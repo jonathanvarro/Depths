@@ -1,0 +1,16 @@
+# Godot 4
+.godot/
+/android/
+*.translation
+
+# Export output
+/export/
+/build/
+*.exe
+*.pck
+*.ipa
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+desktop.ini

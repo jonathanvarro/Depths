@@ -21,7 +21,7 @@ A dark, first-person dungeon crawler about party strain, dangerous discoveries, 
 
 Established direction: dark and gritty atmosphere; first-person grid exploration; procedural dungeon layouts; room encounters; an increasingly difficult descent toward the bottom floor; a small party represented by expressive portraits; turn-based combat involving positioning, protection, and cooperation; a readable exploration map.
 
-Proposals still to validate: exactly three companions; the detailed strain and relationship mechanics; resource quantities and time costs; combat positions and action lists; the pixel-art production approach; and the initial prototype scope below. No engine, language, or framework has been selected.
+Proposals still to validate: exactly three companions; the detailed strain and relationship mechanics; resource quantities and time costs; combat positions and action lists; the pixel-art production approach; and the initial prototype scope below. Engine: Godot 4; target platforms: Windows and iPhone (decided 2026-10-16).
 
 ## Core loop
 
@@ -124,7 +124,7 @@ Success criteria:
 
 ## Open decisions
 
-1. Target platform and engine; desktop is a proposal, not a commitment.
+1. ~~Target platform and engine~~ — decided: Godot 4, Windows and iPhone. Still open: touch control scheme, phone orientation (portrait or landscape), and minimum supported devices.
 2. Exact movement, facing, turn, and room-transition rules.
 3. Combat layout, targeting, positions, action economy, and retreat rules.
 4. Strain states, player agency, and the role of trust or relationships.
