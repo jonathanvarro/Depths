@@ -39,6 +39,7 @@ const KEY_BINDINGS := {
 	"turn_left": [KEY_A, KEY_LEFT],
 	"turn_right": [KEY_D, KEY_RIGHT],
 	"toggle_debug": [KEY_F3],
+	"toggle_map": [KEY_M, KEY_TAB],
 }
 
 const TOUCH_BUTTON_SIZE := Vector2(88, 88)
@@ -64,6 +65,9 @@ var _map  # dungeon_map.gd for the current floor
 var _level: Node3D
 var _party: Node3D
 var _minimap: Control
+var _full_map: Control  # full-screen overlay
+var _full_map_view: Control
+var _full_map_title: Label
 var _debug_label: Label
 var _message_label: Label
 var _message_tween: Tween
@@ -82,6 +86,7 @@ func _ready() -> void:
 	_build_ui(_minimap)
 	_party = Party.new()
 	_party.moved.connect(_minimap.on_party_moved)
+	_party.moved.connect(_full_map_view.on_party_moved)
 	_party.moved.connect(_on_party_moved)
 	_party.entered_cell.connect(_on_party_entered_cell)
 	_party.opened_door.connect(_on_party_opened_door)
@@ -95,6 +100,10 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_debug"):
 		_set_debug(not _debug_label.visible)
+	elif event.is_action_pressed("toggle_map"):
+		_set_full_map(not _full_map.visible)
+	elif _full_map.visible and event.is_action_pressed("ui_cancel"):
+		_set_full_map(false)
 	elif _prompt.visible and event.is_action_pressed("ui_accept"):
 		_answer_prompt(true)
 	elif _prompt.visible and event.is_action_pressed("ui_cancel"):
@@ -116,6 +125,7 @@ func _go_to_floor(depth: int, from_above: bool) -> void:
 	add_child(_level)
 
 	_minimap.setup(_map)
+	_full_map_view.setup(_map)
 	var arrival: Vector2i = _map.start_cell if from_above else _map.find_content(DungeonMap.Content.STAIRS_DOWN)
 	_party.place(_map, arrival)
 	_show_message("%s · depth %d" % [environment_theme.display_name, depth])
@@ -186,6 +196,18 @@ func _answer_prompt(yes: bool) -> void:
 func _set_debug(enabled: bool) -> void:
 	_debug_label.visible = enabled
 	_minimap.reveal_all = enabled
+	_full_map_view.reveal_all = enabled
+
+
+## Opens or closes the full-screen map. The party can't move while it's open,
+## and it can't open over a yes/no prompt.
+func _set_full_map(open: bool) -> void:
+	if open and _prompt.visible:
+		return
+	_full_map.visible = open
+	_party.locked = open
+	if open:
+		_full_map_title.text = "%s · depth %d of %d" % [environment_theme.display_name, _depth, floors_in_site]
 
 
 func _show_message(text: String) -> void:
@@ -267,6 +289,83 @@ func _build_ui(minimap: Control) -> void:
 	ui.add_child(pad_corner)
 
 	_build_prompt(ui)
+	_build_full_map(ui)
+	minimap.pressed.connect(_set_full_map.bind(true))
+
+
+## Full-screen map: title, the explored floor scaled to fit, and a legend in
+## the environment's own words. Tapping anywhere closes it.
+func _build_full_map(ui: CanvasLayer) -> void:
+	_full_map = Control.new()
+	_full_map.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_full_map.mouse_filter = Control.MOUSE_FILTER_STOP
+	_full_map.gui_input.connect(func(event: InputEvent):
+		if (event is InputEventMouseButton and event.pressed) or (event is InputEventScreenTouch and event.pressed):
+			_set_full_map(false))
+	ui.add_child(_full_map)
+
+	var shade := ColorRect.new()
+	shade.color = Color(0.03, 0.03, 0.03, 0.94)
+	shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	shade.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_full_map.add_child(shade)
+
+	var margin := MarginContainer.new()
+	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	margin.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_set_margins(margin, 24)
+	_full_map.add_child(margin)
+	var column := VBoxContainer.new()
+	column.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	column.add_theme_constant_override("separation", 12)
+	margin.add_child(column)
+
+	_full_map_title = Label.new()
+	_full_map_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_full_map_title.add_theme_font_size_override("font_size", 28)
+	_full_map_title.add_theme_color_override("font_color", Color("e8d9b0"))
+	column.add_child(_full_map_title)
+
+	_full_map_view = Minimap.new()
+	_full_map_view.full_view = true
+	_full_map_view.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_full_map_view.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	column.add_child(_full_map_view)
+
+	var legend := HFlowContainer.new()
+	legend.alignment = FlowContainer.ALIGNMENT_CENTER
+	legend.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	legend.add_theme_constant_override("h_separation", 20)
+	column.add_child(legend)
+	var t := environment_theme
+	var c := Minimap.CONTENT_COLORS
+	for entry in [
+			["You", Minimap.COLOR_PARTY], [t.closed_name, Minimap.COLOR_CLOSED_PASSAGE],
+			[t.blocked_name, Minimap.COLOR_BLOCKED_PASSAGE], [t.descent_name + " / " + t.ascent_name, c[6]],
+			["Encounter", c[1]], ["Chest", c[2]], ["Trap", c[3]], ["Strange object", c[4]], ["Rest spot", c[5]]]:
+		legend.add_child(_legend_item(entry[0], entry[1]))
+
+	var hint := Label.new()
+	hint.text = "Tap anywhere or press M to close"
+	hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	hint.add_theme_color_override("font_color", Color(1, 1, 1, 0.5))
+	column.add_child(hint)
+	_full_map.visible = false
+
+
+func _legend_item(text: String, color: Color) -> Control:
+	var row := HBoxContainer.new()
+	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var swatch := ColorRect.new()
+	swatch.color = color
+	swatch.custom_minimum_size = Vector2(14, 14)
+	swatch.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	swatch.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	row.add_child(swatch)
+	var label := Label.new()
+	label.text = text
+	row.add_child(label)
+	return row
 
 
 ## Centred yes/no box for deliberate choices like descending. Big buttons

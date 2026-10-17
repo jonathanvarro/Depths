@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-16 – Claude
+- Did: #5 full-screen map. Tap/click the minimap (mouse or touch) or press M/Tab to open; tap anywhere, M/Tab or Escape closes. Shows the explored floor scaled to fit (zooms to explored area, at least 15 cells across), title with depth, and a legend using the environment theme's names. Party is locked while it's open; it won't open over a Go/Stay prompt. minimap.gd now has a `full_view` mode sharing all drawing code. Recoloured passage bars (webs pale blue-grey, roots near-black) so they read against the floor and don't look like encounters. Tested open/close by mouse, touch, and keys in-game.
+- Next: Milestone 1 remaining: #6 HUD at phone resolution, #7 placeholder audio.
+- Watch out: No pan/zoom on the full map; at 31x31 it fits a landscape phone, but much larger floors would need it.
+
 ## 2026-10-16 – ChatGPT
 - Did: #22 designed the cave campsite as one clearing with highlighted, clickable/tappable activity areas. Added docs/campsite-design.md, linked it from DESIGN.md, and made an in-chat interactive pixel layout study with five destinations and activity/Back interaction. Checked the interaction and responsive layout before committing.
 - Next: Owner reviews the composition and proposed services. Implement the refuge when scheduled, reusing preparation/results work (#18/#17) and resolving recovery, treatment and cave re-entry rules first.
