@@ -93,6 +93,8 @@ Suggested initial presentation: one campsite screen with a few selectable activi
 
 The suggested retreat flow is to return through the dungeon to its entrance before reaching camp, with discovered shortcuts potentially easing later returns. Travel costs, escape exceptions, refuge services, recovery timing, and prices still need design decisions. Rest spots inside the dungeon remain distinct from the outside refuge.
 
+**Cave-camp staff and equipment (2026-10-16):** the owner wants a blacksmith sent from a nearby village and a nurse for the cave area. The smith is an apprentice, explaining the limited selection of quality items; the starting location should offer very basic equipment. The [updated campsite design](docs/campsite-design.md) proposes a sixth clickable smith area and places the nurse in the treatment tent. Exact stock, repair/crafting mechanics, NPC identities and later-site availability remain open. The original five-area interaction study predates this addition.
+
 ### Continuity and escalation proposals
 
 Keeping companions, scars, equipment, relationships, and important discoveries across sites would give the campaign emotional continuity: the people approaching the castle are the ones who began at the cave campfire. This is a preferred design proposal, not a finalized save/persistence or permanent-death rule.

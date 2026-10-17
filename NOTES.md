@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-16 – ChatGPT
+- Did: #24 recorded the cave-area nurse and village-sent apprentice blacksmith. Established very basic starting equipment and limited quality stock as owner direction; updated the campsite specification to six proposed destinations, with nurse in Treatment and a modest smith lean-to. Checked documentation consistency and whitespace. Included Godot's generated import settings for the earlier merchant v2 concept (Refs #23).
+- Next: Choose a small starting equipment list and the two NPC designs. Recompose the clearing for six readable touch targets when the refuge is implemented.
+- Watch out: Item examples and repairs/fitting are proposals; no durability, crafting, shop or treatment mechanics added. The original inline campsite study still has five areas. Existing audio/game changes are unrelated and excluded.
+
 ## 2026-10-16 – Claude
 - Did: #7 placeholder audio, finishing Milestone 1. Sounds are synthesised by tools/make_placeholder_audio.py into audio/placeholder/ (no third-party licences; README explains). EnvironmentTheme gained a Sound group (ambience, footstep_sounds, bump_sound, open_sound); cave uses dripping-cave ambience and a web tear, stone uses a hum and door creak. main.gd plays looping ambience, footsteps through an AudioStreamRandomizer (3 variants, pitch varied), and bump/open effects; party.gd emits `stepped` and `bumped`. Verified in-game that each sound starts at the right moment, and analysed the files: no clipping, inaudible loop seam.
 - Next: Milestone 2 (party and combat), starting with #8 party data.
