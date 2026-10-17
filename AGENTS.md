@@ -6,12 +6,16 @@ this via CLAUDE.md; ChatGPT Codex reads AGENTS.md directly). Keep it current.
 ## About the project
 
 - **What it is:** A dark, first-person grid dungeon crawler about party strain, dangerous discoveries, and descending through increasingly difficult procedural floors. See `DESIGN.md` for current direction, proposals, and open decisions.
-- **Language / engine / framework:** Godot 4 (GDScript unless decided
-  otherwise). Exact Godot version not yet pinned.
+- **Language / engine / framework:** Godot 4.7, GDScript, Mobile renderer
+  (chosen for iPhone performance). Don't upgrade the Godot version without
+  the owner's OK.
 - **Target platforms:** Windows and iPhone (iOS). Design every screen for
   both mouse/keyboard and touch from the start; keep UI readable on a phone.
   iOS builds must be exported and signed on a Mac with Xcode.
-- **How to run it:** _TBD_ (no Godot project created yet)
+- **How to run it:** Open `project.godot` in the Godot editor and press F5.
+  No main scene is set yet. Mouse clicks emulate touch
+  (`input_devices/pointing/emulate_touch_from_mouse`) so touch input can be
+  tested on Windows.
 - **How to test it:** _TBD_
 
 ## Project structure
@@ -19,7 +23,10 @@ this via CLAUDE.md; ChatGPT Codex reads AGENTS.md directly). Keep it current.
 - `DESIGN.md` – living design direction and proposed first playable scope.
 - `AGENTS.md` / `CLAUDE.md` – shared assistant instructions and entry point.
 - `NOTES.md` – handoff history between assistants.
-- No game code yet; run instructions and tests remain undecided.
+- `project.godot` – Godot project settings. Prefer changing settings in the
+  editor; if editing by hand, keep changes minimal.
+- `.godot/` – Godot's local cache; ignored by git, never commit it.
+- No game code or scenes yet.
 
 ## How we work
 
