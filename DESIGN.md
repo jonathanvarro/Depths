@@ -149,6 +149,7 @@ Suggested economical approach:
 - Enemy sprites with a few purposeful frames and clear silhouettes.
 - Portrait variants that communicate condition and emotion.
 - Sound, light flicker, restrained particles, and impact effects to support limited animation.
+- Placeholder sound (#7) is generated, project-owned audio wired through each environment theme: looping ambience, varied footsteps, a bump, and a passage-opening sound (web tear in the cave, door creak in stone). Real recordings replace them by swapping files in the theme.
 
 Pixel art is not automatically cheap: consistency, readable expressions, viewpoints, and animation frame counts determine workload. Choose a coherent pixel scale before producing final assets. Use Greed & Darkness as a visual reference, not a source of copied assets or a requirement to reproduce its animation technique.
 

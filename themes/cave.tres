@@ -5,6 +5,12 @@
 [ext_resource type="Material" path="res://art/textures/stone-v1/wall_worn.tres" id="3"]
 [ext_resource type="Material" path="res://art/textures/stone-v1/floor.tres" id="4"]
 [ext_resource type="Material" path="res://art/textures/stone-v1/ceiling.tres" id="5"]
+[ext_resource type="AudioStream" path="res://audio/placeholder/ambience_cave.wav" id="6"]
+[ext_resource type="AudioStream" path="res://audio/placeholder/footstep_1.wav" id="7"]
+[ext_resource type="AudioStream" path="res://audio/placeholder/footstep_2.wav" id="8"]
+[ext_resource type="AudioStream" path="res://audio/placeholder/footstep_3.wav" id="9"]
+[ext_resource type="AudioStream" path="res://audio/placeholder/bump.wav" id="10"]
+[ext_resource type="AudioStream" path="res://audio/placeholder/web_tear.wav" id="11"]
 
 [resource]
 script = ExtResource("1")
@@ -26,3 +32,7 @@ ascent_name = "Hanging roots"
 ascent_prompt = "Climb the roots back up?"
 exit_message = "Daylight. The way back to camp."
 ascent_color = Color(0.4, 0.3, 0.18, 1)
+ambience = ExtResource("6")
+footstep_sounds = Array[AudioStream]([ExtResource("7"), ExtResource("8"), ExtResource("9")])
+bump_sound = ExtResource("10")
+open_sound = ExtResource("11")

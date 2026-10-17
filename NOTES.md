@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-16 – Claude
+- Did: #7 placeholder audio, finishing Milestone 1. Sounds are synthesised by tools/make_placeholder_audio.py into audio/placeholder/ (no third-party licences; README explains). EnvironmentTheme gained a Sound group (ambience, footstep_sounds, bump_sound, open_sound); cave uses dripping-cave ambience and a web tear, stone uses a hum and door creak. main.gd plays looping ambience, footsteps through an AudioStreamRandomizer (3 variants, pitch varied), and bump/open effects; party.gd emits `stepped` and `bumped`. Verified in-game that each sound starts at the right moment, and analysed the files: no clipping, inaudible loop seam.
+- Next: Milestone 2 (party and combat), starting with #8 party data.
+- Watch out: I can't listen to audio; the owner should check the sounds feel right. Volumes are constants at the top of main.gd. No settings/mute option yet.
+
 ## 2026-10-16 – ChatGPT
 - Did: Refined #23 after owner approval: the original merchant concept's middle figure is the starting build, with less gold/jewellery and wealth increasing location by location. Generated merchant-progression-v2.png from v1 and updated merchant/campsite/design documentation; v1 is preserved. Checked image integrity, links and documentation whitespace.
 - Next: Use v2's left figure as the current starter reference. Plan the exact site-to-appearance stages and prepare aligned production portraits; Master Tallow remains a working name.

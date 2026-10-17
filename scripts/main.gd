@@ -44,6 +44,9 @@ const KEY_BINDINGS := {
 
 const TOUCH_BUTTON_SIZE := Vector2(88, 88)
 const MESSAGE_SECONDS := 2.0
+const AMBIENCE_VOLUME_DB := -10.0
+const FOOTSTEP_VOLUME_DB := -6.0
+const EFFECT_VOLUME_DB := -4.0
 
 ## Seed for the site; 0 picks a new random site each run. The first floor
 ## uses this seed directly; deeper floors derive theirs from it. Every run
@@ -83,6 +86,9 @@ var _prompt_label: Label
 var _prompt_action := Callable()
 var _safe_area: Control  # HUD lives in here, clear of notches and home bars
 var _full_map_margin: MarginContainer
+var _ambience_player: AudioStreamPlayer
+var _footstep_player: AudioStreamPlayer
+var _effect_player: AudioStreamPlayer
 
 
 func _ready() -> void:
@@ -100,6 +106,9 @@ func _ready() -> void:
 	_party.entered_cell.connect(_on_party_entered_cell)
 	_party.opened_door.connect(_on_party_opened_door)
 	_party.blocked_by.connect(_on_party_blocked)
+	_build_audio()
+	_party.stepped.connect(func(_cell): _footstep_player.play())
+	_party.bumped.connect(func(_cell): _play_effect(environment_theme.bump_sound))
 	add_child(_party)
 	_party.setup(CELL_SIZE)
 	_go_to_floor(1, true)
@@ -167,6 +176,7 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 
 func _on_party_opened_door(cell: Vector2i) -> void:
 	_level.refresh_door(cell)
+	_play_effect(environment_theme.open_sound)
 	_show_message(environment_theme.closed_open_message)
 
 
@@ -227,6 +237,38 @@ func _show_message(text: String) -> void:
 	_message_tween = create_tween()
 	_message_tween.tween_interval(MESSAGE_SECONDS)
 	_message_tween.tween_property(_message_label, "modulate:a", 0.0, 0.5)
+
+
+## Placeholder sound: the theme's ambience loops, footsteps vary in sample
+## and pitch, and one-off effects share a player.
+func _build_audio() -> void:
+	_ambience_player = AudioStreamPlayer.new()
+	_ambience_player.stream = environment_theme.ambience
+	_ambience_player.volume_db = AMBIENCE_VOLUME_DB
+	add_child(_ambience_player)
+	if _ambience_player.stream:
+		_ambience_player.play()
+
+	var steps := AudioStreamRandomizer.new()
+	for sound in environment_theme.footstep_sounds:
+		steps.add_stream(-1, sound)
+	steps.random_pitch = 1.12
+	steps.random_volume_offset_db = 2.0
+	_footstep_player = AudioStreamPlayer.new()
+	_footstep_player.stream = steps
+	_footstep_player.volume_db = FOOTSTEP_VOLUME_DB
+	add_child(_footstep_player)
+
+	_effect_player = AudioStreamPlayer.new()
+	_effect_player.volume_db = EFFECT_VOLUME_DB
+	_effect_player.max_polyphony = 2
+	add_child(_effect_player)
+
+
+func _play_effect(sound: AudioStream) -> void:
+	if sound:
+		_effect_player.stream = sound
+		_effect_player.play()
 
 
 func _register_input_actions() -> void:

@@ -47,9 +47,12 @@ this via CLAUDE.md; ChatGPT Codex reads AGENTS.md directly). Keep it current.
   opens closed passages and bumps on blocked ones.
 - `scripts/level_builder.gd` – turns a map plus an EnvironmentTheme into 3D
   geometry; theme scenes replace the placeholder shapes when assigned.
-- `scripts/environment_theme.gd` + `themes/*.tres` – per-environment look and
-  wording for passages and ways up/down (cave: webs, roots, pit, hanging
-  roots; stone: doors, stairs). Picked via `environment_theme` on Main.
+- `scripts/environment_theme.gd` + `themes/*.tres` – per-environment look,
+  wording and sound for passages and ways up/down (cave: webs, roots, pit,
+  hanging roots; stone: doors, stairs), plus ambience, footsteps, bump and
+  open sounds. Picked via `environment_theme` on Main.
+- `audio/placeholder/` – generated placeholder sounds (see its README for
+  licence); rebuilt by `tools/make_placeholder_audio.py`.
 - `scripts/dungeon_map.gd` – grid data (`is_wall`), cell contents
   (`Content` enum, `content_at`, `enter`), and explored cells. Layout text
   uses letters for contents: E encounter, C chest, T trap, O strange object,

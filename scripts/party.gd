@@ -15,6 +15,10 @@ signal entered_cell(cell: Vector2i)
 signal opened_door(cell: Vector2i)
 ## The party walked into a blocked passage.
 signal blocked_by(cell: Vector2i)
+## A step into a new cell has started (for footsteps).
+signal stepped(cell: Vector2i)
+## The party walked into a wall or blocked passage.
+signal bumped(cell: Vector2i)
 
 ## Facing index: 0 north, 1 east, 2 south, 3 west.
 const DIRECTIONS: Array[Vector2i] = [Vector2i(0, -1), Vector2i(1, 0), Vector2i(0, 1), Vector2i(-1, 0)]
@@ -91,12 +95,14 @@ func _try_step(direction: Vector2i) -> void:
 	elif not map.is_passable(target):
 		if map.door_at(target) == DungeonMap.Door.BLOCKED:
 			blocked_by.emit(target)
+		bumped.emit(target)
 		# Bump against the wall so the player knows the input registered.
 		var bump := position + Vector3(direction.x, 0, direction.y) * BUMP_DISTANCE
 		tween.tween_property(self, "position", bump, MOVE_TIME * 0.4)
 		tween.tween_property(self, "position", position, MOVE_TIME * 0.4)
 	else:
 		cell = target
+		stepped.emit(cell)
 		tween.tween_property(self, "position", _cell_to_world(cell), MOVE_TIME)
 		map.reveal_around(cell)
 		moved.emit(cell, facing)

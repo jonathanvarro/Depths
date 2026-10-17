@@ -49,3 +49,13 @@ extends Resource
 @export var exit_message := "The way out."
 @export var ascent_color := Color("8a7b5c")
 @export var ascent_scene: PackedScene
+
+@export_group("Sound")
+## Loops for as long as the party is in this environment.
+@export var ambience: AudioStream
+## One is picked at random for each step, with slight pitch variation.
+@export var footstep_sounds: Array[AudioStream] = []
+## Walking into a wall or blocked passage.
+@export var bump_sound: AudioStream
+## Opening a closed passage (tearing a web, creaking a door...).
+@export var open_sound: AudioStream
