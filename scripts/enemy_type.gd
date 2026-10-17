@@ -20,3 +20,14 @@ extends Resource
 @export var injuries: Array[Injury] = []
 ## Verb used in the combat log ("The rat bites Mara").
 @export var attack_verb := "attacks"
+
+## How it fights (#15). See combat_state.gd for what each does.
+enum Tactic {
+	BASIC,  ## attacks anyone; respects a defender
+	DARTING,  ## goes for the weakest; may flee when badly hurt (rats)
+	WEB_AND_VENOM,  ## opens with a web, bites poison; ignores defenders (spiders)
+	CUNNING,  ## flanks whoever isn't defending; shields up when hurt (goblins)
+}
+@export var tactic := Tactic.BASIC
+## Shown when the fight starts: a hint at how it fights.
+@export var intro := ""

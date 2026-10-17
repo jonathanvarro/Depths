@@ -17,3 +17,5 @@ initiative = 10
 injury_chance = 0.12
 injuries = Array[Injury]([ExtResource("3"), ExtResource("4")])
 attack_verb = "slashes"
+tactic = 3
+intro = "A goblin circles, looking for an opening."

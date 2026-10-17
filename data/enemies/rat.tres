@@ -17,3 +17,5 @@ initiative = 12
 injury_chance = 0.05
 injuries = Array[Injury]([ExtResource("3"), ExtResource("4")])
 attack_verb = "bites"
+tactic = 1
+intro = "The rat darts about, sizing up the weakest."

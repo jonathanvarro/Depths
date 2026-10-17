@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-17 – Claude
+- Did: #15 distinct tactics. EnemyType gained `tactic` and `intro`; combat_state.gd implements darting rats (target weakest, may flee when hurt; all-fled = victory), web-and-venom spiders (opening web -25% next action, 2-turn non-stacking venom ticking at turn start via `events`, ignore defenders), cunning goblins (flank non-defenders, shield when hurt halving damage until their next turn). Combat screen shows intros, venom events, webbed/poisoned in the turn line, [shield] on tags, fades fleeing enemies. ENCOUNTER_GROUPS mix tactics by depth, capped at party size. 18 tactic checks + balance sims pass; all earlier suites pass; in-game fights verified with ChatGPT's new cave-simple-v1 sprites.
+- Next: #16 room encounters (chests, traps, strange objects, rest spots with choices and clues) or #30 opening.
+- Watch out: A full healthy party of three wins everything; tune when recruitment/equipment arrive. Spiders are the deadliest single enemy for lone Mara (74% win).
+
 ## 2026-10-17 – ChatGPT
 - Did: #33 completed all nine simpler rat/spider/goblin sprites in art/enemies/cave-simple-v1, using the goblin study's style. Exact 128px transparent canvases, one shared <=32-colour palette per enemy, pivot (64,120), common pose scale and planted ground y=120. Added ready-made SpriteFrames/scenes; changed only the scene paths in data/enemies/{rat,spider,goblin}.tres to connect them to Claude's combat. Full prompts/raw sources in art/source/enemies-simple-v1; exporter, registration/hash report, native/2x sheets and six real combat captures included.
 - Next: Claude can use these immediately; art/enemies/README.md and art/enemies/cave-simple-v1/README.md list exact paths and the Sprite/idle/attack/hurt contract. New enemy families should follow docs/enemy-art-direction.md. Continue #15 tactics independently; no art changes to combat rules or stats.

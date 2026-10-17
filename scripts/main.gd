@@ -19,10 +19,12 @@ const GOBLIN := preload("res://data/enemies/goblin.tres")
 ## Enemy groups an encounter can hold, by floor depth (#14; #15 will give
 ## them distinct tactics and tune the mix). One group is picked at random
 ## from those no larger than the party.
+## Deeper floors mix tactics: rats pick on the weakest while a spider webs
+## someone or a goblin flanks (#15).
 const ENCOUNTER_GROUPS := {
-	1: [[RAT]],
-	2: [[RAT], [SPIDER], [RAT, RAT]],
-	3: [[SPIDER], [RAT, RAT], [GOBLIN]],
+	1: [[RAT], [RAT], [SPIDER], [RAT, RAT]],
+	2: [[RAT], [SPIDER], [RAT, RAT], [RAT, SPIDER], [GOBLIN, RAT]],
+	3: [[SPIDER], [GOBLIN], [SPIDER, RAT], [GOBLIN, SPIDER], [GOBLIN, RAT, RAT], [GOBLIN, SPIDER, RAT]],
 }
 ## Retreat lands the party this many steps away (trial of the owner's idea).
 const RETREAT_DISTANCE := Vector2i(3, 6)

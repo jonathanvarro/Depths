@@ -20,6 +20,17 @@ const ROUND_TIME := 1
 ## Time lost fleeing.
 const RETREAT_TIME := 6
 
+## Enemy tactics (#15).
+## Spider web: the victim's next action is this much less accurate.
+const WEB_PENALTY := 0.25
+## Spider venom: damage at the start of the victim's turns, for this many
+## turns. A new bite refreshes it rather than stacking.
+const VENOM_DAMAGE := 1
+const VENOM_TURNS := 2
+## Rats may flee once below half health; goblins may raise a shield.
+const RAT_FLEE_CHANCE := 0.4
+const GOBLIN_SHIELD_CHANCE := 0.4
+
 
 ## One enemy in this fight.
 class Foe:
@@ -27,14 +38,18 @@ class Foe:
 	var name: String
 	var health: int
 	var node: Node3D  # set by the combat screen
+	var fled := false
+	var shielded := false  # goblin: halves damage until its next turn
+	var has_webbed := false  # spider: opens with a web once
 
 	func _init(enemy_type: EnemyType, label: String) -> void:
 		type = enemy_type
 		name = label
 		health = enemy_type.max_health
 
+	## Still in the fight (not dead and not fled).
 	func is_alive() -> bool:
-		return health > 0
+		return health > 0 and not fled
 
 
 var party  # party_state.gd
@@ -46,6 +61,11 @@ var rng := RandomNumberGenerator.new()
 var _order: Array = []  # Companion or Foe, this round's acting order
 var _turn := 0
 var _defending := {}  # Companion -> true until their next turn
+var _webbed := {}  # Companion -> true until their next action
+var _venom := {}  # Companion -> turns left
+## Things that happened between actions (venom ticking...). The combat
+## screen shows and clears these after each advance().
+var events: PackedStringArray = []
 
 
 func _init(party_state, enemy_types: Array[EnemyType]) -> void:
@@ -95,20 +115,42 @@ func advance() -> void:
 		if actor.is_alive():
 			if actor is Companion:
 				_defending.erase(actor)  # a defence lasts until their next turn
-			return
+				_tick_venom(actor)
+				_check_end()
+				if result != Result.ONGOING:
+					return
+				if actor.is_alive():
+					return
+			else:
+				actor.shielded = false  # a shield lasts until its next turn
+				return
 		_turn += 1
 
 
 func hero_hit_chance(hero: Companion) -> float:
 	var chance: float = hero.accuracy * hero.effectiveness() + LIGHT_ACCURACY[party.supplies.light_band()]
+	if is_webbed(hero):
+		chance -= WEB_PENALTY
 	return clampf(chance, MIN_HIT_CHANCE, MAX_HIT_CHANCE)
+
+
+func is_webbed(hero: Companion) -> bool:
+	return _webbed.has(hero)
+
+
+func venom_turns(hero: Companion) -> int:
+	return _venom.get(hero, 0)
 
 
 ## Returns {"hit": bool, "damage": int, "killed": bool, "text": String}.
 func hero_attack(hero: Companion, target: Foe) -> Dictionary:
 	var outcome := {"hit": false, "damage": 0, "killed": false}
-	if rng.randf() < hero_hit_chance(hero):
+	var hit := rng.randf() < hero_hit_chance(hero)
+	_webbed.erase(hero)  # the web only spoils one action
+	if hit:
 		var damage := maxi(1, roundi(rng.randi_range(hero.attack_min, hero.attack_max) * hero.effectiveness()))
+		if target.shielded:
+			damage = maxi(1, damage / 2)
 		target.health = maxi(0, target.health - damage)
 		outcome = {"hit": true, "damage": damage, "killed": not target.is_alive()}
 		outcome["text"] = "%s strikes the %s for %d.%s" % [hero.display_name, target.name.to_lower(), damage, " It falls." if outcome["killed"] else ""]
@@ -121,17 +163,40 @@ func hero_attack(hero: Companion, target: Foe) -> Dictionary:
 ## Halves damage until the hero's next turn and draws enemy attacks.
 func hero_defend(hero: Companion) -> String:
 	_defending[hero] = true
+	_webbed.erase(hero)
 	return "%s braces, guarding the party." % hero.display_name
 
 
 func hero_use_item(item: SupplyItem) -> String:
+	if current_actor() is Companion:
+		_webbed.erase(current_actor())
 	return party.use_item(item, true)
 
 
 ## Returns {"target": Companion, "hit": bool, "damage": int,
 ## "injury": Injury or null, "text": String}.
 func enemy_act(foe: Foe) -> Dictionary:
-	var target := _choose_target()
+	match foe.type.tactic:
+		EnemyType.Tactic.DARTING:
+			if foe.health * 2 < foe.type.max_health and rng.randf() < RAT_FLEE_CHANCE:
+				foe.fled = true
+				_check_end()
+				return {"target": null, "hit": false, "damage": 0, "injury": null, "fled": true,
+						"text": "The %s squeals and scurries away." % foe.name.to_lower()}
+		EnemyType.Tactic.WEB_AND_VENOM:
+			if not foe.has_webbed:
+				foe.has_webbed = true
+				var victim := _choose_target(foe)
+				if victim:
+					_webbed[victim] = true
+					return {"target": victim, "hit": false, "damage": 0, "injury": null,
+							"text": "The %s spits a web over %s. Their next move will be clumsy." % [foe.name.to_lower(), victim.display_name]}
+		EnemyType.Tactic.CUNNING:
+			if not foe.shielded and foe.health * 2 <= foe.type.max_health and rng.randf() < GOBLIN_SHIELD_CHANCE:
+				foe.shielded = true
+				return {"target": null, "hit": false, "damage": 0, "injury": null,
+						"text": "The %s raises a battered shield." % foe.name.to_lower()}
+	var target := _choose_target(foe)
 	var outcome := {"target": target, "hit": false, "damage": 0, "injury": null}
 	if target == null:
 		return outcome
@@ -143,6 +208,9 @@ func enemy_act(foe: Foe) -> Dictionary:
 		outcome["hit"] = true
 		outcome["damage"] = damage
 		outcome["text"] = "The %s %s %s for %d." % [foe.name.to_lower(), foe.type.attack_verb, target.display_name, damage]
+		if foe.type.tactic == EnemyType.Tactic.WEB_AND_VENOM and target.is_alive():
+			_venom[target] = VENOM_TURNS
+			outcome["text"] += " Venom burns in the wound."
 		if target.is_alive() and not foe.type.injuries.is_empty() and rng.randf() < foe.type.injury_chance:
 			var injury: Injury = foe.type.injuries[rng.randi_range(0, foe.type.injuries.size() - 1)]
 			if target.add_injury(injury):
@@ -163,14 +231,49 @@ func retreat() -> String:
 	return "You flee blindly into the dark."
 
 
-## Enemies go after whoever is defending; otherwise anyone standing.
-func _choose_target() -> Companion:
+## Who an enemy goes after, by tactic. Normally a defender draws attacks.
+func _choose_target(foe: Foe = null) -> Companion:
 	var living: Array[Companion] = party.living_members()
 	if living.is_empty():
 		return null
 	var guards := living.filter(func(h: Companion): return is_defending(h))
-	var pool: Array = guards if not guards.is_empty() else living
+	var exposed := living.filter(func(h: Companion): return not is_defending(h))
+	var tactic: int = foe.type.tactic if foe else EnemyType.Tactic.BASIC
+	var pool: Array = living
+	match tactic:
+		EnemyType.Tactic.WEB_AND_VENOM:
+			pool = living  # it drops from above; a defender covers no one
+		EnemyType.Tactic.CUNNING:
+			pool = exposed if not exposed.is_empty() else living  # flanks
+		EnemyType.Tactic.DARTING:
+			pool = guards if not guards.is_empty() else [_weakest(living)]
+		_:
+			pool = guards if not guards.is_empty() else living
 	return pool[rng.randi_range(0, pool.size() - 1)]
+
+
+func _weakest(heroes: Array[Companion]) -> Companion:
+	var weakest := heroes[0]
+	for hero in heroes:
+		if hero.health < weakest.health:
+			weakest = hero
+	return weakest
+
+
+func _tick_venom(hero: Companion) -> void:
+	var turns: int = _venom.get(hero, 0)
+	if turns <= 0:
+		return
+	hero.change_health(-VENOM_DAMAGE)
+	turns -= 1
+	if turns > 0:
+		_venom[hero] = turns
+	else:
+		_venom.erase(hero)
+	var text := "Venom burns %s (%d)." % [hero.display_name, VENOM_DAMAGE]
+	if not hero.is_alive():
+		text += " %s falls." % hero.display_name
+	events.append(text)
 
 
 func _build_order() -> void:

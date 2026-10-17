@@ -77,8 +77,10 @@ this via CLAUDE.md; ChatGPT Codex reads AGENTS.md directly). Keep it current.
 - `scripts/strain.gd` – strain rules and tuning numbers (states,
   effectiveness, per-time gains, event spikes, panic chance). Companion has
   `strain` and `hunger`; F3 + L adds strain for testing.
-- `scripts/enemy_type.gd` + `data/enemies/*.tres` – enemy numbers and the
-  art scene (Node3D with AnimatedSprite3D "Sprite": idle/attack/hurt).
+- `scripts/enemy_type.gd` + `data/enemies/*.tres` – enemy numbers, `tactic`
+  (BASIC / DARTING / WEB_AND_VENOM / CUNNING, rules in combat_state.gd),
+  `intro` hint, and the art scene (Node3D with AnimatedSprite3D "Sprite":
+  idle/attack/hurt).
 - `scripts/combat_state.gd` – combat rules without visuals (turn order,
   attack/defend/item/retreat, enemy attacks, results); testable directly.
 - `scripts/combat_screen.gd` – combat UI: turn text, log, tappable enemy

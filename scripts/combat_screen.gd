@@ -55,6 +55,11 @@ func run(state, cards: Array) -> void:
 	_select_target(state.living_foes()[0])
 	var names := ", ".join(PackedStringArray(state.foes.map(func(f): return f.name.to_lower())))
 	_add_log("Something stirs: %s!" % names)
+	var hinted := {}
+	for foe in state.foes:
+		if foe.type.intro != "" and not hinted.has(foe.type):
+			hinted[foe.type] = true
+			_add_log(foe.type.intro)  # a hint at how it fights (#15)
 	visible = true
 
 	while state.result == CombatState.Result.ONGOING:
@@ -74,6 +79,9 @@ func run(state, cards: Array) -> void:
 		if state.result != CombatState.Result.ONGOING:
 			break
 		state.advance()
+		for event in state.events:
+			_add_log(event)
+		state.events.clear()
 		if _target == null or not _target.is_alive():
 			var living: Array = state.living_foes()
 			if not living.is_empty():
@@ -107,8 +115,11 @@ func _hero_action(hero: Companion, action: Dictionary) -> void:
 
 func _enemy_action(foe) -> void:
 	var outcome: Dictionary = _state.enemy_act(foe)
-	_play(foe, "attack", 0.4)
 	_add_log(outcome.get("text", ""))
+	if outcome.get("fled", false):
+		await _fade_out(foe)
+		return
+	_play(foe, "attack", 0.4)
 	await get_tree().create_timer(0.5).timeout
 
 
@@ -140,7 +151,7 @@ func _process(_delta: float) -> void:
 		tag.visible = foe.is_alive() and foe.node != null and not camera.is_position_behind(foe.node.global_position)
 		if tag.visible:
 			var screen := camera.unproject_position(foe.node.global_position + Vector3(0, TAG_HEIGHT, 0))
-			tag.text = "%s %d/%d" % [foe.name, foe.health, foe.type.max_health]
+			tag.text = "%s %d/%d%s" % [foe.name, foe.health, foe.type.max_health, "  [shield]" if foe.shielded else ""]
 			tag.position = screen - tag.size / 2.0
 			tag.modulate = Color.WHITE if foe == _target else Color(1, 1, 1, 0.65)
 
@@ -159,7 +170,13 @@ func _mark_turn(hero: Companion) -> void:
 		card.set_active(hero != null and card.companion == hero)
 	if hero:
 		var odds := roundi(_state.hero_hit_chance(hero) * 100)
-		_turn_label.text = "Round %d · %s's turn (%d%% to hit)" % [_state.round, hero.display_name, odds]
+		var status := PackedStringArray()
+		if _state.is_webbed(hero):
+			status.append("webbed")
+		if _state.venom_turns(hero) > 0:
+			status.append("poisoned")
+		var extra := (", " + ", ".join(status)) if not status.is_empty() else ""
+		_turn_label.text = "Round %d · %s's turn (%d%% to hit%s)" % [_state.round, hero.display_name, odds, extra]
 
 
 func _add_log(text: String) -> void:
