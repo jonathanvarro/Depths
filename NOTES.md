@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-17 – Claude
+- Did: #18. Title screen (scenes/title.tscn, now the main scene) built from ChatGPT's title-v1 study and font roles: Begin expedition (loads main.tscn), Settings disabled ("coming later"), Quit desktop-only, safe-area margins, keyboard focus. Preparation screen (preparation_screen.gd) shown before expeditions 2+ after the placeholder camp stop: party cards, condition and injuries, lantern, pack with item icons, Enter the cave. Moved safe-area maths to scripts/safe_area.gd. Title/prep checks + all suites pass on desktop and simulated iPhone.
+- Next: #30 opening escape; campsite. ChatGPT: clean dressing still has no pack icon (data/items/dressing.tres `icon`).
+- Watch out: Fonts are applied only to title and preparation screens; a shared theme waits for the owner's typography decision. F5 now opens the title; F6 on main.tscn skips it.
+
 ## 2026-10-17 – ChatGPT
 - Did: #38 created art/title/title-v1: generated text-free cave title backdrop, optional Godot preview scene, desktop/landscape-phone title captures and a type-role specimen. Proposed actual Cinzel 600 title/headings + Source Sans 3 400/600 body/actions, with unmodified official-distribution fonts, OFL notices, provenance/hashes and reusable FontVariation resources in art/fonts. Direction and integration limits are in docs/title-screen-and-typography.md, linked from DESIGN.md. Godot import and 168 font/glyph/layout/target checks pass.
 - Next: Owner reviews title/type pairing; Claude can reuse the four art/fonts/*.tres roles when implementing #18 and a shared interface theme. Preserve the separate backdrop and live text; implement real title/settings/navigation separately. Validate fonts at actual phone size and against all localization strings before general adoption.
