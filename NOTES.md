@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-16 – Claude
+- Did: Made E:\GitHub\Depths the single working copy: it was 7 commits behind, so cleared its duplicate files (identical to GitHub) and fast-forwarded it. Recorded the location in AGENTS.md. Confirmed the game imports and runs from there.
+- Next: Owner points Godot and ChatGPT at E:\GitHub\Depths and removes the OneDrive copy and the stray `new-game-project/` folder. Then #3 doors / #4 stairs.
+- Watch out: Until `new-game-project/` is deleted it shows as untracked; don't commit it. Godot's project list only contained that empty project, so the owner hadn't yet seen the generator or contents in the editor.
+
 ## 2026-10-16 – ChatGPT
 - Did: Recorded the owner's site-by-site campaign progression in DESIGN.md and the project summary: cave + campsite first, then dungeon/refuge combinations growing toward a castle and demon portal or similar. Revised the premise, deepest-objective wording, first-playable scope, and open questions so they no longer imply a single dungeon for the entire campaign.
 - Next: Design the cave/camp recovery-and-return loop alongside the existing exploration work. Define site completion and persistent party state before implementing campaign travel.

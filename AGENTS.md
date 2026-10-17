@@ -21,6 +21,9 @@ this via CLAUDE.md; ChatGPT Codex reads AGENTS.md directly). Keep it current.
   On the Main node, `use_debug_layout` loads a small hand-drawn floor with
   known contents; `show_debug` starts with the overlay on.
 
+- **Where the repo lives:** on the owner's PC the one working copy is
+  `E:\GitHub\Depths`. An older copy under OneDrive is retired; don't use it.
+
 ## Project structure
 
 - `DESIGN.md` – living design direction and proposed first playable scope.
