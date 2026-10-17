@@ -19,7 +19,11 @@ this via CLAUDE.md; ChatGPT Codex reads AGENTS.md directly). Keep it current.
 - **How to test it:** No automated test suite yet. Press **F3** in-game for
   the debug overlay (seed, cell, contents) and a fully revealed minimap.
   On the Main node, `use_debug_layout` loads a small hand-drawn floor with
-  known contents; `show_debug` starts with the overlay on.
+  known contents; `show_debug` starts with the overlay on;
+  `simulate_phone_safe_area` reserves an iPhone's notch/home-bar margins.
+  To preview phone shapes, run with e.g. `--resolution 1278x590` (iPhone 15)
+  or `1334x750` (iPhone SE). HUD controls go inside `_safe_area` in main.gd
+  so they stay clear of the notch on real phones.
 
 - **Where the repo lives:** on the owner's PC the one working copy is
   `E:\GitHub\Depths`. An older copy under OneDrive is retired; don't use it.

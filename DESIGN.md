@@ -249,7 +249,9 @@ Success criteria:
 
 ## Open decisions
 
-1. ~~Target platform and engine~~ — decided: Godot 4, Windows and iPhone, **landscape only** on phone (#6). Still open: final touch layout and minimum supported devices.
+1. ~~Target platform and engine~~ — decided: Godot 4, Windows and iPhone, **landscape only** on phone (#6). Still open: minimum supported devices.
+
+   **Phone layout check (#6, 2026-10-16):** the UI is laid out at 648px tall and stretched to the screen, widening on longer phones. Measured at iPhone SE (16:9), iPhone 15/16 and Pro Max (~2.17:1) shapes in the editor: touch-pad buttons come out at 51–58pt (Apple's minimum is 44pt); default text is 20px (≈12pt on SE) so legends stay legible; the HUD sits inside iOS's safe area so the camera cutout, rounded corners and home bar don't cover the map or controls. Not yet tried on a real iPhone (#20).
 2. ~~Movement scheme~~ — decided: forward/back/turn. Each step costs time (#10). Still open: strafing and room-transition presentation.
 3. Combat: enemies in first-person view (#13). Still open: targeting, positions, action economy, and retreat rules.
 4. Strain states, player agency, and the role of trust or relationships.

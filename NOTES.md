@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-16 – Claude
+- Did: #6 phone layout check. Rendered the HUD, prompt and full map at iPhone SE, 15/16 and Pro Max screen shapes. Touch buttons measure 51–58pt (above Apple's 44pt). Fixed: HUD now lives in a safe-area Control (main.gd `_safe_area`, `_apply_safe_area`) using DisplayServer.get_display_safe_area() on mobile, so the notch/Dynamic Island and home bar can't cover the map or touch pad; `simulate_phone_safe_area` on Main fakes iPhone 15 insets for testing on Windows. Default font size raised to 20 (project.godot gui/theme/default_font_size) because 16 was ~9pt on an SE. Full-map backdrop made opaque.
+- Next: #7 placeholder audio finishes Milestone 1.
+- Watch out: Real-device safe-area behaviour is untested until the iOS export (#20). Untracked art/concepts/merchant/ belongs to ChatGPT's in-progress work; I left it alone.
+
 ## 2026-10-16 – ChatGPT
 - Did: #23 recorded the owner's required recurring greedy merchant, following the party between rest locations and growing increasingly obese and gross. Added docs/merchant-design.md, integrated him into the campsite's supply awning, and generated/preserved art/concepts/merchant/merchant-progression-v1.png with full prompt/provenance. Visually reviewed the three-stage concept and checked documentation links/whitespace.
 - Next: Owner reviews the identity and progression. Master Tallow, the red cap/gold tooth/moustache/rings, and three-stage structure are proposals. Resolve trading, rest-location coverage and progression triggers before implementation; prepare aligned portrait masters after art approval.

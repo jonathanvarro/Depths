@@ -57,6 +57,13 @@ const MESSAGE_SECONDS := 2.0
 @export var environment_theme: EnvironmentTheme = preload("res://themes/cave.tres")
 ## Floors in this site; the deepest has no way further down.
 @export var floors_in_site := 3
+## Pretend to be a modern iPhone in landscape (camera cutout on both sides,
+## home bar at the bottom) to check the HUD stays clear of them on Windows.
+@export var simulate_phone_safe_area := false
+
+## iPhone 15 landscape safe-area insets (59pt sides, 21pt bottom) in this
+## game's 648px-tall UI space: left, top, right, bottom.
+const SIMULATED_PHONE_INSETS := Vector4(97, 0, 97, 35)
 
 var _site_seed := 0
 var _depth := 0
@@ -74,6 +81,8 @@ var _message_tween: Tween
 var _prompt: Control
 var _prompt_label: Label
 var _prompt_action := Callable()
+var _safe_area: Control  # HUD lives in here, clear of notches and home bars
+var _full_map_margin: MarginContainer
 
 
 func _ready() -> void:
@@ -247,8 +256,14 @@ func _build_environment() -> void:
 
 
 func _build_ui(minimap: Control) -> void:
-	var ui := CanvasLayer.new()
-	add_child(ui)
+	var canvas := CanvasLayer.new()
+	add_child(canvas)
+	# Everything except full-screen backgrounds goes inside the safe area.
+	var ui := Control.new()
+	ui.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	ui.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	canvas.add_child(ui)
+	_safe_area = ui
 
 	var map_corner := MarginContainer.new()
 	map_corner.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT)
@@ -289,8 +304,34 @@ func _build_ui(minimap: Control) -> void:
 	ui.add_child(pad_corner)
 
 	_build_prompt(ui)
-	_build_full_map(ui)
+	_build_full_map(canvas)
 	minimap.pressed.connect(_set_full_map.bind(true))
+	get_viewport().size_changed.connect(_apply_safe_area)
+	_apply_safe_area()
+
+
+## Keeps the HUD out from under the iPhone's camera cutout, rounded corners
+## and home bar. On desktop there's nothing to avoid.
+func _apply_safe_area() -> void:
+	var insets := _safe_area_insets()
+	for control: Control in [_safe_area, _full_map_margin]:
+		control.offset_left = insets.x
+		control.offset_top = insets.y
+		control.offset_right = -insets.z
+		control.offset_bottom = -insets.w
+
+
+## Left, top, right, bottom insets in UI pixels.
+func _safe_area_insets() -> Vector4:
+	if simulate_phone_safe_area:
+		return SIMULATED_PHONE_INSETS
+	if not OS.has_feature("mobile"):
+		return Vector4.ZERO
+	var window := Vector2(DisplayServer.window_get_size())
+	var safe := Rect2(DisplayServer.get_display_safe_area())
+	var to_ui := get_viewport().get_visible_rect().size / window
+	return Vector4(safe.position.x * to_ui.x, safe.position.y * to_ui.y,
+			(window.x - safe.end.x) * to_ui.x, (window.y - safe.end.y) * to_ui.y)
 
 
 ## Full-screen map: title, the explored floor scaled to fit, and a legend in
@@ -305,7 +346,7 @@ func _build_full_map(ui: CanvasLayer) -> void:
 	ui.add_child(_full_map)
 
 	var shade := ColorRect.new()
-	shade.color = Color(0.03, 0.03, 0.03, 0.94)
+	shade.color = Color(0.03, 0.03, 0.03, 1.0)
 	shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	shade.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_full_map.add_child(shade)
@@ -315,6 +356,7 @@ func _build_full_map(ui: CanvasLayer) -> void:
 	margin.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_set_margins(margin, 24)
 	_full_map.add_child(margin)
+	_full_map_margin = margin
 	var column := VBoxContainer.new()
 	column.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	column.add_theme_constant_override("separation", 12)
@@ -370,7 +412,7 @@ func _legend_item(text: String, color: Color) -> Control:
 
 ## Centred yes/no box for deliberate choices like descending. Big buttons
 ## for touch; Enter/Escape also answer.
-func _build_prompt(ui: CanvasLayer) -> void:
+func _build_prompt(ui: Control) -> void:
 	var center := CenterContainer.new()
 	center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	center.mouse_filter = Control.MOUSE_FILTER_IGNORE
