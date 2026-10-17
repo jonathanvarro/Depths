@@ -1,0 +1,66 @@
+{
+  "canvas": [
+    128,
+    128
+  ],
+  "pivot": [
+    64,
+    120
+  ],
+  "common_scale": 1.0,
+  "frames": [
+    {
+      "pose": "idle",
+      "translation": [
+        0,
+        18
+      ],
+      "scale": 1.0,
+      "bounds": [
+        4,
+        45,
+        124,
+        121
+      ],
+      "visible_colours": 32,
+      "ground_y": 120,
+      "sha256": "a11c64b14cdd33ea087a13072ba0dea7e3c5a763090b1fe18a5df04aab2e8e3f"
+    },
+    {
+      "pose": "attack",
+      "translation": [
+        0,
+        14
+      ],
+      "scale": 1.0,
+      "bounds": [
+        7,
+        44,
+        121,
+        121
+      ],
+      "visible_colours": 32,
+      "ground_y": 120,
+      "sha256": "284fd77ca4f581974aaedc582e9666b1f779b570f9b2f0d1ff95138847f9cf61"
+    },
+    {
+      "pose": "hurt",
+      "translation": [
+        0,
+        19
+      ],
+      "scale": 1.0,
+      "bounds": [
+        7,
+        48,
+        122,
+        121
+      ],
+      "visible_colours": 31,
+      "ground_y": 120,
+      "sha256": "37a91b04f9b0297787dffc37538f7827f57ddcbe67ed60e4d6ff0c8c097b82ff"
+    }
+  ],
+  "shared_visible_colours": 32,
+  "pixel_size": 0.007236842105263159
+}

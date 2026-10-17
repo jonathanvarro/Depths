@@ -4,6 +4,8 @@ The owner likes the cave environments and creature designs, but wants enemies le
 
 ## Shared visual rules
 
+**Production follow-up (#33):** the owner requested the remaining enemies in this direction after the goblin study. The complete [cave-simple-v1 set](../art/enemies/cave-simple-v1/README.md) now applies the 128px, shared 32-colour maximum and three-pose contract to rat, spider and goblin, and is connected through EnemyType.scene. Treat those as this family's working limits; exceptional future enemies can be reviewed separately.
+
 Enemies belong with the simple, shadow-heavy environments. Keep the detailed expression work for party portraits. Convey menace through posture, silhouette and a few recognizable features. Avoid making every surface equally interesting.
 
 | Element | Proposed production rule |
@@ -57,4 +59,4 @@ Generation still needs visual review and exact export checks; this template is g
 
 128px contains one quarter as many pixels as 256px, so equivalent uncompressed RGBA texture data uses one quarter the space. Fewer texture marks and poses also reduce art cleanup and continuity work. Flat colours at the same resolution do not automatically reduce draw calls or GPU cost, and these are not measured iPhone performance results. Texture import settings, scene count and animation scope still matter. No promise of faster image generation is implied.
 
-The nine more detailed [cave enemy poses](../art/enemies/cave-v1/preview.png) remain preserved as exploratory references and combat-integration starters. Rebuild rat, spider and the remaining goblin poses only after reviewing this simpler direction. The [expedition handoff](../art/expedition-v1/README.md) records their current resource contract.
+The nine more detailed [cave enemy poses](../art/enemies/cave-v1/preview.png) remain preserved as exploratory references. The [simplified family handoff](../art/enemies/cave-simple-v1/README.md) supersedes their combat paths; the [earlier expedition handoff](../art/expedition-v1/README.md) preserves the original pass's resource contract.

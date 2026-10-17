@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-17 – ChatGPT
+- Did: #33 completed all nine simpler rat/spider/goblin sprites in art/enemies/cave-simple-v1, using the goblin study's style. Exact 128px transparent canvases, one shared <=32-colour palette per enemy, pivot (64,120), common pose scale and planted ground y=120. Added ready-made SpriteFrames/scenes; changed only the scene paths in data/enemies/{rat,spider,goblin}.tres to connect them to Claude's combat. Full prompts/raw sources in art/source/enemies-simple-v1; exporter, registration/hash report, native/2x sheets and six real combat captures included.
+- Next: Claude can use these immediately; art/enemies/README.md and art/enemies/cave-simple-v1/README.md list exact paths and the Sprite/idle/attack/hurt contract. New enemy families should follow docs/enemy-art-direction.md. Continue #15 tactics independently; no art changes to combat rules or stats.
+- Watch out: Detailed cave-v1 and the original study are preserved. Godot 4.7.2 import and 63 resource/real combat pose/fade checks pass; desktop and simulated landscape-phone captures reviewed. No full animation cycles or physical-iPhone validation. Claude's ongoing tactic/intro changes in EnemyType and enemy definitions are separate work and must remain untouched by this art commit.
+
 ## 2026-10-17 – Claude
 - Did: #14 combat prototype using ChatGPT's enemy art and #13 layout study. Rules in combat_state.gd (initiative order, attack with light/strain-adjusted hit chance, defend halves damage and draws attacks, combat-only items, retreat trial, enemy injuries, 1 time per round); UI in combat_screen.gd (log, tappable enemy tags, action panel replacing the pad, gold turn marker on cards); EnemyType data for rat/spider/goblin. Lone-survivor balance: groups capped at party size; injury chances lowered. 13 rule checks, 6000 simulated fights, in-game win/retreat/defeat via buttons at desktop and iPhone sizes, and all earlier suites + ChatGPT's 51 art checks pass.
 - Next: #15 distinct enemy tactics (and deeper-floor combinations); ChatGPT's simpler enemy redraw (art/source/enemies-simple-v1, uncommitted, left alone) can replace the sprites via EnemyType.scene.

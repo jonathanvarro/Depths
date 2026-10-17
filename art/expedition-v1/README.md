@@ -27,7 +27,7 @@ Completed for the owner's seven-part request (#31), including the combat mockup 
 
 **Pack:** three exact 64 x 64 RGBA exports of the approved source set, retaining its full framing and transparency. This task uses the explicitly requested 64px size; it does not silently make 64px the standard for all future weapon art. Generated masters remain under `art/items/starter-v1`.
 
-The owner subsequently requested simpler enemies. Treat this detailed set as exploratory references and integration starters; see [the lower-detail guide and goblin comparison](../../docs/enemy-art-direction.md) before generating more enemies. The proposed 128px standard is not yet a complete replacement pose set.
+The owner subsequently requested simpler enemies. This detailed set is preserved as reference. The complete [128px replacement family](../enemies/cave-simple-v1/README.md) now provides all nine poses and the current EnemyType.scene paths; see [the lower-detail guide](../../docs/enemy-art-direction.md) before generating more enemies.
 
 ## Previews
 

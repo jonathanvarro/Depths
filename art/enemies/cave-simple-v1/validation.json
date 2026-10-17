@@ -1,0 +1,210 @@
+{
+  "canvas": [
+    128,
+    128
+  ],
+  "pivot": [
+    64,
+    120
+  ],
+  "enemies": {
+    "rat": {
+      "canvas": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        120
+      ],
+      "common_scale": 1.0,
+      "frames": [
+        {
+          "pose": "idle",
+          "translation": [
+            -2,
+            2
+          ],
+          "scale": 1.0,
+          "bounds": [
+            7,
+            16,
+            122,
+            121
+          ],
+          "visible_colours": 32,
+          "ground_y": 120,
+          "sha256": "4a6e1eb75c761bb4167f51a30ef9be6f3f81db7bc1d97751fecc731d06a43d3a"
+        },
+        {
+          "pose": "attack",
+          "translation": [
+            -2,
+            2
+          ],
+          "scale": 1.0,
+          "bounds": [
+            10,
+            22,
+            123,
+            121
+          ],
+          "visible_colours": 32,
+          "ground_y": 120,
+          "sha256": "036663f0d6dd28e820b79301b0a8ec9b5c28ca102e8102f33291deedd8291fe7"
+        },
+        {
+          "pose": "hurt",
+          "translation": [
+            -2,
+            3
+          ],
+          "scale": 1.0,
+          "bounds": [
+            9,
+            26,
+            122,
+            121
+          ],
+          "visible_colours": 32,
+          "ground_y": 120,
+          "sha256": "36ba898557860609f67a7851e3adffbc561f099f629061227b6b1dcd598ec25b"
+        }
+      ],
+      "shared_visible_colours": 32,
+      "pixel_size": 0.004761904761904762
+    },
+    "spider": {
+      "canvas": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        120
+      ],
+      "common_scale": 1.0,
+      "frames": [
+        {
+          "pose": "idle",
+          "translation": [
+            0,
+            18
+          ],
+          "scale": 1.0,
+          "bounds": [
+            4,
+            45,
+            124,
+            121
+          ],
+          "visible_colours": 32,
+          "ground_y": 120,
+          "sha256": "a11c64b14cdd33ea087a13072ba0dea7e3c5a763090b1fe18a5df04aab2e8e3f"
+        },
+        {
+          "pose": "attack",
+          "translation": [
+            0,
+            14
+          ],
+          "scale": 1.0,
+          "bounds": [
+            7,
+            44,
+            121,
+            121
+          ],
+          "visible_colours": 32,
+          "ground_y": 120,
+          "sha256": "284fd77ca4f581974aaedc582e9666b1f779b570f9b2f0d1ff95138847f9cf61"
+        },
+        {
+          "pose": "hurt",
+          "translation": [
+            0,
+            19
+          ],
+          "scale": 1.0,
+          "bounds": [
+            7,
+            48,
+            122,
+            121
+          ],
+          "visible_colours": 31,
+          "ground_y": 120,
+          "sha256": "37a91b04f9b0297787dffc37538f7827f57ddcbe67ed60e4d6ff0c8c097b82ff"
+        }
+      ],
+      "shared_visible_colours": 32,
+      "pixel_size": 0.007236842105263159
+    },
+    "goblin": {
+      "canvas": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        120
+      ],
+      "common_scale": 1.0,
+      "frames": [
+        {
+          "pose": "idle",
+          "translation": [
+            0,
+            0
+          ],
+          "scale": 1.0,
+          "bounds": [
+            24,
+            10,
+            105,
+            121
+          ],
+          "visible_colours": 21,
+          "ground_y": 120,
+          "sha256": "d35bc632489c5c02a1191ddba0620deb7cb82a67ed848bf9a32a57f95f800c14"
+        },
+        {
+          "pose": "attack",
+          "translation": [
+            0,
+            3
+          ],
+          "scale": 1.0,
+          "bounds": [
+            28,
+            14,
+            108,
+            121
+          ],
+          "visible_colours": 31,
+          "ground_y": 120,
+          "sha256": "6ddc828b87a0417b08b8af3da8f97c7304a696979f51bc3778b01c7452ee19ab"
+        },
+        {
+          "pose": "hurt",
+          "translation": [
+            0,
+            1
+          ],
+          "scale": 1.0,
+          "bounds": [
+            19,
+            15,
+            111,
+            121
+          ],
+          "visible_colours": 31,
+          "ground_y": 120,
+          "sha256": "90381d884d10c2dcc925238f49829204516c44de365da8070d4dd56a71b3e612"
+        }
+      ],
+      "shared_visible_colours": 31,
+      "pixel_size": 0.012612612612612612
+    }
+  }
+}
