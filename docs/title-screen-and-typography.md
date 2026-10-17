@@ -2,6 +2,8 @@
 
 The owner requested a generated title screen and noted that its fonts will form persistent elements of the game (#38). This study extends the [navigation proposals](navigation-interface-design.md). **Depths remains the working name**, not a decided release title.
 
+**Follow-up (2026-10-17):** The owner accepted the title/type pairing and chose the Pack screen next, selecting Field kit in the navigation comparison. The [Pack refinement](pack-screen-design.md) uses these font roles in an isolated Godot preview (#39). Claude has implemented the real title and preparation flow in #18; the optional title study described below remains separate. A game-wide shared theme has not yet been applied.
+
 [Desktop title](../art/title/title-v1/title-desktop.png) · [Landscape phone](../art/title/title-v1/title-phone.png) · [Type specimen](../art/title/title-v1/title-specimen.png)
 
 ## Title composition

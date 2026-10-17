@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-17 – ChatGPT
+- Did: #39 refined the owner's selected Field kit direction into an isolated interactive Godot Pack preview at art/ui/pack-v1/preview.tscn, using the accepted Cinzel/Source Sans pairing. Includes four actual supplies, selection/details, lantern quantity/light/burn, recipients, explicit time costs, disabled reasons, feedback and Back/Escape/focus return. Opt-in styles are in art/ui/field-kit-v1; desktop/phone captures, provenance and docs/pack-screen-design.md preserve the design. Existing PartyState rules run on copied sample parties. Godot 4.7.2 import and 1087 layout/interaction assertions pass at desktop and two simulated phone sizes; captures reviewed.
+- Next: Owner reviews the Pack; a separate implementation task can adapt scripts/pack_screen.gd, apply the shared roles to one room-choice panel, and connect the dressing icon. Title/type pairing and Field kit selection are now recorded in DESIGN.md and their guides for Claude.
+- Watch out: Live Pack and gameplay unchanged; F6 on preview.tscn opens the sample. Clean dressing's 64px RGBA export is a prototype fallback only; data/items/dressing.tres still has no icon. Physical iPhone, expanded inventory/full-party presentation and localization need later checks. Existing portrait lighting still needs #36. Claude's title/preparation and opening-design work was preserved.
+
 ## 2026-10-17 – Claude
 - Did: Owner playtested the Windows build and met no fights: encounters were one invisible tile per room, crossed by the direct climb on ~12% of floors. Per owner, a fight now fills its room: generated layouts mark room floor with ',' (corridors stay '.'), DungeonMap.room_around()/encounter_zones map every room cell to its fight, and main.gd starts the fight on entering any of them. The survivor's waking room never gets contents; retreat lands outside the fight's room. Direct climb now meets a fight on ~33% (deepest) / ~55% (middle) floors. Zone + all suites pass; rebuilt build/windows/Depths.exe.
 - Next: #30 opening; contents still have no visuals (ask ChatGPT for chest/idol/pool/camp props and visible enemies if the owner wants them later).

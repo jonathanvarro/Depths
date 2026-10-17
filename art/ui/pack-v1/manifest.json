@@ -1,0 +1,24 @@
+{
+  "issue": 39,
+  "kind": "Godot-authored design preview, not generated UI artwork",
+  "dressing_export": {
+    "source": "art/items/starter-v1/clean-dressing.png",
+    "source_sha256": "3718b90b6359be6c9d01660e4d4e10985f53c09e05adbb7917169d8d7b69363c",
+    "output": "art/ui/pack-v1/clean-dressing.png",
+    "output_sha256": "776f78c8fc0fe58b3148dad370ee173ebcc250a45c9279351c0238a66407b020",
+    "operation": "RGBA conversion and Pillow Image.Resampling.LANCZOS resize to 64x64; transparency retained"
+  },
+  "reused": [
+    "art/items/pack-64-v1/oil-flask.png",
+    "art/items/pack-64-v1/ration.png",
+    "art/items/pack-64-v1/restorative-draught.png",
+    "art/title/title-v1/background.png",
+    "data/companions/mara.tres and its current portrait layers",
+    "art/fonts/heading-cinzel.tres",
+    "art/fonts/body-source-sans.tres",
+    "art/fonts/action-source-sans.tres"
+  ],
+  "capture_tool": "tools/art/check_pack_design.gd",
+  "physical_phone_test": false,
+  "live_pack_replaced": false
+}

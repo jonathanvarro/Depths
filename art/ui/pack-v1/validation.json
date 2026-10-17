@@ -1,0 +1,105 @@
+{
+  "checks": 1087,
+  "failures": [],
+  "godot": "4.7.2",
+  "layouts": [
+    {
+      "item": "Oil flask",
+      "layout": "desktop",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "item": "Ration",
+      "layout": "desktop",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "item": "Restorative draught",
+      "layout": "desktop",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "item": "Clean dressing",
+      "layout": "desktop",
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    {
+      "item": "Oil flask",
+      "layout": "phone",
+      "viewport": [
+        1278,
+        590
+      ]
+    },
+    {
+      "item": "Ration",
+      "layout": "phone",
+      "viewport": [
+        1278,
+        590
+      ]
+    },
+    {
+      "item": "Restorative draught",
+      "layout": "phone",
+      "viewport": [
+        1278,
+        590
+      ]
+    },
+    {
+      "item": "Clean dressing",
+      "layout": "phone",
+      "viewport": [
+        1278,
+        590
+      ]
+    },
+    {
+      "item": "Oil flask",
+      "layout": "phone-se",
+      "viewport": [
+        1334,
+        750
+      ]
+    },
+    {
+      "item": "Ration",
+      "layout": "phone-se",
+      "viewport": [
+        1334,
+        750
+      ]
+    },
+    {
+      "item": "Restorative draught",
+      "layout": "phone-se",
+      "viewport": [
+        1334,
+        750
+      ]
+    },
+    {
+      "item": "Clean dressing",
+      "layout": "phone-se",
+      "viewport": [
+        1334,
+        750
+      ]
+    }
+  ],
+  "live_pack_changed": false,
+  "physical_phone_test": false
+}
