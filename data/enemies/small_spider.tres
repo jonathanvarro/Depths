@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EnemyType" format=3]
+
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="1"]
+[ext_resource type="PackedScene" path="res://art/enemies/cave-simple-v1/spider/scene.tscn" id="2"]
+
+[resource]
+script = ExtResource("1")
+display_name = "Small spider"
+scene = ExtResource("2")
+max_health = 6
+damage_min = 1
+damage_max = 2
+accuracy = 0.6
+initiative = 9
+injury_chance = 0.0
+attack_verb = "bites"
+tactic = 2
+intro = "A small spider hangs above, spinning."

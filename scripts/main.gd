@@ -15,6 +15,27 @@ const EventScreen := preload("res://scripts/event_screen.gd")
 const RoomEvents := preload("res://scripts/room_events.gd")
 const Expedition := preload("res://scripts/expedition.gd")
 const SafeArea := preload("res://scripts/safe_area.gd")
+const OpeningGenerator := preload("res://scripts/opening_generator.gd")
+
+## The opening escape (#30) is "floor 0": Mara bleeds along a winding hallway
+## with no map until she's weak enough, then daylight appears just ahead.
+const OPENING_DEPTH := 0
+const BLEED_EVERY := 12  # time units per point of health lost to bleeding
+const EXIT_HEALTH := 3  # at or below this, the daylight exit appears
+const OPENING_MIN_HEALTH := 2  # she can't drop below this in the opening
+const OPENING_STRAIN := 80.0  # starts Panicking (no random bolting, #30)
+const EXIT_AHEAD := 4  # hallway cells ahead of her where daylight appears
+## Daylight also waits until she's been through this many fights, so an
+## unlucky first fight doesn't cut the tutorial short (owner: 2-3 fights).
+const OPENING_MIN_FIGHTS := 2
+## The opening's fights, in order along the hallway: gentler tutorial
+## creatures, a rat to learn on first. Tuned by simulation: 2-3 fights and
+## about 33 steps before daylight.
+const OPENING_FIGHTS := [
+	[preload("res://data/enemies/starved_rat.tres")],
+	[preload("res://data/enemies/starved_rat.tres")],
+	[preload("res://data/enemies/small_spider.tres")],
+]
 const ResultsScreen := preload("res://scripts/results_screen.gd")
 const PreparationScreen := preload("res://scripts/preparation_screen.gd")
 ## Placeholder camp stop between expeditions until the campsite exists
@@ -112,6 +133,15 @@ const EFFECT_VOLUME_DB := -4.0
 	preload("res://data/items/restorative_draught.tres"): 1,
 	preload("res://data/items/dressing.tres"): 2,
 }
+## Play the opening escape (#30) when a new game starts.
+@export var play_opening := true
+## Art for the fallen companions in the opening room, one per body (Node3D
+## scenes whose origin sits on the floor). Missing files fall back to a plain
+## placeholder shape. ChatGPT's sprites: art/props/opening-bodies-v1 (#55).
+@export var body_scenes: PackedStringArray = [
+	"res://art/props/opening-bodies-v1/fallen-a.tscn",
+	"res://art/props/opening-bodies-v1/fallen-b.tscn",
+]
 ## Shown as the game opens on the deepest floor, where the companions died.
 @export_multiline var opening_message := "Your companions lie still. Find the way out."
 
@@ -149,6 +179,17 @@ var _expedition  # expedition.gd: this expedition's record (#17)
 var _results: Control  # results_screen.gd
 var _preparation: Control  # preparation_screen.gd
 var _ending := false
+var _floor_started := false
+var _in_opening := false
+var _opening := {}  # opening_generator.gd output
+var _bleed_clock := 0
+var _exit_cell := Vector2i(-1, -1)
+var _hint_box: Control
+var _hint_label: Label
+var _hint := ""  # which hint is showing
+var _hints_done := {}
+var _steps_taken := 0
+var _opening_fights_done := 0
 var _in_combat := false
 var _touch_pad: Control
 var _pack_button: Button
@@ -183,6 +224,10 @@ func _ready() -> void:
 	_build_audio()
 	_party.stepped.connect(func(_cell): _footstep_player.play())
 	_party.stepped.connect(func(_cell): _party_state.advance_time(_party_state.step_time()))
+	_party.stepped.connect(_on_opening_step)
+	_party.bumped.connect(func(_cell): _update_hints("bumped"))
+	_party.opened_door.connect(func(_cell): _update_hints("web_torn"))
+	_party.moved.connect(func(_cell, _facing): _update_hints("moved"))
 	_party.bumped.connect(func(_cell): _play_effect(environment_theme.bump_sound))
 	_party.panicked.connect(_on_party_panicked)
 	_party_state.changed.connect(_on_party_state_changed)
@@ -194,7 +239,10 @@ func _ready() -> void:
 	_update_lantern()
 	# The survivor wakes on the deepest floor and climbs out (#8). The debug
 	# layout is a single hand-drawn floor, so it starts there instead.
-	_go_to_floor(1 if use_debug_layout else floors_in_site, Arrival.OPENING)
+	if use_debug_layout or not play_opening:
+		_go_to_floor(1, Arrival.OPENING)
+	else:
+		_begin_opening()
 	_set_debug(show_debug)
 
 
@@ -227,8 +275,9 @@ func _unhandled_input(event: InputEvent) -> void:
 ## way up; arriving from below puts it at the way down; the opening uses the
 ## floor's start cell.
 func _go_to_floor(depth: int, arrival: Arrival) -> void:
-	if _depth != 0:
+	if _floor_started:
 		_party_state.complete_pending_effects()  # owner rule (#8): durations finish between floors
+	_floor_started = true
 	_depth = depth
 	_expedition.visit_floor(depth)
 	if not _floors.has(depth):
@@ -236,12 +285,7 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 		_assign_events(_floors[depth])
 	_map = _floors[depth]
 
-	if _level:
-		_level.queue_free()
-	_level = LevelBuilder.new()
-	_level.build(_map, environment_theme, CELL_SIZE, WALL_HEIGHT)
-	add_child(_level)
-
+	_build_level()
 	_minimap.setup(_map)
 	_full_map_view.setup(_map)
 	var cell: Vector2i = _map.start_cell
@@ -256,7 +300,19 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 		_show_message("%s · depth %d" % [environment_theme.display_name, depth])
 
 
+func _build_level() -> void:
+	if _level:
+		_level.queue_free()
+	_level = LevelBuilder.new()
+	_level.build(_map, environment_theme, CELL_SIZE, WALL_HEIGHT)
+	add_child(_level)
+	if _depth == OPENING_DEPTH and _in_opening:
+		_add_opening_dressing()
+
+
 func _make_layout(depth: int) -> PackedStringArray:
+	if depth == OPENING_DEPTH:
+		return _opening["layout"]
 	if use_debug_layout and depth == 1:
 		return PackedStringArray(DEBUG_LAYOUT)
 	return FloorGenerator.generate(_site_seed + (depth - 1) * FLOOR_SEED_STEP, depth < floors_in_site, depth)
@@ -284,7 +340,7 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 		DungeonMap.Content.CHEST, DungeonMap.Content.TRAP, DungeonMap.Content.STRANGE_OBJECT, DungeonMap.Content.REST_SPOT:
 			_run_event(cell)
 		DungeonMap.Content.STAIRS_UP:
-			if _depth == 1:
+			if _depth <= 1:  # floor 1, or the opening's daylight exit
 				_ask("%s Leave the cave?" % environment_theme.exit_message,
 						_end_expedition.bind(Expedition.Ending.RETURNED))
 			else:
@@ -330,6 +386,8 @@ func _run_event(cell: Vector2i) -> void:
 ## action panel replaces the movement pad until it's over.
 ## `types` sets the enemies (e.g. an ambush); empty picks a group for the floor.
 func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
+	if types.is_empty() and _in_opening and cell in _opening["fights"]:
+		types.assign(OPENING_FIGHTS[_opening["fights"].find(cell)])
 	if types.is_empty():
 		var groups: Array = ENCOUNTER_GROUPS.get(clampi(_depth, 1, ENCOUNTER_GROUPS.size()))
 		# Never more enemies than heroes standing, so a lone survivor isn't swamped.
@@ -339,6 +397,7 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 	var state = CombatState.new(_party_state, types)
 	_place_foes(state.foes)
 	_in_combat = true
+	_update_hints("fight")
 	_party.locked = true
 	_touch_pad.visible = false
 	_pack_button.disabled = true
@@ -357,11 +416,16 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 		CombatState.Result.VICTORY:
 			_party.locked = false
 			_show_message("The way is clear.")
+			_update_hints("fight_over")
+			if _in_opening:
+				_opening_fights_done += 1
+			_check_opening_exit()
 		CombatState.Result.RETREAT:
 			_party.locked = false
 			_map.triggered.erase(cell)  # they're still there, at full strength
 			_expedition.retreats += 1
 			_flee_from(cell)
+			_check_opening_exit()
 		CombatState.Result.DEFEAT:
 			_end_expedition(Expedition.Ending.WIPED)
 
@@ -375,7 +439,7 @@ func _end_expedition(ending: int) -> void:
 	_set_pack(false)
 	_party.locked = true  # after closing overlays, which unlock on close
 	var notes := {
-		Expedition.Ending.RETURNED: "You climb out into the daylight.",
+		Expedition.Ending.RETURNED: "You stagger out into the daylight, alone." if _in_opening else "You climb out into the daylight.",
 		Expedition.Ending.WIPED: "No one is left to carry the lantern. Recruiting new heroes at camp comes later; for now the story begins again.",
 		Expedition.Ending.REACHED_BOTTOM: "You stood where the others fell, and lived to climb back.",
 	}
@@ -391,6 +455,7 @@ func _end_expedition(ending: int) -> void:
 ## Placeholder camp stop, then back into the cave from the top. The cave
 ## remembers what was explored, opened and cleared.
 func _start_new_expedition() -> void:
+	_end_opening()
 	for hero: Companion in _party_state.living_members():
 		hero.complete_pending_effects()
 		hero.change_health(hero.effective_max_health())
@@ -458,7 +523,10 @@ func _on_party_state_changed(announce := true) -> void:
 			_show_message("%s is %s." % [member.display_name, StrainRules.NAMES[state].to_lower()])
 		elif state < before and state == StrainRules.State.STEADY:
 			_show_message("%s steadies." % member.display_name)
-	_party.panic_chance = StrainRules.PANIC_BOLT_CHANCE if _party_state.panicking_member() else 0.0
+	# No random bolting during the opening: panic shows, but the controls
+	# tutorial shouldn't fight the player (#30).
+	var panicking: bool = _party_state.panicking_member() != null and not _in_opening
+	_party.panic_chance = StrainRules.PANIC_BOLT_CHANCE if panicking else 0.0
 	# Falling outside a fight (a trap, a bad drink) ends the expedition too.
 	if announce and _party_state.living_members().is_empty() and not _in_combat and not _ending:
 		_end_expedition.call_deferred(Expedition.Ending.WIPED)
@@ -467,6 +535,198 @@ func _on_party_state_changed(announce := true) -> void:
 func _on_party_panicked() -> void:
 	var who: Companion = _party_state.panicking_member()
 	_show_message("%s panics and bolts!" % (who.display_name if who else "Someone"))
+
+
+# --- Opening escape (#30) -------------------------------------------------
+
+func _begin_opening() -> void:
+	_in_opening = true
+	_opening = OpeningGenerator.generate(_site_seed)
+	var hero: Companion = _party_state.members[0]
+	hero.strain = OPENING_STRAIN
+	hero.min_health = OPENING_MIN_HEALTH
+	_minimap.visible = false  # no map during the escape
+	_on_party_state_changed(false)
+	_go_to_floor(OPENING_DEPTH, Arrival.OPENING)
+	# Wake facing down the room toward the way out, the bodies in view.
+	_party.facing = 1
+	_party.rotation.y = -PI / 2.0
+	_party.moved.emit(_party.cell, _party.facing)
+	_update_hints("start")
+
+
+func _end_opening() -> void:
+	if not _in_opening:
+		return
+	_in_opening = false
+	for hero: Companion in _party_state.members:
+		hero.min_health = 0
+	_minimap.visible = true
+	_show_hint("")
+
+
+## Bleeding: a point of health every few steps until the exit appears.
+func _on_opening_step(_cell: Vector2i) -> void:
+	if not _in_opening:
+		return
+	_steps_taken += 1
+	_bleed_clock += _party_state.step_time()
+	if _bleed_clock >= BLEED_EVERY and _exit_cell == Vector2i(-1, -1):
+		_bleed_clock = 0
+		var hero: Companion = _party_state.members[0]
+		hero.change_health(-1)
+		if not _hints_done.has("bleeding"):
+			_hints_done["bleeding"] = true
+			_show_message("You're bleeding. Keep moving.")
+	_check_opening_exit()
+
+
+## Once she's weak enough, daylight appears a few steps further along.
+func _check_opening_exit() -> void:
+	if not _in_opening or _in_combat or _exit_cell != Vector2i(-1, -1):
+		return
+	var hero: Companion = _party_state.members[0]
+	if hero.health > EXIT_HEALTH or _opening_fights_done < mini(OPENING_MIN_FIGHTS, _opening["fights"].size()):
+		return
+	var hallway: Array = _opening["hallway"]
+	var here: int = hallway.find(_party.cell)
+	var index: int = clampi(here + EXIT_AHEAD, 0, hallway.size() - 1)
+	while index < hallway.size() - 1 and (_map.content_at(hallway[index]) != DungeonMap.Content.NONE or _map.door_at(hallway[index]) != DungeonMap.Door.NONE):
+		index += 1
+	_exit_cell = hallway[index]
+	_map.contents[_exit_cell] = DungeonMap.Content.STAIRS_UP
+	_map.encounter_zones.erase(_exit_cell)
+	_build_level()
+	_show_message("Cold air on your face. Daylight, just ahead!")
+	_update_hints("exit")
+
+
+## The companions' bodies, and the daylight once the exit is open.
+func _add_opening_dressing() -> void:
+	var room: Rect2i = _opening["room"]
+	var start: Vector2i = _opening["start"]
+	# In the far corners of the room, in view as she wakes facing east.
+	var cells := [start + Vector2i(2, -1), start + Vector2i(2, 1)]
+	for i in cells.size():
+		var path: String = body_scenes[i] if i < body_scenes.size() else ""
+		var body: Node3D
+		if path != "" and ResourceLoader.exists(path):
+			body = load(path).instantiate()  # a camera-facing sprite, drawn lying down
+		else:
+			body = _placeholder_body()
+			body.rotation.y = PI / 2.0 + randf_range(-0.5, 0.5)  # lying across her view
+		body.position = Vector3(cells[i].x * CELL_SIZE, 0.0, cells[i].y * CELL_SIZE)
+		_level.add_child(body)
+	if _exit_cell != Vector2i(-1, -1):
+		var daylight := OmniLight3D.new()
+		daylight.light_color = Color(0.82, 0.88, 1.0)
+		daylight.light_energy = 3.0
+		daylight.omni_range = CELL_SIZE * 4.0
+		daylight.position = Vector3(_exit_cell.x * CELL_SIZE, WALL_HEIGHT - 0.3, _exit_cell.y * CELL_SIZE)
+		_level.add_child(daylight)
+
+
+## A dark, cloth-wrapped shape lying on the floor, until there's real art.
+func _placeholder_body() -> Node3D:
+	var root := Node3D.new()
+	var cloth := StandardMaterial3D.new()
+	cloth.albedo_color = Color(0.36, 0.29, 0.22)
+	cloth.roughness = 1.0
+	var torso := MeshInstance3D.new()
+	var box := BoxMesh.new()
+	box.size = Vector3(0.5, 0.2, 1.35)
+	box.material = cloth
+	torso.mesh = box
+	torso.position.y = 0.1
+	root.add_child(torso)
+	var head := MeshInstance3D.new()
+	var sphere := SphereMesh.new()
+	sphere.radius = 0.14
+	sphere.height = 0.26
+	var skin := StandardMaterial3D.new()
+	skin.albedo_color = Color(0.55, 0.45, 0.38)
+	sphere.material = skin
+	head.mesh = sphere
+	head.position = Vector3(0.0, 0.13, -0.8)
+	root.add_child(head)
+	return root
+
+
+## Just-in-time hints, worded for keyboard or touch. Each shows once, until
+## the player has done the thing it describes.
+func _update_hints(event: String) -> void:
+	if not _in_opening:
+		return
+	var touch := OS.has_feature("mobile")  # computers: keys, with clicking as an alternative
+	match event:
+		"start":
+			_show_hint("Tap ▲ to move forward" if touch else "Move forward: W or ↑ (or click ▲)")
+		"moved":
+			if _hint == "start" and _steps_taken >= 2:
+				_finish_hint()
+			var ahead: Vector2i = _party.cell + Party.DIRECTIONS[_party.facing]
+			if not _hints_done.has("web") and (_map.door_at(ahead) == DungeonMap.Door.CLOSED or _map.door_at(ahead + Party.DIRECTIONS[_party.facing]) == DungeonMap.Door.CLOSED):
+				_show_hint("Walk into the web to tear through it.", "web")
+			elif not _hints_done.has("turn") and _hints_done.has("start") and _hint == "" and not _map.is_passable(ahead):
+				_show_hint("Tap ↺ or ↻ to turn" if touch else "Turn: A and D, or ← and → (or click ↺ ↻)", "turn")
+			elif _hint == "turn" and _map.is_passable(ahead):
+				_finish_hint()
+			elif _hint == "pack" and _steps_taken >= _hints_done.get("pack_shown", 0) + 12:
+				_finish_hint()
+		"bumped":
+			if not _hints_done.has("turn") and _hint == "":
+				_show_hint("Tap ↺ or ↻ to turn" if touch else "Turn: A and D, or ← and → (or click ↺ ↻)", "turn")
+		"web_torn":
+			if _hint == "web":
+				_finish_hint()
+		"fight":
+			if not _hints_done.has("fight"):
+				_show_hint(("Tap" if touch else "Click") + " an enemy's name to target it, then Attack. Defend halves the damage you take.", "fight")
+		"fight_over":
+			if _hint == "fight":
+				_finish_hint()
+			if not _hints_done.has("pack"):
+				_hints_done["pack_shown"] = _steps_taken
+				_show_hint("Tap Pack to see what you carry." if touch else "Your pack: press I, or click Pack.", "pack")
+		"pack":
+			if _hint == "pack":
+				_finish_hint()
+		"exit":
+			_show_hint("Daylight! Walk into the light to get out.", "exit")
+
+
+func _show_hint(text: String, key := "start") -> void:
+	_hint = key if text != "" else ""
+	_hint_label.text = text
+	_hint_box.visible = text != ""
+
+
+func _finish_hint() -> void:
+	_hints_done[_hint] = true
+	_show_hint("")
+
+
+func _build_hint(ui: Control) -> void:
+	_hint_box = PanelContainer.new()
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color(0.05, 0.045, 0.04, 0.82)
+	style.border_color = Color("dbb477")
+	style.set_border_width(SIDE_LEFT, 3)
+	style.set_content_margin_all(10)
+	_hint_box.add_theme_stylebox_override("panel", style)
+	_hint_box.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM)
+	_hint_box.grow_horizontal = Control.GROW_DIRECTION_BOTH
+	_hint_box.grow_vertical = Control.GROW_DIRECTION_BEGIN
+	_hint_box.position.y -= 24
+	_hint_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_hint_label = Label.new()
+	_hint_label.add_theme_font_size_override("font_size", 20)
+	_hint_label.add_theme_color_override("font_color", Color("e8d9b0"))
+	_hint_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_hint_label.custom_minimum_size = Vector2(380, 0)
+	_hint_box.add_child(_hint_label)
+	ui.add_child(_hint_box)
+	_hint_box.visible = false
 
 
 func _update_lantern() -> void:
@@ -535,13 +795,15 @@ func _set_pack(open: bool) -> void:
 		return
 	_pack.visible = open
 	_party.locked = open
+	if open:
+		_update_hints("pack")
 	_pack.refresh()
 
 
 ## Opens or closes the full-screen map. The party can't move while it's open,
 ## and it can't open over a yes/no prompt.
 func _set_full_map(open: bool) -> void:
-	if open and (_prompt.visible or _pack.visible or _in_combat or _event_screen.visible):
+	if open and (_prompt.visible or _pack.visible or _in_combat or _event_screen.visible or _in_opening):
 		return
 	_full_map.visible = open
 	_party.locked = open
@@ -680,6 +942,7 @@ func _build_ui(minimap: Control) -> void:
 	_touch_pad = pad_corner
 
 	_build_party_cards(ui)
+	_build_hint(ui)
 	_build_prompt(ui)
 	_build_full_map(canvas)
 	_pack = PackScreen.new()

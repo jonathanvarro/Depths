@@ -125,6 +125,12 @@ Templates > Download and Install; already installed on the owner's PC).
 - `scripts/preparation_screen.gd` – party, condition, lantern and pack before
   expeditions 2+ (the opening skips it). `scripts/safe_area.gd` – shared
   notch/home-bar insets for every screen.
+- `scripts/opening_generator.gd` – the opening escape's bodies room and
+  winding hallway (#30). main.gd's "Opening escape" section runs it as floor
+  0: bleeding, health floor, daylight exit, bodies (`body_scenes`), hints.
+  `play_opening` on Main turns it off (tests that aren't about the opening
+  should); `data/enemies/starved_rat.tres` / `small_spider.tres` are its
+  gentler enemies.
 - `scripts/pack_screen.gd` – the Pack screen (Pack button under the minimap,
   or I/B). PartyState.use_item(), rest(), cannot_use_reason() do the work.
 - `audio/placeholder/` – generated placeholder sounds (see its README for

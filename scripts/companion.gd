@@ -47,6 +47,8 @@ const StrainRules := preload("res://scripts/strain.gd")
 @export var injuries: Array[Injury] = []
 ## Injuries currently bound by a dressing: present, but not hindering.
 var dressed: Array[Injury] = []
+## Damage can't take health below this (the opening escape can't be lost, #30).
+var min_health := 0
 
 ## Effects still playing out: [{"stat": "health", "per_unit": float,
 ## "units_left": int}]. Health is the only stat for now.
@@ -61,7 +63,8 @@ func is_alive() -> bool:
 
 func change_health(amount: int) -> void:
 	var before := health
-	health = clampi(health + amount, 0, effective_max_health())
+	var lowest := mini(min_health, health)
+	health = clampi(health + amount, lowest, effective_max_health())
 	if health < before:
 		change_strain((before - health) * StrainRules.DAMAGE_PER_HEALTH)
 	if health != before:

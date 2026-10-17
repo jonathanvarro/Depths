@@ -54,7 +54,10 @@ func add_found(loot: Dictionary) -> void:
 func gained(party) -> PackedStringArray:
 	var lines := PackedStringArray()
 	lines.append("Time spent: %d" % (party.time_elapsed - _start_time))
-	lines.append("Deepest floor: %d   ·   floors seen: %d" % [deepest, floors_seen.size()])
+	if deepest > 0:  # floor 0 is the opening escape
+		lines.append("Deepest floor: %d   ·   floors seen: %d" % [deepest, floors_seen.size()])
+	else:
+		lines.append("Escaped the depths alive")
 	var beaten := PackedStringArray()
 	for name in enemies_defeated:
 		beaten.append("%s ×%d" % [name.to_lower(), enemies_defeated[name]])
