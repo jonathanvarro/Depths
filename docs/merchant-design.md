@@ -23,7 +23,7 @@ Suggested dramatic contrast: the party returns battered while his clothes become
 
 Keep the approved character's crooked dark-red cap with its pinned brass coin, thin forked moustache, conspicuous gold tooth and calculating smile. A ledger and tarnished coin scales establish his trade. Begin with little jewellery; add rings, chains and richer ornament at successive locations. The cap pin and gold tooth can remain recognizable anchors even in the less wealthy starter.
 
-Maintain his facial identity, gaze, hand gesture, framing and upper-left lantern light across later portrait variants. Clothing can be altered to fit his increasing size while preserving the waistcoat's recognizable colour and pattern. Distinguish stages through silhouette and facial structure as well as surface grime, so the change remains readable at phone size.
+Maintain his facial identity, gaze, hand gesture and framing across later portrait variants. The concept's upper-left lantern light is a presentation reference; production portraits must keep neutral character colours/form separate from lighting, following [the portrait lighting contract](portrait-lighting.md), so the light can match the rest location. Clothing can be altered to fit his increasing size while preserving the waistcoat's recognizable colour and pattern. Distinguish stages through silhouette and facial structure as well as surface grime, so the change remains readable at phone size.
 
 | Suggested visual stage | Silhouette and face | Clothes and surrounding details |
 | --- | --- | --- |

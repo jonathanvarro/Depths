@@ -27,4 +27,6 @@ Generated images were reduced with nearest-neighbor sampling to 192 × 192. The 
 
 ## Next art pass
 
+The owner subsequently required [separate character and lighting layers](../../../../docs/portrait-lighting.md). This prototype has warm highlights/shadows baked into its character, garment and facial patches. A future source-art pass must reauthor neutral layers plus registered lighting masks, including the animated expression set now in `art/portraits/mara-animation-v1`; adding an overlay alone does not remove the baked illumination. These originals are preserved.
+
 Separate back hair, face/neck/body, front hair, and underlayer; reconstruct covered pixels. Then author one blink and a small mouth-open replacement by editing pixels on this registered master, checking that the face does not drift between frames. Test a high collar before attempting a hood.

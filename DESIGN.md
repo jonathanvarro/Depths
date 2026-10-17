@@ -229,12 +229,14 @@ This is guidance for the doors/stairs work already underway (#3 and #4), not a r
 - Use a **192 × 192 pixel canvas** as the current portrait working standard, subject to checking readability on Windows and iPhone.
 - Keep detailed, expressive pixel portraits against simpler environments.
 - Preserve each character's individual face, hair, and personality; a reusable body does not mean a shared generic face.
-- Keep each character's pose, framing, lighting, and facial registration fixed across outfits, expressions, and animation frames. The current Mara sample looks slightly toward image right rather than directly at the player; use this as the initial pose reference, not a requirement that every character have an identical face angle.
+- Keep each character's pose, framing and facial registration fixed across outfits, expressions, and animation frames. Author neutral character colours/form separately from directional illumination; lighting passes must stay registered across variants. The current Mara sample looks slightly toward image right rather than directly at the player; use this as the initial pose reference, not a requirement that every character have an identical face angle.
 - Prepare bases without a hood or outer equipment and with minimal plain clothing, leaving shoulders and neckline accessible for outfit layers.
 
 ### Layer structure and clothing
 
-Build editable layered masters and export aligned full-canvas transparent layers. Do not trim or independently resize components. Share layer names, pixel scale, lighting direction, and attachment conventions across characters.
+Build editable layered masters and export aligned full-canvas transparent layers. Do not trim or independently resize components. Share layer names, pixel scale, lighting-pass conventions and attachment conventions across characters.
+
+**Separate illumination (owner direction, 2026-10-17, #35):** keep neutral character/outfit/expression art separate from incident highlights and directional/cast shadows. A character should support warm, dim and neutral lighting without a permanent lantern glow. See [the portrait lighting contract and migration audit](docs/portrait-lighting.md). Current Mara and merchant art has baked lighting and needs a source-art pass; the existing renderer does not yet implement independent lighting. Keep conditions and essential UI readability independent of scene illumination.
 
 The intended structure includes background, back hair, body/neck, character head/face, eyes/brows, mouth, clothing, front hair, accessories, and condition layers. Exact ordering depends on the garment: a hood or cloak may need back and front pieces, and hair may need to overlap a collar. Reconstruct hidden pixels rather than relying on visible fragments from a flattened image.
 

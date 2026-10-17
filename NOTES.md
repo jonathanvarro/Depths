@@ -14,6 +14,11 @@ Format:
 ---
 
 ## 2026-10-17 – ChatGPT
+- Did: #35 recorded the owner's requirement to separate portrait character art from lighting in docs/portrait-lighting.md; updated DESIGN.md, merchant guidance and Mara's prototype README to remove the assumption of permanently fixed lantern light. Audited the actual PortraitSet/View, PartyCard and Mara resource: character, tunic and expression drawings currently contain baked illumination; no independent lighting pass exists yet.
+- Next: #36 tracks reauthoring a neutral aligned Mara master/tunic and neutral blink/talk patches, supplying coordinated shadow/highlight masks, then extending the renderer and verifying neutral/warm/dim composites with conditions/outfits at 192/96px. The guide gives the layer/registration contract, migration sequence and validation criteria for Claude and future art generation.
+- Watch out: Design/production rule only; existing PNGs, live portraits and gameplay are unchanged. This is not a claim that lighting was extracted. Preserve local form/occlusion, keep light masks compatible with active expressions/clothing, and retain readable UI in darkness. Automatic lantern-to-portrait mapping remains undecided. Claude's encounter changes remain untouched.
+
+## 2026-10-17 – ChatGPT
 - Did: #34 recorded the owner's rough-paper, hero-drawn map direction in docs/hand-drawn-map-design.md, linked from DESIGN.md. Generated art/concepts/map/hero-map-v1.png with the built-in image tool; full prompt/provenance saved beside it. Proposed charcoal contours without visible cell squares, sparse rock hatching/notes, distinct discovery symbols, a quiet parchment centre and a simpler corner-map version. Checked image integrity/source-copy equality and local documentation links.
 - Next: Owner reviews the visual direction; a later renderer task can build continuous outlines from explored grid data with stable small line variation, preserving reliable connections, scale, facing and discovery. Guide includes phone readability checks and implementation boundaries.
 - Watch out: Concept/design only; scripts/minimap.gd and live UI are unchanged. Mockup is illustrative, not an actual seed or complete symbol set. Labels/Close must be real UI with safe-area/touch sizing; texture and handwriting must not obscure routes. Ongoing Claude encounter changes remain separate.
