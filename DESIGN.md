@@ -202,6 +202,8 @@ The interface should preserve the two elements the owner particularly liked: exp
 
 **Navigation/menu study (2026-10-17, #37):** [shared interface proposals](docs/navigation-interface-design.md) compare Field kit (quiet exploration controls, dark worn panels, parchment documents) with Field journal (persistent book tabs and paper-led windows). The study covers Pack, map, party review and menu/Back behaviour as a foundation for other windows. Field kit is a recommendation for review, not an approved theme or a change to the live game.
 
+**Title/typography study (2026-10-17, #38):** [title-screen concept and type roles](docs/title-screen-and-typography.md) propose Cinzel SemiBold for the title/major headings and Source Sans 3 for actions/body text. The cave background is generated separately; title/menu use actual bundled fonts with licences and reusable Godot resources. Desktop/phone captures and a specimen are provided. This remains a design proposal, not a changed entry scene or an approved release title.
+
 ## Reusable environment materials
 
 Use a library of coordinated wall, floor, and ceiling textures applied to reusable geometry. Keep surfaces low-resolution, sparsely detailed, and consistent in colour and intended pixel scale. Combine material families with room shapes, props, and lighting for identity. Stains, cracks, moss, and symbols can later be separate variations or overlays.

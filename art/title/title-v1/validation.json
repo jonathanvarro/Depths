@@ -1,0 +1,43 @@
+{
+  "pngs": {
+    "background.png": {
+      "size": [
+        1672,
+        941
+      ],
+      "mode": "RGB",
+      "sha256": "6190e892b7c46eccf1e53eed08c4869fe89cb741d4d7374f43d42e87ab15c3a6"
+    },
+    "title-desktop.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB",
+      "sha256": "254ddd2a103a001c9bb108039e3f0a868cd3d4b3d9171462b18d0ff8b3e8de3d"
+    },
+    "title-phone.png": {
+      "size": [
+        1278,
+        590
+      ],
+      "mode": "RGB",
+      "sha256": "c7acd33afd377423865428a4ca6e08c67c689d969712ced5f6be59ace8a9af62"
+    },
+    "title-specimen.png": {
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB",
+      "sha256": "4a9bb238b19d91671f669ab381d764919127cdbbb9cd3c12c3cbd57a73a80f8e"
+    }
+  },
+  "background_exact_source_copy": true,
+  "godot_version": "4.7.2",
+  "godot_checks_passed": 168,
+  "font_files": 2,
+  "fonts_have_licence": true,
+  "physical_phone_test": false,
+  "main_scene_changed": false
+}
