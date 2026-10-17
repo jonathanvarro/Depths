@@ -5,16 +5,17 @@ this via CLAUDE.md; ChatGPT Codex reads AGENTS.md directly). Keep it current.
 
 ## About the project
 
-<!-- TODO: Describe what Depths is in a few sentences. -->
-- **What it is:** _TBD_
+- **What it is:** A dark, first-person grid dungeon crawler about party strain, dangerous discoveries, and descending through increasingly difficult procedural floors. See `DESIGN.md` for current direction, proposals, and open decisions.
 - **Language / engine / framework:** _TBD_
 - **How to run it:** _TBD_
 - **How to test it:** _TBD_
 
 ## Project structure
 
-<!-- TODO: Fill in as folders are added, e.g. `src/` – game code. -->
-_No files yet._
+- `DESIGN.md` – living design direction and proposed first playable scope.
+- `AGENTS.md` / `CLAUDE.md` – shared assistant instructions and entry point.
+- `NOTES.md` – handoff history between assistants.
+- No game code yet; engine, run instructions, and tests remain undecided.
 
 ## How we work
 
