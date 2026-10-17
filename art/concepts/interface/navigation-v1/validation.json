@@ -1,0 +1,79 @@
+{
+  "checks": [
+    {
+      "width": 1024,
+      "kind": "kit",
+      "flows": "Pack/select/use/cancel, Map, Party, Menu/Controls, Back/Escape, focus restoration",
+      "overflow": false
+    },
+    {
+      "width": 1024,
+      "kind": "journal",
+      "flows": "Pack/select/use/cancel, Map, Party, Menu/Controls, Back/Escape, focus restoration",
+      "overflow": false
+    },
+    {
+      "width": 736,
+      "kind": "kit",
+      "flows": "Pack/select/use/cancel, Map, Party, Menu/Controls, Back/Escape, focus restoration",
+      "overflow": false
+    },
+    {
+      "width": 736,
+      "kind": "journal",
+      "flows": "Pack/select/use/cancel, Map, Party, Menu/Controls, Back/Escape, focus restoration",
+      "overflow": false
+    },
+    {
+      "width": 568,
+      "kind": "kit",
+      "flows": "Pack/select/use/cancel, Map, Party, Menu/Controls, Back/Escape, focus restoration",
+      "overflow": false
+    },
+    {
+      "width": 568,
+      "kind": "journal",
+      "flows": "Pack/select/use/cancel, Map, Party, Menu/Controls, Back/Escape, focus restoration",
+      "overflow": false
+    },
+    {
+      "width": 320,
+      "kind": "kit",
+      "flows": "Pack/select/use/cancel, Map, Party, Menu/Controls, Back/Escape, focus restoration",
+      "overflow": false
+    },
+    {
+      "width": 320,
+      "kind": "journal",
+      "flows": "Pack/select/use/cancel, Map, Party, Menu/Controls, Back/Escape, focus restoration",
+      "overflow": false
+    }
+  ],
+  "scriptErrors": [],
+  "physicalPhoneTest": false,
+  "variantSwitching": true,
+  "browser": "Installed Microsoft Edge, headless",
+  "fragmentSha256": "9069de8236051947e3c1ead09e9658d9cec404fd81df6fd5b6970725b0ddfa3b",
+  "captureSizes": {
+    "cave-backdrop.png": [
+      1280,
+      720
+    ],
+    "journal-exploration.png": [
+      992,
+      640
+    ],
+    "journal-pack.png": [
+      992,
+      640
+    ],
+    "kit-exploration.png": [
+      992,
+      640
+    ],
+    "kit-pack.png": [
+      992,
+      640
+    ]
+  }
+}

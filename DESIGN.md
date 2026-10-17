@@ -200,6 +200,8 @@ Pixel art is not automatically cheap: consistency, readable expressions, viewpoi
 
 The interface should preserve the two elements the owner particularly liked: expressive companion portraits and the exploration map. Sound, writing, and reactions should make losses and moments of relief feel personal. Content boundaries and the degree of graphic horror remain undecided.
 
+**Navigation/menu study (2026-10-17, #37):** [shared interface proposals](docs/navigation-interface-design.md) compare Field kit (quiet exploration controls, dark worn panels, parchment documents) with Field journal (persistent book tabs and paper-led windows). The study covers Pack, map, party review and menu/Back behaviour as a foundation for other windows. Field kit is a recommendation for review, not an approved theme or a change to the live game.
+
 ## Reusable environment materials
 
 Use a library of coordinated wall, floor, and ceiling textures applied to reusable geometry. Keep surfaces low-resolution, sparsely detailed, and consistent in colour and intended pixel scale. Combine material families with room shapes, props, and lighting for identity. Stains, cracks, moss, and symbols can later be separate variations or overlays.

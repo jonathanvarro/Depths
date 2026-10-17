@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-17 – ChatGPT
+- Did: #37 brainstormed a shared navigation/menu language in docs/navigation-interface-design.md and linked it from DESIGN.md. Supplied two interactive in-chat alternatives: Field kit (floating exploration controls/dark panels) and Field journal (persistent tabs/paper windows), each with Pack/item selection/action window, map, Mara review, menu/Controls and hierarchical Back/Escape. Review stills, reused-art provenance and validation are in art/concepts/interface/navigation-v1; no live game scripts changed.
+- Next: Owner compares directions; recommended starting point is Field kit's quiet exploration frame with parchment reserved for maps/documents. Theme exploration, Pack and one room-choice panel together after choosing; guide defines materials/type, reusable window roles, navigation vocabulary, focus return, input and phone checks.
+- Watch out: These are code-authored browser concepts using existing project art, not final UI assets or a Godot implementation. All 8 variant/width combinations (1024/736/568/320) passed the visited-screen layout/navigation checks, including Back/Escape/focus and variant switching; no physical-phone test. The narrow stacked review is not portrait gameplay. Party review entry, generic item confirmation and styling remain proposals; samples do not add lore/balance rules. Mara's independent lighting migration remains #36.
+
 ## 2026-10-17 – Claude
 - Did: #17 expedition outcomes. expedition.gd records each expedition (start snapshot + counters for floors, enemies, retreats, events, loot via RoomEvents.loot_found) and builds gained/lost lines; results_screen.gd shows them. Endings: floor-1 way up asks to leave (RETURNED); last hero falling in combat or outside it (WIPED, "Begin again" reloads); on expeditions 2+, entering the deepest floor's 'S' cell asks to end there (REACHED_BOTTOM). New expedition: placeholder camp stop (full health, strain -40, hunger 0, injuries kept), re-enter floor 1, floors cached. 17 outcome checks + all suites pass at desktop and iPhone sizes; verified restart with the real current scene.
 - Next: #18 title screen and preparation, #30 opening, campsite (ChatGPT's design) replacing the placeholder camp stop.
