@@ -174,6 +174,8 @@ Maintain clear navigation cues and consistent map meanings. A decorative pit mus
 
 This is guidance for the doors/stairs work already underway (#3 and #4), not a request to replace or duplicate it. The first implementation can remain generic and gain environment-specific appearances later.
 
+**Implemented (#3, #4):** gameplay uses four roles — closed passage (cleared by stepping into it), blocked passage (can't pass yet), way down, way up. An `EnvironmentTheme` resource (`themes/cave.tres`, `themes/stone.tres`) supplies each role's name, messages, placeholder colour, and an optional scene for real art, plus the site's wall/floor/ceiling materials. The cave theme currently uses spider webs, tangled roots, a pit, and hanging roots; the stone theme uses doors, a barred door, and stairs. Taking a way down or up asks for confirmation first, and floors remember their state when revisited. Adding environment art means assigning scenes in a theme, not changing game code.
+
 ## Portrait system — direction recorded 2026-10-16
 
 ### Canvas, identity, and pose

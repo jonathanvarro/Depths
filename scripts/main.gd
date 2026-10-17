@@ -1,33 +1,34 @@
 extends Node3D
-## Grid-movement prototype: generates a placeholder dungeon floor, places the
-## party at the start, and adds the map and touch controls.
+## Exploration prototype: generates the floors of one site, dressed by an
+## environment theme, and handles moving between them, plus the map, touch
+## controls, messages, and debug overlay.
 
 const DungeonMap := preload("res://scripts/dungeon_map.gd")
 const Party := preload("res://scripts/party.gd")
 const Minimap := preload("res://scripts/minimap.gd")
 const FloorGenerator := preload("res://scripts/floor_generator.gd")
-const STONE_WALL := preload("res://art/textures/stone-v1/wall_plain.tres")
-const WORN_WALL := preload("res://art/textures/stone-v1/wall_worn.tres")
-const STONE_FLOOR := preload("res://art/textures/stone-v1/floor.tres")
-const STONE_CEILING := preload("res://art/textures/stone-v1/ceiling.tres")
+const LevelBuilder := preload("res://scripts/level_builder.gd")
 
 const CELL_SIZE := 2.0
 const WALL_HEIGHT := 2.4
+## Mixed into the site seed so each floor of a site gets its own layout.
+const FLOOR_SEED_STEP := 7919
 
-## Hand-drawn floor for debugging (see use_debug_layout).
-## '#' wall, '.' floor, 'S' start, other letters are contents (see
-## dungeon_map.gd). Rows must all be the same length.
+## Hand-drawn first floor for debugging (see use_debug_layout).
+## '#' wall, '.' floor, 'S' start, 'D' closed passage, 'B' blocked passage,
+## other letters are contents (see dungeon_map.gd). Rows must all be the
+## same length.
 const DEBUG_LAYOUT := [
 	"############",
 	"#S.C.#..E..#",
-	"#.##.#.###.#",
+	"#D##B#.###.#",
 	"#.#..#...#.#",
 	"#.#.####.#.#",
 	"#...#....#.#",
 	"###.#.####.#",
 	"#..T..#..R.#",
 	"#.###.#.##.#",
-	"#...#...#..#",
+	"#...#...#.>#",
 	"############",
 ]
 
@@ -43,54 +44,115 @@ const KEY_BINDINGS := {
 const TOUCH_BUTTON_SIZE := Vector2(88, 88)
 const MESSAGE_SECONDS := 2.0
 
-## Seed for the generated floor; 0 picks a new random floor each run.
-## Every run prints its seed, so a floor worth revisiting can be replayed.
+## Seed for the site; 0 picks a new random site each run. The first floor
+## uses this seed directly; deeper floors derive theirs from it. Every run
+## prints its seed, so a site worth revisiting can be replayed.
 @export var floor_seed := 0
-## Use DEBUG_LAYOUT instead of generating a floor.
+## Use DEBUG_LAYOUT for the first floor instead of generating it.
 @export var use_debug_layout := false
 ## Start with the debug overlay on (F3 toggles it while playing).
 @export var show_debug := false
+## How the site looks and what its features are called.
+@export var environment_theme: EnvironmentTheme = preload("res://themes/cave.tres")
+## Floors in this site; the deepest has no way further down.
+@export var floors_in_site := 3
 
-var _map  # dungeon_map.gd
-var _seed_text := "debug layout"
+var _site_seed := 0
+var _depth := 0
+var _floors := {}  # depth -> dungeon_map.gd, kept so revisited floors remember their state
+var _map  # dungeon_map.gd for the current floor
+var _level: Node3D
+var _party: Node3D
 var _minimap: Control
 var _debug_label: Label
 var _message_label: Label
 var _message_tween: Tween
+var _prompt: Control
+var _prompt_label: Label
+var _prompt_action := Callable()
 
 
 func _ready() -> void:
 	_register_input_actions()
-	var map = DungeonMap.new(_make_layout())
-	_map = map
 	_build_environment()
-	_build_floor(map)
+	_site_seed = floor_seed if floor_seed != 0 else randi()
+	print("Floor seed: ", _site_seed)
 
 	_minimap = Minimap.new()
-	_minimap.setup(map)
 	_build_ui(_minimap)
-	var party := Party.new()
-	party.moved.connect(_minimap.on_party_moved)
-	party.moved.connect(_on_party_moved)
-	party.entered_cell.connect(_on_party_entered_cell)
-	add_child(party)
-	party.setup(map, CELL_SIZE)
+	_party = Party.new()
+	_party.moved.connect(_minimap.on_party_moved)
+	_party.moved.connect(_on_party_moved)
+	_party.entered_cell.connect(_on_party_entered_cell)
+	_party.opened_door.connect(_on_party_opened_door)
+	_party.blocked_by.connect(_on_party_blocked)
+	add_child(_party)
+	_party.setup(CELL_SIZE)
+	_go_to_floor(1, true)
 	_set_debug(show_debug)
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_debug"):
 		_set_debug(not _debug_label.visible)
+	elif _prompt.visible and event.is_action_pressed("ui_accept"):
+		_answer_prompt(true)
+	elif _prompt.visible and event.is_action_pressed("ui_cancel"):
+		_answer_prompt(false)
 
 
-## Placeholder for real encounters: for now each content just announces itself.
+## Builds (or returns to) a floor. Arriving from above puts the party at the
+## way up; arriving from below puts it at the way down.
+func _go_to_floor(depth: int, from_above: bool) -> void:
+	_depth = depth
+	if not _floors.has(depth):
+		_floors[depth] = DungeonMap.new(_make_layout(depth), depth)
+	_map = _floors[depth]
+
+	if _level:
+		_level.queue_free()
+	_level = LevelBuilder.new()
+	_level.build(_map, environment_theme, CELL_SIZE, WALL_HEIGHT)
+	add_child(_level)
+
+	_minimap.setup(_map)
+	var arrival: Vector2i = _map.start_cell if from_above else _map.find_content(DungeonMap.Content.STAIRS_DOWN)
+	_party.place(_map, arrival)
+	_show_message("%s · depth %d" % [environment_theme.display_name, depth])
+
+
+func _make_layout(depth: int) -> PackedStringArray:
+	if use_debug_layout and depth == 1:
+		return PackedStringArray(DEBUG_LAYOUT)
+	return FloorGenerator.generate(_site_seed + (depth - 1) * FLOOR_SEED_STEP, depth < floors_in_site)
+
+
 func _on_party_entered_cell(cell: Vector2i) -> void:
 	var content: int = _map.enter(cell)
-	if content == DungeonMap.Content.NONE:
-		return
-	var content_text := DungeonMap.content_name(content)
-	print("Entered %s at %s" % [content_text, cell])
-	_show_message(content_text)
+	match content:
+		DungeonMap.Content.NONE:
+			return
+		DungeonMap.Content.STAIRS_DOWN:
+			_ask(environment_theme.descent_prompt, _go_to_floor.bind(_depth + 1, true))
+		DungeonMap.Content.STAIRS_UP:
+			if _depth == 1:
+				_show_message(environment_theme.exit_message)  # campsite comes later
+			else:
+				_ask(environment_theme.ascent_prompt, _go_to_floor.bind(_depth - 1, false))
+		_:
+			# Placeholder for real encounters: for now contents just announce themselves.
+			var content_text := DungeonMap.content_name(content)
+			print("Entered %s at %s" % [content_text, cell])
+			_show_message(content_text)
+
+
+func _on_party_opened_door(cell: Vector2i) -> void:
+	_level.refresh_door(cell)
+	_show_message(environment_theme.closed_open_message)
+
+
+func _on_party_blocked(_cell: Vector2i) -> void:
+	_show_message(environment_theme.blocked_message)
 
 
 func _on_party_moved(cell: Vector2i, facing: int) -> void:
@@ -98,12 +160,27 @@ func _on_party_moved(cell: Vector2i, facing: int) -> void:
 	var state := ""
 	if content != DungeonMap.Content.NONE:
 		state = " (used)" if _map.triggered.has(cell) else ""
-	_debug_label.text = "Seed: %s
-Cell: %s  Facing: %s
-Here: %s%s
-Contents on floor: %d" % [
-		_seed_text, cell, ["N", "E", "S", "W"][facing],
-		DungeonMap.content_name(content), state, _map.contents.size()]
+	var seed_text: String = "debug layout" if use_debug_layout and _depth == 1 else str(_site_seed)
+	_debug_label.text = "Seed: %s  Depth: %d/%d\nCell: %s  Facing: %s\nHere: %s%s\nContents on floor: %d  Passages: %d" % [
+		seed_text, _depth, floors_in_site, cell, ["N", "E", "S", "W"][facing],
+		DungeonMap.content_name(content), state, _map.contents.size(), _map.doors.size()]
+
+
+## Shows a yes/no question; `on_yes` runs if the player agrees.
+func _ask(question: String, on_yes: Callable) -> void:
+	_prompt_label.text = question
+	_prompt_action = on_yes
+	_prompt.visible = true
+	_party.locked = true
+
+
+func _answer_prompt(yes: bool) -> void:
+	_prompt.visible = false
+	_party.locked = false
+	var action := _prompt_action
+	_prompt_action = Callable()
+	if yes and action.is_valid():
+		action.call()
 
 
 func _set_debug(enabled: bool) -> void:
@@ -119,15 +196,6 @@ func _show_message(text: String) -> void:
 	_message_tween = create_tween()
 	_message_tween.tween_interval(MESSAGE_SECONDS)
 	_message_tween.tween_property(_message_label, "modulate:a", 0.0, 0.5)
-
-
-func _make_layout() -> PackedStringArray:
-	if use_debug_layout:
-		return PackedStringArray(DEBUG_LAYOUT)
-	var seed_value := floor_seed if floor_seed != 0 else randi()
-	_seed_text = str(seed_value)
-	print("Floor seed: ", seed_value)
-	return FloorGenerator.generate(seed_value)
 
 
 func _register_input_actions() -> void:
@@ -154,42 +222,6 @@ func _build_environment() -> void:
 	var world_env := WorldEnvironment.new()
 	world_env.environment = env
 	add_child(world_env)
-
-
-func _build_floor(map) -> void:
-	var wall_mesh := BoxMesh.new()
-	wall_mesh.size = Vector3(CELL_SIZE, WALL_HEIGHT, CELL_SIZE)
-	wall_mesh.material = STONE_WALL
-	var worn_wall_mesh := BoxMesh.new()
-	worn_wall_mesh.size = wall_mesh.size
-	worn_wall_mesh.material = WORN_WALL
-	var tile_mesh := PlaneMesh.new()
-	tile_mesh.size = Vector2(CELL_SIZE, CELL_SIZE)
-	tile_mesh.material = STONE_FLOOR
-	var ceiling_mesh := PlaneMesh.new()
-	ceiling_mesh.size = Vector2(CELL_SIZE, CELL_SIZE)
-	ceiling_mesh.flip_faces = true
-	ceiling_mesh.material = STONE_CEILING
-
-	for y in map.height:
-		for x in map.width:
-			var cell := Vector2i(x, y)
-			var at := Vector3(x * CELL_SIZE, 0.0, y * CELL_SIZE)
-			if map.is_wall(cell):
-				if map.is_exposed_wall(cell):
-					# Stable variation without consuming the floor generator's RNG.
-					var mesh := worn_wall_mesh if (x * 7 + y * 11) % 5 == 0 else wall_mesh
-					_add_mesh(mesh, at + Vector3(0, WALL_HEIGHT / 2.0, 0))
-			else:
-				_add_mesh(tile_mesh, at)
-				_add_mesh(ceiling_mesh, at + Vector3(0, WALL_HEIGHT, 0))
-
-
-func _add_mesh(mesh: Mesh, at: Vector3) -> void:
-	var instance := MeshInstance3D.new()
-	instance.mesh = mesh
-	instance.position = at
-	add_child(instance)
 
 
 func _build_ui(minimap: Control) -> void:
@@ -233,6 +265,41 @@ func _build_ui(minimap: Control) -> void:
 		pad.add_child(_make_touch_button(spec[0], spec[1]))
 	pad_corner.add_child(pad)
 	ui.add_child(pad_corner)
+
+	_build_prompt(ui)
+
+
+## Centred yes/no box for deliberate choices like descending. Big buttons
+## for touch; Enter/Escape also answer.
+func _build_prompt(ui: CanvasLayer) -> void:
+	var center := CenterContainer.new()
+	center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	center.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	ui.add_child(center)
+
+	var panel := PanelContainer.new()
+	center.add_child(panel)
+	var box := VBoxContainer.new()
+	box.add_theme_constant_override("separation", 16)
+	panel.add_child(box)
+	_prompt_label = Label.new()
+	_prompt_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_prompt_label.add_theme_font_size_override("font_size", 28)
+	box.add_child(_prompt_label)
+	var buttons := HBoxContainer.new()
+	buttons.alignment = BoxContainer.ALIGNMENT_CENTER
+	buttons.add_theme_constant_override("separation", 24)
+	box.add_child(buttons)
+	for spec in [["Go", true], ["Stay", false]]:
+		var button := Button.new()
+		button.text = spec[0]
+		button.custom_minimum_size = Vector2(140, 72)
+		button.focus_mode = Control.FOCUS_NONE
+		button.add_theme_font_size_override("font_size", 28)
+		button.pressed.connect(_answer_prompt.bind(spec[1]))
+		buttons.add_child(button)
+	_prompt = center
+	_prompt.visible = false
 
 
 ## Holding the button holds the action, exactly like holding the key.

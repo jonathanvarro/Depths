@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="EnvironmentTheme" format=3]
+
+[ext_resource type="Script" path="res://scripts/environment_theme.gd" id="1"]
+[ext_resource type="Material" path="res://art/textures/stone-v1/wall_plain.tres" id="2"]
+[ext_resource type="Material" path="res://art/textures/stone-v1/wall_worn.tres" id="3"]
+[ext_resource type="Material" path="res://art/textures/stone-v1/floor.tres" id="4"]
+[ext_resource type="Material" path="res://art/textures/stone-v1/ceiling.tres" id="5"]
+
+[resource]
+script = ExtResource("1")
+display_name = "Cave"
+wall_material = ExtResource("2")
+wall_variant_material = ExtResource("3")
+floor_material = ExtResource("4")
+ceiling_material = ExtResource("5")
+closed_name = "Spider web"
+closed_open_message = "You tear through the web."
+closed_color = Color(0.9, 0.9, 0.85, 0.18)
+blocked_name = "Tangled roots"
+blocked_message = "Thick roots block the way."
+blocked_color = Color(0.32, 0.22, 0.12, 1)
+descent_name = "Pit"
+descent_prompt = "Climb down into the pit?"
+descent_color = Color(0.02, 0.02, 0.02, 1)
+ascent_name = "Hanging roots"
+ascent_prompt = "Climb the roots back up?"
+exit_message = "Daylight. The way back to camp."
+ascent_color = Color(0.4, 0.3, 0.18, 1)

@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-16 – Claude
+- Did: #3 and #4. Passages: 'D' closed (stepping in clears/opens it; party stays put that press) and 'B' blocked (bump + message). Ways up/down: '<' at the arrival point, '>' in the room farthest on foot; deepest floor (floors_in_site, default 3) has none. Taking either asks Go/Stay; floors are cached so revisits keep explored/opened/used state. New EnvironmentTheme resource (scripts/environment_theme.gd, themes/cave.tres + stone.tres) holds names, messages, placeholder colours, optional art scenes, and surface materials, following ChatGPT's DESIGN.md guidance. level_builder.gd now owns 3D geometry. Minimap draws passage bars and shows stairs once seen. Tested 500 seeds (reachable despite blocked passages, ~5 closed + ~1 blocked per floor, way down always reachable, deepest floor has none, walls unchanged) and an in-game run through web, roots, pit, descend, ascend.
+- Next: #5 full-screen map. Art: assign closed/opened/blocked/descent/ascent scenes in themes/cave.tres. Floor 1's way up says "back to camp" until the campsite exists.
+- Watch out: Blocked passages can't be unlocked yet (no keys/tools). Placeholders are plain shapes; the web is a translucent sheet. ChatGPT and Claude both worked in E:\GitHub\Depths at the same time today without conflict, but avoid editing the same files simultaneously.
+
 ## 2026-10-16 – ChatGPT
 - Did: Safely transferred the documentation from retired OneDrive commit c40bb8ed778df488306a8cad0bf0a0df0d1495bd into E:\GitHub\Depths: the environment-specific door/stair section in DESIGN.md and its original handoff below. Preserved the newer working-copy note and existing implementation changes. Checked the documentation diff and whitespace before committing.
 - Next: Continue #3/#4 using this visual guidance alongside the current door/stair implementation.

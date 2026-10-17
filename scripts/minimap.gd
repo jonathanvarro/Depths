@@ -20,6 +20,10 @@ const CONTENT_COLORS := {
 	6: Color("e8e2d0"),  # STAIRS_DOWN
 	7: Color("e8e2d0"),  # STAIRS_UP
 }
+const COLOR_CLOSED_PASSAGE := Color("b08850")
+const COLOR_BLOCKED_PASSAGE := Color("8a2f24")
+## Contents visible from a distance (no need to step in to discover them).
+const SEEN_FROM_AFAR := [6, 7]  # STAIRS_DOWN, STAIRS_UP
 
 var map  # dungeon_map.gd
 var party_cell := Vector2i.ZERO
@@ -56,15 +60,36 @@ func _draw() -> void:
 			if not (reveal_all or map.explored.has(c)) or c.x < 0 or c.y < 0 or c.x >= map.width or c.y >= map.height:
 				continue
 			var color: Color = COLOR_WALL if map.is_wall(c) else COLOR_FLOOR
-			draw_rect(Rect2(origin + Vector2(x, y) * TILE, Vector2(TILE, TILE) - Vector2.ONE), color)
+			var tile_rect := Rect2(origin + Vector2(x, y) * TILE, Vector2(TILE, TILE) - Vector2.ONE)
+			draw_rect(tile_rect, color)
+			_draw_passage(c, tile_rect)
 			# Contents appear once discovered (or always, in debug).
 			var content: int = map.content_at(c)
-			if content != 0 and (reveal_all or map.discovered.has(c)):
+			if content != 0 and (reveal_all or map.discovered.has(c) or content in SEEN_FROM_AFAR):
 				var marker: Color = CONTENT_COLORS[content]
 				if map.triggered.has(c):
 					marker = marker.darkened(0.4)
 				draw_circle(origin + (Vector2(x, y) + Vector2(0.5, 0.5)) * TILE, TILE * 0.3, marker)
 
+	_draw_arrow(origin, half)
+
+
+## Closed and blocked passages: a bar across the corridor.
+func _draw_passage(c: Vector2i, tile_rect: Rect2) -> void:
+	var door: int = map.door_at(c)
+	if door != 1 and door != 3:  # CLOSED, BLOCKED
+		return
+	var color := COLOR_CLOSED_PASSAGE if door == 1 else COLOR_BLOCKED_PASSAGE
+	var runs_east_west: bool = map.is_wall(c + Vector2i.UP) and map.is_wall(c + Vector2i.DOWN)
+	var bar := tile_rect.grow(-1.0)
+	if runs_east_west:
+		bar = Rect2(bar.get_center() - Vector2(1.5, bar.size.y / 2.0), Vector2(3, bar.size.y))
+	else:
+		bar = Rect2(bar.get_center() - Vector2(bar.size.x / 2.0, 1.5), Vector2(bar.size.x, 3))
+	draw_rect(bar, color)
+
+
+func _draw_arrow(origin: Vector2, half: int) -> void:
 	# Arrow pointing the way the party faces (rotation 0 = north = up).
 	var center := origin + (Vector2(half, half) + Vector2(0.5, 0.5)) * TILE
 	var angle := party_facing * PI / 2.0

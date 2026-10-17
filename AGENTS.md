@@ -34,15 +34,23 @@ this via CLAUDE.md; ChatGPT Codex reads AGENTS.md directly). Keep it current.
 - `.godot/` – Godot's local cache; ignored by git, never commit it.
 - `scenes/main.tscn` – entry scene; everything else is built in code by
   `scripts/main.gd` while we're prototyping.
-- `scripts/main.gd` – generates the floor (or uses `DEBUG_LAYOUT`), builds
-  lighting, UI,
+- `scripts/main.gd` – runs a site: generates and caches each floor (or uses
+  `DEBUG_LAYOUT` for floor 1), moves between floors via the yes/no prompt,
+  builds lighting, UI,
   touch pad, and the input actions (`move_forward`, `move_back`,
   `turn_left`, `turn_right`).
-- `scripts/party.gd` – first-person party: grid cell, facing, step/turn tweens.
+- `scripts/party.gd` – first-person party: grid cell, facing, step/turn tweens;
+  opens closed passages and bumps on blocked ones.
+- `scripts/level_builder.gd` – turns a map plus an EnvironmentTheme into 3D
+  geometry; theme scenes replace the placeholder shapes when assigned.
+- `scripts/environment_theme.gd` + `themes/*.tres` – per-environment look and
+  wording for passages and ways up/down (cave: webs, roots, pit, hanging
+  roots; stone: doors, stairs). Picked via `environment_theme` on Main.
 - `scripts/dungeon_map.gd` – grid data (`is_wall`), cell contents
   (`Content` enum, `content_at`, `enter`), and explored cells. Layout text
   uses letters for contents: E encounter, C chest, T trap, O strange object,
-  R rest spot, > stairs down, < stairs up. Contents trigger once, except
+  R rest spot, > way down, < way up (also the start if there's no S), plus
+  D closed passage and B blocked passage (`Door` enum). Contents trigger once, except
   stairs (`REPEATABLE`).
 - `scripts/floor_generator.gd` – seeded room-and-corridor floor generator.
   Set `floor_seed` on the Main node to replay a floor (the seed is printed at

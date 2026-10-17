@@ -1,8 +1,10 @@
 extends RefCounted
-## Builds a random floor: rectangular rooms joined by corridors.
+## Builds a random floor: rectangular rooms joined by corridors, with a way
+## up where the party arrives, a way down in the farthest room, passages at
+## some room entrances, and contents in most rooms.
 ##
-## Output uses the same text format as dungeon_map.gd ('#', '.', 'S'), so a
-## generated floor and a hand-drawn debug layout are interchangeable.
+## Output uses the same text format as dungeon_map.gd, so a generated floor
+## and a hand-drawn debug layout are interchangeable.
 ## The same seed always produces the same floor.
 
 const WIDTH := 31
@@ -19,9 +21,15 @@ const ROOM_CONTENT_CHANCE := 0.75
 ## Layout symbols (see dungeon_map.gd) and how often each is picked.
 ## Stairs are placed separately (issue #4).
 const ROOM_CONTENT_WEIGHTS := {"E": 3, "C": 2, "T": 2, "O": 1, "R": 1}
+## Chances for each room entrance to get a closed or blocked passage.
+const CLOSED_PASSAGE_CHANCE := 0.3
+const BLOCKED_PASSAGE_CHANCE := 0.12
+
+const NEIGHBOURS: Array[Vector2i] = [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]
 
 
-static func generate(seed_value: int) -> PackedStringArray:
+## has_descent: false on a site's deepest floor, which has no way further down.
+static func generate(seed_value: int, has_descent := true) -> PackedStringArray:
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed_value
 	var open := PackedByteArray()
@@ -51,27 +59,93 @@ static func generate(seed_value: int) -> PackedStringArray:
 		if rng.randf() < EXTRA_CORRIDOR_CHANCE:
 			_carve_corridor(open, rng, _center(rooms[i]), _center(rooms[rng.randi_range(0, i - 1)]))
 
+	# Everything below is placed after the corridors, so it never changes a
+	# seed's walls.
 	var start := _center(rooms[0])
-	# Placed after all corridors so adding contents never changes a seed's walls.
-	var symbols := {}  # Vector2i -> layout symbol
+	var symbols := {start: "<"}  # Vector2i -> layout symbol
+
+	if has_descent and rooms.size() > 1:
+		var distance := _walking_distances(open, start, {})
+		var farthest := rooms[1]
+		for room: Rect2i in rooms.slice(1):
+			if distance.get(_center(room), 0) > distance.get(_center(farthest), 0):
+				farthest = room
+		symbols[_center(farthest)] = ">"
+
 	for room: Rect2i in rooms.slice(1):
 		if rng.randf() < ROOM_CONTENT_CHANCE:
 			var cell := room.position + Vector2i(rng.randi_range(0, room.size.x - 1), rng.randi_range(0, room.size.y - 1))
-			symbols[cell] = _pick_weighted(rng, ROOM_CONTENT_WEIGHTS)
+			var content := _pick_weighted(rng, ROOM_CONTENT_WEIGHTS)
+			if not symbols.has(cell):
+				symbols[cell] = content
+
+	_place_passages(open, rng, rooms, start, symbols)
 
 	var layout := PackedStringArray()
 	for y in HEIGHT:
 		var row := ""
 		for x in WIDTH:
 			var cell := Vector2i(x, y)
-			if cell == start:
-				row += "S"
-			elif symbols.has(cell):
+			if symbols.has(cell):
 				row += symbols[cell]
 			else:
 				row += "." if open[y * WIDTH + x] else "#"
 		layout.append(row)
 	return layout
+
+
+## Puts closed ('D') and blocked ('B') passages in doorways: corridor cells
+## just outside a room, with wall on both sides. A blocked passage is only
+## kept if every other floor cell is still reachable from the start.
+static func _place_passages(open: PackedByteArray, rng: RandomNumberGenerator, rooms: Array[Rect2i], start: Vector2i, symbols: Dictionary) -> void:
+	var floor_count := open.count(1)
+	var blocked := {}
+	for y in HEIGHT:
+		for x in WIDTH:
+			var cell := Vector2i(x, y)
+			if not _is_doorway(open, rooms, cell) or symbols.has(cell):
+				continue
+			if NEIGHBOURS.any(func(n): return symbols.get(cell + n, "") in ["D", "B"]):
+				continue  # no passages side by side
+			var roll := rng.randf()
+			if roll < BLOCKED_PASSAGE_CHANCE:
+				blocked[cell] = true
+				if _walking_distances(open, start, blocked).size() == floor_count - blocked.size():
+					symbols[cell] = "B"
+					continue
+				blocked.erase(cell)  # it would cut part of the floor off
+			if roll < BLOCKED_PASSAGE_CHANCE + CLOSED_PASSAGE_CHANCE:
+				symbols[cell] = "D"
+
+
+static func _is_doorway(open: PackedByteArray, rooms: Array[Rect2i], cell: Vector2i) -> bool:
+	if not _is_open(open, cell) or rooms.any(func(r: Rect2i): return r.has_point(cell)):
+		return false
+	var next_to_room := NEIGHBOURS.any(func(n): return rooms.any(func(r: Rect2i): return r.has_point(cell + n)))
+	var walls_east_west := not _is_open(open, cell + Vector2i.LEFT) and not _is_open(open, cell + Vector2i.RIGHT)
+	var walls_north_south := not _is_open(open, cell + Vector2i.UP) and not _is_open(open, cell + Vector2i.DOWN)
+	return next_to_room and (walls_east_west != walls_north_south)
+
+
+static func _is_open(open: PackedByteArray, cell: Vector2i) -> bool:
+	return cell.x >= 0 and cell.y >= 0 and cell.x < WIDTH and cell.y < HEIGHT and open[cell.y * WIDTH + cell.x] == 1
+
+
+## Steps needed to reach each open cell from `from`, treating `closed` cells
+## as walls (breadth-first search).
+static func _walking_distances(open: PackedByteArray, from: Vector2i, closed: Dictionary) -> Dictionary:
+	var distance := {from: 0}
+	var queue: Array[Vector2i] = [from]
+	var i := 0
+	while i < queue.size():
+		var cell := queue[i]
+		i += 1
+		for n in NEIGHBOURS:
+			var next := cell + n
+			if _is_open(open, next) and not closed.has(next) and not distance.has(next):
+				distance[next] = distance[cell] + 1
+				queue.append(next)
+	return distance
 
 
 static func _pick_weighted(rng: RandomNumberGenerator, weights: Dictionary) -> String:
