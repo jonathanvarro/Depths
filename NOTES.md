@@ -13,6 +13,16 @@ Format:
 
 ---
 
+## 2026-10-16 – ChatGPT
+- Did: Safely transferred the documentation from retired OneDrive commit c40bb8ed778df488306a8cad0bf0a0df0d1495bd into E:\GitHub\Depths: the environment-specific door/stair section in DESIGN.md and its original handoff below. Preserved the newer working-copy note and existing implementation changes. Checked the documentation diff and whitespace before committing.
+- Next: Continue #3/#4 using this visual guidance alongside the current door/stair implementation.
+- Watch out: The retired copy was read only to recover this commit; E:\GitHub\Depths remains the single working copy. Script/theme work already in progress is outside this documentation transfer and must not be included in its commit.
+
+## 2026-10-16 – ChatGPT (recovered from c40bb8e)
+- Did: Recorded environment-specific door/stair presentation in DESIGN.md: cave webs, roots, dirt obstructions/mounds, pits, and natural passages can use the same barrier and floor-transition roles as built doors/stairs.
+- Next: For #3/#4, keep gameplay state and destinations independent of appearance so site themes can be applied later; generic visuals are fine initially.
+- Watch out: Owner says differences are mostly visual. This does not add mandatory tools, web-burning costs, one-way pits, or falling damage. Documentation only; did not touch Claude's door/stair implementation.
+
 ## 2026-10-16 – Claude
 - Did: Made E:\GitHub\Depths the single working copy: it was 7 commits behind, so cleared its duplicate files (identical to GitHub) and fast-forwarded it. Recorded the location in AGENTS.md. Confirmed the game imports and runs from there.
 - Next: Owner points Godot and ChatGPT at E:\GitHub\Depths and removes the OneDrive copy and the stray `new-game-project/` folder. Then #3 doors / #4 stairs.

@@ -156,6 +156,24 @@ Use a library of coordinated wall, floor, and ceiling textures applied to reusab
 
 The first test set lives in `art/textures/stone-v1/`: two 64 × 64 wall variants, one floor, one ceiling, and shared Godot materials. The existing prototype now uses them. This is a production-direction test, not a final resolution commitment. Windows import and a rendered corridor were checked; larger-room tiling, physical texel-scale consistency, seam cleanup, and phone appearance still need review.
 
+### Environment-specific doors and stairs
+
+Doors and stairs are reusable gameplay roles with appearances suited to each site. The owner intends these differences to be primarily visual, rather than requiring a new movement or interaction system for each environment.
+
+| Gameplay role | Cave presentation ideas | Built-environment examples |
+| --- | --- | --- |
+| Passage barrier / door | Thick spider webs, tangled roots, or a dirt obstruction | Wooden door, iron gate, stone slab |
+| Route upward | Dirt mound, rising natural passage, or climbable roots | Staircase or ladder |
+| Route downward | Pit, sloping tunnel, or root-lined shaft | Descending stairs or hatch |
+
+The cave examples preserve the owner's direction; exact assets and interactions are not yet specified. Webs can be visually cleared rather than swinging open, while still using the shared passage-barrier state. Natural ascents and descents can use the shared floor-transition behaviour.
+
+Keep gameplay state separate from presentation: blocked/cleared passage, interaction availability, destination, and return linkage should not depend on whether the artwork depicts a door, web, staircase, or pit. A site's presentation can supply appropriate visuals, labels, and simple transition effects without changing the underlying rules.
+
+Maintain clear navigation cues and consistent map meanings. A decorative pit must not be mistaken for a usable descent, and a passage disguised by roots must still be recognisable as interactable. Visual pits do not imply one-way travel or falling damage. Special requirements such as burning webs, cutting roots, tools, or resource costs are future mechanics requiring a separate decision; they are not implied by this visual direction.
+
+This is guidance for the doors/stairs work already underway (#3 and #4), not a request to replace or duplicate it. The first implementation can remain generic and gain environment-specific appearances later.
+
 ## Portrait system — direction recorded 2026-10-16
 
 ### Canvas, identity, and pose
