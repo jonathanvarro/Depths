@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-17 – ChatGPT
+- Did: #28 drafted a plain starter knife inventory visual with the built-in image tool. Saved art/concepts/items/plain-knife-v1.png and README with the full prompt/provenance. Visually inspected the iron/wood construction and pixel-art direction; verified PNG integrity and real alpha transparency.
+- Next: Owner reviews the item style; clean the pixel/alpha edges and check an actual small inventory slot before choosing an export resolution or making more items.
+- Watch out: Generated 1254 x 1254 concept only, not a final 64 x 64 icon or implemented inventory item. Faint alpha pixels extend into the margin. No knife stats, starting loadout or game scripts changed.
+
 ## 2026-10-17 – Claude
 - Did: Owner decided the lone survivor starts on the deepest floor where the companions died and climbs out to camp. Generator now marks 'S' on the deepest floor in the room farthest from the way up (same spot a way down would use, so walls/contents are unchanged); main.gd opens there with `opening_message` and uses an Arrival enum (OPENING/FROM_ABOVE/FROM_BELOW). Debug layout still opens on floor 1. Tested 500 seeds x 6 checks, the opening in-game, and reran door/stairs, party and map tests.
 - Next: #9 portrait cards. Owner to decide how the companions' deaths are shown and escape difficulty (open decision 4).
