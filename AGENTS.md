@@ -66,8 +66,11 @@ conversations, so this repo is the only shared memory.
 2. **One assistant at a time.** Don't assume the working tree is untouched
    since the last session — check `git status` and `git log` first.
 3. **Small, focused changes.** Do the task asked; don't refactor unrelated code.
-4. **Don't commit or push unless the owner asks.** The owner commits between
-   handoffs so every assistant's work is a separate, reviewable snapshot.
+4. **Automatically commit and push completed tasks.** After completing a
+   requested task, run appropriate checks, then automatically commit and push
+   your own changes. Leave unrelated changes untouched. Stop and explain if
+   checks fail, ownership of changes is unclear, or pushing requires resolving
+   conflicts. Never force-push.
 5. **Leave a handoff note.** At the end of a task, add an entry to the top of
    `NOTES.md` (see the format there).
 

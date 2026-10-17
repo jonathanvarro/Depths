@@ -109,6 +109,12 @@ Pixel art is not automatically cheap: consistency, readable expressions, viewpoi
 
 The interface should preserve the two elements the owner particularly liked: expressive companion portraits and the exploration map. Sound, writing, and reactions should make losses and moments of relief feel personal. Content boundaries and the degree of graphic horror remain undecided.
 
+## Reusable environment materials
+
+Use a library of coordinated wall, floor, and ceiling textures applied to reusable geometry. Keep surfaces low-resolution, sparsely detailed, and consistent in colour and intended pixel scale. Combine material families with room shapes, props, and lighting for identity. Stains, cracks, moss, and symbols can later be separate variations or overlays.
+
+The first test set lives in `art/textures/stone-v1/`: two 64 × 64 wall variants, one floor, one ceiling, and shared Godot materials. The existing prototype now uses them. This is a production-direction test, not a final resolution commitment. Windows import and a rendered corridor were checked; larger-room tiling, physical texel-scale consistency, seam cleanup, and phone appearance still need review.
+
 ## Portrait system — direction recorded 2026-10-16
 
 ### Canvas, identity, and pose

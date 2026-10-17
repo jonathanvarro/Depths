@@ -6,6 +6,10 @@ const DungeonMap := preload("res://scripts/dungeon_map.gd")
 const Party := preload("res://scripts/party.gd")
 const Minimap := preload("res://scripts/minimap.gd")
 const FloorGenerator := preload("res://scripts/floor_generator.gd")
+const STONE_WALL := preload("res://art/textures/stone-v1/wall_plain.tres")
+const WORN_WALL := preload("res://art/textures/stone-v1/wall_worn.tres")
+const STONE_FLOOR := preload("res://art/textures/stone-v1/floor.tres")
+const STONE_CEILING := preload("res://art/textures/stone-v1/ceiling.tres")
 
 const CELL_SIZE := 2.0
 const WALL_HEIGHT := 2.4
@@ -94,23 +98,19 @@ func _build_environment() -> void:
 
 
 func _build_floor(map) -> void:
-	var stone := StandardMaterial3D.new()
-	stone.albedo_color = Color("4a4640")
-	stone.roughness = 1.0
-	var ground := StandardMaterial3D.new()
-	ground.albedo_color = Color("5a4232")
-	ground.roughness = 1.0
-
 	var wall_mesh := BoxMesh.new()
 	wall_mesh.size = Vector3(CELL_SIZE, WALL_HEIGHT, CELL_SIZE)
-	wall_mesh.material = stone
+	wall_mesh.material = STONE_WALL
+	var worn_wall_mesh := BoxMesh.new()
+	worn_wall_mesh.size = wall_mesh.size
+	worn_wall_mesh.material = WORN_WALL
 	var tile_mesh := PlaneMesh.new()
 	tile_mesh.size = Vector2(CELL_SIZE, CELL_SIZE)
-	tile_mesh.material = ground
+	tile_mesh.material = STONE_FLOOR
 	var ceiling_mesh := PlaneMesh.new()
 	ceiling_mesh.size = Vector2(CELL_SIZE, CELL_SIZE)
 	ceiling_mesh.flip_faces = true
-	ceiling_mesh.material = stone
+	ceiling_mesh.material = STONE_CEILING
 
 	for y in map.height:
 		for x in map.width:
@@ -118,7 +118,9 @@ func _build_floor(map) -> void:
 			var at := Vector3(x * CELL_SIZE, 0.0, y * CELL_SIZE)
 			if map.is_wall(cell):
 				if map.is_exposed_wall(cell):
-					_add_mesh(wall_mesh, at + Vector3(0, WALL_HEIGHT / 2.0, 0))
+					# Stable variation without consuming the floor generator's RNG.
+					var mesh := worn_wall_mesh if (x * 7 + y * 11) % 5 == 0 else wall_mesh
+					_add_mesh(mesh, at + Vector3(0, WALL_HEIGHT / 2.0, 0))
 			else:
 				_add_mesh(tile_mesh, at)
 				_add_mesh(ceiling_mesh, at + Vector3(0, WALL_HEIGHT, 0))

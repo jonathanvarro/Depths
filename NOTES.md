@@ -13,6 +13,16 @@ Format:
 
 ---
 
+## 2026-10-16 – ChatGPT
+- Did: #21 added art/textures/stone-v1: two 64 x 64 wall variants, floor, ceiling, shared nearest-filtered rough materials, source atlas, actual in-game screenshot, and README. Applied them in scripts/main.gd with deterministic wall variation; recorded the material-library direction in DESIGN.md. Included the earlier owned automatic-commit policy update after verifying its ownership.
+- Next: Owner reviews the set in F5; tune seam continuity and physical texel scale before expanding into other environment families.
+- Watch out: Textures are generated prototypes; not guaranteed perfectly seamless. Default BoxMesh UVs differ from plane UVs. Godot 4.7.2 normal-access import and actual Windows Mobile-renderer capture passed; iPhone untested. Initial restricted checks had settings-directory errors, resolved by normal-access validation.
+
+## 2026-10-16 – ChatGPT
+- Did: Replaced the ask-before-commit rule in AGENTS.md with the owner's standing instruction to check, commit, and push completed tasks automatically, leaving unrelated changes untouched and never force-pushing. CLAUDE.md already imports AGENTS.md.
+- Next: The assistant handling the already staged floor-generator work should finish that handoff before this policy change is committed separately.
+- Watch out: At task start, unrelated work was already staged in AGENTS.md, NOTES.md, DESIGN.md, game scripts, and other files. This task's policy and handoff edits are unstaged; did not alter the existing index, commit, or push because shared files overlap with that staged work.
+
 ## 2026-10-16 – Claude
 - Did: #1 procedural floor generator (scripts/floor_generator.gd): 31x31 floors of up to 9 rooms joined by L-shaped corridors plus occasional loops; seeded and deterministic. Tested 500 seeds: all fully connected and deterministic. Minimap now shows a 15x15 window around the party; only walls next to floor are drawn. Committed ChatGPT's portrait work separately. Recorded owner decisions from #6 (landscape only; set handheld orientation to sensor landscape), #10 (time per step, oil trade-off, delayed food/healing, supplies in backpack not HUD), and #13 (enemies in first-person) in DESIGN.md.
 - Next: #2 room data model, then #3 doors and #4 stairs.
