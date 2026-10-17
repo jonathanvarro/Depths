@@ -14,6 +14,11 @@ Format:
 ---
 
 ## 2026-10-17 – ChatGPT
+- Did: Inspected #28's knife concept at 64/128 pixels with same-size enlarged views and selectable backgrounds in chat. Verified native display sizes and viewer layout at 736/320 review widths; recorded the comparison in the item-art README. Source art unchanged.
+- Next: Owner reviews the comparison. Consider 128 x 128 working art plus simplified 64 x 64 compact icons, then validate in the actual phone inventory before adopting a standard.
+- Watch out: These are resampled viewing previews, not hand-authored native icons or exported assets. CSS pixel size is not physical iPhone size. No resolution standard or game UI changed.
+
+## 2026-10-17 – ChatGPT
 - Did: #28 drafted a plain starter knife inventory visual with the built-in image tool. Saved art/concepts/items/plain-knife-v1.png and README with the full prompt/provenance. Visually inspected the iron/wood construction and pixel-art direction; verified PNG integrity and real alpha transparency.
 - Next: Owner reviews the item style; clean the pixel/alpha edges and check an actual small inventory slot before choosing an export resolution or making more items.
 - Watch out: Generated 1254 x 1254 concept only, not a final 64 x 64 icon or implemented inventory item. Faint alpha pixels extend into the margin. No knife stats, starting loadout or game scripts changed.
