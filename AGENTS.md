@@ -153,10 +153,12 @@ Work is tracked as GitHub Issues: https://github.com/jonathanvarro/Depths/issues
 Board (Todo / In Progress / Done): https://github.com/users/jonathanvarro/projects/2
 
 - Milestones set the order: 1 · Explorable dungeon → 2 · Party and combat →
-  3 · First playable expedition. Finish a milestone before starting the next
-  unless the owner says otherwise.
-- Labels: `exploration`, `party`, `combat`, `ui`, `platform`, and
-  `decision needed` (ask the owner; don't decide for them).
+  3 · First playable expedition → 4 · Camp and campaign loop → 5 · Depth and
+  polish → 6 · Later. Finish a milestone before starting the next unless the
+  owner says otherwise.
+- Labels: `exploration`, `party`, `combat`, `ui`, `platform`, `camp`, `art`
+  (needs art, usually ChatGPT), `audio`, and `decision needed` (ask the
+  owner; don't decide for them).
 - When working on an issue, mention it in commit messages (e.g. `Refs #3`, or
   `Closes #3` when every "Done when" box is met).
 - Move an issue to In Progress on the board when starting it and Done when
