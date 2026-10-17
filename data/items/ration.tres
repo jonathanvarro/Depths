@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SupplyItem" format=3]
+
+[ext_resource type="Script" path="res://scripts/supply_item.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+display_name = "Ration"
+description = "Feeds the whole party. Each hero regains 4 health over 20 time, or at the next rest."
+effect = 1
+amount = 4
+duration = 20
+use_time = 1
+use_message = "You eat. Strength returns slowly."

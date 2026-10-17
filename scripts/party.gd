@@ -36,6 +36,7 @@ var facing := 0
 var locked := false
 
 var _busy := false
+var _lantern: OmniLight3D
 
 
 ## Creates the camera and lantern. Call once, then place() on each floor.
@@ -48,12 +49,26 @@ func setup(size: float) -> void:
 
 	# The party's lantern: the only light in the dungeon.
 	var lantern := OmniLight3D.new()
+	_lantern = lantern
 	lantern.position = Vector3(0.3, EYE_HEIGHT - 0.2, 0.0)
 	lantern.light_color = Color("e8a84a")
 	lantern.light_energy = 1.6
 	lantern.omni_range = cell_size * 3.5
 	lantern.omni_attenuation = 1.2
 	add_child(lantern)
+
+
+## Lantern brightness and reach from its oil level, 0 (out) to 1 (full).
+## Out isn't pitch black: a faint glow keeps the way back findable.
+func set_light(fraction: float) -> void:
+	if fraction <= 0.0:
+		_lantern.light_energy = 0.35
+		_lantern.omni_range = cell_size * 1.6
+		_lantern.light_color = Color("7a5a3a")
+		return
+	_lantern.light_color = Color("e8a84a")
+	_lantern.light_energy = lerpf(0.8, 1.9, fraction)
+	_lantern.omni_range = cell_size * lerpf(2.4, 4.2, fraction)
 
 
 ## Puts the party on a floor at `at`, facing an open direction.

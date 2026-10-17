@@ -14,6 +14,11 @@ Format:
 ---
 
 ## 2026-10-17 – Claude
+- Did: #10 supplies per owner's comment, numbers from ChatGPT's economy research (tunable). Time: 1/step. Lantern: 100 oil, burn 0.5-1.5/step scaling with level, light dims with oil, faint glow when out; messages when low/out. Items as SupplyItem resources (oil flask, ration, restorative draught) with delayed healing via Companion effects; rest spots ask, take 20 time, complete effects, once each (Stay keeps it). Pack screen with Use buttons and reasons when unusable. 25 checks pass (burn ~110 steps/tank, band changes, waste-free refills, healing over time, rest, reasons, in-game pack/lantern/rest) at desktop and iPhone sizes.
+- Next: #11 injury (dressings belong there), #12 strain. Pack capacity (8 slots in research) not implemented.
+- Watch out: "Outside combat only" isn't enforced yet because there's no combat; add the check in #14.
+
+## 2026-10-17 – Claude
 - Did: #9 portrait cards, following ChatGPT's portrait plan (DESIGN.md "Portrait system"). PortraitSet resource = aligned 192px layers in the plan's order + condition overlays + blink/talk frames; PortraitView stacks and animates them by swapping drawings (auto-blink, talk, hurt flash/shake, set_condition). data/portraits/mara.tres uses the mara-layered-v1 PNGs (base as body, tunic as clothing). Party cards bottom-left in the safe area: portrait, name, health bar with numbers, icons (wounded <=50%, healing in progress, down); empty slots faint. Companion now emits `changed` on health/effect changes so cards update and flash. F3 + H/J to hurt/heal for testing. 16 checks pass at desktop and iPhone-15 sizes.
 - Next: Art: blink_frames/talk_frames and condition overlays for Mara (ChatGPT's next art pass) will animate without code changes. Then #10 supplies.
 - Watch out: Portraits display at 96px (half of 192) with linear filtering; check readability on a real phone. Icons are drawn placeholders.

@@ -1,5 +1,6 @@
 extends RefCounted
-## The party as a whole: up to three heroes and the time spent so far.
+## The party as a whole: up to three heroes, what they carry, and the time
+## spent so far.
 ##
 ## Kept by main.gd for the whole session, so it carries across floors.
 ## The game starts with a lone survivor; the other slots fill later
@@ -7,11 +8,15 @@ extends RefCounted
 
 signal changed
 
+const Supplies := preload("res://scripts/supplies.gd")
 const MAX_MEMBERS := 3
+## A rest takes this long; it also finishes every effect in progress (#10).
+const REST_TIME := 20
 
 var members: Array[Companion] = []
 ## Time units spent this expedition. Every step costs one (#10).
 var time_elapsed := 0
+var supplies = Supplies.new()
 
 
 ## Adds a copy of `definition` (so the .tres file is never modified).
@@ -37,9 +42,64 @@ func free_slots() -> int:
 
 func advance_time(units := 1) -> void:
 	time_elapsed += units
+	supplies.burn(units)
 	for member in members:
 		member.advance_time(units)
 	changed.emit()
+
+
+## Resting: time passes (the lantern keeps burning) and everything in
+## progress, like food and draughts, finishes.
+func rest() -> void:
+	advance_time(REST_TIME)
+	complete_pending_effects()
+
+
+func living_members() -> Array[Companion]:
+	return members.filter(func(m: Companion): return m.is_alive())
+
+
+## The living hero furthest below full health, or null if nobody is hurt.
+func most_hurt() -> Companion:
+	var worst: Companion = null
+	for member in living_members():
+		if member.health < member.max_health and (worst == null or member.max_health - member.health > worst.max_health - worst.health):
+			worst = member
+	return worst
+
+
+## Why `item` can't be used right now, or "" if it can.
+func cannot_use_reason(item: SupplyItem) -> String:
+	if supplies.count(item) <= 0 and not (item.effect == SupplyItem.Effect.REFILL_LANTERN and supplies.open_flask > 0.0):
+		return "None left"
+	match item.effect:
+		SupplyItem.Effect.REFILL_LANTERN:
+			if supplies.lantern_is_full():
+				return "Lantern is full"
+		SupplyItem.Effect.FEED_PARTY, SupplyItem.Effect.HEAL_ONE:
+			if most_hurt() == null:
+				return "Nobody is hurt"
+	return ""
+
+
+## Uses one `item` (outside combat). Returns a message to show, or "" if it
+## couldn't be used.
+func use_item(item: SupplyItem) -> String:
+	if cannot_use_reason(item) != "":
+		return ""
+	match item.effect:
+		SupplyItem.Effect.REFILL_LANTERN:
+			supplies.refill(item)
+		SupplyItem.Effect.FEED_PARTY:
+			supplies.take(item)
+			for member in living_members():
+				member.add_effect_over_time("health", item.amount, item.duration)
+		SupplyItem.Effect.HEAL_ONE:
+			var target := most_hurt()
+			supplies.take(item)
+			target.add_effect_over_time("health", item.amount, item.duration)
+	advance_time(item.use_time)
+	return item.use_message
 
 
 ## Moving between floors: every effect with a duration finishes now, so the

@@ -10,6 +10,8 @@ const FloorGenerator := preload("res://scripts/floor_generator.gd")
 const LevelBuilder := preload("res://scripts/level_builder.gd")
 const PartyState := preload("res://scripts/party_state.gd")
 const PartyCard := preload("res://scripts/party_card.gd")
+const PackScreen := preload("res://scripts/pack_screen.gd")
+const Supplies := preload("res://scripts/supplies.gd")
 
 const CELL_SIZE := 2.0
 const WALL_HEIGHT := 2.4
@@ -42,6 +44,7 @@ const KEY_BINDINGS := {
 	"turn_right": [KEY_D, KEY_RIGHT],
 	"toggle_debug": [KEY_F3],
 	"toggle_map": [KEY_M, KEY_TAB],
+	"toggle_pack": [KEY_I, KEY_B],
 	"debug_hurt": [KEY_H],  # only while the F3 overlay is open
 	"debug_heal": [KEY_J],
 }
@@ -66,6 +69,13 @@ const EFFECT_VOLUME_DB := -4.0
 @export var floors_in_site := 3
 ## The lone survivor the game starts with; the other two slots fill later.
 @export var starting_hero: Companion = preload("res://data/companions/mara.tres")
+## What the survivor carries at the start. Amounts follow ChatGPT's economy
+## research (docs/starter-cave-economy-research.md); tune freely.
+@export var starting_supplies: Dictionary[SupplyItem, int] = {
+	preload("res://data/items/oil_flask.tres"): 3,
+	preload("res://data/items/ration.tres"): 2,
+	preload("res://data/items/restorative_draught.tres"): 1,
+}
 ## Shown as the game opens on the deepest floor, where the companions died.
 @export_multiline var opening_message := "Your companions lie still. Find the way out."
 
@@ -97,6 +107,8 @@ var _message_tween: Tween
 var _prompt: Control
 var _prompt_label: Label
 var _prompt_action := Callable()
+var _prompt_no_action := Callable()
+var _pack: Control  # pack_screen.gd
 var _safe_area: Control  # HUD lives in here, clear of notches and home bars
 var _full_map_margin: MarginContainer
 var _ambience_player: AudioStreamPlayer
@@ -111,6 +123,8 @@ func _ready() -> void:
 	print("Floor seed: ", _site_seed)
 	_party_state = PartyState.new()
 	_party_state.add_member(starting_hero)
+	for item in starting_supplies:
+		_party_state.supplies.add(item, starting_supplies[item])
 
 	_minimap = Minimap.new()
 	_build_ui(_minimap)
@@ -127,6 +141,9 @@ func _ready() -> void:
 	_party.bumped.connect(func(_cell): _play_effect(environment_theme.bump_sound))
 	add_child(_party)
 	_party.setup(CELL_SIZE)
+	_party_state.supplies.changed.connect(_update_lantern)
+	_party_state.supplies.light_band_changed.connect(_on_light_band_changed)
+	_update_lantern()
 	# The survivor wakes on the deepest floor and climbs out (#8). The debug
 	# layout is a single hand-drawn floor, so it starts there instead.
 	_go_to_floor(1 if use_debug_layout else floors_in_site, Arrival.OPENING)
@@ -144,6 +161,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		_set_full_map(not _full_map.visible)
 	elif _full_map.visible and event.is_action_pressed("ui_cancel"):
 		_set_full_map(false)
+	elif event.is_action_pressed("toggle_pack"):
+		_set_pack(not _pack.visible)
+	elif _pack.visible and event.is_action_pressed("ui_cancel"):
+		_set_pack(false)
 	elif _prompt.visible and event.is_action_pressed("ui_accept"):
 		_answer_prompt(true)
 	elif _prompt.visible and event.is_action_pressed("ui_cancel"):
@@ -194,6 +215,10 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 			return
 		DungeonMap.Content.STAIRS_DOWN:
 			_ask(environment_theme.descent_prompt, _go_to_floor.bind(_depth + 1, Arrival.FROM_ABOVE))
+		DungeonMap.Content.REST_SPOT:
+			# Each rest spot can be used once; saying no keeps it for later.
+			_ask("A sheltered spot. Rest here? (%d time)" % PartyState.REST_TIME, _rest,
+					func(): _map.triggered.erase(cell))
 		DungeonMap.Content.STAIRS_UP:
 			if _depth == 1:
 				_show_message(environment_theme.exit_message)  # campsite comes later
@@ -204,6 +229,23 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 			var content_text := DungeonMap.content_name(content)
 			print("Entered %s at %s" % [content_text, cell])
 			_show_message(content_text)
+
+
+func _rest() -> void:
+	_party_state.rest()
+	_show_message("You rest. Food and remedies take full effect.")
+
+
+func _update_lantern() -> void:
+	_party.set_light(_party_state.supplies.light_fraction())
+
+
+func _on_light_band_changed(band: Supplies.Light) -> void:
+	match band:
+		Supplies.Light.DIM:
+			_show_message("The lantern burns low.")
+		Supplies.Light.OUT:
+			_show_message("The lantern gutters out. Only a faint glow remains.")
 
 
 func _on_party_opened_door(cell: Vector2i) -> void:
@@ -222,16 +264,18 @@ func _on_party_moved(cell: Vector2i, facing: int) -> void:
 	if content != DungeonMap.Content.NONE:
 		state = " (used)" if _map.triggered.has(cell) else ""
 	var seed_text: String = "debug layout" if use_debug_layout and _depth == 1 else str(_site_seed)
-	_debug_label.text = "Seed: %s  Depth: %d/%d\nCell: %s  Facing: %s\nHere: %s%s\nContents on floor: %d  Passages: %d\nParty: %s\nTime: %d" % [
+	_debug_label.text = "Seed: %s  Depth: %d/%d\nCell: %s  Facing: %s\nHere: %s%s\nContents on floor: %d  Passages: %d\nParty: %s\nTime: %d  Oil: %.1f (%s)" % [
 		seed_text, _depth, floors_in_site, cell, ["N", "E", "S", "W"][facing],
 		DungeonMap.content_name(content), state, _map.contents.size(), _map.doors.size(),
-		_party_state.summary(), _party_state.time_elapsed]
+		_party_state.summary(), _party_state.time_elapsed, _party_state.supplies.oil,
+		Supplies.LIGHT_NAMES[_party_state.supplies.light_band()]]
 
 
-## Shows a yes/no question; `on_yes` runs if the player agrees.
-func _ask(question: String, on_yes: Callable) -> void:
+## Shows a yes/no question; `on_yes` runs if the player agrees, `on_no` if not.
+func _ask(question: String, on_yes: Callable, on_no := Callable()) -> void:
 	_prompt_label.text = question
 	_prompt_action = on_yes
+	_prompt_no_action = on_no
 	_prompt.visible = true
 	_party.locked = true
 
@@ -239,9 +283,10 @@ func _ask(question: String, on_yes: Callable) -> void:
 func _answer_prompt(yes: bool) -> void:
 	_prompt.visible = false
 	_party.locked = false
-	var action := _prompt_action
+	var action := _prompt_action if yes else _prompt_no_action
 	_prompt_action = Callable()
-	if yes and action.is_valid():
+	_prompt_no_action = Callable()
+	if action.is_valid():
 		action.call()
 
 
@@ -251,10 +296,19 @@ func _set_debug(enabled: bool) -> void:
 	_full_map_view.reveal_all = enabled
 
 
+## Opens or closes the pack screen; like the map, the party waits meanwhile.
+func _set_pack(open: bool) -> void:
+	if open and (_prompt.visible or _full_map.visible):
+		return
+	_pack.visible = open
+	_party.locked = open
+	_pack.refresh()
+
+
 ## Opens or closes the full-screen map. The party can't move while it's open,
 ## and it can't open over a yes/no prompt.
 func _set_full_map(open: bool) -> void:
-	if open and _prompt.visible:
+	if open and (_prompt.visible or _pack.visible):
 		return
 	_full_map.visible = open
 	_party.locked = open
@@ -344,7 +398,19 @@ func _build_ui(minimap: Control) -> void:
 	map_corner.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT)
 	map_corner.grow_horizontal = Control.GROW_DIRECTION_BEGIN
 	_set_margins(map_corner, 16)
-	map_corner.add_child(minimap)
+	var map_column := VBoxContainer.new()
+	map_column.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	map_corner.add_child(map_column)
+	map_column.add_child(minimap)
+	# Supplies live in the pack, not on the HUD (#10).
+	var pack_button := Button.new()
+	pack_button.text = "Pack"
+	pack_button.custom_minimum_size = Vector2(96, 52)
+	pack_button.size_flags_horizontal = Control.SIZE_SHRINK_END
+	pack_button.focus_mode = Control.FOCUS_NONE
+	pack_button.modulate.a = 0.8
+	pack_button.pressed.connect(func(): _set_pack(true))
+	map_column.add_child(pack_button)
 	ui.add_child(map_corner)
 
 	_debug_label = Label.new()
@@ -381,6 +447,12 @@ func _build_ui(minimap: Control) -> void:
 	_build_party_cards(ui)
 	_build_prompt(ui)
 	_build_full_map(canvas)
+	_pack = PackScreen.new()
+	canvas.add_child(_pack)
+	_pack.setup(_party_state)
+	_pack.visible = false
+	_pack.closed.connect(_set_pack.bind(false))
+	_pack.used.connect(_show_message)
 	minimap.pressed.connect(_set_full_map.bind(true))
 	get_viewport().size_changed.connect(_apply_safe_area)
 	_apply_safe_area()
@@ -390,7 +462,7 @@ func _build_ui(minimap: Control) -> void:
 ## and home bar. On desktop there's nothing to avoid.
 func _apply_safe_area() -> void:
 	var insets := _safe_area_insets()
-	for control: Control in [_safe_area, _full_map_margin]:
+	for control: Control in [_safe_area, _full_map_margin, _pack.content]:
 		control.offset_left = insets.x
 		control.offset_top = insets.y
 		control.offset_right = -insets.z

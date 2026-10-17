@@ -142,6 +142,8 @@ Possible objectives include defeating an enemy, protecting a companion, recoveri
 - **Food and healing are used outside combat.** Their effects generally take time to fully apply, or apply after a camp/rest event, rather than instantly.
 - **Supplies live in a backpack/inventory screen**, not on the main HUD. Keep the HUD visually quiet.
 
+*Implemented (#10), starting values from the economy research, all tunable:* 1 time per step (turns, bumps and menus are free). Lantern holds 100 oil; burn scales from 0.5/step nearly empty to 1.5/step full (a full tank lasts ~110 steps); light brightness and reach scale with oil, and an empty lantern leaves a faint glow so the exit is never locked. Oil flasks refill without waste (a part-used flask is kept). Rations heal every hero 4 over 20 time; a restorative draught heals the most hurt hero 10 over 20 time. A rest at a rest spot (once per spot, asks first) takes 20 time and completes all pending effects. The survivor starts with 3 flasks, 2 rations, 1 draught. Supplies are shown in a Pack screen (Pack button / I), not on the HUD. Dressings wait for the injury mechanic (#11); pack capacity is not limited yet.
+
 Other candidate resources: health and carrying capacity. Treasure can compete with provisions for space. Recovery consumes resources or requires safety.
 
 Rewards include treasure, equipment, knowledge, shortcuts, and safe resting places. Discoveries should change future options, not simply add score.

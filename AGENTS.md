@@ -67,6 +67,12 @@ this via CLAUDE.md; ChatGPT Codex reads AGENTS.md directly). Keep it current.
 - `scripts/party_card.gd` – HUD card per party slot (portrait, name, health
   bar, condition icons); main.gd builds three bottom-left. With F3 open,
   H hurts and J heals the first hero, to see the cards react.
+- `scripts/supplies.gd` – lantern oil (burn scales with level, light
+  bands, waste-free refills) and supply counts; owned by PartyState.
+- `scripts/supply_item.gd` + `data/items/*.tres` – supply definitions
+  (refill lantern / feed party / heal one, amounts, durations, use time).
+- `scripts/pack_screen.gd` – the Pack screen (Pack button under the minimap,
+  or I/B). PartyState.use_item(), rest(), cannot_use_reason() do the work.
 - `audio/placeholder/` – generated placeholder sounds (see its README for
   licence); rebuilt by `tools/make_placeholder_audio.py`.
 - `scripts/dungeon_map.gd` – grid data (`is_wall`), cell contents

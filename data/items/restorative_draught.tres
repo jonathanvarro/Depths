@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SupplyItem" format=3]
+
+[ext_resource type="Script" path="res://scripts/supply_item.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+display_name = "Restorative draught"
+description = "Given to the most hurt hero: 10 health over 20 time, or at the next rest."
+effect = 2
+amount = 10
+duration = 20
+use_time = 1
+use_message = "The draught takes hold slowly."
