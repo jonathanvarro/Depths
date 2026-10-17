@@ -63,6 +63,11 @@ const EFFECT_VOLUME_DB := -4.0
 @export var floors_in_site := 3
 ## The lone survivor the game starts with; the other two slots fill later.
 @export var starting_hero: Companion = preload("res://data/companions/mara.tres")
+## Shown as the game opens on the deepest floor, where the companions died.
+@export_multiline var opening_message := "Your companions lie still. Find the way out."
+
+## Where the party appears on a floor.
+enum Arrival { OPENING, FROM_ABOVE, FROM_BELOW }
 ## Pretend to be a modern iPhone in landscape (camera cutout on both sides,
 ## home bar at the bottom) to check the HUD stays clear of them on Windows.
 @export var simulate_phone_safe_area := false
@@ -118,7 +123,9 @@ func _ready() -> void:
 	_party.bumped.connect(func(_cell): _play_effect(environment_theme.bump_sound))
 	add_child(_party)
 	_party.setup(CELL_SIZE)
-	_go_to_floor(1, true)
+	# The survivor wakes on the deepest floor and climbs out (#8). The debug
+	# layout is a single hand-drawn floor, so it starts there instead.
+	_go_to_floor(1 if use_debug_layout else floors_in_site, Arrival.OPENING)
 	_set_debug(show_debug)
 
 
@@ -136,8 +143,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 ## Builds (or returns to) a floor. Arriving from above puts the party at the
-## way up; arriving from below puts it at the way down.
-func _go_to_floor(depth: int, from_above: bool) -> void:
+## way up; arriving from below puts it at the way down; the opening uses the
+## floor's start cell.
+func _go_to_floor(depth: int, arrival: Arrival) -> void:
 	if _depth != 0:
 		_party_state.complete_pending_effects()  # owner rule (#8): durations finish between floors
 	_depth = depth
@@ -153,9 +161,16 @@ func _go_to_floor(depth: int, from_above: bool) -> void:
 
 	_minimap.setup(_map)
 	_full_map_view.setup(_map)
-	var arrival: Vector2i = _map.start_cell if from_above else _map.find_content(DungeonMap.Content.STAIRS_DOWN)
-	_party.place(_map, arrival)
-	_show_message("%s · depth %d" % [environment_theme.display_name, depth])
+	var cell: Vector2i = _map.start_cell
+	if arrival == Arrival.FROM_ABOVE:
+		cell = _map.find_content(DungeonMap.Content.STAIRS_UP)
+	elif arrival == Arrival.FROM_BELOW:
+		cell = _map.find_content(DungeonMap.Content.STAIRS_DOWN)
+	_party.place(_map, cell)
+	if arrival == Arrival.OPENING and not use_debug_layout:
+		_show_message(opening_message)
+	else:
+		_show_message("%s · depth %d" % [environment_theme.display_name, depth])
 
 
 func _make_layout(depth: int) -> PackedStringArray:
@@ -170,12 +185,12 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 		DungeonMap.Content.NONE:
 			return
 		DungeonMap.Content.STAIRS_DOWN:
-			_ask(environment_theme.descent_prompt, _go_to_floor.bind(_depth + 1, true))
+			_ask(environment_theme.descent_prompt, _go_to_floor.bind(_depth + 1, Arrival.FROM_ABOVE))
 		DungeonMap.Content.STAIRS_UP:
 			if _depth == 1:
 				_show_message(environment_theme.exit_message)  # campsite comes later
 			else:
-				_ask(environment_theme.ascent_prompt, _go_to_floor.bind(_depth - 1, false))
+				_ask(environment_theme.ascent_prompt, _go_to_floor.bind(_depth - 1, Arrival.FROM_BELOW))
 		_:
 			# Placeholder for real encounters: for now contents just announce themselves.
 			var content_text := DungeonMap.content_name(content)

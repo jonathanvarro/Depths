@@ -1,7 +1,8 @@
 extends RefCounted
 ## Builds a random floor: rectangular rooms joined by corridors, with a way
 ## up where the party arrives, a way down in the farthest room, passages at
-## some room entrances, and contents in most rooms.
+## some room entrances, and contents in most rooms. On the deepest floor the
+## farthest room instead holds 'S': where the lone survivor wakes (#8).
 ##
 ## Output uses the same text format as dungeon_map.gd, so a generated floor
 ## and a hand-drawn debug layout are interchangeable.
@@ -64,13 +65,13 @@ static func generate(seed_value: int, has_descent := true) -> PackedStringArray:
 	var start := _center(rooms[0])
 	var symbols := {start: "<"}  # Vector2i -> layout symbol
 
-	if has_descent and rooms.size() > 1:
+	if rooms.size() > 1:
 		var distance := _walking_distances(open, start, {})
 		var farthest := rooms[1]
 		for room: Rect2i in rooms.slice(1):
 			if distance.get(_center(room), 0) > distance.get(_center(farthest), 0):
 				farthest = room
-		symbols[_center(farthest)] = ">"
+		symbols[_center(farthest)] = ">" if has_descent else "S"
 
 	for room: Rect2i in rooms.slice(1):
 		if rng.randf() < ROOM_CONTENT_CHANCE:

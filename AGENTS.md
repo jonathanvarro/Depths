@@ -38,8 +38,10 @@ this via CLAUDE.md; ChatGPT Codex reads AGENTS.md directly). Keep it current.
 - `.godot/` – Godot's local cache; ignored by git, never commit it.
 - `scenes/main.tscn` – entry scene; everything else is built in code by
   `scripts/main.gd` while we're prototyping.
-- `scripts/main.gd` – runs a site: generates and caches each floor (or uses
-  `DEBUG_LAYOUT` for floor 1), moves between floors via the yes/no prompt,
+- `scripts/main.gd` – runs a site: opens on the deepest floor at the
+  survivor's start ('S'; floor 1 when `use_debug_layout`), generates and
+  caches each floor, moves between floors via the yes/no prompt
+  (`Arrival`: OPENING / FROM_ABOVE / FROM_BELOW),
   builds lighting, UI,
   touch pad, and the input actions (`move_forward`, `move_back`,
   `turn_left`, `turn_right`).

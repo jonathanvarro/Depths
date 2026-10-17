@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-17 – Claude
+- Did: Owner decided the lone survivor starts on the deepest floor where the companions died and climbs out to camp. Generator now marks 'S' on the deepest floor in the room farthest from the way up (same spot a way down would use, so walls/contents are unchanged); main.gd opens there with `opening_message` and uses an Arrival enum (OPENING/FROM_ABOVE/FROM_BELOW). Debug layout still opens on floor 1. Tested 500 seeds x 6 checks, the opening in-game, and reran door/stairs, party and map tests.
+- Next: #9 portrait cards. Owner to decide how the companions' deaths are shown and escape difficulty (open decision 4).
+- Watch out: Escaping means climbing 3 generated floors; ChatGPT's economy research suggests the escape be short and gentle, so floors_in_site or opening floor size may need tuning.
+
 ## 2026-10-17 – ChatGPT
 - Did: #27 recorded the personality/fear/recruit-variation discussion in docs/hero-personality-and-fear.md and linked it from DESIGN.md. Preserved outlooks, values/faults/boundaries, paladin/bandit cooperation, neutral-party trade-offs, pair trust, three proposed fear states and bounded recruit variation. Checked documentation links, consistency and whitespace.
 - Next: Owner refines the smallest encounter reactions, fear effects and recruit variation rules before implementation; coordinate with #12/#14 and #25's proposed Resolve attribute.

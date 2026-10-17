@@ -6,7 +6,8 @@ extends RefCounted
 ## Any letter in CONTENT_SYMBOLS is a floor cell holding that content.
 ## 'D' is a closed passage and 'B' a blocked one (see Door). How they look
 ## depends on the environment theme: a door, a web, roots...
-## Without an 'S', the party starts on the way up ('<').
+## 'S' marks where the game opens (the survivor's start on the deepest
+## floor); without one, start_cell is the way up ('<').
 ## Grid coordinates are Vector2i(x, y): x grows east, y grows south.
 
 enum Content { NONE, ENCOUNTER, CHEST, TRAP, STRANGE_OBJECT, REST_SPOT, STAIRS_DOWN, STAIRS_UP }
