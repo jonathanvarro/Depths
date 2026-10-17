@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-16 – ChatGPT
+- Did: Refined #23 after owner approval: the original merchant concept's middle figure is the starting build, with less gold/jewellery and wealth increasing location by location. Generated merchant-progression-v2.png from v1 and updated merchant/campsite/design documentation; v1 is preserved. Checked image integrity, links and documentation whitespace.
+- Next: Use v2's left figure as the current starter reference. Plan the exact site-to-appearance stages and prepare aligned production portraits; Master Tallow remains a working name.
+- Watch out: Character identity is approved, but the revised sheet is still concept art. No shop/progression code added; repeat camp visits and individual purchases are not defined as appearance triggers.
+
 ## 2026-10-16 – Claude
 - Did: #6 phone layout check. Rendered the HUD, prompt and full map at iPhone SE, 15/16 and Pro Max screen shapes. Touch buttons measure 51–58pt (above Apple's 44pt). Fixed: HUD now lives in a safe-area Control (main.gd `_safe_area`, `_apply_safe_area`) using DisplayServer.get_display_safe_area() on mobile, so the notch/Dynamic Island and home bar can't cover the map or touch pad; `simulate_phone_safe_area` on Main fakes iPhone 15 insets for testing on Windows. Default font size raised to 20 (project.godot gui/theme/default_font_size) because 16 was ~9pt on an SE. Full-map backdrop made opaque.
 - Next: #7 placeholder audio finishes Milestone 1.

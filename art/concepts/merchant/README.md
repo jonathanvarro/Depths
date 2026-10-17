@@ -1,4 +1,16 @@
-# Recurring merchant — progression concept v1
+# Recurring merchant — progression concepts
+
+## Current reference: v2
+
+`merchant-progression-v2.png` is the revised study, edited with the built-in image-generation tool on 2026-10-16 using v1 as the reference. The owner approved the character and chose v1's middle build as the starter, with less gold/jewellery and increasing wealth location by location. V2 implements that larger starter and a clear increase in jewellery/coin display across the panels; later builds also increase in size and grossness. Exact location-to-appearance stages remain to be planned. Original generated output copied unmodified; v1 retained.
+
+Visually checked identity, starting build and wealth progression. The edit retains a small number of starter rings rather than achieving the prompt's exact one-ring request. The character is still visibly much less ornamented at the start. Both sheets remain flattened concept art, not aligned production portraits or final pixel masters; phone-size readability is untested.
+
+### V2 edit prompt
+
+Edit this merchant progression concept sheet, preserving its established character design, dark pixel-art aesthetic, lantern-lit tent setting and landscape triptych format. Important owner correction: the CURRENT MIDDLE figure's obese body size and facial fullness must become the NEW LEFT starting figure. Do not use the original thin left figure as the starter. Preserve the same crooked dark-red cap with coin pin, forked moustache, gold tooth, calculating smile and facial identity throughout. New LEFT: match original middle figure's substantial belly and jowls but sharply reduce wealth: only ONE modest signet ring, NO necklaces or chains or jeweled collar clasp, humble worn brocade waistcoat, a sparse small handful of coins, modest ledger and scales. The single gold tooth and cap pin are recognizable anchors and should remain. New MIDDLE: visibly heavier than the new left, roughly the original right figure's size, more greasy and indulgent, add several rings and one restrained gold chain, better but stained clothes, noticeably larger coin piles. New RIGHT: considerably heavier still, broad massive belly and layered jowls, sumptuously refitted but filthy and food-stained finery, many rings and extravagant gold chains and jeweled clasp, much larger accumulated wealth. Clear increase in girth, grime and jewelry LEFT TO RIGHT, corresponding to successive campaign locations. Keep him alert and sly in all panels. All three heads fully visible, upper body and hands with room for silhouette growth. Same upper-left lantern light, coordinated pose/framing, dark charcoal/rust/amber palette and deliberate pixel clusters. Fully clothed, nonsexual, no gore, no extra people, no text or labels. Change only what this corrected progression requires; preserve the approved identity and atmosphere.
+
+## Original study: v1 (historical)
 
 `merchant-progression-v1.png` is a generated three-stage character study for the recurring merchant described in [the design](../../../docs/merchant-design.md). It is meant for review, not runtime use.
 

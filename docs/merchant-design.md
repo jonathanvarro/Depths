@@ -7,8 +7,9 @@ Recorded 2026-10-16 for #23, following the campsite design (#22).
 - There must be a greedy merchant who follows the party from rest location to rest location.
 - His appearance must be distinctive and memorable.
 - As the campaign progresses, he becomes increasingly obese and gross, fitting the dark environment.
+- The owner approved the character design and chose the original concept's **middle figure as the starting build**. He begins already markedly obese, with less gold and jewellery; visible wealth increases **location by location**. Body size and grossness continue to escalate from that larger starting point.
 
-This establishes a recurring character and an escalating appearance. His name, history, precise services, progression triggers and any supernatural explanation are not decided.
+This establishes a recurring character, an approved visual identity, a larger starting build and location-by-location wealth progression. His name, history, precise services, exact location-to-appearance mapping and any supernatural explanation are not decided.
 
 ## Proposed identity
 
@@ -20,19 +21,19 @@ Suggested dramatic contrast: the party returns battered while his clothes become
 
 ## Recognizable visual anchors
 
-Keep the same crooked dark-red cap with its pinned brass coin, thin forked moustache, conspicuous gold tooth, calculating smile and heavy signet rings. A ledger and tarnished coin scales establish his trade. These are proposed design anchors demonstrated in the concept, subject to owner review.
+Keep the approved character's crooked dark-red cap with its pinned brass coin, thin forked moustache, conspicuous gold tooth and calculating smile. A ledger and tarnished coin scales establish his trade. Begin with little jewellery; add rings, chains and richer ornament at successive locations. The cap pin and gold tooth can remain recognizable anchors even in the less wealthy starter.
 
 Maintain his facial identity, gaze, hand gesture, framing and upper-left lantern light across later portrait variants. Clothing can be altered to fit his increasing size while preserving the waistcoat's recognizable colour and pattern. Distinguish stages through silhouette and facial structure as well as surface grime, so the change remains readable at phone size.
 
 | Suggested visual stage | Silhouette and face | Clothes and surrounding details |
 | --- | --- | --- |
-| Early campaign | Stocky, oily, shrewd; prominent grin and recognizable cheek/nose shapes | Patched brocade waistcoat, a few rings, travel counter and modest coin piles |
-| Middle campaign | Markedly obese; fuller cheeks and jowls, larger belly | Strained or refitted waistcoat, more jewellery, sweat, food stains and crumbs |
-| Late campaign | Massively obese; layered jowls and belly dominate the composition, same alert eyes and smile | Richer but filthy clothing, greasy fingers, stained collar/bib, ostentatious wealth and remnants of indulgent meals |
+| Starting location | Already markedly obese, matching v1's middle figure; full cheeks/jowls and substantial belly | Worn brocade waistcoat, little jewellery, no lavish chains, less displayed gold |
+| Later location (illustrative) | Heavier than the revised starter; more pronounced jowls and belly | More rings and a chain, better but stained clothes, growing coin piles, sweat and food stains |
+| Much later location (illustrative) | Massively obese beyond the revised starter; layered jowls and belly dominate, same alert eyes and smile | Rich but filthy finery, extravagant jewellery, greasy fingers, stained collar/bib and ostentatious accumulated wealth |
 
 The grotesque treatment combines increasing size with neglect, stained finery, unpleasant eating habits and avaricious behaviour. He remains fully clothed and recognizably human in this concept. Body horror, demonic identity, a final transformation or a villain reveal would need a separate decision.
 
-The three stages are a concept-study proposal. They do not imply three fixed dungeon sites, a per-floor transformation, a real-time weight simulation or a required animation rig.
+The three panels illustrate a longer location-by-location progression; they do not limit the campaign to three sites. Treat advancement to a new campaign location as the proposed appearance update point, rather than changing him on every camp revisit or transaction. Exact steps and how revisiting an earlier location affects his appearance remain open. No per-floor transformation, real-time weight simulation or animation rig is implied.
 
 ## Place in the campsite
 
@@ -44,6 +45,6 @@ He follows the party between rest locations, including the initial campsite and 
 
 ## Concept asset and production limits
 
-See [merchant-progression-v1.png](../art/concepts/merchant/merchant-progression-v1.png) and its [provenance/prompt](../art/concepts/merchant/README.md). The image shows the same merchant in three side-by-side progression studies. It is generated concept art, not a layered portrait master, a sprite sheet or final game UI.
+See the revised [merchant-progression-v2.png](../art/concepts/merchant/merchant-progression-v2.png) and its [provenance/prompt](../art/concepts/merchant/README.md). V2 starts from v1's middle build with reduced jewellery and increases size and wealth across the sheet. The original [v1](../art/concepts/merchant/merchant-progression-v1.png) is preserved as concept history; its left figure is superseded as the starter. Both are generated concept art, not layered portrait masters, sprite sheets or final game UI.
 
 Before production, review the identity and tone with the owner; clean and align each chosen stage; simplify enough to read at the established 192 x 192 portrait working size; and validate expression changes and framing. The merchant may require his own wider service portrait/body template as he grows; do not force his silhouette into the six proposed companion body templates. Portrait dimensions and animation coverage remain to be tested.

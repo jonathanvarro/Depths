@@ -6,7 +6,7 @@ Design study recorded 2026-10-16 for #22. This specifies a proposed refuge scree
 
 The cave's refuge is a campsite with several little tents or activity areas. Areas can be highlighted and clicked/tapped to take the player into their respective views. Retain this spatial presentation as the camp's main navigation.
 
-The owner subsequently specified a greedy recurring merchant who follows the party between rest locations and becomes increasingly obese and gross. He occupies the existing supply awning; see [the merchant design](merchant-design.md) and [progression concept](../art/concepts/merchant/merchant-progression-v1.png). His presence and visual escalation are now established direction; his identity, trading rules and precise progression stages remain proposals.
+The owner subsequently specified a greedy recurring merchant who follows the party between rest locations and becomes increasingly obese and gross. He occupies the existing supply awning; see [the merchant design](merchant-design.md) and [revised progression concept](../art/concepts/merchant/merchant-progression-v2.png). The character design is approved, starting with the original middle figure's build, less gold/jewellery and increasing wealth location by location. Name, trading rules and precise stage mapping remain open.
 
 ## Proposed composition
 
