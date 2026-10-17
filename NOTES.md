@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-16 – Claude
+- Did: #2 room data model. dungeon_map.gd now has a `Content` enum, per-cell `contents` parsed from layout letters, and `enter(cell)` which returns content once (stairs repeat). Generator puts one random content in ~75% of non-start rooms, placed after corridors so existing seeds keep identical walls. Party emits `entered_cell` when a step finishes; main.gd shows a placeholder on-screen message and prints it. F3 toggles a debug overlay and fully revealed minimap with coloured content markers. Tested 500 seeds (connected, deterministic, walls unchanged vs before, contents never on start/walls), enter() rules, and an in-game run on the debug layout.
+- Next: #3 doors and #4 stairs (generator should place '>' in a far room). Real encounter behaviour replaces the placeholder message in later issues (#14, #16).
+- Watch out: Contents have no 3D visuals yet; they're only visible via the message and the map. Movement isn't blocked while something triggers.
+
 ## 2026-10-16 – ChatGPT
 - Did: #21 added art/textures/stone-v1: two 64 x 64 wall variants, floor, ceiling, shared nearest-filtered rough materials, source atlas, actual in-game screenshot, and README. Applied them in scripts/main.gd with deterministic wall variation; recorded the material-library direction in DESIGN.md. Included the earlier owned automatic-commit policy update after verifying its ownership.
 - Next: Owner reviews the set in F5; tune seam continuity and physical texel scale before expanding into other environment families.

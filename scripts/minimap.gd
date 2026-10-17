@@ -10,10 +10,25 @@ const COLOR_BACKGROUND := Color(0.08, 0.08, 0.08, 0.85)
 const COLOR_FLOOR := Color("8c7b5e")  # dirty parchment
 const COLOR_WALL := Color("2f4a4a")   # muted teal
 const COLOR_PARTY := Color("e8a84a")  # lantern amber
+## Marker colours for cell contents, keyed by dungeon_map.gd's Content values.
+const CONTENT_COLORS := {
+	1: Color("b03a2e"),  # ENCOUNTER
+	2: Color("d9b44a"),  # CHEST
+	3: Color("8e5ba8"),  # TRAP
+	4: Color("5fb3b3"),  # STRANGE_OBJECT
+	5: Color("6fa35a"),  # REST_SPOT
+	6: Color("e8e2d0"),  # STAIRS_DOWN
+	7: Color("e8e2d0"),  # STAIRS_UP
+}
 
 var map  # dungeon_map.gd
 var party_cell := Vector2i.ZERO
 var party_facing := 0
+## Debug: show every cell and its contents, explored or not.
+var reveal_all := false:
+	set(value):
+		reveal_all = value
+		queue_redraw()
 
 
 func setup(dungeon_map) -> void:
@@ -38,10 +53,17 @@ func _draw() -> void:
 	for y in VIEW_CELLS:
 		for x in VIEW_CELLS:
 			var c := top_left + Vector2i(x, y)
-			if not map.explored.has(c) or c.x < 0 or c.y < 0 or c.x >= map.width or c.y >= map.height:
+			if not (reveal_all or map.explored.has(c)) or c.x < 0 or c.y < 0 or c.x >= map.width or c.y >= map.height:
 				continue
 			var color: Color = COLOR_WALL if map.is_wall(c) else COLOR_FLOOR
 			draw_rect(Rect2(origin + Vector2(x, y) * TILE, Vector2(TILE, TILE) - Vector2.ONE), color)
+			# Contents appear once discovered (or always, in debug).
+			var content: int = map.content_at(c)
+			if content != 0 and (reveal_all or map.discovered.has(c)):
+				var marker: Color = CONTENT_COLORS[content]
+				if map.triggered.has(c):
+					marker = marker.darkened(0.4)
+				draw_circle(origin + (Vector2(x, y) + Vector2(0.5, 0.5)) * TILE, TILE * 0.3, marker)
 
 	# Arrow pointing the way the party faces (rotation 0 = north = up).
 	var center := origin + (Vector2(half, half) + Vector2(0.5, 0.5)) * TILE

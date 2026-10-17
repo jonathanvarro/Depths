@@ -7,6 +7,8 @@ extends Node3D
 ## Holding an action repeats it once each move finishes.
 
 signal moved(cell: Vector2i, facing: int)
+## Fires when a step into a new cell finishes (not on turns or wall bumps).
+signal entered_cell(cell: Vector2i)
 
 ## Facing index: 0 north, 1 east, 2 south, 3 west.
 const DIRECTIONS: Array[Vector2i] = [Vector2i(0, -1), Vector2i(1, 0), Vector2i(0, 1), Vector2i(-1, 0)]
@@ -80,6 +82,7 @@ func _try_step(direction: Vector2i) -> void:
 		tween.tween_property(self, "position", _cell_to_world(cell), MOVE_TIME)
 		map.reveal_around(cell)
 		moved.emit(cell, facing)
+		tween.finished.connect(func(): entered_cell.emit(cell))
 	tween.finished.connect(func(): _busy = false)
 
 

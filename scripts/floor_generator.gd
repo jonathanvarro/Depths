@@ -14,6 +14,11 @@ const ROOM_MAX := 6
 ## Chance per room of one extra corridor, so the floor has loops rather than
 ## only dead ends (gives the player alternative routes back).
 const EXTRA_CORRIDOR_CHANCE := 0.35
+## Chance that a room (other than the start room) holds something.
+const ROOM_CONTENT_CHANCE := 0.75
+## Layout symbols (see dungeon_map.gd) and how often each is picked.
+## Stairs are placed separately (issue #4).
+const ROOM_CONTENT_WEIGHTS := {"E": 3, "C": 2, "T": 2, "O": 1, "R": 1}
 
 
 static func generate(seed_value: int) -> PackedStringArray:
@@ -47,16 +52,38 @@ static func generate(seed_value: int) -> PackedStringArray:
 			_carve_corridor(open, rng, _center(rooms[i]), _center(rooms[rng.randi_range(0, i - 1)]))
 
 	var start := _center(rooms[0])
+	# Placed after all corridors so adding contents never changes a seed's walls.
+	var symbols := {}  # Vector2i -> layout symbol
+	for room: Rect2i in rooms.slice(1):
+		if rng.randf() < ROOM_CONTENT_CHANCE:
+			var cell := room.position + Vector2i(rng.randi_range(0, room.size.x - 1), rng.randi_range(0, room.size.y - 1))
+			symbols[cell] = _pick_weighted(rng, ROOM_CONTENT_WEIGHTS)
+
 	var layout := PackedStringArray()
 	for y in HEIGHT:
 		var row := ""
 		for x in WIDTH:
-			if Vector2i(x, y) == start:
+			var cell := Vector2i(x, y)
+			if cell == start:
 				row += "S"
+			elif symbols.has(cell):
+				row += symbols[cell]
 			else:
 				row += "." if open[y * WIDTH + x] else "#"
 		layout.append(row)
 	return layout
+
+
+static func _pick_weighted(rng: RandomNumberGenerator, weights: Dictionary) -> String:
+	var total := 0
+	for key in weights:
+		total += weights[key]
+	var roll := rng.randi_range(1, total)
+	for key in weights:
+		roll -= weights[key]
+		if roll <= 0:
+			return key
+	return weights.keys()[0]
 
 
 static func _center(room: Rect2i) -> Vector2i:
