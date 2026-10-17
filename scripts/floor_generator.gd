@@ -72,6 +72,7 @@ static func generate(seed_value: int, has_descent := true, depth := 1) -> Packed
 	var start := _center(rooms[0])
 	var symbols := {start: "<"}  # Vector2i -> layout symbol
 
+	var survivor_room := Rect2i()
 	if rooms.size() > 1:
 		var distance := _walking_distances(open, start, {})
 		var farthest := rooms[1]
@@ -79,12 +80,17 @@ static func generate(seed_value: int, has_descent := true, depth := 1) -> Packed
 			if distance.get(_center(room), 0) > distance.get(_center(farthest), 0):
 				farthest = room
 		symbols[_center(farthest)] = ">" if has_descent else "S"
+		if not has_descent:
+			survivor_room = farthest
 
 	for room: Rect2i in rooms.slice(1):
 		if rng.randf() < ROOM_CONTENT_CHANCE:
 			var cell := room.position + Vector2i(rng.randi_range(0, room.size.x - 1), rng.randi_range(0, room.size.y - 1))
 			var content := _pick_weighted(rng, content_weights)
-			if not symbols.has(cell):
+			# The room where the survivor wakes stays empty (#8): no ambush
+			# before the first step. The dice are still rolled so other
+			# rooms keep the same contents.
+			if not symbols.has(cell) and not survivor_room.has_point(cell):
 				symbols[cell] = content
 
 	_place_passages(open, rng, rooms, start, symbols)
@@ -96,8 +102,11 @@ static func generate(seed_value: int, has_descent := true, depth := 1) -> Packed
 			var cell := Vector2i(x, y)
 			if symbols.has(cell):
 				row += symbols[cell]
+			elif not open[y * WIDTH + x]:
+				row += "#"
 			else:
-				row += "." if open[y * WIDTH + x] else "#"
+				# ',' marks room floor so the map knows where rooms are.
+				row += "," if rooms.any(func(r: Rect2i): return r.has_point(cell)) else "."
 		layout.append(row)
 	return layout
 

@@ -2,7 +2,8 @@ extends RefCounted
 ## Grid layout of one dungeon floor: walls, what each cell contains, and
 ## which cells the party has seen.
 ##
-## Layout legend: '#' wall, '.' floor, 'S' party start (a floor cell).
+## Layout legend: '#' wall, '.' corridor floor, ',' room floor, 'S' party
+## start (a floor cell).
 ## Any letter in CONTENT_SYMBOLS is a floor cell holding that content.
 ## 'D' is a closed passage and 'B' a blocked one (see Door). How they look
 ## depends on the environment theme: a door, a web, roots...
@@ -42,6 +43,9 @@ var triggered := {}  # Vector2i -> true, for one-time contents already used
 var discovered := {}  # Vector2i -> true, for any contents the party has entered
 var doors := {}  # Vector2i -> Door
 var events := {}  # Vector2i -> RoomEvent, assigned by main.gd (#16)
+## Every cell of a room holding a fight -> that fight's cell. Entering any
+## of them starts the fight ("entering a room commits the party").
+var encounter_zones := {}
 
 var _rows: PackedStringArray
 
@@ -65,6 +69,39 @@ func _init(layout: PackedStringArray, floor_depth := 1) -> void:
 				doors[cell] = DOOR_SYMBOLS[symbol]
 	if not has_start:
 		start_cell = find_content(Content.STAIRS_UP)
+	for cell in contents:
+		if contents[cell] == Content.ENCOUNTER:
+			for zone_cell in room_around(cell):
+				if not encounter_zones.has(zone_cell):
+					encounter_zones[zone_cell] = cell
+
+
+## The room a cell belongs to: the connected room floor around it (',' in
+## the layout, plus contents placed in rooms). Passages and corridor floor
+## ('.') bound a room, and generated rooms never touch, so this is exactly
+## one room. A cell outside any room (e.g. a corridor) is its own "room".
+func room_around(cell: Vector2i) -> Array[Vector2i]:
+	var found: Array[Vector2i] = [cell]
+	if not _is_room_cell(cell):
+		return found
+	var seen := {cell: true}
+	var i := 0
+	while i < found.size():
+		var c := found[i]
+		i += 1
+		for offset in [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]:
+			var next: Vector2i = c + offset
+			if not seen.has(next) and _is_room_cell(next):
+				seen[next] = true
+				found.append(next)
+	return found
+
+
+func _is_room_cell(cell: Vector2i) -> bool:
+	if is_wall(cell):
+		return false
+	var symbol := _rows[cell.y][cell.x]
+	return symbol != "." and not DOOR_SYMBOLS.has(symbol)
 
 
 func is_wall(cell: Vector2i) -> bool:

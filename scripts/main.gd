@@ -269,14 +269,18 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 		_ask("The bottom of the cave, where the others fell. End the expedition here?",
 				_end_expedition.bind(Expedition.Ending.REACHED_BOTTOM))
 		return
+	# A fight fills its room: entering any part of it starts the fight.
+	var fight_cell: Vector2i = _map.encounter_zones.get(cell, Vector2i(-1, -1))
+	if fight_cell != Vector2i(-1, -1) and not _map.triggered.has(fight_cell):
+		_map.enter(fight_cell)
+		_start_combat(fight_cell)
+		return
 	var content: int = _map.enter(cell)
 	match content:
 		DungeonMap.Content.NONE:
 			return
 		DungeonMap.Content.STAIRS_DOWN:
 			_ask(environment_theme.descent_prompt, _go_to_floor.bind(_depth + 1, Arrival.FROM_ABOVE))
-		DungeonMap.Content.ENCOUNTER:
-			_start_combat(cell)
 		DungeonMap.Content.CHEST, DungeonMap.Content.TRAP, DungeonMap.Content.STRANGE_OBJECT, DungeonMap.Content.REST_SPOT:
 			_run_event(cell)
 		DungeonMap.Content.STAIRS_UP:
@@ -422,11 +426,13 @@ func _flee_from(cell: Vector2i) -> void:
 	var distances: Dictionary = _map.walking_distances(cell)
 	var options: Array[Vector2i] = []
 	for c in distances:
-		if distances[c] >= RETREAT_DISTANCE.x and distances[c] <= RETREAT_DISTANCE.y and _map.content_at(c) == DungeonMap.Content.NONE:
+		var in_range: bool = distances[c] >= RETREAT_DISTANCE.x and distances[c] <= RETREAT_DISTANCE.y
+		# Somewhere empty, and not back inside the fight's room.
+		if in_range and _map.content_at(c) == DungeonMap.Content.NONE and not _map.encounter_zones.has(c):
 			options.append(c)
 	if options.is_empty():
 		for c in distances:
-			if c != cell and _map.content_at(c) == DungeonMap.Content.NONE:
+			if c != cell and _map.content_at(c) == DungeonMap.Content.NONE and not _map.encounter_zones.has(c):
 				options.append(c)
 	if options.is_empty():
 		return

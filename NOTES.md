@@ -14,6 +14,11 @@ Format:
 ---
 
 ## 2026-10-17 – Claude
+- Did: Owner playtested the Windows build and met no fights: encounters were one invisible tile per room, crossed by the direct climb on ~12% of floors. Per owner, a fight now fills its room: generated layouts mark room floor with ',' (corridors stay '.'), DungeonMap.room_around()/encounter_zones map every room cell to its fight, and main.gd starts the fight on entering any of them. The survivor's waking room never gets contents; retreat lands outside the fight's room. Direct climb now meets a fight on ~33% (deepest) / ~55% (middle) floors. Zone + all suites pass; rebuilt build/windows/Depths.exe.
+- Next: #30 opening; contents still have no visuals (ask ChatGPT for chest/idol/pool/camp props and visible enemies if the owner wants them later).
+- Watch out: Hand-drawn layouts using only '.' have no rooms, so their fights stay single-cell (fine for the debug map).
+
+## 2026-10-17 – Claude
 - Did: #19 Windows build. export_presets.cfg "Windows Desktop": single embedded-pck build/windows/Depths.exe (~130 MB, ~109 MB of it the engine), excludes art/source and tools. Copied the exe to a folder with no project and ran it: title and dungeon both start on D3D12 with no errors, and room events load (RoomEvents now errors if the folder is empty). Title screen accepts `-- --begin` to skip straight in, for checking builds. Steps in AGENTS.md "Building for Windows".
 - Next: #20 iPhone export (needs a Mac), #30 opening.
 - Watch out: Unsigned exe → SmartScreen warning for players. Not yet run on a second PC; no Windows icon set (application/icon empty; needs an .ico).

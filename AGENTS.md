@@ -131,7 +131,9 @@ Templates > Download and Install; already installed on the owner's PC).
   licence); rebuilt by `tools/make_placeholder_audio.py`.
 - `scripts/dungeon_map.gd` – grid data (`is_wall`), cell contents
   (`Content` enum, `content_at`, `enter`), and explored cells. Layout text
-  uses letters for contents: E encounter, C chest, T trap, O strange object,
+  uses ',' for room floor and '.' for corridor floor (rooms are found from
+  ','; a fight fills its room via `encounter_zones`), and letters for
+  contents: E encounter, C chest, T trap, O strange object,
   R rest spot, > way down, < way up (also the start if there's no S), plus
   D closed passage and B blocked passage (`Door` enum). Contents trigger once, except
   stairs (`REPEATABLE`).
