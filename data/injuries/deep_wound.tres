@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Injury" format=3]
+
+[ext_resource type="Script" path="res://scripts/injury.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+display_name = "Deep wound"
+description = "Maximum health -5 until treated at camp. A dressing holds it closed for now."
+max_health_penalty = 5
+portrait_condition = "blood"
+icon_kind = "wound"

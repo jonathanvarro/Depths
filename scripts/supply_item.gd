@@ -11,6 +11,7 @@ enum Effect {
 	REFILL_LANTERN,  ## pours `amount` oil into the lantern
 	FEED_PARTY,  ## every living hero heals `amount` over `duration`
 	HEAL_ONE,  ## the most hurt living hero heals `amount` over `duration`
+	DRESS_INJURY,  ## binds one injury until camp (#11)
 }
 
 @export var display_name := "Supply"

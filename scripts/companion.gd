@@ -8,6 +8,9 @@ extends Resource
 ## Effects over time: something like a slow-acting remedy is added with
 ## add_effect_over_time() and applied a little each time unit (one step = one
 ## unit). Changing floors completes every effect at once.
+##
+## Injuries (#11) lower maximum health or slow each step until treated at
+## camp. A dressing suppresses an injury's effect in the meantime.
 
 @export var display_name := "Unnamed"
 @export var role := ""
@@ -22,6 +25,10 @@ extends Resource
 @export var portrait: Texture2D
 @export var max_health := 20
 @export var health := 20
+## Injuries carried (a definition can list some to start with).
+@export var injuries: Array[Injury] = []
+## Injuries currently bound by a dressing: present, but not hindering.
+var dressed: Array[Injury] = []
 
 ## Effects still playing out: [{"stat": "health", "per_unit": float,
 ## "units_left": int}]. Health is the only stat for now.
@@ -36,9 +43,56 @@ func is_alive() -> bool:
 
 func change_health(amount: int) -> void:
 	var before := health
-	health = clampi(health + amount, 0, max_health)
+	health = clampi(health + amount, 0, effective_max_health())
 	if health != before:
 		emit_changed()
+
+
+## Maximum health after untreated, undressed injuries.
+func effective_max_health() -> int:
+	var penalty := 0
+	for injury in hindering_injuries():
+		penalty += injury.max_health_penalty
+	return maxi(1, max_health - penalty)
+
+
+## Time one step costs this hero.
+func step_time() -> int:
+	var cost := 1
+	for injury in hindering_injuries():
+		cost += injury.extra_step_time
+	return cost
+
+
+func hindering_injuries() -> Array[Injury]:
+	return injuries.filter(func(i: Injury): return i not in dressed)
+
+
+## Adds an injury (once per kind). Returns false if they already have it.
+func add_injury(injury: Injury) -> bool:
+	if injury in injuries:
+		return false
+	injuries.append(injury)
+	health = mini(health, effective_max_health())
+	emit_changed()
+	return true
+
+
+## Field treatment: binds the first undressed injury until camp.
+func dress_injury() -> Injury:
+	var hindering := hindering_injuries()
+	if hindering.is_empty():
+		return null
+	dressed.append(hindering[0])
+	emit_changed()
+	return hindering[0]
+
+
+## Proper treatment at camp: every injury is gone (health isn't restored).
+func treat_injuries() -> void:
+	injuries.clear()
+	dressed.clear()
+	emit_changed()
 
 
 ## Spreads `total` evenly over `units` of time.

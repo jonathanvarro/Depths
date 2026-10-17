@@ -19,6 +19,7 @@ var _time_label: Label
 var _lantern_bar: ProgressBar
 var _lantern_label: Label
 var _list: VBoxContainer
+var _injuries: VBoxContainer
 
 
 func setup(party_state) -> void:
@@ -39,6 +40,19 @@ func refresh() -> void:
 	_lantern_label.text = "%s  ·  %d/%d oil  ·  burns %.1f per step%s" % [
 		Supplies.LIGHT_NAMES[supplies.light_band()], roundi(supplies.oil), int(Supplies.LANTERN_CAPACITY),
 		supplies.burn_rate(), flask_note]
+
+	for child in _injuries.get_children():
+		child.queue_free()
+	var any_injury := false
+	for member: Companion in _party.members:
+		for injury in member.injuries:
+			any_injury = true
+			var state := "dressed until camp" if injury in member.dressed else "untreated"
+			var line := _label("%s: %s (%s). %s" % [member.display_name, injury.display_name, state, injury.description], 17, COLOR_DIM_TEXT)
+			line.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+			_injuries.add_child(line)
+	if not any_injury:
+		_injuries.add_child(_label("No injuries.", 17, COLOR_DIM_TEXT))
 
 	for child in _list.get_children():
 		child.queue_free()
@@ -123,6 +137,10 @@ func _build() -> void:
 	_lantern_label = _label("", 17, COLOR_DIM_TEXT)
 	column.add_child(_lantern_label)
 	column.add_child(_label("A fuller lantern lights farther but burns faster.", 17, COLOR_DIM_TEXT))
+
+	column.add_child(_label("Injuries", 22, COLOR_TEXT))
+	_injuries = VBoxContainer.new()
+	column.add_child(_injuries)
 
 	var scroll := ScrollContainer.new()
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL

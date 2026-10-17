@@ -26,6 +26,8 @@ func add_member(definition: Companion) -> bool:
 		return false
 	var member: Companion = definition.duplicate()
 	member.pending_effects = []
+	member.injuries = definition.injuries.duplicate()
+	member.dressed = []
 	members.append(member)
 	changed.emit()
 	return true
@@ -48,6 +50,22 @@ func advance_time(units := 1) -> void:
 	changed.emit()
 
 
+## Time a step costs the party: they move at the pace of the slowest hero.
+func step_time() -> int:
+	var cost := 1
+	for member in living_members():
+		cost = maxi(cost, member.step_time())
+	return cost
+
+
+## The first living hero with an injury that a dressing could bind.
+func first_undressed_injured() -> Companion:
+	for member in living_members():
+		if not member.hindering_injuries().is_empty():
+			return member
+	return null
+
+
 ## Resting: time passes (the lantern keeps burning) and everything in
 ## progress, like food and draughts, finishes.
 func rest() -> void:
@@ -63,7 +81,7 @@ func living_members() -> Array[Companion]:
 func most_hurt() -> Companion:
 	var worst: Companion = null
 	for member in living_members():
-		if member.health < member.max_health and (worst == null or member.max_health - member.health > worst.max_health - worst.health):
+		if member.health < member.effective_max_health() and (worst == null or member.effective_max_health() - member.health > worst.effective_max_health() - worst.health):
 			worst = member
 	return worst
 
@@ -79,6 +97,9 @@ func cannot_use_reason(item: SupplyItem) -> String:
 		SupplyItem.Effect.FEED_PARTY, SupplyItem.Effect.HEAL_ONE:
 			if most_hurt() == null:
 				return "Nobody is hurt"
+		SupplyItem.Effect.DRESS_INJURY:
+			if first_undressed_injured() == null:
+				return "No injury to bind"
 	return ""
 
 
@@ -98,6 +119,9 @@ func use_item(item: SupplyItem) -> String:
 			var target := most_hurt()
 			supplies.take(item)
 			target.add_effect_over_time("health", item.amount, item.duration)
+		SupplyItem.Effect.DRESS_INJURY:
+			supplies.take(item)
+			first_undressed_injured().dress_injury()
 	advance_time(item.use_time)
 	return item.use_message
 
@@ -114,7 +138,9 @@ func summary() -> String:
 	var parts := PackedStringArray()
 	for member in members:
 		var pending := " (+%d effects)" % member.pending_effects.size() if member.pending_effects.size() > 0 else ""
-		parts.append("%s %d/%d%s" % [member.display_name, member.health, member.max_health, pending])
+		var hurts := PackedStringArray(member.injuries.map(func(i: Injury): return i.display_name + ("*" if i in member.dressed else "")))
+		var injured := " [%s]" % ", ".join(hurts) if not hurts.is_empty() else ""
+		parts.append("%s %d/%d%s%s" % [member.display_name, member.health, member.effective_max_health(), pending, injured])
 	for i in free_slots():
 		parts.append("[empty]")
 	return ", ".join(parts)

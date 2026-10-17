@@ -119,6 +119,8 @@ Each companion has a distinct role, personality, vulnerability, and reason to en
 
 **Decided 2026-10-17 (#11): injuries.** Two to start, both liked by the owner: a **deep wound** (lowers maximum health) and a **limp** (each step costs extra time). An injury can only be **temporarily** eased in the field (e.g. a dressing) and is **properly treated at camp**.
 
+*Implemented (#11):* `Injury` resources in `data/injuries/` — deep wound (max health −5) and limp (+1 time per step; the party moves at the slowest hero's pace). A clean dressing (3 time, survivor starts with 2) binds one injury so it stops hindering until camp; `Companion.treat_injuries()` is the camp treatment for the nurse to call later. Traps currently hurt (3) and have a 50% chance of a random injury, as a placeholder until #16. Injuries show as icons on the card (white band when dressed), in the Pack screen, and can drive portrait overlays (`blood`, `bandage`) once that art exists.
+
 **Decided 2026-10-17 (#12): strain** rises from **time, darkness, lost health, injury and hunger**, and high strain causes **panicking and lost effectiveness**.
 
 Strain should affect decisions and behaviour, rather than exist only as a number. Possible reactions include hesitation, requests to retreat, recklessness, and disagreement. Personal motives can make a particular discovery especially tempting to one person.

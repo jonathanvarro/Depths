@@ -71,6 +71,9 @@ this via CLAUDE.md; ChatGPT Codex reads AGENTS.md directly). Keep it current.
   bands, waste-free refills) and supply counts; owned by PartyState.
 - `scripts/supply_item.gd` + `data/items/*.tres` – supply definitions
   (refill lantern / feed party / heal one, amounts, durations, use time).
+- `scripts/injury.gd` + `data/injuries/*.tres` – lasting injuries (max
+  health penalty, extra step time, portrait overlay names). Companion holds
+  `injuries` and `dressed`; F3 + K injures the first hero for testing.
 - `scripts/pack_screen.gd` – the Pack screen (Pack button under the minimap,
   or I/B). PartyState.use_item(), rest(), cannot_use_reason() do the work.
 - `audio/placeholder/` – generated placeholder sounds (see its README for

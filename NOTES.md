@@ -14,6 +14,11 @@ Format:
 ---
 
 ## 2026-10-17 – Claude
+- Did: Recorded owner decisions for #11, #12, #14, #15 (issue comments + DESIGN.md) and created #30 for the opening escape (bodies in the room, panicking Mara, brief tutorial climb). Built #11: Injury resources (deep wound -5 max health, limp +1 time/step), dressing item binds one injury until camp, Companion.treat_injuries() for camp, traps hurt and may injure (placeholder for #16), card icons and Pack listing. 19 checks pass.
+- Next: #12 strain (time, darkness, lost health, injury, hunger -> panic and lost effectiveness). Hunger needs a small hunger clock that rations reset.
+- Watch out: Portrait overlays "blood"/"bandage" are wired but Mara has no such art yet.
+
+## 2026-10-17 – Claude
 - Did: #10 supplies per owner's comment, numbers from ChatGPT's economy research (tunable). Time: 1/step. Lantern: 100 oil, burn 0.5-1.5/step scaling with level, light dims with oil, faint glow when out; messages when low/out. Items as SupplyItem resources (oil flask, ration, restorative draught) with delayed healing via Companion effects; rest spots ask, take 20 time, complete effects, once each (Stay keeps it). Pack screen with Use buttons and reasons when unusable. 25 checks pass (burn ~110 steps/tank, band changes, waste-free refills, healing over time, rest, reasons, in-game pack/lantern/rest) at desktop and iPhone sizes.
 - Next: #11 injury (dressings belong there), #12 strain. Pack capacity (8 slots in research) not implemented.
 - Watch out: "Outside combat only" isn't enforced yet because there's no combat; add the check in #14.

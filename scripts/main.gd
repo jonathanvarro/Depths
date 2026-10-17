@@ -47,6 +47,7 @@ const KEY_BINDINGS := {
 	"toggle_pack": [KEY_I, KEY_B],
 	"debug_hurt": [KEY_H],  # only while the F3 overlay is open
 	"debug_heal": [KEY_J],
+	"debug_injure": [KEY_K],
 }
 
 const TOUCH_BUTTON_SIZE := Vector2(88, 88)
@@ -75,7 +76,16 @@ const EFFECT_VOLUME_DB := -4.0
 	preload("res://data/items/oil_flask.tres"): 3,
 	preload("res://data/items/ration.tres"): 2,
 	preload("res://data/items/restorative_draught.tres"): 1,
+	preload("res://data/items/dressing.tres"): 2,
 }
+## Injuries a trap can cause (#11); one is picked at random.
+@export var trap_injuries: Array[Injury] = [
+	preload("res://data/injuries/deep_wound.tres"),
+	preload("res://data/injuries/limp.tres"),
+]
+## Trap damage, and the chance it also leaves a lasting injury.
+@export var trap_damage := 3
+@export_range(0.0, 1.0) var trap_injury_chance := 0.5
 ## Shown as the game opens on the deepest floor, where the companions died.
 @export_multiline var opening_message := "Your companions lie still. Find the way out."
 
@@ -137,7 +147,7 @@ func _ready() -> void:
 	_party.blocked_by.connect(_on_party_blocked)
 	_build_audio()
 	_party.stepped.connect(func(_cell): _footstep_player.play())
-	_party.stepped.connect(func(_cell): _party_state.advance_time(1))
+	_party.stepped.connect(func(_cell): _party_state.advance_time(_party_state.step_time()))
 	_party.bumped.connect(func(_cell): _play_effect(environment_theme.bump_sound))
 	add_child(_party)
 	_party.setup(CELL_SIZE)
@@ -157,6 +167,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		_party_state.members[0].change_health(-3)
 	elif _debug_label.visible and event.is_action_pressed("debug_heal") and not _party_state.members.is_empty():
 		_party_state.members[0].add_effect_over_time("health", 6, 12)
+	elif _debug_label.visible and event.is_action_pressed("debug_injure") and not _party_state.members.is_empty():
+		_party_state.members[0].add_injury(trap_injuries.pick_random())
 	elif event.is_action_pressed("toggle_map"):
 		_set_full_map(not _full_map.visible)
 	elif _full_map.visible and event.is_action_pressed("ui_cancel"):
@@ -215,6 +227,8 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 			return
 		DungeonMap.Content.STAIRS_DOWN:
 			_ask(environment_theme.descent_prompt, _go_to_floor.bind(_depth + 1, Arrival.FROM_ABOVE))
+		DungeonMap.Content.TRAP:
+			_spring_trap()
 		DungeonMap.Content.REST_SPOT:
 			# Each rest spot can be used once; saying no keeps it for later.
 			_ask("A sheltered spot. Rest here? (%d time)" % PartyState.REST_TIME, _rest,
@@ -229,6 +243,23 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 			var content_text := DungeonMap.content_name(content)
 			print("Entered %s at %s" % [content_text, cell])
 			_show_message(content_text)
+
+
+## Placeholder trap until room encounters (#16) add clues and choices:
+## it hurts someone and may leave a lasting injury.
+func _spring_trap() -> void:
+	var victims: Array[Companion] = _party_state.living_members()
+	if victims.is_empty():
+		return
+	var victim: Companion = victims.pick_random()
+	victim.change_health(-trap_damage)
+	var text := "A trap! %s is hurt." % victim.display_name
+	if not trap_injuries.is_empty() and randf() < trap_injury_chance:
+		var injury: Injury = trap_injuries.pick_random()
+		if victim.add_injury(injury):
+			text = "A trap! %s suffers a %s." % [victim.display_name, injury.display_name.to_lower()]
+	_play_effect(environment_theme.bump_sound)
+	_show_message(text)
 
 
 func _rest() -> void:

@@ -13,12 +13,15 @@ const COLOR_HEALTH_BACK := Color(0.12, 0.08, 0.07)
 const EMPTY_ALPHA := 0.35
 
 ## Condition icons, drawn as simple shapes (placeholder art).
-enum Icon { HEALING, WOUNDED, DOWN }
+enum Icon { HEALING, WOUNDED, DOWN, INJURY_WOUND, INJURY_LIMP }
 const ICON_COLORS := {
 	Icon.HEALING: Color("6fa35a"),
 	Icon.WOUNDED: Color("c0392b"),
 	Icon.DOWN: Color("9a9a9a"),
+	Icon.INJURY_WOUND: Color("e04a3a"),
+	Icon.INJURY_LIMP: Color("e0902f"),
 }
+const COLOR_DRESSING := Color("f2efe6")
 
 var companion: Companion
 
@@ -104,11 +107,12 @@ func refresh() -> void:
 	if companion == null:
 		return
 	_name.text = companion.display_name
-	_bar.max_value = companion.max_health
+	var cap := companion.effective_max_health()  # lowered by untreated injuries
+	_bar.max_value = cap
 	_bar.value = companion.health
-	_health_text.text = "%d/%d" % [companion.health, companion.max_health]
+	_health_text.text = "%d/%d" % [companion.health, cap]
 	var fill := StyleBoxFlat.new()
-	var low := companion.health * 2 <= companion.max_health
+	var low := companion.health * 2 <= cap
 	fill.bg_color = COLOR_HEALTH_LOW if low else COLOR_HEALTH
 	_bar.add_theme_stylebox_override("fill", fill)
 	if _last_health >= 0 and companion.health < _last_health:
@@ -123,6 +127,13 @@ func refresh() -> void:
 		_add_icon(Icon.WOUNDED)
 	if companion.is_alive() and not companion.pending_effects.is_empty():
 		_add_icon(Icon.HEALING)
+	for injury in companion.injuries:
+		var is_dressed := injury in companion.dressed
+		var kind := Icon.INJURY_LIMP if injury.icon_kind == "limp" else Icon.INJURY_WOUND
+		_add_icon(kind, is_dressed, injury.display_name + (" (dressed)" if is_dressed else ""))
+		# Portrait overlays, if the art provides them.
+		_portrait.set_condition(injury.portrait_condition, not is_dressed)
+		_portrait.set_condition(injury.dressed_portrait_condition, is_dressed)
 
 
 func _clear_icons() -> void:
@@ -130,17 +141,17 @@ func _clear_icons() -> void:
 		child.queue_free()
 
 
-func _add_icon(kind: Icon) -> void:
+func _add_icon(kind: Icon, dressed := false, tooltip := "") -> void:
 	var icon := Control.new()
 	icon.custom_minimum_size = Vector2(ICON_SIZE, ICON_SIZE)
 	icon.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	icon.tooltip_text = Icon.keys()[kind].capitalize()
-	icon.draw.connect(_draw_icon.bind(icon, kind))
+	icon.tooltip_text = tooltip if tooltip != "" else Icon.keys()[kind].capitalize()
+	icon.draw.connect(_draw_icon.bind(icon, kind, dressed))
 	_icons.add_child(icon)
 
 
-func _draw_icon(icon: Control, kind: Icon) -> void:
+func _draw_icon(icon: Control, kind: Icon, dressed := false) -> void:
 	var c := icon.size / 2.0
 	var r := ICON_SIZE / 2.0
 	var color: Color = ICON_COLORS[kind]
@@ -154,3 +165,10 @@ func _draw_icon(icon: Control, kind: Icon) -> void:
 		Icon.DOWN:  # cross
 			icon.draw_line(c - Vector2(r, r) * 0.8, c + Vector2(r, r) * 0.8, color, 2.5)
 			icon.draw_line(c + Vector2(-r, r) * 0.8, c + Vector2(r, -r) * 0.8, color, 2.5)
+		Icon.INJURY_WOUND:  # gash: two slanted cuts
+			icon.draw_line(c + Vector2(-r, -r * 0.3), c + Vector2(r * 0.3, r), color, 2.5)
+			icon.draw_line(c + Vector2(-r * 0.3, -r), c + Vector2(r, r * 0.3), color, 2.5)
+		Icon.INJURY_LIMP:  # bent leg
+			icon.draw_polyline(PackedVector2Array([c + Vector2(-r * 0.2, -r), c + Vector2(r * 0.3, 0), c + Vector2(-r * 0.4, r)]), color, 2.5)
+	if dressed:  # a white band across the icon
+		icon.draw_rect(Rect2(c - Vector2(r, r * 0.22), Vector2(r * 2, r * 0.44)), COLOR_DRESSING)
