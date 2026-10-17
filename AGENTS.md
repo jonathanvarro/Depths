@@ -59,6 +59,14 @@ this via CLAUDE.md; ChatGPT Codex reads AGENTS.md directly). Keep it current.
 - `scripts/party_state.gd` – the party: up to 3 heroes, time elapsed
   (1 unit per step), completes timed effects on floor changes. Owned by
   main.gd (`_party_state`); starts with `starting_hero` (Mara).
+- `scripts/portrait_set.gd` + `data/portraits/*.tres` – a character's
+  layered portrait (aligned 192x192 layers, condition overlays, blink/talk
+  frames). Companion.portrait_set points at one.
+- `scripts/portrait_view.gd` – draws a PortraitSet; blink(), talk(), hurt(),
+  set_condition().
+- `scripts/party_card.gd` – HUD card per party slot (portrait, name, health
+  bar, condition icons); main.gd builds three bottom-left. With F3 open,
+  H hurts and J heals the first hero, to see the cards react.
 - `audio/placeholder/` – generated placeholder sounds (see its README for
   licence); rebuilt by `tools/make_placeholder_audio.py`.
 - `scripts/dungeon_map.gd` – grid data (`is_wall`), cell contents

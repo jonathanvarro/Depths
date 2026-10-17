@@ -9,6 +9,7 @@ const Minimap := preload("res://scripts/minimap.gd")
 const FloorGenerator := preload("res://scripts/floor_generator.gd")
 const LevelBuilder := preload("res://scripts/level_builder.gd")
 const PartyState := preload("res://scripts/party_state.gd")
+const PartyCard := preload("res://scripts/party_card.gd")
 
 const CELL_SIZE := 2.0
 const WALL_HEIGHT := 2.4
@@ -41,6 +42,8 @@ const KEY_BINDINGS := {
 	"turn_right": [KEY_D, KEY_RIGHT],
 	"toggle_debug": [KEY_F3],
 	"toggle_map": [KEY_M, KEY_TAB],
+	"debug_hurt": [KEY_H],  # only while the F3 overlay is open
+	"debug_heal": [KEY_J],
 }
 
 const TOUCH_BUTTON_SIZE := Vector2(88, 88)
@@ -78,6 +81,7 @@ const SIMULATED_PHONE_INSETS := Vector4(97, 0, 97, 35)
 
 var _site_seed := 0
 var _party_state  # party_state.gd: heroes and time, kept across floors
+var _cards: Array[PanelContainer] = []  # party_card.gd, one per slot
 var _depth := 0
 var _floors := {}  # depth -> dungeon_map.gd, kept so revisited floors remember their state
 var _map  # dungeon_map.gd for the current floor
@@ -132,6 +136,10 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_debug"):
 		_set_debug(not _debug_label.visible)
+	elif _debug_label.visible and event.is_action_pressed("debug_hurt") and not _party_state.members.is_empty():
+		_party_state.members[0].change_health(-3)
+	elif _debug_label.visible and event.is_action_pressed("debug_heal") and not _party_state.members.is_empty():
+		_party_state.members[0].add_effect_over_time("health", 6, 12)
 	elif event.is_action_pressed("toggle_map"):
 		_set_full_map(not _full_map.visible)
 	elif _full_map.visible and event.is_action_pressed("ui_cancel"):
@@ -370,6 +378,7 @@ func _build_ui(minimap: Control) -> void:
 	pad_corner.add_child(pad)
 	ui.add_child(pad_corner)
 
+	_build_party_cards(ui)
 	_build_prompt(ui)
 	_build_full_map(canvas)
 	minimap.pressed.connect(_set_full_map.bind(true))
@@ -475,6 +484,38 @@ func _legend_item(text: String, color: Color) -> Control:
 	label.text = text
 	row.add_child(label)
 	return row
+
+
+## Portrait cards along the bottom-left, one per party slot.
+func _build_party_cards(ui: Control) -> void:
+	var corner := MarginContainer.new()
+	corner.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_LEFT)
+	corner.grow_vertical = Control.GROW_DIRECTION_BEGIN
+	corner.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_set_margins(corner, 16)
+	ui.add_child(corner)
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 8)
+	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	corner.add_child(row)
+	for i in PartyState.MAX_MEMBERS:
+		var card := PartyCard.new()
+		row.add_child(card)
+		_cards.append(card)
+	_party_state.changed.connect(_refresh_cards)
+	_refresh_cards()
+
+
+func _refresh_cards() -> void:
+	for i in _cards.size():
+		var card = _cards[i]
+		if i < _party_state.members.size():
+			var hero: Companion = _party_state.members[i]
+			if not hero.changed.is_connected(card.refresh):
+				hero.changed.connect(card.refresh)
+			card.show_companion(hero)
+		else:
+			card.show_empty()
 
 
 ## Centred yes/no box for deliberate choices like descending. Big buttons

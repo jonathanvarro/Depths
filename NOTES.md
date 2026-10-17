@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-17 – Claude
+- Did: #9 portrait cards, following ChatGPT's portrait plan (DESIGN.md "Portrait system"). PortraitSet resource = aligned 192px layers in the plan's order + condition overlays + blink/talk frames; PortraitView stacks and animates them by swapping drawings (auto-blink, talk, hurt flash/shake, set_condition). data/portraits/mara.tres uses the mara-layered-v1 PNGs (base as body, tunic as clothing). Party cards bottom-left in the safe area: portrait, name, health bar with numbers, icons (wounded <=50%, healing in progress, down); empty slots faint. Companion now emits `changed` on health/effect changes so cards update and flash. F3 + H/J to hurt/heal for testing. 16 checks pass at desktop and iPhone-15 sizes.
+- Next: Art: blink_frames/talk_frames and condition overlays for Mara (ChatGPT's next art pass) will animate without code changes. Then #10 supplies.
+- Watch out: Portraits display at 96px (half of 192) with linear filtering; check readability on a real phone. Icons are drawn placeholders.
+
 ## 2026-10-17 – ChatGPT
 - Did: Refined #28's knife into art/concepts/items/plain-knife-v2.png using the built-in image editor: slightly rougher steel, sparse rust freckles and shallow pitting, retaining a usable edge and the original design. Preserved v1 and recorded the full edit prompt/provenance. Visually checked wear and identity; verified PNG integrity and alpha transparency.
 - Next: Owner reviews the rougher finish; use the preferred version for a native-size cleanup and actual inventory-slot check.

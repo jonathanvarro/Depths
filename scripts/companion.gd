@@ -16,6 +16,9 @@ extends Resource
 @export_multiline var personality := ""
 ## What pressure gets to them first.
 @export_multiline var vulnerability := ""
+## Layered, animated portrait (preferred). See PortraitSet.
+@export var portrait_set: PortraitSet
+## Single flat image, used if there's no portrait_set.
 @export var portrait: Texture2D
 @export var max_health := 20
 @export var health := 20
@@ -32,12 +35,16 @@ func is_alive() -> bool:
 
 
 func change_health(amount: int) -> void:
+	var before := health
 	health = clampi(health + amount, 0, max_health)
+	if health != before:
+		emit_changed()
 
 
 ## Spreads `total` evenly over `units` of time.
 func add_effect_over_time(stat: String, total: int, units: int) -> void:
 	pending_effects.append({"stat": stat, "per_unit": float(total) / maxi(units, 1), "units_left": maxi(units, 1)})
+	emit_changed()
 
 
 func advance_time(units: int) -> void:

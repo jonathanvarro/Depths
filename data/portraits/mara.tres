@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="PortraitSet" format=3]
+
+[ext_resource type="Script" path="res://scripts/portrait_set.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/concepts/portraits/mara-layered-v1/background.png" id="2"]
+[ext_resource type="Texture2D" path="res://art/concepts/portraits/mara-layered-v1/base.png" id="3"]
+[ext_resource type="Texture2D" path="res://art/concepts/portraits/mara-layered-v1/eyes-neutral.png" id="4"]
+[ext_resource type="Texture2D" path="res://art/concepts/portraits/mara-layered-v1/mouth-neutral.png" id="5"]
+[ext_resource type="Texture2D" path="res://art/concepts/portraits/mara-layered-v1/tunic.png" id="6"]
+
+[resource]
+script = ExtResource("1")
+background = ExtResource("2")
+body = ExtResource("3")
+eyes = ExtResource("4")
+mouth = ExtResource("5")
+clothing = Array[Texture2D]([ExtResource("6")])

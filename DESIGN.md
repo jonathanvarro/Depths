@@ -239,6 +239,8 @@ Frame counts and expression coverage are proposals, not completed assets. Build 
 
 `art/concepts/portraits/mara-base-192-v2.png` is the unhooded pose reference. `art/concepts/portraits/mara-layered-v1/` contains a 192 × 192 OpenRaster wardrobe test, separate transparent PNGs, a combined preview, and a README.
 
+**In game (#9):** a `PortraitSet` resource (`scripts/portrait_set.gd`, e.g. `data/portraits/mara.tres`) lists a character's aligned 192 × 192 layers in the order above — background, back pieces, body template, head, eyes, mouth, clothing, front pieces — plus named condition overlays (e.g. "blood", "bandage") and optional `blink_frames` / `talk_frames`. `scripts/portrait_view.gd` stacks the layers and animates by swapping drawings: automatic blinks every few seconds, `talk(seconds)`, and `hurt()` (red flash and small shake, no art needed). Reusing a body or outfit means pointing several sets at the same image. Blinking and talking stay inactive until frames are drawn. Portrait cards (name, health bar, condition icons) sit bottom-left, one per party slot, with empty slots faint.
+
 The wardrobe test demonstrates a tunic toggle and provides neutral eye/mouth replacement patches. It is **not a finished layered animation master**: hair, body, face, and original underlayer remain combined in its base image; blink, speech, scar, dirt, and fatigue variants are not implemented. The next production step is proper separation and hidden-area reconstruction.
 
 ## Proposed first playable
