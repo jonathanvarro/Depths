@@ -6,7 +6,7 @@ Research and proposal, 2026-10-17, [issue #25](https://github.com/jonathanvarro/
 
 Build the cave economy around **bringing the same people home with enough gains to try something more ambitious next time**. Gold, XP, equipment, health, strain, provisions and knowledge should all contribute to that decision. A financially successful expedition can still leave someone hurt; an early retreat can still bring a level, a useful item and a safer route.
 
-Use a small, legible first version: five attributes, three starting companions, levels 1–3 during the cave, rats/spiders/goblins, a handful of plain equipment, one gold currency, five supply types, one persistent injury and the existing strain work. Treat the cave as a finite place whose cleared encounters stay cleared. Provide a recovery safeguard so scarce supplies cannot make the campaign unwinnable.
+Use a small, legible first version: five attributes, the decided lone survivor opening followed by recruitment into three party slots, levels 1–3 during the cave, rats/spiders/goblins, a handful of plain equipment, one gold currency, five supply types, one persistent injury and the existing strain work. Treat the cave as a finite place whose cleared encounters stay cleared. Provide a recovery safeguard so scarce supplies cannot make the campaign unwinnable.
 
 The numerical examples form one connected **paper prototype**, rather than independent price suggestions. Their arithmetic has been checked; combat, route length, player behaviour and enjoyment have not been playtested. Final combat rules will change these values.
 
@@ -22,8 +22,9 @@ The current [design](../DESIGN.md), [campsite concept](campsite-design.md) and [
 - Inventory supplies belong in the backpack screen, with a quiet HUD and readable landscape phone controls.
 - A recurring greedy provision merchant, an apprentice smith with very basic equipment and little quality stock, and a nurse.
 - The newly recorded #26 decision: campfire recruitment, a tent stash whose stored items survive a full party wipe, and continuation of the same campaign with replacement recruits.
+- The newly completed #8 direction: start with one survivor whose companions died in the dungeon, with three total party slots. One step advances time by one unit; pending timed effects finish in full on a floor change. The current placeholder is Mara, wounded at 14/20 HP, with health as the only implemented stat. The opening location remains undecided.
 
-Party size, exact attributes, XP, prices, recovery, individual death rules, carried-item/currency losses, other persistence and re-entry rules are still proposals. This report develops the requested possibilities without turning them into owner decisions or starting implementation ahead of the milestone plan. The #26 documentation arrived during this research and is incorporated here; its confirmed stash and recruitment rules take precedence over any exploratory alternatives.
+Exact attributes, XP, prices, recovery items, individual death rules, carried-item/currency losses, other persistence and re-entry rules are still proposals. This report develops the requested possibilities without turning them into owner decisions or starting implementation ahead of the milestone plan. The #26 and #8 updates arrived during this research and are incorporated here; their confirmed decisions take precedence over any exploratory alternatives. The numerical trio below describes a recruited party, not three heroes at new-game start, and does not change Mara's implemented 14/20 HP.
 
 ## What the research contributes
 
@@ -66,6 +67,14 @@ Use three distinct kinds of progress:
 
 Time has no gold price tag in the cave, but it spends oil and exposes the party to pressure. Gold cannot instantly restore someone while they are in danger. Ordinary exploration does not produce XP repeatedly. These limits keep the resources connected without making them interchangeable.
 
+### The lone survivor opening is a separate balance case
+
+The decided opening has one wounded hero trying to escape after their companions died. **Do not use a three-person encounter budget for that escape.** Its starting location and presentation remain owner decisions. Recommend a short, deliberately placed route to safety, enough supplied light for that route, clear clues and at most a single ordinary rat on a compulsory path. Do not make the survivor buy equipment, recruit companions or defeat a goblin pack before first reaching camp. Optional dangers can be avoided.
+
+Use the current 14/20 HP survivor as the opening test case. The later 22–30 HP role examples are a proposed stat-system trial, not an automatic increase to her current health. Full cave budgets below assume an opportunity to recruit a viable party after that escape. If the opening uses the same persistent cave, any collected cache or resolved threat must be deducted from the later floor budget rather than awarding it twice.
+
+To make the cash example coherent with recruitment, a possible first-camp package is a **48g one-time grant: 24g to afford two 12g novices and 24g left for discretionary preparation**, plus the one-time shared supply kit. The narrative source of that grant is undecided. If the owner prefers finding recruits through encounters or a slower hiring pace, redesign the early threat budget and funding together. The existing numerical ledger begins after the two initial hires; it does not fund those hires from the same 24g twice.
+
 ## Character attributes and attachment
 
 ### Five attributes to begin with
@@ -84,11 +93,11 @@ These are roles for the stats, not a complete skill-check specification. Prefer 
 
 Do not add a charisma tax just to access fair shop prices. Dialogue can depend on knowledge, choices and personality. A magic attribute/resource should be added only after a playable magic role exists; Resolve is not silently a mana stat.
 
-### Example starting companions
+### Example recruited party
 
-These are mechanical role examples, not approved characters, genders or names. Each has ten attribute points.
+These are mechanical role examples after recruitment, not approved characters, genders or names. Each has ten attribute points. They are not a replacement specification for the lone opening survivor.
 
-| Role | STR | DEX | VIT | WIT | RES | Starting HP | Illustrative job |
+| Role | STR | DEX | VIT | WIT | RES | Proposed level-1 HP | Illustrative job |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
 | Protector | 3 | 1 | 3 | 1 | 2 | 30 | Draw danger, guard someone, strike with a club |
 | Scout | 2 | 3 | 2 | 2 | 1 | 26 | Act early, use a knife, inspect delicate hazards |
@@ -108,7 +117,7 @@ Attachment should also come from each person's motive, reactions, chosen talent,
 
 ## XP and levels
 
-**Recommendation: shared XP awards for the active expedition party, with individual totals and talent choices.** Everyone earns the full listed award; it is not divided by three. The original three advance together if they start together; later recruits can have lower totals. Include living companions who were downed or used support actions. Avoid last-hit bonuses and separate weapon-use grinding.
+**Recommendation: shared XP awards for the active expedition party, with individual totals and talent choices.** Everyone earns the full listed award; it is not divided by three. Companions with the same starting XP advance together; later recruits can have lower totals. Include living companions who were downed or used support actions. Avoid last-hit bonuses and separate weapon-use grinding.
 
 | Level | Cumulative XP | Proposed gain |
 | --- | ---: | --- |
@@ -184,16 +193,18 @@ Most drops should be supplies or valuables. Guarantee one useful equipment oppor
 | Supply | Price | Proposed use and timing | Initial pack |
 | --- | ---: | --- | ---: |
 | Oil flask | 6g | Adds 100 oil units; refilling is outside combat and costs time | 3 |
-| Party ration | 4g | Feeds all three at one designated rest; restores 4 HP each on completion | 2 |
+| Party ration | 4g | Feeds the active party, up to three, at one designated rest; restores 4 HP each on completion | 2 |
 | Clean dressing | 4g | Suppresses the one persistent injury's penalty until camp, after a 20-tick rest; does not restore HP | 2 |
 | Restorative draught | 12g | Restores 10 HP to one companion after a 20-tick rest; outside combat | 1 |
 | Antivenom | 8g | Clears venom after a short outside-combat application; optional for bounded combat venom | 0 |
 
-The initial four stocked types have a replacement value of **46g**. Give them with starting equipment, then provide **24g of discretionary starting money**. This makes the first trip a preparation choice without requiring the player to purchase permission to begin.
+The initial four stocked types have a replacement value of **46g**. Grant this shared kit once at the first camp, after the separately supplied opening escape, and leave **24g of discretionary money after initial recruitment** under the suggested 48g funding package. This makes the first prepared expedition a choice without charging the wounded opening survivor to reach safety.
 
-Food, a dressing and a draught may be prepared during the same rest; their duration is shared, not added. The draught's extra healing is additive to food, capped at maximum HP. One draught per companion and one ration per rest; unused healing does not become a stored future bonus. No healing while browsing inventory or walking in circles.
+Food, a dressing and a draught may be prepared during the same rest; their duration is shared, not added. The draught's extra healing is additive to food, capped at maximum HP. One draught per companion and one ration per rest; unused healing does not become a stored future bonus. Browsing inventory and walking in circles cannot create a new recovery benefit. Already active timed effects do progress with steps and finish on floor changes, as decided in #8.
 
 For an initial trial, each designated dungeon rest spot is usable once for a 20-tick rest. Rests consume oil and cannot be started during combat. Subsequent rests require another spot or camp; this prevents infinite healing from a single safe tile. Recovery completes only when the rest completes. Prevent interruption in the first version rather than inventing an untested ambush/refund rule.
+
+The sample items use a committed rest action, so the party cannot start that rest and walk to nearby stairs before it finishes. If a separate walking remedy uses the implemented timed-effect system, preserve the owner's floor-change completion rule: one application provides only its remaining effect once. Budget for quick completion near stairs and test stair backtracking; do not silently disable that rule or treat each floor crossing as a fresh dose.
 
 ### HP and injuries are different
 
@@ -217,14 +228,14 @@ The owner has decided that a full wipe ends the expedition and the campaign cont
 
 Recruitment should preserve a reason to care for experienced companions while allowing the campaign to continue. Test these **additional proposals**, not assumptions about what #26 already approved:
 
-- Include the initial three companions in new-game setup. A later basic novice could cost **12g**, with no recurring wages in the starter cave. A complete replacement trio would then cost 36g before supplies and treatment.
+- Preserve the one-survivor start. A basic novice could cost **12g**, with no recurring wages in the starter cave. Two first-camp hires cost 24g; a complete post-wipe replacement trio costs 36g before supplies and treatment. The proposed 48g first-camp grant covers those initial two hires plus the separate 24g expedition reserve.
 - Make basic roles reliably recruitable at the campfire; no rare roster roll should prevent fielding a viable party. Extra heroes can wait at camp. XP awards go to the active expedition party; avoid a resting roster becoming an unlimited free training engine.
 - Give a novice one usable basic weapon and plain clothes, with total ordinary resale value below the hire price. Do not grant the original 46g supply kit with every recruit. Protected emergency equipment/supplies have no sale value, so recruiting, dismissing and selling cannot print money.
 - Test a replacement starting at level 1 when the highest level achieved is 2, and level 2 when it is 3: `max(1, highest achieved level − 1)`, at that level's minimum XP. Future awards still go to everyone in full. This limits a death spiral without granting the dead companion's personal identity, talents or equipment to the replacement. Apply no catch-up above a level actually earned by the campaign.
 - Keep tent deposits outside the carried pack limit. Stored items are protected on a wipe as decided; show this distinction clearly before departure. Currency protection and stash access at later sites still need decisions.
 - Check emergency eligibility against both party inventory and accessible stash. Aid must still be available when those resources cannot form and equip a viable party. A finite cave with paid recruits, no survivors and an empty stash otherwise contradicts the intended continuing campaign.
 
-The worked three-return cash budget below assumes no deaths or hires. One 12g recruit reduces its 51g ending balance to 39g, before any additional loss/replacement equipment. A wipe is not adequately priced by multiplying that fee by three: lost carried goods, replacement levels, remaining rewards and access to the objective all matter. Test both a first-floor wipe with a stocked stash and a late wipe after most treasure has already been claimed.
+The worked three-return cash budget below begins after the two initial hires and assumes no subsequent deaths or hires. One further 12g recruit reduces its 51g ending balance to 39g, before any additional loss/replacement equipment. A wipe is not adequately priced by multiplying that fee by three: lost carried goods, replacement levels, remaining rewards and access to the objective all matter. Test both a first-floor wipe with a stocked stash and a late wipe after most treasure has already been claimed.
 
 ## Time, lantern oil and carrying space
 
@@ -287,7 +298,7 @@ A normal return might replenish **two oil flasks, one ration, one dressing and o
 
 After the mean first-floor haul:
 
-`24g starting money + 42g treasure − 32g replenishment − 6g rest = 28g`.
+`24g available after initial recruitment + 42g treasure − 32g replenishment − 6g rest = 28g`.
 
 The party can buy an 18g spear and retain 10g, or save toward armour/the sword. With one injury treatment, the same return leaves 16g, making the spear a choice to delay. The injury changes the next plan without erasing the entire expedition.
 
@@ -295,7 +306,7 @@ Across three illustrative returns, with all mean cave rewards, three 38g refresh
 
 `24 + 42 + 59 + 98 + 24 − 3 × 38 − 2 × 12 − 18 − 40 = 51g`.
 
-That final balance includes buying the third replacement supply set for subsequent use. The initial free 46g supply kit was granted before this cash ledger, not charged again. Keeping found supplies reduces purchases but also reduces treasure converted to cash; record both sides.
+That final balance includes buying the third replacement supply set for subsequent use. The initial free 46g supply kit was granted before this cash ledger, not charged again. The suggested starting finance is `48g − 2 × 12g initial hires = 24g` before the ledger begins. Any opening-escape loot drawn from the same cave budget is counted once, not extra. Keeping found supplies reduces purchases but also reduces treasure converted to cash; record both sides.
 
 Sensitivity matters more than this attractive middle case:
 
@@ -330,7 +341,7 @@ Propose that voluntary retreat preserves carried loot and earned XP. The campaig
 
 This supports the existing milestone order; it does not complete the open gameplay issues.
 
-1. **Party data/portraits (#8/#9):** stable character identity, proposed attribute fields, HP/condition display and a place for XP. Verify values survive floor transitions.
+1. **Extend completed party data into portraits (#8/#9):** #8 now provides one survivor, three slots, health and timed effects. Add proposed attributes/XP only when adopted; display condition and verify floor-transition behaviour, including completion of pending effects.
 2. **Supplies, injury and strain (#10–#12):** one time ledger, oil, delayed recovery, one injury and clear condition warnings. Test no free recovery from menu use.
 3. **Combat/enemies (#13–#15):** tiny action set, targeting/protection, retreat, and rats/spiders/goblins. Measure attrition before adding weapon variants.
 4. **Encounters and expedition loop (#16–#18):** required content budgets, actual inventory/trade, camp treatment, results and persistent cave returns. Add the minimum services needed for the loop.
@@ -349,7 +360,7 @@ Initial playtest questions:
 - Can the minimal supplied party reach the unresolved objective after earlier rewards are exhausted?
 - Is the low-light strategy useful without becoming the obvious permanent setting?
 
-For the generator, later validate at least 500 seeds for required content, reachability, introduction order, route cost and reward floors. For combat, test fresh and injured parties, a downed companion, minimum/default equipment, both talent branches, and the boss before and after camp-applied progression. Then observe players on Windows and a landscape phone-sized view. Paper calculations do not substitute for those checks.
+For the generator, later validate at least 500 seeds for required content, reachability, introduction order, route cost and reward floors. For combat, test the wounded lone opening survivor separately, then fresh and injured recruited parties, a downed companion, minimum/default equipment, both talent branches, and the boss before and after camp-applied progression. Test timed remedies near stairs under the confirmed completion rule. Then observe players on Windows and a landscape phone-sized view. Paper calculations do not substitute for those checks.
 
 ## Decisions for the owner
 

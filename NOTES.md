@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-17 – ChatGPT
+- Did: Reconciled #25 research with the just-completed #8 lone-survivor/timed-effect decisions. Separated Mara's wounded opening escape from the later recruited trio, added a proposed first-camp recruitment allowance without double-spending the expedition reserve, and accounted for floor-change completion of timed remedies. Rechecked documentation and budget arithmetic.
+- Next: Continue #9. Owner reviews opening placement, initial hiring/funding, loss rules and recovery safeguards before adopting economy values.
+- Watch out: All new numbers remain proposals; Mara's implemented 14/20 HP and the confirmed timed-effect rules are unchanged. The 24g worked budget begins after initial hires, with a proposed 48g first-camp grant funding both hires and that reserve. No game scripts changed in this research follow-up.
+
 ## 2026-10-17 – Claude
 - Did: #8 party data, per the owner's comment: one starting hero (companions died in the dungeon), three slots, state survives floors, timed effects complete on floor change. Added Companion resource (scripts/companion.gd), party_state.gd (3 slots, time per step, effects over time), and data/companions/mara.tres as the placeholder survivor (guide, 14/20 HP, uses ChatGPT's Mara portrait). main.gd owns the party; F3 debug shows party and time. 20 tests pass (effect maths incl. fractions and caps, slot limit, definition files never modified, step = 1 time unit, floor change completes healing).
 - Next: #9 portrait cards HUD (portrait field already points at mara-base-192-v2.png). Ask owner where the lone survivor starts (recorded as open decision 4).
