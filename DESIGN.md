@@ -107,7 +107,11 @@ Open campaign questions: what counts as completing a site, whether old sites rem
 
 ## Companions and strain
 
-Start by exploring a three-person party. Each companion has a distinct role, personality, vulnerability, and reason to enter the dungeon. Portrait cards communicate physical and emotional condition.
+**Decided 2026-10-17 (#8):** the game starts with **one hero**. Their companions were killed in the dungeon and they need to make it out. The party has **three hero slots**; the others fill later (e.g. campfire recruitment, #26). Party state carries between floors, and any effect with a duration (such as healing over time) is completed in full when the party changes floor.
+
+Each companion has a distinct role, personality, vulnerability, and reason to enter the dungeon. Portrait cards communicate physical and emotional condition.
+
+*Implementation:* heroes are `Companion` resources in `data/companions/` (name, role, motive, personality, vulnerability, portrait, health, effects over time). The placeholder starting survivor is **Mara**, the guide from the portrait concepts, starting wounded (14/20). One step = one unit of time. Open: where the lone survivor starts (e.g. deep in the cave, climbing out) and how the opening is presented.
 
 Strain should affect decisions and behaviour, rather than exist only as a number. Possible reactions include hesitation, requests to retreat, recklessness, and disagreement. Personal motives can make a particular discovery especially tempting to one person.
 
@@ -261,7 +265,7 @@ Success criteria:
    **Phone layout check (#6, 2026-10-16):** the UI is laid out at 648px tall and stretched to the screen, widening on longer phones. Measured at iPhone SE (16:9), iPhone 15/16 and Pro Max (~2.17:1) shapes in the editor: touch-pad buttons come out at 51–58pt (Apple's minimum is 44pt); default text is 20px (≈12pt on SE) so legends stay legible; the HUD sits inside iOS's safe area so the camera cutout, rounded corners and home bar don't cover the map or controls. Not yet tried on a real iPhone (#20).
 2. ~~Movement scheme~~ — decided: forward/back/turn. Each step costs time (#10). Still open: strafing and room-transition presentation.
 3. Combat: enemies in first-person view (#13). Still open: targeting, positions, action economy, and retreat rules.
-4. Strain states, player agency, and the role of trust or relationships.
+4. Opening: where the lone survivor starts and how the companions' deaths are shown (#8). Strain states, player agency, and the role of trust or relationships.
 5. Partly decided (#26): stored items survive a party wipe and the campaign continues with new recruits from the campfire. Still open: carried/equipped item losses or recovery, currency, recruitment costs/availability, cross-site stash access, and persistence of injuries, knowledge, relationships, shortcuts and dungeon state. Carrying surviving companions' history between sites remains a proposal.
 6. Per-site floor count, expedition duration, difficulty curve, completion objectives, refuge recovery/services, and transitions/revisits between sites. First site: cave + campsite; later castle/portal escalation is campaign direction rather than a finalized destination list.
 7. Coherent clue placement in procedural floors. (Navigability is guaranteed by the generator: rooms are joined incrementally, so every floor cell is reachable — #1.)

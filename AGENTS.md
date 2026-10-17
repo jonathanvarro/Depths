@@ -51,6 +51,12 @@ this via CLAUDE.md; ChatGPT Codex reads AGENTS.md directly). Keep it current.
   wording and sound for passages and ways up/down (cave: webs, roots, pit,
   hanging roots; stone: doors, stairs), plus ambience, footsteps, bump and
   open sounds. Picked via `environment_theme` on Main.
+- `scripts/companion.gd` + `data/companions/*.tres` – hero definitions
+  (Companion resource: identity, health, effects over time). The game
+  plays with copies, never the .tres itself.
+- `scripts/party_state.gd` – the party: up to 3 heroes, time elapsed
+  (1 unit per step), completes timed effects on floor changes. Owned by
+  main.gd (`_party_state`); starts with `starting_hero` (Mara).
 - `audio/placeholder/` – generated placeholder sounds (see its README for
   licence); rebuilt by `tools/make_placeholder_audio.py`.
 - `scripts/dungeon_map.gd` – grid data (`is_wall`), cell contents

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Companion" format=3]
+
+[ext_resource type="Script" path="res://scripts/companion.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/concepts/portraits/mara-base-192-v2.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+display_name = "Mara"
+role = "Guide"
+motive = "Led her companions into the cave. They died there; she has to get out and live with it."
+personality = "Weathered, practical, quiet under pressure."
+vulnerability = "Guilt over the companions she lost."
+portrait = ExtResource("2")
+max_health = 20
+health = 14

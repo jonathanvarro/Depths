@@ -8,6 +8,7 @@ const Party := preload("res://scripts/party.gd")
 const Minimap := preload("res://scripts/minimap.gd")
 const FloorGenerator := preload("res://scripts/floor_generator.gd")
 const LevelBuilder := preload("res://scripts/level_builder.gd")
+const PartyState := preload("res://scripts/party_state.gd")
 
 const CELL_SIZE := 2.0
 const WALL_HEIGHT := 2.4
@@ -60,6 +61,8 @@ const EFFECT_VOLUME_DB := -4.0
 @export var environment_theme: EnvironmentTheme = preload("res://themes/cave.tres")
 ## Floors in this site; the deepest has no way further down.
 @export var floors_in_site := 3
+## The lone survivor the game starts with; the other two slots fill later.
+@export var starting_hero: Companion = preload("res://data/companions/mara.tres")
 ## Pretend to be a modern iPhone in landscape (camera cutout on both sides,
 ## home bar at the bottom) to check the HUD stays clear of them on Windows.
 @export var simulate_phone_safe_area := false
@@ -69,6 +72,7 @@ const EFFECT_VOLUME_DB := -4.0
 const SIMULATED_PHONE_INSETS := Vector4(97, 0, 97, 35)
 
 var _site_seed := 0
+var _party_state  # party_state.gd: heroes and time, kept across floors
 var _depth := 0
 var _floors := {}  # depth -> dungeon_map.gd, kept so revisited floors remember their state
 var _map  # dungeon_map.gd for the current floor
@@ -96,6 +100,8 @@ func _ready() -> void:
 	_build_environment()
 	_site_seed = floor_seed if floor_seed != 0 else randi()
 	print("Floor seed: ", _site_seed)
+	_party_state = PartyState.new()
+	_party_state.add_member(starting_hero)
 
 	_minimap = Minimap.new()
 	_build_ui(_minimap)
@@ -108,6 +114,7 @@ func _ready() -> void:
 	_party.blocked_by.connect(_on_party_blocked)
 	_build_audio()
 	_party.stepped.connect(func(_cell): _footstep_player.play())
+	_party.stepped.connect(func(_cell): _party_state.advance_time(1))
 	_party.bumped.connect(func(_cell): _play_effect(environment_theme.bump_sound))
 	add_child(_party)
 	_party.setup(CELL_SIZE)
@@ -131,6 +138,8 @@ func _unhandled_input(event: InputEvent) -> void:
 ## Builds (or returns to) a floor. Arriving from above puts the party at the
 ## way up; arriving from below puts it at the way down.
 func _go_to_floor(depth: int, from_above: bool) -> void:
+	if _depth != 0:
+		_party_state.complete_pending_effects()  # owner rule (#8): durations finish between floors
 	_depth = depth
 	if not _floors.has(depth):
 		_floors[depth] = DungeonMap.new(_make_layout(depth), depth)
@@ -190,9 +199,10 @@ func _on_party_moved(cell: Vector2i, facing: int) -> void:
 	if content != DungeonMap.Content.NONE:
 		state = " (used)" if _map.triggered.has(cell) else ""
 	var seed_text: String = "debug layout" if use_debug_layout and _depth == 1 else str(_site_seed)
-	_debug_label.text = "Seed: %s  Depth: %d/%d\nCell: %s  Facing: %s\nHere: %s%s\nContents on floor: %d  Passages: %d" % [
+	_debug_label.text = "Seed: %s  Depth: %d/%d\nCell: %s  Facing: %s\nHere: %s%s\nContents on floor: %d  Passages: %d\nParty: %s\nTime: %d" % [
 		seed_text, _depth, floors_in_site, cell, ["N", "E", "S", "W"][facing],
-		DungeonMap.content_name(content), state, _map.contents.size(), _map.doors.size()]
+		DungeonMap.content_name(content), state, _map.contents.size(), _map.doors.size(),
+		_party_state.summary(), _party_state.time_elapsed]
 
 
 ## Shows a yes/no question; `on_yes` runs if the player agrees.

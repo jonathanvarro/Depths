@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-17 – Claude
+- Did: #8 party data, per the owner's comment: one starting hero (companions died in the dungeon), three slots, state survives floors, timed effects complete on floor change. Added Companion resource (scripts/companion.gd), party_state.gd (3 slots, time per step, effects over time), and data/companions/mara.tres as the placeholder survivor (guide, 14/20 HP, uses ChatGPT's Mara portrait). main.gd owns the party; F3 debug shows party and time. 20 tests pass (effect maths incl. fractions and caps, slot limit, definition files never modified, step = 1 time unit, floor change completes healing).
+- Next: #9 portrait cards HUD (portrait field already points at mara-base-192-v2.png). Ask owner where the lone survivor starts (recorded as open decision 4).
+- Watch out: Health is the only stat; effects only support "health". Untracked docs/starter-cave-economy-research.md is ChatGPT's work in progress; left alone.
+
 ## 2026-10-17 – ChatGPT
 - Did: #25 researched the starter cave's connected economy using original developer/designer sources. Added docs/starter-cave-economy-research.md with proposed attributes, shared XP awards/individual talents, three enemy families, basic equipment, supplies, delayed recovery, camp prices, finite rewards, recruitment, a worked budget and owner decisions; linked it from DESIGN.md. Incorporated the newly committed #26 stash/recruitment decisions. Checked arithmetic, reward-range sensitivity, generator probabilities, local links and documentation whitespace.
 - Next: Owner reviews individual casualty/loss rules, finite cave persistence and recovery safeguards before adopting the numbers. Continue Milestone 2 at #8; use the report to inform later supplies/combat/encounter work.
