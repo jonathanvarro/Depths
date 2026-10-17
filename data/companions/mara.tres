@@ -15,3 +15,5 @@ portrait_set = ExtResource("3")
 portrait = ExtResource("2")
 max_health = 20
 health = 14
+strain = 55.0
+hunger = 60

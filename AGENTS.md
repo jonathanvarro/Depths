@@ -74,6 +74,9 @@ this via CLAUDE.md; ChatGPT Codex reads AGENTS.md directly). Keep it current.
 - `scripts/injury.gd` + `data/injuries/*.tres` – lasting injuries (max
   health penalty, extra step time, portrait overlay names). Companion holds
   `injuries` and `dressed`; F3 + K injures the first hero for testing.
+- `scripts/strain.gd` – strain rules and tuning numbers (states,
+  effectiveness, per-time gains, event spikes, panic chance). Companion has
+  `strain` and `hunger`; F3 + L adds strain for testing.
 - `scripts/pack_screen.gd` – the Pack screen (Pack button under the minimap,
   or I/B). PartyState.use_item(), rest(), cannot_use_reason() do the work.
 - `audio/placeholder/` – generated placeholder sounds (see its README for

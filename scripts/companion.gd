@@ -1,5 +1,7 @@
 class_name Companion
 extends Resource
+
+const StrainRules := preload("res://scripts/strain.gd")
 ## One hero in the party: who they are, and their current condition.
 ##
 ## Companion definitions live in `data/companions/*.tres`. The game plays with
@@ -11,6 +13,9 @@ extends Resource
 ##
 ## Injuries (#11) lower maximum health or slow each step until treated at
 ## camp. A dressing suppresses an injury's effect in the meantime.
+##
+## Strain (#12) builds from time, darkness, lost health, injury and hunger;
+## see strain.gd for the rules and states.
 
 @export var display_name := "Unnamed"
 @export var role := ""
@@ -25,6 +30,10 @@ extends Resource
 @export var portrait: Texture2D
 @export var max_health := 20
 @export var health := 20
+## 0 (calm) to 100 (panicking). See strain.gd.
+@export_range(0.0, 100.0) var strain := 0.0
+## Time units since the hero last ate.
+@export var hunger := 0
 ## Injuries carried (a definition can list some to start with).
 @export var injuries: Array[Injury] = []
 ## Injuries currently bound by a dressing: present, but not hindering.
@@ -44,9 +53,36 @@ func is_alive() -> bool:
 func change_health(amount: int) -> void:
 	var before := health
 	health = clampi(health + amount, 0, effective_max_health())
+	if health < before:
+		change_strain((before - health) * StrainRules.DAMAGE_PER_HEALTH)
 	if health != before:
 		emit_changed()
 
+
+func change_strain(amount: float) -> void:
+	var before := strain
+	strain = clampf(strain + amount, 0.0, StrainRules.MAX)
+	if not is_equal_approx(strain, before):
+		emit_changed()
+
+
+func strain_state() -> StrainRules.State:
+	return StrainRules.state_for(strain)
+
+
+func effectiveness() -> float:
+	return StrainRules.EFFECTIVENESS[strain_state()]
+
+
+func is_hungry() -> bool:
+	return hunger >= StrainRules.HUNGRY_AFTER
+
+
+## Eating resets hunger and eases strain a little.
+func eat() -> void:
+	hunger = 0
+	change_strain(StrainRules.EATING)
+	emit_changed()
 
 ## Maximum health after untreated, undressed injuries.
 func effective_max_health() -> int:
@@ -74,6 +110,7 @@ func add_injury(injury: Injury) -> bool:
 		return false
 	injuries.append(injury)
 	health = mini(health, effective_max_health())
+	change_strain(StrainRules.NEW_INJURY)
 	emit_changed()
 	return true
 

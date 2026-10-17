@@ -19,6 +19,8 @@ signal blocked_by(cell: Vector2i)
 signal stepped(cell: Vector2i)
 ## The party walked into a wall or blocked passage.
 signal bumped(cell: Vector2i)
+## Panic took over a move: the party bolted in a random direction (#12).
+signal panicked
 
 ## Facing index: 0 north, 1 east, 2 south, 3 west.
 const DIRECTIONS: Array[Vector2i] = [Vector2i(0, -1), Vector2i(1, 0), Vector2i(0, 1), Vector2i(-1, 0)]
@@ -34,6 +36,9 @@ var facing := 0
 
 ## While true the party ignores movement input (e.g. a prompt is open).
 var locked := false
+## Chance that a step bolts in a random open direction instead (set while
+## someone is panicking).
+var panic_chance := 0.0
 
 var _busy := false
 var _lantern: OmniLight3D
@@ -88,7 +93,10 @@ func place(dungeon_map, at: Vector2i) -> void:
 func _process(_delta: float) -> void:
 	if _busy or locked:
 		return
-	if Input.is_action_pressed("move_forward"):
+	var stepping := Input.is_action_pressed("move_forward") or Input.is_action_pressed("move_back")
+	if stepping and panic_chance > 0.0 and randf() < panic_chance:
+		_bolt()
+	elif Input.is_action_pressed("move_forward"):
 		_try_step(DIRECTIONS[facing])
 	elif Input.is_action_pressed("move_back"):
 		_try_step(-DIRECTIONS[facing])
@@ -123,6 +131,22 @@ func _try_step(direction: Vector2i) -> void:
 		moved.emit(cell, facing)
 		tween.finished.connect(func(): entered_cell.emit(cell))
 	tween.finished.connect(func(): _busy = false)
+
+
+## Panic: spin to face a random open direction and run that way.
+func _bolt() -> void:
+	var open: Array[int] = []
+	for f in DIRECTIONS.size():
+		if map.is_passable(cell + DIRECTIONS[f]):
+			open.append(f)
+	if open.is_empty():
+		_try_step(DIRECTIONS[facing])
+		return
+	facing = open.pick_random()
+	rotation.y = _facing_to_yaw(facing)
+	panicked.emit()
+	moved.emit(cell, facing)
+	_try_step(DIRECTIONS[facing])
 
 
 ## step: -1 turns left (counter-clockwise), 1 turns right (clockwise).

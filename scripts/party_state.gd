@@ -9,6 +9,7 @@ extends RefCounted
 signal changed
 
 const Supplies := preload("res://scripts/supplies.gd")
+const StrainRules := preload("res://scripts/strain.gd")
 const MAX_MEMBERS := 3
 ## A rest takes this long; it also finishes every effect in progress (#10).
 const REST_TIME := 20
@@ -44,10 +45,24 @@ func free_slots() -> int:
 
 func advance_time(units := 1) -> void:
 	time_elapsed += units
-	supplies.burn(units)
+	for i in units:
+		supplies.burn(1)
+		var light: Supplies.Light = supplies.light_band()
+		for member in living_members():
+			member.hunger += 1
+			member.change_strain(StrainRules.per_time_unit(member, light))
 	for member in members:
 		member.advance_time(units)
 	changed.emit()
+
+
+## The hero under the most strain, if anyone is panicking (else null).
+func panicking_member() -> Companion:
+	var worst: Companion = null
+	for member in living_members():
+		if member.strain_state() == StrainRules.State.PANICKING and (worst == null or member.strain > worst.strain):
+			worst = member
+	return worst
 
 
 ## Time a step costs the party: they move at the pace of the slowest hero.
@@ -71,6 +86,8 @@ func first_undressed_injured() -> Companion:
 func rest() -> void:
 	advance_time(REST_TIME)
 	complete_pending_effects()
+	for member in living_members():
+		member.change_strain(StrainRules.RESTING)
 
 
 func living_members() -> Array[Companion]:
@@ -94,7 +111,10 @@ func cannot_use_reason(item: SupplyItem) -> String:
 		SupplyItem.Effect.REFILL_LANTERN:
 			if supplies.lantern_is_full():
 				return "Lantern is full"
-		SupplyItem.Effect.FEED_PARTY, SupplyItem.Effect.HEAL_ONE:
+		SupplyItem.Effect.FEED_PARTY:
+			if most_hurt() == null and not living_members().any(func(m: Companion): return m.is_hungry()):
+				return "Nobody needs it"
+		SupplyItem.Effect.HEAL_ONE:
 			if most_hurt() == null:
 				return "Nobody is hurt"
 		SupplyItem.Effect.DRESS_INJURY:
@@ -114,6 +134,7 @@ func use_item(item: SupplyItem) -> String:
 		SupplyItem.Effect.FEED_PARTY:
 			supplies.take(item)
 			for member in living_members():
+				member.eat()
 				member.add_effect_over_time("health", item.amount, item.duration)
 		SupplyItem.Effect.HEAL_ONE:
 			var target := most_hurt()

@@ -8,6 +8,7 @@ signal closed
 signal used(message: String)
 
 const Supplies := preload("res://scripts/supplies.gd")
+const StrainRules := preload("res://scripts/strain.gd")
 const COLOR_TEXT := Color("e8d9b0")
 const COLOR_DIM_TEXT := Color(0.85, 0.8, 0.7, 0.65)
 const COLOR_OIL := Color("e8a84a")
@@ -45,6 +46,10 @@ func refresh() -> void:
 		child.queue_free()
 	var any_injury := false
 	for member: Companion in _party.members:
+		var hunger := "  ·  hungry" if member.is_hungry() else ""
+		_injuries.add_child(_label("%s: %s (strain %d)  ·  effectiveness %d%%%s" % [
+			member.display_name, StrainRules.NAMES[member.strain_state()], roundi(member.strain),
+			roundi(member.effectiveness() * 100), hunger], 17, COLOR_TEXT))
 		for injury in member.injuries:
 			any_injury = true
 			var state := "dressed until camp" if injury in member.dressed else "untreated"
@@ -138,7 +143,7 @@ func _build() -> void:
 	column.add_child(_lantern_label)
 	column.add_child(_label("A fuller lantern lights farther but burns faster.", 17, COLOR_DIM_TEXT))
 
-	column.add_child(_label("Injuries", 22, COLOR_TEXT))
+	column.add_child(_label("Condition", 22, COLOR_TEXT))
 	_injuries = VBoxContainer.new()
 	column.add_child(_injuries)
 

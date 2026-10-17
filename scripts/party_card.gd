@@ -4,6 +4,7 @@ extends PanelContainer
 ## Kept deliberately quiet: supplies and details live elsewhere (#10).
 
 const PortraitView := preload("res://scripts/portrait_view.gd")
+const StrainRules := preload("res://scripts/strain.gd")
 
 const PORTRAIT_SIZE := Vector2(96, 96)
 const ICON_SIZE := 14.0
@@ -11,6 +12,14 @@ const COLOR_HEALTH := Color("a8322a")
 const COLOR_HEALTH_LOW := Color("e0542f")
 const COLOR_HEALTH_BACK := Color(0.12, 0.08, 0.07)
 const EMPTY_ALPHA := 0.35
+const COLOR_STRAIN := Color("8e6bb8")
+## Card border per strain state: calm to alarmed.
+const STRAIN_BORDERS := {
+	StrainRules.State.STEADY: Color(0.35, 0.27, 0.18, 0.9),
+	StrainRules.State.UNEASY: Color("b0893a"),
+	StrainRules.State.SHAKEN: Color("d0682a"),
+	StrainRules.State.PANICKING: Color("e0332a"),
+}
 
 ## Condition icons, drawn as simple shapes (placeholder art).
 enum Icon { HEALING, WOUNDED, DOWN, INJURY_WOUND, INJURY_LIMP }
@@ -31,11 +40,14 @@ var _bar: ProgressBar
 var _health_text: Label
 var _icons: HBoxContainer
 var _last_health := -1
+var _style: StyleBoxFlat
+var _strain_bar: ProgressBar
 
 
 func _init() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var style := StyleBoxFlat.new()
+	_style = style
 	style.bg_color = Color(0.06, 0.05, 0.05, 0.8)
 	style.border_color = Color(0.35, 0.27, 0.18, 0.9)
 	style.set_border_width_all(1)
@@ -74,6 +86,18 @@ func _init() -> void:
 	back.bg_color = COLOR_HEALTH_BACK
 	_bar.add_theme_stylebox_override("background", back)
 	column.add_child(_bar)
+	_strain_bar = ProgressBar.new()
+	_strain_bar.show_percentage = false
+	_strain_bar.max_value = StrainRules.MAX
+	_strain_bar.custom_minimum_size = Vector2(PORTRAIT_SIZE.x, 5)
+	_strain_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var strain_back := StyleBoxFlat.new()
+	strain_back.bg_color = COLOR_HEALTH_BACK
+	var strain_fill := StyleBoxFlat.new()
+	strain_fill.bg_color = COLOR_STRAIN
+	_strain_bar.add_theme_stylebox_override("background", strain_back)
+	_strain_bar.add_theme_stylebox_override("fill", strain_fill)
+	column.add_child(_strain_bar)
 	_health_text = Label.new()
 	_health_text.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_health_text.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -97,6 +121,8 @@ func show_empty() -> void:
 	_portrait.show_portrait(null, null)
 	_name.text = "—"
 	_bar.value = 0
+	_strain_bar.value = 0
+	_style.border_color = STRAIN_BORDERS[StrainRules.State.STEADY]
 	_health_text.text = ""
 	_clear_icons()
 	modulate.a = EMPTY_ALPHA
@@ -118,7 +144,17 @@ func refresh() -> void:
 	if _last_health >= 0 and companion.health < _last_health:
 		_portrait.hurt()
 	_last_health = companion.health
-	_portrait.modulate = Color(0.45, 0.45, 0.45) if not companion.is_alive() else Color.WHITE
+	# Strain: border colour, a darker portrait, pallor when shaken, and a
+	# tremor when panicking.
+	var state := companion.strain_state()
+	_strain_bar.value = companion.strain
+	_style.border_color = STRAIN_BORDERS[state]
+	_style.set_border_width_all(1 if state == StrainRules.State.STEADY else 2)
+	var shade := lerpf(1.0, 0.7, companion.strain / StrainRules.MAX)
+	_portrait.modulate = Color(0.45, 0.45, 0.45) if not companion.is_alive() else Color(shade, shade, shade)
+	_portrait.set_condition("pallor", companion.is_alive() and state >= StrainRules.State.SHAKEN)
+	_portrait.set_tremble(companion.is_alive() and state == StrainRules.State.PANICKING)
+	tooltip_text = "%s: %s" % [companion.display_name, StrainRules.NAMES[state]]
 
 	_clear_icons()
 	if not companion.is_alive():

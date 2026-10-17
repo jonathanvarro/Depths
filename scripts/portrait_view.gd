@@ -18,6 +18,8 @@ var _flash: ColorRect
 var _blink_timer: Timer
 var _talk_tween: Tween
 var _hurt_tween: Tween
+var _trembling := false
+var _tremble_clock := 0.0
 
 
 func _init() -> void:
@@ -99,6 +101,22 @@ func talk(seconds: float) -> void:
 		_talk_tween.tween_callback(func(): _mouth.texture = frame)
 		_talk_tween.tween_interval(TALK_FRAME_SECONDS)
 	_talk_tween.tween_callback(func(): _mouth.texture = portrait_set.mouth)
+
+
+## A constant small tremor (used while panicking). Needs no extra art.
+func set_tremble(on: bool) -> void:
+	_trembling = on
+	if not on and _rig and not (_hurt_tween and _hurt_tween.is_running()):
+		_rig.position = Vector2.ZERO
+
+
+func _process(delta: float) -> void:
+	if not _trembling or _rig == null or (_hurt_tween and _hurt_tween.is_running()):
+		return
+	_tremble_clock -= delta
+	if _tremble_clock <= 0.0:
+		_tremble_clock = 0.05
+		_rig.position = Vector2(randf_range(-1.5, 1.5), randf_range(-1.0, 1.0))
 
 
 ## Red flash and a short shake. Needs no extra art.

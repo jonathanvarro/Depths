@@ -123,6 +123,8 @@ Each companion has a distinct role, personality, vulnerability, and reason to en
 
 **Decided 2026-10-17 (#12): strain** rises from **time, darkness, lost health, injury and hunger**, and high strain causes **panicking and lost effectiveness**.
 
+*Implemented (#12), numbers to tune in `scripts/strain.gd`:* strain 0–100 per hero, in four states — Steady (<25), Uneasy, Shaken (50+), Panicking (75+) — with effectiveness 100/90/75/60% for combat to use (#14). Per time unit it rises a little from time, more in a dim or dark lantern, with missing health, with each hindering injury, and when hungry (80+ time since eating) or starving (160+); a bright lantern eases it. Damage (+1.5 per health lost) and new injuries (+10) spike it; eating (−5) and resting (−20) relieve it. Panicking heroes sometimes bolt in a random direction instead of the step asked for (15% per step). The card shows a strain bar, a border that warms from neutral to red, a darker portrait, the `pallor` overlay from Shaken, and a tremor when Panicking; messages announce state changes. Mara starts Shaken (55) and not yet fed (hunger 60). Fear/Resolve (docs/hero-personality-and-fear.md) can plug into these rules later.
+
 Strain should affect decisions and behaviour, rather than exist only as a number. Possible reactions include hesitation, requests to retreat, recklessness, and disagreement. Personal motives can make a particular discovery especially tempting to one person.
 
 Trust, promises, and unequal sacrifices are possible ways to deepen this system, not yet mandatory features. Serious refusals or loss of control should have readable warning signs and opportunities for the player to respond.

@@ -12,6 +12,7 @@ const PartyState := preload("res://scripts/party_state.gd")
 const PartyCard := preload("res://scripts/party_card.gd")
 const PackScreen := preload("res://scripts/pack_screen.gd")
 const Supplies := preload("res://scripts/supplies.gd")
+const StrainRules := preload("res://scripts/strain.gd")
 
 const CELL_SIZE := 2.0
 const WALL_HEIGHT := 2.4
@@ -48,6 +49,7 @@ const KEY_BINDINGS := {
 	"debug_hurt": [KEY_H],  # only while the F3 overlay is open
 	"debug_heal": [KEY_J],
 	"debug_injure": [KEY_K],
+	"debug_strain": [KEY_L],
 }
 
 const TOUCH_BUTTON_SIZE := Vector2(88, 88)
@@ -149,6 +151,9 @@ func _ready() -> void:
 	_party.stepped.connect(func(_cell): _footstep_player.play())
 	_party.stepped.connect(func(_cell): _party_state.advance_time(_party_state.step_time()))
 	_party.bumped.connect(func(_cell): _play_effect(environment_theme.bump_sound))
+	_party.panicked.connect(_on_party_panicked)
+	_party_state.changed.connect(_on_party_state_changed)
+	_on_party_state_changed(false)  # note starting states without announcing them
 	add_child(_party)
 	_party.setup(CELL_SIZE)
 	_party_state.supplies.changed.connect(_update_lantern)
@@ -167,6 +172,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		_party_state.members[0].change_health(-3)
 	elif _debug_label.visible and event.is_action_pressed("debug_heal") and not _party_state.members.is_empty():
 		_party_state.members[0].add_effect_over_time("health", 6, 12)
+	elif _debug_label.visible and event.is_action_pressed("debug_strain") and not _party_state.members.is_empty():
+		_party_state.members[0].change_strain(20.0)
 	elif _debug_label.visible and event.is_action_pressed("debug_injure") and not _party_state.members.is_empty():
 		_party_state.members[0].add_injury(trap_injuries.pick_random())
 	elif event.is_action_pressed("toggle_map"):
@@ -260,6 +267,31 @@ func _spring_trap() -> void:
 			text = "A trap! %s suffers a %s." % [victim.display_name, injury.display_name.to_lower()]
 	_play_effect(environment_theme.bump_sound)
 	_show_message(text)
+
+
+var _strain_states := {}  # Companion -> last strain state, to announce changes
+
+
+## Strain (#12): announce state changes and let panic take over some moves.
+func _on_party_state_changed(announce := true) -> void:
+	for member: Companion in _party_state.living_members():
+		if not member.changed.is_connected(_on_party_state_changed):
+			member.changed.connect(_on_party_state_changed)  # e.g. strain from a trap
+		var state := member.strain_state()
+		var before: int = _strain_states.get(member, state)
+		_strain_states[member] = state
+		if not announce:
+			continue
+		if state > before:
+			_show_message("%s is %s." % [member.display_name, StrainRules.NAMES[state].to_lower()])
+		elif state < before and state == StrainRules.State.STEADY:
+			_show_message("%s steadies." % member.display_name)
+	_party.panic_chance = StrainRules.PANIC_BOLT_CHANCE if _party_state.panicking_member() else 0.0
+
+
+func _on_party_panicked() -> void:
+	var who: Companion = _party_state.panicking_member()
+	_show_message("%s panics and bolts!" % (who.display_name if who else "Someone"))
 
 
 func _rest() -> void:

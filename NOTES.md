@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-17 – Claude
+- Did: #12 strain per owner (time, darkness, lost health, injury, hunger -> panic, lost effectiveness). scripts/strain.gd holds rules/numbers; Companion gained strain + hunger; PartyState ticks them per time unit with the lantern band; rations reset hunger; rest relieves. Panic: party.gd bolts in a random open direction (15%/step). Card: strain bar, state-coloured border, darkening, pallor overlay (uses ChatGPT's new mara-animation-v1 art when its portrait set is committed), tremor. Messages on state changes. All suites pass (strain 20 checks; reran party, cards, injuries, supplies, opening, doors, map).
+- Next: #14 combat (attack/defend/item; effectiveness() ready to use). #30 opening should set Mara's opening strain/panic deliberately.
+- Watch out: Left ChatGPT's uncommitted art wiring (data/items/*.tres icons, data/portraits/mara.tres frames/overlays, themes/cave.tres, art/*, tools/art) untouched and unstaged.
+
 ## 2026-10-17 – ChatGPT
 - Did: #29 created art/items/starter-v1: 12 new matching transparent weapon/protection/supply images plus a copy of the approved rough knife, 13 total. Added a labelled preview, full prompt/source manifest, asset map with SupplyItem.icon paths, and validation report. Visually checked all subjects and the preview; all source PNGs decode, have alpha 0–255, square 1254px canvases and exact source-copy hashes.
 - Next: Claude can assign oil-flask, party-ration, restorative-draught and clean-dressing textures to the corresponding data/items resources; README lists exact res:// paths. Review in the actual phone inventory, simplify/clean pixel edges and choose optimized export sizes before finalizing the library.
