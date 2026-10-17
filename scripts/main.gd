@@ -14,7 +14,9 @@ const PackScreen := preload("res://scripts/pack_screen.gd")
 const EventScreen := preload("res://scripts/event_screen.gd")
 const RoomEvents := preload("res://scripts/room_events.gd")
 const Expedition := preload("res://scripts/expedition.gd")
+const SafeArea := preload("res://scripts/safe_area.gd")
 const ResultsScreen := preload("res://scripts/results_screen.gd")
+const PreparationScreen := preload("res://scripts/preparation_screen.gd")
 ## Placeholder camp stop between expeditions until the campsite exists
 ## (#18/#22): rest restores health and eases strain; injuries wait for the
 ## nurse.
@@ -119,9 +121,6 @@ enum Arrival { OPENING, FROM_ABOVE, FROM_BELOW }
 ## home bar at the bottom) to check the HUD stays clear of them on Windows.
 @export var simulate_phone_safe_area := false
 
-## iPhone 15 landscape safe-area insets (59pt sides, 21pt bottom) in this
-## game's 648px-tall UI space: left, top, right, bottom.
-const SIMULATED_PHONE_INSETS := Vector4(97, 0, 97, 35)
 
 var _site_seed := 0
 var _party_state  # party_state.gd: heroes and time, kept across floors
@@ -148,6 +147,7 @@ var _event_screen: Control  # event_screen.gd
 var _room_events = RoomEvents.new()
 var _expedition  # expedition.gd: this expedition's record (#17)
 var _results: Control  # results_screen.gd
+var _preparation: Control  # preparation_screen.gd
 var _ending := false
 var _in_combat := false
 var _touch_pad: Control
@@ -393,6 +393,8 @@ func _start_new_expedition() -> void:
 		hero.change_strain(-CAMP_STRAIN_RELIEF)
 		hero.hunger = 0
 	_expedition = Expedition.new(_party_state, _expedition.number + 1)
+	_preparation.show_for(_expedition.number, _party_state)
+	await _preparation.entered
 	_ending = false
 	_party.locked = false
 	_go_to_floor(1, Arrival.FROM_ABOVE)
@@ -686,6 +688,8 @@ func _build_ui(minimap: Control) -> void:
 	ui.add_child(_event_screen)
 	_results = ResultsScreen.new()
 	canvas.add_child(_results)
+	_preparation = PreparationScreen.new()
+	canvas.add_child(_preparation)
 	minimap.pressed.connect(_set_full_map.bind(true))
 	get_viewport().size_changed.connect(_apply_safe_area)
 	_apply_safe_area()
@@ -695,7 +699,7 @@ func _build_ui(minimap: Control) -> void:
 ## and home bar. On desktop there's nothing to avoid.
 func _apply_safe_area() -> void:
 	var insets := _safe_area_insets()
-	for control: Control in [_safe_area, _full_map_margin, _pack.content, _combat.content, _results.content]:
+	for control: Control in [_safe_area, _full_map_margin, _pack.content, _combat.content, _results.content, _preparation.content]:
 		control.offset_left = insets.x
 		control.offset_top = insets.y
 		control.offset_right = -insets.z
@@ -704,15 +708,7 @@ func _apply_safe_area() -> void:
 
 ## Left, top, right, bottom insets in UI pixels.
 func _safe_area_insets() -> Vector4:
-	if simulate_phone_safe_area:
-		return SIMULATED_PHONE_INSETS
-	if not OS.has_feature("mobile"):
-		return Vector4.ZERO
-	var window := Vector2(DisplayServer.window_get_size())
-	var safe := Rect2(DisplayServer.get_display_safe_area())
-	var to_ui := get_viewport().get_visible_rect().size / window
-	return Vector4(safe.position.x * to_ui.x, safe.position.y * to_ui.y,
-			(window.x - safe.end.x) * to_ui.x, (window.y - safe.end.y) * to_ui.y)
+	return SafeArea.insets(get_viewport(), simulate_phone_safe_area)
 
 
 ## Full-screen map: title, the explored floor scaled to fit, and a legend in

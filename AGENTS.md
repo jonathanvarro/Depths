@@ -13,7 +13,8 @@ this via CLAUDE.md; ChatGPT Codex reads AGENTS.md directly). Keep it current.
   both mouse/keyboard and touch from the start; keep UI readable on a phone.
   iOS builds must be exported and signed on a Mac with Xcode.
 - **How to run it:** Open `project.godot` in the Godot editor and press F5.
-  Main scene: `scenes/main.tscn`. Mouse clicks emulate touch
+  The game starts on the title screen (`scenes/title.tscn`); to jump
+  straight into the dungeon, open `scenes/main.tscn` and press F6. Mouse clicks emulate touch
   (`input_devices/pointing/emulate_touch_from_mouse`) so touch input can be
   tested on Windows.
 - **How to test it:** No automated test suite yet. Press **F3** in-game for
@@ -99,6 +100,12 @@ this via CLAUDE.md; ChatGPT Codex reads AGENTS.md directly). Keep it current.
 - `scripts/results_screen.gd` – end-of-expedition screen. main.gd
   `_end_expedition()` shows it; `_start_new_expedition()` is the placeholder
   camp stop and re-entry from floor 1.
+- `scripts/title_screen.gd` + `scenes/title.tscn` – title screen (#18) built
+  from ChatGPT's title study: Begin expedition, Settings (disabled until
+  settings exist), Quit (desktop only). Uses art/fonts roles.
+- `scripts/preparation_screen.gd` – party, condition, lantern and pack before
+  expeditions 2+ (the opening skips it). `scripts/safe_area.gd` – shared
+  notch/home-bar insets for every screen.
 - `scripts/pack_screen.gd` – the Pack screen (Pack button under the minimap,
   or I/B). PartyState.use_item(), rest(), cannot_use_reason() do the work.
 - `audio/placeholder/` – generated placeholder sounds (see its README for
