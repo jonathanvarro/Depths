@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="RoomEvent" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="event"]
+[ext_resource type="Script" path="res://scripts/event_choice.gd" id="choice"]
+[ext_resource type="Script" path="res://scripts/event_outcome.gd" id="outcome"]
+
+[sub_resource type="Resource" id="o0_0"]
+script = ExtResource("outcome")
+weight = 2
+text = "Cold and clean. Strength seeps back slowly."
+heal_over_time = 4
+
+[sub_resource type="Resource" id="o0_1"]
+script = ExtResource("outcome")
+weight = 1
+text = "It tastes of rust and rot. Your stomach turns."
+health = -1
+strain = 10.0
+
+[sub_resource type="Resource" id="c0"]
+script = ExtResource("choice")
+label = "Drink"
+time_cost = 2
+outcomes = Array[EventOutcome]([SubResource("o0_0"), SubResource("o0_1")])
+
+[sub_resource type="Resource" id="o1_0"]
+script = ExtResource("outcome")
+weight = 1
+text = "Tiny pale shrimp dart through the water. Something lives in it — that's a good sign, mostly."
+
+[sub_resource type="Resource" id="c1"]
+script = ExtResource("choice")
+label = "Look closer"
+time_cost = 3
+investigation = true
+outcomes = Array[EventOutcome]([SubResource("o1_0")])
+
+[resource]
+script = ExtResource("event")
+kind = 4
+title = "A still pool"
+clue = "Black water fills a hollow in the floor, perfectly still. It smells faintly of iron."
+choices = Array[EventChoice]([SubResource("c0"), SubResource("c1")])
+min_depth = 1
+max_depth = 99
+weight = 2

@@ -1,0 +1,59 @@
+[gd_resource type="Resource" script_class="RoomEvent" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="event"]
+[ext_resource type="Script" path="res://scripts/event_choice.gd" id="choice"]
+[ext_resource type="Script" path="res://scripts/event_outcome.gd" id="outcome"]
+[ext_resource type="Resource" path="res://data/injuries/limp.tres" id="limp"]
+
+[sub_resource type="Resource" id="o0_0"]
+script = ExtResource("outcome")
+weight = 3
+text = "Slow going, but you find the solid stones."
+
+[sub_resource type="Resource" id="o0_1"]
+script = ExtResource("outcome")
+weight = 1
+text = "A slab tilts under you and your ankle twists."
+health = -1
+injury = ExtResource("limp")
+
+[sub_resource type="Resource" id="c0"]
+script = ExtResource("choice")
+label = "Test every step"
+time_cost = 4
+outcomes = Array[EventOutcome]([SubResource("o0_0"), SubResource("o0_1")])
+
+[sub_resource type="Resource" id="o1_0"]
+script = ExtResource("outcome")
+weight = 1
+text = "You're across before the floor can decide."
+
+[sub_resource type="Resource" id="o1_1"]
+script = ExtResource("outcome")
+weight = 1
+text = "The floor gives way and you drop hard onto broken stone."
+health = -4
+strain = 8.0
+
+[sub_resource type="Resource" id="o1_2"]
+script = ExtResource("outcome")
+weight = 1
+text = "A slab tips and you fall, catching your ankle."
+health = -2
+injury = ExtResource("limp")
+
+[sub_resource type="Resource" id="c1"]
+script = ExtResource("choice")
+label = "Hurry across"
+time_cost = 1
+outcomes = Array[EventOutcome]([SubResource("o1_0"), SubResource("o1_1"), SubResource("o1_2")])
+
+[resource]
+script = ExtResource("event")
+kind = 3
+title = "Hollow floor"
+clue = "The ground sounds hollow under your boots. A cold draught rises from somewhere below."
+choices = Array[EventChoice]([SubResource("c0"), SubResource("c1")])
+min_depth = 2
+max_depth = 99
+weight = 2

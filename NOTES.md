@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-17 – Claude
+- Did: #16 room events. Data-driven RoomEvent/EventChoice/EventOutcome resources in data/events (8 events: abandoned pack, goblin stash, tripwire, hollow floor, pale idol, still pool, dry alcove, old campsite); room_events.gd picks by kind and depth and resolves outcomes (health, delayed heal, strain, injury, oil, loot, rest, ambush); event_screen.gd shows clue, choices and an automatic "Leave it" (keeps it for later). Replaced the placeholder trap and rest prompt. Generator content mix now varies by depth (walls unchanged). 22 event checks + all earlier suites pass at desktop/iPhone sizes.
+- Next: #30 opening escape, or Milestone 3's #17 outcomes.
+- Watch out: Outcomes affect the party's first living hero ("whoever acted"); choosing who acts comes with recruits. Rewards are supplies only until gold/treasure exists. Left ChatGPT's uncommitted edits (DESIGN.md, NOTES.md, docs/*, portrait README) unstaged; my doc additions were staged on top of HEAD.
+
 ## 2026-10-17 – ChatGPT
 - Did: #35 recorded the owner's requirement to separate portrait character art from lighting in docs/portrait-lighting.md; updated DESIGN.md, merchant guidance and Mara's prototype README to remove the assumption of permanently fixed lantern light. Audited the actual PortraitSet/View, PartyCard and Mara resource: character, tunic and expression drawings currently contain baked illumination; no independent lighting pass exists yet.
 - Next: #36 tracks reauthoring a neutral aligned Mara master/tunic and neutral blink/talk patches, supplying coordinated shadow/highlight masks, then extending the renderer and verifying neutral/warm/dim composites with conditions/outfits at 192/96px. The guide gives the layer/registration contract, migration sequence and validation criteria for Claude and future art generation.

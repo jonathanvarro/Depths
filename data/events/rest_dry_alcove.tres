@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="RoomEvent" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="event"]
+[ext_resource type="Script" path="res://scripts/event_choice.gd" id="choice"]
+[ext_resource type="Script" path="res://scripts/event_outcome.gd" id="outcome"]
+
+[sub_resource type="Resource" id="o0_0"]
+script = ExtResource("outcome")
+weight = 1
+text = "You rest with your back to the stone and the lantern turned low."
+rest = true
+
+[sub_resource type="Resource" id="c0"]
+script = ExtResource("choice")
+label = "Rest here (20 time)"
+time_cost = 0
+outcomes = Array[EventOutcome]([SubResource("o0_0")])
+
+[resource]
+script = ExtResource("event")
+kind = 5
+title = "A dry alcove"
+clue = "A dry hollow in the rock, sheltered on three sides. Someone has rested here before."
+choices = Array[EventChoice]([SubResource("c0")])
+min_depth = 1
+max_depth = 99
+weight = 3

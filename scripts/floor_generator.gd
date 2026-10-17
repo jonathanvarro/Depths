@@ -19,9 +19,15 @@ const ROOM_MAX := 6
 const EXTRA_CORRIDOR_CHANCE := 0.35
 ## Chance that a room (other than the start room) holds something.
 const ROOM_CONTENT_CHANCE := 0.75
-## Layout symbols (see dungeon_map.gd) and how often each is picked.
-## Stairs are placed separately (issue #4).
-const ROOM_CONTENT_WEIGHTS := {"E": 3, "C": 2, "T": 2, "O": 1, "R": 1}
+## Layout symbols (see dungeon_map.gd) and how often each is picked, by
+## depth: deeper floors bring more fights and traps, fewer places to rest
+## (#16). Depths past the table use its last row. Stairs are placed
+## separately (#4).
+const ROOM_CONTENT_WEIGHTS := [
+	{"E": 2, "C": 3, "T": 1, "O": 1, "R": 2},
+	{"E": 3, "C": 2, "T": 2, "O": 1, "R": 1},
+	{"E": 3, "C": 2, "T": 3, "O": 2, "R": 1},
+]
 ## Chances for each room entrance to get a closed or blocked passage.
 const CLOSED_PASSAGE_CHANCE := 0.3
 const BLOCKED_PASSAGE_CHANCE := 0.12
@@ -30,7 +36,8 @@ const NEIGHBOURS: Array[Vector2i] = [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN,
 
 
 ## has_descent: false on a site's deepest floor, which has no way further down.
-static func generate(seed_value: int, has_descent := true) -> PackedStringArray:
+static func generate(seed_value: int, has_descent := true, depth := 1) -> PackedStringArray:
+	var content_weights: Dictionary = ROOM_CONTENT_WEIGHTS[clampi(depth, 1, ROOM_CONTENT_WEIGHTS.size()) - 1]
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed_value
 	var open := PackedByteArray()
@@ -76,7 +83,7 @@ static func generate(seed_value: int, has_descent := true) -> PackedStringArray:
 	for room: Rect2i in rooms.slice(1):
 		if rng.randf() < ROOM_CONTENT_CHANCE:
 			var cell := room.position + Vector2i(rng.randi_range(0, room.size.x - 1), rng.randi_range(0, room.size.y - 1))
-			var content := _pick_weighted(rng, ROOM_CONTENT_WEIGHTS)
+			var content := _pick_weighted(rng, content_weights)
 			if not symbols.has(cell):
 				symbols[cell] = content
 

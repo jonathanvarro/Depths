@@ -1,0 +1,47 @@
+[gd_resource type="Resource" script_class="RoomEvent" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="event"]
+[ext_resource type="Script" path="res://scripts/event_choice.gd" id="choice"]
+[ext_resource type="Script" path="res://scripts/event_outcome.gd" id="outcome"]
+[ext_resource type="Resource" path="res://data/items/ration.tres" id="ration"]
+
+[sub_resource type="Resource" id="o0_0"]
+script = ExtResource("outcome")
+weight = 1
+text = "Even cold, the old fire feels like company."
+strain = -10.0
+rest = true
+
+[sub_resource type="Resource" id="c0"]
+script = ExtResource("choice")
+label = "Rest by the hearth (20 time)"
+time_cost = 0
+outcomes = Array[EventOutcome]([SubResource("o0_0")])
+
+[sub_resource type="Resource" id="o1_0"]
+script = ExtResource("outcome")
+weight = 2
+text = "Tucked in the bedroll: a ration, still sealed."
+loot = Dictionary[SupplyItem, int]({ExtResource("ration"): 1})
+
+[sub_resource type="Resource" id="o1_1"]
+script = ExtResource("outcome")
+weight = 1
+text = "Nothing but mouse-chewed scraps."
+
+[sub_resource type="Resource" id="c1"]
+script = ExtResource("choice")
+label = "Search the camp"
+time_cost = 2
+investigation = true
+outcomes = Array[EventOutcome]([SubResource("o1_0"), SubResource("o1_1")])
+
+[resource]
+script = ExtResource("event")
+kind = 5
+title = "An old campsite"
+clue = "Cold ashes ring a blackened hearth. A torn bedroll, a dented tin cup."
+choices = Array[EventChoice]([SubResource("c0"), SubResource("c1")])
+min_depth = 2
+max_depth = 99
+weight = 1

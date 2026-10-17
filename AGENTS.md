@@ -87,6 +87,12 @@ this via CLAUDE.md; ChatGPT Codex reads AGENTS.md directly). Keep it current.
   tags, action panel. main.gd `_start_combat()` spawns foes, hides the
   movement pad, and handles victory/retreat/defeat. Encounter groups by
   depth are `ENCOUNTER_GROUPS` in main.gd.
+- `scripts/room_event.gd`, `event_choice.gd`, `event_outcome.gd` +
+  `data/events/*.tres` – room events (#16). Add an event by writing a new
+  .tres (kind 2 chest / 3 trap / 4 strange object / 5 rest spot, clue,
+  choices, depth range); `room_events.gd` loads every file in the folder.
+- `scripts/room_events.gd` – picks events per cell by kind and depth,
+  resolves choices; `scripts/event_screen.gd` shows them.
 - `scripts/pack_screen.gd` – the Pack screen (Pack button under the minimap,
   or I/B). PartyState.use_item(), rest(), cannot_use_reason() do the work.
 - `audio/placeholder/` – generated placeholder sounds (see its README for

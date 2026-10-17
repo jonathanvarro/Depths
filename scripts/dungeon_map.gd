@@ -41,6 +41,7 @@ var contents := {}  # Vector2i -> Content (empty cells are absent)
 var triggered := {}  # Vector2i -> true, for one-time contents already used
 var discovered := {}  # Vector2i -> true, for any contents the party has entered
 var doors := {}  # Vector2i -> Door
+var events := {}  # Vector2i -> RoomEvent, assigned by main.gd (#16)
 
 var _rows: PackedStringArray
 

@@ -11,6 +11,13 @@ const LevelBuilder := preload("res://scripts/level_builder.gd")
 const PartyState := preload("res://scripts/party_state.gd")
 const PartyCard := preload("res://scripts/party_card.gd")
 const PackScreen := preload("res://scripts/pack_screen.gd")
+const EventScreen := preload("res://scripts/event_screen.gd")
+const RoomEvents := preload("res://scripts/room_events.gd")
+## Injuries the F3 + K debug key picks from.
+const DEBUG_INJURIES: Array[Injury] = [
+	preload("res://data/injuries/deep_wound.tres"),
+	preload("res://data/injuries/limp.tres"),
+]
 const CombatState := preload("res://scripts/combat_state.gd")
 const CombatScreen := preload("res://scripts/combat_screen.gd")
 const RAT := preload("res://data/enemies/rat.tres")
@@ -97,14 +104,6 @@ const EFFECT_VOLUME_DB := -4.0
 	preload("res://data/items/restorative_draught.tres"): 1,
 	preload("res://data/items/dressing.tres"): 2,
 }
-## Injuries a trap can cause (#11); one is picked at random.
-@export var trap_injuries: Array[Injury] = [
-	preload("res://data/injuries/deep_wound.tres"),
-	preload("res://data/injuries/limp.tres"),
-]
-## Trap damage, and the chance it also leaves a lasting injury.
-@export var trap_damage := 3
-@export_range(0.0, 1.0) var trap_injury_chance := 0.5
 ## Shown as the game opens on the deepest floor, where the companions died.
 @export_multiline var opening_message := "Your companions lie still. Find the way out."
 
@@ -139,6 +138,8 @@ var _prompt_action := Callable()
 var _prompt_no_action := Callable()
 var _pack: Control  # pack_screen.gd
 var _combat: Control  # combat_screen.gd
+var _event_screen: Control  # event_screen.gd
+var _room_events = RoomEvents.new()
 var _in_combat := false
 var _touch_pad: Control
 var _pack_button: Button
@@ -196,7 +197,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif _debug_label.visible and event.is_action_pressed("debug_strain") and not _party_state.members.is_empty():
 		_party_state.members[0].change_strain(20.0)
 	elif _debug_label.visible and event.is_action_pressed("debug_injure") and not _party_state.members.is_empty():
-		_party_state.members[0].add_injury(trap_injuries.pick_random())
+		_party_state.members[0].add_injury(DEBUG_INJURIES.pick_random())
 	elif event.is_action_pressed("toggle_map"):
 		_set_full_map(not _full_map.visible)
 	elif _full_map.visible and event.is_action_pressed("ui_cancel"):
@@ -220,6 +221,7 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 	_depth = depth
 	if not _floors.has(depth):
 		_floors[depth] = DungeonMap.new(_make_layout(depth), depth)
+		_assign_events(_floors[depth])
 	_map = _floors[depth]
 
 	if _level:
@@ -245,7 +247,7 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 func _make_layout(depth: int) -> PackedStringArray:
 	if use_debug_layout and depth == 1:
 		return PackedStringArray(DEBUG_LAYOUT)
-	return FloorGenerator.generate(_site_seed + (depth - 1) * FLOOR_SEED_STEP, depth < floors_in_site)
+	return FloorGenerator.generate(_site_seed + (depth - 1) * FLOOR_SEED_STEP, depth < floors_in_site, depth)
 
 
 func _on_party_entered_cell(cell: Vector2i) -> void:
@@ -257,12 +259,8 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 			_ask(environment_theme.descent_prompt, _go_to_floor.bind(_depth + 1, Arrival.FROM_ABOVE))
 		DungeonMap.Content.ENCOUNTER:
 			_start_combat(cell)
-		DungeonMap.Content.TRAP:
-			_spring_trap()
-		DungeonMap.Content.REST_SPOT:
-			# Each rest spot can be used once; saying no keeps it for later.
-			_ask("A sheltered spot. Rest here? (%d time)" % PartyState.REST_TIME, _rest,
-					func(): _map.triggered.erase(cell))
+		DungeonMap.Content.CHEST, DungeonMap.Content.TRAP, DungeonMap.Content.STRANGE_OBJECT, DungeonMap.Content.REST_SPOT:
+			_run_event(cell)
 		DungeonMap.Content.STAIRS_UP:
 			if _depth == 1:
 				_show_message(environment_theme.exit_message)  # campsite comes later
@@ -275,15 +273,44 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 			_show_message(content_text)
 
 
+## Gives each chest, trap, strange object and rest spot on a floor its event,
+## picked to suit the depth (#16).
+func _assign_events(map) -> void:
+	for cell in map.contents:
+		var event: RoomEvent = _room_events.pick(map.contents[cell], map.depth)
+		if event:
+			map.events[cell] = event
+
+
+## A room event (#16): clue, choices, "Leave it". Leaving keeps it for later;
+## an ambush starts a fight.
+func _run_event(cell: Vector2i) -> void:
+	var event: RoomEvent = _map.events.get(cell)
+	if event == null:
+		_show_message(DungeonMap.content_name(_map.content_at(cell)))
+		return
+	_party.locked = true
+	_event_screen.show_event(event, _party_state, _room_events)
+	var result: Dictionary = await _event_screen.finished
+	_party.locked = false
+	if result["left"]:
+		_map.triggered.erase(cell)
+	elif not result["ambush"].is_empty():
+		var types: Array[EnemyType] = []
+		types.assign(result["ambush"])
+		_start_combat(cell, types)
+
+
 ## A fight (#14): enemies appear ahead in the first-person view and the
 ## action panel replaces the movement pad until it's over.
-func _start_combat(cell: Vector2i) -> void:
-	var groups: Array = ENCOUNTER_GROUPS.get(clampi(_depth, 1, ENCOUNTER_GROUPS.size()))
-	# Never more enemies than heroes standing, so a lone survivor isn't swamped.
-	var party_size: int = _party_state.living_members().size()
-	var fitting := groups.filter(func(g: Array): return g.size() <= party_size)
-	var types: Array[EnemyType] = []
-	types.assign((fitting if not fitting.is_empty() else [[groups[0][0]]]).pick_random())
+## `types` sets the enemies (e.g. an ambush); empty picks a group for the floor.
+func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
+	if types.is_empty():
+		var groups: Array = ENCOUNTER_GROUPS.get(clampi(_depth, 1, ENCOUNTER_GROUPS.size()))
+		# Never more enemies than heroes standing, so a lone survivor isn't swamped.
+		var party_size: int = _party_state.living_members().size()
+		var fitting := groups.filter(func(g: Array): return g.size() <= party_size)
+		types.assign((fitting if not fitting.is_empty() else [[groups[0][0]]]).pick_random())
 	var state = CombatState.new(_party_state, types)
 	_place_foes(state.foes)
 	_in_combat = true
@@ -346,23 +373,6 @@ func _flee_from(cell: Vector2i) -> void:
 	_show_message("You flee blindly into the dark, and lose your way.")
 
 
-## Placeholder trap until room encounters (#16) add clues and choices:
-## it hurts someone and may leave a lasting injury.
-func _spring_trap() -> void:
-	var victims: Array[Companion] = _party_state.living_members()
-	if victims.is_empty():
-		return
-	var victim: Companion = victims.pick_random()
-	victim.change_health(-trap_damage)
-	var text := "A trap! %s is hurt." % victim.display_name
-	if not trap_injuries.is_empty() and randf() < trap_injury_chance:
-		var injury: Injury = trap_injuries.pick_random()
-		if victim.add_injury(injury):
-			text = "A trap! %s suffers a %s." % [victim.display_name, injury.display_name.to_lower()]
-	_play_effect(environment_theme.bump_sound)
-	_show_message(text)
-
-
 var _strain_states := {}  # Companion -> last strain state, to announce changes
 
 
@@ -386,11 +396,6 @@ func _on_party_state_changed(announce := true) -> void:
 func _on_party_panicked() -> void:
 	var who: Companion = _party_state.panicking_member()
 	_show_message("%s panics and bolts!" % (who.display_name if who else "Someone"))
-
-
-func _rest() -> void:
-	_party_state.rest()
-	_show_message("You rest. Food and remedies take full effect.")
 
 
 func _update_lantern() -> void:
@@ -455,7 +460,7 @@ func _set_debug(enabled: bool) -> void:
 
 ## Opens or closes the pack screen; like the map, the party waits meanwhile.
 func _set_pack(open: bool) -> void:
-	if open and (_prompt.visible or _full_map.visible or _in_combat):
+	if open and (_prompt.visible or _full_map.visible or _in_combat or _event_screen.visible):
 		return
 	_pack.visible = open
 	_party.locked = open
@@ -465,7 +470,7 @@ func _set_pack(open: bool) -> void:
 ## Opens or closes the full-screen map. The party can't move while it's open,
 ## and it can't open over a yes/no prompt.
 func _set_full_map(open: bool) -> void:
-	if open and (_prompt.visible or _pack.visible or _in_combat):
+	if open and (_prompt.visible or _pack.visible or _in_combat or _event_screen.visible):
 		return
 	_full_map.visible = open
 	_party.locked = open
@@ -614,6 +619,8 @@ func _build_ui(minimap: Control) -> void:
 	_pack.used.connect(_show_message)
 	_combat = CombatScreen.new()
 	canvas.add_child(_combat)
+	_event_screen = EventScreen.new()
+	ui.add_child(_event_screen)
 	minimap.pressed.connect(_set_full_map.bind(true))
 	get_viewport().size_changed.connect(_apply_safe_area)
 	_apply_safe_area()

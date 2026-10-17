@@ -1,0 +1,54 @@
+[gd_resource type="Resource" script_class="RoomEvent" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="event"]
+[ext_resource type="Script" path="res://scripts/event_choice.gd" id="choice"]
+[ext_resource type="Script" path="res://scripts/event_outcome.gd" id="outcome"]
+[ext_resource type="Resource" path="res://data/items/restorative_draught.tres" id="draught"]
+[ext_resource type="Resource" path="res://data/enemies/goblin.tres" id="goblin"]
+
+[sub_resource type="Resource" id="o0_0"]
+script = ExtResource("outcome")
+weight = 2
+text = "Under the stones: a stoppered draught and a pot of rendered fat for the lamp."
+oil = 30.0
+loot = Dictionary[SupplyItem, int]({ExtResource("draught"): 1})
+
+[sub_resource type="Resource" id="o0_1"]
+script = ExtResource("outcome")
+weight = 1
+text = "The charm rattles as the stones shift. Footsteps answer from the dark."
+ambush = Array[EnemyType]([ExtResource("goblin")])
+
+[sub_resource type="Resource" id="c0"]
+script = ExtResource("choice")
+label = "Dig through the stones"
+time_cost = 3
+outcomes = Array[EventOutcome]([SubResource("o0_0"), SubResource("o0_1")])
+
+[sub_resource type="Resource" id="o1_0"]
+script = ExtResource("outcome")
+weight = 1
+text = "You cut the string and catch the charm before it can rattle."
+
+[sub_resource type="Resource" id="o1_1"]
+script = ExtResource("outcome")
+weight = 1
+text = "The charm clatters on the stones. You freeze. Nothing comes — this time."
+strain = 6.0
+
+[sub_resource type="Resource" id="c1"]
+script = ExtResource("choice")
+label = "Cut the charm down first"
+time_cost = 2
+investigation = true
+outcomes = Array[EventOutcome]([SubResource("o1_0"), SubResource("o1_1")])
+
+[resource]
+script = ExtResource("event")
+kind = 2
+title = "A goblin stash"
+clue = "Stones piled into a crude cairn. Something glints behind it, and a bone charm hangs above on a string."
+choices = Array[EventChoice]([SubResource("c0"), SubResource("c1")])
+min_depth = 2
+max_depth = 99
+weight = 2
