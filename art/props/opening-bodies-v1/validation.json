@@ -1,0 +1,18 @@
+{
+  "checks": 52,
+  "failures": [],
+  "godot": "4.7.2",
+  "integration": "assets only; live opening implementation preserved",
+  "physical_phone_test": false,
+  "scene_hook": "main.gd body_scene; floor origin, arbitrary yaw",
+  "viewports": [
+    [
+      1280,
+      720
+    ],
+    [
+      1278,
+      590
+    ]
+  ]
+}

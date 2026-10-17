@@ -1,0 +1,239 @@
+{
+  "canvas": [
+    128,
+    128
+  ],
+  "pivot": [
+    64,
+    120
+  ],
+  "pixel_size_metres": 0.015625,
+  "sprite_y_metres": 0.875,
+  "billboard": "fixed Y; upright card with pre-drawn lying pose",
+  "alpha": [
+    0,
+    255
+  ],
+  "filter": "nearest",
+  "palette": [
+    [
+      13,
+      10,
+      9
+    ],
+    [
+      23,
+      17,
+      16
+    ],
+    [
+      27,
+      21,
+      20
+    ],
+    [
+      30,
+      26,
+      26
+    ],
+    [
+      36,
+      23,
+      19
+    ],
+    [
+      36,
+      29,
+      27
+    ],
+    [
+      36,
+      32,
+      34
+    ],
+    [
+      42,
+      32,
+      28
+    ],
+    [
+      42,
+      35,
+      34
+    ],
+    [
+      44,
+      39,
+      41
+    ],
+    [
+      50,
+      34,
+      25
+    ],
+    [
+      50,
+      40,
+      35
+    ],
+    [
+      50,
+      47,
+      49
+    ],
+    [
+      51,
+      28,
+      20
+    ],
+    [
+      51,
+      44,
+      43
+    ],
+    [
+      52,
+      19,
+      15
+    ],
+    [
+      57,
+      36,
+      27
+    ],
+    [
+      57,
+      44,
+      38
+    ],
+    [
+      59,
+      48,
+      42
+    ],
+    [
+      61,
+      41,
+      30
+    ],
+    [
+      63,
+      54,
+      49
+    ],
+    [
+      66,
+      60,
+      55
+    ],
+    [
+      69,
+      45,
+      32
+    ],
+    [
+      69,
+      49,
+      37
+    ],
+    [
+      73,
+      48,
+      34
+    ],
+    [
+      75,
+      76,
+      81
+    ],
+    [
+      76,
+      50,
+      35
+    ],
+    [
+      76,
+      57,
+      44
+    ],
+    [
+      88,
+      59,
+      42
+    ],
+    [
+      97,
+      78,
+      65
+    ],
+    [
+      123,
+      96,
+      84
+    ],
+    [
+      180,
+      135,
+      105
+    ]
+  ],
+  "export": "BOX resize to common 128px width; translate floor contact to y=120 without trimming; alpha threshold 128; shared 32-colour median-cut palette; no dithering",
+  "sources": [
+    {
+      "id": "fallen-a",
+      "master": "fallen-a-oblique-master.png",
+      "master_size": [
+        1774,
+        887
+      ],
+      "master_sha256": "b18db7f28db2589a5d821c78d7dd392cfc523d7f72564ac597a324e4d96dfbcd"
+    },
+    {
+      "id": "fallen-b",
+      "master": "fallen-b-oblique-master.png",
+      "master_size": [
+        1983,
+        793
+      ],
+      "master_sha256": "ec1b8c9da8af298df2c7057be22953f279dcc003d7c5d0fd4207823b204c09cf"
+    }
+  ],
+  "exports": [
+    {
+      "file": "fallen-a.png",
+      "size": [
+        128,
+        128
+      ],
+      "visible_bounds": [
+        7,
+        90,
+        121,
+        120
+      ],
+      "pivot": [
+        64,
+        120
+      ],
+      "sha256": "4c495272ac177cc8b57f0fcb7f4b7e33202405870e0c81bb46c0c78f74ee2d65"
+    },
+    {
+      "file": "fallen-b.png",
+      "size": [
+        128,
+        128
+      ],
+      "visible_bounds": [
+        5,
+        96,
+        122,
+        120
+      ],
+      "pivot": [
+        64,
+        120
+      ],
+      "sha256": "9782c6daeee52ab5b57bf5b9cb834345a3f13322ae4cce22220a25b0bdae10bd"
+    }
+  ]
+}
