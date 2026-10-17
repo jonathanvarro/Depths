@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-17 – ChatGPT
+- Did: #29 created art/items/starter-v1: 12 new matching transparent weapon/protection/supply images plus a copy of the approved rough knife, 13 total. Added a labelled preview, full prompt/source manifest, asset map with SupplyItem.icon paths, and validation report. Visually checked all subjects and the preview; all source PNGs decode, have alpha 0–255, square 1254px canvases and exact source-copy hashes.
+- Next: Claude can assign oil-flask, party-ration, restorative-draught and clean-dressing textures to the corresponding data/items resources; README lists exact res:// paths. Review in the actual phone inventory, simplify/clean pixel edges and choose optimized export sizes before finalizing the library.
+- Watch out: Source art only; no supply/portrait code or item definitions changed. Antivenom/equipment art does not implement those systems. Native 128px icon standard is still unapproved; the preview is not a sprite atlas. Earlier knife variants are preserved.
+
 ## 2026-10-17 – Claude
 - Did: Recorded owner decisions for #11, #12, #14, #15 (issue comments + DESIGN.md) and created #30 for the opening escape (bodies in the room, panicking Mara, brief tutorial climb). Built #11: Injury resources (deep wound -5 max health, limp +1 time/step), dressing item binds one injury until camp, Companion.treat_injuries() for camp, traps hurt and may injure (placeholder for #16), card icons and Pack listing. 19 checks pass.
 - Next: #12 strain (time, darkness, lost health, injury, hunger -> panic and lost effectiveness). Hunger needs a small hunger clock that rations reset.

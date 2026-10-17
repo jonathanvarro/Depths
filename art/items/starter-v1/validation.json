@@ -1,0 +1,234 @@
+{
+  "checked": "2026-10-17",
+  "asset_count": 13,
+  "checks": [
+    "PNG decoding",
+    "RGBA alpha 0..255",
+    "nonempty silhouette",
+    "square canvas",
+    "unmodified source copy SHA-256"
+  ],
+  "assets": [
+    {
+      "file": "wooden-club.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "solid_bounds_alpha_128": [
+        147,
+        76,
+        1220,
+        1208
+      ],
+      "sha256": "54943cb657543d7b8dc3c399db2c4cdbef5a2a658ed07ec37ce6a9854b251e1b"
+    },
+    {
+      "file": "simple-spear.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "solid_bounds_alpha_128": [
+        113,
+        59,
+        1201,
+        1195
+      ],
+      "sha256": "11c101e0685af50d558d80404de7f37df9764f1742604846ec9c18ed5f1b9e56"
+    },
+    {
+      "file": "woodcutters-axe.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "solid_bounds_alpha_128": [
+        65,
+        104,
+        1222,
+        1175
+      ],
+      "sha256": "9d30d98f5a8bece4faa7882de7a8a3f61d25cc7628ebf9dbce8c7ee5720053a8"
+    },
+    {
+      "file": "plain-staff.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "solid_bounds_alpha_128": [
+        94,
+        60,
+        1205,
+        1196
+      ],
+      "sha256": "11f2cdde9d46aa4a7558d018c02c51a6ba804e201ba1ca45dddccbdf893c1d7c"
+    },
+    {
+      "file": "iron-sword.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "solid_bounds_alpha_128": [
+        74,
+        62,
+        1205,
+        1190
+      ],
+      "sha256": "a0e2dd35d0303859f354ae837eb1f08b93e814f3f80e477c739299288824a0e2"
+    },
+    {
+      "file": "wooden-shield.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "solid_bounds_alpha_128": [
+        183,
+        79,
+        1114,
+        1187
+      ],
+      "sha256": "383fcf51ea46696b6b2c3f579cde95842773090f691c20831fc6f59600b09a6b"
+    },
+    {
+      "file": "padded-coat.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "solid_bounds_alpha_128": [
+        196,
+        41,
+        1079,
+        1218
+      ],
+      "sha256": "ddca18f19002b022a1613e047ba7d6f8397415bd45d91aadae633701d68589ec"
+    },
+    {
+      "file": "oil-flask.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "solid_bounds_alpha_128": [
+        183,
+        92,
+        1078,
+        1166
+      ],
+      "sha256": "de4d982558fab48aa7df8ae18a5d1f17bf80b6523d3a5c85621c72b5c6fbeedb"
+    },
+    {
+      "file": "party-ration.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "solid_bounds_alpha_128": [
+        41,
+        158,
+        1227,
+        1119
+      ],
+      "sha256": "e4914c94ccb9e88083310ae750a33374843847a605790daec2d8b6aab02c0436"
+    },
+    {
+      "file": "clean-dressing.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "solid_bounds_alpha_128": [
+        82,
+        193,
+        1175,
+        1067
+      ],
+      "sha256": "3718b90b6359be6c9d01660e4d4e10985f53c09e05adbb7917169d8d7b69363c"
+    },
+    {
+      "file": "restorative-draught.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "solid_bounds_alpha_128": [
+        290,
+        138,
+        965,
+        1139
+      ],
+      "sha256": "49db6872720c2e5b60c544081ceb7120dc1fa6b76f00ce3796553424e16c1cf6"
+    },
+    {
+      "file": "antivenom.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "solid_bounds_alpha_128": [
+        493,
+        57,
+        823,
+        1168
+      ],
+      "sha256": "8fa70ca54d4a56808763f1740f86fc0fa942a4d356070e1c519eaf8526fc9ed6"
+    },
+    {
+      "file": "plain-knife.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "solid_bounds_alpha_128": [
+        56,
+        75,
+        1211,
+        1200
+      ],
+      "sha256": "5eeb11ecdf2d278ba17f89c5b7b076e194d545128069c35f4c7307d1badeb9fa"
+    }
+  ]
+}
