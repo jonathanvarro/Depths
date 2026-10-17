@@ -14,6 +14,11 @@ Format:
 ---
 
 ## 2026-10-17 – ChatGPT
+- Did: Refined #28's knife into art/concepts/items/plain-knife-v2.png using the built-in image editor: slightly rougher steel, sparse rust freckles and shallow pitting, retaining a usable edge and the original design. Preserved v1 and recorded the full edit prompt/provenance. Visually checked wear and identity; verified PNG integrity and alpha transparency.
+- Next: Owner reviews the rougher finish; use the preferred version for a native-size cleanup and actual inventory-slot check.
+- Watch out: Cosmetic concept revision only. No durability/stat penalties, inventory implementation or approved pixel-resolution standard added; the earlier 64/128 comparison still depicts v1.
+
+## 2026-10-17 – ChatGPT
 - Did: Inspected #28's knife concept at 64/128 pixels with same-size enlarged views and selectable backgrounds in chat. Verified native display sizes and viewer layout at 736/320 review widths; recorded the comparison in the item-art README. Source art unchanged.
 - Next: Owner reviews the comparison. Consider 128 x 128 working art plus simplified 64 x 64 compact icons, then validate in the actual phone inventory before adopting a standard.
 - Watch out: These are resampled viewing previews, not hand-authored native icons or exported assets. CSS pixel size is not physical iPhone size. No resolution standard or game UI changed.
