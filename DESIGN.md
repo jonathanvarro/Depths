@@ -1,6 +1,6 @@
 # Depths — Design Direction
 
-Last updated: 2026-10-16. This is a living design document for the owner, Claude Code, and Codex. It records the discussion so far; it is not a complete implementation specification. Depths is the working project name, not a confirmed release title.
+Last updated: 2026-10-17. This is a living design document for the owner, Claude Code, and Codex. It records the discussion so far; it is not a complete implementation specification. Depths is the working project name, not a confirmed release title.
 
 ## Premise
 
@@ -139,6 +139,8 @@ Other candidate resources: health and carrying capacity. Treasure can compete wi
 Rewards include treasure, equipment, knowledge, shortcuts, and safe resting places. Discoveries should change future options, not simply add score.
 
 Unknown encounters should offer suggestive evidence while retaining uncertainty. Players should often understand the type of risk they are accepting without knowing the precise outcome. Avoid making repeated arbitrary punishment the main source of difficulty.
+
+**Starter-cave economy research (2026-10-17, #25):** see [the sourced research and connected paper prototype](docs/starter-cave-economy-research.md) for proposed attributes, XP, rats/spiders/goblins, basic equipment, treasure budgets, delayed healing, camp services, recruitment and worked expedition costs. It also identifies missing reward/rest guarantees in the current generator and explains the connection between finite encounters and recovery safeguards. These are recommendations for owner review, not approved mechanics or playtested balance; individual death/loss rules, cave persistence, combat rules and exact values remain open. The confirmed #26 stash/recruitment decisions are preserved. No gameplay implementation is included.
 
 ## Visual and audio direction
 

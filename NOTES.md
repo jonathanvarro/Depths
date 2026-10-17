@@ -14,6 +14,11 @@ Format:
 ---
 
 ## 2026-10-17 – ChatGPT
+- Did: #25 researched the starter cave's connected economy using original developer/designer sources. Added docs/starter-cave-economy-research.md with proposed attributes, shared XP awards/individual talents, three enemy families, basic equipment, supplies, delayed recovery, camp prices, finite rewards, recruitment, a worked budget and owner decisions; linked it from DESIGN.md. Incorporated the newly committed #26 stash/recruitment decisions. Checked arithmetic, reward-range sensitivity, generator probabilities, local links and documentation whitespace.
+- Next: Owner reviews individual casualty/loss rules, finite cave persistence and recovery safeguards before adopting the numbers. Continue Milestone 2 at #8; use the report to inform later supplies/combat/encounter work.
+- Watch out: Research/paper prototype only; no game mechanics or generator changes, combat simulation or player testing. Current placement has no guaranteed chest/rest. Finite loot cannot fund unlimited retreats/recruits without a recovery fallback or another income rule. Values depend on unresolved combat and actual route lengths; instant combat healing would change the existing outside-combat recovery direction.
+
+## 2026-10-17 – ChatGPT
 - Did: #26 recorded campfire recruitment, tent stash/preparation, stored items surviving a full party wipe, and continuation of the same campaign with new recruits. Updated DESIGN.md's persistence decisions and the campsite's activity descriptions and proposed post-wipe flow. Checked documentation consistency and whitespace.
 - Next: Define recruitment availability/cost, carried-item outcomes, stash access between sites and a viable recovery path for an impoverished party before implementing #17/#18.
 - Watch out: These are design decisions only. No save/inventory/recruitment code added. Do not infer free recruitment, loss of all carried gear, corpse recovery or a dungeon reset; those rules remain open.
