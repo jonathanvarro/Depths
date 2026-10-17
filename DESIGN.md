@@ -115,7 +115,11 @@ Each companion has a distinct role, personality, vulnerability, and reason to en
 
 *Implementation:* heroes are `Companion` resources in `data/companions/` (name, role, motive, personality, vulnerability, portrait, health, effects over time). The placeholder starting survivor is **Mara**, the guide from the portrait concepts, starting wounded (14/20). One step = one unit of time.
 
-**Decided 2026-10-17 (#8): the survivor starts on the deepest floor, where the companions died, and must climb out to the campsite.** On the deepest floor the generator puts the survivor's start in the room farthest from the way up (where the way down would be on other floors); the game opens there with "Your companions lie still. Find the way out." Reaching the way up on the first floor leads out toward camp (the campsite itself is #17/#18). Still open: how the companions' deaths are shown (bodies, remains, a scene) and how long/dangerous the escape should be — the economy research recommends a short, gentle route for the wounded survivor.
+**Decided 2026-10-17 (#8): the survivor starts on the deepest floor, where the companions died, and must climb out to the campsite.** On the deepest floor the generator puts the survivor's start in the room farthest from the way up (where the way down would be on other floors); the game opens there with "Your companions lie still. Find the way out." Reaching the way up on the first floor leads out toward camp (the campsite itself is #17/#18). **Decided 2026-10-17 (#30):** the companions' **bodies are in the starting room**; Mara is **hurt, confused and panicking** to leave. The escape is **brief — shorter than three full floors** — and doubles as a **tutorial** introducing the controls, setting and character.
+
+**Decided 2026-10-17 (#11): injuries.** Two to start, both liked by the owner: a **deep wound** (lowers maximum health) and a **limp** (each step costs extra time). An injury can only be **temporarily** eased in the field (e.g. a dressing) and is **properly treated at camp**.
+
+**Decided 2026-10-17 (#12): strain** rises from **time, darkness, lost health, injury and hunger**, and high strain causes **panicking and lost effectiveness**.
 
 Strain should affect decisions and behaviour, rather than exist only as a number. Possible reactions include hesitation, requests to retreat, recklessness, and disagreement. Personal motives can make a particular discovery especially tempting to one person.
 
@@ -130,6 +134,8 @@ Combat is turn-based. The room view becomes the battlefield while heroes remain 
 Exploration knowledge can provide an advantage or help avoid an unnecessary fight. Fighting should offer worthwhile gains while carrying lasting costs.
 
 Possible objectives include defeating an enemy, protecting a companion, recovering an object, or holding a threat back while clearing an exit. Retreat should involve a meaningful decision; its exact mechanics remain open.
+
+**Decided 2026-10-17 (#14, #15):** a hero's turn offers **attack, defend, or use an item**; a **magic system comes later**. Retreat is not decided — the owner's idea is that retreating moves the party to a random nearby spot at a cost of time and light. The cave's first enemies are **rats, spiders and goblins**, with room for more ideas.
 
 **Decided 2026-10-16 (#13): enemies appear in the first-person view.** A dedicated formation layout may be explored later. Do not assume the movement or combat of Greed & Darkness is the target. The owner likes its art styling but envisions these systems differently. Three party positions and a compact action set are starting proposals, not settled rules.
 
@@ -273,7 +279,7 @@ Success criteria:
    **Phone layout check (#6, 2026-10-16):** the UI is laid out at 648px tall and stretched to the screen, widening on longer phones. Measured at iPhone SE (16:9), iPhone 15/16 and Pro Max (~2.17:1) shapes in the editor: touch-pad buttons come out at 51–58pt (Apple's minimum is 44pt); default text is 20px (≈12pt on SE) so legends stay legible; the HUD sits inside iOS's safe area so the camera cutout, rounded corners and home bar don't cover the map or controls. Not yet tried on a real iPhone (#20).
 2. ~~Movement scheme~~ — decided: forward/back/turn. Each step costs time (#10). Still open: strafing and room-transition presentation.
 3. Combat: enemies in first-person view (#13). Still open: targeting, positions, action economy, and retreat rules.
-4. Opening: how the companions' deaths are shown and how hard the escape is (#8; start location decided: deepest floor). Strain states, player agency, and the role of trust or relationships.
+4. Opening: decided (#30) — bodies in the room, brief tutorial escape. Still open: trust and relationships. Strain states, player agency, and the role of trust or relationships.
 5. Partly decided (#26): stored items survive a party wipe and the campaign continues with new recruits from the campfire. Still open: carried/equipped item losses or recovery, currency, recruitment costs/availability, cross-site stash access, and persistence of injuries, knowledge, relationships, shortcuts and dungeon state. Carrying surviving companions' history between sites remains a proposal.
 6. Per-site floor count, expedition duration, difficulty curve, completion objectives, refuge recovery/services, and transitions/revisits between sites. First site: cave + campsite; later castle/portal escalation is campaign direction rather than a finalized destination list.
 7. Coherent clue placement in procedural floors. (Navigability is guaranteed by the generator: rooms are joined incrementally, so every floor cell is reachable — #1.)
