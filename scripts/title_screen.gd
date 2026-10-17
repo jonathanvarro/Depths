@@ -70,6 +70,9 @@ func _ready() -> void:
 	_apply_margins()
 	get_viewport().size_changed.connect(_apply_margins)
 	_begin.grab_focus()
+	# For checking exported builds: `Depths.exe -- --begin` skips the title.
+	if "--begin" in OS.get_cmdline_user_args():
+		_begin.pressed.emit.call_deferred()
 
 
 func _apply_margins() -> void:

@@ -14,6 +14,11 @@ Format:
 ---
 
 ## 2026-10-17 – Claude
+- Did: #19 Windows build. export_presets.cfg "Windows Desktop": single embedded-pck build/windows/Depths.exe (~130 MB, ~109 MB of it the engine), excludes art/source and tools. Copied the exe to a folder with no project and ran it: title and dungeon both start on D3D12 with no errors, and room events load (RoomEvents now errors if the folder is empty). Title screen accepts `-- --begin` to skip straight in, for checking builds. Steps in AGENTS.md "Building for Windows".
+- Next: #20 iPhone export (needs a Mac), #30 opening.
+- Watch out: Unsigned exe → SmartScreen warning for players. Not yet run on a second PC; no Windows icon set (application/icon empty; needs an .ico).
+
+## 2026-10-17 – Claude
 - Did: #18. Title screen (scenes/title.tscn, now the main scene) built from ChatGPT's title-v1 study and font roles: Begin expedition (loads main.tscn), Settings disabled ("coming later"), Quit desktop-only, safe-area margins, keyboard focus. Preparation screen (preparation_screen.gd) shown before expeditions 2+ after the placeholder camp stop: party cards, condition and injuries, lantern, pack with item icons, Enter the cave. Moved safe-area maths to scripts/safe_area.gd. Title/prep checks + all suites pass on desktop and simulated iPhone.
 - Next: #30 opening escape; campsite. ChatGPT: clean dressing still has no pack icon (data/items/dressing.tres `icon`).
 - Watch out: Fonts are applied only to title and preparation screens; a shared theme waits for the owner's typography decision. F5 now opens the title; F6 on main.tscn skips it.

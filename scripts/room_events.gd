@@ -14,6 +14,8 @@ var rng := RandomNumberGenerator.new()
 func _init() -> void:
 	rng.randomize()
 	library = load_library()
+	if library.is_empty():
+		push_error("No room events found in %s" % EVENTS_DIR)
 
 
 ## Every RoomEvent in data/events (works in exported builds too, where

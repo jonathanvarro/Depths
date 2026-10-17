@@ -29,6 +29,25 @@ this via CLAUDE.md; ChatGPT Codex reads AGENTS.md directly). Keep it current.
 - **Where the repo lives:** on the owner's PC the one working copy is
   `E:\GitHub\Depths`. An older copy under OneDrive is retired; don't use it.
 
+## Building for Windows (#19)
+
+The `Windows Desktop` preset in `export_presets.cfg` makes one self-contained
+`build/windows/Depths.exe` (game data embedded; `build/` is git-ignored).
+It needs Godot's 4.7.2 export templates (editor: Editor > Manage Export
+Templates > Download and Install; already installed on the owner's PC).
+
+- **In the editor:** Project > Export > Windows Desktop > Export Project.
+- **From a terminal:** `Godot_v4.7.2-stable_win64_console.exe --headless
+  --path . --export-release "Windows Desktop" build/windows/Depths.exe`
+- **Share it:** send `Depths.exe` (zip it if needed). No Godot install is
+  needed to play. It's unsigned, so Windows SmartScreen may warn on first
+  launch ("More info" > "Run anyway").
+- **Check a build:** `Depths.exe --quit-after 400 -- --begin` skips the
+  title and runs the dungeon briefly; errors print to the console.
+- The preset leaves out `art/source/` and `tools/`. Everything else under
+  `res://` is included (data/events is loaded by folder listing, so a
+  "selected scenes only" export would drop it).
+
 ## Project structure
 
 - `DESIGN.md` – living design direction and proposed first playable scope.
