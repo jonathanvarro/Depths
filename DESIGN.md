@@ -87,6 +87,8 @@ Retreat has a destination: the current site's nearby refuge. It provides the set
 
 Suggested initial presentation: one campsite screen with a few selectable activities rather than a large walkable town or settlement-building system. Food and treatment should respect the established delayed recovery/rest rules; returning should not implicitly erase every injury or strain state.
 
+**Campsite interaction direction (2026-10-16):** the owner wants little tents/activity areas that highlight and can be clicked or tapped to enter. See [the campsite design](docs/campsite-design.md) for the proposed clearing, five destinations (your tent, supplies, treatment, campfire, cave path), mouse/touch behaviour, and activity-view flow. The spatial interaction is the owner's direction; the service selection and detailed layout are proposals for review. This is a design study, not an implemented refuge or finalized recovery/economy rules.
+
 The suggested retreat flow is to return through the dungeon to its entrance before reaching camp, with discovered shortcuts potentially easing later returns. Travel costs, escape exceptions, refuge services, recovery timing, and prices still need design decisions. Rest spots inside the dungeon remain distinct from the outside refuge.
 
 ### Continuity and escalation proposals
