@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-16 – ChatGPT
+- Did: #23 recorded the owner's required recurring greedy merchant, following the party between rest locations and growing increasingly obese and gross. Added docs/merchant-design.md, integrated him into the campsite's supply awning, and generated/preserved art/concepts/merchant/merchant-progression-v1.png with full prompt/provenance. Visually reviewed the three-stage concept and checked documentation links/whitespace.
+- Next: Owner reviews the identity and progression. Master Tallow, the red cap/gold tooth/moustache/rings, and three-stage structure are proposals. Resolve trading, rest-location coverage and progression triggers before implementation; prepare aligned portrait masters after art approval.
+- Watch out: Generated flattened concept only; no shop, follower logic or appearance progression implemented. Name and supernatural backstory are not settled. No game scripts changed in this task.
+
 ## 2026-10-16 – Claude
 - Did: #5 full-screen map. Tap/click the minimap (mouse or touch) or press M/Tab to open; tap anywhere, M/Tab or Escape closes. Shows the explored floor scaled to fit (zooms to explored area, at least 15 cells across), title with depth, and a legend using the environment theme's names. Party is locked while it's open; it won't open over a Go/Stay prompt. minimap.gd now has a `full_view` mode sharing all drawing code. Recoloured passage bars (webs pale blue-grey, roots near-black) so they read against the floor and don't look like encounters. Tested open/close by mouse, touch, and keys in-game.
 - Next: Milestone 1 remaining: #6 HUD at phone resolution, #7 placeholder audio.

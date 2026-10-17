@@ -6,6 +6,8 @@ Design study recorded 2026-10-16 for #22. This specifies a proposed refuge scree
 
 The cave's refuge is a campsite with several little tents or activity areas. Areas can be highlighted and clicked/tapped to take the player into their respective views. Retain this spatial presentation as the camp's main navigation.
 
+The owner subsequently specified a greedy recurring merchant who follows the party between rest locations and becomes increasingly obese and gross. He occupies the existing supply awning; see [the merchant design](merchant-design.md) and [progression concept](../art/concepts/merchant/merchant-progression-v1.png). His presence and visual escalation are now established direction; his identity, trading rules and precise progression stages remain proposals.
+
 ## Proposed composition
 
 A single fixed landscape view looks into a sheltered clearing at dusk. The central fire provides the warmest light. Patched canvas, bedrolls, crates and a treatment cot make it a small expedition camp. A rocky escarpment and dark trees frame the clearing; the cave path remains visible at the back right.
@@ -25,7 +27,7 @@ Suggested positions are proportional to the scene, excluding interface chrome. T
 
 | Area | Approximate centre (x, y) | Visual cue | Proposed destination and choices |
 | --- | --- | --- | --- |
-| Supplies | 19%, 44% | Open awning, counter, crates, oil tins | Review provisions and equipment; pack for the next descent. Buying, selling, stock and a persistent stash are undecided. |
+| Merchant (supply awning) | 19%, 44% | Open awning, recurring merchant, counter, coin scales and provisions | Meet the merchant; trade and review carried supplies. Exact buying/selling rules, prices, stock and a persistent stash are undecided. |
 | Treatment | 61%, 43% | Pale canvas, hanging cloth, low cot | Select a companion, inspect injuries and arrange treatment. Exact service provider, costs and recovery rules remain open. |
 | Your tent | 21%, 78% | Broad low tent and bedrolls | Review party condition and equipment; arrange a rest. Show expected recovery, duration and supplies before confirming. |
 | Campfire | 48%, 71% | Fire ring, kettle, seats, companions | Speak to companions and review discoveries. Dialogue, journal and relationship effects are proposals. |
