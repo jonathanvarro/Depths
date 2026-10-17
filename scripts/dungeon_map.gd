@@ -138,6 +138,22 @@ func reachable_from(from: Vector2i) -> Dictionary:
 	return seen
 
 
+## Steps from `from` to every cell reachable on foot (breadth-first).
+func walking_distances(from: Vector2i) -> Dictionary:
+	var distance := {from: 0}
+	var queue: Array[Vector2i] = [from]
+	var i := 0
+	while i < queue.size():
+		var cell := queue[i]
+		i += 1
+		for offset in [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]:
+			var next: Vector2i = cell + offset
+			if not distance.has(next) and is_passable(next):
+				distance[next] = distance[cell] + 1
+				queue.append(next)
+	return distance
+
+
 func floor_cell_count() -> int:
 	var count := 0
 	for row in _rows:

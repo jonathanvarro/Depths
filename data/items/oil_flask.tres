@@ -13,3 +13,4 @@ amount = 100
 duration = 0
 use_time = 2
 use_message = "You refill the lantern."
+usable_in_combat = true

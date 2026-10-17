@@ -25,3 +25,6 @@ enum Effect {
 @export var use_time := 1
 ## Shown after use.
 @export var use_message := ""
+## Food and healing are for outside combat (#10); only items marked here can
+## be used in a fight.
+@export var usable_in_combat := false

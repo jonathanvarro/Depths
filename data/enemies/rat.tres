@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="EnemyType" format=3]
+
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="1"]
+[ext_resource type="PackedScene" path="res://art/enemies/cave-v1/rat/scene.tscn" id="2"]
+[ext_resource type="Resource" path="res://data/injuries/deep_wound.tres" id="3"]
+[ext_resource type="Resource" path="res://data/injuries/limp.tres" id="4"]
+
+[resource]
+script = ExtResource("1")
+display_name = "Rat"
+scene = ExtResource("2")
+max_health = 6
+damage_min = 1
+damage_max = 3
+accuracy = 0.7
+initiative = 12
+injury_chance = 0.05
+injuries = Array[Injury]([ExtResource("3"), ExtResource("4")])
+attack_verb = "bites"

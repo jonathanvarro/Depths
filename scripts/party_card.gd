@@ -42,6 +42,7 @@ var _icons: HBoxContainer
 var _last_health := -1
 var _style: StyleBoxFlat
 var _strain_bar: ProgressBar
+var _turn_marker: ColorRect
 
 
 func _init() -> void:
@@ -58,6 +59,13 @@ func _init() -> void:
 	column.add_theme_constant_override("separation", 2)
 	column.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(column)
+
+	_turn_marker = ColorRect.new()  # gold bar: this hero's turn in combat
+	_turn_marker.color = Color("e8c25a")
+	_turn_marker.custom_minimum_size = Vector2(0, 4)
+	_turn_marker.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_turn_marker.visible = false
+	column.add_child(_turn_marker)
 
 	_portrait = PortraitView.new()
 	_portrait.custom_minimum_size = PORTRAIT_SIZE
@@ -114,6 +122,10 @@ func show_companion(hero: Companion) -> void:
 		_portrait.show_portrait(hero.portrait_set, hero.portrait)
 	modulate.a = 1.0
 	refresh()
+
+
+func set_active(active: bool) -> void:
+	_turn_marker.visible = active
 
 
 func show_empty() -> void:

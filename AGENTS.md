@@ -77,6 +77,14 @@ this via CLAUDE.md; ChatGPT Codex reads AGENTS.md directly). Keep it current.
 - `scripts/strain.gd` – strain rules and tuning numbers (states,
   effectiveness, per-time gains, event spikes, panic chance). Companion has
   `strain` and `hunger`; F3 + L adds strain for testing.
+- `scripts/enemy_type.gd` + `data/enemies/*.tres` – enemy numbers and the
+  art scene (Node3D with AnimatedSprite3D "Sprite": idle/attack/hurt).
+- `scripts/combat_state.gd` – combat rules without visuals (turn order,
+  attack/defend/item/retreat, enemy attacks, results); testable directly.
+- `scripts/combat_screen.gd` – combat UI: turn text, log, tappable enemy
+  tags, action panel. main.gd `_start_combat()` spawns foes, hides the
+  movement pad, and handles victory/retreat/defeat. Encounter groups by
+  depth are `ENCOUNTER_GROUPS` in main.gd.
 - `scripts/pack_screen.gd` – the Pack screen (Pack button under the minimap,
   or I/B). PartyState.use_item(), rest(), cannot_use_reason() do the work.
 - `audio/placeholder/` – generated placeholder sounds (see its README for

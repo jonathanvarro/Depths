@@ -104,7 +104,9 @@ func most_hurt() -> Companion:
 
 
 ## Why `item` can't be used right now, or "" if it can.
-func cannot_use_reason(item: SupplyItem) -> String:
+func cannot_use_reason(item: SupplyItem, in_combat := false) -> String:
+	if in_combat and not item.usable_in_combat:
+		return "Not during a fight"
 	if supplies.count(item) <= 0 and not (item.effect == SupplyItem.Effect.REFILL_LANTERN and supplies.open_flask > 0.0):
 		return "None left"
 	match item.effect:
@@ -125,8 +127,8 @@ func cannot_use_reason(item: SupplyItem) -> String:
 
 ## Uses one `item` (outside combat). Returns a message to show, or "" if it
 ## couldn't be used.
-func use_item(item: SupplyItem) -> String:
-	if cannot_use_reason(item) != "":
+func use_item(item: SupplyItem, in_combat := false) -> String:
+	if cannot_use_reason(item, in_combat) != "":
 		return ""
 	match item.effect:
 		SupplyItem.Effect.REFILL_LANTERN:
@@ -143,7 +145,8 @@ func use_item(item: SupplyItem) -> String:
 		SupplyItem.Effect.DRESS_INJURY:
 			supplies.take(item)
 			first_undressed_injured().dress_injury()
-	advance_time(item.use_time)
+	if not in_combat:  # in a fight, the round's time covers it
+		advance_time(item.use_time)
 	return item.use_message
 
 

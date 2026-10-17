@@ -30,6 +30,15 @@ const StrainRules := preload("res://scripts/strain.gd")
 @export var portrait: Texture2D
 @export var max_health := 20
 @export var health := 20
+@export_group("Fighting")
+## Damage range of a basic attack (a plain knife for now; weapons later).
+@export var attack_min := 2
+@export var attack_max := 4
+@export_range(0.0, 1.0) var accuracy := 0.75
+## Higher acts earlier in a combat round.
+@export var initiative := 10
+@export_group("")
+
 ## 0 (calm) to 100 (panicking). See strain.gd.
 @export_range(0.0, 100.0) var strain := 0.0
 ## Time units since the hero last ate.

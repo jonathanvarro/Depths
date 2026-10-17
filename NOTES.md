@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-17 – Claude
+- Did: #14 combat prototype using ChatGPT's enemy art and #13 layout study. Rules in combat_state.gd (initiative order, attack with light/strain-adjusted hit chance, defend halves damage and draws attacks, combat-only items, retreat trial, enemy injuries, 1 time per round); UI in combat_screen.gd (log, tappable enemy tags, action panel replacing the pad, gold turn marker on cards); EnemyType data for rat/spider/goblin. Lone-survivor balance: groups capped at party size; injury chances lowered. 13 rule checks, 6000 simulated fights, in-game win/retreat/defeat via buttons at desktop and iPhone sizes, and all earlier suites + ChatGPT's 51 art checks pass.
+- Next: #15 distinct enemy tactics (and deeper-floor combinations); ChatGPT's simpler enemy redraw (art/source/enemies-simple-v1, uncommitted, left alone) can replace the sprites via EnemyType.scene.
+- Watch out: Goblin is still ~31% lethal for lone wounded Mara; #30's opening should choose its encounters deliberately. No enemy death animation yet (fade out).
+
 ## 2026-10-17 – ChatGPT
 - Did: #31 art handoff in art/expedition-v1/README.md: aligned 192px Mara blink/talk/condition layers assigned in her PortraitSet; cave-specific 64px surfaces and five transparent 256px feature scenes assigned in the cave theme; three 64px Pack icons assigned to items; nine registered rat/spider/goblin poses with ready-to-use scene/SpriteFrames resources. Added desktop/phone combat presentation studies for #13. Preserved generated masters and full prompts under art/source; deterministic export scripts and validation reports included. Godot import succeeds; 51 resource/live portrait checks pass.
 - Next: #32 docs/enemy-art-direction.md records the owner's simpler-enemy direction, proposed 128px/32-colour/three-pose contract and reusable generation rules. Review art/enemies/style-study-v1/comparison.png: new goblin redraw uses 24 colours, exact 128px transparent canvas and pivot (64,120). After review, rebuild the complete enemy pose families to match; Claude can use the current art resources immediately while implementing #14 combat.
