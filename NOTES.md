@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-17 – ChatGPT
+- Did: #34 recorded the owner's rough-paper, hero-drawn map direction in docs/hand-drawn-map-design.md, linked from DESIGN.md. Generated art/concepts/map/hero-map-v1.png with the built-in image tool; full prompt/provenance saved beside it. Proposed charcoal contours without visible cell squares, sparse rock hatching/notes, distinct discovery symbols, a quiet parchment centre and a simpler corner-map version. Checked image integrity/source-copy equality and local documentation links.
+- Next: Owner reviews the visual direction; a later renderer task can build continuous outlines from explored grid data with stable small line variation, preserving reliable connections, scale, facing and discovery. Guide includes phone readability checks and implementation boundaries.
+- Watch out: Concept/design only; scripts/minimap.gd and live UI are unchanged. Mockup is illustrative, not an actual seed or complete symbol set. Labels/Close must be real UI with safe-area/touch sizing; texture and handwriting must not obscure routes. Ongoing Claude encounter changes remain separate.
+
 ## 2026-10-17 – Claude
 - Did: #15 distinct tactics. EnemyType gained `tactic` and `intro`; combat_state.gd implements darting rats (target weakest, may flee when hurt; all-fled = victory), web-and-venom spiders (opening web -25% next action, 2-turn non-stacking venom ticking at turn start via `events`, ignore defenders), cunning goblins (flank non-defenders, shield when hurt halving damage until their next turn). Combat screen shows intros, venom events, webbed/poisoned in the turn line, [shield] on tags, fades fleeing enemies. ENCOUNTER_GROUPS mix tactics by depth, capped at party size. 18 tactic checks + balance sims pass; all earlier suites pass; in-game fights verified with ChatGPT's new cave-simple-v1 sprites.
 - Next: #16 room encounters (chests, traps, strange objects, rest spots with choices and clues) or #30 opening.

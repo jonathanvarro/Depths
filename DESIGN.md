@@ -48,6 +48,8 @@ Preparation should create responsibility: the player can connect outcomes to cho
 
 Preserve the readable map from the visual concepts, adapted to the grid. Show explored rooms and routes, the current location, blocked doors, uncertain passages, stairs, and known routes toward safety. Notes and unresolved discoveries provide reasons to revisit rooms.
 
+**Map appearance (2026-10-17, #34):** the owner wants rougher paper and a map that feels drawn by the heroes, with no perfect visible grid. See [the parchment-map design and visual study](docs/hand-drawn-map-design.md): worn edges, charcoal room/corridor contours, sparse annotations and clear symbols. Keep actual connections, scale, discovery and facing reliable. Full map can carry more drawing detail; the corner map stays sparse. This is recorded design direction, not a live renderer change.
+
 Within each dungeon site, the objective is to reach its bottom floor or deepest objective and complete that site's challenge. Completion opens the way to another site; the campaign is no longer envisioned as only one increasingly deep dungeon. Exact objectives, completion conditions, and final encounters remain undecided.
 
 Successive floors should become harder through stronger enemies, new behaviours, more demanding combinations, traps, and environmental hazards. Avoid relying solely on larger enemy health and damage values. Increased danger should be accompanied by rewards worth considering: equipment, treasure, knowledge, shortcuts, and access to deeper areas.
