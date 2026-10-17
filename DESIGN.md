@@ -4,7 +4,7 @@ Last updated: 2026-10-16. This is a living design document for the owner, Claude
 
 ## Premise
 
-A dark, first-person dungeon crawler about party strain, dangerous discoveries, and the temptation to keep going. Lead a small party through a procedurally generated dungeon to reach its bottom floor.
+A dark, first-person dungeon crawler about party strain, dangerous discoveries, and the temptation to keep going. Lead a small party through procedurally generated dungeon sites, each paired with a nearby refuge. Begin with a cave and campsite; later sites grow in danger and importance. Within a site, descend toward its deepest objective.
 
 **The goal gets closer as the party becomes less able to reach it.** Lost hit points, persistent injuries, dwindling supplies, emotional strain, and increasingly difficult floors make each decision to continue more consequential. Discoveries offer opportunities to recover, gain an advantage, or take another tempting risk.
 
@@ -48,13 +48,54 @@ Preparation should create responsibility: the player can connect outcomes to cho
 
 Preserve the readable map from the visual concepts, adapted to the grid. Show explored rooms and routes, the current location, blocked doors, uncertain passages, stairs, and known routes toward safety. Notes and unresolved discoveries provide reasons to revisit rooms.
 
-The main objective is to reach the bottom floor. Its story purpose and final encounter are undecided.
+Within each dungeon site, the objective is to reach its bottom floor or deepest objective and complete that site's challenge. Completion opens the way to another site; the campaign is no longer envisioned as only one increasingly deep dungeon. Exact objectives, completion conditions, and final encounters remain undecided.
 
 Successive floors should become harder through stronger enemies, new behaviours, more demanding combinations, traps, and environmental hazards. Avoid relying solely on larger enemy health and damage values. Increased danger should be accompanied by rewards worth considering: equipment, treasure, knowledge, shortcuts, and access to deeper areas.
 
 Allow moments of recovery within the overall decline. A defensible room or useful cache can make another floor seem possible. Descent should be a deliberate choice made with the party's condition and return route in mind.
 
 Returning safely with useful gains should matter even when the bottom is not reached. Exact return-travel hazards, stair rules, and expedition persistence are unresolved.
+
+## Campaign progression and refuges — recorded 2026-10-16
+
+### Agreed direction
+
+The campaign progresses through **dungeon + refuge combinations**, starting small and of low importance, then building toward a castle, a demon portal, or a similarly significant threat. The first site is **a cave paired with a campsite**. Completing a site allows the party to move to another location with its own dungeon and refuge.
+
+Preserve two scales of progression:
+
+- **Within a site:** prepare at its refuge, explore increasingly difficult depths, retreat to recover when necessary, and return to attempt its objective.
+- **Between sites:** complete the current challenge and move onward to a more consequential destination, introducing different environments and threats.
+
+This direction replaces the assumption that the whole campaign must take place in one dungeon. The initial cave-and-campsite loop should stand on its own before building later sites. Recording the wider campaign does not authorize implementing every destination now.
+
+### Possible route, not a fixed content list
+
+| Stage | Refuge | Dungeon | Possible emphasis |
+| --- | --- | --- | --- |
+| First site | Small campsite | Cave and abandoned workings | Learn exploration, resources, retreat, and recovery |
+| Later site | Occupied chapel | Old crypt | Introduce unnatural threats and sealed passages |
+| Later site | Expedition outpost | Ruined fortress | Longer expeditions and more demanding objectives |
+| Late campaign | Encampment | Castle and its depths | Bring together the party's accumulated experience |
+| Possible finale | Makeshift sanctuary | Demon portal or breach | A high-stakes final expedition |
+
+Only cave + campsite is the initial site choice. The intermediate destinations, their order, and whether the castle/portal are one site or separate sites remain illustrative. Avoid committing to a full campaign asset list before testing the first site.
+
+### Refuge purpose
+
+Retreat has a destination: the current site's nearby refuge. It provides the setting for recovery, provisioning, party preparation, and reflection before another attempt. A campsite with other explorers is a useful initial concept; a town or more elaborate settlement is not required.
+
+Suggested initial presentation: one campsite screen with a few selectable activities rather than a large walkable town or settlement-building system. Food and treatment should respect the established delayed recovery/rest rules; returning should not implicitly erase every injury or strain state.
+
+The suggested retreat flow is to return through the dungeon to its entrance before reaching camp, with discovered shortcuts potentially easing later returns. Travel costs, escape exceptions, refuge services, recovery timing, and prices still need design decisions. Rest spots inside the dungeon remain distinct from the outside refuge.
+
+### Continuity and escalation proposals
+
+Keeping companions, scars, equipment, relationships, and important discoveries across sites would give the campaign emotional continuity: the people approaching the castle are the ones who began at the cave campfire. This is a preferred design proposal, not a finalized save/persistence or permanent-death rule.
+
+Escalation should introduce new hazards, tactics, and preparation needs as well as stronger enemies. An initially local problem could reveal evidence of a larger threat, providing a reason to travel onward; the specific story is open.
+
+Open campaign questions: what counts as completing a site, whether old sites remain accessible, whether moving on is reversible, how revisits affect procedural layouts and cleared encounters, and what carries forward between sites and expeditions.
 
 ## Companions and strain
 
@@ -163,9 +204,10 @@ The wardrobe test demonstrates a tunic toggle and provides neutral eye/mouth rep
 
 ## Proposed first playable
 
-Build one short, complete expedition before expanding the dungeon:
+Build the **cave + campsite** as a complete initial loop before expanding into a multi-site campaign:
 
-- Three compact floors with a temporary bottom-floor objective and a way to return.
+- A small cave dungeon with a completion objective and a route back to the campsite. Three compact floors remain a scope proposal, not a fixed requirement.
+- A minimal campsite where the party can recover, replenish supplies, and prepare another attempt. Include retreat and re-entry; do not require a town or travel system for this first version.
 - Three companions with distinct actions and visible conditions.
 - A small reusable selection of encounters and enemy types.
 - Basic supplies, health, one persistent injury mechanic, and a few strain states.
@@ -187,8 +229,8 @@ Success criteria:
 2. ~~Movement scheme~~ — decided: forward/back/turn. Each step costs time (#10). Still open: strafing and room-transition presentation.
 3. Combat: enemies in first-person view (#13). Still open: targeting, positions, action economy, and retreat rules.
 4. Strain states, player agency, and the role of trust or relationships.
-5. What persists between expeditions: companions, death, injuries, equipment, knowledge, and shortcuts.
-6. Floor count, expedition duration, difficulty curve, and bottom-floor purpose.
+5. What persists between expeditions and sites: companions, death, injuries, equipment, knowledge, relationships, and shortcuts. Carrying party history forward is a proposal; exact rules remain open.
+6. Per-site floor count, expedition duration, difficulty curve, completion objectives, refuge recovery/services, and transitions/revisits between sites. First site: cave + campsite; later castle/portal escalation is campaign direction rather than a finalized destination list.
 7. Coherent clue placement in procedural floors. (Navigability is guaranteed by the generator: rooms are joined incrementally, so every floor cell is reachable — #1.)
 8. Environment resolution, final portrait cleanup/export workflow, animation budget, body-template proportions, and horror boundaries. Portrait working canvas is 192 × 192; see the portrait-system section for agreed direction and remaining proposals.
 
