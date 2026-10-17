@@ -14,6 +14,11 @@ Format:
 ---
 
 ## 2026-10-17 – Claude
+- Did: #17 expedition outcomes. expedition.gd records each expedition (start snapshot + counters for floors, enemies, retreats, events, loot via RoomEvents.loot_found) and builds gained/lost lines; results_screen.gd shows them. Endings: floor-1 way up asks to leave (RETURNED); last hero falling in combat or outside it (WIPED, "Begin again" reloads); on expeditions 2+, entering the deepest floor's 'S' cell asks to end there (REACHED_BOTTOM). New expedition: placeholder camp stop (full health, strain -40, hunger 0, injuries kept), re-enter floor 1, floors cached. 17 outcome checks + all suites pass at desktop and iPhone sizes; verified restart with the real current scene.
+- Next: #18 title screen and preparation, #30 opening, campsite (ChatGPT's design) replacing the placeholder camp stop.
+- Watch out: "Reached the bottom" is a stand-in objective. Untracked art/concepts/interface/ is ChatGPT's; left alone.
+
+## 2026-10-17 – Claude
 - Did: #16 room events. Data-driven RoomEvent/EventChoice/EventOutcome resources in data/events (8 events: abandoned pack, goblin stash, tripwire, hollow floor, pale idol, still pool, dry alcove, old campsite); room_events.gd picks by kind and depth and resolves outcomes (health, delayed heal, strain, injury, oil, loot, rest, ambush); event_screen.gd shows clue, choices and an automatic "Leave it" (keeps it for later). Replaced the placeholder trap and rest prompt. Generator content mix now varies by depth (walls unchanged). 22 event checks + all earlier suites pass at desktop/iPhone sizes.
 - Next: #30 opening escape, or Milestone 3's #17 outcomes.
 - Watch out: Outcomes affect the party's first living hero ("whoever acted"); choosing who acts comes with recruits. Rewards are supplies only until gold/treasure exists. Left ChatGPT's uncommitted edits (DESIGN.md, NOTES.md, docs/*, portrait README) unstaged; my doc additions were staged on top of HEAD.

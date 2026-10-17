@@ -13,6 +13,12 @@ const PartyCard := preload("res://scripts/party_card.gd")
 const PackScreen := preload("res://scripts/pack_screen.gd")
 const EventScreen := preload("res://scripts/event_screen.gd")
 const RoomEvents := preload("res://scripts/room_events.gd")
+const Expedition := preload("res://scripts/expedition.gd")
+const ResultsScreen := preload("res://scripts/results_screen.gd")
+## Placeholder camp stop between expeditions until the campsite exists
+## (#18/#22): rest restores health and eases strain; injuries wait for the
+## nurse.
+const CAMP_STRAIN_RELIEF := 40.0
 ## Injuries the F3 + K debug key picks from.
 const DEBUG_INJURIES: Array[Injury] = [
 	preload("res://data/injuries/deep_wound.tres"),
@@ -140,6 +146,9 @@ var _pack: Control  # pack_screen.gd
 var _combat: Control  # combat_screen.gd
 var _event_screen: Control  # event_screen.gd
 var _room_events = RoomEvents.new()
+var _expedition  # expedition.gd: this expedition's record (#17)
+var _results: Control  # results_screen.gd
+var _ending := false
 var _in_combat := false
 var _touch_pad: Control
 var _pack_button: Button
@@ -159,6 +168,8 @@ func _ready() -> void:
 	_party_state.add_member(starting_hero)
 	for item in starting_supplies:
 		_party_state.supplies.add(item, starting_supplies[item])
+	_expedition = Expedition.new(_party_state, 1)
+	_room_events.loot_found.connect(func(loot): _expedition.add_found(loot))
 
 	_minimap = Minimap.new()
 	_build_ui(_minimap)
@@ -219,6 +230,7 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 	if _depth != 0:
 		_party_state.complete_pending_effects()  # owner rule (#8): durations finish between floors
 	_depth = depth
+	_expedition.visit_floor(depth)
 	if not _floors.has(depth):
 		_floors[depth] = DungeonMap.new(_make_layout(depth), depth)
 		_assign_events(_floors[depth])
@@ -251,6 +263,12 @@ func _make_layout(depth: int) -> PackedStringArray:
 
 
 func _on_party_entered_cell(cell: Vector2i) -> void:
+	# Later expeditions: the deepest point, where the others fell, is the
+	# goal for now (the site's real objective is still undecided).
+	if _expedition.number > 1 and _depth == floors_in_site and cell == _map.start_cell and not use_debug_layout:
+		_ask("The bottom of the cave, where the others fell. End the expedition here?",
+				_end_expedition.bind(Expedition.Ending.REACHED_BOTTOM))
+		return
 	var content: int = _map.enter(cell)
 	match content:
 		DungeonMap.Content.NONE:
@@ -263,7 +281,8 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 			_run_event(cell)
 		DungeonMap.Content.STAIRS_UP:
 			if _depth == 1:
-				_show_message(environment_theme.exit_message)  # campsite comes later
+				_ask("%s Leave the cave?" % environment_theme.exit_message,
+						_end_expedition.bind(Expedition.Ending.RETURNED))
 			else:
 				_ask(environment_theme.ascent_prompt, _go_to_floor.bind(_depth - 1, Arrival.FROM_BELOW))
 		_:
@@ -295,7 +314,9 @@ func _run_event(cell: Vector2i) -> void:
 	_party.locked = false
 	if result["left"]:
 		_map.triggered.erase(cell)
-	elif not result["ambush"].is_empty():
+		return
+	_expedition.events_resolved += 1
+	if not result["ambush"].is_empty():
 		var types: Array[EnemyType] = []
 		types.assign(result["ambush"])
 		_start_combat(cell, types)
@@ -325,6 +346,9 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 	_in_combat = false
 	_touch_pad.visible = true
 	_pack_button.disabled = false
+	for foe in state.foes:
+		if foe.health <= 0:
+			_expedition.add_defeated(foe.type.display_name)
 	match result:
 		CombatState.Result.VICTORY:
 			_party.locked = false
@@ -332,11 +356,47 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 		CombatState.Result.RETREAT:
 			_party.locked = false
 			_map.triggered.erase(cell)  # they're still there, at full strength
+			_expedition.retreats += 1
 			_flee_from(cell)
 		CombatState.Result.DEFEAT:
-			# Proper endings come with #17; for now offer a fresh start.
-			_ask("%s has fallen. Begin again?" % _party_state.members[0].display_name,
-					func(): get_tree().reload_current_scene(), func(): _party.locked = true)
+			_end_expedition(Expedition.Ending.WIPED)
+
+
+## Ends the expedition (#17) and shows what it gained and cost.
+func _end_expedition(ending: int) -> void:
+	if _ending:
+		return
+	_ending = true
+	_set_full_map(false)
+	_set_pack(false)
+	_party.locked = true  # after closing overlays, which unlock on close
+	var notes := {
+		Expedition.Ending.RETURNED: "You climb out into the daylight.",
+		Expedition.Ending.WIPED: "No one is left to carry the lantern. Recruiting new heroes at camp comes later; for now the story begins again.",
+		Expedition.Ending.REACHED_BOTTOM: "You stood where the others fell, and lived to climb back.",
+	}
+	_results.show_results(ending, _expedition, _party_state, notes[ending])
+	await _results.continue_pressed
+	_results.visible = false
+	if ending == Expedition.Ending.WIPED:
+		get_tree().reload_current_scene()
+		return
+	_start_new_expedition()
+
+
+## Placeholder camp stop, then back into the cave from the top. The cave
+## remembers what was explored, opened and cleared.
+func _start_new_expedition() -> void:
+	for hero: Companion in _party_state.living_members():
+		hero.complete_pending_effects()
+		hero.change_health(hero.effective_max_health())
+		hero.change_strain(-CAMP_STRAIN_RELIEF)
+		hero.hunger = 0
+	_expedition = Expedition.new(_party_state, _expedition.number + 1)
+	_ending = false
+	_party.locked = false
+	_go_to_floor(1, Arrival.FROM_ABOVE)
+	_show_message("Rested at camp. Expedition %d: back into the cave." % _expedition.number)
 
 
 ## Stands the enemies in front of the party, spread across the corridor.
@@ -391,6 +451,9 @@ func _on_party_state_changed(announce := true) -> void:
 		elif state < before and state == StrainRules.State.STEADY:
 			_show_message("%s steadies." % member.display_name)
 	_party.panic_chance = StrainRules.PANIC_BOLT_CHANCE if _party_state.panicking_member() else 0.0
+	# Falling outside a fight (a trap, a bad drink) ends the expedition too.
+	if announce and _party_state.living_members().is_empty() and not _in_combat and not _ending:
+		_end_expedition.call_deferred(Expedition.Ending.WIPED)
 
 
 func _on_party_panicked() -> void:
@@ -621,6 +684,8 @@ func _build_ui(minimap: Control) -> void:
 	canvas.add_child(_combat)
 	_event_screen = EventScreen.new()
 	ui.add_child(_event_screen)
+	_results = ResultsScreen.new()
+	canvas.add_child(_results)
 	minimap.pressed.connect(_set_full_map.bind(true))
 	get_viewport().size_changed.connect(_apply_safe_area)
 	_apply_safe_area()
@@ -630,7 +695,7 @@ func _build_ui(minimap: Control) -> void:
 ## and home bar. On desktop there's nothing to avoid.
 func _apply_safe_area() -> void:
 	var insets := _safe_area_insets()
-	for control: Control in [_safe_area, _full_map_margin, _pack.content, _combat.content]:
+	for control: Control in [_safe_area, _full_map_margin, _pack.content, _combat.content, _results.content]:
 		control.offset_left = insets.x
 		control.offset_top = insets.y
 		control.offset_right = -insets.z

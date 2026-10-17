@@ -4,6 +4,9 @@ extends RefCounted
 
 const EVENTS_DIR := "res://data/events"
 
+## Supplies found by any choice, for the expedition record (#17).
+signal loot_found(loot: Dictionary)
+
 var library: Array[RoomEvent] = []
 var rng := RandomNumberGenerator.new()
 
@@ -73,6 +76,8 @@ func resolve(party, choice: EventChoice) -> Dictionary:
 		party.supplies.oil = clampf(party.supplies.oil + outcome.oil, 0.0, party.supplies.LANTERN_CAPACITY)
 		party.supplies.changed.emit()
 		notes.append("lantern %s" % ("refilled" if outcome.oil > 0 else "spilled"))
+	if not outcome.loot.is_empty():
+		loot_found.emit(outcome.loot)
 	for item in outcome.loot:
 		party.supplies.add(item, outcome.loot[item])
 		notes.append("found %s ×%d" % [item.display_name.to_lower(), outcome.loot[item]])

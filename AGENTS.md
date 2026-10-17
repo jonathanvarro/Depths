@@ -93,6 +93,12 @@ this via CLAUDE.md; ChatGPT Codex reads AGENTS.md directly). Keep it current.
   choices, depth range); `room_events.gd` loads every file in the folder.
 - `scripts/room_events.gd` – picks events per cell by kind and depth,
   resolves choices; `scripts/event_screen.gd` shows them.
+- `scripts/expedition.gd` – one expedition's record (start snapshot plus
+  counters) and its gained/lost lines; `Ending` RETURNED / WIPED /
+  REACHED_BOTTOM.
+- `scripts/results_screen.gd` – end-of-expedition screen. main.gd
+  `_end_expedition()` shows it; `_start_new_expedition()` is the placeholder
+  camp stop and re-entry from floor 1.
 - `scripts/pack_screen.gd` – the Pack screen (Pack button under the minimap,
   or I/B). PartyState.use_item(), rest(), cannot_use_reason() do the work.
 - `audio/placeholder/` – generated placeholder sounds (see its README for
