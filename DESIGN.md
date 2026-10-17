@@ -37,7 +37,7 @@ Preparation should create responsibility: the player can connect outcomes to cho
 ## Exploration and movement
 
 - The party moves together through a procedurally generated grid, one room at a time, viewed through the party's eyes.
-- Controls should be simple directional inputs. Whether these mean absolute map directions or forward/back/turn/strafe remains open.
+- Controls: classic forward / back / turn left / turn right (decided 2026-10-16). Strafing is not included for now.
 - Entering a room commits the party to encountering its contents. It does not require opening every chest or touching every object.
 - Rooms can contain creatures, traps, chests, strange objects, events, or places of relief.
 - Some threats require an immediate response; others allow investigation or withdrawal.
@@ -125,7 +125,7 @@ Success criteria:
 ## Open decisions
 
 1. ~~Target platform and engine~~ — decided: Godot 4, Windows and iPhone. Still open: touch control scheme, phone orientation (portrait or landscape), and minimum supported devices.
-2. Exact movement, facing, turn, and room-transition rules.
+2. ~~Movement scheme~~ — decided: forward/back/turn. Still open: strafing, room-transition presentation, and whether each step costs time.
 3. Combat layout, targeting, positions, action economy, and retreat rules.
 4. Strain states, player agency, and the role of trust or relationships.
 5. What persists between expeditions: companions, death, injuries, equipment, knowledge, and shortcuts.
