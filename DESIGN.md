@@ -97,6 +97,8 @@ The suggested retreat flow is to return through the dungeon to its entrance befo
 
 ### Continuity and escalation proposals
 
+**Decided 2026-10-17 (#26):** items stored at camp survive a full party wipe. The current expedition ends, and the player continues the same campaign with new recruits, recruited at the campfire. The tent provides the stash and party preparation. What happens to carried/equipped items, recruitment costs/availability, cross-site stash access and other campaign/dungeon state remains open; this decision does not reset the campaign or imply automatic resurrection. See [the campsite flow](docs/campsite-design.md).
+
 Keeping companions, scars, equipment, relationships, and important discoveries across sites would give the campaign emotional continuity: the people approaching the castle are the ones who began at the cave campfire. This is a preferred design proposal, not a finalized save/persistence or permanent-death rule.
 
 Escalation should introduce new hazards, tactics, and preparation needs as well as stronger enemies. An initially local problem could reveal evidence of a larger threat, providing a reason to travel onward; the specific story is open.
@@ -258,7 +260,7 @@ Success criteria:
 2. ~~Movement scheme~~ — decided: forward/back/turn. Each step costs time (#10). Still open: strafing and room-transition presentation.
 3. Combat: enemies in first-person view (#13). Still open: targeting, positions, action economy, and retreat rules.
 4. Strain states, player agency, and the role of trust or relationships.
-5. What persists between expeditions and sites: companions, death, injuries, equipment, knowledge, relationships, and shortcuts. Carrying party history forward is a proposal; exact rules remain open.
+5. Partly decided (#26): stored items survive a party wipe and the campaign continues with new recruits from the campfire. Still open: carried/equipped item losses or recovery, currency, recruitment costs/availability, cross-site stash access, and persistence of injuries, knowledge, relationships, shortcuts and dungeon state. Carrying surviving companions' history between sites remains a proposal.
 6. Per-site floor count, expedition duration, difficulty curve, completion objectives, refuge recovery/services, and transitions/revisits between sites. First site: cave + campsite; later castle/portal escalation is campaign direction rather than a finalized destination list.
 7. Coherent clue placement in procedural floors. (Navigability is guaranteed by the generator: rooms are joined incrementally, so every floor cell is reachable — #1.)
 8. Environment resolution, final portrait cleanup/export workflow, animation budget, body-template proportions, and horror boundaries. Portrait working canvas is 192 × 192; see the portrait-system section for agreed direction and remaining proposals.

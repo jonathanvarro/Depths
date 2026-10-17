@@ -10,6 +10,16 @@ The owner subsequently specified a greedy recurring merchant who follows the par
 
 ## Proposed composition
 
+### Recruitment, tent storage and party wipes — owner decisions (#26)
+
+- **Campfire:** recruit additional heroes and replacement heroes here. Companion conversations remain a proposed secondary function.
+- **Your tent:** provides the camp stash and party preparation. Items deposited in storage survive a full party wipe and remain available to equip the new recruits. Rest remains a proposed additional activity with unresolved costs and timing.
+- **Party wipe:** ends the current expedition, but does not end or reset the campaign. The player continues with new recruits and access to the surviving stored items.
+
+Proposed flow: wipe -> review expedition losses -> return to camp management -> recruit replacement heroes at the fire -> equip them from the tent's stash -> prepare another expedition. This describes campaign continuation, not the dead party physically returning. Integrate the loss review with #17 and preparation with #18.
+
+Keep stored inventory distinct from what heroes carry or wear. The owner has confirmed protection for stored items; loss or recovery of carried/equipped items, currency handling, recruitment costs/availability, minimum viable replacement equipment, stash capacity/access between sites, and persistence of dungeon state or discoveries after a wipe remain open. Do not infer free recruits, corpse recovery, resurrection, or loss of every carried item from this decision. Ensure later implementation cannot strand the campaign without a way to form another party.
+
 ### Cave-area staff and starter equipment — owner decisions (#24)
 
 The cave camp needs a blacksmith sent from a nearby village and a nurse. The smith is an **apprentice**: his limited experience explains why so few quality items are available. This is the starting location, so keep equipment **very basic**, with a small selection and little high-quality stock.
@@ -40,11 +50,11 @@ Suggested positions are proportional to the scene, excluding interface chrome. T
 
 | Area | Approximate centre (x, y) | Visual cue | Proposed destination and choices |
 | --- | --- | --- | --- |
-| Merchant (supply awning) | 19%, 44% | Open awning, recurring merchant, counter, coin scales and provisions | Meet the merchant; trade and review carried supplies. Exact buying/selling rules, prices, stock and a persistent stash are undecided. |
+| Merchant (supply awning) | 19%, 44% | Open awning, recurring merchant, counter, coin scales and provisions | Meet the merchant; trade and review carried supplies. Buying/selling rules, prices and stock are undecided; the camp stash is at your tent. |
 | Smith | To be placed between merchant and party tent | Apprentice, anvil, tools, portable forge beneath a lean-to | Basic equipment; possible repairs/fitting. Exact stock and mechanics remain open. |
 | Treatment / nurse | 61%, 43% | Nurse, pale canvas, hanging cloth, low cot | Select a companion, inspect injuries and arrange treatment. Costs and recovery rules remain open. |
-| Your tent | 21%, 78% | Broad low tent and bedrolls | Review party condition and equipment; arrange a rest. Show expected recovery, duration and supplies before confirming. |
-| Campfire | 48%, 71% | Fire ring, kettle, seats, companions | Speak to companions and review discoveries. Dialogue, journal and relationship effects are proposals. |
+| Your tent | 21%, 78% | Broad low tent, storage chest and bedrolls | Deposit/withdraw stored items and prepare/equip heroes. Stash survives a party wipe. Rest remains proposed; show its effects and costs before confirmation. |
+| Campfire | 48%, 71% | Fire ring, kettle, seats, current and prospective companions | Recruit additional/replacement heroes. Conversations and reviewing discoveries remain secondary proposals; recruitment costs and availability are undecided. |
 | Cave path | 87%, 37% | Dark opening and final route lantern | Review the party and carried supplies, then deliberately confirm entry into the cave. |
 
 These are six destinations in the revised design, not six fully specified simulation systems. The apprentice's modest forge is part of his area; a separate crafting station, inn, recruitment hall and town economy are outside this concept. Service views can start modestly without full crafting, shop or healer simulations.
@@ -66,7 +76,7 @@ Proposed flow: return through floor 1's way up -> review the expedition's gains 
 
 Arriving at camp does not automatically clear injuries or refill supplies. Food and treatment follow the existing delayed recovery direction in DESIGN.md (#10/#11). Rest should be one clear commitment with visible effects, rather than requiring repeated clicks to process each companion. The exact time model, rest duration, pricing, recovery limits and persistence are unresolved.
 
-The current floor-1 exit only says back to camp. Wiring it to a real refuge, preserving party/inventory state, deciding cave re-entry and revisits, and save/load all belong to later implementation. Do not assume the prototype's in-memory floor cache defines the final expedition rules.
+The current floor-1 exit only says back to camp. Wiring it to a real refuge, preserving party/inventory state, deciding cave re-entry and revisits, and save/load all belong to later implementation. Post-wipe campaign continuation and stored-item survival are now confirmed rules, but are not implemented. Do not assume the prototype's in-memory floor cache defines the final expedition rules.
 
 ## First implementation boundary
 

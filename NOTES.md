@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-17 – ChatGPT
+- Did: #26 recorded campfire recruitment, tent stash/preparation, stored items surviving a full party wipe, and continuation of the same campaign with new recruits. Updated DESIGN.md's persistence decisions and the campsite's activity descriptions and proposed post-wipe flow. Checked documentation consistency and whitespace.
+- Next: Define recruitment availability/cost, carried-item outcomes, stash access between sites and a viable recovery path for an impoverished party before implementing #17/#18.
+- Watch out: These are design decisions only. No save/inventory/recruitment code added. Do not infer free recruitment, loss of all carried gear, corpse recovery or a dungeon reset; those rules remain open.
+
 ## 2026-10-16 – ChatGPT
 - Did: #24 recorded the cave-area nurse and village-sent apprentice blacksmith. Established very basic starting equipment and limited quality stock as owner direction; updated the campsite specification to six proposed destinations, with nurse in Treatment and a modest smith lean-to. Checked documentation consistency and whitespace. Included Godot's generated import settings for the earlier merchant v2 concept (Refs #23).
 - Next: Choose a small starting equipment list and the two NPC designs. Recompose the clearing for six readable touch targets when the refuge is implemented.
