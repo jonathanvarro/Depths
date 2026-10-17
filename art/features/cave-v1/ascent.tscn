@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Texture2D" path="res://art/features/cave-v1/hanging-roots.png" id="1"]
+
+[node name="HangingRoots" type="Node3D"]
+
+[node name="Art" type="Sprite3D" parent="."]
+position = Vector3(0, 1.2, 0)
+rotation = Vector3(0, 3.1415927, 0)
+scale = Vector3(1, 1.2, 1)
+texture_filter = 0
+pixel_size = 0.0078125
+shaded = true
+double_sided = true
+alpha_cut = 1
+alpha_scissor_threshold = 0.12
+texture = ExtResource("1")

@@ -1,0 +1,468 @@
+{
+  "portrait_registration": [
+    {
+      "file": "eyes-half.png",
+      "source_translation": [
+        0,
+        0
+      ],
+      "allowed_regions": [
+        [
+          85,
+          65,
+          106,
+          76
+        ],
+        [
+          118,
+          64,
+          135,
+          76
+        ]
+      ],
+      "outside_region_changes": 0
+    },
+    {
+      "file": "eyes-closed.png",
+      "source_translation": [
+        0,
+        0
+      ],
+      "allowed_regions": [
+        [
+          85,
+          65,
+          106,
+          76
+        ],
+        [
+          118,
+          64,
+          135,
+          76
+        ]
+      ],
+      "outside_region_changes": 0
+    },
+    {
+      "file": "mouth-small.png",
+      "source_translation": [
+        0,
+        0
+      ],
+      "allowed_regions": [
+        [
+          96,
+          96,
+          124,
+          106
+        ]
+      ],
+      "outside_region_changes": 0
+    },
+    {
+      "file": "mouth-open.png",
+      "source_translation": [
+        0,
+        0
+      ],
+      "allowed_regions": [
+        [
+          96,
+          96,
+          124,
+          106
+        ]
+      ],
+      "outside_region_changes": 0
+    },
+    {
+      "file": "mouth-round.png",
+      "source_translation": [
+        0,
+        0
+      ],
+      "allowed_regions": [
+        [
+          96,
+          96,
+          124,
+          106
+        ]
+      ],
+      "outside_region_changes": 0
+    }
+  ],
+  "web_outer_anchors_identical": true,
+  "texture_opposite_edges_equal": true,
+  "files": [
+    {
+      "file": "art/portraits/mara-animation-v1/bandage.png",
+      "size": [
+        192,
+        192
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        253
+      ],
+      "sha256": "719fd646b3a957dd930fd033c27fdbb0e65751c1b532518249f7c036e0cdc8f5"
+    },
+    {
+      "file": "art/portraits/mara-animation-v1/blood.png",
+      "size": [
+        192,
+        192
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        253
+      ],
+      "sha256": "6c957f83548329bb8f5d5b1233c95930730e9a3cc6966e0562155c8e71c31478"
+    },
+    {
+      "file": "art/portraits/mara-animation-v1/dirt.png",
+      "size": [
+        192,
+        192
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        112
+      ],
+      "sha256": "12524a7c0fcb0f9b42687ea44238568f96a65499f27d787c5a781aa31ff97183"
+    },
+    {
+      "file": "art/portraits/mara-animation-v1/eyes-closed.png",
+      "size": [
+        192,
+        192
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "b48c101ea77bbe741e29cfc1ccd01cccc28567d75bc3d47f17e379b1d4a16d50"
+    },
+    {
+      "file": "art/portraits/mara-animation-v1/eyes-half.png",
+      "size": [
+        192,
+        192
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "0726ba718e977b40fc15bccc8b088fd256d1d69eb32fc82ce4a3a48538ab3012"
+    },
+    {
+      "file": "art/portraits/mara-animation-v1/mouth-open.png",
+      "size": [
+        192,
+        192
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "7a3650fe135b40fa559d784a50497055db697ff1837cc1f1c7d253708117e571"
+    },
+    {
+      "file": "art/portraits/mara-animation-v1/mouth-round.png",
+      "size": [
+        192,
+        192
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "136ce2d751d9e1738987e1757cf39f0bcca60accdaf1d41f26579dae6de7ff4c"
+    },
+    {
+      "file": "art/portraits/mara-animation-v1/mouth-small.png",
+      "size": [
+        192,
+        192
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "798da119de56ab4efeec3ca73b4d51718c1c0818b3c8376df1e0a97f1f1637d3"
+    },
+    {
+      "file": "art/portraits/mara-animation-v1/pallor.png",
+      "size": [
+        192,
+        192
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        48
+      ],
+      "sha256": "847febcb0b89bb2664a2fea566f7fdfe61dd20fc6cc2bf14a416b47293092ca6"
+    },
+    {
+      "file": "art/textures/cave-v1/ceiling.png",
+      "size": [
+        64,
+        64
+      ],
+      "mode": "RGB",
+      "alpha": null,
+      "sha256": "153cdb8e51e0681ccd30da04dad72b5e6beb5e47ed08713612f566f9ab3218eb"
+    },
+    {
+      "file": "art/textures/cave-v1/floor.png",
+      "size": [
+        64,
+        64
+      ],
+      "mode": "RGB",
+      "alpha": null,
+      "sha256": "ad5178b69d670d74ee43a324a79aa1c8502626b336aa7a5703fe1726ddccbbdc"
+    },
+    {
+      "file": "art/textures/cave-v1/wall.png",
+      "size": [
+        64,
+        64
+      ],
+      "mode": "RGB",
+      "alpha": null,
+      "sha256": "827892c54d82e7f712e50b2d971a3cb164dc1f22bf40c0e278502f4d70fcf5c8"
+    },
+    {
+      "file": "art/features/cave-v1/hanging-roots.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "9563cf43c3b904c12445a956c226abb7f450aae3981cbafdf9a505c694d200e3"
+    },
+    {
+      "file": "art/features/cave-v1/pit-opening.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "59433f49ee33be4053af5b6785147b6e3ae1d7c584fe62229650d70fbc9f4e3d"
+    },
+    {
+      "file": "art/features/cave-v1/root-barrier.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "ca1d64d697d15880c82b49e1dcf3f6177d3b6137a1f7dd47d3add442c00d24a1"
+    },
+    {
+      "file": "art/features/cave-v1/web-intact.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "1df318be18cc316dc9c65bdcc920933ddb8818bb1c8f89f208d06bb087a3dae9"
+    },
+    {
+      "file": "art/features/cave-v1/web-torn.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "e3ed8875950d8466b3a96f01be2e202111e0062e5e4a553bb7f9f0a43f10a45f"
+    },
+    {
+      "file": "art/enemies/cave-v1/goblin/attack.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "c89c68747bd4ce22f98b2f33040274e2e693742de984e2dd36b1c2c8e7a7cee9"
+    },
+    {
+      "file": "art/enemies/cave-v1/goblin/hurt.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "6e2dd92def32d1efffb88bdeb7ebbe276168ebf75817f880d53100591d4e3bb5"
+    },
+    {
+      "file": "art/enemies/cave-v1/goblin/idle.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "68793f683fc5759e66dd7ad5ae028743316d9a4a835d4e0f005389d045845fc5"
+    },
+    {
+      "file": "art/enemies/cave-v1/rat/attack.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "86e74ab9b43e3a1feb00ad7c8e0216955689e3f57fec17222594b2e079335f4b"
+    },
+    {
+      "file": "art/enemies/cave-v1/rat/hurt.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "f7e883bb5efc6f255bef08ea60cdf9e521db1bec7319dc58c54e633b1879742f"
+    },
+    {
+      "file": "art/enemies/cave-v1/rat/idle.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "e0ef0cedc9a2054a8efc79f0f97473300985add5dca6b5a2e029ac49278fbd39"
+    },
+    {
+      "file": "art/enemies/cave-v1/spider/attack.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "f7a9dd4553cf59c9856a1e55e0bc5513eb01afee5701bcb65b3a227c11337fc5"
+    },
+    {
+      "file": "art/enemies/cave-v1/spider/hurt.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "c3699aee76457e121f5dd28370b55c00cd3edb694fb97a68298e42882ab04e06"
+    },
+    {
+      "file": "art/enemies/cave-v1/spider/idle.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "23ec7dbeeb95c973fe3a3374011f18a5f7506c4337769e545151dda83b7f1d57"
+    },
+    {
+      "file": "art/items/pack-64-v1/oil-flask.png",
+      "size": [
+        64,
+        64
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "5ae1024b45fdda648f636597ecdc46ac95a3c832f9467a3ad90d24901d138f32"
+    },
+    {
+      "file": "art/items/pack-64-v1/ration.png",
+      "size": [
+        64,
+        64
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "9b5251ead2eaacfac07599be1fbc59c31c4bbd276aeb28584f4ea90f959346a8"
+    },
+    {
+      "file": "art/items/pack-64-v1/restorative-draught.png",
+      "size": [
+        64,
+        64
+      ],
+      "mode": "RGBA",
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "caa8994a284a6c0542aff86dc32f6a95ed75df37763624dbcc46420d8a8d77ae"
+    }
+  ]
+}

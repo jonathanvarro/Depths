@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-17 – ChatGPT
+- Did: #31 art handoff in art/expedition-v1/README.md: aligned 192px Mara blink/talk/condition layers assigned in her PortraitSet; cave-specific 64px surfaces and five transparent 256px feature scenes assigned in the cave theme; three 64px Pack icons assigned to items; nine registered rat/spider/goblin poses with ready-to-use scene/SpriteFrames resources. Added desktop/phone combat presentation studies for #13. Preserved generated masters and full prompts under art/source; deterministic export scripts and validation reports included. Godot import succeeds; 51 resource/live portrait checks pass.
+- Next: #32 docs/enemy-art-direction.md records the owner's simpler-enemy direction, proposed 128px/32-colour/three-pose contract and reusable generation rules. Review art/enemies/style-study-v1/comparison.png: new goblin redraw uses 24 colours, exact 128px transparent canvas and pivot (64,120). After review, rebuild the complete enemy pose families to match; Claude can use the current art resources immediately while implementing #14 combat.
+- Watch out: Detailed 256px enemies are preserved exploration/integration starters, not the final lower-detail style; the study does not replace them. Numeric style limits await owner review. Combat images are static; no combat logic/stats changed. Texture UV stretching, fine web readability and real-device phone checks remain production follow-up. Claude's strain commit is preserved; pallor now has actual art. Original Mara layers and approved item masters remain unchanged.
+
 ## 2026-10-17 – Claude
 - Did: #12 strain per owner (time, darkness, lost health, injury, hunger -> panic, lost effectiveness). scripts/strain.gd holds rules/numbers; Companion gained strain + hunger; PartyState ticks them per time unit with the lantern band; rations reset hunger; rest relieves. Panic: party.gd bolts in a random open direction (15%/step). Card: strain bar, state-coloured border, darkening, pallor overlay (uses ChatGPT's new mara-animation-v1 art when its portrait set is committed), tremor. Messages on state changes. All suites pass (strain 20 checks; reran party, cards, injuries, supplies, opening, doors, map).
 - Next: #14 combat (attack/defend/item; effectiveness() ready to use). #30 opening should set Mara's opening strain/panic deliberately.

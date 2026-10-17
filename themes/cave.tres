@@ -1,20 +1,30 @@
 [gd_resource type="Resource" script_class="EnvironmentTheme" format=3]
 
 [ext_resource type="Script" path="res://scripts/environment_theme.gd" id="1"]
-[ext_resource type="Material" path="res://art/textures/stone-v1/wall_plain.tres" id="2"]
-[ext_resource type="Material" path="res://art/textures/stone-v1/wall_worn.tres" id="3"]
-[ext_resource type="Material" path="res://art/textures/stone-v1/floor.tres" id="4"]
-[ext_resource type="Material" path="res://art/textures/stone-v1/ceiling.tres" id="5"]
+[ext_resource type="Material" path="res://art/textures/cave-v1/wall.tres" id="2"]
+[ext_resource type="Material" path="res://art/textures/cave-v1/wall.tres" id="3"]
+[ext_resource type="Material" path="res://art/textures/cave-v1/floor.tres" id="4"]
+[ext_resource type="Material" path="res://art/textures/cave-v1/ceiling.tres" id="5"]
 [ext_resource type="AudioStream" path="res://audio/placeholder/ambience_cave.wav" id="6"]
 [ext_resource type="AudioStream" path="res://audio/placeholder/footstep_1.wav" id="7"]
 [ext_resource type="AudioStream" path="res://audio/placeholder/footstep_2.wav" id="8"]
 [ext_resource type="AudioStream" path="res://audio/placeholder/footstep_3.wav" id="9"]
 [ext_resource type="AudioStream" path="res://audio/placeholder/bump.wav" id="10"]
 [ext_resource type="AudioStream" path="res://audio/placeholder/web_tear.wav" id="11"]
+[ext_resource type="PackedScene" path="res://art/features/cave-v1/closed.tscn" id="12"]
+[ext_resource type="PackedScene" path="res://art/features/cave-v1/opened.tscn" id="13"]
+[ext_resource type="PackedScene" path="res://art/features/cave-v1/blocked.tscn" id="14"]
+[ext_resource type="PackedScene" path="res://art/features/cave-v1/descent.tscn" id="15"]
+[ext_resource type="PackedScene" path="res://art/features/cave-v1/ascent.tscn" id="16"]
 
 [resource]
 script = ExtResource("1")
 display_name = "Cave"
+closed_scene = ExtResource("12")
+opened_scene = ExtResource("13")
+blocked_scene = ExtResource("14")
+descent_scene = ExtResource("15")
+ascent_scene = ExtResource("16")
 wall_material = ExtResource("2")
 wall_variant_material = ExtResource("3")
 floor_material = ExtResource("4")

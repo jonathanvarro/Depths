@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Texture2D" path="res://art/features/cave-v1/pit-opening.png" id="1"]
+[ext_resource type="Material" path="res://art/textures/cave-v1/floor.tres" id="2"]
+
+[sub_resource type="StandardMaterial3D" id="PitMaterial"]
+transparency = 1
+cull_mode = 2
+texture_filter = 0
+albedo_texture = ExtResource("1")
+roughness = 1.0
+
+[sub_resource type="PlaneMesh" id="Floor"]
+material = ExtResource("2")
+size = Vector2(2, 2)
+
+[sub_resource type="QuadMesh" id="Pit"]
+material = SubResource("PitMaterial")
+size = Vector2(2, 2)
+
+[node name="PitOpening" type="Node3D"]
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+position = Vector3(0, -0.015, 0)
+mesh = SubResource("Floor")
+
+[node name="Art" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.01, 0)
+rotation = Vector3(-1.5707964, 0, 0)
+mesh = SubResource("Pit")

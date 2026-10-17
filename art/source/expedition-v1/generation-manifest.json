@@ -1,0 +1,117 @@
+{
+  "created": "2026-10-17",
+  "mode": "built-in image generation and identity-preserving edits",
+  "assets": [
+    {
+      "id": "mara-eyes-half",
+      "prompt": "Use case: identity-preserve. Edit target: the attached Mara portrait base. Preserve EXACT character identity, framing, pose, head position, hair, skin, body, clothes, light direction and square canvas. The target is a 192x192 pixel portrait: work on this SAME pixel layout, do not repaint or shift the face. Preserve true transparent background. No new objects, text, labels, borders or scene. Only the expression change specified below; rest of the portrait stays identical. Deliver a full-canvas transparent portrait for extracting the altered facial region, not a cropped face. Mara has BOTH eyelids half-closed, halfway through a blink. Keep her eyebrows and original eye corners fixed, gaze direction unchanged, upper lids moving down. No smile or other facial changes.",
+      "refs": [
+        "E:/GitHub/Depths/art/concepts/portraits/mara-layered-v1/base.png"
+      ],
+      "transparent": true,
+      "kind": "mara-expression",
+      "source": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-586fcc6a-2c9a-4a0f-a1f7-2eae851da5ec.png"
+    },
+    {
+      "id": "mara-eyes-closed",
+      "prompt": "Use case: identity-preserve. Edit target: the attached Mara portrait base. Preserve EXACT character identity, framing, pose, head position, hair, skin, body, clothes, light direction and square canvas. The target is a 192x192 pixel portrait: work on this SAME pixel layout, do not repaint or shift the face. Preserve true transparent background. No new objects, text, labels, borders or scene. Only the expression change specified below; rest of the portrait stays identical. Deliver a full-canvas transparent portrait for extracting the altered facial region, not a cropped face. Mara has BOTH eyes fully closed in a natural brief blink. Eyelids meet in thin dark gently curved lines at the existing eye positions; keep eyebrow shapes and eye corners fixed. No other expression or facial changes.",
+      "refs": [
+        "E:/GitHub/Depths/art/concepts/portraits/mara-layered-v1/base.png"
+      ],
+      "transparent": true,
+      "kind": "mara-expression",
+      "source": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-c5ce85ad-e6b7-4c03-9bd1-ce63ccde2075.png"
+    },
+    {
+      "id": "mara-mouth-small",
+      "prompt": "Use case: identity-preserve. Edit target: the attached Mara portrait base. Preserve EXACT character identity, framing, pose, head position, hair, skin, body, clothes, light direction and square canvas. The target is a 192x192 pixel portrait: work on this SAME pixel layout, do not repaint or shift the face. Preserve true transparent background. No new objects, text, labels, borders or scene. Only the expression change specified below; rest of the portrait stays identical. Deliver a full-canvas transparent portrait for extracting the altered facial region, not a cropped face. Change ONLY the mouth to a small slightly open speaking shape, a narrow dark opening between relaxed lips. Keep both mouth corners and face position fixed. Eyes and every other feature unchanged.",
+      "refs": [
+        "E:/GitHub/Depths/art/concepts/portraits/mara-layered-v1/base.png"
+      ],
+      "transparent": true,
+      "kind": "mara-expression",
+      "source": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-ffe38046-74bb-4f98-9bda-939bb9c5f4a8.png"
+    },
+    {
+      "id": "mara-mouth-open",
+      "prompt": "Use case: identity-preserve. Edit target: the attached Mara portrait base. Preserve EXACT character identity, framing, pose, head position, hair, skin, body, clothes, light direction and square canvas. The target is a 192x192 pixel portrait: work on this SAME pixel layout, do not repaint or shift the face. Preserve true transparent background. No new objects, text, labels, borders or scene. Only the expression change specified below; rest of the portrait stays identical. Deliver a full-canvas transparent portrait for extracting the altered facial region, not a cropped face. Change ONLY the mouth to a modest open speaking shape, small vertical opening with subtle visible teeth, not a smile, shout or surprised expression. Keep mouth corners and facial position fixed. Eyes unchanged.",
+      "refs": [
+        "E:/GitHub/Depths/art/concepts/portraits/mara-layered-v1/base.png"
+      ],
+      "transparent": true,
+      "kind": "mara-expression",
+      "source": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-af83e775-e249-499e-aeba-7502ba50a504.png"
+    },
+    {
+      "id": "mara-mouth-round",
+      "prompt": "Use case: identity-preserve. Edit target: the attached Mara portrait base. Preserve EXACT character identity, framing, pose, head position, hair, skin, body, clothes, light direction and square canvas. The target is a 192x192 pixel portrait: work on this SAME pixel layout, do not repaint or shift the face. Preserve true transparent background. No new objects, text, labels, borders or scene. Only the expression change specified below; rest of the portrait stays identical. Deliver a full-canvas transparent portrait for extracting the altered facial region, not a cropped face. Change ONLY the mouth to a small rounded 'o' speaking shape, subtle pursed lips and dark opening, not surprised or cartoonish. Keep mouth centre and facial position fixed. Eyes unchanged.",
+      "refs": [
+        "E:/GitHub/Depths/art/concepts/portraits/mara-layered-v1/base.png"
+      ],
+      "transparent": true,
+      "kind": "mara-expression",
+      "source": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-a27d04a7-660c-4837-a673-6232add27e0e.png"
+    },
+    {
+      "id": "mara-blood",
+      "prompt": "Use case: stylized-concept. Reference image: Mara's exact 192x192 portrait layout. Produce ONLY a sparse condition overlay on a fully transparent square canvas, aligned to that portrait. DO NOT include her face, hair, eyes, clothing, body or background: show only the new marks described. Preserve upper-left warm light and coarse gritty pixel style. Keep placement at the same normalized positions as the portrait. No text/frames. A few small dark dried-blood streaks and one narrow fresh scratch on the visible cheek/temple at image right, beside the eye without covering it. Restrained blood only, not gore or dripping face. Sparse transparent marks.",
+      "refs": [
+        "E:/GitHub/Depths/art/concepts/portraits/mara-layered-v1/base.png"
+      ],
+      "transparent": true,
+      "kind": "mara-condition",
+      "source": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-d7ffa3aa-0329-40c1-ae16-3dfd6257bffe.png"
+    },
+    {
+      "id": "mara-dirt",
+      "prompt": "Use case: stylized-concept. Reference image: Mara's exact 192x192 portrait layout. Produce ONLY a sparse condition overlay on a fully transparent square canvas, aligned to that portrait. DO NOT include her face, hair, eyes, clothing, body or background: show only the new marks described. Preserve upper-left warm light and coarse gritty pixel style. Keep placement at the same normalized positions as the portrait. No text/frames. Sparse dark earth smudges on the exposed cheek, forehead and neck, subtle uneven brown-grey dust, keep eye and mouth areas clear. Marks only with transparent gaps, not an opaque skin patch.",
+      "refs": [
+        "E:/GitHub/Depths/art/concepts/portraits/mara-layered-v1/base.png"
+      ],
+      "transparent": true,
+      "kind": "mara-condition",
+      "source": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-7b482a4e-1e63-4c17-aedf-f694e2643d4a.png"
+    },
+    {
+      "id": "mara-bandage",
+      "prompt": "Use case: stylized-concept. Reference image: Mara's exact 192x192 portrait layout. Produce ONLY a sparse condition overlay on a fully transparent square canvas, aligned to that portrait. DO NOT include her face, hair, eyes, clothing, body or background: show only the new marks described. Preserve upper-left warm light and coarse gritty pixel style. Keep placement at the same normalized positions as the portrait. No text/frames. A small neatly wrapped strip of pale linen across the cheek at image left, diagonal from below the ear toward the outer cheek, NOT covering the eyes or mouth. Simple clean cloth with subtle folds and a small fastening. Show bandage only, all surrounding pixels transparent.",
+      "refs": [
+        "E:/GitHub/Depths/art/concepts/portraits/mara-layered-v1/base.png"
+      ],
+      "transparent": true,
+      "kind": "mara-condition",
+      "source": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-5b0d1fe2-da52-41be-af38-ba4fa61a6e27.png"
+    },
+    {
+      "id": "mara-pallor",
+      "prompt": "Use case: stylized-concept. Reference image: Mara's exact 192x192 portrait layout. Produce ONLY a sparse condition overlay on a fully transparent square canvas, aligned to that portrait. DO NOT include her face, hair, eyes, clothing, body or background: show only the new marks described. Preserve upper-left warm light and coarse gritty pixel style. Keep placement at the same normalized positions as the portrait. No text/frames. Only a very subtle translucent desaturated pale grey-green wash shaped to the exposed forehead, cheeks and neck, faint cool under-eye shading. No eyeballs, facial features, hair or clothes. Underlying portrait must remain visible; this is a sickly pallor tint, not a replacement face.",
+      "refs": [
+        "E:/GitHub/Depths/art/concepts/portraits/mara-layered-v1/base.png"
+      ],
+      "transparent": true,
+      "kind": "mara-condition",
+      "source": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-fd85aba9-dc7c-4424-bc99-bef8e4cc34ab.png"
+    },
+    {
+      "id": "cave-wall",
+      "prompt": "Use case: stylized-concept. One seamless repeating square albedo texture for a dark first-person cave, intended to be reduced to a 64x64 pixel tile. Flat orthographic surface scan, no perspective, no objects, no text, no frame, no directional or baked lantern lighting, no shadows around edges. Simple low-resolution pixel-art look: large sparse clusters, restrained charcoal/slate/brown-grey palette, readable broad forms, no photoreal microdetail. Tile seamlessly on all four edges, avoid a distinct central focal shape. Opaque full square. Natural rough cave rock, broad irregular limestone/shale faces and shallow horizontal fractures, subtle earth deposits, no cut masonry, bricks or mortar.",
+      "transparent": false,
+      "kind": "texture",
+      "source": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-9f565947-2307-4a19-90f3-6d0d9090591b.png"
+    },
+    {
+      "id": "cave-floor",
+      "prompt": "Use case: stylized-concept. One seamless repeating square albedo texture for a dark first-person cave, intended to be reduced to a 64x64 pixel tile. Flat orthographic surface scan, no perspective, no objects, no text, no frame, no directional or baked lantern lighting, no shadows around edges. Simple low-resolution pixel-art look: large sparse clusters, restrained charcoal/slate/brown-grey palette, readable broad forms, no photoreal microdetail. Tile seamlessly on all four edges, avoid a distinct central focal shape. Opaque full square. Compacted cave earth and worn rough rock with sparse tiny gravel clusters and shallow irregular cracks. Fairly flat walkable surface, no tiled flagstones, bones, puddles or props.",
+      "transparent": false,
+      "kind": "texture",
+      "source": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-13062082-1632-4af7-92e1-c44dca960d87.png"
+    },
+    {
+      "id": "cave-ceiling",
+      "prompt": "Use case: stylized-concept. One seamless repeating square albedo texture for a dark first-person cave, intended to be reduced to a 64x64 pixel tile. Flat orthographic surface scan, no perspective, no objects, no text, no frame, no directional or baked lantern lighting, no shadows around edges. Simple low-resolution pixel-art look: large sparse clusters, restrained charcoal/slate/brown-grey palette, readable broad forms, no photoreal microdetail. Tile seamlessly on all four edges, avoid a distinct central focal shape. Opaque full square. Natural cave ceiling rock, darker stratified fractured stone with sparse broad cracks. No dramatic stalactites or large hanging forms; ceiling detail remains subtle.",
+      "transparent": false,
+      "kind": "texture",
+      "source": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-afe6ad75-6a2b-42c3-9b58-f6e08cadd3aa.png"
+    }
+  ]
+}

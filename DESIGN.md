@@ -135,6 +135,8 @@ Health and injuries carry beyond a battle. Stress, disease, and enduring quirks 
 
 Combat is turn-based. The room view becomes the battlefield while heroes remain represented by their portrait cards. Positioning, protection, and cooperation matter, and injuries or strain affect available tactics.
 
+**Presentation study (#13, #31):** [desktop](art/expedition-v1/combat-desktop.png) and [landscape phone](art/expedition-v1/combat-phone.png) show enemies in the first-person cave with three portrait slots along the bottom and Attack / Defend / Item actions. These are static layout studies, not implemented combat or approved encounter balance; see [the art handoff](art/expedition-v1/README.md).
+
 Exploration knowledge can provide an advantage or help avoid an unnecessary fight. Fighting should offer worthwhile gains while carrying lasting costs.
 
 Possible objectives include defeating an enemy, protecting a companion, recovering an object, or holding a threat back while clearing an exit. Retreat should involve a meaningful decision; its exact mechanics remain open.
@@ -167,6 +169,8 @@ Unknown encounters should offer suggestive evidence while retaining uncertainty.
 Dark, gritty, grounded medieval fantasy. Stained stone, corroded metal, worn supplies, oppressive spaces, and scarce lantern light. Charcoal, dirty parchment, muted teal, rusty brown, and warm amber form the initial palette. Keep essential threats and interface elements readable.
 
 The current visual baseline is **simple, shadow-heavy pixel environments with detailed, expressive character portraits and limited, deliberate animation**. Use bold room shapes, sparse textures, a restrained palette, and one clear encounter focal point. The owner preferred this reduced-detail direction over the intricate painted and densely textured pixel mockups. Exact environment resolution and production workflow remain open.
+
+**Enemy detail direction (2026-10-17, #32):** the owner likes the creature designs but wants simpler enemies for consistency and lower requirements. Follow [the enemy art guide](docs/enemy-art-direction.md): silhouette-led shapes, sparse texture, shared lighting/palettes and registered poses. Its proposed 128px canvas and colour limits have a simpler goblin study for review; the detailed nine-pose set remains preserved as reference, not the final production style.
 
 Suggested economical approach:
 

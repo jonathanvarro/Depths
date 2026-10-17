@@ -1,0 +1,124 @@
+{
+  "created": "2026-10-17",
+  "assets": [
+    {
+      "id": "web-intact",
+      "prompt": "Use case: stylized-concept. Asset: one front-facing cave feature sprite for a dark first-person grid crawler, square full canvas, genuine transparent background. Match restrained gritty coarse pixel art, muted earth/charcoal and dirty parchment colours with faint warm upper-left light, simple bold structures. Full feature visible with about 5 percent transparent margin. No cut-stone doorway, surrounding wall, scene, floor backdrop, text, UI, people, frame, shadows outside object or magical glow. Canvas framing must remain fixed, no tight crop. An intact broad spider web spanning a roughly square passage, wispy irregular pale grey silk strands anchored at the corners and sides of the canvas, thick enough to read against a dark cave. All spaces between silk strands completely transparent. No spider or captured prey.",
+      "transparent": true,
+      "kind": "feature",
+      "source": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-9cac8cb4-9d1c-4ead-8875-422e0f128271.png"
+    },
+    {
+      "id": "root-barrier",
+      "prompt": "Use case: stylized-concept. Asset: one front-facing cave feature sprite for a dark first-person grid crawler, square full canvas, genuine transparent background. Match restrained gritty coarse pixel art, muted earth/charcoal and dirty parchment colours with faint warm upper-left light, simple bold structures. Full feature visible with about 5 percent transparent margin. No cut-stone doorway, surrounding wall, scene, floor backdrop, text, UI, people, frame, shadows outside object or magical glow. Canvas framing must remain fixed, no tight crop. A dense impassable wall of tangled thick brown tree roots spanning the whole square passage, interwoven woody forms with a few transparent gaps, darkness visible through gaps is actual transparency. Roots connect across top/sides; no leaves, flowers, stone frame or background.",
+      "transparent": true,
+      "kind": "feature",
+      "source": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-3f48b40a-7a25-43ca-9c4a-7874f69ccc73.png"
+    },
+    {
+      "id": "pit-opening",
+      "prompt": "Use case: stylized-concept. Asset: one front-facing cave feature sprite for a dark first-person grid crawler, square full canvas, genuine transparent background. Match restrained gritty coarse pixel art, muted earth/charcoal and dirty parchment colours with faint warm upper-left light, simple bold structures. Full feature visible with about 5 percent transparent margin. No cut-stone doorway, surrounding wall, scene, floor backdrop, text, UI, people, frame, shadows outside object or magical glow. Canvas framing must remain fixed, no tight crop. A single rocky pit opening viewed from a low first-person approach: wide flattened oval earthy stone rim, front lip lower in frame, dark near-black interior indicating depth. Transparent outside the rim, interior remains dark opaque. Not a vertical doorway or round top-down well; no stairs or ladder.",
+      "transparent": true,
+      "kind": "feature",
+      "source": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-a87f223f-8163-484e-9035-2bcd75ddbc70.png"
+    },
+    {
+      "id": "hanging-roots",
+      "prompt": "Use case: stylized-concept. Asset: one front-facing cave feature sprite for a dark first-person grid crawler, square full canvas, genuine transparent background. Match restrained gritty coarse pixel art, muted earth/charcoal and dirty parchment colours with faint warm upper-left light, simple bold structures. Full feature visible with about 5 percent transparent margin. No cut-stone doorway, surrounding wall, scene, floor backdrop, text, UI, people, frame, shadows outside object or magical glow. Canvas framing must remain fixed, no tight crop. Several thick climbable roots hanging down from across the top edge of a cave passage toward the ground, twisted vertical strands and a few side branches, with large transparent gaps between them. Ends nearly reach the bottom of the fixed canvas. Not a dense blocking wall, no web, vines, green leaves or stone frame.",
+      "transparent": true,
+      "kind": "feature",
+      "source": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-6d112a8e-dbac-4777-8275-801a6d502877.png"
+    },
+    {
+      "id": "web-torn",
+      "prompt": "Edit this exact front-facing spider-web sprite. Preserve square canvas, camera, fixed silk anchor positions, outer strands, colours, style and transparent background. Tear a large roughly person-sized central passage through it, leaving broken wispy dangling strands around the hole. Transparent space where the web is torn; no black fill, wall or figure. Keep the outer one-quarter border identical to the intact web; change only the centre. No crop, resize, shift, text or new objects.",
+      "refs": [
+        "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-9cac8cb4-9d1c-4ead-8875-422e0f128271.png"
+      ],
+      "transparent": true,
+      "kind": "feature",
+      "source": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-678c0d08-3b9e-43bc-b8df-d3e788ea12c9.png"
+    },
+    {
+      "id": "rat-idle",
+      "prompt": "Use case: stylized-concept. One enemy sprite for a dark first-person medieval cave crawler. Entire creature shown, front-facing toward player, centered on fixed square canvas with generous transparent margin around head, limbs and feet. Genuine transparent background, no floor or cast shadow, no scene, text, UI, labels or frame. Grounded gritty pixel art, bold readable clusters and restrained charcoal/brown/slate palette, soft warm upper-left lantern lighting. No gore, no cartoon cute proportions, no magic glow. Pose: idle standing ready to confront player. One hostile large cave rat, low four-legged stance, coarse matted grey-brown fur, pinkish paws and ears, long thin bare tail curling behind without extending outside canvas, small dark eyes, pointed muzzle facing player, forepaws planted. Natural anatomy, all four legs, no extra limbs.",
+      "transparent": true,
+      "kind": "enemy",
+      "source": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-ca476310-0fe2-490f-8d99-fba7e56b14d7.png"
+    },
+    {
+      "id": "spider-idle",
+      "prompt": "Use case: stylized-concept. One enemy sprite for a dark first-person medieval cave crawler. Entire creature shown, front-facing toward player, centered on fixed square canvas with generous transparent margin around head, limbs and feet. Genuine transparent background, no floor or cast shadow, no scene, text, UI, labels or frame. Grounded gritty pixel art, bold readable clusters and restrained charcoal/brown/slate palette, soft warm upper-left lantern lighting. No gore, no cartoon cute proportions, no magic glow. Pose: idle standing ready to confront player. One large cave spider, eight sturdy jointed legs splayed symmetrically enough for a clear frontal silhouette, low broad thorax, rounded dark mottled abdomen behind, small clustered dull eyes and short visible fangs. Brown-black chitin with sparse hairs, no oversized cartoon face, no web.",
+      "transparent": true,
+      "kind": "enemy",
+      "source": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-91040e20-34d4-4ff2-8339-535a15328c53.png"
+    },
+    {
+      "id": "goblin-idle",
+      "prompt": "Use case: stylized-concept. One enemy sprite for a dark first-person medieval cave crawler. Entire creature shown, front-facing toward player, centered on fixed square canvas with generous transparent margin around head, limbs and feet. Genuine transparent background, no floor or cast shadow, no scene, text, UI, labels or frame. Grounded gritty pixel art, bold readable clusters and restrained charcoal/brown/slate palette, soft warm upper-left lantern lighting. No gore, no cartoon cute proportions, no magic glow. Pose: idle standing ready to confront player. One lean adult male goblin scavenger, full body standing slightly crouched toward player, dull olive-grey skin, pointed ears, wary narrow face, patched brown tunic, rope belt and ragged trousers, bare feet. Holds a crude short iron knife in image-right hand and a small rough wooden buckler in image-left hand. No jewels, ornate armour or fantasy glow.",
+      "transparent": true,
+      "kind": "enemy",
+      "source": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-b7026270-cbf8-4445-9e2e-4d480392521b.png"
+    },
+    {
+      "id": "rat-attack",
+      "prompt": "Use case: identity-preserve. Edit this enemy's idle sprite into its attack pose for a first-person combat view. Keep exact character identity, anatomy, colours, worn materials, upper-left lantern light, art style and square transparent canvas. Keep feet/ground contact at the same baseline and body at the same world scale; preserve center and generous margins. Do not zoom, recrop, change species, equipment or add scene/text/shadows/effects. Whole creature remains visible; transparent background. The rat lunges toward the viewer, mouth open enough to show incisors, front paws raised slightly. Keep tail and all limbs within frame.",
+      "refs": [
+        "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-ca476310-0fe2-490f-8d99-fba7e56b14d7.png"
+      ],
+      "transparent": true,
+      "kind": "enemy",
+      "source": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-b2ac20be-1397-4e61-91b1-e76b915877aa.png"
+    },
+    {
+      "id": "rat-hurt",
+      "prompt": "Use case: identity-preserve. Edit this enemy's idle sprite into its hurt pose for a first-person combat view. Keep exact character identity, anatomy, colours, worn materials, upper-left lantern light, art style and square transparent canvas. Keep feet/ground contact at the same baseline and body at the same world scale; preserve center and generous margins. Do not zoom, recrop, change species, equipment or add scene/text/shadows/effects. Whole creature remains visible; transparent background. The rat recoils from a hit, head turned slightly and body compressed, paws bracing. No blood or new wounds.",
+      "refs": [
+        "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-ca476310-0fe2-490f-8d99-fba7e56b14d7.png"
+      ],
+      "transparent": true,
+      "kind": "enemy",
+      "source": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-ef8784c7-9635-4623-ae40-680951d23c5d.png"
+    },
+    {
+      "id": "spider-attack",
+      "prompt": "Use case: identity-preserve. Edit this enemy's idle sprite into its attack pose for a first-person combat view. Keep exact character identity, anatomy, colours, worn materials, upper-left lantern light, art style and square transparent canvas. Keep feet/ground contact at the same baseline and body at the same world scale; preserve center and generous margins. Do not zoom, recrop, change species, equipment or add scene/text/shadows/effects. Whole creature remains visible; transparent background. The spider raises its front pair of legs and exposes its fangs in a short frontal strike; all eight legs remain readable and within frame.",
+      "refs": [
+        "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-91040e20-34d4-4ff2-8339-535a15328c53.png"
+      ],
+      "transparent": true,
+      "kind": "enemy",
+      "source": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-0ababbd2-a5fa-4281-a84a-7b3551dc6d4e.png"
+    },
+    {
+      "id": "spider-hurt",
+      "prompt": "Use case: identity-preserve. Edit this enemy's idle sprite into its hurt pose for a first-person combat view. Keep exact character identity, anatomy, colours, worn materials, upper-left lantern light, art style and square transparent canvas. Keep feet/ground contact at the same baseline and body at the same world scale; preserve center and generous margins. Do not zoom, recrop, change species, equipment or add scene/text/shadows/effects. Whole creature remains visible; transparent background. The spider recoils with front body lowered and legs bent inward slightly, recognizably hurt but still alive. No severed limbs or gore.",
+      "refs": [
+        "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-91040e20-34d4-4ff2-8339-535a15328c53.png"
+      ],
+      "transparent": true,
+      "kind": "enemy",
+      "source": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-d967dc80-dbfe-4e9e-b2d2-76739159a4cf.png"
+    },
+    {
+      "id": "goblin-attack",
+      "prompt": "Use case: identity-preserve. Edit this enemy's idle sprite into its attack pose for a first-person combat view. Keep exact character identity, anatomy, colours, worn materials, upper-left lantern light, art style and square transparent canvas. Keep feet/ground contact at the same baseline and body at the same world scale; preserve center and generous margins. Do not zoom, recrop, change species, equipment or add scene/text/shadows/effects. Whole creature remains visible; transparent background. The goblin makes a short forward knife thrust toward the viewer with the same crude knife, buckler held close. Keep full body and feet visible.",
+      "refs": [
+        "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-b7026270-cbf8-4445-9e2e-4d480392521b.png"
+      ],
+      "transparent": true,
+      "kind": "enemy",
+      "source": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-3850bd28-f17c-4336-9159-bbc8e9331f29.png"
+    },
+    {
+      "id": "goblin-hurt",
+      "prompt": "Use case: identity-preserve. Edit this enemy's idle sprite into its hurt pose for a first-person combat view. Keep exact character identity, anatomy, colours, worn materials, upper-left lantern light, art style and square transparent canvas. Keep feet/ground contact at the same baseline and body at the same world scale; preserve center and generous margins. Do not zoom, recrop, change species, equipment or add scene/text/shadows/effects. Whole creature remains visible; transparent background. The goblin flinches backward from a hit, shoulders recoiling and shield drawn inward, knees bent, same weapons retained. No gore or new costume.",
+      "refs": [
+        "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-b7026270-cbf8-4445-9e2e-4d480392521b.png"
+      ],
+      "transparent": true,
+      "kind": "enemy",
+      "source": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-b265d9e3-7307-41a4-8daa-f33d3fc42a0e.png"
+    }
+  ]
+}

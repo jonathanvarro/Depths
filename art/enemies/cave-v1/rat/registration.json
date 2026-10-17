@@ -1,0 +1,41 @@
+[
+  {
+    "pose": "idle",
+    "scale": 0.9739130434782609,
+    "translation": [
+      -4,
+      10
+    ],
+    "pivot": [
+      128,
+      240
+    ],
+    "solid_ground_y": 240
+  },
+  {
+    "pose": "attack",
+    "scale": 0.9739130434782609,
+    "translation": [
+      -6,
+      25
+    ],
+    "pivot": [
+      128,
+      240
+    ],
+    "solid_ground_y": 240
+  },
+  {
+    "pose": "hurt",
+    "scale": 0.9739130434782609,
+    "translation": [
+      -5,
+      11
+    ],
+    "pivot": [
+      128,
+      240
+    ],
+    "solid_ground_y": 240
+  }
+]

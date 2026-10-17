@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="SpriteFrames" path="res://art/enemies/cave-v1/goblin/frames.tres" id="1"]
+
+[node name="goblin" type="Node3D"]
+
+[node name="Sprite" type="AnimatedSprite3D" parent="."]
+position = Vector3(0, 0.7, 0)
+pixel_size = 0.0062499999999999995
+billboard = 1
+shaded = true
+texture_filter = 0
+alpha_cut = 1
+alpha_scissor_threshold = 0.12
+sprite_frames = ExtResource("1")
+animation = &"idle"

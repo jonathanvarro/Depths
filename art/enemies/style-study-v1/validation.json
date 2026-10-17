@@ -1,0 +1,44 @@
+{
+  "goblin-detailed-128.png": {
+    "size": [
+      128,
+      128
+    ],
+    "visible_colors": 3276,
+    "alpha_values": [
+      0,
+      255
+    ],
+    "ground_y": 120,
+    "pivot": [
+      64,
+      120
+    ],
+    "translation": [
+      0,
+      1
+    ],
+    "sha256": "9963f92a9a21329cbcdd27380179810f21250456f54eb883179872cdc817fc13"
+  },
+  "goblin-simple-128.png": {
+    "size": [
+      128,
+      128
+    ],
+    "visible_colors": 24,
+    "alpha_values": [
+      0,
+      255
+    ],
+    "ground_y": 120,
+    "pivot": [
+      64,
+      120
+    ],
+    "translation": [
+      -1,
+      0
+    ],
+    "sha256": "942434fce6553996464cb98ba0b4c4dc77e4528dbf1a949cf1a20206be770e12"
+  }
+}
