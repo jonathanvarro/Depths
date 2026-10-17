@@ -111,6 +111,8 @@ Open campaign questions: what counts as completing a site, whether old sites rem
 
 Each companion has a distinct role, personality, vulnerability, and reason to enter the dungeon. Portrait cards communicate physical and emotional condition.
 
+**Personality/fear ideas recorded 2026-10-17 (#27):** explore lawful, neutral and lawless outlooks alongside individual values/boundaries; useful mixed-party synergies with disagreements and pair trust; fear as readable temporary strain; and modest class-bounded recruit variation (initially one strength, weakness and particular fear). See [the discussion notes](docs/hero-personality-and-fear.md) for examples, neutral-party trade-offs and open rules. These are proposals to develop, not implemented mechanics or finalized numerical balance. Courage can use the proposed Resolve attribute rather than a duplicate stat; the lone-survivor opening remains unchanged.
+
 *Implementation:* heroes are `Companion` resources in `data/companions/` (name, role, motive, personality, vulnerability, portrait, health, effects over time). The placeholder starting survivor is **Mara**, the guide from the portrait concepts, starting wounded (14/20). One step = one unit of time. Open: where the lone survivor starts (e.g. deep in the cave, climbing out) and how the opening is presented.
 
 Strain should affect decisions and behaviour, rather than exist only as a number. Possible reactions include hesitation, requests to retreat, recklessness, and disagreement. Personal motives can make a particular discovery especially tempting to one person.

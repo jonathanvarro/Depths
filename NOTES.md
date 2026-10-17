@@ -14,6 +14,11 @@ Format:
 ---
 
 ## 2026-10-17 – ChatGPT
+- Did: #27 recorded the personality/fear/recruit-variation discussion in docs/hero-personality-and-fear.md and linked it from DESIGN.md. Preserved outlooks, values/faults/boundaries, paladin/bandit cooperation, neutral-party trade-offs, pair trust, three proposed fear states and bounded recruit variation. Checked documentation links, consistency and whitespace.
+- Next: Owner refines the smallest encounter reactions, fear effects and recruit variation rules before implementation; coordinate with #12/#14 and #25's proposed Resolve attribute.
+- Watch out: Proposals only. No stats, saves, resource definitions or gameplay changed. Current one-survivor opening and health-only implementation remain intact; fear's floor-transition behaviour is undecided.
+
+## 2026-10-17 – ChatGPT
 - Did: Reconciled #25 research with the just-completed #8 lone-survivor/timed-effect decisions. Separated Mara's wounded opening escape from the later recruited trio, added a proposed first-camp recruitment allowance without double-spending the expedition reserve, and accounted for floor-change completion of timed remedies. Rechecked documentation and budget arithmetic.
 - Next: Continue #9. Owner reviews opening placement, initial hiring/funding, loss rules and recovery safeguards before adopting economy values.
 - Watch out: All new numbers remain proposals; Mara's implemented 14/20 HP and the confirmed timed-effect rules are unchanged. The 24g worked budget begins after initial hires, with a proposed 48g first-camp grant funding both hires and that reserve. No game scripts changed in this research follow-up.
