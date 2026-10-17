@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<image version="0.0.3" w="192" h="192" name="Mara - wardrobe prototype">
+  <stack>
+    <layer name="Mouth - neutral replacement patch" src="data/mouth-neutral.png" opacity="1.0" visibility="visible" composite-op="svg:src-over" x="0" y="0"/>
+    <layer name="Eyes - neutral replacement patch" src="data/eyes-neutral.png" opacity="1.0" visibility="visible" composite-op="svg:src-over" x="0" y="0"/>
+    <layer name="Outfit - brown tunic (toggle)" src="data/tunic.png" opacity="1.0" visibility="visible" composite-op="svg:src-over" x="0" y="0"/>
+    <layer name="Base - body face and hair combined" src="data/base.png" opacity="1.0" visibility="visible" composite-op="svg:src-over" x="0" y="0"/>
+    <layer name="Background" src="data/background.png" opacity="1.0" visibility="visible" composite-op="svg:src-over" x="0" y="0"/>
+  </stack>
+</image>

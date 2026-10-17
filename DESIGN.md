@@ -88,7 +88,7 @@ Unknown encounters should offer suggestive evidence while retaining uncertainty.
 
 Dark, gritty, grounded medieval fantasy. Stained stone, corroded metal, worn supplies, oppressive spaces, and scarce lantern light. Charcoal, dirty parchment, muted teal, rusty brown, and warm amber form the initial palette. Keep essential threats and interface elements readable.
 
-The latest proposed production direction is **dark pixel art with detailed character portraits, modular first-person environments, and limited, deliberate animation**. This replaces the expensive painted mockups as a potential initial asset target, while preserving their mood. The owner has asked about feasibility; final adoption and asset resolution remain open.
+The current visual baseline is **simple, shadow-heavy pixel environments with detailed, expressive character portraits and limited, deliberate animation**. Use bold room shapes, sparse textures, a restrained palette, and one clear encounter focal point. The owner preferred this reduced-detail direction over the intricate painted and densely textured pixel mockups. Exact environment resolution and production workflow remain open.
 
 Suggested economical approach:
 
@@ -101,6 +101,52 @@ Suggested economical approach:
 Pixel art is not automatically cheap: consistency, readable expressions, viewpoints, and animation frame counts determine workload. Choose a coherent pixel scale before producing final assets. Use Greed & Darkness as a visual reference, not a source of copied assets or a requirement to reproduce its animation technique.
 
 The interface should preserve the two elements the owner particularly liked: expressive companion portraits and the exploration map. Sound, writing, and reactions should make losses and moments of relief feel personal. Content boundaries and the degree of graphic horror remain undecided.
+
+## Portrait system — direction recorded 2026-10-16
+
+### Canvas, identity, and pose
+
+- Use a **192 × 192 pixel canvas** as the current portrait working standard, subject to checking readability on Windows and iPhone.
+- Keep detailed, expressive pixel portraits against simpler environments.
+- Preserve each character's individual face, hair, and personality; a reusable body does not mean a shared generic face.
+- Keep each character's pose, framing, lighting, and facial registration fixed across outfits, expressions, and animation frames. The current Mara sample looks slightly toward image right rather than directly at the player; use this as the initial pose reference, not a requirement that every character have an identical face angle.
+- Prepare bases without a hood or outer equipment and with minimal plain clothing, leaving shoulders and neckline accessible for outfit layers.
+
+### Layer structure and clothing
+
+Build editable layered masters and export aligned full-canvas transparent layers. Do not trim or independently resize components. Share layer names, pixel scale, lighting direction, and attachment conventions across characters.
+
+The intended structure includes background, back hair, body/neck, character head/face, eyes/brows, mouth, clothing, front hair, accessories, and condition layers. Exact ordering depends on the garment: a hood or cloak may need back and front pieces, and hair may need to overlap a collar. Reconstruct hidden pixels rather than relying on visible fragments from a flattened image.
+
+Outfits should fit a known body template and neck/shoulder attachment points. Start with deliberate complete outfit sets rather than unrestricted combinations of every hairstyle, hood, collar, and armour piece. Validate overlap and clipping before adding variants.
+
+### Reusable body templates
+
+Adopt reusable upper-body templates to reduce later clothing work while retaining character-specific heads. The owner's planning target is **three body types for female characters and three for male characters**. Lean, average, and broad are proposed build labels; exact proportions and attachment geometry are not yet defined.
+
+These are head-and-shoulders portrait templates, not a commitment to six full-body animation rigs. An outfit fitted to a template can be reused by characters using that template, with checks for head, neck, hair, and pose compatibility. Each additional template still requires an outfit fitting and validation pass.
+
+The proposed validation step is one body template, two distinct character heads, and a shared outfit before producing the full six-template library. The template count is a planning target, not a requirement to create all six for the first playable.
+
+### Condition layers
+
+- Dirt, blood, bruises, and similar temporary marks use independently controlled overlays.
+- Scars use persistent appearance overlays; how they are earned and carried between expeditions depends on unresolved gameplay persistence rules.
+- Bandages are separate accessories that can cover wounds.
+- Sunken cheeks, pallor, and other changes to facial condition use coordinated shading layers or replacement face variants rather than arbitrary dark marks.
+- Condition placement must remain compatible with facial expressions and the character's fixed pose. Wounds should transition to healed scars where appropriate; bandages cover injuries. Avoid blindly stacking every effect until the face becomes unreadable.
+
+### Simple animation
+
+Use interchangeable pixel drawings rather than deforming a single face. Initial candidates are three blink states, a small set of speaking mouth frames, and coordinated eye/brow/mouth expression sets such as neutral, worried, angry, and exhausted. Speaking frames must remain compatible with the current expression. Full lip-sync is not required for the initial test.
+
+Frame counts and expression coverage are proposals, not completed assets. Build and check one blink, a short speaking cycle, one outfit swap, and one condition overlay before expanding. Generated concepts require alignment and pixel cleanup; independently generating every frame risks identity and feature drift.
+
+### Existing prototype and limits
+
+`art/concepts/portraits/mara-base-192-v2.png` is the unhooded pose reference. `art/concepts/portraits/mara-layered-v1/` contains a 192 × 192 OpenRaster wardrobe test, separate transparent PNGs, a combined preview, and a README.
+
+The wardrobe test demonstrates a tunic toggle and provides neutral eye/mouth replacement patches. It is **not a finished layered animation master**: hair, body, face, and original underlayer remain combined in its base image; blink, speech, scar, dirt, and fatigue variants are not implemented. The next production step is proper separation and hidden-area reconstruction.
 
 ## Proposed first playable
 
@@ -131,7 +177,7 @@ Success criteria:
 5. What persists between expeditions: companions, death, injuries, equipment, knowledge, and shortcuts.
 6. Floor count, expedition duration, difficulty curve, and bottom-floor purpose.
 7. How procedural generation guarantees navigable layouts and coherent clues.
-8. Art resolution, asset workflow, animation budget, and horror boundaries.
+8. Environment resolution, final portrait cleanup/export workflow, animation budget, body-template proportions, and horror boundaries. Portrait working canvas is 192 × 192; see the portrait-system section for agreed direction and remaining proposals.
 
 ## References and concept history
 
