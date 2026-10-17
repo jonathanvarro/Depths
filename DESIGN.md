@@ -41,7 +41,7 @@ Preparation should create responsibility: the player can connect outcomes to cho
 - Entering a room commits the party to encountering its contents. It does not require opening every chest or touching every object.
 - Rooms can contain creatures, traps, chests, strange objects, events, or places of relief.
 - Some threats require an immediate response; others allow investigation or withdrawal.
-- Investigation provides clues but consumes resources. Exact costs and whether each action advances time remain open.
+- Investigation provides clues but consumes resources, including time.
 - Procedural layouts should use consistent rules and reusable authored encounters so discoveries remain understandable.
 
 ## Map and dungeon progression
@@ -74,11 +74,18 @@ Exploration knowledge can provide an advantage or help avoid an unnecessary figh
 
 Possible objectives include defeating an enemy, protecting a companion, recovering an object, or holding a threat back while clearing an exit. Retreat should involve a meaningful decision; its exact mechanics remain open.
 
-The precise presentation is unresolved: enemies might remain in first-person view or use a dedicated formation layout. Do not assume the movement or combat of Greed & Darkness is the target. The owner likes its art styling but envisions these systems differently. Three party positions and a compact action set are starting proposals, not settled rules.
+**Decided 2026-10-16 (#13): enemies appear in the first-person view.** A dedicated formation layout may be explored later. Do not assume the movement or combat of Greed & Darkness is the target. The owner likes its art styling but envisions these systems differently. Three party positions and a compact action set are starting proposals, not settled rules.
 
 ## Resources, rewards, and uncertainty
 
-Candidate resources include health, light, food, healing supplies, and carrying capacity. Treasure can compete with provisions for space. Recovery consumes resources or requires safety.
+**Decided 2026-10-16 (#10):**
+
+- **Time is the primary resource.** Every step costs time.
+- **Lantern oil burns over time, and its level matters.** A high oil level gives more light and a greater advantage but burns proportionately faster; a low level burns slower but gives less light and less advantage. Managing the flame is a trade-off, not just a meter running down.
+- **Food and healing are used outside combat.** Their effects generally take time to fully apply, or apply after a camp/rest event, rather than instantly.
+- **Supplies live in a backpack/inventory screen**, not on the main HUD. Keep the HUD visually quiet.
+
+Other candidate resources: health and carrying capacity. Treasure can compete with provisions for space. Recovery consumes resources or requires safety.
 
 Rewards include treasure, equipment, knowledge, shortcuts, and safe resting places. Discoveries should change future options, not simply add score.
 
@@ -170,13 +177,13 @@ Success criteria:
 
 ## Open decisions
 
-1. ~~Target platform and engine~~ — decided: Godot 4, Windows and iPhone. Still open: touch control scheme, phone orientation (portrait or landscape), and minimum supported devices.
-2. ~~Movement scheme~~ — decided: forward/back/turn. Still open: strafing, room-transition presentation, and whether each step costs time.
-3. Combat layout, targeting, positions, action economy, and retreat rules.
+1. ~~Target platform and engine~~ — decided: Godot 4, Windows and iPhone, **landscape only** on phone (#6). Still open: final touch layout and minimum supported devices.
+2. ~~Movement scheme~~ — decided: forward/back/turn. Each step costs time (#10). Still open: strafing and room-transition presentation.
+3. Combat: enemies in first-person view (#13). Still open: targeting, positions, action economy, and retreat rules.
 4. Strain states, player agency, and the role of trust or relationships.
 5. What persists between expeditions: companions, death, injuries, equipment, knowledge, and shortcuts.
 6. Floor count, expedition duration, difficulty curve, and bottom-floor purpose.
-7. How procedural generation guarantees navigable layouts and coherent clues.
+7. Coherent clue placement in procedural floors. (Navigability is guaranteed by the generator: rooms are joined incrementally, so every floor cell is reachable — #1.)
 8. Environment resolution, final portrait cleanup/export workflow, animation budget, body-template proportions, and horror boundaries. Portrait working canvas is 192 × 192; see the portrait-system section for agreed direction and remaining proposals.
 
 ## References and concept history

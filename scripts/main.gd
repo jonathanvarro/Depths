@@ -1,16 +1,18 @@
 extends Node3D
-## Grid-movement prototype: builds a placeholder dungeon floor from a text
-## layout, places the party at the start, and adds the map and touch controls.
+## Grid-movement prototype: generates a placeholder dungeon floor, places the
+## party at the start, and adds the map and touch controls.
 
 const DungeonMap := preload("res://scripts/dungeon_map.gd")
 const Party := preload("res://scripts/party.gd")
 const Minimap := preload("res://scripts/minimap.gd")
+const FloorGenerator := preload("res://scripts/floor_generator.gd")
 
 const CELL_SIZE := 2.0
 const WALL_HEIGHT := 2.4
 
+## Hand-drawn floor for debugging (see use_debug_layout).
 ## '#' wall, '.' floor, 'S' start. Rows must all be the same length.
-const LAYOUT := [
+const DEBUG_LAYOUT := [
 	"############",
 	"#S...#.....#",
 	"#.##.#.###.#",
@@ -34,10 +36,16 @@ const KEY_BINDINGS := {
 
 const TOUCH_BUTTON_SIZE := Vector2(88, 88)
 
+## Seed for the generated floor; 0 picks a new random floor each run.
+## Every run prints its seed, so a floor worth revisiting can be replayed.
+@export var floor_seed := 0
+## Use DEBUG_LAYOUT instead of generating a floor.
+@export var use_debug_layout := false
+
 
 func _ready() -> void:
 	_register_input_actions()
-	var map = DungeonMap.new(PackedStringArray(LAYOUT))
+	var map = DungeonMap.new(_make_layout())
 	_build_environment()
 	_build_floor(map)
 
@@ -49,6 +57,14 @@ func _ready() -> void:
 	party.setup(map, CELL_SIZE)
 
 	_build_ui(minimap)
+
+
+func _make_layout() -> PackedStringArray:
+	if use_debug_layout:
+		return PackedStringArray(DEBUG_LAYOUT)
+	var seed_value := floor_seed if floor_seed != 0 else randi()
+	print("Floor seed: ", seed_value)
+	return FloorGenerator.generate(seed_value)
 
 
 func _register_input_actions() -> void:
@@ -101,7 +117,8 @@ func _build_floor(map) -> void:
 			var cell := Vector2i(x, y)
 			var at := Vector3(x * CELL_SIZE, 0.0, y * CELL_SIZE)
 			if map.is_wall(cell):
-				_add_mesh(wall_mesh, at + Vector3(0, WALL_HEIGHT / 2.0, 0))
+				if map.is_exposed_wall(cell):
+					_add_mesh(wall_mesh, at + Vector3(0, WALL_HEIGHT / 2.0, 0))
 			else:
 				_add_mesh(tile_mesh, at)
 				_add_mesh(ceiling_mesh, at + Vector3(0, WALL_HEIGHT, 0))

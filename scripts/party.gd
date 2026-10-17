@@ -27,6 +27,11 @@ func setup(dungeon_map, size: float) -> void:
 	map = dungeon_map
 	cell_size = size
 	cell = map.start_cell
+	# Start facing an open direction rather than a wall.
+	for f in DIRECTIONS.size():
+		if not map.is_wall(cell + DIRECTIONS[f]):
+			facing = f
+			break
 	position = _cell_to_world(cell)
 	rotation.y = _facing_to_yaw(facing)
 

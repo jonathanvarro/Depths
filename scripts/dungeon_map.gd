@@ -31,6 +31,35 @@ func is_wall(cell: Vector2i) -> bool:
 	return _rows[cell.y][cell.x] == WALL
 
 
+## True if a floor cell borders this wall; buried walls never need drawing.
+func is_exposed_wall(cell: Vector2i) -> bool:
+	for offset in [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]:
+		if not is_wall(cell + offset):
+			return true
+	return false
+
+
+## All floor cells reachable on foot from `from` (flood fill).
+func reachable_from(from: Vector2i) -> Dictionary:
+	var seen := {from: true}
+	var queue: Array[Vector2i] = [from]
+	while not queue.is_empty():
+		var cell: Vector2i = queue.pop_back()
+		for offset in [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]:
+			var next: Vector2i = cell + offset
+			if not seen.has(next) and not is_wall(next):
+				seen[next] = true
+				queue.append(next)
+	return seen
+
+
+func floor_cell_count() -> int:
+	var count := 0
+	for row in _rows:
+		count += row.length() - row.count(WALL)
+	return count
+
+
 ## Marks a cell and its eight neighbours as seen, so nearby walls show on the map.
 func reveal_around(cell: Vector2i) -> void:
 	for dy in range(-1, 2):
