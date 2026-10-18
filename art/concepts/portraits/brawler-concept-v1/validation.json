@@ -1,0 +1,39 @@
+{
+  "issue": 102,
+  "tool": "built-in image_gen.imagegen",
+  "scope": "static concept; not a registered animated rig",
+  "transform": {
+    "full_square_resize": [
+      184,
+      184
+    ],
+    "offset": [
+      4,
+      4
+    ]
+  },
+  "canvas": [
+    192,
+    192
+  ],
+  "card_canvas": [
+    96,
+    96
+  ],
+  "alpha_bounds": [
+    4,
+    27,
+    188,
+    188
+  ],
+  "visible_colours": 48,
+  "source_sha256": "8edb7a7a8ec1e36739a8f6a5c7afbd64e29f9bb59551548251cc59afffcd80b4",
+  "export_sha256": {
+    "portrait-192.png": "e154ab00bb350fe858736046dcff4d546b99744401a723793a6faca255f83774",
+    "portrait-96.png": "954c467f5ef7d5647c5a1838631adcf7f599cded794fdcf949cfcc0df72a0a6b",
+    "portrait-enlarged.png": "d28be9826aefd77acc9c762aab240afecb28d64fe5c1a655d8ab5ea0f3e57228",
+    "review-dark.png": "c1a9408222740c1e2cf98db72677808ba7477babf33289c23632ec3585adfc20",
+    "review-light.png": "3f83c6e386e5068fe070c976c828a5f0fad3f79edcb890b58e9f83729ecfe187"
+  },
+  "failures": []
+}

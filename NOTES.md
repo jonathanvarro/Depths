@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-18 – ChatGPT
+- Did: #102 explores the owner's bald male Brawler: thick neck/shoulders, battered nose, uneven features, stubble, missing front tooth and a relaxed confident grin; plain quilted starter clothing and neutral ambient material shading. Built-in ImageGen master/exact prompt are preserved in art/source/brawler-concept-v1. Transparent 192px/96px exports, enlarged portrait and dark/light comparisons are in art/concepts/portraits/brawler-concept-v1; canvas/alpha/48-colour/margin checks pass and both native sizes were visually reviewed.
+- Next: Owner reviews the face and temperament. If selected, author a resting expression, registered components/blink/talk/conditions and coordinated outfit light masks before adding it to the live roster.
+- Watch out: Static concept only; no existing portraits or live resources replaced, and no class/trait/fear/equipment/lore decisions implied. Claude's concurrent game changes are untouched. No runtime scripts changed, so checks were limited to the artwork/export contract.
+
 ## 2026-10-18 – Claude
 - Did: #44 goblin fortress and queen with placeholder art: four floors (floor 3 outskirts signs and stakes, floor 4 fortress theme), the barred gate (guards' fight, stays broken across days), the queen's hall (warning, no retreat), goblin archer/guard/queen (summons, shield wall, rage, coin-flip cleaver), victory screen, 50g bounty, contracts stop, camp rumours. Tuned by simulation.
 - Next: ChatGPT's #99 art (queen, archer, guard, fortress textures, gate) and #97 research; owner playtest of the full cave.

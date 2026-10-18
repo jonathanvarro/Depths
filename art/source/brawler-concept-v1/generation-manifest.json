@@ -1,0 +1,16 @@
+{
+  "tool": "image_gen.imagegen",
+  "date": "2026-10-18",
+  "issue": 102,
+  "args": {
+    "prompt": "Use case: stylized-concept.\nAsset type: a NEW single character portrait concept for Depths, a dark first-person dungeon crawler. Image 1 is a STYLE/FRAMING reference only (the existing recruit); Image 2 is a STYLE/PALETTE reference only (Mara). Invent a distinctly different man, do not copy either identity.\nPrimary request: a bald, conventionally unattractive adult male Brawler, about forty, who has the uncomplicated, utterly confident bearing of an unpolished knight who enjoys clubbing things. Thick neck, broad powerful shoulders, heavy slightly asymmetric jaw, large battered flattened nose, prominent ears, weathered skin. Completely bald scalp, heavy eyebrows, very short dark stubble. A small relaxed lopsided grin must clearly reveal ONE missing upper front tooth among a few ordinary teeth. The missing tooth should read at small portrait size; do not turn it into a huge cartoon mouth. Steady direct eyes, a quietly pleased and self-assured expression, eager for a straightforward physical challenge. He is competent and adult, rather than vacant, raging, malicious, or slapstick. Distinctive, rough, human and potentially likeable.\nClothing: plain worn brown quilted arming jerkin over an undyed linen collar, simple practical starter clothing that suggests a rough foot soldier or low-ranking knight. No ornate armour, heraldry, jewelry or wealth. Keep the face the centre of attention; no weapon in frame.\nStyle: match the game's crisp restrained 192x192 pixel portrait language: deliberate visible pixel clusters, limited muted earth/skin palette, readable broad forms, sparse facial marks, modest detail. Not photorealistic, not a smooth painting, not glossy cartoon or elaborate high-resolution illustration.\nComposition: one square full-canvas head-and-shoulders bust, almost front-facing with a slight turn, looking toward the viewer. Entire bald dome comfortably inside the canvas, ears visible, broad shoulders near the lower edges. Similar head size and eye-line to the reference recruit so it can later fit the portrait system, but this is a concept, not an exact component registration request. True transparent exterior, no background, frame, label, sheet, UI or text.\nLighting: neutral local material colours and soft diffuse WHITE ambient fill, enough modelling for volume. No baked orange torch rim, yellow lamp cast, dramatic one-sided directional light, deep cast shadow or atmospheric glow. Separate illumination will be authored later.",
+    "referenced_image_paths": [
+      "E:/GitHub/Depths/art/portraits/recruit-roster-v1/brawler-b/preview.png",
+      "E:/GitHub/Depths/art/portraits/mara-neutral-v1/preview.png"
+    ],
+    "transparent_background": true
+  },
+  "generated_file": "exec-47be6711-aadf-4f92-a353-6c14c3fc1256.png",
+  "preserved_file": "master.png",
+  "scope": "Single static portrait concept. No live roster replacement, animation or lighting masks."
+}
