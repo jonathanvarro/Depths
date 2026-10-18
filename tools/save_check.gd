@@ -136,10 +136,10 @@ func _initialize() -> void:
 		await create_timer(0.1).timeout
 		guard += 1
 	var after := SaveGame.read()
-	check("a wipe saves at camp with nobody and nothing", after.get("at_camp", false) and after["party"].is_empty())
+	check("a wipe saves at camp: recruits gone, Mara back, nothing carried", after.get("at_camp", false) and after["party"].size() == 1)
 	await _drop(main)
 	main = await _game(true)
-	check("continue after a wipe: the camp, empty-handed", main._camp.visible and main._party_state.members.is_empty() and main._party_state.supplies.gold == 0)
+	check("continue after a wipe: the camp, Mara hurt, empty-handed", main._camp.visible and main._party_state.members.size() == 1 and main._party_state.members[0].main_hero and main._party_state.members[0].is_alive() and main._party_state.supplies.gold == 0)
 	await _drop(main)
 
 	# 5. The title offers Continue when there's a save.

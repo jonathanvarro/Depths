@@ -8,9 +8,10 @@ extends Control
 ## moves the day on) says so on its button first.
 
 ## The player chose to head back down (cave path).
-signal cave_chosen
+signal cave_chosen(start_depth: int)
 ## Save and go back to the title (#45).
 signal save_and_exit
+signal open_settings
 
 const DIR := "res://art/camp/cave-camp-v1/"
 const HEADING := preload("res://art/fonts/heading-cinzel.tres")
@@ -91,6 +92,12 @@ func _init() -> void:
 	save.add_theme_font_size_override("font_size", 11)
 	save.pressed.connect(func(): save_and_exit.emit())
 	_canvas.add_child(save)
+	var gear := _button("Settings")
+	gear.position = Vector2(540, 62)
+	gear.size = Vector2(84, 24)
+	gear.add_theme_font_size_override("font_size", 11)
+	gear.pressed.connect(func(): open_settings.emit())
+	_canvas.add_child(gear)
 	_build_activity()
 	_note = _label("", ACTION, 14, AMBER)
 	_note.position = Vector2(0, 150)
@@ -552,8 +559,18 @@ func _cave_path() -> void:
 		var state := "paid" if c["paid"] else "%d of %d" % [c["done"], c["count"]]
 		_text("Posted on the trail post, by order of the king: %s (%s)." % [CampState.contract_text(c), state], AMBER)
 	var down := _button("Head back down")
-	down.pressed.connect(func(): cave_chosen.emit())
+	down.pressed.connect(func(): cave_chosen.emit(1))
 	_body.add_child(down)
+	# The secured route (#79): straight to floor 2, for a price.
+	if _camp.route_open():
+		var route := _button("Secured route to floor 2 (%dg)" % CampState.ROUTE_PRICE)
+		route.disabled = _party.supplies.gold < CampState.ROUTE_PRICE
+		route.pressed.connect(func():
+			if _camp.buy_route(_party):
+				cave_chosen.emit(2))
+		_body.add_child(route)
+	else:
+		_text("The king's scouts say: reach the second floor twice more, and they'll mark a safe way down to it - for a price. (%d of %d)" % [mini(_camp.floor2_reached, CampState.ROUTE_AFTER), CampState.ROUTE_AFTER], MUTED)
 
 
 func _unhandled_input(event: InputEvent) -> void:

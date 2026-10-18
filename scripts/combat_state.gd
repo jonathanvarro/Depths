@@ -247,7 +247,7 @@ func _killing_blow(foe: Foe) -> Dictionary:
 			outcome["injury"] = injury
 			outcome["text"] += " %s suffers a %s!" % [target.display_name, injury.display_name.to_lower()]
 	if not target.is_alive():
-		outcome["text"] += " %s falls." % target.display_name
+		outcome["text"] += _fall_text(target)
 	_check_end()
 	return outcome
 
@@ -475,7 +475,7 @@ func _carry_out(foe: Foe) -> Dictionary:
 				outcome["injury"] = injury
 				outcome["text"] += " %s suffers a %s!" % [target.display_name, injury.display_name.to_lower()]
 		if not target.is_alive():
-			outcome["text"] += " %s falls." % target.display_name
+			outcome["text"] += _fall_text(target)
 	else:
 		outcome["text"] = "The %s lunges at %s and misses." % [foe.name.to_lower(), target.display_name]
 	_check_end()
@@ -544,8 +544,14 @@ func _tick_venom(hero: Companion) -> void:
 		_venom.erase(hero)
 	var text := "Venom burns %s (%d)." % [hero.display_name, VENOM_DAMAGE]
 	if not hero.is_alive():
-		text += " %s falls." % hero.display_name
+		text += _fall_text(hero)
 	events.append(text)
+
+
+func _fall_text(hero: Companion) -> String:
+	if hero.is_unconscious():
+		return " %s collapses, unconscious." % hero.display_name
+	return " %s falls." % hero.display_name
 
 
 func _build_order() -> void:

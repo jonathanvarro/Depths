@@ -62,6 +62,7 @@ func _init() -> void:
 	_done = _button("Continue")
 	column.add_child(_done)
 	_player = AudioStreamPlayer.new()
+	_player.bus = "Effects"
 	_player.stream = load("res://audio/placeholder/coin.wav") if ResourceLoader.exists("res://audio/placeholder/coin.wav") else null
 	add_child(_player)
 	visible = false

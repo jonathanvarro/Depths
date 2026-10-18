@@ -184,7 +184,9 @@ func refresh() -> void:
 	_clear_icons()
 	if companion.is_alive() and companion.bleeding:
 		_add_icon(Icon.BLEEDING, false, "Bleeding: loses health as she walks")
-	if not companion.is_alive():
+	if companion.is_unconscious():
+		_add_icon(Icon.DOWN, false, "Unconscious: a draught or a rest revives them")
+	elif not companion.is_alive():
 		_add_icon(Icon.DOWN)
 	elif low and not companion.bleeding:
 		_add_icon(Icon.WOUNDED)

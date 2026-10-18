@@ -226,6 +226,21 @@ Suggested initial presentation: one campsite screen with a few selectable activi
   - **Simulated** (`tools/balance_sim.gd`, simple play): a fresh party of three beats the queen 92% of the time in about 11 rounds, losing about 36 of 66 health. The gate fight costs about 16.
   - The old "end the expedition at the bottom" stand-in is gone.
 
+**Decided and built 2026-10-18:**
+- **Main heroes fall unconscious, not dead (#83).**
+  - Mara is a main hero. At 0 health she's carried: she can't act, but stays in the party.
+  - A draught goes to her first, and a rest brings her round.
+  - In a full wipe the recruits are lost and she wakes at camp with 1 health and a deep wound.
+  - The rule lives in `Companion.is_unconscious()` / main.gd `_main_heroes_wake_at_camp()`, so a permanent-loss rule can replace it.
+- **The secured route (#79):** after **two expeditions that reach floor 2**, the cave path offers the king's scouts' route straight to floor 2 for **40g a trip** (expensive by design; tune by playtest). Before that, the cave path shows progress.
+- **Room contents (#46):** enemies **ambush** and aren't shown.
+  - Chests, objects and rest spots stand in their rooms; traps stay hidden.
+  - A goblin stash and the strongbox use ChatGPT's chest art (open, then empty once resolved); an abandoned pack is a coin sack.
+  - The idol, the pool, rest spots and the old workings are simple placeholders until props arrive (#96).
+- **Settings (#52):** master, music and effects volume (separate audio buses), fullscreen on computers, screen flashes on/off, and text size (Normal / Large / Larger, scaling the whole interface).
+  - Saved to `user://settings.cfg`.
+  - Reachable from the title, the Pack and the camp.
+
 The suggested retreat flow is to return through the dungeon to its entrance before reaching camp, with discovered shortcuts potentially easing later returns. Travel costs, escape exceptions, refuge services, recovery timing, and prices still need design decisions. Rest spots inside the dungeon remain distinct from the outside refuge.
 
 **Cave-camp staff and equipment (2026-10-16):** the owner wants a blacksmith sent from a nearby village and a nurse for the cave area. The smith is an apprentice, explaining the limited selection of quality items; the starting location should offer very basic equipment. The [updated campsite design](docs/campsite-design.md) proposes a sixth clickable smith area and places the nurse in the treatment tent. Exact stock, repair/crafting mechanics, NPC identities and later-site availability remain open. The original five-area interaction study predates this addition.

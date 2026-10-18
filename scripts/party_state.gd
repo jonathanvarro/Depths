@@ -115,6 +115,9 @@ func drop(item: Equipment) -> void:
 func rest() -> void:
 	advance_time(REST_TIME)
 	complete_pending_effects()
+	for member in members:
+		if member.is_unconscious():  # a rest brings them round (#83)
+			member.change_health(maxi(1, member.effective_max_health() / 4))
 	for member in living_members():
 		member.change_strain(StrainRules.RESTING)
 
@@ -125,6 +128,9 @@ func living_members() -> Array[Companion]:
 
 ## The living hero furthest below full health, or null if nobody is hurt.
 func most_hurt() -> Companion:
+	for member in members:
+		if member.is_unconscious():
+			return member  # a draught revives an unconscious main hero first (#83)
 	var worst: Companion = null
 	for member in living_members():
 		if member.health < member.effective_max_health() and (worst == null or member.effective_max_health() - member.health > worst.effective_max_health() - worst.health):

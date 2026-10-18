@@ -51,6 +51,9 @@ const StrainRules := preload("res://scripts/strain.gd")
 @export var weakness := ""
 ## The campaign's first hero (Mara): can't be dismissed at camp.
 @export var founder := false
+## A main hero (#83): falling leaves them unconscious, not dead - carried
+## by the party until a draught or a rest revives them.
+@export var main_hero := false
 ## Combat row (#72): "front" takes melee and shields the back; "back" is
 ## safe from melee but attacks only with reach. Kept between fights.
 @export_enum("front", "back") var row := "front"
@@ -102,6 +105,17 @@ func hit_accuracy() -> float:
 
 func is_alive() -> bool:
 	return health > 0
+
+
+## Fallen but not dead (#83). The one place the "can't die" rule lives, so a
+## permanent-loss rule can replace it later.
+func is_unconscious() -> bool:
+	return main_hero and health <= 0
+
+
+## Still with the party: conscious, or a main hero being carried.
+func is_with_party() -> bool:
+	return is_alive() or is_unconscious()
 
 
 func change_health(amount: int) -> void:

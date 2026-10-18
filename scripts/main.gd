@@ -24,6 +24,8 @@ const CampState := preload("res://scripts/camp_state.gd")
 const CampScreen := preload("res://scripts/camp_screen.gd")
 const SaveGame := preload("res://scripts/save_game.gd")
 const CoinFlip := preload("res://scripts/coin_flip.gd")
+const Settings := preload("res://scripts/settings.gd")
+const SettingsScreen := preload("res://scripts/settings_screen.gd")
 const TITLE_SCENE := "res://scenes/title.tscn"
 ## Opening: remark on being lost at junctions this often (steps).
 const LOST_REMARK_EVERY := 18
@@ -247,8 +249,10 @@ var _camp: Control  # camp_screen.gd
 var _active_cell := Vector2i(-1, -1)  # a fight or event in progress (redone after loading)
 var _wipe_pending := false  # wiped: the save already holds the aftermath
 var _save_queued := false
+var _settings: Control  # settings_screen.gd (#52)
 var _cave_theme: EnvironmentTheme  # floors 1-3; the fortress has its own (#44)
 var _fight_kind := ""  # "gate" or "queen" while those fights run (#44)
+var _props := {}  # cell -> prop node for this floor's room contents (#46)
 var _cell_now := Vector2i(-1, -1)
 var _cell_before := Vector2i(-1, -1)  # where to step back to from the hall's door
 var _party_state  # party_state.gd: heroes and time, kept across floors
@@ -330,6 +334,7 @@ var _bleed_ticks := 0  # bleed ticks shown this run (for tests)
 
 func _ready() -> void:
 	_register_input_actions()
+	Settings.apply(get_tree())
 	_build_environment()
 	_cave_theme = environment_theme
 	_site_seed = floor_seed if floor_seed != 0 else randi()
@@ -477,6 +482,7 @@ func _build_level() -> void:
 	_level = LevelBuilder.new()
 	_level.build(_map, environment_theme, CELL_SIZE, WALL_HEIGHT)
 	add_child(_level)
+	_add_room_props()
 	if _depth == OPENING_DEPTH and _in_opening:
 		_add_opening_dressing()
 	elif _depth == OUTSKIRTS_DEPTH and not use_debug_layout:
@@ -556,6 +562,7 @@ func _run_event(cell: Vector2i) -> void:
 	if result["left"]:
 		_map.triggered.erase(cell)
 		return
+	_empty_prop(cell)
 	if _in_opening and event in OPENING_BODY_EVENTS:
 		_searched_bodies[cell] = true
 		_say("search_body", true)
@@ -663,10 +670,11 @@ func _end_expedition(ending: int) -> void:
 	_party.locked = true  # after closing overlays, which unlock on close
 	var notes := {
 		Expedition.Ending.RETURNED: "You stagger out into the daylight, alone." if _in_opening else "You climb out into the daylight.",
-		Expedition.Ending.WIPED: "Everyone is lost, and everything they carried. The camp remains: new companions wait by the fire.",
+		Expedition.Ending.WIPED: "Everyone falls, and everything they carried is lost. Recruits don't come back; a main hero wakes at camp, badly hurt. New companions wait by the fire.",
 		Expedition.Ending.REACHED_BOTTOM: "You stood where the others fell, and lived to climb back.",
 	}
 	if ending == Expedition.Ending.WIPED:
+		_main_heroes_wake_at_camp()
 		_wipe_pending = true
 		_save_now()
 	if _in_opening and ending == Expedition.Ending.RETURNED:
@@ -698,11 +706,14 @@ func _start_new_expedition() -> void:
 		_party_state.supplies.torch_left = 0.0
 	_party_state.supplies.changed.emit()
 	_update_lantern()
-	# The fallen are gone; heroes who stayed with the nurse rejoin (#41).
+	# The fallen are gone (main heroes are carried, #83); heroes who stayed
+	# with the nurse rejoin (#41).
 	for hero: Companion in _party_state.members.duplicate():
-		if not hero.is_alive():
+		if not hero.is_with_party():
 			_party_state.remove_member(hero)
 	_camp_state.rejoin(_party_state)
+	if _expedition.deepest >= 2:
+		_camp_state.floor2_reached += 1  # towards the secured route (#79)
 	var reward: int = _camp_state.collect_contract(_party_state)
 	var note := ""
 	if _camp_state.queen_defeated and not _camp_state.bounty_paid:
@@ -724,7 +735,7 @@ func _camp_loop(reward := 0, note := "") -> void:
 	elif reward > 0:
 		_camp.announce("The king's quartermaster pays the contract: %d gold." % reward)
 	_save_now()  # autosave on returning to camp (#45)
-	await _camp.cave_chosen
+	var start_depth: int = await _camp.cave_chosen
 	_camp.visible = false
 	_camp_state.leave_behind(_party_state)
 	_expedition = Expedition.new(_party_state, _expedition.number + 1)
@@ -732,8 +743,12 @@ func _camp_loop(reward := 0, note := "") -> void:
 	await _preparation.entered
 	_ending = false
 	_party.locked = false
-	_go_to_floor(1, Arrival.FROM_ABOVE)
-	_show_message("Day %d. Expedition %d: back into the cave." % [_camp_state.day, _expedition.number])
+	_go_to_floor(start_depth, Arrival.FROM_ABOVE)
+	if start_depth > 1:
+		_expedition.visit_floor(1)
+		_show_message("Day %d. Expedition %d: the scouts' route, straight to floor %d." % [_camp_state.day, _expedition.number, start_depth])
+	else:
+		_show_message("Day %d. Expedition %d: back into the cave." % [_camp_state.day, _expedition.number])
 	_light_torch_if_dark()
 
 
@@ -744,6 +759,16 @@ func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST or what == NOTIFICATION_APPLICATION_PAUSED:
 		if is_node_ready() and _party_state:
 			_save_now()
+
+
+## A full wipe (#83): recruits are lost, but an unconscious main hero
+## wakes at camp, hurt and with a lasting injury.
+func _main_heroes_wake_at_camp() -> void:
+	for hero: Companion in _party_state.members:
+		if hero.is_unconscious():
+			hero.health = 1
+			hero.add_injury(DEBUG_INJURIES[0])  # a deep wound
+			hero.emit_changed()
 
 
 ## Camp changes (buying, hiring, resting) save once things settle.
@@ -777,7 +802,7 @@ func _save_now() -> void:
 			people.append(hero)
 	var index := func(hero): return people.find(hero)
 	var at_camp: bool = _camp.visible or _preparation.visible or _wipe_pending
-	var party: Array = _party_state.members.filter(func(h: Companion): return h.is_alive() or not _wipe_pending)
+	var party: Array = _party_state.members.filter(func(h: Companion): return h.is_with_party() or not _wipe_pending)
 	var supplies: Dictionary = SaveGame.pack_object(_party_state.supplies)
 	if _wipe_pending:  # everything carried is lost (#41)
 		var nothing = Supplies.new()
@@ -877,6 +902,83 @@ func _light_torch_if_dark() -> void:
 	var supplies = _party_state.supplies
 	if supplies.source == Supplies.Source.NONE and supplies.count(TORCH) > 0:
 		supplies.light_torch(TORCH)
+
+
+# --- Room contents (#46) ---------------------------------------------
+
+## Chests, objects and rest spots show in their rooms; traps and enemies
+## don't (owner: enemies ambush). Emptied containers show as empty.
+func _add_room_props() -> void:
+	_props.clear()
+	if _map == null:
+		return
+	for cell in _map.events:
+		var event: RoomEvent = _map.events[cell]
+		if event.kind == DungeonMap.Content.TRAP or _map.solid.has(cell):
+			continue
+		var node: Node3D = event.prop.instantiate() if event.prop else _placeholder_prop(event.kind)
+		if node == null:
+			continue
+		node.position = Vector3(cell.x * CELL_SIZE, 0.0, cell.y * CELL_SIZE)
+		_level.add_child(node)
+		_props[cell] = node
+		if _map.triggered.has(cell):
+			_empty_prop(cell)
+
+
+func _empty_prop(cell: Vector2i) -> void:
+	var node = _props.get(cell)
+	if node and "state" in node:
+		node.set("state", "empty")
+
+
+## Simple shapes until the props arrive (#96): a pale stone for strange
+## objects, a ring of stones for rest spots, a rock pile for anything else.
+func _placeholder_prop(kind: int) -> Node3D:
+	var root := Node3D.new()
+	var stone := StandardMaterial3D.new()
+	stone.albedo_color = Color(0.45, 0.43, 0.4)
+	match kind:
+		DungeonMap.Content.STRANGE_OBJECT:
+			var pale := StandardMaterial3D.new()
+			pale.albedo_color = Color(0.85, 0.83, 0.76)
+			var plinth := MeshInstance3D.new()
+			var box := BoxMesh.new()
+			box.size = Vector3(0.5, 0.5, 0.5)
+			box.material = stone
+			plinth.mesh = box
+			plinth.position.y = 0.25
+			root.add_child(plinth)
+			var figure := MeshInstance3D.new()
+			var capsule := CapsuleMesh.new()
+			capsule.radius = 0.12
+			capsule.height = 0.45
+			capsule.material = pale
+			figure.mesh = capsule
+			figure.position.y = 0.72
+			root.add_child(figure)
+		DungeonMap.Content.REST_SPOT:
+			for i in 7:
+				var rock := MeshInstance3D.new()
+				var sphere := SphereMesh.new()
+				sphere.radius = 0.09
+				sphere.height = 0.12
+				sphere.material = stone
+				rock.mesh = sphere
+				var angle := TAU * i / 7.0
+				rock.position = Vector3(cos(angle) * 0.35, 0.05, sin(angle) * 0.35)
+				root.add_child(rock)
+		_:
+			for i in 4:
+				var rock := MeshInstance3D.new()
+				var box := BoxMesh.new()
+				box.size = Vector3(0.3, 0.22, 0.26) * (1.0 - i * 0.15)
+				box.material = stone
+				rock.mesh = box
+				rock.position = Vector3(-0.2 + i * 0.13, 0.11, (i % 2) * 0.15)
+				rock.rotation.y = i * 0.7
+				root.add_child(rock)
+	return root
 
 
 # --- The goblin fortress (#44) ------------------------------------------
@@ -1236,7 +1338,7 @@ func _bleed_pulse(hero: Companion) -> void:
 	_heart_player.pitch_scale = lerpf(1.0, 1.15, weakness)
 	for i in beats:
 		get_tree().create_timer(i * gap).timeout.connect(_heart_player.play)
-	if not screen_flashes:
+	if not screen_flashes or not Settings.get_value("flashes"):
 		return
 	var peak := lerpf(0.45, 0.85, weakness)
 	if _bleed_ticks == 1:
@@ -1259,7 +1361,7 @@ func _update_wound_dim() -> void:
 		return
 	var dim := 0.0
 	var living: Array[Companion] = _party_state.living_members()
-	if screen_flashes and not living.is_empty() and living[0].bleeding:
+	if screen_flashes and Settings.get_value("flashes") and not living.is_empty() and living[0].bleeding:
 		var fraction := float(living[0].health) / living[0].effective_max_health()
 		dim = clampf((0.5 - fraction) / 0.5, 0.0, 1.0) * 0.55
 	_wound_overlay.material.set_shader_parameter("dim", dim)
@@ -2111,7 +2213,9 @@ func _show_message(text: String) -> void:
 ## Placeholder sound: the theme's ambience loops, footsteps vary in sample
 ## and pitch, and one-off effects share a player.
 func _build_audio() -> void:
+	Settings.ensure_buses()
 	_ambience_player = AudioStreamPlayer.new()
+	_ambience_player.bus = "Music"
 	_ambience_player.stream = environment_theme.ambience
 	_ambience_player.volume_db = AMBIENCE_VOLUME_DB
 	add_child(_ambience_player)
@@ -2124,16 +2228,19 @@ func _build_audio() -> void:
 	steps.random_pitch = 1.12
 	steps.random_volume_offset_db = 2.0
 	_footstep_player = AudioStreamPlayer.new()
+	_footstep_player.bus = "Effects"
 	_footstep_player.stream = steps
 	_footstep_player.volume_db = FOOTSTEP_VOLUME_DB
 	add_child(_footstep_player)
 
 	_heart_player = AudioStreamPlayer.new()
+	_heart_player.bus = "Effects"
 	_heart_player.stream = HEARTBEAT
 	_heart_player.volume_db = HEARTBEAT_VOLUME_DB
 	add_child(_heart_player)
 
 	_effect_player = AudioStreamPlayer.new()
+	_effect_player.bus = "Effects"
 	_effect_player.volume_db = EFFECT_VOLUME_DB
 	_effect_player.max_polyphony = 2
 	add_child(_effect_player)
@@ -2275,10 +2382,19 @@ func _build_ui(minimap: Control) -> void:
 	coin_layer.add_child(coin)
 	_combat.coin = coin
 	_combat.place_foe = _place_extra_foe
+	# Settings (#52), above everything, from the Pack or the camp.
+	var settings_layer := CanvasLayer.new()
+	settings_layer.layer = 7
+	add_child(settings_layer)
+	_settings = SettingsScreen.new()
+	settings_layer.add_child(_settings)
+	_settings.closed.connect(_update_wound_dim)
+	_pack.open_settings.connect(func(): _settings.open())
 	_event_screen.coin = coin
 	_camp = CampScreen.new()
 	canvas.add_child(_camp)
 	_camp.save_and_exit.connect(save_and_exit)
+	_camp.open_settings.connect(func(): _settings.open())
 	_preparation = PreparationScreen.new()
 	canvas.add_child(_preparation)
 	minimap.pressed.connect(_set_full_map.bind(true))
@@ -2290,6 +2406,11 @@ func _build_ui(minimap: Control) -> void:
 ## and home bar. On desktop there's nothing to avoid.
 func _apply_safe_area() -> void:
 	var insets := _safe_area_insets()
+	if _settings:
+		_settings.content.offset_left = insets.x
+		_settings.content.offset_top = insets.y
+		_settings.content.offset_right = -insets.z
+		_settings.content.offset_bottom = -insets.w
 	for control: Control in [_safe_area, _full_map_margin, _pack.content, _combat.content, _results.content, _preparation.content, _chest.content, _camp.content]:
 		control.offset_left = insets.x
 		control.offset_top = insets.y

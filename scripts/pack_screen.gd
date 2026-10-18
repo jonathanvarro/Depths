@@ -6,6 +6,7 @@ extends Control
 signal closed
 ## Save the game and go back to the title (#45).
 signal save_and_exit
+signal open_settings
 ## An item was used; `message` describes what happened.
 signal used(message: String)
 
@@ -271,6 +272,14 @@ func _build() -> void:
 	save.pressed.connect(func(): save_and_exit.emit())
 	header.add_child(save)
 	header.move_child(save, header.get_child_count() - 2)
+	var gear := Button.new()
+	gear.text = "Settings"
+	gear.custom_minimum_size = Vector2(120, 52)
+	gear.focus_mode = Control.FOCUS_NONE
+	gear.add_theme_font_size_override("font_size", 20)
+	gear.pressed.connect(func(): open_settings.emit())
+	header.add_child(gear)
+	header.move_child(gear, header.get_child_count() - 2)
 	header.add_child(close)
 	header.move_child(coin, 1)
 	header.move_child(save, header.get_child_count()-2)

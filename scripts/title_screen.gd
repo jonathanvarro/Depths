@@ -17,6 +17,7 @@ const GAME_SCENE := "res://scenes/main.tscn"
 
 var _margin: MarginContainer
 var _begin: Button
+var _settings_screen: Control
 
 
 func _ready() -> void:
@@ -68,16 +69,19 @@ func _ready() -> void:
 		SaveGame.delete()
 		get_tree().change_scene_to_file(GAME_SCENE))
 	column.add_child(_begin)
-	# No settings exist yet; shown, but not pretending to work.
 	var settings := _menu_button("Settings", 72 if phone else 56, false)
-	settings.disabled = true
-	settings.tooltip_text = "Coming later"
+	settings.pressed.connect(func(): _settings_screen.open())
 	column.add_child(settings)
 	if not phone:  # iPhone apps don't quit themselves
 		var quit := _menu_button("Quit", 56, false)
 		quit.pressed.connect(func(): get_tree().quit())
 		column.add_child(quit)
 
+	# Settings (#52): applied before anything plays; the screen sits on top.
+	var Settings := preload("res://scripts/settings.gd")
+	Settings.apply(get_tree())
+	_settings_screen = preload("res://scripts/settings_screen.gd").new()
+	add_child(_settings_screen)
 	_apply_margins()
 	get_viewport().size_changed.connect(_apply_margins)
 	_begin.grab_focus()

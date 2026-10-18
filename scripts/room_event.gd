@@ -16,3 +16,7 @@ extends Resource
 @export var min_depth := 1
 @export var max_depth := 99
 @export var weight := 1
+## What stands in the room (#46): a scene with a floor origin. If it has a
+## `state` property ("closed"/"empty"), it's emptied once resolved. Without
+## one, a plain placeholder by kind. Traps are never shown.
+@export var prop: PackedScene

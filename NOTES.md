@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-18 – Claude
+- Did: unconscious main heroes (#83), the secured route to floor 2 (#79: after two floor-2 trips, 40g), visible room contents with ambushing enemies (#46), Settings (#52: volumes on Music/Effects buses, fullscreen, screen flashes, text size; title, Pack, camp).
+- Next: decisions on #95 (choose a starting hero), #93 armour after #97 research; ChatGPT art #96/#99.
+- Watch out: Text size scales the whole UI via content_scale_factor; check phone layouts at "Larger". Route price is a guess. Room props for idol/pool/rest/workings are placeholders.
+
 ## 2026-10-18 – ChatGPT
 - Did: #102 explores the owner's bald male Brawler: thick neck/shoulders, battered nose, uneven features, stubble, missing front tooth and a relaxed confident grin; plain quilted starter clothing and neutral ambient material shading. Built-in ImageGen master/exact prompt are preserved in art/source/brawler-concept-v1. Transparent 192px/96px exports, enlarged portrait and dark/light comparisons are in art/concepts/portraits/brawler-concept-v1; canvas/alpha/48-colour/margin checks pass and both native sizes were visually reviewed.
 - Next: Owner reviews the face and temperament. If selected, author a resting expression, registered components/blink/talk/conditions and coordinated outfit light masks before adding it to the live roster.

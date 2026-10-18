@@ -67,6 +67,11 @@ var gate_broken := false
 var queen_defeated := false
 var bounty_paid := false
 const QUEEN_BOUNTY := 50
+## The secured route (#79): once the party has reached floor 2 on this many
+## expeditions, the king's scouts will take them straight there - at a price.
+const ROUTE_AFTER := 2
+const ROUTE_PRICE := 40
+var floor2_reached := 0
 var _used_names: Array = []  # each name comes by once before any repeats
 
 
@@ -133,7 +138,7 @@ func rejoin(party) -> void:
 
 ## Rest until tomorrow: everyone recovers fully, and the day moves on.
 func rest(party) -> void:
-	for hero: Companion in party.living_members():
+	for hero: Companion in party.members.filter(func(h: Companion): return h.is_with_party()):
 		hero.complete_pending_effects()
 		hero.hunger = 0
 		hero.change_strain(-hero.strain)
@@ -176,6 +181,20 @@ func is_recovering(hero: Companion) -> bool:
 ## The day `hero` is fit again (or today).
 func ready_on(hero: Companion) -> int:
 	return maxi(day, recovering.get(hero, day))
+
+
+func route_open() -> bool:
+	return floor2_reached >= ROUTE_AFTER
+
+
+## Pays for the secured route. Returns false if it's not open or too dear.
+func buy_route(party) -> bool:
+	if not route_open() or party.supplies.gold < ROUTE_PRICE:
+		return false
+	party.supplies.gold -= ROUTE_PRICE
+	party.supplies.changed.emit()
+	changed.emit()
+	return true
 
 
 ## Heroes fit to go into the cave.
