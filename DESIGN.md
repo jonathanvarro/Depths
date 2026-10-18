@@ -201,6 +201,30 @@ Suggested initial presentation: one campsite screen with a few selectable activi
 - **Signposting:** rumours at camp, and signs in the cave (marks, drums, trophies).
 - **Victory:** the site is cleared, with a story beat and a bounty at camp. The next site is "coming later", and the cave stays explorable.
 - **Proposed numbers** are on #44. **Art** is requested in #99.
+- *Built (2026-10-18), placeholder art:*
+  - **Four floors.**
+    - Floor 3 says goblin marks and drums on arrival, and its rooms carry crude stakes and bone piles.
+    - Floor 4 uses its own fortress theme (`themes/fortress.tres`).
+    - Its farthest room becomes the **queen's hall**, every way in barred by a gate (`scripts/fortress.gd`).
+  - **The gate:**
+    - Walking into it offers the fight: two guards and an archer.
+    - Winning breaks it for good (`gate_broken`). Every later layout leaves the hall's ways open.
+  - **The hall:**
+    - Stepping in warns "no turning back". Declining steps back out.
+    - Going in starts the queen fight with **Retreat disabled**: the queen at the back and two guards in front.
+  - **The queen** (32 health, 3–6 damage):
+    - She calls one more guard, screeches (+15 strain for everyone), and raises her cleaver: **the coin decides**, heads it misses, tails it hits double and injures.
+    - Below half health she's **enraged**: she steps to the front, does +2 damage, and swings the cleaver more.
+  - **Guards** (12 health) form a **shield wall**: while one stands in front, goblins behind take half damage. They sometimes brace (shield up).
+  - **Archers** (8 health) stand at the back and reach the back row.
+  - **Floor 4 groups** mix guards, archers and goblins.
+  - **Victory:**
+    - "The goblin queen is dead" screen.
+    - Contracts stop, and a **50g bounty** is paid at camp.
+    - The hall stays empty, and exploring goes on.
+  - **Camp rumours** at the fire and the cave path track progress.
+  - **Simulated** (`tools/balance_sim.gd`, simple play): a fresh party of three beats the queen 92% of the time in about 11 rounds, losing about 36 of 66 health. The gate fight costs about 16.
+  - The old "end the expedition at the bottom" stand-in is gone.
 
 The suggested retreat flow is to return through the dungeon to its entrance before reaching camp, with discovered shortcuts potentially easing later returns. Travel costs, escape exceptions, refuge services, recovery timing, and prices still need design decisions. Rest spots inside the dungeon remain distinct from the outside refuge.
 

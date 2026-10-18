@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-18 – Claude
+- Did: #44 goblin fortress and queen with placeholder art: four floors (floor 3 outskirts signs and stakes, floor 4 fortress theme), the barred gate (guards' fight, stays broken across days), the queen's hall (warning, no retreat), goblin archer/guard/queen (summons, shield wall, rage, coin-flip cleaver), victory screen, 50g bounty, contracts stop, camp rumours. Tuned by simulation.
+- Next: ChatGPT's #99 art (queen, archer, guard, fortress textures, gate) and #97 research; owner playtest of the full cave.
+- Watch out: New enemies are tinted/scaled goblins until #99. The fortress hall is the farthest big room; areas only reachable through it stay shut until the gate breaks.
+
 ## 2026-10-18 – ChatGPT
 - Did: #92 exports sixteen consistent 64px starter/copper-ore/lantern icons, wires seven live resources, and adds a 20px coin glyph. All 28 live item/gear icons reviewed at 64px/40px. #36 reauthors neutral Mara base/tunic, five registered blink/talk patches, four conditions and paired outfit light masks; original art preserved. PortraitSet/View now support independent neutral/warm/dim light without illuminating backgrounds/UI; all 27 recruit expression resources expose their existing masks through the same fields. #98 gives camp stock/sales actual thumbnails and visible affordability reasons, keyboard focus for Pack/chest, and a shared condition/inventory scroll so full-party details do not hide phone inventory. Full guide: docs/playable-art-pass.md; sources/exact built-in ImageGen prompts and editable Mara ORA preserved.
 - Next: Owner can review the desktop/phone captures in art/concepts/inventory-64-v1 and mara-neutral-v1. Continue the unticked #96 backlog; held lantern/status/intent icons, camp variants, leather equipment and sound remain. Portrait illumination is explicit presentation, not automatically tied to fuel. Physical iPhone still needs testing.

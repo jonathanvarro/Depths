@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="EnemyType" format=3]
+
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="1"]
+[ext_resource type="PackedScene" path="res://art/enemies/cave-simple-v1/goblin/scene.tscn" id="2"]
+[ext_resource type="Resource" path="res://data/injuries/deep_wound.tres" id="3"]
+[ext_resource type="Resource" path="res://data/injuries/limp.tres" id="4"]
+
+[resource]
+script = ExtResource("1")
+scene = ExtResource("2")
+injuries = Array[Injury]([ExtResource("3"), ExtResource("4")])
+display_name = "Goblin guard"
+max_health = 12
+damage_min = 2
+damage_max = 3
+accuracy = 0.7
+initiative = 8
+injury_chance = 0.08
+attack_verb = "bashes"
+tactic = 5
+intro = "A goblin guard plants its shield. While it stands, the goblins behind it are hard to hurt."
+purse = Vector2i(2, 5)
+tint = Color(0.75, 0.75, 0.9, 1)
+sprite_scale = 1.1

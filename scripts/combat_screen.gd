@@ -36,6 +36,10 @@ var only_action := ""
 var _hero: Companion  # whose turn it is (rows decide who they can reach, #72)
 ## The coin flip overlay (coin_flip.gd), set by main.gd (#77).
 var coin: Control
+## No running away (the queen's hall, #44).
+var no_retreat := false
+## Places a foe that joins mid-fight in the world (set by main.gd).
+var place_foe := Callable()
 ## Emitted after each hero action (the opening reacts to glancing blows).
 signal hero_acted(hero: Companion, action: Dictionary, outcome: Dictionary)
 
@@ -55,13 +59,11 @@ func run(state, cards: Array) -> void:
 		tag.queue_free()
 	_tags.clear()
 	for foe in state.foes:
-		var tag := Button.new()
-		tag.focus_mode = Control.FOCUS_NONE
-		tag.custom_minimum_size = Vector2(110, 44)
-		tag.add_theme_font_size_override("font_size", 18)
-		tag.pressed.connect(_select_target.bind(foe))
-		add_child(tag)
-		_tags[foe] = tag
+		_add_tag(foe)
+	state.foe_joined.connect(func(foe):
+		if place_foe.is_valid():
+			place_foe.call(foe)
+		_add_tag(foe))
 	_select_target(state.living_foes()[0])
 	var names := ", ".join(PackedStringArray(state.foes.map(func(f): return f.name.to_lower())))
 	_add_log("Something stirs: %s!" % names)
@@ -109,6 +111,16 @@ func run(state, cards: Array) -> void:
 	finished.emit(state.result)
 
 
+func _add_tag(foe) -> void:
+	var tag := Button.new()
+	tag.focus_mode = Control.FOCUS_NONE
+	tag.custom_minimum_size = Vector2(110, 44)
+	tag.add_theme_font_size_override("font_size", 18)
+	tag.pressed.connect(_select_target.bind(foe))
+	add_child(tag)
+	_tags[foe] = tag
+
+
 func _hero_action(hero: Companion, action: Dictionary) -> void:
 	var outcome := {}
 	match action["kind"]:
@@ -137,7 +149,7 @@ func _hero_action(hero: Companion, action: Dictionary) -> void:
 
 
 func _enemy_action(foe) -> void:
-	if foe.intent == CombatState.Intent.KILLING_BLOW and coin:
+	if foe.intent in [CombatState.Intent.KILLING_BLOW, CombatState.Intent.CLEAVER] and coin:
 		# The coin decides (#77): shown in the open, no turning it down.
 		var target: Companion = _state.prepare_killing_blow(foe)
 		if target:
@@ -147,7 +159,8 @@ func _enemy_action(foe) -> void:
 			var luck: Array = _state.party.luck()
 			if luck[1] != "":
 				notes.append("%s's luck" % luck[1])
-			var heads: bool = await coin.flip("The %s lunges for %s's throat!" % [foe.name.to_lower(), target.display_name],
+			var title := "The queen raises her cleaver over %s!" % target.display_name if foe.intent == CombatState.Intent.CLEAVER else "The %s lunges for %s's throat!" % [foe.name.to_lower(), target.display_name]
+			var heads: bool = await coin.flip(title,
 					"the blow whistles past", "a crushing hit and a lasting injury",
 					_state.killing_blow_odds(target), ", ".join(notes))
 			_state.coin = 1 if heads else 0
@@ -188,7 +201,10 @@ func _process(_delta: float) -> void:
 		var tag: Button = _tags[foe]
 		tag.visible = foe.is_alive() and foe.node != null and not camera.is_position_behind(foe.node.global_position)
 		if tag.visible:
-			var screen := camera.unproject_position(foe.node.global_position + Vector3(0, TAG_HEIGHT, 0))
+			# Back-row tags sit higher, so a row behind doesn't hide the row in front (#72).
+			# Neighbours alternate heights too, so wide two-line tags don't collide.
+			var lift: float = TAG_HEIGHT + (0.6 if not _state.foe_in_front(foe) else 0.0) + 0.25 * (foe.node.scale.y - 1.0) + 0.45 * (_state.foes.find(foe) % 2)
+			var screen := camera.unproject_position(foe.node.global_position + Vector3(0, lift, 0))
 			var intent: String = CombatState.intent_text(foe)  # what it does next (#60)
 			var back := "  [back]" if not _state.foe_in_front(foe) else ""
 			if foe.glancing:
@@ -216,6 +232,8 @@ func _update_attack() -> void:
 		elif button.text == "Move":
 			button.visible = _state.party.living_members().size() > 1
 			button.disabled = only_action != ""
+		elif button.text == "Retreat":
+			button.disabled = only_action != "" or no_retreat
 
 
 func _refresh() -> void:

@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="EnemyType" format=3]
+
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="1"]
+[ext_resource type="PackedScene" path="res://art/enemies/cave-simple-v1/goblin/scene.tscn" id="2"]
+[ext_resource type="Resource" path="res://data/injuries/deep_wound.tres" id="3"]
+[ext_resource type="Resource" path="res://data/injuries/limp.tres" id="4"]
+
+[resource]
+script = ExtResource("1")
+scene = ExtResource("2")
+injuries = Array[Injury]([ExtResource("3"), ExtResource("4")])
+display_name = "Goblin archer"
+max_health = 8
+damage_min = 2
+damage_max = 3
+accuracy = 0.7
+initiative = 11
+injury_chance = 0.05
+attack_verb = "shoots"
+tactic = 4
+intro = "A goblin archer hangs back, nocking an arrow - it can reach anyone."
+purse = Vector2i(1, 4)
+row = "back"
+reach_back = true
+tint = Color(0.75, 0.9, 0.7, 1)
+sprite_scale = 0.9

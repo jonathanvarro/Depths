@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="EnvironmentTheme" format=3]
+
+[ext_resource type="Script" path="res://scripts/environment_theme.gd" id="1"]
+[ext_resource type="Material" path="res://art/textures/stone-v1/wall_plain.tres" id="2"]
+[ext_resource type="Material" path="res://art/textures/stone-v1/wall_worn.tres" id="3"]
+[ext_resource type="Material" path="res://art/textures/stone-v1/floor.tres" id="4"]
+[ext_resource type="Material" path="res://art/textures/stone-v1/ceiling.tres" id="5"]
+[ext_resource type="AudioStream" path="res://audio/placeholder/ambience_stone.wav" id="6"]
+[ext_resource type="AudioStream" path="res://audio/placeholder/footstep_1.wav" id="7"]
+[ext_resource type="AudioStream" path="res://audio/placeholder/footstep_2.wav" id="8"]
+[ext_resource type="AudioStream" path="res://audio/placeholder/footstep_3.wav" id="9"]
+[ext_resource type="AudioStream" path="res://audio/placeholder/bump.wav" id="10"]
+[ext_resource type="AudioStream" path="res://audio/placeholder/door_creak.wav" id="11"]
+
+[resource]
+script = ExtResource("1")
+display_name = "Goblin fortress"
+wall_material = ExtResource("2")
+wall_variant_material = ExtResource("3")
+floor_material = ExtResource("4")
+ceiling_material = ExtResource("5")
+closed_name = "Timber door"
+closed_open_message = "The door creaks open."
+closed_color = Color(0.42, 0.29, 0.18, 1)
+blocked_name = "Barred gate"
+blocked_message = "A barred gate. Eyes watch you through the gaps."
+blocked_color = Color(0.36, 0.24, 0.12, 1)
+descent_name = "Stairs down"
+descent_prompt = "Descend the stairs?"
+descent_color = Color(0.02, 0.02, 0.02, 1)
+ascent_name = "Stairs up"
+ascent_prompt = "Climb back up?"
+exit_message = "The way out."
+ascent_color = Color(0.54, 0.48, 0.36, 1)
+ambience = ExtResource("6")
+footstep_sounds = Array[AudioStream]([ExtResource("7"), ExtResource("8"), ExtResource("9")])
+bump_sound = ExtResource("10")
+open_sound = ExtResource("11")

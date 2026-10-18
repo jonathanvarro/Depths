@@ -187,6 +187,13 @@ Templates > Download and Install; already installed on the owner's PC).
   [1] tails); CombatState Intent.KILLING_BLOW, `prepare_killing_blow`,
   `killing_blow_odds`, `coin`; Companion.luck, PartyState.luck().
   `tools/coin_check.gd`.
+- Goblin fortress (#44): `scripts/fortress.gd` (hall + gates on floor 4,
+  `DungeonMap.marks`), `themes/fortress.tres`, main.gd `_apply_theme`,
+  `_gate_fight`/`_break_gates`/`_queen_fight`/`_queen_defeated`,
+  `_fight_kind`; CampState `gate_broken`/`queen_defeated`/`bounty_paid`;
+  EnemyType tactics ARCHER/GUARD/QUEEN, `summons`, placeholder `tint` and
+  `sprite_scale`; CombatState `foe_joined`, guard wall, rage.
+  `tools/fortress_check.gd`.
 - `scripts/chest_screen.gd` – chest window beside the pack: drag (set_drag_
   forwarding), tap, or the take-all icon button; `took` signal.
 - `scripts/pack_screen.gd` – the Pack screen (Pack button under the minimap,

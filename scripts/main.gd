@@ -99,6 +99,17 @@ const CombatScreen := preload("res://scripts/combat_screen.gd")
 const RAT := preload("res://data/enemies/rat.tres")
 const SPIDER := preload("res://data/enemies/spider.tres")
 const GOBLIN := preload("res://data/enemies/goblin.tres")
+const ARCHER := preload("res://data/enemies/goblin_archer.tres")
+const GUARD := preload("res://data/enemies/goblin_guard.tres")
+const QUEEN := preload("res://data/enemies/goblin_queen.tres")
+## The goblin fortress (#44): floor 3 is its outskirts, floor 4 the fortress
+## with the queen's hall behind a gate.
+const OUTSKIRTS_DEPTH := 3
+const FORTRESS_DEPTH := 4
+const Fortress := preload("res://scripts/fortress.gd")
+const FORTRESS_THEME := preload("res://themes/fortress.tres")
+const GATE_FIGHT: Array = [GUARD, GUARD, ARCHER]
+const QUEEN_FIGHT: Array = [QUEEN, GUARD, GUARD]
 ## Enemy groups an encounter can hold, by floor depth (#14; #15 will give
 ## them distinct tactics and tune the mix). One group is picked at random
 ## from those no larger than the party.
@@ -107,8 +118,10 @@ const GOBLIN := preload("res://data/enemies/goblin.tres")
 const ENCOUNTER_GROUPS := {
 	1: [[RAT], [RAT], [SPIDER], [RAT, RAT], [RAT, SPIDER], [RAT, RAT, RAT]],
 	2: [[RAT], [SPIDER], [RAT, RAT], [RAT, SPIDER], [GOBLIN, RAT], [SPIDER, SPIDER], [GOBLIN, SPIDER], [RAT, RAT, SPIDER], [GOBLIN, RAT, RAT], [GOBLIN, SPIDER, RAT]],
-	3: [[SPIDER], [GOBLIN], [GOBLIN, SPIDER], [GOBLIN, GOBLIN], [GOBLIN, RAT, RAT], [GOBLIN, SPIDER, RAT],
-			[GOBLIN, GOBLIN, SPIDER], [GOBLIN, GOBLIN, RAT, RAT], [GOBLIN, SPIDER, SPIDER, RAT]],
+	3: [[SPIDER], [GOBLIN], [GOBLIN, SPIDER], [GOBLIN, GOBLIN], [GOBLIN, ARCHER], [GOBLIN, RAT, RAT], [GOBLIN, SPIDER, RAT],
+			[GOBLIN, GOBLIN, SPIDER], [GOBLIN, GOBLIN, ARCHER], [GOBLIN, GOBLIN, RAT, RAT], [GOBLIN, SPIDER, SPIDER, RAT]],
+	4: [[GOBLIN], [GOBLIN, ARCHER], [GUARD, GOBLIN], [GUARD, ARCHER], [GOBLIN, GOBLIN, ARCHER],
+			[GUARD, GOBLIN, ARCHER], [GUARD, GOBLIN, GOBLIN], [GUARD, GUARD, ARCHER, GOBLIN]],
 }
 ## Full parties meet groups close to their size (#49): never more enemies
 ## than heroes standing, except one extra for a full party on the deepest
@@ -191,7 +204,7 @@ void fragment() {
 ## How the site looks and what its features are called.
 @export var environment_theme: EnvironmentTheme = preload("res://themes/cave.tres")
 ## Floors in this site; the deepest has no way further down.
-@export var floors_in_site := 3
+@export var floors_in_site := 4
 ## The lone survivor the game starts with; the other two slots fill later.
 @export var starting_hero: Companion = preload("res://data/companions/mara.tres")
 ## What the survivor carries at the start. Amounts follow ChatGPT's economy
@@ -234,6 +247,10 @@ var _camp: Control  # camp_screen.gd
 var _active_cell := Vector2i(-1, -1)  # a fight or event in progress (redone after loading)
 var _wipe_pending := false  # wiped: the save already holds the aftermath
 var _save_queued := false
+var _cave_theme: EnvironmentTheme  # floors 1-3; the fortress has its own (#44)
+var _fight_kind := ""  # "gate" or "queen" while those fights run (#44)
+var _cell_now := Vector2i(-1, -1)
+var _cell_before := Vector2i(-1, -1)  # where to step back to from the hall's door
 var _party_state  # party_state.gd: heroes and time, kept across floors
 var _cards: Array[PanelContainer] = []  # party_card.gd, one per slot
 var _depth := 0
@@ -314,6 +331,7 @@ var _bleed_ticks := 0  # bleed ticks shown this run (for tests)
 func _ready() -> void:
 	_register_input_actions()
 	_build_environment()
+	_cave_theme = environment_theme
 	_site_seed = floor_seed if floor_seed != 0 else randi()
 	_first_seed = _site_seed
 	_camp_state.start(_first_seed, _party_state)
@@ -418,9 +436,17 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 		_party_state.complete_pending_effects()
 	_floor_started = true
 	_depth = depth
+	_apply_theme()
 	_expedition.visit_floor(depth)
 	if not _floors.has(depth):
-		_floors[depth] = DungeonMap.new(_make_layout(depth), depth)
+		var layout := _make_layout(depth)
+		var marks := {}
+		if depth == FORTRESS_DEPTH and not use_debug_layout:
+			var fortress: Dictionary = Fortress.fortify(layout, _camp_state.gate_broken)
+			layout = fortress["layout"]
+			marks = {"hall": fortress["hall"], "gates": fortress["gates"]}
+		_floors[depth] = DungeonMap.new(layout, depth)
+		_floors[depth].marks = marks
 		_assign_events(_floors[depth])
 	_map = _floors[depth]
 
@@ -441,6 +467,7 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 		_show_message("%s · depth %d · waited %d while it took hold" % [environment_theme.display_name, depth, waited])
 	else:
 		_show_message("%s · depth %d" % [environment_theme.display_name, depth])
+	_fortress_signs(depth)
 	_save_now()  # autosave on every floor change (#45)
 
 
@@ -452,6 +479,8 @@ func _build_level() -> void:
 	add_child(_level)
 	if _depth == OPENING_DEPTH and _in_opening:
 		_add_opening_dressing()
+	elif _depth == OUTSKIRTS_DEPTH and not use_debug_layout:
+		_add_outskirts_dressing()
 
 
 func _make_layout(depth: int) -> PackedStringArray:
@@ -463,11 +492,10 @@ func _make_layout(depth: int) -> PackedStringArray:
 
 
 func _on_party_entered_cell(cell: Vector2i) -> void:
-	# Later expeditions: the deepest point, where the others fell, is the
-	# goal for now (the site's real objective is still undecided).
-	if _expedition.number > 1 and _depth == floors_in_site and cell == _map.start_cell and not use_debug_layout:
-		_ask("The bottom of the cave, where the others fell. End the expedition here?",
-				_end_expedition.bind(Expedition.Ending.REACHED_BOTTOM))
+	# The queen's hall (#44): a warning, then no turning back.
+	if _depth == FORTRESS_DEPTH and cell in _map.marks.get("hall", []) and not _camp_state.queen_defeated:
+		_ask("The queen's hall. Once you step inside, there's no turning back. Go in?",
+				_queen_fight.bind(cell), _step_back)
 		return
 	# Opening: the next fight comes once she's walked far enough (#56).
 	if _in_opening and _opening_fights_done < OPENING_FIGHTS.size() and _steps_taken >= _next_fight_at:
@@ -568,6 +596,7 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 	_in_combat = false
 	_active_cell = Vector2i(-1, -1)
 	_combat.only_action = ""
+	_combat.no_retreat = false
 	_layout_hint()
 	_touch_pad.visible = true
 	_pack_button.disabled = false
@@ -580,6 +609,9 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 		CombatState.Result.VICTORY:
 			_party.locked = false
 			_show_message("The way is clear.")
+			match _fight_kind:
+				"gate": _break_gates()
+				"queen": _queen_defeated()
 			_say("fight_won", true)
 			_update_hints("fight_over")
 			if _in_opening:
@@ -595,6 +627,7 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 			_check_opening_exit()
 		CombatState.Result.DEFEAT:
 			_end_expedition(Expedition.Ending.WIPED)
+	_fight_kind = ""
 
 
 ## A beaten enemy's purse (goblins, #42).
@@ -670,16 +703,25 @@ func _start_new_expedition() -> void:
 		if not hero.is_alive():
 			_party_state.remove_member(hero)
 	_camp_state.rejoin(_party_state)
-	_camp_loop(_camp_state.collect_contract(_party_state))
+	var reward: int = _camp_state.collect_contract(_party_state)
+	var note := ""
+	if _camp_state.queen_defeated and not _camp_state.bounty_paid:
+		_camp_state.bounty_paid = true
+		_party_state.supplies.gold += _camp_state.QUEEN_BOUNTY
+		_party_state.supplies.changed.emit()
+		note = "The camp cheers the queen's death. The quartermaster pays the bounty: %d gold." % _camp_state.QUEEN_BOUNTY
+	_camp_loop(reward, note)
 
 
 ## The campsite (#40) until the party heads down: nothing recovers by itself
 ## - rest in your tent. Also where a game saved at camp resumes (#45).
-func _camp_loop(reward := 0) -> void:
+func _camp_loop(reward := 0, note := "") -> void:
 	_ending = true
 	_party.locked = true
 	_camp.open(_camp_state, _party_state)
-	if reward > 0:
+	if note != "":
+		_camp.announce(note)
+	elif reward > 0:
 		_camp.announce("The king's quartermaster pays the contract: %d gold." % reward)
 	_save_now()  # autosave on returning to camp (#45)
 	await _camp.cave_chosen
@@ -837,6 +879,130 @@ func _light_torch_if_dark() -> void:
 		supplies.light_torch(TORCH)
 
 
+# --- The goblin fortress (#44) ------------------------------------------
+
+## Floors 1-3 are cave; the fortress floor has its own look and sound.
+func _apply_theme() -> void:
+	var theme: EnvironmentTheme = FORTRESS_THEME if _depth >= FORTRESS_DEPTH and not use_debug_layout else _cave_theme
+	if theme == environment_theme:
+		return
+	environment_theme = theme
+	if _ambience_player and theme.ambience and _ambience_player.stream != theme.ambience:
+		_ambience_player.stream = theme.ambience
+		_ambience_player.play()
+
+
+## Signs of the fortress: marks and drums on its outskirts, the gate below.
+func _fortress_signs(depth: int) -> void:
+	if use_debug_layout or _camp_state.queen_defeated:
+		return
+	if depth == OUTSKIRTS_DEPTH:
+		_show_message("Goblin marks daubed on the rock. Somewhere below: drums.")
+	elif depth == FORTRESS_DEPTH:
+		_show_message("Worked stone and timber: the goblin fortress." if _camp_state.gate_broken
+				else "Worked stone and timber: the goblin fortress. Her hall lies beyond a barred gate.")
+
+
+func _gate_fight() -> void:
+	_fight_kind = "gate"
+	var types: Array[EnemyType] = []
+	types.assign(GATE_FIGHT)
+	_start_combat(_party.cell, types)
+
+
+## The gate's guards are beaten: it stays broken for good, whatever the day.
+func _break_gates() -> void:
+	_camp_state.gate_broken = true
+	for gate in _map.marks.get("gates", []):
+		_map.doors[gate] = DungeonMap.Door.OPEN
+	_build_level()
+	_play_effect(environment_theme.open_sound)
+	_show_message("The gate splinters. The way to the queen's hall is open.")
+	_save_now()
+
+
+func _queen_fight(cell: Vector2i) -> void:
+	_fight_kind = "queen"
+	_combat.no_retreat = true
+	var types: Array[EnemyType] = []
+	types.assign(QUEEN_FIGHT)
+	_start_combat(cell, types)
+
+
+## Declined the hall: back out the way she came.
+func _step_back() -> void:
+	if _cell_before != Vector2i(-1, -1) and _map.is_passable(_cell_before):
+		_party.place(_map, _cell_before)
+
+
+## The site is cleared (#44): a story beat, a bounty waiting at camp.
+func _queen_defeated() -> void:
+	_camp_state.queen_defeated = true
+	_camp_state.contract = {}
+	_save_now()
+	_party.locked = true
+	_results.show_brief("The goblin queen is dead",
+			"Her guards scatter into the dark and the drums fall silent. The fortress is broken. The king's camp will want to hear of this - and pay for it.",
+			"Continue")
+	await _results.continue_pressed
+	_results.visible = false
+	_party.locked = false
+
+
+## Crude stakes and bone piles in the outskirts' rooms (placeholders, #99).
+func _add_outskirts_dressing() -> void:
+	var wood := StandardMaterial3D.new()
+	wood.albedo_color = Color(0.32, 0.22, 0.12)
+	var bone := StandardMaterial3D.new()
+	bone.albedo_color = Color(0.78, 0.74, 0.62)
+	var placed := 0
+	for y in _map.height:
+		for x in _map.width:
+			var cell := Vector2i(x, y)
+			if placed >= 10 or _map.is_wall(cell) or not _map._is_room_cell(cell) or _map.content_at(cell) != DungeonMap.Content.NONE:
+				continue
+			if (x * 7 + y * 13) % 11 != 0:
+				continue
+			placed += 1
+			var at := Vector3(x * CELL_SIZE, 0.0, y * CELL_SIZE)
+			for i in 3:  # a short palisade of sharpened stakes
+				var stake := MeshInstance3D.new()
+				var mesh := CylinderMesh.new()
+				mesh.top_radius = 0.0
+				mesh.bottom_radius = 0.07
+				mesh.height = 1.1
+				mesh.material = wood
+				stake.mesh = mesh
+				stake.position = at + Vector3(-0.5 + i * 0.25, 0.55, 0.7)
+				_level.add_child(stake)
+			var pile := MeshInstance3D.new()
+			var bones := BoxMesh.new()
+			bones.size = Vector3(0.35, 0.12, 0.2)
+			bones.material = bone
+			pile.mesh = bones
+			pile.position = at + Vector3(0.4, 0.06, -0.5)
+			_level.add_child(pile)
+
+
+## A foe that joins mid-fight (the queen's guards) appears beside the others.
+func _place_extra_foe(foe) -> void:
+	var forward := -_party.global_transform.basis.z
+	var right := _party.global_transform.basis.x
+	var node: Node3D = foe.type.scene.instantiate()
+	node.position = _party.position + forward * CELL_SIZE * 1.0 + right * randf_range(-1.0, 1.0)
+	_dress_foe(node, foe.type)
+	_level.add_child(node)
+	foe.node = node
+
+
+## Until the fortress art lands (#99), new goblins wear a tint and a size.
+func _dress_foe(node: Node3D, type: EnemyType) -> void:
+	node.scale *= type.sprite_scale
+	var sprite := node.get_node_or_null("Sprite")
+	if sprite and type.tint != Color.WHITE:
+		sprite.modulate = type.tint
+
+
 ## A new camp day (#40): the cave re-randomizes - new layouts, fresh enemies.
 func _on_camp_day_passed(day: int) -> void:
 	_site_seed = _first_seed + (day - 1) * DAY_SEED_STEP
@@ -849,7 +1015,7 @@ func _place_foes(foes: Array) -> void:
 	var right := _party.global_transform.basis.x
 	var ahead_open: bool = _map.is_passable(_party.cell + Party.DIRECTIONS[_party.facing])
 	var distance := CELL_SIZE * (1.2 if ahead_open else 0.4)
-	var spread := {1: [0.0], 2: [-0.45, 0.45], 3: [-0.7, 0.0, 0.7], 4: [-0.9, -0.3, 0.3, 0.9]}
+	var spread := {1: [0.0], 2: [-0.5, 0.5], 3: [-0.85, 0.0, 0.85], 4: [-1.05, -0.35, 0.35, 1.05]}
 	# Front and back rows (#72): spread across the corridor together (so
 	# their tags don't overlap), with the back row a little further off.
 	var ordered: Array = foes.filter(func(f): return not f.in_back()) + foes.filter(func(f): return f.in_back())
@@ -859,6 +1025,7 @@ func _place_foes(foes: Array) -> void:
 		var depth := distance + (CELL_SIZE * 0.5 if foe.in_back() and ahead_open else 0.0)
 		var node: Node3D = foe.type.scene.instantiate()
 		node.position = _party.position + forward * depth + right * offsets[mini(i, offsets.size() - 1)]
+		_dress_foe(node, foe.type)
 		_level.add_child(node)
 		foe.node = node
 
@@ -1861,11 +2028,17 @@ func _on_party_opened_door(cell: Vector2i) -> void:
 	_show_message(environment_theme.closed_open_message)
 
 
-func _on_party_blocked(_cell: Vector2i) -> void:
+func _on_party_blocked(cell: Vector2i) -> void:
+	if _depth == FORTRESS_DEPTH and cell in _map.marks.get("gates", []) and not _camp_state.gate_broken:
+		_ask("A barred gate, and goblin guards behind it. Break it down? They'll fight.", _gate_fight)
+		return
 	_show_message(environment_theme.blocked_message)
 
 
 func _on_party_moved(cell: Vector2i, facing: int) -> void:
+	if cell != _cell_now:
+		_cell_before = _cell_now
+		_cell_now = cell
 	var content: int = _map.content_at(cell)
 	var state := ""
 	if content != DungeonMap.Content.NONE:
@@ -2101,6 +2274,7 @@ func _build_ui(minimap: Control) -> void:
 	var coin := CoinFlip.new()
 	coin_layer.add_child(coin)
 	_combat.coin = coin
+	_combat.place_foe = _place_extra_foe
 	_event_screen.coin = coin
 	_camp = CampScreen.new()
 	canvas.add_child(_camp)

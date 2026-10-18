@@ -26,6 +26,12 @@ func _initialize() -> void:
 				wins += r[0]; rounds += r[1]; lost += r[2]; worst = maxi(worst, r[3])
 			var n := float(fitting.size())
 			print("depth %d: win %.0f%%  rounds %.1f  health lost per fight %.1f (worst %d)" % [depth, wins / n, rounds / n, lost / n, worst])
+	# The goblin queen (#44): a full party, fresh, and after a hard floor.
+	var queen := _simulate(3, Main.QUEEN_FIGHT)
+	print("--- the goblin queen, party of 3 ---")
+	print("fresh: win %.0f%%  rounds %.1f  health lost %.1f (worst %d)" % queen)
+	var gate := _simulate(3, Main.GATE_FIGHT)
+	print("the gate's guards: win %.0f%%  rounds %.1f  health lost %.1f (worst %d)" % gate)
 	quit()
 
 
@@ -64,7 +70,7 @@ func _simulate(size: int, group: Array) -> Array:
 		while c.result == CS.Result.ONGOING and guard < 300:
 			var actor = c.current_actor()
 			if actor is Companion:
-				var heavy: bool = c.living_foes().any(func(f): return f.intent == CS.Intent.HEAVY)
+				var heavy: bool = c.living_foes().any(func(f): return f.intent in [CS.Intent.HEAVY, CS.Intent.KILLING_BLOW, CS.Intent.CLEAVER])
 				if actor.role == "Warden" and heavy:
 					c.hero_defend(actor)
 				else:

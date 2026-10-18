@@ -61,6 +61,12 @@ var _charity_on := 0
 ## True once someone has gone down today: the cave they mapped is lost if
 ## the party rests (#85).
 var explored_today := false
+## The goblin fortress (#44): lasting progress that survives the cave
+## shifting each day.
+var gate_broken := false
+var queen_defeated := false
+var bounty_paid := false
+const QUEEN_BOUNTY := 50
 var _used_names: Array = []  # each name comes by once before any repeats
 
 
@@ -278,6 +284,9 @@ func take_gold(party) -> void:
 ## Today's posted contract from the king's camp (#42): beat so many of one
 ## kind of enemy for a lump sum, paid back at camp. A new one each day.
 func post_contract() -> void:
+	if queen_defeated:  # the fortress is broken: no more contracts
+		contract = {}
+		return
 	var offer: Dictionary = CONTRACTS[rng.randi_range(0, CONTRACTS.size() - 1)]
 	contract = offer.duplicate()
 	contract["done"] = 0
@@ -286,7 +295,7 @@ func post_contract() -> void:
 
 
 func count_kill(enemy_name: String) -> void:
-	if not contract.is_empty() and not contract["paid"] and enemy_name == contract["enemy"]:
+	if not contract.is_empty() and not contract.get("paid", true) and enemy_name == contract["enemy"]:
 		contract["done"] = mini(contract["done"] + 1, contract["count"])
 
 

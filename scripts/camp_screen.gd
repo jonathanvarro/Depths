@@ -302,6 +302,15 @@ func _smith() -> void:
 	_text("Bought gear goes in your pack; equip it from there.", MUTED)
 
 
+## What the camp says about the goblin queen (#44).
+func _rumour() -> String:
+	if _camp.queen_defeated:
+		return "The camp still toasts the goblin queen's death."
+	if _camp.gate_broken:
+		return "Word has spread: the fortress gate is broken. Only the queen's hall remains."
+	return "Soldiers swap stories of a goblin queen and her fortress, four floors down, behind a barred gate."
+
+
 ## Top-right: the day and the purse.
 func _status() -> String:
 	return "Day %d · %dg" % [_camp.day, _party.supplies.gold]
@@ -460,6 +469,7 @@ func _fire() -> void:
 		_text("No one is by the fire today.", MUTED)
 	else:
 		_text("Others who made it to the camp sit by the fire. Any of them would join you - for now, for nothing.")
+	_text(_rumour(), MUTED)
 	for recruit: Companion in _camp.candidates:
 		_recruit_row(recruit, full)
 	_body.add_child(_label("Your party", HEADING, 16, TEXT))
@@ -536,6 +546,7 @@ func _cave_path() -> void:
 	if not staying.is_empty():
 		_text("Staying with the nurse: %s." % ", ".join(PackedStringArray(staying.map(func(h): return "%s (fit on day %d)" % [h.display_name, _camp.ready_on(h)]))), MUTED)
 	_text("The cave is as you left it today." if _camp.explored_today else "The cave has shifted since anyone was last inside.", MUTED)
+	_text(_rumour(), MUTED)
 	if not _camp.contract.is_empty():
 		var c: Dictionary = _camp.contract
 		var state := "paid" if c["paid"] else "%d of %d" % [c["done"], c["count"]]

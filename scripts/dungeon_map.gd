@@ -49,6 +49,8 @@ var encounter_zones := {}
 ## Cells holding something you can't walk onto (a body, a fire, a chest).
 ## Walking into one interacts with it instead (#69).
 var solid := {}  # Vector2i -> true
+## Floor-specific places, e.g. the fortress's "hall" and "gates" (#44).
+var marks := {}
 
 var _rows: PackedStringArray
 

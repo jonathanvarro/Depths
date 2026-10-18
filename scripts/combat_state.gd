@@ -34,7 +34,7 @@ const GOBLIN_SHIELD_CHANCE := 0.4
 ## Enemy intentions (#60): every enemy shows what it will do on its next
 ## turn - the action, never the target - so Defend, targeting and items are
 ## real choices. Each is planned after the enemy acts (and at the start).
-enum Intent { ATTACK, LUNGE, DART, WEB, BITE, SWING, HEAVY, SHIELD, KILLING_BLOW }
+enum Intent { ATTACK, LUNGE, DART, WEB, BITE, SWING, HEAVY, SHIELD, KILLING_BLOW, SHOOT, BASH, BRACE, CALL, SCREECH, CLEAVER }
 const INTENT_TEXT := {
 	Intent.ATTACK: "attacking",
 	Intent.LUNGE: "lunging",
@@ -45,7 +45,29 @@ const INTENT_TEXT := {
 	Intent.HEAVY: "winding up a heavy blow",
 	Intent.SHIELD: "raising a shield",
 	Intent.KILLING_BLOW: "lining up a killing blow",
+	Intent.SHOOT: "nocking an arrow",
+	Intent.BASH: "readying a shield bash",
+	Intent.BRACE: "bracing behind its shield",
+	Intent.CALL: "calling her guards",
+	Intent.SCREECH: "drawing breath to screech",
+	Intent.CLEAVER: "raising her cleaver",
 }
+## The fortress (#44). Guards brace now and then; the queen calls up to
+## QUEEN_CALLS guards, screeches (strain for everyone) and swings a cleaver
+## the coin decides. Below half health she's enraged: she steps forward,
+## hits harder and swings the cleaver more often.
+const GUARD_BRACE_CHANCE := 0.3
+const GUARD_WALL_FACTOR := 0.5
+const QUEEN_CALLS := 1
+const QUEEN_CALL_CHANCE := 0.4
+const QUEEN_CLEAVER_CHANCE := 0.25
+const QUEEN_ENRAGED_CLEAVER_CHANCE := 0.45
+const QUEEN_SCREECH_CHANCE := 0.2
+const SCREECH_STRAIN := 15.0
+const ENRAGED_DAMAGE := 2
+
+## A foe joined mid-fight (the queen's guards): the screen adds its tag.
+signal foe_joined(foe)
 ## Goblin: now and then a killing blow, decided by the coin (#77). Heads it
 ## misses; tails it hits double, past any guard, and leaves an injury.
 ## Defending the target, and luck, bend the odds.
@@ -74,9 +96,12 @@ class Foe:
 	## spider, which only fire drives off, #69). Its health isn't shown.
 	var glancing := false
 	var marked: Companion  # a killing blow's target, chosen before the coin
+	var row_override := ""  # "front" once the enraged queen steps forward
+	var enraged := false
+	var calls := 0
 
 	func in_back() -> bool:
-		return type.row == "back"
+		return (row_override if row_override != "" else type.row) == "back"
 
 	func _init(enemy_type: EnemyType, label: String) -> void:
 		type = enemy_type
@@ -139,8 +164,47 @@ func plan(foe: Foe) -> void:
 				foe.intent = Intent.HEAVY
 			else:
 				foe.intent = Intent.SWING
+		EnemyType.Tactic.ARCHER:
+			foe.intent = Intent.SHOOT
+		EnemyType.Tactic.GUARD:
+			foe.intent = Intent.BRACE if not foe.shielded and foe.intent != Intent.BRACE and rng.randf() < GUARD_BRACE_CHANCE else Intent.BASH
+		EnemyType.Tactic.QUEEN:
+			if not foe.enraged and foe.health * 2 <= foe.type.max_health:
+				foe.enraged = true
+				foe.row_override = "front"
+				events.append("The goblin queen roars and storms forward, enraged!")
+			var guards := living_foes().filter(func(f: Foe): return f.type.tactic == EnemyType.Tactic.GUARD).size()
+			var cleaver := QUEEN_ENRAGED_CLEAVER_CHANCE if foe.enraged else QUEEN_CLEAVER_CHANCE
+			var roll := rng.randf()
+			if foe.type.summons and foe.calls < QUEEN_CALLS and guards < 2 and foe.intent != Intent.CALL and roll < QUEEN_CALL_CHANCE:
+				foe.intent = Intent.CALL
+			elif foe.intent != Intent.CLEAVER and rng.randf() < cleaver:
+				foe.intent = Intent.CLEAVER
+			elif foe.intent != Intent.SCREECH and rng.randf() < QUEEN_SCREECH_CHANCE:
+				foe.intent = Intent.SCREECH
+			else:
+				foe.intent = Intent.SWING
 		_:
 			foe.intent = Intent.ATTACK
+
+
+## The queen's call: another guard joins the fight.
+func _call_guard(queen: Foe) -> Dictionary:
+	queen.calls += 1
+	var count := foes.filter(func(f: Foe): return f.type == queen.type.summons).size() + 1
+	var guard := Foe.new(queen.type.summons, "%s %d" % [queen.type.summons.display_name, count])
+	foes.append(guard)
+	plan(guard)
+	foe_joined.emit(guard)
+	return {"target": null, "hit": false, "damage": 0, "injury": null,
+			"text": "The queen shrieks - %s rushes in to guard her!" % guard.name.to_lower()}
+
+
+func _screech(queen: Foe) -> Dictionary:
+	for hero: Companion in party.living_members():
+		hero.change_strain(SCREECH_STRAIN)
+	return {"target": null, "hit": false, "damage": 0, "injury": null,
+			"text": "The queen's screech rattles everyone's nerves."}
 
 
 ## The coin's result for the next killing blow: 1 heads, 0 tails, -1 not
@@ -170,13 +234,13 @@ func _killing_blow(foe: Foe) -> Dictionary:
 	var heads: bool = coin == 1 if coin != -1 else rng.randf() < killing_blow_odds(target)
 	coin = -1
 	if heads:
-		outcome["text"] = "The %s's killing blow whistles past %s!" % [foe.name.to_lower(), target.display_name]
+		outcome["text"] = "The %s's %s whistles past %s!" % [foe.name.to_lower(), "cleaver" if foe.intent == Intent.CLEAVER else "killing blow", target.display_name]
 		return outcome
 	var damage: int = maxi(1, foe.type.damage_max * HEAVY_MULTIPLIER - target.toughness)
 	target.change_health(-damage)
 	outcome["hit"] = true
 	outcome["damage"] = damage
-	outcome["text"] = "The %s's killing blow lands on %s for %d!" % [foe.name.to_lower(), target.display_name, damage]
+	outcome["text"] = "The %s's %s lands on %s for %d!" % [foe.name.to_lower(), "cleaver" if foe.intent == Intent.CLEAVER else "killing blow", target.display_name, damage]
 	if target.is_alive() and not foe.type.injuries.is_empty():
 		var injury: Injury = foe.type.injuries[rng.randi_range(0, foe.type.injuries.size() - 1)]
 		if target.add_injury(injury):
@@ -236,6 +300,11 @@ func advance() -> void:
 				actor.shielded = false  # a shield lasts until its next turn
 				return
 		_turn += 1
+
+
+## A goblin guard stands in front: those behind it take half damage (#44).
+func guard_wall_up() -> bool:
+	return living_foes().any(func(f: Foe): return f.type.tactic == EnemyType.Tactic.GUARD and not f.in_back())
 
 
 # --- Rows (#72) -------------------------------------------------------
@@ -309,6 +378,8 @@ func hero_attack(hero: Companion, target: Foe) -> Dictionary:
 		var damage := maxi(1, roundi(rng.randi_range(reach.x, reach.y) * hero.effectiveness()))
 		if target.shielded:
 			damage = maxi(1, damage / 2)
+		if target.in_back() and guard_wall_up():
+			damage = maxi(1, floori(damage * GUARD_WALL_FACTOR))
 		target.health = maxi(0, target.health - damage)
 		outcome = {"hit": true, "damage": damage, "killed": not target.is_alive()}
 		outcome["text"] = "%s strikes the %s for %d.%s" % [hero.display_name, target.name.to_lower(), damage, " It falls." if outcome["killed"] else ""]
@@ -359,8 +430,16 @@ func _carry_out(foe: Foe) -> Dictionary:
 			foe.shielded = true
 			return {"target": null, "hit": false, "damage": 0, "injury": null,
 					"text": "The %s raises a battered shield." % foe.name.to_lower()}
-		Intent.KILLING_BLOW:
+		Intent.KILLING_BLOW, Intent.CLEAVER:
 			return _killing_blow(foe)
+		Intent.BRACE:
+			foe.shielded = true
+			return {"target": null, "hit": false, "damage": 0, "injury": null,
+					"text": "The %s braces behind its shield." % foe.name.to_lower()}
+		Intent.CALL:
+			return _call_guard(foe)
+		Intent.SCREECH:
+			return _screech(foe)
 	var heavy := foe.intent == Intent.HEAVY
 	var target := _choose_target(foe)
 	var outcome := {"target": target, "hit": false, "damage": 0, "injury": null}
@@ -368,6 +447,8 @@ func _carry_out(foe: Foe) -> Dictionary:
 		return outcome
 	if rng.randf() < foe.type.accuracy:
 		var damage := rng.randi_range(foe.type.damage_min, foe.type.damage_max)
+		if foe.enraged:
+			damage += ENRAGED_DAMAGE
 		if heavy:
 			damage *= HEAVY_MULTIPLIER
 		if heavy and is_defending(target):

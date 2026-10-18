@@ -27,6 +27,9 @@ enum Tactic {
 	DARTING,  ## goes for the weakest; may flee when badly hurt (rats)
 	WEB_AND_VENOM,  ## opens with a web, bites poison; ignores defenders (spiders)
 	CUNNING,  ## flanks whoever isn't defending; shields up when hurt (goblins)
+	ARCHER,  ## shoots from the back row, reaching anyone (goblin archer, #44)
+	GUARD,  ## shield wall: goblins behind it take half damage (goblin guard)
+	QUEEN,  ## calls guards, screeches, and her cleaver is decided by the coin
 }
 @export var tactic := Tactic.BASIC
 ## Shown when the fight starts: a hint at how it fights.
@@ -38,3 +41,9 @@ enum Tactic {
 @export_enum("front", "back") var row := "front"
 ## Attacks reach the heroes' back row (a spider drops from above).
 @export var reach_back := false
+## Who it calls into the fight (the queen's guards, #44).
+@export var summons: EnemyType
+## Placeholder look until its own art exists: a tint and a size for the
+## shared sprite (#99).
+@export var tint := Color.WHITE
+@export var sprite_scale := 1.0
