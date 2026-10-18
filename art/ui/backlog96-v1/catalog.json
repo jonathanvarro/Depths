@@ -1,0 +1,68 @@
+{
+  "issue": 96,
+  "native_canvas": [
+    32,
+    32
+  ],
+  "status_display_px": 14,
+  "intent_order": [
+    "attack",
+    "lunge",
+    "dart",
+    "web",
+    "bite",
+    "swing",
+    "heavy",
+    "shield",
+    "killing-blow",
+    "shoot",
+    "bash",
+    "brace",
+    "call",
+    "screech",
+    "cleaver"
+  ],
+  "groups": {
+    "status": {
+      "bleeding": "res://art/ui/backlog96-v1/status/bleeding.png",
+      "wounded": "res://art/ui/backlog96-v1/status/wounded.png",
+      "healing": "res://art/ui/backlog96-v1/status/healing.png",
+      "down": "res://art/ui/backlog96-v1/status/down.png",
+      "deep-wound": "res://art/ui/backlog96-v1/status/deep-wound.png",
+      "limp": "res://art/ui/backlog96-v1/status/limp.png",
+      "unconscious": "res://art/ui/backlog96-v1/status/unconscious.png",
+      "dressed-overlay": "res://art/ui/backlog96-v1/status/dressed-overlay.png"
+    },
+    "intent": {
+      "attack": "res://art/ui/backlog96-v1/intent/attack.png",
+      "lunge": "res://art/ui/backlog96-v1/intent/lunge.png",
+      "dart": "res://art/ui/backlog96-v1/intent/dart.png",
+      "web": "res://art/ui/backlog96-v1/intent/web.png",
+      "bite": "res://art/ui/backlog96-v1/intent/bite.png",
+      "swing": "res://art/ui/backlog96-v1/intent/swing.png",
+      "heavy": "res://art/ui/backlog96-v1/intent/heavy.png",
+      "shield": "res://art/ui/backlog96-v1/intent/shield.png",
+      "killing-blow": "res://art/ui/backlog96-v1/intent/killing-blow.png",
+      "shoot": "res://art/ui/backlog96-v1/intent/shoot.png",
+      "bash": "res://art/ui/backlog96-v1/intent/bash.png",
+      "brace": "res://art/ui/backlog96-v1/intent/brace.png",
+      "call": "res://art/ui/backlog96-v1/intent/call.png",
+      "screech": "res://art/ui/backlog96-v1/intent/screech.png",
+      "cleaver": "res://art/ui/backlog96-v1/intent/cleaver.png"
+    },
+    "map": {
+      "party": "res://art/ui/backlog96-v1/map/party.png",
+      "up": "res://art/ui/backlog96-v1/map/up.png",
+      "down": "res://art/ui/backlog96-v1/map/down.png",
+      "rest": "res://art/ui/backlog96-v1/map/rest.png",
+      "chest": "res://art/ui/backlog96-v1/map/chest.png",
+      "chest-empty": "res://art/ui/backlog96-v1/map/chest-empty.png",
+      "closed": "res://art/ui/backlog96-v1/map/closed.png",
+      "blocked": "res://art/ui/backlog96-v1/map/blocked.png",
+      "danger": "res://art/ui/backlog96-v1/map/danger.png",
+      "object": "res://art/ui/backlog96-v1/map/object.png",
+      "frontier": "res://art/ui/backlog96-v1/map/frontier.png"
+    }
+  },
+  "authoring": "Original SVG paths; no external icon library."
+}

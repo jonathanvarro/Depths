@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="RoomEvent" format=3]
 
 [ext_resource type="Script" path="res://scripts/room_event.gd" id="event"]
+[ext_resource type="PackedScene" path="res://art/props/cave-events-v1/tripwire.tscn" id="prop"]
 [ext_resource type="Script" path="res://scripts/event_choice.gd" id="choice"]
 [ext_resource type="Script" path="res://scripts/event_outcome.gd" id="outcome"]
 
@@ -42,6 +43,7 @@ outcomes = Array[EventOutcome]([SubResource("o1_0"), SubResource("o1_1")])
 
 [resource]
 script = ExtResource("event")
+prop = ExtResource("prop")
 kind = 3
 title = "A tripwire"
 clue = "The floor here is too clean, as if someone swept it. Something catches the lantern light at ankle height."

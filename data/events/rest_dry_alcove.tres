@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="RoomEvent" format=3]
 
 [ext_resource type="Script" path="res://scripts/room_event.gd" id="event"]
+[ext_resource type="PackedScene" path="res://art/props/cave-events-v1/dry-alcove.tscn" id="prop"]
 [ext_resource type="Script" path="res://scripts/event_choice.gd" id="choice"]
 [ext_resource type="Script" path="res://scripts/event_outcome.gd" id="outcome"]
 
@@ -18,6 +19,7 @@ outcomes = Array[EventOutcome]([SubResource("o0_0")])
 
 [resource]
 script = ExtResource("event")
+prop = ExtResource("prop")
 kind = 5
 title = "A dry alcove"
 clue = "A dry hollow in the rock, sheltered on three sides. Someone has rested here before."

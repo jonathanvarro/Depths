@@ -4,6 +4,7 @@ extends PanelContainer
 ## Kept deliberately quiet: supplies and details live elsewhere (#10).
 
 const PortraitView := preload("res://scripts/portrait_view.gd")
+const Glyphs := preload("res://art/ui/backlog96-v1/glyphs.gd")
 const StrainRules := preload("res://scripts/strain.gd")
 
 const PORTRAIT_SIZE := Vector2(96, 96)
@@ -21,17 +22,8 @@ const STRAIN_BORDERS := {
 	StrainRules.State.PANICKING: Color("e0332a"),
 }
 
-## Condition icons, drawn as simple shapes (placeholder art).
+## Condition identities; registered 32px glyphs display at 14px.
 enum Icon { HEALING, WOUNDED, DOWN, INJURY_WOUND, INJURY_LIMP, BLEEDING }
-const ICON_COLORS := {
-	Icon.BLEEDING: Color("e0221a"),
-	Icon.HEALING: Color("6fa35a"),
-	Icon.WOUNDED: Color("c0392b"),
-	Icon.DOWN: Color("9a9a9a"),
-	Icon.INJURY_WOUND: Color("e04a3a"),
-	Icon.INJURY_LIMP: Color("e0902f"),
-}
-const COLOR_DRESSING := Color("f2efe6")
 
 var companion: Companion
 
@@ -207,38 +199,22 @@ func _clear_icons() -> void:
 
 
 func _add_icon(kind: Icon, dressed := false, tooltip := "") -> void:
-	var icon := Control.new()
+	var icon := TextureRect.new()
+	var id: String = ["healing","wounded","down","deep-wound","limp","bleeding"][kind]
+	if kind==Icon.DOWN and companion and companion.is_unconscious():id="unconscious"
+	icon.texture=Glyphs.STATUS[id]
+	icon.expand_mode=TextureRect.EXPAND_IGNORE_SIZE
+	icon.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	icon.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
 	icon.custom_minimum_size = Vector2(ICON_SIZE, ICON_SIZE)
 	icon.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	icon.tooltip_text = tooltip if tooltip != "" else Icon.keys()[kind].capitalize()
-	icon.draw.connect(_draw_icon.bind(icon, kind, dressed))
 	_icons.add_child(icon)
-
-
-func _draw_icon(icon: Control, kind: Icon, dressed := false) -> void:
-	var c := icon.size / 2.0
-	var r := ICON_SIZE / 2.0
-	var color: Color = ICON_COLORS[kind]
-	match kind:
-		Icon.HEALING:  # plus sign
-			icon.draw_rect(Rect2(c - Vector2(r * 0.3, r), Vector2(r * 0.6, r * 2)), color)
-			icon.draw_rect(Rect2(c - Vector2(r, r * 0.3), Vector2(r * 2, r * 0.6)), color)
-		Icon.WOUNDED:  # blood drop
-			icon.draw_circle(c + Vector2(0, r * 0.3), r * 0.6, color)
-			icon.draw_colored_polygon(PackedVector2Array([c + Vector2(0, -r), c + Vector2(r * 0.55, r * 0.15), c + Vector2(-r * 0.55, r * 0.15)]), color)
-		Icon.BLEEDING:  # a drop with drips falling from it
-			icon.draw_circle(c + Vector2(-r * 0.2, -r * 0.05), r * 0.5, color)
-			icon.draw_colored_polygon(PackedVector2Array([c + Vector2(-r * 0.2, -r), c + Vector2(r * 0.27, -r * 0.2), c + Vector2(-r * 0.67, -r * 0.2)]), color)
-			icon.draw_circle(c + Vector2(r * 0.55, r * 0.45), r * 0.2, color)
-			icon.draw_circle(c + Vector2(-r * 0.2, r * 0.8), r * 0.18, color)
-		Icon.DOWN:  # cross
-			icon.draw_line(c - Vector2(r, r) * 0.8, c + Vector2(r, r) * 0.8, color, 2.5)
-			icon.draw_line(c + Vector2(-r, r) * 0.8, c + Vector2(r, -r) * 0.8, color, 2.5)
-		Icon.INJURY_WOUND:  # gash: two slanted cuts
-			icon.draw_line(c + Vector2(-r, -r * 0.3), c + Vector2(r * 0.3, r), color, 2.5)
-			icon.draw_line(c + Vector2(-r * 0.3, -r), c + Vector2(r, r * 0.3), color, 2.5)
-		Icon.INJURY_LIMP:  # bent leg
-			icon.draw_polyline(PackedVector2Array([c + Vector2(-r * 0.2, -r), c + Vector2(r * 0.3, 0), c + Vector2(-r * 0.4, r)]), color, 2.5)
-	if dressed:  # a white band across the icon
-		icon.draw_rect(Rect2(c - Vector2(r, r * 0.22), Vector2(r * 2, r * 0.44)), COLOR_DRESSING)
+	if dressed:
+		var band := TextureRect.new()
+		band.texture=Glyphs.STATUS["dressed-overlay"]
+		band.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		band.expand_mode=TextureRect.EXPAND_IGNORE_SIZE
+		band.mouse_filter=Control.MOUSE_FILTER_IGNORE
+		icon.add_child(band)

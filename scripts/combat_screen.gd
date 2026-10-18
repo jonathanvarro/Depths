@@ -11,6 +11,7 @@ signal enemy_acted(foe, outcome: Dictionary)
 signal _action_chosen(action: Dictionary)
 
 const CombatState := preload("res://scripts/combat_state.gd")
+const Glyphs := preload("res://art/ui/backlog96-v1/glyphs.gd")
 const COLOR_TEXT := Color("e8d9b0")
 const COLOR_DIM_TEXT := Color(0.85, 0.8, 0.7, 0.75)
 const ENEMY_PAUSE := 0.45
@@ -206,6 +207,10 @@ func _process(_delta: float) -> void:
 			var lift: float = TAG_HEIGHT + (0.6 if not _state.foe_in_front(foe) else 0.0) + 0.25 * (foe.node.scale.y - 1.0) + 0.45 * (_state.foes.find(foe) % 2)
 			var screen := camera.unproject_position(foe.node.global_position + Vector3(0, lift, 0))
 			var intent: String = CombatState.intent_text(foe)  # what it does next (#60)
+			tag.icon=Glyphs.intention(foe.intent)
+			tag.expand_icon=false
+			tag.add_theme_constant_override("icon_max_width",18)
+			tag.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
 			var back := "  [back]" if not _state.foe_in_front(foe) else ""
 			if foe.glancing:
 				tag.text = "%s%s\n%s" % [foe.name, back, intent]  # no health to whittle down (#69)

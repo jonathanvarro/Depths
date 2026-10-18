@@ -1,0 +1,94 @@
+{
+  "issue": 96,
+  "enemies": {
+    "starved-rat": "res://art/enemies/tutorial-v1/starved-rat/scene.tscn",
+    "small-spider": "res://art/enemies/tutorial-v1/small-spider/scene.tscn"
+  },
+  "props": {
+    "goblin-stash": {
+      "scene": "res://art/props/cave-events-v1/goblin-stash.tscn",
+      "texture": "res://art/props/cave-events-v1/goblin-stash.png",
+      "flat": false,
+      "pivot": [
+        64,
+        120
+      ],
+      "world_height": 0.55
+    },
+    "old-workings": {
+      "scene": "res://art/props/cave-events-v1/old-workings.tscn",
+      "texture": "res://art/props/cave-events-v1/old-workings.png",
+      "flat": false,
+      "pivot": [
+        64,
+        120
+      ],
+      "world_height": 0.9
+    },
+    "dry-alcove": {
+      "scene": "res://art/props/cave-events-v1/dry-alcove.tscn",
+      "texture": "res://art/props/cave-events-v1/dry-alcove.png",
+      "flat": false,
+      "pivot": [
+        64,
+        120
+      ],
+      "world_height": 0.65
+    },
+    "tripwire": {
+      "scene": "res://art/props/cave-events-v1/tripwire.tscn",
+      "texture": "res://art/props/cave-events-v1/tripwire.png",
+      "flat": false,
+      "pivot": [
+        64,
+        120
+      ],
+      "world_height": 0.18
+    },
+    "hollow-floor": {
+      "scene": "res://art/props/cave-events-v1/hollow-floor.tscn",
+      "texture": "res://art/props/cave-events-v1/hollow-floor.png",
+      "flat": true,
+      "pivot": [
+        64,
+        64
+      ],
+      "world_span": 1.4
+    },
+    "idol-niche": {
+      "scene": "res://art/props/cave-events-v1/idol-niche.tscn",
+      "texture": "res://art/props/cave-events-v1/idol-niche.png",
+      "flat": false,
+      "pivot": [
+        64,
+        120
+      ],
+      "world_height": 0.85
+    },
+    "abandoned-pack": {
+      "scene": "res://art/props/cave-events-v1/abandoned-pack.tscn",
+      "reuses": "res://art/props/cave-room-props-v1/abandoned-pack.tscn",
+      "state": "closed/empty adapter to set_searched"
+    },
+    "still-pool": {
+      "scene": "res://art/props/cave-room-props-v1/still-pool.tscn",
+      "flat": true
+    },
+    "cold-camp": {
+      "scene": "res://art/props/cave-room-props-v1/cold-camp.tscn",
+      "lit": false
+    }
+  },
+  "events": {
+    "chest_abandoned_pack": "abandoned-pack",
+    "chest_goblin_stash": "goblin-stash",
+    "chest_old_workings": "old-workings",
+    "object_pale_idol": "idol-niche",
+    "object_still_pool": "still-pool",
+    "rest_dry_alcove": "dry-alcove",
+    "rest_old_camp": "cold-camp",
+    "trap_tripwire": "tripwire",
+    "trap_hollow_floor": "hollow-floor"
+  },
+  "trap_visibility": "Game-owned: hidden unless the current party has the keen_eyes trait (#95)."
+}

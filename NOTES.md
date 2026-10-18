@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-18 – ChatGPT
+- Did: #96 visual pass: thin starved rat/pale small spider idle/attack/hurt; 8 party conditions and all 15 current intent glyphs wired to UI; registered contract/cot variants following real camp state; nine room-event prop references with searched pack/cairn states; authored crown/skull coin faces wired to the existing flip. Added held-lantern states/animation, opening daylight scene, 3 leather icons with shield/coat catalogue, rough blank map paper and 11 map markers. Original ImageGen masters/all 18 exact requests and editable SVGs preserved; exports, catalogues, phone/native review sheets and 50 Godot captures in art/concepts/backlog96-v1. Full handoff: docs/backlog96-art.md.
+- Next: Claude can place the paired held torch/lantern in the navigation HUD and the daylight scene only at the opening exit; implement the map renderer in #50 and armour definitions/rules in #93. #96 still needs real sound (#54) and later merchant portraits once a second site exists; #99 fortress art is separate.
+- Watch out: Godot 4.7.2 import, 185 art/state/renderer checks and existing opening/camp/coin checks pass with clean error logs. Phone safe-area and Larger UI captures reviewed; physical iPhone untested. Trap visibility follows the current #95 keen_eyes rule; this pass changes art references/presentation only. Main does not yet instantiate held lantern/daylight; those captures are placement previews. Concurrent starting-hero/research work and unrelated UIDs excluded.
+
 ## 2026-10-18 – Claude
 - Did: #95 starting hero choice. Hero screen on New game (scripts/hero_select.gd), Corin and Sister Alwen (data, dialogue libraries, broken starting weapons, placeholder recruit faces), Mara as rogue; traits keen_eyes / grudge / field_medic; opening adapts (half health, pronouns, the hero's own broken weapon). tools/hero_check.gd; opening_playthrough.gd takes a hero (5th arg).
 - Next: #97 research is in (owner): read it and settle stats/XP/monsters; #103 portraits.

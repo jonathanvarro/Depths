@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="SpriteFrames" path="res://art/enemies/tutorial-v1/small-spider/frames.tres" id="frames"]
+[node name="small-spider" type="Node3D"]
+[node name="Sprite" type="AnimatedSprite3D" parent="."]
+position = Vector3(0, 0.2925373134328358, 0)
+pixel_size = 0.005223880597014925
+billboard = 1
+shaded = true
+texture_filter = 0
+alpha_cut = 1
+alpha_scissor_threshold = 0.5
+sprite_frames = ExtResource("frames")
+animation = &"idle"

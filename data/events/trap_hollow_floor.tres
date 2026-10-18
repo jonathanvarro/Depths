@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="RoomEvent" format=3]
 
 [ext_resource type="Script" path="res://scripts/room_event.gd" id="event"]
+[ext_resource type="PackedScene" path="res://art/props/cave-events-v1/hollow-floor.tscn" id="prop"]
 [ext_resource type="Script" path="res://scripts/event_choice.gd" id="choice"]
 [ext_resource type="Script" path="res://scripts/event_outcome.gd" id="outcome"]
 [ext_resource type="Resource" path="res://data/injuries/limp.tres" id="limp"]
@@ -50,6 +51,7 @@ outcomes = Array[EventOutcome]([SubResource("o1_0"), SubResource("o1_1"), SubRes
 
 [resource]
 script = ExtResource("event")
+prop = ExtResource("prop")
 kind = 3
 title = "Hollow floor"
 clue = "The ground sounds hollow under your boots. A cold draught rises from somewhere below."

@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Texture2D" path="res://art/props/cave-events-v1/old-workings.png" id="texture"]
+
+[node name="old-workings" type="Node3D"]
+
+[node name="Sprite" type="Sprite3D" parent="."]
+position = Vector3(0, 0.5538461538461539, 0)
+billboard = 2
+pixel_size = 0.00989010989010989
+shaded = true
+texture_filter = 0
+alpha_cut = 1
+alpha_scissor_threshold = 0.5
+texture = ExtResource("texture")

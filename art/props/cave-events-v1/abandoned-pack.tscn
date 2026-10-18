@@ -1,0 +1,6 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="Script" path="res://art/props/cave-events-v1/container.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/props/cave-room-props-v1/abandoned-pack.tscn" id="pack"]
+[node name="AbandonedPack" type="Node3D"]
+script = ExtResource("script")
+[node name="Pack" parent="." instance=ExtResource("pack")]

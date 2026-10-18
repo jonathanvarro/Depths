@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="RoomEvent" format=3]
 
 [ext_resource type="Script" path="res://scripts/room_event.gd" id="event"]
+[ext_resource type="PackedScene" path="res://art/props/cave-room-props-v1/still-pool.tscn" id="prop"]
 [ext_resource type="Script" path="res://scripts/event_choice.gd" id="choice"]
 [ext_resource type="Script" path="res://scripts/event_outcome.gd" id="outcome"]
 
@@ -37,6 +38,7 @@ outcomes = Array[EventOutcome]([SubResource("o1_0")])
 
 [resource]
 script = ExtResource("event")
+prop = ExtResource("prop")
 kind = 4
 title = "A still pool"
 clue = "Black water fills a hollow in the floor, perfectly still. It smells faintly of iron."

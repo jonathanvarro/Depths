@@ -1,0 +1,15 @@
+{
+  "issue": 93,
+  "canvas": [
+    64,
+    64
+  ],
+  "rules_pending": true,
+  "icons": {
+    "leather-jerkin": "res://art/items/armour-v1/leather-jerkin.png",
+    "boiled-leather-vest": "res://art/items/armour-v1/boiled-leather-vest.png",
+    "studded-leather": "res://art/items/armour-v1/studded-leather.png",
+    "wooden-shield": "res://art/items/inventory-64-v1/wooden-shield.png",
+    "padded-coat": "res://art/items/inventory-64-v1/padded-coat.png"
+  }
+}

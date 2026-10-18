@@ -5,7 +5,7 @@ extends Control
 ##
 ## Owner decisions (#77): one coin; only rare, high-stakes moments; hero
 ## traits or trinkets can bend the odds; no turning down. Heads is always
-## the good side. The coin is drawn here until there's art (#96).
+## the good side. Neutral crown/skull art is supplied by #96.
 
 ## Flip() result: true for heads (the good outcome).
 signal landed(heads: bool)
@@ -15,6 +15,8 @@ const COLOR_DIM := Color(0.85, 0.8, 0.7, 0.75)
 const GOLD := Color("d9a441")
 const GOLD_DARK := Color("8a5d1c")
 const COIN_RADIUS := 64.0
+const HEADS_TEXTURE := preload("res://art/ui/coin-v1/heads.png")
+const TAILS_TEXTURE := preload("res://art/ui/coin-v1/tails.png")
 const SPINS := 9
 const SPIN_SECONDS := 1.6
 
@@ -109,23 +111,9 @@ func flip(title: String, heads_text: String, tails_text: String, heads_chance :=
 
 ## Heads: the king's crown. Tails: a skull.
 func _draw_coin() -> void:
-	var c := _coin.size / 2.0
-	_coin.draw_circle(c, COIN_RADIUS, GOLD_DARK)
-	_coin.draw_circle(c, COIN_RADIUS - 6, GOLD)
-	_coin.draw_arc(c, COIN_RADIUS - 14, 0, TAU, 48, GOLD_DARK, 2.0)
-	if _face_heads:
-		var base := c + Vector2(0, 18)
-		_coin.draw_colored_polygon(PackedVector2Array([
-			base + Vector2(-30, 0), base + Vector2(-30, -28), base + Vector2(-15, -12), base + Vector2(0, -36),
-			base + Vector2(15, -12), base + Vector2(30, -28), base + Vector2(30, 0)]), GOLD_DARK)
-		_coin.draw_rect(Rect2(base + Vector2(-30, 2), Vector2(60, 8)), GOLD_DARK)
-	else:
-		_coin.draw_circle(c + Vector2(0, -6), 24, GOLD_DARK)
-		_coin.draw_rect(Rect2(c + Vector2(-13, 10), Vector2(26, 16)), GOLD_DARK)
-		_coin.draw_circle(c + Vector2(-9, -8), 7, GOLD)
-		_coin.draw_circle(c + Vector2(9, -8), 7, GOLD)
-		for x in [-8, 0, 8]:
-			_coin.draw_line(c + Vector2(x, 12), c + Vector2(x, 26), GOLD, 2.0)
+	var texture: Texture2D = HEADS_TEXTURE if _face_heads else TAILS_TEXTURE
+	var extent := Vector2.ONE * COIN_RADIUS
+	_coin.draw_texture_rect(texture,Rect2(_coin.size/2.0-extent,extent*2),false)
 
 
 func _label(size: int, color: Color) -> Label:

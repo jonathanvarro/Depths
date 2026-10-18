@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="Texture2D" path="res://art/features/daylight-exit-v1/exit.png" id="texture"]
+[node name="DaylightExit" type="Node3D"]
+[node name="Sprite" type="Sprite3D" parent="."]
+position = Vector3(0, 1.445, 0)
+pixel_size = 0.012
+billboard = 2
+shaded = false
+texture_filter = 0
+alpha_cut = 1
+alpha_scissor_threshold = 0.5
+texture = ExtResource("texture")

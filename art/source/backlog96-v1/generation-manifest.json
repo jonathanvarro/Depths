@@ -1,0 +1,210 @@
+{
+  "tool": "image_gen.imagegen",
+  "date": "2026-10-18",
+  "issue": 96,
+  "corrections": [
+    {
+      "name": "hollow-floor-clean",
+      "args": {
+        "prompt": "Use case: background-extraction. EDIT TARGET attached. Preserve ONLY the solid cracked stone slabs and the tiny solid rock chips of this exact hollow-floor patch, keeping their pixels, layout, colours and full-canvas placement. Remove the entire soft grey/brown haze, halo, painted ground shadow, translucent ground matte and any dark rectangular background around the stone. Every pixel outside the physical solid rock silhouettes must be genuinely alpha0 transparent. The stone edges must be crisp without a blurred fringe. Keep the narrow dark crevices that lie BETWEEN or UNDER overlapping actual slabs, but no surrounding glow. Do not repaint, enlarge, move, crop, add new objects, arrows, symbols or text. Return the same full canvas with TRUE exterior transparency; this must work on a light background as a clean cutout.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/backlog96-v1/hollow-floor.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-49079ea1-5fc3-46e3-a1f2-8028011531ca.png",
+      "preserved_file": "hollow-floor-clean.png"
+    },
+    {
+      "name": "hollow-floor-topdown",
+      "args": {
+        "prompt": "Use case: precise-object-edit. Change the attached cracked stone patch into a TRUE ORTHOGRAPHIC TOP-DOWN floor decal for the same Depths game. Camera looks STRAIGHT DOWN from above: a broadly round/irregular oval patch of loosely fitting grey cave slabs, roughly equal width and depth. One central sagging slab and a few narrow dark cracks hint at hollow support below. Preserve the slate/ochre palette and simple broad pixel clusters. NO visible vertical side faces, horizon, front-facing staging, perspective compression, pedestal, raised cliff or pit opening. No halo, ambient glow, cast shadow, surrounding ground rectangle, haze or background. ONLY the solid rock patch cutout; exterior must be strict clear transparency and crisp rock boundaries. Entire broad round patch centred in a square canvas with generous margins, intended as128x128 pixels laid flat on a3D cave floor. At most32 colours, sparse detail, neutral flat material light; no text/UI/markers. Top down is essential: this must read from any of four compass views.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/backlog96-v1/hollow-floor-clean.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-85993594-5514-4711-9a0d-21c9edfe353f.png",
+      "preserved_file": "hollow-floor-topdown.png"
+    }
+  ],
+  "entries": [
+    {
+      "name": "held-lantern",
+      "args": {
+        "prompt": "Use case: stylized-concept. Generate one tall held oil-lantern BODY sprite for Depths, matching the attached approved inventory lantern's distinctive battered iron ribs, round wire handle, tarnished brass base and humble starter equipment. Reference is STYLE and identity, enlarge into a clearer front-facing tall narrow lantern with a small lower oil reservoir and central wick. The entire handle and base must fit inside a transparent 1:2 canvas with generous side margins. Unlit, NO flame, NO glow. Keep the central glass chamber mostly TRANSPARENT/clear so a separate animated flame can be composited there; iron ribs and a few pale glass edge reflections remain. No hand, character, wall, ground shadow, UI, text or backdrop. Dark fantasy deliberately simple pixel art for a 128x256 game sprite, broad crisp clusters, about 24-32 muted neutral metal colours, no microtexture or individual scratches. Soft neutral WHITE material lighting only; no baked orange rim or directional torch highlight. One single lantern only, squarely front-facing.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/items/inventory-64-v1/lantern-unlit.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-1c4b7581-d88c-41ee-b549-6ef600b40b52.png",
+      "preserved_file": "held-lantern.png"
+    },
+    {
+      "name": "starved-rat",
+      "args": {
+        "prompt": "Use case: precise-object-edit for a NEW tutorial enemy family. Attached 2x2 sheet is the pose/style guide. Reauthor the SAME front-facing rat species as a distinctly STARVED RAT: markedly narrower bony body, angular hips and two suggested ribs, ragged sparse grey-brown fur in just a few masses, large ears and long thin pinkish tail. Emaciated but no gore, open wounds or corpse. Keep the creature's face aggressive and animal. EXACT 2x2 equal SQUARE cells: top-left idle; top-right attack lunging with open jaws; bottom-left hurt recoiling sideways but alive; bottom-right duplicate idle. SAME anatomy, head size and magnification in all cells; supporting feet on the same baseline near 94 percent of each cell height, full ears/tail/limbs inside each cell. True transparent background throughout, no floor/shadow/dividers/labels. Sparse clean pixel art designed for 128px cells, at most32 muted grey/brown/pink colours across family, broad large clusters, about3 shades/material. No detailed hairs, gradients, noise, dithering or glossy eyes. Neutral material shading, no orange light baked in. Preserve the references' clear three-pose language but genuinely redraw the thinner form, not a recolour.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/backlog96-v1/rat-reference.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-b5b8918d-ff22-4fd5-bf4e-1b1c421bf574.png",
+      "preserved_file": "starved-rat.png"
+    },
+    {
+      "name": "small-spider",
+      "args": {
+        "prompt": "Use case: precise-object-edit for a NEW tutorial enemy family. Attached 2x2 sheet is pose/style guide. Reauthor this front-facing cave spider as a SMALL PALE SPIDER: narrower delicate abdomen, thin clearly separated jointed legs, pale dusty grey/taupe shell with muted ochre joints, two small fangs. Exactly EIGHT legs in every pose, four on each side, attached to the front body; fangs are separate from the legs. No extra limbs, ornament, fur or blood. EXACT2x2 equal SQUARE cells: top-left idle; top-right attack with raised forelegs and forward fangs; bottom-left hurt recoiling low sideways, still eight intact legs; bottom-right duplicate idle. Same magnification/anatomy across all four cells; planted foot baseline near94percent cell height; no clipping. Full transparent canvas, no ground/shadow/dividers/labels. Simple broad pixel clusters designed for128px cells and32 shared colours, three shades/material, no fine texture, gradients, noise or dithering. The smaller world size is set later in the scene; preserve enough clear readable silhouette in each cell. Neutral local shading, no baked torch rim. Keep the distinct two body masses and low-spread character of the reference.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/backlog96-v1/spider-reference.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-58d09059-8d83-4116-a7ff-008b91ce4a91.png",
+      "preserved_file": "small-spider.png"
+    },
+    {
+      "name": "leather-armour",
+      "args": {
+        "prompt": "Use case: stylized-concept. A2x2 transparent item-art atlas for Depths. Attached padded coat is STYLE reference, not an edit target. Three different simple leather body armours on invisible torsos, consistent slight three-quarter front view and same scale. Top-left: soft LEATHER JERKIN, supple dull brown hide, short sleeveless vest, simple side ties, a few patches. Top-right: BOILED LEATHER VEST, rigid dark chest shell and broad overlapping shoulder guards, heavier silhouette, plain straps. Bottom-left: STUDDED LEATHER, worn dark leather jerkin with a few widely spaced small dull iron rivet rows and reinforced shoulders, no spikes. Bottom-right empty transparent. Each piece alone centred within its equal square cell with broad margins. No person, head, mannequin, arms, helmet, swords, labels, prices, frame or background. Crisp modest pixel illustration designed to reduce to64x64 icons, broad silhouette-first clusters, muted earth/material palette, neutral WHITE diffuse fill, no torch glow/rim. Material folds and wear sparse; no microtexture, elaborate embroidery or polished fantasy armour. All three visibly distinct at40px, honest basic equipment.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/items/starter-v1/padded-coat.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-8b84d358-91bb-42f4-9118-14bd3e82cef7.png",
+      "preserved_file": "leather-armour.png"
+    },
+    {
+      "name": "contract-notice",
+      "args": {
+        "prompt": "Use case: precise-object-edit. EDIT TARGET is the attached cave-path site sprite. Keep its cave rocks, entrance, lantern, rough trail post, camera angle, canvas proportions and transparent exterior exactly registered. Add ONLY a small weathered parchment notice fastened to the wooden post in the left foreground, below the existing hanging lantern. It should look like a cheaply printed royal contract: a tiny simple crown mark at top, two or three illegible charcoal lines and a dull wax seal; no readable text. Parchment sheet is rough beige, curled edge, simple cord/nail attachment. It must be clearly lighter than the wooden post and visible at the site's small camp size. Same restrained pixel clusters and neutral material lighting as target, no new light/glow. No other scenery, people, foliage, border, change to entrance or scale. Return the complete site with true transparent background, SAME4:3 canvas composition.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/camp/cave-camp-v1/cave.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-dc3720cc-c0b7-4ea3-985b-baf7874cc0c8.png",
+      "preserved_file": "contract-notice.png"
+    },
+    {
+      "name": "nurse-occupied",
+      "args": {
+        "prompt": "Use case: precise-object-edit. EDIT TARGET is the attached nurse's tent site. Keep the exact existing tent silhouette, poles, ropes, cot position, crates, bucket, utensils, framing, neutral light and transparent exterior. Add ONLY one modestly covered adult patient resting on the existing cot on the left inside the tent. Their head rests at the cot's deeper/back end; plain grey blanket covers torso and legs, small linen head bandage, resting posture, no blood or distress. Patient identity deliberately indistinct at this small scene scale, no resemblance to a specific hero. They are recovering, not a corpse. Do not add a standing nurse, a second bed, new furniture, symbols or text. Whole site remains on same4:3 canvas, same ground contact, transparent background, restrained clear pixel clusters, NO baked warm lamp lighting or glowing skin. Exact placement/alignment matters for swapping between empty and occupied versions.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/camp/cave-camp-v1/treatment.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-bf9597ce-497a-4a80-b49e-4b093126f931.png",
+      "preserved_file": "nurse-occupied.png"
+    },
+    {
+      "name": "goblin-stash",
+      "args": {
+        "prompt": "Use case: stylized-concept. Depths dark dungeon pixel art designed for a128x128 transparent floor sprite. One front-facing full prop with a slightly visible top plane. Broad crisp clusters, at most32 muted material colours, simple neutral WHITE diffuse form shading, no orange torch rim, no glow, no painted ground shadow, no background, text or UI. Leave generous margins around the silhouette and place the bottom contact line near94percent of the square canvas. Sparse wear marks, no photographic/painterly microdetail, dithering or gradients. A small goblin stash cairn: a low uneven pile of six coarse slate stones concealing a ragged hide bundle, with a little crude BONE CHARM tied to a bent stick leaning from the cairn. A few chipped greenish stones, one grubby cord; no coins displayed, chest, weapon, skull body or living goblin. Broad low silhouette, recognizable stone cairn + small pale charm + tucked brown bundle. Some empty transparent space above; this is a small floor object, not a towering monument.",
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-d8847f80-b960-4d9d-aa1a-acbae340b992.png",
+      "preserved_file": "goblin-stash.png"
+    },
+    {
+      "name": "old-workings",
+      "args": {
+        "prompt": "Use case: stylized-concept. Depths dark dungeon pixel art designed for a128x128 transparent floor sprite. One front-facing full prop with a slightly visible top plane. Broad crisp clusters, at most32 muted material colours, simple neutral WHITE diffuse form shading, no orange torch rim, no glow, no painted ground shadow, no background, text or UI. Leave generous margins around the silhouette and place the bottom contact line near94percent of the square canvas. Sparse wear marks, no photographic/painterly microdetail, dithering or gradients. An abandoned tiny mine working prop: a broken low section of dark rock with a few clear dull GREEN COPPER VEINS, a RUSTED PICK leaning diagonally against it and a SPLIT WICKER BASKET with two rock chunks on the ground. One compact connected composition, readable vein/pick/basket silhouettes at128px. No tunnel opening, room, miners, glowing crystal, gold, gems, tracks or machinery. Stone occupies upper middle, pick to one side, basket low foreground. Basic forgotten hand tools, low-resource medieval cave.",
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-018d62da-c690-4f8d-b4ac-c5f8330fc1e1.png",
+      "preserved_file": "old-workings.png"
+    },
+    {
+      "name": "dry-alcove",
+      "args": {
+        "prompt": "Use case: stylized-concept. Depths cave floor prop in deliberately simple pixel art for a128x128 sprite: broad crisp clusters, about3 shades per material, at most32 muted stone/cloth/wood colours, no noisy texture, dithering, gradients or painterly detail. Front-facing with slightly visible top plane, consistent floor perspective with the reference. Whole isolated object inside square transparent canvas, generous margins, lowest contact near94percent of cell height. Neutral WHITE form shading only, no torch rim, glow, ground shadow, background, labels or UI. A dry resting alcove marker: a modest torn grey-brown bedroll spread on a little raised dry stone shelf, sheltered by a low three-sided curve of cave stone. Thin folded blanket and small rolled head rest. This is a shallow resting recess, not an archway or tunnel entrance. No fire, embers, light, supplies, person, doors or magical symbols. Low calm silhouette, readable dry bedding against cool slate, a safe-looking pause within a hostile cave. Style reference is the existing cold camp but this prop has NO hearth or ashes.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/props/cave-room-props-v1/cold-camp.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-25983af2-89c9-493b-9034-b36ebbfefb3c.png",
+      "preserved_file": "dry-alcove.png"
+    },
+    {
+      "name": "tripwire",
+      "args": {
+        "prompt": "Use case: stylized-concept. Depths cave floor prop in deliberately simple pixel art for a128x128 sprite: broad crisp clusters, about3 shades per material, at most32 muted stone/cloth/wood colours, no noisy texture, dithering, gradients or painterly detail. Front-facing with slightly visible top plane, consistent floor perspective with the reference. Whole isolated object inside square transparent canvas, generous margins, lowest contact near94percent of cell height. Neutral WHITE form shading only, no torch rim, glow, ground shadow, background, labels or UI. A small crude tripwire trap: two low rusty iron pegs planted left and right into two small chipped stone footings, with a taut thin dull grey cord stretched between them close to floor height. A single small bent trigger hook on one peg. Keep the cord visible at128px using one clear continuous line, not hair-like noise. Broad low silhouette with lots of transparent space above, no spike pit, gore, victim, large mechanism or glowing wire. Do not draw a warning sign, a room, ground rectangle, circles or arrows. Style reference is for the simple cave-prop materials only.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/props/cave-room-props-v1/cold-camp.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-b1106e02-4cd9-4ea6-8b04-5224ebe8e9e7.png",
+      "preserved_file": "tripwire.png"
+    },
+    {
+      "name": "hollow-floor",
+      "args": {
+        "prompt": "Use case: stylized-concept. Depths cave floor prop in deliberately simple pixel art for a128x128 sprite: broad crisp clusters, about3 shades per material, at most32 muted stone/cloth/wood colours, no noisy texture, dithering, gradients or painterly detail. Front-facing with slightly visible top plane, consistent floor perspective with the reference. Whole isolated object inside square transparent canvas, generous margins, lowest contact near94percent of cell height. Neutral WHITE form shading only, no torch rim, glow, ground shadow, background, labels or UI. A compact fragile HOLLOW FLOOR warning patch, a flattened slightly top-down oval cluster of cracked cave slabs, one shallow sagging slab in the middle and a narrow dark crack under its edge, a few tiny loose chips. Subtle structural failure; NOT a fully open pit or black portal, no bones, spikes, arrows, exclamation signs or creature. Surface is cool grey shale with one muted ochre edge, neutral light, no cast ground shadow. Keep the patch low and horizontally spread; transparent outside stones. This will be laid FLAT on the cave floor, not stood upright.",
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-5ed151e3-050f-4af1-a27c-b5f15ec2d7d8.png",
+      "preserved_file": "hollow-floor.png"
+    },
+    {
+      "name": "daylight-exit",
+      "args": {
+        "prompt": "Use case: stylized-concept. One tall front-facing cave EXIT sprite for Depths, 1:2 transparent canvas, designed for128x256 pixel art. A rough vertical crack in natural cool grey cave rock that opens onto pale daylight: an irregular narrow opening, a little washed-out grey-blue sky and a suggestion of a few grass stalks beyond, pale stone rubble at the base. Opening visibly leads outside, not a magical portal, ladder, door or staircase. Full rocky sides and ground contact fit inside the canvas; lower contact near97percent. Bright ivory daylight within the opening; any rays are very restrained and confined to the opening, no giant surrounding aura or flare. No text, UI, character, sun symbol, orange rim, painted ground shadow or background outside the rock silhouette. Broad clear pixel clusters and sparse32colour material palette, simple cave environment detail. Readable as freedom/daylight from the first-person view.",
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-95c7c575-fa69-43b3-91ad-7e20e60a5bc5.png",
+      "preserved_file": "daylight-exit.png"
+    },
+    {
+      "name": "coin-faces",
+      "args": {
+        "prompt": "Use case: stylized-concept. A 2x2 transparent sprite atlas for one old GOLD COIN in Depths, designed for128px game UI. Top-left: HEADS, a simple worn three-point royal CROWN in shallow relief. Top-right: TAILS, a simple SKULL in shallow relief with two clear eye sockets and three square teeth. Bottom-left: the SAME coin seen edge-on as a narrow vertical ribbed metal sliver, same height/diameter as front faces. Bottom-right empty transparent. Each equal SQUARE cell, heads and tails identical front-facing circular diameter, perfectly centred, generous identical margins. Worn slightly irregular hammered edge but both faces must have matching outside outline/scale. Tarnished ochre gold, 3 broad metal tones and deep brown engraved marks; neutral WHITE soft material light, no directional shine or glow, no coloured gem, red paint, lettering, numbers, text, frame, label or backdrop. Deliberately coarse crisp pixel-art clusters, simple readable emblems, no decorative microtexture. This is a serious dangerous coin flip, not a shiny reward badge.",
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-b196d007-b171-48b2-8d50-83d6e96ec608.png",
+      "preserved_file": "coin-faces.png"
+    },
+    {
+      "name": "parchment",
+      "args": {
+        "prompt": "Use case: stylized-concept. Production BLANK rough parchment texture for Depths' hand-drawn dungeon map. The attached picture is a STYLE reference ONLY; remove ALL its map drawing, rooms, routes, symbols, writing, title, controls and borders. One SQUARE practical expedition sheet, gently torn/frayed edges and a few nicks/folds near the margins; quiet broad warm grey-beige drawing area in the central85percent. Subdued sparse coarse paper fibres, rubbed corners, subtle uneven material colour. No heavy noisy grit, prominent stains, burned black rim, ornamental treasure-map decoration, wax seals or objects. Entire sheet inside the square canvas with a slim true-transparent exterior margin. No text, map, grid, ink marks, icons or shadows. Designed to export512x512 with low-contrast centre behind crisp charcoal geometry; neutral flat lighting. Damage stays on the outermost8percent so the quiet interior can be cropped for the minimap.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/concepts/map/hero-map-v1.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-2be5f457-7d42-4aaf-8626-6db5bcc387cb.png",
+      "preserved_file": "parchment.png"
+    },
+    {
+      "name": "goblin-stash-empty",
+      "args": {
+        "prompt": "Use case: precise-object-edit. Attached is exact EDIT TARGET for the EMPTY/SEARCHED state of this goblin stash. Keep square full-canvas registration, EXACT rock pile silhouette, stick, bone charm, colours, lighting and floor contact unchanged. Change ONLY the brown hide bundle under the stones: it is now untied, slumped OPEN with empty dark interior and loosened cord, no valuables. A little displaced flap makes the search visible while leaving the stone/charm structure untouched. No new coins, chest, creature, ground, shadow, text or backdrop. True transparent exterior, same sparse32colour pixel-art language. Canvas alignment between states is crucial: no moving, zooming, rotating, scaling or rearranging the cairn.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/backlog96-v1/goblin-stash.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-43fdf9b8-3344-43f9-ba13-1145954991a9.png",
+      "preserved_file": "goblin-stash-empty.png"
+    },
+    {
+      "name": "idol-niche",
+      "args": {
+        "prompt": "Use case: compositing. Attached small pale stone idol is an IDENTITY/STYLE reference: preserve its featureless oval head, folded arms, seated figure and simple low-detail stone form. Create one compact128px-style front-facing world prop: that same small idol sitting on a low rough stone ledge INSIDE a shallow broken natural cave-rock NICHE. Grey stones form a low recess backdrop with a few overhanging pieces, not a full tunnel doorway or arch to pass through. Idol is pale grey and easily distinguished against darker cool shale. Whole small niche and plinth within a square transparent canvas, bottom contact near94percent, broad crisp restrained pixel clusters, at most32 neutral colours; no detailed carved ornaments, treasure, candles, fire, magic, orange rim or glow. Neutral white form shading. No walls beyond the immediate niche silhouette, ground shadow, text, symbols, UI or frame. Low humble unsettling devotional object rather than grand statue.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/props/cave-room-props-v1/pale-idol.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-24a063dd-b792-477e-b56e-5f24dfd88ff2.png",
+      "preserved_file": "idol-niche.png"
+    }
+  ]
+}

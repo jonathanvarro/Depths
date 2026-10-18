@@ -35,6 +35,7 @@ var _note_tween: Tween
 var _canvas: Control
 var _buttons := {}  # site id -> Button
 var _sites := {}  # site id -> layout entry
+var _site_art := {}  # site id -> registered art node
 var _day_label: Label
 var _activity: Panel
 var _activity_title: Label
@@ -113,6 +114,7 @@ func _init() -> void:
 func open(camp, party) -> void:
 	_camp = camp
 	_party = party
+	_update_site_art()
 	visible = true
 	_close_activity()
 	_fit()
@@ -144,6 +146,7 @@ func _add_site(site: Dictionary) -> void:
 	art.position = Vector2(rect.get_center().x, rect.end.y - 24)
 	art.scale = Vector2.ONE * float(site["scale"])
 	_canvas.add_child(art)
+	_site_art[id]=art
 	# The whole site and its label are one target (keyboard, mouse, touch).
 	var button := Button.new()
 	button.position = rect.position
@@ -174,6 +177,15 @@ func _add_site(site: Dictionary) -> void:
 	button.pressed.connect(open_activity.bind(id))
 	_canvas.add_child(button)
 	_buttons[id] = button
+
+
+## Registered site variants follow actual contracts and recovery state.
+func _update_site_art() -> void:
+	if _camp==null:return
+	var has_contract: bool = _camp.contract.has("enemy") and not _camp.queen_defeated
+	_site_art["cave"].get_node("Base").texture=load("res://art/camp/cave-camp-variants-v1/contract-notice.png") if has_contract else load(DIR+"cave.png")
+	var occupied: bool = _camp.recovering.keys().any(func(hero):return _camp.is_recovering(hero))
+	_site_art["treatment"].get_node("Base").texture=load("res://art/camp/cave-camp-variants-v1/nurse-occupied.png") if occupied else load(DIR+"treatment.png")
 
 
 ## Scales the 640 x 360 scene to fit the safe area, centred.
@@ -252,6 +264,7 @@ func _close_activity() -> void:
 
 
 func _refresh_activity() -> void:
+	_update_site_art()
 	_day_label.text = _status()
 	for child in _body.get_children():
 		_body.remove_child(child)

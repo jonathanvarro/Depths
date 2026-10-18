@@ -1,0 +1,459 @@
+{
+  "issue": 96,
+  "assets": {
+    "art/props/lantern-v1/body.png": {
+      "canvas": [
+        128,
+        256
+      ],
+      "bounds": [
+        19,
+        8,
+        108,
+        248
+      ],
+      "visible_colours": 31
+    },
+    "art/items/armour-v1/leather-jerkin.png": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        8,
+        4,
+        56,
+        60
+      ],
+      "visible_colours": 32
+    },
+    "art/items/armour-v1/boiled-leather-vest.png": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        4,
+        4,
+        60,
+        60
+      ],
+      "visible_colours": 32
+    },
+    "art/items/armour-v1/studded-leather.png": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        4,
+        4,
+        59,
+        60
+      ],
+      "visible_colours": 31
+    },
+    "art/enemies/tutorial-v1/starved-rat/idle.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        8,
+        25,
+        118,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/enemies/tutorial-v1/starved-rat/attack.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        9,
+        29,
+        119,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/enemies/tutorial-v1/starved-rat/hurt.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        8,
+        27,
+        120,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/enemies/tutorial-v1/small-spider/idle.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        8,
+        54,
+        119,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/enemies/tutorial-v1/small-spider/attack.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        9,
+        49,
+        113,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/enemies/tutorial-v1/small-spider/hurt.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        8,
+        59,
+        116,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/props/cave-events-v1/goblin-stash.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        8,
+        54,
+        120,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/props/cave-events-v1/goblin-stash-empty.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        8,
+        54,
+        120,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/props/cave-events-v1/old-workings.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        8,
+        30,
+        120,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/props/cave-events-v1/dry-alcove.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        8,
+        56,
+        120,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/props/cave-events-v1/tripwire.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        8,
+        96,
+        120,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/props/cave-events-v1/hollow-floor.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        8,
+        18,
+        120,
+        110
+      ],
+      "visible_colours": 29
+    },
+    "art/props/cave-events-v1/idol-niche.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        10,
+        9,
+        117,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/camp/cave-camp-variants-v1/contract-notice.png": {
+      "canvas": [
+        256,
+        192
+      ],
+      "edited_box": [
+        59,
+        85,
+        93,
+        130
+      ],
+      "outside_patch_unchanged": true
+    },
+    "art/camp/cave-camp-variants-v1/nurse-occupied.png": {
+      "canvas": [
+        256,
+        192
+      ],
+      "edited_box": [
+        86,
+        106,
+        138,
+        150
+      ],
+      "outside_patch_unchanged": true
+    },
+    "art/features/daylight-exit-v1/exit.png": {
+      "canvas": [
+        128,
+        256
+      ],
+      "bounds": [
+        8,
+        20,
+        120,
+        249
+      ],
+      "visible_colours": 32
+    },
+    "art/ui/coin-v1/heads.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        6,
+        6,
+        121,
+        122
+      ],
+      "visible_colours": 32
+    },
+    "art/ui/coin-v1/tails.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        6,
+        6,
+        122,
+        122
+      ],
+      "visible_colours": 32
+    },
+    "art/ui/coin-v1/edge.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        57,
+        33,
+        71,
+        94
+      ],
+      "visible_colours": 32
+    },
+    "art/ui/map-v1/parchment.png": {
+      "canvas": [
+        512,
+        512
+      ],
+      "bounds": [
+        12,
+        11,
+        502,
+        501
+      ],
+      "visible_colours": 56
+    }
+  },
+  "registration": {
+    "starved-rat": {
+      "common_canvas_scale": 0.9739130434782609,
+      "common_dx": -1,
+      "pose_translations": [
+        [
+          -1,
+          4
+        ],
+        [
+          -1,
+          3
+        ],
+        [
+          -1,
+          4
+        ]
+      ],
+      "contact_y": 120
+    },
+    "small-spider": {
+      "common_canvas_scale": 0.9256198347107438,
+      "common_dx": 2,
+      "pose_translations": [
+        [
+          2,
+          12
+        ],
+        [
+          2,
+          11
+        ],
+        [
+          2,
+          14
+        ]
+      ],
+      "contact_y": 120
+    },
+    "goblin-stash": {
+      "shared_full_canvas_scale": 1.009009009009009,
+      "shared_offset": [
+        0,
+        -2
+      ],
+      "state_union": [
+        8,
+        56,
+        119,
+        122
+      ]
+    },
+    "contract-notice": {
+      "source_bounds": [
+        91,
+        209,
+        1392,
+        1066
+      ],
+      "target_bounds": [
+        16,
+        37,
+        240,
+        185
+      ],
+      "patch_box": [
+        59,
+        85,
+        93,
+        130
+      ]
+    },
+    "nurse-occupied": {
+      "source_bounds": [
+        81,
+        191,
+        1395,
+        1073
+      ],
+      "target_bounds": [
+        16,
+        36,
+        240,
+        185
+      ],
+      "patch_box": [
+        86,
+        106,
+        138,
+        150
+      ]
+    }
+  },
+  "failures": [],
+  "source_sha256": {
+    "coin-faces.png": "4e4f436f806ee7d74c89f5e1b099288591f5da1fde81ca9c18a0ddebbedea42b",
+    "contract-notice.png": "55791c89762a26b0589af0797719da099128830cef5e3e6e02a129c6963d3a92",
+    "daylight-exit.png": "d5faac2c2be3b17420d814c390cab5f69a344a58022145010053430b3355d1a2",
+    "dry-alcove.png": "aa59d808b53c95c2f4b478b9e3f3ac4da8cf773b8452fe64570eeebeb88a10e8",
+    "goblin-stash-empty.png": "bef96fdcb6950d88b423ba76088afc3208c5efa37977ccc4406a05901782de43",
+    "goblin-stash.png": "3cbfecb70bc046d6738fca02cf35bd5909268032ae0aa4fe19ed183f8917b142",
+    "held-lantern.png": "224642c4d7ae685168d80f84cdfb070d0f18061f8b2079fd900379372d3e3540",
+    "hollow-floor-clean.png": "542a586f054237bb8c99093a076166a3e1a9cee115adf85eafbd32f618a4eb94",
+    "hollow-floor-topdown.png": "1b2880a95f19e0eee258cbee0b325387c4e217bc1f295683c5b36311f9453848",
+    "hollow-floor.png": "b01f89bcdd2e26e480adebb6d7603ba192e3a4fe7e3c226cd3743afbec5351cb",
+    "idol-niche.png": "05b559eed5d9265533640350c7f7b2fae3066204b2130fb181dd425a487eea01",
+    "leather-armour.png": "278453f2aef0fa410ba6de2989a9e162e51b57fbb7912452d4ee4dbf00198858",
+    "nurse-occupied.png": "9a703c91dd8ee5ec0962eba05d48cb86da1092f518e99afc255f40d8471a95d9",
+    "old-workings.png": "f7f70add4a4b4b3364d85783df4e156f4f7beec4fa5b52b2067871a298e5bb81",
+    "parchment.png": "4ef9d7066c2498b15aa186ccfdaf0db0ced763efe927220d95b74377c8d2d4a5",
+    "rat-reference.png": "933d24c4bbe7a9fd8ad5967e45b4ec1bdc8dbe3e8330b088d02d69d9fd84a9fd",
+    "small-spider.png": "3655b4e249c9397cec1d69d75cd677737461dfd758a247ca8f8419d221dba023",
+    "spider-reference.png": "b11ec409350a7bbe648a39d3480be4d60e833f8f9e072f2307172fb5f3f04c2c",
+    "starved-rat.png": "997b0e9087ca74e19644cb207ecb118adf67e6b07af6787a8a202ecd57584653",
+    "tripwire.png": "ba4c021f413a4261e869f7713540e993d04385eb306a172bb37db304163890a1"
+  },
+  "sha256": {
+    "art/props/lantern-v1/body.png": "d580578d5b3ec77c0d897f50df6ffaaa79ddb23d827089c8b1f99766ee3b22c4",
+    "art/items/armour-v1/leather-jerkin.png": "712dfd03d29c0511d7ee666b6a6dc9d3c6d161924cbe123e970f47c246f4e1a5",
+    "art/items/armour-v1/boiled-leather-vest.png": "daf5960baf98ea6619b18671bca28f9b49ff57817e0e3558286e9e6dec14febf",
+    "art/items/armour-v1/studded-leather.png": "e2eb6e223de1c97e43af29116ce6a1a758d670b51d60e5d54af3f93f4993eaf7",
+    "art/enemies/tutorial-v1/starved-rat/idle.png": "889117e4e4781fbf8bb1872f75acb1cfbaae254babb6172d10134f8c3153feb3",
+    "art/enemies/tutorial-v1/starved-rat/attack.png": "d1467a84d4b1f5741dd4ff32c64c40e2e2cd4c24e568192900c52eba7dd59204",
+    "art/enemies/tutorial-v1/starved-rat/hurt.png": "8de0b105c7bf9b2406112e19efea4f2fbee1cbd3d818a3bf06ba19f9cd2d01b4",
+    "art/enemies/tutorial-v1/small-spider/idle.png": "66d6fb8a5e490f376b73dedd2fa06155df88ed0b518eebf74412bd5be0fc2274",
+    "art/enemies/tutorial-v1/small-spider/attack.png": "2b6bfccf426ab233ed4e3756b1f36420f961f6ba706039fe0a72ff51f2b06f04",
+    "art/enemies/tutorial-v1/small-spider/hurt.png": "08c2a5d560b8708b222692778a485a890e7acc2727ff502eaa9da4275dcf8936",
+    "art/props/cave-events-v1/goblin-stash.png": "e2e2af34061a47d29fcdbe092bf371932d5d1c45708acd454da5b95a56a49d4f",
+    "art/props/cave-events-v1/goblin-stash-empty.png": "bf626a76c81d6c6b95aa636a18c64ebfe5671cef1564eca99459b3fbadcadce4",
+    "art/props/cave-events-v1/old-workings.png": "d3382d64ff56f15cd1ef2b0aee9ebfb47017508db09b8e7440928ff50f2dca07",
+    "art/props/cave-events-v1/dry-alcove.png": "015126227dd1be21cfef6da8b3ad05856ca6967d861f9f359a1d039dae3d76bd",
+    "art/props/cave-events-v1/tripwire.png": "5d853669af7f3c2c10c58b77b88f8ee0a4407678031f10dc11096c2664e7c638",
+    "art/props/cave-events-v1/hollow-floor.png": "afd58052582da35d1b2f2331a073b788a772db54f8276b48b2ffc80e8e4bea15",
+    "art/props/cave-events-v1/idol-niche.png": "3cc17d0fd5f35773c076596446b1863d1fe73fe0dba44a84d8a9d24f99b46810",
+    "art/camp/cave-camp-variants-v1/contract-notice.png": "5bdddcf80dd5de6ecaa26cd9421f3d5191ad7965baab97d3bad467071d4a5e18",
+    "art/camp/cave-camp-variants-v1/nurse-occupied.png": "231bd0194977dd61126f33f33e887d19fa0d58bb0e8e71211dbfa66178cf2de3",
+    "art/features/daylight-exit-v1/exit.png": "7ddba646cda7d3d5d4485c37cf046cdd6f401e913c07a4334b3d0f2bfb5357ca",
+    "art/ui/coin-v1/heads.png": "49d0d09bc863689dd04d9c3a0e6261043d7c253e3ab793fd99c5eb2aeb90ef1b",
+    "art/ui/coin-v1/tails.png": "11f18d349458fd3bfba3882e3e291577f0ada337cfd72463f1f96a5a864371bc",
+    "art/ui/coin-v1/edge.png": "3cc74eb36ccd94f3d0da81c805ceb6249347a192b745bc420a55b4e59a803991",
+    "art/ui/map-v1/parchment.png": "aa04b33736d0ba885c4587299e7851c5485dfc5b67d18cd3c35de5731128c0ba"
+  }
+}
