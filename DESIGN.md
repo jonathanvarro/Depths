@@ -122,6 +122,18 @@ Suggested initial presentation: one campsite screen with a few selectable activi
 
 **Royal relief camp and art (owner, 2026-10-17, #78/#79):** the king is sending forces against the monsters and goblins, but something disrupted their arrival; they are reaching the area scattered and disorganized. The shortages and apprentice's makeshift tools follow from this. The cause remains open. [Campsite artwork](docs/campsite-art.md) supplies an empty clearing, six independent destination layers and separate merchant/apprentice/nurse portraits, ready to map to #40's six spots. Patched canvas and faded blue/ochre royal cloth are visual proposals; names and final heraldry remain open. The all-sites art review does not decide opening days or stock progression (#79/#80).
 
+**Decided 2026-10-17 (#41): recruitment at the fire.**
+- **Roles:**
+  - **Warden:** protector; tough, good at Defend, draws attacks.
+  - **Scout:** quick; acts early, hits more often, less health.
+  - **Brawler:** damage; hits hard, less accurate, gets hurt more.
+- **Each recruit** has a role, one **strength** and one **weakness**, shown before hiring. A personal fear comes later, with a fear system.
+- **At the fire:** 2–3 candidates. Each new day one leaves and someone new arrives.
+- **Cost:** free into empty slots until gold exists (#42).
+- **Dismissing:** recruits can be dismissed at camp; Mara can't.
+- **Full wipe:** the heroes and everything they carried are lost. The stash and the camp day remain, and play continues from the fire. Whether Mara can die in a wipe is decided later; for now she's treated like anyone else.
+- **Portraits:** requested from ChatGPT (#82); role silhouettes until then.
+
 The suggested retreat flow is to return through the dungeon to its entrance before reaching camp, with discovered shortcuts potentially easing later returns. Travel costs, escape exceptions, refuge services, recovery timing, and prices still need design decisions. Rest spots inside the dungeon remain distinct from the outside refuge.
 
 **Cave-camp staff and equipment (2026-10-16):** the owner wants a blacksmith sent from a nearby village and a nurse for the cave area. The smith is an apprentice, explaining the limited selection of quality items; the starting location should offer very basic equipment. The [updated campsite design](docs/campsite-design.md) proposes a sixth clickable smith area and places the nurse in the treatment tent. Exact stock, repair/crafting mechanics, NPC identities and later-site availability remain open. The original five-area interaction study predates this addition.
