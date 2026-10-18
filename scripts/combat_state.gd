@@ -67,6 +67,9 @@ class Foe:
 	## spider, which only fire drives off, #69). Its health isn't shown.
 	var glancing := false
 
+	func in_back() -> bool:
+		return type.row == "back"
+
 	func _init(enemy_type: EnemyType, label: String) -> void:
 		type = enemy_type
 		name = label
@@ -180,6 +183,44 @@ func advance() -> void:
 		_turn += 1
 
 
+# --- Rows (#72) -------------------------------------------------------
+# The front row takes melee and shields the back. A row stands alone (no
+# one left in front of it) counts as the front.
+
+func hero_in_front(hero: Companion) -> bool:
+	return hero.row == "front" or not party.living_members().any(func(h: Companion): return h.row == "front")
+
+
+func foe_in_front(foe: Foe) -> bool:
+	return not foe.in_back() or not living_foes().any(func(f: Foe): return not f.in_back())
+
+
+## Whether `hero` can attack `foe` from where they stand.
+func can_hit(hero: Companion, foe: Foe) -> bool:
+	if not foe.is_alive():
+		return false
+	if not hero_in_front(hero) and not hero.has_reach():
+		return false  # back row without reach: defend or use items
+	return foe_in_front(foe) or hero.has_reach()
+
+
+func targets_for(hero: Companion) -> Array[Foe]:
+	return living_foes().filter(func(f: Foe): return can_hit(hero, f))
+
+
+## Whether `foe` can strike `hero` (melee reaches only the front).
+func foe_can_reach(foe: Foe, hero: Companion) -> bool:
+	return foe.type.reach_back or hero_in_front(hero)
+
+
+## Steps to the other row; takes the hero's turn.
+func hero_move(hero: Companion) -> String:
+	hero.row = "back" if hero.row == "front" else "front"
+	_webbed.erase(hero)
+	hero.emit_changed()
+	return "%s steps to the %s." % [hero.display_name, hero.row]
+
+
 func hero_hit_chance(hero: Companion) -> float:
 	var chance: float = hero.hit_accuracy() * hero.effectiveness() + LIGHT_ACCURACY[party.supplies.light_band()]
 	if is_webbed(hero):
@@ -198,6 +239,9 @@ func venom_turns(hero: Companion) -> int:
 ## Returns {"hit": bool, "damage": int, "killed": bool, "text": String}.
 func hero_attack(hero: Companion, target: Foe) -> Dictionary:
 	var outcome := {"hit": false, "damage": 0, "killed": false}
+	if not can_hit(hero, target):
+		outcome["text"] = "%s can't reach the %s from there." % [hero.display_name, target.name.to_lower()]
+		return outcome
 	var hit := rng.randf() < hero_hit_chance(hero)
 	_webbed.erase(hero)  # the web only spoils one action
 	if hit and target.glancing:
@@ -322,6 +366,8 @@ func retreat() -> String:
 ## Who an enemy goes after, by tactic. Normally a defender draws attacks.
 func _choose_target(foe: Foe = null) -> Companion:
 	var living: Array[Companion] = party.living_members()
+	if foe:
+		living = living.filter(func(h: Companion): return foe_can_reach(foe, h))
 	if living.is_empty():
 		return null
 	var guards := living.filter(func(h: Companion): return is_defending(h))

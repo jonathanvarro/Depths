@@ -295,6 +295,16 @@ Deeper floors mix them (depth 1 mostly single rats; depth 3 pairs and trios like
   - **light as a weapon** stays an idea (#74);
   - the opening's torch throw is unchanged.
 
+*Rows (#72, built 2026-10-18):*
+- **Each hero has a row,** kept between fights:
+  - **front** takes melee and shields the back;
+  - **back** is safe from melee, but attacks only with **reach**: a Scout's sling, or the simple spear.
+  - Scouts start at the back; everyone else at the front.
+  - **Move** swaps rows and costs the turn.
+- **Enemies:** spiders hang back (melee reaches them only once the front enemies are down) and drop on anyone, back row included. Rats and goblins stand in front and reach only the front row.
+- **A row standing alone** counts as the front, so a lone hero or a lone enemy always fights normally.
+- **On screen:** cards show "front"/"back" when there's company. Back-row enemy tags say [back], and out-of-reach enemies are dimmed with Attack disabled.
+
 *Full-party balance (#49, 2026-10-18):*
 - **Group size:** parties meet groups close to their size (at least heroes − 1, never more than heroes standing). A full party may meet one extra enemy on floor 3.
 - **Bigger groups by floor:**

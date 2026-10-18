@@ -51,6 +51,16 @@ const StrainRules := preload("res://scripts/strain.gd")
 @export var weakness := ""
 ## The campaign's first hero (Mara): can't be dismissed at camp.
 @export var founder := false
+## Combat row (#72): "front" takes melee and shields the back; "back" is
+## safe from melee but attacks only with reach. Kept between fights.
+@export_enum("front", "back") var row := "front"
+## Attacks from the back row without a reach weapon (a Scout's sling).
+@export var reach := false
+
+
+## Can attack from the back row / into the enemy's back row.
+func has_reach() -> bool:
+	return weapon.reach if weapon else reach
 
 ## 0 (calm) to 100 (panicking). See strain.gd.
 @export_range(0.0, 100.0) var strain := 0.0

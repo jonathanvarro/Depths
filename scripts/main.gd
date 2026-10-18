@@ -681,13 +681,18 @@ func _place_foes(foes: Array) -> void:
 	var right := _party.global_transform.basis.x
 	var ahead_open: bool = _map.is_passable(_party.cell + Party.DIRECTIONS[_party.facing])
 	var distance := CELL_SIZE * (1.2 if ahead_open else 0.4)
-	var spread := {1: [0.0], 2: [-0.45, 0.45], 3: [-0.7, 0.0, 0.7]}
-	var offsets: Array = spread.get(foes.size(), [0.0])
-	for i in foes.size():
-		var node: Node3D = foes[i].type.scene.instantiate()
-		node.position = _party.position + forward * distance + right * offsets[mini(i, offsets.size() - 1)]
+	var spread := {1: [0.0], 2: [-0.45, 0.45], 3: [-0.7, 0.0, 0.7], 4: [-0.9, -0.3, 0.3, 0.9]}
+	# Front and back rows (#72): spread across the corridor together (so
+	# their tags don't overlap), with the back row a little further off.
+	var ordered: Array = foes.filter(func(f): return not f.in_back()) + foes.filter(func(f): return f.in_back())
+	var offsets: Array = spread.get(ordered.size(), [0.0])
+	for i in ordered.size():
+		var foe = ordered[i]
+		var depth := distance + (CELL_SIZE * 0.5 if foe.in_back() and ahead_open else 0.0)
+		var node: Node3D = foe.type.scene.instantiate()
+		node.position = _party.position + forward * depth + right * offsets[mini(i, offsets.size() - 1)]
 		_level.add_child(node)
-		foes[i].node = node
+		foe.node = node
 
 
 ## Retreat (trial): bolt to a random spot a few steps away, losing time
@@ -2048,6 +2053,7 @@ func _refresh_cards() -> void:
 			var hero: Companion = _party_state.members[i]
 			if not hero.changed.is_connected(card.refresh):
 				hero.changed.connect(card.refresh)
+			card.show_row = _party_state.members.size() > 1
 			card.show_companion(hero)
 		else:
 			card.show_empty()

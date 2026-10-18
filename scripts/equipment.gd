@@ -14,3 +14,5 @@ extends Resource
 @export_range(-0.5, 0.5) var accuracy_bonus := 0.0
 ## Gold at the smith; the merchant buys it back for 30% (#42).
 @export var price := 0
+## Reaches past the front row: usable from the back, hits enemies' back row (#72).
+@export var reach := false

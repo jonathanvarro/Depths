@@ -68,9 +68,12 @@ func _simulate(size: int, group: Array) -> Array:
 				if actor.role == "Warden" and heavy:
 					c.hero_defend(actor)
 				else:
-					var foes: Array = c.living_foes()
-					foes.sort_custom(func(a, b): return a.health < b.health)
-					c.hero_attack(actor, foes[0])
+					var foes: Array = c.targets_for(actor)  # rows decide who's in reach (#72)
+					if foes.is_empty():
+						c.hero_defend(actor)
+					else:
+						foes.sort_custom(func(a, b): return a.health < b.health)
+						c.hero_attack(actor, foes[0])
 			else:
 				c.enemy_act(actor)
 			if c.result == CS.Result.ONGOING:

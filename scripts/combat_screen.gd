@@ -33,6 +33,7 @@ var _tags := {}  # Foe -> Button
 ## "" allows every action; "throw" allows only Item > Throw torch (the
 ## opening forces the throw when Mara is nearly down, #69).
 var only_action := ""
+var _hero: Companion  # whose turn it is (rows decide who they can reach, #72)
 ## Emitted after each hero action (the opening reacts to glancing blows).
 signal hero_acted(hero: Companion, action: Dictionary, outcome: Dictionary)
 
@@ -73,6 +74,10 @@ func run(state, cards: Array) -> void:
 		var actor = state.current_actor()
 		_refresh()
 		if actor is Companion:
+			_hero = actor
+			var reachable: Array = state.targets_for(actor)
+			if not reachable.is_empty() and not state.can_hit(actor, _target):
+				_select_target(reachable[0])
 			_mark_turn(actor)
 			_show_actions(true)
 			var action: Dictionary = await _action_chosen
@@ -95,6 +100,7 @@ func run(state, cards: Array) -> void:
 				_select_target(living[0])
 
 	_mark_turn(null)
+	_hero = null
 	_refresh()
 	await get_tree().create_timer(0.8).timeout
 	visible = false
@@ -114,6 +120,8 @@ func _hero_action(hero: Companion, action: Dictionary) -> void:
 					await _fade_out(target)
 		"defend":
 			_add_log(_state.hero_defend(hero))
+		"move":
+			_add_log(_state.hero_move(hero))
 		"item":
 			_add_log(_state.hero_use_item(action["item"]))
 		"retreat":
@@ -166,17 +174,32 @@ func _process(_delta: float) -> void:
 		if tag.visible:
 			var screen := camera.unproject_position(foe.node.global_position + Vector3(0, TAG_HEIGHT, 0))
 			var intent: String = CombatState.intent_text(foe)  # what it does next (#60)
+			var back := "  [back]" if not _state.foe_in_front(foe) else ""
 			if foe.glancing:
-				tag.text = "%s\n%s" % [foe.name, intent]  # no health to whittle down (#69)
+				tag.text = "%s%s\n%s" % [foe.name, back, intent]  # no health to whittle down (#69)
 			else:
-				tag.text = "%s %d/%d%s\n%s" % [foe.name, foe.health, foe.type.max_health, "  [shield]" if foe.shielded else "", intent]
+				tag.text = "%s %d/%d%s%s\n%s" % [foe.name, foe.health, foe.type.max_health, "  [shield]" if foe.shielded else "", back, intent]
 			tag.position = screen - tag.size / 2.0
-			tag.modulate = Color.WHITE if foe == _target else Color(1, 1, 1, 0.65)
+			var reachable: bool = _hero == null or _state.can_hit(_hero, foe)
+			tag.modulate = Color.WHITE if foe == _target else Color(1, 1, 1, 0.65 if reachable else 0.35)
 
 
 func _select_target(foe) -> void:
 	_target = foe
 	_target_label.text = "Target: %s" % foe.name
+	_update_attack()
+
+
+## Attack only when the current hero can reach the target (#72).
+func _update_attack() -> void:
+	if _action_buttons == null or _state == null or _hero == null:
+		return
+	for button: Button in _action_buttons.get_children():
+		if button.text == "Attack":
+			button.disabled = only_action != "" or not _state.can_hit(_hero, _target)
+		elif button.text == "Move":
+			button.visible = _state.party.living_members().size() > 1
+			button.disabled = only_action != ""
 
 
 func _refresh() -> void:
@@ -212,6 +235,7 @@ func _show_actions(shown: bool) -> void:
 	_item_buttons.visible = false
 	for button: Button in _action_buttons.get_children():
 		button.disabled = only_action != "" and button.text != "Item"
+	_update_attack()
 	if shown and only_action == "throw":
 		_show_items()
 
@@ -287,7 +311,7 @@ func _build() -> void:
 	_action_buttons = HBoxContainer.new()
 	_action_buttons.add_theme_constant_override("separation", 8)
 	rows.add_child(_action_buttons)
-	for spec in [["Attack", "attack"], ["Defend", "defend"], ["Item", ""], ["Retreat", "retreat"]]:
+	for spec in [["Attack", "attack"], ["Defend", "defend"], ["Move", "move"], ["Item", ""], ["Retreat", "retreat"]]:
 		var button := _button(spec[0])
 		var kind: String = spec[1]
 		if kind == "":

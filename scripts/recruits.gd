@@ -18,9 +18,9 @@ const ROLES := {
 		"portrait": "res://art/portraits/recruit-silhouettes-v1/warden.png",
 	},
 	"Scout": {
-		"about": "Quick and sharp. Acts early and hits often, but can't take much.",
+		"about": "Quick and sharp, with a sling: fights from the back row. Acts early and hits often, but can't take much.",
 		"max_health": 16, "attack": Vector2i(2, 3), "accuracy": 0.85, "initiative": 13,
-		"guard_factor": 0.5, "toughness": 0,
+		"guard_factor": 0.5, "toughness": 0, "row": "back", "reach": true,
 		"portrait": "res://art/portraits/recruit-silhouettes-v1/scout.png",
 	},
 	"Brawler": {
@@ -74,6 +74,8 @@ static func make(rng: RandomNumberGenerator, taken: Array = [], faces_in_use: Ar
 	hero.initiative = spec["initiative"]
 	hero.guard_factor = spec["guard_factor"]
 	hero.toughness = spec["toughness"]
+	hero.row = spec.get("row", "front")  # Scouts start at the back with a sling (#72)
+	hero.reach = spec.get("reach", false)
 	hero.portrait = load(spec["portrait"])
 	var faces := faces_for(role)
 	var free_faces := faces.filter(func(f): return f["portrait_set"] not in faces_in_use)

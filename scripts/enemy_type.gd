@@ -33,3 +33,8 @@ enum Tactic {
 @export var intro := ""
 ## Gold dropped when beaten, min-max (goblins carry purses, #42).
 @export var purse := Vector2i.ZERO
+## Where it stands in a fight (#72): back-row enemies can only be hit with
+## reach until the front row is down.
+@export_enum("front", "back") var row := "front"
+## Attacks reach the heroes' back row (a spider drops from above).
+@export var reach_back := false

@@ -173,6 +173,9 @@ Templates > Download and Install; already installed on the owner's PC).
   (RoomEvents `gold_found`); CampState buy/sell/buy_gear/buy_lantern,
   `MERCHANT_STOCK`, `SMITH_STOCK`, contracts (`post_contract`, `count_kill`,
   `collect_contract`), charity torches. `tools/gold_check.gd` covers it.
+- Rows (#72): `Companion.row` / `reach` / `has_reach()`, `Equipment.reach`,
+  `EnemyType.row` / `reach_back`; CombatState `can_hit`, `targets_for`,
+  `foe_can_reach`, `hero_move`. `tools/rows_check.gd`; `tools/balance_sim.gd`.
 - `scripts/chest_screen.gd` – chest window beside the pack: drag (set_drag_
   forwarding), tap, or the take-all icon button; `took` signal.
 - `scripts/pack_screen.gd` – the Pack screen (Pack button under the minimap,

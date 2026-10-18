@@ -5,8 +5,9 @@
 [resource]
 script = ExtResource("1")
 display_name = "Simple spear"
-description = "An iron point on an ash shaft. Reaches further than it looks."
+description = "An iron point on an ash shaft. Reaches past the front row: usable from the back, and hits enemies hanging back."
 attack_min = 2
 attack_max = 5
 accuracy_bonus = 0.0
 price = 18
+reach = true

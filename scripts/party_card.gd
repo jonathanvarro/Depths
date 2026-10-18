@@ -44,6 +44,9 @@ var _last_health := -1
 var _style: StyleBoxFlat
 var _strain_bar: ProgressBar
 var _turn_marker: ColorRect
+var _row_label: Label
+## Show the hero's combat row (only meaningful with company, #72).
+var show_row := false
 
 
 func _init() -> void:
@@ -82,6 +85,11 @@ func _init() -> void:
 	_name.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_name.clip_text = true
 	name_row.add_child(_name)
+	_row_label = Label.new()
+	_row_label.add_theme_font_size_override("font_size", 12)
+	_row_label.add_theme_color_override("font_color", Color("b3a78f"))
+	_row_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	name_row.add_child(_row_label)
 	_icons = HBoxContainer.new()
 	_icons.add_theme_constant_override("separation", 2)
 	_icons.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -133,6 +141,7 @@ func show_empty() -> void:
 	companion = null
 	_portrait.show_portrait(null, null)
 	_name.text = "—"
+	_row_label.text = ""
 	_bar.value = 0
 	_strain_bar.value = 0
 	_style.border_color = STRAIN_BORDERS[StrainRules.State.STEADY]
@@ -146,6 +155,7 @@ func refresh() -> void:
 	if companion == null:
 		return
 	_name.text = companion.display_name
+	_row_label.text = ("back" if companion.row == "back" else "front") if show_row else ""
 	var cap := companion.effective_max_health()  # lowered by untreated injuries
 	_bar.max_value = cap
 	_bar.value = companion.health
