@@ -113,6 +113,12 @@ Suggested initial presentation: one campsite screen with a few selectable activi
 - **No travel costs** between cave and camp.
 - **Art:** the clearing starts as a placeholder; ChatGPT paints it later to fit the same six spots.
 - **Ideas for later:** the king's forces arriving as the days pass (#80); paid scouts who map floor 1 (#81).
+- *Implemented (first pass):*
+  - After the results screen comes the **relief camp**: ChatGPT's clearing (#78) with the six places as large labelled targets that work with mouse, touch and keyboard (Escape goes back).
+  - **Arriving heals nothing by itself.** The old automatic camp heal is gone; rest in your tent.
+  - The tent's stash moves supplies and gear in and out. It is kept in memory only: party wipes still restart the game until recruits (#41) and saving (#45) exist.
+  - The cave path summarizes the party and blocks the way down while no one is fit.
+  - A new day re-seeds the cave, so floors are regenerated; going back without resting keeps the explored cave.
 
 **Royal relief camp and art (owner, 2026-10-17, #78/#79):** the king is sending forces against the monsters and goblins, but something disrupted their arrival; they are reaching the area scattered and disorganized. The shortages and apprentice's makeshift tools follow from this. The cause remains open. [Campsite artwork](docs/campsite-art.md) supplies an empty clearing, six independent destination layers and separate merchant/apprentice/nurse portraits, ready to map to #40's six spots. Patched canvas and faded blue/ochre royal cloth are visual proposals; names and final heraldry remain open. The all-sites art review does not decide opening days or stock progression (#79/#80).
 

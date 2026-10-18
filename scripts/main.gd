@@ -20,6 +20,8 @@ const DialogueBox := preload("res://scripts/dialogue_box.gd")
 ## Seconds between unprompted lines, so heroes don't chatter (#57).
 const SPEECH_COOLDOWN := 6.0
 const ChestScreen := preload("res://scripts/chest_screen.gd")
+const CampState := preload("res://scripts/camp_state.gd")
+const CampScreen := preload("res://scripts/camp_screen.gd")
 ## Opening: remark on being lost at junctions this often (steps).
 const LOST_REMARK_EVERY := 18
 
@@ -82,10 +84,8 @@ const OPENING_TURN_TIME := 0.32
 const WAKE_PITCH_DEGREES := -60.0
 const ResultsScreen := preload("res://scripts/results_screen.gd")
 const PreparationScreen := preload("res://scripts/preparation_screen.gd")
-## Placeholder camp stop between expeditions until the campsite exists
-## (#18/#22): rest restores health and eases strain; injuries wait for the
-## nurse.
-const CAMP_STRAIN_RELIEF := 40.0
+## Each camp day gets its own cave: the site seed is mixed with the day (#40).
+const DAY_SEED_STEP := 104729
 ## Injuries the F3 + K debug key picks from.
 const DEBUG_INJURIES: Array[Injury] = [
 	preload("res://data/injuries/deep_wound.tres"),
@@ -221,6 +221,9 @@ enum Arrival { OPENING, FROM_ABOVE, FROM_BELOW }
 
 
 var _site_seed := 0
+var _first_seed := 0  # the site seed on day 1
+var _camp_state = CampState.new()  # day, stash, recovery (#40)
+var _camp: Control  # camp_screen.gd
 var _party_state  # party_state.gd: heroes and time, kept across floors
 var _cards: Array[PanelContainer] = []  # party_card.gd, one per slot
 var _depth := 0
@@ -302,6 +305,8 @@ func _ready() -> void:
 	_register_input_actions()
 	_build_environment()
 	_site_seed = floor_seed if floor_seed != 0 else randi()
+	_first_seed = _site_seed
+	_camp_state.day_passed.connect(_on_camp_day_passed)
 	print("Floor seed: ", _site_seed)
 	_party_state = PartyState.new()
 	_party_state.add_member(starting_hero)
@@ -609,18 +614,23 @@ func _start_new_expedition() -> void:
 	_party_state.supplies.torch_left = 0.0
 	_party_state.supplies.changed.emit()
 	_update_lantern()
-	for hero: Companion in _party_state.living_members():
-		hero.complete_pending_effects()
-		hero.change_health(hero.effective_max_health())
-		hero.change_strain(-CAMP_STRAIN_RELIEF)
-		hero.hunger = 0
+	# The campsite (#40): nothing recovers by itself - rest in your tent.
+	_camp.open(_camp_state, _party_state, starting_supplies)
+	await _camp.cave_chosen
+	_camp.visible = false
 	_expedition = Expedition.new(_party_state, _expedition.number + 1)
 	_preparation.show_for(_expedition.number, _party_state)
 	await _preparation.entered
 	_ending = false
 	_party.locked = false
 	_go_to_floor(1, Arrival.FROM_ABOVE)
-	_show_message("Rested at camp. Expedition %d: back into the cave." % _expedition.number)
+	_show_message("Day %d. Expedition %d: back into the cave." % [_camp_state.day, _expedition.number])
+
+
+## A new camp day (#40): the cave re-randomizes - new layouts, fresh enemies.
+func _on_camp_day_passed(day: int) -> void:
+	_site_seed = _first_seed + (day - 1) * DAY_SEED_STEP
+	_floors.clear()
 
 
 ## Stands the enemies in front of the party, spread across the corridor.
@@ -1668,7 +1678,7 @@ func _set_debug(enabled: bool) -> void:
 
 ## Opens or closes the pack screen; like the map, the party waits meanwhile.
 func _set_pack(open: bool) -> void:
-	if open and (_prompt.visible or _full_map.visible or _in_combat or _event_screen.visible or _chest.visible):
+	if open and (_prompt.visible or _full_map.visible or _in_combat or _event_screen.visible or _chest.visible or _camp.visible):
 		return
 	_pack.visible = open
 	_party.locked = open
@@ -1680,7 +1690,7 @@ func _set_pack(open: bool) -> void:
 ## Opens or closes the full-screen map. The party can't move while it's open,
 ## and it can't open over a yes/no prompt.
 func _set_full_map(open: bool) -> void:
-	if open and (_prompt.visible or _pack.visible or _in_combat or _event_screen.visible or _in_opening):
+	if open and (_prompt.visible or _pack.visible or _in_combat or _event_screen.visible or _in_opening or _camp.visible):
 		return
 	_full_map.visible = open
 	_party.locked = open
@@ -1856,6 +1866,8 @@ func _build_ui(minimap: Control) -> void:
 	_results = ResultsScreen.new()
 	canvas.add_child(_results)
 	_build_eyelids(canvas)
+	_camp = CampScreen.new()
+	canvas.add_child(_camp)
 	_preparation = PreparationScreen.new()
 	canvas.add_child(_preparation)
 	minimap.pressed.connect(_set_full_map.bind(true))
@@ -1867,7 +1879,7 @@ func _build_ui(minimap: Control) -> void:
 ## and home bar. On desktop there's nothing to avoid.
 func _apply_safe_area() -> void:
 	var insets := _safe_area_insets()
-	for control: Control in [_safe_area, _full_map_margin, _pack.content, _combat.content, _results.content, _preparation.content, _chest.content]:
+	for control: Control in [_safe_area, _full_map_margin, _pack.content, _combat.content, _results.content, _preparation.content, _chest.content, _camp.content]:
 		control.offset_left = insets.x
 		control.offset_top = insets.y
 		control.offset_right = -insets.z

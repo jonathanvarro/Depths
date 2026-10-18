@@ -9,3 +9,4 @@ description = "Each step takes 1 extra time until treated at camp. A dressing bi
 extra_step_time = 1
 portrait_condition = ""
 icon_kind = "limp"
+recovery_days = 1

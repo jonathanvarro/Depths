@@ -17,3 +17,5 @@ extends Resource
 @export var dressed_portrait_condition := "bandage"
 ## Card icon: "wound" or "limp" (drawn placeholders for now).
 @export var icon_kind := "wound"
+## Days a hero spends in the nurse's tent after treatment (#40).
+@export var recovery_days := 1

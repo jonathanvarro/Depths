@@ -42,7 +42,7 @@ func _init() -> void:
 	content.add_child(column)
 	_title = _label("", HEADING, 32, TEXT)
 	column.add_child(_title)
-	column.add_child(_label("Rested at camp. Check the party and the pack, then head back down.", BODY, 19, MUTED))
+	column.add_child(_label("Check the party and the pack, then head back down.", BODY, 19, MUTED))
 
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 32)

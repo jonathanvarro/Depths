@@ -9,3 +9,4 @@ description = "Maximum health -5 until treated at camp. A dressing holds it clos
 max_health_penalty = 5
 portrait_condition = "blood"
 icon_kind = "wound"
+recovery_days = 2

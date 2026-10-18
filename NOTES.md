@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-17 – Claude
+- Did: #40 first campsite. CampState (day counter; rest = full health/strain, +1 day, cave re-seeded; nurse treats injuries -> hero out for Injury.recovery_days (deep wound 2, limp 1), optional; merchant tops the pack up to starting supplies once a day, free; tent stash) and CampScreen using ChatGPT's cave-camp-v1 clearing, site scenes, NPC portraits and layout.json. Flow: results -> camp -> cave path -> preparation -> floor 1. Removed the automatic camp heal. tools/camp_check.gd covers every place at desktop/phone sizes; opening play-through now passes through the camp.
+- Next: Owner playtest of the camp; recruitment at the fire (#41); gold and the merchant/smith (#42).
+- Watch out: Wipes still reload the game, so the stash only matters once #41/#45 exist. The smith shows stock only. When recruits exist, recovering heroes must stay at camp while others go (CampState.available()); the cave path only checks that someone is fit.
+
 ## 2026-10-17 – ChatGPT
 - Did: #78 supplies the cave campsite art: 640x360 empty clearing, six separate 256x192 destination layers/ground-origin 2D scenes and 192px merchant/apprentice/nurse portraits in art/camp/cave-camp-v1. docs/campsite-art.md maps stable IDs, sources, contacts, neutral-lighting scope and integration. Preserved ten generated masters/exact prompts, palettes/hashes and native boards. Export/import checks and all 217 Godot checks pass, with 15 captures at desktop/two phone shapes. Fire reuses #63's flame resource; hidden/reduced-motion presentation is supported. Recorded the owner's disrupted royal deployment story while keeping its cause unresolved.
 - Next: Claude's #40 can map each independent layer to its six existing camp anchors and use the portraits in service views. Follow current DESIGN.md #40 decisions for rest/day/treatment/services. Gate site art and its input together under the real camp availability model when #79/#80 is implemented.

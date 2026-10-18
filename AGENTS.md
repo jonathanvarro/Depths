@@ -158,6 +158,11 @@ Templates > Download and Install; already installed on the owner's PC).
 - Enemy intentions (#60): `CombatState.Intent`, `Foe.intent`, `plan(foe)`
   (call again after changing a foe from outside), `intent_text()`;
   `enemy_act()` carries out the shown intent, then plans the next one.
+- Campsite (#40): `scripts/camp_state.gd` (day, `stash` as a Supplies,
+  `recovering`, rest/treat/restock; `day_passed` re-seeds the cave in
+  main.gd) and `scripts/camp_screen.gd` (ChatGPT's art/camp/cave-camp-v1
+  clearing + layout.json; one activity view per site id). `Injury.recovery_days`.
+  `tools/camp_check.gd` drives every place (args: desk|phone, screenshot dir).
 - `scripts/chest_screen.gd` – chest window beside the pack: drag (set_drag_
   forwarding), tap, or the take-all icon button; `took` signal.
 - `scripts/pack_screen.gd` – the Pack screen (Pack button under the minimap,
