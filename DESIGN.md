@@ -146,6 +146,21 @@ Suggested initial presentation: one campsite screen with a few selectable activi
 - The no-opening debug start still begins with a lantern.
 
 
+**Decided 2026-10-18 (#42): gold.**
+- **Earned from:**
+  - coins in chests, packs and goblin stashes;
+  - goblin purses (rats and spiders drop nothing);
+  - treasure sold to the merchant;
+  - posted contracts from the king's camp.
+- **Spent on:**
+  - merchant supplies (replacing the free daily top-up): torch 3g, ration 4g, dressing 4g, oil flask 6g, draught 12g, **lantern 40g**;
+  - smith gear: knife 8g, club 10g, shield 16g, spear 18g, axe 24g, padded coat 28g, iron sword 40g.
+  - Recruits and the nurse stay free for now.
+- **Starting out:** the first camp visit after the opening gives the basic kit free, with **no starting gold**.
+- **Selling:** gear sells back at 30%; treasure sells at its listed value.
+- **Wipe:** carried gold is lost; gold in the tent stash is kept.
+- **Contracts, treasure values and armour rules** are proposals on #42, to settle while building.
+
 The suggested retreat flow is to return through the dungeon to its entrance before reaching camp, with discovered shortcuts potentially easing later returns. Travel costs, escape exceptions, refuge services, recovery timing, and prices still need design decisions. Rest spots inside the dungeon remain distinct from the outside refuge.
 
 **Cave-camp staff and equipment (2026-10-16):** the owner wants a blacksmith sent from a nearby village and a nurse for the cave area. The smith is an apprentice, explaining the limited selection of quality items; the starting location should offer very basic equipment. The [updated campsite design](docs/campsite-design.md) proposes a sixth clickable smith area and places the nurse in the treatment tent. Exact stock, repair/crafting mechanics, NPC identities and later-site availability remain open. The original five-area interaction study predates this addition.
