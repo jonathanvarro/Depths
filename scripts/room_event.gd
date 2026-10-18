@@ -17,6 +17,7 @@ extends Resource
 @export var max_depth := 99
 @export var weight := 1
 ## What stands in the room (#46): a scene with a floor origin. If it has a
-## `state` property ("closed"/"empty"), it's emptied once resolved. Without
-## one, a plain placeholder by kind. Traps are never shown.
+## `state` property ("closed"/"empty"), it shows its used art once resolved.
+## Missing art falls back to a plain placeholder. Unresolved traps require
+## Keen eyes; their sprung/collapsed remains are visible after resolving.
 @export var prop: PackedScene

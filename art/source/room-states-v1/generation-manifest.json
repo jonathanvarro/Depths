@@ -1,0 +1,127 @@
+{
+  "tool": "image_gen.imagegen (built-in)",
+  "date": "2026-10-18",
+  "issue": 46,
+  "entries": [
+    {
+      "name": "old-workings-used",
+      "args": {
+        "prompt": "Use case: precise-object-edit. Production USED STATE sprite for Depths, a dark first-person mobile dungeon crawler. Input image 1 is the edit target, not a loose style suggestion. Change ONLY its resolved/used state as specified. Keep the target's FULL square canvas, subject registration, camera, remaining object identity, sparse padding and pixel-art language. Native export is 128x128: broad readable hard pixel clusters, <=32 muted shared colours, 3 tones per material, no detail increase, no soft painterly texture, gradients, outline glow, ground shadow, background or text. Keep genuine alpha0 outside the sprite. Form shading only, no baked torch lighting. The mining seam is picked clean: replace all green ore streaks and loose ore chunks with exhausted dark gouges and rubble. Empty the split basket, lay the same rusted pick down at its base. Keep rock mound and overall extent recognizably the same. No coins, valuable ore or glitter.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/props/cave-events-v1/old-workings.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-e0d21b86-47d7-4253-b519-17ac5f65e78a.png",
+      "preserved_file": "old-workings-used.png"
+    },
+    {
+      "name": "idol-niche-used",
+      "args": {
+        "prompt": "Use case: precise-object-edit. Production USED STATE sprite for Depths, a dark first-person mobile dungeon crawler. Input image 1 is the edit target, not a loose style suggestion. Change ONLY its resolved/used state as specified. Keep the target's FULL square canvas, subject registration, camera, remaining object identity, sparse padding and pixel-art language. Native export is 128x128: broad readable hard pixel clusters, <=32 muted shared colours, 3 tones per material, no detail increase, no soft painterly texture, gradients, outline glow, ground shadow, background or text. Keep genuine alpha0 outside the sprite. Form shading only, no baked torch lighting. Remove the pale stone idol completely from the niche. Leave the SAME stone niche empty, with a dusty pale impression where the figure sat and a few small chalk chips on the plinth. Keep all surrounding arch stones, silhouette and base position unchanged. No new idol or treasure.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/props/cave-events-v1/idol-niche.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-164bc860-cb3f-4bb3-a386-cbd25b2173cb.png",
+      "preserved_file": "idol-niche-used.png"
+    },
+    {
+      "name": "still-pool-used",
+      "args": {
+        "prompt": "Use case: precise-object-edit. Production USED STATE sprite for Depths, a dark first-person mobile dungeon crawler. Input image 1 is the edit target, not a loose style suggestion. Change ONLY its resolved/used state as specified. Keep the target's FULL square canvas, subject registration, camera, remaining object identity, sparse padding and pixel-art language. Native export is 128x128: broad readable hard pixel clusters, <=32 muted shared colours, 3 tones per material, no detail increase, no soft painterly texture, gradients, outline glow, ground shadow, background or text. Keep genuine alpha0 outside the sprite. Form shading only, no baked torch lighting. The SAME floor pool has been disturbed: replace the perfectly still black teal water surface with murky dull water, three broad readable irregular rings/ripples and a little stirred sediment. Keep EXACT rock rim, transparent exterior, size and circular footprint. No foam, glow, magic, splashes above the surface or extra objects.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/props/cave-room-props-v1/still-pool.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-f8b2d998-96ae-4c35-9cae-5b44abf6a722.png",
+      "preserved_file": "still-pool-used.png"
+    },
+    {
+      "name": "dry-alcove-used",
+      "args": {
+        "prompt": "Use case: precise-object-edit. Production USED STATE sprite for Depths, a dark first-person mobile dungeon crawler. Input image 1 is the edit target, not a loose style suggestion. Change ONLY its resolved/used state as specified. Keep the target's FULL square canvas, subject registration, camera, remaining object identity, sparse padding and pixel-art language. Native export is 128x128: broad readable hard pixel clusters, <=32 muted shared colours, 3 tones per material, no detail increase, no soft painterly texture, gradients, outline glow, ground shadow, background or text. Keep genuine alpha0 outside the sprite. Form shading only, no baked torch lighting. The resting place has been used. Flatten and unroll the same bedroll into a compressed creased blanket, leave its pillow flattened and a small patch of cold grey ashes by the bedroll. Keep the same ring of sheltering stones, composition, outer footprint and empty canvas. No person or lit fire, no new supplies.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/props/cave-events-v1/dry-alcove.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-c8aa4a6c-38c4-43f1-980a-40c9db48e9a9.png",
+      "preserved_file": "dry-alcove-used.png"
+    },
+    {
+      "name": "cold-camp-used",
+      "args": {
+        "prompt": "Use case: precise-object-edit. Production USED STATE sprite for Depths, a dark first-person mobile dungeon crawler. Input image 1 is the edit target, not a loose style suggestion. Change ONLY its resolved/used state as specified. Keep the target's FULL square canvas, subject registration, camera, remaining object identity, sparse padding and pixel-art language. Native export is 128x128: broad readable hard pixel clusters, <=32 muted shared colours, 3 tones per material, no detail increase, no soft painterly texture, gradients, outline glow, ground shadow, background or text. Keep genuine alpha0 outside the sprite. Form shading only, no baked torch lighting. The SAME campsite after a further rest: spread the hearth ash into a broad pale flattened patch, show spent black char and completely extinguished ember fragments; unroll/flatten and heavily crease the same brown bedroll on the right, with no loose supplies left. Keep the original stone hearth shape, same object placement, same low height and sparse overall footprint. No flame, smoke, warm glow or new objects.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/props/cave-room-props-v1/cold-camp.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-8fa7867f-1b93-4509-9f09-fcb37ec4c578.png",
+      "preserved_file": "cold-camp-used.png"
+    },
+    {
+      "name": "tripwire-used",
+      "args": {
+        "prompt": "Use case: precise-object-edit. Production USED STATE sprite for Depths, a dark first-person mobile dungeon crawler. Input image 1 is the edit target, not a loose style suggestion. Change ONLY its resolved/used state as specified. Keep the target's FULL square canvas, subject registration, camera, remaining object identity, sparse padding and pixel-art language. Native export is 128x128: broad readable hard pixel clusters, <=32 muted shared colours, 3 tones per material, no detail increase, no soft painterly texture, gradients, outline glow, ground shadow, background or text. Keep genuine alpha0 outside the sprite. Form shading only, no baked torch lighting. The trap has sprung: sever the taut connecting wire, leave both stakes in the same positions, show two slack curling wire ends fallen onto the ground and a small shifted trigger peg. The wire MUST no longer bridge between posts. Preserve the SAME near-empty canvas, low placement and scale. No arrow projectile, effects or additional trap design.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/props/cave-events-v1/tripwire.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-949282e3-3a8e-4280-9dd3-37e937bddbb8.png",
+      "preserved_file": "tripwire-used.png"
+    },
+    {
+      "name": "hollow-floor-used",
+      "args": {
+        "prompt": "Use case: precise-object-edit. Production USED STATE sprite for Depths, a dark first-person mobile dungeon crawler. Input image 1 is the edit target, not a loose style suggestion. Change ONLY its resolved/used state as specified. Keep the target's FULL square canvas, subject registration, camera, remaining object identity, sparse padding and pixel-art language. Native export is 128x128: broad readable hard pixel clusters, <=32 muted shared colours, 3 tones per material, no detail increase, no soft painterly texture, gradients, outline glow, ground shadow, background or text. Keep genuine alpha0 outside the sprite. Form shading only, no baked torch lighting. The cracked circular floor has collapsed into a pit: remove the central cracked slabs and replace them with a dark open hole, broken stone edges and a few jagged fragments on the rim. Keep the original circular outside footprint and top-down orientation. Interior is opaque near-black, not transparent. Exterior is truly transparent. No glow, water, ladder or treasure.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/props/cave-events-v1/hollow-floor.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-ab5b4ee2-6c53-41d6-be6a-636527effb86.png",
+      "preserved_file": "hollow-floor-used.png"
+    },
+    {
+      "name": "strongbox-states",
+      "args": {
+        "prompt": "Use case: stylized-concept. Production 2x2 STATE SHEET for a small rigged iron strongbox in Depths, dark first-person mobile dungeon crawler. Match the restrained chunky pixel-art language of reference 1, which is STYLE only; do not copy its wooden tutorial chest. Front-facing slightly elevated view, floor grounded, complete chest, native 128x128 canvas per frame with 12% transparent padding. Plain small squat blackened iron box, blunt iron straps, rusty lock, bolted base, one visible coiled spring through gap in lid. No gold ornaments or glowing contents. Four equal cells with transparent gutters; all cells same camera, hardware, scale, footprint and floor contact. TOP LEFT CLOSED with lid shut and spring tucked in. TOP RIGHT OPENED and SPRUNG: lid raised, interior visibly empty, released bent spring and harmless snapped needle next to lock. BOTTOM LEFT same opened state. BOTTOM RIGHT same closed state. No labels/text/numbers, effects, floor plane, drop shadows or backdrop. Genuine transparent background. <=32 muted colours shared, broad hard pixel clusters, 3 tones per material, no painterly texture/extra detail. All metal reads as worn iron, no new loot or weapon.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/props/cave-events-v1/old-workings.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-f6eb2671-0e6e-4e98-a8cc-c92cceebf7ca.png",
+      "preserved_file": "strongbox-states.png"
+    },
+    {
+      "name": "stairs-up",
+      "args": {
+        "prompt": "Use case: stylized-concept. Production static world feature sprite, stairs up, for Depths dark first-person grid dungeon crawler. Reference 1 is the fortress material/style guide only. Front-facing, centred, complete self-contained small stairwell cut from rough grey-brown stone, 6 broad worn steps rising away from the viewer to a dark unlit doorway above, clearly ascending, with a low rough stone cheek on each side. No decorative arch, figures, furniture, rails, lettering, arrows, glow, torch or daylight. Complete silhouette, square canvas with at least 10% transparent margins on all sides. Native 128x128 pixel-art language: broad hard clusters, <=32 muted shared colours, 3 tones per material, restrained detail, readable on a phone. No photorealism, painterly texture, gradients or floor shadow. Interior darkness is opaque; outside the stairwell genuinely alpha0. Neutral material shading, light supplied by engine. Perspective matches a first-person viewer, lowest front step meets the ground at bottom centre.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/textures/fortress-v1/wall.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-92a2126b-e8ab-45f9-ad72-88a4b8cae4d1.png",
+      "preserved_file": "stairs-up.png"
+    },
+    {
+      "name": "stairs-down",
+      "args": {
+        "prompt": "Use case: stylized-concept. Production static world feature sprite, stairs down, for Depths dark first-person grid dungeon crawler. Reference 1 is the fortress material/style guide only. Front-facing, centred, complete self-contained small stairwell cut from rough grey-brown stone, a low rectangular broken stone rim around a stairwell in the ground, 5 visible broad worn steps descending away below floor level into opaque near-black depth, clearly descending, no tall doorway or ascending flight. No decorative arch, figures, furniture, rails, lettering, arrows, glow, torch or daylight. Complete silhouette, square canvas with at least 10% transparent margins on all sides. Native 128x128 pixel-art language: broad hard clusters, <=32 muted shared colours, 3 tones per material, restrained detail, readable on a phone. No photorealism, painterly texture, gradients or floor shadow. Interior darkness is opaque; outside the stairwell genuinely alpha0. Neutral material shading, light supplied by engine. Perspective matches a first-person viewer, view slightly down into the stairwell, opening is broad rather than a vertical black door.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/textures/fortress-v1/wall.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-3e811122-4008-4b58-9cc1-b65e93ed86d3.png",
+      "preserved_file": "stairs-down.png"
+    }
+  ]
+}

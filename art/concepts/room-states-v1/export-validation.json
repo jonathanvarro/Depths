@@ -1,0 +1,396 @@
+{
+  "issue": 46,
+  "assets": {
+    "art/props/room-states-v1/old-workings-used.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        7,
+        29,
+        121,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/props/room-states-v1/idol-niche-used.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        10,
+        10,
+        120,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/props/room-states-v1/still-pool-used.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        7,
+        11,
+        120,
+        117
+      ],
+      "visible_colours": 31
+    },
+    "art/props/room-states-v1/dry-alcove-used.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        7,
+        57,
+        121,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/props/room-states-v1/cold-camp-used.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        8,
+        80,
+        121,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/props/room-states-v1/tripwire-used.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        8,
+        97,
+        122,
+        121
+      ],
+      "visible_colours": 30
+    },
+    "art/props/room-states-v1/hollow-floor-used.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        7,
+        18,
+        121,
+        112
+      ],
+      "visible_colours": 30
+    },
+    "art/props/room-states-v1/strongbox-closed.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        10,
+        49,
+        120,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/props/room-states-v1/strongbox-used.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        8,
+        31,
+        112,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/features/stone-stairs-v1/stairs-up.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        9,
+        9,
+        119,
+        121
+      ],
+      "visible_colours": 31
+    },
+    "art/features/stone-stairs-v1/stairs-down.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        8,
+        45,
+        120,
+        121
+      ],
+      "visible_colours": 30
+    }
+  },
+  "registration": {
+    "old-workings": {
+      "reference": "art/props/cave-events-v1/old-workings.png",
+      "full_canvas_resize": [
+        128,
+        128
+      ],
+      "offset": [
+        0,
+        1
+      ],
+      "original_bounds": [
+        8,
+        30,
+        120,
+        121
+      ],
+      "used_bounds": [
+        7,
+        29,
+        121,
+        121
+      ],
+      "flat": false,
+      "scene_transform": "unchanged from reference scene"
+    },
+    "idol-niche": {
+      "reference": "art/props/cave-events-v1/idol-niche.png",
+      "full_canvas_resize": [
+        128,
+        128
+      ],
+      "offset": [
+        0,
+        1
+      ],
+      "original_bounds": [
+        10,
+        9,
+        117,
+        121
+      ],
+      "used_bounds": [
+        10,
+        10,
+        120,
+        121
+      ],
+      "flat": false,
+      "scene_transform": "unchanged from reference scene"
+    },
+    "still-pool": {
+      "reference": "art/props/cave-room-props-v1/still-pool.png",
+      "full_canvas_resize": [
+        128,
+        128
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "original_bounds": [
+        8,
+        12,
+        120,
+        116
+      ],
+      "used_bounds": [
+        7,
+        11,
+        120,
+        117
+      ],
+      "flat": true,
+      "scene_transform": "unchanged from reference scene"
+    },
+    "dry-alcove": {
+      "reference": "art/props/cave-events-v1/dry-alcove.png",
+      "full_canvas_resize": [
+        128,
+        128
+      ],
+      "offset": [
+        0,
+        -6
+      ],
+      "original_bounds": [
+        8,
+        56,
+        120,
+        121
+      ],
+      "used_bounds": [
+        7,
+        57,
+        121,
+        121
+      ],
+      "flat": false,
+      "scene_transform": "unchanged from reference scene"
+    },
+    "cold-camp": {
+      "reference": "art/props/cave-room-props-v1/cold-camp.png",
+      "full_canvas_resize": [
+        128,
+        128
+      ],
+      "offset": [
+        0,
+        -6
+      ],
+      "original_bounds": [
+        8,
+        81,
+        120,
+        121
+      ],
+      "used_bounds": [
+        8,
+        80,
+        121,
+        121
+      ],
+      "flat": false,
+      "scene_transform": "unchanged from reference scene"
+    },
+    "tripwire": {
+      "reference": "art/props/cave-events-v1/tripwire.png",
+      "full_canvas_resize": [
+        128,
+        128
+      ],
+      "offset": [
+        0,
+        -3
+      ],
+      "original_bounds": [
+        8,
+        96,
+        120,
+        121
+      ],
+      "used_bounds": [
+        8,
+        97,
+        122,
+        121
+      ],
+      "flat": false,
+      "scene_transform": "unchanged from reference scene"
+    },
+    "hollow-floor": {
+      "reference": "art/props/cave-events-v1/hollow-floor.png",
+      "full_canvas_resize": [
+        128,
+        128
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "original_bounds": [
+        8,
+        18,
+        120,
+        110
+      ],
+      "used_bounds": [
+        7,
+        18,
+        121,
+        112
+      ],
+      "flat": true,
+      "scene_transform": "unchanged from reference scene"
+    },
+    "strongbox": {
+      "shared_scale": 0.9824561403508771,
+      "shared_x": -3,
+      "offsets": [
+        [
+          -3,
+          13
+        ],
+        [
+          -3,
+          13
+        ]
+      ],
+      "floor_contact_y": 120
+    },
+    "stairs-up": {
+      "shared_scale": 1.0769230769230769,
+      "shared_x": -5,
+      "offsets": [
+        [
+          -5,
+          -3
+        ]
+      ],
+      "floor_contact_y": 120
+    },
+    "stairs-down": {
+      "shared_scale": 1.0,
+      "shared_x": 0,
+      "offsets": [
+        [
+          0,
+          14
+        ]
+      ],
+      "floor_contact_y": 120
+    }
+  },
+  "original_sha256": {
+    "art/props/cave-events-v1/old-workings.png": "d3382d64ff56f15cd1ef2b0aee9ebfb47017508db09b8e7440928ff50f2dca07",
+    "art/props/cave-events-v1/idol-niche.png": "3cc17d0fd5f35773c076596446b1863d1fe73fe0dba44a84d8a9d24f99b46810",
+    "art/props/cave-room-props-v1/still-pool.png": "aed767dcc6c3e8de482162bec38333b5bb61d015166c23eba7e52ca94d088020",
+    "art/props/cave-events-v1/dry-alcove.png": "015126227dd1be21cfef6da8b3ad05856ca6967d861f9f359a1d039dae3d76bd",
+    "art/props/cave-room-props-v1/cold-camp.png": "22cd2ec50246700010779fb9f08b7a132c1595cd4dd9da47235abf32ea1ea8fc",
+    "art/props/cave-events-v1/tripwire.png": "5d853669af7f3c2c10c58b77b88f8ee0a4407678031f10dc11096c2664e7c638",
+    "art/props/cave-events-v1/hollow-floor.png": "afd58052582da35d1b2f2331a073b788a772db54f8276b48b2ffc80e8e4bea15"
+  },
+  "source_sha256": {
+    "cold-camp-used.png": "5a6cc9fb48251caa4237104f2870b01e7b903c1b98d2be2443970892337e7352",
+    "dry-alcove-used.png": "441775c386073c4c9c94ea59de5ba1e1c83a9cb90ca9e215af037c23b5f7f666",
+    "hollow-floor-used.png": "2f10386932cf01511c183103a78710f4503f9f5a507c01bb6f336d9401e2c4c8",
+    "idol-niche-used.png": "14ea794edb72080b46bdc25cc800b54e1e1997b0ff38905041f44b63790e27a5",
+    "old-workings-used.png": "92e6df648ba3f0342716352384725874a424148fd298df8e108bbe0ff7d0b153",
+    "stairs-down.png": "11da3b18ffbdf0f73a3652ce3f4155e11614cf49c196ab0524154b34f80ee192",
+    "stairs-up.png": "69dc8eaff4e5694818764a69311abe012d53aeff32be7285098aa61503036963",
+    "still-pool-used.png": "0992a627f53a0c745c9b99926729be015d3e4ebb07c66e2963d05629b4585df4",
+    "strongbox-states.png": "4774d3b15747529cb99ce79143b64ea1d76a4ccae55889dfaa42c011f22b9320",
+    "tripwire-used.png": "b279214666eefcbe1324e2b97f2ba5224520b4591b335cf26e54cdb30d5364b0"
+  },
+  "sha256": {
+    "art/props/room-states-v1/old-workings-used.png": "88d6534ba74f82251bccde4999b00df0027faa8dc7b13a4b9be465bd34325a99",
+    "art/props/room-states-v1/idol-niche-used.png": "12f4a9ed1f02dcb796067eec87df0365b4d4510cae081fb4802dd066b4eb3ce4",
+    "art/props/room-states-v1/still-pool-used.png": "5a43f0508720a3d0ba878dc4c226a76db1dd3e4866c72da7fcc2f6134565d335",
+    "art/props/room-states-v1/dry-alcove-used.png": "22392ecf77c8d119435da46aab8b18e94e4dd6e55bc08380a5159fb2c524136b",
+    "art/props/room-states-v1/cold-camp-used.png": "7e43f8a714299b7343682ebc18a450f80d6c796b2a19f2d9f655205d86e6e00f",
+    "art/props/room-states-v1/tripwire-used.png": "c6a702341aa6345765822903c62e6e9d7ce17c320432df8436004c2f5274e9f5",
+    "art/props/room-states-v1/hollow-floor-used.png": "bdb68d559c969b93198e7f4af1fcb3a7d871a49211793606bbc299926136ae4b",
+    "art/props/room-states-v1/strongbox-closed.png": "622516959040dc619280b4735568e037f8de1d083d3cd594593492af27e955b4",
+    "art/props/room-states-v1/strongbox-used.png": "32366392910bb1573a5cbedfbe76761966fd956e435aacb36faa730ec4558818",
+    "art/features/stone-stairs-v1/stairs-up.png": "e1ea95ca67472bab2b4d6732aaf756e1c3552ee179fa174d4a694931ad47064b",
+    "art/features/stone-stairs-v1/stairs-down.png": "59dfbb42b1cd6897e1b56d2d4429c86fa3e82ef8044801c8a4e50c9e33294d4a"
+  }
+}

@@ -236,9 +236,9 @@ Suggested initial presentation: one campsite screen with a few selectable activi
   - The rule lives in `Companion.is_unconscious()` / main.gd `_main_heroes_wake_at_camp()`, so a permanent-loss rule can replace it.
 - **The secured route (#79):** after **two expeditions that reach floor 2**, the cave path offers the king's scouts' route straight to floor 2 for **40g a trip** (expensive by design; tune by playtest). Before that, the cave path shows progress.
 - **Room contents (#46):** enemies **ambush** and aren't shown.
-  - Chests, objects and rest spots stand in their rooms; traps stay hidden.
-  - A goblin stash and the strongbox use ChatGPT's chest art (open, then empty once resolved); an abandoned pack is a coin sack.
-  - The idol, the pool, rest spots and the old workings are simple placeholders until props arrive (#96).
+  - Chests, objects and rest spots stand in their rooms. Unresolved traps need Keen eyes; their resolved remains are visible to everyone.
+  - The goblin stash opens its cairn, the abandoned pack has a searched variant, and the strongbox has its own closed/opened iron-box art.
+  - Every current room event has art. [Resolved-state props](docs/room-prop-states.md) distinguish spent workings, idol niche, pool, rest spots, traps and the iron strongbox; state survives revisiting and saving. Stone/fortress stairs use dedicated artwork; cave roots/pit and opening daylight keep their existing look.
 - **Settings (#52):** master, music and effects volume (separate audio buses), fullscreen on computers, screen flashes on/off, and text size (Normal / Large / Larger, scaling the whole interface).
   - Saved to `user://settings.cfg`.
   - Reachable from the title, the Pack and the camp.

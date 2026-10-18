@@ -1,0 +1,65 @@
+{
+  "issue": 46,
+  "canvas": [
+    128,
+    128
+  ],
+  "props": {
+    "old-workings": {
+      "event": "chest_old_workings",
+      "scene": "res://art/props/room-states-v1/old-workings.tscn",
+      "original": "res://art/props/cave-events-v1/old-workings.png",
+      "used": "res://art/props/room-states-v1/old-workings-used.png",
+      "flat": false
+    },
+    "idol-niche": {
+      "event": "object_pale_idol",
+      "scene": "res://art/props/room-states-v1/idol-niche.tscn",
+      "original": "res://art/props/cave-events-v1/idol-niche.png",
+      "used": "res://art/props/room-states-v1/idol-niche-used.png",
+      "flat": false
+    },
+    "still-pool": {
+      "event": "object_still_pool",
+      "scene": "res://art/props/room-states-v1/still-pool.tscn",
+      "original": "res://art/props/cave-room-props-v1/still-pool.png",
+      "used": "res://art/props/room-states-v1/still-pool-used.png",
+      "flat": true
+    },
+    "dry-alcove": {
+      "event": "rest_dry_alcove",
+      "scene": "res://art/props/room-states-v1/dry-alcove.tscn",
+      "original": "res://art/props/cave-events-v1/dry-alcove.png",
+      "used": "res://art/props/room-states-v1/dry-alcove-used.png",
+      "flat": false
+    },
+    "cold-camp": {
+      "event": "rest_old_camp",
+      "scene": "res://art/props/room-states-v1/cold-camp.tscn",
+      "original": "res://art/props/cave-room-props-v1/cold-camp.png",
+      "used": "res://art/props/room-states-v1/cold-camp-used.png",
+      "flat": false
+    },
+    "tripwire": {
+      "event": "trap_tripwire",
+      "scene": "res://art/props/room-states-v1/tripwire.tscn",
+      "original": "res://art/props/cave-events-v1/tripwire.png",
+      "used": "res://art/props/room-states-v1/tripwire-used.png",
+      "flat": false
+    },
+    "hollow-floor": {
+      "event": "trap_hollow_floor",
+      "scene": "res://art/props/room-states-v1/hollow-floor.tscn",
+      "original": "res://art/props/cave-events-v1/hollow-floor.png",
+      "used": "res://art/props/room-states-v1/hollow-floor-used.png",
+      "flat": true
+    },
+    "strongbox": {
+      "event": "chest_strongbox",
+      "scene": "res://art/props/room-states-v1/strongbox.tscn",
+      "original": "res://art/props/room-states-v1/strongbox-closed.png",
+      "used": "res://art/props/room-states-v1/strongbox-used.png",
+      "flat": false
+    }
+  }
+}

@@ -12,6 +12,9 @@
 [ext_resource type="AudioStream" path="res://audio/placeholder/bump.wav" id="10"]
 [ext_resource type="AudioStream" path="res://audio/placeholder/door_creak.wav" id="11"]
 
+[ext_resource type="PackedScene" path="res://art/features/stone-stairs-v1/stone-up.tscn" id="stairs_up"]
+[ext_resource type="PackedScene" path="res://art/features/stone-stairs-v1/stone-down.tscn" id="stairs_down"]
+
 [resource]
 script = ExtResource("1")
 display_name = "Stone dungeon"
@@ -36,3 +39,6 @@ ambience = ExtResource("6")
 footstep_sounds = Array[AudioStream]([ExtResource("7"), ExtResource("8"), ExtResource("9")])
 bump_sound = ExtResource("10")
 open_sound = ExtResource("11")
+
+ascent_scene = ExtResource("stairs_up")
+descent_scene = ExtResource("stairs_down")

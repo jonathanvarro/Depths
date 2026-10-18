@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Texture2D" path="res://art/props/cave-events-v1/hollow-floor.png" id="texture"]
+[ext_resource type="Texture2D" path="res://art/props/room-states-v1/hollow-floor-used.png" id="empty"]
+[ext_resource type="Script" path="res://art/props/cave-events-v1/container.gd" id="script"]
+
+[node name="hollow-floor" type="Node3D"]
+script = ExtResource("script")
+closed_texture = ExtResource("texture")
+empty_texture = ExtResource("empty")
+
+[node name="Sprite" type="Sprite3D" parent="."]
+position = Vector3(0, 0.015, 0)
+rotation = Vector3(-1.5707964, 0, 0)
+billboard = 0
+pixel_size = 0.012499999999999999
+shaded = true
+texture_filter = 0
+alpha_cut = 1
+alpha_scissor_threshold = 0.5
+texture = ExtResource("texture")

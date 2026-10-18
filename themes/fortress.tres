@@ -17,6 +17,9 @@
 [ext_resource type="PackedScene" path="res://art/features/fortress-v1/gate-barred.tscn" id="blocked_scene"]
 [ext_resource type="PackedScene" path="res://art/features/fortress-v1/gate-broken.tscn" id="gate_opened_scene"]
 
+[ext_resource type="PackedScene" path="res://art/features/stone-stairs-v1/fortress-up.tscn" id="stairs_up"]
+[ext_resource type="PackedScene" path="res://art/features/stone-stairs-v1/fortress-down.tscn" id="stairs_down"]
+
 [resource]
 script = ExtResource("1")
 display_name = "Goblin fortress"
@@ -46,3 +49,6 @@ closed_scene = ExtResource("closed_scene")
 opened_scene = ExtResource("opened_scene")
 blocked_scene = ExtResource("blocked_scene")
 gate_opened_scene = ExtResource("gate_opened_scene")
+
+ascent_scene = ExtResource("stairs_up")
+descent_scene = ExtResource("stairs_down")

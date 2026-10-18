@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="Texture2D" path="res://art/features/stone-stairs-v1/stairs-up.png" id="texture"]
+[ext_resource type="Material" path="res://art/textures/fortress-v1/floor.tres" id="floor"]
+[sub_resource type="PlaneMesh" id="ground"]
+material = ExtResource("floor")
+size = Vector2(2, 2)
+[node name="StairsUp" type="Node3D"]
+metadata/direction = "up"
+[node name="Sprite" type="Sprite3D" parent="."]
+position = Vector3(0, 0.85, 0)
+pixel_size = 0.015178571428571428
+billboard = 2
+shaded = true
+texture_filter = 0
+alpha_cut = 1
+alpha_scissor_threshold = 0.5
+texture = ExtResource("texture")

@@ -980,8 +980,8 @@ func _light_torch_if_dark() -> void:
 
 # --- Room contents (#46) ---------------------------------------------
 
-## Chests, objects and rest spots show in their rooms; traps and enemies
-## don't (owner: enemies ambush). Emptied containers show as empty.
+## Chests, objects and rest spots show in their rooms. Unresolved traps need
+## Keen eyes; resolved traps stay visible to everyone. Enemies still ambush.
 func _add_room_props() -> void:
 	_props.clear()
 	if _map == null:
@@ -990,20 +990,28 @@ func _add_room_props() -> void:
 		var event: RoomEvent = _map.events[cell]
 		if _map.solid.has(cell):
 			continue
-		if event.kind == DungeonMap.Content.TRAP and not _party_state.has_trait("keen_eyes"):
+		if event.kind == DungeonMap.Content.TRAP and not _party_state.has_trait("keen_eyes") and not _map.triggered.has(cell):
 			continue  # hidden - unless Mara's keen eyes spot it (#95)
-		var node: Node3D = event.prop.instantiate() if event.prop else _placeholder_prop(event.kind)
-		if node == null:
-			continue
-		node.position = Vector3(cell.x * CELL_SIZE, 0.0, cell.y * CELL_SIZE)
-		_level.add_child(node)
-		_props[cell] = node
+		_create_room_prop(cell,event)
 		if _map.triggered.has(cell):
 			_empty_prop(cell)
 
 
+func _create_room_prop(cell: Vector2i,event: RoomEvent) -> Node3D:
+	var node: Node3D = event.prop.instantiate() if event.prop else _placeholder_prop(event.kind)
+	if node:
+		node.position = Vector3(cell.x * CELL_SIZE, 0.0, cell.y * CELL_SIZE)
+		_level.add_child(node)
+		_props[cell] = node
+	return node
+
+
 func _empty_prop(cell: Vector2i) -> void:
 	var node = _props.get(cell)
+	# A trap hidden from this hero gains its resolved prop immediately.
+	if node == null and _map != null and _map.triggered.has(cell) and not _map.solid.has(cell):
+		var event: RoomEvent = _map.events.get(cell)
+		if event:node = _create_room_prop(cell,event)
 	if node and "state" in node:
 		node.set("state", "empty")
 
