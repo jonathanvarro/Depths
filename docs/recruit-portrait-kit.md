@@ -1,5 +1,11 @@
 # Recruit portrait starter kit · v1
 
+**Roster expansion:** [nine recruit faces](recruit-roster.md) now supplies
+three per role, including Brawler, through the combined roster catalog.
+This page retains the original two-face proof and its validation history.
+The optional lighting adapter also accepts a catalog entry as its third
+`configure` argument for faces in other asset folders.
+
 [Artwork #84](https://github.com/jonathanvarro/Depths/issues/84), first
 two-character production bundle for [#82](https://github.com/jonathanvarro/Depths/issues/82)
 and [recruitment #41](https://github.com/jonathanvarro/Depths/issues/41).

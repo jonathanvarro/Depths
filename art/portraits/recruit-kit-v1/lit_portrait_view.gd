@@ -10,7 +10,7 @@ var _shadow: TextureRect
 var _highlight: TextureRect
 var _blink_tween: Tween
 
-func configure(id: String, emotion: String = "neutral") -> void:
+func configure(id: String, emotion: String = "neutral", profile: Dictionary = {}) -> void:
 	# A frame callback from the previous expression must never restore old eyes.
 	for tween in [_blink_tween,_talk_tween,_hurt_tween]:
 		if tween and tween.is_valid():
@@ -19,9 +19,10 @@ func configure(id: String, emotion: String = "neutral") -> void:
 	expression = emotion
 	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	var suffix := "" if emotion == "neutral" else "-" + emotion
-	show_portrait(load("res://data/portraits/recruits-v1/" + id + suffix + ".tres"))
-	_shadow = _add_layer(load(DIR + id + "/shadow-left.png"))
-	_highlight = _add_layer(load(DIR + id + "/highlight-left.png"))
+	var neutral_path: String = profile.get("portrait_set","res://data/portraits/recruits-v1/" + id + ".tres")
+	show_portrait(load(neutral_path.trim_suffix(".tres") + suffix + ".tres"))
+	_shadow = _add_layer(load(profile.get("shadow",DIR + id + "/shadow-left.png")))
+	_highlight = _add_layer(load(profile.get("highlight",DIR + id + "/highlight-left.png")))
 	set_illumination(illumination)
 	set_outfit(outfit_visible)
 

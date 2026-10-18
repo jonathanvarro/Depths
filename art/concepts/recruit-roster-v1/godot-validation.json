@@ -1,0 +1,32 @@
+{
+  "asset_canvas": [
+    192,
+    192
+  ],
+  "captures": 24,
+  "checks": 2413,
+  "failures": [],
+  "godot": "4.7.2",
+  "physical_phone_test": false,
+  "review_portrait_sizes": [
+    [
+      128,
+      128
+    ],
+    [
+      96,
+      96
+    ]
+  ],
+  "scope": "Nine recruits; shared existing body/outfit; no live recruitment wiring or Mara migration.",
+  "viewports": [
+    [
+      1280,
+      720
+    ],
+    [
+      1278,
+      590
+    ]
+  ]
+}

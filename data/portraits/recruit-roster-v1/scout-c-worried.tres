@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="PortraitSet" format=3]
+
+[ext_resource type="Script" path="res://scripts/portrait_set.gd" id="script"]
+[ext_resource type="Texture2D" path="res://art/portraits/recruit-kit-v1/shared/body.png" id="0"]
+[ext_resource type="Texture2D" path="res://art/portraits/recruit-roster-v1/scout-c/head.png" id="1"]
+[ext_resource type="Texture2D" path="res://art/portraits/recruit-roster-v1/scout-c/eyes-worried.png" id="2"]
+[ext_resource type="Texture2D" path="res://art/portraits/recruit-roster-v1/scout-c/mouth-worried.png" id="3"]
+[ext_resource type="Texture2D" path="res://art/portraits/recruit-kit-v1/shared/jerkin.png" id="4"]
+[ext_resource type="Texture2D" path="res://art/portraits/recruit-roster-v1/scout-c/blood.png" id="5"]
+[ext_resource type="Texture2D" path="res://art/portraits/recruit-roster-v1/scout-c/dirt.png" id="6"]
+[ext_resource type="Texture2D" path="res://art/portraits/recruit-roster-v1/scout-c/bandage.png" id="7"]
+[ext_resource type="Texture2D" path="res://art/portraits/recruit-roster-v1/scout-c/pallor.png" id="8"]
+
+[resource]
+script = ExtResource("script")
+body = ExtResource("0")
+head = ExtResource("1")
+eyes = ExtResource("2")
+mouth = ExtResource("3")
+clothing = Array[Texture2D]([ExtResource("4")])
+conditions = {"blood": ExtResource("5"), "dirt": ExtResource("6"), "bandage": ExtResource("7"), "pallor": ExtResource("8")}

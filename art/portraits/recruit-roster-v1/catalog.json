@@ -1,0 +1,144 @@
+{
+  "canvas": [
+    192,
+    192
+  ],
+  "body_template": "average-covered-adult-v1",
+  "portraits": [
+    {
+      "id": "warden-a",
+      "role": "Warden",
+      "portrait": "res://art/portraits/recruit-kit-v1/warden-a/preview.png",
+      "portrait_set": "res://data/portraits/recruits-v1/warden-a.tres",
+      "expressions": [
+        "neutral",
+        "worried",
+        "exhausted"
+      ],
+      "shadow": "res://art/portraits/recruit-kit-v1/warden-a/shadow-left.png",
+      "highlight": "res://art/portraits/recruit-kit-v1/warden-a/highlight-left.png"
+    },
+    {
+      "id": "scout-a",
+      "role": "Scout",
+      "portrait": "res://art/portraits/recruit-kit-v1/scout-a/preview.png",
+      "portrait_set": "res://data/portraits/recruits-v1/scout-a.tres",
+      "expressions": [
+        "neutral",
+        "worried",
+        "exhausted"
+      ],
+      "shadow": "res://art/portraits/recruit-kit-v1/scout-a/shadow-left.png",
+      "highlight": "res://art/portraits/recruit-kit-v1/scout-a/highlight-left.png"
+    },
+    {
+      "id": "brawler-a",
+      "role": "Brawler",
+      "portrait": "res://art/portraits/recruit-roster-v1/brawler-a/preview.png",
+      "portrait_set": "res://data/portraits/recruit-roster-v1/brawler-a.tres",
+      "expressions": [
+        "neutral",
+        "worried",
+        "exhausted"
+      ],
+      "shadow": "res://art/portraits/recruit-roster-v1/brawler-a/shadow-left.png",
+      "highlight": "res://art/portraits/recruit-roster-v1/brawler-a/highlight-left.png"
+    },
+    {
+      "id": "warden-b",
+      "role": "Warden",
+      "portrait": "res://art/portraits/recruit-roster-v1/warden-b/preview.png",
+      "portrait_set": "res://data/portraits/recruit-roster-v1/warden-b.tres",
+      "expressions": [
+        "neutral",
+        "worried",
+        "exhausted"
+      ],
+      "shadow": "res://art/portraits/recruit-roster-v1/warden-b/shadow-left.png",
+      "highlight": "res://art/portraits/recruit-roster-v1/warden-b/highlight-left.png"
+    },
+    {
+      "id": "scout-b",
+      "role": "Scout",
+      "portrait": "res://art/portraits/recruit-roster-v1/scout-b/preview.png",
+      "portrait_set": "res://data/portraits/recruit-roster-v1/scout-b.tres",
+      "expressions": [
+        "neutral",
+        "worried",
+        "exhausted"
+      ],
+      "shadow": "res://art/portraits/recruit-roster-v1/scout-b/shadow-left.png",
+      "highlight": "res://art/portraits/recruit-roster-v1/scout-b/highlight-left.png"
+    },
+    {
+      "id": "brawler-b",
+      "role": "Brawler",
+      "portrait": "res://art/portraits/recruit-roster-v1/brawler-b/preview.png",
+      "portrait_set": "res://data/portraits/recruit-roster-v1/brawler-b.tres",
+      "expressions": [
+        "neutral",
+        "worried",
+        "exhausted"
+      ],
+      "shadow": "res://art/portraits/recruit-roster-v1/brawler-b/shadow-left.png",
+      "highlight": "res://art/portraits/recruit-roster-v1/brawler-b/highlight-left.png"
+    },
+    {
+      "id": "warden-c",
+      "role": "Warden",
+      "portrait": "res://art/portraits/recruit-roster-v1/warden-c/preview.png",
+      "portrait_set": "res://data/portraits/recruit-roster-v1/warden-c.tres",
+      "expressions": [
+        "neutral",
+        "worried",
+        "exhausted"
+      ],
+      "shadow": "res://art/portraits/recruit-roster-v1/warden-c/shadow-left.png",
+      "highlight": "res://art/portraits/recruit-roster-v1/warden-c/highlight-left.png"
+    },
+    {
+      "id": "scout-c",
+      "role": "Scout",
+      "portrait": "res://art/portraits/recruit-roster-v1/scout-c/preview.png",
+      "portrait_set": "res://data/portraits/recruit-roster-v1/scout-c.tres",
+      "expressions": [
+        "neutral",
+        "worried",
+        "exhausted"
+      ],
+      "shadow": "res://art/portraits/recruit-roster-v1/scout-c/shadow-left.png",
+      "highlight": "res://art/portraits/recruit-roster-v1/scout-c/highlight-left.png"
+    },
+    {
+      "id": "brawler-c",
+      "role": "Brawler",
+      "portrait": "res://art/portraits/recruit-roster-v1/brawler-c/preview.png",
+      "portrait_set": "res://data/portraits/recruit-roster-v1/brawler-c.tres",
+      "expressions": [
+        "neutral",
+        "worried",
+        "exhausted"
+      ],
+      "shadow": "res://art/portraits/recruit-roster-v1/brawler-c/shadow-left.png",
+      "highlight": "res://art/portraits/recruit-roster-v1/brawler-c/highlight-left.png"
+    }
+  ],
+  "issue": 82,
+  "by_role": {
+    "Warden": [
+      "warden-a",
+      "warden-b",
+      "warden-c"
+    ],
+    "Scout": [
+      "scout-a",
+      "scout-b",
+      "scout-c"
+    ],
+    "Brawler": [
+      "brawler-a",
+      "brawler-b",
+      "brawler-c"
+    ]
+  }
+}

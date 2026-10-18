@@ -1,0 +1,342 @@
+{
+  "tool": "image_gen.imagegen",
+  "issue": 82,
+  "entries": [
+    {
+      "name": "warden-b-master",
+      "args": {
+        "prompt": "Use case: precise-object-edit for a NEW character head on a SHARED portrait body. Edit the exact supplied Depths recruit master, preserving its SQUARE canvas, precise shoulder/undershirt silhouette, high linen collar and NECK SOCKET, head centre, scale, almost-front-facing slight image-right pose, eye line and mouth line. Change ONLY the head and exposed neck. Keep hair short and above shoulders. All skin exposed at the neck must match the new face; the shirt/collar itself stays unchanged. The new identity must be distinct, not a recolour of the reference. Crisp broad pixel-art clusters for192x192, restrained48colour neutral material palette; simple local anatomy/crease shading. Diffuse neutral WHITE fill from all sides: NO fixed warm/orange lamp colour, bright rim, dramatic directional highlight, deep one-sided cast shadow, gradients or photographic/painterly texture. No headwear, jewellery, weapon, extra clothing, fresh blood, UI, text, background or frame. Transparent exterior. Older ADULT MALE WARDEN, about52, deep brown skin, broad rectangular face with strong cheekbones, close-cropped salt-and-pepper hair and short neat beard confined to jaw/chin, broad straight nose, steady dark eyes, closed neutral mouth. Calm and dependable, weathered crow's feet; sturdy protector without ornate rank badges.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/recruit-kit-v1/master-b.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-300602b0-f0a1-40f7-b565-2982bbff3117.png",
+      "preserved_file": "warden-b-master.png"
+    },
+    {
+      "name": "warden-c-master",
+      "args": {
+        "prompt": "Use case: precise-object-edit for a NEW character head on a SHARED portrait body. Edit the exact supplied Depths recruit master, preserving its SQUARE canvas, precise shoulder/undershirt silhouette, high linen collar and NECK SOCKET, head centre, scale, almost-front-facing slight image-right pose, eye line and mouth line. Change ONLY the head and exposed neck. Keep hair short and above shoulders. All skin exposed at the neck must match the new face; the shirt/collar itself stays unchanged. The new identity must be distinct, not a recolour of the reference. Crisp broad pixel-art clusters for192x192, restrained48colour neutral material palette; simple local anatomy/crease shading. Diffuse neutral WHITE fill from all sides: NO fixed warm/orange lamp colour, bright rim, dramatic directional highlight, deep one-sided cast shadow, gradients or photographic/painterly texture. No headwear, jewellery, weapon, extra clothing, fresh blood, UI, text, background or frame. Transparent exterior. Young ADULT FEMALE WARDEN, about29, pale freckled skin, broad grounded face, short tightly cropped auburn-red hair, thick straight eyebrows, slightly round nose, pale grey-green attentive eyes, closed neutral mouth. Alert determined bearing and practical unglamorous appearance; no makeup or scars.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/recruit-kit-v1/master-a.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-4cbeeae6-d8bc-48d1-bcdf-c4ed65fb492b.png",
+      "preserved_file": "warden-c-master.png"
+    },
+    {
+      "name": "scout-b-master",
+      "args": {
+        "prompt": "Use case: precise-object-edit for a NEW character head on a SHARED portrait body. Edit the exact supplied Depths recruit master, preserving its SQUARE canvas, precise shoulder/undershirt silhouette, high linen collar and NECK SOCKET, head centre, scale, almost-front-facing slight image-right pose, eye line and mouth line. Change ONLY the head and exposed neck. Keep hair short and above shoulders. All skin exposed at the neck must match the new face; the shirt/collar itself stays unchanged. The new identity must be distinct, not a recolour of the reference. Crisp broad pixel-art clusters for192x192, restrained48colour neutral material palette; simple local anatomy/crease shading. Diffuse neutral WHITE fill from all sides: NO fixed warm/orange lamp colour, bright rim, dramatic directional highlight, deep one-sided cast shadow, gradients or photographic/painterly texture. No headwear, jewellery, weapon, extra clothing, fresh blood, UI, text, background or frame. Transparent exterior. Young ADULT FEMALE SCOUT, about24, deep brown skin, compact short black twists above the ears, lean oval face and high cheekbones, expressive dark eyes, small broad nose, clean closed neutral mouth. Inquisitive sharp-eyed and capable, no exotic costume or glamour.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/recruit-kit-v1/master-a.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-6ba82c42-025f-4fab-8f8a-4f044ec27737.png",
+      "preserved_file": "scout-b-master.png"
+    },
+    {
+      "name": "scout-c-master",
+      "args": {
+        "prompt": "Use case: precise-object-edit for a NEW character head on a SHARED portrait body. Edit the exact supplied Depths recruit master, preserving its SQUARE canvas, precise shoulder/undershirt silhouette, high linen collar and NECK SOCKET, head centre, scale, almost-front-facing slight image-right pose, eye line and mouth line. Change ONLY the head and exposed neck. Keep hair short and above shoulders. All skin exposed at the neck must match the new face; the shirt/collar itself stays unchanged. The new identity must be distinct, not a recolour of the reference. Crisp broad pixel-art clusters for192x192, restrained48colour neutral material palette; simple local anatomy/crease shading. Diffuse neutral WHITE fill from all sides: NO fixed warm/orange lamp colour, bright rim, dramatic directional highlight, deep one-sided cast shadow, gradients or photographic/painterly texture. No headwear, jewellery, weapon, extra clothing, fresh blood, UI, text, background or frame. Transparent exterior. Older ADULT MALE SCOUT, about56, warm medium-brown skin, shaved balding head with short grey stubble around sides, narrow long face, hooked nose, alert dark eyes with crow's feet, short grey chin stubble and closed neutral mouth. Lean watchful veteran, no eye patch or hood.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/recruit-kit-v1/master-b.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-4ac6a759-3fae-49d0-85b3-021a1787c7ff.png",
+      "preserved_file": "scout-c-master.png"
+    },
+    {
+      "name": "brawler-a-master",
+      "args": {
+        "prompt": "Use case: precise-object-edit for a NEW character head on a SHARED portrait body. Edit the exact supplied Depths recruit master, preserving its SQUARE canvas, precise shoulder/undershirt silhouette, high linen collar and NECK SOCKET, head centre, scale, almost-front-facing slight image-right pose, eye line and mouth line. Change ONLY the head and exposed neck. Keep hair short and above shoulders. All skin exposed at the neck must match the new face; the shirt/collar itself stays unchanged. The new identity must be distinct, not a recolour of the reference. Crisp broad pixel-art clusters for192x192, restrained48colour neutral material palette; simple local anatomy/crease shading. Diffuse neutral WHITE fill from all sides: NO fixed warm/orange lamp colour, bright rim, dramatic directional highlight, deep one-sided cast shadow, gradients or photographic/painterly texture. No headwear, jewellery, weapon, extra clothing, fresh blood, UI, text, background or frame. Transparent exterior. ADULT FEMALE BRAWLER, about36, light weathered skin, short black undercut hair, broad square face, strong cheekbones, slightly flattened crooked nose, level dark eyes and closed firm mouth. ONE old pale scar on image-left cheek BELOW the eye and away from the mouth. Rough physically imposing character, no fresh wounds, bodybuilder glamour or aggressive scream.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/recruit-kit-v1/master-a.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-3597202b-8503-4d3a-872f-4901a214c286.png",
+      "preserved_file": "brawler-a-master.png"
+    },
+    {
+      "name": "brawler-b-master",
+      "args": {
+        "prompt": "Use case: precise-object-edit for a NEW character head on a SHARED portrait body. Edit the exact supplied Depths recruit master, preserving its SQUARE canvas, precise shoulder/undershirt silhouette, high linen collar and NECK SOCKET, head centre, scale, almost-front-facing slight image-right pose, eye line and mouth line. Change ONLY the head and exposed neck. Keep hair short and above shoulders. All skin exposed at the neck must match the new face; the shirt/collar itself stays unchanged. The new identity must be distinct, not a recolour of the reference. Crisp broad pixel-art clusters for192x192, restrained48colour neutral material palette; simple local anatomy/crease shading. Diffuse neutral WHITE fill from all sides: NO fixed warm/orange lamp colour, bright rim, dramatic directional highlight, deep one-sided cast shadow, gradients or photographic/painterly texture. No headwear, jewellery, weapon, extra clothing, fresh blood, UI, text, background or frame. Transparent exterior. ADULT MALE BRAWLER, about28, medium olive skin, closely shaved head, broad blunt jaw, broken-looking crooked nose, thick straight dark eyebrows, dark stubble and closed neutral mouth. ONE small old pale scar low on image-right cheek. Tough battered labourer bearing, no blood, grin, jewellery or exaggerated villain features.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/recruit-kit-v1/master-b.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-fd9b94d4-04be-40ed-a90e-500a5763396a.png",
+      "preserved_file": "brawler-b-master.png"
+    },
+    {
+      "name": "brawler-c-master",
+      "args": {
+        "prompt": "Use case: precise-object-edit for a NEW character head on a SHARED portrait body. Edit the exact supplied Depths recruit master, preserving its SQUARE canvas, precise shoulder/undershirt silhouette, high linen collar and NECK SOCKET, head centre, scale, almost-front-facing slight image-right pose, eye line and mouth line. Change ONLY the head and exposed neck. Keep hair short and above shoulders. All skin exposed at the neck must match the new face; the shirt/collar itself stays unchanged. The new identity must be distinct, not a recolour of the reference. Crisp broad pixel-art clusters for192x192, restrained48colour neutral material palette; simple local anatomy/crease shading. Diffuse neutral WHITE fill from all sides: NO fixed warm/orange lamp colour, bright rim, dramatic directional highlight, deep one-sided cast shadow, gradients or photographic/painterly texture. No headwear, jewellery, weapon, extra clothing, fresh blood, UI, text, background or frame. Transparent exterior. Older ADULT MALE BRAWLER, about61, darker bronze/tan skin, short cropped coarse grey hair, heavy wrinkled brow and broad face, bulbous slightly bent nose, tired but alert dark eyes, a SHORT TRIMMED grey moustache immediately above the upper lip confined to mouth width, closed neutral mouth. ONE old pale scar on the outer image-left cheek. Battered veteran, no long beard or facial hair over collar.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/recruit-kit-v1/master-b.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-c677d893-b8d5-43f1-87b0-69620f72f3e7.png",
+      "preserved_file": "brawler-c-master.png"
+    },
+    {
+      "name": "warden-b-faces",
+      "args": {
+        "prompt": "Use case: precise-object-edit. ONE registered FACIAL-ANIMATION ATLAS from the supplied3column by2row reference, equal square cells, identical camera/scale/face registration in every cell. Keep all hair, skin, scars, facial hair, shirt and body pixels unchanged except the specified EYES/BROWS or MOUTH; don't repaint the rest or move the head. Top-left: HALF-CLOSED eyes, neutral mouth. Top-middle: FULLY CLOSED eyes with readable lids, neutral mouth. Top-right: neutral eyes and a SMALL partly open speaking mouth. Bottom-left: neutral eyes and a moderately OPEN speaking mouth, dark interior and subdued teeth. Bottom-middle: WORRIED raised/inward brows and tense closed mouth. Bottom-right: EXHAUSTED drooping lids/brows and a downturned closed mouth. Preserve EXACT identity, old scars, freckles and any facial hair around mouth in every cell. No grin or exaggerated expression, no other characters. Same neutral diffuse illumination, no new lamp cast. Crisp192px pixel clusters, genuinely transparent exterior in each cell, no background, text, gaps, frame or panel borders. The atlas is ONE asset; whole reference cell alignment must remain exact.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/recruit-roster-v1/warden-b-face-reference.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-ca1a1cae-b261-4039-88c4-460a702a387d.png",
+      "preserved_file": "warden-b-faces.png"
+    },
+    {
+      "name": "warden-b-conditions",
+      "args": {
+        "prompt": "Use case: precise-object-edit. ONE aligned CONDITION-OVERLAY ATLAS2columns by2rows using the exact supplied head/body positions. The repeated character is ONLY a PLACEMENT GUIDE: REMOVE all original character, face, hair, eyes, mouth, clothes and outline pixels. Output ONLY marks on real transparent backgrounds. Top-left: sparse dark-red dried-blood streak at image-right forehead/temple, one cheek fleck; no eye/lip covering. Top-right: simple muted brown mud smudges on cheeks/jaw and shirt, NO white fabric or replacement skin. Bottom-left: a SMALL plain off-white cloth forehead dressing ABOVE the eyebrows, about one-third of head width and thin, no eye covering. Bottom-right: translucent sickly desaturated pale-grey/green WASH shaped over forehead/cheek/neck skin only, open gaps for eyes/lips, no identity or facial lines. Precise full-cell registration, no rescaling of patches, no ghost portrait beneath them. Sparse broad192px pixel clusters, no grain noise, photoreal texture, lighting, glow, text, cell borders or background.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/recruit-roster-v1/warden-b-overlay-reference.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-bbd05b5a-0de7-450e-8843-7b2e734b588c.png",
+      "preserved_file": "warden-b-conditions.png"
+    },
+    {
+      "name": "warden-b-lighting",
+      "args": {
+        "prompt": "Use case: precise-object-edit. ONE transparent LIGHT-COVERAGE ATLAS2columns by2rows with exact full-cell registration to supplied character. Use the figure ONLY to place broad coverage; REMOVE all original skin/hair/material/identity details. Top-left: BLACK broad translucent shade coverage on far image-right face/neck/shoulder planes for a light arriving from upper IMAGE LEFT; subtle brow/nose/chin shade, keep near side transparent. Top-right: WHITE broad translucent highlight coverage on near image-left forehead/cheek/nose/shoulder planes for that same light; keep far side transparent. Bottom-left and bottom-right: softer versions of those same two masks, same head pose, DO NOT mirror the head. NO eyes, brows, mouth, face identity, clothing seams, hair strands or traced material texture in any mask. Only deliberately broad sparse pixel-art light/shadow coverage matching192px native registration. Full silhouette exterior genuinely transparent; unaffected areas transparent. No background, text, border, halo, rectangular wash or colour. Engine will tint white coverage and control opacity independently.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/recruit-roster-v1/warden-b-overlay-reference.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-9ca8affb-00e0-48f9-bacc-36a6a798ad7a.png",
+      "preserved_file": "warden-b-lighting.png"
+    },
+    {
+      "name": "warden-c-faces",
+      "args": {
+        "prompt": "Use case: precise-object-edit. ONE registered FACIAL-ANIMATION ATLAS from the supplied3column by2row reference, equal square cells, identical camera/scale/face registration in every cell. Keep all hair, skin, scars, facial hair, shirt and body pixels unchanged except the specified EYES/BROWS or MOUTH; don't repaint the rest or move the head. Top-left: HALF-CLOSED eyes, neutral mouth. Top-middle: FULLY CLOSED eyes with readable lids, neutral mouth. Top-right: neutral eyes and a SMALL partly open speaking mouth. Bottom-left: neutral eyes and a moderately OPEN speaking mouth, dark interior and subdued teeth. Bottom-middle: WORRIED raised/inward brows and tense closed mouth. Bottom-right: EXHAUSTED drooping lids/brows and a downturned closed mouth. Preserve EXACT identity, old scars, freckles and any facial hair around mouth in every cell. No grin or exaggerated expression, no other characters. Same neutral diffuse illumination, no new lamp cast. Crisp192px pixel clusters, genuinely transparent exterior in each cell, no background, text, gaps, frame or panel borders. The atlas is ONE asset; whole reference cell alignment must remain exact.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/recruit-roster-v1/warden-c-face-reference.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-e5b88887-40ef-4985-8a30-01368b633a09.png",
+      "preserved_file": "warden-c-faces.png"
+    },
+    {
+      "name": "warden-c-conditions",
+      "args": {
+        "prompt": "Use case: precise-object-edit. ONE aligned CONDITION-OVERLAY ATLAS2columns by2rows using the exact supplied head/body positions. The repeated character is ONLY a PLACEMENT GUIDE: REMOVE all original character, face, hair, eyes, mouth, clothes and outline pixels. Output ONLY marks on real transparent backgrounds. Top-left: sparse dark-red dried-blood streak at image-right forehead/temple, one cheek fleck; no eye/lip covering. Top-right: simple muted brown mud smudges on cheeks/jaw and shirt, NO white fabric or replacement skin. Bottom-left: a SMALL plain off-white cloth forehead dressing ABOVE the eyebrows, about one-third of head width and thin, no eye covering. Bottom-right: translucent sickly desaturated pale-grey/green WASH shaped over forehead/cheek/neck skin only, open gaps for eyes/lips, no identity or facial lines. Precise full-cell registration, no rescaling of patches, no ghost portrait beneath them. Sparse broad192px pixel clusters, no grain noise, photoreal texture, lighting, glow, text, cell borders or background.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/recruit-roster-v1/warden-c-overlay-reference.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-d3425dce-ff75-440d-aa1a-72992b1e951a.png",
+      "preserved_file": "warden-c-conditions.png"
+    },
+    {
+      "name": "warden-c-lighting",
+      "args": {
+        "prompt": "Use case: precise-object-edit. ONE transparent LIGHT-COVERAGE ATLAS2columns by2rows with exact full-cell registration to supplied character. Use the figure ONLY to place broad coverage; REMOVE all original skin/hair/material/identity details. Top-left: BLACK broad translucent shade coverage on far image-right face/neck/shoulder planes for a light arriving from upper IMAGE LEFT; subtle brow/nose/chin shade, keep near side transparent. Top-right: WHITE broad translucent highlight coverage on near image-left forehead/cheek/nose/shoulder planes for that same light; keep far side transparent. Bottom-left and bottom-right: softer versions of those same two masks, same head pose, DO NOT mirror the head. NO eyes, brows, mouth, face identity, clothing seams, hair strands or traced material texture in any mask. Only deliberately broad sparse pixel-art light/shadow coverage matching192px native registration. Full silhouette exterior genuinely transparent; unaffected areas transparent. No background, text, border, halo, rectangular wash or colour. Engine will tint white coverage and control opacity independently.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/recruit-roster-v1/warden-c-overlay-reference.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-d0836302-0f23-4d2f-9466-02d608c317df.png",
+      "preserved_file": "warden-c-lighting.png"
+    },
+    {
+      "name": "scout-b-faces",
+      "args": {
+        "prompt": "Use case: precise-object-edit. ONE registered FACIAL-ANIMATION ATLAS from the supplied3column by2row reference, equal square cells, identical camera/scale/face registration in every cell. Keep all hair, skin, scars, facial hair, shirt and body pixels unchanged except the specified EYES/BROWS or MOUTH; don't repaint the rest or move the head. Top-left: HALF-CLOSED eyes, neutral mouth. Top-middle: FULLY CLOSED eyes with readable lids, neutral mouth. Top-right: neutral eyes and a SMALL partly open speaking mouth. Bottom-left: neutral eyes and a moderately OPEN speaking mouth, dark interior and subdued teeth. Bottom-middle: WORRIED raised/inward brows and tense closed mouth. Bottom-right: EXHAUSTED drooping lids/brows and a downturned closed mouth. Preserve EXACT identity, old scars, freckles and any facial hair around mouth in every cell. No grin or exaggerated expression, no other characters. Same neutral diffuse illumination, no new lamp cast. Crisp192px pixel clusters, genuinely transparent exterior in each cell, no background, text, gaps, frame or panel borders. The atlas is ONE asset; whole reference cell alignment must remain exact.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/recruit-roster-v1/scout-b-face-reference.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-91b5f89c-156a-4dce-8ea3-86fb0cba85ec.png",
+      "preserved_file": "scout-b-faces.png"
+    },
+    {
+      "name": "scout-b-conditions",
+      "args": {
+        "prompt": "Use case: precise-object-edit. ONE aligned CONDITION-OVERLAY ATLAS2columns by2rows using the exact supplied head/body positions. The repeated character is ONLY a PLACEMENT GUIDE: REMOVE all original character, face, hair, eyes, mouth, clothes and outline pixels. Output ONLY marks on real transparent backgrounds. Top-left: sparse dark-red dried-blood streak at image-right forehead/temple, one cheek fleck; no eye/lip covering. Top-right: simple muted brown mud smudges on cheeks/jaw and shirt, NO white fabric or replacement skin. Bottom-left: a SMALL plain off-white cloth forehead dressing ABOVE the eyebrows, about one-third of head width and thin, no eye covering. Bottom-right: translucent sickly desaturated pale-grey/green WASH shaped over forehead/cheek/neck skin only, open gaps for eyes/lips, no identity or facial lines. Precise full-cell registration, no rescaling of patches, no ghost portrait beneath them. Sparse broad192px pixel clusters, no grain noise, photoreal texture, lighting, glow, text, cell borders or background.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/recruit-roster-v1/scout-b-overlay-reference.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-b5f5b7ee-113b-47c0-87d8-b3c63f533578.png",
+      "preserved_file": "scout-b-conditions.png"
+    },
+    {
+      "name": "scout-b-lighting",
+      "args": {
+        "prompt": "Use case: precise-object-edit. ONE transparent LIGHT-COVERAGE ATLAS2columns by2rows with exact full-cell registration to supplied character. Use the figure ONLY to place broad coverage; REMOVE all original skin/hair/material/identity details. Top-left: BLACK broad translucent shade coverage on far image-right face/neck/shoulder planes for a light arriving from upper IMAGE LEFT; subtle brow/nose/chin shade, keep near side transparent. Top-right: WHITE broad translucent highlight coverage on near image-left forehead/cheek/nose/shoulder planes for that same light; keep far side transparent. Bottom-left and bottom-right: softer versions of those same two masks, same head pose, DO NOT mirror the head. NO eyes, brows, mouth, face identity, clothing seams, hair strands or traced material texture in any mask. Only deliberately broad sparse pixel-art light/shadow coverage matching192px native registration. Full silhouette exterior genuinely transparent; unaffected areas transparent. No background, text, border, halo, rectangular wash or colour. Engine will tint white coverage and control opacity independently.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/recruit-roster-v1/scout-b-overlay-reference.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-b18ac1e9-6c56-4f73-aa68-df7d8f604891.png",
+      "preserved_file": "scout-b-lighting.png"
+    },
+    {
+      "name": "scout-c-faces",
+      "args": {
+        "prompt": "Use case: precise-object-edit. ONE registered FACIAL-ANIMATION ATLAS from the supplied 3 column by 2 row reference, equal square cells, identical camera/scale/face registration in every cell. Keep all hair, skin, scars, facial hair, shirt and body pixels unchanged except the specified EYES/BROWS or MOUTH; don't repaint the rest or move the head. Top-left: HALF-CLOSED eyes, neutral mouth. Top-middle: FULLY CLOSED eyes with readable lids, neutral mouth. Top-right: neutral eyes and a SMALL partly open speaking mouth. Bottom-left: neutral eyes and a moderately OPEN speaking mouth, dark interior and subdued teeth. Bottom-middle: WORRIED raised/inward brows and tense closed mouth. Bottom-right: EXHAUSTED drooping lids/brows and a downturned closed mouth. Preserve EXACT identity, old scars, freckles and any facial hair around mouth in every cell. No grin or exaggerated expression, no other characters. Same neutral diffuse illumination, no new lamp cast. Crisp 192px pixel clusters, genuinely transparent exterior in each cell, no background, text, gaps, frame or panel borders. The atlas is ONE asset; whole reference cell alignment must remain exact.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/recruit-roster-v1/scout-c-face-reference.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-89f9de0b-9e15-4f9d-a5c5-2cdb06da0840.png",
+      "preserved_file": "scout-c-faces.png"
+    },
+    {
+      "name": "scout-c-conditions",
+      "args": {
+        "prompt": "Use case: precise-object-edit. ONE aligned CONDITION-OVERLAY ATLAS 2 columns by 2 rows using the exact supplied head/body positions. The repeated character is ONLY a PLACEMENT GUIDE: REMOVE all original character, face, hair, eyes, mouth, clothes and outline pixels. Output ONLY marks on real transparent backgrounds. Top-left: sparse dark-red dried-blood streak at image-right forehead/temple, one cheek fleck; no eye/lip covering. Top-right: simple muted brown mud smudges on cheeks/jaw and shirt, NO white fabric or replacement skin. Bottom-left: a SMALL plain off-white cloth forehead dressing ABOVE the eyebrows, about one-third of head width and thin, no eye covering. Bottom-right: translucent sickly desaturated pale-grey/green WASH shaped over forehead/cheek/neck skin only, open gaps for eyes/lips, no identity or facial lines. Precise full-cell registration, no rescaling of patches, no ghost portrait beneath them. Sparse broad 192px pixel clusters, no grain noise, photoreal texture, lighting, glow, text, cell borders or background.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/recruit-roster-v1/scout-c-overlay-reference.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-67bbf710-b511-4b59-be27-47c84c08875d.png",
+      "preserved_file": "scout-c-conditions.png"
+    },
+    {
+      "name": "scout-c-lighting",
+      "args": {
+        "prompt": "Use case: precise-object-edit. ONE transparent LIGHT-COVERAGE ATLAS 2 columns by 2 rows with exact full-cell registration to supplied character. Use the figure ONLY to place broad coverage; REMOVE all original skin/hair/material/identity details. Top-left: BLACK broad translucent shade coverage on far image-right face/neck/shoulder planes for a light arriving from upper IMAGE LEFT; subtle brow/nose/chin shade, keep near side transparent. Top-right: WHITE broad translucent highlight coverage on near image-left forehead/cheek/nose/shoulder planes for that same light; keep far side transparent. Bottom-left and bottom-right: softer versions of those same two masks, same head pose, DO NOT mirror the head. NO eyes, brows, mouth, face identity, clothing seams, hair strands or traced material texture in any mask. Only deliberately broad sparse pixel-art light/shadow coverage matching 192px native registration. Full silhouette exterior genuinely transparent; unaffected areas transparent. No background, text, border, halo, rectangular wash or colour. Engine will tint white coverage and control opacity independently.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/recruit-roster-v1/scout-c-overlay-reference.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-c2c81f9d-4f78-4fae-ad3c-a9ebf2ae5499.png",
+      "preserved_file": "scout-c-lighting.png"
+    },
+    {
+      "name": "brawler-a-faces",
+      "args": {
+        "prompt": "Use case: precise-object-edit. ONE registered FACIAL-ANIMATION ATLAS from the supplied 3 column by 2 row reference, equal square cells, identical camera/scale/face registration in every cell. Keep all hair, skin, scars, facial hair, shirt and body pixels unchanged except the specified EYES/BROWS or MOUTH; don't repaint the rest or move the head. Top-left: HALF-CLOSED eyes, neutral mouth. Top-middle: FULLY CLOSED eyes with readable lids, neutral mouth. Top-right: neutral eyes and a SMALL partly open speaking mouth. Bottom-left: neutral eyes and a moderately OPEN speaking mouth, dark interior and subdued teeth. Bottom-middle: WORRIED raised/inward brows and tense closed mouth. Bottom-right: EXHAUSTED drooping lids/brows and a downturned closed mouth. Preserve EXACT identity, old scars, freckles and any facial hair around mouth in every cell. No grin or exaggerated expression, no other characters. Same neutral diffuse illumination, no new lamp cast. Crisp 192px pixel clusters, genuinely transparent exterior in each cell, no background, text, gaps, frame or panel borders. The atlas is ONE asset; whole reference cell alignment must remain exact.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/recruit-roster-v1/brawler-a-face-reference.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-7f1ad715-1c7d-44bc-a6a0-b86de1720ac8.png",
+      "preserved_file": "brawler-a-faces.png"
+    },
+    {
+      "name": "brawler-a-conditions",
+      "args": {
+        "prompt": "Use case: precise-object-edit. ONE aligned CONDITION-OVERLAY ATLAS 2 columns by 2 rows using the exact supplied head/body positions. The repeated character is ONLY a PLACEMENT GUIDE: REMOVE all original character, face, hair, eyes, mouth, clothes and outline pixels. Output ONLY marks on real transparent backgrounds. Top-left: sparse dark-red dried-blood streak at image-right forehead/temple, one cheek fleck; no eye/lip covering. Top-right: simple muted brown mud smudges on cheeks/jaw and shirt, NO white fabric or replacement skin. Bottom-left: a SMALL plain off-white cloth forehead dressing ABOVE the eyebrows, about one-third of head width and thin, no eye covering. Bottom-right: translucent sickly desaturated pale-grey/green WASH shaped over forehead/cheek/neck skin only, open gaps for eyes/lips, no identity or facial lines. Precise full-cell registration, no rescaling of patches, no ghost portrait beneath them. Sparse broad 192px pixel clusters, no grain noise, photoreal texture, lighting, glow, text, cell borders or background.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/recruit-roster-v1/brawler-a-overlay-reference.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-b2c8c927-1986-4207-b644-6f575e018ce7.png",
+      "preserved_file": "brawler-a-conditions.png"
+    },
+    {
+      "name": "brawler-a-lighting",
+      "args": {
+        "prompt": "Use case: precise-object-edit. ONE transparent LIGHT-COVERAGE ATLAS 2 columns by 2 rows with exact full-cell registration to supplied character. Use the figure ONLY to place broad coverage; REMOVE all original skin/hair/material/identity details. Top-left: BLACK broad translucent shade coverage on far image-right face/neck/shoulder planes for a light arriving from upper IMAGE LEFT; subtle brow/nose/chin shade, keep near side transparent. Top-right: WHITE broad translucent highlight coverage on near image-left forehead/cheek/nose/shoulder planes for that same light; keep far side transparent. Bottom-left and bottom-right: softer versions of those same two masks, same head pose, DO NOT mirror the head. NO eyes, brows, mouth, face identity, clothing seams, hair strands or traced material texture in any mask. Only deliberately broad sparse pixel-art light/shadow coverage matching 192px native registration. Full silhouette exterior genuinely transparent; unaffected areas transparent. No background, text, border, halo, rectangular wash or colour. Engine will tint white coverage and control opacity independently.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/recruit-roster-v1/brawler-a-overlay-reference.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-fd58c459-8178-4477-9b09-a97f4243467c.png",
+      "preserved_file": "brawler-a-lighting.png"
+    },
+    {
+      "name": "brawler-b-faces",
+      "args": {
+        "prompt": "Use case: precise-object-edit. ONE registered FACIAL-ANIMATION ATLAS from the supplied 3 column by 2 row reference, equal square cells, identical camera/scale/face registration in every cell. Keep all hair, skin, scars, facial hair, shirt and body pixels unchanged except the specified EYES/BROWS or MOUTH; don't repaint the rest or move the head. Top-left: HALF-CLOSED eyes, neutral mouth. Top-middle: FULLY CLOSED eyes with readable lids, neutral mouth. Top-right: neutral eyes and a SMALL partly open speaking mouth. Bottom-left: neutral eyes and a moderately OPEN speaking mouth, dark interior and subdued teeth. Bottom-middle: WORRIED raised/inward brows and tense closed mouth. Bottom-right: EXHAUSTED drooping lids/brows and a downturned closed mouth. Preserve EXACT identity, old scars, freckles and any facial hair around mouth in every cell. No grin or exaggerated expression, no other characters. Same neutral diffuse illumination, no new lamp cast. Crisp 192px pixel clusters, genuinely transparent exterior in each cell, no background, text, gaps, frame or panel borders. The atlas is ONE asset; whole reference cell alignment must remain exact.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/recruit-roster-v1/brawler-b-face-reference.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-586e395b-2839-438f-bfb0-c66dae3c7476.png",
+      "preserved_file": "brawler-b-faces.png"
+    },
+    {
+      "name": "brawler-b-conditions",
+      "args": {
+        "prompt": "Use case: precise-object-edit. ONE aligned CONDITION-OVERLAY ATLAS 2 columns by 2 rows using the exact supplied head/body positions. The repeated character is ONLY a PLACEMENT GUIDE: REMOVE all original character, face, hair, eyes, mouth, clothes and outline pixels. Output ONLY marks on real transparent backgrounds. Top-left: sparse dark-red dried-blood streak at image-right forehead/temple, one cheek fleck; no eye/lip covering. Top-right: simple muted brown mud smudges on cheeks/jaw and shirt, NO white fabric or replacement skin. Bottom-left: a SMALL plain off-white cloth forehead dressing ABOVE the eyebrows, about one-third of head width and thin, no eye covering. Bottom-right: translucent sickly desaturated pale-grey/green WASH shaped over forehead/cheek/neck skin only, open gaps for eyes/lips, no identity or facial lines. Precise full-cell registration, no rescaling of patches, no ghost portrait beneath them. Sparse broad 192px pixel clusters, no grain noise, photoreal texture, lighting, glow, text, cell borders or background.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/recruit-roster-v1/brawler-b-overlay-reference.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-65121fa7-4a6a-4bc5-82dc-417bec99c5b3.png",
+      "preserved_file": "brawler-b-conditions.png"
+    },
+    {
+      "name": "brawler-b-lighting",
+      "args": {
+        "prompt": "Use case: precise-object-edit. ONE transparent LIGHT-COVERAGE ATLAS 2 columns by 2 rows with exact full-cell registration to supplied character. Use the figure ONLY to place broad coverage; REMOVE all original skin/hair/material/identity details. Top-left: BLACK broad translucent shade coverage on far image-right face/neck/shoulder planes for a light arriving from upper IMAGE LEFT; subtle brow/nose/chin shade, keep near side transparent. Top-right: WHITE broad translucent highlight coverage on near image-left forehead/cheek/nose/shoulder planes for that same light; keep far side transparent. Bottom-left and bottom-right: softer versions of those same two masks, same head pose, DO NOT mirror the head. NO eyes, brows, mouth, face identity, clothing seams, hair strands or traced material texture in any mask. Only deliberately broad sparse pixel-art light/shadow coverage matching 192px native registration. Full silhouette exterior genuinely transparent; unaffected areas transparent. No background, text, border, halo, rectangular wash or colour. Engine will tint white coverage and control opacity independently.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/recruit-roster-v1/brawler-b-overlay-reference.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-320bb446-a181-4e0b-8d42-e970608a4f33.png",
+      "preserved_file": "brawler-b-lighting.png"
+    },
+    {
+      "name": "brawler-c-faces",
+      "args": {
+        "prompt": "Use case: precise-object-edit. ONE registered FACIAL-ANIMATION ATLAS from the supplied 3 column by 2 row reference, equal square cells, identical camera/scale/face registration in every cell. Keep all hair, skin, scars, facial hair, shirt and body pixels unchanged except the specified EYES/BROWS or MOUTH; don't repaint the rest or move the head. Top-left: HALF-CLOSED eyes, neutral mouth. Top-middle: FULLY CLOSED eyes with readable lids, neutral mouth. Top-right: neutral eyes and a SMALL partly open speaking mouth. Bottom-left: neutral eyes and a moderately OPEN speaking mouth, dark interior and subdued teeth. Bottom-middle: WORRIED raised/inward brows and tense closed mouth. Bottom-right: EXHAUSTED drooping lids/brows and a downturned closed mouth. Preserve EXACT identity, old scars, freckles and any facial hair around mouth in every cell. No grin or exaggerated expression, no other characters. Same neutral diffuse illumination, no new lamp cast. Crisp 192px pixel clusters, genuinely transparent exterior in each cell, no background, text, gaps, frame or panel borders. The atlas is ONE asset; whole reference cell alignment must remain exact.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/recruit-roster-v1/brawler-c-face-reference.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-6eab2c81-5bcd-47d3-a620-ff1e6700c6de.png",
+      "preserved_file": "brawler-c-faces.png"
+    },
+    {
+      "name": "brawler-c-conditions",
+      "args": {
+        "prompt": "Use case: precise-object-edit. ONE aligned CONDITION-OVERLAY ATLAS 2 columns by 2 rows using the exact supplied head/body positions. The repeated character is ONLY a PLACEMENT GUIDE: REMOVE all original character, face, hair, eyes, mouth, clothes and outline pixels. Output ONLY marks on real transparent backgrounds. Top-left: sparse dark-red dried-blood streak at image-right forehead/temple, one cheek fleck; no eye/lip covering. Top-right: simple muted brown mud smudges on cheeks/jaw and shirt, NO white fabric or replacement skin. Bottom-left: a SMALL plain off-white cloth forehead dressing ABOVE the eyebrows, about one-third of head width and thin, no eye covering. Bottom-right: translucent sickly desaturated pale-grey/green WASH shaped over forehead/cheek/neck skin only, open gaps for eyes/lips, no identity or facial lines. Precise full-cell registration, no rescaling of patches, no ghost portrait beneath them. Sparse broad 192px pixel clusters, no grain noise, photoreal texture, lighting, glow, text, cell borders or background.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/recruit-roster-v1/brawler-c-overlay-reference.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-1642b09d-c36c-411a-b623-3203db0b06b5.png",
+      "preserved_file": "brawler-c-conditions.png"
+    },
+    {
+      "name": "brawler-c-lighting",
+      "args": {
+        "prompt": "Use case: precise-object-edit. ONE transparent LIGHT-COVERAGE ATLAS 2 columns by 2 rows with exact full-cell registration to supplied character. Use the figure ONLY to place broad coverage; REMOVE all original skin/hair/material/identity details. Top-left: BLACK broad translucent shade coverage on far image-right face/neck/shoulder planes for a light arriving from upper IMAGE LEFT; subtle brow/nose/chin shade, keep near side transparent. Top-right: WHITE broad translucent highlight coverage on near image-left forehead/cheek/nose/shoulder planes for that same light; keep far side transparent. Bottom-left and bottom-right: softer versions of those same two masks, same head pose, DO NOT mirror the head. NO eyes, brows, mouth, face identity, clothing seams, hair strands or traced material texture in any mask. Only deliberately broad sparse pixel-art light/shadow coverage matching 192px native registration. Full silhouette exterior genuinely transparent; unaffected areas transparent. No background, text, border, halo, rectangular wash or colour. Engine will tint white coverage and control opacity independently.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/recruit-roster-v1/brawler-c-overlay-reference.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-15d5139b-bc14-4c6e-abad-6540a6fa8368.png",
+      "preserved_file": "brawler-c-lighting.png"
+    }
+  ]
+}

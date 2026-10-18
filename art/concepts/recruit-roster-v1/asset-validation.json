@@ -1,0 +1,2625 @@
+{
+  "issue": 82,
+  "new_portraits": 7,
+  "total_portraits": 9,
+  "canvas": [
+    192,
+    192
+  ],
+  "master_transform": {
+    "resize_full_square": [
+      184,
+      184
+    ],
+    "offset": [
+      4,
+      4
+    ]
+  },
+  "eye_region": [
+    73,
+    51,
+    142,
+    82
+  ],
+  "mouth_region": [
+    82,
+    89,
+    132,
+    112
+  ],
+  "registration": {
+    "warden-b": {
+      "frames": [
+        {
+          "uniform_scale": 0.8210526315789474,
+          "scaled_canvas": [
+            158,
+            158
+          ],
+          "offset": [
+            12,
+            12
+          ],
+          "refinement": [
+            1,
+            0
+          ],
+          "source_head_bounds": [
+            53,
+            13,
+            148,
+            105
+          ],
+          "target_head_bounds": [
+            56,
+            23,
+            134,
+            105
+          ]
+        },
+        {
+          "uniform_scale": 0.8125,
+          "scaled_canvas": [
+            156,
+            156
+          ],
+          "offset": [
+            23,
+            12
+          ],
+          "refinement": [
+            0,
+            1
+          ],
+          "source_head_bounds": [
+            41,
+            13,
+            137,
+            105
+          ],
+          "target_head_bounds": [
+            56,
+            23,
+            134,
+            105
+          ]
+        },
+        {
+          "uniform_scale": 0.8125,
+          "scaled_canvas": [
+            156,
+            156
+          ],
+          "offset": [
+            23,
+            12
+          ],
+          "refinement": [
+            0,
+            1
+          ],
+          "source_head_bounds": [
+            41,
+            13,
+            137,
+            105
+          ],
+          "target_head_bounds": [
+            56,
+            23,
+            134,
+            105
+          ]
+        },
+        {
+          "uniform_scale": 0.8210526315789474,
+          "scaled_canvas": [
+            158,
+            158
+          ],
+          "offset": [
+            12,
+            12
+          ],
+          "refinement": [
+            1,
+            0
+          ],
+          "source_head_bounds": [
+            53,
+            13,
+            148,
+            105
+          ],
+          "target_head_bounds": [
+            56,
+            23,
+            134,
+            105
+          ]
+        },
+        {
+          "uniform_scale": 0.8125,
+          "scaled_canvas": [
+            156,
+            156
+          ],
+          "offset": [
+            23,
+            12
+          ],
+          "refinement": [
+            0,
+            1
+          ],
+          "source_head_bounds": [
+            41,
+            13,
+            137,
+            105
+          ],
+          "target_head_bounds": [
+            56,
+            23,
+            134,
+            105
+          ]
+        },
+        {
+          "uniform_scale": 0.8125,
+          "scaled_canvas": [
+            156,
+            156
+          ],
+          "offset": [
+            23,
+            12
+          ],
+          "refinement": [
+            0,
+            1
+          ],
+          "source_head_bounds": [
+            41,
+            13,
+            137,
+            105
+          ],
+          "target_head_bounds": [
+            56,
+            23,
+            134,
+            105
+          ]
+        }
+      ],
+      "bandage": {
+        "source_bounds": [
+          80,
+          43,
+          129,
+          67
+        ],
+        "top": 45,
+        "max_size": [
+          72,
+          14
+        ]
+      }
+    },
+    "warden-c": {
+      "frames": [
+        {
+          "uniform_scale": 0.978494623655914,
+          "scaled_canvas": [
+            188,
+            188
+          ],
+          "offset": [
+            2,
+            1
+          ],
+          "refinement": [
+            -1,
+            1
+          ],
+          "source_head_bounds": [
+            49,
+            13,
+            142,
+            105
+          ],
+          "target_head_bounds": [
+            50,
+            14,
+            141,
+            105
+          ]
+        },
+        {
+          "uniform_scale": 0.978494623655914,
+          "scaled_canvas": [
+            188,
+            188
+          ],
+          "offset": [
+            2,
+            1
+          ],
+          "refinement": [
+            -1,
+            1
+          ],
+          "source_head_bounds": [
+            49,
+            13,
+            142,
+            105
+          ],
+          "target_head_bounds": [
+            50,
+            14,
+            141,
+            105
+          ]
+        },
+        {
+          "uniform_scale": 0.978494623655914,
+          "scaled_canvas": [
+            188,
+            188
+          ],
+          "offset": [
+            2,
+            1
+          ],
+          "refinement": [
+            -1,
+            1
+          ],
+          "source_head_bounds": [
+            49,
+            13,
+            142,
+            105
+          ],
+          "target_head_bounds": [
+            50,
+            14,
+            141,
+            105
+          ]
+        },
+        {
+          "uniform_scale": 0.978494623655914,
+          "scaled_canvas": [
+            188,
+            188
+          ],
+          "offset": [
+            2,
+            1
+          ],
+          "refinement": [
+            -1,
+            1
+          ],
+          "source_head_bounds": [
+            49,
+            13,
+            142,
+            105
+          ],
+          "target_head_bounds": [
+            50,
+            14,
+            141,
+            105
+          ]
+        },
+        {
+          "uniform_scale": 0.978494623655914,
+          "scaled_canvas": [
+            188,
+            188
+          ],
+          "offset": [
+            2,
+            1
+          ],
+          "refinement": [
+            -1,
+            1
+          ],
+          "source_head_bounds": [
+            49,
+            13,
+            142,
+            105
+          ],
+          "target_head_bounds": [
+            50,
+            14,
+            141,
+            105
+          ]
+        },
+        {
+          "uniform_scale": 0.978494623655914,
+          "scaled_canvas": [
+            188,
+            188
+          ],
+          "offset": [
+            2,
+            1
+          ],
+          "refinement": [
+            -1,
+            1
+          ],
+          "source_head_bounds": [
+            49,
+            13,
+            142,
+            105
+          ],
+          "target_head_bounds": [
+            50,
+            14,
+            141,
+            105
+          ]
+        }
+      ],
+      "bandage": {
+        "source_bounds": [
+          89,
+          37,
+          135,
+          60
+        ],
+        "top": 45,
+        "max_size": [
+          72,
+          14
+        ]
+      }
+    },
+    "scout-b": {
+      "frames": [
+        {
+          "uniform_scale": 0.9019607843137255,
+          "scaled_canvas": [
+            173,
+            173
+          ],
+          "offset": [
+            8,
+            6
+          ],
+          "refinement": [
+            -1,
+            0
+          ],
+          "source_head_bounds": [
+            45,
+            10,
+            147,
+            105
+          ],
+          "target_head_bounds": [
+            49,
+            15,
+            141,
+            105
+          ]
+        },
+        {
+          "uniform_scale": 0.9019607843137255,
+          "scaled_canvas": [
+            173,
+            173
+          ],
+          "offset": [
+            9,
+            6
+          ],
+          "refinement": [
+            -1,
+            0
+          ],
+          "source_head_bounds": [
+            44,
+            10,
+            146,
+            105
+          ],
+          "target_head_bounds": [
+            49,
+            15,
+            141,
+            105
+          ]
+        },
+        {
+          "uniform_scale": 0.9019607843137255,
+          "scaled_canvas": [
+            173,
+            173
+          ],
+          "offset": [
+            11,
+            6
+          ],
+          "refinement": [
+            -1,
+            0
+          ],
+          "source_head_bounds": [
+            42,
+            10,
+            144,
+            105
+          ],
+          "target_head_bounds": [
+            49,
+            15,
+            141,
+            105
+          ]
+        },
+        {
+          "uniform_scale": 0.8932038834951457,
+          "scaled_canvas": [
+            171,
+            171
+          ],
+          "offset": [
+            9,
+            6
+          ],
+          "refinement": [
+            -1,
+            2
+          ],
+          "source_head_bounds": [
+            45,
+            10,
+            148,
+            105
+          ],
+          "target_head_bounds": [
+            49,
+            15,
+            141,
+            105
+          ]
+        },
+        {
+          "uniform_scale": 0.9019607843137255,
+          "scaled_canvas": [
+            173,
+            173
+          ],
+          "offset": [
+            9,
+            6
+          ],
+          "refinement": [
+            -1,
+            1
+          ],
+          "source_head_bounds": [
+            44,
+            10,
+            146,
+            105
+          ],
+          "target_head_bounds": [
+            49,
+            15,
+            141,
+            105
+          ]
+        },
+        {
+          "uniform_scale": 0.9019607843137255,
+          "scaled_canvas": [
+            173,
+            173
+          ],
+          "offset": [
+            11,
+            6
+          ],
+          "refinement": [
+            -1,
+            0
+          ],
+          "source_head_bounds": [
+            42,
+            10,
+            144,
+            105
+          ],
+          "target_head_bounds": [
+            49,
+            15,
+            141,
+            105
+          ]
+        }
+      ],
+      "bandage": {
+        "source_bounds": [
+          68,
+          30,
+          140,
+          58
+        ],
+        "top": 45,
+        "max_size": [
+          72,
+          14
+        ]
+      }
+    },
+    "scout-c": {
+      "frames": [
+        {
+          "uniform_scale": 0.8478260869565217,
+          "scaled_canvas": [
+            163,
+            163
+          ],
+          "offset": [
+            15,
+            14
+          ],
+          "refinement": [
+            1,
+            -2
+          ],
+          "source_head_bounds": [
+            48,
+            10,
+            140,
+            105
+          ],
+          "target_head_bounds": [
+            56,
+            22,
+            134,
+            105
+          ]
+        },
+        {
+          "uniform_scale": 0.8478260869565217,
+          "scaled_canvas": [
+            163,
+            163
+          ],
+          "offset": [
+            15,
+            14
+          ],
+          "refinement": [
+            1,
+            -2
+          ],
+          "source_head_bounds": [
+            48,
+            10,
+            140,
+            105
+          ],
+          "target_head_bounds": [
+            56,
+            22,
+            134,
+            105
+          ]
+        },
+        {
+          "uniform_scale": 0.8478260869565217,
+          "scaled_canvas": [
+            163,
+            163
+          ],
+          "offset": [
+            15,
+            14
+          ],
+          "refinement": [
+            1,
+            -2
+          ],
+          "source_head_bounds": [
+            48,
+            10,
+            140,
+            105
+          ],
+          "target_head_bounds": [
+            56,
+            22,
+            134,
+            105
+          ]
+        },
+        {
+          "uniform_scale": 0.8478260869565217,
+          "scaled_canvas": [
+            163,
+            163
+          ],
+          "offset": [
+            15,
+            14
+          ],
+          "refinement": [
+            1,
+            -2
+          ],
+          "source_head_bounds": [
+            48,
+            10,
+            140,
+            105
+          ],
+          "target_head_bounds": [
+            56,
+            22,
+            134,
+            105
+          ]
+        },
+        {
+          "uniform_scale": 0.8478260869565217,
+          "scaled_canvas": [
+            163,
+            163
+          ],
+          "offset": [
+            15,
+            14
+          ],
+          "refinement": [
+            1,
+            -1
+          ],
+          "source_head_bounds": [
+            48,
+            10,
+            140,
+            105
+          ],
+          "target_head_bounds": [
+            56,
+            22,
+            134,
+            105
+          ]
+        },
+        {
+          "uniform_scale": 0.8478260869565217,
+          "scaled_canvas": [
+            163,
+            163
+          ],
+          "offset": [
+            15,
+            14
+          ],
+          "refinement": [
+            1,
+            -2
+          ],
+          "source_head_bounds": [
+            48,
+            10,
+            140,
+            105
+          ],
+          "target_head_bounds": [
+            56,
+            22,
+            134,
+            105
+          ]
+        }
+      ],
+      "bandage": {
+        "source_bounds": [
+          83,
+          38,
+          138,
+          60
+        ],
+        "top": 45,
+        "max_size": [
+          72,
+          14
+        ]
+      }
+    },
+    "brawler-a": {
+      "frames": [
+        {
+          "uniform_scale": 1.0,
+          "scaled_canvas": [
+            192,
+            192
+          ],
+          "offset": [
+            0,
+            -1
+          ],
+          "refinement": [
+            0,
+            1
+          ],
+          "source_head_bounds": [
+            54,
+            13,
+            144,
+            105
+          ],
+          "target_head_bounds": [
+            54,
+            12,
+            144,
+            105
+          ]
+        },
+        {
+          "uniform_scale": 1.0,
+          "scaled_canvas": [
+            192,
+            192
+          ],
+          "offset": [
+            0,
+            -1
+          ],
+          "refinement": [
+            0,
+            1
+          ],
+          "source_head_bounds": [
+            54,
+            13,
+            144,
+            105
+          ],
+          "target_head_bounds": [
+            54,
+            12,
+            144,
+            105
+          ]
+        },
+        {
+          "uniform_scale": 1.0,
+          "scaled_canvas": [
+            192,
+            192
+          ],
+          "offset": [
+            0,
+            -1
+          ],
+          "refinement": [
+            0,
+            1
+          ],
+          "source_head_bounds": [
+            54,
+            13,
+            144,
+            105
+          ],
+          "target_head_bounds": [
+            54,
+            12,
+            144,
+            105
+          ]
+        },
+        {
+          "uniform_scale": 1.0,
+          "scaled_canvas": [
+            192,
+            192
+          ],
+          "offset": [
+            0,
+            -1
+          ],
+          "refinement": [
+            0,
+            1
+          ],
+          "source_head_bounds": [
+            54,
+            13,
+            144,
+            105
+          ],
+          "target_head_bounds": [
+            54,
+            12,
+            144,
+            105
+          ]
+        },
+        {
+          "uniform_scale": 1.0,
+          "scaled_canvas": [
+            192,
+            192
+          ],
+          "offset": [
+            0,
+            -1
+          ],
+          "refinement": [
+            0,
+            1
+          ],
+          "source_head_bounds": [
+            54,
+            13,
+            144,
+            105
+          ],
+          "target_head_bounds": [
+            54,
+            12,
+            144,
+            105
+          ]
+        },
+        {
+          "uniform_scale": 1.0,
+          "scaled_canvas": [
+            192,
+            192
+          ],
+          "offset": [
+            0,
+            -1
+          ],
+          "refinement": [
+            0,
+            1
+          ],
+          "source_head_bounds": [
+            54,
+            13,
+            144,
+            105
+          ],
+          "target_head_bounds": [
+            54,
+            12,
+            144,
+            105
+          ]
+        }
+      ],
+      "bandage": {
+        "source_bounds": [
+          88,
+          41,
+          135,
+          65
+        ],
+        "top": 45,
+        "max_size": [
+          72,
+          14
+        ]
+      }
+    },
+    "brawler-b": {
+      "frames": [
+        {
+          "uniform_scale": 0.8210526315789474,
+          "scaled_canvas": [
+            158,
+            158
+          ],
+          "offset": [
+            17,
+            10
+          ],
+          "refinement": [
+            -1,
+            -2
+          ],
+          "source_head_bounds": [
+            48,
+            20,
+            143,
+            105
+          ],
+          "target_head_bounds": [
+            56,
+            26,
+            134,
+            105
+          ]
+        },
+        {
+          "uniform_scale": 0.8125,
+          "scaled_canvas": [
+            156,
+            156
+          ],
+          "offset": [
+            18,
+            10
+          ],
+          "refinement": [
+            0,
+            0
+          ],
+          "source_head_bounds": [
+            47,
+            20,
+            143,
+            105
+          ],
+          "target_head_bounds": [
+            56,
+            26,
+            134,
+            105
+          ]
+        },
+        {
+          "uniform_scale": 0.8125,
+          "scaled_canvas": [
+            156,
+            156
+          ],
+          "offset": [
+            18,
+            10
+          ],
+          "refinement": [
+            0,
+            0
+          ],
+          "source_head_bounds": [
+            47,
+            20,
+            143,
+            105
+          ],
+          "target_head_bounds": [
+            56,
+            26,
+            134,
+            105
+          ]
+        },
+        {
+          "uniform_scale": 0.8210526315789474,
+          "scaled_canvas": [
+            158,
+            158
+          ],
+          "offset": [
+            17,
+            14
+          ],
+          "refinement": [
+            -1,
+            -2
+          ],
+          "source_head_bounds": [
+            48,
+            15,
+            143,
+            105
+          ],
+          "target_head_bounds": [
+            56,
+            26,
+            134,
+            105
+          ]
+        },
+        {
+          "uniform_scale": 0.8125,
+          "scaled_canvas": [
+            156,
+            156
+          ],
+          "offset": [
+            18,
+            15
+          ],
+          "refinement": [
+            -1,
+            -2
+          ],
+          "source_head_bounds": [
+            47,
+            14,
+            143,
+            105
+          ],
+          "target_head_bounds": [
+            56,
+            26,
+            134,
+            105
+          ]
+        },
+        {
+          "uniform_scale": 0.8125,
+          "scaled_canvas": [
+            156,
+            156
+          ],
+          "offset": [
+            18,
+            15
+          ],
+          "refinement": [
+            -1,
+            -2
+          ],
+          "source_head_bounds": [
+            47,
+            14,
+            143,
+            105
+          ],
+          "target_head_bounds": [
+            56,
+            26,
+            134,
+            105
+          ]
+        }
+      ],
+      "bandage": {
+        "source_bounds": [
+          90,
+          42,
+          136,
+          63
+        ],
+        "top": 45,
+        "max_size": [
+          72,
+          14
+        ]
+      }
+    },
+    "brawler-c": {
+      "frames": [
+        {
+          "uniform_scale": 1.0,
+          "scaled_canvas": [
+            192,
+            192
+          ],
+          "offset": [
+            0,
+            0
+          ],
+          "refinement": [
+            0,
+            0
+          ],
+          "source_head_bounds": [
+            54,
+            16,
+            136,
+            105
+          ],
+          "target_head_bounds": [
+            54,
+            16,
+            136,
+            105
+          ]
+        },
+        {
+          "uniform_scale": 1.0,
+          "scaled_canvas": [
+            192,
+            192
+          ],
+          "offset": [
+            0,
+            0
+          ],
+          "refinement": [
+            0,
+            0
+          ],
+          "source_head_bounds": [
+            54,
+            16,
+            136,
+            105
+          ],
+          "target_head_bounds": [
+            54,
+            16,
+            136,
+            105
+          ]
+        },
+        {
+          "uniform_scale": 1.0,
+          "scaled_canvas": [
+            192,
+            192
+          ],
+          "offset": [
+            0,
+            0
+          ],
+          "refinement": [
+            0,
+            0
+          ],
+          "source_head_bounds": [
+            54,
+            16,
+            136,
+            105
+          ],
+          "target_head_bounds": [
+            54,
+            16,
+            136,
+            105
+          ]
+        },
+        {
+          "uniform_scale": 1.0,
+          "scaled_canvas": [
+            192,
+            192
+          ],
+          "offset": [
+            0,
+            0
+          ],
+          "refinement": [
+            0,
+            0
+          ],
+          "source_head_bounds": [
+            54,
+            16,
+            136,
+            105
+          ],
+          "target_head_bounds": [
+            54,
+            16,
+            136,
+            105
+          ]
+        },
+        {
+          "uniform_scale": 1.0,
+          "scaled_canvas": [
+            192,
+            192
+          ],
+          "offset": [
+            0,
+            0
+          ],
+          "refinement": [
+            0,
+            0
+          ],
+          "source_head_bounds": [
+            54,
+            16,
+            136,
+            105
+          ],
+          "target_head_bounds": [
+            54,
+            16,
+            136,
+            105
+          ]
+        },
+        {
+          "uniform_scale": 1.0,
+          "scaled_canvas": [
+            192,
+            192
+          ],
+          "offset": [
+            0,
+            0
+          ],
+          "refinement": [
+            0,
+            0
+          ],
+          "source_head_bounds": [
+            54,
+            16,
+            136,
+            105
+          ],
+          "target_head_bounds": [
+            54,
+            16,
+            136,
+            105
+          ]
+        }
+      ],
+      "bandage": {
+        "source_bounds": [
+          108,
+          32,
+          144,
+          58
+        ],
+        "top": 45,
+        "max_size": [
+          72,
+          14
+        ]
+      }
+    }
+  },
+  "assets": {
+    "brawler-a/bandage.png": {
+      "bounds": [
+        88,
+        45,
+        115,
+        59
+      ],
+      "colours": 8
+    },
+    "brawler-a/blood.png": {
+      "bounds": [
+        132,
+        30,
+        144,
+        61
+      ],
+      "colours": 7
+    },
+    "brawler-a/dirt.png": {
+      "bounds": [
+        8,
+        78,
+        170,
+        188
+      ],
+      "colours": 1
+    },
+    "brawler-a/eyes-closed.png": {
+      "bounds": [
+        73,
+        51,
+        142,
+        82
+      ],
+      "colours": 23
+    },
+    "brawler-a/eyes-exhausted.png": {
+      "bounds": [
+        73,
+        51,
+        142,
+        82
+      ],
+      "colours": 24
+    },
+    "brawler-a/eyes-half.png": {
+      "bounds": [
+        73,
+        51,
+        142,
+        82
+      ],
+      "colours": 23
+    },
+    "brawler-a/eyes-neutral.png": {
+      "bounds": [
+        73,
+        51,
+        142,
+        82
+      ],
+      "colours": 30
+    },
+    "brawler-a/eyes-worried.png": {
+      "bounds": [
+        73,
+        51,
+        142,
+        82
+      ],
+      "colours": 28
+    },
+    "brawler-a/head.png": {
+      "bounds": [
+        28,
+        12,
+        164,
+        144
+      ],
+      "colours": 32
+    },
+    "brawler-a/highlight-left.png": {
+      "bounds": [
+        6,
+        12,
+        114,
+        188
+      ],
+      "colours": 1
+    },
+    "brawler-a/mouth-exhausted.png": {
+      "bounds": [
+        82,
+        89,
+        132,
+        112
+      ],
+      "colours": 20
+    },
+    "brawler-a/mouth-neutral.png": {
+      "bounds": [
+        82,
+        89,
+        132,
+        112
+      ],
+      "colours": 21
+    },
+    "brawler-a/mouth-open.png": {
+      "bounds": [
+        82,
+        89,
+        132,
+        112
+      ],
+      "colours": 25
+    },
+    "brawler-a/mouth-small.png": {
+      "bounds": [
+        82,
+        89,
+        132,
+        112
+      ],
+      "colours": 24
+    },
+    "brawler-a/mouth-worried.png": {
+      "bounds": [
+        82,
+        89,
+        132,
+        112
+      ],
+      "colours": 18
+    },
+    "brawler-a/pallor.png": {
+      "bounds": [
+        61,
+        37,
+        135,
+        144
+      ],
+      "colours": 8
+    },
+    "brawler-a/preview.png": {
+      "bounds": [
+        4,
+        12,
+        188,
+        188
+      ],
+      "colours": 69
+    },
+    "brawler-a/shadow-left.png": {
+      "bounds": [
+        6,
+        12,
+        188,
+        188
+      ],
+      "colours": 1
+    },
+    "brawler-b/bandage.png": {
+      "bounds": [
+        86,
+        45,
+        117,
+        59
+      ],
+      "colours": 8
+    },
+    "brawler-b/blood.png": {
+      "bounds": [
+        124,
+        50,
+        131,
+        97
+      ],
+      "colours": 8
+    },
+    "brawler-b/dirt.png": {
+      "bounds": [
+        18,
+        84,
+        179,
+        181
+      ],
+      "colours": 1
+    },
+    "brawler-b/eyes-closed.png": {
+      "bounds": [
+        73,
+        51,
+        134,
+        82
+      ],
+      "colours": 20
+    },
+    "brawler-b/eyes-exhausted.png": {
+      "bounds": [
+        73,
+        51,
+        133,
+        82
+      ],
+      "colours": 23
+    },
+    "brawler-b/eyes-half.png": {
+      "bounds": [
+        73,
+        51,
+        134,
+        82
+      ],
+      "colours": 21
+    },
+    "brawler-b/eyes-neutral.png": {
+      "bounds": [
+        73,
+        51,
+        134,
+        82
+      ],
+      "colours": 26
+    },
+    "brawler-b/eyes-worried.png": {
+      "bounds": [
+        73,
+        51,
+        133,
+        82
+      ],
+      "colours": 29
+    },
+    "brawler-b/head.png": {
+      "bounds": [
+        28,
+        26,
+        164,
+        144
+      ],
+      "colours": 33
+    },
+    "brawler-b/highlight-left.png": {
+      "bounds": [
+        4,
+        26,
+        126,
+        188
+      ],
+      "colours": 1
+    },
+    "brawler-b/mouth-exhausted.png": {
+      "bounds": [
+        82,
+        89,
+        129,
+        112
+      ],
+      "colours": 20
+    },
+    "brawler-b/mouth-neutral.png": {
+      "bounds": [
+        82,
+        89,
+        129,
+        112
+      ],
+      "colours": 20
+    },
+    "brawler-b/mouth-open.png": {
+      "bounds": [
+        82,
+        89,
+        129,
+        112
+      ],
+      "colours": 21
+    },
+    "brawler-b/mouth-small.png": {
+      "bounds": [
+        82,
+        89,
+        129,
+        112
+      ],
+      "colours": 20
+    },
+    "brawler-b/mouth-worried.png": {
+      "bounds": [
+        82,
+        89,
+        129,
+        112
+      ],
+      "colours": 20
+    },
+    "brawler-b/pallor.png": {
+      "bounds": [
+        62,
+        37,
+        132,
+        144
+      ],
+      "colours": 8
+    },
+    "brawler-b/preview.png": {
+      "bounds": [
+        4,
+        26,
+        188,
+        188
+      ],
+      "colours": 65
+    },
+    "brawler-b/shadow-left.png": {
+      "bounds": [
+        12,
+        26,
+        188,
+        188
+      ],
+      "colours": 1
+    },
+    "brawler-c/bandage.png": {
+      "bounds": [
+        92,
+        45,
+        111,
+        59
+      ],
+      "colours": 8
+    },
+    "brawler-c/blood.png": {
+      "bounds": [
+        125,
+        33,
+        135,
+        106
+      ],
+      "colours": 8
+    },
+    "brawler-c/dirt.png": {
+      "bounds": [
+        8,
+        71,
+        177,
+        184
+      ],
+      "colours": 1
+    },
+    "brawler-c/eyes-closed.png": {
+      "bounds": [
+        73,
+        51,
+        136,
+        82
+      ],
+      "colours": 23
+    },
+    "brawler-c/eyes-exhausted.png": {
+      "bounds": [
+        73,
+        51,
+        136,
+        82
+      ],
+      "colours": 23
+    },
+    "brawler-c/eyes-half.png": {
+      "bounds": [
+        73,
+        51,
+        136,
+        82
+      ],
+      "colours": 22
+    },
+    "brawler-c/eyes-neutral.png": {
+      "bounds": [
+        73,
+        51,
+        136,
+        82
+      ],
+      "colours": 29
+    },
+    "brawler-c/eyes-worried.png": {
+      "bounds": [
+        73,
+        51,
+        136,
+        82
+      ],
+      "colours": 29
+    },
+    "brawler-c/head.png": {
+      "bounds": [
+        28,
+        16,
+        164,
+        144
+      ],
+      "colours": 40
+    },
+    "brawler-c/highlight-left.png": {
+      "bounds": [
+        4,
+        17,
+        132,
+        188
+      ],
+      "colours": 1
+    },
+    "brawler-c/mouth-exhausted.png": {
+      "bounds": [
+        82,
+        89,
+        131,
+        112
+      ],
+      "colours": 22
+    },
+    "brawler-c/mouth-neutral.png": {
+      "bounds": [
+        82,
+        89,
+        131,
+        112
+      ],
+      "colours": 22
+    },
+    "brawler-c/mouth-open.png": {
+      "bounds": [
+        82,
+        89,
+        131,
+        112
+      ],
+      "colours": 22
+    },
+    "brawler-c/mouth-small.png": {
+      "bounds": [
+        82,
+        89,
+        131,
+        112
+      ],
+      "colours": 22
+    },
+    "brawler-c/mouth-worried.png": {
+      "bounds": [
+        82,
+        89,
+        131,
+        112
+      ],
+      "colours": 22
+    },
+    "brawler-c/pallor.png": {
+      "bounds": [
+        61,
+        37,
+        136,
+        144
+      ],
+      "colours": 8
+    },
+    "brawler-c/preview.png": {
+      "bounds": [
+        4,
+        16,
+        188,
+        188
+      ],
+      "colours": 69
+    },
+    "brawler-c/shadow-left.png": {
+      "bounds": [
+        4,
+        16,
+        188,
+        188
+      ],
+      "colours": 1
+    },
+    "scout-b/bandage.png": {
+      "bounds": [
+        83,
+        45,
+        119,
+        59
+      ],
+      "colours": 8
+    },
+    "scout-b/blood.png": {
+      "bounds": [
+        114,
+        28,
+        140,
+        71
+      ],
+      "colours": 8
+    },
+    "scout-b/dirt.png": {
+      "bounds": [
+        11,
+        86,
+        182,
+        188
+      ],
+      "colours": 1
+    },
+    "scout-b/eyes-closed.png": {
+      "bounds": [
+        73,
+        51,
+        140,
+        82
+      ],
+      "colours": 23
+    },
+    "scout-b/eyes-exhausted.png": {
+      "bounds": [
+        73,
+        51,
+        140,
+        82
+      ],
+      "colours": 26
+    },
+    "scout-b/eyes-half.png": {
+      "bounds": [
+        73,
+        51,
+        139,
+        82
+      ],
+      "colours": 24
+    },
+    "scout-b/eyes-neutral.png": {
+      "bounds": [
+        73,
+        51,
+        141,
+        82
+      ],
+      "colours": 31
+    },
+    "scout-b/eyes-worried.png": {
+      "bounds": [
+        73,
+        51,
+        140,
+        82
+      ],
+      "colours": 34
+    },
+    "scout-b/head.png": {
+      "bounds": [
+        28,
+        15,
+        164,
+        144
+      ],
+      "colours": 31
+    },
+    "scout-b/highlight-left.png": {
+      "bounds": [
+        4,
+        18,
+        114,
+        188
+      ],
+      "colours": 1
+    },
+    "scout-b/mouth-exhausted.png": {
+      "bounds": [
+        82,
+        89,
+        130,
+        112
+      ],
+      "colours": 19
+    },
+    "scout-b/mouth-neutral.png": {
+      "bounds": [
+        82,
+        89,
+        131,
+        112
+      ],
+      "colours": 21
+    },
+    "scout-b/mouth-open.png": {
+      "bounds": [
+        82,
+        89,
+        130,
+        112
+      ],
+      "colours": 23
+    },
+    "scout-b/mouth-small.png": {
+      "bounds": [
+        82,
+        89,
+        130,
+        112
+      ],
+      "colours": 24
+    },
+    "scout-b/mouth-worried.png": {
+      "bounds": [
+        82,
+        89,
+        130,
+        112
+      ],
+      "colours": 17
+    },
+    "scout-b/pallor.png": {
+      "bounds": [
+        61,
+        37,
+        133,
+        144
+      ],
+      "colours": 8
+    },
+    "scout-b/preview.png": {
+      "bounds": [
+        4,
+        15,
+        188,
+        188
+      ],
+      "colours": 67
+    },
+    "scout-b/shadow-left.png": {
+      "bounds": [
+        4,
+        15,
+        188,
+        188
+      ],
+      "colours": 1
+    },
+    "scout-c/bandage.png": {
+      "bounds": [
+        84,
+        45,
+        119,
+        59
+      ],
+      "colours": 8
+    },
+    "scout-c/blood.png": {
+      "bounds": [
+        122,
+        34,
+        133,
+        103
+      ],
+      "colours": 8
+    },
+    "scout-c/dirt.png": {
+      "bounds": [
+        20,
+        86,
+        162,
+        185
+      ],
+      "colours": 1
+    },
+    "scout-c/eyes-closed.png": {
+      "bounds": [
+        73,
+        51,
+        134,
+        82
+      ],
+      "colours": 22
+    },
+    "scout-c/eyes-exhausted.png": {
+      "bounds": [
+        73,
+        51,
+        134,
+        82
+      ],
+      "colours": 23
+    },
+    "scout-c/eyes-half.png": {
+      "bounds": [
+        73,
+        51,
+        134,
+        82
+      ],
+      "colours": 22
+    },
+    "scout-c/eyes-neutral.png": {
+      "bounds": [
+        73,
+        51,
+        134,
+        82
+      ],
+      "colours": 28
+    },
+    "scout-c/eyes-worried.png": {
+      "bounds": [
+        73,
+        51,
+        134,
+        82
+      ],
+      "colours": 32
+    },
+    "scout-c/head.png": {
+      "bounds": [
+        28,
+        22,
+        164,
+        144
+      ],
+      "colours": 31
+    },
+    "scout-c/highlight-left.png": {
+      "bounds": [
+        6,
+        22,
+        120,
+        188
+      ],
+      "colours": 1
+    },
+    "scout-c/mouth-exhausted.png": {
+      "bounds": [
+        82,
+        89,
+        129,
+        112
+      ],
+      "colours": 21
+    },
+    "scout-c/mouth-neutral.png": {
+      "bounds": [
+        82,
+        89,
+        129,
+        112
+      ],
+      "colours": 21
+    },
+    "scout-c/mouth-open.png": {
+      "bounds": [
+        82,
+        89,
+        129,
+        112
+      ],
+      "colours": 23
+    },
+    "scout-c/mouth-small.png": {
+      "bounds": [
+        82,
+        89,
+        129,
+        112
+      ],
+      "colours": 22
+    },
+    "scout-c/mouth-worried.png": {
+      "bounds": [
+        82,
+        89,
+        129,
+        112
+      ],
+      "colours": 22
+    },
+    "scout-c/pallor.png": {
+      "bounds": [
+        65,
+        37,
+        133,
+        144
+      ],
+      "colours": 8
+    },
+    "scout-c/preview.png": {
+      "bounds": [
+        4,
+        22,
+        188,
+        188
+      ],
+      "colours": 66
+    },
+    "scout-c/shadow-left.png": {
+      "bounds": [
+        12,
+        22,
+        188,
+        188
+      ],
+      "colours": 1
+    },
+    "warden-b/bandage.png": {
+      "bounds": [
+        87,
+        45,
+        116,
+        59
+      ],
+      "colours": 8
+    },
+    "warden-b/blood.png": {
+      "bounds": [
+        112,
+        37,
+        134,
+        98
+      ],
+      "colours": 8
+    },
+    "warden-b/dirt.png": {
+      "bounds": [
+        23,
+        77,
+        173,
+        183
+      ],
+      "colours": 1
+    },
+    "warden-b/eyes-closed.png": {
+      "bounds": [
+        73,
+        51,
+        134,
+        82
+      ],
+      "colours": 22
+    },
+    "warden-b/eyes-exhausted.png": {
+      "bounds": [
+        73,
+        51,
+        134,
+        82
+      ],
+      "colours": 26
+    },
+    "warden-b/eyes-half.png": {
+      "bounds": [
+        73,
+        51,
+        134,
+        82
+      ],
+      "colours": 22
+    },
+    "warden-b/eyes-neutral.png": {
+      "bounds": [
+        73,
+        51,
+        134,
+        82
+      ],
+      "colours": 26
+    },
+    "warden-b/eyes-worried.png": {
+      "bounds": [
+        73,
+        51,
+        134,
+        82
+      ],
+      "colours": 31
+    },
+    "warden-b/head.png": {
+      "bounds": [
+        28,
+        23,
+        164,
+        144
+      ],
+      "colours": 31
+    },
+    "warden-b/highlight-left.png": {
+      "bounds": [
+        6,
+        24,
+        132,
+        186
+      ],
+      "colours": 1
+    },
+    "warden-b/mouth-exhausted.png": {
+      "bounds": [
+        82,
+        89,
+        130,
+        112
+      ],
+      "colours": 22
+    },
+    "warden-b/mouth-neutral.png": {
+      "bounds": [
+        82,
+        89,
+        130,
+        112
+      ],
+      "colours": 21
+    },
+    "warden-b/mouth-open.png": {
+      "bounds": [
+        82,
+        89,
+        130,
+        112
+      ],
+      "colours": 21
+    },
+    "warden-b/mouth-small.png": {
+      "bounds": [
+        82,
+        89,
+        130,
+        112
+      ],
+      "colours": 21
+    },
+    "warden-b/mouth-worried.png": {
+      "bounds": [
+        82,
+        89,
+        130,
+        112
+      ],
+      "colours": 22
+    },
+    "warden-b/pallor.png": {
+      "bounds": [
+        70,
+        42,
+        133,
+        143
+      ],
+      "colours": 8
+    },
+    "warden-b/preview.png": {
+      "bounds": [
+        4,
+        23,
+        188,
+        188
+      ],
+      "colours": 65
+    },
+    "warden-b/shadow-left.png": {
+      "bounds": [
+        6,
+        23,
+        188,
+        186
+      ],
+      "colours": 1
+    },
+    "warden-c/bandage.png": {
+      "bounds": [
+        87,
+        45,
+        115,
+        59
+      ],
+      "colours": 8
+    },
+    "warden-c/blood.png": {
+      "bounds": [
+        119,
+        38,
+        139,
+        100
+      ],
+      "colours": 8
+    },
+    "warden-c/dirt.png": {
+      "bounds": [
+        23,
+        77,
+        177,
+        186
+      ],
+      "colours": 1
+    },
+    "warden-c/eyes-closed.png": {
+      "bounds": [
+        73,
+        51,
+        140,
+        82
+      ],
+      "colours": 23
+    },
+    "warden-c/eyes-exhausted.png": {
+      "bounds": [
+        73,
+        51,
+        139,
+        82
+      ],
+      "colours": 26
+    },
+    "warden-c/eyes-half.png": {
+      "bounds": [
+        73,
+        51,
+        140,
+        82
+      ],
+      "colours": 23
+    },
+    "warden-c/eyes-neutral.png": {
+      "bounds": [
+        73,
+        51,
+        141,
+        82
+      ],
+      "colours": 33
+    },
+    "warden-c/eyes-worried.png": {
+      "bounds": [
+        73,
+        51,
+        139,
+        82
+      ],
+      "colours": 32
+    },
+    "warden-c/head.png": {
+      "bounds": [
+        28,
+        14,
+        164,
+        144
+      ],
+      "colours": 33
+    },
+    "warden-c/highlight-left.png": {
+      "bounds": [
+        6,
+        15,
+        156,
+        188
+      ],
+      "colours": 1
+    },
+    "warden-c/mouth-exhausted.png": {
+      "bounds": [
+        82,
+        89,
+        131,
+        112
+      ],
+      "colours": 23
+    },
+    "warden-c/mouth-neutral.png": {
+      "bounds": [
+        82,
+        89,
+        132,
+        112
+      ],
+      "colours": 22
+    },
+    "warden-c/mouth-open.png": {
+      "bounds": [
+        82,
+        89,
+        131,
+        112
+      ],
+      "colours": 24
+    },
+    "warden-c/mouth-small.png": {
+      "bounds": [
+        82,
+        89,
+        131,
+        112
+      ],
+      "colours": 24
+    },
+    "warden-c/mouth-worried.png": {
+      "bounds": [
+        82,
+        89,
+        131,
+        112
+      ],
+      "colours": 23
+    },
+    "warden-c/pallor.png": {
+      "bounds": [
+        65,
+        42,
+        133,
+        140
+      ],
+      "colours": 8
+    },
+    "warden-c/preview.png": {
+      "bounds": [
+        4,
+        14,
+        188,
+        188
+      ],
+      "colours": 70
+    },
+    "warden-c/shadow-left.png": {
+      "bounds": [
+        6,
+        14,
+        188,
+        188
+      ],
+      "colours": 1
+    }
+  },
+  "failures": [],
+  "lighting_coverage": {
+    "shadow": "alpha * (255-luminance)/255",
+    "highlight": "alpha * clamp((luminance-110)/145,0,1)",
+    "cluster_grid": [
+      32,
+      32
+    ],
+    "clip": "composited silhouette"
+  },
+  "sha256": {
+    "art/portraits/recruit-roster-v1/brawler-a/bandage.png": "159b04c5d4c25c02a4b0df50767e4a853db4957699880469bc87d4f94d94efa8",
+    "art/portraits/recruit-roster-v1/brawler-a/blood.png": "21a0540415410e3654b0976d139b740906de42cbce0b6460378787912c3d20f0",
+    "art/portraits/recruit-roster-v1/brawler-a/dirt.png": "f0a5c40fd82fc6547cef825a767ef7153a38b43f5d0d906bb7f9322ca3b2df06",
+    "art/portraits/recruit-roster-v1/brawler-a/eyes-closed.png": "1f4c948f76b0eafdcf7606ee73ed9657993a9dc4dead98fb63df1b4842690401",
+    "art/portraits/recruit-roster-v1/brawler-a/eyes-exhausted.png": "d443365245cb68b8ea0e2668b6475f5cc8f63927e8e5afa1eab303ad0deca0b1",
+    "art/portraits/recruit-roster-v1/brawler-a/eyes-half.png": "bee725023567aef1c0fffa682a8d4de5a04c9b60d5d282f4d593f0eb1ae39620",
+    "art/portraits/recruit-roster-v1/brawler-a/eyes-neutral.png": "410d88cd7bfdfb661ffd8afa3a853a4abe9cee1b39a3b30f5e881acac14401c3",
+    "art/portraits/recruit-roster-v1/brawler-a/eyes-worried.png": "24d0742e8236da56a75c5ad109d5989c7c9a25176f78afcbb71158e23f1ac7c1",
+    "art/portraits/recruit-roster-v1/brawler-a/head.png": "8cae1f6382abd16a06459147785479ddc926ea014fda96fba66b7209ebaf4084",
+    "art/portraits/recruit-roster-v1/brawler-a/highlight-left.png": "3f54cb1e5f549949231b858e937a028f0e2cd61e78e51e7c65c289d191cccdeb",
+    "art/portraits/recruit-roster-v1/brawler-a/mouth-exhausted.png": "795b48984ebbd4171d22905f6daa6f0af73f79da47ea878a001a4b6d16727efe",
+    "art/portraits/recruit-roster-v1/brawler-a/mouth-neutral.png": "e8bf9a3f08e1f405bd4478c96b299278530333617326e7a5d618f40ab7291306",
+    "art/portraits/recruit-roster-v1/brawler-a/mouth-open.png": "b8ac0df90895d1ecd4b5fe686721f3c09b1ee8f3108bf368788e2e89aac6f8d3",
+    "art/portraits/recruit-roster-v1/brawler-a/mouth-small.png": "214aa0ef8b56f7887c82233d9131290688742df9ffadb6282ea82509b4684ead",
+    "art/portraits/recruit-roster-v1/brawler-a/mouth-worried.png": "1cf467630a1be4a836426276e2bd147aec8b0d1b9918a2fc0a3a62dd7554ae4d",
+    "art/portraits/recruit-roster-v1/brawler-a/pallor.png": "6df60a579a70d27891cce8ea3fb1a71a29075afd3ebb3439a554b04b3c730aeb",
+    "art/portraits/recruit-roster-v1/brawler-a/preview.png": "a271fe93d320673661a4d91aa3ced4ba48cdc76f939372507ca1cfd780e676eb",
+    "art/portraits/recruit-roster-v1/brawler-a/shadow-left.png": "a23bc64b9c2365b018d7c4d814790941bc78a6593c8bfb835051d0931856fb49",
+    "art/portraits/recruit-roster-v1/brawler-b/bandage.png": "28519e129081f1cec7e4f5fb9b9d53bc2005b5c0d11b81e48ec8a71dfed683dd",
+    "art/portraits/recruit-roster-v1/brawler-b/blood.png": "c2958e64434e116cac04d9c5b901ad0325be211146a042ad62e32bd62d682884",
+    "art/portraits/recruit-roster-v1/brawler-b/dirt.png": "0362615020343169d48740ec213dfc218c064681e281dddd27f3d10d29298f57",
+    "art/portraits/recruit-roster-v1/brawler-b/eyes-closed.png": "45d3dee0b8ed06397670b1687bf03ab9c6db3fb880b48c7ab16de7d8d73389cf",
+    "art/portraits/recruit-roster-v1/brawler-b/eyes-exhausted.png": "843ac958255eb567349da6a86d2f7d69d09af57f9182b22a4768dcc6600740bc",
+    "art/portraits/recruit-roster-v1/brawler-b/eyes-half.png": "8ed5fce341f5f0451cd2fd78433e94fa87522c288dd4ffaa4d3c1e260df778a0",
+    "art/portraits/recruit-roster-v1/brawler-b/eyes-neutral.png": "f1015873867fede1698e50d4a2a6ce46dd469448961912b1d883d767cbae6434",
+    "art/portraits/recruit-roster-v1/brawler-b/eyes-worried.png": "6233cbbbd739b8b4ac50f491d3c6527016c8320e45ba01cd0338084e1aa48059",
+    "art/portraits/recruit-roster-v1/brawler-b/head.png": "8ab0a9ebb16805705d2aa67f4e6e6b540d7f2caf3dc23527af4a12cfb9d2c80a",
+    "art/portraits/recruit-roster-v1/brawler-b/highlight-left.png": "9450fe9485397a426e9b2313a7cba6a5c61c7ef660076cb3db241c6030dc521c",
+    "art/portraits/recruit-roster-v1/brawler-b/mouth-exhausted.png": "41f7c290a835c269a763ac7ebeb708d655adf7837ef5f862ff0f1142df7b5d29",
+    "art/portraits/recruit-roster-v1/brawler-b/mouth-neutral.png": "d14c4470ad086280d36a4ffa891067c21ee78c0bdc0677991c97834fdfc41da2",
+    "art/portraits/recruit-roster-v1/brawler-b/mouth-open.png": "df7363d105e15b167753aa87cfadd02785365d98ad36a7fe87824a9aeaee1528",
+    "art/portraits/recruit-roster-v1/brawler-b/mouth-small.png": "04a9b0e4a1b6876574e6e8e8975b38dbe18817dd99798a89f33e8806a8eef375",
+    "art/portraits/recruit-roster-v1/brawler-b/mouth-worried.png": "bfbffd14fa3bc2024e1c73ff6639097761e886aebbe50fb02b914e092cc7b545",
+    "art/portraits/recruit-roster-v1/brawler-b/pallor.png": "81a6931473ab86deb6df412c4d859ce2ba77611a866187dbb0ecfda6311a2bc3",
+    "art/portraits/recruit-roster-v1/brawler-b/preview.png": "e1fd4a4b1a1809d017717d308af10519cdfd6a66c321cd9796499f531aa0ec4c",
+    "art/portraits/recruit-roster-v1/brawler-b/shadow-left.png": "c1a7cde224a5adf965cd5fd621ff1da3ffab68886b5c3e7b8e4cb231a712dc18",
+    "art/portraits/recruit-roster-v1/brawler-c/bandage.png": "61453a3a8ff0d953ceb388e4a8a0a7ba12d8652489f82cf6f14768ac61c0b705",
+    "art/portraits/recruit-roster-v1/brawler-c/blood.png": "e5615be354338165f23b0351636042491f2b36f5245a84a3b248aa5a01c00c3f",
+    "art/portraits/recruit-roster-v1/brawler-c/dirt.png": "0bd78554b412496af85defe55fd8d232f12ccf11dc6fb475d64f27802fbf4953",
+    "art/portraits/recruit-roster-v1/brawler-c/eyes-closed.png": "8e8fb4f664b863845029f533f401c79d869168d25f126735ced74e21b5890eaa",
+    "art/portraits/recruit-roster-v1/brawler-c/eyes-exhausted.png": "6a43597c67bd8dda437de1028a0de9a302f8debf2ba308ceb17dd13f315c21c9",
+    "art/portraits/recruit-roster-v1/brawler-c/eyes-half.png": "88d29f3ee84b8eb0a76f286741e19222b89199fcb80b39669e2770a6ed1002a7",
+    "art/portraits/recruit-roster-v1/brawler-c/eyes-neutral.png": "d0135d94fca45392da738997e4f05ec695d6f4dc254b01bf23406d1447b93a83",
+    "art/portraits/recruit-roster-v1/brawler-c/eyes-worried.png": "978c3ac8b16085e8807e801b2b16104256156769943c10991591188d097e52f1",
+    "art/portraits/recruit-roster-v1/brawler-c/head.png": "53b11b12fa3b711f3571259fd28c612475f626b430394e1c16caf9783ce923dc",
+    "art/portraits/recruit-roster-v1/brawler-c/highlight-left.png": "48448d3daff4be052bdaafbb5cb63a39c903fcf5076f874030974431bb2d5676",
+    "art/portraits/recruit-roster-v1/brawler-c/mouth-exhausted.png": "1cc2fce4f6c4cd399b795513babf065662002bba76efe4927ed9f9f545fcdd82",
+    "art/portraits/recruit-roster-v1/brawler-c/mouth-neutral.png": "307dbda4d0301baa027b20fbfd5f5bfc721a6051524cb9b4dcb00f4d1f2e8029",
+    "art/portraits/recruit-roster-v1/brawler-c/mouth-open.png": "65af55b6ba3eac061ddca65f5a65be642159fa441a7c4f185f70c4b4cef18a01",
+    "art/portraits/recruit-roster-v1/brawler-c/mouth-small.png": "4209d44d132d297a8462d1f764ff268b971ed5ae4eb0885f22322b370c7bfa97",
+    "art/portraits/recruit-roster-v1/brawler-c/mouth-worried.png": "a5f544b09071647a96ffce0217cae356310869fc1ccb4676774d23367bd68c8e",
+    "art/portraits/recruit-roster-v1/brawler-c/pallor.png": "420480b7c756bbdd88a955cd2053df2754b00bc79f3ccba33edd13a42e6dcf8d",
+    "art/portraits/recruit-roster-v1/brawler-c/preview.png": "787ec6ddc75951ee39770ca7a69240d3f8209dadaaef72d8a97a4d074b179274",
+    "art/portraits/recruit-roster-v1/brawler-c/shadow-left.png": "2fb6a2d67801c6223fc5d46c2d107af4f282c015ca107cd26858be2592457d12",
+    "art/portraits/recruit-roster-v1/scout-b/bandage.png": "6a779dc0871935bcb014cb4779b8ffc23f1604affde2da98769339c9e34db590",
+    "art/portraits/recruit-roster-v1/scout-b/blood.png": "db92d9774e2dfd7b4aa811d0042744fa74d25dc9b0d8b4b8ce6984c5b2b653c7",
+    "art/portraits/recruit-roster-v1/scout-b/dirt.png": "132e85b8401bc2beca0c18055d1a6566cd37e2ba1621d1479b6243d551dbb9de",
+    "art/portraits/recruit-roster-v1/scout-b/eyes-closed.png": "fef69f471220f9164d3c071922659a0486bf066a2570b9feefd4cffe2134bd07",
+    "art/portraits/recruit-roster-v1/scout-b/eyes-exhausted.png": "e4e3f1352765650b53501a857a50a1fce3b71b68a36002b437a801911a9f8486",
+    "art/portraits/recruit-roster-v1/scout-b/eyes-half.png": "588cc03e3665bad580d609955adafb22ef109054d7f4e489f1766971aa8dfe90",
+    "art/portraits/recruit-roster-v1/scout-b/eyes-neutral.png": "60e57c6f8d5463b5f81e75dedad75b883c0eef26c9a35e783cdccd129f41450f",
+    "art/portraits/recruit-roster-v1/scout-b/eyes-worried.png": "31dce7697fb55fa572fec14302977f9ffc6703a79873c26333eeedd9bbc802b7",
+    "art/portraits/recruit-roster-v1/scout-b/head.png": "6d02aa795388abf7c5760439239b27d7a6086950f14d3c53a26b262f8237596a",
+    "art/portraits/recruit-roster-v1/scout-b/highlight-left.png": "74b019d17ee1f067e08eabd358dc870e7e7b64cca13cc5e6ce6a59fb04cc105a",
+    "art/portraits/recruit-roster-v1/scout-b/mouth-exhausted.png": "01294f9f14c538a4cb196e30373f44ca67cede11cc2b851342501eaaa39e56dd",
+    "art/portraits/recruit-roster-v1/scout-b/mouth-neutral.png": "2a09ba474d784b2db07b80621537aa93e63650214be7681c0ad069c1e7b055d7",
+    "art/portraits/recruit-roster-v1/scout-b/mouth-open.png": "8f239a9f2ad153fab2ee56595e8fe02337aa8b0b068524b631a00f2c893e5baa",
+    "art/portraits/recruit-roster-v1/scout-b/mouth-small.png": "a3c88bfb1a88459c408f5968d1e272b75fab29f69495cd543cf50ca57b687fff",
+    "art/portraits/recruit-roster-v1/scout-b/mouth-worried.png": "cc1c90e9ecadc68914849d5d5f1f835887bf9b7a62dbf8f1361bb838970dcc63",
+    "art/portraits/recruit-roster-v1/scout-b/pallor.png": "1c173e66ba8487f250bf48f34bff558dcc710e65565d4b7c0993ec7dacaea9c1",
+    "art/portraits/recruit-roster-v1/scout-b/preview.png": "2b139f674e081169163eb743e95f18efcaf48958f243ffff57da13fc52111169",
+    "art/portraits/recruit-roster-v1/scout-b/shadow-left.png": "1382eb2b6e7135c1f552a62f936b7a4f3ec34e198fe33a91c263de28b7cb24d1",
+    "art/portraits/recruit-roster-v1/scout-c/bandage.png": "20c6bbd630cb60e7b2caa2272bdaf5be74be08e35bf1db683aa5a4c8a74d29af",
+    "art/portraits/recruit-roster-v1/scout-c/blood.png": "e374ba090c453fc83021ad892f46ca3b6aa6f4a43e5a232988892665e376b8fa",
+    "art/portraits/recruit-roster-v1/scout-c/dirt.png": "fed41868943e9d9c36cffd4af1a8ea37f86b50574d0447318698763b2b461497",
+    "art/portraits/recruit-roster-v1/scout-c/eyes-closed.png": "b8a482e3e29f08f4fef933e100a5b82796b29f564795f86ec32d62ea1984c036",
+    "art/portraits/recruit-roster-v1/scout-c/eyes-exhausted.png": "b5909ff89e91a47ae11aaaba175f7a5c56168b9f8e77ce9e9a025f9fdfb20247",
+    "art/portraits/recruit-roster-v1/scout-c/eyes-half.png": "3012527044fdc7260bce5046efdc6c147b0100e1786f0888e45529d7acbe7c9e",
+    "art/portraits/recruit-roster-v1/scout-c/eyes-neutral.png": "91e0b3cb5b80bc01fc73e53398938ff54e6e14d59c50fecf214236da48d32abd",
+    "art/portraits/recruit-roster-v1/scout-c/eyes-worried.png": "8e3470621d849416124780c60c9b61d1320dca1f9c3f98c1e1f5bf10a3cbe034",
+    "art/portraits/recruit-roster-v1/scout-c/head.png": "bcdb9af7775ecf230f0fa2532f98dbb5d1f74e473fbc4d41963dce265bdeb658",
+    "art/portraits/recruit-roster-v1/scout-c/highlight-left.png": "a67692af9f9cc6c3bf8f2fa47771d0f07b6213a46d6589d912fe87ce4a8b13e4",
+    "art/portraits/recruit-roster-v1/scout-c/mouth-exhausted.png": "8b659c14742362c823594b41c7e1c634bc4f0cf54f748f6b13fe8e31d8af6347",
+    "art/portraits/recruit-roster-v1/scout-c/mouth-neutral.png": "1744019e22ddc4e8412bc3571d7652881739af6c6feab7112c244b8b6dce2d8a",
+    "art/portraits/recruit-roster-v1/scout-c/mouth-open.png": "996928908189b165db2087174d305b53ed5c458e4568689ad4a55c9879956253",
+    "art/portraits/recruit-roster-v1/scout-c/mouth-small.png": "4a3cdce411ea76b6c3657320c8b11e32ca5357bfad13f719e66d0da48ea68636",
+    "art/portraits/recruit-roster-v1/scout-c/mouth-worried.png": "c8596d6267bf1649a7a59894021ba69c9cd1c6b9ca4857d1cdf2a2373b47cbad",
+    "art/portraits/recruit-roster-v1/scout-c/pallor.png": "4db4ef9409d178bd5823d9d5b8f6492faf4403534e27bb4e96220e87169072ba",
+    "art/portraits/recruit-roster-v1/scout-c/preview.png": "168dafc51bc58aa7369e117276538b80ecdfa2cc109794527c4fca9e1ecd02a6",
+    "art/portraits/recruit-roster-v1/scout-c/shadow-left.png": "6f421a4adb310a4b81587b4de95e0c0547f65fbb8126614dfff62eddab73cc77",
+    "art/portraits/recruit-roster-v1/warden-b/bandage.png": "1bdfa66c22c5232a61acce51d2b5cc8df0482d537d347555bc38fa7b60349bd7",
+    "art/portraits/recruit-roster-v1/warden-b/blood.png": "d88698ec7c8132ad99c4518db62844bceaadd5d50bf5d316419dbc17fd9977d7",
+    "art/portraits/recruit-roster-v1/warden-b/dirt.png": "7fe1ec298d6a9e5ad4379257fb4140d7e20fdf1d6334aa1e11cd9744f2255b02",
+    "art/portraits/recruit-roster-v1/warden-b/eyes-closed.png": "5f3f4d32ce9f1e864644bf46c6aaff7a05bef99a48e48f7e921c68ff709c95e2",
+    "art/portraits/recruit-roster-v1/warden-b/eyes-exhausted.png": "b8ee5cecb02d4552e7307ca9d16e9257c22ef24ec9aa1fa150dc846c53b3b293",
+    "art/portraits/recruit-roster-v1/warden-b/eyes-half.png": "b01a7db0dc5335c913faab94bd2d3a90c10148e1b3f52957ea998db75e408986",
+    "art/portraits/recruit-roster-v1/warden-b/eyes-neutral.png": "d54a6a0dcb673a00cf18fc397c18ea9a6932df72095642fb88c094f6e4b6041b",
+    "art/portraits/recruit-roster-v1/warden-b/eyes-worried.png": "39b3ab9881bcefd6df1f5253fe0fd05566771bcd760488a4145c827b794fdec9",
+    "art/portraits/recruit-roster-v1/warden-b/head.png": "b47bd01def2624582d43a988093b25bd325cadee3cefa64b1777a9045440b245",
+    "art/portraits/recruit-roster-v1/warden-b/highlight-left.png": "0ee3825fbfe88046a53b2c80e36d168f1815564578f837285e5dbd90d52e41c3",
+    "art/portraits/recruit-roster-v1/warden-b/mouth-exhausted.png": "c39893086d2df009cfac004eb1b94cff28aa95ecb699dee043e055d240fcb05d",
+    "art/portraits/recruit-roster-v1/warden-b/mouth-neutral.png": "2458bf457ac91959b202fdbeb2fda765893a50cb1f75a09465b5fe1e7d0e35df",
+    "art/portraits/recruit-roster-v1/warden-b/mouth-open.png": "5dc112de69e9eaccbac80bc6a79005228ba7d733501748e04f3ce739ad33747a",
+    "art/portraits/recruit-roster-v1/warden-b/mouth-small.png": "d42dff9cd34a4f7b16dc141431dac4646c6428e09f9ab9e97d48114a54df78dd",
+    "art/portraits/recruit-roster-v1/warden-b/mouth-worried.png": "5433b67d8c9c6332210dac89249138fae69b26233f5d9881ce2a6e0cca72db95",
+    "art/portraits/recruit-roster-v1/warden-b/pallor.png": "8c21c019085f21525ba8a9350a96faf8e28ea01a6e10d6d557cc92d674e61724",
+    "art/portraits/recruit-roster-v1/warden-b/preview.png": "282fa250ca44ef6b31521e960128e4596f3f30ed959eb3c812df051fbf37d9d9",
+    "art/portraits/recruit-roster-v1/warden-b/shadow-left.png": "56f844934d54080b49aed07e45c4ceef1b5731db6c8051ea13bc3e406ab1b135",
+    "art/portraits/recruit-roster-v1/warden-c/bandage.png": "ccc2ab9af1fbe560ac3ecd1519748ca3037df8b7704a490829b8ad257c3f02b5",
+    "art/portraits/recruit-roster-v1/warden-c/blood.png": "0f55875d1e0f46e72569894189f66a8446562c27f49f2d96bd49daada892406a",
+    "art/portraits/recruit-roster-v1/warden-c/dirt.png": "6494e155d6e06f6b3a69a8d33192f8fae4315818d88938d497c51a80f762d21d",
+    "art/portraits/recruit-roster-v1/warden-c/eyes-closed.png": "9b388902841d7f59e364269a7d965c7530259989573bd21fe0eb1864ef1ea1c3",
+    "art/portraits/recruit-roster-v1/warden-c/eyes-exhausted.png": "2efb4b33d7420c609b0ce2abb814dabfbf05cf748c8546a264aa33be928e9d6e",
+    "art/portraits/recruit-roster-v1/warden-c/eyes-half.png": "93e4693f77124178495058a8ef17006c6eee7e14cb98c7d9bb2e7678bc833b9e",
+    "art/portraits/recruit-roster-v1/warden-c/eyes-neutral.png": "50babadc3a95739e232d864d38a768aa09d86650c4904d74a7dfcf4167e85047",
+    "art/portraits/recruit-roster-v1/warden-c/eyes-worried.png": "0441d1181a3c8712ce5c62cb102cfa6ef2b14038effc8e643ae91630e1f058d8",
+    "art/portraits/recruit-roster-v1/warden-c/head.png": "9df5f1b577daca43b5503d9b8d58584aaf0ee5f67c634f2ee01d37b8e0b0acff",
+    "art/portraits/recruit-roster-v1/warden-c/highlight-left.png": "12a0504c5fa23cc033142b32770263b95b5c4baa387e684bef2cfb4801b02222",
+    "art/portraits/recruit-roster-v1/warden-c/mouth-exhausted.png": "87a65b675a150c6c801ae1ad6bd67882c4a76f205128065d07c9ec5192a56a39",
+    "art/portraits/recruit-roster-v1/warden-c/mouth-neutral.png": "b29562a0a70ced860d4c4bb93893e5c462da9cfeac4766c87c2cb0d3eff9cad2",
+    "art/portraits/recruit-roster-v1/warden-c/mouth-open.png": "7a415e7009d071017729df1fb1bfca6867770f5a1c7d723aa1fb48b7d81a1f0a",
+    "art/portraits/recruit-roster-v1/warden-c/mouth-small.png": "5c136ad44ec2828b6ec561ded2167c05a2dd57784204d4f5e275babb3961fba5",
+    "art/portraits/recruit-roster-v1/warden-c/mouth-worried.png": "e84e347080df427b7616847a61cbd1ddbc4651c2d1fbb2fc28c94276cc9ea579",
+    "art/portraits/recruit-roster-v1/warden-c/pallor.png": "605a033c0a5ab7472bf0390a75b49e08c3265c0a0fe6e7108d67adb7437eb999",
+    "art/portraits/recruit-roster-v1/warden-c/preview.png": "bc2e6ac911d13097dfe152f05a96a7b1ff857b5b32a367416e207f250b45a489",
+    "art/portraits/recruit-roster-v1/warden-c/shadow-left.png": "6ae782b81f6374961adb37705adbf917fdca2516318f7377193e7ace58aa7633",
+    "art/source/recruit-roster-v1/brawler-a-conditions.png": "8d316a5b49e54638f46023d3369ea018b1b344842d0f4f1aa2d0a33d9946b5bd",
+    "art/source/recruit-roster-v1/brawler-a-face-reference.png": "2e6fdbf1f467c0dbcb1c1e7a532945b5bcb6fe647959afb83e088def8bd4c531",
+    "art/source/recruit-roster-v1/brawler-a-faces.png": "3bfde87a9f2a8467cdd5e57e3bcf2bd2fa6220f2a6f1adbd111c45c2b7db633e",
+    "art/source/recruit-roster-v1/brawler-a-lighting.png": "13b45dcd653b916552b2a645beaa8f89e14eb118414e0fb3b2377adffa9b2152",
+    "art/source/recruit-roster-v1/brawler-a-master.png": "ec2a80f2bc1f2448facfc802ac2ed83e18f9f9463f530d13824b9c1794d0fbd0",
+    "art/source/recruit-roster-v1/brawler-a-overlay-reference.png": "2cb343fe91dfcd3aa0c72ba092b8086bbee9699db42ad84b5b7f68b717dba713",
+    "art/source/recruit-roster-v1/brawler-b-conditions.png": "9712084b8e95718be8cf6376471517fa7ace180d1e607ab08faeedf0c8f7822c",
+    "art/source/recruit-roster-v1/brawler-b-face-reference.png": "90e9b073f4b44c25cb7110a0dde58dd92e04a87260b9caacf7eb9ade92bce08e",
+    "art/source/recruit-roster-v1/brawler-b-faces.png": "cb136aa338f3929ff6490368e429882e641b99ccd549945e591c0b4fefe16b68",
+    "art/source/recruit-roster-v1/brawler-b-lighting.png": "1b7fd5e2482874fbe7efaa0bb80363050fbbb171b884d1ba3dc3b2ee6a593972",
+    "art/source/recruit-roster-v1/brawler-b-master.png": "e903a9b254bf5be5f9c124f9616da456cf885bd67421cebfcee68f44c989af85",
+    "art/source/recruit-roster-v1/brawler-b-overlay-reference.png": "2d4d05eec1288bb35795a41706f3cde92e81e4060a9c12eec01482e79b664929",
+    "art/source/recruit-roster-v1/brawler-c-conditions.png": "eaa41ce0ad993a6e0ae3f9444cba3d919e4c5d94a6d4ada24617930562f974f7",
+    "art/source/recruit-roster-v1/brawler-c-face-reference.png": "e1183972d059636669dc68c88c29b7e6cadcdd3b9c2c7320ebb52fab14e95f23",
+    "art/source/recruit-roster-v1/brawler-c-faces.png": "ec2e2d664f28b48148188507abfd72c8ea1b28240c49c2c45524b3320832d8bb",
+    "art/source/recruit-roster-v1/brawler-c-lighting.png": "1f8a48412dac95faa7aa725e8600346f67de6bbafdfb84b63e6e27d9f3e1376e",
+    "art/source/recruit-roster-v1/brawler-c-master.png": "f683b90048fb5aa47fb211f2ece6d26706b14ab90566e1e2fc5408fc407f46b7",
+    "art/source/recruit-roster-v1/brawler-c-overlay-reference.png": "aefaabc9fef5605bf2f0951223d101115daf18a283f8f2d3bb4c13d2931c8706",
+    "art/source/recruit-roster-v1/scout-b-conditions.png": "9d67453e923a3748b705aa9a97eb2668469d1353a6892a57d8c22a56e32b920e",
+    "art/source/recruit-roster-v1/scout-b-face-reference.png": "69b2cfa7c0398af34dbc102c9d7a47ad172209d326174efe42c52a5a6bd1602d",
+    "art/source/recruit-roster-v1/scout-b-faces.png": "9583429a5b3cf96fb023e47fdf5f994e574c4b2a6999fb2a35f760c8432f4ede",
+    "art/source/recruit-roster-v1/scout-b-lighting.png": "0d8a34e605547d390726dd2737d22c6284174286ffbacd6e5b9653d30d3625d7",
+    "art/source/recruit-roster-v1/scout-b-master.png": "e299a4c031050ec7ec8d83ad964e99b81d6490f0f1eb2528e81923e7adf4206b",
+    "art/source/recruit-roster-v1/scout-b-overlay-reference.png": "f4b88b3ecdd67e28f2caed5f0cce63202101945cefe9bb9478d2d095bc4f21d4",
+    "art/source/recruit-roster-v1/scout-c-conditions.png": "c21da693cc379b8e4fea26a3d7d05b393d2daa0e5afd136fa5bc861f9692c373",
+    "art/source/recruit-roster-v1/scout-c-face-reference.png": "c868f75ee28e3ede65164fbada9d422af24afbee79f5312294a986e26767e267",
+    "art/source/recruit-roster-v1/scout-c-faces.png": "6282c324599e390de41aba354c7c784008b954604067c2b9c516367cbb672985",
+    "art/source/recruit-roster-v1/scout-c-lighting.png": "8dbc32d682e984a489817bba4b33cf8bf9c9ba275e1d0b7c052e365df4b863d2",
+    "art/source/recruit-roster-v1/scout-c-master.png": "ebef63a924aac2ad5109f634670e1a8c8472cc41e7291df473b215e92b34508f",
+    "art/source/recruit-roster-v1/scout-c-overlay-reference.png": "e1279c342a7a88368026fa73b9f53c145caf764b73a0e6acf73757cbe89ef057",
+    "art/source/recruit-roster-v1/warden-b-conditions.png": "29c2a31d426dae33f5389da379318f0684f5cff80d525b3ad55640118ae51970",
+    "art/source/recruit-roster-v1/warden-b-face-reference.png": "4b368d2015e7488d2a6b619b7ae33250d451012e2aa9ccc9adfc296c6cafbb10",
+    "art/source/recruit-roster-v1/warden-b-faces.png": "c20d2c99fcf4845a91e15cec57dc32dc7c59d8a69403e1fdeb421374774423a3",
+    "art/source/recruit-roster-v1/warden-b-lighting.png": "5b8c0d8aad3d6e1f0a2631420b70d8e4b4bd290f584511393a5255fbc8f67d25",
+    "art/source/recruit-roster-v1/warden-b-master.png": "5ed335f2325d9c47d7e3ca3886cafd212d7a84d7835bb19ea7af71c9fa3e0777",
+    "art/source/recruit-roster-v1/warden-b-overlay-reference.png": "94549fa45a0969b008eb7c5319a8dcfcc061541cffeca7480162c344f877b26c",
+    "art/source/recruit-roster-v1/warden-c-conditions.png": "70ceb2d0c37c6813d8628fba4cb372f1fc7779b3024632d43d3e5ee2375fb161",
+    "art/source/recruit-roster-v1/warden-c-face-reference.png": "2262f56671331b0a984a882b8542613918e1233b164273b8ebefe3735ec42043",
+    "art/source/recruit-roster-v1/warden-c-faces.png": "ec1650b7bf4b772dcdf6a32d57de9053185f4080e199b83572be294c51f326c3",
+    "art/source/recruit-roster-v1/warden-c-lighting.png": "c37c4d72a0288ac12a2397f53765e64e2da9df7d437144a59a94951c4be9eda3",
+    "art/source/recruit-roster-v1/warden-c-master.png": "aa69755ccd752aa4b4c2d83df12c043ed96f8fc7fb284ab9c837516d1e081a3d",
+    "art/source/recruit-roster-v1/warden-c-overlay-reference.png": "2884a26f30bac4a00bc3f78e48bdc473a37e49215325899fb0d7b32207d337ac",
+    "data/portraits/recruit-roster-v1/brawler-a-exhausted.tres": "f948f86caa7615159e0a21523e45637742b787f772b8bfd2c80ab30f839b1a30",
+    "data/portraits/recruit-roster-v1/brawler-a-worried.tres": "83ec9a06290a116b4962e99f555a6a1170cb8e4e248fbe933604d04e3c7ed115",
+    "data/portraits/recruit-roster-v1/brawler-a.tres": "f92c658d39b2404a210419f80c7cbc1cf65c99b4fdb8a80cb4bcd194ff1dddf8",
+    "data/portraits/recruit-roster-v1/brawler-b-exhausted.tres": "d33f420cd246eca9c383130e2f71ade112e92c4ee7e94bcf0eaf9495831b72ba",
+    "data/portraits/recruit-roster-v1/brawler-b-worried.tres": "a5ab26cf3d69e4b68c795beef78d30adbdae00727873b0c0c568d89e3caf1d9f",
+    "data/portraits/recruit-roster-v1/brawler-b.tres": "3245ddce9977a5f50369f77206029eb40a565a315a018c6df67d84014dae44d5",
+    "data/portraits/recruit-roster-v1/brawler-c-exhausted.tres": "6a10617078b0dd9377f358a828dfcafe86497386433c67ae60da44b339ee19dc",
+    "data/portraits/recruit-roster-v1/brawler-c-worried.tres": "9ed95c0c2bdc98422d243bc6e4b09653d2491555cee89e81da86f14aa9b549ed",
+    "data/portraits/recruit-roster-v1/brawler-c.tres": "c83aed0c3ae57fb902f9d44c5cde38648f54f49a22e25c88194e50547c1c3efb",
+    "data/portraits/recruit-roster-v1/scout-b-exhausted.tres": "380027788d3786ac7ad7acb0a6f23849e1f3d530ec2f6941fc85558152c405d4",
+    "data/portraits/recruit-roster-v1/scout-b-worried.tres": "36c8fd5e5065871c1a5194fed867a7ec3c2a66ff259207c255eb8e206c92daf1",
+    "data/portraits/recruit-roster-v1/scout-b.tres": "ed1c5cbaa077c3cc2f86e9a74696791cae5ef2eb771027da60b53f2640794885",
+    "data/portraits/recruit-roster-v1/scout-c-exhausted.tres": "7984b967739f1ac1f465e50bf175e06833ce74af1ef56ced0e724b5b12431d1f",
+    "data/portraits/recruit-roster-v1/scout-c-worried.tres": "8d3681b56a22c9032d7b5bc05fc51c9e45501d6a93de39035eb4f06e1d3e4c9e",
+    "data/portraits/recruit-roster-v1/scout-c.tres": "d32cd0045c579613f2fd9fe7c84fd42cfd3089c2d17a3b1a2f992db1509af8d7",
+    "data/portraits/recruit-roster-v1/warden-b-exhausted.tres": "a4f4592fe38ee7e8f12f81c028e7f6460018ef1b719fd795b880f592283c6e96",
+    "data/portraits/recruit-roster-v1/warden-b-worried.tres": "1e883e5f953bc5b79d5b45fcb6accf2c54999261063fd7e77443487ffa62a760",
+    "data/portraits/recruit-roster-v1/warden-b.tres": "86c5c32c81b5260f847431ef921ae19e1a674820716a17c57f72a7c2dda39689",
+    "data/portraits/recruit-roster-v1/warden-c-exhausted.tres": "80763d13177b96e8979864ed793dca8489a9f4f3e33389dd39741c0853da1ac9",
+    "data/portraits/recruit-roster-v1/warden-c-worried.tres": "38a9549f662ee0aae459397d8e92ead0906227ea844220f8b781572923307322",
+    "data/portraits/recruit-roster-v1/warden-c.tres": "05b6930b1838ea8ade8e297eea8fa0f6a41a0e9d67a139ee445320e355aab5c6",
+    "art/portraits/recruit-kit-v1/shared/body.png": "354a59a5cec26c785eb480c2f2652369d2e8b0acfeb3840efc968919c0c0ce9b",
+    "art/portraits/recruit-kit-v1/shared/jerkin.png": "b3ee6b1d563c33a4caad913e5ad15e1e52564c7e8b2c94b5b45242d154a52fcb"
+  }
+}
