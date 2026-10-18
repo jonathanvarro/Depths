@@ -81,6 +81,23 @@ func _initialize() -> void:
 	check("Mara can't be dismissed", not camp.dismiss(ps, mara))
 	check("dismiss sends one away", _press(main._camp, "Dismiss") and ps.members.size() == 2)
 
+	# Any hero can take up carried gear; the Pack compares before and after (#67).
+	var knife: Equipment = load("res://data/gear/plain_knife.tres")
+	ps.supplies.gear.append(knife)
+	main._pack.visible = true
+	main._pack.refresh()
+	var helper: Companion = ps.members[1]
+	main._camp.visible = false
+	await _snap("pack_gear")
+	main._camp.visible = true
+	var pack_text := " | ".join(main._pack._list.find_children("*", "Label", true, false).map(func(l): return l.text))
+	check("pack compares the knife for each hero", pack_text.contains("%s: " % helper.display_name) and pack_text.contains("->") and pack_text.contains("1-3 dmg"), pack_text.substr(0, 300))
+	check("a recruit equips it", _press(main._pack, "Equip: %s" % helper.display_name) and helper.weapon == knife)
+	main._pack.refresh()
+	check("and can put it away again", _press(main._pack, "Put away") and helper.weapon == null and knife in ps.supplies.gear)
+	ps.supplies.gear.erase(knife)
+	main._pack.visible = false
+
 	# A day passes: one leaves the fire, one arrives.
 	var waiting: Array = camp.candidates.duplicate()
 	camp.rest(ps)

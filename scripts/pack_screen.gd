@@ -68,6 +68,10 @@ func refresh() -> void:
 		_injuries.add_child(_label("%s: %s (strain %d)  ·  effectiveness %d%%%s" % [
 			member.display_name, StrainRules.NAMES[member.strain_state()], roundi(member.strain),
 			roundi(member.effectiveness() * 100), hunger], 17, COLOR_TEXT))
+		if member.is_alive() and member.effectiveness() < 1.0:
+			# Why their numbers are down (#67).
+			_injuries.add_child(_label("    Strain cuts %s's hit chance and damage to %d%%. Light, food and rest ease it." % [
+				member.display_name, roundi(member.effectiveness() * 100)], 16, COLOR_DIM_TEXT))
 		for injury in member.injuries:
 			any_injury = true
 			var state := "dressed until camp" if injury in member.dressed else "untreated"
@@ -84,14 +88,30 @@ func refresh() -> void:
 		_list.add_child(_item_row(item))
 
 
-## What the lead hero wields, and carried gear with Equip / Drop (#58).
+## What each hero wields, and carried gear with Equip / Drop (#58). Each
+## carried weapon shows, per hero, what it would change (#67).
 func _add_gear_rows() -> void:
 	var living: Array[Companion] = _party.living_members()
 	if living.is_empty():
 		return
-	var hero: Companion = living[0]
-	var wielding := "%s (%d-%d)" % [hero.weapon.display_name, hero.weapon.attack_min, hero.weapon.attack_max] if hero.weapon else "bare hands"
-	_list.add_child(_label("Gear  ·  %s wields %s" % [hero.display_name, wielding], 20, COLOR_TEXT))
+	_list.add_child(_label("Gear", 20, COLOR_TEXT))
+	for hero in living:
+		var row := HBoxContainer.new()
+		row.add_theme_constant_override("separation", 12)
+		var held := "%s (%s)" % [hero.weapon.display_name, _numbers(hero, hero.weapon)] if hero.weapon else "their own weapon (%s)" % _numbers(hero, null)
+		var line := _label("%s wields %s" % [hero.display_name, held], 18, COLOR_TEXT)
+		line.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		row.add_child(line)
+		if hero.weapon and not hero.founder:  # recruits can go back to their own kit
+			var away := _small_button("Put away")
+			away.pressed.connect(func():
+				_party.supplies.gear.append(hero.weapon)
+				hero.weapon = null
+				hero.emit_changed()
+				_party.supplies.changed.emit()
+				refresh())
+			row.add_child(away)
+		_list.add_child(row)
 	for item: Equipment in _party.supplies.gear:
 		var row := HBoxContainer.new()
 		row.add_theme_constant_override("separation", 12)
@@ -108,20 +128,39 @@ func _add_gear_rows() -> void:
 		var about := _label(item.description, 17, COLOR_DIM_TEXT)
 		about.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		text.add_child(about)
+		for hero in living:
+			var now := _numbers(hero, hero.weapon)
+			var then := _numbers(hero, item)
+			text.add_child(_label("%s: %s  ->  %s" % [hero.display_name, now, then], 16, COLOR_DIM_TEXT))
 		row.add_child(text)
-		var equip := _small_button("Equip")
-		equip.pressed.connect(func():
-			_party.equip(hero, item)
-			used.emit("%s takes up the %s." % [hero.display_name, item.display_name.to_lower()])
-			refresh())
-		row.add_child(equip)
+		var buttons := VBoxContainer.new()
+		for hero in living:
+			var equip := _small_button("Equip" if living.size() == 1 else "Equip: %s" % hero.display_name)
+			if living.size() > 1:
+				equip.custom_minimum_size = Vector2(150, 44)
+			equip.pressed.connect(func():
+				_party.equip(hero, item)
+				used.emit("%s takes up the %s." % [hero.display_name, item.display_name.to_lower()])
+				refresh())
+			buttons.add_child(equip)
 		var drop := _small_button("Drop")
 		drop.pressed.connect(func():
 			_party.drop(item)
 			used.emit("You drop the %s. It's gone." % item.display_name.to_lower())
 			refresh())
-		row.add_child(drop)
+		buttons.add_child(drop)
+		row.add_child(buttons)
 		_list.add_child(row)
+
+
+## "3-5 dmg, 85% to hit" for `hero` holding `weapon` (null: their own),
+## before strain - the comparison is about the gear (#67).
+func _numbers(hero: Companion, weapon: Equipment) -> String:
+	var low: int = weapon.attack_min if weapon else hero.attack_min
+	var high: int = weapon.attack_max if weapon else hero.attack_max
+	var hit: float = clampf(hero.accuracy + (weapon.accuracy_bonus if weapon else 0.0), 0.1, 0.95)
+	var damage := str(low) if low == high else "%d-%d" % [low, high]
+	return "%s dmg, %d%% to hit" % [damage, roundi(hit * 100)]
 
 
 func _small_button(text: String) -> Button:
