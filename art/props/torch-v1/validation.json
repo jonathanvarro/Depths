@@ -1,0 +1,63 @@
+{
+  "canvas": [
+    128,
+    256
+  ],
+  "icon_canvas": [
+    64,
+    64
+  ],
+  "flame_anchor": [
+    64,
+    92
+  ],
+  "frames": 6,
+  "fps": 8,
+  "cycle_seconds": 0.75,
+  "body_contact_y": 247,
+  "source_bounds": [
+    387,
+    136,
+    651,
+    1427
+  ],
+  "body_scale": 0.13013168086754454,
+  "assets": [
+    {
+      "name": "body",
+      "size": [
+        128,
+        256
+      ],
+      "bounds": [
+        47,
+        80,
+        81,
+        248
+      ],
+      "visible_colours": 20
+    },
+    {
+      "name": "icon",
+      "size": [
+        64,
+        64
+      ],
+      "bounds": [
+        17,
+        6,
+        47,
+        58
+      ],
+      "visible_colours": 20
+    }
+  ],
+  "failures": [],
+  "sha256": {
+    "art/source/torch-v1/torch-generated.png": "b8dc870f53f84b2458e04546500a6ced68b954a55133baca9927f51bb091b34a",
+    "art/props/torch-v1/body.png": "8c7f013d53a635318954dcd58cd75e89dbf2e0921f7ce43b3c79b50ff4614da2",
+    "art/items/pack-64-v1/torch.png": "5b5dbfc0b8c44f33d79c7c9671bf9b6af43a8fae2702d538c89d55d18ff8acb3",
+    "art/features/campfire-v1/flames.png": "e50726dd63352c90f99ae2ef28f2ad32e1e19635573cedfd29d16c0233dfd8e7",
+    "art/features/campfire-v1/frames.tres": "d8301ab0ac4f9dfd5941c40e5aba26314099f0c63c26f90c42e0f28e6dd79ac5"
+  }
+}

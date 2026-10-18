@@ -1,0 +1,17 @@
+{
+  "checks": 36,
+  "failures": [],
+  "godot": "4.7.2",
+  "held_integration": "Reusable presentation only; captures add an illustrative overlay. Pack icon is live.",
+  "physical_phone_test": false,
+  "viewports": [
+    [
+      1280,
+      720
+    ],
+    [
+      1278,
+      590
+    ]
+  ]
+}

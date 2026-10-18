@@ -224,6 +224,8 @@ Use a library of coordinated wall, floor, and ceiling textures applied to reusab
 
 **Campfire visual (#63):** [campfire-v1](art/features/campfire-v1/README.md) supplies a fixed stone/log base and six-frame flame loop on 128px canvases, with separate solid/flame lighting and a warm local light. Claude's #59 opening hook loads it automatically; more maze placements remain with visible room contents (#46). The graphic does not add rest, healing, fuel, checkpoint or recruitment rules.
 
+**Torch art (#68):** [torch-v1](art/props/torch-v1/README.md) adds a rough wooden torch with soot-darkened cloth, a live 64px Pack icon and reusable steady/dim/unlit presentation sharing the campfire flame library. The neutral solid body remains fixed as the flame shrinks. Held-art positioning stays with the shared interface work; this adds no torch mechanics or tuning changes.
+
 The first test set lives in `art/textures/stone-v1/`: two 64 × 64 wall variants, one floor, one ceiling, and shared Godot materials. The existing prototype now uses them. This is a production-direction test, not a final resolution commitment. Windows import and a rendered corridor were checked; larger-room tiling, physical texel-scale consistency, seam cleanup, and phone appearance still need review.
 
 ### Environment-specific doors and stairs

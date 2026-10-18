@@ -137,6 +137,15 @@ func _small_button(text: String) -> Button:
 func _item_row(item: SupplyItem) -> Control:
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 16)
+	if item.icon:
+		var icon := TextureRect.new()
+		icon.texture = item.icon
+		icon.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		icon.custom_minimum_size = Vector2(40, 40)
+		icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		icon.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		row.add_child(icon)
 	var text := VBoxContainer.new()
 	text.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(text)

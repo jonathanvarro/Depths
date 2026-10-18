@@ -1,0 +1,9 @@
+{
+  "issue": 68,
+  "tool": "Built-in image_gen.imagegen",
+  "created": "2026-10-17",
+  "file": "torch-generated.png",
+  "prompt": "Use case: stylized-concept. Asset type: one transparent unlit torch sprite master for Depths, a dark first-person cave dungeon crawler. ONE ordinary improvised torch, full object shown upright, front view, narrow rough wooden stick with a chunky wrapped oil-soaked cloth head tied by two plain cord turns. Cloth is dirty ochre-brown with a soot-blackened top and one short frayed edge. Lower shaft is dark worn wood with one or two broad chips, blunt bottom. Modest rustic starting equipment, no decoration, no metal cage, no iron brazier, no ornate grip. Keep the whole torch nearly straight and upright, NOT diagonal; slight irregular asymmetry is natural. Strong clear silhouette designed for128x256 native-pixel held art and a64x64 inventory reduction. Broad crisp pixel-art clusters, about three shades per material, muted brown wood and faded ochre cloth, no fine grain or cloth weave. Neutral diffuse lighting with small broad highlights, no baked orange illumination. Square transparent canvas; torch centred horizontally, full head and shaft within generous margins, roughly x420..604,y90..934 on a1024x1024 canvas. NO FLAME, NO fire, NO smoke, NO embers, NO glow, NO cast shadow, NO ground or background, NO hands or person. Keep the top of the cloth head plainly visible so a separate flame animation can attach there. Avoid photorealism, gradients, antialiasing, dithering, texture noise, tiny details, fancy ornament, UI, text or labels. Genuinely transparent background.",
+  "animation": "Reuses art/features/campfire-v1/frames.tres and flames.png unchanged; six 128px cells at8fps. Existing provenance art/source/campfire-v1/generation-manifest.json.",
+  "export": "tools/art/build_torch.py; crop, resize with nearest filtering, threshold alpha, non-dithered shared20-colour body/icon palette. No hand-painted pixels."
+}
