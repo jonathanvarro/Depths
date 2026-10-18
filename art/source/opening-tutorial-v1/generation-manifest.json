@@ -1,0 +1,46 @@
+{
+  "issue": 70,
+  "created": "2026-10-17",
+  "tool": "Built-in image_gen.imagegen",
+  "assets": [
+    {
+      "file": "broken-knife.png",
+      "prompt": "Use case: precise-object-edit. Edit target: the supplied approved plain knife for Depths. Make this SAME knife visibly BROKEN: the iron blade is snapped off halfway along its length, leaving a broad jagged transverse fracture and a short blunt dangerous stump. Remove the entire distal tip; do not show the missing fragment anywhere. Preserve the same two-rivet worn wooden handle, short metal bolster, diagonal orientation (grip lower left, broken blade upper right), material colours and recognizable construction. Simplify into broad crisp pixel-art clusters suitable for a64x64 inventory icon: about3shades per material, restrained light rust, only a few wear marks. No fine texture, grain, noise, dithering, gradients or photorealism. Clear silhouette; the break must read at40px. Entire remaining knife within transparent square canvas with margins. No extra weapons, blood, hands, ground, shadow, glow, background, text or UI. Genuinely transparent background. Preserve original artwork's identity while changing only its damage and simplifying detail.",
+      "references": [
+        "art/items/starter-v1/plain-knife.png"
+      ],
+      "transparent_background": true
+    },
+    {
+      "file": "damaged-armour.png",
+      "prompt": "Use case: precise-object-edit. Edit target: supplied basic padded coat inventory artwork for Depths. Produce its clearly DAMAGED version: same sleeveless brown-grey quilted cloth vest with short standing collar, open armholes, three simple front cord ties and plain split hem. Add one broad torn opening across the lower-left front panel exposing dull pale stuffing, a broken lowest tie, and a ragged missing corner of the hem. Damage should read at64px/40px; not scattered tiny scratches. Keep the garment wearable and identifiable as the same padded cloth armour, not metal armour. No new plates, pauldrons, insignia or ornament. Neutral diffuse light, muted charcoal-brown cloth and dull beige stuffing. Broad crisp pixel-art clusters, three shades per material, simple large folds and only a few quilt divisions; avoid fine weave, gradient shading, dithering, noisy wear and photorealism. Same front three-quarter inventory presentation, full object isolated inside transparent square canvas with margins. No body, mannequin, blood, gore, ground, floor shadow, glow, background, labels or UI. Genuinely transparent background.",
+      "references": [
+        "art/items/starter-v1/padded-coat.png"
+      ],
+      "transparent_background": true
+    },
+    {
+      "file": "chest-closed.png",
+      "prompt": "Use case: stylized-concept. One CLOSED small battered wooden dungeon chest for Depths, the first-person cave crawler. Front-facing world prop, viewed slightly from above at standing eye height, almost symmetric facade with only a narrow hint of its right side; NOT isometric. Simple squat plank box with FLAT hinged lid, two broad dull dark iron straps, small central plain latch, four short block feet. Rough brown wood and slightly rusty iron, practical low-quality equipment, no ornament, gold, gems or magic. Very simple crisp pixel-art clusters intended for128x128 native pixels, about3shades per material, no tiny wood grain, pores, texture noise, dithering, gradients or photorealism. Neutral diffuse shading, no baked warm firelight. Square1024x1024 transparent canvas; reserve the upper half as transparent space for its future opened lid: the whole closed chest must occupy approximately x128..896,y560..928, with bottom contact y928. It must be low in the canvas, not vertically centred. Keep margins on every side. The body front lower box spans approximately y650..900, lid thickness y560..650. Entire chest fully shown. No contents visible. No ground plane, cast shadow, glow, environment, people, text, labels or UI. Genuinely transparent background.",
+      "references": [],
+      "transparent_background": true
+    },
+    {
+      "file": "chest-open.png",
+      "prompt": "Use case: precise-object-edit. Edit target: this exact closed wooden chest sprite. Create the OPEN, UNLOOTED state of the SAME chest, on the EXACT SAME square transparent canvas. Change ONLY the lid/hinge/latch position and revealed contents. Lift the existing flat wooden lid on its rear hinges, so its interior is visible upright behind the box, occupying the currently empty upper canvas. Keep the lower front box, two iron straps, plank divisions, worn corners, short feet, camera perspective, bottom contact and left/right positions EXACTLY fixed; do not move, resize, redesign or recenter the chest body. The rear of the open interior is dark. Inside, show ONE small corked amber healing bottle and ONE plain folded linen dressing, partly tucked behind the front rim; NO coins or treasure. Lid should be fully inside the upper canvas with generous transparent margins. Same restrained brown wood/slightly rusty charcoal iron, simple crisp pixel-art clusters suitable for128x128, broad shadows, no new fine texture or dithering. Keep neutral diffuse lighting and the genuine transparent background. No glow, loot beam, magic, ground shadow, environment, labels or UI. This is a state change of the same registered sprite, not a new chest design.",
+      "references": [
+        "art/source/opening-tutorial-v1/chest-closed.png"
+      ],
+      "transparent_background": true
+    },
+    {
+      "file": "chest-empty.png",
+      "prompt": "Use case: precise-object-edit. Edit target: the supplied OPEN chest. Create its EMPTY, LOOTED state. Remove ONLY the amber bottle and folded linen dressing from inside. Reveal the plain dark wooden interior behind where they were. Keep EVERYTHING ELSE EXACTLY IDENTICAL: same raised lid and hinge angle, same lower box and straps/latch/plank marks/feet, same camera/perspective and lighting, exact same square canvas and pixel registration, same size and floor contact, same genuine transparent background. Do not close, move, resize, recenter or redesign the chest. No new objects, coins, stains, glow, shadow, environment, labels or UI. Preserve the simple crisp pixel-art treatment intended for128x128. This is the same open chest after its two supplies were removed, not a new drawing.",
+      "references": [
+        "art/source/opening-tutorial-v1/chest-open.png"
+      ],
+      "transparent_background": true
+    }
+  ],
+  "export": "tools/art/build_opening_tutorial_art.py; 64px gear, 128px chests, fixed floor registration/shared chest scale, binary alpha, no-dither palette reduction. Approved source references preserved."
+}

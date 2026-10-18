@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-17 – ChatGPT
+- Did: #70 supplies the requested opening art set: transparent 64px broken knife and damaged padded-armour icons, plus three registered 128px wooden chest states (closed / open with supplies / empty). The knife Equipment resource now uses its broken icon without stat changes. art/props/tutorial-chest-v1 includes state-selectable Godot scenes; docs/opening-tutorial-art.md has the full handoff. Generated masters/exact prompts, native/enlarged comparisons, shared chest palette/registration/hashes and 12 normal/dim cave captures are preserved. All five exports/imports and 51 Godot checks pass on desktop/landscape-phone shapes.
+- Next: Replace Main._add_chest's placeholder using scene.tscn/set_state through the visible-contents work. Its existing opened=true means emptied, so select empty; use open explicitly for supplies remaining. Armour has no actual equipment definition yet and stays an art asset. Owner also requested abandoned packs, idol, pool and cold campsite remains as the next prop set.
+- Watch out: Three static chest drawings, not a lid-opening animation; shared floor pivot (64,120), one scale and 32-colour maximum. No collider, light, loot or armour mechanics added. Open artwork illustrates the existing draught/dressing rewards rather than exact quantities. Source reference items unchanged; only the broken knife's icon path changes in existing game data. Physical iPhone/actual chest placement remain integration checks. Claude's #69/#71/combat work and its notes were preserved.
+
 ## 2026-10-17 – Claude
 - Did: #71 bleeding feedback. Each bleed tick: red edge vignette flash (stronger at low health, strongest early on the first) plus a generated heartbeat (tools/make_placeholder_audio.py, heartbeat.wav), more and faster beats as health drops. Below half health while bleeding the edges stay dark between ticks; clears when bleeding stops. Main.screen_flashes turns the flash off (for #52). Play-through checks the ticks, the darkening and that it clears.
 - Next: #60 combat design discussion.

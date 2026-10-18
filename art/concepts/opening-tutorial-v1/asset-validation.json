@@ -1,0 +1,157 @@
+{
+  "issue": 70,
+  "alpha": "binary, transparent background",
+  "assets": [
+    {
+      "file": "art/items/opening-tutorial-v1/broken-knife.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        4,
+        5,
+        60,
+        59
+      ],
+      "visible_colours": 24
+    },
+    {
+      "file": "art/items/opening-tutorial-v1/damaged-armour.png",
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        11,
+        4,
+        53,
+        60
+      ],
+      "visible_colours": 24
+    },
+    {
+      "file": "art/props/tutorial-chest-v1/closed.png",
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        13,
+        63,
+        117,
+        121
+      ],
+      "visible_colours": 30
+    },
+    {
+      "file": "art/props/tutorial-chest-v1/open.png",
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        13,
+        14,
+        116,
+        121
+      ],
+      "visible_colours": 32
+    },
+    {
+      "file": "art/props/tutorial-chest-v1/empty.png",
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        13,
+        13,
+        117,
+        121
+      ],
+      "visible_colours": 30
+    }
+  ],
+  "failures": [],
+  "chest_registration": [
+    {
+      "state": "closed",
+      "lower_box": [
+        129,
+        666,
+        897,
+        973
+      ],
+      "root": [
+        513.0,
+        973
+      ],
+      "scale": 0.13541666666666666,
+      "offset": [
+        -5,
+        -11
+      ]
+    },
+    {
+      "state": "open",
+      "lower_box": [
+        130,
+        666,
+        895,
+        973
+      ],
+      "root": [
+        512.5,
+        973
+      ],
+      "scale": 0.13541666666666666,
+      "offset": [
+        -5,
+        -11
+      ]
+    },
+    {
+      "state": "empty",
+      "lower_box": [
+        129,
+        666,
+        897,
+        975
+      ],
+      "root": [
+        513.0,
+        975
+      ],
+      "scale": 0.13541666666666666,
+      "offset": [
+        -5,
+        -11
+      ]
+    }
+  ],
+  "pivot": [
+    64,
+    120
+  ],
+  "lower_box_widths": [
+    103,
+    103,
+    103
+  ],
+  "chest_shared_visible_colours": 32,
+  "sha256": {
+    "art/source/opening-tutorial-v1/broken-knife.png": "f943d3a5294b64ff9f445485aac99faeac143ab880115530d7d417684cdd22bc",
+    "art/source/opening-tutorial-v1/damaged-armour.png": "1fb2da0dc9d8cfafaa745a7abe1b9b31d6aad3cafd19cd8115434f967d24d541",
+    "art/source/opening-tutorial-v1/chest-closed.png": "3e118a77d82849a84aed3268d99683c7196d33b2977f3f17ee3e7b5976e31f6e",
+    "art/source/opening-tutorial-v1/chest-open.png": "4ac45bff563afde20b2ac4b4611d25c7c79a6a295d5b3cc9cf1a41af8e79241f",
+    "art/source/opening-tutorial-v1/chest-empty.png": "203f52976ad41e78706314781fd7e7a019d0698491af4d1d493f83e1f59c4098",
+    "art/items/opening-tutorial-v1/broken-knife.png": "56ee988d7cac235f1e4e38f9a90ec3da92bdda7c2b9e09dc7a295e96a4c5e805",
+    "art/items/opening-tutorial-v1/damaged-armour.png": "74e2a84cb073ef1ed8f40a1a9cab7576c99ecfd958617016d811ede9e37684a2",
+    "art/props/tutorial-chest-v1/closed.png": "dd1a73eb992ad89a90b5666fee8c103b8256163e34212d8d735f3853d0e19e63",
+    "art/props/tutorial-chest-v1/open.png": "8f8792dfcba4fb93da873580f1b59b4573f218127f25150d33b5ccd8daeac12f",
+    "art/props/tutorial-chest-v1/empty.png": "04e03d4556fb76484b278e72bbdb801c953cf5f320c6d82bea79641ec0df9f6d",
+    "art/items/starter-v1/plain-knife.png": "5eeb11ecdf2d278ba17f89c5b7b076e194d545128069c35f4c7307d1badeb9fa",
+    "art/items/starter-v1/padded-coat.png": "ddca18f19002b022a1613e047ba7d6f8397415bd45d91aadae633701d68589ec"
+  }
+}

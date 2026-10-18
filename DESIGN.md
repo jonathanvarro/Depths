@@ -264,6 +264,8 @@ Use a library of coordinated wall, floor, and ceiling textures applied to reusab
 
 **Torch art (#68):** [torch-v1](art/props/torch-v1/README.md) adds a rough wooden torch with soot-darkened cloth, a live 64px Pack icon and reusable steady/dim/unlit presentation sharing the campfire flame library. The neutral solid body remains fixed as the flame shrinks. Held-art positioning stays with the shared interface work; this adds no torch mechanics or tuning changes.
 
+**Opening equipment/chests (#70):** [tutorial art handoff](docs/opening-tutorial-art.md) supplies a broken-knife icon, damaged padded-armour icon and coordinated closed/open/empty wooden chest states. Chest drawings share a 128px canvas, floor pivot and palette; the knife's existing resource uses its damaged image. The other assets are ready for their implementation hooks, without new armour, loot or lighting rules.
+
 The first test set lives in `art/textures/stone-v1/`: two 64 × 64 wall variants, one floor, one ceiling, and shared Godot materials. The existing prototype now uses them. This is a production-direction test, not a final resolution commitment. Windows import and a rendered corridor were checked; larger-room tiling, physical texel-scale consistency, seam cleanup, and phone appearance still need review.
 
 ### Environment-specific doors and stairs

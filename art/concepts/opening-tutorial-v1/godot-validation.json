@@ -1,0 +1,17 @@
+{
+  "checks": 51,
+  "failures": [],
+  "godot": "4.7.2",
+  "integration": "Broken knife icon connected; chest scenes and armour art ready; Main/room implementation preserved.",
+  "physical_phone_test": false,
+  "viewports": [
+    [
+      1280,
+      720
+    ],
+    [
+      1278,
+      590
+    ]
+  ]
+}
