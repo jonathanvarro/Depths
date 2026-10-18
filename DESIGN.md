@@ -257,6 +257,15 @@ Suggested initial presentation: one campsite screen with a few selectable activi
   - **The opening** starts each at half health, with their own lines, and the drop step names their broken weapon. Hints use each hero's pronouns.
   - Corin and Alwen use recruit faces as placeholders until #103.
 
+**Decided 2026-10-18 (#47, #93, from ChatGPT's research #97, `docs/stats-monsters-xp-research.md`):**
+- **Attributes:** Strength, Dexterity, Vitality and Resolve (Wits later).
+- **Levels 1–4** for the cave: XP 80 / 220 / 440; talents at 2 and 4, +1 attribute at 3, +2 health per level, chosen at camp.
+- **XP:** full awards for every active hero; a **per-floor campaign limit** on fight XP, plus one-off awards for the gate, the queen and clearing the cave.
+- **Recruits** arrive one level behind, with catch-up XP.
+- **Main heroes** keep their traits, with stat profiles: Mara Dexterity, Corin Strength/Vitality, Alwen Resolve.
+- **First new monsters:** great rat, webspinner, goblin drummer.
+- **Armour:** one body slot. Padded coat −1 (28g) and leather jerkin −2 with −2 initiative (48g).
+
 The suggested retreat flow is to return through the dungeon to its entrance before reaching camp, with discovered shortcuts potentially easing later returns. Travel costs, escape exceptions, refuge services, recovery timing, and prices still need design decisions. Rest spots inside the dungeon remain distinct from the outside refuge.
 
 **Cave-camp staff and equipment (2026-10-16):** the owner wants a blacksmith sent from a nearby village and a nurse for the cave area. The smith is an apprentice, explaining the limited selection of quality items; the starting location should offer very basic equipment. The [updated campsite design](docs/campsite-design.md) proposes a sixth clickable smith area and places the nurse in the treatment tent. Exact stock, repair/crafting mechanics, NPC identities and later-site availability remain open. The original five-area interaction study predates this addition.
