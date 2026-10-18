@@ -168,6 +168,11 @@ Templates > Download and Install; already installed on the owner's PC).
   Companion `guard_factor`, `toughness`, `strength`, `weakness`, `founder`.
   Placeholder portraits: `tools/art/build_recruit_silhouettes.py` (Pillow).
   `tools/recruit_check.gd` covers the fire, staying behind, a wipe and torches.
+- Gold (#42): `Supplies.gold` (stash has its own); `SupplyItem.price` and
+  effect TREASURE; `Equipment.price`; `EnemyType.purse`; `EventOutcome.gold`
+  (RoomEvents `gold_found`); CampState buy/sell/buy_gear/buy_lantern,
+  `MERCHANT_STOCK`, `SMITH_STOCK`, contracts (`post_contract`, `count_kill`,
+  `collect_contract`), charity torches. `tools/gold_check.gd` covers it.
 - `scripts/chest_screen.gd` – chest window beside the pack: drag (set_drag_
   forwarding), tap, or the take-all icon button; `took` signal.
 - `scripts/pack_screen.gd` – the Pack screen (Pack button under the minimap,

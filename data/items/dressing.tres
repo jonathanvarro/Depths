@@ -13,3 +13,4 @@ amount = 0
 duration = 0
 use_time = 3
 use_message = "You bind the injury. It will hold until camp."
+price = 4

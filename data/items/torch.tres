@@ -13,3 +13,4 @@ amount = 0
 duration = 0
 use_time = 2
 use_message = "You light the torch. The dark draws back a little."
+price = 3

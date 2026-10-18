@@ -13,3 +13,4 @@ amount = 4
 duration = 20
 use_time = 1
 use_message = "You eat. Strength returns slowly."
+price = 4

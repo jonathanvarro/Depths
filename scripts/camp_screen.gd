@@ -19,13 +19,14 @@ const MUTED := Color("b3a78f")
 const AMBER := Color("dbb477")
 const CANVAS := Vector2(640, 360)
 ## The apprentice's starter stock, shown until there's gold (#42).
-const SMITH_STOCK := ["a plain knife", "a simple spear", "a woodcutter's axe", "a rough wooden shield"]
+const CampState := preload("res://scripts/camp_state.gd")
 
 var content: Control  # main.gd keeps this inside the safe area
 
 var _camp  # camp_state.gd
 var _party  # party_state.gd
-var _wanted := {}  # SupplyItem -> amount the merchant tops up to
+var _note: Label  # a passing announcement over the clearing
+var _note_tween: Tween
 var _canvas: Control
 var _buttons := {}  # site id -> Button
 var _sites := {}  # site id -> layout entry
@@ -74,19 +75,36 @@ func _init() -> void:
 	_day_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	_canvas.add_child(_day_label)
 	_build_activity()
+	_note = _label("", ACTION, 14, AMBER)
+	_note.position = Vector2(0, 150)
+	_note.size = Vector2(CANVAS.x, 24)
+	_note.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_note.modulate.a = 0.0
+	_canvas.add_child(_note)
 	content.resized.connect(_fit)
 	visible = false
 
 
-## Shows the clearing. `wanted` is what the merchant tops the pack up to.
-func open(camp, party, wanted: Dictionary) -> void:
+## Shows the clearing.
+func open(camp, party) -> void:
 	_camp = camp
 	_party = party
-	_wanted = wanted
 	visible = true
 	_close_activity()
 	_fit()
 	_buttons["cave"].grab_focus.call_deferred()
+
+
+## A short message over the clearing (e.g. a contract paid).
+func announce(text: String) -> void:
+	_note.text = text
+	_note.modulate.a = 1.0
+	_day_label.text = _status()
+	if _note_tween:
+		_note_tween.kill()
+	_note_tween = create_tween()
+	_note_tween.tween_interval(3.0)
+	_note_tween.tween_property(_note, "modulate:a", 0.0, 0.8)
 
 
 func is_open(id: String) -> bool:
@@ -180,6 +198,9 @@ func _build_activity() -> void:
 
 func open_activity(id: String) -> void:
 	_current = id
+	if _note_tween:
+		_note_tween.kill()
+	_note.modulate.a = 0.0  # announcements belong to the clearing
 	_last_site = id
 	for button in _buttons.values():
 		button.visible = false
@@ -200,13 +221,13 @@ func _close_activity() -> void:
 	_activity.visible = false
 	for button in _buttons.values():
 		button.visible = true
-	_day_label.text = "Day %d" % _camp.day if _camp else ""
+	_day_label.text = _status() if _camp else ""
 	if _buttons.has(_last_site) and visible:
 		_buttons[_last_site].grab_focus.call_deferred()
 
 
 func _refresh_activity() -> void:
-	_day_label.text = "Day %d" % _camp.day
+	_day_label.text = _status()
 	for child in _body.get_children():
 		_body.remove_child(child)
 		child.queue_free()
@@ -219,27 +240,89 @@ func _refresh_activity() -> void:
 		"cave": _cave_path()
 
 
+## The merchant (#42): buy supplies and the lantern, sell treasure and gear.
 func _merchant() -> void:
-	_text("\"Short on supplies? I'll see you right. Pay me when there's coin to pay with.\"")
-	if not _camp.can_restock():
-		_text("He's already topped up your pack today. Come back tomorrow.", MUTED)
-		return
-	var missing: Dictionary = _camp.restock_preview(_party, _wanted)
-	if missing.is_empty():
-		_text("Your pack already holds everything he'd give you.", MUTED)
-		return
-	_text("He'll top up your pack: " + _list_items(missing) + ".", MUTED)
-	var take := _button("Top up the pack (once a day)")
-	take.pressed.connect(func():
-		var given: Dictionary = _camp.restock(_party, _wanted)
-		_refresh_activity()
-		_text("Added " + _list_items(given) + ".", AMBER))
-	_body.add_child(take)
+	_text("\"Back again, and still breathing. Good for business. What'll it be?\"")
+	_purse_line()
+	if _camp.needs_charity(_party):
+		_text("He looks at your empty hands and sighs. \"Two torches. On account.\"", AMBER)
+		var charity := _button("Take two torches")
+		charity.pressed.connect(func():
+			_camp.give_charity(_party)
+			_refresh_activity())
+		_body.add_child(charity)
+	_body.add_child(_label("Buy", HEADING, 16, TEXT))
+	if not _party.supplies.has_lantern:
+		_shop_row("Lantern: brighter than a torch, burns oil. Yours to keep.", CampState.LANTERN_PRICE, func(): _camp.buy_lantern(_party))
+	for item: SupplyItem in CampState.MERCHANT_STOCK:
+		if item.effect == SupplyItem.Effect.REFILL_LANTERN and not _party.supplies.has_lantern:
+			continue  # oil is for lantern owners
+		var held: int = _party.supplies.count(item)
+		_shop_row("%s (you have %d)" % [item.display_name, held], item.price, _camp.buy.bind(_party, item))
+	var selling := false
+	for item: SupplyItem in _party.supplies.items:
+		if item.effect == SupplyItem.Effect.TREASURE and _party.supplies.count(item) > 0:
+			if not selling:
+				_body.add_child(_label("Sell", HEADING, 16, TEXT))
+				selling = true
+			_sell_row("%s ×%d" % [item.display_name, _party.supplies.count(item)], CampState.sale_price(item), _camp.sell.bind(_party, item))
+	for item: Equipment in _party.supplies.gear:
+		if not selling:
+			_body.add_child(_label("Sell", HEADING, 16, TEXT))
+			selling = true
+		_sell_row(item.display_name, CampState.sale_price(item), _camp.sell_gear.bind(_party, item))
 
 
+## The apprentice smith (#42): plain gear into the pack (equip it there).
 func _smith() -> void:
-	_text("The apprentice has little to show yet: %s." % ", ".join(PackedStringArray(SMITH_STOCK)))
-	_text("Nothing is for sale until you can pay.", MUTED)
+	_text("The apprentice wipes his hands. \"It's not much. But it'll hold.\"")
+	_purse_line()
+	for item: Equipment in CampState.SMITH_STOCK:
+		var accuracy := "" if is_zero_approx(item.accuracy_bonus) else ", %+d%% to hit" % roundi(item.accuracy_bonus * 100)
+		_shop_row("%s: %d-%d damage%s" % [item.display_name, item.attack_min, item.attack_max, accuracy], item.price, _camp.buy_gear.bind(_party, item))
+	_text("Coming once there are rules for them: %s." % ", ".join(PackedStringArray(CampState.SMITH_COMING)), MUTED)
+	_text("Bought gear goes in your pack; equip it from there.", MUTED)
+
+
+## Top-right: the day and the purse.
+func _status() -> String:
+	return "Day %d · %dg" % [_camp.day, _party.supplies.gold]
+
+
+func _purse_line() -> void:
+	_text("Your purse: %d gold" % _party.supplies.gold, AMBER)
+
+
+func _shop_row(text: String, price: int, on_buy: Callable) -> void:
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 8)
+	var name := _label(text, BODY, 12, TEXT)
+	name.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	name.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	row.add_child(name)
+	var buy := _button("Buy %dg" % price)
+	buy.custom_minimum_size = Vector2(70, 26)
+	buy.disabled = _party.supplies.gold < price
+	buy.pressed.connect(func():
+		on_buy.call()
+		_refresh_activity())
+	row.add_child(buy)
+	_body.add_child(row)
+
+
+func _sell_row(text: String, price: int, on_sell: Callable) -> void:
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 8)
+	var name := _label(text, BODY, 12, TEXT)
+	name.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	row.add_child(name)
+	var sell := _button("Sell %dg" % price)
+	sell.custom_minimum_size = Vector2(70, 26)
+	sell.pressed.connect(func():
+		on_sell.call()
+		_refresh_activity())
+	row.add_child(sell)
+	_body.add_child(row)
 
 
 func _nurse() -> void:
@@ -268,7 +351,21 @@ func _tent() -> void:
 		_text("A night's rest. It's day %d." % _camp.day, AMBER))
 	_body.add_child(rest)
 	_body.add_child(_label("Stash", HEADING, 16, TEXT))
-	_text("Stored items stay here, whatever happens down there.", MUTED)
+	_text("Stored items and gold stay here, whatever happens down there.", MUTED)
+	var gold_row := HBoxContainer.new()
+	gold_row.add_theme_constant_override("separation", 8)
+	var gold_text := _label("Gold: %d carried · %d in the stash" % [_party.supplies.gold, _camp.stash.gold], BODY, 12, AMBER)
+	gold_text.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	gold_row.add_child(gold_text)
+	for spec in [["Store gold", _camp.store_gold, _party.supplies.gold > 0], ["Take gold", _camp.take_gold, _camp.stash.gold > 0]]:
+		var button := _button(spec[0])
+		button.disabled = not spec[2]
+		var action: Callable = spec[1]
+		button.pressed.connect(func():
+			action.call(_party)
+			_refresh_activity())
+		gold_row.add_child(button)
+	_body.add_child(gold_row)
 	var columns := HBoxContainer.new()
 	columns.add_theme_constant_override("separation", 12)
 	_body.add_child(columns)
@@ -371,6 +468,10 @@ func _cave_path() -> void:
 	var staying: int = _party.living_members().size() - going.size()
 	if staying > 0:
 		_text("Anyone still recovering stays with the nurse.", MUTED)
+	if not _camp.contract.is_empty():
+		var c: Dictionary = _camp.contract
+		var state := "paid" if c["paid"] else "%d of %d" % [c["done"], c["count"]]
+		_text("Posted on the trail post, by order of the king: %s (%s)." % [CampState.contract_text(c), state], AMBER)
 	var down := _button("Head back down")
 	down.pressed.connect(func(): cave_chosen.emit())
 	_body.add_child(down)
@@ -404,13 +505,6 @@ func _row(column: VBoxContainer, text: String, action: String, on_press: Callabl
 		_refresh_activity())
 	row.add_child(button)
 	column.add_child(row)
-
-
-func _list_items(items: Dictionary) -> String:
-	var parts := PackedStringArray()
-	for item: SupplyItem in items:
-		parts.append("%s ×%d" % [item.display_name.to_lower(), items[item]])
-	return ", ".join(parts)
 
 
 func _text(text: String, color := TEXT) -> void:

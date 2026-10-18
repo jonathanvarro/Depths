@@ -37,7 +37,7 @@ func refresh() -> void:
 	if not visible or _party == null:
 		return
 	var supplies = _party.supplies
-	_time_label.text = "Time spent: %d" % _party.time_elapsed
+	_time_label.text = "%d gold  ·  Time spent: %d" % [supplies.gold, _party.time_elapsed]
 	match supplies.source:
 		Supplies.Source.TORCH:
 			_light_title.text = "Torch"

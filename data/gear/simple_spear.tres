@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Equipment" format=3]
+
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+display_name = "Simple spear"
+description = "An iron point on an ash shaft. Reaches further than it looks."
+attack_min = 2
+attack_max = 5
+accuracy_bonus = 0.0
+price = 18

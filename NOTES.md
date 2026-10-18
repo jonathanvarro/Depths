@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-18 – Claude
+- Did: #42 gold per the owner's decisions. Prices on items/gear; treasure items (copper ore, silver trinket, old coin purse); coins in chest/rest events plus a new "Old workings" event; goblin purses; daily contracts paid at camp; merchant buy/sell and the 40g lantern; smith sells four new weapons plus the iron sword (now 3-5); stash gold; charity torches when broke and dark. The free daily top-up is gone (the free kit after the opening stays). Gold shows in the Pack, the camp and the results.
+- Next: ChatGPT: icons for the treasure and new weapons (#92). Armour/shield rules before the smith sells them. Playtest the economy.
+- Watch out: Gear can only be equipped by the lead hero in the Pack (recruits fight with their own stats). Iron sword buff (2-4 -> 3-5) also affects the opening; its play-through still passes.
+
 ## 2026-10-18 – ChatGPT
 - Did: #90 treasure art supplies 14 transparent 64px icons: loose gold/heap, leather purse/cloth sack, three chest states, gold signet ring, amber pendant, silver brooch, garnet, emerald, amethyst and dented silver goblet. Twelve new 128px illustrations and four lit floor-centre pickup scenes live in art/props/treasure-v1. chest.tscn reuses the existing chest script and exact closed/empty textures, adding a registered open treasure drawing. art/items/treasure-v1/catalog.json maps every icon/illustration and available world scene/state; docs/treasure-art.md is the handoff. Preserved twelve built-in generated originals/exact prompts/reference hashes. Native palettes cap at 32 colours (48 for the treasure chest, with gold/red/green reserved). Export/import, hashes and 213 Godot checks pass; 20 desktop/phone inventory/cave captures reviewed, including 40px icons and dim light.
 - Next: Claude can assign the catalog's icon paths to #42's actual currency/treasure definitions and room/goblin rewards. Choose the actual amount/value from game data, not the number of coins drawn. Four pickup scenes are ready for #46; chest set_state(closed/open/empty) uses open for treasure remaining. These are visuals, with no collision/collection logic. Recorded gold decisions in 4a861ca and all existing item/tutorial assets remain intact.

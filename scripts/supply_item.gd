@@ -13,6 +13,7 @@ enum Effect {
 	HEAL_ONE,  ## the most hurt living hero heals `amount` over `duration`
 	DRESS_INJURY,  ## binds one injury until camp (#11)
 	LIGHT_TORCH,  ## lights a torch to hold; it burns down (#59)
+	TREASURE,  ## not usable: sold to the merchant for `price` (#42)
 }
 
 @export var display_name := "Supply"
@@ -29,3 +30,5 @@ enum Effect {
 ## Food and healing are for outside combat (#10); only items marked here can
 ## be used in a fight.
 @export var usable_in_combat := false
+## Gold: what the merchant charges, or for treasure what he pays (#42).
+@export var price := 0

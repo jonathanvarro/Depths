@@ -38,6 +38,8 @@ var torch_left := 0.0
 var torch_burns := true
 ## Gear carried in the pack (not wielded), e.g. a spare weapon (#58).
 var gear: Array[Equipment] = []
+## Carried gold (#42). Lost in a party wipe; the camp stash keeps its own.
+var gold := 0
 ## Oil left in a flask that was only partly poured (used first next refill).
 var open_flask := 0.0
 var items: Array[SupplyItem] = []  # kinds carried, in pack order
@@ -118,6 +120,7 @@ func lose_everything() -> void:
 	items.clear()
 	_counts.clear()
 	gear.clear()
+	gold = 0
 	open_flask = 0.0
 	oil = 0.0
 	has_lantern = false

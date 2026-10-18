@@ -12,3 +12,5 @@ extends Resource
 @export var attack_max := 2
 ## Added to the hero's hit chance (negative for a poor weapon).
 @export_range(-0.5, 0.5) var accuracy_bonus := 0.0
+## Gold at the smith; the merchant buys it back for 30% (#42).
+@export var price := 0

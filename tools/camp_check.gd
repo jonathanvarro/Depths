@@ -73,8 +73,9 @@ func _initialize() -> void:
 	await _open("supplies")
 	check("merchant view with his portrait", main._camp.is_open("supplies") and main._camp._portrait.texture != null)
 	await _snap("merchant")
-	check("top-up restores the rations", _press(main._camp, "Top up") and supplies.count(ration) == 2)
-	check("only once a day", not main._camp_state.can_restock() and _body_text().contains("tomorrow"))
+	supplies.gold = 8
+	main._camp._refresh_activity()
+	check("buy rations back for 4g each", _press(main._camp, "Buy 4g") and _press(main._camp, "Buy 4g") and supplies.count(ration) == 2 and supplies.gold == 0)
 
 	# Escape goes back to the clearing.
 	var esc := InputEventAction.new()
@@ -87,7 +88,7 @@ func _initialize() -> void:
 
 	# Smith: stock shown, nothing for sale yet.
 	await _open("smith")
-	check("smith shows stock, not for sale", _body_text().contains("plain knife") and _body_text().contains("until you can pay"))
+	check("smith sells plain gear; shield and coat still coming", _body_text().contains("Plain knife") and _body_text().contains("Coming once"))
 
 	# Nurse: treatment takes Mara out for the wound's days.
 	await _open("treatment")
@@ -106,7 +107,7 @@ func _initialize() -> void:
 	check("rest button names the next day", _press(main._camp, "Rest until day 2"))
 	check("rest: day 2, full health, calm", main._camp_state.day == 2 and hero.health == hero.effective_max_health() and hero.strain == 0.0)
 	check("a new day re-seeds the cave", main._site_seed != seed_before and main._floors.is_empty())
-	check("merchant restocks on the new day", main._camp_state.can_restock())
+	check("a new contract is posted on the new day", main._camp_state.contract.has("enemy"))
 	var stash_total := func() -> int:
 		var n: int = main._camp_state.stash.gear.size()
 		for item in main._camp_state.stash.items:

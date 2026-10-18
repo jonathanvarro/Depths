@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SupplyItem" format=3]
+
+[ext_resource type="Script" path="res://scripts/supply_item.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+display_name = "Copper ore"
+description = "A green-streaked lump from the old workings. The merchant will buy it."
+effect = 5
+use_time = 0
+price = 3

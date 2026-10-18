@@ -21,6 +21,8 @@ enum Target {
 @export var oil := 0.0
 ## Supplies found.
 @export var loot: Dictionary[SupplyItem, int] = {}
+## Gold coins found (#42).
+@export var gold := 0
 ## Gear found (goes into the pack, unequipped).
 @export var gear: Array[Equipment] = []
 ## The party rests here (as at a rest spot).

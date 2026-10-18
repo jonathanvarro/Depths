@@ -5,13 +5,16 @@
 [ext_resource type="Script" path="res://scripts/event_outcome.gd" id="outcome"]
 [ext_resource type="Resource" path="res://data/items/restorative_draught.tres" id="draught"]
 [ext_resource type="Resource" path="res://data/enemies/goblin.tres" id="goblin"]
+[ext_resource type="Resource" path="res://data/items/old_coin_purse.tres" id="purse"]
+[ext_resource type="Resource" path="res://data/items/copper_ore.tres" id="ore"]
 
 [sub_resource type="Resource" id="o0_0"]
 script = ExtResource("outcome")
 weight = 2
-text = "Under the stones: a stoppered draught and a pot of rendered fat for the lamp."
+text = "Under the stones: a stoppered draught, a pot of rendered fat for the lamp, and a handful of coins."
 oil = 30.0
 loot = Dictionary[SupplyItem, int]({ExtResource("draught"): 1})
+gold = 10
 
 [sub_resource type="Resource" id="o0_1"]
 script = ExtResource("outcome")
@@ -19,11 +22,17 @@ weight = 1
 text = "The charm rattles as the stones shift. Footsteps answer from the dark."
 ambush = Array[EnemyType]([ExtResource("goblin")])
 
+[sub_resource type="Resource" id="o0_2"]
+script = ExtResource("outcome")
+weight = 1
+text = "Stolen goods: an old coin purse and lumps of copper ore."
+loot = Dictionary[SupplyItem, int]({ExtResource("purse"): 1, ExtResource("ore"): 2})
+
 [sub_resource type="Resource" id="c0"]
 script = ExtResource("choice")
 label = "Dig through the stones"
 time_cost = 3
-outcomes = Array[EventOutcome]([SubResource("o0_0"), SubResource("o0_1")])
+outcomes = Array[EventOutcome]([SubResource("o0_0"), SubResource("o0_1"), SubResource("o0_2")])
 
 [sub_resource type="Resource" id="o1_0"]
 script = ExtResource("outcome")

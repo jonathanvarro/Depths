@@ -15,6 +15,33 @@ signal changed
 
 const Supplies := preload("res://scripts/supplies.gd")
 const Recruits := preload("res://scripts/recruits.gd")
+const TORCH := preload("res://data/items/torch.tres")
+## Gold (#42): the lantern upgrade, and what the merchant pays for gear.
+const LANTERN_PRICE := 40
+const GEAR_RESALE := 0.3
+## What the merchant and the smith sell.
+const MERCHANT_STOCK: Array[SupplyItem] = [
+	preload("res://data/items/torch.tres"),
+	preload("res://data/items/ration.tres"),
+	preload("res://data/items/dressing.tres"),
+	preload("res://data/items/restorative_draught.tres"),
+	preload("res://data/items/oil_flask.tres"),
+]
+const SMITH_STOCK: Array[Equipment] = [
+	preload("res://data/gear/plain_knife.tres"),
+	preload("res://data/gear/wooden_club.tres"),
+	preload("res://data/gear/simple_spear.tres"),
+	preload("res://data/gear/woodcutters_axe.tres"),
+	preload("res://data/gear/iron_sword.tres"),
+]
+## Not for sale until armour and shields have rules.
+const SMITH_COMING := ["a rough wooden shield (16g)", "a padded coat (28g)"]
+## Contracts the king's camp posts, one a day (#42).
+const CONTRACTS := [
+	{"enemy": "Goblin", "plural": "goblins", "count": 3, "reward": 15},
+	{"enemy": "Spider", "plural": "spiders", "count": 3, "reward": 8},
+	{"enemy": "Rat", "plural": "rats", "count": 4, "reward": 5},
+]
 ## How many recruits wait at the fire (#41).
 const CANDIDATES := 3
 
@@ -28,7 +55,9 @@ var candidates: Array[Companion] = []
 ## Heroes recovering in the nurse's tent while the others are down below.
 var left_behind: Array[Companion] = []
 var rng := RandomNumberGenerator.new()
-var _restocked_on := 0
+## Today's contract: enemy, plural, count, reward, done, paid.
+var contract := {}
+var _charity_on := 0
 var _used_names: Array = []  # each name comes by once before any repeats
 
 
@@ -36,6 +65,7 @@ var _used_names: Array = []  # each name comes by once before any repeats
 func start(seed_value: int) -> void:
 	rng.seed = seed_value
 	_fill_fire()
+	post_contract()
 
 
 func _fill_fire() -> void:
@@ -94,6 +124,7 @@ func rest(party) -> void:
 	if not candidates.is_empty():
 		candidates.pop_front()  # the longest-waiting moves on
 	_fill_fire()
+	post_contract()
 	for hero in recovering.keys():
 		if recovering[hero] <= day:
 			recovering.erase(hero)
@@ -133,30 +164,130 @@ func available(party) -> Array[Companion]:
 	return party.living_members().filter(func(h: Companion): return not is_recovering(h))
 
 
-func can_restock() -> bool:
-	return _restocked_on < day
+## The merchant (#42): sells supplies and the lantern, buys treasure and
+## gear (gear at 30%). The basic kit after the opening is free (main.gd).
+func can_afford(party, price: int) -> bool:
+	return party.supplies.gold >= price
 
 
-## What the merchant would add to bring the pack up to `wanted`.
-func restock_preview(party, wanted: Dictionary) -> Dictionary:
-	var missing := {}
-	for item in wanted:
-		var short: int = wanted[item] - party.supplies.count(item)
-		if short > 0:
-			missing[item] = short
-	return missing
-
-
-## Tops the pack up to `wanted`, once a day (free until gold exists, #42).
-func restock(party, wanted: Dictionary) -> Dictionary:
-	if not can_restock():
-		return {}
-	var given := restock_preview(party, wanted)
-	for item in given:
-		party.supplies.add(item, given[item])
-	_restocked_on = day
+func buy(party, item: SupplyItem) -> bool:
+	if not can_afford(party, item.price):
+		return false
+	party.supplies.gold -= item.price
+	party.supplies.add(item)
 	changed.emit()
-	return given
+	return true
+
+
+func buy_lantern(party) -> bool:
+	var supplies = party.supplies
+	if supplies.has_lantern or not can_afford(party, LANTERN_PRICE):
+		return false
+	supplies.gold -= LANTERN_PRICE
+	supplies.has_lantern = true
+	supplies.oil = Supplies.LANTERN_CAPACITY
+	supplies.source = Supplies.Source.LANTERN
+	supplies.torch_left = 0.0
+	supplies.changed.emit()
+	changed.emit()
+	return true
+
+
+static func sale_price(item) -> int:
+	if item is Equipment:
+		return floori(item.price * GEAR_RESALE)
+	return item.price
+
+
+func sell(party, item: SupplyItem) -> bool:
+	if item.effect != SupplyItem.Effect.TREASURE or not party.supplies.take(item):
+		return false
+	party.supplies.gold += sale_price(item)
+	party.supplies.changed.emit()
+	changed.emit()
+	return true
+
+
+func sell_gear(party, item: Equipment) -> bool:
+	if item not in party.supplies.gear:
+		return false
+	party.supplies.gear.erase(item)
+	party.supplies.gold += sale_price(item)
+	party.supplies.changed.emit()
+	changed.emit()
+	return true
+
+
+## The smith's stock (#42): plain gear into the pack, to equip there.
+func buy_gear(party, item: Equipment) -> bool:
+	if not can_afford(party, item.price):
+		return false
+	party.supplies.gold -= item.price
+	party.supplies.gear.append(item)
+	party.supplies.changed.emit()
+	changed.emit()
+	return true
+
+
+## No light and no money: the merchant fronts two torches, once a day, so
+## the party is never stuck at camp (#41's "always a viable party").
+func needs_charity(party) -> bool:
+	var supplies = party.supplies
+	return not supplies.has_lantern and supplies.count(TORCH) == 0 and supplies.gold < TORCH.price and _charity_on < day
+
+
+func give_charity(party) -> bool:
+	if not needs_charity(party):
+		return false
+	party.supplies.add(TORCH, 2)
+	_charity_on = day
+	changed.emit()
+	return true
+
+
+## Gold moves between the pack and the stash all at once.
+func store_gold(party) -> void:
+	stash.gold += party.supplies.gold
+	party.supplies.gold = 0
+	party.supplies.changed.emit()
+	changed.emit()
+
+
+func take_gold(party) -> void:
+	party.supplies.gold += stash.gold
+	stash.gold = 0
+	party.supplies.changed.emit()
+	changed.emit()
+
+
+## Today's posted contract from the king's camp (#42): beat so many of one
+## kind of enemy for a lump sum, paid back at camp. A new one each day.
+func post_contract() -> void:
+	var offer: Dictionary = CONTRACTS[rng.randi_range(0, CONTRACTS.size() - 1)]
+	contract = offer.duplicate()
+	contract["done"] = 0
+	contract["paid"] = false
+	changed.emit()
+
+
+func count_kill(enemy_name: String) -> void:
+	if not contract.is_empty() and not contract["paid"] and enemy_name == contract["enemy"]:
+		contract["done"] = mini(contract["done"] + 1, contract["count"])
+
+
+## Pays a completed contract into the pack. Returns the reward (0 if none).
+func collect_contract(party) -> int:
+	if contract.is_empty() or contract["paid"] or contract["done"] < contract["count"]:
+		return 0
+	contract["paid"] = true
+	party.supplies.gold += contract["reward"]
+	party.supplies.changed.emit()
+	changed.emit()
+	return contract["reward"]
+
+
+static func contract_text(offer: Dictionary) -> String:
+	return "Beat %d %s: %d gold" % [offer["count"], offer["plural"], offer["reward"]]
 
 
 func store(party, item: SupplyItem) -> void:

@@ -317,6 +317,7 @@ func _ready() -> void:
 			_party_state.supplies.add(item, starting_supplies[item])
 	_expedition = Expedition.new(_party_state, 1)
 	_room_events.loot_found.connect(func(loot): _expedition.add_found(loot))
+	_room_events.gold_found.connect(func(amount): _expedition.gold_found += amount)
 
 	_minimap = Minimap.new()
 	_build_ui(_minimap)
@@ -550,6 +551,8 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 	for foe in state.foes:
 		if foe.health <= 0:
 			_expedition.add_defeated(foe.type.display_name)
+			_camp_state.count_kill(foe.type.display_name)  # today's contract (#42)
+			_loot_purse(foe)
 	match result:
 		CombatState.Result.VICTORY:
 			_party.locked = false
@@ -569,6 +572,18 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 			_check_opening_exit()
 		CombatState.Result.DEFEAT:
 			_end_expedition(Expedition.Ending.WIPED)
+
+
+## A beaten enemy's purse (goblins, #42).
+func _loot_purse(foe) -> void:
+	var purse: Vector2i = foe.type.purse
+	if purse.y <= 0:
+		return
+	var coins := randi_range(purse.x, purse.y)
+	_party_state.supplies.gold += coins
+	_party_state.supplies.changed.emit()
+	_expedition.gold_found += coins
+	_show_message("The %s's purse: %d gold." % [foe.name.to_lower(), coins])
 
 
 ## Ends the expedition (#17) and shows what it gained and cost.
@@ -618,7 +633,10 @@ func _start_new_expedition() -> void:
 			_party_state.remove_member(hero)
 	_camp_state.rejoin(_party_state)
 	# The campsite (#40): nothing recovers by itself - rest in your tent.
-	_camp.open(_camp_state, _party_state, starting_supplies)
+	_camp.open(_camp_state, _party_state)
+	var reward: int = _camp_state.collect_contract(_party_state)
+	if reward > 0:
+		_camp.announce("The king's quartermaster pays the contract: %d gold." % reward)
 	await _camp.cave_chosen
 	_camp.visible = false
 	_camp_state.leave_behind(_party_state)

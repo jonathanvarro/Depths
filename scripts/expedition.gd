@@ -19,6 +19,7 @@ var enemies_defeated := {}  # display name -> count
 var retreats := 0
 var events_resolved := 0
 var found := {}  # SupplyItem -> count
+var gold_found := 0  # coins, purses and contracts (#42)
 
 var _start_time := 0
 var _start_oil := 0.0
@@ -67,6 +68,8 @@ func gained(party) -> PackedStringArray:
 	for item: SupplyItem in found:
 		finds.append("%s ×%d" % [item.display_name.to_lower(), found[item]])
 	lines.append("Found: " + (", ".join(finds) if not finds.is_empty() else "nothing"))
+	if gold_found > 0:
+		lines.append("Gold found: %d" % gold_found)
 	for hero: Companion in _start_heroes:
 		if hero.is_alive() and hero.strain < _start_heroes[hero]["strain"] - 0.5:
 			lines.append("%s is calmer (strain %d → %d)" % [hero.display_name, roundi(_start_heroes[hero]["strain"]), roundi(hero.strain)])

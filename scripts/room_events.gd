@@ -6,6 +6,7 @@ const EVENTS_DIR := "res://data/events"
 
 ## Supplies found by any choice, for the expedition record (#17).
 signal loot_found(loot: Dictionary)
+signal gold_found(amount: int)
 
 var library: Array[RoomEvent] = []
 var rng := RandomNumberGenerator.new()
@@ -83,6 +84,11 @@ func resolve(party, choice: EventChoice) -> Dictionary:
 	for item in outcome.loot:
 		party.supplies.add(item, outcome.loot[item])
 		notes.append("found %s ×%d" % [item.display_name.to_lower(), outcome.loot[item]])
+	if outcome.gold > 0:
+		party.supplies.gold += outcome.gold
+		party.supplies.changed.emit()
+		gold_found.emit(outcome.gold)
+		notes.append("found %d gold" % outcome.gold)
 	for item in outcome.gear:
 		party.supplies.gear.append(item)
 		party.supplies.changed.emit()

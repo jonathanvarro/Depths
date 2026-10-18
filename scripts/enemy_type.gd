@@ -31,3 +31,5 @@ enum Tactic {
 @export var tactic := Tactic.BASIC
 ## Shown when the fight starts: a hint at how it fights.
 @export var intro := ""
+## Gold dropped when beaten, min-max (goblins carry purses, #42).
+@export var purse := Vector2i.ZERO

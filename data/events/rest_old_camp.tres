@@ -21,8 +21,9 @@ outcomes = Array[EventOutcome]([SubResource("o0_0")])
 [sub_resource type="Resource" id="o1_0"]
 script = ExtResource("outcome")
 weight = 2
-text = "Tucked in the bedroll: a ration, still sealed."
+text = "Tucked in the bedroll: a ration, still sealed, and four coins."
 loot = Dictionary[SupplyItem, int]({ExtResource("ration"): 1})
+gold = 4
 
 [sub_resource type="Resource" id="o1_1"]
 script = ExtResource("outcome")

@@ -160,6 +160,16 @@ Suggested initial presentation: one campsite screen with a few selectable activi
 - **Selling:** gear sells back at 30%; treasure sells at its listed value.
 - **Wipe:** carried gold is lost; gold in the tent stash is kept.
 - **Contracts, treasure values and armour rules** are proposals on #42, to settle while building.
+- *Implemented:*
+  - **Gold sources:** an abandoned pack can hold 5g and a silver trinket; a goblin stash 10g, or a coin purse and ore; the old campsite 4g. A new depth-1 event, **Old workings**, yields copper ore (3g each) or 3g.
+  - **Goblin purses:** 2–6g each.
+  - **Contracts:** one a day, on the cave path's trail post (3 goblins 15g, 3 spiders 8g, 4 rats 5g), paid on arrival at camp.
+  - **Treasure:** copper ore 3g, silver trinket 6g, old coin purse 10g. It can't be used, only sold.
+  - **The merchant** sells supplies (oil only to lantern owners) and the 40g lantern, which switches the party to it. He buys treasure and gear (30%).
+  - **The smith** sells: plain knife 1–3 +10% (8g), wooden club 2–4 (10g), simple spear 2–5 (18g), woodcutter's axe 3–5 −10% (24g), iron sword now 3–5 +5% (40g). The shield and padded coat wait for armour rules.
+  - **Stash gold:** the stash stores and returns gold.
+  - **A party with no light and no money** gets two torches on account, once a day, so it's never stuck.
+  - **Gold shows** in the Pack, at the top of the camp, and on the results screen.
 
 The suggested retreat flow is to return through the dungeon to its entrance before reaching camp, with discovered shortcuts potentially easing later returns. Travel costs, escape exceptions, refuge services, recovery timing, and prices still need design decisions. Rest spots inside the dungeon remain distinct from the outside refuge.
 

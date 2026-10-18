@@ -130,6 +130,8 @@ func cannot_use_reason(item: SupplyItem, in_combat := false) -> String:
 	if supplies.count(item) <= 0 and not (item.effect == SupplyItem.Effect.REFILL_LANTERN and supplies.open_flask > 0.0):
 		return "None left"
 	match item.effect:
+		SupplyItem.Effect.TREASURE:
+			return "Sell it at camp"
 		SupplyItem.Effect.REFILL_LANTERN:
 			if not supplies.has_lantern:
 				return "No lantern"
