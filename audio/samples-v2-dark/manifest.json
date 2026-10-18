@@ -1,0 +1,147 @@
+{
+  "date": "2026-10-18",
+  "issues": [
+    54,
+    96
+  ],
+  "status": "Owner-requested darker synthesized auditions; live replacements undecided.",
+  "direction": "Dense contact, rough material friction, short damped resonance; avoid cartoon pitch glides or musical ringing.",
+  "method": "Original filtered-noise synthesis, subdued modal metal and irregular friction. No recordings or AI audio service.",
+  "python_source": "tools/audio/generate_sfx_dark.py",
+  "shared_primitives": "tools/audio/generate_sfx_samples.py",
+  "numpy_version": "2.3.5",
+  "sample_rate": 44100,
+  "channels": 1,
+  "pcm_bits": 16,
+  "looped": false,
+  "checks": "Finite samples, PCM round-trip, format, headroom, zero endpoints and SHA-256.",
+  "effects": [
+    {
+      "file": "heartbeat.wav",
+      "seconds": 0.78,
+      "peak_dbfs": -9.0,
+      "rms_dbfs": -25.53,
+      "clipped_samples": 0,
+      "boundary_samples": [
+        0,
+        0
+      ],
+      "sha256": "b0f3d76ec60771cd357cd64f437ea1de2be7be949a83b0356dda5d31ed6ca38d",
+      "description": "Muffled pressure and skin; removes the pitched drum-like glide.",
+      "seed": 960542,
+      "reel_start_seconds": 0.25
+    },
+    {
+      "file": "club-hit.wav",
+      "seconds": 1.05,
+      "peak_dbfs": -6.0,
+      "rms_dbfs": -26.12,
+      "clipped_samples": 0,
+      "boundary_samples": [
+        0,
+        0
+      ],
+      "sha256": "724ddce2ca97e67cd52a0cc7bcf58f10edfeab3980147762694afd57f736d328",
+      "description": "Dense irregular thud, crushed cloth and abrupt wooden contact; no ringing body.",
+      "seed": 960543,
+      "reel_start_seconds": 1.68
+    },
+    {
+      "file": "shield-block.wav",
+      "seconds": 1.2,
+      "peak_dbfs": -7.0,
+      "rms_dbfs": -30.95,
+      "clipped_samples": 0,
+      "boundary_samples": [
+        0,
+        0
+      ],
+      "sha256": "27ef1c2a4d9e6f61d57d2bb11e2647df55bb1fa73d8930d0cc327719ff656d55",
+      "description": "Strained rough timber, hard contact and short dull fitting chatter.",
+      "seed": 960544,
+      "reel_start_seconds": 3.38
+    },
+    {
+      "file": "coin-pouch.wav",
+      "seconds": 1.85,
+      "peak_dbfs": -10.0,
+      "rms_dbfs": -30.14,
+      "clipped_samples": 0,
+      "boundary_samples": [
+        0,
+        0
+      ],
+      "sha256": "13cd94e4922f1bf747797c20e3e65aad6dcd790f32265ecf75269a409f8f0114",
+      "description": "Damped worn coins against creased leather; less sparkle and shorter rings.",
+      "seed": 960545,
+      "reel_start_seconds": 5.23
+    },
+    {
+      "file": "chest-open.wav",
+      "seconds": 2.65,
+      "peak_dbfs": -9.0,
+      "rms_dbfs": -28.57,
+      "clipped_samples": 0,
+      "boundary_samples": [
+        0,
+        0
+      ],
+      "sha256": "65fa3231c4a17071113d3f9efbd2f96e1fb705507aae77c170225ea3e673e464",
+      "description": "Heavy latch, abrasive hinge friction and dull wooden lid; less tonal squeak.",
+      "seed": 960546,
+      "reel_start_seconds": 7.73
+    },
+    {
+      "file": "torch-light.wav",
+      "seconds": 3.5,
+      "peak_dbfs": -10.0,
+      "rms_dbfs": -25.41,
+      "clipped_samples": 0,
+      "boundary_samples": [
+        0,
+        0
+      ],
+      "sha256": "9f4c16c7a883be6fc9225287f8bed40022b2a7462ab87551536ef17cc2deb3aa",
+      "description": "Coarser flint, uneven low fire and dry charcoal crackles; less airy hiss.",
+      "seed": 960547,
+      "reel_start_seconds": 11.03
+    }
+  ],
+  "audition": {
+    "file": "audition.wav",
+    "seconds": 15.18,
+    "peak_dbfs": -6.0,
+    "rms_dbfs": -28.54,
+    "clipped_samples": 0,
+    "boundary_samples": [
+      0,
+      0
+    ],
+    "sha256": "54eb16891e5be4babe99dfdd0d25bb75f2dc96d68a261ecd30cd9c62610cb2a2"
+  },
+  "club_comparison": {
+    "file": "club-comparison.wav",
+    "seconds": 3.55,
+    "peak_dbfs": -6.0,
+    "rms_dbfs": -32.18,
+    "clipped_samples": 0,
+    "boundary_samples": [
+      0,
+      0
+    ],
+    "sha256": "6344492965690cf30e811a2cb0a881546e77c66ea527e4a675a7d97d69747dc4",
+    "order": [
+      "v1 original",
+      "v2 dark"
+    ],
+    "start_seconds": [
+      0.25,
+      2.1
+    ],
+    "comparison_gain_db": [
+      0.0,
+      -3.781
+    ],
+    "matching": "Equal whole-clip RMS; not a perceptual loudness calibration."
+  }
+}

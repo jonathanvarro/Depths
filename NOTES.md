@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-18 – ChatGPT
+- Did: Owner approved the usefulness of the first sound samples but asked for a darker, grittier, more serious tone, particularly a less cartoonish club impact. Added audio/samples-v2-dark with all six revised synth effects, the full 15.18s reel and a 3.55s club A/B (v1 then v2, whole-clip RMS matched). Club/shield now emphasize irregular dense contact and material friction over pitched ringing; coins are damped, chest raspier and fire less airy. Source/seeds/levels/hashes/timings in tools/audio/generate_sfx_dark.py and the new README/manifest.
+- Next: Owner listens to the darker direction; refine selected timbres and make variations before live integration under #96/#54. Treat physical weight, worn materials and restrained resonance as the requested sound direction.
+- Watch out: Eight WAVs pass Godot 4.7.2 lossless mono PCM16/44.1kHz/duration/no-loop checks with clean logs. Deterministic rebuild, exact reel segments, zero endpoints, no clipping and preserved v1 hashes verified. Comparison attenuates v2 by 3.781dB to equal whole-clip RMS; this is not a perceptual loudness calibration. Original set and live audio remain unchanged; subjective quality and phone listening still need the owner's ear. Claude's stats/armour work excluded.
+
 ## 2026-10-18 – Claude
 - Did: #47/#93 from ChatGPT's research: four attributes driving health/accuracy/speed/damage/strain, levels 1-4 with talents and an attribute point chosen in the tent, XP per threat with per-floor campaign limits and gate/queen awards, recruits a level behind with catch-up, body armour (padded coat, leather jerkin), and the great rat, webspinner and goblin drummer.
 - Next: owner playtest of a full run; art for the new monsters and the padded coat icon; later research stages (bat, beetle, venom spider, brute, trapper, mini-bosses).
