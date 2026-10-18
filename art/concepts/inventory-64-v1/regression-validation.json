@@ -1,0 +1,79 @@
+{
+  "date": "2026-10-18",
+  "engine": "4.7.2",
+  "recruit_kit": {
+    "captures": 24,
+    "checks": 424,
+    "failures": [],
+    "godot": "4.7.2",
+    "native_portrait_sizes": [
+      [
+        192,
+        192
+      ],
+      [
+        96,
+        96
+      ]
+    ],
+    "physical_phone_test": false,
+    "viewports": [
+      [
+        1280,
+        720
+      ],
+      [
+        1278,
+        590
+      ]
+    ]
+  },
+  "recruit_roster": {
+    "asset_canvas": [
+      192,
+      192
+    ],
+    "captures": 24,
+    "checks": 2413,
+    "failures": [],
+    "godot": "4.7.2",
+    "physical_phone_test": false,
+    "review_portrait_sizes": [
+      [
+        128,
+        128
+      ],
+      [
+        96,
+        96
+      ]
+    ],
+    "viewports": [
+      [
+        1280,
+        720
+      ],
+      [
+        1278,
+        590
+      ]
+    ]
+  },
+  "live_flows": {
+    "camp": {
+      "pass_count": 28,
+      "fails_zero": true,
+      "stderr_empty": true
+    },
+    "gold": {
+      "pass_count": 24,
+      "fails_zero": true,
+      "stderr_empty": true
+    },
+    "opening": {
+      "pass_count": 30,
+      "fails_zero": true,
+      "stderr_empty": true
+    }
+  }
+}

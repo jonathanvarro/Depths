@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Companion" format=3]
 
 [ext_resource type="Script" path="res://scripts/companion.gd" id="1"]
-[ext_resource type="Texture2D" path="res://art/concepts/portraits/mara-base-192-v2.png" id="2"]
+[ext_resource type="Texture2D" path="res://art/portraits/mara-neutral-v1/preview.png" id="2"]
 [ext_resource type="Resource" path="res://data/portraits/mara.tres" id="3"]
 [ext_resource type="Resource" path="res://data/dialogue/mara.tres" id="4"]
 [ext_resource type="Resource" path="res://data/gear/broken_knife.tres" id="5"]

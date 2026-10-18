@@ -1,0 +1,81 @@
+{
+  "issue": 92,
+  "canvas": [
+    64,
+    64
+  ],
+  "padding": 4,
+  "assets": [
+    {
+      "id": "plain-knife",
+      "icon": "res://art/items/inventory-64-v1/plain-knife.png",
+      "resource": "res://data/gear/plain_knife.tres"
+    },
+    {
+      "id": "wooden-club",
+      "icon": "res://art/items/inventory-64-v1/wooden-club.png",
+      "resource": "res://data/gear/wooden_club.tres"
+    },
+    {
+      "id": "simple-spear",
+      "icon": "res://art/items/inventory-64-v1/simple-spear.png",
+      "resource": "res://data/gear/simple_spear.tres"
+    },
+    {
+      "id": "woodcutters-axe",
+      "icon": "res://art/items/inventory-64-v1/woodcutters-axe.png",
+      "resource": "res://data/gear/woodcutters_axe.tres"
+    },
+    {
+      "id": "plain-staff",
+      "icon": "res://art/items/inventory-64-v1/plain-staff.png"
+    },
+    {
+      "id": "iron-sword",
+      "icon": "res://art/items/inventory-64-v1/iron-sword.png",
+      "resource": "res://data/gear/iron_sword.tres"
+    },
+    {
+      "id": "wooden-shield",
+      "icon": "res://art/items/inventory-64-v1/wooden-shield.png"
+    },
+    {
+      "id": "padded-coat",
+      "icon": "res://art/items/inventory-64-v1/padded-coat.png"
+    },
+    {
+      "id": "oil-flask",
+      "icon": "res://art/items/inventory-64-v1/oil-flask.png"
+    },
+    {
+      "id": "party-ration",
+      "icon": "res://art/items/inventory-64-v1/party-ration.png"
+    },
+    {
+      "id": "clean-dressing",
+      "icon": "res://art/items/inventory-64-v1/clean-dressing.png",
+      "resource": "res://data/items/dressing.tres"
+    },
+    {
+      "id": "restorative-draught",
+      "icon": "res://art/items/inventory-64-v1/restorative-draught.png"
+    },
+    {
+      "id": "antivenom",
+      "icon": "res://art/items/inventory-64-v1/antivenom.png"
+    },
+    {
+      "id": "copper-ore",
+      "icon": "res://art/items/inventory-64-v1/copper-ore.png",
+      "resource": "res://data/items/copper_ore.tres"
+    },
+    {
+      "id": "lantern",
+      "icon": "res://art/items/inventory-64-v1/lantern.png"
+    },
+    {
+      "id": "lantern-unlit",
+      "icon": "res://art/items/inventory-64-v1/lantern-unlit.png"
+    }
+  ]
+}

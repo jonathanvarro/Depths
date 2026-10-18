@@ -1,28 +1,32 @@
 [gd_resource type="Resource" script_class="PortraitSet" format=3]
 
-[ext_resource type="Script" path="res://scripts/portrait_set.gd" id="1"]
-[ext_resource type="Texture2D" path="res://art/concepts/portraits/mara-layered-v1/background.png" id="2"]
-[ext_resource type="Texture2D" path="res://art/concepts/portraits/mara-layered-v1/base.png" id="3"]
-[ext_resource type="Texture2D" path="res://art/concepts/portraits/mara-layered-v1/eyes-neutral.png" id="4"]
-[ext_resource type="Texture2D" path="res://art/concepts/portraits/mara-layered-v1/mouth-neutral.png" id="5"]
-[ext_resource type="Texture2D" path="res://art/concepts/portraits/mara-layered-v1/tunic.png" id="6"]
-[ext_resource type="Texture2D" path="res://art/portraits/mara-animation-v1/eyes-half.png" id="7"]
-[ext_resource type="Texture2D" path="res://art/portraits/mara-animation-v1/eyes-closed.png" id="8"]
-[ext_resource type="Texture2D" path="res://art/portraits/mara-animation-v1/mouth-small.png" id="9"]
-[ext_resource type="Texture2D" path="res://art/portraits/mara-animation-v1/mouth-open.png" id="10"]
-[ext_resource type="Texture2D" path="res://art/portraits/mara-animation-v1/mouth-round.png" id="11"]
-[ext_resource type="Texture2D" path="res://art/portraits/mara-animation-v1/blood.png" id="12"]
-[ext_resource type="Texture2D" path="res://art/portraits/mara-animation-v1/dirt.png" id="13"]
-[ext_resource type="Texture2D" path="res://art/portraits/mara-animation-v1/bandage.png" id="14"]
-[ext_resource type="Texture2D" path="res://art/portraits/mara-animation-v1/pallor.png" id="15"]
+[ext_resource type="Script" path="res://scripts/portrait_set.gd" id="script"]
+[ext_resource type="Texture2D" path="res://art/concepts/portraits/mara-layered-v1/background.png" id="background"]
+[ext_resource type="Texture2D" path="res://art/portraits/mara-neutral-v1/base.png" id="0"]
+[ext_resource type="Texture2D" path="res://art/portraits/mara-neutral-v1/eyes-neutral.png" id="1"]
+[ext_resource type="Texture2D" path="res://art/portraits/mara-neutral-v1/mouth-neutral.png" id="2"]
+[ext_resource type="Texture2D" path="res://art/portraits/mara-neutral-v1/tunic.png" id="3"]
+[ext_resource type="Texture2D" path="res://art/portraits/mara-neutral-v1/eyes-half.png" id="4"]
+[ext_resource type="Texture2D" path="res://art/portraits/mara-neutral-v1/eyes-closed.png" id="5"]
+[ext_resource type="Texture2D" path="res://art/portraits/mara-neutral-v1/mouth-small.png" id="6"]
+[ext_resource type="Texture2D" path="res://art/portraits/mara-neutral-v1/mouth-open.png" id="7"]
+[ext_resource type="Texture2D" path="res://art/portraits/mara-neutral-v1/mouth-round.png" id="8"]
+[ext_resource type="Texture2D" path="res://art/portraits/mara-neutral-v1/blood.png" id="9"]
+[ext_resource type="Texture2D" path="res://art/portraits/mara-neutral-v1/dirt.png" id="10"]
+[ext_resource type="Texture2D" path="res://art/portraits/mara-neutral-v1/bandage.png" id="11"]
+[ext_resource type="Texture2D" path="res://art/portraits/mara-neutral-v1/pallor.png" id="12"]
+[ext_resource type="Texture2D" path="res://art/portraits/mara-neutral-v1/shadow-tunic.png" id="13"]
+[ext_resource type="Texture2D" path="res://art/portraits/mara-neutral-v1/highlight-tunic.png" id="14"]
 
 [resource]
-script = ExtResource("1")
-background = ExtResource("2")
-body = ExtResource("3")
-eyes = ExtResource("4")
-mouth = ExtResource("5")
-clothing = Array[Texture2D]([ExtResource("6")])
-conditions = {"blood": ExtResource("12"), "dirt": ExtResource("13"), "bandage": ExtResource("14"), "pallor": ExtResource("15")}
-blink_frames = Array[Texture2D]([ExtResource("7"), ExtResource("8")])
-talk_frames = Array[Texture2D]([ExtResource("9"), ExtResource("10"), ExtResource("11")])
+script = ExtResource("script")
+background = ExtResource("background")
+body = ExtResource("0")
+eyes = ExtResource("1")
+mouth = ExtResource("2")
+clothing = Array[Texture2D]([ExtResource("3")])
+conditions = {"blood": ExtResource("9"), "dirt": ExtResource("10"), "bandage": ExtResource("11"), "pallor": ExtResource("12")}
+blink_frames = Array[Texture2D]([ExtResource("4"), ExtResource("5")])
+talk_frames = Array[Texture2D]([ExtResource("6"), ExtResource("7"), ExtResource("8")])
+light_shadow = ExtResource("13")
+light_highlight = ExtResource("14")

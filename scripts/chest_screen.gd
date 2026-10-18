@@ -75,7 +75,7 @@ func refresh() -> void:
 func _tile(item: SupplyItem, quantity: int, in_chest: bool) -> Control:
 	var tile := Button.new()
 	tile.custom_minimum_size = TILE_SIZE
-	tile.focus_mode = Control.FOCUS_NONE
+	tile.focus_mode = Control.FOCUS_ALL
 	tile.tooltip_text = "%s\n%s" % [item.display_name, item.description]
 	tile.icon = item.icon
 	tile.expand_icon = true
@@ -138,10 +138,12 @@ func _build() -> void:
 	var close := Button.new()
 	close.text = "Close"
 	close.custom_minimum_size = Vector2(120, 52)
-	close.focus_mode = Control.FOCUS_NONE
+	close.focus_mode = Control.FOCUS_ALL
 	close.add_theme_font_size_override("font_size", 20)
 	close.pressed.connect(func(): closed.emit())
 	header.add_child(close)
+	visibility_changed.connect(func():
+		if visible: close.grab_focus())
 
 	var sides := HBoxContainer.new()
 	sides.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -156,7 +158,7 @@ func _build() -> void:
 	sides.add_child(middle)
 	_take_all = Button.new()
 	_take_all.custom_minimum_size = Vector2(88, 88)
-	_take_all.focus_mode = Control.FOCUS_NONE
+	_take_all.focus_mode = Control.FOCUS_ALL
 	_take_all.tooltip_text = "Take everything"
 	_take_all.pressed.connect(take_all)
 	var glyph := Control.new()

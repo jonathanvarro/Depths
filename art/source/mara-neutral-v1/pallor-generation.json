@@ -1,0 +1,13 @@
+{
+  "tool": "image_gen.imagegen",
+  "date": "2026-10-18",
+  "args": {
+    "prompt": "Edit the attached registered Mara neutral character master. Produce ONLY a translucent skin pallor overlay, on exactly the same full square canvas and with exact same positions as the reference. True transparent background. Keep all skin areas (face including nose and lips, visible ear, neck, upper chest) covered with a continuous smooth thin veil of desaturated pale ivory-grey at low opacity (about 20-25 percent). No holes shaped like eyes, nose, mouth; let the low opacity keep the underlying facial details visible. Outside skin: absolutely transparent. No character drawing, no hair, eyes, facial lines, clothes, shadows, blood, lighting or mask-like hard edges. This is a condition overlay for a dark fantasy pixel portrait; registered full canvas, not a standalone face cutout. Do not move, crop, enlarge or alter the pose. Return only the pale translucent skin coverage.",
+    "referenced_image_paths": [
+      "E:/GitHub/Depths/art/source/mara-neutral-v1/base-master.png"
+    ],
+    "transparent_background": true
+  },
+  "generated_file": "exec-9b9ecb1d-531c-4db2-a63c-c8becbf743d2.png",
+  "preserved_file": "pallor.png"
+}

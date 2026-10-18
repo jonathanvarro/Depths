@@ -49,6 +49,7 @@ def resources(id):
         start=9 if emotion=='neutral' else 5
         lines.append('conditions = {'+', '.join('"'+n+'": ExtResource("'+str(start+i)+'")' for i,n in enumerate(kit.CONDITIONS))+'}')
         if emotion=='neutral':lines += ['blink_frames = Array[Texture2D]([ExtResource("5"), ExtResource("6")])','talk_frames = Array[Texture2D]([ExtResource("7"), ExtResource("8")])']
+        kit.add_lighting(lines,uri(OUT/id))
         (DATA/(id+('' if emotion=='neutral' else '-'+emotion)+'.tres')).write_text('\n'.join(lines)+'\n',encoding='utf-8',newline='\n')
 
 def main():

@@ -1,0 +1,42 @@
+{
+  "tool": "image_gen.imagegen",
+  "date": "2026-10-18",
+  "entries": [
+    {
+      "name": "copper-ore",
+      "args": {
+        "prompt": "Use case: stylized-concept. ONE copper ore item for a dark dungeon crawler, matching the worn pixel-art oil flask in image1 (style reference only). A compact angular lump of dark charcoal-brown host rock with a few broad exposed DULL COPPER-ORANGE metallic seams and small muted blue-green mineral patches. Clearly unrefined copper ore, not bright gold nuggets or polished gems; chunky readable rock silhouette. Three-quarter inventory view from slightly above, whole object centred with padding, real transparent background. Broad native64px/128px clusters, about24-32colours, local soft neutral form shading. No ground shadow, glow, text, border, UI, extra objects or realistic microtexture.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/items/pack-64-v1/oil-flask.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-22d3cd56-3591-4ca2-b6f9-0451b0df447a.png",
+      "preserved_file": "copper-ore.png"
+    },
+    {
+      "name": "lantern",
+      "args": {
+        "prompt": "Use case: stylized-concept. ONE practical medieval OIL LANTERN inventory item matching image1 oil-flask pixel art (style reference only). Squat battered dark iron frame with an arched carry handle, broad soot-stained glass chamber containing a SMALL subdued warm wick, simple brass oil reservoir and short feet. No modern hurricane glass chimney, electricity, runes or ornate jewelry. Distinct enclosed lantern silhouette, unlike the round oil flask or upright torch. Whole object centred and padded, slight three-quarter view. Restrained native64px/128px pixel clusters, about24-32colours, dull iron/brass with modest local shading. True transparent background outside silhouette, no emitted halo, floor/shadow, text, frame or UI. Wick may be visible inside glass only.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/items/pack-64-v1/oil-flask.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-6ba23248-3980-4c70-9063-0944d6fe753f.png",
+      "preserved_file": "lantern.png"
+    },
+    {
+      "name": "lantern-unlit",
+      "args": {
+        "prompt": "Use case: precise-object-edit. Keep the supplied oil lantern EXACTLY registered, same frame, handle, glass, brass reservoir, feet, camera, material colours and transparent exterior. Change ONLY burning state: extinguish the small wick flame and remove its orange illumination from inside glass/reservoir, leaving the unlit wick in place. The glass should be soot-stained neutral grey/brown, not white or empty transparent holes. Preserve external neutral material highlights. No other edits, no rescaling, no crop, text, ground or glow. Crisp64px/128px item pixel style. Output genuine transparent background.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/inventory-64-v1/lantern.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-1b0bac2c-f161-463e-9150-b0be7b44b81a.png",
+      "preserved_file": "lantern-unlit.png"
+    }
+  ]
+}

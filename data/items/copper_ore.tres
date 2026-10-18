@@ -2,8 +2,11 @@
 
 [ext_resource type="Script" path="res://scripts/supply_item.gd" id="1"]
 
+[ext_resource type="Texture2D" path="res://art/items/inventory-64-v1/copper-ore.png" id="art_icon"]
+
 [resource]
 script = ExtResource("1")
+icon = ExtResource("art_icon")
 display_name = "Copper ore"
 description = "A green-streaked lump from the old workings. The merchant will buy it."
 effect = 5

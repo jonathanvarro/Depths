@@ -1,0 +1,251 @@
+{
+  "issue": 92,
+  "assets": {
+    "plain-knife": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        4,
+        4,
+        60,
+        59
+      ],
+      "visible_colours": 32
+    },
+    "wooden-club": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        5,
+        4,
+        58,
+        60
+      ],
+      "visible_colours": 32
+    },
+    "simple-spear": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        5,
+        4,
+        59,
+        60
+      ],
+      "visible_colours": 32
+    },
+    "woodcutters-axe": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        4,
+        6,
+        60,
+        58
+      ],
+      "visible_colours": 32
+    },
+    "plain-staff": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        4,
+        4,
+        59,
+        60
+      ],
+      "visible_colours": 32
+    },
+    "iron-sword": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        4,
+        4,
+        60,
+        60
+      ],
+      "visible_colours": 32
+    },
+    "wooden-shield": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        8,
+        4,
+        55,
+        60
+      ],
+      "visible_colours": 32
+    },
+    "padded-coat": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        11,
+        4,
+        53,
+        60
+      ],
+      "visible_colours": 32
+    },
+    "oil-flask": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        8,
+        4,
+        55,
+        60
+      ],
+      "visible_colours": 32
+    },
+    "party-ration": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        4,
+        9,
+        60,
+        54
+      ],
+      "visible_colours": 32
+    },
+    "clean-dressing": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        4,
+        9,
+        60,
+        54
+      ],
+      "visible_colours": 32
+    },
+    "restorative-draught": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        13,
+        4,
+        51,
+        60
+      ],
+      "visible_colours": 32
+    },
+    "antivenom": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        23,
+        4,
+        40,
+        60
+      ],
+      "visible_colours": 32
+    },
+    "copper-ore": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        4,
+        5,
+        60,
+        58
+      ],
+      "visible_colours": 32
+    },
+    "lantern": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        16,
+        4,
+        47,
+        60
+      ],
+      "visible_colours": 32
+    },
+    "lantern-unlit": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        16,
+        4,
+        47,
+        60
+      ],
+      "visible_colours": 32
+    }
+  },
+  "source_sha256": {
+    "art/items/starter-v1/plain-knife.png": "5eeb11ecdf2d278ba17f89c5b7b076e194d545128069c35f4c7307d1badeb9fa",
+    "art/items/starter-v1/wooden-club.png": "54943cb657543d7b8dc3c399db2c4cdbef5a2a658ed07ec37ce6a9854b251e1b",
+    "art/items/starter-v1/simple-spear.png": "11c101e0685af50d558d80404de7f37df9764f1742604846ec9c18ed5f1b9e56",
+    "art/items/starter-v1/woodcutters-axe.png": "9d30d98f5a8bece4faa7882de7a8a3f61d25cc7628ebf9dbce8c7ee5720053a8",
+    "art/items/starter-v1/plain-staff.png": "11f2cdde9d46aa4a7558d018c02c51a6ba804e201ba1ca45dddccbdf893c1d7c",
+    "art/items/starter-v1/iron-sword.png": "a0e2dd35d0303859f354ae837eb1f08b93e814f3f80e477c739299288824a0e2",
+    "art/items/starter-v1/wooden-shield.png": "383fcf51ea46696b6b2c3f579cde95842773090f691c20831fc6f59600b09a6b",
+    "art/items/starter-v1/padded-coat.png": "ddca18f19002b022a1613e047ba7d6f8397415bd45d91aadae633701d68589ec",
+    "art/items/starter-v1/oil-flask.png": "de4d982558fab48aa7df8ae18a5d1f17bf80b6523d3a5c85621c72b5c6fbeedb",
+    "art/items/starter-v1/party-ration.png": "e4914c94ccb9e88083310ae750a33374843847a605790daec2d8b6aab02c0436",
+    "art/items/starter-v1/clean-dressing.png": "3718b90b6359be6c9d01660e4d4e10985f53c09e05adbb7917169d8d7b69363c",
+    "art/items/starter-v1/restorative-draught.png": "49db6872720c2e5b60c544081ceb7120dc1fa6b76f00ce3796553424e16c1cf6",
+    "art/items/starter-v1/antivenom.png": "8fa70ca54d4a56808763f1740f86fc0fa942a4d356070e1c519eaf8526fc9ed6",
+    "art/source/inventory-64-v1/copper-ore.png": "8ebac1c07cf552d6b9629104b3d23295162ce78e2fe63920a2ac5dc462cedfb3",
+    "art/source/inventory-64-v1/lantern.png": "2553f3cc00b28c6c778a95e6957bf81180079fd8dcd064ba164a2f89e2e6609d",
+    "art/source/inventory-64-v1/lantern-unlit.png": "c6a4dd3e7e678a448925bed5b6f0ae4b915cf730192b0ec185a6e3454a1b6cbe"
+  },
+  "failures": [],
+  "sha256": {
+    "art/items/inventory-64-v1/antivenom.png": "01ed92cc2e0aa9ccfb99e2da3e38c1f2d2e9bd844db76817b431f5b73e4bce5e",
+    "art/items/inventory-64-v1/clean-dressing.png": "7a1fbba0cd7c8c0869fcdb8ad313c50fbe772a3cf78b7ad224b864ecfc8a7626",
+    "art/items/inventory-64-v1/copper-ore.png": "ba78173d588319c025c9b30f27d0afdfe7c148e8f30e7f01a7c9c37c25e09533",
+    "art/items/inventory-64-v1/iron-sword.png": "fee9270255a2dc5a0b60ed4c2b3e8a7f7ef017de7db8d995ebdc79faa7d3164f",
+    "art/items/inventory-64-v1/lantern-unlit.png": "dbf0d64360e5f021f679fcfedf4dc74e8053242374ee6fa6d1e579bb4b913270",
+    "art/items/inventory-64-v1/lantern.png": "2dcee54070014e0975c780eb277221317712b125a2cf1e874e9b3292cd1d41a7",
+    "art/items/inventory-64-v1/oil-flask.png": "ea92a3a428c6d0ab28e8c64f230d42efa24b3c994b8822f3fd7aa3fa15941f70",
+    "art/items/inventory-64-v1/padded-coat.png": "41cdfd98010324313669d13415f707c43102a81c3bfd0bef8a7f794bacfd3664",
+    "art/items/inventory-64-v1/party-ration.png": "bc5c71a3b7692a7a057726bdd04bbac47fb6d76cc91efe5c1f0deca0a0e3fa25",
+    "art/items/inventory-64-v1/plain-knife.png": "4629868d587fd165c9d08acc2e9334d7fa11aa052e846eab47f22dc485c4f7c6",
+    "art/items/inventory-64-v1/plain-staff.png": "af4af9211efdaec3698d7ae33f48de28af14c9cbfdd9d2912f5f53885af98257",
+    "art/items/inventory-64-v1/restorative-draught.png": "9fd251620e7493b12bea11a1cc59190ac681ab296686630064cdbe5a21e5beb9",
+    "art/items/inventory-64-v1/simple-spear.png": "c3d3403cfdcf06174b9c86378468f4bb171733520dcbbf45db4f5185698d4990",
+    "art/items/inventory-64-v1/woodcutters-axe.png": "f4ddcc448dda8b60fa81c12c5ed7ec55cd759445aa624ddac0334a949e02a957",
+    "art/items/inventory-64-v1/wooden-club.png": "05b1947ce7242d939c1af96c02f965e6b0c713579a8fb9d7621d6f7c7c4841f4",
+    "art/items/inventory-64-v1/wooden-shield.png": "b9ab31ed1bfec4fafc230bf72d99f08b1daa27658667d7bbc4c1031773897aba"
+  },
+  "live_resource_count": 28
+}

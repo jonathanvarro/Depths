@@ -15,7 +15,7 @@ Keep the existing **192 × 192 canvas and origin (0,0)** for every component and
 
 An authored lighting set may need both highlights and shadows. A single translucent orange overlay cannot remove warm highlights or hard shadows already painted into a base. Merely darkening the final portrait also retains their direction and changes material colours indiscriminately.
 
-Use descriptive authoring names, for example `character/body-neutral`, `character/eyes-half-neutral`, `clothing/tunic-neutral`, and `lighting/lantern-left/{shadow,highlight}`. These are a proposed asset convention, **not fields already supported by PortraitSet**. The split between character and illumination is required; exact masks, blend modes and naming can be settled in the implementation pass.
+PortraitSet now supports optional `light_shadow` and `light_highlight` textures. PortraitView's `set_illumination("neutral" | "warm" | "dim")` controls them independently; neutral is the default. Each pass is a full 192px canvas. Broad black/white coverage is stored in alpha, then tinted by the renderer. Descriptive authoring folders may differ, but the character/illumination split is required.
 
 ## Expressions, clothing and layer order
 
@@ -33,9 +33,11 @@ Whether HUD lighting follows lantern oil automatically, which direction the port
 
 ## Existing art audit and migration
 
-Mara's current `art/concepts/portraits/mara-layered-v1/base.png`, tunic and the facial replacement drawings have illumination baked in. `data/portraits/mara.tres` still uses them. `PortraitSet` currently has character, condition and animation textures; `PortraitView` stacks them but has no dedicated lighting pass. `PartyCard`'s strain modulation is an existing condition presentation effect, not separated illumination. Merchant progression sheets also show a fixed warm light and remain concepts.
+**Completed 2026-10-18 (#36):** `data/portraits/mara.tres` uses the new neutral character/tunic, neutral facial animation, conditions and coordinated masks in `art/portraits/mara-neutral-v1`. Its flat fallback is neutral too. All 27 recruit expression resources now expose their existing light masks through the same canonical fields. Originals in `mara-layered-v1` and `mara-animation-v1` are preserved. See [the implementation and visual review](playable-art-pass.md).
 
-Preserve those originals. The source-art and renderer migration is tracked in [#36](https://github.com/jonathanvarro/Depths/issues/36). That pass should:
+The renderer isolates character/outfit/conditions from the background, applies illumination, then draws hurt feedback. Reconfiguring a portrait cancels old animation callbacks. PartyCard's existing strain modulation remains a separate gameplay condition effect; it is not the illumination preset. Merchant progression sheets retain fixed warm lighting as historical concepts; camp NPC plates are neutral static art, outside this animated rig.
+
+The source-art and renderer migration is tracked in [#36](https://github.com/jonathanvarro/Depths/issues/36). Its validation requirements were:
 
 1. Reauthor one aligned neutral Mara master and tunic, with the baked warm highlights/cast shadows removed while retaining identity and form.
 2. Bring neutral eyes, blink and talk patches into the same master; validate all replacement regions and conditions together.
@@ -43,4 +45,4 @@ Preserve those originals. The source-art and renderer migration is tracked in [#
 4. Extend PortraitSet/PortraitView with independently controllable lighting data and composition, keeping older resources usable until migrated. Choose blends after checking the masks in the actual renderer; do not treat a filled-but-unconnected property as finished separation.
 5. Verify alpha, unchanged registration, no residual bright rim in the neutral/dim view, no feature ghosts, outfit clipping, and desktop/landscape-phone readability. Connect Mara's new resource only once the complete expression/condition set works.
 
-This entry records the production requirement and migration plan. **It does not claim the existing PNGs have been de-lit, change the live resource/renderer, or automatically tie portraits to lantern oil.**
+The original PNGs remain historical baked-light references. New resources use reauthored neutral drawings. Illumination still does not automatically follow lantern oil, camera direction or camp time. Mara supplies validated tunic and underlayer masks; arbitrary outfits or additional light directions require coordinated artwork.

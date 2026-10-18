@@ -1,6 +1,6 @@
 extends "res://scripts/portrait_view.gd"
 ## Optional presentation adapter for this kit; the existing neutral PortraitSet
-## also works in PortraitView without this adapter. Does not migrate Mara.
+## also works in PortraitView, including its canonical light passes.
 const DIR := "res://art/portraits/recruit-kit-v1/"
 var character_id := "warden-a"
 var expression := "neutral"
@@ -21,8 +21,8 @@ func configure(id: String, emotion: String = "neutral", profile: Dictionary = {}
 	var suffix := "" if emotion == "neutral" else "-" + emotion
 	var neutral_path: String = profile.get("portrait_set","res://data/portraits/recruits-v1/" + id + ".tres")
 	show_portrait(load(neutral_path.trim_suffix(".tres") + suffix + ".tres"))
-	_shadow = _add_layer(load(profile.get("shadow",DIR + id + "/shadow-left.png")))
-	_highlight = _add_layer(load(profile.get("highlight",DIR + id + "/highlight-left.png")))
+	_shadow = _light_shadow if _light_shadow else _add_layer(load(profile.get("shadow",DIR + id + "/shadow-left.png")))
+	_highlight = _light_highlight if _light_highlight else _add_layer(load(profile.get("highlight",DIR + id + "/highlight-left.png")))
 	set_illumination(illumination)
 	set_outfit(outfit_visible)
 
@@ -47,15 +47,15 @@ func set_illumination(preset: String) -> void:
 		return
 	match preset:
 		"warm":
-			_rig.modulate = Color.WHITE
+			_character.modulate = Color.WHITE
 			_shadow.modulate = Color(1,1,1,0.26)
 			_highlight.modulate = Color(1,0.70,0.36,0.24)
 		"dim":
-			_rig.modulate = Color(0.60,0.64,0.68)
+			_character.modulate = Color(0.60,0.64,0.68)
 			_shadow.modulate = Color(1,1,1,0.43)
 			_highlight.modulate = Color(0.65,0.76,0.90,0.05)
 		_:
-			_rig.modulate = Color.WHITE
+			_character.modulate = Color.WHITE
 			_shadow.modulate.a = 0.0
 			_highlight.modulate.a = 0.0
 
@@ -63,6 +63,6 @@ func set_outfit(shown: bool) -> void:
 	outfit_visible = shown
 	if _rig == null:
 		return
-	for layer in _rig.get_children():
+	for layer in _character.get_children():
 		if layer is TextureRect and layer.texture != null and layer.texture.resource_path.ends_with("/shared/jerkin.png"):
 			layer.visible = shown

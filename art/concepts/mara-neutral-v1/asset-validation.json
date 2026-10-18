@@ -1,0 +1,259 @@
+{
+  "issue": 36,
+  "canvas": [
+    192,
+    192
+  ],
+  "master_transform": "full canvas nearest to 192; origin 0,0",
+  "eyes_region": [
+    80,
+    55,
+    141,
+    85
+  ],
+  "mouth_region": [
+    92,
+    93,
+    128,
+    112
+  ],
+  "registration": {
+    "eyes-half": {
+      "unchanged_nose_ear_chin_translation": [
+        0,
+        0
+      ]
+    },
+    "eyes-closed": {
+      "unchanged_nose_ear_chin_translation": [
+        0,
+        0
+      ]
+    },
+    "mouth-small": {
+      "unchanged_nose_ear_chin_translation": [
+        0,
+        0
+      ]
+    },
+    "mouth-open": {
+      "unchanged_nose_ear_chin_translation": [
+        0,
+        0
+      ]
+    },
+    "mouth-round": {
+      "unchanged_nose_ear_chin_translation": [
+        0,
+        0
+      ]
+    },
+    "bandage": {
+      "source_bounds": [
+        89,
+        44,
+        135,
+        60
+      ],
+      "top": 46,
+      "max_size": [
+        66,
+        12
+      ]
+    }
+  },
+  "failures": [],
+  "assets": {
+    "bandage.png": {
+      "sha256": "45e9e622a7b6273c4d5a57b2f6abc21739d2832475f6b87a44130cb42a10f683",
+      "alpha_bounds": [
+        91,
+        46,
+        125,
+        58
+      ],
+      "rgb_colours": 8
+    },
+    "base.png": {
+      "sha256": "e86904195e7bf2977459ad77262cab602f7fc95233ffcd6567e91b5c7cc9301d",
+      "alpha_bounds": [
+        0,
+        6,
+        192,
+        192
+      ],
+      "rgb_colours": 48
+    },
+    "blood.png": {
+      "sha256": "74a8c8fc7415cc3765f7f0048b388b0c6572a3116800d5761747d5a0236324d9",
+      "alpha_bounds": [
+        112,
+        28,
+        147,
+        117
+      ],
+      "rgb_colours": 8
+    },
+    "dirt.png": {
+      "sha256": "e7fe0d6289ae9d60035a4c36509de2335dc713f67d61e4dd37c98b6500513a13",
+      "alpha_bounds": [
+        26,
+        70,
+        179,
+        170
+      ],
+      "rgb_colours": 1
+    },
+    "eyes-closed.png": {
+      "sha256": "6ffb4b77fd9977855f6f175cfd3b83aa83cb3734443b8e87925bd5f5b1620e4d",
+      "alpha_bounds": [
+        80,
+        55,
+        141,
+        85
+      ],
+      "rgb_colours": 41
+    },
+    "eyes-half.png": {
+      "sha256": "6498aaf914728b539c8002067363779e92c917c211d472c999339e9d3be560d4",
+      "alpha_bounds": [
+        80,
+        55,
+        141,
+        85
+      ],
+      "rgb_colours": 41
+    },
+    "eyes-neutral.png": {
+      "sha256": "9fa20998c6201248d72e571f39e159e77a8c0d950f8f11f2dd7778e6d97bf17c",
+      "alpha_bounds": [
+        80,
+        55,
+        141,
+        85
+      ],
+      "rgb_colours": 44
+    },
+    "highlight-tunic.png": {
+      "sha256": "f81f5b80ed94f7a719ec37120f22ff99e9d512603649d65750172c2d9276f8d5",
+      "alpha_bounds": [
+        0,
+        6,
+        132,
+        186
+      ],
+      "rgb_colours": 1
+    },
+    "highlight-underlayer.png": {
+      "sha256": "21ced96e208d99ac31fa137f0a5131e072681549af2ede2e976a147e7940600c",
+      "alpha_bounds": [
+        0,
+        6,
+        174,
+        192
+      ],
+      "rgb_colours": 1
+    },
+    "mouth-neutral.png": {
+      "sha256": "b87dbed36ffa2dafdf2a3f350d7b55de83441529b319c01cde115e8c90d0a4a0",
+      "alpha_bounds": [
+        92,
+        93,
+        128,
+        112
+      ],
+      "rgb_colours": 32
+    },
+    "mouth-open.png": {
+      "sha256": "a3f0c9efd130aa989b295d55097663b6cd174d4fd40bbe67a27bb76ceaaa2e12",
+      "alpha_bounds": [
+        92,
+        93,
+        128,
+        112
+      ],
+      "rgb_colours": 42
+    },
+    "mouth-round.png": {
+      "sha256": "3c0b87cf1ab8523818a1c5979b50aa2d7a3cd3aa9bf38e746bfa8b90ed4540da",
+      "alpha_bounds": [
+        92,
+        93,
+        128,
+        112
+      ],
+      "rgb_colours": 36
+    },
+    "mouth-small.png": {
+      "sha256": "6c0d00eb6b96e80916fa82a8c5f8182560af883c4ea046ad7fadfa3f02723d8e",
+      "alpha_bounds": [
+        92,
+        93,
+        128,
+        112
+      ],
+      "rgb_colours": 41
+    },
+    "pallor.png": {
+      "sha256": "286e926a78e6278c1542cab7de4a82f4817971d151a54ee393b7bccfb43502cf",
+      "alpha_bounds": [
+        53,
+        37,
+        143,
+        145
+      ],
+      "rgb_colours": 1
+    },
+    "preview.png": {
+      "sha256": "ebfc7cb2e5911f5d32b1997483afd85d64a2f7f76225ff5241310b42b6b41fd7",
+      "alpha_bounds": [
+        0,
+        6,
+        192,
+        192
+      ],
+      "rgb_colours": 44
+    },
+    "shadow-tunic.png": {
+      "sha256": "b2bf1bbbade4258e980169a33613a2a07f6356e6bd67285f22d8ab6b61a45ddf",
+      "alpha_bounds": [
+        0,
+        6,
+        192,
+        192
+      ],
+      "rgb_colours": 1
+    },
+    "shadow-underlayer.png": {
+      "sha256": "ecf2db99ed66880b43ff5b9b7af494fdc0edc7cf8cd8b251d1c7aeee5a4b1e7a",
+      "alpha_bounds": [
+        0,
+        6,
+        192,
+        192
+      ],
+      "rgb_colours": 1
+    },
+    "tunic.png": {
+      "sha256": "6a92a9351df2c7ac4d5f1648b8e2777063d9e54040fced2dd554e17770510d44",
+      "alpha_bounds": [
+        0,
+        133,
+        192,
+        192
+      ],
+      "rgb_colours": 35
+    }
+  },
+  "source_sha256": {
+    "base-master.png": "e65cb6dc322c2356cdbeb8ca12a861f44816e5e4b8920f5c2d03890cc6f7382a",
+    "condition-reference.png": "ef379aaf010bdbc03311222609fe8d838e571d84c456f3c845433b77911611d4",
+    "conditions.png": "f74590fc15f4a1a2f2ec57e0c1a0feb9f530808d796947c067ad9d0ed3742836",
+    "face-reference.png": "2734c79f987329ae898cb576c8b7f897e238c0e9de7e36a2d362b34fbad9d898",
+    "faces.png": "9ba0d3d029cec9dad39a8a7352c28ad232060e647ff9f404b95046d3b24faeef",
+    "light-reference.png": "755154aa1f471d831d190f5b7e46cd93711b147f47b2c7b4a342ba59da87aa31",
+    "lighting.png": "4d1c832d1383bf822a970695c6b138454e10855cfa61bfcbcd62a30117653098",
+    "pallor.png": "38492013d555bf52391d71b90eea8e15bc40f34830b1d68227946854cdfa5f0f",
+    "tunic-master.png": "4be4ebe0a46b90a4ce90558c59fc3a79a5d8a89a23047e57a0ec8ab8761bbeef"
+  }
+}

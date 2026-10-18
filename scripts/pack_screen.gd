@@ -14,6 +14,10 @@ const StrainRules := preload("res://scripts/strain.gd")
 const COLOR_TEXT := Color("e8d9b0")
 const COLOR_DIM_TEXT := Color(0.85, 0.8, 0.7, 0.65)
 const COLOR_OIL := Color("e8a84a")
+const LANTERN_ICON := preload("res://art/items/inventory-64-v1/lantern.png")
+const UNLIT_LANTERN_ICON := preload("res://art/items/inventory-64-v1/lantern-unlit.png")
+const TORCH_ICON := preload("res://art/items/pack-64-v1/torch.png")
+const COIN_ICON := preload("res://art/items/inventory-64-v1/gold-coin.svg")
 
 var content: MarginContainer  # main.gd keeps this inside the safe area
 
@@ -23,8 +27,10 @@ var _lantern_bar: ProgressBar
 var _lantern_label: Label
 var _light_title: Label
 var _light_note: Label
+var _light_icon: TextureRect
 var _list: VBoxContainer
 var _injuries: VBoxContainer
+var _inventory_scroll: ScrollContainer
 
 
 func setup(party_state) -> void:
@@ -42,17 +48,20 @@ func refresh() -> void:
 	_time_label.text = "%d gold  ·  Time spent: %d" % [supplies.gold, _party.time_elapsed]
 	match supplies.source:
 		Supplies.Source.TORCH:
+			_light_icon.texture = TORCH_ICON
 			_light_title.text = "Torch"
 			_lantern_bar.max_value = Supplies.TORCH_BURN_TIME
 			_lantern_bar.value = supplies.torch_left
 			_lantern_label.text = "Burning  ·  %d time left" % ceili(supplies.torch_left) if supplies.torch_burns else "Burning"
 			_light_note.text = "In a fight, Item > Throw torch scares an enemy away, but the torch is gone."
 		Supplies.Source.NONE:
+			_light_icon.texture = UNLIT_LANTERN_ICON if supplies.has_lantern else null
 			_light_title.text = "No light"
 			_lantern_bar.value = 0
 			_lantern_label.text = "Darkness. Light a torch, if you have one."
 			_light_note.text = ""
 		_:
+			_light_icon.texture = LANTERN_ICON if supplies.oil > 0 else UNLIT_LANTERN_ICON
 			_light_title.text = "Lantern"
 			_lantern_bar.max_value = Supplies.LANTERN_CAPACITY
 			_lantern_bar.value = supplies.oil
@@ -120,6 +129,7 @@ func _add_gear_rows() -> void:
 		if item.icon:
 			var icon := TextureRect.new()
 			icon.texture = item.icon
+			icon.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 			icon.custom_minimum_size = Vector2(40, 40)
 			icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 			icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
@@ -169,7 +179,7 @@ func _small_button(text: String) -> Button:
 	var button := Button.new()
 	button.text = text
 	button.custom_minimum_size = Vector2(110, 56)
-	button.focus_mode = Control.FOCUS_NONE
+	button.focus_mode = Control.FOCUS_ALL
 	button.add_theme_font_size_override("font_size", 20)
 	button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	return button
@@ -201,7 +211,8 @@ func _item_row(item: SupplyItem) -> Control:
 	button.text = "Use" if reason == "" else reason
 	button.disabled = reason != ""
 	button.custom_minimum_size = Vector2(170, 56)
-	button.focus_mode = Control.FOCUS_NONE
+	button.focus_mode = Control.FOCUS_ALL
+	button.tooltip_text = reason if reason != "" else item.description
 	button.add_theme_font_size_override("font_size", 20)
 	button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	button.pressed.connect(func():
@@ -238,24 +249,46 @@ func _build() -> void:
 	_time_label = _label("", 20, COLOR_DIM_TEXT)
 	_time_label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	header.add_child(_time_label)
+	var coin := TextureRect.new()
+	coin.texture = COIN_ICON
+	coin.custom_minimum_size = Vector2(20,20)
+	coin.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	coin.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	coin.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	coin.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	header.add_child(coin)
 	var close := Button.new()
 	close.text = "Close"
 	close.custom_minimum_size = Vector2(120, 52)
-	close.focus_mode = Control.FOCUS_NONE
+	close.focus_mode = Control.FOCUS_ALL
 	close.add_theme_font_size_override("font_size", 20)
 	close.pressed.connect(func(): closed.emit())
 	var save := Button.new()
 	save.text = "Save & exit"
 	save.custom_minimum_size = Vector2(150, 52)
-	save.focus_mode = Control.FOCUS_NONE
+	save.focus_mode = Control.FOCUS_ALL
 	save.add_theme_font_size_override("font_size", 20)
 	save.pressed.connect(func(): save_and_exit.emit())
 	header.add_child(save)
 	header.move_child(save, header.get_child_count() - 2)
 	header.add_child(close)
+	header.move_child(coin, 1)
+	header.move_child(save, header.get_child_count()-2)
+	visibility_changed.connect(func():
+		if visible: close.grab_focus())
 
+	var light_row := HBoxContainer.new()
+	light_row.add_theme_constant_override("separation",8)
+	column.add_child(light_row)
+	_light_icon = TextureRect.new()
+	_light_icon.custom_minimum_size = Vector2(28,28)
+	_light_icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	_light_icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	_light_icon.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	_light_icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	light_row.add_child(_light_icon)
 	_light_title = _label("Lantern", 22, COLOR_TEXT)
-	column.add_child(_light_title)
+	light_row.add_child(_light_title)
 	_lantern_bar = ProgressBar.new()
 	_lantern_bar.max_value = Supplies.LANTERN_CAPACITY
 	_lantern_bar.show_percentage = false
@@ -272,18 +305,23 @@ func _build() -> void:
 	_light_note = _label("", 17, COLOR_DIM_TEXT)
 	column.add_child(_light_note)
 
-	column.add_child(_label("Condition", 22, COLOR_TEXT))
-	_injuries = VBoxContainer.new()
-	column.add_child(_injuries)
-
 	var scroll := ScrollContainer.new()
+	_inventory_scroll = scroll
+	scroll.follow_focus = true
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	column.add_child(scroll)
+	var inventory := VBoxContainer.new()
+	inventory.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	inventory.add_theme_constant_override("separation",14)
+	scroll.add_child(inventory)
+	inventory.add_child(_label("Condition", 22, COLOR_TEXT))
+	_injuries = VBoxContainer.new()
+	inventory.add_child(_injuries)
 	_list = VBoxContainer.new()
 	_list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_list.add_theme_constant_override("separation", 14)
-	scroll.add_child(_list)
+	inventory.add_child(_list)
 
 
 func _label(text: String, size: int, color: Color) -> Label:

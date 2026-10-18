@@ -11,6 +11,9 @@
 [ext_resource type="Texture2D" path="res://art/portraits/recruit-roster-v1/brawler-b/bandage.png" id="7"]
 [ext_resource type="Texture2D" path="res://art/portraits/recruit-roster-v1/brawler-b/pallor.png" id="8"]
 
+[ext_resource type="Texture2D" path="res://art/portraits/recruit-roster-v1/brawler-b/shadow-left.png" id="light_shadow"]
+[ext_resource type="Texture2D" path="res://art/portraits/recruit-roster-v1/brawler-b/highlight-left.png" id="light_highlight"]
+
 [resource]
 script = ExtResource("script")
 body = ExtResource("0")
@@ -19,3 +22,5 @@ eyes = ExtResource("2")
 mouth = ExtResource("3")
 clothing = Array[Texture2D]([ExtResource("4")])
 conditions = {"blood": ExtResource("5"), "dirt": ExtResource("6"), "bandage": ExtResource("7"), "pallor": ExtResource("8")}
+light_shadow = ExtResource("light_shadow")
+light_highlight = ExtResource("light_highlight")

@@ -11,6 +11,11 @@ const HURT_COLOR := Color(0.8, 0.05, 0.05, 0.55)
 var portrait_set: PortraitSet
 
 var _rig: Control  # holds the layers; moved to shake
+var _character: Control  # excludes the background and card UI
+var _light_shadow: TextureRect
+var _light_highlight: TextureRect
+var _illumination := "neutral"
+var _eye_tween: Tween
 var _eyes: TextureRect
 var _mouth: TextureRect
 var _overlays := {}  # condition name -> TextureRect
@@ -25,25 +30,37 @@ var _tremble_clock := 0.0
 func _init() -> void:
 	clip_contents = true
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 
 
 ## Builds the layer stack. `fallback` is used when there's no set.
 func show_portrait(layers: PortraitSet, fallback: Texture2D = null) -> void:
-	if _talk_tween:
-		_talk_tween.kill()  # its layers are about to be replaced
+	for tween in [_eye_tween, _talk_tween, _hurt_tween]:
+		if tween and tween.is_valid():
+			tween.kill()  # its layers are about to be replaced
 	portrait_set = layers
 	for child in get_children():
 		child.queue_free()
 	_overlays.clear()
+	_character = null
+	_eyes = null
+	_mouth = null
+	_light_shadow = null
+	_light_highlight = null
 	_rig = Control.new()
 	_rig.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_rig.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(_rig)
+	if layers != null:
+		_add_layer(layers.background)
+	_character = Control.new()
+	_character.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_character.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_rig.add_child(_character)
 
 	if layers == null:
 		_add_layer(fallback)
 	else:
-		_add_layer(layers.background)
 		for texture in layers.back:
 			_add_layer(texture)
 		_add_layer(layers.body)
@@ -58,6 +75,11 @@ func show_portrait(layers: PortraitSet, fallback: Texture2D = null) -> void:
 			var overlay := _add_layer(layers.conditions[condition])
 			overlay.visible = false
 			_overlays[condition] = overlay
+		if layers.light_shadow:
+			_light_shadow = _add_layer(layers.light_shadow)
+		if layers.light_highlight:
+			_light_highlight = _add_layer(layers.light_highlight)
+	_apply_illumination()
 
 	_flash = ColorRect.new()
 	_flash.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -84,11 +106,32 @@ func blink() -> void:
 	var reverse := portrait_set.blink_frames.duplicate()
 	reverse.reverse()
 	frames.append_array(reverse.slice(1))
-	var tween := create_tween()
+	if _eye_tween and _eye_tween.is_valid():
+		_eye_tween.kill()
+	_eye_tween = create_tween()
 	for frame in frames:
-		tween.tween_callback(func(): if is_instance_valid(_eyes): _eyes.texture = frame)
-		tween.tween_interval(BLINK_FRAME_SECONDS)
-	tween.tween_callback(func(): if is_instance_valid(_eyes) and portrait_set: _eyes.texture = portrait_set.eyes)
+		_eye_tween.tween_callback(func(): if is_instance_valid(_eyes): _eyes.texture = frame)
+		_eye_tween.tween_interval(BLINK_FRAME_SECONDS)
+	_eye_tween.tween_callback(func(): if is_instance_valid(_eyes) and portrait_set: _eyes.texture = portrait_set.eyes)
+
+
+## Explicit presentation choice. Fuel and world-light rules remain with the caller.
+func set_illumination(preset: String) -> void:
+	_illumination = preset
+	_apply_illumination()
+
+
+func _apply_illumination() -> void:
+	if _character == null:
+		return
+	_character.modulate = Color(0.60, 0.64, 0.68) if _illumination == "dim" else Color.WHITE
+	if _light_shadow:
+		_light_shadow.modulate = Color(1, 1, 1, 0.43 if _illumination == "dim" else (0.26 if _illumination == "warm" else 0.0))
+	if _light_highlight:
+		match _illumination:
+			"warm": _light_highlight.modulate = Color(1, 0.70, 0.36, 0.24)
+			"dim": _light_highlight.modulate = Color(0.65, 0.76, 0.90, 0.05)
+			_: _light_highlight.modulate = Color(1, 1, 1, 0)
 
 
 ## Cycles mouth shapes for `seconds`, then returns to the resting mouth.
@@ -142,7 +185,10 @@ func _add_layer(texture: Texture2D) -> TextureRect:
 	layer.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	layer.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_rig.add_child(layer)
+	if _character:
+		_character.add_child(layer)
+	else:
+		_rig.add_child(layer)
 	return layer
 
 

@@ -15,6 +15,9 @@
 [ext_resource type="Texture2D" path="res://art/portraits/recruit-roster-v1/brawler-c/bandage.png" id="11"]
 [ext_resource type="Texture2D" path="res://art/portraits/recruit-roster-v1/brawler-c/pallor.png" id="12"]
 
+[ext_resource type="Texture2D" path="res://art/portraits/recruit-roster-v1/brawler-c/shadow-left.png" id="light_shadow"]
+[ext_resource type="Texture2D" path="res://art/portraits/recruit-roster-v1/brawler-c/highlight-left.png" id="light_highlight"]
+
 [resource]
 script = ExtResource("script")
 body = ExtResource("0")
@@ -25,3 +28,5 @@ clothing = Array[Texture2D]([ExtResource("4")])
 conditions = {"blood": ExtResource("9"), "dirt": ExtResource("10"), "bandage": ExtResource("11"), "pallor": ExtResource("12")}
 blink_frames = Array[Texture2D]([ExtResource("5"), ExtResource("6")])
 talk_frames = Array[Texture2D]([ExtResource("7"), ExtResource("8")])
+light_shadow = ExtResource("light_shadow")
+light_highlight = ExtResource("light_highlight")

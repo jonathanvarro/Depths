@@ -2,8 +2,11 @@
 
 [ext_resource type="Script" path="res://scripts/equipment.gd" id="1"]
 
+[ext_resource type="Texture2D" path="res://art/items/inventory-64-v1/simple-spear.png" id="art_icon"]
+
 [resource]
 script = ExtResource("1")
+icon = ExtResource("art_icon")
 display_name = "Simple spear"
 description = "An iron point on an ash shaft. Reaches past the front row: usable from the back, and hits enemies hanging back."
 attack_min = 2

@@ -90,6 +90,12 @@ def save_ora(name,layers,merged):
         archive.writestr('stack.xml',ET.tostring(image,encoding='utf-8',xml_declaration=True))
         archive.write(merged,'mergedimage.png')
 
+def add_lighting(lines,directory):
+    declarations=['[ext_resource type="Texture2D" path="'+directory+'/'+name+'-left.png" id="light_'+name+'"]' for name in ['shadow','highlight']]
+    index=lines.index('[resource]')
+    lines[index:index]=declarations+['']
+    lines += ['light_shadow = ExtResource("light_shadow")','light_highlight = ExtResource("light_highlight")']
+
 def make_resource(character,expression):
     names=['shared/body.png',character+'/head.png',character+'/eyes-'+expression+'.png',
         character+'/mouth-'+expression+'.png','shared/jerkin.png']
@@ -106,6 +112,7 @@ def make_resource(character,expression):
     if expression=='neutral':
         lines+=['blink_frames = Array[Texture2D]([ExtResource("5"), ExtResource("6")])',
             'talk_frames = Array[Texture2D]([ExtResource("7"), ExtResource("8")])']
+    add_lighting(lines,'res://art/portraits/recruit-kit-v1/'+character)
     (DATA/(character+('' if expression=='neutral' else '-'+expression)+'.tres')).write_text('\n'.join(lines)+'\n',encoding='utf-8',newline='\n')
 
 def main():

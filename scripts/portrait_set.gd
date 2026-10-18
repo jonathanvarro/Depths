@@ -30,6 +30,12 @@ extends Resource
 ## (e.g. "blood", "dirt", "bandage", "scar", "pallor").
 @export var conditions: Dictionary[String, Texture2D] = {}
 
+@export_group("Lighting")
+## Optional neutral black/white passes, registered to this exact outfit.
+## PortraitView tints these; neither background nor card UI is illuminated.
+@export var light_shadow: Texture2D
+@export var light_highlight: Texture2D
+
 @export_group("Animation")
 ## Eyes closing, in order (e.g. half-closed, closed). Played forward then back.
 @export var blink_frames: Array[Texture2D] = []

@@ -1,0 +1,66 @@
+{
+  "tool": "image_gen.imagegen",
+  "date": "2026-10-18",
+  "entries": [
+    {
+      "name": "mara-base",
+      "args": {
+        "prompt": "Use case: precise-object-edit. Image1 is the exact EDIT TARGET: Mara's existing full192x192 transparent character base in a charcoal sleeveless underlayer. Reauthor the SAME WOMAN in EXACT SAME pose, head angle, eye/nose/mouth positions, tied brown hair, brown eyes, skin tone, shoulder silhouette and FULL CANVAS registration. Change illumination ONLY: remove the orange/yellow bright rim on image-left hair/ear/shoulder, remove amber torch colour and hard lamp cast shadows. Reveal natural brown hair and muted neutral skin under broad soft WHITE diffuse ambient light from both sides, preserving readable anatomy/local crease and hair shading. No permanent directional specular shine or deep one-sided shadow. Keep the dark underlayer, no new tunic, hood, makeup, jewelry, expression, crop or anatomy change. Crisp restrained detailed192px pixel art, not painted/photo. Genuinely transparent exterior. No background or UI. This is a neutral character plate that will receive separate lighting masks; do not simply add a blue overlay to the old lighting.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/concepts/portraits/mara-layered-v1/base.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-d997c8e7-69d7-44e6-b9d3-bd3290d1c321.png",
+      "preserved_file": "base-master.png"
+    },
+    {
+      "name": "mara-tunic",
+      "args": {
+        "prompt": "Use case: precise-object-edit. Exact edit target is the supplied isolated brown tunic on full192x192 transparent canvas. Change ONLY illumination to neutral diffuse WHITE ambient, removing bright orange/yellow left shoulder/sleeve rim and hard lamp shadows. Preserve brown fabric material, worn weave, round neckline, exact seams, perspective, silhouette and pixel positions. Keep all upper/head/neck/interior neckline regions and exterior genuinely transparent. Output ONLY the same garment in the same full square registration, no body, head, skin, mannequin, new background, text, additions or trimming. Crisp restrained192px pixel clusters, material form shading allowed, no new directional highlights.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/concepts/portraits/mara-layered-v1/tunic.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-7514653e-51b9-4723-af95-fe4684e2bb77.png",
+      "preserved_file": "tunic-master.png"
+    },
+    {
+      "name": "mara-faces",
+      "args": {
+        "prompt": "Use case: precise-object-edit. ONE registered FACIAL ANIMATION ATLAS3columns by2rows from supplied reference. Keep each full cell exactly the same size and character position. Preserve Mara's exact identity, neutral white ambient illumination, hair, nose, face outline, scars, skin palette, underlayer and background transparency. Change ONLY specified eye/brow or mouth regions. Top-left HALF CLOSED eyelids, neutral lips. Top-middle FULL CLOSED eyelids, neutral lips. Top-right neutral eyes, SMALL partly open speaking lips. Bottom-left neutral eyes, moderately OPEN speaking mouth with subdued teeth and dark interior. Bottom-middle neutral eyes, small ROUND O shaped speaking mouth. Bottom-right UNCHANGED NEUTRAL reference for registration. No grin or new emotion, no new lighting, no head enlargement/movement, no gaps/borders/text/background. Crisp192px pixel clusters, real alpha exterior per cell. This atlas will yield fixed full192px feature replacement canvases.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/mara-neutral-v1/face-reference.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-56789a2a-f926-4f30-9fb8-1ec12f5d943a.png",
+      "preserved_file": "faces.png"
+    },
+    {
+      "name": "mara-conditions",
+      "args": {
+        "prompt": "Use case: precise-object-edit. ONE CONDITION OVERLAY ATLAS2columns by2rows. Supplied repeated neutral Mara is ONLY a placement guide; REMOVE every original character/face/hair/clothes/outline pixel. Keep exact full-cell registration. Top-left sparse dark dried-red blood at image-right forehead/temple with small cheek streak, no eyes/lips covering. Top-right sparse muted brown dirt on cheeks/jaw and garment shoulders. Bottom-left SMALL thin plain offwhite FOREHEAD dressing above brows, not an eye bandage, only one-third head width. Bottom-right translucent sickly pale desaturated grey-green SKIN WASH on forehead/cheeks/neck, leaving open holes for eyes/lips, no facial lines or identity detail. Output ONLY sparse marks on genuine transparent alpha; no ghost face beneath. Broad192px pixel clusters, no scene/text/border/glow/light, no replacement head.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/mara-neutral-v1/condition-reference.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-816d5fc1-7b78-4252-abc0-28922067681a.png",
+      "preserved_file": "conditions.png"
+    },
+    {
+      "name": "mara-lighting",
+      "args": {
+        "prompt": "Use case: precise-object-edit. ONE LIGHT COVERAGE ATLAS2columns by2rows using exact character positions in supplied reference. Top row refers to Mara in CHARCOAL UNDERLAYER; bottom row to Mara wearing BROWN TUNIC. Remove all original identity/skin/hair/fabric drawings; guide silhouette ONLY. LEFT column: broad BLACK translucent shadow coverage on far image-right planes from an upper IMAGE LEFT light, with subtle nose/brow/chin/collar cast shade and near side transparent. RIGHT column: broad WHITE translucent highlight coverage on near image-left hair/forehead/cheek/neck/shoulder planes for same light, far side transparent. Bottom row coverage must fit tunic sleeves/neckline; top row fits exposed arms/dark underlayer. No eyes, lips, eyebrows, facial features, hair strands or fabric microtexture drawn in masks. Broad deliberately sparse192px pixel clusters, unaffected areas and exterior truly transparent. No rectangular wash, halo, background, text or border. Engine controls tint and opacity independently; this is not a white/black replacement portrait.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/mara-neutral-v1/light-reference.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-01eb61fa-61e7-4d40-b679-dd4df509027d.png",
+      "preserved_file": "lighting.png"
+    }
+  ]
+}

@@ -73,7 +73,7 @@ func _init() -> void:
 
 	_portrait = PortraitView.new()
 	_portrait.custom_minimum_size = PORTRAIT_SIZE
-	_portrait.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR  # downscaled 192px art
+	_portrait.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST  # same pixel clusters at card size
 	column.add_child(_portrait)
 
 	var name_row := HBoxContainer.new()

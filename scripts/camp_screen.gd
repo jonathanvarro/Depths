@@ -20,6 +20,8 @@ const TEXT := Color("e6dac1")
 const MUTED := Color("b3a78f")
 const AMBER := Color("dbb477")
 const CANVAS := Vector2(640, 360)
+const COIN_ICON := preload("res://art/items/inventory-64-v1/gold-coin.svg")
+const LANTERN_ICON := preload("res://art/items/inventory-64-v1/lantern-unlit.png")
 ## The apprentice's starter stock, shown until there's gold (#42).
 const CampState := preload("res://scripts/camp_state.gd")
 
@@ -72,10 +74,17 @@ func _init() -> void:
 	title.position = Vector2(20, 8)
 	_canvas.add_child(title)
 	_day_label = _label("", HEADING, 16, AMBER)
-	_day_label.position = Vector2(560, 10)
-	_day_label.size = Vector2(64, 24)
+	_day_label.position = Vector2(400, 10)
+	_day_label.size = Vector2(204, 24)
 	_day_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	_canvas.add_child(_day_label)
+	var coin := TextureRect.new()
+	coin.texture = COIN_ICON
+	coin.position = Vector2(610,13)
+	coin.size = Vector2(14,14)
+	coin.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	coin.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_canvas.add_child(coin)
 	var save := _button("Save & exit")
 	save.position = Vector2(540, 34)
 	save.size = Vector2(84, 24)
@@ -195,6 +204,7 @@ func _build_activity() -> void:
 	_portrait.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	_activity.add_child(_portrait)
 	_scroll = ScrollContainer.new()
+	_scroll.follow_focus = true
 	_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	_activity.add_child(_scroll)
 	_body = VBoxContainer.new()
@@ -261,24 +271,24 @@ func _merchant() -> void:
 		_body.add_child(charity)
 	_body.add_child(_label("Buy", HEADING, 16, TEXT))
 	if not _party.supplies.has_lantern:
-		_shop_row("Lantern: brighter than a torch, burns oil. Yours to keep.", CampState.LANTERN_PRICE, func(): _camp.buy_lantern(_party))
+		_shop_row("Lantern: brighter than a torch, burns oil. Yours to keep.", CampState.LANTERN_PRICE, func(): _camp.buy_lantern(_party), LANTERN_ICON)
 	for item: SupplyItem in CampState.MERCHANT_STOCK:
 		if item.effect == SupplyItem.Effect.REFILL_LANTERN and not _party.supplies.has_lantern:
 			continue  # oil is for lantern owners
 		var held: int = _party.supplies.count(item)
-		_shop_row("%s (you have %d)" % [item.display_name, held], item.price, _camp.buy.bind(_party, item))
+		_shop_row("%s (you have %d)" % [item.display_name, held], item.price, _camp.buy.bind(_party, item), item.icon)
 	var selling := false
 	for item: SupplyItem in _party.supplies.items:
 		if item.effect == SupplyItem.Effect.TREASURE and _party.supplies.count(item) > 0:
 			if not selling:
 				_body.add_child(_label("Sell", HEADING, 16, TEXT))
 				selling = true
-			_sell_row("%s ×%d" % [item.display_name, _party.supplies.count(item)], CampState.sale_price(item), _camp.sell.bind(_party, item))
+			_sell_row("%s ×%d" % [item.display_name, _party.supplies.count(item)], CampState.sale_price(item), _camp.sell.bind(_party, item), item.icon)
 	for item: Equipment in _party.supplies.gear:
 		if not selling:
 			_body.add_child(_label("Sell", HEADING, 16, TEXT))
 			selling = true
-		_sell_row(item.display_name, CampState.sale_price(item), _camp.sell_gear.bind(_party, item))
+		_sell_row(item.display_name, CampState.sale_price(item), _camp.sell_gear.bind(_party, item), item.icon)
 
 
 ## The apprentice smith (#42): plain gear into the pack (equip it there).
@@ -287,7 +297,7 @@ func _smith() -> void:
 	_purse_line()
 	for item: Equipment in CampState.SMITH_STOCK:
 		var accuracy := "" if is_zero_approx(item.accuracy_bonus) else ", %+d%% to hit" % roundi(item.accuracy_bonus * 100)
-		_shop_row("%s: %d-%d damage%s" % [item.display_name, item.attack_min, item.attack_max, accuracy], item.price, _camp.buy_gear.bind(_party, item))
+		_shop_row("%s: %d-%d damage%s" % [item.display_name, item.attack_min, item.attack_max, accuracy], item.price, _camp.buy_gear.bind(_party, item), item.icon)
 	_text("Coming once there are rules for them: %s." % ", ".join(PackedStringArray(CampState.SMITH_COMING)), MUTED)
 	_text("Bought gear goes in your pack; equip it from there.", MUTED)
 
@@ -301,16 +311,24 @@ func _purse_line() -> void:
 	_text("Your purse: %d gold" % _party.supplies.gold, AMBER)
 
 
-func _shop_row(text: String, price: int, on_buy: Callable) -> void:
+func _shop_row(text: String, price: int, on_buy: Callable, icon: Texture2D = null) -> void:
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 8)
+	_item_icon(row,icon)
+	var details := VBoxContainer.new()
+	details.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	row.add_child(details)
 	var name := _label(text, BODY, 12, TEXT)
 	name.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	name.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	row.add_child(name)
+	details.add_child(name)
+	if _party.supplies.gold < price:
+		details.add_child(_label("Need %dg more" % (price-_party.supplies.gold),BODY,11,MUTED))
 	var buy := _button("Buy %dg" % price)
-	buy.custom_minimum_size = Vector2(70, 26)
+	buy.custom_minimum_size = Vector2(78, 30)
+	_price_icon(buy)
 	buy.disabled = _party.supplies.gold < price
+	buy.tooltip_text = "Need %dg more gold" % (price-_party.supplies.gold) if buy.disabled else "Buy for %dg" % price
 	buy.pressed.connect(func():
 		on_buy.call()
 		_refresh_activity())
@@ -318,19 +336,41 @@ func _shop_row(text: String, price: int, on_buy: Callable) -> void:
 	_body.add_child(row)
 
 
-func _sell_row(text: String, price: int, on_sell: Callable) -> void:
+func _sell_row(text: String, price: int, on_sell: Callable, icon: Texture2D = null) -> void:
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 8)
+	_item_icon(row,icon)
 	var name := _label(text, BODY, 12, TEXT)
 	name.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	name.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	row.add_child(name)
 	var sell := _button("Sell %dg" % price)
-	sell.custom_minimum_size = Vector2(70, 26)
+	sell.custom_minimum_size = Vector2(78, 30)
+	_price_icon(sell)
 	sell.pressed.connect(func():
 		on_sell.call()
 		_refresh_activity())
 	row.add_child(sell)
 	_body.add_child(row)
+
+
+func _item_icon(row: Control, texture: Texture2D) -> void:
+	if texture == null:return
+	var icon := TextureRect.new()
+	icon.texture = texture
+	icon.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	icon.custom_minimum_size = Vector2(28,28)
+	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	icon.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	row.add_child(icon)
+
+
+func _price_icon(button: Button) -> void:
+	button.icon = COIN_ICON
+	button.expand_icon = true
+	button.add_theme_constant_override("icon_max_width",12)
 
 
 func _nurse() -> void:
@@ -527,7 +567,7 @@ func _row(column: VBoxContainer, text: String, action: String, on_press: Callabl
 	name.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	row.add_child(name)
 	var button := _button(action)
-	button.custom_minimum_size = Vector2(52, 26)
+	button.custom_minimum_size = Vector2(52, 30)
 	button.pressed.connect(func():
 		on_press.call()
 		_refresh_activity())

@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-18 – ChatGPT
+- Did: #92 exports sixteen consistent 64px starter/copper-ore/lantern icons, wires seven live resources, and adds a 20px coin glyph. All 28 live item/gear icons reviewed at 64px/40px. #36 reauthors neutral Mara base/tunic, five registered blink/talk patches, four conditions and paired outfit light masks; original art preserved. PortraitSet/View now support independent neutral/warm/dim light without illuminating backgrounds/UI; all 27 recruit expression resources expose their existing masks through the same fields. #98 gives camp stock/sales actual thumbnails and visible affordability reasons, keyboard focus for Pack/chest, and a shared condition/inventory scroll so full-party details do not hide phone inventory. Full guide: docs/playable-art-pass.md; sources/exact built-in ImageGen prompts and editable Mara ORA preserved.
+- Next: Owner can review the desktop/phone captures in art/concepts/inventory-64-v1 and mara-neutral-v1. Continue the unticked #96 backlog; held lantern/status/intent icons, camp variants, leather equipment and sound remain. Portrait illumination is explicit presentation, not automatically tied to fuel. Physical iPhone still needs testing.
+- Watch out: Import, asset checks, 222 input/portrait checks, recruit kit 424 + roster 2,413 checks, camp 28, gold 24 and opening escape 30 checks pass. Combined review shutdown retains the unchanged SaveGame static script, independently reproduced with minimal Main/save cleanup and tracked as #100; standalone camp/gold/opening finish cleanly. No saving/gameplay/stat/price changes. Claude's concurrent commits and unrelated untracked script UIDs were preserved.
+
 ## 2026-10-18 – Claude
 - Did: #77 coin flip: overlay with drawn coin and placeholder sound, a rare rigged strongbox event (floors 2+), goblins' rare killing blow decided by the coin (defending +20%), and the Lucky recruit strength (+10%).
 - Next: decisions on #44 (goblin fortress), #83 (what unconscious means); ChatGPT's #97 research.
