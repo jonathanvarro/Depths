@@ -246,7 +246,9 @@ func buy_gear(party, item: Equipment) -> bool:
 ## the party is never stuck at camp (#41's "always a viable party").
 func needs_charity(party) -> bool:
 	var supplies = party.supplies
-	return not supplies.has_lantern and supplies.count(TORCH) == 0 and supplies.gold < TORCH.price and _charity_on < day
+	# Torches and gold in the stash count too, so it can't be farmed (#86).
+	var torches: int = supplies.count(TORCH) + stash.count(TORCH)
+	return not supplies.has_lantern and torches == 0 and supplies.gold + stash.gold < TORCH.price and _charity_on < day
 
 
 func give_charity(party) -> bool:

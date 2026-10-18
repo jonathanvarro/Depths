@@ -145,11 +145,18 @@ func _initialize() -> void:
 	check("a wipe loses carried gold; the stash keeps its gold", supplies.gold == 0 and camp.stash.gold == 4)
 
 	# Nothing to light the way and no money: two torches on account.
+	supplies.add(torch, 1)
+	camp.store(ps, torch)
+	check("no charity while torches sit in the stash", not camp.needs_charity(ps))
+	camp.withdraw(ps, torch)
+	supplies.take(torch)
+	await _open("supplies")
+	camp.stash.gold = 2  # too little for a torch, even counting the stash
 	await _open("supplies")
 	check("the merchant fronts two torches", _press(main._camp, "Take two torches") and supplies.count(torch) == 2)
 	check("only once a day", not camp.needs_charity(ps))
 	await _open("rest")
-	check("take the stash gold back", _press(main._camp, "Take gold") and supplies.gold == 4 and camp.stash.gold == 0)
+	check("take the stash gold back", _press(main._camp, "Take gold") and supplies.gold == 2 and camp.stash.gold == 0)
 	check("a new contract each day", camp.contract.has("enemy"))
 	print("fails=", fails)
 	quit()
