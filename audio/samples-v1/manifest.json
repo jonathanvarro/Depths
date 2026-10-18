@@ -1,0 +1,120 @@
+{
+  "date": "2026-10-18",
+  "issues": [
+    54,
+    96
+  ],
+  "status": "procedural audition samples; not approved live replacements",
+  "method": "Original NumPy modal synthesis and filtered noise; no recordings or model-generated audio.",
+  "python_source": "tools/audio/generate_sfx_samples.py",
+  "numpy_version": "2.3.5",
+  "sample_rate": 44100,
+  "channels": 1,
+  "pcm_bits": 16,
+  "looped": false,
+  "checks": "Finite samples, PCM round-trip, format, no clipping, zero boundary samples and SHA-256.",
+  "effects": [
+    {
+      "file": "heartbeat.wav",
+      "seconds": 0.78,
+      "peak_dbfs": -9.0,
+      "rms_dbfs": -26,
+      "clipped_samples": 0,
+      "boundary_samples": [
+        0,
+        0
+      ],
+      "sha256": "89b57d7691cee8384d7ef3b9679cc5d2bb2f34c39d292edbc28c96629a8a9702",
+      "description": "Muffled two-part pulse; one cycle, no alarm tone.",
+      "seed": 96054,
+      "reel_start_seconds": 0.25
+    },
+    {
+      "file": "club-hit.wav",
+      "seconds": 1.05,
+      "peak_dbfs": -6.0,
+      "rms_dbfs": -30,
+      "clipped_samples": 0,
+      "boundary_samples": [
+        0,
+        0
+      ],
+      "sha256": "e1eab64e172a607d04ba74193c129d3ed860e15929aa9cd8bad7029b72ae0240",
+      "description": "Heavy dull impact, close cloth movement, short wooden body.",
+      "seed": 96055,
+      "reel_start_seconds": 1.68
+    },
+    {
+      "file": "shield-block.wav",
+      "seconds": 1.2,
+      "peak_dbfs": -7.0,
+      "rms_dbfs": -28,
+      "clipped_samples": 0,
+      "boundary_samples": [
+        0,
+        0
+      ],
+      "sha256": "b110b56f388951ae50031db545dd1c38141c6437d3ddce7cc1d307a768782bee",
+      "description": "Rough wooden shield with a little iron fitting chatter.",
+      "seed": 96056,
+      "reel_start_seconds": 3.38
+    },
+    {
+      "file": "coin-pouch.wav",
+      "seconds": 1.85,
+      "peak_dbfs": -10.0,
+      "rms_dbfs": -28,
+      "clipped_samples": 0,
+      "boundary_samples": [
+        0,
+        0
+      ],
+      "sha256": "73409f4f47b460d642503e08c9f34488d5199ff5c50063ede42c977836e0e73e",
+      "description": "A few worn coins settling in leather; small treasure or payment.",
+      "seed": 96057,
+      "reel_start_seconds": 5.23
+    },
+    {
+      "file": "chest-open.wav",
+      "seconds": 2.65,
+      "peak_dbfs": -9.0,
+      "rms_dbfs": -28,
+      "clipped_samples": 0,
+      "boundary_samples": [
+        0,
+        0
+      ],
+      "sha256": "3a4008b3158eeb0a5b70b8358558dd19e52ba96fb121217e771cea1fdfc27fa5",
+      "description": "Latch, dragging hinge and wooden lid settling; no treasure fanfare.",
+      "seed": 96058,
+      "reel_start_seconds": 7.73
+    },
+    {
+      "file": "torch-light.wav",
+      "seconds": 3.5,
+      "peak_dbfs": -10.0,
+      "rms_dbfs": -27,
+      "clipped_samples": 0,
+      "boundary_samples": [
+        0,
+        0
+      ],
+      "sha256": "ae1d28d578c6d15bf585946eab7c7c4d699d946eaf4ce14df3cde378aca7fed1",
+      "description": "Two scratches, flame catch and brief dry crackle fading out.",
+      "seed": 96059,
+      "reel_start_seconds": 11.03
+    }
+  ],
+  "audition": {
+    "file": "audition.wav",
+    "seconds": 15.18,
+    "peak_dbfs": -6.0,
+    "rms_dbfs": -29,
+    "clipped_samples": 0,
+    "boundary_samples": [
+      0,
+      0
+    ],
+    "sha256": "0bf41bf4e57392bc50e5b346dfcd4b6730eb4cb92297d072aa6a0c36bea9935d"
+  }
+}
