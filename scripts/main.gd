@@ -381,8 +381,13 @@ func _unhandled_input(event: InputEvent) -> void:
 ## way up; arriving from below puts it at the way down; the opening uses the
 ## floor's start cell.
 func _go_to_floor(depth: int, arrival: Arrival) -> void:
+	var waited := 0
 	if _floor_started:
-		_party_state.complete_pending_effects()  # owner rule (#8): durations finish between floors
+		# Owner rule (#8): durations finish between floors - but the time they
+		# still needed is spent (#65), so the stairs aren't a free rest.
+		waited = _party_state.remaining_effect_time()
+		_party_state.advance_time(waited)
+		_party_state.complete_pending_effects()
 	_floor_started = true
 	_depth = depth
 	_expedition.visit_floor(depth)
@@ -404,6 +409,8 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 		pass  # the wake-up shows the opening line once the bodies are in view
 	elif arrival == Arrival.OPENING and not use_debug_layout:
 		_show_message(opening_message)
+	elif waited > 0:
+		_show_message("%s · depth %d · waited %d while it took hold" % [environment_theme.display_name, depth, waited])
 	else:
 		_show_message("%s · depth %d" % [environment_theme.display_name, depth])
 

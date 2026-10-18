@@ -179,6 +179,15 @@ func use_item(item: SupplyItem, in_combat := false) -> String:
 
 ## Moving between floors: every effect with a duration finishes now, so the
 ## party arrives with healing (and the like) fully received.
+## Time until every hero's effects have fully played out (the longest).
+func remaining_effect_time() -> int:
+	var longest := 0
+	for member in living_members():
+		for effect in member.pending_effects:
+			longest = maxi(longest, effect["units_left"])
+	return longest
+
+
 func complete_pending_effects() -> void:
 	for member in members:
 		member.complete_pending_effects()

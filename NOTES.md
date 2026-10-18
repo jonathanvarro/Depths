@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-17 – Claude
+- Did: #65 measured the stair trick (same healing for 3 time instead of 21) and, per the owner's choice, made changing floors spend the time remaining on pending effects before finishing them (PartyState.remaining_effect_time()). Stairs now take 22 time against 21 for resting; resting still eases strain.
+- Next: Milestone 3 is clear; milestone 4 starts with the campsite (#40).
+- Watch out: The waiting happens on the first floor change after drinking; the arrival message mentions it.
+
 ## 2026-10-17 – ChatGPT
 - Did: #75 supplies abandoned pack / searched pack, pale idol, still pool and cold campsite art. Five transparent 128px exports and reusable scenes are in art/props/cave-room-props-v1; full event/resource mapping and placement/state contract are in docs/cave-room-prop-art.md. Exact built-in image_gen prompts, source masters, palette/registration/hashes, dark/light boards and 20 normal/dim cave captures are preserved. Export checks and all 85 Godot 4.7.2 checks pass at desktop/landscape-phone sizes.
 - Next: #46 should choose props by actual event resource identity and wire the pack's set_searched(bool) to a resolved search. Put the small idol on a niche support surface; keep the pool horizontal on the existing floor. Runtime scenes are ready; live placement remains separate.

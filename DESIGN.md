@@ -225,6 +225,11 @@ Deeper floors mix them (depth 1 mostly single rats; depth 3 pairs and trios like
 
 *Implemented (#10), starting values from the economy research, all tunable:* 1 time per step (turns, bumps and menus are free). Lantern holds 100 oil; burn scales from 0.5/step nearly empty to 1.5/step full (a full tank lasts ~110 steps); light brightness and reach scale with oil, and an empty lantern leaves a faint glow so the exit is never locked. Oil flasks refill without waste (a part-used flask is kept). Rations heal every hero 4 over 20 time; a restorative draught heals the most hurt hero 10 over 20 time. A rest at a rest spot (once per spot, asks first) takes 20 time and completes all pending effects. The survivor starts with 3 flasks, 2 rations, 1 draught. Supplies are shown in a Pack screen (Pack button / I), not on the HUD. Dressings wait for the injury mechanic (#11); pack capacity is not limited yet.
 
+**Decided 2026-10-17 (#65): changing floors spends the remaining healing time.**
+- Effects still finish between floors (the #8 rule), but the time they still needed passes first: oil burns, hunger and strain tick. The arrival message says how long the party waited.
+- Before: a draught plus a quick trip down and back up gave 10 health in 3 time and 4.5 oil, against 21 time and 28.5 oil for resting. Now it's 22 time and 29.8 oil.
+- Healing costs the same anywhere, and a rest spot stays better because it also eases strain.
+
 Other candidate resources: health and carrying capacity. Treasure can compete with provisions for space. Recovery consumes resources or requires safety.
 
 Rewards include treasure, equipment, knowledge, shortcuts, and safe resting places. Discoveries should change future options, not simply add score.
