@@ -195,6 +195,17 @@ Possible objectives include defeating an enemy, protecting a companion, recoveri
 
 Deeper floors mix them (depth 1 mostly single rats; depth 3 pairs and trios like goblin + spider + rat), never more enemies than heroes. Simulated lone Mara at her start: rat 98% win, spider 74%, goblin 79%. A healthy party of three wins everything for now, losing ~2 / 3 / 5 health per fight on depths 1 / 2 / 3 — tune once recruits and equipment exist. More enemy ideas welcome (owner); candidates: a bat swarm that buffets the lantern (burns oil), a blind cave crawler that hunts by sound, spore-releasing mould that raises strain.
 
+**Decided 2026-10-17 (#60): making fights strategic.**
+- **Enemy intentions:** each enemy shows its **next action, but not its target**. For example, *winding up a heavy blow*, *spinning a web*, *raising a shield*.
+- **Shorter fights, with length by enemy:** quick skirmishes for small creatures, longer fights for tougher ones. Damage rises on both sides, so each fight costs something.
+  - Proposed: rat 1–2 rounds, spider 2–3, goblin 3–5.
+  - Every enemy has at least one intention worth reacting to; for example, Defend halves a goblin's heavy blow.
+- **Positioning:** heroes and enemies get **front and back rows** once recruits exist (#72). Front takes most melee and blocks melee reach to the back; some attackers reach past. Moving costs a turn.
+- **Later:**
+  - deciding before a fight, such as sneaking past or striking first (#73);
+  - **light as a weapon** stays an idea (#74);
+  - the opening's torch throw is unchanged.
+
 **Decided 2026-10-16 (#13): enemies appear in the first-person view.** A dedicated formation layout may be explored later. Do not assume the movement or combat of Greed & Darkness is the target. The owner likes its art styling but envisions these systems differently. Three party positions and a compact action set are starting proposals, not settled rules.
 
 ## Resources, rewards, and uncertainty
