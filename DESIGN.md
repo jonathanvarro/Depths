@@ -222,6 +222,8 @@ The interface should preserve the two elements the owner particularly liked: exp
 
 Use a library of coordinated wall, floor, and ceiling textures applied to reusable geometry. Keep surfaces low-resolution, sparsely detailed, and consistent in colour and intended pixel scale. Combine material families with room shapes, props, and lighting for identity. Stains, cracks, moss, and symbols can later be separate variations or overlays.
 
+**Campfire visual (#63):** [campfire-v1](art/features/campfire-v1/README.md) supplies a fixed stone/log base and six-frame flame loop on 128px canvases, with separate solid/flame lighting and a warm local light. Claude's #59 opening hook loads it automatically; more maze placements remain with visible room contents (#46). The graphic does not add rest, healing, fuel, checkpoint or recruitment rules.
+
 The first test set lives in `art/textures/stone-v1/`: two 64 × 64 wall variants, one floor, one ceiling, and shared Godot materials. The existing prototype now uses them. This is a production-direction test, not a final resolution commitment. Windows import and a rendered corridor were checked; larger-room tiling, physical texel-scale consistency, seam cleanup, and phone appearance still need review.
 
 ### Environment-specific doors and stairs

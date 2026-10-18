@@ -1,0 +1,184 @@
+{
+  "canvas": [
+    128,
+    128
+  ],
+  "frame_count": 6,
+  "fps": 8,
+  "cycle_seconds": 0.75,
+  "base_contact": [
+    64,
+    120
+  ],
+  "flame_root": [
+    64,
+    102
+  ],
+  "registration": [
+    {
+      "source_bounds": [
+        139,
+        50,
+        443,
+        488
+      ],
+      "source_root_x": 283.86587771203153,
+      "scale": 0.18222222222222223,
+      "offset": [
+        12,
+        13
+      ]
+    },
+    {
+      "source_bounds": [
+        108,
+        35,
+        425,
+        485
+      ],
+      "source_root_x": 254.4960876369327,
+      "scale": 0.18222222222222223,
+      "offset": [
+        18,
+        14
+      ]
+    },
+    {
+      "source_bounds": [
+        104,
+        73,
+        413,
+        488
+      ],
+      "source_root_x": 245.29690346083788,
+      "scale": 0.18222222222222223,
+      "offset": [
+        19,
+        13
+      ]
+    },
+    {
+      "source_bounds": [
+        101,
+        139,
+        437,
+        457
+      ],
+      "source_root_x": 270.2057823129252,
+      "scale": 0.18222222222222223,
+      "offset": [
+        15,
+        19
+      ]
+    },
+    {
+      "source_bounds": [
+        109,
+        33,
+        411,
+        463
+      ],
+      "source_root_x": 266.2920634920635,
+      "scale": 0.18222222222222223,
+      "offset": [
+        15,
+        18
+      ]
+    },
+    {
+      "source_bounds": [
+        80,
+        17,
+        411,
+        462
+      ],
+      "source_root_x": 251.63501483679525,
+      "scale": 0.18222222222222223,
+      "offset": [
+        18,
+        18
+      ]
+    }
+  ],
+  "frames": [
+    {
+      "name": "base",
+      "bounds": [
+        8,
+        72,
+        120,
+        121
+      ],
+      "visible_colours": 20
+    },
+    {
+      "name": "flame-0",
+      "bounds": [
+        37,
+        22,
+        92,
+        102
+      ],
+      "visible_colours": 10
+    },
+    {
+      "name": "flame-1",
+      "bounds": [
+        38,
+        21,
+        95,
+        102
+      ],
+      "visible_colours": 10
+    },
+    {
+      "name": "flame-2",
+      "bounds": [
+        38,
+        26,
+        94,
+        102
+      ],
+      "visible_colours": 10
+    },
+    {
+      "name": "flame-3",
+      "bounds": [
+        33,
+        44,
+        94,
+        102
+      ],
+      "visible_colours": 10
+    },
+    {
+      "name": "flame-4",
+      "bounds": [
+        35,
+        24,
+        90,
+        102
+      ],
+      "visible_colours": 10
+    },
+    {
+      "name": "flame-5",
+      "bounds": [
+        33,
+        21,
+        93,
+        102
+      ],
+      "visible_colours": 10
+    }
+  ],
+  "failures": [],
+  "sha256": {
+    "base.png": "500a35963140b3bda76615a627365cfd91c30e7ea0947c8089d3ee8de2c2a3e9",
+    "flames.png": "e50726dd63352c90f99ae2ef28f2ad32e1e19635573cedfd29d16c0233dfd8e7"
+  },
+  "source_sha256": {
+    "base-generated.png": "3887d738eef9ffd7bf03bc8749a9ba4d44ee897ff559d1cecb35ec589f6167fc",
+    "flames-generated.png": "1ebad5b9cc12f1a03b0473421635bf9163170760631228bef19a866fd6428302"
+  }
+}

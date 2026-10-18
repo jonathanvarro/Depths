@@ -1,0 +1,18 @@
+{
+  "issue": 63,
+  "tool": "Built-in image_gen.imagegen",
+  "created": "2026-10-17",
+  "outputs": [
+    {
+      "file": "base-generated.png",
+      "prompt": "Use case: stylized-concept. Asset type: static transparent campfire BASE sprite for Depths, a dark first-person cave dungeon crawler. Create ONE isolated small rough stone fire ring containing three crossed short charred logs. NO fire, NO flames, NO sparks, NO smoke, NO glowing embers; these are a separate animation layer. Camera: front-facing world prop seen from a slightly elevated human eye, shallow ellipse ring, visible inner logs; not isometric. Broad crisp pixel-art clusters, designed to reduce cleanly to 128x128 native pixels, about three shades per material, restrained charcoal brown logs and muted warm-gray stones. Simple silhouette, asymmetrical chipped rocks, sparse purposeful wear. No photorealism, fine grain, gradients, dithering, tiny detail, uniform cartoon outline or excessive polish. Neutral diffuse lighting, no orange light painted onto stones, no cast ground shadow, no ground patch. Transparent background, no labels or UI. Square 1024x1024 canvas. Base occupies x approximately 128..896, y 640..928; keep the TOP HALF EMPTY TRANSPARENT for a separate flame layer. Bottom contact centred at x512,y928. Entire object inside canvas with transparent margins. Fire ring/wood only, no landscape or characters.",
+      "role": "static neutral stone/log base"
+    },
+    {
+      "file": "flames-generated.png",
+      "prompt": "Use case: stylized-concept. Asset type: transparent sprite sheet for a small campfire flame loop in Depths, a dark first-person cave crawler. Generate EXACTLY SIX sequential animation drawings in a regular 3-COLUMN by 2-ROW grid, reading left to right top row then bottom row. Landscape 1536x1024 canvas, each square cell512x512. Each cell is the SAME front-facing modest campfire flame at the SAME scale and same origin, varying ONLY the flame tongues as it gently flickers. Central flame root at local(256,352) with root width about140; tallest tip aroundlocaly72, widestextentlocalx128..384. Stay inside each cell with generous transparent gutters. Warm burnt orange outer flame, amber inner flame and small pale yellow core; 3 to 5 solid colour masses per flame, crisp broad pixel-art clusters designed for128x128 native sprites, no fine detail. Subtle changing lean left/upright/right/low/left/upright, last pose returns naturally into first, flame remains roughly constant overall size. Fire ONLY: NO logs, NO stones, NO ground, NO shadows, NO smoke, NO shower of sparks, NO background glow, NO gradients, NO motion blur, NO antialiasing, NO text, NO grid lines, NO frames or labels. Genuinely transparent background across sheet. These are six frames of ONE fire, not different fire designs. First-person world prop rather than UI flame icon. Restrained irregular natural torn flame silhouette, not cute or cartoon-logo style.",
+      "role": "six sequential flames in 3x2 sheet"
+    }
+  ],
+  "processing": "tools/art/build_campfire.py crops/slices, applies common cycle scale and root registration, reduces to 128px canvases, thresholds alpha and uses non-dithered shared palettes. No repainted pixels. Runtime base and flames remain separate."
+}
