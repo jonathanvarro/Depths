@@ -176,6 +176,12 @@ Templates > Download and Install; already installed on the owner's PC).
 - Rows (#72): `Companion.row` / `reach` / `has_reach()`, `Equipment.reach`,
   `EnemyType.row` / `reach_back`; CombatState `can_hit`, `targets_for`,
   `foe_can_reach`, `hero_move`. `tools/rows_check.gd`; `tools/balance_sim.gd`.
+- Saving (#45): `scripts/save_game.gd` (one slot; `pack_object`/`unpack_into`
+  store resources by path and generated objects by script variables).
+  main.gd `_save_now()` / `_restore()` / `_camp_loop()`; heroes are packed
+  once in "people" and referenced by index. Runs with `--script` use
+  `user://test_save.dat`. New runtime state must be added to both functions.
+  `tools/save_check.gd`.
 - `scripts/chest_screen.gd` – chest window beside the pack: drag (set_drag_
   forwarding), tap, or the take-all icon button; `took` signal.
 - `scripts/pack_screen.gd` – the Pack screen (Pack button under the minimap,

@@ -54,8 +54,19 @@ func _ready() -> void:
 	gap.custom_minimum_size.y = 18 if phone else 26
 	column.add_child(gap)
 
-	_begin = _menu_button("Begin expedition", 72 if phone else 56, true)
-	_begin.pressed.connect(func(): get_tree().change_scene_to_file(GAME_SCENE))
+	# Continue a saved game (#45); a new game replaces the save.
+	var SaveGame := preload("res://scripts/save_game.gd")
+	var has_save: bool = SaveGame.exists()
+	if has_save:
+		var resume := _menu_button("Continue", 72 if phone else 56, true)
+		resume.pressed.connect(func():
+			SaveGame.continue_requested = true
+			get_tree().change_scene_to_file(GAME_SCENE))
+		column.add_child(resume)
+	_begin = _menu_button("New game (replaces your save)" if has_save else "Begin expedition", 72 if phone else 56, not has_save)
+	_begin.pressed.connect(func():
+		SaveGame.delete()
+		get_tree().change_scene_to_file(GAME_SCENE))
 	column.add_child(_begin)
 	# No settings exist yet; shown, but not pretending to work.
 	var settings := _menu_button("Settings", 72 if phone else 56, false)

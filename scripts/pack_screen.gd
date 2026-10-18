@@ -4,6 +4,8 @@ extends Control
 ## quiet. Opening and browsing spend nothing; using an item spends its time.
 
 signal closed
+## Save the game and go back to the title (#45).
+signal save_and_exit
 ## An item was used; `message` describes what happened.
 signal used(message: String)
 
@@ -242,6 +244,14 @@ func _build() -> void:
 	close.focus_mode = Control.FOCUS_NONE
 	close.add_theme_font_size_override("font_size", 20)
 	close.pressed.connect(func(): closed.emit())
+	var save := Button.new()
+	save.text = "Save & exit"
+	save.custom_minimum_size = Vector2(150, 52)
+	save.focus_mode = Control.FOCUS_NONE
+	save.add_theme_font_size_override("font_size", 20)
+	save.pressed.connect(func(): save_and_exit.emit())
+	header.add_child(save)
+	header.move_child(save, header.get_child_count() - 2)
 	header.add_child(close)
 
 	_light_title = _label("Lantern", 22, COLOR_TEXT)

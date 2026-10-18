@@ -14,6 +14,11 @@ Format:
 ---
 
 ## 2026-10-18 – Claude
+- Did: Owner's batch. Camp clarity (#85/#87/#88), stash-proof charity torches (#86), closed #43, full-party balance with size-aware groups (#49, tools/balance_sim.gd), any hero equips gear with before/after numbers (#67), front/back rows (#72), saving (#45: autosave on floors/camp/camp changes/close/pause, Save & exit in Pack and camp, Continue on the title; opening restarts on Continue). Research brief for ChatGPT on stats/monsters/XP (#97).
+- Next: Owner: #79's "a day = one trip down" conflicts with "resting moves the day" (#40) - which wins? Then #97 research, #44 goblin fortress objective, #83 unconscious main heroes.
+- Watch out: Anything new that must survive a reload needs adding to main.gd _save_now()/_restore(). Fights resumed after loading restart the enemies at full health.
+
+## 2026-10-18 – Claude
 - Did: Recruits now get ChatGPT's animated faces (#82, recruit-roster-v1 catalog, three per role, no duplicates among the fire, party and anyone at camp; silhouettes only if a role runs out). Fixed exports: export_presets.cfg now includes *.json, so the camp layout and the face catalog ship in Depths.exe (every exe since the camp was added lacked them).
 - Next: rest of the owner's batch (camp clarity, #86, #43, #49, #67, #72).
 - Watch out: Any new runtime JSON is exported via the *.json include filter; other non-resource files would need adding too.

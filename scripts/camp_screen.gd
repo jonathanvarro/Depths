@@ -9,6 +9,8 @@ extends Control
 
 ## The player chose to head back down (cave path).
 signal cave_chosen
+## Save and go back to the title (#45).
+signal save_and_exit
 
 const DIR := "res://art/camp/cave-camp-v1/"
 const HEADING := preload("res://art/fonts/heading-cinzel.tres")
@@ -74,6 +76,12 @@ func _init() -> void:
 	_day_label.size = Vector2(64, 24)
 	_day_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	_canvas.add_child(_day_label)
+	var save := _button("Save & exit")
+	save.position = Vector2(540, 34)
+	save.size = Vector2(84, 24)
+	save.add_theme_font_size_override("font_size", 11)
+	save.pressed.connect(func(): save_and_exit.emit())
+	_canvas.add_child(save)
 	_build_activity()
 	_note = _label("", ACTION, 14, AMBER)
 	_note.position = Vector2(0, 150)

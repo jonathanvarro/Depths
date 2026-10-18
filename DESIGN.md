@@ -178,6 +178,17 @@ Suggested initial presentation: one campsite screen with a few selectable activi
   - Events can give random valuables fit for the floor (`EventOutcome.treasure`). An abandoned pack holds one; a goblin stash two, plus ore. Old workings can turn up gold nuggets.
   - The opening's chest now uses ChatGPT's chest art: closed, then empty once looted.
 
+**Saving (#45, owner 2026-10-18): save and exit any time; autosave on floor changes and on returning to camp.**
+- *Built:* one save slot. The game saves:
+  - on every floor change;
+  - on arriving at camp, and after camp changes (buying, hiring, resting);
+  - from **Save & exit** in the Pack and at camp;
+  - when the window closes or a phone sends the app to the background.
+- **The title** offers **Continue**; a new game replaces the save.
+- **Interrupted moments:** a fight or room event cut off by quitting happens again on Continue. The enemies come back at full strength, while the party keeps its current health.
+- **A wipe** is saved straight away as its aftermath, so quitting can't undo it.
+- **During the opening** only a marker is kept: Continue restarts the escape in the same maze.
+
 The suggested retreat flow is to return through the dungeon to its entrance before reaching camp, with discovered shortcuts potentially easing later returns. Travel costs, escape exceptions, refuge services, recovery timing, and prices still need design decisions. Rest spots inside the dungeon remain distinct from the outside refuge.
 
 **Cave-camp staff and equipment (2026-10-16):** the owner wants a blacksmith sent from a nearby village and a nurse for the cave area. The smith is an apprentice, explaining the limited selection of quality items; the starting location should offer very basic equipment. The [updated campsite design](docs/campsite-design.md) proposes a sixth clickable smith area and places the nurse in the treatment tent. Exact stock, repair/crafting mechanics, NPC identities and later-site availability remain open. The original five-area interaction study predates this addition.

@@ -22,6 +22,8 @@ const SPEECH_COOLDOWN := 6.0
 const ChestScreen := preload("res://scripts/chest_screen.gd")
 const CampState := preload("res://scripts/camp_state.gd")
 const CampScreen := preload("res://scripts/camp_screen.gd")
+const SaveGame := preload("res://scripts/save_game.gd")
+const TITLE_SCENE := "res://scenes/title.tscn"
 ## Opening: remark on being lost at junctions this often (steps).
 const LOST_REMARK_EVERY := 18
 
@@ -228,6 +230,9 @@ var _site_seed := 0
 var _first_seed := 0  # the site seed on day 1
 var _camp_state = CampState.new()  # day, stash, recovery (#40)
 var _camp: Control  # camp_screen.gd
+var _active_cell := Vector2i(-1, -1)  # a fight or event in progress (redone after loading)
+var _wipe_pending := false  # wiped: the save already holds the aftermath
+var _save_queued := false
 var _party_state  # party_state.gd: heroes and time, kept across floors
 var _cards: Array[PanelContainer] = []  # party_card.gd, one per slot
 var _depth := 0
@@ -351,9 +356,20 @@ func _ready() -> void:
 	_party_state.supplies.changed.connect(_update_lantern)
 	_party_state.supplies.light_band_changed.connect(_on_light_band_changed)
 	_update_lantern()
+	_camp_state.changed.connect(_save_soon)
+	var saved: Dictionary = SaveGame.read() if SaveGame.continue_requested else {}
+	SaveGame.continue_requested = false
 	# The survivor wakes on the deepest floor and climbs out (#8). The debug
 	# layout is a single hand-drawn floor, so it starts there instead.
-	if use_debug_layout or not play_opening:
+	if not saved.is_empty() and not saved.get("opening", false):
+		_restore(saved)
+	elif not saved.is_empty():
+		# Saved during the opening: the short scripted escape starts again,
+		# in the same maze (#45).
+		_site_seed = saved["seed"]
+		_first_seed = _site_seed
+		_begin_opening()
+	elif use_debug_layout or not play_opening:
 		_go_to_floor(1, Arrival.OPENING)
 	else:
 		_begin_opening()
@@ -424,6 +440,7 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 		_show_message("%s · depth %d · waited %d while it took hold" % [environment_theme.display_name, depth, waited])
 	else:
 		_show_message("%s · depth %d" % [environment_theme.display_name, depth])
+	_save_now()  # autosave on every floor change (#45)
 
 
 func _build_level() -> void:
@@ -501,9 +518,11 @@ func _run_event(cell: Vector2i) -> void:
 		_show_message(DungeonMap.content_name(_map.content_at(cell)))
 		return
 	_party.locked = true
+	_active_cell = cell
 	_room_events.depth = _depth  # deeper floors hold richer treasure (#42)
 	_event_screen.show_event(event, _party_state, _room_events)
 	var result: Dictionary = await _event_screen.finished
+	_active_cell = Vector2i(-1, -1)
 	_party.locked = false
 	if result["left"]:
 		_map.triggered.erase(cell)
@@ -523,6 +542,7 @@ func _run_event(cell: Vector2i) -> void:
 ## action panel replaces the movement pad until it's over.
 ## `types` sets the enemies (e.g. an ambush); empty picks a group for the floor.
 func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
+	_active_cell = cell
 	var opening_spider := _in_opening and _opening_fights_done == OPENING_FIGHTS.size() - 1
 	if types.is_empty():
 		types.assign(encounter_pool(_depth, _party_state.living_members().size()).pick_random())
@@ -545,6 +565,7 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 		if is_instance_valid(foe.node):
 			foe.node.queue_free()
 	_in_combat = false
+	_active_cell = Vector2i(-1, -1)
 	_combat.only_action = ""
 	_layout_hint()
 	_touch_pad.visible = true
@@ -611,6 +632,9 @@ func _end_expedition(ending: int) -> void:
 		Expedition.Ending.WIPED: "Everyone is lost, and everything they carried. The camp remains: new companions wait by the fire.",
 		Expedition.Ending.REACHED_BOTTOM: "You stood where the others fell, and lived to climb back.",
 	}
+	if ending == Expedition.Ending.WIPED:
+		_wipe_pending = true
+		_save_now()
 	if _in_opening and ending == Expedition.Ending.RETURNED:
 		_results.show_brief("Barely survived", "You stagger out into the daylight, alone.", "To camp")
 	else:
@@ -620,6 +644,7 @@ func _end_expedition(ending: int) -> void:
 	if ending == Expedition.Ending.WIPED:
 		_party_state.supplies.lose_everything()  # the campaign goes on (#41)
 	_start_new_expedition()
+	_wipe_pending = false
 
 
 ## Placeholder camp stop, then back into the cave from the top. The cave
@@ -644,11 +669,18 @@ func _start_new_expedition() -> void:
 		if not hero.is_alive():
 			_party_state.remove_member(hero)
 	_camp_state.rejoin(_party_state)
-	# The campsite (#40): nothing recovers by itself - rest in your tent.
+	_camp_loop(_camp_state.collect_contract(_party_state))
+
+
+## The campsite (#40) until the party heads down: nothing recovers by itself
+## - rest in your tent. Also where a game saved at camp resumes (#45).
+func _camp_loop(reward := 0) -> void:
+	_ending = true
+	_party.locked = true
 	_camp.open(_camp_state, _party_state)
-	var reward: int = _camp_state.collect_contract(_party_state)
 	if reward > 0:
 		_camp.announce("The king's quartermaster pays the contract: %d gold." % reward)
+	_save_now()  # autosave on returning to camp (#45)
 	await _camp.cave_chosen
 	_camp.visible = false
 	_camp_state.leave_behind(_party_state)
@@ -660,6 +692,141 @@ func _start_new_expedition() -> void:
 	_go_to_floor(1, Arrival.FROM_ABOVE)
 	_show_message("Day %d. Expedition %d: back into the cave." % [_camp_state.day, _expedition.number])
 	_light_torch_if_dark()
+
+
+# --- Saving (#45) -----------------------------------------------------
+
+func _notification(what: int) -> void:
+	# Closing the window, or a phone sending the app to the background.
+	if what == NOTIFICATION_WM_CLOSE_REQUEST or what == NOTIFICATION_APPLICATION_PAUSED:
+		if is_node_ready() and _party_state:
+			_save_now()
+
+
+## Camp changes (buying, hiring, resting) save once things settle.
+func _save_soon() -> void:
+	if _save_queued:
+		return
+	_save_queued = true
+	(func():
+		_save_queued = false
+		if _camp.visible:
+			_save_now()).call_deferred()
+
+
+func save_and_exit() -> void:
+	_save_now()
+	get_tree().change_scene_to_file(TITLE_SCENE)
+
+
+## Writes the whole campaign. During the opening only a marker is kept: the
+## escape starts again on Continue. A fight or event in progress is undone
+## so it happens again after loading.
+func _save_now() -> void:
+	if _in_opening:
+		SaveGame.write({"opening": true, "seed": _first_seed})
+		return
+	if _ending and not _camp.visible and not _wipe_pending:
+		return  # the results screen: the camp saves next
+	var people: Array = []  # every hero object once; referenced by index
+	for hero in _party_state.members + _camp_state.left_behind + _camp_state.candidates:
+		if hero not in people:
+			people.append(hero)
+	var index := func(hero): return people.find(hero)
+	var at_camp: bool = _camp.visible or _preparation.visible or _wipe_pending
+	var party: Array = _party_state.members.filter(func(h: Companion): return h.is_alive() or not _wipe_pending)
+	var supplies: Dictionary = SaveGame.pack_object(_party_state.supplies)
+	if _wipe_pending:  # everything carried is lost (#41)
+		var nothing = Supplies.new()
+		nothing.lose_everything()
+		supplies = SaveGame.pack_object(nothing)
+	var floors := []
+	for depth in _floors:
+		var map = _floors[depth]
+		var undo: bool = map == _map and _active_cell != Vector2i(-1, -1) and map.triggered.has(_active_cell)
+		if undo:
+			map.triggered.erase(_active_cell)
+		floors.append([depth, SaveGame.pack_object(map)])
+		if undo:
+			map.triggered[_active_cell] = true
+	var recovering := []
+	for hero in _camp_state.recovering:
+		recovering.append([index.call(hero), _camp_state.recovering[hero]])
+	var start_heroes := []
+	for hero in _expedition._start_heroes:
+		if hero in people:
+			start_heroes.append([index.call(hero), SaveGame.pack_value(_expedition._start_heroes[hero])])
+	SaveGame.write({
+		"seed": _site_seed, "first_seed": _first_seed, "depth": _depth,
+		"at_camp": at_camp, "cell": _party.cell, "facing": _party.facing,
+		"resume": not at_camp and _active_cell != Vector2i(-1, -1),
+		"people": people.map(func(h): return SaveGame.pack_object(h)),
+		"party": party.map(func(h): return index.call(h)),
+		"time": _party_state.time_elapsed,
+		"supplies": supplies,
+		"camp": SaveGame.pack_object(_camp_state, ["stash", "candidates", "left_behind", "recovering", "rng"]),
+		"stash": SaveGame.pack_object(_camp_state.stash),
+		"candidates": _camp_state.candidates.map(func(h): return index.call(h)),
+		"left_behind": _camp_state.left_behind.map(func(h): return index.call(h)),
+		"recovering": recovering,
+		"camp_rng": _camp_state.rng.state,
+		"expedition": SaveGame.pack_object(_expedition, ["_start_heroes"]),
+		"start_heroes": start_heroes,
+		"floors": floors,
+	})
+
+
+## Rebuilds the campaign from a save and carries on where it left off.
+func _restore(data: Dictionary) -> void:
+	_site_seed = data["seed"]
+	_first_seed = data["first_seed"]
+	var people: Array = data["people"].map(func(d):
+		var hero := Companion.new()
+		SaveGame.unpack_into(hero, d)
+		return hero)
+	_party_state.members.assign(data["party"].map(func(i): return people[i]))
+	_party_state.time_elapsed = data["time"]
+	SaveGame.unpack_into(_party_state.supplies, data["supplies"])
+	SaveGame.unpack_into(_camp_state, data["camp"])
+	SaveGame.unpack_into(_camp_state.stash, data["stash"])
+	_camp_state.candidates.assign(data["candidates"].map(func(i): return people[i]))
+	_camp_state.left_behind.assign(data["left_behind"].map(func(i): return people[i]))
+	_camp_state.recovering = {}
+	for pair in data["recovering"]:
+		_camp_state.recovering[people[pair[0]]] = pair[1]
+	_camp_state.rng.state = data["camp_rng"]
+	_expedition = Expedition.new(_party_state, data["expedition"]["number"])
+	SaveGame.unpack_into(_expedition, data["expedition"])
+	for pair in data["start_heroes"]:
+		_expedition._start_heroes[people[pair[0]]] = SaveGame.unpack_value(pair[1])
+	_floors = {}
+	for pair in data["floors"]:
+		var map = DungeonMap.new(pair[1]["_rows"], pair[0])
+		SaveGame.unpack_into(map, pair[1])
+		_floors[pair[0]] = map
+	_floor_started = true
+	_party_state.changed.emit()
+	_party_state.supplies.changed.emit()
+	_refresh_cards()
+	_on_party_state_changed(false)
+	_update_lantern()
+	if data["at_camp"]:
+		_camp_state.rejoin(_party_state)  # saved right after a wipe: they're back
+		_refresh_cards()
+		_camp_loop()
+		return
+	_depth = data["depth"]
+	_map = _floors[_depth]
+	_build_level()
+	_minimap.setup(_map)
+	_full_map_view.setup(_map)
+	_party.place(_map, data["cell"])
+	_party.facing = data["facing"]
+	_party.rotation.y = -_party.facing * PI / 2.0
+	_party.moved.emit(_party.cell, _party.facing)
+	_show_message("%s · depth %d · continued" % [environment_theme.display_name, _depth])
+	if data["resume"]:  # an interrupted fight or event happens again
+		_on_party_entered_cell.call_deferred(_party.cell)
 
 
 ## Going in without a light: a torch is lit at the cave mouth, if there is one.
@@ -1913,6 +2080,7 @@ func _build_ui(minimap: Control) -> void:
 	_pack.setup(_party_state)
 	_pack.visible = false
 	_pack.closed.connect(_set_pack.bind(false))
+	_pack.save_and_exit.connect(save_and_exit)
 	_pack.used.connect(_show_message)
 	_pack.used.connect(func(_m): _refresh_tutorial_hint())
 	_combat = CombatScreen.new()
@@ -1927,6 +2095,7 @@ func _build_ui(minimap: Control) -> void:
 	_build_eyelids(canvas)
 	_camp = CampScreen.new()
 	canvas.add_child(_camp)
+	_camp.save_and_exit.connect(save_and_exit)
 	_preparation = PreparationScreen.new()
 	canvas.add_child(_preparation)
 	minimap.pressed.connect(_set_full_map.bind(true))
