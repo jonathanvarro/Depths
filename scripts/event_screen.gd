@@ -45,6 +45,10 @@ func _init() -> void:
 	visible = false
 
 
+## The coin flip overlay (coin_flip.gd), set by main.gd (#77).
+var coin: Control
+
+
 func show_event(event: RoomEvent, party_state, rules) -> void:
 	_event = event
 	_party = party_state
@@ -69,7 +73,18 @@ func _show_choices() -> void:
 
 
 func _choose(choice: EventChoice) -> void:
-	var result: Dictionary = _rules.resolve(_party, choice)
+	var forced := -1
+	if choice.coin_flip and coin:
+		# No turning it down once chosen (#77); luck bends the odds.
+		_clear_buttons()
+		var luck: Array = _party.luck()
+		var chance: float = minf(0.5 + luck[0], 0.85)
+		var note: String = "%s's luck" % luck[1] if luck[1] != "" else ""
+		visible = false  # the coin has the screen to itself
+		var heads: bool = await coin.flip(_event.title, choice.heads_text, choice.tails_text, chance, note)
+		visible = true
+		forced = 0 if heads else 1
+	var result: Dictionary = _rules.resolve(_party, choice, forced)
 	if choice.investigation and result["ambush"].is_empty():
 		_used[choice] = true
 		_body.text += "\n\n" + result["text"]

@@ -34,6 +34,8 @@ var _tags := {}  # Foe -> Button
 ## opening forces the throw when Mara is nearly down, #69).
 var only_action := ""
 var _hero: Companion  # whose turn it is (rows decide who they can reach, #72)
+## The coin flip overlay (coin_flip.gd), set by main.gd (#77).
+var coin: Control
 ## Emitted after each hero action (the opening reacts to glancing blows).
 signal hero_acted(hero: Companion, action: Dictionary, outcome: Dictionary)
 
@@ -135,6 +137,20 @@ func _hero_action(hero: Companion, action: Dictionary) -> void:
 
 
 func _enemy_action(foe) -> void:
+	if foe.intent == CombatState.Intent.KILLING_BLOW and coin:
+		# The coin decides (#77): shown in the open, no turning it down.
+		var target: Companion = _state.prepare_killing_blow(foe)
+		if target:
+			var notes := PackedStringArray()
+			if _state.is_defending(target):
+				notes.append("%s is defending" % target.display_name)
+			var luck: Array = _state.party.luck()
+			if luck[1] != "":
+				notes.append("%s's luck" % luck[1])
+			var heads: bool = await coin.flip("The %s lunges for %s's throat!" % [foe.name.to_lower(), target.display_name],
+					"the blow whistles past", "a crushing hit and a lasting injury",
+					_state.killing_blow_odds(target), ", ".join(notes))
+			_state.coin = 1 if heads else 0
 	var outcome: Dictionary = _state.enemy_act(foe)
 	_add_log(outcome.get("text", ""))
 	enemy_acted.emit(foe, outcome)

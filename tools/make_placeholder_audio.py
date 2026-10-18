@@ -183,6 +183,16 @@ def heartbeat():
     return out
 
 
+def coin():
+    """A coin flicked into the air: a bright ring, then a small landing clink."""
+    n = seconds(1.9)
+    out = [0.0] * n
+    for delay, freq, gain, length in [(0.0, 2350, 1.0, 0.35), (0.0, 3510, 0.5, 0.25), (1.75, 2600, 0.6, 0.08), (1.82, 2900, 0.35, 0.05)]:
+        ring = [math.sin(2 * math.pi * freq * i / RATE) * decay(i, 0.001, length) for i in range(seconds(0.6))]
+        mix_into(out, ring, seconds(delay), gain)
+    return out
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     for v in range(3):
@@ -193,6 +203,7 @@ def main():
     write("ambience_cave.wav", ambience(24, 7, False), 0.5)
     write("ambience_stone.wav", ambience(24, 3, True), 0.5)
     write("heartbeat.wav", heartbeat(), 0.9)
+    write("coin.wav", coin(), 0.6)
 
 
 if __name__ == "__main__":

@@ -75,9 +75,10 @@ func pick(kind: int, depth: int) -> RoomEvent:
 
 ## Applies `choice` for the party. Returns {"text": String,
 ## "ambush": Array[EnemyType], "ends": bool}.
-func resolve(party, choice: EventChoice) -> Dictionary:
+## `forced`: which outcome to use (the coin decided), or -1 to pick by weight.
+func resolve(party, choice: EventChoice, forced := -1) -> Dictionary:
 	party.advance_time(choice.time_cost)
-	var outcome := _pick_outcome(choice)
+	var outcome: EventOutcome = choice.outcomes[forced] if forced >= 0 and forced < choice.outcomes.size() else _pick_outcome(choice)
 	var result := {"text": "", "ambush": [] as Array[EnemyType], "ends": not choice.investigation}
 	if outcome == null:
 		return result

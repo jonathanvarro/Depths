@@ -9,3 +9,7 @@ extends Resource
 ## Investigations: offered once, and the event stays open afterwards.
 @export var investigation := false
 @export var outcomes: Array[EventOutcome] = []
+## Decided by the coin (#77): the first outcome is heads, the second tails.
+@export var coin_flip := false
+@export var heads_text := ""
+@export var tails_text := ""

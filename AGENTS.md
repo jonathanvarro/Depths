@@ -182,6 +182,11 @@ Templates > Download and Install; already installed on the owner's PC).
   once in "people" and referenced by index. Runs with `--script` use
   `user://test_save.dat`. New runtime state must be added to both functions.
   `tools/save_check.gd`.
+- Coin flip (#77): `scripts/coin_flip.gd` overlay, `await coin.flip(title,
+  heads, tails, chance, note)`; EventChoice `coin_flip` (outcomes[0] heads,
+  [1] tails); CombatState Intent.KILLING_BLOW, `prepare_killing_blow`,
+  `killing_blow_odds`, `coin`; Companion.luck, PartyState.luck().
+  `tools/coin_check.gd`.
 - `scripts/chest_screen.gd` – chest window beside the pack: drag (set_drag_
   forwarding), tap, or the take-all icon button; `took` signal.
 - `scripts/pack_screen.gd` – the Pack screen (Pack button under the minimap,

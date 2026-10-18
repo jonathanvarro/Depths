@@ -306,6 +306,15 @@ Deeper floors mix them (depth 1 mostly single rats; depth 3 pairs and trios like
   - **light as a weapon** stays an idea (#74);
   - the opening's torch throw is unchanged.
 
+*Coin flip (#77, built 2026-10-18; owner: one coin, rare high-stakes moments, odds bent by traits or trinkets, no turning down):*
+- The coin shows what heads (always the good side) and tails mean, and the odds. The player presses **Flip**, watches it spin and land, then continues. Once it's up there's no backing out.
+- **Rigged strongbox** (floors 2+, rare): heads gives 15 gold and a valuable; tails, a spring-needle (−4 health, strain) and nothing inside.
+- **Goblin killing blow:** a rare new intention (about 10% of goblin turns), *lining up a killing blow*.
+  - Heads, it misses. Tails, it hits for double its maximum, past any guard, and leaves an injury.
+  - Defending the target adds 20% to heads.
+- **Luck:** the recruit strength **Lucky** adds 10% to heads (the party's luckiest counts). Heads is capped at 85%.
+- **Art:** the coin is drawn (crown and skull) and the sound is a placeholder until there's art (#96).
+
 *Rows (#72, built 2026-10-18):*
 - **Each hero has a row,** kept between fights:
   - **front** takes melee and shields the back;

@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="RoomEvent" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="event"]
+[ext_resource type="Script" path="res://scripts/event_choice.gd" id="choice"]
+[ext_resource type="Script" path="res://scripts/event_outcome.gd" id="outcome"]
+
+[sub_resource type="Resource" id="heads"]
+script = ExtResource("outcome")
+text = "The spring snaps, harmlessly, into the wall. Inside: coins, and something wrapped in velvet."
+gold = 15
+treasure = 1
+
+[sub_resource type="Resource" id="tails"]
+script = ExtResource("outcome")
+text = "A needle springs from the lock and sinks deep into your hand. The box is empty - a decoy."
+health = -4
+strain = 8.0
+
+[sub_resource type="Resource" id="c0"]
+script = ExtResource("choice")
+label = "Force the lid"
+time_cost = 2
+outcomes = Array[EventOutcome]([SubResource("heads"), SubResource("tails")])
+coin_flip = true
+heads_text = "the trap misfires: 15 gold and a valuable"
+tails_text = "a spring-needle through the hand, and nothing inside"
+
+[resource]
+script = ExtResource("event")
+kind = 2
+title = "A rigged strongbox"
+clue = "A small iron strongbox, bolted to the rock. Rust streaks the lock, and a coiled spring shows through a gap in the lid."
+choices = Array[EventChoice]([SubResource("c0")])
+min_depth = 2
+max_depth = 99
+weight = 1

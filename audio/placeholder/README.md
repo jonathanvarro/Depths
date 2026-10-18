@@ -11,6 +11,7 @@ recordings later by assigning new files in `themes/*.tres` (Sound group).
 | `door_creak.wav` | Opening a door (stone theme) |
 | `ambience_cave.wav` | Cave background loop: rumble and dripping water |
 | `heartbeat.wav` | One heartbeat; repeated, faster at low health, when bleeding costs health (#71) |
+| `coin.wav` | The coin flip (#77): a ring as it's flicked, a clink as it lands |
 | `ambience_stone.wav` | Stone dungeon background loop: rumble and low hum |
 
 ## Licence and source

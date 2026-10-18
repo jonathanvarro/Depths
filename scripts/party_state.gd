@@ -39,6 +39,15 @@ func remove_member(member: Companion) -> void:
 	changed.emit()
 
 
+## The luckiest living hero bends coin flips (#77): [bonus, their name].
+func luck() -> Array:
+	var best: Companion = null
+	for member in living_members():
+		if member.luck > 0.0 and (best == null or member.luck > best.luck):
+			best = member
+	return [best.luck, best.display_name] if best else [0.0, ""]
+
+
 func free_slots() -> int:
 	return MAX_MEMBERS - members.size()
 

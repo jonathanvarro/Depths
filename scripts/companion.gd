@@ -56,6 +56,8 @@ const StrainRules := preload("res://scripts/strain.gd")
 @export_enum("front", "back") var row := "front"
 ## Attacks from the back row without a reach weapon (a Scout's sling).
 @export var reach := false
+## Added to the odds of heads when the coin is flipped (#77).
+@export_range(0.0, 0.5) var luck := 0.0
 
 
 ## Can attack from the back row / into the enemy's back row.

@@ -23,6 +23,7 @@ const ChestScreen := preload("res://scripts/chest_screen.gd")
 const CampState := preload("res://scripts/camp_state.gd")
 const CampScreen := preload("res://scripts/camp_screen.gd")
 const SaveGame := preload("res://scripts/save_game.gd")
+const CoinFlip := preload("res://scripts/coin_flip.gd")
 const TITLE_SCENE := "res://scenes/title.tscn"
 ## Opening: remark on being lost at junctions this often (steps).
 const LOST_REMARK_EVERY := 18
@@ -2093,6 +2094,14 @@ func _build_ui(minimap: Control) -> void:
 	_results = ResultsScreen.new()
 	canvas.add_child(_results)
 	_build_eyelids(canvas)
+	# The coin flip (#77) sits above everything, tutorial cards included.
+	var coin_layer := CanvasLayer.new()
+	coin_layer.layer = 6
+	add_child(coin_layer)
+	var coin := CoinFlip.new()
+	coin_layer.add_child(coin)
+	_combat.coin = coin
+	_event_screen.coin = coin
 	_camp = CampScreen.new()
 	canvas.add_child(_camp)
 	_camp.save_and_exit.connect(save_and_exit)

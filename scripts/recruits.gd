@@ -36,6 +36,7 @@ const STRENGTHS := [
 	{"name": "Sturdy", "text": "+4 health", "stat": "max_health", "amount": 4},
 	{"name": "Quick", "text": "acts sooner", "stat": "initiative", "amount": 3},
 	{"name": "Strong arm", "text": "+1 damage", "stat": "attack_max", "amount": 1},
+	{"name": "Lucky", "text": "better odds when a coin is flipped", "stat": "luck", "amount": 0.1},
 ]
 const WEAKNESSES := [
 	{"name": "Clumsy", "text": "-8% to hit", "stat": "accuracy", "amount": -0.08},

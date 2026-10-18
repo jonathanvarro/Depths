@@ -34,7 +34,7 @@ const GOBLIN_SHIELD_CHANCE := 0.4
 ## Enemy intentions (#60): every enemy shows what it will do on its next
 ## turn - the action, never the target - so Defend, targeting and items are
 ## real choices. Each is planned after the enemy acts (and at the start).
-enum Intent { ATTACK, LUNGE, DART, WEB, BITE, SWING, HEAVY, SHIELD }
+enum Intent { ATTACK, LUNGE, DART, WEB, BITE, SWING, HEAVY, SHIELD, KILLING_BLOW }
 const INTENT_TEXT := {
 	Intent.ATTACK: "attacking",
 	Intent.LUNGE: "lunging",
@@ -44,7 +44,14 @@ const INTENT_TEXT := {
 	Intent.SWING: "swinging",
 	Intent.HEAVY: "winding up a heavy blow",
 	Intent.SHIELD: "raising a shield",
+	Intent.KILLING_BLOW: "lining up a killing blow",
 }
+## Goblin: now and then a killing blow, decided by the coin (#77). Heads it
+## misses; tails it hits double, past any guard, and leaves an injury.
+## Defending the target, and luck, bend the odds.
+const GOBLIN_KILLING_CHANCE := 0.1
+const KILLING_DEFEND_BONUS := 0.2
+const MAX_HEADS_CHANCE := 0.85
 ## Goblin: a telegraphed heavy blow hits this many times harder; a hero
 ## who Defends turns it aside completely.
 const HEAVY_MULTIPLIER := 2
@@ -66,6 +73,7 @@ class Foe:
 	## Blows glance off: 0-1 damage and it never falls (the opening's
 	## spider, which only fire drives off, #69). Its health isn't shown.
 	var glancing := false
+	var marked: Companion  # a killing blow's target, chosen before the coin
 
 	func in_back() -> bool:
 		return type.row == "back"
@@ -125,12 +133,59 @@ func plan(foe: Foe) -> void:
 		EnemyType.Tactic.CUNNING:
 			if not foe.shielded and foe.health * 2 <= foe.type.max_health and rng.randf() < GOBLIN_SHIELD_CHANCE:
 				foe.intent = Intent.SHIELD
-			elif foe.intent != Intent.HEAVY and rng.randf() < GOBLIN_HEAVY_CHANCE:
+			elif foe.intent not in [Intent.HEAVY, Intent.KILLING_BLOW] and rng.randf() < GOBLIN_KILLING_CHANCE:
+				foe.intent = Intent.KILLING_BLOW
+			elif foe.intent not in [Intent.HEAVY, Intent.KILLING_BLOW] and rng.randf() < GOBLIN_HEAVY_CHANCE:
 				foe.intent = Intent.HEAVY
 			else:
 				foe.intent = Intent.SWING
 		_:
 			foe.intent = Intent.ATTACK
+
+
+## The coin's result for the next killing blow: 1 heads, 0 tails, -1 not
+## flipped (then it's rolled here, e.g. in simulations).
+var coin := -1
+
+
+## Picks who a killing blow is aimed at, so the coin's odds can show.
+func prepare_killing_blow(foe: Foe) -> Companion:
+	foe.marked = _choose_target(foe)
+	return foe.marked
+
+
+func killing_blow_odds(target: Companion) -> float:
+	var chance: float = 0.5 + party.luck()[0]
+	if target and is_defending(target):
+		chance += KILLING_DEFEND_BONUS
+	return minf(chance, MAX_HEADS_CHANCE)
+
+
+func _killing_blow(foe: Foe) -> Dictionary:
+	var target: Companion = foe.marked if foe.marked and foe.marked.is_alive() else _choose_target(foe)
+	foe.marked = null
+	var outcome := {"target": target, "hit": false, "damage": 0, "injury": null}
+	if target == null:
+		return outcome
+	var heads: bool = coin == 1 if coin != -1 else rng.randf() < killing_blow_odds(target)
+	coin = -1
+	if heads:
+		outcome["text"] = "The %s's killing blow whistles past %s!" % [foe.name.to_lower(), target.display_name]
+		return outcome
+	var damage: int = maxi(1, foe.type.damage_max * HEAVY_MULTIPLIER - target.toughness)
+	target.change_health(-damage)
+	outcome["hit"] = true
+	outcome["damage"] = damage
+	outcome["text"] = "The %s's killing blow lands on %s for %d!" % [foe.name.to_lower(), target.display_name, damage]
+	if target.is_alive() and not foe.type.injuries.is_empty():
+		var injury: Injury = foe.type.injuries[rng.randi_range(0, foe.type.injuries.size() - 1)]
+		if target.add_injury(injury):
+			outcome["injury"] = injury
+			outcome["text"] += " %s suffers a %s!" % [target.display_name, injury.display_name.to_lower()]
+	if not target.is_alive():
+		outcome["text"] += " %s falls." % target.display_name
+	_check_end()
+	return outcome
 
 
 ## How the intent reads on screen, e.g. "winding up a heavy blow".
@@ -304,6 +359,8 @@ func _carry_out(foe: Foe) -> Dictionary:
 			foe.shielded = true
 			return {"target": null, "hit": false, "damage": 0, "injury": null,
 					"text": "The %s raises a battered shield." % foe.name.to_lower()}
+		Intent.KILLING_BLOW:
+			return _killing_blow(foe)
 	var heavy := foe.intent == Intent.HEAVY
 	var target := _choose_target(foe)
 	var outcome := {"target": target, "hit": false, "damage": 0, "injury": null}

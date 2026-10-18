@@ -14,6 +14,11 @@ Format:
 ---
 
 ## 2026-10-18 – Claude
+- Did: #77 coin flip: overlay with drawn coin and placeholder sound, a rare rigged strongbox event (floors 2+), goblins' rare killing blow decided by the coin (defending +20%), and the Lucky recruit strength (+10%).
+- Next: decisions on #44 (goblin fortress), #83 (what unconscious means); ChatGPT's #97 research.
+- Watch out: Coin art and sound are wanted (#96). The killing blow ignores a defender's guard on tails by design.
+
+## 2026-10-18 – Claude
 - Did: Owner's batch. Camp clarity (#85/#87/#88), stash-proof charity torches (#86), closed #43, full-party balance with size-aware groups (#49, tools/balance_sim.gd), any hero equips gear with before/after numbers (#67), front/back rows (#72), saving (#45: autosave on floors/camp/camp changes/close/pause, Save & exit in Pack and camp, Continue on the title; opening restarts on Continue). Research brief for ChatGPT on stats/monsters/XP (#97).
 - Next: #97 research, #44 goblin fortress objective, #83 unconscious main heroes.
 - Watch out: Anything new that must survive a reload needs adding to main.gd _save_now()/_restore(). Fights resumed after loading restart the enemies at full health.
