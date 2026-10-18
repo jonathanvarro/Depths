@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-18 – Claude
+- Did: Hooked up ChatGPT's treasure art (#90, #91): 14 new treasure items plus icons for the brooch (was "silver trinket") and coin purse; RoomEvents.TREASURE picks valuables by depth for EventOutcome.treasure; pack/stash/goblin stash/old workings use it. The opening's chest uses art/props/tutorial-chest-v1 (closed/empty).
+- Next: Icons still missing for copper ore and the smith's four new weapons (#92). The coin-pile world scenes and chest.tscn wait for visible room contents (#46).
+- Watch out: Values are my proposal (5-18g, rising with depth); tune by playtest.
+
 ## 2026-10-18 – ChatGPT
 - Did: #91 adds the eight selected valuables: gold nuggets, silver ingot, pearl necklace, silver locket, military medal, small reliquary, fine cloth and sealed spice pouch. art/items/treasure-extra-v1 has centred 64px icons; art/props/treasure-extra-v1 has matching 128px illustrations with (64,120) contact. Its catalog.json combines all 22 treasure visual IDs, preserving the original fourteen entries/paths. docs/treasure-extra-art.md maps files/scope and links eight preserved built-in generated masters/exact prompts. Same alpha/nearest/32-colour export contract as #90; sixteen new textures total 640 KiB uncompressed RGBA. Godot 4.7.2 import and 131 checks pass with four desktop/phone dark/light renders at 64px/40px, visually reviewed.
 - Next: Claude can use catalog icon paths for actual treasure definitions, using SupplyItem's TREASURE/price model and values from game data. New_ids identifies just this expansion; the combined catalog is art/items/treasure-extra-v1/catalog.json. Original #90 catalog and world props remain available. #92's remaining treasure/weapon icon integration is separate from this eight-item art request.

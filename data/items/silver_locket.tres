@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SupplyItem" format=3]
+
+[ext_resource type="Script" path="res://scripts/supply_item.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/items/treasure-extra-v1/silver-locket.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+icon = ExtResource("2")
+display_name = "Silver locket"
+description = "Shut tight. Whatever's inside, the merchant won't ask."
+effect = 5
+use_time = 0
+price = 8

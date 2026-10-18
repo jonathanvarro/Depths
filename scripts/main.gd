@@ -497,6 +497,7 @@ func _run_event(cell: Vector2i) -> void:
 		_show_message(DungeonMap.content_name(_map.content_at(cell)))
 		return
 	_party.locked = true
+	_room_events.depth = _depth  # deeper floors hold richer treasure (#42)
 	_event_screen.show_event(event, _party_state, _room_events)
 	var result: Dictionary = await _event_screen.finished
 	_party.locked = false
@@ -1205,8 +1206,18 @@ func _opening_fire_cell() -> Vector2i:
 	return _opening["start"] + Vector2i(3, -1)
 
 
-## A plain wooden chest until there's art: a box and a lid, open once emptied.
+## The opening's chest: ChatGPT's chest art (closed, then empty once
+## looted, #70); a plain box and lid if the art is missing.
+const CHEST_SCENE := "res://art/props/tutorial-chest-v1/scene.tscn"
+
+
 func _add_chest(cell: Vector2i, opened: bool) -> void:
+	if ResourceLoader.exists(CHEST_SCENE):
+		var art: Node3D = load(CHEST_SCENE).instantiate()
+		art.position = Vector3(cell.x * CELL_SIZE, 0.0, cell.y * CELL_SIZE)
+		art.set("state", "empty" if opened else "closed")
+		_level.add_child(art)
+		return
 	var chest := Node3D.new()
 	chest.position = Vector3(cell.x * CELL_SIZE, 0.0, cell.y * CELL_SIZE)
 	var wood := StandardMaterial3D.new()

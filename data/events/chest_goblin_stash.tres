@@ -5,7 +5,6 @@
 [ext_resource type="Script" path="res://scripts/event_outcome.gd" id="outcome"]
 [ext_resource type="Resource" path="res://data/items/restorative_draught.tres" id="draught"]
 [ext_resource type="Resource" path="res://data/enemies/goblin.tres" id="goblin"]
-[ext_resource type="Resource" path="res://data/items/old_coin_purse.tres" id="purse"]
 [ext_resource type="Resource" path="res://data/items/copper_ore.tres" id="ore"]
 
 [sub_resource type="Resource" id="o0_0"]
@@ -25,8 +24,9 @@ ambush = Array[EnemyType]([ExtResource("goblin")])
 [sub_resource type="Resource" id="o0_2"]
 script = ExtResource("outcome")
 weight = 1
-text = "Stolen goods: an old coin purse and lumps of copper ore."
-loot = Dictionary[SupplyItem, int]({ExtResource("purse"): 1, ExtResource("ore"): 2})
+text = "Stolen goods, bundled in a filthy rag: valuables and lumps of copper ore."
+loot = Dictionary[SupplyItem, int]({ExtResource("ore"): 2})
+treasure = 2
 
 [sub_resource type="Resource" id="c0"]
 script = ExtResource("choice")

@@ -23,6 +23,8 @@ enum Target {
 @export var loot: Dictionary[SupplyItem, int] = {}
 ## Gold coins found (#42).
 @export var gold := 0
+## Random valuables found, drawn from RoomEvents.TREASURE for the depth.
+@export var treasure := 0
 ## Gear found (goes into the pack, unequipped).
 @export var gear: Array[Equipment] = []
 ## The party rests here (as at a rest spot).

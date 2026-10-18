@@ -8,6 +8,31 @@ const EVENTS_DIR := "res://data/events"
 signal loot_found(loot: Dictionary)
 signal gold_found(amount: int)
 
+## Valuables a room can hold (#42): [item, deepest-from depth, weight].
+## Cheap finds near the top, richer ones deeper. Art: ChatGPT's treasure
+## sets (#90, #91); values are game data in each item.
+const TREASURE := [
+	[preload("res://data/items/amethyst.tres"), 1, 3],
+	[preload("res://data/items/fine_cloth.tres"), 1, 3],
+	[preload("res://data/items/silver_trinket.tres"), 1, 3],
+	[preload("res://data/items/military_medal.tres"), 1, 2],
+	[preload("res://data/items/silver_locket.tres"), 1, 2],
+	[preload("res://data/items/garnet.tres"), 1, 2],
+	[preload("res://data/items/amber_pendant.tres"), 2, 2],
+	[preload("res://data/items/spice_pouch.tres"), 2, 2],
+	[preload("res://data/items/silver_goblet.tres"), 2, 2],
+	[preload("res://data/items/old_coin_purse.tres"), 2, 2],
+	[preload("res://data/items/gold_signet_ring.tres"), 2, 1],
+	[preload("res://data/items/gold_nuggets.tres"), 2, 1],
+	[preload("res://data/items/silver_ingot.tres"), 3, 1],
+	[preload("res://data/items/emerald.tres"), 3, 1],
+	[preload("res://data/items/small_reliquary.tres"), 3, 1],
+	[preload("res://data/items/pearl_necklace.tres"), 3, 1],
+]
+
+## The floor being explored; main.gd sets it before an event (#42).
+var depth := 1
+
 var library: Array[RoomEvent] = []
 var rng := RandomNumberGenerator.new()
 
@@ -79,11 +104,15 @@ func resolve(party, choice: EventChoice) -> Dictionary:
 		party.supplies.oil = clampf(party.supplies.oil + outcome.oil, 0.0, party.supplies.LANTERN_CAPACITY)
 		party.supplies.changed.emit()
 		notes.append("lantern %s" % ("refilled" if outcome.oil > 0 else "spilled"))
-	if not outcome.loot.is_empty():
-		loot_found.emit(outcome.loot)
-	for item in outcome.loot:
-		party.supplies.add(item, outcome.loot[item])
-		notes.append("found %s ×%d" % [item.display_name.to_lower(), outcome.loot[item]])
+	var loot: Dictionary = outcome.loot.duplicate()
+	for i in outcome.treasure:
+		var find: SupplyItem = random_treasure(depth)
+		loot[find] = loot.get(find, 0) + 1
+	if not loot.is_empty():
+		loot_found.emit(loot)
+	for item in loot:
+		party.supplies.add(item, loot[item])
+		notes.append("found %s ×%d" % [item.display_name.to_lower(), loot[item]])
 	if outcome.gold > 0:
 		party.supplies.gold += outcome.gold
 		party.supplies.changed.emit()
@@ -102,6 +131,20 @@ func resolve(party, choice: EventChoice) -> Dictionary:
 		text += "\n(" + "; ".join(notes) + ")"
 	result["text"] = text
 	return result
+
+
+## One valuable fit for `floor_depth`, picked by weight.
+func random_treasure(floor_depth: int) -> SupplyItem:
+	var pool := TREASURE.filter(func(t): return t[1] <= maxi(1, floor_depth))
+	var total := 0
+	for entry in pool:
+		total += entry[2]
+	var roll := randi_range(1, total)
+	for entry in pool:
+		roll -= entry[2]
+		if roll <= 0:
+			return entry[0]
+	return pool[0][0]
 
 
 func _pick_outcome(choice: EventChoice) -> EventOutcome:

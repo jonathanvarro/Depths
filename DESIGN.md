@@ -170,6 +170,13 @@ Suggested initial presentation: one campsite screen with a few selectable activi
   - **Stash gold:** the stash stores and returns gold.
   - **A party with no light and no money** gets two torches on account, once a day, so it's never stuck.
   - **Gold shows** in the Pack, at the top of the camp, and on the results screen.
+- *Treasure (ChatGPT's art #90/#91, 2026-10-18):* 16 valuables with icons, sold at their value.
+  - **From floor 1:** amethyst 5g, fine cloth 6g, silver leaf brooch 6g, military medal 7g, silver locket 8g, garnet 8g.
+  - **From floor 2:** amber pendant 9g, spice pouch 9g, silver goblet 10g, old coin purse 10g, gold signet ring 12g, gold nuggets 12g.
+  - **From floor 3:** silver ingot 14g, emerald 15g, reliquary 16g, pearl necklace 18g.
+  - Copper ore (3g) has no icon yet.
+  - Events can give random valuables fit for the floor (`EventOutcome.treasure`). An abandoned pack holds one; a goblin stash two, plus ore. Old workings can turn up gold nuggets.
+  - The opening's chest now uses ChatGPT's chest art: closed, then empty once looted.
 
 The suggested retreat flow is to return through the dungeon to its entrance before reaching camp, with discovered shortcuts potentially easing later returns. Travel costs, escape exceptions, refuge services, recovery timing, and prices still need design decisions. Rest spots inside the dungeon remain distinct from the outside refuge.
 

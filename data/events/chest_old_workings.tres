@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://scripts/event_choice.gd" id="choice"]
 [ext_resource type="Script" path="res://scripts/event_outcome.gd" id="outcome"]
 [ext_resource type="Resource" path="res://data/items/copper_ore.tres" id="ore"]
+[ext_resource type="Resource" path="res://data/items/gold_nuggets.tres" id="nuggets"]
 
 [sub_resource type="Resource" id="o0_0"]
 script = ExtResource("outcome")
@@ -19,11 +20,17 @@ health = -2
 strain = 6.0
 loot = Dictionary[SupplyItem, int]({ExtResource("ore"): 1})
 
+[sub_resource type="Resource" id="o0_2"]
+script = ExtResource("outcome")
+weight = 1
+text = "A glint deep in the seam. Gold - only a little, but gold."
+loot = Dictionary[SupplyItem, int]({ExtResource("nuggets"): 1, ExtResource("ore"): 1})
+
 [sub_resource type="Resource" id="c0"]
 script = ExtResource("choice")
 label = "Dig out the ore"
 time_cost = 4
-outcomes = Array[EventOutcome]([SubResource("o0_0"), SubResource("o0_1")])
+outcomes = Array[EventOutcome]([SubResource("o0_0"), SubResource("o0_1"), SubResource("o0_2")])
 
 [sub_resource type="Resource" id="o1_0"]
 script = ExtResource("outcome")

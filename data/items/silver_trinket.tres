@@ -1,11 +1,13 @@
 [gd_resource type="Resource" script_class="SupplyItem" format=3]
 
 [ext_resource type="Script" path="res://scripts/supply_item.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/items/treasure-v1/silver-brooch.png" id="2"]
 
 [resource]
 script = ExtResource("1")
-display_name = "Silver trinket"
-description = "Tarnished, but silver. Someone's keepsake, once."
+icon = ExtResource("2")
+display_name = "Silver leaf brooch"
+description = "A bent silver cloak pin shaped like a leaf. Someone's keepsake, once."
 effect = 5
 use_time = 0
 price = 6

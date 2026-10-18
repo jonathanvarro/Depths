@@ -64,9 +64,11 @@ func _initialize() -> void:
 	var coins := EventChoice.new()
 	coins.outcomes = [pack.choices[0].outcomes[3]]
 	main._room_events.resolve(ps, coins)
-	check("a chest gives coins and a trinket", supplies.gold == 5 and supplies.count(trinket) == 1)
+	var found_items: Array = supplies.items.filter(func(i): return i.effect == SupplyItem.Effect.TREASURE and supplies.count(i) > 0)
+	check("a chest gives coins and a random valuable", supplies.gold == 5 and found_items.size() == 1 and found_items[0].icon != null, str(found_items.map(func(i): return i.display_name)))
+	var valuable: SupplyItem = found_items[0]
 	check("the expedition counts the gold", main._expedition.gold_found == 5)
-	check("treasure can't be used, only sold", ps.cannot_use_reason(trinket) == "Sell it at camp")
+	check("treasure can't be used, only sold", ps.cannot_use_reason(valuable) == "Sell it at camp")
 
 	# A goblin's purse.
 	var CS = load("res://scripts/combat_state.gd")
@@ -98,8 +100,8 @@ func _initialize() -> void:
 	var before: int = supplies.gold
 	check("sell copper ore for 3g each", _press(main._camp, "Sell 3g") and supplies.gold == before + 3)
 	_press(main._camp, "Sell 3g")
-	_press(main._camp, "Sell 6g")
-	check("all treasure sold", supplies.count(ore) == 0 and supplies.count(trinket) == 0 and supplies.gold == before + 12)
+	_press(main._camp, "Sell %dg" % valuable.price)
+	check("all treasure sold at its value", supplies.count(ore) == 0 and supplies.count(valuable) == 0 and supplies.gold == before + 6 + valuable.price, str(supplies.gold - before))
 	var torches: int = supplies.count(torch)
 	before = supplies.gold
 	check("buy a torch for 3g", camp.buy(ps, torch) and supplies.count(torch) == torches + 1 and supplies.gold == before - 3)

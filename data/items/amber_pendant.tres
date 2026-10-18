@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SupplyItem" format=3]
+
+[ext_resource type="Script" path="res://scripts/supply_item.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/items/treasure-v1/amber-pendant.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+icon = ExtResource("2")
+display_name = "Amber pendant"
+description = "A teardrop of amber in a silver rim."
+effect = 5
+use_time = 0
+price = 9

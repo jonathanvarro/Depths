@@ -7,7 +7,6 @@
 [ext_resource type="Resource" path="res://data/items/ration.tres" id="ration"]
 [ext_resource type="Resource" path="res://data/items/dressing.tres" id="dressing"]
 [ext_resource type="Resource" path="res://data/enemies/rat.tres" id="rat"]
-[ext_resource type="Resource" path="res://data/items/silver_trinket.tres" id="trinket"]
 
 [sub_resource type="Resource" id="o0_0"]
 script = ExtResource("outcome")
@@ -30,9 +29,9 @@ ambush = Array[EnemyType]([ExtResource("rat")])
 [sub_resource type="Resource" id="o0_3"]
 script = ExtResource("outcome")
 weight = 2
-text = "A few coins knotted in a rag, and a tarnished silver trinket."
-loot = Dictionary[SupplyItem, int]({ExtResource("trinket"): 1})
+text = "A few coins knotted in a rag, and something wrapped with them."
 gold = 5
+treasure = 1
 
 [sub_resource type="Resource" id="c0"]
 script = ExtResource("choice")
