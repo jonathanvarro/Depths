@@ -152,6 +152,9 @@ Templates > Download and Install; already installed on the owner's PC).
   damage, never falls, no health shown); `CombatScreen.only_action`
   ("throw") and `hero_acted` signal. `Companion.bleeding` shows an icon.
   `Supplies.torch_burns` false stops torches burning down.
+- Bleeding feedback (#71): main.gd `_bleed_pulse()` (red edge flash + heartbeat,
+  `audio/placeholder/heartbeat.wav`) and `_update_wound_dim()` (a vignette
+  shader under the HUD); `screen_flashes` export disables the flash.
 - `scripts/chest_screen.gd` – chest window beside the pack: drag (set_drag_
   forwarding), tap, or the take-all icon button; `took` signal.
 - `scripts/pack_screen.gd` – the Pack screen (Pack button under the minimap,

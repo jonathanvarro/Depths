@@ -154,6 +154,10 @@ Each companion has a distinct role, personality, vulnerability, and reason to en
   - That was her last torch, so panic follows.
 - **Daylight:** when it opens, every side passage off the path to it is **walled up**, so it can't be avoided.
 - **Mara:** new lines for exploring, the second web, the chest, tripping, glancing blows, the forced throw and the fire, plus more for the existing moments.
+- **Bleeding feedback (#71):** every point lost to bleeding flashes **red at the screen edges** and plays a **heartbeat**.
+  - The weaker she is, the stronger the flash and the faster the heartbeat (not louder).
+  - Below half health the edges stay **darker** between ticks, closing in.
+  - Both stop when bleeding stops. `Main.screen_flashes` turns the flash off, for Settings (#52).
 - **Art requests for ChatGPT:** a broken knife icon, broken armour (an armour slot is for later), and a chest; the chest is a plain box for now.
 
 **Decided 2026-10-17 (#11): injuries.** Two to start, both liked by the owner: a **deep wound** (lowers maximum health) and a **limp** (each step costs extra time). An injury can only be **temporarily** eased in the field (e.g. a dressing) and is **properly treated at camp**.

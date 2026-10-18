@@ -21,6 +21,7 @@ var health_at_throw := -1
 var forced_seen := false
 var snapped := {}
 var paused_frames := 0
+var dimmed := false
 
 
 func check(label: String, ok: bool, detail = "") -> void:
@@ -78,6 +79,11 @@ func _watch() -> void:
 	lowest = mini(lowest, main._party_state.members[0].health)
 	if main._party.paused:
 		paused_frames += 1
+	if main._wound_overlay.material.get_shader_parameter("flash") > 0.4:
+		_snap_once("flash")
+	if main._wound_overlay.material.get_shader_parameter("dim") > 0.0:
+		dimmed = true
+		_snap_once("dim")
 
 
 ## Handles whatever the game is waiting on: cards, fights, events, pack
@@ -307,6 +313,9 @@ func _initialize() -> void:
 	check("cards were centred pauses", cards_seen.get("bleeding") == "ok" and cards_seen.get("fight") == "ok" and cards_seen.get("equip") == "pack" and paused_frames > 0)
 	check("exactly 3 fights", fights == 3)
 	check("never below 2 health", lowest >= 2)
+	check("each bleed tick flashed and thumped (#71)", main._bleed_ticks > 0 and main._said.has("bleeding"), "%d ticks" % main._bleed_ticks)
+	check("edges darkened at low health while bleeding", dimmed)
+	check("the darkening cleared once bleeding stopped", main._wound_overlay.material.get_shader_parameter("dim") == 0.0)
 	check("Barely survived", main._results.visible and main._results._title.text == "Barely survived")
 	await _snap("survived")
 	_press(main._results, "To camp")

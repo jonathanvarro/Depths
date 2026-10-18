@@ -154,6 +154,24 @@ const MESSAGE_SECONDS := 2.0
 const AMBIENCE_VOLUME_DB := -10.0
 const FOOTSTEP_VOLUME_DB := -6.0
 const EFFECT_VOLUME_DB := -4.0
+## Bleeding feedback (#71): a red flash at the screen edges and a heartbeat
+## on each point lost. Lower health: stronger flash, faster heartbeat, and
+## edges that stay dark between ticks.
+const HEARTBEAT := preload("res://audio/placeholder/heartbeat.wav")
+const HEARTBEAT_VOLUME_DB := -2.0
+const WOUND_SHADER := """
+shader_type canvas_item;
+uniform float flash = 0.0;
+uniform float dim = 0.0;
+void fragment() {
+	vec2 p = (UV - 0.5) * vec2(1.0, 1.25);
+	float edge = smoothstep(0.26, 0.72, length(p));
+	float red = edge * flash;
+	float dark = edge * dim;
+	float alpha = clamp(red + dark, 0.0, 0.95);
+	COLOR = vec4(vec3(0.6, 0.02, 0.02) * red / max(red + dark, 0.001), alpha);
+}
+"""
 
 ## Seed for the site; 0 picks a new random site each run. The first floor
 ## uses this seed directly; deeper floors derive theirs from it. Every run
@@ -179,6 +197,9 @@ const EFFECT_VOLUME_DB := -4.0
 }
 ## Play the opening escape (#30) when a new game starts.
 @export var play_opening := true
+## Red edge flashes when bleeding costs health (#71). Settings (#52) can
+## turn this off for players sensitive to flashing.
+@export var screen_flashes := true
 ## Art for the fallen companions in the opening room, one per body (Node3D
 ## scenes whose origin sits on the floor). Missing files fall back to a plain
 ## placeholder shape. ChatGPT's sprites: art/props/opening-bodies-v1 (#55).
@@ -271,6 +292,10 @@ var _full_map_margin: MarginContainer
 var _ambience_player: AudioStreamPlayer
 var _footstep_player: AudioStreamPlayer
 var _effect_player: AudioStreamPlayer
+var _wound_overlay: ColorRect
+var _wound_tween: Tween
+var _heart_player: AudioStreamPlayer
+var _bleed_ticks := 0  # bleed ticks shown this run (for tests)
 
 
 func _ready() -> void:
@@ -631,6 +656,7 @@ var _strain_states := {}  # Companion -> last strain state, to announce changes
 
 ## Strain (#12): announce state changes and let panic take over some moves.
 func _on_party_state_changed(announce := true) -> void:
+	_update_wound_dim()
 	for member: Companion in _party_state.living_members():
 		if not member.changed.is_connected(_on_party_state_changed):
 			member.changed.connect(_on_party_state_changed)  # e.g. strain from a trap
@@ -783,6 +809,7 @@ func _on_opening_step(_cell: Vector2i) -> void:
 	if _bleed_clock >= BLEED_EVERY and hero.bleeding:
 		_bleed_clock = 0
 		hero.change_health(-1)
+		_bleed_pulse(hero)
 		_say("bleeding", true, true)
 	# Explain the bleeding once nothing more pressing is on screen.
 	if not _hints_done.has("bleeding") and _said.has("bleeding") and _hint in ["", "turn"]:
@@ -796,6 +823,46 @@ func _on_opening_step(_cell: Vector2i) -> void:
 		_last_lost_remark = _steps_taken
 		_say("explore" if _web2_at < 0 else "lost")
 	_check_opening_exit()
+
+
+## One point lost to bleeding (#71): the edges flash red and her heart
+## thumps, harder and faster the weaker she is. The first is the strongest
+## of the early ones, to go with the bleeding card.
+func _bleed_pulse(hero: Companion) -> void:
+	_bleed_ticks += 1
+	var weakness := 1.0 - clampf(float(hero.health) / hero.effective_max_health(), 0.0, 1.0)
+	var beats := 2 + roundi(weakness * 3.0)
+	var gap := lerpf(0.8, 0.4, weakness)
+	_heart_player.pitch_scale = lerpf(1.0, 1.15, weakness)
+	for i in beats:
+		get_tree().create_timer(i * gap).timeout.connect(_heart_player.play)
+	if not screen_flashes:
+		return
+	var peak := lerpf(0.45, 0.85, weakness)
+	if _bleed_ticks == 1:
+		peak = maxf(peak, 0.75)
+	if _wound_tween:
+		_wound_tween.kill()
+	_wound_tween = create_tween()
+	_wound_tween.tween_method(_set_wound_flash, 0.0, peak, 0.07)
+	_wound_tween.tween_method(_set_wound_flash, peak, 0.0, lerpf(0.45, 0.9, weakness))
+
+
+func _set_wound_flash(amount: float) -> void:
+	_wound_overlay.material.set_shader_parameter("flash", amount)
+
+
+## Badly hurt and bleeding: the edges stay dark between ticks, closing in
+## as health falls below half (#71). Clears when the bleeding stops.
+func _update_wound_dim() -> void:
+	if _wound_overlay == null:
+		return
+	var dim := 0.0
+	var living: Array[Companion] = _party_state.living_members()
+	if screen_flashes and not living.is_empty() and living[0].bleeding:
+		var fraction := float(living[0].health) / living[0].effective_max_health()
+		dim = clampf((0.5 - fraction) / 0.5, 0.0, 1.0) * 0.55
+	_wound_overlay.material.set_shader_parameter("dim", dim)
 
 
 func _open_ways(cell: Vector2i) -> int:
@@ -1643,6 +1710,11 @@ func _build_audio() -> void:
 	_footstep_player.volume_db = FOOTSTEP_VOLUME_DB
 	add_child(_footstep_player)
 
+	_heart_player = AudioStreamPlayer.new()
+	_heart_player.stream = HEARTBEAT
+	_heart_player.volume_db = HEARTBEAT_VOLUME_DB
+	add_child(_heart_player)
+
 	_effect_player = AudioStreamPlayer.new()
 	_effect_player.volume_db = EFFECT_VOLUME_DB
 	_effect_player.max_polyphony = 2
@@ -1684,6 +1756,17 @@ func _build_environment() -> void:
 func _build_ui(minimap: Control) -> void:
 	var canvas := CanvasLayer.new()
 	add_child(canvas)
+	# Bleeding vignette (#71): under the HUD, over the view, never in the way.
+	_wound_overlay = ColorRect.new()
+	_wound_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_wound_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var wound_material := ShaderMaterial.new()
+	wound_material.shader = Shader.new()
+	wound_material.shader.code = WOUND_SHADER
+	_wound_overlay.material = wound_material
+	wound_material.set_shader_parameter("flash", 0.0)
+	wound_material.set_shader_parameter("dim", 0.0)
+	canvas.add_child(_wound_overlay)
 	# Everything except full-screen backgrounds goes inside the safe area.
 	var ui := Control.new()
 	ui.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)

@@ -14,6 +14,11 @@ Format:
 ---
 
 ## 2026-10-17 – Claude
+- Did: #71 bleeding feedback. Each bleed tick: red edge vignette flash (stronger at low health, strongest early on the first) plus a generated heartbeat (tools/make_placeholder_audio.py, heartbeat.wav), more and faster beats as health drops. Below half health while bleeding the edges stay dark between ticks; clears when bleeding stops. Main.screen_flashes turns the flash off (for #52). Play-through checks the ticks, the darkening and that it clears.
+- Next: #60 combat design discussion.
+- Watch out: The vignette sits under the HUD, so translucent buttons pick up a red tint during a flash. Regenerating placeholder audio leaves the older files byte-identical.
+
+## 2026-10-17 – Claude
 - Did: #69 opening polish from the owner's second playtest. Slower wake with lingering blinks; Mara starts 10/20, bleeding (card icon), empty-handed, only her card shown. Bodies/fire/chest are solid (walk into them). Hints are centred cards (act / pack-gated pause / ok pause). The opening maze has a first stretch closed by a second web; fights start after it. A chest after fight 1 (a niche cut beside her if possible, else the nearest dead end ahead; placeholder box) opens a new drag / tap / take-all chest window with a restorative draught + dressing, then a draught card. The torch doesn't burn down in the opening; she trips after fight 2 and relights the spare. The spider's blows glance (no health shown); the throw is taught after a swing and forced at 4 health. Daylight walls off side passages. Many new Mara lines. Camp restocks starting supplies.
 - Next: ChatGPT: broken knife icon, broken armour, chest art (see #69). Owner playtest of the rebuilt exe.
 - Watch out: The chest window is only used by the opening's chest so far; floor chests still use event choices. The opening no longer gives starting supplies until camp. Old scratch opening tests (step-based fights, burn-out) no longer apply; tools/opening_playthrough.gd is the scripted play-through (args: tag, screenshot dir, seed, optional "force").

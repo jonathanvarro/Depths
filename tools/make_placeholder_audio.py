@@ -168,6 +168,21 @@ def ambience(length, drips, hum):
     return looped
 
 
+def heartbeat():
+    """One heartbeat: a deep "lub" then a softer "dub"."""
+    n = seconds(0.5)
+    out = [0.0] * n
+    for delay, freq, gain in [(0.0, 52, 1.0), (0.17, 60, 0.6)]:
+        thump = []
+        phase = 0.0
+        for i in range(seconds(0.22)):
+            f = freq * (1.0 + 0.6 * math.exp(-i / RATE / 0.02))  # a little pitch drop gives it punch
+            phase += 2 * math.pi * f / RATE
+            thump.append(math.sin(phase) * decay(i, 0.006, 0.05))
+        mix_into(out, lowpass(thump, 300), seconds(delay), gain)
+    return out
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     for v in range(3):
@@ -177,6 +192,7 @@ def main():
     write("door_creak.wav", door_creak(), 0.5)
     write("ambience_cave.wav", ambience(24, 7, False), 0.5)
     write("ambience_stone.wav", ambience(24, 3, True), 0.5)
+    write("heartbeat.wav", heartbeat(), 0.9)
 
 
 if __name__ == "__main__":

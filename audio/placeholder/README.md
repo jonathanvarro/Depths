@@ -10,6 +10,7 @@ recordings later by assigning new files in `themes/*.tres` (Sound group).
 | `web_tear.wav` | Clearing a web (cave theme) |
 | `door_creak.wav` | Opening a door (stone theme) |
 | `ambience_cave.wav` | Cave background loop: rumble and dripping water |
+| `heartbeat.wav` | One heartbeat; repeated, faster at low health, when bleeding costs health (#71) |
 | `ambience_stone.wav` | Stone dungeon background loop: rumble and low hum |
 
 ## Licence and source
