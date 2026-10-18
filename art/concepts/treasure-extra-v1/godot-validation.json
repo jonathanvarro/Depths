@@ -1,0 +1,22 @@
+{
+  "captures": 4,
+  "checks": 131,
+  "failures": [],
+  "godot": "4.7.2",
+  "icon_review_sizes": [
+    64,
+    40
+  ],
+  "physical_phone_test": false,
+  "scope": "Eight additional valuables and combined catalog; no price, effect, currency or room integration.",
+  "viewports": [
+    [
+      1280,
+      720
+    ],
+    [
+      1278,
+      590
+    ]
+  ]
+}

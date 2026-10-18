@@ -1,0 +1,248 @@
+{
+  "issue": 91,
+  "assets": {
+    "art/items/treasure-extra-v1/gold-nuggets.png": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        4,
+        7,
+        60,
+        56
+      ],
+      "visible_colours": 32
+    },
+    "art/props/treasure-extra-v1/gold-nuggets.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        12,
+        30,
+        116,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/items/treasure-extra-v1/silver-ingot.png": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        4,
+        14,
+        60,
+        49
+      ],
+      "visible_colours": 32
+    },
+    "art/props/treasure-extra-v1/silver-ingot.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        12,
+        56,
+        116,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/items/treasure-extra-v1/pearl-necklace.png": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        4,
+        10,
+        60,
+        53
+      ],
+      "visible_colours": 32
+    },
+    "art/props/treasure-extra-v1/pearl-necklace.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        12,
+        41,
+        116,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/items/treasure-extra-v1/silver-locket.png": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        13,
+        4,
+        51,
+        60
+      ],
+      "visible_colours": 32
+    },
+    "art/props/treasure-extra-v1/silver-locket.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        29,
+        17,
+        99,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/items/treasure-extra-v1/military-medal.png": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        15,
+        4,
+        49,
+        60
+      ],
+      "visible_colours": 32
+    },
+    "art/props/treasure-extra-v1/military-medal.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        32,
+        17,
+        96,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/items/treasure-extra-v1/small-reliquary.png": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        4,
+        7,
+        60,
+        57
+      ],
+      "visible_colours": 32
+    },
+    "art/props/treasure-extra-v1/small-reliquary.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        12,
+        29,
+        116,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/items/treasure-extra-v1/fine-cloth.png": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        4,
+        10,
+        60,
+        53
+      ],
+      "visible_colours": 32
+    },
+    "art/props/treasure-extra-v1/fine-cloth.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        12,
+        42,
+        116,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/items/treasure-extra-v1/spice-pouch.png": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        4,
+        6,
+        60,
+        58
+      ],
+      "visible_colours": 32
+    },
+    "art/props/treasure-extra-v1/spice-pouch.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        12,
+        25,
+        116,
+        121
+      ],
+      "visible_colours": 32
+    }
+  },
+  "failures": [],
+  "new_items": 8,
+  "combined_items": 22,
+  "runtime_rgba_bytes": 655360,
+  "sha256": {
+    "art/source/treasure-extra-v1/fine-cloth.png": "aebedba9fe9775bb09ec66868d7bbcbf4b42371ee5a462ac5038d05cfeefd46a",
+    "art/source/treasure-extra-v1/gold-nuggets.png": "f6e865ddd18c57bbd0dfb6500e8e9eac74804eb2f61dcffa332e806ce1f7ee86",
+    "art/source/treasure-extra-v1/military-medal.png": "0bd4f264d09bb36df5d1f35c52f466e675d16d0e98a785c0fcf054b67182935c",
+    "art/source/treasure-extra-v1/pearl-necklace.png": "95ed03952e776f43e5f200cff798ffe9590a52fb03720f389fc13068caffee3b",
+    "art/source/treasure-extra-v1/silver-ingot.png": "c3eb65ccec393168b6127bfee0177829dc8db2d49f3479cdaee7da08ccdad0ae",
+    "art/source/treasure-extra-v1/silver-locket.png": "1a4dbbea9c1736e0aff497fa4cb883fd54daf70d2c8a97aa2d589bdf10879e86",
+    "art/source/treasure-extra-v1/small-reliquary.png": "992c4914507905c5053603ba9a8b88057120c6a4df12a0ba561ffbcfc411122f",
+    "art/source/treasure-extra-v1/spice-pouch.png": "6df4fa30f71246c3f9610e3319a64b1427e5d76181e5f153af7b716f3075bd6f",
+    "art/items/treasure-extra-v1/gold-nuggets.png": "852605d247b2c71fa4153b767ba699c1125833cc3c04a6067f8f4bc1e873473c",
+    "art/props/treasure-extra-v1/gold-nuggets.png": "ab1dbc5467961d147b23d70bf40eb8c7b1e158b62498ebd787705b1273d2510f",
+    "art/items/treasure-extra-v1/silver-ingot.png": "e7542d4a23cc67df2ef98c5ae9924eb03cee67ca720b640964dbac10526396a0",
+    "art/props/treasure-extra-v1/silver-ingot.png": "960db86c4e702ffbd79bd024a7a85ddb39cf5fec1ba9f542001a05268e156231",
+    "art/items/treasure-extra-v1/pearl-necklace.png": "505f2d7011c4e3974d011c5d2ddebfb5ac5341e584dc2cd1f9e3865e1820fa37",
+    "art/props/treasure-extra-v1/pearl-necklace.png": "c4ecb924d22775d7ac9afb4613c7e0319a2aed846b1ba59cb652ba4a40f5dade",
+    "art/items/treasure-extra-v1/silver-locket.png": "48f224e4915d5cce1f7fa9bc65ee0ca9cf491cfa23da67f76c18e55a995e1f05",
+    "art/props/treasure-extra-v1/silver-locket.png": "b3888c26ea917941c26e51647298a608c8eb158ee2254401f4e7cfc56b07a176",
+    "art/items/treasure-extra-v1/military-medal.png": "2fb51fd41f2c943041ffe0497507cfd5115880b144e055643b3236318378250a",
+    "art/props/treasure-extra-v1/military-medal.png": "00fd22a91c2aaf3de6f572bb176f4c4491714773e64f1a2544bec058dda6d36f",
+    "art/items/treasure-extra-v1/small-reliquary.png": "bb2679f541e6719b3e06a7b92275e2ff3aa6b02a5e3a9f934857dc69297dd14e",
+    "art/props/treasure-extra-v1/small-reliquary.png": "d1b66ba63322aff16f2f58f66051f3e2248738b874ac32e66ff692e46dd2ee1c",
+    "art/items/treasure-extra-v1/fine-cloth.png": "cd74d281e456fa75584bbe798c2ef87e7d5c066646296d789afea5fac1fd404b",
+    "art/props/treasure-extra-v1/fine-cloth.png": "a16057471ced8ad96f4f35be2d312598e3d38125d9379db8db8b3a31667539d4",
+    "art/items/treasure-extra-v1/spice-pouch.png": "76bfb8271bd267807863353d1b466e325f2425c1babfd328c97e3493b8ea06d1",
+    "art/props/treasure-extra-v1/spice-pouch.png": "ab0d10b95cfd9ddafa06c704d56f644e980596c577388ad322262491b922e8fa"
+  },
+  "reference_sha256": {
+    "art/items/treasure-v1/silver-goblet.png": "1af9ac6098fea95307b6141905757234728e51b8cee1896393ff97442ab2a4c8",
+    "art/items/treasure-v1/gold-signet-ring.png": "33fd7a3ca4f92d4d78db50550b6227c409525cc31aa0b235f542ebec3ff297c1",
+    "art/items/treasure-v1/coin-purse.png": "6f6769fbee2c71be3f6ede4db4e4bdf5fa410bfb9101afd2a81500d349555568"
+  }
+}

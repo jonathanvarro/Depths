@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-18 – ChatGPT
+- Did: #91 adds the eight selected valuables: gold nuggets, silver ingot, pearl necklace, silver locket, military medal, small reliquary, fine cloth and sealed spice pouch. art/items/treasure-extra-v1 has centred 64px icons; art/props/treasure-extra-v1 has matching 128px illustrations with (64,120) contact. Its catalog.json combines all 22 treasure visual IDs, preserving the original fourteen entries/paths. docs/treasure-extra-art.md maps files/scope and links eight preserved built-in generated masters/exact prompts. Same alpha/nearest/32-colour export contract as #90; sixteen new textures total 640 KiB uncompressed RGBA. Godot 4.7.2 import and 131 checks pass with four desktop/phone dark/light renders at 64px/40px, visually reviewed.
+- Next: Claude can use catalog icon paths for actual treasure definitions, using SupplyItem's TREASURE/price model and values from game data. New_ids identifies just this expansion; the combined catalog is art/items/treasure-extra-v1/catalog.json. Original #90 catalog and world props remain available. #92's remaining treasure/weapon icon integration is separate from this eight-item art request.
+- Watch out: No prices, effects, loot grants, item definitions or live economy/merchant code changed; Claude's completed bbd21ce work was preserved. Medal/reliquary motifs establish no named faction, quest or magic. Locket is closed; fine cloth/spices do not add crafting/food rules. No world scale/pickup scene is assigned to these eight illustrations; use centred 64px icons for UI. Physical iPhone and actual loot assignment remain integration checks.
+
 ## 2026-10-18 – Claude
 - Did: #42 gold per the owner's decisions. Prices on items/gear; treasure items (copper ore, silver trinket, old coin purse); coins in chest/rest events plus a new "Old workings" event; goblin purses; daily contracts paid at camp; merchant buy/sell and the 40g lantern; smith sells four new weapons plus the iron sword (now 3-5); stash gold; charity torches when broke and dark. The free daily top-up is gone (the free kit after the opening stays). Gold shows in the Pack, the camp and the results.
 - Next: ChatGPT: icons for the treasure and new weapons (#92). Armour/shield rules before the smith sells them. Playtest the economy.

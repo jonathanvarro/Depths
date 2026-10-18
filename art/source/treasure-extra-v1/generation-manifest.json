@@ -1,0 +1,159 @@
+{
+  "tool": "image_gen.imagegen",
+  "date": "2026-10-18",
+  "issue": 91,
+  "entries": [
+    {
+      "name": "gold-nuggets",
+      "args": {
+        "prompt": "Use case: stylized-concept. Asset type: ONE production recoverable-valuable item illustration for Depths, a dark first-person dungeon crawler; export target128px and64px. Input images are STYLE REFERENCES ONLY (existing silver goblet, gold signet ring and coin purse); do not include reference objects. Scene/backdrop: genuinely transparent alpha, complete centred single-subject silhouette with clear padding on every side. Three-quarter inventory view from slightly above. Restrained handmade pixel art matching the references: broad deliberate native64px/128px clusters, limited approximately24–32-colour palette, worn practical medieval materials, dark crevices and selective modest highlights. Neutral diffuse material shading with a modest upper-left highlight; no orange torch colour wash. No ground slab or cast-shadow halo, environment, decorative frame, checkerboard, text, letters, UI, numbers, logo, sparkle particles, magical glow, smooth airbrush, photorealism or dense microtexture. Keep important small features thick enough to survive64px and40px display. Do not add objects beyond the subject. \nSubject: A SMALL GROUP of three irregular RAW GOLD NUGGETS resting together, one knobbly larger lump and two smaller chipped pieces. Unrefined ochre gold with a few dark mineral inclusions, blunt natural lobes and chipped edges. Strong chunky natural silhouette, no coin discs, stamped faces or mint marks.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/items/treasure-v1/silver-goblet.png",
+          "E:/GitHub/Depths/art/items/treasure-v1/gold-signet-ring.png",
+          "E:/GitHub/Depths/art/items/treasure-v1/coin-purse.png"
+        ],
+        "transparent_background": true
+      },
+      "reference_roles": [
+        "style reference: silver goblet",
+        "style reference: gold signet ring",
+        "style reference: leather coin purse"
+      ],
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-45c63eb1-6d9c-4a63-be9f-418e39bff516.png",
+      "preserved_file": "gold-nuggets.png"
+    },
+    {
+      "name": "silver-ingot",
+      "args": {
+        "prompt": "Use case: stylized-concept. Asset type: ONE production recoverable-valuable item illustration for Depths, a dark first-person dungeon crawler; export target128px and64px. Input images are STYLE REFERENCES ONLY (existing silver goblet, gold signet ring and coin purse); do not include reference objects. Scene/backdrop: genuinely transparent alpha, complete centred single-subject silhouette with clear padding on every side. Three-quarter inventory view from slightly above. Restrained handmade pixel art matching the references: broad deliberate native64px/128px clusters, limited approximately24–32-colour palette, worn practical medieval materials, dark crevices and selective modest highlights. Neutral diffuse material shading with a modest upper-left highlight; no orange torch colour wash. No ground slab or cast-shadow halo, environment, decorative frame, checkerboard, text, letters, UI, numbers, logo, sparkle particles, magical glow, smooth airbrush, photorealism or dense microtexture. Keep important small features thick enough to survive64px and40px display. Do not add objects beyond the subject. \nSubject: ONE small old CAST SILVER INGOT, squat elongated trapezoid bar at a three-quarter angle, sloping sides, slightly uneven cast surface, scuffed bevelled corners and tarnished dark recesses. Dull silver with restrained pale upper facets; one tiny abstract worn assay indentation without readable text. Not a stack of bars, not gold.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/items/treasure-v1/silver-goblet.png",
+          "E:/GitHub/Depths/art/items/treasure-v1/gold-signet-ring.png",
+          "E:/GitHub/Depths/art/items/treasure-v1/coin-purse.png"
+        ],
+        "transparent_background": true
+      },
+      "reference_roles": [
+        "style reference: silver goblet",
+        "style reference: gold signet ring",
+        "style reference: leather coin purse"
+      ],
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-ff5b1383-c407-4ce0-9bd9-4e0cd030b5ed.png",
+      "preserved_file": "silver-ingot.png"
+    },
+    {
+      "name": "pearl-necklace",
+      "args": {
+        "prompt": "Use case: stylized-concept. Asset type: ONE production recoverable-valuable item illustration for Depths, a dark first-person dungeon crawler; export target128px and64px. Input images are STYLE REFERENCES ONLY (existing silver goblet, gold signet ring and coin purse); do not include reference objects. Scene/backdrop: genuinely transparent alpha, complete centred single-subject silhouette with clear padding on every side. Three-quarter inventory view from slightly above. Restrained handmade pixel art matching the references: broad deliberate native64px/128px clusters, limited approximately24–32-colour palette, worn practical medieval materials, dark crevices and selective modest highlights. Neutral diffuse material shading with a modest upper-left highlight; no orange torch colour wash. No ground slab or cast-shadow halo, environment, decorative frame, checkerboard, text, letters, UI, numbers, logo, sparkle particles, magical glow, smooth airbrush, photorealism or dense microtexture. Keep important small features thick enough to survive64px and40px display. Do not add objects beyond the subject. \nSubject: ONE complete old PEARL NECKLACE laid in a loose oval loop with a small tarnished silver clasp. Cream-to-grey uneven round pearls, about a dozen large clearly separated bead clusters per side, simple legible loop with transparent open centre. Slightly irregular aged lustre, no gold pendant or gemstones. Keep every pearl and clasp inside the canvas.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/items/treasure-v1/silver-goblet.png",
+          "E:/GitHub/Depths/art/items/treasure-v1/gold-signet-ring.png",
+          "E:/GitHub/Depths/art/items/treasure-v1/coin-purse.png"
+        ],
+        "transparent_background": true
+      },
+      "reference_roles": [
+        "style reference: silver goblet",
+        "style reference: gold signet ring",
+        "style reference: leather coin purse"
+      ],
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-f93529ce-ffd3-4bf0-b859-6a8d55e56182.png",
+      "preserved_file": "pearl-necklace.png"
+    },
+    {
+      "name": "silver-locket",
+      "args": {
+        "prompt": "Use case: stylized-concept. Asset type: ONE production recoverable-valuable item illustration for Depths, a dark first-person dungeon crawler; export target128px and64px. Input images are STYLE REFERENCES ONLY (existing silver goblet, gold signet ring and coin purse); do not include reference objects. Scene/backdrop: genuinely transparent alpha, complete centred single-subject silhouette with clear padding on every side. Three-quarter inventory view from slightly above. Restrained handmade pixel art matching the references: broad deliberate native64px/128px clusters, limited approximately24–32-colour palette, worn practical medieval materials, dark crevices and selective modest highlights. Neutral diffuse material shading with a modest upper-left highlight; no orange torch colour wash. No ground slab or cast-shadow halo, environment, decorative frame, checkerboard, text, letters, UI, numbers, logo, sparkle particles, magical glow, smooth airbrush, photorealism or dense microtexture. Keep important small features thick enough to survive64px and40px display. Do not add objects beyond the subject. \nSubject: ONE CLOSED oval SILVER LOCKET with a small suspension bail at top, a tiny side hinge and a worn shallow engraved curved leaf on its lid. Tarnished silver, slightly dented rim, clearly thicker hinged case with a seam. No chain, ribbon, portrait, readable inscription or visible contents. A personal keepsake, distinct from a round military medal.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/items/treasure-v1/silver-goblet.png",
+          "E:/GitHub/Depths/art/items/treasure-v1/gold-signet-ring.png",
+          "E:/GitHub/Depths/art/items/treasure-v1/coin-purse.png"
+        ],
+        "transparent_background": true
+      },
+      "reference_roles": [
+        "style reference: silver goblet",
+        "style reference: gold signet ring",
+        "style reference: leather coin purse"
+      ],
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-9c7bad72-687e-409d-8d83-9e8844eea07c.png",
+      "preserved_file": "silver-locket.png"
+    },
+    {
+      "name": "military-medal",
+      "args": {
+        "prompt": "Use case: stylized-concept. Asset type: ONE production recoverable-valuable item illustration for Depths, a dark first-person dungeon crawler; export target128px and64px. Input images are STYLE REFERENCES ONLY (existing silver goblet, gold signet ring and coin purse); do not include reference objects. Scene/backdrop: genuinely transparent alpha, complete centred single-subject silhouette with clear padding on every side. Three-quarter inventory view from slightly above. Restrained handmade pixel art matching the references: broad deliberate native64px/128px clusters, limited approximately24–32-colour palette, worn practical medieval materials, dark crevices and selective modest highlights. Neutral diffuse material shading with a modest upper-left highlight; no orange torch colour wash. No ground slab or cast-shadow halo, environment, decorative frame, checkerboard, text, letters, UI, numbers, logo, sparkle particles, magical glow, smooth airbrush, photorealism or dense microtexture. Keep important small features thick enough to survive64px and40px display. Do not add objects beyond the subject. \nSubject: ONE worn MILITARY MEDAL: a round dull BRONZE disc hanging from a SHORT folded faded CRIMSON cloth ribbon, with a simple rectangular pin bar at top. One broad abstract relief sunburst/royal badge impression on the disc, no letters, numbers or real-world insignia. Scratched bronze, frayed ribbon edges but readable complete form; solemn recovered campaign keepsake. No silver chain or gems.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/items/treasure-v1/silver-goblet.png",
+          "E:/GitHub/Depths/art/items/treasure-v1/gold-signet-ring.png",
+          "E:/GitHub/Depths/art/items/treasure-v1/coin-purse.png"
+        ],
+        "transparent_background": true
+      },
+      "reference_roles": [
+        "style reference: silver goblet",
+        "style reference: gold signet ring",
+        "style reference: leather coin purse"
+      ],
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-3a1dbbcd-236e-4c15-88fc-9067cb789b68.png",
+      "preserved_file": "military-medal.png"
+    },
+    {
+      "name": "small-reliquary",
+      "args": {
+        "prompt": "Use case: stylized-concept. Asset type: ONE production recoverable-valuable item illustration for Depths, a dark first-person dungeon crawler; export target128px and64px. Input images are STYLE REFERENCES ONLY (existing silver goblet, gold signet ring and coin purse); do not include reference objects. Scene/backdrop: genuinely transparent alpha, complete centred single-subject silhouette with clear padding on every side. Three-quarter inventory view from slightly above. Restrained handmade pixel art matching the references: broad deliberate native64px/128px clusters, limited approximately24–32-colour palette, worn practical medieval materials, dark crevices and selective modest highlights. Neutral diffuse material shading with a modest upper-left highlight; no orange torch colour wash. No ground slab or cast-shadow halo, environment, decorative frame, checkerboard, text, letters, UI, numbers, logo, sparkle particles, magical glow, smooth airbrush, photorealism or dense microtexture. Keep important small features thick enough to survive64px and40px display. Do not add objects beyond the subject. \nSubject: ONE SMALL CLOSED RELIQUARY, a palm-sized rectangular dark wooden casket with a low GABLED ROOF lid, tarnished brass corner bands, a plain round silver boss and a small shut latch. Restrained old sacred craftsmanship, rubbed corners and dark seams; a few broad engraved lines, no elaborate filigree. No skulls, visible relics, magic light, readable text or extra objects. Clearly smaller and more architectural than the existing broad supply chest; no handles or chain.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/items/treasure-v1/silver-goblet.png",
+          "E:/GitHub/Depths/art/items/treasure-v1/gold-signet-ring.png",
+          "E:/GitHub/Depths/art/items/treasure-v1/coin-purse.png"
+        ],
+        "transparent_background": true
+      },
+      "reference_roles": [
+        "style reference: silver goblet",
+        "style reference: gold signet ring",
+        "style reference: leather coin purse"
+      ],
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-2f00d8aa-831f-434f-aca0-30f3281f21c6.png",
+      "preserved_file": "small-reliquary.png"
+    },
+    {
+      "name": "fine-cloth",
+      "args": {
+        "prompt": "Use case: stylized-concept. Asset type: ONE production recoverable-valuable item illustration for Depths, a dark first-person dungeon crawler; export target128px and64px. Input images are STYLE REFERENCES ONLY (existing silver goblet, gold signet ring and coin purse); do not include reference objects. Scene/backdrop: genuinely transparent alpha, complete centred single-subject silhouette with clear padding on every side. Three-quarter inventory view from slightly above. Restrained handmade pixel art matching the references: broad deliberate native64px/128px clusters, limited approximately24–32-colour palette, worn practical medieval materials, dark crevices and selective modest highlights. Neutral diffuse material shading with a modest upper-left highlight; no orange torch colour wash. No ground slab or cast-shadow halo, environment, decorative frame, checkerboard, text, letters, UI, numbers, logo, sparkle particles, magical glow, smooth airbrush, photorealism or dense microtexture. Keep important small features thick enough to survive64px and40px display. Do not add objects beyond the subject. \nSubject: ONE neatly folded BUNDLE OF FINE CLOTH, deep faded INDIGO BLUE woven fabric with a narrow muted gold border, several broad soft folds and a simple undyed cloth tie around the bundle. Valuable imported textile with a few rubbed edges, not a torn rag or bandage, no embroidery writing, no loose spool or extra goods. Distinct square folded silhouette.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/items/treasure-v1/silver-goblet.png",
+          "E:/GitHub/Depths/art/items/treasure-v1/gold-signet-ring.png",
+          "E:/GitHub/Depths/art/items/treasure-v1/coin-purse.png"
+        ],
+        "transparent_background": true
+      },
+      "reference_roles": [
+        "style reference: silver goblet",
+        "style reference: gold signet ring",
+        "style reference: leather coin purse"
+      ],
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-6bf5ad56-79e6-44df-aeb3-5fc1e4c41a53.png",
+      "preserved_file": "fine-cloth.png"
+    },
+    {
+      "name": "spice-pouch",
+      "args": {
+        "prompt": "Use case: stylized-concept. Asset type: ONE production recoverable-valuable item illustration for Depths, a dark first-person dungeon crawler; export target128px and64px. Input images are STYLE REFERENCES ONLY (existing silver goblet, gold signet ring and coin purse); do not include reference objects. Scene/backdrop: genuinely transparent alpha, complete centred single-subject silhouette with clear padding on every side. Three-quarter inventory view from slightly above. Restrained handmade pixel art matching the references: broad deliberate native64px/128px clusters, limited approximately24–32-colour palette, worn practical medieval materials, dark crevices and selective modest highlights. Neutral diffuse material shading with a modest upper-left highlight; no orange torch colour wash. No ground slab or cast-shadow halo, environment, decorative frame, checkerboard, text, letters, UI, numbers, logo, sparkle particles, magical glow, smooth airbrush, photorealism or dense microtexture. Keep important small features thick enough to survive64px and40px display. Do not add objects beyond the subject. \nSubject: ONE small SEALED SPICE POUCH, a narrow reddish-brown oiled-cloth packet with a FLAT FOLDED TOP tightly bound by crossed thin cord and an intact dull red WAX SEAL. One broad dark stain and restrained stitched side seam. A firm little rectangular folded parcel, clearly different from the existing bulbous leather coin purse or tied tall coin sack. Contents remain hidden: no loose spices, coins, label, letters, symbols or potion bottle.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/items/treasure-v1/silver-goblet.png",
+          "E:/GitHub/Depths/art/items/treasure-v1/gold-signet-ring.png",
+          "E:/GitHub/Depths/art/items/treasure-v1/coin-purse.png"
+        ],
+        "transparent_background": true
+      },
+      "reference_roles": [
+        "style reference: silver goblet",
+        "style reference: gold signet ring",
+        "style reference: leather coin purse"
+      ],
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-35e7da47-54eb-4d11-ac20-55a8f4dd3a71.png",
+      "preserved_file": "spice-pouch.png"
+    }
+  ]
+}

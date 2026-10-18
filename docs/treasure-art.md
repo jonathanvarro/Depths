@@ -1,5 +1,9 @@
 # Gold and recoverable valuables · v1
 
+**Expansion:** [eight additional valuables](treasure-extra-art.md) brings
+the combined catalog to 22 visual IDs, preserving every original path.
+This guide documents the first fourteen and their world props.
+
 Artwork for [#90](https://github.com/jonathanvarro/Depths/issues/90), supporting
 [gold, treasure and the merchant #42](https://github.com/jonathanvarro/Depths/issues/42).
 Rough recovered valuables fit the cave's worn iron, leather, cloth and timber.
