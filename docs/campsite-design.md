@@ -2,6 +2,10 @@
 
 Design study recorded 2026-10-16 for #22. This specifies a proposed refuge screen; it does not implement the campsite or advance gameplay work past the current milestone.
 
+**Current first-camp rules:** the newer **Decided 2026-10-17 (#40)** block in DESIGN.md supersedes this study's older rest/treatment/cost proposals. The six-site art set and interactive composition review are now in [campsite-art.md](campsite-art.md); this original document preserves the interaction direction and proposal history.
+
+**Owner's story direction (2026-10-17, #78/#79):** the king is sending forces to deal with monsters and goblins, but their disrupted, scattered arrival leaves the camp disorganized and under-resourced. This explains the apprentice's makeshift tool supply. What happened is still open. The art uses patched campaign canvas, mismatched civilian equipment and proposed faded royal cloth; site/stock availability as arrivals unfold remains #79/#80, without a fixed schedule in the art.
+
 ## Owner's direction
 
 The cave's refuge is a campsite with several little tents or activity areas. Areas can be highlighted and clicked/tapped to take the player into their respective views. Retain this spatial presentation as the camp's main navigation.

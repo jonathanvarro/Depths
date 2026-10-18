@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-17 – ChatGPT
+- Did: #78 supplies the cave campsite art: 640x360 empty clearing, six separate 256x192 destination layers/ground-origin 2D scenes and 192px merchant/apprentice/nurse portraits in art/camp/cave-camp-v1. docs/campsite-art.md maps stable IDs, sources, contacts, neutral-lighting scope and integration. Preserved ten generated masters/exact prompts, palettes/hashes and native boards. Export/import checks and all 217 Godot checks pass, with 15 captures at desktop/two phone shapes. Fire reuses #63's flame resource; hidden/reduced-motion presentation is supported. Recorded the owner's disrupted royal deployment story while keeping its cause unresolved.
+- Next: Claude's #40 can map each independent layer to its six existing camp anchors and use the portraits in service views. Follow current DESIGN.md #40 decisions for rest/day/treatment/services. Gate site art and its input together under the real camp availability model when #79/#80 is implemented.
+- Watch out: Art/isolated review only; no live camp, stock, gold, service or arrival-day logic changed. The review shows all six areas and opens art-only views. NPCs are static neutral character plates, not layered blink/talk rigs or complete directional-lighting sets. Blue/ochre crown cloth and apprentice/nurse appearances are visual proposals; names/final heraldry are open. Physical iPhone remains untested. Claude's current campsite decisions and other work were preserved.
+
 ## 2026-10-17 – Claude
 - Did: #65 measured the stair trick (same healing for 3 time instead of 21) and, per the owner's choice, made changing floors spend the time remaining on pending effects before finishing them (PartyState.remaining_effect_time()). Stairs now take 22 time against 21 for resting; resting still eases strain.
 - Next: Milestone 3 is clear; milestone 4 starts with the campsite (#40).

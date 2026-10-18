@@ -1,0 +1,289 @@
+{
+  "issue": 78,
+  "assets": {
+    "supplies": {
+      "canvas": [
+        256,
+        192
+      ],
+      "source_bounds": [
+        87,
+        84,
+        1365,
+        972
+      ],
+      "offset": [
+        16,
+        29
+      ],
+      "pivot": [
+        128,
+        184
+      ],
+      "visible_bounds": [
+        16,
+        29,
+        240,
+        185
+      ],
+      "visible_colours": 40,
+      "colour_limit": 40
+    },
+    "treatment": {
+      "canvas": [
+        256,
+        192
+      ],
+      "source_bounds": [
+        36,
+        81,
+        1414,
+        996
+      ],
+      "offset": [
+        16,
+        36
+      ],
+      "pivot": [
+        128,
+        184
+      ],
+      "visible_bounds": [
+        16,
+        36,
+        240,
+        185
+      ],
+      "visible_colours": 40,
+      "colour_limit": 40
+    },
+    "cave": {
+      "canvas": [
+        256,
+        192
+      ],
+      "source_bounds": [
+        135,
+        183,
+        1344,
+        982
+      ],
+      "offset": [
+        16,
+        37
+      ],
+      "pivot": [
+        128,
+        184
+      ],
+      "visible_bounds": [
+        16,
+        37,
+        240,
+        185
+      ],
+      "visible_colours": 39,
+      "colour_limit": 40
+    },
+    "rest": {
+      "canvas": [
+        256,
+        192
+      ],
+      "source_bounds": [
+        86,
+        280,
+        1361,
+        886
+      ],
+      "offset": [
+        16,
+        79
+      ],
+      "pivot": [
+        128,
+        184
+      ],
+      "visible_bounds": [
+        16,
+        79,
+        240,
+        185
+      ],
+      "visible_colours": 40,
+      "colour_limit": 40
+    },
+    "smith": {
+      "canvas": [
+        256,
+        192
+      ],
+      "source_bounds": [
+        51,
+        108,
+        1402,
+        945
+      ],
+      "offset": [
+        16,
+        46
+      ],
+      "pivot": [
+        128,
+        184
+      ],
+      "visible_bounds": [
+        16,
+        46,
+        240,
+        185
+      ],
+      "visible_colours": 40,
+      "colour_limit": 40
+    },
+    "fire": {
+      "canvas": [
+        256,
+        192
+      ],
+      "source_bounds": [
+        84,
+        372,
+        1368,
+        1028
+      ],
+      "offset": [
+        16,
+        71
+      ],
+      "pivot": [
+        128,
+        184
+      ],
+      "visible_bounds": [
+        16,
+        71,
+        240,
+        185
+      ],
+      "visible_colours": 40,
+      "colour_limit": 40
+    },
+    "merchant": {
+      "canvas": [
+        192,
+        192
+      ],
+      "source_bounds": [
+        12,
+        31,
+        1237,
+        1253
+      ],
+      "offset": [
+        4,
+        5
+      ],
+      "pivot": [
+        96,
+        188
+      ],
+      "visible_bounds": [
+        4,
+        5,
+        188,
+        189
+      ],
+      "visible_colours": 48,
+      "colour_limit": 48
+    },
+    "apprentice": {
+      "canvas": [
+        192,
+        192
+      ],
+      "source_bounds": [
+        57,
+        8,
+        1204,
+        1254
+      ],
+      "offset": [
+        12,
+        5
+      ],
+      "pivot": [
+        96,
+        188
+      ],
+      "visible_bounds": [
+        12,
+        5,
+        181,
+        189
+      ],
+      "visible_colours": 48,
+      "colour_limit": 48
+    },
+    "nurse": {
+      "canvas": [
+        192,
+        192
+      ],
+      "source_bounds": [
+        127,
+        12,
+        1127,
+        1254
+      ],
+      "offset": [
+        22,
+        5
+      ],
+      "pivot": [
+        96,
+        188
+      ],
+      "visible_bounds": [
+        22,
+        5,
+        170,
+        189
+      ],
+      "visible_colours": 48,
+      "colour_limit": 48
+    },
+    "clearing": {
+      "canvas": [
+        640,
+        360
+      ],
+      "visible_colours": 48,
+      "colour_limit": 48,
+      "opaque": true
+    }
+  },
+  "failures": [],
+  "sha256": {
+    "art/source/campsite-v1/apprentice.png": "f540dd38524d851535eacf87be699e060e37c7b38528aff37212121a64baf4a7",
+    "art/source/campsite-v1/cave.png": "62db34b034f3cde250539a8f85a74cfbddfd2bdf0c131b9cb350fdd509603eaf",
+    "art/source/campsite-v1/clearing.png": "b755d5d52319eb21ed46f299f4adc42aa4f25513bbaa7c0dfa023e0e1bb7c0e9",
+    "art/source/campsite-v1/fire.png": "973bc075b91bb891b3328ce166d4df338aa4591beb0b938ab1af3984bbb5f68e",
+    "art/source/campsite-v1/merchant.png": "61bd27a4836d75b433712220a764f78a922faca0015004b047e2c851f9bcaca8",
+    "art/source/campsite-v1/nurse.png": "9ec379e3242e7d48816260098ad3b0d8daf7d8c382ad954fbee9a19d03253c1c",
+    "art/source/campsite-v1/rest.png": "7c3c34073724f5a02aee799b214d2eba58703f51ae41ed05c3adf7e8a507be7f",
+    "art/source/campsite-v1/smith.png": "7a5b5b6e40a755c03296b902d0c296a7a57cfe59f9ad52f9a6b3bca1616c9326",
+    "art/source/campsite-v1/supplies.png": "bab3e541f71dd335d2e690dfd84693ff9d85c42cb50720221749ab7a8a597912",
+    "art/source/campsite-v1/treatment.png": "493b9a389452622885a9f7adc664bc5f1077d5812bbbf4d6e07105bf92a3ceb2",
+    "art/camp/cave-camp-v1/apprentice.png": "944471d9f0761f53b31e4ffcdbb7851f8eafe06a8fa19bfa9fbc7bb67f418e9d",
+    "art/camp/cave-camp-v1/cave.png": "d8942ae9a9cdaa7a8b2741ead469fe2189ec6185e66826e308433d1f9e361c56",
+    "art/camp/cave-camp-v1/clearing.png": "cca766bc3e8c8955ca45590ebc45747baad2969fce6685901b07bcdb1c9e5540",
+    "art/camp/cave-camp-v1/fire.png": "94bfe18fd679e77eeec60c4893359e167c86244b76fd9226176db3c65843d1b9",
+    "art/camp/cave-camp-v1/merchant.png": "21fb2699f2c4b202fded701439b4564ad452d1dc3dc5bfa5909c9383b3c6c1e4",
+    "art/camp/cave-camp-v1/nurse.png": "24cfff717e613f5a5c72d4758ac59dfc55e19485e879d39f763d5ef6fa1279cd",
+    "art/camp/cave-camp-v1/rest.png": "e99921ecd6b7cbd7d2010a471c2c7a050240fe002609a976345088adb54da225",
+    "art/camp/cave-camp-v1/smith.png": "3af36bd06fce60aeab1c03342451d4118acad58ed758d5e37850988dfd683307",
+    "art/camp/cave-camp-v1/supplies.png": "2079fa282347e1db01c9036f5a79ab0d5b285846a95c7c6fa55e3fb2ec456316",
+    "art/camp/cave-camp-v1/treatment.png": "d66474b5842a0dd7f84feb30634f9e94c467b58d99d0f75aaff901f39e2ea953"
+  }
+}

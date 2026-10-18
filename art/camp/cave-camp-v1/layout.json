@@ -1,0 +1,11 @@
+{
+  "canvas": [640, 360],
+  "sites": [
+    {"id":"supplies","label":"Merchant","rect":[18,48,182,132],"scale":0.7,"npc":"merchant"},
+    {"id":"treatment","label":"Nurse","rect":[241,39,182,132],"scale":0.7,"npc":"nurse"},
+    {"id":"cave","label":"Cave path","rect":[471,12,151,132],"scale":0.6,"npc":""},
+    {"id":"rest","label":"Your tent","rect":[18,204,190,138],"scale":0.74,"npc":""},
+    {"id":"smith","label":"Apprentice smith","rect":[226,188,190,138],"scale":0.73,"npc":"apprentice"},
+    {"id":"fire","label":"Recruitment fire","rect":[430,200,190,138],"scale":0.73,"npc":""}
+  ]
+}

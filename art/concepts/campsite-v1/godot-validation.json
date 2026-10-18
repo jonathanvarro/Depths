@@ -1,0 +1,22 @@
+{
+  "captures": 15,
+  "checks": 217,
+  "failures": [],
+  "godot": "4.7.2",
+  "physical_phone_test": false,
+  "scope": "Isolated art review: no campaign or camp service implementation.",
+  "viewports": [
+    [
+      1280,
+      720
+    ],
+    [
+      1278,
+      590
+    ],
+    [
+      1334,
+      750
+    ]
+  ]
+}
