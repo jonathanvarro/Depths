@@ -1,5 +1,7 @@
 # Pack screen — Field kit refinement
 
+**Superseded layout (2026-10-17, #61):** The owner has requested image-only Pack slots with hover/touch details, plus a tabbed Equipment/Status hero window with portrait selection. See [the current direction](pack-and-hero-window-design.md). This first labelled-row study and its Godot preview remain available as history and a real-supply-rule test.
+
 The owner chose the Pack screen as the next interface design after accepting the title/font pairing (#38), and selected **Field kit** in the navigation comparison (#37). This is an editable Godot design preview for #39. The live Pack remains in `scripts/pack_screen.gd`; this preview is not connected to an expedition.
 
 [Desktop preview](../art/ui/pack-v1/desktop-ration.png) · [Landscape phone](../art/ui/pack-v1/phone-ration.png) · [Treatment detail](../art/ui/pack-v1/phone-dressing.png) · [After use / unavailable](../art/ui/pack-v1/phone-after-use.png)
