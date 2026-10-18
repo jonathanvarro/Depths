@@ -1,0 +1,88 @@
+{
+  "tool": "Built-in image_gen.imagegen",
+  "date": "2026-10-17",
+  "issue": 84,
+  "generations": {
+    "master-a": {
+      "prompt": "Use case: stylized-concept. Asset: neutral layered-portrait MASTER A for Depths, dark grounded medieval dungeon crawler. Reference Mara only for pixel-art fidelity, 192x192 head-and-shoulder framing and sombre tone; DO NOT copy her identity or warm directional lighting. Create an older ADULT FEMALE village WARDEN, about45, practical average sturdy build, broad slightly square face, medium olive/tan skin with neutral beige undertones, short cropped dark hair streaked grey at temples, alert steady brown eyes, closed neutral mouth, weathered but capable and calm. NO scar, blood, jewellery, headgear or weapons. Her head is nearly frontal, turned only very slightly toward image right. Bust shoulders symmetric and level, shoulders not tilted. Plain modest OFF-WHITE HIGH-COLLARED LINEN UNDERSHIRT, no armour or outer garment, collar covers the full base of the neck. Hair short and entirely ABOVE the shoulders, no braid or long side locks. Entire head, ears, neckline and complete shoulder silhouette inside a SQUARE transparent canvas, visible torso cut off at lower canvas edge, about5percent outer margin. Eyes at about37percent canvas height, mouth at about51percent, chin about61percent, high undershirt collar begins about65percent, shoulders extend to about8percent and92percent width at about79percent height. Head centre about51percent width. This is a reusable average adult torso with an individual head: plain shirt geometry should be easy to share with another adult head. Crisp deliberate pixel-art clusters for192px native export, about3 shades per material, muted48-colour palette. Neutral diffuse white fill from ALL sides; retain modest local form/crease occlusion ONLY. Absolutely NO orange lantern colour, rim highlight, directional spotlight, one-sided cast facial shadow, studio gradient or background. No UI, frame, text, loose props, dithering, photographic/painterly micro-detail. Transparent exterior.",
+      "referenced_image_paths": [
+        "E:/GitHub/Depths/art/concepts/portraits/mara-layered-v1/preview.png"
+      ],
+      "transparent_background": true,
+      "source_file": "master-a.png",
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-b7e2feac-7652-478a-924e-0dcce5b790a3.png"
+    },
+    "master-b": {
+      "transparent_background": true,
+      "referenced_image_paths": [
+        "E:/GitHub/Depths/art/source/recruit-kit-v1/master-a.png"
+      ],
+      "prompt": "Use case: identity-preserve but NEW HEAD on IDENTICAL SHARED BODY. Edit this exact portrait master for a second Depths recruit. Preserve the exact square canvas, shoulder silhouette, torso, off-white high-collared undershirt, collar/neck socket position, neutral diffuse lighting, scale, head centre, eye-line and mouth-line. Change ONLY the head above the collar into a distinct young ADULT MALE SCOUT, about27: narrow angular face, medium olive/tan skin in the SAME neutral beige family as the reference, short cropped black curls entirely above shoulders, straight dark brows, sharp observant brown eyes, slightly crooked nose, faint freckles, clean-shaven closed neutral mouth. Not a younger or male copy of the woman: different jaw/nose/brow but retain the exact spatial eye/mouth registration and head direction almost frontal slightly toward image right. NO scarf, hood, hat, armour, jewellery, weapons, scar, blood or extra outfit. Keep the reference shoulders and shirt pixel-for-pixel if possible, and fit the neck into the exact same collar. Crisp simplified192px pixel clusters with48colours. No fixed warm/rim/directional light, gradients, dithering, painterly detail, background, text or UI. Transparent exterior.",
+      "source_file": "master-b.png",
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-e6ccb55f-02ad-4f18-b306-06c473ffb1e5.png"
+    },
+    "outfit": {
+      "transparent_background": true,
+      "referenced_image_paths": [
+        "E:/GitHub/Depths/art/source/recruit-kit-v1/master-a.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Asset: ONE separate reusable CLOTHING OVERLAY, exactly aligned to this portrait's FULL SQUARE CANVAS. Use the reference ONLY as a registration guide; remove the whole character from output. Draw ONLY a simple worn muted brown quilted padded sleeveless jerkin over the reference shoulders/upper chest, with low plain dark binding at the neckline and simple front lacing. No ornate armour, cloak, hood, weapon, badges or anatomy. Outer shoulder silhouette and torso position exactly match the reference's undershirt; top of jerkin near base of neck, leave the face and upper white collar completely clear. Keep the same exact canvas, scale and shoulder alignment, output only fabric/fastening pixels over genuine transparency everywhere else: NO head, skin, hair, eyes, shirt underlayer or background. Bottom of jerkin reaches the source canvas bottom; collar opening remains transparent to show original high linen collar underneath. Cloth neutral material brown with local fold/quilting occlusion only; no orange forge/lantern cast or directional light. Sparse broad crisp192px pixel-art clusters, no dither or microtexture.",
+      "source_file": "outfit.png",
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-5ec62d06-a4db-4ffe-aacb-783c75f629ff.png"
+    },
+    "warden-faces": {
+      "transparent_background": true,
+      "referenced_image_paths": [
+        "E:/GitHub/Depths/build/art-review/warden-face-reference.png"
+      ],
+      "prompt": "Use case: precise-object-edit. This is an ALIGNED ANIMATION/EXPRESSION ATLAS, NOT a new character sheet. Edit the supplied3columns by2rows sheet of the exact SAME woman. Preserve canvas aspect3:2, equal square cells, exact registration/scale/pose/head/skin/hair/shirt in EVERY cell; do not add gaps, labels or borders. Change ONLY the eyes/brows or mouth as specified, leaving ALL other pixels unchanged. Top-left cell: eyes HALF CLOSED, mouth neutral. Top-middle: eyes FULLY CLOSED with readable lids, mouth neutral. Top-right: eyes neutral, lips slightly parted for quiet talking. Bottom-left: eyes neutral, mouth moderately OPEN speaking, dark mouth interior, small subdued teeth. Bottom-middle: WORRIED expression, brows raised/inward and closed tense mouth. Bottom-right: EXHAUSTED expression, drooping eyelids/brows and slightly downturned closed mouth. Exactly the reference older female Warden identity, no identity/face-width/eye-line/mouth-line drift, no head moves, no clothing changes. Neutral diffuse lighting throughout, no new highlights or warm cast. Clean192px pixel-art treatment. All six exterior backgrounds transparent. This whole asset is one registered facial-animation atlas.",
+      "source_file": "warden-faces.png",
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-f6ddb00b-1062-4fb0-ab42-b5640cf05076.png"
+    },
+    "warden-conditions": {
+      "transparent_background": true,
+      "referenced_image_paths": [
+        "E:/GitHub/Depths/build/art-review/warden-overlay-reference.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Asset: aligned CONDITION-OVERLAY ATLAS2columns by2rows, equal square cells, preserve the reference full canvas and exact face registration. The repeated woman is ONLY a placement guide: REMOVE ALL character/skin/eyes/mouth/hair/clothing pixels from final output, leaving ONLY the added marks on genuine transparent backgrounds in each cell. Top-left: sparse dark-red dried blood streak at her image-right forehead/temple and a small cheek fleck, do not cover eyes or lips. Top-right: a few deliberate muted-brown dirt smudges on cheeks/jaw and lower shirt, no replacement facial features. Bottom-left: ONE plain off-white cloth bandage strip across her upper forehead ABOVE the eyebrows, aligned to head shape, not over the eyes. Bottom-right: a translucent desaturated sickly pale-grey/green WASH in broad forehead/cheek/neck areas, no eyes/nose/mouth/skin painting, no identity details, keep open gaps for eyes and lips. Palette simple large pixel clusters native192px, no dust noise, no glow, no shadows, no base portrait or faint ghost portrait, no background/frame/text. Conditions only, with their natural positions preserved on each full cell.",
+      "source_file": "warden-conditions.png",
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-07a3492d-4372-45e2-868c-42de6bdd83c8.png"
+    },
+    "warden-lighting": {
+      "transparent_background": true,
+      "referenced_image_paths": [
+        "E:/GitHub/Depths/build/art-review/warden-overlay-reference.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Asset: TRANSPARENT ILLUMINATION MASK ATLAS2columns by2rows, same exact full cell registration as supplied woman/shoulders. Reference character is ONLY the silhouette/plane guide; REMOVE ALL skin/hair/clothes/features and output ONLY broad simple light/shadow shapes with transparent exterior. No portrait underneath, no eyes, brows, mouth, material texture, identity or lines. Top-left cell: black translucent cast/plane SHADOW mask for light arriving from upper IMAGE LEFT: broad far image-right face/neck/shoulder shadow, modest under brow/nose/chin planes, no deep eye holes. Top-right: WHITE translucent HIGHLIGHT mask for same upper-left light, broad near image-left forehead/cheek/nose/shoulder planes, no skin-coloured painted face. Bottom-left: black translucent SHADOW mask for mirrored upper IMAGE RIGHT light. Bottom-right: WHITE translucent HIGHLIGHT mask for same upper-right light. Both masks should cover the ENTIRE same head+torso silhouette where appropriate but leave transparent gaps in unaffected areas. Keep deliberately broad crisp pixel-art shapes matching192px registration; no halos or full rectangular wash. All four backgrounds transparent, no text or panel borders. These masks will be tinted/strength-controlled separately in engine; white means light coverage, black means shade coverage.",
+      "source_file": "warden-lighting.png",
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-a0acaa93-8005-4880-a853-93119c6a85b5.png"
+    },
+    "scout-faces": {
+      "transparent_background": true,
+      "referenced_image_paths": [
+        "E:/GitHub/Depths/build/art-review/scout-face-reference.png"
+      ],
+      "prompt": "Use case: precise-object-edit. This is ONE ALIGNED FACIAL-ANIMATION ATLAS,3columns by2rows of equal square cells. Edit the repeated exact SAME young male Scout reference. Preserve the full3:2canvas, cell boundaries, exact head/skin/short curls/shirt/shoulder pixels and registration in EVERY cell; no gaps/labels/borders. Change ONLY eyes/brows or mouth. Top-left: eyes HALF CLOSED, mouth neutral. Top-middle: eyes FULLY CLOSED with lids, mouth neutral. Top-right: neutral eyes, lips slightly parted speaking. Bottom-left: neutral eyes, moderately OPEN speaking mouth with dark interior and small subdued teeth. Bottom-middle: WORRIED raised/inward brows and tense closed mouth. Bottom-right: EXHAUSTED drooping eyelids/brows and a slightly downturned closed mouth. Same exact identity, face width, eye/mouth positions and head angle in all cells; no movement or other edits. Neutral diffuse lighting, no orange/rim/directional highlights. Crisp192px pixel-art clusters, not painterly. All six exterior backgrounds transparent. No teeth grin, exaggerated cartoon emotion or new characters.",
+      "source_file": "scout-faces.png",
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-8c695ddb-d341-4d68-b349-93608969f4b3.png"
+    },
+    "scout-conditions": {
+      "transparent_background": true,
+      "referenced_image_paths": [
+        "E:/GitHub/Depths/build/art-review/scout-overlay-reference.png"
+      ],
+      "prompt": "Use case: precise-object-edit. ONE aligned CONDITION-OVERLAY ATLAS2columns by2rows, equal square cells. The repeated young male Scout is ONLY a registration guide. Remove ALL head/skin/hair/eyes/mouth/shirt pixels from final output, leaving ONLY the added condition marks with exactly the reference full-cell placement and genuinely transparent exterior. Top-left: sparse dark red dried-blood streak at image-right forehead/temple and one small cheek fleck, no eyes/lips covered. Top-right: a few muted-brown dirt smudges at cheeks/jaw and lower shirt. Bottom-left: ONE plain off-white cloth bandage across upper forehead ABOVE eyebrows, no eye covering. Bottom-right: translucent desaturated sickly grey-green pallor WASH at forehead/cheeks/neck, no identity details or replacement skin, open gaps for eye and mouth positions. Simple broad sparse192px pixel-art clusters. No portrait/ghost outline underneath, facial feature lines, background, text, panel frames, glows, directional lighting or noisy scattered dirt grains.",
+      "source_file": "scout-conditions.png",
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-c6e23ac5-c6f1-4dd1-9792-80b15cc0f7a6.png"
+    },
+    "scout-lighting": {
+      "transparent_background": true,
+      "referenced_image_paths": [
+        "E:/GitHub/Depths/build/art-review/scout-overlay-reference.png"
+      ],
+      "prompt": "Use case: precise-object-edit. ONE transparent ILLUMINATION-MASK ATLAS2columns by2rows, equal square cells, exact reference head/torso registration. Reference young male Scout is ONLY a silhouette/plane guide. REMOVE ALL skin/hair/clothing/eyes/mouth/material detail and output ONLY light/shadow coverage patches with transparent exterior. Top-left: BLACK translucent broad far image-right face/neck/shoulder SHADOW coverage for light from upper IMAGE LEFT; restrained under brow/nose/chin, no deep eye holes. Top-right: WHITE translucent broad near image-left forehead/cheek/nose/shoulder HIGHLIGHT coverage for the same light. Bottom-left: BLACK shadow coverage for mirrored upper IMAGE RIGHT light. Bottom-right: WHITE highlight coverage for that upper-right light. Broad deliberately simple pixel clusters at192px, not a detailed monochrome face or traced identity. Preserve gaps outside lit/shaded regions and outside the exact silhouette. No original portrait underneath, halo, rectangle, lettering, panel borders, colour or directional light baked into a skin drawing. Engine will separately tint and control strength.",
+      "source_file": "scout-lighting.png",
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-a4973676-2d76-4019-93d9-a6233d7b5b06.png"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "captures": 24,
+  "checks": 424,
+  "failures": [],
+  "godot": "4.7.2",
+  "native_portrait_sizes": [
+    [
+      192,
+      192
+    ],
+    [
+      96,
+      96
+    ]
+  ],
+  "physical_phone_test": false,
+  "scope": "Two recruits and shared template; no live recruitment or Mara migration.",
+  "viewports": [
+    [
+      1280,
+      720
+    ],
+    [
+      1278,
+      590
+    ]
+  ]
+}

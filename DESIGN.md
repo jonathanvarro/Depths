@@ -368,6 +368,8 @@ These are head-and-shoulders portrait templates, not a commitment to six full-bo
 
 The proposed validation step is one body template, two distinct character heads, and a shared outfit before producing the full six-template library. The template count is a planning target, not a requirement to create all six for the first playable.
 
+**First reuse proof (#84, 2026-10-17):** [recruit portrait kit](docs/recruit-portrait-kit.md) supplies an older Warden and younger Scout with distinct neutral heads sharing the exact same covered-body/linen and padded-jerkin textures. Six PortraitSets cover neutral animated and static worried/exhausted expressions; both have four condition layers and separate authored upper-left light masks. This validates one clothed bust/socket at 192px and 96px, not all six body families. Editable masters and catalog paths are ready for #41/#82; more faces/Brawler and Mara's #36 migration remain open.
+
 ### Condition layers
 
 - Dirt, blood, bruises, and similar temporary marks use independently controlled overlays.

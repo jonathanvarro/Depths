@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="PortraitSet" format=3]
+
+[ext_resource type="Script" path="res://scripts/portrait_set.gd" id="script"]
+[ext_resource type="Texture2D" path="res://art/portraits/recruit-kit-v1/shared/body.png" id="0"]
+[ext_resource type="Texture2D" path="res://art/portraits/recruit-kit-v1/warden-a/head.png" id="1"]
+[ext_resource type="Texture2D" path="res://art/portraits/recruit-kit-v1/warden-a/eyes-neutral.png" id="2"]
+[ext_resource type="Texture2D" path="res://art/portraits/recruit-kit-v1/warden-a/mouth-neutral.png" id="3"]
+[ext_resource type="Texture2D" path="res://art/portraits/recruit-kit-v1/shared/jerkin.png" id="4"]
+[ext_resource type="Texture2D" path="res://art/portraits/recruit-kit-v1/warden-a/eyes-half.png" id="5"]
+[ext_resource type="Texture2D" path="res://art/portraits/recruit-kit-v1/warden-a/eyes-closed.png" id="6"]
+[ext_resource type="Texture2D" path="res://art/portraits/recruit-kit-v1/warden-a/mouth-small.png" id="7"]
+[ext_resource type="Texture2D" path="res://art/portraits/recruit-kit-v1/warden-a/mouth-open.png" id="8"]
+[ext_resource type="Texture2D" path="res://art/portraits/recruit-kit-v1/warden-a/blood.png" id="9"]
+[ext_resource type="Texture2D" path="res://art/portraits/recruit-kit-v1/warden-a/dirt.png" id="10"]
+[ext_resource type="Texture2D" path="res://art/portraits/recruit-kit-v1/warden-a/bandage.png" id="11"]
+[ext_resource type="Texture2D" path="res://art/portraits/recruit-kit-v1/warden-a/pallor.png" id="12"]
+
+[resource]
+script = ExtResource("script")
+body = ExtResource("0")
+head = ExtResource("1")
+eyes = ExtResource("2")
+mouth = ExtResource("3")
+clothing = Array[Texture2D]([ExtResource("4")])
+conditions = {"blood": ExtResource("9"), "dirt": ExtResource("10"), "bandage": ExtResource("11"), "pallor": ExtResource("12")}
+blink_frames = Array[Texture2D]([ExtResource("5"), ExtResource("6")])
+talk_frames = Array[Texture2D]([ExtResource("7"), ExtResource("8")])

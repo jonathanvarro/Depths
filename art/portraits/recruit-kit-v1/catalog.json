@@ -1,0 +1,35 @@
+{
+  "canvas": [
+    192,
+    192
+  ],
+  "body_template": "average-covered-adult-v1",
+  "portraits": [
+    {
+      "id": "warden-a",
+      "role": "Warden",
+      "portrait": "res://art/portraits/recruit-kit-v1/warden-a/preview.png",
+      "portrait_set": "res://data/portraits/recruits-v1/warden-a.tres",
+      "expressions": [
+        "neutral",
+        "worried",
+        "exhausted"
+      ],
+      "shadow": "res://art/portraits/recruit-kit-v1/warden-a/shadow-left.png",
+      "highlight": "res://art/portraits/recruit-kit-v1/warden-a/highlight-left.png"
+    },
+    {
+      "id": "scout-a",
+      "role": "Scout",
+      "portrait": "res://art/portraits/recruit-kit-v1/scout-a/preview.png",
+      "portrait_set": "res://data/portraits/recruits-v1/scout-a.tres",
+      "expressions": [
+        "neutral",
+        "worried",
+        "exhausted"
+      ],
+      "shadow": "res://art/portraits/recruit-kit-v1/scout-a/shadow-left.png",
+      "highlight": "res://art/portraits/recruit-kit-v1/scout-a/highlight-left.png"
+    }
+  ]
+}

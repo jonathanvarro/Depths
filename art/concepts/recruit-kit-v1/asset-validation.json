@@ -1,0 +1,515 @@
+{
+  "issue": 84,
+  "canvas": [
+    192,
+    192
+  ],
+  "master_transform": {
+    "resize_full_square": [
+      184,
+      184
+    ],
+    "offset": [
+      4,
+      4
+    ]
+  },
+  "eye_region": [
+    78,
+    53,
+    135,
+    80
+  ],
+  "mouth_region": [
+    89,
+    91,
+    125,
+    108
+  ],
+  "shared_body": "shared/body.png",
+  "shared_clothing": "shared/jerkin.png",
+  "assets": {
+    "warden-a/bandage-registration": {
+      "source_bounds": [
+        33,
+        33,
+        162,
+        92
+      ],
+      "target_top": 45,
+      "max_size": [
+        72,
+        14
+      ]
+    },
+    "scout-a/bandage-registration": {
+      "source_bounds": [
+        42,
+        31,
+        160,
+        84
+      ],
+      "target_top": 45,
+      "max_size": [
+        72,
+        14
+      ]
+    },
+    "scout-a/bandage.png": {
+      "visible_bounds": [
+        86,
+        45,
+        117,
+        58
+      ],
+      "colours": 8
+    },
+    "scout-a/blood.png": {
+      "visible_bounds": [
+        69,
+        21,
+        138,
+        119
+      ],
+      "colours": 8
+    },
+    "scout-a/dirt.png": {
+      "visible_bounds": [
+        49,
+        86,
+        149,
+        181
+      ],
+      "colours": 1
+    },
+    "scout-a/eyes-closed.png": {
+      "visible_bounds": [
+        78,
+        53,
+        135,
+        80
+      ],
+      "colours": 28
+    },
+    "scout-a/eyes-exhausted.png": {
+      "visible_bounds": [
+        78,
+        53,
+        135,
+        80
+      ],
+      "colours": 30
+    },
+    "scout-a/eyes-half.png": {
+      "visible_bounds": [
+        78,
+        53,
+        135,
+        80
+      ],
+      "colours": 31
+    },
+    "scout-a/eyes-neutral.png": {
+      "visible_bounds": [
+        78,
+        53,
+        135,
+        80
+      ],
+      "colours": 36
+    },
+    "scout-a/eyes-worried.png": {
+      "visible_bounds": [
+        78,
+        53,
+        135,
+        80
+      ],
+      "colours": 35
+    },
+    "scout-a/head.png": {
+      "visible_bounds": [
+        28,
+        15,
+        164,
+        144
+      ],
+      "colours": 36
+    },
+    "scout-a/highlight-left.png": {
+      "visible_bounds": [
+        6,
+        21,
+        108,
+        188
+      ],
+      "colours": 1
+    },
+    "scout-a/mouth-exhausted.png": {
+      "visible_bounds": [
+        89,
+        91,
+        125,
+        108
+      ],
+      "colours": 21
+    },
+    "scout-a/mouth-neutral.png": {
+      "visible_bounds": [
+        89,
+        91,
+        125,
+        108
+      ],
+      "colours": 20
+    },
+    "scout-a/mouth-open.png": {
+      "visible_bounds": [
+        89,
+        91,
+        125,
+        108
+      ],
+      "colours": 35
+    },
+    "scout-a/mouth-small.png": {
+      "visible_bounds": [
+        89,
+        91,
+        125,
+        108
+      ],
+      "colours": 24
+    },
+    "scout-a/mouth-worried.png": {
+      "visible_bounds": [
+        89,
+        91,
+        125,
+        108
+      ],
+      "colours": 20
+    },
+    "scout-a/pallor.png": {
+      "visible_bounds": [
+        72,
+        40,
+        134,
+        144
+      ],
+      "colours": 8
+    },
+    "scout-a/preview.png": {
+      "visible_bounds": [
+        4,
+        15,
+        188,
+        188
+      ],
+      "colours": 45
+    },
+    "scout-a/shadow-left.png": {
+      "visible_bounds": [
+        102,
+        24,
+        188,
+        186
+      ],
+      "colours": 1
+    },
+    "shared/body.png": {
+      "visible_bounds": [
+        4,
+        116,
+        188,
+        188
+      ],
+      "colours": 31
+    },
+    "shared/jerkin.png": {
+      "visible_bounds": [
+        14,
+        125,
+        178,
+        188
+      ],
+      "colours": 20
+    },
+    "warden-a/bandage.png": {
+      "visible_bounds": [
+        86,
+        45,
+        117,
+        59
+      ],
+      "colours": 8
+    },
+    "warden-a/blood.png": {
+      "visible_bounds": [
+        129,
+        34,
+        141,
+        64
+      ],
+      "colours": 8
+    },
+    "warden-a/dirt.png": {
+      "visible_bounds": [
+        49,
+        96,
+        147,
+        187
+      ],
+      "colours": 1
+    },
+    "warden-a/eyes-closed.png": {
+      "visible_bounds": [
+        78,
+        53,
+        135,
+        80
+      ],
+      "colours": 28
+    },
+    "warden-a/eyes-exhausted.png": {
+      "visible_bounds": [
+        78,
+        53,
+        135,
+        80
+      ],
+      "colours": 29
+    },
+    "warden-a/eyes-half.png": {
+      "visible_bounds": [
+        78,
+        53,
+        135,
+        80
+      ],
+      "colours": 28
+    },
+    "warden-a/eyes-neutral.png": {
+      "visible_bounds": [
+        78,
+        53,
+        135,
+        80
+      ],
+      "colours": 32
+    },
+    "warden-a/eyes-worried.png": {
+      "visible_bounds": [
+        78,
+        53,
+        135,
+        80
+      ],
+      "colours": 32
+    },
+    "warden-a/head.png": {
+      "visible_bounds": [
+        28,
+        14,
+        164,
+        144
+      ],
+      "colours": 32
+    },
+    "warden-a/highlight-left.png": {
+      "visible_bounds": [
+        4,
+        14,
+        144,
+        188
+      ],
+      "colours": 1
+    },
+    "warden-a/mouth-exhausted.png": {
+      "visible_bounds": [
+        89,
+        91,
+        125,
+        108
+      ],
+      "colours": 17
+    },
+    "warden-a/mouth-neutral.png": {
+      "visible_bounds": [
+        89,
+        91,
+        125,
+        108
+      ],
+      "colours": 15
+    },
+    "warden-a/mouth-open.png": {
+      "visible_bounds": [
+        89,
+        91,
+        125,
+        108
+      ],
+      "colours": 25
+    },
+    "warden-a/mouth-small.png": {
+      "visible_bounds": [
+        89,
+        91,
+        125,
+        108
+      ],
+      "colours": 24
+    },
+    "warden-a/mouth-worried.png": {
+      "visible_bounds": [
+        89,
+        91,
+        125,
+        108
+      ],
+      "colours": 19
+    },
+    "warden-a/pallor.png": {
+      "visible_bounds": [
+        59,
+        41,
+        137,
+        140
+      ],
+      "colours": 8
+    },
+    "warden-a/preview.png": {
+      "visible_bounds": [
+        4,
+        14,
+        188,
+        188
+      ],
+      "colours": 45
+    },
+    "warden-a/shadow-left.png": {
+      "visible_bounds": [
+        4,
+        14,
+        188,
+        188
+      ],
+      "colours": 1
+    }
+  },
+  "frame_translations": {
+    "warden-a": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ]
+    ],
+    "scout-a": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ]
+    ]
+  },
+  "failures": [],
+  "sha256": {
+    "art/portraits/recruit-kit-v1/scout-a/bandage.png": "1bfb0f06545b4164146cd2546a8dd3e2978efcf43ee1b3c63d03e4dd21163619",
+    "art/portraits/recruit-kit-v1/scout-a/blood.png": "64f42d13cae922432cf1e2267ccfa493bc25a959804196bb9bab366eb66dfcfe",
+    "art/portraits/recruit-kit-v1/scout-a/dirt.png": "0d9c554ddfbfd1a637694eac1a879162361cfaf67d26458cc5b941cb7e2ffc4a",
+    "art/portraits/recruit-kit-v1/scout-a/eyes-closed.png": "aa1835b146ce2c014a4846a4b2a9f6c3b1ca40e57736174a725f4106c81177de",
+    "art/portraits/recruit-kit-v1/scout-a/eyes-exhausted.png": "a900aa56e6207aefc07b8cfb827292e290e4e6efca7c88e2e6d05b34381b5d9a",
+    "art/portraits/recruit-kit-v1/scout-a/eyes-half.png": "9c1bc8433f95963ab42afc02f819a1362fc04647191e9cf0116d01b61ac5d569",
+    "art/portraits/recruit-kit-v1/scout-a/eyes-neutral.png": "eaef6d44f8d58fa101b95e454ae6e53cf2a9d964a59ee9050c64b5d9ac571f3a",
+    "art/portraits/recruit-kit-v1/scout-a/eyes-worried.png": "7f8462879a610a06a74c74143e5ef3ca58c4f5bcc7c831bb57bf6418dbadbf3b",
+    "art/portraits/recruit-kit-v1/scout-a/head.png": "dae0d4c6ae6ab1751ded835299d446a15ef42672d4d5a6ac82a165a95080218f",
+    "art/portraits/recruit-kit-v1/scout-a/highlight-left.png": "2bc30cc0d2d1f57acce3648d8475bdef2ac3635c8e44e097019874a7679e57ab",
+    "art/portraits/recruit-kit-v1/scout-a/mouth-exhausted.png": "f138046aa80a9fc111ab114bf57d5308a656b83c73efb6d3f72167d3e82d9754",
+    "art/portraits/recruit-kit-v1/scout-a/mouth-neutral.png": "3e8879eba517ef7d71454b431a42b57a80310d70477129adbd6ef2f02d41466c",
+    "art/portraits/recruit-kit-v1/scout-a/mouth-open.png": "c77e99fbc510e67bc6f98b6f1b05bb30db391b60b838dce366f940c34cef6ea6",
+    "art/portraits/recruit-kit-v1/scout-a/mouth-small.png": "441b14ce0914407f85152e81a4516f3232514980b2841665c03aac81e6792030",
+    "art/portraits/recruit-kit-v1/scout-a/mouth-worried.png": "a8a36a9917ba3e75298fcd9a33c1af51134c70bbb23cadb0a65460fe9664d8c9",
+    "art/portraits/recruit-kit-v1/scout-a/pallor.png": "bbe8a4cf76ddb99c0aef4566c11be507bca2d45eae02479464f069fc9780db63",
+    "art/portraits/recruit-kit-v1/scout-a/preview.png": "1dee31ff67771296cf2c47aa0f0dd65196f27f0ebdecea69c57ada542efff874",
+    "art/portraits/recruit-kit-v1/scout-a/shadow-left.png": "33ead5178ae0771766e044dcf07295e43552ea82e35dd7b0e856a8ec02a44454",
+    "art/portraits/recruit-kit-v1/shared/body.png": "354a59a5cec26c785eb480c2f2652369d2e8b0acfeb3840efc968919c0c0ce9b",
+    "art/portraits/recruit-kit-v1/shared/jerkin.png": "b3ee6b1d563c33a4caad913e5ad15e1e52564c7e8b2c94b5b45242d154a52fcb",
+    "art/portraits/recruit-kit-v1/warden-a/bandage.png": "1a89f8d6ebbf35319ba70ba3c6f79f491f91916b962ca09f280e8f660f207b00",
+    "art/portraits/recruit-kit-v1/warden-a/blood.png": "b3b96078a35bb41dc3a8e6f37f79520ee849b0f7846f098351e10d3182cf9356",
+    "art/portraits/recruit-kit-v1/warden-a/dirt.png": "bcc28b5b2e180d41a6fe0f5c156bfb057b3928fa5b16506b7aee18aea88011b5",
+    "art/portraits/recruit-kit-v1/warden-a/eyes-closed.png": "d1d203da2c8e1dd88a8b3439c520debfeaa9b0a8f5057e7534c8d0f3f16d4181",
+    "art/portraits/recruit-kit-v1/warden-a/eyes-exhausted.png": "913a3353f59ed3e280263c569740cb121fa8b87407350ab5864ee371afac7429",
+    "art/portraits/recruit-kit-v1/warden-a/eyes-half.png": "8c7ac3563a5f8940403ed692ad99f2ce3f7d34b53ea439480018d474cd9ba716",
+    "art/portraits/recruit-kit-v1/warden-a/eyes-neutral.png": "64175db99eed10d23677d950b4e193823f12036f6dbdcb5359d22bc90a612170",
+    "art/portraits/recruit-kit-v1/warden-a/eyes-worried.png": "f9f8ef1c26e6bdb7fb628aac7e790ab204235a7309cd884d4b2b64aa8d333941",
+    "art/portraits/recruit-kit-v1/warden-a/head.png": "81960da12e5690949a596dc535e6b2d607651318a0d80e09cfeba9266af1eb4e",
+    "art/portraits/recruit-kit-v1/warden-a/highlight-left.png": "7f8cc7256bedae2b3114b9cf215362cfb8ae9ef09109eadc0c3939773690ab32",
+    "art/portraits/recruit-kit-v1/warden-a/mouth-exhausted.png": "d5c41749a6929b7f9b5571c0dcd295b74068ae70aeb45acb060f47bbddffb298",
+    "art/portraits/recruit-kit-v1/warden-a/mouth-neutral.png": "222f47ab3f0b7ba05ac88d95c223d53db0948a70b92946be458b472bba0c2bcb",
+    "art/portraits/recruit-kit-v1/warden-a/mouth-open.png": "28d6ee8ab674fa9e0de602245af169620e0e43fdce384cb2f7dbdd4110559652",
+    "art/portraits/recruit-kit-v1/warden-a/mouth-small.png": "de080e199a08f85117c9e0bfdb02b3c91c59b3ac9a20ce8ff588d640521f9da6",
+    "art/portraits/recruit-kit-v1/warden-a/mouth-worried.png": "f0748fde046eea0853687a0bbeb63e487780ae886373991b5e9f2763cbe5f1cb",
+    "art/portraits/recruit-kit-v1/warden-a/pallor.png": "ed2c6764ef870a38d279376386121ce4f71c9e2cc843e782faf60bfdffda75f5",
+    "art/portraits/recruit-kit-v1/warden-a/preview.png": "f1ad8ed1dfeb2a8526d0ab437ec6b9817cfbcc5a2829ec196fa8c4595a2caab1",
+    "art/portraits/recruit-kit-v1/warden-a/shadow-left.png": "c44d4b25744622d4be4fa07bef77f0747c8b8cb82bb42e73811f8e7da4ca532a",
+    "art/source/recruit-kit-v1/master-a.png": "59434154353e041527183ac833126456f3ca9b76e3175d45cdfaaa41dcee1738",
+    "art/source/recruit-kit-v1/master-b.png": "1fc99878b82099b4bbad5e65b506c8a094adbd3b34f11a5fbd1d0e954654c94f",
+    "art/source/recruit-kit-v1/outfit.png": "f7fcf4b05057348f4f3b01eca60db035a148922400a36e0159e253417d7ebdce",
+    "art/source/recruit-kit-v1/scout-conditions.png": "33684443d5cd1683d826a10692773645e88993ad3a7b4378075604adacb8220b",
+    "art/source/recruit-kit-v1/scout-face-reference.png": "e1f1e3e0c369bfcad4a45dd10177ee9ce6253b908ca3a82fe277a631844f40fa",
+    "art/source/recruit-kit-v1/scout-faces.png": "b2c413bd92f26333535d6a136522cff1eea3afb333b1779065244469cb8ebad1",
+    "art/source/recruit-kit-v1/scout-lighting.png": "f3baafd0e461d2d6d9451d39654bda513eb4405f5e7bdb999409131ea3524e35",
+    "art/source/recruit-kit-v1/scout-overlay-reference.png": "a639c3ebf188e5578e8a4a970882c4a5ebe83c81f4e1973cfe14d00e8a0cbddd",
+    "art/source/recruit-kit-v1/warden-conditions.png": "2082cb172b041bff457b34b09b0c5af3366df78dc200494419aad8624ee06097",
+    "art/source/recruit-kit-v1/warden-face-reference.png": "44100a2ef5b37996715bdfd73a9d7ffd572dbaeb51d27d8d15e9189eaf35ce31",
+    "art/source/recruit-kit-v1/warden-faces.png": "563f989d9f28708fc46e9f5ef6e958340bc034494c63fbd350405a4bc3884f01",
+    "art/source/recruit-kit-v1/warden-lighting.png": "58a64f086df91b107f69021265573cd20b0bf503b2c7ff25bea5e263419fb156",
+    "art/source/recruit-kit-v1/warden-overlay-reference.png": "d950606f07c1c32a7fdc548ec66a116b13e3da7d292885c0c6b5b835fb5fa61c",
+    "data/portraits/recruits-v1/scout-a-exhausted.tres": "c7fb485329c92e198deef504c627245a1bfffbc041875bcb2a739cbe8a6d28f3",
+    "data/portraits/recruits-v1/scout-a-worried.tres": "bee0c42f120085655b22db503a40553ed8deb5150fc00e6552c53a60eee52942",
+    "data/portraits/recruits-v1/scout-a.tres": "2c9cabdf1a4e69eb9eb3765c4529d149e8241e5421e4ccdf0b24eeb816a05d24",
+    "data/portraits/recruits-v1/warden-a-exhausted.tres": "10288e454c0203e5f2d1c088cf5b59e9353b905b1773fc888fd25d05bc8a0c68",
+    "data/portraits/recruits-v1/warden-a-worried.tres": "6ff8029f281292c4f6d4ddae93abb6ea8c313a6be7817f50560d09ffa2f03f44",
+    "data/portraits/recruits-v1/warden-a.tres": "33c26cc16551afc6123a1c78e823bc893bedafbe1befe599506253db3f1e20bd"
+  }
+}
