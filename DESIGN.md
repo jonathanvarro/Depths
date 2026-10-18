@@ -295,6 +295,21 @@ Deeper floors mix them (depth 1 mostly single rats; depth 3 pairs and trios like
   - **light as a weapon** stays an idea (#74);
   - the opening's torch throw is unchanged.
 
+*Full-party balance (#49, 2026-10-18):*
+- **Group size:** parties meet groups close to their size (at least heroes − 1, never more than heroes standing). A full party may meet one extra enemy on floor 3.
+- **Bigger groups by floor:**
+  - floor 1 adds rat + spider and three rats;
+  - floor 2 adds spider pairs, goblin + spider and mixed trios;
+  - floor 3 adds goblin pairs, goblin + goblin + spider, and groups of four.
+- **Simulated** (`tools/balance_sim.gd`; Mara with the iron sword plus a Warden and a Brawler, simple play), health lost per fight out of about 66:
+
+  | Party | Floor 1 | Floor 2 | Floor 3 |
+  | --- | --- | --- | --- |
+  | Three heroes | 4 | 6 | 15 |
+  | Lone hero | 2 | 2 | 3.5 |
+
+  - Wins stay near 100% with simple play. The pressure is attrition across a floor rather than losing single fights.
+
 **Decided 2026-10-16 (#13): enemies appear in the first-person view.** A dedicated formation layout may be explored later. Do not assume the movement or combat of Greed & Darkness is the target. The owner likes its art styling but envisions these systems differently. Three party positions and a compact action set are starting proposals, not settled rules.
 
 ## Resources, rewards, and uncertainty

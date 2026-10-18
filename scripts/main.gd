@@ -102,10 +102,14 @@ const GOBLIN := preload("res://data/enemies/goblin.tres")
 ## Deeper floors mix tactics: rats pick on the weakest while a spider webs
 ## someone or a goblin flanks (#15).
 const ENCOUNTER_GROUPS := {
-	1: [[RAT], [RAT], [SPIDER], [RAT, RAT]],
-	2: [[RAT], [SPIDER], [RAT, RAT], [RAT, SPIDER], [GOBLIN, RAT]],
-	3: [[SPIDER], [GOBLIN], [SPIDER, RAT], [GOBLIN, SPIDER], [GOBLIN, RAT, RAT], [GOBLIN, SPIDER, RAT]],
+	1: [[RAT], [RAT], [SPIDER], [RAT, RAT], [RAT, SPIDER], [RAT, RAT, RAT]],
+	2: [[RAT], [SPIDER], [RAT, RAT], [RAT, SPIDER], [GOBLIN, RAT], [SPIDER, SPIDER], [GOBLIN, SPIDER], [RAT, RAT, SPIDER], [GOBLIN, RAT, RAT], [GOBLIN, SPIDER, RAT]],
+	3: [[SPIDER], [GOBLIN], [GOBLIN, SPIDER], [GOBLIN, GOBLIN], [GOBLIN, RAT, RAT], [GOBLIN, SPIDER, RAT],
+			[GOBLIN, GOBLIN, SPIDER], [GOBLIN, GOBLIN, RAT, RAT], [GOBLIN, SPIDER, SPIDER, RAT]],
 }
+## Full parties meet groups close to their size (#49): never more enemies
+## than heroes standing, except one extra for a full party on the deepest
+## floors; and groups of at least (heroes - 1) when there are any.
 ## Retreat lands the party this many steps away (trial of the owner's idea).
 const RETREAT_DISTANCE := Vector2i(3, 6)
 const Supplies := preload("res://scripts/supplies.gd")
@@ -521,11 +525,7 @@ func _run_event(cell: Vector2i) -> void:
 func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 	var opening_spider := _in_opening and _opening_fights_done == OPENING_FIGHTS.size() - 1
 	if types.is_empty():
-		var groups: Array = ENCOUNTER_GROUPS.get(clampi(_depth, 1, ENCOUNTER_GROUPS.size()))
-		# Never more enemies than heroes standing, so a lone survivor isn't swamped.
-		var party_size: int = _party_state.living_members().size()
-		var fitting := groups.filter(func(g: Array): return g.size() <= party_size)
-		types.assign((fitting if not fitting.is_empty() else [[groups[0][0]]]).pick_random())
+		types.assign(encounter_pool(_depth, _party_state.living_members().size()).pick_random())
 	var state = CombatState.new(_party_state, types)
 	if opening_spider:
 		for foe in state.foes:
@@ -585,6 +585,17 @@ func _loot_purse(foe) -> void:
 	_party_state.supplies.changed.emit()
 	_expedition.gold_found += coins
 	_show_message("The %s's purse: %d gold." % [foe.name.to_lower(), coins])
+
+
+## The enemy groups a party of `party_size` can meet at `depth` (#49).
+static func encounter_pool(depth: int, party_size: int) -> Array:
+	var groups: Array = ENCOUNTER_GROUPS.get(clampi(depth, 1, ENCOUNTER_GROUPS.size()))
+	var cap := party_size + (1 if party_size >= PartyState.MAX_MEMBERS and depth >= 3 else 0)
+	var fitting := groups.filter(func(g: Array): return g.size() <= cap)
+	if fitting.is_empty():
+		return [[groups[0][0]]]
+	var close := fitting.filter(func(g: Array): return g.size() >= party_size - 1)
+	return close if not close.is_empty() else fitting
 
 
 ## Ends the expedition (#17) and shows what it gained and cost.
