@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Texture2D" path="res://art/props/cave-room-props-v1/cold-camp.png" id="1"]
+
+[node name="ColdCamp" type="Node3D"]
+
+[node name="Sprite" type="Sprite3D" parent="."]
+position = Vector3(0, 0.7, 0)
+pixel_size = 0.0125
+billboard = 2
+shaded = true
+texture_filter = 0
+alpha_cut = 1
+alpha_scissor_threshold = 0.5
+texture = ExtResource("1")

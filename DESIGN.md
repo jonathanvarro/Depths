@@ -272,6 +272,8 @@ Use a library of coordinated wall, floor, and ceiling textures applied to reusab
 
 **Opening equipment/chests (#70):** [tutorial art handoff](docs/opening-tutorial-art.md) supplies a broken-knife icon, damaged padded-armour icon and coordinated closed/open/empty wooden chest states. Chest drawings share a 128px canvas, floor pivot and palette; the knife's existing resource uses its damaged image. The other assets are ready for their implementation hooks, without new armour, loot or lighting rules.
 
+**Cave event props (#75):** [room-prop art handoff](docs/cave-room-prop-art.md) supplies a torn pack with closed/searched states, a small worn pale idol, still black water on a horizontal floor card and a cold hearth with torn bedroll/tin cup. Reusable 128px scenes match the existing event clues. Select by event identity during visible-contents work (#46); the art adds no rewards, safety, light, collisions or event rules.
+
 The first test set lives in `art/textures/stone-v1/`: two 64 × 64 wall variants, one floor, one ceiling, and shared Godot materials. The existing prototype now uses them. This is a production-direction test, not a final resolution commitment. Windows import and a rendered corridor were checked; larger-room tiling, physical texel-scale consistency, seam cleanup, and phone appearance still need review.
 
 ### Environment-specific doors and stairs

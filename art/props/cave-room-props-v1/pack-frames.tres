@@ -1,0 +1,11 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3]
+
+[ext_resource type="Texture2D" path="res://art/props/cave-room-props-v1/abandoned-pack.png" id="1"]
+[ext_resource type="Texture2D" path="res://art/props/cave-room-props-v1/abandoned-pack-searched.png" id="2"]
+
+[resource]
+animations = [{
+"frames": [{"duration": 1.0, "texture": ExtResource("1")}], "loop": false, "name": &"unsearched", "speed": 1.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("2")}], "loop": false, "name": &"searched", "speed": 1.0
+}]

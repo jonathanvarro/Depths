@@ -1,0 +1,160 @@
+{
+  "issue": 75,
+  "canvas": [
+    128,
+    128
+  ],
+  "assets": [
+    {
+      "file": "abandoned-pack.png",
+      "bounds": [
+        12,
+        31,
+        116,
+        121
+      ],
+      "visible_colours": 24
+    },
+    {
+      "file": "abandoned-pack-searched.png",
+      "bounds": [
+        12,
+        31,
+        116,
+        121
+      ],
+      "visible_colours": 24
+    },
+    {
+      "file": "pale-idol.png",
+      "bounds": [
+        35,
+        17,
+        94,
+        121
+      ],
+      "visible_colours": 16
+    },
+    {
+      "file": "cold-camp.png",
+      "bounds": [
+        8,
+        81,
+        120,
+        121
+      ],
+      "visible_colours": 24
+    },
+    {
+      "file": "still-pool.png",
+      "bounds": [
+        8,
+        12,
+        120,
+        116
+      ],
+      "visible_colours": 15
+    }
+  ],
+  "registration": {
+    "abandoned-pack": {
+      "source_bounds": [
+        138,
+        153,
+        1009,
+        909
+      ],
+      "root_x": 573.5,
+      "scale": 0.11912943871706758,
+      "offset": [
+        -4,
+        13
+      ],
+      "pivot": [
+        64,
+        120
+      ]
+    },
+    "abandoned-pack-searched": {
+      "source_bounds": [
+        138,
+        152,
+        1011,
+        910
+      ],
+      "root_x": 574.5,
+      "scale": 0.11912943871706758,
+      "offset": [
+        -4,
+        13
+      ],
+      "pivot": [
+        64,
+        120
+      ]
+    },
+    "pale-idol": {
+      "source_bounds": [
+        402,
+        385,
+        854,
+        1186
+      ],
+      "offset": [
+        35,
+        17
+      ],
+      "pivot": [
+        64,
+        120
+      ]
+    },
+    "cold-camp": {
+      "source_bounds": [
+        54,
+        788,
+        1207,
+        1199
+      ],
+      "offset": [
+        8,
+        81
+      ],
+      "pivot": [
+        64,
+        120
+      ]
+    },
+    "still-pool": {
+      "source_bounds": [
+        69,
+        114,
+        1194,
+        1161
+      ],
+      "offset": [
+        8,
+        12
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "orientation": "top-down, horizontal world plane"
+    }
+  },
+  "failures": [],
+  "pack_shared_colours": 24,
+  "sha256": {
+    "art/source/cave-room-props-v1/cold-camp.png": "0471b70fbefdc9359f9875be98ed04f42717a886c55053d3527ff1d3f939f966",
+    "art/source/cave-room-props-v1/idol.png": "89c736bf7dfca3b4a24917a94077cd9cd90af6196db94455af763a9ec078bc27",
+    "art/source/cave-room-props-v1/pack-searched.png": "eec34c2ce799e2653b4bf8901feec3dd1239c5afcd89724d6a039b32a36e30ef",
+    "art/source/cave-room-props-v1/pack.png": "17c130c97f26073358023b65cd43f268871ccaa52c9de4e54c625a905735932d",
+    "art/source/cave-room-props-v1/pool.png": "4c455a345d03a8d2f17316e90f7c8509de4621f9294ffed4f1a52a5443a6bfe1",
+    "art/props/cave-room-props-v1/abandoned-pack-searched.png": "17bef6dfa0c02fa21856f541fa4887b84293c03ad51150ac75e941c233fa2c5f",
+    "art/props/cave-room-props-v1/abandoned-pack.png": "ec2053a1e7a65c1aecfce358036f6b0e3d5ce3337fb2a4796861d654a53dab17",
+    "art/props/cave-room-props-v1/cold-camp.png": "22cd2ec50246700010779fb9f08b7a132c1595cd4dd9da47235abf32ea1ea8fc",
+    "art/props/cave-room-props-v1/pale-idol.png": "96cc630105958f961132bf4798b6d3df7c5216587448c715bd89eef38cd26365",
+    "art/props/cave-room-props-v1/still-pool.png": "aed767dcc6c3e8de482162bec38333b5bb61d015166c23eba7e52ca94d088020"
+  }
+}

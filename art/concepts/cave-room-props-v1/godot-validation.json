@@ -1,0 +1,18 @@
+{
+  "captures": 20,
+  "checks": 85,
+  "failures": [],
+  "godot": "4.7.2",
+  "integration": "Reusable art scenes only; event placement and state wiring remain #46.",
+  "physical_phone_test": false,
+  "viewports": [
+    [
+      1280,
+      720
+    ],
+    [
+      1278,
+      590
+    ]
+  ]
+}

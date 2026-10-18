@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-17 – ChatGPT
+- Did: #75 supplies abandoned pack / searched pack, pale idol, still pool and cold campsite art. Five transparent 128px exports and reusable scenes are in art/props/cave-room-props-v1; full event/resource mapping and placement/state contract are in docs/cave-room-prop-art.md. Exact built-in image_gen prompts, source masters, palette/registration/hashes, dark/light boards and 20 normal/dim cave captures are preserved. Export checks and all 85 Godot 4.7.2 checks pass at desktop/landscape-phone sizes.
+- Next: #46 should choose props by actual event resource identity and wire the pack's set_searched(bool) to a resolved search. Put the small idol on a niche support surface; keep the pool horizontal on the existing floor. Runtime scenes are ready; live placement remains separate.
+- Watch out: Cold camp emits no light and is distinct from a lit/recruitment campsite. Pool is opaque water, not a descent pit. No loot, healing, time, collision or event mechanics changed; inspecting/leaving/prodding alone must not mark a pack searched. Source/review folders are excluded from runtime import. Physical iPhone and live placement/visibility still need integration checks. Claude's latest combat commit and notes were preserved.
+
 ## 2026-10-17 – Claude
 - Did: #60 decisions recorded (DESIGN.md; follow-ups #72 rows, #73 decide before a fight, #74 light as a weapon) and the first combat pass: enemy intentions (action, not target) shown on each enemy's tag; goblin heavy blow (x2, fully blocked by Defend, never twice running); rats show "darting back" before fleeing; spiders may re-web. Retuned rat/spider/goblin to about 2/3/4-5 rounds for lone Mara.
 - Next: Owner playtest of fight feel; rows (#72) once recruits (#41) exist.
