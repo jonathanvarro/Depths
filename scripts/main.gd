@@ -297,6 +297,7 @@ var _hint_mode := ""  # "act", "pack" or "ok" (see _show_hint)
 var _hint_queue: Array = []  # a card waiting for an "ok" card to close
 var _chest: Control  # chest_screen.gd
 var _web2_at := -1  # step she broke the second web
+var _starting_weapon: Equipment  # the hero's broken weapon, dropped in the tutorial
 var _trip_at := -1
 var _tripped := false
 var _spider_swings := 0
@@ -343,6 +344,10 @@ func _ready() -> void:
 	_camp_state.day_passed.connect(_on_camp_day_passed)
 	print("Floor seed: ", _site_seed)
 	_party_state = PartyState.new()
+	# The hero chosen on the title's hero screen (#95).
+	if SaveGame.new_game_hero != "" and ResourceLoader.exists(SaveGame.new_game_hero):
+		starting_hero = load(SaveGame.new_game_hero)
+	SaveGame.new_game_hero = ""
 	_party_state.add_member(starting_hero)
 	# The opening starts with nothing; she's restocked at camp (#69).
 	if use_debug_layout or not play_opening:
@@ -392,6 +397,11 @@ func _ready() -> void:
 		# in the same maze (#45).
 		_site_seed = saved["seed"]
 		_first_seed = _site_seed
+		if saved.has("hero") and ResourceLoader.exists(saved["hero"]):
+			starting_hero = load(saved["hero"])
+			_party_state.members.clear()
+			_party_state.add_member(starting_hero)
+			_refresh_cards()
 		_begin_opening()
 	elif use_debug_layout or not play_opening:
 		_go_to_floor(1, Arrival.OPENING)
@@ -736,6 +746,7 @@ func _camp_loop(reward := 0, note := "") -> void:
 		_camp.announce("The king's quartermaster pays the contract: %d gold." % reward)
 	_save_now()  # autosave on returning to camp (#45)
 	var start_depth: int = await _camp.cave_chosen
+	_party_state.field_bind_used = false  # the field medic's binding: once a trip
 	_camp.visible = false
 	_camp_state.leave_behind(_party_state)
 	_expedition = Expedition.new(_party_state, _expedition.number + 1)
@@ -792,7 +803,7 @@ func save_and_exit() -> void:
 ## so it happens again after loading.
 func _save_now() -> void:
 	if _in_opening:
-		SaveGame.write({"opening": true, "seed": _first_seed})
+		SaveGame.write({"opening": true, "seed": _first_seed, "hero": starting_hero.resource_path})
 		return
 	if _ending and not _camp.visible and not _wipe_pending:
 		return  # the results screen: the camp saves next
@@ -914,8 +925,10 @@ func _add_room_props() -> void:
 		return
 	for cell in _map.events:
 		var event: RoomEvent = _map.events[cell]
-		if event.kind == DungeonMap.Content.TRAP or _map.solid.has(cell):
+		if _map.solid.has(cell):
 			continue
+		if event.kind == DungeonMap.Content.TRAP and not _party_state.has_trait("keen_eyes"):
+			continue  # hidden - unless Mara's keen eyes spot it (#95)
 		var node: Node3D = event.prop.instantiate() if event.prop else _placeholder_prop(event.kind)
 		if node == null:
 			continue
@@ -957,6 +970,26 @@ func _placeholder_prop(kind: int) -> Node3D:
 			figure.mesh = capsule
 			figure.position.y = 0.72
 			root.add_child(figure)
+		DungeonMap.Content.TRAP:  # only for keen eyes: a rusted spike plate
+			var plate := MeshInstance3D.new()
+			var board := BoxMesh.new()
+			board.size = Vector3(0.9, 0.04, 0.9)
+			var rust := StandardMaterial3D.new()
+			rust.albedo_color = Color(0.5, 0.25, 0.15)
+			board.material = rust
+			plate.mesh = board
+			plate.position.y = 0.02
+			root.add_child(plate)
+			for i in 9:
+				var spike := MeshInstance3D.new()
+				var cone := CylinderMesh.new()
+				cone.top_radius = 0.0
+				cone.bottom_radius = 0.04
+				cone.height = 0.18
+				cone.material = rust
+				spike.mesh = cone
+				spike.position = Vector3(-0.3 + (i % 3) * 0.3, 0.12, -0.3 + (i / 3) * 0.3)
+				root.add_child(spike)
 		DungeonMap.Content.REST_SPOT:
 			for i in 7:
 				var rock := MeshInstance3D.new()
@@ -1198,7 +1231,8 @@ func _begin_opening() -> void:
 	_opening = OpeningGenerator.generate(_site_seed)
 	var hero: Companion = _party_state.members[0]
 	# Hurt, bleeding and filthy, but panic is held back until later (#56, #69).
-	hero.health = OPENING_START_HEALTH
+	hero.health = roundi(hero.effective_max_health() * OPENING_START_HEALTH / 20.0)  # half, as Mara's 10/20
+	_starting_weapon = hero.weapon
 	hero.strain = OPENING_START_STRAIN
 	hero.strain_locked = true
 	hero.min_health = OPENING_MIN_HEALTH
@@ -1315,7 +1349,7 @@ func _on_opening_step(_cell: Vector2i) -> void:
 		_say("bleeding", true, true)
 	# Explain the bleeding once nothing more pressing is on screen.
 	if not _hints_done.has("bleeding") and _said.has("bleeding") and _hint in ["", "turn"]:
-		_show_hint("%s is bleeding - see the red drop on her card. She loses health as she walks, so don't linger: find a way out." % hero.display_name, "bleeding", "ok")
+		_show_hint("%s is bleeding - see the red drop on %s card. %s loses health as %s walks, so don't linger: find a way out." % [hero.display_name, hero.pronouns[2], hero.pronouns[0].capitalize(), hero.pronouns[0]], "bleeding", "ok")
 	if _steps_taken == _trip_at:
 		_trip()
 	# Lost and hurrying: now and then at a junction, and once to find the exit.
@@ -1816,7 +1850,7 @@ func _start_opening_panic() -> void:
 	hero.strain_locked = false
 	hero.strain = OPENING_PANIC_STRAIN
 	_on_party_state_changed()
-	_show_hint("That was your last torch. In the dark, %s panics: her hands shake, so she hits less often and less hard. Light, food and rest calm her." % hero.display_name, "panic", "ok")
+	_show_hint("That was your last torch. In the dark, %s panics: %s hands shake, so %s hits less often and less hard. Light, food and rest calm %s." % [hero.display_name, hero.pronouns[2], hero.pronouns[0], hero.pronouns[1]], "panic", "ok")
 	_hints_done["panic_at"] = _steps_taken
 	_say("panic", true)
 
@@ -1844,10 +1878,10 @@ func _refresh_tutorial_hint() -> void:
 		key = "equip"
 		text = "%s to open your pack." % open_pack
 		inside = "Equip the iron sword."
-	elif BROKEN_KNIFE in supplies.gear:
+	elif _starting_weapon and _starting_weapon in supplies.gear:
 		key = "drop"
 		text = "%s to open your pack." % open_pack
-		inside = "Drop the broken knife. It's no use now."
+		inside = "Drop the %s. It's no use now." % _starting_weapon.display_name.to_lower()
 	elif not supplies.torch_lit() and not _hints_done.has("light") and supplies.count(TORCH) > 0:
 		key = "light"
 		text = "It's too dark to go on. %s to open your pack." % open_pack

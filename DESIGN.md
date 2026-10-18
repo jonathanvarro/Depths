@@ -249,6 +249,13 @@ Suggested initial presentation: one campsite screen with a few selectable activi
 - **Unpicked heroes** don't exist in that game.
 - **Proposed main-hero traits** (on #95): Mara's **Keen eyes** (traps show), Corin's **Grudge** (+1 damage against goblins), the healer's **Field medic** (healing items heal more; one dressing-free binding per expedition).
 - **Portraits** are requested in #103.
+- *Built (2026-10-18):*
+  - **New game asks "Who wakes in the dark?"** Each hero's card shows a portrait, role, one-line backstory and trait. The chosen hero starts alone; the others don't exist in that game.
+  - **Mara, the rogue:** 80% to hit, acts early, a sling when unarmed. **Keen eyes:** traps show in their rooms.
+  - **Corin, the brawler:** 26 health, starts with a broken short sword. **Grudge:** +1 damage against goblins. Crude, angry lines.
+  - **Sister Alwen, the healer:** 18 health, starts with a cracked walking staff. **Field medic:** healing items heal half again as much, and once a trip she binds an injury without a dressing (a button in the Pack).
+  - **The opening** starts each at half health, with their own lines, and the drop step names their broken weapon. Hints use each hero's pronouns.
+  - Corin and Alwen use recruit faces as placeholders until #103.
 
 The suggested retreat flow is to return through the dungeon to its entrance before reaching camp, with discovered shortcuts potentially easing later returns. Travel costs, escape exceptions, refuge services, recovery timing, and prices still need design decisions. Rest spots inside the dungeon remain distinct from the outside refuge.
 

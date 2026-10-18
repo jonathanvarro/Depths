@@ -48,6 +48,30 @@ func luck() -> Array:
 	return [best.luck, best.display_name] if best else [0.0, ""]
 
 
+## A living hero has this main-hero trait (#95).
+func has_trait(id: String) -> bool:
+	return living_members().any(func(m: Companion): return m.trait_id == id)
+
+
+## Field medic (#95): healing heals half again as much with them along.
+const FIELD_MEDIC_BONUS := 1.5
+## Field medic's binding without a dressing: once per expedition.
+var field_bind_used := false
+
+
+func can_field_bind(hero: Companion) -> bool:
+	return has_trait("field_medic") and not field_bind_used and not hero.hindering_injuries().is_empty()
+
+
+func field_bind(hero: Companion) -> bool:
+	if not can_field_bind(hero):
+		return false
+	field_bind_used = true
+	hero.dress_injury()
+	changed.emit()
+	return true
+
+
 func free_slots() -> int:
 	return MAX_MEMBERS - members.size()
 
@@ -179,11 +203,11 @@ func use_item(item: SupplyItem, in_combat := false) -> String:
 			supplies.take(item)
 			for member in living_members():
 				member.eat()
-				member.add_effect_over_time("health", item.amount, item.duration)
+				member.add_effect_over_time("health", _healing(item.amount), item.duration)
 		SupplyItem.Effect.HEAL_ONE:
 			var target := most_hurt()
 			supplies.take(item)
-			target.add_effect_over_time("health", item.amount, item.duration)
+			target.add_effect_over_time("health", _healing(item.amount), item.duration)
 		SupplyItem.Effect.DRESS_INJURY:
 			supplies.take(item)
 			first_undressed_injured().dress_injury()
@@ -192,6 +216,10 @@ func use_item(item: SupplyItem, in_combat := false) -> String:
 	if not in_combat:  # in a fight, the round's time covers it
 		advance_time(item.use_time)
 	return item.use_message
+
+
+func _healing(amount: int) -> int:
+	return roundi(amount * FIELD_MEDIC_BONUS) if has_trait("field_medic") else amount
 
 
 ## Moving between floors: every effect with a duration finishes now, so the

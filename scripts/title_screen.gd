@@ -18,6 +18,7 @@ const GAME_SCENE := "res://scenes/main.tscn"
 var _margin: MarginContainer
 var _begin: Button
 var _settings_screen: Control
+var _hero_select: Control  # hero_select.gd (#95)
 
 
 func _ready() -> void:
@@ -65,9 +66,8 @@ func _ready() -> void:
 			get_tree().change_scene_to_file(GAME_SCENE))
 		column.add_child(resume)
 	_begin = _menu_button("New game (replaces your save)" if has_save else "Begin expedition", 72 if phone else 56, not has_save)
-	_begin.pressed.connect(func():
-		SaveGame.delete()
-		get_tree().change_scene_to_file(GAME_SCENE))
+	# A new game starts by choosing who wakes in the dark (#95).
+	_begin.pressed.connect(func(): _hero_select.open())
 	column.add_child(_begin)
 	var settings := _menu_button("Settings", 72 if phone else 56, false)
 	settings.pressed.connect(func(): _settings_screen.open())
@@ -82,12 +82,15 @@ func _ready() -> void:
 	Settings.apply(get_tree())
 	_settings_screen = preload("res://scripts/settings_screen.gd").new()
 	add_child(_settings_screen)
+	_hero_select = preload("res://scripts/hero_select.gd").new()
+	add_child(_hero_select)
+	_hero_select.chosen.connect(_start_new_game)
 	_apply_margins()
 	get_viewport().size_changed.connect(_apply_margins)
 	_begin.grab_focus()
 	# For checking exported builds: `Depths.exe -- --begin` skips the title.
 	if "--begin" in OS.get_cmdline_user_args():
-		_begin.pressed.emit.call_deferred()
+		_start_new_game.call_deferred(_hero_select.HEROES[0])
 
 
 func _apply_margins() -> void:
@@ -128,3 +131,11 @@ func _menu_button(text: String, height: int, primary: bool) -> Button:
 	focus.set_border_width_all(2)
 	button.add_theme_stylebox_override("focus", focus)
 	return button
+
+
+## A new game as `hero_path`: the old save goes, the chosen hero wakes.
+func _start_new_game(hero_path: String) -> void:
+	var SaveGame := preload("res://scripts/save_game.gd")
+	SaveGame.delete()
+	SaveGame.new_game_hero = hero_path
+	get_tree().change_scene_to_file(GAME_SCENE)

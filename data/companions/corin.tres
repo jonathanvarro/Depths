@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="Companion" format=3]
+
+[ext_resource type="Script" path="res://scripts/companion.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/portraits/recruit-roster-v1/brawler-b/preview.png" id="2"]
+[ext_resource type="Resource" path="res://data/portraits/recruit-roster-v1/brawler-b.tres" id="3"]
+[ext_resource type="Resource" path="res://data/dialogue/corin.tres" id="4"]
+[ext_resource type="Resource" path="res://data/gear/broken_short_sword.tres" id="5"]
+
+[resource]
+script = ExtResource("1")
+founder = true
+main_hero = true
+portrait_set = ExtResource("3")
+dialogue = ExtResource("4")
+weapon = ExtResource("5")
+portrait = ExtResource("2")
+display_name = "Corin"
+role = "Brawler"
+motive = "A soldier of the king's vanguard. The goblins ambushed his company in the cave; he means to make them pay."
+personality = "Bald, crude, quick to anger. Sarcastic, and sometimes cruel to goblins."
+vulnerability = "His temper."
+backstory = "Vanguard soldier. Goblins killed his company; he wants every one of them dead."
+trait_id = "grudge"
+trait_name = "Grudge"
+trait_text = "+1 damage against goblins"
+pronouns = PackedStringArray("he", "him", "his")
+max_health = 26
+health = 26
+attack_min = 2
+attack_max = 4
+accuracy = 0.65
+initiative = 9
+strain = 30.0

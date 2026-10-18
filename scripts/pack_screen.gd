@@ -89,6 +89,17 @@ func refresh() -> void:
 			var state := "dressed until camp" if injury in member.dressed else "untreated"
 			var line := _label("%s: %s (%s). %s" % [member.display_name, injury.display_name, state, injury.description], 17, COLOR_DIM_TEXT)
 			line.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+			if _party.can_field_bind(member) and not injury in member.dressed:
+				var medic: Companion = _party.living_members().filter(func(m: Companion): return m.trait_id == "field_medic")[0]
+				var bind := _small_button("%s binds it" % medic.display_name.split(" ")[-1])
+				bind.custom_minimum_size = Vector2(170, 44)
+				bind.tooltip_text = "Field medic: once a trip, without a dressing"
+				var patient := member
+				bind.pressed.connect(func():
+					_party.field_bind(patient)
+					used.emit("%s binds %s's wound without a dressing." % [medic.display_name, patient.display_name])
+					refresh())
+				_injuries.add_child(bind)
 			_injuries.add_child(line)
 	if not any_injury:
 		_injuries.add_child(_label("No injuries.", 17, COLOR_DIM_TEXT))

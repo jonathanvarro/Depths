@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-18 – Claude
+- Did: #95 starting hero choice. Hero screen on New game (scripts/hero_select.gd), Corin and Sister Alwen (data, dialogue libraries, broken starting weapons, placeholder recruit faces), Mara as rogue; traits keen_eyes / grudge / field_medic; opening adapts (half health, pronouns, the hero's own broken weapon). tools/hero_check.gd; opening_playthrough.gd takes a hero (5th arg).
+- Next: #97 research is in (owner): read it and settle stats/XP/monsters; #103 portraits.
+- Watch out: `Depths.exe -- --begin` starts as Mara directly. Companion.pronouns is used for hint text; new heroes need it.
+
 ## 2026-10-18 – ChatGPT
 - Did: #97 researched stats/monsters/XP against current code and eight original developer/rules sources. Added docs/stats-monsters-xp-research.md: five-attribute derivation, role/trait mapping, 18-entry staged catalogue with numbers/intents/drops/threat budgets, levels 1–4, repeat-learning limits, catch-up/wipe rules, armour candidates and owner decisions. Added tools/stats_research_probe.gd and raw JSON for 36,000 controlled live-combat trials; linked the report from DESIGN.md and marked the prior economy paper historical. Checked research arithmetic, local links, tables, Godot script parsing and simulation completion.
 - Next: Owner chooses the attribute/growth model, repeat-XP limit, replacement policy, armour scope and monster subset. Claude can then implement under #47/#93/#48; #101 remains an idea, not approved by the report.

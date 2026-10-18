@@ -376,6 +376,8 @@ func hero_attack(hero: Companion, target: Foe) -> Dictionary:
 	elif hit:
 		var reach := hero.attack_range()
 		var damage := maxi(1, roundi(rng.randi_range(reach.x, reach.y) * hero.effectiveness()))
+		if hero.trait_id == "grudge" and target.type.display_name.begins_with("Goblin"):
+			damage += 1  # Corin's grudge (#95)
 		if target.shielded:
 			damage = maxi(1, damage / 2)
 		if target.in_back() and guard_wall_up():

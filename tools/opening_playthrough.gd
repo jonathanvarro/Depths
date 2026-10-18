@@ -142,7 +142,7 @@ func _do_pack_step() -> void:
 	await _snap_once("pack_" + key)
 	match key:
 		"equip": _press_in_row("Iron sword", "Equip")
-		"drop": _press_in_row("Broken knife", "Drop")
+		"drop": _press_in_row(main._starting_weapon.display_name, "Drop")
 		"light", "relight": _press_in_row("Torch", "Use")
 		"draught": _press_in_row("Restorative draught", "Use")
 	await process_frame
@@ -217,6 +217,9 @@ func _initialize() -> void:
 	tag = args[0]
 	S = args[1]
 	force = args.size() > 3 and args[3] == "force"
+	# Optional 5th arg: the starting hero to choose (#95), e.g. corin.
+	if args.size() > 4:
+		load("res://scripts/save_game.gd").new_game_hero = "res://data/companions/%s.tres" % args[4]
 	main = load("res://scenes/main.tscn").instantiate()
 	main.floor_seed = int(args[2]) if args.size() > 2 else 11
 	main.simulate_phone_safe_area = tag == "phone"
@@ -226,7 +229,7 @@ func _initialize() -> void:
 	await create_timer(5.0).timeout
 	var hero: Companion = main._party_state.members[0]
 	var supplies = main._party_state.supplies
-	check("starts at 10 health, bleeding, blood and dirt", hero.health == 10 and hero.bleeding and "blood" in hero.appearance and "dirt" in hero.appearance)
+	check("starts at half health, bleeding, blood and dirt", hero.health == roundi(hero.max_health / 2.0) and hero.bleeding and "blood" in hero.appearance and "dirt" in hero.appearance, "%s %d/%d" % [hero.display_name, hero.health, hero.max_health])
 	check("only Mara's card shows", main._cards.filter(func(c): return c.visible).size() == 1)
 	check("starts with no supplies", supplies.items.filter(func(i): return supplies.count(i) > 0).is_empty())
 	check("bodies and fire are solid", main._opening_body_cells().all(func(c): return main._map.solid.has(c)) and main._map.solid.has(main._opening_fire_cell()))
@@ -251,7 +254,7 @@ func _initialize() -> void:
 		check("never stood on a body", main._party.cell != body)
 	check("both bodies searched: 2 torches + sword", supplies.count(main.TORCH) + (1 if supplies.torch_lit() else 0) == 2 and (main.IRON_SWORD in supplies.gear or hero.weapon == main.IRON_SWORD))
 	await _settle()  # equip / drop / light via pack cards
-	check("sword equipped, knife dropped, torch lit", hero.weapon == main.IRON_SWORD and main.BROKEN_KNIFE not in supplies.gear and supplies.torch_lit())
+	check("sword equipped, broken weapon dropped, torch lit", hero.weapon == main.IRON_SWORD and main._starting_weapon not in supplies.gear and supplies.torch_lit())
 	await _snap("torch_lit")
 	# Out through the web first: the wandering below never re-enters the room.
 	await _walk_to(web + Vector2i(1, 0))

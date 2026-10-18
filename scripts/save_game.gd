@@ -14,6 +14,8 @@ const VERSION := 1
 
 ## Set by the title screen's Continue before the game scene loads.
 static var continue_requested := false
+## The starting hero chosen for a new game (#95), as a resource path.
+static var new_game_hero := ""
 
 
 static func exists() -> bool:

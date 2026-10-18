@@ -54,6 +54,16 @@ const StrainRules := preload("res://scripts/strain.gd")
 ## A main hero (#83): falling leaves them unconscious, not dead - carried
 ## by the party until a draught or a rest revives them.
 @export var main_hero := false
+## A main hero's special trait (#95), one recruits never get:
+## "keen_eyes" (traps show), "grudge" (+1 damage against goblins),
+## "field_medic" (healing works better; a dressing-free binding per trip).
+@export var trait_id := ""
+@export var trait_name := ""
+@export var trait_text := ""
+## One line shown when choosing a starting hero.
+@export_multiline var backstory := ""
+## Subject, object, possessive - for text written about them.
+@export var pronouns := PackedStringArray(["they", "them", "their"])
 ## Combat row (#72): "front" takes melee and shields the back; "back" is
 ## safe from melee but attacks only with reach. Kept between fights.
 @export_enum("front", "back") var row := "front"

@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="Companion" format=3]
+
+[ext_resource type="Script" path="res://scripts/companion.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/portraits/recruit-roster-v1/warden-c/preview.png" id="2"]
+[ext_resource type="Resource" path="res://data/portraits/recruit-roster-v1/warden-c.tres" id="3"]
+[ext_resource type="Resource" path="res://data/dialogue/alwen.tres" id="4"]
+[ext_resource type="Resource" path="res://data/gear/cracked_staff.tres" id="5"]
+
+[resource]
+script = ExtResource("1")
+founder = true
+main_hero = true
+portrait_set = ExtResource("3")
+dialogue = ExtResource("4")
+weapon = ExtResource("5")
+portrait = ExtResource("2")
+display_name = "Sister Alwen"
+role = "Healer"
+motive = "A field nurse who came down with the vanguard. Too late to save them; not too late to get out."
+personality = "Calm in a crisis, gentle, stubborn. Counts her breaths."
+vulnerability = "The ones she couldn't save."
+backstory = "Field nurse of the vanguard. She reached her companions too late."
+trait_id = "field_medic"
+trait_name = "Field medic"
+trait_text = "Healing items heal half again as much; once a trip she binds an injury without a dressing"
+pronouns = PackedStringArray("she", "her", "her")
+max_health = 18
+health = 18
+attack_min = 1
+attack_max = 3
+accuracy = 0.65
+initiative = 10
+strain = 30.0

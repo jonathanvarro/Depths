@@ -202,6 +202,10 @@ Templates > Download and Install; already installed on the owner's PC).
   `route_open()`, `buy_route()`; CampScreen `cave_chosen(start_depth)`.
   Room props (#46): `RoomEvent.prop`, main.gd `_add_room_props()`.
   `tools/batch_check.gd`.
+- Starting heroes (#95): `scripts/hero_select.gd` (HEROES list),
+  `data/companions/{mara,corin,alwen}.tres`, Companion `trait_id`,
+  `trait_name`, `trait_text`, `backstory`, `pronouns`; SaveGame
+  `new_game_hero`; PartyState `has_trait`, `field_bind`.
 - `scripts/chest_screen.gd` – chest window beside the pack: drag (set_drag_
   forwarding), tap, or the take-all icon button; `took` signal.
 - `scripts/pack_screen.gd` – the Pack screen (Pack button under the minimap,
