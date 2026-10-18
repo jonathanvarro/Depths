@@ -2581,8 +2581,7 @@ func _safe_area_insets() -> Vector4:
 	return SafeArea.insets(get_viewport(), simulate_phone_safe_area)
 
 
-## Full-screen map: title, the explored floor scaled to fit, and a legend in
-## the environment's own words. Tapping anywhere closes it.
+## Full-screen sketch with self-explanatory symbols; tapping anywhere closes it.
 func _build_full_map(ui: CanvasLayer) -> void:
 	_full_map = Control.new()
 	_full_map.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -2629,49 +2628,12 @@ func _build_full_map(ui: CanvasLayer) -> void:
 	_full_map_view.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	column.add_child(_full_map_view)
 
-	var legend := HFlowContainer.new()
-	legend.alignment = FlowContainer.ALIGNMENT_CENTER
-	legend.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	legend.add_theme_constant_override("h_separation", 20)
-	column.add_child(legend)
-	for entry in [
-			["You",Minimap.GLYPHS.party],["Closed",Minimap.GLYPHS.closed],
-			["Blocked",Minimap.GLYPHS.blocked],["Down",Minimap.GLYPHS.down],["Up",Minimap.GLYPHS.up],
-			["Chest",Minimap.GLYPHS.chest],["Searched",Minimap.GLYPHS["chest-empty"]],
-			["Rest",Minimap.GLYPHS.rest],["Danger",Minimap.GLYPHS.danger],["Object",Minimap.GLYPHS.object],["Unexplored edge",Minimap.GLYPHS.frontier]]:
-		legend.add_child(_legend_item(entry[0], entry[1]))
-
 	var hint := Label.new()
 	hint.text = "Tap anywhere or press M to close"
 	hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	hint.add_theme_color_override("font_color", Color(1, 1, 1, 0.5))
 	column.add_child(hint)
 	_full_map.visible = false
-
-
-func _legend_item(text: String, texture: Texture2D) -> Control:
-	var row := HBoxContainer.new()
-	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	var swatch := TextureRect.new()
-	swatch.texture=texture
-	swatch.expand_mode=TextureRect.EXPAND_IGNORE_SIZE
-	swatch.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	swatch.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
-	swatch.custom_minimum_size = Vector2(20, 20)
-	swatch.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	swatch.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	var mount:=PanelContainer.new()
-	var paper:=StyleBoxFlat.new()
-	paper.bg_color=Color("d6c3a1")
-	paper.set_content_margin_all(2)
-	mount.add_theme_stylebox_override("panel",paper)
-	mount.mouse_filter=Control.MOUSE_FILTER_IGNORE
-	mount.add_child(swatch)
-	row.add_child(mount)
-	var label := Label.new()
-	label.text = text
-	row.add_child(label)
-	return row
 
 
 ## Portrait cards along the bottom-left, one per party slot.

@@ -78,7 +78,18 @@ func _hash_point(v: Vector2i) -> int:
 
 func _vertex(v: Vector2i) -> Vector2:
 	var n:=_hash_point(v)
-	return Vector2(v)+Vector2(float(n%17)/16.0-.5,float(int(n/17)%17)/16.0-.5)*.035
+	return Vector2(v)+Vector2(float(n%17)/16.0-.5,float(int(n/17)%17)/16.0-.5)*.13
+
+## A drifting pen, rather than displaced route geometry. Endpoints are shared.
+func _stroke(a: Vector2, b: Vector2, outward: Vector2, seed_value: int) -> PackedVector2Array:
+	var points:=PackedVector2Array([a])
+	var bow: float=(float(seed_value%19)/18.0-.5)*.18
+	var wobble: float=(float(int(seed_value/19)%13)/12.0-.5)*.09
+	for step in range(1,6):
+		var t: float=step/6.0
+		points.append(a.lerp(b,t)+outward*(sin(PI*t)*bow+sin(TAU*t)*wobble))
+	points.append(b)
+	return points
 
 func _cache_geometry() -> void:
 	var key: int=hash([map.explored,map._rows,reveal_all])
@@ -104,7 +115,7 @@ func _cache_geometry() -> void:
 			var b:=_vertex(c+corners[(side+1)%4])
 			var n:=_hash_point(c+corners[side])
 			var outward:=Vector2(directions[side])
-			var points:=PackedVector2Array([a,a.lerp(b,.34)+outward*(float(n%11)/10.0-.5)*.035,a.lerp(b,.69)-outward*(float(n%7)/6.0-.5)*.025,b])
+			var points:=_stroke(a,b,outward,n)
 			# Unknown neighbours stay unknown, regardless of actual wall data.
 			var frontier: bool=not reveal_all and not map.explored.has(neighbor)
 			_edges.append({"cell":c,"points":points,"frontier":frontier,"outward":outward,"hatch":n%5==0})
@@ -133,13 +144,18 @@ func _draw() -> void:
 		var points:=PackedVector2Array()
 		for p in edge.points:points.append(origin+(p-Vector2(cells.position))*tile)
 		if edge.frontier:
-			draw_line(points[0],points[0].lerp(points[3],.30),Color(INK,.66),width,true)
-			draw_line(points[0].lerp(points[3],.51),points[0].lerp(points[3],.77),Color(INK,.48),width,true)
+			draw_polyline(points.slice(0,3),Color(INK,.66),width,true)
+			draw_polyline(points.slice(4,6),Color(INK,.48),width,true)
 		else:
 			draw_polyline(points,INK,width,true)
+			if full_view and edge.hatch and tile>=12:
+				# The occasional faint second pass leaves a little charcoal pressure.
+				var trace:=PackedVector2Array()
+				for p in points.slice(1,5):trace.append(p+edge.outward*tile*.045)
+				draw_polyline(trace,Color(INK,.24),1.0,true)
 			if full_view and edge.hatch and tile>=9:
-				var middle: Vector2=points[0].lerp(points[3],.5)
-				var tangent: Vector2=(points[3]-points[0]).normalized()
+				var middle: Vector2=points[3]
+				var tangent: Vector2=(points[-1]-points[0]).normalized()
 				for i in [-1,0,1]:
 					var p: Vector2=middle+tangent*i*tile*.17+edge.outward*tile*.16
 					draw_line(p,p+edge.outward*tile*.24+tangent*tile*.10,Color(INK,.32),1.0,true)
@@ -149,7 +165,7 @@ func _draw() -> void:
 		var content: int=map.content_at(cell)
 		if content!=0 and (reveal_all or map.discovered.has(cell) or content in SEEN_FROM_AFAR):
 			var used: bool=map.triggered.has(cell)
-			_draw_marker(marker_for(content,used),center,tile,Color(1,1,1,.58 if used else 1.0))
+			_draw_marker(marker_for(content,used),center,tile,Color(1,1,1,.58 if used and content!=2 else 1.0))
 		var door: int=map.door_at(cell)
 		if door==1 or door==3:_draw_marker(GLYPHS.closed if door==1 else GLYPHS.blocked,center,tile)
 	_draw_arrow(origin+(Vector2(party_cell-cells.position)+Vector2.ONE*.5)*tile,tile)
@@ -157,7 +173,7 @@ func _draw() -> void:
 
 func _draw_marker(texture: Texture2D, center: Vector2, tile: float, tint:=Color.WHITE) -> void:
 	if texture==null:return
-	var extent:=clampf(tile*.80,6.0,20.0)
+	var extent:=clampf(tile*.90,14.0 if full_view else 10.0,28.0 if full_view else 20.0)
 	draw_texture_rect(texture,Rect2(center-Vector2.ONE*extent*.5,Vector2.ONE*extent),false,tint)
 
 func _notes() -> Array:
@@ -188,7 +204,7 @@ func _draw_notes(notes: Array, rect: Rect2) -> void:
 		var text: String=notes[i].title
 		while text.length()>3 and font.get_string_size(text,HORIZONTAL_ALIGNMENT_LEFT,-1,14).x>rect.size.x-28:text=text.left(-2)+"…"
 		draw_string(font,Vector2(rect.position.x+24,y),text,HORIZONTAL_ALIGNMENT_LEFT,rect.size.x-24,14,INK)
-		if notes[i].used:draw_string(font,Vector2(rect.position.x+24,y+18),"searched" if notes[i].content==2 else "used",HORIZONTAL_ALIGNMENT_LEFT,rect.size.x-24,12,Color(INK,.72))
+		if notes[i].used and notes[i].content!=2:draw_string(font,Vector2(rect.position.x+24,y+18),"used",HORIZONTAL_ALIGNMENT_LEFT,rect.size.x-24,12,Color(INK,.72))
 
 func _visible_cells() -> Rect2i:
 	if not full_view:

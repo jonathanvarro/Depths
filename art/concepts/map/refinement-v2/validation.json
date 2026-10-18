@@ -1,0 +1,22 @@
+{
+  "captures": [
+    "symbols-desktop",
+    "symbols-desktop-larger",
+    "corner-desktop",
+    "generated-desktop",
+    "generated-desktop-larger",
+    "symbols-1278",
+    "symbols-1278-larger",
+    "corner-1278",
+    "generated-1278",
+    "generated-1278-larger",
+    "symbols-1334",
+    "symbols-1334-larger",
+    "corner-1334",
+    "generated-1334",
+    "generated-1334-larger"
+  ],
+  "checks": 48,
+  "failures": [],
+  "fixtures": "Symbols fixture explicitly revealed for visual review; generated floor2 separately. Physical iPhone untested."
+}

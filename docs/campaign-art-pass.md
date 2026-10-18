@@ -14,7 +14,7 @@ Artwork for #99, #103, #105, #96, #50 and #89 is exported and connected. Present
 | Equipment | Broken short sword and cracked staff in `art/items/campaign-v1/`, wired to gear resources. Padded coat now uses its existing icon; leather jerkin already had its correct icon. |
 | Feedback (#105) | Twelve replacement 32px PNGs at the existing `art/ui/visual105-v1/` paths: rush, recover, beat, webbed, venom, guard, drummed, armour, miss, heart, nerves and rest. Editable original SVGs are preserved. Existing slash/claw effects remain. |
 | Backlog (#96) | Main instantiates the existing held torch/lantern using actual supplies and places the existing daylight exit only in the opening. Held art hides during menus/camp/combat and does not consume fuel or advance time. |
-| Map (#50) | Both views use existing paper/glyphs with joined charcoal boundaries, stable irregular strokes, blank unknown regions and sparse notes. [Implementation guide](hand-drawn-map-design.md). Owner review of the new preview is pending. |
+| Map (#50) | Both views use existing paper/glyphs with joined charcoal boundaries, stable irregular strokes, blank unknown regions and sparse notes. [Implementation and owner refinement](hand-drawn-map-design.md): legend removed, clearer symbols and red-X searched chests. |
 | Camp (#89) | Two anonymous seated recruit silhouettes, a meal, drying cloth and local fire warmth. Presence follows available recruits. [Before/after review](camp-dressing-review.md). |
 
 ## Production contract
@@ -53,4 +53,4 @@ Previews: [hero choice](../art/concepts/campaign-v1/hero-choice-phone.png), [que
 
 ## Remaining work
 
-Owner review of the new map remains pending (#50). Physical iPhone rendering/touch and subjective audio listening were not tested. #99's drums, gate break and screech, and #96/#54's accepted live sound replacements remain unfinished. Existing darker sound auditions are unchanged. Later merchant portraits remain conditional on a second site. No new class, encounter, recruit or economy decisions are implied.
+Follow-up: the owner reviewed #50 as much improved and requested simpler marks and looser lines. The [map refinement](hand-drawn-map-design.md) implements that feedback, replacing the original legend and searched-chest mark. Physical iPhone rendering/touch and subjective audio listening were not tested. #99's drums, gate break and screech, and #96/#54's accepted live sound replacements remain unfinished. Existing darker sound auditions are unchanged. Later merchant portraits remain conditional on a second site. No new class, encounter, recruit or economy decisions are implied.

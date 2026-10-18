@@ -42,17 +42,18 @@ def main():
       'screech':path('M5 10 13 5v22l-8-5ZM18 10c5 3 5 9 0 12M23 5c9 6 9 16 0 22','none',PAPER,3),
       'cleaver':path('M12 4h16v15H12Z',RED,INK,2)+path('M12 7 4 26l4 3 9-10','none',PAPER,3)+path('M23 8h2','none',PAPER,2)
     }
+    chest=path('M4 14 5 27 28 26 28 14ZM4 14 7 6 24 5 28 14M5 14l22-1M15 13v7l4-1v-6','none','#362b20',2.3)
     maps={
       'party':path('M7 4 27 16 7 28l4-12Z',GOLD,'#362b20',2),
       'up':path('M8 28V5m9 23V5M8 10h9m-9 7h9m-9 7h9M25 19V4m-4 5 4-5 4 5','none','#362b20',2),
       'down':path('M8 28V5m9 23V5M8 10h9m-9 7h9m-9 7h9M25 4v24m-4-5 4 5 4-5','none','#362b20',2),
-      'rest':path('M4 12c0-6 8-6 8 0v12c0 5-8 5-8 0ZM12 8l16 1v18H8M5 16h5','none','#362b20',2),
-      'chest':path('M4 13h24v14H4ZM4 13l3-8h18l3 8M15 12v9h3v-9','none','#362b20',2),
-      'chest-empty':path('M4 16h24v12H4ZM4 12l2-9h22l-2 9ZM8 22h16','none','#655a46',2),
-      'closed':path('M7 3v26m18-26v26M3 15h26m-26 4h26','none','#362b20',2.5),
-      'blocked':path('M4 5 28 27M5 27 27 4M10 11l-6 5m17 4 7-3m-12 3-2 9','none','#362b20',2.5),
+      'rest':path('M3 27V8m0 13h26v6M4 20v-7h9v7m0-7h12l4 7M6 16h4','none','#362b20',2.3),
+      'chest':chest,
+      'chest-empty':chest+path('M3 4 28 29M28 3 4 29','none','#a33a30',3.2),
+      'closed':path('M6 29V4l20-1v26M10 27V8l12-1v20ZM18 17h1','none','#362b20',2.4),
+      'blocked':path('M3 28 2 20 8 14l9 2 3 12ZM16 28 17 17l9-3 4 9-2 5ZM8 14 10 5l11-1 6 10M11 7l5 7','none','#362b20',2.3),
       'danger':path('M16 3 30 28H2ZM16 11v9m0 4v1','none','#362b20',2.5),
-      'object':path('M11 4h10v8l6 16H5l6-16ZM12 8h8m-4 7v7','none','#362b20',2),
+      'object':path('M9 10c0-10 17-9 16 0 0 5-9 5-9 11m0 5v1','none','#362b20',3.2),
       'frontier':path('M3 12h7m5 0h5m5 0h4M3 21h6m6 0h6m5 0h3','none','#655a46',1.8)
     }
     catalog={'issue':96,'native_canvas':[32,32],'status_display_px':14,'intent_order':list(intents),'groups':{},'authoring':'Original SVG paths; no external icon library.'}
