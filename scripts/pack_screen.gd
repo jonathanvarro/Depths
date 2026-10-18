@@ -19,6 +19,8 @@ var _party  # party_state.gd
 var _time_label: Label
 var _lantern_bar: ProgressBar
 var _lantern_label: Label
+var _light_title: Label
+var _light_note: Label
 var _list: VBoxContainer
 var _injuries: VBoxContainer
 
@@ -36,11 +38,27 @@ func refresh() -> void:
 		return
 	var supplies = _party.supplies
 	_time_label.text = "Time spent: %d" % _party.time_elapsed
-	_lantern_bar.value = supplies.oil
-	var flask_note := "  ·  part-used flask: %d" % roundi(supplies.open_flask) if supplies.open_flask > 0.0 else ""
-	_lantern_label.text = "%s  ·  %d/%d oil  ·  burns %.1f per step%s" % [
-		Supplies.LIGHT_NAMES[supplies.light_band()], roundi(supplies.oil), int(Supplies.LANTERN_CAPACITY),
-		supplies.burn_rate(), flask_note]
+	match supplies.source:
+		Supplies.Source.TORCH:
+			_light_title.text = "Torch"
+			_lantern_bar.max_value = Supplies.TORCH_BURN_TIME
+			_lantern_bar.value = supplies.torch_left
+			_lantern_label.text = "Burning  ·  %d time left" % ceili(supplies.torch_left)
+			_light_note.text = "In a fight, Item > Throw torch scares an enemy away, but the torch is gone."
+		Supplies.Source.NONE:
+			_light_title.text = "No light"
+			_lantern_bar.value = 0
+			_lantern_label.text = "Darkness. Light a torch, if you have one."
+			_light_note.text = ""
+		_:
+			_light_title.text = "Lantern"
+			_lantern_bar.max_value = Supplies.LANTERN_CAPACITY
+			_lantern_bar.value = supplies.oil
+			var flask_note := "  ·  part-used flask: %d" % roundi(supplies.open_flask) if supplies.open_flask > 0.0 else ""
+			_lantern_label.text = "%s  ·  %d/%d oil  ·  burns %.1f per step%s" % [
+				Supplies.LIGHT_NAMES[supplies.light_band()], roundi(supplies.oil), int(Supplies.LANTERN_CAPACITY),
+				supplies.burn_rate(), flask_note]
+			_light_note.text = "A fuller lantern lights farther but burns faster."
 
 	for child in _injuries.get_children():
 		child.queue_free()
@@ -61,8 +79,59 @@ func refresh() -> void:
 
 	for child in _list.get_children():
 		child.queue_free()
+	_add_gear_rows()
 	for item: SupplyItem in supplies.items:
 		_list.add_child(_item_row(item))
+
+
+## What the lead hero wields, and carried gear with Equip / Drop (#58).
+func _add_gear_rows() -> void:
+	var living: Array[Companion] = _party.living_members()
+	if living.is_empty():
+		return
+	var hero: Companion = living[0]
+	var wielding := "%s (%d-%d)" % [hero.weapon.display_name, hero.weapon.attack_min, hero.weapon.attack_max] if hero.weapon else "bare hands"
+	_list.add_child(_label("Gear  ·  %s wields %s" % [hero.display_name, wielding], 20, COLOR_TEXT))
+	for item: Equipment in _party.supplies.gear:
+		var row := HBoxContainer.new()
+		row.add_theme_constant_override("separation", 12)
+		if item.icon:
+			var icon := TextureRect.new()
+			icon.texture = item.icon
+			icon.custom_minimum_size = Vector2(40, 40)
+			icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			row.add_child(icon)
+		var text := VBoxContainer.new()
+		text.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		text.add_child(_label("%s  (%d-%d)" % [item.display_name, item.attack_min, item.attack_max], 22, COLOR_TEXT))
+		var about := _label(item.description, 17, COLOR_DIM_TEXT)
+		about.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		text.add_child(about)
+		row.add_child(text)
+		var equip := _small_button("Equip")
+		equip.pressed.connect(func():
+			_party.equip(hero, item)
+			used.emit("%s takes up the %s." % [hero.display_name, item.display_name.to_lower()])
+			refresh())
+		row.add_child(equip)
+		var drop := _small_button("Drop")
+		drop.pressed.connect(func():
+			_party.drop(item)
+			used.emit("You drop the %s. It's gone." % item.display_name.to_lower())
+			refresh())
+		row.add_child(drop)
+		_list.add_child(row)
+
+
+func _small_button(text: String) -> Button:
+	var button := Button.new()
+	button.text = text
+	button.custom_minimum_size = Vector2(110, 56)
+	button.focus_mode = Control.FOCUS_NONE
+	button.add_theme_font_size_override("font_size", 20)
+	button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	return button
 
 
 func _item_row(item: SupplyItem) -> Control:
@@ -127,7 +196,8 @@ func _build() -> void:
 	close.pressed.connect(func(): closed.emit())
 	header.add_child(close)
 
-	column.add_child(_label("Lantern", 22, COLOR_TEXT))
+	_light_title = _label("Lantern", 22, COLOR_TEXT)
+	column.add_child(_light_title)
 	_lantern_bar = ProgressBar.new()
 	_lantern_bar.max_value = Supplies.LANTERN_CAPACITY
 	_lantern_bar.show_percentage = false
@@ -141,7 +211,8 @@ func _build() -> void:
 	column.add_child(_lantern_bar)
 	_lantern_label = _label("", 17, COLOR_DIM_TEXT)
 	column.add_child(_lantern_label)
-	column.add_child(_label("A fuller lantern lights farther but burns faster.", 17, COLOR_DIM_TEXT))
+	_light_note = _label("", 17, COLOR_DIM_TEXT)
+	column.add_child(_light_note)
 
 	column.add_child(_label("Condition", 22, COLOR_TEXT))
 	_injuries = VBoxContainer.new()

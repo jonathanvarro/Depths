@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" path="res://art/concepts/portraits/mara-base-192-v2.png" id="2"]
 [ext_resource type="Resource" path="res://data/portraits/mara.tres" id="3"]
 [ext_resource type="Resource" path="res://data/dialogue/mara.tres" id="4"]
+[ext_resource type="Resource" path="res://data/gear/broken_knife.tres" id="5"]
 
 [resource]
 script = ExtResource("1")
@@ -14,6 +15,7 @@ personality = "Weathered, practical, quiet under pressure."
 vulnerability = "Guilt over the companions she lost."
 portrait_set = ExtResource("3")
 dialogue = ExtResource("4")
+weapon = ExtResource("5")
 portrait = ExtResource("2")
 max_health = 20
 health = 14

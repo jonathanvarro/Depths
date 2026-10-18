@@ -12,6 +12,7 @@ enum Effect {
 	FEED_PARTY,  ## every living hero heals `amount` over `duration`
 	HEAL_ONE,  ## the most hurt living hero heals `amount` over `duration`
 	DRESS_INJURY,  ## binds one injury until camp (#11)
+	LIGHT_TORCH,  ## lights a torch to hold; it burns down (#59)
 }
 
 @export var display_name := "Supply"

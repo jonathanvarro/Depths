@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="RoomEvent" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="event"]
+[ext_resource type="Script" path="res://scripts/event_choice.gd" id="choice"]
+[ext_resource type="Script" path="res://scripts/event_outcome.gd" id="outcome"]
+[ext_resource type="Resource" path="res://data/gear/iron_sword.tres" id="sword"]
+
+[sub_resource type="Resource" id="o0"]
+script = ExtResource("outcome")
+text = "Their hand is still closed around the hilt. You pry the sword free."
+gear = Array[Equipment]([ExtResource("sword")])
+
+[sub_resource type="Resource" id="c0"]
+script = ExtResource("choice")
+label = "Search them"
+time_cost = 2
+outcomes = Array[EventOutcome]([SubResource("o0")])
+
+[resource]
+script = ExtResource("event")
+kind = 2
+title = "Your companion"
+clue = "Your other companion, a sword still in their hand."
+choices = Array[EventChoice]([SubResource("c0")])
+min_depth = 99
+max_depth = 99

@@ -81,6 +81,26 @@ func first_undressed_injured() -> Companion:
 	return null
 
 
+## Wields `item` from the pack; whatever the hero held goes into the pack.
+func equip(hero: Companion, item: Equipment) -> void:
+	if item not in supplies.gear:
+		return
+	supplies.gear.erase(item)
+	if hero.weapon:
+		supplies.gear.append(hero.weapon)
+	hero.weapon = item
+	hero.emit_changed()
+	supplies.changed.emit()
+	changed.emit()
+
+
+## Throws gear away for good.
+func drop(item: Equipment) -> void:
+	supplies.gear.erase(item)
+	supplies.changed.emit()
+	changed.emit()
+
+
 ## Resting: time passes (the lantern keeps burning) and everything in
 ## progress, like food and draughts, finishes.
 func rest() -> void:
@@ -111,8 +131,13 @@ func cannot_use_reason(item: SupplyItem, in_combat := false) -> String:
 		return "None left"
 	match item.effect:
 		SupplyItem.Effect.REFILL_LANTERN:
+			if not supplies.has_lantern:
+				return "No lantern"
 			if supplies.lantern_is_full():
 				return "Lantern is full"
+		SupplyItem.Effect.LIGHT_TORCH:
+			if supplies.torch_lit():
+				return "One is already lit"
 		SupplyItem.Effect.FEED_PARTY:
 			if most_hurt() == null and not living_members().any(func(m: Companion): return m.is_hungry()):
 				return "Nobody needs it"
@@ -145,6 +170,8 @@ func use_item(item: SupplyItem, in_combat := false) -> String:
 		SupplyItem.Effect.DRESS_INJURY:
 			supplies.take(item)
 			first_undressed_injured().dress_injury()
+		SupplyItem.Effect.LIGHT_TORCH:
+			supplies.light_torch(item)
 	if not in_combat:  # in a fight, the round's time covers it
 		advance_time(item.use_time)
 	return item.use_message

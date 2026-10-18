@@ -43,8 +43,18 @@ const OPENING_FIGHTS := [
 	[preload("res://data/enemies/starved_rat.tres")],
 	[preload("res://data/enemies/small_spider.tres")],
 ]
-## Panic is held back until after this fight, then introduced (#56).
-const OPENING_PANIC_AFTER_FIGHT := 2
+## Daylight can open this many steps after the last fight even if she's
+## not yet weak (the torch may have spared her, #59).
+const OPENING_EXIT_AFTER_LAST_FIGHT := 10
+## The opening's tutorial props (#58, #59): searching the two bodies gives
+## torches and a sword; she starts holding a broken knife.
+const TORCH := preload("res://data/items/torch.tres")
+const BROKEN_KNIFE := preload("res://data/gear/broken_knife.tres")
+const IRON_SWORD := preload("res://data/gear/iron_sword.tres")
+const OPENING_BODY_EVENTS := [
+	preload("res://data/events/opening_body_torches.tres"),
+	preload("res://data/events/opening_body_sword.tres"),
+]
 const OPENING_START_STRAIN := 10.0
 const OPENING_PANIC_STRAIN := 80.0
 ## Slower steps and turns, so hints and moments have room (#56).
@@ -158,6 +168,9 @@ const EFFECT_VOLUME_DB := -4.0
 	"res://art/props/opening-bodies-v1/fallen-a.tscn",
 	"res://art/props/opening-bodies-v1/fallen-b.tscn",
 ]
+## The dying fire in the opening room (a Node3D scene on the floor).
+## Missing file: placeholder embers. ChatGPT's art: art/features/campfire-v1.
+@export var fire_scene_path := "res://art/features/campfire-v1/scene.tscn"
 ## Shown as the game opens on the deepest floor, where the companions died.
 @export_multiline var opening_message := "Your companions lie still. Find the way out."
 
@@ -207,6 +220,9 @@ var _hints_done := {}
 var _steps_taken := 0
 var _opening_fights_done := 0
 var _next_fight_at := 0
+var _last_fight_step := 0
+var _panic_started := false
+var _searched_bodies := {}  # body cell -> true once actually searched
 var _eyelids: Control
 var _dialogue_box: PanelContainer  # dialogue_box.gd
 var _last_line := ""
@@ -409,6 +425,10 @@ func _run_event(cell: Vector2i) -> void:
 	if result["left"]:
 		_map.triggered.erase(cell)
 		return
+	if _in_opening and event in OPENING_BODY_EVENTS:
+		_searched_bodies[cell] = true
+		_say("search_body", true)
+		_refresh_tutorial_hint()
 	_expedition.events_resolved += 1
 	if not result["ambush"].is_empty():
 		var types: Array[EnemyType] = []
@@ -420,6 +440,7 @@ func _run_event(cell: Vector2i) -> void:
 ## action panel replaces the movement pad until it's over.
 ## `types` sets the enemies (e.g. an ambush); empty picks a group for the floor.
 func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
+	var opening_spider := _in_opening and _opening_fights_done == OPENING_FIGHTS.size() - 1
 	if types.is_empty():
 		var groups: Array = ENCOUNTER_GROUPS.get(clampi(_depth, 1, ENCOUNTER_GROUPS.size()))
 		# Never more enemies than heroes standing, so a lone survivor isn't swamped.
@@ -427,6 +448,9 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 		var fitting := groups.filter(func(g: Array): return g.size() <= party_size)
 		types.assign((fitting if not fitting.is_empty() else [[groups[0][0]]]).pick_random())
 	var state = CombatState.new(_party_state, types)
+	if opening_spider:
+		for foe in state.foes:
+			foe.has_webbed = true  # the opening's spider bites first (#59)
 	_place_foes(state.foes)
 	_in_combat = true
 	_update_hints("fight")
@@ -498,6 +522,15 @@ func _start_new_expedition() -> void:
 	for hero: Companion in _party_state.members:
 		hero.appearance.clear()  # washed at camp
 		hero.emit_changed()
+	# A lantern from camp, filled (#59: the opening had only torches).
+	if not _party_state.supplies.has_lantern:
+		_party_state.supplies.has_lantern = true
+		_party_state.supplies.oil = Supplies.LANTERN_CAPACITY
+	# At camp the torch is put out; the lantern is her light now.
+	_party_state.supplies.source = Supplies.Source.LANTERN
+	_party_state.supplies.torch_left = 0.0
+	_party_state.supplies.changed.emit()
+	_update_lantern()
 	for hero: Companion in _party_state.living_members():
 		hero.complete_pending_effects()
 		hero.change_health(hero.effective_max_health())
@@ -600,9 +633,24 @@ func _begin_opening() -> void:
 	_party.move_time = OPENING_MOVE_TIME
 	_party.turn_time = OPENING_TURN_TIME
 	_next_fight_at = OPENING_FIGHT_STEPS[0]
+	# No lantern: the fire lights the room; torches must be found (#59).
+	_party_state.supplies.has_lantern = false
+	_party_state.supplies.source = Supplies.Source.NONE
+	_party_state.supplies.changed.emit()
+	_update_lantern()
+	_party.step_check = _opening_step_check
+	if not _party.refused.is_connected(_on_step_refused):
+		_party.refused.connect(_on_step_refused)
+		_party_state.supplies.torch_burnt_out.connect(_on_torch_burnt_out)
+		_combat.enemy_acted.connect(_on_combat_enemy_acted)
+		_party_state.changed.connect(_refresh_tutorial_hint)
 	_minimap.visible = false  # no map during the escape
 	_on_party_state_changed(false)
 	_go_to_floor(OPENING_DEPTH, Arrival.OPENING)
+	for i in OPENING_BODY_EVENTS.size():
+		var body: Vector2i = _opening_body_cells()[i]
+		_map.contents[body] = DungeonMap.Content.CHEST  # searchable, via its event
+		_map.events[body] = OPENING_BODY_EVENTS[i]
 	# Wake facing down the room toward the way out, the bodies in view.
 	_party.facing = 1
 	_party.rotation.y = -PI / 2.0
@@ -654,6 +702,7 @@ func _end_opening() -> void:
 		hero.strain_locked = false
 	_party.move_time = Party.MOVE_TIME
 	_party.turn_time = Party.TURN_TIME
+	_party.step_check = Callable()
 	_minimap.visible = true
 	_show_hint("")
 
@@ -688,14 +737,8 @@ func _on_opening_fight_won() -> void:
 	_opening_fights_done += 1
 	if _opening_fights_done < OPENING_FIGHTS.size():
 		_next_fight_at = maxi(OPENING_FIGHT_STEPS[_opening_fights_done], _steps_taken + OPENING_REFIGHT_AFTER)
-	if _opening_fights_done == OPENING_PANIC_AFTER_FIGHT:
-		# Panic sets in, and a hint explains what it does (#56).
-		var hero: Companion = _party_state.members[0]
-		hero.strain_locked = false
-		hero.strain = OPENING_PANIC_STRAIN
-		_on_party_state_changed()
-		_show_hint("Panic: %s's hands shake, so she hits less often and less hard. Light, food and rest calm her." % hero.display_name, "panic")
-		_say("panic", true)
+	else:
+		_last_fight_step = _steps_taken
 
 
 ## Once all three fights are over and she's weak enough, daylight opens a
@@ -704,7 +747,8 @@ func _check_opening_exit() -> void:
 	if not _in_opening or _in_combat or _exit_cell != Vector2i(-1, -1):
 		return
 	var hero: Companion = _party_state.members[0]
-	var can_leave := _opening_fights_done >= OPENING_FIGHTS.size() and hero.health <= EXIT_HEALTH
+	var fights_over := _opening_fights_done >= OPENING_FIGHTS.size()
+	var can_leave := fights_over and (hero.health <= EXIT_HEALTH or _steps_taken - _last_fight_step >= OPENING_EXIT_AFTER_LAST_FIGHT)
 	if not can_leave and _steps_taken < OPENING_STEP_LIMIT:
 		return
 	_exit_cell = _pick_exit_cell()
@@ -754,7 +798,8 @@ func _add_opening_dressing() -> void:
 	var room: Rect2i = _opening["room"]
 	var start: Vector2i = _opening["start"]
 	# In the far corners of the room, in view as she wakes facing east.
-	var cells := [start + Vector2i(2, -1), start + Vector2i(2, 1)]
+	var cells := _opening_body_cells()
+	_add_fire(start + Vector2i(3, -1))  # the far corner: in view, lighting the bodies and doorway
 	for i in cells.size():
 		var path: String = body_scenes[i] if i < body_scenes.size() else ""
 		var body: Node3D
@@ -772,6 +817,140 @@ func _add_opening_dressing() -> void:
 		daylight.omni_range = CELL_SIZE * 4.0
 		daylight.position = Vector3(_exit_cell.x * CELL_SIZE, WALL_HEIGHT - 0.3, _exit_cell.y * CELL_SIZE)
 		_level.add_child(daylight)
+
+
+## Where the two bodies lie: the far corners, in view as she wakes.
+func _opening_body_cells() -> Array[Vector2i]:
+	var start: Vector2i = _opening["start"]
+	return [start + Vector2i(2, -1), start + Vector2i(2, 1)]
+
+
+## A dying fire: the room's only light until she finds a torch (#59).
+## Placeholder embers until there's art.
+func _add_fire(cell: Vector2i) -> void:
+	if fire_scene_path != "" and ResourceLoader.exists(fire_scene_path):
+		var art: Node3D = load(fire_scene_path).instantiate()
+		art.position = Vector3(cell.x * CELL_SIZE, 0.0, cell.y * CELL_SIZE)
+		_level.add_child(art)
+		# A soft fill so the whole small room reads, not just the fire.
+		var fill := OmniLight3D.new()
+		fill.light_color = Color(1.0, 0.55, 0.25)
+		fill.light_energy = 1.0
+		fill.omni_range = CELL_SIZE * 3.6
+		var middle: Vector2i = _opening["start"] + Vector2i(1, 0)  # lights the bodies from the front
+		fill.position = Vector3(middle.x * CELL_SIZE, 1.4, middle.y * CELL_SIZE)
+		_level.add_child(fill)
+		return
+	var fire := Node3D.new()
+	fire.position = Vector3(cell.x * CELL_SIZE, 0.0, cell.y * CELL_SIZE)
+	var embers := MeshInstance3D.new()
+	var mound := SphereMesh.new()
+	mound.radius = 0.18
+	mound.height = 0.12
+	var glow := StandardMaterial3D.new()
+	glow.albedo_color = Color(0.9, 0.35, 0.1)
+	glow.emission_enabled = true
+	glow.emission = Color(1.0, 0.4, 0.1)
+	glow.emission_energy_multiplier = 0.8
+	mound.material = glow
+	embers.mesh = mound
+	embers.position.y = 0.05
+	fire.add_child(embers)
+	var light := OmniLight3D.new()
+	light.light_color = Color(1.0, 0.55, 0.25)
+	light.light_energy = 1.8
+	light.omni_range = CELL_SIZE * 3.6
+	light.position.y = 0.5
+	fire.add_child(light)
+	var flicker := create_tween().set_loops()
+	flicker.bind_node(light)
+	flicker.tween_property(light, "light_energy", 1.4, 0.18)
+	flicker.tween_property(light, "light_energy", 1.95, 0.23)
+	flicker.tween_property(light, "light_energy", 1.65, 0.15)
+	_level.add_child(fire)
+
+
+## Opening: she won't leave the room without a light (#58, #59).
+func _opening_step_check(target: Vector2i) -> String:
+	if not _in_opening or _party_state.supplies.torch_lit() or _panic_started:
+		return ""
+	var room: Rect2i = _opening["room"]
+	if room.has_point(target) or not room.has_point(_party.cell):
+		return ""
+	return "too_dark"
+
+
+func _on_step_refused(reason: String) -> void:
+	if reason == "too_dark":
+		_say("too_dark", true)
+		_refresh_tutorial_hint()
+
+
+func _on_torch_burnt_out() -> void:
+	if not _in_opening:
+		_show_message("Your torch burns out.")
+		return
+	_say("torch_out", true)
+	if _party_state.supplies.count(TORCH) > 0:
+		_show_hint("Your torch has burned out! Open the Pack and light the spare.", "torch_out")
+
+
+## Fight 3: once the spider has struck, teach throwing the torch.
+func _on_combat_enemy_acted(_foe, outcome: Dictionary) -> void:
+	if not _in_opening or _opening_fights_done != OPENING_FIGHTS.size() - 1 or _hints_done.has("throw"):
+		return
+	if not _party_state.supplies.torch_lit():
+		return
+	var hero: Companion = _party_state.members[0]
+	var poisoned: bool = _combat._state.venom_turns(hero) > 0
+	_show_hint(("Poisoned! " if poisoned else "") + "Open Item and throw your torch to scare the spider away.", "throw")
+
+
+## Without any light left, she panics: the panic mechanic, explained.
+func _start_opening_panic() -> void:
+	_panic_started = true
+	var hero: Companion = _party_state.members[0]
+	hero.strain_locked = false
+	hero.strain = OPENING_PANIC_STRAIN
+	_on_party_state_changed()
+	_show_hint("In the dark, %s panics: her hands shake, so she hits less often and less hard. Light, food and rest calm her." % hero.display_name, "panic")
+	_hints_done["panic_at"] = _steps_taken
+	_say("panic", true)
+
+
+## The next thing the tutorial wants, worked out from where she is: search
+## the bodies, equip the sword, drop the broken knife, light a torch.
+func _refresh_tutorial_hint() -> void:
+	if not _in_opening or not _hints_done.has("start"):
+		return
+	var supplies = _party_state.supplies
+	if _hint == "torch_out" and supplies.torch_lit():
+		_finish_hint()
+	if _hint not in ["", "search", "equip", "drop", "light"]:
+		return
+	var touch := OS.has_feature("mobile")
+	var open_pack := "tap Pack" if touch else "press I or click Pack"
+	var hero: Companion = _party_state.members[0]
+	var text := ""
+	var key := ""
+	if not _opening_body_cells().all(func(c): return _searched_bodies.has(c)):
+		key = "search"
+		text = "Search your companions: walk onto each of them."
+	elif hero.weapon != IRON_SWORD and IRON_SWORD in supplies.gear:
+		key = "equip"
+		text = "Open your pack (%s) and equip the iron sword." % open_pack
+	elif BROKEN_KNIFE in supplies.gear:
+		key = "drop"
+		text = "Drop the broken knife from your pack. It's no use now."
+	elif not supplies.torch_lit() and not _hints_done.has("light") and supplies.count(TORCH) > 0:
+		key = "light"
+		text = "Light a torch from your pack. It's too dark to go on without one."
+	if key == "":
+		if _hint in ["search", "equip", "drop", "light"]:
+			_finish_hint()
+		return
+	if _hint != key:
+		_show_hint(text, key)  # the next step replaces the last; nothing is skipped
 
 
 ## A dark, cloth-wrapped shape lying on the floor, until there's real art.
@@ -810,16 +989,18 @@ func _update_hints(event: String) -> void:
 		"start":
 			_show_hint("Tap ▲ to move forward" if touch else "Move forward: W or ↑ (or click ▲)")
 		"moved":
-			if _hint == "start" and _steps_taken >= 2:
+			if _hint == "start" and _steps_taken >= 1:
 				_finish_hint()
+			_refresh_tutorial_hint()
 			var ahead: Vector2i = _party.cell + Party.DIRECTIONS[_party.facing]
-			if not _hints_done.has("web") and (_map.door_at(ahead) == DungeonMap.Door.CLOSED or _map.door_at(ahead + Party.DIRECTIONS[_party.facing]) == DungeonMap.Door.CLOSED):
+			var can_go: bool = _party_state.supplies.torch_lit() or _panic_started  # not before she has light
+			if can_go and not _hints_done.has("web") and (_map.door_at(ahead) == DungeonMap.Door.CLOSED or _map.door_at(ahead + Party.DIRECTIONS[_party.facing]) == DungeonMap.Door.CLOSED):
 				_show_hint("Walk into the web to tear through it.", "web")
 			elif not _hints_done.has("turn") and _hints_done.has("start") and _hint == "" and not _map.is_passable(ahead):
 				_show_hint("Tap ↺ or ↻ to turn" if touch else "Turn: A and D, or ← and → (or click ↺ ↻)", "turn")
 			elif _hint == "turn" and _map.is_passable(ahead):
 				_finish_hint()
-			elif _hint == "pack" and _steps_taken >= _hints_done.get("pack_shown", 0) + 12:
+			elif _hint == "panic" and _steps_taken >= _hints_done.get("panic_at", 0) + 8:
 				_finish_hint()
 		"bumped":
 			if not _hints_done.has("turn") and _hint == "":
@@ -831,14 +1012,10 @@ func _update_hints(event: String) -> void:
 			if not _hints_done.has("fight"):
 				_show_hint(("Tap" if touch else "Click") + " an enemy's name to target it, then Attack. Defend halves the damage you take.", "fight")
 		"fight_over":
-			if _hint == "fight":
+			if _hint in ["fight", "throw"]:
 				_finish_hint()
-			if not _hints_done.has("pack"):
-				_hints_done["pack_shown"] = _steps_taken
-				_show_hint("Tap Pack to see what you carry." if touch else "Your pack: press I, or click Pack.", "pack")
 		"pack":
-			if _hint == "pack":
-				_finish_hint()
+			_refresh_tutorial_hint()
 		"exit":
 			_show_hint("Daylight! Walk into the light to get out.", "exit")
 
@@ -847,6 +1024,10 @@ func _show_hint(text: String, key := "start") -> void:
 	_hint = key if text != "" else ""
 	_hint_label.text = text
 	_hint_box.visible = text != ""
+	# In a fight, sit above the action panel instead of beside it.
+	var lift := 150.0 if _in_combat else 24.0
+	_hint_box.offset_bottom = -lift
+	_hint_box.offset_top = -lift - _hint_box.get_combined_minimum_size().y
 
 
 func _finish_hint() -> void:
@@ -940,6 +1121,20 @@ func _update_lantern() -> void:
 
 
 func _on_light_band_changed(band: Supplies.Light) -> void:
+	var supplies = _party_state.supplies
+	if supplies.source == Supplies.Source.TORCH and band != Supplies.Light.OUT:
+		if _in_opening and not _hints_done.has("light"):
+			_hints_done["light"] = true
+			_say("torch_lit", true)
+		if band == Supplies.Light.DIM:
+			_show_message("Your torch gutters.")
+		return
+	if _in_opening and band == Supplies.Light.OUT:
+		if _in_combat:
+			_say("throw_torch", true)
+		if not _panic_started and supplies.count(TORCH) == 0 and _hints_done.has("light"):
+			_start_opening_panic()
+		return
 	match band:
 		Supplies.Light.DIM:
 			_show_message("The lantern burns low.")
@@ -1159,6 +1354,7 @@ func _build_ui(minimap: Control) -> void:
 	_pack.visible = false
 	_pack.closed.connect(_set_pack.bind(false))
 	_pack.used.connect(_show_message)
+	_pack.used.connect(func(_m): _refresh_tutorial_hint())
 	_combat = CombatScreen.new()
 	canvas.add_child(_combat)
 	_event_screen = EventScreen.new()

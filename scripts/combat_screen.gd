@@ -6,6 +6,8 @@ extends Control
 ## (art/expedition-v1/combat-*.png).
 
 signal finished(result: int)  # combat_state.gd Result
+## After each enemy turn (the opening reacts to the spider's poison, #59).
+signal enemy_acted(foe, outcome: Dictionary)
 signal _action_chosen(action: Dictionary)
 
 const CombatState := preload("res://scripts/combat_state.gd")
@@ -110,12 +112,17 @@ func _hero_action(hero: Companion, action: Dictionary) -> void:
 			_add_log(_state.hero_use_item(action["item"]))
 		"retreat":
 			_add_log(_state.retreat())
+		"throw":
+			var target = _target
+			_add_log(_state.hero_throw_torch(hero, target))
+			await _fade_out(target)
 	await get_tree().create_timer(0.25).timeout
 
 
 func _enemy_action(foe) -> void:
 	var outcome: Dictionary = _state.enemy_act(foe)
 	_add_log(outcome.get("text", ""))
+	enemy_acted.emit(foe, outcome)
 	if outcome.get("fled", false):
 		await _fade_out(foe)
 		return
@@ -197,6 +204,11 @@ func _show_actions(shown: bool) -> void:
 func _show_items() -> void:
 	for child in _item_buttons.get_children():
 		child.queue_free()
+	if _state.party.supplies.torch_lit():
+		# Throw the burning torch: the target flees the flames (#59).
+		var throw := _button("Throw torch")
+		throw.pressed.connect(func(): _action_chosen.emit({"kind": "throw"}))
+		_item_buttons.add_child(throw)
 	for item: SupplyItem in _state.party.supplies.items:
 		if not item.usable_in_combat:
 			continue

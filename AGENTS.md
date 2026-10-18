@@ -135,6 +135,13 @@ Templates > Download and Install; already installed on the owner's PC).
   situation (Companion.dialogue); `scripts/dialogue_box.gd` shows them above
   the cards. main.gd `_say(situation)` picks and shows one (#57). Add lines
   or situations in the .tres without code.
+- `scripts/equipment.gd` + `data/gear/*.tres` – weapons (#58). Companion
+  `weapon` sets attack range/accuracy; PartyState.equip()/drop(); carried gear
+  is `Supplies.gear`. RoomEvent outcomes can give `gear`.
+- Light sources (#59): `Supplies.source` is LANTERN, TORCH (held, burns
+  `torch_left`, `torch_burnt_out` signal) or NONE; `has_lantern`. Torch
+  supply effect LIGHT_TORCH; CombatState.hero_throw_torch() scares a foe off.
+  Party.step_check can refuse a step (the opening's too-dark gate).
 - `scripts/pack_screen.gd` – the Pack screen (Pack button under the minimap,
   or I/B). PartyState.use_item(), rest(), cannot_use_reason() do the work.
 - `audio/placeholder/` – generated placeholder sounds (see its README for

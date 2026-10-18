@@ -21,6 +21,8 @@ signal stepped(cell: Vector2i)
 signal bumped(cell: Vector2i)
 ## Panic took over a move: the party bolted in a random direction (#12).
 signal panicked
+## A step was refused by `step_check` (e.g. too dark to leave, #58).
+signal refused(reason: String)
 
 ## Facing index: 0 north, 1 east, 2 south, 3 west.
 const DIRECTIONS: Array[Vector2i] = [Vector2i(0, -1), Vector2i(1, 0), Vector2i(0, 1), Vector2i(-1, 0)]
@@ -46,6 +48,9 @@ var panic_chance := 0.0
 var move_time := MOVE_TIME
 var turn_time := TURN_TIME
 var camera: Camera3D
+## Optional: called with the target cell before each step; returning a
+## non-empty reason refuses the step (the party bumps instead).
+var step_check := Callable()
 
 var _busy := false
 var _lantern: OmniLight3D
@@ -117,7 +122,13 @@ func _try_step(direction: Vector2i) -> void:
 	_busy = true
 	var target := cell + direction
 	var tween := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	if map.door_at(target) == DungeonMap.Door.CLOSED:
+	var reason: String = step_check.call(target) if step_check.is_valid() else ""
+	if reason != "":
+		refused.emit(reason)
+		var nudge := position + Vector3(direction.x, 0, direction.y) * BUMP_DISTANCE
+		tween.tween_property(self, "position", nudge, move_time * 0.4)
+		tween.tween_property(self, "position", position, move_time * 0.4)
+	elif map.door_at(target) == DungeonMap.Door.CLOSED:
 		map.open_door(target)
 		map.reveal_around(target)
 		opened_door.emit(target)

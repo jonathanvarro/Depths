@@ -83,6 +83,10 @@ func resolve(party, choice: EventChoice) -> Dictionary:
 	for item in outcome.loot:
 		party.supplies.add(item, outcome.loot[item])
 		notes.append("found %s ×%d" % [item.display_name.to_lower(), outcome.loot[item]])
+	for item in outcome.gear:
+		party.supplies.gear.append(item)
+		party.supplies.changed.emit()
+		notes.append("found %s" % item.display_name.to_lower())
 	if outcome.rest:
 		party.rest()
 		notes.append("rested")

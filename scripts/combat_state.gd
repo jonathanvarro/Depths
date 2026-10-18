@@ -128,7 +128,7 @@ func advance() -> void:
 
 
 func hero_hit_chance(hero: Companion) -> float:
-	var chance: float = hero.accuracy * hero.effectiveness() + LIGHT_ACCURACY[party.supplies.light_band()]
+	var chance: float = hero.hit_accuracy() * hero.effectiveness() + LIGHT_ACCURACY[party.supplies.light_band()]
 	if is_webbed(hero):
 		chance -= WEB_PENALTY
 	return clampf(chance, MIN_HIT_CHANCE, MAX_HIT_CHANCE)
@@ -148,7 +148,8 @@ func hero_attack(hero: Companion, target: Foe) -> Dictionary:
 	var hit := rng.randf() < hero_hit_chance(hero)
 	_webbed.erase(hero)  # the web only spoils one action
 	if hit:
-		var damage := maxi(1, roundi(rng.randi_range(hero.attack_min, hero.attack_max) * hero.effectiveness()))
+		var reach := hero.attack_range()
+		var damage := maxi(1, roundi(rng.randi_range(reach.x, reach.y) * hero.effectiveness()))
 		if target.shielded:
 			damage = maxi(1, damage / 2)
 		target.health = maxi(0, target.health - damage)
@@ -222,6 +223,18 @@ func enemy_act(foe: Foe) -> Dictionary:
 		outcome["text"] = "The %s lunges at %s and misses." % [foe.name.to_lower(), target.display_name]
 	_check_end()
 	return outcome
+
+
+## Throws the burning torch at `target`, which flees the flames (#59).
+## The torch is gone; without a lantern, the party is in the dark.
+func hero_throw_torch(hero: Companion, target: Foe) -> String:
+	if not party.supplies.torch_lit():
+		return ""
+	_webbed.erase(hero)
+	party.supplies.lose_torch()
+	target.fled = true
+	_check_end()
+	return "%s hurls the burning torch - the %s flees from the flames!" % [hero.display_name, target.name.to_lower()]
 
 
 ## The owner's retreat idea (trial): the fight ends, the party flees.

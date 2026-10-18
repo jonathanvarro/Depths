@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SupplyItem" format=3]
+
+[ext_resource type="Script" path="res://scripts/supply_item.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+display_name = "Torch"
+description = "Light one to see by; it burns down. In a fight, throw a burning torch to scare an enemy away - but then it's gone."
+effect = 4
+amount = 0
+duration = 0
+use_time = 2
+use_message = "You light the torch. The dark draws back a little."

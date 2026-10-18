@@ -37,6 +37,8 @@ const StrainRules := preload("res://scripts/strain.gd")
 @export var attack_min := 2
 @export var attack_max := 4
 @export_range(0.0, 1.0) var accuracy := 0.75
+## What they fight with; without one they use attack_min/max (#58).
+@export var weapon: Equipment
 ## Higher acts earlier in a combat round.
 @export var initiative := 10
 @export_group("")
@@ -62,6 +64,17 @@ var appearance: Array[String] = []
 var pending_effects: Array[Dictionary] = []
 
 var _health_fraction := 0.0  # partial healing carried between time units
+
+
+## Damage range of a basic attack: the weapon's, or their own bare-handed.
+func attack_range() -> Vector2i:
+	if weapon:
+		return Vector2i(weapon.attack_min, weapon.attack_max)
+	return Vector2i(attack_min, attack_max)
+
+
+func hit_accuracy() -> float:
+	return accuracy + (weapon.accuracy_bonus if weapon else 0.0)
 
 
 func is_alive() -> bool:
