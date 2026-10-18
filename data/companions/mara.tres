@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scripts/companion.gd" id="1"]
 [ext_resource type="Texture2D" path="res://art/concepts/portraits/mara-base-192-v2.png" id="2"]
 [ext_resource type="Resource" path="res://data/portraits/mara.tres" id="3"]
+[ext_resource type="Resource" path="res://data/dialogue/mara.tres" id="4"]
 
 [resource]
 script = ExtResource("1")
@@ -12,6 +13,7 @@ motive = "Led her companions into the cave. They died there; she has to get out 
 personality = "Weathered, practical, quiet under pressure."
 vulnerability = "Guilt over the companions she lost."
 portrait_set = ExtResource("3")
+dialogue = ExtResource("4")
 portrait = ExtResource("2")
 max_health = 20
 health = 14

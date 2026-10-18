@@ -16,26 +16,42 @@ const RoomEvents := preload("res://scripts/room_events.gd")
 const Expedition := preload("res://scripts/expedition.gd")
 const SafeArea := preload("res://scripts/safe_area.gd")
 const OpeningGenerator := preload("res://scripts/opening_generator.gd")
+const DialogueBox := preload("res://scripts/dialogue_box.gd")
+## Seconds between unprompted lines, so heroes don't chatter (#57).
+const SPEECH_COOLDOWN := 6.0
+## Opening: remark on being lost at junctions this often (steps).
+const LOST_REMARK_EVERY := 18
 
-## The opening escape (#30) is "floor 0": Mara bleeds along a winding hallway
-## with no map until she's weak enough, then daylight appears just ahead.
+## The opening escape (#30, #56) is "floor 0": Mara wakes among the bodies
+## and bleeds through a branching maze with no map. Three fights come after
+## set distances walked; once all three are over and she's weak enough,
+## daylight appears just ahead.
 const OPENING_DEPTH := 0
 const BLEED_EVERY := 12  # time units per point of health lost to bleeding
-const EXIT_HEALTH := 3  # at or below this, the daylight exit appears
+const EXIT_HEALTH := 3  # at or below this (after the fights), daylight appears
 const OPENING_MIN_HEALTH := 2  # she can't drop below this in the opening
-const OPENING_STRAIN := 80.0  # starts Panicking (no random bolting, #30)
-const EXIT_AHEAD := 4  # hallway cells ahead of her where daylight appears
-## Daylight also waits until she's been through this many fights, so an
-## unlucky first fight doesn't cut the tutorial short (owner: 2-3 fights).
-const OPENING_MIN_FIGHTS := 2
-## The opening's fights, in order along the hallway: gentler tutorial
-## creatures, a rat to learn on first. Tuned by simulation: 2-3 fights and
-## about 33 steps before daylight.
+const EXIT_DISTANCE := Vector2i(4, 6)  # steps ahead of her where daylight opens
+## Steps walked before each fight; a retreat brings the same fight back a
+## few steps later.
+const OPENING_FIGHT_STEPS: Array[int] = [20, 44, 68]
+const OPENING_REFIGHT_AFTER := 8
+## If she somehow walks this far, daylight opens anyway.
+const OPENING_STEP_LIMIT := 130
+## The opening's fights, in order: gentler tutorial creatures, a rat first.
 const OPENING_FIGHTS := [
 	[preload("res://data/enemies/starved_rat.tres")],
 	[preload("res://data/enemies/starved_rat.tres")],
 	[preload("res://data/enemies/small_spider.tres")],
 ]
+## Panic is held back until after this fight, then introduced (#56).
+const OPENING_PANIC_AFTER_FIGHT := 2
+const OPENING_START_STRAIN := 10.0
+const OPENING_PANIC_STRAIN := 80.0
+## Slower steps and turns, so hints and moments have room (#56).
+const OPENING_MOVE_TIME := 0.42
+const OPENING_TURN_TIME := 0.32
+## Waking up: looking down at the floor, then lifting the head (#56).
+const WAKE_PITCH_DEGREES := -60.0
 const ResultsScreen := preload("res://scripts/results_screen.gd")
 const PreparationScreen := preload("res://scripts/preparation_screen.gd")
 ## Placeholder camp stop between expeditions until the campsite exists
@@ -190,6 +206,15 @@ var _hint := ""  # which hint is showing
 var _hints_done := {}
 var _steps_taken := 0
 var _opening_fights_done := 0
+var _next_fight_at := 0
+var _eyelids: Control
+var _dialogue_box: PanelContainer  # dialogue_box.gd
+var _last_line := ""
+var _last_spoke_at := -100.0
+var _said := {}  # one-off remarks already made
+var _last_lost_remark := 0
+var _eyelid_top: ColorRect
+var _eyelid_bottom: ColorRect
 var _in_combat := false
 var _touch_pad: Control
 var _pack_button: Button
@@ -227,6 +252,7 @@ func _ready() -> void:
 	_party.stepped.connect(_on_opening_step)
 	_party.bumped.connect(func(_cell): _update_hints("bumped"))
 	_party.opened_door.connect(func(_cell): _update_hints("web_torn"))
+	_party.opened_door.connect(func(_cell): _say("web"))
 	_party.moved.connect(func(_cell, _facing): _update_hints("moved"))
 	_party.bumped.connect(func(_cell): _play_effect(environment_theme.bump_sound))
 	_party.panicked.connect(_on_party_panicked)
@@ -294,7 +320,9 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 	elif arrival == Arrival.FROM_BELOW:
 		cell = _map.find_content(DungeonMap.Content.STAIRS_DOWN)
 	_party.place(_map, cell)
-	if arrival == Arrival.OPENING and not use_debug_layout:
+	if _in_opening:
+		pass  # the wake-up shows the opening line once the bodies are in view
+	elif arrival == Arrival.OPENING and not use_debug_layout:
 		_show_message(opening_message)
 	else:
 		_show_message("%s · depth %d" % [environment_theme.display_name, depth])
@@ -324,6 +352,12 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 	if _expedition.number > 1 and _depth == floors_in_site and cell == _map.start_cell and not use_debug_layout:
 		_ask("The bottom of the cave, where the others fell. End the expedition here?",
 				_end_expedition.bind(Expedition.Ending.REACHED_BOTTOM))
+		return
+	# Opening: the next fight comes once she's walked far enough (#56).
+	if _in_opening and _opening_fights_done < OPENING_FIGHTS.size() and _steps_taken >= _next_fight_at:
+		var types: Array[EnemyType] = []
+		types.assign(OPENING_FIGHTS[_opening_fights_done])
+		_start_combat(cell, types)
 		return
 	# A fight fills its room: entering any part of it starts the fight.
 	var fight_cell: Vector2i = _map.encounter_zones.get(cell, Vector2i(-1, -1))
@@ -386,8 +420,6 @@ func _run_event(cell: Vector2i) -> void:
 ## action panel replaces the movement pad until it's over.
 ## `types` sets the enemies (e.g. an ambush); empty picks a group for the floor.
 func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
-	if types.is_empty() and _in_opening and cell in _opening["fights"]:
-		types.assign(OPENING_FIGHTS[_opening["fights"].find(cell)])
 	if types.is_empty():
 		var groups: Array = ENCOUNTER_GROUPS.get(clampi(_depth, 1, ENCOUNTER_GROUPS.size()))
 		# Never more enemies than heroes standing, so a lone survivor isn't swamped.
@@ -398,6 +430,7 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 	_place_foes(state.foes)
 	_in_combat = true
 	_update_hints("fight")
+	_say("fight_start", true)
 	_party.locked = true
 	_touch_pad.visible = false
 	_pack_button.disabled = true
@@ -416,15 +449,18 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 		CombatState.Result.VICTORY:
 			_party.locked = false
 			_show_message("The way is clear.")
+			_say("fight_won", true)
 			_update_hints("fight_over")
 			if _in_opening:
-				_opening_fights_done += 1
+				_on_opening_fight_won()
 			_check_opening_exit()
 		CombatState.Result.RETREAT:
 			_party.locked = false
 			_map.triggered.erase(cell)  # they're still there, at full strength
 			_expedition.retreats += 1
 			_flee_from(cell)
+			if _in_opening:
+				_next_fight_at = _steps_taken + OPENING_REFIGHT_AFTER  # it follows her
 			_check_opening_exit()
 		CombatState.Result.DEFEAT:
 			_end_expedition(Expedition.Ending.WIPED)
@@ -443,7 +479,10 @@ func _end_expedition(ending: int) -> void:
 		Expedition.Ending.WIPED: "No one is left to carry the lantern. Recruiting new heroes at camp comes later; for now the story begins again.",
 		Expedition.Ending.REACHED_BOTTOM: "You stood where the others fell, and lived to climb back.",
 	}
-	_results.show_results(ending, _expedition, _party_state, notes[ending])
+	if _in_opening and ending == Expedition.Ending.RETURNED:
+		_results.show_brief("Barely survived", "You stagger out into the daylight, alone.", "To camp")
+	else:
+		_results.show_results(ending, _expedition, _party_state, notes[ending])
 	await _results.continue_pressed
 	_results.visible = false
 	if ending == Expedition.Ending.WIPED:
@@ -456,6 +495,9 @@ func _end_expedition(ending: int) -> void:
 ## remembers what was explored, opened and cleared.
 func _start_new_expedition() -> void:
 	_end_opening()
+	for hero: Companion in _party_state.members:
+		hero.appearance.clear()  # washed at camp
+		hero.emit_changed()
 	for hero: Companion in _party_state.living_members():
 		hero.complete_pending_effects()
 		hero.change_health(hero.effective_max_health())
@@ -521,12 +563,18 @@ func _on_party_state_changed(announce := true) -> void:
 			continue
 		if state > before:
 			_show_message("%s is %s." % [member.display_name, StrainRules.NAMES[state].to_lower()])
+			if state == StrainRules.State.PANICKING and not _in_opening:
+				_say("panic", true)
 		elif state < before and state == StrainRules.State.STEADY:
 			_show_message("%s steadies." % member.display_name)
 	# No random bolting during the opening: panic shows, but the controls
 	# tutorial shouldn't fight the player (#30).
 	var panicking: bool = _party_state.panicking_member() != null and not _in_opening
 	_party.panic_chance = StrainRules.PANIC_BOLT_CHANCE if panicking else 0.0
+	# Badly hurt: say so once per expedition (not during fights).
+	for member: Companion in _party_state.living_members():
+		if announce and not _in_combat and member.health * 4 <= member.effective_max_health():
+			_say("hurt", false, true)
 	# Falling outside a fight (a trap, a bad drink) ends the expedition too.
 	if announce and _party_state.living_members().is_empty() and not _in_combat and not _ending:
 		_end_expedition.call_deferred(Expedition.Ending.WIPED)
@@ -543,8 +591,15 @@ func _begin_opening() -> void:
 	_in_opening = true
 	_opening = OpeningGenerator.generate(_site_seed)
 	var hero: Companion = _party_state.members[0]
-	hero.strain = OPENING_STRAIN
+	# Hurt and filthy, but panic is held back until later (#56).
+	hero.strain = OPENING_START_STRAIN
+	hero.strain_locked = true
 	hero.min_health = OPENING_MIN_HEALTH
+	hero.appearance = ["blood", "dirt"]
+	hero.emit_changed()  # redraw the card with the overlays
+	_party.move_time = OPENING_MOVE_TIME
+	_party.turn_time = OPENING_TURN_TIME
+	_next_fight_at = OPENING_FIGHT_STEPS[0]
 	_minimap.visible = false  # no map during the escape
 	_on_party_state_changed(false)
 	_go_to_floor(OPENING_DEPTH, Arrival.OPENING)
@@ -552,7 +607,42 @@ func _begin_opening() -> void:
 	_party.facing = 1
 	_party.rotation.y = -PI / 2.0
 	_party.moved.emit(_party.cell, _party.facing)
+	_wake_up()
+
+
+## Eyes open slowly and the head lifts from the floor; then the bodies are
+## in view and the line about them appears.
+func _wake_up() -> void:
+	_party.locked = true
+	_party.camera.rotation.x = deg_to_rad(WAKE_PITCH_DEGREES)
+	_set_eyelids(0.0)
+	_eyelids.visible = true
+	var lids := create_tween()
+	lids.tween_interval(0.7)
+	lids.tween_method(_set_eyelids, 0.0, 0.35, 0.6)
+	lids.tween_method(_set_eyelids, 0.35, 0.0, 0.25)
+	lids.tween_interval(0.4)
+	lids.tween_callback(_say.bind("wake", true))
+	lids.tween_method(_set_eyelids, 0.0, 0.7, 0.7)
+	lids.tween_method(_set_eyelids, 0.7, 0.15, 0.2)
+	lids.tween_method(_set_eyelids, 0.15, 1.0, 0.9)
+	var look := create_tween()
+	look.tween_interval(1.6)
+	look.tween_property(_party.camera, "rotation:x", 0.0, 2.6).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	await look.finished
+	_eyelids.visible = false
+	_party.locked = false
+	_show_message(opening_message)
 	_update_hints("start")
+	await get_tree().create_timer(2.6).timeout
+	_say("bodies", true, true)
+
+
+## 0 = eyes shut, 1 = wide open.
+func _set_eyelids(open: float) -> void:
+	var cover := (1.0 - open) * 0.5
+	_eyelid_top.anchor_bottom = cover
+	_eyelid_bottom.anchor_top = 1.0 - cover
 
 
 func _end_opening() -> void:
@@ -561,11 +651,14 @@ func _end_opening() -> void:
 	_in_opening = false
 	for hero: Companion in _party_state.members:
 		hero.min_health = 0
+		hero.strain_locked = false
+	_party.move_time = Party.MOVE_TIME
+	_party.turn_time = Party.TURN_TIME
 	_minimap.visible = true
 	_show_hint("")
 
 
-## Bleeding: a point of health every few steps until the exit appears.
+## Bleeding: a point of health every few steps until daylight appears.
 func _on_opening_step(_cell: Vector2i) -> void:
 	if not _in_opening:
 		return
@@ -577,28 +670,83 @@ func _on_opening_step(_cell: Vector2i) -> void:
 		hero.change_health(-1)
 		if not _hints_done.has("bleeding"):
 			_hints_done["bleeding"] = true
-			_show_message("You're bleeding. Keep moving.")
+			_say("bleeding", true, true)
+	# Lost and hurrying: now and then at a junction, and once to find the exit.
+	if _opening_fights_done >= 1:
+		_say("find_exit", false, true)
+	if _steps_taken - _last_lost_remark >= LOST_REMARK_EVERY and _open_ways(_party.cell) >= 3:
+		_last_lost_remark = _steps_taken
+		_say("lost")
 	_check_opening_exit()
 
 
-## Once she's weak enough, daylight appears a few steps further along.
+func _open_ways(cell: Vector2i) -> int:
+	return Party.DIRECTIONS.filter(func(d): return _map.is_passable(cell + d)).size()
+
+
+func _on_opening_fight_won() -> void:
+	_opening_fights_done += 1
+	if _opening_fights_done < OPENING_FIGHTS.size():
+		_next_fight_at = maxi(OPENING_FIGHT_STEPS[_opening_fights_done], _steps_taken + OPENING_REFIGHT_AFTER)
+	if _opening_fights_done == OPENING_PANIC_AFTER_FIGHT:
+		# Panic sets in, and a hint explains what it does (#56).
+		var hero: Companion = _party_state.members[0]
+		hero.strain_locked = false
+		hero.strain = OPENING_PANIC_STRAIN
+		_on_party_state_changed()
+		_show_hint("Panic: %s's hands shake, so she hits less often and less hard. Light, food and rest calm her." % hero.display_name, "panic")
+		_say("panic", true)
+
+
+## Once all three fights are over and she's weak enough, daylight opens a
+## few steps ahead (or anyway, if she's walked a very long way).
 func _check_opening_exit() -> void:
 	if not _in_opening or _in_combat or _exit_cell != Vector2i(-1, -1):
 		return
 	var hero: Companion = _party_state.members[0]
-	if hero.health > EXIT_HEALTH or _opening_fights_done < mini(OPENING_MIN_FIGHTS, _opening["fights"].size()):
+	var can_leave := _opening_fights_done >= OPENING_FIGHTS.size() and hero.health <= EXIT_HEALTH
+	if not can_leave and _steps_taken < OPENING_STEP_LIMIT:
 		return
-	var hallway: Array = _opening["hallway"]
-	var here: int = hallway.find(_party.cell)
-	var index: int = clampi(here + EXIT_AHEAD, 0, hallway.size() - 1)
-	while index < hallway.size() - 1 and (_map.content_at(hallway[index]) != DungeonMap.Content.NONE or _map.door_at(hallway[index]) != DungeonMap.Door.NONE):
-		index += 1
-	_exit_cell = hallway[index]
+	_exit_cell = _pick_exit_cell()
 	_map.contents[_exit_cell] = DungeonMap.Content.STAIRS_UP
-	_map.encounter_zones.erase(_exit_cell)
 	_build_level()
 	_show_message("Cold air on your face. Daylight, just ahead!")
 	_update_hints("exit")
+	_say("daylight", true)
+
+
+## A spot a few steps away, preferably ahead of her rather than behind.
+func _pick_exit_cell() -> Vector2i:
+	var behind: Vector2i = _party.cell - Party.DIRECTIONS[_party.facing]
+	var room: Rect2i = _opening["room"]
+	for avoid_behind in [true, false]:
+		var distance := {_party.cell: 0}
+		var queue: Array[Vector2i] = [_party.cell]
+		var i := 0
+		var options: Array[Vector2i] = []
+		var farthest: Vector2i = _party.cell
+		while i < queue.size():
+			var c := queue[i]
+			i += 1
+			for d in Party.DIRECTIONS:
+				var n: Vector2i = c + d
+				if distance.has(n) or not _map.is_passable(n) or (avoid_behind and n == behind):
+					continue
+				distance[n] = distance[c] + 1
+				if distance[n] > EXIT_DISTANCE.y:
+					continue
+				queue.append(n)
+				if room.has_point(n) or _map.door_at(n) != DungeonMap.Door.NONE:
+					continue
+				if distance[n] >= EXIT_DISTANCE.x:
+					options.append(n)
+				if distance[n] > distance.get(farthest, 0):
+					farthest = n
+		if not options.is_empty():
+			return options.pick_random()
+		if avoid_behind == false and farthest != _party.cell:
+			return farthest
+	return _party.cell + Party.DIRECTIONS[_party.facing]
 
 
 ## The companions' bodies, and the daylight once the exit is open.
@@ -706,6 +854,64 @@ func _finish_hint() -> void:
 	_show_hint("")
 
 
+## Speech box just above the portrait cards (#57).
+func _build_dialogue_box(ui: Control) -> void:
+	var corner := MarginContainer.new()
+	corner.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_LEFT)
+	corner.grow_vertical = Control.GROW_DIRECTION_BEGIN
+	corner.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	corner.add_theme_constant_override("margin_left", 16)
+	corner.add_theme_constant_override("margin_bottom", 196)  # sits above the cards
+	ui.add_child(corner)
+	_dialogue_box = DialogueBox.new()
+	corner.add_child(_dialogue_box)
+
+
+## The lead hero says something fitting `situation` (#57): a line from their
+## library, in the box above the cards, while their portrait talks.
+## Unforced lines respect a short cooldown; `once` lines are said only once.
+func _say(situation: String, force := false, once := false) -> void:
+	if once and _said.has(situation):
+		return
+	var now := Time.get_ticks_msec() / 1000.0
+	if not force and now - _last_spoke_at < SPEECH_COOLDOWN:
+		return
+	var living: Array[Companion] = _party_state.living_members()
+	if living.is_empty() or living[0].dialogue == null:
+		return
+	var hero: Companion = living[0]
+	var line: String = hero.dialogue.pick(situation, _last_line)
+	if line == "":
+		return
+	_said[situation] = true
+	_last_line = line
+	_last_spoke_at = now
+	var seconds: float = _dialogue_box.say(hero.display_name, line)
+	for card in _cards:
+		if card.companion == hero:
+			card._portrait.talk(minf(seconds, 2.5))
+
+
+## Two black lids that close over the screen from top and bottom.
+func _build_eyelids(canvas: CanvasLayer) -> void:
+	_eyelids = Control.new()
+	_eyelids.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_eyelids.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	canvas.add_child(_eyelids)
+	_eyelid_top = ColorRect.new()
+	_eyelid_top.color = Color.BLACK
+	_eyelid_top.anchor_right = 1.0
+	_eyelid_top.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_eyelids.add_child(_eyelid_top)
+	_eyelid_bottom = ColorRect.new()
+	_eyelid_bottom.color = Color.BLACK
+	_eyelid_bottom.anchor_right = 1.0
+	_eyelid_bottom.anchor_bottom = 1.0
+	_eyelid_bottom.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_eyelids.add_child(_eyelid_bottom)
+	_eyelids.visible = false
+
+
 func _build_hint(ui: Control) -> void:
 	_hint_box = PanelContainer.new()
 	var style := StyleBoxFlat.new()
@@ -737,6 +943,7 @@ func _on_light_band_changed(band: Supplies.Light) -> void:
 	match band:
 		Supplies.Light.DIM:
 			_show_message("The lantern burns low.")
+			_say("dark")
 		Supplies.Light.OUT:
 			_show_message("The lantern gutters out. Only a faint glow remains.")
 
@@ -942,6 +1149,7 @@ func _build_ui(minimap: Control) -> void:
 	_touch_pad = pad_corner
 
 	_build_party_cards(ui)
+	_build_dialogue_box(ui)
 	_build_hint(ui)
 	_build_prompt(ui)
 	_build_full_map(canvas)
@@ -957,6 +1165,7 @@ func _build_ui(minimap: Control) -> void:
 	ui.add_child(_event_screen)
 	_results = ResultsScreen.new()
 	canvas.add_child(_results)
+	_build_eyelids(canvas)
 	_preparation = PreparationScreen.new()
 	canvas.add_child(_preparation)
 	minimap.pressed.connect(_set_full_map.bind(true))

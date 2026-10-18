@@ -165,6 +165,8 @@ func refresh() -> void:
 	var shade := lerpf(1.0, 0.7, companion.strain / StrainRules.MAX)
 	_portrait.modulate = Color(0.45, 0.45, 0.45) if not companion.is_alive() else Color(shade, shade, shade)
 	_portrait.set_condition("pallor", companion.is_alive() and state >= StrainRules.State.SHAKEN)
+	for overlay in companion.appearance:
+		_portrait.set_condition(overlay, true)
 	_portrait.set_tremble(companion.is_alive() and state == StrainRules.State.PANICKING)
 	tooltip_text = "%s: %s" % [companion.display_name, StrainRules.NAMES[state]]
 

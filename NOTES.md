@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-17 – Claude
+- Did: #56 opening polish from the owner's playtest: opening_generator.gd is now a Prim's maze (about 130 junctions, 100 dead ends, a few loops) around the bodies room, with a web across the doorway; fights by distance walked (20/44/68 steps, a retreat brings it back 8 steps later); daylight after all 3 fights at <= 3 health (or 130 steps); wake-up pan with eyelids; slower movement (Party.move_time/turn_time) and a slower web push (Party.TEAR_TIME); blood/dirt portrait overlays (Companion.appearance) and strain held (Companion.strain_locked) until panic after fight 2 with a hint; "Barely survived" brief results (ResultsScreen.show_brief) then camp; small spider weakened to 3 health. #57 hero dialogue: DialogueLines resource + data/dialogue/mara.tres (12 situations), DialogueBox above the cards, main.gd `_say()` with cooldown and once-only lines, wired to opening beats and general events.
+- Next: #58 tutorial weapon, #59 torch, #60 combat discussion.
+- Watch out: Fight 3 is still ~7 rounds because panic cuts her hit chance and damage; that's for #60. Dialogue lines are first drafts for the owner to edit.
+
 ## 2026-10-17 – ChatGPT
 - Did: #61 revised Pack to image-only slots with quantity badges and hover/focus or pinned click/touch details. Added an interactive Equipment/Status hero-window study: Equipment on open, portrait selection switches hero, active tab retained between heroes, explicit use/equip/unequip, Back/Escape and focus return. Source, self-contained review, reused-art/font manifest, 16 captures and validation are in art/concepts/interface/pack-heroes-v2; guide is docs/pack-and-hero-window-design.md. Browser checks pass: 146 assertions, no runtime errors at desktop, landscape phone, compact and narrow review widths. Bundled fonts use lossless WOFF container compression with OFL notices; existing TTFs unchanged.
 - Next: Owner reviews the revised Pack and hero window; Claude can integrate through #48/#51 using real inventory/party data, Godot safe areas and existing input/opening restrictions. Current layout decisions are linked in DESIGN.md; the old Pack guide points to the revision.

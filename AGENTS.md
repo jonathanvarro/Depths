@@ -126,11 +126,15 @@ Templates > Download and Install; already installed on the owner's PC).
   expeditions 2+ (the opening skips it). `scripts/safe_area.gd` – shared
   notch/home-bar insets for every screen.
 - `scripts/opening_generator.gd` – the opening escape's bodies room and
-  winding hallway (#30). main.gd's "Opening escape" section runs it as floor
+  branching maze (#30, #56). main.gd's "Opening escape" section runs it as floor
   0: bleeding, health floor, daylight exit, bodies (`body_scenes`), hints.
   `play_opening` on Main turns it off (tests that aren't about the opening
   should); `data/enemies/starved_rat.tres` / `small_spider.tres` are its
   gentler enemies.
+- `scripts/dialogue_lines.gd` + `data/dialogue/*.tres` – a hero's lines by
+  situation (Companion.dialogue); `scripts/dialogue_box.gd` shows them above
+  the cards. main.gd `_say(situation)` picks and shows one (#57). Add lines
+  or situations in the .tres without code.
 - `scripts/pack_screen.gd` – the Pack screen (Pack button under the minimap,
   or I/B). PartyState.use_item(), rest(), cannot_use_reason() do the work.
 - `audio/placeholder/` – generated placeholder sounds (see its README for

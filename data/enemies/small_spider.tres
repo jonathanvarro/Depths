@@ -7,7 +7,7 @@
 script = ExtResource("1")
 display_name = "Small spider"
 scene = ExtResource("2")
-max_health = 6
+max_health = 3
 damage_min = 1
 damage_max = 2
 accuracy = 0.6

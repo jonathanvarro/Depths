@@ -58,9 +58,22 @@ func show_results(ending: int, expedition, party, note: String) -> void:
 	_title.text = Expedition.TITLES[ending]
 	var where := "Expedition %d" % expedition.number
 	_subtitle.text = where + ". " + note
+	_gained.get_parent().visible = true
+	_lost.get_parent().visible = true
 	_fill(_gained, expedition.gained(party), COLOR_DIM_TEXT)
 	_fill(_lost, expedition.lost(party), COLOR_LOSS)
 	_button.text = "Begin again" if ending == Expedition.Ending.WIPED else "New expedition"
+	visible = true
+
+
+## A short ending with no tallies (the opening: "Barely survived", #56).
+## Later this is where gold retrieved and enemies slain will show.
+func show_brief(title: String, note: String, button: String) -> void:
+	_title.text = title
+	_subtitle.text = note
+	_gained.get_parent().visible = false
+	_lost.get_parent().visible = false
+	_button.text = button
 	visible = true
 
 

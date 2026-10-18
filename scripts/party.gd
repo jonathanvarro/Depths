@@ -27,6 +27,9 @@ const DIRECTIONS: Array[Vector2i] = [Vector2i(0, -1), Vector2i(1, 0), Vector2i(0
 const MOVE_TIME := 0.22
 const TURN_TIME := 0.16
 const BUMP_DISTANCE := 0.15
+## Pushing through a web or opening a door: slower than a step (#56).
+const TEAR_TIME := 0.9
+const TEAR_PUSH := 0.35
 const EYE_HEIGHT := 1.2
 
 var map  # dungeon_map.gd
@@ -39,6 +42,10 @@ var locked := false
 ## Chance that a step bolts in a random open direction instead (set while
 ## someone is panicking).
 var panic_chance := 0.0
+## How long a step and a turn take; the opening slows them down (#56).
+var move_time := MOVE_TIME
+var turn_time := TURN_TIME
+var camera: Camera3D
 
 var _busy := false
 var _lantern: OmniLight3D
@@ -47,7 +54,7 @@ var _lantern: OmniLight3D
 ## Creates the camera and lantern. Call once, then place() on each floor.
 func setup(size: float) -> void:
 	cell_size = size
-	var camera := Camera3D.new()
+	camera = Camera3D.new()
 	camera.position.y = EYE_HEIGHT
 	camera.fov = 70.0
 	add_child(camera)
@@ -114,19 +121,22 @@ func _try_step(direction: Vector2i) -> void:
 		map.open_door(target)
 		map.reveal_around(target)
 		opened_door.emit(target)
-		tween.tween_interval(MOVE_TIME)
+		# Lean into it and push through, then settle back.
+		var push := position + Vector3(direction.x, 0, direction.y) * TEAR_PUSH
+		tween.tween_property(self, "position", push, TEAR_TIME * 0.55)
+		tween.tween_property(self, "position", position, TEAR_TIME * 0.45)
 	elif not map.is_passable(target):
 		if map.door_at(target) == DungeonMap.Door.BLOCKED:
 			blocked_by.emit(target)
 		bumped.emit(target)
 		# Bump against the wall so the player knows the input registered.
 		var bump := position + Vector3(direction.x, 0, direction.y) * BUMP_DISTANCE
-		tween.tween_property(self, "position", bump, MOVE_TIME * 0.4)
-		tween.tween_property(self, "position", position, MOVE_TIME * 0.4)
+		tween.tween_property(self, "position", bump, move_time * 0.4)
+		tween.tween_property(self, "position", position, move_time * 0.4)
 	else:
 		cell = target
 		stepped.emit(cell)
-		tween.tween_property(self, "position", _cell_to_world(cell), MOVE_TIME)
+		tween.tween_property(self, "position", _cell_to_world(cell), move_time)
 		map.reveal_around(cell)
 		moved.emit(cell, facing)
 		tween.finished.connect(func(): entered_cell.emit(cell))
@@ -155,7 +165,7 @@ func _turn(step: int) -> void:
 	facing = wrapi(facing + step, 0, 4)
 	# Rotate relative to the current yaw so the turn never spins the long way round.
 	var tween := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	tween.tween_property(self, "rotation:y", rotation.y - step * PI / 2.0, TURN_TIME)
+	tween.tween_property(self, "rotation:y", rotation.y - step * PI / 2.0, turn_time)
 	tween.finished.connect(func(): _busy = false)
 	moved.emit(cell, facing)
 

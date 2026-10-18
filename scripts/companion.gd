@@ -28,6 +28,8 @@ const StrainRules := preload("res://scripts/strain.gd")
 @export var portrait_set: PortraitSet
 ## Single flat image, used if there's no portrait_set.
 @export var portrait: Texture2D
+## What they say, by situation (#57).
+@export var dialogue: DialogueLines
 @export var max_health := 20
 @export var health := 20
 @export_group("Fighting")
@@ -49,6 +51,11 @@ const StrainRules := preload("res://scripts/strain.gd")
 var dressed: Array[Injury] = []
 ## Damage can't take health below this (the opening escape can't be lost, #30).
 var min_health := 0
+## While true, strain doesn't change (the opening holds panic back, #56).
+var strain_locked := false
+## Cosmetic portrait overlays (names in PortraitSet.conditions), e.g. the
+## blood and dirt of the opening.
+var appearance: Array[String] = []
 
 ## Effects still playing out: [{"stat": "health", "per_unit": float,
 ## "units_left": int}]. Health is the only stat for now.
@@ -72,6 +79,8 @@ func change_health(amount: int) -> void:
 
 
 func change_strain(amount: float) -> void:
+	if strain_locked:
+		return
 	var before := strain
 	strain = clampf(strain + amount, 0.0, StrainRules.MAX)
 	if not is_equal_approx(strain, before):
