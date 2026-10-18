@@ -1,0 +1,249 @@
+<div id="depths-pack-heroes" aria-label="Depths Pack and hero interface">
+  <style>
+    @font-face{font-family:DepthsHeading;src:url("@@headingFont@@") format("woff");font-weight:100 900}
+    @font-face{font-family:DepthsBody;src:url("@@bodyFont@@") format("woff");font-weight:100 900}
+    #depths-pack-heroes{--d-bg:#111610;--d-panel:#22231d;--d-inset:#191d17;--d-text:#e6dac1;--d-muted:#b7ab93;--d-edge:#66543c;--d-gold:#d7b174;--d-selected:#51432d;color-scheme:dark;color:var(--d-text);font:20px/1.35 DepthsBody,sans-serif;position:relative}
+    #depths-pack-heroes *{box-sizing:border-box}
+    #depths-pack-heroes [hidden]{display:none!important}
+    #depths-pack-heroes button{font:600 19px/1.25 DepthsBody,sans-serif;color:var(--d-text);background:#303027;border:1px solid var(--d-edge);padding:10px 16px;min-height:48px;border-radius:0;touch-action:manipulation}
+    #depths-pack-heroes button:hover{border-color:var(--d-gold);background:#3d392b}
+    #depths-pack-heroes button:disabled{color:#a69e8d;background:#252820;border-color:#494538;cursor:default}
+    #depths-pack-heroes button:focus-visible{outline:3px solid var(--d-gold);outline-offset:3px}
+    #depths-pack-heroes button[aria-pressed=true],#depths-pack-heroes button[aria-selected=true]{background:var(--d-selected);border-color:var(--d-gold)}
+    #depths-pack-heroes h1,#depths-pack-heroes h2,#depths-pack-heroes h3{font-family:DepthsHeading,serif;font-weight:600;margin:0}
+    #depths-pack-heroes h1{font-size:32px}#depths-pack-heroes h2{font-size:23px}#depths-pack-heroes h3{font-size:19px}
+    #depths-pack-heroes p{margin:0}#depths-pack-heroes .muted{color:var(--d-muted)}
+    #depths-pack-heroes .small{font-size:16px}#depths-pack-heroes .number{font-variant-numeric:tabular-nums}
+    #depths-pack-heroes .stage{background:linear-gradient(#0d120ee8,#0d120ef0),url("@@backdrop@@") center/cover;padding:12px;min-height:570px}
+    #depths-pack-heroes .window{background:var(--d-panel);border:1px solid var(--d-edge);padding:16px;position:relative}
+    #depths-pack-heroes .top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:12px;flex-wrap:wrap}
+    #depths-pack-heroes .controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    #depths-pack-heroes .workspace{display:grid;grid-template-columns:96px minmax(0,1fr);gap:24px}
+    #depths-pack-heroes .party{display:flex;flex-direction:column;gap:12px;border-right:1px solid #454735;padding-right:14px}
+    #depths-pack-heroes .portrait-button{padding:4px;width:80px;display:flex;flex-direction:column;align-items:center;gap:4px}
+    #depths-pack-heroes .portrait-button img{width:68px;height:68px;image-rendering:pixelated;object-fit:cover}
+    #depths-pack-heroes .portrait-button span{font-size:15px}
+    #depths-pack-heroes .portrait-placeholder{height:68px;width:68px;display:grid;place-items:center;background:#171c17;color:#b7ab93}
+    #depths-pack-heroes .portrait-placeholder i{font:600 30px DepthsHeading,serif;font-style:normal}
+    #depths-pack-heroes .hero-heading{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+    #depths-pack-heroes .hero-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+    #depths-pack-heroes .hero-toolbar .hero-heading{margin:0;justify-content:flex-start}
+    #depths-pack-heroes .hero-toolbar .tabs{margin:0;padding:0;border:0}
+    #depths-pack-heroes .tabs{display:flex;gap:4px;margin-bottom:10px;border-bottom:1px solid #454735;padding-bottom:6px}
+    #depths-pack-heroes .tabs button{border-color:transparent;background:transparent;min-width:112px;min-height:44px}
+    #depths-pack-heroes .tabs button[aria-selected=true]{border-color:var(--d-gold);background:var(--d-selected)}
+    #depths-pack-heroes .equip-board{display:grid;grid-template-columns:166px minmax(0,1fr);gap:22px;align-items:start}
+    #depths-pack-heroes .hero-picture{width:160px;height:160px;object-fit:cover;image-rendering:pixelated;border:1px solid var(--d-edge);background:var(--d-inset)}
+    #depths-pack-heroes .large-placeholder{width:160px;height:160px;display:grid;place-items:center;background:var(--d-inset);border:1px solid var(--d-edge);font:600 44px DepthsHeading,serif}
+    #depths-pack-heroes .summary{display:grid;gap:6px}
+    #depths-pack-heroes .equipment{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;max-width:300px}
+    #depths-pack-heroes .equip-cell{display:grid;gap:4px;justify-items:center;min-width:0}
+    #depths-pack-heroes .equip-cell>span{font-size:16px;color:var(--d-muted);text-align:center}
+    #depths-pack-heroes .slot{width:100%;aspect-ratio:1;min-height:64px;padding:4px;position:relative;display:grid;place-items:center;background:#191d17;border:1px solid #5c503d}
+    #depths-pack-heroes .slot img{width:76%;height:76%;object-fit:contain;image-rendering:pixelated;pointer-events:none;filter:drop-shadow(0 2px 1px #080b08)}
+    #depths-pack-heroes .slot .qty{position:absolute;bottom:4px;right:7px;font-size:16px;color:var(--d-gold);background:#191d17;padding:0 3px}
+    #depths-pack-heroes .slot.empty{border-color:#3f4234;background:#1d2019;color:#666953}
+    #depths-pack-heroes .slot.empty:disabled{background:#1d2019;border-color:#3f4234}
+    #depths-pack-heroes .slot .empty-mark{font-size:23px;color:#7f7c67;font-weight:400}
+    #depths-pack-heroes .gear-bag{margin-top:12px;border-top:1px solid #454735;padding-top:8px}
+    #depths-pack-heroes .gear-bag h3{font:400 17px DepthsBody,sans-serif;color:var(--d-muted);margin-bottom:6px}
+    #depths-pack-heroes .spares{display:grid;grid-template-columns:repeat(8,minmax(0,56px));gap:8px}
+    #depths-pack-heroes .spares .slot{min-height:54px;max-width:76px}
+    #depths-pack-heroes .lantern{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:16px}
+    #depths-pack-heroes .lantern strong{color:var(--d-gold);font-weight:600}
+    #depths-pack-heroes .oil-track{height:5px;width:180px;background:#121a15;margin-top:7px}
+    #depths-pack-heroes .oil-fill{width:62%;height:100%;background:var(--d-gold)}
+    #depths-pack-heroes .bag-wrap{display:grid;justify-items:center}
+    #depths-pack-heroes .bag{width:100%;max-width:440px;padding:16px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;background:#1b1e17;border:1px solid #5b4a34;box-shadow:inset 0 0 0 5px #20231b}
+    #depths-pack-heroes .bag .slot{min-height:64px}
+    #depths-pack-heroes .bag .slot img{width:70%;height:70%}
+    #depths-pack-heroes .footer{font-size:16px;color:var(--d-muted);margin-top:10px;min-height:20px}
+    #depths-pack-heroes .status-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+    #depths-pack-heroes .status-column{display:grid;align-content:start;gap:16px}
+    #depths-pack-heroes .status-section{border-top:1px solid #454735;padding-top:10px;display:grid;gap:7px}
+    #depths-pack-heroes .status-section h3{margin-bottom:2px}
+    #depths-pack-heroes .meter-label{display:flex;justify-content:space-between;gap:12px}
+    #depths-pack-heroes .meter{height:7px;background:#121a15}
+    #depths-pack-heroes .meter span{height:100%;display:block;background:#ad6756}
+    #depths-pack-heroes .meter.strain span{background:var(--d-gold)}
+    #depths-pack-heroes dl{margin:0;display:grid;grid-template-columns:1fr auto;gap:7px 14px}#depths-pack-heroes dd{margin:0;color:var(--d-text)}#depths-pack-heroes dt{color:var(--d-muted)}
+    #depths-pack-heroes .inspect{position:absolute;z-index:30;width:320px;max-width:calc(100% - 24px);background:#282b21;border:1px solid var(--d-gold);box-shadow:0 10px 32px #000b;padding:16px;display:grid;gap:10px}
+    #depths-pack-heroes .inspect-head{display:flex;gap:12px;align-items:center;padding-right:38px}
+    #depths-pack-heroes .inspect-head img{width:56px;height:56px;object-fit:contain;image-rendering:pixelated}
+    #depths-pack-heroes .inspect .close{position:absolute;right:5px;top:5px;min-width:44px;min-height:44px;padding:4px;background:transparent;border-color:transparent}
+    #depths-pack-heroes .inspect h2{font-size:22px;overflow-wrap:anywhere}
+    #depths-pack-heroes .inspect .primary{background:var(--d-gold);border-color:var(--d-gold);color:#201f18;width:100%}
+    #depths-pack-heroes .inspect .primary:focus-visible{outline-color:var(--d-text)}
+    #depths-pack-heroes .inspect .primary:disabled{background:#303027;border-color:#66543c;color:#aaa18d}
+    #depths-pack-heroes .inspect[data-pinned=false]{pointer-events:none}
+    #depths-pack-heroes .inspect[data-pinned=false] .primary,#depths-pack-heroes .inspect[data-pinned=false] .close{display:none}
+    #depths-pack-heroes .launcher{min-height:510px;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;align-content:center}
+    #depths-pack-heroes .sample-note{font-size:14px;color:var(--d-muted)}
+    @media(min-width:1100px) and (max-height:650px){#depths-pack-heroes .stage{padding:14px 97px 35px;min-height:0}#depths-pack-heroes .top{margin-bottom:10px}#depths-pack-heroes .footer{margin-top:8px}}
+    @media(max-width:800px){#depths-pack-heroes{font-size:18px}#depths-pack-heroes .stage{padding:12px}#depths-pack-heroes .window{padding:16px}#depths-pack-heroes .workspace{gap:16px;grid-template-columns:82px minmax(0,1fr)}#depths-pack-heroes .party{padding-right:8px}#depths-pack-heroes .portrait-button{width:72px}#depths-pack-heroes .portrait-button img,#depths-pack-heroes .portrait-placeholder{width:60px;height:60px}#depths-pack-heroes .equip-board{grid-template-columns:128px minmax(0,1fr);gap:16px}#depths-pack-heroes .hero-picture,#depths-pack-heroes .large-placeholder{width:124px;height:124px}#depths-pack-heroes .equipment{gap:10px}#depths-pack-heroes .spares{grid-template-columns:repeat(6,minmax(0,1fr))}#depths-pack-heroes .spares .slot{max-width:72px}}
+    @media(max-width:620px){#depths-pack-heroes .workspace{grid-template-columns:1fr}#depths-pack-heroes .party{flex-direction:row;border-right:0;border-bottom:1px solid #454735;padding:0 0 10px;gap:10px;align-items:center}#depths-pack-heroes .portrait-button{min-width:68px}#depths-pack-heroes .sample-note{max-width:100px}#depths-pack-heroes .spares{grid-template-columns:repeat(6,minmax(0,1fr))}#depths-pack-heroes .top{margin-bottom:12px}#depths-pack-heroes .stage{min-height:0}#depths-pack-heroes .inspect{font-size:18px}}
+    @media(max-width:430px){#depths-pack-heroes .stage{padding:6px}#depths-pack-heroes .window{padding:12px}#depths-pack-heroes h1{font-size:27px}#depths-pack-heroes .top{gap:8px}#depths-pack-heroes .top .controls{gap:6px}#depths-pack-heroes button{padding:8px 12px;font-size:18px}#depths-pack-heroes .equip-board{grid-template-columns:1fr}#depths-pack-heroes .summary{display:none}#depths-pack-heroes .equipment{gap:10px}#depths-pack-heroes .spares{grid-template-columns:repeat(4,minmax(0,1fr))}#depths-pack-heroes .status-grid{grid-template-columns:1fr;gap:16px}#depths-pack-heroes .bag{padding:10px;gap:8px;grid-template-columns:repeat(3,minmax(0,1fr))}#depths-pack-heroes .sample-note{font-size:13px;max-width:58px}#depths-pack-heroes .portrait-button{width:64px;min-width:64px}#depths-pack-heroes .portrait-button img,#depths-pack-heroes .portrait-placeholder{width:52px;height:52px}#depths-pack-heroes .party{gap:6px}#depths-pack-heroes .slot{min-height:58px}#depths-pack-heroes .inspect{padding:12px}}
+  </style>
+  <div class="stage">
+    <div class="launcher" hidden>
+      <button class="cursor-interaction" data-open="equipment">Open Equipment</button>
+      <button class="cursor-interaction" data-open="pack">Open Pack</button>
+    </div>
+    <section class="window" aria-label="Party window">
+      <header class="top"><h1 class="page-title">Equipment</h1><div class="controls"><button class="cursor-interaction destination">Pack</button><button class="cursor-interaction back">Back</button></div></header>
+      <div class="workspace">
+        <nav class="party" aria-label="Choose hero"></nav>
+        <main class="page-content">
+          <div class="hero-toolbar"><div class="hero-heading"><h2 class="hero-name">Mara</h2><span class="hero-role muted">Guide</span></div>
+          <div class="tabs" role="tablist" aria-label="Hero details">
+            <button class="cursor-interaction" id="depths-equipment-tab" role="tab" aria-selected="true" aria-controls="depths-equipment">Equipment</button>
+            <button class="cursor-interaction" id="depths-status-tab" role="tab" aria-selected="false" aria-controls="depths-status">Status</button>
+          </div>
+          </div>
+          <section id="depths-equipment" role="tabpanel" aria-labelledby="depths-equipment-tab">
+            <div class="equip-board"><div class="summary"></div><div class="equipment" aria-label="Equipment slots"></div></div>
+            <div class="gear-bag"><h3>In the shared pack</h3><div class="spares" aria-label="Spare equipment"></div></div>
+          </section>
+          <section id="depths-status" role="tabpanel" aria-labelledby="depths-status-tab" hidden></section>
+          <section class="pack-page" aria-label="Shared pack" hidden>
+            <div class="lantern"><div><strong class="number">Lantern · 62 / 100</strong><div class="oil-track"><div class="oil-fill"></div></div></div><span class="muted small">Steady light<br>Burns 1.1 oil / time</span></div>
+            <div class="bag-wrap"><div class="bag" aria-label="Inventory slots"></div></div>
+          </section>
+        </main>
+      </div>
+      <p class="footer" role="status" aria-live="polite">Browsing costs no time.</p>
+    </section>
+    <section class="inspect" role="dialog" aria-modal="false" aria-labelledby="depths-inspect-title" hidden>
+      <button class="cursor-interaction close" aria-label="Close item details">×</button>
+      <div class="inspect-head"><img alt=""><div><h2 id="depths-inspect-title"></h2><p class="inspect-type muted small"></p></div></div>
+      <p id="depths-inspect-description"></p><p class="inspect-extra muted small"></p>
+      <button class="cursor-interaction primary"></button>
+    </section>
+  </div>
+</div>
+<script>
+(()=>{
+  const root=document.getElementById('depths-pack-heroes');
+  const $=s=>root.querySelector(s), $$=s=>[...root.querySelectorAll(s)];
+  const art={mara:'@@mara@@',knife:'@@knife@@',club:'@@club@@',spear:'@@spear@@',staff:'@@staff@@',shield:'@@shield@@',coat:'@@coat@@',oil:'@@oil@@',ration:'@@ration@@',draught:'@@draught@@',dressing:'@@dressing@@'};
+  const items={
+    oil:{name:'Oil flask',type:'Shared supply',desc:'Refills the lantern. Any unused oil stays in the flask.',extra:'For the lantern',verb:'Refill lantern · 2 time'},
+    ration:{name:'Ration',type:'Shared supply',desc:'Each living hero regains 4 health over 20 time. Also feeds the party.',extra:'Recovery finishes at rest or when changing floors.',verb:'Eat ration · 1 time'},
+    draught:{name:'Restorative draught',type:'Shared supply',desc:'The most hurt hero regains 10 health over 20 time.',extra:'Recovery finishes at rest or when changing floors.',verb:'Drink draught · 1 time'},
+    dressing:{name:'Clean dressing',type:'Shared supply',desc:'Binds one injury until camp. Stops its penalty; it does not heal the injury.',extra:'No injury needs binding in this sample.',verb:'No injury to bind'},
+    knife:{name:'Plain knife',type:'Main hand',slot:'main',desc:'A rough iron blade with a worn wooden grip. Light rust marks the edge.'},
+    club:{name:'Wooden club',type:'Main hand',slot:'main',desc:'A heavy knot of wood with a simple wrapped grip.'},
+    spear:{name:'Simple spear',type:'Main hand',slot:'main',desc:'A plain wooden shaft tipped with a small iron point.'},
+    staff:{name:'Plain staff',type:'Main hand',slot:'main',desc:'A worn length of wood with a cloth grip. Nothing ornate.'},
+    shield:{name:'Wooden shield',type:'Off hand',slot:'off',desc:'Rough wooden planks, an iron boss, and a battered rim.'},
+    coat:{name:'Padded coat',type:'Body',slot:'body',desc:'A plain quilted coat, tied at the front. Practical protection.'}
+  };
+  const gear=['knife','club','spear','staff','shield','coat'], supply=['oil','ration','draught','dressing'];
+  const roles=[['head','Head'],['body','Body'],['accessory','Accessory'],['main','Main hand'],['off','Off hand'],['feet','Feet']];
+  const defaults=()=>({page:'equipment',hero:0,open:false,oil:62,openFlask:0,counts:{oil:3,ration:2,draught:1,dressing:2},loadouts:[{main:'knife',body:'coat'},{},{ }],feedback:'Browsing costs no time.'});
+  let state=defaults(), active=null, hideTimer=0, suppressFocus=false, suppressHover=false, opener=null;
+  const heroes=[{name:'Mara',role:'Guide',portrait:art.mara},{name:'Hero II',role:'Example companion',initial:'II'},{name:'Hero III',role:'Example companion',initial:'III'}];
+  const settings={party:'Full party example'};
+  function restore(saved){
+    const p=saved?.privateContent;
+    if(!p||p.version!==2)return;
+    if(['equipment','status','pack'].includes(p.page))state.page=p.page;
+    if(Number.isInteger(p.hero)&&p.hero>=0&&p.hero<3)state.hero=p.hero;
+    if(typeof p.open==='boolean')state.open=p.open;
+    if(Number.isFinite(p.oil))state.oil=Math.max(0,Math.min(100,p.oil));
+    if(Number.isFinite(p.openFlask))state.openFlask=Math.max(0,Math.min(100,p.openFlask));
+    if(p.counts&&supply.every(k=>Number.isInteger(p.counts[k])&&p.counts[k]>=0&&p.counts[k]<=9))state.counts={...p.counts};
+    if(Array.isArray(p.loadouts)&&p.loadouts.length===3){
+      const seen=new Set();
+      state.loadouts=p.loadouts.map(o=>Object.fromEntries(Object.entries(o||{}).filter(([s,k])=>{if(items[k]?.slot!==s||seen.has(k))return false;seen.add(k);return true;})));
+    }
+  }
+  function remember(){root.dispatchEvent(new CustomEvent('depths:panel-state',{bubbles:true,detail:{privateContent:{version:2,...state}}}));}
+  root.addEventListener('depths:restore',e=>{closeDetail(false);restore(e.detail);render();});
+  root.addEventListener('depths:fuel',e=>{state.oil=e.detail.oil;refreshLamp();});
+  root.addEventListener('depths:open',e=>{closeDetail(false);state.open=true;state.page=e.detail.page==='pack'?'pack':'equipment';state.hero=e.detail.hero||0;state.feedback='Browsing costs no time.';render();$('.back').focus();if(e.detail.item){const b=$('.bag [data-item="'+e.detail.item+'"]');if(b){showDetail(b,true);$('.inspect .primary').focus();}}remember();});
+  function inPack(k){return !state.loadouts.some(o=>Object.values(o).includes(k));}
+  function refreshLamp(){const light=state.oil<=0?'Out':state.oil<100/3?'Dim':state.oil<200/3?'Steady':'Bright';$('.lantern strong').textContent='Lantern · '+Math.round(state.oil)+' / 100';$('.lantern>.muted').textContent=light+' light · '+(state.oil>0?.5+state.oil/100:0).toFixed(1)+' oil / time';$('.oil-fill').style.width=state.oil+'%';}
+  function slot(k,context,label){
+    const b=document.createElement('button');b.type='button';b.className='slot cursor-interaction'+(!k?' empty':'');
+    if(!k){b.disabled=true;b.setAttribute('aria-label',label||'Empty inventory slot');b.innerHTML='<span class="empty-mark" aria-hidden="true">·</span>';return b;}
+    b.dataset.item=k;b.dataset.context=context;b.setAttribute('aria-label',items[k].name+(supply.includes(k)?`, ${state.counts[k]} left`:''));b.setAttribute('aria-haspopup','dialog');b.setAttribute('aria-expanded','false');
+    const image=document.createElement('img');image.src=art[k];image.alt='';b.append(image);
+    if(supply.includes(k)){const n=document.createElement('span');n.className='qty number';n.textContent='×'+state.counts[k];b.append(n);}
+    b.addEventListener('pointerenter',e=>{if(e.pointerType!=='touch'&&!active?.pinned&&!suppressHover)showDetail(b,false);});
+    b.addEventListener('pointerleave',()=>{if(!active?.pinned)hideTimer=setTimeout(()=>{if(!active?.pinned)closeDetail(false);},160);});
+    b.addEventListener('focus',()=>{if(!suppressFocus&&!active?.pinned)showDetail(b,false);});
+    b.addEventListener('click',()=>{showDetail(b,true);$('.inspect .primary').disabled?$('.inspect .close').focus():$('.inspect .primary').focus();});
+    return b;
+  }
+  function render(){
+    $('.window').hidden=!state.open;$('.launcher').hidden=state.open;
+    $('.page-title').textContent=state.page==='pack'?'Pack':state.page==='status'?'Status':'Equipment';
+    $('.destination').textContent=state.page==='pack'?'Heroes':'Pack';
+    const nav=$('.party');nav.replaceChildren();heroes.forEach((h,i)=>{
+      const b=document.createElement('button');b.type='button';b.className='portrait-button cursor-interaction';b.dataset.hero=i;b.setAttribute('aria-label','Inspect '+h.name);b.setAttribute('aria-pressed',String(state.hero===i));
+      b.hidden=settings.party==='Mara only'&&i>0;
+      b.innerHTML=h.portrait?`<img src="${h.portrait}" alt=""><span>${h.name}</span>`:`<span class="portrait-placeholder" aria-hidden="true"><i>${h.initial}</i></span><span>${h.name}</span>`;
+      b.addEventListener('click',()=>{closeDetail(false);state.hero=i;if(state.page==='pack')state.page='equipment';state.feedback='Browsing costs no time.';render();$(`[data-hero="${i}"]`).focus();remember();});nav.append(b);
+    });
+    const note=document.createElement('span');note.className='sample-note';note.textContent='Example party';note.hidden=settings.party==='Mara only';nav.append(note);
+    const h=heroes[state.hero];$('.hero-name').textContent=h.name;$('.hero-role').textContent=h.role;
+    $('.hero-toolbar').hidden=state.page==='pack';$('.hero-heading').hidden=state.page==='pack';$('.tabs').hidden=state.page==='pack';
+    $('#depths-equipment').hidden=state.page!=='equipment';$('#depths-status').hidden=state.page!=='status';$('.pack-page').hidden=state.page!=='pack';
+    $('#depths-equipment-tab').setAttribute('aria-selected',String(state.page==='equipment'));$('#depths-status-tab').setAttribute('aria-selected',String(state.page==='status'));
+    $('.summary').innerHTML=(h.portrait?`<img class="hero-picture" alt="Mara" src="${h.portrait}">`:`<div class="large-placeholder" aria-hidden="true">${h.initial}</div>`)+(state.hero===0?'<p class="small number">Health 14 / 20</p><p class="muted small">Shaken</p>':'<p class="small muted">Example companion</p>');
+    const grid=$('.equipment');grid.replaceChildren();roles.forEach(([id,name])=>{const c=document.createElement('div');c.className='equip-cell';const label=document.createElement('span');label.textContent=name;c.append(label,slot(state.loadouts[state.hero][id],'equipped','Empty '+name));grid.append(c);});
+    const spares=$('.spares');spares.replaceChildren();gear.filter(inPack).forEach(k=>spares.append(slot(k,'bag')));
+    const bag=$('.bag');bag.replaceChildren();[...supply,...gear.filter(inPack)].forEach(k=>bag.append(slot(k,'bag')));while(bag.children.length<12)bag.append(slot(null,'bag'));
+    $('#depths-status').innerHTML=state.hero===0?`<div class="status-grid"><div class="status-column"><section class="status-section"><h3>Condition</h3><div class="meter-label"><span>Health</span><span class="number">14 / 20</span></div><div class="meter" role="meter" aria-label="Health" aria-valuenow="14" aria-valuemin="0" aria-valuemax="20"><span style="width:70%"></span></div><div class="meter-label"><span>Strain · Shaken</span><span class="number">55 / 100</span></div><div class="meter strain" role="meter" aria-label="Strain" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"><span style="width:55%"></span></div><p class="small muted">Fed · No lasting injuries</p></section><section class="status-section"><h3>Combat</h3><dl><dt>Base attack</dt><dd class="number">2–4</dd><dt>Base accuracy</dt><dd class="number">75%</dd><dt>Initiative</dt><dd class="number">10</dd></dl><p class="small muted">Current strain reduces effectiveness.</p></section></div><div class="status-column"><section class="status-section"><h3>Personality</h3><p>Weathered, practical, quiet under pressure.</p></section><section class="status-section"><h3>Burden</h3><p>Guilt over the companions she lost.</p></section><section class="status-section"><h3>Reason to go on</h3><p>She led them into the cave. Now she has to get out and live with it.</p></section></div></div>`:'<div class="status-grid"><section class="status-section"><h3>Condition</h3><dl><dt>Health</dt><dd>—</dd><dt>Strain</dt><dd>—</dd><dt>Injuries</dt><dd>—</dd></dl></section><section class="status-section"><h3>Character</h3><p class="muted">Example companion</p><p class="small muted">The same window will show this hero’s condition and personality.</p></section></div>';
+    $('.footer').textContent=state.feedback;
+    refreshLamp();
+  }
+  function closeDetail(restoreFocus=true){
+    clearTimeout(hideTimer);const previous=active?.trigger;if(previous)previous.setAttribute('aria-expanded','false');active=null;$('.inspect').hidden=true;suppressHover=true;
+    if(restoreFocus&&previous?.isConnected){suppressFocus=true;previous.focus({preventScroll:true});requestAnimationFrame(()=>suppressFocus=false);}
+  }
+  function placeDetail(){
+    if(!active)return;const p=$('.inspect'),r=root.getBoundingClientRect(),a=active.trigger.getBoundingClientRect();
+    const w=p.offsetWidth,h=p.offsetHeight;let x=a.right-r.left+12;if(x+w>r.width-12)x=a.left-r.left-w-12;
+    x=Math.max(12,Math.min(x,r.width-w-12));const y=Math.max(12,Math.min(a.top-r.top,r.height-h-12));p.style.left=x+'px';p.style.top=y+'px';
+  }
+  function showDetail(trigger,pinned){
+    clearTimeout(hideTimer);if(active?.trigger!==trigger)closeDetail(false);const k=trigger.dataset.item,i=items[k];
+    active={key:k,context:trigger.dataset.context,trigger,pinned};trigger.setAttribute('aria-expanded','true');
+    $('.inspect-head img').src=art[k];$('#depths-inspect-title').textContent=i.name;$('.inspect-type').textContent=i.type;
+    $('#depths-inspect-description').textContent=i.desc;
+    $('.inspect-extra').textContent=i.extra||(active.context==='equipped'?'Equipped by '+heroes[state.hero].name:'For '+heroes[state.hero].name);
+    const b=$('.inspect .primary');b.disabled=k==='dressing'||(supply.includes(k)&&state.counts[k]===0);
+    b.textContent=supply.includes(k)?(state.counts[k]===0?'None left':i.verb):(active.context==='equipped'?'Unequip':'Equip for '+heroes[state.hero].name);
+    if(k==='oil'){b.disabled=state.oil>=99.5||(state.counts.oil===0&&state.openFlask<=0);b.textContent=state.oil>=99.5?'Lantern is full':b.disabled?'None left':i.verb;$('.inspect-extra').textContent=state.openFlask>0?'Open flask: '+Math.round(state.openFlask)+' oil left.':'Unused oil stays in the flask.';}
+    $('.inspect').dataset.pinned=String(pinned);$('.inspect').hidden=false;placeDetail();
+  }
+  $('.inspect').addEventListener('pointerenter',()=>clearTimeout(hideTimer));$('.inspect').addEventListener('pointerleave',()=>{if(!active?.pinned)hideTimer=setTimeout(()=>{if(!active?.pinned)closeDetail(false);},160);});
+  $('.inspect .close').addEventListener('click',()=>closeDetail());
+  $('.inspect .primary').addEventListener('click',()=>{
+    if(!active||$('.inspect .primary').disabled)return;
+    const {key:k,context}=active,i=items[k];
+    if(supply.includes(k)){
+      if(k==='oil'){let space=100-state.oil;const fromOpen=Math.min(space,state.openFlask);state.openFlask-=fromOpen;state.oil+=fromOpen;space-=fromOpen;if(space>=.5&&state.counts.oil>0){state.counts.oil--;const poured=Math.min(space,100);state.oil+=poured;state.openFlask=100-poured;}}
+      else state.counts[k]--;
+      for(let n=0;n<({oil:2,ration:1,draught:1,dressing:3}[k]);n++)state.oil=Math.max(0,state.oil-(state.oil>0?.5+state.oil/100:0));
+      state.feedback=k==='ration'?'You eat. Strength returns slowly.':k==='draught'?'The draught takes hold slowly.':'You refill the lantern.';
+    }
+    else{if(context==='equipped'){delete state.loadouts[state.hero][i.slot];state.feedback=i.name+' returned to the shared pack.';}else{state.loadouts[state.hero][i.slot]=k;state.page='equipment';state.feedback=i.name+' equipped by '+heroes[state.hero].name+'.';}}
+    closeDetail(false);render();const destination=$(`[data-item="${k}"]`);suppressFocus=true;(destination||$('.destination')).focus({preventScroll:true});requestAnimationFrame(()=>suppressFocus=false);remember();
+  });
+  function changePage(page){closeDetail(false);state.page=page;state.feedback='Browsing costs no time.';render();remember();}
+  $('#depths-equipment-tab').addEventListener('click',()=>changePage('equipment'));$('#depths-status-tab').addEventListener('click',()=>changePage('status'));
+  $('.tabs').addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();const page=e.target.id==='depths-status-tab'?'equipment':'status';changePage(page);$(page==='status'?'#depths-status-tab':'#depths-equipment-tab').focus();}});
+  $('.destination').addEventListener('click',()=>changePage(state.page==='pack'?'equipment':'pack'));
+  function closeWindow(){closeDetail(false);state.open=false;render();(opener||$('[data-open="equipment"]')).focus();remember();}
+  $('.back').addEventListener('click',closeWindow);
+  $$('[data-open]').forEach(b=>b.addEventListener('click',()=>{opener=b;state.open=true;state.page=b.dataset.open;state.feedback='Browsing costs no time.';render();$('.back').focus();remember();}));
+  root.addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();e.stopPropagation();active?closeDetail():state.open&&closeWindow();}});
+  root.addEventListener('pointerdown',e=>{if(active&&!$('.inspect').contains(e.target)&&!active.trigger.contains(e.target))closeDetail(false);});
+  root.addEventListener('pointermove',e=>{if(e.pointerType!=='touch'&&(e.movementX||e.movementY)){suppressHover=false;const b=e.target.closest('.slot[data-item]');if(b&&!active?.pinned&&active?.trigger!==b)showDetail(b,false);}});
+  new ResizeObserver(placeDetail).observe(root);
+  render();
+})();
+</script>

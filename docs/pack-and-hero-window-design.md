@@ -2,6 +2,8 @@
 
 Owner direction, 2026-10-17 (#61): revise Pack into **image-only slots**, revealing descriptions on **hover or touch**. Put **Equipment and Status in the same hero window**, open it on Equipment by default, and use **hero portraits to switch the inspected person**. This supersedes the labelled-row layout of the [first Pack study](pack-screen-design.md).
 
+**Follow-up (#62):** The owner liked this revision and requested a simpler [standard exploration HUD](exploration-hud-design.md): backpack icon just right of the portraits, Settings gear, and a source-aware lantern/torch indicator. The Pack/hero composition stays the basis for those windows; a compact light readout is now explicitly wanted outside Pack.
+
 An interactive review was supplied in the design chat. Its editable source, self-contained fragment, source-art/font manifest, captures and validation are in [pack-heroes-v2](../art/concepts/interface/pack-heroes-v2/README.md). This remains a browser design study; the live Godot Pack and hero cards are unchanged.
 
 [Equipment](../art/concepts/interface/pack-heroes-v2/desktop-equipment.png) · [Status](../art/concepts/interface/pack-heroes-v2/desktop-status.png) · [Pack](../art/concepts/interface/pack-heroes-v2/desktop-pack.png) · [Item detail](../art/concepts/interface/pack-heroes-v2/desktop-item-detail.png)

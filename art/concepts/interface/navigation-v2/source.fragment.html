@@ -1,0 +1,155 @@
+<div id="depths-hud" aria-label="Depths exploration navigation">
+  <style>
+    #depths-hud{--hud-bg:#12170f;--hud-panel:#22231d;--hud-text:#e6dac1;--hud-muted:#b7ab93;--hud-edge:#66543c;--hud-gold:#d7b174;--scene-dim:.22;position:relative;color-scheme:dark;color:var(--hud-text);font:20px/1.35 DepthsBody,sans-serif}
+    #depths-hud *{box-sizing:border-box}#depths-hud [hidden]{display:none!important}
+    #depths-hud .exploration{position:relative;min-height:570px;background:#171b12;overflow:hidden}
+    #depths-hud .cave{position:absolute;inset:0;background:url("@@cave@@") center/cover}
+    #depths-hud .darkness{position:absolute;inset:0;background:#030704;opacity:var(--scene-dim);pointer-events:none;transition:opacity .2s}
+    #depths-hud button{font:600 18px/1.25 DepthsBody,sans-serif;color:var(--hud-text);background:#22261df2;border:1px solid var(--hud-edge);border-radius:0;min-height:48px;padding:10px 16px;touch-action:manipulation}
+    #depths-hud button:hover{background:#3b382a;border-color:var(--hud-gold)}
+    #depths-hud button:focus-visible,#depths-hud input:focus-visible{outline:3px solid var(--hud-gold);outline-offset:3px}
+    #depths-hud button:disabled{background:#141b12c9;border-color:#454a37;color:#797e69;cursor:default}
+    #depths-hud h1,#depths-hud h2{font-family:DepthsHeading,serif;font-weight:600;margin:0}#depths-hud h1{font-size:30px}#depths-hud h2{font-size:24px}
+    #depths-hud p{margin:0}#depths-hud .muted{color:var(--hud-muted)}#depths-hud .small{font-size:16px}#depths-hud .number{font-variant-numeric:tabular-nums}
+    #depths-hud .icon-button{width:64px;height:64px;padding:12px;display:grid;place-items:center}
+    #depths-hud .icon-button svg{width:34px!important;height:34px!important;stroke-width:1.75}
+    #depths-hud .top-tools{position:absolute;right:24px;top:72px;display:flex;gap:14px;align-items:start}
+    #depths-hud .map-thumb{width:120px;height:90px;padding:4px;background:#2f291b}
+    #depths-hud .map-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+    #depths-hud .bottom-hud{position:absolute;left:24px;right:24px;bottom:28px;display:flex;align-items:end;justify-content:space-between;gap:18px}
+    #depths-hud .party-and-pack{display:flex;align-items:center;gap:12px}
+    #depths-hud .hud-portraits{display:flex;gap:8px}
+    #depths-hud .hud-portrait{width:82px;padding:4px;display:grid;gap:3px;text-align:left}
+    #depths-hud .hud-portrait img{width:72px;height:72px;object-fit:cover;image-rendering:pixelated;display:block}
+    #depths-hud .hud-portrait .hero-label{font-size:16px}
+    #depths-hud .health-track{height:5px;background:#121a15}#depths-hud .health-track span{display:block;width:70%;height:100%;background:#ad6756}
+    #depths-hud .empty-hero{height:120px;display:grid;align-content:center;text-align:center;font:400 24px DepthsHeading,serif}
+    #depths-hud .move-pad{display:grid;grid-template-columns:repeat(3,56px);grid-template-rows:repeat(2,56px);gap:8px}
+    #depths-hud .move-forward{grid-column:2}#depths-hud .move-left{grid-column:1;grid-row:2}#depths-hud .move-back{grid-column:2;grid-row:2}#depths-hud .move-right{grid-column:3;grid-row:2}
+    #depths-hud .move-pad button{width:56px;height:56px;min-height:56px;padding:12px}
+    #depths-hud .move-pad svg{width:30px!important;height:30px!important;stroke-width:1.75}
+    #depths-hud .fuel-button{position:absolute;left:24px;top:24px;width:68px;min-height:124px;padding:6px;display:grid;justify-items:center;gap:5px;background:#172016e8}
+    #depths-hud .fuel-art{position:relative;width:44px;height:76px;display:block}
+    #depths-hud .handle{position:absolute;left:12px;top:0;width:20px;height:16px;border:2px solid #99825a;border-bottom:0;border-radius:12px 12px 0 0}
+    #depths-hud .cap{position:absolute;left:5px;top:14px;width:34px;height:6px;background:#8a7754;border-radius:3px 3px 0 0}
+    #depths-hud .glass{position:absolute;left:8px;top:20px;width:28px;height:35px;background:#24271a;border-left:2px solid #8a7754;border-right:2px solid #8a7754}
+    #depths-hud .flame{position:absolute;left:7px;bottom:5px;width:12px;height:21px;background:#e2b36b;border-radius:60% 10% 55% 45%;transform:rotate(15deg);box-shadow:0 0 14px #dcaa6059;transform-origin:bottom center}
+    #depths-hud .reservoir{position:absolute;left:7px;top:55px;width:30px;height:14px;background:#0d150e;overflow:hidden}
+    #depths-hud .oil{position:absolute;bottom:0;left:0;right:0;height:62%;background:#c79752;transition:height .2s}
+    #depths-hud .base{position:absolute;left:4px;top:69px;width:36px;height:5px;background:#8a7754}
+    #depths-hud .torch-art{display:none;position:absolute;inset:0}
+    #depths-hud .torch-stick{position:absolute;bottom:2px;left:18px;width:9px;height:40px;background:#856344;transform:rotate(6deg)}
+    #depths-hud .torch-head{position:absolute;bottom:38px;left:13px;width:18px;height:15px;background:repeating-linear-gradient(15deg,#78634b 0 3px,#433d2d 3px 5px)}
+    #depths-hud .torch-fire{position:absolute;bottom:48px;left:12px;width:19px;height:28px;background:#e2b36b;border-radius:65% 8% 55% 40%;transform-origin:bottom center;box-shadow:0 0 14px #dcaa6059}
+    #depths-hud .fuel-button[data-source=torch] .lantern-art{display:none}
+    #depths-hud .fuel-button[data-source=torch] .torch-art{display:block}
+    #depths-hud .fuel-caption{font-size:15px;display:grid;justify-items:center;gap:1px}
+    #depths-hud .fuel-caption .fuel-band{font-weight:400;color:var(--hud-muted)}
+    #depths-hud .fuel-details{position:absolute;left:105px;top:24px;z-index:10;width:280px;max-width:calc(100% - 24px);background:var(--hud-panel);border:1px solid var(--hud-gold);padding:16px;display:grid;gap:12px;box-shadow:0 8px 24px #0009}
+    #depths-hud .fuel-details .close-fuel{position:absolute;top:4px;right:4px;width:44px;padding:6px;background:transparent;border-color:transparent}
+    #depths-hud .fuel-details h2{padding-right:34px}
+    #depths-hud .oil-action{background:var(--hud-gold);color:#201f18}
+    #depths-hud .utility-page{background:linear-gradient(#0d120ee8,#0d120ef0),url("@@cave@@") center/cover;padding:24px;min-height:570px}
+    #depths-hud .utility-panel{background:var(--hud-panel);border:1px solid var(--hud-edge);padding:24px;max-width:820px;margin:0 auto}
+    #depths-hud .utility-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px}
+    #depths-hud .setting-row{display:grid;gap:12px;border-top:1px solid #454735;padding:18px 0}
+    #depths-hud .setting-label{display:flex;justify-content:space-between;gap:14px}
+    #depths-hud input[type=range]{width:100%;min-height:44px;accent-color:var(--hud-gold)}
+    #depths-hud .controls-grid{display:grid;grid-template-columns:1fr auto;gap:14px;margin:0}#depths-hud .controls-grid dd{margin:0;color:var(--hud-muted)}
+    #depths-hud .full-map{width:100%;max-height:370px;object-fit:contain;display:block;background:#201f17}
+    #depths-hud .inventory-window{background:var(--hud-bg)}
+    #depths-hud .notice{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+    @media(min-width:1100px){#depths-hud .bottom-hud{left:97px;right:97px;bottom:35px}#depths-hud .top-tools{right:97px}#depths-hud .fuel-button{left:97px;top:14px}#depths-hud .fuel-details{left:178px;top:14px}}
+    @media(max-width:620px){#depths-hud .bottom-hud{left:14px;right:14px;bottom:20px;gap:12px}#depths-hud .hud-portrait{width:64px;padding:4px}#depths-hud .hud-portrait img{width:54px;height:54px}#depths-hud .hud-portrait .hero-label{font-size:14px}#depths-hud .empty-hero{height:98px}#depths-hud .hud-portraits{gap:6px}#depths-hud .party-and-pack{gap:8px}#depths-hud .party-and-pack .icon-button{width:48px;height:52px;padding:10px}#depths-hud .move-pad{grid-template-columns:repeat(3,48px);grid-template-rows:repeat(2,48px);gap:6px}#depths-hud .move-pad button{width:48px;height:48px;min-height:48px;padding:10px}#depths-hud .fuel-button{left:14px;top:14px}#depths-hud .top-tools{right:14px;top:72px;gap:10px}#depths-hud .utility-page{padding:12px}#depths-hud .utility-panel{padding:16px}#depths-hud .fuel-details{left:92px;top:14px;width:260px}}
+    @media(max-width:430px){#depths-hud .exploration{min-height:600px}#depths-hud .bottom-hud{flex-wrap:wrap;justify-content:end}#depths-hud .party-and-pack{width:100%;justify-content:start}#depths-hud .fuel-details{left:12px;top:150px}#depths-hud .top-tools .map-thumb{width:88px;height:78px}#depths-hud .utility-heading{gap:8px}#depths-hud h1{font-size:27px}#depths-hud .controls-grid{grid-template-columns:1fr;gap:4px}#depths-hud .controls-grid dd{margin-bottom:10px}}
+    @media(prefers-reduced-motion:reduce){#depths-hud .darkness,#depths-hud .oil{transition:none}}
+  </style>
+  <section class="exploration" aria-label="Cave exploration">
+    <div class="cave" aria-hidden="true"></div><div class="darkness" aria-hidden="true"></div>
+    <button class="fuel-button cursor-interaction" aria-label="Lantern oil" aria-haspopup="dialog" aria-expanded="false" data-tooltip="Lantern oil and light">
+      <span class="fuel-art" aria-hidden="true"><span class="lantern-art"><span class="handle"></span><span class="cap"></span><span class="glass"><span class="flame"></span></span><span class="reservoir"><span class="oil"></span></span><span class="base"></span></span><span class="torch-art"><span class="torch-stick"></span><span class="torch-head"></span><span class="torch-fire"></span></span></span>
+      <span class="fuel-caption"><span class="fuel-percent number">62%</span><span class="fuel-band">Steady</span></span>
+    </button>
+    <div class="top-tools"><button class="map-thumb cursor-interaction" aria-label="Open map" data-tooltip="Map"><img src="@@map@@" alt=""></button><button class="icon-button settings-button cursor-interaction" aria-label="Settings" data-tooltip="Settings"><i data-lucide="settings" aria-hidden="true"></i></button></div>
+    <div class="bottom-hud">
+      <div class="party-and-pack"><div class="hud-portraits" aria-label="Party portraits"><button class="hud-portrait mara-button cursor-interaction" aria-label="Mara: open Equipment" data-tooltip="Mara · Equipment"><img class="mara-image" alt=""><span class="hero-label">Mara</span><span class="health-track" aria-hidden="true"><span></span></span><span class="hero-label number">14 / 20</span></button><button class="hud-portrait empty-hero" disabled aria-label="Empty party slot">—</button><button class="hud-portrait empty-hero" disabled aria-label="Empty party slot">—</button></div><button class="icon-button backpack-button cursor-interaction" aria-label="Open Pack" data-tooltip="Pack"><i data-lucide="backpack" aria-hidden="true"></i></button></div>
+      <div class="move-pad" aria-label="Movement"><button class="move-forward cursor-interaction" aria-label="Move forward" data-tooltip="Forward · W / ↑"><i data-lucide="arrow-up" aria-hidden="true"></i></button><button class="move-left cursor-interaction" aria-label="Turn left" data-tooltip="Turn left · A / ←"><i data-lucide="rotate-ccw" aria-hidden="true"></i></button><button class="move-back cursor-interaction" aria-label="Move back" data-tooltip="Back · S / ↓"><i data-lucide="arrow-down" aria-hidden="true"></i></button><button class="move-right cursor-interaction" aria-label="Turn right" data-tooltip="Turn right · D / →"><i data-lucide="rotate-cw" aria-hidden="true"></i></button></div>
+    </div>
+    <section class="fuel-details" role="dialog" aria-modal="false" aria-labelledby="depths-fuel-title" hidden><button class="close-fuel cursor-interaction" aria-label="Close lantern details">×</button><h2 id="depths-fuel-title">Lantern</h2><p class="oil-value number">62 / 100 oil</p><p class="light-value muted small">Steady light · 1.1 oil / time</p><button class="oil-action cursor-interaction">Find oil in Pack</button></section>
+    <p class="notice" aria-live="polite" role="status"></p>
+  </section>
+  <div class="inventory-window" hidden>@@heroPanels@@</div>
+  <section class="utility-page settings-page" aria-label="Settings" hidden><div class="utility-panel"><header class="utility-heading"><h1>Settings</h1><button class="settings-back cursor-interaction">Back</button></header><div class="setting-row"><label class="setting-label" for="depths-volume"><span>Sound</span><span class="volume-value number">80%</span></label><input id="depths-volume" type="range" min="0" max="100" value="80" aria-label="Sound volume"></div><div class="setting-row"><button class="show-controls cursor-interaction">Controls</button></div></div></section>
+  <section class="utility-page controls-page" aria-label="Controls" hidden><div class="utility-panel"><header class="utility-heading"><h1>Controls</h1><button class="controls-back cursor-interaction">Back</button></header><dl class="controls-grid"><dt>Move forward / back</dt><dd>W / S · ↑ / ↓</dd><dt>Turn left / right</dt><dd>A / D · ← / →</dd><dt>Pack</dt><dd>I · Backpack</dd><dt>Hero equipment</dt><dd>Hero portrait</dd><dt>Map</dt><dd>M · Map corner</dd><dt>Back</dt><dd>Escape</dd></dl></div></section>
+  <section class="utility-page map-page" aria-label="Map" hidden><div class="utility-panel"><header class="utility-heading"><h1>Map</h1><button class="map-back cursor-interaction">Back</button></header><img class="full-map" src="@@map@@" alt="Hand-drawn cave map on rough paper"></div></section>
+</div>
+<script>
+(()=>{
+ const root=document.getElementById('depths-hud'),$=s=>root.querySelector(s);
+ const panels=$('#depths-pack-heroes');
+ const state={view:'exploration',source:'lantern',oil:62,torchLeft:31,volume:80,party:null};let origin=$('.backpack-button');
+ function band(){if(state.source==='torch')return state.torchLeft<=0?'Out':state.torchLeft<10?'Dim':'Steady';return state.oil<=0?'Out':state.oil<100/3?'Dim':state.oil<200/3?'Steady':'Bright';}
+ function burnRate(){return state.oil<=0?0:.5+state.oil/100;}
+ function remember(){if(window.openai?.setWidgetState)window.openai.setWidgetState({modelContent:{design:'Icon navigation and source-aware light',view:state.view,source:state.source,oil:Math.round(state.oil),torchLeft:state.torchLeft,light:band()},privateContent:{version:3,...state}}).catch(()=>{});}
+ function setView(){
+   $('.exploration').hidden=state.view!=='exploration';$('.inventory-window').hidden=state.view!=='inventory';
+   $('.settings-page').hidden=state.view!=='settings';$('.controls-page').hidden=state.view!=='controls';$('.map-page').hidden=state.view!=='map';
+ }
+ function fuel(){
+   const label=band(),torch=state.source==='torch',percent=Math.round(torch?state.torchLeft*2:state.oil);$('.fuel-percent').textContent=percent+'%';$('.fuel-band').textContent=label;
+   $('.fuel-button').dataset.source=state.source;
+   $('.fuel-button').setAttribute('aria-label',(torch?'Torch life, ':'Lantern oil, ')+percent+' percent, '+label+' light');
+   $('.fuel-button').setAttribute('data-tooltip',(torch?'Torch':'Lantern')+' · '+percent+'% left · '+label+' light');
+   $('.oil').style.height=state.oil+'%';$('.flame').hidden=state.oil<=0;
+   $('.flame').style.transform='rotate(15deg) scale('+(.5+.5*state.oil/100)+')';
+   $('.flame').style.opacity=String(.55+.45*state.oil/100);
+   const light=torch?(state.torchLeft<=0?0:state.torchLeft<10?.33:.55):state.oil/100;
+   root.style.setProperty('--scene-dim',light<=0?.78:.06+.58*(1-light));
+   $('.torch-fire').hidden=state.torchLeft<=0;$('.torch-fire').style.transform='rotate(12deg) scale('+(.3+.7*state.torchLeft/50)+')';
+   $('.torch-head').style.filter='brightness('+(.4+.6*state.torchLeft/50)+')';
+   $('#depths-fuel-title').textContent=torch?'Torch':'Lantern';$('.oil-action').hidden=torch;
+   $('.oil-value').textContent=torch?Math.round(state.torchLeft)+' / 50 time left':percent+' / 100 oil';$('.light-value').textContent=label+' light'+(torch?'':' · '+burnRate().toFixed(1)+' oil / time');
+   panels.dispatchEvent(new CustomEvent('depths:fuel',{detail:{oil:state.oil}}));
+   if(torch){panels.querySelector('.lantern strong').textContent='Torch · '+Math.round(state.torchLeft)+' / 50 time left';panels.querySelector('.lantern>.muted').textContent=label+' light';panels.querySelector('.oil-fill').style.width=percent+'%';}
+ }
+ function closeFuel(restore=true){$('.fuel-details').hidden=true;$('.fuel-button').setAttribute('aria-expanded','false');if(restore)$('.fuel-button').focus();}
+ function openInventory(page='pack',item=null,opener=$('.backpack-button')){origin=opener;closeFuel(false);state.view='inventory';setView();panels.dispatchEvent(new CustomEvent('depths:open',{detail:{page,item}}));}
+ function returnToCave(){state.view='exploration';closeFuel(false);setView();origin.focus({preventScroll:true});remember();}
+ function openSettings(){origin=$('.settings-button');closeFuel(false);state.view='settings';setView();$('.settings-back').focus();remember();}
+ function openMap(){origin=$('.map-thumb');closeFuel(false);state.view='map';setView();$('.map-back').focus();remember();}
+ $('.mara-image').src=panels.querySelector('.portrait-button img').src;
+ $('.backpack-button').addEventListener('click',()=>openInventory());
+ $('.mara-button').addEventListener('click',()=>openInventory('equipment',null,$('.mara-button')));
+ $('.settings-button').addEventListener('click',openSettings);$('.map-thumb').addEventListener('click',openMap);
+ $('.settings-back').addEventListener('click',returnToCave);$('.map-back').addEventListener('click',returnToCave);
+ $('.show-controls').addEventListener('click',()=>{state.view='controls';setView();$('.controls-back').focus();remember();});
+ function backToSettings(){state.view='settings';setView();$('.show-controls').focus();remember();}
+ $('.controls-back').addEventListener('click',backToSettings);
+ $('.fuel-button').addEventListener('click',()=>{if(!$('.fuel-details').hidden){closeFuel();return;}$('.fuel-details').hidden=false;$('.fuel-button').setAttribute('aria-expanded','true');$('.close-fuel').focus();});
+ $('.close-fuel').addEventListener('click',()=>closeFuel());$('.oil-action').addEventListener('click',()=>openInventory('pack','oil',$('.fuel-button')));
+ $('#depths-volume').addEventListener('input',e=>{state.volume=Number(e.target.value);$('.volume-value').textContent=state.volume+'%';remember();});
+ root.addEventListener('depths:panel-state',e=>{state.party=e.detail;state.oil=e.detail.privateContent.oil;fuel();if(!e.detail.privateContent.open&&state.view==='inventory')returnToCave();else remember();});
+ function step(){const before=band();if(state.source==='torch')state.torchLeft=Math.max(0,state.torchLeft-1);else state.oil=Math.max(0,state.oil-burnRate());fuel();if(before!==band())$('.notice').textContent='Light is '+band().toLowerCase()+'.';remember();}
+ $('.move-forward').addEventListener('click',step);$('.move-back').addEventListener('click',step);
+ for(const s of ['.move-left','.move-right'])$(s).addEventListener('click',()=>{$('.notice').textContent=s==='.move-left'?'Turn left.':'Turn right.';});
+ root.addEventListener('keydown',e=>{
+   if(e.key==='Escape'){e.preventDefault();if(state.view==='controls')backToSettings();else if(state.view!=='exploration'&&state.view!=='inventory')returnToCave();else if(!$('.fuel-details').hidden)closeFuel();else if(state.view==='exploration')openSettings();return;}
+   if(e.target.tagName==='INPUT')return;
+   if(state.view!=='exploration'||e.repeat)return;
+   const key=e.key.toLowerCase();if(key==='i'||key==='b'){e.preventDefault();openInventory();}else if(key==='m'){e.preventDefault();openMap();}else if(['w','s','arrowup','arrowdown'].includes(key)){e.preventDefault();step();}
+ });
+ function restore(saved){const p=saved?.privateContent;if(p?.version!==3)return;
+   if(p.view===state.view&&p.source===state.source&&p.torchLeft===state.torchLeft&&p.oil===state.oil&&p.volume===state.volume&&JSON.stringify(p.party)===JSON.stringify(state.party))return;
+   state.source=p.source==='torch'?'torch':'lantern';if(Number.isFinite(p.torchLeft))state.torchLeft=Math.max(0,Math.min(50,p.torchLeft));
+   if(Number.isFinite(p.oil))state.oil=Math.max(0,Math.min(100,p.oil));if(Number.isFinite(p.volume))state.volume=Math.max(0,Math.min(100,p.volume));
+   if(p.party){state.party=p.party;panels.dispatchEvent(new CustomEvent('depths:restore',{detail:p.party}));}
+   state.view=['exploration','inventory','settings','controls','map'].includes(p.view)?p.view:'exploration';
+   if(state.view==='inventory'&&!p.party?.privateContent?.open)state.view='exploration';
+   $('#depths-volume').value=state.volume;$('.volume-value').textContent=state.volume+'%';setView();fuel();
+ }
+ restore(window.openai?.widgetState);setView();fuel();
+ window.addEventListener('openai:set_globals',e=>restore(e.detail?.globals?.widgetState));
+ if(globalThis.lucide)lucide.createIcons({attrs:{width:26,height:26}});
+ if(globalThis.Tweak){const tweak=new Tweak({container:$('.fuel-button'),onChange:()=>{fuel();remember();}});tweak.addSelect(state,'source',{label:'Light source',options:[{label:'Lantern',value:'lantern'},{label:'Torch',value:'torch'}]});tweak.addSlider(state,'oil',{label:'Lantern oil',min:0,max:100,step:1,unit:'%',reference:'lantern.oil'});tweak.addSlider(state,'torchLeft',{label:'Torch life',min:0,max:50,step:1,unit:' time',reference:'torch.remaining'});}
+})();
+</script>

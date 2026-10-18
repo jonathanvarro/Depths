@@ -1,0 +1,98 @@
+{
+  "issue": 62,
+  "kind": "Code-authored HUD study; no new generated artwork",
+  "assets": [
+    {
+      "id": "mara",
+      "reused": "art/concepts/interface/pack-heroes-v2/assets/mara.png",
+      "sha256": "410c5f8e535156a54ad440567506ca260218c13fabf96ab10a96260c30d44348"
+    },
+    {
+      "id": "knife",
+      "reused": "art/concepts/interface/pack-heroes-v2/assets/knife.png",
+      "sha256": "1b7467a88a561986d64eacd7eaf6613736ad3d9ab5c4c154bf14823906d83a90"
+    },
+    {
+      "id": "club",
+      "reused": "art/concepts/interface/pack-heroes-v2/assets/club.png",
+      "sha256": "562d119b27b7d1e00ad18c12c6bf375e1942404c0046aa43ef75e36d21b91536"
+    },
+    {
+      "id": "spear",
+      "reused": "art/concepts/interface/pack-heroes-v2/assets/spear.png",
+      "sha256": "b28a5b4f8874a07164d749f96accf6179f8b8ad32bfd2c4789348920a71ef00e"
+    },
+    {
+      "id": "staff",
+      "reused": "art/concepts/interface/pack-heroes-v2/assets/staff.png",
+      "sha256": "a46a3a9a61df7a847375f107c54df5643aaa2f328122eaa7f884b9481bc0caf1"
+    },
+    {
+      "id": "shield",
+      "reused": "art/concepts/interface/pack-heroes-v2/assets/shield.png",
+      "sha256": "d8fc097ac8321db6888d4c39709195c65ef210d45fc7e8bef8b7c2b3111f5a7b"
+    },
+    {
+      "id": "coat",
+      "reused": "art/concepts/interface/pack-heroes-v2/assets/coat.png",
+      "sha256": "7f9e269a25cb71cacb249981cc44cd7ebe0bc0df682b823c4853c14b5f4e8f80"
+    },
+    {
+      "id": "oil",
+      "reused": "art/concepts/interface/pack-heroes-v2/assets/oil.png",
+      "sha256": "5ae1024b45fdda648f636597ecdc46ac95a3c832f9467a3ad90d24901d138f32"
+    },
+    {
+      "id": "ration",
+      "reused": "art/concepts/interface/pack-heroes-v2/assets/ration.png",
+      "sha256": "9b5251ead2eaacfac07599be1fbc59c31c4bbd276aeb28584f4ea90f959346a8"
+    },
+    {
+      "id": "draught",
+      "reused": "art/concepts/interface/pack-heroes-v2/assets/draught.png",
+      "sha256": "caa8994a284a6c0542aff86dc32f6a95ed75df37763624dbcc46420d8a8d77ae"
+    },
+    {
+      "id": "dressing",
+      "reused": "art/concepts/interface/pack-heroes-v2/assets/dressing.png",
+      "sha256": "776f78c8fc0fe58b3148dad370ee173ebcc250a45c9279351c0238a66407b020"
+    },
+    {
+      "id": "backdrop",
+      "reused": "art/concepts/interface/pack-heroes-v2/assets/backdrop.jpg",
+      "sha256": "631e2f7d7a1c3e734c2b4f1b542af4154dd3f7f436f664acd459e9fa0e3520a8"
+    },
+    {
+      "id": "headingFont",
+      "reused": "art/concepts/interface/pack-heroes-v2/assets/headingFont.woff",
+      "sha256": "8bdda0befa856867fd016921713f3bc8e64f56f2f7b6aecc61c77d3969809091"
+    },
+    {
+      "id": "bodyFont",
+      "reused": "art/concepts/interface/pack-heroes-v2/assets/bodyFont.woff",
+      "sha256": "9d3438a4110e0da64f457a4714a9a1dac9cf69407084b49e799b2d787b07a19e"
+    },
+    {
+      "id": "cave",
+      "source": "art/concepts/interface/navigation-v1/cave-backdrop.png",
+      "output": "art/concepts/interface/navigation-v2/assets/cave.jpg",
+      "source_sha256": "2d352872d81f94c1cfee224d48a3ebbf51120e9c304fce55faa7fb5043f5952c",
+      "sha256": "508d9516572c7c5a12adfa198268e7aac7038f07af5793a825965a9848f56a7b",
+      "size": [
+        960,
+        540
+      ]
+    },
+    {
+      "id": "map",
+      "source": "art/concepts/map/hero-map-v1.png",
+      "output": "art/concepts/interface/navigation-v2/assets/map.jpg",
+      "source_sha256": "db1121eee643b055d3f702e3597ec48e7437b7ca64022593800a9a21c949abcb",
+      "sha256": "55dc654c9306425961d2c809784d709fe2ef9c35b89905dda47548ef33f418d1",
+      "size": [
+        640,
+        360
+      ]
+    }
+  ]
+}

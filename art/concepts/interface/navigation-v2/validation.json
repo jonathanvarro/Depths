@@ -1,0 +1,29 @@
+{
+  "checks": 419,
+  "failures": [],
+  "errors": [],
+  "viewports": [
+    [
+      1024,
+      720
+    ],
+    [
+      1278,
+      590
+    ],
+    [
+      736,
+      590
+    ],
+    [
+      568,
+      590
+    ],
+    [
+      320,
+      900
+    ]
+  ],
+  "physical_phone_test": false,
+  "live_game_changed": false
+}

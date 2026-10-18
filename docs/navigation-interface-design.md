@@ -4,6 +4,8 @@ The owner asked to brainstorm the general navigation interface so it can establi
 
 **Follow-up (2026-10-17):** The owner selected **Field kit** in the interactive comparison and chose Pack as the next design. See [Pack screen refinement](pack-screen-design.md) (#39) for the editable Godot preview using the accepted title/font pairing. The original alternatives below remain a record of the comparison; the live Pack has not yet adopted the new design.
 
+**Current refinement (#61/#62):** The owner liked the [image-slot Pack and tabbed hero window](pack-and-hero-window-design.md), then requested a [simpler exploration HUD](exploration-hud-design.md): icon-only backpack just right of portraits, Settings gear and a compact visible lantern/torch meter. These explicit updates supersede the labelled Pack/Menu and no-fuel-readout suggestions below; accessible names and hover/focus labels remain required.
+
 ## Two coherent directions
 
 | Direction | Exploration | Windows | Trade-off |
