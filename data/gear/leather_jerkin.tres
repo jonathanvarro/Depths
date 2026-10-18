@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Equipment" format=3]
+
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/items/armour-v1/leather-jerkin.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+display_name = "Leather jerkin"
+description = "Stiff leather over the chest and shoulders. Takes 2 off every blow, but you move slower in it."
+icon = ExtResource("2")
+attack_min = 0
+attack_max = 0
+price = 48
+slot = "body"
+armour = 2
+initiative_penalty = 2

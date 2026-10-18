@@ -34,7 +34,7 @@ const GOBLIN_SHIELD_CHANCE := 0.4
 ## Enemy intentions (#60): every enemy shows what it will do on its next
 ## turn - the action, never the target - so Defend, targeting and items are
 ## real choices. Each is planned after the enemy acts (and at the start).
-enum Intent { ATTACK, LUNGE, DART, WEB, BITE, SWING, HEAVY, SHIELD, KILLING_BLOW, SHOOT, BASH, BRACE, CALL, SCREECH, CLEAVER }
+enum Intent { ATTACK, LUNGE, DART, WEB, BITE, SWING, HEAVY, SHIELD, KILLING_BLOW, SHOOT, BASH, BRACE, CALL, SCREECH, CLEAVER, RUSH, RECOVER, BEAT }
 const INTENT_TEXT := {
 	Intent.ATTACK: "attacking",
 	Intent.LUNGE: "lunging",
@@ -51,7 +51,14 @@ const INTENT_TEXT := {
 	Intent.CALL: "calling her guards",
 	Intent.SCREECH: "drawing breath to screech",
 	Intent.CLEAVER: "raising her cleaver",
+	Intent.RUSH: "bunching to rush",
+	Intent.RECOVER: "catching its breath",
+	Intent.BEAT: "beating a war drum",
 }
+## New monsters (#47): a great rat's rush hits harder; a drummer's beat
+## makes each other goblin's next hit stronger.
+const RUSH_DAMAGE := 2
+const DRUM_DAMAGE := 1
 ## The fortress (#44). Guards brace now and then; the queen calls up to
 ## QUEEN_CALLS guards, screeches (strain for everyone) and swings a cleaver
 ## the coin decides. Below half health she's enraged: she steps forward,
@@ -124,6 +131,8 @@ var _turn := 0
 var _defending := {}  # Companion -> true until their next turn
 var _webbed := {}  # Companion -> true until their next action
 var _venom := {}  # Companion -> turns left
+var _opened := {}  # Companion -> true after their first attack (opening shot, #47)
+var _drummed := {}  # Foe -> true: their next hit is stronger (goblin drummer)
 ## Things that happened between actions (venom ticking...). The combat
 ## screen shows and clears these after each advance().
 var events: PackedStringArray = []
@@ -153,7 +162,7 @@ func plan(foe: Foe) -> void:
 		EnemyType.Tactic.DARTING:
 			foe.intent = Intent.DART if hurt and not foe.glancing and rng.randf() < RAT_FLEE_CHANCE else Intent.LUNGE
 		EnemyType.Tactic.WEB_AND_VENOM:
-			var reweb := foe.intent == Intent.BITE and rng.randf() < SPIDER_REWEB_CHANCE
+			var reweb := foe.intent == Intent.BITE and rng.randf() < foe.type.web_chance
 			foe.intent = Intent.WEB if not foe.has_webbed or reweb else Intent.BITE
 		EnemyType.Tactic.CUNNING:
 			if not foe.shielded and foe.health * 2 <= foe.type.max_health and rng.randf() < GOBLIN_SHIELD_CHANCE:
@@ -166,6 +175,10 @@ func plan(foe: Foe) -> void:
 				foe.intent = Intent.SWING
 		EnemyType.Tactic.ARCHER:
 			foe.intent = Intent.SHOOT
+		EnemyType.Tactic.RUSHER:
+			foe.intent = Intent.RECOVER if foe.intent == Intent.RUSH else Intent.RUSH
+		EnemyType.Tactic.DRUMMER:
+			foe.intent = Intent.SWING if foe.intent == Intent.BEAT else Intent.BEAT
 		EnemyType.Tactic.GUARD:
 			foe.intent = Intent.BRACE if not foe.shielded and foe.intent != Intent.BRACE and rng.randf() < GUARD_BRACE_CHANCE else Intent.BASH
 		EnemyType.Tactic.QUEEN:
@@ -236,7 +249,7 @@ func _killing_blow(foe: Foe) -> Dictionary:
 	if heads:
 		outcome["text"] = "The %s's %s whistles past %s!" % [foe.name.to_lower(), "cleaver" if foe.intent == Intent.CLEAVER else "killing blow", target.display_name]
 		return outcome
-	var damage: int = maxi(1, foe.type.damage_max * HEAVY_MULTIPLIER - target.toughness)
+	var damage: int = maxi(1, foe.type.damage_max * HEAVY_MULTIPLIER - target.damage_reduction())
 	target.change_health(-damage)
 	outcome["hit"] = true
 	outcome["damage"] = damage
@@ -378,6 +391,11 @@ func hero_attack(hero: Companion, target: Foe) -> Dictionary:
 		var damage := maxi(1, roundi(rng.randi_range(reach.x, reach.y) * hero.effectiveness()))
 		if hero.trait_id == "grudge" and target.type.display_name.begins_with("Goblin"):
 			damage += 1  # Corin's grudge (#95)
+		if hero.has_talent("berserker") and hero.health * 2 < hero.effective_max_health():
+			damage += 2
+		if hero.has_talent("opening_shot") and not _opened.has(hero):
+			damage += 2
+		_opened[hero] = true
 		if target.shielded:
 			damage = maxi(1, damage / 2)
 		if target.in_back() and guard_wall_up():
@@ -424,6 +442,9 @@ func _carry_out(foe: Foe) -> Dictionary:
 		Intent.WEB:
 			foe.has_webbed = true
 			var victim := _choose_target(foe)
+			if victim and victim.has_talent("slip_web"):
+				return {"target": victim, "hit": false, "damage": 0, "injury": null,
+						"text": "The %s spits a web at %s, who slips free." % [foe.name.to_lower(), victim.display_name]}
 			if victim:
 				_webbed[victim] = true
 				return {"target": victim, "hit": false, "damage": 0, "injury": null,
@@ -440,6 +461,15 @@ func _carry_out(foe: Foe) -> Dictionary:
 					"text": "The %s braces behind its shield." % foe.name.to_lower()}
 		Intent.CALL:
 			return _call_guard(foe)
+		Intent.RECOVER:
+			return {"target": null, "hit": false, "damage": 0, "injury": null,
+					"text": "The %s pants, catching its breath." % foe.name.to_lower()}
+		Intent.BEAT:
+			for other in living_foes():
+				if other != foe:
+					_drummed[other] = true
+			return {"target": null, "hit": false, "damage": 0, "injury": null,
+					"text": "The %s pounds its drum - the others snarl and surge." % foe.name.to_lower()}
 		Intent.SCREECH:
 			return _screech(foe)
 	var heavy := foe.intent == Intent.HEAVY
@@ -451,6 +481,11 @@ func _carry_out(foe: Foe) -> Dictionary:
 		var damage := rng.randi_range(foe.type.damage_min, foe.type.damage_max)
 		if foe.enraged:
 			damage += ENRAGED_DAMAGE
+		if foe.intent == Intent.RUSH:
+			damage += RUSH_DAMAGE
+		if _drummed.has(foe):
+			damage += DRUM_DAMAGE
+			_drummed.erase(foe)
 		if heavy:
 			damage *= HEAVY_MULTIPLIER
 		if heavy and is_defending(target):
@@ -458,7 +493,7 @@ func _carry_out(foe: Foe) -> Dictionary:
 		elif is_defending(target):
 			damage = maxi(1, floori(damage * target.guard_factor))
 		if damage > 0:
-			damage = maxi(1, damage - target.toughness)
+			damage = maxi(1, damage - target.damage_reduction())  # toughness, talents, armour (#93)
 		if heavy and damage == 0:
 			outcome["text"] = "%s braces and turns aside the %s's heavy blow!" % [target.display_name, foe.name.to_lower()]
 			_check_end()
@@ -468,7 +503,7 @@ func _carry_out(foe: Foe) -> Dictionary:
 		outcome["damage"] = damage
 		var verb: String = "brings down a heavy blow on" if heavy else foe.type.attack_verb
 		outcome["text"] = "The %s %s %s for %d." % [foe.name.to_lower(), verb, target.display_name, damage]
-		if foe.type.tactic == EnemyType.Tactic.WEB_AND_VENOM and target.is_alive():
+		if foe.type.tactic == EnemyType.Tactic.WEB_AND_VENOM and foe.type.venomous and target.is_alive():
 			_venom[target] = VENOM_TURNS
 			outcome["text"] += " Venom burns in the wound."
 		if target.is_alive() and not foe.type.injuries.is_empty() and rng.randf() < foe.type.injury_chance:
@@ -564,8 +599,8 @@ func _build_order() -> void:
 		_order.append(foe)
 	# Higher initiative first; ties go to the party.
 	_order.sort_custom(func(a, b):
-		var ia: int = a.initiative if a is Companion else a.type.initiative
-		var ib: int = b.initiative if b is Companion else b.type.initiative
+		var ia: int = a.effective_initiative() if a is Companion else a.type.initiative
+		var ib: int = b.effective_initiative() if b is Companion else b.type.initiative
 		if ia != ib:
 			return ia > ib
 		return a is Companion and not b is Companion)

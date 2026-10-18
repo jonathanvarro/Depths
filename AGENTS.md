@@ -206,6 +206,14 @@ Templates > Download and Install; already installed on the owner's PC).
   `data/companions/{mara,corin,alwen}.tres`, Companion `trait_id`,
   `trait_name`, `trait_text`, `backstory`, `pronouns`; SaveGame
   `new_game_hero`; PartyState `has_trait`, `field_bind`.
+- Stats, levels, XP (#47): `scripts/progression.gd` (thresholds, floor
+  limits, talents, advance/auto_advance); Companion `uses_stats`, stat_str/
+  dex/vit/res, aim_base, speed_base, hp_bonus, damage_max_mod, level, xp,
+  talents, `refresh_stats()`, `damage_reduction()`, `effective_initiative()`;
+  CampState `xp_left`, `best_level`, `advance()`; main.gd `_award_fight_xp`,
+  `_grant_xp`. EnemyType `threat`. Armour (#93): Equipment `slot`, `armour`,
+  `initiative_penalty`, `force`, `light`; Companion `body`.
+  `tools/progression_check.gd`.
 - `scripts/chest_screen.gd` – chest window beside the pack: drag (set_drag_
   forwarding), tap, or the take-all icon button; `took` signal.
 - `scripts/pack_screen.gd` – the Pack screen (Pack button under the minimap,

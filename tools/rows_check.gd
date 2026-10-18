@@ -89,7 +89,7 @@ func _initialize() -> void:
 		guard += 1
 	await create_timer(0.3).timeout
 	check("a Move button with company", main._combat._action_buttons.get_children().any(func(b): return b.text == "Move" and b.visible))
-	check("cards show rows", main._cards.any(func(card): return card._row_label.text in ["front", "back"]))
+	check("cards show rows", main._cards.any(func(card): return card._row_label.text.ends_with("front") or card._row_label.text.ends_with("back")))
 	if dir != "":
 		for i in 4:
 			await process_frame

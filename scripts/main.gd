@@ -23,6 +23,7 @@ const ChestScreen := preload("res://scripts/chest_screen.gd")
 const CampState := preload("res://scripts/camp_state.gd")
 const CampScreen := preload("res://scripts/camp_screen.gd")
 const SaveGame := preload("res://scripts/save_game.gd")
+const Progression := preload("res://scripts/progression.gd")
 const CoinFlip := preload("res://scripts/coin_flip.gd")
 const Settings := preload("res://scripts/settings.gd")
 const SettingsScreen := preload("res://scripts/settings_screen.gd")
@@ -104,6 +105,9 @@ const GOBLIN := preload("res://data/enemies/goblin.tres")
 const ARCHER := preload("res://data/enemies/goblin_archer.tres")
 const GUARD := preload("res://data/enemies/goblin_guard.tres")
 const QUEEN := preload("res://data/enemies/goblin_queen.tres")
+const GREAT_RAT := preload("res://data/enemies/great_rat.tres")
+const WEBSPINNER := preload("res://data/enemies/webspinner.tres")
+const DRUMMER := preload("res://data/enemies/goblin_drummer.tres")
 ## The goblin fortress (#44): floor 3 is its outskirts, floor 4 the fortress
 ## with the queen's hall behind a gate.
 const OUTSKIRTS_DEPTH := 3
@@ -118,12 +122,14 @@ const QUEEN_FIGHT: Array = [QUEEN, GUARD, GUARD]
 ## Deeper floors mix tactics: rats pick on the weakest while a spider webs
 ## someone or a goblin flanks (#15).
 const ENCOUNTER_GROUPS := {
-	1: [[RAT], [RAT], [SPIDER], [RAT, RAT], [RAT, SPIDER], [RAT, RAT, RAT]],
-	2: [[RAT], [SPIDER], [RAT, RAT], [RAT, SPIDER], [GOBLIN, RAT], [SPIDER, SPIDER], [GOBLIN, SPIDER], [RAT, RAT, SPIDER], [GOBLIN, RAT, RAT], [GOBLIN, SPIDER, RAT]],
+	1: [[RAT], [RAT], [SPIDER], [GREAT_RAT], [RAT, RAT], [RAT, SPIDER], [GREAT_RAT, RAT], [RAT, RAT, RAT]],
+	2: [[RAT], [SPIDER], [GREAT_RAT], [RAT, RAT], [RAT, SPIDER], [GOBLIN, RAT], [SPIDER, SPIDER], [GOBLIN, SPIDER], [WEBSPINNER, GOBLIN],
+			[RAT, RAT, SPIDER], [GREAT_RAT, SPIDER, RAT], [GOBLIN, RAT, RAT], [GOBLIN, SPIDER, RAT]],
 	3: [[SPIDER], [GOBLIN], [GOBLIN, SPIDER], [GOBLIN, GOBLIN], [GOBLIN, ARCHER], [GOBLIN, RAT, RAT], [GOBLIN, SPIDER, RAT],
-			[GOBLIN, GOBLIN, SPIDER], [GOBLIN, GOBLIN, ARCHER], [GOBLIN, GOBLIN, RAT, RAT], [GOBLIN, SPIDER, SPIDER, RAT]],
+			[GOBLIN, GOBLIN, SPIDER], [GOBLIN, GOBLIN, ARCHER], [GOBLIN, WEBSPINNER, GOBLIN], [GOBLIN, GOBLIN, DRUMMER],
+			[GOBLIN, GOBLIN, RAT, RAT], [GOBLIN, SPIDER, SPIDER, RAT]],
 	4: [[GOBLIN], [GOBLIN, ARCHER], [GUARD, GOBLIN], [GUARD, ARCHER], [GOBLIN, GOBLIN, ARCHER],
-			[GUARD, GOBLIN, ARCHER], [GUARD, GOBLIN, GOBLIN], [GUARD, GUARD, ARCHER, GOBLIN]],
+			[GUARD, GOBLIN, ARCHER], [GUARD, GOBLIN, GOBLIN], [GUARD, DRUMMER, GOBLIN], [GUARD, GUARD, ARCHER, GOBLIN]],
 }
 ## Full parties meet groups close to their size (#49): never more enemies
 ## than heroes standing, except one extra for a full party on the deepest
@@ -626,6 +632,7 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 		CombatState.Result.VICTORY:
 			_party.locked = false
 			_show_message("The way is clear.")
+			_award_fight_xp(state)
 			match _fight_kind:
 				"gate": _break_gates()
 				"queen": _queen_defeated()
@@ -645,6 +652,49 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 		CombatState.Result.DEFEAT:
 			_end_expedition(Expedition.Ending.WIPED)
 	_fight_kind = ""
+
+
+# --- Experience (#47) ---------------------------------------------------
+
+## A fight won: every hero still with the party learns from it. Ordinary
+## fights draw on the floor's limited fight XP; the gate and the queen are
+## one-off awards instead.
+func _award_fight_xp(state) -> void:
+	if _in_opening or _depth < 1:
+		return
+	var amount := 0
+	match _fight_kind:
+		"gate":
+			amount = Progression.GATE_XP
+		"queen":
+			amount = Progression.QUEEN_XP + Progression.CLEARED_XP
+		_:
+			var threat := 0
+			for foe in state.foes:
+				if not foe.is_alive():
+					threat += foe.type.threat
+			amount = _camp_state.take_floor_xp(_depth, threat * Progression.XP_PER_THREAT)
+	if amount <= 0:
+		if _fight_kind == "":
+			_show_message("The way is clear. Nothing more to learn from these.")
+		return
+	_grant_xp(amount)
+	_show_message("The way is clear. +%d XP" % amount)
+
+
+## Everyone with the party gets the full award; anyone below the camp's
+## benchmark (one level under its best) gets it twice until they catch up.
+func _grant_xp(amount: int) -> void:
+	var benchmark: int = Progression.THRESHOLDS[maxi(1, _camp_state.best_level - 1)] if _camp_state.best_level > 1 else 0
+	for hero: Companion in _party_state.members:
+		if not hero.is_with_party():
+			continue
+		var extra := clampi(benchmark - hero.xp, 0, amount)
+		var was_ready := Progression.ready_to_advance(hero)
+		hero.xp += amount + extra
+		if not was_ready and Progression.ready_to_advance(hero):
+			_show_message("%s is ready to advance - choose at camp." % hero.display_name)
+		hero.emit_changed()
 
 
 ## A beaten enemy's purse (goblins, #42).
@@ -747,6 +797,7 @@ func _camp_loop(reward := 0, note := "") -> void:
 	_save_now()  # autosave on returning to camp (#45)
 	var start_depth: int = await _camp.cave_chosen
 	_party_state.field_bind_used = false  # the field medic's binding: once a trip
+	_party_state.field_binds = 0
 	_camp.visible = false
 	_camp_state.leave_behind(_party_state)
 	_expedition = Expedition.new(_party_state, _expedition.number + 1)

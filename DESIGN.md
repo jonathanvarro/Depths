@@ -265,6 +265,25 @@ Suggested initial presentation: one campsite screen with a few selectable activi
 - **Main heroes** keep their traits, with stat profiles: Mara Dexterity, Corin Strength/Vitality, Alwen Resolve.
 - **First new monsters:** great rat, webspinner, goblin drummer.
 - **Armour:** one body slot. Padded coat −1 (28g) and leather jerkin −2 with −2 initiative (48g).
+- *Built (2026-10-18):*
+  - **Derived numbers:** maximum health = 12 + 4×Vitality + role/personal offsets + 2 per level. Accuracy is a role base + 4% per Dexterity above 2. Speed is a role base + 2 per Dexterity above 2.
+    - Strength adds to force weapons and fists (a light knife ignores a weak arm; a sling ignores Strength).
+    - Resolve scales strain *gains* only.
+    - Calibrated so every role and hero keeps today's level-1 numbers. The same sword is now 4–6 for Corin but 2–4 for Mara.
+  - **XP:** 4 per threat point (rat 1, spider 2, great rat 2, goblin/archer/webspinner 3, guard/drummer 4). Per-floor limits are 60/80/110/90. The gate gives 40 and the queen 80+40, outside those limits.
+    - Level-ups are chosen in the tent (**Training**). Cards show the level and a "+" when ready.
+    - Recruits join one level below the best hero and double-earn until they catch up.
+  - **Talents** (two to choose from at levels 2 and 4, by role):
+    - Warden: Bulwark or Stalwart, then Iron hide or Steel nerves.
+    - Scout and Rogue: Deadeye or Quick hands, then Slip the web or Opening shot.
+    - Brawler: Heavy hands or Thick skull, then Berserker or Unbreakable.
+    - Healer: Steady hands or Steel nerves, then Triage or Herbalist.
+  - **Armour:** a body slot in the Pack (compared before and after). The smith sells the padded coat (−1) and the leather jerkin (−2, 2 slower). Armour applies after guarding, minimum 1.
+  - **New monsters** (tinted/scaled placeholders):
+    - great rat: rushes for +2, then catches its breath; floors 1–2;
+    - webspinner: back row, webs 60% of the time, no venom; floors 2–3;
+    - goblin drummer: back row, its beat gives the others +1 on their next hit; floors 3–4.
+  - **Balance:** with Mara's lower Strength, a fresh level-1 party beats the queen 87% of the time in simulation; levels and armour lift that.
 
 The suggested retreat flow is to return through the dungeon to its entrance before reaching camp, with discovered shortcuts potentially easing later returns. Travel costs, escape exceptions, refuge services, recovery timing, and prices still need design decisions. Rest spots inside the dungeon remain distinct from the outside refuge.
 

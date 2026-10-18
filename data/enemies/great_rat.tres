@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="EnemyType" format=3]
+
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="1"]
+[ext_resource type="PackedScene" path="res://art/enemies/cave-simple-v1/rat/scene.tscn" id="2"]
+[ext_resource type="Resource" path="res://data/injuries/deep_wound.tres" id="3"]
+[ext_resource type="Resource" path="res://data/injuries/limp.tres" id="4"]
+
+[resource]
+script = ExtResource("1")
+scene = ExtResource("2")
+injuries = Array[Injury]([ExtResource("3"), ExtResource("4")])
+display_name = "Great rat"
+max_health = 7
+damage_min = 2
+damage_max = 3
+accuracy = 0.7
+initiative = 11
+injury_chance = 0.05
+attack_verb = "bites"
+tactic = 7
+intro = "A great rat bunches its haunches: it rushes hard, then has to catch its breath."
+threat = 2
+tint = Color(0.8, 0.65, 0.55, 1)
+sprite_scale = 1.35

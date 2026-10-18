@@ -59,7 +59,7 @@ func _initialize() -> void:
 		if g["hit"]: hits["goblin"] = maxi(hits["goblin"], g["damage"])
 		var r: Dictionary = c.hero_attack(hero, c.foes[1])
 		if r["hit"]: hits["rat"] = maxi(hits["rat"], r["damage"])
-	check("Grudge: +1 against goblins only", hits["goblin"] == 4 and hits["rat"] == 3, str(hits))
+	check("Grudge: +1 against goblins only", hits["goblin"] == hits["rat"] + 1, str(hits))
 
 	var q = PS.new()
 	q.add_member(load("res://data/companions/alwen.tres"))

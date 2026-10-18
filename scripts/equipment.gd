@@ -16,3 +16,11 @@ extends Resource
 @export var price := 0
 ## Reaches past the front row: usable from the back, hits enemies' back row (#72).
 @export var reach := false
+## "weapon" or "body" (armour, #93).
+@export_enum("weapon", "body") var slot := "weapon"
+## Body armour: taken off every blow (minimum 1), and how much it slows.
+@export var armour := 0
+@export var initiative_penalty := 0
+## Strength adds to force weapons; a light weapon ignores a weak arm (#47).
+@export var force := true
+@export var light := false

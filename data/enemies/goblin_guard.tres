@@ -22,3 +22,4 @@ intro = "A goblin guard plants its shield. While it stands, the goblins behind i
 purse = Vector2i(2, 5)
 tint = Color(0.75, 0.75, 0.9, 1)
 sprite_scale = 1.1
+threat = 4

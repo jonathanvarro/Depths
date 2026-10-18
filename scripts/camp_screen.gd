@@ -25,6 +25,7 @@ const COIN_ICON := preload("res://art/items/inventory-64-v1/gold-coin.svg")
 const LANTERN_ICON := preload("res://art/items/inventory-64-v1/lantern-unlit.png")
 ## The apprentice's starter stock, shown until there's gold (#42).
 const CampState := preload("res://scripts/camp_state.gd")
+const Progression := preload("res://scripts/progression.gd")
 
 var content: Control  # main.gd keeps this inside the safe area
 
@@ -316,10 +317,39 @@ func _smith() -> void:
 	_text("The apprentice wipes his hands. \"It's not much. But it'll hold.\"")
 	_purse_line()
 	for item: Equipment in CampState.SMITH_STOCK:
+		if item.slot == "body":  # armour (#93)
+			var slower := ", slower by %d" % item.initiative_penalty if item.initiative_penalty > 0 else ""
+			_shop_row("%s: armour %d%s" % [item.display_name, item.armour, slower], item.price, _camp.buy_gear.bind(_party, item), item.icon)
+			continue
 		var accuracy := "" if is_zero_approx(item.accuracy_bonus) else ", %+d%% to hit" % roundi(item.accuracy_bonus * 100)
 		_shop_row("%s: %d-%d damage%s" % [item.display_name, item.attack_min, item.attack_max, accuracy], item.price, _camp.buy_gear.bind(_party, item), item.icon)
 	_text("Coming once there are rules for them: %s." % ", ".join(PackedStringArray(CampState.SMITH_COMING)), MUTED)
 	_text("Bought gear goes in your pack; equip it from there.", MUTED)
+
+
+## Level-ups (#47): each hero's level, XP and attributes; anyone ready
+## chooses a talent (levels 2 and 4) or an attribute point (level 3).
+func _training() -> void:
+	_body.add_child(_label("Training", HEADING, 16, TEXT))
+	for hero: Companion in _party.members:
+		if not hero.uses_stats:
+			continue
+		var next: int = Progression.xp_for_next(hero)
+		var progress := "%d / %d XP" % [hero.xp, next] if next > 0 else "%d XP (the cave's best)" % hero.xp
+		var talents := ", ".join(PackedStringArray(hero.talents.map(func(t): return Progression.talent_name(t))))
+		_text("%s · level %d · %s · STR %d DEX %d VIT %d RES %d%s" % [hero.display_name, hero.level, progress, hero.stat_str, hero.stat_dex, hero.stat_vit, hero.stat_res, (" · " + talents) if talents != "" else ""], MUTED)
+		if Progression.ready_to_advance(hero):
+			_text("%s is ready for level %d. Choose one:" % [hero.display_name, hero.level + 1], AMBER)
+			var row := HFlowContainer.new()
+			row.add_theme_constant_override("h_separation", 8)
+			for option in Progression.choices(hero):
+				var pick := _button("%s: %s" % [option[1], option[2]])
+				var id: String = option[0]
+				pick.pressed.connect(func():
+					_camp.advance(hero, id)
+					_refresh_activity())
+				row.add_child(pick)
+			_body.add_child(row)
 
 
 ## What the camp says about the goblin queen (#44).
@@ -426,6 +456,7 @@ func _nurse() -> void:
 
 
 func _tent() -> void:
+	_training()
 	# What a night's rest does, and doesn't (#85, #88).
 	_text("Rest until tomorrow: health and strain fully restored. Lasting injuries remain - only the nurse treats those.")
 	var injured: Array = _party.living_members().filter(func(h): return not h.injuries.is_empty() and not _camp.is_recovering(h))

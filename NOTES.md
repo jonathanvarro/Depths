@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-18 – Claude
+- Did: #47/#93 from ChatGPT's research: four attributes driving health/accuracy/speed/damage/strain, levels 1-4 with talents and an attribute point chosen in the tent, XP per threat with per-floor campaign limits and gate/queen awards, recruits a level behind with catch-up, body armour (padded coat, leather jerkin), and the great rat, webspinner and goblin drummer.
+- Next: owner playtest of a full run; art for the new monsters and the padded coat icon; later research stages (bat, beetle, venom spider, brute, trapper, mini-bosses).
+- Watch out: Companions made in code (tests) keep fixed numbers unless `uses_stats` is set. New heroes need stats + aim_base/speed_base/hp_bonus. Old saves load with level 1 and default stats.
+
 ## 2026-10-18 – ChatGPT
 - Did: Owner requested sound samples. Added six original procedural auditions for #96/#54 in audio/samples-v1: heartbeat, club impact, wooden shield block, coins settling in leather, chest opening and torch ignition/crackle. audition.wav is a 15.18s reel in that order; README has timings and individual files. NumPy source, seeds, format/level/hash manifest preserved in tools/audio/generate_sfx_samples.py; no recordings, external assets or AI audio service used.
 - Next: Owner listens and selects timbres to refine; then make variations and decide live replacements. Sound completion boxes remain unticked. Camp ambience/music and recorded foley in #54 remain separate.

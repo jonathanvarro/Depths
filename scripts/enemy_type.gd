@@ -30,17 +30,25 @@ enum Tactic {
 	ARCHER,  ## shoots from the back row, reaching anyone (goblin archer, #44)
 	GUARD,  ## shield wall: goblins behind it take half damage (goblin guard)
 	QUEEN,  ## calls guards, screeches, and her cleaver is decided by the coin
+	RUSHER,  ## rushes, then catches its breath (great rat, #47)
+	DRUMMER,  ## beats a war drum: the others hit harder next (goblin drummer)
 }
 @export var tactic := Tactic.BASIC
 ## Shown when the fight starts: a hint at how it fights.
 @export var intro := ""
 ## Gold dropped when beaten, min-max (goblins carry purses, #42).
 @export var purse := Vector2i.ZERO
+## Threat points (#47): an encounter's cost; XP is 4 per point. 0 for the
+## opening's scripted enemies.
+@export var threat := 1
 ## Where it stands in a fight (#72): back-row enemies can only be hit with
 ## reach until the front row is down.
 @export_enum("front", "back") var row := "front"
 ## Attacks reach the heroes' back row (a spider drops from above).
 @export var reach_back := false
+## Spiders: chance to web again after a bite, and whether bites poison.
+@export_range(0.0, 1.0) var web_chance := 0.25
+@export var venomous := true
 ## Who it calls into the fight (the queen's guards, #44).
 @export var summons: EnemyType
 ## Placeholder look until its own art exists: a tint and a size for the

@@ -45,6 +45,27 @@ const StrainRules := preload("res://scripts/strain.gd")
 @export_range(0.0, 1.0) var guard_factor := 0.5
 ## Taken off every blow they suffer (negative: hurt more, e.g. a Brawler).
 @export var toughness := 0
+## Body armour (#93): takes `armour` off every blow, slows by its penalty.
+@export var body: Equipment
+@export_group("Stats")
+## Attributes (#47): Strength, Dexterity, Vitality, Resolve, about 1-4.
+## When `uses_stats` is on, maximum health, accuracy and initiative are
+## derived from them (refresh_stats); off, those fields are used as set.
+@export var uses_stats := false
+@export var stat_str := 2
+@export var stat_dex := 2
+@export var stat_vit := 2
+@export var stat_res := 2
+## Role and personal offsets the derived numbers start from.
+@export var aim_base := 0.75
+@export var speed_base := 10
+@export var hp_bonus := 0
+## A personal strength/weakness on the top of their damage (Strong arm).
+@export var damage_max_mod := 0
+## Level 1-4 and total XP (#47); talents chosen at levels 2 and 4.
+@export var level := 1
+@export var xp := 0
+@export var talents: Array[String] = []
 @export_group("")
 ## A recruit's strength and weakness, as shown at the fire (#41).
 @export var strength := ""
@@ -104,13 +125,63 @@ var _health_fraction := 0.0  # partial healing carried between time units
 
 ## Damage range of a basic attack: the weapon's, or their own bare-handed.
 func attack_range() -> Vector2i:
-	if weapon:
-		return Vector2i(weapon.attack_min, weapon.attack_max)
-	return Vector2i(attack_min, attack_max)
+	var span := Vector2i(weapon.attack_min, weapon.attack_max) if weapon else Vector2i(attack_min, attack_max)
+	if not uses_stats:
+		return span
+	# Strength adds to force weapons (and their own fists); a light knife
+	# ignores a weak arm; a sling ignores Strength (#47).
+	var str_bonus := stat_str - 2
+	if weapon and weapon.light:
+		str_bonus = maxi(0, str_bonus)
+	elif (weapon and not weapon.force) or (not weapon and reach):
+		str_bonus = 0
+	span += Vector2i(str_bonus, str_bonus)
+	if has_talent("heavy_hands"):
+		span += Vector2i.ONE
+	span.y += damage_max_mod
+	span.x = maxi(1, span.x)
+	span.y = maxi(span.x, span.y)
+	return span
 
 
 func hit_accuracy() -> float:
 	return accuracy + (weapon.accuracy_bonus if weapon else 0.0)
+
+
+func has_talent(id: String) -> bool:
+	return id in talents
+
+
+## Recomputes the derived numbers from attributes, level and talents (#47).
+## Raising maximum health doesn't refill current health.
+func refresh_stats() -> void:
+	if not uses_stats:
+		return
+	max_health = 12 + 4 * stat_vit + hp_bonus + 2 * (level - 1)
+	if has_talent("stalwart"):
+		max_health += 4
+	if has_talent("unbreakable"):
+		max_health += 6
+	accuracy = aim_base + 0.04 * (stat_dex - 2) + (0.05 if has_talent("deadeye") else 0.0)
+	initiative = speed_base + 2 * (stat_dex - 2) + (2 if has_talent("quick_hands") else 0)
+	if has_talent("bulwark"):
+		guard_factor = minf(guard_factor, 0.15)
+	health = mini(health, max_health)
+
+
+## Acting order in a fight: armour slows (#93).
+func effective_initiative() -> int:
+	return initiative - (body.initiative_penalty if body else 0)
+
+
+## Taken off every blow: toughness, talents and body armour (#47, #93).
+func damage_reduction() -> int:
+	var reduction := toughness + (body.armour if body else 0)
+	if has_talent("iron_hide"):
+		reduction += 1
+	if has_talent("thick_skull") and toughness < 0:
+		reduction -= toughness
+	return reduction
 
 
 func is_alive() -> bool:
@@ -141,6 +212,9 @@ func change_health(amount: int) -> void:
 func change_strain(amount: float) -> void:
 	if strain_locked:
 		return
+	if amount > 0.0 and uses_stats:
+		# Resolve steadies (#47): only gains are scaled, never relief.
+		amount *= clampf(1.0 - 0.08 * (stat_res - 2), 0.75, 1.15) * (0.8 if has_talent("steel_nerves") else 1.0)
 	var before := strain
 	strain = clampf(strain + amount, 0.0, StrainRules.MAX)
 	if not is_equal_approx(strain, before):

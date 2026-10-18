@@ -15,6 +15,7 @@ signal changed
 
 const Supplies := preload("res://scripts/supplies.gd")
 const Recruits := preload("res://scripts/recruits.gd")
+const Progression := preload("res://scripts/progression.gd")
 const TORCH := preload("res://data/items/torch.tres")
 ## Gold (#42): the lantern upgrade, and what the merchant pays for gear.
 const LANTERN_PRICE := 40
@@ -33,9 +34,11 @@ const SMITH_STOCK: Array[Equipment] = [
 	preload("res://data/gear/simple_spear.tres"),
 	preload("res://data/gear/woodcutters_axe.tres"),
 	preload("res://data/gear/iron_sword.tres"),
+	preload("res://data/gear/padded_coat.tres"),
+	preload("res://data/gear/leather_jerkin.tres"),
 ]
-## Not for sale until armour and shields have rules.
-const SMITH_COMING := ["a rough wooden shield (16g)", "a padded coat (28g)"]
+## Not for sale until shields have rules.
+const SMITH_COMING := ["a rough wooden shield (16g)"]
 ## Contracts the king's camp posts, one a day (#42).
 const CONTRACTS := [
 	{"enemy": "Goblin", "plural": "goblins", "count": 3, "reward": 15},
@@ -72,6 +75,10 @@ const QUEEN_BOUNTY := 50
 const ROUTE_AFTER := 2
 const ROUTE_PRICE := 40
 var floor2_reached := 0
+## Experience (#47): fight XP each floor can still teach this campaign, and
+## the highest level any hero has taken (recruits join one below it).
+var xp_left := Progression.FLOOR_XP_LIMIT.duplicate()
+var best_level := 1
 var _used_names: Array = []  # each name comes by once before any repeats
 
 
@@ -94,7 +101,7 @@ func _fill_fire(party = null) -> void:
 		for person in people:
 			if person.portrait_set:
 				faces.append(person.portrait_set.resource_path)
-		var recruit: Companion = Recruits.make(rng, _used_names, faces)
+		var recruit: Companion = Recruits.make(rng, _used_names, faces, maxi(1, best_level - 1))
 		_used_names.append(recruit.display_name)
 		candidates.append(recruit)
 
@@ -193,6 +200,23 @@ func buy_route(party) -> bool:
 		return false
 	party.supplies.gold -= ROUTE_PRICE
 	party.supplies.changed.emit()
+	changed.emit()
+	return true
+
+
+## Fight XP from `depth`, limited by what that floor can still teach.
+func take_floor_xp(depth: int, amount: int) -> int:
+	var left: int = xp_left.get(depth, 0)
+	var given := mini(amount, left)
+	xp_left[depth] = left - given
+	return given
+
+
+## Takes a level-up chosen at camp and keeps track of the best level.
+func advance(hero: Companion, choice: String) -> bool:
+	if not Progression.advance(hero, choice):
+		return false
+	best_level = maxi(best_level, hero.level)
 	changed.emit()
 	return true
 

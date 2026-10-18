@@ -147,7 +147,9 @@ func refresh() -> void:
 	if companion == null:
 		return
 	_name.text = companion.display_name
-	_row_label.text = ("back" if companion.row == "back" else "front") if show_row else ""
+	# Level, a mark when ready to advance at camp (#47), and the row (#72).
+	var ready := "+" if companion.level < 4 and companion.xp >= [0, 0, 80, 220, 440][mini(companion.level + 1, 4)] and companion.uses_stats else ""
+	_row_label.text = "L%d%s%s" % [companion.level, ready, (" " + ("back" if companion.row == "back" else "front")) if show_row else ""]
 	var cap := companion.effective_max_health()  # lowered by untreated injuries
 	_bar.max_value = cap
 	_bar.value = companion.health

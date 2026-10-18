@@ -122,7 +122,8 @@ func _add_gear_rows() -> void:
 		var row := HBoxContainer.new()
 		row.add_theme_constant_override("separation", 12)
 		var held := "%s (%s)" % [hero.weapon.display_name, _numbers(hero, hero.weapon)] if hero.weapon else "their own weapon (%s)" % _numbers(hero, null)
-		var line := _label("%s wields %s" % [hero.display_name, held], 18, COLOR_TEXT)
+		var worn := " · wears %s (armour %d)" % [hero.body.display_name.to_lower(), hero.body.armour] if hero.body else ""
+		var line := _label("%s wields %s%s" % [hero.display_name, held, worn], 18, COLOR_TEXT)
 		line.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		row.add_child(line)
 		if hero.weapon and not hero.founder:  # recruits can go back to their own kit
@@ -148,13 +149,14 @@ func _add_gear_rows() -> void:
 			row.add_child(icon)
 		var text := VBoxContainer.new()
 		text.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		text.add_child(_label("%s  (%d-%d)" % [item.display_name, item.attack_min, item.attack_max], 22, COLOR_TEXT))
+		var summary := "armour %d%s" % [item.armour, (", slower by %d" % item.initiative_penalty) if item.initiative_penalty > 0 else ""] if item.slot == "body" else "%d-%d" % [item.attack_min, item.attack_max]
+		text.add_child(_label("%s  (%s)" % [item.display_name, summary], 22, COLOR_TEXT))
 		var about := _label(item.description, 17, COLOR_DIM_TEXT)
 		about.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		text.add_child(about)
 		for hero in living:
-			var now := _numbers(hero, hero.weapon)
-			var then := _numbers(hero, item)
+			var now := _numbers(hero, hero.weapon) if item.slot != "body" else _armour(hero, hero.body)
+			var then := _numbers(hero, item) if item.slot != "body" else _armour(hero, item)
 			text.add_child(_label("%s: %s  ->  %s" % [hero.display_name, now, then], 16, COLOR_DIM_TEXT))
 		row.add_child(text)
 		var buttons := VBoxContainer.new()
@@ -177,11 +179,22 @@ func _add_gear_rows() -> void:
 		_list.add_child(row)
 
 
+## "armour 1, speed 9" for `hero` wearing `armour` (null: nothing), #93.
+func _armour(hero: Companion, armour: Equipment) -> String:
+	var points: int = armour.armour if armour else 0
+	var penalty: int = armour.initiative_penalty if armour else 0
+	return "armour %d, speed %d" % [points, hero.initiative - penalty]
+
+
 ## "3-5 dmg, 85% to hit" for `hero` holding `weapon` (null: their own),
 ## before strain - the comparison is about the gear (#67).
 func _numbers(hero: Companion, weapon: Equipment) -> String:
-	var low: int = weapon.attack_min if weapon else hero.attack_min
-	var high: int = weapon.attack_max if weapon else hero.attack_max
+	var held: Equipment = hero.weapon
+	hero.weapon = weapon
+	var span: Vector2i = hero.attack_range()  # Strength and talents included (#47)
+	hero.weapon = held
+	var low: int = span.x
+	var high: int = span.y
 	var hit: float = clampf(hero.accuracy + (weapon.accuracy_bonus if weapon else 0.0), 0.1, 0.95)
 	var damage := str(low) if low == high else "%d-%d" % [low, high]
 	return "%s dmg, %d%% to hit" % [damage, roundi(hit * 100)]

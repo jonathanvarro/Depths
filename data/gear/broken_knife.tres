@@ -12,3 +12,5 @@ attack_min = 1
 attack_max = 2
 accuracy_bonus = -0.05
 price = 0
+force = false
+light = true

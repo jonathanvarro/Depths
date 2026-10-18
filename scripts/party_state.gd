@@ -26,6 +26,8 @@ func add_member(definition: Companion) -> bool:
 	if members.size() >= MAX_MEMBERS:
 		return false
 	var member: Companion = definition.duplicate()
+	member.talents = definition.talents.duplicate()
+	member.refresh_stats()
 	member.pending_effects = []
 	member.injuries = definition.injuries.duplicate()
 	member.dressed = []
@@ -60,12 +62,18 @@ var field_bind_used := false
 
 
 func can_field_bind(hero: Companion) -> bool:
-	return has_trait("field_medic") and not field_bind_used and not hero.hindering_injuries().is_empty()
+	var allowed := 2 if living_members().any(func(m: Companion): return m.has_talent("triage")) else 1
+	return has_trait("field_medic") and field_binds < allowed and not hero.hindering_injuries().is_empty()
+
+
+## Bindings used this trip (field_bind_used kept for the first one).
+var field_binds := 0
 
 
 func field_bind(hero: Companion) -> bool:
 	if not can_field_bind(hero):
 		return false
+	field_binds += 1
 	field_bind_used = true
 	hero.dress_injury()
 	changed.emit()
@@ -119,6 +127,14 @@ func equip(hero: Companion, item: Equipment) -> void:
 	if item not in supplies.gear:
 		return
 	supplies.gear.erase(item)
+	if item.slot == "body":  # armour (#93)
+		if hero.body:
+			supplies.gear.append(hero.body)
+		hero.body = item
+		hero.emit_changed()
+		supplies.changed.emit()
+		changed.emit()
+		return
 	if hero.weapon:
 		supplies.gear.append(hero.weapon)
 	hero.weapon = item
@@ -210,7 +226,10 @@ func use_item(item: SupplyItem, in_combat := false) -> String:
 			target.add_effect_over_time("health", _healing(item.amount), item.duration)
 		SupplyItem.Effect.DRESS_INJURY:
 			supplies.take(item)
-			first_undressed_injured().dress_injury()
+			var patient := first_undressed_injured()
+			patient.dress_injury()
+			if living_members().any(func(m: Companion): return m.has_talent("steady_hands")):
+				patient.add_effect_over_time("health", 4, 20)  # steady hands (#47)
 		SupplyItem.Effect.LIGHT_TORCH:
 			supplies.light_torch(item)
 	if not in_combat:  # in a fight, the round's time covers it
@@ -219,7 +238,12 @@ func use_item(item: SupplyItem, in_combat := false) -> String:
 
 
 func _healing(amount: int) -> int:
-	return roundi(amount * FIELD_MEDIC_BONUS) if has_trait("field_medic") else amount
+	var healed := float(amount)
+	if has_trait("field_medic"):
+		healed *= FIELD_MEDIC_BONUS
+	if living_members().any(func(m: Companion): return m.has_talent("herbalist")):
+		healed *= 1.25
+	return roundi(healed)
 
 
 ## Moving between floors: every effect with a duration finishes now, so the

@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="EnemyType" format=3]
+
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="1"]
+[ext_resource type="PackedScene" path="res://art/enemies/cave-simple-v1/goblin/scene.tscn" id="2"]
+[ext_resource type="Resource" path="res://data/injuries/deep_wound.tres" id="3"]
+[ext_resource type="Resource" path="res://data/injuries/limp.tres" id="4"]
+
+[resource]
+script = ExtResource("1")
+scene = ExtResource("2")
+injuries = Array[Injury]([ExtResource("3"), ExtResource("4")])
+display_name = "Goblin drummer"
+max_health = 9
+damage_min = 1
+damage_max = 2
+accuracy = 0.7
+initiative = 11
+injury_chance = 0.05
+attack_verb = "swipes at"
+tactic = 8
+intro = "A goblin drummer hangs back. Its beat drives the others to hit harder."
+purse = Vector2i(2, 4)
+threat = 4
+row = "back"
+tint = Color(0.95, 0.8, 0.6, 1)
+sprite_scale = 0.95

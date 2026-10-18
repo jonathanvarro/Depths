@@ -21,3 +21,4 @@ tactic = 2
 intro = "A spider hangs above, spinning."
 row = "back"
 reach_back = true
+threat = 2
