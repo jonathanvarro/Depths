@@ -95,6 +95,25 @@ Suggested initial presentation: one campsite screen with a few selectable activi
 
 **Recurring merchant (2026-10-16):** the owner requires a greedy merchant who follows the party from rest location to rest location, with a distinctive, memorable appearance that becomes increasingly obese and gross as the campaign progresses. The character design is approved; the original concept's middle figure is his starting build, initially with less gold/jewellery and increasing wealth location by location. He occupies the campsite's supply awning. See [the merchant design and revised progression concept](docs/merchant-design.md). Name, exact stage mapping, trading rules and any supernatural explanation remain proposals or open decisions.
 
+**Decided 2026-10-17 (#40): the first campsite.**
+- **Days:** the camp keeps a day counter. **Resting moves it forward one day.**
+  - A **new day re-randomizes the cave** (new layouts, fresh enemies), and the merchant restocks.
+  - Going back in without resting keeps the same cave.
+- **Tent:**
+  - **Rest** is safe and fully restores health and strain, at no supply cost.
+  - The **stash** survives a party wipe.
+- **Nurse:**
+  - Treats lasting injuries, free until gold exists.
+  - A treated hero is **out of play for a few days** by injury (e.g. limp 1, deep wound 2).
+  - Treatment is optional; an injured hero may go back in untreated.
+- **Merchant:** tops the pack up to the starting supplies once a day, free until gold exists (#42).
+- **Smith:** shows his stock as coming soon.
+- **Campfire:** waits for recruitment (#41).
+- **Cave path:** leads to preparation.
+- **No travel costs** between cave and camp.
+- **Art:** the clearing starts as a placeholder; ChatGPT paints it later to fit the same six spots.
+- **Ideas for later:** the king's forces arriving as the days pass (#80); paid scouts who map floor 1 (#81).
+
 The suggested retreat flow is to return through the dungeon to its entrance before reaching camp, with discovered shortcuts potentially easing later returns. Travel costs, escape exceptions, refuge services, recovery timing, and prices still need design decisions. Rest spots inside the dungeon remain distinct from the outside refuge.
 
 **Cave-camp staff and equipment (2026-10-16):** the owner wants a blacksmith sent from a nearby village and a nurse for the cave area. The smith is an apprentice, explaining the limited selection of quality items; the starting location should offer very basic equipment. The [updated campsite design](docs/campsite-design.md) proposes a sixth clickable smith area and places the nurse in the treatment tent. Exact stock, repair/crafting mechanics, NPC identities and later-site availability remain open. The original five-area interaction study predates this addition.
