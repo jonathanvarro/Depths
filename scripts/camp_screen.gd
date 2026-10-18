@@ -335,7 +335,13 @@ func _nurse() -> void:
 			var names := ", ".join(PackedStringArray(hero.injuries.map(func(i: Injury): return i.display_name.to_lower())))
 			var days: int = _camp.treatment_days(hero)
 			_text("%s: %s. Untreated, %s can still go back in." % [hero.display_name, names, hero.display_name])
-			var treat := _button("Treat %s (out of play %d day%s)" % [hero.display_name, days, "" if days == 1 else "s"])
+			# Who's left to go down meanwhile (#88).
+			var others: int = _camp.available(_party).filter(func(h): return h != hero).size()
+			if others == 0:
+				_text("Treated, %s is out until day %d - and no one else is fit, so nobody goes down until then." % [hero.display_name, _camp.day + days], AMBER)
+			else:
+				_text("Treated, %s is out until day %d; the others can go down without %s." % [hero.display_name, _camp.day + days, hero.display_name], MUTED)
+			var treat := _button("Treat %s (back on day %d)" % [hero.display_name, _camp.day + days])
 			treat.pressed.connect(func():
 				_camp.treat(hero)
 				_refresh_activity())
@@ -343,7 +349,18 @@ func _nurse() -> void:
 
 
 func _tent() -> void:
-	_text("Rest until tomorrow: everyone recovers fully. By morning the cave will have shifted.")
+	# What a night's rest does, and doesn't (#85, #88).
+	_text("Rest until tomorrow: health and strain fully restored. Lasting injuries remain - only the nurse treats those.")
+	var injured: Array = _party.living_members().filter(func(h): return not h.injuries.is_empty() and not _camp.is_recovering(h))
+	if not injured.is_empty():
+		_text("Still injured after resting: %s." % ", ".join(PackedStringArray(injured.map(func(h): return h.display_name))), MUTED)
+	var healed: Array = _party.living_members().filter(func(h): return _camp.is_recovering(h) and _camp.ready_on(h) == _camp.day + 1)
+	if not healed.is_empty():
+		_text("Fit again tomorrow: %s." % ", ".join(PackedStringArray(healed.map(func(h): return h.display_name))), MUTED)
+	if _camp.explored_today:
+		_text("By morning the cave will have shifted: new passages and fresh enemies. The ways you found today will be gone.", AMBER)
+	else:
+		_text("By morning the cave will have shifted: new passages and fresh enemies.", MUTED)
 	var rest := _button("Rest until day %d" % (_camp.day + 1))
 	rest.pressed.connect(func():
 		_camp.rest(_party)
@@ -465,9 +482,12 @@ func _cave_path() -> void:
 	if going.is_empty():
 		_text("No one is fit to go. Rest in your tent to pass the days.", AMBER)
 		return
-	var staying: int = _party.living_members().size() - going.size()
-	if staying > 0:
-		_text("Anyone still recovering stays with the nurse.", MUTED)
+	# The roster that actually leaves (#87).
+	var staying: Array = _party.living_members().filter(func(h): return h not in going)
+	_text("Going down: %s." % ", ".join(PackedStringArray(going.map(func(h): return h.display_name))), AMBER)
+	if not staying.is_empty():
+		_text("Staying with the nurse: %s." % ", ".join(PackedStringArray(staying.map(func(h): return "%s (fit on day %d)" % [h.display_name, _camp.ready_on(h)]))), MUTED)
+	_text("The cave is as you left it today." if _camp.explored_today else "The cave has shifted since anyone was last inside.", MUTED)
 	if not _camp.contract.is_empty():
 		var c: Dictionary = _camp.contract
 		var state := "paid" if c["paid"] else "%d of %d" % [c["done"], c["count"]]

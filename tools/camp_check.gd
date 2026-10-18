@@ -93,7 +93,8 @@ func _initialize() -> void:
 	# Nurse: treatment takes Mara out for the wound's days.
 	await _open("treatment")
 	await _snap("nurse")
-	check("nurse offers treatment with its days", _press(main._camp, "Treat Mara (out of play 2 days)"))
+	check("treatment warns no one else is fit", _body_text().contains("no one else is fit"))
+	check("nurse offers treatment with its ready day", _press(main._camp, "Treat Mara (back on day 3)"))
 	check("treated: no injury, recovering until day 3", hero.injuries.is_empty() and main._camp_state.is_recovering(hero) and main._camp_state.ready_on(hero) == 3)
 
 	# Cave path: no one fit.
@@ -103,6 +104,7 @@ func _initialize() -> void:
 
 	# Tent: rest (day 2), stash.
 	await _open("rest")
+	check("rest says injuries remain", _body_text().contains("Lasting injuries remain"))
 	var seed_before: int = main._site_seed
 	check("rest button names the next day", _press(main._camp, "Rest until day 2"))
 	check("rest: day 2, full health, calm", main._camp_state.day == 2 and hero.health == hero.effective_max_health() and hero.strain == 0.0)
@@ -125,6 +127,7 @@ func _initialize() -> void:
 
 	# Cave path -> preparation -> a new cave.
 	await _open("cave")
+	check("the cave path names who goes and that the cave shifted", _body_text().contains("Going down: Mara") and _body_text().contains("has shifted"))
 	check("head back down", _press(main._camp, "Head back down"))
 	await create_timer(0.2).timeout
 	check("preparation follows the cave path", not main._camp.visible and main._preparation.visible)

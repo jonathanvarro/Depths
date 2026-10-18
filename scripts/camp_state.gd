@@ -58,6 +58,9 @@ var rng := RandomNumberGenerator.new()
 ## Today's contract: enemy, plural, count, reward, done, paid.
 var contract := {}
 var _charity_on := 0
+## True once someone has gone down today: the cave they mapped is lost if
+## the party rests (#85).
+var explored_today := false
 var _used_names: Array = []  # each name comes by once before any repeats
 
 
@@ -106,6 +109,7 @@ func dismiss(party, hero: Companion) -> bool:
 
 ## Heading down: heroes still recovering stay in the nurse's tent.
 func leave_behind(party) -> void:
+	explored_today = true
 	for hero: Companion in party.members.duplicate():
 		if is_recovering(hero):
 			party.remove_member(hero)
@@ -129,6 +133,7 @@ func rest(party) -> void:
 		hero.change_strain(-hero.strain)
 		hero.change_health(hero.effective_max_health())
 	day += 1
+	explored_today = false
 	if not candidates.is_empty():
 		candidates.pop_front()  # the longest-waiting moves on
 	_fill_fire(party)
