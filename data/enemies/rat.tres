@@ -9,7 +9,7 @@
 script = ExtResource("1")
 display_name = "Rat"
 scene = ExtResource("2")
-max_health = 6
+max_health = 4
 damage_min = 1
 damage_max = 3
 accuracy = 0.7

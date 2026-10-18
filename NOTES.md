@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-17 – Claude
+- Did: #60 decisions recorded (DESIGN.md; follow-ups #72 rows, #73 decide before a fight, #74 light as a weapon) and the first combat pass: enemy intentions (action, not target) shown on each enemy's tag; goblin heavy blow (x2, fully blocked by Defend, never twice running); rats show "darting back" before fleeing; spiders may re-web. Retuned rat/spider/goblin to about 2/3/4-5 rounds for lone Mara.
+- Next: Owner playtest of fight feel; rows (#72) once recruits (#41) exist.
+- Watch out: Intents are planned at fight start; code that changes a foe afterwards (as the opening does for its spider) must call CombatState.plan(foe). Scratch tactics test updated for intents (not in repo).
+
 ## 2026-10-17 – ChatGPT
 - Did: #70 supplies the requested opening art set: transparent 64px broken knife and damaged padded-armour icons, plus three registered 128px wooden chest states (closed / open with supplies / empty). The knife Equipment resource now uses its broken icon without stat changes. art/props/tutorial-chest-v1 includes state-selectable Godot scenes; docs/opening-tutorial-art.md has the full handoff. Generated masters/exact prompts, native/enlarged comparisons, shared chest palette/registration/hashes and 12 normal/dim cave captures are preserved. All five exports/imports and 51 Godot checks pass on desktop/landscape-phone shapes.
 - Next: Replace Main._add_chest's placeholder using scene.tscn/set_state through the visible-contents work. Its existing opened=true means emptied, so select empty; use open explicitly for supplies remaining. Armour has no actual equipment definition yet and stays an art asset. Owner also requested abandoned packs, idol, pool and cold campsite remains as the next prop set.

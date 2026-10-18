@@ -27,9 +27,30 @@ const WEB_PENALTY := 0.25
 ## turns. A new bite refreshes it rather than stacking.
 const VENOM_DAMAGE := 1
 const VENOM_TURNS := 2
-## Rats may flee once below half health; goblins may raise a shield.
-const RAT_FLEE_CHANCE := 0.4
+## Rats may dart off once below half health; goblins may raise a shield.
+const RAT_FLEE_CHANCE := 0.5
 const GOBLIN_SHIELD_CHANCE := 0.4
+
+## Enemy intentions (#60): every enemy shows what it will do on its next
+## turn - the action, never the target - so Defend, targeting and items are
+## real choices. Each is planned after the enemy acts (and at the start).
+enum Intent { ATTACK, LUNGE, DART, WEB, BITE, SWING, HEAVY, SHIELD }
+const INTENT_TEXT := {
+	Intent.ATTACK: "attacking",
+	Intent.LUNGE: "lunging",
+	Intent.DART: "darting back",
+	Intent.WEB: "spinning a web",
+	Intent.BITE: "poised to bite",
+	Intent.SWING: "swinging",
+	Intent.HEAVY: "winding up a heavy blow",
+	Intent.SHIELD: "raising a shield",
+}
+## Goblin: a telegraphed heavy blow hits this many times harder; a hero
+## who Defends turns it aside completely.
+const HEAVY_MULTIPLIER := 2
+const GOBLIN_HEAVY_CHANCE := 0.3
+## Spider: chance to spin another web after a bite.
+const SPIDER_REWEB_CHANCE := 0.25
 
 
 ## One enemy in this fight.
@@ -41,6 +62,7 @@ class Foe:
 	var fled := false
 	var shielded := false  # goblin: halves damage until its next turn
 	var has_webbed := false  # spider: opens with a web once
+	var intent := Intent.ATTACK  # what it does next turn (#60)
 	## Blows glance off: 0-1 damage and it never falls (the opening's
 	## spider, which only fire drives off, #69). Its health isn't shown.
 	var glancing := false
@@ -82,7 +104,35 @@ func _init(party_state, enemy_types: Array[EnemyType]) -> void:
 		numbered[type] = numbered.get(type, 0) + 1
 		var label := type.display_name if seen[type] == 1 else "%s %d" % [type.display_name, numbered[type]]
 		foes.append(Foe.new(type, label))
+	for foe in foes:
+		plan(foe)
 	_build_order()
+
+
+## Picks what `foe` will do on its next turn (shown to the player).
+## Call again after changing a foe's state from outside (e.g. has_webbed).
+func plan(foe: Foe) -> void:
+	var hurt := foe.health * 2 < foe.type.max_health
+	match foe.type.tactic:
+		EnemyType.Tactic.DARTING:
+			foe.intent = Intent.DART if hurt and not foe.glancing and rng.randf() < RAT_FLEE_CHANCE else Intent.LUNGE
+		EnemyType.Tactic.WEB_AND_VENOM:
+			var reweb := foe.intent == Intent.BITE and rng.randf() < SPIDER_REWEB_CHANCE
+			foe.intent = Intent.WEB if not foe.has_webbed or reweb else Intent.BITE
+		EnemyType.Tactic.CUNNING:
+			if not foe.shielded and foe.health * 2 <= foe.type.max_health and rng.randf() < GOBLIN_SHIELD_CHANCE:
+				foe.intent = Intent.SHIELD
+			elif foe.intent != Intent.HEAVY and rng.randf() < GOBLIN_HEAVY_CHANCE:
+				foe.intent = Intent.HEAVY
+			else:
+				foe.intent = Intent.SWING
+		_:
+			foe.intent = Intent.ATTACK
+
+
+## How the intent reads on screen, e.g. "winding up a heavy blow".
+static func intent_text(foe) -> String:
+	return INTENT_TEXT[foe.intent]
 
 
 ## Whoever acts now: a Companion or a Foe.
@@ -182,41 +232,56 @@ func hero_use_item(item: SupplyItem) -> String:
 	return party.use_item(item, true)
 
 
+## Carries out the foe's shown intent, then plans its next one.
 ## Returns {"target": Companion, "hit": bool, "damage": int,
 ## "injury": Injury or null, "text": String}.
 func enemy_act(foe: Foe) -> Dictionary:
-	match foe.type.tactic:
-		EnemyType.Tactic.DARTING:
-			if foe.health * 2 < foe.type.max_health and rng.randf() < RAT_FLEE_CHANCE:
-				foe.fled = true
-				_check_end()
-				return {"target": null, "hit": false, "damage": 0, "injury": null, "fled": true,
-						"text": "The %s squeals and scurries away." % foe.name.to_lower()}
-		EnemyType.Tactic.WEB_AND_VENOM:
-			if not foe.has_webbed:
-				foe.has_webbed = true
-				var victim := _choose_target(foe)
-				if victim:
-					_webbed[victim] = true
-					return {"target": victim, "hit": false, "damage": 0, "injury": null,
-							"text": "The %s spits a web over %s. Their next move will be clumsy." % [foe.name.to_lower(), victim.display_name]}
-		EnemyType.Tactic.CUNNING:
-			if not foe.shielded and foe.health * 2 <= foe.type.max_health and rng.randf() < GOBLIN_SHIELD_CHANCE:
-				foe.shielded = true
-				return {"target": null, "hit": false, "damage": 0, "injury": null,
-						"text": "The %s raises a battered shield." % foe.name.to_lower()}
+	var outcome := _carry_out(foe)
+	if foe.is_alive():
+		plan(foe)
+	return outcome
+
+
+func _carry_out(foe: Foe) -> Dictionary:
+	match foe.intent:
+		Intent.DART:
+			foe.fled = true
+			_check_end()
+			return {"target": null, "hit": false, "damage": 0, "injury": null, "fled": true,
+					"text": "The %s squeals and scurries away." % foe.name.to_lower()}
+		Intent.WEB:
+			foe.has_webbed = true
+			var victim := _choose_target(foe)
+			if victim:
+				_webbed[victim] = true
+				return {"target": victim, "hit": false, "damage": 0, "injury": null,
+						"text": "The %s spits a web over %s. Their next move will be clumsy." % [foe.name.to_lower(), victim.display_name]}
+		Intent.SHIELD:
+			foe.shielded = true
+			return {"target": null, "hit": false, "damage": 0, "injury": null,
+					"text": "The %s raises a battered shield." % foe.name.to_lower()}
+	var heavy := foe.intent == Intent.HEAVY
 	var target := _choose_target(foe)
 	var outcome := {"target": target, "hit": false, "damage": 0, "injury": null}
 	if target == null:
 		return outcome
 	if rng.randf() < foe.type.accuracy:
 		var damage := rng.randi_range(foe.type.damage_min, foe.type.damage_max)
-		if is_defending(target):
+		if heavy:
+			damage *= HEAVY_MULTIPLIER
+		if heavy and is_defending(target):
+			damage = 0  # braced for it: the heavy blow is turned aside
+		elif is_defending(target):
 			damage = maxi(1, damage / 2)
+		if heavy and damage == 0:
+			outcome["text"] = "%s braces and turns aside the %s's heavy blow!" % [target.display_name, foe.name.to_lower()]
+			_check_end()
+			return outcome
 		target.change_health(-damage)
 		outcome["hit"] = true
 		outcome["damage"] = damage
-		outcome["text"] = "The %s %s %s for %d." % [foe.name.to_lower(), foe.type.attack_verb, target.display_name, damage]
+		var verb: String = "brings down a heavy blow on" if heavy else foe.type.attack_verb
+		outcome["text"] = "The %s %s %s for %d." % [foe.name.to_lower(), verb, target.display_name, damage]
 		if foe.type.tactic == EnemyType.Tactic.WEB_AND_VENOM and target.is_alive():
 			_venom[target] = VENOM_TURNS
 			outcome["text"] += " Venom burns in the wound."

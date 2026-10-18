@@ -200,6 +200,12 @@ Deeper floors mix them (depth 1 mostly single rats; depth 3 pairs and trios like
 - **Shorter fights, with length by enemy:** quick skirmishes for small creatures, longer fights for tougher ones. Damage rises on both sides, so each fight costs something.
   - Proposed: rat 1–2 rounds, spider 2–3, goblin 3–5.
   - Every enemy has at least one intention worth reacting to; for example, Defend halves a goblin's heavy blow.
+- *Implemented (first pass):*
+  - Every enemy plans its next move and shows it under its name, as an action without a target: rat *lunging* / *darting back*, spider *spinning a web* / *poised to bite*, goblin *swinging* / *winding up a heavy blow* / *raising a shield*.
+  - A heavy blow hits double, but **Defend turns it aside completely**; a goblin never winds up twice in a row.
+  - Retuned: rat 4 health (1–3 damage), spider 6 (0.75 accuracy), goblin 10 (2–4).
+  - Simulated lone Mara with the iron sword: rat about 2 rounds / 2.6 health lost; spider about 3 / 2.4; goblin about 4 / 7.7 when only attacking, about 5 / 6.1 when defending against heavy blows.
+  - The first-fight card explains intentions.
 - **Positioning:** heroes and enemies get **front and back rows** once recruits exist (#72). Front takes most melee and blocks melee reach to the back; some attackers reach past. Moving costs a turn.
 - **Later:**
   - deciding before a fight, such as sneaking past or striking first (#73);

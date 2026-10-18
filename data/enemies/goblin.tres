@@ -9,9 +9,9 @@
 script = ExtResource("1")
 display_name = "Goblin"
 scene = ExtResource("2")
-max_health = 12
-damage_min = 1
-damage_max = 3
+max_health = 10
+damage_min = 2
+damage_max = 4
 accuracy = 0.7
 initiative = 10
 injury_chance = 0.12

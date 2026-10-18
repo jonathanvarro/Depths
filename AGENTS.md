@@ -155,6 +155,9 @@ Templates > Download and Install; already installed on the owner's PC).
 - Bleeding feedback (#71): main.gd `_bleed_pulse()` (red edge flash + heartbeat,
   `audio/placeholder/heartbeat.wav`) and `_update_wound_dim()` (a vignette
   shader under the HUD); `screen_flashes` export disables the flash.
+- Enemy intentions (#60): `CombatState.Intent`, `Foe.intent`, `plan(foe)`
+  (call again after changing a foe from outside), `intent_text()`;
+  `enemy_act()` carries out the shown intent, then plans the next one.
 - `scripts/chest_screen.gd` – chest window beside the pack: drag (set_drag_
   forwarding), tap, or the take-all icon button; `took` signal.
 - `scripts/pack_screen.gd` – the Pack screen (Pack button under the minimap,

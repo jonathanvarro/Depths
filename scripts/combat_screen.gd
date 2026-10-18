@@ -165,10 +165,11 @@ func _process(_delta: float) -> void:
 		tag.visible = foe.is_alive() and foe.node != null and not camera.is_position_behind(foe.node.global_position)
 		if tag.visible:
 			var screen := camera.unproject_position(foe.node.global_position + Vector3(0, TAG_HEIGHT, 0))
+			var intent: String = CombatState.intent_text(foe)  # what it does next (#60)
 			if foe.glancing:
-				tag.text = foe.name  # no health to whittle down (#69)
+				tag.text = "%s\n%s" % [foe.name, intent]  # no health to whittle down (#69)
 			else:
-				tag.text = "%s %d/%d%s" % [foe.name, foe.health, foe.type.max_health, "  [shield]" if foe.shielded else ""]
+				tag.text = "%s %d/%d%s\n%s" % [foe.name, foe.health, foe.type.max_health, "  [shield]" if foe.shielded else "", intent]
 			tag.position = screen - tag.size / 2.0
 			tag.modulate = Color.WHITE if foe == _target else Color(1, 1, 1, 0.65)
 

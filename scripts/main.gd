@@ -516,6 +516,7 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 		for foe in state.foes:
 			foe.has_webbed = true  # the opening's spider bites first (#59)
 			foe.glancing = true  # and only fire drives it off (#69)
+			state.plan(foe)
 	_place_foes(state.foes)
 	_in_combat = true
 	_update_hints("fight")
@@ -1416,7 +1417,7 @@ func _update_hints(event: String) -> void:
 				_finish_hint()
 		"fight":
 			if not _hints_done.has("fight"):
-				_show_hint(("Tap" if touch else "Click") + " an enemy's name to target it, then Attack. Defend halves the damage you take.", "fight", "ok")
+				_show_hint(("Tap" if touch else "Click") + " an enemy's name to target it, then Attack. Under its name is what it will do next: Defend halves the damage you take, and fully blocks a heavy blow.", "fight", "ok")
 		"fight_over":
 			if _hint in ["fight", "throw", "force_throw"]:
 				_finish_hint()
