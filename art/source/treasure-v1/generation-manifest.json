@@ -1,0 +1,215 @@
+{
+  "tool": "image_gen.imagegen",
+  "date": "2026-10-18",
+  "issue": 90,
+  "entries": [
+    {
+      "name": "coins-small",
+      "args": {
+        "prompt": "Use case: stylized-concept. Asset type: ONE production item illustration for Depths, a dark first-person dungeon crawler, to export at 128px and 64px. Input images are STYLE REFERENCES ONLY (oil flask and rough iron knife); do not include either reference object. Scene/backdrop: genuinely transparent alpha, entire object isolated with clear padding on all sides. Style/medium: restrained handmade pixel art, chunky deliberate native 64px/128px pixel clusters and limited approximately24-32-colour palette; rough, practical, old-world materials. Three-quarter inventory view from slightly above, centred complete silhouette, no cropping. Muted ochre gold, dull silver, earthy cloth/leather, selective gemstone colour. Neutral diffuse material shading with a modest upper-left highlight, no baked torch-orange wash. No ground slab or cast ground-shadow halo, no scene, frame, checkerboard, text, letters, UI, numbers, logos, magic glow, sparkle particles, photorealism, smooth airbrush or intricate microtexture. Do not add extra loot beyond the subject. \nSubject: A SMALL handful of exactly three separate worn GOLD COINS resting partly overlapping, thick irregular medieval hammered discs, unreadable worn stamped marks, one face-up and two slightly tilted. Very simple legible three-disc silhouette; no huge pile.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/items/pack-64-v1/oil-flask.png",
+          "E:/GitHub/Depths/art/items/starter-v1/plain-knife.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-2d9d2bac-cdb6-4b28-a5ed-96f59b052b96.png",
+      "preserved_file": "coins-small.png",
+      "reference_roles": [
+        "style reference: oil flask",
+        "style reference: rough knife"
+      ]
+    },
+    {
+      "name": "coins-heap",
+      "args": {
+        "prompt": "Use case: stylized-concept. Asset type: ONE production item illustration for Depths, a dark first-person dungeon crawler, to export at 128px and 64px. Input images are STYLE REFERENCES ONLY (oil flask and rough iron knife); do not include either reference object. Scene/backdrop: genuinely transparent alpha, entire object isolated with clear padding on all sides. Style/medium: restrained handmade pixel art, chunky deliberate native 64px/128px pixel clusters and limited approximately24-32-colour palette; rough, practical, old-world materials. Three-quarter inventory view from slightly above, centred complete silhouette, no cropping. Muted ochre gold, dull silver, earthy cloth/leather, selective gemstone colour. Neutral diffuse material shading with a modest upper-left highlight, no baked torch-orange wash. No ground slab or cast ground-shadow halo, no scene, frame, checkerboard, text, letters, UI, numbers, logos, magic glow, sparkle particles, photorealism, smooth airbrush or intricate microtexture. Do not add extra loot beyond the subject. \nSubject: A LOW HEAP of roughly twenty worn GOLD COINS, a few uneven short stacks and scattered overlapping discs, thick irregular hammered edges with worn unreadable stamped faces. Compact broad mound, visually much more than three coins, no bag.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/items/pack-64-v1/oil-flask.png",
+          "E:/GitHub/Depths/art/items/starter-v1/plain-knife.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-cf998089-ea9c-4b84-87a6-61b600f93df7.png",
+      "preserved_file": "coins-heap.png",
+      "reference_roles": [
+        "style reference: oil flask",
+        "style reference: rough knife"
+      ]
+    },
+    {
+      "name": "coin-purse",
+      "args": {
+        "prompt": "Use case: stylized-concept. Asset type: ONE production item illustration for Depths, a dark first-person dungeon crawler, to export at 128px and 64px. Input images are STYLE REFERENCES ONLY (oil flask and rough iron knife); do not include either reference object. Scene/backdrop: genuinely transparent alpha, entire object isolated with clear padding on all sides. Style/medium: restrained handmade pixel art, chunky deliberate native 64px/128px pixel clusters and limited approximately24-32-colour palette; rough, practical, old-world materials. Three-quarter inventory view from slightly above, centred complete silhouette, no cropping. Muted ochre gold, dull silver, earthy cloth/leather, selective gemstone colour. Neutral diffuse material shading with a modest upper-left highlight, no baked torch-orange wash. No ground slab or cast ground-shadow halo, no scene, frame, checkerboard, text, letters, UI, numbers, logos, magic glow, sparkle particles, photorealism, smooth airbrush or intricate microtexture. Do not add extra loot beyond the subject. \nSubject: ONE small battered DARK BROWN LEATHER COIN PURSE, rounded squat shape, gathered neck with a simple thin cord, mouth slightly open showing just a few muted gold coin edges. Uneven stitching and rubbed leather, compact pocket-sized silhouette.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/items/pack-64-v1/oil-flask.png",
+          "E:/GitHub/Depths/art/items/starter-v1/plain-knife.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-3e6e479b-e1ae-44d9-9941-a5308f2fcf91.png",
+      "preserved_file": "coin-purse.png",
+      "reference_roles": [
+        "style reference: oil flask",
+        "style reference: rough knife"
+      ]
+    },
+    {
+      "name": "coin-sack",
+      "args": {
+        "prompt": "Use case: stylized-concept. Asset type: ONE production item illustration for Depths, a dark first-person dungeon crawler, to export at 128px and 64px. Input images are STYLE REFERENCES ONLY (oil flask and rough iron knife); do not include either reference object. Scene/backdrop: genuinely transparent alpha, entire object isolated with clear padding on all sides. Style/medium: restrained handmade pixel art, chunky deliberate native 64px/128px pixel clusters and limited approximately24-32-colour palette; rough, practical, old-world materials. Three-quarter inventory view from slightly above, centred complete silhouette, no cropping. Muted ochre gold, dull silver, earthy cloth/leather, selective gemstone colour. Neutral diffuse material shading with a modest upper-left highlight, no baked torch-orange wash. No ground slab or cast ground-shadow halo, no scene, frame, checkerboard, text, letters, UI, numbers, logos, magic glow, sparkle particles, photorealism, smooth airbrush or intricate microtexture. Do not add extra loot beyond the subject. \nSubject: ONE larger bulging faded grey-brown COARSE CLOTH COIN SACK, pear-shaped and tied tightly at the neck with a plain rope; a few worn gold coins spilled beside its foot. Taller and broader than a small leather purse, one subtle sewn patch, heavy sagging folds.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/items/pack-64-v1/oil-flask.png",
+          "E:/GitHub/Depths/art/items/starter-v1/plain-knife.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-9c0ed897-9bde-44cf-af91-c427f64670a1.png",
+      "preserved_file": "coin-sack.png",
+      "reference_roles": [
+        "style reference: oil flask",
+        "style reference: rough knife"
+      ]
+    },
+    {
+      "name": "gold-signet-ring",
+      "args": {
+        "prompt": "Use case: stylized-concept. Asset type: ONE production item illustration for Depths, a dark first-person dungeon crawler, to export at 128px and 64px. Input images are STYLE REFERENCES ONLY (oil flask and rough iron knife); do not include either reference object. Scene/backdrop: genuinely transparent alpha, entire object isolated with clear padding on all sides. Style/medium: restrained handmade pixel art, chunky deliberate native 64px/128px pixel clusters and limited approximately24-32-colour palette; rough, practical, old-world materials. Three-quarter inventory view from slightly above, centred complete silhouette, no cropping. Muted ochre gold, dull silver, earthy cloth/leather, selective gemstone colour. Neutral diffuse material shading with a modest upper-left highlight, no baked torch-orange wash. No ground slab or cast ground-shadow halo, no scene, frame, checkerboard, text, letters, UI, numbers, logos, magic glow, sparkle particles, photorealism, smooth airbrush or intricate microtexture. Do not add extra loot beyond the subject. \nSubject: ONE worn GOLD SIGNET RING at a three-quarter angle, thick slightly misshapen band and flattened oval seal face with an abstract unreadable incised mark. Scuffed old gold, dark inner hole very clearly open; no gems, no chain.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/items/pack-64-v1/oil-flask.png",
+          "E:/GitHub/Depths/art/items/starter-v1/plain-knife.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-acd8c59c-5fd1-4f45-96aa-21e0b3eecf14.png",
+      "preserved_file": "gold-signet-ring.png",
+      "reference_roles": [
+        "style reference: oil flask",
+        "style reference: rough knife"
+      ]
+    },
+    {
+      "name": "amber-pendant",
+      "args": {
+        "prompt": "Use case: stylized-concept. Asset type: ONE production item illustration for Depths, a dark first-person dungeon crawler, to export at 128px and 64px. Input images are STYLE REFERENCES ONLY (oil flask and rough iron knife); do not include either reference object. Scene/backdrop: genuinely transparent alpha, entire object isolated with clear padding on all sides. Style/medium: restrained handmade pixel art, chunky deliberate native 64px/128px pixel clusters and limited approximately24-32-colour palette; rough, practical, old-world materials. Three-quarter inventory view from slightly above, centred complete silhouette, no cropping. Muted ochre gold, dull silver, earthy cloth/leather, selective gemstone colour. Neutral diffuse material shading with a modest upper-left highlight, no baked torch-orange wash. No ground slab or cast ground-shadow halo, no scene, frame, checkerboard, text, letters, UI, numbers, logos, magic glow, sparkle particles, photorealism, smooth airbrush or intricate microtexture. Do not add extra loot beyond the subject. \nSubject: ONE old AMBER PENDANT, cloudy honey-coloured teardrop stone in a simple tarnished silver rim, attached to a short loosely looped dark silver chain. Broad amber centre and readable loop silhouette, no tiny filigree, ordinary recovered jewelry.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/items/pack-64-v1/oil-flask.png",
+          "E:/GitHub/Depths/art/items/starter-v1/plain-knife.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-2c45d217-d24a-4962-8fdb-2cd96fd701c6.png",
+      "preserved_file": "amber-pendant.png",
+      "reference_roles": [
+        "style reference: oil flask",
+        "style reference: rough knife"
+      ]
+    },
+    {
+      "name": "silver-brooch",
+      "args": {
+        "prompt": "Use case: stylized-concept. Asset type: ONE production item illustration for Depths, a dark first-person dungeon crawler, to export at 128px and 64px. Input images are STYLE REFERENCES ONLY (oil flask and rough iron knife); do not include either reference object. Scene/backdrop: genuinely transparent alpha, entire object isolated with clear padding on all sides. Style/medium: restrained handmade pixel art, chunky deliberate native 64px/128px pixel clusters and limited approximately24-32-colour palette; rough, practical, old-world materials. Three-quarter inventory view from slightly above, centred complete silhouette, no cropping. Muted ochre gold, dull silver, earthy cloth/leather, selective gemstone colour. Neutral diffuse material shading with a modest upper-left highlight, no baked torch-orange wash. No ground slab or cast ground-shadow halo, no scene, frame, checkerboard, text, letters, UI, numbers, logos, magic glow, sparkle particles, photorealism, smooth airbrush or intricate microtexture. Do not add extra loot beyond the subject. \nSubject: ONE tarnished SILVER LEAF-SHAPED CLOAK BROOCH, short broad leaf silhouette, simple central vein and a visible fastening pin crossing behind it. Dull silver, dark recesses and a few pale highlights, slightly bent tip, no jewels or chain.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/items/pack-64-v1/oil-flask.png",
+          "E:/GitHub/Depths/art/items/starter-v1/plain-knife.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-6b18c897-e3a7-41f7-80f8-033549ce6528.png",
+      "preserved_file": "silver-brooch.png",
+      "reference_roles": [
+        "style reference: oil flask",
+        "style reference: rough knife"
+      ]
+    },
+    {
+      "name": "garnet",
+      "args": {
+        "prompt": "Use case: stylized-concept. Asset type: ONE production item illustration for Depths, a dark first-person dungeon crawler, to export at 128px and 64px. Input images are STYLE REFERENCES ONLY (oil flask and rough iron knife); do not include either reference object. Scene/backdrop: genuinely transparent alpha, entire object isolated with clear padding on all sides. Style/medium: restrained handmade pixel art, chunky deliberate native 64px/128px pixel clusters and limited approximately24-32-colour palette; rough, practical, old-world materials. Three-quarter inventory view from slightly above, centred complete silhouette, no cropping. Muted ochre gold, dull silver, earthy cloth/leather, selective gemstone colour. Neutral diffuse material shading with a modest upper-left highlight, no baked torch-orange wash. No ground slab or cast ground-shadow halo, no scene, frame, checkerboard, text, letters, UI, numbers, logos, magic glow, sparkle particles, photorealism, smooth airbrush or intricate microtexture. Do not add extra loot beyond the subject. \nSubject: ONE cut deep RED GARNET loose gemstone, a squat oval cushion-cut stone resting at a three-quarter angle. Few broad dark-red planes and one muted warm highlight, thick solid faceted silhouette, no ring setting or other stones.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/items/pack-64-v1/oil-flask.png",
+          "E:/GitHub/Depths/art/items/starter-v1/plain-knife.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-311692e2-56f8-414f-a915-2bab64953d07.png",
+      "preserved_file": "garnet.png",
+      "reference_roles": [
+        "style reference: oil flask",
+        "style reference: rough knife"
+      ]
+    },
+    {
+      "name": "emerald",
+      "args": {
+        "prompt": "Use case: stylized-concept. Asset type: ONE production item illustration for Depths, a dark first-person dungeon crawler, to export at 128px and 64px. Input images are STYLE REFERENCES ONLY (oil flask and rough iron knife); do not include either reference object. Scene/backdrop: genuinely transparent alpha, entire object isolated with clear padding on all sides. Style/medium: restrained handmade pixel art, chunky deliberate native 64px/128px pixel clusters and limited approximately24-32-colour palette; rough, practical, old-world materials. Three-quarter inventory view from slightly above, centred complete silhouette, no cropping. Muted ochre gold, dull silver, earthy cloth/leather, selective gemstone colour. Neutral diffuse material shading with a modest upper-left highlight, no baked torch-orange wash. No ground slab or cast ground-shadow halo, no scene, frame, checkerboard, text, letters, UI, numbers, logos, magic glow, sparkle particles, photorealism, smooth airbrush or intricate microtexture. Do not add extra loot beyond the subject. \nSubject: ONE cut GREEN EMERALD loose gemstone, rectangular stepped-cut with clipped corners, resting at a three-quarter angle. Clearly elongated angular outline, a few broad deep green facets and restrained pale highlights, no mounting or other stones.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/items/pack-64-v1/oil-flask.png",
+          "E:/GitHub/Depths/art/items/starter-v1/plain-knife.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-601c6ec1-d197-4376-abe3-59ae07c87c7f.png",
+      "preserved_file": "emerald.png",
+      "reference_roles": [
+        "style reference: oil flask",
+        "style reference: rough knife"
+      ]
+    },
+    {
+      "name": "amethyst",
+      "args": {
+        "prompt": "Use case: stylized-concept. Asset type: ONE production item illustration for Depths, a dark first-person dungeon crawler, to export at 128px and 64px. Input images are STYLE REFERENCES ONLY (oil flask and rough iron knife); do not include either reference object. Scene/backdrop: genuinely transparent alpha, entire object isolated with clear padding on all sides. Style/medium: restrained handmade pixel art, chunky deliberate native 64px/128px pixel clusters and limited approximately24-32-colour palette; rough, practical, old-world materials. Three-quarter inventory view from slightly above, centred complete silhouette, no cropping. Muted ochre gold, dull silver, earthy cloth/leather, selective gemstone colour. Neutral diffuse material shading with a modest upper-left highlight, no baked torch-orange wash. No ground slab or cast ground-shadow halo, no scene, frame, checkerboard, text, letters, UI, numbers, logos, magic glow, sparkle particles, photorealism, smooth airbrush or intricate microtexture. Do not add extra loot beyond the subject. \nSubject: ONE small rough PURPLE AMETHYST crystal cluster, three fused unequal stubby points growing from a chipped grey-purple base. Strong jagged natural outline distinctly unlike cut oval or rectangular gems, few broad violet planes, no sparkle particles.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/items/pack-64-v1/oil-flask.png",
+          "E:/GitHub/Depths/art/items/starter-v1/plain-knife.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-f436ccb4-a2ed-4b6a-829e-47eb0a1df631.png",
+      "preserved_file": "amethyst.png",
+      "reference_roles": [
+        "style reference: oil flask",
+        "style reference: rough knife"
+      ]
+    },
+    {
+      "name": "silver-goblet",
+      "args": {
+        "prompt": "Use case: stylized-concept. Asset type: ONE production item illustration for Depths, a dark first-person dungeon crawler, to export at 128px and 64px. Input images are STYLE REFERENCES ONLY (oil flask and rough iron knife); do not include either reference object. Scene/backdrop: genuinely transparent alpha, entire object isolated with clear padding on all sides. Style/medium: restrained handmade pixel art, chunky deliberate native 64px/128px pixel clusters and limited approximately24-32-colour palette; rough, practical, old-world materials. Three-quarter inventory view from slightly above, centred complete silhouette, no cropping. Muted ochre gold, dull silver, earthy cloth/leather, selective gemstone colour. Neutral diffuse material shading with a modest upper-left highlight, no baked torch-orange wash. No ground slab or cast ground-shadow halo, no scene, frame, checkerboard, text, letters, UI, numbers, logos, magic glow, sparkle particles, photorealism, smooth airbrush or intricate microtexture. Do not add extra loot beyond the subject. \nSubject: ONE old DENTED SILVER GOBLET with a short stem and broad simple foot, thick cup rim slightly uneven, no handles. Tarnished dark-grey silver with restrained pale reflections, a small dent on one side, plain shallow engraved band, no gems.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/items/pack-64-v1/oil-flask.png",
+          "E:/GitHub/Depths/art/items/starter-v1/plain-knife.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-0ba8b192-961e-4102-8f60-69ebec132054.png",
+      "preserved_file": "silver-goblet.png",
+      "reference_roles": [
+        "style reference: oil flask",
+        "style reference: rough knife"
+      ]
+    },
+    {
+      "name": "chest-full",
+      "args": {
+        "prompt": "Use case: precise-object-edit. Asset type: registered chest treasure state for a dark pixel-art dungeon crawler. Image1 is the EXACT EDIT TARGET, the existing OPEN supply chest master; image2 is its native128px runtime style/registration reference. Change ONLY the contents INSIDE the open lower box: remove the amber medicine bottle and folded dressing completely, replace them with a low, clearly visible heap of worn ochre GOLD COINS and a few simple red/green loose stones partly sunk among the coins. No glowing treasure, light rays or glitter. KEEP THE ENTIRE CHEST PIXELS/SHAPE/POSE/CAMERA/SCALE in EXACTLY the same positions: lower box, lid outline and angle, boards, iron straps, rusty hardware, hinges, legs and foot contact. Contents must stay behind the front board and inside the box, never spill onto the floor or outside chest silhouette. Same restrained chunky pixel art, neutral wood/iron shading. Genuine transparent background outside the chest. No shadow slab, environment, text, borders, bottles, fabric or added ornament. This must swap with the supplied closed/empty chest without any visual jump.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/opening-tutorial-v1/chest-open.png",
+          "E:/GitHub/Depths/art/props/tutorial-chest-v1/open.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-bd19ea0c-2508-4316-9cab-57526fb66ed9.png",
+      "preserved_file": "chest-full.png",
+      "reference_roles": [
+        "edit target: original supply chest master",
+        "native registration/style reference"
+      ]
+    }
+  ],
+  "reused_states": [
+    "res://art/props/tutorial-chest-v1/closed.png",
+    "res://art/props/tutorial-chest-v1/empty.png"
+  ]
+}

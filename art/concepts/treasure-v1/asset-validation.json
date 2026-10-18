@@ -1,0 +1,449 @@
+{
+  "issue": 90,
+  "assets": {
+    "art/items/treasure-v1/coins-small.png": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        4,
+        11,
+        60,
+        52
+      ],
+      "visible_colours": 32
+    },
+    "art/props/treasure-v1/coins-small.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        12,
+        44,
+        116,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/items/treasure-v1/coins-heap.png": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        4,
+        15,
+        60,
+        49
+      ],
+      "visible_colours": 32
+    },
+    "art/props/treasure-v1/coins-heap.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        12,
+        57,
+        116,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/items/treasure-v1/coin-purse.png": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        4,
+        5,
+        60,
+        58
+      ],
+      "visible_colours": 32
+    },
+    "art/props/treasure-v1/coin-purse.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        12,
+        23,
+        116,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/items/treasure-v1/coin-sack.png": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        4,
+        4,
+        60,
+        59
+      ],
+      "visible_colours": 32
+    },
+    "art/props/treasure-v1/coin-sack.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        12,
+        18,
+        116,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/items/treasure-v1/chest-closed.png": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        4,
+        16,
+        60,
+        47
+      ],
+      "visible_colours": 28
+    },
+    "art/props/tutorial-chest-v1/closed.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        13,
+        63,
+        117,
+        121
+      ],
+      "visible_colours": 30
+    },
+    "art/items/treasure-v1/chest-full.png": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        5,
+        4,
+        59,
+        60
+      ],
+      "visible_colours": 46
+    },
+    "art/props/treasure-v1/chest-full.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        13,
+        13,
+        117,
+        121
+      ],
+      "visible_colours": 46
+    },
+    "art/items/treasure-v1/chest-empty.png": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        5,
+        4,
+        59,
+        60
+      ],
+      "visible_colours": 29
+    },
+    "art/props/tutorial-chest-v1/empty.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        13,
+        13,
+        117,
+        121
+      ],
+      "visible_colours": 30
+    },
+    "art/items/treasure-v1/gold-signet-ring.png": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        4,
+        12,
+        60,
+        52
+      ],
+      "visible_colours": 32
+    },
+    "art/props/treasure-v1/gold-signet-ring.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        12,
+        47,
+        116,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/items/treasure-v1/amber-pendant.png": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        7,
+        4,
+        57,
+        60
+      ],
+      "visible_colours": 32
+    },
+    "art/props/treasure-v1/amber-pendant.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        17,
+        17,
+        110,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/items/treasure-v1/silver-brooch.png": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        4,
+        4,
+        58,
+        60
+      ],
+      "visible_colours": 32
+    },
+    "art/props/treasure-v1/silver-brooch.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        12,
+        17,
+        115,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/items/treasure-v1/garnet.png": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        4,
+        8,
+        60,
+        55
+      ],
+      "visible_colours": 32
+    },
+    "art/props/treasure-v1/garnet.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        12,
+        34,
+        116,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/items/treasure-v1/emerald.png": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        4,
+        8,
+        60,
+        55
+      ],
+      "visible_colours": 32
+    },
+    "art/props/treasure-v1/emerald.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        12,
+        33,
+        116,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/items/treasure-v1/amethyst.png": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        11,
+        4,
+        53,
+        60
+      ],
+      "visible_colours": 32
+    },
+    "art/props/treasure-v1/amethyst.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        25,
+        17,
+        103,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/items/treasure-v1/silver-goblet.png": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        13,
+        4,
+        51,
+        60
+      ],
+      "visible_colours": 32
+    },
+    "art/props/treasure-v1/silver-goblet.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        29,
+        17,
+        99,
+        121
+      ],
+      "visible_colours": 32
+    }
+  },
+  "failures": [],
+  "alpha": "binary cutout",
+  "chest_registration": {
+    "source_lower_box": [
+      129,
+      666,
+      896,
+      975
+    ],
+    "scale": 0.13559322033898305,
+    "offset": [
+      -5,
+      -11
+    ],
+    "pivot": [
+      64,
+      120
+    ],
+    "closed_empty": "existing textures, unchanged",
+    "palette_limit": 48,
+    "reserved_content_colours": {
+      "gold": 8,
+      "red": 4,
+      "green": 4
+    },
+    "gem_pixel_counts": {
+      "red": 64,
+      "green": 47
+    }
+  },
+  "sha256": {
+    "art/items/treasure-v1/coins-small.png": "8ea3793acc1934321be1ede0c0d16c0bb436a8c95829ac95219f822b22a6f7ca",
+    "art/props/treasure-v1/coins-small.png": "a0e817a69716cfc6ae1fe9071c0525610b324e5df5ce9cbc5c7a46ca33858b74",
+    "art/items/treasure-v1/coins-heap.png": "fe044b25cb0950ac137830a135f0eb095c85fd3825c3d10313a5a157d4cc51ba",
+    "art/props/treasure-v1/coins-heap.png": "9205f2b6b1b465c7923b68dc7e8bce258f98d8a27e61f49c10df7bd1618c8d5b",
+    "art/items/treasure-v1/coin-purse.png": "6f6769fbee2c71be3f6ede4db4e4bdf5fa410bfb9101afd2a81500d349555568",
+    "art/props/treasure-v1/coin-purse.png": "4ff2ce5d0e24c482c5e75c22c022007a8e6158fccbd263cc37ef81dc19c59c8c",
+    "art/items/treasure-v1/coin-sack.png": "65c1b0a669d51123d2b752063af0ef3cc54ecceeb15195725f64c53601a9335a",
+    "art/props/treasure-v1/coin-sack.png": "342c855e0bb76448af4b505d6f0973b12ffaf5038bbe65a3be11f38397433f17",
+    "art/items/treasure-v1/chest-closed.png": "10afdcbd24a0ed74aac3a05729dc370d5aade93bbb6cc1a916bd0a53c900ccd0",
+    "art/props/tutorial-chest-v1/closed.png": "dd1a73eb992ad89a90b5666fee8c103b8256163e34212d8d735f3853d0e19e63",
+    "art/items/treasure-v1/chest-full.png": "37734edf2032b6c05fc8e5846774dabac5d21c3d37b567bdf02e7ced1806a635",
+    "art/props/treasure-v1/chest-full.png": "7c2b441e8398f6d6cf32b95186fb5a3708ab8bdc3d3606f05f6b10ba501dddb7",
+    "art/items/treasure-v1/chest-empty.png": "0ed3a164d166fcf6edd5351e8f528f054a5201f96d42eae56045910893678683",
+    "art/props/tutorial-chest-v1/empty.png": "04e03d4556fb76484b278e72bbdb801c953cf5f320c6d82bea79641ec0df9f6d",
+    "art/items/treasure-v1/gold-signet-ring.png": "33fd7a3ca4f92d4d78db50550b6227c409525cc31aa0b235f542ebec3ff297c1",
+    "art/props/treasure-v1/gold-signet-ring.png": "33e1126b3f394a0c9a54fcf449f6907ca941738408ed2ef86bc046f3c6359012",
+    "art/items/treasure-v1/amber-pendant.png": "0ea3d7c558bde55a0c65ab17114675f3461207796bebe774e38e87cdf3c2e1e3",
+    "art/props/treasure-v1/amber-pendant.png": "539c71a53bcbcd41c4ad2fe4988d23c38f88242311a5a219be899dc68cb8a493",
+    "art/items/treasure-v1/silver-brooch.png": "7bb86d7b2a2453b35a1e6a517edb5154649e35f197917f915243652dcf503556",
+    "art/props/treasure-v1/silver-brooch.png": "6ac1fee87b80ab93e799b22a3b27efc5402199aad882d8dcb08a3f3b5b3d9bec",
+    "art/items/treasure-v1/garnet.png": "515b076bd5b08e19d97b3853ff5ab3341efdb5544373cbd4ec0701c18bae20a6",
+    "art/props/treasure-v1/garnet.png": "f758ff4f821bf5bc3c3e366d5d20d25945afde822c217bb4bf7e8ff897a04d52",
+    "art/items/treasure-v1/emerald.png": "2377c3bd000f6f99a3f8bb954e0d3a19c10054054a1b336d323f0220d524115a",
+    "art/props/treasure-v1/emerald.png": "027b619132ba87da8f6cfcfa4bc774f8ac316c09cc09a9aadeed1c65e1602f19",
+    "art/items/treasure-v1/amethyst.png": "7025f456fa8960959a20f3c20da65243e0ee8099498221a21f604b719e96b2e6",
+    "art/props/treasure-v1/amethyst.png": "1b1c3764d2ca820b426df73986a85f213ce25001f1c82481e043ace939e6b7cb",
+    "art/items/treasure-v1/silver-goblet.png": "1af9ac6098fea95307b6141905757234728e51b8cee1896393ff97442ab2a4c8",
+    "art/props/treasure-v1/silver-goblet.png": "51f739e9e120189fad7368671cd4fdc4438f6cd8a29be8c62f6f03c20359339d",
+    "art/source/treasure-v1/amber-pendant.png": "e23ac7fffe0ed3d098d7c299addb752055fdb5bc154c1cb328d2f547cb701fbc",
+    "art/source/treasure-v1/amethyst.png": "c291b0cbc17803334bb9ee95a41ef18c24d6eadb524548c4cd5d9a636b53264e",
+    "art/source/treasure-v1/chest-full.png": "55182a058f46c59187db81aa34d88cc07f9527b2f7423593cdeefbf29cb3ef1e",
+    "art/source/treasure-v1/coin-purse.png": "2885352a7c7945352bb8f017552d081cc195e55cdd2bec8f0c8e5c1459116500",
+    "art/source/treasure-v1/coin-sack.png": "4d5bb80df6f1ef4f86c7938fa9376b1c7640b568679a61606d3b0dfc08e14f6f",
+    "art/source/treasure-v1/coins-heap.png": "e9fedca4422fd2491fc3d73d4966c0291649b6945319d69a674605485cf20cc0",
+    "art/source/treasure-v1/coins-small.png": "f2d13a1c37bd85802e7d1ef502eaac47966a7ea3d5384bfe58f63a2d02dbe0d2",
+    "art/source/treasure-v1/emerald.png": "99ddcbfac3d8db439df929f202e401a8ed9d6add5ed11464f20e057e326875dc",
+    "art/source/treasure-v1/garnet.png": "d6dcc05765c2a73f23b9c1b0e9f8d99469e9c7db0fa60d19b52530811880628b",
+    "art/source/treasure-v1/gold-signet-ring.png": "183202b3b87ca6d809f2dfcc55e0503c387b7c0eff1e5cc0d5d475ad1c719789",
+    "art/source/treasure-v1/silver-brooch.png": "306e61b16dbe82ac8ba783aa7de3218138b89b868edb722266070adec5120890",
+    "art/source/treasure-v1/silver-goblet.png": "8d3a3e2b03af66c26e1b6c316a59704e4918dae9ccf59f921ebd47d114096f1d"
+  },
+  "reference_sha256": {
+    "art/items/starter-v1/plain-knife.png": "5eeb11ecdf2d278ba17f89c5b7b076e194d545128069c35f4c7307d1badeb9fa",
+    "art/items/pack-64-v1/oil-flask.png": "5ae1024b45fdda648f636597ecdc46ac95a3c832f9467a3ad90d24901d138f32",
+    "art/source/opening-tutorial-v1/chest-open.png": "4ac45bff563afde20b2ac4b4611d25c7c79a6a295d5b3cc9cf1a41af8e79241f",
+    "art/props/tutorial-chest-v1/open.png": "8f8792dfcba4fb93da873580f1b59b4573f218127f25150d33b5ccd8daeac12f",
+    "art/props/tutorial-chest-v1/chest.gd": "e2f715800f8862d1d704fb28cc4317ef02b3adb3c6df18b697d47f837bde1b92"
+  },
+  "runtime_rgba_bytes": 1015808
+}

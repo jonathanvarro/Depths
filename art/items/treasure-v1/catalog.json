@@ -1,0 +1,127 @@
+{
+  "version": 1,
+  "issue": 90,
+  "icon_canvas": [
+    64,
+    64
+  ],
+  "illustration_canvas": [
+    128,
+    128
+  ],
+  "world_pivot": [
+    64,
+    120
+  ],
+  "amounts_and_prices": "not assigned by artwork",
+  "assets": [
+    {
+      "id": "coins-small",
+      "label": "Loose gold coins",
+      "category": "currency",
+      "icon": "res://art/items/treasure-v1/coins-small.png",
+      "illustration": "res://art/props/treasure-v1/coins-small.png",
+      "world_scene": "res://art/props/treasure-v1/coins-small.tscn"
+    },
+    {
+      "id": "coins-heap",
+      "label": "Gold coin heap",
+      "category": "currency",
+      "icon": "res://art/items/treasure-v1/coins-heap.png",
+      "illustration": "res://art/props/treasure-v1/coins-heap.png",
+      "world_scene": "res://art/props/treasure-v1/coins-heap.tscn"
+    },
+    {
+      "id": "coin-purse",
+      "label": "Leather coin purse",
+      "category": "currency_container",
+      "icon": "res://art/items/treasure-v1/coin-purse.png",
+      "illustration": "res://art/props/treasure-v1/coin-purse.png",
+      "world_scene": "res://art/props/treasure-v1/coin-purse.tscn"
+    },
+    {
+      "id": "coin-sack",
+      "label": "Cloth coin sack",
+      "category": "currency_container",
+      "icon": "res://art/items/treasure-v1/coin-sack.png",
+      "illustration": "res://art/props/treasure-v1/coin-sack.png",
+      "world_scene": "res://art/props/treasure-v1/coin-sack.tscn"
+    },
+    {
+      "id": "chest-closed",
+      "label": "Closed chest",
+      "category": "chest_state",
+      "icon": "res://art/items/treasure-v1/chest-closed.png",
+      "illustration": "res://art/props/tutorial-chest-v1/closed.png",
+      "world_scene": "res://art/props/treasure-v1/chest.tscn",
+      "state": "closed"
+    },
+    {
+      "id": "chest-full",
+      "label": "Treasure chest",
+      "category": "chest_state",
+      "icon": "res://art/items/treasure-v1/chest-full.png",
+      "illustration": "res://art/props/treasure-v1/chest-full.png",
+      "world_scene": "res://art/props/treasure-v1/chest.tscn",
+      "state": "open"
+    },
+    {
+      "id": "chest-empty",
+      "label": "Empty chest",
+      "category": "chest_state",
+      "icon": "res://art/items/treasure-v1/chest-empty.png",
+      "illustration": "res://art/props/tutorial-chest-v1/empty.png",
+      "world_scene": "res://art/props/treasure-v1/chest.tscn",
+      "state": "empty"
+    },
+    {
+      "id": "gold-signet-ring",
+      "label": "Gold signet ring",
+      "category": "valuable",
+      "icon": "res://art/items/treasure-v1/gold-signet-ring.png",
+      "illustration": "res://art/props/treasure-v1/gold-signet-ring.png"
+    },
+    {
+      "id": "amber-pendant",
+      "label": "Amber pendant",
+      "category": "valuable",
+      "icon": "res://art/items/treasure-v1/amber-pendant.png",
+      "illustration": "res://art/props/treasure-v1/amber-pendant.png"
+    },
+    {
+      "id": "silver-brooch",
+      "label": "Silver leaf brooch",
+      "category": "valuable",
+      "icon": "res://art/items/treasure-v1/silver-brooch.png",
+      "illustration": "res://art/props/treasure-v1/silver-brooch.png"
+    },
+    {
+      "id": "garnet",
+      "label": "Cut garnet",
+      "category": "valuable",
+      "icon": "res://art/items/treasure-v1/garnet.png",
+      "illustration": "res://art/props/treasure-v1/garnet.png"
+    },
+    {
+      "id": "emerald",
+      "label": "Cut emerald",
+      "category": "valuable",
+      "icon": "res://art/items/treasure-v1/emerald.png",
+      "illustration": "res://art/props/treasure-v1/emerald.png"
+    },
+    {
+      "id": "amethyst",
+      "label": "Rough amethyst",
+      "category": "valuable",
+      "icon": "res://art/items/treasure-v1/amethyst.png",
+      "illustration": "res://art/props/treasure-v1/amethyst.png"
+    },
+    {
+      "id": "silver-goblet",
+      "label": "Dented silver goblet",
+      "category": "valuable",
+      "icon": "res://art/items/treasure-v1/silver-goblet.png",
+      "illustration": "res://art/props/treasure-v1/silver-goblet.png"
+    }
+  ]
+}

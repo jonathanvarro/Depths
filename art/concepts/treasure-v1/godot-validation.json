@@ -1,0 +1,22 @@
+{
+  "captures": 20,
+  "checks": 213,
+  "failures": [],
+  "godot": "4.7.2",
+  "icon_review_sizes": [
+    64,
+    40
+  ],
+  "physical_phone_test": false,
+  "scope": "Treasure art only; no loot quantities, prices, inventory/currency or room integration.",
+  "viewports": [
+    [
+      1280,
+      720
+    ],
+    [
+      1278,
+      590
+    ]
+  ]
+}

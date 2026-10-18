@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Texture2D" path="res://art/props/treasure-v1/coins-small.png" id="1"]
+
+[node name="Treasure" type="Node3D"]
+metadata/visual_id = "coins-small"
+
+[node name="Sprite" type="Sprite3D" parent="."]
+position = Vector3(0, 0.175000000, 0)
+pixel_size = 0.003125000
+billboard = 2
+shaded = true
+texture_filter = 0
+alpha_cut = 1
+alpha_scissor_threshold = 0.5
+texture = ExtResource("1")

@@ -1,0 +1,14 @@
+[gd_resource type="SpriteFrames" load_steps=4 format=3]
+
+[ext_resource type="Texture2D" path="res://art/props/tutorial-chest-v1/closed.png" id="1"]
+[ext_resource type="Texture2D" path="res://art/props/treasure-v1/chest-full.png" id="2"]
+[ext_resource type="Texture2D" path="res://art/props/tutorial-chest-v1/empty.png" id="3"]
+
+[resource]
+animations = [{
+"frames": [{"duration": 1.0, "texture": ExtResource("1")}], "loop": false, "name": &"closed", "speed": 1.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("2")}], "loop": false, "name": &"open", "speed": 1.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("3")}], "loop": false, "name": &"empty", "speed": 1.0
+}]
