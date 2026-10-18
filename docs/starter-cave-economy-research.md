@@ -1,5 +1,7 @@
 # Starter cave — economy and character progression research
 
+**Historical proposal:** the game has developed since this 2026-10-17 paper. See [the 2026-10-18 stats, monsters and XP research](stats-monsters-xp-research.md) for a current-code audit and revised progression proposal. In particular, current cave days regenerate, recruits/treatment are free, initial gold is zero, and the site has four floors with the goblin queen; the older proposed alternatives below do not override those decisions.
+
 Research and proposal, 2026-10-17, [issue #25](https://github.com/jonathanvarro/Depths/issues/25). **For owner review: none of the proposed mechanics or numbers below are approved or implemented.**
 
 ## Recommendation

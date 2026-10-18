@@ -1,6 +1,6 @@
 # Depths — Design Direction
 
-Last updated: 2026-10-17. This is a living design document for the owner, Claude Code, and Codex. It records the discussion so far; it is not a complete implementation specification. Depths is the working project name, not a confirmed release title.
+Last updated: 2026-10-18. This is a living design document for the owner, Claude Code, and Codex. It records the discussion so far; it is not a complete implementation specification. Depths is the working project name, not a confirmed release title.
 
 ## Premise
 
@@ -18,6 +18,8 @@ A dark, first-person dungeon crawler about party strain, dangerous discoveries, 
 - **Knowledge matters.** Consistent dungeon rules let players apply what they learn, even when layouts change.
 
 ## Current direction and certainty
+
+**Stats, monsters and XP research (2026-10-18, #97):** [the updated research](docs/stats-monsters-xp-research.md) audits the built four-floor cave/fortress, proposes five attributes, an 18-entry monster catalogue, levels 1–4, limited repeat-combat learning, recruit catch-up and cautious armour rules. It includes 36,000 controlled live-combat trials, raw results and a reproducible research probe. All new systems/values remain proposals; the measured scenarios do not implement talents, XP or new monster behaviours. This updates the relevant assumptions in the older economy paper while preserving current opening, free recruitment/treatment, daily regeneration, main-hero unconsciousness and coin/intent rules. Owner choices remain under #47/#93/#97/#101; no shipping gameplay changed in this research.
 
 Established direction: dark and gritty atmosphere; first-person grid exploration; procedural dungeon layouts; room encounters; an increasingly difficult descent toward the bottom floor; a small party represented by expressive portraits; turn-based combat involving positioning, protection, and cooperation; a readable exploration map.
 

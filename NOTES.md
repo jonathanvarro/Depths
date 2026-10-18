@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-18 – ChatGPT
+- Did: #97 researched stats/monsters/XP against current code and eight original developer/rules sources. Added docs/stats-monsters-xp-research.md: five-attribute derivation, role/trait mapping, 18-entry staged catalogue with numbers/intents/drops/threat budgets, levels 1–4, repeat-learning limits, catch-up/wipe rules, armour candidates and owner decisions. Added tools/stats_research_probe.gd and raw JSON for 36,000 controlled live-combat trials; linked the report from DESIGN.md and marked the prior economy paper historical. Checked research arithmetic, local links, tables, Godot script parsing and simulation completion.
+- Next: Owner chooses the attribute/growth model, repeat-XP limit, replacement policy, armour scope and monster subset. Claude can then implement under #47/#93/#48; #101 remains an idea, not approved by the report.
+- Watch out: No shipping gameplay or enemy/gear resources changed. Candidate trials model numeric proxies, not new talents/Resolve/Wits/monster behaviours; armour trials omit speed costs. Fresh level-3 candidate queen wins 99.7%, but worn (75% HP, 35 strain) wins 70.2%. Measurements pin c987f29's pre-#95 Guide profile; the newly decided rogue/Corin/healer choices and their in-progress implementations need separate validation. Current weapon replacement can erase fallback damage traits; address deliberately in an approved stat migration. Concurrent gameplay/art work and unrelated UIDs were excluded.
+
 ## 2026-10-18 – Claude
 - Did: unconscious main heroes (#83), the secured route to floor 2 (#79: after two floor-2 trips, 40g), visible room contents with ambushing enemies (#46), Settings (#52: volumes on Music/Effects buses, fullscreen, screen flashes, text size; title, Pack, camp).
 - Next: decisions on #95 (choose a starting hero), #93 armour after #97 research; ChatGPT art #96/#99.
