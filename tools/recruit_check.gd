@@ -68,6 +68,7 @@ func _initialize() -> void:
 	var camp = main._camp_state
 	check("three recruits by the fire", camp.candidates.size() == 3)
 	check("each has a role, strength and weakness", camp.candidates.all(func(c): return c.role in ["Warden", "Scout", "Brawler"] and c.strength != "" and c.weakness != "" and c.portrait != null))
+	check("each has an animated face from the roster, no two alike", camp.candidates.all(func(c): return c.portrait_set != null) and camp.candidates.map(func(c): return c.portrait_set.resource_path).size() == 3 and camp.candidates[0].portrait_set != camp.candidates[1].portrait_set and camp.candidates[1].portrait_set != camp.candidates[2].portrait_set and camp.candidates[0].portrait_set != camp.candidates[2].portrait_set)
 	check("names differ", camp.candidates.map(func(c): return c.display_name).size() == 3 and camp.candidates[0].display_name != camp.candidates[1].display_name)
 	await _open("fire")
 	await _snap("fire")

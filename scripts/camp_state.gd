@@ -62,17 +62,25 @@ var _used_names: Array = []  # each name comes by once before any repeats
 
 
 ## Seeds the camp and puts the first recruits by the fire.
-func start(seed_value: int) -> void:
+func start(seed_value: int, party = null) -> void:
 	rng.seed = seed_value
-	_fill_fire()
+	_fill_fire(party)
 	post_contract()
 
 
-func _fill_fire() -> void:
+func _fill_fire(party = null) -> void:
 	while candidates.size() < CANDIDATES:
 		if _used_names.size() >= Recruits.NAMES.size():
 			_used_names.clear()  # everyone's been by once; names may repeat
-		var recruit: Companion = Recruits.make(rng, _used_names)
+		var faces := []  # no two people by the fire or in the party share a face
+		var people: Array = candidates.duplicate()
+		if party:
+			people.append_array(party.members)
+		people.append_array(left_behind)
+		for person in people:
+			if person.portrait_set:
+				faces.append(person.portrait_set.resource_path)
+		var recruit: Companion = Recruits.make(rng, _used_names, faces)
 		_used_names.append(recruit.display_name)
 		candidates.append(recruit)
 
@@ -123,7 +131,7 @@ func rest(party) -> void:
 	day += 1
 	if not candidates.is_empty():
 		candidates.pop_front()  # the longest-waiting moves on
-	_fill_fire()
+	_fill_fire(party)
 	post_contract()
 	for hero in recovering.keys():
 		if recovering[hero] <= day:

@@ -14,6 +14,11 @@ Format:
 ---
 
 ## 2026-10-18 – Claude
+- Did: Recruits now get ChatGPT's animated faces (#82, recruit-roster-v1 catalog, three per role, no duplicates among the fire, party and anyone at camp; silhouettes only if a role runs out). Fixed exports: export_presets.cfg now includes *.json, so the camp layout and the face catalog ship in Depths.exe (every exe since the camp was added lacked them).
+- Next: rest of the owner's batch (camp clarity, #86, #43, #49, #67, #72).
+- Watch out: Any new runtime JSON is exported via the *.json include filter; other non-resource files would need adding too.
+
+## 2026-10-18 – Claude
 - Did: Hooked up ChatGPT's treasure art (#90, #91): 14 new treasure items plus icons for the brooch (was "silver trinket") and coin purse; RoomEvents.TREASURE picks valuables by depth for EventOutcome.treasure; pack/stash/goblin stash/old workings use it. The opening's chest uses art/props/tutorial-chest-v1 (closed/empty).
 - Next: Icons still missing for copper ore and the smith's four new weapons (#92). The coin-pile world scenes and chest.tscn wait for visible room contents (#46).
 - Watch out: Values are my proposal (5-18g, rising with depth); tune by playtest.

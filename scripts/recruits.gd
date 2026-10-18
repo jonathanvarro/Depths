@@ -4,8 +4,11 @@ extends RefCounted
 ##
 ## Owner decisions (#41): roles Warden (protector), Scout (quick) and
 ## Brawler (damage); 2-3 candidates, one leaving and one arriving each day;
-## free until gold exists. Portraits are role silhouettes until ChatGPT's
-## recruit portraits land (#82). All numbers are first guesses to tune.
+## free until gold exists. Faces come from ChatGPT's recruit roster (#82):
+## three animated faces per role; a role silhouette if none is free.
+## All numbers are first guesses to tune.
+
+const FACES := "res://art/portraits/recruit-roster-v1/catalog.json"
 
 const ROLES := {
 	"Warden": {
@@ -47,8 +50,17 @@ const NAMES := [
 ]
 
 
-## A new recruit, drawn with `rng`. `taken` names are avoided.
-static func make(rng: RandomNumberGenerator, taken: Array = []) -> Companion:
+## Faces for a role from the roster catalog: [{id, portrait, portrait_set}].
+static func faces_for(role: String) -> Array:
+	if not FileAccess.file_exists(FACES):
+		return []
+	var catalog: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(FACES))
+	return catalog["portraits"].filter(func(p): return p["role"] == role and ResourceLoader.exists(p["portrait_set"]))
+
+
+## A new recruit, drawn with `rng`. `taken` names and `faces_in_use`
+## (portrait set paths) are avoided where possible.
+static func make(rng: RandomNumberGenerator, taken: Array = [], faces_in_use: Array = []) -> Companion:
 	var role: String = ROLES.keys()[rng.randi_range(0, ROLES.size() - 1)]
 	var spec: Dictionary = ROLES[role]
 	var hero := Companion.new()
@@ -63,6 +75,15 @@ static func make(rng: RandomNumberGenerator, taken: Array = []) -> Companion:
 	hero.guard_factor = spec["guard_factor"]
 	hero.toughness = spec["toughness"]
 	hero.portrait = load(spec["portrait"])
+	var faces := faces_for(role)
+	var free_faces := faces.filter(func(f): return f["portrait_set"] not in faces_in_use)
+	if not free_faces.is_empty():
+		faces = free_faces
+	if not faces.is_empty():
+		var face: Dictionary = faces[rng.randi_range(0, faces.size() - 1)]
+		hero.portrait_set = load(face["portrait_set"])
+		if ResourceLoader.exists(face["portrait"]):
+			hero.portrait = load(face["portrait"])
 	var strength: Dictionary = STRENGTHS[rng.randi_range(0, STRENGTHS.size() - 1)]
 	var weaknesses := WEAKNESSES.filter(func(w): return w["stat"] != strength["stat"])
 	var weakness: Dictionary = weaknesses[rng.randi_range(0, weaknesses.size() - 1)]

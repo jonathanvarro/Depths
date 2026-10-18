@@ -306,7 +306,7 @@ func _ready() -> void:
 	_build_environment()
 	_site_seed = floor_seed if floor_seed != 0 else randi()
 	_first_seed = _site_seed
-	_camp_state.start(_first_seed)
+	_camp_state.start(_first_seed, _party_state)
 	_camp_state.day_passed.connect(_on_camp_day_passed)
 	print("Floor seed: ", _site_seed)
 	_party_state = PartyState.new()
