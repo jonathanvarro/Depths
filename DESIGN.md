@@ -189,6 +189,19 @@ Suggested initial presentation: one campsite screen with a few selectable activi
 - **A wipe** is saved straight away as its aftermath, so quitting can't undo it.
 - **During the opening** only a marker is kept: Continue restarts the escape in the same maze.
 
+**Decided 2026-10-18 (#44): the cave's objective is the goblin fortress and its queen.**
+- **Floors:** 1–2 are natural cave; **3 is the fortress outskirts** (palisades, watch posts, goblin marks, war drums); **4 is the fortress**, with the queen's hall.
+- **The gate:** a barred gate on floor 4, held by its guards. Once broken it **stays broken**, even as the cave shifts daily.
+- **The queen:**
+  - She fights behind a **front row of guards** and calls more.
+  - She has **phases** (enraged below half health).
+  - Her signature cleaver attack is **decided by the coin** (#77).
+- **No retreat** from her fight, with a warning before entering the hall.
+- **New enemies:** a **goblin archer** (back row, reaches the back row) and a **goblin guard** (shield wall), with more possible after ChatGPT's research (#97).
+- **Signposting:** rumours at camp, and signs in the cave (marks, drums, trophies).
+- **Victory:** the site is cleared, with a story beat and a bounty at camp. The next site is "coming later", and the cave stays explorable.
+- **Proposed numbers** are on #44. **Art** is requested in #99.
+
 The suggested retreat flow is to return through the dungeon to its entrance before reaching camp, with discovered shortcuts potentially easing later returns. Travel costs, escape exceptions, refuge services, recovery timing, and prices still need design decisions. Rest spots inside the dungeon remain distinct from the outside refuge.
 
 **Cave-camp staff and equipment (2026-10-16):** the owner wants a blacksmith sent from a nearby village and a nurse for the cave area. The smith is an apprentice, explaining the limited selection of quality items; the starting location should offer very basic equipment. The [updated campsite design](docs/campsite-design.md) proposes a sixth clickable smith area and places the nurse in the treatment tent. Exact stock, repair/crafting mechanics, NPC identities and later-site availability remain open. The original five-area interaction study predates this addition.
