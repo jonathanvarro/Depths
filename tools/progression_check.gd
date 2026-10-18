@@ -171,7 +171,7 @@ func _initialize() -> void:
 	main._save_now()
 	main.queue_free()
 	await process_frame
-	SaveGame.continue_requested = true
+	SaveGame.set_continue_requested(true)
 	main = load("res://scenes/main.tscn").instantiate()
 	main.play_opening = false
 	main.floor_seed = 11

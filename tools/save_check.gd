@@ -23,7 +23,7 @@ func _press(node, label: String) -> bool:
 
 
 func _game(continue_save: bool):
-	SaveGame.continue_requested = continue_save
+	SaveGame.set_continue_requested(continue_save)
 	var main = load("res://scenes/main.tscn").instantiate()
 	main.play_opening = false
 	main.floor_seed = 41
@@ -48,7 +48,7 @@ func _to_camp(main, ending: int) -> void:
 func _initialize() -> void:
 	var args := OS.get_cmdline_user_args()
 	S = args[1] if args.size() > 1 else ""
-	SaveGame.path = "user://test_save.dat"
+	SaveGame.set_path("user://test_save.dat")
 	SaveGame.delete()
 
 	# 1. In the cave: a floor change autosaves; save again after walking.

@@ -9,11 +9,19 @@ const BUSES := ["Master", "Music", "Effects"]
 ## Text and interface size steps (the whole UI scales with it).
 const TEXT_SIZES := {"Normal": 1.0, "Large": 1.15, "Larger": 1.3}
 
-static var values := {
+const DEFAULTS := {
 	"Master": 1.0, "Music": 0.8, "Effects": 1.0,
 	"fullscreen": false, "flashes": true, "text_size": "Normal",
 }
-static var _loaded := false
+## Current values live in engine metadata, not static variables: static
+## variables kept this script alive at exit (#100).
+const STATE := "depths_settings"
+
+
+static func _values() -> Dictionary:
+	if not Engine.has_meta(STATE):
+		Engine.set_meta(STATE, DEFAULTS.duplicate())
+	return Engine.get_meta(STATE)
 
 
 static func path() -> String:
@@ -21,31 +29,31 @@ static func path() -> String:
 
 
 static func load_settings() -> void:
-	if _loaded:
+	if Engine.has_meta(STATE + "_loaded"):
 		return
-	_loaded = true
+	Engine.set_meta(STATE + "_loaded", true)
 	var config := ConfigFile.new()
 	if config.load(path()) != OK:
 		return
-	for key in values:
-		values[key] = config.get_value("settings", key, values[key])
+	for key in _values():
+		_values()[key] = config.get_value("settings", key, _values()[key])
 
 
 static func save() -> void:
 	var config := ConfigFile.new()
-	for key in values:
-		config.set_value("settings", key, values[key])
+	for key in _values():
+		config.set_value("settings", key, _values()[key])
 	config.save(path())
 
 
 static func get_value(key: String) -> Variant:
 	load_settings()
-	return values[key]
+	return _values()[key]
 
 
 static func set_value(key: String, value: Variant, tree: SceneTree = null) -> void:
 	load_settings()
-	values[key] = value
+	_values()[key] = value
 	save()
 	apply(tree)
 
@@ -66,12 +74,12 @@ static func apply(tree: SceneTree = null) -> void:
 	ensure_buses()
 	for bus in BUSES:
 		var index := AudioServer.get_bus_index(bus)
-		var level: float = values[bus]
+		var level: float = _values()[bus]
 		AudioServer.set_bus_mute(index, level <= 0.001)
 		AudioServer.set_bus_volume_db(index, linear_to_db(maxf(level, 0.001)))
 	if not OS.has_feature("mobile") and DisplayServer.get_name() != "headless":
-		var mode := DisplayServer.WINDOW_MODE_FULLSCREEN if values["fullscreen"] else DisplayServer.WINDOW_MODE_WINDOWED
-		if DisplayServer.window_get_mode() != mode and (values["fullscreen"] or DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN):
+		var mode := DisplayServer.WINDOW_MODE_FULLSCREEN if _values()["fullscreen"] else DisplayServer.WINDOW_MODE_WINDOWED
+		if DisplayServer.window_get_mode() != mode and (_values()["fullscreen"] or DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN):
 			DisplayServer.window_set_mode(mode)
 	if tree:
-		tree.root.content_scale_factor = TEXT_SIZES.get(values["text_size"], 1.0)
+		tree.root.content_scale_factor = TEXT_SIZES.get(_values()["text_size"], 1.0)

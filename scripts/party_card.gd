@@ -6,6 +6,9 @@ extends PanelContainer
 const PortraitView := preload("res://scripts/portrait_view.gd")
 const Glyphs := preload("res://art/ui/backlog96-v1/glyphs.gd")
 const StrainRules := preload("res://scripts/strain.gd")
+## Exploration conditions (#64): nerves for strain, a ration for hunger.
+const NERVES_ICON := preload("res://art/ui/visual105-v1/nerves.png")
+const RATION := preload("res://data/items/ration.tres")
 
 const PORTRAIT_SIZE := Vector2(96, 96)
 const ICON_SIZE := 14.0
@@ -65,10 +68,14 @@ func _init() -> void:
 	_turn_marker.visible = false
 	column.add_child(_turn_marker)
 
+	var frame := Control.new()  # the portrait, with condition icons over it
+	frame.custom_minimum_size = PORTRAIT_SIZE
+	frame.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	column.add_child(frame)
 	_portrait = PortraitView.new()
 	_portrait.custom_minimum_size = PORTRAIT_SIZE
 	_portrait.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST  # same pixel clusters at card size
-	column.add_child(_portrait)
+	frame.add_child(_portrait)
 
 	var name_row := HBoxContainer.new()
 	name_row.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -84,10 +91,17 @@ func _init() -> void:
 	_row_label.add_theme_color_override("font_color", Color("b3a78f"))
 	_row_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	name_row.add_child(_row_label)
+	# Condition icons sit along the portrait's bottom edge, so a few of them
+	# don't squeeze the name (#64).
 	_icons = HBoxContainer.new()
 	_icons.add_theme_constant_override("separation", 2)
 	_icons.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	name_row.add_child(_icons)
+	_icons.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
+	_icons.offset_top = -ICON_SIZE - 3
+	_icons.offset_bottom = -2
+	_icons.offset_left = 3
+	_icons.alignment = BoxContainer.ALIGNMENT_END
+	frame.add_child(_icons)
 
 	_bar = ProgressBar.new()
 	_bar.show_percentage = false
@@ -195,6 +209,13 @@ func refresh() -> void:
 		# Portrait overlays, if the art provides them.
 		_portrait.set_condition(injury.portrait_condition, not is_dressed)
 		_portrait.set_condition(injury.dressed_portrait_condition, is_dressed)
+	# Strain and hunger as icons with what they do and what helps (#64).
+	if companion.is_alive() and state > StrainRules.State.STEADY:
+		var effect := roundi(StrainRules.EFFECTIVENESS[state] * 100)
+		_add_condition(NERVES_ICON, STRAIN_BORDERS[state], "%s: fights at %d%%. Light, food and rest calm them." % [StrainRules.NAMES[state], effect])
+	if companion.is_alive() and companion.is_hungry():
+		var starving := companion.hunger >= StrainRules.STARVING_AFTER
+		_add_condition(RATION.icon, Color("e0542f") if starving else Color.WHITE, ("Starving" if starving else "Hungry") + ": nerves fray faster. Eat a ration.")
 	for mark in _marks:
 		var icon := TextureRect.new()
 		icon.texture = mark[0]
@@ -214,6 +235,50 @@ func set_marks(marks: Array) -> void:
 		return
 	_marks = marks
 	refresh()
+
+
+func _add_condition(texture: Texture2D, tint: Color, tooltip: String) -> void:
+	var icon := TextureRect.new()
+	icon.texture = texture
+	icon.modulate = tint
+	icon.tooltip_text = tooltip
+	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	icon.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	icon.custom_minimum_size = Vector2(ICON_SIZE, ICON_SIZE)
+	icon.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	icon.mouse_filter = Control.MOUSE_FILTER_PASS
+	_icons.add_child(icon)
+
+
+## Something got worse (#64): a big icon rises from the portrait and fades,
+## and the card shakes a little, so the change is seen rather than read.
+func alert(texture: Texture2D, tint := Color.WHITE) -> void:
+	if texture == null:
+		return
+	var icon := TextureRect.new()
+	icon.texture = texture
+	icon.modulate = tint
+	icon.top_level = true
+	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	icon.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	icon.size = Vector2(48, 48)
+	icon.pivot_offset = icon.size / 2.0
+	icon.global_position = global_position + Vector2(size.x / 2.0 - 24.0, 20.0)
+	icon.scale = Vector2(0.4, 0.4)
+	add_child(icon)
+	var tween := icon.create_tween()
+	tween.tween_property(icon, "scale", Vector2(1.2, 1.2), 0.2).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tween.tween_property(icon, "global_position:y", icon.global_position.y - 70.0, 1.1).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(icon, "modulate:a", 0.0, 0.5).set_delay(0.6)
+	tween.tween_callback(icon.queue_free)
+	var shake := create_tween()
+	var home := _portrait.position
+	for i in 4:
+		shake.tween_property(_portrait, "position:x", home.x + (4.0 if i % 2 == 0 else -4.0), 0.04)
+	shake.tween_property(_portrait, "position:x", home.x, 0.04)
 
 
 func _clear_icons() -> void:

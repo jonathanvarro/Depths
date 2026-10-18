@@ -62,7 +62,7 @@ func _ready() -> void:
 	if has_save:
 		var resume := _menu_button("Continue", 72 if phone else 56, true)
 		resume.pressed.connect(func():
-			SaveGame.continue_requested = true
+			SaveGame.set_continue_requested(true)
 			get_tree().change_scene_to_file(GAME_SCENE))
 		column.add_child(resume)
 	_begin = _menu_button("New game (replaces your save)" if has_save else "Begin expedition", 72 if phone else 56, not has_save)
@@ -137,5 +137,5 @@ func _menu_button(text: String, height: int, primary: bool) -> Button:
 func _start_new_game(hero_path: String) -> void:
 	var SaveGame := preload("res://scripts/save_game.gd")
 	SaveGame.delete()
-	SaveGame.new_game_hero = hero_path
+	SaveGame.set_new_game_hero(hero_path)
 	get_tree().change_scene_to_file(GAME_SCENE)

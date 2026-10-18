@@ -52,6 +52,24 @@ func _initialize() -> void:
 	main._event_screen._finish({"left": true, "ambush": [] as Array[EnemyType]})
 	for hero in main._party_state.members:
 		hero.health = hero.max_health
+	# Exploring (#64): worse nerves and hunger show on the card.
+	var lead: Companion = main._party_state.members[0]
+	lead.strain = 10.0
+	main._on_party_state_changed(false)
+	lead.change_strain(50.0)
+	lead.hunger = 100
+	lead.emit_changed()
+	await create_timer(0.3).timeout
+	var card = main._cards[0]
+	var tips: Array = card._icons.get_children().map(func(c): return c.tooltip_text)
+	check("a shaken hero's card shows nerves and what helps", tips.any(func(s): return s.begins_with("Shaken") and s.contains("rest")), str(tips))
+	check("a hungry hero's card shows hunger", tips.any(func(s): return s.begins_with("Hungry")))
+	check("the worsening pops over the card", card.get_children().any(func(c): return c is TextureRect and c.top_level))
+	if dir != "":
+		root.get_texture().get_image().save_png(dir + "/visual_" + tag + "_strain.png")
+	lead.strain = 10.0
+	lead.hunger = 0
+	lead.emit_changed()
 	var goblin: EnemyType = load("res://data/enemies/goblin.tres").duplicate()
 	goblin.accuracy = 1.0
 	goblin.initiative = 1

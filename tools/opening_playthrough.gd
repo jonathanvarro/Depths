@@ -219,7 +219,7 @@ func _initialize() -> void:
 	force = args.size() > 3 and args[3] == "force"
 	# Optional 5th arg: the starting hero to choose (#95), e.g. corin.
 	if args.size() > 4:
-		load("res://scripts/save_game.gd").new_game_hero = "res://data/companions/%s.tres" % args[4]
+		load("res://scripts/save_game.gd").set_new_game_hero("res://data/companions/%s.tres" % args[4])
 	main = load("res://scenes/main.tscn").instantiate()
 	main.floor_seed = int(args[2]) if args.size() > 2 else 11
 	main.simulate_phone_safe_area = tag == "phone"

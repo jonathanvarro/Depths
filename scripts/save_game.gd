@@ -7,29 +7,61 @@ extends RefCounted
 ## path; generated ones (recruits, party members) by their script variables.
 ## main.gd decides what goes in and how to rebuild the game from it.
 
-## Test runs (started with --script) get their own file, so they never
-## touch the player's save.
-static var path := "user://test_save.dat" if "--script" in OS.get_cmdline_args() else "user://save.dat"
 const VERSION := 1
+## The few values that cross scenes live in engine metadata rather than in
+## static variables: static variables kept this script alive at exit (#100).
+const STATE := "depths_save_game"
 
-## Set by the title screen's Continue before the game scene loads.
-static var continue_requested := false
-## The starting hero chosen for a new game (#95), as a resource path.
-static var new_game_hero := ""
+
+static func _state() -> Dictionary:
+	if not Engine.has_meta(STATE):
+		Engine.set_meta(STATE, {
+			# Test runs (started with --script) get their own file, so they
+			# never touch the player's save.
+			"path": "user://test_save.dat" if "--script" in OS.get_cmdline_args() else "user://save.dat",
+			"continue": false,  # set by the title screen's Continue
+			"hero": "",  # the starting hero chosen for a new game (#95)
+		})
+	return Engine.get_meta(STATE)
+
+
+static func path() -> String:
+	return _state()["path"]
+
+
+static func set_path(value: String) -> void:
+	_state()["path"] = value
+
+
+static func continue_requested() -> bool:
+	return _state()["continue"]
+
+
+static func set_continue_requested(value: bool) -> void:
+	_state()["continue"] = value
+
+
+## The starting hero chosen for a new game, as a resource path.
+static func new_game_hero() -> String:
+	return _state()["hero"]
+
+
+static func set_new_game_hero(value: String) -> void:
+	_state()["hero"] = value
 
 
 static func exists() -> bool:
-	return FileAccess.file_exists(path)
+	return FileAccess.file_exists(path())
 
 
 static func delete() -> void:
 	if exists():
-		DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
+		DirAccess.remove_absolute(ProjectSettings.globalize_path(path()))
 
 
 static func write(data: Dictionary) -> bool:
 	data["version"] = VERSION
-	var file := FileAccess.open(path, FileAccess.WRITE)
+	var file := FileAccess.open(path(), FileAccess.WRITE)
 	if file == null:
 		push_warning("Couldn't save: %s" % FileAccess.get_open_error())
 		return false
@@ -40,7 +72,7 @@ static func write(data: Dictionary) -> bool:
 static func read() -> Dictionary:
 	if not exists():
 		return {}
-	var file := FileAccess.open(path, FileAccess.READ)
+	var file := FileAccess.open(path(), FileAccess.READ)
 	if file == null:
 		return {}
 	var data = file.get_var()
