@@ -142,6 +142,18 @@ Templates > Download and Install; already installed on the owner's PC).
   `torch_left`, `torch_burnt_out` signal) or NONE; `has_lantern`. Torch
   supply effect LIGHT_TORCH; CombatState.hero_throw_torch() scares a foe off.
   Party.step_check can refuse a step (the opening's too-dark gate).
+- Opening polish (#69): `DungeonMap.solid` cells block movement and
+  `Party.interacted` fires when walked into (bodies, fire, chests);
+  `DungeonMap.set_symbol()` edits a cell (niches, sealing the way to
+  daylight; rebuild the level after); `walking_path()`. Tutorial cards are
+  main.gd `_show_hint(text, key, mode, inside)` with modes act / pack / ok;
+  `Party.paused` is the card's hold, separate from `locked`. Opening steps
+  are state-driven in `_refresh_tutorial_hint()`. `Foe.glancing` (0-1
+  damage, never falls, no health shown); `CombatScreen.only_action`
+  ("throw") and `hero_acted` signal. `Companion.bleeding` shows an icon.
+  `Supplies.torch_burns` false stops torches burning down.
+- `scripts/chest_screen.gd` – chest window beside the pack: drag (set_drag_
+  forwarding), tap, or the take-all icon button; `took` signal.
 - `scripts/pack_screen.gd` – the Pack screen (Pack button under the minimap,
   or I/B). PartyState.use_item(), rest(), cannot_use_reason() do the work.
 - `audio/placeholder/` – generated placeholder sounds (see its README for

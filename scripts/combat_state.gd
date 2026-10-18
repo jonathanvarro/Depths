@@ -41,6 +41,9 @@ class Foe:
 	var fled := false
 	var shielded := false  # goblin: halves damage until its next turn
 	var has_webbed := false  # spider: opens with a web once
+	## Blows glance off: 0-1 damage and it never falls (the opening's
+	## spider, which only fire drives off, #69). Its health isn't shown.
+	var glancing := false
 
 	func _init(enemy_type: EnemyType, label: String) -> void:
 		type = enemy_type
@@ -147,7 +150,12 @@ func hero_attack(hero: Companion, target: Foe) -> Dictionary:
 	var outcome := {"hit": false, "damage": 0, "killed": false}
 	var hit := rng.randf() < hero_hit_chance(hero)
 	_webbed.erase(hero)  # the web only spoils one action
-	if hit:
+	if hit and target.glancing:
+		var scratch := rng.randi_range(0, 1)
+		target.health = maxi(1, target.health - scratch)
+		outcome = {"hit": true, "damage": scratch, "killed": false, "glanced": true}
+		outcome["text"] = "%s's blow glances off the %s's hard legs." % [hero.display_name, target.name.to_lower()]
+	elif hit:
 		var reach := hero.attack_range()
 		var damage := maxi(1, roundi(rng.randi_range(reach.x, reach.y) * hero.effectiveness()))
 		if target.shielded:

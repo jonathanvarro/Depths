@@ -46,6 +46,9 @@ var events := {}  # Vector2i -> RoomEvent, assigned by main.gd (#16)
 ## Every cell of a room holding a fight -> that fight's cell. Entering any
 ## of them starts the fight ("entering a room commits the party").
 var encounter_zones := {}
+## Cells holding something you can't walk onto (a body, a fire, a chest).
+## Walking into one interacts with it instead (#69).
+var solid := {}  # Vector2i -> true
 
 var _rows: PackedStringArray
 
@@ -113,7 +116,17 @@ func is_wall(cell: Vector2i) -> bool:
 ## True if the party can stand in this cell (walls and blocked passages can't).
 ## A closed door is passable: stepping into it opens it first.
 func is_passable(cell: Vector2i) -> bool:
-	return not is_wall(cell) and door_at(cell) != Door.BLOCKED
+	return not is_wall(cell) and door_at(cell) != Door.BLOCKED and not solid.has(cell)
+
+
+## Changes one cell of the layout (e.g. sealing a passage with '#', or
+## opening an alcove with ','). The caller rebuilds the level.
+func set_symbol(cell: Vector2i, symbol: String) -> void:
+	var row := _rows[cell.y]
+	_rows[cell.y] = row.substr(0, cell.x) + symbol + row.substr(cell.x + 1)
+	doors.erase(cell)
+	if DOOR_SYMBOLS.has(symbol):
+		doors[cell] = DOOR_SYMBOLS[symbol]
 
 
 func door_at(cell: Vector2i) -> Door:
@@ -190,6 +203,31 @@ func walking_distances(from: Vector2i) -> Dictionary:
 				distance[next] = distance[cell] + 1
 				queue.append(next)
 	return distance
+
+
+## Cells on a shortest walk from `from` to `to`, both included (empty if
+## there's no way).
+func walking_path(from: Vector2i, to: Vector2i) -> Array[Vector2i]:
+	var previous := {from: from}
+	var queue: Array[Vector2i] = [from]
+	var i := 0
+	while i < queue.size() and not previous.has(to):
+		var cell := queue[i]
+		i += 1
+		for offset in [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]:
+			var next: Vector2i = cell + offset
+			if not previous.has(next) and is_passable(next):
+				previous[next] = cell
+				queue.append(next)
+	var path: Array[Vector2i] = []
+	if not previous.has(to):
+		return path
+	var at := to
+	while at != from:
+		path.push_front(at)
+		at = previous[at]
+	path.push_front(from)
+	return path
 
 
 func floor_cell_count() -> int:

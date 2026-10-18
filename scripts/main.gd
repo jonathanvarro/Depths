@@ -19,24 +19,42 @@ const OpeningGenerator := preload("res://scripts/opening_generator.gd")
 const DialogueBox := preload("res://scripts/dialogue_box.gd")
 ## Seconds between unprompted lines, so heroes don't chatter (#57).
 const SPEECH_COOLDOWN := 6.0
+const ChestScreen := preload("res://scripts/chest_screen.gd")
 ## Opening: remark on being lost at junctions this often (steps).
 const LOST_REMARK_EVERY := 18
 
-## The opening escape (#30, #56) is "floor 0": Mara wakes among the bodies
-## and bleeds through a branching maze with no map. Three fights come after
-## set distances walked; once all three are over and she's weak enough,
-## daylight appears just ahead.
+## The opening escape (#30, #56, #69) is "floor 0": Mara wakes among the
+## bodies and bleeds through a branching maze with no map. A first stretch
+## is hers to explore; past a second web come three fights, a chest after
+## the first and a stumble that kills her torch after the second. Once all
+## three are over and she's weak enough, daylight appears just ahead.
 const OPENING_DEPTH := 0
-const BLEED_EVERY := 12  # time units per point of health lost to bleeding
+const BLEED_EVERY := 16  # time units per point of health lost to bleeding
+const OPENING_START_HEALTH := 10
 const EXIT_HEALTH := 3  # at or below this (after the fights), daylight appears
 const OPENING_MIN_HEALTH := 2  # she can't drop below this in the opening
 const EXIT_DISTANCE := Vector2i(4, 6)  # steps ahead of her where daylight opens
-## Steps walked before each fight; a retreat brings the same fight back a
-## few steps later.
-const OPENING_FIGHT_STEPS: Array[int] = [20, 44, 68]
+## Steps from the second web to fight 1, from fight 1 to fight 2, from
+## fight 2 to the stumble, and from the stumble to the spider. A retreat
+## brings the same fight back a few steps later.
+const OPENING_FIRST_FIGHT_AFTER := 6
+const OPENING_SECOND_FIGHT_AFTER := 16
+const OPENING_TRIP_AFTER := 6
+const OPENING_SPIDER_AFTER_TRIP := 6
 const OPENING_REFIGHT_AFTER := 8
-## If she somehow walks this far, daylight opens anyway.
-const OPENING_STEP_LIMIT := 130
+const NEVER := 1 << 30
+## If she walks this far past the second web, daylight opens anyway.
+const OPENING_STEP_LIMIT := 110
+## At or below this in the spider fight, the game makes her throw the torch.
+const FORCE_THROW_HEALTH := 4
+## Tutorial steps worked out from her state (see _refresh_tutorial_hint).
+const TUTORIAL_STEPS := ["", "search", "equip", "drop", "light", "relight", "draught"]
+const DRAUGHT := preload("res://data/items/restorative_draught.tres")
+## The chest after fight 1 (#69): her first healing.
+const OPENING_CHEST := {
+	preload("res://data/items/restorative_draught.tres"): 1,
+	preload("res://data/items/dressing.tres"): 1,
+}
 ## The opening's fights, in order: gentler tutorial creatures, a rat first.
 const OPENING_FIGHTS := [
 	[preload("res://data/enemies/starved_rat.tres")],
@@ -215,7 +233,21 @@ var _bleed_clock := 0
 var _exit_cell := Vector2i(-1, -1)
 var _hint_box: Control
 var _hint_label: Label
+var _hint_ok: Button
+var _hint_shade: ColorRect
 var _hint := ""  # which hint is showing
+var _hint_text := ""
+var _hint_inside := ""  # a "pack" card's text once the Pack is open
+var _hint_mode := ""  # "act", "pack" or "ok" (see _show_hint)
+var _hint_queue: Array = []  # a card waiting for an "ok" card to close
+var _chest: Control  # chest_screen.gd
+var _web2_at := -1  # step she broke the second web
+var _trip_at := -1
+var _tripped := false
+var _spider_swings := 0
+var _opening_chest_cell := Vector2i(-1, -1)
+var _level_chest_open := false
+var _chest_looted := false
 var _hints_done := {}
 var _steps_taken := 0
 var _opening_fights_done := 0
@@ -248,8 +280,10 @@ func _ready() -> void:
 	print("Floor seed: ", _site_seed)
 	_party_state = PartyState.new()
 	_party_state.add_member(starting_hero)
-	for item in starting_supplies:
-		_party_state.supplies.add(item, starting_supplies[item])
+	# The opening starts with nothing; she's restocked at camp (#69).
+	if use_debug_layout or not play_opening:
+		for item in starting_supplies:
+			_party_state.supplies.add(item, starting_supplies[item])
 	_expedition = Expedition.new(_party_state, 1)
 	_room_events.loot_found.connect(func(loot): _expedition.add_found(loot))
 
@@ -262,6 +296,8 @@ func _ready() -> void:
 	_party.entered_cell.connect(_on_party_entered_cell)
 	_party.opened_door.connect(_on_party_opened_door)
 	_party.blocked_by.connect(_on_party_blocked)
+	_party.interacted.connect(_on_party_interacted)
+	_party.opened_door.connect(_on_opening_web_torn)
 	_build_audio()
 	_party.stepped.connect(func(_cell): _footstep_player.play())
 	_party.stepped.connect(func(_cell): _party_state.advance_time(_party_state.step_time()))
@@ -289,7 +325,10 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("toggle_debug"):
+	if _hint_mode == "ok" and event.is_action_pressed("ui_accept"):
+		_finish_hint()
+		get_viewport().set_input_as_handled()
+	elif event.is_action_pressed("toggle_debug"):
 		_set_debug(not _debug_label.visible)
 	elif _debug_label.visible and event.is_action_pressed("debug_hurt") and not _party_state.members.is_empty():
 		_party_state.members[0].change_health(-3)
@@ -451,6 +490,7 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 	if opening_spider:
 		for foe in state.foes:
 			foe.has_webbed = true  # the opening's spider bites first (#59)
+			foe.glancing = true  # and only fire drives it off (#69)
 	_place_foes(state.foes)
 	_in_combat = true
 	_update_hints("fight")
@@ -464,6 +504,8 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 		if is_instance_valid(foe.node):
 			foe.node.queue_free()
 	_in_combat = false
+	_combat.only_action = ""
+	_layout_hint()
 	_touch_pad.visible = true
 	_pack_button.disabled = false
 	for foe in state.foes:
@@ -518,6 +560,9 @@ func _end_expedition(ending: int) -> void:
 ## Placeholder camp stop, then back into the cave from the top. The cave
 ## remembers what was explored, opened and cleared.
 func _start_new_expedition() -> void:
+	if _in_opening:
+		for item in starting_supplies:  # restocked at camp (#69)
+			_party_state.supplies.add(item, starting_supplies[item])
 	_end_opening()
 	for hero: Companion in _party_state.members:
 		hero.appearance.clear()  # washed at camp
@@ -624,18 +669,23 @@ func _begin_opening() -> void:
 	_in_opening = true
 	_opening = OpeningGenerator.generate(_site_seed)
 	var hero: Companion = _party_state.members[0]
-	# Hurt and filthy, but panic is held back until later (#56).
+	# Hurt, bleeding and filthy, but panic is held back until later (#56, #69).
+	hero.health = OPENING_START_HEALTH
 	hero.strain = OPENING_START_STRAIN
 	hero.strain_locked = true
 	hero.min_health = OPENING_MIN_HEALTH
 	hero.appearance = ["blood", "dirt"]
+	hero.bleeding = true
 	hero.emit_changed()  # redraw the card with the overlays
+	_refresh_cards()  # just Mara: no empty slots during the escape
 	_party.move_time = OPENING_MOVE_TIME
 	_party.turn_time = OPENING_TURN_TIME
-	_next_fight_at = OPENING_FIGHT_STEPS[0]
+	_next_fight_at = NEVER  # fights wait until she's through the second web
 	# No lantern: the fire lights the room; torches must be found (#59).
+	# The torch doesn't burn down here; she loses it by tripping (#69).
 	_party_state.supplies.has_lantern = false
 	_party_state.supplies.source = Supplies.Source.NONE
+	_party_state.supplies.torch_burns = false
 	_party_state.supplies.changed.emit()
 	_update_lantern()
 	_party.step_check = _opening_step_check
@@ -643,6 +693,7 @@ func _begin_opening() -> void:
 		_party.refused.connect(_on_step_refused)
 		_party_state.supplies.torch_burnt_out.connect(_on_torch_burnt_out)
 		_combat.enemy_acted.connect(_on_combat_enemy_acted)
+		_combat.hero_acted.connect(_on_combat_hero_acted)
 		_party_state.changed.connect(_refresh_tutorial_hint)
 	_minimap.visible = false  # no map during the escape
 	_on_party_state_changed(false)
@@ -651,6 +702,8 @@ func _begin_opening() -> void:
 		var body: Vector2i = _opening_body_cells()[i]
 		_map.contents[body] = DungeonMap.Content.CHEST  # searchable, via its event
 		_map.events[body] = OPENING_BODY_EVENTS[i]
+		_map.solid[body] = true  # searched from beside, not stood on (#69)
+	_map.solid[_opening_fire_cell()] = true
 	# Wake facing down the room toward the way out, the bodies in view.
 	_party.facing = 1
 	_party.rotation.y = -PI / 2.0
@@ -659,29 +712,38 @@ func _begin_opening() -> void:
 
 
 ## Eyes open slowly and the head lifts from the floor; then the bodies are
-## in view and the line about them appears.
+## in view and the line about them appears. She keeps blinking a while
+## after she's up (#69).
 func _wake_up() -> void:
 	_party.locked = true
 	_party.camera.rotation.x = deg_to_rad(WAKE_PITCH_DEGREES)
 	_set_eyelids(0.0)
 	_eyelids.visible = true
 	var lids := create_tween()
-	lids.tween_interval(0.7)
-	lids.tween_method(_set_eyelids, 0.0, 0.35, 0.6)
-	lids.tween_method(_set_eyelids, 0.35, 0.0, 0.25)
-	lids.tween_interval(0.4)
+	lids.tween_interval(1.0)
+	lids.tween_method(_set_eyelids, 0.0, 0.35, 0.8)
+	lids.tween_method(_set_eyelids, 0.35, 0.0, 0.35)
+	lids.tween_interval(0.6)
 	lids.tween_callback(_say.bind("wake", true))
-	lids.tween_method(_set_eyelids, 0.0, 0.7, 0.7)
-	lids.tween_method(_set_eyelids, 0.7, 0.15, 0.2)
-	lids.tween_method(_set_eyelids, 0.15, 1.0, 0.9)
+	lids.tween_method(_set_eyelids, 0.0, 0.7, 0.9)
+	lids.tween_method(_set_eyelids, 0.7, 0.15, 0.3)
+	lids.tween_method(_set_eyelids, 0.15, 0.85, 1.1)
 	var look := create_tween()
-	look.tween_interval(1.6)
-	look.tween_property(_party.camera, "rotation:x", 0.0, 2.6).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	look.tween_interval(2.2)
+	look.tween_property(_party.camera, "rotation:x", 0.0, 3.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	await look.finished
-	_eyelids.visible = false
 	_party.locked = false
 	_show_message(opening_message)
 	_update_hints("start")
+	# Still dazed: a few heavy blinks while she finds her feet.
+	var blinks := create_tween()
+	for gap in [0.5, 1.1, 1.6]:
+		blinks.tween_interval(gap)
+		blinks.tween_method(_set_eyelids, 0.85, 0.0, 0.18)
+		blinks.tween_interval(0.12)
+		blinks.tween_method(_set_eyelids, 0.0, 0.9, 0.35)
+	blinks.tween_method(_set_eyelids, 0.9, 1.0, 0.6)
+	blinks.tween_callback(func(): _eyelids.visible = false)
 	await get_tree().create_timer(2.6).timeout
 	_say("bodies", true, true)
 
@@ -700,11 +762,15 @@ func _end_opening() -> void:
 	for hero: Companion in _party_state.members:
 		hero.min_health = 0
 		hero.strain_locked = false
+		hero.bleeding = false
+		hero.emit_changed()
 	_party.move_time = Party.MOVE_TIME
 	_party.turn_time = Party.TURN_TIME
 	_party.step_check = Callable()
+	_party_state.supplies.torch_burns = true
 	_minimap.visible = true
 	_show_hint("")
+	_refresh_cards()
 
 
 ## Bleeding: a point of health every few steps until daylight appears.
@@ -713,19 +779,22 @@ func _on_opening_step(_cell: Vector2i) -> void:
 		return
 	_steps_taken += 1
 	_bleed_clock += _party_state.step_time()
-	if _bleed_clock >= BLEED_EVERY and _exit_cell == Vector2i(-1, -1):
+	var hero: Companion = _party_state.members[0]
+	if _bleed_clock >= BLEED_EVERY and hero.bleeding:
 		_bleed_clock = 0
-		var hero: Companion = _party_state.members[0]
 		hero.change_health(-1)
-		if not _hints_done.has("bleeding"):
-			_hints_done["bleeding"] = true
-			_say("bleeding", true, true)
+		_say("bleeding", true, true)
+	# Explain the bleeding once nothing more pressing is on screen.
+	if not _hints_done.has("bleeding") and _said.has("bleeding") and _hint in ["", "turn"]:
+		_show_hint("%s is bleeding - see the red drop on her card. She loses health as she walks, so don't linger: find a way out." % hero.display_name, "bleeding", "ok")
+	if _steps_taken == _trip_at:
+		_trip()
 	# Lost and hurrying: now and then at a junction, and once to find the exit.
 	if _opening_fights_done >= 1:
 		_say("find_exit", false, true)
 	if _steps_taken - _last_lost_remark >= LOST_REMARK_EVERY and _open_ways(_party.cell) >= 3:
 		_last_lost_remark = _steps_taken
-		_say("lost")
+		_say("explore" if _web2_at < 0 else "lost")
 	_check_opening_exit()
 
 
@@ -733,30 +802,63 @@ func _open_ways(cell: Vector2i) -> int:
 	return Party.DIRECTIONS.filter(func(d): return _map.is_passable(cell + d)).size()
 
 
+## Through the second web: from here on the fights come (#69).
+func _on_opening_web_torn(cell: Vector2i) -> void:
+	if not _in_opening or cell != _opening["web2"] or _web2_at >= 0:
+		return
+	_web2_at = _steps_taken
+	_next_fight_at = _steps_taken + OPENING_FIRST_FIGHT_AFTER
+	_say("web2", true)
+
+
 func _on_opening_fight_won() -> void:
 	_opening_fights_done += 1
-	if _opening_fights_done < OPENING_FIGHTS.size():
-		_next_fight_at = maxi(OPENING_FIGHT_STEPS[_opening_fights_done], _steps_taken + OPENING_REFIGHT_AFTER)
-	else:
-		_last_fight_step = _steps_taken
+	match _opening_fights_done:
+		1:  # a chest turns up, with her first healing (#69)
+			_next_fight_at = _steps_taken + OPENING_SECOND_FIGHT_AFTER
+			_place_opening_chest()
+		2:  # she trips soon after, and the torch goes out
+			_next_fight_at = NEVER
+			_trip_at = _steps_taken + OPENING_TRIP_AFTER
+		_:
+			_last_fight_step = _steps_taken
 
 
 ## Once all three fights are over and she's weak enough, daylight opens a
-## few steps ahead (or anyway, if she's walked a very long way).
+## few steps ahead (or anyway, if she's walked a very long way). The ways
+## off the path to it close behind her, so it can't be avoided (#69).
 func _check_opening_exit() -> void:
 	if not _in_opening or _in_combat or _exit_cell != Vector2i(-1, -1):
 		return
 	var hero: Companion = _party_state.members[0]
 	var fights_over := _opening_fights_done >= OPENING_FIGHTS.size()
 	var can_leave := fights_over and (hero.health <= EXIT_HEALTH or _steps_taken - _last_fight_step >= OPENING_EXIT_AFTER_LAST_FIGHT)
-	if not can_leave and _steps_taken < OPENING_STEP_LIMIT:
+	var walked_too_far := _web2_at >= 0 and _steps_taken - _web2_at >= OPENING_STEP_LIMIT
+	if not can_leave and not walked_too_far:
 		return
 	_exit_cell = _pick_exit_cell()
 	_map.contents[_exit_cell] = DungeonMap.Content.STAIRS_UP
+	_seal_off_path(_map.walking_path(_party.cell, _exit_cell))
+	hero.bleeding = false  # the cold air: she's past caring
+	hero.emit_changed()
 	_build_level()
 	_show_message("Cold air on your face. Daylight, just ahead!")
 	_update_hints("exit")
 	_say("daylight", true)
+
+
+## Walls up every side way off `path`, so it leads only to the daylight.
+func _seal_off_path(path: Array[Vector2i]) -> void:
+	var on_path := {}
+	for cell in path:
+		on_path[cell] = true
+	for cell in path:
+		for d in Party.DIRECTIONS:
+			var side: Vector2i = cell + d
+			if on_path.has(side) or _map.is_wall(side) or _map.solid.has(side):
+				continue
+			_map.set_symbol(side, "#")
+			_map.contents.erase(side)
 
 
 ## A spot a few steps away, preferably ahead of her rather than behind.
@@ -793,13 +895,170 @@ func _pick_exit_cell() -> Vector2i:
 	return _party.cell + Party.DIRECTIONS[_party.facing]
 
 
-## The companions' bodies, and the daylight once the exit is open.
-func _add_opening_dressing() -> void:
+## After the first fight: a chest turns up (#69). If the wall right beside
+## her can take a niche, it's cut there, in view; otherwise the chest sits
+## in the nearest dead end ahead. Either way it never blocks a passage.
+## The "A chest!" card comes when she first sees it.
+func _place_opening_chest() -> void:
+	var here: Vector2i = _party.cell
+	var forward: Vector2i = Party.DIRECTIONS[_party.facing]
+	var left: Vector2i = Party.DIRECTIONS[wrapi(_party.facing - 1, 0, 4)]
+	var right: Vector2i = Party.DIRECTIONS[wrapi(_party.facing + 1, 0, 4)]
+	var ahead := here + forward
+	var cell := Vector2i(-1, -1)
+	for c: Vector2i in [ahead, ahead + left, ahead + right, here + left, here + right]:
+		if _can_be_niche(c):
+			_map.set_symbol(c, ".")
+			cell = c
+			break
+	if cell == Vector2i(-1, -1):
+		cell = _nearest_dead_end(here, here - forward)
+	if cell == Vector2i(-1, -1):
+		return
+	_map.contents[cell] = DungeonMap.Content.CHEST
+	_map.solid[cell] = true
+	_opening_chest_cell = cell
+	_build_level()
+	_check_chest_in_view()
+
+
+## The closest dead end (one way in) from `from`, not going back through
+## `behind` or through a web, and not the room. (-1, -1) if none.
+func _nearest_dead_end(from: Vector2i, behind: Vector2i) -> Vector2i:
 	var room: Rect2i = _opening["room"]
-	var start: Vector2i = _opening["start"]
-	# In the far corners of the room, in view as she wakes facing east.
+	for avoid_behind in [true, false]:
+		var seen := {from: true}
+		var queue: Array[Vector2i] = [from]
+		var i := 0
+		while i < queue.size():
+			var c := queue[i]
+			i += 1
+			if c != from and not room.has_point(c) and _open_ways(c) == 1:
+				return c
+			for d in Party.DIRECTIONS:
+				var n: Vector2i = c + d
+				if seen.has(n) or not _map.is_passable(n) or _map.door_at(n) != DungeonMap.Door.NONE:
+					continue
+				if avoid_behind and n == behind:
+					continue
+				seen[n] = true
+				queue.append(n)
+	return Vector2i(-1, -1)
+
+
+## Once the chest is in sight (straight ahead, or right beside her), Mara
+## spots it and the card says how to open it.
+func _check_chest_in_view() -> void:
+	if not _in_opening or _opening_chest_cell == Vector2i(-1, -1) or _said.has("chest_seen"):
+		return
+	var cell: Vector2i = _party.cell
+	var in_view := false
+	for d in Party.DIRECTIONS:
+		if cell + d == _opening_chest_cell:
+			in_view = true
+	for step in range(1, 5):
+		var c: Vector2i = cell + Party.DIRECTIONS[_party.facing] * step
+		if c == _opening_chest_cell:
+			in_view = true
+		if not _map.is_passable(c):
+			break
+	if not in_view:
+		return
+	_say("chest_seen", true, true)
+	_show_hint("A chest! Face it and walk into it to open it.", "chest_find")
+
+
+## A buried wall cell touching exactly one floor cell: opening it makes a
+## dead-end niche, never a new way through.
+func _can_be_niche(cell: Vector2i) -> bool:
+	if cell.x < 1 or cell.y < 1 or cell.x >= _map.width - 1 or cell.y >= _map.height - 1:
+		return false
+	if not _map.is_wall(cell) or _opening["room"].grow(1).has_point(cell):
+		return false
+	var floors := 0
+	for d in Party.DIRECTIONS:
+		if not _map.is_wall(cell + d):
+			floors += 1
+	return floors == 1
+
+
+func _open_opening_chest(cell: Vector2i) -> void:
+	_update_hints("chest_opened")
+	_party.locked = true
+	_chest.open("A battered chest", OPENING_CHEST, _party_state)
+	_say("chest", true)
+	_show_hint("Take what's inside: drag an item into your pack, tap it, or use the arrow button to take everything.", "chest_take")
+	await _chest.closed
+	_chest.visible = false
+	_party.locked = false
+	if _chest.is_empty():
+		_map.triggered[cell] = true
+		_level_chest_open = true
+		_build_level()
+	if _hint == "chest_take":
+		_finish_hint()
+	_layout_hint()
+	_refresh_tutorial_hint()
+
+
+func _on_chest_took(_item: SupplyItem, _quantity: int) -> void:
+	_chest_looted = true
+	if _chest.is_empty() and _hint == "chest_take":
+		_show_hint("That's everything. Close the chest.", "chest_take")
+
+
+## The party walked into something solid: search a body, open the chest,
+## or warm her hands at the fire (#69).
+func _on_party_interacted(cell: Vector2i) -> void:
+	if _in_opening and cell == _opening_chest_cell:
+		if not _map.triggered.has(cell):
+			_open_opening_chest(cell)
+		else:
+			_show_message("The chest is empty.")
+		return
+	if _in_opening and cell == _opening_fire_cell():
+		_show_message("The fire is dying. It won't last, and it can't be carried.")
+		_say("fire", false, true)
+		return
+	if _map.triggered.has(cell):
+		_show_message("Nothing more to take.")
+		return
+	if _map.content_at(cell) != DungeonMap.Content.NONE:
+		_map.enter(cell)
+		_run_event(cell)
+
+
+## After fight 2 she stumbles in the dark; the torch flies from her hand
+## and dies. She has to light the spare (#69).
+func _trip() -> void:
+	_tripped = true
+	_party.locked = true
+	var camera: Camera3D = _party.camera
+	var fall := create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	fall.tween_property(camera, "rotation:x", deg_to_rad(-55.0), 0.3)
+	fall.parallel().tween_property(camera, "rotation:z", deg_to_rad(14.0), 0.3)
+	fall.parallel().tween_property(camera, "position:y", 0.45, 0.3)
+	await fall.finished
+	_play_effect(environment_theme.bump_sound)
+	_party_state.supplies.lose_torch()
+	_show_message("You stumble - the torch flies from your hand and hisses out.")
+	_say("trip", true)
+	await get_tree().create_timer(1.4).timeout
+	var rise := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	rise.tween_property(camera, "rotation:x", 0.0, 1.6)
+	rise.parallel().tween_property(camera, "rotation:z", 0.0, 1.6)
+	rise.parallel().tween_property(camera, "position:y", Party.EYE_HEIGHT, 1.6)
+	await rise.finished
+	_party.locked = false
+	_next_fight_at = _steps_taken + OPENING_SPIDER_AFTER_TRIP
+	_refresh_tutorial_hint()
+
+
+## The companions' bodies, the fire, the chest, and the daylight once the
+## exit is open.
+func _add_opening_dressing() -> void:
 	var cells := _opening_body_cells()
-	_add_fire(start + Vector2i(3, -1))  # the far corner: in view, lighting the bodies and doorway
+	_add_fire(_opening_fire_cell())  # the far corner: in view, lighting the bodies and doorway
 	for i in cells.size():
 		var path: String = body_scenes[i] if i < body_scenes.size() else ""
 		var body: Node3D
@@ -810,6 +1069,8 @@ func _add_opening_dressing() -> void:
 			body.rotation.y = PI / 2.0 + randf_range(-0.5, 0.5)  # lying across her view
 		body.position = Vector3(cells[i].x * CELL_SIZE, 0.0, cells[i].y * CELL_SIZE)
 		_level.add_child(body)
+	if _opening_chest_cell != Vector2i(-1, -1):
+		_add_chest(_opening_chest_cell, _level_chest_open)
 	if _exit_cell != Vector2i(-1, -1):
 		var daylight := OmniLight3D.new()
 		daylight.light_color = Color(0.82, 0.88, 1.0)
@@ -823,6 +1084,51 @@ func _add_opening_dressing() -> void:
 func _opening_body_cells() -> Array[Vector2i]:
 	var start: Vector2i = _opening["start"]
 	return [start + Vector2i(2, -1), start + Vector2i(2, 1)]
+
+
+func _opening_fire_cell() -> Vector2i:
+	return _opening["start"] + Vector2i(3, -1)
+
+
+## A plain wooden chest until there's art: a box and a lid, open once emptied.
+func _add_chest(cell: Vector2i, opened: bool) -> void:
+	var chest := Node3D.new()
+	chest.position = Vector3(cell.x * CELL_SIZE, 0.0, cell.y * CELL_SIZE)
+	var wood := StandardMaterial3D.new()
+	wood.albedo_color = Color(0.42, 0.28, 0.16)
+	wood.roughness = 1.0
+	var band := StandardMaterial3D.new()
+	band.albedo_color = Color(0.32, 0.3, 0.27)
+	band.metallic = 0.6
+	var box := MeshInstance3D.new()
+	var box_mesh := BoxMesh.new()
+	box_mesh.size = Vector3(0.9, 0.45, 0.6)
+	box_mesh.material = wood
+	box.mesh = box_mesh
+	box.position.y = 0.225
+	chest.add_child(box)
+	var lid := MeshInstance3D.new()
+	var lid_mesh := BoxMesh.new()
+	lid_mesh.size = Vector3(0.94, 0.12, 0.64)
+	lid_mesh.material = band
+	lid.mesh = lid_mesh
+	lid.position = Vector3(0.0, 0.51, 0.0)
+	if opened:
+		lid.position = Vector3(0.0, 0.62, -0.3)
+		lid.rotation.x = -1.2
+	chest.add_child(lid)
+	# Turn it to face the passage it opens onto.
+	for f in Party.DIRECTIONS.size():
+		if not _map.is_wall(cell + Party.DIRECTIONS[f]):
+			chest.rotation.y = -f * PI / 2.0 + PI
+	# A faint glint so it reads in the dark.
+	var glint := OmniLight3D.new()
+	glint.light_color = Color(1.0, 0.8, 0.5)
+	glint.light_energy = 0.4
+	glint.omni_range = CELL_SIZE * 1.2
+	glint.position.y = 0.9
+	chest.add_child(glint)
+	_level.add_child(chest)
 
 
 ## A dying fire: the room's only light until she finds a torch (#59).
@@ -870,10 +1176,14 @@ func _add_fire(cell: Vector2i) -> void:
 	_level.add_child(fire)
 
 
-## Opening: she won't leave the room without a light (#58, #59).
+## Opening: she won't go on without a light (#58, #59): not out of the
+## room before she has one, and not anywhere once she's tripped and lost
+## it while the spare is still unlit (#69).
 func _opening_step_check(target: Vector2i) -> String:
 	if not _in_opening or _party_state.supplies.torch_lit() or _panic_started:
 		return ""
+	if _tripped and _party_state.supplies.count(TORCH) > 0:
+		return "too_dark"
 	var room: Rect2i = _opening["room"]
 	if room.has_point(target) or not room.has_point(_party.cell):
 		return ""
@@ -889,21 +1199,33 @@ func _on_step_refused(reason: String) -> void:
 func _on_torch_burnt_out() -> void:
 	if not _in_opening:
 		_show_message("Your torch burns out.")
-		return
-	_say("torch_out", true)
-	if _party_state.supplies.count(TORCH) > 0:
-		_show_hint("Your torch has burned out! Open the Pack and light the spare.", "torch_out")
 
 
-## Fight 3: once the spider has struck, teach throwing the torch.
-func _on_combat_enemy_acted(_foe, outcome: Dictionary) -> void:
-	if not _in_opening or _opening_fights_done != OPENING_FIGHTS.size() - 1 or _hints_done.has("throw"):
+## Fight 3: the spider bites and bites; once she's nearly down, the game
+## makes her throw the torch (#69).
+func _on_combat_enemy_acted(_foe, _outcome: Dictionary) -> void:
+	if not _in_opening or _opening_fights_done != OPENING_FIGHTS.size() - 1:
 		return
 	if not _party_state.supplies.torch_lit():
 		return
 	var hero: Companion = _party_state.members[0]
-	var poisoned: bool = _combat._state.venom_turns(hero) > 0
-	_show_hint(("Poisoned! " if poisoned else "") + "Open Item and throw your torch to scare the spider away.", "throw")
+	if hero.health <= FORCE_THROW_HEALTH and _combat.only_action == "":
+		_combat.only_action = "throw"
+		_say("forced_throw", true)
+		_show_hint("%s can't take any more. Throw the torch at the spider - it's the only thing it fears." % hero.display_name, "force_throw", "ok")
+
+
+## Fight 3: her blows glance off; after a swing or two, the throw is taught.
+func _on_combat_hero_acted(_hero: Companion, action: Dictionary, outcome: Dictionary) -> void:
+	if not _in_opening or _opening_fights_done != OPENING_FIGHTS.size() - 1:
+		return
+	if action["kind"] != "attack":
+		return
+	_spider_swings += 1
+	if outcome.get("glanced", false):
+		_say("spider_glance", true)
+	if _spider_swings >= 1 and not _hints_done.has("throw") and _hint != "throw" and _party_state.supplies.torch_lit():
+		_show_hint("Your blade can't hurt it! Open Item and throw your torch to scare it away.", "throw")
 
 
 ## Without any light left, she panics: the panic mechanic, explained.
@@ -913,44 +1235,56 @@ func _start_opening_panic() -> void:
 	hero.strain_locked = false
 	hero.strain = OPENING_PANIC_STRAIN
 	_on_party_state_changed()
-	_show_hint("In the dark, %s panics: her hands shake, so she hits less often and less hard. Light, food and rest calm her." % hero.display_name, "panic")
+	_show_hint("That was your last torch. In the dark, %s panics: her hands shake, so she hits less often and less hard. Light, food and rest calm her." % hero.display_name, "panic", "ok")
 	_hints_done["panic_at"] = _steps_taken
 	_say("panic", true)
 
 
 ## The next thing the tutorial wants, worked out from where she is: search
-## the bodies, equip the sword, drop the broken knife, light a torch.
+## the bodies, equip the sword, drop the broken knife, light a torch, drink
+## the draught from the chest, light the spare after tripping.
+## Pack steps hold her still until the Pack is open (#69).
 func _refresh_tutorial_hint() -> void:
 	if not _in_opening or not _hints_done.has("start"):
 		return
-	var supplies = _party_state.supplies
-	if _hint == "torch_out" and supplies.torch_lit():
-		_finish_hint()
-	if _hint not in ["", "search", "equip", "drop", "light"]:
+	if _hint not in TUTORIAL_STEPS:
 		return
+	var supplies = _party_state.supplies
 	var touch := OS.has_feature("mobile")
-	var open_pack := "tap Pack" if touch else "press I or click Pack"
+	var open_pack := "Tap Pack" if touch else "Press I (or click Pack)"
 	var hero: Companion = _party_state.members[0]
 	var text := ""
+	var inside := ""
 	var key := ""
 	if not _opening_body_cells().all(func(c): return _searched_bodies.has(c)):
 		key = "search"
-		text = "Search your companions: walk onto each of them."
+		text = "Search your fallen companions: face one and walk into them."
 	elif hero.weapon != IRON_SWORD and IRON_SWORD in supplies.gear:
 		key = "equip"
-		text = "Open your pack (%s) and equip the iron sword." % open_pack
+		text = "%s to open your pack." % open_pack
+		inside = "Equip the iron sword."
 	elif BROKEN_KNIFE in supplies.gear:
 		key = "drop"
-		text = "Drop the broken knife from your pack. It's no use now."
+		text = "%s to open your pack." % open_pack
+		inside = "Drop the broken knife. It's no use now."
 	elif not supplies.torch_lit() and not _hints_done.has("light") and supplies.count(TORCH) > 0:
 		key = "light"
-		text = "Light a torch from your pack. It's too dark to go on without one."
+		text = "It's too dark to go on. %s to open your pack." % open_pack
+		inside = "Use a torch to light it."
+	elif _tripped and not supplies.torch_lit() and supplies.count(TORCH) > 0 and not _panic_started:
+		key = "relight"
+		text = "Your torch is out! %s and light the spare." % open_pack
+		inside = "Light the spare torch."
+	elif _chest_looted and supplies.count(DRAUGHT) > 0 and hero.pending_effects.is_empty() and not _hints_done.has("draught"):
+		key = "draught"
+		text = "You're badly hurt. %s and drink the restorative draught." % open_pack
+		inside = "Use the restorative draught. It heals slowly as you walk."
 	if key == "":
-		if _hint in ["search", "equip", "drop", "light"]:
+		if _hint in TUTORIAL_STEPS and _hint != "":
 			_finish_hint()
 		return
-	if _hint != key:
-		_show_hint(text, key)  # the next step replaces the last; nothing is skipped
+	if _hint != key or _hint_text != text:
+		_show_hint(text, key, "pack" if inside != "" else "act", inside)  # the next step replaces the last; nothing is skipped
 
 
 ## A dark, cloth-wrapped shape lying on the floor, until there's real art.
@@ -985,6 +1319,7 @@ func _update_hints(event: String) -> void:
 	if not _in_opening:
 		return
 	var touch := OS.has_feature("mobile")  # computers: keys, with clicking as an alternative
+	var turn_text := "Tap ↺ or ↻ to turn" if touch else "Turn: A and D, or ← and → (or click ↺ ↻)"
 	match event:
 		"start":
 			_show_hint("Tap ▲ to move forward" if touch else "Move forward: W or ↑ (or click ▲)")
@@ -994,25 +1329,29 @@ func _update_hints(event: String) -> void:
 			_refresh_tutorial_hint()
 			var ahead: Vector2i = _party.cell + Party.DIRECTIONS[_party.facing]
 			var can_go: bool = _party_state.supplies.torch_lit() or _panic_started  # not before she has light
-			if can_go and not _hints_done.has("web") and (_map.door_at(ahead) == DungeonMap.Door.CLOSED or _map.door_at(ahead + Party.DIRECTIONS[_party.facing]) == DungeonMap.Door.CLOSED):
+			if can_go and not _hints_done.has("web") and _hint == "" and (_map.door_at(ahead) == DungeonMap.Door.CLOSED or _map.door_at(ahead + Party.DIRECTIONS[_party.facing]) == DungeonMap.Door.CLOSED):
 				_show_hint("Walk into the web to tear through it.", "web")
-			elif not _hints_done.has("turn") and _hints_done.has("start") and _hint == "" and not _map.is_passable(ahead):
-				_show_hint("Tap ↺ or ↻ to turn" if touch else "Turn: A and D, or ← and → (or click ↺ ↻)", "turn")
+			elif not _hints_done.has("turn") and _hints_done.has("start") and _hint == "" and not _map.is_passable(ahead) and not _map.solid.has(ahead):
+				_show_hint(turn_text, "turn")
 			elif _hint == "turn" and _map.is_passable(ahead):
 				_finish_hint()
-			elif _hint == "panic" and _steps_taken >= _hints_done.get("panic_at", 0) + 8:
+			elif _hint == "chest_find" and _map.triggered.has(_opening_chest_cell):
 				_finish_hint()
+			_check_chest_in_view()
 		"bumped":
 			if not _hints_done.has("turn") and _hint == "":
-				_show_hint("Tap ↺ or ↻ to turn" if touch else "Turn: A and D, or ← and → (or click ↺ ↻)", "turn")
+				_show_hint(turn_text, "turn")
 		"web_torn":
 			if _hint == "web":
 				_finish_hint()
+		"chest_opened":
+			if _hint == "chest_find":
+				_finish_hint()
 		"fight":
 			if not _hints_done.has("fight"):
-				_show_hint(("Tap" if touch else "Click") + " an enemy's name to target it, then Attack. Defend halves the damage you take.", "fight")
+				_show_hint(("Tap" if touch else "Click") + " an enemy's name to target it, then Attack. Defend halves the damage you take.", "fight", "ok")
 		"fight_over":
-			if _hint in ["fight", "throw"]:
+			if _hint in ["fight", "throw", "force_throw"]:
 				_finish_hint()
 		"pack":
 			_refresh_tutorial_hint()
@@ -1020,19 +1359,59 @@ func _update_hints(event: String) -> void:
 			_show_hint("Daylight! Walk into the light to get out.", "exit")
 
 
-func _show_hint(text: String, key := "start") -> void:
+## Tutorial cards (#69): centred and prominent. `mode`:
+## "act"  - stays until she does what it says (moving, turning...);
+## "pack" - holds her still until the Pack is open, then shows `inside`;
+## "ok"   - pauses everything until dismissed (Got it / Enter).
+## While a screen is open (Pack, chest, fight) the card moves aside.
+func _show_hint(text: String, key := "start", mode := "act", inside := "") -> void:
+	if text != "" and _hint_mode == "ok" and mode != "ok" and _hint != key:
+		_hint_queue = [text, key, mode, inside]  # don't cut off an explanation
+		return
 	_hint = key if text != "" else ""
-	_hint_label.text = text
-	_hint_box.visible = text != ""
-	# In a fight, sit above the action panel instead of beside it.
-	var lift := 150.0 if _in_combat else 24.0
-	_hint_box.offset_bottom = -lift
-	_hint_box.offset_top = -lift - _hint_box.get_combined_minimum_size().y
+	_hint_text = text
+	_hint_inside = inside
+	_hint_mode = mode if text != "" else ""
+	_layout_hint()
+
+
+func _layout_hint() -> void:
+	if _hint_box == null:
+		return
+	var shown := _hint != ""
+	var in_pack := _pack.visible
+	var screen_open := in_pack or _chest.visible or _in_combat or _event_screen.visible
+	_hint_label.text = _hint_inside if _hint_mode == "pack" and in_pack and _hint_inside != "" else _hint_text
+	_hint_ok.visible = _hint_mode == "ok"
+	_hint_shade.visible = shown and _hint_mode == "ok"
+	_hint_box.visible = shown
+	_party.paused = shown and (_hint_mode == "ok" or (_hint_mode == "pack" and not in_pack))
+	if not shown:
+		return
+	_hint_box.reset_size()
+	var size := _hint_box.get_combined_minimum_size()
+	var insets := _safe_area_insets()
+	var view := get_viewport().get_visible_rect().size
+	var y := view.y * 0.4 - size.y / 2.0  # the middle, a little high
+	if _in_combat:
+		y = insets.y + 200.0  # below the fight's log, above the enemies
+	elif in_pack or _chest.visible or _event_screen.visible:
+		y = view.y - insets.w - size.y - 24.0  # along the bottom, clear of the header
+	if not screen_open and _hint_mode == "ok":
+		y = view.y * 0.42 - size.y / 2.0
+	_hint_box.position = Vector2((view.x - size.x) / 2.0, y)
 
 
 func _finish_hint() -> void:
 	_hints_done[_hint] = true
+	var was_ok := _hint_mode == "ok"
+	_hint_mode = ""
 	_show_hint("")
+	if was_ok and not _hint_queue.is_empty():
+		var queued: Array = _hint_queue
+		_hint_queue = []
+		_show_hint(queued[0], queued[1], queued[2], queued[3])
+	_refresh_tutorial_hint()
 
 
 ## Speech box just above the portrait cards (#57).
@@ -1093,26 +1472,47 @@ func _build_eyelids(canvas: CanvasLayer) -> void:
 	_eyelids.visible = false
 
 
-func _build_hint(ui: Control) -> void:
+## The tutorial card (#69): its own layer, above the Pack, chest and fight
+## screens. "ok" cards dim the view behind them and wait for Got it.
+func _build_hint() -> void:
+	var layer := CanvasLayer.new()
+	layer.layer = 5
+	add_child(layer)
+	_hint_shade = ColorRect.new()
+	_hint_shade.color = Color(0, 0, 0, 0.45)
+	_hint_shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_hint_shade.mouse_filter = Control.MOUSE_FILTER_STOP  # play waits
+	_hint_shade.visible = false
+	layer.add_child(_hint_shade)
 	_hint_box = PanelContainer.new()
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.05, 0.045, 0.04, 0.82)
+	style.bg_color = Color(0.05, 0.045, 0.04, 0.94)
 	style.border_color = Color("dbb477")
-	style.set_border_width(SIDE_LEFT, 3)
-	style.set_content_margin_all(10)
+	style.set_border_width_all(2)
+	style.set_corner_radius_all(6)
+	style.set_content_margin_all(18)
 	_hint_box.add_theme_stylebox_override("panel", style)
-	_hint_box.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM)
-	_hint_box.grow_horizontal = Control.GROW_DIRECTION_BOTH
-	_hint_box.grow_vertical = Control.GROW_DIRECTION_BEGIN
-	_hint_box.position.y -= 24
 	_hint_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var column := VBoxContainer.new()
+	column.add_theme_constant_override("separation", 14)
+	column.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_hint_box.add_child(column)
 	_hint_label = Label.new()
-	_hint_label.add_theme_font_size_override("font_size", 20)
-	_hint_label.add_theme_color_override("font_color", Color("e8d9b0"))
+	_hint_label.add_theme_font_size_override("font_size", 25)
+	_hint_label.add_theme_color_override("font_color", Color("f0e2bb"))
+	_hint_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_hint_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_hint_label.custom_minimum_size = Vector2(380, 0)
-	_hint_box.add_child(_hint_label)
-	ui.add_child(_hint_box)
+	_hint_label.custom_minimum_size = Vector2(540, 0)
+	column.add_child(_hint_label)
+	_hint_ok = Button.new()
+	_hint_ok.text = "Got it"
+	_hint_ok.custom_minimum_size = Vector2(170, 56)
+	_hint_ok.focus_mode = Control.FOCUS_NONE
+	_hint_ok.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	_hint_ok.add_theme_font_size_override("font_size", 22)
+	_hint_ok.pressed.connect(_finish_hint)
+	column.add_child(_hint_ok)
+	layer.add_child(_hint_box)
 	_hint_box.visible = false
 
 
@@ -1193,13 +1593,13 @@ func _set_debug(enabled: bool) -> void:
 
 ## Opens or closes the pack screen; like the map, the party waits meanwhile.
 func _set_pack(open: bool) -> void:
-	if open and (_prompt.visible or _full_map.visible or _in_combat or _event_screen.visible):
+	if open and (_prompt.visible or _full_map.visible or _in_combat or _event_screen.visible or _chest.visible):
 		return
 	_pack.visible = open
 	_party.locked = open
-	if open:
-		_update_hints("pack")
+	_update_hints("pack")
 	_pack.refresh()
+	_layout_hint()
 
 
 ## Opens or closes the full-screen map. The party can't move while it's open,
@@ -1345,7 +1745,7 @@ func _build_ui(minimap: Control) -> void:
 
 	_build_party_cards(ui)
 	_build_dialogue_box(ui)
-	_build_hint(ui)
+	_build_hint()
 	_build_prompt(ui)
 	_build_full_map(canvas)
 	_pack = PackScreen.new()
@@ -1359,6 +1759,9 @@ func _build_ui(minimap: Control) -> void:
 	canvas.add_child(_combat)
 	_event_screen = EventScreen.new()
 	ui.add_child(_event_screen)
+	_chest = ChestScreen.new()
+	canvas.add_child(_chest)
+	_chest.took.connect(_on_chest_took)
 	_results = ResultsScreen.new()
 	canvas.add_child(_results)
 	_build_eyelids(canvas)
@@ -1373,7 +1776,7 @@ func _build_ui(minimap: Control) -> void:
 ## and home bar. On desktop there's nothing to avoid.
 func _apply_safe_area() -> void:
 	var insets := _safe_area_insets()
-	for control: Control in [_safe_area, _full_map_margin, _pack.content, _combat.content, _results.content, _preparation.content]:
+	for control: Control in [_safe_area, _full_map_margin, _pack.content, _combat.content, _results.content, _preparation.content, _chest.content]:
 		control.offset_left = insets.x
 		control.offset_top = insets.y
 		control.offset_right = -insets.z
@@ -1491,6 +1894,8 @@ func _refresh_cards() -> void:
 			card.show_companion(hero)
 		else:
 			card.show_empty()
+		# The escape is Mara's alone: no empty slots on screen (#69).
+		card.visible = i < _party_state.members.size() or not _in_opening
 
 
 ## Centred yes/no box for deliberate choices like descending. Big buttons

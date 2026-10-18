@@ -33,6 +33,9 @@ var oil := LANTERN_CAPACITY
 var has_lantern := true
 var source := Source.LANTERN
 var torch_left := 0.0
+## False: a lit torch doesn't burn down (the opening, where it's lost by
+## tripping instead, #69).
+var torch_burns := true
 ## Gear carried in the pack (not wielded), e.g. a spare weapon (#58).
 var gear: Array[Equipment] = []
 ## Oil left in a flask that was only partly poured (used first next refill).
@@ -70,6 +73,8 @@ func burn_rate() -> float:
 func burn(units: int) -> void:
 	var band_before := light_band()
 	if source == Source.TORCH:
+		if not torch_burns:
+			return
 		torch_left = maxf(0.0, torch_left - units)
 		if torch_left <= 0.0:
 			source = Source.LANTERN if has_lantern else Source.NONE

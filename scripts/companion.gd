@@ -58,6 +58,8 @@ var strain_locked := false
 ## Cosmetic portrait overlays (names in PortraitSet.conditions), e.g. the
 ## blood and dirt of the opening.
 var appearance: Array[String] = []
+## Losing health as they walk (the opening, #69): shown on their card.
+var bleeding := false
 
 ## Effects still playing out: [{"stat": "health", "per_unit": float,
 ## "units_left": int}]. Health is the only stat for now.

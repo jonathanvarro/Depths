@@ -30,6 +30,11 @@ var _actions: Control
 var _action_buttons: HBoxContainer
 var _item_buttons: HBoxContainer
 var _tags := {}  # Foe -> Button
+## "" allows every action; "throw" allows only Item > Throw torch (the
+## opening forces the throw when Mara is nearly down, #69).
+var only_action := ""
+## Emitted after each hero action (the opening reacts to glancing blows).
+signal hero_acted(hero: Companion, action: Dictionary, outcome: Dictionary)
 
 
 func _init() -> void:
@@ -97,12 +102,13 @@ func run(state, cards: Array) -> void:
 
 
 func _hero_action(hero: Companion, action: Dictionary) -> void:
+	var outcome := {}
 	match action["kind"]:
 		"attack":
 			var target = _target
-			var outcome: Dictionary = _state.hero_attack(hero, target)
+			outcome = _state.hero_attack(hero, target)
 			_add_log(outcome["text"])
-			if outcome["hit"]:
+			if outcome["hit"] and not outcome.get("glanced", false):
 				await _play(target, "hurt", 0.35)
 				if outcome["killed"]:
 					await _fade_out(target)
@@ -116,6 +122,7 @@ func _hero_action(hero: Companion, action: Dictionary) -> void:
 			var target = _target
 			_add_log(_state.hero_throw_torch(hero, target))
 			await _fade_out(target)
+	hero_acted.emit(hero, action, outcome)
 	await get_tree().create_timer(0.25).timeout
 
 
@@ -158,7 +165,10 @@ func _process(_delta: float) -> void:
 		tag.visible = foe.is_alive() and foe.node != null and not camera.is_position_behind(foe.node.global_position)
 		if tag.visible:
 			var screen := camera.unproject_position(foe.node.global_position + Vector3(0, TAG_HEIGHT, 0))
-			tag.text = "%s %d/%d%s" % [foe.name, foe.health, foe.type.max_health, "  [shield]" if foe.shielded else ""]
+			if foe.glancing:
+				tag.text = foe.name  # no health to whittle down (#69)
+			else:
+				tag.text = "%s %d/%d%s" % [foe.name, foe.health, foe.type.max_health, "  [shield]" if foe.shielded else ""]
 			tag.position = screen - tag.size / 2.0
 			tag.modulate = Color.WHITE if foe == _target else Color(1, 1, 1, 0.65)
 
@@ -199,6 +209,10 @@ func _show_actions(shown: bool) -> void:
 	_actions.visible = shown
 	_action_buttons.visible = true
 	_item_buttons.visible = false
+	for button: Button in _action_buttons.get_children():
+		button.disabled = only_action != "" and button.text != "Item"
+	if shown and only_action == "throw":
+		_show_items()
 
 
 func _show_items() -> void:
@@ -214,10 +228,11 @@ func _show_items() -> void:
 			continue
 		var reason: String = _state.party.cannot_use_reason(item, true)
 		var button := _button("%s ×%d" % [item.display_name, _state.party.supplies.count(item)] if reason == "" else reason)
-		button.disabled = reason != ""
+		button.disabled = reason != "" or only_action != ""
 		button.pressed.connect(func(): _action_chosen.emit({"kind": "item", "item": item}))
 		_item_buttons.add_child(button)
 	var back := _button("Back")
+	back.disabled = only_action != ""
 	back.pressed.connect(func():
 		_action_buttons.visible = true
 		_item_buttons.visible = false)

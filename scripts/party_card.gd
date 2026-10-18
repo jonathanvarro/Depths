@@ -22,8 +22,9 @@ const STRAIN_BORDERS := {
 }
 
 ## Condition icons, drawn as simple shapes (placeholder art).
-enum Icon { HEALING, WOUNDED, DOWN, INJURY_WOUND, INJURY_LIMP }
+enum Icon { HEALING, WOUNDED, DOWN, INJURY_WOUND, INJURY_LIMP, BLEEDING }
 const ICON_COLORS := {
+	Icon.BLEEDING: Color("e0221a"),
 	Icon.HEALING: Color("6fa35a"),
 	Icon.WOUNDED: Color("c0392b"),
 	Icon.DOWN: Color("9a9a9a"),
@@ -171,9 +172,11 @@ func refresh() -> void:
 	tooltip_text = "%s: %s" % [companion.display_name, StrainRules.NAMES[state]]
 
 	_clear_icons()
+	if companion.is_alive() and companion.bleeding:
+		_add_icon(Icon.BLEEDING, false, "Bleeding: loses health as she walks")
 	if not companion.is_alive():
 		_add_icon(Icon.DOWN)
-	elif low:
+	elif low and not companion.bleeding:
 		_add_icon(Icon.WOUNDED)
 	if companion.is_alive() and not companion.pending_effects.is_empty():
 		_add_icon(Icon.HEALING)
@@ -212,6 +215,11 @@ func _draw_icon(icon: Control, kind: Icon, dressed := false) -> void:
 		Icon.WOUNDED:  # blood drop
 			icon.draw_circle(c + Vector2(0, r * 0.3), r * 0.6, color)
 			icon.draw_colored_polygon(PackedVector2Array([c + Vector2(0, -r), c + Vector2(r * 0.55, r * 0.15), c + Vector2(-r * 0.55, r * 0.15)]), color)
+		Icon.BLEEDING:  # a drop with drips falling from it
+			icon.draw_circle(c + Vector2(-r * 0.2, -r * 0.05), r * 0.5, color)
+			icon.draw_colored_polygon(PackedVector2Array([c + Vector2(-r * 0.2, -r), c + Vector2(r * 0.27, -r * 0.2), c + Vector2(-r * 0.67, -r * 0.2)]), color)
+			icon.draw_circle(c + Vector2(r * 0.55, r * 0.45), r * 0.2, color)
+			icon.draw_circle(c + Vector2(-r * 0.2, r * 0.8), r * 0.18, color)
 		Icon.DOWN:  # cross
 			icon.draw_line(c - Vector2(r, r) * 0.8, c + Vector2(r, r) * 0.8, color, 2.5)
 			icon.draw_line(c + Vector2(-r, r) * 0.8, c + Vector2(r, -r) * 0.8, color, 2.5)

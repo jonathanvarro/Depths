@@ -23,6 +23,8 @@ signal bumped(cell: Vector2i)
 signal panicked
 ## A step was refused by `step_check` (e.g. too dark to leave, #58).
 signal refused(reason: String)
+## The party walked into something solid it can use: a body, a chest (#69).
+signal interacted(cell: Vector2i)
 
 ## Facing index: 0 north, 1 east, 2 south, 3 west.
 const DIRECTIONS: Array[Vector2i] = [Vector2i(0, -1), Vector2i(1, 0), Vector2i(0, 1), Vector2i(-1, 0)]
@@ -41,6 +43,8 @@ var facing := 0
 
 ## While true the party ignores movement input (e.g. a prompt is open).
 var locked := false
+## Held still by a tutorial card (#69), separately from `locked`.
+var paused := false
 ## Chance that a step bolts in a random open direction instead (set while
 ## someone is panicking).
 var panic_chance := 0.0
@@ -103,7 +107,7 @@ func place(dungeon_map, at: Vector2i) -> void:
 
 
 func _process(_delta: float) -> void:
-	if _busy or locked:
+	if _busy or locked or paused:
 		return
 	var stepping := Input.is_action_pressed("move_forward") or Input.is_action_pressed("move_back")
 	if stepping and panic_chance > 0.0 and randf() < panic_chance:
@@ -127,6 +131,11 @@ func _try_step(direction: Vector2i) -> void:
 		refused.emit(reason)
 		var nudge := position + Vector3(direction.x, 0, direction.y) * BUMP_DISTANCE
 		tween.tween_property(self, "position", nudge, move_time * 0.4)
+		tween.tween_property(self, "position", position, move_time * 0.4)
+	elif map.solid.has(target):
+		interacted.emit(target)
+		var reach := position + Vector3(direction.x, 0, direction.y) * BUMP_DISTANCE
+		tween.tween_property(self, "position", reach, move_time * 0.4)
 		tween.tween_property(self, "position", position, move_time * 0.4)
 	elif map.door_at(target) == DungeonMap.Door.CLOSED:
 		map.open_door(target)

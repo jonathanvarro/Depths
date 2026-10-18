@@ -43,7 +43,7 @@ func refresh() -> void:
 			_light_title.text = "Torch"
 			_lantern_bar.max_value = Supplies.TORCH_BURN_TIME
 			_lantern_bar.value = supplies.torch_left
-			_lantern_label.text = "Burning  ·  %d time left" % ceili(supplies.torch_left)
+			_lantern_label.text = "Burning  ·  %d time left" % ceili(supplies.torch_left) if supplies.torch_burns else "Burning"
 			_light_note.text = "In a fight, Item > Throw torch scares an enemy away, but the torch is gone."
 		Supplies.Source.NONE:
 			_light_title.text = "No light"

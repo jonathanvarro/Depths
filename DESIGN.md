@@ -133,6 +133,29 @@ Each companion has a distinct role, personality, vulnerability, and reason to en
 
 *Systems added:* weapons as `Equipment` resources (`data/gear/`; a hero's attack comes from their weapon), carried gear with Equip/Drop in the Pack; the party's light can be the lantern, a held torch (burns down, `Supplies.Source`) or nothing; torches are a supply (`data/items/torch.tres`) lit from the Pack; **Throw torch** in combat makes the target flee and uses up the held torch.
 
+**Revised after the second playtest (#69, owner 2026-10-17):**
+- **Waking:** a slightly slower wake-up, and she keeps blinking for a few seconds after she's up.
+- **Start:** Mara is at **10/20**, **bleeding** (a red-drop icon on her card) with blood and dirt on her portrait, and carries **nothing**. She's restocked at camp. Only her card shows: no empty slots during the escape.
+- **Solid props:** the bodies, the fire and chests are **solid**. Face one and walk into it to search or open it.
+- **Tutorial cards:** hints are **centred cards**:
+  - movement cards wait for the move;
+  - Pack steps hold her still until the Pack is open ("Press I...") and then say what to do there;
+  - explanations (bleeding, the first fight, panic, the forced throw) **pause** until "Got it" (or Enter).
+  - While the Pack, a chest or a fight is open, the card moves aside.
+- **Pacing:** a first stretch of maze is free to explore, closed off by a **second web**. The fights start 6 steps past it.
+- **Chest:** after fight 1 a **chest** appears: in a niche cut beside her if the wall allows, otherwise in the nearest dead end ahead. A card explains it when she sees it. Its window sits next to the Pack:
+  - **drag** an item across, **tap** it, or use the **take-all icon**;
+  - it holds a **restorative draught** (her first healing) and a dressing;
+  - a card then has her drink the draught.
+- **Torch:** it no longer burns down in the opening. Instead, a few steps after fight 2 she **trips** (the view lurches down), the torch dies, and she must light the spare before she'll move.
+- **Spider:** fight 3's spider **can't be beaten by attacking**. Blows glance off (0–1 damage), it never falls and shows no health, and it bites her repeatedly.
+  - After her first swing a card teaches **Item > Throw torch**.
+  - If she's at **4 health or less** without throwing, the game pauses and **only the throw is allowed**.
+  - That was her last torch, so panic follows.
+- **Daylight:** when it opens, every side passage off the path to it is **walled up**, so it can't be avoided.
+- **Mara:** new lines for exploring, the second web, the chest, tripping, glancing blows, the forced throw and the fire, plus more for the existing moments.
+- **Art requests for ChatGPT:** a broken knife icon, broken armour (an armour slot is for later), and a chest; the chest is a plain box for now.
+
 **Decided 2026-10-17 (#11): injuries.** Two to start, both liked by the owner: a **deep wound** (lowers maximum health) and a **limp** (each step costs extra time). An injury can only be **temporarily** eased in the field (e.g. a dressing) and is **properly treated at camp**.
 
 *Implemented (#11):* `Injury` resources in `data/injuries/` — deep wound (max health −5) and limp (+1 time per step; the party moves at the slowest hero's pace). A clean dressing (3 time, survivor starts with 2) binds one injury so it stops hindering until camp; `Companion.treat_injuries()` is the camp treatment for the nurse to call later. Traps currently hurt (3) and have a 50% chance of a random injury, as a placeholder until #16. Injuries show as icons on the card (white band when dressed), in the Pack screen, and can drive portrait overlays (`blood`, `bandage`) once that art exists.

@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-17 – Claude
+- Did: #69 opening polish from the owner's second playtest. Slower wake with lingering blinks; Mara starts 10/20, bleeding (card icon), empty-handed, only her card shown. Bodies/fire/chest are solid (walk into them). Hints are centred cards (act / pack-gated pause / ok pause). The opening maze has a first stretch closed by a second web; fights start after it. A chest after fight 1 (a niche cut beside her if possible, else the nearest dead end ahead; placeholder box) opens a new drag / tap / take-all chest window with a restorative draught + dressing, then a draught card. The torch doesn't burn down in the opening; she trips after fight 2 and relights the spare. The spider's blows glance (no health shown); the throw is taught after a swing and forced at 4 health. Daylight walls off side passages. Many new Mara lines. Camp restocks starting supplies.
+- Next: ChatGPT: broken knife icon, broken armour, chest art (see #69). Owner playtest of the rebuilt exe.
+- Watch out: The chest window is only used by the opening's chest so far; floor chests still use event choices. The opening no longer gives starting supplies until camp. Old scratch opening tests (step-based fights, burn-out) no longer apply; tools/opening_playthrough.gd is the scripted play-through (args: tag, screenshot dir, seed, optional "force").
+
 ## 2026-10-17 – ChatGPT
 - Did: #68 generated rough wood/soot-darkened cloth torch art. art/items/pack-64-v1/torch.png is a transparent 64px icon connected to data/items/torch.tres; Pack supply rows now draw their existing optional icons in 40px slots (matching gear), so the torch and earlier supplies appear. art/props/torch-v1 supplies a neutral 128x256 body and reusable Node2D held.tscn with steady/dim/unlit states, sharing the campfire's six-frame/8fps flame resource unchanged. Master/exact prompt, export checks, GIF and desktop/phone cave/Pack captures are preserved in art/source/torch-v1 and art/concepts/torch-v1.
 - Next: Claude can instance held.tscn and feed apply_supplies on Supplies.changed through #51/#59. Pack icon integration is live; held-art placement is a review example only, not added to Main/Party. README gives exact paths, canvas/root and source/fallback contracts. Keep world lighting with the existing party light.
