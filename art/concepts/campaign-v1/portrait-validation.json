@@ -1,0 +1,234 @@
+{
+  "issues": [
+    103,
+    96
+  ],
+  "canvas": [
+    192,
+    192
+  ],
+  "reference_transform": "full master -> 184px with (4,4) padding; derived cells remain full 192px",
+  "characters": {
+    "corin": {
+      "eyes_region": [
+        82,
+        57,
+        136,
+        77
+      ],
+      "mouth_region": [
+        93,
+        84,
+        125,
+        101
+      ],
+      "expression_registration": {
+        "eyes-half": {
+          "anchor_translation": [
+            2,
+            -2
+          ],
+          "only_replaces": [
+            82,
+            57,
+            136,
+            77
+          ]
+        },
+        "eyes-closed": {
+          "anchor_translation": [
+            2,
+            -3
+          ],
+          "only_replaces": [
+            82,
+            57,
+            136,
+            77
+          ]
+        },
+        "mouth-small": {
+          "anchor_translation": [
+            2,
+            -3
+          ],
+          "only_replaces": [
+            93,
+            84,
+            125,
+            101
+          ]
+        },
+        "mouth-open": {
+          "anchor_translation": [
+            2,
+            -2
+          ],
+          "only_replaces": [
+            93,
+            84,
+            125,
+            101
+          ]
+        },
+        "mouth-round": {
+          "anchor_translation": [
+            2,
+            -2
+          ],
+          "only_replaces": [
+            93,
+            84,
+            125,
+            101
+          ]
+        }
+      },
+      "base_visible_colours": 48,
+      "head_body_compose_exactly": true,
+      "bandage_registration": {
+        "source_bounds": [
+          99,
+          40,
+          144,
+          71
+        ],
+        "centre_x": 108,
+        "top": 44,
+        "max_size": [
+          40,
+          10
+        ]
+      },
+      "sha256": {
+        "bandage.png": "20ec9d3fc362bb8f68aac5dc7fac64b822b8b0e4613980896b6adaf2712866c0",
+        "blood.png": "3e38ec2f54673495e5be79a9b367ee7596e445166bc1eaac321299a37de47fac",
+        "body.png": "4cfdf93b4d67bf00cbcbdeafb423d92091b1f97048d5b64599d41d355c221122",
+        "dirt.png": "fe146db859792312fdc353c6ddcdfb9db895d2286be4abe09f5bcf50e5278e88",
+        "eyes-closed.png": "f3b1259dc00007611a5668664ea0be9bfdb6f8aa49d4802d07f4ed67b19458de",
+        "eyes-half.png": "cb30c2768b6916f7e33385ac8e8358e94494f6025e08375de9f41c881dca7435",
+        "eyes-neutral.png": "fa6c625ddecb6f45ca694378fc85956033705c4828fc076b1a2ee6ef3637de19",
+        "head.png": "a25df55b9517970c9fc702282c25a2892b4cd165960d335d246d7c573a7c1810",
+        "highlight.png": "a1b89f0f8d7d0bc14ee045a3e88244f49696c889884594760ed2addde9c2768a",
+        "mouth-neutral.png": "1b471f77f9036a58c0d59a30d27e1b478f3ca82a5def687fff004e4c9013ef93",
+        "mouth-open.png": "25a0940bd4d0ffc4684770f5d10f373dee7d619631a5e06a144683d8ae6d9e8b",
+        "mouth-round.png": "684f36e77ac5b0c7448351b3ebf5b8669f9ce98a33bae83348565d44bf74172e",
+        "mouth-small.png": "f3cf7a1e517d31d982f94f4b31050bce5a4e17c33e675d6c2c8c5578dd5edd7b",
+        "pallor.png": "8075bfbe3bc41828869e9ad27c2b9ec54d5600ddf1ab79551f054f12c8604432",
+        "preview.png": "3546ca23be4fe8a1b5d6da43f68ceb9f6530e31dd8923e321678ed3f891ca3e6",
+        "shadow.png": "40885af7b8af3cc0bc00e080812355e7767f9bf4763592c26470b42ac40b358e"
+      }
+    },
+    "alwen": {
+      "eyes_region": [
+        84,
+        56,
+        140,
+        78
+      ],
+      "mouth_region": [
+        98,
+        87,
+        129,
+        104
+      ],
+      "expression_registration": {
+        "eyes-half": {
+          "anchor_translation": [
+            -4,
+            -4
+          ],
+          "only_replaces": [
+            84,
+            56,
+            140,
+            78
+          ]
+        },
+        "eyes-closed": {
+          "anchor_translation": [
+            -3,
+            -4
+          ],
+          "only_replaces": [
+            84,
+            56,
+            140,
+            78
+          ]
+        },
+        "mouth-small": {
+          "anchor_translation": [
+            0,
+            -4
+          ],
+          "only_replaces": [
+            98,
+            87,
+            129,
+            104
+          ]
+        },
+        "mouth-open": {
+          "anchor_translation": [
+            -4,
+            -2
+          ],
+          "only_replaces": [
+            98,
+            87,
+            129,
+            104
+          ]
+        },
+        "mouth-round": {
+          "anchor_translation": [
+            -4,
+            -3
+          ],
+          "only_replaces": [
+            98,
+            87,
+            129,
+            104
+          ]
+        }
+      },
+      "base_visible_colours": 48,
+      "head_body_compose_exactly": true,
+      "bandage_registration": {
+        "source_bounds": [
+          100,
+          42,
+          140,
+          63
+        ],
+        "centre_x": 121,
+        "top": 47,
+        "max_size": [
+          27,
+          8
+        ]
+      },
+      "sha256": {
+        "bandage.png": "3655b7b71980c8f48e467e52d6a4e881872d8ab5dc9282bcd93b74cb13f9b7e3",
+        "blood.png": "a20acfc0895c147c10c6c06bb0ee3747dbb2292085263b27e2265c1475f76a00",
+        "body.png": "b4d156a37130b136fc88c6ae7c8eeed27e00bb2b862bde05c6893168c898fed3",
+        "dirt.png": "34681c73929640e974e73b30aeb558bb4a02afd4faa1c8b56d666dbd3922cf3b",
+        "eyes-closed.png": "142c5b377e7801f27bb556184ca4fe7f948782d3d72dadb5e27fcc46fcb0da90",
+        "eyes-half.png": "0e5b4ac8c09af9561d5750cf6edb943011e34babddcacc6666188e9fb2f660f9",
+        "eyes-neutral.png": "98dd71ce9583a47a0efc5f3739433eaeaf9b98218488a89f048da52bb57b7a03",
+        "head.png": "14006aa0d31065815614743257fcb9261422b396aab55b915d4e9eaae9635fa8",
+        "highlight.png": "bf621a81772231413e5fa830592c48e05b502fed74c9bfcbc350d8b2b3d830a8",
+        "mouth-neutral.png": "2ed7d6f5d2dd159e87bfe4e4f961c36f79f34859552c0fcd100b72ba3b42e3a7",
+        "mouth-open.png": "1f45f1e8215867b71b8d66950a438941ecfbfc218017d3bc5098362bfaacf03d",
+        "mouth-round.png": "f9f7c2f4ce9e5de9fab2e0af7c0db095c1eb8df7adf21c02004f6616a58995e2",
+        "mouth-small.png": "9e808227dff9738d6f60f3ece121497c6413bbdb1ad2edd3b313ae94d0bd84e9",
+        "pallor.png": "877dc4965dc2e30986ea7a0b0cc2c29cd9018c13ec13483076754d344169e0df",
+        "preview.png": "7a2582119c9e0244599a33f0f3bdc3a8e8e690f0ff05196e930957cfb2a7b75d",
+        "shadow.png": "675d1b7026c64729dc315ccc320b2ad7acd000eb11d4c9353a7d099b714f4104"
+      }
+    }
+  },
+  "failures": []
+}

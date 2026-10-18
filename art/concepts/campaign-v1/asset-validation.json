@@ -1,0 +1,861 @@
+{
+  "issues": [
+    99,
+    103,
+    105,
+    96,
+    50,
+    89
+  ],
+  "assets": {
+    "art/enemies/campaign-v1/queen/idle.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        27,
+        31,
+        102,
+        122
+      ],
+      "visible_colours": 30
+    },
+    "art/enemies/campaign-v1/queen/attack.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        23,
+        15,
+        92,
+        121
+      ],
+      "visible_colours": 31
+    },
+    "art/enemies/campaign-v1/queen/hurt.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        18,
+        25,
+        113,
+        121
+      ],
+      "visible_colours": 30
+    },
+    "art/enemies/campaign-v1/queen/enraged-idle.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        18,
+        37,
+        110,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/enemies/campaign-v1/queen/enraged-attack.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        22,
+        11,
+        95,
+        121
+      ],
+      "visible_colours": 30
+    },
+    "art/enemies/campaign-v1/queen/enraged-hurt.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        15,
+        26,
+        114,
+        121
+      ],
+      "visible_colours": 31
+    },
+    "art/enemies/campaign-v1/archer/idle.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        30,
+        20,
+        100,
+        120
+      ],
+      "visible_colours": 31
+    },
+    "art/enemies/campaign-v1/archer/draw.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        16,
+        9,
+        102,
+        120
+      ],
+      "visible_colours": 30
+    },
+    "art/enemies/campaign-v1/archer/release.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        27,
+        15,
+        110,
+        121
+      ],
+      "visible_colours": 30
+    },
+    "art/enemies/campaign-v1/archer/hurt.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        17,
+        29,
+        92,
+        121
+      ],
+      "visible_colours": 30
+    },
+    "art/enemies/campaign-v1/archer/attack.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        16,
+        9,
+        102,
+        120
+      ],
+      "visible_colours": 30
+    },
+    "art/enemies/campaign-v1/guard/idle.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        18,
+        14,
+        108,
+        121
+      ],
+      "visible_colours": 30
+    },
+    "art/enemies/campaign-v1/guard/attack.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        10,
+        23,
+        118,
+        121
+      ],
+      "visible_colours": 31
+    },
+    "art/enemies/campaign-v1/guard/hurt.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        10,
+        18,
+        116,
+        121
+      ],
+      "visible_colours": 31
+    },
+    "art/enemies/campaign-v1/guard/brace.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        17,
+        32,
+        117,
+        121
+      ],
+      "visible_colours": 30
+    },
+    "art/enemies/campaign-v1/great-rat/idle.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        13,
+        25,
+        116,
+        120
+      ],
+      "visible_colours": 32
+    },
+    "art/enemies/campaign-v1/great-rat/attack.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        8,
+        24,
+        118,
+        120
+      ],
+      "visible_colours": 32
+    },
+    "art/enemies/campaign-v1/great-rat/hurt.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        13,
+        29,
+        119,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/enemies/campaign-v1/webspinner/idle.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        11,
+        48,
+        118,
+        121
+      ],
+      "visible_colours": 31
+    },
+    "art/enemies/campaign-v1/webspinner/attack.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        13,
+        34,
+        113,
+        121
+      ],
+      "visible_colours": 31
+    },
+    "art/enemies/campaign-v1/webspinner/hurt.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        10,
+        51,
+        118,
+        121
+      ],
+      "visible_colours": 31
+    },
+    "art/enemies/campaign-v1/drummer/idle.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        28,
+        20,
+        114,
+        120
+      ],
+      "visible_colours": 32
+    },
+    "art/enemies/campaign-v1/drummer/attack.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        11,
+        9,
+        93,
+        120
+      ],
+      "visible_colours": 32
+    },
+    "art/enemies/campaign-v1/drummer/hurt.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        25,
+        21,
+        117,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/features/fortress-v1/gate-barred.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        8,
+        17,
+        120,
+        122
+      ],
+      "visible_colours": 31
+    },
+    "art/features/fortress-v1/gate-broken.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        8,
+        17,
+        120,
+        122
+      ],
+      "visible_colours": 32
+    },
+    "art/features/fortress-v1/hall-closed.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        8,
+        18,
+        120,
+        122
+      ],
+      "visible_colours": 32
+    },
+    "art/features/fortress-v1/hall-open.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        8,
+        18,
+        120,
+        122
+      ],
+      "visible_colours": 32
+    },
+    "art/props/fortress-v1/palisade.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        9,
+        9,
+        119,
+        121
+      ],
+      "visible_colours": 31
+    },
+    "art/props/fortress-v1/watch-post.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        22,
+        9,
+        105,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/props/fortress-v1/goblin-mark.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        8,
+        9,
+        120,
+        122
+      ],
+      "visible_colours": 32
+    },
+    "art/props/fortress-v1/trophies.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        20,
+        9,
+        107,
+        121
+      ],
+      "visible_colours": 31
+    },
+    "art/props/fortress-v1/throne.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        20,
+        9,
+        109,
+        121
+      ],
+      "visible_colours": 32
+    },
+    "art/textures/fortress-v1/wall.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "opaque": true,
+      "shared_palette_limit": 32
+    },
+    "art/textures/fortress-v1/wall-timber.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "opaque": true,
+      "shared_palette_limit": 32
+    },
+    "art/textures/fortress-v1/floor.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "opaque": true,
+      "shared_palette_limit": 32
+    },
+    "art/textures/fortress-v1/ceiling.png": {
+      "canvas": [
+        128,
+        128
+      ],
+      "opaque": true,
+      "shared_palette_limit": 32
+    },
+    "art/items/campaign-v1/broken-short-sword.png": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        5,
+        4,
+        59,
+        60
+      ],
+      "visible_colours": 32
+    },
+    "art/items/campaign-v1/cracked-staff.png": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        5,
+        4,
+        58,
+        60
+      ],
+      "visible_colours": 32
+    },
+    "art/illustrations/fortress-v1/victory.png": {
+      "canvas": [
+        640,
+        360
+      ],
+      "opaque": true,
+      "palette_limit": 64
+    },
+    "art/camp/occupancy-v1/seated-a.png": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        11,
+        24,
+        53,
+        57
+      ],
+      "visible_colours": 32
+    },
+    "art/camp/occupancy-v1/seated-b.png": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        11,
+        18,
+        53,
+        57
+      ],
+      "visible_colours": 31
+    },
+    "art/camp/occupancy-v1/meal.png": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        14,
+        17,
+        49,
+        57
+      ],
+      "visible_colours": 32
+    },
+    "art/camp/occupancy-v1/drying-cloth.png": {
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        8,
+        22,
+        56,
+        57
+      ],
+      "visible_colours": 31
+    }
+  },
+  "registration": {
+    "queen": {
+      "common_scale": 0.875,
+      "common_dx": 4,
+      "pose_offsets": [
+        [
+          4,
+          13
+        ],
+        [
+          4,
+          12
+        ],
+        [
+          4,
+          17
+        ],
+        [
+          4,
+          9
+        ],
+        [
+          4,
+          9
+        ],
+        [
+          4,
+          18
+        ]
+      ],
+      "contact_y": 120,
+      "isolated_export_pixels_removed": {
+        "enraged-hurt": 11
+      }
+    },
+    "archer": {
+      "common_scale": 0.9256198347107438,
+      "common_dx": -4,
+      "pose_offsets": [
+        [
+          -4,
+          8
+        ],
+        [
+          -4,
+          7
+        ],
+        [
+          -4,
+          11
+        ],
+        [
+          -4,
+          11
+        ],
+        [
+          -4,
+          7
+        ]
+      ],
+      "contact_y": 120
+    },
+    "guard": {
+      "common_scale": 0.9824561403508771,
+      "common_dx": 0,
+      "pose_offsets": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          -2
+        ],
+        [
+          0,
+          7
+        ],
+        [
+          0,
+          8
+        ]
+      ],
+      "contact_y": 120,
+      "isolated_export_pixels_removed": {
+        "hurt": 10
+      }
+    },
+    "great-rat": {
+      "common_scale": 0.9333333333333333,
+      "common_dx": 2,
+      "pose_offsets": [
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          14
+        ]
+      ],
+      "contact_y": 120
+    },
+    "webspinner": {
+      "common_scale": 0.875,
+      "common_dx": 6,
+      "pose_offsets": [
+        [
+          6,
+          9
+        ],
+        [
+          6,
+          9
+        ],
+        [
+          6,
+          24
+        ]
+      ],
+      "contact_y": 120,
+      "isolated_export_pixels_removed": {
+        "attack": 5,
+        "hurt": 5
+      }
+    },
+    "drummer": {
+      "common_scale": 0.9333333333333333,
+      "common_dx": -2,
+      "pose_offsets": [
+        [
+          -2,
+          3
+        ],
+        [
+          -2,
+          3
+        ],
+        [
+          -2,
+          10
+        ]
+      ],
+      "contact_y": 120
+    },
+    "doors": {
+      "common_scale": 0.9032258064516129,
+      "common_dx": 6,
+      "pose_offsets": [
+        [
+          6,
+          12
+        ],
+        [
+          6,
+          12
+        ],
+        [
+          6,
+          13
+        ],
+        [
+          6,
+          13
+        ]
+      ],
+      "contact_y": 120
+    },
+    "palisade": {
+      "common_scale": 1.0467289719626167,
+      "common_dx": -11,
+      "pose_offsets": [
+        [
+          -11,
+          -7
+        ]
+      ],
+      "contact_y": 120
+    },
+    "watch-post": {
+      "common_scale": 0.9739130434782609,
+      "common_dx": -1,
+      "pose_offsets": [
+        [
+          -1,
+          0
+        ]
+      ],
+      "contact_y": 120
+    },
+    "goblin-mark": {
+      "common_scale": 1.037037037037037,
+      "common_dx": -13,
+      "pose_offsets": [
+        [
+          -13,
+          -3
+        ]
+      ],
+      "contact_y": 120
+    },
+    "trophies": {
+      "common_scale": 0.9572649572649573,
+      "common_dx": 20,
+      "pose_offsets": [
+        [
+          20,
+          5
+        ]
+      ],
+      "contact_y": 120
+    },
+    "throne": {
+      "common_scale": 0.9572649572649573,
+      "common_dx": 3,
+      "pose_offsets": [
+        [
+          3,
+          4
+        ]
+      ],
+      "contact_y": 120
+    }
+  },
+  "failures": [],
+  "source_sha256": {
+    "alwen-base.png": "c54b9c62a92b60f3d12dc133674f0501c9e4325223c8ebc18c5f8159af6fadcd",
+    "alwen-conditions.png": "62551f521699f581d1f0666f920abc5f980a00c48bdb43f44b7c1dbe4c486919",
+    "alwen-faces.png": "c09a0931a3fbb9d3f73bd59b0294051bd7c8177010271d994df8ab42de95f7bf",
+    "alwen-lighting.png": "7c7810a4a330fb088a5afafbed6650f21c0ef6f38649ea37e043191a4ab25457",
+    "alwen-reference.png": "6e5a0ce58799a1f0363ded3f8c58768c2c11996e7722804dbfcfe421805ca1b0",
+    "archer-poses.png": "8babba4c20496daf416dedd51b47c4e396940d5aaec327c02e1cf1bbeb508120",
+    "broken-short-sword.png": "b5498b70d05d220fa78edbde21d147f27ea38959cf19d865a87d45f7214e7b97",
+    "camp-occupancy.png": "c1b8d7578ebf9d52f9dc1a213113048352655c905caddd57edfed2175ebb075e",
+    "corin-base.png": "0282d4e6e7908c3845be069dd119ce7698017a5782c6d843ba574323782b50c7",
+    "corin-conditions.png": "1881105e6f826741bb6daac3f7e491ec4833343c64dc1056a81d2fe806077470",
+    "corin-faces.png": "b81a1e8067037d202ad3a4c66a326d89069361df0dd95a7bd3814e012fd9a6ce",
+    "corin-lighting.png": "00e6b1ff2144f3b5108409b0a3f4ae4d0072a052cbd265f78672687cda08565e",
+    "corin-reference.png": "ce96c1f37cf290abfc8b22b72ad42340725819d023abea9879bcb079da5e77ec",
+    "cracked-staff.png": "f979ca644663ea6a3da620c4737dcd9f2d9a86443350c9f629f5a12a6ae7f223",
+    "drummer-poses.png": "bba86552963eb0a4d7e4b98ac0c548d4e497db823fd9c30371df91bc62416299",
+    "fortress-doors.png": "6fea01b4eb4d47d2bccf463fe3c7aa7bdb8759754560a86639cbcab7d403e5d9",
+    "fortress-textures.png": "6c862a1b5d4413c4fb989689f82544e0795f9b3b3ce166ac6a3f7e9eece05487",
+    "great-rat-poses.png": "0812a185150a2e954108a2ea7c89848a22d3f46ce4f13865de5ea97c4e4a93c8",
+    "guard-poses.png": "66e385ed7e2152cf43322da7913019a0777986d3feb86271d9c6b01a34a3c28e",
+    "outskirts-props.png": "0ebbcecd1d3e40df5d5647f66363d16c3b1ea5b96a0afcc219d61cee104e6dcc",
+    "queen-enraged.png": "dab18680991f44b8530d15da5227d80a3ab0990d8881069a00271a2133947a23",
+    "queen-poses.png": "277e34d48160dbb1c48870e97382692eafaabf663501017e8a71975728e1ec66",
+    "throne.png": "5b5e70b0c7843e9e44c3fe002ce42c78d35424f8d67ff63ae86f452b876dd6c4",
+    "victory.png": "6323f8f8d4a80961913ea27a3afee27cd7953b86fcb4620dc27e1eea85d009d2",
+    "webspinner-poses.png": "67d808072dea3256ad371dbc5006ee326715d64e5cff7840b6703978b99a06b2"
+  },
+  "sha256": {
+    "art/enemies/campaign-v1/queen/idle.png": "75de23f92f7377deb1fb35dcf7cd663f418488edd914bddd3401720f7a1a01b5",
+    "art/enemies/campaign-v1/queen/attack.png": "f287531ae3125db303077a76026096657a58fc467ded1f0d1936fead11a4db80",
+    "art/enemies/campaign-v1/queen/hurt.png": "6ded67e10f1ee17b73cd18134a766fe1effb9e2d0a6038fcb40fba3cf846d88e",
+    "art/enemies/campaign-v1/queen/enraged-idle.png": "c6acf25fc59fb8af1e0563252d9a59dfa17754fd52609b0931c45d29f02b3330",
+    "art/enemies/campaign-v1/queen/enraged-attack.png": "7fea7a3cbe63241b5d8c7fbe5c28525433adc76d8853d5196f5b1752a1f94677",
+    "art/enemies/campaign-v1/queen/enraged-hurt.png": "c0f41575e905bf5886dedd12957cbba13c96e3e21afef74b95680d7ce3708087",
+    "art/enemies/campaign-v1/archer/idle.png": "afef32879f9cb0061d781fa7d32046359fec7bf2c839ac320aa15be1fee0c6a1",
+    "art/enemies/campaign-v1/archer/draw.png": "c0124301973ffe154340fb90fead0f95075e4a7d4415ca0e4274ab9e90bae5d6",
+    "art/enemies/campaign-v1/archer/release.png": "704232b71a6634659b1adb5c282f17597ad51b9fb6fbccf5c1c849e7fa25473b",
+    "art/enemies/campaign-v1/archer/hurt.png": "8bb23b12d8f9a24cfb862410f914abbc0ae8d8e765f5751f7123409e214dfb87",
+    "art/enemies/campaign-v1/archer/attack.png": "c0124301973ffe154340fb90fead0f95075e4a7d4415ca0e4274ab9e90bae5d6",
+    "art/enemies/campaign-v1/guard/idle.png": "2e383762cc54bc9673e10aff056275d6b70a25daddc3805ee707edc7ab16d44e",
+    "art/enemies/campaign-v1/guard/attack.png": "d5fe7ef26341b64addf4bc5ae4e1cb01b093d7e9364811c93c37f1a421a1161f",
+    "art/enemies/campaign-v1/guard/hurt.png": "606e5f629cd2aa6befe7b820774d5dc54155b85827fcfd26b0f70ef45653e5db",
+    "art/enemies/campaign-v1/guard/brace.png": "7996a470f8046c148719e8cb0ca58125eb6a56a27c8bbb065ea9b460bd695bd7",
+    "art/enemies/campaign-v1/great-rat/idle.png": "4f0eb1751615f5692c188847458c1b11ab9e130c665f7b58974a2e5fa2585b77",
+    "art/enemies/campaign-v1/great-rat/attack.png": "025e755cf12fd78c225655b7f0e54d84f7344aae32a76a6096f8954bbbbe8b59",
+    "art/enemies/campaign-v1/great-rat/hurt.png": "7f20d19180b6520187e53065e41ce42ebbcd527471cf4e754137ed42c1e71f49",
+    "art/enemies/campaign-v1/webspinner/idle.png": "84dea0e027df4ca909cf8b599636f955a9824fa5108fe5efb1cd311bf5b0732c",
+    "art/enemies/campaign-v1/webspinner/attack.png": "beb19f00f2e87b4264db0fa8c7454a3aa4613ad74ccbe5f929e29aef4e13ff3d",
+    "art/enemies/campaign-v1/webspinner/hurt.png": "9816526fa56cf3e55434eb521e66cc82419132246a8775d7858ff9b542641846",
+    "art/enemies/campaign-v1/drummer/idle.png": "15713994e2c9628384bfa2ec1fecbff1ad1231965d514c1fde99b055040aab00",
+    "art/enemies/campaign-v1/drummer/attack.png": "2e515d4df3a57b0aadb4f7a596d3b7c5d876e65c2134ad2f775c482cd467e3c8",
+    "art/enemies/campaign-v1/drummer/hurt.png": "2040e43b892e83b727f0aa6275a0ef7cd7264ece67bbbecb80c0e941cd9dfc0a",
+    "art/features/fortress-v1/gate-barred.png": "dc5f28e238f6c899dc7bf77ea4b5199a38861239713856b97c3d6af92b5b69af",
+    "art/features/fortress-v1/gate-broken.png": "9c5bd2b76253c84d9643f664a13d76141c5c2c55ea4158c5ff91253abfdc922e",
+    "art/features/fortress-v1/hall-closed.png": "87cf68d0bb71a1e371f6767c8de0d7e429e7499cbbc9e4cbf208a192cf2a9f9c",
+    "art/features/fortress-v1/hall-open.png": "aa08e004bef5570df1917feecc5f14a385f5817f9a68f0bcb1814d52d556f94b",
+    "art/props/fortress-v1/palisade.png": "4468536767aed5feac91871b59443e8eaab581ab0825f2c33681e480a2f89b6f",
+    "art/props/fortress-v1/watch-post.png": "81842b144bdecc3124cbbbdd601a26e19a3a67416973f68d29a0577b86d6c3ab",
+    "art/props/fortress-v1/goblin-mark.png": "987a9fedccbf070c759cf9961bef0b1088d90ee69db25df42def6596b0cf6327",
+    "art/props/fortress-v1/trophies.png": "4c1e8633ee08a6e9104a3cc58f189572f739c305961ff45d94814341a0a9bd01",
+    "art/props/fortress-v1/throne.png": "fc4a68e15d271a9ce407696b650083325329e4105a6928911ce6cec896178b71",
+    "art/textures/fortress-v1/wall.png": "deee3d0f0d589941c5c4a1972a8d55bc127f15fd67ae485c80be97614d2b3c02",
+    "art/textures/fortress-v1/wall-timber.png": "537f70893b720aaa62a970a127fd023faf9ddb752502d56198865b5551c4aa81",
+    "art/textures/fortress-v1/floor.png": "82a36850d25d41157d245cdce88da0a8b783b07058e0533699743c9752829907",
+    "art/textures/fortress-v1/ceiling.png": "a3dd9253800551b5ac208bf076e45a7c49c912801b7549083d26a349a61a9d90",
+    "art/items/campaign-v1/broken-short-sword.png": "4a7673abf5eb651282ce9a46fd4b377fc62711163591a23508e21ae60e380d91",
+    "art/items/campaign-v1/cracked-staff.png": "dd1e6edad5f7890c9c6e4b58c50ad92504e0ed78b9b1cc183c63a5cbc40946c9",
+    "art/illustrations/fortress-v1/victory.png": "0c0b3794dab8f2a8625e17efb919693853860679659a24279cb38d12d0303cbc",
+    "art/camp/occupancy-v1/seated-a.png": "22c18b8a87acdc235c88b23ee5f47dd7d67e3bcc731c710de76da16b38e5c8b4",
+    "art/camp/occupancy-v1/seated-b.png": "4d9ed21d4114d62b8a67d660f24925dec853aed41fbd1c5f5f59091e349d68a7",
+    "art/camp/occupancy-v1/meal.png": "4fec40f100952acc66b72ccf0d9f5e15bf71b8a7b427df14acb8ce77d8bce84d",
+    "art/camp/occupancy-v1/drying-cloth.png": "aa33c8867a7975e858dfb9969f354c17060ea990f0a88681495f3b0aedec7bed"
+  }
+}

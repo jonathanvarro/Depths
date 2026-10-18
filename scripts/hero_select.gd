@@ -16,6 +16,8 @@ const MUTED := Color("b3a78f")
 const AMBER := Color("dbb477")
 const HEADING := preload("res://art/fonts/heading-cinzel.tres")
 const BODY := preload("res://art/fonts/body-source-sans.tres")
+const SafeArea := preload("res://scripts/safe_area.gd")
+@export var simulate_phone_safe_area := false
 
 var content: MarginContainer
 
@@ -54,7 +56,19 @@ func _init() -> void:
 	visible = false
 
 
+func _ready() -> void:
+	get_viewport().size_changed.connect(_fit_safe_area)
+	_fit_safe_area()
+
+
+func _fit_safe_area() -> void:
+	var insets:=SafeArea.insets(get_viewport(),simulate_phone_safe_area)
+	for pair in [["left",insets.x],["top",insets.y],["right",insets.z],["bottom",insets.w]]:
+		content.add_theme_constant_override("margin_"+pair[0],int(pair[1]+24))
+
+
 func open() -> void:
+	_fit_safe_area()
 	visible = true
 
 
@@ -71,19 +85,27 @@ func _card(path: String) -> Control:
 	var column := VBoxContainer.new()
 	column.add_theme_constant_override("separation", 6)
 	panel.add_child(column)
+	var scroll:=ScrollContainer.new()
+	scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED
+	scroll.size_flags_vertical=Control.SIZE_EXPAND_FILL
+	column.add_child(scroll)
+	var details:=VBoxContainer.new()
+	details.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+	details.add_theme_constant_override("separation",6)
+	scroll.add_child(details)
 	var face := TextureRect.new()
 	face.texture = hero.portrait
 	face.custom_minimum_size = Vector2(0, 150)
 	face.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	face.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	face.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
-	column.add_child(face)
-	column.add_child(_label(hero.display_name, HEADING, 24, TEXT))
-	column.add_child(_label(hero.role, BODY, 18, AMBER))
+	face.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	details.add_child(face)
+	details.add_child(_label(hero.display_name, HEADING, 24, TEXT))
+	details.add_child(_label(hero.role, BODY, 18, AMBER))
 	var story := _label(hero.backstory, BODY, 16, MUTED)
 	story.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	column.add_child(story)
-	column.add_child(_label("%s: %s" % [hero.trait_name, hero.trait_text], BODY, 16, AMBER))
+	details.add_child(story)
+	details.add_child(_label("%s: %s" % [hero.trait_name, hero.trait_text], BODY, 16, AMBER))
 	var choose := _button("Wake as %s" % hero.display_name.split(" ")[-1])
 	choose.pressed.connect(func():
 		visible = false

@@ -83,6 +83,7 @@ func _ready() -> void:
 	_settings_screen = preload("res://scripts/settings_screen.gd").new()
 	add_child(_settings_screen)
 	_hero_select = preload("res://scripts/hero_select.gd").new()
+	_hero_select.simulate_phone_safe_area=simulate_phone
 	add_child(_hero_select)
 	_hero_select.chosen.connect(_start_new_game)
 	_apply_margins()

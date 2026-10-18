@@ -37,6 +37,7 @@ var _canvas: Control
 var _buttons := {}  # site id -> Button
 var _sites := {}  # site id -> layout entry
 var _site_art := {}  # site id -> registered art node
+var _dressing: Node2D
 var _day_label: Label
 var _activity: Panel
 var _activity_title: Label
@@ -73,6 +74,10 @@ func _init() -> void:
 	var layout: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(DIR + "layout.json"))
 	for site in layout["sites"]:
 		_add_site(site)
+	_dressing=preload("res://art/camp/occupancy-v1/dressing.gd").new()
+	_canvas.add_child(_dressing)
+	_canvas.move_child(_dressing,_site_art.fire.get_index()+1)  # seated bodies in front of logs; fire label stays above
+	_dressing.setup(_canvas,_site_art.fire)
 	var title := _label("Relief camp", HEADING, 18, TEXT)
 	title.position = Vector2(20, 8)
 	_canvas.add_child(title)
@@ -183,6 +188,7 @@ func _add_site(site: Dictionary) -> void:
 ## Registered site variants follow actual contracts and recovery state.
 func _update_site_art() -> void:
 	if _camp==null:return
+	_dressing.refresh(_camp)
 	var has_contract: bool = _camp.contract.has("enemy") and not _camp.queen_defeated
 	_site_art["cave"].get_node("Base").texture=load("res://art/camp/cave-camp-variants-v1/contract-notice.png") if has_contract else load(DIR+"cave.png")
 	var occupied: bool = _camp.recovering.keys().any(func(hero):return _camp.is_recovering(hero))

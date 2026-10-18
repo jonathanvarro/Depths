@@ -1,0 +1,12 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3]
+[ext_resource type="Texture2D" path="res://art/enemies/campaign-v1/archer/idle.png" id="idle"]
+[ext_resource type="Texture2D" path="res://art/enemies/campaign-v1/archer/draw.png" id="draw"]
+[ext_resource type="Texture2D" path="res://art/enemies/campaign-v1/archer/release.png" id="release"]
+[ext_resource type="Texture2D" path="res://art/enemies/campaign-v1/archer/hurt.png" id="hurt"]
+[ext_resource type="Texture2D" path="res://art/enemies/campaign-v1/archer/attack.png" id="attack"]
+[resource]
+animations = [{"frames":[{"duration":1.0,"texture":ExtResource("idle")} ],"loop":true,"name":&"idle","speed":8.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("draw")} ],"loop":false,"name":&"draw","speed":8.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("release")} ],"loop":false,"name":&"release","speed":8.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("hurt")} ],"loop":false,"name":&"hurt","speed":8.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("draw")} ,{"duration":1.0,"texture":ExtResource("release")} ],"loop":false,"name":&"attack","speed":8.0}]

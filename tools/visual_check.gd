@@ -77,6 +77,9 @@ func _initialize() -> void:
 	var types: Array[EnemyType] = [goblin, load("res://data/enemies/webspinner.tres")]
 	main._start_combat(main._party.cell, types)
 	var combat = main._combat
+	# Exercise a normal damaging blow, not the random, interactive coin flip.
+	# CUNNING can otherwise choose KILLING_BLOW and wait for player input here.
+	combat._state.foes[0].intent = main.CombatState.Intent.SWING
 	var guard := 0
 	while not combat._actions.visible and guard < 100:
 		await create_timer(0.1).timeout
@@ -99,7 +102,7 @@ func _initialize() -> void:
 	while main._in_combat and guard < 120 and not saw_claw:
 		guard += 1
 		if combat._actions.visible:
-			combat._action_chosen.emit({"kind": "attack"})
+			combat._action_chosen.emit({"kind": "defend"})
 		await create_timer(0.03).timeout
 		var labels: Array = combat._fx.get_children().filter(func(c): return c is Label and c.text.begins_with("-"))
 		if not labels.is_empty():
@@ -109,5 +112,15 @@ func _initialize() -> void:
 			if dir != "":
 				root.get_texture().get_image().save_png(dir + "/visual_" + tag + "_claw.png")
 	check("an enemy's hit shows a red number on the card", saw_claw)
+	# Let the awaited fight finish before releasing Main and quitting.
+	combat._state.result = main.CombatState.Result.VICTORY
+	if combat._actions.visible:
+		combat._action_chosen.emit({"kind": "defend"})
+	guard = 0
+	while main._in_combat and guard < 100:
+		await create_timer(0.05).timeout
+		guard += 1
+	main.queue_free()
+	await create_timer(0.2).timeout
 	print("fails=", fails)
-	quit()
+	quit(1 if fails else 0)

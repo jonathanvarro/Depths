@@ -1,16 +1,21 @@
 [gd_resource type="Resource" script_class="EnvironmentTheme" format=3]
 
 [ext_resource type="Script" path="res://scripts/environment_theme.gd" id="1"]
-[ext_resource type="Material" path="res://art/textures/stone-v1/wall_plain.tres" id="2"]
-[ext_resource type="Material" path="res://art/textures/stone-v1/wall_worn.tres" id="3"]
-[ext_resource type="Material" path="res://art/textures/stone-v1/floor.tres" id="4"]
-[ext_resource type="Material" path="res://art/textures/stone-v1/ceiling.tres" id="5"]
+[ext_resource type="Material" path="res://art/textures/fortress-v1/wall.tres" id="2"]
+[ext_resource type="Material" path="res://art/textures/fortress-v1/wall-timber.tres" id="3"]
+[ext_resource type="Material" path="res://art/textures/fortress-v1/floor.tres" id="4"]
+[ext_resource type="Material" path="res://art/textures/fortress-v1/ceiling.tres" id="5"]
 [ext_resource type="AudioStream" path="res://audio/placeholder/ambience_stone.wav" id="6"]
 [ext_resource type="AudioStream" path="res://audio/placeholder/footstep_1.wav" id="7"]
 [ext_resource type="AudioStream" path="res://audio/placeholder/footstep_2.wav" id="8"]
 [ext_resource type="AudioStream" path="res://audio/placeholder/footstep_3.wav" id="9"]
 [ext_resource type="AudioStream" path="res://audio/placeholder/bump.wav" id="10"]
 [ext_resource type="AudioStream" path="res://audio/placeholder/door_creak.wav" id="11"]
+
+[ext_resource type="PackedScene" path="res://art/features/fortress-v1/hall-closed.tscn" id="closed_scene"]
+[ext_resource type="PackedScene" path="res://art/features/fortress-v1/hall-open.tscn" id="opened_scene"]
+[ext_resource type="PackedScene" path="res://art/features/fortress-v1/gate-barred.tscn" id="blocked_scene"]
+[ext_resource type="PackedScene" path="res://art/features/fortress-v1/gate-broken.tscn" id="gate_opened_scene"]
 
 [resource]
 script = ExtResource("1")
@@ -36,3 +41,8 @@ ambience = ExtResource("6")
 footstep_sounds = Array[AudioStream]([ExtResource("7"), ExtResource("8"), ExtResource("9")])
 bump_sound = ExtResource("10")
 open_sound = ExtResource("11")
+
+closed_scene = ExtResource("closed_scene")
+opened_scene = ExtResource("opened_scene")
+blocked_scene = ExtResource("blocked_scene")
+gate_opened_scene = ExtResource("gate_opened_scene")

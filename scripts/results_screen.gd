@@ -16,6 +16,8 @@ var _subtitle: Label
 var _gained: VBoxContainer
 var _lost: VBoxContainer
 var _button: Button
+var _illustration: TextureRect
+var _tallies: HBoxContainer
 
 
 func _init() -> void:
@@ -38,7 +40,16 @@ func _init() -> void:
 	_subtitle = _label(20, COLOR_DIM_TEXT)
 	_subtitle.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	column.add_child(_subtitle)
+	_illustration=TextureRect.new()
+	_illustration.expand_mode=TextureRect.EXPAND_IGNORE_SIZE
+	_illustration.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	_illustration.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
+	_illustration.size_flags_vertical=Control.SIZE_EXPAND_FILL
+	_illustration.custom_minimum_size=Vector2(0,120)
+	_illustration.visible=false
+	column.add_child(_illustration)
 	var columns := HBoxContainer.new()
+	_tallies=columns
 	columns.add_theme_constant_override("separation", 40)
 	columns.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	column.add_child(columns)
@@ -55,6 +66,8 @@ func _init() -> void:
 
 
 func show_results(ending: int, expedition, party, note: String) -> void:
+	_illustration.visible=false
+	_tallies.visible=true
 	_title.text = Expedition.TITLES[ending]
 	var where := "Expedition %d" % expedition.number
 	_subtitle.text = where + ". " + note
@@ -68,7 +81,10 @@ func show_results(ending: int, expedition, party, note: String) -> void:
 
 ## A short ending with no tallies (the opening: "Barely survived", #56).
 ## Later this is where gold retrieved and enemies slain will show.
-func show_brief(title: String, note: String, button: String) -> void:
+func show_brief(title: String, note: String, button: String, illustration: Texture2D=null) -> void:
+	_illustration.texture=illustration
+	_illustration.visible=illustration!=null
+	_tallies.visible=false
 	_title.text = title
 	_subtitle.text = note
 	_gained.get_parent().visible = false

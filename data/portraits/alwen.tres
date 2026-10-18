@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="PortraitSet" format=3]
+
+[ext_resource type="Script" path="res://scripts/portrait_set.gd" id="script"]
+[ext_resource type="Texture2D" path="res://art/concepts/portraits/mara-layered-v1/background.png" id="background"]
+[ext_resource type="Texture2D" path="res://art/portraits/main-heroes-v1/alwen/body.png" id="0"]
+[ext_resource type="Texture2D" path="res://art/portraits/main-heroes-v1/alwen/head.png" id="1"]
+[ext_resource type="Texture2D" path="res://art/portraits/main-heroes-v1/alwen/eyes-neutral.png" id="2"]
+[ext_resource type="Texture2D" path="res://art/portraits/main-heroes-v1/alwen/mouth-neutral.png" id="3"]
+[ext_resource type="Texture2D" path="res://art/portraits/main-heroes-v1/alwen/eyes-half.png" id="4"]
+[ext_resource type="Texture2D" path="res://art/portraits/main-heroes-v1/alwen/eyes-closed.png" id="5"]
+[ext_resource type="Texture2D" path="res://art/portraits/main-heroes-v1/alwen/mouth-small.png" id="6"]
+[ext_resource type="Texture2D" path="res://art/portraits/main-heroes-v1/alwen/mouth-open.png" id="7"]
+[ext_resource type="Texture2D" path="res://art/portraits/main-heroes-v1/alwen/mouth-round.png" id="8"]
+[ext_resource type="Texture2D" path="res://art/portraits/main-heroes-v1/alwen/blood.png" id="9"]
+[ext_resource type="Texture2D" path="res://art/portraits/main-heroes-v1/alwen/dirt.png" id="10"]
+[ext_resource type="Texture2D" path="res://art/portraits/main-heroes-v1/alwen/bandage.png" id="11"]
+[ext_resource type="Texture2D" path="res://art/portraits/main-heroes-v1/alwen/pallor.png" id="12"]
+[ext_resource type="Texture2D" path="res://art/portraits/main-heroes-v1/alwen/shadow.png" id="13"]
+[ext_resource type="Texture2D" path="res://art/portraits/main-heroes-v1/alwen/highlight.png" id="14"]
+
+[resource]
+script = ExtResource("script")
+background = ExtResource("background")
+body = ExtResource("0")
+head = ExtResource("1")
+eyes = ExtResource("2")
+mouth = ExtResource("3")
+blink_frames = Array[Texture2D]([ExtResource("4"),ExtResource("5")])
+talk_frames = Array[Texture2D]([ExtResource("6"),ExtResource("7"),ExtResource("8")])
+conditions = {"blood": ExtResource("9"), "dirt": ExtResource("10"), "bandage": ExtResource("11"), "pallor": ExtResource("12")}
+light_shadow = ExtResource("13")
+light_highlight = ExtResource("14")

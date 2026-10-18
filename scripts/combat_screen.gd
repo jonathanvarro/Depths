@@ -18,7 +18,7 @@ const COLOR_DIM_TEXT := Color(0.85, 0.8, 0.7, 0.75)
 const ENEMY_PAUSE := 0.45
 const TAG_HEIGHT := 0.9  # metres above an enemy's feet
 const TAG_ICON := 30
-## Placeholder glyphs (#105) until ChatGPT's versions land.
+## Native 32px glyphs matching the #96 interface art (#105).
 const MARKS := {
 	"rush": preload("res://art/ui/visual105-v1/rush.png"),
 	"recover": preload("res://art/ui/visual105-v1/recover.png"),
@@ -308,12 +308,14 @@ func _process(_delta: float) -> void:
 		return
 	var camera := get_viewport().get_camera_3d()
 	for foe in _tags:
+		if foe.node and foe.node.has_method("set_combat_state"):
+			foe.node.set_combat_state(foe.enraged,foe.shielded)
 		var tag: Button = _tags[foe]
 		tag.visible = foe.is_alive() and foe.node != null and not camera.is_position_behind(foe.node.global_position)
 		if tag.visible:
 			# Back-row tags sit higher, so a row behind doesn't hide the row in front (#72).
 			# Neighbours alternate heights too, so tags don't collide.
-			var lift: float = TAG_HEIGHT + (0.6 if not _state.foe_in_front(foe) else 0.0) + 0.25 * (foe.node.scale.y - 1.0) + 0.35 * (_state.foes.find(foe) % 2)
+			var lift: float = float(foe.node.get_meta("visual_height",TAG_HEIGHT)) + 0.12 + (0.6 if not _state.foe_in_front(foe) else 0.0) + 0.25 * (foe.node.scale.y - 1.0) + 0.35 * (_state.foes.find(foe) % 2)
 			var screen := camera.unproject_position(foe.node.global_position + Vector3(0, lift, 0))
 			# What it does next as an icon (#60, #105); the words on hover.
 			tag.icon = _intent_icon(foe.intent)

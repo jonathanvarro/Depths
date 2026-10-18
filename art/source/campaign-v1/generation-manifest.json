@@ -1,0 +1,297 @@
+{
+  "tool": "image_gen.imagegen (built-in)",
+  "date": "2026-10-18",
+  "issues": [
+    99,
+    103,
+    105,
+    96,
+    50,
+    89
+  ],
+  "entries": [
+    {
+      "name": "queen-poses",
+      "args": {
+        "prompt": "Use case: stylized-concept. Asset: production combat pose sheet. Dark first-person dungeon crawler, restrained menace through silhouette, 128px-native pixel sprite language of the referenced Depths goblin. Broad crisp pixel clusters and broad shadows, 3 shades per material, <=32 shared colours. No painterly texture, hair strands, pores, scattered noise, gradients, cute chibi proportions, glow, floor shadow, text or UI. Every subject is front-facing, full body, all limbs and weapon contained, grounded at the SAME scale with 12% padding in every equal cell. Transparent exterior genuinely alpha0. Warm form shading only subtle; no background lighting. Reference is STYLE/family only. Create an imposing adult female goblin queen, thick powerful build, angular cruel face, pointed ears, jagged bent iron crown, faded oxblood ragged tunic/leather apron and one heavy chipped cleaver. No glamour, no sexuality, no extra ornaments. Square 2x2 equal-cell sheet: TOP LEFT idle, cleaver low; TOP RIGHT attacking, cleaver lifted diagonally ready to descend; BOTTOM LEFT hurt, torso recoils, cleaver drops outward; BOTTOM RIGHT duplicate idle. Consistent crown, anatomy, cleaver, tunic and planted foot position. Separate cells with transparent gutters. Three large readable poses, no visual effects. Queen remains within 128px style, no automatic detail increase for boss.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/enemies/cave-simple-v1/goblin/idle.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-50a20727-92f8-4190-b68b-d61299fd6856.png",
+      "preserved_file": "queen-poses.png"
+    },
+    {
+      "name": "archer-poses",
+      "args": {
+        "prompt": "Use case: stylized-concept. Asset: production combat pose sheet. Dark first-person dungeon crawler, restrained menace through silhouette, 128px-native pixel sprite language of the referenced Depths goblin. Broad crisp pixel clusters and broad shadows, 3 shades per material, <=32 shared colours. No painterly texture, hair strands, pores, scattered noise, gradients, cute chibi proportions, glow, floor shadow, text or UI. Every subject is front-facing, full body, all limbs and weapon contained, grounded at the SAME scale with 12% padding in every equal cell. Transparent exterior genuinely alpha0. Warm form shading only subtle; no background lighting. Reference is STYLE and goblin family. A lean goblin archer, pointed ears, hunched narrow shoulders, dull green skin, patched brown short tunic, plain wooden shortbow and a small quiver. No buckler or blade. Square 2x2 equal-cell sheet, SAME character and scale: TOP LEFT idle with bow lowered, TOP RIGHT drawing bowstring with nocked arrow, BOTTOM LEFT releasing arrow with bow arm extended (no flying projectile or streak), BOTTOM RIGHT hurt/recoiling with bow lowered. Both hands perform anatomically plausible archery. All bow limbs and arms inside cell. No labels.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/enemies/cave-simple-v1/goblin/idle.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-d5cedd0a-aee1-4fb3-bf7a-5b89c8f4cd56.png",
+      "preserved_file": "archer-poses.png"
+    },
+    {
+      "name": "guard-poses",
+      "args": {
+        "prompt": "Use case: stylized-concept. Asset: production combat pose sheet. Dark first-person dungeon crawler, restrained menace through silhouette, 128px-native pixel sprite language of the referenced Depths goblin. Broad crisp pixel clusters and broad shadows, 3 shades per material, <=32 shared colours. No painterly texture, hair strands, pores, scattered noise, gradients, cute chibi proportions, glow, floor shadow, text or UI. Every subject is front-facing, full body, all limbs and weapon contained, grounded at the SAME scale with 12% padding in every equal cell. Transparent exterior genuinely alpha0. Warm form shading only subtle; no background lighting. Reference is STYLE/family. A stocky goblin guard with a tall crude rectangular timber shield strapped with dull iron and one short club. Pointed ears and battered iron cap, ragged ochre brown tunic. Shield is primary silhouette, simple three boards/two bands. Square 2x2 equal-cell sheet SAME equipment, size and floor contact: TOP LEFT idle shield held in front and club low; TOP RIGHT shield-bash attack leaning forward; BOTTOM LEFT hurt recoiling, shield angled aside; BOTTOM RIGHT braced/guarding, lowered stance with shield firmly planted. No round shield, no additional weapons, no VFX or UI.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/enemies/cave-simple-v1/goblin/idle.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-1144bf6c-b3a8-44cc-afaa-1e472d5639a6.png",
+      "preserved_file": "guard-poses.png"
+    },
+    {
+      "name": "corin-base",
+      "args": {
+        "prompt": "Use case: identity-preserve. Asset: 192x192 layered hero portrait master. Reference 1 is the APPROVED CORIN IDENTITY and full-canvas framing, preserve bald head, broad neck/shoulders, battered broad nose, unequal features, stubble, missing front tooth, age and confident simple-minded expression. Reference 2 is NEUTRAL LIGHTING / pixel-treatment style only, not identity. Reauthor this approved brawler as Corin, king's vanguard soldier: worn quilted brown jerkin, scuffed leather shoulder fastening, plain dirty linen at collar. Keep the clothing basic and broadly shaped; no expensive plate, jewellery, insignia or raised weapon. Calm resting expression with small asymmetrical closed-mouth smirk rather than wide laughter; personality confident and quick to anger without caricature. Neutral ambient material shading ONLY; remove warm directional highlights, lamp-coloured planes, strong cast shadows and rim light. Head/shoulders same size and same origin on square canvas, 4px-equivalent safe top/sides. Body/clothing can share a master but skin and eyes/mouth must remain editable by registered overlays. Transparent exterior, no background, no shadow outside silhouette. Subtle game pixel-art face matching Mara at 192px, not smooth painted portrait.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/concepts/portraits/brawler-concept-v1/portrait-192.png",
+          "E:/GitHub/Depths/art/portraits/mara-neutral-v1/preview.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-25cf0fba-c8c6-4884-9e35-76b101a26852.png",
+      "preserved_file": "corin-base.png"
+    },
+    {
+      "name": "alwen-base",
+      "args": {
+        "prompt": "Use case: stylized-concept. Asset: production 192x192 layered portrait master for Sister Alwen, practical vanguard field nurse. References are STYLE, neutral illumination, face scale and canvas framing only; create a DISTINCT woman, not Mara with a scarf. Adult about forty, tired observant eyes, broad straight nose, firm mouth and patient, stubborn composed expression; a little weathering and fatigue rather than glamour. Dark brown hair with a few greys tucked beneath a plain faded grey linen headcloth, practical muted slate-brown outer shawl over worn linen, simple leather medical satchel strap, a small visible rolled bandage/herb pouch near lower shoulder. No jewellery, staff or weapon in frame, no modern medical cross, no luxurious robes. Head and shoulders on the full square canvas, face large and readable at96px, no clipped head or chin, 4px-equivalent top/side padding. Subtle crisp game pixel clusters matching Mara at192px, restrained48-colour feel, no photographic pores or painterly gradients. Neutral ambient material shading only, no specific lamp warmth/rim/cast shadow, transparent outside silhouette with no background.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/portraits/mara-neutral-v1/preview.png",
+          "E:/GitHub/Depths/art/concepts/portraits/brawler-concept-v1/portrait-192.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-6347ab16-4b73-4dc1-8292-d557c7362a3f.png",
+      "preserved_file": "alwen-base.png"
+    },
+    {
+      "name": "fortress-textures",
+      "args": {
+        "prompt": "Use case: stylized-concept. Asset: production texture atlas for Depths dungeon surfaces. Style reference is existing 64px stone tile, not its exact layout. Create a square 2x2 atlas of FOUR EDGE-TO-EDGE, ORTHOGRAPHIC, SEAMLESS surface swatches: TL roughly worked dark grey stone blocks with uneven mortar; TR same stone reinforced by crude dark desaturated timber beams; BL trampled dusty flagstone floor with a few broad seams and stains, no debris objects; BR rough timber-plank ceiling seen straight on, broad joins. Every quadrant is its own seamless repeating material, shared muted charcoal/brown palette, designed for128x128 pixel tiles and crisp broad pixel clusters. Quiet low-contrast value range for a dim goblin fortress, more improvised than castle masonry, no decorative symbols or border, no torch highlights or directional cast shadows. No perspective, lighting effects, edge vignette, transparency, textual labels, scene, doorway or framed panels. Uniform ambient material colours.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/textures/stone-v1/wall_plain.png"
+        ],
+        "transparent_background": false
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-c459ad74-9f6b-471d-9dbd-1482e3ca1759.png",
+      "preserved_file": "fortress-textures.png"
+    },
+    {
+      "name": "outskirts-props",
+      "args": {
+        "prompt": "Use case: stylized-concept. Asset: four registered goblin outskirts world props on transparent square 2x2 sheet. STYLE reference is the Depths128px old-workings sprite, match broad crisp clusters and restrained32-colour material shading. Front-facing grounded camera view, no perspective floor/background/shadow outside silhouette. TL palisade section: five mismatched sharpened stakes lashed to two rough crossbars, no doorway; TR small unoccupied crude watch post: low timber lookout with short ladder, no character; BL upright rock with one broad crude ochre goblin tally/hand daub (abstract mark, not readable writing); BR one stake with a few animal skulls and tied bone trophies, restrained and not graphic. Each prop its own equal cell with12% transparent padding, same useful world-prop pixel scale, full object contained. Sparse wear, mutedgrey/ochrebrown, no magical glows, no readable letters, no loot or interactive UI.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/props/cave-events-v1/old-workings.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-2be92001-eed5-4efe-ad1b-6ebb0ea17ce4.png",
+      "preserved_file": "outskirts-props.png"
+    },
+    {
+      "name": "fortress-doors",
+      "args": {
+        "prompt": "Use case: stylized-concept. Asset: Depths front-facing passage features, square2x2 sheet of registered states. Same128px-native broad pixel style as old-workings reference, restrained32-colour darktimber/iron/grey palette, transparent exterior; gaps between timbers genuinely transparent. TOP LEFT barred fortress gate, full two-post frame with rough closely-spaced verticalstakes and two crossbars; TOP RIGHT EXACT same gate frame and floor contact but crossbars snapped outward and centre cleared for passage, short splinters at posts and a few floor fragments. BOTTOM LEFT queen hall's crude double timber doors closed, two upright posts, two slabs, minimal dulliron straps, no golden ornament; BOTTOM RIGHT SAME door frame and both doors swung open so central passage is clear/transparent. Allfour equal squarecells, front-on orthographic, floorcontact same row, same framewidth andheight withinpair, transparent10%gutters. No room/background/ground plane/people/smoke/glows/text, no perspective roof. Major silhouette/geometry must remain stable acrossstates.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/props/cave-events-v1/old-workings.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-2269db79-2fb5-460e-a449-52e8ff0f86cc.png",
+      "preserved_file": "fortress-doors.png"
+    },
+    {
+      "name": "queen-enraged",
+      "args": {
+        "prompt": "Use case: identity-preserve. Asset: enraged combat pose sheet for the EXACT referenced goblin queen. Reference image is existing4posegrid, preserve her proportions, crown, chipped cleaver, torn oxblood tunic/leather apron and green material colours. Do not enlarge or redesign her, no magic aura or glowing skin. Same square2x2 equalcells and128px broadpixelclusterstyle <=32sharedcolours with normal. TL enraged idle: lowered forward threatening stance, teeth bared, crown slightly crooked; TR enraged attack: cleaver raised/fierce full-body lunging gesture; BL enraged hurt: flinch/recoil but still dangerous; BR duplicate enraged idle. Preserve same cell scale and footcontact, all limbs/weapon insidegutters. Front-facing, fullbody, plain transparent alpha0 background includingaroundfeet, no groundshadow/VFX/text. Rage is readable in posture/face, not red fullsprite tint.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/campaign-v1/queen-poses.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-97d940d8-d803-4742-920c-0549bd34ac29.png",
+      "preserved_file": "queen-enraged.png"
+    },
+    {
+      "name": "throne",
+      "args": {
+        "prompt": "Use case: stylized-concept. Asset: Depths128px world prop, front-facing crude goblin throne, EMPTY. Build a low broad rough timber seat on a small stone plinth, uneven high back of scavenged planks, two dulliron binding straps and a faded oxblood rag thrown overseat, small jagged crude crownshape cut into backtop only ifsubtle. Match queen's primitive materiallanguage inreference1 and oldworkingspixelstyle reference2. Broad crispclusters, sparsewear, simple32colour feel, darktimber/grey/oxblood; no gold, ornate carving or extraweapons. Floororigin belowseat, fullsilhouette containedintransparent square with8%padding, no room, no backdrop, no castgroundshadow, no lightingglow, no text.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/campaign-v1/queen-poses.png",
+          "E:/GitHub/Depths/art/props/cave-events-v1/old-workings.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-9bab5298-7ba9-45a1-b540-3bd472b3093e.png",
+      "preserved_file": "throne.png"
+    },
+    {
+      "name": "victory",
+      "args": {
+        "prompt": "Use case: stylized-concept. Asset: landscape16:9 illustration for Depths site-cleared screen, no textbaked. Pixel-art environment at intendednative640x360, broadclusters/detaillevelof campsite reference1. After goblin queen's defeat, show an EMPTY crude timber throne at farback ofworkedstone/timberhall, fallen bent crude crown and loweredchippedcleaver nearby, brokengateposts framingforeground, cold scatteredashes and a very restrainedshaftofpale exitlight. Nopeople, no heroes predefined, no bodies/orgore, no celebrationfantasyglow. Directionquiet exhaustedrelief afterstress. Mutedcharcoalstone,darktimber,smalloxbloodclothmatchingqueenreference2, slightpaledaylightdistance. Compositioncentre/throne upperhalf, foregroundlowerthirdquietdarkforliveUItextbeneathoroverit. No lettering, frame, buttons, UI, watermark or decorativeborder.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/camp/cave-camp-v1/clearing.png",
+          "E:/GitHub/Depths/art/source/campaign-v1/queen-poses.png"
+        ],
+        "transparent_background": false
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-7f0f7ac4-0839-491a-8b94-d1d8a19294f1.png",
+      "preserved_file": "victory.png"
+    },
+    {
+      "name": "corin-faces",
+      "args": {
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/campaign-v1/corin-reference.png"
+        ],
+        "transparent_background": true,
+        "prompt": "Use case: identity-preserve. Asset: exact registered blink/talk drawings for corin portrait, reference is EDIT TARGET. Create a landscape 3 columns x2 rows sheet of SIX equal square cells. Every cell repeats the EXACT full reference canvas, same head size, position, skin/material colours and neutral shading. Change ONLY facial expression region: row1 left half-closed eyelids, row1 middle eyes fully gently closed, row1 right small speaking mouth opening; row2 left wider speaking mouth, row2 middle rounded 'o' speaking mouth, row2 right unchanged neutral reference. Preserve brows, nose, ears, chin, hair, outfit and every other pixel as closely as possible. No head tilt, gaze shift, resized/cropped face, altered facial identity, hand or props. For corin retain bald head, stubble, battered nose, missing front tooth when mouth opens. Pixel art for192x192 percell at final export, restrained48colourfeel. Fullcanvas reference includes4pxpadding; preserve origin and bounds, no fitting each face independently. Neutral material lighting, no lamp/rim light. Transparent exterior, no labels, borders or gutters displacingcellcontent."
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-d9552ccc-f8fc-4112-aaf7-158c90a34b0d.png",
+      "preserved_file": "corin-faces.png"
+    },
+    {
+      "name": "corin-conditions",
+      "args": {
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/campaign-v1/corin-reference.png"
+        ],
+        "transparent_background": true,
+        "prompt": "Use case: precise-object-edit. Asset: four TRANSPARENT CONDITION OVERLAYS for the exact full192x192 reference portrait of corin. Output square2x2 equal cells, each a full registered portrait canvas but DRAW NO CHARACTER, HAIR, CLOTHES OR SKIN BACKGROUND; ONLY the condition marks. TL blood: a few darkred fresh streaks on visible cheek and collar (restrained, not graphic). TR dirt: sparse darkbrown soot/grime patches on forehead, cheek and shoulder. BL bandage: one small wornlinen dressing strip across visible forehead, placed above brows belowhairline. BR pallor: very faint low-opacity sickly grey-green coverage limited to the visible face/neck skin shape. All marks positioned by the reference's exact head/shoulder coordinates, not centred arbitrary standaloneicons. Transparent alpha0 everywhere other than intendedmark; no ghosted reference, blackbackground, shadows, heads, extra faces or frames. Crisp subtle192px game pixel marks, no antialiased blur except translucentpallor, no lighting."
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-f6976776-b3d0-49b9-a66d-a7ffa6dfdd3b.png",
+      "preserved_file": "corin-conditions.png"
+    },
+    {
+      "name": "corin-lighting",
+      "args": {
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/campaign-v1/corin-reference.png"
+        ],
+        "transparent_background": true,
+        "prompt": "Use case: lighting-weather. Asset: authored monochrome portrait LIGHT COVERAGE MASKS only for the EXACT reference192x192 corin silhouette and outfit. Square2x2 equal full-canvascells: TL shadow coverage, TR highlight coverage, BL duplicate shadow, BR duplicate highlight. Preserve reference origin, head/body silhouette and clothingoutline exactly. Shadows: render inside character silhouette WHITE where unaffected, broad GREY to BLACK coverage on planes turned away from upper-left lantern (rightsidecheek/neck, collarunderside and opposing shoulder); exterior alpha0. Highlights: render inside silhouette BLACK where unaffected, broad subdued GREY to WHITE on upper-left-facing forehead, cheek, shoulder and clothridges; exterior alpha0. These are soft broad art direction masks, not portraits: NO eyes/eyelashes/mouth/nose detail/hairstrands/identity/features/colour/dirt. No light beyondsilhouette orbright backgrounds. Broad simple registered clusters and sparse coverage, will be downsampled to32pxmaskandthen192; coordinated with this exact shawl/collar. Neutral body inreferenceisnottoberedrawn, onlygrayscalecoveragepasses."
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-d1408cf0-35b7-4261-86de-77591c5f4bde.png",
+      "preserved_file": "corin-lighting.png"
+    },
+    {
+      "name": "alwen-faces",
+      "args": {
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/campaign-v1/alwen-reference.png"
+        ],
+        "transparent_background": true,
+        "prompt": "Use case: identity-preserve. Asset: exact registered blink/talk drawings for alwen portrait, reference is EDIT TARGET. Create a landscape 3 columns x2 rows sheet of SIX equal square cells. Every cell repeats the EXACT full reference canvas, same head size, position, skin/material colours and neutral shading. Change ONLY facial expression region: row1 left half-closed eyelids, row1 middle eyes fully gently closed, row1 right small speaking mouth opening; row2 left wider speaking mouth, row2 middle rounded 'o' speaking mouth, row2 right unchanged neutral reference. Preserve brows, nose, ears, chin, hair, outfit and every other pixel as closely as possible. No head tilt, gaze shift, resized/cropped face, altered facial identity, hand or props. For alwen retain headcloth, tired adult face and practical shawl. Pixel art for192x192 percell at final export, restrained48colourfeel. Fullcanvas reference includes4pxpadding; preserve origin and bounds, no fitting each face independently. Neutral material lighting, no lamp/rim light. Transparent exterior, no labels, borders or gutters displacingcellcontent."
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-90095a34-4fb1-4873-b700-50eebd190e54.png",
+      "preserved_file": "alwen-faces.png"
+    },
+    {
+      "name": "alwen-conditions",
+      "args": {
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/campaign-v1/alwen-reference.png"
+        ],
+        "transparent_background": true,
+        "prompt": "Use case: precise-object-edit. Asset: four TRANSPARENT CONDITION OVERLAYS for the exact full192x192 reference portrait of alwen. Output square2x2 equal cells, each a full registered portrait canvas but DRAW NO CHARACTER, HAIR, CLOTHES OR SKIN BACKGROUND; ONLY the condition marks. TL blood: a few darkred fresh streaks on visible cheek and collar (restrained, not graphic). TR dirt: sparse darkbrown soot/grime patches on forehead, cheek and shoulder. BL bandage: one small wornlinen dressing strip across visible forehead, placed above brows belowhairline. BR pallor: very faint low-opacity sickly grey-green coverage limited to the visible face/neck skin shape. All marks positioned by the reference's exact head/shoulder coordinates, not centred arbitrary standaloneicons. Transparent alpha0 everywhere other than intendedmark; no ghosted reference, blackbackground, shadows, heads, extra faces or frames. Crisp subtle192px game pixel marks, no antialiased blur except translucentpallor, no lighting."
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-585c959d-c020-4143-9ffe-1ec918c64ad8.png",
+      "preserved_file": "alwen-conditions.png"
+    },
+    {
+      "name": "alwen-lighting",
+      "args": {
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/campaign-v1/alwen-reference.png"
+        ],
+        "transparent_background": true,
+        "prompt": "Use case: lighting-weather. Asset: authored monochrome portrait LIGHT COVERAGE MASKS only for the EXACT reference192x192 alwen silhouette and outfit. Square2x2 equal full-canvascells: TL shadow coverage, TR highlight coverage, BL duplicate shadow, BR duplicate highlight. Preserve reference origin, head/body silhouette and clothingoutline exactly. Shadows: render inside character silhouette WHITE where unaffected, broad GREY to BLACK coverage on planes turned away from upper-left lantern (rightsidecheek/neck, collarunderside and opposing shoulder); exterior alpha0. Highlights: render inside silhouette BLACK where unaffected, broad subdued GREY to WHITE on upper-left-facing forehead, cheek, shoulder and clothridges; exterior alpha0. These are soft broad art direction masks, not portraits: NO eyes/eyelashes/mouth/nose detail/hairstrands/identity/features/colour/dirt. No light beyondsilhouette orbright backgrounds. Broad simple registered clusters and sparse coverage, will be downsampled to32pxmaskandthen192; coordinated with this exact shawl/collar. Neutral body inreferenceisnottoberedrawn, onlygrayscalecoveragepasses."
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-1768e0f8-80c1-4581-af8d-e84e7aedf8e8.png",
+      "preserved_file": "alwen-lighting.png"
+    },
+    {
+      "name": "broken-short-sword",
+      "args": {
+        "prompt": "Use case: stylized-concept. Asset: Depths64x64 pack weapon icon. Style reference roughplainknife, no extra subject. One BROKEN SHORT SWORD: plain leather-wrappedironhilt,small battered crossguard, blade snapped jaggedly about a hand's width beyondguard, visible broken dull grey metal edge, a little drybrownrust/scuff. Diagonal lowerleft hilt to upperright stub. Broad crisp pixel clusters, roughworkmanship andmattemetal, not shiny treasure. At64px reads as snapped sword, distinctfrom intact knife. Entireiconinsidecentred square with12%transparentpadding; no detachedblade, hand, shadow,background, UI,words or frame, no glow.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/items/inventory-64-v1/plain-knife.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-eef25422-cb2c-452f-9bb4-62002bf928a4.png",
+      "preserved_file": "broken-short-sword.png"
+    },
+    {
+      "name": "cracked-staff",
+      "args": {
+        "prompt": "Use case: stylized-concept. Asset: Depths64x64 pack weapon icon. One cracked WALKING STAFF belonging to fieldnurse: plain long brownstaff, slight naturalcrook attop, a long split alongshaft bound poorly with two narrowdirtyclothstrips. No crystal, magic, carvedface, spearpoint or modernmedicalsign. Diagonal lowerleftto upperright composition, fullstaffcontainedintransparent square with10%padding; darkwood/roughlinen broadnativepixelclusters, restrained32colourmaterialshading matching reference'sroughwoodtreatment. Damage clearlyvisiblenearmidshaft without looking snapped apart. No hand, castshadow,scene, UI or words.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/items/inventory-64-v1/wooden-club.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-eca2bc5b-90af-4b01-9a66-b506d43cc564.png",
+      "preserved_file": "cracked-staff.png"
+    },
+    {
+      "name": "great-rat-poses",
+      "args": {
+        "prompt": "Use case: stylized-concept. Asset: distinct currently-playable greatrat enemy for Depths backlog. Production Depths sprite, front-facing full body, transparentbackground with no groundshadow. Crisp broad pixel clusters for128x128native, atmost32sharedcolours overposes, sparsematerialdetail, restrainedwarmformshading, no painterlynoiseorgradients, no cuteproportions. Square2x2equalcells: TLidle, TRattack, BLhurt, BRduplicateidle. Sameanatomy/scale/equipment andfloorcontact inallcells, allbodyparts inside12%transparentpadding. Use reference rat as family/style. A heavier, broadshouldered greatrat withmatted darkbrownfur, raggedleft ear, thickneck andyellow incisors, broadmusclemass ratherthan inflatedcuteanimal. Preserve lowfourlegbody, twoears, longnakedtail andpointedsnout. Attacklungesforwardmouthopen;hurtflinches sidewaystailretained. A deliberate bulky silhouette ratherthan merely tinting normalrat; no extrafangs, horns, armour, glow or detailedfurstrands.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/enemies/cave-simple-v1/rat/idle.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-8edf296e-0384-42a2-929c-8d684b369b0a.png",
+      "preserved_file": "great-rat-poses.png"
+    },
+    {
+      "name": "webspinner-poses",
+      "args": {
+        "prompt": "Use case: stylized-concept. Asset: distinct currently-playable webspinner spider for Depths backlog. Production Depths sprite, front-facing full body, transparentbackground with no groundshadow. Crisp broad pixel clusters for128x128native, atmost32sharedcolours overposes, sparsematerialdetail, restrainedwarmformshading, no painterlynoiseorgradients, no cuteproportions. Square2x2equalcells: TLidle, TRattack, BLhurt, BRduplicateidle. Sameanatomy/scale/equipment andfloorcontact inallcells, allbodyparts inside12%transparentpadding. Reference is spiderfamily/style. A webspinner withlargepear-shaped dullgrey-brownabdomen andpale bandsnearspinnerets, long slender angularlegs, eightlegs total andlowbody, smallfrontfangs. Visuallydifferent from compactochrecavespider without magic. Idle lowalert stance; attackforelegsraised with spinneret end slightlylifted andsmallhintofsilk atbody (no projectile orworldweboutside silhouette); hurtsplayedflinch. Keepall8legreadableandconsistent, noface, noextraeyeslikegems, nohairtexture.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/enemies/cave-simple-v1/spider/idle.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-e5be5f1f-05c1-46e3-b44d-193ce9481bb9.png",
+      "preserved_file": "webspinner-poses.png"
+    },
+    {
+      "name": "drummer-poses",
+      "args": {
+        "prompt": "Use case: stylized-concept. Asset: distinct currently-playable goblinwar drummer for Depths backlog. Production Depths sprite, front-facing full body, transparentbackground with no groundshadow. Crisp broad pixel clusters for128x128native, atmost32sharedcolours overposes, sparsematerialdetail, restrainedwarmformshading, no painterlynoiseorgradients, no cuteproportions. Square2x2equalcells: TLidle, TRattack, BLhurt, BRduplicateidle. Sameanatomy/scale/equipment andfloorcontact inallcells, allbodyparts inside12%transparentpadding. Reference is goblinidentity/stylefamily. Hunched lean greengoblininraggedmutedbrowncloth, a small crude hide-headedwar drumstrappedtofront atwaist andtwo simplewoodenbeaters. Nosearrowpointyears, barelowerlegs. No shield, sword, bow or queen crown. Idle beaters low oneineachhand; ATTACKmeans beatingdrum, onebeaterraisedandoneoverdrumhead; hurt recoilswithsame strappeddrum. Keepdrumandsinglepairbeaters anatomicallyconsistent, clearbiggesture withoutsoundeffects, musicalnotes or magicrays. Dark seriousprimitivekit.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/enemies/cave-simple-v1/goblin/idle.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-4c8f9e89-b92d-4e74-939c-345f774d77dd.png",
+      "preserved_file": "drummer-poses.png"
+    },
+    {
+      "name": "camp-occupancy",
+      "args": {
+        "prompt": "Use case: stylized-concept. Asset: subtle camp occupancy cues for Depths' existing fixed-view refuge. Reference1 is wholeclearing style/view only, reference2 existingfire/logperspective. Transparent square2x2 sheet of four SEPARATE assets with12%clear gutters. TL anonymous weary traveller seated facingthreequarteraway, hunched in a fadedbrown/charcoalpatched cloak, handsaroundtin cup, bootsvisible, NOchair/logdrawn. TR second seated traveller facingotherway, darkmutedgreyheadcloth andsimpleworncoat, elbows resting on knees, no visible detailedface orweapon, NOchair/logdrawn. BL small humble meal: twowoodenbowls, tornpieceofdarkbread andoneplain tin cup, no pileoffood or table. BR a shortlineon2roughstakesholding two mendeddryingclothpieces, withouttent. Broadcrispnativepixelclusters, planned64px square sprites withfiguresonly~40pxhigh atnative, unobtrusive32colourfeel. Neutralambientmaterialshading, no bakedorangefirelight, no groundshadow/backdrop/glow. Restrainedrefugeunder-resourcedafterdisruptedroyalarrival, no new namedNPC, no crowd/largebuilding/flags/text/UI. Propsmustsitflatandmatchcampsitecameraelevation ratherthanfirstpersonfrontview.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/camp/cave-camp-v1/clearing.png",
+          "E:/GitHub/Depths/art/camp/cave-camp-v1/fire.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-7daa0c5e-8da0-458c-ab4a-bafceac45ade.png",
+      "preserved_file": "camp-occupancy.png"
+    }
+  ],
+  "native_vectors": "Original sources in glyphs/, built by tools/art/build_campaign_glyphs.py",
+  "reference_registration": "Portrait reference PNGs: full master resampled184x184 at(4,4), 48 colour palette; no independent feature fitting."
+}

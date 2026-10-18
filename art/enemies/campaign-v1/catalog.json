@@ -1,0 +1,27 @@
+{
+  "enemies": {
+    "queen": "res://art/enemies/campaign-v1/queen/scene.tscn",
+    "archer": "res://art/enemies/campaign-v1/archer/scene.tscn",
+    "guard": "res://art/enemies/campaign-v1/guard/scene.tscn",
+    "great-rat": "res://art/enemies/campaign-v1/great-rat/scene.tscn",
+    "webspinner": "res://art/enemies/campaign-v1/webspinner/scene.tscn",
+    "drummer": "res://art/enemies/campaign-v1/drummer/scene.tscn"
+  },
+  "props": {
+    "palisade": "res://art/props/fortress-v1/palisade.tscn",
+    "watch-post": "res://art/props/fortress-v1/watch-post.tscn",
+    "goblin-mark": "res://art/props/fortress-v1/goblin-mark.tscn",
+    "trophies": "res://art/props/fortress-v1/trophies.tscn",
+    "throne": "res://art/props/fortress-v1/throne.tscn"
+  },
+  "features": {
+    "gate-barred": "res://art/features/fortress-v1/gate-barred.tscn",
+    "gate-broken": "res://art/features/fortress-v1/gate-broken.tscn",
+    "hall-closed": "res://art/features/fortress-v1/hall-closed.tscn",
+    "hall-open": "res://art/features/fortress-v1/hall-open.tscn"
+  },
+  "items": {
+    "broken-short-sword": "res://art/items/campaign-v1/broken-short-sword.png",
+    "cracked-staff": "res://art/items/campaign-v1/cracked-staff.png"
+  }
+}

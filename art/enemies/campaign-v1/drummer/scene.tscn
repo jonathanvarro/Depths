@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="SpriteFrames" path="res://art/enemies/campaign-v1/drummer/frames.tres" id="frames"]
+[ext_resource type="Script" path="res://art/enemies/campaign-v1/actor.gd" id="script"]
+
+[node name="drummer" type="Node3D"]
+script = ExtResource("script")
+metadata/visual_height = 0.94
+
+[node name="Sprite" type="AnimatedSprite3D" parent="."]
+position = Vector3(0, 0.5264, 0)
+pixel_size = 0.009399999999999999
+billboard = 1
+shaded = true
+texture_filter = 0
+alpha_cut = 1
+alpha_scissor_threshold = 0.5
+sprite_frames = ExtResource("frames")
+animation = &"idle"

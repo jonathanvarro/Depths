@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="SpriteFrames" path="res://art/enemies/campaign-v1/queen/frames.tres" id="frames"]
+[ext_resource type="Script" path="res://art/enemies/campaign-v1/actor.gd" id="script"]
+[ext_resource type="SpriteFrames" path="res://art/enemies/campaign-v1/queen/enraged-frames.tres" id="rage"]
+
+[node name="queen" type="Node3D"]
+script = ExtResource("script")
+metadata/visual_height = 1.42
+enraged_frames = ExtResource("rage")
+
+[node name="Sprite" type="AnimatedSprite3D" parent="."]
+position = Vector3(0, 0.8738461538461537, 0)
+pixel_size = 0.015604395604395603
+billboard = 1
+shaded = true
+texture_filter = 0
+alpha_cut = 1
+alpha_scissor_threshold = 0.5
+sprite_frames = ExtResource("frames")
+animation = &"idle"

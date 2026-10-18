@@ -275,6 +275,7 @@ var _minimap: Control
 var _full_map: Control  # full-screen overlay
 var _full_map_view: Control
 var _full_map_title: Label
+var _full_map_close: Button
 var _debug_label: Label
 var _message_label: Label
 var _message_tween: Tween
@@ -501,13 +502,19 @@ func _build_level() -> void:
 	if _level:
 		_level.queue_free()
 	_level = LevelBuilder.new()
-	_level.build(_map, environment_theme, CELL_SIZE, WALL_HEIGHT)
+	var visual_theme: EnvironmentTheme=environment_theme
+	if _depth==OPENING_DEPTH and _in_opening and _exit_cell!=Vector2i(-1,-1):
+		visual_theme=environment_theme.duplicate()
+		visual_theme.ascent_scene=preload("res://art/features/daylight-exit-v1/scene.tscn")
+	_level.build(_map, visual_theme, CELL_SIZE, WALL_HEIGHT)
 	add_child(_level)
 	_add_room_props()
 	if _depth == OPENING_DEPTH and _in_opening:
 		_add_opening_dressing()
 	elif _depth == OUTSKIRTS_DEPTH and not use_debug_layout:
 		_add_outskirts_dressing()
+	elif _depth==FORTRESS_DEPTH:
+		_add_fortress_dressing()
 
 
 func _make_layout(depth: int) -> PackedStringArray:
@@ -1134,18 +1141,19 @@ func _queen_defeated() -> void:
 	_party.locked = true
 	_results.show_brief("The goblin queen is dead",
 			"Her guards scatter into the dark and the drums fall silent. The fortress is broken. The king's camp will want to hear of this - and pay for it.",
-			"Continue")
+			"Continue",preload("res://art/illustrations/fortress-v1/victory.png"))
 	await _results.continue_pressed
 	_results.visible = false
 	_party.locked = false
 
 
-## Crude stakes and bone piles in the outskirts' rooms (placeholders, #99).
+## Small authored goblin occupation props in the existing outskirts rooms (#99).
 func _add_outskirts_dressing() -> void:
-	var wood := StandardMaterial3D.new()
-	wood.albedo_color = Color(0.32, 0.22, 0.12)
-	var bone := StandardMaterial3D.new()
-	bone.albedo_color = Color(0.78, 0.74, 0.62)
+	var scenes:= [
+		preload("res://art/props/fortress-v1/palisade.tscn"),
+		preload("res://art/props/fortress-v1/watch-post.tscn"),
+		preload("res://art/props/fortress-v1/goblin-mark.tscn"),
+		preload("res://art/props/fortress-v1/trophies.tscn")]
 	var placed := 0
 	for y in _map.height:
 		for x in _map.width:
@@ -1154,25 +1162,26 @@ func _add_outskirts_dressing() -> void:
 				continue
 			if (x * 7 + y * 13) % 11 != 0:
 				continue
-			placed += 1
-			var at := Vector3(x * CELL_SIZE, 0.0, y * CELL_SIZE)
-			for i in 3:  # a short palisade of sharpened stakes
-				var stake := MeshInstance3D.new()
-				var mesh := CylinderMesh.new()
-				mesh.top_radius = 0.0
-				mesh.bottom_radius = 0.07
-				mesh.height = 1.1
-				mesh.material = wood
-				stake.mesh = mesh
-				stake.position = at + Vector3(-0.5 + i * 0.25, 0.55, 0.7)
-				_level.add_child(stake)
-			var pile := MeshInstance3D.new()
-			var bones := BoxMesh.new()
-			bones.size = Vector3(0.35, 0.12, 0.2)
-			bones.material = bone
-			pile.mesh = bones
-			pile.position = at + Vector3(0.4, 0.06, -0.5)
-			_level.add_child(pile)
+			var art: Node3D=scenes[placed%scenes.size()].instantiate()
+			art.position=Vector3(x*CELL_SIZE+.65,0,y*CELL_SIZE+.65)
+			_level.add_child(art)
+			placed+=1
+
+
+## A decorative seat at the back of the existing hall; no new blocker.
+func _add_fortress_dressing() -> void:
+	var hall: Array=_map.marks.get("hall",[])
+	if hall.is_empty():return
+	var seat: Vector2i=hall[0]
+	var best: float=-1.0
+	for cell: Vector2i in hall:
+		if _map.is_wall(cell) or _map.content_at(cell)!=DungeonMap.Content.NONE:continue
+		var distance:=100000.0
+		for gate: Vector2i in _map.marks.get("gates",[]):distance=minf(distance,Vector2(cell).distance_squared_to(Vector2(gate)))
+		if distance>best:best=distance;seat=cell
+	var throne:=preload("res://art/props/fortress-v1/throne.tscn").instantiate()
+	throne.position=Vector3(seat.x*CELL_SIZE,0,seat.y*CELL_SIZE)
+	_level.add_child(throne)
 
 
 ## A foe that joins mid-fight (the queen's guards) appears beside the others.
@@ -1186,7 +1195,7 @@ func _place_extra_foe(foe) -> void:
 	foe.node = node
 
 
-## Until the fortress art lands (#99), new goblins wear a tint and a size.
+## Optional legacy presentation adjustments; new art has its own native scale.
 func _dress_foe(node: Node3D, type: EnemyType) -> void:
 	node.scale *= type.sprite_scale
 	var sprite := node.get_node_or_null("Sprite")
@@ -2342,6 +2351,7 @@ func _set_full_map(open: bool) -> void:
 	_party.locked = open
 	if open:
 		_full_map_title.text = "%s · depth %d of %d" % [environment_theme.display_name, _depth, floors_in_site]
+		_full_map_close.grab_focus.call_deferred()
 
 
 func _show_message(text: String) -> void:
@@ -2442,6 +2452,10 @@ func _build_ui(minimap: Control) -> void:
 	ui.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	canvas.add_child(ui)
 	_safe_area = ui
+	var held_light:=preload("res://scripts/held_light_view.gd").new()
+	held_light.name="HeldLight"
+	ui.add_child(held_light)
+	held_light.setup(self)
 
 	var map_corner := MarginContainer.new()
 	map_corner.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT)
@@ -2595,11 +2609,19 @@ func _build_full_map(ui: CanvasLayer) -> void:
 	column.add_theme_constant_override("separation", 12)
 	margin.add_child(column)
 
+	var header:=HBoxContainer.new()
+	column.add_child(header)
 	_full_map_title = Label.new()
+	_full_map_title.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 	_full_map_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_full_map_title.add_theme_font_size_override("font_size", 28)
 	_full_map_title.add_theme_color_override("font_color", Color("e8d9b0"))
-	column.add_child(_full_map_title)
+	header.add_child(_full_map_title)
+	_full_map_close=Button.new()
+	_full_map_close.text="Close"
+	_full_map_close.custom_minimum_size=Vector2(96,52)
+	_full_map_close.pressed.connect(_set_full_map.bind(false))
+	header.add_child(_full_map_close)
 
 	_full_map_view = Minimap.new()
 	_full_map_view.full_view = true
@@ -2612,12 +2634,11 @@ func _build_full_map(ui: CanvasLayer) -> void:
 	legend.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	legend.add_theme_constant_override("h_separation", 20)
 	column.add_child(legend)
-	var t := environment_theme
-	var c := Minimap.CONTENT_COLORS
 	for entry in [
-			["You", Minimap.COLOR_PARTY], [t.closed_name, Minimap.COLOR_CLOSED_PASSAGE],
-			[t.blocked_name, Minimap.COLOR_BLOCKED_PASSAGE], [t.descent_name + " / " + t.ascent_name, c[6]],
-			["Encounter", c[1]], ["Chest", c[2]], ["Trap", c[3]], ["Strange object", c[4]], ["Rest spot", c[5]]]:
+			["You",Minimap.GLYPHS.party],["Closed",Minimap.GLYPHS.closed],
+			["Blocked",Minimap.GLYPHS.blocked],["Down",Minimap.GLYPHS.down],["Up",Minimap.GLYPHS.up],
+			["Chest",Minimap.GLYPHS.chest],["Searched",Minimap.GLYPHS["chest-empty"]],
+			["Rest",Minimap.GLYPHS.rest],["Danger",Minimap.GLYPHS.danger],["Object",Minimap.GLYPHS.object],["Unexplored edge",Minimap.GLYPHS.frontier]]:
 		legend.add_child(_legend_item(entry[0], entry[1]))
 
 	var hint := Label.new()
@@ -2628,15 +2649,25 @@ func _build_full_map(ui: CanvasLayer) -> void:
 	_full_map.visible = false
 
 
-func _legend_item(text: String, color: Color) -> Control:
+func _legend_item(text: String, texture: Texture2D) -> Control:
 	var row := HBoxContainer.new()
 	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	var swatch := ColorRect.new()
-	swatch.color = color
-	swatch.custom_minimum_size = Vector2(14, 14)
+	var swatch := TextureRect.new()
+	swatch.texture=texture
+	swatch.expand_mode=TextureRect.EXPAND_IGNORE_SIZE
+	swatch.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	swatch.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
+	swatch.custom_minimum_size = Vector2(20, 20)
 	swatch.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	swatch.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	row.add_child(swatch)
+	var mount:=PanelContainer.new()
+	var paper:=StyleBoxFlat.new()
+	paper.bg_color=Color("d6c3a1")
+	paper.set_content_margin_all(2)
+	mount.add_theme_stylebox_override("panel",paper)
+	mount.mouse_filter=Control.MOUSE_FILTER_IGNORE
+	mount.add_child(swatch)
+	row.add_child(mount)
 	var label := Label.new()
 	label.text = text
 	row.add_child(label)

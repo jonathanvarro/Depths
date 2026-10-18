@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="SpriteFrames" path="res://art/enemies/campaign-v1/great-rat/frames.tres" id="frames"]
+[ext_resource type="Script" path="res://art/enemies/campaign-v1/actor.gd" id="script"]
+
+[node name="great-rat" type="Node3D"]
+script = ExtResource("script")
+metadata/visual_height = 0.62
+
+[node name="Sprite" type="AnimatedSprite3D" parent="."]
+position = Vector3(0, 0.3654736842105263, 0)
+pixel_size = 0.006526315789473684
+billboard = 1
+shaded = true
+texture_filter = 0
+alpha_cut = 1
+alpha_scissor_threshold = 0.5
+sprite_frames = ExtResource("frames")
+animation = &"idle"

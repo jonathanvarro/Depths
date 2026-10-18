@@ -60,7 +60,9 @@ func refresh_door(cell: Vector2i) -> void:
 		DungeonMap.Door.BLOCKED:
 			node = _add_feature(_theme.blocked_scene, _make_slab(_theme.blocked_color, 0.5), cell)
 		DungeonMap.Door.OPEN:
-			if _theme.opened_scene:
+			if cell in _map.marks.get("gates",[]) and _theme.gate_opened_scene:
+				node = _add_feature(_theme.gate_opened_scene,null,cell)
+			elif _theme.opened_scene:
 				node = _add_feature(_theme.opened_scene, null, cell)
 	if node:
 		_door_nodes[cell] = node

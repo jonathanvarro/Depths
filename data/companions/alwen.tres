@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="Companion" format=3]
 
 [ext_resource type="Script" path="res://scripts/companion.gd" id="1"]
-[ext_resource type="Texture2D" path="res://art/portraits/recruit-roster-v1/warden-c/preview.png" id="2"]
-[ext_resource type="Resource" path="res://data/portraits/recruit-roster-v1/warden-c.tres" id="3"]
+[ext_resource type="Texture2D" path="res://art/portraits/main-heroes-v1/alwen/preview.png" id="2"]
+[ext_resource type="Resource" path="res://data/portraits/alwen.tres" id="3"]
 [ext_resource type="Resource" path="res://data/dialogue/alwen.tres" id="4"]
 [ext_resource type="Resource" path="res://data/gear/cracked_staff.tres" id="5"]
 

@@ -1,0 +1,15 @@
+{
+  "captures": [
+    "map-complex-1278",
+    "map-complex-1278-larger",
+    "map-sparse-1278",
+    "camp-after-1278",
+    "map-complex-1334",
+    "map-complex-1334-larger",
+    "map-sparse-1334",
+    "camp-after-1334"
+  ],
+  "checks": 22,
+  "failures": [],
+  "fixtures": "Real generated floor2; discovery set explicitly for art review. Physical iPhone untested."
+}

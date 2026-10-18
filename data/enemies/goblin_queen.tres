@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="EnemyType" format=3]
 
 [ext_resource type="Script" path="res://scripts/enemy_type.gd" id="1"]
-[ext_resource type="PackedScene" path="res://art/enemies/cave-simple-v1/goblin/scene.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://art/enemies/campaign-v1/queen/scene.tscn" id="2"]
 [ext_resource type="Resource" path="res://data/injuries/deep_wound.tres" id="3"]
 [ext_resource type="Resource" path="res://data/injuries/limp.tres" id="4"]
 [ext_resource type="Resource" path="res://data/enemies/goblin_guard.tres" id="5"]
@@ -24,6 +24,4 @@ purse = Vector2i(20, 30)
 row = "back"
 reach_back = true
 summons = ExtResource("5")
-tint = Color(1, 0.75, 0.6, 1)
-sprite_scale = 1.5
 threat = 10

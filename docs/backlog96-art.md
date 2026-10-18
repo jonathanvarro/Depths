@@ -1,5 +1,7 @@
 # Backlog #96: cave and interface art
 
+Follow-up 2026-10-18: [campaign art delivery](campaign-art-pass.md) connects the held torch/lantern and opening-only daylight to Main, wires padded-coat and broken starting-weapon icons, adds great-rat/webspinner/drummer sprites, implements the #50 map renderer and adds the #89 occupancy cues. Historical placement limitations below describe the original pass; these visual hooks are now live. Audio and later-site merchant progression remain unfinished.
+
 Delivered 2026-10-18. This visual pass follows the existing small pixel-art library: rough materials, restrained detail, neutral material colours, transparent cutouts, nearest filtering and lossless imports. Generated originals are preserved separately from runtime exports.
 
 ## Connected in the game

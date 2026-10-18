@@ -1,0 +1,25 @@
+{
+  "issues": [
+    105,
+    96
+  ],
+  "canvas": [
+    32,
+    32
+  ],
+  "source": "Original native SVG drawings; same contour and material palette as backlog96-v1.",
+  "runtime": {
+    "rush": "res://art/ui/visual105-v1/rush.png",
+    "recover": "res://art/ui/visual105-v1/recover.png",
+    "beat": "res://art/ui/visual105-v1/beat.png",
+    "webbed": "res://art/ui/visual105-v1/webbed.png",
+    "venom": "res://art/ui/visual105-v1/venom.png",
+    "guard": "res://art/ui/visual105-v1/guard.png",
+    "drummed": "res://art/ui/visual105-v1/drummed.png",
+    "armour": "res://art/ui/visual105-v1/armour.png",
+    "miss": "res://art/ui/visual105-v1/miss.png",
+    "heart": "res://art/ui/visual105-v1/heart.png",
+    "nerves": "res://art/ui/visual105-v1/nerves.png",
+    "rest": "res://art/ui/visual105-v1/rest.png"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "captures": [
+    "camp-before-desktop",
+    "camp-before-recruits-desktop",
+    "camp-before-recovery-desktop",
+    "camp-before-phone",
+    "camp-before-recruits-phone",
+    "camp-before-recovery-phone"
+  ],
+  "evidence": [
+    {
+      "ambience": "res://audio/placeholder/ambience_cave.wav",
+      "ambience_playing": true,
+      "candidate_count": 3,
+      "flame_frame_advanced": true,
+      "flames_playing": true,
+      "view": "desktop"
+    },
+    {
+      "ambience": "res://audio/placeholder/ambience_cave.wav",
+      "ambience_playing": true,
+      "candidate_count": 3,
+      "flame_frame_advanced": true,
+      "flames_playing": true,
+      "view": "phone"
+    }
+  ],
+  "listening_review": false
+}

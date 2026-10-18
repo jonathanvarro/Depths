@@ -28,6 +28,8 @@ extends Resource
 @export var closed_scene: PackedScene
 ## Shown after opening (optional; nothing is shown if empty).
 @export var opened_scene: PackedScene
+## Broken remains for marked fortress gates; ordinary doors use opened_scene.
+@export var gate_opened_scene: PackedScene
 
 @export_group("Blocked passage")
 ## Cannot be passed yet (locked door, rubble, thick roots...).

@@ -1,6 +1,14 @@
 # A map drawn by the party
 
-The owner requested rougher paper and a map that feels hand-drawn by the heroes rather than a perfect visible grid (#34). [Visual study](../art/concepts/map/hero-map-v1.png). This records that direction and proposes its presentation; it does not change the current map renderer or navigation rules.
+The owner requested rougher paper and a map that feels hand-drawn by the heroes rather than a perfect visible grid (#34). [Original visual study](../art/concepts/map/hero-map-v1.png). The drawing layer is now implemented under #50; navigation and discovery rules remain unchanged. The guidance below records the original direction.
+
+## Implemented · 2026-10-18
+
+`scripts/minimap.gd` draws merged explored-floor regions on rough paper, with stable shared-vertex charcoal boundaries, restrained hatching against known walls and unfinished strokes at unknown frontiers. Unknown regions remain blank; changing unseen walls does not alter the sketch. Both views stay north-up and retain exact route centres, facing and discovery/triggered states. Geometry is cached until layout/discovery changes.
+
+The full map adds at most three distinct observed event/way titles in a separate margin, further capped to available height at Larger UI size. Used discoveries show used/searched. Long titles shorten with an ellipsis. The legend uses real text and marker icons on light mounts; the Close button stays within the phone safe area. Existing mouse, touch and map-key/Escape closing remain.
+
+Reviewed sparse/complex maps, all facings, doors/blocked passages, used discoveries and unknown frontiers. Two Godot checkers pass 308 combined art/map checks. See [live preview](../art/concepts/campaign-v1/map-facing-0-phone.png), [complex Larger preview](../art/concepts/campaign-v1/map-complex-1278-larger.png) and [delivery guide](campaign-art-pass.md). Owner review of the new rendered direction is pending; physical iPhone testing remains separate.
 
 ## Appearance
 
