@@ -1,0 +1,26 @@
+{
+  "issue": 108,
+  "kind": "Composition study, not runtime or touch-target validation",
+  "source_canvas": [
+    1672,
+    941
+  ],
+  "source_preserved": true,
+  "source_cropped": false,
+  "native_canvas": [
+    640,
+    360
+  ],
+  "preview_canvas": [
+    1280,
+    720
+  ],
+  "native_palette_limit": 64,
+  "resampling": "nearest",
+  "sha256": {
+    "art/source/camp-organic-v2/master.png": "e1103ba2e687977b708f9dc16f5f2f2bd5d61d59e77b7c85ee94e9a9fb728550",
+    "art/source/camp-organic-v2/generation-manifest.json": "75f2876e29169257ac5959abeeca02c17088d690f71f248be2657102a9d44613",
+    "art/concepts/camp-organic-v2/camp-640.png": "fd478c0bb0597f864fa7902849ef4ac4b5334467f4df0ac942a816a607e5613b",
+    "art/concepts/camp-organic-v2/camp-1280.png": "5acf5b4e0178ec113fab6f1ab3432873397bdfb70a8721b9b3a2f438e6360ed6"
+  }
+}

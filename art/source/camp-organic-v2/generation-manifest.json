@@ -1,0 +1,20 @@
+{
+  "tool": "image_gen.imagegen (built-in)",
+  "date": "2026-10-18",
+  "issue": 108,
+  "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-0f8a641b-7e66-4ff0-8cf5-3a2f9c94c433.png",
+  "preserved_file": "master.png",
+  "args": {
+    "prompt": "Use case: stylized-concept. Asset: ONE cohesive campsite composition concept for Depths, a dark first-person dungeon crawler; this is the fixed 2D camp hub view. Wide 16:9 landscape, compose for 1280x720 and eventual native 640x360. Input 1 is the current Depths camp: preserve its rough pixel-art materials, grey overcast cave/forest mood, humble patched tent/site identities and SIX functional destinations, but COMPLETELY RECOMPOSE their spatial arrangement. Input 2 is the user-provided Darkest Dungeon town: spatial/reference ONLY for connected paths, changing elevation, convincing scale/depth, overlaps and buildings belonging to one place. Do not copy its architecture, town, castle, palette, linework, composition or specific objects. PRIMARY FIX: the camp must be a believable temporary under-resourced royal relief camp settled into the terrain, not six isolated cutouts or equal button cards. Make ONE continuous ground plane with irregular grass margins, stones embedded in soil, natural footpaths, shared perspective, grounded contact shadows, tent stakes/guy ropes and work yards. Forest/rock enclosure shapes where the camp can be built. Sites vary in size and depth and face into usable shared spaces; no rows, columns, equal spacing or detached pedestals. ORGANIZATION: a modest communal recruitment fire slightly right of centre in the lower-middle clearing is the social focus, with sitting logs and a kettle. One worn approach path enters lower-left, curves past a patched red merchant awning/cart at mid-left, opens by the fire, then narrows and climbs through rocky ground to a dark cave mouth high at the back-right. Branches naturally reach each entrance. A pale nurse's tent rests on a dry sheltered shelf at upper-left/mid-distance with cot visible and a small linen line. One small personal tent nestles among roots/rocks in the left foreground, with its own short worn approach and a storage chest. The apprentice smith's crude lean-to sits on the right-hand flank in a small stony work area, with a portable brazier, anvil and very few basic tools. All six are clear silhouettes with visible approaches. Believable gaps let a person pass between guy ropes, entrances, work tools and hearth; overlap only peripheral stones/vegetation for depth, never hide an entrance. A broken wagon wheel and a few moved crates relate to the interrupted/disorganized royal relief effort, not abundant stock. Two tiny anonymous seated backs by the fire can imply waiting recruits; no crowd. Exactly four humble shelters/shops (merchant awning, nurse tent, personal tent, smith lean-to), one fire and one cave destination, no extra huts, village, permanent church, towers or services. Keep all destinations inside the phone-safe central 88% of the picture. Style: match Depths' restrained pixel-art scene, broad readable clusters at 640x360, limited muted grey-brown/olive palette, sparse details, small warm fire accents, no extra realism or brushy painterly finish, no dazzling magic. Shared calm perspective looking slightly down into the whole camp from its approach, irregular natural terraces but no isolated floating platforms. No UI whatsoever: no labels, caption bars, signs with text, hotspot boxes, menu frames, coins, overlays or watermarks. This must read as an inhabited location first.",
+    "referenced_image_paths": [
+      "E:/GitHub/Depths/art/concepts/campaign-v1/camp-after-phone.png",
+      "C:/Users/jonat/AppData/Local/Temp/codex-clipboard-8d8bf958-ff73-4aad-a6f5-ffc95819c632.png"
+    ],
+    "transparent_background": false
+  },
+  "reference_roles": [
+    "Current Depths camp: material/site identity reference; recompose its layout.",
+    "User-provided Darkest Dungeon town: spatial relationships only; not copied into the repository."
+  ],
+  "status": "Composition concept; not a replacement for the layered live camp."
+}
