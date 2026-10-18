@@ -241,6 +241,13 @@ Suggested initial presentation: one campsite screen with a few selectable activi
   - Saved to `user://settings.cfg`.
   - Reachable from the title, the Pack and the camp.
 
+**Decided 2026-10-18 (#95): choosing a starting hero.**
+- **The choice:** three main heroes. **Mara** (now the **rogue**), **Corin** (a crude, quick-tempered soldier of the king's vanguard, the **brawler**) and a new **healer**.
+- **The opening:** all three share the escape, each in their own voice, portrait, starting weapon and one-line backstory.
+- **Unpicked heroes** don't exist in that game.
+- **Proposed main-hero traits** (on #95): Mara's **Keen eyes** (traps show), Corin's **Grudge** (+1 damage against goblins), the healer's **Field medic** (healing items heal more; one dressing-free binding per expedition).
+- **Portraits** are requested in #103.
+
 The suggested retreat flow is to return through the dungeon to its entrance before reaching camp, with discovered shortcuts potentially easing later returns. Travel costs, escape exceptions, refuge services, recovery timing, and prices still need design decisions. Rest spots inside the dungeon remain distinct from the outside refuge.
 
 **Cave-camp staff and equipment (2026-10-16):** the owner wants a blacksmith sent from a nearby village and a nurse for the cave area. The smith is an apprentice, explaining the limited selection of quality items; the starting location should offer very basic equipment. The [updated campsite design](docs/campsite-design.md) proposes a sixth clickable smith area and places the nurse in the treatment tent. Exact stock, repair/crafting mechanics, NPC identities and later-site availability remain open. The original five-area interaction study predates this addition.
