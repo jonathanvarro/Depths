@@ -491,6 +491,20 @@ The interface should preserve the two elements the owner particularly liked: exp
 
 **Title/typography study (2026-10-17, #38):** The owner accepted the [title-screen concept and type roles](docs/title-screen-and-typography.md): Cinzel SemiBold for the title/major headings and Source Sans 3 for actions/body text. The cave background is generated separately; title/menu use actual bundled fonts with licences and reusable Godot resources. Desktop/phone captures and a specimen are provided; Depths remains a working release name. *Implemented (#18):* the title is now the game's first screen; Begin expedition starts the lone-survivor opening, Settings is shown disabled until settings exist, and Quit appears on desktop only. Before every later expedition a preparation screen shows the party's cards and condition, the lantern and the pack, then Enter the cave. These live screens and the isolated #39 Pack preview use the fonts; adoption across other screens remains separate work.
 
+### Show, don't tell — decided 2026-10-18 (#105)
+
+Guidance and results are shown as pictures rather than sentences.
+
+- **Combat:** there is no text log.
+  - A hero's hit draws a slash over the enemy, then a large damage number. Misses say "miss"; glancing blows show the armour mark.
+  - An enemy's hit draws claw marks and a red number on that hero's card.
+  - Webs, venom, guarding, drumming and the like pop as icons.
+- **Enemy tags:** the intention icon, the name and a health bar. The words appear on hover.
+- **Conditions:** webbed, venom and defending sit as icons on the party cards. The selected target shows the chance to hit.
+- **Tutorial cards:** one short line, plus an icon. A pulsing gold ring marks the button to press.
+- **Room events:** the story line stays. What changed shows as icon-and-number chips.
+- **Art:** the new icons are placeholders in `art/ui/visual105-v1/` until ChatGPT replaces them.
+
 ## Reusable environment materials
 
 Use a library of coordinated wall, floor, and ceiling textures applied to reusable geometry. Keep surfaces low-resolution, sparsely detailed, and consistent in colour and intended pixel scale. Combine material families with room shapes, props, and lighting for identity. Stains, cracks, moss, and symbols can later be separate variations or overlays.

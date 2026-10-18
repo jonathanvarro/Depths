@@ -3,6 +3,15 @@ extends RefCounted
 ## No visuals; event_screen.gd shows them and main.gd wires them in.
 
 const EVENTS_DIR := "res://data/events"
+const Glyphs := preload("res://art/ui/backlog96-v1/glyphs.gd")
+## Result chips (#105): what changed, as an icon and a number.
+const CHIP_ICONS := {
+	"health": preload("res://art/ui/visual105-v1/heart.png"),
+	"strain": preload("res://art/ui/visual105-v1/nerves.png"),
+	"rest": preload("res://art/ui/visual105-v1/rest.png"),
+	"gold": preload("res://art/ui/coin-v1/heads.png"),
+	"oil": preload("res://data/items/oil_flask.tres"),
+}
 
 ## Supplies found by any choice, for the expedition record (#17).
 signal loot_found(loot: Dictionary)
@@ -74,14 +83,20 @@ func pick(kind: int, depth: int) -> RoomEvent:
 
 
 ## Applies `choice` for the party. Returns {"text": String,
-## "ambush": Array[EnemyType], "ends": bool}.
+## "ambush": Array[EnemyType], "ends": bool, "story": String, "changes":
+## Array of {"icon": Texture2D, "text": String, "good": bool}} - the story
+## line and what changed as chips (#105); "text" has both in words.
 ## `forced`: which outcome to use (the coin decided), or -1 to pick by weight.
 func resolve(party, choice: EventChoice, forced := -1) -> Dictionary:
 	party.advance_time(choice.time_cost)
 	var outcome: EventOutcome = choice.outcomes[forced] if forced >= 0 and forced < choice.outcomes.size() else _pick_outcome(choice)
-	var result := {"text": "", "ambush": [] as Array[EnemyType], "ends": not choice.investigation}
+	var result := {"text": "", "ambush": [] as Array[EnemyType], "ends": not choice.investigation, "story": "", "changes": []}
 	if outcome == null:
 		return result
+	var changes: Array = result["changes"]
+	var named: bool = outcome.target == EventOutcome.Target.EVERYONE and party.living_members().size() > 1
+	var chip := func(icon: Texture2D, text: String, good: bool, hero) -> void:
+		changes.append({"icon": icon, "text": ("%s %s" % [hero.display_name, text]) if hero and named else text, "good": good})
 	var living: Array[Companion] = party.living_members()
 	var targets: Array[Companion] = []
 	if outcome.target == EventOutcome.Target.EVERYONE:
@@ -93,18 +108,23 @@ func resolve(party, choice: EventChoice, forced := -1) -> Dictionary:
 		if outcome.health != 0:
 			hero.change_health(outcome.health)
 			notes.append("%s %+d health" % [hero.display_name, outcome.health])
+			chip.call(CHIP_ICONS["health"], "%+d" % outcome.health, outcome.health > 0, hero)
 		if outcome.heal_over_time > 0:
 			hero.add_effect_over_time("health", outcome.heal_over_time, 20)
 			notes.append("%s will recover %d" % [hero.display_name, outcome.heal_over_time])
+			chip.call(Glyphs.STATUS["healing"], "+%d" % outcome.heal_over_time, true, hero)
 		if outcome.strain != 0.0:
 			hero.change_strain(outcome.strain)
 			notes.append("%s %s" % [hero.display_name, "steadies" if outcome.strain < 0 else "is shaken"])
+			chip.call(CHIP_ICONS["strain"], "-" if outcome.strain < 0 else "+", outcome.strain < 0, hero)
 		if outcome.injury and hero.add_injury(outcome.injury):
 			notes.append("%s suffers a %s" % [hero.display_name, outcome.injury.display_name.to_lower()])
+			chip.call(Glyphs.STATUS["limp" if outcome.injury.icon_kind == "limp" else "deep-wound"], outcome.injury.display_name, false, hero)
 	if outcome.oil != 0.0:
 		party.supplies.oil = clampf(party.supplies.oil + outcome.oil, 0.0, party.supplies.LANTERN_CAPACITY)
 		party.supplies.changed.emit()
 		notes.append("lantern %s" % ("refilled" if outcome.oil > 0 else "spilled"))
+		chip.call(CHIP_ICONS["oil"].icon, "+" if outcome.oil > 0 else "-", outcome.oil > 0, null)
 	var loot: Dictionary = outcome.loot.duplicate()
 	for i in outcome.treasure:
 		var find: SupplyItem = random_treasure(depth)
@@ -114,19 +134,24 @@ func resolve(party, choice: EventChoice, forced := -1) -> Dictionary:
 	for item in loot:
 		party.supplies.add(item, loot[item])
 		notes.append("found %s ×%d" % [item.display_name.to_lower(), loot[item]])
+		chip.call(item.icon, "×%d" % loot[item] if item.icon else "%s ×%d" % [item.display_name, loot[item]], true, null)
 	if outcome.gold > 0:
 		party.supplies.gold += outcome.gold
 		party.supplies.changed.emit()
 		gold_found.emit(outcome.gold)
 		notes.append("found %d gold" % outcome.gold)
+		chip.call(CHIP_ICONS["gold"], "+%d" % outcome.gold, true, null)
 	for item in outcome.gear:
 		party.supplies.gear.append(item)
 		party.supplies.changed.emit()
 		notes.append("found %s" % item.display_name.to_lower())
+		chip.call(item.icon, "" if item.icon else item.display_name, true, null)
 	if outcome.rest:
 		party.rest()
 		notes.append("rested")
+		chip.call(CHIP_ICONS["rest"], "", true, null)
 	result["ambush"] = outcome.ambush.duplicate()
+	result["story"] = outcome.text
 	var text := outcome.text
 	if not notes.is_empty():
 		text += "\n(" + "; ".join(notes) + ")"

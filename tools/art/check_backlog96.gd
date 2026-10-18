@@ -132,7 +132,7 @@ func _run() -> void:
 			main._combat.run(state,main._cards);await create_timer(0.15).timeout
 			var target: Button=main._combat._tags[state.foes[0]]
 			check(target.icon==Glyphs.intention(state.foes[0].intent),"Actual combat tag uses intention glyph")
-			check(target.text.contains(CS.intent_text(state.foes[0])),"Intention text remains")
+			check(target.tooltip_text.contains(CS.intent_text(state.foes[0])),"Intention words on hover (#105)")
 			await snap("combat-"+enemy_name+"-"+tag)
 			if phone and enemy_name=="goblin":
 				root.content_scale_factor=1.3;await snap("combat-heavy-phone-larger")

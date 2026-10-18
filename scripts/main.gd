@@ -77,6 +77,9 @@ const OPENING_EXIT_AFTER_LAST_FIGHT := 10
 const TORCH := preload("res://data/items/torch.tres")
 const BROKEN_KNIFE := preload("res://data/gear/broken_knife.tres")
 const IRON_SWORD := preload("res://data/gear/iron_sword.tres")
+const HintRing := preload("res://scripts/hint_ring.gd")
+const Glyphs := preload("res://art/ui/backlog96-v1/glyphs.gd")
+const WEBBED_ICON := preload("res://art/ui/visual105-v1/webbed.png")
 const OPENING_BODY_EVENTS := [
 	preload("res://data/events/opening_body_torches.tres"),
 	preload("res://data/events/opening_body_sword.tres"),
@@ -296,6 +299,8 @@ var _hint_box: Control
 var _hint_label: Label
 var _hint_ok: Button
 var _hint_shade: ColorRect
+var _hint_icon: TextureRect  # what the card is about, at a glance (#105)
+var _hint_ring: Panel  # hint_ring.gd: circles the button to press
 var _hint := ""  # which hint is showing
 var _hint_text := ""
 var _hint_inside := ""  # a "pack" card's text once the Pack is open
@@ -676,10 +681,10 @@ func _award_fight_xp(state) -> void:
 			amount = _camp_state.take_floor_xp(_depth, threat * Progression.XP_PER_THREAT)
 	if amount <= 0:
 		if _fight_kind == "":
-			_show_message("The way is clear. Nothing more to learn from these.")
+			_show_message("No XP: nothing more to learn here")
 		return
 	_grant_xp(amount)
-	_show_message("The way is clear. +%d XP" % amount)
+	_show_message("+%d XP" % amount)
 
 
 ## Everyone with the party gets the full award; anyone below the camp's
@@ -706,7 +711,7 @@ func _loot_purse(foe) -> void:
 	_party_state.supplies.gold += coins
 	_party_state.supplies.changed.emit()
 	_expedition.gold_found += coins
-	_show_message("The %s's purse: %d gold." % [foe.name.to_lower(), coins])
+	_show_message("+%d gold" % coins)
 
 
 ## The enemy groups a party of `party_size` can meet at `depth` (#49).
@@ -1400,7 +1405,7 @@ func _on_opening_step(_cell: Vector2i) -> void:
 		_say("bleeding", true, true)
 	# Explain the bleeding once nothing more pressing is on screen.
 	if not _hints_done.has("bleeding") and _said.has("bleeding") and _hint in ["", "turn"]:
-		_show_hint("%s is bleeding - see the red drop on %s card. %s loses health as %s walks, so don't linger: find a way out." % [hero.display_name, hero.pronouns[2], hero.pronouns[0].capitalize(), hero.pronouns[0]], "bleeding", "ok")
+		_show_hint("Bleeding: %s loses health with every step. Find a way out." % hero.display_name, "bleeding", "ok")
 	if _steps_taken == _trip_at:
 		_trip()
 	# Lost and hurrying: now and then at a junction, and once to find the exit.
@@ -1619,7 +1624,7 @@ func _check_chest_in_view() -> void:
 	if not in_view:
 		return
 	_say("chest_seen", true, true)
-	_show_hint("A chest! Face it and walk into it to open it.", "chest_find")
+	_show_hint("A chest! Walk into it to open it.", "chest_find")
 
 
 ## A buried wall cell touching exactly one floor cell: opening it makes a
@@ -1641,7 +1646,7 @@ func _open_opening_chest(cell: Vector2i) -> void:
 	_party.locked = true
 	_chest.open("A battered chest", OPENING_CHEST, _party_state)
 	_say("chest", true)
-	_show_hint("Take what's inside: drag an item into your pack, tap it, or use the arrow button to take everything.", "chest_take")
+	_show_hint("Drag or tap items into your pack.", "chest_take")
 	await _chest.closed
 	_chest.visible = false
 	_party.locked = false
@@ -1878,7 +1883,7 @@ func _on_combat_enemy_acted(_foe, _outcome: Dictionary) -> void:
 	if hero.health <= FORCE_THROW_HEALTH and _combat.only_action == "":
 		_combat.only_action = "throw"
 		_say("forced_throw", true)
-		_show_hint("%s can't take any more. Throw the torch at the spider - it's the only thing it fears." % hero.display_name, "force_throw", "ok")
+		_show_hint("Throw your torch! It's the only thing the spider fears.", "force_throw", "ok")
 
 
 ## Fight 3: her blows glance off; after a swing or two, the throw is taught.
@@ -1891,7 +1896,7 @@ func _on_combat_hero_acted(_hero: Companion, action: Dictionary, outcome: Dictio
 	if outcome.get("glanced", false):
 		_say("spider_glance", true)
 	if _spider_swings >= 1 and not _hints_done.has("throw") and _hint != "throw" and _party_state.supplies.torch_lit():
-		_show_hint("Your blade can't hurt it! Open Item and throw your torch to scare it away.", "throw")
+		_show_hint("Blades glance off. Throw your torch!", "throw")
 
 
 ## Without any light left, she panics: the panic mechanic, explained.
@@ -1901,7 +1906,7 @@ func _start_opening_panic() -> void:
 	hero.strain_locked = false
 	hero.strain = OPENING_PANIC_STRAIN
 	_on_party_state_changed()
-	_show_hint("That was your last torch. In the dark, %s panics: %s hands shake, so %s hits less often and less hard. Light, food and rest calm %s." % [hero.display_name, hero.pronouns[2], hero.pronouns[0], hero.pronouns[1]], "panic", "ok")
+	_show_hint("No light: %s panics and fights worse. Light, food and rest calm %s." % [hero.display_name, hero.pronouns[1]], "panic", "ok")
 	_hints_done["panic_at"] = _steps_taken
 	_say("panic", true)
 
@@ -1924,7 +1929,7 @@ func _refresh_tutorial_hint() -> void:
 	var key := ""
 	if not _opening_body_cells().all(func(c): return _searched_bodies.has(c)):
 		key = "search"
-		text = "Search your fallen companions: face one and walk into them."
+		text = "Walk into your fallen companions to search them."
 	elif hero.weapon != IRON_SWORD and IRON_SWORD in supplies.gear:
 		key = "equip"
 		text = "%s to open your pack." % open_pack
@@ -1932,10 +1937,10 @@ func _refresh_tutorial_hint() -> void:
 	elif _starting_weapon and _starting_weapon in supplies.gear:
 		key = "drop"
 		text = "%s to open your pack." % open_pack
-		inside = "Drop the %s. It's no use now." % _starting_weapon.display_name.to_lower()
+		inside = "Drop the %s." % _starting_weapon.display_name.to_lower()
 	elif not supplies.torch_lit() and not _hints_done.has("light") and supplies.count(TORCH) > 0:
 		key = "light"
-		text = "It's too dark to go on. %s to open your pack." % open_pack
+		text = "Too dark. %s to open your pack." % open_pack
 		inside = "Use a torch to light it."
 	elif _tripped and not supplies.torch_lit() and supplies.count(TORCH) > 0 and not _panic_started:
 		key = "relight"
@@ -1943,8 +1948,8 @@ func _refresh_tutorial_hint() -> void:
 		inside = "Light the spare torch."
 	elif _chest_looted and supplies.count(DRAUGHT) > 0 and hero.pending_effects.is_empty() and not _hints_done.has("draught"):
 		key = "draught"
-		text = "You're badly hurt. %s and drink the restorative draught." % open_pack
-		inside = "Use the restorative draught. It heals slowly as you walk."
+		text = "Badly hurt. %s and drink the draught." % open_pack
+		inside = "Drink the draught: it heals as you walk."
 	if key == "":
 		if _hint in TUTORIAL_STEPS and _hint != "":
 			_finish_hint()
@@ -2015,7 +2020,7 @@ func _update_hints(event: String) -> void:
 				_finish_hint()
 		"fight":
 			if not _hints_done.has("fight"):
-				_show_hint(("Tap" if touch else "Click") + " an enemy's name to target it, then Attack. Under its name is what it will do next: Defend halves the damage you take, and fully blocks a heavy blow.", "fight", "ok")
+				_show_hint(("Tap" if touch else "Click") + " an enemy to target it, then Attack. Its icon shows its next move. Defend softens a blow and stops a heavy one.", "fight", "ok")
 		"fight_over":
 			if _hint in ["fight", "throw", "force_throw"]:
 				_finish_hint()
@@ -2050,6 +2055,9 @@ func _layout_hint() -> void:
 	_hint_label.text = _hint_inside if _hint_mode == "pack" and in_pack and _hint_inside != "" else _hint_text
 	_hint_ok.visible = _hint_mode == "ok"
 	_hint_shade.visible = shown and _hint_mode == "ok"
+	_hint_icon.texture = _hint_icon_for(_hint) if shown else null
+	_hint_icon.visible = _hint_icon.texture != null
+	_hint_ring.finder = _hint_target if shown else Callable()
 	_hint_box.visible = shown
 	_party.paused = shown and (_hint_mode == "ok" or (_hint_mode == "pack" and not in_pack))
 	if not shown:
@@ -2066,6 +2074,32 @@ func _layout_hint() -> void:
 	if not screen_open and _hint_mode == "ok":
 		y = view.y * 0.42 - size.y / 2.0
 	_hint_box.position = Vector2((view.x - size.x) / 2.0, y)
+
+
+## The picture for a tutorial card (#105).
+func _hint_icon_for(key: String) -> Texture2D:
+	match key:
+		"bleeding": return Glyphs.STATUS["bleeding"]
+		"throw", "force_throw", "light", "relight": return TORCH.icon
+		"draught": return DRAUGHT.icon
+		"equip": return IRON_SWORD.icon
+		"drop": return _starting_weapon.icon if _starting_weapon else null
+		"web": return WEBBED_ICON
+		"fight": return Glyphs.intention(CombatState.Intent.ATTACK)
+	return null
+
+
+## The button a tutorial card wants pressed, ringed so the words can be few.
+func _hint_target() -> Control:
+	if _hint in ["throw", "force_throw"] and _in_combat:
+		var name := "Throw torch" if _combat._item_buttons.visible else "Item"
+		for row in [_combat._item_buttons, _combat._action_buttons]:
+			for button in row.get_children():
+				if button.text == name:
+					return button
+	if _hint_mode == "pack" and not _pack.visible:
+		return _pack_button
+	return null
 
 
 func _finish_hint() -> void:
@@ -2163,6 +2197,15 @@ func _build_hint() -> void:
 	column.add_theme_constant_override("separation", 14)
 	column.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_hint_box.add_child(column)
+	_hint_icon = TextureRect.new()
+	_hint_icon.custom_minimum_size = Vector2(56, 56)
+	_hint_icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	_hint_icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	_hint_icon.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	_hint_icon.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	_hint_icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_hint_icon.visible = false
+	column.add_child(_hint_icon)
 	_hint_label = Label.new()
 	_hint_label.add_theme_font_size_override("font_size", 25)
 	_hint_label.add_theme_color_override("font_color", Color("f0e2bb"))
@@ -2180,6 +2223,8 @@ func _build_hint() -> void:
 	column.add_child(_hint_ok)
 	layer.add_child(_hint_box)
 	_hint_box.visible = false
+	_hint_ring = HintRing.new()
+	layer.add_child(_hint_ring)
 
 
 func _update_lantern() -> void:

@@ -39,6 +39,8 @@ var _turn_marker: ColorRect
 var _row_label: Label
 ## Show the hero's combat row (only meaningful with company, #72).
 var show_row := false
+## Fight-only conditions from the combat screen (#105): [texture, tooltip].
+var _marks: Array = []
 
 
 func _init() -> void:
@@ -193,6 +195,25 @@ func refresh() -> void:
 		# Portrait overlays, if the art provides them.
 		_portrait.set_condition(injury.portrait_condition, not is_dressed)
 		_portrait.set_condition(injury.dressed_portrait_condition, is_dressed)
+	for mark in _marks:
+		var icon := TextureRect.new()
+		icon.texture = mark[0]
+		icon.tooltip_text = mark[1]
+		icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		icon.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		icon.custom_minimum_size = Vector2(ICON_SIZE, ICON_SIZE)
+		icon.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		_icons.add_child(icon)
+
+
+## Fight conditions (webbed, venom, defending) shown with the other icons.
+func set_marks(marks: Array) -> void:
+	if marks == _marks:
+		return
+	_marks = marks
+	refresh()
 
 
 func _clear_icons() -> void:

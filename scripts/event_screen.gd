@@ -14,6 +14,7 @@ var _party  # party_state.gd
 var _event: RoomEvent
 var _title: Label
 var _body: Label
+var _chips: HFlowContainer  # what changed, as icons and numbers (#105)
 var _buttons: VBoxContainer
 var _used := {}  # investigations already tried
 
@@ -39,6 +40,10 @@ func _init() -> void:
 	_body.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_body.custom_minimum_size = Vector2(520, 0)
 	column.add_child(_body)
+	_chips = HFlowContainer.new()
+	_chips.add_theme_constant_override("h_separation", 10)
+	_chips.add_theme_constant_override("v_separation", 6)
+	column.add_child(_chips)
 	_buttons = VBoxContainer.new()
 	_buttons.add_theme_constant_override("separation", 8)
 	column.add_child(_buttons)
@@ -56,6 +61,7 @@ func show_event(event: RoomEvent, party_state, rules) -> void:
 	_used.clear()
 	_title.text = event.title
 	_body.text = event.clue
+	_clear_chips()
 	_show_choices()
 	visible = true
 
@@ -87,10 +93,13 @@ func _choose(choice: EventChoice) -> void:
 	var result: Dictionary = _rules.resolve(_party, choice, forced)
 	if choice.investigation and result["ambush"].is_empty():
 		_used[choice] = true
-		_body.text += "\n\n" + result["text"]
+		_body.text += "\n\n" + result["story"]
+		_add_chips(result["changes"])
 		_show_choices()
 		return
-	_body.text = result["text"]
+	_body.text = result["story"]
+	_clear_chips()
+	_add_chips(result["changes"])
 	_clear_buttons()
 	_add_button("Continue", func(): _finish({"left": false, "ambush": result["ambush"]}))
 
@@ -98,6 +107,45 @@ func _choose(choice: EventChoice) -> void:
 func _finish(result: Dictionary) -> void:
 	visible = false
 	finished.emit(result)
+
+
+func _clear_chips() -> void:
+	for child in _chips.get_children():
+		_chips.remove_child(child)
+		child.queue_free()
+
+
+## One chip per change: an icon and its number, green for good, red for bad.
+func _add_chips(changes: Array) -> void:
+	for change in changes:
+		var chip := PanelContainer.new()
+		var style := StyleBoxFlat.new()
+		style.bg_color = Color(0.1, 0.085, 0.07)
+		style.border_color = Color("6fae5a") if change["good"] else Color("b5463a")
+		style.set_border_width_all(1)
+		style.set_corner_radius_all(4)
+		style.set_content_margin_all(4)
+		style.content_margin_left = 6
+		style.content_margin_right = 8
+		chip.add_theme_stylebox_override("panel", style)
+		var row := HBoxContainer.new()
+		row.add_theme_constant_override("separation", 4)
+		chip.add_child(row)
+		if change["icon"]:
+			var icon := TextureRect.new()
+			icon.texture = change["icon"]
+			icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			icon.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+			icon.custom_minimum_size = Vector2(32, 32)
+			row.add_child(icon)
+		if change["text"] != "":
+			var label := _label(22, Color("bfe3a8") if change["good"] else Color("f0a090"))
+			label.text = change["text"]
+			label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+			label.size_flags_vertical = Control.SIZE_FILL
+			row.add_child(label)
+		_chips.add_child(chip)
 
 
 func _clear_buttons() -> void:
