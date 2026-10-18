@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-17 – Claude
+- Did: #41 recruitment. Warden/Scout/Brawler recruits with one strength and one weakness (scripts/recruits.gd), three at the fire with one replaced each day, free hire, dismiss (not Mara), role silhouettes until #82. Heroes recovering with the nurse stay at camp and rejoin; a wipe now continues at camp (fallen and everything carried lost, stash/day/anyone at camp kept). Owner direction: torches first, lantern later as an upgrade: no camp lantern, starting/merchant supplies are 4 torches, one is lit at the cave mouth. Fixed portrait talk/blink tweens touching freed layers when party slots shift.
+- Next: #42 gold (the lantern becomes something to buy); #82 portraits from ChatGPT.
+- Watch out: Whether Mara can die in a wipe is still open (treated like anyone for now). Oil flasks are useless without a lantern; they're no longer handed out. Installed Pillow for the owner's Python (needed for art tools).
+
 ## 2026-10-17 – ChatGPT
 - Did: #84 supplies the first reusable recruit portrait kit: distinct Warden/Scout heads on the same shared linen body/socket and padded jerkin; all layers 192px. data/portraits/recruits-v1 contains neutral animated and static worried/exhausted PortraitSets, each with blood/dirt/bandage/pallor. Optional lit_portrait_view.gd applies separate upper-left shadow/highlight masks above character/conditions for neutral/warm/dim review, without modifying existing PortraitView. catalog.json and docs/recruit-portrait-kit.md provide flat/animated mapping. Nine generated masters, exact prompts, registration boards, two editable ORA stacks, animation/condition boards and hashes preserved. Export/import and all 424 Godot checks pass with 24 desktop/phone captures and 192px/96px views.
 - Next: Claude can assign the catalog's portrait_set plus flat fallback to Warden/Scout candidates during #41, retaining a stable art ID per recruit. Neutral resources animate in the current PortraitView; use the optional adapter only where separate authored light presets are desired. Expand toward #82's full roster after reviewing this shared-template proof.

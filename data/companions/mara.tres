@@ -9,6 +9,7 @@
 [resource]
 script = ExtResource("1")
 display_name = "Mara"
+founder = true
 role = "Guide"
 motive = "Led her companions into the cave. They died there; she has to get out and live with it."
 personality = "Weathered, practical, quiet under pressure."

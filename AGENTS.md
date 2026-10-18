@@ -163,6 +163,11 @@ Templates > Download and Install; already installed on the owner's PC).
   main.gd) and `scripts/camp_screen.gd` (ChatGPT's art/camp/cave-camp-v1
   clearing + layout.json; one activity view per site id). `Injury.recovery_days`.
   `tools/camp_check.gd` drives every place (args: desk|phone, screenshot dir).
+- Recruitment (#41): `scripts/recruits.gd` (roles, traits, names; `make(rng)`),
+  CampState `candidates` / `hire` / `dismiss` / `leave_behind` / `rejoin`;
+  Companion `guard_factor`, `toughness`, `strength`, `weakness`, `founder`.
+  Placeholder portraits: `tools/art/build_recruit_silhouettes.py` (Pillow).
+  `tools/recruit_check.gd` covers the fire, staying behind, a wipe and torches.
 - `scripts/chest_screen.gd` – chest window beside the pack: drag (set_drag_
   forwarding), tap, or the take-all icon button; `took` signal.
 - `scripts/pack_screen.gd` – the Pack screen (Pack button under the minimap,

@@ -190,7 +190,7 @@ void fragment() {
 ## What the survivor carries at the start. Amounts follow ChatGPT's economy
 ## research (docs/starter-cave-economy-research.md); tune freely.
 @export var starting_supplies: Dictionary[SupplyItem, int] = {
-	preload("res://data/items/oil_flask.tres"): 3,
+	preload("res://data/items/torch.tres"): 4,  # torches first; the lantern is an upgrade
 	preload("res://data/items/ration.tres"): 2,
 	preload("res://data/items/restorative_draught.tres"): 1,
 	preload("res://data/items/dressing.tres"): 2,
@@ -306,6 +306,7 @@ func _ready() -> void:
 	_build_environment()
 	_site_seed = floor_seed if floor_seed != 0 else randi()
 	_first_seed = _site_seed
+	_camp_state.start(_first_seed)
 	_camp_state.day_passed.connect(_on_camp_day_passed)
 	print("Floor seed: ", _site_seed)
 	_party_state = PartyState.new()
@@ -580,7 +581,7 @@ func _end_expedition(ending: int) -> void:
 	_party.locked = true  # after closing overlays, which unlock on close
 	var notes := {
 		Expedition.Ending.RETURNED: "You stagger out into the daylight, alone." if _in_opening else "You climb out into the daylight.",
-		Expedition.Ending.WIPED: "No one is left to carry the lantern. Recruiting new heroes at camp comes later; for now the story begins again.",
+		Expedition.Ending.WIPED: "Everyone is lost, and everything they carried. The camp remains: new companions wait by the fire.",
 		Expedition.Ending.REACHED_BOTTOM: "You stood where the others fell, and lived to climb back.",
 	}
 	if _in_opening and ending == Expedition.Ending.RETURNED:
@@ -590,8 +591,7 @@ func _end_expedition(ending: int) -> void:
 	await _results.continue_pressed
 	_results.visible = false
 	if ending == Expedition.Ending.WIPED:
-		get_tree().reload_current_scene()
-		return
+		_party_state.supplies.lose_everything()  # the campaign goes on (#41)
 	_start_new_expedition()
 
 
@@ -605,19 +605,23 @@ func _start_new_expedition() -> void:
 	for hero: Companion in _party_state.members:
 		hero.appearance.clear()  # washed at camp
 		hero.emit_changed()
-	# A lantern from camp, filled (#59: the opening had only torches).
-	if not _party_state.supplies.has_lantern:
-		_party_state.supplies.has_lantern = true
-		_party_state.supplies.oil = Supplies.LANTERN_CAPACITY
-	# At camp the torch is put out; the lantern is her light now.
-	_party_state.supplies.source = Supplies.Source.LANTERN
-	_party_state.supplies.torch_left = 0.0
+	# Torches light the way; a lantern is an upgrade to buy later (owner,
+	# 2026-10-17). A party that has one goes back to it at camp.
+	if _party_state.supplies.has_lantern:
+		_party_state.supplies.source = Supplies.Source.LANTERN
+		_party_state.supplies.torch_left = 0.0
 	_party_state.supplies.changed.emit()
 	_update_lantern()
+	# The fallen are gone; heroes who stayed with the nurse rejoin (#41).
+	for hero: Companion in _party_state.members.duplicate():
+		if not hero.is_alive():
+			_party_state.remove_member(hero)
+	_camp_state.rejoin(_party_state)
 	# The campsite (#40): nothing recovers by itself - rest in your tent.
 	_camp.open(_camp_state, _party_state, starting_supplies)
 	await _camp.cave_chosen
 	_camp.visible = false
+	_camp_state.leave_behind(_party_state)
 	_expedition = Expedition.new(_party_state, _expedition.number + 1)
 	_preparation.show_for(_expedition.number, _party_state)
 	await _preparation.entered
@@ -625,6 +629,14 @@ func _start_new_expedition() -> void:
 	_party.locked = false
 	_go_to_floor(1, Arrival.FROM_ABOVE)
 	_show_message("Day %d. Expedition %d: back into the cave." % [_camp_state.day, _expedition.number])
+	_light_torch_if_dark()
+
+
+## Going in without a light: a torch is lit at the cave mouth, if there is one.
+func _light_torch_if_dark() -> void:
+	var supplies = _party_state.supplies
+	if supplies.source == Supplies.Source.NONE and supplies.count(TORCH) > 0:
+		supplies.light_torch(TORCH)
 
 
 ## A new camp day (#40): the cave re-randomizes - new layouts, fresh enemies.
@@ -1283,7 +1295,9 @@ func _on_step_refused(reason: String) -> void:
 
 func _on_torch_burnt_out() -> void:
 	if not _in_opening:
-		_show_message("Your torch burns out.")
+		var spare := " Light another from the pack." if _party_state.supplies.count(TORCH) > 0 else " That was the last one."
+		_show_message("Your torch burns out." + spare)
+		_say("torch_out")
 
 
 ## Fight 3: the spider bites and bites; once she's nearly down, the game

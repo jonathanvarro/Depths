@@ -113,6 +113,19 @@ func lose_torch() -> void:
 	changed.emit()
 
 
+## A party wipe (#41): everything carried is lost, lantern included.
+func lose_everything() -> void:
+	items.clear()
+	_counts.clear()
+	gear.clear()
+	open_flask = 0.0
+	oil = 0.0
+	has_lantern = false
+	source = Source.NONE
+	torch_left = 0.0
+	changed.emit()
+
+
 func torch_lit() -> bool:
 	return source == Source.TORCH and torch_left > 0.0
 

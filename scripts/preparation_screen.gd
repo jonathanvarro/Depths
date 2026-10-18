@@ -105,7 +105,7 @@ func show_for(expedition_number: int, party) -> void:
 	for child in _supplies.get_children():
 		child.queue_free()
 	var supplies = party.supplies
-	_supplies.add_child(_label("Lantern: %d/%d oil (%s)" % [roundi(supplies.oil), int(Supplies.LANTERN_CAPACITY), Supplies.LIGHT_NAMES[supplies.light_band()].to_lower()], ACTION, 20, TEXT))
+	_supplies.add_child(_label(_light_line(supplies), ACTION, 20, TEXT))
 	for item: SupplyItem in supplies.items:
 		var line := HBoxContainer.new()
 		line.add_theme_constant_override("separation", 10)
@@ -118,9 +118,24 @@ func show_for(expedition_number: int, party) -> void:
 			line.add_child(icon)
 		line.add_child(_label("%s ×%d" % [item.display_name, supplies.count(item)], BODY, 20, TEXT if supplies.count(item) > 0 else MUTED))
 		_supplies.add_child(line)
-	_supplies.add_child(_label("Buying supplies comes with the campsite.", BODY, 16, MUTED))
+	_supplies.add_child(_label("The merchant tops up your pack once a day.", BODY, 16, MUTED))
 	visible = true
 	_enter.grab_focus()
+
+
+## What lights the way: the lantern if the party has one, else torches.
+func _light_line(supplies) -> String:
+	if supplies.has_lantern:
+		return "Lantern: %d/%d oil (%s)" % [roundi(supplies.oil), int(Supplies.LANTERN_CAPACITY), Supplies.LIGHT_NAMES[supplies.light_band()].to_lower()]
+	if supplies.torch_lit():
+		return "Torch: burning, %d time left" % ceili(supplies.torch_left)
+	var torch_count := 0
+	for item: SupplyItem in supplies.items:
+		if item.effect == SupplyItem.Effect.LIGHT_TORCH:
+			torch_count += supplies.count(item)
+	if torch_count > 0:
+		return "Torches: %d (one is lit as you go in)" % torch_count
+	return "No light! Get torches from the merchant."
 
 
 func _label(text: String, font: Font, size: int, color: Color) -> Label:

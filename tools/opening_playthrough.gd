@@ -328,7 +328,7 @@ func _initialize() -> void:
 	await create_timer(0.2).timeout
 	_press(main._preparation, "Enter the cave")
 	await create_timer(0.3).timeout
-	check("camp: lantern, restocked, all three slots, not bleeding", supplies.has_lantern and supplies.source == 1 and supplies.count(main.TORCH) == 0 and supplies.count(load("res://data/items/oil_flask.tres")) == 3 and main._cards.all(func(c): return c.visible) and not hero.bleeding)
+	check("camp: torches not a lantern, restocked, all three slots, not bleeding", not supplies.has_lantern and supplies.torch_lit() and supplies.count(main.TORCH) == 3 and main._cards.all(func(c): return c.visible) and not hero.bleeding)
 	check("keeps the sword", hero.weapon == main.IRON_SWORD)
 	print("fails=", fails)
 	quit()

@@ -29,6 +29,8 @@ func _init() -> void:
 
 ## Builds the layer stack. `fallback` is used when there's no set.
 func show_portrait(layers: PortraitSet, fallback: Texture2D = null) -> void:
+	if _talk_tween:
+		_talk_tween.kill()  # its layers are about to be replaced
 	portrait_set = layers
 	for child in get_children():
 		child.queue_free()
@@ -84,9 +86,9 @@ func blink() -> void:
 	frames.append_array(reverse.slice(1))
 	var tween := create_tween()
 	for frame in frames:
-		tween.tween_callback(func(): _eyes.texture = frame)
+		tween.tween_callback(func(): if is_instance_valid(_eyes): _eyes.texture = frame)
 		tween.tween_interval(BLINK_FRAME_SECONDS)
-	tween.tween_callback(func(): _eyes.texture = portrait_set.eyes)
+	tween.tween_callback(func(): if is_instance_valid(_eyes) and portrait_set: _eyes.texture = portrait_set.eyes)
 
 
 ## Cycles mouth shapes for `seconds`, then returns to the resting mouth.
@@ -98,9 +100,9 @@ func talk(seconds: float) -> void:
 	_talk_tween = create_tween()
 	for i in int(seconds / TALK_FRAME_SECONDS):
 		var frame: Texture2D = portrait_set.talk_frames.pick_random()
-		_talk_tween.tween_callback(func(): _mouth.texture = frame)
+		_talk_tween.tween_callback(func(): if is_instance_valid(_mouth): _mouth.texture = frame)
 		_talk_tween.tween_interval(TALK_FRAME_SECONDS)
-	_talk_tween.tween_callback(func(): _mouth.texture = portrait_set.mouth)
+	_talk_tween.tween_callback(func(): if is_instance_valid(_mouth) and portrait_set: _mouth.texture = portrait_set.mouth)
 
 
 ## A constant small tremor (used while panicking). Needs no extra art.

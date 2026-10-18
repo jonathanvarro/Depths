@@ -41,7 +41,16 @@ const StrainRules := preload("res://scripts/strain.gd")
 @export var weapon: Equipment
 ## Higher acts earlier in a combat round.
 @export var initiative := 10
+## Share of a blow taken while defending (a Warden takes less, #41).
+@export_range(0.0, 1.0) var guard_factor := 0.5
+## Taken off every blow they suffer (negative: hurt more, e.g. a Brawler).
+@export var toughness := 0
 @export_group("")
+## A recruit's strength and weakness, as shown at the fire (#41).
+@export var strength := ""
+@export var weakness := ""
+## The campaign's first hero (Mara): can't be dismissed at camp.
+@export var founder := false
 
 ## 0 (calm) to 100 (panicking). See strain.gd.
 @export_range(0.0, 100.0) var strain := 0.0

@@ -290,9 +290,68 @@ func _tent() -> void:
 		stash.add_child(_label("Empty.", BODY, 12, MUTED))
 
 
+## Recruits by the fire (#41): who they are, their strength and weakness,
+## and Invite; then the party, where recruits can be sent away.
 func _fire() -> void:
-	_text("The fire crackles. No one is sitting with you yet.")
-	_text("New companions may join here once others reach the camp.", MUTED)
+	var full: bool = _party.free_slots() <= 0
+	if _camp.candidates.is_empty():
+		_text("No one is by the fire today.", MUTED)
+	else:
+		_text("Others who made it to the camp sit by the fire. Any of them would join you - for now, for nothing.")
+	for recruit: Companion in _camp.candidates:
+		_recruit_row(recruit, full)
+	_body.add_child(_label("Your party", HEADING, 16, TEXT))
+	if _party.members.is_empty():
+		_text("No one. Invite someone to go down with you.", AMBER)
+	for hero: Companion in _party.members:
+		var row := HBoxContainer.new()
+		row.add_theme_constant_override("separation", 8)
+		var about := _label("%s · %s · %d/%d health" % [hero.display_name, hero.role, hero.health, hero.effective_max_health()], BODY, 12, TEXT)
+		about.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		row.add_child(about)
+		if hero.founder:
+			row.add_child(_label("Stays", ACTION, 12, MUTED))
+		else:
+			var dismiss := _button("Dismiss")
+			dismiss.pressed.connect(func():
+				_camp.dismiss(_party, hero)
+				_refresh_activity())
+			row.add_child(dismiss)
+		_body.add_child(row)
+
+
+func _recruit_row(recruit: Companion, full: bool) -> void:
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 10)
+	var face := TextureRect.new()
+	face.texture = recruit.portrait
+	face.custom_minimum_size = Vector2(56, 56)
+	face.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	face.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	face.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+	row.add_child(face)
+	var info := VBoxContainer.new()
+	info.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	info.add_theme_constant_override("separation", 0)
+	info.add_child(_label("%s · %s" % [recruit.display_name, recruit.role], ACTION, 14, TEXT))
+	var traits := _label("Strength: %s · Weakness: %s" % [recruit.strength, recruit.weakness], BODY, 11, AMBER)
+	traits.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	info.add_child(traits)
+	var damage := str(recruit.attack_min) if recruit.attack_min == recruit.attack_max else "%d-%d" % [recruit.attack_min, recruit.attack_max]
+	var numbers := _label("%d health · %s damage · %d%% to hit · speed %d" % [recruit.max_health, damage, roundi(recruit.accuracy * 100), recruit.initiative], BODY, 11, MUTED)
+	info.add_child(numbers)
+	var about := _label(recruit.personality, BODY, 11, MUTED)
+	about.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	info.add_child(about)
+	row.add_child(info)
+	var invite := _button("Party full" if full else "Invite")
+	invite.disabled = full
+	invite.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+	invite.pressed.connect(func():
+		_camp.hire(_party, recruit)
+		_refresh_activity())
+	row.add_child(invite)
+	_body.add_child(row)
 
 
 func _cave_path() -> void:
@@ -303,9 +362,15 @@ func _cave_path() -> void:
 		else:
 			var hurt := " · untreated: " + ", ".join(PackedStringArray(hero.injuries.map(func(i: Injury): return i.display_name.to_lower()))) if not hero.injuries.is_empty() else ""
 			_text("%s: %d/%d health%s" % [hero.display_name, hero.health, hero.effective_max_health(), hurt])
+	if _party.members.is_empty():
+		_text("Your party is gone. Find companions at the fire.", AMBER)
+		return
 	if going.is_empty():
 		_text("No one is fit to go. Rest in your tent to pass the days.", AMBER)
 		return
+	var staying: int = _party.living_members().size() - going.size()
+	if staying > 0:
+		_text("Anyone still recovering stays with the nurse.", MUTED)
 	var down := _button("Head back down")
 	down.pressed.connect(func(): cave_chosen.emit())
 	_body.add_child(down)

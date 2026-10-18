@@ -272,7 +272,9 @@ func _carry_out(foe: Foe) -> Dictionary:
 		if heavy and is_defending(target):
 			damage = 0  # braced for it: the heavy blow is turned aside
 		elif is_defending(target):
-			damage = maxi(1, damage / 2)
+			damage = maxi(1, floori(damage * target.guard_factor))
+		if damage > 0:
+			damage = maxi(1, damage - target.toughness)
 		if heavy and damage == 0:
 			outcome["text"] = "%s braces and turns aside the %s's heavy blow!" % [target.display_name, foe.name.to_lower()]
 			_check_end()

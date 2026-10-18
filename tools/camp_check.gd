@@ -120,7 +120,7 @@ func _initialize() -> void:
 	check("fit again on day 3", main._camp_state.day == 3 and not main._camp_state.is_recovering(hero))
 
 	await _open("fire")
-	check("the fire waits for recruits", _body_text().contains("No one is sitting"))
+	check("recruits wait by the fire", _body_text().contains("by the fire") and main._camp_state.candidates.size() == 3)
 
 	# Cave path -> preparation -> a new cave.
 	await _open("cave")

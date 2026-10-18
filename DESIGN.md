@@ -133,6 +133,18 @@ Suggested initial presentation: one campsite screen with a few selectable activi
 - **Dismissing:** recruits can be dismissed at camp; Mara can't.
 - **Full wipe:** the heroes and everything they carried are lost. The stash and the camp day remain, and play continues from the fire. Whether Mara can die in a wipe is decided later; for now she's treated like anyone else.
 - **Portraits:** requested from ChatGPT (#82); role silhouettes until then.
+- *Implemented:*
+  - Recruit stats: Warden 24 health, defending takes a quarter of a blow; Scout 16 health, 85% to hit, acts early; Brawler 22 health, 3–5 damage, 65% to hit, takes +1 from every blow.
+  - Traits: Sharp-eyed, Sturdy, Quick and Strong arm, against Clumsy, Frail, Slow and Weak grip (never on the same stat).
+  - Heroes recovering with the nurse stay at camp while the others go down, and they survive a wipe.
+  - After a wipe, the fallen and everything carried are gone; the camp, stash, day and anyone at camp remain.
+
+**Decided 2026-10-17 (owner): torches first; the lantern is an upgrade.**
+- The camp no longer hands out a lantern. Parties light the way with **torches**: the merchant's daily top-up gives 4, and one is lit automatically at the cave mouth if none is burning.
+- When a torch burns out, the message says to light another from the pack.
+- The **lantern** (brighter, so better accuracy and less strain, refilled with oil) becomes something to **buy once there's gold** (#42).
+- The no-opening debug start still begins with a lantern.
+
 
 The suggested retreat flow is to return through the dungeon to its entrance before reaching camp, with discovered shortcuts potentially easing later returns. Travel costs, escape exceptions, refuge services, recovery timing, and prices still need design decisions. Rest spots inside the dungeon remain distinct from the outside refuge.
 
