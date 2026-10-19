@@ -330,7 +330,7 @@
   function render(){
     $('.window').hidden=!state.open;$('.launcher').hidden=state.open;
     $('.page-title').textContent='Equipment & Pack';
-    
+
     const nav=$('.party');nav.replaceChildren();heroes.forEach((h,i)=>{
       const b=document.createElement('button');b.type='button';b.className='portrait-button cursor-interaction';b.dataset.hero=i;b.setAttribute('aria-label','Inspect '+h.name);b.setAttribute('aria-pressed',String(state.hero===i));
       b.hidden=settings.party==='Mara only'&&i>0;

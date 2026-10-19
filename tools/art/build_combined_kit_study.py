@@ -37,6 +37,7 @@ def main():
     template=(OUT/'layout.html').read_text(encoding='utf-8')
     css=(OUT/'combined.css').read_text(encoding='utf-8')
     html=template.replace('@@styles@@',styles+'\n'+css).replace('@@script@@',script)
+    html='\n'.join(line.rstrip() for line in html.splitlines())+'\n'
     assert '@@' not in html
     (OUT/'combined-kit.html').write_text(html,encoding='utf-8',newline='\n')
     manifest={'issue':109,'kind':'Combined browser design review; live game unchanged',
