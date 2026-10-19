@@ -1,8 +1,8 @@
 extends Node
 ## Music (#54): one track per place, crossfading when the place changes, on
 ## the Music bus (Settings volume). Tracks live in audio/music/ under these
-## names (.ogg); a missing track just means silence, so the game runs before
-## the licensed tracks land. Licences: audio/music/README.md.
+## names (.ogg, .mp3 or .wav); a missing track just means silence.
+## Licences and credits: audio/music/README.md.
 
 const FOLDER := "res://audio/music/"
 const PLACES := ["title", "cave", "fortress", "combat", "camp"]
@@ -47,6 +47,10 @@ func play(where: String) -> void:
 	if stream:
 		if stream is AudioStreamOggVorbis or stream is AudioStreamMP3:
 			stream.loop = true
+		elif stream is AudioStreamWAV and stream.loop_mode == AudioStreamWAV.LOOP_DISABLED:
+			stream.loop_mode = AudioStreamWAV.LOOP_FORWARD  # the tracks are loop cuts
+			stream.loop_begin = 0
+			stream.loop_end = int(stream.get_length() * stream.mix_rate)
 		new.stream = stream
 		new.volume_db = -80.0
 		new.play()
