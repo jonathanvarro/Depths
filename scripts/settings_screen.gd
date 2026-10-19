@@ -41,6 +41,7 @@ func open() -> void:
 	var header := HBoxContainer.new()
 	_column.add_child(header)
 	var title := _label("Settings", 30, COLOR_TEXT)
+	title.theme_type_variation = "PageTitle"  # Cinzel heading (#51)
 	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	header.add_child(title)
 	var close := _button("Close")

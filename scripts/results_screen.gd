@@ -36,6 +36,7 @@ func _init() -> void:
 	column.add_theme_constant_override("separation", 14)
 	content.add_child(column)
 	_title = _label(34, COLOR_TEXT)
+	_title.theme_type_variation = "PageTitle"  # Cinzel heading (#51)
 	column.add_child(_title)
 	_subtitle = _label(20, COLOR_DIM_TEXT)
 	_subtitle.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART

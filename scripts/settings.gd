@@ -3,6 +3,7 @@ extends RefCounted
 ## kept in user://settings.cfg and applied at startup. Test runs (started
 ## with --script) use their own file.
 
+const UiTheme := preload("res://scripts/ui_theme.gd")
 const PATH_GAME := "user://settings.cfg"
 const PATH_TEST := "user://test_settings.cfg"
 const BUSES := ["Master", "Music", "Effects"]
@@ -83,3 +84,4 @@ static func apply(tree: SceneTree = null) -> void:
 			DisplayServer.window_set_mode(mode)
 	if tree:
 		tree.root.content_scale_factor = TEXT_SIZES.get(_values()["text_size"], 1.0)
+		UiTheme.install()  # the shared Field kit style (#51)

@@ -269,6 +269,7 @@ func _build() -> void:
 	var header := HBoxContainer.new()
 	column.add_child(header)
 	var title := _label("Pack", 30, COLOR_TEXT)
+	title.theme_type_variation = "PageTitle"  # Cinzel heading (#51)
 	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	header.add_child(title)
 	_time_label = _label("", 20, COLOR_DIM_TEXT)
@@ -321,6 +322,7 @@ func _build() -> void:
 	_light_icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	light_row.add_child(_light_icon)
 	_light_title = _label("Lantern", 22, COLOR_TEXT)
+	_light_title.theme_type_variation = "ItemTitle"  # Cinzel heading (#51)
 	light_row.add_child(_light_title)
 	_lantern_bar = ProgressBar.new()
 	_lantern_bar.max_value = Supplies.LANTERN_CAPACITY
