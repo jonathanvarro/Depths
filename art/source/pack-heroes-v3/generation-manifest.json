@@ -1,0 +1,25 @@
+{
+  "issue": 109,
+  "entries": [
+    {
+      "name": "bag",
+      "args": {
+        "prompt": "Use case: ui-mockup / stylized-concept\nAsset type: empty physical backpack background for the dark fantasy game Depths, later overlaid with real item icons and readable interface text.\nPrimary request: A battered medieval travelling backpack opened completely flat, viewed directly from overhead, isolated on a truly transparent background. Wide landscape composition about 3:2. Clearly one believable soft bag: faded umber leather outer sides, two worn straps and simple iron buckles, open top flap, coarse olive-brown canvas lining, small hand repairs and restrained grime. Main interior is a broad nearly rectangular flat organizer, four columns by three rows of shallow square cloth compartments, evenly aligned with thin low stitched dividers. All twelve compartments EMPTY, same size and unobstructed. Dark inner cloth but enough midtone value to see brown knives, rations and bottles later. Borders/straps stay outside the twelve-cell central interior. Minimal depth so icons will sit naturally on top. Avoid oversized decorative flap or a giant protruding handle. Narrow margin around whole bag; nothing cropped.\nStyle: restrained low resolution painterly pixel art for a serious stressful dungeon crawler; chunky readable shapes, limited earthy palette, distressed canvas and blunt stitching, simplified texture. This is a practical poor traveller's bag, with no gold embellishment or elaborate ornament. Neutral even material lighting; no directional orange firelight or luminous effects. No items, weapons, labels, letters, numbers, runes, coins, hands, people, UI chrome, watermark or background surface. Actual transparent alpha, no checkerboard.",
+        "transparent_background": true
+      },
+      "preserved_file": "bag.png",
+      "tool": "built-in image_gen.imagegen",
+      "generated_path": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-aaca17b6-716d-42fa-bec1-f3c34e5fa126.png"
+    },
+    {
+      "name": "roll",
+      "args": {
+        "prompt": "Use case: stylized-concept\nAsset type: physical equipment display background for dark fantasy game Depths; real item icons and readable interface text will be overlaid later.\nPrimary request: A humble adventurer's rectangular equipment maintenance roll opened flat, viewed directly from overhead, isolated with actual transparent alpha. Wide landscape about 3:2. Frayed coarse olive canvas, battered dark umber leather reinforced corners and edge, two short simple fastening straps and iron buckles, small hand-sewn repairs. Broad QUIET EMPTY central surface, no grid or equipment silhouettes. Thin line of stitching around edge, one subtle vertical fabric fold down centre; restrained wrinkles confined near edges so item art reads clearly. Roll corners slightly irregular, naturally lying flat. Consistent thin margins, entire object visible.\nStyle: restrained low resolution painterly pixel art, chunky readable shapes and limited earthy palette for a serious dark stressful dungeon crawler. Neutral even material lighting, mid-dark cloth, no dramatic firelight. Poor traveller's working kit, no fancy ornament. Match faded leather/olive canvas backpack materials. No weapons, armour, tools, bottles, loose objects, people, hands, symbols, text, labels, UI chrome, runes, glowing effects, or watermark. No background surface, no checkerboard. Actual transparent background.",
+        "transparent_background": true
+      },
+      "preserved_file": "roll.png",
+      "tool": "built-in image_gen.imagegen",
+      "generated_path": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-fec44cec-17a3-412a-a495-05a8f1d18818.png"
+    }
+  ]
+}

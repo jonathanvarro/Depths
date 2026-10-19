@@ -1,5 +1,7 @@
 # Pack slots and the hero window
 
+**2026-10-18 visual follow-up (#109):** the owner requested a more physical backpack. The [leather/canvas Pack and Equipment revision](physical-pack-and-equipment.md) retains this interaction direction, uses current Mara art/role, and limits the equipment study to current Weapon/Body regions. Both versions remain browser studies; the live Godot Pack is unchanged.
+
 Owner direction, 2026-10-17 (#61): revise Pack into **image-only slots**, revealing descriptions on **hover or touch**. Put **Equipment and Status in the same hero window**, open it on Equipment by default, and use **hero portraits to switch the inspected person**. This supersedes the labelled-row layout of the [first Pack study](pack-screen-design.md).
 
 **Follow-up (#62):** The owner liked this revision and requested a simpler [standard exploration HUD](exploration-hud-design.md): backpack icon just right of the portraits, Settings gear, and a source-aware lantern/torch indicator. The Pack/hero composition stays the basis for those windows; a compact light readout is now explicitly wanted outside Pack.

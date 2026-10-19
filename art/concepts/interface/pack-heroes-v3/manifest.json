@@ -1,0 +1,47 @@
+{
+  "issue": 109,
+  "kind": "Isolated browser visual review; live game unchanged",
+  "source_interactions": "art/concepts/interface/pack-heroes-v2/source.fragment.html",
+  "source_interactions_sha256": "18555bbfe8ef07f1bfb0d19bbcb892a5e5a0d94ddab09b132a854fe8da73a386",
+  "exports": [
+    {
+      "source": "art/source/pack-heroes-v3/bag.png",
+      "source_sha256": "aed79f5b1b915dc31e5b1f174888736024b99359690714d81cb06b041e8817ec",
+      "output": "art/concepts/interface/pack-heroes-v3/assets/bag.png",
+      "output_sha256": "c3e63dd5b7d87279b4786f87eb9ca15271f545698e5fdb9461b4a163eebd4e01",
+      "size": [
+        768,
+        512
+      ],
+      "operation": "2x nearest-neighbour reduction; original generated alpha retained"
+    },
+    {
+      "source": "art/source/pack-heroes-v3/roll.png",
+      "source_sha256": "b79ced29281d0a1662979a99b069fe022456b3ff0e82fe723c2fa89599ca1f0a",
+      "output": "art/concepts/interface/pack-heroes-v3/assets/roll.png",
+      "output_sha256": "06e2f4e43f4a7eb326f88c56a70a60870a0962ab8a2a0eb6db5111d00e26c659",
+      "size": [
+        768,
+        512
+      ],
+      "operation": "2x nearest-neighbour reduction; original generated alpha retained"
+    }
+  ],
+  "existing_art": {
+    "mara": "art/portraits/mara-neutral-v1/preview.png",
+    "knife": "art/concepts/interface/pack-heroes-v2/assets/knife.png",
+    "club": "art/concepts/interface/pack-heroes-v2/assets/club.png",
+    "spear": "art/concepts/interface/pack-heroes-v2/assets/spear.png",
+    "staff": "art/concepts/interface/pack-heroes-v2/assets/staff.png",
+    "shield": "art/concepts/interface/pack-heroes-v2/assets/shield.png",
+    "coat": "art/concepts/interface/pack-heroes-v2/assets/coat.png",
+    "oil": "art/concepts/interface/pack-heroes-v2/assets/oil.png",
+    "ration": "art/concepts/interface/pack-heroes-v2/assets/ration.png",
+    "draught": "art/concepts/interface/pack-heroes-v2/assets/draught.png",
+    "dressing": "art/concepts/interface/pack-heroes-v2/assets/dressing.png",
+    "backdrop": "art/concepts/interface/pack-heroes-v2/assets/backdrop.jpg",
+    "headingFont": "art/concepts/interface/pack-heroes-v2/assets/headingFont.woff",
+    "bodyFont": "art/concepts/interface/pack-heroes-v2/assets/bodyFont.woff"
+  },
+  "source_of_truth": "Existing game rules; sample gear/health/light in review are fixtures, not starting grants."
+}
