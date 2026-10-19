@@ -146,6 +146,7 @@ func _on_camp_changed() -> void:
 	_update_site_art()
 	_day_label.text=_status()
 	if _current!="" and not _camp.site_present(_current):_close_activity()
+	elif _current=="supplies":_refresh_activity()
 
 
 func _focus_available(preferred: String) -> void:
@@ -184,6 +185,8 @@ func _add_site(site: Dictionary) -> void:
 	art.animate_lights=animate_lights
 	_canvas.add_child(art)
 	_site_art[id]=art
+	if id=="supplies":
+		art.add_child(load("res://art/camp/arrivals-v1/caravan-unloading.tscn").instantiate())
 	# The whole site and its label are one target (keyboard, mouse, touch).
 	var button := Button.new()
 	button.position = rect.position
@@ -224,12 +227,19 @@ func _highlight_site(id: String) -> void:
 ## Registered site variants follow actual contracts and recovery state.
 func _update_site_art() -> void:
 	if _camp==null:return
+	_save_button.visible=_current==""
+	_settings_button.visible=_current==""
 	_dressing.refresh(_camp)
 	for id in _site_art:
 		var present: bool=_camp.site_present(id)
 		_site_art[id].visible=present
 		_buttons[id].disabled=not present
 		_buttons[id].visible=present and _current==""
+	var unloading: bool=_camp.merchant_unloading
+	_site_art.supplies.get_node("Base").visible=not unloading
+	_site_art.supplies.get_node("Unloading").visible=unloading
+	_site_art.supplies.get_node("Lantern0").visible=not unloading
+	_buttons.supplies.text="Merchant · Unloading" if unloading else _sites.supplies.label
 	var has_contract: bool = _camp.contract.has("enemy") and not _camp.queen_defeated
 	_site_art["cave"].get_node("Notice").visible=has_contract
 	var occupied: bool = _camp.recovering.keys().any(func(hero):return _camp.is_recovering(hero))
@@ -247,8 +257,12 @@ func _fit() -> void:
 	# Keep global/activity controls comfortably tappable at Larger UI scale.
 	var height:=maxf(30.0,44.0/ratio)
 	for button in [_save_button,_settings_button,_back]:
-		if button:button.custom_minimum_size.y=height
+		if button:
+			button.custom_minimum_size.y=height
+			button.size.y=height
 	if _save_button:
+		_save_button.size.x=104
+		_settings_button.size.x=74
 		_save_button.position.y=CANVAS.y-height-4
 		_settings_button.position.y=CANVAS.y-height-4
 	for button in _body.find_children("*","Button",true,false):button.custom_minimum_size.y=height
@@ -323,6 +337,8 @@ func _refresh_activity() -> void:
 		_close_activity()
 		return
 	_update_site_art()
+	if _current=="supplies":
+		_activity_title.text="Merchant caravan · Unloading" if _camp.merchant_unloading else _sites.supplies.label
 	_day_label.text = _status()
 	for child in _body.get_children():
 		_body.remove_child(child)
@@ -339,8 +355,12 @@ func _refresh_activity() -> void:
 
 ## The merchant (#42): buy supplies and the lantern, sell treasure and gear.
 func _merchant() -> void:
-	_text("\"Back again, and still breathing. Good for business. What'll it be?\"")
-	_purse_line()
+	if _camp.merchant_unloading:
+		_text("\"Careful with that chest! The shop opens when I've finished unloading.\"")
+		_text("Caravan unloading. Trading is not available yet.", AMBER)
+	else:
+		_text("\"Back again, and still breathing. Good for business. What'll it be?\"")
+		_purse_line()
 	if _camp.needs_charity(_party):
 		_text("He looks at your empty hands and sighs. \"Two torches. On account.\"", AMBER)
 		var charity := _button("Take two torches")
@@ -348,6 +368,8 @@ func _merchant() -> void:
 			_camp.give_charity(_party)
 			_refresh_activity())
 		_body.add_child(charity)
+	# Existing emergency torches remain possible; these are not a trade.
+	if _camp.merchant_unloading:return
 	_body.add_child(_label("Buy", HEADING, 16, TEXT))
 	if not _party.supplies.has_lantern:
 		_shop_row("Lantern: brighter than a torch, burns oil. Yours to keep.", CampState.LANTERN_PRICE, func(): _camp.buy_lantern(_party), LANTERN_ICON)
@@ -719,6 +741,15 @@ func _button(text: String) -> Button:
 	button.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 	button.add_theme_font_override("font", ACTION)
 	button.add_theme_font_size_override("font_size", 13)
+	# This entire camp uses a scaled 640px canvas. Keep the shared theme's
+	# colours/focus, but do not double-scale its screen-sized 12px padding.
+	for state in ["normal","hover","pressed","disabled"]:
+		var compact:=button.get_theme_stylebox(state).duplicate() as StyleBox
+		compact.content_margin_left=8
+		compact.content_margin_right=8
+		compact.content_margin_top=4
+		compact.content_margin_bottom=4
+		button.add_theme_stylebox_override(state,compact)
 	return button
 
 

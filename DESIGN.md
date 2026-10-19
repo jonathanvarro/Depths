@@ -124,6 +124,8 @@ Suggested initial presentation: one campsite screen with a few selectable activi
 
 **Royal relief camp and art (owner, 2026-10-17, #78/#79):** the king is sending forces against the monsters and goblins, but something disrupted their arrival; they are reaching the area scattered and disorganized. The shortages and apprentice's makeshift tools follow from this. The cause remains open. [Campsite artwork](docs/campsite-art.md) supplies an empty clearing, six independent destination layers and separate merchant/apprentice/nurse portraits, ready to map to #40's six spots. Patched canvas and faded blue/ochre royal cloth are visual proposals; names and final heraldry remain open. The all-sites art review does not decide opening days or stock progression (#79/#80).
 
+**Starting camp and arrivals (owner, 2026-10-18, #80):** your tent, recruitment fire and nurse's tent are established. The merchant caravan is visibly unloading; trading opens on the first expedition return **after the tutorial escape**. The apprentice smith arrives after the first night/rest at camp. These are independent triggers: resting before setting out brings the smith but leaves the merchant unloading. The cave path remains accessible as permanent terrain. New stories use this sequence; established saves retain their services. Existing starting supplies and emergency torches remain available; no new prices, waiting penalties or rest costs. [Arrival art, implementation and review](docs/camp-arrivals.md).
+
 **Decided 2026-10-17 (#41): recruitment at the fire.**
 - **Roles:**
   - **Warden:** protector; tough, good at Defend, draws attacks.

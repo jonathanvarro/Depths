@@ -14,7 +14,7 @@ Sources retain neutral overcast material shading. Dynamic light is supplied sepa
 
 `CampState.site_presence` stores optional story-controlled flags. `site_present(id)` reads them; `set_site_present(id, present)` updates them and emits the existing changed signal. Site art, lamps, labels and hit targets change together. Removing an active site closes its activity, and hidden/unknown services reject direct opening. Back does not revive a missing target.
 
-**No arrival schedule was invented.** #80 still needs its story decisions. Missing keys default to present, preserving current availability and old saves. Existing save serialization already stores this dictionary; there are no new save-file fields outside the camp object and no version bump. Resource stocks, prices, day progression, treatment and recruitment rules are unchanged.
+**Arrival follow-up (#80):** the owner has now chosen [the initial camp and two opening triggers](camp-arrivals.md). Your tent/fire/nurse are established, the visible caravan is unloading with trading closed, and the smith has not arrived. The first post-tutorial expedition return opens trading; the first camp night brings the smith. Missing presence keys still default to present, preserving established saves. Existing save serialization stores the arrival state inside the camp object, with no version bump. Prices, day progression, treatment and recruitment rules are unchanged.
 
 Story code can set a site's flag when the story requires it, for example:
 
@@ -24,7 +24,7 @@ camp.set_site_present("smith", false)
 camp.set_site_present("smith", true)
 ```
 
-The partial-camp review image explicitly selects rest/fire/cave only. It demonstrates compositing and availability; it is not the new day-one schedule.
+The earlier partial-camp review image explicitly selects rest/fire/cave only. It remains a compositing fixture; use the [new initial-state capture](../art/concepts/camp-arrivals-v1/starting-1278.png) for the owner's actual day-one composition. The unloading wagon is a separate child layer; the original established stall remains intact for the transition.
 
 ## Animation and interaction
 

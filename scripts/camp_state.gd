@@ -50,8 +50,13 @@ const CANDIDATES := 3
 
 var day := 1
 ## Story-controlled physical sites (#108). Missing keys preserve today's
-## availability and old saves; arrival timing remains a separate decision (#80).
+## availability and old saves. New story starts opt into #80's arrival sequence.
 var site_presence: Dictionary = {}
+## The caravan can be physically present before its shop opens (#80).
+## False by default preserves established camps in existing saves.
+var merchant_unloading := false
+## Zero means no pending arrival (including older saves).
+var smith_arrival_day := 0
 const SITE_IDS := ["supplies", "treatment", "rest", "smith", "fire", "cave"]
 ## Items and gear left in the tent; they survive a party wipe.
 var stash = Supplies.new()
@@ -96,6 +101,30 @@ func set_site_present(id: String, present: bool) -> void:
 		return
 	site_presence[id] = present
 	changed.emit()
+
+
+## Owner's starting composition; story entry calls this once, not on rest.
+func begin_arrivals() -> void:
+	site_presence = {"smith": false}
+	merchant_unloading = true
+	smith_arrival_day = day + 1
+	changed.emit()
+
+
+func set_merchant_unloading(unloading: bool) -> void:
+	if merchant_unloading == unloading:
+		return
+	merchant_unloading = unloading
+	changed.emit()
+
+
+func can_trade() -> bool:
+	return site_present("supplies") and not merchant_unloading
+
+
+## The tutorial escape does not count; Main calls this for later returns.
+func expedition_returned() -> void:
+	set_merchant_unloading(false)
 
 
 ## Seeds the camp and puts the first recruits by the fire.
@@ -167,6 +196,9 @@ func rest(party) -> void:
 		hero.change_strain(-hero.strain)
 		hero.change_health(hero.effective_max_health())
 	day += 1
+	if smith_arrival_day > 0 and day >= smith_arrival_day:
+		site_presence["smith"] = true
+		smith_arrival_day = 0
 	explored_today = false
 	if not candidates.is_empty():
 		candidates.pop_front()  # the longest-waiting moves on
@@ -249,7 +281,7 @@ func can_afford(party, price: int) -> bool:
 
 
 func buy(party, item: SupplyItem) -> bool:
-	if not can_afford(party, item.price):
+	if not can_trade() or not can_afford(party, item.price):
 		return false
 	party.supplies.gold -= item.price
 	party.supplies.add(item)
@@ -259,7 +291,7 @@ func buy(party, item: SupplyItem) -> bool:
 
 func buy_lantern(party) -> bool:
 	var supplies = party.supplies
-	if supplies.has_lantern or not can_afford(party, LANTERN_PRICE):
+	if not can_trade() or supplies.has_lantern or not can_afford(party, LANTERN_PRICE):
 		return false
 	supplies.gold -= LANTERN_PRICE
 	supplies.has_lantern = true
@@ -278,7 +310,7 @@ static func sale_price(item) -> int:
 
 
 func sell(party, item: SupplyItem) -> bool:
-	if item.effect != SupplyItem.Effect.TREASURE or not party.supplies.take(item):
+	if not can_trade() or item.effect != SupplyItem.Effect.TREASURE or not party.supplies.take(item):
 		return false
 	party.supplies.gold += sale_price(item)
 	party.supplies.changed.emit()
@@ -287,7 +319,7 @@ func sell(party, item: SupplyItem) -> bool:
 
 
 func sell_gear(party, item: Equipment) -> bool:
-	if item not in party.supplies.gear:
+	if not can_trade() or item not in party.supplies.gear:
 		return false
 	party.supplies.gear.erase(item)
 	party.supplies.gold += sale_price(item)
@@ -298,7 +330,7 @@ func sell_gear(party, item: Equipment) -> bool:
 
 ## The smith's stock (#42): plain gear into the pack, to equip there.
 func buy_gear(party, item: Equipment) -> bool:
-	if not can_afford(party, item.price):
+	if not site_present("smith") or not can_afford(party, item.price):
 		return false
 	party.supplies.gold -= item.price
 	party.supplies.gear.append(item)

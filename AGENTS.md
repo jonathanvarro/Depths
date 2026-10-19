@@ -163,7 +163,9 @@ Templates > Download and Install; already installed on the owner's PC).
   main.gd) and `scripts/camp_screen.gd` (`art/camp/organic-v3` terrain,
   independent site scenes/local lights + layout.json; one activity per site).
   CampState `site_presence` / `set_site_present()` controls availability;
-  absent keys default present until #80's arrival rules are decided.
+  absent keys default present for older saves. New story starts use #80's
+  `begin_arrivals()`: unloading merchant opens after the first post-tutorial
+  expedition return; smith appears after the first camp rest.
   `Injury.recovery_days`.
   `tools/camp_check.gd` drives every place (args: desk|phone, screenshot dir).
 - Recruitment (#41): `scripts/recruits.gd` (roles, traits, names; `make(rng)`),

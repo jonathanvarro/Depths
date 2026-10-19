@@ -405,6 +405,10 @@ func _ready() -> void:
 	_camp_state.changed.connect(_save_soon)
 	var saved: Dictionary = SaveGame.read() if SaveGame.continue_requested() else {}
 	SaveGame.set_continue_requested(false)
+	# #80: new story starts (or a restarted tutorial) reach a partial camp.
+	# Existing campaigns and explicit debug/test starts keep their saved services.
+	if play_opening and not use_debug_layout and (saved.is_empty() or saved.get("opening", false)):
+		_camp_state.begin_arrivals()
 	# The survivor wakes on the deepest floor and climbs out (#8). The debug
 	# layout is a single hand-drawn floor, so it starts there instead.
 	if not saved.is_empty() and not saved.get("opening", false):
@@ -774,10 +778,13 @@ func _end_expedition(ending: int) -> void:
 ## Placeholder camp stop, then back into the cave from the top. The cave
 ## remembers what was explored, opened and cleared.
 func _start_new_expedition() -> void:
+	var returned_from_expedition := not _in_opening
 	if _in_opening:
 		for item in starting_supplies:  # restocked at camp (#69)
 			_party_state.supplies.add(item, starting_supplies[item])
 	_end_opening()
+	if returned_from_expedition:
+		_camp_state.expedition_returned()
 	for hero: Companion in _party_state.members:
 		hero.appearance.clear()  # washed at camp
 		hero.emit_changed()

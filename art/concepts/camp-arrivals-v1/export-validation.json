@@ -1,0 +1,32 @@
+{
+  "issue": 80,
+  "bounds": [
+    53,
+    95,
+    245,
+    116
+  ],
+  "registration": {
+    "source_bounds": [
+      116,
+      91,
+      1799,
+      765
+    ],
+    "scale": 0.14557338086749852,
+    "position": [
+      51,
+      111
+    ],
+    "canvas": [
+      249,
+      102
+    ]
+  },
+  "master_sha256": "84ca59ea32c6180c7a367ff39ceda8276831fd8fa71d6c288820b3d4b48b77c4",
+  "export_sha256": "3697ec1b744fe210c56c71c79f69628934d4e66c4a5006aa7874d2884cd8b55d",
+  "palette": "Existing organic-v3 terrain colours only; no original artwork changed",
+  "alpha": "Binary, threshold 224",
+  "new_game": "tent/fire/nurse, unloading merchant, no smith; cave remains",
+  "triggers": "First post-tutorial return opens trading; first rest brings smith"
+}

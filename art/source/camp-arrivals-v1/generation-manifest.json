@@ -1,0 +1,15 @@
+{
+  "issue": 80,
+  "tool": "built-in image_gen.imagegen",
+  "args": {
+    "prompt": "Use case: precise-object-edit\nAsset type: transparent pixel-art camp site variant for Depths, the merchant caravan just arrived and unloading; must composite into the same camp.\nInput images: Image 1 is the current merchant stall cutout, the edit target and material/identity reference. Image 2 is the full approved camp, a perspective/scale/material reference only; do not reproduce its ground or other sites.\nPrimary request: Replace the established merchant market setup with its earlier UNLOADING state. One weather-beaten wooden covered wagon, still laden with tied sacks and a large closed chest; rear tailboard lowered as an unloading ramp, two plain supply crates recently placed beside it, loose rolled canvas awning and tent poles still bundled against the wagon. The faded muted red patched cloth from the reference is now the wagon's small canvas cover or rolled awning. No erected stall/tent, no shop counter, no goods laid out for sale. The arrangement should clearly read as newly arrived supplies awaiting setup, not an abandoned wreck. Show entire wagon with visible wheel and grounded crate bases. Slightly elevated three-quarter view consistent with the camp's merchant site. Wide low silhouette, about twice as wide as high. Use a few large readable shapes; it will occupy about 245 by 116 game pixels. Keep the cart/crates grouped within one tight cutout, with grounded contact shading on the objects only.\nStyle: match Depths' subdued serious dark medieval pixel art, coarse simplified wooden planks, worn umber/olive cloth, rusty iron, sparse chunky pixels and restrained texture. Neutral overcast material shading, no orange lighting baked in, no glowing lantern or painted ground light.\nConstraints: genuinely transparent background, all sky/terrain/trees/floors removed, no landscape patch or rectangular backdrop; no checkerboard. No people, animals, additional vehicles or buildings. No UI, words, logos or watermark. Preserve the humble poorly resourced camp character. One isolated unloading wagon arrangement, not a contact sheet or multi-state collection.",
+    "referenced_image_paths": [
+      "E:/GitHub/Depths/art/source/camp-layered-v3/supplies.png",
+      "E:/GitHub/Depths/art/concepts/camp-layered-v3/all-sites-1278.png"
+    ],
+    "transparent_background": true
+  },
+  "preserved_file": "caravan-unloading.png",
+  "generated_path": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-ab470c1d-b499-4eb5-8ca6-2069bff38633.png",
+  "role": "Earlier packed merchant state; established original kept intact."
+}
