@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="Script" path="res://art/camp/organic-v3/site.gd" id="script"]
+[ext_resource type="Texture2D" path="res://art/camp/organic-v3/treatment.png" id="texture"]
+[ext_resource type="Texture2D" path="res://art/camp/organic-v3/occupied-cot.png" id="cot"]
+
+[node name="treatment" type="Node2D"]
+script = ExtResource("script")
+texture_filter = 1
+[node name="Base" type="Sprite2D" parent="."]
+position = Vector2(187, 46)
+centered = false
+texture = ExtResource("texture")
+light_mask = 2
+[node name="OccupiedCot" type="Sprite2D" parent="."]
+position = Vector2(245, 84)
+centered = false
+texture = ExtResource("cot")
+light_mask = 2
+visible = false

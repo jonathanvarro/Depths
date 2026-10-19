@@ -1,0 +1,104 @@
+{
+  "tool": "image_gen.imagegen (built-in)",
+  "date": "2026-10-18",
+  "issue": 108,
+  "entries": [
+    {
+      "name": "terrain",
+      "args": {
+        "prompt": "Use case: precise-object-edit. Production clean terrain plate for the approved Depths campsite in input 1. EXACT same wide 16:9 landscape framing, perspective, landforms, hillside shelves, path network, distant forest/mountains, foreground roots, grey overcast palette and native pixel-art language. Remove ALL man-made camp sites and their equipment: merchant awning/banner/cart/counter/goods, pale nurse tent/cot/linen line, personal tent/chest, smith lean-to/tools/brazier, hearth/rack/kettle/sitting logs/firewood, both people, EVERY lantern, rope/pole/post, paper notice, crate, barrel, stool or camp item. Reconstruct only the natural stone, sparse vegetation and worn dirt beneath them. No obvious tent-shaped empty silhouettes or cut-and-paste rectangles: clean coherent soil and natural rock with paths leading to usable clear patches. Keep the dark cave mouth and its geological surround as permanent landscape, but remove all human fittings around it. Keep exact recognizable cliff shapes/path connections in the rest of the picture. Remove ALL orange light pools and glow: neutral cool overcast illumination everywhere, no fires/embers. This is one continuous landscape on which the sites can be placed independently. Do not add shelters, buildings, ruins, people or interactables. No text, symbols or UI. Complete opaque image, wide landscape, broad pixel clusters suitable for native 640x360; no increased photorealism or painterly texture.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/camp-organic-v2/master.png"
+        ],
+        "transparent_background": false
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-af33ddf7-6061-4199-ad52-57ca74dcc1f3.png",
+      "preserved_file": "terrain.png"
+    },
+    {
+      "name": "supplies",
+      "args": {
+        "prompt": "Use case: background-extraction / precise-object-edit. Production layer for the APPROVED Depths camp composition in input 1. Preserve the exact depicted subject design, viewpoint and worn materials. This is restrained pixel art for a 640x360 native game view, broad readable clusters, limited muted grey/brown/olive palette, no added detail. NO text, UI, labels, watermark, people or new items. Lighting is NEUTRAL overcast: turn every flame, ember, brazier and lantern OFF, no warm glow or cast light baked into this layer. Isolate the complete specified site only on genuine alpha0 transparency, with all its poles/stakes/ropes/hardware intact and at least 8% padding. Do NOT include a rectangular fragment of scenery, horizon, ground plane, plants, cliffs, soil, detached rocks or adjacent sites. Contact shadows subtle and small. Keep the same 3/4 perspective as the input; do not invent a new front view. The patched RED MERCHANT AWNING in the LEFT MIDDLE, including its taller red cloth banner, counter, sparse goods, sacks/barrels/crates at its feet and the adjacent wagon/cart wheel. No personal foreground tent, nurse tent, hearth or smith. The hanging merchant lantern has dark unlit amber glass.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/camp-organic-v2/master.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-7c684863-65a2-46f6-86ce-b0527ac94225.png",
+      "preserved_file": "supplies.png"
+    },
+    {
+      "name": "treatment",
+      "args": {
+        "prompt": "Use case: background-extraction / precise-object-edit. Production layer for the APPROVED Depths camp composition in input 1. Preserve the exact depicted subject design, viewpoint and worn materials. This is restrained pixel art for a 640x360 native game view, broad readable clusters, limited muted grey/brown/olive palette, no added detail. NO text, UI, labels, watermark, people or new items. Lighting is NEUTRAL overcast: turn every flame, ember, brazier and lantern OFF, no warm glow or cast light baked into this layer. Isolate the complete specified site only on genuine alpha0 transparency, with all its poles/stakes/ropes/hardware intact and at least 8% padding. Do NOT include a rectangular fragment of scenery, horizon, ground plane, plants, cliffs, soil, detached rocks or adjacent sites. Contact shadows subtle and small. Keep the same 3/4 perspective as the input; do not invent a new front view. The PALE NURSE TENT on the UPPER LEFT shelf, including tent, ropes/stakes, EMPTY visible cot, basin and linen line to its right. No ground/cliff below the tent. No patient or nurse. Preserve the white canvas and blue patch. No hanging lantern/glow.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/camp-organic-v2/master.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-96e7fc51-a445-4d87-9bd6-dbb66608357a.png",
+      "preserved_file": "treatment.png"
+    },
+    {
+      "name": "rest",
+      "args": {
+        "prompt": "Use case: background-extraction / precise-object-edit. Production layer for the APPROVED Depths camp composition in input 1. Preserve the exact depicted subject design, viewpoint and worn materials. This is restrained pixel art for a 640x360 native game view, broad readable clusters, limited muted grey/brown/olive palette, no added detail. NO text, UI, labels, watermark, people or new items. Lighting is NEUTRAL overcast: turn every flame, ember, brazier and lantern OFF, no warm glow or cast light baked into this layer. Isolate the complete specified site only on genuine alpha0 transparency, with all its poles/stakes/ropes/hardware intact and at least 8% padding. Do NOT include a rectangular fragment of scenery, horizon, ground plane, plants, cliffs, soil, detached rocks or adjacent sites. Contact shadows subtle and small. Keep the same 3/4 perspective as the input; do not invent a new front view. The small PATCHED PERSONAL TENT in the LOWER LEFT foreground, including its storage chest, bedding, small crates, poles/ropes and its hanging lantern. No adjacent merchant awning or foreground tree/rocks. The lantern glass is dark and unlit.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/camp-organic-v2/master.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-10b106d9-acdd-44de-aab2-f8f53e96224f.png",
+      "preserved_file": "rest.png"
+    },
+    {
+      "name": "smith",
+      "args": {
+        "prompt": "Use case: background-extraction / precise-object-edit. Production layer for the APPROVED Depths camp composition in input 1. Preserve the exact depicted subject design, viewpoint and worn materials. This is restrained pixel art for a 640x360 native game view, broad readable clusters, limited muted grey/brown/olive palette, no added detail. NO text, UI, labels, watermark, people or new items. Lighting is NEUTRAL overcast: turn every flame, ember, brazier and lantern OFF, no warm glow or cast light baked into this layer. Isolate the complete specified site only on genuine alpha0 transparency, with all its poles/stakes/ropes/hardware intact and at least 8% padding. Do NOT include a rectangular fragment of scenery, horizon, ground plane, plants, cliffs, soil, detached rocks or adjacent sites. Contact shadows subtle and small. Keep the same 3/4 perspective as the input; do not invent a new front view. The APPRENTICE SMITH LEAN-TO on the RIGHT, including patched tan/blue canvas, anvil, few basic tools, barrels and small portable brazier. Nothing from the cave/foreground cliffs. Brazier is completely cold black charcoal, no orange/red coals or glow.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/camp-organic-v2/master.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-05dc0640-8ead-48e7-9712-6ef4dcdba819.png",
+      "preserved_file": "smith.png"
+    },
+    {
+      "name": "fire",
+      "args": {
+        "prompt": "Use case: background-extraction / precise-object-edit. Production layer for the APPROVED Depths camp composition in input 1. Preserve the exact depicted subject design, viewpoint and worn materials. This is restrained pixel art for a 640x360 native game view, broad readable clusters, limited muted grey/brown/olive palette, no added detail. NO text, UI, labels, watermark, people or new items. Lighting is NEUTRAL overcast: turn every flame, ember, brazier and lantern OFF, no warm glow or cast light baked into this layer. Isolate the complete specified site only on genuine alpha0 transparency, with all its poles/stakes/ropes/hardware intact and at least 8% padding. Do NOT include a rectangular fragment of scenery, horizon, ground plane, plants, cliffs, soil, detached rocks or adjacent sites. Contact shadows subtle and small. Keep the same 3/4 perspective as the input; do not invent a new front view. The COMMUNAL FIRE SITE in the LOWER MIDDLE: stone hearth ring, logs/charred wood, two sitting logs, kettle hanging on its wooden rack, and little associated wood stumps. Remove BOTH SEATED PEOPLE completely. Remove flame and glowing coals completely, leaving a dark cold hearth beneath the hanging kettle. No ground plane or scenic rocks. All surrounding canvas transparent.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/camp-organic-v2/master.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-9f022570-a8e4-4030-bf8a-b3b30454df97.png",
+      "preserved_file": "fire.png"
+    },
+    {
+      "name": "cave-post",
+      "args": {
+        "prompt": "Use case: background-extraction / precise-object-edit. Production layer for the APPROVED Depths camp composition in input 1. Preserve the exact depicted subject design, viewpoint and worn materials. This is restrained pixel art for a 640x360 native game view, broad readable clusters, limited muted grey/brown/olive palette, no added detail. NO text, UI, labels, watermark, people or new items. Lighting is NEUTRAL overcast: turn every flame, ember, brazier and lantern OFF, no warm glow or cast light baked into this layer. Isolate the complete specified site only on genuine alpha0 transparency, with all its poles/stakes/ropes/hardware intact and at least 8% padding. Do NOT include a rectangular fragment of scenery, horizon, ground plane, plants, cliffs, soil, detached rocks or adjacent sites. Contact shadows subtle and small. Keep the same 3/4 perspective as the input; do not invent a new front view. The small WOODEN TRAIL POST AND HANGING LANTERN beside the CAVE at UPPER RIGHT. Only the post, lantern and small crossbar/hardware; no cave arch, cliff, fence, rocks, soil or other sites. Remove the hanging paper notice entirely, leaving the upright post visible where the paper was. Lantern glass dark/unlit. This tiny environmental fitting will be registered into the original scene; isolate it enlarged in the transparent canvas.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/camp-organic-v2/master.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-9cd614cb-4fef-4b0a-99fa-525a9385952d.png",
+      "preserved_file": "cave-post.png"
+    },
+    {
+      "name": "occupied-cot",
+      "args": {
+        "prompt": "Use case: stylized-concept / precise-object-edit. Small production condition overlay for the nurse's cot visible in the UPPER LEFT pale tent of input 1. Isolate ONLY that SAME simple wooden cot, at the SAME slightly elevated front/3-quarter camera perspective, now with one quiet adult patient lying under a dull grey-brown blanket. A small anonymous head on the existing pillow; no portrait detail or new NPC identity. Preserve cot wood, mattress shape, thin legs and overall proportions. No tent walls, canvas, equipment, ground, shadow plane or backdrop; genuine transparent exterior. Intended final display is about 40x20 pixels in a 640x360 pixel-art campsite: extremely restrained broad hard clusters, <=32 muted colours, no fine folds/skin detail. Neutral overcast material shading, no warm light, halo, magic, blood or text. Complete cot and sleeping silhouette with generous transparent margins, no cropping.",
+        "referenced_image_paths": [
+          "E:/GitHub/Depths/art/source/camp-organic-v2/master.png"
+        ],
+        "transparent_background": true
+      },
+      "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-1ce53cfe-ed3f-4376-8536-90320abc1d83.png",
+      "preserved_file": "occupied-cot.png"
+    }
+  ],
+  "story_schedule": "No arrival dates authored; site_presence is controlled by story code."
+}

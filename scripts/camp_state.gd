@@ -49,6 +49,10 @@ const CONTRACTS := [
 const CANDIDATES := 3
 
 var day := 1
+## Story-controlled physical sites (#108). Missing keys preserve today's
+## availability and old saves; arrival timing remains a separate decision (#80).
+var site_presence: Dictionary = {}
+const SITE_IDS := ["supplies", "treatment", "rest", "smith", "fire", "cave"]
 ## Items and gear left in the tent; they survive a party wipe.
 var stash = Supplies.new()
 ## Companion -> the day they're fit again after treatment.
@@ -80,6 +84,18 @@ var floor2_reached := 0
 var xp_left := Progression.FLOOR_XP_LIMIT.duplicate()
 var best_level := 1
 var _used_names: Array = []  # each name comes by once before any repeats
+
+
+func site_present(id: String) -> bool:
+	return id in SITE_IDS and bool(site_presence.get(id, true))
+
+
+## No schedule is invented here; story code decides when a site arrives.
+func set_site_present(id: String, present: bool) -> void:
+	if id not in SITE_IDS or site_present(id) == present:
+		return
+	site_presence[id] = present
+	changed.emit()
 
 
 ## Seeds the camp and puts the first recruits by the fire.

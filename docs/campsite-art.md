@@ -1,6 +1,6 @@
 # Cave campsite artwork · v1
 
-Owner feedback 2026-10-18: the sites still read as floating buttons rather than a believable settlement. [Connected-camp composition study (#108)](camp-composition-v2.md) explores terrain-led spacing, shared paths, depth and grounded sites. Its layout may recompose the earlier fixed coordinates; preserve service IDs/state rules. The v1 assets and live camp remain unchanged while production layers are developed.
+Owner feedback 2026-10-18 led to the [connected-camp composition study (#108)](camp-composition-v2.md), followed by the [layered live camp](layered-camp.md): independent terrain/sites, story-presence hooks and animated local light. That implementation supersedes these original coordinates in the live screen while preserving service IDs and rules. The v1 assets remain available for reference and original NPC portraits.
 
 Artwork task [#78](https://github.com/jonathanvarro/Depths/issues/78),
 for Claude's [#40 campsite](https://github.com/jonathanvarro/Depths/issues/40).

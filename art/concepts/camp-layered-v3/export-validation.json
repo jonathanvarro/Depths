@@ -1,0 +1,154 @@
+{
+  "issue": 108,
+  "source_masters": 9,
+  "native_canvas": [
+    640,
+    360
+  ],
+  "shared_palette_limit": 64,
+  "cutout_alpha_threshold": 224,
+  "registration": {
+    "treatment": {
+      "source_bounds": [
+        115,
+        125,
+        1595,
+        767
+      ],
+      "scale": 0.11993769470404984,
+      "position": [
+        187,
+        46
+      ],
+      "canvas": [
+        182,
+        81
+      ]
+    },
+    "cave": {
+      "source_bounds": [
+        399,
+        57,
+        960,
+        1161
+      ],
+      "scale": 0.0481283422459893,
+      "position": [
+        506,
+        48
+      ],
+      "canvas": [
+        31,
+        57
+      ]
+    },
+    "supplies": {
+      "source_bounds": [
+        176,
+        82,
+        1612,
+        806
+      ],
+      "scale": 0.16022099447513813,
+      "position": [
+        58,
+        93
+      ],
+      "canvas": [
+        234,
+        120
+      ]
+    },
+    "smith": {
+      "source_bounds": [
+        108,
+        164,
+        1510,
+        878
+      ],
+      "scale": 0.13480741797432239,
+      "position": [
+        441,
+        153
+      ],
+      "canvas": [
+        193,
+        100
+      ]
+    },
+    "rest": {
+      "source_bounds": [
+        138,
+        185,
+        1426,
+        891
+      ],
+      "scale": 0.14906832298136646,
+      "position": [
+        24,
+        205
+      ],
+      "canvas": [
+        196,
+        109
+      ]
+    },
+    "fire": {
+      "source_bounds": [
+        72,
+        15,
+        1701,
+        854
+      ],
+      "scale": 0.10846245530393325,
+      "position": [
+        308,
+        188
+      ],
+      "canvas": [
+        181,
+        95
+      ]
+    },
+    "occupied-cot": {
+      "source_bounds": [
+        434,
+        159,
+        1416,
+        782
+      ],
+      "scale": 0.038523274478330656,
+      "position": [
+        0,
+        -2
+      ],
+      "canvas": [
+        42,
+        28
+      ]
+    }
+  },
+  "sha256": {
+    "art/camp/organic-v3/cave.png": "492a9a7dbf39669f6cc06fdeccec304e475f3239cec96133cb1414f7c47ebb60",
+    "art/camp/organic-v3/fire.png": "8b74f9e60f22849d4b33410f646d29035d6f33bb75f5e25a72ab3727ec5d7a4a",
+    "art/camp/organic-v3/notice.png": "84de1091d73798fa998e3ee5d6046f8dff97fc4b288cbbe0592bdea7a1ba5301",
+    "art/camp/organic-v3/occupied-cot.png": "3b169af101305eaf4d7f9e38abe54a8f58d913d085b170bf063cc6337ff9c705",
+    "art/camp/organic-v3/rest.png": "b9b1a4aea76ebde240ff57f8c3daf3558712ac39bb78a3240c50fa099dc0ce11",
+    "art/camp/organic-v3/smith.png": "6f5fe841e0dc803eabcac6b9752d0df7840212a215884c4646aaf43d3a3501be",
+    "art/camp/organic-v3/supplies.png": "22207ddeaecf3cdd26439ee1bdf93e17c8d6508aa23da0f3347ab57ea5afe1d0",
+    "art/camp/organic-v3/terrain.png": "5396e34f93826632efd98beb578ebb0308f2633bda3814d911719d548de035de",
+    "art/camp/organic-v3/treatment.png": "a5ebb21a9d376c7b30d79f3139c1ea5fef01e2c79b0b513b3e6bff20f2907ec1"
+  },
+  "source_sha256": {
+    "cave-post.png": "149c99f2132f1b61a7e93feb8a04136a15d13ae7b6c143ebc18e89ee8b7ef691",
+    "fire-corrected.png": "09729bac161ef536345a24b5f89767a98dcdb3434a7068aa58576d8c28659cc4",
+    "fire-reference.png": "cc6bf045e80f48db4e0a9e006d65d40243df21fe615d48c8ae9a1997644118a2",
+    "fire.png": "276f0f119897f0087a21125549c999446d1a3049bfa1584d6e705070ac125e20",
+    "occupied-cot.png": "e647b6046c83494122d6741cc393034f0c43b8db942b812f5556735c0ac27490",
+    "rest.png": "f4e043894409862e60527ff0946f734902f6ff5ddfc853b556e41f7f8444e028",
+    "smith.png": "f64414d6f7e1af6a8007247e43f7c9b74252accb21a9f5acd84f0cd4bde04e5d",
+    "supplies.png": "c3c90e2fd5abe5a29ec11e96bc0e3199a956b854bc34df7edd1d9a3d15d4796f",
+    "terrain.png": "485ad772d7fef3771cf99879599a851cac3f81b4423dc49d6678f5add0c12f8a",
+    "treatment.png": "70c70ebaa4396008b1baed2a2d5c7e66f47cf64c1ab0c061aed7eaf4dea782d5"
+  }
+}

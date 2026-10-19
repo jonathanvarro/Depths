@@ -160,8 +160,11 @@ Templates > Download and Install; already installed on the owner's PC).
   `enemy_act()` carries out the shown intent, then plans the next one.
 - Campsite (#40): `scripts/camp_state.gd` (day, `stash` as a Supplies,
   `recovering`, rest/treat/restock; `day_passed` re-seeds the cave in
-  main.gd) and `scripts/camp_screen.gd` (ChatGPT's art/camp/cave-camp-v1
-  clearing + layout.json; one activity view per site id). `Injury.recovery_days`.
+  main.gd) and `scripts/camp_screen.gd` (`art/camp/organic-v3` terrain,
+  independent site scenes/local lights + layout.json; one activity per site).
+  CampState `site_presence` / `set_site_present()` controls availability;
+  absent keys default present until #80's arrival rules are decided.
+  `Injury.recovery_days`.
   `tools/camp_check.gd` drives every place (args: desk|phone, screenshot dir).
 - Recruitment (#41): `scripts/recruits.gd` (roles, traits, names; `make(rng)`),
   CampState `candidates` / `hire` / `dismiss` / `leave_behind` / `rejoin`;

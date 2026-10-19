@@ -1,0 +1,27 @@
+{
+  "captures": [
+    "all-sites-desktop",
+    "terrain-only-desktop",
+    "partial-fixture-desktop",
+    "recovery-desktop",
+    "all-sites-desktop-larger",
+    "merchant-desktop-larger",
+    "all-sites-1278",
+    "terrain-only-1278",
+    "partial-fixture-1278",
+    "recovery-1278",
+    "all-sites-1278-larger",
+    "merchant-1278-larger",
+    "all-sites-1334",
+    "terrain-only-1334",
+    "partial-fixture-1334",
+    "recovery-1334",
+    "all-sites-1334-larger",
+    "merchant-1334-larger"
+  ],
+  "checks": 258,
+  "failures": [],
+  "godot": "4.7.2-stable (official)",
+  "partial_camp": "Explicit presentation fixture only, not a story schedule.",
+  "physical_iPhone": false
+}

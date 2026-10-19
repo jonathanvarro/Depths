@@ -1,0 +1,274 @@
+{
+  "canvas": [
+    640,
+    360
+  ],
+  "sites": [
+    {
+      "id": "treatment",
+      "label": "Nurse",
+      "npc": "nurse",
+      "bounds": [
+        184,
+        48,
+        188,
+        77
+      ],
+      "rect": [
+        178,
+        40,
+        192,
+        80
+      ]
+    },
+    {
+      "id": "cave",
+      "label": "Cave path",
+      "npc": "",
+      "source": "cave-post",
+      "bounds": [
+        508,
+        33,
+        27,
+        70
+      ],
+      "rect": [
+        485,
+        24,
+        146,
+        106
+      ],
+      "lights": [
+        [
+          529,
+          74,
+          0.32,
+          0.58,
+          2,
+          4
+        ]
+      ]
+    },
+    {
+      "id": "supplies",
+      "label": "Merchant",
+      "npc": "merchant",
+      "bounds": [
+        53,
+        95,
+        245,
+        116
+      ],
+      "rect": [
+        45,
+        120,
+        245,
+        89
+      ],
+      "lights": [
+        [
+          103,
+          158,
+          0.3,
+          0.62,
+          2,
+          4
+        ]
+      ]
+    },
+    {
+      "id": "smith",
+      "label": "Apprentice smith",
+      "npc": "apprentice",
+      "bounds": [
+        443,
+        129,
+        189,
+        122
+      ],
+      "rect": [
+        466,
+        133,
+        166,
+        122
+      ],
+      "lights": [
+        [
+          575,
+          214,
+          0.33,
+          0.82,
+          6,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "rest",
+      "label": "Your tent",
+      "npc": "",
+      "bounds": [
+        26,
+        200,
+        192,
+        112
+      ],
+      "rect": [
+        24,
+        214,
+        198,
+        101
+      ],
+      "lights": [
+        [
+          157,
+          249,
+          0.3,
+          0.55,
+          2,
+          4
+        ]
+      ]
+    },
+    {
+      "id": "fire",
+      "label": "Recruitment fire",
+      "npc": "",
+      "source": "fire-corrected",
+      "bounds": [
+        303,
+        190,
+        191,
+        91
+      ],
+      "rect": [
+        294,
+        197,
+        160,
+        92
+      ]
+    }
+  ],
+  "registration": {
+    "treatment": {
+      "source_bounds": [
+        115,
+        125,
+        1595,
+        767
+      ],
+      "scale": 0.11993769470404984,
+      "position": [
+        187,
+        46
+      ],
+      "canvas": [
+        182,
+        81
+      ]
+    },
+    "cave": {
+      "source_bounds": [
+        399,
+        57,
+        960,
+        1161
+      ],
+      "scale": 0.0481283422459893,
+      "position": [
+        506,
+        48
+      ],
+      "canvas": [
+        31,
+        57
+      ]
+    },
+    "supplies": {
+      "source_bounds": [
+        176,
+        82,
+        1612,
+        806
+      ],
+      "scale": 0.16022099447513813,
+      "position": [
+        58,
+        93
+      ],
+      "canvas": [
+        234,
+        120
+      ]
+    },
+    "smith": {
+      "source_bounds": [
+        108,
+        164,
+        1510,
+        878
+      ],
+      "scale": 0.13480741797432239,
+      "position": [
+        441,
+        153
+      ],
+      "canvas": [
+        193,
+        100
+      ]
+    },
+    "rest": {
+      "source_bounds": [
+        138,
+        185,
+        1426,
+        891
+      ],
+      "scale": 0.14906832298136646,
+      "position": [
+        24,
+        205
+      ],
+      "canvas": [
+        196,
+        109
+      ]
+    },
+    "fire": {
+      "source_bounds": [
+        72,
+        15,
+        1701,
+        854
+      ],
+      "scale": 0.10846245530393325,
+      "position": [
+        308,
+        188
+      ],
+      "canvas": [
+        181,
+        95
+      ]
+    },
+    "occupied-cot": {
+      "source_bounds": [
+        434,
+        159,
+        1416,
+        782
+      ],
+      "scale": 0.038523274478330656,
+      "position": [
+        0,
+        -2
+      ],
+      "canvas": [
+        42,
+        28
+      ]
+    }
+  },
+  "story": "No arrival schedule. Missing site_presence keys default to present."
+}

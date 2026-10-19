@@ -1,0 +1,12 @@
+{
+  "kind": "Actual Godot capture preview",
+  "source_frames": 24,
+  "gif_frames": 19,
+  "canvas": [
+    640,
+    360
+  ],
+  "loop": true,
+  "nominal_frame_duration_ms": 100,
+  "sha256": "2da69765d2994099c18c8c8e41eeba32a293a1bee5a53718e39d22b38e5e4032"
+}

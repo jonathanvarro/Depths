@@ -1,0 +1,25 @@
+{
+  "tool": "image_gen.imagegen (built-in)",
+  "date": "2026-10-18",
+  "issue": 108,
+  "reason": "Initial fire generation included other camp sites. Unused original preserved; corrected single hearth is consumed.",
+  "generated_file": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-3a4dee76-624f-41bf-982a-44aefd9465ac.png",
+  "preserved_file": "fire-corrected.png",
+  "args": {
+    "prompt": "Use case: precise-object-edit/background-extraction. Input 1 is a tightly cropped reference of ONE hearth. Isolate ONLY this communal hearth on actual alpha0 transparency. Remove BOTH seated people, remove the flame, remove ALL warm orange light/glowing coals, remove all soil/ground/background and remove the tiny piece of smith equipment at the far upper-right. KEEP the two sitting logs, fixed stone fire ring, dark unlit firewood, two wooden uprights with crossbar, the suspended black iron kettle, and its little associated wood stumps, at the exact same relative positions and camera perspective. ONE complete hearth object only. The result must contain NO tents, awnings, shop, architecture, people, furniture outside the hearth, extra camp sites, scene or spritesheet. Neutral grey/brown overcast material shading, restrained hard pixel clusters for a 640x360 campsite, not more realistic/detailed than input. Native display roughly 170x90px. Transparent margins all around, no crop of the hearth itself, no text or labels. Keep the hearth at the centre of the canvas and fill most of it with this one object. All transparent empty gaps between logs/rack are alpha0; dark hearth centre remains opaque.",
+    "referenced_image_paths": [
+      "E:/GitHub/Depths/art/source/camp-layered-v3/fire-reference.png"
+    ],
+    "transparent_background": true
+  },
+  "reference_crop": {
+    "file": "fire-reference.png",
+    "source": "art/source/camp-organic-v2/master.png",
+    "box": [
+      790,
+      490,
+      1295,
+      742
+    ]
+  }
+}

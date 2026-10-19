@@ -1,6 +1,6 @@
 extends Control
-## The campsite (#40): ChatGPT's clearing (art/camp/cave-camp-v1) with six
-## places to tap - merchant, nurse, cave path, your tent, apprentice smith
+## The campsite (#40/#108): layered terrain, independent sites and lights.
+## Six places to tap - merchant, nurse, cave path, your tent, apprentice smith
 ## and the recruitment fire. Each opens an activity view with Back. The
 ## rules live in camp_state.gd; this only shows them and passes choices on.
 ##
@@ -13,7 +13,8 @@ signal cave_chosen(start_depth: int)
 signal save_and_exit
 signal open_settings
 
-const DIR := "res://art/camp/cave-camp-v1/"
+const DIR := "res://art/camp/organic-v3/"
+const PORTRAIT_DIR := "res://art/camp/cave-camp-v1/"
 const HEADING := preload("res://art/fonts/heading-cinzel.tres")
 const BODY := preload("res://art/fonts/body-source-sans.tres")
 const ACTION := preload("res://art/fonts/action-source-sans.tres")
@@ -47,6 +48,14 @@ var _body: VBoxContainer
 var _back: Button
 var _current := ""
 var _last_site := ""
+var _save_button: Button
+var _settings_button: Button
+## Presentation toggle for a still review or reduced-motion integration.
+var animate_lights := true:
+	set(value):
+		animate_lights=value
+		for site in _site_art.values():site.animate_lights=value
+		if _dressing:_dressing.animate_lights=value
 
 
 func _init() -> void:
@@ -67,16 +76,17 @@ func _init() -> void:
 	_canvas.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	content.add_child(_canvas)
 	var scenery := TextureRect.new()
-	scenery.texture = load(DIR + "clearing.png")
+	scenery.texture = load(DIR + "terrain.png")
 	scenery.size = CANVAS
+	scenery.light_mask = 2
 	scenery.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_canvas.add_child(scenery)
 	var layout: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(DIR + "layout.json"))
 	for site in layout["sites"]:
 		_add_site(site)
-	_dressing=preload("res://art/camp/occupancy-v1/dressing.gd").new()
+	_dressing=preload("res://art/camp/organic-v3/dressing.gd").new()
 	_canvas.add_child(_dressing)
-	_canvas.move_child(_dressing,_site_art.fire.get_index()+1)  # seated bodies in front of logs; fire label stays above
+	_canvas.move_child(_dressing,_site_art.fire.get_index()+1)
 	_dressing.setup(_canvas,_site_art.fire)
 	var title := _label("Relief camp", HEADING, 18, TEXT)
 	title.position = Vector2(20, 8)
@@ -94,14 +104,16 @@ func _init() -> void:
 	coin.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_canvas.add_child(coin)
 	var save := _button("Save & exit")
-	save.position = Vector2(540, 34)
-	save.size = Vector2(84, 24)
+	_save_button=save
+	save.position = Vector2(440, 326)
+	save.size = Vector2(104, 30)
 	save.add_theme_font_size_override("font_size", 11)
 	save.pressed.connect(func(): save_and_exit.emit())
 	_canvas.add_child(save)
 	var gear := _button("Settings")
-	gear.position = Vector2(540, 62)
-	gear.size = Vector2(84, 24)
+	_settings_button=gear
+	gear.position = Vector2(550, 326)
+	gear.size = Vector2(74, 30)
 	gear.add_theme_font_size_override("font_size", 11)
 	gear.pressed.connect(func(): open_settings.emit())
 	_canvas.add_child(gear)
@@ -118,13 +130,32 @@ func _init() -> void:
 
 ## Shows the clearing.
 func open(camp, party) -> void:
+	if _camp and _camp.changed.is_connected(_on_camp_changed):
+		_camp.changed.disconnect(_on_camp_changed)
 	_camp = camp
 	_party = party
+	_camp.changed.connect(_on_camp_changed)
 	_update_site_art()
 	visible = true
 	_close_activity()
 	_fit()
-	_buttons["cave"].grab_focus.call_deferred()
+	_focus_available.call_deferred("cave")
+
+
+func _on_camp_changed() -> void:
+	_update_site_art()
+	_day_label.text=_status()
+	if _current!="" and not _camp.site_present(_current):_close_activity()
+
+
+func _focus_available(preferred: String) -> void:
+	if _buttons.has(preferred) and _buttons[preferred].visible and not _buttons[preferred].disabled:
+		_buttons[preferred].grab_focus()
+		return
+	for button in _buttons.values():
+		if button.visible and not button.disabled:
+			button.grab_focus()
+			return
 
 
 ## A short message over the clearing (e.g. a contract paid).
@@ -149,8 +180,8 @@ func _add_site(site: Dictionary) -> void:
 	var r: Array = site["rect"]
 	var rect := Rect2(r[0], r[1], r[2], r[3])
 	var art: Node2D = load(DIR + id + ".tscn").instantiate()
-	art.position = Vector2(rect.get_center().x, rect.end.y - 24)
-	art.scale = Vector2.ONE * float(site["scale"])
+	# Textures retain registered positions on the common landscape canvas.
+	art.animate_lights=animate_lights
 	_canvas.add_child(art)
 	_site_art[id]=art
 	# The whole site and its label are one target (keyboard, mouse, touch).
@@ -163,36 +194,46 @@ func _add_site(site: Dictionary) -> void:
 	button.add_theme_color_override("font_color", TEXT)
 	button.add_theme_color_override("font_hover_color", Color.WHITE)
 	button.add_theme_color_override("font_focus_color", Color.WHITE)
+	button.add_theme_color_override("font_outline_color",Color("101513"))
+	button.add_theme_constant_override("outline_size",3)
 	var normal := StyleBoxFlat.new()
 	normal.bg_color = Color(0, 0, 0, 0)
-	normal.content_margin_top = rect.size.y - 22
+	normal.content_margin_top = rect.size.y - 21
 	button.add_theme_stylebox_override("normal", normal)
 	for state in ["hover", "pressed", "focus"]:
 		var highlight := normal.duplicate() as StyleBoxFlat
-		highlight.bg_color = Color(0.7, 0.49, 0.22, 0.1)
-		highlight.border_color = Color("bc9b60")
-		highlight.set_border_width_all(1)
 		button.add_theme_stylebox_override(state, highlight)
-	var strip := ColorRect.new()  # a readable label strip over the dark scenery
-	strip.color = Color(0.04, 0.06, 0.05, 0.86)
-	strip.position = Vector2(4, rect.size.y - 21)
-	strip.size = Vector2(rect.size.x - 8, 20)
-	strip.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	strip.show_behind_parent = true
-	button.add_child(strip)
+	button.mouse_entered.connect(_highlight_site.bind(id))
+	button.mouse_exited.connect(_highlight_site.bind(id))
+	button.focus_entered.connect(_highlight_site.bind(id))
+	button.focus_exited.connect(_highlight_site.bind(id))
 	button.pressed.connect(open_activity.bind(id))
 	_canvas.add_child(button)
 	_buttons[id] = button
+	# Put all controls above artwork even where the terrain groups overlap.
+	for target in _buttons.values():_canvas.move_child(target,-1)
+
+
+func _highlight_site(id: String) -> void:
+	var button: Button=_buttons[id]
+	var active: bool=button.is_hovered() or button.has_focus()
+	_site_art[id].modulate=Color(1.14,1.10,1.02) if active else Color.WHITE
+	button.add_theme_color_override("font_color",AMBER if active else TEXT)
 
 
 ## Registered site variants follow actual contracts and recovery state.
 func _update_site_art() -> void:
 	if _camp==null:return
 	_dressing.refresh(_camp)
+	for id in _site_art:
+		var present: bool=_camp.site_present(id)
+		_site_art[id].visible=present
+		_buttons[id].disabled=not present
+		_buttons[id].visible=present and _current==""
 	var has_contract: bool = _camp.contract.has("enemy") and not _camp.queen_defeated
-	_site_art["cave"].get_node("Base").texture=load("res://art/camp/cave-camp-variants-v1/contract-notice.png") if has_contract else load(DIR+"cave.png")
+	_site_art["cave"].get_node("Notice").visible=has_contract
 	var occupied: bool = _camp.recovering.keys().any(func(hero):return _camp.is_recovering(hero))
-	_site_art["treatment"].get_node("Base").texture=load("res://art/camp/cave-camp-variants-v1/nurse-occupied.png") if occupied else load(DIR+"treatment.png")
+	_site_art["treatment"].get_node("OccupiedCot").visible=occupied
 
 
 ## Scales the 640 x 360 scene to fit the safe area, centred.
@@ -203,6 +244,14 @@ func _fit() -> void:
 	var ratio := minf(room.x / CANVAS.x, room.y / CANVAS.y)
 	_canvas.scale = Vector2.ONE * ratio
 	_canvas.position = (room - CANVAS * ratio) / 2.0
+	# Keep global/activity controls comfortably tappable at Larger UI scale.
+	var height:=maxf(30.0,44.0/ratio)
+	for button in [_save_button,_settings_button,_back]:
+		if button:button.custom_minimum_size.y=height
+	if _save_button:
+		_save_button.position.y=CANVAS.y-height-4
+		_settings_button.position.y=CANVAS.y-height-4
+	for button in _body.find_children("*","Button",true,false):button.custom_minimum_size.y=height
 
 
 func _build_activity() -> void:
@@ -241,6 +290,7 @@ func _build_activity() -> void:
 
 
 func open_activity(id: String) -> void:
+	if not _sites.has(id) or _camp==null or not _camp.site_present(id):return
 	_current = id
 	if _note_tween:
 		_note_tween.kill()
@@ -251,7 +301,7 @@ func open_activity(id: String) -> void:
 	var site: Dictionary = _sites[id]
 	_activity_title.text = site["label"]
 	var npc: String = site["npc"]
-	_portrait.texture = load(DIR + npc + ".png") if npc != "" else null
+	_portrait.texture = load(PORTRAIT_DIR + npc + ".png") if npc != "" else null
 	var left := 222.0 if npc != "" else 18.0
 	_scroll.position = Vector2(left, 50)
 	_scroll.size = Vector2(_activity.size.x - left - 14, _activity.size.y - 62)
@@ -263,14 +313,15 @@ func open_activity(id: String) -> void:
 func _close_activity() -> void:
 	_current = ""
 	_activity.visible = false
-	for button in _buttons.values():
-		button.visible = true
+	_update_site_art()
 	_day_label.text = _status() if _camp else ""
-	if _buttons.has(_last_site) and visible:
-		_buttons[_last_site].grab_focus.call_deferred()
+	if visible:_focus_available.call_deferred(_last_site)
 
 
 func _refresh_activity() -> void:
+	if _current!="" and not _camp.site_present(_current):
+		_close_activity()
+		return
 	_update_site_art()
 	_day_label.text = _status()
 	for child in _body.get_children():
@@ -283,6 +334,7 @@ func _refresh_activity() -> void:
 		"rest": _tent()
 		"fire": _fire()
 		"cave": _cave_path()
+	_fit()
 
 
 ## The merchant (#42): buy supplies and the lantern, sell treasure and gear.

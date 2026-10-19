@@ -1,5 +1,7 @@
 # A camp that belongs to its terrain · #108
 
+The owner approved this direction and asked for independent sites plus animated glows. [The layered live camp](layered-camp.md) now implements it, with clean terrain, separate sites/occupancy, local light and optional story-presence flags. This document preserves the original composition study and its handoff.
+
 The owner supplied a Darkest Dungeon town reference and identified a structural weakness in the current camp: the sites read as floating buttons rather than buildings belonging to a believable place. The earlier occupancy pass adds signs of people, but does not solve the spacing, ground relationships or composition.
 
 The reference is useful because paths, levels, overlapping edges and common working space connect the buildings. Depths should apply that spatial logic to a temporary, disorganized royal relief camp. Its own worn pixel-art materials and six existing services remain the foundation.
