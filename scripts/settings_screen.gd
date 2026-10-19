@@ -73,8 +73,8 @@ func open() -> void:
 		sizes.add_child(choice)
 	_column.add_child(sizes)
 	_column.add_child(_label("Changes are saved straight away.", 16, COLOR_DIM))
-	# Music credits (#54): CC-BY needs one; the rest are CC0 (audio/music/README.md).
-	var credits := _label("Combat music: \"For the Black Lord\" by Ronhul Maggot (CC-BY 4.0). Other music: TAD, Paul Wortmann, William Hector and RandomMind (CC0), via OpenGameArt.", 14, COLOR_DIM)
+	# Music credits (#54): the CC-BY tracks need one; the rest are CC0 (audio/music/README.md).
+	var credits := _label("Music: \"The Rising Tide\" by HitCtrl (CC-BY 3.0); \"For the Black Lord\" by Ronhul Maggot (CC-BY 4.0); Paul Wortmann, William Hector and RandomMind (CC0). All via OpenGameArt.", 14, COLOR_DIM)
 	credits.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	credits.custom_minimum_size = Vector2(480, 0)
 	_column.add_child(credits)

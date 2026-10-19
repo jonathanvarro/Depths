@@ -4,7 +4,7 @@ One looping track per place, read by `scripts/music.gd` (any of .ogg, .mp3 or .w
 
 | File | Plays |
 |---|---|
-| `title.mp3` | Title screen |
+| `title.ogg` | Title screen |
 | `cave.ogg` | Exploring the cave (floors 1–3, and the opening) |
 | `fortress.wav` | The goblin fortress (floor 4) |
 | `combat.wav` | Any fight |
@@ -18,10 +18,10 @@ Record every track here before committing it: title, artist, source URL, licence
 
 | File | Track | Artist | Source | Licence | Credit |
 |---|---|---|---|---|---|
-| `title.mp3` | Vampire's Piano | TAD | https://opengameart.org/content/vampires-piano | CC0 | none required |
+| `title.ogg` | The Rising Tide | HitCtrl | https://opengameart.org/node/113828 | CC-BY 3.0 | "The Rising Tide" by HitCtrl, CC-BY 3.0 (https://creativecommons.org/licenses/by/3.0/) — shown in Settings |
 | `cave.ogg` | Dark Cavern Ambient (002, loop) | Paul Wortmann | https://opengameart.org/content/dark-cavern-ambient | CC0 | none required |
 | `fortress.wav` | Horde War Drums loop | William Hector | https://opengameart.org/node/176112 | CC0 | none required |
 | `combat.wav` | For the Black Lord (loop) | Ronhul Maggot | https://opengameart.org/node/141359 | CC-BY 4.0 | "For the Black Lord" by Ronhul Maggot, CC-BY 4.0 (https://creativecommons.org/licenses/by/4.0/) — shown in Settings |
 | `camp.wav` | Medieval: The Bard's Tale (loop) | RandomMind | https://opengameart.org/content/medieval-the-bards-tale | CC0 | none required |
 
-Downloaded 2026-10-18 from OpenGameArt; licences checked on each page that day. Files are unmodified apart from renaming. Owner approved the shortlist the same day.
+Downloaded 2026-10-18 from OpenGameArt; licences checked on each page that day. Files are unmodified apart from renaming. Owner approved the shortlist the same day, then chose The Rising Tide for the title (replacing Vampire's Piano).
