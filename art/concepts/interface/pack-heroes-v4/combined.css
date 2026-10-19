@@ -1,0 +1,93 @@
+/* #109 owner refinement: both panels stay visible during inspection. */
+#depths-pack-heroes .stage{height:100vh;min-height:0;padding:24px 64px}
+#depths-pack-heroes .window{height:100%;max-width:1250px;display:flex;flex-direction:column;padding:18px 22px}
+#depths-pack-heroes .top{flex:none;flex-wrap:nowrap;padding-bottom:8px;margin-bottom:10px;min-height:52px}
+#depths-pack-heroes h1{font-size:28px}
+#depths-pack-heroes h2{font-size:22px}
+#depths-pack-heroes .combined{display:grid;grid-template-columns:minmax(260px,.9fr) minmax(360px,1.1fr);gap:20px;flex:1;min-height:0}
+#depths-pack-heroes .hero-panel{display:flex;flex-direction:column;min-width:0;min-height:0;border-right:1px solid #4a493a;padding-right:18px}
+#depths-pack-heroes .hero-top{flex:none;display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}
+#depths-pack-heroes .hero-heading{flex:none;margin-bottom:4px;justify-content:flex-start;gap:10px}
+#depths-pack-heroes .hero-toolbar{flex:none;margin-bottom:4px}
+#depths-pack-heroes .tabs{display:flex;gap:4px;justify-content:flex-start}
+#depths-pack-heroes .tabs button{font-size:18px;min-width:106px;padding:7px 12px}
+#depths-pack-heroes .hero-body{flex:1;min-height:0;overflow-y:auto;scrollbar-color:#756248 #191d17;padding:2px}
+#depths-pack-heroes .equip-board{grid-template-columns:112px minmax(0,1fr);gap:8px;align-items:center;min-height:190px}
+#depths-pack-heroes .summary{gap:4px}
+#depths-pack-heroes .hero-picture,#depths-pack-heroes .large-placeholder{width:108px;height:108px}
+#depths-pack-heroes .summary p{font-size:16px}
+#depths-pack-heroes .equipment{min-height:180px;max-width:none;padding:30px 20px 28px 28px;gap:10px}
+#depths-pack-heroes .equipment .slot{min-height:80px;max-width:96px}
+#depths-pack-heroes .equip-cell>span{font-size:17px}
+#depths-pack-heroes .equip-cell.receives .slot{border:2px solid #d7b174;background:#d7b17420}
+#depths-pack-heroes .party{flex:none;flex-direction:row;gap:8px;border:0;border-top:1px solid #454735;padding:6px 0 0;margin-top:6px;align-items:center}
+#depths-pack-heroes .portrait-button{width:64px;min-width:64px;gap:1px;padding:3px}
+#depths-pack-heroes .portrait-button img,#depths-pack-heroes .portrait-placeholder{width:44px;height:44px}
+#depths-pack-heroes .portrait-placeholder i{font-size:24px}
+#depths-pack-heroes .portrait-button span{font-size:14px}
+#depths-pack-heroes .sample-note{font-size:12px;max-width:66px}
+#depths-pack-heroes .pack-page{display:flex;flex-direction:column;min-width:0;min-height:0}
+#depths-pack-heroes .bag-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;flex:none;min-height:32px}
+#depths-pack-heroes .bag-heading h2{font-size:20px}
+#depths-pack-heroes .lantern{display:block;font-size:16px;padding:0}
+#depths-pack-heroes .oil-track{width:124px;height:4px;margin-top:3px}
+#depths-pack-heroes .bag-wrap{flex:1;min-height:0;align-content:center;justify-items:center}
+#depths-pack-heroes .physical-bag{width:min(100%,570px,calc((100vh - 310px)*1.5));aspect-ratio:3/2}
+#depths-pack-heroes .bag{gap:3px}
+#depths-pack-heroes .bag .slot img{width:88%;height:88%}
+#depths-pack-heroes .bag .slot .qty{font-size:15px}
+#depths-pack-heroes .inspection-dock{flex:none;height:104px;margin-top:10px;border-top:1px solid #4a493a;position:relative;display:flex;align-items:center}
+#depths-pack-heroes .inspect-hint{font-size:17px;padding:0 10px}
+#depths-pack-heroes .inspect{position:relative;inset:auto;width:100%;max-width:none;min-height:94px;max-height:104px;padding:8px 54px 8px 10px;border-radius:2px;display:grid;grid-template-columns:180px minmax(0,1fr) 170px;grid-template-rows:auto auto;gap:3px 14px;align-items:center;box-shadow:none}
+#depths-pack-heroes .inspect-head{grid-column:1;grid-row:1/span 2;padding:0;gap:8px}
+#depths-pack-heroes .inspect-head img{width:44px;height:44px}
+#depths-pack-heroes .inspect h2{font-size:20px}
+#depths-pack-heroes .inspect-type{font-size:15px}
+#depths-pack-heroes #depths-inspect-description{grid-column:2;grid-row:1;font-size:17px;max-height:48px;overflow-y:auto}
+#depths-pack-heroes .inspect-extra{grid-column:2;grid-row:2;font-size:15px}
+#depths-pack-heroes .inspect .primary{grid-column:3;grid-row:1/span 2;font-size:17px;min-height:48px;padding:8px 10px}
+#depths-pack-heroes .inspect[data-pinned=false] .primary{display:none}
+#depths-pack-heroes .inspect .close{top:5px;right:5px}
+#depths-pack-heroes .footer{flex:none;margin-top:6px;min-height:18px;font-size:14px}
+#depths-pack-heroes .status-grid{grid-template-columns:1fr;gap:12px;font-size:17px}
+#depths-pack-heroes .status-column{gap:12px}
+#depths-pack-heroes .status-section{padding-top:6px;gap:5px}
+#depths-pack-heroes .status-section h3{font-size:18px}
+@media(min-width:1100px) and (max-height:650px){
+ #depths-pack-heroes .stage{padding:14px 97px 35px}
+ #depths-pack-heroes .window{padding:12px 16px}
+ #depths-pack-heroes .equip-board{min-height:162px}
+ #depths-pack-heroes .equipment{min-height:162px;padding:28px 18px 24px 26px}
+ #depths-pack-heroes .equipment .slot{min-height:76px;max-width:82px}
+}
+@media(max-width:900px){
+ #depths-pack-heroes .stage{padding:12px 18px}
+ #depths-pack-heroes .window{padding:12px}
+ #depths-pack-heroes .combined{grid-template-columns:minmax(240px,.9fr) minmax(350px,1.1fr);gap:12px}
+ #depths-pack-heroes .hero-panel{padding-right:10px}
+ #depths-pack-heroes .hero-top{display:block;margin-bottom:2px}
+ #depths-pack-heroes .hero-heading{margin-bottom:2px;font-size:16px;line-height:1.1}
+ #depths-pack-heroes .hero-heading h2{font-size:19px;line-height:1.1}
+ #depths-pack-heroes .hero-toolbar{margin-bottom:0}
+ #depths-pack-heroes .equip-board{grid-template-columns:86px minmax(0,1fr);gap:4px;min-height:160px}
+ #depths-pack-heroes .hero-picture,#depths-pack-heroes .large-placeholder{width:82px;height:82px}
+ #depths-pack-heroes .summary p{font-size:15px}
+ #depths-pack-heroes .equipment{min-height:156px;padding:24px 14px 20px 22px;gap:7px}
+ #depths-pack-heroes .equipment .slot{min-height:64px}
+ #depths-pack-heroes .equip-cell>span{font-size:16px}
+ #depths-pack-heroes .physical-bag{width:100%}
+ #depths-pack-heroes .bag-heading{align-items:start}
+ #depths-pack-heroes .bag-heading h2{font-size:19px}
+ #depths-pack-heroes .lantern{font-size:14px}
+ #depths-pack-heroes .oil-track{width:100px}
+ #depths-pack-heroes .bag .slot .qty{font-size:13px}
+ #depths-pack-heroes .sample-note{display:none}
+ #depths-pack-heroes .inspection-dock{height:118px}
+ #depths-pack-heroes .inspect{grid-template-columns:130px minmax(0,1fr) 128px;gap:3px 8px;max-height:118px;min-height:108px}
+ #depths-pack-heroes .inspect h2{font-size:18px}
+ #depths-pack-heroes .inspect-head{gap:4px}
+ #depths-pack-heroes .inspect-head img{width:36px;height:36px}
+ #depths-pack-heroes #depths-inspect-description{font-size:16px;max-height:64px}
+ #depths-pack-heroes .inspect-extra{font-size:14px}
+ #depths-pack-heroes .inspect .primary{font-size:16px}
+}

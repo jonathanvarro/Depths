@@ -1,0 +1,13 @@
+{
+  "issue": 109,
+  "kind": "Combined browser design review; live game unchanged",
+  "base": "art/concepts/interface/pack-heroes-v3/pack-heroes.html",
+  "base_sha256": "d80d82775a4cb54983f7f9e03b9642367ca840ed1f53a8664cb9c848cf6d9492",
+  "reused_art": [
+    "art/concepts/interface/pack-heroes-v3/assets/bag.png",
+    "art/concepts/interface/pack-heroes-v3/assets/roll.png"
+  ],
+  "new_generated_art": false,
+  "layout": "Equipment/status left, shared bag always right, reserved bottom inspection row",
+  "demo_only": "Existing isolated sample state, no gameplay or inventory capacity decision."
+}

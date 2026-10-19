@@ -1,5 +1,7 @@
 # Physical Pack and Equipment · #109
 
+**Owner follow-up:** inventory and equipment must be visible together, with equipment left and backpack right. The [combined v4 review](combined-equipment-and-pack.md) supersedes this version's separate-page layout and reuses the approved art.
+
 Owner direction, 2026-10-18: revisit the interfaces, specifically **visual style and a more physical backpack**. This extends #61's accepted icon-slot and tabbed hero-window design.
 
 ## New visual direction

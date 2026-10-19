@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Depths · Combined Equipment and Pack</title><style>html,body{margin:0;background:#11130f}body{min-width:700px}</style></head><body>
+<div id="depths-pack-heroes" aria-label="Depths combined equipment and inventory study">
+ <style>@@styles@@</style>
+ <div class="stage">
+  <div class="launcher" hidden><button data-open="equipment">Open Equipment &amp; Pack</button></div>
+  <section class="window" aria-label="Equipment and shared pack">
+   <header class="top"><h1 class="page-title">Equipment &amp; Pack</h1><button class="back">Back</button></header>
+   <div class="combined">
+    <section class="hero-panel" aria-label="Selected hero">
+     <div class="hero-top"><div class="hero-heading"><h2 class="hero-name">Mara</h2><span class="hero-role muted">Rogue</span></div>
+     <div class="hero-toolbar"><div class="tabs" role="tablist" aria-label="Hero details">
+      <button id="depths-equipment-tab" role="tab" aria-selected="true" aria-controls="depths-equipment">Equipment</button>
+      <button id="depths-status-tab" role="tab" aria-selected="false" aria-controls="depths-status">Status</button>
+     </div></div></div>
+     <div class="hero-body">
+      <section id="depths-equipment" role="tabpanel" aria-labelledby="depths-equipment-tab"><div class="equip-board"><div class="summary"></div><div class="equipment" aria-label="Equipped items"></div></div></section>
+      <section id="depths-status" role="tabpanel" aria-labelledby="depths-status-tab" hidden></section>
+     </div>
+     <nav class="party" aria-label="Choose hero"></nav>
+    </section>
+    <section class="pack-page" aria-label="Shared backpack">
+     <div class="bag-heading"><h2>Shared pack</h2><div class="lantern"><strong class="number">Lantern · 62 / 100</strong><div class="oil-track"><div class="oil-fill"></div></div></div></div>
+     <div class="bag-wrap"><div class="physical-bag"><div class="bag" aria-label="Inventory slots"></div></div></div>
+    </section>
+   </div>
+   <div class="inspection-dock" aria-label="Item inspection">
+    <p class="inspect-hint muted">Select an item to inspect it. Select a portrait to change hero.</p>
+    <section class="inspect" role="dialog" aria-modal="false" aria-labelledby="depths-inspect-title" data-pinned="false" hidden>
+     <button class="close" aria-label="Close item details">×</button>
+     <div class="inspect-head"><img alt=""><div><h2 id="depths-inspect-title"></h2><p class="inspect-type muted small"></p></div></div>
+     <p id="depths-inspect-description"></p><p class="inspect-extra muted small"></p><button class="primary"></button>
+    </section>
+   </div>
+   <p class="footer" role="status" aria-live="polite">Visual study · Sample inventory · Browsing costs no time.</p>
+   <div class="gear-bag" hidden><div class="spares"></div></div>
+  </section>
+ </div>
+</div>
+<script>@@script@@</script>
+</body></html>
