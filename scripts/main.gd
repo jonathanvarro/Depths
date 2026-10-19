@@ -24,6 +24,8 @@ const CampState := preload("res://scripts/camp_state.gd")
 const CampScreen := preload("res://scripts/camp_screen.gd")
 const SaveGame := preload("res://scripts/save_game.gd")
 const Progression := preload("res://scripts/progression.gd")
+const Sounds := preload("res://scripts/sounds.gd")
+const Music := preload("res://scripts/music.gd")
 const CoinFlip := preload("res://scripts/coin_flip.gd")
 const Settings := preload("res://scripts/settings.gd")
 const SettingsScreen := preload("res://scripts/settings_screen.gd")
@@ -188,7 +190,7 @@ const EFFECT_VOLUME_DB := -4.0
 ## Bleeding feedback (#71): a red flash at the screen edges and a heartbeat
 ## on each point lost. Lower health: stronger flash, faster heartbeat, and
 ## edges that stay dark between ticks.
-const HEARTBEAT := preload("res://audio/placeholder/heartbeat.wav")
+const HEARTBEAT := Sounds.HEARTBEAT  # the darker second set (#54)
 const HEARTBEAT_VOLUME_DB := -2.0
 const WOUND_SHADER := """
 shader_type canvas_item;
@@ -339,6 +341,7 @@ var _full_map_margin: MarginContainer
 var _ambience_player: AudioStreamPlayer
 var _footstep_player: AudioStreamPlayer
 var _effect_player: AudioStreamPlayer
+var _music: Node  # music.gd: a track per place (#54)
 var _wound_overlay: ColorRect
 var _wound_tween: Tween
 var _heart_player: AudioStreamPlayer
@@ -368,6 +371,8 @@ func _ready() -> void:
 	_expedition = Expedition.new(_party_state, 1)
 	_room_events.loot_found.connect(func(loot): _expedition.add_found(loot))
 	_room_events.gold_found.connect(func(amount): _expedition.gold_found += amount)
+	_room_events.gold_found.connect(func(_amount): Sounds.play(self, "coins"))
+	_party_state.supplies.torch_flared.connect(func(): Sounds.play(self, "torch"))
 
 	_minimap = Minimap.new()
 	_build_ui(_minimap)
@@ -507,6 +512,7 @@ func _build_level() -> void:
 		visual_theme=environment_theme.duplicate()
 		visual_theme.ascent_scene=preload("res://art/features/daylight-exit-v1/scene.tscn")
 	_level.build(_map, visual_theme, CELL_SIZE, WALL_HEIGHT)
+	_play_place_music()
 	add_child(_level)
 	_add_room_props()
 	if _depth == OPENING_DEPTH and _in_opening:
@@ -623,8 +629,11 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 	_party.locked = true
 	_touch_pad.visible = false
 	_pack_button.disabled = true
+	if _music:
+		_music.play("combat")
 	_combat.run(state, _cards)
 	var result: int = await _combat.finished
+	_play_place_music()
 	for foe in state.foes:
 		if is_instance_valid(foe.node):
 			foe.node.queue_free()
@@ -719,6 +728,7 @@ func _loot_purse(foe) -> void:
 	_party_state.supplies.changed.emit()
 	_expedition.gold_found += coins
 	_show_message("+%d gold" % coins)
+	Sounds.play(self, "coins")
 
 
 ## The enemy groups a party of `party_size` can meet at `depth` (#49).
@@ -802,6 +812,8 @@ func _camp_loop(reward := 0, note := "") -> void:
 	_ending = true
 	_party.locked = true
 	_camp.open(_camp_state, _party_state)
+	if _music:
+		_music.play("camp")
 	if note != "":
 		_camp.announce(note)
 	elif reward > 0:
@@ -1676,6 +1688,7 @@ func _open_opening_chest(cell: Vector2i) -> void:
 	_update_hints("chest_opened")
 	_party.locked = true
 	_chest.open("A battered chest", OPENING_CHEST, _party_state)
+	Sounds.play(self, "chest")
 	_say("chest", true)
 	_show_hint("Drag or tap items into your pack.", "chest_take")
 	await _chest.closed
@@ -2401,11 +2414,19 @@ func _build_audio() -> void:
 	_heart_player.volume_db = HEARTBEAT_VOLUME_DB
 	add_child(_heart_player)
 
+	_music = Music.new()
+	add_child(_music)
 	_effect_player = AudioStreamPlayer.new()
 	_effect_player.bus = "Effects"
 	_effect_player.volume_db = EFFECT_VOLUME_DB
 	_effect_player.max_polyphony = 2
 	add_child(_effect_player)
+
+
+## The cave's music, or the fortress's on its floor (#54).
+func _play_place_music() -> void:
+	if _music and not _in_combat:
+		_music.play("fortress" if _depth == FORTRESS_DEPTH else "cave")
 
 
 func _play_effect(sound: AudioStream) -> void:

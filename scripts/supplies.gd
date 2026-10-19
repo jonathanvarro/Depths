@@ -10,6 +10,7 @@ signal changed
 signal light_band_changed(band: Light)
 ## A held torch burned down to nothing (#59).
 signal torch_burnt_out
+signal torch_flared  # a fresh torch is lit (the sound, #54)
 
 ## What the party sees by: the lantern (oil), a torch in hand (burns down),
 ## or nothing at all (#59). The opening has no lantern.
@@ -99,6 +100,7 @@ func light_torch(torch: SupplyItem) -> bool:
 	torch_left = TORCH_BURN_TIME
 	if light_band() != band_before:
 		light_band_changed.emit(light_band())
+	torch_flared.emit()
 	changed.emit()
 	return true
 

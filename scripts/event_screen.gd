@@ -6,6 +6,7 @@ extends CenterContainer
 ## {"left": bool, "ambush": Array[EnemyType]}
 signal finished(result: Dictionary)
 
+const Sounds := preload("res://scripts/sounds.gd")
 const COLOR_TEXT := Color("e8d9b0")
 const COLOR_DIM_TEXT := Color(0.85, 0.8, 0.7, 0.85)
 
@@ -99,6 +100,8 @@ func _choose(choice: EventChoice) -> void:
 		_show_choices()
 		return
 	_body.text = result["story"]
+	if _event.kind == 2:  # DungeonMap.Content.CHEST: the lid comes up (#54)
+		Sounds.play(self, "chest")
 	_clear_chips()
 	_add_chips(result["changes"])
 	_clear_buttons()

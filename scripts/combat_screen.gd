@@ -13,6 +13,7 @@ signal _action_chosen(action: Dictionary)
 const CombatState := preload("res://scripts/combat_state.gd")
 const Glyphs := preload("res://art/ui/backlog96-v1/glyphs.gd")
 const CombatFx := preload("res://scripts/combat_fx.gd")
+const Sounds := preload("res://scripts/sounds.gd")
 const COLOR_TEXT := Color("e8d9b0")
 const COLOR_DIM_TEXT := Color(0.85, 0.8, 0.7, 0.75)
 const ENEMY_PAUSE := 0.45
@@ -178,11 +179,13 @@ func _hero_action(hero: Companion, action: Dictionary) -> void:
 			if not outcome["hit"]:
 				_fx.number(at, "miss", CombatFx.COLOR_DULL, 34)
 			elif outcome.get("glanced", false):
+				Sounds.play(self, "block")
 				_fx.slash(at)
 				_fx.icon(at + Vector2(0, -30), MARKS["armour"])  # its hard legs turn the blade
 				_fx.number(at + Vector2(60, -40), str(outcome["damage"]), CombatFx.COLOR_DULL, 34, 0.12)
 			else:
 				_fx.slash(at, outcome["damage"] >= 5)
+				Sounds.play(self, "block" if target.shielded else "hit")
 				if target.shielded:
 					_fx.icon(at + Vector2(-50, -20), MARKS["guard"], 34.0)
 				# The slash lands, then the number follows it (#105).
@@ -192,6 +195,7 @@ func _hero_action(hero: Companion, action: Dictionary) -> void:
 					await _fade_out(target)
 		"defend":
 			_state.hero_defend(hero)
+			Sounds.play(self, "block", -10.0)
 			_fx.icon(_card_point(hero), MARKS["guard"], 56.0)
 		"move":
 			_state.hero_move(hero)
@@ -249,6 +253,7 @@ func _show_enemy_outcome(foe, intent: int, outcome: Dictionary, was_webbed: Dict
 	var at := _foe_point(foe)
 	match intent:
 		CombatState.Intent.SHIELD, CombatState.Intent.BRACE:
+			Sounds.play(self, "block", -10.0)
 			_fx.icon(at, MARKS["guard"], 56.0)
 		CombatState.Intent.RECOVER:
 			_fx.icon(at, MARKS["recover"], 56.0)
@@ -269,6 +274,7 @@ func _show_enemy_outcome(foe, intent: int, outcome: Dictionary, was_webbed: Dict
 		return
 	var card_at := _card_point(target)
 	if outcome.get("hit", false):
+		Sounds.play(self, "hit", -2.0)
 		_fx.claw(card_at)
 		if target.body and target.body.armour > 0:
 			_fx.icon(card_at + Vector2(40, 30), MARKS["armour"], 30.0)
@@ -278,6 +284,7 @@ func _show_enemy_outcome(foe, intent: int, outcome: Dictionary, was_webbed: Dict
 			var injury: Injury = outcome["injury"]
 			_fx.icon(card_at + Vector2(0, 40), Glyphs.STATUS["limp" if injury.icon_kind == "limp" else "deep-wound"], 40.0)
 	elif _state.is_defending(target):
+		Sounds.play(self, "block")
 		_fx.icon(card_at, MARKS["guard"], 56.0)  # braced and turned aside
 	else:
 		_fx.number(card_at, "miss", CombatFx.COLOR_DULL, 34)

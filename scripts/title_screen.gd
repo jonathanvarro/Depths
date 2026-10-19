@@ -23,6 +23,9 @@ var _hero_select: Control  # hero_select.gd (#95)
 
 func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	var music := preload("res://scripts/music.gd").new()  # #54
+	add_child(music)
+	music.play.call_deferred("title")
 	var phone := simulate_phone or OS.has_feature("mobile")
 
 	var backdrop := TextureRect.new()

@@ -85,6 +85,7 @@ func _initialize() -> void:
 		await create_timer(0.1).timeout
 		guard += 1
 	await create_timer(0.3).timeout
+	check("a fight switches to the combat music (#54)", main._music.place == "combat", main._music.place)
 	check("no sentence log on the fight screen", not "_log_label" in combat and combat._turn_label.text.begins_with("Round"))
 	var first: Button = combat._tags[combat._state.foes[0]]
 	check("tags carry an icon, a name and a health bar", first.icon != null and first.text == combat._state.foes[0].name and first.get_node("Health").visible)
@@ -93,6 +94,8 @@ func _initialize() -> void:
 		root.get_texture().get_image().save_png(dir + "/visual_" + tag + "_tags.png")
 	combat._action_chosen.emit({"kind": "attack"})
 	await create_timer(0.2).timeout
+	var heard: bool = combat.get_children().any(func(c): return c is AudioStreamPlayer and c.stream in [main.Sounds.EFFECTS["hit"], main.Sounds.EFFECTS["block"]])
+	check("a landed blow is heard (#54)", heard or combat._fx.get_children().any(func(c): return c is Label and c.text == "miss"))
 	check("an attack draws a slash and a number, or a miss", combat._fx.get_children().any(func(c): return c is Label), str(combat._fx.get_child_count()))
 	if dir != "":
 		root.get_texture().get_image().save_png(dir + "/visual_" + tag + "_slash.png")
