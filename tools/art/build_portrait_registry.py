@@ -37,10 +37,11 @@ def inspect(path):
     frames += [{'name':name,'eyes':texture('eyes'),'mouth':p} for name,p in zip(['Small mouth','Open mouth','Round mouth'],textures('talk_frames'))]
     boxes={'mara':[[80,55,141,85],[92,93,128,112]],'corin':[[80,55,140,81],[87,83,128,104]],'alwen':[[84,56,140,78],[98,87,129,104]]}
     eye,mouth=boxes.get(face,[[78,53,139,82],[89,91,125,108]] if face in ['warden-a','scout-a'] else [[73,51,142,82],[82,89,132,112]])
-    corrected=any('/frames-pixel-v3/' in p for p in textures('blink_frames')+textures('talk_frames'))
+    refined=any('/frames-pixel-v4/' in p for p in textures('blink_frames')+textures('talk_frames'))
+    corrected=refined or any('/frames-pixel-v3/' in p for p in textures('blink_frames')+textures('talk_frames'))
     return {'id':stem,'face_id':face,'label':UNIQUE.get(face,face)+((' · '+stem.rsplit('-',1)[-1]) if stem!=face else ''),'kind':kind,'family':family,
             'resource':'res://'+path.relative_to(ROOT).as_posix(),'layers':layers,'neutral_eyes':texture('eyes'),'neutral_mouth':texture('mouth'),
-            'frames':frames,'eye_box':eye,'mouth_box':mouth,'separated_features':corrected,'review':'Complete components v3: underlying face has no eyes or lips; neutral components restore the original exactly. Each animation replaces the whole feature, including its corners.' if corrected else 'Static expression; no neutral blink/talk frames borrowed.'}
+            'frames':frames,'eye_box':eye,'mouth_box':mouth,'separated_features':corrected,'review':('Textured drawings v4: original lip tissue, smaller shaded openings and curved lids retaining the lower iris in half blinks. V3 clean/neutral components and timing are preserved.' if refined else 'Complete components v3: clean underlying face; neutral restores the original exactly.') if corrected else 'Static expression; no neutral blink/talk frames borrowed.'}
 
 def main():
     OUT.mkdir(parents=True,exist_ok=True);write(OUT/'.gdignore','')

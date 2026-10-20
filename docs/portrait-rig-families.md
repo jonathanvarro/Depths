@@ -1,4 +1,8 @@
-# Portrait families and complete facial components · #121
+# Portrait families and facial drawings · #121 / #124
+
+**Current refinement (#124):** Claude correctly identified that v3 removed duplicate features but its flat mouths/lids did not match the painted resting faces. The live v4 drawings retain original lip colour, shading and beard texture around smaller openings, short tooth hints and softly contracted lips. Lower lip/detail moves by a few native pixels within the existing matte; the head/jaw silhouette stays registered. Lids have curved tapered lashes, soft creases and native skin texture; half blinks retain the original lower iris. Corin's far lid ends before the side cheek and his tooth gap stays dark. Recruits already declared two talk frames; the neutral “round” in Claude's review sheet was a preview fallback, not a runtime frame. New review sheets leave that column blank and label it honestly.
+
+[V4 Mara comparison](../art/concepts/portrait-drawings-v4/mara-before-after.png) · [native drawings](../art/concepts/portrait-drawings-v4/all-faces.png) · [96px card review](../art/concepts/portrait-drawings-v4/card-size.png) · [actual Godot 192/96px captures](../art/concepts/portrait-drawings-v4/godot/) · [motion](../art/concepts/portrait-drawings-v4/godot/motion.gif)
 
 The owner chose precise edits to the existing pixels and subsequently spotted a real defect in v2: closed lids left an old outer eye/lash visible, and the rounded mouth sat inside the resting lips. The renderer already swaps one eye and one mouth layer. The problem was artwork: resting features were baked into the character plate, and replacement masks covered only their interiors.
 
@@ -12,26 +16,26 @@ The owner chose precise edits to the existing pixels and subsequently spotted a 
 
 Each animated face now uses a **clean character plate**, with its complete eye openings/lashes and lips removed. Separate neutral components restore the original resting portrait **byte-for-byte**. Half/closed lids and speaking drawings start on that clean surface and replace the complete feature, including outer lashes and lip corners. The rounded mouth retracts the corners; the old resting lip line is absent. Corin's open mouth retains his missing front tooth.
 
-There are 87 runtime PNGs in the twelve `frames-pixel-v3/` folders: twelve clean character plates, twenty-four neutral components and fifty-one animation drawings. All retain the native 192px transparent canvas and original palette. Original character PNGs, v1/v2 frames, rejected generated candidates, shared body/outfit, condition/light passes and playback timing remain intact. No gameplay or save migration is involved. Eighteen static expression resources and flat camp NPC portraits are unchanged.
+The 87 active runtime PNGs comprise twelve clean plates and twenty-four neutral components in `frames-pixel-v3/`, plus fifty-one refined animation drawings in `frames-pixel-v4/`. Native 192px canvases, original palettes and all v3 component mattes remain exact. Older artwork is retained as history. Body/outfit sharing, conditions/lighting, playback, card filtering and save paths are unchanged. Eighteen static expression resources and flat camp NPC portraits stay unanimated.
 
 ## Review
 
-[Paused inspector](../art/concepts/portrait-rigs-v1/inspector.html) · [Mara defect/correction](../art/concepts/portrait-components-v3/mara-before-after.png) · [all held drawings](../art/concepts/portrait-components-v3/all-faces.png) · [Godot motion](../art/concepts/portrait-components-v3/godot/motion.gif)
+[Paused inspector](../art/concepts/portrait-rigs-v1/inspector.html) · [historical v2 duplicate correction](../art/concepts/portrait-components-v3/mara-before-after.png)
 
-The inspector starts paused on Corin. Previous/Next, arrows and frame buttons hold each drawing beside its resting reference. Enlarged crops and a changed-pixel overlay remain available. **Hide eye and mouth components on the right** exposes the actual clean plate. This control is disabled for static expressions. The title identifies **complete components v3**; reload an old browser tab after pulling.
+The inspector starts paused on Corin. Previous/Next, arrows and frame buttons hold each drawing beside its resting reference. Enlarged crops and a changed-pixel overlay remain available. **Hide eye and mouth components on the right** exposes the actual clean plate. This control is disabled for static expressions. The title identifies **textured drawings v4**; reload an old browser tab after pulling.
 
 V2 comparisons and masks remain as history. Their “unchanged outside small masks” checks passed but did not prove full feature replacement: those masks missed old corners and lashes. Do not cite that report as proof that duplicates were absent. Rejected ImageGen atlases remain unwired in [portrait-frames-v2](../art/source/portrait-frames-v2/README.md); v3 uses native pixel edits.
 
 ## Rebuilding
 
-[Authoring tool](../tools/art/build_portrait_components.py) · [source footprints/recipes](../art/source/portrait-components-v3/README.md)
+[Current authoring tool](../tools/art/refine_portrait_drawings.py) · [v4 contours/recipes](../art/source/portrait-drawings-v4/README.md) · [frozen v3 component sources](../art/source/portrait-components-v3/README.md)
 
-Run `build_portrait_components.py --wire`, then `build_portrait_registry.py`. The builder validates immutable original source hashes. Full feature footprints and contours are explicit for each face. Skin fills use unmasked boundaries and the same face's cheek texture, snapped to its existing palette. Masks are clipped to the original silhouette. There is no scaling, atlas fitting, head movement or borrowed facial anatomy.
+Run `refine_portrait_drawings.py --wire`, then `build_portrait_registry.py`. The tool validates immutable original hashes, reads v3 clean/neutral/matte references unchanged, and fits native source lip tissue around a modest opening. Local integer sampling preserves texture; no skin/beard blur, full-head scaling, generated redraw or atlas fitting is used. Half lids retain actual original iris pixels, and curved lids use local skin texture/palette. The v3 builder refuses to overwrite the frozen components while v4 is live.
 
-All four older exporters retain complete v3 character/neutral/animation bindings, rejecting changed original anatomy until components are rebuilt. Static expression exports retain their own drawings. The superseded v2 tool refuses to overwrite v3 bindings. New faces require their own fitted contours and visual review.
+All four older exporters preserve v3 clean/neutral plus v4 animation bindings, rejecting changed original anatomy until refitted. Static expression exports retain their own drawings. The archived v2 tool refuses to overwrite its references. New faces require their own fitted contours and visual review.
 
 ## Verification
 
-`validate_portrait_components.py` checks exact resting reconstruction, actual clean underlayers, full feature mattes, original hashes/palette, every simultaneous blink/talk combination, and independent original iris/lip-corner regression points. Each closed eye forms one connected drawing. Native and enlarged held frames were also visually inspected.
+`validate_portrait_drawings.py` passes 658 checks for original and v3 source preservation, exact neutral reconstruction, full mattes, original palette, actual simultaneous composition, connected curved lashes, visible original lower iris, distinct declared mouths, Corin's profile/beard/teeth and untouched timing/filter code. The historical v3 validator/report remains preserved; neither report certifies visual style. All twelve faces were inspected held at native, enlarged and 96px card sizes.
 
-All thirty-one resources are compared against `3d1ee08`: only explicit clean-character/neutral/animation texture bindings may differ. Static expressions and all other values remain exact. Godot 4.7.2 passes 450 playback/lifecycle checks and 118 family/ownership checks. The inspector passes 37 desktop/phone-browser checks and retains 18 captures, including the bare face and rounded mouth. Export preservation is checked for all 31 resources. Engine logs are clean. These checks do not replace physical iPhone review or the owner's judgment of the drawings.
+All thirty-one resources are compared against `3d1ee08`: only explicit clean-character/neutral/animation texture bindings may differ. Static expressions and all other values remain exact. Godot 4.7.2 passes 450 playback/lifecycle, 118 ownership and 40 native/card-capture checks. The inspector passes 37 browser checks and retains 18 captures. Export preservation is checked for all 31 resources. Engine logs are clean. The 96px nearest review is retained without changing card filtering; physical iPhone review and the owner's judgment remain separate.

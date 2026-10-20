@@ -105,6 +105,8 @@ def prefer_pixel_frames(lines):
     """
     if not any(line.startswith('blink_frames =') for line in lines):return lines
     manifest=ROOT/'art/concepts/portrait-components-v3/components.json'
+    refined=ROOT/'art/concepts/portrait-drawings-v4/components.json'
+    if refined.exists() and json.loads(refined.read_text(encoding='utf-8')).get('status')=='live':manifest=refined
     if not manifest.exists():return lines
     records=json.loads(manifest.read_text(encoding='utf-8'))['faces']
     by_texture={old:(record,new) for record in records for old,new in record['bindings'].items()}

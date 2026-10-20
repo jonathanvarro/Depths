@@ -1,0 +1,10 @@
+{
+	"checks": 40,
+	"failures": [],
+	"groups": 4,
+	"recruit_round": "blank labelled 2 talk shapes; never neutral fallback",
+	"sizes": [
+		192,
+		96
+	]
+}

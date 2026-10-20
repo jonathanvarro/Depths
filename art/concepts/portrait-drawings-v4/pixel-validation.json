@@ -1,0 +1,9 @@
+{
+  "issue": 124,
+  "revision": "textured-drawings-v4",
+  "faces": 12,
+  "checks": 658,
+  "failures": [],
+  "neutral_clean_mattes_timing": "unchanged from v3",
+  "review": "192px,96px nearest, held enlarged crops and actual Godot motion; style remains a visual judgment."
+}

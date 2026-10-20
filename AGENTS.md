@@ -85,8 +85,9 @@ Templates > Download and Install; already installed on the owner's PC).
   `data/portraits/catalog.json` separates reusable body-template families from
   unique hero rigs (`rig_kind`/`rig_family`/`face_id`); facial drawings are never
   shared across heads. Complete native eye/mouth separation and paused inspection:
-  `docs/portrait-rig-families.md`; preserve clean character + neutral/animated
-  `frames-pixel-v3` components on re-export. V2 left baked features visible.
+  `docs/portrait-rig-families.md`; preserve `frames-pixel-v3` clean/neutral
+  components and `frames-pixel-v4` animation on re-export (#124).
+  V2 left baked features visible; v3 animation was too flat. Timing is unchanged.
 - `scripts/portrait_view.gd` – draws a PortraitSet; blink(), talk(), hurt(),
   set_condition().
 - `scripts/party_card.gd` – HUD card per party slot (portrait, name, health

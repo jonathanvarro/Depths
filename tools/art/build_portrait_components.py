@@ -149,6 +149,9 @@ def full_patch(image,mask):
 
 def main():
  parser=argparse.ArgumentParser();parser.add_argument('--wire',action='store_true');args=parser.parse_args()
+ refined=ROOT/'art/concepts/portrait-drawings-v4/components.json'
+ if refined.exists() and json.loads(refined.read_text(encoding='utf-8')).get('status')=='live':
+  parser.error('V3 clean/neutral components are frozen beneath the v4 drawings. Use refine_portrait_drawings.py --wire.')
  records=json.loads(ORIGINALS.read_text(encoding='utf-8'))['faces']
  write(SOURCE/'.gdignore','');write(REVIEW/'.gdignore','');write(REVIEW/'.gitignore','motion-*.png\n')
  report={'issue':121,'revision':'complete-components-v3','canvas':[192,192],

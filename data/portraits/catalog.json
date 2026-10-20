@@ -50,28 +50,28 @@
         },
         {
           "name": "Half lid",
-          "eyes": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/eyes-half.png",
+          "eyes": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v4/eyes-half.png",
           "mouth": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Closed",
-          "eyes": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/eyes-closed.png",
+          "eyes": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v4/eyes-closed.png",
           "mouth": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Small mouth",
           "eyes": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/eyes-neutral.png",
-          "mouth": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/mouth-small.png"
+          "mouth": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v4/mouth-small.png"
         },
         {
           "name": "Open mouth",
           "eyes": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/eyes-neutral.png",
-          "mouth": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/mouth-open.png"
+          "mouth": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v4/mouth-open.png"
         },
         {
           "name": "Round mouth",
           "eyes": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/eyes-neutral.png",
-          "mouth": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/mouth-round.png"
+          "mouth": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v4/mouth-round.png"
         }
       ],
       "eye_box": [
@@ -87,7 +87,7 @@
         104
       ],
       "separated_features": true,
-      "review": "Complete components v3: underlying face has no eyes or lips; neutral components restore the original exactly. Each animation replaces the whole feature, including its corners."
+      "review": "Textured drawings v4: original lip tissue, smaller shaded openings and curved lids retaining the lower iris in half blinks. V3 clean/neutral components and timing are preserved."
     },
     {
       "id": "corin",
@@ -113,28 +113,28 @@
         },
         {
           "name": "Half lid",
-          "eyes": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/eyes-half.png",
+          "eyes": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v4/eyes-half.png",
           "mouth": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Closed",
-          "eyes": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/eyes-closed.png",
+          "eyes": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v4/eyes-closed.png",
           "mouth": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Small mouth",
           "eyes": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/eyes-neutral.png",
-          "mouth": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/mouth-small.png"
+          "mouth": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v4/mouth-small.png"
         },
         {
           "name": "Open mouth",
           "eyes": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/eyes-neutral.png",
-          "mouth": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/mouth-open.png"
+          "mouth": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v4/mouth-open.png"
         },
         {
           "name": "Round mouth",
           "eyes": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/eyes-neutral.png",
-          "mouth": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/mouth-round.png"
+          "mouth": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v4/mouth-round.png"
         }
       ],
       "eye_box": [
@@ -150,7 +150,7 @@
         104
       ],
       "separated_features": true,
-      "review": "Complete components v3: underlying face has no eyes or lips; neutral components restore the original exactly. Each animation replaces the whole feature, including its corners."
+      "review": "Textured drawings v4: original lip tissue, smaller shaded openings and curved lids retaining the lower iris in half blinks. V3 clean/neutral components and timing are preserved."
     },
     {
       "id": "mara",
@@ -176,28 +176,28 @@
         },
         {
           "name": "Half lid",
-          "eyes": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/eyes-half.png",
+          "eyes": "res://art/portraits/mara-neutral-v1/frames-pixel-v4/eyes-half.png",
           "mouth": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Closed",
-          "eyes": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/eyes-closed.png",
+          "eyes": "res://art/portraits/mara-neutral-v1/frames-pixel-v4/eyes-closed.png",
           "mouth": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Small mouth",
           "eyes": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/eyes-neutral.png",
-          "mouth": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/mouth-small.png"
+          "mouth": "res://art/portraits/mara-neutral-v1/frames-pixel-v4/mouth-small.png"
         },
         {
           "name": "Open mouth",
           "eyes": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/eyes-neutral.png",
-          "mouth": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/mouth-open.png"
+          "mouth": "res://art/portraits/mara-neutral-v1/frames-pixel-v4/mouth-open.png"
         },
         {
           "name": "Round mouth",
           "eyes": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/eyes-neutral.png",
-          "mouth": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/mouth-round.png"
+          "mouth": "res://art/portraits/mara-neutral-v1/frames-pixel-v4/mouth-round.png"
         }
       ],
       "eye_box": [
@@ -213,7 +213,7 @@
         112
       ],
       "separated_features": true,
-      "review": "Complete components v3: underlying face has no eyes or lips; neutral components restore the original exactly. Each animation replaces the whole feature, including its corners."
+      "review": "Textured drawings v4: original lip tissue, smaller shaded openings and curved lids retaining the lower iris in half blinks. V3 clean/neutral components and timing are preserved."
     },
     {
       "id": "brawler-a-exhausted",
@@ -315,23 +315,23 @@
         },
         {
           "name": "Half lid",
-          "eyes": "res://art/portraits/recruit-roster-v1/brawler-a/frames-pixel-v3/eyes-half.png",
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-a/frames-pixel-v4/eyes-half.png",
           "mouth": "res://art/portraits/recruit-roster-v1/brawler-a/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Closed",
-          "eyes": "res://art/portraits/recruit-roster-v1/brawler-a/frames-pixel-v3/eyes-closed.png",
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-a/frames-pixel-v4/eyes-closed.png",
           "mouth": "res://art/portraits/recruit-roster-v1/brawler-a/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Small mouth",
           "eyes": "res://art/portraits/recruit-roster-v1/brawler-a/frames-pixel-v3/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/brawler-a/frames-pixel-v3/mouth-small.png"
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-a/frames-pixel-v4/mouth-small.png"
         },
         {
           "name": "Open mouth",
           "eyes": "res://art/portraits/recruit-roster-v1/brawler-a/frames-pixel-v3/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/brawler-a/frames-pixel-v3/mouth-open.png"
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-a/frames-pixel-v4/mouth-open.png"
         }
       ],
       "eye_box": [
@@ -347,7 +347,7 @@
         112
       ],
       "separated_features": true,
-      "review": "Complete components v3: underlying face has no eyes or lips; neutral components restore the original exactly. Each animation replaces the whole feature, including its corners."
+      "review": "Textured drawings v4: original lip tissue, smaller shaded openings and curved lids retaining the lower iris in half blinks. V3 clean/neutral components and timing are preserved."
     },
     {
       "id": "brawler-b-exhausted",
@@ -449,23 +449,23 @@
         },
         {
           "name": "Half lid",
-          "eyes": "res://art/portraits/recruit-roster-v1/brawler-b/frames-pixel-v3/eyes-half.png",
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-b/frames-pixel-v4/eyes-half.png",
           "mouth": "res://art/portraits/recruit-roster-v1/brawler-b/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Closed",
-          "eyes": "res://art/portraits/recruit-roster-v1/brawler-b/frames-pixel-v3/eyes-closed.png",
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-b/frames-pixel-v4/eyes-closed.png",
           "mouth": "res://art/portraits/recruit-roster-v1/brawler-b/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Small mouth",
           "eyes": "res://art/portraits/recruit-roster-v1/brawler-b/frames-pixel-v3/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/brawler-b/frames-pixel-v3/mouth-small.png"
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-b/frames-pixel-v4/mouth-small.png"
         },
         {
           "name": "Open mouth",
           "eyes": "res://art/portraits/recruit-roster-v1/brawler-b/frames-pixel-v3/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/brawler-b/frames-pixel-v3/mouth-open.png"
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-b/frames-pixel-v4/mouth-open.png"
         }
       ],
       "eye_box": [
@@ -481,7 +481,7 @@
         112
       ],
       "separated_features": true,
-      "review": "Complete components v3: underlying face has no eyes or lips; neutral components restore the original exactly. Each animation replaces the whole feature, including its corners."
+      "review": "Textured drawings v4: original lip tissue, smaller shaded openings and curved lids retaining the lower iris in half blinks. V3 clean/neutral components and timing are preserved."
     },
     {
       "id": "brawler-c-exhausted",
@@ -583,23 +583,23 @@
         },
         {
           "name": "Half lid",
-          "eyes": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/eyes-half.png",
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v4/eyes-half.png",
           "mouth": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Closed",
-          "eyes": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/eyes-closed.png",
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v4/eyes-closed.png",
           "mouth": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Small mouth",
           "eyes": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/mouth-small.png"
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v4/mouth-small.png"
         },
         {
           "name": "Open mouth",
           "eyes": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/mouth-open.png"
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v4/mouth-open.png"
         }
       ],
       "eye_box": [
@@ -615,7 +615,7 @@
         112
       ],
       "separated_features": true,
-      "review": "Complete components v3: underlying face has no eyes or lips; neutral components restore the original exactly. Each animation replaces the whole feature, including its corners."
+      "review": "Textured drawings v4: original lip tissue, smaller shaded openings and curved lids retaining the lower iris in half blinks. V3 clean/neutral components and timing are preserved."
     },
     {
       "id": "scout-b-exhausted",
@@ -717,23 +717,23 @@
         },
         {
           "name": "Half lid",
-          "eyes": "res://art/portraits/recruit-roster-v1/scout-b/frames-pixel-v3/eyes-half.png",
+          "eyes": "res://art/portraits/recruit-roster-v1/scout-b/frames-pixel-v4/eyes-half.png",
           "mouth": "res://art/portraits/recruit-roster-v1/scout-b/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Closed",
-          "eyes": "res://art/portraits/recruit-roster-v1/scout-b/frames-pixel-v3/eyes-closed.png",
+          "eyes": "res://art/portraits/recruit-roster-v1/scout-b/frames-pixel-v4/eyes-closed.png",
           "mouth": "res://art/portraits/recruit-roster-v1/scout-b/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Small mouth",
           "eyes": "res://art/portraits/recruit-roster-v1/scout-b/frames-pixel-v3/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/scout-b/frames-pixel-v3/mouth-small.png"
+          "mouth": "res://art/portraits/recruit-roster-v1/scout-b/frames-pixel-v4/mouth-small.png"
         },
         {
           "name": "Open mouth",
           "eyes": "res://art/portraits/recruit-roster-v1/scout-b/frames-pixel-v3/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/scout-b/frames-pixel-v3/mouth-open.png"
+          "mouth": "res://art/portraits/recruit-roster-v1/scout-b/frames-pixel-v4/mouth-open.png"
         }
       ],
       "eye_box": [
@@ -749,7 +749,7 @@
         112
       ],
       "separated_features": true,
-      "review": "Complete components v3: underlying face has no eyes or lips; neutral components restore the original exactly. Each animation replaces the whole feature, including its corners."
+      "review": "Textured drawings v4: original lip tissue, smaller shaded openings and curved lids retaining the lower iris in half blinks. V3 clean/neutral components and timing are preserved."
     },
     {
       "id": "scout-c-exhausted",
@@ -851,23 +851,23 @@
         },
         {
           "name": "Half lid",
-          "eyes": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/eyes-half.png",
+          "eyes": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v4/eyes-half.png",
           "mouth": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Closed",
-          "eyes": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/eyes-closed.png",
+          "eyes": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v4/eyes-closed.png",
           "mouth": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Small mouth",
           "eyes": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/mouth-small.png"
+          "mouth": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v4/mouth-small.png"
         },
         {
           "name": "Open mouth",
           "eyes": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/mouth-open.png"
+          "mouth": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v4/mouth-open.png"
         }
       ],
       "eye_box": [
@@ -883,7 +883,7 @@
         112
       ],
       "separated_features": true,
-      "review": "Complete components v3: underlying face has no eyes or lips; neutral components restore the original exactly. Each animation replaces the whole feature, including its corners."
+      "review": "Textured drawings v4: original lip tissue, smaller shaded openings and curved lids retaining the lower iris in half blinks. V3 clean/neutral components and timing are preserved."
     },
     {
       "id": "warden-b-exhausted",
@@ -985,23 +985,23 @@
         },
         {
           "name": "Half lid",
-          "eyes": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/eyes-half.png",
+          "eyes": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v4/eyes-half.png",
           "mouth": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Closed",
-          "eyes": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/eyes-closed.png",
+          "eyes": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v4/eyes-closed.png",
           "mouth": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Small mouth",
           "eyes": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/mouth-small.png"
+          "mouth": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v4/mouth-small.png"
         },
         {
           "name": "Open mouth",
           "eyes": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/mouth-open.png"
+          "mouth": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v4/mouth-open.png"
         }
       ],
       "eye_box": [
@@ -1017,7 +1017,7 @@
         112
       ],
       "separated_features": true,
-      "review": "Complete components v3: underlying face has no eyes or lips; neutral components restore the original exactly. Each animation replaces the whole feature, including its corners."
+      "review": "Textured drawings v4: original lip tissue, smaller shaded openings and curved lids retaining the lower iris in half blinks. V3 clean/neutral components and timing are preserved."
     },
     {
       "id": "warden-c-exhausted",
@@ -1119,23 +1119,23 @@
         },
         {
           "name": "Half lid",
-          "eyes": "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v3/eyes-half.png",
+          "eyes": "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v4/eyes-half.png",
           "mouth": "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Closed",
-          "eyes": "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v3/eyes-closed.png",
+          "eyes": "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v4/eyes-closed.png",
           "mouth": "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Small mouth",
           "eyes": "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v3/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v3/mouth-small.png"
+          "mouth": "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v4/mouth-small.png"
         },
         {
           "name": "Open mouth",
           "eyes": "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v3/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v3/mouth-open.png"
+          "mouth": "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v4/mouth-open.png"
         }
       ],
       "eye_box": [
@@ -1151,7 +1151,7 @@
         112
       ],
       "separated_features": true,
-      "review": "Complete components v3: underlying face has no eyes or lips; neutral components restore the original exactly. Each animation replaces the whole feature, including its corners."
+      "review": "Textured drawings v4: original lip tissue, smaller shaded openings and curved lids retaining the lower iris in half blinks. V3 clean/neutral components and timing are preserved."
     },
     {
       "id": "scout-a-exhausted",
@@ -1253,23 +1253,23 @@
         },
         {
           "name": "Half lid",
-          "eyes": "res://art/portraits/recruit-kit-v1/scout-a/frames-pixel-v3/eyes-half.png",
+          "eyes": "res://art/portraits/recruit-kit-v1/scout-a/frames-pixel-v4/eyes-half.png",
           "mouth": "res://art/portraits/recruit-kit-v1/scout-a/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Closed",
-          "eyes": "res://art/portraits/recruit-kit-v1/scout-a/frames-pixel-v3/eyes-closed.png",
+          "eyes": "res://art/portraits/recruit-kit-v1/scout-a/frames-pixel-v4/eyes-closed.png",
           "mouth": "res://art/portraits/recruit-kit-v1/scout-a/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Small mouth",
           "eyes": "res://art/portraits/recruit-kit-v1/scout-a/frames-pixel-v3/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-kit-v1/scout-a/frames-pixel-v3/mouth-small.png"
+          "mouth": "res://art/portraits/recruit-kit-v1/scout-a/frames-pixel-v4/mouth-small.png"
         },
         {
           "name": "Open mouth",
           "eyes": "res://art/portraits/recruit-kit-v1/scout-a/frames-pixel-v3/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-kit-v1/scout-a/frames-pixel-v3/mouth-open.png"
+          "mouth": "res://art/portraits/recruit-kit-v1/scout-a/frames-pixel-v4/mouth-open.png"
         }
       ],
       "eye_box": [
@@ -1285,7 +1285,7 @@
         108
       ],
       "separated_features": true,
-      "review": "Complete components v3: underlying face has no eyes or lips; neutral components restore the original exactly. Each animation replaces the whole feature, including its corners."
+      "review": "Textured drawings v4: original lip tissue, smaller shaded openings and curved lids retaining the lower iris in half blinks. V3 clean/neutral components and timing are preserved."
     },
     {
       "id": "warden-a-exhausted",
@@ -1387,23 +1387,23 @@
         },
         {
           "name": "Half lid",
-          "eyes": "res://art/portraits/recruit-kit-v1/warden-a/frames-pixel-v3/eyes-half.png",
+          "eyes": "res://art/portraits/recruit-kit-v1/warden-a/frames-pixel-v4/eyes-half.png",
           "mouth": "res://art/portraits/recruit-kit-v1/warden-a/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Closed",
-          "eyes": "res://art/portraits/recruit-kit-v1/warden-a/frames-pixel-v3/eyes-closed.png",
+          "eyes": "res://art/portraits/recruit-kit-v1/warden-a/frames-pixel-v4/eyes-closed.png",
           "mouth": "res://art/portraits/recruit-kit-v1/warden-a/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Small mouth",
           "eyes": "res://art/portraits/recruit-kit-v1/warden-a/frames-pixel-v3/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-kit-v1/warden-a/frames-pixel-v3/mouth-small.png"
+          "mouth": "res://art/portraits/recruit-kit-v1/warden-a/frames-pixel-v4/mouth-small.png"
         },
         {
           "name": "Open mouth",
           "eyes": "res://art/portraits/recruit-kit-v1/warden-a/frames-pixel-v3/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-kit-v1/warden-a/frames-pixel-v3/mouth-open.png"
+          "mouth": "res://art/portraits/recruit-kit-v1/warden-a/frames-pixel-v4/mouth-open.png"
         }
       ],
       "eye_box": [
@@ -1419,7 +1419,7 @@
         108
       ],
       "separated_features": true,
-      "review": "Complete components v3: underlying face has no eyes or lips; neutral components restore the original exactly. Each animation replaces the whole feature, including its corners."
+      "review": "Textured drawings v4: original lip tissue, smaller shaded openings and curved lids retaining the lower iris in half blinks. V3 clean/neutral components and timing are preserved."
     }
   ],
   "supporting_resources": [
@@ -1446,28 +1446,28 @@
         },
         {
           "name": "Half lid",
-          "eyes": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/eyes-half.png",
+          "eyes": "res://art/portraits/mara-neutral-v1/frames-pixel-v4/eyes-half.png",
           "mouth": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Closed",
-          "eyes": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/eyes-closed.png",
+          "eyes": "res://art/portraits/mara-neutral-v1/frames-pixel-v4/eyes-closed.png",
           "mouth": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Small mouth",
           "eyes": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/eyes-neutral.png",
-          "mouth": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/mouth-small.png"
+          "mouth": "res://art/portraits/mara-neutral-v1/frames-pixel-v4/mouth-small.png"
         },
         {
           "name": "Open mouth",
           "eyes": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/eyes-neutral.png",
-          "mouth": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/mouth-open.png"
+          "mouth": "res://art/portraits/mara-neutral-v1/frames-pixel-v4/mouth-open.png"
         },
         {
           "name": "Round mouth",
           "eyes": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/eyes-neutral.png",
-          "mouth": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/mouth-round.png"
+          "mouth": "res://art/portraits/mara-neutral-v1/frames-pixel-v4/mouth-round.png"
         }
       ],
       "eye_box": [
@@ -1483,7 +1483,7 @@
         112
       ],
       "separated_features": true,
-      "review": "Complete components v3: underlying face has no eyes or lips; neutral components restore the original exactly. Each animation replaces the whole feature, including its corners."
+      "review": "Textured drawings v4: original lip tissue, smaller shaded openings and curved lids retaining the lower iris in half blinks. V3 clean/neutral components and timing are preserved."
     }
   ],
   "rule": "Sharing a canvas or body never licenses sharing another face’s eye/mouth frames."

@@ -36,7 +36,7 @@ The browser uses isolated example inventory, oil/health and loadouts; showing th
 
 ## Portrait coherence
 
-**Follow-up #121:** the owner found mismatch and then identified old lashes/lip corners beneath v2 drawings. The checks below establish dimensions/playback, not complete replacement. [Rig separation, paused inspection and complete v3 components](portrait-rig-families.md) now use clean character plates and full eye/mouth replacements; neutral components reconstruct the original resting faces exactly. The inspector can hide facial components to expose the actual underlying plate.
+**Follow-ups #121/#124:** the owner identified old lashes/lip corners beneath v2 drawings, then Claude identified flat mouth/lid rendering in v3. [The current handoff](portrait-rig-families.md) retains v3 clean/neutral/matte components with textured v4 animation: original lip tissue, smaller openings and curved lids retaining the lower iris halfway through a blink. The inspector exposes the underlying plate. Resting reconstruction, timing and filtering remain exact; dimension/playback checks alone do not certify style.
 
 [Animation preview](../art/concepts/portrait-coherence-v1/motion.gif) · [hero frame registration](../art/concepts/portrait-coherence-v1/registration-0.png)
 

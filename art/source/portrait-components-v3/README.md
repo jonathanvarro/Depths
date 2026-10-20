@@ -1,6 +1,6 @@
 # Complete portrait components · #121
 
-Owner-authorized native pixel edits of twelve existing faces. No generated redraw, scaling or new design. Original sources remain untouched. Rebuild with `tools/art/build_portrait_components.py --wire`, then `build_portrait_registry.py`.
+Frozen native component sources for twelve existing faces. Original sources remain untouched. Clean plates, neutral components and mattes are reused exactly by [the v4 refinement](../portrait-drawings-v4/README.md). Rebuild live drawings with `refine_portrait_drawings.py --wire`, then `build_portrait_registry.py`; the older v3 builder protects these references while v4 is live.
 
 Each face folder retains its immutable resting reference, clean reference, full eye/mouth erasure footprints, per-drawing ink/slit masks and recipe/bindings/source hashes. Skin fills use unmasked native boundaries and local cheek texture, snapped to the original palette. Every mask is clipped to the original silhouette. Clean plates remove the **whole** feature, including outer lashes and lip corners; neutral components restore it exactly. Animated drawings start on the clean surface.
 

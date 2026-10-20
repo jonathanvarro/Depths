@@ -6,7 +6,10 @@ ROOT=Path(__file__).resolve().parents[2]
 BASELINE='3d1ee08'
 catalogue=json.loads((ROOT/'data/portraits/catalog.json').read_text(encoding='utf-8'))
 entries=catalogue['portraits']+catalogue['supporting_resources']
-components=json.loads((ROOT/'art/concepts/portrait-components-v3/components.json').read_text(encoding='utf-8'))
+manifest=ROOT/'art/concepts/portrait-components-v3/components.json'
+refined=ROOT/'art/concepts/portrait-drawings-v4/components.json'
+if refined.exists() and json.loads(refined.read_text(encoding='utf-8')).get('status')=='live':manifest=refined
+components=json.loads(manifest.read_text(encoding='utf-8'))
 approved={resource:face['bindings'] for face in components['faces'] for resource in face['resources']}
 for entry in entries:
     path=ROOT/entry['resource'].removeprefix('res://')
