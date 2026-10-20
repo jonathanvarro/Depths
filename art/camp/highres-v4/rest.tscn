@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="Script" path="res://art/camp/organic-v3/site.gd" id="script"]
+[ext_resource type="Texture2D" path="res://art/camp/highres-v4/rest.png" id="texture"]
+[ext_resource type="Script" path="res://art/camp/organic-v3/warm_light.gd" id="light"]
+
+[node name="rest" type="Node2D"]
+script = ExtResource("script")
+texture_filter = 2
+[node name="Base" type="Sprite2D" parent="."]
+position = Vector2(24, 205)
+scale = Vector2(0.4, 0.4)
+centered = false
+texture = ExtResource("texture")
+light_mask = 2
+[node name="Lantern0" type="PointLight2D" parent="."]
+script = ExtResource("light")
+position = Vector2(157, 249)
+base_energy = 0.3
+texture_scale = 0.55
+phase = 8.299999999999999
+core_size = Vector2(2, 4)

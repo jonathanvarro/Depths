@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="SupplyItem" format=3]
 
 [ext_resource type="Script" path="res://scripts/supply_item.gd" id="1"]
-[ext_resource type="Texture2D" path="res://art/items/treasure-v1/amethyst.png" id="2"]
+[ext_resource type="Texture2D" path="res://art/items/refined-v2/amethyst.png" id="2"]
 
 [resource]
 script = ExtResource("1")
 icon = ExtResource("2")
 display_name = "Rough amethyst"
-description = "A small cluster of violet crystal, still in its rock."
+description = "Violet points still rooted in pale stone. The broken base is gritty with the old seam."
 effect = 5
 use_time = 0
 price = 5

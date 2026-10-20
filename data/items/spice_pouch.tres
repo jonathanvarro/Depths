@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="SupplyItem" format=3]
 
 [ext_resource type="Script" path="res://scripts/supply_item.gd" id="1"]
-[ext_resource type="Texture2D" path="res://art/items/treasure-extra-v1/spice-pouch.png" id="2"]
+[ext_resource type="Texture2D" path="res://art/items/refined-v2/spice-pouch.png" id="2"]
 
 [resource]
 script = ExtResource("1")
 icon = ExtResource("2")
 display_name = "Sealed spice pouch"
-description = "Pepper and something sweeter. Traders pay well for it."
+description = "A red-brown packet cinched tight under an unbroken seal. Pepper and a sweet, dry scent escape through the cloth."
 effect = 5
 use_time = 0
 price = 9

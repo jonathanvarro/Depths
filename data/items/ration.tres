@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="SupplyItem" format=3]
 
 [ext_resource type="Script" path="res://scripts/supply_item.gd" id="1"]
-[ext_resource type="Texture2D" path="res://art/items/pack-64-v1/ration.png" id="2"]
+[ext_resource type="Texture2D" path="res://art/items/refined-v2/ration.png" id="2"]
 
 [resource]
 script = ExtResource("1")
 icon = ExtResource("2")
-display_name = "Ration"
-description = "Feeds the whole party. Each hero regains 4 health over 20 time, or at the next rest."
+display_name = "Trail ration"
+description = "Hard bread, dried meat and cheese in a tied cloth. Feeds the party: each hero regains 4 health over 20 time, completed by rest or a floor change."
 effect = 1
 amount = 4
 duration = 20

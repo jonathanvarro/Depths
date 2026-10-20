@@ -1,0 +1,524 @@
+{
+  "date": "2026-10-18",
+  "baseline_commit": "56f6ca67ed72b98c99c2dbc84bb6907e32ac4146",
+  "live_resources": 32,
+  "native_icons": 34,
+  "all_non_visual_resource_content_unchanged": true,
+  "explicit_gameplay_properties_checked": 164,
+  "runtime_rgba_bytes": 2228224,
+  "sources_unchanged": true,
+  "source_upscales": 0,
+  "assets": [
+    {
+      "id": "broken_knife",
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        8,
+        10,
+        120,
+        118
+      ],
+      "colours": 64,
+      "original_preserved": true
+    },
+    {
+      "id": "broken_short_sword",
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        10,
+        8,
+        117,
+        120
+      ],
+      "colours": 63,
+      "original_preserved": true
+    },
+    {
+      "id": "cracked_staff",
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        11,
+        8,
+        117,
+        120
+      ],
+      "colours": 62,
+      "original_preserved": true
+    },
+    {
+      "id": "iron_sword",
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        8,
+        8,
+        120,
+        120
+      ],
+      "colours": 64,
+      "original_preserved": true
+    },
+    {
+      "id": "leather_jerkin",
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        16,
+        8,
+        112,
+        120
+      ],
+      "colours": 64,
+      "original_preserved": true
+    },
+    {
+      "id": "padded_coat",
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        22,
+        8,
+        106,
+        120
+      ],
+      "colours": 62,
+      "original_preserved": true
+    },
+    {
+      "id": "plain_knife",
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        8,
+        9,
+        120,
+        118
+      ],
+      "colours": 64,
+      "original_preserved": true
+    },
+    {
+      "id": "simple_spear",
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        10,
+        8,
+        117,
+        120
+      ],
+      "colours": 64,
+      "original_preserved": true
+    },
+    {
+      "id": "woodcutters_axe",
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        8,
+        12,
+        120,
+        116
+      ],
+      "colours": 64,
+      "original_preserved": true
+    },
+    {
+      "id": "wooden_club",
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        11,
+        8,
+        117,
+        120
+      ],
+      "colours": 64,
+      "original_preserved": true
+    },
+    {
+      "id": "amber_pendant",
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        14,
+        8,
+        114,
+        120
+      ],
+      "colours": 64,
+      "original_preserved": true
+    },
+    {
+      "id": "amethyst",
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        22,
+        8,
+        106,
+        120
+      ],
+      "colours": 64,
+      "original_preserved": true
+    },
+    {
+      "id": "copper_ore",
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        8,
+        11,
+        120,
+        116
+      ],
+      "colours": 64,
+      "original_preserved": true
+    },
+    {
+      "id": "dressing",
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        8,
+        19,
+        120,
+        109
+      ],
+      "colours": 64,
+      "original_preserved": true
+    },
+    {
+      "id": "emerald",
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        8,
+        16,
+        120,
+        111
+      ],
+      "colours": 61,
+      "original_preserved": true
+    },
+    {
+      "id": "fine_cloth",
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        8,
+        21,
+        120,
+        106
+      ],
+      "colours": 64,
+      "original_preserved": true
+    },
+    {
+      "id": "garnet",
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        8,
+        17,
+        120,
+        110
+      ],
+      "colours": 63,
+      "original_preserved": true
+    },
+    {
+      "id": "gold_nuggets",
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        8,
+        15,
+        120,
+        113
+      ],
+      "colours": 64,
+      "original_preserved": true
+    },
+    {
+      "id": "gold_signet_ring",
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        8,
+        24,
+        120,
+        104
+      ],
+      "colours": 64,
+      "original_preserved": true
+    },
+    {
+      "id": "military_medal",
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        30,
+        8,
+        98,
+        120
+      ],
+      "colours": 64,
+      "original_preserved": true
+    },
+    {
+      "id": "oil_flask",
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        17,
+        8,
+        110,
+        120
+      ],
+      "colours": 62,
+      "original_preserved": true
+    },
+    {
+      "id": "old_coin_purse",
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        8,
+        11,
+        120,
+        117
+      ],
+      "colours": 63,
+      "original_preserved": true
+    },
+    {
+      "id": "pearl_necklace",
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        8,
+        21,
+        120,
+        107
+      ],
+      "colours": 64,
+      "original_preserved": true
+    },
+    {
+      "id": "ration",
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        8,
+        18,
+        120,
+        109
+      ],
+      "colours": 64,
+      "original_preserved": true
+    },
+    {
+      "id": "restorative_draught",
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        26,
+        8,
+        102,
+        120
+      ],
+      "colours": 64,
+      "original_preserved": true
+    },
+    {
+      "id": "silver_goblet",
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        26,
+        8,
+        101,
+        120
+      ],
+      "colours": 64,
+      "original_preserved": true
+    },
+    {
+      "id": "silver_ingot",
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        8,
+        29,
+        120,
+        99
+      ],
+      "colours": 64,
+      "original_preserved": true
+    },
+    {
+      "id": "silver_locket",
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        26,
+        8,
+        101,
+        120
+      ],
+      "colours": 64,
+      "original_preserved": true
+    },
+    {
+      "id": "silver_trinket",
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        8,
+        8,
+        119,
+        120
+      ],
+      "colours": 64,
+      "original_preserved": true
+    },
+    {
+      "id": "small_reliquary",
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        8,
+        14,
+        120,
+        114
+      ],
+      "colours": 64,
+      "original_preserved": true
+    },
+    {
+      "id": "spice_pouch",
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        8,
+        12,
+        120,
+        115
+      ],
+      "colours": 64,
+      "original_preserved": true
+    },
+    {
+      "id": "torch",
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        35,
+        13,
+        95,
+        115
+      ],
+      "colours": 63,
+      "original_preserved": true
+    },
+    {
+      "id": "lantern",
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        33,
+        8,
+        95,
+        120
+      ],
+      "colours": 64,
+      "original_preserved": true
+    },
+    {
+      "id": "lantern-unlit",
+      "canvas": [
+        128,
+        128
+      ],
+      "bounds": [
+        33,
+        8,
+        95,
+        120
+      ],
+      "colours": 64,
+      "original_preserved": true
+    }
+  ],
+  "failures": []
+}

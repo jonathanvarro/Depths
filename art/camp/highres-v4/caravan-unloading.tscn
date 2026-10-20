@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="Texture2D" path="res://art/camp/highres-v4/caravan-unloading.png" id="texture"]
+
+[node name="Unloading" type="Sprite2D"]
+position = Vector2(51, 111)
+scale = Vector2(0.4, 0.4)
+centered = false
+texture = ExtResource("texture")
+texture_filter = 2
+light_mask = 2
+visible = false

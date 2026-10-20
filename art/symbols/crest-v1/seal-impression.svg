@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>Forked seal impression</title>
+  <desc>Single-colour impression for a wax seal, shallow stamp or stitched cloth label. Adapt its colour to the material; it is not an interaction icon.</desc>
+  <path d="m32 3 14 4 10 10 5 15-4 14-11 11-15 4-14-5L7 46 3 31l5-14L18 7z" fill="none" stroke="#5d3c2a" stroke-width="3"/>
+  <g fill="#5d3c2a" transform="translate(8 8) scale(.75)">
+    <path d="M29 55V13l6-5v44l-3 5z"/>
+    <path d="m29 29-13-5-5-12 9 4 5 8 4-1z"/>
+    <path d="m35 19 9-8 7 4-5 10-11 7v-7l7-5 2-4-4 2-5 7z"/>
+    <path d="m29 35-12-4-8 8 4 11 10-3 6-7v-7l-9 9-4 1-1-4 4-2 10 4z"/>
+    <path d="m35 40 10-8 5 5-5 9-10 5v-7l6-3 2-5-8 10z"/>
+  </g>
+</svg>

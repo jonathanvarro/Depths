@@ -25,12 +25,20 @@ var _talk_tween: Tween
 var _hurt_tween: Tween
 var _trembling := false
 var _tremble_clock := 0.0
+var _animated := true
+var _cosmetic_rng := RandomNumberGenerator.new()
 
 
 func _init() -> void:
 	clip_contents = true
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	_cosmetic_rng.randomize()
+	visibility_changed.connect(_visibility_changed)
+
+
+func _ready() -> void:
+	_schedule_blink()
 
 
 ## Builds the layer stack. `fallback` is used when there's no set.
@@ -40,6 +48,7 @@ func show_portrait(layers: PortraitSet, fallback: Texture2D = null) -> void:
 			tween.kill()  # its layers are about to be replaced
 	portrait_set = layers
 	for child in get_children():
+		remove_child(child)  # old timers/layers cannot run during this frame
 		child.queue_free()
 	_overlays.clear()
 	_character = null
@@ -100,7 +109,7 @@ func set_condition(condition: String, shown: bool) -> void:
 
 
 func blink() -> void:
-	if portrait_set == null or portrait_set.blink_frames.is_empty() or _eyes == null:
+	if not _animated or not is_visible_in_tree() or portrait_set == null or portrait_set.blink_frames.is_empty() or _eyes == null:
 		return
 	var frames := portrait_set.blink_frames.duplicate()
 	var reverse := portrait_set.blink_frames.duplicate()
@@ -109,9 +118,11 @@ func blink() -> void:
 	if _eye_tween and _eye_tween.is_valid():
 		_eye_tween.kill()
 	_eye_tween = create_tween()
-	for frame in frames:
+	for index in frames.size():
+		var frame: Texture2D = frames[index]
 		_eye_tween.tween_callback(func(): if is_instance_valid(_eyes): _eyes.texture = frame)
-		_eye_tween.tween_interval(BLINK_FRAME_SECONDS)
+		# Hold the closed drawing briefly, then reopen through the half lid.
+		_eye_tween.tween_interval(BLINK_FRAME_SECONDS * (2 if index == portrait_set.blink_frames.size() - 1 else 1))
 	_eye_tween.tween_callback(func(): if is_instance_valid(_eyes) and portrait_set: _eyes.texture = portrait_set.eyes)
 
 
@@ -134,18 +145,53 @@ func _apply_illumination() -> void:
 			_: _light_highlight.modulate = Color(1, 1, 1, 0)
 
 
-## Cycles mouth shapes for `seconds`, then returns to the resting mouth.
+## Short syllables pass through the small mouth and include resting pauses.
+## These are speech gestures, not audio/phoneme synchronization.
 func talk(seconds: float) -> void:
-	if portrait_set == null or portrait_set.talk_frames.is_empty() or _mouth == null:
+	stop_talking()
+	if seconds <= 0 or not _animated or not is_visible_in_tree() or portrait_set == null or portrait_set.talk_frames.is_empty() or _mouth == null:
 		return
-	if _talk_tween:
-		_talk_tween.kill()
 	_talk_tween = create_tween()
-	for i in int(seconds / TALK_FRAME_SECONDS):
-		var frame: Texture2D = portrait_set.talk_frames.pick_random()
+	var sequence := [0, 1, 0, -1, 0, 2, 0, -1] if portrait_set.talk_frames.size() >= 3 else [0, 1, 0, -1]
+	var remaining := seconds
+	var i := 0
+	while remaining > 0.0001:
+		var index: int = sequence[i % sequence.size()]
+		var frame: Texture2D = portrait_set.mouth if index < 0 else portrait_set.talk_frames[mini(index, portrait_set.talk_frames.size() - 1)]
+		var duration := minf(remaining, TALK_FRAME_SECONDS * (1.5 if index < 0 else (1.25 if index > 0 else 1.0)))
 		_talk_tween.tween_callback(func(): if is_instance_valid(_mouth): _mouth.texture = frame)
-		_talk_tween.tween_interval(TALK_FRAME_SECONDS)
+		_talk_tween.tween_interval(duration)
+		remaining -= duration
+		i += 1
 	_talk_tween.tween_callback(func(): if is_instance_valid(_mouth) and portrait_set: _mouth.texture = portrait_set.mouth)
+
+
+func stop_talking() -> void:
+	if _talk_tween and _talk_tween.is_valid():
+		_talk_tween.kill()
+	if is_instance_valid(_mouth) and portrait_set:
+		_mouth.texture = portrait_set.mouth
+
+
+## Fallen heroes remain still. Restoring health permits animation again.
+func set_animated(enabled: bool) -> void:
+	if _animated == enabled:
+		return
+	_animated = enabled
+	_visibility_changed()
+
+
+func _visibility_changed() -> void:
+	if not _animated or not is_visible_in_tree():
+		if _blink_timer:
+			_blink_timer.stop()
+		if _eye_tween and _eye_tween.is_valid():
+			_eye_tween.kill()
+		if is_instance_valid(_eyes) and portrait_set:
+			_eyes.texture = portrait_set.eyes
+		stop_talking()
+	else:
+		_schedule_blink()
 
 
 ## A constant small tremor (used while panicking). Needs no extra art.
@@ -161,7 +207,7 @@ func _process(delta: float) -> void:
 	_tremble_clock -= delta
 	if _tremble_clock <= 0.0:
 		_tremble_clock = 0.05
-		_rig.position = Vector2(randf_range(-1.5, 1.5), randf_range(-1.0, 1.0))
+		_rig.position = Vector2(_cosmetic_rng.randf_range(-1.5, 1.5), _cosmetic_rng.randf_range(-1.0, 1.0))
 
 
 ## Red flash and a short shake. Needs no extra art.
@@ -193,7 +239,8 @@ func _add_layer(texture: Texture2D) -> TextureRect:
 
 
 func _schedule_blink() -> void:
-	_blink_timer.start(randf_range(BLINK_INTERVAL.x, BLINK_INTERVAL.y))
+	if _blink_timer and is_inside_tree() and is_visible_in_tree() and _animated and portrait_set and not portrait_set.blink_frames.is_empty():
+		_blink_timer.start(_cosmetic_rng.randf_range(BLINK_INTERVAL.x, BLINK_INTERVAL.y))
 
 
 func _on_blink_timer() -> void:

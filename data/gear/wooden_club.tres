@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" path="res://scripts/equipment.gd" id="1"]
 
-[ext_resource type="Texture2D" path="res://art/items/inventory-64-v1/wooden-club.png" id="art_icon"]
+[ext_resource type="Texture2D" path="res://art/items/refined-v2/wooden-club.png" id="art_icon"]
 
 [resource]
 script = ExtResource("1")
 icon = ExtResource("art_icon")
-display_name = "Wooden club"
-description = "A knotted length of oak. Simple and dependable."
+display_name = "Knotted oak club"
+description = "A swollen knot forms the head; a dark wrap marks the grip. Plain oak, balanced well enough for repeated blows."
 attack_min = 2
 attack_max = 4
 accuracy_bonus = 0.0

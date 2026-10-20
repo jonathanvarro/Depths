@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" path="res://scripts/equipment.gd" id="1"]
 
-[ext_resource type="Texture2D" path="res://art/items/inventory-64-v1/padded-coat.png" id="campaign_art"]
+[ext_resource type="Texture2D" path="res://art/items/refined-v2/padded-coat.png" id="campaign_art"]
 
 [resource]
 script = ExtResource("1")
 icon = ExtResource("campaign_art")
-display_name = "Padded coat"
-description = "Quilted wool, thick enough to blunt a bite. Takes 1 off every blow."
+display_name = "Quilted coat"
+description = "Sleeveless quilting hangs in narrow, hand-stitched channels. Reduces each blow by 1, to a minimum of 1."
 attack_min = 0
 attack_max = 0
 price = 28

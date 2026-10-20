@@ -1,0 +1,152 @@
+{
+  "kind": "Isolated combined interface review; live Pack only receives focused cleanup",
+  "new_generated_art": false,
+  "art_sources": [
+    "art/concepts/interface/pack-heroes-v3/assets/bag.png",
+    "art/concepts/interface/pack-heroes-v3/assets/roll.png"
+  ],
+  "resource_count": 32,
+  "hero_fixture": "Three starting hero options shown together for comparison only; not an approved starting party.",
+  "sources": [
+    {
+      "path": "data/items/amber_pendant.tres",
+      "sha256": "515a04a73d0655becaf8813005610da80f876b0b4ae36eef2810de4c1f32b7ba"
+    },
+    {
+      "path": "data/items/amethyst.tres",
+      "sha256": "f2f16f0a6ea3e94f6919bf0b2979ba12804af3e0baa768921fd23f2d919ef492"
+    },
+    {
+      "path": "data/items/copper_ore.tres",
+      "sha256": "c4f2c4488ba65d4f630c3e7e0c9b9cb26696363a9acdb3931eac7880ee7c5f84"
+    },
+    {
+      "path": "data/items/dressing.tres",
+      "sha256": "50d4787eba5ddd7942bab8008f08397c69566c1a5b658d391da5539b55483a85"
+    },
+    {
+      "path": "data/items/emerald.tres",
+      "sha256": "a682a1781d258a58e57de5039a4ea9a3247e28542e216ebbbb5c79db9859c4eb"
+    },
+    {
+      "path": "data/items/fine_cloth.tres",
+      "sha256": "352eed0861db6fa8388c5c0e6db0f604c1119278c1524eb60a9d161e4ae6ea7f"
+    },
+    {
+      "path": "data/items/garnet.tres",
+      "sha256": "0b63ce1b5c1943d55a12859ccf98252cd2aed1c00dc967762aab4867fbaf8075"
+    },
+    {
+      "path": "data/items/gold_nuggets.tres",
+      "sha256": "38bc278329d22bcc3951cf2c25186daba730736a9489ef2033f99749a0bcadc8"
+    },
+    {
+      "path": "data/items/gold_signet_ring.tres",
+      "sha256": "6864a23927f24020107bc7608173dc52162d2f8e16227dc4565439eb2b21c978"
+    },
+    {
+      "path": "data/items/military_medal.tres",
+      "sha256": "e0854f3c4313253ae4d4bad59171f8ae486f6038263c6d73d018c7d17a678d13"
+    },
+    {
+      "path": "data/items/oil_flask.tres",
+      "sha256": "d6bfb211dc69f4e9cdcdf55bca74a3f33f19d7b48ff3bcc9647c1a58e1efd61a"
+    },
+    {
+      "path": "data/items/old_coin_purse.tres",
+      "sha256": "e05a3fab621ceae0e58fb4e024b0252b4e03f4c4e979461552217e05d1edcdb2"
+    },
+    {
+      "path": "data/items/pearl_necklace.tres",
+      "sha256": "2f1f213f0df6c11cfd25e03eae5329cc3a582b95bf105235bcc1eb6c79dbf967"
+    },
+    {
+      "path": "data/items/ration.tres",
+      "sha256": "ff1dd8889677afdd28997df2305ee76f8569cacdc01b341aff8f19a94d4a8fb9"
+    },
+    {
+      "path": "data/items/restorative_draught.tres",
+      "sha256": "32d72bf10e69c9bdb5cf01fe9d6967a01cb50ada1e08a26d992d7b75d7e568ab"
+    },
+    {
+      "path": "data/items/silver_goblet.tres",
+      "sha256": "ac186edef80778a0f95ba8a78afa914c7712716405777adf28ebd1d5dae789cd"
+    },
+    {
+      "path": "data/items/silver_ingot.tres",
+      "sha256": "1a0ebc9b6b98119ea7f3eef87c5de34477cb3284fb794d4e11502a7ad83bebf1"
+    },
+    {
+      "path": "data/items/silver_locket.tres",
+      "sha256": "2c3b48c8e1f3af4b97f5f6b9b2857dbe773a4b583fd38d7899b30b9337d2284d"
+    },
+    {
+      "path": "data/items/silver_trinket.tres",
+      "sha256": "b13ebbfec3e06f4d7d577f4e704742f310a04a04966ea70a793f4efcd879f428"
+    },
+    {
+      "path": "data/items/small_reliquary.tres",
+      "sha256": "bd1dcd66af63244a5ddea870d9781aeed87e92012b07158befb5c76738ec4fb8"
+    },
+    {
+      "path": "data/items/spice_pouch.tres",
+      "sha256": "7c1c7032c4fdc1dcf5393176eba6f4ad968e93f926ee2986478632c35f925f89"
+    },
+    {
+      "path": "data/items/torch.tres",
+      "sha256": "b961fed9b9e3abeafb6d1d873af78c7b17c45a0a63319124ea975eac75ca493e"
+    },
+    {
+      "path": "data/gear/broken_knife.tres",
+      "sha256": "1e719c09eb0fe8ce8a1da2d1605b3805b54eaebf8daeacbbaedba967f14c70ea"
+    },
+    {
+      "path": "data/gear/broken_short_sword.tres",
+      "sha256": "9dc6b25a16bd13d2d56fab902c2bf0823c22e6e84068d0a24889d967f9d6b55f"
+    },
+    {
+      "path": "data/gear/cracked_staff.tres",
+      "sha256": "2c28d4680ebbcad4264f3f60905296d3294a21acc05bc7a18cb663060c8ba9ab"
+    },
+    {
+      "path": "data/gear/iron_sword.tres",
+      "sha256": "d724f20a25ffa9ef0d7daf978ca3c65110626e67804ad0f095b8bd5d78c40366"
+    },
+    {
+      "path": "data/gear/leather_jerkin.tres",
+      "sha256": "36ae70d9c3d3dfbd01077678cc0d8a791786be2a8c033e8a11cf5e1adcf40749"
+    },
+    {
+      "path": "data/gear/padded_coat.tres",
+      "sha256": "e5eaa0a4a04f1c4313d8cd95f8a8c8f18ced29708ce6ca93a1daa2916d8dd0d6"
+    },
+    {
+      "path": "data/gear/plain_knife.tres",
+      "sha256": "5d75eae8af688c7fe3f685b1ccac22fcd566b39812036de4fcbefd257610d43e"
+    },
+    {
+      "path": "data/gear/simple_spear.tres",
+      "sha256": "4adda9d5b9348390d8f97dd17ed6c323be645f039fd8b537c3a09859217be2fb"
+    },
+    {
+      "path": "data/gear/woodcutters_axe.tres",
+      "sha256": "94014baff260c0ef033cc856ec575dc764cd185f5d3cf4e161e8ac913c06b20c"
+    },
+    {
+      "path": "data/gear/wooden_club.tres",
+      "sha256": "ae91fcb34b9ee39d6f295cde57eadd1d7dcc0f861c0d1b676fe9f53f1a0a0e9b"
+    },
+    {
+      "path": "data/companions/mara.tres",
+      "sha256": "1c35fe90508efb1dad90f3d3010befddd4d348ec39c09f3b8d93b7937ac78072"
+    },
+    {
+      "path": "data/companions/corin.tres",
+      "sha256": "a68dbac66978750597e25d84ed41c25c97bc4f5c58feb2c68d8f906c8f06a842"
+    },
+    {
+      "path": "data/companions/alwen.tres",
+      "sha256": "5352af949821d3c47a5ee668dd8495e6746ee2849bf694383fbca0e2dd3f8ad6"
+    }
+  ]
+}

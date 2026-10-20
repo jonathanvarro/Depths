@@ -1,0 +1,22 @@
+{
+	"captures": [
+		"starting-desktop",
+		"starting-desktop-larger",
+		"unloading-desktop",
+		"trading-desktop",
+		"morning-desktop",
+		"starting-1278",
+		"starting-1278-larger",
+		"unloading-1278",
+		"trading-1278",
+		"morning-1278",
+		"starting-1334",
+		"starting-1334-larger",
+		"unloading-1334",
+		"trading-1334",
+		"morning-1334"
+	],
+	"checks": 101,
+	"failures": [],
+	"physical_phone_test": false
+}

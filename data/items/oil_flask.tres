@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="SupplyItem" format=3]
 
 [ext_resource type="Script" path="res://scripts/supply_item.gd" id="1"]
-[ext_resource type="Texture2D" path="res://art/items/pack-64-v1/oil-flask.png" id="2"]
+[ext_resource type="Texture2D" path="res://art/items/refined-v2/oil-flask.png" id="2"]
 
 [resource]
 script = ExtResource("1")
 icon = ExtResource("2")
-display_name = "Oil flask"
-description = "Refills the lantern. A part-used flask keeps what's left."
+display_name = "Leather oil flask"
+description = "A squat, stitched flask with a narrow metal pourer. Refills the lantern; unused oil stays in the flask."
 effect = 0
 amount = 100
 duration = 0

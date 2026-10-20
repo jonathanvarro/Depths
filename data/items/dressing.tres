@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="SupplyItem" format=3]
 
 [ext_resource type="Script" path="res://scripts/supply_item.gd" id="1"]
-[ext_resource type="Texture2D" path="res://art/items/inventory-64-v1/clean-dressing.png" id="2"]
+[ext_resource type="Texture2D" path="res://art/items/refined-v2/dressing.png" id="2"]
 
 [resource]
 script = ExtResource("1")
 icon = ExtResource("2")
-display_name = "Clean dressing"
-description = "Binds one injury so it stops hindering you until camp. It doesn't heal it."
+display_name = "Linen dressing"
+description = "Clean linen wound tight and tied with cord. Binds one injury until camp, removing its penalties without healing it."
 effect = 3
 amount = 0
 duration = 0

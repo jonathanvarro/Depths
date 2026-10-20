@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="Equipment" format=3]
 
 [ext_resource type="Script" path="res://scripts/equipment.gd" id="1"]
-[ext_resource type="Texture2D" path="res://art/items/armour-v1/leather-jerkin.png" id="2"]
+[ext_resource type="Texture2D" path="res://art/items/refined-v2/leather-jerkin.png" id="2"]
 
 [resource]
 script = ExtResource("1")
-display_name = "Leather jerkin"
-description = "Stiff leather over the chest and shoulders. Takes 2 off every blow, but you move slower in it."
+display_name = "Patched leather jerkin"
+description = "Thick hide, front ties and crooked repairs. Reduces each blow by 2, to a minimum of 1; initiative -2."
 icon = ExtResource("2")
 attack_min = 0
 attack_max = 0

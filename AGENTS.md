@@ -160,7 +160,7 @@ Templates > Download and Install; already installed on the owner's PC).
   `enemy_act()` carries out the shown intent, then plans the next one.
 - Campsite (#40): `scripts/camp_state.gd` (day, `stash` as a Supplies,
   `recovering`, rest/treat/restock; `day_passed` re-seeds the cave in
-  main.gd) and `scripts/camp_screen.gd` (`art/camp/organic-v3` terrain,
+  main.gd) and `scripts/camp_screen.gd` (`art/camp/highres-v4` terrain,
   independent site scenes/local lights + layout.json; one activity per site).
   CampState `site_presence` / `set_site_present()` controls availability;
   absent keys default present for older saves. New story starts use #80's
@@ -168,6 +168,8 @@ Templates > Download and Install; already installed on the owner's PC).
   expedition return; smith appears after the first camp rest.
   `Injury.recovery_days`.
   `tools/camp_check.gd` drives every place (args: desk|phone, screenshot dir).
+  Higher-resolution camp/items, shared seal, focused live interface cleanup and
+  portrait animation handoff: `docs/visual-refinement.md` (#112/#120).
 - Recruitment (#41): `scripts/recruits.gd` (roles, traits, names; `make(rng)`),
   CampState `candidates` / `hire` / `dismiss` / `leave_behind` / `rejoin`;
   Companion `guard_factor`, `toughness`, `strength`, `weakness`, `founder`.

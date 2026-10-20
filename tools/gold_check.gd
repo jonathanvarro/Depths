@@ -122,7 +122,7 @@ func _initialize() -> void:
 	await _open("smith")
 	await _snap("smith")
 	check("can't afford the axe", not camp.buy_gear(ps, load("res://data/gear/woodcutters_axe.tres")))
-	check("buy a plain knife", _press(main._camp, "Buy 8g") and supplies.gold == 2 and supplies.gear.any(func(g): return g.display_name == "Plain knife"))
+	check("buy a plain knife", _press(main._camp, "Buy 8g") and supplies.gold == 2 and supplies.gear.any(func(g): return g.resource_path == "res://data/gear/plain_knife.tres"))
 	await _open("supplies")
 	check("sell it back for 2g (30%)", _press(main._camp, "Sell 2g") and supplies.gold == 4)
 

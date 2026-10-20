@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="SupplyItem" format=3]
 
 [ext_resource type="Script" path="res://scripts/supply_item.gd" id="1"]
-[ext_resource type="Texture2D" path="res://art/items/treasure-v1/emerald.png" id="2"]
+[ext_resource type="Texture2D" path="res://art/items/refined-v2/emerald.png" id="2"]
 
 [resource]
 script = ExtResource("1")
 icon = ExtResource("2")
-display_name = "Cut emerald"
-description = "A stepped green gem. Worth more than everything else in your pack."
+display_name = "Step-cut emerald"
+description = "A deep green stone cut into broad, descending steps. One corner is chipped; the heart is clear."
 effect = 5
 use_time = 0
 price = 15

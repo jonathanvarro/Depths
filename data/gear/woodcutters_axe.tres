@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" path="res://scripts/equipment.gd" id="1"]
 
-[ext_resource type="Texture2D" path="res://art/items/inventory-64-v1/woodcutters-axe.png" id="art_icon"]
+[ext_resource type="Texture2D" path="res://art/items/refined-v2/woodcutters-axe.png" id="art_icon"]
 
 [resource]
 script = ExtResource("1")
 icon = ExtResource("art_icon")
 display_name = "Woodcutter's axe"
-description = "Heavy. Bites deep when it lands - which isn't always."
+description = "A pitted iron wedge on a curved, darkened haft. A heavy working tool: hard-hitting, but difficult to land cleanly."
 attack_min = 3
 attack_max = 5
 accuracy_bonus = -0.1

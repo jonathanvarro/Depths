@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Depths · Field kit</title><style>html,body{margin:0;background:#11130f}body{min-width:700px}</style></head><body>
+<div id="depths-pack-heroes" aria-label="Field kit">
+ <style>@@styles@@</style>
+ <div class="stage">
+  <div class="launcher" hidden><button data-open="equipment">Open field kit</button></div>
+  <section class="window" aria-label="Equipment and shared backpack">
+   <header class="top"><h1 class="page-title">Field kit</h1><div class="resources"><span class="currency" aria-label="84 gold"><img src="../../../symbols/crest-v1/currency-coin.svg" alt=""><strong>84</strong></span><div class="lantern" aria-label="Lantern oil 62 of 100"><img src="../../../items/refined-v2/lantern.png" alt=""><div><span class="number">62 / 100</span><div class="oil-track"><div class="oil-fill"></div></div></div></div></div><button class="back icon-button" aria-label="Close field kit" title="Close field kit"><img src="../../../ui/controls-v1/close.svg" alt=""></button></header>
+   <div class="combined">
+    <section class="hero-panel" aria-label="Selected hero equipment">
+     <nav class="party" aria-label="Choose hero"></nav>
+     <div class="hero-context"><span class="hero-role muted"></span><div class="quick-condition"></div></div>
+     <div class="tabs" role="tablist" aria-label="Hero details"><button id="depths-equipment-tab" role="tab" aria-selected="true" aria-controls="depths-equipment">Equipment</button><button id="depths-status-tab" role="tab" aria-selected="false" aria-controls="depths-status">Status</button></div>
+     <div class="hero-body"><section id="depths-equipment" role="tabpanel" aria-labelledby="depths-equipment-tab"><div class="equipment" aria-label="Equipped items"></div></section><section id="depths-status" role="tabpanel" aria-labelledby="depths-status-tab" hidden></section></div>
+    </section>
+    <section class="pack-page" aria-label="Shared backpack"><div class="bag-wrap"><div class="physical-bag"><div class="bag" aria-label="Inventory slots"></div></div></div><nav class="bag-pages" aria-label="Backpack pages" hidden><button class="previous icon-button" aria-label="Previous backpack page">‹</button><span class="page-count number"></span><button class="next icon-button" aria-label="Next backpack page">›</button></nav></section>
+   </div>
+   <div class="inspection-dock" aria-label="Item inspection"><section class="inspect" role="dialog" aria-modal="false" aria-labelledby="depths-inspect-title" data-pinned="false" hidden><button class="close icon-button" aria-label="Close item details" title="Close item details">×</button><div class="inspect-head"><img alt=""><div><h2 id="depths-inspect-title"></h2><p class="inspect-type muted small"></p></div></div><p id="depths-inspect-description"></p><p class="inspect-extra muted small"></p><button class="primary"></button></section></div>
+   <p class="feedback" role="status" aria-live="polite"></p>
+  </section>
+ </div>
+</div>
+<script>@@data@@
+@@script@@</script>
+</body></html>

@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="SupplyItem" format=3]
 
 [ext_resource type="Script" path="res://scripts/supply_item.gd" id="1"]
-[ext_resource type="Texture2D" path="res://art/items/treasure-extra-v1/small-reliquary.png" id="2"]
+[ext_resource type="Texture2D" path="res://art/items/refined-v2/small-reliquary.png" id="2"]
 
 [resource]
 script = ExtResource("1")
 icon = ExtResource("2")
-display_name = "Small reliquary"
-description = "A gilded box for a saint's relic. Heavier than it looks."
+display_name = "Gilt reliquary"
+description = "A small iron-bound casket beneath worn gilding. Its pitched lid and stubborn clasp guard a relic you cannot see."
 effect = 5
 use_time = 0
 price = 16

@@ -185,6 +185,7 @@ func refresh() -> void:
 	_style.set_border_width_all(1 if state == StrainRules.State.STEADY else 2)
 	var shade := lerpf(1.0, 0.7, companion.strain / StrainRules.MAX)
 	_portrait.modulate = Color(0.45, 0.45, 0.45) if not companion.is_alive() else Color(shade, shade, shade)
+	_portrait.set_animated(companion.is_alive())
 	_portrait.set_condition("pallor", companion.is_alive() and state >= StrainRules.State.SHAKEN)
 	for overlay in companion.appearance:
 		_portrait.set_condition(overlay, true)
@@ -193,7 +194,7 @@ func refresh() -> void:
 
 	_clear_icons()
 	if companion.is_alive() and companion.bleeding:
-		_add_icon(Icon.BLEEDING, false, "Bleeding: loses health as she walks")
+		_add_icon(Icon.BLEEDING, false, "Bleeding: loses health while walking")
 	if companion.is_unconscious():
 		_add_icon(Icon.DOWN, false, "Unconscious: a draught or a rest revives them")
 	elif not companion.is_alive():

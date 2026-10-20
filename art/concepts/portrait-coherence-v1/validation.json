@@ -1,0 +1,16 @@
+{
+	"animated_faces": 12,
+	"checks": 450,
+	"failures": [],
+	"note": "NPC flat portraits and worried/exhausted expression sets remain static; no borrowed animation drawings.",
+	"portrait_sets": 30,
+	"registration_columns": [
+		"neutral",
+		"half lid",
+		"closed",
+		"small mouth",
+		"open mouth",
+		"round or open mouth",
+		"restored neutral"
+	]
+}

@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="Script" path="res://art/camp/organic-v3/site.gd" id="script"]
+[ext_resource type="Texture2D" path="res://art/camp/highres-v4/fire.png" id="texture"]
+[ext_resource type="SpriteFrames" path="res://art/features/campfire-v1/frames.tres" id="flames"]
+
+[node name="fire" type="Node2D"]
+script = ExtResource("script")
+texture_filter = 2
+[node name="Base" type="Sprite2D" parent="."]
+position = Vector2(308, 188)
+scale = Vector2(0.4, 0.4)
+centered = false
+texture = ExtResource("texture")
+light_mask = 2
+[node name="FlameAnchor" type="Node2D" parent="."]
+position = Vector2(399, 248)
+scale = Vector2(0.34, 0.34)
+[node name="Flames" type="AnimatedSprite2D" parent="FlameAnchor"]
+position = Vector2(-64, -102)
+centered = false
+sprite_frames = ExtResource("flames")
+animation = &"burn"
+light_mask = 1

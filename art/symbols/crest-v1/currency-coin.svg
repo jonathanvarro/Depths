@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+  <title>Currency</title>
+  <desc>Small irregular hammered coin with the reduced forked seal. The number beside it supplies the actual gold amount.</desc>
+  <path d="m8 1 6 1 4 4 1 6-3 5-5 2-6-2-3-4-1-6 3-4z" fill="#67441c"/>
+  <path d="m8 1 6 1 3 4 1 6-3 4-5 2-5-2-3-4-1-5 3-4z" fill="#c3943c"/>
+  <path d="m8 2 5 1 3 3-2 1-3-3-5 1-2 3-1 4-1-4 3-5z" fill="#edce79"/>
+  <path d="m6 6 3-2 5 2 2 5-3 4-5 1-4-4z" fill="#b37b2e"/>
+  <path d="M9 15V6l2-1v9zM9 9 6 8 5 5l3 1 1 2zm2-1 3-2 1 2-4 3zM9 11l-3-1-2 2 2 2 3-2zm2 1 3-2 1 2-4 3z" fill="#69471f"/>
+</svg>

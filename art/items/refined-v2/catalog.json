@@ -1,0 +1,1186 @@
+{
+  "version": 2,
+  "date": "2026-10-18",
+  "baseline_commit": "56f6ca67ed72b98c99c2dbc84bb6907e32ac4146",
+  "canvas": [
+    128,
+    128
+  ],
+  "content_box": [
+    112,
+    112
+  ],
+  "padding_minimum": 8,
+  "colour_limit_per_icon": 64,
+  "alpha": "binary cutout",
+  "processing": "Source alpha crop, torch registration rotation only, direct Lanczos reduction, 64-colour quantisation without dither. No upscaling or paint edits.",
+  "items": [
+    {
+      "id": "broken_knife",
+      "resource": "res://data/gear/broken_knife.tres",
+      "name": "Broken knife",
+      "description": "A jagged stump of iron above a two-rivet wooden grip. The missing point makes a poor weapon worse.",
+      "icon": "res://art/items/refined-v2/broken-knife.png",
+      "previous_icon": "res://art/items/opening-tutorial-v1/broken-knife.png",
+      "previous_name": "Broken knife",
+      "previous_description": "Snapped halfway down the blade. Better than bare hands - barely.",
+      "original_resource_sha256": "ef8daf76284bfa674d0228be5bff83f5a0f0cd8e6f1a347b6838da6b6a30fd1e",
+      "source": "res://art/source/opening-tutorial-v1/broken-knife.png",
+      "source_sha256": "f943d3a5294b64ff9f445485aac99faeac143ab880115530d7d417684cdd22bc",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_cell": null,
+      "source_alpha_bounds": [
+        60,
+        192,
+        1108,
+        1203
+      ],
+      "source_rotation_degrees": 0,
+      "direct_source_scale": 0.10687022900763359,
+      "design": "Short jagged stump and two-rivet wooden handle; intact knife retains a visibly complete point.",
+      "gameplay_fields": {
+        "script": "ExtResource(\"1\")",
+        "attack_min": "1",
+        "attack_max": "2",
+        "accuracy_bonus": "-0.05",
+        "price": "0",
+        "force": "false",
+        "light": "true"
+      },
+      "export_sha256": "2456600b880d808a0154aab29476d298e325c97ea2ec012f9664d6d1bd7c49dd"
+    },
+    {
+      "id": "broken_short_sword",
+      "resource": "res://data/gear/broken_short_sword.tres",
+      "name": "Broken short sword",
+      "description": "A broad break ends the blade just above its plain guard. The leather grip still fits a fighting hand.",
+      "icon": "res://art/items/refined-v2/broken-short-sword.png",
+      "previous_icon": "res://art/items/campaign-v1/broken-short-sword.png",
+      "previous_name": "Broken short sword",
+      "previous_description": "Snapped a hand's width from the hilt. Better than bare fists. Barely.",
+      "original_resource_sha256": "ac5bbc14e05ad8e8a487a71f60ba737a492af31636613e813e819ced38535cce",
+      "source": "res://art/source/campaign-v1/broken-short-sword.png",
+      "source_sha256": "b5498b70d05d220fa78edbde21d147f27ea38959cf19d865a87d45f7214e7b97",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_cell": null,
+      "source_alpha_bounds": [
+        191,
+        188,
+        1062,
+        1097
+      ],
+      "source_rotation_degrees": 0,
+      "direct_source_scale": 0.12321232123212321,
+      "design": "Plain crossguard and abruptly truncated broad blade; recognisably a sword despite break.",
+      "gameplay_fields": {
+        "script": "ExtResource(\"1\")",
+        "attack_min": "1",
+        "attack_max": "2",
+        "accuracy_bonus": "-0.05",
+        "price": "0"
+      },
+      "export_sha256": "480384fd2a0cd1009aa300ef43adf8cb27120b1b98eb4c18a49f09625d49bb78"
+    },
+    {
+      "id": "cracked_staff",
+      "resource": "res://data/gear/cracked_staff.tres",
+      "name": "Split walking staff",
+      "description": "A nurse's worn staff, split with the grain above its cloth grip. Light in the hand; unreliable under a hard blow.",
+      "icon": "res://art/items/refined-v2/cracked-staff.png",
+      "previous_icon": "res://art/items/campaign-v1/cracked-staff.png",
+      "previous_name": "Cracked walking staff",
+      "previous_description": "A field nurse's staff, split along its length. It won't take many more blows.",
+      "original_resource_sha256": "a3ed4a49ef531cf6b5318f5cc2ab120b1acfe3d294043d3287f2c2a0fc35f901",
+      "source": "res://art/source/campaign-v1/cracked-staff.png",
+      "source_sha256": "f979ca644663ea6a3da620c4737dcd9f2d9a86443350c9f629f5a12a6ae7f223",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_cell": null,
+      "source_alpha_bounds": [
+        135,
+        73,
+        1190,
+        1193
+      ],
+      "source_rotation_degrees": 0,
+      "direct_source_scale": 0.1,
+      "design": "Long slim wood, central cloth grip and longitudinal split; club has a visibly swollen striking head.",
+      "gameplay_fields": {
+        "script": "ExtResource(\"1\")",
+        "attack_min": "1",
+        "attack_max": "2",
+        "accuracy_bonus": "0.0",
+        "price": "0",
+        "force": "false",
+        "light": "true"
+      },
+      "export_sha256": "917aace4b914be70fc4999f2113d81033bb4ac2b8978e0c50347d4a5276b541a"
+    },
+    {
+      "id": "iron_sword",
+      "resource": "res://data/gear/iron_sword.tres",
+      "name": "Companion's iron sword",
+      "description": "A straight, carefully kept blade above a plain iron crossguard. Familiar leather fills the palm; this one was made to last.",
+      "icon": "res://art/items/refined-v2/iron-sword.png",
+      "previous_icon": "res://art/items/inventory-64-v1/iron-sword.png",
+      "previous_name": "Iron sword",
+      "previous_description": "Your companion's sword. Well kept, and heavier than you remember.",
+      "original_resource_sha256": "e6f7cf64c5c516232d23774e19d1499cd5795829233330a7af6862e394627d1b",
+      "source": "res://art/items/starter-v1/iron-sword.png",
+      "source_sha256": "a0e2dd35d0303859f354ae837eb1f08b93e814f3f80e477c739299288824a0e2",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_cell": null,
+      "source_alpha_bounds": [
+        74,
+        62,
+        1205,
+        1190
+      ],
+      "source_rotation_degrees": 0,
+      "direct_source_scale": 0.09902740937223696,
+      "design": "Long straight blade, full guard and cleaner iron; quality is conveyed by construction rather than jewellery.",
+      "gameplay_fields": {
+        "script": "ExtResource(\"1\")",
+        "attack_min": "3",
+        "attack_max": "5",
+        "accuracy_bonus": "0.05",
+        "price": "40"
+      },
+      "export_sha256": "d2809f72ac0bb441e5b405d154b52546e3c9f6151513002f3236a4398bbfb118"
+    },
+    {
+      "id": "leather_jerkin",
+      "resource": "res://data/gear/leather_jerkin.tres",
+      "name": "Patched leather jerkin",
+      "description": "Thick hide, front ties and crooked repairs. Reduces each blow by 2, to a minimum of 1; initiative -2.",
+      "icon": "res://art/items/refined-v2/leather-jerkin.png",
+      "previous_icon": "res://art/items/armour-v1/leather-jerkin.png",
+      "previous_name": "Leather jerkin",
+      "previous_description": "Stiff leather over the chest and shoulders. Takes 2 off every blow, but you move slower in it.",
+      "original_resource_sha256": "df48cc01e232fdc10ba6e4d3eb7d193225f4788a765abdf6fc56e301d2bc9a10",
+      "source": "res://art/source/backlog96-v1/leather-armour.png",
+      "source_sha256": "278453f2aef0fa410ba6de2989a9e162e51b57fbb7912452d4ee4dbf00198858",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_cell": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "source_alpha_bounds": [
+        105,
+        70,
+        568,
+        609
+      ],
+      "source_rotation_degrees": 0,
+      "direct_source_scale": 0.2077922077922078,
+      "design": "Large flat patched hide panels and front ties; no quilted channels of the padded coat.",
+      "gameplay_fields": {
+        "script": "ExtResource(\"1\")",
+        "attack_min": "0",
+        "attack_max": "0",
+        "price": "48",
+        "slot": "\"body\"",
+        "armour": "2",
+        "initiative_penalty": "2"
+      },
+      "export_sha256": "936aa036ed8fc8f2cfc808cf2f04565496772f87dd47a7f756369403642bea28"
+    },
+    {
+      "id": "padded_coat",
+      "resource": "res://data/gear/padded_coat.tres",
+      "name": "Quilted coat",
+      "description": "Sleeveless quilting hangs in narrow, hand-stitched channels. Reduces each blow by 1, to a minimum of 1.",
+      "icon": "res://art/items/refined-v2/padded-coat.png",
+      "previous_icon": "res://art/items/inventory-64-v1/padded-coat.png",
+      "previous_name": "Padded coat",
+      "previous_description": "Quilted wool, thick enough to blunt a bite. Takes 1 off every blow.",
+      "original_resource_sha256": "4fba1a90190a931bdddf5d686b681c6a0c65c938528bf292ea1e2c39e87da482",
+      "source": "res://art/items/starter-v1/padded-coat.png",
+      "source_sha256": "ddca18f19002b022a1613e047ba7d6f8397415bd45d91aadae633701d68589ec",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_cell": null,
+      "source_alpha_bounds": [
+        196,
+        41,
+        1079,
+        1218
+      ],
+      "source_rotation_degrees": 0,
+      "direct_source_scale": 0.0951571792693288,
+      "design": "Sleeveless rounded garment with dense parallel quilting and small front ties.",
+      "gameplay_fields": {
+        "script": "ExtResource(\"1\")",
+        "attack_min": "0",
+        "attack_max": "0",
+        "price": "28",
+        "slot": "\"body\"",
+        "armour": "1"
+      },
+      "export_sha256": "f5b75d0c47f08ef315a00fb7d220eff3d462ee0b10f8c3732764891b997b5f3f"
+    },
+    {
+      "id": "plain_knife",
+      "resource": "res://data/gear/plain_knife.tres",
+      "name": "Riveted knife",
+      "description": "Two dark rivets secure a wooden grip beneath a short, rust-freckled blade. Light and easy to place, with little weight behind it.",
+      "icon": "res://art/items/refined-v2/plain-knife.png",
+      "previous_icon": "res://art/items/inventory-64-v1/plain-knife.png",
+      "previous_name": "Plain knife",
+      "previous_description": "Light and quick. Easy to land, never heavy.",
+      "original_resource_sha256": "28a0f2b9c19e0a892f5be1d989c78b0eb628d9563cce375b346c6422abd92b80",
+      "source": "res://art/items/starter-v1/plain-knife.png",
+      "source_sha256": "5eeb11ecdf2d278ba17f89c5b7b076e194d545128069c35f4c7307d1badeb9fa",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_cell": null,
+      "source_alpha_bounds": [
+        56,
+        75,
+        1211,
+        1200
+      ],
+      "source_rotation_degrees": 0,
+      "direct_source_scale": 0.09696969696969697,
+      "design": "Wide short iron point, rusty freckles and two-rivet grip; rough useful starter craftsmanship.",
+      "gameplay_fields": {
+        "script": "ExtResource(\"1\")",
+        "attack_min": "1",
+        "attack_max": "3",
+        "accuracy_bonus": "0.1",
+        "price": "8",
+        "force": "false",
+        "light": "true"
+      },
+      "export_sha256": "3336e68bec1aa8c1b32514c319aaa915dbff6b68568aed8aaaee5898da3f1200"
+    },
+    {
+      "id": "simple_spear",
+      "resource": "res://data/gear/simple_spear.tres",
+      "name": "Ash-shaft spear",
+      "description": "A small iron leaf bound to a long ash shaft. Reaches from the back row and can strike enemies behind the front.",
+      "icon": "res://art/items/refined-v2/simple-spear.png",
+      "previous_icon": "res://art/items/inventory-64-v1/simple-spear.png",
+      "previous_name": "Simple spear",
+      "previous_description": "An iron point on an ash shaft. Reaches past the front row: usable from the back, and hits enemies hanging back.",
+      "original_resource_sha256": "2acdfb121e398fa0171088e2db9b1d444faf8397f38455456756349e22592746",
+      "source": "res://art/items/starter-v1/simple-spear.png",
+      "source_sha256": "11c101e0685af50d558d80404de7f37df9764f1742604846ec9c18ed5f1b9e56",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_cell": null,
+      "source_alpha_bounds": [
+        113,
+        59,
+        1201,
+        1195
+      ],
+      "source_rotation_degrees": 0,
+      "direct_source_scale": 0.09859154929577464,
+      "design": "Very long slim shaft and small leaf point; entire shaft kept inside padding for reach identity.",
+      "gameplay_fields": {
+        "script": "ExtResource(\"1\")",
+        "attack_min": "2",
+        "attack_max": "5",
+        "accuracy_bonus": "0.0",
+        "price": "18",
+        "reach": "true"
+      },
+      "export_sha256": "a05b947df402cf0f537102fad283f15b18f81e379729a9a32122c165b2799154"
+    },
+    {
+      "id": "woodcutters_axe",
+      "resource": "res://data/gear/woodcutters_axe.tres",
+      "name": "Woodcutter's axe",
+      "description": "A pitted iron wedge on a curved, darkened haft. A heavy working tool: hard-hitting, but difficult to land cleanly.",
+      "icon": "res://art/items/refined-v2/woodcutters-axe.png",
+      "previous_icon": "res://art/items/inventory-64-v1/woodcutters-axe.png",
+      "previous_name": "Woodcutter's axe",
+      "previous_description": "Heavy. Bites deep when it lands - which isn't always.",
+      "original_resource_sha256": "2fc03fe75294831298c0cd81e11189a812c403561dce7fd66535ad54e3fe08c5",
+      "source": "res://art/items/starter-v1/woodcutters-axe.png",
+      "source_sha256": "9d30d98f5a8bece4faa7882de7a8a3f61d25cc7628ebf9dbce8c7ee5720053a8",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_cell": null,
+      "source_alpha_bounds": [
+        65,
+        104,
+        1222,
+        1175
+      ],
+      "source_rotation_degrees": 0,
+      "direct_source_scale": 0.09680207433016422,
+      "design": "Curved haft and broad single wedge head; asymmetry distinguishes it from linear weapons.",
+      "gameplay_fields": {
+        "script": "ExtResource(\"1\")",
+        "attack_min": "3",
+        "attack_max": "5",
+        "accuracy_bonus": "-0.1",
+        "price": "24"
+      },
+      "export_sha256": "6945b50e4d0a53b72da4f269d80838dc4460f0bd89a082fbbfa06772dc44a2f5"
+    },
+    {
+      "id": "wooden_club",
+      "resource": "res://data/gear/wooden_club.tres",
+      "name": "Knotted oak club",
+      "description": "A swollen knot forms the head; a dark wrap marks the grip. Plain oak, balanced well enough for repeated blows.",
+      "icon": "res://art/items/refined-v2/wooden-club.png",
+      "previous_icon": "res://art/items/inventory-64-v1/wooden-club.png",
+      "previous_name": "Wooden club",
+      "previous_description": "A knotted length of oak. Simple and dependable.",
+      "original_resource_sha256": "2a33be2d572d6dbb8f29f32db16bca8d9e248718d15fda60b40d0e2146428389",
+      "source": "res://art/items/starter-v1/wooden-club.png",
+      "source_sha256": "54943cb657543d7b8dc3c399db2c4cdbef5a2a658ed07ec37ce6a9854b251e1b",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_cell": null,
+      "source_alpha_bounds": [
+        147,
+        76,
+        1220,
+        1208
+      ],
+      "source_rotation_degrees": 0,
+      "direct_source_scale": 0.0989399293286219,
+      "design": "Broad knotted head, tapering shaft and wrapped grip; organic asymmetry with no invented spikes.",
+      "gameplay_fields": {
+        "script": "ExtResource(\"1\")",
+        "attack_min": "2",
+        "attack_max": "4",
+        "accuracy_bonus": "0.0",
+        "price": "10"
+      },
+      "export_sha256": "97fd22a081332130dc2ab1f33169751c643078c29449a15c2c02a67e3c0ea679"
+    },
+    {
+      "id": "amber_pendant",
+      "resource": "res://data/items/amber_pendant.tres",
+      "name": "Amber tear pendant",
+      "description": "Honey-coloured amber hangs in a dark silver claw setting. A short loop of chain is all that remains.",
+      "icon": "res://art/items/refined-v2/amber-pendant.png",
+      "previous_icon": "res://art/items/treasure-v1/amber-pendant.png",
+      "previous_name": "Amber pendant",
+      "previous_description": "A teardrop of amber in a silver rim.",
+      "original_resource_sha256": "e154a9caca35df67865a9612ee7fd6145b0b8a0f3e44497603cfae8fa9a780c9",
+      "source": "res://art/source/treasure-v1/amber-pendant.png",
+      "source_sha256": "e23ac7fffe0ed3d098d7c299addb752055fdb5bc154c1cb328d2f547cb701fbc",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_cell": null,
+      "source_alpha_bounds": [
+        226,
+        70,
+        1234,
+        1201
+      ],
+      "source_rotation_degrees": 0,
+      "direct_source_scale": 0.09902740937223696,
+      "design": "Teardrop amber and short loop; warm translucent centre distinguishes it from the opaque red/green gems.",
+      "gameplay_fields": {
+        "script": "ExtResource(\"1\")",
+        "effect": "5",
+        "use_time": "0",
+        "price": "9"
+      },
+      "export_sha256": "c30a4976c79ce85c2013ade7c274f8563d43ea4465dc946e9f7d893a1cbbfe62"
+    },
+    {
+      "id": "amethyst",
+      "resource": "res://data/items/amethyst.tres",
+      "name": "Rough amethyst",
+      "description": "Violet points still rooted in pale stone. The broken base is gritty with the old seam.",
+      "icon": "res://art/items/refined-v2/amethyst.png",
+      "previous_icon": "res://art/items/treasure-v1/amethyst.png",
+      "previous_name": "Rough amethyst",
+      "previous_description": "A small cluster of violet crystal, still in its rock.",
+      "original_resource_sha256": "e8c4edb8e5a4df6e0e9762b2f97ec782ca5d45b967d63b07e427fc078ae4b745",
+      "source": "res://art/source/treasure-v1/amethyst.png",
+      "source_sha256": "c291b0cbc17803334bb9ee95a41ef18c24d6eadb524548c4cd5d9a636b53264e",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_cell": null,
+      "source_alpha_bounds": [
+        287,
+        117,
+        1074,
+        1167
+      ],
+      "source_rotation_degrees": 0,
+      "direct_source_scale": 0.10666666666666667,
+      "design": "Upright multi-point violet cluster, pale rocky foot; the only uncut crystal cluster.",
+      "gameplay_fields": {
+        "script": "ExtResource(\"1\")",
+        "effect": "5",
+        "use_time": "0",
+        "price": "5"
+      },
+      "export_sha256": "ac0ffaf7282b1801d814be1e1bd13cf6533d075c75c02258e93969fafeae0394"
+    },
+    {
+      "id": "copper_ore",
+      "resource": "res://data/items/copper_ore.tres",
+      "name": "Copper ore",
+      "description": "Green seams crust a dark, freshly broken lump. The merchant buys it for the copper beneath.",
+      "icon": "res://art/items/refined-v2/copper-ore.png",
+      "previous_icon": "res://art/items/inventory-64-v1/copper-ore.png",
+      "previous_name": "Copper ore",
+      "previous_description": "A green-streaked lump from the old workings. The merchant will buy it.",
+      "original_resource_sha256": "4540824b745b4302a38e0e8f2c1e4e677c26ea5ba6f653d2eaeeb7b4e030d24b",
+      "source": "res://art/source/inventory-64-v1/copper-ore.png",
+      "source_sha256": "8ebac1c07cf552d6b9629104b3d23295162ce78e2fe63920a2ac5dc462cedfb3",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_cell": null,
+      "source_alpha_bounds": [
+        139,
+        208,
+        1126,
+        1134
+      ],
+      "source_rotation_degrees": 0,
+      "direct_source_scale": 0.11347517730496454,
+      "design": "Low irregular rock with oxidised green/copper veins, distinct from brilliant gold knots.",
+      "gameplay_fields": {
+        "script": "ExtResource(\"1\")",
+        "effect": "5",
+        "use_time": "0",
+        "price": "3"
+      },
+      "export_sha256": "9a135858fe233dbd14a1204c927372423db287933fd5cb87ce1d8cfd6b166a08"
+    },
+    {
+      "id": "dressing",
+      "resource": "res://data/items/dressing.tres",
+      "name": "Linen dressing",
+      "description": "Clean linen wound tight and tied with cord. Binds one injury until camp, removing its penalties without healing it.",
+      "icon": "res://art/items/refined-v2/dressing.png",
+      "previous_icon": "res://art/items/inventory-64-v1/clean-dressing.png",
+      "previous_name": "Clean dressing",
+      "previous_description": "Binds one injury so it stops hindering you until camp. It doesn't heal it.",
+      "original_resource_sha256": "4c5f69bf5495a0c549fc3bb2f67aa5c92c7dd05fc3967ea81f7779cdfa5a15a8",
+      "source": "res://art/items/starter-v1/clean-dressing.png",
+      "source_sha256": "3718b90b6359be6c9d01660e4d4e10985f53c09e05adbb7917169d8d7b69363c",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_cell": null,
+      "source_alpha_bounds": [
+        82,
+        193,
+        1175,
+        1067
+      ],
+      "source_rotation_degrees": 0,
+      "direct_source_scale": 0.10247026532479414,
+      "design": "Pale rolled linen and loose square end, clean treatment material rather than treasure cloth.",
+      "gameplay_fields": {
+        "script": "ExtResource(\"1\")",
+        "effect": "3",
+        "amount": "0",
+        "duration": "0",
+        "use_time": "3",
+        "use_message": "\"You bind the injury. It will hold until camp.\"",
+        "price": "4"
+      },
+      "export_sha256": "fcb748873cf3a16e7a01d69f0a8681028446922911e14ee79619b1c497c37349"
+    },
+    {
+      "id": "emerald",
+      "resource": "res://data/items/emerald.tres",
+      "name": "Step-cut emerald",
+      "description": "A deep green stone cut into broad, descending steps. One corner is chipped; the heart is clear.",
+      "icon": "res://art/items/refined-v2/emerald.png",
+      "previous_icon": "res://art/items/treasure-v1/emerald.png",
+      "previous_name": "Cut emerald",
+      "previous_description": "A stepped green gem. Worth more than everything else in your pack.",
+      "original_resource_sha256": "8407ef71fc26002c0b41b86a2a69a9bf528f2e2e0457002123154db9d77ac143",
+      "source": "res://art/source/treasure-v1/emerald.png",
+      "source_sha256": "99ddcbfac3d8db439df929f202e401a8ed9d6add5ed11464f20e057e326875dc",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_cell": null,
+      "source_alpha_bounds": [
+        218,
+        293,
+        1109,
+        1046
+      ],
+      "source_rotation_degrees": 0,
+      "direct_source_scale": 0.12570145903479238,
+      "design": "Rectangular emerald with broad stair-step facets; distinct from squat irregular garnet.",
+      "gameplay_fields": {
+        "script": "ExtResource(\"1\")",
+        "effect": "5",
+        "use_time": "0",
+        "price": "15"
+      },
+      "export_sha256": "9d58bc6da7c97fbc8ae3876a98a389fd5055f90501f2d36834b70bc6c451bf69"
+    },
+    {
+      "id": "fine_cloth",
+      "resource": "res://data/items/fine_cloth.tres",
+      "name": "Blue broadcloth",
+      "description": "Dense blue cloth folded under crossed pale ties. The outer fold is dusty; the cloth within is sound.",
+      "icon": "res://art/items/refined-v2/fine-cloth.png",
+      "previous_icon": "res://art/items/treasure-extra-v1/fine-cloth.png",
+      "previous_name": "Fine cloth",
+      "previous_description": "A folded length of good cloth, still clean inside its wrap.",
+      "original_resource_sha256": "b351b97456a7e8a321524402bc7552461f6df8cbda11eae7f5cdf86f8398cbdd",
+      "source": "res://art/source/treasure-extra-v1/fine-cloth.png",
+      "source_sha256": "aebedba9fe9775bb09ec66868d7bbcbf4b42371ee5a462ac5038d05cfeefd46a",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_cell": null,
+      "source_alpha_bounds": [
+        128,
+        261,
+        1134,
+        1028
+      ],
+      "source_rotation_degrees": 0,
+      "direct_source_scale": 0.11133200795228629,
+      "design": "Deep blue folded rectangle under crossed pale ties; cool colour separates it from red spice parcel.",
+      "gameplay_fields": {
+        "script": "ExtResource(\"1\")",
+        "effect": "5",
+        "use_time": "0",
+        "price": "6"
+      },
+      "export_sha256": "db92fa565fe5dce5a3266a5a5b3f0a5d79387f44309780709970aa14929bc854"
+    },
+    {
+      "id": "garnet",
+      "resource": "res://data/items/garnet.tres",
+      "name": "Cut garnet",
+      "description": "A squat, wine-red gem with a broad face and uneven facets. Its edges are dark enough to look black.",
+      "icon": "res://art/items/refined-v2/garnet.png",
+      "previous_icon": "res://art/items/treasure-v1/garnet.png",
+      "previous_name": "Cut garnet",
+      "previous_description": "A squat, dark red stone, cut by someone who knew how.",
+      "original_resource_sha256": "5e67876c20bf942262ce4b4f6b765f58e9e7f4c892f84d342f2d59e6667d1813",
+      "source": "res://art/source/treasure-v1/garnet.png",
+      "source_sha256": "d6dcc05765c2a73f23b9c1b0e9f8d99469e9c7db0fa60d19b52530811880628b",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_cell": null,
+      "source_alpha_bounds": [
+        190,
+        257,
+        1100,
+        1015
+      ],
+      "source_rotation_degrees": 0,
+      "direct_source_scale": 0.12307692307692308,
+      "design": "Low irregular red gem with black-red edge and large face; no glow or magic.",
+      "gameplay_fields": {
+        "script": "ExtResource(\"1\")",
+        "effect": "5",
+        "use_time": "0",
+        "price": "8"
+      },
+      "export_sha256": "b8bf7f1b0f63fc1fb25b098ee754b7d74454ce6bea3ca7eabfc5678aec05851c"
+    },
+    {
+      "id": "gold_nuggets",
+      "resource": "res://data/items/gold_nuggets.tres",
+      "name": "Gold nuggets",
+      "description": "Heavy yellow knots with quartz still caught in their creases. They have never passed through a mint.",
+      "icon": "res://art/items/refined-v2/gold-nuggets.png",
+      "previous_icon": "res://art/items/treasure-extra-v1/gold-nuggets.png",
+      "previous_name": "Gold nuggets",
+      "previous_description": "A few rough nuggets, picked from the seam.",
+      "original_resource_sha256": "796528926bb33cd6fc055cc23bfd25894aa22b965ebb520f748a4b3927725b1e",
+      "source": "res://art/source/treasure-extra-v1/gold-nuggets.png",
+      "source_sha256": "f6e865ddd18c57bbd0dfb6500e8e9eac74804eb2f61dcffa332e806ce1f7ee86",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_cell": null,
+      "source_alpha_bounds": [
+        189,
+        245,
+        1085,
+        1030
+      ],
+      "source_rotation_degrees": 0,
+      "direct_source_scale": 0.125,
+      "design": "Several irregular yellow knots, no minted circular outline or stamped face.",
+      "gameplay_fields": {
+        "script": "ExtResource(\"1\")",
+        "effect": "5",
+        "use_time": "0",
+        "price": "12"
+      },
+      "export_sha256": "1b78d870f601e8d13a57339014b116723f60c64d8aa4046c5fc05bfdeaea3f1a"
+    },
+    {
+      "id": "gold_signet_ring",
+      "resource": "res://data/items/gold_signet_ring.tres",
+      "name": "Worn gold signet",
+      "description": "A thick gold band with a deep-cut branching seal. The rim is rubbed smooth where a thumb worried it.",
+      "icon": "res://art/items/refined-v2/gold-signet-ring.png",
+      "previous_icon": "res://art/items/treasure-v1/gold-signet-ring.png",
+      "previous_name": "Gold signet ring",
+      "previous_description": "A thick worn band with a flattened seal. Someone important lost this.",
+      "original_resource_sha256": "27f9a65eed674ab6f48cabc215007356c976c7610f6980362b7d4846cb368e88",
+      "source": "res://art/source/treasure-v1/gold-signet-ring.png",
+      "source_sha256": "183202b3b87ca6d809f2dfcc55e0503c387b7c0eff1e5cc0d5d475ad1c719789",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_cell": null,
+      "source_alpha_bounds": [
+        89,
+        252,
+        1202,
+        1044
+      ],
+      "source_rotation_degrees": 0,
+      "direct_source_scale": 0.10062893081761007,
+      "design": "Heavy open band and prominent round seal; angular branching engraving informs the reusable seal glyph.",
+      "gameplay_fields": {
+        "script": "ExtResource(\"1\")",
+        "effect": "5",
+        "use_time": "0",
+        "price": "12"
+      },
+      "export_sha256": "4adc8a17fa7a65f38a672888ab14dcf25f7d21412c54e69febdbc80ab14b29fa"
+    },
+    {
+      "id": "military_medal",
+      "resource": "res://data/items/military_medal.tres",
+      "name": "Faded campaign medal",
+      "description": "A sunburst medal hangs from a frayed red ribbon. Raised rays surround a centre worn nearly flat.",
+      "icon": "res://art/items/refined-v2/military-medal.png",
+      "previous_icon": "res://art/items/treasure-extra-v1/military-medal.png",
+      "previous_name": "Military medal",
+      "previous_description": "A soldier's medal on a faded ribbon.",
+      "original_resource_sha256": "a787fad9cedb99f5f9580a4771aa780e8075dfa609c97a41c826c44d3c7f5cf0",
+      "source": "res://art/source/treasure-extra-v1/military-medal.png",
+      "source_sha256": "0bd4f264d09bb36df5d1f35c52f466e675d16d0e98a785c0fcf054b67182935c",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_cell": null,
+      "source_alpha_bounds": [
+        337,
+        104,
+        969,
+        1138
+      ],
+      "source_rotation_degrees": 0,
+      "direct_source_scale": 0.10831721470019343,
+      "design": "Red triangular ribbon over a round sunburst medal; this radial mark remains distinct from the branching seal.",
+      "gameplay_fields": {
+        "script": "ExtResource(\"1\")",
+        "effect": "5",
+        "use_time": "0",
+        "price": "7"
+      },
+      "export_sha256": "52f3af1ad085e475d1c298899601ada6f822c310cbae9f3c5b78e162fa554e91"
+    },
+    {
+      "id": "oil_flask",
+      "resource": "res://data/items/oil_flask.tres",
+      "name": "Leather oil flask",
+      "description": "A squat, stitched flask with a narrow metal pourer. Refills the lantern; unused oil stays in the flask.",
+      "icon": "res://art/items/refined-v2/oil-flask.png",
+      "previous_icon": "res://art/items/pack-64-v1/oil-flask.png",
+      "previous_name": "Oil flask",
+      "previous_description": "Refills the lantern. A part-used flask keeps what's left.",
+      "original_resource_sha256": "c726e21f758c16fa8ba9ddede65e412f7d2252a6f055c793574c809d7d9c56cb",
+      "source": "res://art/items/starter-v1/oil-flask.png",
+      "source_sha256": "de4d982558fab48aa7df8ae18a5d1f17bf80b6523d3a5c85621c72b5c6fbeedb",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_cell": null,
+      "source_alpha_bounds": [
+        183,
+        92,
+        1078,
+        1166
+      ],
+      "source_rotation_degrees": 0,
+      "direct_source_scale": 0.1042830540037244,
+      "design": "Opaque stitched leather kidney shape and metal spout; no confusion with glass draught.",
+      "gameplay_fields": {
+        "script": "ExtResource(\"1\")",
+        "effect": "0",
+        "amount": "100",
+        "duration": "0",
+        "use_time": "2",
+        "use_message": "\"You refill the lantern.\"",
+        "usable_in_combat": "true",
+        "price": "6"
+      },
+      "export_sha256": "2c841e7a8193b65af267c37acce926b2a00fd207bb9eb3b3366398c8233c069b"
+    },
+    {
+      "id": "old_coin_purse",
+      "resource": "res://data/items/old_coin_purse.tres",
+      "name": "Old coin purse",
+      "description": "A puckered leather purse, its cord polished by handling. Old-minted coins knock dully together inside.",
+      "icon": "res://art/items/refined-v2/old-coin-purse.png",
+      "previous_icon": "res://art/items/treasure-v1/coin-purse.png",
+      "previous_name": "Old coin purse",
+      "previous_description": "Coins of an old reign. The merchant knows what they're worth.",
+      "original_resource_sha256": "b169b0d422bb79be0cc8c8c7adf0c515718412a3a7c3860117e27fc06ad50c02",
+      "source": "res://art/source/treasure-v1/coin-purse.png",
+      "source_sha256": "2885352a7c7945352bb8f017552d081cc195e55cdd2bec8f0c8e5c1459116500",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_cell": null,
+      "source_alpha_bounds": [
+        116,
+        158,
+        1160,
+        1147
+      ],
+      "source_rotation_degrees": 0,
+      "direct_source_scale": 0.10727969348659004,
+      "design": "Upright gathered leather pouch and hanging cord, distinct from the flat sealed spice parcel.",
+      "gameplay_fields": {
+        "script": "ExtResource(\"1\")",
+        "effect": "5",
+        "use_time": "0",
+        "price": "10"
+      },
+      "export_sha256": "fddaf2c6c397019018bc766bf8fef7fa07ebd77d48c5b61258b1e30aaee41f64"
+    },
+    {
+      "id": "pearl_necklace",
+      "resource": "res://data/items/pearl_necklace.tres",
+      "name": "Pearl necklace",
+      "description": "Uneven cream pearls strung in a loose oval. A little gilt clasp holds more securely than the thread.",
+      "icon": "res://art/items/refined-v2/pearl-necklace.png",
+      "previous_icon": "res://art/items/treasure-extra-v1/pearl-necklace.png",
+      "previous_name": "Pearl necklace",
+      "previous_description": "A string of pearls, a long way from any sea.",
+      "original_resource_sha256": "5d1cf626beb713a36bc2cdf5b9cd478a9dbe5dc2b0b247ea43b6d7c46fb74c53",
+      "source": "res://art/source/treasure-extra-v1/pearl-necklace.png",
+      "source_sha256": "95ed03952e776f43e5f200cff798ffe9590a52fb03720f389fc13068caffee3b",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_cell": null,
+      "source_alpha_bounds": [
+        50,
+        177,
+        1227,
+        1086
+      ],
+      "source_rotation_degrees": 0,
+      "direct_source_scale": 0.0951571792693288,
+      "design": "Open oval of unequal cream beads, readable negative centre; no gem pendant.",
+      "gameplay_fields": {
+        "script": "ExtResource(\"1\")",
+        "effect": "5",
+        "use_time": "0",
+        "price": "18"
+      },
+      "export_sha256": "64a89de631b415622ea547dc5fe83ec6d6e4116a0a501f492bd7aba18965aa6f"
+    },
+    {
+      "id": "ration",
+      "resource": "res://data/items/ration.tres",
+      "name": "Trail ration",
+      "description": "Hard bread, dried meat and cheese in a tied cloth. Feeds the party: each hero regains 4 health over 20 time, completed by rest or a floor change.",
+      "icon": "res://art/items/refined-v2/ration.png",
+      "previous_icon": "res://art/items/pack-64-v1/ration.png",
+      "previous_name": "Ration",
+      "previous_description": "Feeds the whole party. Each hero regains 4 health over 20 time, or at the next rest.",
+      "original_resource_sha256": "46e21b7196d40936d605ed18652049abd431e6fb21d5d878d8af0eeb702576b4",
+      "source": "res://art/items/starter-v1/party-ration.png",
+      "source_sha256": "e4914c94ccb9e88083310ae750a33374843847a605790daec2d8b6aab02c0436",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_cell": null,
+      "source_alpha_bounds": [
+        41,
+        158,
+        1227,
+        1119
+      ],
+      "source_rotation_degrees": 0,
+      "direct_source_scale": 0.09443507588532883,
+      "design": "Cream tied cloth, broad loaf, meat and cheese; a compact food bundle.",
+      "gameplay_fields": {
+        "script": "ExtResource(\"1\")",
+        "effect": "1",
+        "amount": "4",
+        "duration": "20",
+        "use_time": "1",
+        "use_message": "\"You eat. Strength returns slowly.\"",
+        "price": "4"
+      },
+      "export_sha256": "93c7aedacee2f590604b68c9a2927ba26daf526af7f419972aa67812a9914aeb"
+    },
+    {
+      "id": "restorative_draught",
+      "resource": "res://data/items/restorative_draught.tres",
+      "name": "Restorative draught",
+      "description": "Dark herbal liquor in a round, cloth-bound bottle. The most hurt hero regains 10 health over 20 time, completed by rest or a floor change.",
+      "icon": "res://art/items/refined-v2/restorative-draught.png",
+      "previous_icon": "res://art/items/pack-64-v1/restorative-draught.png",
+      "previous_name": "Restorative draught",
+      "previous_description": "Given to the most hurt hero: 10 health over 20 time, or at the next rest.",
+      "original_resource_sha256": "46882832dc695bfd7db2269d78500ac2bbe175eb228f1558edfaf098ba96f9c1",
+      "source": "res://art/items/starter-v1/restorative-draught.png",
+      "source_sha256": "49db6872720c2e5b60c544081ceb7120dc1fa6b76f00ce3796553424e16c1cf6",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_cell": null,
+      "source_alpha_bounds": [
+        290,
+        138,
+        965,
+        1139
+      ],
+      "source_rotation_degrees": 0,
+      "direct_source_scale": 0.11188811188811189,
+      "design": "Round amber-red bottle with cork and pale neck wrap; unique glass silhouette among live supplies.",
+      "gameplay_fields": {
+        "script": "ExtResource(\"1\")",
+        "effect": "2",
+        "amount": "10",
+        "duration": "20",
+        "use_time": "1",
+        "use_message": "\"The draught takes hold slowly.\"",
+        "price": "12"
+      },
+      "export_sha256": "cf8e571ed21a2b99e8b59b4101513ec11926d99c1a9fe243b5b339dc423717ec"
+    },
+    {
+      "id": "silver_goblet",
+      "resource": "res://data/items/silver_goblet.tres",
+      "name": "Dented silver goblet",
+      "description": "A wide-lipped silver cup with a buckled bowl and narrow foot. Tarnish has settled deep in its chased border.",
+      "icon": "res://art/items/refined-v2/silver-goblet.png",
+      "previous_icon": "res://art/items/treasure-v1/silver-goblet.png",
+      "previous_name": "Dented silver goblet",
+      "previous_description": "A plain silver cup, dented but whole.",
+      "original_resource_sha256": "ae32ae882ddbfd765f53f4937e7ba73fca8d2a7a44a1cd29ad4df9ac3c772b78",
+      "source": "res://art/source/treasure-v1/silver-goblet.png",
+      "source_sha256": "8d3a3e2b03af66c26e1b6c316a59704e4918dae9ccf59f921ebd47d114096f1d",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_cell": null,
+      "source_alpha_bounds": [
+        266,
+        84,
+        1001,
+        1181
+      ],
+      "source_rotation_degrees": 0,
+      "direct_source_scale": 0.10209662716499544,
+      "design": "Wide cup, narrow foot and shallow dent; a tall silver vessel rather than a jewellery outline.",
+      "gameplay_fields": {
+        "script": "ExtResource(\"1\")",
+        "effect": "5",
+        "use_time": "0",
+        "price": "10"
+      },
+      "export_sha256": "1a0690bfb9aa369a26a5bc81b9e4b217c37f6371da64cdb4316645b2785ace7e"
+    },
+    {
+      "id": "silver_ingot",
+      "resource": "res://data/items/silver_ingot.tres",
+      "name": "Stamped silver ingot",
+      "description": "A squat cast bar with sloping sides and a small punched mark. Its rough underside still holds casting grit.",
+      "icon": "res://art/items/refined-v2/silver-ingot.png",
+      "previous_icon": "res://art/items/treasure-extra-v1/silver-ingot.png",
+      "previous_name": "Silver ingot",
+      "previous_description": "A small cast bar of silver, stamped with an old mark.",
+      "original_resource_sha256": "2429949290a70cc156857449ea544b9c3879cd6efd676b2094009e3837f6cced",
+      "source": "res://art/source/treasure-extra-v1/silver-ingot.png",
+      "source_sha256": "c3eb65ccec393168b6127bfee0177829dc8db2d49f3479cdaee7da08ccdad0ae",
+      "source_canvas": [
+        1402,
+        1122
+      ],
+      "source_cell": null,
+      "source_alpha_bounds": [
+        176,
+        243,
+        1252,
+        911
+      ],
+      "source_rotation_degrees": 0,
+      "direct_source_scale": 0.10408921933085502,
+      "design": "Low trapezoidal cast bar and small punched mark; not a fabricated royal seal.",
+      "gameplay_fields": {
+        "script": "ExtResource(\"1\")",
+        "effect": "5",
+        "use_time": "0",
+        "price": "14"
+      },
+      "export_sha256": "e91a141794e67cb0e6ecdcc4df223c985ed55a2e1e4fe27b3fbc8587f045d12f"
+    },
+    {
+      "id": "silver_locket",
+      "resource": "res://data/items/silver_locket.tres",
+      "name": "Silver sprig locket",
+      "description": "An oval silver case worked with a small leaf sprig. The hinge is black with age and the lid holds fast.",
+      "icon": "res://art/items/refined-v2/silver-locket.png",
+      "previous_icon": "res://art/items/treasure-extra-v1/silver-locket.png",
+      "previous_name": "Silver locket",
+      "previous_description": "Shut tight. Whatever's inside, the merchant won't ask.",
+      "original_resource_sha256": "24ae74d1781e078bbc35b0e1d318f53be04bf1756ae10a698002e2bb4b543c23",
+      "source": "res://art/source/treasure-extra-v1/silver-locket.png",
+      "source_sha256": "1a4dbbea9c1736e0aff497fa4cb883fd54daf70d2c8a97aa2d589bdf10879e86",
+      "source_canvas": [
+        1302,
+        1208
+      ],
+      "source_cell": null,
+      "source_alpha_bounds": [
+        348,
+        91,
+        992,
+        1051
+      ],
+      "source_rotation_degrees": 0,
+      "direct_source_scale": 0.11666666666666667,
+      "design": "Closed oval with tiny suspension ring and leaf sprig; no claim it can be opened/equipped.",
+      "gameplay_fields": {
+        "script": "ExtResource(\"1\")",
+        "effect": "5",
+        "use_time": "0",
+        "price": "8"
+      },
+      "export_sha256": "eaaa7af32b1443af2bf07df5bf93a5896f0ff3d49180005d6eb6f2b1b1fcfcad"
+    },
+    {
+      "id": "silver_trinket",
+      "resource": "res://data/items/silver_trinket.tres",
+      "name": "Silver leaf brooch",
+      "description": "A long, veined silver leaf with a bent pin beneath. A dark crease marks where the stem was straightened.",
+      "icon": "res://art/items/refined-v2/silver-trinket.png",
+      "previous_icon": "res://art/items/treasure-v1/silver-brooch.png",
+      "previous_name": "Silver leaf brooch",
+      "previous_description": "A bent silver cloak pin shaped like a leaf. Someone's keepsake, once.",
+      "original_resource_sha256": "d2888c2b4d2fa377fc8d79a7258a8bdecd161086f76af6302d5285fa0edc35f3",
+      "source": "res://art/source/treasure-v1/silver-brooch.png",
+      "source_sha256": "306e61b16dbe82ac8ba783aa7de3218138b89b868edb722266070adec5120890",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_cell": null,
+      "source_alpha_bounds": [
+        271,
+        174,
+        1206,
+        1117
+      ],
+      "source_rotation_degrees": 0,
+      "direct_source_scale": 0.11876988335100742,
+      "design": "Long diagonal leaf, pronounced vein and pin; distinct from the compact oval locket.",
+      "gameplay_fields": {
+        "script": "ExtResource(\"1\")",
+        "effect": "5",
+        "use_time": "0",
+        "price": "6"
+      },
+      "export_sha256": "f61fc2d09c2c6062ecd95266d2ded4a7bdf387f2119f15b98f10c13af9cb70f1"
+    },
+    {
+      "id": "small_reliquary",
+      "resource": "res://data/items/small_reliquary.tres",
+      "name": "Gilt reliquary",
+      "description": "A small iron-bound casket beneath worn gilding. Its pitched lid and stubborn clasp guard a relic you cannot see.",
+      "icon": "res://art/items/refined-v2/small-reliquary.png",
+      "previous_icon": "res://art/items/treasure-extra-v1/small-reliquary.png",
+      "previous_name": "Small reliquary",
+      "previous_description": "A gilded box for a saint's relic. Heavier than it looks.",
+      "original_resource_sha256": "5b789055cf183c6726ab592740d74485bbf4ab41eca28ed7362b7839a972becb",
+      "source": "res://art/source/treasure-extra-v1/small-reliquary.png",
+      "source_sha256": "992c4914507905c5053603ba9a8b88057120c6a4df12a0ba561ffbcfc411122f",
+      "source_canvas": [
+        1402,
+        1122
+      ],
+      "source_cell": null,
+      "source_alpha_bounds": [
+        235,
+        186,
+        1181,
+        1027
+      ],
+      "source_rotation_degrees": 0,
+      "direct_source_scale": 0.11839323467230443,
+      "design": "Pitched-lid iron-bound gilded casket; miniature closed container, sold as one valuable.",
+      "gameplay_fields": {
+        "script": "ExtResource(\"1\")",
+        "effect": "5",
+        "use_time": "0",
+        "price": "16"
+      },
+      "export_sha256": "a36208b77d1c7d5b28faaf2cab658ecec57821939bbd92739bf80a7bac739fea"
+    },
+    {
+      "id": "spice_pouch",
+      "resource": "res://data/items/spice_pouch.tres",
+      "name": "Sealed spice pouch",
+      "description": "A red-brown packet cinched tight under an unbroken seal. Pepper and a sweet, dry scent escape through the cloth.",
+      "icon": "res://art/items/refined-v2/spice-pouch.png",
+      "previous_icon": "res://art/items/treasure-extra-v1/spice-pouch.png",
+      "previous_name": "Sealed spice pouch",
+      "previous_description": "Pepper and something sweeter. Traders pay well for it.",
+      "original_resource_sha256": "0c5cfbc1e5c996c593bafde11d9fa99e9f59dce5764a9d6d78e1d2652f339771",
+      "source": "res://art/source/treasure-extra-v1/spice-pouch.png",
+      "source_sha256": "6df4fa30f71246c3f9610e3319a64b1427e5d76181e5f153af7b716f3075bd6f",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_cell": null,
+      "source_alpha_bounds": [
+        163,
+        208,
+        1092,
+        1065
+      ],
+      "source_rotation_degrees": 0,
+      "direct_source_scale": 0.12055974165769645,
+      "design": "Red-brown wrapped rectangle, tied neck and seal; opposite palette/shape to coin purse.",
+      "gameplay_fields": {
+        "script": "ExtResource(\"1\")",
+        "effect": "5",
+        "use_time": "0",
+        "price": "9"
+      },
+      "export_sha256": "568341ed4fc6cba92bcc2ba45871dc2fd26d25e54c947556f3852a90d8147d11"
+    },
+    {
+      "id": "torch",
+      "resource": "res://data/items/torch.tres",
+      "name": "Pitch-wrapped torch",
+      "description": "Pitch-dark cloth grips a rough wooden stave. Light it to see; throw the burning torch in a fight to drive one enemy away, losing the torch.",
+      "icon": "res://art/items/refined-v2/torch.png",
+      "previous_icon": "res://art/items/pack-64-v1/torch.png",
+      "previous_name": "Torch",
+      "previous_description": "Light one to see by; it burns down. In a fight, throw a burning torch to scare an enemy away - but then it's gone.",
+      "original_resource_sha256": "be3d77f1975e1ea7d8fac9786847802f0f83dfece58689167882ab4a7abd002d",
+      "source": "res://art/source/torch-v1/torch-generated.png",
+      "source_sha256": "b8dc870f53f84b2458e04546500a6ced68b954a55133baca9927f51bb091b34a",
+      "source_canvas": [
+        1024,
+        1536
+      ],
+      "source_cell": null,
+      "source_alpha_bounds": [
+        387,
+        136,
+        651,
+        1426
+      ],
+      "source_rotation_degrees": -28,
+      "direct_source_scale": 0.08860759493670886,
+      "design": "Long rough stave and thick black head, full silhouette registered diagonally; body remains unlit icon.",
+      "gameplay_fields": {
+        "script": "ExtResource(\"1\")",
+        "effect": "4",
+        "amount": "0",
+        "duration": "0",
+        "use_time": "2",
+        "use_message": "\"You light the torch. The dark draws back a little.\"",
+        "price": "3"
+      },
+      "export_sha256": "48ceeeae3054b796043ec13ae7021201b31df81c6b53f034a68634263bcd2536"
+    }
+  ],
+  "auxiliary": [
+    {
+      "id": "lantern",
+      "icon": "res://art/items/refined-v2/lantern.png",
+      "source": "res://art/source/inventory-64-v1/lantern.png",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_sha256": "2553f3cc00b28c6c778a95e6957bf81180079fd8dcd064ba164a2f89e2e6609d",
+      "export_sha256": "904aecb9fd66fe2128c15a92c566d37616b1371edec0c8bacdaf2a2e49934510",
+      "direct_source_scale": 0.09655172413793103,
+      "source_alpha_bounds": [
+        324,
+        44,
+        970,
+        1204
+      ]
+    },
+    {
+      "id": "lantern-unlit",
+      "icon": "res://art/items/refined-v2/lantern-unlit.png",
+      "source": "res://art/source/inventory-64-v1/lantern-unlit.png",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_sha256": "c6a4dd3e7e678a448925bed5b6f0ae4b915cf730192b0ec185a6e3454a1b6cbe",
+      "export_sha256": "497a635256434bc4d3ccd5f556c4d09cf54f53d730a78861e5e3ddcf72cc64a4",
+      "direct_source_scale": 0.09646856158484066,
+      "source_alpha_bounds": [
+        324,
+        44,
+        971,
+        1205
+      ]
+    }
+  ]
+}

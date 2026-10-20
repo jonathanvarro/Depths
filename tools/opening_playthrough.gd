@@ -63,7 +63,7 @@ func _press_in_row(item_name: String, label: String) -> bool:
 		var titles: Array = row.find_children("*", "Label", true, false).map(func(l): return l.text)
 		if titles.any(func(t): return t.begins_with(item_name)):
 			for b in row.find_children("*", "Button", true, false):
-				if b.text == label and not b.disabled:
+				if (b.text == label or b.text.begins_with(label + " ·")) and not b.disabled:
 					b.pressed.emit()
 					return true
 	return false
@@ -141,9 +141,9 @@ func _do_pack_step() -> void:
 	await process_frame
 	await _snap_once("pack_" + key)
 	match key:
-		"equip": _press_in_row("Iron sword", "Equip")
+		"equip": _press_in_row(load("res://data/gear/iron_sword.tres").display_name, "Equip")
 		"drop": _press_in_row(main._starting_weapon.display_name, "Drop")
-		"light", "relight": _press_in_row("Torch", "Use")
+		"light", "relight": _press_in_row(main.TORCH.display_name, "Use")
 		"draught": _press_in_row("Restorative draught", "Use")
 	await process_frame
 	if main._hint not in ["equip", "drop", "light", "relight", "draught"] or main._hint == key:

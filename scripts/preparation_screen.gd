@@ -20,7 +20,6 @@ var content: MarginContainer  # main.gd keeps this inside the safe area
 
 var _title: Label
 var _cards: HBoxContainer
-var _condition: VBoxContainer
 var _supplies: VBoxContainer
 var _enter: Button
 
@@ -29,7 +28,7 @@ func _init() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	var shade := ColorRect.new()
-	shade.color = Color(0.03, 0.035, 0.03, 0.98)
+	shade.color = Color(0.03, 0.035, 0.03, 1.0)
 	shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(shade)
 	content = MarginContainer.new()
@@ -42,7 +41,6 @@ func _init() -> void:
 	content.add_child(column)
 	_title = _label("", HEADING, 32, TEXT)
 	column.add_child(_title)
-	column.add_child(_label("Check the party and the pack, then head back down.", BODY, 19, MUTED))
 
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 32)
@@ -55,16 +53,19 @@ func _init() -> void:
 	_cards = HBoxContainer.new()
 	_cards.add_theme_constant_override("separation", 8)
 	party_column.add_child(_cards)
-	_condition = VBoxContainer.new()
-	party_column.add_child(_condition)
 	var pack_column := VBoxContainer.new()
 	pack_column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	pack_column.add_theme_constant_override("separation", 6)
 	row.add_child(pack_column)
 	pack_column.add_child(_label("Pack", HEADING, 24, TEXT))
+	var inventory_scroll := ScrollContainer.new()
+	inventory_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	inventory_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	pack_column.add_child(inventory_scroll)
 	_supplies = VBoxContainer.new()
+	_supplies.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_supplies.add_theme_constant_override("separation", 4)
-	pack_column.add_child(_supplies)
+	inventory_scroll.add_child(_supplies)
 
 	_enter = Button.new()
 	_enter.text = "Enter the cave"
@@ -84,23 +85,24 @@ func show_for(expedition_number: int, party) -> void:
 	_title.text = "Expedition %d" % expedition_number
 	for child in _cards.get_children():
 		child.queue_free()
-	for child in _condition.get_children():
-		child.queue_free()
 	for i in party.MAX_MEMBERS:
+		var hero_column := VBoxContainer.new()
+		hero_column.add_theme_constant_override("separation", 6)
+		_cards.add_child(hero_column)
 		var card := PartyCard.new()
-		_cards.add_child(card)
+		hero_column.add_child(card)
 		if i < party.members.size():
-			card.show_companion(party.members[i])
+			var hero: Companion = party.members[i]
+			card.show_companion(hero)
+			# The portrait already shows identity, health, strain and condition icons.
+			# Only lasting injury care needs a separate preparation note.
+			if not hero.hindering_injuries().is_empty():
+				var care := _label("Needs the nurse", BODY, 17, AMBER)
+				care.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+				care.custom_minimum_size = Vector2(100, 0)
+				hero_column.add_child(care)
 		else:
 			card.show_empty()
-	for hero: Companion in party.living_members():
-		var injuries := ", ".join(PackedStringArray(hero.injuries.map(func(i: Injury): return i.display_name.to_lower())))
-		var line := "%s: %d/%d health, %s%s" % [hero.display_name, hero.health, hero.effective_max_health(),
-				StrainRules.NAMES[hero.strain_state()].to_lower(), (" · " + injuries + " (needs the nurse)") if injuries != "" else ""]
-		var label := _label(line, BODY, 18, MUTED)
-		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		label.custom_minimum_size = Vector2(320, 0)
-		_condition.add_child(label)
 
 	for child in _supplies.get_children():
 		child.queue_free()
@@ -118,7 +120,6 @@ func show_for(expedition_number: int, party) -> void:
 			line.add_child(icon)
 		line.add_child(_label("%s ×%d" % [item.display_name, supplies.count(item)], BODY, 20, TEXT if supplies.count(item) > 0 else MUTED))
 		_supplies.add_child(line)
-	_supplies.add_child(_label("The merchant tops up your pack once a day.", BODY, 16, MUTED))
 	visible = true
 	_enter.grab_focus()
 

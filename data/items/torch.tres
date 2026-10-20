@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="SupplyItem" format=3]
 
 [ext_resource type="Script" path="res://scripts/supply_item.gd" id="1"]
-[ext_resource type="Texture2D" path="res://art/items/pack-64-v1/torch.png" id="2"]
+[ext_resource type="Texture2D" path="res://art/items/refined-v2/torch.png" id="2"]
 
 [resource]
 script = ExtResource("1")
 icon = ExtResource("2")
-display_name = "Torch"
-description = "Light one to see by; it burns down. In a fight, throw a burning torch to scare an enemy away - but then it's gone."
+display_name = "Pitch-wrapped torch"
+description = "Pitch-dark cloth grips a rough wooden stave. Light it to see; throw the burning torch in a fight to drive one enemy away, losing the torch."
 effect = 4
 amount = 0
 duration = 0

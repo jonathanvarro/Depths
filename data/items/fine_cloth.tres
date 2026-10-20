@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="SupplyItem" format=3]
 
 [ext_resource type="Script" path="res://scripts/supply_item.gd" id="1"]
-[ext_resource type="Texture2D" path="res://art/items/treasure-extra-v1/fine-cloth.png" id="2"]
+[ext_resource type="Texture2D" path="res://art/items/refined-v2/fine-cloth.png" id="2"]
 
 [resource]
 script = ExtResource("1")
 icon = ExtResource("2")
-display_name = "Fine cloth"
-description = "A folded length of good cloth, still clean inside its wrap."
+display_name = "Blue broadcloth"
+description = "Dense blue cloth folded under crossed pale ties. The outer fold is dusty; the cloth within is sound."
 effect = 5
 use_time = 0
 price = 6

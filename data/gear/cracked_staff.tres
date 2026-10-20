@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" path="res://scripts/equipment.gd" id="1"]
 
-[ext_resource type="Texture2D" path="res://art/items/campaign-v1/cracked-staff.png" id="campaign_art"]
+[ext_resource type="Texture2D" path="res://art/items/refined-v2/cracked-staff.png" id="campaign_art"]
 
 [resource]
 script = ExtResource("1")
 icon = ExtResource("campaign_art")
-display_name = "Cracked walking staff"
-description = "A field nurse's staff, split along its length. It won't take many more blows."
+display_name = "Split walking staff"
+description = "A nurse's worn staff, split with the grain above its cloth grip. Light in the hand; unreliable under a hard blow."
 attack_min = 1
 attack_max = 2
 accuracy_bonus = 0.0

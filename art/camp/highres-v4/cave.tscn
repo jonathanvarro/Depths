@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3]
+[ext_resource type="Script" path="res://art/camp/organic-v3/site.gd" id="script"]
+[ext_resource type="Texture2D" path="res://art/camp/highres-v4/cave.png" id="texture"]
+[ext_resource type="Script" path="res://art/camp/organic-v3/warm_light.gd" id="light"]
+[ext_resource type="Texture2D" path="res://art/camp/highres-v4/notice.png" id="notice"]
+
+[node name="cave" type="Node2D"]
+script = ExtResource("script")
+texture_filter = 2
+[node name="Base" type="Sprite2D" parent="."]
+position = Vector2(506, 48)
+scale = Vector2(0.4, 0.4)
+centered = false
+texture = ExtResource("texture")
+light_mask = 2
+[node name="Lantern0" type="PointLight2D" parent="."]
+script = ExtResource("light")
+position = Vector2(529, 74)
+base_energy = 0.32
+texture_scale = 0.58
+phase = 2.5999999999999996
+core_size = Vector2(2, 4)
+[node name="Notice" type="Sprite2D" parent="."]
+position = Vector2(517, 65)
+scale = Vector2(0.4, 0.4)
+centered = false
+texture = ExtResource("notice")
+light_mask = 2
+visible = false

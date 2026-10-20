@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="Equipment" format=3]
 
 [ext_resource type="Script" path="res://scripts/equipment.gd" id="1"]
-[ext_resource type="Texture2D" path="res://art/items/opening-tutorial-v1/broken-knife.png" id="2"]
+[ext_resource type="Texture2D" path="res://art/items/refined-v2/broken-knife.png" id="2"]
 
 [resource]
 script = ExtResource("1")
 display_name = "Broken knife"
-description = "Snapped halfway down the blade. Better than bare hands - barely."
+description = "A jagged stump of iron above a two-rivet wooden grip. The missing point makes a poor weapon worse."
 icon = ExtResource("2")
 attack_min = 1
 attack_max = 2

@@ -13,8 +13,8 @@ signal cave_chosen(start_depth: int)
 signal save_and_exit
 signal open_settings
 
-const DIR := "res://art/camp/organic-v3/"
-const PORTRAIT_DIR := "res://art/camp/cave-camp-v1/"
+const DIR := "res://art/camp/highres-v4/"
+const PORTRAIT_DIR := DIR
 const HEADING := preload("res://art/fonts/heading-cinzel.tres")
 const BODY := preload("res://art/fonts/body-source-sans.tres")
 const ACTION := preload("res://art/fonts/action-source-sans.tres")
@@ -22,8 +22,10 @@ const TEXT := Color("e6dac1")
 const MUTED := Color("b3a78f")
 const AMBER := Color("dbb477")
 const CANVAS := Vector2(640, 360)
-const COIN_ICON := preload("res://art/items/inventory-64-v1/gold-coin.svg")
-const LANTERN_ICON := preload("res://art/items/inventory-64-v1/lantern-unlit.png")
+const COIN_ICON := preload("res://art/symbols/crest-v1/currency-coin.svg")
+const SETTINGS_ICON := preload("res://art/ui/controls-v1/settings.svg")
+const BACK_ICON := preload("res://art/ui/controls-v1/back.svg")
+const LANTERN_ICON := preload("res://art/items/refined-v2/lantern-unlit.png")
 ## The apprentice's starter stock, shown until there's gold (#42).
 const CampState := preload("res://scripts/camp_state.gd")
 const Progression := preload("res://scripts/progression.gd")
@@ -76,7 +78,9 @@ func _init() -> void:
 	_canvas.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	content.add_child(_canvas)
 	var scenery := TextureRect.new()
+	scenery.expand_mode=TextureRect.EXPAND_IGNORE_SIZE
 	scenery.texture = load(DIR + "terrain.png")
+	scenery.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
 	scenery.size = CANVAS
 	scenery.light_mask = 2
 	scenery.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -84,7 +88,7 @@ func _init() -> void:
 	var layout: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(DIR + "layout.json"))
 	for site in layout["sites"]:
 		_add_site(site)
-	_dressing=preload("res://art/camp/organic-v3/dressing.gd").new()
+	_dressing=preload("res://art/camp/highres-v4/dressing.gd").new()
 	_canvas.add_child(_dressing)
 	_canvas.move_child(_dressing,_site_art.fire.get_index()+1)
 	_dressing.setup(_canvas,_site_art.fire)
@@ -110,7 +114,12 @@ func _init() -> void:
 	save.add_theme_font_size_override("font_size", 11)
 	save.pressed.connect(func(): save_and_exit.emit())
 	_canvas.add_child(save)
-	var gear := _button("Settings")
+	var gear := _button("")
+	gear.icon=SETTINGS_ICON
+	gear.expand_icon=true
+	gear.add_theme_constant_override("icon_max_width",18)
+	gear.tooltip_text="Settings"
+	gear.accessibility_name="Settings"
 	_settings_button=gear
 	gear.position = Vector2(550, 326)
 	gear.size = Vector2(74, 30)
@@ -186,7 +195,7 @@ func _add_site(site: Dictionary) -> void:
 	_canvas.add_child(art)
 	_site_art[id]=art
 	if id=="supplies":
-		art.add_child(load("res://art/camp/arrivals-v1/caravan-unloading.tscn").instantiate())
+		art.add_child(load(DIR + "caravan-unloading.tscn").instantiate())
 	# The whole site and its label are one target (keyboard, mouse, touch).
 	var button := Button.new()
 	button.position = rect.position
@@ -262,7 +271,9 @@ func _fit() -> void:
 			button.size.y=height
 	if _save_button:
 		_save_button.size.x=104
-		_settings_button.size.x=74
+		_settings_button.size.x=height
+		_settings_button.position.x=CANVAS.x-height-16
+		_save_button.position.x=_settings_button.position.x-114
 		_save_button.position.y=CANVAS.y-height-4
 		_settings_button.position.y=CANVAS.y-height-4
 	for button in _body.find_children("*","Button",true,false):button.custom_minimum_size.y=height
@@ -281,12 +292,18 @@ func _build_activity() -> void:
 	_activity_title = _label("", HEADING, 20, TEXT)
 	_activity_title.position = Vector2(18, 10)
 	_activity.add_child(_activity_title)
-	_back = _button("Back to camp")
-	_back.position = Vector2(420, 10)
-	_back.size = Vector2(136, 30)
+	_back = _button("")
+	_back.icon=BACK_ICON
+	_back.expand_icon=true
+	_back.add_theme_constant_override("icon_max_width",18)
+	_back.tooltip_text="Back to camp"
+	_back.accessibility_name="Back to camp"
+	_back.position = Vector2(516, 10)
+	_back.size = Vector2(40, 30)
 	_back.pressed.connect(_close_activity)
 	_activity.add_child(_back)
 	_portrait = TextureRect.new()
+	_portrait.texture_filter=CanvasItem.TEXTURE_FILTER_LINEAR
 	_portrait.position = Vector2(10, 56)
 	_portrait.size = Vector2(200, 200)
 	_portrait.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
@@ -360,7 +377,6 @@ func _merchant() -> void:
 		_text("Caravan unloading. Trading is not available yet.", AMBER)
 	else:
 		_text("\"Back again, and still breathing. Good for business. What'll it be?\"")
-		_purse_line()
 	if _camp.needs_charity(_party):
 		_text("He looks at your empty hands and sighs. \"Two torches. On account.\"", AMBER)
 		var charity := _button("Take two torches")
@@ -395,7 +411,6 @@ func _merchant() -> void:
 ## The apprentice smith (#42): plain gear into the pack (equip it there).
 func _smith() -> void:
 	_text("The apprentice wipes his hands. \"It's not much. But it'll hold.\"")
-	_purse_line()
 	for item: Equipment in CampState.SMITH_STOCK:
 		if item.slot == "body":  # armour (#93)
 			var slower := ", slower by %d" % item.initiative_penalty if item.initiative_penalty > 0 else ""
@@ -443,11 +458,7 @@ func _rumour() -> String:
 
 ## Top-right: the day and the purse.
 func _status() -> String:
-	return "Day %d · %dg" % [_camp.day, _party.supplies.gold]
-
-
-func _purse_line() -> void:
-	_text("Your purse: %d gold" % _party.supplies.gold, AMBER)
+	return "Day %d · %d" % [_camp.day, _party.supplies.gold]
 
 
 func _shop_row(text: String, price: int, on_buy: Callable, icon: Texture2D = null) -> void:
@@ -497,7 +508,7 @@ func _item_icon(row: Control, texture: Texture2D) -> void:
 	if texture == null:return
 	var icon := TextureRect.new()
 	icon.texture = texture
-	icon.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	icon.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
 	icon.custom_minimum_size = Vector2(28,28)
 	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
@@ -527,7 +538,7 @@ func _nurse() -> void:
 			if others == 0:
 				_text("Treated, %s is out until day %d - and no one else is fit, so nobody goes down until then." % [hero.display_name, _camp.day + days], AMBER)
 			else:
-				_text("Treated, %s is out until day %d; the others can go down without %s." % [hero.display_name, _camp.day + days, hero.display_name], MUTED)
+				_text("%d days of recovery · back on day %d. The others can travel." % [days, _camp.day + days], MUTED)
 			var treat := _button("Treat %s (back on day %d)" % [hero.display_name, _camp.day + days])
 			treat.pressed.connect(func():
 				_camp.treat(hero)

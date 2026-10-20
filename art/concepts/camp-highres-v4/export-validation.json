@@ -1,0 +1,153 @@
+{
+  "issue": 112,
+  "source": "Original retained generated masters; no new generation or low-resolution upscaling",
+  "logical_canvas": [
+    640,
+    360
+  ],
+  "texture_canvas": [
+    1600,
+    900
+  ],
+  "texture_density": 2.5,
+  "filter": "Linear",
+  "palette": "Source colours retained; low64-colour quantization removed",
+  "rgba_mib": 11.96,
+  "source_sha256": {
+    "terrain": "485ad772d7fef3771cf99879599a851cac3f81b4423dc49d6678f5add0c12f8a",
+    "treatment": "70c70ebaa4396008b1baed2a2d5c7e66f47cf64c1ab0c061aed7eaf4dea782d5",
+    "cave": "149c99f2132f1b61a7e93feb8a04136a15d13ae7b6c143ebc18e89ee8b7ef691",
+    "supplies": "c3c90e2fd5abe5a29ec11e96bc0e3199a956b854bc34df7edd1d9a3d15d4796f",
+    "smith": "f64414d6f7e1af6a8007247e43f7c9b74252accb21a9f5acd84f0cd4bde04e5d",
+    "rest": "f4e043894409862e60527ff0946f734902f6ff5ddfc853b556e41f7f8444e028",
+    "fire": "09729bac161ef536345a24b5f89767a98dcdb3434a7068aa58576d8c28659cc4",
+    "occupied-cot": "e647b6046c83494122d6741cc393034f0c43b8db942b812f5556735c0ac27490",
+    "notice": "55791c89762a26b0589af0797719da099128830cef5e3e6e02a129c6963d3a92",
+    "unloading": "84ca59ea32c6180c7a367ff39ceda8276831fd8fa71d6c288820b3d4b48b77c4",
+    "occupancy": "c1b8d7578ebf9d52f9dc1a213113048352655c905caddd57edfed2175ebb075e",
+    "merchant-portrait": "61bd27a4836d75b433712220a764f78a922faca0015004b047e2c851f9bcaca8",
+    "apprentice-portrait": "f540dd38524d851535eacf87be699e060e37c7b38528aff37212121a64baf4a7",
+    "nurse-portrait": "9ec379e3242e7d48816260098ad3b0d8daf7d8c382ad954fbee9a19d03253c1c"
+  },
+  "exports": {
+    "apprentice.png": {
+      "canvas": [
+        512,
+        512
+      ],
+      "sha256": "c3ef1447bbc76deb704360e2fe964989490d8dad4707315e41699e51f25010cb"
+    },
+    "caravan-unloading.png": {
+      "canvas": [
+        622,
+        255
+      ],
+      "sha256": "ea80a915ec4d82804eea95d6e2121e3058a91d7c016138fc0901b7546d72b457"
+    },
+    "cave.png": {
+      "canvas": [
+        78,
+        142
+      ],
+      "sha256": "44ea77ba5bb9e64edda08d26c46092ac27479bd5be395c173d68ccc34fc78f2c"
+    },
+    "drying-cloth.png": {
+      "canvas": [
+        160,
+        160
+      ],
+      "sha256": "68d2a4657d4c748877188ad7d735977d3adf8ae40fe56fc7b1e210fba4f004c6"
+    },
+    "fire.png": {
+      "canvas": [
+        452,
+        238
+      ],
+      "sha256": "bb9a278771345d68fba11706bcb5f29774865a4258644f981a543a2f2680b23b"
+    },
+    "meal.png": {
+      "canvas": [
+        160,
+        160
+      ],
+      "sha256": "60a69e8e55649e8bfc7c06a2bc3f03c64a4cde37d6da618bc6c412d8bb12cfb5"
+    },
+    "merchant.png": {
+      "canvas": [
+        512,
+        512
+      ],
+      "sha256": "ed16e71078675f4cd2aaf3b33c4a2a636ecd591e39fd071395649e1c3716c150"
+    },
+    "notice.png": {
+      "canvas": [
+        20,
+        35
+      ],
+      "sha256": "8e459059a26f7c91744e60c41c3a65812fb7342b53293f1221f7589452d7d5b2"
+    },
+    "nurse.png": {
+      "canvas": [
+        512,
+        512
+      ],
+      "sha256": "ee9353961bbe1b0bb24a540636650357975b7d7676502f42cbafa1145c6f16e2"
+    },
+    "occupied-cot.png": {
+      "canvas": [
+        105,
+        70
+      ],
+      "sha256": "745819dc506f2679d5c045c66f8d9344c7a162481af4be7d86a9202890620470"
+    },
+    "rest.png": {
+      "canvas": [
+        490,
+        272
+      ],
+      "sha256": "1b6036c3136c7b1723905de942accd76471f0934685563e2783610323ddcd766"
+    },
+    "seated-a.png": {
+      "canvas": [
+        160,
+        160
+      ],
+      "sha256": "54fbef6f4caadd7ba1a03d50f5ea8d447413dbd72a68b324f9d2ff15370eeb2f"
+    },
+    "seated-b.png": {
+      "canvas": [
+        160,
+        160
+      ],
+      "sha256": "495505a06e3906e86c9e3ae504a50f2f1b37dcaaf4abcc98f3bebc655c8b3d0a"
+    },
+    "smith.png": {
+      "canvas": [
+        482,
+        250
+      ],
+      "sha256": "865fb32a505d2beed4f6e40d41f0ca3a337da5a265f840125518e49fc3358da7"
+    },
+    "supplies.png": {
+      "canvas": [
+        585,
+        300
+      ],
+      "sha256": "1d2244b435cf8962e75a6627ee4f27b8fb37c818762fcdc006bcac1bede840e5"
+    },
+    "terrain.png": {
+      "canvas": [
+        1600,
+        900
+      ],
+      "sha256": "10070df0f4392c0f6fcc6c3606226f5b376cae9330b434c177b77cae237c51bb"
+    },
+    "treatment.png": {
+      "canvas": [
+        455,
+        202
+      ],
+      "sha256": "0702fc9475264a5de5a576ae246bc2ed08d3c74e784a659074a64b06354529ea"
+    }
+  }
+}

@@ -5,11 +5,15 @@ const PS=preload("res://scripts/party_state.gd")
 const SG=preload("res://scripts/save_game.gd")
 const Settings=preload("res://scripts/settings.gd")
 const OUT="res://art/concepts/camp-arrivals-v1/"
+var output_dir:=OUT
 var checks:=0
 var failures:Array[String]=[]
 var captures:Array[String]=[]
 
 func _initialize() -> void:
+	var args:=OS.get_cmdline_user_args()
+	if not args.is_empty():output_dir=args[0].trim_suffix("/")+"/"
+	DirAccess.make_dir_recursive_absolute(output_dir)
 	call_deferred("_run")
 
 func check(ok:bool,label:String) -> void:
@@ -21,7 +25,7 @@ func settle() -> void:
 
 func snap(name:String) -> void:
 	await settle();await RenderingServer.frame_post_draw
-	check(root.get_texture().get_image().save_png(OUT+name+".png")==OK,"Capture "+name)
+	check(root.get_texture().get_image().save_png(output_dir+name+".png")==OK,"Capture "+name)
 	captures.append(name)
 
 func press(button:Button,touch:bool) -> void:
@@ -111,6 +115,6 @@ func _run() -> void:
 		main.queue_free();await settle()
 	Settings.set_value("text_size","Normal",self)
 	var report={"checks":checks,"failures":failures,"captures":captures,"physical_phone_test":false}
-	var file=FileAccess.open(OUT+"godot-validation.json",FileAccess.WRITE);file.store_string(JSON.stringify(report,"\t")+"\n");file.close()
+	var file=FileAccess.open(output_dir+"godot-validation.json",FileAccess.WRITE);file.store_string(JSON.stringify(report,"\t")+"\n");file.close()
 	print("CAMP_ARRIVALS: ",checks," failures: ",failures.size()," captures: ",captures.size())
 	quit(1 if not failures.is_empty() else 0)

@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" path="res://scripts/equipment.gd" id="1"]
 
-[ext_resource type="Texture2D" path="res://art/items/campaign-v1/broken-short-sword.png" id="campaign_art"]
+[ext_resource type="Texture2D" path="res://art/items/refined-v2/broken-short-sword.png" id="campaign_art"]
 
 [resource]
 script = ExtResource("1")
 icon = ExtResource("campaign_art")
 display_name = "Broken short sword"
-description = "Snapped a hand's width from the hilt. Better than bare fists. Barely."
+description = "A broad break ends the blade just above its plain guard. The leather grip still fits a fighting hand."
 attack_min = 1
 attack_max = 2
 accuracy_bonus = -0.05
