@@ -54,6 +54,24 @@ These are rules for the code, so the art can be drawn to fit.
 - **Goblin hides and crude banners** (wall; 3–4), **wall spikes and chained cages** (wall, ceiling; 4), and **plank walkways overhead** (ceiling; 4).
 - **A stranger's mark**: the same hand that marked the survey map, scratched once or twice along floor 1. It's a quiet story clue for the ambush (#107).
 
+## Floor elements (added 2026-10-20)
+
+These are flat **floor decals**: they lie on the floor and you walk over them, so they never block a step or the view. Other pieces stand at a **floor edge**. They follow the same rules as the rest: sparse, stable per floor, and never on cells with events, fights, stairs or passages.
+
+| # | Piece | Mount | Size | Floors | Why it helps |
+|---|---|---|---|---|---|
+| F1 | **Puddles** with a dull sheen, in 2–3 shapes | Floor decal | 0.5–1.2 m | 1–2 (and the drowned layer) | Damp, living cave. Pairs with the drip stains. |
+| F2 | **Gravel, loose stones and grit** | Floor decal | 1 m | 1–4 | Breaks up the repeating floor tile. |
+| F3 | **Mine rails**: short broken lengths and a rail end | Floor decal | 1–2 m | 1 | The Old Workings, alongside the pit props. |
+| F4 | **Footprints and drag marks** | Floor decal | 1 m | 1–3 | Something walks here. Pure atmosphere, not a hint for any particular fight. |
+| F5 | **Pale cave mushrooms**, in clusters | Floor edge | 0.2–0.4 m | 2–3 (and the fungal layer) | Life in the dark; sets up the fungal layer. |
+| F6 | **A rat nest**: shredded cloth, twigs, a bone | Floor edge | 0.5 m | 1–2 | The rats' home ground. |
+| F7 | **A thin floor crack**, too narrow to fall into | Floor decal | 1–1.5 m | 1–4 | Unease without being mistaken for the pit trap. |
+| F8 | **Goblin litter**: gnawed bones, a broken pot, scraps | Floor decal / floor edge | 0.5–1 m | 3–4 | Goblin ground before you see a goblin. |
+| F9 | **Old scorch marks** from a long-dead campfire | Floor decal | 0.8 m | 1–3 | Others were here once. Different from the rest spot's cold camp, which has its own prop. |
+
+Nothing on the floor may look like a trap, a pit or a chest. The hollow-floor trap and the pit have their own art, and the dressing must stay clearly different from them.
+
 ## Later layers (direction only, matching #126's wall families)
 
 - **Drowned galleries:** drip curtains, waterline stains, mineral crusts.
