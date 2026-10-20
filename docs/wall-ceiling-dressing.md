@@ -4,6 +4,15 @@
 
 Today, floors draw plain walls, floor and ceiling. The only extras are the stairs and passages, room props, and a few floor props on the fortress floors. This list is **set dressing**: small pieces scattered along walls and ceilings so corridors stop looking alike. It sits **alongside** the descent wall textures (#126), not instead of them.
 
+## First art pack delivered (2026-10-20)
+
+The eleven first-batch categories and all nine floor categories below now have
+assets in `art/dressing/cave-v1/catalog.json` (32 registered cutouts/scenes).
+The lit torch includes four flame frames and a mood-only local light. Sources,
+mounts, previews and rebuilding: [cave-dressing-assets.md](cave-dressing-assets.md).
+Claude's sparse seeded placement remains to be wired; the review rooms are
+standalone fixtures.
+
 ## How the game will place them
 
 These are rules for the code, so the art can be drawn to fit.

@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Texture2D" path="res://art/dressing/cave-v1/goblin-litter.png" id="texture"]
+
+[node name="goblin-litter" type="Node3D"]
+metadata/dressing_id = "goblin-litter"
+
+[node name="Sprite" type="Sprite3D" parent="."]
+position = Vector3(0, 0.012, 0)
+rotation_degrees = Vector3(-90, 0, 0)
+pixel_size = 0.0062499999999999995
+billboard = 0
+shaded = true
+texture_filter = 0
+alpha_cut = 1
+alpha_scissor_threshold = 0.5
+cast_shadow = 0
+modulate = Color(1, 1, 1, 1)
+texture = ExtResource("texture")

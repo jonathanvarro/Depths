@@ -1,0 +1,9 @@
+{
+  "sources": 27,
+  "dressing_assets": 32,
+  "effects": 16,
+  "native_rgba_mib": 10.852,
+  "max_atlas_dimension": 2560,
+  "failures": [],
+  "scope": "Art library and isolated previews; no live floor placement or ambient controller."
+}

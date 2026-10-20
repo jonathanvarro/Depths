@@ -1,0 +1,22 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3]
+
+[ext_resource type="Texture2D" path="res://art/effects/ambient-v1/wall-flame.png" id="atlas"]
+
+[sub_resource type="AtlasTexture" id="frame0"]
+atlas = ExtResource("atlas")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="frame1"]
+atlas = ExtResource("atlas")
+region = Rect2(32, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="frame2"]
+atlas = ExtResource("atlas")
+region = Rect2(64, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="frame3"]
+atlas = ExtResource("atlas")
+region = Rect2(96, 0, 32, 64)
+
+[resource]
+animations = [{"frames": [{"duration": 1.0, "texture": SubResource("frame0")}, {"duration": 1.0, "texture": SubResource("frame1")}, {"duration": 1.0, "texture": SubResource("frame2")}, {"duration": 1.0, "texture": SubResource("frame3")}], "loop": true, "name": &"loop", "speed": 8.0}]

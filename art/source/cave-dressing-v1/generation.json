@@ -1,0 +1,251 @@
+{
+  "date": "2026-10-20",
+  "baseline_commit": "e454e3f",
+  "assets": [
+    {
+      "id": "stalactite-single",
+      "prompt": "Use case: stylized-concept. Production cave SET DRESSING for Depths, a dark first-person dungeon crawler. A SINGLE isolated small environmental object, genuine transparent background, no frame or words, no scenery, no ground square, no cast shadow. Hand-painted pixel art with coarse coherent pixel clusters, rugged dark contours, restrained 32-64 colour palette, broad simple planes, clear at final 128px, not a detailed oil painting or photoreal render. Neutral diffuse lighting, no torch glow, no backlight. Limestone in muted cold grey, earthy taupe and dull brown, darker seams, few pale mineral edges. Front view at eye level; no isometric view. Entire object within square canvas, generous clear margin. Subject: One long slim irregular limestone stalactite hanging DOWN from a small flat mineral attachment at the TOP CENTRE. Its underside tapers to one thin downward point, subtle lumpy layered accretion. No stalagmite on the ground, no ceiling slab. The object is 0.55m long.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-65da196b-fce4-4681-bbf8-0f2660de8bcc.png",
+      "source": "art/source/cave-dressing-v1/stalactite-single-master.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "sha256": "455b393f9f86a35bb9b42c8452fe931d92106ca8870241d4f89ed03f31708dff"
+    },
+    {
+      "id": "stalactite-pair",
+      "prompt": "Use case: stylized-concept. Production cave SET DRESSING for Depths, a dark first-person dungeon crawler. A SINGLE isolated small environmental object, genuine transparent background, no frame or words, no scenery, no ground square, no cast shadow. Hand-painted pixel art with coarse coherent pixel clusters, rugged dark contours, restrained 32-64 colour palette, broad simple planes, clear at final 128px, not a detailed oil painting or photoreal render. Neutral diffuse lighting, no torch glow, no backlight. Limestone in muted cold grey, earthy taupe and dull brown, darker seams, few pale mineral edges. Front view at eye level; no isometric view. Entire object within square canvas, generous clear margin. Subject: One connected natural pair of short hanging limestone stalactites, unequal lengths: one thick crooked droplet spike and one slender slightly shorter spike, joined by a tiny mineral crust at the TOP. Both point DOWN, irregular cave formation, no ceiling slab. Total length 0.65m.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-75b94a8a-da1e-42be-ba49-65db3aae6229.png",
+      "source": "art/source/cave-dressing-v1/stalactite-pair-master.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "sha256": "3b70b11c5b62d60b8e488e3550fbf7e8b75733662d4105b5a11de2f1b937b459"
+    },
+    {
+      "id": "stalactite-cluster",
+      "prompt": "Use case: stylized-concept. Production cave SET DRESSING for Depths, a dark first-person dungeon crawler. A SINGLE isolated small environmental object, genuine transparent background, no frame or words, no scenery, no ground square, no cast shadow. Hand-painted pixel art with coarse coherent pixel clusters, rugged dark contours, restrained 32-64 colour palette, broad simple planes, clear at final 128px, not a detailed oil painting or photoreal render. Neutral diffuse lighting, no torch glow, no backlight. Limestone in muted cold grey, earthy taupe and dull brown, darker seams, few pale mineral edges. Front view at eye level; no isometric view. Entire object within square canvas, generous clear margin. Subject: One connected narrow cluster of FIVE small hanging limestone stalactites on a shallow rough mineral attachment at the TOP. Uneven drippy downward points, longer off-centre spike, short clustered fingers either side, not icicles. Shallow wide hanging mass, no ceiling slab. Maximum length 0.8m.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-583debb3-d9db-4794-8ab7-2c2da45f0df5.png",
+      "source": "art/source/cave-dressing-v1/stalactite-cluster-master.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "sha256": "122ac2e1f4855795940fb4dbb1ae0730e8afeaae13b97bcb3faebd09671b5c1d"
+    },
+    {
+      "id": "stalagmite-stub",
+      "prompt": "Use case: stylized-concept. Production cave SET DRESSING for Depths, a dark first-person dungeon crawler. A SINGLE isolated small environmental object, genuine transparent background, no frame or words, no scenery, no ground square, no cast shadow. Hand-painted pixel art with coarse coherent pixel clusters, rugged dark contours, restrained 32-64 colour palette, broad simple planes, clear at final 128px, not a detailed oil painting or photoreal render. Neutral diffuse lighting, no torch glow, no backlight. Limestone in muted cold grey, earthy taupe and dull brown, darker seams, few pale mineral edges. Front view at eye level; no isometric view. Entire object within square canvas, generous clear margin. Subject: One squat irregular rounded limestone STALAGMITE standing UP from a tiny rough flat base at the bottom. Fat stubby dome with an off-centre blunt peak, vertical dripstone ridges, no long cone, no gems or glow. Natural cave floor-edge formation, 0.3m tall.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-d82de7c5-d8d9-4055-96da-8f2a60656a22.png",
+      "source": "art/source/cave-dressing-v1/stalagmite-stub-master.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "sha256": "285e148e287a96b5ecc7c5957ff1aa0c747cebb3818c12b92b51926efbf2ac30"
+    },
+    {
+      "id": "stalagmite-tall",
+      "prompt": "Use case: stylized-concept. Production cave SET DRESSING for Depths, a dark first-person dungeon crawler. A SINGLE isolated small environmental object, genuine transparent background, no frame or words, no scenery, no ground square, no cast shadow. Hand-painted pixel art with coarse coherent pixel clusters, rugged dark contours, restrained 32-64 colour palette, broad simple planes, clear at final 128px, not a detailed oil painting or photoreal render. Neutral diffuse lighting, no torch glow, no backlight. Limestone in muted cold grey, earthy taupe and dull brown, darker seams, few pale mineral edges. Front view at eye level; no isometric view. Entire object within square canvas, generous clear margin. Subject: One tall narrow limestone STALAGMITE rising UP from a small flared rough base at the bottom. Asymmetric blunt conical peak, two short knobby accretions low on its side, worn vertical flowstone ridges, not a pointed spike trap. Natural cave floor-edge formation 1.0m tall.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-b1176b7c-704b-4dfc-bbd0-ce5c7307bd5f.png",
+      "source": "art/source/cave-dressing-v1/stalagmite-tall-master.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "sha256": "1140dfa5ce6e7d1f4f2763246e59b01db7f385c384d7435e9d854b0543a38661"
+    },
+    {
+      "id": "stalagmite-broken",
+      "prompt": "Use case: stylized-concept. Production cave SET DRESSING for Depths, a dark first-person dungeon crawler. A SINGLE isolated small environmental object, genuine transparent background, no frame or words, no scenery, no ground square, no cast shadow. Hand-painted pixel art with coarse coherent pixel clusters, rugged dark contours, restrained 32-64 colour palette, broad simple planes, clear at final 128px, not a detailed oil painting or photoreal render. Neutral diffuse lighting, no torch glow, no backlight. Limestone in muted cold grey, earthy taupe and dull brown, darker seams, few pale mineral edges. Front view at eye level; no isometric view. Entire object within square canvas, generous clear margin. Subject: One short broken limestone STALAGMITE standing UP from a small uneven base. Top snapped off diagonally exposing a pale rough layered core; jagged but BLUNT broken top, squat asymmetrical mound with two small broken chips at the foot. Natural cave formation, not a trap or mineable treasure, 0.45m tall.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-bc2d5634-64c6-4f5b-97ca-71951d9b1a08.png",
+      "source": "art/source/cave-dressing-v1/stalagmite-broken-master.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "sha256": "cc002a0c0e378bbf5519c7e78caae1a4777896aaf8781c8dc7cd64ccf359abc6"
+    },
+    {
+      "id": "flowstone",
+      "prompt": "Use case: stylized-concept. Production SET DRESSING cutout for Depths, a grim first-person dungeon crawler. SINGLE isolated environmental object on true transparent background; no surrounding scenery, no floor or wall rectangle, no frame, no text except explicit marks. Whole object visible with margin. Front-facing view, broad readable silhouette. Coarse hand-painted pixel art with coherent hard pixel clusters, restrained 32-64 earthy colours, rough charcoal outlines, clear at 128px. Neutral soft material light, NO baked directional torchlight, no magical glow, no photorealism or excessive fine detail. Subject: A patch of cream-grey FLOWSTONE and damp mineral drip stains running down an invisible cave wall. Three broad uneven vertical calcite streaks fan from a small crust at the top and taper into thinner damp dark grey-brown drips. Shallow ridged accretion only, no chunks of wall behind, no large rock slab or rectangular background. Irregular natural transparent silhouette, about 1m high.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-43972b5c-f8c7-4c80-adc0-1720be6ba22a.png",
+      "source": "art/source/cave-dressing-v1/flowstone-master.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "sha256": "ad2938fd93e501537c1dad8807459c079f6f2ac8095438d14520c25406e8fe64"
+    },
+    {
+      "id": "cracks-rubble",
+      "prompt": "Use case: stylized-concept. Production SET DRESSING cutout for Depths, a grim first-person dungeon crawler. SINGLE isolated environmental object on true transparent background; no surrounding scenery, no floor or wall rectangle, no frame, no text except explicit marks. Whole object visible with margin. Front-facing view, broad readable silhouette. Coarse hand-painted pixel art with coherent hard pixel clusters, restrained 32-64 earthy colours, rough charcoal outlines, clear at 128px. Neutral soft material light, NO baked directional torchlight, no magical glow, no photorealism or excessive fine detail. Subject: A wall-foot detail: one crooked branching charcoal-black narrow CRACK with a few small chipped grey limestone edges, running down from upper centre to a short low scatter of four angular grey rocks and gravel along the bottom. The wall itself is INVISIBLE/TRANSPARENT between the fine branches. No large hole, no passage, no timber, no stone slab backdrop. Sparse, shallow, about 1m tall.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-b382ca79-67d6-4179-8e32-055144e0db53.png",
+      "source": "art/source/cave-dressing-v1/cracks-rubble-master.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "sha256": "6c09049b4ca5433f3fa463533fbac2c0cb77fb369593ffb8101700cef8bfbe85"
+    },
+    {
+      "id": "web-strand",
+      "prompt": "Use case: stylized-concept. Production SET DRESSING cutout for Depths, a grim first-person dungeon crawler. SINGLE isolated environmental object on true transparent background; no surrounding scenery, no floor or wall rectangle, no frame, no text except explicit marks. Whole object visible with margin. Front-facing view, broad readable silhouette. Coarse hand-painted pixel art with coherent hard pixel clusters, restrained 32-64 earthy colours, rough charcoal outlines, clear at 128px. Neutral soft material light, NO baked directional torchlight, no magical glow, no photorealism or excessive fine detail. Subject: One loose SAGGING SPIDER-SILK STRAND draped between two small attachment tufts at the top-left and top-right. Sparse dirty grey silk strands, two torn hanging ribbons and one small knotted tangle hanging lower in middle. Thin dull ivory-grey threads with enough thickness to survive 128px reduction. No spider, no whole circular web, no wood or wall behind. About 0.7m wide.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-14596117-65c8-4062-83a1-400348572bbc.png",
+      "source": "art/source/cave-dressing-v1/web-strand-master.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "sha256": "8878c5afc7fb7fd350e435c409d35ca13d9dfd73758da9d8c473cb13db8f88f9"
+    },
+    {
+      "id": "mine-support",
+      "prompt": "Use case: stylized-concept. Production SET DRESSING cutout for Depths, a grim first-person dungeon crawler. SINGLE isolated environmental object on true transparent background; no surrounding scenery, no floor or wall rectangle, no frame, no text except explicit marks. Whole object visible with margin. Front-facing view, broad readable silhouette. Coarse hand-painted pixel art with coherent hard pixel clusters, restrained 32-64 earthy colours, rough charcoal outlines, clear at 128px. Neutral soft material light, NO baked directional torchlight, no magical glow, no photorealism or excessive fine detail. Subject: One complete old MINING SUPPORT FRAME: two upright rough dark timber posts and one heavy horizontal cross-beam, framing a tall OPEN TRANSPARENT gap. Dull iron straps and a few huge wooden pegs, worn splintered corners, foot ends blunt and resting level. HUMAN practical mine pit props, no door, no hinges, no curtain, no cave rocks, no floor plane, no signs. Straight-on symmetrical structural framing, full posts and beam visible. Overall 2m wide by 2.4m tall.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-0bc93ec6-a262-4553-b1b0-61fcbf273b79.png",
+      "source": "art/source/cave-dressing-v1/mine-support-master.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "sha256": "c7079af64cbcc6f125ede346311480c77a8b490456a507f90e466d46e296da19"
+    },
+    {
+      "id": "burnt-sconce",
+      "prompt": "Use case: stylized-concept. Production SET DRESSING cutout for Depths, a grim first-person dungeon crawler. SINGLE isolated environmental object on true transparent background; no surrounding scenery, no floor or wall rectangle, no frame, no text except explicit marks. Whole object visible with margin. Front-facing view, broad readable silhouette. Coarse hand-painted pixel art with coherent hard pixel clusters, restrained 32-64 earthy colours, rough charcoal outlines, clear at 128px. Neutral soft material light, NO baked directional torchlight, no magical glow, no photorealism or excessive fine detail. Subject: A small old iron WALL SCONCE seen directly from the front. Narrow dark square backplate with two visible wall rivets, bent iron bracket cradling a SHORT BURNT-OUT wooden torch stub. Charred splintered black head, dead grey ash, no fire, no red ember, no smoke. Dull black iron and dark worn wood, plain former mining fixture. Total 0.5m tall.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-e72ed000-5ae9-4f69-98b0-f08461a6dfaf.png",
+      "source": "art/source/cave-dressing-v1/burnt-sconce-master.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "sha256": "b2bdc4443081688aa6202b29a56d4c3510388766f09e97df7ebc732d677a494f"
+    },
+    {
+      "id": "goblin-torch-base",
+      "prompt": "Use case: stylized-concept. Production SET DRESSING cutout for Depths, a grim first-person dungeon crawler. SINGLE isolated environmental object on true transparent background; no surrounding scenery, no floor or wall rectangle, no frame, no text except explicit marks. Whole object visible with margin. Front-facing view, broad readable silhouette. Coarse hand-painted pixel art with coherent hard pixel clusters, restrained 32-64 earthy colours, rough charcoal outlines, clear at 128px. Neutral soft material light, NO baked directional torchlight, no magical glow, no photorealism or excessive fine detail. Subject: One crude GOBLIN WALL TORCH, currently UNLIT, viewed directly from front. Thin black iron bracket lashed roughly to a battered wood back block, one short twisted wooden shaft topped by dark pitch-soaked rag bound with coarse cord. A compact torn rag head at upper centre where a flame could be added as a separate animation. Blunt soot-black end, no flame, no glow, no smoke. Ratty improvised construction, no skulls or readable emblem. About 0.6m tall.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-95365d75-7aa8-441a-99e7-2ca349173fc3.png",
+      "source": "art/source/cave-dressing-v1/goblin-torch-base-master.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "sha256": "aca4cf3e944c2d289b583e706796b5ff00028c2b050196754e297609dc4b1314"
+    },
+    {
+      "id": "goblin-daubs",
+      "prompt": "Use case: stylized-concept. Production SET DRESSING cutout for Depths, a grim first-person dungeon crawler. SINGLE isolated environmental object on true transparent background; no surrounding scenery, no floor or wall rectangle, no frame, no text except explicit marks. Whole object visible with margin. Front-facing view, broad readable silhouette. Coarse hand-painted pixel art with coherent hard pixel clusters, restrained 32-64 earthy colours, rough charcoal outlines, clear at 128px. Neutral soft material light, NO baked directional torchlight, no magical glow, no photorealism or excessive fine detail. Subject: One small group of dried RED-OCHRE and dark brick-red PAINT MARKS on an invisible cave wall: a crude smeared three-fingered handprint beside two rough slashing strokes and a small crooked hook-like mark. Dry gritty paint edges and a few short drips. All spaces between marks truly transparent. No stone slab, no wall texture, no circle, no legible language, no compass arrow or loot symbol. Brutish territorial daub, about 0.6m wide.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-18d42665-3e9a-4980-a06a-0ea8f48de615.png",
+      "source": "art/source/cave-dressing-v1/goblin-daubs-master.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "sha256": "dd8e7bbf714426ccb723c20858442681794ae8a78157e84b563fd68c03531b3a"
+    },
+    {
+      "id": "hanging-trophies",
+      "prompt": "Use case: stylized-concept. Production SET DRESSING cutout for Depths, a grim first-person dungeon crawler. SINGLE isolated environmental object on true transparent background; no surrounding scenery, no floor or wall rectangle, no frame, no text except explicit marks. Whole object visible with margin. Front-facing view, broad readable silhouette. Coarse hand-painted pixel art with coherent hard pixel clusters, restrained 32-64 earthy colours, rough charcoal outlines, clear at 128px. Neutral soft material light, NO baked directional torchlight, no magical glow, no photorealism or excessive fine detail. Subject: One small hanging bunch of goblin TROPHIES: a stained small animal skull and three worn long bones tied at unequal heights on thin rough cords to a crooked short horizontal branch. Cords hang from TOP CENTRE; all objects dangle freely. No pole or stand beneath, no ground, no humanoid body, no weapon, no jewelry or gold, not a loot bag. Dirty grey-beige old bone, dark brown cord, modest sinister silhouette. About 0.7m long.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-b012d28e-a34f-41ec-ac24-fb3214ffdaa8.png",
+      "source": "art/source/cave-dressing-v1/hanging-trophies-master.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "sha256": "bb2b4a588c26cf88a54f49510df95d46b7e0cdfc107d176ee2ab91d2751a066b"
+    },
+    {
+      "id": "puddle-small",
+      "prompt": "Use case: stylized-concept. Production FLOOR DRESSING for Depths, grim first-person dungeon crawler. SINGLE isolated low floor detail seen straight DOWN from overhead, true transparent background. No stone tile, rectangular ground patch, vignette, cast shadow, frame or text. Whole object with clear margin. Coarse hand-painted pixel art, 32-64 muted earthy colours, coherent broad clusters and charcoal contours; clear at 128x128. Neutral diffuse material light, no torch glow, no shiny treasure. It is ordinary background dressing, must NOT resemble a hole, pit trap, chest or usable container. Subject: ONE shallow irregular narrow damp PUDDLE, a flattened bean shape with a thin broken slate-grey wet edge and two soft dull grey mineral reflections. Nearly transparent dark blue-grey water, floor is still faintly suggested through it; no depth edge, no black centre, no ripples glowing. Small shallow slick only, 0.6m wide, not a pool or pit.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-7f3b026f-9512-4c98-a44c-27ccd6ba8b71.png",
+      "source": "art/source/cave-dressing-v1/puddle-small-master.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "sha256": "d7ab50bf034675ee2298da5aa824fc5cb43e8ec6b38ce52a444dd681587287d2"
+    },
+    {
+      "id": "puddle-wide",
+      "prompt": "Use case: stylized-concept. Production FLOOR DRESSING for Depths, grim first-person dungeon crawler. SINGLE isolated low floor detail seen straight DOWN from overhead, true transparent background. No stone tile, rectangular ground patch, vignette, cast shadow, frame or text. Whole object with clear margin. Coarse hand-painted pixel art, 32-64 muted earthy colours, coherent broad clusters and charcoal contours; clear at 128x128. Neutral diffuse material light, no torch glow, no shiny treasure. It is ordinary background dressing, must NOT resemble a hole, pit trap, chest or usable container. Subject: ONE shallow irregular wide damp PUDDLE shaped like two connected lobes, tapering wet tail, thin broken muted grey edge and faint dull blue-grey sheen on the surface. No black hole, no deep rim, no rocks forming a bowl, no gold or sparkle. Flat see-through shallow water film on invisible floor, about 1.1m wide.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-ba8ddcb9-83e4-4eb6-a0b4-13d3ef05797f.png",
+      "source": "art/source/cave-dressing-v1/puddle-wide-master.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "sha256": "c0d055c1f97e17e23ba9faa6599bfe03048a38b90b4e3b53a4fd596a6d94109c"
+    },
+    {
+      "id": "floor-gravel",
+      "prompt": "Use case: stylized-concept. Production FLOOR DRESSING for Depths, grim first-person dungeon crawler. SINGLE isolated low floor detail seen straight DOWN from overhead, true transparent background. No stone tile, rectangular ground patch, vignette, cast shadow, frame or text. Whole object with clear margin. Coarse hand-painted pixel art, 32-64 muted earthy colours, coherent broad clusters and charcoal contours; clear at 128x128. Neutral diffuse material light, no torch glow, no shiny treasure. It is ordinary background dressing, must NOT resemble a hole, pit trap, chest or usable container. Subject: a sparse elongated SCATTER OF GRAVEL, six small angular dull grey-brown limestone chips with smaller gritty specks between them. Low flat uneven scatter, no round organized pile, no big boulder, no loot or crystals, invisible background shows between every stone. About 1m wide.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-d351c152-46ac-4a56-93fe-fcba4af60cd4.png",
+      "source": "art/source/cave-dressing-v1/floor-gravel-master.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "sha256": "ab6e3e36c050239a18321d6b94602dedc99577b36bc02f15a6e2530fad6ec3a0"
+    },
+    {
+      "id": "mine-rails",
+      "prompt": "Use case: stylized-concept. Production FLOOR DRESSING for Depths, grim first-person dungeon crawler. SINGLE isolated low floor detail seen straight DOWN from overhead, true transparent background. No stone tile, rectangular ground patch, vignette, cast shadow, frame or text. Whole object with clear margin. Coarse hand-painted pixel art, 32-64 muted earthy colours, coherent broad clusters and charcoal contours; clear at 128x128. Neutral diffuse material light, no torch glow, no shiny treasure. It is ordinary background dressing, must NOT resemble a hole, pit trap, chest or usable container. Subject: a short broken length of TWO PARALLEL RUSTED MINE RAILS on three battered dark wooden sleepers. One rail ends snapped and slightly bent short of the other. Simple old narrow-gauge mining rails seen from above, thin flat bars, sleepers widely separated showing transparent ground between. Entire track segment visible including broken ends, no cart, no fittings that resemble a mechanism or a trap. Roughly 1.4m long.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-af16cf15-30c8-423a-9c86-ced9858d05ac.png",
+      "source": "art/source/cave-dressing-v1/mine-rails-master.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "sha256": "69b5b0176236bd6125348d5012bcd3f1d06e0e002a5512bf8412f19852d62915"
+    },
+    {
+      "id": "tracks-drag",
+      "prompt": "Use case: stylized-concept. Production FLOOR DRESSING for Depths, grim first-person dungeon crawler. SINGLE isolated low floor detail seen straight DOWN from overhead, true transparent background. No stone tile, rectangular ground patch, vignette, cast shadow, frame or text. Whole object with clear margin. Coarse hand-painted pixel art, 32-64 muted earthy colours, coherent broad clusters and charcoal contours; clear at 128x128. Neutral diffuse material light, no torch glow, no shiny treasure. It is ordinary background dressing, must NOT resemble a hole, pit trap, chest or usable container. Subject: four faint muddied BOOTPRINTS followed by one scuffed DRAG STREAK, travelling diagonally across invisible floor. Worn medieval boot soles, simple irregular heel and toe smears, dull grey-brown dry mud with broken edges, thin streak curves away. No arrows, claws, blood, glowing dust or clear directional quest symbols. Pure incidental traces of someone passing, about 1m long.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-067cb8d2-86ba-4173-bfb5-240a3c121eaa.png",
+      "source": "art/source/cave-dressing-v1/tracks-drag-master.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "sha256": "95bbbd8830fc08da0e5a6b6e80225bc81b8806edbb6dfc746ae01324b357c739"
+    },
+    {
+      "id": "floor-crack",
+      "prompt": "Use case: stylized-concept. Production FLOOR DRESSING for Depths, grim first-person dungeon crawler. SINGLE isolated low floor detail seen straight DOWN from overhead, true transparent background. No stone tile, rectangular ground patch, vignette, cast shadow, frame or text. Whole object with clear margin. Coarse hand-painted pixel art, 32-64 muted earthy colours, coherent broad clusters and charcoal contours; clear at 128x128. Neutral diffuse material light, no torch glow, no shiny treasure. It is ordinary background dressing, must NOT resemble a hole, pit trap, chest or usable container. Subject: one very THIN, hairline crooked limestone FLOOR CRACK with two short branches. Dull charcoal line with a few tiny grey chipped edges, close-packed rock visibly joins again across it, no open black area, no hole, no slab tile or floor patch underneath, no floating rocks. Width only a finger in real scale, length1.2m, harmless and narrow enough to walk over. Do not draw a pit.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-61ad1649-e2a2-4156-8c2f-0ef14721ce4b.png",
+      "source": "art/source/cave-dressing-v1/floor-crack-master.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "sha256": "faa55b99f657f516717fc759bdb85e62c9900cb6a4a54ccbb71413f22b5e3050"
+    },
+    {
+      "id": "goblin-litter",
+      "prompt": "Use case: stylized-concept. Production FLOOR DRESSING for Depths, grim first-person dungeon crawler. SINGLE isolated low floor detail seen straight DOWN from overhead, true transparent background. No stone tile, rectangular ground patch, vignette, cast shadow, frame or text. Whole object with clear margin. Coarse hand-painted pixel art, 32-64 muted earthy colours, coherent broad clusters and charcoal contours; clear at 128x128. Neutral diffuse material light, no torch glow, no shiny treasure. It is ordinary background dressing, must NOT resemble a hole, pit trap, chest or usable container. Subject: a sparse scatter of GOBLIN LITTER: two short gnawed animal bones, three small curved broken earthenware SHARDS from an empty pot, and a torn strip of filthy brown cloth. Flat and discarded, no intact pot, sack, crate, chest, edible food or gold, no weapon. Unglamorous old rubbish, about0.7m wide.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-76172207-d504-4971-af87-58b2c3888df5.png",
+      "source": "art/source/cave-dressing-v1/goblin-litter-master.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "sha256": "25555d222dbc56e8e15f664002879cb6b680ec3d94ddc8f74e1f2e5de38b4bb9"
+    },
+    {
+      "id": "old-scorch",
+      "prompt": "Use case: stylized-concept. Production FLOOR DRESSING for Depths, grim first-person dungeon crawler. SINGLE isolated low floor detail seen straight DOWN from overhead, true transparent background. No stone tile, rectangular ground patch, vignette, cast shadow, frame or text. Whole object with clear margin. Coarse hand-painted pixel art, 32-64 muted earthy colours, coherent broad clusters and charcoal contours; clear at 128x128. Neutral diffuse material light, no torch glow, no shiny treasure. It is ordinary background dressing, must NOT resemble a hole, pit trap, chest or usable container. Subject: old diffuse SCORCH MARKS only: irregular smudges of soot and thin grey ash, two little charcoal fragments, black-brown streaks where an old fire burned out long ago. Low flat dirty scatter blending outward into transparency. NO stone ring, logs, bedroll, embers, fire, camp equipment or dramatic round dark hole. Incidental old stain, clearly unlike a usable rest spot, about0.8m wide.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-c3f83aeb-5176-4854-8bbe-6eb9fad66f22.png",
+      "source": "art/source/cave-dressing-v1/old-scorch-master.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "sha256": "878e3e0cec273d99f3db14672ee0e64548b558bb23e10eed75111856fcdf2d44"
+    },
+    {
+      "id": "pale-mushrooms",
+      "prompt": "Use case: stylized-concept. Production FLOOR-EDGE DRESSING cutout for Depths. One low cluster of seven small PALE CAVE MUSHROOMS with thin ivory stems, irregular grey-beige caps of uneven heights, two little caps folded over, a tiny dark mineral crust joining them at their feet. Front-facing view at floor level, not top-down. About0.3m high. True transparent background, no rock slab or scenery, no magic, no glow, no harvest symbol, not food. Coarse muted painted pixel art with broad readable clusters,64colours, neutral diffuse light, whole formation visible with margin, match rugged cave props. Simple quiet natural growth.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-8b8e1466-ed51-4e34-9e2a-1c450196f536.png",
+      "source": "art/source/cave-dressing-v1/pale-mushrooms-master.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "sha256": "66366c3319dfbd221ea3e04c42916956c62022f5f30c264b65e7eb639639a658"
+    },
+    {
+      "id": "rat-nest",
+      "prompt": "Use case: stylized-concept. Production FLOOR-EDGE DRESSING cutout for Depths. A low untidy RAT NEST made from shredded filthy grey-brown cloth, three thin twigs and one small chewed bone, hollow in middle but no black hole or dark pit. Front-facing view at standing-eye height looking slightly down, tiny uneven nest0.45m wide and0.2m tall. True transparent background, no surrounding floor, no rat, no eggs, no stash or whole bag, no usable bedding or loot. Coarse hand-painted pixel art,64muted earthy colours, neutral diffuse material lighting, no cast shadow, whole nest with clear margin.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-f1a5c478-001a-431f-8a84-a3668a7f2225.png",
+      "source": "art/source/cave-dressing-v1/rat-nest-master.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "sha256": "d2e385c84668192605ccfd4cd5c3af0be79a01860c9288ec4926926e48469a9a"
+    },
+    {
+      "id": "wall-fungus",
+      "prompt": "Use case: stylized-concept. Production WALL DRESSING cutout for Depths. A small connected patch of five layered SHELF FUNGI growing sideways from an invisible damp stone wall. Uneven fan-like shelves in dull grey-green and muted jade, pale mineral rims, tiny darker mossy roots behind their attachment, no rock slab, no background. Front-facing,0.45m wide. True transparent background, whole patch visible with margin. Coarse hand-painted pixel art with broad readable clusters and64muted colours. NEUTRAL UNLIT BASE, no glow or lighting halo: a separate glow animation will be added in-engine. No poison haze, gems, faces, food or collectible symbols.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-2fc3fae1-aacf-448e-a3b2-80bb092435b2.png",
+      "source": "art/source/cave-dressing-v1/wall-fungus-master.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "sha256": "0c9123acbbfa375fc9956ec7817fc1f148d6c4b8970de0406acce96c22ceec3c"
+    },
+    {
+      "id": "puddle-small-refined",
+      "prompt": "Use case: precise-object-edit. Refine this game floor decal so it is unmistakably a VERY SHALLOW WET FILM, not a pool, hole or usable basin. Keep the general small elongated bean-shaped silhouette, neutral muted painted-pixel style and true transparent background. REMOVE the raised rocky rim completely and REMOVE the baked cobblestone floor under the water. Replace them with just a thin broken dull grey wet edge and two faint soft grey sheen streaks across largely transparent blue-grey water. The surface is flat and translucent, not dark inside. No surrounding floor, drop shadow, bright white glints, stone bowl, ground patch or border. This is incidental floor moisture an adventurer walks over, with no depth.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-c32bfd74-ee4a-4e85-8c86-354879f96cd3.png",
+      "source": "art/source/cave-dressing-v1/puddle-small-refined-master.png",
+      "tool": "built-in image_gen",
+      "reference": "art/source/cave-dressing-v1/puddle-small-master.png",
+      "transparent_background": true,
+      "sha256": "1252249b139ba2fd26016adf897ce971735901158668056e2acf82b5f221f255"
+    },
+    {
+      "id": "old-scorch-refined",
+      "prompt": "Use case: precise-object-edit. Refine this old fire stain game floor decal. REMOVE the two crossed brown sticks/logs completely. Keep only sparse old soot smudges, pale flat ash streaks and three TINY charcoal flakes, with invisible transparent gaps showing through. The image must read as a faint old flat scorch STAIN on an invisible floor, not an available campsite or a pile of firewood. Keep the coarse restrained painted pixel style and dark brown/grey palette. No logs, twigs, stone ring, embers, smoke, camp equipment, lighting halo or surrounding ground. Genuine transparent background, no glow or shadow.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-7a793ee8-647d-44f4-9625-559ee09e28d1.png",
+      "source": "art/source/cave-dressing-v1/old-scorch-refined-master.png",
+      "tool": "built-in image_gen",
+      "reference": "art/source/cave-dressing-v1/old-scorch-master.png",
+      "transparent_background": true,
+      "sha256": "3be4324b120bc450d502a399d1158113f4ecd8c8a71e7c658bbc6885c763ae45"
+    }
+  ]
+}

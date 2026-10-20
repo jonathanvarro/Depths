@@ -8,6 +8,15 @@ Everything here is **atmosphere**: no new rules. Most of it reacts to two things
 
 As the light fails and nerves fray, the cave should feel like it's closing in. When light returns, it backs off. This is the "show, don't tell" direction (#105): the player sees the danger rather than reading about it.
 
+## First art pack delivered (2026-10-20)
+
+All eight categories below have textures/loops in
+`art/effects/ambient-v1/catalog.json`, with ready SpriteFrames resources and a
+pause/step inspector. The registered fungus mask uses a separate neutral base.
+See [cave-dressing-assets.md](cave-dressing-assets.md) for sizes, blending, source
+provenance and validation. Live placement and light/nerves/settings controllers
+remain for Claude to wire; the existing combat-stage work is preserved.
+
 ## The effects
 
 | # | Effect | What it looks like | When it appears |

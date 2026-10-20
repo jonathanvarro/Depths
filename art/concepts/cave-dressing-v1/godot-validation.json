@@ -1,0 +1,19 @@
+{
+	"captures": [
+		"old-workings-desktop",
+		"damp-cave-desktop",
+		"goblin-wall-desktop",
+		"floor-details-desktop",
+		"wall-close-desktop",
+		"old-workings-phone",
+		"damp-cave-phone",
+		"goblin-wall-phone",
+		"floor-details-phone",
+		"wall-close-phone"
+	],
+	"checks": 171,
+	"dressing_assets": 32,
+	"effects": 16,
+	"failures": [],
+	"limits": "Standalone fixture; no live placement/controller, gameplay, save or theme changes. Phone is a desktop-size simulation."
+}

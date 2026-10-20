@@ -1,0 +1,54 @@
+[gd_resource type="SpriteFrames" load_steps=14 format=3]
+
+[ext_resource type="Texture2D" path="res://art/effects/ambient-v1/eyes-cluster.png" id="atlas"]
+
+[sub_resource type="AtlasTexture" id="frame0"]
+atlas = ExtResource("atlas")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="frame1"]
+atlas = ExtResource("atlas")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="frame2"]
+atlas = ExtResource("atlas")
+region = Rect2(64, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="frame3"]
+atlas = ExtResource("atlas")
+region = Rect2(96, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="frame4"]
+atlas = ExtResource("atlas")
+region = Rect2(0, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="frame5"]
+atlas = ExtResource("atlas")
+region = Rect2(32, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="frame6"]
+atlas = ExtResource("atlas")
+region = Rect2(64, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="frame7"]
+atlas = ExtResource("atlas")
+region = Rect2(96, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="frame8"]
+atlas = ExtResource("atlas")
+region = Rect2(0, 32, 32, 16)
+
+[sub_resource type="AtlasTexture" id="frame9"]
+atlas = ExtResource("atlas")
+region = Rect2(32, 32, 32, 16)
+
+[sub_resource type="AtlasTexture" id="frame10"]
+atlas = ExtResource("atlas")
+region = Rect2(64, 32, 32, 16)
+
+[sub_resource type="AtlasTexture" id="frame11"]
+atlas = ExtResource("atlas")
+region = Rect2(96, 32, 32, 16)
+
+[resource]
+animations = [{"frames": [{"duration": 1.0, "texture": SubResource("frame0")}, {"duration": 1.0, "texture": SubResource("frame1")}, {"duration": 1.0, "texture": SubResource("frame2")}, {"duration": 1.0, "texture": SubResource("frame3")}, {"duration": 1.0, "texture": SubResource("frame4")}, {"duration": 1.0, "texture": SubResource("frame5")}, {"duration": 1.0, "texture": SubResource("frame6")}, {"duration": 1.0, "texture": SubResource("frame7")}, {"duration": 1.0, "texture": SubResource("frame8")}, {"duration": 1.0, "texture": SubResource("frame9")}, {"duration": 1.0, "texture": SubResource("frame10")}, {"duration": 1.0, "texture": SubResource("frame11")}], "loop": true, "name": &"loop", "speed": 8.0}]

@@ -1,0 +1,250 @@
+{
+	"effects": [
+		{
+			"animation": "UV scroll, suggested 0.01 cycles/s",
+			"blend": "alpha",
+			"id": "fog-strip",
+			"max_alpha": 0.18,
+			"repeat_x": true,
+			"size": [
+				256,
+				64
+			],
+			"texture": "res://art/effects/ambient-v1/fog-strip.png"
+		},
+		{
+			"animation": "slow translation/fade; static patch",
+			"blend": "alpha",
+			"id": "fog-patch-1",
+			"max_alpha": 0.2,
+			"size": [
+				128,
+				64
+			],
+			"texture": "res://art/effects/ambient-v1/fog-patch-1.png"
+		},
+		{
+			"animation": "slow translation/fade; static patch",
+			"blend": "alpha",
+			"id": "fog-patch-2",
+			"max_alpha": 0.2,
+			"size": [
+				128,
+				64
+			],
+			"texture": "res://art/effects/ambient-v1/fog-patch-2.png"
+		},
+		{
+			"animation": "slow translation/fade; static patch",
+			"blend": "alpha",
+			"id": "fog-patch-3",
+			"max_alpha": 0.2,
+			"size": [
+				128,
+				64
+			],
+			"texture": "res://art/effects/ambient-v1/fog-patch-3.png"
+		},
+		{
+			"blend": "additive",
+			"columns": 4,
+			"filter": "nearest",
+			"fps": 8.0,
+			"frame_count": 12,
+			"frame_size": [
+				32,
+				16
+			],
+			"frames": "res://art/effects/ambient-v1/eyes-rat.tres",
+			"id": "eyes-rat",
+			"loop": true,
+			"placement": "Rare, one at a time, beyond carried light, Dim/Out or Shaken; unrelated to real enemies. Play once then remove.",
+			"texture": "res://art/effects/ambient-v1/eyes-rat.png"
+		},
+		{
+			"blend": "additive",
+			"columns": 4,
+			"filter": "nearest",
+			"fps": 8.0,
+			"frame_count": 12,
+			"frame_size": [
+				32,
+				16
+			],
+			"frames": "res://art/effects/ambient-v1/eyes-cluster.tres",
+			"id": "eyes-cluster",
+			"loop": true,
+			"placement": "Rare, one at a time, beyond carried light, Dim/Out or Shaken; unrelated to real enemies. Play once then remove.",
+			"texture": "res://art/effects/ambient-v1/eyes-cluster.png"
+		},
+		{
+			"blend": "additive",
+			"columns": 4,
+			"filter": "nearest",
+			"fps": 8.0,
+			"frame_count": 12,
+			"frame_size": [
+				32,
+				16
+			],
+			"frames": "res://art/effects/ambient-v1/eyes-unknown.tres",
+			"id": "eyes-unknown",
+			"loop": true,
+			"placement": "Rare, one at a time, beyond carried light, Dim/Out or Shaken; unrelated to real enemies. Play once then remove.",
+			"texture": "res://art/effects/ambient-v1/eyes-unknown.png"
+		},
+		{
+			"blend": "alpha",
+			"clear_center": [
+				192,
+				108,
+				448,
+				252
+			],
+			"columns": 4,
+			"filter": "nearest",
+			"fps": 6.0,
+			"frame_count": 8,
+			"frame_size": [
+				640,
+				360
+			],
+			"frames": "res://art/effects/ambient-v1/darkness.tres",
+			"id": "darkness",
+			"intensities": {
+				"hint": 0.2,
+				"medium": 0.5,
+				"strong": 1.0
+			},
+			"layer": "Below HUD; cosmetic strength follows carried light/nerves, respecting reduced motion.",
+			"loop": true,
+			"texture": "res://art/effects/ambient-v1/darkness.png"
+		},
+		{
+			"blend": "alpha",
+			"columns": 4,
+			"filter": "nearest",
+			"fps": 8.0,
+			"frame_count": 8,
+			"frame_size": [
+				64,
+				64
+			],
+			"frames": "res://art/effects/ambient-v1/dust.tres",
+			"id": "dust",
+			"loop": true,
+			"texture": "res://art/effects/ambient-v1/dust.png"
+		},
+		{
+			"blend": "alpha",
+			"columns": 4,
+			"filter": "nearest",
+			"fps": 8.0,
+			"frame_count": 8,
+			"frame_size": [
+				64,
+				128
+			],
+			"frames": "res://art/effects/ambient-v1/drip.tres",
+			"id": "drip",
+			"loop": true,
+			"texture": "res://art/effects/ambient-v1/drip.png"
+		},
+		{
+			"blend": "alpha",
+			"columns": 4,
+			"filter": "nearest",
+			"fps": 8.0,
+			"frame_count": 8,
+			"frame_size": [
+				64,
+				128
+			],
+			"frames": "res://art/effects/ambient-v1/smoke.tres",
+			"id": "smoke",
+			"loop": true,
+			"texture": "res://art/effects/ambient-v1/smoke.png"
+		},
+		{
+			"blend": "additive",
+			"columns": 4,
+			"filter": "nearest",
+			"fps": 8.0,
+			"frame_count": 8,
+			"frame_size": [
+				32,
+				64
+			],
+			"frames": "res://art/effects/ambient-v1/embers.tres",
+			"id": "embers",
+			"light_rules": "Appearance only; never change Supplies, fear bands or enemy visibility rules.",
+			"loop": true,
+			"texture": "res://art/effects/ambient-v1/embers.png"
+		},
+		{
+			"blend": "alpha",
+			"columns": 4,
+			"filter": "nearest",
+			"fps": 8.0,
+			"frame_count": 8,
+			"frame_size": [
+				64,
+				128
+			],
+			"frames": "res://art/effects/ambient-v1/torch-smoke-embers.tres",
+			"id": "torch-smoke-embers",
+			"loop": true,
+			"texture": "res://art/effects/ambient-v1/torch-smoke-embers.png"
+		},
+		{
+			"blend": "alpha",
+			"columns": 4,
+			"filter": "nearest",
+			"fps": 8.0,
+			"frame_count": 8,
+			"frame_size": [
+				64,
+				64
+			],
+			"frames": "res://art/effects/ambient-v1/shadow.tres",
+			"id": "shadow",
+			"loop": true,
+			"placement": "Very rare, beyond carried light, Dim/Out only; unrelated to real enemies. Play once then remove.",
+			"texture": "res://art/effects/ambient-v1/shadow.png"
+		},
+		{
+			"blend": "alpha",
+			"columns": 4,
+			"filter": "nearest",
+			"fps": 8.0,
+			"frame_count": 4,
+			"frame_size": [
+				32,
+				64
+			],
+			"frames": "res://art/effects/ambient-v1/wall-flame.tres",
+			"id": "wall-flame",
+			"light_rules": "Appearance only; never change Supplies, fear bands or enemy visibility rules.",
+			"loop": true,
+			"texture": "res://art/effects/ambient-v1/wall-flame.png"
+		},
+		{
+			"blend": "additive",
+			"columns": 4,
+			"filter": "nearest",
+			"fps": 6.0,
+			"frame_count": 8,
+			"frame_size": [
+				128,
+				128
+			],
+			"frames": "res://art/effects/ambient-v1/fungus-pulse.tres",
+			"id": "fungus-pulse",
+			"light_rules": "Appearance only; never change Supplies, fear bands or enemy visibility rules.",
+			"loop": true,
+			"texture": "res://art/effects/ambient-v1/fungus-pulse.png"
+		}
+	],
+	"issue": 129,
+	"phase": "Periodic native pixel drawings; all values are cosmetic."
+}

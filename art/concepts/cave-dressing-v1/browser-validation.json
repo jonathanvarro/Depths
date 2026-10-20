@@ -1,0 +1,14 @@
+{
+  "checks": 24,
+  "failures": [],
+  "captures": [
+    "inspector-darkness-desktop.png",
+    "inspector-eyes-desktop.png",
+    "inspector-torch-desktop.png",
+    "inspector-fungus-desktop.png",
+    "inspector-darkness-phone.png",
+    "inspector-eyes-phone.png",
+    "inspector-torch-phone.png",
+    "inspector-fungus-phone.png"
+  ]
+}
