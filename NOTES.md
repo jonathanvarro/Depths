@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-19 – Claude
+- Did: #122/#123 recorded the owner's new story direction in DESIGN.md (new "Story direction" section, Premise, superseded note on the multi-site campaign, note on the #44 queen objective, open decision 9) and AGENTS.md's project summary. The relic is the main goal and a plot device for now; the goblin queen becomes a side quest; the cave is the main setting, with deeper parts of it replacing later sites. Proposed flow: escape, then the knight commander questions the hero outside, his impatience mobilises more forces, major characters push the story, and dark elves arrive as rivals. Quests: visible ones from camp NPCs, hidden ones as packaged maze areas. Documentation only; no gameplay changed.
+- Next: Owner decisions on #122 (relic, commander, ambush, dark elves) and #123 (quest log, missable quests, rewards). The built queen victory screen and "next site coming later" wording will need updating once the relic exists.
+- Watch out: ChatGPT's uncommitted #121 portrait work (portraits data, art/portraits/*/frames-pixel-v4, tools/art) was left untouched and not included in this commit.
+
 ## 2026-10-19 – ChatGPT
 - Did: #121 reopened after owner correctly identified duplicate resting eyes/lips beneath the v2 animation. Replaced the incomplete interior-mask approach with full facial components for twelve faces: clean character plates, exact neutral components and 51 blink/talk drawings (87 runtime PNGs total). Full eye/lip footprints remove outer lashes and resting corners; closed lids are connected and rounded mouths retract their corners. Original resting portraits reconstruct byte-for-byte, including Mara's underlayer. Unique/reusable families remain separate. Updated paused inspector adds a bare-face switch and visible v3 revision; before/after Mara, full held/enlarged reviews and actual Godot GIF/contact sheets retained. Handoff: docs/portrait-rig-families.md.
 - Next: Owner reloads the inspector and reviews held/moving v3 drawings; physical iPhone review remains. Use build_portrait_components.py --wire then build_portrait_registry.py for future exports. All four original exporters retain complete character/neutral/animation bindings and reject changed original anatomy; archived v2 tool refuses to overwrite its immutable references.

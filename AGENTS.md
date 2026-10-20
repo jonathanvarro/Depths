@@ -5,7 +5,7 @@ this via CLAUDE.md; ChatGPT Codex reads AGENTS.md directly). Keep it current.
 
 ## About the project
 
-- **What it is:** A dark, first-person grid dungeon crawler about party strain and dangerous discoveries. Start with a cave + campsite; complete dungeon sites to move toward larger threats such as a castle or demon portal. See `DESIGN.md` for current direction, proposals, and open decisions.
+- **What it is:** A dark, first-person grid dungeon crawler about party strain and dangerous discoveries. The story stays at one cave and its campsite: the party descends deeper into the same cave toward a relic the king wants found (DESIGN.md "Story direction", #122). See `DESIGN.md` for current direction, proposals, and open decisions.
 - **Language / engine / framework:** Godot 4.7, GDScript, Mobile renderer
   (chosen for iPhone performance). Don't upgrade the Godot version without
   the owner's OK.

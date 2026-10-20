@@ -1,10 +1,10 @@
 # Depths — Design Direction
 
-Last updated: 2026-10-18. This is a living design document for the owner, Claude Code, and Codex. It records the discussion so far; it is not a complete implementation specification. Depths is the working project name, not a confirmed release title.
+Last updated: 2026-10-19. This is a living design document for the owner, Claude Code, and Codex. It records the discussion so far; it is not a complete implementation specification. Depths is the working project name, not a confirmed release title.
 
 ## Premise
 
-A dark, first-person dungeon crawler about party strain, dangerous discoveries, and the temptation to keep going. Lead a small party through procedurally generated dungeon sites, each paired with a nearby refuge. Begin with a cave and campsite; later sites grow in danger and importance. Within a site, descend toward its deepest objective.
+A dark, first-person dungeon crawler about party strain, dangerous discoveries, and the temptation to keep going. Lead a small party through a procedurally generated cave and its campsite refuge, descending ever deeper toward a relic the king wants found. The story stays at the cave; deeper parts of the same cave take the place of new sites (see [Story direction](#story-direction--decided-2026-10-19-122-123)).
 
 **The goal gets closer as the party becomes less able to reach it.** Lost hit points, persistent injuries, dwindling supplies, emotional strain, and increasingly difficult floors make each decision to continue more consequential. Discoveries offer opportunities to recover, gain an advantage, or take another tempting risk.
 
@@ -62,7 +62,35 @@ Allow moments of recovery within the overall decline. A defensible room or usefu
 
 Returning safely with useful gains should matter even when the bottom is not reached. Exact return-travel hazards, stair rules, and expedition persistence are unresolved.
 
+## Story direction — decided 2026-10-19 (#122, #123)
+
+**Scope:** the cave is the main setting. The next "site" is **deeper within the same cave**, and the story centres here rather than across many places. Other settings aren't ruled out for later. The aim is compelling gameplay, with room for characters to talk and explain the story and setting. This replaces the multi-site route in the next section for now.
+
+**The main goal is the relic.** It's a **plot device for now**: what it is (relic, temple or object) and why the king wants it stay open. The **goblin queen** and her fortress (#44) become a **side quest** on the way, no longer the cave's ending.
+
+**Proposed flow** (direction, not yet built):
+1. The hero wakes in the cave (the existing opening escape).
+2. Outside, a **party of the king's forces is waiting**.
+3. The **knight commander** (a major plot character) questions the hero: did they find the relic?
+4. Dialogue choices, along the lines of "not yet" or "we were ambushed".
+5. The commander grows **impatient**, which is **why more forces are mobilised** and the camp grows over time (#79).
+6. **Major characters** appear through the maze and the camp and push the story along.
+7. A **rival team**, the **dark elves**, hears the king's people are here for the relic and **want it too**.
+
+**Dark elves:** **rivals first**. Towards the end the player may learn their real aim, perhaps stopping evil people from misusing the relic. This is still being thought through.
+
+**The knight commander:** who he really is stays open. One inspiration is the knight commander in *Wizardry: Tale of the Forsaken Land*, who slowly turns antagonist and opens several subplots through the people close to him. The point is the kind of subplot one character can carry, not copying that story.
+
+**Story hooks already recorded:** going back down to recover the fallen companions' bodies, and realising it was an **ambush**, not a routine clean-up (#107). Who caused the ambush (goblins, dark elves, or someone among the king's forces) is open.
+
+**Quests on every floor (#123):**
+- **Visible quests** are given through conversations with NPCs at camp.
+- **Hidden quests** are found by searching, possibly with no prompt. They're built as **packaged areas**: small hand-made pieces of the maze that the floor generator places only while their conditions (floor, day, story step) are active.
+- Quest log, missable quests and rewards are open questions on #123.
+
 ## Campaign progression and refuges — recorded 2026-10-16
+
+*Superseded for now by [Story direction](#story-direction--decided-2026-10-19-122-123) (2026-10-19): the game stays at the cave, and deeper parts of it take the place of later sites. The multi-site route below is kept as a possible future direction.*
 
 ### Agreed direction
 
@@ -193,7 +221,7 @@ Suggested initial presentation: one campsite screen with a few selectable activi
 - **A wipe** is saved straight away as its aftermath, so quitting can't undo it.
 - **During the opening** only a marker is kept: Continue restarts the escape in the same maze.
 
-**Decided 2026-10-18 (#44): the cave's objective is the goblin fortress and its queen.**
+**Decided 2026-10-18 (#44): the cave's objective is the goblin fortress and its queen.** *Changed 2026-10-19 (#122): the relic is now the main goal, and the queen is a side quest on the way. The built fortress and queen fight below stay as they are, and the victory wording will need to change once the relic exists.*
 - **Floors:** 1–2 are natural cave; **3 is the fortress outskirts** (palisades, watch posts, goblin marks, war drums); **4 is the fortress**, with the queen's hall.
 - **The gate:** a barred gate on floor 4, held by its guards. Once broken it **stays broken**, even as the cave shifts daily.
 - **The queen:**
@@ -628,6 +656,7 @@ Success criteria:
 6. Per-site floor count, expedition duration, difficulty curve, completion objectives, refuge recovery/services, and transitions/revisits between sites. First site: cave + campsite; later castle/portal escalation is campaign direction rather than a finalized destination list.
 7. Coherent clue placement in procedural floors. (Navigability is guaranteed by the generator: rooms are joined incrementally, so every floor cell is reachable — #1.)
 8. Environment resolution, final portrait cleanup/export workflow, animation budget, body-template proportions, and horror boundaries. Portrait working canvas is 192 × 192; see the portrait-system section for agreed direction and remaining proposals.
+9. Story (#122): what the relic is, who the knight commander really is, who caused the ambush (#107), how many major characters there are, and the dark elves' true aim. Quest log, missable quests and rewards (#123).
 
 ## References and concept history
 
