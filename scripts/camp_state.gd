@@ -47,6 +47,8 @@ const CONTRACTS := [
 ]
 ## How many recruits wait at the fire (#41).
 const CANDIDATES := 3
+## Roles that stand in the front row.
+const FRONT_ROLES := ["Warden", "Brawler"]
 
 var day := 1
 ## Story-controlled physical sites (#108). Missing keys preserve today's
@@ -146,7 +148,11 @@ func _fill_fire(party = null) -> void:
 		for person in people:
 			if person.portrait_set:
 				faces.append(person.portrait_set.resource_path)
-		var recruit: Companion = Recruits.make(rng, _used_names, faces, maxi(1, best_level - 1))
+		# At least one of the three can hold the front (balance report).
+		var role := ""
+		if candidates.size() == CANDIDATES - 1 and not candidates.any(func(c: Companion): return c.role in FRONT_ROLES):
+			role = FRONT_ROLES[rng.randi_range(0, FRONT_ROLES.size() - 1)]
+		var recruit: Companion = Recruits.make(rng, _used_names, faces, maxi(1, best_level - 1), role)
 		_used_names.append(recruit.display_name)
 		candidates.append(recruit)
 

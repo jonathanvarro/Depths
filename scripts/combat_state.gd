@@ -69,8 +69,8 @@ const QUEEN_CALLS := 1
 const QUEEN_CALL_CHANCE := 0.4
 const QUEEN_CLEAVER_CHANCE := 0.25
 const QUEEN_ENRAGED_CLEAVER_CHANCE := 0.45
-const QUEEN_SCREECH_CHANCE := 0.2
-const SCREECH_STRAIN := 15.0
+const QUEEN_SCREECH_CHANCE := 0.15  # was 0.2 (balance report, owner 2026-10-19)
+const SCREECH_STRAIN := 8.0  # was 15
 const ENRAGED_DAMAGE := 2
 
 ## A foe joined mid-fight (the queen's guards): the screen adds its tag.

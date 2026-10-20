@@ -90,7 +90,7 @@ func _initialize() -> void:
 	var first: Button = combat._tags[combat._state.foes[0]]
 	check("tags carry an icon, a name and a health bar", first.icon != null and first.text == combat._state.foes[0].name and first.get_node("Health").visible)
 	var line: String = combat._intent_label.text
-	check("the selected enemy's intention is spelled out without hover (#116)", combat._intent_label.is_visible_in_tree() and line.contains(main.CombatState.intent_text(combat._target)), line)
+	check("the selected enemy's intention is spelled out without hover (#116)", combat._intent_label.is_visible_in_tree() and line.contains(main.CombatState.intent_text(combat._target)), "%s | target %s: %s | visible %s" % [line, combat._target.name, main.CombatState.intent_text(combat._target), combat._intent_label.is_visible_in_tree()])
 	var before = combat._target
 	var tab := InputEventAction.new()
 	tab.action = "ui_focus_next"

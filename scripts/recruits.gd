@@ -15,7 +15,7 @@ const ROLES := {
 	"Warden": {
 		"about": "A protector. Tough, and when defending takes only a quarter of a blow.",
 		"stats": [2, 1, 3, 2], "aim": 0.74, "speed": 10, "hp": 0, "attack": Vector2i(2, 3),
-		"guard_factor": 0.25, "toughness": 0,
+		"guard_factor": 0.25, "toughness": 0, "weapon": "res://data/gear/wooden_club.tres",
 		"portrait": "res://art/portraits/recruit-silhouettes-v1/warden.png",
 	},
 	"Scout": {
@@ -27,7 +27,7 @@ const ROLES := {
 	"Brawler": {
 		"about": "Hits hard. Careless with it: misses more and takes an extra point from every blow.",
 		"stats": [3, 2, 3, 1], "aim": 0.65, "speed": 9, "hp": -2, "attack": Vector2i(2, 4),
-		"guard_factor": 0.5, "toughness": -1,
+		"guard_factor": 0.5, "toughness": -1, "weapon": "res://data/gear/woodcutters_axe.tres",
 		"portrait": "res://art/portraits/recruit-silhouettes-v1/brawler.png",
 	},
 }
@@ -62,8 +62,9 @@ static func faces_for(role: String) -> Array:
 
 ## A new recruit, drawn with `rng`. `taken` names and `faces_in_use`
 ## (portrait set paths) are avoided where possible.
-static func make(rng: RandomNumberGenerator, taken: Array = [], faces_in_use: Array = [], level := 1) -> Companion:
-	var role: String = ROLES.keys()[rng.randi_range(0, ROLES.size() - 1)]
+static func make(rng: RandomNumberGenerator, taken: Array = [], faces_in_use: Array = [], level := 1, role := "") -> Companion:
+	if role == "":
+		role = ROLES.keys()[rng.randi_range(0, ROLES.size() - 1)]
 	var spec: Dictionary = ROLES[role]
 	var hero := Companion.new()
 	var free_names := NAMES.filter(func(n): return n not in taken)
@@ -86,6 +87,10 @@ static func make(rng: RandomNumberGenerator, taken: Array = [], faces_in_use: Ar
 	hero.toughness = spec["toughness"]
 	hero.row = spec.get("row", "front")  # Scouts start at the back with a sling (#72)
 	hero.reach = spec.get("reach", false)
+	# They arrive with their role's plain weapon (balance report, owner
+	# 2026-10-19); Scouts keep their sling.
+	if spec.has("weapon"):
+		hero.weapon = load(spec["weapon"])
 	hero.portrait = load(spec["portrait"])
 	var faces := faces_for(role)
 	var free_faces := faces.filter(func(f): return f["portrait_set"] not in faces_in_use)

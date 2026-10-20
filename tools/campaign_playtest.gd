@@ -107,7 +107,7 @@ func _campaign(hero_path: String, run_seed: int, max_days: int) -> Dictionary:
 	party = PS.new()
 	party.add_member(load(hero_path))
 	var lead: Companion = party.members[0]
-	lead.weapon = IRON_SWORD  # the opening hands every hero the companion's sword
+	lead.weapon = lead.companion_weapon if lead.companion_weapon else IRON_SWORD  # taken in the opening
 	lead.refresh_stats()
 	lead.health = lead.effective_max_health()
 	# Restocked at camp after the opening (#69), with service arrivals (#80).
@@ -406,6 +406,8 @@ func _fortress() -> String:
 			return "home"
 		camp.gate_broken = true
 		stats["gate_day"] = camp.day
+		for hero: Companion in party.living_members():
+			hero.change_strain(-Main.GATE_RELIEF)
 		for gate in gates:
 			map.doors[gate] = DungeonMap.Door.OPEN
 		_heal_up()

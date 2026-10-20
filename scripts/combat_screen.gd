@@ -324,6 +324,8 @@ func _fade_out(foe) -> void:
 func _process(_delta: float) -> void:
 	if not visible or _state == null:
 		return
+	if _actions.visible:
+		_update_intent_line()  # always the selected enemy's current plan (#116)
 	var camera := get_viewport().get_camera_3d()
 	for foe in _tags:
 		if foe.node and foe.node.has_method("set_combat_state"):

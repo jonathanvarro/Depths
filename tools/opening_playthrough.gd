@@ -141,7 +141,7 @@ func _do_pack_step() -> void:
 	await process_frame
 	await _snap_once("pack_" + key)
 	match key:
-		"equip": _press_in_row(load("res://data/gear/iron_sword.tres").display_name, "Equip")
+		"equip": _press_in_row(main._opening_weapon.display_name, "Equip")
 		"drop": _press_in_row(main._starting_weapon.display_name, "Drop")
 		"light", "relight": _press_in_row(main.TORCH.display_name, "Use")
 		"draught": _press_in_row("Restorative draught", "Use")
@@ -252,9 +252,9 @@ func _initialize() -> void:
 	for body in main._opening_body_cells():
 		await _use_solid(body)
 		check("never stood on a body", main._party.cell != body)
-	check("both bodies searched: 2 torches + sword", supplies.count(main.TORCH) + (1 if supplies.torch_lit() else 0) == 2 and (main.IRON_SWORD in supplies.gear or hero.weapon == main.IRON_SWORD))
+	check("both bodies searched: 2 torches + sword", supplies.count(main.TORCH) + (1 if supplies.torch_lit() else 0) == 2 and (main._opening_weapon in supplies.gear or hero.weapon == main._opening_weapon))
 	await _settle()  # equip / drop / light via pack cards
-	check("sword equipped, broken weapon dropped, torch lit", hero.weapon == main.IRON_SWORD and main._starting_weapon not in supplies.gear and supplies.torch_lit())
+	check("sword equipped, broken weapon dropped, torch lit", hero.weapon == main._opening_weapon and main._starting_weapon not in supplies.gear and supplies.torch_lit())
 	await _snap("torch_lit")
 	# Out through the web first: the wandering below never re-enters the room.
 	await _walk_to(web + Vector2i(1, 0))
@@ -332,6 +332,6 @@ func _initialize() -> void:
 	_press(main._preparation, "Enter the cave")
 	await create_timer(0.3).timeout
 	check("camp: torches not a lantern, restocked, all three slots, not bleeding", not supplies.has_lantern and supplies.torch_lit() and supplies.count(main.TORCH) == 3 and main._cards.all(func(c): return c.visible) and not hero.bleeding)
-	check("keeps the sword", hero.weapon == main.IRON_SWORD)
+	check("keeps the companion's weapon", hero.weapon == main._opening_weapon)
 	print("fails=", fails)
 	quit()

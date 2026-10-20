@@ -5,6 +5,7 @@
 [ext_resource type="Resource" path="res://data/portraits/corin.tres" id="3"]
 [ext_resource type="Resource" path="res://data/dialogue/corin.tres" id="4"]
 [ext_resource type="Resource" path="res://data/gear/broken_short_sword.tres" id="5"]
+[ext_resource type="Resource" path="res://data/gear/iron_sword.tres" id="cw"]
 
 [resource]
 script = ExtResource("1")
@@ -39,3 +40,4 @@ stat_res = 1
 aim_base = 0.69
 speed_base = 11
 hp_bonus = 2
+companion_weapon = ExtResource("cw")

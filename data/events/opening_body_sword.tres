@@ -7,7 +7,7 @@
 
 [sub_resource type="Resource" id="o0"]
 script = ExtResource("outcome")
-text = "Their hand is still closed around the hilt. You pry the sword free."
+text = "Their hand is still closed around the grip. You pry the weapon free."
 gear = Array[Equipment]([ExtResource("sword")])
 
 [sub_resource type="Resource" id="c0"]
@@ -20,7 +20,7 @@ outcomes = Array[EventOutcome]([SubResource("o0")])
 script = ExtResource("event")
 kind = 2
 title = "Your companion"
-clue = "Your other companion, a sword still in their hand."
+clue = "Your other companion, a weapon still in their hand."
 choices = Array[EventChoice]([SubResource("c0")])
 min_depth = 99
 max_depth = 99

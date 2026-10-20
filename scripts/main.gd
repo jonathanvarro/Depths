@@ -319,6 +319,8 @@ var _hint_queue: Array = []  # a card waiting for an "ok" card to close
 var _chest: Control  # chest_screen.gd
 var _web2_at := -1  # step she broke the second web
 var _starting_weapon: Equipment  # the hero's broken weapon, dropped in the tutorial
+## The fallen companion's weapon this hero takes in the opening (balance report).
+var _opening_weapon: Equipment = IRON_SWORD
 var _trip_at := -1
 var _tripped := false
 var _spider_swings := 0
@@ -608,7 +610,7 @@ func _run_event(cell: Vector2i) -> void:
 		_map.triggered.erase(cell)
 		return
 	_empty_prop(cell)
-	if _in_opening and event in OPENING_BODY_EVENTS:
+	if _in_opening and cell in _opening_body_cells():
 		_searched_bodies[cell] = true
 		_say("search_body", true)
 		_refresh_tutorial_hint()
@@ -1176,8 +1178,14 @@ func _gate_fight() -> void:
 
 
 ## The gate's guards are beaten: it stays broken for good, whatever the day.
+## Nerves steadied when the gate falls (balance report, owner 2026-10-19).
+const GATE_RELIEF := 15.0
+
+
 func _break_gates() -> void:
 	_camp_state.gate_broken = true
+	for hero: Companion in _party_state.living_members():
+		hero.change_strain(-GATE_RELIEF)  # courage rises as the gate splinters
 	for gate in _map.marks.get("gates", []):
 		_map.doors[gate] = DungeonMap.Door.OPEN
 	_build_level()
@@ -1379,6 +1387,7 @@ func _begin_opening() -> void:
 	# Hurt, bleeding and filthy, but panic is held back until later (#56, #69).
 	hero.health = roundi(hero.effective_max_health() * OPENING_START_HEALTH / 20.0)  # half, as Mara's 10/20
 	_starting_weapon = hero.weapon
+	_opening_weapon = hero.companion_weapon if hero.companion_weapon else IRON_SWORD
 	hero.strain = OPENING_START_STRAIN
 	hero.strain_locked = true
 	hero.min_health = OPENING_MIN_HEALTH
@@ -1409,7 +1418,13 @@ func _begin_opening() -> void:
 	for i in OPENING_BODY_EVENTS.size():
 		var body: Vector2i = _opening_body_cells()[i]
 		_map.contents[body] = DungeonMap.Content.CHEST  # searchable, via its event
-		_map.events[body] = OPENING_BODY_EVENTS[i]
+		var body_event: RoomEvent = OPENING_BODY_EVENTS[i]
+		if body_event.choices[0].outcomes[0].gear.has(IRON_SWORD):
+			# This hero's own fitting weapon instead of the shared sword.
+			body_event = body_event.duplicate(true)
+			var gear: Array[Equipment] = [_opening_weapon]
+			body_event.choices[0].outcomes[0].gear = gear
+		_map.events[body] = body_event
 		_map.solid[body] = true  # searched from beside, not stood on (#69)
 	_map.solid[_opening_fire_cell()] = true
 	# Wake facing down the room toward the way out, the bodies in view.
@@ -2021,10 +2036,10 @@ func _refresh_tutorial_hint() -> void:
 	if not _opening_body_cells().all(func(c): return _searched_bodies.has(c)):
 		key = "search"
 		text = "Walk into your fallen companions to search them."
-	elif hero.weapon != IRON_SWORD and IRON_SWORD in supplies.gear:
+	elif hero.weapon != _opening_weapon and _opening_weapon in supplies.gear:
 		key = "equip"
 		text = "%s to open your pack." % open_pack
-		inside = "Equip the iron sword."
+		inside = "Equip the %s." % _opening_weapon.display_name.to_lower().trim_prefix("companion's ")
 	elif _starting_weapon and _starting_weapon in supplies.gear:
 		key = "drop"
 		text = "%s to open your pack." % open_pack
@@ -2173,7 +2188,7 @@ func _hint_icon_for(key: String) -> Texture2D:
 		"bleeding": return Glyphs.STATUS["bleeding"]
 		"throw", "force_throw", "light", "relight": return TORCH.icon
 		"draught": return DRAUGHT.icon
-		"equip": return IRON_SWORD.icon
+		"equip": return _opening_weapon.icon
 		"drop": return _starting_weapon.icon if _starting_weapon else null
 		"web": return WEBBED_ICON
 		"fight": return Glyphs.intention(CombatState.Intent.ATTACK)

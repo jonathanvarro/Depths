@@ -1,6 +1,6 @@
 # Balance report: full-campaign playtest (October 2026)
 
-*Issues #49 and #119. The bot behind it is `tools/campaign_playtest.gd`, and the queen-fight lab is `tools/queen_lab.gd`. Nothing in this report has been changed in the game: every proposal below waits for the owner's decision.*
+*Issues #49 and #119. The bot behind it is `tools/campaign_playtest.gd`, and the queen-fight lab is `tools/queen_lab.gd`. **Update 2026-10-19:** the owner approved proposals 1–5; they're applied, and the before/after is at the end. Proposals 6–8 still wait.*
 
 ## How it was tested
 
@@ -100,3 +100,31 @@ Godot --headless --path . --script tools/queen_lab.gd
 - The opening escape: covered separately by `tools/opening_playthrough.gd`.
 - Panic bolting while walking, and the coin-flip screens. The rules are the same, but the bot doesn't see the screens.
 - A human's judgement on events and Defend timing. The observed fresh-player campaign asked for in #119 is still needed alongside these numbers.
+
+## Update: proposals 1–5 applied (owner, 2026-10-19)
+
+**What changed:**
+1. The queen's screech: strain 15 → **8**, and chance 20% → **15%**.
+2. Breaking the gate steadies everyone: **−15 strain**.
+3. Each hero now takes a weapon that suits them from the fallen companion:
+   - Mara: a **companion's short sword** (light, 3–5, +5% to hit).
+   - Alwen: a **companion's light mace** (light, 3–5).
+   - Corin: the iron sword, as before.
+
+   The proposal said 2–4 for Alwen's mace, but that's exactly what her iron sword already gave her, so it would have changed nothing; 3–5 matches Mara's. Both weapons use placeholder icons until ChatGPT draws them.
+4. Recruits bring their role's plain weapon: Wardens a **knotted oak club**, Brawlers a **woodcutter's axe**. Scouts keep their sling, because a spear would hit no harder for their weak arm.
+5. At least one of the three recruits at the fire is a **Warden or Brawler**.
+
+The same 90 campaigns (same seeds, same bot), before and after:
+
+| | Mara | Corin | Alwen |
+|---|---|---|---|
+| Campaigns won within 45 days | 16 → **22** / 30 | 23 → **24** / 30 | 9 → **18** / 30 |
+| Days to win (median) | 19 → **11** | 19 → **14.5** | 24 → **22.5** |
+| Party wipes per campaign | 2.1 → **1.8** | 1.4 → **1.2** | 2.8 → **2.1** |
+| Queen, wins per attempt | 23% → **31%** | 38% → **45%** | 13% → **29%** |
+| Gate, wins per attempt | 30/40 → **30/35** | 29/37 → **30/32** | 29/38 → **30/33** |
+
+Floors 1–3 are unchanged: 1–7 health lost per visit, about 95% of fights won. The queen is still the hardest fight in the game, but the three heroes now sit much closer together (29–45% per attempt, against 13–38% before). Every hero wins most campaigns.
+
+Still open: proposal 6 (floor 3 as a warm-up), 7 (route price) and 8 (level 4 before the queen).

@@ -39,6 +39,10 @@ const StrainRules := preload("res://scripts/strain.gd")
 @export_range(0.0, 1.0) var accuracy := 0.75
 ## What they fight with; without one they use attack_min/max (#58).
 @export var weapon: Equipment
+## What this hero takes from the fallen companion in the opening (balance
+## report, owner 2026-10-19): a weapon that suits their arm. Empty means
+## the companion's iron sword.
+@export var companion_weapon: Equipment
 ## Higher acts earlier in a combat round.
 @export var initiative := 10
 ## Share of a blow taken while defending (a Warden takes less, #41).

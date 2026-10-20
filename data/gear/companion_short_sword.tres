@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Equipment" format=3]
+
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/items/refined-v2/iron-sword.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+display_name = "Companion's short sword"
+description = "Short, quick and well balanced: a blade for a fast hand rather than a strong one. Placeholder art until its own icon."
+icon = ExtResource("2")
+attack_min = 3
+attack_max = 5
+accuracy_bonus = 0.05
+price = 32
+force = false
+light = true
