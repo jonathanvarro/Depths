@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="QuestPackage" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="1_80vo2"]
+[ext_resource type="Resource" path="res://data/events/quest_iron_seam.tres" id="2_jf6kq"]
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="3_xmfcp"]
+[ext_resource type="Script" path="res://scripts/quest_package.gd" id="4_77xdh"]
+
+[resource]
+script = ExtResource("4_77xdh")
+id = "iron_seam"
+quest = "iron_sample"
+unless_flags = PackedStringArray("have_ore")
+rows = PackedStringArray("#####", "#,1,#", "#,,,#", "##.##")
+events = Array[ExtResource("1_80vo2")]([ExtResource("2_jf6kq")])

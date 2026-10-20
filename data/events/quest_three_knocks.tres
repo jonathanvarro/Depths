@@ -1,0 +1,61 @@
+[gd_resource type="Resource" script_class="RoomEvent" format=3]
+
+[ext_resource type="Script" path="res://scripts/event_choice.gd" id="1_2ump3"]
+[ext_resource type="Script" path="res://scripts/event_outcome.gd" id="2_8v7mh"]
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="3_a6ib7"]
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="4_tev0k"]
+[ext_resource type="Script" path="res://scripts/supply_item.gd" id="5_cobmq"]
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="6_h7meo"]
+
+[sub_resource type="Resource" id="Resource_0h2lx"]
+script = ExtResource("2_8v7mh")
+text = "A hoarse voice answers. \"Hask - I'm Hask - the props went! Get me out!\" One cracked beam holds the whole fall up."
+quest = "three_knocks"
+quest_stage = 2
+
+[sub_resource type="Resource" id="Resource_iwu3o"]
+script = ExtResource("1_2ump3")
+label = "Call out"
+investigation = true
+outcomes = Array[ExtResource("2_8v7mh")]([SubResource("Resource_0h2lx")])
+
+[sub_resource type="Resource" id="Resource_bsumh"]
+script = ExtResource("2_8v7mh")
+weight = 3
+text = "You wedge the beam, shift stone after stone, and Hask crawls out grey with dust. He swears he'll make his own way to camp - and that he owes you."
+quest = "three_knocks"
+quest_flag = "miner_at_camp"
+quest_stage = 2
+
+[sub_resource type="Resource" id="Resource_4ff1q"]
+script = ExtResource("2_8v7mh")
+text = "Hask crawls out - but the noise of the stones carried. Something comes skittering out of the dark."
+quest = "three_knocks"
+quest_flag = "miner_at_camp"
+quest_stage = 2
+
+[sub_resource type="Resource" id="Resource_0rd0g"]
+script = ExtResource("1_2ump3")
+label = "Brace the beam and dig him out"
+time_cost = 8
+outcomes = Array[ExtResource("2_8v7mh")]([SubResource("Resource_bsumh"), SubResource("Resource_4ff1q")])
+
+[sub_resource type="Resource" id="Resource_jubm0"]
+script = ExtResource("2_8v7mh")
+text = "You chalk the king's mark on the rubble and promise to send diggers. \"Don't be long,\" says the voice."
+quest = "three_knocks"
+quest_flag = "crew_sent"
+quest_stage = 2
+
+[sub_resource type="Resource" id="Resource_50iu0"]
+script = ExtResource("1_2ump3")
+label = "Mark it for a camp crew"
+outcomes = Array[ExtResource("2_8v7mh")]([SubResource("Resource_jubm0")])
+
+[resource]
+script = ExtResource("6_h7meo")
+kind = 4
+title = "Three knocks"
+clue = "Fresh dust on the floor and an abandoned tin cup. From behind a fall of rubble: three knocks, a pause, three knocks."
+choices = Array[ExtResource("1_2ump3")]([SubResource("Resource_iwu3o"), SubResource("Resource_0rd0g"), SubResource("Resource_50iu0")])
+min_depth = 99

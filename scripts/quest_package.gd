@@ -12,11 +12,11 @@ extends Resource
 @export var id := ""
 @export var min_depth := 1
 @export var max_depth := 1
-## Placed while this quest is at this stage (quests.gd Stage)...
+## Placed while this quest is at one of these stages (quests.gd Stage)...
 @export var quest := ""
-@export var stage := 2
-## ...and that quest doesn't have this flag (e.g. the thing is done).
-@export var unless_flag := ""
+@export var stages: Array[int] = [2]
+## ...and that quest has none of these flags (e.g. the thing is done).
+@export var unless_flags: PackedStringArray = []
 @export var rows: PackedStringArray = []
 @export var events: Array[RoomEvent] = []
 ## Who waits at its 'E'.

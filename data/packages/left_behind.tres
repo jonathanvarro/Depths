@@ -12,7 +12,7 @@
 script = ExtResource("7_joiem")
 id = "left_behind"
 quest = "left_behind"
-unless_flag = "found"
+unless_flags = PackedStringArray("found")
 rows = PackedStringArray("#######", "#,,,,,#", "#,1,2,#", "#,,E,,#", "#,,,,,#", "###.###")
 events = Array[ExtResource("1_xtdy0")]([ExtResource("2_jtx2c"), ExtResource("3_pf0qn")])
 fight = Array[ExtResource("4_s6qv5")]([ExtResource("5_75l4d"), ExtResource("6_bmmsj")])

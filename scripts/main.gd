@@ -505,7 +505,13 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 			layout = fortress["layout"]
 			marks = {"hall": fortress["hall"], "gates": fortress["gates"]}
 		# Quest packages the story wants here (#123), stamped into rock.
-		var stamped: Dictionary = Packages.place(layout, Packages.active(_camp_state, depth) if not _in_opening else [], _site_seed + depth * 7919 + 13)
+		# Never join a package through the queen's hall or past her gates.
+		var avoid: Array = marks.get("hall", []) + marks.get("gates", [])
+		var join: Dictionary = {}
+		if not avoid.is_empty():
+			var plain = DungeonMap.new(layout, depth)
+			join = plain.walking_distances(plain.find_content(DungeonMap.Content.STAIRS_UP))
+		var stamped: Dictionary = Packages.place(layout, Packages.active(_camp_state, depth) if not _in_opening else [], _site_seed + depth * 7919 + 13, avoid, join)
 		_floors[depth] = DungeonMap.new(stamped["layout"], depth)
 		_floors[depth].marks = marks
 		_assign_events(_floors[depth])
@@ -634,6 +640,8 @@ func _run_event(cell: Vector2i) -> void:
 		_map.triggered.erase(cell)
 		return
 	_empty_prop(cell)
+	if Quests.has_flag(_camp_state, "lower_gate", "seen") and not Quests.has_flag(_camp_state, "lower_gate", "ending_shown"):
+		await _slice_ending()
 	if _in_opening and cell in _opening_body_cells():
 		_searched_bodies[cell] = true
 		_say("search_body", true)
@@ -1241,6 +1249,7 @@ func _step_back() -> void:
 ## The site is cleared (#44): a story beat, a bounty waiting at camp.
 func _queen_defeated() -> void:
 	_camp_state.queen_defeated = true
+	Quests.set_stage(_camp_state, "queen_claim", Quests.Stage.RESOLVED)  # a side quest now (#122)
 	_camp_state.contract = {}
 	_save_now()
 	_party.locked = true
@@ -1298,6 +1307,21 @@ func _place_extra_foe(foe) -> void:
 	_dress_foe(node, foe.type)
 	_level.add_child(node)
 	foe.node = node
+
+
+## The first story slice ends at the lower water gate (docs/first-slice-
+## plan.md): a short card, then play carries on in the cave as before.
+func _slice_ending() -> void:
+	Quests.set_flag(_camp_state, "lower_gate", "ending_shown")
+	_party.locked = true
+	_results.show_brief("The way down continues",
+			"Below the fortress, the old channels run on into flooded galleries no map has charted. Whatever the commander is looking for, it lies further down.
+
+This is as far as the cave goes for now. Your campaign carries on - the queen, the camp and the upper floors are still yours to finish.",
+			"Continue")
+	await _results.continue_pressed
+	_results.visible = false
+	_party.locked = false
 
 
 ## Optional legacy presentation adjustments; new art has its own native scale.

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="QuestPackage" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="1_tl32s"]
+[ext_resource type="Resource" path="res://data/events/quest_three_knocks.tres" id="2_idqm0"]
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="3_ri5p5"]
+[ext_resource type="Script" path="res://scripts/quest_package.gd" id="4_iwstk"]
+
+[resource]
+script = ExtResource("4_iwstk")
+id = "three_knocks"
+min_depth = 2
+max_depth = 2
+quest = "three_knocks"
+stages = Array[int]([0, 1, 2])
+unless_flags = PackedStringArray("miner_at_camp", "crew_sent")
+rows = PackedStringArray("#########", "#,,,#,,,#", "#,1,B,,,#", "#,,,#,,,#", "##.######")
+events = Array[ExtResource("1_tl32s")]([ExtResource("2_idqm0")])

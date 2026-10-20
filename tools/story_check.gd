@@ -142,9 +142,113 @@ func _initialize() -> void:
 	await _drop(main)
 
 	await _step3()
+	await _steps456()
 	SaveGame.delete()
 	print("fails=", fails)
 	quit()
+
+
+## Runs a package's event on the current floor, picking `choice`.
+func _do_event(main, title: String, choice: String) -> bool:
+	var map = main._map
+	var cells: Array = map.events.keys().filter(func(c): return map.events[c].title == title)
+	if cells.is_empty():
+		return false
+	main._run_event(cells[0])
+	await process_frame
+	var screen = main._event_screen
+	for c in screen._event.choices:
+		if c.label.begins_with(choice):
+			screen._choose(c)
+	await process_frame
+	if screen._buttons.get_child_count() > 0 and screen._event.choices.any(func(c): return c.label.begins_with(choice) and not c.investigation):
+		screen._finish({"left": false, "ambush": [] as Array[EnemyType]})
+	elif screen.visible and not screen._event.choices.any(func(c): return c.label.begins_with(choice) and c.investigation):
+		screen._finish({"left": false, "ambush": [] as Array[EnemyType]})
+	await process_frame
+	return true
+
+
+## Three Knocks, the iron seam, the lower gate and the slice's ending.
+func _steps456() -> void:
+	SaveGame.delete()
+	var main = await _game(false)
+	var camp = main._camp_state
+	# Three Knocks: hidden on floor 2 until found.
+	main._floors.clear()
+	main._go_to_floor(2, main.Arrival.FROM_ABOVE)
+	check("Three Knocks waits, unannounced, on floor 2", "three_knocks" in main._map.packages and "three_knocks" not in Quests.in_log(camp))
+	var map = main._map
+	var knock: Vector2i = map.events.keys().filter(func(c): return map.events[c].title == "Three knocks")[0]
+	main._run_event(knock)
+	await process_frame
+	var screen = main._event_screen
+	screen._choose(screen._event.choices[0])  # call out
+	await process_frame
+	check("calling out finds the quest", "three_knocks" in Quests.in_log(camp) and screen._body.text.contains("Hask"))
+	if dir != "":
+		await _snap("three_knocks")
+	screen._choose(screen._event.choices[2])  # mark it for a crew
+	await process_frame
+	screen._finish({"left": false, "ambush": [] as Array[EnemyType]})
+	await process_frame
+	check("marking it sends a crew", Quests.has_flag(camp, "three_knocks", "crew_sent"))
+	main.Story.on_return(camp)
+	check("...who bring Hask back after the next return", Quests.has_flag(camp, "three_knocks", "miner_at_camp") and main.Story.camp_talk(camp, "fire") == "miner_thanks")
+	main._floors.clear()
+	main._go_to_floor(2, main.Arrival.FROM_ABOVE)
+	check("once he's safe, the rock fall isn't stamped again", "three_knocks" not in main._map.packages)
+	# The iron seam: on floor 1 while the smith's quest is open.
+	main._floors.clear()
+	main._go_to_floor(1, main.Arrival.FROM_ABOVE)
+	check("no seam before the smith asks", "iron_seam" not in main._map.packages)
+	Quests.set_stage(camp, "iron_sample", Quests.Stage.ACTIVE)
+	main._floors.clear()
+	main._go_to_floor(1, main.Arrival.FROM_ABOVE)
+	check("with his request, floor 1 has the dark seam", "iron_seam" in main._map.packages)
+	await _do_event(main, "A dark seam", "Chip out")
+	check("chipping out a sample gives the ore", Quests.has_flag(camp, "iron_sample", "have_ore") and main.Story.camp_talk(camp, "smith") == "smith_deliver")
+	# The lower gate: reachable without the queen's hall.
+	var FG = load("res://scripts/floor_generator.gd")
+	var DM = load("res://scripts/dungeon_map.gd")
+	var F = load("res://scripts/fortress.gd")
+	var Packages = load("res://scripts/packages.gd")
+	var gate_pkg: QuestPackage = load("res://data/packages/lower_gate.tres")
+	var bad := 0
+	for s in 200:
+		var fort: Dictionary = F.fortify(FG.generate(s * 104729 + 3, false, 4), false)
+		var plain = DM.new(fort["layout"], 4)
+		var join: Dictionary = plain.walking_distances(plain.find_content(DM.Content.STAIRS_UP))
+		var stamped: Dictionary = Packages.place(fort["layout"], [gate_pkg], s, fort["hall"] + fort["gates"], join)
+		var m = DM.new(stamped["layout"], 4)
+		var reach: Dictionary = m.walking_distances(m.find_content(DM.Content.STAIRS_UP))
+		if not stamped["failed"].is_empty() or not reach.has(stamped["events"].keys()[0]) or fort["hall"].any(func(c): return reach.has(c)):
+			bad += 1
+	check("over 200 fortresses, the lower gate is reachable without passing the queen's gates", bad == 0, "%d bad" % bad)
+	Quests.set_stage(camp, "lower_gate", Quests.Stage.ACTIVE)
+	main._floors.clear()
+	main._go_to_floor(4, main.Arrival.FROM_ABOVE)
+	check("with the order given, floor 4 has the lower gate", "lower_gate" in main._map.packages)
+	map = main._map
+	var gate_cell: Vector2i = map.events.keys().filter(func(c): return map.events[c].title == "The lower water gate")[0]
+	main._run_event(gate_cell)
+	await process_frame
+	main._event_screen._choose(main._event_screen._event.choices[0])
+	await process_frame
+	main._event_screen._finish({"left": false, "ambush": [] as Array[EnemyType]})
+	await create_timer(0.2).timeout
+	check("looking down ends the slice with its card", main._results.visible and main._results._title.text == "The way down continues" and Quests.stage(camp, "lower_gate") == Quests.Stage.RESOLVED)
+	if dir != "":
+		await _snap("slice_ending")
+	main._results.continue_pressed.emit()
+	await process_frame
+	check("...and play carries on", not main._results.visible and not main._party.locked)
+	main._queen_defeated()
+	await process_frame
+	main._results.continue_pressed.emit()
+	await process_frame
+	check("the queen's death completes her side quest", Quests.stage(camp, "queen_claim") == Quests.Stage.RESOLVED)
+	await _drop(main)
 
 
 ## Quest packages (#123) and Those Left Behind.

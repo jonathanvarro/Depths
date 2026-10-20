@@ -11,7 +11,7 @@ enum Stage { UNKNOWN, OFFERED, ACTIVE, RESOLVED }
 ## log only once found (stage OFFERED or later).
 const INFO := {
 	"left_behind": {"title": "Those Left Behind", "giver": "Commander Vael", "floor": 1, "hidden": false},
-	"three_knocks": {"title": "Three Knocks", "giver": "", "floor": 1, "hidden": true},
+	"three_knocks": {"title": "Three Knocks", "giver": "", "floor": 2, "hidden": true},
 	"iron_sample": {"title": "Iron for the Apprentice", "giver": "the smith", "floor": 1, "hidden": false},
 	"lower_gate": {"title": "The Way Down", "giver": "Commander Vael", "floor": 4, "hidden": false},
 	"queen_claim": {"title": "The Queen's Claim", "giver": "Commander Vael", "floor": 4, "hidden": false},

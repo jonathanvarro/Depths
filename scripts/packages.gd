@@ -25,14 +25,17 @@ static func library() -> Array[QuestPackage]:
 static func active(camp, depth: int) -> Array[QuestPackage]:
 	return library().filter(func(p: QuestPackage):
 		return depth >= p.min_depth and depth <= p.max_depth \
-				and Quests.stage(camp, p.quest) == p.stage \
-				and (p.unless_flag == "" or not Quests.has_flag(camp, p.quest, p.unless_flag)))
+				and Quests.stage(camp, p.quest) in p.stages \
+				and not Array(p.unless_flags).any(func(f): return Quests.has_flag(camp, p.quest, f)))
 
 
 ## Stamps `packages` into `layout`. Returns {"layout", "events": {cell:
 ## RoomEvent}, "fights": {cell: Array[EnemyType]}, "placed": [ids],
 ## "failed": [ids]}.
-static func place(layout: PackedStringArray, packages: Array, seed_value: int) -> Dictionary:
+## `avoid`: cells a corridor must not dig into or join (the queen's hall).
+## `join`: if given, the only open cells a corridor may join (those reached
+## from the stairs without passing the queen's gates).
+static func place(layout: PackedStringArray, packages: Array, seed_value: int, avoid: Array = [], join: Dictionary = {}) -> Dictionary:
 	var rows := Array(layout)
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed_value
@@ -50,9 +53,12 @@ static func place(layout: PackedStringArray, packages: Array, seed_value: int) -
 		var placed := false
 		while not spots.is_empty() and not placed:
 			var at: Vector2i = spots.pop_at(rng.randi_range(0, spots.size() - 1))
+			var area := Rect2i(at, Vector2i(package.rows[0].length(), package.rows.size())).grow(1)
+			if avoid.any(func(c): return area.has_point(c)):
+				continue  # not right against the queen's hall
 			var trial := rows.duplicate()
 			var found := {"events": {}, "fights": {}}
-			if _stamp(trial, package, at, found):
+			if _stamp(trial, package, at, found, avoid, join):
 				rows.assign(trial)
 				out["events"].merge(found["events"])
 				out["fights"].merge(found["fights"])
@@ -92,7 +98,7 @@ static func _put(rows: Array, cell: Vector2i, symbol: String) -> void:
 
 
 ## Returns false if a way in couldn't be dug to the rest of the floor.
-static func _stamp(rows: Array, package: QuestPackage, at: Vector2i, out: Dictionary) -> bool:
+static func _stamp(rows: Array, package: QuestPackage, at: Vector2i, out: Dictionary, avoid: Array = [], join: Dictionary = {}) -> bool:
 	var h: int = package.rows.size()
 	var w: int = package.rows[0].length()
 	var rect := Rect2i(at, Vector2i(w, h))
@@ -113,14 +119,14 @@ static func _stamp(rows: Array, package: QuestPackage, at: Vector2i, out: Dictio
 			if symbol == "." and (x == 0 or y == 0 or x == w - 1 or y == h - 1):
 				entrances.append(cell)
 	for entrance in entrances:
-		if not _dig(rows, entrance, rect):
+		if not _dig(rows, entrance, rect, avoid, join):
 			return false
 	return not entrances.is_empty()
 
 
 ## Digs a corridor from `entrance` through rock to the nearest open cell
 ## outside the package.
-static func _dig(rows: Array, entrance: Vector2i, rect: Rect2i) -> bool:
+static func _dig(rows: Array, entrance: Vector2i, rect: Rect2i, avoid: Array = [], join: Dictionary = {}) -> bool:
 	var height: int = rows.size()
 	var width: int = rows[0].length()
 	var previous := {}
@@ -138,11 +144,13 @@ static func _dig(rows: Array, entrance: Vector2i, rect: Rect2i) -> bool:
 		if cell.x < 1 or cell.y < 1 or cell.x >= width - 1 or cell.y >= height - 1:
 			continue
 		var here: String = rows[cell.y][cell.x]
-		if here == "B":
+		if here == "B" or cell in avoid or (here == "#" and SIDES.any(func(s): return (cell + s) in avoid)):
 			continue  # never end at (or dig through) a blocked passage
 		if here != "#":
-			reached = cell
-			break
+			if join.is_empty() or join.has(cell):
+				reached = cell
+				break
+			continue  # open, but cut off from the stairs: look elsewhere
 		for side in SIDES:
 			var next: Vector2i = cell + side
 			if not previous.has(next) and not rect.has_point(next):

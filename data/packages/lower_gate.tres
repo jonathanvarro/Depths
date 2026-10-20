@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="QuestPackage" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="1_qaehp"]
+[ext_resource type="Resource" path="res://data/events/quest_lower_gate.tres" id="2_ojta0"]
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="3_0bu3v"]
+[ext_resource type="Script" path="res://scripts/quest_package.gd" id="4_wgkm1"]
+
+[resource]
+script = ExtResource("4_wgkm1")
+id = "lower_gate"
+min_depth = 4
+max_depth = 4
+quest = "lower_gate"
+unless_flags = PackedStringArray("seen")
+rows = PackedStringArray("#######", "#,,,,,#", "#,,1,,#", "#,,,,,#", "###.###")
+events = Array[ExtResource("1_qaehp")]([ExtResource("2_ojta0")])

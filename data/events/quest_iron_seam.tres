@@ -1,0 +1,48 @@
+[gd_resource type="Resource" script_class="RoomEvent" format=3]
+
+[ext_resource type="Script" path="res://scripts/event_choice.gd" id="1_thd6i"]
+[ext_resource type="Script" path="res://scripts/event_outcome.gd" id="2_y0w18"]
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="3_3kn08"]
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="4_ublv5"]
+[ext_resource type="Script" path="res://scripts/supply_item.gd" id="5_xxobe"]
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="6_j3bce"]
+
+[sub_resource type="Resource" id="Resource_v2puh"]
+script = ExtResource("2_y0w18")
+text = "A fist-sized lump comes away clean. The smith will want this."
+quest = "iron_sample"
+quest_flag = "have_ore"
+
+[sub_resource type="Resource" id="Resource_31a51"]
+script = ExtResource("1_thd6i")
+label = "Chip out a sample"
+time_cost = 3
+outcomes = Array[ExtResource("2_y0w18")]([SubResource("Resource_v2puh")])
+
+[sub_resource type="Resource" id="Resource_tesns"]
+script = ExtResource("2_y0w18")
+weight = 2
+text = "Iron for the smith, and a lump of copper besides."
+quest = "iron_sample"
+quest_flag = "have_ore"
+
+[sub_resource type="Resource" id="Resource_2i1ib"]
+script = ExtResource("2_y0w18")
+text = "The face cracks and stones rain down - but you come away with the iron."
+health = -2
+strain = 6.0
+quest = "iron_sample"
+quest_flag = "have_ore"
+
+[sub_resource type="Resource" id="Resource_mwq05"]
+script = ExtResource("1_thd6i")
+label = "Work it hard for more"
+time_cost = 6
+outcomes = Array[ExtResource("2_y0w18")]([SubResource("Resource_tesns"), SubResource("Resource_2i1ib")])
+
+[resource]
+script = ExtResource("6_j3bce")
+title = "A dark seam"
+clue = "Where the old workings end, a seam of dark rock runs through the wall, streaked rust-red. Real iron."
+choices = Array[ExtResource("1_thd6i")]([SubResource("Resource_31a51"), SubResource("Resource_mwq05")])
+min_depth = 99
