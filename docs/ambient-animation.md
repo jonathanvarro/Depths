@@ -39,7 +39,11 @@ As the light fails and nerves fray, the cave should feel like it's closing in. W
 - **Swirling darkness** joins the existing bleeding-vignette shader layer. Its strength follows light and nerves, and it eases in and out over a few seconds, never popping.
 - **Settings:** the screen-flash setting already turns down the bleeding flash. The swirling darkness will follow it too, for players sensitive to motion at the screen edges.
 
-## Decision for the owner: do the eyes mean anything?
+## Decided: the eyes are pure atmosphere (owner, 2026-10-20)
+
+Eyes in the darkness appear at random in the dark and **never hint at real enemies**. Fights stay ambushes (#46), and no pattern in the eyes says whether a room is safe.
+
+### The question as it was asked
 
 The decided rule is that enemies ambush: they aren't visible before a fight (#46). Two options:
 
