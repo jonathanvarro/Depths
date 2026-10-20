@@ -45,6 +45,9 @@ var _intent_icon_rect: TextureRect
 var _intent_label: Label
 var _fx: Control  # combat_fx.gd
 var _health_seen := {}  # Companion -> health, to show each change as a number
+## How the last enemy fell to a hero: "slash", "smash", "pierce" or "fire"
+## (the spoils arrive the same way, owner 2026-10-20).
+var last_blow := "slash"
 var _last_number := {}  # Companion -> msec of their last number, to stagger the next
 var _actions: Control
 var _action_buttons: HBoxContainer
@@ -74,6 +77,7 @@ func _init() -> void:
 func run(state, cards: Array) -> void:
 	_state = state
 	_cards = cards
+	last_blow = "slash"
 	_note_health()
 	for tag in _tags.values():
 		tag.queue_free()
@@ -188,6 +192,8 @@ func _hero_action(hero: Companion, action: Dictionary) -> void:
 				_fx.icon(at + Vector2(0, -30), MARKS["armour"])  # its hard legs turn the blade
 				_fx.number(at + Vector2(60, -40), str(outcome["damage"]), CombatFx.COLOR_DULL, 34, 0.12)
 			else:
+				if outcome["killed"]:
+					last_blow = strike_of(hero)
 				_fx.slash(at, outcome["damage"] >= 5)
 				Sounds.play(self, "block" if target.shielded else "hit")
 				if target.shielded:
@@ -211,6 +217,8 @@ func _hero_action(hero: Companion, action: Dictionary) -> void:
 		"throw":
 			var target = _target
 			outcome = _state.hero_throw_torch(hero, target)
+			if outcome["killed"] or outcome["fled"]:
+				last_blow = "fire"
 			var at := _foe_point(target)
 			_fx.icon(at, TORCH.icon, 64.0)
 			if outcome["fled"]:
@@ -385,6 +393,14 @@ func _intent_icon(intent: int) -> Texture2D:
 		CombatState.Intent.RECOVER: return MARKS["recover"]
 		CombatState.Intent.BEAT: return MARKS["beat"]
 	return Glyphs.intention(intent)
+
+
+## How `hero`'s blows land: their weapon's kind; bare hands smash, and a
+## sling (reach without a weapon) pierces.
+static func strike_of(hero: Companion) -> String:
+	if hero.weapon:
+		return hero.weapon.strike
+	return "pierce" if hero.has_reach() else "smash"
 
 
 ## Where an enemy is on screen (for slashes and numbers).

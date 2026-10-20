@@ -32,6 +32,7 @@ const QuestLog := preload("res://scripts/quest_log.gd")
 const Story := preload("res://scripts/story.gd")
 const Packages := preload("res://scripts/packages.gd")
 const BattleStage := preload("res://scripts/battle_stage.gd")
+const SpoilsScreen := preload("res://scripts/spoils_screen.gd")
 ## The commander waiting outside after the escape (#122, first slice).
 const COMMANDER_FIRST := preload("res://data/conversations/commander_first.tres")
 const CoinFlip := preload("res://scripts/coin_flip.gd")
@@ -366,6 +367,7 @@ var _music: Node  # music.gd: a track per place (#54)
 var _conversation: Control  # conversation_screen.gd (#122)
 var _quest_log: Control  # quest_log.gd (#123)
 var _stage: Node3D  # battle_stage.gd: fog and darkness behind every fight
+var _spoils: Control  # spoils_screen.gd: gold and XP after a won fight
 var _wound_overlay: ColorRect
 var _wound_tween: Tween
 var _heart_player: AudioStreamPlayer
@@ -688,6 +690,19 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 		_music.play("combat")
 	_combat.run(state, _cards)
 	var result: int = await _combat.finished
+	for foe in state.foes:
+		if foe.health <= 0:
+			_expedition.add_defeated(foe.type.display_name)
+			_camp_state.count_kill(foe.type.display_name)  # today's contract (#42)
+	# A win: the spoils, on the dark stage, arriving the way the last enemy
+	# fell (owner, 2026-10-20). Otherwise purses are picked up as before.
+	var spoils := _gather_spoils(state) if result == CombatState.Result.VICTORY else {}
+	if result != CombatState.Result.VICTORY:
+		for foe in state.foes:
+			if foe.health <= 0:
+				_loot_purse(foe)
+	if not spoils.is_empty():
+		await _spoils.play(spoils, _combat.last_blow, Settings.get_value("flashes"))
 	await _stage.exit()  # the fog sinks back; the cave returns
 	_play_place_music()
 	for foe in state.foes:
@@ -700,16 +715,11 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 	_layout_hint()
 	_touch_pad.visible = true
 	_pack_button.disabled = false
-	for foe in state.foes:
-		if foe.health <= 0:
-			_expedition.add_defeated(foe.type.display_name)
-			_camp_state.count_kill(foe.type.display_name)  # today's contract (#42)
-			_loot_purse(foe)
 	match result:
 		CombatState.Result.VICTORY:
 			_party.locked = false
-			_show_message("The way is clear.")
-			_award_fight_xp(state)
+			if spoils.is_empty():
+				_show_message("The way is clear.")
 			match _fight_kind:
 				"gate": _break_gates()
 				"queen": _queen_defeated()
@@ -736,9 +746,40 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 ## A fight won: every hero still with the party learns from it. Ordinary
 ## fights draw on the floor's limited fight XP; the gate and the queen are
 ## one-off awards instead.
-func _award_fight_xp(state) -> void:
+## Gold and experience from a won fight, applied now and returned for the
+## spoils screen: {"gold", "heroes": [{"hero", "from", "to"}], "note",
+## "contract"}. Empty when there's nothing to show (the opening).
+func _gather_spoils(state) -> Dictionary:
 	if _in_opening or _depth < 1:
-		return
+		return {}
+	var gold := 0
+	for foe in state.foes:
+		if foe.health <= 0:
+			gold += _take_purse(foe)
+	var amount := _fight_xp(state)
+	var heroes := []
+	var before := {}
+	for hero: Companion in _party_state.members:
+		if hero.is_with_party():
+			before[hero] = hero.xp
+	if amount > 0:
+		_grant_xp(amount, true)
+		for hero in before:
+			heroes.append({"hero": hero, "from": before[hero], "to": hero.xp})
+	var note := "Nothing more to learn on this floor." if amount <= 0 and _fight_kind == "" else ""
+	var contract := ""
+	var c: Dictionary = _camp_state.contract
+	if c.has("enemy") and not c.get("paid", true):
+		contract = "Contract: %d of %d %s" % [c["done"], c["count"], c["plural"]]
+	if gold > 0:
+		Sounds.play(self, "coins")
+	if gold == 0 and heroes.is_empty() and note == "":
+		return {}
+	return {"gold": gold, "heroes": heroes, "note": note, "contract": contract}
+
+
+## The fight's experience for the party, drawn from the floor's allowance.
+func _fight_xp(state) -> int:
 	var amount := 0
 	match _fight_kind:
 		"gate":
@@ -751,17 +792,12 @@ func _award_fight_xp(state) -> void:
 				if not foe.is_alive():
 					threat += foe.type.threat
 			amount = _camp_state.take_floor_xp(_depth, threat * Progression.XP_PER_THREAT)
-	if amount <= 0:
-		if _fight_kind == "":
-			_show_message("No XP: nothing more to learn here")
-		return
-	_grant_xp(amount)
-	_show_message("+%d XP" % amount)
+	return amount
 
 
 ## Everyone with the party gets the full award; anyone below the camp's
 ## benchmark (one level under its best) gets it twice until they catch up.
-func _grant_xp(amount: int) -> void:
+func _grant_xp(amount: int, quiet := false) -> void:
 	var benchmark: int = Progression.THRESHOLDS[maxi(1, _camp_state.best_level - 1)] if _camp_state.best_level > 1 else 0
 	for hero: Companion in _party_state.members:
 		if not hero.is_with_party():
@@ -769,22 +805,29 @@ func _grant_xp(amount: int) -> void:
 		var extra := clampi(benchmark - hero.xp, 0, amount)
 		var was_ready := Progression.ready_to_advance(hero)
 		hero.xp += amount + extra
-		if not was_ready and Progression.ready_to_advance(hero):
+		if not was_ready and Progression.ready_to_advance(hero) and not quiet:
 			_show_message("%s is ready to advance - choose at camp." % hero.display_name)
 		hero.emit_changed()
 
 
 ## A beaten enemy's purse (goblins, #42).
 func _loot_purse(foe) -> void:
+	var coins := _take_purse(foe)
+	if coins > 0:
+		_show_message("+%d gold" % coins)
+		Sounds.play(self, "coins")
+
+
+## Takes a beaten enemy's purse into the pack. Returns the coins.
+func _take_purse(foe) -> int:
 	var purse: Vector2i = foe.type.purse
 	if purse.y <= 0:
-		return
+		return 0
 	var coins := randi_range(purse.x, purse.y)
 	_party_state.supplies.gold += coins
 	_party_state.supplies.changed.emit()
 	_expedition.gold_found += coins
-	_show_message("+%d gold" % coins)
-	Sounds.play(self, "coins")
+	return coins
 
 
 ## The enemy groups a party of `party_size` can meet at `depth` (#49).
@@ -2701,6 +2744,8 @@ func _build_ui(minimap: Control) -> void:
 	talk_layer.add_child(_conversation)
 	_quest_log = QuestLog.new()
 	talk_layer.add_child(_quest_log)
+	_spoils = SpoilsScreen.new()
+	talk_layer.add_child(_spoils)
 	_pack.open_quests.connect(func(): _quest_log.open(_camp_state))
 	add_child(coin_layer)
 	var coin := CoinFlip.new()

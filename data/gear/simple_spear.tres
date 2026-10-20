@@ -14,3 +14,4 @@ attack_max = 5
 accuracy_bonus = 0.0
 price = 18
 reach = true
+strike = "pierce"

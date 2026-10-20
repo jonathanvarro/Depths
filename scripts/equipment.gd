@@ -24,3 +24,6 @@ extends Resource
 ## Strength adds to force weapons; a light weapon ignores a weak arm (#47).
 @export var force := true
 @export var light := false
+## How it lands (spoils arrival, owner 2026-10-20): "slash" for blades,
+## "smash" for clubs and maces, "pierce" for spears.
+@export_enum("slash", "smash", "pierce") var strike := "slash"

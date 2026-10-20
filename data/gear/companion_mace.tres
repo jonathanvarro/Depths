@@ -14,3 +14,4 @@ accuracy_bonus = 0.0
 price = 30
 force = false
 light = true
+strike = "smash"

@@ -13,3 +13,4 @@ attack_min = 2
 attack_max = 4
 accuracy_bonus = 0.0
 price = 10
+strike = "smash"
