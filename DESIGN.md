@@ -83,6 +83,14 @@ Returning safely with useful gains should matter even when the bottom is not rea
 
 **Story hooks already recorded:** going back down to recover the fallen companions' bodies, and realising it was an **ambush**, not a routine clean-up (#107). Who caused the ambush (goblins, dark elves, or someone among the king's forces) is open.
 
+**First story slice (decided 2026-10-20, [plan](docs/first-slice-plan.md)):**
+- The commander scene follows the escape. Commander Edric Vael (working name) is stern but fair on the surface.
+- *Those Left Behind* (floor 1 ambush site; the evidence is a route map marked in a stranger's hand and an odd goblin arrow).
+- *Three Knocks* (a hidden trapped miner: rescue now or send a crew).
+- An iron sample for the smith unlocks a camp-forged blade.
+- The fortress's lower water gate is reachable without the queen and ends the slice. The queen becomes a side quest.
+- Quests can't be missed in this slice.
+
 **Quests on every floor (#123):**
 - **Visible quests** are given through conversations with NPCs at camp.
 - **Hidden quests** are found by searching, possibly with no prompt. They're built as **packaged areas**: small hand-made pieces of the maze that the floor generator places only while their conditions (floor, day, story step) are active.

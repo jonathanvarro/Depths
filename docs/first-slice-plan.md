@@ -71,3 +71,15 @@ Placeholders let the code go ahead first, as before.
 - More levels.
 
 These all wait until this slice has been played and reviewed (#119).
+
+## Decided (owner, 2026-10-20)
+
+The owner accepted every suggestion above:
+
+1. **The commander:** stern but fair on the surface. Working name **Commander Edric Vael** (placeholder; rename freely).
+2. **The ambush evidence:** the party's own route map, marked in a hand none of them used, and a goblin arrow fletched with something goblins don't use. It raises questions; it doesn't answer them.
+3. **Three Knocks:** both ways work. Rescuing now costs time and light and may draw a fight. Sending a crew is safe, but the miner arrives only after the next return.
+4. **The iron project's reward:** a **camp-forged blade** (4–6, light, 45 gold) in the smith's stock.
+5. **Quests can't be missed** in this slice; everything waits.
+6. **The slice's ending:** a short scene at the lower water gate ("the way down continues"), then play carries on.
+7. **The ambush site** is a new place on floor 1, built from the opening's bodies and art. The opening itself is unchanged.
