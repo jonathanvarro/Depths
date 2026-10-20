@@ -519,16 +519,31 @@ func _carry_out(foe: Foe) -> Dictionary:
 	return outcome
 
 
-## Throws the burning torch at `target`, which flees the flames (#59).
+## Burn damage when a thrown torch hits something that doesn't fear fire.
+const TORCH_BURN := Vector2i(3, 5)
+
+## Throws the burning torch at `target` (#59, #115): beasts that fear fire
+## flee; goblins (the queen too) are burned but stand their ground.
 ## The torch is gone; without a lantern, the party is in the dark.
-func hero_throw_torch(hero: Companion, target: Foe) -> String:
+## Returns {"fled", "damage", "killed", "text"}.
+func hero_throw_torch(hero: Companion, target: Foe) -> Dictionary:
+	var outcome := {"fled": false, "damage": 0, "killed": false, "text": ""}
 	if not party.supplies.torch_lit():
-		return ""
+		return outcome
 	_webbed.erase(hero)
 	party.supplies.lose_torch()
-	target.fled = true
+	if target.type.fears_fire:
+		target.fled = true
+		outcome["fled"] = true
+		outcome["text"] = "%s hurls the burning torch - the %s flees from the flames!" % [hero.display_name, target.name.to_lower()]
+	else:
+		var burn := rng.randi_range(TORCH_BURN.x, TORCH_BURN.y)
+		target.health = maxi(0, target.health - burn)
+		outcome["damage"] = burn
+		outcome["killed"] = not target.is_alive()
+		outcome["text"] = "%s hurls the burning torch - the %s is burned for %d, but stands its ground." % [hero.display_name, target.name.to_lower(), burn]
 	_check_end()
-	return "%s hurls the burning torch - the %s flees from the flames!" % [hero.display_name, target.name.to_lower()]
+	return outcome
 
 
 ## The owner's retreat idea (trial): the fight ends, the party flees.

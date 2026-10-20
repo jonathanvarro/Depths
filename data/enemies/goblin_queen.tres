@@ -25,3 +25,4 @@ row = "back"
 reach_back = true
 summons = ExtResource("5")
 threat = 10
+fears_fire = false

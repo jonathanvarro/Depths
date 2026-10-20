@@ -39,6 +39,10 @@ var _state  # combat_state.gd
 var _cards: Array = []  # party_card.gd, to mark whose turn it is
 var _target  # CombatState.Foe
 var _turn_label: Label
+## The selected enemy's next move in words (#116): an icon and a short line
+## on the action panel, so touch and keyboard players needn't hover.
+var _intent_icon_rect: TextureRect
+var _intent_label: Label
 var _fx: Control  # combat_fx.gd
 var _health_seen := {}  # Companion -> health, to show each change as a number
 var _last_number := {}  # Companion -> msec of their last number, to stagger the next
@@ -206,9 +210,16 @@ func _hero_action(hero: Companion, action: Dictionary) -> void:
 			_state.retreat()
 		"throw":
 			var target = _target
-			_state.hero_throw_torch(hero, target)
-			_fx.icon(_foe_point(target), TORCH.icon, 64.0)
-			await _fade_out(target)
+			outcome = _state.hero_throw_torch(hero, target)
+			var at := _foe_point(target)
+			_fx.icon(at, TORCH.icon, 64.0)
+			if outcome["fled"]:
+				await _fade_out(target)  # beasts flee the flames (#115)
+			else:  # goblins are burned but hold their ground
+				_fx.number(at + Vector2(60, -40), str(outcome["damage"]), Color("ff9a3c"), CombatFx.NUMBER_SIZE, 0.12)
+				await _play(target, "hurt", 0.35)
+				if outcome["killed"]:
+					await _fade_out(target)
 	_show_health_changes()
 	_refresh()
 	hero_acted.emit(hero, action, outcome)
@@ -423,6 +434,35 @@ func _show_health_changes(extra_icon: Texture2D = null) -> void:
 func _select_target(foe) -> void:
 	_target = foe
 	_update_attack()
+	_update_intent_line()
+
+
+## "Goblin: winding up a heavy blow" for the selected enemy (#116).
+func _update_intent_line() -> void:
+	if _intent_label == null or _target == null:
+		return
+	_intent_icon_rect.texture = _intent_icon(_target.intent)
+	_intent_label.text = "%s: %s" % [_target.name, CombatState.intent_text(_target)]
+
+
+## Keyboard (#116): Tab, or the turn keys (A/D, ←/→), pick the next or
+## previous enemy while choosing an action.
+func _unhandled_input(event: InputEvent) -> void:
+	if not visible or _state == null or not _actions.visible or not event.is_pressed() or event.is_echo():
+		return
+	var step := 0
+	if event.is_action("ui_focus_next") or event.is_action("turn_right"):
+		step = 1
+	elif event.is_action("ui_focus_prev") or event.is_action("turn_left"):
+		step = -1
+	if step == 0:
+		return
+	var living: Array = _state.living_foes()
+	if living.is_empty():
+		return
+	var i: int = living.find(_target)
+	_select_target(living[(i + step + living.size()) % living.size()])
+	get_viewport().set_input_as_handled()
 
 
 ## Attack only when the current hero can reach the target (#72).
@@ -469,6 +509,7 @@ func _show_actions(shown: bool) -> void:
 	for button: Button in _action_buttons.get_children():
 		button.disabled = only_action != "" and button.text != "Item"
 	_update_attack()
+	_update_intent_line()  # its intention may have changed since it acted
 	if shown and only_action == "throw":
 		_show_items()
 
@@ -527,6 +568,17 @@ func _build() -> void:
 	_actions = panel
 	var rows := VBoxContainer.new()
 	panel.add_child(rows)
+	var intent_row := HBoxContainer.new()
+	intent_row.add_theme_constant_override("separation", 8)
+	_intent_icon_rect = TextureRect.new()
+	_intent_icon_rect.custom_minimum_size = Vector2(28, 28)
+	_intent_icon_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	_intent_icon_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	_intent_icon_rect.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	intent_row.add_child(_intent_icon_rect)
+	_intent_label = _label("", 18, COLOR_TEXT)
+	intent_row.add_child(_intent_label)
+	rows.add_child(intent_row)
 	_action_buttons = HBoxContainer.new()
 	_action_buttons.add_theme_constant_override("separation", 8)
 	rows.add_child(_action_buttons)

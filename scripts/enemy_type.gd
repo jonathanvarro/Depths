@@ -38,6 +38,9 @@ enum Tactic {
 @export var intro := ""
 ## Gold dropped when beaten, min-max (goblins carry purses, #42).
 @export var purse := Vector2i.ZERO
+## A thrown torch (#115, owner 2026-10-19): beasts that fear fire flee from
+## it; goblins stand their ground and are burned instead.
+@export var fears_fire := true
 ## Threat points (#47): an encounter's cost; XP is 4 per point. 0 for the
 ## opening's scripted enemies.
 @export var threat := 1

@@ -21,3 +21,4 @@ tactic = 5
 intro = "A goblin guard plants its shield. While it stands, the goblins behind it are hard to hurt."
 purse = Vector2i(2, 5)
 threat = 4
+fears_fire = false

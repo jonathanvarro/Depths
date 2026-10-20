@@ -89,6 +89,14 @@ func _initialize() -> void:
 	check("no sentence log on the fight screen", not "_log_label" in combat and combat._turn_label.text.begins_with("Round"))
 	var first: Button = combat._tags[combat._state.foes[0]]
 	check("tags carry an icon, a name and a health bar", first.icon != null and first.text == combat._state.foes[0].name and first.get_node("Health").visible)
+	var line: String = combat._intent_label.text
+	check("the selected enemy's intention is spelled out without hover (#116)", combat._intent_label.is_visible_in_tree() and line.contains(main.CombatState.intent_text(combat._target)), line)
+	var before = combat._target
+	var tab := InputEventAction.new()
+	tab.action = "ui_focus_next"
+	tab.pressed = true
+	combat._unhandled_input(tab)
+	check("Tab picks the next enemy", combat._target != before and combat._intent_label.text != line, combat._intent_label.text)
 	check("the intention's words are on hover", first.tooltip_text.contains(main.CombatState.intent_text(combat._state.foes[0])) if "CombatState" in main else first.tooltip_text != "")
 	if dir != "":
 		root.get_texture().get_image().save_png(dir + "/visual_" + tag + "_tags.png")

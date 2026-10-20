@@ -163,6 +163,32 @@ func _try_step(direction: Vector2i) -> void:
 	tween.finished.connect(func(): _busy = false)
 
 
+## Startled into a fight with a wall ahead (#111): turn to face an open
+## way - toward `toward` if given (the fight's room), else the nearest
+## turn, with straight back last - so enemies never stand inside the rock.
+func face_open(toward := Vector2i(-1, -1)) -> void:
+	if map == null or map.is_passable(cell + DIRECTIONS[facing]):
+		return
+	var options: Array[int] = []
+	for turn in [1, -1, 2]:  # right, left, then about-face
+		var f: int = (facing + turn + 4) % 4
+		if map.is_passable(cell + DIRECTIONS[f]):
+			options.append(f)
+	if options.is_empty():
+		return
+	var best: int = options[0]
+	if toward != Vector2i(-1, -1):
+		var closest := INF
+		for f in options:
+			var d := Vector2(cell + DIRECTIONS[f]).distance_squared_to(Vector2(toward))
+			if d < closest:
+				closest = d
+				best = f
+	facing = best
+	rotation.y = _facing_to_yaw(facing)
+	moved.emit(cell, facing)
+
+
 ## Panic: spin to face a random open direction and run that way.
 func _bolt() -> void:
 	var open: Array[int] = []

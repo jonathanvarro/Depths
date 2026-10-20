@@ -22,3 +22,4 @@ intro = "A goblin drummer hangs back. Its beat drives the others to hit harder."
 purse = Vector2i(2, 4)
 threat = 4
 row = "back"
+fears_fire = false

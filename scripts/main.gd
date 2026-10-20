@@ -258,6 +258,13 @@ var _first_seed := 0  # the site seed on day 1
 var _camp_state = CampState.new()  # day, stash, recovery (#40)
 var _camp: Control  # camp_screen.gd
 var _active_cell := Vector2i(-1, -1)  # a fight or event in progress (redone after loading)
+## The game as it stood when that fight or event began (#113). Saving
+## mid-encounter writes this instead, so Continue restarts the encounter
+## with both sides as they were: no fresh enemies against a spent party.
+var _encounter_checkpoint := {}
+## Enemies of a fight that isn't the room's own (an ambush, the gate, the
+## queen), so a resumed game starts that same fight (#113).
+var _active_fight: Array[EnemyType] = []
 var _wipe_pending := false  # wiped: the save already holds the aftermath
 var _save_queued := false
 var _settings: Control  # settings_screen.gd (#52)
@@ -591,11 +598,11 @@ func _run_event(cell: Vector2i) -> void:
 		_show_message(DungeonMap.content_name(_map.content_at(cell)))
 		return
 	_party.locked = true
-	_active_cell = cell
+	_begin_encounter(cell)
 	_room_events.depth = _depth  # deeper floors hold richer treasure (#42)
 	_event_screen.show_event(event, _party_state, _room_events)
 	var result: Dictionary = await _event_screen.finished
-	_active_cell = Vector2i(-1, -1)
+	_end_encounter()
 	_party.locked = false
 	if result["left"]:
 		_map.triggered.erase(cell)
@@ -616,7 +623,8 @@ func _run_event(cell: Vector2i) -> void:
 ## action panel replaces the movement pad until it's over.
 ## `types` sets the enemies (e.g. an ambush); empty picks a group for the floor.
 func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
-	_active_cell = cell
+	_active_fight = types.duplicate()
+	_begin_encounter(cell)
 	var opening_spider := _in_opening and _opening_fights_done == OPENING_FIGHTS.size() - 1
 	if types.is_empty():
 		types.assign(encounter_pool(_depth, _party_state.living_members().size()).pick_random())
@@ -626,6 +634,7 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 			foe.has_webbed = true  # the opening's spider bites first (#59)
 			foe.glancing = true  # and only fire drives it off (#69)
 			state.plan(foe)
+	_party.face_open(cell if cell != _party.cell else Vector2i(-1, -1))  # never fight a wall (#111)
 	_place_foes(state.foes)
 	_in_combat = true
 	_update_hints("fight")
@@ -642,7 +651,7 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 		if is_instance_valid(foe.node):
 			foe.node.queue_free()
 	_in_combat = false
-	_active_cell = Vector2i(-1, -1)
+	_end_encounter()
 	_combat.only_action = ""
 	_combat.no_retreat = false
 	_layout_hint()
@@ -883,12 +892,32 @@ func save_and_exit() -> void:
 ## Writes the whole campaign. During the opening only a marker is kept: the
 ## escape starts again on Continue. A fight or event in progress is undone
 ## so it happens again after loading.
+## A fight or event starts at `cell`: remember the game as it is now (#113).
+func _begin_encounter(cell: Vector2i) -> void:
+	_active_cell = cell
+	_encounter_checkpoint = {} if _in_opening else _save_data()
+
+
+func _end_encounter() -> void:
+	_active_cell = Vector2i(-1, -1)
+	_active_fight.clear()
+	_encounter_checkpoint = {}
+
+
 func _save_now() -> void:
 	if _in_opening:
 		SaveGame.write({"opening": true, "seed": _first_seed, "hero": starting_hero.resource_path})
 		return
 	if _ending and not _camp.visible and not _wipe_pending:
 		return  # the results screen: the camp saves next
+	if not _encounter_checkpoint.is_empty():
+		SaveGame.write(_encounter_checkpoint)  # mid-fight: as it stood at the start
+		return
+	SaveGame.write(_save_data())
+
+
+## Everything a save needs, as plain data.
+func _save_data() -> Dictionary:
 	var people: Array = []  # every hero object once; referenced by index
 	for hero in _party_state.members + _camp_state.left_behind + _camp_state.candidates:
 		if hero not in people:
@@ -904,7 +933,7 @@ func _save_now() -> void:
 	var floors := []
 	for depth in _floors:
 		var map = _floors[depth]
-		var undo: bool = map == _map and _active_cell != Vector2i(-1, -1) and map.triggered.has(_active_cell)
+		var undo: bool = map == _map and _active_cell != Vector2i(-1, -1) and map.triggered.has(_active_cell) and _active_fight.is_empty()
 		if undo:
 			map.triggered.erase(_active_cell)
 		floors.append([depth, SaveGame.pack_object(map)])
@@ -917,10 +946,12 @@ func _save_now() -> void:
 	for hero in _expedition._start_heroes:
 		if hero in people:
 			start_heroes.append([index.call(hero), SaveGame.pack_value(_expedition._start_heroes[hero])])
-	SaveGame.write({
+	return {
 		"seed": _site_seed, "first_seed": _first_seed, "depth": _depth,
 		"at_camp": at_camp, "cell": _party.cell, "facing": _party.facing,
 		"resume": not at_camp and _active_cell != Vector2i(-1, -1),
+		"resume_fight": _active_fight.map(func(t): return t.resource_path),
+		"resume_kind": _fight_kind,
 		"people": people.map(func(h): return SaveGame.pack_object(h)),
 		"party": party.map(func(h): return index.call(h)),
 		"time": _party_state.time_elapsed,
@@ -934,7 +965,7 @@ func _save_now() -> void:
 		"expedition": SaveGame.pack_object(_expedition, ["_start_heroes"]),
 		"start_heroes": start_heroes,
 		"floors": floors,
-	})
+	}
 
 
 ## Rebuilds the campaign from a save and carries on where it left off.
@@ -987,7 +1018,16 @@ func _restore(data: Dictionary) -> void:
 	_party.moved.emit(_party.cell, _party.facing)
 	_show_message("%s · depth %d · continued" % [environment_theme.display_name, _depth])
 	if data["resume"]:  # an interrupted fight or event happens again
-		_on_party_entered_cell.call_deferred(_party.cell)
+		var fight: Array[EnemyType] = []
+		for path in data.get("resume_fight", []):
+			if ResourceLoader.exists(path):
+				fight.append(load(path))
+		if fight.is_empty():
+			_on_party_entered_cell.call_deferred(_party.cell)
+		else:  # an ambush, the gate or the queen: the same fight again
+			_fight_kind = data.get("resume_kind", "")
+			_combat.no_retreat = _fight_kind == "queen"
+			_start_combat.call_deferred(_party.cell, fight)
 
 
 ## Going in without a light: a torch is lit at the cave mouth, if there is one.
