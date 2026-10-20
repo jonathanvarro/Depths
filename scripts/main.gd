@@ -6,6 +6,7 @@ extends Node3D
 const DungeonMap := preload("res://scripts/dungeon_map.gd")
 const Dressing := preload("res://scripts/dressing.gd")
 const Ambience := preload("res://scripts/ambience.gd")
+const Recruits := preload("res://scripts/recruits.gd")
 const Party := preload("res://scripts/party.gd")
 const Minimap := preload("res://scripts/minimap.gd")
 const FloorGenerator := preload("res://scripts/floor_generator.gd")
@@ -690,7 +691,7 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 	# fight takes place on a dark stage, so enemies never meet the walls.
 	_stage.enter(Settings.get_value("flashes"))  # plays as the fight opens
 	_update_hints("fight")
-	_say("fight_start", true)
+	_say("fight_start", true, false, _any_voice())
 	_party.locked = true
 	_touch_pad.visible = false
 	_pack_button.disabled = true
@@ -731,7 +732,7 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 			match _fight_kind:
 				"gate": _break_gates()
 				"queen": _queen_defeated()
-			_say("fight_won", true)
+			_say("fight_won", true, false, _any_voice())
 			_update_hints("fight_over")
 			if _in_opening:
 				_on_opening_fight_won()
@@ -871,7 +872,7 @@ func _end_expedition(ending: int) -> void:
 		_show_hint("")  # the escape is over: no "walk into the light" on top
 		_results.show_brief("Barely survived", "You stagger out into the daylight, alone.", "To camp")
 	else:
-		_results.show_results(ending, _expedition, _party_state, notes[ending])
+		_results.show_results(ending, _expedition, _party_state, notes[ending], _homecoming_lines())
 	await _results.continue_pressed
 	_results.visible = false
 	if _in_opening and ending == Expedition.Ending.RETURNED:
@@ -941,6 +942,9 @@ func _camp_loop(reward := 0, note := "") -> void:
 	_camp.visible = false
 	_camp_state.leave_behind(_party_state)
 	_expedition = Expedition.new(_party_state, _expedition.number + 1)
+	for key: String in _said.keys():
+		if key.contains(":"):
+			_said.erase(key)  # each hero's once-a-trip remarks (#118)
 	_preparation.show_for(_expedition.number, _party_state)
 	await _preparation.entered
 	_ending = false
@@ -1479,7 +1483,9 @@ func _on_party_state_changed(announce := true) -> void:
 			if card:
 				card.alert(PartyCard.NERVES_ICON, PartyCard.STRAIN_BORDERS[state])
 			if state == StrainRules.State.PANICKING and not _in_opening:
-				_say("panic", true)
+				_say("panic", true, false, member)
+			elif state == StrainRules.State.SHAKEN and not _in_opening:
+				_say("shaken", false, true, member)
 		if hunger > hunger_before and card:
 			card.alert(PartyCard.RATION.icon, Color("e0542f") if hunger == 2 else Color.WHITE)
 	# No random bolting during the opening: panic shows, but the controls
@@ -1489,7 +1495,7 @@ func _on_party_state_changed(announce := true) -> void:
 	# Badly hurt: say so once per expedition (not during fights).
 	for member: Companion in _party_state.living_members():
 		if announce and not _in_combat and member.health * 4 <= member.effective_max_health():
-			_say("hurt", false, true)
+			_say("hurt", false, true, member)
 	# Falling outside a fight (a trap, a bad drink) ends the expedition too.
 	if announce and _party_state.living_members().is_empty() and not _in_combat and not _ending:
 		_end_expedition.call_deferred(Expedition.Ending.WIPED)
@@ -2365,26 +2371,62 @@ func _build_dialogue_box(ui: Control) -> void:
 ## The lead hero says something fitting `situation` (#57): a line from their
 ## library, in the box above the cards, while their portrait talks.
 ## Unforced lines respect a short cooldown; `once` lines are said only once.
-func _say(situation: String, force := false, once := false) -> void:
-	if once and _said.has(situation):
+## `who` speaks if given (the hurt or frightened hero, #118); otherwise the
+## lead. A `once` line from a given hero is once per hero per expedition.
+func _say(situation: String, force := false, once := false, who: Companion = null) -> void:
+	var key := situation if who == null else "%s:%s" % [situation, who.display_name]
+	if once and _said.has(key):
 		return
 	var now := Time.get_ticks_msec() / 1000.0
 	if not force and now - _last_spoke_at < SPEECH_COOLDOWN:
 		return
 	var living: Array[Companion] = _party_state.living_members()
-	if living.is_empty() or living[0].dialogue == null:
+	if living.is_empty():
 		return
-	var hero: Companion = living[0]
-	var line: String = hero.dialogue.pick(situation, _last_line)
+	var hero: Companion = who if who else living[0]
+	var lines: DialogueLines = Recruits.lines_for(hero)
+	if lines == null:
+		return
+	var line: String = lines.pick(situation, _last_line)
 	if line == "":
 		return
-	_said[situation] = true
+	_said[key] = true
 	_last_line = line
 	_last_spoke_at = now
 	var seconds: float = _dialogue_box.say(hero.display_name, line)
 	for card in _cards:
 		if card.companion == hero:
 			card._portrait.talk(minf(seconds, 2.5))
+
+
+## Anyone standing may call out in a fight, not only the lead (#118).
+func _any_voice() -> Companion:
+	var living: Array[Companion] = _party_state.living_members()
+	return living.pick_random() if not living.is_empty() else null
+
+
+## One line from each hero who made it back (#118): grief if someone
+## didn't, their wounds if badly hurt, otherwise relief. Only facts the
+## game knows - who fell, how hurt they are.
+func _homecoming_lines() -> Dictionary:
+	var rows: Array = _expedition.hero_rows(_party_state)
+	var fallen: Array = rows.filter(func(r): return not r["back"]).map(func(r): return r["hero"].display_name)
+	var said := {}
+	for row in rows:
+		var hero: Companion = row["hero"]
+		var lines: DialogueLines = Recruits.lines_for(hero)
+		if not row["back"] or lines == null:
+			continue
+		var line := ""
+		if not fallen.is_empty():
+			line = lines.pick("camp_grief").replace("{fallen}", fallen.pick_random())
+		if line == "" and hero.health * 2 < hero.effective_max_health():
+			line = lines.pick("camp_hurt")
+		if line == "":
+			line = lines.pick("camp_return")
+		if line != "":
+			said[hero] = line
+	return said
 
 
 ## Two black lids that close over the screen from top and bottom.

@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="DialogueLines" format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue_lines.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+lines = Dictionary[String, PackedStringArray]({"fight_start": PackedStringArray("Behind me. Stay behind me.", "Arms up. Hold the line.", "Hold. Let them come to us."), "fight_won": PackedStringArray("Everyone still standing? Good.", "Done. Check your wounds.", "That's them seen off."), "hurt": PackedStringArray("I'm cut. Still standing. Keep going.", "I can take another. Not many.", "I'll hold - but don't make me hold long."), "shaken": PackedStringArray("Steady. I said steady. That was for me.", "Something's watching us. I can feel it.", "Keep close. I don't like this."), "panic": PackedStringArray("I can't - I can't hold it -", "Too many. Too dark. Too -"), "camp_return": PackedStringArray("Everyone back. That's the job.", "Fire. Food. Then we go again.", "Good work down there."), "camp_hurt": PackedStringArray("Patch me up. I'll be standing by morning.", "Took a few for the rest of you. Worth it."), "camp_grief": PackedStringArray("I should have been in front of {fallen}. I should have been.", "{fallen} was mine to keep. I didn't.")})

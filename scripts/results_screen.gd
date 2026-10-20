@@ -103,7 +103,8 @@ func _init() -> void:
 	visible = false
 
 
-func show_results(ending: int, expedition, party, note: String) -> void:
+## `quotes`: Companion -> a line they say on getting back (#118).
+func show_results(ending: int, expedition, party, note: String, quotes := {}) -> void:
 	_illustration.visible = false
 	_ledger.visible = true
 	_backdrop.visible = true
@@ -133,7 +134,7 @@ func show_results(ending: int, expedition, party, note: String) -> void:
 	if s["retreats"] > 0:
 		_chip(_chips, null, "Fled ×%d" % s["retreats"], false)
 	for row in expedition.hero_rows(party):
-		_heroes.add_child(_hero_row(row))
+		_heroes.add_child(_hero_row(row, quotes.get(row["hero"], "")))
 	_button.text = "Begin again" if wiped else "To camp"
 	visible = true
 
@@ -152,8 +153,9 @@ func show_brief(title: String, note: String, button: String, illustration: Textu
 
 
 ## One hero: portrait, name, health, experience (with a level-up mark),
-## nerves and new injuries - or that they didn't come back.
-func _hero_row(row: Dictionary) -> Control:
+## nerves and new injuries - or that they didn't come back - and what
+## they say about it.
+func _hero_row(row: Dictionary, quote := "") -> Control:
 	var hero: Companion = row["hero"]
 	var line := HBoxContainer.new()
 	line.add_theme_constant_override("separation", 10)
@@ -168,11 +170,18 @@ func _hero_row(row: Dictionary) -> Control:
 	name.custom_minimum_size = Vector2(140, 0)
 	name.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	line.add_child(name)
+	var column := VBoxContainer.new()
+	column.add_theme_constant_override("separation", 4)
+	column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	column.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	line.add_child(column)
 	var chips := HFlowContainer.new()
 	chips.add_theme_constant_override("h_separation", 8)
-	chips.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	chips.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	line.add_child(chips)
+	column.add_child(chips)
+	if quote != "":
+		var said := _label(18, COLOR_DIM_TEXT, "“%s”" % quote)
+		said.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		column.add_child(said)
 	if not row["back"]:
 		face.modulate = Color(0.4, 0.3, 0.3)
 		_chip(chips, Glyphs.STATUS["down"], "Did not come back", false)

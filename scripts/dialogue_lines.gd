@@ -5,7 +5,8 @@ extends Resource
 ## add situations freely - the game asks for them by name.
 ##
 ## Situations used so far: wake, bodies, bleeding, find_exit, lost, web,
-## fight_start, fight_won, hurt, panic, dark, daylight.
+## fight_start, fight_won, hurt, panic, dark, daylight; and (#118) shaken,
+## camp_return, camp_hurt, camp_grief ("{fallen}" names who didn't come back).
 
 @export var lines: Dictionary[String, PackedStringArray] = {}
 

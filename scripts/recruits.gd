@@ -52,6 +52,20 @@ const NAMES := [
 ]
 
 
+## What a hero says: their own lines, or (for a recruit saved before
+## recruits could talk) their role's (#118).
+static func lines_for(hero: Companion) -> DialogueLines:
+	if hero.dialogue:
+		return hero.dialogue
+	if ROLES.has(hero.role):
+		return load(_lines_path(hero.role))
+	return null
+
+
+static func _lines_path(role: String) -> String:
+	return "res://data/dialogue/recruit_%s.tres" % role.to_lower()
+
+
 ## Faces for a role from the roster catalog: [{id, portrait, portrait_set}].
 static func faces_for(role: String) -> Array:
 	if not FileAccess.file_exists(FACES):
@@ -109,6 +123,7 @@ static func make(rng: RandomNumberGenerator, taken: Array = [], faces_in_use: Ar
 	hero.strength = "%s (%s)" % [strength["name"], strength["text"]]
 	hero.weakness = "%s (%s)" % [weakness["name"], weakness["text"]]
 	hero.personality = spec["about"]
+	hero.dialogue = load(_lines_path(role))  # a few lines in the role's voice (#118)
 	hero.refresh_stats()
 	# Joining part-way up (#47): one level behind the campaign's best.
 	hero.xp = Progression.THRESHOLDS[level] if level > 1 else 0

@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="DialogueLines" format=3]
+
+[ext_resource type="Script" path="res://scripts/dialogue_lines.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+lines = Dictionary[String, PackedStringArray]({"fight_start": PackedStringArray("Finally!", "Mine! That one's mine!", "Come and get it!"), "fight_won": PackedStringArray("Ha! Who's next?", "Too easy.", "That's the stuff."), "hurt": PackedStringArray("Barely a scratch. Big scratch. Keep moving.", "They're getting their licks in. So am I.", "I'm bleeding everywhere. Fun."), "shaken": PackedStringArray("Don't like hitting what I can't see.", "Too quiet. Make some noise, someone.", "Something down here's bigger than me. Don't like that."), "panic": PackedStringArray("Get out of my way! OUT OF MY WAY!", "I'm done - I'm DONE -"), "camp_return": PackedStringArray("Drinks are on the goblins. Their gold, anyway.", "Back up top. Bit disappointed, honestly.", "Next time, deeper."), "camp_hurt": PackedStringArray("Hurts. Means I was in the thick of it.", "Stitch it quick. I want to go back."), "camp_grief": PackedStringArray("{fallen}. Should've been me. I'm the one who charges in.", "We lost {fallen} down there. Someone pays for that.")})
