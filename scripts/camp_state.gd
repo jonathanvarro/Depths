@@ -90,6 +90,8 @@ var floor2_reached := 0
 ## the highest level any hero has taken (recruits join one below it).
 var xp_left := Progression.FLOOR_XP_LIMIT.duplicate()
 var best_level := 1
+## Quests and story flags (#123): id -> {"stage", "flags"}; see quests.gd.
+var quests := {}
 var _used_names: Array = []  # each name comes by once before any repeats
 
 

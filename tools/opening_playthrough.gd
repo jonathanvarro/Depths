@@ -323,6 +323,17 @@ func _initialize() -> void:
 	await _snap("survived")
 	_press(main._results, "To camp")
 	await create_timer(0.2).timeout
+	# The commander waits outside (#122): answer, then on to camp.
+	check("the commander meets the survivor", main._conversation.visible and main._conversation._name.text.contains("Vael"))
+	await _snap("commander")
+	main._conversation.choose("\"We were ambushed")
+	for i in 6:
+		await process_frame
+		if not main._conversation.visible:
+			break
+		main._conversation.choose("")  # "Go on" / "I'll find them"
+	await create_timer(0.2).timeout
+	check("his order becomes the first quest", main.Quests.is_active(main._camp_state, "left_behind") and main.Quests.has_flag(main._camp_state, "story", "told_ambush"))
 	check("the camp follows the escape", main._camp.visible)
 	await _snap("camp")
 	main._camp._buttons["cave"].pressed.emit()

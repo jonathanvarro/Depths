@@ -26,6 +26,10 @@ const SaveGame := preload("res://scripts/save_game.gd")
 const Progression := preload("res://scripts/progression.gd")
 const Sounds := preload("res://scripts/sounds.gd")
 const Music := preload("res://scripts/music.gd")
+const Quests := preload("res://scripts/quests.gd")
+const ConversationScreen := preload("res://scripts/conversation_screen.gd")
+## The commander waiting outside after the escape (#122, first slice).
+const COMMANDER_FIRST := preload("res://data/conversations/commander_first.tres")
 const CoinFlip := preload("res://scripts/coin_flip.gd")
 const Settings := preload("res://scripts/settings.gd")
 const SettingsScreen := preload("res://scripts/settings_screen.gd")
@@ -355,6 +359,7 @@ var _ambience_player: AudioStreamPlayer
 var _footstep_player: AudioStreamPlayer
 var _effect_player: AudioStreamPlayer
 var _music: Node  # music.gd: a track per place (#54)
+var _conversation: Control  # conversation_screen.gd (#122)
 var _wound_overlay: ColorRect
 var _wound_tween: Tween
 var _heart_player: AudioStreamPlayer
@@ -781,11 +786,16 @@ func _end_expedition(ending: int) -> void:
 		_wipe_pending = true
 		_save_now()
 	if _in_opening and ending == Expedition.Ending.RETURNED:
+		_hints_done[_hint] = true
+		_show_hint("")  # the escape is over: no "walk into the light" on top
 		_results.show_brief("Barely survived", "You stagger out into the daylight, alone.", "To camp")
 	else:
 		_results.show_results(ending, _expedition, _party_state, notes[ending])
 	await _results.continue_pressed
 	_results.visible = false
+	if _in_opening and ending == Expedition.Ending.RETURNED:
+		# Outside, the king's forces are waiting (#122, first slice).
+		await _conversation.play(COMMANDER_FIRST, _party_state.members[0], _camp_state)
 	if ending == Expedition.Ending.WIPED:
 		_party_state.supplies.lose_everything()  # the campaign goes on (#41)
 	_start_new_expedition()
@@ -2632,6 +2642,12 @@ func _build_ui(minimap: Control) -> void:
 	# The coin flip (#77) sits above everything, tutorial cards included.
 	var coin_layer := CanvasLayer.new()
 	coin_layer.layer = 6
+	# Conversations (#122) sit above the screens they follow.
+	var talk_layer := CanvasLayer.new()
+	talk_layer.layer = 4
+	add_child(talk_layer)
+	_conversation = ConversationScreen.new()
+	talk_layer.add_child(_conversation)
 	add_child(coin_layer)
 	var coin := CoinFlip.new()
 	coin_layer.add_child(coin)
