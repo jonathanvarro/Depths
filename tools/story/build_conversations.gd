@@ -4,8 +4,7 @@ extends SceneTree
 ## rerun to rebuild:  Godot --headless --path . --script tools/story/build_conversations.gd
 
 const Quests := preload("res://scripts/quests.gd")
-## Placeholder until ChatGPT's commander portrait lands.
-const COMMANDER_PORTRAIT := "res://art/portraits/recruit-silhouettes-v1/warden.png"
+const COMMANDER_PORTRAIT := "res://art/portraits/story-slice-v1/commander-edric.png"
 
 
 func _reply(label: String, next := -1, quest := "", stage := -1, flag := "") -> ConversationReply:
@@ -29,6 +28,8 @@ func _save(name: String, speaker: String, portrait: String, pages: Array) -> voi
 	var talk := Conversation.new()
 	talk.speaker = speaker
 	talk.portrait = load(portrait) if portrait != "" else null
+	if name == "commander_first":
+		talk.backdrop = load("res://art/portraits/story-slice-v1/commander-backdrop.png")
 	talk.pages.assign(pages)
 	var path := "res://data/conversations/%s.tres" % name
 	var error := ResourceSaver.save(talk, path)
@@ -78,7 +79,7 @@ He unrolls the map first. Your party's route is there in the surveyor's neat han
 		])])
 	_save("smith_deliver", "The apprentice smith", "res://art/camp/highres-v4/smith.png", [
 		_page("He weighs the ore in both hands and grins for the first time since he arrived. \"Good iron. Proper iron.\" Two days of hammering later, a blade lies on his anvil, bright and light. \"It's yours to buy - I still have to eat.\"")])
-	_save("miner_thanks", "Hask, a miner", "res://art/portraits/recruit-silhouettes-v1/brawler.png", [
+	_save("miner_thanks", "Hask, a miner", "res://art/portraits/story-slice-v1/hask-miner.png", [
 		_page("The miner you found behind the rubble is sitting at the fire, a blanket round his shoulders. \"They said it was you who heard me. I'd have died in there.\"
 
 He leans in. \"There's good iron on the first floor - a dark seam with rust-red streaks, where the old workings end. The smith'd want it.\"")])

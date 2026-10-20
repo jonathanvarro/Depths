@@ -11,6 +11,7 @@ const TEXT := Color("e8d9b0")
 const PORTRAIT := Vector2(160, 160)
 
 var _portrait: TextureRect
+var _backdrop: TextureRect
 var _name: Label
 var _text: Label
 var _replies: VBoxContainer
@@ -21,6 +22,13 @@ var _camp
 func _init() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	visible = false
+	_backdrop = TextureRect.new()
+	_backdrop.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_backdrop.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	_backdrop.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	_backdrop.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	_backdrop.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(_backdrop)
 	var shade := ColorRect.new()
 	shade.color = Color(0, 0, 0, 0.8)
 	shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -68,6 +76,8 @@ func play(talk: Conversation, hero: Companion, camp) -> void:
 	_hero = hero
 	_camp = camp
 	_portrait.texture = talk.portrait
+	_backdrop.texture = talk.backdrop
+	_backdrop.visible = talk.backdrop != null
 	_portrait.visible = talk.portrait != null
 	_name.text = talk.speaker
 	visible = true
@@ -76,6 +86,7 @@ func play(talk: Conversation, hero: Companion, camp) -> void:
 		var reply = await _show_page(talk.pages[page])
 		page = reply.next if reply else -1
 	visible = false
+	_backdrop.texture = null
 	finished.emit()
 
 

@@ -1,0 +1,116 @@
+{
+  "date": "2026-10-20",
+  "baseline_commit": "cce02b2",
+  "assets": [
+    {
+      "id": "commander-edric",
+      "prompt": "Use case: stylized-concept. Production art for Depths, a grim first-person dungeon crawler. A SINGLE waist-cropped/bust portrait cutout for a 192x192 game portrait. Restrained hand-painted PIXEL ART: chunky coherent pixel clusters, limited earthy palette, crisp irregular silhouettes, visible 1-3-pixel facial planes at final 192px. Match old grounded dungeon portrait illustration, not photorealism, not smooth high-detail concept painting, not cartoon. Front-facing head with slight three-quarter turn, both eyes visible, head occupies upper central half, shoulders fill lower frame, lower torso cropped at canvas bottom; modest upper head margin. Soft NEUTRAL diffuse illumination: local material colours, no directional torch highlights, no amber cast, no backlight, no background, no cast shadow. True transparent background, no checker pattern, no frame, no text. Calm resting eyes and closed resting mouth; one coherent face only. Subject: Commander Edric Vael, human man in his early fifties, stern but fair, weary watchful grey eyes, grey at the temples in short dark hair, clean-shaven square weathered face, strong unglamorous nose, restrained furrowed brows. Scrubbed but dented plain iron armour, simple high collar and dark muted wine-red wool at the neck, practical leather strap. Competent officer of an under-resourced royal expedition; neither a villain nor a richly decorated noble. No crown, no medals, no sword, no glowing runes. Distinct silhouette with short squared pauldrons and upright bearing.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-0f2ee934-db99-453c-8434-9a4b1a7f26bf.png",
+      "source": "art/source/story-slice-v1/commander-edric-master.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "sha256": "1a97a9f79bbffb25bfc6dab73ef05ad19cab836d342e1c93eb421221a2179c88"
+    },
+    {
+      "id": "hask-miner",
+      "prompt": "Use case: stylized-concept. Production art for Depths, a grim first-person dungeon crawler. A SINGLE waist-cropped/bust portrait cutout for a 192x192 game portrait. Restrained hand-painted PIXEL ART: chunky coherent pixel clusters, limited earthy palette, crisp irregular silhouettes, visible 1-3-pixel facial planes at final 192px. Match old grounded dungeon portrait illustration, not photorealism, not smooth high-detail concept painting, not cartoon. Front-facing head with slight three-quarter turn, both eyes visible, head occupies upper central half, shoulders fill lower frame, lower torso cropped at canvas bottom; modest upper head margin. Soft NEUTRAL diffuse illumination: local material colours, no directional torch highlights, no amber cast, no backlight, no background, no cast shadow. True transparent background, no checker pattern, no frame, no text. Calm resting eyes and closed resting mouth; one coherent face only. Subject: Hask, a human working miner in his forties, relieved but exhausted, narrow long weathered face, crooked broken nose, salt-and-pepper stubble, short receding brown hair with dusty forelock, pale tired grey-green eyes, deep cheek hollows. Coarse dun wool blanket draped over slumped shoulders, worn grey linen shirt, visible dusty hands just clasping blanket at lower edge. Fine pale stone dust in hair and collar, no blood, no weapon or armour. Approachable tough ordinary labourer rescued from a cave-in. Broad irregular blanket silhouette, clearly unlike a knight or muscular brawler.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-433b858a-d55f-46a2-a567-ff2cef17530a.png",
+      "source": "art/source/story-slice-v1/hask-miner-master.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "sha256": "e554607a90711e3256153dca5fc6ddc3d25895b7017a9a751f976eebfa274293"
+    },
+    {
+      "id": "three-knocks",
+      "prompt": "Use case: stylized-concept. A SINGLE isolated front-facing environmental prop cutout for Depths, a dark first-person grid dungeon crawler. True transparent background all around, no rectangular backdrop, no text or frame, no fake checkerboard. Entire object visible with 8 percent clear margin. Squarish composition, ground contact along common bottom edge. Restrained hand-painted pixel art, deliberately broad readable pixel clusters, 32-64 muted earthy colours, rugged charcoal contours, coarse surface planes, readable at 192x192. Soft neutral diffuse light only; no baked torch, light rays or glow. View from a standing adventurer directly facing the prop with a slight view of its upper surfaces, not top-down/isometric. Subject: a cave-in of angular dark slate rubble piled across the foot of an old mine opening. ONE thick dark timber support beam leans from lower left to upper right, badly cracked near its middle, smaller splintered brace underneath. A narrow black breathing gap is visible low beside the beam, too small to walk through, no person visible. A small dented grey tin cup lies abandoned on its side in front-right on pale stone dust. Rough broken mine-edge stone irregular silhouette, not an entire cave scene. A memorable diagonal beam, breathing gap, small cup. No ore or tools, no skeletons.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-c31d29af-7055-4403-ab2d-e2558cb95124.png",
+      "source": "art/source/story-slice-v1/three-knocks-master.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "sha256": "bfca8bd6a3289841122e9dec8f332d3736ace0e8177a67183dee6d7cd419e14b"
+    },
+    {
+      "id": "iron-seam",
+      "prompt": "Use case: stylized-concept. A SINGLE isolated front-facing environmental prop cutout for Depths, a dark first-person grid dungeon crawler. True transparent background all around, no rectangular backdrop, no text or frame, no fake checkerboard. Entire object visible with 8 percent clear margin. Squarish composition, ground contact along common bottom edge. Restrained hand-painted pixel art, deliberately broad readable pixel clusters, 32-64 muted earthy colours, rugged charcoal contours, coarse surface planes, readable at 192x192. Soft neutral diffuse light only; no baked torch, light rays or glow. View from a standing adventurer directly facing the prop with a slight view of its upper surfaces, not top-down/isometric. Subject: a low freestanding outcrop of very dark charcoal rock with THREE broad diagonal RUST-RED iron-rich veins running through the broken face. Metallic black hematite with dull oxblood/red-brown streaks, some rusty ochre crumbling nodules at the foot, no gold, no copper green, no gemstone sparkle. Distinct deep triangular seam in centre suitable for chipping a sample from it. Irregular shoulder-height rocky working face on a low skirt of rubble. The rust-red veins must remain visible as broad shapes when reduced to a small sprite. No pickaxe or wood frame; no worked stone masonry.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-3ced8256-1e08-4749-83bb-92fddd0fded8.png",
+      "source": "art/source/story-slice-v1/iron-seam-master.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "sha256": "f702b164fdec51f1e4a4bff23efc8b3d1fc6dadbc408cfbc2ef7e15d7fc9da1e"
+    },
+    {
+      "id": "lower-water-gate",
+      "prompt": "Use case: stylized-concept. A SINGLE isolated front-facing environmental prop cutout for Depths, a dark first-person grid dungeon crawler. True transparent background all around, no rectangular backdrop, no text or frame, no fake checkerboard. Entire object visible with 8 percent clear margin. Squarish composition, ground contact along common bottom edge. Restrained hand-painted pixel art, deliberately broad readable pixel clusters, 32-64 muted earthy colours, rugged charcoal contours, coarse surface planes, readable at 192x192. Soft neutral diffuse light only; no baked torch, light rays or glow. View from a standing adventurer directly facing the prop with a slight view of its upper surfaces, not top-down/isometric. Subject: an ancient low stone WATER GATE, a heavy rectangular iron grate with six vertical bars and two horizontal crossbars, dark rivets, patches of dull rust. Thick weatherworn grey stone jambs have shallow old carved channels, very simple unrecognizable geometric incision, no legible writing. Below the grate an open narrow stone water trough runs forward into foreground; black still water with just two subdued grey ripples in the trough, older channel masonry visible. Closed bars, black recess behind, no distant room or perspective landscape behind the gate. Gate and short forward trough form one physically connected irregular cutout, no floor rectangle surrounding it. Dark sober masonry, no skulls, no magic or emitted light.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-d511230a-8305-480e-a694-61750ff6d55d.png",
+      "source": "art/source/story-slice-v1/lower-water-gate-master.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "sha256": "0e4d070a6b72380be540412a0eaa03d15513065d4294d2eb7eacc1766f3cee8a"
+    },
+    {
+      "id": "companion-short-sword",
+      "prompt": "Use case: stylized-concept. Production inventory item cutout for Depths, a dark grounded dungeon crawler. SINGLE object on genuine transparent background, no ground plane, no shadow, no border, no text, no labels. Square image. Designed to downsample to a crisp 128x128 icon with 8px clear padding. Restrained hand-painted pixel art, coherent hard pixel clusters, 64-colour earthy palette, broad readable material planes, charcoal outlines. Muted steel/iron, brown wood, worn leather; slight rust in creases, practical lived-in medieval equipment. Neutral diffuse lighting without amber torch light or glow. Diagonal orientation from grip at bottom-left to business end top-right, whole object visible. Do not make an ornate fantasy collectible. Subject: Mara's short quick sword, a slim double-edged steel blade with a subtle central fuller, gently tapering sharp point, short plain slightly downturned iron crossguard, dark leather-bound slim grip, small flattened iron pommel. Blade about twice the grip length, modest little nicks near the base but intact sharpened edge. Distinct lean graceful silhouette, no jewelry or gold. Not a dagger, not a broad longsword.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-a230204c-a115-4d7d-8470-544510cc961b.png",
+      "source": "art/source/story-slice-v1/companion-short-sword-master.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "sha256": "bad1fe0d154e9b9e9425350f63851c1c5dee73f4053a07c778df8dc36accf988"
+    },
+    {
+      "id": "companion-mace",
+      "prompt": "Use case: stylized-concept. Production inventory item cutout for Depths, a dark grounded dungeon crawler. SINGLE object on genuine transparent background, no ground plane, no shadow, no border, no text, no labels. Square image. Designed to downsample to a crisp 128x128 icon with 8px clear padding. Restrained hand-painted pixel art, coherent hard pixel clusters, 64-colour earthy palette, broad readable material planes, charcoal outlines. Muted steel/iron, brown wood, worn leather; slight rust in creases, practical lived-in medieval equipment. Neutral diffuse lighting without amber torch light or glow. Diagonal orientation from grip at bottom-left to business end top-right, whole object visible. Do not make an ornate fantasy collectible. Subject: Alwen's LIGHT FLANGED MACE. A short slender all-iron haft with blackened leather wrap on lower third, modest rounded butt cap. Small six-flanged steel head near upper tip with blunt triangular fins, the visible fins forming a readable compact star outline. Head only one quarter of total length; this is a nimble one-handed cleric's mace, no huge ball, no spikes, no wood club. Worn grey planes with tiny rust around the flange roots. No gold, no runes.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-192b35bf-41ba-409d-b358-481791355500.png",
+      "source": "art/source/story-slice-v1/companion-mace-master.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "sha256": "28dfc0eb33eb25e815c509fb50b695d6253c303b9881a82c8b7eae2c90d76420"
+    },
+    {
+      "id": "camp-forged-blade",
+      "prompt": "Use case: stylized-concept. Production inventory item cutout for Depths, a dark grounded dungeon crawler. SINGLE object on genuine transparent background, no ground plane, no shadow, no border, no text, no labels. Square image. Designed to downsample to a crisp 128x128 icon with 8px clear padding. Restrained hand-painted pixel art, coherent hard pixel clusters, 64-colour earthy palette, broad readable material planes, charcoal outlines. Muted steel/iron, brown wood, worn leather; slight rust in creases, practical lived-in medieval equipment. Neutral diffuse lighting without amber torch light or glow. Diagonal orientation from grip at bottom-left to business end top-right, whole object visible. Do not make an ornate fantasy collectible. Subject: an apprentice smith's first good camp-forged sword. Practical compact single-edged blade with straight spine and sloping clipped point, broad dark hammer-scale strip along spine, brighter unevenly ground cutting bevel. A simple shallow iron knuckle guard, plain tapered ash-wood grip secured by exactly two dark iron rivets, a small iron butt plate. Light short machete-like field blade with roughly finished forge marks but sound construction, distinctly broader and humbler than a knight's slim double-edged sword. New useful steel forged from cave iron, no extreme rust, no decoration.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-69e42d19-47db-4460-a366-129c6d9cb4a0.png",
+      "source": "art/source/story-slice-v1/camp-forged-blade-master.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "sha256": "f9d2f04fbec25520e0916ba9407693a7b4ab5d28ebf1cf1e2c82244a0d0fa2d8"
+    },
+    {
+      "id": "iron-ore",
+      "prompt": "Use case: stylized-concept. Single inventory icon for Depths, grim grounded dungeon crawler. One fist-sized angular lump of dark charcoal hematite with broad rust-red ochre streaks along a freshly chipped face. Heavy dark rock with little granular red-brown crumbs attached, no gold, no green copper, no gemstones or sparkle. Coherent chunky hand-painted pixel art, 32-64 earthy colours, crisp rugged silhouette, neutral diffuse material light, readable on a phone at 40px. Object centrally framed on square true transparent canvas with ten percent margin, no other objects, no text, no cast shadow, no background, no frame.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-9fa32d36-c004-4ac2-98f8-292b59c06cc0.png",
+      "source": "art/source/story-slice-v1/iron-ore-master.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "sha256": "e4256894b689fafce37d7c0537811948e9be65e90ad5379fa93a4aefcae8cd1d"
+    },
+    {
+      "id": "commander-backdrop",
+      "prompt": "Use case: stylized-concept. Wide 16:9 story backdrop for Depths, a grim first-person medieval dungeon crawler. Seen from just inside a natural cave mouth looking outward to an overcast muddy relief camp approach. Jagged grey cave lips frame the left and right, the middle opens to cool daylight, tired scrub trees and a distant canvas supply wagon. THREE ordinary royal soldiers waiting by the cave path in worn plain iron helmets and dark muted red wool, spears grounded, one talking to another, small figures in middle distance off-centre. No prominent commander, no close faces, no rich parade army, no heraldic logos, no text. Dirty boot tracks and a few supply crates settle the people into the environment. Broad readable hand-painted pixel clusters, restrained earthy grey/umber/slate green palette, chunky silhouettes, not high-detail oil painting, not smooth 3D, no sun flare, no magic glow. Intentionally quiet central foreground so a conversation panel can cover it. Landscape backdrop, no frame or UI, opaque image.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-4e735f91-1342-4662-8c56-a7dbbaee20f5.png",
+      "source": "art/source/story-slice-v1/commander-backdrop-master.png",
+      "tool": "built-in image_gen",
+      "transparent_background": false,
+      "sha256": "21bef78d5b9cb90921eea09c234b8de7b96d30855b6c0a22defcf9ab8f60bfd1"
+    },
+    {
+      "id": "three-knocks-used",
+      "prompt": "Use case: precise-object-edit. Edit this existing cave-in game prop into its DEALT-WITH visual state, preserving the exact square canvas, transparent background, camera, scale, placement, diagonal cracked beam, wooden frame, rocks, cup and all outer contours. Only a small local change: shift two or three small stones at the lower breathing gap, scatter some fresh pale stone dust there, and add three rough short vertical chalk strokes on the large flat lower-left stone to indicate the site has been attended to. The rubble fall and cracked beam remain largely in place. The cup remains. Do NOT create a walk-through opening, add a person, remove the beam or broadly redraw the rock face. This shared state is used for both rescue and a marked crew site, so avoid implying a fully opened passage. Keep the same coarse muted painted pixel art, no new lighting, no text or labels.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-f768108a-f796-4b05-b793-bacb9b5f80e1.png",
+      "source": "art/source/story-slice-v1/three-knocks-used-master.png",
+      "tool": "built-in image_gen",
+      "reference": "art/source/story-slice-v1/three-knocks-master.png",
+      "transparent_background": true,
+      "sha256": "ea76d7f2e917e9b71f53bb62550a20309319409a95381e881aa648ef799b8b8c"
+    },
+    {
+      "id": "iron-seam-used",
+      "prompt": "Use case: precise-object-edit. Edit this existing iron outcrop game prop into its SAMPLED / WORKED visual state. Preserve exact canvas size, true transparent background, camera, scale, position and silhouette. Keep the same broad dark charcoal rock and rust-red veins around the edges. ONLY the middle section of the two broad ore veins has been chipped: make a clearly visible fresh grey angular scooped cavity in the central front face, with small pale chips and dull rust-red rubble just below. The iron vein is visibly interrupted through the middle by grey fractured stone. No giant hole, no props or pickaxe, no people, no glowing ore, no text, no overall restyle or lighting shift. Same restrained broad painted pixel clusters, same outer rock geometry.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-e9516fd5-6687-41d2-881f-90d9dbf3e62e.png",
+      "source": "art/source/story-slice-v1/iron-seam-used-master.png",
+      "tool": "built-in image_gen",
+      "reference": "art/source/story-slice-v1/iron-seam-master.png",
+      "transparent_background": true,
+      "sha256": "3d3a46ea8ac00de0a8e6824070bf1b3624f44abd09c4d4d3540c80a62d9dceef"
+    }
+  ]
+}

@@ -29,6 +29,7 @@ const LANTERN_ICON := preload("res://art/items/refined-v2/lantern-unlit.png")
 ## The apprentice's starter stock, shown until there's gold (#42).
 const CampState := preload("res://scripts/camp_state.gd")
 const Story := preload("res://scripts/story.gd")
+const NEWS_ICON := preload("res://art/ui/controls-v1/news.svg")
 const Quests := preload("res://scripts/quests.gd")
 const Progression := preload("res://scripts/progression.gd")
 
@@ -257,10 +258,17 @@ func _update_site_art() -> void:
 	_site_art["cave"].get_node("Notice").visible=has_contract
 	var occupied: bool = _camp.recovering.keys().any(func(hero):return _camp.is_recovering(hero))
 	_site_art["treatment"].get_node("OccupiedCot").visible=occupied
-	# Someone here has news (#123): a mark after the site's name.
+	# News follows the same story availability as the site's conversation.
 	for id in _buttons:
 		if id != "supplies" and _sites.has(id):
-			_buttons[id].text = _sites[id].label + ("  (!)" if Story.camp_talk(_camp, id) != "" else "")
+			var news: bool = Story.camp_talk(_camp, id) != ""
+			_buttons[id].text = _sites[id].label
+			_buttons[id].icon = NEWS_ICON if news else null
+			_buttons[id].icon_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+			_buttons[id].expand_icon = true
+			_buttons[id].add_theme_constant_override("icon_max_width", 14)
+			_buttons[id].tooltip_text = "Someone here has news" if news else ""
+			_buttons[id].accessibility_name = _sites[id].label + (", new conversation" if news else "")
 
 
 ## Scales the 640 x 360 scene to fit the safe area, centred.

@@ -1,0 +1,20 @@
+{
+  "masters": 12,
+  "byte_exact_originals_present": 12,
+  "exports": 12,
+  "shared_prop_state_transforms": 2,
+  "unchanged_nonvisual_resources": [
+    "data/gear/companion_short_sword.tres",
+    "data/gear/companion_mace.tres",
+    "data/gear/camp_forged_blade.tres",
+    "data/events/quest_three_knocks.tres",
+    "data/events/quest_iron_seam.tres",
+    "data/events/quest_lower_gate.tres",
+    "data/conversations/commander_first.tres",
+    "data/conversations/commander_report.tres",
+    "data/conversations/commander_waiting.tres",
+    "data/conversations/miner_thanks.tres"
+  ],
+  "baseline": "cce02b2",
+  "failures": []
+}

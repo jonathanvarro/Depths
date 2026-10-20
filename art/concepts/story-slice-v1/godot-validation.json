@@ -1,0 +1,29 @@
+{
+	"captures": [
+		"three_knocks-before-desktop",
+		"three_knocks-used-desktop",
+		"iron_seam-before-desktop",
+		"iron_seam-used-desktop",
+		"lower_gate-before-desktop",
+		"commander-desktop",
+		"hask-desktop",
+		"camp-news-desktop",
+		"pack-items-desktop",
+		"pack-weapons-desktop",
+		"pack-camp-blade-desktop",
+		"three_knocks-before-phone",
+		"three_knocks-used-phone",
+		"iron_seam-before-phone",
+		"iron_seam-used-phone",
+		"lower_gate-before-phone",
+		"commander-phone",
+		"hask-phone",
+		"camp-news-phone",
+		"pack-items-phone",
+		"pack-weapons-phone",
+		"pack-camp-blade-phone"
+	],
+	"checks": 80,
+	"failures": [],
+	"phone": "1278x590 desktop simulation; physical iPhone remains untested."
+}

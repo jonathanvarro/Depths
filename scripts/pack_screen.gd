@@ -22,6 +22,7 @@ const TORCH_ICON := preload("res://art/items/refined-v2/torch.png")
 const COIN_ICON := preload("res://art/symbols/crest-v1/currency-coin.svg")
 const SETTINGS_ICON := preload("res://art/ui/controls-v1/settings.svg")
 const CLOSE_ICON := preload("res://art/ui/controls-v1/close.svg")
+const JOURNAL_ICON := preload("res://art/ui/controls-v1/journal.svg")
 
 var content: MarginContainer  # main.gd keeps this inside the safe area
 
@@ -312,8 +313,12 @@ func _build() -> void:
 	header.add_child(save)
 	header.move_child(save, header.get_child_count() - 2)
 	var quests := Button.new()
-	quests.text = "Quests"
-	quests.custom_minimum_size = Vector2(110, 52)
+	quests.icon = JOURNAL_ICON
+	quests.expand_icon = true
+	quests.add_theme_constant_override("icon_max_width", 26)
+	quests.tooltip_text = "Quest journal"
+	quests.accessibility_name = "Quest journal"
+	quests.custom_minimum_size = Vector2(52, 52)
 	quests.focus_mode = Control.FOCUS_ALL
 	quests.add_theme_font_size_override("font_size", 20)
 	quests.pressed.connect(func(): open_quests.emit())

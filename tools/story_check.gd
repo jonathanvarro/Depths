@@ -97,7 +97,7 @@ func _initialize() -> void:
 	main._results.continue_pressed.emit()
 	await create_timer(0.3).timeout
 	var cs = main._camp
-	check("the cave path is marked: the commander has something to say", cs._buttons["cave"].text.ends_with("(!)"))
+	check("the cave path is marked: the commander has something to say", cs._buttons["cave"].icon != null and cs._buttons["cave"].accessibility_name.contains("new conversation"))
 	cs.open_activity("cave")
 	await process_frame
 	var body := " | ".join(cs._body.find_children("*", "Label", true, false).map(func(l): return l.text))

@@ -2,8 +2,10 @@
 
 [ext_resource type="Script" path="res://scripts/conversation_page.gd" id="1_1vt6o"]
 [ext_resource type="Script" path="res://scripts/conversation_reply.gd" id="2_qlru0"]
-[ext_resource type="Texture2D" path="res://art/portraits/recruit-silhouettes-v1/warden.png" id="3_r7od4"]
+[ext_resource type="Texture2D" path="res://art/portraits/story-slice-v1/commander-edric.png" id="3_r7od4"]
 [ext_resource type="Script" path="res://scripts/conversation.gd" id="4_j4kar"]
+
+[ext_resource type="Texture2D" path="res://art/portraits/story-slice-v1/commander-backdrop.png" id="slice_backdrop"]
 
 [sub_resource type="Resource" id="Resource_hgm1o"]
 script = ExtResource("2_qlru0")
@@ -75,4 +77,5 @@ replies = Array[ExtResource("2_qlru0")]([SubResource("Resource_lgnmi")])
 script = ExtResource("4_j4kar")
 speaker = "Commander Edric Vael"
 portrait = ExtResource("3_r7od4")
+backdrop = ExtResource("slice_backdrop")
 pages = Array[ExtResource("1_1vt6o")]([SubResource("Resource_4r1gf"), SubResource("Resource_6g6o8"), SubResource("Resource_8u8d1"), SubResource("Resource_obvxk"), SubResource("Resource_hr3q8")])

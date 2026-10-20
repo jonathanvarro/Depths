@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="Equipment" format=3]
 
 [ext_resource type="Script" path="res://scripts/equipment.gd" id="1"]
-[ext_resource type="Texture2D" path="res://art/items/refined-v2/wooden-club.png" id="2"]
+[ext_resource type="Texture2D" path="res://art/items/story-slice-v1/companion-mace.png" id="2"]
 
 [resource]
 script = ExtResource("1")
 display_name = "Companion's light mace"
-description = "A flanged head on a short iron haft. Weight in the right place, so it lands hard without a strong arm. Placeholder art until its own icon."
+description = "Six compact iron flanges on a slender haft. Rust gathers at their roots; the leather grip is rubbed almost black."
 icon = ExtResource("2")
 attack_min = 3
 attack_max = 5

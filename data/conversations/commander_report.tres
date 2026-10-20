@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/conversation_page.gd" id="1_gtmdc"]
 [ext_resource type="Script" path="res://scripts/conversation_reply.gd" id="2_e0pqa"]
-[ext_resource type="Texture2D" path="res://art/portraits/recruit-silhouettes-v1/warden.png" id="3_16t82"]
+[ext_resource type="Texture2D" path="res://art/portraits/story-slice-v1/commander-edric.png" id="3_16t82"]
 [ext_resource type="Script" path="res://scripts/conversation.gd" id="4_uo60j"]
 
 [sub_resource type="Resource" id="Resource_llfuq"]

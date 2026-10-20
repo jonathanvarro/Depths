@@ -7,6 +7,8 @@
 [ext_resource type="Script" path="res://scripts/supply_item.gd" id="5_cobmq"]
 [ext_resource type="Script" path="res://scripts/room_event.gd" id="6_h7meo"]
 
+[ext_resource type="PackedScene" path="res://art/props/story-slice-v1/three-knocks.tscn" id="slice_prop"]
+
 [sub_resource type="Resource" id="Resource_0h2lx"]
 script = ExtResource("2_8v7mh")
 text = "A hoarse voice answers. \"Hask - I'm Hask - the props went! Get me out!\" One cracked beam holds the whole fall up."
@@ -59,3 +61,4 @@ title = "Three knocks"
 clue = "Fresh dust on the floor and an abandoned tin cup. From behind a fall of rubble: three knocks, a pause, three knocks."
 choices = Array[ExtResource("1_2ump3")]([SubResource("Resource_iwu3o"), SubResource("Resource_0rd0g"), SubResource("Resource_50iu0")])
 min_depth = 99
+prop = ExtResource("slice_prop")

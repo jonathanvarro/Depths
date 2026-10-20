@@ -6,5 +6,7 @@ extends Resource
 
 @export var speaker := ""
 @export var portrait: Texture2D
+## Optional scene art; absent conversations retain the live camp behind them.
+@export var backdrop: Texture2D
 ## Page 0 is shown first; replies say which page comes next.
 @export var pages: Array[ConversationPage] = []

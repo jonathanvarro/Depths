@@ -98,7 +98,7 @@ func _initialize() -> void:
 				], 8),
 			_choice("Mark it for a camp crew", [_outcome("You chalk the king's mark on the rubble and promise to send diggers. \"Don't be long,\" says the voice.",
 					{"quest": "three_knocks", "quest_stage": A, "quest_flag": "crew_sent"})], 1)],
-			4)
+			4, "res://art/props/story-slice-v1/three-knocks.tscn")
 	_package("three_knocks", Vector2i(2, 2), "three_knocks", [U, O, A], ["miner_at_camp", "crew_sent"], [
 		"#########",
 		"#,,,#,,,#",
@@ -117,7 +117,7 @@ func _initialize() -> void:
 					_outcome("Iron for the smith, and a lump of copper besides.", {"quest": "iron_sample", "quest_flag": "have_ore", "loot": {copper: 1}, "weight": 2}),
 					_outcome("The face cracks and stones rain down - but you come away with the iron.", {"quest": "iron_sample", "quest_flag": "have_ore", "health": -2, "strain": 6.0}),
 				], 6)],
-			2)
+			2, "res://art/props/story-slice-v1/iron-seam.tscn")
 	_package("iron_seam", Vector2i(1, 1), "iron_sample", [A], ["have_ore"], [
 		"#####",
 		"#,1,#",
@@ -130,7 +130,7 @@ func _initialize() -> void:
 			"An iron water gate set into stone far older than the fortress. Below the grate, black water slides away down carved channels, into the dark.",
 			[_choice("Look down through the grate", [_outcome("Far below, the channels open into flooded galleries - worked stone, pillars, the glint of something that is not water. The way down goes on.",
 					{"quest": "lower_gate", "quest_stage": R, "quest_flag": "seen"})], 1)],
-			4)
+			4, "res://art/props/story-slice-v1/lower-water-gate.tscn")
 	_package("lower_gate", Vector2i(4, 4), "lower_gate", [A], ["seen"], [
 		"#######",
 		"#,,,,,#",

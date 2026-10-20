@@ -1,0 +1,260 @@
+{
+  "issue": 127,
+  "date": "2026-10-20",
+  "colour_limit": 64,
+  "assets": [
+    {
+      "id": "commander-edric",
+      "kind": "static-neutral-portrait",
+      "texture": "res://art/portraits/story-slice-v1/commander-edric.png",
+      "canvas": [
+        192,
+        192
+      ],
+      "animation": "None: authored face is whole; never overlay borrowed eyes/mouth.",
+      "source": "res://art/source/story-slice-v1/commander-edric-master.png",
+      "sha256": "18d861f7b24bc800221a9b74fdd2c4e28f6a4b5d8a43340587cb9581cd7fde57"
+    },
+    {
+      "id": "hask-miner",
+      "kind": "static-neutral-portrait",
+      "texture": "res://art/portraits/story-slice-v1/hask-miner.png",
+      "canvas": [
+        192,
+        192
+      ],
+      "animation": "None: authored face is whole; never overlay borrowed eyes/mouth.",
+      "source": "res://art/source/story-slice-v1/hask-miner-master.png",
+      "sha256": "066a35d9e491bf4a182992bffad17ff8caa8c7bd859f59f96fbe8ec45bb57064"
+    },
+    {
+      "id": "companion-short-sword",
+      "kind": "inventory-icon",
+      "texture": "res://art/items/story-slice-v1/companion-short-sword.png",
+      "canvas": [
+        128,
+        128
+      ],
+      "source_bounds": [
+        69,
+        40,
+        1222,
+        1208
+      ],
+      "scale": 0.0958904109589041,
+      "offset": [
+        8,
+        8
+      ],
+      "source": "res://art/source/story-slice-v1/companion-short-sword-master.png",
+      "sha256": "ce8e5a7605cd56e424bd0b7134907cee7f03411a6932b3a06687ffed8b56e0cc"
+    },
+    {
+      "id": "companion-mace",
+      "kind": "inventory-icon",
+      "texture": "res://art/items/story-slice-v1/companion-mace.png",
+      "canvas": [
+        128,
+        128
+      ],
+      "source_bounds": [
+        71,
+        62,
+        1204,
+        1197
+      ],
+      "scale": 0.0986784140969163,
+      "offset": [
+        8,
+        8
+      ],
+      "source": "res://art/source/story-slice-v1/companion-mace-master.png",
+      "sha256": "eeed18b0a887325c9d6f50fb50df348bae74a675edde78b1a5677e0ef4344883"
+    },
+    {
+      "id": "camp-forged-blade",
+      "kind": "inventory-icon",
+      "texture": "res://art/items/story-slice-v1/camp-forged-blade.png",
+      "canvas": [
+        128,
+        128
+      ],
+      "source_bounds": [
+        87,
+        29,
+        1232,
+        1203
+      ],
+      "scale": 0.09540034071550256,
+      "offset": [
+        9,
+        8
+      ],
+      "source": "res://art/source/story-slice-v1/camp-forged-blade-master.png",
+      "sha256": "a4e9e37c5e1744e57ccccb351e0f662d5fcc72125596601dd144063f6772fbdf"
+    },
+    {
+      "id": "iron-ore",
+      "kind": "inventory-icon",
+      "texture": "res://art/items/story-slice-v1/iron-ore.png",
+      "canvas": [
+        128,
+        128
+      ],
+      "source_bounds": [
+        134,
+        161,
+        1145,
+        1119
+      ],
+      "scale": 0.11078140454995054,
+      "offset": [
+        8,
+        11
+      ],
+      "source": "res://art/source/story-slice-v1/iron-ore-master.png",
+      "sha256": "ee2628c21af55287e9cd1e8bea9299d91e7f312d5463302cbfb1c7be5ab8ab73"
+    },
+    {
+      "id": "three-knocks",
+      "kind": "room-prop",
+      "texture": "res://art/props/story-slice-v1/three-knocks.png",
+      "canvas": [
+        192,
+        192
+      ],
+      "pivot": [
+        96,
+        180
+      ],
+      "source_bounds": [
+        31,
+        55,
+        1222,
+        1205
+      ],
+      "scale": 0.14105793450881612,
+      "offset": [
+        12,
+        18
+      ],
+      "source": "res://art/source/story-slice-v1/three-knocks-master.png",
+      "sha256": "25d67dc1bda211bcad40664ca5611df589a44f56b98ae1e9b05c153d6a6b7e20"
+    },
+    {
+      "id": "three-knocks-used",
+      "kind": "room-prop",
+      "texture": "res://art/props/story-slice-v1/three-knocks-used.png",
+      "canvas": [
+        192,
+        192
+      ],
+      "pivot": [
+        96,
+        180
+      ],
+      "source_bounds": [
+        31,
+        55,
+        1222,
+        1205
+      ],
+      "scale": 0.14105793450881612,
+      "offset": [
+        12,
+        18
+      ],
+      "source": "res://art/source/story-slice-v1/three-knocks-used-master.png",
+      "sha256": "f3e0b56b96a56d6fb3059c153e7891a3f919d6d21929e524426db545a2a18d40"
+    },
+    {
+      "id": "iron-seam",
+      "kind": "room-prop",
+      "texture": "res://art/props/story-slice-v1/iron-seam.png",
+      "canvas": [
+        192,
+        192
+      ],
+      "pivot": [
+        96,
+        180
+      ],
+      "source_bounds": [
+        10,
+        156,
+        1249,
+        1134
+      ],
+      "scale": 0.13559322033898305,
+      "offset": [
+        12,
+        47
+      ],
+      "source": "res://art/source/story-slice-v1/iron-seam-master.png",
+      "sha256": "ef2e119bf538bb35eeed6b4f7db511304db8857ff3e21c3e3dd91cba27923cc0"
+    },
+    {
+      "id": "iron-seam-used",
+      "kind": "room-prop",
+      "texture": "res://art/props/story-slice-v1/iron-seam-used.png",
+      "canvas": [
+        192,
+        192
+      ],
+      "pivot": [
+        96,
+        180
+      ],
+      "source_bounds": [
+        10,
+        156,
+        1249,
+        1134
+      ],
+      "scale": 0.13559322033898305,
+      "offset": [
+        12,
+        47
+      ],
+      "source": "res://art/source/story-slice-v1/iron-seam-used-master.png",
+      "sha256": "10f355b5bbf2e2d0b8648782f125658084cd992c2a49f2a643a6f1c5d434cbf6"
+    },
+    {
+      "id": "lower-water-gate",
+      "kind": "room-prop",
+      "texture": "res://art/props/story-slice-v1/lower-water-gate.png",
+      "canvas": [
+        192,
+        192
+      ],
+      "pivot": [
+        96,
+        180
+      ],
+      "source_bounds": [
+        84,
+        20,
+        1171,
+        1234
+      ],
+      "scale": 0.13838550247116968,
+      "offset": [
+        21,
+        12
+      ],
+      "source": "res://art/source/story-slice-v1/lower-water-gate-master.png",
+      "sha256": "d3e8cdd18f006e70378b7dc0fd4d200ab1c9f967eaaaec6ed639071de5c0377e"
+    },
+    {
+      "id": "commander-backdrop",
+      "kind": "conversation-backdrop",
+      "texture": "res://art/portraits/story-slice-v1/commander-backdrop.png",
+      "canvas": [
+        960,
+        540
+      ],
+      "source": "res://art/source/story-slice-v1/commander-backdrop-master.png",
+      "sha256": "f4558a077e797b4f592c71e418d103b8afba8d7195e82e8602d8f6ca278f37e5"
+    }
+  ]
+}
