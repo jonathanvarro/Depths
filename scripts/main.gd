@@ -1371,6 +1371,7 @@ func _place_extra_foe(foe) -> void:
 	_dress_foe(node, foe.type)
 	BattleStage.raise(node)
 	_level.add_child(node)
+	_clear_of_panel(node)
 	foe.node = node
 
 
@@ -1435,7 +1436,38 @@ func _place_foes(foes: Array) -> void:
 		_dress_foe(node, foe.type)
 		BattleStage.raise(node)
 		_level.add_child(node)
+		_clear_of_panel(node)
 		foe.node = node
+
+
+## Fights take place on a dark stage with no floor in view, so a foe whose
+## feet would sit behind the action panel or the party's cards (a rat, a
+## guard's shield) is lifted until it stands clear of them.
+func _clear_of_panel(node: Node3D) -> void:
+	var camera: Camera3D = _party.camera
+	var screen_height: float = get_viewport().get_visible_rect().size.y
+	# The panel's top, from its own size: it may not be laid out yet when
+	# the first fight starts. 16 is the fight screen's margin.
+	var line: float = screen_height - 16.0 - _combat._actions.get_combined_minimum_size().y - 8.0
+	for attempt in 2:  # the second pass corrects for perspective
+		var lowest := -INF
+		var distance := 0.0
+		var sprites: Array = node.find_children("*", "SpriteBase3D", true, false)
+		if node is SpriteBase3D:
+			sprites.append(node)
+		for sprite: SpriteBase3D in sprites:
+			var box := sprite.get_aabb()
+			var foot: Vector3 = sprite.global_transform * Vector3(box.get_center().x, box.position.y, 0.0)
+			if camera.is_position_behind(foot):
+				continue
+			var y := camera.unproject_position(foot).y
+			if y > lowest:
+				lowest = y
+				distance = (foot - camera.global_position).dot(-camera.global_transform.basis.z)
+		if lowest <= line or distance <= 0.0:
+			return
+		var metres_per_pixel := 2.0 * distance * tan(deg_to_rad(camera.fov) / 2.0) / screen_height
+		node.position.y += (lowest - line) * metres_per_pixel
 
 
 ## Retreat (trial): bolt to a random spot a few steps away, losing time
