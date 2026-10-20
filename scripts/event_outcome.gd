@@ -37,3 +37,8 @@ enum Target {
 ## ...and an outcome with this flag in `blocked_by` can't happen once the
 ## room is marked (no charm left to rattle).
 @export var blocked_by := ""
+## Story (#123): mark a flag on a quest and/or move it to a stage
+## (quests.gd), e.g. the evidence is found.
+@export var quest := ""
+@export var quest_flag := ""
+@export var quest_stage := -1

@@ -51,6 +51,10 @@ var encounter_zones := {}
 var solid := {}  # Vector2i -> true
 ## What preparation has already done in a room (#114): cell -> flag names.
 var event_flags := {}
+## Fixed fights (#123): a quest package's 'E' cell -> its enemies.
+var fight_groups := {}
+## Quest packages on this floor (#123): ids placed.
+var packages: Array = []
 ## Floor-specific places, e.g. the fortress's "hall" and "gates" (#44).
 var marks := {}
 

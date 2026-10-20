@@ -30,6 +30,7 @@ const Quests := preload("res://scripts/quests.gd")
 const ConversationScreen := preload("res://scripts/conversation_screen.gd")
 const QuestLog := preload("res://scripts/quest_log.gd")
 const Story := preload("res://scripts/story.gd")
+const Packages := preload("res://scripts/packages.gd")
 ## The commander waiting outside after the escape (#122, first slice).
 const COMMANDER_FIRST := preload("res://data/conversations/commander_first.tres")
 const CoinFlip := preload("res://scripts/coin_flip.gd")
@@ -392,6 +393,7 @@ func _ready() -> void:
 	_expedition = Expedition.new(_party_state, 1)
 	_room_events.loot_found.connect(func(loot): _expedition.add_found(loot))
 	_room_events.gold_found.connect(func(amount): _expedition.gold_found += amount)
+	_room_events.camp = _camp_state  # events can move quests on (#123)
 	_room_events.gold_found.connect(func(_amount): Sounds.play(self, "coins"))
 	_party_state.supplies.torch_flared.connect(func(): Sounds.play(self, "torch"))
 
@@ -502,9 +504,15 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 			var fortress: Dictionary = Fortress.fortify(layout, _camp_state.gate_broken)
 			layout = fortress["layout"]
 			marks = {"hall": fortress["hall"], "gates": fortress["gates"]}
-		_floors[depth] = DungeonMap.new(layout, depth)
+		# Quest packages the story wants here (#123), stamped into rock.
+		var stamped: Dictionary = Packages.place(layout, Packages.active(_camp_state, depth) if not _in_opening else [], _site_seed + depth * 7919 + 13)
+		_floors[depth] = DungeonMap.new(stamped["layout"], depth)
 		_floors[depth].marks = marks
 		_assign_events(_floors[depth])
+		for cell in stamped["events"]:
+			_floors[depth].events[cell] = stamped["events"][cell]
+		_floors[depth].fight_groups = stamped["fights"]
+		_floors[depth].packages = stamped["placed"]
 	_map = _floors[depth]
 
 	_build_level()
@@ -572,7 +580,9 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 	var fight_cell: Vector2i = _map.encounter_zones.get(cell, Vector2i(-1, -1))
 	if fight_cell != Vector2i(-1, -1) and not _map.triggered.has(fight_cell):
 		_map.enter(fight_cell)
-		_start_combat(fight_cell)
+		var fixed: Array[EnemyType] = []  # a quest package's own fight (#123)
+		fixed.assign(_map.fight_groups.get(fight_cell, []))
+		_start_combat(fight_cell, fixed)
 		return
 	var content: int = _map.enter(cell)
 	match content:

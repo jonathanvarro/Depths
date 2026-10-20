@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="RoomEvent" format=3]
+
+[ext_resource type="Script" path="res://scripts/event_choice.gd" id="1_q8nw7"]
+[ext_resource type="Script" path="res://scripts/event_outcome.gd" id="2_0wme3"]
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="3_djksq"]
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="4_ghy8a"]
+[ext_resource type="Script" path="res://scripts/supply_item.gd" id="5_disj7"]
+[ext_resource type="PackedScene" path="res://art/props/opening-bodies-v1/fallen-b.tscn" id="6_hfyst"]
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="7_ricoc"]
+
+[sub_resource type="Resource" id="Resource_bnwyi"]
+script = ExtResource("2_0wme3")
+text = "A ration in waxed cloth, clean linen, and a few coins the rats couldn't eat."
+gold = 6
+
+[sub_resource type="Resource" id="Resource_mbq0j"]
+script = ExtResource("1_q8nw7")
+label = "Take what's left"
+time_cost = 2
+outcomes = Array[ExtResource("2_0wme3")]([SubResource("Resource_bnwyi")])
+
+[resource]
+script = ExtResource("7_ricoc")
+title = "Their packs"
+clue = "Torn packs, half emptied by rats. Some of it is still worth carrying."
+choices = Array[ExtResource("1_q8nw7")]([SubResource("Resource_mbq0j")])
+min_depth = 99
+prop = ExtResource("6_hfyst")

@@ -141,6 +141,80 @@ func _initialize() -> void:
 	check("the smith's unlock survives saving", main._camp_state.smith_stock().any(func(g): return g.display_name == "Camp-forged blade"))
 	await _drop(main)
 
+	await _step3()
 	SaveGame.delete()
 	print("fails=", fails)
 	quit()
+
+
+## Quest packages (#123) and Those Left Behind.
+func _step3() -> void:
+	var FG = load("res://scripts/floor_generator.gd")
+	var DM = load("res://scripts/dungeon_map.gd")
+	var Packages = load("res://scripts/packages.gd")
+	var package: QuestPackage = load("res://data/packages/left_behind.tres")
+	var problems := 0
+	var unreached := 0
+	for s in 400:
+		var layout: PackedStringArray = FG.generate(s * 7919 + 5, true, 1)
+		var before = DM.new(layout, 1)
+		var stamped: Dictionary = Packages.place(layout, [package], s)
+		var map = DM.new(stamped["layout"], 1)
+		if not stamped["failed"].is_empty() or map.find_content(DM.Content.STAIRS_UP) != before.find_content(DM.Content.STAIRS_UP) 				or map.find_content(DM.Content.STAIRS_DOWN) != before.find_content(DM.Content.STAIRS_DOWN) or map.contents.size() != before.contents.size() + 3:
+			problems += 1
+			continue
+		var reach: Dictionary = map.walking_distances(map.find_content(DM.Content.STAIRS_UP))
+		for cell in stamped["events"].keys() + stamped["fights"].keys():
+			if not reach.has(cell):
+				unreached += 1
+		for cell in before.contents:
+			if not reach.has(cell) and before.walking_distances(before.find_content(DM.Content.STAIRS_UP)).has(cell):
+				unreached += 1
+	check("over 400 floors, the package always fits and leaves the floor intact", problems == 0, "%d problems" % problems)
+	check("...and its fight, the fallen and every old room stay reachable", unreached == 0, "%d unreachable" % unreached)
+
+	SaveGame.delete()
+	var main = await _game(false)
+	var camp = main._camp_state
+	Quests.set_stage(camp, "left_behind", Quests.Stage.ACTIVE)
+	main._floors.clear()
+	main._go_to_floor(1, main.Arrival.FROM_ABOVE)
+	var map = main._map
+	check("with the order given, floor 1 holds the ambush site", "left_behind" in map.packages and map.fight_groups.size() == 1)
+	var fight_cell: Vector2i = map.fight_groups.keys()[0]
+	var room: Array = map.room_around(fight_cell)
+	main._party.place(map, room.filter(func(c): return map.content_at(c) == 0)[0])
+	main._on_party_entered_cell(main._party.cell)
+	await create_timer(0.3).timeout
+	var names: Array = main._combat._state.foes.map(func(f): return f.type.display_name) if main._in_combat else []
+	check("scavengers guard it (its own fight, not a random one)", names == ["Great rat", "Rat"], str(names))
+	if main._in_combat:
+		for foe in main._combat._state.foes:
+			foe.health = 0
+		main._combat._state._check_end()
+		var g := 0
+		while main._in_combat and g < 100:
+			if main._combat._actions.visible:
+				main._combat._action_chosen.emit({"kind": "defend"})
+			await create_timer(0.1).timeout
+			g += 1
+	var fallen: Vector2i = map.events.keys().filter(func(c): return map.events[c].title == "Where they fell")[0]
+	main._run_event(fallen)
+	await process_frame
+	var screen = main._event_screen
+	check("the fallen are there to search", screen.visible and screen._title.text == "Where they fell")
+	screen._choose(screen._event.choices[1])
+	await process_frame
+	check("gathering their maps finds the evidence", Quests.has_flag(camp, "left_behind", "found") and screen._body.text.contains("arrow"))
+	if dir != "":
+		await _snap("evidence")
+	screen._finish({"left": false, "ambush": [] as Array[EnemyType]})
+	await process_frame
+	main._save_now()
+	await _drop(main)
+	main = await _game(true)
+	check("the find survives saving", Quests.has_flag(main._camp_state, "left_behind", "found"))
+	main._floors.clear()
+	main._go_to_floor(1, main.Arrival.FROM_ABOVE)
+	check("once found, the site isn't stamped into new floors", "left_behind" not in main._map.packages)
+	await _drop(main)

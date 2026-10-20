@@ -4,6 +4,7 @@ extends RefCounted
 
 const EVENTS_DIR := "res://data/events"
 const Glyphs := preload("res://art/ui/backlog96-v1/glyphs.gd")
+const Quests := preload("res://scripts/quests.gd")
 ## Result chips (#105): what changed, as an icon and a number.
 const CHIP_ICONS := {
 	"health": preload("res://art/ui/visual105-v1/heart.png"),
@@ -41,6 +42,8 @@ const TREASURE := [
 
 ## The floor being explored; main.gd sets it before an event (#42).
 var depth := 1
+## The camp, for events that move quests on (#123); set by main.gd.
+var camp
 
 var library: Array[RoomEvent] = []
 var rng := RandomNumberGenerator.new()
@@ -94,6 +97,11 @@ func resolve(party, choice: EventChoice, forced := -1, flags: Array = []) -> Dic
 	var outcome: EventOutcome = choice.outcomes[forced] if forced >= 0 and forced < choice.outcomes.size() else _pick_outcome(choice, flags)
 	if outcome and outcome.sets_flag != "" and outcome.sets_flag not in flags:
 		flags.append(outcome.sets_flag)
+	if outcome and outcome.quest != "" and camp != null:
+		if outcome.quest_stage >= 0:
+			Quests.set_stage(camp, outcome.quest, outcome.quest_stage)
+		if outcome.quest_flag != "":
+			Quests.set_flag(camp, outcome.quest, outcome.quest_flag)
 	var result := {"text": "", "ambush": [] as Array[EnemyType], "ends": not choice.investigation, "story": "", "changes": []}
 	if outcome == null:
 		return result

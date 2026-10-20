@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="RoomEvent" format=3]
+
+[ext_resource type="Script" path="res://scripts/event_choice.gd" id="1_8ei27"]
+[ext_resource type="Script" path="res://scripts/event_outcome.gd" id="2_ibj3p"]
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="3_7pm5h"]
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="4_npisk"]
+[ext_resource type="Script" path="res://scripts/supply_item.gd" id="5_px5gq"]
+[ext_resource type="PackedScene" path="res://art/props/opening-bodies-v1/fallen-a.tscn" id="6_48mm3"]
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="7_62vov"]
+
+[sub_resource type="Resource" id="Resource_nji8p"]
+script = ExtResource("2_ibj3p")
+text = "The guide, the surveyor, the two porters. None of them ran. Whatever came, it came from both sides at once."
+
+[sub_resource type="Resource" id="Resource_q2qta"]
+script = ExtResource("1_8ei27")
+label = "Look them over"
+investigation = true
+outcomes = Array[ExtResource("2_ibj3p")]([SubResource("Resource_nji8p")])
+
+[sub_resource type="Resource" id="Resource_887wi"]
+script = ExtResource("2_ibj3p")
+text = "The survey map is rolled tight in its case - and someone has marked it in a hand none of your party used. Wedged under the guide is an arrow: a goblin shaft, fletched with something black and glossy that no goblin you know would use."
+quest = "left_behind"
+quest_flag = "found"
+
+[sub_resource type="Resource" id="Resource_xiv6q"]
+script = ExtResource("1_8ei27")
+label = "Gather their maps and anything strange"
+time_cost = 3
+outcomes = Array[ExtResource("2_ibj3p")]([SubResource("Resource_887wi")])
+
+[resource]
+script = ExtResource("7_62vov")
+title = "Where they fell"
+clue = "The rest of your party lies where the ambush caught them. Rats have been at the packs. A survey case lies open beside the guide's hand."
+choices = Array[ExtResource("1_8ei27")]([SubResource("Resource_q2qta"), SubResource("Resource_xiv6q")])
+min_depth = 99
+prop = ExtResource("6_48mm3")
