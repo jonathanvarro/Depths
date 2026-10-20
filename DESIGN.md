@@ -66,6 +66,8 @@ Returning safely with useful gains should matter even when the bottom is not rea
 
 **Scope:** the cave is the main setting. The next "site" is **deeper within the same cave**, and the story centres here rather than across many places. Other settings aren't ruled out for later. The aim is compelling gameplay, with room for characters to talk and explain the story and setting. This replaces the multi-site route in the next section for now.
 
+**The setting is a mine (decided 2026-10-20).** A local town's miners worked the upper levels until they **broke through a wall into something older**. **Gas came first** and killed the shift. When it cleared, **monsters had come up**, and the goblins took the workings. The town's plight, and rumours of what lay beyond the breach, brought the king's investigation and the commander. The upper floors are the town's recent mine (the Old Workings), with older natural caverns and the buried city below. In the game's text, "the cave" becomes "the mine".
+
 **The main goal is the relic.** It's a **plot device for now**: what it is (relic, temple or object) and why the king wants it stay open. The **goblin queen** and her fortress (#44) become a **side quest** on the way, no longer the cave's ending.
 
 **Proposed flow** (direction, not yet built):
