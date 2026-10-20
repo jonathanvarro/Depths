@@ -32,6 +32,7 @@ def resource(underlayer=False):
         'talk_frames = Array[Texture2D]([ExtResource("6"), ExtResource("7"), ExtResource("8")])',
         'light_shadow = ExtResource("13")','light_highlight = ExtResource("14")']
     p=OUT/'underlayer.tres' if underlayer else ROOT/'data/portraits/mara.tres'
+    lines=kit.prefer_pixel_frames(lines)
     p.write_text('\n'.join(lines)+'\n',encoding='utf-8',newline='\n')
 
 def main():

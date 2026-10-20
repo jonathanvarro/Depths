@@ -2,13 +2,16 @@ extends SceneTree
 ## #120: real rig registration, speech/eye lifecycle and portrait replacements.
 const VIEW = preload("res://scripts/portrait_view.gd")
 const OUT = "res://art/concepts/portrait-coherence-v1/"
+var output_dir:=OUT
 var checks := 0
 var failures: Array[String] = []
 var paths: Array[String] = []
 
 func _initialize() -> void:
 	root.content_scale_mode = Window.CONTENT_SCALE_MODE_DISABLED
-	DirAccess.make_dir_recursive_absolute(OUT)
+	var args:=OS.get_cmdline_user_args()
+	if not args.is_empty():output_dir=args[0].trim_suffix("/")+"/"
+	DirAccess.make_dir_recursive_absolute(output_dir)
 	call_deferred("_run")
 
 func check(ok: bool, label: String) -> void:
@@ -98,7 +101,7 @@ func _run() -> void:
 				if col in [1,2]:view._eyes.texture=layers.blink_frames[col-1]
 				if col in [3,4,5]:view._mouth.texture=layers.talk_frames[mini(col-3,layers.talk_frames.size()-1)]
 		await process_frame;await RenderingServer.frame_post_draw
-		check(root.get_texture().get_image().save_png(OUT+"registration-%d.png"%group)==OK,"Registration capture")
+		check(root.get_texture().get_image().save_png(output_dir+"registration-%d.png"%group)==OK,"Registration capture")
 		for control in controls:control.queue_free()
 		await process_frame
 	root.size=Vector2i(512,448)
@@ -112,8 +115,8 @@ func _run() -> void:
 		if frame==5:
 			for view in views:view.blink()
 		await create_timer(0.07).timeout;await RenderingServer.frame_post_draw
-		root.get_texture().get_image().save_png(OUT+"motion-%02d.png"%frame)
+		root.get_texture().get_image().save_png(output_dir+"motion-%02d.png"%frame)
 	var report:={"checks":checks,"failures":failures,"portrait_sets":paths.size(),"animated_faces":neutral.size(),"registration_columns":["neutral","half lid","closed","small mouth","open mouth","round or open mouth","restored neutral"],"note":"NPC flat portraits and worried/exhausted expression sets remain static; no borrowed animation drawings."}
-	var file:=FileAccess.open(OUT+"validation.json",FileAccess.WRITE);file.store_string(JSON.stringify(report,"\t")+"\n");file.close()
+	var file:=FileAccess.open(output_dir+"validation.json",FileAccess.WRITE);file.store_string(JSON.stringify(report,"\t")+"\n");file.close()
 	print("PORTRAIT_COHERENCE: checks=%d failures=%d sets=%d"%[checks,failures.size(),paths.size()])
 	quit(0 if failures.is_empty() else 1)

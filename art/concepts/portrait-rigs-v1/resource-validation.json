@@ -1,7 +1,7 @@
 {
-  "baseline": "84abb14",
+  "baseline": "3d1ee08",
   "resources_checked": 31,
-  "only_rig_metadata_changed": true,
-  "existing_pixel_bindings_unchanged": true,
+  "only_approved_animation_bindings_changed": true,
+  "resting_character_and_other_bindings_unchanged": true,
   "failures": []
 }

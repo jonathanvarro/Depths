@@ -84,7 +84,8 @@ Templates > Download and Install; already installed on the owner's PC).
   frames). Companion.portrait_set points at one.
   `data/portraits/catalog.json` separates reusable body-template families from
   unique hero rigs (`rig_kind`/`rig_family`/`face_id`); facial drawings are never
-  shared across heads. Paused inspection/known fit issues: `docs/portrait-rig-families.md`.
+  shared across heads. Native lid/lip pixel repair and paused inspection:
+  `docs/portrait-rig-families.md`; preserve `frames-pixel-v2` on re-export.
 - `scripts/portrait_view.gd` – draws a PortraitSet; blink(), talk(), hurt(),
   set_condition().
 - `scripts/party_card.gd` – HUD card per party slot (portrait, name, health

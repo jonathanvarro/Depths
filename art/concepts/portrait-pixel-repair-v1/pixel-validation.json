@@ -1,0 +1,1268 @@
+{
+  "issue": 121,
+  "method": "Owner-authorized precise native pixel edits of each existing resting face; no generated atlas fitting.",
+  "baseline": "3d1ee08",
+  "canvas": [
+    192,
+    192
+  ],
+  "faces": [
+    {
+      "face": "alwen",
+      "family": "unique-alwen-v1",
+      "resource": "res://data/portraits/alwen.tres",
+      "base_sha256": "dd0e8657c3976cf0a7077ca533944057892fdac4c726380273b8a9fa1d640475",
+      "recipe": {
+        "eyes": [
+          [
+            100,
+            68,
+            6,
+            3
+          ],
+          [
+            123,
+            68,
+            6,
+            3
+          ]
+        ],
+        "lip": [
+          [
+            104,
+            96
+          ],
+          [
+            110,
+            95
+          ],
+          [
+            117,
+            95
+          ],
+          [
+            122,
+            96
+          ]
+        ]
+      },
+      "frames": [
+        {
+          "name": "eyes-half",
+          "texture": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v2/eyes-half.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/alwen/eyes-half-edit-mask.png",
+          "changed_pixels": 55,
+          "change_bounds": [
+            94,
+            66,
+            130,
+            69
+          ],
+          "sha256": "b236b19fbe84c0ad4ecd3ba533816af9beb7c92ecc674b8717688e8c57e89915"
+        },
+        {
+          "name": "eyes-closed",
+          "texture": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v2/eyes-closed.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/alwen/eyes-closed-edit-mask.png",
+          "changed_pixels": 80,
+          "change_bounds": [
+            94,
+            66,
+            130,
+            71
+          ],
+          "sha256": "c400f49399ffd6c8a42b5c6729b73b622ce01a93656046595365986c3cd9b68d"
+        },
+        {
+          "name": "mouth-small",
+          "texture": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v2/mouth-small.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/alwen/mouth-small-edit-mask.png",
+          "changed_pixels": 37,
+          "change_bounds": [
+            105,
+            95,
+            122,
+            98
+          ],
+          "sha256": "e32cb374b3865b28f4129c95b79ca2dadd2d00f91fb2ec120c27b6c735e509fb"
+        },
+        {
+          "name": "mouth-open",
+          "texture": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v2/mouth-open.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/alwen/mouth-open-edit-mask.png",
+          "changed_pixels": 60,
+          "change_bounds": [
+            105,
+            95,
+            122,
+            100
+          ],
+          "sha256": "34e38189c7f3d3019f6c13c06507f0f7681eabed39176ba414c7ed3021293c20"
+        },
+        {
+          "name": "mouth-round",
+          "texture": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v2/mouth-round.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/alwen/mouth-round-edit-mask.png",
+          "changed_pixels": 25,
+          "change_bounds": [
+            110,
+            94,
+            117,
+            99
+          ],
+          "sha256": "c81f5948429b8240259571b06125e4227b81bb37f6a150e843b46ff80f5d6612"
+        }
+      ],
+      "input_layers": {
+        "res://art/concepts/portraits/mara-layered-v1/background.png": "d68fb226983c6aa8631760a1daa044589ae10d0a997d5fec5f7857e32ffa87d4",
+        "res://art/portraits/main-heroes-v1/alwen/body.png": "b4d156a37130b136fc88c6ae7c8eeed27e00bb2b862bde05c6893168c898fed3",
+        "res://art/portraits/main-heroes-v1/alwen/head.png": "14006aa0d31065815614743257fcb9261422b396aab55b915d4e9eaae9635fa8",
+        "res://art/portraits/main-heroes-v1/alwen/eyes-neutral.png": "98dd71ce9583a47a0efc5f3739433eaeaf9b98218488a89f048da52bb57b7a03",
+        "res://art/portraits/main-heroes-v1/alwen/mouth-neutral.png": "2ed7d6f5d2dd159e87bfe4e4f961c36f79f34859552c0fcd100b72ba3b42e3a7"
+      }
+    },
+    {
+      "face": "corin",
+      "family": "unique-corin-v1",
+      "resource": "res://data/portraits/corin.tres",
+      "base_sha256": "5650ba21ec08bb5721c4366b965da18cbf71ec47e57d2972845d8f33fa8043e7",
+      "recipe": {
+        "eyes": [
+          [
+            95,
+            66,
+            7,
+            3
+          ],
+          [
+            122,
+            69,
+            6,
+            3
+          ]
+        ],
+        "lip": [
+          [
+            94,
+            90
+          ],
+          [
+            100,
+            91
+          ],
+          [
+            106,
+            93
+          ],
+          [
+            111,
+            94
+          ],
+          [
+            116,
+            94
+          ]
+        ],
+        "missing_tooth": true
+      },
+      "frames": [
+        {
+          "name": "eyes-half",
+          "texture": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v2/eyes-half.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/corin/eyes-half-edit-mask.png",
+          "changed_pixels": 51,
+          "change_bounds": [
+            88,
+            65,
+            129,
+            70
+          ],
+          "sha256": "ed464806688aec5e59676eefd2d116484ddccb11b976055ecab14624a4e11fea"
+        },
+        {
+          "name": "eyes-closed",
+          "texture": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v2/eyes-closed.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/corin/eyes-closed-edit-mask.png",
+          "changed_pixels": 78,
+          "change_bounds": [
+            88,
+            65,
+            129,
+            72
+          ],
+          "sha256": "f0b0b805b867fdf9213702593ec80b17afef9d4c0489ed63f0a1e4de877cf39d"
+        },
+        {
+          "name": "mouth-small",
+          "texture": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v2/mouth-small.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/corin/mouth-small-edit-mask.png",
+          "changed_pixels": 45,
+          "change_bounds": [
+            95,
+            90,
+            116,
+            97
+          ],
+          "sha256": "d75633ae26b40089e64934ec1534de73c4d17d2dad9bbf876116fc6ad4c3d05e"
+        },
+        {
+          "name": "mouth-open",
+          "texture": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v2/mouth-open.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/corin/mouth-open-edit-mask.png",
+          "changed_pixels": 73,
+          "change_bounds": [
+            95,
+            90,
+            116,
+            99
+          ],
+          "sha256": "693f00e2c39ec826a1b96965e60b6d03a83f5563e8f887964bfee377c8275a6e"
+        },
+        {
+          "name": "mouth-round",
+          "texture": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v2/mouth-round.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/corin/mouth-round-edit-mask.png",
+          "changed_pixels": 28,
+          "change_bounds": [
+            102,
+            92,
+            109,
+            98
+          ],
+          "sha256": "0555bf381789023adf0c7c261a883c5dbb1b86a6ae18eeff12afa5564432fdb6"
+        }
+      ],
+      "input_layers": {
+        "res://art/concepts/portraits/mara-layered-v1/background.png": "d68fb226983c6aa8631760a1daa044589ae10d0a997d5fec5f7857e32ffa87d4",
+        "res://art/portraits/main-heroes-v1/corin/body.png": "4cfdf93b4d67bf00cbcbdeafb423d92091b1f97048d5b64599d41d355c221122",
+        "res://art/portraits/main-heroes-v1/corin/head.png": "a25df55b9517970c9fc702282c25a2892b4cd165960d335d246d7c573a7c1810",
+        "res://art/portraits/main-heroes-v1/corin/eyes-neutral.png": "fa6c625ddecb6f45ca694378fc85956033705c4828fc076b1a2ee6ef3637de19",
+        "res://art/portraits/main-heroes-v1/corin/mouth-neutral.png": "1b471f77f9036a58c0d59a30d27e1b478f3ca82a5def687fff004e4c9013ef93"
+      }
+    },
+    {
+      "face": "mara",
+      "family": "unique-mara-v1",
+      "resource": "res://data/portraits/mara.tres",
+      "base_sha256": "e87e9fa6d4e2ed7ea8d81d50c8ce5a1771a790bdc0069f22511cff04dc747854",
+      "recipe": {
+        "eyes": [
+          [
+            97,
+            70,
+            7,
+            4
+          ],
+          [
+            123,
+            71,
+            6,
+            4
+          ]
+        ],
+        "lip": [
+          [
+            98,
+            101
+          ],
+          [
+            105,
+            100
+          ],
+          [
+            113,
+            100
+          ],
+          [
+            121,
+            101
+          ]
+        ]
+      },
+      "frames": [
+        {
+          "name": "eyes-half",
+          "texture": "res://art/portraits/mara-neutral-v1/frames-pixel-v2/eyes-half.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/mara/eyes-half-edit-mask.png",
+          "changed_pixels": 85,
+          "change_bounds": [
+            91,
+            67,
+            130,
+            72
+          ],
+          "sha256": "9914b3af78b4bc9968d64e49a9baa427ee2032a561fec231fcc4deee1d1e4ee0"
+        },
+        {
+          "name": "eyes-closed",
+          "texture": "res://art/portraits/mara-neutral-v1/frames-pixel-v2/eyes-closed.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/mara/eyes-closed-edit-mask.png",
+          "changed_pixels": 132,
+          "change_bounds": [
+            91,
+            67,
+            130,
+            75
+          ],
+          "sha256": "4cd34c12e6deccd7472f7a0500df7c65b4b29088cd04e55728c839e6a757c182"
+        },
+        {
+          "name": "mouth-small",
+          "texture": "res://art/portraits/mara-neutral-v1/frames-pixel-v2/mouth-small.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/mara/mouth-small-edit-mask.png",
+          "changed_pixels": 47,
+          "change_bounds": [
+            99,
+            100,
+            121,
+            103
+          ],
+          "sha256": "670cf1a8a91fb48b4afde48a76a61e61033f99bb213e4beb7ab083e104619c9c"
+        },
+        {
+          "name": "mouth-open",
+          "texture": "res://art/portraits/mara-neutral-v1/frames-pixel-v2/mouth-open.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/mara/mouth-open-edit-mask.png",
+          "changed_pixels": 75,
+          "change_bounds": [
+            99,
+            100,
+            121,
+            105
+          ],
+          "sha256": "c33f2b99e80d2eda608e0824e51bf690c4c877589db3489fbf997cc628860c2c"
+        },
+        {
+          "name": "mouth-round",
+          "texture": "res://art/portraits/mara-neutral-v1/frames-pixel-v2/mouth-round.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/mara/mouth-round-edit-mask.png",
+          "changed_pixels": 27,
+          "change_bounds": [
+            106,
+            99,
+            112,
+            105
+          ],
+          "sha256": "50a441eaec7296e86c52f05989630cd9980a2080f2e9016bae94f6586c5faf95"
+        }
+      ],
+      "input_layers": {
+        "res://art/concepts/portraits/mara-layered-v1/background.png": "d68fb226983c6aa8631760a1daa044589ae10d0a997d5fec5f7857e32ffa87d4",
+        "res://art/portraits/mara-neutral-v1/base.png": "e86904195e7bf2977459ad77262cab602f7fc95233ffcd6567e91b5c7cc9301d",
+        "res://art/portraits/mara-neutral-v1/eyes-neutral.png": "9fa20998c6201248d72e571f39e159e77a8c0d950f8f11f2dd7778e6d97bf17c",
+        "res://art/portraits/mara-neutral-v1/mouth-neutral.png": "b87dbed36ffa2dafdf2a3f350d7b55de83441529b319c01cde115e8c90d0a4a0",
+        "res://art/portraits/mara-neutral-v1/tunic.png": "6a92a9351df2c7ac4d5f1648b8e2777063d9e54040fced2dd554e17770510d44"
+      }
+    },
+    {
+      "face": "brawler-a",
+      "family": "average-covered-adult-v1",
+      "resource": "res://data/portraits/recruit-roster-v1/brawler-a.tres",
+      "base_sha256": "95ca01a3369113e798a92c3b71456c039797420c854b37dd7b40d00bfc29a1d6",
+      "recipe": {
+        "eyes": [
+          [
+            96,
+            70,
+            7,
+            4
+          ],
+          [
+            122,
+            70,
+            6,
+            4
+          ]
+        ],
+        "lip": [
+          [
+            96,
+            99
+          ],
+          [
+            103,
+            98
+          ],
+          [
+            110,
+            98
+          ],
+          [
+            117,
+            98
+          ]
+        ]
+      },
+      "frames": [
+        {
+          "name": "eyes-half",
+          "texture": "res://art/portraits/recruit-roster-v1/brawler-a/frames-pixel-v2/eyes-half.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/brawler-a/eyes-half-edit-mask.png",
+          "changed_pixels": 88,
+          "change_bounds": [
+            89,
+            67,
+            129,
+            71
+          ],
+          "sha256": "009031168ff4cc4786df5e74af80e2df07f44d7c93bb44404a75a2dcf78afd6e"
+        },
+        {
+          "name": "eyes-closed",
+          "texture": "res://art/portraits/recruit-roster-v1/brawler-a/frames-pixel-v2/eyes-closed.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/brawler-a/eyes-closed-edit-mask.png",
+          "changed_pixels": 134,
+          "change_bounds": [
+            89,
+            67,
+            129,
+            74
+          ],
+          "sha256": "fed9cbe08687f88566ffb35b4fc410c81dd5624d4afa26084813811820e6b0af"
+        },
+        {
+          "name": "mouth-small",
+          "texture": "res://art/portraits/recruit-roster-v1/brawler-a/frames-pixel-v2/mouth-small.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/brawler-a/mouth-small-edit-mask.png",
+          "changed_pixels": 43,
+          "change_bounds": [
+            97,
+            98,
+            117,
+            101
+          ],
+          "sha256": "df09e4c2848c801f4d4a1003cde1f4645f0750f7084002da3d3a3480eb40b88d"
+        },
+        {
+          "name": "mouth-open",
+          "texture": "res://art/portraits/recruit-roster-v1/brawler-a/frames-pixel-v2/mouth-open.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/brawler-a/mouth-open-edit-mask.png",
+          "changed_pixels": 69,
+          "change_bounds": [
+            97,
+            98,
+            117,
+            103
+          ],
+          "sha256": "f068bf4b370488280b65443085878fd00cfc35c68201bd144750ebc46c22febe"
+        }
+      ],
+      "input_layers": {
+        "res://art/portraits/recruit-kit-v1/shared/body.png": "354a59a5cec26c785eb480c2f2652369d2e8b0acfeb3840efc968919c0c0ce9b",
+        "res://art/portraits/recruit-roster-v1/brawler-a/head.png": "8cae1f6382abd16a06459147785479ddc926ea014fda96fba66b7209ebaf4084",
+        "res://art/portraits/recruit-roster-v1/brawler-a/eyes-neutral.png": "410d88cd7bfdfb661ffd8afa3a853a4abe9cee1b39a3b30f5e881acac14401c3",
+        "res://art/portraits/recruit-roster-v1/brawler-a/mouth-neutral.png": "e8bf9a3f08e1f405bd4478c96b299278530333617326e7a5d618f40ab7291306",
+        "res://art/portraits/recruit-kit-v1/shared/jerkin.png": "b3ee6b1d563c33a4caad913e5ad15e1e52564c7e8b2c94b5b45242d154a52fcb"
+      }
+    },
+    {
+      "face": "brawler-b",
+      "family": "average-covered-adult-v1",
+      "resource": "res://data/portraits/recruit-roster-v1/brawler-b.tres",
+      "base_sha256": "f242810c85e6577a6b01c5a2fc857c6df22fbfa55f2479115320c74a128fa692",
+      "recipe": {
+        "eyes": [
+          [
+            96,
+            69,
+            7,
+            4
+          ],
+          [
+            122,
+            69,
+            6,
+            4
+          ]
+        ],
+        "lip": [
+          [
+            98,
+            98
+          ],
+          [
+            105,
+            96
+          ],
+          [
+            111,
+            97
+          ],
+          [
+            118,
+            98
+          ]
+        ]
+      },
+      "frames": [
+        {
+          "name": "eyes-half",
+          "texture": "res://art/portraits/recruit-roster-v1/brawler-b/frames-pixel-v2/eyes-half.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/brawler-b/eyes-half-edit-mask.png",
+          "changed_pixels": 88,
+          "change_bounds": [
+            89,
+            66,
+            129,
+            70
+          ],
+          "sha256": "e0c4201432a3f9bac65100a9aff392573815f1043e5fc44d2aa32a0315f18f12"
+        },
+        {
+          "name": "eyes-closed",
+          "texture": "res://art/portraits/recruit-roster-v1/brawler-b/frames-pixel-v2/eyes-closed.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/brawler-b/eyes-closed-edit-mask.png",
+          "changed_pixels": 137,
+          "change_bounds": [
+            89,
+            66,
+            129,
+            73
+          ],
+          "sha256": "aff43106e173862ae8896515e793606ee95bf689016b78a20d10f9c451490489"
+        },
+        {
+          "name": "mouth-small",
+          "texture": "res://art/portraits/recruit-roster-v1/brawler-b/frames-pixel-v2/mouth-small.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/brawler-b/mouth-small-edit-mask.png",
+          "changed_pixels": 35,
+          "change_bounds": [
+            99,
+            96,
+            118,
+            100
+          ],
+          "sha256": "771d5f44ccb32c791f4fd5e35b710505e0e747821a66819f4d898a0c2126a476"
+        },
+        {
+          "name": "mouth-open",
+          "texture": "res://art/portraits/recruit-roster-v1/brawler-b/frames-pixel-v2/mouth-open.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/brawler-b/mouth-open-edit-mask.png",
+          "changed_pixels": 59,
+          "change_bounds": [
+            99,
+            96,
+            118,
+            102
+          ],
+          "sha256": "9baaccc4ccdc1d0ecac37e794a72c980619e2b857db3c08db924d731f5defcb8"
+        }
+      ],
+      "input_layers": {
+        "res://art/portraits/recruit-kit-v1/shared/body.png": "354a59a5cec26c785eb480c2f2652369d2e8b0acfeb3840efc968919c0c0ce9b",
+        "res://art/portraits/recruit-roster-v1/brawler-b/head.png": "8ab0a9ebb16805705d2aa67f4e6e6b540d7f2caf3dc23527af4a12cfb9d2c80a",
+        "res://art/portraits/recruit-roster-v1/brawler-b/eyes-neutral.png": "f1015873867fede1698e50d4a2a6ce46dd469448961912b1d883d767cbae6434",
+        "res://art/portraits/recruit-roster-v1/brawler-b/mouth-neutral.png": "d14c4470ad086280d36a4ffa891067c21ee78c0bdc0677991c97834fdfc41da2",
+        "res://art/portraits/recruit-kit-v1/shared/jerkin.png": "b3ee6b1d563c33a4caad913e5ad15e1e52564c7e8b2c94b5b45242d154a52fcb"
+      }
+    },
+    {
+      "face": "brawler-c",
+      "family": "average-covered-adult-v1",
+      "resource": "res://data/portraits/recruit-roster-v1/brawler-c.tres",
+      "base_sha256": "459f5c9dfc94e958d2fa18955c4653ccc6e009304f9003093e0df24986036bff",
+      "recipe": {
+        "eyes": [
+          [
+            96,
+            68,
+            7,
+            4
+          ],
+          [
+            122,
+            69,
+            6,
+            4
+          ]
+        ],
+        "lip": [
+          [
+            96,
+            98
+          ],
+          [
+            103,
+            97
+          ],
+          [
+            111,
+            97
+          ],
+          [
+            119,
+            98
+          ]
+        ]
+      },
+      "frames": [
+        {
+          "name": "eyes-half",
+          "texture": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v2/eyes-half.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/brawler-c/eyes-half-edit-mask.png",
+          "changed_pixels": 86,
+          "change_bounds": [
+            89,
+            65,
+            129,
+            70
+          ],
+          "sha256": "83f4dd86ac892da80be547511b4d89c0e7b0018dca8d44cb6d4c51da3226e19d"
+        },
+        {
+          "name": "eyes-closed",
+          "texture": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v2/eyes-closed.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/brawler-c/eyes-closed-edit-mask.png",
+          "changed_pixels": 131,
+          "change_bounds": [
+            89,
+            65,
+            129,
+            73
+          ],
+          "sha256": "d3bbe6dcf09a62c3513f68c53fc32b89770a494a1907398a4dfe22919d967b10"
+        },
+        {
+          "name": "mouth-small",
+          "texture": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v2/mouth-small.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/brawler-c/mouth-small-edit-mask.png",
+          "changed_pixels": 47,
+          "change_bounds": [
+            97,
+            97,
+            119,
+            100
+          ],
+          "sha256": "41a86e2b6926228c8eb0fbb15f0d79efa59a1967df616ef32ff4155353b7a17c"
+        },
+        {
+          "name": "mouth-open",
+          "texture": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v2/mouth-open.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/brawler-c/mouth-open-edit-mask.png",
+          "changed_pixels": 75,
+          "change_bounds": [
+            97,
+            97,
+            119,
+            102
+          ],
+          "sha256": "10d673ae5a2d7a667cd43644582a9f772498400c078b862a15773b72387df1b3"
+        }
+      ],
+      "input_layers": {
+        "res://art/portraits/recruit-kit-v1/shared/body.png": "354a59a5cec26c785eb480c2f2652369d2e8b0acfeb3840efc968919c0c0ce9b",
+        "res://art/portraits/recruit-roster-v1/brawler-c/head.png": "53b11b12fa3b711f3571259fd28c612475f626b430394e1c16caf9783ce923dc",
+        "res://art/portraits/recruit-roster-v1/brawler-c/eyes-neutral.png": "d0135d94fca45392da738997e4f05ec695d6f4dc254b01bf23406d1447b93a83",
+        "res://art/portraits/recruit-roster-v1/brawler-c/mouth-neutral.png": "307dbda4d0301baa027b20fbfd5f5bfc721a6051524cb9b4dcb00f4d1f2e8029",
+        "res://art/portraits/recruit-kit-v1/shared/jerkin.png": "b3ee6b1d563c33a4caad913e5ad15e1e52564c7e8b2c94b5b45242d154a52fcb"
+      }
+    },
+    {
+      "face": "scout-b",
+      "family": "average-covered-adult-v1",
+      "resource": "res://data/portraits/recruit-roster-v1/scout-b.tres",
+      "base_sha256": "78e586a7f1d0d05bd0aaf2579c536cdb6ddf501faa072fc785d1918494196769",
+      "recipe": {
+        "eyes": [
+          [
+            96,
+            70,
+            7,
+            4
+          ],
+          [
+            122,
+            70,
+            6,
+            4
+          ]
+        ],
+        "lip": [
+          [
+            97,
+            99
+          ],
+          [
+            104,
+            98
+          ],
+          [
+            111,
+            99
+          ],
+          [
+            118,
+            99
+          ]
+        ]
+      },
+      "frames": [
+        {
+          "name": "eyes-half",
+          "texture": "res://art/portraits/recruit-roster-v1/scout-b/frames-pixel-v2/eyes-half.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/scout-b/eyes-half-edit-mask.png",
+          "changed_pixels": 88,
+          "change_bounds": [
+            89,
+            67,
+            129,
+            71
+          ],
+          "sha256": "4ad73ae23898f5f14fdb3397462439ffb6113186bb5af522083144b866279ce1"
+        },
+        {
+          "name": "eyes-closed",
+          "texture": "res://art/portraits/recruit-roster-v1/scout-b/frames-pixel-v2/eyes-closed.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/scout-b/eyes-closed-edit-mask.png",
+          "changed_pixels": 136,
+          "change_bounds": [
+            89,
+            67,
+            129,
+            74
+          ],
+          "sha256": "f9d61aafde0570b7f9bf0cc93993ff1def1a661f11f5fa689dbc4597f8df9132"
+        },
+        {
+          "name": "mouth-small",
+          "texture": "res://art/portraits/recruit-roster-v1/scout-b/frames-pixel-v2/mouth-small.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/scout-b/mouth-small-edit-mask.png",
+          "changed_pixels": 43,
+          "change_bounds": [
+            98,
+            98,
+            118,
+            102
+          ],
+          "sha256": "55f74bb43e7ab5f856568e5ceabbfee64826609490baa03c64bf0215d69fa8c3"
+        },
+        {
+          "name": "mouth-open",
+          "texture": "res://art/portraits/recruit-roster-v1/scout-b/frames-pixel-v2/mouth-open.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/scout-b/mouth-open-edit-mask.png",
+          "changed_pixels": 69,
+          "change_bounds": [
+            98,
+            98,
+            118,
+            104
+          ],
+          "sha256": "70a5d4ffe09ff7d26b101a78fa926e442f0138e69370dae54561ec9767b608bc"
+        }
+      ],
+      "input_layers": {
+        "res://art/portraits/recruit-kit-v1/shared/body.png": "354a59a5cec26c785eb480c2f2652369d2e8b0acfeb3840efc968919c0c0ce9b",
+        "res://art/portraits/recruit-roster-v1/scout-b/head.png": "6d02aa795388abf7c5760439239b27d7a6086950f14d3c53a26b262f8237596a",
+        "res://art/portraits/recruit-roster-v1/scout-b/eyes-neutral.png": "60e57c6f8d5463b5f81e75dedad75b883c0eef26c9a35e783cdccd129f41450f",
+        "res://art/portraits/recruit-roster-v1/scout-b/mouth-neutral.png": "2a09ba474d784b2db07b80621537aa93e63650214be7681c0ad069c1e7b055d7",
+        "res://art/portraits/recruit-kit-v1/shared/jerkin.png": "b3ee6b1d563c33a4caad913e5ad15e1e52564c7e8b2c94b5b45242d154a52fcb"
+      }
+    },
+    {
+      "face": "scout-c",
+      "family": "average-covered-adult-v1",
+      "resource": "res://data/portraits/recruit-roster-v1/scout-c.tres",
+      "base_sha256": "cefcf6852daa1ac30328323a49447e6c0bdead639703c3eb4fa63ee5ccaaa618",
+      "recipe": {
+        "eyes": [
+          [
+            96,
+            68,
+            7,
+            4
+          ],
+          [
+            122,
+            69,
+            6,
+            4
+          ]
+        ],
+        "lip": [
+          [
+            96,
+            98
+          ],
+          [
+            103,
+            98
+          ],
+          [
+            111,
+            98
+          ],
+          [
+            118,
+            98
+          ]
+        ]
+      },
+      "frames": [
+        {
+          "name": "eyes-half",
+          "texture": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v2/eyes-half.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/scout-c/eyes-half-edit-mask.png",
+          "changed_pixels": 87,
+          "change_bounds": [
+            89,
+            65,
+            129,
+            70
+          ],
+          "sha256": "49486d4421b0fe0739a2ca17cd8113cba160618dff9ffb90588059d23667f38d"
+        },
+        {
+          "name": "eyes-closed",
+          "texture": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v2/eyes-closed.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/scout-c/eyes-closed-edit-mask.png",
+          "changed_pixels": 129,
+          "change_bounds": [
+            89,
+            65,
+            129,
+            72
+          ],
+          "sha256": "c8d83855cb5c7152a5bf9b6e4c245c66fe721bcc22082702b5889f62518808da"
+        },
+        {
+          "name": "mouth-small",
+          "texture": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v2/mouth-small.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/scout-c/mouth-small-edit-mask.png",
+          "changed_pixels": 45,
+          "change_bounds": [
+            97,
+            98,
+            118,
+            101
+          ],
+          "sha256": "af67323bada6a155ccc040067d83fbb24a87c8a5f122ce8aacf01a3d5677276e"
+        },
+        {
+          "name": "mouth-open",
+          "texture": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v2/mouth-open.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/scout-c/mouth-open-edit-mask.png",
+          "changed_pixels": 73,
+          "change_bounds": [
+            97,
+            98,
+            118,
+            103
+          ],
+          "sha256": "0c317d52dabccd55530fd08331fe3717af76f671db4078d19955a837519c2be7"
+        }
+      ],
+      "input_layers": {
+        "res://art/portraits/recruit-kit-v1/shared/body.png": "354a59a5cec26c785eb480c2f2652369d2e8b0acfeb3840efc968919c0c0ce9b",
+        "res://art/portraits/recruit-roster-v1/scout-c/head.png": "bcdb9af7775ecf230f0fa2532f98dbb5d1f74e473fbc4d41963dce265bdeb658",
+        "res://art/portraits/recruit-roster-v1/scout-c/eyes-neutral.png": "91e0b3cb5b80bc01fc73e53398938ff54e6e14d59c50fecf214236da48d32abd",
+        "res://art/portraits/recruit-roster-v1/scout-c/mouth-neutral.png": "1744019e22ddc4e8412bc3571d7652881739af6c6feab7112c244b8b6dce2d8a",
+        "res://art/portraits/recruit-kit-v1/shared/jerkin.png": "b3ee6b1d563c33a4caad913e5ad15e1e52564c7e8b2c94b5b45242d154a52fcb"
+      }
+    },
+    {
+      "face": "warden-b",
+      "family": "average-covered-adult-v1",
+      "resource": "res://data/portraits/recruit-roster-v1/warden-b.tres",
+      "base_sha256": "ecc6301363ef001342761d0e0aac9675d725710f0788ebc35a4d6019f6cd745a",
+      "recipe": {
+        "eyes": [
+          [
+            96,
+            68,
+            7,
+            4
+          ],
+          [
+            122,
+            69,
+            6,
+            4
+          ]
+        ],
+        "lip": [
+          [
+            97,
+            97
+          ],
+          [
+            103,
+            96
+          ],
+          [
+            110,
+            96
+          ],
+          [
+            118,
+            97
+          ]
+        ]
+      },
+      "frames": [
+        {
+          "name": "eyes-half",
+          "texture": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v2/eyes-half.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/warden-b/eyes-half-edit-mask.png",
+          "changed_pixels": 86,
+          "change_bounds": [
+            89,
+            65,
+            129,
+            70
+          ],
+          "sha256": "7d4c61eec81baca6255ba9192dd63e4ce0ac2b90671e24a7b6b82a98c9d59c69"
+        },
+        {
+          "name": "eyes-closed",
+          "texture": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v2/eyes-closed.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/warden-b/eyes-closed-edit-mask.png",
+          "changed_pixels": 127,
+          "change_bounds": [
+            89,
+            65,
+            129,
+            73
+          ],
+          "sha256": "2af85ca707b5919d9ae6198332edc72ddb815ef357e8b94b80cce2221d469da3"
+        },
+        {
+          "name": "mouth-small",
+          "texture": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v2/mouth-small.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/warden-b/mouth-small-edit-mask.png",
+          "changed_pixels": 41,
+          "change_bounds": [
+            98,
+            96,
+            118,
+            99
+          ],
+          "sha256": "011c029fa825da486ef7d846dbe35d2cf5005027b8a09be7ccf02dcda0fb7ca7"
+        },
+        {
+          "name": "mouth-open",
+          "texture": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v2/mouth-open.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/warden-b/mouth-open-edit-mask.png",
+          "changed_pixels": 66,
+          "change_bounds": [
+            98,
+            96,
+            118,
+            101
+          ],
+          "sha256": "b3c1ca0504ebcad12828d41c30003b6a5f0881bb937486f8e1f2a285271423c1"
+        }
+      ],
+      "input_layers": {
+        "res://art/portraits/recruit-kit-v1/shared/body.png": "354a59a5cec26c785eb480c2f2652369d2e8b0acfeb3840efc968919c0c0ce9b",
+        "res://art/portraits/recruit-roster-v1/warden-b/head.png": "b47bd01def2624582d43a988093b25bd325cadee3cefa64b1777a9045440b245",
+        "res://art/portraits/recruit-roster-v1/warden-b/eyes-neutral.png": "d54a6a0dcb673a00cf18fc397c18ea9a6932df72095642fb88c094f6e4b6041b",
+        "res://art/portraits/recruit-roster-v1/warden-b/mouth-neutral.png": "2458bf457ac91959b202fdbeb2fda765893a50cb1f75a09465b5fe1e7d0e35df",
+        "res://art/portraits/recruit-kit-v1/shared/jerkin.png": "b3ee6b1d563c33a4caad913e5ad15e1e52564c7e8b2c94b5b45242d154a52fcb"
+      }
+    },
+    {
+      "face": "warden-c",
+      "family": "average-covered-adult-v1",
+      "resource": "res://data/portraits/recruit-roster-v1/warden-c.tres",
+      "base_sha256": "f227a703b55c21e7918c827b0053afa6eaaa441e9f56e8e5f289039dd483e8e4",
+      "recipe": {
+        "eyes": [
+          [
+            96,
+            71,
+            7,
+            4
+          ],
+          [
+            122,
+            71,
+            6,
+            4
+          ]
+        ],
+        "lip": [
+          [
+            95,
+            100
+          ],
+          [
+            102,
+            99
+          ],
+          [
+            111,
+            99
+          ],
+          [
+            119,
+            100
+          ]
+        ]
+      },
+      "frames": [
+        {
+          "name": "eyes-half",
+          "texture": "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v2/eyes-half.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/warden-c/eyes-half-edit-mask.png",
+          "changed_pixels": 86,
+          "change_bounds": [
+            89,
+            68,
+            129,
+            72
+          ],
+          "sha256": "ceb0e5e603f7b7068da4cc8ac57462bc0039bb609efa29b0dcfe1bfd5c779489"
+        },
+        {
+          "name": "eyes-closed",
+          "texture": "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v2/eyes-closed.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/warden-c/eyes-closed-edit-mask.png",
+          "changed_pixels": 129,
+          "change_bounds": [
+            89,
+            68,
+            129,
+            75
+          ],
+          "sha256": "5cca666885c4b622f66731b4d3767dafdb175a93abd3940e3e29a9a029f6997c"
+        },
+        {
+          "name": "mouth-small",
+          "texture": "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v2/mouth-small.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/warden-c/mouth-small-edit-mask.png",
+          "changed_pixels": 47,
+          "change_bounds": [
+            96,
+            99,
+            119,
+            102
+          ],
+          "sha256": "9470ee5b3a678c8fc922abfa86c0d8f1c79b00104f55f59aaee520ba4e8b3422"
+        },
+        {
+          "name": "mouth-open",
+          "texture": "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v2/mouth-open.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/warden-c/mouth-open-edit-mask.png",
+          "changed_pixels": 77,
+          "change_bounds": [
+            96,
+            99,
+            119,
+            104
+          ],
+          "sha256": "1758a8b4739bf01def7323f75a1d9b456fa562ec5ae73b7bb6889acf8061d92e"
+        }
+      ],
+      "input_layers": {
+        "res://art/portraits/recruit-kit-v1/shared/body.png": "354a59a5cec26c785eb480c2f2652369d2e8b0acfeb3840efc968919c0c0ce9b",
+        "res://art/portraits/recruit-roster-v1/warden-c/head.png": "9df5f1b577daca43b5503d9b8d58584aaf0ee5f67c634f2ee01d37b8e0b0acff",
+        "res://art/portraits/recruit-roster-v1/warden-c/eyes-neutral.png": "50babadc3a95739e232d864d38a768aa09d86650c4904d74a7dfcf4167e85047",
+        "res://art/portraits/recruit-roster-v1/warden-c/mouth-neutral.png": "b29562a0a70ced860d4c4bb93893e5c462da9cfeac4766c87c2cb0d3eff9cad2",
+        "res://art/portraits/recruit-kit-v1/shared/jerkin.png": "b3ee6b1d563c33a4caad913e5ad15e1e52564c7e8b2c94b5b45242d154a52fcb"
+      }
+    },
+    {
+      "face": "scout-a",
+      "family": "average-covered-adult-v1",
+      "resource": "res://data/portraits/recruits-v1/scout-a.tres",
+      "base_sha256": "eb723fe1b4f08081b8d170ed31a00b987cb509231f3322b20df7efe4a5fbc793",
+      "recipe": {
+        "eyes": [
+          [
+            96,
+            70,
+            7,
+            4
+          ],
+          [
+            122,
+            70,
+            6,
+            4
+          ]
+        ],
+        "lip": [
+          [
+            97,
+            98
+          ],
+          [
+            104,
+            97
+          ],
+          [
+            111,
+            98
+          ],
+          [
+            118,
+            98
+          ]
+        ]
+      },
+      "frames": [
+        {
+          "name": "eyes-half",
+          "texture": "res://art/portraits/recruit-kit-v1/scout-a/frames-pixel-v2/eyes-half.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/scout-a/eyes-half-edit-mask.png",
+          "changed_pixels": 85,
+          "change_bounds": [
+            90,
+            67,
+            129,
+            71
+          ],
+          "sha256": "a1d35563ec391f00d3dbade6c303842d46d4de35ffea7af53d9f3a696380b250"
+        },
+        {
+          "name": "eyes-closed",
+          "texture": "res://art/portraits/recruit-kit-v1/scout-a/frames-pixel-v2/eyes-closed.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/scout-a/eyes-closed-edit-mask.png",
+          "changed_pixels": 129,
+          "change_bounds": [
+            90,
+            67,
+            129,
+            74
+          ],
+          "sha256": "fe8f829ef3a1d685981eeadda58c3c6cef618856e2cba3846574d6263e6fe6c2"
+        },
+        {
+          "name": "mouth-small",
+          "texture": "res://art/portraits/recruit-kit-v1/scout-a/frames-pixel-v2/mouth-small.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/scout-a/mouth-small-edit-mask.png",
+          "changed_pixels": 41,
+          "change_bounds": [
+            98,
+            97,
+            118,
+            101
+          ],
+          "sha256": "5fe92c23b9897ebc19a9d7d9437db1662370845dd2eacd2bba005d6552f25c0f"
+        },
+        {
+          "name": "mouth-open",
+          "texture": "res://art/portraits/recruit-kit-v1/scout-a/frames-pixel-v2/mouth-open.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/scout-a/mouth-open-edit-mask.png",
+          "changed_pixels": 67,
+          "change_bounds": [
+            98,
+            97,
+            118,
+            103
+          ],
+          "sha256": "5b018ee896b832978b12ffdcc37a5fef5c648271ffdf16cf8ea3cc8607f0ba35"
+        }
+      ],
+      "input_layers": {
+        "res://art/portraits/recruit-kit-v1/shared/body.png": "354a59a5cec26c785eb480c2f2652369d2e8b0acfeb3840efc968919c0c0ce9b",
+        "res://art/portraits/recruit-kit-v1/scout-a/head.png": "dae0d4c6ae6ab1751ded835299d446a15ef42672d4d5a6ac82a165a95080218f",
+        "res://art/portraits/recruit-kit-v1/scout-a/eyes-neutral.png": "eaef6d44f8d58fa101b95e454ae6e53cf2a9d964a59ee9050c64b5d9ac571f3a",
+        "res://art/portraits/recruit-kit-v1/scout-a/mouth-neutral.png": "3e8879eba517ef7d71454b431a42b57a80310d70477129adbd6ef2f02d41466c",
+        "res://art/portraits/recruit-kit-v1/shared/jerkin.png": "b3ee6b1d563c33a4caad913e5ad15e1e52564c7e8b2c94b5b45242d154a52fcb"
+      }
+    },
+    {
+      "face": "warden-a",
+      "family": "average-covered-adult-v1",
+      "resource": "res://data/portraits/recruits-v1/warden-a.tres",
+      "base_sha256": "0c1ce2238e75b7e74dbe958e81f346d11b0a6fc5fdfd09df6155ece6d15243ce",
+      "recipe": {
+        "eyes": [
+          [
+            96,
+            71,
+            7,
+            4
+          ],
+          [
+            122,
+            71,
+            6,
+            4
+          ]
+        ],
+        "lip": [
+          [
+            96,
+            100
+          ],
+          [
+            102,
+            99
+          ],
+          [
+            110,
+            99
+          ],
+          [
+            118,
+            100
+          ]
+        ]
+      },
+      "frames": [
+        {
+          "name": "eyes-half",
+          "texture": "res://art/portraits/recruit-kit-v1/warden-a/frames-pixel-v2/eyes-half.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/warden-a/eyes-half-edit-mask.png",
+          "changed_pixels": 86,
+          "change_bounds": [
+            89,
+            68,
+            129,
+            72
+          ],
+          "sha256": "960c810bfece1042eeed1fa9b5c90212015c780c45b962714069fd219ae8e45a"
+        },
+        {
+          "name": "eyes-closed",
+          "texture": "res://art/portraits/recruit-kit-v1/warden-a/frames-pixel-v2/eyes-closed.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/warden-a/eyes-closed-edit-mask.png",
+          "changed_pixels": 123,
+          "change_bounds": [
+            89,
+            68,
+            129,
+            75
+          ],
+          "sha256": "c70444042ca6d98c97fa1cf9a9ed49f61c6c194ea3c76b70915b0f45d4400495"
+        },
+        {
+          "name": "mouth-small",
+          "texture": "res://art/portraits/recruit-kit-v1/warden-a/frames-pixel-v2/mouth-small.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/warden-a/mouth-small-edit-mask.png",
+          "changed_pixels": 42,
+          "change_bounds": [
+            97,
+            99,
+            116,
+            102
+          ],
+          "sha256": "9195d2b4e1c1fad6c2ac5cd45d87a123d157a033fb5759ecd3bf325c197043c1"
+        },
+        {
+          "name": "mouth-open",
+          "texture": "res://art/portraits/recruit-kit-v1/warden-a/frames-pixel-v2/mouth-open.png",
+          "mask": "res://art/source/portrait-pixel-repair-v1/warden-a/mouth-open-edit-mask.png",
+          "changed_pixels": 70,
+          "change_bounds": [
+            97,
+            99,
+            117,
+            104
+          ],
+          "sha256": "5361811d2db13197ccf81516f55031d85db4bcd148d34531c106696cd5ae3e2c"
+        }
+      ],
+      "input_layers": {
+        "res://art/portraits/recruit-kit-v1/shared/body.png": "354a59a5cec26c785eb480c2f2652369d2e8b0acfeb3840efc968919c0c0ce9b",
+        "res://art/portraits/recruit-kit-v1/warden-a/head.png": "81960da12e5690949a596dc535e6b2d607651318a0d80e09cfeba9266af1eb4e",
+        "res://art/portraits/recruit-kit-v1/warden-a/eyes-neutral.png": "64175db99eed10d23677d950b4e193823f12036f6dbdcb5359d22bc90a612170",
+        "res://art/portraits/recruit-kit-v1/warden-a/mouth-neutral.png": "222f47ab3f0b7ba05ac88d95c223d53db0948a70b92946be458b472bba0c2bcb",
+        "res://art/portraits/recruit-kit-v1/shared/jerkin.png": "b3ee6b1d563c33a4caad913e5ad15e1e52564c7e8b2c94b5b45242d154a52fcb"
+      }
+    }
+  ],
+  "failures": []
+}

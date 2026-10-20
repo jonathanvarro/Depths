@@ -1,0 +1,13 @@
+{
+  "checks": 417,
+  "faces": 12,
+  "frames": 51,
+  "changed_pixels_per_frame": [
+    25,
+    137
+  ],
+  "resting_sources_byte_identical_to": "3d1ee08",
+  "outside_fitted_lid_lip_masks_changed_pixels": 0,
+  "native_palette_preserved": true,
+  "failures": []
+}

@@ -1,0 +1,101 @@
+{
+  "face": "warden-c",
+  "family": "average-covered-adult-v1",
+  "resource": "res://data/portraits/recruit-roster-v1/warden-c.tres",
+  "base_sha256": "f227a703b55c21e7918c827b0053afa6eaaa441e9f56e8e5f289039dd483e8e4",
+  "recipe": {
+    "eyes": [
+      [
+        96,
+        71,
+        7,
+        4
+      ],
+      [
+        122,
+        71,
+        6,
+        4
+      ]
+    ],
+    "lip": [
+      [
+        95,
+        100
+      ],
+      [
+        102,
+        99
+      ],
+      [
+        111,
+        99
+      ],
+      [
+        119,
+        100
+      ]
+    ]
+  },
+  "frames": [
+    {
+      "name": "eyes-half",
+      "texture": "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v2/eyes-half.png",
+      "mask": "res://art/source/portrait-pixel-repair-v1/warden-c/eyes-half-edit-mask.png",
+      "changed_pixels": 86,
+      "change_bounds": [
+        89,
+        68,
+        129,
+        72
+      ],
+      "sha256": "ceb0e5e603f7b7068da4cc8ac57462bc0039bb609efa29b0dcfe1bfd5c779489"
+    },
+    {
+      "name": "eyes-closed",
+      "texture": "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v2/eyes-closed.png",
+      "mask": "res://art/source/portrait-pixel-repair-v1/warden-c/eyes-closed-edit-mask.png",
+      "changed_pixels": 129,
+      "change_bounds": [
+        89,
+        68,
+        129,
+        75
+      ],
+      "sha256": "5cca666885c4b622f66731b4d3767dafdb175a93abd3940e3e29a9a029f6997c"
+    },
+    {
+      "name": "mouth-small",
+      "texture": "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v2/mouth-small.png",
+      "mask": "res://art/source/portrait-pixel-repair-v1/warden-c/mouth-small-edit-mask.png",
+      "changed_pixels": 47,
+      "change_bounds": [
+        96,
+        99,
+        119,
+        102
+      ],
+      "sha256": "9470ee5b3a678c8fc922abfa86c0d8f1c79b00104f55f59aaee520ba4e8b3422"
+    },
+    {
+      "name": "mouth-open",
+      "texture": "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v2/mouth-open.png",
+      "mask": "res://art/source/portrait-pixel-repair-v1/warden-c/mouth-open-edit-mask.png",
+      "changed_pixels": 77,
+      "change_bounds": [
+        96,
+        99,
+        119,
+        104
+      ],
+      "sha256": "1758a8b4739bf01def7323f75a1d9b456fa562ec5ae73b7bb6889acf8061d92e"
+    }
+  ],
+  "input_layers": {
+    "res://art/portraits/recruit-kit-v1/shared/body.png": "354a59a5cec26c785eb480c2f2652369d2e8b0acfeb3840efc968919c0c0ce9b",
+    "res://art/portraits/recruit-roster-v1/warden-c/head.png": "9df5f1b577daca43b5503d9b8d58584aaf0ee5f67c634f2ee01d37b8e0b0acff",
+    "res://art/portraits/recruit-roster-v1/warden-c/eyes-neutral.png": "50babadc3a95739e232d864d38a768aa09d86650c4904d74a7dfcf4167e85047",
+    "res://art/portraits/recruit-roster-v1/warden-c/mouth-neutral.png": "b29562a0a70ced860d4c4bb93893e5c462da9cfeac4766c87c2cb0d3eff9cad2",
+    "res://art/portraits/recruit-kit-v1/shared/jerkin.png": "b3ee6b1d563c33a4caad913e5ad15e1e52564c7e8b2c94b5b45242d154a52fcb"
+  }
+}

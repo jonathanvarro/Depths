@@ -36,7 +36,7 @@ The browser uses isolated example inventory, oil/health and loadouts; showing th
 
 ## Portrait coherence
 
-**Follow-up #121:** the owner found eye/mouth visual mismatch when stepping frames. The checks below establish registration dimensions/playback, not a visually identical skin/anatomy fit. [Rig separation and paused inspection](portrait-rig-families.md) records the correction in progress; do not treat #120 as visual acceptance of those facial patches.
+**Follow-up #121:** the owner found eye/mouth visual mismatch when stepping frames. The checks below establish registration dimensions/playback, not a visually identical skin/anatomy fit. [Rig separation, paused inspection and the completed pixel repair](portrait-rig-families.md) supersede those original facial patches: 51 drawings now preserve each resting face outside fitted lid/lip masks.
 
 [Animation preview](../art/concepts/portrait-coherence-v1/motion.gif) · [hero frame registration](../art/concepts/portrait-coherence-v1/registration-0.png)
 

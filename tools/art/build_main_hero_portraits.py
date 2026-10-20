@@ -90,6 +90,7 @@ def main():
         ext+=['','[resource]','script = ExtResource("script")','rig_kind = "Unique"','rig_family = &"unique-'+name+'-v1"','face_id = &"'+name+'"','background = ExtResource("background")','body = ExtResource("0")','head = ExtResource("1")','eyes = ExtResource("2")','mouth = ExtResource("3")',
               'blink_frames = Array[Texture2D]([ExtResource("4"),ExtResource("5")])','talk_frames = Array[Texture2D]([ExtResource("6"),ExtResource("7"),ExtResource("8")])',
               'conditions = {'+', '.join('"'+n+'": ExtResource("'+str(i+9)+'")' for i,n in enumerate(kit.CONDITIONS))+'}', 'light_shadow = ExtResource("13")','light_highlight = ExtResource("14")']
+        ext=kit.prefer_pixel_frames(ext)
         write(ROOT/'data/portraits'/(name+'.tres'),'\n'.join(ext)+'\n')
         layers=[('Neutral coordinated body',folder/'body.png',True),('Neutral head and neck',folder/'head.png',True),('Eyes - neutral',folder/'eyes-neutral.png',True),('Mouth - neutral',folder/'mouth-neutral.png',True)]
         layers += [(n,folder/(n+'.png'),False) for n in names[4:]]

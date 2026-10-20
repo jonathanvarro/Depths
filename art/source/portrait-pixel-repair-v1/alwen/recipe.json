@@ -1,0 +1,114 @@
+{
+  "face": "alwen",
+  "family": "unique-alwen-v1",
+  "resource": "res://data/portraits/alwen.tres",
+  "base_sha256": "dd0e8657c3976cf0a7077ca533944057892fdac4c726380273b8a9fa1d640475",
+  "recipe": {
+    "eyes": [
+      [
+        100,
+        68,
+        6,
+        3
+      ],
+      [
+        123,
+        68,
+        6,
+        3
+      ]
+    ],
+    "lip": [
+      [
+        104,
+        96
+      ],
+      [
+        110,
+        95
+      ],
+      [
+        117,
+        95
+      ],
+      [
+        122,
+        96
+      ]
+    ]
+  },
+  "frames": [
+    {
+      "name": "eyes-half",
+      "texture": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v2/eyes-half.png",
+      "mask": "res://art/source/portrait-pixel-repair-v1/alwen/eyes-half-edit-mask.png",
+      "changed_pixels": 55,
+      "change_bounds": [
+        94,
+        66,
+        130,
+        69
+      ],
+      "sha256": "b236b19fbe84c0ad4ecd3ba533816af9beb7c92ecc674b8717688e8c57e89915"
+    },
+    {
+      "name": "eyes-closed",
+      "texture": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v2/eyes-closed.png",
+      "mask": "res://art/source/portrait-pixel-repair-v1/alwen/eyes-closed-edit-mask.png",
+      "changed_pixels": 80,
+      "change_bounds": [
+        94,
+        66,
+        130,
+        71
+      ],
+      "sha256": "c400f49399ffd6c8a42b5c6729b73b622ce01a93656046595365986c3cd9b68d"
+    },
+    {
+      "name": "mouth-small",
+      "texture": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v2/mouth-small.png",
+      "mask": "res://art/source/portrait-pixel-repair-v1/alwen/mouth-small-edit-mask.png",
+      "changed_pixels": 37,
+      "change_bounds": [
+        105,
+        95,
+        122,
+        98
+      ],
+      "sha256": "e32cb374b3865b28f4129c95b79ca2dadd2d00f91fb2ec120c27b6c735e509fb"
+    },
+    {
+      "name": "mouth-open",
+      "texture": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v2/mouth-open.png",
+      "mask": "res://art/source/portrait-pixel-repair-v1/alwen/mouth-open-edit-mask.png",
+      "changed_pixels": 60,
+      "change_bounds": [
+        105,
+        95,
+        122,
+        100
+      ],
+      "sha256": "34e38189c7f3d3019f6c13c06507f0f7681eabed39176ba414c7ed3021293c20"
+    },
+    {
+      "name": "mouth-round",
+      "texture": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v2/mouth-round.png",
+      "mask": "res://art/source/portrait-pixel-repair-v1/alwen/mouth-round-edit-mask.png",
+      "changed_pixels": 25,
+      "change_bounds": [
+        110,
+        94,
+        117,
+        99
+      ],
+      "sha256": "c81f5948429b8240259571b06125e4227b81bb37f6a150e843b46ff80f5d6612"
+    }
+  ],
+  "input_layers": {
+    "res://art/concepts/portraits/mara-layered-v1/background.png": "d68fb226983c6aa8631760a1daa044589ae10d0a997d5fec5f7857e32ffa87d4",
+    "res://art/portraits/main-heroes-v1/alwen/body.png": "b4d156a37130b136fc88c6ae7c8eeed27e00bb2b862bde05c6893168c898fed3",
+    "res://art/portraits/main-heroes-v1/alwen/head.png": "14006aa0d31065815614743257fcb9261422b396aab55b915d4e9eaae9635fa8",
+    "res://art/portraits/main-heroes-v1/alwen/eyes-neutral.png": "98dd71ce9583a47a0efc5f3739433eaeaf9b98218488a89f048da52bb57b7a03",
+    "res://art/portraits/main-heroes-v1/alwen/mouth-neutral.png": "2ed7d6f5d2dd159e87bfe4e4f961c36f79f34859552c0fcd100b72ba3b42e3a7"
+  }
+}

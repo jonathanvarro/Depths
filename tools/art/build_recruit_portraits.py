@@ -5,6 +5,7 @@ import hashlib
 import json
 import zipfile
 import xml.etree.ElementTree as ET
+import re
 
 ROOT=Path(__file__).resolve().parents[2]
 SOURCE=ROOT/'art/source/recruit-kit-v1'
@@ -96,6 +97,34 @@ def add_lighting(lines,directory):
     lines[index:index]=declarations+['']
     lines += ['light_shadow = ExtResource("light_shadow")','light_highlight = ExtResource("light_highlight")']
 
+def prefer_pixel_frames(lines):
+    """Retain approved #121 pixel repairs when rebuilding older portrait sources.
+
+    A changed resting source invalidates the fit; never silently reuse its old
+    repaired animation on newly generated anatomy.
+    """
+    manifest=ROOT/'art/concepts/portrait-pixel-repair-v1/pixel-validation.json'
+    if not manifest.exists():return lines
+    records=json.loads(manifest.read_text(encoding='utf-8'))['faces']
+    by_texture={frame['texture']:(record,frame) for record in records for frame in record['frames']}
+    result=[];checked=set()
+    for line in lines:
+        match=re.search(r'path="(res://[^"]+/(?:eyes-half|eyes-closed|mouth-small|mouth-open|mouth-round)\.png)"',line)
+        if match:
+            original=match[1];path=ROOT/original.removeprefix('res://')
+            candidate=path if path.parent.name=='frames-pixel-v2' else path.parent/'frames-pixel-v2'/path.name
+            key='res://'+candidate.relative_to(ROOT).as_posix()
+            if key in by_texture:
+                record,frame=by_texture[key]
+                if record['face'] not in checked:
+                    for source,expected in record['input_layers'].items():
+                        assert hashlib.sha256((ROOT/source.removeprefix('res://')).read_bytes()).hexdigest()==expected, record['face']+': resting art changed; re-fit pixel animation before export'
+                    checked.add(record['face'])
+                assert hashlib.sha256(candidate.read_bytes()).hexdigest()==frame['sha256'],candidate
+                line=line.replace(original,key)
+        result.append(line)
+    return result
+
 def make_resource(character,expression):
     names=['shared/body.png',character+'/head.png',character+'/eyes-'+expression+'.png',
         character+'/mouth-'+expression+'.png','shared/jerkin.png']
@@ -113,6 +142,7 @@ def make_resource(character,expression):
         lines+=['blink_frames = Array[Texture2D]([ExtResource("5"), ExtResource("6")])',
             'talk_frames = Array[Texture2D]([ExtResource("7"), ExtResource("8")])']
     add_lighting(lines,'res://art/portraits/recruit-kit-v1/'+character)
+    lines=prefer_pixel_frames(lines)
     (DATA/(character+('' if expression=='neutral' else '-'+expression)+'.tres')).write_text('\n'.join(lines)+'\n',encoding='utf-8',newline='\n')
 
 def main():

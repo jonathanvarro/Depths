@@ -1,0 +1,119 @@
+{
+  "face": "corin",
+  "family": "unique-corin-v1",
+  "resource": "res://data/portraits/corin.tres",
+  "base_sha256": "5650ba21ec08bb5721c4366b965da18cbf71ec47e57d2972845d8f33fa8043e7",
+  "recipe": {
+    "eyes": [
+      [
+        95,
+        66,
+        7,
+        3
+      ],
+      [
+        122,
+        69,
+        6,
+        3
+      ]
+    ],
+    "lip": [
+      [
+        94,
+        90
+      ],
+      [
+        100,
+        91
+      ],
+      [
+        106,
+        93
+      ],
+      [
+        111,
+        94
+      ],
+      [
+        116,
+        94
+      ]
+    ],
+    "missing_tooth": true
+  },
+  "frames": [
+    {
+      "name": "eyes-half",
+      "texture": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v2/eyes-half.png",
+      "mask": "res://art/source/portrait-pixel-repair-v1/corin/eyes-half-edit-mask.png",
+      "changed_pixels": 51,
+      "change_bounds": [
+        88,
+        65,
+        129,
+        70
+      ],
+      "sha256": "ed464806688aec5e59676eefd2d116484ddccb11b976055ecab14624a4e11fea"
+    },
+    {
+      "name": "eyes-closed",
+      "texture": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v2/eyes-closed.png",
+      "mask": "res://art/source/portrait-pixel-repair-v1/corin/eyes-closed-edit-mask.png",
+      "changed_pixels": 78,
+      "change_bounds": [
+        88,
+        65,
+        129,
+        72
+      ],
+      "sha256": "f0b0b805b867fdf9213702593ec80b17afef9d4c0489ed63f0a1e4de877cf39d"
+    },
+    {
+      "name": "mouth-small",
+      "texture": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v2/mouth-small.png",
+      "mask": "res://art/source/portrait-pixel-repair-v1/corin/mouth-small-edit-mask.png",
+      "changed_pixels": 45,
+      "change_bounds": [
+        95,
+        90,
+        116,
+        97
+      ],
+      "sha256": "d75633ae26b40089e64934ec1534de73c4d17d2dad9bbf876116fc6ad4c3d05e"
+    },
+    {
+      "name": "mouth-open",
+      "texture": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v2/mouth-open.png",
+      "mask": "res://art/source/portrait-pixel-repair-v1/corin/mouth-open-edit-mask.png",
+      "changed_pixels": 73,
+      "change_bounds": [
+        95,
+        90,
+        116,
+        99
+      ],
+      "sha256": "693f00e2c39ec826a1b96965e60b6d03a83f5563e8f887964bfee377c8275a6e"
+    },
+    {
+      "name": "mouth-round",
+      "texture": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v2/mouth-round.png",
+      "mask": "res://art/source/portrait-pixel-repair-v1/corin/mouth-round-edit-mask.png",
+      "changed_pixels": 28,
+      "change_bounds": [
+        102,
+        92,
+        109,
+        98
+      ],
+      "sha256": "0555bf381789023adf0c7c261a883c5dbb1b86a6ae18eeff12afa5564432fdb6"
+    }
+  ],
+  "input_layers": {
+    "res://art/concepts/portraits/mara-layered-v1/background.png": "d68fb226983c6aa8631760a1daa044589ae10d0a997d5fec5f7857e32ffa87d4",
+    "res://art/portraits/main-heroes-v1/corin/body.png": "4cfdf93b4d67bf00cbcbdeafb423d92091b1f97048d5b64599d41d355c221122",
+    "res://art/portraits/main-heroes-v1/corin/head.png": "a25df55b9517970c9fc702282c25a2892b4cd165960d335d246d7c573a7c1810",
+    "res://art/portraits/main-heroes-v1/corin/eyes-neutral.png": "fa6c625ddecb6f45ca694378fc85956033705c4828fc076b1a2ee6ef3637de19",
+    "res://art/portraits/main-heroes-v1/corin/mouth-neutral.png": "1b471f77f9036a58c0d59a30d27e1b478f3ca82a5def687fff004e4c9013ef93"
+  }
+}
