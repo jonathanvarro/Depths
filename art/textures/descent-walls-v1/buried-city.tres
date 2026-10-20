@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3]
+
+[ext_resource type="Texture2D" path="res://art/textures/descent-walls-v1/buried-city.png" id="wall"]
+
+[resource]
+resource_name = "Descent walls v1 - Buried city"
+texture_filter = 0
+texture_repeat = true
+albedo_texture = ExtResource("wall")
+roughness = 1.0

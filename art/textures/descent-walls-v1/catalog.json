@@ -1,0 +1,132 @@
+{
+  "issue": 126,
+  "native_size": [
+    128,
+    128
+  ],
+  "palette_limit": 32,
+  "method": "BOX downsample; six-pixel symmetric wrap apron;32-colour median cut, no dithering.",
+  "assignment": "Library only; proposed floor pairs are suggestions from #125, not implemented floors.",
+  "assets": [
+    {
+      "id": "worked-cave",
+      "label": "Worked cave",
+      "suggested_floor_pair": [
+        1,
+        2
+      ],
+      "source": "res://art/source/cave-walls-v1/worked-cave-master.png",
+      "source_sha256": "d8d1c600a05d0128cc790164b8ace603ec5c8d1f9c925699b331849b2c82706e",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "texture": "res://art/textures/descent-walls-v1/worked-cave.png",
+      "sha256": "abb1a323af53226cf84aa9c077d298cfd2b421d2869c232827c9daca0bccac00",
+      "material": "res://art/textures/descent-walls-v1/worked-cave.tres",
+      "colours": 32,
+      "opposite_edge_pixels_identical": true,
+      "generation_tool": "built-in image_gen"
+    },
+    {
+      "id": "goblin-hold",
+      "label": "Goblin hold",
+      "suggested_floor_pair": [
+        3,
+        4
+      ],
+      "source": "res://art/source/cave-walls-v1/goblin-hold-master.png",
+      "source_sha256": "99997bdc7266cc40b1bfe8c2d9e92a470fbe8e5c1f99daa5372835cccc99c63e",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "texture": "res://art/textures/descent-walls-v1/goblin-hold.png",
+      "sha256": "27dd34be997b8865bc5fa3ccae13748f2db973d66fb17c1d383dd787004042d0",
+      "material": "res://art/textures/descent-walls-v1/goblin-hold.tres",
+      "colours": 32,
+      "opposite_edge_pixels_identical": true,
+      "generation_tool": "built-in image_gen"
+    },
+    {
+      "id": "drowned-masonry",
+      "label": "Drowned masonry",
+      "suggested_floor_pair": [
+        5,
+        6
+      ],
+      "source": "res://art/source/cave-walls-v1/drowned-masonry-master.png",
+      "source_sha256": "fefb88a115295f07f758200e39ca23c769c0c14649c74acf01ba205d8a0d1eff",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "texture": "res://art/textures/descent-walls-v1/drowned-masonry.png",
+      "sha256": "bea4e642b4fe0a8e38cb7832a6774002f212aca970a2ae7775f94537e75fc14a",
+      "material": "res://art/textures/descent-walls-v1/drowned-masonry.tres",
+      "colours": 32,
+      "opposite_edge_pixels_identical": true,
+      "generation_tool": "built-in image_gen"
+    },
+    {
+      "id": "fungal-stone",
+      "label": "Fungal stone",
+      "suggested_floor_pair": [
+        7,
+        8
+      ],
+      "source": "res://art/source/cave-walls-v1/fungal-stone-master.png",
+      "source_sha256": "61cbc610bd3ec82f987caaef4ae24f9b9a5545a218c84ba47395d017c55228c5",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "texture": "res://art/textures/descent-walls-v1/fungal-stone.png",
+      "sha256": "761d0c6597d50d048852f06142d8fb0e45c042ff1f13737d00aea436da7bb4e0",
+      "material": "res://art/textures/descent-walls-v1/fungal-stone.tres",
+      "colours": 32,
+      "opposite_edge_pixels_identical": true,
+      "generation_tool": "built-in image_gen"
+    },
+    {
+      "id": "buried-city",
+      "label": "Buried city",
+      "suggested_floor_pair": [
+        9,
+        10
+      ],
+      "source": "res://art/source/cave-walls-v1/buried-city-master.png",
+      "source_sha256": "1bb3225170e41604ff35e6d7b0d7eb8988aa787c1664c1e369a5b4ac14c87ecb",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "texture": "res://art/textures/descent-walls-v1/buried-city.png",
+      "sha256": "98801cbaaaa2f8d857e0dcdd4f9063c76e8120c496d89c35da28df725cb8dffd",
+      "material": "res://art/textures/descent-walls-v1/buried-city.tres",
+      "colours": 32,
+      "opposite_edge_pixels_identical": true,
+      "generation_tool": "built-in image_gen"
+    },
+    {
+      "id": "sealed-temple",
+      "label": "Sealed temple",
+      "suggested_floor_pair": [
+        11,
+        12
+      ],
+      "source": "res://art/source/cave-walls-v1/sealed-temple-master.png",
+      "source_sha256": "18ab0e1e83e9eb6a39caade7470a7c1c5b652f3b9b73daa7450afef47fe155b9",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "texture": "res://art/textures/descent-walls-v1/sealed-temple.png",
+      "sha256": "faf3233b789d93af614512f23eab43a9d11a59ecdf41bd1fca9d01e3cb1c6364",
+      "material": "res://art/textures/descent-walls-v1/sealed-temple.tres",
+      "colours": 32,
+      "opposite_edge_pixels_identical": true,
+      "generation_tool": "built-in image_gen"
+    }
+  ]
+}

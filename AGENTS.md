@@ -74,6 +74,9 @@ Templates > Download and Install; already installed on the owner's PC).
   wording and sound for passages and ways up/down (cave: webs, roots, pit,
   hanging roots; stone: doors, stairs), plus ambience, footsteps, bump and
   open sounds. Picked via `environment_theme` on Main.
+  Six standalone deeper-cave wall families (#126) are available in
+  `art/textures/descent-walls-v1`; sources, previews and integration notes:
+  `docs/descent-wall-library.md`. They are not assigned to live floors yet.
 - `scripts/companion.gd` + `data/companions/*.tres` – hero definitions
   (Companion resource: identity, health, effects over time). The game
   plays with copies, never the .tres itself.

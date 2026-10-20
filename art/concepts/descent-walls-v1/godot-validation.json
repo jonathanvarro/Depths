@@ -1,0 +1,28 @@
+{
+	"captures": [
+		"res://art/concepts/descent-walls-v1/worked-cave-neutral.png",
+		"res://art/concepts/descent-walls-v1/worked-cave-lantern.png",
+		"res://art/concepts/descent-walls-v1/worked-cave-phone-lantern.png",
+		"res://art/concepts/descent-walls-v1/goblin-hold-neutral.png",
+		"res://art/concepts/descent-walls-v1/goblin-hold-lantern.png",
+		"res://art/concepts/descent-walls-v1/goblin-hold-phone-lantern.png",
+		"res://art/concepts/descent-walls-v1/drowned-masonry-neutral.png",
+		"res://art/concepts/descent-walls-v1/drowned-masonry-lantern.png",
+		"res://art/concepts/descent-walls-v1/drowned-masonry-phone-lantern.png",
+		"res://art/concepts/descent-walls-v1/fungal-stone-neutral.png",
+		"res://art/concepts/descent-walls-v1/fungal-stone-lantern.png",
+		"res://art/concepts/descent-walls-v1/fungal-stone-phone-lantern.png",
+		"res://art/concepts/descent-walls-v1/buried-city-neutral.png",
+		"res://art/concepts/descent-walls-v1/buried-city-lantern.png",
+		"res://art/concepts/descent-walls-v1/buried-city-phone-lantern.png",
+		"res://art/concepts/descent-walls-v1/sealed-temple-neutral.png",
+		"res://art/concepts/descent-walls-v1/sealed-temple-lantern.png",
+		"res://art/concepts/descent-walls-v1/sealed-temple-phone-lantern.png"
+	],
+	"checks": 43,
+	"failures": [],
+	"geometry": "Existing LevelBuilder BoxMesh walls and cave floor/ceiling; no UV or live-floor changes.",
+	"lighting": "Shared neutral ambient or warm test lantern; not a new fuel/light mechanic.",
+	"materials": 6,
+	"phone": "1278x590 desktop simulation, not physical iPhone validation."
+}

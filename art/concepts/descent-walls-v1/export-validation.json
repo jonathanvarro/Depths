@@ -1,0 +1,13 @@
+{
+  "assets": 6,
+  "native_size": [
+    128,
+    128
+  ],
+  "all_opaque": true,
+  "palette_limit": 32,
+  "exact_wrapping_edge_pixels": true,
+  "texture_bytes_rgba": 393216,
+  "limitation": "Identical border pixels prevent a colour jump; they do not prove every stone course or crack joins geometrically. Inspect repeated sheets and corridors.",
+  "failures": []
+}
