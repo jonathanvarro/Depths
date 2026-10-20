@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Conversation" format=3]
+
+[ext_resource type="Script" path="res://scripts/conversation_page.gd" id="1_u438k"]
+[ext_resource type="Script" path="res://scripts/conversation_reply.gd" id="2_rddwr"]
+[ext_resource type="Texture2D" path="res://art/portraits/recruit-silhouettes-v1/brawler.png" id="3_eanq2"]
+[ext_resource type="Script" path="res://scripts/conversation.gd" id="4_eg1hy"]
+
+[sub_resource type="Resource" id="Resource_otes6"]
+script = ExtResource("1_u438k")
+text = "The miner you found behind the rubble is sitting at the fire, a blanket round his shoulders. \"They said it was you who heard me. I'd have died in there.\"
+
+He leans in. \"There's good iron on the first floor - a dark seam with rust-red streaks, where the old workings end. The smith'd want it.\""
+
+[resource]
+script = ExtResource("4_eg1hy")
+speaker = "Hask, a miner"
+portrait = ExtResource("3_eanq2")
+pages = Array[ExtResource("1_u438k")]([SubResource("Resource_otes6")])

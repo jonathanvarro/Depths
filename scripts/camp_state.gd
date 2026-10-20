@@ -92,6 +92,8 @@ var xp_left := Progression.FLOOR_XP_LIMIT.duplicate()
 var best_level := 1
 ## Quests and story flags (#123): id -> {"stage", "flags"}; see quests.gd.
 var quests := {}
+## Smith work unlocked by quests (resource paths), sold after SMITH_STOCK.
+var smith_unlocks: Array[String] = []
 var _used_names: Array = []  # each name comes by once before any repeats
 
 
@@ -258,6 +260,15 @@ func buy_route(party) -> bool:
 	party.supplies.changed.emit()
 	changed.emit()
 	return true
+
+
+## What the smith sells now: his stock plus anything quests unlocked.
+func smith_stock() -> Array[Equipment]:
+	var stock: Array[Equipment] = SMITH_STOCK.duplicate()
+	for path in smith_unlocks:
+		if ResourceLoader.exists(path):
+			stock.append(load(path))
+	return stock
 
 
 ## Fight XP from `depth`, limited by what that floor can still teach.

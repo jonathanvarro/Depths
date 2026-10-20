@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Equipment" format=3]
+
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/items/refined-v2/iron-sword.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+display_name = "Camp-forged blade"
+description = "The apprentice's first real work: cave iron, folded twice and ground bright. Light in the hand, and it holds an edge. (Placeholder icon.)"
+icon = ExtResource("2")
+attack_min = 4
+attack_max = 6
+price = 45
+force = false
+light = true

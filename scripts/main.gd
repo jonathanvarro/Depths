@@ -28,6 +28,8 @@ const Sounds := preload("res://scripts/sounds.gd")
 const Music := preload("res://scripts/music.gd")
 const Quests := preload("res://scripts/quests.gd")
 const ConversationScreen := preload("res://scripts/conversation_screen.gd")
+const QuestLog := preload("res://scripts/quest_log.gd")
+const Story := preload("res://scripts/story.gd")
 ## The commander waiting outside after the escape (#122, first slice).
 const COMMANDER_FIRST := preload("res://data/conversations/commander_first.tres")
 const CoinFlip := preload("res://scripts/coin_flip.gd")
@@ -360,6 +362,7 @@ var _footstep_player: AudioStreamPlayer
 var _effect_player: AudioStreamPlayer
 var _music: Node  # music.gd: a track per place (#54)
 var _conversation: Control  # conversation_screen.gd (#122)
+var _quest_log: Control  # quest_log.gd (#123)
 var _wound_overlay: ColorRect
 var _wound_tween: Tween
 var _heart_player: AudioStreamPlayer
@@ -812,6 +815,7 @@ func _start_new_expedition() -> void:
 	_end_opening()
 	if returned_from_expedition:
 		_camp_state.expedition_returned()
+		Story.on_return(_camp_state)  # news that waited for a return (#123)
 	for hero: Companion in _party_state.members:
 		hero.appearance.clear()  # washed at camp
 		hero.emit_changed()
@@ -2648,6 +2652,9 @@ func _build_ui(minimap: Control) -> void:
 	add_child(talk_layer)
 	_conversation = ConversationScreen.new()
 	talk_layer.add_child(_conversation)
+	_quest_log = QuestLog.new()
+	talk_layer.add_child(_quest_log)
+	_pack.open_quests.connect(func(): _quest_log.open(_camp_state))
 	add_child(coin_layer)
 	var coin := CoinFlip.new()
 	coin_layer.add_child(coin)
@@ -2666,6 +2673,7 @@ func _build_ui(minimap: Control) -> void:
 	canvas.add_child(_camp)
 	_camp.save_and_exit.connect(save_and_exit)
 	_camp.open_settings.connect(func(): _settings.open())
+	_camp.conversation = _conversation  # people at camp with news (#123)
 	_preparation = PreparationScreen.new()
 	canvas.add_child(_preparation)
 	minimap.pressed.connect(_set_full_map.bind(true))

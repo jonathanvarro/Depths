@@ -28,6 +28,8 @@ const BACK_ICON := preload("res://art/ui/controls-v1/back.svg")
 const LANTERN_ICON := preload("res://art/items/refined-v2/lantern-unlit.png")
 ## The apprentice's starter stock, shown until there's gold (#42).
 const CampState := preload("res://scripts/camp_state.gd")
+const Story := preload("res://scripts/story.gd")
+const Quests := preload("res://scripts/quests.gd")
 const Progression := preload("res://scripts/progression.gd")
 
 var content: Control  # main.gd keeps this inside the safe area
@@ -40,6 +42,8 @@ var _canvas: Control
 var _buttons := {}  # site id -> Button
 var _sites := {}  # site id -> layout entry
 var _site_art := {}  # site id -> registered art node
+## The conversation screen (set by main.gd): people at camp with news (#123).
+var conversation: Control
 var _dressing: Node2D
 var _day_label: Label
 var _activity: Panel
@@ -253,6 +257,10 @@ func _update_site_art() -> void:
 	_site_art["cave"].get_node("Notice").visible=has_contract
 	var occupied: bool = _camp.recovering.keys().any(func(hero):return _camp.is_recovering(hero))
 	_site_art["treatment"].get_node("OccupiedCot").visible=occupied
+	# Someone here has news (#123): a mark after the site's name.
+	for id in _buttons:
+		if id != "supplies" and _sites.has(id):
+			_buttons[id].text = _sites[id].label + ("  (!)" if Story.camp_talk(_camp, id) != "" else "")
 
 
 ## Scales the 640 x 360 scene to fit the safe area, centred.
@@ -360,6 +368,7 @@ func _refresh_activity() -> void:
 	for child in _body.get_children():
 		_body.remove_child(child)
 		child.queue_free()
+	_talk_row()
 	match _current:
 		"supplies": _merchant()
 		"smith": _smith()
@@ -368,6 +377,23 @@ func _refresh_activity() -> void:
 		"fire": _fire()
 		"cave": _cave_path()
 	_fit()
+
+
+## Someone here has something to say (#123): a talk button at the top.
+func _talk_row() -> void:
+	var id := Story.camp_talk(_camp, _current)
+	var talk := Story.conversation(id)
+	if talk == null:
+		return
+	var button := _button("Talk to %s" % talk.speaker)
+	button.add_theme_color_override("font_color", AMBER)
+	button.pressed.connect(func():
+		if conversation:
+			var heroes: Array = _party.members.filter(func(h): return h.founder or h.main_hero)
+			await conversation.play(talk, heroes[0] if not heroes.is_empty() else (_party.members[0] if not _party.members.is_empty() else null), _camp)
+		Story.after_talk(_camp, id)
+		_refresh_activity())
+	_body.add_child(button)
 
 
 ## The merchant (#42): buy supplies and the lantern, sell treasure and gear.
@@ -411,7 +437,7 @@ func _merchant() -> void:
 ## The apprentice smith (#42): plain gear into the pack (equip it there).
 func _smith() -> void:
 	_text("The apprentice wipes his hands. \"It's not much. But it'll hold.\"")
-	for item: Equipment in CampState.SMITH_STOCK:
+	for item: Equipment in _camp.smith_stock():  # with quest unlocks (#123)
 		if item.slot == "body":  # armour (#93)
 			var slower := ", slower by %d" % item.initiative_penalty if item.initiative_penalty > 0 else ""
 			_shop_row("%s: armour %d%s" % [item.display_name, item.armour, slower], item.price, _camp.buy_gear.bind(_party, item), item.icon)
@@ -669,6 +695,10 @@ func _recruit_row(recruit: Companion, full: bool) -> void:
 
 
 func _cave_path() -> void:
+	# Current orders (#123): the quest log in brief.
+	for id in Quests.in_log(_camp):
+		if Quests.stage(_camp, id) != Quests.Stage.RESOLVED:
+			_text("%s - %s" % [Quests.INFO[id]["title"], Quests.next_step(_camp, id)], AMBER)
 	var going: Array[Companion] = _camp.available(_party)
 	for hero: Companion in _party.living_members():
 		if _camp.is_recovering(hero):

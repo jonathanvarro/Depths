@@ -7,6 +7,7 @@ signal closed
 ## Save the game and go back to the title (#45).
 signal save_and_exit
 signal open_settings
+signal open_quests  # the quest log (#123)
 ## An item was used; `message` describes what happened.
 signal used(message: String)
 
@@ -310,6 +311,14 @@ func _build() -> void:
 	save.pressed.connect(func(): save_and_exit.emit())
 	header.add_child(save)
 	header.move_child(save, header.get_child_count() - 2)
+	var quests := Button.new()
+	quests.text = "Quests"
+	quests.custom_minimum_size = Vector2(110, 52)
+	quests.focus_mode = Control.FOCUS_ALL
+	quests.add_theme_font_size_override("font_size", 20)
+	quests.pressed.connect(func(): open_quests.emit())
+	header.add_child(quests)
+	header.move_child(quests, header.get_child_count() - 2)
 	var gear := Button.new()
 	gear.icon = SETTINGS_ICON
 	gear.expand_icon = true

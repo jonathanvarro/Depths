@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="Conversation" format=3]
+
+[ext_resource type="Script" path="res://scripts/conversation_page.gd" id="1_k32ii"]
+[ext_resource type="Script" path="res://scripts/conversation_reply.gd" id="2_xf27s"]
+[ext_resource type="Texture2D" path="res://art/camp/highres-v4/smith.png" id="3_c4kpy"]
+[ext_resource type="Script" path="res://scripts/conversation.gd" id="4_ryrp8"]
+
+[sub_resource type="Resource" id="Resource_xn2ys"]
+script = ExtResource("2_xf27s")
+label = "\"I'll bring you iron.\""
+quest = "iron_sample"
+stage = 2
+
+[sub_resource type="Resource" id="Resource_qpbbg"]
+script = ExtResource("2_xf27s")
+label = "\"Maybe later.\""
+quest = "iron_sample"
+stage = 1
+
+[sub_resource type="Resource" id="Resource_bodb0"]
+script = ExtResource("1_k32ii")
+text = "The apprentice turns a bent nail over in his fingers. \"Everything they sent me is scrap. If I had real iron - even a fist-sized lump from a good seam - I could make you something better than what you're carrying.\""
+replies = Array[ExtResource("2_xf27s")]([SubResource("Resource_xn2ys"), SubResource("Resource_qpbbg")])
+
+[resource]
+script = ExtResource("4_ryrp8")
+speaker = "The apprentice smith"
+portrait = ExtResource("3_c4kpy")
+pages = Array[ExtResource("1_k32ii")]([SubResource("Resource_bodb0")])

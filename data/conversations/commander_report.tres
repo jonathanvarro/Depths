@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="Conversation" format=3]
+
+[ext_resource type="Script" path="res://scripts/conversation_page.gd" id="1_gtmdc"]
+[ext_resource type="Script" path="res://scripts/conversation_reply.gd" id="2_e0pqa"]
+[ext_resource type="Texture2D" path="res://art/portraits/recruit-silhouettes-v1/warden.png" id="3_16t82"]
+[ext_resource type="Script" path="res://scripts/conversation.gd" id="4_uo60j"]
+
+[sub_resource type="Resource" id="Resource_llfuq"]
+script = ExtResource("2_e0pqa")
+label = "Show him the arrow"
+next = 1
+
+[sub_resource type="Resource" id="Resource_pnv35"]
+script = ExtResource("1_gtmdc")
+text = "You set the survey map on his table, and beside it the arrow.
+
+He unrolls the map first. Your party's route is there in the surveyor's neat hand - and over it, someone else's: marks at the very turns where you were caught. He is quiet for a long moment.
+
+\"None of your people drew these.\""
+replies = Array[ExtResource("2_e0pqa")]([SubResource("Resource_llfuq")])
+
+[sub_resource type="Resource" id="Resource_f30p4"]
+script = ExtResource("2_e0pqa")
+label = "\"What happens now?\""
+next = 2
+
+[sub_resource type="Resource" id="Resource_cdhuw"]
+script = ExtResource("1_gtmdc")
+text = "He turns the arrow in his fingers. Goblin-made shaft. The fletching is black and glossy, cut from no bird you know.
+
+\"Goblins fletch with crow, if they bother at all.\" He lays it down very carefully. \"Say nothing of this at the fire. Not yet.\""
+replies = Array[ExtResource("2_e0pqa")]([SubResource("Resource_f30p4")])
+
+[sub_resource type="Resource" id="Resource_1s6k4"]
+script = ExtResource("2_e0pqa")
+label = "\"I'll find a way down.\""
+quest = "story"
+flag = "reported"
+
+[sub_resource type="Resource" id="Resource_ym1dk"]
+script = ExtResource("1_gtmdc")
+text = "\"Now we go deeper. Below the fortress the old water channels run down to - \" he stops himself. \"To where my orders point. The goblins hold the way. There is a bounty on their queen, if you want it. But I need a way past that fortress, with her or without her.\""
+replies = Array[ExtResource("2_e0pqa")]([SubResource("Resource_1s6k4")])
+
+[resource]
+script = ExtResource("4_uo60j")
+speaker = "Commander Edric Vael"
+portrait = ExtResource("3_16t82")
+pages = Array[ExtResource("1_gtmdc")]([SubResource("Resource_pnv35"), SubResource("Resource_cdhuw"), SubResource("Resource_ym1dk")])
