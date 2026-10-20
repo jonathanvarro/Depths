@@ -1,7 +1,7 @@
 {
   "baseline": "3d1ee08",
   "resources_checked": 31,
-  "only_approved_animation_bindings_changed": true,
-  "resting_character_and_other_bindings_unchanged": true,
+  "only_explicit_component_bindings_changed": true,
+  "static_expressions_and_all_other_resource_values_unchanged": true,
   "failures": []
 }

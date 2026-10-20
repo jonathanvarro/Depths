@@ -1,0 +1,252 @@
+{
+  "face": "warden-b",
+  "family": "average-covered-adult-v1",
+  "resources": [
+    "res://data/portraits/recruit-roster-v1/warden-b.tres"
+  ],
+  "input_layers": {
+    "res://art/portraits/recruit-kit-v1/shared/body.png": "354a59a5cec26c785eb480c2f2652369d2e8b0acfeb3840efc968919c0c0ce9b",
+    "res://art/portraits/recruit-roster-v1/warden-b/head.png": "b47bd01def2624582d43a988093b25bd325cadee3cefa64b1777a9045440b245",
+    "res://art/portraits/recruit-roster-v1/warden-b/eyes-neutral.png": "d54a6a0dcb673a00cf18fc397c18ea9a6932df72095642fb88c094f6e4b6041b",
+    "res://art/portraits/recruit-roster-v1/warden-b/mouth-neutral.png": "2458bf457ac91959b202fdbeb2fda765893a50cb1f75a09465b5fe1e7d0e35df",
+    "res://art/portraits/recruit-kit-v1/shared/jerkin.png": "b3ee6b1d563c33a4caad913e5ad15e1e52564c7e8b2c94b5b45242d154a52fcb"
+  },
+  "bindings": {
+    "res://art/portraits/recruit-roster-v1/warden-b/head.png": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/head-clean.png",
+    "res://art/portraits/recruit-roster-v1/warden-b/eyes-neutral.png": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/eyes-neutral.png",
+    "res://art/portraits/recruit-roster-v1/warden-b/mouth-neutral.png": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/mouth-neutral.png",
+    "res://art/portraits/recruit-roster-v1/warden-b/eyes-half.png": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/eyes-half.png",
+    "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v2/eyes-half.png": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/eyes-half.png",
+    "res://art/portraits/recruit-roster-v1/warden-b/eyes-closed.png": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/eyes-closed.png",
+    "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v2/eyes-closed.png": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/eyes-closed.png",
+    "res://art/portraits/recruit-roster-v1/warden-b/mouth-small.png": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/mouth-small.png",
+    "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v2/mouth-small.png": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/mouth-small.png",
+    "res://art/portraits/recruit-roster-v1/warden-b/mouth-open.png": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/mouth-open.png",
+    "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v2/mouth-open.png": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/mouth-open.png"
+  },
+  "eye_mask": "res://art/source/portrait-components-v3/warden-b/eyes-erasure.png",
+  "mouth_mask": "res://art/source/portrait-components-v3/warden-b/mouth-erasure.png",
+  "original": "res://art/source/portrait-components-v3/warden-b/resting-reference.png",
+  "clean": "res://art/source/portrait-components-v3/warden-b/clean-reference.png",
+  "recipe": {
+    "eyes": [
+      [
+        [
+          [
+            83,
+            66
+          ],
+          [
+            87,
+            62
+          ],
+          [
+            97,
+            62
+          ],
+          [
+            105,
+            65
+          ],
+          [
+            109,
+            68
+          ],
+          [
+            106,
+            73
+          ],
+          [
+            98,
+            75
+          ],
+          [
+            89,
+            74
+          ],
+          [
+            83,
+            70
+          ]
+        ],
+        [
+          [
+            85,
+            67
+          ],
+          [
+            90,
+            70
+          ],
+          [
+            97,
+            71
+          ],
+          [
+            104,
+            69
+          ],
+          [
+            107,
+            68
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            109,
+            67
+          ],
+          [
+            113,
+            63
+          ],
+          [
+            123,
+            63
+          ],
+          [
+            131,
+            66
+          ],
+          [
+            135,
+            69
+          ],
+          [
+            132,
+            74
+          ],
+          [
+            124,
+            76
+          ],
+          [
+            115,
+            75
+          ],
+          [
+            109,
+            71
+          ]
+        ],
+        [
+          [
+            111,
+            68
+          ],
+          [
+            116,
+            71
+          ],
+          [
+            123,
+            72
+          ],
+          [
+            130,
+            70
+          ],
+          [
+            133,
+            69
+          ]
+        ]
+      ]
+    ],
+    "lip": [
+      [
+        96,
+        97
+      ],
+      [
+        103,
+        96
+      ],
+      [
+        110,
+        96
+      ],
+      [
+        119,
+        97
+      ]
+    ],
+    "mouth": [
+      [
+        93,
+        96
+      ],
+      [
+        99,
+        92
+      ],
+      [
+        113,
+        92
+      ],
+      [
+        122,
+        96
+      ],
+      [
+        122,
+        100
+      ],
+      [
+        116,
+        102
+      ],
+      [
+        100,
+        102
+      ],
+      [
+        93,
+        100
+      ]
+    ]
+  },
+  "outputs": [
+    {
+      "name": "clean-character",
+      "texture": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/head-clean.png",
+      "sha256": "919b01499ff8b169d73deefbe17f079afdd7a853b8aa48e05e263ae3a2e9bced"
+    },
+    {
+      "name": "eyes-neutral",
+      "texture": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/eyes-neutral.png",
+      "sha256": "50fa9a8f46c01156d85bae5dc9fdcbdf59525b5cde412d052e5bb61f6846d6d5"
+    },
+    {
+      "name": "mouth-neutral",
+      "texture": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/mouth-neutral.png",
+      "sha256": "86fecf1d43dab5c78629aa074b26da4eb10ecfde27d18e1e2e7c5f99beec09db"
+    },
+    {
+      "name": "eyes-half",
+      "texture": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/eyes-half.png",
+      "sha256": "3f790f6f81dff8fc1701206c0217706a720bc192f0d4a9b6390d1276f6aad284",
+      "ink": "res://art/source/portrait-components-v3/warden-b/eyes-half-ink.png"
+    },
+    {
+      "name": "eyes-closed",
+      "texture": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/eyes-closed.png",
+      "sha256": "b99d588fe4800290be6fb69808136ba1dcd5c2aab98f7bc123f699089809f78f",
+      "ink": "res://art/source/portrait-components-v3/warden-b/eyes-closed-ink.png"
+    },
+    {
+      "name": "mouth-small",
+      "texture": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/mouth-small.png",
+      "sha256": "3ed8b635a630f42174a485bfbc978002e5674a5b2985ba3505f55a4b8028181d",
+      "ink": "res://art/source/portrait-components-v3/warden-b/mouth-small-ink.png"
+    },
+    {
+      "name": "mouth-open",
+      "texture": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/mouth-open.png",
+      "sha256": "58fc690bc6cafd04e8e2f44a70c309b67998a9de7202392b643e209afafb1790",
+      "ink": "res://art/source/portrait-components-v3/warden-b/mouth-open-ink.png"
+    }
+  ]
+}

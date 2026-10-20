@@ -1,0 +1,9 @@
+{
+  "revision": "complete-components-v3",
+  "faces": 12,
+  "checks": 658,
+  "failures": [],
+  "neutral_reconstruction": "exact original RGBA",
+  "combined_blink_and_talk": "all combinations",
+  "visual_review": "Held native and enlarged drawings; separately inspect clean plate and outer corners."
+}

@@ -1,0 +1,277 @@
+{
+  "face": "corin",
+  "family": "unique-corin-v1",
+  "resources": [
+    "res://data/portraits/corin.tres"
+  ],
+  "input_layers": {
+    "res://art/concepts/portraits/mara-layered-v1/background.png": "d68fb226983c6aa8631760a1daa044589ae10d0a997d5fec5f7857e32ffa87d4",
+    "res://art/portraits/main-heroes-v1/corin/body.png": "4cfdf93b4d67bf00cbcbdeafb423d92091b1f97048d5b64599d41d355c221122",
+    "res://art/portraits/main-heroes-v1/corin/head.png": "a25df55b9517970c9fc702282c25a2892b4cd165960d335d246d7c573a7c1810",
+    "res://art/portraits/main-heroes-v1/corin/eyes-neutral.png": "fa6c625ddecb6f45ca694378fc85956033705c4828fc076b1a2ee6ef3637de19",
+    "res://art/portraits/main-heroes-v1/corin/mouth-neutral.png": "1b471f77f9036a58c0d59a30d27e1b478f3ca82a5def687fff004e4c9013ef93"
+  },
+  "bindings": {
+    "res://art/portraits/main-heroes-v1/corin/head.png": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/head-clean.png",
+    "res://art/portraits/main-heroes-v1/corin/eyes-neutral.png": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/eyes-neutral.png",
+    "res://art/portraits/main-heroes-v1/corin/mouth-neutral.png": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/mouth-neutral.png",
+    "res://art/portraits/main-heroes-v1/corin/eyes-half.png": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/eyes-half.png",
+    "res://art/portraits/main-heroes-v1/corin/frames-pixel-v2/eyes-half.png": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/eyes-half.png",
+    "res://art/portraits/main-heroes-v1/corin/eyes-closed.png": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/eyes-closed.png",
+    "res://art/portraits/main-heroes-v1/corin/frames-pixel-v2/eyes-closed.png": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/eyes-closed.png",
+    "res://art/portraits/main-heroes-v1/corin/mouth-small.png": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/mouth-small.png",
+    "res://art/portraits/main-heroes-v1/corin/frames-pixel-v2/mouth-small.png": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/mouth-small.png",
+    "res://art/portraits/main-heroes-v1/corin/mouth-open.png": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/mouth-open.png",
+    "res://art/portraits/main-heroes-v1/corin/frames-pixel-v2/mouth-open.png": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/mouth-open.png",
+    "res://art/portraits/main-heroes-v1/corin/mouth-round.png": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/mouth-round.png",
+    "res://art/portraits/main-heroes-v1/corin/frames-pixel-v2/mouth-round.png": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/mouth-round.png"
+  },
+  "eye_mask": "res://art/source/portrait-components-v3/corin/eyes-erasure.png",
+  "mouth_mask": "res://art/source/portrait-components-v3/corin/mouth-erasure.png",
+  "original": "res://art/source/portrait-components-v3/corin/resting-reference.png",
+  "clean": "res://art/source/portrait-components-v3/corin/clean-reference.png",
+  "recipe": {
+    "eyes": [
+      [
+        [
+          [
+            84,
+            65
+          ],
+          [
+            90,
+            63
+          ],
+          [
+            99,
+            63
+          ],
+          [
+            105,
+            65
+          ],
+          [
+            107,
+            69
+          ],
+          [
+            104,
+            72
+          ],
+          [
+            95,
+            73
+          ],
+          [
+            87,
+            70
+          ],
+          [
+            84,
+            68
+          ]
+        ],
+        [
+          [
+            86,
+            66
+          ],
+          [
+            91,
+            68
+          ],
+          [
+            98,
+            69
+          ],
+          [
+            103,
+            68
+          ],
+          [
+            105,
+            67
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            112,
+            67
+          ],
+          [
+            117,
+            65
+          ],
+          [
+            127,
+            65
+          ],
+          [
+            133,
+            67
+          ],
+          [
+            135,
+            71
+          ],
+          [
+            132,
+            75
+          ],
+          [
+            123,
+            76
+          ],
+          [
+            116,
+            73
+          ],
+          [
+            112,
+            71
+          ]
+        ],
+        [
+          [
+            114,
+            69
+          ],
+          [
+            119,
+            72
+          ],
+          [
+            127,
+            73
+          ],
+          [
+            132,
+            72
+          ],
+          [
+            133,
+            71
+          ]
+        ]
+      ]
+    ],
+    "mouth": [
+      [
+        88,
+        87
+      ],
+      [
+        94,
+        86
+      ],
+      [
+        103,
+        88
+      ],
+      [
+        110,
+        90
+      ],
+      [
+        119,
+        91
+      ],
+      [
+        123,
+        94
+      ],
+      [
+        120,
+        98
+      ],
+      [
+        110,
+        98
+      ],
+      [
+        102,
+        95
+      ],
+      [
+        95,
+        93
+      ],
+      [
+        88,
+        91
+      ]
+    ],
+    "lip": [
+      [
+        90,
+        89
+      ],
+      [
+        97,
+        90
+      ],
+      [
+        104,
+        92
+      ],
+      [
+        111,
+        94
+      ],
+      [
+        119,
+        94
+      ]
+    ],
+    "missing_tooth": true
+  },
+  "outputs": [
+    {
+      "name": "clean-character",
+      "texture": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/head-clean.png",
+      "sha256": "d132c31769fab5520369808a07294e8464317d88721d75ac5aa3fadcdbacb391"
+    },
+    {
+      "name": "eyes-neutral",
+      "texture": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/eyes-neutral.png",
+      "sha256": "96eb34eb5b174fee947b13dedb41518ffd5566a6e3fba21f79dead4889545bb9"
+    },
+    {
+      "name": "mouth-neutral",
+      "texture": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/mouth-neutral.png",
+      "sha256": "c9f50239577246c03e0e7cf141cffe6b4249f93af85ae1b460675bc119efcecb"
+    },
+    {
+      "name": "eyes-half",
+      "texture": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/eyes-half.png",
+      "sha256": "5e0a75ad15448f8698adbc59251bea3cb11a188fe38ee6759db8207579b756eb",
+      "ink": "res://art/source/portrait-components-v3/corin/eyes-half-ink.png"
+    },
+    {
+      "name": "eyes-closed",
+      "texture": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/eyes-closed.png",
+      "sha256": "e00952dc3b481516d4be3821470d366250cd739a1844a2633c6d121671e62d3c",
+      "ink": "res://art/source/portrait-components-v3/corin/eyes-closed-ink.png"
+    },
+    {
+      "name": "mouth-small",
+      "texture": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/mouth-small.png",
+      "sha256": "b7f0830f7b974dbadbdedbe35936085643fa952399df8ba9154cf6f96093e2da",
+      "ink": "res://art/source/portrait-components-v3/corin/mouth-small-ink.png"
+    },
+    {
+      "name": "mouth-open",
+      "texture": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/mouth-open.png",
+      "sha256": "48fbe5a2e3d907023e1203c3dd230653a43bde72e98d4176197217ba6ba964e6",
+      "ink": "res://art/source/portrait-components-v3/corin/mouth-open-ink.png"
+    },
+    {
+      "name": "mouth-round",
+      "texture": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/mouth-round.png",
+      "sha256": "28a024cde574d01a146fb42a1be4f55c25b6601efdee81652f189d54b6c0cd73",
+      "ink": "res://art/source/portrait-components-v3/corin/mouth-round-ink.png"
+    }
+  ]
+}

@@ -1,0 +1,272 @@
+{
+  "face": "alwen",
+  "family": "unique-alwen-v1",
+  "resources": [
+    "res://data/portraits/alwen.tres"
+  ],
+  "input_layers": {
+    "res://art/concepts/portraits/mara-layered-v1/background.png": "d68fb226983c6aa8631760a1daa044589ae10d0a997d5fec5f7857e32ffa87d4",
+    "res://art/portraits/main-heroes-v1/alwen/body.png": "b4d156a37130b136fc88c6ae7c8eeed27e00bb2b862bde05c6893168c898fed3",
+    "res://art/portraits/main-heroes-v1/alwen/head.png": "14006aa0d31065815614743257fcb9261422b396aab55b915d4e9eaae9635fa8",
+    "res://art/portraits/main-heroes-v1/alwen/eyes-neutral.png": "98dd71ce9583a47a0efc5f3739433eaeaf9b98218488a89f048da52bb57b7a03",
+    "res://art/portraits/main-heroes-v1/alwen/mouth-neutral.png": "2ed7d6f5d2dd159e87bfe4e4f961c36f79f34859552c0fcd100b72ba3b42e3a7"
+  },
+  "bindings": {
+    "res://art/portraits/main-heroes-v1/alwen/head.png": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/head-clean.png",
+    "res://art/portraits/main-heroes-v1/alwen/eyes-neutral.png": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/eyes-neutral.png",
+    "res://art/portraits/main-heroes-v1/alwen/mouth-neutral.png": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/mouth-neutral.png",
+    "res://art/portraits/main-heroes-v1/alwen/eyes-half.png": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/eyes-half.png",
+    "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v2/eyes-half.png": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/eyes-half.png",
+    "res://art/portraits/main-heroes-v1/alwen/eyes-closed.png": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/eyes-closed.png",
+    "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v2/eyes-closed.png": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/eyes-closed.png",
+    "res://art/portraits/main-heroes-v1/alwen/mouth-small.png": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/mouth-small.png",
+    "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v2/mouth-small.png": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/mouth-small.png",
+    "res://art/portraits/main-heroes-v1/alwen/mouth-open.png": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/mouth-open.png",
+    "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v2/mouth-open.png": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/mouth-open.png",
+    "res://art/portraits/main-heroes-v1/alwen/mouth-round.png": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/mouth-round.png",
+    "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v2/mouth-round.png": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/mouth-round.png"
+  },
+  "eye_mask": "res://art/source/portrait-components-v3/alwen/eyes-erasure.png",
+  "mouth_mask": "res://art/source/portrait-components-v3/alwen/mouth-erasure.png",
+  "original": "res://art/source/portrait-components-v3/alwen/resting-reference.png",
+  "clean": "res://art/source/portrait-components-v3/alwen/clean-reference.png",
+  "recipe": {
+    "eyes": [
+      [
+        [
+          [
+            90,
+            67
+          ],
+          [
+            95,
+            64
+          ],
+          [
+            103,
+            64
+          ],
+          [
+            109,
+            66
+          ],
+          [
+            111,
+            69
+          ],
+          [
+            108,
+            73
+          ],
+          [
+            102,
+            76
+          ],
+          [
+            94,
+            75
+          ],
+          [
+            90,
+            71
+          ]
+        ],
+        [
+          [
+            92,
+            68
+          ],
+          [
+            97,
+            71
+          ],
+          [
+            103,
+            72
+          ],
+          [
+            108,
+            70
+          ],
+          [
+            109,
+            69
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            114,
+            67
+          ],
+          [
+            119,
+            64
+          ],
+          [
+            129,
+            64
+          ],
+          [
+            134,
+            66
+          ],
+          [
+            136,
+            69
+          ],
+          [
+            134,
+            73
+          ],
+          [
+            128,
+            76
+          ],
+          [
+            119,
+            74
+          ],
+          [
+            114,
+            71
+          ]
+        ],
+        [
+          [
+            116,
+            68
+          ],
+          [
+            121,
+            71
+          ],
+          [
+            128,
+            72
+          ],
+          [
+            133,
+            70
+          ],
+          [
+            134,
+            69
+          ]
+        ]
+      ]
+    ],
+    "mouth": [
+      [
+        100,
+        94
+      ],
+      [
+        105,
+        91
+      ],
+      [
+        111,
+        91
+      ],
+      [
+        119,
+        92
+      ],
+      [
+        124,
+        94
+      ],
+      [
+        127,
+        97
+      ],
+      [
+        123,
+        101
+      ],
+      [
+        113,
+        102
+      ],
+      [
+        103,
+        100
+      ],
+      [
+        100,
+        98
+      ]
+    ],
+    "lip": [
+      [
+        102,
+        96
+      ],
+      [
+        108,
+        95
+      ],
+      [
+        115,
+        95
+      ],
+      [
+        121,
+        96
+      ],
+      [
+        124,
+        97
+      ]
+    ]
+  },
+  "outputs": [
+    {
+      "name": "clean-character",
+      "texture": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/head-clean.png",
+      "sha256": "d4622bab3df8e637c8b4e7d6b5bc2ad41c87679aef364dbf7b9f555779463e2b"
+    },
+    {
+      "name": "eyes-neutral",
+      "texture": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/eyes-neutral.png",
+      "sha256": "3442166a6bb2f6c0b48c6c1481847830fc033f2203066454937309d94d2eb342"
+    },
+    {
+      "name": "mouth-neutral",
+      "texture": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/mouth-neutral.png",
+      "sha256": "420b16b7d822c70be42a240660aef5192fa7049db02b1bfd11755435a3e6b9d7"
+    },
+    {
+      "name": "eyes-half",
+      "texture": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/eyes-half.png",
+      "sha256": "0aacd6fd2fc4c56fe50feac327fb8bca22bb36f8f1c2492ec7ece0d2f94ddbe0",
+      "ink": "res://art/source/portrait-components-v3/alwen/eyes-half-ink.png"
+    },
+    {
+      "name": "eyes-closed",
+      "texture": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/eyes-closed.png",
+      "sha256": "51d5a19121638322ca5642e6ba07e27451e8593f127915ac5216a8574c31bfc5",
+      "ink": "res://art/source/portrait-components-v3/alwen/eyes-closed-ink.png"
+    },
+    {
+      "name": "mouth-small",
+      "texture": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/mouth-small.png",
+      "sha256": "888e0f4c44c9c6031eb50ed85ecb14ecd48486e2dd1aceda962aeeb04b8c5c58",
+      "ink": "res://art/source/portrait-components-v3/alwen/mouth-small-ink.png"
+    },
+    {
+      "name": "mouth-open",
+      "texture": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/mouth-open.png",
+      "sha256": "b1536072c111fdd4f7cfad5be5089c4511f517038a2b48c372fb2f4ce48a55f1",
+      "ink": "res://art/source/portrait-components-v3/alwen/mouth-open-ink.png"
+    },
+    {
+      "name": "mouth-round",
+      "texture": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/mouth-round.png",
+      "sha256": "fa236980d19e2a56e3e22ba39e8da227c6b901d061ab5b4880d06adc7d8fc776",
+      "ink": "res://art/source/portrait-components-v3/alwen/mouth-round-ink.png"
+    }
+  ]
+}

@@ -1,7 +1,8 @@
 {
-  "checks": 31,
+  "checks": 37,
   "failures": [],
   "errors": [],
-  "captures": 14,
+  "captures": 18,
+  "revision": "complete-components-v3",
   "paused_by_default": true
 }

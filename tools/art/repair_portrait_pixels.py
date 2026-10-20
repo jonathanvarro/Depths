@@ -115,6 +115,8 @@ def mouth_edit(base,spec,mode):
 
 def main():
  parser=argparse.ArgumentParser();parser.add_argument('--wire',action='store_true');args=parser.parse_args()
+ if (ROOT/'art/concepts/portrait-components-v3/components.json').exists():
+  parser.error('The partial v2 masks are archived. Use build_portrait_components.py --wire; do not overwrite its immutable v2 source references.')
  registry=json.loads((ROOT/'data/portraits/catalog.json').read_text(encoding='utf-8'))
  entries=[e for e in registry['portraits'] if e['id']==e['face_id']]
  REVIEW.mkdir(parents=True,exist_ok=True);write(REVIEW/'.gdignore','');write(SOURCE/'.gdignore','')

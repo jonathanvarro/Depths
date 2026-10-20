@@ -1,0 +1,252 @@
+{
+  "face": "brawler-c",
+  "family": "average-covered-adult-v1",
+  "resources": [
+    "res://data/portraits/recruit-roster-v1/brawler-c.tres"
+  ],
+  "input_layers": {
+    "res://art/portraits/recruit-kit-v1/shared/body.png": "354a59a5cec26c785eb480c2f2652369d2e8b0acfeb3840efc968919c0c0ce9b",
+    "res://art/portraits/recruit-roster-v1/brawler-c/head.png": "53b11b12fa3b711f3571259fd28c612475f626b430394e1c16caf9783ce923dc",
+    "res://art/portraits/recruit-roster-v1/brawler-c/eyes-neutral.png": "d0135d94fca45392da738997e4f05ec695d6f4dc254b01bf23406d1447b93a83",
+    "res://art/portraits/recruit-roster-v1/brawler-c/mouth-neutral.png": "307dbda4d0301baa027b20fbfd5f5bfc721a6051524cb9b4dcb00f4d1f2e8029",
+    "res://art/portraits/recruit-kit-v1/shared/jerkin.png": "b3ee6b1d563c33a4caad913e5ad15e1e52564c7e8b2c94b5b45242d154a52fcb"
+  },
+  "bindings": {
+    "res://art/portraits/recruit-roster-v1/brawler-c/head.png": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/head-clean.png",
+    "res://art/portraits/recruit-roster-v1/brawler-c/eyes-neutral.png": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/eyes-neutral.png",
+    "res://art/portraits/recruit-roster-v1/brawler-c/mouth-neutral.png": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/mouth-neutral.png",
+    "res://art/portraits/recruit-roster-v1/brawler-c/eyes-half.png": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/eyes-half.png",
+    "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v2/eyes-half.png": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/eyes-half.png",
+    "res://art/portraits/recruit-roster-v1/brawler-c/eyes-closed.png": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/eyes-closed.png",
+    "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v2/eyes-closed.png": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/eyes-closed.png",
+    "res://art/portraits/recruit-roster-v1/brawler-c/mouth-small.png": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/mouth-small.png",
+    "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v2/mouth-small.png": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/mouth-small.png",
+    "res://art/portraits/recruit-roster-v1/brawler-c/mouth-open.png": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/mouth-open.png",
+    "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v2/mouth-open.png": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/mouth-open.png"
+  },
+  "eye_mask": "res://art/source/portrait-components-v3/brawler-c/eyes-erasure.png",
+  "mouth_mask": "res://art/source/portrait-components-v3/brawler-c/mouth-erasure.png",
+  "original": "res://art/source/portrait-components-v3/brawler-c/resting-reference.png",
+  "clean": "res://art/source/portrait-components-v3/brawler-c/clean-reference.png",
+  "recipe": {
+    "eyes": [
+      [
+        [
+          [
+            83,
+            66
+          ],
+          [
+            87,
+            62
+          ],
+          [
+            97,
+            62
+          ],
+          [
+            105,
+            65
+          ],
+          [
+            109,
+            68
+          ],
+          [
+            106,
+            73
+          ],
+          [
+            98,
+            75
+          ],
+          [
+            89,
+            74
+          ],
+          [
+            83,
+            70
+          ]
+        ],
+        [
+          [
+            85,
+            67
+          ],
+          [
+            90,
+            70
+          ],
+          [
+            97,
+            71
+          ],
+          [
+            104,
+            69
+          ],
+          [
+            107,
+            68
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            109,
+            67
+          ],
+          [
+            113,
+            63
+          ],
+          [
+            123,
+            63
+          ],
+          [
+            131,
+            66
+          ],
+          [
+            135,
+            69
+          ],
+          [
+            132,
+            74
+          ],
+          [
+            124,
+            76
+          ],
+          [
+            115,
+            75
+          ],
+          [
+            109,
+            71
+          ]
+        ],
+        [
+          [
+            111,
+            68
+          ],
+          [
+            116,
+            71
+          ],
+          [
+            123,
+            72
+          ],
+          [
+            130,
+            70
+          ],
+          [
+            133,
+            69
+          ]
+        ]
+      ]
+    ],
+    "lip": [
+      [
+        95,
+        98
+      ],
+      [
+        102,
+        97
+      ],
+      [
+        111,
+        97
+      ],
+      [
+        120,
+        98
+      ]
+    ],
+    "mouth": [
+      [
+        92,
+        97
+      ],
+      [
+        98,
+        93
+      ],
+      [
+        114,
+        93
+      ],
+      [
+        123,
+        97
+      ],
+      [
+        123,
+        101
+      ],
+      [
+        117,
+        103
+      ],
+      [
+        99,
+        103
+      ],
+      [
+        92,
+        101
+      ]
+    ]
+  },
+  "outputs": [
+    {
+      "name": "clean-character",
+      "texture": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/head-clean.png",
+      "sha256": "9a5d65cf7b25d85c1bb11b1b93a9c642f610215c8329e792f7f2ee40275a39dd"
+    },
+    {
+      "name": "eyes-neutral",
+      "texture": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/eyes-neutral.png",
+      "sha256": "e0a1366bb642a9cfb008c90f9ed3aea417b19fdd425c63caae498bce62cceda2"
+    },
+    {
+      "name": "mouth-neutral",
+      "texture": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/mouth-neutral.png",
+      "sha256": "8b5f12a54dee3a9486c876badb810a1349af7e45c218c3f71280ee8806fc9b95"
+    },
+    {
+      "name": "eyes-half",
+      "texture": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/eyes-half.png",
+      "sha256": "f5661b2bbdb04926ab6c8c4d32567107f56ad790c4afaf4f14fd27f679c0ec4e",
+      "ink": "res://art/source/portrait-components-v3/brawler-c/eyes-half-ink.png"
+    },
+    {
+      "name": "eyes-closed",
+      "texture": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/eyes-closed.png",
+      "sha256": "78662cfea20e45aa233b145e0817420228d9af80e203d4e61aadaa8acb1c2748",
+      "ink": "res://art/source/portrait-components-v3/brawler-c/eyes-closed-ink.png"
+    },
+    {
+      "name": "mouth-small",
+      "texture": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/mouth-small.png",
+      "sha256": "7b453aaf11588e988193072d0db3be2cd3067aa40c513eb83d20178b3c62be92",
+      "ink": "res://art/source/portrait-components-v3/brawler-c/mouth-small-ink.png"
+    },
+    {
+      "name": "mouth-open",
+      "texture": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/mouth-open.png",
+      "sha256": "ea018b85d565ed9421f90a754619be7781dc0f73810a6c3071238eede1fa4154",
+      "ink": "res://art/source/portrait-components-v3/brawler-c/mouth-open-ink.png"
+    }
+  ]
+}

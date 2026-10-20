@@ -98,30 +98,28 @@ def add_lighting(lines,directory):
     lines += ['light_shadow = ExtResource("light_shadow")','light_highlight = ExtResource("light_highlight")']
 
 def prefer_pixel_frames(lines):
-    """Retain approved #121 pixel repairs when rebuilding older portrait sources.
+    """Retain #121 complete face components when exporting original sources.
 
-    A changed resting source invalidates the fit; never silently reuse its old
-    repaired animation on newly generated anatomy.
+    Static worried/exhausted portraits keep their own complete expressions.
+    A changed original invalidates the clean plate and fitted components.
     """
-    manifest=ROOT/'art/concepts/portrait-pixel-repair-v1/pixel-validation.json'
+    if not any(line.startswith('blink_frames =') for line in lines):return lines
+    manifest=ROOT/'art/concepts/portrait-components-v3/components.json'
     if not manifest.exists():return lines
     records=json.loads(manifest.read_text(encoding='utf-8'))['faces']
-    by_texture={frame['texture']:(record,frame) for record in records for frame in record['frames']}
+    by_texture={old:(record,new) for record in records for old,new in record['bindings'].items()}
     result=[];checked=set()
     for line in lines:
-        match=re.search(r'path="(res://[^"]+/(?:eyes-half|eyes-closed|mouth-small|mouth-open|mouth-round)\.png)"',line)
-        if match:
-            original=match[1];path=ROOT/original.removeprefix('res://')
-            candidate=path if path.parent.name=='frames-pixel-v2' else path.parent/'frames-pixel-v2'/path.name
-            key='res://'+candidate.relative_to(ROOT).as_posix()
-            if key in by_texture:
-                record,frame=by_texture[key]
-                if record['face'] not in checked:
-                    for source,expected in record['input_layers'].items():
-                        assert hashlib.sha256((ROOT/source.removeprefix('res://')).read_bytes()).hexdigest()==expected, record['face']+': resting art changed; re-fit pixel animation before export'
-                    checked.add(record['face'])
-                assert hashlib.sha256(candidate.read_bytes()).hexdigest()==frame['sha256'],candidate
-                line=line.replace(original,key)
+        match=re.search(r'path="(res://[^"]+\.png)"',line)
+        if match and match[1] in by_texture:
+            original=match[1];record,key=by_texture[original]
+            if record['face'] not in checked:
+                for source,expected in record['input_layers'].items():
+                    assert hashlib.sha256((ROOT/source.removeprefix('res://')).read_bytes()).hexdigest()==expected, record['face']+': original anatomy changed; rebuild complete facial components before export'
+                for output in record['outputs']:
+                    assert hashlib.sha256((ROOT/output['texture'].removeprefix('res://')).read_bytes()).hexdigest()==output['sha256'],output['texture']
+                checked.add(record['face'])
+            line=line.replace(original,key)
         result.append(line)
     return result
 

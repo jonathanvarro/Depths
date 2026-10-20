@@ -1,0 +1,273 @@
+{
+  "face": "mara",
+  "family": "unique-mara-v1",
+  "resources": [
+    "res://data/portraits/mara.tres",
+    "res://art/portraits/mara-neutral-v1/underlayer.tres"
+  ],
+  "input_layers": {
+    "res://art/concepts/portraits/mara-layered-v1/background.png": "d68fb226983c6aa8631760a1daa044589ae10d0a997d5fec5f7857e32ffa87d4",
+    "res://art/portraits/mara-neutral-v1/base.png": "e86904195e7bf2977459ad77262cab602f7fc95233ffcd6567e91b5c7cc9301d",
+    "res://art/portraits/mara-neutral-v1/eyes-neutral.png": "9fa20998c6201248d72e571f39e159e77a8c0d950f8f11f2dd7778e6d97bf17c",
+    "res://art/portraits/mara-neutral-v1/mouth-neutral.png": "b87dbed36ffa2dafdf2a3f350d7b55de83441529b319c01cde115e8c90d0a4a0",
+    "res://art/portraits/mara-neutral-v1/tunic.png": "6a92a9351df2c7ac4d5f1648b8e2777063d9e54040fced2dd554e17770510d44"
+  },
+  "bindings": {
+    "res://art/portraits/mara-neutral-v1/base.png": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/base-clean.png",
+    "res://art/portraits/mara-neutral-v1/eyes-neutral.png": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/eyes-neutral.png",
+    "res://art/portraits/mara-neutral-v1/mouth-neutral.png": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/mouth-neutral.png",
+    "res://art/portraits/mara-neutral-v1/eyes-half.png": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/eyes-half.png",
+    "res://art/portraits/mara-neutral-v1/frames-pixel-v2/eyes-half.png": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/eyes-half.png",
+    "res://art/portraits/mara-neutral-v1/eyes-closed.png": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/eyes-closed.png",
+    "res://art/portraits/mara-neutral-v1/frames-pixel-v2/eyes-closed.png": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/eyes-closed.png",
+    "res://art/portraits/mara-neutral-v1/mouth-small.png": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/mouth-small.png",
+    "res://art/portraits/mara-neutral-v1/frames-pixel-v2/mouth-small.png": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/mouth-small.png",
+    "res://art/portraits/mara-neutral-v1/mouth-open.png": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/mouth-open.png",
+    "res://art/portraits/mara-neutral-v1/frames-pixel-v2/mouth-open.png": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/mouth-open.png",
+    "res://art/portraits/mara-neutral-v1/mouth-round.png": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/mouth-round.png",
+    "res://art/portraits/mara-neutral-v1/frames-pixel-v2/mouth-round.png": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/mouth-round.png"
+  },
+  "eye_mask": "res://art/source/portrait-components-v3/mara/eyes-erasure.png",
+  "mouth_mask": "res://art/source/portrait-components-v3/mara/mouth-erasure.png",
+  "original": "res://art/source/portrait-components-v3/mara/resting-reference.png",
+  "clean": "res://art/source/portrait-components-v3/mara/clean-reference.png",
+  "recipe": {
+    "eyes": [
+      [
+        [
+          [
+            84,
+            68
+          ],
+          [
+            89,
+            65
+          ],
+          [
+            99,
+            65
+          ],
+          [
+            106,
+            67
+          ],
+          [
+            109,
+            70
+          ],
+          [
+            107,
+            74
+          ],
+          [
+            102,
+            77
+          ],
+          [
+            91,
+            77
+          ],
+          [
+            85,
+            73
+          ]
+        ],
+        [
+          [
+            86,
+            69
+          ],
+          [
+            91,
+            72
+          ],
+          [
+            99,
+            73
+          ],
+          [
+            105,
+            71
+          ],
+          [
+            107,
+            70
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            113,
+            68
+          ],
+          [
+            119,
+            65
+          ],
+          [
+            131,
+            65
+          ],
+          [
+            137,
+            68
+          ],
+          [
+            139,
+            72
+          ],
+          [
+            135,
+            76
+          ],
+          [
+            124,
+            78
+          ],
+          [
+            116,
+            75
+          ],
+          [
+            113,
+            72
+          ]
+        ],
+        [
+          [
+            115,
+            70
+          ],
+          [
+            120,
+            73
+          ],
+          [
+            128,
+            73
+          ],
+          [
+            135,
+            71
+          ],
+          [
+            137,
+            70
+          ]
+        ]
+      ]
+    ],
+    "mouth": [
+      [
+        94,
+        100
+      ],
+      [
+        99,
+        96
+      ],
+      [
+        105,
+        95
+      ],
+      [
+        113,
+        95
+      ],
+      [
+        121,
+        98
+      ],
+      [
+        125,
+        101
+      ],
+      [
+        122,
+        105
+      ],
+      [
+        112,
+        106
+      ],
+      [
+        101,
+        105
+      ],
+      [
+        94,
+        103
+      ]
+    ],
+    "lip": [
+      [
+        97,
+        101
+      ],
+      [
+        103,
+        100
+      ],
+      [
+        111,
+        100
+      ],
+      [
+        118,
+        101
+      ],
+      [
+        122,
+        102
+      ]
+    ]
+  },
+  "outputs": [
+    {
+      "name": "clean-character",
+      "texture": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/base-clean.png",
+      "sha256": "0186df27b9ca9b356913598a7fcb013edb0716dd8bac318823e7a291c25a2dc9"
+    },
+    {
+      "name": "eyes-neutral",
+      "texture": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/eyes-neutral.png",
+      "sha256": "ec28d0392d00b7f58f43a3d400108ce70adade80b144b2cc9cd8505982cc02b4"
+    },
+    {
+      "name": "mouth-neutral",
+      "texture": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/mouth-neutral.png",
+      "sha256": "8868804fcd66eddfea8b78c2b7a37b02a563c47d42efcf4ca28450aa6f9fc2cc"
+    },
+    {
+      "name": "eyes-half",
+      "texture": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/eyes-half.png",
+      "sha256": "d72a3e811f5235248010205c67a35dcf5d3745cb55dd812f0dfcf724058cccb8",
+      "ink": "res://art/source/portrait-components-v3/mara/eyes-half-ink.png"
+    },
+    {
+      "name": "eyes-closed",
+      "texture": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/eyes-closed.png",
+      "sha256": "8991d8ccc03af616966887af80cebc39e7b1bbb06eb2f68c9b083bfe43f718fe",
+      "ink": "res://art/source/portrait-components-v3/mara/eyes-closed-ink.png"
+    },
+    {
+      "name": "mouth-small",
+      "texture": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/mouth-small.png",
+      "sha256": "7ac7e5c4b6fbcb2a9e08b040b4b2ef9a502fce6d917f6fe4308476ec5bbaae78",
+      "ink": "res://art/source/portrait-components-v3/mara/mouth-small-ink.png"
+    },
+    {
+      "name": "mouth-open",
+      "texture": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/mouth-open.png",
+      "sha256": "085356b7bf5158b2e59b7a8745d98396a6e71f8b44fccdd23ac2a0310a145b54",
+      "ink": "res://art/source/portrait-components-v3/mara/mouth-open-ink.png"
+    },
+    {
+      "name": "mouth-round",
+      "texture": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/mouth-round.png",
+      "sha256": "ba745152a765d128712121728102b5f8571038c54db7e48cbf5b325b0acac994",
+      "ink": "res://art/source/portrait-components-v3/mara/mouth-round-ink.png"
+    }
+  ]
+}

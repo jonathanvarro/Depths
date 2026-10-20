@@ -36,42 +36,42 @@
       "layers": [
         "res://art/concepts/portraits/mara-layered-v1/background.png",
         "res://art/portraits/main-heroes-v1/alwen/body.png",
-        "res://art/portraits/main-heroes-v1/alwen/head.png",
-        "res://art/portraits/main-heroes-v1/alwen/eyes-neutral.png",
-        "res://art/portraits/main-heroes-v1/alwen/mouth-neutral.png"
+        "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/head-clean.png",
+        "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/eyes-neutral.png",
+        "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/mouth-neutral.png"
       ],
-      "neutral_eyes": "res://art/portraits/main-heroes-v1/alwen/eyes-neutral.png",
-      "neutral_mouth": "res://art/portraits/main-heroes-v1/alwen/mouth-neutral.png",
+      "neutral_eyes": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/eyes-neutral.png",
+      "neutral_mouth": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/mouth-neutral.png",
       "frames": [
         {
           "name": "Neutral",
-          "eyes": "res://art/portraits/main-heroes-v1/alwen/eyes-neutral.png",
-          "mouth": "res://art/portraits/main-heroes-v1/alwen/mouth-neutral.png"
+          "eyes": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Half lid",
-          "eyes": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v2/eyes-half.png",
-          "mouth": "res://art/portraits/main-heroes-v1/alwen/mouth-neutral.png"
+          "eyes": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/eyes-half.png",
+          "mouth": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Closed",
-          "eyes": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v2/eyes-closed.png",
-          "mouth": "res://art/portraits/main-heroes-v1/alwen/mouth-neutral.png"
+          "eyes": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/eyes-closed.png",
+          "mouth": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Small mouth",
-          "eyes": "res://art/portraits/main-heroes-v1/alwen/eyes-neutral.png",
-          "mouth": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v2/mouth-small.png"
+          "eyes": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/mouth-small.png"
         },
         {
           "name": "Open mouth",
-          "eyes": "res://art/portraits/main-heroes-v1/alwen/eyes-neutral.png",
-          "mouth": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v2/mouth-open.png"
+          "eyes": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/mouth-open.png"
         },
         {
           "name": "Round mouth",
-          "eyes": "res://art/portraits/main-heroes-v1/alwen/eyes-neutral.png",
-          "mouth": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v2/mouth-round.png"
+          "eyes": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/main-heroes-v1/alwen/frames-pixel-v3/mouth-round.png"
         }
       ],
       "eye_box": [
@@ -86,7 +86,8 @@
         129,
         104
       ],
-      "review": "Native pixel repair: only fitted lid/lip pixels differ from this resting reference; surrounding skin and anatomy are preserved."
+      "separated_features": true,
+      "review": "Complete components v3: underlying face has no eyes or lips; neutral components restore the original exactly. Each animation replaces the whole feature, including its corners."
     },
     {
       "id": "corin",
@@ -98,57 +99,58 @@
       "layers": [
         "res://art/concepts/portraits/mara-layered-v1/background.png",
         "res://art/portraits/main-heroes-v1/corin/body.png",
-        "res://art/portraits/main-heroes-v1/corin/head.png",
-        "res://art/portraits/main-heroes-v1/corin/eyes-neutral.png",
-        "res://art/portraits/main-heroes-v1/corin/mouth-neutral.png"
+        "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/head-clean.png",
+        "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/eyes-neutral.png",
+        "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/mouth-neutral.png"
       ],
-      "neutral_eyes": "res://art/portraits/main-heroes-v1/corin/eyes-neutral.png",
-      "neutral_mouth": "res://art/portraits/main-heroes-v1/corin/mouth-neutral.png",
+      "neutral_eyes": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/eyes-neutral.png",
+      "neutral_mouth": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/mouth-neutral.png",
       "frames": [
         {
           "name": "Neutral",
-          "eyes": "res://art/portraits/main-heroes-v1/corin/eyes-neutral.png",
-          "mouth": "res://art/portraits/main-heroes-v1/corin/mouth-neutral.png"
+          "eyes": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Half lid",
-          "eyes": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v2/eyes-half.png",
-          "mouth": "res://art/portraits/main-heroes-v1/corin/mouth-neutral.png"
+          "eyes": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/eyes-half.png",
+          "mouth": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Closed",
-          "eyes": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v2/eyes-closed.png",
-          "mouth": "res://art/portraits/main-heroes-v1/corin/mouth-neutral.png"
+          "eyes": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/eyes-closed.png",
+          "mouth": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Small mouth",
-          "eyes": "res://art/portraits/main-heroes-v1/corin/eyes-neutral.png",
-          "mouth": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v2/mouth-small.png"
+          "eyes": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/mouth-small.png"
         },
         {
           "name": "Open mouth",
-          "eyes": "res://art/portraits/main-heroes-v1/corin/eyes-neutral.png",
-          "mouth": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v2/mouth-open.png"
+          "eyes": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/mouth-open.png"
         },
         {
           "name": "Round mouth",
-          "eyes": "res://art/portraits/main-heroes-v1/corin/eyes-neutral.png",
-          "mouth": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v2/mouth-round.png"
+          "eyes": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/main-heroes-v1/corin/frames-pixel-v3/mouth-round.png"
         }
       ],
       "eye_box": [
-        82,
-        57,
-        136,
-        77
+        80,
+        55,
+        140,
+        81
       ],
       "mouth_box": [
-        93,
-        84,
-        125,
-        101
+        87,
+        83,
+        128,
+        104
       ],
-      "review": "Native pixel repair: only fitted lid/lip pixels differ from this resting reference; surrounding skin and anatomy are preserved."
+      "separated_features": true,
+      "review": "Complete components v3: underlying face has no eyes or lips; neutral components restore the original exactly. Each animation replaces the whole feature, including its corners."
     },
     {
       "id": "mara",
@@ -159,43 +161,43 @@
       "resource": "res://data/portraits/mara.tres",
       "layers": [
         "res://art/concepts/portraits/mara-layered-v1/background.png",
-        "res://art/portraits/mara-neutral-v1/base.png",
-        "res://art/portraits/mara-neutral-v1/eyes-neutral.png",
-        "res://art/portraits/mara-neutral-v1/mouth-neutral.png",
+        "res://art/portraits/mara-neutral-v1/frames-pixel-v3/base-clean.png",
+        "res://art/portraits/mara-neutral-v1/frames-pixel-v3/eyes-neutral.png",
+        "res://art/portraits/mara-neutral-v1/frames-pixel-v3/mouth-neutral.png",
         "res://art/portraits/mara-neutral-v1/tunic.png"
       ],
-      "neutral_eyes": "res://art/portraits/mara-neutral-v1/eyes-neutral.png",
-      "neutral_mouth": "res://art/portraits/mara-neutral-v1/mouth-neutral.png",
+      "neutral_eyes": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/eyes-neutral.png",
+      "neutral_mouth": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/mouth-neutral.png",
       "frames": [
         {
           "name": "Neutral",
-          "eyes": "res://art/portraits/mara-neutral-v1/eyes-neutral.png",
-          "mouth": "res://art/portraits/mara-neutral-v1/mouth-neutral.png"
+          "eyes": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Half lid",
-          "eyes": "res://art/portraits/mara-neutral-v1/frames-pixel-v2/eyes-half.png",
-          "mouth": "res://art/portraits/mara-neutral-v1/mouth-neutral.png"
+          "eyes": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/eyes-half.png",
+          "mouth": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Closed",
-          "eyes": "res://art/portraits/mara-neutral-v1/frames-pixel-v2/eyes-closed.png",
-          "mouth": "res://art/portraits/mara-neutral-v1/mouth-neutral.png"
+          "eyes": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/eyes-closed.png",
+          "mouth": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Small mouth",
-          "eyes": "res://art/portraits/mara-neutral-v1/eyes-neutral.png",
-          "mouth": "res://art/portraits/mara-neutral-v1/frames-pixel-v2/mouth-small.png"
+          "eyes": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/mouth-small.png"
         },
         {
           "name": "Open mouth",
-          "eyes": "res://art/portraits/mara-neutral-v1/eyes-neutral.png",
-          "mouth": "res://art/portraits/mara-neutral-v1/frames-pixel-v2/mouth-open.png"
+          "eyes": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/mouth-open.png"
         },
         {
           "name": "Round mouth",
-          "eyes": "res://art/portraits/mara-neutral-v1/eyes-neutral.png",
-          "mouth": "res://art/portraits/mara-neutral-v1/frames-pixel-v2/mouth-round.png"
+          "eyes": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/mouth-round.png"
         }
       ],
       "eye_box": [
@@ -210,7 +212,8 @@
         128,
         112
       ],
-      "review": "Native pixel repair: only fitted lid/lip pixels differ from this resting reference; surrounding skin and anatomy are preserved."
+      "separated_features": true,
+      "review": "Complete components v3: underlying face has no eyes or lips; neutral components restore the original exactly. Each animation replaces the whole feature, including its corners."
     },
     {
       "id": "brawler-a-exhausted",
@@ -247,6 +250,7 @@
         132,
         112
       ],
+      "separated_features": false,
       "review": "Static expression; no neutral blink/talk frames borrowed."
     },
     {
@@ -284,6 +288,7 @@
         132,
         112
       ],
+      "separated_features": false,
       "review": "Static expression; no neutral blink/talk frames borrowed."
     },
     {
@@ -295,38 +300,38 @@
       "resource": "res://data/portraits/recruit-roster-v1/brawler-a.tres",
       "layers": [
         "res://art/portraits/recruit-kit-v1/shared/body.png",
-        "res://art/portraits/recruit-roster-v1/brawler-a/head.png",
-        "res://art/portraits/recruit-roster-v1/brawler-a/eyes-neutral.png",
-        "res://art/portraits/recruit-roster-v1/brawler-a/mouth-neutral.png",
+        "res://art/portraits/recruit-roster-v1/brawler-a/frames-pixel-v3/head-clean.png",
+        "res://art/portraits/recruit-roster-v1/brawler-a/frames-pixel-v3/eyes-neutral.png",
+        "res://art/portraits/recruit-roster-v1/brawler-a/frames-pixel-v3/mouth-neutral.png",
         "res://art/portraits/recruit-kit-v1/shared/jerkin.png"
       ],
-      "neutral_eyes": "res://art/portraits/recruit-roster-v1/brawler-a/eyes-neutral.png",
-      "neutral_mouth": "res://art/portraits/recruit-roster-v1/brawler-a/mouth-neutral.png",
+      "neutral_eyes": "res://art/portraits/recruit-roster-v1/brawler-a/frames-pixel-v3/eyes-neutral.png",
+      "neutral_mouth": "res://art/portraits/recruit-roster-v1/brawler-a/frames-pixel-v3/mouth-neutral.png",
       "frames": [
         {
           "name": "Neutral",
-          "eyes": "res://art/portraits/recruit-roster-v1/brawler-a/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/brawler-a/mouth-neutral.png"
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-a/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-a/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Half lid",
-          "eyes": "res://art/portraits/recruit-roster-v1/brawler-a/frames-pixel-v2/eyes-half.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/brawler-a/mouth-neutral.png"
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-a/frames-pixel-v3/eyes-half.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-a/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Closed",
-          "eyes": "res://art/portraits/recruit-roster-v1/brawler-a/frames-pixel-v2/eyes-closed.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/brawler-a/mouth-neutral.png"
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-a/frames-pixel-v3/eyes-closed.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-a/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Small mouth",
-          "eyes": "res://art/portraits/recruit-roster-v1/brawler-a/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/brawler-a/frames-pixel-v2/mouth-small.png"
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-a/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-a/frames-pixel-v3/mouth-small.png"
         },
         {
           "name": "Open mouth",
-          "eyes": "res://art/portraits/recruit-roster-v1/brawler-a/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/brawler-a/frames-pixel-v2/mouth-open.png"
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-a/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-a/frames-pixel-v3/mouth-open.png"
         }
       ],
       "eye_box": [
@@ -341,7 +346,8 @@
         132,
         112
       ],
-      "review": "Native pixel repair: only fitted lid/lip pixels differ from this resting reference; surrounding skin and anatomy are preserved."
+      "separated_features": true,
+      "review": "Complete components v3: underlying face has no eyes or lips; neutral components restore the original exactly. Each animation replaces the whole feature, including its corners."
     },
     {
       "id": "brawler-b-exhausted",
@@ -378,6 +384,7 @@
         132,
         112
       ],
+      "separated_features": false,
       "review": "Static expression; no neutral blink/talk frames borrowed."
     },
     {
@@ -415,6 +422,7 @@
         132,
         112
       ],
+      "separated_features": false,
       "review": "Static expression; no neutral blink/talk frames borrowed."
     },
     {
@@ -426,38 +434,38 @@
       "resource": "res://data/portraits/recruit-roster-v1/brawler-b.tres",
       "layers": [
         "res://art/portraits/recruit-kit-v1/shared/body.png",
-        "res://art/portraits/recruit-roster-v1/brawler-b/head.png",
-        "res://art/portraits/recruit-roster-v1/brawler-b/eyes-neutral.png",
-        "res://art/portraits/recruit-roster-v1/brawler-b/mouth-neutral.png",
+        "res://art/portraits/recruit-roster-v1/brawler-b/frames-pixel-v3/head-clean.png",
+        "res://art/portraits/recruit-roster-v1/brawler-b/frames-pixel-v3/eyes-neutral.png",
+        "res://art/portraits/recruit-roster-v1/brawler-b/frames-pixel-v3/mouth-neutral.png",
         "res://art/portraits/recruit-kit-v1/shared/jerkin.png"
       ],
-      "neutral_eyes": "res://art/portraits/recruit-roster-v1/brawler-b/eyes-neutral.png",
-      "neutral_mouth": "res://art/portraits/recruit-roster-v1/brawler-b/mouth-neutral.png",
+      "neutral_eyes": "res://art/portraits/recruit-roster-v1/brawler-b/frames-pixel-v3/eyes-neutral.png",
+      "neutral_mouth": "res://art/portraits/recruit-roster-v1/brawler-b/frames-pixel-v3/mouth-neutral.png",
       "frames": [
         {
           "name": "Neutral",
-          "eyes": "res://art/portraits/recruit-roster-v1/brawler-b/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/brawler-b/mouth-neutral.png"
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-b/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-b/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Half lid",
-          "eyes": "res://art/portraits/recruit-roster-v1/brawler-b/frames-pixel-v2/eyes-half.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/brawler-b/mouth-neutral.png"
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-b/frames-pixel-v3/eyes-half.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-b/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Closed",
-          "eyes": "res://art/portraits/recruit-roster-v1/brawler-b/frames-pixel-v2/eyes-closed.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/brawler-b/mouth-neutral.png"
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-b/frames-pixel-v3/eyes-closed.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-b/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Small mouth",
-          "eyes": "res://art/portraits/recruit-roster-v1/brawler-b/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/brawler-b/frames-pixel-v2/mouth-small.png"
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-b/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-b/frames-pixel-v3/mouth-small.png"
         },
         {
           "name": "Open mouth",
-          "eyes": "res://art/portraits/recruit-roster-v1/brawler-b/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/brawler-b/frames-pixel-v2/mouth-open.png"
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-b/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-b/frames-pixel-v3/mouth-open.png"
         }
       ],
       "eye_box": [
@@ -472,7 +480,8 @@
         132,
         112
       ],
-      "review": "Native pixel repair: only fitted lid/lip pixels differ from this resting reference; surrounding skin and anatomy are preserved."
+      "separated_features": true,
+      "review": "Complete components v3: underlying face has no eyes or lips; neutral components restore the original exactly. Each animation replaces the whole feature, including its corners."
     },
     {
       "id": "brawler-c-exhausted",
@@ -509,6 +518,7 @@
         132,
         112
       ],
+      "separated_features": false,
       "review": "Static expression; no neutral blink/talk frames borrowed."
     },
     {
@@ -546,6 +556,7 @@
         132,
         112
       ],
+      "separated_features": false,
       "review": "Static expression; no neutral blink/talk frames borrowed."
     },
     {
@@ -557,38 +568,38 @@
       "resource": "res://data/portraits/recruit-roster-v1/brawler-c.tres",
       "layers": [
         "res://art/portraits/recruit-kit-v1/shared/body.png",
-        "res://art/portraits/recruit-roster-v1/brawler-c/head.png",
-        "res://art/portraits/recruit-roster-v1/brawler-c/eyes-neutral.png",
-        "res://art/portraits/recruit-roster-v1/brawler-c/mouth-neutral.png",
+        "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/head-clean.png",
+        "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/eyes-neutral.png",
+        "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/mouth-neutral.png",
         "res://art/portraits/recruit-kit-v1/shared/jerkin.png"
       ],
-      "neutral_eyes": "res://art/portraits/recruit-roster-v1/brawler-c/eyes-neutral.png",
-      "neutral_mouth": "res://art/portraits/recruit-roster-v1/brawler-c/mouth-neutral.png",
+      "neutral_eyes": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/eyes-neutral.png",
+      "neutral_mouth": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/mouth-neutral.png",
       "frames": [
         {
           "name": "Neutral",
-          "eyes": "res://art/portraits/recruit-roster-v1/brawler-c/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/brawler-c/mouth-neutral.png"
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Half lid",
-          "eyes": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v2/eyes-half.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/brawler-c/mouth-neutral.png"
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/eyes-half.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Closed",
-          "eyes": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v2/eyes-closed.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/brawler-c/mouth-neutral.png"
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/eyes-closed.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Small mouth",
-          "eyes": "res://art/portraits/recruit-roster-v1/brawler-c/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v2/mouth-small.png"
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/mouth-small.png"
         },
         {
           "name": "Open mouth",
-          "eyes": "res://art/portraits/recruit-roster-v1/brawler-c/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v2/mouth-open.png"
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-c/frames-pixel-v3/mouth-open.png"
         }
       ],
       "eye_box": [
@@ -603,7 +614,8 @@
         132,
         112
       ],
-      "review": "Native pixel repair: only fitted lid/lip pixels differ from this resting reference; surrounding skin and anatomy are preserved."
+      "separated_features": true,
+      "review": "Complete components v3: underlying face has no eyes or lips; neutral components restore the original exactly. Each animation replaces the whole feature, including its corners."
     },
     {
       "id": "scout-b-exhausted",
@@ -640,6 +652,7 @@
         132,
         112
       ],
+      "separated_features": false,
       "review": "Static expression; no neutral blink/talk frames borrowed."
     },
     {
@@ -677,6 +690,7 @@
         132,
         112
       ],
+      "separated_features": false,
       "review": "Static expression; no neutral blink/talk frames borrowed."
     },
     {
@@ -688,38 +702,38 @@
       "resource": "res://data/portraits/recruit-roster-v1/scout-b.tres",
       "layers": [
         "res://art/portraits/recruit-kit-v1/shared/body.png",
-        "res://art/portraits/recruit-roster-v1/scout-b/head.png",
-        "res://art/portraits/recruit-roster-v1/scout-b/eyes-neutral.png",
-        "res://art/portraits/recruit-roster-v1/scout-b/mouth-neutral.png",
+        "res://art/portraits/recruit-roster-v1/scout-b/frames-pixel-v3/head-clean.png",
+        "res://art/portraits/recruit-roster-v1/scout-b/frames-pixel-v3/eyes-neutral.png",
+        "res://art/portraits/recruit-roster-v1/scout-b/frames-pixel-v3/mouth-neutral.png",
         "res://art/portraits/recruit-kit-v1/shared/jerkin.png"
       ],
-      "neutral_eyes": "res://art/portraits/recruit-roster-v1/scout-b/eyes-neutral.png",
-      "neutral_mouth": "res://art/portraits/recruit-roster-v1/scout-b/mouth-neutral.png",
+      "neutral_eyes": "res://art/portraits/recruit-roster-v1/scout-b/frames-pixel-v3/eyes-neutral.png",
+      "neutral_mouth": "res://art/portraits/recruit-roster-v1/scout-b/frames-pixel-v3/mouth-neutral.png",
       "frames": [
         {
           "name": "Neutral",
-          "eyes": "res://art/portraits/recruit-roster-v1/scout-b/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/scout-b/mouth-neutral.png"
+          "eyes": "res://art/portraits/recruit-roster-v1/scout-b/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/scout-b/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Half lid",
-          "eyes": "res://art/portraits/recruit-roster-v1/scout-b/frames-pixel-v2/eyes-half.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/scout-b/mouth-neutral.png"
+          "eyes": "res://art/portraits/recruit-roster-v1/scout-b/frames-pixel-v3/eyes-half.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/scout-b/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Closed",
-          "eyes": "res://art/portraits/recruit-roster-v1/scout-b/frames-pixel-v2/eyes-closed.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/scout-b/mouth-neutral.png"
+          "eyes": "res://art/portraits/recruit-roster-v1/scout-b/frames-pixel-v3/eyes-closed.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/scout-b/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Small mouth",
-          "eyes": "res://art/portraits/recruit-roster-v1/scout-b/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/scout-b/frames-pixel-v2/mouth-small.png"
+          "eyes": "res://art/portraits/recruit-roster-v1/scout-b/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/scout-b/frames-pixel-v3/mouth-small.png"
         },
         {
           "name": "Open mouth",
-          "eyes": "res://art/portraits/recruit-roster-v1/scout-b/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/scout-b/frames-pixel-v2/mouth-open.png"
+          "eyes": "res://art/portraits/recruit-roster-v1/scout-b/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/scout-b/frames-pixel-v3/mouth-open.png"
         }
       ],
       "eye_box": [
@@ -734,7 +748,8 @@
         132,
         112
       ],
-      "review": "Native pixel repair: only fitted lid/lip pixels differ from this resting reference; surrounding skin and anatomy are preserved."
+      "separated_features": true,
+      "review": "Complete components v3: underlying face has no eyes or lips; neutral components restore the original exactly. Each animation replaces the whole feature, including its corners."
     },
     {
       "id": "scout-c-exhausted",
@@ -771,6 +786,7 @@
         132,
         112
       ],
+      "separated_features": false,
       "review": "Static expression; no neutral blink/talk frames borrowed."
     },
     {
@@ -808,6 +824,7 @@
         132,
         112
       ],
+      "separated_features": false,
       "review": "Static expression; no neutral blink/talk frames borrowed."
     },
     {
@@ -819,38 +836,38 @@
       "resource": "res://data/portraits/recruit-roster-v1/scout-c.tres",
       "layers": [
         "res://art/portraits/recruit-kit-v1/shared/body.png",
-        "res://art/portraits/recruit-roster-v1/scout-c/head.png",
-        "res://art/portraits/recruit-roster-v1/scout-c/eyes-neutral.png",
-        "res://art/portraits/recruit-roster-v1/scout-c/mouth-neutral.png",
+        "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/head-clean.png",
+        "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/eyes-neutral.png",
+        "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/mouth-neutral.png",
         "res://art/portraits/recruit-kit-v1/shared/jerkin.png"
       ],
-      "neutral_eyes": "res://art/portraits/recruit-roster-v1/scout-c/eyes-neutral.png",
-      "neutral_mouth": "res://art/portraits/recruit-roster-v1/scout-c/mouth-neutral.png",
+      "neutral_eyes": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/eyes-neutral.png",
+      "neutral_mouth": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/mouth-neutral.png",
       "frames": [
         {
           "name": "Neutral",
-          "eyes": "res://art/portraits/recruit-roster-v1/scout-c/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/scout-c/mouth-neutral.png"
+          "eyes": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Half lid",
-          "eyes": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v2/eyes-half.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/scout-c/mouth-neutral.png"
+          "eyes": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/eyes-half.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Closed",
-          "eyes": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v2/eyes-closed.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/scout-c/mouth-neutral.png"
+          "eyes": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/eyes-closed.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Small mouth",
-          "eyes": "res://art/portraits/recruit-roster-v1/scout-c/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v2/mouth-small.png"
+          "eyes": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/mouth-small.png"
         },
         {
           "name": "Open mouth",
-          "eyes": "res://art/portraits/recruit-roster-v1/scout-c/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v2/mouth-open.png"
+          "eyes": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/mouth-open.png"
         }
       ],
       "eye_box": [
@@ -865,7 +882,8 @@
         132,
         112
       ],
-      "review": "Native pixel repair: only fitted lid/lip pixels differ from this resting reference; surrounding skin and anatomy are preserved."
+      "separated_features": true,
+      "review": "Complete components v3: underlying face has no eyes or lips; neutral components restore the original exactly. Each animation replaces the whole feature, including its corners."
     },
     {
       "id": "warden-b-exhausted",
@@ -902,6 +920,7 @@
         132,
         112
       ],
+      "separated_features": false,
       "review": "Static expression; no neutral blink/talk frames borrowed."
     },
     {
@@ -939,6 +958,7 @@
         132,
         112
       ],
+      "separated_features": false,
       "review": "Static expression; no neutral blink/talk frames borrowed."
     },
     {
@@ -950,38 +970,38 @@
       "resource": "res://data/portraits/recruit-roster-v1/warden-b.tres",
       "layers": [
         "res://art/portraits/recruit-kit-v1/shared/body.png",
-        "res://art/portraits/recruit-roster-v1/warden-b/head.png",
-        "res://art/portraits/recruit-roster-v1/warden-b/eyes-neutral.png",
-        "res://art/portraits/recruit-roster-v1/warden-b/mouth-neutral.png",
+        "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/head-clean.png",
+        "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/eyes-neutral.png",
+        "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/mouth-neutral.png",
         "res://art/portraits/recruit-kit-v1/shared/jerkin.png"
       ],
-      "neutral_eyes": "res://art/portraits/recruit-roster-v1/warden-b/eyes-neutral.png",
-      "neutral_mouth": "res://art/portraits/recruit-roster-v1/warden-b/mouth-neutral.png",
+      "neutral_eyes": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/eyes-neutral.png",
+      "neutral_mouth": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/mouth-neutral.png",
       "frames": [
         {
           "name": "Neutral",
-          "eyes": "res://art/portraits/recruit-roster-v1/warden-b/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/warden-b/mouth-neutral.png"
+          "eyes": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Half lid",
-          "eyes": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v2/eyes-half.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/warden-b/mouth-neutral.png"
+          "eyes": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/eyes-half.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Closed",
-          "eyes": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v2/eyes-closed.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/warden-b/mouth-neutral.png"
+          "eyes": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/eyes-closed.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Small mouth",
-          "eyes": "res://art/portraits/recruit-roster-v1/warden-b/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v2/mouth-small.png"
+          "eyes": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/mouth-small.png"
         },
         {
           "name": "Open mouth",
-          "eyes": "res://art/portraits/recruit-roster-v1/warden-b/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v2/mouth-open.png"
+          "eyes": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/warden-b/frames-pixel-v3/mouth-open.png"
         }
       ],
       "eye_box": [
@@ -996,7 +1016,8 @@
         132,
         112
       ],
-      "review": "Native pixel repair: only fitted lid/lip pixels differ from this resting reference; surrounding skin and anatomy are preserved."
+      "separated_features": true,
+      "review": "Complete components v3: underlying face has no eyes or lips; neutral components restore the original exactly. Each animation replaces the whole feature, including its corners."
     },
     {
       "id": "warden-c-exhausted",
@@ -1033,6 +1054,7 @@
         132,
         112
       ],
+      "separated_features": false,
       "review": "Static expression; no neutral blink/talk frames borrowed."
     },
     {
@@ -1070,6 +1092,7 @@
         132,
         112
       ],
+      "separated_features": false,
       "review": "Static expression; no neutral blink/talk frames borrowed."
     },
     {
@@ -1081,38 +1104,38 @@
       "resource": "res://data/portraits/recruit-roster-v1/warden-c.tres",
       "layers": [
         "res://art/portraits/recruit-kit-v1/shared/body.png",
-        "res://art/portraits/recruit-roster-v1/warden-c/head.png",
-        "res://art/portraits/recruit-roster-v1/warden-c/eyes-neutral.png",
-        "res://art/portraits/recruit-roster-v1/warden-c/mouth-neutral.png",
+        "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v3/head-clean.png",
+        "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v3/eyes-neutral.png",
+        "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v3/mouth-neutral.png",
         "res://art/portraits/recruit-kit-v1/shared/jerkin.png"
       ],
-      "neutral_eyes": "res://art/portraits/recruit-roster-v1/warden-c/eyes-neutral.png",
-      "neutral_mouth": "res://art/portraits/recruit-roster-v1/warden-c/mouth-neutral.png",
+      "neutral_eyes": "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v3/eyes-neutral.png",
+      "neutral_mouth": "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v3/mouth-neutral.png",
       "frames": [
         {
           "name": "Neutral",
-          "eyes": "res://art/portraits/recruit-roster-v1/warden-c/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/warden-c/mouth-neutral.png"
+          "eyes": "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Half lid",
-          "eyes": "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v2/eyes-half.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/warden-c/mouth-neutral.png"
+          "eyes": "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v3/eyes-half.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Closed",
-          "eyes": "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v2/eyes-closed.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/warden-c/mouth-neutral.png"
+          "eyes": "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v3/eyes-closed.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Small mouth",
-          "eyes": "res://art/portraits/recruit-roster-v1/warden-c/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v2/mouth-small.png"
+          "eyes": "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v3/mouth-small.png"
         },
         {
           "name": "Open mouth",
-          "eyes": "res://art/portraits/recruit-roster-v1/warden-c/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v2/mouth-open.png"
+          "eyes": "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/warden-c/frames-pixel-v3/mouth-open.png"
         }
       ],
       "eye_box": [
@@ -1127,7 +1150,8 @@
         132,
         112
       ],
-      "review": "Native pixel repair: only fitted lid/lip pixels differ from this resting reference; surrounding skin and anatomy are preserved."
+      "separated_features": true,
+      "review": "Complete components v3: underlying face has no eyes or lips; neutral components restore the original exactly. Each animation replaces the whole feature, including its corners."
     },
     {
       "id": "scout-a-exhausted",
@@ -1155,8 +1179,8 @@
       "eye_box": [
         78,
         53,
-        135,
-        80
+        139,
+        82
       ],
       "mouth_box": [
         89,
@@ -1164,6 +1188,7 @@
         125,
         108
       ],
+      "separated_features": false,
       "review": "Static expression; no neutral blink/talk frames borrowed."
     },
     {
@@ -1192,8 +1217,8 @@
       "eye_box": [
         78,
         53,
-        135,
-        80
+        139,
+        82
       ],
       "mouth_box": [
         89,
@@ -1201,6 +1226,7 @@
         125,
         108
       ],
+      "separated_features": false,
       "review": "Static expression; no neutral blink/talk frames borrowed."
     },
     {
@@ -1212,45 +1238,45 @@
       "resource": "res://data/portraits/recruits-v1/scout-a.tres",
       "layers": [
         "res://art/portraits/recruit-kit-v1/shared/body.png",
-        "res://art/portraits/recruit-kit-v1/scout-a/head.png",
-        "res://art/portraits/recruit-kit-v1/scout-a/eyes-neutral.png",
-        "res://art/portraits/recruit-kit-v1/scout-a/mouth-neutral.png",
+        "res://art/portraits/recruit-kit-v1/scout-a/frames-pixel-v3/head-clean.png",
+        "res://art/portraits/recruit-kit-v1/scout-a/frames-pixel-v3/eyes-neutral.png",
+        "res://art/portraits/recruit-kit-v1/scout-a/frames-pixel-v3/mouth-neutral.png",
         "res://art/portraits/recruit-kit-v1/shared/jerkin.png"
       ],
-      "neutral_eyes": "res://art/portraits/recruit-kit-v1/scout-a/eyes-neutral.png",
-      "neutral_mouth": "res://art/portraits/recruit-kit-v1/scout-a/mouth-neutral.png",
+      "neutral_eyes": "res://art/portraits/recruit-kit-v1/scout-a/frames-pixel-v3/eyes-neutral.png",
+      "neutral_mouth": "res://art/portraits/recruit-kit-v1/scout-a/frames-pixel-v3/mouth-neutral.png",
       "frames": [
         {
           "name": "Neutral",
-          "eyes": "res://art/portraits/recruit-kit-v1/scout-a/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-kit-v1/scout-a/mouth-neutral.png"
+          "eyes": "res://art/portraits/recruit-kit-v1/scout-a/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-kit-v1/scout-a/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Half lid",
-          "eyes": "res://art/portraits/recruit-kit-v1/scout-a/frames-pixel-v2/eyes-half.png",
-          "mouth": "res://art/portraits/recruit-kit-v1/scout-a/mouth-neutral.png"
+          "eyes": "res://art/portraits/recruit-kit-v1/scout-a/frames-pixel-v3/eyes-half.png",
+          "mouth": "res://art/portraits/recruit-kit-v1/scout-a/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Closed",
-          "eyes": "res://art/portraits/recruit-kit-v1/scout-a/frames-pixel-v2/eyes-closed.png",
-          "mouth": "res://art/portraits/recruit-kit-v1/scout-a/mouth-neutral.png"
+          "eyes": "res://art/portraits/recruit-kit-v1/scout-a/frames-pixel-v3/eyes-closed.png",
+          "mouth": "res://art/portraits/recruit-kit-v1/scout-a/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Small mouth",
-          "eyes": "res://art/portraits/recruit-kit-v1/scout-a/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-kit-v1/scout-a/frames-pixel-v2/mouth-small.png"
+          "eyes": "res://art/portraits/recruit-kit-v1/scout-a/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-kit-v1/scout-a/frames-pixel-v3/mouth-small.png"
         },
         {
           "name": "Open mouth",
-          "eyes": "res://art/portraits/recruit-kit-v1/scout-a/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-kit-v1/scout-a/frames-pixel-v2/mouth-open.png"
+          "eyes": "res://art/portraits/recruit-kit-v1/scout-a/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-kit-v1/scout-a/frames-pixel-v3/mouth-open.png"
         }
       ],
       "eye_box": [
         78,
         53,
-        135,
-        80
+        139,
+        82
       ],
       "mouth_box": [
         89,
@@ -1258,7 +1284,8 @@
         125,
         108
       ],
-      "review": "Native pixel repair: only fitted lid/lip pixels differ from this resting reference; surrounding skin and anatomy are preserved."
+      "separated_features": true,
+      "review": "Complete components v3: underlying face has no eyes or lips; neutral components restore the original exactly. Each animation replaces the whole feature, including its corners."
     },
     {
       "id": "warden-a-exhausted",
@@ -1286,8 +1313,8 @@
       "eye_box": [
         78,
         53,
-        135,
-        80
+        139,
+        82
       ],
       "mouth_box": [
         89,
@@ -1295,6 +1322,7 @@
         125,
         108
       ],
+      "separated_features": false,
       "review": "Static expression; no neutral blink/talk frames borrowed."
     },
     {
@@ -1323,8 +1351,8 @@
       "eye_box": [
         78,
         53,
-        135,
-        80
+        139,
+        82
       ],
       "mouth_box": [
         89,
@@ -1332,6 +1360,7 @@
         125,
         108
       ],
+      "separated_features": false,
       "review": "Static expression; no neutral blink/talk frames borrowed."
     },
     {
@@ -1343,45 +1372,45 @@
       "resource": "res://data/portraits/recruits-v1/warden-a.tres",
       "layers": [
         "res://art/portraits/recruit-kit-v1/shared/body.png",
-        "res://art/portraits/recruit-kit-v1/warden-a/head.png",
-        "res://art/portraits/recruit-kit-v1/warden-a/eyes-neutral.png",
-        "res://art/portraits/recruit-kit-v1/warden-a/mouth-neutral.png",
+        "res://art/portraits/recruit-kit-v1/warden-a/frames-pixel-v3/head-clean.png",
+        "res://art/portraits/recruit-kit-v1/warden-a/frames-pixel-v3/eyes-neutral.png",
+        "res://art/portraits/recruit-kit-v1/warden-a/frames-pixel-v3/mouth-neutral.png",
         "res://art/portraits/recruit-kit-v1/shared/jerkin.png"
       ],
-      "neutral_eyes": "res://art/portraits/recruit-kit-v1/warden-a/eyes-neutral.png",
-      "neutral_mouth": "res://art/portraits/recruit-kit-v1/warden-a/mouth-neutral.png",
+      "neutral_eyes": "res://art/portraits/recruit-kit-v1/warden-a/frames-pixel-v3/eyes-neutral.png",
+      "neutral_mouth": "res://art/portraits/recruit-kit-v1/warden-a/frames-pixel-v3/mouth-neutral.png",
       "frames": [
         {
           "name": "Neutral",
-          "eyes": "res://art/portraits/recruit-kit-v1/warden-a/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-kit-v1/warden-a/mouth-neutral.png"
+          "eyes": "res://art/portraits/recruit-kit-v1/warden-a/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-kit-v1/warden-a/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Half lid",
-          "eyes": "res://art/portraits/recruit-kit-v1/warden-a/frames-pixel-v2/eyes-half.png",
-          "mouth": "res://art/portraits/recruit-kit-v1/warden-a/mouth-neutral.png"
+          "eyes": "res://art/portraits/recruit-kit-v1/warden-a/frames-pixel-v3/eyes-half.png",
+          "mouth": "res://art/portraits/recruit-kit-v1/warden-a/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Closed",
-          "eyes": "res://art/portraits/recruit-kit-v1/warden-a/frames-pixel-v2/eyes-closed.png",
-          "mouth": "res://art/portraits/recruit-kit-v1/warden-a/mouth-neutral.png"
+          "eyes": "res://art/portraits/recruit-kit-v1/warden-a/frames-pixel-v3/eyes-closed.png",
+          "mouth": "res://art/portraits/recruit-kit-v1/warden-a/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Small mouth",
-          "eyes": "res://art/portraits/recruit-kit-v1/warden-a/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-kit-v1/warden-a/frames-pixel-v2/mouth-small.png"
+          "eyes": "res://art/portraits/recruit-kit-v1/warden-a/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-kit-v1/warden-a/frames-pixel-v3/mouth-small.png"
         },
         {
           "name": "Open mouth",
-          "eyes": "res://art/portraits/recruit-kit-v1/warden-a/eyes-neutral.png",
-          "mouth": "res://art/portraits/recruit-kit-v1/warden-a/frames-pixel-v2/mouth-open.png"
+          "eyes": "res://art/portraits/recruit-kit-v1/warden-a/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-kit-v1/warden-a/frames-pixel-v3/mouth-open.png"
         }
       ],
       "eye_box": [
         78,
         53,
-        135,
-        80
+        139,
+        82
       ],
       "mouth_box": [
         89,
@@ -1389,7 +1418,8 @@
         125,
         108
       ],
-      "review": "Native pixel repair: only fitted lid/lip pixels differ from this resting reference; surrounding skin and anatomy are preserved."
+      "separated_features": true,
+      "review": "Complete components v3: underlying face has no eyes or lips; neutral components restore the original exactly. Each animation replaces the whole feature, including its corners."
     }
   ],
   "supporting_resources": [
@@ -1402,42 +1432,42 @@
       "resource": "res://art/portraits/mara-neutral-v1/underlayer.tres",
       "layers": [
         "res://art/concepts/portraits/mara-layered-v1/background.png",
-        "res://art/portraits/mara-neutral-v1/base.png",
-        "res://art/portraits/mara-neutral-v1/eyes-neutral.png",
-        "res://art/portraits/mara-neutral-v1/mouth-neutral.png"
+        "res://art/portraits/mara-neutral-v1/frames-pixel-v3/base-clean.png",
+        "res://art/portraits/mara-neutral-v1/frames-pixel-v3/eyes-neutral.png",
+        "res://art/portraits/mara-neutral-v1/frames-pixel-v3/mouth-neutral.png"
       ],
-      "neutral_eyes": "res://art/portraits/mara-neutral-v1/eyes-neutral.png",
-      "neutral_mouth": "res://art/portraits/mara-neutral-v1/mouth-neutral.png",
+      "neutral_eyes": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/eyes-neutral.png",
+      "neutral_mouth": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/mouth-neutral.png",
       "frames": [
         {
           "name": "Neutral",
-          "eyes": "res://art/portraits/mara-neutral-v1/eyes-neutral.png",
-          "mouth": "res://art/portraits/mara-neutral-v1/mouth-neutral.png"
+          "eyes": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Half lid",
-          "eyes": "res://art/portraits/mara-neutral-v1/frames-pixel-v2/eyes-half.png",
-          "mouth": "res://art/portraits/mara-neutral-v1/mouth-neutral.png"
+          "eyes": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/eyes-half.png",
+          "mouth": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Closed",
-          "eyes": "res://art/portraits/mara-neutral-v1/frames-pixel-v2/eyes-closed.png",
-          "mouth": "res://art/portraits/mara-neutral-v1/mouth-neutral.png"
+          "eyes": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/eyes-closed.png",
+          "mouth": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/mouth-neutral.png"
         },
         {
           "name": "Small mouth",
-          "eyes": "res://art/portraits/mara-neutral-v1/eyes-neutral.png",
-          "mouth": "res://art/portraits/mara-neutral-v1/frames-pixel-v2/mouth-small.png"
+          "eyes": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/mouth-small.png"
         },
         {
           "name": "Open mouth",
-          "eyes": "res://art/portraits/mara-neutral-v1/eyes-neutral.png",
-          "mouth": "res://art/portraits/mara-neutral-v1/frames-pixel-v2/mouth-open.png"
+          "eyes": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/mouth-open.png"
         },
         {
           "name": "Round mouth",
-          "eyes": "res://art/portraits/mara-neutral-v1/eyes-neutral.png",
-          "mouth": "res://art/portraits/mara-neutral-v1/frames-pixel-v2/mouth-round.png"
+          "eyes": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/eyes-neutral.png",
+          "mouth": "res://art/portraits/mara-neutral-v1/frames-pixel-v3/mouth-round.png"
         }
       ],
       "eye_box": [
@@ -1452,7 +1482,8 @@
         128,
         112
       ],
-      "review": "Native pixel repair: only fitted lid/lip pixels differ from this resting reference; surrounding skin and anatomy are preserved."
+      "separated_features": true,
+      "review": "Complete components v3: underlying face has no eyes or lips; neutral components restore the original exactly. Each animation replaces the whole feature, including its corners."
     }
   ],
   "rule": "Sharing a canvas or body never licenses sharing another face’s eye/mouth frames."

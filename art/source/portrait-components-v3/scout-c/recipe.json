@@ -1,0 +1,252 @@
+{
+  "face": "scout-c",
+  "family": "average-covered-adult-v1",
+  "resources": [
+    "res://data/portraits/recruit-roster-v1/scout-c.tres"
+  ],
+  "input_layers": {
+    "res://art/portraits/recruit-kit-v1/shared/body.png": "354a59a5cec26c785eb480c2f2652369d2e8b0acfeb3840efc968919c0c0ce9b",
+    "res://art/portraits/recruit-roster-v1/scout-c/head.png": "bcdb9af7775ecf230f0fa2532f98dbb5d1f74e473fbc4d41963dce265bdeb658",
+    "res://art/portraits/recruit-roster-v1/scout-c/eyes-neutral.png": "91e0b3cb5b80bc01fc73e53398938ff54e6e14d59c50fecf214236da48d32abd",
+    "res://art/portraits/recruit-roster-v1/scout-c/mouth-neutral.png": "1744019e22ddc4e8412bc3571d7652881739af6c6feab7112c244b8b6dce2d8a",
+    "res://art/portraits/recruit-kit-v1/shared/jerkin.png": "b3ee6b1d563c33a4caad913e5ad15e1e52564c7e8b2c94b5b45242d154a52fcb"
+  },
+  "bindings": {
+    "res://art/portraits/recruit-roster-v1/scout-c/head.png": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/head-clean.png",
+    "res://art/portraits/recruit-roster-v1/scout-c/eyes-neutral.png": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/eyes-neutral.png",
+    "res://art/portraits/recruit-roster-v1/scout-c/mouth-neutral.png": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/mouth-neutral.png",
+    "res://art/portraits/recruit-roster-v1/scout-c/eyes-half.png": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/eyes-half.png",
+    "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v2/eyes-half.png": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/eyes-half.png",
+    "res://art/portraits/recruit-roster-v1/scout-c/eyes-closed.png": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/eyes-closed.png",
+    "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v2/eyes-closed.png": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/eyes-closed.png",
+    "res://art/portraits/recruit-roster-v1/scout-c/mouth-small.png": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/mouth-small.png",
+    "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v2/mouth-small.png": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/mouth-small.png",
+    "res://art/portraits/recruit-roster-v1/scout-c/mouth-open.png": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/mouth-open.png",
+    "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v2/mouth-open.png": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/mouth-open.png"
+  },
+  "eye_mask": "res://art/source/portrait-components-v3/scout-c/eyes-erasure.png",
+  "mouth_mask": "res://art/source/portrait-components-v3/scout-c/mouth-erasure.png",
+  "original": "res://art/source/portrait-components-v3/scout-c/resting-reference.png",
+  "clean": "res://art/source/portrait-components-v3/scout-c/clean-reference.png",
+  "recipe": {
+    "eyes": [
+      [
+        [
+          [
+            83,
+            66
+          ],
+          [
+            87,
+            62
+          ],
+          [
+            97,
+            62
+          ],
+          [
+            105,
+            65
+          ],
+          [
+            109,
+            68
+          ],
+          [
+            106,
+            73
+          ],
+          [
+            98,
+            75
+          ],
+          [
+            89,
+            74
+          ],
+          [
+            83,
+            70
+          ]
+        ],
+        [
+          [
+            85,
+            67
+          ],
+          [
+            90,
+            70
+          ],
+          [
+            97,
+            71
+          ],
+          [
+            104,
+            69
+          ],
+          [
+            107,
+            68
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            109,
+            67
+          ],
+          [
+            113,
+            63
+          ],
+          [
+            123,
+            63
+          ],
+          [
+            131,
+            66
+          ],
+          [
+            135,
+            69
+          ],
+          [
+            132,
+            74
+          ],
+          [
+            124,
+            76
+          ],
+          [
+            115,
+            75
+          ],
+          [
+            109,
+            71
+          ]
+        ],
+        [
+          [
+            111,
+            68
+          ],
+          [
+            116,
+            71
+          ],
+          [
+            123,
+            72
+          ],
+          [
+            130,
+            70
+          ],
+          [
+            133,
+            69
+          ]
+        ]
+      ]
+    ],
+    "lip": [
+      [
+        95,
+        98
+      ],
+      [
+        102,
+        98
+      ],
+      [
+        111,
+        98
+      ],
+      [
+        119,
+        98
+      ]
+    ],
+    "mouth": [
+      [
+        92,
+        97
+      ],
+      [
+        98,
+        94
+      ],
+      [
+        113,
+        94
+      ],
+      [
+        122,
+        97
+      ],
+      [
+        122,
+        101
+      ],
+      [
+        116,
+        103
+      ],
+      [
+        99,
+        103
+      ],
+      [
+        92,
+        101
+      ]
+    ]
+  },
+  "outputs": [
+    {
+      "name": "clean-character",
+      "texture": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/head-clean.png",
+      "sha256": "9053d666b3466e831b603916eba6218977b18badb0c29287338598ed816a99d7"
+    },
+    {
+      "name": "eyes-neutral",
+      "texture": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/eyes-neutral.png",
+      "sha256": "91be62b3b11a20ca157ac6e7aebcb5a1f2fc18e1b4786635deafcd792a3e8995"
+    },
+    {
+      "name": "mouth-neutral",
+      "texture": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/mouth-neutral.png",
+      "sha256": "0b8dbebe525a953f231b15309e8dd41c5170adc755955d78f90bb8f1aa88dea9"
+    },
+    {
+      "name": "eyes-half",
+      "texture": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/eyes-half.png",
+      "sha256": "e5828b8825e073f20cd9f22b6b67ec1cb37cd619e836b3b1db499dabe60dfedb",
+      "ink": "res://art/source/portrait-components-v3/scout-c/eyes-half-ink.png"
+    },
+    {
+      "name": "eyes-closed",
+      "texture": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/eyes-closed.png",
+      "sha256": "5d717a2594b76d5caef912a780e21256922311349c4dded0928feff049934583",
+      "ink": "res://art/source/portrait-components-v3/scout-c/eyes-closed-ink.png"
+    },
+    {
+      "name": "mouth-small",
+      "texture": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/mouth-small.png",
+      "sha256": "38c86249af022283d6f8ea2e4d2f85cd2b9c9f06ea6e729cb1c39000e11a492e",
+      "ink": "res://art/source/portrait-components-v3/scout-c/mouth-small-ink.png"
+    },
+    {
+      "name": "mouth-open",
+      "texture": "res://art/portraits/recruit-roster-v1/scout-c/frames-pixel-v3/mouth-open.png",
+      "sha256": "6a12f1296d75c596fe91a5dd96ec83e19504d5d7b47a28ae0767b08f6f2c9d8c",
+      "ink": "res://art/source/portrait-components-v3/scout-c/mouth-open-ink.png"
+    }
+  ]
+}
