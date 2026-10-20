@@ -128,3 +128,37 @@ The same 90 campaigns (same seeds, same bot), before and after:
 Floors 1–3 are unchanged: 1–7 health lost per visit, about 95% of fights won. The queen is still the hardest fight in the game, but the three heroes now sit much closer together (29–45% per attempt, against 13–38% before). Every hero wins most campaigns.
 
 Still open: proposal 6 (floor 3 as a warm-up), 7 (route price) and 8 (level 4 before the queen).
+
+## Update: proposals 6 and 8 decided (owner, 2026-10-19)
+
+**The owner's direction:**
+- Floor 1 stays onboarding.
+- Floor 2 is where the real game starts.
+- Floor 3 should be tougher.
+- Level 4 should be reachable before the queen (she can become a quest as the story develops).
+
+**What changed:**
+- **Floor 2** (`ENCOUNTER_GROUPS` in `scripts/main.gd`): the lone rat and lone spider are gone. A goblin can appear alone, and new groups include two goblins with a rat or a spider.
+- **Floor 3**: mostly three- and four-enemy goblin bands. Archers and drummers are common, and a goblin guard can appear. Lone spiders and goblin-plus-rat pairs are gone.
+- **Floor XP** (`FLOOR_XP_LIMIT` in `scripts/progression.gd`) went from 60 / 80 / 110 / 90 to **60 / 90 / 150 / 150**. With the gate's 40, that's 490 XP before the queen; level 4 needs 440.
+
+The same 90 seeds, with proposals 1–5 already in, before and after:
+
+| | Mara | Corin | Alwen |
+|---|---|---|---|
+| Campaigns won within 45 days | 23 → **26** / 30 | 27 → **27** / 30 | 12 → **23** / 30 |
+| Days to win (median) | 10 → 12 | 10 → 16 | 7 → 11 |
+| Health lost per floor 2 visit | 3.0 → **4.6** | 4.4 → **5.1** | 3.7 → **5.8** |
+| Health lost per floor 3 visit | 6.3 → **8.3** | 7.6 → **8.8** | 6.9 → **9.1** |
+| Wipes on floors 2–3 (all 30 campaigns) | 1 → **10** | 5 → **7** | 4 → **6** |
+| Queen, wins per attempt | 38% → **50%** | 56% → **49%** | 19% → **39%** |
+| Heroes at level 4 by the end | 0 → **23** | 0 → **19** | 0 → **20** |
+
+**What this means:**
+- Floors 2 and 3 now hurt more and can end an expedition. They're a genuine step up from floor 1, and floor 3 is a real warm-up for the fortress.
+- Reaching level 4 before the queen gives a reason to explore the deeper floors fully. It also evens out the three heroes: each now wins about three campaigns in four or better.
+- Parties take a little longer overall, because the deeper floors slow them down.
+
+**A note on noise:** this "before" row differs from the table in the previous update (for example, Alwen 12 here against 18 there), although both are proposals 1–5 on the same seeds. A small rule change alters which recruits appear and which fights happen, and that ripples through a whole campaign. Treat differences of about three campaigns or fewer as noise.
+
+Still open: proposal 7 (the scouts' route price).
