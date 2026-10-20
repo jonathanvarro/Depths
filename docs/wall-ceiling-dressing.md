@@ -61,6 +61,10 @@ These are rules for the code, so the art can be drawn to fit.
 - **Buried city:** carved reliefs, empty lamp niches, inscriptions.
 - **Sealed temple:** seal glyphs, ward niches.
 
-## A decision for the owner: torch light
+## Decided: torch light (owner, 2026-10-20)
+
+**Lit wall torches are mood only.** They glow and light the walls, but they don't count as light for the party's nerves: the party's light still comes from what it carries.
+
+### The question as it was asked
 
 Should **lit** wall torches (item 9) count as light for the party's nerves, the way a held torch does? I suggest **no for now**. They glow and light the walls, but the party's light still comes from what they carry, so the darkness rules stay simple and predictable. Lit sconces can then be a mood signal for goblin ground. The burnt-out sconce (item 7) avoids the question on the early floors.
