@@ -25,7 +25,7 @@ def resource(underlayer=False):
         '[ext_resource type="Script" path="res://scripts/portrait_set.gd" id="script"]',
         '[ext_resource type="Texture2D" path="res://art/concepts/portraits/mara-layered-v1/background.png" id="background"]']
     lines+=['[ext_resource type="Texture2D" path="'+uri(OUT/(n+'.png'))+'" id="'+str(i)+'"]' for i,n in enumerate(names)]
-    lines+=['','[resource]','script = ExtResource("script")','background = ExtResource("background")','body = ExtResource("0")','eyes = ExtResource("1")','mouth = ExtResource("2")']
+    lines+=['','[resource]','script = ExtResource("script")','rig_kind = "Unique"','rig_family = &"unique-mara-v1"','face_id = &"mara"','background = ExtResource("background")','body = ExtResource("0")','eyes = ExtResource("1")','mouth = ExtResource("2")']
     if not underlayer:lines+=['clothing = Array[Texture2D]([ExtResource("3")])']
     lines+=['conditions = {'+', '.join('"'+n+'": ExtResource("'+str(i+9)+'")' for i,n in enumerate(kit.CONDITIONS))+'}',
         'blink_frames = Array[Texture2D]([ExtResource("4"), ExtResource("5")])',

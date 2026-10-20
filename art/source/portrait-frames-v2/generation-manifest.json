@@ -1,0 +1,24 @@
+{
+  "tool": "Built-in image_gen.imagegen",
+  "issue": 121,
+  "accepted_for_runtime": false,
+  "reason": "Both candidate atlases alter face proportions and surrounding skin relative to the neutral references. Quarantined for comparison, not wired into PortraitSets.",
+  "entries": [
+    {
+      "name": "corin-faces",
+      "prompt": "Use case: identity-preserve / precise-object-edit. Edit target is the attached 192x192 neutral Corin portrait from Depths. Produce a 3-column by 2-row equal-square-cell animation atlas, transparent background. Each cell is the EXACT same full portrait, same 192x192 normalized registration, size, facial anatomy, gaze, nose, eyebrows, stubble, skin colours, pixel clusters, shoulders, clothes and diffuse neutral lighting as the reference. Do not redesign or improve the character. This atlas corrects visibly mismatched earlier eyes/mouth patches. Only edit the eyelid strokes or inner lip opening, preserving ALL adjacent skin creases, moustache, nose and cheeks. Upper left: eyelids half lowered, eyebrows absolutely unchanged. Upper middle: eyes fully gently closed with creases at the SAME eye sockets. Upper right: barely parted speaking lips, preserve the existing confident crooked smile corners and missing front tooth. Lower left: modest open speaking mouth (small movement, not a shout), same lip corners, subtle lower lip/jaw movement confined to mouth area, missing tooth. Lower middle: small rounded speaking lips, preserve chin/stubble exactly. Lower right: unchanged neutral reference. IMPORTANT: do not shift pupils sideways or brow angles; no square colour patches, new teeth, wider face, moved chin, smoothing, richer detail, skin recolouring or painterly effect. In each cell the only allowed feature areas correspond to original eye rectangle x82..136 y57..77 or mouth rectangle x93..125 y84..101 on the 192x192 reference. Keep all other geometry identical. No labels, text, frame, grid lines, added margins or gutter. Pixel art with broad clusters for192px native export, muted48colours. Transparent exterior.",
+      "reference": "art/portraits/main-heroes-v1/corin/preview.png",
+      "generated_file": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-6b009c9e-dbc5-4ac2-9965-d732a4034d18.png",
+      "preserved_file": "corin-faces.png",
+      "transparent_background": true
+    },
+    {
+      "name": "alwen-faces",
+      "prompt": "Use case: identity-preserve / precise-object-edit. Edit the provided exact Alwen portrait. Return a 3-column x2-row animation atlas of six equal SQUARE cells on a truly TRANSPARENT background. Every cell repeats the exact full reference canvas and character position: 192x192 normalized registration, 4px outer margins, head/scarf/body size, eyes, nose, brow, lips and chin coordinates identical. This is production facial animation, not alternate portraits. SAME original pixel clusters and muted neutral skin/fabric colours, no redesign, detail increase, smoothing, relighting, warm cast, added jewellery or expression change. Top left: half-closed lids, same brows. Top middle: gently fully closed lids at those eye sockets, brows unchanged. Top right: lips just barely parted for speech, exactly same mouth corners. Bottom left: modest open speaking mouth, same corners; no big smile, shout, moved nose or changed chin. Bottom middle: small rounded speaking lips, minimal movement. Bottom right: unchanged neutral reference. Only eyelid strokes in x84..140 y56..78 or lip opening in x98..129 y87..104 on original192px canvas may change. Retain the cheek/nose shadow, surrounding skin creases, upper lip position and jaw outline. No rectangular skin patches and no pupil/gaze change. All non-feature pixels as close to original as possible. Preserve the sober practical middle-aged field nurse and her rough grey-brown headscarf exactly. No background colour, glow, text, panel labels, borders or gutters. True alpha transparency outside the character. The attached image is the actual EDIT TARGET, not a loose style inspiration.",
+      "reference": "art/portraits/main-heroes-v1/alwen/preview.png",
+      "generated_file": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-2bb1b277-c9ab-467c-b911-ee3155468323.png",
+      "preserved_file": "alwen-faces.png",
+      "transparent_background": true
+    }
+  ]
+}

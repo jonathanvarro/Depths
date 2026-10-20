@@ -87,7 +87,7 @@ def main():
         names=['body','head','eyes-neutral','mouth-neutral','eyes-half','eyes-closed','mouth-small','mouth-open','mouth-round']+kit.CONDITIONS+['shadow','highlight']
         ext=['[gd_resource type="Resource" script_class="PortraitSet" format=3]','', '[ext_resource type="Script" path="res://scripts/portrait_set.gd" id="script"]','[ext_resource type="Texture2D" path="res://art/concepts/portraits/mara-layered-v1/background.png" id="background"]']
         ext+=['[ext_resource type="Texture2D" path="'+uri(folder/(n+'.png'))+'" id="'+str(i)+'"]' for i,n in enumerate(names)]
-        ext+=['','[resource]','script = ExtResource("script")','background = ExtResource("background")','body = ExtResource("0")','head = ExtResource("1")','eyes = ExtResource("2")','mouth = ExtResource("3")',
+        ext+=['','[resource]','script = ExtResource("script")','rig_kind = "Unique"','rig_family = &"unique-'+name+'-v1"','face_id = &"'+name+'"','background = ExtResource("background")','body = ExtResource("0")','head = ExtResource("1")','eyes = ExtResource("2")','mouth = ExtResource("3")',
               'blink_frames = Array[Texture2D]([ExtResource("4"),ExtResource("5")])','talk_frames = Array[Texture2D]([ExtResource("6"),ExtResource("7"),ExtResource("8")])',
               'conditions = {'+', '.join('"'+n+'": ExtResource("'+str(i+9)+'")' for i,n in enumerate(kit.CONDITIONS))+'}', 'light_shadow = ExtResource("13")','light_highlight = ExtResource("14")']
         write(ROOT/'data/portraits'/(name+'.tres'),'\n'.join(ext)+'\n')

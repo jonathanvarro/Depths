@@ -1,0 +1,7 @@
+{
+  "resources": 30,
+  "unique": 3,
+  "reusable": 27,
+  "paused_by_default": true,
+  "failures": []
+}

@@ -105,7 +105,7 @@ def make_resource(character,expression):
     lines=['[gd_resource type="Resource" script_class="PortraitSet" format=3]','',
         '[ext_resource type="Script" path="res://scripts/portrait_set.gd" id="script"]']
     for i,n in enumerate(names):lines.append('[ext_resource type="Texture2D" path="res://art/portraits/recruit-kit-v1/'+n+'" id="'+str(i)+'"]')
-    lines += ['','[resource]','script = ExtResource("script")','body = ExtResource("0")','head = ExtResource("1")',
+    lines += ['','[resource]','script = ExtResource("script")','rig_kind = "Reusable"','rig_family = &"average-covered-adult-v1"','face_id = &"'+character+'"','body = ExtResource("0")','head = ExtResource("1")',
         'eyes = ExtResource("2")','mouth = ExtResource("3")','clothing = Array[Texture2D]([ExtResource("4")])']
     condition_start=9 if expression=='neutral' else 5
     lines.append('conditions = {'+', '.join('"'+n+'": ExtResource("'+str(i+condition_start)+'")' for i,n in enumerate(CONDITIONS))+'}')

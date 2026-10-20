@@ -1,0 +1,1459 @@
+{
+  "canvas": [
+    192,
+    192
+  ],
+  "families": [
+    {
+      "kind": "Reusable",
+      "id": "average-covered-adult-v1",
+      "purpose": "Standard NPC/minor character body and outfit socket; each face owns its facial drawings."
+    },
+    {
+      "kind": "Unique",
+      "id": "unique-mara-v1",
+      "purpose": "Mara's individual head/body/outfit and facial registration; no shared recruit socket."
+    },
+    {
+      "kind": "Unique",
+      "id": "unique-corin-v1",
+      "purpose": "Corin's individual head/body/outfit and facial registration; no shared recruit socket."
+    },
+    {
+      "kind": "Unique",
+      "id": "unique-alwen-v1",
+      "purpose": "Sister Alwen's individual head/body/outfit and facial registration; no shared recruit socket."
+    }
+  ],
+  "portraits": [
+    {
+      "id": "alwen",
+      "face_id": "alwen",
+      "label": "Sister Alwen",
+      "kind": "Unique",
+      "family": "unique-alwen-v1",
+      "resource": "res://data/portraits/alwen.tres",
+      "layers": [
+        "res://art/concepts/portraits/mara-layered-v1/background.png",
+        "res://art/portraits/main-heroes-v1/alwen/body.png",
+        "res://art/portraits/main-heroes-v1/alwen/head.png",
+        "res://art/portraits/main-heroes-v1/alwen/eyes-neutral.png",
+        "res://art/portraits/main-heroes-v1/alwen/mouth-neutral.png"
+      ],
+      "neutral_eyes": "res://art/portraits/main-heroes-v1/alwen/eyes-neutral.png",
+      "neutral_mouth": "res://art/portraits/main-heroes-v1/alwen/mouth-neutral.png",
+      "frames": [
+        {
+          "name": "Neutral",
+          "eyes": "res://art/portraits/main-heroes-v1/alwen/eyes-neutral.png",
+          "mouth": "res://art/portraits/main-heroes-v1/alwen/mouth-neutral.png"
+        },
+        {
+          "name": "Half lid",
+          "eyes": "res://art/portraits/main-heroes-v1/alwen/eyes-half.png",
+          "mouth": "res://art/portraits/main-heroes-v1/alwen/mouth-neutral.png"
+        },
+        {
+          "name": "Closed",
+          "eyes": "res://art/portraits/main-heroes-v1/alwen/eyes-closed.png",
+          "mouth": "res://art/portraits/main-heroes-v1/alwen/mouth-neutral.png"
+        },
+        {
+          "name": "Small mouth",
+          "eyes": "res://art/portraits/main-heroes-v1/alwen/eyes-neutral.png",
+          "mouth": "res://art/portraits/main-heroes-v1/alwen/mouth-small.png"
+        },
+        {
+          "name": "Open mouth",
+          "eyes": "res://art/portraits/main-heroes-v1/alwen/eyes-neutral.png",
+          "mouth": "res://art/portraits/main-heroes-v1/alwen/mouth-open.png"
+        },
+        {
+          "name": "Round mouth",
+          "eyes": "res://art/portraits/main-heroes-v1/alwen/eyes-neutral.png",
+          "mouth": "res://art/portraits/main-heroes-v1/alwen/mouth-round.png"
+        }
+      ],
+      "eye_box": [
+        84,
+        56,
+        140,
+        78
+      ],
+      "mouth_box": [
+        98,
+        87,
+        129,
+        104
+      ],
+      "review": "Visual fit needs paused review; canvas checks alone do not certify anatomy/skin continuity."
+    },
+    {
+      "id": "corin",
+      "face_id": "corin",
+      "label": "Corin",
+      "kind": "Unique",
+      "family": "unique-corin-v1",
+      "resource": "res://data/portraits/corin.tres",
+      "layers": [
+        "res://art/concepts/portraits/mara-layered-v1/background.png",
+        "res://art/portraits/main-heroes-v1/corin/body.png",
+        "res://art/portraits/main-heroes-v1/corin/head.png",
+        "res://art/portraits/main-heroes-v1/corin/eyes-neutral.png",
+        "res://art/portraits/main-heroes-v1/corin/mouth-neutral.png"
+      ],
+      "neutral_eyes": "res://art/portraits/main-heroes-v1/corin/eyes-neutral.png",
+      "neutral_mouth": "res://art/portraits/main-heroes-v1/corin/mouth-neutral.png",
+      "frames": [
+        {
+          "name": "Neutral",
+          "eyes": "res://art/portraits/main-heroes-v1/corin/eyes-neutral.png",
+          "mouth": "res://art/portraits/main-heroes-v1/corin/mouth-neutral.png"
+        },
+        {
+          "name": "Half lid",
+          "eyes": "res://art/portraits/main-heroes-v1/corin/eyes-half.png",
+          "mouth": "res://art/portraits/main-heroes-v1/corin/mouth-neutral.png"
+        },
+        {
+          "name": "Closed",
+          "eyes": "res://art/portraits/main-heroes-v1/corin/eyes-closed.png",
+          "mouth": "res://art/portraits/main-heroes-v1/corin/mouth-neutral.png"
+        },
+        {
+          "name": "Small mouth",
+          "eyes": "res://art/portraits/main-heroes-v1/corin/eyes-neutral.png",
+          "mouth": "res://art/portraits/main-heroes-v1/corin/mouth-small.png"
+        },
+        {
+          "name": "Open mouth",
+          "eyes": "res://art/portraits/main-heroes-v1/corin/eyes-neutral.png",
+          "mouth": "res://art/portraits/main-heroes-v1/corin/mouth-open.png"
+        },
+        {
+          "name": "Round mouth",
+          "eyes": "res://art/portraits/main-heroes-v1/corin/eyes-neutral.png",
+          "mouth": "res://art/portraits/main-heroes-v1/corin/mouth-round.png"
+        }
+      ],
+      "eye_box": [
+        82,
+        57,
+        136,
+        77
+      ],
+      "mouth_box": [
+        93,
+        84,
+        125,
+        101
+      ],
+      "review": "Visual fit needs paused review; canvas checks alone do not certify anatomy/skin continuity."
+    },
+    {
+      "id": "mara",
+      "face_id": "mara",
+      "label": "Mara",
+      "kind": "Unique",
+      "family": "unique-mara-v1",
+      "resource": "res://data/portraits/mara.tres",
+      "layers": [
+        "res://art/concepts/portraits/mara-layered-v1/background.png",
+        "res://art/portraits/mara-neutral-v1/base.png",
+        "res://art/portraits/mara-neutral-v1/eyes-neutral.png",
+        "res://art/portraits/mara-neutral-v1/mouth-neutral.png",
+        "res://art/portraits/mara-neutral-v1/tunic.png"
+      ],
+      "neutral_eyes": "res://art/portraits/mara-neutral-v1/eyes-neutral.png",
+      "neutral_mouth": "res://art/portraits/mara-neutral-v1/mouth-neutral.png",
+      "frames": [
+        {
+          "name": "Neutral",
+          "eyes": "res://art/portraits/mara-neutral-v1/eyes-neutral.png",
+          "mouth": "res://art/portraits/mara-neutral-v1/mouth-neutral.png"
+        },
+        {
+          "name": "Half lid",
+          "eyes": "res://art/portraits/mara-neutral-v1/eyes-half.png",
+          "mouth": "res://art/portraits/mara-neutral-v1/mouth-neutral.png"
+        },
+        {
+          "name": "Closed",
+          "eyes": "res://art/portraits/mara-neutral-v1/eyes-closed.png",
+          "mouth": "res://art/portraits/mara-neutral-v1/mouth-neutral.png"
+        },
+        {
+          "name": "Small mouth",
+          "eyes": "res://art/portraits/mara-neutral-v1/eyes-neutral.png",
+          "mouth": "res://art/portraits/mara-neutral-v1/mouth-small.png"
+        },
+        {
+          "name": "Open mouth",
+          "eyes": "res://art/portraits/mara-neutral-v1/eyes-neutral.png",
+          "mouth": "res://art/portraits/mara-neutral-v1/mouth-open.png"
+        },
+        {
+          "name": "Round mouth",
+          "eyes": "res://art/portraits/mara-neutral-v1/eyes-neutral.png",
+          "mouth": "res://art/portraits/mara-neutral-v1/mouth-round.png"
+        }
+      ],
+      "eye_box": [
+        80,
+        55,
+        141,
+        85
+      ],
+      "mouth_box": [
+        92,
+        93,
+        128,
+        112
+      ],
+      "review": "Visual fit needs paused review; canvas checks alone do not certify anatomy/skin continuity."
+    },
+    {
+      "id": "brawler-a-exhausted",
+      "face_id": "brawler-a",
+      "label": "brawler-a · exhausted",
+      "kind": "Reusable",
+      "family": "average-covered-adult-v1",
+      "resource": "res://data/portraits/recruit-roster-v1/brawler-a-exhausted.tres",
+      "layers": [
+        "res://art/portraits/recruit-kit-v1/shared/body.png",
+        "res://art/portraits/recruit-roster-v1/brawler-a/head.png",
+        "res://art/portraits/recruit-roster-v1/brawler-a/eyes-exhausted.png",
+        "res://art/portraits/recruit-roster-v1/brawler-a/mouth-exhausted.png",
+        "res://art/portraits/recruit-kit-v1/shared/jerkin.png"
+      ],
+      "neutral_eyes": "res://art/portraits/recruit-roster-v1/brawler-a/eyes-exhausted.png",
+      "neutral_mouth": "res://art/portraits/recruit-roster-v1/brawler-a/mouth-exhausted.png",
+      "frames": [
+        {
+          "name": "Neutral",
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-a/eyes-exhausted.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-a/mouth-exhausted.png"
+        }
+      ],
+      "eye_box": [
+        73,
+        51,
+        142,
+        82
+      ],
+      "mouth_box": [
+        82,
+        89,
+        132,
+        112
+      ],
+      "review": "Visual fit needs paused review; canvas checks alone do not certify anatomy/skin continuity."
+    },
+    {
+      "id": "brawler-a-worried",
+      "face_id": "brawler-a",
+      "label": "brawler-a · worried",
+      "kind": "Reusable",
+      "family": "average-covered-adult-v1",
+      "resource": "res://data/portraits/recruit-roster-v1/brawler-a-worried.tres",
+      "layers": [
+        "res://art/portraits/recruit-kit-v1/shared/body.png",
+        "res://art/portraits/recruit-roster-v1/brawler-a/head.png",
+        "res://art/portraits/recruit-roster-v1/brawler-a/eyes-worried.png",
+        "res://art/portraits/recruit-roster-v1/brawler-a/mouth-worried.png",
+        "res://art/portraits/recruit-kit-v1/shared/jerkin.png"
+      ],
+      "neutral_eyes": "res://art/portraits/recruit-roster-v1/brawler-a/eyes-worried.png",
+      "neutral_mouth": "res://art/portraits/recruit-roster-v1/brawler-a/mouth-worried.png",
+      "frames": [
+        {
+          "name": "Neutral",
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-a/eyes-worried.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-a/mouth-worried.png"
+        }
+      ],
+      "eye_box": [
+        73,
+        51,
+        142,
+        82
+      ],
+      "mouth_box": [
+        82,
+        89,
+        132,
+        112
+      ],
+      "review": "Visual fit needs paused review; canvas checks alone do not certify anatomy/skin continuity."
+    },
+    {
+      "id": "brawler-a",
+      "face_id": "brawler-a",
+      "label": "brawler-a",
+      "kind": "Reusable",
+      "family": "average-covered-adult-v1",
+      "resource": "res://data/portraits/recruit-roster-v1/brawler-a.tres",
+      "layers": [
+        "res://art/portraits/recruit-kit-v1/shared/body.png",
+        "res://art/portraits/recruit-roster-v1/brawler-a/head.png",
+        "res://art/portraits/recruit-roster-v1/brawler-a/eyes-neutral.png",
+        "res://art/portraits/recruit-roster-v1/brawler-a/mouth-neutral.png",
+        "res://art/portraits/recruit-kit-v1/shared/jerkin.png"
+      ],
+      "neutral_eyes": "res://art/portraits/recruit-roster-v1/brawler-a/eyes-neutral.png",
+      "neutral_mouth": "res://art/portraits/recruit-roster-v1/brawler-a/mouth-neutral.png",
+      "frames": [
+        {
+          "name": "Neutral",
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-a/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-a/mouth-neutral.png"
+        },
+        {
+          "name": "Half lid",
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-a/eyes-half.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-a/mouth-neutral.png"
+        },
+        {
+          "name": "Closed",
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-a/eyes-closed.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-a/mouth-neutral.png"
+        },
+        {
+          "name": "Small mouth",
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-a/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-a/mouth-small.png"
+        },
+        {
+          "name": "Open mouth",
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-a/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-a/mouth-open.png"
+        }
+      ],
+      "eye_box": [
+        73,
+        51,
+        142,
+        82
+      ],
+      "mouth_box": [
+        82,
+        89,
+        132,
+        112
+      ],
+      "review": "Visual fit needs paused review; canvas checks alone do not certify anatomy/skin continuity."
+    },
+    {
+      "id": "brawler-b-exhausted",
+      "face_id": "brawler-b",
+      "label": "brawler-b · exhausted",
+      "kind": "Reusable",
+      "family": "average-covered-adult-v1",
+      "resource": "res://data/portraits/recruit-roster-v1/brawler-b-exhausted.tres",
+      "layers": [
+        "res://art/portraits/recruit-kit-v1/shared/body.png",
+        "res://art/portraits/recruit-roster-v1/brawler-b/head.png",
+        "res://art/portraits/recruit-roster-v1/brawler-b/eyes-exhausted.png",
+        "res://art/portraits/recruit-roster-v1/brawler-b/mouth-exhausted.png",
+        "res://art/portraits/recruit-kit-v1/shared/jerkin.png"
+      ],
+      "neutral_eyes": "res://art/portraits/recruit-roster-v1/brawler-b/eyes-exhausted.png",
+      "neutral_mouth": "res://art/portraits/recruit-roster-v1/brawler-b/mouth-exhausted.png",
+      "frames": [
+        {
+          "name": "Neutral",
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-b/eyes-exhausted.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-b/mouth-exhausted.png"
+        }
+      ],
+      "eye_box": [
+        73,
+        51,
+        142,
+        82
+      ],
+      "mouth_box": [
+        82,
+        89,
+        132,
+        112
+      ],
+      "review": "Visual fit needs paused review; canvas checks alone do not certify anatomy/skin continuity."
+    },
+    {
+      "id": "brawler-b-worried",
+      "face_id": "brawler-b",
+      "label": "brawler-b · worried",
+      "kind": "Reusable",
+      "family": "average-covered-adult-v1",
+      "resource": "res://data/portraits/recruit-roster-v1/brawler-b-worried.tres",
+      "layers": [
+        "res://art/portraits/recruit-kit-v1/shared/body.png",
+        "res://art/portraits/recruit-roster-v1/brawler-b/head.png",
+        "res://art/portraits/recruit-roster-v1/brawler-b/eyes-worried.png",
+        "res://art/portraits/recruit-roster-v1/brawler-b/mouth-worried.png",
+        "res://art/portraits/recruit-kit-v1/shared/jerkin.png"
+      ],
+      "neutral_eyes": "res://art/portraits/recruit-roster-v1/brawler-b/eyes-worried.png",
+      "neutral_mouth": "res://art/portraits/recruit-roster-v1/brawler-b/mouth-worried.png",
+      "frames": [
+        {
+          "name": "Neutral",
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-b/eyes-worried.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-b/mouth-worried.png"
+        }
+      ],
+      "eye_box": [
+        73,
+        51,
+        142,
+        82
+      ],
+      "mouth_box": [
+        82,
+        89,
+        132,
+        112
+      ],
+      "review": "Visual fit needs paused review; canvas checks alone do not certify anatomy/skin continuity."
+    },
+    {
+      "id": "brawler-b",
+      "face_id": "brawler-b",
+      "label": "brawler-b",
+      "kind": "Reusable",
+      "family": "average-covered-adult-v1",
+      "resource": "res://data/portraits/recruit-roster-v1/brawler-b.tres",
+      "layers": [
+        "res://art/portraits/recruit-kit-v1/shared/body.png",
+        "res://art/portraits/recruit-roster-v1/brawler-b/head.png",
+        "res://art/portraits/recruit-roster-v1/brawler-b/eyes-neutral.png",
+        "res://art/portraits/recruit-roster-v1/brawler-b/mouth-neutral.png",
+        "res://art/portraits/recruit-kit-v1/shared/jerkin.png"
+      ],
+      "neutral_eyes": "res://art/portraits/recruit-roster-v1/brawler-b/eyes-neutral.png",
+      "neutral_mouth": "res://art/portraits/recruit-roster-v1/brawler-b/mouth-neutral.png",
+      "frames": [
+        {
+          "name": "Neutral",
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-b/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-b/mouth-neutral.png"
+        },
+        {
+          "name": "Half lid",
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-b/eyes-half.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-b/mouth-neutral.png"
+        },
+        {
+          "name": "Closed",
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-b/eyes-closed.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-b/mouth-neutral.png"
+        },
+        {
+          "name": "Small mouth",
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-b/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-b/mouth-small.png"
+        },
+        {
+          "name": "Open mouth",
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-b/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-b/mouth-open.png"
+        }
+      ],
+      "eye_box": [
+        73,
+        51,
+        142,
+        82
+      ],
+      "mouth_box": [
+        82,
+        89,
+        132,
+        112
+      ],
+      "review": "Visual fit needs paused review; canvas checks alone do not certify anatomy/skin continuity."
+    },
+    {
+      "id": "brawler-c-exhausted",
+      "face_id": "brawler-c",
+      "label": "brawler-c · exhausted",
+      "kind": "Reusable",
+      "family": "average-covered-adult-v1",
+      "resource": "res://data/portraits/recruit-roster-v1/brawler-c-exhausted.tres",
+      "layers": [
+        "res://art/portraits/recruit-kit-v1/shared/body.png",
+        "res://art/portraits/recruit-roster-v1/brawler-c/head.png",
+        "res://art/portraits/recruit-roster-v1/brawler-c/eyes-exhausted.png",
+        "res://art/portraits/recruit-roster-v1/brawler-c/mouth-exhausted.png",
+        "res://art/portraits/recruit-kit-v1/shared/jerkin.png"
+      ],
+      "neutral_eyes": "res://art/portraits/recruit-roster-v1/brawler-c/eyes-exhausted.png",
+      "neutral_mouth": "res://art/portraits/recruit-roster-v1/brawler-c/mouth-exhausted.png",
+      "frames": [
+        {
+          "name": "Neutral",
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-c/eyes-exhausted.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-c/mouth-exhausted.png"
+        }
+      ],
+      "eye_box": [
+        73,
+        51,
+        142,
+        82
+      ],
+      "mouth_box": [
+        82,
+        89,
+        132,
+        112
+      ],
+      "review": "Visual fit needs paused review; canvas checks alone do not certify anatomy/skin continuity."
+    },
+    {
+      "id": "brawler-c-worried",
+      "face_id": "brawler-c",
+      "label": "brawler-c · worried",
+      "kind": "Reusable",
+      "family": "average-covered-adult-v1",
+      "resource": "res://data/portraits/recruit-roster-v1/brawler-c-worried.tres",
+      "layers": [
+        "res://art/portraits/recruit-kit-v1/shared/body.png",
+        "res://art/portraits/recruit-roster-v1/brawler-c/head.png",
+        "res://art/portraits/recruit-roster-v1/brawler-c/eyes-worried.png",
+        "res://art/portraits/recruit-roster-v1/brawler-c/mouth-worried.png",
+        "res://art/portraits/recruit-kit-v1/shared/jerkin.png"
+      ],
+      "neutral_eyes": "res://art/portraits/recruit-roster-v1/brawler-c/eyes-worried.png",
+      "neutral_mouth": "res://art/portraits/recruit-roster-v1/brawler-c/mouth-worried.png",
+      "frames": [
+        {
+          "name": "Neutral",
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-c/eyes-worried.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-c/mouth-worried.png"
+        }
+      ],
+      "eye_box": [
+        73,
+        51,
+        142,
+        82
+      ],
+      "mouth_box": [
+        82,
+        89,
+        132,
+        112
+      ],
+      "review": "Visual fit needs paused review; canvas checks alone do not certify anatomy/skin continuity."
+    },
+    {
+      "id": "brawler-c",
+      "face_id": "brawler-c",
+      "label": "brawler-c",
+      "kind": "Reusable",
+      "family": "average-covered-adult-v1",
+      "resource": "res://data/portraits/recruit-roster-v1/brawler-c.tres",
+      "layers": [
+        "res://art/portraits/recruit-kit-v1/shared/body.png",
+        "res://art/portraits/recruit-roster-v1/brawler-c/head.png",
+        "res://art/portraits/recruit-roster-v1/brawler-c/eyes-neutral.png",
+        "res://art/portraits/recruit-roster-v1/brawler-c/mouth-neutral.png",
+        "res://art/portraits/recruit-kit-v1/shared/jerkin.png"
+      ],
+      "neutral_eyes": "res://art/portraits/recruit-roster-v1/brawler-c/eyes-neutral.png",
+      "neutral_mouth": "res://art/portraits/recruit-roster-v1/brawler-c/mouth-neutral.png",
+      "frames": [
+        {
+          "name": "Neutral",
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-c/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-c/mouth-neutral.png"
+        },
+        {
+          "name": "Half lid",
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-c/eyes-half.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-c/mouth-neutral.png"
+        },
+        {
+          "name": "Closed",
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-c/eyes-closed.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-c/mouth-neutral.png"
+        },
+        {
+          "name": "Small mouth",
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-c/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-c/mouth-small.png"
+        },
+        {
+          "name": "Open mouth",
+          "eyes": "res://art/portraits/recruit-roster-v1/brawler-c/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/brawler-c/mouth-open.png"
+        }
+      ],
+      "eye_box": [
+        73,
+        51,
+        142,
+        82
+      ],
+      "mouth_box": [
+        82,
+        89,
+        132,
+        112
+      ],
+      "review": "Visual fit needs paused review; canvas checks alone do not certify anatomy/skin continuity."
+    },
+    {
+      "id": "scout-b-exhausted",
+      "face_id": "scout-b",
+      "label": "scout-b · exhausted",
+      "kind": "Reusable",
+      "family": "average-covered-adult-v1",
+      "resource": "res://data/portraits/recruit-roster-v1/scout-b-exhausted.tres",
+      "layers": [
+        "res://art/portraits/recruit-kit-v1/shared/body.png",
+        "res://art/portraits/recruit-roster-v1/scout-b/head.png",
+        "res://art/portraits/recruit-roster-v1/scout-b/eyes-exhausted.png",
+        "res://art/portraits/recruit-roster-v1/scout-b/mouth-exhausted.png",
+        "res://art/portraits/recruit-kit-v1/shared/jerkin.png"
+      ],
+      "neutral_eyes": "res://art/portraits/recruit-roster-v1/scout-b/eyes-exhausted.png",
+      "neutral_mouth": "res://art/portraits/recruit-roster-v1/scout-b/mouth-exhausted.png",
+      "frames": [
+        {
+          "name": "Neutral",
+          "eyes": "res://art/portraits/recruit-roster-v1/scout-b/eyes-exhausted.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/scout-b/mouth-exhausted.png"
+        }
+      ],
+      "eye_box": [
+        73,
+        51,
+        142,
+        82
+      ],
+      "mouth_box": [
+        82,
+        89,
+        132,
+        112
+      ],
+      "review": "Visual fit needs paused review; canvas checks alone do not certify anatomy/skin continuity."
+    },
+    {
+      "id": "scout-b-worried",
+      "face_id": "scout-b",
+      "label": "scout-b · worried",
+      "kind": "Reusable",
+      "family": "average-covered-adult-v1",
+      "resource": "res://data/portraits/recruit-roster-v1/scout-b-worried.tres",
+      "layers": [
+        "res://art/portraits/recruit-kit-v1/shared/body.png",
+        "res://art/portraits/recruit-roster-v1/scout-b/head.png",
+        "res://art/portraits/recruit-roster-v1/scout-b/eyes-worried.png",
+        "res://art/portraits/recruit-roster-v1/scout-b/mouth-worried.png",
+        "res://art/portraits/recruit-kit-v1/shared/jerkin.png"
+      ],
+      "neutral_eyes": "res://art/portraits/recruit-roster-v1/scout-b/eyes-worried.png",
+      "neutral_mouth": "res://art/portraits/recruit-roster-v1/scout-b/mouth-worried.png",
+      "frames": [
+        {
+          "name": "Neutral",
+          "eyes": "res://art/portraits/recruit-roster-v1/scout-b/eyes-worried.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/scout-b/mouth-worried.png"
+        }
+      ],
+      "eye_box": [
+        73,
+        51,
+        142,
+        82
+      ],
+      "mouth_box": [
+        82,
+        89,
+        132,
+        112
+      ],
+      "review": "Visual fit needs paused review; canvas checks alone do not certify anatomy/skin continuity."
+    },
+    {
+      "id": "scout-b",
+      "face_id": "scout-b",
+      "label": "scout-b",
+      "kind": "Reusable",
+      "family": "average-covered-adult-v1",
+      "resource": "res://data/portraits/recruit-roster-v1/scout-b.tres",
+      "layers": [
+        "res://art/portraits/recruit-kit-v1/shared/body.png",
+        "res://art/portraits/recruit-roster-v1/scout-b/head.png",
+        "res://art/portraits/recruit-roster-v1/scout-b/eyes-neutral.png",
+        "res://art/portraits/recruit-roster-v1/scout-b/mouth-neutral.png",
+        "res://art/portraits/recruit-kit-v1/shared/jerkin.png"
+      ],
+      "neutral_eyes": "res://art/portraits/recruit-roster-v1/scout-b/eyes-neutral.png",
+      "neutral_mouth": "res://art/portraits/recruit-roster-v1/scout-b/mouth-neutral.png",
+      "frames": [
+        {
+          "name": "Neutral",
+          "eyes": "res://art/portraits/recruit-roster-v1/scout-b/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/scout-b/mouth-neutral.png"
+        },
+        {
+          "name": "Half lid",
+          "eyes": "res://art/portraits/recruit-roster-v1/scout-b/eyes-half.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/scout-b/mouth-neutral.png"
+        },
+        {
+          "name": "Closed",
+          "eyes": "res://art/portraits/recruit-roster-v1/scout-b/eyes-closed.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/scout-b/mouth-neutral.png"
+        },
+        {
+          "name": "Small mouth",
+          "eyes": "res://art/portraits/recruit-roster-v1/scout-b/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/scout-b/mouth-small.png"
+        },
+        {
+          "name": "Open mouth",
+          "eyes": "res://art/portraits/recruit-roster-v1/scout-b/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/scout-b/mouth-open.png"
+        }
+      ],
+      "eye_box": [
+        73,
+        51,
+        142,
+        82
+      ],
+      "mouth_box": [
+        82,
+        89,
+        132,
+        112
+      ],
+      "review": "Visual fit needs paused review; canvas checks alone do not certify anatomy/skin continuity."
+    },
+    {
+      "id": "scout-c-exhausted",
+      "face_id": "scout-c",
+      "label": "scout-c · exhausted",
+      "kind": "Reusable",
+      "family": "average-covered-adult-v1",
+      "resource": "res://data/portraits/recruit-roster-v1/scout-c-exhausted.tres",
+      "layers": [
+        "res://art/portraits/recruit-kit-v1/shared/body.png",
+        "res://art/portraits/recruit-roster-v1/scout-c/head.png",
+        "res://art/portraits/recruit-roster-v1/scout-c/eyes-exhausted.png",
+        "res://art/portraits/recruit-roster-v1/scout-c/mouth-exhausted.png",
+        "res://art/portraits/recruit-kit-v1/shared/jerkin.png"
+      ],
+      "neutral_eyes": "res://art/portraits/recruit-roster-v1/scout-c/eyes-exhausted.png",
+      "neutral_mouth": "res://art/portraits/recruit-roster-v1/scout-c/mouth-exhausted.png",
+      "frames": [
+        {
+          "name": "Neutral",
+          "eyes": "res://art/portraits/recruit-roster-v1/scout-c/eyes-exhausted.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/scout-c/mouth-exhausted.png"
+        }
+      ],
+      "eye_box": [
+        73,
+        51,
+        142,
+        82
+      ],
+      "mouth_box": [
+        82,
+        89,
+        132,
+        112
+      ],
+      "review": "Visual fit needs paused review; canvas checks alone do not certify anatomy/skin continuity."
+    },
+    {
+      "id": "scout-c-worried",
+      "face_id": "scout-c",
+      "label": "scout-c · worried",
+      "kind": "Reusable",
+      "family": "average-covered-adult-v1",
+      "resource": "res://data/portraits/recruit-roster-v1/scout-c-worried.tres",
+      "layers": [
+        "res://art/portraits/recruit-kit-v1/shared/body.png",
+        "res://art/portraits/recruit-roster-v1/scout-c/head.png",
+        "res://art/portraits/recruit-roster-v1/scout-c/eyes-worried.png",
+        "res://art/portraits/recruit-roster-v1/scout-c/mouth-worried.png",
+        "res://art/portraits/recruit-kit-v1/shared/jerkin.png"
+      ],
+      "neutral_eyes": "res://art/portraits/recruit-roster-v1/scout-c/eyes-worried.png",
+      "neutral_mouth": "res://art/portraits/recruit-roster-v1/scout-c/mouth-worried.png",
+      "frames": [
+        {
+          "name": "Neutral",
+          "eyes": "res://art/portraits/recruit-roster-v1/scout-c/eyes-worried.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/scout-c/mouth-worried.png"
+        }
+      ],
+      "eye_box": [
+        73,
+        51,
+        142,
+        82
+      ],
+      "mouth_box": [
+        82,
+        89,
+        132,
+        112
+      ],
+      "review": "Visual fit needs paused review; canvas checks alone do not certify anatomy/skin continuity."
+    },
+    {
+      "id": "scout-c",
+      "face_id": "scout-c",
+      "label": "scout-c",
+      "kind": "Reusable",
+      "family": "average-covered-adult-v1",
+      "resource": "res://data/portraits/recruit-roster-v1/scout-c.tres",
+      "layers": [
+        "res://art/portraits/recruit-kit-v1/shared/body.png",
+        "res://art/portraits/recruit-roster-v1/scout-c/head.png",
+        "res://art/portraits/recruit-roster-v1/scout-c/eyes-neutral.png",
+        "res://art/portraits/recruit-roster-v1/scout-c/mouth-neutral.png",
+        "res://art/portraits/recruit-kit-v1/shared/jerkin.png"
+      ],
+      "neutral_eyes": "res://art/portraits/recruit-roster-v1/scout-c/eyes-neutral.png",
+      "neutral_mouth": "res://art/portraits/recruit-roster-v1/scout-c/mouth-neutral.png",
+      "frames": [
+        {
+          "name": "Neutral",
+          "eyes": "res://art/portraits/recruit-roster-v1/scout-c/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/scout-c/mouth-neutral.png"
+        },
+        {
+          "name": "Half lid",
+          "eyes": "res://art/portraits/recruit-roster-v1/scout-c/eyes-half.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/scout-c/mouth-neutral.png"
+        },
+        {
+          "name": "Closed",
+          "eyes": "res://art/portraits/recruit-roster-v1/scout-c/eyes-closed.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/scout-c/mouth-neutral.png"
+        },
+        {
+          "name": "Small mouth",
+          "eyes": "res://art/portraits/recruit-roster-v1/scout-c/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/scout-c/mouth-small.png"
+        },
+        {
+          "name": "Open mouth",
+          "eyes": "res://art/portraits/recruit-roster-v1/scout-c/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/scout-c/mouth-open.png"
+        }
+      ],
+      "eye_box": [
+        73,
+        51,
+        142,
+        82
+      ],
+      "mouth_box": [
+        82,
+        89,
+        132,
+        112
+      ],
+      "review": "Visual fit needs paused review; canvas checks alone do not certify anatomy/skin continuity."
+    },
+    {
+      "id": "warden-b-exhausted",
+      "face_id": "warden-b",
+      "label": "warden-b · exhausted",
+      "kind": "Reusable",
+      "family": "average-covered-adult-v1",
+      "resource": "res://data/portraits/recruit-roster-v1/warden-b-exhausted.tres",
+      "layers": [
+        "res://art/portraits/recruit-kit-v1/shared/body.png",
+        "res://art/portraits/recruit-roster-v1/warden-b/head.png",
+        "res://art/portraits/recruit-roster-v1/warden-b/eyes-exhausted.png",
+        "res://art/portraits/recruit-roster-v1/warden-b/mouth-exhausted.png",
+        "res://art/portraits/recruit-kit-v1/shared/jerkin.png"
+      ],
+      "neutral_eyes": "res://art/portraits/recruit-roster-v1/warden-b/eyes-exhausted.png",
+      "neutral_mouth": "res://art/portraits/recruit-roster-v1/warden-b/mouth-exhausted.png",
+      "frames": [
+        {
+          "name": "Neutral",
+          "eyes": "res://art/portraits/recruit-roster-v1/warden-b/eyes-exhausted.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/warden-b/mouth-exhausted.png"
+        }
+      ],
+      "eye_box": [
+        73,
+        51,
+        142,
+        82
+      ],
+      "mouth_box": [
+        82,
+        89,
+        132,
+        112
+      ],
+      "review": "Visual fit needs paused review; canvas checks alone do not certify anatomy/skin continuity."
+    },
+    {
+      "id": "warden-b-worried",
+      "face_id": "warden-b",
+      "label": "warden-b · worried",
+      "kind": "Reusable",
+      "family": "average-covered-adult-v1",
+      "resource": "res://data/portraits/recruit-roster-v1/warden-b-worried.tres",
+      "layers": [
+        "res://art/portraits/recruit-kit-v1/shared/body.png",
+        "res://art/portraits/recruit-roster-v1/warden-b/head.png",
+        "res://art/portraits/recruit-roster-v1/warden-b/eyes-worried.png",
+        "res://art/portraits/recruit-roster-v1/warden-b/mouth-worried.png",
+        "res://art/portraits/recruit-kit-v1/shared/jerkin.png"
+      ],
+      "neutral_eyes": "res://art/portraits/recruit-roster-v1/warden-b/eyes-worried.png",
+      "neutral_mouth": "res://art/portraits/recruit-roster-v1/warden-b/mouth-worried.png",
+      "frames": [
+        {
+          "name": "Neutral",
+          "eyes": "res://art/portraits/recruit-roster-v1/warden-b/eyes-worried.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/warden-b/mouth-worried.png"
+        }
+      ],
+      "eye_box": [
+        73,
+        51,
+        142,
+        82
+      ],
+      "mouth_box": [
+        82,
+        89,
+        132,
+        112
+      ],
+      "review": "Visual fit needs paused review; canvas checks alone do not certify anatomy/skin continuity."
+    },
+    {
+      "id": "warden-b",
+      "face_id": "warden-b",
+      "label": "warden-b",
+      "kind": "Reusable",
+      "family": "average-covered-adult-v1",
+      "resource": "res://data/portraits/recruit-roster-v1/warden-b.tres",
+      "layers": [
+        "res://art/portraits/recruit-kit-v1/shared/body.png",
+        "res://art/portraits/recruit-roster-v1/warden-b/head.png",
+        "res://art/portraits/recruit-roster-v1/warden-b/eyes-neutral.png",
+        "res://art/portraits/recruit-roster-v1/warden-b/mouth-neutral.png",
+        "res://art/portraits/recruit-kit-v1/shared/jerkin.png"
+      ],
+      "neutral_eyes": "res://art/portraits/recruit-roster-v1/warden-b/eyes-neutral.png",
+      "neutral_mouth": "res://art/portraits/recruit-roster-v1/warden-b/mouth-neutral.png",
+      "frames": [
+        {
+          "name": "Neutral",
+          "eyes": "res://art/portraits/recruit-roster-v1/warden-b/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/warden-b/mouth-neutral.png"
+        },
+        {
+          "name": "Half lid",
+          "eyes": "res://art/portraits/recruit-roster-v1/warden-b/eyes-half.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/warden-b/mouth-neutral.png"
+        },
+        {
+          "name": "Closed",
+          "eyes": "res://art/portraits/recruit-roster-v1/warden-b/eyes-closed.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/warden-b/mouth-neutral.png"
+        },
+        {
+          "name": "Small mouth",
+          "eyes": "res://art/portraits/recruit-roster-v1/warden-b/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/warden-b/mouth-small.png"
+        },
+        {
+          "name": "Open mouth",
+          "eyes": "res://art/portraits/recruit-roster-v1/warden-b/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/warden-b/mouth-open.png"
+        }
+      ],
+      "eye_box": [
+        73,
+        51,
+        142,
+        82
+      ],
+      "mouth_box": [
+        82,
+        89,
+        132,
+        112
+      ],
+      "review": "Visual fit needs paused review; canvas checks alone do not certify anatomy/skin continuity."
+    },
+    {
+      "id": "warden-c-exhausted",
+      "face_id": "warden-c",
+      "label": "warden-c · exhausted",
+      "kind": "Reusable",
+      "family": "average-covered-adult-v1",
+      "resource": "res://data/portraits/recruit-roster-v1/warden-c-exhausted.tres",
+      "layers": [
+        "res://art/portraits/recruit-kit-v1/shared/body.png",
+        "res://art/portraits/recruit-roster-v1/warden-c/head.png",
+        "res://art/portraits/recruit-roster-v1/warden-c/eyes-exhausted.png",
+        "res://art/portraits/recruit-roster-v1/warden-c/mouth-exhausted.png",
+        "res://art/portraits/recruit-kit-v1/shared/jerkin.png"
+      ],
+      "neutral_eyes": "res://art/portraits/recruit-roster-v1/warden-c/eyes-exhausted.png",
+      "neutral_mouth": "res://art/portraits/recruit-roster-v1/warden-c/mouth-exhausted.png",
+      "frames": [
+        {
+          "name": "Neutral",
+          "eyes": "res://art/portraits/recruit-roster-v1/warden-c/eyes-exhausted.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/warden-c/mouth-exhausted.png"
+        }
+      ],
+      "eye_box": [
+        73,
+        51,
+        142,
+        82
+      ],
+      "mouth_box": [
+        82,
+        89,
+        132,
+        112
+      ],
+      "review": "Visual fit needs paused review; canvas checks alone do not certify anatomy/skin continuity."
+    },
+    {
+      "id": "warden-c-worried",
+      "face_id": "warden-c",
+      "label": "warden-c · worried",
+      "kind": "Reusable",
+      "family": "average-covered-adult-v1",
+      "resource": "res://data/portraits/recruit-roster-v1/warden-c-worried.tres",
+      "layers": [
+        "res://art/portraits/recruit-kit-v1/shared/body.png",
+        "res://art/portraits/recruit-roster-v1/warden-c/head.png",
+        "res://art/portraits/recruit-roster-v1/warden-c/eyes-worried.png",
+        "res://art/portraits/recruit-roster-v1/warden-c/mouth-worried.png",
+        "res://art/portraits/recruit-kit-v1/shared/jerkin.png"
+      ],
+      "neutral_eyes": "res://art/portraits/recruit-roster-v1/warden-c/eyes-worried.png",
+      "neutral_mouth": "res://art/portraits/recruit-roster-v1/warden-c/mouth-worried.png",
+      "frames": [
+        {
+          "name": "Neutral",
+          "eyes": "res://art/portraits/recruit-roster-v1/warden-c/eyes-worried.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/warden-c/mouth-worried.png"
+        }
+      ],
+      "eye_box": [
+        73,
+        51,
+        142,
+        82
+      ],
+      "mouth_box": [
+        82,
+        89,
+        132,
+        112
+      ],
+      "review": "Visual fit needs paused review; canvas checks alone do not certify anatomy/skin continuity."
+    },
+    {
+      "id": "warden-c",
+      "face_id": "warden-c",
+      "label": "warden-c",
+      "kind": "Reusable",
+      "family": "average-covered-adult-v1",
+      "resource": "res://data/portraits/recruit-roster-v1/warden-c.tres",
+      "layers": [
+        "res://art/portraits/recruit-kit-v1/shared/body.png",
+        "res://art/portraits/recruit-roster-v1/warden-c/head.png",
+        "res://art/portraits/recruit-roster-v1/warden-c/eyes-neutral.png",
+        "res://art/portraits/recruit-roster-v1/warden-c/mouth-neutral.png",
+        "res://art/portraits/recruit-kit-v1/shared/jerkin.png"
+      ],
+      "neutral_eyes": "res://art/portraits/recruit-roster-v1/warden-c/eyes-neutral.png",
+      "neutral_mouth": "res://art/portraits/recruit-roster-v1/warden-c/mouth-neutral.png",
+      "frames": [
+        {
+          "name": "Neutral",
+          "eyes": "res://art/portraits/recruit-roster-v1/warden-c/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/warden-c/mouth-neutral.png"
+        },
+        {
+          "name": "Half lid",
+          "eyes": "res://art/portraits/recruit-roster-v1/warden-c/eyes-half.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/warden-c/mouth-neutral.png"
+        },
+        {
+          "name": "Closed",
+          "eyes": "res://art/portraits/recruit-roster-v1/warden-c/eyes-closed.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/warden-c/mouth-neutral.png"
+        },
+        {
+          "name": "Small mouth",
+          "eyes": "res://art/portraits/recruit-roster-v1/warden-c/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/warden-c/mouth-small.png"
+        },
+        {
+          "name": "Open mouth",
+          "eyes": "res://art/portraits/recruit-roster-v1/warden-c/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-roster-v1/warden-c/mouth-open.png"
+        }
+      ],
+      "eye_box": [
+        73,
+        51,
+        142,
+        82
+      ],
+      "mouth_box": [
+        82,
+        89,
+        132,
+        112
+      ],
+      "review": "Visual fit needs paused review; canvas checks alone do not certify anatomy/skin continuity."
+    },
+    {
+      "id": "scout-a-exhausted",
+      "face_id": "scout-a",
+      "label": "scout-a · exhausted",
+      "kind": "Reusable",
+      "family": "average-covered-adult-v1",
+      "resource": "res://data/portraits/recruits-v1/scout-a-exhausted.tres",
+      "layers": [
+        "res://art/portraits/recruit-kit-v1/shared/body.png",
+        "res://art/portraits/recruit-kit-v1/scout-a/head.png",
+        "res://art/portraits/recruit-kit-v1/scout-a/eyes-exhausted.png",
+        "res://art/portraits/recruit-kit-v1/scout-a/mouth-exhausted.png",
+        "res://art/portraits/recruit-kit-v1/shared/jerkin.png"
+      ],
+      "neutral_eyes": "res://art/portraits/recruit-kit-v1/scout-a/eyes-exhausted.png",
+      "neutral_mouth": "res://art/portraits/recruit-kit-v1/scout-a/mouth-exhausted.png",
+      "frames": [
+        {
+          "name": "Neutral",
+          "eyes": "res://art/portraits/recruit-kit-v1/scout-a/eyes-exhausted.png",
+          "mouth": "res://art/portraits/recruit-kit-v1/scout-a/mouth-exhausted.png"
+        }
+      ],
+      "eye_box": [
+        78,
+        53,
+        135,
+        80
+      ],
+      "mouth_box": [
+        89,
+        91,
+        125,
+        108
+      ],
+      "review": "Visual fit needs paused review; canvas checks alone do not certify anatomy/skin continuity."
+    },
+    {
+      "id": "scout-a-worried",
+      "face_id": "scout-a",
+      "label": "scout-a · worried",
+      "kind": "Reusable",
+      "family": "average-covered-adult-v1",
+      "resource": "res://data/portraits/recruits-v1/scout-a-worried.tres",
+      "layers": [
+        "res://art/portraits/recruit-kit-v1/shared/body.png",
+        "res://art/portraits/recruit-kit-v1/scout-a/head.png",
+        "res://art/portraits/recruit-kit-v1/scout-a/eyes-worried.png",
+        "res://art/portraits/recruit-kit-v1/scout-a/mouth-worried.png",
+        "res://art/portraits/recruit-kit-v1/shared/jerkin.png"
+      ],
+      "neutral_eyes": "res://art/portraits/recruit-kit-v1/scout-a/eyes-worried.png",
+      "neutral_mouth": "res://art/portraits/recruit-kit-v1/scout-a/mouth-worried.png",
+      "frames": [
+        {
+          "name": "Neutral",
+          "eyes": "res://art/portraits/recruit-kit-v1/scout-a/eyes-worried.png",
+          "mouth": "res://art/portraits/recruit-kit-v1/scout-a/mouth-worried.png"
+        }
+      ],
+      "eye_box": [
+        78,
+        53,
+        135,
+        80
+      ],
+      "mouth_box": [
+        89,
+        91,
+        125,
+        108
+      ],
+      "review": "Visual fit needs paused review; canvas checks alone do not certify anatomy/skin continuity."
+    },
+    {
+      "id": "scout-a",
+      "face_id": "scout-a",
+      "label": "scout-a",
+      "kind": "Reusable",
+      "family": "average-covered-adult-v1",
+      "resource": "res://data/portraits/recruits-v1/scout-a.tres",
+      "layers": [
+        "res://art/portraits/recruit-kit-v1/shared/body.png",
+        "res://art/portraits/recruit-kit-v1/scout-a/head.png",
+        "res://art/portraits/recruit-kit-v1/scout-a/eyes-neutral.png",
+        "res://art/portraits/recruit-kit-v1/scout-a/mouth-neutral.png",
+        "res://art/portraits/recruit-kit-v1/shared/jerkin.png"
+      ],
+      "neutral_eyes": "res://art/portraits/recruit-kit-v1/scout-a/eyes-neutral.png",
+      "neutral_mouth": "res://art/portraits/recruit-kit-v1/scout-a/mouth-neutral.png",
+      "frames": [
+        {
+          "name": "Neutral",
+          "eyes": "res://art/portraits/recruit-kit-v1/scout-a/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-kit-v1/scout-a/mouth-neutral.png"
+        },
+        {
+          "name": "Half lid",
+          "eyes": "res://art/portraits/recruit-kit-v1/scout-a/eyes-half.png",
+          "mouth": "res://art/portraits/recruit-kit-v1/scout-a/mouth-neutral.png"
+        },
+        {
+          "name": "Closed",
+          "eyes": "res://art/portraits/recruit-kit-v1/scout-a/eyes-closed.png",
+          "mouth": "res://art/portraits/recruit-kit-v1/scout-a/mouth-neutral.png"
+        },
+        {
+          "name": "Small mouth",
+          "eyes": "res://art/portraits/recruit-kit-v1/scout-a/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-kit-v1/scout-a/mouth-small.png"
+        },
+        {
+          "name": "Open mouth",
+          "eyes": "res://art/portraits/recruit-kit-v1/scout-a/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-kit-v1/scout-a/mouth-open.png"
+        }
+      ],
+      "eye_box": [
+        78,
+        53,
+        135,
+        80
+      ],
+      "mouth_box": [
+        89,
+        91,
+        125,
+        108
+      ],
+      "review": "Visual fit needs paused review; canvas checks alone do not certify anatomy/skin continuity."
+    },
+    {
+      "id": "warden-a-exhausted",
+      "face_id": "warden-a",
+      "label": "warden-a · exhausted",
+      "kind": "Reusable",
+      "family": "average-covered-adult-v1",
+      "resource": "res://data/portraits/recruits-v1/warden-a-exhausted.tres",
+      "layers": [
+        "res://art/portraits/recruit-kit-v1/shared/body.png",
+        "res://art/portraits/recruit-kit-v1/warden-a/head.png",
+        "res://art/portraits/recruit-kit-v1/warden-a/eyes-exhausted.png",
+        "res://art/portraits/recruit-kit-v1/warden-a/mouth-exhausted.png",
+        "res://art/portraits/recruit-kit-v1/shared/jerkin.png"
+      ],
+      "neutral_eyes": "res://art/portraits/recruit-kit-v1/warden-a/eyes-exhausted.png",
+      "neutral_mouth": "res://art/portraits/recruit-kit-v1/warden-a/mouth-exhausted.png",
+      "frames": [
+        {
+          "name": "Neutral",
+          "eyes": "res://art/portraits/recruit-kit-v1/warden-a/eyes-exhausted.png",
+          "mouth": "res://art/portraits/recruit-kit-v1/warden-a/mouth-exhausted.png"
+        }
+      ],
+      "eye_box": [
+        78,
+        53,
+        135,
+        80
+      ],
+      "mouth_box": [
+        89,
+        91,
+        125,
+        108
+      ],
+      "review": "Visual fit needs paused review; canvas checks alone do not certify anatomy/skin continuity."
+    },
+    {
+      "id": "warden-a-worried",
+      "face_id": "warden-a",
+      "label": "warden-a · worried",
+      "kind": "Reusable",
+      "family": "average-covered-adult-v1",
+      "resource": "res://data/portraits/recruits-v1/warden-a-worried.tres",
+      "layers": [
+        "res://art/portraits/recruit-kit-v1/shared/body.png",
+        "res://art/portraits/recruit-kit-v1/warden-a/head.png",
+        "res://art/portraits/recruit-kit-v1/warden-a/eyes-worried.png",
+        "res://art/portraits/recruit-kit-v1/warden-a/mouth-worried.png",
+        "res://art/portraits/recruit-kit-v1/shared/jerkin.png"
+      ],
+      "neutral_eyes": "res://art/portraits/recruit-kit-v1/warden-a/eyes-worried.png",
+      "neutral_mouth": "res://art/portraits/recruit-kit-v1/warden-a/mouth-worried.png",
+      "frames": [
+        {
+          "name": "Neutral",
+          "eyes": "res://art/portraits/recruit-kit-v1/warden-a/eyes-worried.png",
+          "mouth": "res://art/portraits/recruit-kit-v1/warden-a/mouth-worried.png"
+        }
+      ],
+      "eye_box": [
+        78,
+        53,
+        135,
+        80
+      ],
+      "mouth_box": [
+        89,
+        91,
+        125,
+        108
+      ],
+      "review": "Visual fit needs paused review; canvas checks alone do not certify anatomy/skin continuity."
+    },
+    {
+      "id": "warden-a",
+      "face_id": "warden-a",
+      "label": "warden-a",
+      "kind": "Reusable",
+      "family": "average-covered-adult-v1",
+      "resource": "res://data/portraits/recruits-v1/warden-a.tres",
+      "layers": [
+        "res://art/portraits/recruit-kit-v1/shared/body.png",
+        "res://art/portraits/recruit-kit-v1/warden-a/head.png",
+        "res://art/portraits/recruit-kit-v1/warden-a/eyes-neutral.png",
+        "res://art/portraits/recruit-kit-v1/warden-a/mouth-neutral.png",
+        "res://art/portraits/recruit-kit-v1/shared/jerkin.png"
+      ],
+      "neutral_eyes": "res://art/portraits/recruit-kit-v1/warden-a/eyes-neutral.png",
+      "neutral_mouth": "res://art/portraits/recruit-kit-v1/warden-a/mouth-neutral.png",
+      "frames": [
+        {
+          "name": "Neutral",
+          "eyes": "res://art/portraits/recruit-kit-v1/warden-a/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-kit-v1/warden-a/mouth-neutral.png"
+        },
+        {
+          "name": "Half lid",
+          "eyes": "res://art/portraits/recruit-kit-v1/warden-a/eyes-half.png",
+          "mouth": "res://art/portraits/recruit-kit-v1/warden-a/mouth-neutral.png"
+        },
+        {
+          "name": "Closed",
+          "eyes": "res://art/portraits/recruit-kit-v1/warden-a/eyes-closed.png",
+          "mouth": "res://art/portraits/recruit-kit-v1/warden-a/mouth-neutral.png"
+        },
+        {
+          "name": "Small mouth",
+          "eyes": "res://art/portraits/recruit-kit-v1/warden-a/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-kit-v1/warden-a/mouth-small.png"
+        },
+        {
+          "name": "Open mouth",
+          "eyes": "res://art/portraits/recruit-kit-v1/warden-a/eyes-neutral.png",
+          "mouth": "res://art/portraits/recruit-kit-v1/warden-a/mouth-open.png"
+        }
+      ],
+      "eye_box": [
+        78,
+        53,
+        135,
+        80
+      ],
+      "mouth_box": [
+        89,
+        91,
+        125,
+        108
+      ],
+      "review": "Visual fit needs paused review; canvas checks alone do not certify anatomy/skin continuity."
+    }
+  ],
+  "supporting_resources": [
+    {
+      "id": "underlayer",
+      "face_id": "mara",
+      "label": "Mara · underlayer",
+      "kind": "Unique",
+      "family": "unique-mara-v1",
+      "resource": "res://art/portraits/mara-neutral-v1/underlayer.tres",
+      "layers": [
+        "res://art/concepts/portraits/mara-layered-v1/background.png",
+        "res://art/portraits/mara-neutral-v1/base.png",
+        "res://art/portraits/mara-neutral-v1/eyes-neutral.png",
+        "res://art/portraits/mara-neutral-v1/mouth-neutral.png"
+      ],
+      "neutral_eyes": "res://art/portraits/mara-neutral-v1/eyes-neutral.png",
+      "neutral_mouth": "res://art/portraits/mara-neutral-v1/mouth-neutral.png",
+      "frames": [
+        {
+          "name": "Neutral",
+          "eyes": "res://art/portraits/mara-neutral-v1/eyes-neutral.png",
+          "mouth": "res://art/portraits/mara-neutral-v1/mouth-neutral.png"
+        },
+        {
+          "name": "Half lid",
+          "eyes": "res://art/portraits/mara-neutral-v1/eyes-half.png",
+          "mouth": "res://art/portraits/mara-neutral-v1/mouth-neutral.png"
+        },
+        {
+          "name": "Closed",
+          "eyes": "res://art/portraits/mara-neutral-v1/eyes-closed.png",
+          "mouth": "res://art/portraits/mara-neutral-v1/mouth-neutral.png"
+        },
+        {
+          "name": "Small mouth",
+          "eyes": "res://art/portraits/mara-neutral-v1/eyes-neutral.png",
+          "mouth": "res://art/portraits/mara-neutral-v1/mouth-small.png"
+        },
+        {
+          "name": "Open mouth",
+          "eyes": "res://art/portraits/mara-neutral-v1/eyes-neutral.png",
+          "mouth": "res://art/portraits/mara-neutral-v1/mouth-open.png"
+        },
+        {
+          "name": "Round mouth",
+          "eyes": "res://art/portraits/mara-neutral-v1/eyes-neutral.png",
+          "mouth": "res://art/portraits/mara-neutral-v1/mouth-round.png"
+        }
+      ],
+      "eye_box": [
+        80,
+        55,
+        141,
+        85
+      ],
+      "mouth_box": [
+        92,
+        93,
+        128,
+        112
+      ],
+      "review": "Visual fit needs paused review; canvas checks alone do not certify anatomy/skin continuity."
+    }
+  ],
+  "rule": "Sharing a canvas or body never licenses sharing another face’s eye/mouth frames."
+}

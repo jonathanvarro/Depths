@@ -82,6 +82,9 @@ Templates > Download and Install; already installed on the owner's PC).
 - `scripts/portrait_set.gd` + `data/portraits/*.tres` – a character's
   layered portrait (aligned 192x192 layers, condition overlays, blink/talk
   frames). Companion.portrait_set points at one.
+  `data/portraits/catalog.json` separates reusable body-template families from
+  unique hero rigs (`rig_kind`/`rig_family`/`face_id`); facial drawings are never
+  shared across heads. Paused inspection/known fit issues: `docs/portrait-rig-families.md`.
 - `scripts/portrait_view.gd` – draws a PortraitSet; blink(), talk(), hurt(),
   set_condition().
 - `scripts/party_card.gd` – HUD card per party slot (portrait, name, health

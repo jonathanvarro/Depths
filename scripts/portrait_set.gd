@@ -13,6 +13,15 @@ extends Resource
 ## blink_frames replace `eyes` briefly, talk_frames replace `mouth`. Leave
 ## them empty and blinking/talking simply doesn't happen.
 
+@export_group("Rig identity")
+## Reusable means the body/outfit template is shared, never facial drawings.
+@export_enum("Reusable", "Unique") var rig_kind := "Reusable"
+## Exact body/socket registration family, not the character's gameplay class.
+@export var rig_family: StringName
+## Eye/mouth/condition drawings belong to this face only, even in a shared family.
+@export var face_id: StringName
+
+@export_group("Layers")
 ## Layers are drawn in this order, bottom to top.
 @export var background: Texture2D
 ## Hair (or hood) pieces that go behind the body.

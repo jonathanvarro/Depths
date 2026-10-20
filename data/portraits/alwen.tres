@@ -20,6 +20,9 @@
 
 [resource]
 script = ExtResource("script")
+rig_kind = "Unique"
+rig_family = &"unique-alwen-v1"
+face_id = &"alwen"
 background = ExtResource("background")
 body = ExtResource("0")
 head = ExtResource("1")

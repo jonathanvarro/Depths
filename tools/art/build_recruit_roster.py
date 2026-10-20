@@ -44,7 +44,7 @@ def resources(id):
         lines=['[gd_resource type="Resource" script_class="PortraitSet" format=3]','',
             '[ext_resource type="Script" path="res://scripts/portrait_set.gd" id="script"]']
         lines += ['[ext_resource type="Texture2D" path="'+uri(p)+'" id="'+str(i)+'"]' for i,p in enumerate(names)]
-        lines += ['','[resource]','script = ExtResource("script")','body = ExtResource("0")','head = ExtResource("1")',
+        lines += ['','[resource]','script = ExtResource("script")','rig_kind = "Reusable"','rig_family = &"average-covered-adult-v1"','face_id = &"'+id+'"','body = ExtResource("0")','head = ExtResource("1")',
             'eyes = ExtResource("2")','mouth = ExtResource("3")','clothing = Array[Texture2D]([ExtResource("4")])']
         start=9 if emotion=='neutral' else 5
         lines.append('conditions = {'+', '.join('"'+n+'": ExtResource("'+str(start+i)+'")' for i,n in enumerate(kit.CONDITIONS))+'}')

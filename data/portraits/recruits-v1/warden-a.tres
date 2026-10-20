@@ -20,6 +20,9 @@
 
 [resource]
 script = ExtResource("script")
+rig_kind = "Reusable"
+rig_family = &"average-covered-adult-v1"
+face_id = &"warden-a"
 body = ExtResource("0")
 head = ExtResource("1")
 eyes = ExtResource("2")

@@ -36,6 +36,8 @@ The browser uses isolated example inventory, oil/health and loadouts; showing th
 
 ## Portrait coherence
 
+**Follow-up #121:** the owner found eye/mouth visual mismatch when stepping frames. The checks below establish registration dimensions/playback, not a visually identical skin/anatomy fit. [Rig separation and paused inspection](portrait-rig-families.md) records the correction in progress; do not treat #120 as visual acceptance of those facial patches.
+
 [Animation preview](../art/concepts/portrait-coherence-v1/motion.gif) · [hero frame registration](../art/concepts/portrait-coherence-v1/registration-0.png)
 
 All **30 PortraitSets** were checked: three starting heroes, nine neutral recruit faces and eighteen static worried/exhausted variants. The twelve neutral faces each retain their own registered 192×192 transparent eye/mouth drawings; no face borrows another face's frames. Four native-size contact sheets show neutral, half lid, closed, small/open/round mouth and neutral again. No portrait pixels, lighting layers or character registration were changed.

@@ -1,5 +1,7 @@
 # Recruit portrait starter kit · v1
 
+**Rig separation:** [classified portrait families and paused inspector](portrait-rig-families.md) distinguish this reusable body/outfit kit from the unique Mara/Corin/Alwen rigs. Facial drawings remain face-specific; older canvas/registration checks do not certify skin or anatomy continuity.
+
 **Roster expansion:** [nine recruit faces](recruit-roster.md) now supplies
 three per role, including Brawler, through the combined roster catalog.
 This page retains the original two-face proof and its validation history.

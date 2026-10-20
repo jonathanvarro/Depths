@@ -20,6 +20,9 @@
 
 [resource]
 script = ExtResource("script")
+rig_kind = "Unique"
+rig_family = &"unique-mara-v1"
+face_id = &"mara"
 background = ExtResource("background")
 body = ExtResource("0")
 eyes = ExtResource("1")
