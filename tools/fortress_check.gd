@@ -47,6 +47,23 @@ func _initialize() -> void:
 	var args := OS.get_cmdline_user_args()
 	tag = args[0] if args.size() > 0 else "desk"
 	dir = args[1] if args.size() > 1 else ""
+	# The hall never swallows the stairs up, where parties arrive, nor turns
+	# a room's contents into a gate (found by the campaign playtest).
+	var FG = load("res://scripts/floor_generator.gd")
+	var DM = load("res://scripts/dungeon_map.gd")
+	var lost := 0
+	for s in 400:
+		var layout: PackedStringArray = FG.generate(s * 7919 + 1, false, 4)
+		var before = DM.new(layout, 4)
+		var fortified: Dictionary = load("res://scripts/fortress.gd").fortify(layout, false)
+		var after = DM.new(fortified["layout"], 4)
+		var gone: bool = after.find_content(DM.Content.STAIRS_UP) != before.find_content(DM.Content.STAIRS_UP) or fortified["hall"].is_empty()
+		for gate in fortified["gates"]:
+			if before.contents.has(gate):
+				gone = true
+		if gone:
+			lost += 1
+	check("over 400 caves, floor 4 keeps its stairs up and a hall", lost == 0, "%d lost" % lost)
 	var CS = load("res://scripts/combat_state.gd")
 	var PS = load("res://scripts/party_state.gd")
 	var queen: EnemyType = load("res://data/enemies/goblin_queen.tres")

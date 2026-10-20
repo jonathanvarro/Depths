@@ -14,7 +14,12 @@ const MIN_HALL_CELLS := 6
 
 static func fortify(layout: PackedStringArray, gate_broken: bool) -> Dictionary:
 	var map = DungeonMap.new(layout, 4)
-	var distances: Dictionary = map.walking_distances(map.start_cell)
+	# Parties arrive by the stairs up (the start mark is only for a fresh
+	# floor): measure from there, and never build the hall over them.
+	var arrival: Vector2i = map.find_content(DungeonMap.Content.STAIRS_UP)
+	if arrival == Vector2i(-1, -1):
+		arrival = map.start_cell
+	var distances: Dictionary = map.walking_distances(arrival)
 	var seen := {}
 	var hall: Array[Vector2i] = []
 	var hall_distance := -1
@@ -24,8 +29,10 @@ static func fortify(layout: PackedStringArray, gate_broken: bool) -> Dictionary:
 		var room: Array[Vector2i] = map.room_around(cell)
 		for c in room:
 			seen[c] = true
-		if room.size() < MIN_HALL_CELLS or map.start_cell in room:
+		if room.size() < MIN_HALL_CELLS or map.start_cell in room or arrival in room:
 			continue
+		if not _gates_clear(map, room):
+			continue  # a gate would cover the stairs or a room's contents
 		var nearest := 1 << 30
 		for c in room:
 			nearest = mini(nearest, distances.get(c, 1 << 30))
@@ -48,6 +55,22 @@ static func fortify(layout: PackedStringArray, gate_broken: bool) -> Dictionary:
 	for gate in gates:
 		_put(rows, gate, "." if gate_broken else "B")
 	return {"layout": rows, "hall": hall, "gates": gates}
+
+
+## True if none of the hall's way-in cells holds anything (stairs above
+## all): gating them would erase it and could strand the party.
+static func _gates_clear(map, room: Array[Vector2i]) -> bool:
+	var in_room := {}
+	for c in room:
+		in_room[c] = true
+	for c in room:
+		for d in DIRECTIONS:
+			var way: Vector2i = c + d
+			if in_room.has(way) or map.is_wall(way):
+				continue
+			if map.contents.has(way) or way == map.start_cell:
+				return false
+	return true
 
 
 static func _put(rows: PackedStringArray, cell: Vector2i, symbol: String) -> void:
