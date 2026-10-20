@@ -31,6 +31,7 @@ const ConversationScreen := preload("res://scripts/conversation_screen.gd")
 const QuestLog := preload("res://scripts/quest_log.gd")
 const Story := preload("res://scripts/story.gd")
 const Packages := preload("res://scripts/packages.gd")
+const BattleStage := preload("res://scripts/battle_stage.gd")
 ## The commander waiting outside after the escape (#122, first slice).
 const COMMANDER_FIRST := preload("res://data/conversations/commander_first.tres")
 const CoinFlip := preload("res://scripts/coin_flip.gd")
@@ -364,6 +365,7 @@ var _effect_player: AudioStreamPlayer
 var _music: Node  # music.gd: a track per place (#54)
 var _conversation: Control  # conversation_screen.gd (#122)
 var _quest_log: Control  # quest_log.gd (#123)
+var _stage: Node3D  # battle_stage.gd: fog and darkness behind every fight
 var _wound_overlay: ColorRect
 var _wound_tween: Tween
 var _heart_player: AudioStreamPlayer
@@ -422,6 +424,9 @@ func _ready() -> void:
 	_on_party_state_changed(false)  # note starting states without announcing them
 	add_child(_party)
 	_party.setup(CELL_SIZE)
+	_stage = BattleStage.new()  # fights take place on a dark stage (owner, 2026-10-20)
+	_party.camera.add_child(_stage)
+	_stage.fit(_party.camera)
 	_party_state.supplies.changed.connect(_update_lantern)
 	_party_state.supplies.light_band_changed.connect(_on_light_band_changed)
 	_update_lantern()
@@ -671,6 +676,9 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 	_party.face_open(cell if cell != _party.cell else Vector2i(-1, -1))  # never fight a wall (#111)
 	_place_foes(state.foes)
 	_in_combat = true
+	# Fog surges up from the floor and the cave fades to near-black: the
+	# fight takes place on a dark stage, so enemies never meet the walls.
+	_stage.enter(Settings.get_value("flashes"))  # plays as the fight opens
 	_update_hints("fight")
 	_say("fight_start", true)
 	_party.locked = true
@@ -680,6 +688,7 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 		_music.play("combat")
 	_combat.run(state, _cards)
 	var result: int = await _combat.finished
+	await _stage.exit()  # the fog sinks back; the cave returns
 	_play_place_music()
 	for foe in state.foes:
 		if is_instance_valid(foe.node):
@@ -1305,6 +1314,7 @@ func _place_extra_foe(foe) -> void:
 	var node: Node3D = foe.type.scene.instantiate()
 	node.position = _party.position + forward * CELL_SIZE * 1.0 + right * randf_range(-1.0, 1.0)
 	_dress_foe(node, foe.type)
+	BattleStage.raise(node)
 	_level.add_child(node)
 	foe.node = node
 
@@ -1342,8 +1352,10 @@ func _on_camp_day_passed(day: int) -> void:
 func _place_foes(foes: Array) -> void:
 	var forward := -_party.global_transform.basis.z
 	var right := _party.global_transform.basis.x
-	var ahead_open: bool = _map.is_passable(_party.cell + Party.DIRECTIONS[_party.facing])
-	var distance := CELL_SIZE * (1.2 if ahead_open else 0.4)
+	# The battle stage hides the cave, so enemies always take the same spots,
+	# whatever the walls (walls can't hide or clip them: BattleStage.raise).
+	var ahead_open := true
+	var distance := CELL_SIZE * 1.2
 	var spread := {1: [0.0], 2: [-0.5, 0.5], 3: [-0.85, 0.0, 0.85], 4: [-1.05, -0.35, 0.35, 1.05]}
 	# Front and back rows (#72): spread across the corridor together (so
 	# their tags don't overlap), with the back row a little further off.
@@ -1355,6 +1367,7 @@ func _place_foes(foes: Array) -> void:
 		var node: Node3D = foe.type.scene.instantiate()
 		node.position = _party.position + forward * depth + right * offsets[mini(i, offsets.size() - 1)]
 		_dress_foe(node, foe.type)
+		BattleStage.raise(node)
 		_level.add_child(node)
 		foe.node = node
 

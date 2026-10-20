@@ -21,6 +21,23 @@ As the light fails and nerves fray, the cave should feel like it's closing in. W
 | A7 | **Fungus glow pulse** | A slow brighten-and-fade on glowing fungus patches. | With the glowing fungus (#128, second batch). |
 | A8 | **A passing shadow** (rare) | Something dark crossing a far corridor end, glimpsed for an instant. | Very rarely, and only when the light is Dim or Out. |
 
+## Added: the battle transition (owner, 2026-10-20)
+
+**Decided:** every fight, the opening's scripted fights included, takes place on a **near-black stage**.
+- When a fight starts, fog surges up along the floor and the cave behind fades to near-black.
+- When it ends, the fog sinks back and the cave returns.
+- Enemies are drawn above the darkness, so they can never clip into walls, and they always stand at the same stage positions.
+- With screen flashes off in Settings, it's a plain fade.
+
+This is built (`scripts/battle_stage.gd`) with a generated pixel fog as a stand-in. Art wanted:
+
+| # | Effect | What it looks like |
+|---|---|---|
+| A9 | **Fog surge** | A wave of mist rolling in along the floor toward the camera and rising to fill the view: about 8–12 frames over roughly 0.6 s. Played backwards (or as its own sinking version) when the fight ends. |
+| A10 | **Battle backdrop** | The settled stage: near-black above, a low band of slowly drifting fog where the enemies stand. A 640×360 overlay, as a short seamless loop or a tileable fog strip the game scrolls. |
+
+The enemies need something to stand in: a lighter, denser band of fog at their feet, and almost nothing above head height.
+
 ## Format
 
 - **Style:** pixel art matching the cave props, with nearest-neighbour filtering. Smooth gradients in fog and darkness should be dithered or stepped to fit the pixel look.
