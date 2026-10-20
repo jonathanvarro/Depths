@@ -52,7 +52,7 @@ Preserve the readable map from the visual concepts, adapted to the grid. Show ex
 
 **Map appearance (2026-10-17, #34):** the owner wants rougher paper and a map that feels drawn by the heroes, with no perfect visible grid. See [the parchment-map design and visual study](docs/hand-drawn-map-design.md): worn edges, charcoal room/corridor contours, sparse annotations and clear symbols. Keep actual connections, scale, discovery and facing reliable. Full map can carry more drawing detail; the corner map stays sparse. This is recorded design direction, not a live renderer change.
 
-Within each dungeon site, the objective is to reach its bottom floor or deepest objective and complete that site's challenge. Completion opens the way to another site; the campaign is no longer envisioned as only one increasingly deep dungeon. Exact objectives, completion conditions, and final encounters remain undecided.
+The current campaign follows one increasingly deep cave toward its deepest objective. New environments form layers of the same place, with the surface camp as the recurring refuge. The relic, completion conditions and final encounter remain undecided; the earlier multi-site route is retained below as a possible future direction.
 
 *Implemented (#17):* every expedition ends one of three ways, followed by a results screen of what was **gained** (time, deepest floor, enemies overcome, encounters resolved, supplies found, strain eased) and **lost** (lamp oil burned, supplies used, retreats, health and strain changes, new injuries, heroes who didn't come back). **Returned:** taking the way up on floor 1 asks to leave the cave. **Wiped out:** the last hero falling, in or out of combat. **Reached the bottom:** on later expeditions, reaching the deepest point (where the others fell) asks whether to end there — a stand-in until the site's real objective is decided. After returning or reaching the bottom, **New expedition** goes back in from floor 1; the cave remembers its state, and a placeholder camp stop restores health, eases strain (−40) and resets hunger while injuries wait for the nurse. After a wipe, **Begin again** restarts the story until recruitment and the stash exist (#26, campsite).
 
@@ -87,6 +87,8 @@ Returning safely with useful gains should matter even when the bottom is not rea
 - **Visible quests** are given through conversations with NPCs at camp.
 - **Hidden quests** are found by searching, possibly with no prompt. They're built as **packaged areas**: small hand-made pieces of the maze that the floor generator places only while their conditions (floor, day, story step) are active.
 - Quest log, missable quests and rewards are open questions on #123.
+
+**Expanded cave proposal (2026-10-19, #125):** [One cave, many depths](docs/cave-descent-and-quests.md) proposes twelve floors in six connected layers: early cave, goblin fortress, flooded galleries, fungal gardens, a buried city and a temple/finale. It includes 48 named activity concepts, camp-given and hidden quest packages, gathering tied to camp projects, earned routes and persistent story outcomes across daily regeneration. Floor count, names, activities, new materials and lore are proposals for review, not approved production scope or implemented systems. Start by testing one visible quest, one hidden package and one smith project within the built cave.
 
 ## Campaign progression and refuges — recorded 2026-10-16
 

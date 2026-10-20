@@ -2,6 +2,8 @@
 
 *Written 2026-10-18 from the open and closed issues, DESIGN.md and the commit history. Update it when a phase moves.*
 
+*Scope update 2026-10-19 (#122/#123/#125): the cave now carries the campaign, with the relic as its main goal and the queen as a side quest. The issue counts and delivery checklist below remain the October 18 snapshot. [The expanded descent proposal](cave-descent-and-quests.md) offers a longer-term structure, not authorization to build all of it.*
+
 ## Where the project stands
 
 The **first playable is very close to whole**: DESIGN.md defines it as the cave and the campsite as one complete loop. 101 issues are closed and 20 remain open. Most of the open ones are ideas waiting for a decision rather than unfinished work.
@@ -29,7 +31,7 @@ The **first playable is very close to whole**: DESIGN.md defines it as the cave 
 
 ## Phase 1: Finish and prove the first playable *(now)*
 
-**Goal:** someone can play from the title screen to the queen's defeat and back to camp. The run should hit the DESIGN.md success criteria: the party is tempted to push on, the reasons to leave are clear, and the condition of the party can be read at a glance.
+**Goal:** prove the built four-floor cave/camp slice, including an optional queen fight and return to camp. The queen is a slice milestone rather than the campaign ending. The run should hit the DESIGN.md success criteria: the party is tempted to push on, the reasons to leave are clear, and the condition of the party can be read at a glance. Making the queen optional in play still needs the alternative descent and ending-flow work under #122/#123.
 
 1. **A full campaign playtest.** Play through the opening, several expeditions, floors 1–4, the gate and the queen. Note pacing, difficulty and confusing moments.
 2. **A balance pass** with the new monsters, levels and armour. Rerun `tools/balance_sim.gd` and tune the XP limits and the queen fight against the playtest.
@@ -41,7 +43,7 @@ The **first playable is very close to whole**: DESIGN.md defines it as the cave 
    - swap in ChatGPT's #105 icons
    - #64 player check
 
-**Done when:** a new player finishes the cave without explanations from us, and the playtest notes show no blocking confusion.
+**Done when:** a new player completes the four-floor slice without explanations from us, and the playtest notes show no blocking confusion.
 
 ## Phase 2: Decisions in the dark *(next)*
 
@@ -69,14 +71,11 @@ The **first playable is very close to whole**: DESIGN.md defines it as the cave 
 - **#66 Check on a real landscape iPhone:** the Pack, hero windows, touch sizes and the safe area.
 - A performance check on older devices, and settings for text size and flashes.
 
-## Beyond the first site
+## Beyond the four-floor slice
 
-DESIGN.md's campaign direction, not yet broken into issues:
-- more sites after the cave (a castle, then a portal), each with its own refuge
-- carrying heroes and their history between sites
-- shortcuts and revisits
+The current campaign direction stays within the cave and its surface camp (#122/#123). [The proposal under #125](cave-descent-and-quests.md) connects deeper cave, fortress, water, fungal growth, an unknown city and a temple/finale, with reusable quest areas and camp material projects. Twelve floors and 48 activities are a concept library, not a committed asset list.
 
-Start this only once Phase 1 proves the cave loop.
+First prove one visible early quest, one hidden multi-room activity and one smith project, then the route below the fortress. Keep using the Phase 1 playtest to judge the cave loop before producing later layers. The older castle/other-refuge route in DESIGN.md is superseded for now.
 
 ---
 
