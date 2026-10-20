@@ -31,3 +31,9 @@ enum Target {
 @export var rest := false
 ## Enemies that attack once the text is read.
 @export var ambush: Array[EnemyType] = []
+## Preparation that sticks (#114): this outcome marks the room (e.g. "the
+## charm is down")...
+@export var sets_flag := ""
+## ...and an outcome with this flag in `blocked_by` can't happen once the
+## room is marked (no charm left to rattle).
+@export var blocked_by := ""

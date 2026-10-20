@@ -12,6 +12,7 @@ const COLOR_DIM_TEXT := Color(0.85, 0.8, 0.7, 0.85)
 
 var _rules  # room_events.gd
 var _party  # party_state.gd
+var _flags: Array = []  # this room's preparation so far (#114)
 var _event: RoomEvent
 var _title: Label
 var _body: Label
@@ -56,7 +57,9 @@ func _init() -> void:
 var coin: Control
 
 
-func show_event(event: RoomEvent, party_state, rules) -> void:
+## `flags`: the room's remembered preparation (main.gd keeps it per cell).
+func show_event(event: RoomEvent, party_state, rules, flags: Array = []) -> void:
+	_flags = flags
 	_event = event
 	_party = party_state
 	_rules = rules
@@ -92,7 +95,7 @@ func _choose(choice: EventChoice) -> void:
 		var heads: bool = await coin.flip(_event.title, choice.heads_text, choice.tails_text, chance, note)
 		visible = true
 		forced = 0 if heads else 1
-	var result: Dictionary = _rules.resolve(_party, choice, forced)
+	var result: Dictionary = _rules.resolve(_party, choice, forced, _flags)
 	if choice.investigation and result["ambush"].is_empty():
 		_used[choice] = true
 		_body.text += "\n\n" + result["story"]

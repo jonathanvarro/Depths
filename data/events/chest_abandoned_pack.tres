@@ -25,6 +25,7 @@ loot = Dictionary[SupplyItem, int]({ExtResource("ration"): 1, ExtResource("dress
 script = ExtResource("outcome")
 weight = 1
 text = "Something inside squirms — a rat bursts out, teeth first!"
+blocked_by = "pack_empty"
 ambush = Array[EnemyType]([ExtResource("rat")])
 
 [sub_resource type="Resource" id="o0_3"]
@@ -50,6 +51,7 @@ ambush = Array[EnemyType]([ExtResource("rat")])
 script = ExtResource("outcome")
 weight = 2
 text = "Nothing moves. Whatever chewed the strap is long gone."
+sets_flag = "pack_empty"
 
 [sub_resource type="Resource" id="c1"]
 script = ExtResource("choice")

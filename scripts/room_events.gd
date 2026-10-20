@@ -87,9 +87,13 @@ func pick(kind: int, depth: int) -> RoomEvent:
 ## Array of {"icon": Texture2D, "text": String, "good": bool}} - the story
 ## line and what changed as chips (#105); "text" has both in words.
 ## `forced`: which outcome to use (the coin decided), or -1 to pick by weight.
-func resolve(party, choice: EventChoice, forced := -1) -> Dictionary:
+## `flags`: the room's preparation so far (#114); outcomes it rules out
+## aren't rolled, and this outcome's own flag is added to it.
+func resolve(party, choice: EventChoice, forced := -1, flags: Array = []) -> Dictionary:
 	party.advance_time(choice.time_cost)
-	var outcome: EventOutcome = choice.outcomes[forced] if forced >= 0 and forced < choice.outcomes.size() else _pick_outcome(choice)
+	var outcome: EventOutcome = choice.outcomes[forced] if forced >= 0 and forced < choice.outcomes.size() else _pick_outcome(choice, flags)
+	if outcome and outcome.sets_flag != "" and outcome.sets_flag not in flags:
+		flags.append(outcome.sets_flag)
 	var result := {"text": "", "ambush": [] as Array[EnemyType], "ends": not choice.investigation, "story": "", "changes": []}
 	if outcome == null:
 		return result
@@ -173,15 +177,16 @@ func random_treasure(floor_depth: int) -> SupplyItem:
 	return pool[0][0]
 
 
-func _pick_outcome(choice: EventChoice) -> EventOutcome:
-	if choice.outcomes.is_empty():
+func _pick_outcome(choice: EventChoice, flags: Array = []) -> EventOutcome:
+	var possible: Array = choice.outcomes.filter(func(o: EventOutcome): return o.blocked_by == "" or o.blocked_by not in flags)
+	if possible.is_empty():
 		return null
 	var total := 0
-	for outcome in choice.outcomes:
+	for outcome in possible:
 		total += outcome.weight
 	var roll := rng.randi_range(1, total)
-	for outcome in choice.outcomes:
+	for outcome in possible:
 		roll -= outcome.weight
 		if roll <= 0:
 			return outcome
-	return choice.outcomes[0]
+	return possible[0]

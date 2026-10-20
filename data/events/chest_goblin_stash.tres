@@ -20,6 +20,7 @@ gold = 10
 script = ExtResource("outcome")
 weight = 1
 text = "The charm rattles as the stones shift. Footsteps answer from the dark."
+blocked_by = "charm_down"
 ambush = Array[EnemyType]([ExtResource("goblin")])
 
 [sub_resource type="Resource" id="o0_2"]
@@ -39,11 +40,13 @@ outcomes = Array[EventOutcome]([SubResource("o0_0"), SubResource("o0_1"), SubRes
 script = ExtResource("outcome")
 weight = 1
 text = "You cut the string and catch the charm before it can rattle."
+sets_flag = "charm_down"
 
 [sub_resource type="Resource" id="o1_1"]
 script = ExtResource("outcome")
 weight = 1
 text = "The charm clatters on the stones. You freeze. Nothing comes — this time."
+sets_flag = "charm_down"
 strain = 6.0
 
 [sub_resource type="Resource" id="c1"]

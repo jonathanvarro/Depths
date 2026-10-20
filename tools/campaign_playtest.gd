@@ -507,8 +507,9 @@ func _event(at: Vector2i) -> String:
 	stats["events"] += 1
 	events_rules.depth = depth
 	var gold_before: int = party.supplies.gold
+	var flags: Array = []  # preparation carries over to the real choice (#114)
 	for choice: EventChoice in event.choices:
-		var result: Dictionary = events_rules.resolve(party, choice)
+		var result: Dictionary = events_rules.resolve(party, choice, -1, flags)
 		if not result["ambush"].is_empty():
 			stats["gold_found"] += maxi(0, party.supplies.gold - gold_before)
 			var fight := _fight(result["ambush"], "")

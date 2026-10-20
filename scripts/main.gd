@@ -606,7 +606,9 @@ func _run_event(cell: Vector2i) -> void:
 	_party.locked = true
 	_begin_encounter(cell)
 	_room_events.depth = _depth  # deeper floors hold richer treasure (#42)
-	_event_screen.show_event(event, _party_state, _room_events)
+	if not _map.event_flags.has(cell):
+		_map.event_flags[cell] = []
+	_event_screen.show_event(event, _party_state, _room_events, _map.event_flags[cell])
 	var result: Dictionary = await _event_screen.finished
 	_end_encounter()
 	_party.locked = false
