@@ -4,6 +4,8 @@ extends Node3D
 ## controls, messages, and debug overlay.
 
 const DungeonMap := preload("res://scripts/dungeon_map.gd")
+const Dressing := preload("res://scripts/dressing.gd")
+const Ambience := preload("res://scripts/ambience.gd")
 const Party := preload("res://scripts/party.gd")
 const Minimap := preload("res://scripts/minimap.gd")
 const FloorGenerator := preload("res://scripts/floor_generator.gd")
@@ -370,6 +372,7 @@ var _quest_log: Control  # quest_log.gd (#123)
 var _stage: Node3D  # battle_stage.gd: fog and darkness behind every fight
 var _spoils: Control  # spoils_screen.gd: gold and XP after a won fight
 var _vision: CanvasLayer  # vision_filter.gd: the cold blue of memories and dreams
+var _ambience: Node  # ambience.gd: fog, creeping darkness, eyes beyond the light (#129)
 var _wound_overlay: ColorRect
 var _wound_tween: Tween
 var _heart_player: AudioStreamPlayer
@@ -428,6 +431,7 @@ func _ready() -> void:
 	_on_party_state_changed(false)  # note starting states without announcing them
 	add_child(_party)
 	_party.setup(CELL_SIZE)
+	_ambience.attach(_party, _party.camera)
 	_stage = BattleStage.new()  # fights take place on a dark stage (owner, 2026-10-20)
 	_party.camera.add_child(_stage)
 	_stage.fit(_party.camera)
@@ -569,6 +573,8 @@ func _build_level() -> void:
 		_add_outskirts_dressing()
 	elif _depth==FORTRESS_DEPTH:
 		_add_fortress_dressing()
+	if not _in_opening and not use_debug_layout:
+		Dressing.dress(_level, _map, _depth, _site_seed, CELL_SIZE, WALL_HEIGHT)  # #128
 
 
 func _make_layout(depth: int) -> PackedStringArray:
@@ -2660,6 +2666,11 @@ func _build_ui(minimap: Control) -> void:
 	wound_material.set_shader_parameter("flash", 0.0)
 	wound_material.set_shader_parameter("dim", 0.0)
 	canvas.add_child(_wound_overlay)
+	_ambience = Ambience.new()
+	_ambience.main = self
+	add_child(_ambience)
+	canvas.add_child(_ambience.overlay)
+	canvas.move_child(_ambience.overlay, 0)  # under the wound vignette and the HUD
 	# Everything except full-screen backgrounds goes inside the safe area.
 	var ui := Control.new()
 	ui.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)

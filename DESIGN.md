@@ -541,6 +541,20 @@ The interface should preserve the two elements the owner particularly liked: exp
 
 **Title/typography study (2026-10-17, #38):** The owner accepted the [title-screen concept and type roles](docs/title-screen-and-typography.md): Cinzel SemiBold for the title/major headings and Source Sans 3 for actions/body text. The cave background is generated separately; title/menu use actual bundled fonts with licences and reusable Godot resources. Desktop/phone captures and a specimen are provided; Depths remains a working release name. *Implemented (#18):* the title is now the game's first screen; Begin expedition starts the lone-survivor opening, Settings is shown disabled until settings exist, and Quit appears on desktop only. Before every later expedition a preparation screen shows the party's cards and condition, the lantern and the pack, then Enter the cave. These live screens and the isolated #39 Pack preview use the fonts; adoption across other screens remains separate work.
 
+### Mine dressing and mood — implemented 2026-10-20 (#128, #129)
+
+- **Dressing** (`scripts/dressing.gd`) scatters ChatGPT's cave-v1 pieces over each mine floor. The scatter is seeded by site and depth, so a floor looks the same each visit. Cells with stairs, doors or events stay clear.
+  - Floor 1: pit props along straight drifts, rails, chalk marks and webs.
+  - Floor 2: damp, fungus and natural rock.
+  - Floors 3–4: goblin daubs, trophies, litter and lit wall torches.
+- **Purely cosmetic:** dressing never blocks a cell. A lit torch's glow is mood only and doesn't count as light.
+- **Ambience** (`scripts/ambience.gd`) is pure atmosphere and changes no rules:
+  - Low fog drifts over the floor.
+  - Swirling darkness creeps in from the screen edges as the light fails (Dim a little, Out fully) or nerves fray (Uneasy to Panicking). It draws back when things improve.
+  - With the light low or nerves bad, eyes sometimes open at the far end of the passage ahead, beyond the lantern. More rarely a shadow passes. Either one goes when you move or turn.
+  - Dust hangs in a good lantern's light.
+  - All of it stands aside in fights, the opening and at camp. With screen flashes off, the darkness holds still and the dust is left out.
+
 ### Show, don't tell — decided 2026-10-18 (#105)
 
 Guidance and results are shown as pictures rather than sentences.
