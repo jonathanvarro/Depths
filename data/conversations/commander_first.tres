@@ -1,81 +1,80 @@
 [gd_resource type="Resource" script_class="Conversation" format=3]
 
-[ext_resource type="Script" path="res://scripts/conversation_page.gd" id="1_1vt6o"]
-[ext_resource type="Script" path="res://scripts/conversation_reply.gd" id="2_qlru0"]
-[ext_resource type="Texture2D" path="res://art/portraits/story-slice-v1/commander-edric.png" id="3_r7od4"]
-[ext_resource type="Script" path="res://scripts/conversation.gd" id="4_j4kar"]
+[ext_resource type="Texture2D" path="res://art/portraits/story-slice-v1/commander-backdrop.png" id="1_qlru0"]
+[ext_resource type="Script" path="res://scripts/conversation_page.gd" id="2_r7od4"]
+[ext_resource type="Script" path="res://scripts/conversation_reply.gd" id="3_j4kar"]
+[ext_resource type="Texture2D" path="res://art/portraits/story-slice-v1/commander-edric.png" id="4_hgm1o"]
+[ext_resource type="Script" path="res://scripts/conversation.gd" id="5_aq5t2"]
 
-[ext_resource type="Texture2D" path="res://art/portraits/story-slice-v1/commander-backdrop.png" id="slice_backdrop"]
-
-[sub_resource type="Resource" id="Resource_hgm1o"]
-script = ExtResource("2_qlru0")
+[sub_resource type="Resource" id="Resource_tjfbn"]
+script = ExtResource("3_j4kar")
 label = "\"We were ambushed.\""
 next = 1
 quest = "story"
 flag = "told_ambush"
 
-[sub_resource type="Resource" id="Resource_aq5t2"]
-script = ExtResource("2_qlru0")
+[sub_resource type="Resource" id="Resource_4r1gf"]
+script = ExtResource("3_j4kar")
 label = "\"Not yet.\""
 next = 2
 quest = "story"
 flag = "told_not_yet"
 
-[sub_resource type="Resource" id="Resource_tjfbn"]
-script = ExtResource("2_qlru0")
+[sub_resource type="Resource" id="Resource_cjiw5"]
+script = ExtResource("3_j4kar")
 label = "\"Find what? They never told me.\""
 next = 3
 quest = "story"
 flag = "asked_what"
 
-[sub_resource type="Resource" id="Resource_4r1gf"]
-script = ExtResource("1_1vt6o")
-text = "Soldiers in the king's colours stand at the cave mouth. Their commander steps forward: grey at the temples, armour scrubbed clean, eyes that miss nothing.
+[sub_resource type="Resource" id="Resource_6g6o8"]
+script = ExtResource("2_r7od4")
+text = "Soldiers in the king's colours stand at the mine entrance. Their commander steps forward: grey at the temples, armour scrubbed clean, eyes that miss nothing.
 
 \"Edric Vael, commander of this expedition. You went down with the survey party. Tell me - did you find it?\""
-replies = Array[ExtResource("2_qlru0")]([SubResource("Resource_hgm1o"), SubResource("Resource_aq5t2"), SubResource("Resource_tjfbn")])
-
-[sub_resource type="Resource" id="Resource_cjiw5"]
-script = ExtResource("2_qlru0")
-next = 4
-
-[sub_resource type="Resource" id="Resource_6g6o8"]
-script = ExtResource("1_1vt6o")
-text = "\"Ambushed.\" He weighs the word. \"Rats bite. Spiders wait. Goblins raid - but an ambush means someone knew where you'd be.\" He glances at his officers, then back to you. \"Then I want to know who.\""
-replies = Array[ExtResource("2_qlru0")]([SubResource("Resource_cjiw5")])
+replies = Array[ExtResource("3_j4kar")]([SubResource("Resource_tjfbn"), SubResource("Resource_4r1gf"), SubResource("Resource_cjiw5")])
 
 [sub_resource type="Resource" id="Resource_4tdd2"]
-script = ExtResource("2_qlru0")
+script = ExtResource("3_j4kar")
 next = 4
 
 [sub_resource type="Resource" id="Resource_8u8d1"]
-script = ExtResource("1_1vt6o")
-text = "\"Not yet.\" Something tightens at the corner of his mouth. \"Then the king's patience is the only thing in this valley that isn't running out.\""
-replies = Array[ExtResource("2_qlru0")]([SubResource("Resource_4tdd2")])
+script = ExtResource("2_r7od4")
+text = "\"Ambushed.\" He weighs the word. \"Rats bite. Spiders wait. Goblins raid - but an ambush means someone knew where you'd be.\" He glances at his officers, then back to you. \"Then I want to know who.\""
+replies = Array[ExtResource("3_j4kar")]([SubResource("Resource_4tdd2")])
 
 [sub_resource type="Resource" id="Resource_gimte"]
-script = ExtResource("2_qlru0")
+script = ExtResource("3_j4kar")
 next = 4
 
 [sub_resource type="Resource" id="Resource_obvxk"]
-script = ExtResource("1_1vt6o")
-text = "\"They didn't tell you.\" A pause - not surprise, exactly. \"Good. Fewer tongues. You'll learn what you need when you need it, {hero}.\""
-replies = Array[ExtResource("2_qlru0")]([SubResource("Resource_gimte")])
+script = ExtResource("2_r7od4")
+text = "\"Not yet.\" Something tightens at the corner of his mouth. \"Then the king's patience is the only thing in this valley that isn't running out.\""
+replies = Array[ExtResource("3_j4kar")]([SubResource("Resource_gimte")])
 
 [sub_resource type="Resource" id="Resource_lgnmi"]
-script = ExtResource("2_qlru0")
+script = ExtResource("3_j4kar")
+next = 4
+
+[sub_resource type="Resource" id="Resource_hr3q8"]
+script = ExtResource("2_r7od4")
+text = "\"They didn't tell you.\" A pause - not surprise, exactly. \"Good. Fewer tongues. You'll learn what you need when you need it, {hero}.\""
+replies = Array[ExtResource("3_j4kar")]([SubResource("Resource_lgnmi")])
+
+[sub_resource type="Resource" id="Resource_fflwa"]
+script = ExtResource("3_j4kar")
 label = "\"I'll find them.\""
 quest = "left_behind"
 stage = 2
 
-[sub_resource type="Resource" id="Resource_hr3q8"]
-script = ExtResource("1_1vt6o")
+[sub_resource type="Resource" id="Resource_moxlj"]
+script = ExtResource("2_r7od4")
 text = "\"Your party is still down there. Rest at the camp tonight. Then go back to the first floor, find where they fell, and bring me whatever they carried - every map, every scrap. Their families will want to know. So will I.\""
-replies = Array[ExtResource("2_qlru0")]([SubResource("Resource_lgnmi")])
+replies = Array[ExtResource("3_j4kar")]([SubResource("Resource_fflwa")])
 
 [resource]
-script = ExtResource("4_j4kar")
+script = ExtResource("5_aq5t2")
 speaker = "Commander Edric Vael"
-portrait = ExtResource("3_r7od4")
-backdrop = ExtResource("slice_backdrop")
-pages = Array[ExtResource("1_1vt6o")]([SubResource("Resource_4r1gf"), SubResource("Resource_6g6o8"), SubResource("Resource_8u8d1"), SubResource("Resource_obvxk"), SubResource("Resource_hr3q8")])
+portrait = ExtResource("4_hgm1o")
+backdrop = ExtResource("1_qlru0")
+pages = Array[ExtResource("2_r7od4")]([SubResource("Resource_6g6o8"), SubResource("Resource_8u8d1"), SubResource("Resource_obvxk"), SubResource("Resource_hr3q8"), SubResource("Resource_moxlj")])

@@ -107,7 +107,7 @@ func _initialize() -> void:
 	await process_frame
 	_press(main._camp, "Head back down")
 	await create_timer(0.2).timeout
-	_press(main._preparation, "Enter the cave")
+	_press(main._preparation, "Enter the mine")
 	await create_timer(0.3).timeout
 	var fight_cell: Vector2i = main._party.cell + main.Party.DIRECTIONS[main._party.facing]
 	main._map.contents[fight_cell] = main.DungeonMap.Content.ENCOUNTER

@@ -45,7 +45,7 @@ func _head_down() -> void:
 	await _open("cave")
 	_press(main._camp, "Head back down")
 	await create_timer(0.2).timeout
-	_press(main._preparation, "Enter the cave")
+	_press(main._preparation, "Enter the mine")
 	await create_timer(0.3).timeout
 
 

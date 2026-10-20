@@ -50,7 +50,7 @@ func _head_down(label := "Head back down") -> void:
 	await process_frame
 	_press(main._camp, label)
 	await create_timer(0.2).timeout
-	_press(main._preparation, "Enter the cave")
+	_press(main._preparation, "Enter the mine")
 	await create_timer(0.3).timeout
 
 

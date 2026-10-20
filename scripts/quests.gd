@@ -72,7 +72,7 @@ static func next_step(camp, id: String) -> String:
 		"iron_sample":
 			if has_flag(camp, id, "have_ore"):
 				return "Bring the iron ore to the smith."
-			return "Take an iron sample from a seam in the cave."
+			return "Take an iron sample from a seam in the mine."
 		"lower_gate":
 			return "Find a way past the fortress to the water below, on floor 4."
 		"queen_claim":

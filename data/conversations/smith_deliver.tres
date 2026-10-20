@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/conversation_page.gd" id="1_u7262"]
 [ext_resource type="Script" path="res://scripts/conversation_reply.gd" id="2_tege7"]
-[ext_resource type="Texture2D" path="res://art/camp/highres-v4/smith.png" id="3_vgxpr"]
+[ext_resource type="Texture2D" path="res://art/camp/highres-v4/apprentice.png" id="3_vgxpr"]
 [ext_resource type="Script" path="res://scripts/conversation.gd" id="4_avcmb"]
 
 [sub_resource type="Resource" id="Resource_wost7"]

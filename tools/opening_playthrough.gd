@@ -332,7 +332,7 @@ func _initialize() -> void:
 		if not main._conversation.visible:
 			break
 		main._conversation.choose("")  # "Go on" / "I'll find them"
-	await create_timer(0.2).timeout
+	await create_timer(0.5).timeout  # the conversation fades out
 	check("his order becomes the first quest", main.Quests.is_active(main._camp_state, "left_behind") and main.Quests.has_flag(main._camp_state, "story", "told_ambush"))
 	check("the camp follows the escape", main._camp.visible)
 	await _snap("camp")
@@ -340,7 +340,7 @@ func _initialize() -> void:
 	await process_frame
 	_press(main._camp, "Head back down")
 	await create_timer(0.2).timeout
-	_press(main._preparation, "Enter the cave")
+	_press(main._preparation, "Enter the mine")
 	await create_timer(0.3).timeout
 	check("camp: torches not a lantern, restocked, all three slots, not bleeding", not supplies.has_lantern and supplies.torch_lit() and supplies.count(main.TORCH) == 3 and main._cards.all(func(c): return c.visible) and not hero.bleeding)
 	check("keeps the companion's weapon", hero.weapon == main._opening_weapon)

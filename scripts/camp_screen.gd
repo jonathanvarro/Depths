@@ -398,7 +398,7 @@ func _talk_row() -> void:
 	button.pressed.connect(func():
 		if conversation:
 			var heroes: Array = _party.members.filter(func(h): return h.founder or h.main_hero)
-			await conversation.play(talk, heroes[0] if not heroes.is_empty() else (_party.members[0] if not _party.members.is_empty() else null), _camp)
+			await conversation.play(talk, heroes[0] if not heroes.is_empty() else (_party.members[0] if not _party.members.is_empty() else null), _camp, _party.members)
 		Story.after_talk(_camp, id)
 		_refresh_activity())
 	_body.add_child(button)
@@ -464,7 +464,7 @@ func _training() -> void:
 		if not hero.uses_stats:
 			continue
 		var next: int = Progression.xp_for_next(hero)
-		var progress := "%d / %d XP" % [hero.xp, next] if next > 0 else "%d XP (the cave's best)" % hero.xp
+		var progress := "%d / %d XP" % [hero.xp, next] if next > 0 else "%d XP (the mine's best)" % hero.xp
 		var talents := ", ".join(PackedStringArray(hero.talents.map(func(t): return Progression.talent_name(t))))
 		_text("%s · level %d · %s · STR %d DEX %d VIT %d RES %d%s" % [hero.display_name, hero.level, progress, hero.stat_str, hero.stat_dex, hero.stat_vit, hero.stat_res, (" · " + talents) if talents != "" else ""], MUTED)
 		if Progression.ready_to_advance(hero):
@@ -591,9 +591,9 @@ func _tent() -> void:
 	if not healed.is_empty():
 		_text("Fit again tomorrow: %s." % ", ".join(PackedStringArray(healed.map(func(h): return h.display_name))), MUTED)
 	if _camp.explored_today:
-		_text("By morning the cave will have shifted: new passages and fresh enemies. The ways you found today will be gone.", AMBER)
+		_text("By morning the mine will have shifted: new passages and fresh enemies. The ways you found today will be gone.", AMBER)
 	else:
-		_text("By morning the cave will have shifted: new passages and fresh enemies.", MUTED)
+		_text("By morning the mine will have shifted: new passages and fresh enemies.", MUTED)
 	var rest := _button("Rest until day %d" % (_camp.day + 1))
 	rest.pressed.connect(func():
 		_camp.rest(_party)
@@ -725,7 +725,7 @@ func _cave_path() -> void:
 	_text("Going down: %s." % ", ".join(PackedStringArray(going.map(func(h): return h.display_name))), AMBER)
 	if not staying.is_empty():
 		_text("Staying with the nurse: %s." % ", ".join(PackedStringArray(staying.map(func(h): return "%s (fit on day %d)" % [h.display_name, _camp.ready_on(h)]))), MUTED)
-	_text("The cave is as you left it today." if _camp.explored_today else "The cave has shifted since anyone was last inside.", MUTED)
+	_text("The mine is as you left it today." if _camp.explored_today else "The mine has shifted since anyone was last inside.", MUTED)
 	_text(_rumour(), MUTED)
 	if not _camp.contract.is_empty():
 		var c: Dictionary = _camp.contract

@@ -7,8 +7,8 @@ enum Ending { RETURNED, WIPED, REACHED_BOTTOM }
 
 const TITLES := {
 	Ending.RETURNED: "Back in the daylight",
-	Ending.WIPED: "The cave keeps them",
-	Ending.REACHED_BOTTOM: "The bottom of the cave",
+	Ending.WIPED: "The mine keeps them",
+	Ending.REACHED_BOTTOM: "The bottom of the mine",
 }
 
 ## Which expedition this is: 1 is the lone survivor's escape.

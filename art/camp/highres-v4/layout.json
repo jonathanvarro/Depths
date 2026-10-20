@@ -23,7 +23,7 @@
     },
     {
       "id": "cave",
-      "label": "Cave path",
+      "label": "Mine path",
       "npc": "",
       "source": "cave-post",
       "bounds": [

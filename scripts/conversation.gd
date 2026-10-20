@@ -6,6 +6,10 @@ extends Resource
 
 @export var speaker := ""
 @export var portrait: Texture2D
+## A second person in the scene (optional): both stand on the right, and
+## whoever speaks is lit while the other dims.
+@export var second_speaker := ""
+@export var second_portrait: Texture2D
 ## Optional scene art; absent conversations retain the live camp behind them.
 @export var backdrop: Texture2D
 ## Page 0 is shown first; replies say which page comes next.

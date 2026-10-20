@@ -19,7 +19,7 @@
 
 [resource]
 script = ExtResource("1")
-display_name = "Cave"
+display_name = "Mine"
 closed_scene = ExtResource("12")
 opened_scene = ExtResource("13")
 blocked_scene = ExtResource("14")

@@ -607,7 +607,7 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 			_run_event(cell)
 		DungeonMap.Content.STAIRS_UP:
 			if _depth <= 1:  # floor 1, or the opening's daylight exit
-				_ask("%s Leave the cave?" % environment_theme.exit_message,
+				_ask("%s Leave the mine?" % environment_theme.exit_message,
 						_end_expedition.bind(Expedition.Ending.RETURNED))
 			else:
 				_ask(environment_theme.ascent_prompt, _go_to_floor.bind(_depth - 1, Arrival.FROM_BELOW))
@@ -868,7 +868,7 @@ func _end_expedition(ending: int) -> void:
 	_results.visible = false
 	if _in_opening and ending == Expedition.Ending.RETURNED:
 		# Outside, the king's forces are waiting (#122, first slice).
-		await _conversation.play(COMMANDER_FIRST, _party_state.members[0], _camp_state)
+		await _conversation.play(COMMANDER_FIRST, _party_state.members[0], _camp_state, _party_state.members)
 	if ending == Expedition.Ending.WIPED:
 		_party_state.supplies.lose_everything()  # the campaign goes on (#41)
 	_start_new_expedition()
@@ -942,7 +942,7 @@ func _camp_loop(reward := 0, note := "") -> void:
 		_expedition.visit_floor(1)
 		_show_message("Day %d. Expedition %d: the scouts' route, straight to floor %d." % [_camp_state.day, _expedition.number, start_depth])
 	else:
-		_show_message("Day %d. Expedition %d: back into the cave." % [_camp_state.day, _expedition.number])
+		_show_message("Day %d. Expedition %d: back into the mine." % [_camp_state.day, _expedition.number])
 	_light_torch_if_dark()
 
 

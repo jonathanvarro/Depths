@@ -40,7 +40,7 @@ func _initialize() -> void:
 	var A := Quests.Stage.ACTIVE
 	# After the escape: the king's forces are waiting at the cave mouth.
 	_save("commander_first", "Commander Edric Vael", COMMANDER_PORTRAIT, [
-		_page("Soldiers in the king's colours stand at the cave mouth. Their commander steps forward: grey at the temples, armour scrubbed clean, eyes that miss nothing.\n\n\"Edric Vael, commander of this expedition. You went down with the survey party. Tell me - did you find it?\"", [
+		_page("Soldiers in the king's colours stand at the mine entrance. Their commander steps forward: grey at the temples, armour scrubbed clean, eyes that miss nothing.\n\n\"Edric Vael, commander of this expedition. You went down with the survey party. Tell me - did you find it?\"", [
 			_reply("\"We were ambushed.\"", 1, "story", -1, "told_ambush"),
 			_reply("\"Not yet.\"", 2, "story", -1, "told_not_yet"),
 			_reply("\"Find what? They never told me.\"", 3, "story", -1, "asked_what"),
@@ -72,12 +72,12 @@ He unrolls the map first. Your party's route is there in the surveyor's neat han
 		_page("\"Now we go deeper. Below the fortress the old water channels run down to - \" he stops himself. \"To where my orders point. The goblins hold the way. There is a bounty on their queen, if you want it. But I need a way past that fortress, with her or without her.\"", [
 			_reply("\"I'll find a way down.\"", -1, "story", -1, "reported")]),
 	])
-	_save("smith_offer", "The apprentice smith", "res://art/camp/highres-v4/smith.png", [
+	_save("smith_offer", "The apprentice smith", "res://art/camp/highres-v4/apprentice.png", [
 		_page("The apprentice turns a bent nail over in his fingers. \"Everything they sent me is scrap. If I had real iron - even a fist-sized lump from a good seam - I could make you something better than what you're carrying.\"", [
 			_reply("\"I'll bring you iron.\"", -1, "iron_sample", Quests.Stage.ACTIVE),
 			_reply("\"Maybe later.\"", -1, "iron_sample", Quests.Stage.OFFERED),
 		])])
-	_save("smith_deliver", "The apprentice smith", "res://art/camp/highres-v4/smith.png", [
+	_save("smith_deliver", "The apprentice smith", "res://art/camp/highres-v4/apprentice.png", [
 		_page("He weighs the ore in both hands and grins for the first time since he arrived. \"Good iron. Proper iron.\" Two days of hammering later, a blade lies on his anvil, bright and light. \"It's yours to buy - I still have to eat.\"")])
 	_save("miner_thanks", "Hask, a miner", "res://art/portraits/story-slice-v1/hask-miner.png", [
 		_page("The miner you found behind the rubble is sitting at the fire, a blanket round his shoulders. \"They said it was you who heard me. I'd have died in there.\"

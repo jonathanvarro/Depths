@@ -68,7 +68,7 @@ func _init() -> void:
 	inventory_scroll.add_child(_supplies)
 
 	_enter = Button.new()
-	_enter.text = "Enter the cave"
+	_enter.text = "Enter the mine"
 	_enter.custom_minimum_size = Vector2(280, 64)
 	_enter.size_flags_horizontal = Control.SIZE_SHRINK_END
 	_enter.add_theme_font_override("font", ACTION)

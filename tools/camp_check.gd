@@ -131,7 +131,7 @@ func _initialize() -> void:
 	check("head back down", _press(main._camp, "Head back down"))
 	await create_timer(0.2).timeout
 	check("preparation follows the cave path", not main._camp.visible and main._preparation.visible)
-	_press(main._preparation, "Enter the cave")
+	_press(main._preparation, "Enter the mine")
 	await create_timer(0.4).timeout
 	check("back in the cave on floor 1", main._depth == 1 and not main._party.locked)
 	check("a different cave on day 3", main._map._rows != day1_layout)

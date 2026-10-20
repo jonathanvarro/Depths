@@ -53,7 +53,7 @@ func _talk(main, cs, who: String, a: String = "", b: String = "", c: String = ""
 			break
 		main._conversation.choose("")
 		await process_frame
-	await process_frame
+	await create_timer(0.4).timeout  # the conversation fades out
 	return not main._conversation.visible
 
 
@@ -82,7 +82,7 @@ func _initialize() -> void:
 	main._conversation.choose("Go on")
 	await process_frame
 	main._conversation.choose("\"I'll find them")
-	await process_frame
+	await create_timer(0.4).timeout
 	check("the order becomes an active quest", Quests.is_active(camp, "left_behind") and Quests.has_flag(camp, "story", "asked_what"))
 	check("...and the conversation closes", not main._conversation.visible)
 	main._save_now()

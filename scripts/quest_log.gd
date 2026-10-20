@@ -61,7 +61,7 @@ func open(camp) -> void:
 	for id in ids:
 		var info: Dictionary = Quests.INFO[id]
 		var done: bool = Quests.stage(camp, id) == Quests.Stage.RESOLVED
-		var from := " · from %s" % info["giver"] if info["giver"] != "" else " · found in the cave"
+		var from := " · from %s" % info["giver"] if info["giver"] != "" else " · found in the mine"
 		_list.add_child(_label("%s  (floor %d%s)" % [info["title"], info["floor"], from], MUTED if done else AMBER, 20))
 		_list.add_child(_label(Quests.next_step(camp, id), MUTED if done else TEXT, 18))
 	visible = true
