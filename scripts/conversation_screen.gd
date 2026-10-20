@@ -14,6 +14,7 @@ signal _replied(reply)
 signal finished
 
 const Quests := preload("res://scripts/quests.gd")
+const Settings := preload("res://scripts/settings.gd")
 const TEXT := Color("e8d9b0")
 const MUTED := Color(0.85, 0.8, 0.7, 0.75)
 const GOLD := Color("f2c94c")
@@ -34,6 +35,9 @@ var _portrait: TextureRect  # the first person's portrait (kept for tools)
 var _hero: Companion
 var _camp
 var _frames := {}  # "npc", "npc2", Companion -> frame
+## The vision tint (vision_filter.gd), set by main.gd: a Conversation with
+## `vision` ticked plays inside it.
+var vision: CanvasLayer
 
 
 func _init() -> void:
@@ -109,6 +113,9 @@ func play(talk: Conversation, hero: Companion, camp, party: Array = []) -> void:
 	var fade := create_tween().set_parallel()
 	fade.tween_property(self, "modulate:a", 1.0, FADE)
 	fade.tween_property(_shade, "color:a", 0.45, FADE)  # the world fades, but stays
+	var dreaming: bool = talk.vision and vision != null
+	if dreaming:
+		vision.enter(Settings.get_value("flashes"))  # a memory or a dream: the cold blue
 	var page := 0
 	while page >= 0 and page < talk.pages.size():
 		var reply = await _show_page(talk, talk.pages[page])
@@ -116,6 +123,8 @@ func play(talk: Conversation, hero: Companion, camp, party: Array = []) -> void:
 	var out := create_tween()
 	out.tween_property(self, "modulate:a", 0.0, FADE)
 	await out.finished
+	if dreaming:
+		await vision.exit()  # back to the present
 	visible = false
 	_backdrop.texture = null
 	finished.emit()

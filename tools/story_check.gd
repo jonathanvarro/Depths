@@ -141,6 +141,7 @@ func _initialize() -> void:
 	check("the smith's unlock survives saving", main._camp_state.smith_stock().any(func(g): return g.display_name == "Camp-forged blade"))
 	await _drop(main)
 
+	await _vision_check()
 	await _step3()
 	await _steps456()
 	SaveGame.delete()
@@ -248,6 +249,26 @@ func _steps456() -> void:
 	main._results.continue_pressed.emit()
 	await process_frame
 	check("the queen's death completes her side quest", Quests.stage(camp, "queen_claim") == Quests.Stage.RESOLVED)
+	await _drop(main)
+
+
+## Visions and dreams (owner, 2026-10-20): the cold blue tint.
+func _vision_check() -> void:
+	var main = await _game(false)
+	var talk: Conversation = load("res://data/conversations/miner_thanks.tres").duplicate()
+	talk.vision = true
+	main._conversation.play(talk, main._party_state.members[0], main._camp_state)
+	await create_timer(0.8).timeout
+	check("a vision conversation plays in the blue tint", main._vision.is_on())
+	main._conversation.choose("")
+	await create_timer(1.2).timeout
+	check("...and the present returns after it", not main._vision.is_on() and not main._conversation.visible)
+	main.set_vision(true)
+	await create_timer(0.8).timeout
+	check("the scripted switch turns a vision on", main._vision.is_on())
+	main.set_vision(false)
+	await create_timer(0.8).timeout
+	check("...and off", not main._vision.is_on())
 	await _drop(main)
 
 

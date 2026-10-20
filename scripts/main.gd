@@ -33,6 +33,7 @@ const Story := preload("res://scripts/story.gd")
 const Packages := preload("res://scripts/packages.gd")
 const BattleStage := preload("res://scripts/battle_stage.gd")
 const SpoilsScreen := preload("res://scripts/spoils_screen.gd")
+const VisionFilter := preload("res://scripts/vision_filter.gd")
 ## The commander waiting outside after the escape (#122, first slice).
 const COMMANDER_FIRST := preload("res://data/conversations/commander_first.tres")
 const CoinFlip := preload("res://scripts/coin_flip.gd")
@@ -368,6 +369,7 @@ var _conversation: Control  # conversation_screen.gd (#122)
 var _quest_log: Control  # quest_log.gd (#123)
 var _stage: Node3D  # battle_stage.gd: fog and darkness behind every fight
 var _spoils: Control  # spoils_screen.gd: gold and XP after a won fight
+var _vision: CanvasLayer  # vision_filter.gd: the cold blue of memories and dreams
 var _wound_overlay: ColorRect
 var _wound_tween: Tween
 var _heart_player: AudioStreamPlayer
@@ -1360,6 +1362,17 @@ func _place_extra_foe(foe) -> void:
 	BattleStage.raise(node)
 	_level.add_child(node)
 	foe.node = node
+
+
+## Visions of the past and dreams (owner, 2026-10-20): `true` drains the
+## whole screen to a cold blue, `false` brings back the present. For
+## scripted memories and dreams; conversations with `vision` ticked do it
+## themselves.
+func set_vision(on: bool) -> void:
+	if on:
+		await _vision.enter(Settings.get_value("flashes"))
+	else:
+		await _vision.exit()
 
 
 ## The first story slice ends at the lower water gate (docs/first-slice-
@@ -2746,6 +2759,9 @@ func _build_ui(minimap: Control) -> void:
 	talk_layer.add_child(_quest_log)
 	_spoils = SpoilsScreen.new()
 	talk_layer.add_child(_spoils)
+	_vision = VisionFilter.new()
+	add_child(_vision)
+	_conversation.vision = _vision
 	_pack.open_quests.connect(func(): _quest_log.open(_camp_state))
 	add_child(coin_layer)
 	var coin := CoinFlip.new()

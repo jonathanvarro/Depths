@@ -93,6 +93,12 @@ Returning safely with useful gains should matter even when the bottom is not rea
 - The fortress's lower water gate is reachable without the queen and ends the slice. The queen becomes a side quest.
 - Quests can't be missed in this slice.
 
+**Visions and dreams (decided 2026-10-20):**
+- Memories of the past and dream sequences play in a **cold blue tint**: the whole screen drains to blue, portraits included, with deep blue shadows, pale light, a soft vignette and a faint slow shimmer.
+- It fades in and out, and with screen flashes off only the tint remains.
+- Any conversation can be marked as a vision. Scripted sequences can switch the vision on and off for remembered places and dreams.
+- A storytelling tool: no vision content has been written yet.
+
 **Battle stage (decided 2026-10-20, #129):** every fight, the opening's included, happens on a near-black stage. Fog surges up from the floor as it starts and sinks back as it ends. Enemies draw above the darkness at fixed positions, so walls never clip them. With screen flashes off, it's a plain fade.
 
 **Quests on every floor (#123):**

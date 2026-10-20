@@ -10,6 +10,9 @@ extends Resource
 ## whoever speaks is lit while the other dims.
 @export var second_speaker := ""
 @export var second_portrait: Texture2D
+## A vision of the past or a dream (owner, 2026-10-20): the whole scene
+## plays in the cold blue vision tint (vision_filter.gd).
+@export var vision := false
 ## Optional scene art; absent conversations retain the live camp behind them.
 @export var backdrop: Texture2D
 ## Page 0 is shown first; replies say which page comes next.
