@@ -34,7 +34,7 @@ func _init(party, expedition_number := 1) -> void:
 	for item in party.supplies.items:
 		_start_supplies[item] = party.supplies.count(item)
 	for hero: Companion in party.members:
-		_start_heroes[hero] = {"health": hero.health, "strain": hero.strain, "injuries": hero.injuries.duplicate()}
+		_start_heroes[hero] = {"health": hero.health, "strain": hero.strain, "injuries": hero.injuries.duplicate(), "xp": hero.xp}
 
 
 func visit_floor(depth: int) -> void:
@@ -49,6 +49,41 @@ func add_defeated(name: String) -> void:
 func add_found(loot: Dictionary) -> void:
 	for item in loot:
 		found[item] = found.get(item, 0) + loot[item]
+
+
+## The trip in numbers, for the results screen's chips: {"time",
+## "deepest", "enemies", "events", "found": {item: n}, "gold", "used":
+## {item: n}, "oil", "retreats"}.
+func summary(party) -> Dictionary:
+	var enemies := 0
+	for name in enemies_defeated:
+		enemies += enemies_defeated[name]
+	var used := {}
+	var flasks := 0
+	for item: SupplyItem in _start_supplies.keys() + found.keys():
+		if used.has(item):
+			continue
+		var spent: int = _start_supplies.get(item, 0) + found.get(item, 0) - party.supplies.count(item)
+		if spent > 0:
+			used[item] = spent
+			if item.effect == SupplyItem.Effect.REFILL_LANTERN:
+				flasks += spent
+	var oil: float = _start_oil + flasks * 100.0 - (party.supplies.oil + party.supplies.open_flask)
+	return {"time": party.time_elapsed - _start_time, "deepest": deepest, "enemies": enemies,
+			"events": events_resolved, "found": found, "gold": gold_found, "used": used,
+			"oil": roundi(maxf(oil, 0.0)), "retreats": retreats}
+
+
+## One row per hero who set out: {"hero", "back" (came home), "health_from",
+## "health", "xp_from", "xp", "strain_from", "strain", "new_injuries"}.
+func hero_rows(party) -> Array:
+	var rows := []
+	for hero: Companion in _start_heroes:
+		var before: Dictionary = _start_heroes[hero]
+		rows.append({"hero": hero, "back": hero.is_with_party(), "health_from": before["health"], "health": hero.health,
+				"xp_from": before.get("xp", hero.xp), "xp": hero.xp, "strain_from": before["strain"], "strain": hero.strain,
+				"new_injuries": hero.injuries.filter(func(i): return i not in before["injuries"])})
+	return rows
 
 
 ## Lines describing what the expedition brought.
