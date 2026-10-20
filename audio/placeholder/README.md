@@ -5,7 +5,7 @@ recordings later by assigning new files in `themes/*.tres` (Sound group).
 
 | File | Used for |
 | --- | --- |
-| `footstep_1-3.wav` | Each step (one picked at random, pitch varied) |
+| `footstep_1-3.wav` | Each step (one picked at random, pitch varied): a soft, muffled heel-toe scuff on gritty stone |
 | `bump.wav` | Walking into a wall or blocked passage |
 | `web_tear.wav` | Clearing a web (cave theme) |
 | `door_creak.wav` | Opening a door (stone theme) |
@@ -21,5 +21,6 @@ and sine waves. No third-party recordings are used, so there is no external
 licence to track; they belong to this project like its code.
 
 To rebuild them: `python tools/make_placeholder_audio.py` (same output every
-run). The two ambience files are set to loop in their `.import` files
+run). The footsteps come from `python tools/audio/generate_soft_footsteps.py`
+instead (softer, owner request 2026-10-20; 44.1 kHz, peaks near -12 dBFS). The two ambience files are set to loop in their `.import` files
 (`edit/loop_mode=2`).

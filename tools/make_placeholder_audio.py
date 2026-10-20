@@ -195,8 +195,11 @@ def coin():
 
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
+    # The footsteps are now made by tools/audio/generate_soft_footsteps.py
+    # (softer, 2026-10-20). They're still computed here so the shared random
+    # sequence - and so every other sound below - stays exactly the same.
     for v in range(3):
-        write(f"footstep_{v + 1}.wav", footstep(v), 0.7)
+        footstep(v)
     write("bump.wav", bump(), 0.8)
     write("web_tear.wav", web_tear(), 0.6)
     write("door_creak.wav", door_creak(), 0.5)
