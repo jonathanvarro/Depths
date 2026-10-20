@@ -83,3 +83,27 @@ The owner accepted every suggestion above:
 5. **Quests can't be missed** in this slice; everything waits.
 6. **The slice's ending:** a short scene at the lower water gate ("the way down continues"), then play carries on.
 7. **The ambush site** is a new place on floor 1, built from the opening's bodies and art. The opening itself is unchanged.
+
+## Built (2026-10-20)
+
+All six build steps are in: f8168bb and the commits before it.
+
+**The campaign playtest bot now follows the story.** Over 90 campaigns (30 per hero, 45 days max):
+
+| | Mara | Corin | Alwen |
+|---|---|---|---|
+| Those Left Behind done (median day) | 3 | 2 | 2 |
+| Three Knocks done | day 3 (30/30) | day 2 (30/30) | day 2 (29/30) |
+| Iron for the Apprentice done | day 3 | day 3 | day 3 |
+| Lower water gate reached | day 6 (30/30) | day 6.5 (30/30) | day 6 (30/30) |
+| Queen dead (side quest) | 24/30 | 27/30 | 18/30 |
+| Stuck runs | 0 | 0 | 0 |
+
+- The slice's story content takes about a week of in-game days.
+- The queen remains the hardest fight and is now optional.
+- Alwen's queen result (18) is lower than the last balance run (23). The extra quest fights change every campaign's course, so treat it as noise until it's seen twice.
+
+**Not done:**
+- Real art (see the art list above).
+- A hand-played pass through the slice.
+- Rebuilding the exe.

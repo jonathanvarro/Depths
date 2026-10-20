@@ -1,7 +1,9 @@
 extends SceneTree
 ## Full-campaign playtest (#119, #49): plays whole campaigns, from the camp
-## after the opening escape to the goblin queen's death, many times over
-## for each starting hero, and reports how they went.
+## after the opening escape until the queen is dead and the first story
+## slice's lower gate is reached, many times over for each starting hero,
+## and reports how they went. It follows the story too: the commander's
+## orders, quest packages and camp conversations (docs/first-slice-plan.md).
 ##
 ## It plays by the game's own rules - PartyState, CombatState, CampState,
 ## RoomEvents, Progression, FloorGenerator, Fortress and main.gd's
@@ -21,6 +23,9 @@ const FloorGenerator := preload("res://scripts/floor_generator.gd")
 const Fortress := preload("res://scripts/fortress.gd")
 const Supplies := preload("res://scripts/supplies.gd")
 const StrainRules := preload("res://scripts/strain.gd")
+const Quests := preload("res://scripts/quests.gd")
+const Story := preload("res://scripts/story.gd")
+const Packages := preload("res://scripts/packages.gd")
 
 const TORCH := preload("res://data/items/torch.tres")
 const RATION := preload("res://data/items/ration.tres")
@@ -102,7 +107,7 @@ func _campaign(hero_path: String, run_seed: int, max_days: int) -> Dictionary:
 		"gold_found": 0, "gold_contracts": 0, "gold_sold": 0, "gold_spent": 0, "bounty": 0,
 		"gate_tries": 0, "gate_day": 0, "queen_tries": 0, "queen_rounds": 0, "queen_day": 0,
 		"route_bought": 0, "lantern_day": 0, "xp_spent_out_day": {}, "levels_at_end": [],
-		"treated": 0, "recruits_hired": 0, "queen_attempts": [], "gate_attempts": [],
+		"treated": 0, "recruits_hired": 0, "quest_days": {}, "queen_attempts": [], "gate_attempts": [],
 	}
 	party = PS.new()
 	party.add_member(load(hero_path))
@@ -117,9 +122,13 @@ func _campaign(hero_path: String, run_seed: int, max_days: int) -> Dictionary:
 	party.supplies.add(DRESSING, 2)
 	camp = CampState.new()
 	camp.start(run_seed, party)
+	events_rules.camp = camp
+	# The commander's order after the escape (first story slice).
+	Quests.set_stage(camp, "left_behind", Quests.Stage.ACTIVE)
 	camp.day_passed.connect(func(day): floors.clear())
 	camp.begin_arrivals()
 	while camp.day <= max_days:
+		_talk_at_camp()
 		var start_depth := _camp_day()
 		if start_depth < 0:
 			continue  # rested or waited a day
@@ -128,7 +137,8 @@ func _campaign(hero_path: String, run_seed: int, max_days: int) -> Dictionary:
 		_back_at_camp(ending)
 		if stats["stuck"] != "":
 			break
-		if camp.queen_defeated:
+		_note_quests()
+		if camp.queen_defeated and Quests.stage(camp, "lower_gate") == Quests.Stage.RESOLVED:
 			stats["won"] = true
 			break
 	stats["days"] = camp.day
@@ -137,6 +147,36 @@ func _campaign(hero_path: String, run_seed: int, max_days: int) -> Dictionary:
 
 
 # --- Camp ---------------------------------------------------------------
+
+## People at camp with news (first slice): the bot listens, answering with
+## the first reply each time, as the conversation screen would apply it.
+func _talk_at_camp() -> void:
+	for site in ["cave", "smith", "fire"]:
+		var id := Story.camp_talk(camp, site)
+		var talk := Story.conversation(id)
+		if talk == null:
+			continue
+		var page := 0
+		var guard := 0
+		while page >= 0 and page < talk.pages.size() and guard < 20:
+			guard += 1
+			var replies: Array = talk.pages[page].replies
+			var reply = replies[0] if not replies.is_empty() else null
+			if reply and reply.quest != "":
+				if reply.stage >= 0:
+					Quests.set_stage(camp, reply.quest, reply.stage)
+				if reply.flag != "":
+					Quests.set_flag(camp, reply.quest, reply.flag)
+			page = reply.next if reply else -1
+		Story.after_talk(camp, id)
+
+
+## The day each quest first resolved, for the report.
+func _note_quests() -> void:
+	for id in Quests.INFO:
+		if Quests.stage(camp, id) == Quests.Stage.RESOLVED and not stats["quest_days"].has(id):
+			stats["quest_days"][id] = camp.day
+
 
 ## One visit to camp. Returns the depth to head down to, or -1 if the day
 ## was spent resting or waiting.
@@ -241,6 +281,7 @@ func _back_at_camp(ending: int) -> void:
 				hero.add_injury(DEEP_WOUND)
 		party.supplies.lose_everything()
 	camp.expedition_returned()
+	Story.on_return(camp)
 	for hero in party.members.duplicate():
 		if not hero.is_with_party():
 			party.remove_member(hero)
@@ -317,12 +358,21 @@ func _enter_floor(to: int, from_above: bool) -> bool:
 			var fortress: Dictionary = Fortress.fortify(layout, camp.gate_broken)
 			layout = fortress["layout"]
 			marks = {"hall": fortress["hall"], "gates": fortress["gates"]}
-		var map = DungeonMap.new(layout, to)
+		var avoid: Array = marks.get("hall", []) + marks.get("gates", [])
+		var join: Dictionary = {}
+		if not avoid.is_empty():
+			var plain = DungeonMap.new(layout, to)
+			join = plain.walking_distances(plain.find_content(C.STAIRS_UP))
+		var stamped: Dictionary = Packages.place(layout, Packages.active(camp, to), site_seed + to * 7919 + 13, avoid, join)
+		var map = DungeonMap.new(stamped["layout"], to)
 		map.marks = marks
 		for c in map.contents:
 			var event: RoomEvent = events_rules.pick(map.contents[c], to)
 			if event:
 				map.events[c] = event
+		for c in stamped["events"]:
+			map.events[c] = stamped["events"][c]
+		map.fight_groups = stamped["fights"]
 		floors[to] = map
 	var map = _map()
 	cell = map.find_content(C.STAIRS_UP) if from_above else map.find_content(C.STAIRS_DOWN)
@@ -429,6 +479,7 @@ func _fortress() -> String:
 	if result == CS.Result.DEFEAT:
 		return "wiped"
 	camp.queen_defeated = true
+	Quests.set_stage(camp, "queen_claim", Quests.Stage.RESOLVED)
 	camp.contract = {}
 	stats["queen_day"] = camp.day
 	return "home"
@@ -482,7 +533,9 @@ func _on_enter(at: Vector2i) -> String:
 	var fight_cell: Vector2i = map.encounter_zones.get(at, Vector2i(-1, -1))
 	if fight_cell != Vector2i(-1, -1) and not map.triggered.has(fight_cell):
 		map.enter(fight_cell)
-		var types: Array = Main.encounter_pool(depth, party.living_members().size()).pick_random()
+		var types: Array = map.fight_groups.get(fight_cell, [])  # a quest package's own fight
+		if types.is_empty():
+			types = Main.encounter_pool(depth, party.living_members().size()).pick_random()
 		var result := _fight(types, "")
 		if result == CS.Result.DEFEAT:
 			return "wiped"
