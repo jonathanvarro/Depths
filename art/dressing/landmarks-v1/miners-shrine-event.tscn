@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://art/dressing/landmarks-v1/shrine.gd" id="script"]
+[ext_resource type="Texture2D" path="res://art/dressing/landmarks-v1/miners-shrine.png" id="t0"]
+[ext_resource type="Texture2D" path="res://art/dressing/landmarks-v1/miners-shrine-used.png" id="t1"]
+[ext_resource type="Texture2D" path="res://art/dressing/landmarks-v1/shrine-offerings.png" id="t2"]
+[ext_resource type="Texture2D" path="res://art/dressing/landmarks-v1/shrine-offerings-used.png" id="t3"]
+[ext_resource type="SpriteFrames" path="res://art/dressing/landmarks-v1/shrine-glow.tres" id="glow"]
+
+[node name="MinersShrine" type="Node3D"]
+script = ExtResource("script")
+closed_texture = ExtResource("t0")
+empty_texture = ExtResource("t1")
+offerings_texture = ExtResource("t2")
+spent_offerings_texture = ExtResource("t3")
+
+[node name="Sprite" type="Sprite3D" parent="."]
+position = Vector3(0,0.95,0.012)
+pixel_size = 0.008928571428571428
+billboard = 0
+shaded = true
+texture_filter = 0
+alpha_cut = 1
+cast_shadow = 0
+texture = ExtResource("t0")
+
+[node name="Offerings" type="Sprite3D" parent="."]
+position = Vector3(0,0.15089285714285716,0.16)
+pixel_size = 0.005803571428571429
+billboard = 2
+shaded = true
+texture_filter = 0
+alpha_cut = 1
+cast_shadow = 0
+texture = ExtResource("t2")
+
+[node name="Glow" type="AnimatedSprite3D" parent="."]
+position = Vector3(0,0.15089285714285716,0.162)
+pixel_size = 0.005803571428571429
+billboard = 2
+shaded = false
+texture_filter = 0
+cast_shadow = 0
+sprite_frames = ExtResource("glow")
+animation = &"glow"
+autoplay = "glow"

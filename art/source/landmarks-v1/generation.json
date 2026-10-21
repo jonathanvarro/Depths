@@ -1,0 +1,136 @@
+{
+  "issue": 132,
+  "date": "2026-10-21",
+  "assets": [
+    {
+      "id": "root-curtain-a",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: one modular CEILING ROOT CURTAIN for Depths, a dark first-person grid cave game. Production pixel-art sprite, designed to read at native128x128, transparent square canvas. Three thick twisted old tree roots attached to a short broken root mat across the TOP edge, hanging downward with tapering fine hooked ends. Main mass on LEFT HALF, two thinner strands toward centre, wide clear gaps; uneven ends, a little dead moss, rough warm umber bark and cool charcoal shadows. Curtain is a shallow hanging fringe, not a solid wall or door; the walkway below must visibly remain open. FRONT orthographic view, roots flat against image plane, clear silhouette, entire asset inside with small margins, no camera perspective. Match restrained cave props: broad crisp clustered pixels, 3 shades per material, muted ochre/umber/slate palette, <=64 colours intended shared cave palette, sparse wear. Neutral diffuse illumination; no baked ground shadow, glow, highlights from lamps. GENUINE TRANSPARENT ALPHA outside roots and in every gap. No rock wall, scenery, floor, container, body, face, text, frame, UI, fake checkerboard, photoreal pores, fine texture noise, gradients, painterly blur or antialiasing.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-d72e008f-c8d5-43e3-a7c6-b3f4cf17e90a.png",
+      "source": "art/source/landmarks-v1/root-curtain-a-master.png",
+      "sha256": "eb14c69f1ec3ccadf8a2749debb647247ed2069a0edf6a96b4bb98e164fc8090"
+    },
+    {
+      "id": "root-curtain-b",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: precise-object-edit. Edit target: this modular ceiling root sprite for Depths. Make a SECOND DISTINCT curtain variant in exactly the same pixel scale, bark colours, shading and simplified clustered treatment. Change the silhouette to a low shallow arch of forked roots, thickest on the RIGHT, with only TWO short hanging tendrils, an open central gap and one small muted moss tuft at the attachment. The long lower half of the canvas must be empty transparent space: it is ceiling fringe that leaves a passable corridor, not a barrier. No long central root, no doorway frame, no wall or floor. Entire root mat and tips contained in square canvas. Broad 3-shade umber/charcoal pixels, native128x128 target, <=64 shared colours, no extra texture detail, text or UI. Genuine transparent background and gaps, no shadow painted on a wall.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-c8164f7d-3c3a-4cf1-b623-aa5f62d1df86.png",
+      "source": "art/source/landmarks-v1/root-curtain-b-master.png",
+      "reference": "art/source/landmarks-v1/root-curtain-a-master.png",
+      "sha256": "f3cb2126c943de73f2b96f4fc71a594e78ea7e1e7018f96c47fe1013c6cacb1a"
+    },
+    {
+      "id": "wall-roots",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: modular WALL ROOTS decal cutout for Depths' old cave, native128x128. Front orthographic view of one thick tree root entering from the top left, twisting downward and splitting into four thinner roots which creep across the rock face. Roots only, isolated: no actual rock wall/background. Umber bark, charcoal cool shadows, a few dusty olive moss patches, rough old natural forms. Broad crisp painted PIXEL CLUSTERS, at most3 shades per material and64 shared colours; simpler restrained game prop, no hairline texture noise or photographic detail. Branches leave large transparent gaps, low asymmetric silhouette inside square canvas with padding. Designed as a wall-mounted layer, flat front-facing, no cast shadow, no rim light or baked torch glow. Entire piece contained. GENUINE transparent alpha outside roots and between branches. No face, creature, door, loot, text, UI, frame, checkerboard or floor.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-e1d93644-04ec-45ca-a5d1-07c008df7476.png",
+      "source": "art/source/landmarks-v1/wall-roots-master.png",
+      "sha256": "95222a2d26300e0a374bae7b0b8540e463cd47999637cb377dad6b2b44493d0a"
+    },
+    {
+      "id": "root-foot-tangle",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: FLOOR-EDGE ROOT TANGLE for Depths cave scenery, target128x128 transparent square. A low irregular clump of twisted umber roots emerging from the foot of a wall, three broad woody loops with tapered ends spreading sideways, a little dust and dead olive moss. FRONT facing slightly elevated view, isolated roots only, bottom contact line level; shape broad and low, not a standing tree or barrier. Whole object within canvas with transparent padding. Grounded sparse PIXEL clusters, broad 3-shade bark masses, charcoal/slate shadows, muted ochre-brown, max64 shared colours; neutral diffuse illumination. No ground patch or cast shadow, rock wall, chest, vines shaped as faces, text, UI, checkerboard, glossy detail, noise or painterly blur. Genuine transparent outside and between root loops. Decoration tucked at the wall edge, visibly not something to use or collect.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-40c110f8-64b2-4c22-b6cf-550823f7ac43.png",
+      "source": "art/source/landmarks-v1/root-foot-tangle-master.png",
+      "selected": true,
+      "sha256": "48e941c3fdd1dd8846f36a06bb83eecf85f26dc2cd29da3a6f743ece62e62059"
+    },
+    {
+      "id": "floor-crossing-root",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: TOP-DOWN FLOOR DECAL for Depths cave, target128x128. A SINGLE thick old tree root snakes horizontally from LEFT edge toward RIGHT, splitting into two thin short ends, very shallow woody surface with a few rootlet branches and dusty olive flecks. Orthographic plan view looking STRAIGHT DOWN, root only with genuine transparent alpha around it. Entire root with small padding. This is drawn onto flat cave floor, so NO raised ridge silhouette, no ground cross-section, no soil tile, no pit or tripwire, no perspective, no ground shadow. Umber bark and charcoal-cool shadows in broad crisp painted PIXEL clusters, 2-3 shades per material, max64 colours shared cave palette, sparse marks, native128px readability. No noise, photoreal texture, gradients, glow, UI, text, frame, checkerboard. Low irregular organic shape should read as harmless old root, not a trap.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-b77a1054-882d-4b7e-a6c6-60c054ac046a.png",
+      "source": "art/source/landmarks-v1/floor-crossing-root-master.png",
+      "selected": true,
+      "sha256": "afd691b7f3a7e42475662ef243f281868b9f4d8735af06f2e7e6754600136927"
+    },
+    {
+      "id": "miners-shrine",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: INTERACTIVE MINERS' SHRINE WALL NICHE, fresh/untouched state for Depths, dark dungeon crawler. One front-facing orthographic cutout to mount on a cave wall, intended128x128 sprite, genuine transparent square canvas. Broad shallow rectangular rough grey-brown stone niche with a LOW FLAT ARCH and a worn timber lintel, a small warm DARK WOOD carved standing miner token inside: blocky simple man holding a pick across chest, abstract unpainted face, NOT a pale stone seated idol or hooded statue. Tiny dusty muted blue rag tied on inner right peg, dry rust/ochre patina. Low stone ledge at base. Small guttered wax stubs ON THE LEDGE only, cold unlit; foreground floor offerings will be separate so NO floor pile. Niche approx1metre wide, wider than tall; a dark recessed interior, large clear readable silhouette. Broad crisp painted PIXEL clusters, 3 shades per material, sparse intentional wear, 64colour cave palette. Neutral diffuse light, no baked golden spotlight or magical glow, no world light, no surroundings or ground shadow. Whole outline with8percent transparent margin. No loot chest, treasure pile, glowing gems, readable runes, real-world religious symbols, UI, text, frame, checkerboard or excessive microtexture. It is an approachable worn miners' votive shrine, visibly distinct from a white idol in a round rock arch.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-98a43ccb-fec0-42ac-b4eb-1f545d8f61e4.png",
+      "source": "art/source/landmarks-v1/miners-shrine-master.png",
+      "selected": true,
+      "sha256": "68b24b7789f31e964404dc15eba36d978313b620f569dff8bcea4f2e0b3d3119"
+    },
+    {
+      "id": "miners-shrine-used",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: precise-object-edit. Edit target: the supplied miners' shrine niche. Make its RESOLVED/ATTENDED state with IDENTICAL canvas size, camera, crop, rock outline, lintel, stone ledge, miner carving, scale, lighting and palette. Change only two small details: REMOVE the blue rag offering from the right interior peg leaving the bare peg, and reduce the candle stubs on the ledge to lower spent wax with blackened wicks. The wooden miner token stays in place, intact, same stance and pick. No new cracks or rock rearrangement. Keep the whole niche registered in exactly the same position. No candles burning, no smoke, no magical colour, no particles, text, UI or extra offerings. Genuine transparent background outside the same outline. Match the broad simplified pixel clusters,128px target. This is a completed interaction, neutral regarding whether its outcome was a boon or a bane.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-e0a246c9-513b-460f-8f3c-979db2c79d92.png",
+      "source": "art/source/landmarks-v1/miners-shrine-used-master.png",
+      "selected": true,
+      "sha256": "e70898acea25bb6fbda287af3644266bf280f1c2ae33fc0ffcc14c6f308bacb9",
+      "reference": "art/source/landmarks-v1/miners-shrine-master.png"
+    },
+    {
+      "id": "shrine-offerings",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: MINERS' SHRINE FLOOR OFFERINGS, untouched state, separate modular prop for Depths. One LOW BROAD cluster at the foot of a cave-wall shrine: three guttered ivory wax candles of unequal height, one dull small tin cup holding a single worn bronze coin, and a short folded dusty muted blue cloth, on one flat broken stone slab. NO flames yet, just black wicks; separate optional animation will supply their flicker. Front-facing slightly elevated game prop view, contact edge horizontal. Transparent square canvas with all objects contained and ample margin. It is a little votive arrangement, not a glittering loot pile or chest. Broad deliberate PIXEL clusters, restrained charcoal/umber/stone/tin/wax palette, 3 shades per material, target128x128, max64 colours shared with cave dressing. Neutral diffuse illumination, no floor tile or cast shadow, no background, cave wall, statue, gold sparkle, labels, UI, checkerboard, blur, gradients or microtexture. Shape wide and low, with clear separate candle wicks readable at phone size.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-767bb89f-3039-4654-9cf4-068ab9f33efb.png",
+      "source": "art/source/landmarks-v1/shrine-offerings-master.png",
+      "selected": false,
+      "sha256": "10cb855bae12f2dcbb13a32a825bb550702b5c1593b2e13c7245ef4ad7c90f7d"
+    },
+    {
+      "id": "shrine-offerings-neutral",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: background-extraction and precise-object-edit. Edit target: these shrine offerings. Remove EVERY soft halo, glow, shadow, haze and translucent surrounding pixel. Keep only the sharply outlined solid stone slab, three unlit wax candles with BLACK WICKS, metal cup/coin and blue cloth. The candles are COLD, not emissive: no bright bloom anywhere. Cloth must be plain blue without any symbol or lettering. Preserve exact camera, object positions, outlines and source canvas for registration. Genuine fully transparent empty background with a crisp boundary, including beneath the slab: no black fill, floor, spotlight or checkerboard. Retain sparse broad pixel clusters suitable for128x128, restrained local wax/metal/stone/brown/blue colours; neutral lighting. No new objects or text. Candle flames and any glow will be authored separately later, so do not draw them.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-8b7a4739-1387-4bd5-a3d6-062a0dcab198.png",
+      "source": "art/source/landmarks-v1/shrine-offerings-neutral-master.png",
+      "selected": true,
+      "sha256": "33b2c617a967479f347e685f86cb66be57f4dc42304fdd9df013c235f898f1f5",
+      "reference": "art/source/landmarks-v1/shrine-offerings-master.png"
+    },
+    {
+      "id": "shrine-offerings-used",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: precise-object-edit. Edit target: the supplied shrine floor offerings. Make the RESOLVED/SPENT state on the SAME canvas and exact fixed camera, slab outline, crop, placement and scale. REMOVE the folded blue cloth entirely, REMOVE the coin so the tin cup is visibly empty, leave three much lower spent wax stubs with black wicks where the original three candles stood. Preserve the unchanged slab and cup exactly. No flames or glow, no haze or shadow around the object; genuine transparent alpha with clean solid-pixel edges. Keep broad restrained pixel clusters and neutral stone/tin/ivory colours; no new objects, writing, magic effects or red/green outcome colour. This means the shrine interaction is finished, regardless of boon or bane. Keep a single wide low floor-edge arrangement, no floor backdrop.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-b78cd19c-9618-4db2-b92f-28e872366a5f.png",
+      "source": "art/source/landmarks-v1/shrine-offerings-used-master.png",
+      "reference": "art/source/landmarks-v1/shrine-offerings-neutral-master.png",
+      "sha256": "d6fcb9563f84e21e35ac5b3136a1103ddd719be59979eb8789c9cdd2ebc3083e"
+    },
+    {
+      "id": "collapsed-crates",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: COLLAPSED ROYAL SUPPLY CRATES, floor-edge scenery for Depths, native128x128. One low heap of two completely CRUSHED wooden packing crates trapped under heavy fallen grey limestone. Broken slats splayed, diagonal shattered battens and split corners visible, rusted bent nails. Boxes are flattened and permanently buried: NO intact lid, chest silhouette, usable handles, open cavity or visible contents. A faded dull blue cloth scrap caught under one stone quietly suggests the king's abandoned expedition. Front-facing slightly elevated orthographic game prop view, entire heap contained in transparent square canvas with padding, grounded broad low silhouette. Restrained dark PIXEL art: large deliberate wood/rock clusters,3 shades per material, umber/grey/charcoal with tiny muted blue, <=64-colour cave palette, neutral diffuse light. No background rock wall, floor tile, ground shadow, gold, coins, salvage tools, sparkle, UI, writing, fake checkerboard, photoreal wood grain, gradients or noisy detail. This is inaccessible old wreckage used as a landmark, not a loot container.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-43646004-2df6-4249-bddf-f1da3e536600.png",
+      "source": "art/source/landmarks-v1/collapsed-crates-master.png",
+      "sha256": "7e3c1a0a1838bc4a2d4703a9ca5ba17e2cc46ef83f893fb3f1f0f9dd0b5bb036"
+    },
+    {
+      "id": "split-barrel",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: SPLIT BARREL WRECKAGE, second floor-edge collapsed supply cache variant for Depths. A flattened half-barrel crushed LENGTHWISE beneath two fallen grey limestone blocks. Wide broken umber staves splayed apart, a bent rusty iron hoop fallen sideways, missing ends, no intact round mouth or enclosed container. A few short grey wood splinters. Clear broad LOW silhouette, all pieces inside transparent square with padding. Front-facing slightly elevated orthographic game sprite, intended128x128. Entire pile permanently crushed and empty: no chest, intact lid, gold, rations, bottles or takeable contents. Simple restrained PIXEL clusters, broad wood/stone/shadow masses with3 shades per material, max64-colour cave palette, muted charcoal umber coolgrey, neutral diffuse light. No ground tile, surrounding floor, cast shadow, wall, UI, writing, checkerboard, photographic grain or fine noise. It must read as old collapsed infrastructure and scenery, not a searchable loot barrel.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-daf96b27-a1d0-4102-94a3-d040291d2ed8.png",
+      "source": "art/source/landmarks-v1/split-barrel-master.png",
+      "sha256": "05669aa3c6747b2493eb2d50cd4b05a9f18ebf1c364561b273d611ec6b43d710"
+    },
+    {
+      "id": "fallen-banner",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: FALLEN TORN ROYAL BANNER FLOOR DECAL for Depths, native128x128. Orthographic TOP-DOWN view looking straight down at a very old rectangular piece of dull DESATURATED BLUE cloth with faded OCHRE GOLD edging, lying crumpled diagonally and ripped into ragged points at lower end. Cloth partly frayed and stained with cave dust, two small stones pinning corners, no pole or spear. Leave a modest relatively FLAT EMPTY BLUE area near the middle for an existing seal motif to be added as a separate layer; DO NOT draw any insignia, crown, symbol, letter or text. Transparent alpha outside cloth/stones, entirepiece contained with margins, no floor tile or cast shadow or background. Simple broad crisp PIXEL clusters, three shades per material, <=64colours matching muted cave brown/grey and camp blue/ochre; neutral diffuse illumination, no metallic sparkle or magical glow. Harmless ruined scenery, not a collectible cape. No photo fabric weave, noise, gradients, antialiasing, UI, frame or checkerboard.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-65fce7c0-c17d-4508-b473-f391c17cf4f7.png",
+      "source": "art/source/landmarks-v1/fallen-banner-master.png",
+      "sha256": "7c9470c470f82827ee454b1a61a9ea7512345433026e1f329cdf3c33cc4bbc13"
+    },
+    {
+      "id": "cache-rubble-planks",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: TOP-DOWN RUBBLE AND PLANKS FLOOR DECAL, collapsed supply cache scenery for Depths. An irregular sparse scatter of flat angular grey limestone chips, three snapped dark umber crate planks and small rusty nail flecks. Looking STRAIGHT DOWN orthographic plan view, no front faces or piled height, no intact crate or opening. Broad low asymmetrical patch with transparent gaps between debris, whole scatter contained with margin on square transparentcanvas. It goes flat on existing cave floor: do not draw a floor tile, soil patch, pit, trap, chest, item, loot, tools, shadows or full scenery. Crisp simplified PIXEL CLUSTERS for128x128, three flat shades per material, <=64 shared cavecolours, restrained coolgreys/umber/charcoal, neutral diffuse light, sparse intentional detail. No perspective, photo grain, blur, gradients, glow, text, UI, checkerboard.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-623e613c-642b-4813-8e50-f15ebc67de25.png",
+      "source": "art/source/landmarks-v1/cache-rubble-planks-master.png",
+      "sha256": "841cf5f7a29f8c5afb5bf2710784c45582e87f8070bf388c909f73cfb7407d88"
+    },
+    {
+      "id": "cache-spilled-grain",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: TOP-DOWN SPOILED GRAIN AND STRAW FLOOR DECAL for Depths' collapsed old royal supply cache. One irregular FLAT patch of dusty old dull ochre grain husks mixed with a few short straw lengths, much of it dirty dark brown and crushed. Three small separated satellite scatters, large transparent gaps and a ragged main patch. Looking STRAIGHT DOWN, no sacks, bowls, baskets, bread or food portions: this is trampled old waste and scenery, not recoverable rations. Entire patch within square canvas with margins, genuine transparent alpha, no floor tile or ground shadow, no front edge or depth. Broad crisp SIMPLE PIXEL clusters readable at native128x128, muted ochre/tan/charcoal,2-3 shades, <=64 shared cavecolours; no tiny dense noise or photographic seeds, gradients, glow, UI, text, frame or checkerboard.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-5006822d-167c-4f09-97bf-c9909744b99d.png",
+      "source": "art/source/landmarks-v1/cache-spilled-grain-master.png",
+      "sha256": "c682f22ae27e1cfa081fa3666d123466c8e0c6c82d28e8e32339778f5fa72c8d"
+    }
+  ]
+}

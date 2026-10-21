@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Texture2D" path="res://art/dressing/landmarks-v1/root-curtain-b.png" id="texture"]
+
+[node name="root-curtain-b" type="Node3D"]
+metadata/asset_id = "root-curtain-b"
+
+[node name="Sprite" type="Sprite3D" parent="."]
+position = Vector3(0.0, -0.22589285714285715, 0)
+pixel_size = 0.010267857142857143
+billboard = 2
+shaded = true
+texture_filter = 0
+alpha_cut = 1
+alpha_scissor_threshold = 0.5
+cast_shadow = 0
+texture = ExtResource("texture")

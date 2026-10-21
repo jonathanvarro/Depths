@@ -1,0 +1,19 @@
+{
+	"captures": [
+		"roots-desktop",
+		"cache-desktop",
+		"shrine-fresh-desktop",
+		"shrine-used-desktop",
+		"shrine-glow-off-desktop",
+		"roots-phone",
+		"cache-phone",
+		"shrine-fresh-phone",
+		"shrine-used-phone",
+		"shrine-glow-off-phone",
+		"map-desktop",
+		"map-phone"
+	],
+	"checks": 105,
+	"failures": [],
+	"limits": "Standalone mounted art and real Minimap. No live placement, Main or saves. Desktop phone-size simulation, not physical iPhone."
+}

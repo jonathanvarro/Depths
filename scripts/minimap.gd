@@ -28,6 +28,7 @@ const GLYPHS := {
 	"blocked":preload("res://art/ui/backlog96-v1/map/blocked.png"),
 	"danger":preload("res://art/ui/backlog96-v1/map/danger.png"),
 	"object":preload("res://art/ui/backlog96-v1/map/object.png"),
+	"landmark":preload("res://art/ui/backlog96-v1/map/landmark.png"),
 	"frontier":preload("res://art/ui/backlog96-v1/map/frontier.png")
 }
 
@@ -168,7 +169,7 @@ func _draw() -> void:
 			_draw_marker(marker_for(content,used),center,tile,Color(1,1,1,.58 if used and content!=2 else 1.0))
 		var door: int=map.door_at(cell)
 		if door==1 or door==3:_draw_marker(GLYPHS.closed if door==1 else GLYPHS.blocked,center,tile)
-	# Landmarks (#117) the party has stood in: a small inked diamond.
+	# Landmarks (#117/#132) the party has stood in: a charcoal cairn.
 	for landmark: Dictionary in map.landmarks:
 		var spot: Vector2i=landmark["centre"]
 		if (landmark["seen"] or reveal_all) and cells.has_point(spot):
@@ -181,12 +182,9 @@ func _draw_marker(texture: Texture2D, center: Vector2, tile: float, tint:=Color.
 	var extent:=clampf(tile*.90,14.0 if full_view else 10.0,28.0 if full_view else 20.0)
 	draw_texture_rect(texture,Rect2(center-Vector2.ONE*extent*.5,Vector2.ONE*extent),false,tint)
 
-## A landmark's mark: a hollow diamond with a dot, drawn in the map's ink.
+## The same known-place glyph on the corner map, full map and discoveries rail.
 func _draw_landmark(center: Vector2, tile: float) -> void:
-	var r:=clampf(tile*.42,6.0 if full_view else 4.5,12.0 if full_view else 8.0)
-	var points:=PackedVector2Array([center+Vector2(0,-r),center+Vector2(r,0),center+Vector2(0,r),center+Vector2(-r,0),center+Vector2(0,-r)])
-	draw_polyline(points,INK,clampf(r*.22,1.2,2.2),true)
-	draw_circle(center,maxf(1.2,r*.2),INK)
+	_draw_marker(GLYPHS.landmark,center,tile)
 
 func _notes() -> Array:
 	var notes: Array=[]

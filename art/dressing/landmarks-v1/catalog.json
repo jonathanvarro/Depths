@@ -1,0 +1,572 @@
+{
+  "issues": [
+    132,
+    133
+  ],
+  "cell_metres": 2,
+  "wall_metres": 2.4,
+  "colour_limit": 64,
+  "palette": "res://art/dressing/landmarks-v1/palette.json",
+  "placement": "Art library only. Claude owns live landmark/event placement and all boon/bane rules.",
+  "assets": [
+    {
+      "id": "root-curtain-a",
+      "mount": "ceiling",
+      "pivot": [
+        64,
+        8
+      ],
+      "canvas": [
+        128,
+        128
+      ],
+      "texture": "res://art/dressing/landmarks-v1/root-curtain-a.png",
+      "scene": "res://art/dressing/landmarks-v1/root-curtain-a.tscn",
+      "pixel_size": 0.005909090909090909,
+      "measured_axis": "height",
+      "metres": 0.65,
+      "floors": [
+        2,
+        3
+      ],
+      "opacity": 1,
+      "source": "res://art/source/landmarks-v1/root-curtain-a-master.png",
+      "source_sha256": "eb14c69f1ec3ccadf8a2749debb647247ed2069a0edf6a96b4bb98e164fc8090",
+      "export_sha256": "28e457af39b3ee1137f198338677a9129f1b39c51e58e0bedbca9d30e6fe80c2",
+      "collision": false,
+      "interactive_candidate": false,
+      "source_bounds": [
+        52,
+        37,
+        1206,
+        1226
+      ],
+      "scale": 0.0941968040370059,
+      "offset": [
+        9,
+        8
+      ]
+    },
+    {
+      "id": "root-curtain-b",
+      "mount": "ceiling",
+      "pivot": [
+        64,
+        42
+      ],
+      "canvas": [
+        128,
+        128
+      ],
+      "texture": "res://art/dressing/landmarks-v1/root-curtain-b.png",
+      "scene": "res://art/dressing/landmarks-v1/root-curtain-b.tscn",
+      "pixel_size": 0.010267857142857143,
+      "measured_axis": "width",
+      "metres": 1.15,
+      "floors": [
+        2,
+        3
+      ],
+      "opacity": 1,
+      "source": "res://art/source/landmarks-v1/root-curtain-b-master.png",
+      "source_sha256": "f3cb2126c943de73f2b96f4fc71a594e78ea7e1e7018f96c47fe1013c6cacb1a",
+      "export_sha256": "bc4c83c3fc0c769dd2a31a10ca81ffe32994da3c7a36e961e57ae6556af146c7",
+      "collision": false,
+      "interactive_candidate": false,
+      "source_bounds": [
+        55,
+        90,
+        1215,
+        538
+      ],
+      "scale": 0.09655172413793103,
+      "offset": [
+        8,
+        42
+      ]
+    },
+    {
+      "id": "wall-roots",
+      "mount": "wall",
+      "pivot": [
+        64,
+        64
+      ],
+      "canvas": [
+        128,
+        128
+      ],
+      "texture": "res://art/dressing/landmarks-v1/wall-roots.png",
+      "scene": "res://art/dressing/landmarks-v1/wall-roots.tscn",
+      "pixel_size": 0.011607142857142858,
+      "measured_axis": "height",
+      "metres": 1.3,
+      "floors": [
+        2,
+        3
+      ],
+      "opacity": 1,
+      "source": "res://art/source/landmarks-v1/wall-roots-master.png",
+      "source_sha256": "95222a2d26300e0a374bae7b0b8540e463cd47999637cb377dad6b2b44493d0a",
+      "export_sha256": "da74d5763943135920b0698bf10a9b4fa4be23b40850cac65b6f538d9783d6c2",
+      "collision": false,
+      "interactive_candidate": false,
+      "source_bounds": [
+        17,
+        4,
+        1247,
+        1251
+      ],
+      "scale": 0.08981555733761026,
+      "offset": [
+        9,
+        8
+      ],
+      "suggested_wall_height": 1.25
+    },
+    {
+      "id": "root-foot-tangle",
+      "mount": "floor-edge",
+      "pivot": [
+        64,
+        88
+      ],
+      "canvas": [
+        128,
+        128
+      ],
+      "texture": "res://art/dressing/landmarks-v1/root-foot-tangle.png",
+      "scene": "res://art/dressing/landmarks-v1/root-foot-tangle.tscn",
+      "pixel_size": 0.006306306306306306,
+      "measured_axis": "width",
+      "metres": 0.7,
+      "floors": [
+        2,
+        3
+      ],
+      "opacity": 1,
+      "source": "res://art/source/landmarks-v1/root-foot-tangle-master.png",
+      "source_sha256": "48e941c3fdd1dd8846f36a06bb83eecf85f26dc2cd29da3a6f743ece62e62059",
+      "export_sha256": "d1f166c7a006cb2501debdef6c0def60eebe674e3b68968cd7055729bb0e8246",
+      "collision": false,
+      "interactive_candidate": false,
+      "source_bounds": [
+        18,
+        367,
+        1242,
+        897
+      ],
+      "scale": 0.0915032679738562,
+      "offset": [
+        8,
+        40
+      ]
+    },
+    {
+      "id": "floor-crossing-root",
+      "mount": "floor-decal",
+      "pivot": [
+        64,
+        64
+      ],
+      "canvas": [
+        128,
+        128
+      ],
+      "texture": "res://art/dressing/landmarks-v1/floor-crossing-root.png",
+      "scene": "res://art/dressing/landmarks-v1/floor-crossing-root.tscn",
+      "pixel_size": 0.013063063063063063,
+      "measured_axis": "width",
+      "metres": 1.45,
+      "floors": [
+        2,
+        3
+      ],
+      "opacity": 1,
+      "source": "res://art/source/landmarks-v1/floor-crossing-root-master.png",
+      "source_sha256": "afd691b7f3a7e42475662ef243f281868b9f4d8735af06f2e7e6754600136927",
+      "export_sha256": "cf53a23a67836d24a4652fd486751e07d31390b6e6f0646965b8e14cc1909410",
+      "collision": false,
+      "interactive_candidate": false,
+      "source_bounds": [
+        42,
+        226,
+        1734,
+        789
+      ],
+      "scale": 0.06619385342789598,
+      "offset": [
+        8,
+        45
+      ]
+    },
+    {
+      "id": "miners-shrine",
+      "mount": "wall",
+      "pivot": [
+        64,
+        64
+      ],
+      "canvas": [
+        128,
+        128
+      ],
+      "texture": "res://art/dressing/landmarks-v1/miners-shrine.png",
+      "scene": "res://art/dressing/landmarks-v1/miners-shrine.tscn",
+      "pixel_size": 0.008928571428571428,
+      "measured_axis": "width",
+      "metres": 1.0,
+      "floors": [
+        1,
+        3
+      ],
+      "opacity": 1,
+      "source": "res://art/source/landmarks-v1/miners-shrine-master.png",
+      "source_sha256": "68b24b7789f31e964404dc15eba36d978313b620f569dff8bcea4f2e0b3d3119",
+      "export_sha256": "83ba3e8723325f8e2c6dfdb64c2af6806a7fe71e41c73dc1e19b3305f4df53ed",
+      "collision": false,
+      "interactive_candidate": true,
+      "source_bounds": [
+        57,
+        163,
+        1342,
+        976
+      ],
+      "scale": 0.08715953307392996,
+      "offset": [
+        8,
+        28
+      ],
+      "suggested_wall_height": 0.95,
+      "state_family": "miners-shrine"
+    },
+    {
+      "id": "miners-shrine-used",
+      "mount": "wall",
+      "pivot": [
+        64,
+        64
+      ],
+      "canvas": [
+        128,
+        128
+      ],
+      "texture": "res://art/dressing/landmarks-v1/miners-shrine-used.png",
+      "scene": "res://art/dressing/landmarks-v1/miners-shrine-used.tscn",
+      "pixel_size": 0.008928571428571428,
+      "measured_axis": "width",
+      "metres": 1.0,
+      "floors": [
+        1,
+        3
+      ],
+      "opacity": 1,
+      "source": "res://art/source/landmarks-v1/miners-shrine-used-master.png",
+      "source_sha256": "e70898acea25bb6fbda287af3644266bf280f1c2ae33fc0ffcc14c6f308bacb9",
+      "export_sha256": "9b060e3781114999ffc7968aa5ec551fd09f2dd39a3f3e4371529259aa07b14b",
+      "collision": false,
+      "interactive_candidate": true,
+      "source_bounds": [
+        57,
+        163,
+        1342,
+        976
+      ],
+      "scale": 0.08715953307392996,
+      "offset": [
+        8,
+        28
+      ],
+      "suggested_wall_height": 0.95,
+      "state_family": "miners-shrine"
+    },
+    {
+      "id": "shrine-offerings",
+      "mount": "floor-edge",
+      "pivot": [
+        64,
+        90
+      ],
+      "canvas": [
+        128,
+        128
+      ],
+      "texture": "res://art/dressing/landmarks-v1/shrine-offerings.png",
+      "scene": "res://art/dressing/landmarks-v1/shrine-offerings.tscn",
+      "pixel_size": 0.005803571428571429,
+      "measured_axis": "width",
+      "metres": 0.65,
+      "floors": [
+        1,
+        3
+      ],
+      "opacity": 1,
+      "source": "res://art/source/landmarks-v1/shrine-offerings-neutral-master.png",
+      "source_sha256": "33b2c617a967479f347e685f86cb66be57f4dc42304fdd9df013c235f898f1f5",
+      "export_sha256": "c8de75c3b7c55d90b9ddafac90e7f311320d3816e5f179d7b32f6691953a4909",
+      "collision": false,
+      "interactive_candidate": true,
+      "source_bounds": [
+        64,
+        153,
+        1478,
+        824
+      ],
+      "scale": 0.07920792079207921,
+      "offset": [
+        8,
+        37
+      ],
+      "state_family": "shrine-offerings"
+    },
+    {
+      "id": "shrine-offerings-used",
+      "mount": "floor-edge",
+      "pivot": [
+        64,
+        90
+      ],
+      "canvas": [
+        128,
+        128
+      ],
+      "texture": "res://art/dressing/landmarks-v1/shrine-offerings-used.png",
+      "scene": "res://art/dressing/landmarks-v1/shrine-offerings-used.tscn",
+      "pixel_size": 0.005803571428571429,
+      "measured_axis": "width",
+      "metres": 0.65,
+      "floors": [
+        1,
+        3
+      ],
+      "opacity": 1,
+      "source": "res://art/source/landmarks-v1/shrine-offerings-used-master.png",
+      "source_sha256": "d6fcb9563f84e21e35ac5b3136a1103ddd719be59979eb8789c9cdd2ebc3083e",
+      "export_sha256": "46684866f4cd710270530cd4b66c1a8e4c5637a6c55b7340dfe1da6e7fed3906",
+      "collision": false,
+      "interactive_candidate": true,
+      "source_bounds": [
+        64,
+        153,
+        1478,
+        824
+      ],
+      "scale": 0.07920792079207921,
+      "offset": [
+        8,
+        37
+      ],
+      "state_family": "shrine-offerings"
+    },
+    {
+      "id": "collapsed-crates",
+      "mount": "floor-edge",
+      "pivot": [
+        64,
+        97
+      ],
+      "canvas": [
+        128,
+        128
+      ],
+      "texture": "res://art/dressing/landmarks-v1/collapsed-crates.png",
+      "scene": "res://art/dressing/landmarks-v1/collapsed-crates.tscn",
+      "pixel_size": 0.009821428571428573,
+      "measured_axis": "width",
+      "metres": 1.1,
+      "floors": [
+        1,
+        2
+      ],
+      "opacity": 1,
+      "source": "res://art/source/landmarks-v1/collapsed-crates-master.png",
+      "source_sha256": "7e3c1a0a1838bc4a2d4703a9ca5ba17e2cc46ef83f893fb3f1f0f9dd0b5bb036",
+      "export_sha256": "c48cce7301497817d9b12870e9eae9a596d9c4835335edba0e36d128ffe3e008",
+      "collision": false,
+      "interactive_candidate": false,
+      "source_bounds": [
+        13,
+        258,
+        1242,
+        982
+      ],
+      "scale": 0.09113100081366965,
+      "offset": [
+        8,
+        31
+      ]
+    },
+    {
+      "id": "split-barrel",
+      "mount": "floor-edge",
+      "pivot": [
+        64,
+        97
+      ],
+      "canvas": [
+        128,
+        128
+      ],
+      "texture": "res://art/dressing/landmarks-v1/split-barrel.png",
+      "scene": "res://art/dressing/landmarks-v1/split-barrel.tscn",
+      "pixel_size": 0.008035714285714287,
+      "measured_axis": "width",
+      "metres": 0.9,
+      "floors": [
+        1,
+        2
+      ],
+      "opacity": 1,
+      "source": "res://art/source/landmarks-v1/split-barrel-master.png",
+      "source_sha256": "05669aa3c6747b2493eb2d50cd4b05a9f18ebf1c364561b273d611ec6b43d710",
+      "export_sha256": "0dfd3d328894d3b84aa3c76822953699d4a4e02304096b5c958c82ca4668d351",
+      "collision": false,
+      "interactive_candidate": false,
+      "source_bounds": [
+        48,
+        268,
+        1194,
+        951
+      ],
+      "scale": 0.09773123909249563,
+      "offset": [
+        8,
+        30
+      ]
+    },
+    {
+      "id": "fallen-banner",
+      "mount": "floor-decal",
+      "pivot": [
+        64,
+        64
+      ],
+      "canvas": [
+        128,
+        128
+      ],
+      "texture": "res://art/dressing/landmarks-v1/fallen-banner.png",
+      "scene": "res://art/dressing/landmarks-v1/fallen-banner.tscn",
+      "pixel_size": 0.010267857142857143,
+      "measured_axis": "height",
+      "metres": 1.15,
+      "floors": [
+        1,
+        2
+      ],
+      "opacity": 1,
+      "source": "res://art/source/landmarks-v1/fallen-banner-master.png",
+      "source_sha256": "7c9470c470f82827ee454b1a61a9ea7512345433026e1f329cdf3c33cc4bbc13",
+      "export_sha256": "0e7ccab7401b60fc6eefb9b746ca0700c6f8344ae1bc4b1b792f5b906e995473",
+      "collision": false,
+      "interactive_candidate": false,
+      "source_bounds": [
+        31,
+        15,
+        1234,
+        1235
+      ],
+      "scale": 0.09180327868852459,
+      "offset": [
+        9,
+        8
+      ]
+    },
+    {
+      "id": "cache-rubble-planks",
+      "mount": "floor-decal",
+      "pivot": [
+        64,
+        64
+      ],
+      "canvas": [
+        128,
+        128
+      ],
+      "texture": "res://art/dressing/landmarks-v1/cache-rubble-planks.png",
+      "scene": "res://art/dressing/landmarks-v1/cache-rubble-planks.tscn",
+      "pixel_size": 0.011607142857142858,
+      "measured_axis": "width",
+      "metres": 1.3,
+      "floors": [
+        1,
+        2
+      ],
+      "opacity": 1,
+      "source": "res://art/source/landmarks-v1/cache-rubble-planks-master.png",
+      "source_sha256": "841cf5f7a29f8c5afb5bf2710784c45582e87f8070bf388c909f73cfb7407d88",
+      "export_sha256": "43303b94b6b2e8257f3a004b420dbde8e4d7fa43035e6390afc948520aecfa03",
+      "collision": false,
+      "interactive_candidate": false,
+      "source_bounds": [
+        165,
+        153,
+        1155,
+        1112
+      ],
+      "scale": 0.11313131313131314,
+      "offset": [
+        8,
+        10
+      ]
+    },
+    {
+      "id": "cache-spilled-grain",
+      "mount": "floor-decal",
+      "pivot": [
+        64,
+        64
+      ],
+      "canvas": [
+        128,
+        128
+      ],
+      "texture": "res://art/dressing/landmarks-v1/cache-spilled-grain.png",
+      "scene": "res://art/dressing/landmarks-v1/cache-spilled-grain.tscn",
+      "pixel_size": 0.007589285714285714,
+      "measured_axis": "width",
+      "metres": 0.85,
+      "floors": [
+        1,
+        2
+      ],
+      "opacity": 1,
+      "source": "res://art/source/landmarks-v1/cache-spilled-grain-master.png",
+      "source_sha256": "c682f22ae27e1cfa081fa3666d123466c8e0c6c82d28e8e32339778f5fa72c8d",
+      "export_sha256": "a7658098c7eb09f37969464c89ce86d4389836d78674203498ca6d6441fc5bea",
+      "collision": false,
+      "interactive_candidate": false,
+      "source_bounds": [
+        69,
+        123,
+        1193,
+        1186
+      ],
+      "scale": 0.099644128113879,
+      "offset": [
+        8,
+        11
+      ]
+    }
+  ],
+  "event_scene": "res://art/dressing/landmarks-v1/miners-shrine-event.tscn",
+  "native_layers": {
+    "banner_seal": "res://art/dressing/landmarks-v1/banner-seal.png",
+    "shrine_glow": "res://art/dressing/landmarks-v1/shrine-glow.tres",
+    "wick_seats": [
+      [
+        43,
+        36
+      ],
+      [
+        58,
+        48
+      ],
+      [
+        31,
+        59
+      ]
+    ]
+  },
+  "map_glyph": "res://art/ui/backlog96-v1/map/landmark.png"
+}

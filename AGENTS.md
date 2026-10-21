@@ -77,6 +77,10 @@ Templates > Download and Install; already installed on the owner's PC).
   Six standalone deeper-cave wall families (#126) are available in
   `art/textures/descent-walls-v1`; sources, previews and integration notes:
   `docs/descent-wall-library.md`. They are not assigned to live floors yet.
+  Roots, collapsed royal cache scenery and a miners' shrine with fresh/resolved
+  states (#132/#133) are ready in `art/dressing/landmarks-v1`;
+  `docs/landmark-art.md` records mounts and the shrine's required wall anchor.
+  The new cairn glyph is live on the map; these scenes await placement.
 - `scripts/companion.gd` + `data/companions/*.tres` – hero definitions
   (Companion resource: identity, health, effects over time). The game
   plays with copies, never the .tres itself.

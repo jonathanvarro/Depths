@@ -1,0 +1,7 @@
+{
+  "canonical_seal": {
+    "path": "art/symbols/crest-v1/forked-seal.svg",
+    "sha256": "953253c0bb499889b3ca98887bafea92c282e45744217d24672ab8da92f59112"
+  },
+  "map_source": "art/source/landmarks-v1/landmark.svg"
+}
