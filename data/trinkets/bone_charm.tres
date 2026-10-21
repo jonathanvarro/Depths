@@ -20,4 +20,4 @@ attack_max = 0
 price = 40
 slot = "trinket"
 effect = SubResource("Resource_w3aid")
-tier = "fine"
+tier = "magic"

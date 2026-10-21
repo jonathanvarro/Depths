@@ -14,6 +14,7 @@ signal took(item: SupplyItem, quantity: int)
 const COLOR_TEXT := Color("e8d9b0")
 const COLOR_DIM_TEXT := Color(0.85, 0.8, 0.7, 0.65)
 const TILE_SIZE := Vector2(120, 120)
+const Quality := preload("res://scripts/quality.gd")
 
 var content: MarginContainer  # main.gd keeps this inside the safe area
 ## What's still in the chest: SupplyItem -> quantity.
@@ -110,6 +111,7 @@ func _tile(item: SupplyItem, quantity: int, in_chest: bool) -> Control:
 	tile.add_theme_font_size_override("font_size", 15)
 	tile.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	tile.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	Quality.apply_to_button(tile, Quality.tier_of(item))  # its quality's border
 	if in_chest:
 		tile.pressed.connect(take.bind(item))  # tap to take
 		tile.set_drag_forwarding(func(_at): return _start_drag(item), Callable(), Callable())

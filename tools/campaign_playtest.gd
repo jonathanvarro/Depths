@@ -285,7 +285,7 @@ func _shop() -> void:
 					party.equip(hero, IRON_SWORD)
 
 
-## A careful player wears what they can read: uniques first, then fine or
+## A careful player wears what they can read: uniques first, then magic or
 ## rare jewellery. Trinkets that might be cursed (gear that isn't unique)
 ## are sold instead (#135).
 func _wear_trinkets() -> void:
@@ -299,7 +299,7 @@ func _wear_trinkets() -> void:
 			continue
 		for item: SupplyItem in party.supplies.items:
 			var trinket: Equipment = Trinkets.for_treasure(item) if party.supplies.count(item) > 0 else null
-			if trinket and trinket.tier in ["fine", "rare"]:
+			if trinket and trinket.tier in ["magic", "rare"]:
 				party.wear_treasure(hero, item)
 				stats["trinkets_worn"] += 1
 				break

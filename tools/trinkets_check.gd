@@ -50,7 +50,8 @@ func _initialize() -> void:
 	for t in all:
 		if t.curse == null:
 			tiers[t.tier] = tiers.get(t.tier, 0) + 1
-	check("a first set: commons, fines, a rare, uniques", tiers.get("common") == 3 and tiers.get("unique") == 6 and tiers.get("rare") == 1, str(tiers))
+	var jewels := all.filter(func(t): return t.treasure != null and t.tier == "magic").size()
+	check("a first set: magic jewellery, a rare, uniques", jewels == 5 and tiers.get("unique") == 6 and tiers.get("rare") == 1 and not tiers.has("common") and not tiers.has("fine"), str(tiers))
 	check("three cursed trinkets, each with a cleansed form", all.filter(func(t): return t.curse != null and t.cleansed != null).size() == 3)
 	for jewel in ["silver_trinket", "military_medal", "silver_locket", "amber_pendant", "gold_signet_ring", "small_reliquary"]:
 		if Trinkets.for_treasure(_item(jewel)) == null:
@@ -147,7 +148,7 @@ func _initialize() -> void:
 		if find:
 			drops.append(find)
 	check("weak foes leave nothing", weak_drops == 0)
-	check("tougher foes sometimes leave fine jewellery, never cursed on floor 1", drops.size() > 150 and drops.size() < 350 and drops.all(func(d): return d is SupplyItem), drops.size())
+	check("tougher foes sometimes leave magic jewellery, never cursed on floor 1", drops.size() > 150 and drops.size() < 350 and drops.all(func(d): return d is SupplyItem), drops.size())
 	var deep := []
 	for i in 2000:
 		var find = Trinkets.drop(rng, 3, 14)

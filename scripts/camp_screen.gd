@@ -28,6 +28,7 @@ const BACK_ICON := preload("res://art/ui/controls-v1/back.svg")
 const LANTERN_ICON := preload("res://art/items/refined-v2/lantern-unlit.png")
 ## The apprentice's starter stock, shown until there's gold (#42).
 const CampState := preload("res://scripts/camp_state.gd")
+const Quality := preload("res://scripts/quality.gd")
 const Story := preload("res://scripts/story.gd")
 const NEWS_ICON := preload("res://art/ui/controls-v1/news.svg")
 const Quests := preload("res://scripts/quests.gd")
@@ -434,12 +435,12 @@ func _merchant() -> void:
 			if not selling:
 				_body.add_child(_label("Sell", HEADING, 16, TEXT))
 				selling = true
-			_sell_row("%s ×%d" % [item.display_name, _party.supplies.count(item)], CampState.sale_price(item), _camp.sell.bind(_party, item), item.icon)
+			_sell_row("%s ×%d" % [item.display_name, _party.supplies.count(item)], CampState.sale_price(item), _camp.sell.bind(_party, item), item.icon, Quality.tier_of(item))
 	for item: Equipment in _party.supplies.gear:
 		if not selling:
 			_body.add_child(_label("Sell", HEADING, 16, TEXT))
 			selling = true
-		_sell_row(item.display_name, CampState.sale_price(item), _camp.sell_gear.bind(_party, item), item.icon)
+		_sell_row(item.display_name, CampState.sale_price(item), _camp.sell_gear.bind(_party, item), item.icon, Quality.tier_of(item))
 
 
 ## The apprentice smith (#42): plain gear into the pack (equip it there).
@@ -526,10 +527,10 @@ func _shop_row(text: String, price: int, on_buy: Callable, icon: Texture2D = nul
 	_body.add_child(row)
 
 
-func _sell_row(text: String, price: int, on_sell: Callable, icon: Texture2D = null) -> void:
+func _sell_row(text: String, price: int, on_sell: Callable, icon: Texture2D = null, tier := "common") -> void:
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 8)
-	_item_icon(row,icon)
+	_item_icon(row,icon,tier)
 	var name := _label(text, BODY, 12, TEXT)
 	name.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	name.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -544,17 +545,10 @@ func _sell_row(text: String, price: int, on_sell: Callable, icon: Texture2D = nu
 	_body.add_child(row)
 
 
-func _item_icon(row: Control, texture: Texture2D) -> void:
+## An item's icon, framed for its quality (owner, 2026-10-21).
+func _item_icon(row: Control, texture: Texture2D, tier := "common") -> void:
 	if texture == null:return
-	var icon := TextureRect.new()
-	icon.texture = texture
-	icon.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
-	icon.custom_minimum_size = Vector2(28,28)
-	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	icon.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	row.add_child(icon)
+	row.add_child(Quality.framed(texture, tier, Vector2(28, 28)))
 
 
 func _price_icon(button: Button) -> void:

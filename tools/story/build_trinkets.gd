@@ -3,9 +3,10 @@ extends SceneTree
 ## Rerun to rebuild:
 ##   Godot --headless --path . --script tools/story/build_trinkets.gd
 ##
-## Common: a benefit and a drawback. Fine: a clear benefit, a small
-## drawback. Rare: two benefits. Unique: a playstyle buff. Cursed ones look
-## fine until worn. Icons borrow the jewellery art until ChatGPT's land.
+## Magic: a modifier (here a benefit with a drawback). Rare: two benefits.
+## Unique: a playstyle buff. Cursed ones pose as magic until worn. A trinket
+## has no base numbers to improve, so none are common or fine (owner,
+## 2026-10-21). Icons borrow the jewellery art until ChatGPT's land.
 
 const DIR := "res://data/trinkets"
 
@@ -48,13 +49,13 @@ func _jewel(id: String, item: String, name: String, about: String, tier: String,
 
 func _initialize() -> void:
 	DirAccess.make_dir_recursive_absolute(DIR)
-	# Common: a benefit and a drawback.
-	_jewel("leaf_brooch", "silver_trinket", "Silver leaf brooch", "A light thing to wear. The eye goes to it, and from it.", "common", {"accuracy": 0.06, "strain_rate": 1.2})
-	_jewel("campaign_medal", "military_medal", "Faded campaign medal", "Someone else's courage, pinned on. It helps, a little. It weighs, a little.", "common", {"strain_rate": 0.75, "max_health": -2})
-	_jewel("sprig_locket", "silver_locket", "Silver sprig locket", "A pressed sprig of herb inside. The smell is a comfort; the clasp catches your sleeve.", "common", {"healing": 1.25, "accuracy": -0.05})
-	# Fine: a clear benefit, a small drawback.
-	_jewel("amber_pendant", "amber_pendant", "Amber tear pendant", "Warm against the skin, as if it kept a little of the sun.", "fine", {"max_health": 3, "oil_rate": 1.1})
-	_jewel("gold_signet", "gold_signet_ring", "Worn gold signet", "A noble's seal, heavy on the hand. Your blows land heavier too.", "fine", {"damage": 1, "strain_rate": 1.1})
+	# Magic: a benefit and a drawback.
+	_jewel("leaf_brooch", "silver_trinket", "Silver leaf brooch", "A light thing to wear. The eye goes to it, and from it.", "magic", {"accuracy": 0.06, "strain_rate": 1.2})
+	_jewel("campaign_medal", "military_medal", "Faded campaign medal", "Someone else's courage, pinned on. It helps, a little. It weighs, a little.", "magic", {"strain_rate": 0.75, "max_health": -2})
+	_jewel("sprig_locket", "silver_locket", "Silver sprig locket", "A pressed sprig of herb inside. The smell is a comfort; the clasp catches your sleeve.", "magic", {"healing": 1.25, "accuracy": -0.05})
+	# Magic too: a clearer benefit, a smaller drawback.
+	_jewel("amber_pendant", "amber_pendant", "Amber tear pendant", "Warm against the skin, as if it kept a little of the sun.", "magic", {"max_health": 3, "oil_rate": 1.1})
+	_jewel("gold_signet", "gold_signet_ring", "Worn gold signet", "A noble's seal, heavy on the hand. Your blows land heavier too.", "magic", {"damage": 1, "strain_rate": 1.1})
 	# Rare: two benefits.
 	_jewel("gilt_reliquary", "small_reliquary", "Gilt reliquary", "A saint's knuckle in gold. Whoever's it was, they were steady.", "rare", {"strain_rate": 0.75, "max_health": 2})
 	# Unique: a playstyle buff. Only from quests, the fortress and below.
@@ -67,14 +68,14 @@ func _initialize() -> void:
 	_trinket("shield_bearers_token", "Shield-bearer's token", "A tin badge of the king's shield line.", "unique", {"defend_steadies": 6.0}, "military_medal", unique)
 	# Cursed: they look fine until worn. Cleansing leaves the good part.
 	var cursed := {"price": 40}
-	var pearl := _trinket("black_pearl_ring", "Black pearl ring", "A black pearl, perfect, set in old silver.", "fine", {"damage": 1}, "pearl_necklace", cursed)
-	var charm := _trinket("bone_charm", "Bone-white charm", "A carved bone, smooth and pale, on a cord.", "fine", {"strain_rate": 0.75}, "silver_locket", cursed)
-	var torc := _trinket("goblin_torc", "Goblin gold torc", "Crude, heavy and gold. Goblin work, but good gold.", "fine", {"accuracy": 0.08}, "gold_nuggets", cursed)
-	_trinket("black_pearl_ring_cursed", "Black pearl ring", pearl.description, "fine", {"damage": 1}, "pearl_necklace",
+	var pearl := _trinket("black_pearl_ring", "Black pearl ring", "A black pearl, perfect, set in old silver.", "magic", {"damage": 1}, "pearl_necklace", cursed)
+	var charm := _trinket("bone_charm", "Bone-white charm", "A carved bone, smooth and pale, on a cord.", "magic", {"strain_rate": 0.75}, "silver_locket", cursed)
+	var torc := _trinket("goblin_torc", "Goblin gold torc", "Crude, heavy and gold. Goblin work, but good gold.", "magic", {"accuracy": 0.08}, "gold_nuggets", cursed)
+	_trinket("black_pearl_ring_cursed", "Black pearl ring", pearl.description, "magic", {"damage": 1}, "pearl_necklace",
 			{"price": 40, "curse": load("res://data/boons/marked.tres"), "cleansed": pearl})
-	_trinket("bone_charm_cursed", "Bone-white charm", charm.description, "fine", {"strain_rate": 0.75}, "silver_locket",
+	_trinket("bone_charm_cursed", "Bone-white charm", charm.description, "magic", {"strain_rate": 0.75}, "silver_locket",
 			{"price": 40, "curse": load("res://data/boons/withering.tres"), "cleansed": charm})
-	_trinket("goblin_torc_cursed", "Goblin gold torc", torc.description, "fine", {"accuracy": 0.08}, "gold_nuggets",
+	_trinket("goblin_torc_cursed", "Goblin gold torc", torc.description, "magic", {"accuracy": 0.08}, "gold_nuggets",
 			{"price": 40, "curse": load("res://data/boons/sickness.tres"), "cleansed": torc})
 	print("done")
 	quit()

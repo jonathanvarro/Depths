@@ -3,8 +3,8 @@ extends RefCounted
 ## turn up. Definitions are Equipment with slot "trinket" in data/trinkets;
 ## jewellery found as treasure links to the trinket it's worn as.
 ##
-## Chests and events give common and fine ones (the jewellery in the
-## treasure tables); tougher foes sometimes drop fine or rare ones, or a
+## Chests and events give magic ones (the jewellery in the
+## treasure tables); tougher foes sometimes drop magic or rare ones, or a
 ## cursed one; uniques come only from quests, the fortress and later layers.
 
 const DIR := "res://data/trinkets"
@@ -41,7 +41,7 @@ static func unique_reward(rng: RandomNumberGenerator, owned: Array) -> Equipment
 	return options[rng.randi_range(0, options.size() - 1)] if not options.is_empty() else null
 
 
-## What a tougher foe leaves, if anything: fine or rare jewellery (as
+## What a tougher foe leaves, if anything: magic or rare jewellery (as
 ## treasure, to wear or sell), or on floors 2+ sometimes a cursed trinket.
 ## Returns a SupplyItem, an Equipment, or null.
 static func drop(rng: RandomNumberGenerator, depth: int, foe_health: int):
@@ -51,6 +51,6 @@ static func drop(rng: RandomNumberGenerator, depth: int, foe_health: int):
 		var cursed := all().filter(func(t: Equipment): return t.curse != null)
 		if not cursed.is_empty():
 			return cursed[rng.randi_range(0, cursed.size() - 1)]
-	var tiers := ["fine"] if depth <= 2 else ["fine", "rare"]
+	var tiers := ["magic"] if depth <= 2 else ["magic", "rare"]
 	var jewels := all().filter(func(t: Equipment): return t.treasure != null and t.tier in tiers)
 	return jewels[rng.randi_range(0, jewels.size() - 1)].treasure if not jewels.is_empty() else null

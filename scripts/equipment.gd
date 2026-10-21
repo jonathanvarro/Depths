@@ -33,10 +33,13 @@ extends Resource
 
 @export_group("Trinket")
 ## Trinkets (#135; owner 2026-10-21), and cloaks and capes on the back:
-## what wearing it does, as long as it's worn. Common: a benefit and a drawback; fine: a clear benefit, a small
-## drawback; rare: two benefits; unique: a playstyle buff.
+## what wearing it does, as long as it's worn.
 @export var effect: Boon
-@export_enum("common", "fine", "rare", "unique") var tier := "common"
+## Quality (owner, 2026-10-21), shown as the icon's border: common (the base
+## item, no border), fine (slightly better base numbers), magic (better base
+## plus a modifier, blue), rare (two modifiers) and unique (named, a
+## playstyle effect). A trinket has no base numbers, so it starts at magic.
+@export_enum("common", "fine", "magic", "rare", "unique") var tier := "common"
 ## Jewellery found as treasure is worn as this; taken off, it goes back to
 ## the pack as that treasure (and still sells as treasure).
 @export var treasure: SupplyItem

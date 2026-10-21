@@ -22,6 +22,6 @@ attack_max = 0
 price = 40
 slot = "trinket"
 effect = SubResource("Resource_r6ufa")
-tier = "fine"
+tier = "magic"
 curse = ExtResource("2_r6fnn")
 cleansed = ExtResource("1_me27n")

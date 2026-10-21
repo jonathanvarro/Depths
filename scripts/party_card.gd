@@ -9,6 +9,7 @@ const StrainRules := preload("res://scripts/strain.gd")
 ## Exploration conditions (#64): nerves for strain, a ration for hunger.
 const NERVES_ICON := preload("res://art/ui/visual105-v1/nerves.png")
 const RATION := preload("res://data/items/ration.tres")
+const Quality := preload("res://scripts/quality.gd")
 ## Boon (false) and bane (true) marks when a Boon has no icon of its own (#133).
 const BOON_MARKS := {false: preload("res://art/ui/boons-v1/boon.png"), true: preload("res://art/ui/boons-v1/bane.png")}
 
@@ -221,7 +222,7 @@ func refresh() -> void:
 		_add_condition(RATION.icon, Color("e0542f") if starving else Color.WHITE, ("Starving" if starving else "Hungry") + ": nerves fray faster. Eat a ration.")
 	# A worn trinket (#135), and its curse if it has one.
 	if companion.trinket:
-		_add_condition(companion.trinket.icon, Color.WHITE, "Wears the %s: %s" % [companion.trinket.display_name.to_lower(), companion.trinket.effect.effects_text()])
+		_add_condition(companion.trinket.icon, Color.WHITE, "Wears the %s (%s): %s" % [companion.trinket.display_name.to_lower(), Quality.tier_of(companion.trinket, companion), companion.trinket.effect.effects_text()], Quality.tier_of(companion.trinket, companion))
 		if companion.is_cursed():
 			_add_condition(BOON_MARKS[true], Color.WHITE, "Cursed - %s: %s It won't come off until it's cleansed." % [companion.trinket.curse.display_name, companion.trinket.curse.description])
 	# Boons and banes (#133): what they do and how long they last.
@@ -250,7 +251,14 @@ func set_marks(marks: Array) -> void:
 	refresh()
 
 
-func _add_condition(texture: Texture2D, tint: Color, tooltip: String) -> void:
+## `tier`: an item's quality, framed with its border (#135).
+func _add_condition(texture: Texture2D, tint: Color, tooltip: String, tier := "") -> void:
+	if tier != "" and tier != "common":
+		var framed := Quality.framed(texture, tier, Vector2(ICON_SIZE - 4, ICON_SIZE - 4))
+		framed.tooltip_text = tooltip
+		framed.mouse_filter = Control.MOUSE_FILTER_PASS
+		_icons.add_child(framed)
+		return
 	var icon := TextureRect.new()
 	icon.texture = texture
 	icon.modulate = tint

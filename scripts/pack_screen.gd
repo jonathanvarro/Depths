@@ -14,6 +14,7 @@ signal used(message: String)
 const Supplies := preload("res://scripts/supplies.gd")
 const StrainRules := preload("res://scripts/strain.gd")
 const Trinkets := preload("res://scripts/trinkets.gd")
+const Quality := preload("res://scripts/quality.gd")
 const COLOR_TEXT := Color("e8d9b0")
 const COLOR_DIM_TEXT := Color(0.85, 0.8, 0.7, 0.65)
 const COLOR_OIL := Color("e8a84a")
@@ -191,13 +192,7 @@ func _add_gear_rows() -> void:
 		var row := HBoxContainer.new()
 		row.add_theme_constant_override("separation", 12)
 		if item.icon:
-			var icon := TextureRect.new()
-			icon.texture = item.icon
-			icon.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
-			icon.custom_minimum_size = Vector2(40, 40)
-			icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-			icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-			row.add_child(icon)
+			row.add_child(Quality.framed(item.icon, Quality.tier_of(item), Vector2(40, 40)))  # its quality's border
 		var text := VBoxContainer.new()
 		text.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		var summary := "armour %d%s" % [item.armour, (", slower by %d" % item.initiative_penalty) if item.initiative_penalty > 0 else ""] if item.slot == "body" else "%d-%d" % [item.attack_min, item.attack_max]
@@ -282,14 +277,7 @@ func _item_row(item: SupplyItem) -> Control:
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 16)
 	if item.icon:
-		var icon := TextureRect.new()
-		icon.texture = item.icon
-		icon.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
-		icon.custom_minimum_size = Vector2(40, 40)
-		icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		icon.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-		row.add_child(icon)
+		row.add_child(Quality.framed(item.icon, Quality.tier_of(item), Vector2(40, 40)))  # its quality's border
 	var text := VBoxContainer.new()
 	text.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(text)

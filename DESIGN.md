@@ -561,15 +561,13 @@ Trinkets are wearable boons. They use the same effect list as boons and banes, s
 
 - **Slot:** one per hero to start. A second slot could later be a talent, for example for a merchant or treasure-hunter class.
 - **Swapping:** any time outside a fight.
-- **Tiers:**
-  - **Common:** a benefit and a drawback.
-  - **Fine:** a clear benefit and a small drawback.
+- **Tiers** (on the quality ladder below; a trinket has no base numbers, so it starts at magic):
+  - **Magic:** a benefit and a drawback.
   - **Rare:** two benefits.
   - **Unique:** a playstyle buff.
 - **Showing effects:** a trinket's effects show when found, except a cursed one's hidden bane.
 - **Wear it or sell it:** the jewellery in the treasure tables can be worn. Taken off, it goes back to the pack as treasure, so it still sells and still takes space.
-  - Common: the silver leaf brooch, the campaign medal and the silver sprig locket.
-  - Fine: the amber tear pendant and the gold signet.
+  - Magic: the silver leaf brooch, the campaign medal, the silver sprig locket, the amber tear pendant and the gold signet.
   - Rare: the gilt reliquary.
 - **Uniques**, from quests, the fortress and later layers only. For now the queen's hoard gives one.
   - **Bloodstone:** +2 damage below half health.
@@ -579,9 +577,9 @@ Trinkets are wearable boons. They use the same effect list as boons and banes, s
   - **Gambler's knucklebone:** coin flips favour you, but ambushes come more often.
   - **Shield-bearer's token:** defending steadies everyone's nerves.
 - **Cursed trinkets:** the black pearl ring, the bone-white charm and the goblin gold torc.
-  - They look like fine trinkets. Once worn they reveal a bane (Marked, Withering or Sickness), and they won't come off or be swapped.
+  - They pass for magic trinkets. Once worn they reveal a bane (Marked, Withering or Sickness), and they won't come off or be swapped.
   - Holy water or the nurse (20g) cleanses one for good, leaving the good part.
-- **Where they drop:** tougher foes (10+ health) have a 12% chance to leave fine jewellery, or rare from floor 3. From floor 2, a quarter of those drops are cursed.
+- **Where they drop:** tougher foes (10+ health) have a 12% chance to leave magic jewellery, or rare from floor 3. From floor 2, a quarter of those drops are cursed.
 - **Built with** `tools/story/build_trinkets.gd` into `data/trinkets/`. Icons borrow the jewellery art until new ones are drawn.
 
 ### The back slot — owner request 2026-10-21
@@ -597,6 +595,23 @@ Each hero has a back slot for a backpack, a cloak or a cape, worn and taken off 
 - **Taking off a backpack** can leave the pack over-full. Nothing is lost, but nothing more fits until something goes.
 - **Where to get them:** the smith sells all four.
 - **Built with** `tools/story/build_back_gear.gd`. They have no icons yet.
+
+### Item quality and borders — decided 2026-10-21
+
+Every item's icon is framed by its quality, in the Pack, chests, the shops and on the cards (`scripts/quality.gd`).
+
+| Quality | Border | Meaning |
+|---|---|---|
+| Common | none | the base item, as the smith sells it |
+| Fine | pale bronze, thin | slightly better base numbers |
+| Magic | blue | better base numbers plus one modifier |
+| Rare | cold silver, with corner studs | better base numbers plus two modifiers |
+| Unique | amber gold, thick, with a slow glint (none with screen flashes off) | named, with a playstyle effect |
+| Cursed | violet, once worn | passes for its apparent tier until then |
+
+- **Not just colour:** border weight and the studs differ too, and the tier is named in the item's text.
+- **Jewellery** shows its trinket's tier.
+- **Weapons and armour:** finer, magic and rare versions (better base numbers, random modifiers, generated names) are the next piece of work, not built yet.
 
 ## Visual and audio direction
 
