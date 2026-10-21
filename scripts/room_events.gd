@@ -13,6 +13,8 @@ const CHIP_ICONS := {
 	"gold": preload("res://art/ui/coin-v1/heads.png"),
 	"oil": preload("res://data/items/oil_flask.tres"),
 }
+## Boon (false) and bane (true) marks when a Boon has no icon of its own (#133).
+const BOON_ICONS := {false: preload("res://art/ui/boons-v1/boon.png"), true: preload("res://art/ui/boons-v1/bane.png")}
 
 ## Supplies found by any choice, for the expedition record (#17).
 signal loot_found(loot: Dictionary)
@@ -94,7 +96,13 @@ func pick(kind: int, depth: int) -> RoomEvent:
 ## aren't rolled, and this outcome's own flag is added to it.
 func resolve(party, choice: EventChoice, forced := -1, flags: Array = []) -> Dictionary:
 	party.advance_time(choice.time_cost)
-	var outcome: EventOutcome = choice.outcomes[forced] if forced >= 0 and forced < choice.outcomes.size() else _pick_outcome(choice, flags)
+	# What the choice asks for (#133): an item (tools are kept) and gold.
+	if choice.requires and choice.requires.effect != SupplyItem.Effect.TOOL:
+		party.supplies.take(choice.requires)
+	if choice.gold_cost > 0:
+		party.supplies.gold = maxi(0, party.supplies.gold - choice.gold_cost)
+		party.supplies.changed.emit()
+	var outcome: EventOutcome = choice.outcomes[forced] if forced >= 0 and forced < choice.outcomes.size() else _pick_outcome(choice, flags, party.draws_ambush())
 	if outcome and outcome.sets_flag != "" and outcome.sets_flag not in flags:
 		flags.append(outcome.sets_flag)
 	if outcome and outcome.quest != "" and camp != null:
@@ -102,7 +110,8 @@ func resolve(party, choice: EventChoice, forced := -1, flags: Array = []) -> Dic
 			Quests.set_stage(camp, outcome.quest, outcome.quest_stage)
 		if outcome.quest_flag != "":
 			Quests.set_flag(camp, outcome.quest, outcome.quest_flag)
-	var result := {"text": "", "ambush": [] as Array[EnemyType], "ends": not choice.investigation, "story": "", "changes": []}
+	# "no_room": finds that didn't fit in the pack (#133), for main.gd to offer.
+	var result := {"text": "", "ambush": [] as Array[EnemyType], "ends": not choice.investigation, "story": "", "changes": [], "no_room": {}}
 	if outcome == null:
 		return result
 	var changes: Array = result["changes"]
@@ -129,6 +138,15 @@ func resolve(party, choice: EventChoice, forced := -1, flags: Array = []) -> Dic
 			hero.change_strain(outcome.strain)
 			notes.append("%s %s" % [hero.display_name, "steadies" if outcome.strain < 0 else "is shaken"])
 			chip.call(CHIP_ICONS["strain"], "-" if outcome.strain < 0 else "+", outcome.strain < 0, hero)
+		if outcome.boon:
+			hero.add_boon(outcome.boon)
+			notes.append("%s: %s" % [hero.display_name, outcome.boon.display_name.to_lower()])
+			chip.call(outcome.boon.icon if outcome.boon.icon else BOON_ICONS[outcome.boon.bane], outcome.boon.display_name, not outcome.boon.bane, hero)
+		if outcome.lift_bane:
+			var lifted: Boon = hero.lift_bane()
+			if lifted:
+				notes.append("%s is free of %s" % [hero.display_name, lifted.display_name.to_lower()])
+				chip.call(BOON_ICONS[false], "lifted: " + lifted.display_name, true, hero)
 		if outcome.injury and hero.add_injury(outcome.injury):
 			notes.append("%s suffers a %s" % [hero.display_name, outcome.injury.display_name.to_lower()])
 			chip.call(Glyphs.STATUS["limp" if outcome.injury.icon_kind == "limp" else "deep-wound"], outcome.injury.display_name, false, hero)
@@ -144,7 +162,9 @@ func resolve(party, choice: EventChoice, forced := -1, flags: Array = []) -> Dic
 	if not loot.is_empty():
 		loot_found.emit(loot)
 	for item in loot:
-		party.supplies.add(item, loot[item])
+		var fits: int = party.supplies.add_what_fits(item, loot[item])
+		if fits < loot[item]:
+			result["no_room"][item] = loot[item] - fits
 		notes.append("found %s ×%d" % [item.display_name.to_lower(), loot[item]])
 		chip.call(item.icon, "×%d" % loot[item] if item.icon else "%s ×%d" % [item.display_name, loot[item]], true, null)
 	if outcome.gold > 0:
@@ -154,6 +174,10 @@ func resolve(party, choice: EventChoice, forced := -1, flags: Array = []) -> Dic
 		notes.append("found %d gold" % outcome.gold)
 		chip.call(CHIP_ICONS["gold"], "+%d" % outcome.gold, true, null)
 	for item in outcome.gear:
+		if not party.supplies.has_room_for_gear():
+			notes.append("no room for %s" % item.display_name.to_lower())
+			chip.call(item.icon, "no room", false, null)
+			continue
 		party.supplies.gear.append(item)
 		party.supplies.changed.emit()
 		notes.append("found %s" % item.display_name.to_lower())
@@ -185,16 +209,18 @@ func random_treasure(floor_depth: int) -> SupplyItem:
 	return pool[0][0]
 
 
-func _pick_outcome(choice: EventChoice, flags: Array = []) -> EventOutcome:
+## `hunted`: a bane draws ambushes - outcomes that end in one weigh double (#133).
+func _pick_outcome(choice: EventChoice, flags: Array = [], hunted := false) -> EventOutcome:
 	var possible: Array = choice.outcomes.filter(func(o: EventOutcome): return o.blocked_by == "" or o.blocked_by not in flags)
 	if possible.is_empty():
 		return null
+	var weight := func(o: EventOutcome) -> int: return o.weight * (2 if hunted and not o.ambush.is_empty() else 1)
 	var total := 0
 	for outcome in possible:
-		total += outcome.weight
+		total += weight.call(outcome)
 	var roll := rng.randi_range(1, total)
 	for outcome in possible:
-		roll -= outcome.weight
+		roll -= weight.call(outcome)
 		if roll <= 0:
 			return outcome
 	return possible[0]

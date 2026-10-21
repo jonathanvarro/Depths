@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Boon" format=3]
+
+[ext_resource type="Script" path="res://scripts/boon.gd" id="1_hd5b2"]
+
+[resource]
+script = ExtResource("1_hd5b2")
+display_name = "Sickness"
+description = "Healing does only half, and nerves fray faster."
+bane = true
+strain_rate = 1.5
+healing = 0.5

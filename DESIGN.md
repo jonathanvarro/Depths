@@ -517,6 +517,44 @@ Unknown encounters should offer suggestive evidence while retaining uncertainty.
 
 **Starter-cave economy research (2026-10-17, #25):** see [the sourced research and connected paper prototype](docs/starter-cave-economy-research.md) for proposed attributes, XP, rats/spiders/goblins, basic equipment, treasure budgets, delayed healing, camp services, recruitment and worked expedition costs. It separates the wounded survivor's opening escape from the later recruited-party budget, identifies missing reward/rest guarantees in the current generator and explains the connection between finite encounters and recovery safeguards. These are recommendations for owner review, not approved mechanics or playtested balance; individual death/loss rules, cave persistence, combat rules and exact values remain open. The confirmed #8 lone-survivor/timed-effect and #26 stash/recruitment decisions are preserved. No gameplay implementation is included.
 
+### Pack space, boons and banes, and items that open choices — decided 2026-10-21 (#133)
+
+The core of the game is tradeoffs. Shrines and gambles leave lasting boons and banes, and carrying the right item opens a better choice. Every slot in the pack is a choice too.
+
+- **Pack space:**
+  - Each hero adds 4 slots, never fewer than 8 in all, so a party of 1, 2 or 3 carries 8, 8 or 12. The minimum of 8 is Claude's addition: with 4 slots, a lone hero's starting kit would fill the pack.
+  - A slot holds one stack of one kind: most supplies 5, treasure, draughts, holy water and antidotes 3, and a pick or spade 1. A piece of spare gear fills a slot.
+  - Gold, the lantern, a lit torch and what heroes wear take no space. The camp stash has no limit.
+  - When a find doesn't fit, it's shown beside the pack like a chest. Tapping a stack in the pack leaves it there, so the player swaps or walks away. The Pack shows the space used and has a Drop button on each supply.
+  - The merchant, the smith and the stash won't hand over what doesn't fit. A party that shrinks may find its pack over-full: nothing is lost, but nothing more fits until something goes.
+- **Items that open choices:**
+  - **Pick:** a tool, kept. Works a seam, breaks rock, smashes a cursed stone.
+  - **Spade:** a tool, kept. Digs out a buried cache.
+  - **Holy water:** used up. Lifts a bane, blesses a defiled shrine.
+  - **Antidote:** used up. Cures spider venom in a fight, makes a fouled well safe.
+  - A spade or pick also hacks through a blocked passage, taking 4 time.
+  - Without the item, the choice shows greyed, for example "needs a spade", so players learn what to bring.
+  - All four are sold by the merchant.
+- **Boons and banes** (`data/boons/`, built by `tools/story/build_shrines.gd`):
+  - An event outcome grants one to the hero who acted, or to everyone.
+  - Strong ones last a number of fights, through camp. Mild ones last until the end of the trip.
+  - They show on the card, with what they do and how long they last.
+  - The nurse lifts a bane for 20 gold.
+  - Effects:
+    - damage
+    - hit chance
+    - maximum health
+    - how fast nerves fray
+    - how much healing heals
+    - how fast the lantern burns
+    - seeing traps
+    - drawing ambushes
+- **First events**, which use placeholder props until #132:
+  - **A miners' shrine** offers a favour for an offering: a ration, 10 gold or a flask of oil. Praying is free and might calm you.
+  - **A defiled shrine** can be studied first. Holy water blesses everyone. A pick smashes it, but something may notice. Touching it is a coin toss between power with a sting and withering.
+  - **A fouled well** is safe with an antidote; drinking it without one is a gamble.
+  - **A buried cache:** a spade digs it out cleanly, a pick wrecks some of it but finds ore, and bare hands risk a crushed hand.
+
 ## Visual and audio direction
 
 Dark, gritty, grounded medieval fantasy. Stained stone, corroded metal, worn supplies, oppressive spaces, and scarce lantern light. Charcoal, dirty parchment, muted teal, rusty brown, and warm amber form the initial palette. Keep essential threats and interface elements readable.

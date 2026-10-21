@@ -11,6 +11,10 @@ signal changed
 const Supplies := preload("res://scripts/supplies.gd")
 const StrainRules := preload("res://scripts/strain.gd")
 const MAX_MEMBERS := 3
+## Pack space (owner, 2026-10-21, #133): slots per hero, and never fewer
+## than PACK_MINIMUM so a lone hero can carry a kit and still find things.
+const PACK_SLOTS_PER_HERO := 4
+const PACK_MINIMUM := 8
 ## A rest takes this long; it also finishes every effect in progress (#10).
 const REST_TIME := 20
 
@@ -29,16 +33,26 @@ func add_member(definition: Companion) -> bool:
 	member.talents = definition.talents.duplicate()
 	member.refresh_stats()
 	member.pending_effects = []
+	member.boons = []
 	member.injuries = definition.injuries.duplicate()
 	member.dressed = []
 	members.append(member)
+	update_capacity()
 	changed.emit()
 	return true
 
 
 func remove_member(member: Companion) -> void:
 	members.erase(member)
+	update_capacity()
 	changed.emit()
+
+
+## The pack grows with the party. A smaller party may find it over-full:
+## nothing is lost, but nothing more fits until something goes.
+func update_capacity() -> void:
+	supplies.capacity = maxi(PACK_MINIMUM, PACK_SLOTS_PER_HERO * members.size())
+	supplies.changed.emit()
 
 
 ## The luckiest living hero bends coin flips (#77): [bonus, their name].
@@ -80,6 +94,23 @@ func field_bind(hero: Companion) -> bool:
 	return true
 
 
+## How fast the lantern burns, after boons and banes (#133).
+func oil_rate() -> float:
+	var rate := 1.0
+	for member in living_members():
+		rate *= member.boon_product("oil_rate")
+	return rate
+
+
+## Traps show: Mara's keen eyes (#95), or a boon.
+func sees_traps() -> bool:
+	return has_trait("keen_eyes") or living_members().any(func(m: Companion): return m.boon_flag("reveals_traps"))
+
+
+func draws_ambush() -> bool:
+	return living_members().any(func(m: Companion): return m.boon_flag("draws_ambush"))
+
+
 func free_slots() -> int:
 	return MAX_MEMBERS - members.size()
 
@@ -87,7 +118,7 @@ func free_slots() -> int:
 func advance_time(units := 1) -> void:
 	time_elapsed += units
 	for i in units:
-		supplies.burn(1)
+		supplies.burn(1, oil_rate())
 		var light: Supplies.Light = supplies.light_band()
 		for member in living_members():
 			member.hunger += 1
@@ -187,6 +218,14 @@ func cannot_use_reason(item: SupplyItem, in_combat := false) -> String:
 	match item.effect:
 		SupplyItem.Effect.TREASURE:
 			return "Sell it at camp"
+		SupplyItem.Effect.TOOL:
+			return "A tool: kept for the right place"
+		SupplyItem.Effect.CURE_VENOM:
+			if not in_combat:
+				return "For venom, in a fight"
+		SupplyItem.Effect.LIFT_BANE:
+			if not living_members().any(func(m: Companion): return m.has_bane()):
+				return "No one is cursed"
 		SupplyItem.Effect.REFILL_LANTERN:
 			if not supplies.has_lantern:
 				return "No lantern"
@@ -232,6 +271,14 @@ func use_item(item: SupplyItem, in_combat := false) -> String:
 				patient.add_effect_over_time("health", 4, 20)  # steady hands (#47)
 		SupplyItem.Effect.LIGHT_TORCH:
 			supplies.light_torch(item)
+		SupplyItem.Effect.LIFT_BANE:
+			supplies.take(item)
+			for member in living_members():
+				if member.has_bane():
+					var lifted: Boon = member.lift_bane()
+					if not in_combat:
+						advance_time(item.use_time)
+					return "%s: %s lifts." % [member.display_name, lifted.display_name]
 	if not in_combat:  # in a fight, the round's time covers it
 		advance_time(item.use_time)
 	return item.use_message

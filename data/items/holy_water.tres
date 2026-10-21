@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="SupplyItem" format=3]
+
+[ext_resource type="Script" path="res://scripts/supply_item.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+display_name = "Holy water"
+description = "A stoppered phial blessed at the camp's shrine. Lifts one bane from a hero. Poured on an evil shrine, it blesses it."
+effect = 8
+use_time = 1
+use_message = "The water hisses where it touches."
+usable_in_combat = false
+price = 15
+stack = 3
+a_name = "holy water"

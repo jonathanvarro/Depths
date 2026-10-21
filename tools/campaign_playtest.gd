@@ -566,6 +566,8 @@ func _event(at: Vector2i) -> String:
 	var gold_before: int = party.supplies.gold
 	var flags: Array = []  # preparation carries over to the real choice (#114)
 	for choice: EventChoice in event.choices:
+		if choice.missing(party) != "":
+			continue  # needs an item or gold the party lacks (#133)
 		var result: Dictionary = events_rules.resolve(party, choice, -1, flags)
 		if not result["ambush"].is_empty():
 			stats["gold_found"] += maxi(0, party.supplies.gold - gold_before)

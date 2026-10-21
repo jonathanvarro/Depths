@@ -14,3 +14,4 @@ duration = 20
 use_time = 1
 use_message = "The draught takes hold slowly."
 price = 12
+stack = 3

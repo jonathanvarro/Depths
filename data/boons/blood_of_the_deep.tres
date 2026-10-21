@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Boon" format=3]
+
+[ext_resource type="Script" path="res://scripts/boon.gd" id="1_63m8w"]
+
+[resource]
+script = ExtResource("1_63m8w")
+display_name = "Blood of the deep"
+description = "+2 damage, but healing does only half."
+fights = 3
+damage = 2
+healing = 0.5

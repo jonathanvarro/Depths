@@ -14,6 +14,9 @@ enum Effect {
 	DRESS_INJURY,  ## binds one injury until camp (#11)
 	LIGHT_TORCH,  ## lights a torch to hold; it burns down (#59)
 	TREASURE,  ## not usable: sold to the merchant for `price` (#42)
+	TOOL,  ## not used up: carrying it opens choices on events (pick, spade; #133)
+	CURE_VENOM,  ## clears spider venom from one hero (in fights too); also purifies water
+	LIFT_BANE,  ## lifts one bane from a hero; also blesses evil shrines (#133)
 }
 
 @export var display_name := "Supply"
@@ -32,3 +35,27 @@ enum Effect {
 @export var usable_in_combat := false
 ## Gold: what the merchant charges, or for treasure what he pays (#42).
 @export var price := 0
+## "a spade", "an antidote", "holy water": for "needs ..." on event
+## choices (#133). Empty: "a" plus the name.
+@export var a_name := ""
+## How many fit in one pack slot (#133). 0: by kind - treasure 3, tools 1,
+## everything else 5.
+@export var stack := 0
+
+
+func with_article() -> String:
+	if a_name != "":
+		return a_name
+	var noun := display_name.to_lower()
+	return ("an " if noun[0] in "aeiou" else "a ") + noun
+
+
+func stack_size() -> int:
+	if stack > 0:
+		return stack
+	match effect:
+		Effect.TREASURE:
+			return 3
+		Effect.TOOL:
+			return 1
+	return 5

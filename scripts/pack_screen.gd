@@ -115,9 +115,15 @@ func refresh() -> void:
 
 	for child in _list.get_children():
 		child.queue_free()
+	# Pack space (#133): slots used of the pack's size.
+	if supplies.is_limited():
+		var space := _label("Pack space: %d of %d" % [supplies.slots_used(), supplies.capacity], 18, COLOR_DIM_TEXT if supplies.slots_used() < supplies.capacity else COLOR_TEXT)
+		space.tooltip_text = "Each hero adds %d slots. A slot holds a stack of one kind of supply, or one piece of spare gear." % _party.PACK_SLOTS_PER_HERO
+		_list.add_child(space)
 	_add_gear_rows()
 	for item: SupplyItem in supplies.items:
-		_list.add_child(_item_row(item))
+		if supplies.count(item) > 0:
+			_list.add_child(_item_row(item))
 
 
 ## What each hero wields, and carried gear with Equip / Drop (#58). Each
@@ -257,6 +263,15 @@ func _item_row(item: SupplyItem) -> Control:
 			used.emit(message)
 		refresh())
 	row.add_child(button)
+	# Leave one behind, to make room (#133).
+	var drop := _small_button("Drop")
+	drop.tooltip_text = "Leave one %s here" % item.display_name.to_lower()
+	drop.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	drop.pressed.connect(func():
+		_party.supplies.drop(item, 1)
+		used.emit("Left behind: %s." % item.display_name.to_lower())
+		refresh())
+	row.add_child(drop)
 	return row
 
 

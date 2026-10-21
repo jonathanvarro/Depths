@@ -1,0 +1,80 @@
+[gd_resource type="Resource" script_class="RoomEvent" format=3]
+
+[ext_resource type="Script" path="res://scripts/event_choice.gd" id="1_18ngl"]
+[ext_resource type="Script" path="res://scripts/event_outcome.gd" id="2_mv6tf"]
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="3_wf4t3"]
+[ext_resource type="Resource" path="res://data/boons/miners_luck.tres" id="4_uhaad"]
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="5_mhrru"]
+[ext_resource type="Script" path="res://scripts/supply_item.gd" id="6_p2x74"]
+[ext_resource type="Resource" path="res://data/items/ration.tres" id="7_u4xw4"]
+[ext_resource type="Resource" path="res://data/boons/quiet_heart.tres" id="8_62diq"]
+[ext_resource type="Resource" path="res://data/boons/lamp_blessing.tres" id="9_x8goh"]
+[ext_resource type="Resource" path="res://data/items/oil_flask.tres" id="10_vgk6v"]
+[ext_resource type="Resource" path="res://data/boons/deep_eyes.tres" id="11_qk5n6"]
+[ext_resource type="PackedScene" path="res://art/props/room-states-v1/idol-niche.tscn" id="12_vds4p"]
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="13_gjg63"]
+
+[sub_resource type="Resource" id="Resource_t388s"]
+script = ExtResource("2_mv6tf")
+text = "You set the food in the cup. The candle stubs seem to lean toward you."
+boon = ExtResource("4_uhaad")
+
+[sub_resource type="Resource" id="Resource_ld0f3"]
+script = ExtResource("1_18ngl")
+label = "Leave a ration"
+outcomes = Array[ExtResource("2_mv6tf")]([SubResource("Resource_t388s")])
+requires = ExtResource("7_u4xw4")
+
+[sub_resource type="Resource" id="Resource_hg6wn"]
+script = ExtResource("2_mv6tf")
+text = "The coins ring in the tin. A calm settles on you, like a hand on the shoulder."
+boon = ExtResource("8_62diq")
+
+[sub_resource type="Resource" id="Resource_tp8wb"]
+script = ExtResource("1_18ngl")
+label = "Leave 10 gold"
+outcomes = Array[ExtResource("2_mv6tf")]([SubResource("Resource_hg6wn")])
+gold_cost = 10
+
+[sub_resource type="Resource" id="Resource_r7dta"]
+script = ExtResource("2_mv6tf")
+text = "The oil pools, dark and still. Your light steadies."
+boon = ExtResource("9_x8goh")
+
+[sub_resource type="Resource" id="Resource_62xt2"]
+script = ExtResource("1_18ngl")
+label = "Pour a flask of oil into the cup"
+outcomes = Array[ExtResource("2_mv6tf")]([SubResource("Resource_r7dta")])
+requires = ExtResource("10_vgk6v")
+
+[sub_resource type="Resource" id="Resource_5y56p"]
+script = ExtResource("2_mv6tf")
+weight = 2
+text = "You stay a while. Your breathing slows."
+strain = -10.0
+
+[sub_resource type="Resource" id="Resource_33p33"]
+script = ExtResource("2_mv6tf")
+text = "As you rise you notice what you hadn't: the loose stones, the thin places in the floor."
+boon = ExtResource("11_qk5n6")
+
+[sub_resource type="Resource" id="Resource_od5nv"]
+script = ExtResource("2_mv6tf")
+weight = 2
+text = "Nothing answers. The cold gets into your knees."
+
+[sub_resource type="Resource" id="Resource_es2cm"]
+script = ExtResource("1_18ngl")
+label = "Pray"
+time_cost = 2
+outcomes = Array[ExtResource("2_mv6tf")]([SubResource("Resource_5y56p"), SubResource("Resource_33p33"), SubResource("Resource_od5nv")])
+
+[resource]
+script = ExtResource("13_gjg63")
+kind = 4
+title = "A miners' shrine"
+clue = "A niche cut neatly into the rock: candle stubs, a tin cup, a coin worn smooth. Someone kept this, once."
+choices = Array[ExtResource("1_18ngl")]([SubResource("Resource_ld0f3"), SubResource("Resource_tp8wb"), SubResource("Resource_62xt2"), SubResource("Resource_es2cm")])
+max_depth = 3
+weight = 2
+prop = ExtResource("12_vds4p")

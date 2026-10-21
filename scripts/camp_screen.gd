@@ -427,7 +427,7 @@ func _merchant() -> void:
 		if item.effect == SupplyItem.Effect.REFILL_LANTERN and not _party.supplies.has_lantern:
 			continue  # oil is for lantern owners
 		var held: int = _party.supplies.count(item)
-		_shop_row("%s (you have %d)" % [item.display_name, held], item.price, _camp.buy.bind(_party, item), item.icon)
+		_shop_row("%s (you have %d)" % [item.display_name, held], item.price, _camp.buy.bind(_party, item), item.icon, _party.supplies.room_for(item) > 0)
 	var selling := false
 	for item: SupplyItem in _party.supplies.items:
 		if item.effect == SupplyItem.Effect.TREASURE and _party.supplies.count(item) > 0:
@@ -448,10 +448,10 @@ func _smith() -> void:
 	for item: Equipment in _camp.smith_stock():  # with quest unlocks (#123)
 		if item.slot == "body":  # armour (#93)
 			var slower := ", slower by %d" % item.initiative_penalty if item.initiative_penalty > 0 else ""
-			_shop_row("%s: armour %d%s" % [item.display_name, item.armour, slower], item.price, _camp.buy_gear.bind(_party, item), item.icon)
+			_shop_row("%s: armour %d%s" % [item.display_name, item.armour, slower], item.price, _camp.buy_gear.bind(_party, item), item.icon, _party.supplies.has_room_for_gear())
 			continue
 		var accuracy := "" if is_zero_approx(item.accuracy_bonus) else ", %+d%% to hit" % roundi(item.accuracy_bonus * 100)
-		_shop_row("%s: %d-%d damage%s" % [item.display_name, item.attack_min, item.attack_max, accuracy], item.price, _camp.buy_gear.bind(_party, item), item.icon)
+		_shop_row("%s: %d-%d damage%s" % [item.display_name, item.attack_min, item.attack_max, accuracy], item.price, _camp.buy_gear.bind(_party, item), item.icon, _party.supplies.has_room_for_gear())
 	_text("Coming once there are rules for them: %s." % ", ".join(PackedStringArray(CampState.SMITH_COMING)), MUTED)
 	_text("Bought gear goes in your pack; equip it from there.", MUTED)
 
@@ -495,7 +495,8 @@ func _status() -> String:
 	return "Day %d · %d" % [_camp.day, _party.supplies.gold]
 
 
-func _shop_row(text: String, price: int, on_buy: Callable, icon: Texture2D = null) -> void:
+## `room` false: the pack has no space for it (#133).
+func _shop_row(text: String, price: int, on_buy: Callable, icon: Texture2D = null, room := true) -> void:
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 8)
 	_item_icon(row,icon)
@@ -511,8 +512,10 @@ func _shop_row(text: String, price: int, on_buy: Callable, icon: Texture2D = nul
 	var buy := _button("Buy %dg" % price)
 	buy.custom_minimum_size = Vector2(78, 30)
 	_price_icon(buy)
-	buy.disabled = _party.supplies.gold < price
-	buy.tooltip_text = "Need %dg more gold" % (price-_party.supplies.gold) if buy.disabled else "Buy for %dg" % price
+	buy.disabled = _party.supplies.gold < price or not room
+	buy.tooltip_text = "Your pack is full" if not room else ("Need %dg more gold" % (price-_party.supplies.gold) if buy.disabled else "Buy for %dg" % price)
+	if not room:
+		details.add_child(_label("No room in your pack", BODY, 11, MUTED))
 	buy.pressed.connect(func():
 		on_buy.call()
 		_refresh_activity())
@@ -558,6 +561,20 @@ func _price_icon(button: Button) -> void:
 
 
 func _nurse() -> void:
+	# Banes that outlasted the trip (#133).
+	for hero: Companion in _party.living_members():
+		if not hero.has_bane():
+			continue
+		var bane: Boon = hero.boons.filter(func(b): return b["boon"].bane)[0]["boon"]
+		_text("%s still carries %s: %s" % [hero.display_name, bane.display_name.to_lower(), bane.description], AMBER)
+		var lift := _button("Lift it (%dg)" % CampState.LIFT_BANE_PRICE)
+		lift.disabled = _party.supplies.gold < CampState.LIFT_BANE_PRICE
+		lift.pressed.connect(func():
+			var lifted: Boon = _camp.lift_bane(_party, hero)
+			_refresh_activity()
+			if lifted:
+				_text("The nurse mutters over %s and burns something bitter. %s lifts." % [hero.display_name, lifted.display_name], AMBER))
+		_body.add_child(lift)
 	for hero: Companion in _party.living_members():
 		if _camp.is_recovering(hero):
 			_text("%s is resting here until day %d." % [hero.display_name, _camp.ready_on(hero)])
@@ -619,7 +636,7 @@ func _tent() -> void:
 	var columns := HBoxContainer.new()
 	columns.add_theme_constant_override("separation", 12)
 	_body.add_child(columns)
-	var pack := _column(columns, "In your pack")
+	var pack := _column(columns, "In your pack (%d/%d)" % [_party.supplies.slots_used(), _party.supplies.capacity])
 	var stash := _column(columns, "In the stash")
 	for item: SupplyItem in _party.supplies.items:
 		if _party.supplies.count(item) > 0:
@@ -628,9 +645,9 @@ func _tent() -> void:
 		_row(pack, item.display_name, "Store", _camp.store_gear.bind(_party, item))
 	for item: SupplyItem in _camp.stash.items:
 		if _camp.stash.count(item) > 0:
-			_row(stash, "%s ×%d" % [item.display_name, _camp.stash.count(item)], "Take", _camp.withdraw.bind(_party, item))
+			_row(stash, "%s ×%d" % [item.display_name, _camp.stash.count(item)], "Take", _camp.withdraw.bind(_party, item), _party.supplies.room_for(item) > 0)
 	for item: Equipment in _camp.stash.gear:
-		_row(stash, item.display_name, "Take", _camp.withdraw_gear.bind(_party, item))
+		_row(stash, item.display_name, "Take", _camp.withdraw_gear.bind(_party, item), _party.supplies.has_room_for_gear())
 	if pack.get_child_count() == 1:
 		pack.add_child(_label("Empty.", BODY, 12, MUTED))
 	if stash.get_child_count() == 1:
@@ -766,7 +783,8 @@ func _column(parent: Control, heading: String) -> VBoxContainer:
 	return column
 
 
-func _row(column: VBoxContainer, text: String, action: String, on_press: Callable) -> void:
+## `enabled` false: e.g. no room in the pack to take it (#133).
+func _row(column: VBoxContainer, text: String, action: String, on_press: Callable, enabled := true) -> void:
 	var row := HBoxContainer.new()
 	var name := _label(text, BODY, 12, TEXT)
 	name.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -774,6 +792,9 @@ func _row(column: VBoxContainer, text: String, action: String, on_press: Callabl
 	row.add_child(name)
 	var button := _button(action)
 	button.custom_minimum_size = Vector2(52, 30)
+	button.disabled = not enabled
+	if not enabled:
+		button.tooltip_text = "Your pack is full"
 	button.pressed.connect(func():
 		on_press.call()
 		_refresh_activity())

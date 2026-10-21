@@ -123,6 +123,8 @@ var bleeding := false
 ## Effects still playing out: [{"stat": "health", "per_unit": float,
 ## "units_left": int}]. Health is the only stat for now.
 var pending_effects: Array[Dictionary] = []
+## Boons and banes (#133): [{"boon": Boon, "fights_left": int}].
+var boons: Array[Dictionary] = []
 
 var _health_fraction := 0.0  # partial healing carried between time units
 
@@ -130,8 +132,11 @@ var _health_fraction := 0.0  # partial healing carried between time units
 ## Damage range of a basic attack: the weapon's, or their own bare-handed.
 func attack_range() -> Vector2i:
 	var span := Vector2i(weapon.attack_min, weapon.attack_max) if weapon else Vector2i(attack_min, attack_max)
+	var blessed := int(boon_total("damage"))
+	span += Vector2i(blessed, blessed)
 	if not uses_stats:
-		return span
+		span.x = maxi(1, span.x)
+		return Vector2i(span.x, maxi(span.x, span.y))
 	# Strength adds to force weapons (and their own fists); a light knife
 	# ignores a weak arm; a sling ignores Strength (#47).
 	var str_bonus := stat_str - 2
@@ -149,7 +154,68 @@ func attack_range() -> Vector2i:
 
 
 func hit_accuracy() -> float:
-	return accuracy + (weapon.accuracy_bonus if weapon else 0.0)
+	return accuracy + (weapon.accuracy_bonus if weapon else 0.0) + boon_total("accuracy")
+
+
+## Gains a boon or bane; the same one again starts its count afresh.
+func add_boon(boon: Boon) -> void:
+	boons = boons.filter(func(b): return b["boon"] != boon)
+	boons.append({"boon": boon, "fights_left": boon.fights})
+	health = mini(health, effective_max_health())
+	emit_changed()
+
+
+func has_bane() -> bool:
+	return boons.any(func(b): return b["boon"].bane)
+
+
+## Lifts the first bane (holy water, the nurse). Returns it, or null.
+func lift_bane() -> Boon:
+	for entry in boons:
+		if entry["boon"].bane:
+			boons.erase(entry)
+			emit_changed()
+			return entry["boon"]
+	return null
+
+
+## The sum of a numeric effect over every boon and bane.
+func boon_total(field: String) -> float:
+	var total := 0.0
+	for entry in boons:
+		total += float(entry["boon"].get(field))
+	return total
+
+
+## The product of a multiplying effect (strain_rate, healing, oil_rate).
+func boon_product(field: String) -> float:
+	var product := 1.0
+	for entry in boons:
+		product *= float(entry["boon"].get(field))
+	return product
+
+
+func boon_flag(field: String) -> bool:
+	return boons.any(func(b): return b["boon"].get(field))
+
+
+## A fight is over: fight-long boons count down and fade.
+func fight_ended() -> void:
+	if boons.is_empty():
+		return
+	for entry in boons:
+		if entry["boon"].fights > 0:
+			entry["fights_left"] -= 1
+	boons = boons.filter(func(b): return b["boon"].fights == 0 or b["fights_left"] > 0)
+	emit_changed()
+
+
+## Back at camp: trip-long boons end.
+func trip_ended() -> void:
+	if boons.is_empty():
+		return
+	boons = boons.filter(func(b): return b["boon"].fights > 0)
+	emit_changed()
 
 
 func has_talent(id: String) -> bool:
@@ -219,6 +285,8 @@ func change_strain(amount: float) -> void:
 	if amount > 0.0 and uses_stats:
 		# Resolve steadies (#47): only gains are scaled, never relief.
 		amount *= clampf(1.0 - 0.08 * (stat_res - 2), 0.75, 1.15) * (0.8 if has_talent("steel_nerves") else 1.0)
+	if amount > 0.0:
+		amount *= boon_product("strain_rate")  # #133
 	var before := strain
 	strain = clampf(strain + amount, 0.0, StrainRules.MAX)
 	if not is_equal_approx(strain, before):
@@ -248,7 +316,7 @@ func effective_max_health() -> int:
 	var penalty := 0
 	for injury in hindering_injuries():
 		penalty += injury.max_health_penalty
-	return maxi(1, max_health - penalty)
+	return maxi(1, max_health - penalty + int(boon_total("max_health")))
 
 
 ## Time one step costs this hero.
@@ -293,6 +361,8 @@ func treat_injuries() -> void:
 
 ## Spreads `total` evenly over `units` of time.
 func add_effect_over_time(stat: String, total: int, units: int) -> void:
+	if stat == "health":
+		total = roundi(total * boon_product("healing"))  # blessed or cursed healing (#133)
 	pending_effects.append({"stat": stat, "per_unit": float(total) / maxi(units, 1), "units_left": maxi(units, 1)})
 	emit_changed()
 

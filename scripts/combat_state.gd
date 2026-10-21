@@ -419,7 +419,27 @@ func hero_defend(hero: Companion) -> String:
 func hero_use_item(item: SupplyItem) -> String:
 	if current_actor() is Companion:
 		_webbed.erase(current_actor())
+	if item.effect == SupplyItem.Effect.CURE_VENOM:
+		return _cure_venom(item)
 	return party.use_item(item, true)
+
+
+func any_venom() -> bool:
+	return _venom.values().any(func(turns): return turns > 0)
+
+
+## An antidote (#133): the acting hero first if poisoned, else whoever is.
+func _cure_venom(item: SupplyItem) -> String:
+	var patient = current_actor() if venom_turns(current_actor()) > 0 else null
+	if patient == null:
+		for hero in _venom:
+			if _venom[hero] > 0:
+				patient = hero
+				break
+	if patient == null or not party.supplies.take(item):
+		return ""
+	_venom.erase(patient)
+	return "%s: %s" % [patient.display_name, item.use_message]
 
 
 ## Carries out the foe's shown intent, then plans its next one.

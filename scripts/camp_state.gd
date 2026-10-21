@@ -27,7 +27,14 @@ const MERCHANT_STOCK: Array[SupplyItem] = [
 	preload("res://data/items/dressing.tres"),
 	preload("res://data/items/restorative_draught.tres"),
 	preload("res://data/items/oil_flask.tres"),
+	# For the mine's shrines, wells and rockfalls (#133).
+	preload("res://data/items/antidote.tres"),
+	preload("res://data/items/holy_water.tres"),
+	preload("res://data/items/spade.tres"),
+	preload("res://data/items/pick.tres"),
 ]
+## The nurse lifts a bane for this much (#133).
+const LIFT_BANE_PRICE := 20
 const SMITH_STOCK: Array[Equipment] = [
 	preload("res://data/gear/plain_knife.tres"),
 	preload("res://data/gear/wooden_club.tres"),
@@ -197,6 +204,7 @@ func rejoin(party) -> void:
 		if party.members.size() < party.MAX_MEMBERS:
 			party.members.append(hero)
 	left_behind.clear()
+	party.update_capacity()
 	party.changed.emit()
 
 
@@ -232,6 +240,16 @@ func treatment_days(hero: Companion) -> int:
 
 
 ## The nurse treats every injury; the hero is out of play meanwhile.
+## The nurse lifts one bane for a price (#133). Returns it, or null.
+func lift_bane(party, hero: Companion) -> Boon:
+	if not hero.has_bane() or party.supplies.gold < LIFT_BANE_PRICE:
+		return null
+	party.supplies.gold -= LIFT_BANE_PRICE
+	party.supplies.changed.emit()
+	changed.emit()
+	return hero.lift_bane()
+
+
 func treat(hero: Companion) -> void:
 	var days := treatment_days(hero)
 	if days <= 0:
@@ -325,7 +343,7 @@ func can_afford(party, price: int) -> bool:
 
 
 func buy(party, item: SupplyItem) -> bool:
-	if not can_trade() or not can_afford(party, item.price):
+	if not can_trade() or not can_afford(party, item.price) or party.supplies.room_for(item) <= 0:
 		return false
 	party.supplies.gold -= item.price
 	party.supplies.add(item)
@@ -374,7 +392,7 @@ func sell_gear(party, item: Equipment) -> bool:
 
 ## The smith's stock (#42): plain gear into the pack, to equip there.
 func buy_gear(party, item: Equipment) -> bool:
-	if not site_present("smith") or not can_afford(party, item.price):
+	if not site_present("smith") or not can_afford(party, item.price) or not party.supplies.has_room_for_gear():
 		return false
 	party.supplies.gold -= item.price
 	party.supplies.gear.append(item)
@@ -456,7 +474,7 @@ func store(party, item: SupplyItem) -> void:
 
 
 func withdraw(party, item: SupplyItem) -> void:
-	if stash.take(item):
+	if party.supplies.room_for(item) > 0 and stash.take(item):
 		party.supplies.add(item)
 		changed.emit()
 
@@ -470,7 +488,7 @@ func store_gear(party, item: Equipment) -> void:
 
 
 func withdraw_gear(party, item: Equipment) -> void:
-	if item in stash.gear:
+	if item in stash.gear and party.supplies.has_room_for_gear():
 		stash.gear.erase(item)
 		party.supplies.gear.append(item)
 		party.supplies.changed.emit()

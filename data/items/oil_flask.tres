@@ -15,3 +15,4 @@ use_time = 2
 use_message = "You refill the lantern."
 usable_in_combat = true
 price = 6
+a_name = "a flask of oil"

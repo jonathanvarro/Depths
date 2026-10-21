@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SupplyItem" format=3]
+
+[ext_resource type="Script" path="res://scripts/supply_item.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+display_name = "Antidote"
+description = "Bitter salts folded in waxed paper. Clears spider venom from one hero, even mid-fight. Stirred into foul water, it makes it safe to drink."
+effect = 7
+use_time = 1
+use_message = "The venom's burn fades."
+usable_in_combat = true
+price = 8
+stack = 3

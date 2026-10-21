@@ -9,6 +9,9 @@ const Landmarks := preload("res://scripts/landmarks.gd")
 const Ambience := preload("res://scripts/ambience.gd")
 const Recruits := preload("res://scripts/recruits.gd")
 const TURN_LEFT_ICON := preload("res://art/ui/controls-v1/turn-left.svg")
+const SPADE := preload("res://data/items/spade.tres")
+const PICK := preload("res://data/items/pick.tres")
+const CLEAR_PASSAGE_TIME := 4
 const TURN_RIGHT_ICON := preload("res://art/ui/controls-v1/turn-right.svg")
 const Party := preload("res://scripts/party.gd")
 const Minimap := preload("res://scripts/minimap.gd")
@@ -662,6 +665,8 @@ func _run_event(cell: Vector2i) -> void:
 	_event_screen.show_event(event, _party_state, _room_events, _map.event_flags[cell])
 	var result: Dictionary = await _event_screen.finished
 	_end_encounter()
+	if not result.get("no_room", {}).is_empty():
+		await _offer_no_room(result["no_room"])
 	_party.locked = false
 	if result["left"]:
 		_map.triggered.erase(cell)
@@ -710,6 +715,8 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 		_music.play("combat")
 	_combat.run(state, _cards)
 	var result: int = await _combat.finished
+	for hero: Companion in _party_state.members:
+		hero.fight_ended()  # fight-long boons and banes count down (#133)
 	for foe in state.foes:
 		if foe.health <= 0:
 			_expedition.add_defeated(foe.type.display_name)
@@ -908,6 +915,7 @@ func _start_new_expedition() -> void:
 		Story.on_return(_camp_state)  # news that waited for a return (#123)
 	for hero: Companion in _party_state.members:
 		hero.appearance.clear()  # washed at camp
+		hero.trip_ended()  # trip-long boons and banes end (#133)
 		hero.emit_changed()
 	# Torches light the way; a lantern is an upgrade to buy later (owner,
 	# 2026-10-17). A party that has one goes back to it at camp.
@@ -1094,6 +1102,7 @@ func _restore(data: Dictionary) -> void:
 	_party_state.members.assign(data["party"].map(func(i): return people[i]))
 	_party_state.time_elapsed = data["time"]
 	SaveGame.unpack_into(_party_state.supplies, data["supplies"])
+	_party_state.update_capacity()  # pack space follows the party (#133)
 	SaveGame.unpack_into(_camp_state, data["camp"])
 	SaveGame.unpack_into(_camp_state.stash, data["stash"])
 	_camp_state.candidates.assign(data["candidates"].map(func(i): return people[i]))
@@ -1164,7 +1173,7 @@ func _add_room_props() -> void:
 		var event: RoomEvent = _map.events[cell]
 		if _map.solid.has(cell):
 			continue
-		if event.kind == DungeonMap.Content.TRAP and not _party_state.has_trait("keen_eyes") and not _map.triggered.has(cell):
+		if event.kind == DungeonMap.Content.TRAP and not _party_state.sees_traps() and not _map.triggered.has(cell):
 			continue  # hidden - unless Mara's keen eyes spot it (#95)
 		_create_room_prop(cell,event)
 		if _map.triggered.has(cell):
@@ -1924,6 +1933,14 @@ func _can_be_niche(cell: Vector2i) -> bool:
 	return floors == 1
 
 
+## Finds that didn't fit (#133): shown like a chest beside the pack, so the
+## player can leave something else instead. Whatever stays is left behind.
+func _offer_no_room(finds: Dictionary) -> void:
+	_chest.open("No room in your pack", finds, _party_state)
+	await _chest.closed
+	_chest.visible = false
+
+
 func _open_opening_chest(cell: Vector2i) -> void:
 	_update_hints("chest_opened")
 	_party.locked = true
@@ -2584,7 +2601,25 @@ func _on_party_blocked(cell: Vector2i) -> void:
 	if _depth == FORTRESS_DEPTH and cell in _map.marks.get("gates", []) and not _camp_state.gate_broken:
 		_ask("A barred gate, and goblin guards behind it. Break it down? They'll fight.", _gate_fight)
 		return
-	_show_message(environment_theme.blocked_message)
+	# A spade or pick clears a blocked passage (#133).
+	var tool: SupplyItem = null
+	for item: SupplyItem in [SPADE, PICK]:
+		if _party_state.supplies.count(item) > 0:
+			tool = item
+			break
+	if tool and _depth != FORTRESS_DEPTH:
+		_ask("Something chokes the passage. Clear it with the %s? (%d time)" % [tool.display_name.to_lower(), CLEAR_PASSAGE_TIME], _clear_passage.bind(cell))
+		return
+	_show_message(environment_theme.blocked_message + ("" if _depth == FORTRESS_DEPTH else " A spade or a pick would clear it."))
+
+
+## Hacks through a blocked passage with a spade or pick (#133).
+func _clear_passage(cell: Vector2i) -> void:
+	_party_state.advance_time(CLEAR_PASSAGE_TIME)
+	_map.doors[cell] = DungeonMap.Door.OPEN
+	_level.refresh_door(cell)
+	_play_effect(environment_theme.open_sound)
+	_show_message("You hack your way through.")
 
 
 func _on_party_moved(cell: Vector2i, facing: int) -> void:

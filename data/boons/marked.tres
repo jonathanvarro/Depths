@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Boon" format=3]
+
+[ext_resource type="Script" path="res://scripts/boon.gd" id="1_qxbrr"]
+
+[resource]
+script = ExtResource("1_qxbrr")
+display_name = "Marked"
+description = "Something follows: ambushes come twice as often."
+bane = true
+draws_ambush = true

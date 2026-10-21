@@ -1,0 +1,63 @@
+[gd_resource type="Resource" script_class="RoomEvent" format=3]
+
+[ext_resource type="Script" path="res://scripts/event_choice.gd" id="1_fhbvk"]
+[ext_resource type="Script" path="res://scripts/event_outcome.gd" id="2_svxbi"]
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="3_y4r2s"]
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="4_xb8os"]
+[ext_resource type="Script" path="res://scripts/supply_item.gd" id="5_tqswc"]
+[ext_resource type="Resource" path="res://data/items/spade.tres" id="6_gqm5n"]
+[ext_resource type="Resource" path="res://data/items/pick.tres" id="7_r8ryb"]
+[ext_resource type="Resource" path="res://data/boons/shaking_hands.tres" id="8_m22pg"]
+[ext_resource type="PackedScene" path="res://art/props/room-states-v1/old-workings.tscn" id="9_c22vp"]
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="10_defad"]
+
+[sub_resource type="Resource" id="Resource_4182w"]
+script = ExtResource("2_svxbi")
+text = "The crate comes free, lid intact."
+gold = 8
+treasure = 2
+
+[sub_resource type="Resource" id="Resource_53iba"]
+script = ExtResource("1_fhbvk")
+label = "Dig it out with the spade"
+time_cost = 3
+outcomes = Array[ExtResource("2_svxbi")]([SubResource("Resource_4182w")])
+requires = ExtResource("6_gqm5n")
+
+[sub_resource type="Resource" id="Resource_a0hpr"]
+script = ExtResource("2_svxbi")
+text = "The rock gives in chunks. The crate is crushed, but some of it is still good - and there's ore in the rock."
+treasure = 1
+
+[sub_resource type="Resource" id="Resource_fqqrw"]
+script = ExtResource("1_fhbvk")
+label = "Break the rock with the pick"
+time_cost = 2
+outcomes = Array[ExtResource("2_svxbi")]([SubResource("Resource_a0hpr")])
+requires = ExtResource("7_r8ryb")
+
+[sub_resource type="Resource" id="Resource_3ydi5"]
+script = ExtResource("2_svxbi")
+text = "Fingers raw, you prise out what you can."
+treasure = 1
+
+[sub_resource type="Resource" id="Resource_8by0p"]
+script = ExtResource("2_svxbi")
+text = "A rock shifts and drops on your hand."
+health = -3
+boon = ExtResource("8_m22pg")
+
+[sub_resource type="Resource" id="Resource_5yh73"]
+script = ExtResource("1_fhbvk")
+label = "Dig with your hands"
+time_cost = 4
+outcomes = Array[ExtResource("2_svxbi")]([SubResource("Resource_3ydi5"), SubResource("Resource_8by0p")])
+
+[resource]
+script = ExtResource("10_defad")
+title = "A buried cache"
+clue = "A slump of fallen rock, and under it the corner of a crate stamped with the king's mark."
+choices = Array[ExtResource("1_fhbvk")]([SubResource("Resource_53iba"), SubResource("Resource_fqqrw"), SubResource("Resource_5yh73")])
+max_depth = 3
+weight = 2
+prop = ExtResource("9_c22vp")

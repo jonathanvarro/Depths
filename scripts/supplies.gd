@@ -45,6 +45,11 @@ var gold := 0
 var open_flask := 0.0
 var items: Array[SupplyItem] = []  # kinds carried, in pack order
 var _counts := {}  # SupplyItem -> int
+## Pack space (owner, 2026-10-21, #133): how many slots the pack has. A slot
+## holds up to an item's stack size; a piece of spare gear fills one. Gold,
+## the lantern, a lit torch and what heroes wear don't take space. -1: no
+## limit (the camp stash). party_state.gd sets it from the party's size.
+var capacity := -1
 
 
 func add(item: SupplyItem, quantity := 1) -> void:
@@ -57,6 +62,49 @@ func add(item: SupplyItem, quantity := 1) -> void:
 
 func count(item: SupplyItem) -> int:
 	return _counts.get(item, 0)
+
+
+## Slots in use: each kind's stacks, plus one per piece of spare gear.
+func slots_used() -> int:
+	var used := gear.size()
+	for item: SupplyItem in _counts:
+		used += ceili(float(_counts[item]) / item.stack_size())
+	return used
+
+
+func is_limited() -> bool:
+	return capacity >= 0
+
+
+## How many more of `item` fit: room left in its last stack, plus free slots.
+func room_for(item: SupplyItem) -> int:
+	if not is_limited():
+		return 1 << 30
+	var stack := item.stack_size()
+	var held := count(item)
+	var top_up := (stack - held % stack) % stack
+	return top_up + maxi(0, capacity - slots_used()) * stack
+
+
+func has_room_for_gear() -> bool:
+	return not is_limited() or slots_used() < capacity
+
+
+## Adds as many of `item` as fit (up to `quantity`); returns how many.
+func add_what_fits(item: SupplyItem, quantity := 1) -> int:
+	var fits := mini(quantity, room_for(item))
+	if fits > 0:
+		add(item, fits)
+	return fits
+
+
+## Leaves `quantity` of `item` behind to make room.
+func drop(item: SupplyItem, quantity := 1) -> int:
+	var dropped := mini(quantity, count(item))
+	if dropped > 0:
+		_counts[item] -= dropped
+		changed.emit()
+	return dropped
 
 
 func take(item: SupplyItem) -> bool:
@@ -73,7 +121,8 @@ func burn_rate() -> float:
 	return BURN_AT_EMPTY + (BURN_AT_FULL - BURN_AT_EMPTY) * oil / LANTERN_CAPACITY
 
 
-func burn(units: int) -> void:
+## `rate`: boons and banes can make the lantern burn slower or faster (#133).
+func burn(units: int, rate := 1.0) -> void:
 	var band_before := light_band()
 	if source == Source.TORCH:
 		if not torch_burns:
@@ -84,7 +133,7 @@ func burn(units: int) -> void:
 			torch_burnt_out.emit()
 	else:
 		for i in units:
-			oil = maxf(0.0, oil - burn_rate())
+			oil = maxf(0.0, oil - burn_rate() * rate)
 	if light_band() != band_before:
 		light_band_changed.emit(light_band())
 	changed.emit()

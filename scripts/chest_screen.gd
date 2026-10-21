@@ -2,6 +2,10 @@ extends Control
 ## An opened chest beside the pack (#69): drag an item from the chest into
 ## the pack, tap it to move it, or use the take-all button (an icon) to
 ## move everything. Closing leaves anything not taken behind.
+##
+## The pack has room for so much (#133): what doesn't fit stays in the
+## chest, and tapping something in the pack leaves a stack of it here (the
+## part-full one first), freeing a slot.
 
 signal closed
 ## An item was moved into the pack.
@@ -21,6 +25,7 @@ var _chest_grid: GridContainer
 var _pack_grid: GridContainer
 var _pack_panel: PanelContainer
 var _take_all: Button
+var _pack_heading: Label
 
 
 func _init() -> void:
@@ -44,10 +49,24 @@ func take(item: SupplyItem) -> void:
 	var quantity: int = contents.get(item, 0)
 	if quantity <= 0:
 		return
-	contents.erase(item)
-	_party.supplies.add(item, quantity)
-	took.emit(item, quantity)
+	var fits: int = _party.supplies.add_what_fits(item, quantity)
+	if fits >= quantity:
+		contents.erase(item)
+	else:
+		contents[item] = quantity - fits
+	if fits > 0:
+		took.emit(item, fits)
 	refresh()
+
+
+## Leaves a stack of `item` here, to free a slot in the pack.
+func put_back(item: SupplyItem) -> void:
+	var stack := item.stack_size()
+	var held: int = _party.supplies.count(item)
+	var dropped: int = _party.supplies.drop(item, held % stack if held % stack != 0 else stack)
+	if dropped > 0:
+		contents[item] = contents.get(item, 0) + dropped
+		refresh()
 
 
 func take_all() -> void:
@@ -70,6 +89,12 @@ func refresh() -> void:
 			_pack_grid.add_child(_tile(item, _party.supplies.count(item), false))
 	_take_all.disabled = is_empty()
 	_take_all.get_child(0).queue_redraw()
+	var supplies = _party.supplies
+	if supplies.is_limited():
+		var full: bool = supplies.slots_used() >= supplies.capacity
+		_pack_heading.text = "Your pack · %d/%d" % [supplies.slots_used(), supplies.capacity] + ("  ·  full: tap a stack to leave it" if full and not is_empty() else "")
+	else:
+		_pack_heading.text = "Your pack"
 
 
 func _tile(item: SupplyItem, quantity: int, in_chest: bool) -> Control:
@@ -90,7 +115,9 @@ func _tile(item: SupplyItem, quantity: int, in_chest: bool) -> Control:
 		tile.set_drag_forwarding(func(_at): return _start_drag(item), Callable(), Callable())
 	else:
 		tile.mouse_filter = Control.MOUSE_FILTER_PASS  # drops land on the pack panel
-		tile.disabled = true
+		tile.tooltip_text += "
+Tap to leave a stack here."
+		tile.pressed.connect(put_back.bind(item))
 	return tile
 
 
@@ -173,6 +200,7 @@ func _build() -> void:
 	_pack_panel.set_drag_forwarding(Callable(), _can_drop_on_pack, _drop_on_pack)
 	sides.add_child(_pack_panel)
 	_pack_grid = _pack_panel.get_meta("grid")
+	_pack_heading = _pack_panel.get_meta("heading")
 
 
 ## Two chevrons pointing right, into an open pack.
@@ -200,7 +228,9 @@ func _panel(heading: String) -> PanelContainer:
 	column.add_theme_constant_override("separation", 10)
 	column.mouse_filter = Control.MOUSE_FILTER_PASS
 	panel.add_child(column)
-	column.add_child(_label(heading, 22, COLOR_TEXT))
+	var title := _label(heading, 22, COLOR_TEXT)
+	column.add_child(title)
+	panel.set_meta("heading", title)
 	var grid := GridContainer.new()
 	grid.columns = 3
 	grid.mouse_filter = Control.MOUSE_FILTER_PASS

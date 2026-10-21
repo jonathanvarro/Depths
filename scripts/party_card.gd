@@ -9,6 +9,8 @@ const StrainRules := preload("res://scripts/strain.gd")
 ## Exploration conditions (#64): nerves for strain, a ration for hunger.
 const NERVES_ICON := preload("res://art/ui/visual105-v1/nerves.png")
 const RATION := preload("res://data/items/ration.tres")
+## Boon (false) and bane (true) marks when a Boon has no icon of its own (#133).
+const BOON_MARKS := {false: preload("res://art/ui/boons-v1/boon.png"), true: preload("res://art/ui/boons-v1/bane.png")}
 
 const PORTRAIT_SIZE := Vector2(96, 96)
 const ICON_SIZE := 14.0
@@ -217,6 +219,11 @@ func refresh() -> void:
 	if companion.is_alive() and companion.is_hungry():
 		var starving := companion.hunger >= StrainRules.STARVING_AFTER
 		_add_condition(RATION.icon, Color("e0542f") if starving else Color.WHITE, ("Starving" if starving else "Hungry") + ": nerves fray faster. Eat a ration.")
+	# Boons and banes (#133): what they do and how long they last.
+	for entry in companion.boons:
+		var boon: Boon = entry["boon"]
+		_add_condition(boon.icon if boon.icon else BOON_MARKS[boon.bane], Color.WHITE,
+				"%s (%s): %s" % [boon.display_name, boon.duration_text(entry["fights_left"]), boon.description])
 	for mark in _marks:
 		var icon := TextureRect.new()
 		icon.texture = mark[0]

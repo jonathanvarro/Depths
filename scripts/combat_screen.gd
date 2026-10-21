@@ -544,6 +544,8 @@ func _show_items() -> void:
 		if not item.usable_in_combat:
 			continue
 		var reason: String = _state.party.cannot_use_reason(item, true)
+		if reason == "" and item.effect == SupplyItem.Effect.CURE_VENOM and not _state.any_venom():
+			reason = "No one is poisoned"
 		var button := _button("%s ×%d" % [item.display_name, _state.party.supplies.count(item)] if reason == "" else reason)
 		button.disabled = reason != "" or only_action != ""
 		button.pressed.connect(func(): _action_chosen.emit({"kind": "item", "item": item}))

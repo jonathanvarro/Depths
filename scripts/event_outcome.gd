@@ -31,6 +31,10 @@ enum Target {
 @export var rest := false
 ## Enemies that attack once the text is read.
 @export var ambush: Array[EnemyType] = []
+## A blessing or curse on whoever acted, or everyone (#133).
+@export var boon: Boon
+## Lifts a bane from whoever acted, or everyone (holy water, a kind shrine).
+@export var lift_bane := false
 ## Preparation that sticks (#114): this outcome marks the room (e.g. "the
 ## charm is down")...
 @export var sets_flag := ""

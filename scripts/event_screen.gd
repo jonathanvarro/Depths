@@ -79,7 +79,10 @@ func _show_choices() -> void:
 		var label := choice.label
 		if choice.time_cost > 0 and not label.contains("time"):
 			label += "  (%d time)" % choice.time_cost
-		_add_button(label, _choose.bind(choice))
+		var missing: String = choice.missing(_party)
+		if missing != "":
+			label = "%s  (%s)" % [choice.label, missing]
+		_add_button(label, _choose.bind(choice)).disabled = missing != ""
 	_add_button("Leave it", func(): _finish({"left": true, "ambush": [] as Array[EnemyType]}))
 
 
@@ -160,7 +163,7 @@ func _clear_buttons() -> void:
 		child.queue_free()
 
 
-func _add_button(text: String, action: Callable) -> void:
+func _add_button(text: String, action: Callable) -> Button:
 	var button := Button.new()
 	button.text = text
 	button.custom_minimum_size = Vector2(0, 52)
@@ -168,6 +171,7 @@ func _add_button(text: String, action: Callable) -> void:
 	button.add_theme_font_size_override("font_size", 20)
 	button.pressed.connect(action)
 	_buttons.add_child(button)
+	return button
 
 
 func _label(size: int, color: Color) -> Label:

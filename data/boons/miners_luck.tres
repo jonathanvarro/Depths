@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Boon" format=3]
+
+[ext_resource type="Script" path="res://scripts/boon.gd" id="1_m165a"]
+
+[resource]
+script = ExtResource("1_m165a")
+display_name = "Miners' luck"
+description = "+8% to hit."
+fights = 3
+accuracy = 0.08

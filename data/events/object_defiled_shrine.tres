@@ -1,0 +1,83 @@
+[gd_resource type="Resource" script_class="RoomEvent" format=3]
+
+[ext_resource type="Script" path="res://scripts/event_choice.gd" id="1_llc2w"]
+[ext_resource type="Script" path="res://scripts/event_outcome.gd" id="2_4uogs"]
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="3_qgnw8"]
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="4_r06ri"]
+[ext_resource type="Script" path="res://scripts/supply_item.gd" id="5_rtuxe"]
+[ext_resource type="Resource" path="res://data/boons/blessed.tres" id="6_23ihm"]
+[ext_resource type="Resource" path="res://data/items/holy_water.tres" id="7_583uv"]
+[ext_resource type="Resource" path="res://data/boons/marked.tres" id="8_87tk0"]
+[ext_resource type="Resource" path="res://data/items/pick.tres" id="9_2kgsk"]
+[ext_resource type="Resource" path="res://data/boons/blood_of_the_deep.tres" id="10_rd10s"]
+[ext_resource type="Resource" path="res://data/boons/withering.tres" id="11_hu7q2"]
+[ext_resource type="PackedScene" path="res://art/props/room-states-v1/idol-niche.tscn" id="12_5sqcc"]
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="13_0s4yr"]
+
+[sub_resource type="Resource" id="Resource_q1s70"]
+script = ExtResource("2_4uogs")
+text = "Scratches around the niche: tally marks in two columns. Under one, a fist. Under the other, a skull. About as many of each."
+
+[sub_resource type="Resource" id="Resource_svsmp"]
+script = ExtResource("1_llc2w")
+label = "Study it"
+time_cost = 2
+investigation = true
+outcomes = Array[ExtResource("2_4uogs")]([SubResource("Resource_q1s70")])
+
+[sub_resource type="Resource" id="Resource_6nxoa"]
+script = ExtResource("2_4uogs")
+text = "The stone hisses and cracks. Clean candlelight, from nowhere, for a breath. Everyone stands straighter."
+target = 1
+boon = ExtResource("6_23ihm")
+
+[sub_resource type="Resource" id="Resource_wgd40"]
+script = ExtResource("1_llc2w")
+label = "Bless it with holy water"
+outcomes = Array[ExtResource("2_4uogs")]([SubResource("Resource_6nxoa")])
+requires = ExtResource("7_583uv")
+
+[sub_resource type="Resource" id="Resource_cycm3"]
+script = ExtResource("2_4uogs")
+weight = 2
+text = "It splits with a sound like a sigh. The air lightens."
+target = 1
+strain = -6.0
+
+[sub_resource type="Resource" id="Resource_gp217"]
+script = ExtResource("2_4uogs")
+text = "It breaks - and somewhere far off, something notices."
+boon = ExtResource("8_87tk0")
+
+[sub_resource type="Resource" id="Resource_k1o37"]
+script = ExtResource("1_llc2w")
+label = "Smash the stone"
+time_cost = 2
+outcomes = Array[ExtResource("2_4uogs")]([SubResource("Resource_cycm3"), SubResource("Resource_gp217")])
+requires = ExtResource("9_2kgsk")
+
+[sub_resource type="Resource" id="Resource_skh8k"]
+script = ExtResource("2_4uogs")
+text = "Heat runs up your arm and into your fists. It doesn't feel like yours."
+boon = ExtResource("10_rd10s")
+
+[sub_resource type="Resource" id="Resource_4xbog"]
+script = ExtResource("2_4uogs")
+text = "The warmth drains out of you instead."
+boon = ExtResource("11_hu7q2")
+
+[sub_resource type="Resource" id="Resource_l0sww"]
+script = ExtResource("1_llc2w")
+label = "Touch the dark stone"
+outcomes = Array[ExtResource("2_4uogs")]([SubResource("Resource_skh8k"), SubResource("Resource_4xbog")])
+
+[resource]
+script = ExtResource("13_0s4yr")
+kind = 4
+title = "A defiled shrine"
+clue = "The same miners' niche, but goblin hands have smeared it with something dark, and a black stone sits where the candles were. It feels warm."
+choices = Array[ExtResource("1_llc2w")]([SubResource("Resource_svsmp"), SubResource("Resource_wgd40"), SubResource("Resource_k1o37"), SubResource("Resource_l0sww")])
+min_depth = 2
+max_depth = 4
+weight = 2
+prop = ExtResource("12_5sqcc")
