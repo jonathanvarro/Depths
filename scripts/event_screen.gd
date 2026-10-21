@@ -19,6 +19,9 @@ var _body: Label
 var _chips: HFlowContainer  # what changed, as icons and numbers (#105)
 var _buttons: VBoxContainer
 var _used := {}  # investigations already tried
+## Finds that didn't fit in the pack (#133, #136): handed on with the result
+## so main.gd can offer them beside the pack.
+var _no_room := {}
 
 
 func _init() -> void:
@@ -64,6 +67,7 @@ func show_event(event: RoomEvent, party_state, rules, flags: Array = []) -> void
 	_party = party_state
 	_rules = rules
 	_used.clear()
+	_no_room = {}
 	_title.text = event.title
 	_body.text = event.clue
 	_clear_chips()
@@ -99,6 +103,8 @@ func _choose(choice: EventChoice) -> void:
 		visible = true
 		forced = 0 if heads else 1
 	var result: Dictionary = _rules.resolve(_party, choice, forced, _flags)
+	for item in result.get("no_room", {}):
+		_no_room[item] = _no_room.get(item, 0) + result["no_room"][item]
 	if choice.investigation and result["ambush"].is_empty():
 		_used[choice] = true
 		_body.text += "\n\n" + result["story"]
@@ -116,6 +122,7 @@ func _choose(choice: EventChoice) -> void:
 
 func _finish(result: Dictionary) -> void:
 	visible = false
+	result["no_room"] = _no_room.duplicate()
 	finished.emit(result)
 
 

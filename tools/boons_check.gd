@@ -102,6 +102,13 @@ func _initialize() -> void:
 	rules.resolve(party, smash)
 	check("a tool is kept", party.supplies.count(pick) == 1)
 
+	# The cache's pick reward, from the file on disk (#137): treasure and ore.
+	var digger = PartyState.new()
+	digger.add_member(load("res://data/companions/mara.tres"))
+	digger.supplies.add(pick)
+	RoomEvents.new().resolve(digger, _choice(_event("chest_buried_cache"), "Break the rock"))
+	check("breaking the cache with a pick finds the ore it promises (#137)", digger.supplies.count(_item("copper_ore")) == 1)
+
 	# --- Boons and banes.
 	mara.boons.clear()
 	var aim := mara.hit_accuracy()
@@ -203,6 +210,31 @@ func _initialize() -> void:
 	main._chest.take(leftover)
 	check("leaving a torch makes room for the find", ps.supplies.count(leftover) >= 1)
 	await _snap("no_room")
+	main._chest.closed.emit()
+	await process_frame
+	# The real route (#136): choose, Continue, and the swap view opens.
+	var cache := _event("chest_buried_cache")
+	var spot := Vector2i(-1, -1)
+	for c in main._map.contents:
+		if not main._map.events.has(c):
+			spot = c
+			break
+	if spot == Vector2i(-1, -1):
+		spot = main._map.contents.keys()[0]
+	main._map.events[spot] = cache
+	main._map.triggered.erase(spot)
+	ps.supplies.add_what_fits(torch, 999)  # full again
+	main._run_event(spot)
+	await process_frame
+	main._event_screen._choose(_choice(cache, "Dig it out"))
+	await process_frame
+	var go_on: Array = main._event_screen._buttons.get_children().filter(func(b): return b.text == "Continue")
+	check("the event ends with Continue", not go_on.is_empty())
+	if not go_on.is_empty():
+		go_on[0].pressed.emit()
+	for i in 4:
+		await process_frame
+	check("after Continue, what didn't fit is offered beside the pack (#136)", main._chest.visible and main._chest._title.text == "No room in your pack" and not main._chest.is_empty(), main._chest._title.text)
 	main._chest.closed.emit()
 	await process_frame
 	# A blocked passage, cleared with the spade.

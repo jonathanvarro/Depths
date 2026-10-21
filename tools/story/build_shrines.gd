@@ -39,7 +39,10 @@ func _outcome(text: String, extra := {}) -> EventOutcome:
 	var o := EventOutcome.new()
 	o.text = text
 	for key in extra:
-		o.set(key, extra[key])
+		if key == "loot":
+			o.loot.assign(extra[key])  # a typed dictionary: set() would drop it silently (#137)
+		else:
+			o.set(key, extra[key])
 	return o
 
 
