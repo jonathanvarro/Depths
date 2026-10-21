@@ -1,0 +1,153 @@
+{
+	"baseline": "7560c71",
+	"checks": 19,
+	"date": "2026-10-21",
+	"deep_eyes_with_mara": {
+		"after": true,
+		"before": true
+	},
+	"defiled_shrine_before_choice": {
+		"buttons": [
+			"Study it  (2 time)",
+			"Bless it with holy water  (needs holy water)",
+			"Smash the stone  (needs a miner's pick)",
+			"Touch the dark stone  (1 time)",
+			"Leave it"
+		],
+		"clue": "The same miners' niche, but goblin hands have smeared it with something dark, and a black stone sits where the candles were. It feels warm."
+	},
+	"duration": {
+		"after_one_fight_end": 2,
+		"after_trip": "Sickness gone, Withering kept",
+		"saved_fights_left": 3
+	},
+	"effects": [
+		{
+			"bane": false,
+			"description": "+1 damage.",
+			"fights": 3,
+			"id": "blessed",
+			"name": "Blessed"
+		},
+		{
+			"bane": false,
+			"description": "+2 damage, but healing does only half.",
+			"fights": 3,
+			"id": "blood_of_the_deep",
+			"name": "Blood of the deep"
+		},
+		{
+			"bane": false,
+			"description": "Traps show before you step on them.",
+			"fights": 0,
+			"id": "deep_eyes",
+			"name": "Deep eyes"
+		},
+		{
+			"bane": false,
+			"description": "Healing does half again as much.",
+			"fights": 0,
+			"id": "hearty",
+			"name": "Hearty"
+		},
+		{
+			"bane": false,
+			"description": "The lantern burns a quarter slower.",
+			"fights": 0,
+			"id": "lamp_blessing",
+			"name": "Lamp blessing"
+		},
+		{
+			"bane": true,
+			"description": "Something follows: ambushes come twice as often.",
+			"fights": 0,
+			"id": "marked",
+			"name": "Marked"
+		},
+		{
+			"bane": false,
+			"description": "+8% to hit.",
+			"fights": 3,
+			"id": "miners_luck",
+			"name": "Miners' luck"
+		},
+		{
+			"bane": false,
+			"description": "Nerves fray half as fast.",
+			"fights": 0,
+			"id": "quiet_heart",
+			"name": "Quiet heart"
+		},
+		{
+			"bane": true,
+			"description": "8% less to hit, 1 less damage.",
+			"fights": 3,
+			"id": "shaking_hands",
+			"name": "Shaking hands"
+		},
+		{
+			"bane": true,
+			"description": "Healing does only half, and nerves fray faster.",
+			"fights": 0,
+			"id": "sickness",
+			"name": "Sickness"
+		},
+		{
+			"bane": true,
+			"description": "4 less maximum health.",
+			"fights": 3,
+			"id": "withering",
+			"name": "Withering"
+		}
+	],
+	"failures": 0,
+	"full_pack_event_screen": {
+		"finished_result_has_no_room": false,
+		"finished_result_keys": [
+			"left",
+			"ambush"
+		],
+		"loot_generated": true
+	},
+	"marked": {
+		"actual_seeded_ambushes_per_10000": 4019,
+		"marked_probability": 0.4,
+		"normal_probability": 0.25,
+		"prepared_and_marked_probability": 0.0
+	},
+	"mixed_bargain": {
+		"cleanse_recognizes_as_bane": false,
+		"damage": 2.0,
+		"healing_multiplier": 0.5,
+		"lift_returns_null": true
+	},
+	"new_shrine_coin_flags": {
+		"chest_buried_cache": false,
+		"object_defiled_shrine": false,
+		"object_fouled_well": false,
+		"object_miners_shrine": false
+	},
+	"oil": {
+		"blessed_tank_steps": 146,
+		"excludes": "event/refill time, light's combat effects, free refills and extra flasks",
+		"flask_amount": 100,
+		"keep_flask_two_tank_steps": 220,
+		"normal_tank_steps": 110,
+		"offer_flask_one_blessed_tank_steps": 146
+	},
+	"pick_cache_ore_granted": 0,
+	"runtime_file_hashes": {
+		"scripts/boon.gd": "2c0af58c917aa8bd8fc339e84fc3f19398f7f742fadb5ab96283aff7a0cf7b4f",
+		"scripts/companion.gd": "91e944965c0e7c6fd00a4e9c694b21b9d4a3ef404365d60b7419a8ecd72b3e39",
+		"scripts/event_screen.gd": "147e26c7e83421e855cd21d181a92fb596f08d3e3d1c5b527682a9d5ff3ed47a",
+		"scripts/main.gd": "8abdd40f86a8dc25f5b317b1b26a1de272c6546be0972002934107a450d2cb94",
+		"scripts/room_events.gd": "cb42fc20a59edf6a45501e0cb34cc69605790d6b9e200c061b68e0b52c8ba4fe"
+	},
+	"scope": "Live rule and event-screen probes, not a campaign balance simulation",
+	"well": {
+		"first_target": "Mara",
+		"future_healing_multiplier": 1.5,
+		"scheduled_healing": 8.0,
+		"targets": 1
+	}
+}

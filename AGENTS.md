@@ -52,6 +52,7 @@ Templates > Download and Install; already installed on the owner's PC).
 
 - `DESIGN.md` – living design direction and proposed first playable scope.
 - `docs/cave-descent-and-quests.md` – proposed twelve-floor cave campaign and 48 activity concepts (#125), including quest packages, camp projects and story persistence. Read alongside #122/#123; floor count, lore and new mechanics are not approved or implemented.
+- `docs/boons-curses-and-gambling-review.md` – #134 audit of the #133 shrine system, costs/odds/durations, research and proposed improvements; recorded probes in `docs/boons-curses-review-data.json`. Reward bugs are #136/#137; #135 trinkets were in progress during review. Recommendations do not change live rules.
 - `AGENTS.md` / `CLAUDE.md` – shared assistant instructions and entry point.
 - `NOTES.md` – handoff history between assistants.
 - `project.godot` – Godot project settings. Prefer changing settings in the
