@@ -75,7 +75,7 @@ func _ready() -> void:
 	var settings := _menu_button("Settings", 72 if phone else 56, false)
 	settings.pressed.connect(func(): _settings_screen.open())
 	column.add_child(settings)
-	if not phone:  # iPhone apps don't quit themselves
+	if not phone and not OS.has_feature("web"):  # iPhone apps and web pages don't quit themselves
 		var quit := _menu_button("Quit", 56, false)
 		quit.pressed.connect(func(): get_tree().quit())
 		column.add_child(quit)

@@ -7,6 +7,8 @@ const DungeonMap := preload("res://scripts/dungeon_map.gd")
 const Dressing := preload("res://scripts/dressing.gd")
 const Ambience := preload("res://scripts/ambience.gd")
 const Recruits := preload("res://scripts/recruits.gd")
+const TURN_LEFT_ICON := preload("res://art/ui/controls-v1/turn-left.svg")
+const TURN_RIGHT_ICON := preload("res://art/ui/controls-v1/turn-right.svg")
 const Party := preload("res://scripts/party.gd")
 const Minimap := preload("res://scripts/minimap.gd")
 const FloorGenerator := preload("res://scripts/floor_generator.gd")
@@ -2194,7 +2196,7 @@ func _refresh_tutorial_hint() -> void:
 	if _hint not in TUTORIAL_STEPS:
 		return
 	var supplies = _party_state.supplies
-	var touch := OS.has_feature("mobile")
+	var touch := _is_touch()
 	var open_pack := "Tap Pack" if touch else "Press I (or click Pack)"
 	var hero: Companion = _party_state.members[0]
 	var text := ""
@@ -2262,8 +2264,8 @@ func _placeholder_body() -> Node3D:
 func _update_hints(event: String) -> void:
 	if not _in_opening:
 		return
-	var touch := OS.has_feature("mobile")  # computers: keys, with clicking as an alternative
-	var turn_text := "Tap ↺ or ↻ to turn" if touch else "Turn: A and D, or ← and → (or click ↺ ↻)"
+	var touch := _is_touch()  # computers: keys, with clicking as an alternative
+	var turn_text := "Tap the curved arrows to turn" if touch else "Turn: A and D, or ← and → (or click the curved arrows)"
 	match event:
 		"start":
 			_show_hint("Tap ▲ to move forward" if touch else "Move forward: W or ↑ (or click ▲)")
@@ -2801,7 +2803,9 @@ func _build_ui(minimap: Control) -> void:
 	_set_margins(pad_corner, 24)
 	var pad := GridContainer.new()
 	pad.columns = 3
-	for spec in [["↺", "turn_left"], ["▲", "move_forward"], ["↻", "turn_right"],
+	# The turn arrows are drawn, not typed: the web build has no system font
+	# to fall back on for ↺ and ↻.
+	for spec in [[TURN_LEFT_ICON, "turn_left"], ["▲", "move_forward"], [TURN_RIGHT_ICON, "turn_right"],
 			["", ""], ["▼", "move_back"], ["", ""]]:
 		pad.add_child(_make_touch_button(spec[0], spec[1]))
 	pad_corner.add_child(pad)
@@ -3019,14 +3023,25 @@ func _build_prompt(ui: Control) -> void:
 
 
 ## Holding the button holds the action, exactly like holding the key.
-func _make_touch_button(label: String, action: String) -> Control:
+## A phone, or a tablet playing in the browser (an iPad's Safari reports
+## itself as a Mac, so ask the screen rather than the system).
+func _is_touch() -> bool:
+	return OS.has_feature("mobile") or (OS.has_feature("web") and DisplayServer.is_touchscreen_available())
+
+
+## `label` is a short text or an icon.
+func _make_touch_button(label, action: String) -> Control:
 	if action.is_empty():
 		var spacer := Control.new()
 		spacer.custom_minimum_size = TOUCH_BUTTON_SIZE
 		spacer.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		return spacer
 	var button := Button.new()
-	button.text = label
+	if label is Texture2D:
+		button.icon = label
+		button.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	else:
+		button.text = label
 	button.custom_minimum_size = TOUCH_BUTTON_SIZE
 	button.focus_mode = Control.FOCUS_NONE
 	button.add_theme_font_size_override("font_size", 36)
