@@ -33,6 +33,9 @@ const DRESSING := preload("res://data/items/dressing.tres")
 const DRAUGHT := preload("res://data/items/restorative_draught.tres")
 const OIL := preload("res://data/items/oil_flask.tres")
 const IRON_SWORD := preload("res://data/gear/iron_sword.tres")
+const ANTIDOTE := preload("res://data/items/antidote.tres")
+const HOLY_WATER := preload("res://data/items/holy_water.tres")
+const SPADE := preload("res://data/items/spade.tres")
 const DEEP_WOUND := preload("res://data/injuries/deep_wound.tres")
 
 const HEROES := {
@@ -106,7 +109,7 @@ func _campaign(hero_path: String, run_seed: int, max_days: int) -> Dictionary:
 		"wipes_by_floor": {1: 0, 2: 0, 3: 0, 4: 0}, "first_arrival": {},
 		"gold_found": 0, "gold_contracts": 0, "gold_sold": 0, "gold_spent": 0, "bounty": 0,
 		"gate_tries": 0, "gate_day": 0, "queen_tries": 0, "queen_rounds": 0, "queen_day": 0,
-		"route_bought": 0, "lantern_day": 0, "xp_spent_out_day": {}, "levels_at_end": [],
+		"route_bought": 0, "lantern_day": 0, "boons": 0, "banes": 0, "banes_lifted": 0, "xp_spent_out_day": {}, "levels_at_end": [],
 		"treated": 0, "recruits_hired": 0, "quest_days": {}, "queen_attempts": [], "gate_attempts": [],
 	}
 	party = PS.new()
@@ -255,6 +258,16 @@ func _shop() -> void:
 				if not camp.buy(party, item):
 					break
 				stats["gold_spent"] += item.price
+		# A careful player carries the counters too, once the basics are bought (#133).
+		for item in [ANTIDOTE, HOLY_WATER, SPADE]:
+			if party.supplies.count(item) < 1 and party.supplies.gold >= item.price + 20:
+				if camp.buy(party, item):
+					stats["gold_spent"] += item.price
+	# A bane that outlasted the trip: the nurse lifts it, if it's affordable.
+	for hero: Companion in party.living_members():
+		if hero.has_bane() and party.supplies.gold >= CampState.LIFT_BANE_PRICE + 20 and camp.lift_bane(party, hero):
+			stats["gold_spent"] += CampState.LIFT_BANE_PRICE
+			stats["banes_lifted"] += 1
 	if camp.site_present("smith"):
 		for hero: Companion in party.members:
 			if hero.body == null:
@@ -568,7 +581,13 @@ func _event(at: Vector2i) -> String:
 	for choice: EventChoice in event.choices:
 		if choice.missing(party) != "":
 			continue  # needs an item or gold the party lacks (#133)
+		if not choice.investigation and choice.outcomes.any(func(o: EventOutcome): return o.boon and o.boon.bane):
+			continue  # a careful player doesn't gamble on a curse (#133)
+		var boons_before := _boon_count()
 		var result: Dictionary = events_rules.resolve(party, choice, -1, flags)
+		var boons_after := _boon_count()
+		stats["boons"] += maxi(0, boons_after.x - boons_before.x)
+		stats["banes"] += maxi(0, boons_after.y - boons_before.y)
 		if not result["ambush"].is_empty():
 			stats["gold_found"] += maxi(0, party.supplies.gold - gold_before)
 			var fight := _fight(result["ambush"], "")
@@ -682,7 +701,22 @@ func _award_xp(state, kind: String) -> void:
 # --- Between fights --------------------------------------------------------
 
 ## After a fight or event: drink, eat, bind and relight as needed.
+## Boons (x) and banes (y) the party carries now.
+func _boon_count() -> Vector2i:
+	var count := Vector2i.ZERO
+	for hero: Companion in party.members:
+		for entry in hero.boons:
+			if entry["boon"].bane:
+				count.y += 1
+			else:
+				count.x += 1
+	return count
+
+
 func _patch_up() -> void:
+	if party.cannot_use_reason(HOLY_WATER) == "":
+		party.use_item(HOLY_WATER)  # lift a bane in the field
+		stats["banes_lifted"] += 1
 	for hero: Companion in party.living_members():
 		if float(hero.health) / hero.effective_max_health() < 0.5 and party.cannot_use_reason(DRAUGHT) == "":
 			party.use_item(DRAUGHT)
@@ -800,6 +834,9 @@ func _summarise(all: Dictionary) -> void:
 				_mean(runs.map(func(r): return r["gold_found"])), _mean(runs.map(func(r): return r["gold_contracts"])),
 				_mean(runs.map(func(r): return r["gold_sold"])), _mean(runs.map(func(r): return r["gold_spent"])),
 				runs.filter(func(r): return r["lantern_day"] > 0).size(), _mean(runs.map(func(r): return r["route_bought"]))])
+		print("  boons gained %.1f, banes gained %.1f, banes lifted %.1f per campaign (#133)" % [
+				_mean(runs.map(func(r): return r["boons"])), _mean(runs.map(func(r): return r["banes"])),
+				_mean(runs.map(func(r): return r["banes_lifted"]))])
 		var gate_runs: Array = runs.filter(func(r): return r["gate_tries"] > 0)
 		var queen_runs: Array = runs.filter(func(r): return r["queen_tries"] > 0)
 		print("  gate: tried in %d runs (%.1f tries each), broken by day median %s" % [gate_runs.size(), _mean(gate_runs.map(func(r): return r["gate_tries"])),
