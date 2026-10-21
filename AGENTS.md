@@ -92,6 +92,9 @@ Templates > Download and Install; already installed on the owner's PC).
   `docs/portrait-rig-families.md`; preserve `frames-pixel-v3` clean/neutral
   components and `frames-pixel-v4` animation on re-export (#124).
   V2 left baked features visible; v3 animation was too flat. Timing is unchanged.
+  The first two unique dark elf rigs (#131), their separate lighting and one
+  combat pose family are ready in `docs/results-and-rivals-art.md`; their
+  catalogue stays separate from human/recruit exporters and has no story assignment.
 - `scripts/portrait_view.gd` – draws a PortraitSet; blink(), talk(), hurt(),
   set_condition().
 - `scripts/party_card.gd` – HUD card per party slot (portrait, name, health
@@ -129,6 +132,8 @@ Templates > Download and Install; already installed on the owner's PC).
 - `scripts/results_screen.gd` – end-of-expedition screen. main.gd
   `_end_expedition()` shows it; `_start_new_expedition()` is the placeholder
   camp stop and re-entry from floor 1.
+  Spoils/results art (#130), paired cave-mouth backgrounds and arrival sheets
+  are connected; handoff and paused art review: `docs/results-and-rivals-art.md`.
 - `scripts/title_screen.gd` + `scenes/title.tscn` – title screen (#18) built
   from ChatGPT's title study: Begin expedition, Settings (disabled until
   settings exist), Quit (desktop only). Uses art/fonts roles.

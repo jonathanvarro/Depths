@@ -15,20 +15,19 @@ const COLOR_DIM_TEXT := Color(0.85, 0.8, 0.7, 0.85)
 const COLOR_LOSS := Color("e28c7c")
 const COLOR_GAIN := Color("bfe3a8")
 const COLOR_AMBER := Color("f2c94c")
-## Placeholder backdrop until ChatGPT's cave-mouth illustration lands.
-const BACKDROP := preload("res://art/title/title-v1/background.png")
+const BACKDROP := preload("res://art/ui/results-v1/results-dawn.png")
+const WIPE_BACKDROP := preload("res://art/ui/results-v1/results-wipe.png")
 const ICONS := {
-	"gold": preload("res://art/ui/coin-v1/heads.png"),
-	"enemies": preload("res://art/ui/backlog96-v1/map/danger.png"),
-	"events": preload("res://art/ui/backlog96-v1/map/object.png"),
-	"deepest": preload("res://art/ui/backlog96-v1/map/down.png"),
+	"gold": preload("res://art/ui/results-v1/coin-pouch.png"),
+	"enemies": preload("res://art/ui/results-v1/danger-light.png"),
+	"events": preload("res://art/ui/results-v1/object-light.png"),
+	"deepest": preload("res://art/ui/results-v1/down-light.png"),
+	"xp": preload("res://art/ui/results-v1/experience.png"),
+	"advance": preload("res://art/ui/results-v1/level-up.png"),
 	"health": preload("res://art/ui/visual105-v1/heart.png"),
 	"nerves": preload("res://art/ui/visual105-v1/nerves.png"),
 	"oil": preload("res://data/items/oil_flask.tres"),
 }
-
-## The minimap's glyphs (dark ink for parchment), lightened on this screen.
-var MAP_GLYPHS: Array = [ICONS["enemies"], ICONS["events"], ICONS["deepest"]]
 
 var content: MarginContainer  # main.gd keeps this inside the safe area
 
@@ -109,7 +108,8 @@ func show_results(ending: int, expedition, party, note: String, quotes := {}) ->
 	_ledger.visible = true
 	_backdrop.visible = true
 	var wiped := ending == Expedition.Ending.WIPED
-	_tint.color = Color(0.12, 0.01, 0.01, 0.86) if wiped else Color(0.05, 0.04, 0.03, 0.8)
+	_backdrop.texture = WIPE_BACKDROP if wiped else BACKDROP
+	_tint.color = Color(0.08, 0.015, 0.02, 0.48) if wiped else Color(0.025, 0.025, 0.025, 0.38)
 	_title.text = Expedition.TITLES[ending]
 	var s: Dictionary = expedition.summary(party)
 	_subtitle.text = "Expedition %d · %s" % [expedition.number, note]
@@ -190,9 +190,9 @@ func _hero_row(row: Dictionary, quote := "") -> Control:
 	_chip(chips, ICONS["health"], "%d/%d" % [row["health"], hero.effective_max_health()] + ("  %+d" % change if change != 0 else ""), change >= 0)
 	var xp: int = row["xp"] - row["xp_from"]
 	if xp > 0:
-		_chip(chips, null, "+%d XP" % xp, true)
+		_chip(chips, ICONS["xp"], "+%d XP" % xp, true)
 	if Progression.ready_to_advance(hero):
-		_chip(chips, null, "Level up at camp", true, COLOR_AMBER)
+		_chip(chips, ICONS["advance"], "Level up at camp", true, COLOR_AMBER)
 	var nerves: float = row["strain"] - row["strain_from"]
 	if absf(nerves) >= 5.0:
 		_chip(chips, ICONS["nerves"], "calmer" if nerves < 0 else "shaken", nerves < 0)
@@ -223,27 +223,12 @@ func _chip(parent: Control, icon: Texture2D, text: String, good: bool, colour :=
 		picture.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		picture.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 		picture.custom_minimum_size = Vector2(28, 28)
-		if icon in MAP_GLYPHS:
-			picture.material = _light_ink()  # map glyphs are drawn dark, for parchment
 		row.add_child(picture)
 	var label := _label(19, colour if colour.a > 0 else (COLOR_GAIN if good else COLOR_LOSS), text)
 	label.size_flags_vertical = Control.SIZE_FILL
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	row.add_child(label)
 	parent.add_child(chip)
-
-
-var _ink: ShaderMaterial
-
-
-## Paints a dark-ink glyph in the screen's light text colour, keeping its shape.
-func _light_ink() -> ShaderMaterial:
-	if _ink == null:
-		_ink = ShaderMaterial.new()
-		_ink.shader = Shader.new()
-		_ink.shader.code = "shader_type canvas_item;
-void fragment() { COLOR = vec4(0.89, 0.83, 0.68, texture(TEXTURE, UV).a); }"
-	return _ink
 
 
 func _clear(node: Node) -> void:

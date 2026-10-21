@@ -1,0 +1,20 @@
+{
+  "assets": [
+    {
+      "id": "results-dawn",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: finished 16:9 background illustration for Depths, a dark first-person dungeon crawler's expedition results screen. Primary request: looking OUT from deep inside a rough limestone cave mouth at a subdued cold dawn. Chunky restrained painted pixel art, broad readable value masses and sparse deliberate rock clusters, earthy charcoal umber and slate blue, small warm pale gold dawn strip. No smooth photorealism, no tiny texture noise. Composition: cave ceiling and rock frame occupy upper/right edges; opening to misty woodland on far right third, muddy winding path leaving cave toward indistinct distant canvas tents very small on right horizon. Left 65 percent and centre are very dark, quiet, low contrast rock shadow for readable overlaid results text; avoid salient objects there. Eye-level first-person, no visible hero, no hands or characters, no bodies or blood, no text, no UI, no logo. Oppressive but relieved, not a triumphant fantasy vista. Wide horizontal landscape, intended runtime 1280x720.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-ed05b3a8-1eb9-46ba-99ca-73253d717f12.png",
+      "source": "art/source/results-v1/results-dawn-master.png",
+      "sha256": "a1ccdb806e74c9feee89549b75079c0a68eea63084df8adeac9fd64151d2799a"
+    },
+    {
+      "id": "results-wipe",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: lighting-weather. Edit target: the provided Depths cave-mouth results illustration. Create the paired DEFEAT aftermath version. Keep the camera, rock contours, opening position, path and all scenery registered EXACTLY to the original image. Change only lighting/weather: the dawn has failed behind thick slate clouds; distant camp is indistinct and unlit; cold, almost colourless outside light, subtle exhausted bruised red-brown in the deepest cave shadows. Add only one abandoned broken dark torch on the extreme lower-right rock ledge, no flame. No corpses, no characters, no gore, no text or UI. Preserve broad painted pixel clusters and 16:9 format. The left 65 percent must remain quiet dark space for results text. This is a defeat view, not a new location.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-4005c1d4-2724-44cb-af26-28e1294758db.png",
+      "source": "art/source/results-v1/results-wipe-master.png",
+      "sha256": "97bb5588cd3f8b153ac81a56339156b7bc6eb88fcd3a85cf6c097a7671033e6a"
+    }
+  ]
+}

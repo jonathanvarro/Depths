@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="PortraitSet" format=3]
+
+[ext_resource type="Script" path="res://scripts/portrait_set.gd" id="script"]
+[ext_resource type="Texture2D" path="res://art/portraits/dark-elves-v1/dark-elf-man/character-clean.png" id="character-clean"]
+[ext_resource type="Texture2D" path="res://art/portraits/dark-elves-v1/dark-elf-man/eyes-neutral.png" id="eyes-neutral"]
+[ext_resource type="Texture2D" path="res://art/portraits/dark-elves-v1/dark-elf-man/mouth-neutral.png" id="mouth-neutral"]
+[ext_resource type="Texture2D" path="res://art/portraits/dark-elves-v1/dark-elf-man/eyes-half.png" id="eyes-half"]
+[ext_resource type="Texture2D" path="res://art/portraits/dark-elves-v1/dark-elf-man/eyes-closed.png" id="eyes-closed"]
+[ext_resource type="Texture2D" path="res://art/portraits/dark-elves-v1/dark-elf-man/mouth-small.png" id="mouth-small"]
+[ext_resource type="Texture2D" path="res://art/portraits/dark-elves-v1/dark-elf-man/mouth-open.png" id="mouth-open"]
+[ext_resource type="Texture2D" path="res://art/portraits/dark-elves-v1/dark-elf-man/mouth-round.png" id="mouth-round"]
+[ext_resource type="Texture2D" path="res://art/portraits/dark-elves-v1/dark-elf-man/shadow.png" id="shadow"]
+[ext_resource type="Texture2D" path="res://art/portraits/dark-elves-v1/dark-elf-man/highlight.png" id="highlight"]
+
+[resource]
+script = ExtResource("script")
+rig_kind = "Unique"
+rig_family = &"unique-dark-elf-man-v1"
+face_id = &"dark-elf-man"
+head = ExtResource("character-clean")
+eyes = ExtResource("eyes-neutral")
+mouth = ExtResource("mouth-neutral")
+blink_frames = Array[Texture2D]([ExtResource("eyes-half"),ExtResource("eyes-closed")])
+talk_frames = Array[Texture2D]([ExtResource("mouth-small"),ExtResource("mouth-open"),ExtResource("mouth-round")])
+light_shadow = ExtResource("shadow")
+light_highlight = ExtResource("highlight")

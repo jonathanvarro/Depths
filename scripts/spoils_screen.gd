@@ -10,7 +10,15 @@ signal _done
 
 const CombatFx := preload("res://scripts/combat_fx.gd")
 const Progression := preload("res://scripts/progression.gd")
-const COIN := preload("res://art/ui/coin-v1/heads.png")
+const COIN := preload("res://art/ui/results-v1/coin-pouch.png")
+const XP_MARK := preload("res://art/ui/results-v1/experience.png")
+const LEVEL_MARK := preload("res://art/ui/results-v1/level-up.png")
+const ARRIVALS := {
+	"slash": preload("res://art/ui/results-v1/slash-frames.tres"),
+	"smash": preload("res://art/ui/results-v1/smash-frames.tres"),
+	"pierce": preload("res://art/ui/results-v1/pierce-frames.tres"),
+	"fire": preload("res://art/ui/results-v1/fire-frames.tres"),
+}
 const TEXT := Color("e8d9b0")
 const MUTED := Color(0.85, 0.8, 0.7, 0.7)
 const AMBER := Color("f2c94c")
@@ -103,26 +111,26 @@ func _arrive(blow: String, home: Vector2) -> void:
 	match blow:
 		"slash":  # a blade's cut across the screen, the spoils slide in along it
 			var dir := Vector2(1, 0.62).normalized()
-			_fx.slash(center, true)
-			_streak(center - dir * view.x * 0.6, center + dir * view.x * 0.6, Color("fff3d6"), 14.0)
+			_arrival_art("slash", center)
 			_panel.position = home - dir * 260.0
 			tween.set_parallel()
 			tween.tween_property(_panel, "position", home, 0.22).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 			tween.tween_property(_panel, "modulate:a", 1.0, 0.12)
 		"smash":  # a blunt impact: a flash, cracks, a shake, and it drops in
-			_impact(center)
+			_arrival_art("smash", center)
 			_panel.scale = Vector2(1.5, 1.5)
 			tween.set_parallel()
 			tween.tween_property(_panel, "scale", Vector2.ONE, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 			tween.tween_property(_panel, "modulate:a", 1.0, 0.08)
 			_shake()
 		"pierce":  # a quick thrust from the side
-			_streak(Vector2(-40, center.y), center, Color("fff3d6"), 9.0)
+			_arrival_art("pierce", center)
 			_panel.position = home - Vector2(view.x * 0.5, 0)
 			tween.set_parallel()
 			tween.tween_property(_panel, "position", home, 0.16).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
 			tween.tween_property(_panel, "modulate:a", 1.0, 0.1)
 		"fire":  # it burns in: embers eat away a dark cover
+			_arrival_art("fire", center)
 			_panel.modulate.a = 1.0
 			var cover := ColorRect.new()
 			cover.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -139,6 +147,18 @@ func _arrive(blow: String, home: Vector2) -> void:
 		_:  # plain fade (screen flashes off)
 			tween.tween_property(_panel, "modulate:a", 1.0, 0.2)
 	await tween.finished
+
+
+func _arrival_art(kind: String, at: Vector2) -> void:
+	var sprite := AnimatedSprite2D.new()
+	sprite.sprite_frames = ARRIVALS[kind]
+	sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	sprite.position = at
+	sprite.scale = Vector2(5, 3)
+	sprite.z_index = 1  # the brief arrival must remain visible over the panel
+	_fx.add_child(sprite)
+	sprite.animation_finished.connect(sprite.queue_free)
+	sprite.play(&"arrival")
 
 
 func _streak(from: Vector2, to: Vector2, color: Color, width: float) -> void:
@@ -230,8 +250,9 @@ func _build(spoils: Dictionary) -> void:
 		bar.value = entry["from"]
 		line.add_child(bar)
 		var gained := _label("+%d XP" % (entry["to"] - entry["from"]), TEXT, 18)
+		line.add_child(_mark(XP_MARK, "Experience earned"))
 		line.add_child(gained)
-		var ready := _label("Level up at camp", AMBER, 16)
+		var ready := _mark(LEVEL_MARK, "Level up at camp")
 		ready.visible = false
 		line.add_child(ready)
 		_rows.add_child(line)
@@ -267,8 +288,21 @@ func _count_up(spoils: Dictionary) -> void:
 		tween.tween_property(bar, "value", float(b[2]), 0.8).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		var hero: Companion = b[4]
 		if Progression.ready_to_advance(hero):
-			var mark: Label = b[3]
+			var mark: TextureRect = b[3]
 			tween.tween_callback(func(): mark.visible = true).set_delay(0.8)
+
+
+func _mark(texture: Texture2D, description: String) -> TextureRect:
+	var mark := TextureRect.new()
+	mark.texture = texture
+	mark.custom_minimum_size = Vector2(28, 28)
+	mark.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	mark.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	mark.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	mark.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	mark.tooltip_text = description
+	mark.accessibility_name = description
+	return mark
 
 
 func _label(text: String, color: Color, size: int) -> Label:

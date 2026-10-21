@@ -1,0 +1,46 @@
+{
+  "assets": [
+    {
+      "id": "dark-elf-man",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: Depths dark fantasy game portrait, new unique DARK ELF MAN. Square transparent canvas, chest-up bust occupying nearly entire width at bottom, generous 8 percent clear space above hair/ear tips. Head nearly FRONT FACING, eyes horizontally aligned, face centred x50%, eyes around y39%, mouth y57%, armour lower third. Mature handsome narrow face, sharp narrow chin and high cheekbones, long slim neck, long pointed ears sweep up and back with visible inner folds. COLD SLATE BLUE skin #98AACC #7688AE #526084; strong dark boldly upswept eyebrows readable at 96px; pale lilac irises, normal whites, no glow. Swept-back shoulder-length WHITE hair. Clean shaven, proud controlled wary expression, closed resting lips, natural asymmetry and faint wear, not a smile or snarl. Gothic BLACK fluted plate cuirass with central ridge, high gorget, tall swept pauldrons, grey-silver edge filigree kept sparse; HEAVY ragged black fur mantle framing neck and shoulders, narrow crimson cloth glimpses. Restrained painted PIXEL portrait designed for native192x192: coherent chunky paint clusters, 3-4 shades per material, crisp silhouette, hand-painted realistic anatomy, same gritty grounded restrained rendering as weathered human RPG portraits, more detail on face than armour. NEUTRAL diffuse illumination, preserve local skin colours, no baked warm torch glow, directional rim, cast spotlight, gradients, glossy skin, glam makeup or photoreal pores. No background, no ground shadow, no frame, no UI, no text, no logo. Fully transparent outside bust; include both ears and all hair.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-b89e8678-943e-4cb6-976a-788772edd29c.png",
+      "source": "art/source/dark-elves-v1/dark-elf-man-master.png",
+      "sha256": "0b9a07bd2c2fc8ce4310d7b5f5dcad386cf9a437797ebe77e80559985aacf726"
+    },
+    {
+      "id": "dark-elf-woman",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: finished unique DARK ELF WOMAN bust portrait for Depths, a gritty dark dungeon crawler. Square truly transparent canvas, chest-up shoulders filling width at bottom, 8 percent clear space above circlet and ear tips. FACE FRONT ON, aligned horizontal eyes, centre face x50%, eyes at y39%, mouth y57%, armour lower third. Conventionally beautiful but severe mature adult; softer jaw and rounded narrow chin, high cheekbones, fine straight nose, fuller dark-violet lips CLOSED at rest, slightly larger almond lilac eyes with natural sclera and longer lashes. Signature LARGE BOLD BLACK UPSWEPT eyebrows, readable at native96px. Long pointed ears sweep up/back with inner folds. Cold SLATE BLUE skin #98AACC #7688AE #526084, no red eyes or glowing features. Long straight BLACK hair, simple black circlet with three slim tall spires. Fluted ridged BLACKENED gothic plate, high gorget, tall swept pauldrons, sparse grey-silver edging, heavy ragged BLACK FUR mantle and small deep-violet/crimson cloth glimpses. No cleavage, practical enclosed armour. Restrained hand-painted PIXEL portrait designed for192x192, broad crisp colour clusters with 3-4 shades per material, textured realism similar to weathered grounded human RPG busts, not anime or glossy fantasy pinup. NEUTRAL diffuse light, local colours, no warm torch light, cast spotlight, rim glow or directional lighting effects; lighting will be a separate layer. Calm imperious wary expression, no snarl. No background, no frame, text, UI, logo or ground shadow; alpha outside entire bust, ears and hair fully contained.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-558ed6d4-8c85-4ad7-baec-d9bc4d257b09.png",
+      "source": "art/source/dark-elves-v1/dark-elf-woman-master.png",
+      "sha256": "9a81d8a40f2c6f722b91743553cd2ea9c790ac9c29d91597542a98c3ae3d91e3"
+    },
+    {
+      "id": "dark-elf-idle",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: ordinary combat enemy sprite for Depths, native target128x128, one IDLE pose. A DARK ELF male rival standing alert, full body front-facing eye-level view toward player. Tall SLENDER proportions (8.5 heads), slim waist, long legs/neck, slate-blue skin, white swept-back hair, long pointed swept-back ears, huge upswept dark brows, pale lilac eyes. Gothic black fluted armour, pointed tassets, tall ridged pauldrons, heavy ragged BLACK FUR mantle around shoulders, sparse cold grey edge highlights, crimson narrow tabard/cape lining. Holds one slim leaf-point SPEAR upright on viewer right, tip below top margin; other hand free. An individual rival, not a demon; no horns or monster anatomy. STRICT SIMPLIFIED PIXEL SPRITE, broad flat 2-3-shade clusters, strong silhouette, LARGE deliberate pixels; at most32 colours across entire sprite. Armour folds and fur rendered as big masses, NOT painterly texture, no individual fur strands, noise, gradients, photoreal detail, antialiasing, particles or lighting glow. The full head-to-boot figure occupies x35%-65%, y12%-88%; spear/cloth/ears within x15%-85% and y6%-92%. Transparent square canvas, feet planted on same horizontal baseline at94% height, visual centre x50%; clear padding all around, no ground, no contact shadow, no background, no text or UI. Slightly warm upper-left sprite shading matching simple goblin combat art, distinct from the more detailed portrait style.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-fa78db09-335e-41ef-95c0-2328f341c5aa.png",
+      "source": "art/source/dark-elves-v1/dark-elf-idle-master.png",
+      "sha256": "4081faaa9e10d30ff17b8be2bf25968b17878b1025a1ccc7c85b9b020f3eddc7"
+    },
+    {
+      "id": "dark-elf-attack",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: identity-preserve. Edit target: this dark elf IDLE combat sprite. Make its ATTACK pose: right hand drives the SAME spear forward at the viewer, spear foreshortened diagonally across the body from viewer right shoulder toward lower-left centre, left hand braces haft; lead knee bent, shoulders leaning a little into thrust, readable attack silhouette. SAME person, face, white hair, ears, black fur mantle, black ridged armour and red cloth, SAME head size and body limb lengths; do not scale or zoom. Keep both feet on the ORIGINAL ground contact baseline and same canvas/pivot, figure entirely inside, no cropping spear. Sparse broad crisp PIXEL clusters intended for128x128, at most32 colours, NO extra texture or smooth detailing. No motion blur, no light effects, no blood, no background, no ground shadow, no text or UI. Transparent alpha. Only one full-body attack pose on square canvas.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-e1eaa3dd-5e00-4e9b-b1f9-5d1019019551.png",
+      "source": "art/source/dark-elves-v1/dark-elf-attack-master.png",
+      "reference": "art/source/dark-elves-v1/dark-elf-idle-master.png",
+      "sha256": "1c9c4ca9e2d7b9a64dc8dad4fe446f7b924a1740a5f94e24eab8fd7cceb8b89b"
+    },
+    {
+      "id": "dark-elf-hurt",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: identity-preserve. Edit target: the provided dark elf IDLE combat sprite. Draw one HURT/recoil pose of EXACTLY this individual and equipment. Torso twists slightly away from an unseen blow, head recoils and eyes narrowed, left hand comes up to protect chest, right hand keeps the SAME upright spear leaning a little outward viewer right. One knee flexes; both boots remain on the original baseline. SAME face, white swept-back hair, slate-blue skin, ears, same high gorget, tall shoulders, ragged black fur, ridged black armour and crimson cloth. SAME head size and limb length as original idle: do NOT enlarge head, stretch torso, zoom or refit the figure. Include every spear tip/boot inside square transparent canvas and preserve full canvas scale and position. Target128x128 simplified pixel art, broad flat 2-3-shade clusters, at most32 colours, clear pose. NO gore, wounds, red flash, particles, motion blur, smooth painting, fur strands, background, ground shadow, text or UI. A brief stagger, not a death or falling pose.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-ba5075a7-7206-4149-8042-98807b7450f0.png",
+      "source": "art/source/dark-elves-v1/dark-elf-hurt-master.png",
+      "reference": "art/source/dark-elves-v1/dark-elf-idle-master.png",
+      "sha256": "35ca5f2efdc5cfdeb5aa51d4e17c859a7d38f6318a13a0bef63f032d4ec28dba"
+    }
+  ]
+}

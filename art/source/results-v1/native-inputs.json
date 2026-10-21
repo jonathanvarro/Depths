@@ -1,0 +1,18 @@
+[
+  {
+    "path": "art/items/refined-v2/old-coin-purse.png",
+    "sha256": "fddaf2c6c397019018bc766bf8fef7fa07ebd77d48c5b61258b1e30aaee41f64"
+  },
+  {
+    "path": "art/source/backlog96-v1/glyphs/map/danger.svg",
+    "sha256": "bbeb82a77b2150850461b777f41811e0e172d3862943f00e829908da98919f70"
+  },
+  {
+    "path": "art/source/backlog96-v1/glyphs/map/object.svg",
+    "sha256": "79135bc31d9436f60e4909d1fad30bf2b43ea8a70483369fe9ee08bd71246b09"
+  },
+  {
+    "path": "art/source/backlog96-v1/glyphs/map/down.svg",
+    "sha256": "13a9fcb15a5671480ff32f326a02d6546460d77d04b9979977e1346b766397d1"
+  }
+]

@@ -1,0 +1,30 @@
+{
+  "issue": 130,
+  "backdrops": [
+    1280,
+    720
+  ],
+  "glyphs": [
+    32,
+    32
+  ],
+  "effects": {
+    "names": [
+      "slash",
+      "smash",
+      "pierce",
+      "fire"
+    ],
+    "canvas": [
+      128,
+      64
+    ],
+    "frames": 8,
+    "fps": 20,
+    "loop": false
+  },
+  "purse_source": {
+    "path": "art/items/refined-v2/old-coin-purse.png",
+    "sha256": "fddaf2c6c397019018bc766bf8fef7fa07ebd77d48c5b61258b1e30aaee41f64"
+  }
+}
