@@ -128,6 +128,9 @@ var boons: Array[Dictionary] = []
 ## A worn trinket (#135): its effect (and a cursed one's bane) counts like
 ## a boon for as long as it's worn.
 @export var trinket: Equipment
+## Worn on the back (owner, 2026-10-21): a backpack for more pack slots, or
+## a cloak or cape whose effect counts like a trinket's.
+@export var back: Equipment
 
 var _health_fraction := 0.0  # partial healing carried between time units
 
@@ -204,6 +207,8 @@ func effects() -> Array[Boon]:
 			all.append(trinket.effect)
 		if trinket.curse:
 			all.append(trinket.curse)
+	if back and back.effect:
+		all.append(back.effect)
 	return all
 
 
@@ -269,7 +274,7 @@ func refresh_stats() -> void:
 
 ## Acting order in a fight: armour slows (#93).
 func effective_initiative() -> int:
-	return initiative - (body.initiative_penalty if body else 0)
+	return initiative - (body.initiative_penalty if body else 0) - (back.initiative_penalty if back else 0)
 
 
 ## Taken off every blow: toughness, talents and body armour (#47, #93).

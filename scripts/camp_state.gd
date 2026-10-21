@@ -43,6 +43,11 @@ const SMITH_STOCK: Array[Equipment] = [
 	preload("res://data/gear/iron_sword.tres"),
 	preload("res://data/gear/padded_coat.tres"),
 	preload("res://data/gear/leather_jerkin.tres"),
+	# Worn on the back (owner, 2026-10-21).
+	preload("res://data/gear/satchel.tres"),
+	preload("res://data/gear/frame_pack.tres"),
+	preload("res://data/gear/oilcloth_cloak.tres"),
+	preload("res://data/gear/wool_cape.tres"),
 ]
 ## Not for sale until shields have rules.
 const SMITH_COMING := ["a rough wooden shield (16g)"]

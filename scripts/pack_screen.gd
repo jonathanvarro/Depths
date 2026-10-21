@@ -153,6 +153,21 @@ func _add_gear_rows() -> void:
 				refresh())
 			row.add_child(away)
 		_list.add_child(row)
+		# On the back (owner, 2026-10-21): a backpack, cloak or cape.
+		if hero.back:
+			var back_row := HBoxContainer.new()
+			back_row.add_theme_constant_override("separation", 12)
+			var carried := _label("    On the back: %s (%s)" % [hero.back.display_name.to_lower(), Equipment.back_text(hero.back)], 16, COLOR_DIM_TEXT)
+			carried.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+			carried.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			back_row.add_child(carried)
+			var unstrap := _small_button("Take off")
+			unstrap.tooltip_text = "Into the pack"
+			unstrap.pressed.connect(func():
+				_party.take_off_back(hero)
+				refresh())
+			back_row.add_child(unstrap)
+			_list.add_child(back_row)
 		# Trinkets (#135): what it does, and taking it off (not if cursed).
 		if hero.trinket:
 			var charm_row := HBoxContainer.new()
@@ -188,14 +203,18 @@ func _add_gear_rows() -> void:
 		var summary := "armour %d%s" % [item.armour, (", slower by %d" % item.initiative_penalty) if item.initiative_penalty > 0 else ""] if item.slot == "body" else "%d-%d" % [item.attack_min, item.attack_max]
 		if item.slot == "trinket":
 			summary = "%s trinket" % item.tier
+		elif item.slot == "back":
+			summary = "worn on the back"
 		text.add_child(_label("%s  (%s)" % [item.display_name, summary], 22, COLOR_TEXT))
 		var about := _label(item.description, 17, COLOR_DIM_TEXT)
 		about.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		text.add_child(about)
 		if item.slot == "trinket":
 			text.add_child(_label("Worn: " + item.effect.effects_text(), 16, COLOR_DIM_TEXT))
+		elif item.slot == "back":
+			text.add_child(_label("Worn: " + Equipment.back_text(item), 16, COLOR_DIM_TEXT))
 		for hero in living:
-			if item.slot == "trinket":
+			if item.slot in ["trinket", "back"]:
 				break
 			var now := _numbers(hero, hero.weapon) if item.slot != "body" else _armour(hero, hero.body)
 			var then := _numbers(hero, item) if item.slot != "body" else _armour(hero, item)

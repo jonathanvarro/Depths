@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Equipment" format=3]
+
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="1_is0gh"]
+
+[resource]
+script = ExtResource("1_is0gh")
+display_name = "Leather satchel"
+description = "A soldier's satchel on a broad strap. Room for a little more."
+attack_min = 0
+attack_max = 0
+price = 25
+slot = "back"
+pack_slots = 2

@@ -446,6 +446,9 @@ func _merchant() -> void:
 func _smith() -> void:
 	_text("The apprentice wipes his hands. \"It's not much. But it'll hold.\"")
 	for item: Equipment in _camp.smith_stock():  # with quest unlocks (#123)
+		if item.slot == "back":  # backpacks, cloaks and capes
+			_shop_row("%s: %s" % [item.display_name, Equipment.back_text(item)], item.price, _camp.buy_gear.bind(_party, item), item.icon, _party.supplies.has_room_for_gear())
+			continue
 		if item.slot == "body":  # armour (#93)
 			var slower := ", slower by %d" % item.initiative_penalty if item.initiative_penalty > 0 else ""
 			_shop_row("%s: armour %d%s" % [item.display_name, item.armour, slower], item.price, _camp.buy_gear.bind(_party, item), item.icon, _party.supplies.has_room_for_gear())

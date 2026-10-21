@@ -16,8 +16,11 @@ extends Resource
 @export var price := 0
 ## Reaches past the front row: usable from the back, hits enemies' back row (#72).
 @export var reach := false
-## "weapon", "body" (armour, #93) or "trinket" (#135).
-@export_enum("weapon", "body", "trinket") var slot := "weapon"
+## "weapon", "body" (armour, #93), "trinket" (#135) or "back" (a backpack,
+## cloak or cape; owner 2026-10-21).
+@export_enum("weapon", "body", "trinket", "back") var slot := "weapon"
+## A backpack: pack slots it adds while worn (owner, 2026-10-21).
+@export var pack_slots := 0
 ## Body armour: taken off every blow (minimum 1), and how much it slows.
 @export var armour := 0
 @export var initiative_penalty := 0
@@ -29,8 +32,8 @@ extends Resource
 @export_enum("slash", "smash", "pierce") var strike := "slash"
 
 @export_group("Trinket")
-## Trinkets (#135; owner 2026-10-21): what wearing it does, as long as it's
-## worn. Common: a benefit and a drawback; fine: a clear benefit, a small
+## Trinkets (#135; owner 2026-10-21), and cloaks and capes on the back:
+## what wearing it does, as long as it's worn. Common: a benefit and a drawback; fine: a clear benefit, a small
 ## drawback; rare: two benefits; unique: a playstyle buff.
 @export var effect: Boon
 @export_enum("common", "fine", "rare", "unique") var tier := "common"
@@ -41,3 +44,15 @@ extends Resource
 ## off until cleansed (holy water, the nurse), when it becomes `cleansed`.
 @export var curse: Boon
 @export var cleansed: Equipment
+
+
+## What a back item does, in words: "+2 pack slots", "nerves fray 10% slower".
+static func back_text(item: Equipment) -> String:
+	var parts := PackedStringArray()
+	if item.pack_slots > 0:
+		parts.append("+%d pack slots" % item.pack_slots)
+	if item.initiative_penalty > 0:
+		parts.append("slower by %d" % item.initiative_penalty)
+	if item.effect:
+		parts.append(item.effect.effects_text())
+	return ", ".join(parts)

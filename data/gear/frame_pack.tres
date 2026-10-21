@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Equipment" format=3]
+
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="1_elrqp"]
+
+[resource]
+script = ExtResource("1_elrqp")
+display_name = "Miner's frame pack"
+description = "A wooden frame and canvas, made for hauling ore. Room for a lot more, but it slows you."
+attack_min = 0
+attack_max = 0
+price = 45
+slot = "back"
+pack_slots = 4
+initiative_penalty = 1

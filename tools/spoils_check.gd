@@ -49,9 +49,12 @@ func _initialize() -> void:
 		h.refresh_stats()
 	main._combat._action_chosen.emit({"kind": "attack"})
 	g = 0
-	while not main._spoils.visible and g < 60:
+	while not main._spoils.visible and g < 200:
 		await create_timer(0.05).timeout
 		g += 1
+		# Hit chance tops out below 100%: if the blow missed, swing again.
+		if main._combat._actions.visible and main._combat._state.foes[0].health > 0:
+			main._combat._action_chosen.emit({"kind": "attack"})
 	check("winning shows the spoils", main._spoils.visible)
 	check("...arriving the way the goblin fell", main._combat.last_blow == main.CombatScreen.strike_of(lead), main._combat.last_blow)
 	await create_timer(1.0).timeout

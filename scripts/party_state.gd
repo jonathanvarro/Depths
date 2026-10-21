@@ -52,7 +52,11 @@ func remove_member(member: Companion) -> void:
 ## The pack grows with the party. A smaller party may find it over-full:
 ## nothing is lost, but nothing more fits until something goes.
 func update_capacity() -> void:
-	supplies.capacity = maxi(PACK_MINIMUM, PACK_SLOTS_PER_HERO * members.size())
+	var extra := 0
+	for member in members:
+		if member.back:
+			extra += member.back.pack_slots  # a backpack (owner, 2026-10-21)
+	supplies.capacity = maxi(PACK_MINIMUM, PACK_SLOTS_PER_HERO * members.size()) + extra
 	supplies.changed.emit()
 
 
@@ -176,6 +180,15 @@ func equip(hero: Companion, item: Equipment) -> void:
 		supplies.changed.emit()
 		changed.emit()
 		return
+	if item.slot == "back":  # a backpack, cloak or cape
+		if hero.back:
+			supplies.gear.append(hero.back)
+		hero.back = item
+		hero.health = mini(hero.health, hero.effective_max_health())
+		hero.emit_changed()
+		update_capacity()
+		changed.emit()
+		return
 	if hero.weapon:
 		supplies.gear.append(hero.weapon)
 	hero.weapon = item
@@ -200,6 +213,20 @@ func wear(hero: Companion, trinket: Equipment) -> String:
 		return ""
 	supplies.gear.erase(trinket)
 	return _put_on(hero, trinket)
+
+
+## Takes off what's on a hero's back, into the pack. The pack may end up
+## over-full if it was a backpack: nothing is lost, but nothing more fits.
+func take_off_back(hero: Companion) -> bool:
+	if hero.back == null:
+		return false
+	supplies.gear.append(hero.back)
+	hero.back = null
+	hero.health = mini(hero.health, hero.effective_max_health())
+	hero.emit_changed()
+	update_capacity()
+	changed.emit()
+	return true
 
 
 ## Takes a trinket off, back into the pack. False if it's cursed.

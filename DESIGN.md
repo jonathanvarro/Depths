@@ -584,6 +584,20 @@ Trinkets are wearable boons. They use the same effect list as boons and banes, s
 - **Where they drop:** tougher foes (10+ health) have a 12% chance to leave fine jewellery, or rare from floor 3. From floor 2, a quarter of those drops are cursed.
 - **Built with** `tools/story/build_trinkets.gd` into `data/trinkets/`. Icons borrow the jewellery art until new ones are drawn.
 
+### The back slot — owner request 2026-10-21
+
+Each hero has a back slot for a backpack, a cloak or a cape, worn and taken off from the Pack outside fights.
+
+- **Backpacks** add pack slots while worn. Carried and unworn, a backpack takes a slot like any spare gear.
+  - **Leather satchel:** +2 slots (25g).
+  - **Miner's frame pack:** +4 slots, but slower by 1 in fights (45g).
+- **Cloaks and capes** carry an effect, counted like a trinket's.
+  - **Oilcloth cloak:** nerves fray 10% slower, and the lantern burns 10% slower (20g).
+  - **Heavy wool cape:** +2 maximum health (18g).
+- **Taking off a backpack** can leave the pack over-full. Nothing is lost, but nothing more fits until something goes.
+- **Where to get them:** the smith sells all four.
+- **Built with** `tools/story/build_back_gear.gd`. They have no icons yet.
+
 ## Visual and audio direction
 
 Dark, gritty, grounded medieval fantasy. Stained stone, corroded metal, worn supplies, oppressive spaces, and scarce lantern light. Charcoal, dirty parchment, muted teal, rusty brown, and warm amber form the initial palette. Keep essential threats and interface elements readable.
