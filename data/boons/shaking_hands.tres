@@ -1,9 +1,11 @@
 [gd_resource type="Resource" script_class="Boon" format=3]
 
+[ext_resource type="Texture2D" path="res://art/ui/boons-v2/shaking-hands.png" id="field_art"]
 [ext_resource type="Script" path="res://scripts/boon.gd" id="1_7w17f"]
 
 [resource]
 script = ExtResource("1_7w17f")
+icon = ExtResource("field_art")
 display_name = "Shaking hands"
 description = "8% less to hit, 1 less damage."
 bane = true

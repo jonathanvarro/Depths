@@ -3,7 +3,14 @@ extends SceneTree
 ## data/gear: backpacks that add pack slots, and a cloak and a cape whose
 ## effects count like a trinket's. Rerun to rebuild:
 ##   Godot --headless --path . --script tools/story/build_back_gear.gd
-## No icons yet: ChatGPT is asked for them.
+## Icons: #138, source-backed field-kit-v1 inventory art.
+
+const BACK_ICONS := {
+	"satchel": "res://art/items/field-kit-v1/leather-satchel.png",
+	"frame_pack": "res://art/items/field-kit-v1/miners-frame-pack.png",
+	"oilcloth_cloak": "res://art/items/field-kit-v1/oilcloth-cloak.png",
+	"wool_cape": "res://art/items/field-kit-v1/heavy-wool-cape.png",
+}
 
 
 func _effect(name: String, effects: Dictionary) -> Boon:
@@ -20,6 +27,7 @@ func _back(id: String, name: String, about: String, price: int, extra: Dictionar
 	var g := Equipment.new()
 	g.slot = "back"
 	g.display_name = name
+	g.icon = load(BACK_ICONS[id])
 	g.description = about
 	g.price = price
 	g.attack_min = 0

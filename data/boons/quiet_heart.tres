@@ -1,9 +1,11 @@
 [gd_resource type="Resource" script_class="Boon" format=3]
 
+[ext_resource type="Texture2D" path="res://art/ui/boons-v2/quiet-heart.png" id="field_art"]
 [ext_resource type="Script" path="res://scripts/boon.gd" id="1_mt0w8"]
 
 [resource]
 script = ExtResource("1_mt0w8")
+icon = ExtResource("field_art")
 display_name = "Quiet heart"
 description = "Nerves fray half as fast."
 strain_rate = 0.5

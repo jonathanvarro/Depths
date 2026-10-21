@@ -1,0 +1,102 @@
+{
+  "issue": 138,
+  "date": "2026-10-21",
+  "assets": [
+    {
+      "id": "miners-pick",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Production inventory icon for Depths, a dark first-person cave crawler. Input images are STYLE REFERENCES ONLY: existing knife and leather garment. Match their restrained weathered painted pixel clusters, broad readable silhouettes, 3-4 shades per material, muted umber/charcoal/slate/linen colours, no fine texture noise; intended 128x128 master export and 64x64/40px display. One isolated object fully contained in square canvas with roughly 8% margin, no UI box or text. Neutral diffuse illumination and material shading, no scene lighting, glow, sparkle, ground or cast shadow. GENUINE TRANSPARENT BACKGROUND. No extra props, hands, letters, logo, watermark, fake checkerboard, 3D render or photographic detail. Subject: a SHORT miner's pick, a practical old mining tool rather than a battle axe. Dark pitted iron head: one narrow curved pointed end and one short chisel end, visibly mounted through a thick wooden haft. Haft worn smooth, simple two dark grip bands, no spikes or jewels. Diagonal whole-tool composition, wooden grip lower left and iron head upper right; large asymmetrical crossbar clearly reads at 40px. No blade shaped like a sword or axe.",
+      "reference_images": [
+        "art/items/refined-v2/plain-knife.png",
+        "art/items/refined-v2/leather-jerkin.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-bfab0abf-5f11-407d-93b4-d46d44573738.png",
+      "source": "art/source/field-kit-v1/miners-pick-master.png",
+      "sha256": "be9a7ca46b83717fbcc1645a60709ccffbfd9051d0ee86144dc7369ca78d83d1"
+    },
+    {
+      "id": "folding-spade",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Production inventory icon for Depths, a dark first-person cave crawler. Input images are STYLE REFERENCES ONLY: existing knife and leather garment. Match their restrained weathered painted pixel clusters, broad readable silhouettes, 3-4 shades per material, muted umber/charcoal/slate/linen colours, no fine texture noise; intended 128x128 master export and 64x64/40px display. One isolated object fully contained in square canvas with roughly 8% margin, no UI box or text. Neutral diffuse illumination and material shading, no scene lighting, glow, sparkle, ground or cast shadow. GENUINE TRANSPARENT BACKGROUND. No extra props, hands, letters, logo, watermark, fake checkerboard, 3D render or photographic detail. Subject: a soldier's FOLDING SPADE, deployed open: a broad compact rounded-square dark iron digging blade with a clear central crease and a nick in its edge, visible hinge collar near the blade, short wooden shaft and sturdy D-shaped iron handle. Whole tool diagonal with D-handle lower left and broad blade upper right. Thick simple metal/wood shapes so it cannot be confused with a pick, spear or axe; an old utilitarian digging tool, slightly rusty, no weapon ornament.",
+      "reference_images": [
+        "art/items/refined-v2/plain-knife.png",
+        "art/items/refined-v2/leather-jerkin.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-2fa97bc9-f54d-4f70-93a6-adc8d57c5800.png",
+      "source": "art/source/field-kit-v1/folding-spade-master.png",
+      "sha256": "ecc90a9f97186aa81a26f85f2ad8536c7a62817cc49c5e6ae53eb6fc4f68bb1d"
+    },
+    {
+      "id": "holy-water",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Production inventory icon for Depths, a dark first-person cave crawler. Input images are STYLE REFERENCES ONLY: existing knife and leather garment. Match restrained weathered painted pixel clusters, broad readable silhouettes, 3-4 shades per material, muted umber/charcoal/slate/linen colours, no fine texture noise; intended 128x128 export and 64x64/40px display. One isolated object fully contained in square canvas with roughly 8% margin, no UI box or text. Neutral diffuse illumination and material shading, no scene lighting, glow, sparkle, ground or cast shadow. GENUINE TRANSPARENT BACKGROUND. No extra props, hands, letters, logo, watermark, fake checkerboard, 3D render or photographic detail. Subject: one slim upright STOPPERED PHIAL of holy water. A tall narrow hexagonal bottle of thick cloudy pale blue-green glass, straight shoulders and short neck, filled with clear water with a simple level visible. A small rough cork and plain light linen neck binding secured with a faded blue cord. Very small grey wax blob closing the binding, no symbol or invented religious emblem. Strong tall silhouette, cool glass with broad flat restrained reflections; this is a modest sacred consumable, NOT a round red potion, flask or lantern. Bottle fully opaque enough to read against any inventory background; genuine transparent outside only. Worn edges, tiny flaws, no gold/jewels, no magic aura.",
+      "reference_images": [
+        "art/items/refined-v2/plain-knife.png",
+        "art/items/refined-v2/leather-jerkin.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-f116d6d0-4b20-43e9-b336-88b5fa63a016.png",
+      "source": "art/source/field-kit-v1/holy-water-master.png",
+      "sha256": "16aada09139ae5933dd8cad8de81ff35f857ae982ef7e86fb3938d16fcc5048e"
+    },
+    {
+      "id": "antidote",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Production inventory icon for Depths, a dark first-person cave crawler. Input images are STYLE REFERENCES ONLY: existing knife and leather garment. Match restrained weathered painted pixel clusters, broad readable silhouettes, 3-4 shades per material, muted umber/charcoal/slate/linen colours, no fine texture noise; intended 128x128 export and 64x64/40px display. One isolated object fully contained in square canvas with roughly 8% margin, no UI box or text. Neutral diffuse illumination and material shading, no scene lighting, glow, sparkle, ground or cast shadow. GENUINE TRANSPARENT BACKGROUND. No extra props, hands, letters, logo, watermark, fake checkerboard, 3D render or photographic detail. Subject: one low flat folded WAX-PAPER PACKET of bitter antidote salts. Dusty ivory parchment in a broad diamond/envelope silhouette with visibly folded triangular corners, one corner opened enough to reveal a small patch of pale granular salts inside. Simple muted sage-green thread crosses the packet once, tied in a short off-centre knot; little wax marks and crumpled creases. Crisp angular envelope shape, not a sack, roll of bandage, food ration, red spice parcel, bottle or cloth bundle. Broad readable paper planes with few shade clusters. One packet only, no spilled heap outside, no spoon, medicine cross, skull, label, letters or symbols.",
+      "reference_images": [
+        "art/items/refined-v2/plain-knife.png",
+        "art/items/refined-v2/leather-jerkin.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-52d5533b-6e34-44d5-be21-9e5225bf56fb.png",
+      "source": "art/source/field-kit-v1/antidote-master.png",
+      "sha256": "358047552d6fe2c19a1b03d5b9985a19f7814cd7fbee06dbf2cfbb319209e157"
+    },
+    {
+      "id": "leather-satchel",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Production inventory icon for Depths, a dark first-person cave crawler. Input images are STYLE REFERENCES ONLY: existing knife and leather garment. Match restrained weathered painted pixel clusters, broad readable silhouettes, 3-4 shades per material, muted umber/charcoal/slate/linen colours, no fine texture noise; intended 128x128 export and 64x64/40px display. One isolated object fully contained in square canvas with roughly 8% margin, no UI box or text. Neutral diffuse illumination and material shading, no scene lighting, glow, sparkle, ground or cast shadow. GENUINE TRANSPARENT BACKGROUND. No extra props, hands, letters, logo, watermark, fake checkerboard, 3D render or photographic detail. Subject: one modest soldier's LEATHER SATCHEL on a BROAD SHOULDER STRAP, viewed slightly from above and at a shallow three-quarter angle. Low horizontal rectangular brown leather bag with a single rounded flap, one dull iron buckle, one crooked stitched repair and rubbed corners. Broad shoulder strap forms a clear short loop above and behind the bag, kept entirely inside the image. Main bag fills the central lower area. Muted warm brown leather, very dark seams, plain iron hardware. This is a compact flat shoulder satchel, not a knapsack or coin pouch, no rolled blanket, bedroll, weapons, bottles, emblem or valuables. Strong simple flap silhouette readable at40px.",
+      "reference_images": [
+        "art/items/refined-v2/plain-knife.png",
+        "art/items/refined-v2/leather-jerkin.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-e1629015-b83a-4ef3-8343-72197717cfd4.png",
+      "source": "art/source/field-kit-v1/leather-satchel-master.png",
+      "sha256": "05f29829b9cfb5406f937cd535845a18bf67785a67e7ef71a2b65824052c11b9"
+    },
+    {
+      "id": "miners-frame-pack",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Production inventory icon for Depths, a dark first-person cave crawler. Input images are STYLE REFERENCES ONLY: existing knife and leather garment. Match restrained weathered painted pixel clusters, broad readable silhouettes, 3-4 shades per material, muted umber/charcoal/slate/linen colours, no fine texture noise; intended 128x128 export and 64x64/40px display. One isolated object fully contained in square canvas with roughly 8% margin, no UI box or text. Neutral diffuse illumination and material shading, no scene lighting, glow, sparkle, ground or cast shadow. GENUINE TRANSPARENT BACKGROUND. No extra props, hands, letters, logo, watermark, fake checkerboard, 3D render or photographic detail. Subject: one MINER'S FRAME PACK, a tall narrow canvas hauling bag lashed to a visible rough wooden external frame. Shallow three-quarter rear view exposes two upright wooden rails projecting a little above the top and a lower crossbar under the bag. Dusty olive-grey heavy canvas sack, deep folds, squared base, two broad dark leather carrying straps and coarse cord lashings. Taller than wide, unmistakable exposed wood frame and larger capacity than a flat satchel. Empty practical hauling gear with closed folded top, worn, patched and under-resourced; no ore, shovel, weapons, bedroll, bottles, jewels, brand, logo or symbols. Clear broad silhouette and sparse details.",
+      "reference_images": [
+        "art/items/refined-v2/plain-knife.png",
+        "art/items/refined-v2/leather-jerkin.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-b5cd27fc-4f6a-44c0-a0bb-7b3ba285abb5.png",
+      "source": "art/source/field-kit-v1/miners-frame-pack-master.png",
+      "sha256": "9097cc82939fae9b90a4dfb2d8eea868f292b316f26a29b73a4a030a2e79c0c3"
+    },
+    {
+      "id": "oilcloth-cloak",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Production inventory icon for Depths, a dark first-person cave crawler. Input images are STYLE REFERENCES ONLY: existing knife and leather garment. Match restrained weathered painted pixel clusters, broad readable silhouettes, 3-4 shades per material, muted umber/charcoal/slate/linen colours, no fine texture noise; intended 128x128 export and 64x64/40px display. One isolated object fully contained in square canvas with roughly 8% margin, no UI box or text. Neutral diffuse illumination and material shading, no scene lighting, glow, sparkle, ground or cast shadow. GENUINE TRANSPARENT BACKGROUND. No extra props, hands, letters, logo, watermark, fake checkerboard, 3D render or photographic detail. Subject: one EMPTY OILCLOTH CLOAK arranged as a hanging inventory garment, no wearer or mannequin. LONG NARROW asymmetric silhouette, a modest folded hood at the top, front opening with a single plain horn toggle, one side drawn slightly across the other, irregular worn lower hem. Very dark charcoal-olive waxed cloth, broad subdued slick highlights along three deep long folds, patched shoulder edge. Practical damp-cave rain cloak, not armour, not a magic or royal robe. Entire garment is visible; hem above bottom margin. No human head, face, hands or feet; no scene, insignia, trim, jewels, weapons, metal shoulders or decorative pattern. Keep its long pointed outline different from a short broad cape.",
+      "reference_images": [
+        "art/items/refined-v2/plain-knife.png",
+        "art/items/refined-v2/leather-jerkin.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-7946b8b6-3ad6-494f-8d4f-b00b681fa3b3.png",
+      "source": "art/source/field-kit-v1/oilcloth-cloak-master.png",
+      "sha256": "e971aa38a7540be1628bfca08671147f62ac622f6fada714b8877aaee5fbe26f"
+    },
+    {
+      "id": "heavy-wool-cape",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Production inventory icon for Depths, a dark first-person cave crawler. Input images are STYLE REFERENCES ONLY: existing knife and leather garment. Match restrained weathered painted pixel clusters, broad readable silhouettes, 3-4 shades per material, muted umber/charcoal/slate/linen colours, no fine texture noise; intended 128x128 export and 64x64/40px display. One isolated object fully contained in square canvas with roughly 8% margin, no UI box or text. Neutral diffuse illumination and material shading, no scene lighting, glow, sparkle, ground or cast shadow. GENUINE TRANSPARENT BACKGROUND. No extra props, hands, letters, logo, watermark, fake checkerboard, 3D render or photographic detail. Subject: one EMPTY HEAVY WOOL CAPE arranged as an inventory garment, no wearer or mannequin. BROAD SHORT rounded-shoulder silhouette with NO HOOD: a simple open neck hole and thick folded collar, plain dark wooden toggle on a short cord at throat, wide trapezoidal drape and softly curved bottom hem. Dusty medium GREY wool, thick blunt edges, three broad heavy folds, slight fraying at bottom, one rough darn. Clearly shorter and wider than a long rain cloak, simple ordinary warmth for the cave. Entire cape contained. Broad clustered shading, not hair texture or fur, no human figure, armour, jewels, insignia, gold, woven pattern, magical glow or extra props.",
+      "reference_images": [
+        "art/items/refined-v2/plain-knife.png",
+        "art/items/refined-v2/leather-jerkin.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-c41eaaef-c302-4575-8e61-fd8c79b60039.png",
+      "source": "art/source/field-kit-v1/heavy-wool-cape-master.png",
+      "sha256": "4a1e57555743cf6d9254a3509db3ee6b11149fc8b55b6d80c208d265475234d4"
+    }
+  ]
+}

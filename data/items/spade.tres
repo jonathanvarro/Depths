@@ -1,9 +1,11 @@
 [gd_resource type="Resource" script_class="SupplyItem" format=3]
 
+[ext_resource type="Texture2D" path="res://art/items/field-kit-v1/folding-spade.png" id="field_art"]
 [ext_resource type="Script" path="res://scripts/supply_item.gd" id="1"]
 
 [resource]
 script = ExtResource("1")
+icon = ExtResource("field_art")
 display_name = "Spade"
 description = "A soldier's folding spade, the blade nicked. With it you can clear a choked passage or dig where something lies buried."
 effect = 6

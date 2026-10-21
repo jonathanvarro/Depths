@@ -1,0 +1,17 @@
+{
+	"captures": [
+		"pack-leather-satchel-desktop",
+		"pack-oilcloth-cloak-desktop",
+		"pack-miners-pick-desktop",
+		"pack-antidote-desktop",
+		"pack-leather-satchel-phone",
+		"pack-oilcloth-cloak-phone",
+		"pack-miners-pick-phone",
+		"pack-antidote-phone",
+		"party-symbols-desktop",
+		"party-symbols-phone"
+	],
+	"checks": 89,
+	"failures": [],
+	"limits": "Existing Pack/PartyCard components, isolated from Main and saves. Phone dimensions on Windows, not physical iPhone."
+}

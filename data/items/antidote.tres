@@ -1,9 +1,11 @@
 [gd_resource type="Resource" script_class="SupplyItem" format=3]
 
+[ext_resource type="Texture2D" path="res://art/items/field-kit-v1/antidote.png" id="field_art"]
 [ext_resource type="Script" path="res://scripts/supply_item.gd" id="1"]
 
 [resource]
 script = ExtResource("1")
+icon = ExtResource("field_art")
 display_name = "Antidote"
 description = "Bitter salts folded in waxed paper. Clears spider venom from one hero, even mid-fight. Stirred into foul water, it makes it safe to drink."
 effect = 7

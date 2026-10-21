@@ -1,9 +1,11 @@
 [gd_resource type="Resource" script_class="Equipment" format=3]
 
+[ext_resource type="Texture2D" path="res://art/items/field-kit-v1/leather-satchel.png" id="field_art"]
 [ext_resource type="Script" path="res://scripts/equipment.gd" id="1_is0gh"]
 
 [resource]
 script = ExtResource("1_is0gh")
+icon = ExtResource("field_art")
 display_name = "Leather satchel"
 description = "A soldier's satchel on a broad strap. Room for a little more."
 attack_min = 0

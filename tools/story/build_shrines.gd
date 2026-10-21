@@ -25,6 +25,7 @@ const CHEST := 2
 func _boon(id: String, name: String, about: String, bane: bool, fights: int, effects: Dictionary) -> Boon:
 	var b := Boon.new()
 	b.display_name = name
+	b.icon = load("res://art/ui/boons-v2/%s.png" % id.replace("_", "-"))
 	b.description = about
 	b.bane = bane
 	b.fights = fights

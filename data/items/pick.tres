@@ -1,9 +1,11 @@
 [gd_resource type="Resource" script_class="SupplyItem" format=3]
 
+[ext_resource type="Texture2D" path="res://art/items/field-kit-v1/miners-pick.png" id="field_art"]
 [ext_resource type="Script" path="res://scripts/supply_item.gd" id="1"]
 
 [resource]
 script = ExtResource("1")
+icon = ExtResource("field_art")
 display_name = "Miner's pick"
 description = "A short miner's pick, its haft worn smooth by other hands. No use in a fight. With it you can work a seam, break through fallen rock, or smash something that ought to be smashed."
 effect = 6

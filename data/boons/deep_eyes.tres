@@ -1,9 +1,11 @@
 [gd_resource type="Resource" script_class="Boon" format=3]
 
+[ext_resource type="Texture2D" path="res://art/ui/boons-v2/deep-eyes.png" id="field_art"]
 [ext_resource type="Script" path="res://scripts/boon.gd" id="1_bblbi"]
 
 [resource]
 script = ExtResource("1_bblbi")
+icon = ExtResource("field_art")
 display_name = "Deep eyes"
 description = "Traps show before you step on them."
 reveals_traps = true

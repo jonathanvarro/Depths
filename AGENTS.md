@@ -109,6 +109,9 @@ Templates > Download and Install; already installed on the owner's PC).
   bands, waste-free refills) and supply counts; owned by PartyState.
 - `scripts/supply_item.gd` + `data/items/*.tres` – supply definitions
   (refill lantern / feed party / heal one, amounts, durations, use time).
+  Tools/treatments and the four back-slot items use `art/items/field-kit-v1`;
+  eleven specific boon/bane glyphs are in `art/ui/boons-v2` (#138).
+  Sources, builder bindings and native/display-size review: `docs/field-kit-art.md`.
 - `scripts/injury.gd` + `data/injuries/*.tres` – lasting injuries (max
   health penalty, extra step time, portrait overlay names). Companion holds
   `injuries` and `dressed`; F3 + K injures the first hero for testing.

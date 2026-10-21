@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Equipment" format=3]
 
+[ext_resource type="Texture2D" path="res://art/items/field-kit-v1/heavy-wool-cape.png" id="field_art"]
 [ext_resource type="Script" path="res://scripts/boon.gd" id="1_bbj4j"]
 [ext_resource type="Script" path="res://scripts/equipment.gd" id="2_xy01i"]
 
@@ -11,6 +12,7 @@ max_health = 2
 
 [resource]
 script = ExtResource("2_xy01i")
+icon = ExtResource("field_art")
 display_name = "Heavy wool cape"
 description = "Thick grey wool. Warmth is its own kind of strength down here."
 attack_min = 0
