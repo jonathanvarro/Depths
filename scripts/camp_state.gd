@@ -81,11 +81,13 @@ var gate_broken := false
 var queen_defeated := false
 var bounty_paid := false
 const QUEEN_BOUNTY := 50
-## The secured route (#79): once the party has reached floor 2 on this many
-## expeditions, the king's scouts will take them straight there - at a price.
+## The scouts' routes (#79; owner 2026-10-20): once the party has reached
+## a floor on this many expeditions, the king's scouts will take them
+## straight down to it - each floor its own route, dearer the deeper it goes.
 const ROUTE_AFTER := 2
-const ROUTE_PRICE := 40
-var floor2_reached := 0
+const ROUTE_PRICES := {2: 20, 3: 35, 4: 50}
+var floors_reached := {}  # depth -> expeditions that got at least that deep
+var floor2_reached := 0  # older saves' count, from when only floor 2 had a route
 ## Experience (#47): fight XP each floor can still teach this campaign, and
 ## the highest level any hero has taken (recruits join one below it).
 var xp_left := Progression.FLOOR_XP_LIMIT.duplicate()
@@ -248,15 +250,38 @@ func ready_on(hero: Companion) -> int:
 	return maxi(day, recovering.get(hero, day))
 
 
-func route_open() -> bool:
-	return floor2_reached >= ROUTE_AFTER
+## An expedition got down to `deepest`: it counts toward every route on the way.
+func record_depth(deepest: int) -> void:
+	for depth in ROUTE_PRICES:
+		if deepest >= depth:
+			floors_reached[depth] = times_reached(depth) + 1
 
 
-## Pays for the secured route. Returns false if it's not open or too dear.
-func buy_route(party) -> bool:
-	if not route_open() or party.supplies.gold < ROUTE_PRICE:
+## How many expeditions have reached `depth`.
+func times_reached(depth: int) -> int:
+	return maxi(floors_reached.get(depth, 0), floor2_reached if depth == 2 else 0)
+
+
+func route_open(depth := 2) -> bool:
+	return ROUTE_PRICES.has(depth) and times_reached(depth) >= ROUTE_AFTER
+
+
+## The floors the scouts will take the party to, shallowest first.
+func open_routes() -> Array:
+	var depths := ROUTE_PRICES.keys().filter(func(d): return route_open(d))
+	depths.sort()
+	return depths
+
+
+func route_price(depth: int) -> int:
+	return ROUTE_PRICES.get(depth, 0)
+
+
+## Pays for the route to `depth`. Returns false if it's not open or too dear.
+func buy_route(party, depth := 2) -> bool:
+	if not route_open(depth) or party.supplies.gold < route_price(depth):
 		return false
-	party.supplies.gold -= ROUTE_PRICE
+	party.supplies.gold -= route_price(depth)
 	party.supplies.changed.emit()
 	changed.emit()
 	return true

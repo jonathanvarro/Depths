@@ -214,12 +214,17 @@ func _camp_day() -> int:
 		return -1
 	camp.give_charity(party)
 	var start := 1
-	if camp.route_open() and _gold() >= CampState.ROUTE_PRICE + 20 and _mean_level() >= 1.5:
+	# The deepest route the party is ready for and can afford with gold to spare.
+	for depth: int in camp.open_routes():
+		if _gold() >= camp.route_price(depth) + 20 and _mean_level() >= depth - 0.5:
+			start = depth
+	if start > 1:
 		camp.take_gold(party)
-		if camp.buy_route(party):
-			stats["gold_spent"] += CampState.ROUTE_PRICE
+		if camp.buy_route(party, start):
+			stats["gold_spent"] += camp.route_price(start)
 			stats["route_bought"] += 1
-			start = 2
+		else:
+			start = 1
 	camp.store_gold(party)  # nothing carried is safe from a wipe
 	camp.leave_behind(party)
 	return start
@@ -333,8 +338,7 @@ func _expedition(start_depth: int) -> int:
 			if depth == 1:
 				break
 			_enter_floor(depth - 1, false)
-		if deepest >= 2:
-			camp.floor2_reached += 1
+		camp.record_depth(deepest)
 		stats["returns"] += 1
 		return 0
 	return 0

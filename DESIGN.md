@@ -284,7 +284,10 @@ Suggested initial presentation: one campsite screen with a few selectable activi
   - A draught goes to her first, and a rest brings her round.
   - In a full wipe the recruits are lost and she wakes at camp with 1 health and a deep wound.
   - The rule lives in `Companion.is_unconscious()` / main.gd `_main_heroes_wake_at_camp()`, so a permanent-loss rule can replace it.
-- **The secured route (#79):** after **two expeditions that reach floor 2**, the cave path offers the king's scouts' route straight to floor 2 for **40g a trip** (expensive by design; tune by playtest). Before that, the cave path shows progress.
+- **The scouts' routes (#79; revised by the owner 2026-10-20):** a floor's route opens after **two expeditions reach that floor**. Floors 2, 3 and 4 each have their own route, and the deeper the floor, the higher the price: **20g, 35g and 50g a trip**. These are first guesses, to tune by playtest.
+  - Reaching a deeper floor counts toward every route above it.
+  - The cave path lists each open route and shows progress toward the next one.
+  - This replaces the single floor-2 route at 40g, which the playtest bot never found worth buying (balance proposal 7).
 - **Room contents (#46):** enemies **ambush** and aren't shown.
   - Chests, objects and rest spots stand in their rooms. Unresolved traps need Keen eyes; their resolved remains are visible to everyone.
   - The goblin stash opens its cairn, the abandoned pack has a searched variant, and the strongbox has its own closed/opened iron-box art.

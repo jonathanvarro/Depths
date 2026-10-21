@@ -131,10 +131,10 @@ func _initialize() -> void:
 	await _head_down()
 	main._go_to_floor(2, main.Arrival.FROM_ABOVE)
 	await _to_camp()
-	check("one trip to floor 2 counted", camp.floor2_reached == 1)
+	check("one trip to floor 2 counted", camp.times_reached(2) == 1)
 	main._camp._buttons["cave"].pressed.emit()
 	await process_frame
-	check("the route isn't offered yet", not _body_text().contains("Secured route") and _body_text().contains("(1 of 2)"))
+	check("the route isn't offered yet", not _body_text().contains("Scouts' route") and _body_text().contains("(1 of 2)"))
 	await _head_down()
 	main._go_to_floor(2, main.Arrival.FROM_ABOVE)
 	await _to_camp()
@@ -143,9 +143,21 @@ func _initialize() -> void:
 	main._camp._buttons["cave"].pressed.emit()
 	await process_frame
 	await _snap("route")
-	check("after two trips the route is offered", _body_text().contains("scouts") or main._camp._body.find_children("*", "Button", true, false).any(func(b): return b.text.begins_with("Secured route")))
-	await _head_down("Secured route")
-	check("it costs 40g and starts on floor 2", ps.supplies.gold == 5 and main._depth == 2, "gold %d depth %d" % [ps.supplies.gold, main._depth])
+	check("after two trips the route is offered", main._camp._body.find_children("*", "Button", true, false).any(func(b): return b.text.begins_with("Scouts' route to floor 2")))
+	await _head_down("Scouts' route to floor 2")
+	check("it costs 20g and starts on floor 2", ps.supplies.gold == 25 and main._depth == 2, "gold %d depth %d" % [ps.supplies.gold, main._depth])
+	# Deeper routes (owner 2026-10-20): each floor its own, dearer the deeper.
+	var scouts = camp.get_script().new()
+	scouts.floor2_reached = 1  # an older save's count still counts
+	scouts.record_depth(3)
+	check("a trip to floor 3 counts for floor 2 as well", scouts.times_reached(2) == 2 and scouts.times_reached(3) == 1 and scouts.open_routes() == [2])
+	scouts.record_depth(4)
+	check("two trips to floor 3 open its route too", scouts.open_routes() == [2, 3], str(scouts.open_routes()))
+	check("deeper routes cost more", scouts.route_price(2) < scouts.route_price(3) and scouts.route_price(3) < scouts.route_price(4))
+	var purse = ps.get_script().new()
+	purse.supplies.gold = 30
+	check("a route you can't afford isn't bought", not scouts.buy_route(purse, 3) and purse.supplies.gold == 30)
+	check("floor 4's isn't open after one trip", not scouts.route_open(4))
 
 	# --- #52: Settings from the Pack.
 	main._set_pack(true)

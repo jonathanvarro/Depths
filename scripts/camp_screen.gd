@@ -734,16 +734,21 @@ func _cave_path() -> void:
 	var down := _button("Head back down")
 	down.pressed.connect(func(): cave_chosen.emit(1))
 	_body.add_child(down)
-	# The secured route (#79): straight to floor 2, for a price.
-	if _camp.route_open():
-		var route := _button("Secured route to floor 2 (%dg)" % CampState.ROUTE_PRICE)
-		route.disabled = _party.supplies.gold < CampState.ROUTE_PRICE
+	# The scouts' routes (#79): straight down to any floor they've marked,
+	# dearer the deeper it goes.
+	for depth: int in _camp.open_routes():
+		var price: int = _camp.route_price(depth)
+		var route := _button("Scouts' route to floor %d (%dg)" % [depth, price])
+		route.disabled = _party.supplies.gold < price
 		route.pressed.connect(func():
-			if _camp.buy_route(_party):
-				cave_chosen.emit(2))
+			if _camp.buy_route(_party, depth):
+				cave_chosen.emit(depth))
 		_body.add_child(route)
-	else:
-		_text("The king's scouts say: reach the second floor twice more, and they'll mark a safe way down to it - for a price. (%d of %d)" % [mini(_camp.floor2_reached, CampState.ROUTE_AFTER), CampState.ROUTE_AFTER], MUTED)
+	# The next route they'd mark.
+	for depth: int in CampState.ROUTE_PRICES:
+		if not _camp.route_open(depth) and (depth == 2 or _camp.times_reached(depth) > 0):
+			_text("The king's scouts say: reach floor %d twice, and they'll mark a safe way down to it - for a price. (%d of %d)" % [depth, _camp.times_reached(depth), CampState.ROUTE_AFTER], MUTED)
+			break
 
 
 func _unhandled_input(event: InputEvent) -> void:

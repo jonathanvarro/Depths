@@ -911,8 +911,7 @@ func _start_new_expedition() -> void:
 		if not hero.is_with_party():
 			_party_state.remove_member(hero)
 	_camp_state.rejoin(_party_state)
-	if _expedition.deepest >= 2:
-		_camp_state.floor2_reached += 1  # towards the secured route (#79)
+	_camp_state.record_depth(_expedition.deepest)  # towards the scouts' routes (#79)
 	var reward: int = _camp_state.collect_contract(_party_state)
 	var note := ""
 	if _camp_state.queen_defeated and not _camp_state.bounty_paid:
@@ -951,7 +950,8 @@ func _camp_loop(reward := 0, note := "") -> void:
 	_party.locked = false
 	_go_to_floor(start_depth, Arrival.FROM_ABOVE)
 	if start_depth > 1:
-		_expedition.visit_floor(1)
+		for depth in range(1, start_depth):
+			_expedition.visit_floor(depth)  # the scouts led them through
 		_show_message("Day %d. Expedition %d: the scouts' route, straight to floor %d." % [_camp_state.day, _expedition.number, start_depth])
 	else:
 		_show_message("Day %d. Expedition %d: back into the mine." % [_camp_state.day, _expedition.number])
