@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Equipment" format=3]
+
+[ext_resource type="Script" path="res://scripts/boon.gd" id="1_82dor"]
+[ext_resource type="Texture2D" path="res://art/items/refined-v2/amber-pendant.png" id="2_nj3xe"]
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="3_tuvdn"]
+[ext_resource type="Resource" path="res://data/items/amber_pendant.tres" id="4_ccs5r"]
+
+[sub_resource type="Resource" id="Resource_lc81w"]
+script = ExtResource("1_82dor")
+display_name = "Amber tear pendant"
+description = "+3 maximum health, the lantern burns 10% faster."
+max_health = 3
+oil_rate = 1.1
+
+[resource]
+script = ExtResource("3_tuvdn")
+display_name = "Amber tear pendant"
+description = "Warm against the skin, as if it kept a little of the sun."
+icon = ExtResource("2_nj3xe")
+attack_min = 0
+attack_max = 0
+slot = "trinket"
+effect = SubResource("Resource_lc81w")
+tier = "fine"
+treasure = ExtResource("4_ccs5r")

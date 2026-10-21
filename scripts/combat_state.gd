@@ -360,6 +360,12 @@ func hero_move(hero: Companion) -> String:
 
 func hero_hit_chance(hero: Companion) -> float:
 	var chance: float = hero.hit_accuracy() * hero.effectiveness() + LIGHT_ACCURACY[party.supplies.light_band()]
+	# A trinket or boon that favours bright light, and pays for the dark (#135).
+	match party.supplies.light_band():
+		Supplies.Light.BRIGHT:
+			chance += hero.boon_total("light_accuracy")
+		Supplies.Light.DIM, Supplies.Light.OUT:
+			chance -= hero.boon_total("light_accuracy")
 	if is_webbed(hero):
 		chance -= WEB_PENALTY
 	return clampf(chance, MIN_HIT_CHANCE, MAX_HIT_CHANCE)
@@ -393,6 +399,10 @@ func hero_attack(hero: Companion, target: Foe) -> Dictionary:
 			damage += 1  # Corin's grudge (#95)
 		if hero.has_talent("berserker") and hero.health * 2 < hero.effective_max_health():
 			damage += 2
+		if hero.health * 2 < hero.effective_max_health():
+			damage += int(hero.boon_total("low_health_damage"))  # a bloodstone (#135)
+		if hero.row == "back":
+			damage += int(hero.boon_total("back_row_damage"))  # a slinger's ring
 		if hero.has_talent("opening_shot") and not _opened.has(hero):
 			damage += 2
 		_opened[hero] = true
@@ -413,6 +423,10 @@ func hero_attack(hero: Companion, target: Foe) -> Dictionary:
 func hero_defend(hero: Companion) -> String:
 	_defending[hero] = true
 	_webbed.erase(hero)
+	var steadies: float = hero.boon_total("defend_steadies")  # a shield-bearer's token (#135)
+	if steadies > 0.0:
+		for member in party.living_members():
+			member.change_strain(-steadies)
 	return "%s braces, guarding the party." % hero.display_name
 
 
@@ -557,7 +571,7 @@ func hero_throw_torch(hero: Companion, target: Foe) -> Dictionary:
 		outcome["fled"] = true
 		outcome["text"] = "%s hurls the burning torch - the %s flees from the flames!" % [hero.display_name, target.name.to_lower()]
 	else:
-		var burn := rng.randi_range(TORCH_BURN.x, TORCH_BURN.y)
+		var burn := rng.randi_range(TORCH_BURN.x, TORCH_BURN.y) + int(hero.boon_total("torch_burn"))
 		target.health = maxi(0, target.health - burn)
 		outcome["damage"] = burn
 		outcome["killed"] = not target.is_alive()

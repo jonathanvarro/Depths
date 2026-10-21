@@ -36,6 +36,7 @@ const IRON_SWORD := preload("res://data/gear/iron_sword.tres")
 const ANTIDOTE := preload("res://data/items/antidote.tres")
 const HOLY_WATER := preload("res://data/items/holy_water.tres")
 const SPADE := preload("res://data/items/spade.tres")
+const Trinkets := preload("res://scripts/trinkets.gd")
 const DEEP_WOUND := preload("res://data/injuries/deep_wound.tres")
 
 const HEROES := {
@@ -65,6 +66,7 @@ var depth := 0
 var cell := Vector2i.ZERO
 var stats := {}
 var steps := 0
+var trinket_rng := RandomNumberGenerator.new()  # trinket drops (#135)
 
 
 func _initialize() -> void:
@@ -109,7 +111,7 @@ func _campaign(hero_path: String, run_seed: int, max_days: int) -> Dictionary:
 		"wipes_by_floor": {1: 0, 2: 0, 3: 0, 4: 0}, "first_arrival": {},
 		"gold_found": 0, "gold_contracts": 0, "gold_sold": 0, "gold_spent": 0, "bounty": 0,
 		"gate_tries": 0, "gate_day": 0, "queen_tries": 0, "queen_rounds": 0, "queen_day": 0,
-		"route_bought": 0, "lantern_day": 0, "boons": 0, "banes": 0, "banes_lifted": 0, "xp_spent_out_day": {}, "levels_at_end": [],
+		"route_bought": 0, "lantern_day": 0, "boons": 0, "banes": 0, "banes_lifted": 0, "trinkets_found": 0, "trinkets_worn": 0, "xp_spent_out_day": {}, "levels_at_end": [],
 		"treated": 0, "recruits_hired": 0, "quest_days": {}, "queen_attempts": [], "gate_attempts": [],
 	}
 	party = PS.new()
@@ -239,6 +241,7 @@ func _gold() -> int:
 
 func _shop() -> void:
 	camp.take_gold(party)
+	_wear_trinkets()
 	if camp.can_trade():
 		for item in party.supplies.items.duplicate():
 			while item.effect == SupplyItem.Effect.TREASURE and party.supplies.count(item) > 0:
@@ -280,6 +283,26 @@ func _shop() -> void:
 				if camp.buy_gear(party, IRON_SWORD):
 					stats["gold_spent"] += IRON_SWORD.price
 					party.equip(hero, IRON_SWORD)
+
+
+## A careful player wears what they can read: uniques first, then fine or
+## rare jewellery. Trinkets that might be cursed (gear that isn't unique)
+## are sold instead (#135).
+func _wear_trinkets() -> void:
+	for hero: Companion in party.living_members():
+		if hero.trinket:
+			continue
+		var uniques: Array = party.supplies.gear.filter(func(g: Equipment): return g.slot == "trinket" and g.tier == "unique")
+		if not uniques.is_empty():
+			party.wear(hero, uniques[0])
+			stats["trinkets_worn"] += 1
+			continue
+		for item: SupplyItem in party.supplies.items:
+			var trinket: Equipment = Trinkets.for_treasure(item) if party.supplies.count(item) > 0 else null
+			if trinket and trinket.tier in ["fine", "rare"]:
+				party.wear_treasure(hero, item)
+				stats["trinkets_worn"] += 1
+				break
 
 
 func _mean_level() -> float:
@@ -496,6 +519,9 @@ func _fortress() -> String:
 	if result == CS.Result.DEFEAT:
 		return "wiped"
 	camp.queen_defeated = true
+	var prize: Equipment = Trinkets.unique_reward(trinket_rng, [])  # her hoard (#135)
+	if prize:
+		party.supplies.gear.append(prize)
 	Quests.set_stage(camp, "queen_claim", Quests.Stage.RESOLVED)
 	camp.contract = {}
 	stats["queen_day"] = camp.day
@@ -643,6 +669,16 @@ func _fight(group: Array, kind: String) -> int:
 	if state.result == CS.Result.VICTORY:
 		stats["fights_won"] += 1
 		_award_xp(state, kind)
+		# Tougher foes sometimes leave a trinket (#135), as in the game.
+		for foe in state.foes:
+			if foe.health > 0:
+				continue
+			var find = Trinkets.drop(trinket_rng, depth, foe.type.max_health)
+			if find is Equipment and party.supplies.has_room_for_gear():
+				party.supplies.gear.append(find)
+				stats["trinkets_found"] += 1
+			elif find is SupplyItem and party.supplies.add_what_fits(find) > 0:
+				stats["trinkets_found"] += 1
 	elif state.result == CS.Result.RETREAT:
 		stats["fight_retreats"] += 1
 	return state.result
@@ -834,9 +870,10 @@ func _summarise(all: Dictionary) -> void:
 				_mean(runs.map(func(r): return r["gold_found"])), _mean(runs.map(func(r): return r["gold_contracts"])),
 				_mean(runs.map(func(r): return r["gold_sold"])), _mean(runs.map(func(r): return r["gold_spent"])),
 				runs.filter(func(r): return r["lantern_day"] > 0).size(), _mean(runs.map(func(r): return r["route_bought"]))])
-		print("  boons gained %.1f, banes gained %.1f, banes lifted %.1f per campaign (#133)" % [
+		print("  boons gained %.1f, banes gained %.1f, banes lifted %.1f per campaign (#133); trinkets found %.1f, worn %.1f (#135)" % [
 				_mean(runs.map(func(r): return r["boons"])), _mean(runs.map(func(r): return r["banes"])),
-				_mean(runs.map(func(r): return r["banes_lifted"]))])
+				_mean(runs.map(func(r): return r["banes_lifted"])), _mean(runs.map(func(r): return r["trinkets_found"])),
+				_mean(runs.map(func(r): return r["trinkets_worn"]))])
 		var gate_runs: Array = runs.filter(func(r): return r["gate_tries"] > 0)
 		var queen_runs: Array = runs.filter(func(r): return r["queen_tries"] > 0)
 		print("  gate: tried in %d runs (%.1f tries each), broken by day median %s" % [gate_runs.size(), _mean(gate_runs.map(func(r): return r["gate_tries"])),

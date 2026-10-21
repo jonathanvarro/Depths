@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="Equipment" format=3]
+
+[ext_resource type="Resource" path="res://data/trinkets/bone_charm.tres" id="1_wcqot"]
+[ext_resource type="Resource" path="res://data/boons/withering.tres" id="2_gxsmu"]
+[ext_resource type="Script" path="res://scripts/boon.gd" id="3_umauh"]
+[ext_resource type="Texture2D" path="res://art/items/refined-v2/silver-locket.png" id="4_vjvop"]
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="5_r17k8"]
+
+[sub_resource type="Resource" id="Resource_1e5pn"]
+script = ExtResource("3_umauh")
+display_name = "Bone-white charm"
+description = "Nerves fray 25% slower."
+strain_rate = 0.75
+
+[resource]
+script = ExtResource("5_r17k8")
+display_name = "Bone-white charm"
+description = "A carved bone, smooth and pale, on a cord."
+icon = ExtResource("4_vjvop")
+attack_min = 0
+attack_max = 0
+price = 40
+slot = "trinket"
+effect = SubResource("Resource_1e5pn")
+tier = "fine"
+curse = ExtResource("2_gxsmu")
+cleansed = ExtResource("1_wcqot")

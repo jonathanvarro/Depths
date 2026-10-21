@@ -125,6 +125,9 @@ var bleeding := false
 var pending_effects: Array[Dictionary] = []
 ## Boons and banes (#133): [{"boon": Boon, "fights_left": int}].
 var boons: Array[Dictionary] = []
+## A worn trinket (#135): its effect (and a cursed one's bane) counts like
+## a boon for as long as it's worn.
+@export var trinket: Equipment
 
 var _health_fraction := 0.0  # partial healing carried between time units
 
@@ -166,11 +169,23 @@ func add_boon(boon: Boon) -> void:
 
 
 func has_bane() -> bool:
-	return boons.any(func(b): return b["boon"].bane)
+	return boons.any(func(b): return b["boon"].bane) or is_cursed()
 
 
-## Lifts the first bane (holy water, the nurse). Returns it, or null.
+## Wearing a cursed trinket: it won't come off until cleansed (#135).
+func is_cursed() -> bool:
+	return trinket != null and trinket.curse != null
+
+
+## Lifts a bane (holy water, the nurse): a cursed trinket first - it's
+## cleansed for good - else the first bane. Returns it, or null.
 func lift_bane() -> Boon:
+	if is_cursed():
+		var curse: Boon = trinket.curse
+		trinket = trinket.cleansed
+		health = mini(health, effective_max_health())
+		emit_changed()
+		return curse
 	for entry in boons:
 		if entry["boon"].bane:
 			boons.erase(entry)
@@ -179,24 +194,37 @@ func lift_bane() -> Boon:
 	return null
 
 
-## The sum of a numeric effect over every boon and bane.
+## Every effect on this hero now: boons and banes, and a worn trinket's.
+func effects() -> Array[Boon]:
+	var all: Array[Boon] = []
+	for entry in boons:
+		all.append(entry["boon"])
+	if trinket:
+		if trinket.effect:
+			all.append(trinket.effect)
+		if trinket.curse:
+			all.append(trinket.curse)
+	return all
+
+
+## The sum of a numeric effect over every boon, bane and trinket.
 func boon_total(field: String) -> float:
 	var total := 0.0
-	for entry in boons:
-		total += float(entry["boon"].get(field))
+	for effect in effects():
+		total += float(effect.get(field))
 	return total
 
 
 ## The product of a multiplying effect (strain_rate, healing, oil_rate).
 func boon_product(field: String) -> float:
 	var product := 1.0
-	for entry in boons:
-		product *= float(entry["boon"].get(field))
+	for effect in effects():
+		product *= float(effect.get(field))
 	return product
 
 
 func boon_flag(field: String) -> bool:
-	return boons.any(func(b): return b["boon"].get(field))
+	return effects().any(func(e: Boon): return e.get(field))
 
 
 ## A fight is over: fight-long boons count down and fade.

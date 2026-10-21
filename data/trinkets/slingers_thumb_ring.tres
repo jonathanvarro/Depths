@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Equipment" format=3]
+
+[ext_resource type="Script" path="res://scripts/boon.gd" id="1_8ikx2"]
+[ext_resource type="Texture2D" path="res://art/items/refined-v2/gold-signet-ring.png" id="2_p4j2b"]
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="3_xrfcx"]
+
+[sub_resource type="Resource" id="Resource_0r8kf"]
+script = ExtResource("1_8ikx2")
+display_name = "Slinger's thumb-ring"
+description = "+1 damage from the back row."
+back_row_damage = 1
+
+[resource]
+script = ExtResource("3_xrfcx")
+display_name = "Slinger's thumb-ring"
+description = "Horn, worn smooth by a thousand releases."
+icon = ExtResource("2_p4j2b")
+attack_min = 0
+attack_max = 0
+price = 50
+slot = "trinket"
+effect = SubResource("Resource_0r8kf")
+tier = "unique"

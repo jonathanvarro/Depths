@@ -16,8 +16,8 @@ extends Resource
 @export var price := 0
 ## Reaches past the front row: usable from the back, hits enemies' back row (#72).
 @export var reach := false
-## "weapon" or "body" (armour, #93).
-@export_enum("weapon", "body") var slot := "weapon"
+## "weapon", "body" (armour, #93) or "trinket" (#135).
+@export_enum("weapon", "body", "trinket") var slot := "weapon"
 ## Body armour: taken off every blow (minimum 1), and how much it slows.
 @export var armour := 0
 @export var initiative_penalty := 0
@@ -27,3 +27,17 @@ extends Resource
 ## How it lands (spoils arrival, owner 2026-10-20): "slash" for blades,
 ## "smash" for clubs and maces, "pierce" for spears.
 @export_enum("slash", "smash", "pierce") var strike := "slash"
+
+@export_group("Trinket")
+## Trinkets (#135; owner 2026-10-21): what wearing it does, as long as it's
+## worn. Common: a benefit and a drawback; fine: a clear benefit, a small
+## drawback; rare: two benefits; unique: a playstyle buff.
+@export var effect: Boon
+@export_enum("common", "fine", "rare", "unique") var tier := "common"
+## Jewellery found as treasure is worn as this; taken off, it goes back to
+## the pack as that treasure (and still sells as treasure).
+@export var treasure: SupplyItem
+## A cursed trinket's hidden bane, shown only once worn. It can't be taken
+## off until cleansed (holy water, the nurse), when it becomes `cleansed`.
+@export var curse: Boon
+@export var cleansed: Equipment

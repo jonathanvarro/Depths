@@ -9,6 +9,7 @@ extends RefCounted
 signal changed
 
 const Supplies := preload("res://scripts/supplies.gd")
+const Trinkets := preload("res://scripts/trinkets.gd")
 const StrainRules := preload("res://scripts/strain.gd")
 const MAX_MEMBERS := 3
 ## Pack space (owner, 2026-10-21, #133): slots per hero, and never fewer
@@ -58,10 +59,13 @@ func update_capacity() -> void:
 ## The luckiest living hero bends coin flips (#77): [bonus, their name].
 func luck() -> Array:
 	var best: Companion = null
+	var best_luck := 0.0
 	for member in living_members():
-		if member.luck > 0.0 and (best == null or member.luck > best.luck):
+		var own: float = member.luck + member.boon_total("luck")  # a knucklebone (#135)
+		if own > 0.0 and (best == null or own > best_luck):
 			best = member
-	return [best.luck, best.display_name] if best else [0.0, ""]
+			best_luck = own
+	return [best_luck, best.display_name] if best else [0.0, ""]
 
 
 ## A living hero has this main-hero trait (#95).
@@ -157,6 +161,12 @@ func first_undressed_injured() -> Companion:
 func equip(hero: Companion, item: Equipment) -> void:
 	if item not in supplies.gear:
 		return
+	if item.slot == "trinket":  # #135
+		if hero.is_cursed():
+			return  # a cursed trinket won't come off
+		supplies.gear.erase(item)
+		_put_on(hero, item)
+		return
 	supplies.gear.erase(item)
 	if item.slot == "body":  # armour (#93)
 		if hero.body:
@@ -172,6 +182,58 @@ func equip(hero: Companion, item: Equipment) -> void:
 	hero.emit_changed()
 	supplies.changed.emit()
 	changed.emit()
+
+
+## Wears a piece of jewellery from the pack as its trinket (#135). Returns
+## a message ("" if it can't be worn): a cursed one reveals itself here.
+func wear_treasure(hero: Companion, item: SupplyItem) -> String:
+	var trinket: Equipment = Trinkets.for_treasure(item)
+	if trinket == null or hero.is_cursed() or not supplies.take(item):
+		return ""
+	return _put_on(hero, trinket)
+
+
+## Puts on a trinket carried as gear (a unique, or a cursed one). Returns
+## the message, or "" if it can't be worn now.
+func wear(hero: Companion, trinket: Equipment) -> String:
+	if trinket not in supplies.gear or trinket.slot != "trinket" or hero.is_cursed():
+		return ""
+	supplies.gear.erase(trinket)
+	return _put_on(hero, trinket)
+
+
+## Takes a trinket off, back into the pack. False if it's cursed.
+func take_off_trinket(hero: Companion) -> bool:
+	if hero.trinket == null or hero.is_cursed():
+		return false
+	_stow(hero.trinket)
+	hero.trinket = null
+	hero.health = mini(hero.health, hero.effective_max_health())
+	hero.emit_changed()
+	changed.emit()
+	return true
+
+
+func _put_on(hero: Companion, trinket: Equipment) -> String:
+	if hero.trinket:
+		_stow(hero.trinket)
+	hero.trinket = trinket
+	hero.health = mini(hero.health, hero.effective_max_health())
+	hero.emit_changed()
+	supplies.changed.emit()
+	changed.emit()
+	if trinket.curse:
+		return "The clasp bites as %s puts on the %s. Cursed with %s - and it won't come off." % [hero.display_name, trinket.display_name.to_lower(), trinket.curse.display_name.to_lower()]
+	return "%s puts on the %s." % [hero.display_name, trinket.display_name.to_lower()]
+
+
+## A trinket taken off goes back as the treasure it came from, or as gear.
+func _stow(trinket: Equipment) -> void:
+	if trinket.treasure:
+		supplies.add(trinket.treasure)
+	else:
+		supplies.gear.append(trinket)
+	supplies.changed.emit()
 
 
 ## Throws gear away for good.

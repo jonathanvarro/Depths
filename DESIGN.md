@@ -555,6 +555,35 @@ The core of the game is tradeoffs. Shrines and gambles leave lasting boons and b
   - **A fouled well** is safe with an antidote; drinking it without one is a gamble.
   - **A buried cache:** a spade digs it out cleanly, a pick wrecks some of it but finds ore, and bare hands risk a crushed hand.
 
+### Trinkets — decided 2026-10-21 (#135)
+
+Trinkets are wearable boons. They use the same effect list as boons and banes, so shrines and trinkets share one system.
+
+- **Slot:** one per hero to start. A second slot could later be a talent, for example for a merchant or treasure-hunter class.
+- **Swapping:** any time outside a fight.
+- **Tiers:**
+  - **Common:** a benefit and a drawback.
+  - **Fine:** a clear benefit and a small drawback.
+  - **Rare:** two benefits.
+  - **Unique:** a playstyle buff.
+- **Showing effects:** a trinket's effects show when found, except a cursed one's hidden bane.
+- **Wear it or sell it:** the jewellery in the treasure tables can be worn. Taken off, it goes back to the pack as treasure, so it still sells and still takes space.
+  - Common: the silver leaf brooch, the campaign medal and the silver sprig locket.
+  - Fine: the amber tear pendant and the gold signet.
+  - Rare: the gilt reliquary.
+- **Uniques**, from quests, the fortress and later layers only. For now the queen's hoard gives one.
+  - **Bloodstone:** +2 damage below half health.
+  - **Moth-wing brooch:** ±10% to hit in bright or dim light.
+  - **Slinger's thumb-ring:** +1 damage from the back row.
+  - **Ember ring:** thrown torches burn 3 more.
+  - **Gambler's knucklebone:** coin flips favour you, but ambushes come more often.
+  - **Shield-bearer's token:** defending steadies everyone's nerves.
+- **Cursed trinkets:** the black pearl ring, the bone-white charm and the goblin gold torc.
+  - They look like fine trinkets. Once worn they reveal a bane (Marked, Withering or Sickness), and they won't come off or be swapped.
+  - Holy water or the nurse (20g) cleanses one for good, leaving the good part.
+- **Where they drop:** tougher foes (10+ health) have a 12% chance to leave fine jewellery, or rare from floor 3. From floor 2, a quarter of those drops are cursed.
+- **Built with** `tools/story/build_trinkets.gd` into `data/trinkets/`. Icons borrow the jewellery art until new ones are drawn.
+
 ## Visual and audio direction
 
 Dark, gritty, grounded medieval fantasy. Stained stone, corroded metal, worn supplies, oppressive spaces, and scarce lantern light. Charcoal, dirty parchment, muted teal, rusty brown, and warm amber form the initial palette. Keep essential threats and interface elements readable.

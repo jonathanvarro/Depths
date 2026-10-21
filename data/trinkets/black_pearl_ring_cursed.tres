@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="Equipment" format=3]
+
+[ext_resource type="Resource" path="res://data/trinkets/black_pearl_ring.tres" id="1_uku4b"]
+[ext_resource type="Resource" path="res://data/boons/marked.tres" id="2_vun2h"]
+[ext_resource type="Script" path="res://scripts/boon.gd" id="3_ha04a"]
+[ext_resource type="Texture2D" path="res://art/items/refined-v2/pearl-necklace.png" id="4_v810l"]
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="5_6dell"]
+
+[sub_resource type="Resource" id="Resource_dy21j"]
+script = ExtResource("3_ha04a")
+display_name = "Black pearl ring"
+description = "+1 damage."
+damage = 1
+
+[resource]
+script = ExtResource("5_6dell")
+display_name = "Black pearl ring"
+description = "A black pearl, perfect, set in old silver."
+icon = ExtResource("4_v810l")
+attack_min = 0
+attack_max = 0
+price = 40
+slot = "trinket"
+effect = SubResource("Resource_dy21j")
+tier = "fine"
+curse = ExtResource("2_vun2h")
+cleansed = ExtResource("1_uku4b")

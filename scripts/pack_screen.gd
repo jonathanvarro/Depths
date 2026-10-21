@@ -13,6 +13,7 @@ signal used(message: String)
 
 const Supplies := preload("res://scripts/supplies.gd")
 const StrainRules := preload("res://scripts/strain.gd")
+const Trinkets := preload("res://scripts/trinkets.gd")
 const COLOR_TEXT := Color("e8d9b0")
 const COLOR_DIM_TEXT := Color(0.85, 0.8, 0.7, 0.65)
 const COLOR_OIL := Color("e8a84a")
@@ -152,6 +153,25 @@ func _add_gear_rows() -> void:
 				refresh())
 			row.add_child(away)
 		_list.add_child(row)
+		# Trinkets (#135): what it does, and taking it off (not if cursed).
+		if hero.trinket:
+			var charm_row := HBoxContainer.new()
+			charm_row.add_theme_constant_override("separation", 12)
+			var curse := ""
+			if hero.is_cursed():
+				curse = "  ·  cursed: %s, %s" % [hero.trinket.curse.display_name.to_lower(), hero.trinket.curse.effects_text()]
+			var charm := _label("    Wears the %s: %s%s" % [hero.trinket.display_name.to_lower(), hero.trinket.effect.effects_text(), curse], 16, COLOR_DIM_TEXT)
+			charm.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+			charm.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			charm_row.add_child(charm)
+			var off := _small_button("Take off" if not hero.is_cursed() else "Cursed")
+			off.disabled = hero.is_cursed()
+			off.tooltip_text = "Holy water or the nurse can lift the curse" if hero.is_cursed() else "Back into the pack"
+			off.pressed.connect(func():
+				_party.take_off_trinket(hero)
+				refresh())
+			charm_row.add_child(off)
+			_list.add_child(charm_row)
 	for item: Equipment in _party.supplies.gear:
 		var row := HBoxContainer.new()
 		row.add_theme_constant_override("separation", 12)
@@ -166,11 +186,17 @@ func _add_gear_rows() -> void:
 		var text := VBoxContainer.new()
 		text.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		var summary := "armour %d%s" % [item.armour, (", slower by %d" % item.initiative_penalty) if item.initiative_penalty > 0 else ""] if item.slot == "body" else "%d-%d" % [item.attack_min, item.attack_max]
+		if item.slot == "trinket":
+			summary = "%s trinket" % item.tier
 		text.add_child(_label("%s  (%s)" % [item.display_name, summary], 22, COLOR_TEXT))
 		var about := _label(item.description, 17, COLOR_DIM_TEXT)
 		about.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		text.add_child(about)
+		if item.slot == "trinket":
+			text.add_child(_label("Worn: " + item.effect.effects_text(), 16, COLOR_DIM_TEXT))
 		for hero in living:
+			if item.slot == "trinket":
+				break
 			var now := _numbers(hero, hero.weapon) if item.slot != "body" else _armour(hero, hero.body)
 			var then := _numbers(hero, item) if item.slot != "body" else _armour(hero, item)
 			var subject := "%s: " % hero.display_name if living.size() > 1 else ""
@@ -181,9 +207,15 @@ func _add_gear_rows() -> void:
 			var equip := _small_button("Equip" if living.size() == 1 else "Equip: %s" % hero.display_name)
 			if living.size() > 1:
 				equip.custom_minimum_size = Vector2(150, 44)
+			if item.slot == "trinket":
+				equip.text = "Wear" if living.size() == 1 else "Wear: %s" % hero.display_name
+				equip.disabled = hero.is_cursed()
 			equip.pressed.connect(func():
-				_party.equip(hero, item)
-				used.emit("%s takes up the %s." % [hero.display_name, item.display_name.to_lower()])
+				if item.slot == "trinket":
+					used.emit(_party.wear(hero, item))
+				else:
+					_party.equip(hero, item)
+					used.emit("%s takes up the %s." % [hero.display_name, item.display_name.to_lower()])
 				refresh())
 			buttons.add_child(equip)
 		var drop := _small_button("Drop")
@@ -247,6 +279,22 @@ func _item_row(item: SupplyItem) -> Control:
 	var about := _label(item.description, 17, COLOR_DIM_TEXT)
 	about.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	text.add_child(about)
+	# Jewellery can be worn as a trinket, or sold (#135).
+	var trinket: Equipment = Trinkets.for_treasure(item) if item.effect == SupplyItem.Effect.TREASURE else null
+	if trinket:
+		text.add_child(_label("Worn (%s): %s" % [trinket.tier, trinket.effect.effects_text()], 16, COLOR_DIM_TEXT))
+		var wearers := VBoxContainer.new()
+		wearers.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		var living: Array[Companion] = _party.living_members()
+		for hero in living:
+			var wear := _small_button("Wear" if living.size() == 1 else "Wear: %s" % hero.display_name)
+			wear.custom_minimum_size = Vector2(150, 44)
+			wear.disabled = hero.is_cursed()
+			wear.pressed.connect(func():
+				used.emit(_party.wear_treasure(hero, item))
+				refresh())
+			wearers.add_child(wear)
+		row.add_child(wearers)
 
 	var reason: String = _party.cannot_use_reason(item)
 	var button := Button.new()

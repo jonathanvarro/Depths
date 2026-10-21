@@ -8,6 +8,7 @@ const Dressing := preload("res://scripts/dressing.gd")
 const Landmarks := preload("res://scripts/landmarks.gd")
 const Ambience := preload("res://scripts/ambience.gd")
 const Recruits := preload("res://scripts/recruits.gd")
+const Trinkets := preload("res://scripts/trinkets.gd")
 const TURN_LEFT_ICON := preload("res://art/ui/controls-v1/turn-left.svg")
 const SPADE := preload("res://data/items/spade.tres")
 const PICK := preload("res://data/items/pick.tres")
@@ -362,6 +363,7 @@ var _dialogue_box: PanelContainer  # dialogue_box.gd
 var _last_line := ""
 var _last_spoke_at := -100.0
 var _said := {}  # one-off remarks already made
+var _rng := RandomNumberGenerator.new()  # trinket drops and rewards (#135)
 var _last_lost_remark := 0
 var _eyelid_top: ColorRect
 var _eyelid_bottom: ColorRect
@@ -392,6 +394,7 @@ func _ready() -> void:
 	_build_environment()
 	_cave_theme = environment_theme
 	_site_seed = floor_seed if floor_seed != 0 else randi()
+	_rng.randomize()
 	_first_seed = _site_seed
 	_camp_state.start(_first_seed, _party_state)
 	_camp_state.day_passed.connect(_on_camp_day_passed)
@@ -730,6 +733,8 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 				_loot_purse(foe)
 	if not spoils.is_empty():
 		await _spoils.play(spoils, _combat.last_blow, Settings.get_value("flashes"))
+	if result == CombatState.Result.VICTORY:
+		_trinket_drops(state)
 	await _stage.exit()  # the fog sinks back; the cave returns
 	_play_place_music()
 	for foe in state.foes:
@@ -803,6 +808,30 @@ func _gather_spoils(state) -> Dictionary:
 	if gold == 0 and heroes.is_empty() and note == "":
 		return {}
 	return {"gold": gold, "heroes": heroes, "note": note, "contract": contract}
+
+
+## Tougher foes sometimes leave a trinket (#135): fine or rare jewellery,
+## or on floors 2+ a cursed one. Into the pack if there's room.
+func _trinket_drops(state) -> void:
+	if _in_opening or _depth < 1:
+		return
+	for foe in state.foes:
+		if foe.health > 0:
+			continue
+		var find = Trinkets.drop(_rng, _depth, foe.type.max_health)
+		if find == null:
+			continue
+		var name: String = find.display_name.to_lower()
+		if find is Equipment:
+			if not _party_state.supplies.has_room_for_gear():
+				_show_message("The %s wore a %s, but there's no room in the pack." % [foe.type.display_name.to_lower(), name])
+				continue
+			_party_state.supplies.gear.append(find)
+			_party_state.supplies.changed.emit()
+		elif _party_state.supplies.add_what_fits(find) == 0:
+			_show_message("The %s wore a %s, but there's no room in the pack." % [foe.type.display_name.to_lower(), name])
+			continue
+		_show_message("The %s wore a %s. It's in the pack." % [foe.type.display_name.to_lower(), name])
 
 
 ## The fight's experience for the party, drawn from the floor's allowance.
@@ -1337,8 +1366,19 @@ func _queen_defeated() -> void:
 	_camp_state.contract = {}
 	_save_now()
 	_party.locked = true
+	# Her hoard holds something unique (#135).
+	var owned: Array = _party_state.members.map(func(h): return h.trinket) + _party_state.supplies.gear
+	var prize: Equipment = Trinkets.unique_reward(_rng, owned)
+	if prize:
+		if _party_state.supplies.has_room_for_gear():
+			_party_state.supplies.gear.append(prize)
+		else:
+			_camp_state.stash.gear.append(prize)  # carried up for you
+		_party_state.supplies.changed.emit()
 	_results.show_brief("The goblin queen is dead",
-			"Her guards scatter into the dark and the drums fall silent. The fortress is broken. The king's camp will want to hear of this - and pay for it.",
+			"Her guards scatter into the dark and the drums fall silent. The fortress is broken. The king's camp will want to hear of this - and pay for it." + ("
+
+In her hoard: the %s." % prize.display_name.to_lower() if prize else ""),
 			"Continue",preload("res://art/illustrations/fortress-v1/victory.png"))
 	await _results.continue_pressed
 	_results.visible = false

@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Equipment" format=3]
+
+[ext_resource type="Script" path="res://scripts/boon.gd" id="1_1vtex"]
+[ext_resource type="Texture2D" path="res://art/items/refined-v2/gold-signet-ring.png" id="2_x56xf"]
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="3_hoqid"]
+[ext_resource type="Resource" path="res://data/items/gold_signet_ring.tres" id="4_cg4is"]
+
+[sub_resource type="Resource" id="Resource_8725x"]
+script = ExtResource("1_1vtex")
+display_name = "Worn gold signet"
+description = "+1 damage, nerves fray 10% faster."
+damage = 1
+strain_rate = 1.1
+
+[resource]
+script = ExtResource("3_hoqid")
+display_name = "Worn gold signet"
+description = "A noble's seal, heavy on the hand. Your blows land heavier too."
+icon = ExtResource("2_x56xf")
+attack_min = 0
+attack_max = 0
+slot = "trinket"
+effect = SubResource("Resource_8725x")
+tier = "fine"
+treasure = ExtResource("4_cg4is")

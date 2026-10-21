@@ -219,6 +219,11 @@ func refresh() -> void:
 	if companion.is_alive() and companion.is_hungry():
 		var starving := companion.hunger >= StrainRules.STARVING_AFTER
 		_add_condition(RATION.icon, Color("e0542f") if starving else Color.WHITE, ("Starving" if starving else "Hungry") + ": nerves fray faster. Eat a ration.")
+	# A worn trinket (#135), and its curse if it has one.
+	if companion.trinket:
+		_add_condition(companion.trinket.icon, Color.WHITE, "Wears the %s: %s" % [companion.trinket.display_name.to_lower(), companion.trinket.effect.effects_text()])
+		if companion.is_cursed():
+			_add_condition(BOON_MARKS[true], Color.WHITE, "Cursed - %s: %s It won't come off until it's cleansed." % [companion.trinket.curse.display_name, companion.trinket.curse.description])
 	# Boons and banes (#133): what they do and how long they last.
 	for entry in companion.boons:
 		var boon: Boon = entry["boon"]

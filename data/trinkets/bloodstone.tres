@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Equipment" format=3]
+
+[ext_resource type="Script" path="res://scripts/boon.gd" id="1_whcy5"]
+[ext_resource type="Texture2D" path="res://art/items/refined-v2/garnet.png" id="2_bag8s"]
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="3_vhbvv"]
+
+[sub_resource type="Resource" id="Resource_0j3li"]
+script = ExtResource("1_whcy5")
+display_name = "Bloodstone"
+description = "+2 damage below half health."
+low_health_damage = 2
+
+[resource]
+script = ExtResource("3_vhbvv")
+display_name = "Bloodstone"
+description = "A red stone that warms as you bleed."
+icon = ExtResource("2_bag8s")
+attack_min = 0
+attack_max = 0
+price = 50
+slot = "trinket"
+effect = SubResource("Resource_0j3li")
+tier = "unique"

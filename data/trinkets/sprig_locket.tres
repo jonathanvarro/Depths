@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Equipment" format=3]
+
+[ext_resource type="Script" path="res://scripts/boon.gd" id="1_rhkpp"]
+[ext_resource type="Texture2D" path="res://art/items/refined-v2/silver-locket.png" id="2_f7n3b"]
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="3_x6i64"]
+[ext_resource type="Resource" path="res://data/items/silver_locket.tres" id="4_el7lb"]
+
+[sub_resource type="Resource" id="Resource_fh03v"]
+script = ExtResource("1_rhkpp")
+display_name = "Silver sprig locket"
+description = "-5% to hit, healing +25%."
+accuracy = -0.05
+healing = 1.25
+
+[resource]
+script = ExtResource("3_x6i64")
+display_name = "Silver sprig locket"
+description = "A pressed sprig of herb inside. The smell is a comfort; the clasp catches your sleeve."
+icon = ExtResource("2_f7n3b")
+attack_min = 0
+attack_max = 0
+slot = "trinket"
+effect = SubResource("Resource_fh03v")
+treasure = ExtResource("4_el7lb")

@@ -565,8 +565,11 @@ func _nurse() -> void:
 	for hero: Companion in _party.living_members():
 		if not hero.has_bane():
 			continue
-		var bane: Boon = hero.boons.filter(func(b): return b["boon"].bane)[0]["boon"]
-		_text("%s still carries %s: %s" % [hero.display_name, bane.display_name.to_lower(), bane.description], AMBER)
+		if hero.is_cursed():  # a cursed trinket (#135) is lifted first
+			_text("%s can't take off the %s: %s" % [hero.display_name, hero.trinket.display_name.to_lower(), hero.trinket.curse.description], AMBER)
+		else:
+			var bane: Boon = hero.boons.filter(func(b): return b["boon"].bane)[0]["boon"]
+			_text("%s still carries %s: %s" % [hero.display_name, bane.display_name.to_lower(), bane.description], AMBER)
 		var lift := _button("Lift it (%dg)" % CampState.LIFT_BANE_PRICE)
 		lift.disabled = _party.supplies.gold < CampState.LIFT_BANE_PRICE
 		lift.pressed.connect(func():

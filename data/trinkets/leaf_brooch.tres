@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Equipment" format=3]
+
+[ext_resource type="Script" path="res://scripts/boon.gd" id="1_t6eig"]
+[ext_resource type="Texture2D" path="res://art/items/refined-v2/silver-trinket.png" id="2_7wfbq"]
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="3_f3f45"]
+[ext_resource type="Resource" path="res://data/items/silver_trinket.tres" id="4_vp1b7"]
+
+[sub_resource type="Resource" id="Resource_nvuce"]
+script = ExtResource("1_t6eig")
+display_name = "Silver leaf brooch"
+description = "+6% to hit, nerves fray 20% faster."
+accuracy = 0.06
+strain_rate = 1.2
+
+[resource]
+script = ExtResource("3_f3f45")
+display_name = "Silver leaf brooch"
+description = "A light thing to wear. The eye goes to it, and from it."
+icon = ExtResource("2_7wfbq")
+attack_min = 0
+attack_max = 0
+slot = "trinket"
+effect = SubResource("Resource_nvuce")
+treasure = ExtResource("4_vp1b7")

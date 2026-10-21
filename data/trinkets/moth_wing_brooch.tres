@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Equipment" format=3]
+
+[ext_resource type="Script" path="res://scripts/boon.gd" id="1_xi3py"]
+[ext_resource type="Texture2D" path="res://art/items/refined-v2/silver-trinket.png" id="2_4habm"]
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="3_5p62a"]
+
+[sub_resource type="Resource" id="Resource_xivjv"]
+script = ExtResource("1_xi3py")
+display_name = "Moth-wing brooch"
+description = "+10% to hit in bright light, -10% in dim light."
+light_accuracy = 0.1
+
+[resource]
+script = ExtResource("3_5p62a")
+display_name = "Moth-wing brooch"
+description = "Dust-grey wings in silver. It loves the light, and hates the dark."
+icon = ExtResource("2_4habm")
+attack_min = 0
+attack_max = 0
+price = 50
+slot = "trinket"
+effect = SubResource("Resource_xivjv")
+tier = "unique"

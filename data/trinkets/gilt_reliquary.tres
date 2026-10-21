@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Equipment" format=3]
+
+[ext_resource type="Script" path="res://scripts/boon.gd" id="1_8xt51"]
+[ext_resource type="Texture2D" path="res://art/items/refined-v2/small-reliquary.png" id="2_jgey1"]
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="3_okqmm"]
+[ext_resource type="Resource" path="res://data/items/small_reliquary.tres" id="4_o76gt"]
+
+[sub_resource type="Resource" id="Resource_0dqt7"]
+script = ExtResource("1_8xt51")
+display_name = "Gilt reliquary"
+description = "+2 maximum health, nerves fray 25% slower."
+max_health = 2
+strain_rate = 0.75
+
+[resource]
+script = ExtResource("3_okqmm")
+display_name = "Gilt reliquary"
+description = "A saint's knuckle in gold. Whoever's it was, they were steady."
+icon = ExtResource("2_jgey1")
+attack_min = 0
+attack_max = 0
+slot = "trinket"
+effect = SubResource("Resource_0dqt7")
+tier = "rare"
+treasure = ExtResource("4_o76gt")

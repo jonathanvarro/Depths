@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Equipment" format=3]
+
+[ext_resource type="Script" path="res://scripts/boon.gd" id="1_tn3ne"]
+[ext_resource type="Texture2D" path="res://art/items/refined-v2/old-coin-purse.png" id="2_8airx"]
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="3_rprwm"]
+
+[sub_resource type="Resource" id="Resource_42jva"]
+script = ExtResource("1_tn3ne")
+display_name = "Gambler's knucklebone"
+description = "Ambushes come more often, coin flips favour you."
+draws_ambush = true
+luck = 0.15
+
+[resource]
+script = ExtResource("3_rprwm")
+display_name = "Gambler's knucklebone"
+description = "Rolled in a hundred taverns. It wins more than it should, and draws the wrong eyes."
+icon = ExtResource("2_8airx")
+attack_min = 0
+attack_max = 0
+price = 50
+slot = "trinket"
+effect = SubResource("Resource_42jva")
+tier = "unique"

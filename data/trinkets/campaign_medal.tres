@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Equipment" format=3]
+
+[ext_resource type="Script" path="res://scripts/boon.gd" id="1_gws4v"]
+[ext_resource type="Texture2D" path="res://art/items/refined-v2/military-medal.png" id="2_xce6j"]
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="3_klea7"]
+[ext_resource type="Resource" path="res://data/items/military_medal.tres" id="4_mty5c"]
+
+[sub_resource type="Resource" id="Resource_nnraf"]
+script = ExtResource("1_gws4v")
+display_name = "Faded campaign medal"
+description = "-2 maximum health, nerves fray 25% slower."
+max_health = -2
+strain_rate = 0.75
+
+[resource]
+script = ExtResource("3_klea7")
+display_name = "Faded campaign medal"
+description = "Someone else's courage, pinned on. It helps, a little. It weighs, a little."
+icon = ExtResource("2_xce6j")
+attack_min = 0
+attack_max = 0
+slot = "trinket"
+effect = SubResource("Resource_nnraf")
+treasure = ExtResource("4_mty5c")
