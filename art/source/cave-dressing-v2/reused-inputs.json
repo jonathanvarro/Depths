@@ -1,0 +1,22 @@
+{
+  "res://art/textures/descent-walls-v1/buried-city.png": "98801cbaaaa2f8d857e0dcdd4f9063c76e8120c496d89c35da28df725cb8dffd",
+  "res://art/textures/descent-walls-v1/drowned-masonry.png": "bea4e642b4fe0a8e38cb7832a6774002f212aca970a2ae7775f94537e75fc14a",
+  "res://art/textures/descent-walls-v1/fungal-stone.png": "761d0c6597d50d048852f06142d8fb0e45c042ff1f13737d00aea436da7bb4e0",
+  "res://art/textures/descent-walls-v1/goblin-hold.png": "27dd34be997b8865bc5fa3ccae13748f2db973d66fb17c1d383dd787004042d0",
+  "res://art/textures/descent-walls-v1/sealed-temple.png": "faf3233b789d93af614512f23eab43a9d11a59ecdf41bd1fca9d01e3cb1c6364",
+  "res://art/textures/descent-walls-v1/worked-cave.png": "abb1a323af53226cf84aa9c077d298cfd2b421d2869c232827c9daca0bccac00",
+  "res://art/textures/descent-walls-v1/buried-city.tres": "4ffa64e2f46f5298b496a8eb8636055c4c15f9b7d782b734e3a7400a40201363",
+  "res://art/textures/descent-walls-v1/drowned-masonry.tres": "dfeb5ee1b82867aecdef1925d20b9c554b78497dfaa4d9ba3a8705e4cd512719",
+  "res://art/textures/descent-walls-v1/fungal-stone.tres": "a1391a54da93e896c66a54eb341a921282971d07870d2b9f16b284502077ff61",
+  "res://art/textures/descent-walls-v1/goblin-hold.tres": "fa8c073b612bc018df675816d36c4f37219a9158982486d1dd1b74921362f393",
+  "res://art/textures/descent-walls-v1/sealed-temple.tres": "c6ffe6de86249c0e265a2b7e5e0e1c3c7b3742f9d917b05f341481878b8eff22",
+  "res://art/textures/descent-walls-v1/worked-cave.tres": "b022a258a5021e870c4a7ca7338514b37785b1fb6ba2f67e2b58d34e1a19b080",
+  "res://themes/cave.tres": "7d07f58bbec286996bd6fd305c3f85b642a3ddf125ef91e47ca449a88f7210b8",
+  "res://themes/fortress.tres": "6b04ff584762318be0fd6404563b94a9cdbc4fd91bed4b981937f267482c8c00",
+  "res://themes/stone.tres": "94d93fceae9f40e7fb9f57c296a1790f28894d303480ea9f7f6b9f96cfef841a",
+  "res://scripts/level_builder.gd": "f0044545d699609d1254fe496600ccc678492614f298f7fe0e326da00b24daf2",
+  "res://scripts/dressing.gd": "01ad7e242d1caf05431859d312aaa49afd017445f58d4035f1a1724b333b0fbe",
+  "res://art/dressing/cave-v1/pale-mushrooms.png": "a900c69c0b2d8215b3841f7cbbaa275505e317fbfbff989cc6a1622094c94dde",
+  "res://art/dressing/cave-v1/wall-fungus.png": "8ee74598ac328368c0e657d3077c26f122f5279ffdfff57b518a92b7d64086b2",
+  "res://art/effects/ambient-v1/drip.tres": "91c99ff1f7a3adc1832957753b2586dd28227ed39ae93f82bdb98f0f2ded1650"
+}

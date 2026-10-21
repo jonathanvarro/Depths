@@ -1,0 +1,839 @@
+{
+  "issue": 139,
+  "cell_metres": 2,
+  "wall_metres": 2.4,
+  "colour_limit_per_piece": 64,
+  "placement": "Library only; live themes, placement, events, collisions, saves and light/nerves rules unchanged. Later floor ranges are proposals.",
+  "reuses": [
+    "art/dressing/landmarks-v1 roots",
+    "art/dressing/cave-v1/wall-fungus and ambient-v1 pulse"
+  ],
+  "clue_ink": "res://art/dressing/cave-v2/stranger-mark-ink.png",
+  "assets": [
+    {
+      "id": "moss-curtain",
+      "mount": "ceiling",
+      "measured_axis": "width",
+      "metres": 1.1,
+      "canvas": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        36
+      ],
+      "pixel_size": 0.009821428571428573,
+      "floors": [
+        2,
+        3
+      ],
+      "floor_status": "existing floor range",
+      "family": "fungal-stone",
+      "source": "res://art/source/cave-dressing-v2/moss-curtain-master.png",
+      "source_sha256": "1b802445eae65ff6733fbe9350da50300d73567b3072869953e5fe11c94ff396",
+      "texture": "res://art/dressing/cave-v2/moss-curtain.png",
+      "sha256": "e0dd8d8943e7047a45f1f6616b0a6dd5def29d70b069870d17382654b976fe1f",
+      "scene": "res://art/dressing/cave-v2/moss-curtain.tscn",
+      "opacity": 1,
+      "collision": false,
+      "interactive": false,
+      "source_bounds": [
+        40,
+        241,
+        1213,
+        828
+      ],
+      "scale": 0.09548167092924126,
+      "offset": [
+        8,
+        36
+      ],
+      "glow_scene": "res://art/dressing/cave-v2/moss-curtain-lit.tscn",
+      "glow_frames": "res://art/dressing/cave-v2/moss-curtain-pulse.tres",
+      "emission_mask": "res://art/dressing/cave-v2/moss-curtain-emission.png"
+    },
+    {
+      "id": "old-remains",
+      "mount": "floor-edge",
+      "measured_axis": "width",
+      "metres": 0.85,
+      "canvas": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        90
+      ],
+      "pixel_size": 0.007589285714285714,
+      "floors": [
+        1,
+        4
+      ],
+      "floor_status": "existing floor range",
+      "family": "worked-cave",
+      "source": "res://art/source/cave-dressing-v2/old-remains-master.png",
+      "source_sha256": "db4f7d2db5878693ec10a8214f5116d45aa1662f24e5c1a79bcb4527c7764da7",
+      "texture": "res://art/dressing/cave-v2/old-remains.png",
+      "sha256": "bd6381f8a8a886a919d3486b398560276e8c899f497c3fc6bf371de7a716d02f",
+      "scene": "res://art/dressing/cave-v2/old-remains.tscn",
+      "opacity": 1,
+      "collision": false,
+      "interactive": false,
+      "source_bounds": [
+        93,
+        193,
+        1443,
+        834
+      ],
+      "scale": 0.08296296296296296,
+      "offset": [
+        8,
+        37
+      ]
+    },
+    {
+      "id": "mine-ring-chain",
+      "mount": "wall",
+      "measured_axis": "height",
+      "metres": 0.6,
+      "canvas": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "pixel_size": 0.005357142857142857,
+      "floors": [
+        1,
+        1
+      ],
+      "floor_status": "existing floor range",
+      "family": "worked-cave",
+      "source": "res://art/source/cave-dressing-v2/mine-ring-chain-master.png",
+      "source_sha256": "b6f88f5b5342e862d3875fa8bb0c5bac51d5c11ff67e1b5f3678bdbb37e5e01a",
+      "texture": "res://art/dressing/cave-v2/mine-ring-chain.png",
+      "sha256": "85f4588091e671f9cf73903a40936ce419a34b55d131f5bf46172c09f836badb",
+      "scene": "res://art/dressing/cave-v2/mine-ring-chain.tscn",
+      "opacity": 1,
+      "collision": false,
+      "interactive": false,
+      "source_bounds": [
+        433,
+        88,
+        896,
+        1194
+      ],
+      "scale": 0.10126582278481013,
+      "offset": [
+        40,
+        8
+      ],
+      "suggested_wall_height": 1.4
+    },
+    {
+      "id": "broken-rail-end",
+      "mount": "wall",
+      "measured_axis": "height",
+      "metres": 0.55,
+      "canvas": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "pixel_size": 0.0049107142857142865,
+      "floors": [
+        1,
+        1
+      ],
+      "floor_status": "existing floor range",
+      "family": "worked-cave",
+      "source": "res://art/source/cave-dressing-v2/broken-rail-end-master.png",
+      "source_sha256": "8d4a18114fbf4bd58d70e31ad80b2d60e8347ca28f486f12c7ff0f136b1cd503",
+      "texture": "res://art/dressing/cave-v2/broken-rail-end.png",
+      "sha256": "511de708aa14589ba145b4203db2b25a16d56d762667ab5e155057ccbbf8232b",
+      "scene": "res://art/dressing/cave-v2/broken-rail-end.tscn",
+      "opacity": 1,
+      "collision": false,
+      "interactive": false,
+      "source_bounds": [
+        232,
+        225,
+        1096,
+        1127
+      ],
+      "scale": 0.12416851441241686,
+      "offset": [
+        10,
+        8
+      ],
+      "suggested_wall_height": 0.6
+    },
+    {
+      "id": "lantern-hook",
+      "mount": "wall",
+      "measured_axis": "height",
+      "metres": 0.35,
+      "canvas": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "pixel_size": 0.0031249999999999997,
+      "floors": [
+        1,
+        1
+      ],
+      "floor_status": "existing floor range",
+      "family": "worked-cave",
+      "source": "res://art/source/cave-dressing-v2/lantern-hook-master.png",
+      "source_sha256": "816e715a5c37610cf5f396a0e72e54746236af0ca752df41822c93ed55196fa7",
+      "texture": "res://art/dressing/cave-v2/lantern-hook.png",
+      "sha256": "9fdd930c7d67be59cacf081e12795ea2d79c3c80ee1735e03997461245f57f7b",
+      "scene": "res://art/dressing/cave-v2/lantern-hook.tscn",
+      "opacity": 1,
+      "collision": false,
+      "interactive": false,
+      "source_bounds": [
+        271,
+        277,
+        985,
+        990
+      ],
+      "scale": 0.1568627450980392,
+      "offset": [
+        8,
+        8
+      ],
+      "suggested_wall_height": 1.5
+    },
+    {
+      "id": "goblin-hide",
+      "mount": "wall",
+      "measured_axis": "height",
+      "metres": 0.8,
+      "canvas": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "pixel_size": 0.0071428571428571435,
+      "floors": [
+        3,
+        4
+      ],
+      "floor_status": "existing floor range",
+      "family": "goblin-hold",
+      "source": "res://art/source/cave-dressing-v2/goblin-hide-master.png",
+      "source_sha256": "da69232a6ee3894cd98d71597094b86e3cbd8ab6ecdc44b6b01fa3fcc97abf89",
+      "texture": "res://art/dressing/cave-v2/goblin-hide.png",
+      "sha256": "ff248916985a38b59414faadf006e22d67cdc146e09fdaffbe8b1ffd5bd02177",
+      "scene": "res://art/dressing/cave-v2/goblin-hide.tscn",
+      "opacity": 1,
+      "collision": false,
+      "interactive": false,
+      "source_bounds": [
+        57,
+        51,
+        1195,
+        1215
+      ],
+      "scale": 0.09621993127147767,
+      "offset": [
+        9,
+        8
+      ],
+      "suggested_wall_height": 1.25
+    },
+    {
+      "id": "goblin-banner",
+      "mount": "wall",
+      "measured_axis": "height",
+      "metres": 0.95,
+      "canvas": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "pixel_size": 0.008715596330275228,
+      "floors": [
+        3,
+        4
+      ],
+      "floor_status": "existing floor range",
+      "family": "goblin-hold",
+      "source": "res://art/source/cave-dressing-v2/goblin-banner-master.png",
+      "source_sha256": "0074d9b02f826efa6f9ca4a57edd8a827640ebac2c1d6c2937dd60939105003b",
+      "texture": "res://art/dressing/cave-v2/goblin-banner.png",
+      "sha256": "aa210644aec0e6107abe62a1502a718a9c06bb91a66bb6a2582b764f5ad6bbd1",
+      "scene": "res://art/dressing/cave-v2/goblin-banner.tscn",
+      "opacity": 1,
+      "collision": false,
+      "interactive": false,
+      "source_bounds": [
+        173,
+        63,
+        1082,
+        1200
+      ],
+      "scale": 0.09850483729111698,
+      "offset": [
+        19,
+        8
+      ],
+      "suggested_wall_height": 1.4
+    },
+    {
+      "id": "wall-spikes",
+      "mount": "wall",
+      "measured_axis": "width",
+      "metres": 0.85,
+      "canvas": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "pixel_size": 0.007589285714285714,
+      "floors": [
+        4,
+        4
+      ],
+      "floor_status": "existing floor range",
+      "family": "goblin-hold",
+      "source": "res://art/source/cave-dressing-v2/wall-spikes-pointed-master.png",
+      "source_sha256": "adbe8573ed315c5bf90040bd835ba31628a49ff023d7db052a636a0e95b34cf8",
+      "texture": "res://art/dressing/cave-v2/wall-spikes.png",
+      "sha256": "e43cd48b7d2b51cfbd8a26386e39e7aacf895ab37aee0d2cf877b1f428991fe7",
+      "scene": "res://art/dressing/cave-v2/wall-spikes.tscn",
+      "opacity": 1,
+      "collision": false,
+      "interactive": false,
+      "source_bounds": [
+        43,
+        415,
+        1211,
+        842
+      ],
+      "scale": 0.0958904109589041,
+      "offset": [
+        8,
+        43
+      ],
+      "suggested_wall_height": 1.15
+    },
+    {
+      "id": "chained-cage",
+      "mount": "ceiling",
+      "measured_axis": "height",
+      "metres": 0.65,
+      "canvas": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        8
+      ],
+      "pixel_size": 0.005803571428571429,
+      "floors": [
+        4,
+        4
+      ],
+      "floor_status": "existing floor range",
+      "family": "goblin-hold",
+      "source": "res://art/source/cave-dressing-v2/chained-cage-master.png",
+      "source_sha256": "26c18669507d278358c8a7ad252e424a78c96f855b33e542645d845277dcd41a",
+      "texture": "res://art/dressing/cave-v2/chained-cage.png",
+      "sha256": "76256173d255d4ec05edb81a6474009f675110b1c024401c03cdb30d0b00592d",
+      "scene": "res://art/dressing/cave-v2/chained-cage.tscn",
+      "opacity": 1,
+      "collision": false,
+      "interactive": false,
+      "source_bounds": [
+        251,
+        0,
+        1017,
+        1218
+      ],
+      "scale": 0.09195402298850575,
+      "offset": [
+        29,
+        8
+      ]
+    },
+    {
+      "id": "overhead-walkway",
+      "mount": "ceiling-plane",
+      "measured_axis": "width",
+      "metres": 1.6,
+      "canvas": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "pixel_size": 0.014285714285714287,
+      "floors": [
+        4,
+        4
+      ],
+      "floor_status": "existing floor range",
+      "family": "goblin-hold",
+      "source": "res://art/source/cave-dressing-v2/overhead-walkway-master.png",
+      "source_sha256": "6ca7ab7455b40989b05e4117331b0ecd753cd6ba18fe8a25b9564ba90eb317b0",
+      "texture": "res://art/dressing/cave-v2/overhead-walkway.png",
+      "sha256": "1ef2af3a2d36a84c1902d2b9b11e0579f254b520d84aae8e5cfe9d33c103e84b",
+      "scene": "res://art/dressing/cave-v2/overhead-walkway.tscn",
+      "opacity": 1,
+      "collision": false,
+      "interactive": false,
+      "source_bounds": [
+        40,
+        193,
+        1496,
+        809
+      ],
+      "scale": 0.07692307692307693,
+      "offset": [
+        8,
+        40
+      ]
+    },
+    {
+      "id": "waterline-stain",
+      "mount": "wall",
+      "measured_axis": "width",
+      "metres": 1.6,
+      "canvas": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "pixel_size": 0.014545454545454545,
+      "floors": [
+        5,
+        6
+      ],
+      "floor_status": "proposed layer range only",
+      "family": "drowned-masonry",
+      "source": "res://art/source/cave-dressing-v2/waterline-stain-master.png",
+      "source_sha256": "6948ef23898fd677aa59124e5630e86d592dd656ba60f01842d94b7cc06fb90f",
+      "texture": "res://art/dressing/cave-v2/waterline-stain.png",
+      "sha256": "589da1420fe004ce0d7e87aa6bd606d14d42c17d5c9d671b9cc5b0c932e1f681",
+      "scene": "res://art/dressing/cave-v2/waterline-stain.tscn",
+      "opacity": 0.65,
+      "collision": false,
+      "interactive": false,
+      "source_bounds": [
+        51,
+        212,
+        1917,
+        667
+      ],
+      "scale": 0.06002143622722401,
+      "offset": [
+        8,
+        50
+      ],
+      "suggested_wall_height": 0.7
+    },
+    {
+      "id": "mineral-crust",
+      "mount": "wall",
+      "measured_axis": "width",
+      "metres": 1.1,
+      "canvas": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "pixel_size": 0.009821428571428573,
+      "floors": [
+        5,
+        6
+      ],
+      "floor_status": "proposed layer range only",
+      "family": "drowned-masonry",
+      "source": "res://art/source/cave-dressing-v2/mineral-crust-master.png",
+      "source_sha256": "cb0d87469b70b3c717c1dfd84a4934995ea1547558824da494a08e0b487c18fa",
+      "texture": "res://art/dressing/cave-v2/mineral-crust.png",
+      "sha256": "d1cd53dec9dc26b0a04dbdf6a1056a4b5c3cc4b4848105c9162b8d54349fc259",
+      "scene": "res://art/dressing/cave-v2/mineral-crust.tscn",
+      "opacity": 0.8,
+      "collision": false,
+      "interactive": false,
+      "source_bounds": [
+        59,
+        243,
+        1186,
+        1009
+      ],
+      "scale": 0.09937888198757763,
+      "offset": [
+        8,
+        26
+      ],
+      "suggested_wall_height": 1.4
+    },
+    {
+      "id": "relief-fragment",
+      "mount": "wall",
+      "measured_axis": "width",
+      "metres": 1.0,
+      "canvas": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "pixel_size": 0.008928571428571428,
+      "floors": [
+        9,
+        10
+      ],
+      "floor_status": "proposed layer range only",
+      "family": "buried-city",
+      "source": "res://art/source/cave-dressing-v2/relief-fragment-master.png",
+      "source_sha256": "9b736b6ed1b8b78f54692846d4c9ade5d9a6b59d68366b24550e012d3eedfb34",
+      "texture": "res://art/dressing/cave-v2/relief-fragment.png",
+      "sha256": "55d804b2a2687006ed51d73841cf874175950d2c78460ea5431bed4f0604c3f2",
+      "scene": "res://art/dressing/cave-v2/relief-fragment.tscn",
+      "opacity": 1,
+      "collision": false,
+      "interactive": false,
+      "source_bounds": [
+        49,
+        340,
+        1204,
+        941
+      ],
+      "scale": 0.09696969696969697,
+      "offset": [
+        8,
+        35
+      ],
+      "suggested_wall_height": 1.3
+    },
+    {
+      "id": "empty-lamp-niche",
+      "mount": "wall",
+      "measured_axis": "height",
+      "metres": 0.5,
+      "canvas": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "pixel_size": 0.004464285714285714,
+      "floors": [
+        9,
+        10
+      ],
+      "floor_status": "proposed layer range only",
+      "family": "buried-city",
+      "source": "res://art/source/cave-dressing-v2/empty-lamp-niche-master.png",
+      "source_sha256": "fce621af641edd5c4998ec9e840dbfa82a72ae36ce0db2399b3b358af91a24ca",
+      "texture": "res://art/dressing/cave-v2/empty-lamp-niche.png",
+      "sha256": "80727e2b4549648087defc9a5748e326faa3a57c7cc3ef1ec74cbe568fc5a2ba",
+      "scene": "res://art/dressing/cave-v2/empty-lamp-niche.tscn",
+      "opacity": 1,
+      "collision": false,
+      "interactive": false,
+      "source_bounds": [
+        278,
+        81,
+        984,
+        1191
+      ],
+      "scale": 0.1009009009009009,
+      "offset": [
+        28,
+        8
+      ],
+      "suggested_wall_height": 1.2
+    },
+    {
+      "id": "ward-niche",
+      "mount": "wall",
+      "measured_axis": "height",
+      "metres": 0.65,
+      "canvas": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "pixel_size": 0.006372549019607843,
+      "floors": [
+        11,
+        12
+      ],
+      "floor_status": "proposed layer range only",
+      "family": "sealed-temple",
+      "source": "res://art/source/cave-dressing-v2/ward-niche-master.png",
+      "source_sha256": "2eaf04b927f61efb323c93c3f760a2d78af3ae4822ad694bff98c82c4c691d36",
+      "texture": "res://art/dressing/cave-v2/ward-niche.png",
+      "sha256": "ad7ece1a0faef241353fd160852bfb50f963c37d8e62d879c19e51a13681ab9f",
+      "scene": "res://art/dressing/cave-v2/ward-niche.tscn",
+      "opacity": 1,
+      "collision": false,
+      "interactive": false,
+      "source_bounds": [
+        149,
+        203,
+        1105,
+        1074
+      ],
+      "scale": 0.11715481171548117,
+      "offset": [
+        8,
+        13
+      ],
+      "suggested_wall_height": 1.25
+    },
+    {
+      "id": "stranger-mark",
+      "mount": "wall",
+      "measured_axis": "width",
+      "metres": 0.32,
+      "canvas": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "pixel_size": 0.0071111111111111115,
+      "floors": [
+        1,
+        1
+      ],
+      "floor_status": "existing floor range",
+      "family": "worked-cave",
+      "source": "res://art/source/cave-dressing-v2/native/stranger-mark.png",
+      "source_sha256": "e1eaa4b5ab4fbeb0107123d9ae0746cbb7d9985ad9a8e193123f5a1684ceaf0a",
+      "texture": "res://art/dressing/cave-v2/stranger-mark.png",
+      "sha256": "24e009fd173a370c758d9deed44d5210263a18b9d30912f1cc3d4c45372ef199",
+      "scene": "res://art/dressing/cave-v2/stranger-mark.tscn",
+      "opacity": 1,
+      "collision": false,
+      "interactive": false,
+      "source_bounds": [
+        0,
+        0,
+        128,
+        128
+      ],
+      "scale": 1.0,
+      "offset": [
+        0,
+        0
+      ],
+      "suggested_wall_height": 1.0
+    },
+    {
+      "id": "inscription-band",
+      "mount": "wall",
+      "measured_axis": "width",
+      "metres": 0.8,
+      "canvas": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "pixel_size": 0.009195402298850575,
+      "floors": [
+        9,
+        10
+      ],
+      "floor_status": "proposed layer range only",
+      "family": "buried-city",
+      "source": "res://art/source/cave-dressing-v2/native/inscription-band.png",
+      "source_sha256": "28f8fd4cc5cced498f853cdd1a4262446ad87abacc785cf4e812f58a19a5e27f",
+      "texture": "res://art/dressing/cave-v2/inscription-band.png",
+      "sha256": "28d2392c77ad5a10ec41e4c69117efc321fcd624cbb4677492be4e7ac9ea9c38",
+      "scene": "res://art/dressing/cave-v2/inscription-band.tscn",
+      "opacity": 1,
+      "collision": false,
+      "interactive": false,
+      "source_bounds": [
+        0,
+        0,
+        128,
+        128
+      ],
+      "scale": 1.0,
+      "offset": [
+        0,
+        0
+      ],
+      "suggested_wall_height": 1.45
+    },
+    {
+      "id": "seal-ornament",
+      "mount": "wall",
+      "measured_axis": "width",
+      "metres": 0.35,
+      "canvas": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "pixel_size": 0.004605263157894736,
+      "floors": [
+        11,
+        12
+      ],
+      "floor_status": "proposed layer range only",
+      "family": "sealed-temple",
+      "source": "res://art/source/cave-dressing-v2/native/seal-ornament.png",
+      "source_sha256": "de06c98296eba87160c14a62236b13e10a936afc26371be448140cdf18b8e71b",
+      "texture": "res://art/dressing/cave-v2/seal-ornament.png",
+      "sha256": "48adbf51b9905efa29911d931b3641eeff0546e8ef981227ab87d5a79dcaab83",
+      "scene": "res://art/dressing/cave-v2/seal-ornament.tscn",
+      "opacity": 1,
+      "collision": false,
+      "interactive": false,
+      "source_bounds": [
+        0,
+        0,
+        128,
+        128
+      ],
+      "scale": 1.0,
+      "offset": [
+        0,
+        0
+      ],
+      "suggested_wall_height": 1.25
+    },
+    {
+      "id": "floor-fungus",
+      "mount": "floor-edge",
+      "pivot": [
+        64,
+        102
+      ],
+      "canvas": [
+        128,
+        128
+      ],
+      "texture": "res://art/dressing/cave-v2/floor-fungus.png",
+      "scene": "res://art/dressing/cave-v2/floor-fungus.tscn",
+      "pixel_size": 0.003947368421052632,
+      "measured_axis": "height",
+      "metres": 0.3,
+      "floors": [
+        2,
+        3
+      ],
+      "opacity": 1,
+      "source": "res://art/dressing/cave-v1/pale-mushrooms.png",
+      "source_sha256": "a900c69c0b2d8215b3841f7cbbaa275505e317fbfbff989cc6a1622094c94dde",
+      "edge_only": true,
+      "collision": false,
+      "source_bounds": [
+        191,
+        105,
+        1402,
+        928
+      ],
+      "scale": 0.09248554913294797,
+      "offset": [
+        8,
+        26
+      ],
+      "export_sha256": "a900c69c0b2d8215b3841f7cbbaa275505e317fbfbff989cc6a1622094c94dde",
+      "native_rgba_bytes": 65536,
+      "sha256": "a900c69c0b2d8215b3841f7cbbaa275505e317fbfbff989cc6a1622094c94dde",
+      "interactive": false,
+      "family": "fungal-stone",
+      "source_kind": "unchanged existing neutral art",
+      "glow_scene": "res://art/dressing/cave-v2/floor-fungus-lit.tscn",
+      "glow_frames": "res://art/dressing/cave-v2/floor-fungus-pulse.tres",
+      "emission_mask": "res://art/dressing/cave-v2/floor-fungus-emission.png"
+    },
+    {
+      "id": "drip-curtain",
+      "mount": "wall",
+      "measured_axis": "width",
+      "metres": 1.1,
+      "canvas": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "pixel_size": 0.009821428571428573,
+      "floors": [
+        5,
+        6
+      ],
+      "floor_status": "proposed layer range only",
+      "family": "drowned-masonry",
+      "source": "res://art/source/cave-dressing-v2/mineral-crust-master.png",
+      "source_sha256": "cb0d87469b70b3c717c1dfd84a4934995ea1547558824da494a08e0b487c18fa",
+      "texture": "res://art/dressing/cave-v2/mineral-crust.png",
+      "sha256": "d1cd53dec9dc26b0a04dbdf6a1056a4b5c3cc4b4848105c9162b8d54349fc259",
+      "scene": "res://art/dressing/cave-v2/drip-curtain.tscn",
+      "opacity": 0.8,
+      "collision": false,
+      "interactive": false,
+      "source_bounds": [
+        59,
+        243,
+        1186,
+        1009
+      ],
+      "scale": 0.09937888198757763,
+      "offset": [
+        8,
+        26
+      ],
+      "suggested_wall_height": 1.4,
+      "source_kind": "composite of mineral-crust and unchanged ambient drip"
+    }
+  ]
+}

@@ -1,0 +1,1326 @@
+{
+  "issue": 139,
+  "checks": 328,
+  "failures": [],
+  "generated_masters": 28,
+  "surface_textures": 12,
+  "dressing_entries": 20,
+  "runtime_pngs": 36,
+  "rgba_canvas_bytes": 3215360,
+  "rgba_canvas_mib": 3.066,
+  "limits": "Canvas memory before engine overhead, not physical iPhone profiling. Matching edge colours do not prove structural continuity.",
+  "results": [
+    {
+      "check": "Original source hash: worked-cave-floor",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: worked-cave-floor",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact generated copy: worked-cave-floor",
+      "ok": true
+    },
+    {
+      "check": "Original source hash: worked-cave-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: worked-cave-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact generated copy: worked-cave-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Original source hash: goblin-hold-floor",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: goblin-hold-floor",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact generated copy: goblin-hold-floor",
+      "ok": true
+    },
+    {
+      "check": "Original source hash: goblin-hold-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: goblin-hold-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact generated copy: goblin-hold-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Original source hash: drowned-masonry-floor",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: drowned-masonry-floor",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact generated copy: drowned-masonry-floor",
+      "ok": true
+    },
+    {
+      "check": "Original source hash: drowned-masonry-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: drowned-masonry-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact generated copy: drowned-masonry-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Original source hash: fungal-stone-floor",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: fungal-stone-floor",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact generated copy: fungal-stone-floor",
+      "ok": true
+    },
+    {
+      "check": "Original source hash: fungal-stone-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: fungal-stone-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact generated copy: fungal-stone-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Original source hash: buried-city-floor",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: buried-city-floor",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact generated copy: buried-city-floor",
+      "ok": true
+    },
+    {
+      "check": "Original source hash: buried-city-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: buried-city-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact generated copy: buried-city-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Original source hash: sealed-temple-floor",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: sealed-temple-floor",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact generated copy: sealed-temple-floor",
+      "ok": true
+    },
+    {
+      "check": "Original source hash: sealed-temple-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: sealed-temple-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact generated copy: sealed-temple-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Original source hash: moss-curtain",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: moss-curtain",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact generated copy: moss-curtain",
+      "ok": true
+    },
+    {
+      "check": "Original source hash: old-remains",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: old-remains",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact generated copy: old-remains",
+      "ok": true
+    },
+    {
+      "check": "Original source hash: mine-ring-chain",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: mine-ring-chain",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact generated copy: mine-ring-chain",
+      "ok": true
+    },
+    {
+      "check": "Original source hash: broken-rail-end",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: broken-rail-end",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact generated copy: broken-rail-end",
+      "ok": true
+    },
+    {
+      "check": "Original source hash: lantern-hook",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: lantern-hook",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact generated copy: lantern-hook",
+      "ok": true
+    },
+    {
+      "check": "Original source hash: goblin-hide",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: goblin-hide",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact generated copy: goblin-hide",
+      "ok": true
+    },
+    {
+      "check": "Original source hash: goblin-banner",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: goblin-banner",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact generated copy: goblin-banner",
+      "ok": true
+    },
+    {
+      "check": "Original source hash: wall-spikes",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: wall-spikes",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact generated copy: wall-spikes",
+      "ok": true
+    },
+    {
+      "check": "Original source hash: chained-cage",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: chained-cage",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact generated copy: chained-cage",
+      "ok": true
+    },
+    {
+      "check": "Original source hash: overhead-walkway",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: overhead-walkway",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact generated copy: overhead-walkway",
+      "ok": true
+    },
+    {
+      "check": "Original source hash: waterline-stain",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: waterline-stain",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact generated copy: waterline-stain",
+      "ok": true
+    },
+    {
+      "check": "Original source hash: mineral-crust",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: mineral-crust",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact generated copy: mineral-crust",
+      "ok": true
+    },
+    {
+      "check": "Original source hash: relief-fragment",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: relief-fragment",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact generated copy: relief-fragment",
+      "ok": true
+    },
+    {
+      "check": "Original source hash: empty-lamp-niche",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: empty-lamp-niche",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact generated copy: empty-lamp-niche",
+      "ok": true
+    },
+    {
+      "check": "Original source hash: ward-niche",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: ward-niche",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact generated copy: ward-niche",
+      "ok": true
+    },
+    {
+      "check": "Original source hash: wall-spikes-pointed",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: wall-spikes-pointed",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact generated copy: wall-spikes-pointed",
+      "ok": true
+    },
+    {
+      "check": "All 28 masters retained, including rejected peg candidate",
+      "ok": true
+    },
+    {
+      "check": "Six complete surface families",
+      "ok": true
+    },
+    {
+      "check": "Opaque native surface: worked-cave-floor",
+      "ok": true
+    },
+    {
+      "check": "Exact wall-palette subset: worked-cave-floor",
+      "ok": true
+    },
+    {
+      "check": "Opposite edge pixels match: worked-cave-floor",
+      "ok": true
+    },
+    {
+      "check": "Surface provenance: worked-cave-floor",
+      "ok": true
+    },
+    {
+      "check": "Opaque native surface: worked-cave-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Exact wall-palette subset: worked-cave-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Opposite edge pixels match: worked-cave-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Surface provenance: worked-cave-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Opaque native surface: goblin-hold-floor",
+      "ok": true
+    },
+    {
+      "check": "Exact wall-palette subset: goblin-hold-floor",
+      "ok": true
+    },
+    {
+      "check": "Opposite edge pixels match: goblin-hold-floor",
+      "ok": true
+    },
+    {
+      "check": "Surface provenance: goblin-hold-floor",
+      "ok": true
+    },
+    {
+      "check": "Opaque native surface: goblin-hold-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Exact wall-palette subset: goblin-hold-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Opposite edge pixels match: goblin-hold-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Surface provenance: goblin-hold-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Opaque native surface: drowned-masonry-floor",
+      "ok": true
+    },
+    {
+      "check": "Exact wall-palette subset: drowned-masonry-floor",
+      "ok": true
+    },
+    {
+      "check": "Opposite edge pixels match: drowned-masonry-floor",
+      "ok": true
+    },
+    {
+      "check": "Surface provenance: drowned-masonry-floor",
+      "ok": true
+    },
+    {
+      "check": "Opaque native surface: drowned-masonry-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Exact wall-palette subset: drowned-masonry-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Opposite edge pixels match: drowned-masonry-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Surface provenance: drowned-masonry-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Opaque native surface: fungal-stone-floor",
+      "ok": true
+    },
+    {
+      "check": "Exact wall-palette subset: fungal-stone-floor",
+      "ok": true
+    },
+    {
+      "check": "Opposite edge pixels match: fungal-stone-floor",
+      "ok": true
+    },
+    {
+      "check": "Surface provenance: fungal-stone-floor",
+      "ok": true
+    },
+    {
+      "check": "Opaque native surface: fungal-stone-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Exact wall-palette subset: fungal-stone-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Opposite edge pixels match: fungal-stone-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Surface provenance: fungal-stone-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Opaque native surface: buried-city-floor",
+      "ok": true
+    },
+    {
+      "check": "Exact wall-palette subset: buried-city-floor",
+      "ok": true
+    },
+    {
+      "check": "Opposite edge pixels match: buried-city-floor",
+      "ok": true
+    },
+    {
+      "check": "Surface provenance: buried-city-floor",
+      "ok": true
+    },
+    {
+      "check": "Opaque native surface: buried-city-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Exact wall-palette subset: buried-city-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Opposite edge pixels match: buried-city-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Surface provenance: buried-city-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Opaque native surface: sealed-temple-floor",
+      "ok": true
+    },
+    {
+      "check": "Exact wall-palette subset: sealed-temple-floor",
+      "ok": true
+    },
+    {
+      "check": "Opposite edge pixels match: sealed-temple-floor",
+      "ok": true
+    },
+    {
+      "check": "Surface provenance: sealed-temple-floor",
+      "ok": true
+    },
+    {
+      "check": "Opaque native surface: sealed-temple-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Exact wall-palette subset: sealed-temple-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Opposite edge pixels match: sealed-temple-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Surface provenance: sealed-temple-ceiling",
+      "ok": true
+    },
+    {
+      "check": "Twenty dressing entries including reuse and composite",
+      "ok": true
+    },
+    {
+      "check": "Native binary alpha: moss-curtain",
+      "ok": true
+    },
+    {
+      "check": "Visible colour budget: moss-curtain",
+      "ok": true
+    },
+    {
+      "check": "Clean transparent RGB: moss-curtain",
+      "ok": true
+    },
+    {
+      "check": "Dressing provenance: moss-curtain",
+      "ok": true
+    },
+    {
+      "check": "Measured real size: moss-curtain",
+      "ok": true
+    },
+    {
+      "check": "Scenery classification: moss-curtain",
+      "ok": true
+    },
+    {
+      "check": "Hanging top anchor: moss-curtain",
+      "ok": true
+    },
+    {
+      "check": "Registered mask and atlas: moss-curtain",
+      "ok": true
+    },
+    {
+      "check": "Emission remains inside base: moss-curtain",
+      "ok": true
+    },
+    {
+      "check": "Frame 0 registered: moss-curtain",
+      "ok": true
+    },
+    {
+      "check": "Frame 1 registered: moss-curtain",
+      "ok": true
+    },
+    {
+      "check": "Frame 2 registered: moss-curtain",
+      "ok": true
+    },
+    {
+      "check": "Frame 3 registered: moss-curtain",
+      "ok": true
+    },
+    {
+      "check": "Frame 4 registered: moss-curtain",
+      "ok": true
+    },
+    {
+      "check": "Frame 5 registered: moss-curtain",
+      "ok": true
+    },
+    {
+      "check": "Frame 6 registered: moss-curtain",
+      "ok": true
+    },
+    {
+      "check": "Frame 7 registered: moss-curtain",
+      "ok": true
+    },
+    {
+      "check": "Pulse changes opacity without moving drawings: moss-curtain",
+      "ok": true
+    },
+    {
+      "check": "Native binary alpha: old-remains",
+      "ok": true
+    },
+    {
+      "check": "Visible colour budget: old-remains",
+      "ok": true
+    },
+    {
+      "check": "Clean transparent RGB: old-remains",
+      "ok": true
+    },
+    {
+      "check": "Dressing provenance: old-remains",
+      "ok": true
+    },
+    {
+      "check": "Measured real size: old-remains",
+      "ok": true
+    },
+    {
+      "check": "Scenery classification: old-remains",
+      "ok": true
+    },
+    {
+      "check": "Standing foot anchor: old-remains",
+      "ok": true
+    },
+    {
+      "check": "Native binary alpha: mine-ring-chain",
+      "ok": true
+    },
+    {
+      "check": "Visible colour budget: mine-ring-chain",
+      "ok": true
+    },
+    {
+      "check": "Clean transparent RGB: mine-ring-chain",
+      "ok": true
+    },
+    {
+      "check": "Dressing provenance: mine-ring-chain",
+      "ok": true
+    },
+    {
+      "check": "Measured real size: mine-ring-chain",
+      "ok": true
+    },
+    {
+      "check": "Scenery classification: mine-ring-chain",
+      "ok": true
+    },
+    {
+      "check": "Native binary alpha: broken-rail-end",
+      "ok": true
+    },
+    {
+      "check": "Visible colour budget: broken-rail-end",
+      "ok": true
+    },
+    {
+      "check": "Clean transparent RGB: broken-rail-end",
+      "ok": true
+    },
+    {
+      "check": "Dressing provenance: broken-rail-end",
+      "ok": true
+    },
+    {
+      "check": "Measured real size: broken-rail-end",
+      "ok": true
+    },
+    {
+      "check": "Scenery classification: broken-rail-end",
+      "ok": true
+    },
+    {
+      "check": "Native binary alpha: lantern-hook",
+      "ok": true
+    },
+    {
+      "check": "Visible colour budget: lantern-hook",
+      "ok": true
+    },
+    {
+      "check": "Clean transparent RGB: lantern-hook",
+      "ok": true
+    },
+    {
+      "check": "Dressing provenance: lantern-hook",
+      "ok": true
+    },
+    {
+      "check": "Measured real size: lantern-hook",
+      "ok": true
+    },
+    {
+      "check": "Scenery classification: lantern-hook",
+      "ok": true
+    },
+    {
+      "check": "Native binary alpha: goblin-hide",
+      "ok": true
+    },
+    {
+      "check": "Visible colour budget: goblin-hide",
+      "ok": true
+    },
+    {
+      "check": "Clean transparent RGB: goblin-hide",
+      "ok": true
+    },
+    {
+      "check": "Dressing provenance: goblin-hide",
+      "ok": true
+    },
+    {
+      "check": "Measured real size: goblin-hide",
+      "ok": true
+    },
+    {
+      "check": "Scenery classification: goblin-hide",
+      "ok": true
+    },
+    {
+      "check": "Native binary alpha: goblin-banner",
+      "ok": true
+    },
+    {
+      "check": "Visible colour budget: goblin-banner",
+      "ok": true
+    },
+    {
+      "check": "Clean transparent RGB: goblin-banner",
+      "ok": true
+    },
+    {
+      "check": "Dressing provenance: goblin-banner",
+      "ok": true
+    },
+    {
+      "check": "Measured real size: goblin-banner",
+      "ok": true
+    },
+    {
+      "check": "Scenery classification: goblin-banner",
+      "ok": true
+    },
+    {
+      "check": "Native binary alpha: wall-spikes",
+      "ok": true
+    },
+    {
+      "check": "Visible colour budget: wall-spikes",
+      "ok": true
+    },
+    {
+      "check": "Clean transparent RGB: wall-spikes",
+      "ok": true
+    },
+    {
+      "check": "Dressing provenance: wall-spikes",
+      "ok": true
+    },
+    {
+      "check": "Measured real size: wall-spikes",
+      "ok": true
+    },
+    {
+      "check": "Scenery classification: wall-spikes",
+      "ok": true
+    },
+    {
+      "check": "Native binary alpha: chained-cage",
+      "ok": true
+    },
+    {
+      "check": "Visible colour budget: chained-cage",
+      "ok": true
+    },
+    {
+      "check": "Clean transparent RGB: chained-cage",
+      "ok": true
+    },
+    {
+      "check": "Dressing provenance: chained-cage",
+      "ok": true
+    },
+    {
+      "check": "Measured real size: chained-cage",
+      "ok": true
+    },
+    {
+      "check": "Scenery classification: chained-cage",
+      "ok": true
+    },
+    {
+      "check": "Hanging top anchor: chained-cage",
+      "ok": true
+    },
+    {
+      "check": "Native binary alpha: overhead-walkway",
+      "ok": true
+    },
+    {
+      "check": "Visible colour budget: overhead-walkway",
+      "ok": true
+    },
+    {
+      "check": "Clean transparent RGB: overhead-walkway",
+      "ok": true
+    },
+    {
+      "check": "Dressing provenance: overhead-walkway",
+      "ok": true
+    },
+    {
+      "check": "Measured real size: overhead-walkway",
+      "ok": true
+    },
+    {
+      "check": "Scenery classification: overhead-walkway",
+      "ok": true
+    },
+    {
+      "check": "Native binary alpha: waterline-stain",
+      "ok": true
+    },
+    {
+      "check": "Visible colour budget: waterline-stain",
+      "ok": true
+    },
+    {
+      "check": "Clean transparent RGB: waterline-stain",
+      "ok": true
+    },
+    {
+      "check": "Dressing provenance: waterline-stain",
+      "ok": true
+    },
+    {
+      "check": "Measured real size: waterline-stain",
+      "ok": true
+    },
+    {
+      "check": "Scenery classification: waterline-stain",
+      "ok": true
+    },
+    {
+      "check": "Native binary alpha: mineral-crust",
+      "ok": true
+    },
+    {
+      "check": "Visible colour budget: mineral-crust",
+      "ok": true
+    },
+    {
+      "check": "Clean transparent RGB: mineral-crust",
+      "ok": true
+    },
+    {
+      "check": "Dressing provenance: mineral-crust",
+      "ok": true
+    },
+    {
+      "check": "Measured real size: mineral-crust",
+      "ok": true
+    },
+    {
+      "check": "Scenery classification: mineral-crust",
+      "ok": true
+    },
+    {
+      "check": "Native binary alpha: relief-fragment",
+      "ok": true
+    },
+    {
+      "check": "Visible colour budget: relief-fragment",
+      "ok": true
+    },
+    {
+      "check": "Clean transparent RGB: relief-fragment",
+      "ok": true
+    },
+    {
+      "check": "Dressing provenance: relief-fragment",
+      "ok": true
+    },
+    {
+      "check": "Measured real size: relief-fragment",
+      "ok": true
+    },
+    {
+      "check": "Scenery classification: relief-fragment",
+      "ok": true
+    },
+    {
+      "check": "Native binary alpha: empty-lamp-niche",
+      "ok": true
+    },
+    {
+      "check": "Visible colour budget: empty-lamp-niche",
+      "ok": true
+    },
+    {
+      "check": "Clean transparent RGB: empty-lamp-niche",
+      "ok": true
+    },
+    {
+      "check": "Dressing provenance: empty-lamp-niche",
+      "ok": true
+    },
+    {
+      "check": "Measured real size: empty-lamp-niche",
+      "ok": true
+    },
+    {
+      "check": "Scenery classification: empty-lamp-niche",
+      "ok": true
+    },
+    {
+      "check": "Native binary alpha: ward-niche",
+      "ok": true
+    },
+    {
+      "check": "Visible colour budget: ward-niche",
+      "ok": true
+    },
+    {
+      "check": "Clean transparent RGB: ward-niche",
+      "ok": true
+    },
+    {
+      "check": "Dressing provenance: ward-niche",
+      "ok": true
+    },
+    {
+      "check": "Measured real size: ward-niche",
+      "ok": true
+    },
+    {
+      "check": "Scenery classification: ward-niche",
+      "ok": true
+    },
+    {
+      "check": "Native binary alpha: stranger-mark",
+      "ok": true
+    },
+    {
+      "check": "Visible colour budget: stranger-mark",
+      "ok": true
+    },
+    {
+      "check": "Clean transparent RGB: stranger-mark",
+      "ok": true
+    },
+    {
+      "check": "Dressing provenance: stranger-mark",
+      "ok": true
+    },
+    {
+      "check": "Measured real size: stranger-mark",
+      "ok": true
+    },
+    {
+      "check": "Scenery classification: stranger-mark",
+      "ok": true
+    },
+    {
+      "check": "Native binary alpha: inscription-band",
+      "ok": true
+    },
+    {
+      "check": "Visible colour budget: inscription-band",
+      "ok": true
+    },
+    {
+      "check": "Clean transparent RGB: inscription-band",
+      "ok": true
+    },
+    {
+      "check": "Dressing provenance: inscription-band",
+      "ok": true
+    },
+    {
+      "check": "Measured real size: inscription-band",
+      "ok": true
+    },
+    {
+      "check": "Scenery classification: inscription-band",
+      "ok": true
+    },
+    {
+      "check": "Native binary alpha: seal-ornament",
+      "ok": true
+    },
+    {
+      "check": "Visible colour budget: seal-ornament",
+      "ok": true
+    },
+    {
+      "check": "Clean transparent RGB: seal-ornament",
+      "ok": true
+    },
+    {
+      "check": "Dressing provenance: seal-ornament",
+      "ok": true
+    },
+    {
+      "check": "Measured real size: seal-ornament",
+      "ok": true
+    },
+    {
+      "check": "Scenery classification: seal-ornament",
+      "ok": true
+    },
+    {
+      "check": "Native binary alpha: floor-fungus",
+      "ok": true
+    },
+    {
+      "check": "Visible colour budget: floor-fungus",
+      "ok": true
+    },
+    {
+      "check": "Dressing provenance: floor-fungus",
+      "ok": true
+    },
+    {
+      "check": "Measured real size: floor-fungus",
+      "ok": true
+    },
+    {
+      "check": "Scenery classification: floor-fungus",
+      "ok": true
+    },
+    {
+      "check": "Standing foot anchor: floor-fungus",
+      "ok": true
+    },
+    {
+      "check": "Registered mask and atlas: floor-fungus",
+      "ok": true
+    },
+    {
+      "check": "Emission remains inside base: floor-fungus",
+      "ok": true
+    },
+    {
+      "check": "Frame 0 registered: floor-fungus",
+      "ok": true
+    },
+    {
+      "check": "Frame 1 registered: floor-fungus",
+      "ok": true
+    },
+    {
+      "check": "Frame 2 registered: floor-fungus",
+      "ok": true
+    },
+    {
+      "check": "Frame 3 registered: floor-fungus",
+      "ok": true
+    },
+    {
+      "check": "Frame 4 registered: floor-fungus",
+      "ok": true
+    },
+    {
+      "check": "Frame 5 registered: floor-fungus",
+      "ok": true
+    },
+    {
+      "check": "Frame 6 registered: floor-fungus",
+      "ok": true
+    },
+    {
+      "check": "Frame 7 registered: floor-fungus",
+      "ok": true
+    },
+    {
+      "check": "Pulse changes opacity without moving drawings: floor-fungus",
+      "ok": true
+    },
+    {
+      "check": "Fungus emission excludes stems/feet",
+      "ok": true
+    },
+    {
+      "check": "Native binary alpha: drip-curtain",
+      "ok": true
+    },
+    {
+      "check": "Visible colour budget: drip-curtain",
+      "ok": true
+    },
+    {
+      "check": "Clean transparent RGB: drip-curtain",
+      "ok": true
+    },
+    {
+      "check": "Dressing provenance: drip-curtain",
+      "ok": true
+    },
+    {
+      "check": "Measured real size: drip-curtain",
+      "ok": true
+    },
+    {
+      "check": "Scenery classification: drip-curtain",
+      "ok": true
+    },
+    {
+      "check": "Neutral floor fungus reused byte-exact",
+      "ok": true
+    },
+    {
+      "check": "Pointed spike replacement selected",
+      "ok": true
+    },
+    {
+      "check": "Original native drawing: stranger-mark",
+      "ok": true
+    },
+    {
+      "check": "Original native drawing: inscription-band",
+      "ok": true
+    },
+    {
+      "check": "Original native drawing: seal-ornament",
+      "ok": true
+    },
+    {
+      "check": "Scratch and future map ink share exact motif",
+      "ok": true
+    },
+    {
+      "check": "Native route-clue ink dimensions",
+      "ok": true
+    },
+    {
+      "check": "Preserved input: res://art/textures/descent-walls-v1/buried-city.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved tracked content: res://art/textures/descent-walls-v1/buried-city.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved input: res://art/textures/descent-walls-v1/drowned-masonry.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved tracked content: res://art/textures/descent-walls-v1/drowned-masonry.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved input: res://art/textures/descent-walls-v1/fungal-stone.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved tracked content: res://art/textures/descent-walls-v1/fungal-stone.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved input: res://art/textures/descent-walls-v1/goblin-hold.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved tracked content: res://art/textures/descent-walls-v1/goblin-hold.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved input: res://art/textures/descent-walls-v1/sealed-temple.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved tracked content: res://art/textures/descent-walls-v1/sealed-temple.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved input: res://art/textures/descent-walls-v1/worked-cave.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved tracked content: res://art/textures/descent-walls-v1/worked-cave.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved input: res://art/textures/descent-walls-v1/buried-city.tres",
+      "ok": true
+    },
+    {
+      "check": "Preserved tracked content: res://art/textures/descent-walls-v1/buried-city.tres",
+      "ok": true
+    },
+    {
+      "check": "Preserved input: res://art/textures/descent-walls-v1/drowned-masonry.tres",
+      "ok": true
+    },
+    {
+      "check": "Preserved tracked content: res://art/textures/descent-walls-v1/drowned-masonry.tres",
+      "ok": true
+    },
+    {
+      "check": "Preserved input: res://art/textures/descent-walls-v1/fungal-stone.tres",
+      "ok": true
+    },
+    {
+      "check": "Preserved tracked content: res://art/textures/descent-walls-v1/fungal-stone.tres",
+      "ok": true
+    },
+    {
+      "check": "Preserved input: res://art/textures/descent-walls-v1/goblin-hold.tres",
+      "ok": true
+    },
+    {
+      "check": "Preserved tracked content: res://art/textures/descent-walls-v1/goblin-hold.tres",
+      "ok": true
+    },
+    {
+      "check": "Preserved input: res://art/textures/descent-walls-v1/sealed-temple.tres",
+      "ok": true
+    },
+    {
+      "check": "Preserved tracked content: res://art/textures/descent-walls-v1/sealed-temple.tres",
+      "ok": true
+    },
+    {
+      "check": "Preserved input: res://art/textures/descent-walls-v1/worked-cave.tres",
+      "ok": true
+    },
+    {
+      "check": "Preserved tracked content: res://art/textures/descent-walls-v1/worked-cave.tres",
+      "ok": true
+    },
+    {
+      "check": "Preserved input: res://themes/cave.tres",
+      "ok": true
+    },
+    {
+      "check": "Preserved tracked content: res://themes/cave.tres",
+      "ok": true
+    },
+    {
+      "check": "Preserved input: res://themes/fortress.tres",
+      "ok": true
+    },
+    {
+      "check": "Preserved tracked content: res://themes/fortress.tres",
+      "ok": true
+    },
+    {
+      "check": "Preserved input: res://themes/stone.tres",
+      "ok": true
+    },
+    {
+      "check": "Preserved tracked content: res://themes/stone.tres",
+      "ok": true
+    },
+    {
+      "check": "Preserved input: res://scripts/level_builder.gd",
+      "ok": true
+    },
+    {
+      "check": "Preserved tracked content: res://scripts/level_builder.gd",
+      "ok": true
+    },
+    {
+      "check": "Preserved input: res://scripts/dressing.gd",
+      "ok": true
+    },
+    {
+      "check": "Preserved tracked content: res://scripts/dressing.gd",
+      "ok": true
+    },
+    {
+      "check": "Preserved input: res://art/dressing/cave-v1/pale-mushrooms.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved tracked content: res://art/dressing/cave-v1/pale-mushrooms.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved input: res://art/dressing/cave-v1/wall-fungus.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved tracked content: res://art/dressing/cave-v1/wall-fungus.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved input: res://art/effects/ambient-v1/drip.tres",
+      "ok": true
+    },
+    {
+      "check": "Preserved tracked content: res://art/effects/ambient-v1/drip.tres",
+      "ok": true
+    }
+  ]
+}

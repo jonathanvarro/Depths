@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Texture2D" path="res://art/dressing/cave-v2/goblin-hide.png" id="texture"]
+
+[node name="goblin-hide" type="Node3D"]
+metadata/dressing_id = "goblin-hide"
+
+[node name="Sprite" type="Sprite3D" parent="."]
+position = Vector3(0.0, 0.0, 0.012)
+pixel_size = 0.0071428571428571435
+billboard = 0
+shaded = true
+texture_filter = 0
+alpha_cut = 1
+alpha_scissor_threshold = 0.5
+cast_shadow = 0
+modulate = Color(1, 1, 1, 1)
+texture = ExtResource("texture")

@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Texture2D" path="res://art/dressing/cave-v2/mineral-crust.png" id="texture"]
+
+[ext_resource type="SpriteFrames" path="res://art/effects/ambient-v1/drip.tres" id="drip"]
+
+[node name="drip-curtain" type="Node3D"]
+metadata/dressing_id = "drip-curtain"
+
+[node name="Sprite" type="Sprite3D" parent="."]
+position = Vector3(0.0, 0.0, 0.012)
+pixel_size = 0.009821428571428573
+billboard = 0
+shaded = true
+texture_filter = 0
+alpha_cut = 0
+alpha_scissor_threshold = 0.5
+cast_shadow = 0
+modulate = Color(1, 1, 1, 0.8)
+texture = ExtResource("texture")
+
+[node name="Drip0" type="AnimatedSprite3D" parent="."]
+position = Vector3(-0.25, -0.85, 0.04)
+pixel_size = 0.008
+shaded = true
+texture_filter = 0
+cast_shadow = 0
+sprite_frames = ExtResource("drip")
+animation = &"loop"
+frame = 0
+autoplay = "loop"
+
+[node name="Drip1" type="AnimatedSprite3D" parent="."]
+position = Vector3(0.25, -0.85, 0.04)
+pixel_size = 0.008
+shaded = true
+texture_filter = 0
+cast_shadow = 0
+sprite_frames = ExtResource("drip")
+animation = &"loop"
+frame = 4
+autoplay = "loop"

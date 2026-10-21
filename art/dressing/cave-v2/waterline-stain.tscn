@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Texture2D" path="res://art/dressing/cave-v2/waterline-stain.png" id="texture"]
+
+[node name="waterline-stain" type="Node3D"]
+metadata/dressing_id = "waterline-stain"
+
+[node name="Sprite" type="Sprite3D" parent="."]
+position = Vector3(0.0, 0.0, 0.012)
+pixel_size = 0.014545454545454545
+billboard = 0
+shaded = true
+texture_filter = 0
+alpha_cut = 0
+alpha_scissor_threshold = 0.5
+cast_shadow = 0
+modulate = Color(1, 1, 1, 0.65)
+texture = ExtResource("texture")

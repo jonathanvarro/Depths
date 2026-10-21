@@ -1,0 +1,162 @@
+{
+  "issue": 139,
+  "date": "2026-10-21",
+  "assets": [
+    {
+      "id": "worked-cave-floor",
+      "family": "worked-cave",
+      "prompt": "Use case: stylized-concept. One seamless repeatable OPAQUE SQUARE material texture for Depths, a dark first-person pixel cave crawler. Reference image is MATERIAL/PALETTE/PIXEL-STYLE reference only: the matching existing wall tile. Create a NEW surface for the specified role, perfectly flat orthographic material view, no perspective, no room scene. Fill every edge, no border or padding. Match the wall's hue, restrained value range, broad crisp clustered pixels and restrained 3-shade surfaces; intended native128x128/32-colour export. Large readable material shapes, sparse details, no photographic grain, painterly blur or hairline cracks. Diffuse albedo only, absolutely no directional light, ambient-occlusion vignette, cast shadows, glow or bright centre. Edges should tile in both axes with continuing material features and no conspicuous central motif. No loose props, bones, roots, pools, treasure, writing, emblems, floor traps, holes, stairs, doors or creatures. Role: WALKABLE MINE FLOOR seen straight down. Low uneven shale plates worn flat by passage, broad irregular fractures with fine compacted gritty earth only in shallow joints. Warm charcoal-grey and muted taupe like the reference, a little dull clay on plate edges. The surface reads as firm ground, not a pile of big rocks, wall masonry or dangerous gaps. Loose grit must be texture, not discrete pickup objects.",
+      "role": "floor",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/textures/descent-walls-v1/worked-cave.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-998c5fd6-b8ac-408a-b5e5-30376c9a36f8.png",
+      "source": "art/source/descent-surfaces-v1/worked-cave-floor-master.png",
+      "sha256": "61f9fd6bc5012afed134de5041c88f7659b6e0b3b7dc1656bf870cfb8d03b20b"
+    },
+    {
+      "id": "worked-cave-ceiling",
+      "family": "worked-cave",
+      "prompt": "Use case: stylized-concept. One seamless repeatable OPAQUE SQUARE material texture for Depths, a dark first-person pixel cave crawler. Reference image is MATERIAL/PALETTE/PIXEL-STYLE reference only: the matching existing wall tile. Create a NEW surface for the specified role, perfectly flat orthographic material view, no perspective, no room scene. Fill every edge, no border or padding. Match the wall's hue, restrained value range, broad crisp clustered pixels and restrained 3-shade surfaces; intended native128x128/32-colour export. Large readable material shapes, sparse details, no photographic grain, painterly blur or hairline cracks. Diffuse albedo only, absolutely no directional light, ambient-occlusion vignette, cast shadows, glow or bright centre. Edges should tile in both axes with continuing material features and no conspicuous central motif. No loose props, bones, roots, pools, treasure, writing, emblems, floor traps, holes, stairs, doors or creatures. Role: MINE ROCK CEILING viewed straight up. Broad interlocking fractured shale underside, larger continuous dark flat planes than the reference wall, compressed angular strata and shallow seams. Same warm charcoal-grey/taupe, slightly quieter and darker overall, gentle intrinsic stone variation but no lighting gradient. No hanging stalactites, timber supports or roots baked into the tile.",
+      "role": "ceiling",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/textures/descent-walls-v1/worked-cave.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-1b7d73a3-a813-4fad-b5bf-488a2b40a941.png",
+      "source": "art/source/descent-surfaces-v1/worked-cave-ceiling-master.png",
+      "sha256": "fc64f9b7cc8bd7779fa6605ed4560246eff6cb47ee7b8891a577e7c162ac9d25"
+    },
+    {
+      "id": "goblin-hold-floor",
+      "family": "goblin-hold",
+      "prompt": "Use case: stylized-concept. One seamless repeatable OPAQUE SQUARE material texture for Depths, a dark first-person pixel cave crawler. Reference image is MATERIAL/PALETTE/PIXEL-STYLE reference only: the matching existing wall tile. Create a NEW surface for the specified role, perfectly flat orthographic material view, no perspective, no room scene. Fill every edge, no border or padding. Match the wall's hue, restrained value range, broad crisp clustered pixels and restrained 3-shade surfaces; intended native128x128/32-colour export. Large readable material shapes, sparse details, no photographic grain, painterly blur or hairline cracks. Diffuse albedo only, absolutely no directional light, ambient-occlusion vignette, cast shadows, glow or bright centre. Edges should tile in both axes with continuing material features and no conspicuous central motif. No loose props, bones, roots, pools, treasure, writing, emblems, floor traps, holes, stairs, doors or creatures. Role: GOBLIN HOLD FLOOR viewed straight down. Older irregular broad brown-grey cobbles and crude flat flagstones, patched with compressed dirt and dark silt in shallow joints. Similar slate/umber stone and messy practical construction to reference wall, but stones lie flat as rough paving. Occasional unobtrusive chipped edges, no bones, litter or wood scraps baked in. No neat wall-brick courses.",
+      "role": "floor",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/textures/descent-walls-v1/goblin-hold.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-73a0cb16-d86d-4e66-926b-feea7201c75e.png",
+      "source": "art/source/descent-surfaces-v1/goblin-hold-floor-master.png",
+      "sha256": "292f8c4e77e7b77d1be06f5cbef47ad78af52db6f9ead906313861e7dec8e6d1"
+    },
+    {
+      "id": "goblin-hold-ceiling",
+      "family": "goblin-hold",
+      "prompt": "Use case: stylized-concept. One seamless repeatable OPAQUE SQUARE material texture for Depths, a dark first-person pixel cave crawler. Reference image is MATERIAL/PALETTE/PIXEL-STYLE reference only: the matching existing wall tile. Create a NEW surface for the specified role, perfectly flat orthographic material view, no perspective, no room scene. Fill every edge, no border or padding. Match the wall's hue, restrained value range, broad crisp clustered pixels and restrained 3-shade surfaces; intended native128x128/32-colour export. Large readable material shapes, sparse details, no photographic grain, painterly blur or hairline cracks. Diffuse albedo only, absolutely no directional light, ambient-occlusion vignette, cast shadows, glow or bright centre. Edges should tile in both axes with continuing material features and no conspicuous central motif. No loose props, bones, roots, pools, treasure, writing, emblems, floor traps, holes, stairs, doors or creatures. Role: GOBLIN HOLD MASONRY CEILING viewed straight up. Dark rough laid stone underside, broad irregular vault-like blocks in a flat non-perspective tile, weathered uneven mortar and tiny patched joints. Same brown-grey/umber masonry as matching wall. Quiet low-contrast underside. No actual curved room, perspective arches, beams, planks or torches baked in.",
+      "role": "ceiling",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/textures/descent-walls-v1/goblin-hold.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-edbda33d-ba43-47f9-9037-7f4ce821e456.png",
+      "source": "art/source/descent-surfaces-v1/goblin-hold-ceiling-master.png",
+      "sha256": "81af5210fbeee0a89fdba37f6011395c479af15dc724a5c0f1b2dd360edbb3da"
+    },
+    {
+      "id": "drowned-masonry-floor",
+      "family": "drowned-masonry",
+      "prompt": "Use case: stylized-concept. One seamless repeatable OPAQUE SQUARE material texture for Depths, a dark first-person pixel cave crawler. Reference image is MATERIAL/PALETTE/PIXEL-STYLE reference only: the matching existing wall tile. Create a NEW surface for the specified role, perfectly flat orthographic material view, no perspective, no room scene. Fill every edge, no border or padding. Match the wall's hue, restrained value range, broad crisp clustered pixels and restrained 3-shade surfaces; intended native128x128/32-colour export. Large readable material shapes, sparse details, no photographic grain, painterly blur or hairline cracks. Diffuse albedo only, absolutely no directional light, ambient-occlusion vignette, cast shadows, glow or bright centre. Edges should tile in both axes with continuing material features and no conspicuous central motif. No loose props, bones, roots, pools, treasure, writing, emblems, floor traps, holes, stairs, doors or creatures. Role: FLOOR of old DROWNED GALLERIES, seen straight down. Broad worn flat slate flagstones in an irregular staggered paving, shallow eroded joints full of dark silty deposits, sparse pale mineral traces at edges. Cold blue-grey slate and desaturated green-grey patina matching reference. The floor is damp solid stone, NOT a water surface, pool, mirror or pit. No baked specular highlights or puddle shapes. Quiet softened faces with enough large-scale construction to read.",
+      "role": "floor",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/textures/descent-walls-v1/drowned-masonry.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-506e9c9a-2af5-4306-8072-0c4eba5c15e0.png",
+      "source": "art/source/descent-surfaces-v1/drowned-masonry-floor-master.png",
+      "sha256": "9cec517d7c5062e530b2e1e52ba1099eb0344ad6f2ad663a13773bfc86a757a4"
+    },
+    {
+      "id": "drowned-masonry-ceiling",
+      "family": "drowned-masonry",
+      "prompt": "Use case: stylized-concept. One seamless repeatable OPAQUE SQUARE material texture for Depths, a dark first-person pixel cave crawler. Reference image is MATERIAL/PALETTE/PIXEL-STYLE reference only: the matching existing wall tile. Create a NEW surface for the specified role, perfectly flat orthographic material view, no perspective, no room scene. Fill every edge, no border or padding. Match the wall's hue, restrained value range, broad crisp clustered pixels and restrained 3-shade surfaces; intended native128x128/32-colour export. Large readable material shapes, sparse details, no photographic grain, painterly blur or hairline cracks. Diffuse albedo only, absolutely no directional light, ambient-occlusion vignette, cast shadows, glow or bright centre. Edges should tile in both axes with continuing material features and no conspicuous central motif. No loose props, bones, roots, pools, treasure, writing, emblems, floor traps, holes, stairs, doors or creatures. Role: CEILING underside of old DROWNED GALLERIES seen straight up. Broad eroded slate structural slabs with a few shallow fractured joints and irregular pale mineral crust seams, sparse desaturated green staining. Cold blue-grey material exactly as reference, quiet dark underside with broad forms. No waterfall, hanging formations or baked water drops; those are separate dressing. No room or arch perspective.",
+      "role": "ceiling",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/textures/descent-walls-v1/drowned-masonry.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-80f5e102-b24d-4b78-8003-07495b5e291e.png",
+      "source": "art/source/descent-surfaces-v1/drowned-masonry-ceiling-master.png",
+      "sha256": "f75251a1eb139f953b8b294e1ff830df6c8cdc7c14e370d084ff7460c2cb4981"
+    },
+    {
+      "id": "fungal-stone-floor",
+      "family": "fungal-stone",
+      "prompt": "Use case: stylized-concept. One seamless repeatable OPAQUE SQUARE material texture for Depths, a dark first-person pixel cave crawler. Reference image is MATERIAL/PALETTE/PIXEL-STYLE reference only: the matching existing wall tile. Create a NEW surface for the specified role, perfectly flat orthographic material view, no perspective, no room scene. Fill every edge, no border or padding. Match the wall's hue, restrained value range, broad crisp clustered pixels and restrained 3-shade surfaces; intended native128x128/32-colour export. Large readable material shapes, sparse details, no photographic grain, painterly blur or hairline cracks. Diffuse albedo only, absolutely no directional light, ambient-occlusion vignette, cast shadows, glow or bright centre. Edges should tile in both axes with continuing material features and no conspicuous central motif. No loose props, bones, roots, pools, treasure, writing, emblems, floor traps, holes, stairs, doors or creatures. Role: FLOOR of FUNGAL HOLLOWS seen straight down. Flat worn old stone pavement slowly overgrown with thin dull olive and muted teal fungal films in some joints, broad exposed walkable stone faces in centre of patches, a few shallow branching surface fissures. Same dark mossy olive/slate palette as wall reference. Patchy low contrast surface growth ONLY, no mushrooms, tendrils or roots, glowing dots, circular slime pools, holes or decorative patterns. Solid passable stone undergrowth.",
+      "role": "floor",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/textures/descent-walls-v1/fungal-stone.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-02a79b5d-e90f-4dfe-9e1b-b70ea4d5dea9.png",
+      "source": "art/source/descent-surfaces-v1/fungal-stone-floor-master.png",
+      "sha256": "84f9a2f4ec2f752f4c7f7ee8da373d592bf3904704f42fa5b080cbb186a4eeab"
+    },
+    {
+      "id": "fungal-stone-ceiling",
+      "family": "fungal-stone",
+      "prompt": "Use case: stylized-concept. One seamless repeatable OPAQUE SQUARE material texture for Depths, a dark first-person pixel cave crawler. Reference image is MATERIAL/PALETTE/PIXEL-STYLE reference only: the matching existing wall tile. Create a NEW surface for the specified role, perfectly flat orthographic material view, no perspective, no room scene. Fill every edge, no border or padding. Match the wall's hue, restrained value range, broad crisp clustered pixels and restrained 3-shade surfaces; intended native128x128/32-colour export. Large readable material shapes, sparse details, no photographic grain, painterly blur or hairline cracks. Diffuse albedo only, absolutely no directional light, ambient-occlusion vignette, cast shadows, glow or bright centre. Edges should tile in both axes with continuing material features and no conspicuous central motif. No loose props, bones, roots, pools, treasure, writing, emblems, floor traps, holes, stairs, doors or creatures. Role: CEILING of FUNGAL HOLLOWS seen straight up. Old rough stone underside with flat irregular crusts of dark olive lichen and subdued blue-grey fungal patina, broad large stone patches and shallow seams. Same reference palette, slightly quieter overall. Keep a repeatable neutral substrate: NO luminous light, fungus caps, roots or dangling moss baked in, as those will be separate layers. No wall-brick courses or room perspective.",
+      "role": "ceiling",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/textures/descent-walls-v1/fungal-stone.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-6cd51059-a1e2-46da-bec6-5ee33e70c837.png",
+      "source": "art/source/descent-surfaces-v1/fungal-stone-ceiling-master.png",
+      "sha256": "9f23983e2b080ed53ef86eb5323caf83a6512c3d4bdcae5e9d9bcf68a62dc5b7"
+    },
+    {
+      "id": "buried-city-floor",
+      "family": "buried-city",
+      "prompt": "Use case: stylized-concept. One seamless repeatable OPAQUE SQUARE material texture for Depths, a dark first-person pixel cave crawler. Reference image is MATERIAL/PALETTE/PIXEL-STYLE reference only: the matching existing wall tile. Create a NEW surface for the specified role, perfectly flat orthographic material view, no perspective, no room scene. Fill every edge, no border or padding. Match the wall's hue, restrained value range, broad crisp clustered pixels and restrained 3-shade surfaces; intended native128x128/32-colour export. Large readable material shapes, sparse details, no photographic grain, painterly blur or hairline cracks. Diffuse albedo only, absolutely no directional light, ambient-occlusion vignette, cast shadows, glow or bright centre. Edges should tile in both axes with continuing material features and no conspicuous central motif. No loose props, bones, roots, pools, treasure, writing, emblems, floor traps, holes, stairs, doors or creatures. Role: FLOOR in a buried older city, seen straight down. Large worn rectangular limestone flagstones laid as flat paving, broad slightly unequal slabs with narrow staggered joints, small chipped corners, dusty buff-grey stone and faint remnants of pale mineral plaster trapped along a few edges. Same warm pale limestone palette as wall reference. Three or four large slabs across the tile, not a small cobble mosaic, no ornate carpet pattern or central symbol. Foot-worn but solid and readable.",
+      "role": "floor",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/textures/descent-walls-v1/buried-city.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-00d47459-db3c-49b3-aa61-aecda903dfd7.png",
+      "source": "art/source/descent-surfaces-v1/buried-city-floor-master.png",
+      "sha256": "572733fc748246fa02da106f4b49b1d24c67bc762f7a5f49d0685fca554d413f"
+    },
+    {
+      "id": "buried-city-ceiling",
+      "family": "buried-city",
+      "prompt": "Use case: stylized-concept. One seamless repeatable OPAQUE SQUARE material texture for Depths, a dark first-person pixel cave crawler. Reference image is MATERIAL/PALETTE/PIXEL-STYLE reference only: the matching existing wall tile. Create a NEW surface for the specified role, perfectly flat orthographic material view, no perspective, no room scene. Fill every edge, no border or padding. Match the wall's hue, restrained value range, broad crisp clustered pixels and restrained 3-shade surfaces; intended native128x128/32-colour export. Large readable material shapes, sparse details, no photographic grain, painterly blur or hairline cracks. Diffuse albedo only, absolutely no directional light, ambient-occlusion vignette, cast shadows, glow or bright centre. Edges should tile in both axes with continuing material features and no conspicuous central motif. No loose props, bones, roots, pools, treasure, writing, emblems, floor traps, holes, stairs, doors or creatures. Role: CEILING underside in a buried older city, viewed straight up. Long broad dressed limestone structural lintel slabs with understated shallow block seams and sparse remnants of old buff plaster over portions of the face. Match the wall's pale buff/grey limestone, make underside a little quieter and greyer rather than blackened by light. Flat repeating construction texture, no perspective, no carved images, statues, decorations or glyphs.",
+      "role": "ceiling",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/textures/descent-walls-v1/buried-city.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-5d60ece3-32ca-449d-a6c2-ed61d62853f6.png",
+      "source": "art/source/descent-surfaces-v1/buried-city-ceiling-master.png",
+      "sha256": "7909e8e389362aca577100885db5f8c0581e51892122bdbd9cfa91b7312f091c"
+    },
+    {
+      "id": "sealed-temple-floor",
+      "family": "sealed-temple",
+      "prompt": "Use case: stylized-concept. One seamless repeatable OPAQUE SQUARE material texture for Depths, a dark first-person pixel cave crawler. Reference image is MATERIAL/PALETTE/PIXEL-STYLE reference only: the matching existing wall tile. Create a NEW surface for the specified role, perfectly flat orthographic material view, no perspective, no room scene. Fill every edge, no border or padding. Match the wall's hue, restrained value range, broad crisp clustered pixels and restrained 3-shade surfaces; intended native128x128/32-colour export. Large readable material shapes, sparse details, no photographic grain, painterly blur or hairline cracks. Diffuse albedo only, absolutely no directional light, ambient-occlusion vignette, cast shadows, glow or bright centre. Edges should tile in both axes with continuing material features and no conspicuous central motif. No loose props, bones, roots, pools, treasure, writing, emblems, floor traps, holes, stairs, doors or creatures. Role: FLOOR of a sealed ancient temple, viewed straight down. Large nearly square flat dark basalt paving slabs, restrained straight recessed narrow joints, subtle broken cool grey-purple mottling, a few slightly chamfered worn edges. Same charcoal basalt/purple-grey values as reference wall. Very broad simple stones, solemn precise construction, no luminous cracks or magical marks, concentric motifs, symbols, gold, lava or deep gaps.",
+      "role": "floor",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/textures/descent-walls-v1/sealed-temple.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-22fe0a3b-1931-4fdb-8780-386560dd0a18.png",
+      "source": "art/source/descent-surfaces-v1/sealed-temple-floor-master.png",
+      "sha256": "50bcdb93f3c03f0b2f1f16454a42107536291d46284343a185026e9047939655"
+    },
+    {
+      "id": "sealed-temple-ceiling",
+      "family": "sealed-temple",
+      "prompt": "Use case: stylized-concept. One seamless repeatable OPAQUE SQUARE material texture for Depths, a dark first-person pixel cave crawler. Reference image is MATERIAL/PALETTE/PIXEL-STYLE reference only: the matching existing wall tile. Create a NEW surface for the specified role, perfectly flat orthographic material view, no perspective, no room scene. Fill every edge, no border or padding. Match the wall's hue, restrained value range, broad crisp clustered pixels and restrained 3-shade surfaces; intended native128x128/32-colour export. Large readable material shapes, sparse details, no photographic grain, painterly blur or hairline cracks. Diffuse albedo only, absolutely no directional light, ambient-occlusion vignette, cast shadows, glow or bright centre. Edges should tile in both axes with continuing material features and no conspicuous central motif. No loose props, bones, roots, pools, treasure, writing, emblems, floor traps, holes, stairs, doors or creatures. Role: CEILING underside of a sealed ancient temple, viewed straight up. Broad rectangular dark basalt coffer slabs separated by a few shallow precise recessed channels, only slight intrinsic cool grey-purple mineral variation and chipped corners. Match reference wall's quiet dark basalt palette; sombre larger planes, no heavy baked shadows. Flat orthographic repeat tile, no overhead room perspective, pillars, glyphs, wards, stars, relief figures or illumination.",
+      "role": "ceiling",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/textures/descent-walls-v1/sealed-temple.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-d55f849b-2cd0-4bb2-824f-d7a0c577be6f.png",
+      "source": "art/source/descent-surfaces-v1/sealed-temple-ceiling-master.png",
+      "sha256": "2fb1fdbc1705369977f70bdbda64b9e4463baa7696eb689d9e527255f3525bfa"
+    }
+  ]
+}

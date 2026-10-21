@@ -1,0 +1,218 @@
+{
+  "issue": 139,
+  "date": "2026-10-21",
+  "assets": [
+    {
+      "id": "moss-curtain",
+      "prompt": "Use case: stylized-concept. One modular transparent scenery sprite for Depths, a dark first-person cave crawler. The reference images are STYLE REFERENCES ONLY: existing cave timber/fungus props. Match restrained rough painted PIXEL CLUSTERS and 3-4 shades per material, muted umber/olive/slate/bone palette, simplified to native128x128 and at most64 colours. Orthographic FRONT VIEW unless specified. Entire isolated piece inside a square canvas with small clear margins, genuine transparent alpha outside and in all gaps. Neutral diffuse albedo shading, no scene lighting, glow, ground shadow, wall background, floor rectangle, UI, text, border, checkerboard or photographic noise. This is fixed old SCENERY, never a usable container or loot. Subject: a shallow CEILING FRINGE of old moss, five irregular tapered dusty olive-green hanging strips and short rootlets, joined by a narrow dark fibrous mat across the top. Thickest mass on left, broad transparent gaps and a long clear lower half; max hanging depth about0.45m over a2m walkway. Uneven serrated clumps but no hairline fern details, flowers or bright spores. No wood beam, stone ceiling or actual wall. Moss is neutral unlit; its optional faint emission will be a separate layer.",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/dressing/cave-v1/mine-support.png",
+        "art/dressing/cave-v1/wall-fungus.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-12ba7164-7655-4d02-82df-203952c23ac4.png",
+      "source": "art/source/cave-dressing-v2/moss-curtain-master.png",
+      "selected": true,
+      "sha256": "1b802445eae65ff6733fbe9350da50300d73567b3072869953e5fe11c94ff396"
+    },
+    {
+      "id": "old-remains",
+      "prompt": "Use case: stylized-concept. One modular transparent scenery sprite for Depths, a dark first-person cave crawler. The reference images are STYLE REFERENCES ONLY: existing cave timber/fungus props. Match restrained rough painted PIXEL CLUSTERS and 3-4 shades per material, muted umber/olive/slate/bone palette, simplified to native128x128 and at most64 colours. Orthographic FRONT VIEW unless specified. Entire isolated piece inside a square canvas with small clear margins, genuine transparent alpha outside and in all gaps. Neutral diffuse albedo shading, no scene lighting, glow, ground shadow, wall background, floor rectangle, UI, text, border, checkerboard or photographic noise. This is fixed old SCENERY, never a usable container or loot. Subject: old human skeletal remains slumped low against a cave wall: tilted weathered skull, partial rib cage, bent arm and two broken leg bones mostly lost under torn brown rags. About0.8m wide and0.5m high, low asymmetrical heap. Bone dusty grey-ivory, cloth rotten umber, a few tiny dark rock chips at base. No fresh flesh, blood, armour, intact boots, weapon, bag, jewellery or anything worth taking. No background wall. Distinct from the tutorial's fresh fallen companions; an anonymous old ruin of a person.",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/dressing/cave-v1/mine-support.png",
+        "art/dressing/cave-v1/wall-fungus.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-83d4e0b3-b963-4228-a4dd-e5a61ad6defa.png",
+      "source": "art/source/cave-dressing-v2/old-remains-master.png",
+      "selected": true,
+      "sha256": "db4f7d2db5878693ec10a8214f5116d45aa1662f24e5c1a79bcb4527c7764da7"
+    },
+    {
+      "id": "mine-ring-chain",
+      "prompt": "Use case: stylized-concept. One modular transparent scenery sprite for Depths, a dark first-person cave crawler. The reference images are STYLE REFERENCES ONLY: existing cave timber/fungus props. Match restrained rough painted PIXEL CLUSTERS and 3-4 shades per material, muted umber/olive/slate/bone palette, simplified to native128x128 and at most64 colours. Orthographic FRONT VIEW unless specified. Entire isolated piece inside a square canvas with small clear margins, genuine transparent alpha outside and in all gaps. Neutral diffuse albedo shading, no scene lighting, glow, ground shadow, wall background, floor rectangle, UI, text, border, checkerboard or photographic noise. This is fixed old SCENERY, never a usable container or loot. Subject: one rusted mine WALL RING AND CHAIN fitting. A plain square iron anchor plate with four old rivet heads, a thick round iron ring through its centre, and a short heavy chain of five large irregular oval links hanging down and slightly left. Last link broken open. Coarse pitted dark iron with restrained rust orange on edges. Readable broad links at small size, no tiny dozens of links, padlock, hook, tool, lantern, rope or rock backdrop. Old fixed wall hardware, not a takeable chain weapon.",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/dressing/cave-v1/mine-support.png",
+        "art/dressing/cave-v1/wall-fungus.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-a80851d6-46bd-47ea-a703-8aeedceacc8d.png",
+      "source": "art/source/cave-dressing-v2/mine-ring-chain-master.png",
+      "selected": true,
+      "sha256": "b6f88f5b5342e862d3875fa8bb0c5bac51d5c11ff67e1b5f3678bdbb37e5e01a"
+    },
+    {
+      "id": "broken-rail-end",
+      "prompt": "Use case: stylized-concept. One modular transparent scenery sprite for Depths, a dark first-person cave crawler. The reference images are STYLE REFERENCES ONLY: existing cave timber/fungus props. Match restrained rough painted PIXEL CLUSTERS and 3-4 shades per material, muted umber/olive/slate/bone palette, simplified to native128x128 and at most64 colours. Orthographic FRONT VIEW unless specified. Entire isolated piece inside a square canvas with small clear margins, genuine transparent alpha outside and in all gaps. Neutral diffuse albedo shading, no scene lighting, glow, ground shadow, wall background, floor rectangle, UI, text, border, checkerboard or photographic noise. This is fixed old SCENERY, never a usable container or loot. Subject: one BROKEN OLD MINE RAIL END as a small fixed wall-edge fitting: a short diagonal T-section iron rail stub with a jagged snapped upper end and a square riveted bracket at its lower end. Side/front orthographic view clearly shows the broad top flange and narrow web. Flaky dark rust, grey iron on the break, two old square bolts. One short fragment only, no whole track, cart, usable pick or wood floor. Entire stub inside margins; neutral no wall behind.",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/dressing/cave-v1/mine-support.png",
+        "art/dressing/cave-v1/wall-fungus.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-dc0d5ddb-480c-442a-91f2-ae07811f8b37.png",
+      "source": "art/source/cave-dressing-v2/broken-rail-end-master.png",
+      "selected": true,
+      "sha256": "8d4a18114fbf4bd58d70e31ad80b2d60e8347ca28f486f12c7ff0f136b1cd503"
+    },
+    {
+      "id": "lantern-hook",
+      "prompt": "Use case: stylized-concept. One modular transparent scenery sprite for Depths, a dark first-person cave crawler. The reference images are STYLE REFERENCES ONLY: existing cave timber/fungus props. Match restrained rough painted PIXEL CLUSTERS and 3-4 shades per material, muted umber/olive/slate/bone palette, simplified to native128x128 and at most64 colours. Orthographic FRONT VIEW unless specified. Entire isolated piece inside a square canvas with small clear margins, genuine transparent alpha outside and in all gaps. Neutral diffuse albedo shading, no scene lighting, glow, ground shadow, wall background, floor rectangle, UI, text, border, checkerboard or photographic noise. This is fixed old SCENERY, never a usable container or loot. Subject: an EMPTY rusted lantern hook fixed to a small iron wall plate: two rivets in the plate, a short bent flat iron arm projects slightly outward then ends in a deep downward J curl. Thick practical silhouette, front orthographic view, no lantern, chain, rope or removable item. Dull charcoal iron with a few dark orange rust chips and grey edge wear, no brass/gold. No rock or lighting behind it. A tiny old mining wall fitting.",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/dressing/cave-v1/mine-support.png",
+        "art/dressing/cave-v1/wall-fungus.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-5f8fb90e-f351-49c7-87b5-e75c4c8c2633.png",
+      "source": "art/source/cave-dressing-v2/lantern-hook-master.png",
+      "selected": true,
+      "sha256": "816e715a5c37610cf5f396a0e72e54746236af0ca752df41822c93ed55196fa7"
+    },
+    {
+      "id": "goblin-hide",
+      "prompt": "Use case: stylized-concept. One modular transparent scenery sprite for Depths, a dark first-person cave crawler. The reference images are STYLE REFERENCES ONLY: existing cave timber/fungus props. Match restrained rough painted PIXEL CLUSTERS and 3-4 shades per material, muted umber/olive/slate/bone palette, simplified to native128x128 and at most64 colours. Orthographic FRONT VIEW unless specified. Entire isolated piece inside a square canvas with small clear margins, genuine transparent alpha outside and in all gaps. Neutral diffuse albedo shading, no scene lighting, glow, ground shadow, wall background, floor rectangle, UI, text, border, checkerboard or photographic noise. This is fixed old SCENERY, never a usable container or loot. Subject: a coarse small tanned GOAT HIDE stretched on an irregular stick crossframe, pegged with crude cord to a wall. Squat asymmetric animal-pelt silhouette with four short ragged leg tabs, leathery ochre-brown centre and sparse dark fur around edges. No animal head or face, no human anatomy, no blood or fresh flesh. A few crude stitches and uneven lashings, not a usable cloak or backpack. Framing sticks and hide only, no wall.",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/dressing/cave-v1/mine-support.png",
+        "art/dressing/cave-v1/wall-fungus.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-6b383391-59c9-44fd-b1a5-97d3977aee10.png",
+      "source": "art/source/cave-dressing-v2/goblin-hide-master.png",
+      "selected": true,
+      "sha256": "da69232a6ee3894cd98d71597094b86e3cbd8ab6ecdc44b6b01fa3fcc97abf89"
+    },
+    {
+      "id": "goblin-banner",
+      "prompt": "Use case: stylized-concept. One modular transparent scenery sprite for Depths, a dark first-person cave crawler. The reference images are STYLE REFERENCES ONLY: existing cave timber/fungus props. Match restrained rough painted PIXEL CLUSTERS and 3-4 shades per material, muted umber/olive/slate/bone palette, simplified to native128x128 and at most64 colours. Orthographic FRONT VIEW unless specified. Entire isolated piece inside a square canvas with small clear margins, genuine transparent alpha outside and in all gaps. Neutral diffuse albedo shading, no scene lighting, glow, ground shadow, wall background, floor rectangle, UI, text, border, checkerboard or photographic noise. This is fixed old SCENERY, never a usable container or loot. Subject: one crude GOBLIN WALL BANNER: dull rust-red cloth lashed to a short crooked black wooden crossbar, hanging vertically with a badly torn pointed bottom, two large repairs and a few obvious holes. Flat front orthographic view, broad simple folds, frayed lower edge. Coarse stolen rag, no neat gold trim, crown, royal crest, emblem, symbol, letters, skull drawing or patterned design. Entire crossbar and cloth contained. A fixed rag marker with strong long triangular silhouette.",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/dressing/cave-v1/mine-support.png",
+        "art/dressing/cave-v1/wall-fungus.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-f592c108-38b2-42a7-81d2-797b9ce07822.png",
+      "source": "art/source/cave-dressing-v2/goblin-banner-master.png",
+      "selected": true,
+      "sha256": "0074d9b02f826efa6f9ca4a57edd8a827640ebac2c1d6c2937dd60939105003b"
+    },
+    {
+      "id": "wall-spikes",
+      "prompt": "Use case: stylized-concept. One modular transparent scenery sprite for Depths, a dark first-person cave crawler. The reference images are STYLE REFERENCES ONLY: existing cave timber/fungus props. Match restrained rough painted PIXEL CLUSTERS and 3-4 shades per material, muted umber/olive/slate/bone palette, simplified to native128x128 and at most64 colours. Orthographic FRONT VIEW unless specified. Entire isolated piece inside a square canvas with small clear margins, genuine transparent alpha outside and in all gaps. Neutral diffuse albedo shading, no scene lighting, glow, ground shadow, wall background, floor rectangle, UI, text, border, checkerboard or photographic noise. This is fixed old SCENERY, never a usable container or loot. Subject: a short mounted WALL SPIKE RACK: a dark splintered horizontal timber bar with three uneven blunt iron spikes projecting forward and a little upward, broad rusty wedges with readable chunky profiles. Square pegs/rivets secure it to the wall. Front/very shallow orthographic angle shows all three points and the short back board. Small defensive wall decoration, not a floor trap, full palisade, weapon or door. No skulls, bones, prisoners or blood. Grey iron, rust ochre, rotten brown wood.",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/dressing/cave-v1/mine-support.png",
+        "art/dressing/cave-v1/wall-fungus.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-a9224908-e2b5-443a-a4d1-3e248b3f1ea0.png",
+      "source": "art/source/cave-dressing-v2/wall-spikes-master.png",
+      "selected": false,
+      "sha256": "ce71db3cec97883d816e4d15e4d9440d954373bfddad7046a0980f8956d798a4"
+    },
+    {
+      "id": "chained-cage",
+      "prompt": "Use case: stylized-concept. One modular transparent scenery sprite for Depths, a dark first-person cave crawler. The reference images are STYLE REFERENCES ONLY: existing cave timber/fungus props. Match restrained rough painted PIXEL CLUSTERS and 3-4 shades per material, muted umber/olive/slate/bone palette, simplified to native128x128 and at most64 colours. Orthographic FRONT VIEW unless specified. Entire isolated piece inside a square canvas with small clear margins, genuine transparent alpha outside and in all gaps. Neutral diffuse albedo shading, no scene lighting, glow, ground shadow, wall background, floor rectangle, UI, text, border, checkerboard or photographic noise. This is fixed old SCENERY, never a usable container or loot. Subject: a SMALL EMPTY BROKEN CAGE hanging from two short chains. Front orthographic view of a rough tapered iron cage, a few large bent vertical bars, uneven top hoop and smashed bottom ring, two bars missing and bottom visibly broken open. See genuine transparent space through all bars. About0.65m total height including chains; no standing person. Old goblin ceiling scenery with no usable door, handle, padlock, captive, corpse, torch or loot. Rusted charcoal iron, sparse orange wear. Entire short chains and cage contained.",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/dressing/cave-v1/mine-support.png",
+        "art/dressing/cave-v1/wall-fungus.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-65f23d2b-866c-4841-8aa6-df72806e770b.png",
+      "source": "art/source/cave-dressing-v2/chained-cage-master.png",
+      "selected": true,
+      "sha256": "26c18669507d278358c8a7ad252e424a78c96f855b33e542645d845277dcd41a"
+    },
+    {
+      "id": "overhead-walkway",
+      "prompt": "Use case: stylized-concept. One modular transparent scenery sprite for Depths, a dark first-person cave crawler. The reference images are STYLE REFERENCES ONLY: existing cave timber/fungus props. Match restrained rough painted PIXEL CLUSTERS and 3-4 shades per material, muted umber/olive/slate/bone palette, simplified to native128x128 and at most64 colours. Orthographic FRONT VIEW unless specified. Entire isolated piece inside a square canvas with small clear margins, genuine transparent alpha outside and in all gaps. Neutral diffuse albedo shading, no scene lighting, glow, ground shadow, wall background, floor rectangle, UI, text, border, checkerboard or photographic noise. This is fixed old SCENERY, never a usable container or loot. Subject: UNDERSIDE of a short overhead PLANK WALKWAY, viewed perfectly straight up as a FLAT ORTHOGRAPHIC texture cutout, no perspective. Four broad uneven dark brown wooden planks laid parallel, two short thick cross battens nailed across their undersides. Irregular broken ends, a little daylight-free transparent gap between two boards, broad wood grain clusters, square iron nail heads. The rectangular patch is longer horizontally than vertically. No supports extending off the image, no rails, ropes, stone, background, side view, room or bridge scene. This cutout will be placed flat just below a ceiling, not across the player\u2019s floor.",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/dressing/cave-v1/mine-support.png",
+        "art/dressing/cave-v1/wall-fungus.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-d4f85313-e679-40ef-9311-0f4cbde35251.png",
+      "source": "art/source/cave-dressing-v2/overhead-walkway-master.png",
+      "selected": true,
+      "sha256": "6ca7ab7455b40989b05e4117331b0ecd753cd6ba18fe8a25b9564ba90eb317b0"
+    },
+    {
+      "id": "waterline-stain",
+      "prompt": "Use case: stylized-concept. One modular transparent scenery sprite for Depths, a dark first-person cave crawler. The reference images are STYLE REFERENCES ONLY: existing cave timber/fungus props. Match restrained rough painted PIXEL CLUSTERS and 3-4 shades per material, muted umber/olive/slate/bone palette, simplified to native128x128 and at most64 colours. Orthographic FRONT VIEW unless specified. Entire isolated piece inside a square canvas with small clear margins, genuine transparent alpha outside and in all gaps. Neutral diffuse albedo shading, no scene lighting, glow, ground shadow, wall background, floor rectangle, UI, text, border, checkerboard or photographic noise. This is fixed old SCENERY, never a usable container or loot. Subject: a WALL WATERLINE STAIN ONLY, a broad thin asymmetric horizontal tide mark of dark desaturated olive-grey silt, with an uneven pale grey mineral lip and three short downward streaks. A transparent overlay for existing stone: there must be NO actual stone, brick, floor or wall painted in the asset. Stain-only irregular cutout silhouette with low subdued opacity, transparent space above and below and between fragments. No water surface, pool, shine, holes or bubble pattern. Wide low patch, entire ends inside padding.",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/dressing/cave-v1/mine-support.png",
+        "art/dressing/cave-v1/wall-fungus.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-d67bc20f-1e19-4288-82a3-f995b0326328.png",
+      "source": "art/source/cave-dressing-v2/waterline-stain-master.png",
+      "selected": true,
+      "sha256": "6948ef23898fd677aa59124e5630e86d592dd656ba60f01842d94b7cc06fb90f"
+    },
+    {
+      "id": "mineral-crust",
+      "prompt": "Use case: stylized-concept. One modular transparent scenery sprite for Depths, a dark first-person cave crawler. The reference images are STYLE REFERENCES ONLY: existing cave timber/fungus props. Match restrained rough painted PIXEL CLUSTERS and 3-4 shades per material, muted umber/olive/slate/bone palette, simplified to native128x128 and at most64 colours. Orthographic FRONT VIEW unless specified. Entire isolated piece inside a square canvas with small clear margins, genuine transparent alpha outside and in all gaps. Neutral diffuse albedo shading, no scene lighting, glow, ground shadow, wall background, floor rectangle, UI, text, border, checkerboard or photographic noise. This is fixed old SCENERY, never a usable container or loot. Subject: a thin irregular WALL MINERAL CRUST ONLY: dull ivory-grey calcite residue in a broken arc with three shallow streaks/drip tongues down from it, slightly crusted scalloped edges and many broad transparent gaps. Neutral mineral deposit, not ore, a crystal cluster, white fungus, jewellery or a ledge. No rock wall/background, no glow, no liquid stream or ground shadow. Restrained charcoal-grey/dirty bone shades, flattened orthographic patch with coarse readable pixels. Designed to overlay damp blue-grey masonry, sparse and old.",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/dressing/cave-v1/mine-support.png",
+        "art/dressing/cave-v1/wall-fungus.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-51a50a7a-d911-4053-9661-05f0e5ddddae.png",
+      "source": "art/source/cave-dressing-v2/mineral-crust-master.png",
+      "selected": true,
+      "sha256": "cb0d87469b70b3c717c1dfd84a4934995ea1547558824da494a08e0b487c18fa"
+    },
+    {
+      "id": "relief-fragment",
+      "family": "buried-city",
+      "prompt": "Use case: stylized-concept. One modular transparent scenery sprite for Depths, a dark first-person cave crawler. The reference images are STYLE REFERENCES ONLY: matching existing wall tile and cave timber prop. Match restrained rough painted PIXEL CLUSTERS and 3-4 shades per material, muted umber/olive/slate/bone palette, simplified to native128x128 and at most64 colours. Orthographic FRONT VIEW unless specified. Entire isolated piece inside a square canvas with small clear margins, genuine transparent alpha outside and in all gaps. Neutral diffuse albedo shading, no scene lighting, glow, ground shadow, wall background, floor rectangle, UI, text, border, checkerboard or photographic noise. This is fixed old SCENERY, never a usable container or loot. Subject: a shallow broken LIMESTONE RELIEF FRAGMENT for a buried-city wall, about1m wide. A low horizontal chipped stone panel bearing three nested arch-shaped grooves and a restrained worn geometric border. Pale buff/grey limestone matching wall reference, broad flat carving, incomplete edges and an erased centre. No figures, animals, face, text, readable letters, religious/faction emblems, treasure, magical glow or architectural doorway. It is a shallow decorative fragment, not a full standing portal or object to open.",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/textures/descent-walls-v1/buried-city.png",
+        "art/dressing/cave-v1/mine-support.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-6ef9ce71-6827-4bbb-be59-5e18a9d81b7b.png",
+      "source": "art/source/cave-dressing-v2/relief-fragment-master.png",
+      "selected": true,
+      "sha256": "9b736b6ed1b8b78f54692846d4c9ade5d9a6b59d68366b24550e012d3eedfb34"
+    },
+    {
+      "id": "empty-lamp-niche",
+      "family": "buried-city",
+      "prompt": "Use case: stylized-concept. One modular transparent scenery sprite for Depths, a dark first-person cave crawler. The reference images are STYLE REFERENCES ONLY: matching existing wall tile and cave timber prop. Match restrained rough painted PIXEL CLUSTERS and 3-4 shades per material, muted umber/olive/slate/bone palette, simplified to native128x128 and at most64 colours. Orthographic FRONT VIEW unless specified. Entire isolated piece inside a square canvas with small clear margins, genuine transparent alpha outside and in all gaps. Neutral diffuse albedo shading, no scene lighting, glow, ground shadow, wall background, floor rectangle, UI, text, border, checkerboard or photographic noise. This is fixed old SCENERY, never a usable container or loot. Subject: one small EMPTY OLD LAMP NICHE cut in pale buff limestone, seen exactly front-on. A narrow rectangular recess with a short blunt pointed top, chipped stone rim, shallow dark grey interior, a tiny shelf at the base and an old soot smudge above the empty shelf. No actual lamp, candle, flame, idol, offering, figure, handle or loot. The niche is clearly a small mundane wall fitting, about0.5m high, not a doorway or shrine. Full cutout stone rim contained, no surrounding wall rectangle.",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/textures/descent-walls-v1/buried-city.png",
+        "art/dressing/cave-v1/mine-support.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-3d06419b-f902-49eb-8e07-6a075720b1ff.png",
+      "source": "art/source/cave-dressing-v2/empty-lamp-niche-master.png",
+      "selected": true,
+      "sha256": "fce621af641edd5c4998ec9e840dbfa82a72ae36ce0db2399b3b358af91a24ca"
+    },
+    {
+      "id": "ward-niche",
+      "family": "sealed-temple",
+      "prompt": "Use case: stylized-concept. One modular transparent scenery sprite for Depths, a dark first-person cave crawler. The reference images are STYLE REFERENCES ONLY: matching existing wall tile and cave timber prop. Match restrained rough painted PIXEL CLUSTERS and 3-4 shades per material, muted umber/olive/slate/bone palette, simplified to native128x128 and at most64 colours. Orthographic FRONT VIEW unless specified. Entire isolated piece inside a square canvas with small clear margins, genuine transparent alpha outside and in all gaps. Neutral diffuse albedo shading, no scene lighting, glow, ground shadow, wall background, floor rectangle, UI, text, border, checkerboard or photographic noise. This is fixed old SCENERY, never a usable container or loot. Subject: one small shallow WARD NICHE in dark purple-grey BASALT, exactly front-facing. A squat hexagonal recess with a thick chipped dark stone rim, two simple nested bevels and a plain flat recessed stone centre. Old solemn architectural ornament, about0.65m tall. The centre has NO object, gem, face, carved glyph, religious emblem, text, handle, knob or glimmer. No door frame, keyhole, altar or opening mechanism. Neutral structural stone relief only, dark basalt palette matching reference; separate markings can be overlaid later.",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/textures/descent-walls-v1/sealed-temple.png",
+        "art/dressing/cave-v1/mine-support.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-555304ee-f386-4c57-8cbc-20e3b74dbf01.png",
+      "source": "art/source/cave-dressing-v2/ward-niche-master.png",
+      "selected": true,
+      "sha256": "2eaf04b927f61efb323c93c3f760a2d78af3ae4822ad694bff98c82c4c691d36"
+    },
+    {
+      "id": "wall-spikes-pointed",
+      "family": null,
+      "prompt": "Use case: precise-object-edit. Edit target is the existing three-spike timber wall rack. Change ONLY the ends and shaft shapes of its three iron bars: make each a clearly TAPERED POINTED iron spike with a long triangular point, projecting upward/outward from the same rusty square base plate. No square blunt end caps; these should look like spikes rather than pegs. Keep the short splintered back board, three mounting positions, rust/grey palette, neutral clustered pixel treatment, full canvas registration and genuine transparent background. Fixed wall scenery, no creatures, blood, text or new objects.",
+      "reference_images": [
+        "art/source/cave-dressing-v2/wall-spikes-master.png"
+      ],
+      "tool": "built-in image_gen",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-96fecc2a-9bab-4dd6-8346-31ec4c9c9b4e.png",
+      "source": "art/source/cave-dressing-v2/wall-spikes-pointed-master.png",
+      "selected": true,
+      "reference": "art/source/cave-dressing-v2/wall-spikes-master.png",
+      "sha256": "adbe8573ed315c5bf90040bd835ba31628a49ff023d7db052a636a0e95b34cf8"
+    }
+  ]
+}

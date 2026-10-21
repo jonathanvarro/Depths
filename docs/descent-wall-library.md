@@ -21,7 +21,7 @@ Names and pairings are working art labels. Stone colour/construction and surface
 
 Each family has one 128×128 opaque PNG with at most 32 colours, and a `StandardMaterial3D` `.tres` using nearest sampling, repeat and full roughness. There are no normal/emission maps, custom shaders or added lighting costs. Six RGBA textures represent 393,216 uncompressed bytes before engine overhead. Original cave/stone/fortress assets and all live themes remain unchanged.
 
-To use a material in a future environment, assign its resource to `EnvironmentTheme.wall_material` and initially the same resource to `wall_variant_material`. This avoids mixing unrelated surfaces. A distinct damaged/plain partner, transition overlays and coordinated floor/ceiling materials can follow when the family is integrated. No floor change or campaign hook is included now.
+To use a material in a future environment, assign its resource to `EnvironmentTheme.wall_material` and initially the same resource to `wall_variant_material`. This avoids mixing unrelated surfaces. #139 now provides [matching floor/ceiling materials and deeper dressing](descent-surfaces-and-dressing.md), without changing these walls or live themes. Distinct damaged/plain partners and transitions can follow during integration.
 
 ## Generation and export
 
@@ -35,4 +35,9 @@ Rebuild with `tools/art/build_descent_walls.py`, import in Godot 4.7.2, then run
 
 43 Godot checks pass with clean import/render logs and 18 actual captures: each family under shared neutral ambient, warm lantern and 1278×590 phone-shaped lantern conditions. The fixture uses the existing `LevelBuilder` and its ordinary `BoxMesh` walls, plus the existing cave floor/ceiling. It creates no game state, floor assignment, save or fuel rules.
 
-Those existing floor/ceiling textures are comparison surfaces, not newly matched art for all six families. The existing box UV layout stretches/crops material regions differently from floor planes, so physical texel-scale consistency is still the previously recorded geometry limitation; this asset task does not change it. Repeated motifs remain visible in large uniform areas; worn variants and landmarks can break those up later. Physical iPhone appearance remains untested.
+The original #126 captures above use the old cave floor/ceiling for comparison.
+#139's inspector has new matched surfaces and fresh actual room views. The
+existing box UV layout stretches/crops material regions differently from floor
+planes, so physical texel-scale consistency remains a geometry limitation.
+Repeated motifs remain visible in large uniform areas; worn variants and
+landmarks can break those up later. Physical iPhone appearance remains untested.

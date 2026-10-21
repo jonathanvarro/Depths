@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Texture2D" path="res://art/dressing/cave-v2/mineral-crust.png" id="texture"]
+
+[node name="mineral-crust" type="Node3D"]
+metadata/dressing_id = "mineral-crust"
+
+[node name="Sprite" type="Sprite3D" parent="."]
+position = Vector3(0.0, 0.0, 0.012)
+pixel_size = 0.009821428571428573
+billboard = 0
+shaded = true
+texture_filter = 0
+alpha_cut = 0
+alpha_scissor_threshold = 0.5
+cast_shadow = 0
+modulate = Color(1, 1, 1, 0.8)
+texture = ExtResource("texture")

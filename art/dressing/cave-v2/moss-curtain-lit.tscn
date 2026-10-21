@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Texture2D" path="res://art/dressing/cave-v2/moss-curtain.png" id="texture"]
+
+[ext_resource type="SpriteFrames" path="res://art/dressing/cave-v2/moss-curtain-pulse.tres" id="glow"]
+
+[node name="moss-curtain" type="Node3D"]
+metadata/dressing_id = "moss-curtain"
+
+[node name="Sprite" type="Sprite3D" parent="."]
+position = Vector3(0.0, -0.275, 0)
+pixel_size = 0.009821428571428573
+billboard = 2
+shaded = true
+texture_filter = 0
+alpha_cut = 1
+alpha_scissor_threshold = 0.5
+cast_shadow = 0
+modulate = Color(1, 1, 1, 1)
+texture = ExtResource("texture")
+
+[node name="Glow" type="AnimatedSprite3D" parent="."]
+position = Vector3(0, -0.275, 0.016)
+pixel_size = 0.009821428571428573
+billboard = 2
+shaded = false
+texture_filter = 0
+cast_shadow = 0
+sprite_frames = ExtResource("glow")
+animation = &"loop"
+autoplay = "loop"

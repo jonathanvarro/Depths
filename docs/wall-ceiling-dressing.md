@@ -2,7 +2,10 @@
 
 *2026-10-20 · Owner request: walls and ceilings that make the cave feel real, for example a wall torch or a stalagmite. Related: landmarks (#117), the cave descent (#125), the descent wall library (#126), and the art backlog (#96).*
 
-Today, floors draw plain walls, floor and ceiling. The only extras are the stairs and passages, room props, and a few floor props on the fortress floors. This list is **set dressing**: small pieces scattered along walls and ceilings so corridors stop looking alike. It sits **alongside** the descent wall textures (#126), not instead of them.
+This brief originally described mostly plain rooms. The first dressing library
+is now placed sparsely by `scripts/dressing.gd`; landmark roots/cache art is
+separate (#132). This list describes **set dressing** alongside the descent
+wall textures (#126).
 
 ## First art pack delivered (2026-10-20)
 
@@ -10,8 +13,17 @@ The eleven first-batch categories and all nine floor categories below now have
 assets in `art/dressing/cave-v1/catalog.json` (32 registered cutouts/scenes).
 The lit torch includes four flame frames and a mood-only local light. Sources,
 mounts, previews and rebuilding: [cave-dressing-assets.md](cave-dressing-assets.md).
-Claude's sparse seeded placement remains to be wired; the review rooms are
+Claude's sparse seeded placement is now live. The original review rooms remain
 standalone fixtures.
+
+## Remaining art delivered (2026-10-21)
+
+#139 adds the second-batch fittings/moss/remains/goblin pieces and later-layer
+accents, plus twelve matching descent floor/ceiling materials. There are twenty
+new dressing entries/assemblies, reusing existing roots/wall fungus and the
+neutral floor mushroom drawing. New scenes remain ready for placement; proposed
+deeper layers and the stranger's clue have no new story assignment.
+[Catalogue, mounts, sources and paused review](descent-surfaces-and-dressing.md).
 
 ## How the game will place them
 

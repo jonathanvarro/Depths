@@ -1,0 +1,1234 @@
+{
+  "issue": 139,
+  "size": 128,
+  "colour_limit": 32,
+  "families": [
+    {
+      "id": "worked-cave",
+      "wall_texture": "res://art/textures/descent-walls-v1/worked-cave.png",
+      "wall_material": "res://art/textures/descent-walls-v1/worked-cave.tres",
+      "wall_sha256": "abb1a323af53226cf84aa9c077d298cfd2b421d2869c232827c9daca0bccac00",
+      "palette": [
+        [
+          29,
+          29,
+          31
+        ],
+        [
+          34,
+          34,
+          35
+        ],
+        [
+          38,
+          38,
+          39
+        ],
+        [
+          42,
+          42,
+          42
+        ],
+        [
+          45,
+          45,
+          45
+        ],
+        [
+          48,
+          47,
+          47
+        ],
+        [
+          51,
+          50,
+          50
+        ],
+        [
+          54,
+          52,
+          52
+        ],
+        [
+          57,
+          55,
+          54
+        ],
+        [
+          59,
+          56,
+          55
+        ],
+        [
+          60,
+          58,
+          57
+        ],
+        [
+          62,
+          59,
+          58
+        ],
+        [
+          63,
+          61,
+          59
+        ],
+        [
+          66,
+          62,
+          59
+        ],
+        [
+          67,
+          64,
+          61
+        ],
+        [
+          70,
+          66,
+          63
+        ],
+        [
+          71,
+          67,
+          64
+        ],
+        [
+          72,
+          68,
+          66
+        ],
+        [
+          75,
+          69,
+          65
+        ],
+        [
+          75,
+          70,
+          66
+        ],
+        [
+          76,
+          71,
+          68
+        ],
+        [
+          77,
+          72,
+          68
+        ],
+        [
+          79,
+          72,
+          68
+        ],
+        [
+          79,
+          74,
+          70
+        ],
+        [
+          81,
+          75,
+          71
+        ],
+        [
+          82,
+          76,
+          71
+        ],
+        [
+          84,
+          76,
+          69
+        ],
+        [
+          84,
+          78,
+          72
+        ],
+        [
+          86,
+          79,
+          73
+        ],
+        [
+          90,
+          81,
+          74
+        ],
+        [
+          94,
+          84,
+          76
+        ],
+        [
+          103,
+          91,
+          79
+        ]
+      ],
+      "floor_material": "res://art/textures/descent-surfaces-v1/worked-cave-floor.tres",
+      "floor_texture": "res://art/textures/descent-surfaces-v1/worked-cave-floor.png",
+      "ceiling_material": "res://art/textures/descent-surfaces-v1/worked-cave-ceiling.tres",
+      "ceiling_texture": "res://art/textures/descent-surfaces-v1/worked-cave-ceiling.png"
+    },
+    {
+      "id": "goblin-hold",
+      "wall_texture": "res://art/textures/descent-walls-v1/goblin-hold.png",
+      "wall_material": "res://art/textures/descent-walls-v1/goblin-hold.tres",
+      "wall_sha256": "27dd34be997b8865bc5fa3ccae13748f2db973d66fb17c1d383dd787004042d0",
+      "palette": [
+        [
+          28,
+          23,
+          18
+        ],
+        [
+          33,
+          28,
+          21
+        ],
+        [
+          36,
+          32,
+          26
+        ],
+        [
+          41,
+          34,
+          26
+        ],
+        [
+          43,
+          38,
+          32
+        ],
+        [
+          45,
+          41,
+          36
+        ],
+        [
+          49,
+          40,
+          30
+        ],
+        [
+          49,
+          46,
+          40
+        ],
+        [
+          50,
+          44,
+          36
+        ],
+        [
+          52,
+          46,
+          39
+        ],
+        [
+          53,
+          48,
+          41
+        ],
+        [
+          54,
+          50,
+          44
+        ],
+        [
+          57,
+          53,
+          47
+        ],
+        [
+          59,
+          48,
+          35
+        ],
+        [
+          59,
+          51,
+          40
+        ],
+        [
+          60,
+          55,
+          49
+        ],
+        [
+          62,
+          53,
+          43
+        ],
+        [
+          63,
+          56,
+          47
+        ],
+        [
+          63,
+          57,
+          49
+        ],
+        [
+          65,
+          59,
+          51
+        ],
+        [
+          67,
+          59,
+          47
+        ],
+        [
+          69,
+          62,
+          53
+        ],
+        [
+          72,
+          58,
+          43
+        ],
+        [
+          72,
+          63,
+          52
+        ],
+        [
+          73,
+          66,
+          57
+        ],
+        [
+          77,
+          63,
+          46
+        ],
+        [
+          77,
+          68,
+          57
+        ],
+        [
+          80,
+          72,
+          61
+        ],
+        [
+          82,
+          68,
+          51
+        ],
+        [
+          86,
+          73,
+          58
+        ],
+        [
+          89,
+          78,
+          63
+        ],
+        [
+          99,
+          86,
+          70
+        ]
+      ],
+      "floor_material": "res://art/textures/descent-surfaces-v1/goblin-hold-floor.tres",
+      "floor_texture": "res://art/textures/descent-surfaces-v1/goblin-hold-floor.png",
+      "ceiling_material": "res://art/textures/descent-surfaces-v1/goblin-hold-ceiling.tres",
+      "ceiling_texture": "res://art/textures/descent-surfaces-v1/goblin-hold-ceiling.png"
+    },
+    {
+      "id": "drowned-masonry",
+      "wall_texture": "res://art/textures/descent-walls-v1/drowned-masonry.png",
+      "wall_material": "res://art/textures/descent-walls-v1/drowned-masonry.tres",
+      "wall_sha256": "bea4e642b4fe0a8e38cb7832a6774002f212aca970a2ae7775f94537e75fc14a",
+      "palette": [
+        [
+          30,
+          34,
+          28
+        ],
+        [
+          36,
+          42,
+          37
+        ],
+        [
+          37,
+          47,
+          49
+        ],
+        [
+          40,
+          51,
+          55
+        ],
+        [
+          41,
+          48,
+          44
+        ],
+        [
+          41,
+          55,
+          59
+        ],
+        [
+          43,
+          57,
+          62
+        ],
+        [
+          44,
+          55,
+          58
+        ],
+        [
+          46,
+          58,
+          60
+        ],
+        [
+          46,
+          59,
+          62
+        ],
+        [
+          47,
+          53,
+          46
+        ],
+        [
+          47,
+          60,
+          63
+        ],
+        [
+          48,
+          62,
+          65
+        ],
+        [
+          51,
+          62,
+          65
+        ],
+        [
+          51,
+          65,
+          68
+        ],
+        [
+          53,
+          60,
+          51
+        ],
+        [
+          55,
+          65,
+          64
+        ],
+        [
+          55,
+          68,
+          70
+        ],
+        [
+          56,
+          69,
+          72
+        ],
+        [
+          56,
+          70,
+          74
+        ],
+        [
+          59,
+          73,
+          76
+        ],
+        [
+          60,
+          70,
+          66
+        ],
+        [
+          61,
+          74,
+          78
+        ],
+        [
+          63,
+          73,
+          68
+        ],
+        [
+          63,
+          76,
+          78
+        ],
+        [
+          63,
+          78,
+          81
+        ],
+        [
+          66,
+          81,
+          83
+        ],
+        [
+          69,
+          79,
+          72
+        ],
+        [
+          71,
+          85,
+          87
+        ],
+        [
+          78,
+          89,
+          84
+        ],
+        [
+          86,
+          97,
+          94
+        ],
+        [
+          103,
+          113,
+          109
+        ]
+      ],
+      "floor_material": "res://art/textures/descent-surfaces-v1/drowned-masonry-floor.tres",
+      "floor_texture": "res://art/textures/descent-surfaces-v1/drowned-masonry-floor.png",
+      "ceiling_material": "res://art/textures/descent-surfaces-v1/drowned-masonry-ceiling.tres",
+      "ceiling_texture": "res://art/textures/descent-surfaces-v1/drowned-masonry-ceiling.png"
+    },
+    {
+      "id": "fungal-stone",
+      "wall_texture": "res://art/textures/descent-walls-v1/fungal-stone.png",
+      "wall_material": "res://art/textures/descent-walls-v1/fungal-stone.tres",
+      "wall_sha256": "761d0c6597d50d048852f06142d8fb0e45c042ff1f13737d00aea436da7bb4e0",
+      "palette": [
+        [
+          34,
+          32,
+          22
+        ],
+        [
+          41,
+          39,
+          25
+        ],
+        [
+          44,
+          41,
+          28
+        ],
+        [
+          46,
+          43,
+          29
+        ],
+        [
+          47,
+          45,
+          30
+        ],
+        [
+          49,
+          46,
+          33
+        ],
+        [
+          51,
+          47,
+          33
+        ],
+        [
+          52,
+          49,
+          35
+        ],
+        [
+          53,
+          51,
+          37
+        ],
+        [
+          54,
+          53,
+          37
+        ],
+        [
+          56,
+          53,
+          39
+        ],
+        [
+          57,
+          56,
+          40
+        ],
+        [
+          58,
+          53,
+          37
+        ],
+        [
+          60,
+          56,
+          47
+        ],
+        [
+          60,
+          58,
+          43
+        ],
+        [
+          61,
+          56,
+          34
+        ],
+        [
+          61,
+          61,
+          34
+        ],
+        [
+          62,
+          60,
+          50
+        ],
+        [
+          64,
+          59,
+          44
+        ],
+        [
+          65,
+          62,
+          45
+        ],
+        [
+          66,
+          63,
+          47
+        ],
+        [
+          66,
+          67,
+          43
+        ],
+        [
+          68,
+          62,
+          45
+        ],
+        [
+          69,
+          65,
+          50
+        ],
+        [
+          70,
+          67,
+          48
+        ],
+        [
+          71,
+          68,
+          50
+        ],
+        [
+          72,
+          73,
+          48
+        ],
+        [
+          75,
+          70,
+          53
+        ],
+        [
+          79,
+          74,
+          56
+        ],
+        [
+          79,
+          77,
+          55
+        ],
+        [
+          82,
+          80,
+          57
+        ],
+        [
+          92,
+          87,
+          64
+        ]
+      ],
+      "floor_material": "res://art/textures/descent-surfaces-v1/fungal-stone-floor.tres",
+      "floor_texture": "res://art/textures/descent-surfaces-v1/fungal-stone-floor.png",
+      "ceiling_material": "res://art/textures/descent-surfaces-v1/fungal-stone-ceiling.tres",
+      "ceiling_texture": "res://art/textures/descent-surfaces-v1/fungal-stone-ceiling.png"
+    },
+    {
+      "id": "buried-city",
+      "wall_texture": "res://art/textures/descent-walls-v1/buried-city.png",
+      "wall_material": "res://art/textures/descent-walls-v1/buried-city.tres",
+      "wall_sha256": "98801cbaaaa2f8d857e0dcdd4f9063c76e8120c496d89c35da28df725cb8dffd",
+      "palette": [
+        [
+          77,
+          72,
+          64
+        ],
+        [
+          94,
+          87,
+          77
+        ],
+        [
+          106,
+          97,
+          85
+        ],
+        [
+          115,
+          106,
+          94
+        ],
+        [
+          123,
+          114,
+          100
+        ],
+        [
+          130,
+          120,
+          106
+        ],
+        [
+          133,
+          124,
+          112
+        ],
+        [
+          136,
+          126,
+          112
+        ],
+        [
+          137,
+          128,
+          116
+        ],
+        [
+          139,
+          129,
+          116
+        ],
+        [
+          140,
+          131,
+          118
+        ],
+        [
+          141,
+          133,
+          120
+        ],
+        [
+          144,
+          134,
+          120
+        ],
+        [
+          145,
+          136,
+          123
+        ],
+        [
+          146,
+          137,
+          124
+        ],
+        [
+          148,
+          138,
+          123
+        ],
+        [
+          148,
+          139,
+          126
+        ],
+        [
+          150,
+          140,
+          125
+        ],
+        [
+          150,
+          141,
+          127
+        ],
+        [
+          151,
+          142,
+          128
+        ],
+        [
+          154,
+          142,
+          126
+        ],
+        [
+          154,
+          145,
+          130
+        ],
+        [
+          157,
+          145,
+          127
+        ],
+        [
+          158,
+          148,
+          131
+        ],
+        [
+          159,
+          149,
+          133
+        ],
+        [
+          161,
+          151,
+          135
+        ],
+        [
+          164,
+          153,
+          136
+        ],
+        [
+          169,
+          155,
+          134
+        ],
+        [
+          172,
+          160,
+          142
+        ],
+        [
+          181,
+          163,
+          137
+        ],
+        [
+          185,
+          169,
+          144
+        ],
+        [
+          192,
+          178,
+          155
+        ]
+      ],
+      "floor_material": "res://art/textures/descent-surfaces-v1/buried-city-floor.tres",
+      "floor_texture": "res://art/textures/descent-surfaces-v1/buried-city-floor.png",
+      "ceiling_material": "res://art/textures/descent-surfaces-v1/buried-city-ceiling.tres",
+      "ceiling_texture": "res://art/textures/descent-surfaces-v1/buried-city-ceiling.png"
+    },
+    {
+      "id": "sealed-temple",
+      "wall_texture": "res://art/textures/descent-walls-v1/sealed-temple.png",
+      "wall_material": "res://art/textures/descent-walls-v1/sealed-temple.tres",
+      "wall_sha256": "faf3233b789d93af614512f23eab43a9d11a59ecdf41bd1fca9d01e3cb1c6364",
+      "palette": [
+        [
+          22,
+          22,
+          25
+        ],
+        [
+          27,
+          26,
+          29
+        ],
+        [
+          34,
+          32,
+          36
+        ],
+        [
+          40,
+          36,
+          41
+        ],
+        [
+          40,
+          37,
+          43
+        ],
+        [
+          41,
+          38,
+          43
+        ],
+        [
+          42,
+          38,
+          44
+        ],
+        [
+          43,
+          40,
+          45
+        ],
+        [
+          43,
+          41,
+          46
+        ],
+        [
+          44,
+          39,
+          45
+        ],
+        [
+          44,
+          42,
+          47
+        ],
+        [
+          45,
+          42,
+          47
+        ],
+        [
+          46,
+          42,
+          47
+        ],
+        [
+          46,
+          44,
+          49
+        ],
+        [
+          47,
+          42,
+          47
+        ],
+        [
+          47,
+          45,
+          50
+        ],
+        [
+          48,
+          46,
+          51
+        ],
+        [
+          49,
+          42,
+          48
+        ],
+        [
+          49,
+          47,
+          51
+        ],
+        [
+          50,
+          44,
+          50
+        ],
+        [
+          50,
+          48,
+          52
+        ],
+        [
+          51,
+          45,
+          50
+        ],
+        [
+          51,
+          49,
+          54
+        ],
+        [
+          52,
+          45,
+          51
+        ],
+        [
+          53,
+          50,
+          54
+        ],
+        [
+          54,
+          46,
+          51
+        ],
+        [
+          55,
+          53,
+          56
+        ],
+        [
+          57,
+          50,
+          55
+        ],
+        [
+          58,
+          54,
+          57
+        ],
+        [
+          61,
+          57,
+          60
+        ],
+        [
+          66,
+          61,
+          63
+        ],
+        [
+          73,
+          68,
+          69
+        ]
+      ],
+      "floor_material": "res://art/textures/descent-surfaces-v1/sealed-temple-floor.tres",
+      "floor_texture": "res://art/textures/descent-surfaces-v1/sealed-temple-floor.png",
+      "ceiling_material": "res://art/textures/descent-surfaces-v1/sealed-temple-ceiling.tres",
+      "ceiling_texture": "res://art/textures/descent-surfaces-v1/sealed-temple-ceiling.png"
+    }
+  ],
+  "assets": [
+    {
+      "id": "worked-cave-floor",
+      "family": "worked-cave",
+      "role": "floor",
+      "texture": "res://art/textures/descent-surfaces-v1/worked-cave-floor.png",
+      "material": "res://art/textures/descent-surfaces-v1/worked-cave-floor.tres",
+      "canvas": [
+        128,
+        128
+      ],
+      "palette_source": "res://art/textures/descent-walls-v1/worked-cave.png",
+      "colours": 23,
+      "source": "res://art/source/descent-surfaces-v1/worked-cave-floor-master.png",
+      "source_sha256": "61f9fd6bc5012afed134de5041c88f7659b6e0b3b7dc1656bf870cfb8d03b20b",
+      "sha256": "145c6dc4b02754dbf7326d2511448e51c60ef2ce03a7e23a3846a25df653954b"
+    },
+    {
+      "id": "worked-cave-ceiling",
+      "family": "worked-cave",
+      "role": "ceiling",
+      "texture": "res://art/textures/descent-surfaces-v1/worked-cave-ceiling.png",
+      "material": "res://art/textures/descent-surfaces-v1/worked-cave-ceiling.tres",
+      "canvas": [
+        128,
+        128
+      ],
+      "palette_source": "res://art/textures/descent-walls-v1/worked-cave.png",
+      "colours": 19,
+      "source": "res://art/source/descent-surfaces-v1/worked-cave-ceiling-master.png",
+      "source_sha256": "fc64f9b7cc8bd7779fa6605ed4560246eff6cb47ee7b8891a577e7c162ac9d25",
+      "sha256": "108f860515ed20d47c54b0c22fbdce9e4fc06fc0c9538c5e64a2763da87c2577"
+    },
+    {
+      "id": "goblin-hold-floor",
+      "family": "goblin-hold",
+      "role": "floor",
+      "texture": "res://art/textures/descent-surfaces-v1/goblin-hold-floor.png",
+      "material": "res://art/textures/descent-surfaces-v1/goblin-hold-floor.tres",
+      "canvas": [
+        128,
+        128
+      ],
+      "palette_source": "res://art/textures/descent-walls-v1/goblin-hold.png",
+      "colours": 29,
+      "source": "res://art/source/descent-surfaces-v1/goblin-hold-floor-master.png",
+      "source_sha256": "292f8c4e77e7b77d1be06f5cbef47ad78af52db6f9ead906313861e7dec8e6d1",
+      "sha256": "10684123f4b416ddc303e3e641124e7bf51b995374830307321f101804dcace6"
+    },
+    {
+      "id": "goblin-hold-ceiling",
+      "family": "goblin-hold",
+      "role": "ceiling",
+      "texture": "res://art/textures/descent-surfaces-v1/goblin-hold-ceiling.png",
+      "material": "res://art/textures/descent-surfaces-v1/goblin-hold-ceiling.tres",
+      "canvas": [
+        128,
+        128
+      ],
+      "palette_source": "res://art/textures/descent-walls-v1/goblin-hold.png",
+      "colours": 28,
+      "source": "res://art/source/descent-surfaces-v1/goblin-hold-ceiling-master.png",
+      "source_sha256": "81af5210fbeee0a89fdba37f6011395c479af15dc724a5c0f1b2dd360edbb3da",
+      "sha256": "714f6fa53cd8fcca50097e118d1a0a70cb0dde9f87e16b06ae46edb448da0a39"
+    },
+    {
+      "id": "drowned-masonry-floor",
+      "family": "drowned-masonry",
+      "role": "floor",
+      "texture": "res://art/textures/descent-surfaces-v1/drowned-masonry-floor.png",
+      "material": "res://art/textures/descent-surfaces-v1/drowned-masonry-floor.tres",
+      "canvas": [
+        128,
+        128
+      ],
+      "palette_source": "res://art/textures/descent-walls-v1/drowned-masonry.png",
+      "colours": 31,
+      "source": "res://art/source/descent-surfaces-v1/drowned-masonry-floor-master.png",
+      "source_sha256": "9cec517d7c5062e530b2e1e52ba1099eb0344ad6f2ad663a13773bfc86a757a4",
+      "sha256": "14a49d59d66dc5bd9e8ac454f8f7df2d60551740dd648bbfbd84a9db2c1faa0c"
+    },
+    {
+      "id": "drowned-masonry-ceiling",
+      "family": "drowned-masonry",
+      "role": "ceiling",
+      "texture": "res://art/textures/descent-surfaces-v1/drowned-masonry-ceiling.png",
+      "material": "res://art/textures/descent-surfaces-v1/drowned-masonry-ceiling.tres",
+      "canvas": [
+        128,
+        128
+      ],
+      "palette_source": "res://art/textures/descent-walls-v1/drowned-masonry.png",
+      "colours": 30,
+      "source": "res://art/source/descent-surfaces-v1/drowned-masonry-ceiling-master.png",
+      "source_sha256": "f75251a1eb139f953b8b294e1ff830df6c8cdc7c14e370d084ff7460c2cb4981",
+      "sha256": "ee3a9497dc04af0aa066614945aa38c8ceddf996d45fbd3ddb342538889bf384"
+    },
+    {
+      "id": "fungal-stone-floor",
+      "family": "fungal-stone",
+      "role": "floor",
+      "texture": "res://art/textures/descent-surfaces-v1/fungal-stone-floor.png",
+      "material": "res://art/textures/descent-surfaces-v1/fungal-stone-floor.tres",
+      "canvas": [
+        128,
+        128
+      ],
+      "palette_source": "res://art/textures/descent-walls-v1/fungal-stone.png",
+      "colours": 29,
+      "source": "res://art/source/descent-surfaces-v1/fungal-stone-floor-master.png",
+      "source_sha256": "84f9a2f4ec2f752f4c7f7ee8da373d592bf3904704f42fa5b080cbb186a4eeab",
+      "sha256": "9e96cd3589a09bcceda0637360d1db2c2f02c2d7c22911296e8467431fc8b65a"
+    },
+    {
+      "id": "fungal-stone-ceiling",
+      "family": "fungal-stone",
+      "role": "ceiling",
+      "texture": "res://art/textures/descent-surfaces-v1/fungal-stone-ceiling.png",
+      "material": "res://art/textures/descent-surfaces-v1/fungal-stone-ceiling.tres",
+      "canvas": [
+        128,
+        128
+      ],
+      "palette_source": "res://art/textures/descent-walls-v1/fungal-stone.png",
+      "colours": 31,
+      "source": "res://art/source/descent-surfaces-v1/fungal-stone-ceiling-master.png",
+      "source_sha256": "9f23983e2b080ed53ef86eb5323caf83a6512c3d4bdcae5e9d9bcf68a62dc5b7",
+      "sha256": "50af22fc2f2cef1e59682f04334ae4d21aad6c1a40f9b837f4d42feba3d318e9"
+    },
+    {
+      "id": "buried-city-floor",
+      "family": "buried-city",
+      "role": "floor",
+      "texture": "res://art/textures/descent-surfaces-v1/buried-city-floor.png",
+      "material": "res://art/textures/descent-surfaces-v1/buried-city-floor.tres",
+      "canvas": [
+        128,
+        128
+      ],
+      "palette_source": "res://art/textures/descent-walls-v1/buried-city.png",
+      "colours": 23,
+      "source": "res://art/source/descent-surfaces-v1/buried-city-floor-master.png",
+      "source_sha256": "572733fc748246fa02da106f4b49b1d24c67bc762f7a5f49d0685fca554d413f",
+      "sha256": "63bdbd392fc6c672e7010eb972aea0b015c123a3c46daaafcb691f5da62c5f22"
+    },
+    {
+      "id": "buried-city-ceiling",
+      "family": "buried-city",
+      "role": "ceiling",
+      "texture": "res://art/textures/descent-surfaces-v1/buried-city-ceiling.png",
+      "material": "res://art/textures/descent-surfaces-v1/buried-city-ceiling.tres",
+      "canvas": [
+        128,
+        128
+      ],
+      "palette_source": "res://art/textures/descent-walls-v1/buried-city.png",
+      "colours": 26,
+      "source": "res://art/source/descent-surfaces-v1/buried-city-ceiling-master.png",
+      "source_sha256": "7909e8e389362aca577100885db5f8c0581e51892122bdbd9cfa91b7312f091c",
+      "sha256": "98fe4b7dfd9f70b1bc351c77b9f26d07bf2c11382c722bbcbd95b7499e954ed8"
+    },
+    {
+      "id": "sealed-temple-floor",
+      "family": "sealed-temple",
+      "role": "floor",
+      "texture": "res://art/textures/descent-surfaces-v1/sealed-temple-floor.png",
+      "material": "res://art/textures/descent-surfaces-v1/sealed-temple-floor.tres",
+      "canvas": [
+        128,
+        128
+      ],
+      "palette_source": "res://art/textures/descent-walls-v1/sealed-temple.png",
+      "colours": 26,
+      "source": "res://art/source/descent-surfaces-v1/sealed-temple-floor-master.png",
+      "source_sha256": "50bcdb93f3c03f0b2f1f16454a42107536291d46284343a185026e9047939655",
+      "sha256": "a9d598e3026cee7a4efcf998fcbed1d938824813dfc1d4b2b6ad1aa8ca575406"
+    },
+    {
+      "id": "sealed-temple-ceiling",
+      "family": "sealed-temple",
+      "role": "ceiling",
+      "texture": "res://art/textures/descent-surfaces-v1/sealed-temple-ceiling.png",
+      "material": "res://art/textures/descent-surfaces-v1/sealed-temple-ceiling.tres",
+      "canvas": [
+        128,
+        128
+      ],
+      "palette_source": "res://art/textures/descent-walls-v1/sealed-temple.png",
+      "colours": 26,
+      "source": "res://art/source/descent-surfaces-v1/sealed-temple-ceiling-master.png",
+      "source_sha256": "2fb1fdbc1705369977f70bdbda64b9e4463baa7696eb689d9e527255f3525bfa",
+      "sha256": "3d3aa04f3da6b2492964619e380a37f9f01afc8fda6744448e8d2cd16434f497"
+    }
+  ],
+  "assignment": "Material library only. Existing wall files and live themes are unchanged. Family/floor lore remains proposed."
+}

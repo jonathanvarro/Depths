@@ -1,0 +1,204 @@
+{
+  "checks": 49,
+  "failures": [],
+  "errors": [],
+  "results": [
+    {
+      "check": "All twenty native drawings loaded",
+      "ok": true
+    },
+    {
+      "check": "Six surface families",
+      "ok": true
+    },
+    {
+      "check": "Room loaded: worked-cave neutral",
+      "ok": true
+    },
+    {
+      "check": "Room loaded: worked-cave lantern",
+      "ok": true
+    },
+    {
+      "check": "Room loaded: worked-cave phone-lantern",
+      "ok": true
+    },
+    {
+      "check": "Room loaded: goblin-hold neutral",
+      "ok": true
+    },
+    {
+      "check": "Room loaded: goblin-hold lantern",
+      "ok": true
+    },
+    {
+      "check": "Room loaded: goblin-hold phone-lantern",
+      "ok": true
+    },
+    {
+      "check": "Room loaded: drowned-masonry neutral",
+      "ok": true
+    },
+    {
+      "check": "Room loaded: drowned-masonry lantern",
+      "ok": true
+    },
+    {
+      "check": "Room loaded: drowned-masonry phone-lantern",
+      "ok": true
+    },
+    {
+      "check": "Room loaded: fungal-stone neutral",
+      "ok": true
+    },
+    {
+      "check": "Room loaded: fungal-stone lantern",
+      "ok": true
+    },
+    {
+      "check": "Room loaded: fungal-stone phone-lantern",
+      "ok": true
+    },
+    {
+      "check": "Room loaded: buried-city neutral",
+      "ok": true
+    },
+    {
+      "check": "Room loaded: buried-city lantern",
+      "ok": true
+    },
+    {
+      "check": "Room loaded: buried-city phone-lantern",
+      "ok": true
+    },
+    {
+      "check": "Room loaded: sealed-temple neutral",
+      "ok": true
+    },
+    {
+      "check": "Room loaded: sealed-temple lantern",
+      "ok": true
+    },
+    {
+      "check": "Room loaded: sealed-temple phone-lantern",
+      "ok": true
+    },
+    {
+      "check": "Dressing tab switches panel",
+      "ok": true
+    },
+    {
+      "check": "Paused frame holds",
+      "ok": true
+    },
+    {
+      "check": "Glow toggle is independent",
+      "ok": true
+    },
+    {
+      "check": "Registered pulse contributes visible pixels",
+      "ok": true
+    },
+    {
+      "check": "Step advances exactly one frame",
+      "ok": true
+    },
+    {
+      "check": "Play resumes",
+      "ok": true
+    },
+    {
+      "check": "Mounted view loaded: mine-fittings desktop",
+      "ok": true
+    },
+    {
+      "check": "Mounted view loaded: mine-fittings phone",
+      "ok": true
+    },
+    {
+      "check": "Mounted view loaded: goblin-fixtures desktop",
+      "ok": true
+    },
+    {
+      "check": "Mounted view loaded: goblin-fixtures phone",
+      "ok": true
+    },
+    {
+      "check": "Mounted view loaded: drowned-details desktop",
+      "ok": true
+    },
+    {
+      "check": "Mounted view loaded: drowned-details phone",
+      "ok": true
+    },
+    {
+      "check": "Mounted view loaded: fungal-details desktop",
+      "ok": true
+    },
+    {
+      "check": "Mounted view loaded: fungal-details phone",
+      "ok": true
+    },
+    {
+      "check": "Mounted view loaded: fungal-dark desktop",
+      "ok": true
+    },
+    {
+      "check": "Mounted view loaded: fungal-dark phone",
+      "ok": true
+    },
+    {
+      "check": "Mounted view loaded: buried-details desktop",
+      "ok": true
+    },
+    {
+      "check": "Mounted view loaded: buried-details phone",
+      "ok": true
+    },
+    {
+      "check": "Mounted view loaded: sealed-details desktop",
+      "ok": true
+    },
+    {
+      "check": "Mounted view loaded: sealed-details phone",
+      "ok": true
+    },
+    {
+      "check": "No horizontal overflow at 844px",
+      "ok": true
+    },
+    {
+      "check": "44px controls at 844px",
+      "ok": true
+    },
+    {
+      "check": "All drawing and label bounds fit cards at 844px",
+      "ok": true
+    },
+    {
+      "check": "No horizontal overflow at 390px",
+      "ok": true
+    },
+    {
+      "check": "44px controls at 390px",
+      "ok": true
+    },
+    {
+      "check": "All drawing and label bounds fit cards at 390px",
+      "ok": true
+    },
+    {
+      "check": "Surface tab returns",
+      "ok": true
+    },
+    {
+      "check": "Visible native tiles load",
+      "ok": true
+    },
+    {
+      "check": "No browser script errors",
+      "ok": true
+    }
+  ],
+  "limits": "Offline desktop Chrome review. Phone dimensions are simulated."
+}

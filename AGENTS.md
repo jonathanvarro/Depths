@@ -78,6 +78,10 @@ Templates > Download and Install; already installed on the owner's PC).
   Six standalone deeper-cave wall families (#126) are available in
   `art/textures/descent-walls-v1`; sources, previews and integration notes:
   `docs/descent-wall-library.md`. They are not assigned to live floors yet.
+  Matching floors/ceilings for all six families and twenty remaining dressing
+  entries (#139) are ready in `docs/descent-surfaces-and-dressing.md`; optional
+  glow is separate and mood only. Preserve live themes/wall files; new placement
+  and later floor/lore assignment remain separate work.
   Roots, collapsed royal cache scenery and a miners' shrine with fresh/resolved
   states (#132/#133) are ready in `art/dressing/landmarks-v1`;
   `docs/landmark-art.md` records mounts and the shrine's required wall anchor.
