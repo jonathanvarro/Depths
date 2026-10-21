@@ -9,6 +9,7 @@ const Landmarks := preload("res://scripts/landmarks.gd")
 const Ambience := preload("res://scripts/ambience.gd")
 const Recruits := preload("res://scripts/recruits.gd")
 const Trinkets := preload("res://scripts/trinkets.gd")
+const GearGen := preload("res://scripts/gear_gen.gd")
 const TURN_LEFT_ICON := preload("res://art/ui/controls-v1/turn-left.svg")
 const SPADE := preload("res://data/items/spade.tres")
 const PICK := preload("res://data/items/pick.tres")
@@ -675,6 +676,11 @@ func _run_event(cell: Vector2i) -> void:
 		_map.triggered.erase(cell)
 		return
 	_empty_prop(cell)
+	# A chest may hold finer gear (owner, 2026-10-21).
+	if event.kind == DungeonMap.Content.CHEST and result["ambush"].is_empty() and not _in_opening:
+		var gear: Equipment = GearGen.drop(_rng, _depth, "chest")
+		if gear:
+			_found_gear(gear, "Underneath: %s." % _a(gear.display_name.to_lower()))
 	if Quests.has_flag(_camp_state, "lower_gate", "seen") and not Quests.has_flag(_camp_state, "lower_gate", "ending_shown"):
 		await _slice_ending()
 	if _in_opening and cell in _opening_body_cells():
@@ -819,19 +825,38 @@ func _trinket_drops(state) -> void:
 		if foe.health > 0:
 			continue
 		var find = Trinkets.drop(_rng, _depth, foe.type.max_health)
+		var gear: Equipment = GearGen.drop(_rng, _depth, "foe", foe.type.max_health)
+		if gear:
+			_found_gear(gear, "The %s carried %s." % [foe.type.display_name.to_lower(), _a(gear.display_name.to_lower())])
 		if find == null:
 			continue
 		var name: String = find.display_name.to_lower()
 		if find is Equipment:
 			if not _party_state.supplies.has_room_for_gear():
-				_show_message("The %s wore a %s, but there's no room in the pack." % [foe.type.display_name.to_lower(), name])
+				_show_message("The %s wore %s, but there's no room in the pack." % [foe.type.display_name.to_lower(), _a(name)])
 				continue
 			_party_state.supplies.gear.append(find)
 			_party_state.supplies.changed.emit()
 		elif _party_state.supplies.add_what_fits(find) == 0:
-			_show_message("The %s wore a %s, but there's no room in the pack." % [foe.type.display_name.to_lower(), name])
+			_show_message("The %s wore %s, but there's no room in the pack." % [foe.type.display_name.to_lower(), _a(name)])
 			continue
-		_show_message("The %s wore a %s. It's in the pack." % [foe.type.display_name.to_lower(), name])
+		_show_message("The %s wore %s. It's in the pack." % [foe.type.display_name.to_lower(), _a(name)])
+
+
+## "a goblin", "an ash-shaft spear".
+static func _a(noun: String) -> String:
+	return ("an " if noun.substr(0, 1) in ["a", "e", "i", "o", "u"] else "a ") + noun
+
+
+## Finer weapons and armour found (owner, 2026-10-21): into the pack if
+## there's room, else left where it lay.
+func _found_gear(gear: Equipment, line: String) -> void:
+	if not _party_state.supplies.has_room_for_gear():
+		_show_message(line + " No room in the pack - you leave it.")
+		return
+	_party_state.supplies.gear.append(gear)
+	_party_state.supplies.changed.emit()
+	_show_message(line + " It's in the pack.")
 
 
 ## The fight's experience for the party, drawn from the floor's allowance.

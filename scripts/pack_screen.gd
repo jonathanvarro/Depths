@@ -198,6 +198,8 @@ func _add_gear_rows() -> void:
 		var summary := "armour %d%s" % [item.armour, (", slower by %d" % item.initiative_penalty) if item.initiative_penalty > 0 else ""] if item.slot == "body" else "%d-%d" % [item.attack_min, item.attack_max]
 		if item.slot == "trinket":
 			summary = "%s trinket" % item.tier
+		elif item.tier != "common":
+			summary = "%s, %s" % [item.tier, summary]
 		elif item.slot == "back":
 			summary = "worn on the back"
 		text.add_child(_label("%s  (%s)" % [item.display_name, summary], 22, COLOR_TEXT))
@@ -206,6 +208,8 @@ func _add_gear_rows() -> void:
 		text.add_child(about)
 		if item.slot == "trinket":
 			text.add_child(_label("Worn: " + item.effect.effects_text(), 16, COLOR_DIM_TEXT))
+		elif item.effect:  # a magic or rare weapon or armour
+			text.add_child(_label("%s: %s" % [item.tier.capitalize(), item.effect.effects_text()], 16, COLOR_DIM_TEXT))
 		elif item.slot == "back":
 			text.add_child(_label("Worn: " + Equipment.back_text(item), 16, COLOR_DIM_TEXT))
 		for hero in living:
@@ -258,7 +262,9 @@ func _numbers(hero: Companion, weapon: Equipment) -> String:
 	hero.weapon = held
 	var low: int = span.x
 	var high: int = span.y
-	var hit: float = clampf(hero.accuracy + (weapon.accuracy_bonus if weapon else 0.0), 0.1, 0.95)
+	hero.weapon = weapon
+	var hit: float = clampf(hero.hit_accuracy(), 0.1, 0.95)  # a magic weapon's aim too
+	hero.weapon = held
 	var damage := str(low) if low == high else "%d-%d" % [low, high]
 	return "%s dmg, %d%% to hit" % [damage, roundi(hit * 100)]
 

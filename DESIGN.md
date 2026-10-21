@@ -611,7 +611,39 @@ Every item's icon is framed by its quality, in the Pack, chests, the shops and o
 
 - **Not just colour:** border weight and the studs differ too, and the tier is named in the item's text.
 - **Jewellery** shows its trinket's tier.
-- **Weapons and armour:** finer, magic and rare versions (better base numbers, random modifiers, generated names) are the next piece of work, not built yet.
+- **Weapons and armour** follow the same ladder; see below.
+
+### Finer weapons and armour — decided 2026-10-21
+
+Found weapons and armour are the smith's common pieces made better, generated when they drop (`scripts/gear_gen.gd`). There are no drawbacks: those belong to trinkets, and cursed gear may come later.
+
+- **Fine:** a weapon gets +1 maximum damage ("Sharpened") or +5% to hit ("Balanced"). Armour gets +2 maximum health ("Reinforced").
+- **Magic:** fine, plus one modifier, which names the piece ("Keen iron sword", "Riveted knife of steady nerves").
+- **Rare:** fine, plus a prefix and a suffix modifier ("Keen iron sword of the lamplighter").
+- **Weapon modifiers:**
+  - Keen: +5% to hit.
+  - Heavy: +1 damage.
+  - Of steady nerves: nerves fray 15% slower.
+  - Of the lamplighter: +5% to hit in bright light, -5% in dim.
+  - Of the back rank: +1 damage from the back row. Reach weapons only.
+- **Armour modifiers:**
+  - Warded: +2 maximum health.
+  - Lamp-hooked: the lantern burns 10% slower.
+  - Of calm: nerves fray 15% slower.
+  - Of mending: healing +20%.
+  - Of the mole: traps show. Rare only.
+- **Drops** come from chests and from tougher foes (10+ health):
+
+| Floor | Chance per chest | Chance per tougher foe | Quality |
+|---|---|---|---|
+| 1 | 10% | 6% | fine |
+| 2 | 10% | 6% | 70% fine, 30% magic |
+| 3 | 15% | 8% | 75% magic, 25% rare |
+| 4 | 15% | 8% | 60% magic, 40% rare |
+
+- **Prices:** better pieces sell for more, at ×1.5 for fine, ×2.5 for magic and ×4 for rare the base price.
+- **The smith** sells common only for now. Fine gear could come through a camp project later.
+- **Uniques:** unique weapons and armour are named one-offs for the story, and come later.
 
 ## Visual and audio direction
 

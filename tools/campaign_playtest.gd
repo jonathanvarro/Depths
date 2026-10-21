@@ -37,6 +37,7 @@ const ANTIDOTE := preload("res://data/items/antidote.tres")
 const HOLY_WATER := preload("res://data/items/holy_water.tres")
 const SPADE := preload("res://data/items/spade.tres")
 const Trinkets := preload("res://scripts/trinkets.gd")
+const GearGen := preload("res://scripts/gear_gen.gd")
 const DEEP_WOUND := preload("res://data/injuries/deep_wound.tres")
 
 const HEROES := {
@@ -111,7 +112,7 @@ func _campaign(hero_path: String, run_seed: int, max_days: int) -> Dictionary:
 		"wipes_by_floor": {1: 0, 2: 0, 3: 0, 4: 0}, "first_arrival": {},
 		"gold_found": 0, "gold_contracts": 0, "gold_sold": 0, "gold_spent": 0, "bounty": 0,
 		"gate_tries": 0, "gate_day": 0, "queen_tries": 0, "queen_rounds": 0, "queen_day": 0,
-		"route_bought": 0, "lantern_day": 0, "boons": 0, "banes": 0, "banes_lifted": 0, "trinkets_found": 0, "trinkets_worn": 0, "xp_spent_out_day": {}, "levels_at_end": [],
+		"route_bought": 0, "lantern_day": 0, "boons": 0, "banes": 0, "banes_lifted": 0, "trinkets_found": 0, "trinkets_worn": 0, "gear_found": 0, "gear_equipped": 0, "xp_spent_out_day": {}, "levels_at_end": [],
 		"treated": 0, "recruits_hired": 0, "quest_days": {}, "queen_attempts": [], "gate_attempts": [],
 	}
 	party = PS.new()
@@ -283,6 +284,39 @@ func _shop() -> void:
 				if camp.buy_gear(party, IRON_SWORD):
 					stats["gold_spent"] += IRON_SWORD.price
 					party.equip(hero, IRON_SWORD)
+
+
+## Finer gear found: kept if there's room, and worn at once if it's better.
+func _take_gear(gear: Equipment) -> void:
+	if gear == null or not party.supplies.has_room_for_gear():
+		return
+	party.supplies.gear.append(gear)
+	stats["gear_found"] += 1
+	for hero: Companion in party.living_members():
+		if gear in party.supplies.gear and _better(hero, gear):
+			party.equip(hero, gear)
+			stats["gear_equipped"] += 1
+
+
+## Is `gear` an upgrade for `hero`? Weapons by expected damage per swing,
+## armour by armour, then by quality.
+func _better(hero: Companion, gear: Equipment) -> bool:
+	if gear.slot == "body":
+		var now: Equipment = hero.body
+		return now == null or gear.armour > now.armour or (gear.armour == now.armour and gear.tier != "common" and now.tier == "common")
+	if gear.slot != "weapon" or (hero.has_reach() and not gear.reach):
+		return false
+	var held: Equipment = hero.weapon
+	var before := _swing(hero)
+	hero.weapon = gear
+	var after := _swing(hero)
+	hero.weapon = held
+	return after > before + 0.1
+
+
+func _swing(hero: Companion) -> float:
+	var span := hero.attack_range()
+	return (span.x + span.y) / 2.0 * clampf(hero.hit_accuracy(), 0.1, 0.95)
 
 
 ## A careful player wears what they can read: uniques first, then magic or
@@ -626,6 +660,8 @@ func _event(at: Vector2i) -> String:
 	stats["gold_found"] += maxi(0, party.supplies.gold - gold_before)
 	if party.living_members().is_empty():
 		return "wiped"
+	if event.kind == 2:  # a chest may hold finer gear, as in the game
+		_take_gear(GearGen.drop(trinket_rng, depth, "chest"))
 	_patch_up()
 	return "ok"
 
@@ -673,6 +709,7 @@ func _fight(group: Array, kind: String) -> int:
 		for foe in state.foes:
 			if foe.health > 0:
 				continue
+			_take_gear(GearGen.drop(trinket_rng, depth, "foe", foe.type.max_health))
 			var find = Trinkets.drop(trinket_rng, depth, foe.type.max_health)
 			if find is Equipment and party.supplies.has_room_for_gear():
 				party.supplies.gear.append(find)
@@ -870,10 +907,11 @@ func _summarise(all: Dictionary) -> void:
 				_mean(runs.map(func(r): return r["gold_found"])), _mean(runs.map(func(r): return r["gold_contracts"])),
 				_mean(runs.map(func(r): return r["gold_sold"])), _mean(runs.map(func(r): return r["gold_spent"])),
 				runs.filter(func(r): return r["lantern_day"] > 0).size(), _mean(runs.map(func(r): return r["route_bought"]))])
-		print("  boons gained %.1f, banes gained %.1f, banes lifted %.1f per campaign (#133); trinkets found %.1f, worn %.1f (#135)" % [
+		print("  boons gained %.1f, banes gained %.1f, banes lifted %.1f per campaign (#133); trinkets found %.1f, worn %.1f (#135); gear found %.1f, equipped %.1f" % [
 				_mean(runs.map(func(r): return r["boons"])), _mean(runs.map(func(r): return r["banes"])),
 				_mean(runs.map(func(r): return r["banes_lifted"])), _mean(runs.map(func(r): return r["trinkets_found"])),
-				_mean(runs.map(func(r): return r["trinkets_worn"]))])
+				_mean(runs.map(func(r): return r["trinkets_worn"])), _mean(runs.map(func(r): return r["gear_found"])),
+				_mean(runs.map(func(r): return r["gear_equipped"]))])
 		var gate_runs: Array = runs.filter(func(r): return r["gate_tries"] > 0)
 		var queen_runs: Array = runs.filter(func(r): return r["queen_tries"] > 0)
 		print("  gate: tried in %d runs (%.1f tries each), broken by day median %s" % [gate_runs.size(), _mean(gate_runs.map(func(r): return r["gate_tries"])),

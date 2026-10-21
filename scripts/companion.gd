@@ -209,6 +209,9 @@ func effects() -> Array[Boon]:
 			all.append(trinket.curse)
 	if back and back.effect:
 		all.append(back.effect)
+	for gear in [weapon, body]:  # magic and rare weapons and armour (owner, 2026-10-21)
+		if gear and gear.effect:
+			all.append(gear.effect)
 	return all
 
 
