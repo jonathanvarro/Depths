@@ -47,7 +47,8 @@ const SUPPORT_EVERY := 4  # pit props along straight corridors (floor 1)
 
 
 ## Dresses `level` for `map` at `depth`. Returns how many pieces it placed.
-static func dress(level: Node3D, map, depth: int, seed: int, cell_size: float, wall_height: float) -> int:
+## `avoid`: cells already dressed as a landmark.
+static func dress(level: Node3D, map, depth: int, seed: int, cell_size: float, wall_height: float, avoid := {}) -> int:
 	if depth < 1:
 		return 0
 	var rng := RandomNumberGenerator.new()
@@ -63,7 +64,7 @@ static func dress(level: Node3D, map, depth: int, seed: int, cell_size: float, w
 	for y in map.height:
 		for x in map.width:
 			var cell := Vector2i(x, y)
-			if not _clear(map, cell):
+			if not _clear(map, cell) or avoid.has(cell):
 				continue
 			var centre := Vector3(x * cell_size, 0.0, y * cell_size)
 			var sides := _wall_sides(map, cell)

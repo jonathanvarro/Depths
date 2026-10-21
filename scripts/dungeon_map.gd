@@ -57,6 +57,8 @@ var fight_groups := {}
 var packages: Array = []
 ## Floor-specific places, e.g. the fortress's "hall" and "gates" (#44).
 var marks := {}
+## This floor's landmarks (#117, landmarks.gd): [{id, name, cells, centre, seen}].
+var landmarks: Array = []
 
 var _rows: PackedStringArray
 

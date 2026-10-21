@@ -557,6 +557,13 @@ The interface should preserve the two elements the owner particularly liked: exp
   - With the light low or nerves bad, eyes sometimes open at the far end of the passage ahead, beyond the lantern. More rarely a shadow passes. Either one goes when you move or turn.
   - Dust hangs in a good lantern's light.
   - All of it stands aside in fights, the opening and at camp. With screen flashes off, the darkness holds still and the dust is left out.
+- **Landmarks** (`scripts/landmarks.gd`, #117, first trial 2026-10-20) give each floor up to two set pieces you can recognise from the view alone. They're built from the dressing, mood lights and decorative fortress props, and can't be searched or used, so they never look like events.
+  - **The old working face** (floors 1–2): a dead-end drift with timber frames, rails, broken rock and chalk tallies.
+  - **The dripping hall** (floors 1–3): a room hung with stalactites and drips over wide puddles, under a cold blue light.
+  - **The pale grotto** (floors 2–3): fungus glowing on every wall and pale mushrooms, under a green light.
+  - **The trophy crossing** (floors 3–4): a goblin junction with strung trophies, a torch on either side and their mark.
+  - The name shows the first time the party walks in. From then on, a small inked diamond marks it on the map, and it's listed under Discoveries.
+  - Placement is seeded like the dressing. A landmark never shares a room with the stairs, and never sits where the party arrives.
 
 ### Show, don't tell — decided 2026-10-18 (#105)
 

@@ -168,6 +168,11 @@ func _draw() -> void:
 			_draw_marker(marker_for(content,used),center,tile,Color(1,1,1,.58 if used and content!=2 else 1.0))
 		var door: int=map.door_at(cell)
 		if door==1 or door==3:_draw_marker(GLYPHS.closed if door==1 else GLYPHS.blocked,center,tile)
+	# Landmarks (#117) the party has stood in: a small inked diamond.
+	for landmark: Dictionary in map.landmarks:
+		var spot: Vector2i=landmark["centre"]
+		if (landmark["seen"] or reveal_all) and cells.has_point(spot):
+			_draw_landmark(origin+(Vector2(spot-cells.position)+Vector2.ONE*.5)*tile,tile)
 	_draw_arrow(origin+(Vector2(party_cell-cells.position)+Vector2.ONE*.5)*tile,tile)
 	if full_view and rail>0:_draw_notes(notes,Rect2(Vector2(size.x-rail-10,30),Vector2(rail-12,size.y-50)))
 
@@ -176,8 +181,17 @@ func _draw_marker(texture: Texture2D, center: Vector2, tile: float, tint:=Color.
 	var extent:=clampf(tile*.90,14.0 if full_view else 10.0,28.0 if full_view else 20.0)
 	draw_texture_rect(texture,Rect2(center-Vector2.ONE*extent*.5,Vector2.ONE*extent),false,tint)
 
+## A landmark's mark: a hollow diamond with a dot, drawn in the map's ink.
+func _draw_landmark(center: Vector2, tile: float) -> void:
+	var r:=clampf(tile*.42,6.0 if full_view else 4.5,12.0 if full_view else 8.0)
+	var points:=PackedVector2Array([center+Vector2(0,-r),center+Vector2(r,0),center+Vector2(0,r),center+Vector2(-r,0),center+Vector2(0,-r)])
+	draw_polyline(points,INK,clampf(r*.22,1.2,2.2),true)
+	draw_circle(center,maxf(1.2,r*.2),INK)
+
 func _notes() -> Array:
 	var notes: Array=[]
+	for landmark: Dictionary in map.landmarks:
+		if landmark["seen"]:notes.append({"title":landmark["name"],"used":false,"content":-1})
 	var titles: Dictionary={}
 	var known: Array=map.discovered.keys()
 	known.sort_custom(func(a,b):return a.y<b.y or (a.y==b.y and a.x<b.x))
@@ -200,7 +214,8 @@ func _draw_notes(notes: Array, rect: Rect2) -> void:
 	var count:=clampi(int(floor((rect.size.y-58)/62))+1,0,notes.size())
 	for i in count:
 		var y: float=rect.position.y+40+i*62
-		_draw_marker(marker_for(notes[i].content,notes[i].used),Vector2(rect.position.x+8,y-4),20)
+		if notes[i].content==-1:_draw_landmark(Vector2(rect.position.x+8,y-4),20)
+		else:_draw_marker(marker_for(notes[i].content,notes[i].used),Vector2(rect.position.x+8,y-4),20)
 		var text: String=notes[i].title
 		while text.length()>3 and font.get_string_size(text,HORIZONTAL_ALIGNMENT_LEFT,-1,14).x>rect.size.x-28:text=text.left(-2)+"…"
 		draw_string(font,Vector2(rect.position.x+24,y),text,HORIZONTAL_ALIGNMENT_LEFT,rect.size.x-24,14,INK)

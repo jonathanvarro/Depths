@@ -5,6 +5,7 @@ extends Node3D
 
 const DungeonMap := preload("res://scripts/dungeon_map.gd")
 const Dressing := preload("res://scripts/dressing.gd")
+const Landmarks := preload("res://scripts/landmarks.gd")
 const Ambience := preload("res://scripts/ambience.gd")
 const Recruits := preload("res://scripts/recruits.gd")
 const TURN_LEFT_ICON := preload("res://art/ui/controls-v1/turn-left.svg")
@@ -577,7 +578,8 @@ func _build_level() -> void:
 	elif _depth==FORTRESS_DEPTH:
 		_add_fortress_dressing()
 	if not _in_opening and not use_debug_layout:
-		Dressing.dress(_level, _map, _depth, _site_seed, CELL_SIZE, WALL_HEIGHT)  # #128
+		var landmarks := Landmarks.place(_level, _map, _depth, _site_seed, CELL_SIZE, WALL_HEIGHT)  # #117
+		Dressing.dress(_level, _map, _depth, _site_seed, CELL_SIZE, WALL_HEIGHT, landmarks)  # #128
 
 
 func _make_layout(depth: int) -> PackedStringArray:
@@ -589,6 +591,13 @@ func _make_layout(depth: int) -> PackedStringArray:
 
 
 func _on_party_entered_cell(cell: Vector2i) -> void:
+	# A landmark (#117): named the first time, marked on the map from then on.
+	var landmark: Dictionary = Landmarks.at_cell(_map, cell)
+	if not landmark.is_empty() and not landmark["seen"]:
+		landmark["seen"] = true
+		_show_message(landmark["name"] + ".")
+		_minimap.queue_redraw()
+		_full_map_view.queue_redraw()
 	# The queen's hall (#44): a warning, then no turning back.
 	if _depth == FORTRESS_DEPTH and cell in _map.marks.get("hall", []) and not _camp_state.queen_defeated:
 		_ask("The queen's hall. Once you step inside, there's no turning back. Go in?",
