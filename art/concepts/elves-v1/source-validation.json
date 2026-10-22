@@ -1,0 +1,764 @@
+{
+  "issue": 131,
+  "checks": 189,
+  "failed": 0,
+  "runtime_rgba_bytes": 3440640,
+  "results": [
+    {
+      "check": "Five separately generated assets",
+      "ok": true
+    },
+    {
+      "check": "Immutable source elf-attack",
+      "ok": true
+    },
+    {
+      "check": "Original exact bytes elf-attack",
+      "ok": true
+    },
+    {
+      "check": "Built-in tool and exact prompt elf-attack",
+      "ok": true
+    },
+    {
+      "check": "Immutable source elf-hurt",
+      "ok": true
+    },
+    {
+      "check": "Original exact bytes elf-hurt",
+      "ok": true
+    },
+    {
+      "check": "Built-in tool and exact prompt elf-hurt",
+      "ok": true
+    },
+    {
+      "check": "Immutable source elf-idle",
+      "ok": true
+    },
+    {
+      "check": "Original exact bytes elf-idle",
+      "ok": true
+    },
+    {
+      "check": "Built-in tool and exact prompt elf-idle",
+      "ok": true
+    },
+    {
+      "check": "Immutable source elf-man",
+      "ok": true
+    },
+    {
+      "check": "Original exact bytes elf-man",
+      "ok": true
+    },
+    {
+      "check": "Built-in tool and exact prompt elf-man",
+      "ok": true
+    },
+    {
+      "check": "Immutable source elf-woman",
+      "ok": true
+    },
+    {
+      "check": "Original exact bytes elf-woman",
+      "ok": true
+    },
+    {
+      "check": "Built-in tool and exact prompt elf-woman",
+      "ok": true
+    },
+    {
+      "check": "Earlier portrait/art unchanged art/portraits/dark-elves-v1/catalog.json",
+      "ok": true
+    },
+    {
+      "check": "Earlier portrait/art unchanged art/portraits/dark-elves-v1/dark-elf-man/character-clean.png",
+      "ok": true
+    },
+    {
+      "check": "Earlier portrait/art unchanged art/portraits/dark-elves-v1/dark-elf-man/eyes-closed.png",
+      "ok": true
+    },
+    {
+      "check": "Earlier portrait/art unchanged art/portraits/dark-elves-v1/dark-elf-man/eyes-half.png",
+      "ok": true
+    },
+    {
+      "check": "Earlier portrait/art unchanged art/portraits/dark-elves-v1/dark-elf-man/eyes-neutral.png",
+      "ok": true
+    },
+    {
+      "check": "Earlier portrait/art unchanged art/portraits/dark-elves-v1/dark-elf-man/highlight.png",
+      "ok": true
+    },
+    {
+      "check": "Earlier portrait/art unchanged art/portraits/dark-elves-v1/dark-elf-man/mouth-neutral.png",
+      "ok": true
+    },
+    {
+      "check": "Earlier portrait/art unchanged art/portraits/dark-elves-v1/dark-elf-man/mouth-open.png",
+      "ok": true
+    },
+    {
+      "check": "Earlier portrait/art unchanged art/portraits/dark-elves-v1/dark-elf-man/mouth-round.png",
+      "ok": true
+    },
+    {
+      "check": "Earlier portrait/art unchanged art/portraits/dark-elves-v1/dark-elf-man/mouth-small.png",
+      "ok": true
+    },
+    {
+      "check": "Earlier portrait/art unchanged art/portraits/dark-elves-v1/dark-elf-man/resting.png",
+      "ok": true
+    },
+    {
+      "check": "Earlier portrait/art unchanged art/portraits/dark-elves-v1/dark-elf-man/shadow.png",
+      "ok": true
+    },
+    {
+      "check": "Earlier portrait/art unchanged art/portraits/dark-elves-v1/dark-elf-woman/character-clean.png",
+      "ok": true
+    },
+    {
+      "check": "Earlier portrait/art unchanged art/portraits/dark-elves-v1/dark-elf-woman/eyes-closed.png",
+      "ok": true
+    },
+    {
+      "check": "Earlier portrait/art unchanged art/portraits/dark-elves-v1/dark-elf-woman/eyes-half.png",
+      "ok": true
+    },
+    {
+      "check": "Earlier portrait/art unchanged art/portraits/dark-elves-v1/dark-elf-woman/eyes-neutral.png",
+      "ok": true
+    },
+    {
+      "check": "Earlier portrait/art unchanged art/portraits/dark-elves-v1/dark-elf-woman/highlight.png",
+      "ok": true
+    },
+    {
+      "check": "Earlier portrait/art unchanged art/portraits/dark-elves-v1/dark-elf-woman/mouth-neutral.png",
+      "ok": true
+    },
+    {
+      "check": "Earlier portrait/art unchanged art/portraits/dark-elves-v1/dark-elf-woman/mouth-open.png",
+      "ok": true
+    },
+    {
+      "check": "Earlier portrait/art unchanged art/portraits/dark-elves-v1/dark-elf-woman/mouth-round.png",
+      "ok": true
+    },
+    {
+      "check": "Earlier portrait/art unchanged art/portraits/dark-elves-v1/dark-elf-woman/mouth-small.png",
+      "ok": true
+    },
+    {
+      "check": "Earlier portrait/art unchanged art/portraits/dark-elves-v1/dark-elf-woman/resting.png",
+      "ok": true
+    },
+    {
+      "check": "Earlier portrait/art unchanged art/portraits/dark-elves-v1/dark-elf-woman/shadow.png",
+      "ok": true
+    },
+    {
+      "check": "Earlier portrait/art unchanged data/portraits/dark-elves-v1/dark-elf-man.tres",
+      "ok": true
+    },
+    {
+      "check": "Earlier portrait/art unchanged data/portraits/dark-elves-v1/dark-elf-woman.tres",
+      "ok": true
+    },
+    {
+      "check": "Earlier portrait/art unchanged art/enemies/dark-elves-v1/spearman/attack.png",
+      "ok": true
+    },
+    {
+      "check": "Earlier portrait/art unchanged art/enemies/dark-elves-v1/spearman/frames.tres",
+      "ok": true
+    },
+    {
+      "check": "Earlier portrait/art unchanged art/enemies/dark-elves-v1/spearman/hurt.png",
+      "ok": true
+    },
+    {
+      "check": "Earlier portrait/art unchanged art/enemies/dark-elves-v1/spearman/idle.png",
+      "ok": true
+    },
+    {
+      "check": "Earlier portrait/art unchanged art/enemies/dark-elves-v1/spearman/registration.json",
+      "ok": true
+    },
+    {
+      "check": "Earlier portrait/art unchanged art/enemies/dark-elves-v1/spearman/scene.tscn",
+      "ok": true
+    },
+    {
+      "check": "Accepted native authoring helper unchanged tools/art/build_portrait_components.py",
+      "ok": true
+    },
+    {
+      "check": "Accepted native authoring helper unchanged tools/art/refine_portrait_drawings.py",
+      "ok": true
+    },
+    {
+      "check": "Exact neutral reconstruction elf-man",
+      "ok": true
+    },
+    {
+      "check": "Unique resource family elf-man",
+      "ok": true
+    },
+    {
+      "check": "Aligned untrimmed canvas elf-man\\character-clean.png",
+      "ok": true
+    },
+    {
+      "check": "Binary feature/base alpha character-clean",
+      "ok": true
+    },
+    {
+      "check": "Native portrait palette character-clean",
+      "ok": true
+    },
+    {
+      "check": "Resource owns every layer character-clean",
+      "ok": true
+    },
+    {
+      "check": "Lossless/no mipmaps character-clean",
+      "ok": true
+    },
+    {
+      "check": "Aligned untrimmed canvas elf-man\\eyes-closed.png",
+      "ok": true
+    },
+    {
+      "check": "Binary feature/base alpha eyes-closed",
+      "ok": true
+    },
+    {
+      "check": "Native portrait palette eyes-closed",
+      "ok": true
+    },
+    {
+      "check": "Resource owns every layer eyes-closed",
+      "ok": true
+    },
+    {
+      "check": "Lossless/no mipmaps eyes-closed",
+      "ok": true
+    },
+    {
+      "check": "Aligned untrimmed canvas elf-man\\eyes-half.png",
+      "ok": true
+    },
+    {
+      "check": "Binary feature/base alpha eyes-half",
+      "ok": true
+    },
+    {
+      "check": "Native portrait palette eyes-half",
+      "ok": true
+    },
+    {
+      "check": "Resource owns every layer eyes-half",
+      "ok": true
+    },
+    {
+      "check": "Lossless/no mipmaps eyes-half",
+      "ok": true
+    },
+    {
+      "check": "Aligned untrimmed canvas elf-man\\eyes-neutral.png",
+      "ok": true
+    },
+    {
+      "check": "Binary feature/base alpha eyes-neutral",
+      "ok": true
+    },
+    {
+      "check": "Native portrait palette eyes-neutral",
+      "ok": true
+    },
+    {
+      "check": "Resource owns every layer eyes-neutral",
+      "ok": true
+    },
+    {
+      "check": "Lossless/no mipmaps eyes-neutral",
+      "ok": true
+    },
+    {
+      "check": "Aligned untrimmed canvas elf-man\\highlight.png",
+      "ok": true
+    },
+    {
+      "check": "Resource owns every layer highlight",
+      "ok": true
+    },
+    {
+      "check": "Lossless/no mipmaps highlight",
+      "ok": true
+    },
+    {
+      "check": "Aligned untrimmed canvas elf-man\\mouth-neutral.png",
+      "ok": true
+    },
+    {
+      "check": "Binary feature/base alpha mouth-neutral",
+      "ok": true
+    },
+    {
+      "check": "Native portrait palette mouth-neutral",
+      "ok": true
+    },
+    {
+      "check": "Resource owns every layer mouth-neutral",
+      "ok": true
+    },
+    {
+      "check": "Lossless/no mipmaps mouth-neutral",
+      "ok": true
+    },
+    {
+      "check": "Aligned untrimmed canvas elf-man\\mouth-open.png",
+      "ok": true
+    },
+    {
+      "check": "Binary feature/base alpha mouth-open",
+      "ok": true
+    },
+    {
+      "check": "Native portrait palette mouth-open",
+      "ok": true
+    },
+    {
+      "check": "Resource owns every layer mouth-open",
+      "ok": true
+    },
+    {
+      "check": "Lossless/no mipmaps mouth-open",
+      "ok": true
+    },
+    {
+      "check": "Aligned untrimmed canvas elf-man\\mouth-round.png",
+      "ok": true
+    },
+    {
+      "check": "Binary feature/base alpha mouth-round",
+      "ok": true
+    },
+    {
+      "check": "Native portrait palette mouth-round",
+      "ok": true
+    },
+    {
+      "check": "Resource owns every layer mouth-round",
+      "ok": true
+    },
+    {
+      "check": "Lossless/no mipmaps mouth-round",
+      "ok": true
+    },
+    {
+      "check": "Aligned untrimmed canvas elf-man\\mouth-small.png",
+      "ok": true
+    },
+    {
+      "check": "Binary feature/base alpha mouth-small",
+      "ok": true
+    },
+    {
+      "check": "Native portrait palette mouth-small",
+      "ok": true
+    },
+    {
+      "check": "Resource owns every layer mouth-small",
+      "ok": true
+    },
+    {
+      "check": "Lossless/no mipmaps mouth-small",
+      "ok": true
+    },
+    {
+      "check": "Aligned untrimmed canvas elf-man\\resting.png",
+      "ok": true
+    },
+    {
+      "check": "Binary feature/base alpha resting",
+      "ok": true
+    },
+    {
+      "check": "Native portrait palette resting",
+      "ok": true
+    },
+    {
+      "check": "Resource owns every layer resting",
+      "ok": true
+    },
+    {
+      "check": "Lossless/no mipmaps resting",
+      "ok": true
+    },
+    {
+      "check": "Aligned untrimmed canvas elf-man\\shadow.png",
+      "ok": true
+    },
+    {
+      "check": "Resource owns every layer shadow",
+      "ok": true
+    },
+    {
+      "check": "Lossless/no mipmaps shadow",
+      "ok": true
+    },
+    {
+      "check": "Complete feature replacement elf-maneyes-neutral",
+      "ok": true
+    },
+    {
+      "check": "Complete feature replacement elf-maneyes-half",
+      "ok": true
+    },
+    {
+      "check": "Complete feature replacement elf-maneyes-closed",
+      "ok": true
+    },
+    {
+      "check": "Complete feature replacement elf-manmouth-neutral",
+      "ok": true
+    },
+    {
+      "check": "Complete feature replacement elf-manmouth-small",
+      "ok": true
+    },
+    {
+      "check": "Complete feature replacement elf-manmouth-open",
+      "ok": true
+    },
+    {
+      "check": "Complete feature replacement elf-manmouth-round",
+      "ok": true
+    },
+    {
+      "check": "Closed frame has no iris elf-man",
+      "ok": true
+    },
+    {
+      "check": "Half frame retains original lower iris elf-man",
+      "ok": true
+    },
+    {
+      "check": "Round speech removes old lip corners elf-man",
+      "ok": true
+    },
+    {
+      "check": "Exact neutral reconstruction elf-woman",
+      "ok": true
+    },
+    {
+      "check": "Unique resource family elf-woman",
+      "ok": true
+    },
+    {
+      "check": "Aligned untrimmed canvas elf-woman\\character-clean.png",
+      "ok": true
+    },
+    {
+      "check": "Binary feature/base alpha character-clean",
+      "ok": true
+    },
+    {
+      "check": "Native portrait palette character-clean",
+      "ok": true
+    },
+    {
+      "check": "Resource owns every layer character-clean",
+      "ok": true
+    },
+    {
+      "check": "Lossless/no mipmaps character-clean",
+      "ok": true
+    },
+    {
+      "check": "Aligned untrimmed canvas elf-woman\\eyes-closed.png",
+      "ok": true
+    },
+    {
+      "check": "Binary feature/base alpha eyes-closed",
+      "ok": true
+    },
+    {
+      "check": "Native portrait palette eyes-closed",
+      "ok": true
+    },
+    {
+      "check": "Resource owns every layer eyes-closed",
+      "ok": true
+    },
+    {
+      "check": "Lossless/no mipmaps eyes-closed",
+      "ok": true
+    },
+    {
+      "check": "Aligned untrimmed canvas elf-woman\\eyes-half.png",
+      "ok": true
+    },
+    {
+      "check": "Binary feature/base alpha eyes-half",
+      "ok": true
+    },
+    {
+      "check": "Native portrait palette eyes-half",
+      "ok": true
+    },
+    {
+      "check": "Resource owns every layer eyes-half",
+      "ok": true
+    },
+    {
+      "check": "Lossless/no mipmaps eyes-half",
+      "ok": true
+    },
+    {
+      "check": "Aligned untrimmed canvas elf-woman\\eyes-neutral.png",
+      "ok": true
+    },
+    {
+      "check": "Binary feature/base alpha eyes-neutral",
+      "ok": true
+    },
+    {
+      "check": "Native portrait palette eyes-neutral",
+      "ok": true
+    },
+    {
+      "check": "Resource owns every layer eyes-neutral",
+      "ok": true
+    },
+    {
+      "check": "Lossless/no mipmaps eyes-neutral",
+      "ok": true
+    },
+    {
+      "check": "Aligned untrimmed canvas elf-woman\\highlight.png",
+      "ok": true
+    },
+    {
+      "check": "Resource owns every layer highlight",
+      "ok": true
+    },
+    {
+      "check": "Lossless/no mipmaps highlight",
+      "ok": true
+    },
+    {
+      "check": "Aligned untrimmed canvas elf-woman\\mouth-neutral.png",
+      "ok": true
+    },
+    {
+      "check": "Binary feature/base alpha mouth-neutral",
+      "ok": true
+    },
+    {
+      "check": "Native portrait palette mouth-neutral",
+      "ok": true
+    },
+    {
+      "check": "Resource owns every layer mouth-neutral",
+      "ok": true
+    },
+    {
+      "check": "Lossless/no mipmaps mouth-neutral",
+      "ok": true
+    },
+    {
+      "check": "Aligned untrimmed canvas elf-woman\\mouth-open.png",
+      "ok": true
+    },
+    {
+      "check": "Binary feature/base alpha mouth-open",
+      "ok": true
+    },
+    {
+      "check": "Native portrait palette mouth-open",
+      "ok": true
+    },
+    {
+      "check": "Resource owns every layer mouth-open",
+      "ok": true
+    },
+    {
+      "check": "Lossless/no mipmaps mouth-open",
+      "ok": true
+    },
+    {
+      "check": "Aligned untrimmed canvas elf-woman\\mouth-round.png",
+      "ok": true
+    },
+    {
+      "check": "Binary feature/base alpha mouth-round",
+      "ok": true
+    },
+    {
+      "check": "Native portrait palette mouth-round",
+      "ok": true
+    },
+    {
+      "check": "Resource owns every layer mouth-round",
+      "ok": true
+    },
+    {
+      "check": "Lossless/no mipmaps mouth-round",
+      "ok": true
+    },
+    {
+      "check": "Aligned untrimmed canvas elf-woman\\mouth-small.png",
+      "ok": true
+    },
+    {
+      "check": "Binary feature/base alpha mouth-small",
+      "ok": true
+    },
+    {
+      "check": "Native portrait palette mouth-small",
+      "ok": true
+    },
+    {
+      "check": "Resource owns every layer mouth-small",
+      "ok": true
+    },
+    {
+      "check": "Lossless/no mipmaps mouth-small",
+      "ok": true
+    },
+    {
+      "check": "Aligned untrimmed canvas elf-woman\\resting.png",
+      "ok": true
+    },
+    {
+      "check": "Binary feature/base alpha resting",
+      "ok": true
+    },
+    {
+      "check": "Native portrait palette resting",
+      "ok": true
+    },
+    {
+      "check": "Resource owns every layer resting",
+      "ok": true
+    },
+    {
+      "check": "Lossless/no mipmaps resting",
+      "ok": true
+    },
+    {
+      "check": "Aligned untrimmed canvas elf-woman\\shadow.png",
+      "ok": true
+    },
+    {
+      "check": "Resource owns every layer shadow",
+      "ok": true
+    },
+    {
+      "check": "Lossless/no mipmaps shadow",
+      "ok": true
+    },
+    {
+      "check": "Complete feature replacement elf-womaneyes-neutral",
+      "ok": true
+    },
+    {
+      "check": "Complete feature replacement elf-womaneyes-half",
+      "ok": true
+    },
+    {
+      "check": "Complete feature replacement elf-womaneyes-closed",
+      "ok": true
+    },
+    {
+      "check": "Complete feature replacement elf-womanmouth-neutral",
+      "ok": true
+    },
+    {
+      "check": "Complete feature replacement elf-womanmouth-small",
+      "ok": true
+    },
+    {
+      "check": "Complete feature replacement elf-womanmouth-open",
+      "ok": true
+    },
+    {
+      "check": "Complete feature replacement elf-womanmouth-round",
+      "ok": true
+    },
+    {
+      "check": "Closed frame has no iris elf-woman",
+      "ok": true
+    },
+    {
+      "check": "Half frame retains original lower iris elf-woman",
+      "ok": true
+    },
+    {
+      "check": "Round speech removes old lip corners elf-woman",
+      "ok": true
+    },
+    {
+      "check": "Native combat canvas idle",
+      "ok": true
+    },
+    {
+      "check": "Registered floor pivot idle",
+      "ok": true
+    },
+    {
+      "check": "Transparent combat gaps idle",
+      "ok": true
+    },
+    {
+      "check": "Pose export hash idle",
+      "ok": true
+    },
+    {
+      "check": "Native combat canvas attack",
+      "ok": true
+    },
+    {
+      "check": "Registered floor pivot attack",
+      "ok": true
+    },
+    {
+      "check": "Transparent combat gaps attack",
+      "ok": true
+    },
+    {
+      "check": "Pose export hash attack",
+      "ok": true
+    },
+    {
+      "check": "Native combat canvas hurt",
+      "ok": true
+    },
+    {
+      "check": "Registered floor pivot hurt",
+      "ok": true
+    },
+    {
+      "check": "Transparent combat gaps hurt",
+      "ok": true
+    },
+    {
+      "check": "Pose export hash hurt",
+      "ok": true
+    },
+    {
+      "check": "One shared 32-colour combat palette",
+      "ok": true
+    },
+    {
+      "check": "Common pose scale and pivot",
+      "ok": true
+    }
+  ]
+}

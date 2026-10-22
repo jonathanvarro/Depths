@@ -1,0 +1,11 @@
+{
+  "id": "elf-woman",
+  "tool": "built-in image_gen",
+  "prompt": "Use case: stylized-concept. Asset type: one neutral character portrait master for Depths. Reference images: Edric is the approved STYLE reference (restrained weathered painted pixel clusters, adult believable materials); new elf man is a CLOTHING/PEOPLE reference only, DO NOT copy his face. Paint a conventionally attractive adult ELF WOMAN, fair warm skin, softer jaw and rounded chin, high cheekbones, fine straight nose, slightly larger almond sea-green eyes, fuller natural lips CLOSED at rest, clearly drawn but restrained lashes. Signature LARGE BOLD UPSWEPT BLONDE BROWS, finer than the man's but readable at a 96px card. Long loose honey-blonde hair behind long pointed ears swept up/back. Quiet observant guarded expression, no smile or glamour pose. Nearly frontal head, very slight turn, both eyes fully visible. Layered cool SILVER mithril armour: three crescent lames per shoulder, horizontal curved cuirass lames, sparse vine etching; deep forest-green cloak, thin gold circlet with one small green stone. Slender long neck, shoulders/bust across lower canvas, hair top at ~10%, chin ~55%, ears fully inside. No fur or black gothic plate. Neutral diffuse BASE shading, no torch colour, directional cast light or rim light; separate native lighting will be added later. Intended 192x192 neutral portrait and 96px card, strong readable painted clusters, limited muted silver/green/gold/skin shades, no photoreal pores, tiny filigree noise, glossy render, pin-up framing, weapons, text or UI. Exact SQUARE canvas. Genuine TRANSPARENT alpha outside character; no cast shadow or scenery.",
+  "reference_images": [
+    "art/portraits/story-slice-v1/commander-edric.png",
+    "art/source/elves-v1/elf-man-master.png"
+  ],
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-f62c7770-074e-49e7-9408-a7cc36244d0d.png",
+  "source": "art/source/elves-v1/elf-woman-master.png"
+}

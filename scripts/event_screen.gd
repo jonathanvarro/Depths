@@ -114,6 +114,8 @@ func _choose(choice: EventChoice) -> void:
 	_body.text = result["story"]
 	if _event.kind == 2:  # DungeonMap.Content.CHEST: the lid comes up (#54)
 		Sounds.play(self, "chest")
+	elif _event.kind == 3 and result["changes"].any(func(change): return not change["good"]):
+		Sounds.play(self, "fall" if _event.prop and _event.prop.resource_path.contains("hollow-floor") else "stumble", -7.0)
 	_clear_chips()
 	_add_chips(result["changes"])
 	_clear_buttons()
@@ -176,6 +178,7 @@ func _add_button(text: String, action: Callable) -> Button:
 	button.custom_minimum_size = Vector2(0, 52)
 	button.focus_mode = Control.FOCUS_NONE
 	button.add_theme_font_size_override("font_size", 20)
+	button.pressed.connect(func(): Sounds.play(self, "ui", -12.0, 0.0))
 	button.pressed.connect(action)
 	_buttons.add_child(button)
 	return button

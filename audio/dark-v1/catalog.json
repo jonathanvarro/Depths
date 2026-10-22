@@ -1,0 +1,739 @@
+{
+  "issues": [
+    96,
+    99,
+    54
+  ],
+  "date": "2026-10-22",
+  "format": "44.1kHz mono PCM16 WAV; no runtime synthesis",
+  "seed": 962210,
+  "sources": "res://art/source/audio-dark-v1/sources.json",
+  "assets": [
+    {
+      "id": "hit-1",
+      "label": "Heavy contact 1",
+      "path": "res://audio/dark-v1/hit-1.wav",
+      "seconds": 0.68,
+      "rate": 44100,
+      "channels": 1,
+      "bits": 16,
+      "loop": false,
+      "peak_dbfs": -6.020334836919244,
+      "rms_dbfs": -22.108293435876742,
+      "sha256": "82ec0aba5e8c4fabb5bc2da0beb736a214023d2ec1e3aadce048b62692b6c110",
+      "inputs": [
+        "impact/impactPunch_heavy_000",
+        "impact/impactSoft_heavy_000",
+        "rpg/cloth1"
+      ],
+      "derived_inputs": [],
+      "notes": "Damped punch/soft foley plus cloth; no sustained resonant note."
+    },
+    {
+      "id": "hit-2",
+      "label": "Heavy contact 2",
+      "path": "res://audio/dark-v1/hit-2.wav",
+      "seconds": 0.68,
+      "rate": 44100,
+      "channels": 1,
+      "bits": 16,
+      "loop": false,
+      "peak_dbfs": -6.020864997729863,
+      "rms_dbfs": -21.292581796122594,
+      "sha256": "86a1329d12c3e02771c994989e08d4c0966c339e5f596fd1e768bb0c06706878",
+      "inputs": [
+        "impact/impactPunch_heavy_001",
+        "impact/impactSoft_heavy_001",
+        "rpg/cloth2"
+      ],
+      "derived_inputs": [],
+      "notes": "Damped punch/soft foley plus cloth; no sustained resonant note."
+    },
+    {
+      "id": "hit-3",
+      "label": "Heavy contact 3",
+      "path": "res://audio/dark-v1/hit-3.wav",
+      "seconds": 0.68,
+      "rate": 44100,
+      "channels": 1,
+      "bits": 16,
+      "loop": false,
+      "peak_dbfs": -6.020334836919244,
+      "rms_dbfs": -22.847588865803733,
+      "sha256": "0c4ec012c354c76fe36da00731c87daa42bf39af3277fadaf85addbd48ad6276",
+      "inputs": [
+        "impact/impactPunch_heavy_002",
+        "impact/impactSoft_heavy_002",
+        "rpg/cloth3"
+      ],
+      "derived_inputs": [],
+      "notes": "Damped punch/soft foley plus cloth; no sustained resonant note."
+    },
+    {
+      "id": "block-wood",
+      "label": "Wooden shield block",
+      "path": "res://audio/dark-v1/block-wood.wav",
+      "seconds": 0.9,
+      "rate": 44100,
+      "channels": 1,
+      "bits": 16,
+      "loop": false,
+      "peak_dbfs": -6.795598677200708,
+      "rms_dbfs": -26.406455711640046,
+      "sha256": "8011779dce9867022f000538a36a5ca25524f7c8fa7b9924c5d21f364ecb1ba5",
+      "inputs": [
+        "impact/impactMetal_light_001",
+        "impact/impactPlank_medium_001",
+        "impact/impactWood_heavy_000"
+      ],
+      "derived_inputs": [],
+      "notes": ""
+    },
+    {
+      "id": "block-metal",
+      "label": "Armour or metal block",
+      "path": "res://audio/dark-v1/block-metal.wav",
+      "seconds": 0.8,
+      "rate": 44100,
+      "channels": 1,
+      "bits": 16,
+      "loop": false,
+      "peak_dbfs": -6.020334836919244,
+      "rms_dbfs": -28.375397962613246,
+      "sha256": "c5b6ab2990c1be154a9e21f2bb2f6b53513c6427cbe2720e187a44f534ae6d0d",
+      "inputs": [
+        "impact/impactPlate_medium_000",
+        "impact/impactSoft_medium_001"
+      ],
+      "derived_inputs": [],
+      "notes": ""
+    },
+    {
+      "id": "miss-1",
+      "label": "Missed swing 1",
+      "path": "res://audio/dark-v1/miss-1.wav",
+      "seconds": 0.48,
+      "rate": 44100,
+      "channels": 1,
+      "bits": 16,
+      "loop": false,
+      "peak_dbfs": -10.550941422879072,
+      "rms_dbfs": -26.175866948547444,
+      "sha256": "69503f7d9419ff3d59ef3140b551b30cdcc6ce55d86d5f7066211cd53bf92a7f",
+      "inputs": [
+        "rpg/cloth2",
+        "rpg/knifeSlice"
+      ],
+      "derived_inputs": [],
+      "notes": ""
+    },
+    {
+      "id": "miss-2",
+      "label": "Missed swing 2",
+      "path": "res://audio/dark-v1/miss-2.wav",
+      "seconds": 0.48,
+      "rate": 44100,
+      "channels": 1,
+      "bits": 16,
+      "loop": false,
+      "peak_dbfs": -9.897364926806725,
+      "rms_dbfs": -30.40217683438656,
+      "sha256": "6dd010ee83bcae7e70c347ae91baf5f328a942a1198b5cf7f66137d62ae59980",
+      "inputs": [
+        "rpg/cloth3",
+        "rpg/knifeSlice2"
+      ],
+      "derived_inputs": [],
+      "notes": ""
+    },
+    {
+      "id": "web-spit",
+      "label": "Web spit",
+      "path": "res://audio/dark-v1/web-spit.wav",
+      "seconds": 0.6,
+      "rate": 44100,
+      "channels": 1,
+      "bits": 16,
+      "loop": false,
+      "peak_dbfs": -6.020864997729863,
+      "rms_dbfs": -25.889469378917717,
+      "sha256": "89101932b43cb4e993e4b0eb5c71606e0b49ddb6b398498b346cf0c40212e6aa",
+      "inputs": [
+        "rpg/cloth3"
+      ],
+      "derived_inputs": [],
+      "notes": "Original wet air/suction layer with licensed fibre friction."
+    },
+    {
+      "id": "venom",
+      "label": "Venom sting",
+      "path": "res://audio/dark-v1/venom.wav",
+      "seconds": 0.72,
+      "rate": 44100,
+      "channels": 1,
+      "bits": 16,
+      "loop": false,
+      "peak_dbfs": -6.020334836919244,
+      "rms_dbfs": -29.4072155386856,
+      "sha256": "87e2a05ddde6169759b8f9bd97a0a800a46356b44f9d32aa88d05a2bbc8761fe",
+      "inputs": [
+        "impact/impactSoft_medium_002"
+      ],
+      "derived_inputs": [],
+      "notes": "Original subdued wet sting plus damp contact; no bright spell chime."
+    },
+    {
+      "id": "coins-1",
+      "label": "Coins in hand 1",
+      "path": "res://audio/dark-v1/coins-1.wav",
+      "seconds": 0.7332199546485261,
+      "rate": 44100,
+      "channels": 1,
+      "bits": 16,
+      "loop": false,
+      "peak_dbfs": -8.404648960397603,
+      "rms_dbfs": -36.00618178016057,
+      "sha256": "07cd493ad7dccd743fb88cbed88954e93ad886bda46433e4617f1989278839d3",
+      "inputs": [
+        "rpg/handleCoins"
+      ],
+      "derived_inputs": [],
+      "notes": ""
+    },
+    {
+      "id": "coins-2",
+      "label": "Coins in hand 2",
+      "path": "res://audio/dark-v1/coins-2.wav",
+      "seconds": 0.31736961451247164,
+      "rate": 44100,
+      "channels": 1,
+      "bits": 16,
+      "loop": false,
+      "peak_dbfs": -8.404648960397603,
+      "rms_dbfs": -29.105053783801154,
+      "sha256": "2821f6587369cb0467410f89f545c6bfdd4654147bb4e9a4046a9811d0b67168",
+      "inputs": [
+        "rpg/handleCoins2"
+      ],
+      "derived_inputs": [],
+      "notes": ""
+    },
+    {
+      "id": "purchase",
+      "label": "Purchase",
+      "path": "res://audio/dark-v1/purchase.wav",
+      "seconds": 1.15,
+      "rate": 44100,
+      "channels": 1,
+      "bits": 16,
+      "loop": false,
+      "peak_dbfs": -8.404648960397603,
+      "rms_dbfs": -33.09965452151251,
+      "sha256": "44bf234a4145d6586409b9b48c1a351957bfc8460abd023ddd92695de01415aa",
+      "inputs": [
+        "rpg/handleCoins2",
+        "rpg/handleSmallLeather"
+      ],
+      "derived_inputs": [],
+      "notes": ""
+    },
+    {
+      "id": "coin-flip",
+      "label": "Coin flip and landing",
+      "path": "res://audio/dark-v1/coin-flip.wav",
+      "seconds": 2.868004535147392,
+      "rate": 44100,
+      "channels": 1,
+      "bits": 16,
+      "loop": false,
+      "peak_dbfs": -8.404648960397603,
+      "rms_dbfs": -40.81560326539565,
+      "sha256": "22fb7edb2ca6eee06de54aebd663f1c19611b95503479d5d1b532fff43c6f3e4",
+      "inputs": [
+        "rpg/handleCoins",
+        "rpg/metalClick"
+      ],
+      "derived_inputs": [],
+      "notes": "Single flick, quiet flight, contact at 2.368s: matches nine live spin pairs; no outcome-specific sound."
+    },
+    {
+      "id": "chest-open",
+      "label": "Heavy chest opening",
+      "path": "res://audio/dark-v1/chest-open.wav",
+      "seconds": 1.55,
+      "rate": 44100,
+      "channels": 1,
+      "bits": 16,
+      "loop": false,
+      "peak_dbfs": -6.020334836919244,
+      "rms_dbfs": -27.4144923730937,
+      "sha256": "974db07065e8fad10da11d7ecb7aeba9370c386384158736039bbf0e0fa6ae86",
+      "inputs": [
+        "impact/impactWood_medium_001",
+        "rpg/creak2",
+        "rpg/metalLatch"
+      ],
+      "derived_inputs": [],
+      "notes": ""
+    },
+    {
+      "id": "torch-light",
+      "label": "Torch ignition",
+      "path": "res://audio/dark-v1/torch-light.wav",
+      "seconds": 1.25,
+      "rate": 44100,
+      "channels": 1,
+      "bits": 16,
+      "loop": false,
+      "peak_dbfs": -6.020334836919244,
+      "rms_dbfs": -30.122651699288102,
+      "sha256": "9265c97c871dc44137e867fc9b6dc1a17f740ff605b70c6794125f17d07c6f18",
+      "inputs": [
+        "fire",
+        "rpg/metalClick"
+      ],
+      "derived_inputs": [],
+      "notes": "Metal/flint-like contact into recorded fire texture; no cinematic whoosh."
+    },
+    {
+      "id": "torch-burnout",
+      "label": "Torch dying",
+      "path": "res://audio/dark-v1/torch-burnout.wav",
+      "seconds": 0.8,
+      "rate": 44100,
+      "channels": 1,
+      "bits": 16,
+      "loop": false,
+      "peak_dbfs": -8.404648960397603,
+      "rms_dbfs": -31.87657787279563,
+      "sha256": "20f2c69e01723a3da662c6b06b912681def0e4c91712b31cf6578dd06f016d94",
+      "inputs": [
+        "fire"
+      ],
+      "derived_inputs": [],
+      "notes": ""
+    },
+    {
+      "id": "stumble",
+      "label": "Stumble on stone",
+      "path": "res://audio/dark-v1/stumble.wav",
+      "seconds": 0.9,
+      "rate": 44100,
+      "channels": 1,
+      "bits": 16,
+      "loop": false,
+      "peak_dbfs": -6.020334836919244,
+      "rms_dbfs": -24.217063866439332,
+      "sha256": "1fbe78f3614c382fad0cc5fc99b97b056b599327207f4ef16207678f742b73c4",
+      "inputs": [
+        "impact/footstep_concrete_002",
+        "impact/impactSoft_heavy_001",
+        "rpg/clothBelt"
+      ],
+      "derived_inputs": [],
+      "notes": ""
+    },
+    {
+      "id": "fall",
+      "label": "Hollow floor fall",
+      "path": "res://audio/dark-v1/fall.wav",
+      "seconds": 1.35,
+      "rate": 44100,
+      "channels": 1,
+      "bits": 16,
+      "loop": false,
+      "peak_dbfs": -6.020334836919244,
+      "rms_dbfs": -23.44317791519412,
+      "sha256": "11777f65f4108f695b6bffa0f17c37549e474df51bcd5e7941b4f9976a26a558",
+      "inputs": [
+        "impact/impactPlank_medium_003",
+        "impact/impactSoft_heavy_003",
+        "impact/impactWood_light_002",
+        "rpg/cloth4"
+      ],
+      "derived_inputs": [],
+      "notes": ""
+    },
+    {
+      "id": "ui-click",
+      "label": "Quiet interface click",
+      "path": "res://audio/dark-v1/ui-click.wav",
+      "seconds": 0.07501133786848073,
+      "rate": 44100,
+      "channels": 1,
+      "bits": 16,
+      "loop": false,
+      "peak_dbfs": -20.938833132692594,
+      "rms_dbfs": -35.13059878443253,
+      "sha256": "f7c3ba3f93af9809819517e6a4fb98802d720914b2ae58641986daceb957430e",
+      "inputs": [
+        "rpg/metalClick"
+      ],
+      "derived_inputs": [],
+      "notes": "Short muted mechanical contact, deliberately quieter than world effects."
+    },
+    {
+      "id": "gate-break",
+      "label": "Fortress gate breaking",
+      "path": "res://audio/dark-v1/gate-break.wav",
+      "seconds": 2.1,
+      "rate": 44100,
+      "channels": 1,
+      "bits": 16,
+      "loop": false,
+      "peak_dbfs": -6.020334836919244,
+      "rms_dbfs": -25.529557678373852,
+      "sha256": "ceb4dea26d59aced821fbc558f81b7d316cb736781ef801da4eb3630627bfcf8",
+      "inputs": [
+        "impact/impactMetal_heavy_002",
+        "impact/impactPlank_medium_000",
+        "impact/impactPlank_medium_003",
+        "impact/impactWood_heavy_001",
+        "impact/impactWood_medium_004"
+      ],
+      "derived_inputs": [],
+      "notes": "Timber failure, falling boards and dull iron; no explosion."
+    },
+    {
+      "id": "queen-screech",
+      "label": "Goblin queen screech",
+      "path": "res://audio/dark-v1/queen-screech.wav",
+      "seconds": 1.5524263038548753,
+      "rate": 44100,
+      "channels": 1,
+      "bits": 16,
+      "loop": false,
+      "peak_dbfs": -6.935838085077642,
+      "rms_dbfs": -25.706309412055216,
+      "sha256": "5eec96fdac18fc4f2946e3f32b90f2449a5b76c996ead96bcdcca3659a7c31bd",
+      "inputs": [
+        "queen"
+      ],
+      "derived_inputs": [],
+      "notes": "Lowered/filtered licensed balloon-friction creature source; not a cloned actor voice."
+    },
+    {
+      "id": "heartbeat",
+      "label": "Bleeding heartbeat",
+      "path": "res://audio/dark-v1/heartbeat.wav",
+      "seconds": 0.86,
+      "rate": 44100,
+      "channels": 1,
+      "bits": 16,
+      "loop": false,
+      "peak_dbfs": -7.535102552626506,
+      "rms_dbfs": -23.73810626211016,
+      "sha256": "34c7dce2abc3c8e1fc0249005161b942962870ddf415c6a5dff325867cf69b24",
+      "inputs": [
+        "heartbeat"
+      ],
+      "derived_inputs": [],
+      "notes": "One licensed lub-dub with a short tail; no generated kick-drum glide."
+    },
+    {
+      "id": "drum-hit",
+      "label": "Muffled war drum",
+      "path": "res://audio/dark-v1/drum-hit.wav",
+      "seconds": 0.8,
+      "rate": 44100,
+      "channels": 1,
+      "bits": 16,
+      "loop": false,
+      "peak_dbfs": -6.935838085077642,
+      "rms_dbfs": -22.052602004738038,
+      "sha256": "05a9b01b7f4b3882272ca4a978b9931927b6874160d68ddf2bb511e2d4da9400",
+      "inputs": [
+        "impact/impactSoft_heavy_000",
+        "impact/impactWood_heavy_000"
+      ],
+      "derived_inputs": [],
+      "notes": ""
+    },
+    {
+      "id": "distant-drums-loop",
+      "label": "Distant fortress drums",
+      "path": "res://audio/dark-v1/distant-drums-loop.wav",
+      "seconds": 16.0,
+      "rate": 44100,
+      "channels": 1,
+      "bits": 16,
+      "loop": true,
+      "peak_dbfs": -9.897364926806725,
+      "rms_dbfs": -32.644361858912724,
+      "sha256": "876f1846fb21e301e596b4705972da7b491ed4d9510b0c5b54ed068ccb16d598",
+      "inputs": [],
+      "derived_inputs": [
+        "drum-hit"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "camp-fire-loop",
+      "label": "Campfire",
+      "path": "res://audio/dark-v1/camp-fire-loop.wav",
+      "seconds": 24.0,
+      "rate": 44100,
+      "channels": 1,
+      "bits": 16,
+      "loop": true,
+      "peak_dbfs": -7.958667634249361,
+      "rms_dbfs": -31.529856092246263,
+      "sha256": "1bfe771d7b7a2ad0dc00c2336ccbf52e6ebd925cd7ea81f4942775742ecacc24",
+      "inputs": [
+        "fire"
+      ],
+      "derived_inputs": [],
+      "notes": ""
+    },
+    {
+      "id": "camp-wind-loop",
+      "label": "Wind around the tents",
+      "path": "res://audio/dark-v1/camp-wind-loop.wav",
+      "seconds": 24.0,
+      "rate": 44100,
+      "channels": 1,
+      "bits": 16,
+      "loop": true,
+      "peak_dbfs": -9.897364926806725,
+      "rms_dbfs": -34.36322465384173,
+      "sha256": "af067f4179126bd23b4303cde3fed2c9100c7bef23a92949569f77d0277f5abe",
+      "inputs": [
+        "wind"
+      ],
+      "derived_inputs": [],
+      "notes": ""
+    },
+    {
+      "id": "camp-voices-loop",
+      "label": "Distant camp murmur",
+      "path": "res://audio/dark-v1/camp-voices-loop.wav",
+      "seconds": 24.0,
+      "rate": 44100,
+      "channels": 1,
+      "bits": 16,
+      "loop": true,
+      "peak_dbfs": -13.979930263711204,
+      "rms_dbfs": -25.462230857829212,
+      "sha256": "d861519be8a1d7508770f2a61a62c3bec5243d5c03374e583ae6875e8ffe4a4a",
+      "inputs": [
+        "crowd"
+      ],
+      "derived_inputs": [],
+      "notes": "Recorded crowd transformed into a remote low-band murmur; deliberately low in the composite, no intelligible dialogue intended."
+    },
+    {
+      "id": "camp-ambience-loop",
+      "label": "Camp ambience",
+      "path": "res://audio/dark-v1/camp-ambience-loop.wav",
+      "seconds": 24.0,
+      "rate": 44100,
+      "channels": 1,
+      "bits": 16,
+      "loop": true,
+      "peak_dbfs": -7.958667634249361,
+      "rms_dbfs": -30.676260917565344,
+      "sha256": "13793ef70092446c01c6eec33df697f9b9e0cf43a9be3abce44155a1f252b62b",
+      "inputs": [],
+      "derived_inputs": [
+        "camp-fire-loop",
+        "camp-wind-loop",
+        "camp-voices-loop"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "torch-burn-loop",
+      "label": "Held torch crackle",
+      "path": "res://audio/dark-v1/torch-burn-loop.wav",
+      "seconds": 8.0,
+      "rate": 44100,
+      "channels": 1,
+      "bits": 16,
+      "loop": true,
+      "peak_dbfs": -12.395863526352395,
+      "rms_dbfs": -39.80941405594311,
+      "sha256": "1bb6f85b6d1d579b539a4d93c5af7e89536e3e109c18170d929b6f2c0a59e74e",
+      "inputs": [
+        "fire"
+      ],
+      "derived_inputs": [],
+      "notes": ""
+    },
+    {
+      "id": "outskirts-ambience-loop",
+      "label": "Cave outskirts with distant drums",
+      "path": "res://audio/dark-v1/outskirts-ambience-loop.wav",
+      "seconds": 16.0,
+      "rate": 44100,
+      "channels": 1,
+      "bits": 16,
+      "loop": true,
+      "peak_dbfs": -9.370250138233281,
+      "rms_dbfs": -23.53841483036603,
+      "sha256": "a6d15da233c3f48435af9e493a1b094caa2655f8cc760ab3717a8b971f2b254a",
+      "inputs": [
+        "project/audio/placeholder/ambience_cave.wav"
+      ],
+      "derived_inputs": [
+        "distant-drums-loop"
+      ],
+      "notes": "Original existing cave ambience is retained beneath the CC0-derived drum texture."
+    }
+  ],
+  "audition": {
+    "file": "art/concepts/sound-v1/audition.wav",
+    "seconds": 59.326031746031745,
+    "timings": [
+      {
+        "id": "hit-1",
+        "start": 0.3,
+        "seconds": 0.68
+      },
+      {
+        "id": "hit-2",
+        "start": 1.28,
+        "seconds": 0.68
+      },
+      {
+        "id": "hit-3",
+        "start": 2.26,
+        "seconds": 0.68
+      },
+      {
+        "id": "block-wood",
+        "start": 3.24,
+        "seconds": 0.9
+      },
+      {
+        "id": "block-metal",
+        "start": 4.44,
+        "seconds": 0.8
+      },
+      {
+        "id": "miss-1",
+        "start": 5.54,
+        "seconds": 0.48
+      },
+      {
+        "id": "miss-2",
+        "start": 6.32,
+        "seconds": 0.48
+      },
+      {
+        "id": "web-spit",
+        "start": 7.1,
+        "seconds": 0.6
+      },
+      {
+        "id": "venom",
+        "start": 8.0,
+        "seconds": 0.72
+      },
+      {
+        "id": "coins-1",
+        "start": 9.02,
+        "seconds": 0.7332199546485261
+      },
+      {
+        "id": "coins-2",
+        "start": 10.05322,
+        "seconds": 0.31736961451247164
+      },
+      {
+        "id": "purchase",
+        "start": 10.67059,
+        "seconds": 1.15
+      },
+      {
+        "id": "coin-flip",
+        "start": 12.12059,
+        "seconds": 2.868004535147392
+      },
+      {
+        "id": "chest-open",
+        "start": 15.28859,
+        "seconds": 1.55
+      },
+      {
+        "id": "torch-light",
+        "start": 17.13859,
+        "seconds": 1.25
+      },
+      {
+        "id": "torch-burnout",
+        "start": 18.68859,
+        "seconds": 0.8
+      },
+      {
+        "id": "stumble",
+        "start": 19.78859,
+        "seconds": 0.9
+      },
+      {
+        "id": "fall",
+        "start": 20.98859,
+        "seconds": 1.35
+      },
+      {
+        "id": "ui-click",
+        "start": 22.63859,
+        "seconds": 0.07501133786848073
+      },
+      {
+        "id": "gate-break",
+        "start": 23.01361,
+        "seconds": 2.1
+      },
+      {
+        "id": "queen-screech",
+        "start": 25.41361,
+        "seconds": 1.5524263038548753
+      },
+      {
+        "id": "heartbeat",
+        "start": 27.26603,
+        "seconds": 0.86
+      },
+      {
+        "id": "drum-hit",
+        "start": 28.42603,
+        "seconds": 0.8
+      },
+      {
+        "id": "distant-drums-loop",
+        "start": 29.52603,
+        "seconds": 4.0
+      },
+      {
+        "id": "camp-fire-loop",
+        "start": 33.82603,
+        "seconds": 4.0
+      },
+      {
+        "id": "camp-wind-loop",
+        "start": 38.12603,
+        "seconds": 4.0
+      },
+      {
+        "id": "camp-voices-loop",
+        "start": 42.42603,
+        "seconds": 4.0
+      },
+      {
+        "id": "camp-ambience-loop",
+        "start": 46.72603,
+        "seconds": 4.0
+      },
+      {
+        "id": "torch-burn-loop",
+        "start": 51.02603,
+        "seconds": 4.0
+      },
+      {
+        "id": "outskirts-ambience-loop",
+        "start": 55.32603,
+        "seconds": 4.0
+      }
+    ]
+  }
+}

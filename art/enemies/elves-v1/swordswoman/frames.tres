@@ -1,0 +1,6 @@
+[gd_resource type="SpriteFrames" load_steps=4 format=3]
+[ext_resource type="Texture2D" path="res://art/enemies/elves-v1/swordswoman/idle.png" id="0"]
+[ext_resource type="Texture2D" path="res://art/enemies/elves-v1/swordswoman/attack.png" id="1"]
+[ext_resource type="Texture2D" path="res://art/enemies/elves-v1/swordswoman/hurt.png" id="2"]
+[resource]
+animations = [{"frames":[{"duration":1.0,"texture":ExtResource("0")}],"loop":false,"name":&"idle","speed":6.0},{"frames":[{"duration":1.0,"texture":ExtResource("1")}],"loop":false,"name":&"attack","speed":6.0},{"frames":[{"duration":1.0,"texture":ExtResource("2")}],"loop":false,"name":&"hurt","speed":6.0}]

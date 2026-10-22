@@ -222,6 +222,7 @@ func _hero_action(hero: Companion, action: Dictionary) -> void:
 			outcome = _state.hero_attack(hero, target)
 			var at := _foe_point(target)
 			if not outcome["hit"]:
+				Sounds.play(self, "miss", -8.0)
 				_fx.number(at, "miss", CombatFx.COLOR_DULL, 34)
 			elif outcome.get("glanced", false):
 				Sounds.play(self, "block")
@@ -317,13 +318,17 @@ func _show_enemy_outcome(foe, intent: int, outcome: Dictionary, was_webbed: Dict
 		CombatState.Intent.RECOVER:
 			_fx.icon(at, MARKS["recover"], 56.0)
 		CombatState.Intent.BEAT:
+			Sounds.play(self, "drum", -8.0)
 			_fx.icon(at, MARKS["beat"], 56.0)
 			for other in _state.living_foes():
 				if other != foe:
 					_fx.icon(_foe_point(other), MARKS["drummed"], 40.0)
 		CombatState.Intent.CALL, CombatState.Intent.SCREECH:
+			if intent == CombatState.Intent.SCREECH:
+				Sounds.play(self, "queen", -8.0)
 			_fx.icon(at, _intent_icon(intent), 64.0)
 		CombatState.Intent.WEB:
+			Sounds.play(self, "web", -7.0)
 			if target:
 				var stuck: bool = _state.is_webbed(target) and not was_webbed.get(target, false)
 				_fx.icon(_card_point(target), MARKS["webbed"] if stuck else MARKS["miss"], 64.0)
@@ -338,6 +343,7 @@ func _show_enemy_outcome(foe, intent: int, outcome: Dictionary, was_webbed: Dict
 		if target.body and target.body.armour > 0:
 			_fx.icon(card_at + Vector2(40, 30), MARKS["armour"], 30.0)
 		if _state.venom_turns(target) > 0 and foe.type.venomous and foe.type.tactic == EnemyType.Tactic.WEB_AND_VENOM:
+			Sounds.play(self, "venom", -10.0)
 			_fx.icon(card_at + Vector2(-40, 30), MARKS["venom"], 34.0)
 		if outcome.get("injury"):
 			var injury: Injury = outcome["injury"]
@@ -346,6 +352,7 @@ func _show_enemy_outcome(foe, intent: int, outcome: Dictionary, was_webbed: Dict
 		Sounds.play(self, "block")
 		_fx.icon(card_at, MARKS["guard"], 56.0)  # braced and turned aside
 	else:
+		Sounds.play(self, "miss", -8.0)
 		_fx.number(card_at, "miss", CombatFx.COLOR_DULL, 34)
 	_show_health_changes()
 

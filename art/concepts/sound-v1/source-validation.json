@@ -1,0 +1,1372 @@
+{
+  "issues": [
+    96,
+    99
+  ],
+  "checks": 340,
+  "failed": 0,
+  "decoded_pcm_bytes": 13964356,
+  "deterministic_rebuild": true,
+  "results": [
+    {
+      "check": "Thirty finished effects and layers",
+      "ok": true
+    },
+    {
+      "check": "Seven verified CC0 sources",
+      "ok": true
+    },
+    {
+      "check": "Immutable source fire",
+      "ok": true
+    },
+    {
+      "check": "Commercially reusable source fire",
+      "ok": true
+    },
+    {
+      "check": "Retained primary licence evidence fire",
+      "ok": true
+    },
+    {
+      "check": "Exact evidence bytes fire",
+      "ok": true
+    },
+    {
+      "check": "Creator/page credit fire",
+      "ok": true
+    },
+    {
+      "check": "Immutable source wind",
+      "ok": true
+    },
+    {
+      "check": "Commercially reusable source wind",
+      "ok": true
+    },
+    {
+      "check": "Retained primary licence evidence wind",
+      "ok": true
+    },
+    {
+      "check": "Exact evidence bytes wind",
+      "ok": true
+    },
+    {
+      "check": "Creator/page credit wind",
+      "ok": true
+    },
+    {
+      "check": "Immutable source crowd",
+      "ok": true
+    },
+    {
+      "check": "Commercially reusable source crowd",
+      "ok": true
+    },
+    {
+      "check": "Retained primary licence evidence crowd",
+      "ok": true
+    },
+    {
+      "check": "Exact evidence bytes crowd",
+      "ok": true
+    },
+    {
+      "check": "Creator/page credit crowd",
+      "ok": true
+    },
+    {
+      "check": "Immutable source queen",
+      "ok": true
+    },
+    {
+      "check": "Commercially reusable source queen",
+      "ok": true
+    },
+    {
+      "check": "Retained primary licence evidence queen",
+      "ok": true
+    },
+    {
+      "check": "Exact evidence bytes queen",
+      "ok": true
+    },
+    {
+      "check": "Creator/page credit queen",
+      "ok": true
+    },
+    {
+      "check": "Immutable source heartbeat",
+      "ok": true
+    },
+    {
+      "check": "Commercially reusable source heartbeat",
+      "ok": true
+    },
+    {
+      "check": "Retained primary licence evidence heartbeat",
+      "ok": true
+    },
+    {
+      "check": "Exact evidence bytes heartbeat",
+      "ok": true
+    },
+    {
+      "check": "Creator/page credit heartbeat",
+      "ok": true
+    },
+    {
+      "check": "Immutable source kenney-impact",
+      "ok": true
+    },
+    {
+      "check": "Commercially reusable source kenney-impact",
+      "ok": true
+    },
+    {
+      "check": "Retained original licence kenney-impact",
+      "ok": true
+    },
+    {
+      "check": "Exact original licence bytes kenney-impact",
+      "ok": true
+    },
+    {
+      "check": "Creator/page credit kenney-impact",
+      "ok": true
+    },
+    {
+      "check": "Immutable source kenney-rpg",
+      "ok": true
+    },
+    {
+      "check": "Commercially reusable source kenney-rpg",
+      "ok": true
+    },
+    {
+      "check": "Retained original licence kenney-rpg",
+      "ok": true
+    },
+    {
+      "check": "Exact original licence bytes kenney-rpg",
+      "ok": true
+    },
+    {
+      "check": "Creator/page credit kenney-rpg",
+      "ok": true
+    },
+    {
+      "check": "Earlier audio untouched audio/placeholder/ambience_cave.wav",
+      "ok": true
+    },
+    {
+      "check": "Earlier audio untouched audio/placeholder/ambience_stone.wav",
+      "ok": true
+    },
+    {
+      "check": "Earlier audio untouched audio/placeholder/bump.wav",
+      "ok": true
+    },
+    {
+      "check": "Earlier audio untouched audio/placeholder/coin.wav",
+      "ok": true
+    },
+    {
+      "check": "Earlier audio untouched audio/placeholder/door_creak.wav",
+      "ok": true
+    },
+    {
+      "check": "Earlier audio untouched audio/placeholder/footstep_1.wav",
+      "ok": true
+    },
+    {
+      "check": "Earlier audio untouched audio/placeholder/footstep_2.wav",
+      "ok": true
+    },
+    {
+      "check": "Earlier audio untouched audio/placeholder/footstep_3.wav",
+      "ok": true
+    },
+    {
+      "check": "Earlier audio untouched audio/placeholder/heartbeat.wav",
+      "ok": true
+    },
+    {
+      "check": "Earlier audio untouched audio/placeholder/web_tear.wav",
+      "ok": true
+    },
+    {
+      "check": "Earlier audio untouched audio/samples-v1/audition.wav",
+      "ok": true
+    },
+    {
+      "check": "Earlier audio untouched audio/samples-v1/chest-open.wav",
+      "ok": true
+    },
+    {
+      "check": "Earlier audio untouched audio/samples-v1/club-hit.wav",
+      "ok": true
+    },
+    {
+      "check": "Earlier audio untouched audio/samples-v1/coin-pouch.wav",
+      "ok": true
+    },
+    {
+      "check": "Earlier audio untouched audio/samples-v1/heartbeat.wav",
+      "ok": true
+    },
+    {
+      "check": "Earlier audio untouched audio/samples-v1/shield-block.wav",
+      "ok": true
+    },
+    {
+      "check": "Earlier audio untouched audio/samples-v1/torch-light.wav",
+      "ok": true
+    },
+    {
+      "check": "Earlier audio untouched audio/samples-v2-dark/audition.wav",
+      "ok": true
+    },
+    {
+      "check": "Earlier audio untouched audio/samples-v2-dark/chest-open.wav",
+      "ok": true
+    },
+    {
+      "check": "Earlier audio untouched audio/samples-v2-dark/club-comparison.wav",
+      "ok": true
+    },
+    {
+      "check": "Earlier audio untouched audio/samples-v2-dark/club-hit.wav",
+      "ok": true
+    },
+    {
+      "check": "Earlier audio untouched audio/samples-v2-dark/coin-pouch.wav",
+      "ok": true
+    },
+    {
+      "check": "Earlier audio untouched audio/samples-v2-dark/heartbeat.wav",
+      "ok": true
+    },
+    {
+      "check": "Earlier audio untouched audio/samples-v2-dark/shield-block.wav",
+      "ok": true
+    },
+    {
+      "check": "Earlier audio untouched audio/samples-v2-dark/torch-light.wav",
+      "ok": true
+    },
+    {
+      "check": "PCM16 mono 44.1k hit-1",
+      "ok": true
+    },
+    {
+      "check": "Duration hit-1",
+      "ok": true
+    },
+    {
+      "check": "Output hash hit-1",
+      "ok": true
+    },
+    {
+      "check": "At least 6dB headroom hit-1",
+      "ok": true
+    },
+    {
+      "check": "No material DC offset hit-1",
+      "ok": true
+    },
+    {
+      "check": "Joined loop/zero shot endpoints hit-1",
+      "ok": true
+    },
+    {
+      "check": "Uncompressed/no altered timing hit-1",
+      "ok": true
+    },
+    {
+      "check": "Explicit import loop flag hit-1",
+      "ok": true
+    },
+    {
+      "check": "PCM16 mono 44.1k hit-2",
+      "ok": true
+    },
+    {
+      "check": "Duration hit-2",
+      "ok": true
+    },
+    {
+      "check": "Output hash hit-2",
+      "ok": true
+    },
+    {
+      "check": "At least 6dB headroom hit-2",
+      "ok": true
+    },
+    {
+      "check": "No material DC offset hit-2",
+      "ok": true
+    },
+    {
+      "check": "Joined loop/zero shot endpoints hit-2",
+      "ok": true
+    },
+    {
+      "check": "Uncompressed/no altered timing hit-2",
+      "ok": true
+    },
+    {
+      "check": "Explicit import loop flag hit-2",
+      "ok": true
+    },
+    {
+      "check": "PCM16 mono 44.1k hit-3",
+      "ok": true
+    },
+    {
+      "check": "Duration hit-3",
+      "ok": true
+    },
+    {
+      "check": "Output hash hit-3",
+      "ok": true
+    },
+    {
+      "check": "At least 6dB headroom hit-3",
+      "ok": true
+    },
+    {
+      "check": "No material DC offset hit-3",
+      "ok": true
+    },
+    {
+      "check": "Joined loop/zero shot endpoints hit-3",
+      "ok": true
+    },
+    {
+      "check": "Uncompressed/no altered timing hit-3",
+      "ok": true
+    },
+    {
+      "check": "Explicit import loop flag hit-3",
+      "ok": true
+    },
+    {
+      "check": "PCM16 mono 44.1k block-wood",
+      "ok": true
+    },
+    {
+      "check": "Duration block-wood",
+      "ok": true
+    },
+    {
+      "check": "Output hash block-wood",
+      "ok": true
+    },
+    {
+      "check": "At least 6dB headroom block-wood",
+      "ok": true
+    },
+    {
+      "check": "No material DC offset block-wood",
+      "ok": true
+    },
+    {
+      "check": "Joined loop/zero shot endpoints block-wood",
+      "ok": true
+    },
+    {
+      "check": "Uncompressed/no altered timing block-wood",
+      "ok": true
+    },
+    {
+      "check": "Explicit import loop flag block-wood",
+      "ok": true
+    },
+    {
+      "check": "PCM16 mono 44.1k block-metal",
+      "ok": true
+    },
+    {
+      "check": "Duration block-metal",
+      "ok": true
+    },
+    {
+      "check": "Output hash block-metal",
+      "ok": true
+    },
+    {
+      "check": "At least 6dB headroom block-metal",
+      "ok": true
+    },
+    {
+      "check": "No material DC offset block-metal",
+      "ok": true
+    },
+    {
+      "check": "Joined loop/zero shot endpoints block-metal",
+      "ok": true
+    },
+    {
+      "check": "Uncompressed/no altered timing block-metal",
+      "ok": true
+    },
+    {
+      "check": "Explicit import loop flag block-metal",
+      "ok": true
+    },
+    {
+      "check": "PCM16 mono 44.1k miss-1",
+      "ok": true
+    },
+    {
+      "check": "Duration miss-1",
+      "ok": true
+    },
+    {
+      "check": "Output hash miss-1",
+      "ok": true
+    },
+    {
+      "check": "At least 6dB headroom miss-1",
+      "ok": true
+    },
+    {
+      "check": "No material DC offset miss-1",
+      "ok": true
+    },
+    {
+      "check": "Joined loop/zero shot endpoints miss-1",
+      "ok": true
+    },
+    {
+      "check": "Uncompressed/no altered timing miss-1",
+      "ok": true
+    },
+    {
+      "check": "Explicit import loop flag miss-1",
+      "ok": true
+    },
+    {
+      "check": "PCM16 mono 44.1k miss-2",
+      "ok": true
+    },
+    {
+      "check": "Duration miss-2",
+      "ok": true
+    },
+    {
+      "check": "Output hash miss-2",
+      "ok": true
+    },
+    {
+      "check": "At least 6dB headroom miss-2",
+      "ok": true
+    },
+    {
+      "check": "No material DC offset miss-2",
+      "ok": true
+    },
+    {
+      "check": "Joined loop/zero shot endpoints miss-2",
+      "ok": true
+    },
+    {
+      "check": "Uncompressed/no altered timing miss-2",
+      "ok": true
+    },
+    {
+      "check": "Explicit import loop flag miss-2",
+      "ok": true
+    },
+    {
+      "check": "PCM16 mono 44.1k web-spit",
+      "ok": true
+    },
+    {
+      "check": "Duration web-spit",
+      "ok": true
+    },
+    {
+      "check": "Output hash web-spit",
+      "ok": true
+    },
+    {
+      "check": "At least 6dB headroom web-spit",
+      "ok": true
+    },
+    {
+      "check": "No material DC offset web-spit",
+      "ok": true
+    },
+    {
+      "check": "Joined loop/zero shot endpoints web-spit",
+      "ok": true
+    },
+    {
+      "check": "Uncompressed/no altered timing web-spit",
+      "ok": true
+    },
+    {
+      "check": "Explicit import loop flag web-spit",
+      "ok": true
+    },
+    {
+      "check": "PCM16 mono 44.1k venom",
+      "ok": true
+    },
+    {
+      "check": "Duration venom",
+      "ok": true
+    },
+    {
+      "check": "Output hash venom",
+      "ok": true
+    },
+    {
+      "check": "At least 6dB headroom venom",
+      "ok": true
+    },
+    {
+      "check": "No material DC offset venom",
+      "ok": true
+    },
+    {
+      "check": "Joined loop/zero shot endpoints venom",
+      "ok": true
+    },
+    {
+      "check": "Uncompressed/no altered timing venom",
+      "ok": true
+    },
+    {
+      "check": "Explicit import loop flag venom",
+      "ok": true
+    },
+    {
+      "check": "PCM16 mono 44.1k coins-1",
+      "ok": true
+    },
+    {
+      "check": "Duration coins-1",
+      "ok": true
+    },
+    {
+      "check": "Output hash coins-1",
+      "ok": true
+    },
+    {
+      "check": "At least 6dB headroom coins-1",
+      "ok": true
+    },
+    {
+      "check": "No material DC offset coins-1",
+      "ok": true
+    },
+    {
+      "check": "Joined loop/zero shot endpoints coins-1",
+      "ok": true
+    },
+    {
+      "check": "Uncompressed/no altered timing coins-1",
+      "ok": true
+    },
+    {
+      "check": "Explicit import loop flag coins-1",
+      "ok": true
+    },
+    {
+      "check": "PCM16 mono 44.1k coins-2",
+      "ok": true
+    },
+    {
+      "check": "Duration coins-2",
+      "ok": true
+    },
+    {
+      "check": "Output hash coins-2",
+      "ok": true
+    },
+    {
+      "check": "At least 6dB headroom coins-2",
+      "ok": true
+    },
+    {
+      "check": "No material DC offset coins-2",
+      "ok": true
+    },
+    {
+      "check": "Joined loop/zero shot endpoints coins-2",
+      "ok": true
+    },
+    {
+      "check": "Uncompressed/no altered timing coins-2",
+      "ok": true
+    },
+    {
+      "check": "Explicit import loop flag coins-2",
+      "ok": true
+    },
+    {
+      "check": "PCM16 mono 44.1k purchase",
+      "ok": true
+    },
+    {
+      "check": "Duration purchase",
+      "ok": true
+    },
+    {
+      "check": "Output hash purchase",
+      "ok": true
+    },
+    {
+      "check": "At least 6dB headroom purchase",
+      "ok": true
+    },
+    {
+      "check": "No material DC offset purchase",
+      "ok": true
+    },
+    {
+      "check": "Joined loop/zero shot endpoints purchase",
+      "ok": true
+    },
+    {
+      "check": "Uncompressed/no altered timing purchase",
+      "ok": true
+    },
+    {
+      "check": "Explicit import loop flag purchase",
+      "ok": true
+    },
+    {
+      "check": "PCM16 mono 44.1k coin-flip",
+      "ok": true
+    },
+    {
+      "check": "Duration coin-flip",
+      "ok": true
+    },
+    {
+      "check": "Output hash coin-flip",
+      "ok": true
+    },
+    {
+      "check": "At least 6dB headroom coin-flip",
+      "ok": true
+    },
+    {
+      "check": "No material DC offset coin-flip",
+      "ok": true
+    },
+    {
+      "check": "Joined loop/zero shot endpoints coin-flip",
+      "ok": true
+    },
+    {
+      "check": "Uncompressed/no altered timing coin-flip",
+      "ok": true
+    },
+    {
+      "check": "Explicit import loop flag coin-flip",
+      "ok": true
+    },
+    {
+      "check": "Landing matches live tween timing",
+      "ok": true
+    },
+    {
+      "check": "Audible landing at the registered time",
+      "ok": true
+    },
+    {
+      "check": "Quiet coin flight, no outcome cue",
+      "ok": true
+    },
+    {
+      "check": "PCM16 mono 44.1k chest-open",
+      "ok": true
+    },
+    {
+      "check": "Duration chest-open",
+      "ok": true
+    },
+    {
+      "check": "Output hash chest-open",
+      "ok": true
+    },
+    {
+      "check": "At least 6dB headroom chest-open",
+      "ok": true
+    },
+    {
+      "check": "No material DC offset chest-open",
+      "ok": true
+    },
+    {
+      "check": "Joined loop/zero shot endpoints chest-open",
+      "ok": true
+    },
+    {
+      "check": "Uncompressed/no altered timing chest-open",
+      "ok": true
+    },
+    {
+      "check": "Explicit import loop flag chest-open",
+      "ok": true
+    },
+    {
+      "check": "PCM16 mono 44.1k torch-light",
+      "ok": true
+    },
+    {
+      "check": "Duration torch-light",
+      "ok": true
+    },
+    {
+      "check": "Output hash torch-light",
+      "ok": true
+    },
+    {
+      "check": "At least 6dB headroom torch-light",
+      "ok": true
+    },
+    {
+      "check": "No material DC offset torch-light",
+      "ok": true
+    },
+    {
+      "check": "Joined loop/zero shot endpoints torch-light",
+      "ok": true
+    },
+    {
+      "check": "Uncompressed/no altered timing torch-light",
+      "ok": true
+    },
+    {
+      "check": "Explicit import loop flag torch-light",
+      "ok": true
+    },
+    {
+      "check": "PCM16 mono 44.1k torch-burnout",
+      "ok": true
+    },
+    {
+      "check": "Duration torch-burnout",
+      "ok": true
+    },
+    {
+      "check": "Output hash torch-burnout",
+      "ok": true
+    },
+    {
+      "check": "At least 6dB headroom torch-burnout",
+      "ok": true
+    },
+    {
+      "check": "No material DC offset torch-burnout",
+      "ok": true
+    },
+    {
+      "check": "Joined loop/zero shot endpoints torch-burnout",
+      "ok": true
+    },
+    {
+      "check": "Uncompressed/no altered timing torch-burnout",
+      "ok": true
+    },
+    {
+      "check": "Explicit import loop flag torch-burnout",
+      "ok": true
+    },
+    {
+      "check": "PCM16 mono 44.1k stumble",
+      "ok": true
+    },
+    {
+      "check": "Duration stumble",
+      "ok": true
+    },
+    {
+      "check": "Output hash stumble",
+      "ok": true
+    },
+    {
+      "check": "At least 6dB headroom stumble",
+      "ok": true
+    },
+    {
+      "check": "No material DC offset stumble",
+      "ok": true
+    },
+    {
+      "check": "Joined loop/zero shot endpoints stumble",
+      "ok": true
+    },
+    {
+      "check": "Uncompressed/no altered timing stumble",
+      "ok": true
+    },
+    {
+      "check": "Explicit import loop flag stumble",
+      "ok": true
+    },
+    {
+      "check": "PCM16 mono 44.1k fall",
+      "ok": true
+    },
+    {
+      "check": "Duration fall",
+      "ok": true
+    },
+    {
+      "check": "Output hash fall",
+      "ok": true
+    },
+    {
+      "check": "At least 6dB headroom fall",
+      "ok": true
+    },
+    {
+      "check": "No material DC offset fall",
+      "ok": true
+    },
+    {
+      "check": "Joined loop/zero shot endpoints fall",
+      "ok": true
+    },
+    {
+      "check": "Uncompressed/no altered timing fall",
+      "ok": true
+    },
+    {
+      "check": "Explicit import loop flag fall",
+      "ok": true
+    },
+    {
+      "check": "PCM16 mono 44.1k ui-click",
+      "ok": true
+    },
+    {
+      "check": "Duration ui-click",
+      "ok": true
+    },
+    {
+      "check": "Output hash ui-click",
+      "ok": true
+    },
+    {
+      "check": "At least 6dB headroom ui-click",
+      "ok": true
+    },
+    {
+      "check": "No material DC offset ui-click",
+      "ok": true
+    },
+    {
+      "check": "Joined loop/zero shot endpoints ui-click",
+      "ok": true
+    },
+    {
+      "check": "Uncompressed/no altered timing ui-click",
+      "ok": true
+    },
+    {
+      "check": "Explicit import loop flag ui-click",
+      "ok": true
+    },
+    {
+      "check": "Quiet UI ceiling",
+      "ok": true
+    },
+    {
+      "check": "PCM16 mono 44.1k gate-break",
+      "ok": true
+    },
+    {
+      "check": "Duration gate-break",
+      "ok": true
+    },
+    {
+      "check": "Output hash gate-break",
+      "ok": true
+    },
+    {
+      "check": "At least 6dB headroom gate-break",
+      "ok": true
+    },
+    {
+      "check": "No material DC offset gate-break",
+      "ok": true
+    },
+    {
+      "check": "Joined loop/zero shot endpoints gate-break",
+      "ok": true
+    },
+    {
+      "check": "Uncompressed/no altered timing gate-break",
+      "ok": true
+    },
+    {
+      "check": "Explicit import loop flag gate-break",
+      "ok": true
+    },
+    {
+      "check": "PCM16 mono 44.1k queen-screech",
+      "ok": true
+    },
+    {
+      "check": "Duration queen-screech",
+      "ok": true
+    },
+    {
+      "check": "Output hash queen-screech",
+      "ok": true
+    },
+    {
+      "check": "At least 6dB headroom queen-screech",
+      "ok": true
+    },
+    {
+      "check": "No material DC offset queen-screech",
+      "ok": true
+    },
+    {
+      "check": "Joined loop/zero shot endpoints queen-screech",
+      "ok": true
+    },
+    {
+      "check": "Uncompressed/no altered timing queen-screech",
+      "ok": true
+    },
+    {
+      "check": "Explicit import loop flag queen-screech",
+      "ok": true
+    },
+    {
+      "check": "PCM16 mono 44.1k heartbeat",
+      "ok": true
+    },
+    {
+      "check": "Duration heartbeat",
+      "ok": true
+    },
+    {
+      "check": "Output hash heartbeat",
+      "ok": true
+    },
+    {
+      "check": "At least 6dB headroom heartbeat",
+      "ok": true
+    },
+    {
+      "check": "No material DC offset heartbeat",
+      "ok": true
+    },
+    {
+      "check": "Joined loop/zero shot endpoints heartbeat",
+      "ok": true
+    },
+    {
+      "check": "Uncompressed/no altered timing heartbeat",
+      "ok": true
+    },
+    {
+      "check": "Explicit import loop flag heartbeat",
+      "ok": true
+    },
+    {
+      "check": "One short complete heartbeat",
+      "ok": true
+    },
+    {
+      "check": "PCM16 mono 44.1k drum-hit",
+      "ok": true
+    },
+    {
+      "check": "Duration drum-hit",
+      "ok": true
+    },
+    {
+      "check": "Output hash drum-hit",
+      "ok": true
+    },
+    {
+      "check": "At least 6dB headroom drum-hit",
+      "ok": true
+    },
+    {
+      "check": "No material DC offset drum-hit",
+      "ok": true
+    },
+    {
+      "check": "Joined loop/zero shot endpoints drum-hit",
+      "ok": true
+    },
+    {
+      "check": "Uncompressed/no altered timing drum-hit",
+      "ok": true
+    },
+    {
+      "check": "Explicit import loop flag drum-hit",
+      "ok": true
+    },
+    {
+      "check": "PCM16 mono 44.1k distant-drums-loop",
+      "ok": true
+    },
+    {
+      "check": "Duration distant-drums-loop",
+      "ok": true
+    },
+    {
+      "check": "Output hash distant-drums-loop",
+      "ok": true
+    },
+    {
+      "check": "At least 6dB headroom distant-drums-loop",
+      "ok": true
+    },
+    {
+      "check": "No material DC offset distant-drums-loop",
+      "ok": true
+    },
+    {
+      "check": "Joined loop/zero shot endpoints distant-drums-loop",
+      "ok": true
+    },
+    {
+      "check": "Uncompressed/no altered timing distant-drums-loop",
+      "ok": true
+    },
+    {
+      "check": "Explicit import loop flag distant-drums-loop",
+      "ok": true
+    },
+    {
+      "check": "Traceable derived sources distant-drums-loop",
+      "ok": true
+    },
+    {
+      "check": "PCM16 mono 44.1k camp-fire-loop",
+      "ok": true
+    },
+    {
+      "check": "Duration camp-fire-loop",
+      "ok": true
+    },
+    {
+      "check": "Output hash camp-fire-loop",
+      "ok": true
+    },
+    {
+      "check": "At least 6dB headroom camp-fire-loop",
+      "ok": true
+    },
+    {
+      "check": "No material DC offset camp-fire-loop",
+      "ok": true
+    },
+    {
+      "check": "Joined loop/zero shot endpoints camp-fire-loop",
+      "ok": true
+    },
+    {
+      "check": "Uncompressed/no altered timing camp-fire-loop",
+      "ok": true
+    },
+    {
+      "check": "Explicit import loop flag camp-fire-loop",
+      "ok": true
+    },
+    {
+      "check": "PCM16 mono 44.1k camp-wind-loop",
+      "ok": true
+    },
+    {
+      "check": "Duration camp-wind-loop",
+      "ok": true
+    },
+    {
+      "check": "Output hash camp-wind-loop",
+      "ok": true
+    },
+    {
+      "check": "At least 6dB headroom camp-wind-loop",
+      "ok": true
+    },
+    {
+      "check": "No material DC offset camp-wind-loop",
+      "ok": true
+    },
+    {
+      "check": "Joined loop/zero shot endpoints camp-wind-loop",
+      "ok": true
+    },
+    {
+      "check": "Uncompressed/no altered timing camp-wind-loop",
+      "ok": true
+    },
+    {
+      "check": "Explicit import loop flag camp-wind-loop",
+      "ok": true
+    },
+    {
+      "check": "PCM16 mono 44.1k camp-voices-loop",
+      "ok": true
+    },
+    {
+      "check": "Duration camp-voices-loop",
+      "ok": true
+    },
+    {
+      "check": "Output hash camp-voices-loop",
+      "ok": true
+    },
+    {
+      "check": "At least 6dB headroom camp-voices-loop",
+      "ok": true
+    },
+    {
+      "check": "No material DC offset camp-voices-loop",
+      "ok": true
+    },
+    {
+      "check": "Joined loop/zero shot endpoints camp-voices-loop",
+      "ok": true
+    },
+    {
+      "check": "Uncompressed/no altered timing camp-voices-loop",
+      "ok": true
+    },
+    {
+      "check": "Explicit import loop flag camp-voices-loop",
+      "ok": true
+    },
+    {
+      "check": "PCM16 mono 44.1k camp-ambience-loop",
+      "ok": true
+    },
+    {
+      "check": "Duration camp-ambience-loop",
+      "ok": true
+    },
+    {
+      "check": "Output hash camp-ambience-loop",
+      "ok": true
+    },
+    {
+      "check": "At least 6dB headroom camp-ambience-loop",
+      "ok": true
+    },
+    {
+      "check": "No material DC offset camp-ambience-loop",
+      "ok": true
+    },
+    {
+      "check": "Joined loop/zero shot endpoints camp-ambience-loop",
+      "ok": true
+    },
+    {
+      "check": "Uncompressed/no altered timing camp-ambience-loop",
+      "ok": true
+    },
+    {
+      "check": "Explicit import loop flag camp-ambience-loop",
+      "ok": true
+    },
+    {
+      "check": "Traceable derived sources camp-ambience-loop",
+      "ok": true
+    },
+    {
+      "check": "PCM16 mono 44.1k torch-burn-loop",
+      "ok": true
+    },
+    {
+      "check": "Duration torch-burn-loop",
+      "ok": true
+    },
+    {
+      "check": "Output hash torch-burn-loop",
+      "ok": true
+    },
+    {
+      "check": "At least 6dB headroom torch-burn-loop",
+      "ok": true
+    },
+    {
+      "check": "No material DC offset torch-burn-loop",
+      "ok": true
+    },
+    {
+      "check": "Joined loop/zero shot endpoints torch-burn-loop",
+      "ok": true
+    },
+    {
+      "check": "Uncompressed/no altered timing torch-burn-loop",
+      "ok": true
+    },
+    {
+      "check": "Explicit import loop flag torch-burn-loop",
+      "ok": true
+    },
+    {
+      "check": "PCM16 mono 44.1k outskirts-ambience-loop",
+      "ok": true
+    },
+    {
+      "check": "Duration outskirts-ambience-loop",
+      "ok": true
+    },
+    {
+      "check": "Output hash outskirts-ambience-loop",
+      "ok": true
+    },
+    {
+      "check": "At least 6dB headroom outskirts-ambience-loop",
+      "ok": true
+    },
+    {
+      "check": "No material DC offset outskirts-ambience-loop",
+      "ok": true
+    },
+    {
+      "check": "Joined loop/zero shot endpoints outskirts-ambience-loop",
+      "ok": true
+    },
+    {
+      "check": "Uncompressed/no altered timing outskirts-ambience-loop",
+      "ok": true
+    },
+    {
+      "check": "Explicit import loop flag outskirts-ambience-loop",
+      "ok": true
+    },
+    {
+      "check": "Deterministic offline rebuild hit-1.wav",
+      "ok": true
+    },
+    {
+      "check": "Deterministic offline rebuild hit-2.wav",
+      "ok": true
+    },
+    {
+      "check": "Deterministic offline rebuild hit-3.wav",
+      "ok": true
+    },
+    {
+      "check": "Deterministic offline rebuild block-wood.wav",
+      "ok": true
+    },
+    {
+      "check": "Deterministic offline rebuild block-metal.wav",
+      "ok": true
+    },
+    {
+      "check": "Deterministic offline rebuild miss-1.wav",
+      "ok": true
+    },
+    {
+      "check": "Deterministic offline rebuild miss-2.wav",
+      "ok": true
+    },
+    {
+      "check": "Deterministic offline rebuild web-spit.wav",
+      "ok": true
+    },
+    {
+      "check": "Deterministic offline rebuild venom.wav",
+      "ok": true
+    },
+    {
+      "check": "Deterministic offline rebuild coins-1.wav",
+      "ok": true
+    },
+    {
+      "check": "Deterministic offline rebuild coins-2.wav",
+      "ok": true
+    },
+    {
+      "check": "Deterministic offline rebuild purchase.wav",
+      "ok": true
+    },
+    {
+      "check": "Deterministic offline rebuild coin-flip.wav",
+      "ok": true
+    },
+    {
+      "check": "Deterministic offline rebuild chest-open.wav",
+      "ok": true
+    },
+    {
+      "check": "Deterministic offline rebuild torch-light.wav",
+      "ok": true
+    },
+    {
+      "check": "Deterministic offline rebuild torch-burnout.wav",
+      "ok": true
+    },
+    {
+      "check": "Deterministic offline rebuild stumble.wav",
+      "ok": true
+    },
+    {
+      "check": "Deterministic offline rebuild fall.wav",
+      "ok": true
+    },
+    {
+      "check": "Deterministic offline rebuild ui-click.wav",
+      "ok": true
+    },
+    {
+      "check": "Deterministic offline rebuild gate-break.wav",
+      "ok": true
+    },
+    {
+      "check": "Deterministic offline rebuild queen-screech.wav",
+      "ok": true
+    },
+    {
+      "check": "Deterministic offline rebuild heartbeat.wav",
+      "ok": true
+    },
+    {
+      "check": "Deterministic offline rebuild drum-hit.wav",
+      "ok": true
+    },
+    {
+      "check": "Deterministic offline rebuild distant-drums-loop.wav",
+      "ok": true
+    },
+    {
+      "check": "Deterministic offline rebuild camp-fire-loop.wav",
+      "ok": true
+    },
+    {
+      "check": "Deterministic offline rebuild camp-wind-loop.wav",
+      "ok": true
+    },
+    {
+      "check": "Deterministic offline rebuild camp-voices-loop.wav",
+      "ok": true
+    },
+    {
+      "check": "Deterministic offline rebuild camp-ambience-loop.wav",
+      "ok": true
+    },
+    {
+      "check": "Deterministic offline rebuild torch-burn-loop.wav",
+      "ok": true
+    },
+    {
+      "check": "Deterministic offline rebuild outskirts-ambience-loop.wav",
+      "ok": true
+    },
+    {
+      "check": "Deterministic offline rebuild audition.wav",
+      "ok": true
+    }
+  ]
+}

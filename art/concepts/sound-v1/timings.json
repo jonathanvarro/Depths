@@ -1,0 +1,152 @@
+[
+  {
+    "id": "hit-1",
+    "start": 0.3,
+    "seconds": 0.68
+  },
+  {
+    "id": "hit-2",
+    "start": 1.28,
+    "seconds": 0.68
+  },
+  {
+    "id": "hit-3",
+    "start": 2.26,
+    "seconds": 0.68
+  },
+  {
+    "id": "block-wood",
+    "start": 3.24,
+    "seconds": 0.9
+  },
+  {
+    "id": "block-metal",
+    "start": 4.44,
+    "seconds": 0.8
+  },
+  {
+    "id": "miss-1",
+    "start": 5.54,
+    "seconds": 0.48
+  },
+  {
+    "id": "miss-2",
+    "start": 6.32,
+    "seconds": 0.48
+  },
+  {
+    "id": "web-spit",
+    "start": 7.1,
+    "seconds": 0.6
+  },
+  {
+    "id": "venom",
+    "start": 8.0,
+    "seconds": 0.72
+  },
+  {
+    "id": "coins-1",
+    "start": 9.02,
+    "seconds": 0.7332199546485261
+  },
+  {
+    "id": "coins-2",
+    "start": 10.05322,
+    "seconds": 0.31736961451247164
+  },
+  {
+    "id": "purchase",
+    "start": 10.67059,
+    "seconds": 1.15
+  },
+  {
+    "id": "coin-flip",
+    "start": 12.12059,
+    "seconds": 2.868004535147392
+  },
+  {
+    "id": "chest-open",
+    "start": 15.28859,
+    "seconds": 1.55
+  },
+  {
+    "id": "torch-light",
+    "start": 17.13859,
+    "seconds": 1.25
+  },
+  {
+    "id": "torch-burnout",
+    "start": 18.68859,
+    "seconds": 0.8
+  },
+  {
+    "id": "stumble",
+    "start": 19.78859,
+    "seconds": 0.9
+  },
+  {
+    "id": "fall",
+    "start": 20.98859,
+    "seconds": 1.35
+  },
+  {
+    "id": "ui-click",
+    "start": 22.63859,
+    "seconds": 0.07501133786848073
+  },
+  {
+    "id": "gate-break",
+    "start": 23.01361,
+    "seconds": 2.1
+  },
+  {
+    "id": "queen-screech",
+    "start": 25.41361,
+    "seconds": 1.5524263038548753
+  },
+  {
+    "id": "heartbeat",
+    "start": 27.26603,
+    "seconds": 0.86
+  },
+  {
+    "id": "drum-hit",
+    "start": 28.42603,
+    "seconds": 0.8
+  },
+  {
+    "id": "distant-drums-loop",
+    "start": 29.52603,
+    "seconds": 4.0
+  },
+  {
+    "id": "camp-fire-loop",
+    "start": 33.82603,
+    "seconds": 4.0
+  },
+  {
+    "id": "camp-wind-loop",
+    "start": 38.12603,
+    "seconds": 4.0
+  },
+  {
+    "id": "camp-voices-loop",
+    "start": 42.42603,
+    "seconds": 4.0
+  },
+  {
+    "id": "camp-ambience-loop",
+    "start": 46.72603,
+    "seconds": 4.0
+  },
+  {
+    "id": "torch-burn-loop",
+    "start": 51.02603,
+    "seconds": 4.0
+  },
+  {
+    "id": "outskirts-ambience-loop",
+    "start": 55.32603,
+    "seconds": 4.0
+  }
+]

@@ -104,6 +104,10 @@ Templates > Download and Install; already installed on the owner's PC).
   The first two unique dark elf rigs (#131), their separate lighting and one
   combat pose family are ready in `docs/results-and-rivals-art.md`; their
   catalogue stays separate from human/recruit exporters and has no story assignment.
+  The ordinary elf man/woman complete #131 in `art/portraits/elves-v1` and
+  `data/portraits/elves-v1`, with fitted native animation, separate lighting and
+  a swordswoman's three combat poses. Handoff: `docs/elves-and-sound-art.md`.
+  These Unique rigs have no character/encounter assignment yet.
 - `scripts/portrait_view.gd` – draws a PortraitSet; blink(), talk(), hurt(),
   set_condition().
 - `scripts/party_card.gd` – HUD card per party slot (portrait, name, health
@@ -262,6 +266,13 @@ Templates > Download and Install; already installed on the owner's PC).
   or I/B). PartyState.use_item(), rest(), cannot_use_reason() do the work.
 - `audio/placeholder/` – generated placeholder sounds (see its README for
   licence); rebuilt by `tools/make_placeholder_audio.py`.
+- `scripts/sounds.gd` + `audio/dark-v1/` – thirty finished CC0-derived effects
+  and ambience layers (#96/#99), exact source credits/processing in its catalogue
+  and CREDITS.md. Hits/misses/coins use an independent presentation RNG; one-shots
+  free themselves. Camp owns its visibility-bound ambience; Main swaps a distant
+  drum bed on floor 3 and restarts cave ambience after camp. Separate stems/torch
+  loop are available. Review and integration: `docs/elves-and-sound-art.md`.
+  Current music/softened footsteps remain; broader #54 stays open.
 - `scripts/dungeon_map.gd` – grid data (`is_wall`), cell contents
   (`Content` enum, `content_at`, `enter`), and explored cells. Layout text
   uses ',' for room floor and '.' for corridor floor (rooms are found from

@@ -1,2 +1,5 @@
 # Normalize EOL for all files that Git considers text files.
 * text=auto eol=lf
+
+# Preserve captured licence pages and archive licence files byte-for-byte.
+art/source/audio-dark-v1/evidence/* -text -diff

@@ -1,0 +1,17 @@
+{
+	"captures": [
+		"runtime-held-192.png",
+		"runtime-held-96.png",
+		"runtime-lighting.png",
+		"combat-idle-desktop.png",
+		"combat-attack-desktop.png",
+		"combat-hurt-desktop.png",
+		"combat-idle-phone.png",
+		"combat-attack-phone.png",
+		"combat-hurt-phone.png"
+	],
+	"checks": 49,
+	"failed": 0,
+	"failures": [],
+	"issue": 131
+}

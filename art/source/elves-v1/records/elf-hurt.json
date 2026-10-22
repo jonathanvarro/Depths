@@ -1,0 +1,10 @@
+{
+  "id": "elf-hurt",
+  "tool": "built-in image_gen",
+  "prompt": "Use case: precise-object-edit. EDIT TARGET: original standing elf swordswoman idle sprite. Create ONE HURT/RECOIL drawing of EXACT same woman, armour, green cloak, golden hair and curved sabre. Same square transparent canvas, same body/head scale and colours. She recoils a little sideways/back with bent knee and torso leaning toward picture RIGHT; free left hand briefly protects upper ribs, sword stays in her right hand lowered toward lower-left. Supporting boot planted at the SAME floor baseline, both boots visible, no collapse or falling. Facial wince is tiny and restrained. Preserve full crescent shoulder lames, banded cuirass, tassets, green split skirt, circlet and long ears. Whole sabre, head, hair and boots fully inside original frame with margins. Simplified broad painted pixel clusters for native128px and <=32colour shared palette, three shades per material; no extra portrait detail. Neutral diffuse shading, no scene lighting. Genuine transparent alpha outside and through gaps. No blood, wound overlay, particles, motion trails, slash marks, floor, cast shadow, second body, text or UI. Exactly one registered hurt pose.",
+  "reference_images": [
+    "art/source/elves-v1/elf-idle-master.png"
+  ],
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-6a88c2d8-b5d1-465a-8cc1-58b3ed68b573.png",
+  "source": "art/source/elves-v1/elf-hurt-master.png"
+}

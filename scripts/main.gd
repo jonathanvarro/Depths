@@ -238,7 +238,7 @@ const EFFECT_VOLUME_DB := -4.0
 ## Bleeding feedback (#71): a red flash at the screen edges and a heartbeat
 ## on each point lost. Lower health: stronger flash, faster heartbeat, and
 ## edges that stay dark between ticks.
-const HEARTBEAT := Sounds.HEARTBEAT  # the darker second set (#54)
+const HEARTBEAT := Sounds.HEARTBEAT  # credited recorded source (#96/#54)
 const HEARTBEAT_VOLUME_DB := -2.0
 const WOUND_SHADER := """
 shader_type canvas_item;
@@ -439,6 +439,7 @@ func _ready() -> void:
 	_room_events.camp = _camp_state  # events can move quests on (#123)
 	_room_events.gold_found.connect(func(_amount): Sounds.play(self, "coins"))
 	_party_state.supplies.torch_flared.connect(func(): Sounds.play(self, "torch"))
+	_party_state.supplies.torch_burnt_out.connect(func(): Sounds.play(self, "burnout", -7.0))
 
 	_minimap = Minimap.new()
 	_build_ui(_minimap)
@@ -1029,6 +1030,8 @@ func _camp_loop(reward := 0, note := "") -> void:
 	_ending = true
 	_party.locked = true
 	_camp.open(_camp_state, _party_state)
+	if _ambience_player:
+		_ambience_player.stop()
 	if _music:
 		_music.play("camp")
 	if note != "":
@@ -1362,11 +1365,18 @@ func _placeholder_prop(kind: int) -> Node3D:
 ## Floors 1-3 are cave; the fortress floor has its own look and sound.
 func _apply_theme() -> void:
 	var theme: EnvironmentTheme = FORTRESS_THEME if _depth >= FORTRESS_DEPTH and not use_debug_layout else _cave_theme
-	if theme == environment_theme:
-		return
 	environment_theme = theme
-	if _ambience_player and theme.ambience and _ambience_player.stream != theme.ambience:
-		_ambience_player.stream = theme.ambience
+	_refresh_place_ambience()
+
+
+func _refresh_place_ambience() -> void:
+	if _ambience_player == null:
+		return
+	var stream: AudioStream = Sounds.LOOPS["outskirts"] if _depth == OUTSKIRTS_DEPTH and not use_debug_layout and not _camp_state.queen_defeated else environment_theme.ambience
+	if _ambience_player.stream != stream:
+		_ambience_player.stop()
+		_ambience_player.stream = stream
+	if stream and not _ambience_player.playing:
 		_ambience_player.play()
 
 
@@ -1400,7 +1410,7 @@ func _break_gates() -> void:
 	for gate in _map.marks.get("gates", []):
 		_map.doors[gate] = DungeonMap.Door.OPEN
 	_build_level()
-	_play_effect(environment_theme.open_sound)
+	Sounds.play(self, "gate", -6.0)
 	_show_message("The gate splinters. The way to the queen's hall is open.")
 	_save_now()
 
@@ -2109,8 +2119,9 @@ func _trip() -> void:
 	fall.parallel().tween_property(camera, "rotation:z", deg_to_rad(14.0), 0.3)
 	fall.parallel().tween_property(camera, "position:y", 0.45, 0.3)
 	await fall.finished
-	_play_effect(environment_theme.bump_sound)
+	Sounds.play(self, "stumble", -6.0)
 	_party_state.supplies.lose_torch()
+	Sounds.play(self, "burnout", -9.0)
 	_show_message("You stumble - the torch flies from your hand and hisses out.")
 	_say("trip", true)
 	await get_tree().create_timer(1.4).timeout
@@ -2815,8 +2826,7 @@ func _build_audio() -> void:
 	_ambience_player.stream = environment_theme.ambience
 	_ambience_player.volume_db = AMBIENCE_VOLUME_DB
 	add_child(_ambience_player)
-	if _ambience_player.stream:
-		_ambience_player.play()
+	_refresh_place_ambience()
 
 	var steps := AudioStreamRandomizer.new()
 	for sound in environment_theme.footstep_sounds:

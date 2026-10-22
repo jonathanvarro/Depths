@@ -1,0 +1,65 @@
+{
+  "issue": 131,
+  "tool": "built-in image_gen",
+  "date": "2026-10-22",
+  "assets": [
+    {
+      "id": "elf-attack",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: precise-object-edit. EDIT TARGET: supplied full-body elf swordswoman idle sprite. Create ONE ATTACK drawing of EXACT same woman/outfit/sabre, same square transparent canvas, same scale, same head/limb proportions, identical silver/green/gold/blonde colours and simplified painted pixel clusters. She makes one controlled forward diagonal sabre cut toward the first-person viewer: sword arm extended toward picture LEFT, blade angled up-left across open space without crossing her face, free hand pulled near waist. Small forward step/bent front knee, shoulders turn slightly, planted supporting boot remains on the original floor baseline near91%. Retain all three shoulder lames, curved chest lames, green cloak/split skirt, circlet, exposed ears and one sabre only. Keep HEAD SIZE and BODY HEIGHT consistent with input; do not enlarge or add foreshortened giant hands. Entire blade, hair, fingers and both boots fully inside canvas with margin, stable body centre. Intended native128px <=32colour sprite, strong simple silhouette and three shades per material. Neutral diffuse shading, genuine transparent background and all body gaps. No motion trail, slash effect, sparks, magic, blood, enemy, floor, cast shadow, text or additional pose. A single crisp attack pose, not a multi-frame board.",
+      "reference_images": [
+        "art/source/elves-v1/elf-idle-master.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-2e53f83f-74b1-4f47-97c0-b3e76889a076.png",
+      "source": "art/source/elves-v1/elf-attack-master.png",
+      "sha256": "cb4bc55e32287df41b019325d42b84de0e86a3dafb73511c528863f109028761"
+    },
+    {
+      "id": "elf-hurt",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: precise-object-edit. EDIT TARGET: original standing elf swordswoman idle sprite. Create ONE HURT/RECOIL drawing of EXACT same woman, armour, green cloak, golden hair and curved sabre. Same square transparent canvas, same body/head scale and colours. She recoils a little sideways/back with bent knee and torso leaning toward picture RIGHT; free left hand briefly protects upper ribs, sword stays in her right hand lowered toward lower-left. Supporting boot planted at the SAME floor baseline, both boots visible, no collapse or falling. Facial wince is tiny and restrained. Preserve full crescent shoulder lames, banded cuirass, tassets, green split skirt, circlet and long ears. Whole sabre, head, hair and boots fully inside original frame with margins. Simplified broad painted pixel clusters for native128px and <=32colour shared palette, three shades per material; no extra portrait detail. Neutral diffuse shading, no scene lighting. Genuine transparent alpha outside and through gaps. No blood, wound overlay, particles, motion trails, slash marks, floor, cast shadow, second body, text or UI. Exactly one registered hurt pose.",
+      "reference_images": [
+        "art/source/elves-v1/elf-idle-master.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-6a88c2d8-b5d1-465a-8cc1-58b3ed68b573.png",
+      "source": "art/source/elves-v1/elf-hurt-master.png",
+      "sha256": "3644361c643e5a3f64bb7bbf9e66dfa406bf6100aeb11a9a2d9c4aec128a2e05"
+    },
+    {
+      "id": "elf-idle",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Asset: ONE front-facing FULL-BODY elf swordswoman IDLE combat sprite for Depths, intended NATIVE128x128 pixels and SHARED <=32-colour palette across poses. Input1 elf woman is CHARACTER/OUTFIT reference only; input2 existing dark elf spearman is SIMPLICITY/SCALE reference. Adult fair-skinned ELF WOMAN, tall slender proportions ~8.5 heads, long swept-back pointed ears, large upswept blonde brows, long honey-blonde hair. Simplify drastically from portrait: small calm face, chunky painted pixel clusters, 3 shades per material, NO tiny filigree or facial texture. Layered banded silver mithril armour with crescent-lame pauldrons and leaf tassets; deep forest-green short cloak and split cloth skirt over fitted boots. Thin gold circlet. ONE slim gently curved silver sabre held low in her right hand, the blade projecting diagonally toward lower left of picture, free hand near torso. Guarded relaxed upright stance, BOTH boot soles on one common floor baseline near 91% image height. Slight three-quarter torso but face and full figure aimed at first-person camera. Entire hair, ears, blade and boots fully contained inside SQUARE transparent canvas, ~8% margin, body centre at x50%; overall art height ~84%. Broad strong silhouette, readable long legs, clear empty gaps around limbs. Neutral cool diffuse shading, no rimlight, torch colour, glow, cast ground shadow, floor, background, text, border or UI. Genuine transparent alpha outside silhouette and in every gap. Do not copy the dark elf spear/black fur/blue skin. Exactly one standing pose, no motion trails or duplicate body.",
+      "reference_images": [
+        "art/source/elves-v1/elf-woman-master.png",
+        "art/enemies/dark-elves-v1/spearman/idle.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-58b7617e-2e6a-49cc-9e73-e40a29a8f511.png",
+      "source": "art/source/elves-v1/elf-idle-master.png",
+      "sha256": "c530c8c07e693e4c20115c254dd9c45b532a3e0f3e10dee5f4632bf5696a900c"
+    },
+    {
+      "id": "elf-man",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: one neutral character portrait master for Depths, dark cave dungeon game. Input 1 (Edric) is the approved STYLE reference: restrained weathered hand-painted pixel clusters, adult face, grounded materials, intended 192x192 and 96px party-card display; Input 2 is a FRAMING reference only (dark elf man). Paint a DIFFERENT person: a conventionally handsome adult ELF MAN, fair warm skin, high cheekbones, fine straight nose, sharp narrow chin, CLEAN SHAVEN, shoulder-length pale-gold blonde hair swept back behind long pointed ears sweeping up and back. Signature LARGE BOLD UPSWEPT BLONDE EYEBROWS that remain readable at 96px. Sea-green eyes, calm guarded expression, closed resting mouth. Nearly frontal head with very slight three-quarter turn, both eyes fully visible, face centred, top of hair at y~12% and chin at y~55%, shoulders/bust fill bottom canvas without clipping ears/hair. Layered cool SILVER mithril armour: three stacked crescent lames at shoulders, curved horizontal lames on cuirass, very sparse etched vine suggestion, deep green cloak and thin gold circlet with one small green stone. Slim tall neck, no huge pauldrons or fur. Weathered but not filthy. Neutral diffuse base illumination, no directional cast lighting, warm torch pass, rim-light, glow or baked background. This will be separated into native clean character/eye/mouth components with separate lighting later. Broad clear painted clusters, limited muted material shades, no photoreal skin pores, glossy 3D, tiny filigree or cartoon. Exact SQUARE canvas, isolated bust, GENUINE TRANSPARENT ALPHA outside the character silhouette, no shadow/backdrop, no text or UI.",
+      "reference_images": [
+        "art/portraits/story-slice-v1/commander-edric.png",
+        "art/portraits/dark-elves-v1/dark-elf-man/resting.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-61544c27-d299-45b6-89f5-cfefca394305.png",
+      "source": "art/source/elves-v1/elf-man-master.png",
+      "sha256": "8c8ea4d025cce59ba7c833f9c0047edd3f37c6d368b7879030c5266397bf4ca8"
+    },
+    {
+      "id": "elf-woman",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: one neutral character portrait master for Depths. Reference images: Edric is the approved STYLE reference (restrained weathered painted pixel clusters, adult believable materials); new elf man is a CLOTHING/PEOPLE reference only, DO NOT copy his face. Paint a conventionally attractive adult ELF WOMAN, fair warm skin, softer jaw and rounded chin, high cheekbones, fine straight nose, slightly larger almond sea-green eyes, fuller natural lips CLOSED at rest, clearly drawn but restrained lashes. Signature LARGE BOLD UPSWEPT BLONDE BROWS, finer than the man's but readable at a 96px card. Long loose honey-blonde hair behind long pointed ears swept up/back. Quiet observant guarded expression, no smile or glamour pose. Nearly frontal head, very slight turn, both eyes fully visible. Layered cool SILVER mithril armour: three crescent lames per shoulder, horizontal curved cuirass lames, sparse vine etching; deep forest-green cloak, thin gold circlet with one small green stone. Slender long neck, shoulders/bust across lower canvas, hair top at ~10%, chin ~55%, ears fully inside. No fur or black gothic plate. Neutral diffuse BASE shading, no torch colour, directional cast light or rim light; separate native lighting will be added later. Intended 192x192 neutral portrait and 96px card, strong readable painted clusters, limited muted silver/green/gold/skin shades, no photoreal pores, tiny filigree noise, glossy render, pin-up framing, weapons, text or UI. Exact SQUARE canvas. Genuine TRANSPARENT alpha outside character; no cast shadow or scenery.",
+      "reference_images": [
+        "art/portraits/story-slice-v1/commander-edric.png",
+        "art/source/elves-v1/elf-man-master.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-f62c7770-074e-49e7-9408-a7cc36244d0d.png",
+      "source": "art/source/elves-v1/elf-woman-master.png",
+      "sha256": "6105be74fba1f52f8dda4c3c45af8b9cec39ed79a4c8901f3b31ed1f5c1c68ff"
+    }
+  ]
+}

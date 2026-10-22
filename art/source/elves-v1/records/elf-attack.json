@@ -1,0 +1,10 @@
+{
+  "id": "elf-attack",
+  "tool": "built-in image_gen",
+  "prompt": "Use case: precise-object-edit. EDIT TARGET: supplied full-body elf swordswoman idle sprite. Create ONE ATTACK drawing of EXACT same woman/outfit/sabre, same square transparent canvas, same scale, same head/limb proportions, identical silver/green/gold/blonde colours and simplified painted pixel clusters. She makes one controlled forward diagonal sabre cut toward the first-person viewer: sword arm extended toward picture LEFT, blade angled up-left across open space without crossing her face, free hand pulled near waist. Small forward step/bent front knee, shoulders turn slightly, planted supporting boot remains on the original floor baseline near91%. Retain all three shoulder lames, curved chest lames, green cloak/split skirt, circlet, exposed ears and one sabre only. Keep HEAD SIZE and BODY HEIGHT consistent with input; do not enlarge or add foreshortened giant hands. Entire blade, hair, fingers and both boots fully inside canvas with margin, stable body centre. Intended native128px <=32colour sprite, strong simple silhouette and three shades per material. Neutral diffuse shading, genuine transparent background and all body gaps. No motion trail, slash effect, sparks, magic, blood, enemy, floor, cast shadow, text or additional pose. A single crisp attack pose, not a multi-frame board.",
+  "reference_images": [
+    "art/source/elves-v1/elf-idle-master.png"
+  ],
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-2e53f83f-74b1-4f47-97c0-b3e76889a076.png",
+  "source": "art/source/elves-v1/elf-attack-master.png"
+}

@@ -33,6 +33,8 @@ const Story := preload("res://scripts/story.gd")
 const NEWS_ICON := preload("res://art/ui/controls-v1/news.svg")
 const Quests := preload("res://scripts/quests.gd")
 const Progression := preload("res://scripts/progression.gd")
+const Sounds := preload("res://scripts/sounds.gd")
+var _ambience: AudioStreamPlayer
 
 var content: Control  # main.gd keeps this inside the safe area
 
@@ -140,6 +142,12 @@ func _init() -> void:
 	_note.modulate.a = 0.0
 	_canvas.add_child(_note)
 	content.resized.connect(_fit)
+	_ambience = Sounds.make_loop(self, "camp", -22.0)
+	visibility_changed.connect(func():
+		if is_visible_in_tree():
+			_ambience.play()
+		else:
+			_ambience.stop())
 	visible = false
 
 
@@ -521,7 +529,10 @@ func _shop_row(text: String, price: int, on_buy: Callable, icon: Texture2D = nul
 	if not room:
 		details.add_child(_label("No room in your pack", BODY, 11, MUTED))
 	buy.pressed.connect(func():
+		var gold_before: int = _party.supplies.gold
 		on_buy.call()
+		if _party.supplies.gold < gold_before:
+			Sounds.play(self, "purchase", -7.0)
 		_refresh_activity())
 	row.add_child(buy)
 	_body.add_child(row)
@@ -539,7 +550,10 @@ func _sell_row(text: String, price: int, on_sell: Callable, icon: Texture2D = nu
 	sell.custom_minimum_size = Vector2(78, 30)
 	_price_icon(sell)
 	sell.pressed.connect(func():
+		var gold_before: int = _party.supplies.gold
 		on_sell.call()
+		if _party.supplies.gold > gold_before:
+			Sounds.play(self, "coins", -7.0)
 		_refresh_activity())
 	row.add_child(sell)
 	_body.add_child(row)
@@ -811,6 +825,7 @@ func _text(text: String, color := TEXT) -> void:
 
 func _button(text: String) -> Button:
 	var button := Button.new()
+	button.pressed.connect(func(): Sounds.play(self, "ui", -12.0, 0.0))
 	button.text = text
 	button.custom_minimum_size = Vector2(0, 30)
 	button.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN

@@ -1,4 +1,5 @@
 extends Control
+const Sounds := preload("res://scripts/sounds.gd")
 ## The coin flip (#77): at rare, high-stakes moments the outcome is decided
 ## in the open. The player sees what heads and tails mean and the odds,
 ## presses Flip (there's no turning it down), watches it spin and land.
@@ -65,7 +66,8 @@ func _init() -> void:
 	column.add_child(_done)
 	_player = AudioStreamPlayer.new()
 	_player.bus = "Effects"
-	_player.stream = load("res://audio/placeholder/coin.wav") if ResourceLoader.exists("res://audio/placeholder/coin.wav") else null
+	_player.stream = Sounds.EFFECTS["coin_flip"]
+	_player.volume_db = -6.0
 	add_child(_player)
 	visible = false
 

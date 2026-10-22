@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="SpriteFrames" path="res://art/enemies/elves-v1/swordswoman/frames.tres" id="frames"]
+[node name="ElfSwordswoman" type="Node3D"]
+metadata/visual_height = 1.95
+[node name="Sprite" type="AnimatedSprite3D" parent="."]
+position = Vector3(0,1.030188679245283,0)
+pixel_size = 0.01839622641509434
+billboard = 1
+shaded = true
+texture_filter = 0
+alpha_cut = 1
+alpha_scissor_threshold = 0.5
+cast_shadow = 0
+sprite_frames = ExtResource("frames")
+animation = &"idle"

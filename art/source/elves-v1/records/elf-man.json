@@ -1,0 +1,11 @@
+{
+  "id": "elf-man",
+  "tool": "built-in image_gen",
+  "prompt": "Use case: stylized-concept. Asset type: one neutral character portrait master for Depths, dark cave dungeon game. Input 1 (Edric) is the approved STYLE reference: restrained weathered hand-painted pixel clusters, adult face, grounded materials, intended 192x192 and 96px party-card display; Input 2 is a FRAMING reference only (dark elf man). Paint a DIFFERENT person: a conventionally handsome adult ELF MAN, fair warm skin, high cheekbones, fine straight nose, sharp narrow chin, CLEAN SHAVEN, shoulder-length pale-gold blonde hair swept back behind long pointed ears sweeping up and back. Signature LARGE BOLD UPSWEPT BLONDE EYEBROWS that remain readable at 96px. Sea-green eyes, calm guarded expression, closed resting mouth. Nearly frontal head with very slight three-quarter turn, both eyes fully visible, face centred, top of hair at y~12% and chin at y~55%, shoulders/bust fill bottom canvas without clipping ears/hair. Layered cool SILVER mithril armour: three stacked crescent lames at shoulders, curved horizontal lames on cuirass, very sparse etched vine suggestion, deep green cloak and thin gold circlet with one small green stone. Slim tall neck, no huge pauldrons or fur. Weathered but not filthy. Neutral diffuse base illumination, no directional cast lighting, warm torch pass, rim-light, glow or baked background. This will be separated into native clean character/eye/mouth components with separate lighting later. Broad clear painted clusters, limited muted material shades, no photoreal skin pores, glossy 3D, tiny filigree or cartoon. Exact SQUARE canvas, isolated bust, GENUINE TRANSPARENT ALPHA outside the character silhouette, no shadow/backdrop, no text or UI.",
+  "reference_images": [
+    "art/portraits/story-slice-v1/commander-edric.png",
+    "art/portraits/dark-elves-v1/dark-elf-man/resting.png"
+  ],
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-61544c27-d299-45b6-89f5-cfefca394305.png",
+  "source": "art/source/elves-v1/elf-man-master.png"
+}

@@ -1,0 +1,339 @@
+{
+  "issues": [
+    96,
+    99
+  ],
+  "checks": 82,
+  "failed": 0,
+  "errors": [],
+  "results": [
+    {
+      "check": "Thirty complete sound cards",
+      "ok": true
+    },
+    {
+      "check": "All real waveform plots decode",
+      "ok": true
+    },
+    {
+      "check": "Native WAV browser playback hit-1",
+      "ok": true
+    },
+    {
+      "check": "Stop/reset hit-1",
+      "ok": true
+    },
+    {
+      "check": "Native WAV browser playback hit-2",
+      "ok": true
+    },
+    {
+      "check": "Stop/reset hit-2",
+      "ok": true
+    },
+    {
+      "check": "Native WAV browser playback hit-3",
+      "ok": true
+    },
+    {
+      "check": "Stop/reset hit-3",
+      "ok": true
+    },
+    {
+      "check": "Native WAV browser playback block-wood",
+      "ok": true
+    },
+    {
+      "check": "Stop/reset block-wood",
+      "ok": true
+    },
+    {
+      "check": "Native WAV browser playback block-metal",
+      "ok": true
+    },
+    {
+      "check": "Stop/reset block-metal",
+      "ok": true
+    },
+    {
+      "check": "Native WAV browser playback miss-1",
+      "ok": true
+    },
+    {
+      "check": "Stop/reset miss-1",
+      "ok": true
+    },
+    {
+      "check": "Native WAV browser playback miss-2",
+      "ok": true
+    },
+    {
+      "check": "Stop/reset miss-2",
+      "ok": true
+    },
+    {
+      "check": "Native WAV browser playback web-spit",
+      "ok": true
+    },
+    {
+      "check": "Stop/reset web-spit",
+      "ok": true
+    },
+    {
+      "check": "Native WAV browser playback venom",
+      "ok": true
+    },
+    {
+      "check": "Stop/reset venom",
+      "ok": true
+    },
+    {
+      "check": "Native WAV browser playback coins-1",
+      "ok": true
+    },
+    {
+      "check": "Stop/reset coins-1",
+      "ok": true
+    },
+    {
+      "check": "Native WAV browser playback coins-2",
+      "ok": true
+    },
+    {
+      "check": "Stop/reset coins-2",
+      "ok": true
+    },
+    {
+      "check": "Native WAV browser playback purchase",
+      "ok": true
+    },
+    {
+      "check": "Stop/reset purchase",
+      "ok": true
+    },
+    {
+      "check": "Native WAV browser playback coin-flip",
+      "ok": true
+    },
+    {
+      "check": "Stop/reset coin-flip",
+      "ok": true
+    },
+    {
+      "check": "Native WAV browser playback chest-open",
+      "ok": true
+    },
+    {
+      "check": "Stop/reset chest-open",
+      "ok": true
+    },
+    {
+      "check": "Native WAV browser playback torch-light",
+      "ok": true
+    },
+    {
+      "check": "Stop/reset torch-light",
+      "ok": true
+    },
+    {
+      "check": "Native WAV browser playback torch-burnout",
+      "ok": true
+    },
+    {
+      "check": "Stop/reset torch-burnout",
+      "ok": true
+    },
+    {
+      "check": "Native WAV browser playback stumble",
+      "ok": true
+    },
+    {
+      "check": "Stop/reset stumble",
+      "ok": true
+    },
+    {
+      "check": "Native WAV browser playback fall",
+      "ok": true
+    },
+    {
+      "check": "Stop/reset fall",
+      "ok": true
+    },
+    {
+      "check": "Native WAV browser playback ui-click",
+      "ok": true
+    },
+    {
+      "check": "Stop/reset ui-click",
+      "ok": true
+    },
+    {
+      "check": "Native WAV browser playback gate-break",
+      "ok": true
+    },
+    {
+      "check": "Stop/reset gate-break",
+      "ok": true
+    },
+    {
+      "check": "Native WAV browser playback queen-screech",
+      "ok": true
+    },
+    {
+      "check": "Stop/reset queen-screech",
+      "ok": true
+    },
+    {
+      "check": "Native WAV browser playback heartbeat",
+      "ok": true
+    },
+    {
+      "check": "Stop/reset heartbeat",
+      "ok": true
+    },
+    {
+      "check": "Native WAV browser playback drum-hit",
+      "ok": true
+    },
+    {
+      "check": "Stop/reset drum-hit",
+      "ok": true
+    },
+    {
+      "check": "Native WAV browser playback distant-drums-loop",
+      "ok": true
+    },
+    {
+      "check": "Stop/reset distant-drums-loop",
+      "ok": true
+    },
+    {
+      "check": "Native WAV browser playback camp-fire-loop",
+      "ok": true
+    },
+    {
+      "check": "Stop/reset camp-fire-loop",
+      "ok": true
+    },
+    {
+      "check": "Native WAV browser playback camp-wind-loop",
+      "ok": true
+    },
+    {
+      "check": "Stop/reset camp-wind-loop",
+      "ok": true
+    },
+    {
+      "check": "Native WAV browser playback camp-voices-loop",
+      "ok": true
+    },
+    {
+      "check": "Stop/reset camp-voices-loop",
+      "ok": true
+    },
+    {
+      "check": "Native WAV browser playback camp-ambience-loop",
+      "ok": true
+    },
+    {
+      "check": "Stop/reset camp-ambience-loop",
+      "ok": true
+    },
+    {
+      "check": "Native WAV browser playback torch-burn-loop",
+      "ok": true
+    },
+    {
+      "check": "Stop/reset torch-burn-loop",
+      "ok": true
+    },
+    {
+      "check": "Native WAV browser playback outskirts-ambience-loop",
+      "ok": true
+    },
+    {
+      "check": "Stop/reset outskirts-ambience-loop",
+      "ok": true
+    },
+    {
+      "check": "Filter visible combat",
+      "ok": true
+    },
+    {
+      "check": "Filter membership combat",
+      "ok": true
+    },
+    {
+      "check": "Filter visible items",
+      "ok": true
+    },
+    {
+      "check": "Filter membership items",
+      "ok": true
+    },
+    {
+      "check": "Filter visible camp",
+      "ok": true
+    },
+    {
+      "check": "Filter membership camp",
+      "ok": true
+    },
+    {
+      "check": "Filter visible fortress",
+      "ok": true
+    },
+    {
+      "check": "Filter membership fortress",
+      "ok": true
+    },
+    {
+      "check": "Filter visible all",
+      "ok": true
+    },
+    {
+      "check": "Ambience repeats on request",
+      "ok": true
+    },
+    {
+      "check": "One shot never inherits repeat",
+      "ok": true
+    },
+    {
+      "check": "Complete reel plays its registered duration",
+      "ok": true
+    },
+    {
+      "check": "Listening volume control",
+      "ok": true
+    },
+    {
+      "check": "No sound-gallery overflow 1280",
+      "ok": true
+    },
+    {
+      "check": "44px sound controls 1280",
+      "ok": true
+    },
+    {
+      "check": "No sound-gallery overflow 844",
+      "ok": true
+    },
+    {
+      "check": "44px sound controls 844",
+      "ok": true
+    },
+    {
+      "check": "No sound-gallery overflow 390",
+      "ok": true
+    },
+    {
+      "check": "44px sound controls 390",
+      "ok": true
+    },
+    {
+      "check": "No sound browser errors",
+      "ok": true
+    }
+  ]
+}

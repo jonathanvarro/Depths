@@ -1,0 +1,256 @@
+{
+  "issue": 131,
+  "checks": 62,
+  "failed": 0,
+  "errors": [],
+  "results": [
+    {
+      "check": "Five retained masters and exact prompts",
+      "ok": true
+    },
+    {
+      "check": "Full native composition elf-man/neutral/neutral",
+      "ok": true
+    },
+    {
+      "check": "Full native composition elf-man/neutral/small",
+      "ok": true
+    },
+    {
+      "check": "Full native composition elf-man/neutral/open",
+      "ok": true
+    },
+    {
+      "check": "Full native composition elf-man/neutral/round",
+      "ok": true
+    },
+    {
+      "check": "Full native composition elf-man/half/neutral",
+      "ok": true
+    },
+    {
+      "check": "Full native composition elf-man/half/small",
+      "ok": true
+    },
+    {
+      "check": "Full native composition elf-man/half/open",
+      "ok": true
+    },
+    {
+      "check": "Full native composition elf-man/half/round",
+      "ok": true
+    },
+    {
+      "check": "Full native composition elf-man/closed/neutral",
+      "ok": true
+    },
+    {
+      "check": "Full native composition elf-man/closed/small",
+      "ok": true
+    },
+    {
+      "check": "Full native composition elf-man/closed/open",
+      "ok": true
+    },
+    {
+      "check": "Full native composition elf-man/closed/round",
+      "ok": true
+    },
+    {
+      "check": "Clean plate removes features elf-man",
+      "ok": true
+    },
+    {
+      "check": "Native96 card elf-man",
+      "ok": true
+    },
+    {
+      "check": "Full native composition elf-woman/neutral/neutral",
+      "ok": true
+    },
+    {
+      "check": "Full native composition elf-woman/neutral/small",
+      "ok": true
+    },
+    {
+      "check": "Full native composition elf-woman/neutral/open",
+      "ok": true
+    },
+    {
+      "check": "Full native composition elf-woman/neutral/round",
+      "ok": true
+    },
+    {
+      "check": "Full native composition elf-woman/half/neutral",
+      "ok": true
+    },
+    {
+      "check": "Full native composition elf-woman/half/small",
+      "ok": true
+    },
+    {
+      "check": "Full native composition elf-woman/half/open",
+      "ok": true
+    },
+    {
+      "check": "Full native composition elf-woman/half/round",
+      "ok": true
+    },
+    {
+      "check": "Full native composition elf-woman/closed/neutral",
+      "ok": true
+    },
+    {
+      "check": "Full native composition elf-woman/closed/small",
+      "ok": true
+    },
+    {
+      "check": "Full native composition elf-woman/closed/open",
+      "ok": true
+    },
+    {
+      "check": "Full native composition elf-woman/closed/round",
+      "ok": true
+    },
+    {
+      "check": "Clean plate removes features elf-woman",
+      "ok": true
+    },
+    {
+      "check": "Native96 card elf-woman",
+      "ok": true
+    },
+    {
+      "check": "Paused drawing stays fixed",
+      "ok": true
+    },
+    {
+      "check": "Step changes a held frame",
+      "ok": true
+    },
+    {
+      "check": "Playback starts",
+      "ok": true
+    },
+    {
+      "check": "Playback pauses",
+      "ok": true
+    },
+    {
+      "check": "Contrast backdrop stone",
+      "ok": true
+    },
+    {
+      "check": "Contrast backdrop linen",
+      "ok": true
+    },
+    {
+      "check": "Contrast backdrop dark",
+      "ok": true
+    },
+    {
+      "check": "Actual portrait capture runtime-held-192",
+      "ok": true
+    },
+    {
+      "check": "Actual portrait capture runtime-held-96",
+      "ok": true
+    },
+    {
+      "check": "Actual portrait capture runtime-lighting",
+      "ok": true
+    },
+    {
+      "check": "Combat tab switches",
+      "ok": true
+    },
+    {
+      "check": "Native pose idlephone",
+      "ok": true
+    },
+    {
+      "check": "Actual combat view idlephone",
+      "ok": true
+    },
+    {
+      "check": "Native pose idledesktop",
+      "ok": true
+    },
+    {
+      "check": "Actual combat view idledesktop",
+      "ok": true
+    },
+    {
+      "check": "Native pose attackphone",
+      "ok": true
+    },
+    {
+      "check": "Actual combat view attackphone",
+      "ok": true
+    },
+    {
+      "check": "Native pose attackdesktop",
+      "ok": true
+    },
+    {
+      "check": "Actual combat view attackdesktop",
+      "ok": true
+    },
+    {
+      "check": "Native pose hurtphone",
+      "ok": true
+    },
+    {
+      "check": "Actual combat view hurtphone",
+      "ok": true
+    },
+    {
+      "check": "Native pose hurtdesktop",
+      "ok": true
+    },
+    {
+      "check": "Actual combat view hurtdesktop",
+      "ok": true
+    },
+    {
+      "check": "Step pose works",
+      "ok": true
+    },
+    {
+      "check": "No horizontal overflow portrait844",
+      "ok": true
+    },
+    {
+      "check": "44px controls portrait844",
+      "ok": true
+    },
+    {
+      "check": "No horizontal overflow combat844",
+      "ok": true
+    },
+    {
+      "check": "44px controls combat844",
+      "ok": true
+    },
+    {
+      "check": "No horizontal overflow portrait390",
+      "ok": true
+    },
+    {
+      "check": "44px controls portrait390",
+      "ok": true
+    },
+    {
+      "check": "No horizontal overflow combat390",
+      "ok": true
+    },
+    {
+      "check": "44px controls combat390",
+      "ok": true
+    },
+    {
+      "check": "No art browser errors",
+      "ok": true
+    }
+  ]
+}
