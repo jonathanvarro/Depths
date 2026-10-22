@@ -518,6 +518,16 @@ Deeper floors mix them (depth 1 mostly single rats; depth 3 pairs and trios like
     - A thrown torch sets it off in a flash that scorches the other foes for 3 and the party for 1.
     - Hurt, it swells, and tears open on its next turn.
   - **Hollow miner** (floor 3; 16 health): grabs an exposed hero, who can't act until the miner is hit. It swings its pick at whoever it holds, and drops a pick 20% of the time.
+- **Art:** ChatGPT's art (#141) is connected, including the special poses (the bat landed, the brute's wind-up and recovery, the bloat swelling and bursting, the miner's grab), the gas cloud, and the new intent and status icons.
+- **Elites and depth scaling — tuned 2026-10-21** (`CombatState.prepare`, shared by the game and the playtest bot):
+  - **Depth:** foes on floor 3 have +10% health and damage, and floor 4 +20%, rounded. The queen and the guards she calls are included, so she has 38 health and 4–7 damage.
+  - **Elites:** from floor 2, some foes become elites.
+    - Chances: 10% each on floor 2 (at most one per fight), 15% on floor 3 and 20% on floor 4 (at most two).
+    - Types: Hardened (half again as much health), Savage (+1 damage), Swift (acts sooner) and Venomous (its hits poison).
+    - An elite has an orange nameplate, stands a little larger, and is worth a little more XP.
+    - Set fights (the gate and the queen) have no elites.
+  - **Elites carry the drops:** an elite's chance of a trinket or gear is ×3, and any elite can drop. An ordinary tougher foe's chance is ×0.5.
+  - **Bot results** (30 campaigns per hero): Mara 24, Corin 26, Alwen 19, against a target of about 24 and the pre-#133 baseline of 24, 29 and 21. Floor-3 and fortress wipes are back.
 
 ## Resources, rewards, and uncertainty
 

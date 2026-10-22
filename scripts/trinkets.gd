@@ -11,6 +11,9 @@ const DIR := "res://data/trinkets"
 ## Tougher foes: a kill has this chance of leaving a trinket.
 const DROP_CHANCE := 0.12
 const TOUGH_HEALTH := 10  # foes with at least this much health count as tougher
+## Elites carry most of the drop chance (#140).
+const ELITE_TIMES := 3.0
+const ORDINARY_TIMES := 0.5
 ## Of those drops, the chance it's a cursed one (floors 2+).
 const CURSED_SHARE := 0.25
 
@@ -44,8 +47,12 @@ static func unique_reward(rng: RandomNumberGenerator, owned: Array) -> Equipment
 ## What a tougher foe leaves, if anything: magic or rare jewellery (as
 ## treasure, to wear or sell), or on floors 2+ sometimes a cursed trinket.
 ## Returns a SupplyItem, an Equipment, or null.
-static func drop(rng: RandomNumberGenerator, depth: int, foe_health: int):
-	if foe_health < TOUGH_HEALTH or rng.randf() >= DROP_CHANCE:
+## Elites (#140) count as tougher whatever their health, and carry most of
+## the chance; ordinary tougher foes carry less.
+static func drop(rng: RandomNumberGenerator, depth: int, foe_health: int, elite := false):
+	if foe_health < TOUGH_HEALTH and not elite:
+		return null
+	if rng.randf() >= DROP_CHANCE * (ELITE_TIMES if elite else ORDINARY_TIMES):
 		return null
 	if depth >= 2 and rng.randf() < CURSED_SHARE:
 		var cursed := all().filter(func(t: Equipment): return t.curse != null)

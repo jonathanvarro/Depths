@@ -68,6 +68,19 @@ const GAS_DAMAGE := {"front": 2, "back": 1}
 const GAS_STRAIN := 6.0
 const FLASH_FOE_DAMAGE := 3
 const FLASH_HERO_DAMAGE := 1
+## Elites (#140, owner 2026-10-21): from floor 2, some foes carry one
+## modifier and a coloured nameplate. They're worth a little more XP and
+## hold most of the drop chance (trinkets.gd, gear_gen.gd). At most this
+## many per fight.
+const ELITE_CHANCE := {2: 0.10, 3: 0.15, 4: 0.20}
+const MAX_ELITES := {2: 1, 3: 2, 4: 2}
+const ELITES := ["Hardened", "Savage", "Swift", "Venomous"]
+const HARDENED_HEALTH := 1.5
+const SAVAGE_DAMAGE := 1
+const SWIFT_INITIATIVE := 3
+## Deeper floors bite harder (owner, 2026-10-21): foes' health and damage
+## scale by floor, the queen and her guards included.
+const DEPTH_SCALE := {3: 1.1, 4: 1.2}
 ## New monsters (#47): a great rat's rush hits harder; a drummer's beat
 ## makes each other goblin's next hit stronger.
 const RUSH_DAMAGE := 2
@@ -119,6 +132,7 @@ class Foe:
 	var row_override := ""  # "front" once the enraged queen steps forward
 	var enraged := false
 	var calls := 0
+	var elite := ""  # "Hardened", "Savage", "Swift" or "Venomous" (#140)
 
 	func in_back() -> bool:
 		return (row_override if row_override != "" else type.row) == "back"
@@ -147,6 +161,7 @@ var _venom := {}  # Companion -> turns left
 var _opened := {}  # Companion -> true after their first attack (opening shot, #47)
 var _drummed := {}  # Foe -> true: their next hit is stronger (goblin drummer)
 var _grabbed := {}  # Companion -> Foe holding them (hollow miner, #140)
+var depth_scale := 1.0  # see prepare()
 ## Things that happened between actions (venom ticking...). The combat
 ## screen shows and clears these after each advance().
 var events: PackedStringArray = []
@@ -168,6 +183,56 @@ func _init(party_state, enemy_types: Array[EnemyType]) -> void:
 			foe.row_override = "back"  # a bat starts in the air
 		plan(foe)
 	_build_order()
+
+
+## Sets the fight up for its floor (#140): deeper foes are tougher, and
+## some become elites. `kind`: "", "gate" or "queen" (set fights have no
+## elites). The game and the playtest bot both call this, so they match.
+func prepare(depth: int, kind := "") -> void:
+	depth_scale = DEPTH_SCALE.get(depth, 1.0)
+	for foe in foes:
+		_scale(foe)
+	if kind == "":
+		var chance: float = ELITE_CHANCE.get(depth, 0.0)
+		var made := 0
+		for foe in foes:
+			if made < MAX_ELITES.get(depth, 0) and rng.randf() < chance:
+				make_elite(foe, ELITES[rng.randi_range(0, ELITES.size() - 1)])
+				made += 1
+	for foe in foes:
+		plan(foe)
+	_build_order()
+
+
+## Deeper, tougher: health and damage times the floor's scale.
+func _scale(foe: Foe) -> void:
+	if is_equal_approx(depth_scale, 1.0):
+		return
+	var type: EnemyType = foe.type.duplicate()
+	type.max_health = roundi(type.max_health * depth_scale)
+	type.damage_min = roundi(type.damage_min * depth_scale)
+	type.damage_max = roundi(type.damage_max * depth_scale)
+	foe.type = type
+	foe.health = type.max_health
+
+
+## Makes `foe` an elite of `kind`. Its kind keeps its own name for contracts
+## and the expedition record; the fight shows "Hardened goblin".
+func make_elite(foe: Foe, kind: String) -> void:
+	var type: EnemyType = foe.type.duplicate()
+	match kind:
+		"Hardened":
+			type.max_health = roundi(type.max_health * HARDENED_HEALTH)
+		"Savage":
+			type.damage_min += SAVAGE_DAMAGE
+			type.damage_max += SAVAGE_DAMAGE
+		"Swift":
+			type.initiative += SWIFT_INITIATIVE
+	type.threat += 1  # a little more to learn from
+	foe.type = type
+	foe.health = type.max_health
+	foe.elite = kind
+	foe.name = "%s %s" % [kind, foe.name.substr(0, 1).to_lower() + foe.name.substr(1)]
 
 
 ## Picks what `foe` will do on its next turn (shown to the player).
@@ -232,8 +297,10 @@ func plan(foe: Foe) -> void:
 ## The queen's call: another guard joins the fight.
 func _call_guard(queen: Foe) -> Dictionary:
 	queen.calls += 1
-	var count := foes.filter(func(f: Foe): return f.type == queen.type.summons).size() + 1
+	# By name: depth scaling gives each foe its own copy of its kind (#140).
+	var count := foes.filter(func(f: Foe): return f.type.display_name == queen.type.summons.display_name).size() + 1
 	var guard := Foe.new(queen.type.summons, "%s %d" % [queen.type.summons.display_name, count])
+	_scale(guard)
 	foes.append(guard)
 	plan(guard)
 	foe_joined.emit(guard)
@@ -610,7 +677,7 @@ func _carry_out(foe: Foe) -> Dictionary:
 		outcome["damage"] = damage
 		var verb: String = "brings down a heavy blow on" if heavy else foe.type.attack_verb
 		outcome["text"] = "The %s %s %s for %d." % [foe.name.to_lower(), verb, target.display_name, damage]
-		if foe.type.tactic == EnemyType.Tactic.WEB_AND_VENOM and foe.type.venomous and target.is_alive():
+		if ((foe.type.tactic == EnemyType.Tactic.WEB_AND_VENOM and foe.type.venomous) or foe.elite == "Venomous") and target.is_alive():
 			_venom[target] = VENOM_TURNS
 			outcome["text"] += " Venom burns in the wound."
 		if target.is_alive() and not foe.type.injuries.is_empty() and rng.randf() < foe.type.injury_chance:

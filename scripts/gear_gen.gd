@@ -39,6 +39,8 @@ const TIER_ODDS := {
 	4: {"magic": 0.6, "rare": 0.4},
 }
 const TOUGH_HEALTH := 10  # as for trinkets: foes with this much health or more
+const ELITE_TIMES := 3.0
+const ORDINARY_TIMES := 0.5
 
 
 ## The smith's common weapons and armour: what finer gear is made from.
@@ -52,11 +54,15 @@ static func bases() -> Array[Equipment]:
 
 ## A chest's or a tougher foe's find, if any: a generated piece, or null.
 ## `source`: "chest" or "foe".
-static func drop(rng: RandomNumberGenerator, depth: int, source: String, foe_health := 0) -> Equipment:
+## Elites (#140) count as tougher whatever their health and carry most of
+## the chance; ordinary tougher foes carry less.
+static func drop(rng: RandomNumberGenerator, depth: int, source: String, foe_health := 0, elite := false) -> Equipment:
 	var floor := clampi(depth, 1, 4)
-	if source == "foe" and foe_health < TOUGH_HEALTH:
+	if source == "foe" and foe_health < TOUGH_HEALTH and not elite:
 		return null
 	var chance: float = (CHEST_CHANCE if source == "chest" else FOE_CHANCE)[floor]
+	if source == "foe":
+		chance *= ELITE_TIMES if elite else ORDINARY_TIMES
 	if rng.randf() >= chance:
 		return null
 	var tier := _roll_tier(rng, TIER_ODDS[floor])

@@ -675,6 +675,7 @@ func _fight(group: Array, kind: String) -> int:
 	types.assign(group)
 	var state = CS.new(party, types)
 	state.rng.seed = randi()
+	state.prepare(depth, kind)  # deeper is tougher; some elites (#140), as in the game
 	var start_health := _total_health()
 	var injuries_before := _injury_count()
 	var guard := 0
@@ -709,10 +710,10 @@ func _fight(group: Array, kind: String) -> int:
 		for foe in state.foes:
 			if foe.health > 0:
 				continue
-			_take_gear(GearGen.drop(trinket_rng, depth, "foe", foe.type.max_health))
+			_take_gear(GearGen.drop(trinket_rng, depth, "foe", foe.type.max_health, foe.elite != ""))
 			if foe.type.drop and trinket_rng.randf() < foe.type.drop_chance:
 				party.supplies.add_what_fits(foe.type.drop)
-			var find = Trinkets.drop(trinket_rng, depth, foe.type.max_health)
+			var find = Trinkets.drop(trinket_rng, depth, foe.type.max_health, foe.elite != "")
 			if find is Equipment and party.supplies.has_room_for_gear():
 				party.supplies.gear.append(find)
 				stats["trinkets_found"] += 1

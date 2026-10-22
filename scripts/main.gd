@@ -714,6 +714,8 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 	if types.is_empty():
 		types.assign(encounter_pool(_depth, _party_state.living_members().size()).pick_random())
 	var state = CombatState.new(_party_state, types)
+	if not _in_opening:
+		state.prepare(_depth, _fight_kind)  # deeper is tougher; some elites (#140)
 	if opening_spider:
 		for foe in state.foes:
 			foe.has_webbed = true  # the opening's spider bites first (#59)
@@ -834,8 +836,8 @@ func _trinket_drops(state) -> void:
 	for foe in state.foes:
 		if foe.health > 0:
 			continue
-		var find = Trinkets.drop(_rng, _depth, foe.type.max_health)
-		var gear: Equipment = GearGen.drop(_rng, _depth, "foe", foe.type.max_health)
+		var find = Trinkets.drop(_rng, _depth, foe.type.max_health, foe.elite != "")
+		var gear: Equipment = GearGen.drop(_rng, _depth, "foe", foe.type.max_health, foe.elite != "")
 		if foe.type.drop and _rng.randf() < foe.type.drop_chance:  # a hollow miner's pick (#140)
 			if _party_state.supplies.add_what_fits(foe.type.drop) > 0:
 				_show_message("The %s's %s clatters free. It's in the pack." % [foe.type.display_name.to_lower(), foe.type.drop.display_name.to_lower()])
@@ -1532,12 +1534,20 @@ func _place_foes(foes: Array) -> void:
 		var node: Node3D = foe.type.scene.instantiate()
 		node.position = _party.position + forward * depth + right * offsets[mini(i, offsets.size() - 1)]
 		_dress_foe(node, foe.type)
+		if foe.elite != "":
+			_mark_elite(node)
 		BattleStage.raise(node)
 		_level.add_child(node)
 		_clear_of_panel(node)
-		if foe.type.tactic == EnemyType.Tactic.SWOOPER:
-			node.position.y += 0.9  # a bat flies (#140)
 		foe.node = node
+
+
+## An elite (#140) stands a little larger, with a hot rim of colour.
+func _mark_elite(node: Node3D) -> void:
+	node.scale *= 1.1
+	var sprite: SpriteBase3D = node.get_node_or_null("Sprite")
+	if sprite:
+		sprite.modulate = sprite.modulate * Color(1.25, 0.95, 0.85)
 
 
 ## Fights take place on a dark stage with no floor in view, so a foe whose
@@ -2981,6 +2991,7 @@ func _build_ui(minimap: Control) -> void:
 	coin_layer.add_child(coin)
 	_combat.coin = coin
 	_combat.place_foe = _place_extra_foe
+	_combat.reframe = _clear_of_panel  # a bat landing (#141)
 	# Settings (#52), above everything, from the Pack or the camp.
 	var settings_layer := CanvasLayer.new()
 	settings_layer.layer = 7

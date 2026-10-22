@@ -148,7 +148,7 @@ func _initialize() -> void:
 		if find:
 			drops.append(find)
 	check("weak foes leave nothing", weak_drops == 0)
-	check("tougher foes sometimes leave magic jewellery, never cursed on floor 1", drops.size() > 150 and drops.size() < 350 and drops.all(func(d): return d is SupplyItem), drops.size())
+	check("tougher foes sometimes leave magic jewellery, never cursed on floor 1", drops.size() > 70 and drops.size() < 180 and drops.all(func(d): return d is SupplyItem), drops.size())
 	var deep := []
 	for i in 2000:
 		var find = Trinkets.drop(rng, 3, 14)

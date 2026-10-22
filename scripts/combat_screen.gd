@@ -53,6 +53,23 @@ var _actions: Control
 var _action_buttons: HBoxContainer
 var _item_buttons: HBoxContainer
 var _tags := {}  # Foe -> Button
+var _busy := {}  # Foe -> true while a one-off pose (attack, hurt) plays
+var _fading := {}  # Foe -> true once its fade has started
+## The new monsters' art (#141): intent and status marks, and the gas burst.
+const MONSTER_INTENTS := {
+	CombatState.Intent.SWOOP: preload("res://art/ui/monsters-v1/intent/swoop.png"),
+	CombatState.Intent.SWELL: preload("res://art/ui/monsters-v1/intent/swell.png"),
+	CombatState.Intent.GRAB: preload("res://art/ui/monsters-v1/intent/grab.png"),
+}
+const GRABBED_MARK := preload("res://art/ui/monsters-v1/status/grabbed.png")
+const ELITE_COLOUR := Color("e0632f")
+const ELITE_ABOUT := {
+	"Hardened": "Hardened: half again as much health.",
+	"Savage": "Savage: hits 1 harder.",
+	"Swift": "Swift: acts sooner.",
+	"Venomous": "Venomous: its hits poison.",
+}
+const GAS_BURST := preload("res://art/effects/monsters-v1/gas-burst.tres")
 ## "" allows every action; "throw" allows only Item > Throw torch (the
 ## opening forces the throw when Mara is nearly down, #69).
 var only_action := ""
@@ -63,6 +80,9 @@ var coin: Control
 var no_retreat := false
 ## Places a foe that joins mid-fight in the world (set by main.gd).
 var place_foe := Callable()
+## Keeps a foe clear of the action panel after its height changes (a bat
+## landing, #141); set by main.gd.
+var reframe := Callable()
 ## Emitted after each hero action (the opening reacts to glancing blows).
 signal hero_acted(hero: Companion, action: Dictionary, outcome: Dictionary)
 
@@ -138,6 +158,16 @@ func _add_tag(foe) -> void:
 	tag.add_theme_constant_override("icon_max_width", TAG_ICON)
 	tag.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	tag.pressed.connect(_select_target.bind(foe))
+	if foe.elite != "":
+		# An elite's nameplate (#140): a hot red-orange border.
+		var plate := StyleBoxFlat.new()
+		plate.bg_color = Color(0.12, 0.08, 0.07, 0.92)
+		plate.border_color = ELITE_COLOUR
+		plate.set_border_width_all(2)
+		plate.set_content_margin_all(6)
+		for state_name in ["normal", "hover", "pressed"]:
+			tag.add_theme_stylebox_override(state_name, plate)
+		tag.tooltip_text = ELITE_ABOUT[foe.elite]
 	var bar := ProgressBar.new()
 	bar.name = "Health"
 	bar.show_percentage = false
@@ -314,14 +344,54 @@ func _play(foe, animation: String, seconds: float) -> void:
 	var sprite: AnimatedSprite3D = foe.node.get_node_or_null("Sprite") if foe.node else null
 	if sprite == null:
 		return
+	_busy[foe] = true
 	sprite.play(animation)
 	await get_tree().create_timer(seconds).timeout
+	_busy.erase(foe)
 	if is_instance_valid(sprite):
-		sprite.play("idle")
+		sprite.play(_rest_pose(foe, sprite))
+
+
+## Gas rolls over the party when a bloat bursts (#141's four-frame cloud).
+func _gas_cloud() -> void:
+	var cloud := AnimatedSprite2D.new()
+	cloud.sprite_frames = GAS_BURST
+	cloud.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	cloud.scale = Vector2(4, 4)
+	cloud.position = Vector2(size.x * 0.32, size.y * 0.72)  # over the party
+	_fx.add_child(cloud)
+	cloud.play(&"once")
+	cloud.animation_finished.connect(cloud.queue_free)
+
+
+## The pose a foe holds between actions (#141's state drawings): a bat on
+## the ground, a brute winding up or catching its breath, a bloat swelling,
+## a miner holding someone. Idle otherwise, or when the art lacks the pose.
+func _rest_pose(foe, sprite: AnimatedSprite3D) -> String:
+	var pose := "idle"
+	match foe.type.tactic:
+		EnemyType.Tactic.SWOOPER:
+			pose = "idle" if foe.in_back() else "landed"
+		EnemyType.Tactic.BRUTE:
+			pose = {CombatState.Intent.HEAVY: "wind-up", CombatState.Intent.RECOVER: "recover"}.get(foe.intent, "idle")
+		EnemyType.Tactic.BLOAT:
+			pose = "swell" if foe.intent == CombatState.Intent.SWELL else "idle"
+		EnemyType.Tactic.GRABBER:
+			pose = "grab" if _state.party.living_members().any(func(h): return _state._grabbed.get(h) == foe) else "idle"
+	return pose if sprite.sprite_frames.has_animation(pose) else "idle"
 
 
 func _fade_out(foe) -> void:
+	if _fading.has(foe):
+		return
+	_fading[foe] = true
 	var sprite: AnimatedSprite3D = foe.node.get_node_or_null("Sprite") if foe.node else null
+	if sprite and sprite.sprite_frames.has_animation("burst"):
+		# A gas-bloat tears open (#141), and the gas rolls over the party.
+		_busy[foe] = true
+		sprite.play("burst")
+		_gas_cloud()
+		await get_tree().create_timer(0.35).timeout
 	if sprite:
 		var tween := create_tween()
 		tween.tween_property(sprite, "modulate:a", 0.0, 0.4)
@@ -338,6 +408,17 @@ func _process(_delta: float) -> void:
 	for foe in _tags:
 		if foe.node and foe.node.has_method("set_combat_state"):
 			foe.node.set_combat_state(foe.enraged,foe.shielded)
+		# The held pose for its state, between actions (#141).
+		var held: AnimatedSprite3D = foe.node.get_node_or_null("Sprite") if foe.node else null
+		if held and foe.is_alive() and not _busy.has(foe):
+			var pose := _rest_pose(foe, held)
+			if held.animation != pose:
+				held.play(pose)
+				if foe.type.tactic == EnemyType.Tactic.SWOOPER and reframe.is_valid():
+					reframe.call(foe.node)
+		# Fallen without a blow of ours (a gas burst, its own swell): fade it.
+		if foe.node and foe.node.visible and not foe.is_alive() and not foe.fled and not _fading.has(foe):
+			_fade_out(foe)
 		var tag: Button = _tags[foe]
 		tag.visible = foe.is_alive() and foe.node != null and not camera.is_position_behind(foe.node.global_position)
 		if tag.visible:
@@ -348,7 +429,7 @@ func _process(_delta: float) -> void:
 			# What it does next as an icon (#60, #105); the words on hover.
 			tag.icon = _intent_icon(foe.intent)
 			tag.text = foe.name
-			tag.tooltip_text = "%s: %s" % [foe.name, CombatState.intent_text(foe)]
+			tag.tooltip_text = "%s: %s" % [foe.name, CombatState.intent_text(foe)] + ("\n" + ELITE_ABOUT[foe.elite] if foe.elite != "" else "")
 			var bar: ProgressBar = tag.get_node("Health")
 			bar.visible = not foe.glancing  # no health to whittle down (#69)
 			bar.max_value = foe.type.max_health
@@ -392,10 +473,8 @@ func _intent_icon(intent: int) -> Texture2D:
 		CombatState.Intent.RUSH: return MARKS["rush"]
 		CombatState.Intent.RECOVER: return MARKS["recover"]
 		CombatState.Intent.BEAT: return MARKS["beat"]
-		# Placeholders until #141's icons: a swoop lunges, a swell is gas, a grab holds.
-		CombatState.Intent.SWOOP: return Glyphs.intention(CombatState.Intent.LUNGE)
-		CombatState.Intent.SWELL: return MARKS["venom"]
-		CombatState.Intent.GRAB: return Glyphs.intention(CombatState.Intent.WEB)
+		CombatState.Intent.SWOOP, CombatState.Intent.SWELL, CombatState.Intent.GRAB:
+			return MONSTER_INTENTS[intent]
 	return Glyphs.intention(intent)
 
 
@@ -515,7 +594,7 @@ func _refresh() -> void:
 		if ongoing and _state.venom_turns(hero) > 0:
 			marks.append([MARKS["venom"], "Venom: loses health each turn"])
 		if ongoing and _state.is_grabbed(hero):
-			marks.append([MARKS["webbed"], "Grabbed: can't act until the one holding them is hit"])
+			marks.append([GRABBED_MARK, "Grabbed: can't act until the one holding them is hit"])
 		if ongoing and _state.is_defending(hero):
 			marks.append([MARKS["guard"], "Defending: takes less damage"])
 		card.set_marks(marks)

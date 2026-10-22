@@ -161,7 +161,7 @@ func _initialize() -> void:
 	main._answer_prompt(true)
 	await create_timer(0.3).timeout
 	var state = main._combat._state
-	check("the queen and two guards", main._in_combat and state.foes.size() == 3 and state.foes[0].type == queen)
+	check("the queen and two guards", main._in_combat and state.foes.size() == 3 and state.foes[0].type.display_name == queen.display_name)
 	var guarded := 0.0
 	while not main._combat._actions.visible and guarded < 50:
 		await create_timer(0.1).timeout
