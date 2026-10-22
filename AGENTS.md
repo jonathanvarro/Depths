@@ -142,6 +142,10 @@ Templates > Download and Install; already installed on the owner's PC).
   choices, depth range); `room_events.gd` loads every file in the folder.
 - `scripts/room_events.gd` – picks events per cell by kind and depth,
   resolves choices; `scripts/event_screen.gd` shows them.
+  #142 connects dedicated defiled-shrine, fouled-well and buried-cache state
+  pairs, plus nine designs across twelve trinket definitions. Catalogue/review
+  and exact source prompts: `docs/events-and-trinkets-art.md`. Preserve shared
+  icons for cursed/cleansed pairs and Claude's existing shrine wall anchor.
 - `scripts/expedition.gd` – one expedition's record (start snapshot plus
   counters) and its gained/lost lines; `Ending` RETURNED / WIPED /
   REACHED_BOTTOM.

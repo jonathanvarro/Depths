@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Equipment" format=3]
 
 [ext_resource type="Script" path="res://scripts/boon.gd" id="1_ae6i6"]
-[ext_resource type="Texture2D" path="res://art/items/refined-v2/silver-locket.png" id="2_374qe"]
+[ext_resource type="Texture2D" path="res://art/items/trinkets-v1/bone-white-charm.png" id="2_374qe"]
 [ext_resource type="Script" path="res://scripts/equipment.gd" id="3_chf0n"]
 
 [sub_resource type="Resource" id="Resource_w3aid"]

@@ -1,0 +1,11 @@
+{
+  "id": "shield-bearers-token",
+  "tool": "built-in image_gen",
+  "prompt": "Use case: stylized-concept. Production inventory icon for Depths, a dark first-person cave crawler. Reference images are STYLE references ONLY: match existing weathered painted pixel clusters and broad readable silhouettes. One isolated worn object fully contained on square transparent canvas with 8% margin, intended native128px/64colours and 64px/40px display. Three or four broad shades per material; restrained charcoal, umber, linen, tarnished silver and muted gold; only subject-specific colour accents. Neutral diffuse material shading, no scene lighting, glow, sparkle, ground, cast shadow, UI frame, letters, label, fake checkerboard or photorealistic fine detail. Genuine transparent alpha outside object and inside holes. Subject: SHIELD-BEARER'S TOKEN: ONE battered tin military badge shaped as a broad blunt heater shield, plain pale pewter front with one shallow broad dent, a dark iron rolled edge and a broken short pin/catch visible behind at the top. View nearly face-on, slightly clockwise tilted. Keep a large CLEAN BLANK central face to receive the game's existing native seal overlay later. NO invented emblem, crown, cross, letter, rune, star or number. No ribbon or chain, not a full sized shield, no sword. Low old silver/charcoal/linen palette, broad worn edges and two small dents.",
+  "reference_images": [
+    "art/items/refined-v2/gold-signet-ring.png",
+    "art/items/field-kit-v1/holy-water.png"
+  ],
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-898340ca-6ac3-4f04-864a-743610687a27.png",
+  "source": "art/source/events-trinkets-v1/shield-bearers-token-master.png"
+}

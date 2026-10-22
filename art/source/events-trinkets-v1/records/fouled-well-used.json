@@ -1,0 +1,10 @@
+{
+  "id": "fouled-well-used",
+  "tool": "built-in image_gen",
+  "prompt": "Use case: precise-object-edit. EDIT TARGET: the supplied miners' fouled well game sprite. Create its disturbed/resolved state. Preserve EXACT original square canvas, camera, scale, every masonry block and silhouette, rope and bucket placement. Only change the water surface: broad low concentric ripples, the scum broken into two small patches at the edges, a slightly lowered water line and damp finger streaks along the near INNER lip. Water remains muddy olive-brown, neither magical nor newly clear: player may have drunk without purifying it. Keep the same broken bucket and rotted rope, same muted grey/umber/olive pixel-cluster painting, neutral diffuse material shading and transparent outside. No new objects, people, reflections of characters, glow, arrows, text, UI or floor. This is the same stone well after someone has drawn water, not a replacement well. Entire object unchanged in size and position.",
+  "reference_images": [
+    "art/source/events-trinkets-v1/fouled-well-master.png"
+  ],
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-c870f717-3b39-4b19-a607-c84ee2d1194c.png",
+  "source": "art/source/events-trinkets-v1/fouled-well-used-master.png"
+}

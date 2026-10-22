@@ -1,0 +1,11 @@
+{
+  "id": "gamblers-knucklebone",
+  "tool": "built-in image_gen",
+  "prompt": "Use case: stylized-concept. Production inventory icon for Depths, a dark first-person cave crawler. Reference images are STYLE references ONLY: match existing weathered painted pixel clusters and broad readable silhouettes. One isolated worn object fully contained on square transparent canvas with 8% margin, intended native128px/64colours and 64px/40px display. Three or four broad shades per material; restrained charcoal, umber, linen, tarnished silver and muted gold; only subject-specific colour accents. Neutral diffuse material shading, no scene lighting, glow, sparkle, ground, cast shadow, UI frame, letters, label, fake checkerboard or photorealistic fine detail. Genuine transparent alpha outside object and inside holes. Subject: GAMBLER'S KNUCKLEBONE: ONE old sheep anklebone used as a gaming piece, squat asymmetric double-knob bone with a pinched waist, tilted diagonally in three-quarter view. Worn ivory and dark umber creases, two or three large drilled black pip holes on the broad upper face, rubbed dark thumb patch at one end. No letters or numbers, dice cube, coins, bag, hands, jewellery mounting, skull or magical decoration. Chunky lobed shape and large pip holes must read at 40px.",
+  "reference_images": [
+    "art/items/refined-v2/gold-signet-ring.png",
+    "art/items/field-kit-v1/holy-water.png"
+  ],
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-6f269dd1-6b29-4bc1-a471-713790ef5e9a.png",
+  "source": "art/source/events-trinkets-v1/gamblers-knucklebone-master.png"
+}

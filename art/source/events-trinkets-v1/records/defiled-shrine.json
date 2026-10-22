@@ -1,0 +1,10 @@
+{
+  "id": "defiled-shrine",
+  "tool": "built-in image_gen",
+  "prompt": "Use case: precise-object-edit. Asset: defiled miners' shrine for Depths, a dark first-person cave crawler. INPUT: existing miners-shrine sprite is the EDIT TARGET and exact architectural reference. Preserve its compact front-facing rough-stone arched niche, stepped sill, same camera, contours and canvas placement. Replace the small central miner idol and all candles with ONE palm-sized irregular BLACK STONE on the sill. Goblins have smeared the inside recess and lower sill with a few broad dried reddish-brown streaks; old wax stubs remain at edges, no flames. Keep all damage plausible and restrained. Large dark central stone must read at native 128px. Muted ochre sandstone, charcoal recess and dried umber red, chunky hand-painted pixel clusters, 3 shades per material, little texture noise. No invented runes, skull idol, glowing eyes, blood spray, faces, text or framing. NO floor or full background wall outside the arch. Neutral diffuse material shading, no warm torch pass or emitted light. GENUINE transparent alpha outside the entire niche, inside gaps where appropriate; whole stonework contained. Preserve the original architectural identity. This is a matching state of one asset, not a redesign.",
+  "reference_images": [
+    "art/dressing/landmarks-v1/miners-shrine.png"
+  ],
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-28701ae5-410a-4f49-9870-9412772cb7dc.png",
+  "source": "art/source/events-trinkets-v1/defiled-shrine-master.png"
+}

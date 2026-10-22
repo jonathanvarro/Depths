@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="Texture2D" path="res://art/props/shrine-events-v1/fouled-well.png" id="fresh"]
+[ext_resource type="Texture2D" path="res://art/props/shrine-events-v1/fouled-well-used.png" id="used"]
+[ext_resource type="Script" path="res://art/props/cave-events-v1/container.gd" id="state"]
+[node name="fouled-well" type="Node3D"]
+script = ExtResource("state")
+closed_texture = ExtResource("fresh")
+empty_texture = ExtResource("used")
+metadata/prop_mount = "floor"
+metadata/wall_height = 0.95
+[node name="Sprite" type="Sprite3D" parent="."]
+position = Vector3(0, 0.46205357142857145, 0)
+pixel_size = 0.010267857142857143
+billboard = 2
+shaded = true
+texture_filter = 0
+alpha_cut = 1
+alpha_scissor_threshold = 0.5
+cast_shadow = 0
+texture = ExtResource("fresh")

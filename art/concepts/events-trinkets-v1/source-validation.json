@@ -1,0 +1,1568 @@
+{
+  "issue": 142,
+  "checks": 390,
+  "failed": 0,
+  "runtime_rgba_bytes": 1130496,
+  "results": [
+    {
+      "check": "Fifteen distinct requested masters",
+      "ok": true
+    },
+    {
+      "check": "Immutable master black-pearl-ring",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact original black-pearl-ring",
+      "ok": true
+    },
+    {
+      "check": "Tool and exact prompt black-pearl-ring",
+      "ok": true
+    },
+    {
+      "check": "Generated alpha black-pearl-ring",
+      "ok": true
+    },
+    {
+      "check": "Immutable master bloodstone",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact original bloodstone",
+      "ok": true
+    },
+    {
+      "check": "Tool and exact prompt bloodstone",
+      "ok": true
+    },
+    {
+      "check": "Generated alpha bloodstone",
+      "ok": true
+    },
+    {
+      "check": "Immutable master bone-white-charm",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact original bone-white-charm",
+      "ok": true
+    },
+    {
+      "check": "Tool and exact prompt bone-white-charm",
+      "ok": true
+    },
+    {
+      "check": "Generated alpha bone-white-charm",
+      "ok": true
+    },
+    {
+      "check": "Immutable master buried-cache-used",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact original buried-cache-used",
+      "ok": true
+    },
+    {
+      "check": "Tool and exact prompt buried-cache-used",
+      "ok": true
+    },
+    {
+      "check": "Generated alpha buried-cache-used",
+      "ok": true
+    },
+    {
+      "check": "Immutable master buried-cache",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact original buried-cache",
+      "ok": true
+    },
+    {
+      "check": "Tool and exact prompt buried-cache",
+      "ok": true
+    },
+    {
+      "check": "Generated alpha buried-cache",
+      "ok": true
+    },
+    {
+      "check": "Immutable master defiled-shrine-used",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact original defiled-shrine-used",
+      "ok": true
+    },
+    {
+      "check": "Tool and exact prompt defiled-shrine-used",
+      "ok": true
+    },
+    {
+      "check": "Generated alpha defiled-shrine-used",
+      "ok": true
+    },
+    {
+      "check": "Immutable master defiled-shrine",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact original defiled-shrine",
+      "ok": true
+    },
+    {
+      "check": "Tool and exact prompt defiled-shrine",
+      "ok": true
+    },
+    {
+      "check": "Generated alpha defiled-shrine",
+      "ok": true
+    },
+    {
+      "check": "Immutable master ember-ring",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact original ember-ring",
+      "ok": true
+    },
+    {
+      "check": "Tool and exact prompt ember-ring",
+      "ok": true
+    },
+    {
+      "check": "Generated alpha ember-ring",
+      "ok": true
+    },
+    {
+      "check": "Immutable master fouled-well-used",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact original fouled-well-used",
+      "ok": true
+    },
+    {
+      "check": "Tool and exact prompt fouled-well-used",
+      "ok": true
+    },
+    {
+      "check": "Generated alpha fouled-well-used",
+      "ok": true
+    },
+    {
+      "check": "Immutable master fouled-well",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact original fouled-well",
+      "ok": true
+    },
+    {
+      "check": "Tool and exact prompt fouled-well",
+      "ok": true
+    },
+    {
+      "check": "Generated alpha fouled-well",
+      "ok": true
+    },
+    {
+      "check": "Immutable master gamblers-knucklebone",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact original gamblers-knucklebone",
+      "ok": true
+    },
+    {
+      "check": "Tool and exact prompt gamblers-knucklebone",
+      "ok": true
+    },
+    {
+      "check": "Generated alpha gamblers-knucklebone",
+      "ok": true
+    },
+    {
+      "check": "Immutable master goblin-gold-torc",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact original goblin-gold-torc",
+      "ok": true
+    },
+    {
+      "check": "Tool and exact prompt goblin-gold-torc",
+      "ok": true
+    },
+    {
+      "check": "Generated alpha goblin-gold-torc",
+      "ok": true
+    },
+    {
+      "check": "Immutable master moth-wing-brooch",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact original moth-wing-brooch",
+      "ok": true
+    },
+    {
+      "check": "Tool and exact prompt moth-wing-brooch",
+      "ok": true
+    },
+    {
+      "check": "Generated alpha moth-wing-brooch",
+      "ok": true
+    },
+    {
+      "check": "Immutable master shield-bearers-token",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact original shield-bearers-token",
+      "ok": true
+    },
+    {
+      "check": "Tool and exact prompt shield-bearers-token",
+      "ok": true
+    },
+    {
+      "check": "Generated alpha shield-bearers-token",
+      "ok": true
+    },
+    {
+      "check": "Immutable master slingers-thumb-ring",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact original slingers-thumb-ring",
+      "ok": true
+    },
+    {
+      "check": "Tool and exact prompt slingers-thumb-ring",
+      "ok": true
+    },
+    {
+      "check": "Generated alpha slingers-thumb-ring",
+      "ok": true
+    },
+    {
+      "check": "Native canvas bloodstoneicon",
+      "ok": true
+    },
+    {
+      "check": "Binary transparent export bloodstoneicon",
+      "ok": true
+    },
+    {
+      "check": "Palette bloodstoneicon",
+      "ok": true
+    },
+    {
+      "check": "No invisible RGB bloodstoneicon",
+      "ok": true
+    },
+    {
+      "check": "Consistent padding bloodstoneicon",
+      "ok": true
+    },
+    {
+      "check": "Native canvas bloodstonecompact_icon",
+      "ok": true
+    },
+    {
+      "check": "Binary transparent export bloodstonecompact_icon",
+      "ok": true
+    },
+    {
+      "check": "Palette bloodstonecompact_icon",
+      "ok": true
+    },
+    {
+      "check": "No invisible RGB bloodstonecompact_icon",
+      "ok": true
+    },
+    {
+      "check": "Consistent padding bloodstonecompact_icon",
+      "ok": true
+    },
+    {
+      "check": "No upscale bloodstone",
+      "ok": true
+    },
+    {
+      "check": "Connected icon res://data/trinkets/bloodstone.tres",
+      "ok": true
+    },
+    {
+      "check": "Native canvas moth-wing-broochicon",
+      "ok": true
+    },
+    {
+      "check": "Binary transparent export moth-wing-broochicon",
+      "ok": true
+    },
+    {
+      "check": "Palette moth-wing-broochicon",
+      "ok": true
+    },
+    {
+      "check": "No invisible RGB moth-wing-broochicon",
+      "ok": true
+    },
+    {
+      "check": "Consistent padding moth-wing-broochicon",
+      "ok": true
+    },
+    {
+      "check": "Native canvas moth-wing-broochcompact_icon",
+      "ok": true
+    },
+    {
+      "check": "Binary transparent export moth-wing-broochcompact_icon",
+      "ok": true
+    },
+    {
+      "check": "Palette moth-wing-broochcompact_icon",
+      "ok": true
+    },
+    {
+      "check": "No invisible RGB moth-wing-broochcompact_icon",
+      "ok": true
+    },
+    {
+      "check": "Consistent padding moth-wing-broochcompact_icon",
+      "ok": true
+    },
+    {
+      "check": "No upscale moth-wing-brooch",
+      "ok": true
+    },
+    {
+      "check": "Connected icon res://data/trinkets/moth_wing_brooch.tres",
+      "ok": true
+    },
+    {
+      "check": "Native canvas slingers-thumb-ringicon",
+      "ok": true
+    },
+    {
+      "check": "Binary transparent export slingers-thumb-ringicon",
+      "ok": true
+    },
+    {
+      "check": "Palette slingers-thumb-ringicon",
+      "ok": true
+    },
+    {
+      "check": "No invisible RGB slingers-thumb-ringicon",
+      "ok": true
+    },
+    {
+      "check": "Consistent padding slingers-thumb-ringicon",
+      "ok": true
+    },
+    {
+      "check": "Native canvas slingers-thumb-ringcompact_icon",
+      "ok": true
+    },
+    {
+      "check": "Binary transparent export slingers-thumb-ringcompact_icon",
+      "ok": true
+    },
+    {
+      "check": "Palette slingers-thumb-ringcompact_icon",
+      "ok": true
+    },
+    {
+      "check": "No invisible RGB slingers-thumb-ringcompact_icon",
+      "ok": true
+    },
+    {
+      "check": "Consistent padding slingers-thumb-ringcompact_icon",
+      "ok": true
+    },
+    {
+      "check": "No upscale slingers-thumb-ring",
+      "ok": true
+    },
+    {
+      "check": "Connected icon res://data/trinkets/slingers_thumb_ring.tres",
+      "ok": true
+    },
+    {
+      "check": "Native canvas ember-ringicon",
+      "ok": true
+    },
+    {
+      "check": "Binary transparent export ember-ringicon",
+      "ok": true
+    },
+    {
+      "check": "Palette ember-ringicon",
+      "ok": true
+    },
+    {
+      "check": "No invisible RGB ember-ringicon",
+      "ok": true
+    },
+    {
+      "check": "Consistent padding ember-ringicon",
+      "ok": true
+    },
+    {
+      "check": "Native canvas ember-ringcompact_icon",
+      "ok": true
+    },
+    {
+      "check": "Binary transparent export ember-ringcompact_icon",
+      "ok": true
+    },
+    {
+      "check": "Palette ember-ringcompact_icon",
+      "ok": true
+    },
+    {
+      "check": "No invisible RGB ember-ringcompact_icon",
+      "ok": true
+    },
+    {
+      "check": "Consistent padding ember-ringcompact_icon",
+      "ok": true
+    },
+    {
+      "check": "No upscale ember-ring",
+      "ok": true
+    },
+    {
+      "check": "Connected icon res://data/trinkets/ember_ring.tres",
+      "ok": true
+    },
+    {
+      "check": "Native canvas gamblers-knuckleboneicon",
+      "ok": true
+    },
+    {
+      "check": "Binary transparent export gamblers-knuckleboneicon",
+      "ok": true
+    },
+    {
+      "check": "Palette gamblers-knuckleboneicon",
+      "ok": true
+    },
+    {
+      "check": "No invisible RGB gamblers-knuckleboneicon",
+      "ok": true
+    },
+    {
+      "check": "Consistent padding gamblers-knuckleboneicon",
+      "ok": true
+    },
+    {
+      "check": "Native canvas gamblers-knucklebonecompact_icon",
+      "ok": true
+    },
+    {
+      "check": "Binary transparent export gamblers-knucklebonecompact_icon",
+      "ok": true
+    },
+    {
+      "check": "Palette gamblers-knucklebonecompact_icon",
+      "ok": true
+    },
+    {
+      "check": "No invisible RGB gamblers-knucklebonecompact_icon",
+      "ok": true
+    },
+    {
+      "check": "Consistent padding gamblers-knucklebonecompact_icon",
+      "ok": true
+    },
+    {
+      "check": "No upscale gamblers-knucklebone",
+      "ok": true
+    },
+    {
+      "check": "Connected icon res://data/trinkets/gamblers_knucklebone.tres",
+      "ok": true
+    },
+    {
+      "check": "Native canvas shield-bearers-tokenicon",
+      "ok": true
+    },
+    {
+      "check": "Binary transparent export shield-bearers-tokenicon",
+      "ok": true
+    },
+    {
+      "check": "Palette shield-bearers-tokenicon",
+      "ok": true
+    },
+    {
+      "check": "No invisible RGB shield-bearers-tokenicon",
+      "ok": true
+    },
+    {
+      "check": "Consistent padding shield-bearers-tokenicon",
+      "ok": true
+    },
+    {
+      "check": "Native canvas shield-bearers-tokencompact_icon",
+      "ok": true
+    },
+    {
+      "check": "Binary transparent export shield-bearers-tokencompact_icon",
+      "ok": true
+    },
+    {
+      "check": "Palette shield-bearers-tokencompact_icon",
+      "ok": true
+    },
+    {
+      "check": "No invisible RGB shield-bearers-tokencompact_icon",
+      "ok": true
+    },
+    {
+      "check": "Consistent padding shield-bearers-tokencompact_icon",
+      "ok": true
+    },
+    {
+      "check": "No upscale shield-bearers-token",
+      "ok": true
+    },
+    {
+      "check": "Connected icon res://data/trinkets/shield_bearers_token.tres",
+      "ok": true
+    },
+    {
+      "check": "Native canvas black-pearl-ringicon",
+      "ok": true
+    },
+    {
+      "check": "Binary transparent export black-pearl-ringicon",
+      "ok": true
+    },
+    {
+      "check": "Palette black-pearl-ringicon",
+      "ok": true
+    },
+    {
+      "check": "No invisible RGB black-pearl-ringicon",
+      "ok": true
+    },
+    {
+      "check": "Consistent padding black-pearl-ringicon",
+      "ok": true
+    },
+    {
+      "check": "Native canvas black-pearl-ringcompact_icon",
+      "ok": true
+    },
+    {
+      "check": "Binary transparent export black-pearl-ringcompact_icon",
+      "ok": true
+    },
+    {
+      "check": "Palette black-pearl-ringcompact_icon",
+      "ok": true
+    },
+    {
+      "check": "No invisible RGB black-pearl-ringcompact_icon",
+      "ok": true
+    },
+    {
+      "check": "Consistent padding black-pearl-ringcompact_icon",
+      "ok": true
+    },
+    {
+      "check": "No upscale black-pearl-ring",
+      "ok": true
+    },
+    {
+      "check": "Connected icon res://data/trinkets/black_pearl_ring.tres",
+      "ok": true
+    },
+    {
+      "check": "Connected icon res://data/trinkets/black_pearl_ring_cursed.tres",
+      "ok": true
+    },
+    {
+      "check": "Hidden curse keeps same image black-pearl-ring",
+      "ok": true
+    },
+    {
+      "check": "Native canvas bone-white-charmicon",
+      "ok": true
+    },
+    {
+      "check": "Binary transparent export bone-white-charmicon",
+      "ok": true
+    },
+    {
+      "check": "Palette bone-white-charmicon",
+      "ok": true
+    },
+    {
+      "check": "No invisible RGB bone-white-charmicon",
+      "ok": true
+    },
+    {
+      "check": "Consistent padding bone-white-charmicon",
+      "ok": true
+    },
+    {
+      "check": "Native canvas bone-white-charmcompact_icon",
+      "ok": true
+    },
+    {
+      "check": "Binary transparent export bone-white-charmcompact_icon",
+      "ok": true
+    },
+    {
+      "check": "Palette bone-white-charmcompact_icon",
+      "ok": true
+    },
+    {
+      "check": "No invisible RGB bone-white-charmcompact_icon",
+      "ok": true
+    },
+    {
+      "check": "Consistent padding bone-white-charmcompact_icon",
+      "ok": true
+    },
+    {
+      "check": "No upscale bone-white-charm",
+      "ok": true
+    },
+    {
+      "check": "Connected icon res://data/trinkets/bone_charm.tres",
+      "ok": true
+    },
+    {
+      "check": "Connected icon res://data/trinkets/bone_charm_cursed.tres",
+      "ok": true
+    },
+    {
+      "check": "Hidden curse keeps same image bone-white-charm",
+      "ok": true
+    },
+    {
+      "check": "Native canvas goblin-gold-torcicon",
+      "ok": true
+    },
+    {
+      "check": "Binary transparent export goblin-gold-torcicon",
+      "ok": true
+    },
+    {
+      "check": "Palette goblin-gold-torcicon",
+      "ok": true
+    },
+    {
+      "check": "No invisible RGB goblin-gold-torcicon",
+      "ok": true
+    },
+    {
+      "check": "Consistent padding goblin-gold-torcicon",
+      "ok": true
+    },
+    {
+      "check": "Native canvas goblin-gold-torccompact_icon",
+      "ok": true
+    },
+    {
+      "check": "Binary transparent export goblin-gold-torccompact_icon",
+      "ok": true
+    },
+    {
+      "check": "Palette goblin-gold-torccompact_icon",
+      "ok": true
+    },
+    {
+      "check": "No invisible RGB goblin-gold-torccompact_icon",
+      "ok": true
+    },
+    {
+      "check": "Consistent padding goblin-gold-torccompact_icon",
+      "ok": true
+    },
+    {
+      "check": "No upscale goblin-gold-torc",
+      "ok": true
+    },
+    {
+      "check": "Connected icon res://data/trinkets/goblin_torc.tres",
+      "ok": true
+    },
+    {
+      "check": "Connected icon res://data/trinkets/goblin_torc_cursed.tres",
+      "ok": true
+    },
+    {
+      "check": "Hidden curse keeps same image goblin-gold-torc",
+      "ok": true
+    },
+    {
+      "check": "No upscale defiled-shrine",
+      "ok": true
+    },
+    {
+      "check": "Prop canvas res://art/props/shrine-events-v1/defiled-shrine.png",
+      "ok": true
+    },
+    {
+      "check": "Prop alpha res://art/props/shrine-events-v1/defiled-shrine.png",
+      "ok": true
+    },
+    {
+      "check": "Prop invisible RGB res://art/props/shrine-events-v1/defiled-shrine.png",
+      "ok": true
+    },
+    {
+      "check": "Prop margin res://art/props/shrine-events-v1/defiled-shrine.png",
+      "ok": true
+    },
+    {
+      "check": "Prop canvas res://art/props/shrine-events-v1/defiled-shrine-used.png",
+      "ok": true
+    },
+    {
+      "check": "Prop alpha res://art/props/shrine-events-v1/defiled-shrine-used.png",
+      "ok": true
+    },
+    {
+      "check": "Prop invisible RGB res://art/props/shrine-events-v1/defiled-shrine-used.png",
+      "ok": true
+    },
+    {
+      "check": "Prop margin res://art/props/shrine-events-v1/defiled-shrine-used.png",
+      "ok": true
+    },
+    {
+      "check": "Shared paired palette defiled-shrine",
+      "ok": true
+    },
+    {
+      "check": "Distinct resolved state defiled-shrine",
+      "ok": true
+    },
+    {
+      "check": "Live event binding defiled-shrine",
+      "ok": true
+    },
+    {
+      "check": "Existing mount rule defiled-shrine",
+      "ok": true
+    },
+    {
+      "check": "No upscale fouled-well",
+      "ok": true
+    },
+    {
+      "check": "Prop canvas res://art/props/shrine-events-v1/fouled-well.png",
+      "ok": true
+    },
+    {
+      "check": "Prop alpha res://art/props/shrine-events-v1/fouled-well.png",
+      "ok": true
+    },
+    {
+      "check": "Prop invisible RGB res://art/props/shrine-events-v1/fouled-well.png",
+      "ok": true
+    },
+    {
+      "check": "Prop margin res://art/props/shrine-events-v1/fouled-well.png",
+      "ok": true
+    },
+    {
+      "check": "Prop canvas res://art/props/shrine-events-v1/fouled-well-used.png",
+      "ok": true
+    },
+    {
+      "check": "Prop alpha res://art/props/shrine-events-v1/fouled-well-used.png",
+      "ok": true
+    },
+    {
+      "check": "Prop invisible RGB res://art/props/shrine-events-v1/fouled-well-used.png",
+      "ok": true
+    },
+    {
+      "check": "Prop margin res://art/props/shrine-events-v1/fouled-well-used.png",
+      "ok": true
+    },
+    {
+      "check": "Shared paired palette fouled-well",
+      "ok": true
+    },
+    {
+      "check": "Distinct resolved state fouled-well",
+      "ok": true
+    },
+    {
+      "check": "Live event binding fouled-well",
+      "ok": true
+    },
+    {
+      "check": "Existing mount rule fouled-well",
+      "ok": true
+    },
+    {
+      "check": "No upscale buried-cache",
+      "ok": true
+    },
+    {
+      "check": "Prop canvas res://art/props/shrine-events-v1/buried-cache.png",
+      "ok": true
+    },
+    {
+      "check": "Prop alpha res://art/props/shrine-events-v1/buried-cache.png",
+      "ok": true
+    },
+    {
+      "check": "Prop invisible RGB res://art/props/shrine-events-v1/buried-cache.png",
+      "ok": true
+    },
+    {
+      "check": "Prop margin res://art/props/shrine-events-v1/buried-cache.png",
+      "ok": true
+    },
+    {
+      "check": "Prop canvas res://art/props/shrine-events-v1/buried-cache-used.png",
+      "ok": true
+    },
+    {
+      "check": "Prop alpha res://art/props/shrine-events-v1/buried-cache-used.png",
+      "ok": true
+    },
+    {
+      "check": "Prop invisible RGB res://art/props/shrine-events-v1/buried-cache-used.png",
+      "ok": true
+    },
+    {
+      "check": "Prop margin res://art/props/shrine-events-v1/buried-cache-used.png",
+      "ok": true
+    },
+    {
+      "check": "Shared paired palette buried-cache",
+      "ok": true
+    },
+    {
+      "check": "Distinct resolved state buried-cache",
+      "ok": true
+    },
+    {
+      "check": "Live event binding buried-cache",
+      "ok": true
+    },
+    {
+      "check": "Existing mount rule buried-cache",
+      "ok": true
+    },
+    {
+      "check": "All gameplay fields preserved data/trinkets/bloodstone.tres",
+      "ok": true
+    },
+    {
+      "check": "All gameplay fields preserved data/trinkets/moth_wing_brooch.tres",
+      "ok": true
+    },
+    {
+      "check": "All gameplay fields preserved data/trinkets/slingers_thumb_ring.tres",
+      "ok": true
+    },
+    {
+      "check": "All gameplay fields preserved data/trinkets/ember_ring.tres",
+      "ok": true
+    },
+    {
+      "check": "All gameplay fields preserved data/trinkets/gamblers_knucklebone.tres",
+      "ok": true
+    },
+    {
+      "check": "All gameplay fields preserved data/trinkets/shield_bearers_token.tres",
+      "ok": true
+    },
+    {
+      "check": "All gameplay fields preserved data/trinkets/black_pearl_ring.tres",
+      "ok": true
+    },
+    {
+      "check": "All gameplay fields preserved data/trinkets/black_pearl_ring_cursed.tres",
+      "ok": true
+    },
+    {
+      "check": "All gameplay fields preserved data/trinkets/bone_charm.tres",
+      "ok": true
+    },
+    {
+      "check": "All gameplay fields preserved data/trinkets/bone_charm_cursed.tres",
+      "ok": true
+    },
+    {
+      "check": "All gameplay fields preserved data/trinkets/goblin_torc.tres",
+      "ok": true
+    },
+    {
+      "check": "All gameplay fields preserved data/trinkets/goblin_torc_cursed.tres",
+      "ok": true
+    },
+    {
+      "check": "All gameplay fields preserved data/events/object_defiled_shrine.tres",
+      "ok": true
+    },
+    {
+      "check": "All gameplay fields preserved data/events/object_fouled_well.tres",
+      "ok": true
+    },
+    {
+      "check": "All gameplay fields preserved data/events/chest_buried_cache.tres",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/refined-v2/amber-pendant.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/refined-v2/amethyst.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/refined-v2/broken-knife.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/refined-v2/broken-short-sword.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/refined-v2/catalog.json",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/refined-v2/copper-ore.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/refined-v2/cracked-staff.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/refined-v2/dressing.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/refined-v2/emerald.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/refined-v2/fine-cloth.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/refined-v2/garnet.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/refined-v2/gold-nuggets.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/refined-v2/gold-signet-ring.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/refined-v2/iron-sword.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/refined-v2/lantern-unlit.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/refined-v2/lantern.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/refined-v2/leather-jerkin.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/refined-v2/military-medal.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/refined-v2/oil-flask.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/refined-v2/old-coin-purse.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/refined-v2/padded-coat.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/refined-v2/pearl-necklace.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/refined-v2/plain-knife.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/refined-v2/ration.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/refined-v2/restorative-draught.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/refined-v2/silver-goblet.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/refined-v2/silver-ingot.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/refined-v2/silver-locket.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/refined-v2/silver-trinket.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/refined-v2/simple-spear.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/refined-v2/small-reliquary.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/refined-v2/spice-pouch.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/refined-v2/torch.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/refined-v2/woodcutters-axe.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/refined-v2/wooden-club.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/field-kit-v1/antidote.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/field-kit-v1/catalog.json",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/field-kit-v1/folding-spade.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/field-kit-v1/heavy-wool-cape.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/field-kit-v1/holy-water.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/field-kit-v1/leather-satchel.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/field-kit-v1/miners-frame-pack.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/field-kit-v1/miners-pick.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/field-kit-v1/oilcloth-cloak.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/field-kit-v1/compact64/antidote.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/field-kit-v1/compact64/folding-spade.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/field-kit-v1/compact64/heavy-wool-cape.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/field-kit-v1/compact64/holy-water.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/field-kit-v1/compact64/leather-satchel.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/field-kit-v1/compact64/miners-frame-pack.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/field-kit-v1/compact64/miners-pick.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/items/field-kit-v1/compact64/oilcloth-cloak.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/props/room-states-v1/catalog.json",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/props/room-states-v1/cold-camp-used.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/props/room-states-v1/cold-camp.tscn",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/props/room-states-v1/dry-alcove-used.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/props/room-states-v1/dry-alcove.tscn",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/props/room-states-v1/hollow-floor-used.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/props/room-states-v1/hollow-floor.tscn",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/props/room-states-v1/idol-niche-used.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/props/room-states-v1/idol-niche.tscn",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/props/room-states-v1/old-workings-used.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/props/room-states-v1/old-workings.tscn",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/props/room-states-v1/still-pool-used.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/props/room-states-v1/still-pool.tscn",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/props/room-states-v1/strongbox-closed.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/props/room-states-v1/strongbox-used.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/props/room-states-v1/strongbox.tscn",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/props/room-states-v1/tripwire-used.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/props/room-states-v1/tripwire.tscn",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/dressing/landmarks-v1/banner-seal.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/dressing/landmarks-v1/cache-rubble-planks.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/dressing/landmarks-v1/cache-rubble-planks.tscn",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/dressing/landmarks-v1/cache-spilled-grain.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/dressing/landmarks-v1/cache-spilled-grain.tscn",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/dressing/landmarks-v1/catalog.json",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/dressing/landmarks-v1/collapsed-crates.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/dressing/landmarks-v1/collapsed-crates.tscn",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/dressing/landmarks-v1/fallen-banner.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/dressing/landmarks-v1/fallen-banner.tscn",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/dressing/landmarks-v1/floor-crossing-root.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/dressing/landmarks-v1/floor-crossing-root.tscn",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/dressing/landmarks-v1/miners-shrine-event.tscn",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/dressing/landmarks-v1/miners-shrine-used.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/dressing/landmarks-v1/miners-shrine-used.tscn",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/dressing/landmarks-v1/miners-shrine.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/dressing/landmarks-v1/miners-shrine.tscn",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/dressing/landmarks-v1/palette.json",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/dressing/landmarks-v1/root-curtain-a.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/dressing/landmarks-v1/root-curtain-a.tscn",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/dressing/landmarks-v1/root-curtain-b.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/dressing/landmarks-v1/root-curtain-b.tscn",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/dressing/landmarks-v1/root-foot-tangle.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/dressing/landmarks-v1/root-foot-tangle.tscn",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/dressing/landmarks-v1/shrine-candle-glow.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/dressing/landmarks-v1/shrine-glow.tres",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/dressing/landmarks-v1/shrine-offerings-used.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/dressing/landmarks-v1/shrine-offerings-used.tscn",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/dressing/landmarks-v1/shrine-offerings.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/dressing/landmarks-v1/shrine-offerings.tscn",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/dressing/landmarks-v1/shrine.gd",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/dressing/landmarks-v1/split-barrel.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/dressing/landmarks-v1/split-barrel.tscn",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/dressing/landmarks-v1/wall-roots.png",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/dressing/landmarks-v1/wall-roots.tscn",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/symbols/crest-v1/currency-coin.svg",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/symbols/crest-v1/forked-seal.svg",
+      "ok": true
+    },
+    {
+      "check": "Existing artwork untouched art/symbols/crest-v1/seal-impression.svg",
+      "ok": true
+    },
+    {
+      "check": "Exact canonical seal contours cache-seal-used.svg",
+      "ok": true
+    },
+    {
+      "check": "Exact canonical seal contours cache-seal.svg",
+      "ok": true
+    },
+    {
+      "check": "Exact canonical seal contours token-seal.svg",
+      "ok": true
+    },
+    {
+      "check": "Trinket builder retains shared art",
+      "ok": true
+    },
+    {
+      "check": "Event builder retains all three scenes and wall flag",
+      "ok": true
+    },
+    {
+      "check": "Lossless import black-pearl-ring.png",
+      "ok": true
+    },
+    {
+      "check": "No mipmaps black-pearl-ring.png",
+      "ok": true
+    },
+    {
+      "check": "Lossless import bloodstone.png",
+      "ok": true
+    },
+    {
+      "check": "No mipmaps bloodstone.png",
+      "ok": true
+    },
+    {
+      "check": "Lossless import bone-white-charm.png",
+      "ok": true
+    },
+    {
+      "check": "No mipmaps bone-white-charm.png",
+      "ok": true
+    },
+    {
+      "check": "Lossless import ember-ring.png",
+      "ok": true
+    },
+    {
+      "check": "No mipmaps ember-ring.png",
+      "ok": true
+    },
+    {
+      "check": "Lossless import gamblers-knucklebone.png",
+      "ok": true
+    },
+    {
+      "check": "No mipmaps gamblers-knucklebone.png",
+      "ok": true
+    },
+    {
+      "check": "Lossless import goblin-gold-torc.png",
+      "ok": true
+    },
+    {
+      "check": "No mipmaps goblin-gold-torc.png",
+      "ok": true
+    },
+    {
+      "check": "Lossless import moth-wing-brooch.png",
+      "ok": true
+    },
+    {
+      "check": "No mipmaps moth-wing-brooch.png",
+      "ok": true
+    },
+    {
+      "check": "Lossless import shield-bearers-token.png",
+      "ok": true
+    },
+    {
+      "check": "No mipmaps shield-bearers-token.png",
+      "ok": true
+    },
+    {
+      "check": "Lossless import slingers-thumb-ring.png",
+      "ok": true
+    },
+    {
+      "check": "No mipmaps slingers-thumb-ring.png",
+      "ok": true
+    },
+    {
+      "check": "Lossless import black-pearl-ring.png",
+      "ok": true
+    },
+    {
+      "check": "No mipmaps black-pearl-ring.png",
+      "ok": true
+    },
+    {
+      "check": "Lossless import bloodstone.png",
+      "ok": true
+    },
+    {
+      "check": "No mipmaps bloodstone.png",
+      "ok": true
+    },
+    {
+      "check": "Lossless import bone-white-charm.png",
+      "ok": true
+    },
+    {
+      "check": "No mipmaps bone-white-charm.png",
+      "ok": true
+    },
+    {
+      "check": "Lossless import ember-ring.png",
+      "ok": true
+    },
+    {
+      "check": "No mipmaps ember-ring.png",
+      "ok": true
+    },
+    {
+      "check": "Lossless import gamblers-knucklebone.png",
+      "ok": true
+    },
+    {
+      "check": "No mipmaps gamblers-knucklebone.png",
+      "ok": true
+    },
+    {
+      "check": "Lossless import goblin-gold-torc.png",
+      "ok": true
+    },
+    {
+      "check": "No mipmaps goblin-gold-torc.png",
+      "ok": true
+    },
+    {
+      "check": "Lossless import moth-wing-brooch.png",
+      "ok": true
+    },
+    {
+      "check": "No mipmaps moth-wing-brooch.png",
+      "ok": true
+    },
+    {
+      "check": "Lossless import shield-bearers-token.png",
+      "ok": true
+    },
+    {
+      "check": "No mipmaps shield-bearers-token.png",
+      "ok": true
+    },
+    {
+      "check": "Lossless import slingers-thumb-ring.png",
+      "ok": true
+    },
+    {
+      "check": "No mipmaps slingers-thumb-ring.png",
+      "ok": true
+    },
+    {
+      "check": "Lossless import buried-cache-used.png",
+      "ok": true
+    },
+    {
+      "check": "No mipmaps buried-cache-used.png",
+      "ok": true
+    },
+    {
+      "check": "Lossless import buried-cache.png",
+      "ok": true
+    },
+    {
+      "check": "No mipmaps buried-cache.png",
+      "ok": true
+    },
+    {
+      "check": "Lossless import defiled-shrine-used.png",
+      "ok": true
+    },
+    {
+      "check": "No mipmaps defiled-shrine-used.png",
+      "ok": true
+    },
+    {
+      "check": "Lossless import defiled-shrine.png",
+      "ok": true
+    },
+    {
+      "check": "No mipmaps defiled-shrine.png",
+      "ok": true
+    },
+    {
+      "check": "Lossless import fouled-well-used.png",
+      "ok": true
+    },
+    {
+      "check": "No mipmaps fouled-well-used.png",
+      "ok": true
+    },
+    {
+      "check": "Lossless import fouled-well.png",
+      "ok": true
+    },
+    {
+      "check": "No mipmaps fouled-well.png",
+      "ok": true
+    }
+  ]
+}

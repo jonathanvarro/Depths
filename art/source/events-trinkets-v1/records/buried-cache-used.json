@@ -1,0 +1,10 @@
+{
+  "id": "buried-cache-used",
+  "tool": "built-in image_gen",
+  "prompt": "Use case: precise-object-edit. EDIT TARGET: the supplied buried royal supply crate game sprite. Make its searched/excavated state on the EXACT same square transparent canvas, same camera, shared ground contact and same iron-bound FRONT FACE and BLANK pale stamp square at exactly their present positions. Keep original front boards and black iron strip. Clear the rocks off the lid and move them into a low scree heap left and behind; pry the lid partially back so the dark empty interior reads clearly. Two split lid planks at rear edge show rough hurried work. No coins, jewels, rewards, ore or loose gear. Original mound's footprint remains recognizable, no new floor/background. Same weathered hand-painted pixel clusters, muted slate/umber/ochre, <=64-colour intended native128px, neutral diffuse shading. No new logo, mark, text, outline indicator, UI or glow. Genuine transparent background in all gaps. Show an already worked-over cache, not an intact chest or treasure spill.",
+  "reference_images": [
+    "art/source/events-trinkets-v1/buried-cache-master.png"
+  ],
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-417bda7c-5957-4467-94e0-e5fe09a35e19.png",
+  "source": "art/source/events-trinkets-v1/buried-cache-used-master.png"
+}

@@ -1,0 +1,119 @@
+{
+  "issue": 142,
+  "props": [
+    {
+      "id": "defiled-shrine",
+      "name": "A defiled shrine",
+      "mount": "wall",
+      "metres_wide": 1.0,
+      "pixel_size": 0.008928571428571428,
+      "pivot": [
+        64,
+        64
+      ],
+      "textures": [
+        "res://art/props/shrine-events-v1/defiled-shrine.png",
+        "res://art/props/shrine-events-v1/defiled-shrine-used.png"
+      ],
+      "scene": "res://art/props/shrine-events-v1/defiled-shrine.tscn",
+      "event": "res://data/events/object_defiled_shrine.tres",
+      "connected": true,
+      "source_bounds": [
+        116,
+        261,
+        1197,
+        943
+      ],
+      "shared_scale": 0.1036077705827937,
+      "offset": [
+        8,
+        28
+      ],
+      "source_canvas": [
+        1312,
+        1199
+      ],
+      "canvas": [
+        128,
+        128
+      ],
+      "colour_limit": 64
+    },
+    {
+      "id": "fouled-well",
+      "name": "A fouled well",
+      "mount": "floor",
+      "metres_wide": 1.15,
+      "pixel_size": 0.010267857142857143,
+      "pivot": [
+        64,
+        109
+      ],
+      "textures": [
+        "res://art/props/shrine-events-v1/fouled-well.png",
+        "res://art/props/shrine-events-v1/fouled-well-used.png"
+      ],
+      "scene": "res://art/props/shrine-events-v1/fouled-well.tscn",
+      "event": "res://data/events/object_fouled_well.tres",
+      "connected": true,
+      "source_bounds": [
+        68,
+        228,
+        1200,
+        1141
+      ],
+      "shared_scale": 0.0989399293286219,
+      "offset": [
+        8,
+        19
+      ],
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "canvas": [
+        128,
+        128
+      ],
+      "colour_limit": 64
+    },
+    {
+      "id": "buried-cache",
+      "name": "A buried cache",
+      "mount": "floor",
+      "metres_wide": 1.25,
+      "pixel_size": 0.011160714285714286,
+      "pivot": [
+        64,
+        95
+      ],
+      "textures": [
+        "res://art/props/shrine-events-v1/buried-cache.png",
+        "res://art/props/shrine-events-v1/buried-cache-used.png"
+      ],
+      "scene": "res://art/props/shrine-events-v1/buried-cache.tscn",
+      "event": "res://data/events/chest_buried_cache.tres",
+      "connected": true,
+      "source_bounds": [
+        24,
+        366,
+        1230,
+        1030
+      ],
+      "shared_scale": 0.09286898839137644,
+      "offset": [
+        8,
+        33
+      ],
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "canvas": [
+        128,
+        128
+      ],
+      "colour_limit": 64
+    }
+  ]
+}

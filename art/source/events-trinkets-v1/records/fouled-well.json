@@ -1,0 +1,8 @@
+{
+  "id": "fouled-well",
+  "tool": "built-in image_gen",
+  "prompt": "Use case: stylized-concept. Asset type: ONE miners' fouled well game prop, intended for native 128x128 export, dark first-person cave crawler Depths. Isolated compact squat circular dry-stacked stone well, battered low rim, an elliptical opening seen slightly from above but front-facing overall. Interior shallow water visibly opaque olive-brown and a small scum crescent at the far edge; no glow. One short frayed rotted rope tail drapes over the near-left lip, and a broken old wooden bucket leans against the near-right base. No wooden roof, gantry, winch or long rope. Broad roughly hewn grey-brown stones and stained mortar, a few greenish damp patches. Full base and contents inside a square canvas with 8% clear margin; consistent grounded front 3/4 view like the game's treasure containers, not top-down or isometric scene. Simplified hand-painted pixel-art clusters, strong squat annular silhouette, three or four shades per material, <=64 muted slate/umber/olive/linen colours intended, few broad wear marks, no tiny noise. Neutral diffuse material shading, no cast ground shadow, firelight, magical particles or baked scenery. Genuine transparent alpha outside the entire object and bucket/rope gaps. No floor patch, labels, UI frame, text, invented rune or photoreal detail. Water should look unsafe rather than bright green poison.",
+  "reference_images": [],
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-6a425882-837f-4b81-a1ef-7da04ecc9b05.png",
+  "source": "art/source/events-trinkets-v1/fouled-well-master.png"
+}

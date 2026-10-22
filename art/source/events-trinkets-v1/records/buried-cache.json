@@ -1,0 +1,10 @@
+{
+  "id": "buried-cache",
+  "tool": "built-in image_gen",
+  "prompt": "Use case: stylized-concept. ONE buried cache event prop for Depths, dark first-person cave crawler. Reference image is STYLE/MATERIAL reference only: existing collapsed royal supplies. New subject: a low mound of fallen slate and brown gravel partly burying a SINGLE stout rectangular miners' supply crate; only the upper front corner and part of its CLOSED plank lid protrude, crate tilted slightly. A large iron-bound corner, broad scarred oak boards and one BLANK pale wood square on the exposed front plank reserved for an existing royal stamp to be composited as a separate native art layer later; leave this area unmarked. It must read as a buried CRATE, distinct from an ore seam and ordinary scattered crates. Grounded front three-quarter view, full object visible, compact mound 1.25 times wider than high, square transparent canvas with 8% margin. Restrained hand-painted pixel clusters intended for native128px/<=64colours, muted slate grey/ochre/umber/charcoal, 3 shades each material, sparse wear, clear broad masses. Neutral diffuse material shading, no baked floor, cast ground shadow, light, gold spills, royal banner, bodies, skulls, text, invented logo, UI or tiny texture noise. Genuine transparent alpha outside crate and scree. Do not show any treasure yet.",
+  "reference_images": [
+    "art/dressing/landmarks-v1/collapsed-crates.png"
+  ],
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-cd93cae1-0900-45b4-92b1-2b1622e26f81.png",
+  "source": "art/source/events-trinkets-v1/buried-cache-master.png"
+}

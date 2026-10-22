@@ -1,0 +1,179 @@
+{
+  "issue": 142,
+  "date": "2026-10-22",
+  "tool": "built-in image_gen",
+  "assets": [
+    {
+      "id": "black-pearl-ring",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Production inventory icon for Depths, a dark first-person cave crawler. Reference images are STYLE references ONLY: match existing weathered painted pixel clusters and broad readable silhouettes. One isolated worn object fully contained on square transparent canvas with 8% margin, intended native128px/64colours and 64px/40px display. Three or four broad shades per material; restrained charcoal, umber, linen, tarnished silver and muted gold; only subject-specific colour accents. Neutral diffuse material shading, no scene lighting, glow, sparkle, ground, cast shadow, UI frame, letters, label, fake checkerboard or photorealistic fine detail. Genuine transparent alpha outside object and inside holes. Subject: BLACK PEARL RING: one old tarnished silver band with a SINGLE large nearly spherical black pearl in a simple low four-claw mount. Three-quarter view, clear oval finger hole behind and under the pearl. Pearl is charcoal-black with one broad quiet blue-grey reflected patch, smooth dark body, no rainbow, red crack or eye. Silver band thin enough to distinguish it from the thick coal-black ember band. No curse cue, skull, red mark or supernatural effect: it should look like good jewellery.",
+      "reference_images": [
+        "art/items/refined-v2/gold-signet-ring.png",
+        "art/items/field-kit-v1/holy-water.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-b9c5c6e1-9362-4cd6-ae17-d676d41d2d0f.png",
+      "source": "art/source/events-trinkets-v1/black-pearl-ring-master.png",
+      "sha256": "2fc1ec0fd723fc2f6b1a2e029a1973cac25c68d57010db8a387471f0bf536cf3"
+    },
+    {
+      "id": "bloodstone",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Production inventory icon for Depths, a dark first-person cave crawler. Reference images are STYLE references ONLY: match existing weathered painted pixel clusters and broad readable silhouettes. One isolated worn object fully contained on square transparent canvas with 8% margin, intended native128px/64colours and 64px/40px display. Three or four broad shades per material; restrained charcoal, umber, linen, tarnished silver and muted gold; only subject-specific colour accents. Neutral diffuse material shading, no scene lighting, glow, sparkle, ground, cast shadow, UI frame, letters, label, fake checkerboard or photorealistic fine detail. Genuine transparent alpha outside object and inside holes. Subject: BLOODSTONE: a single thumb-sized irregular dark-red polished stone, slightly pointed at its base, held by a rough blackened silver claw loop with a short fraying dark cord curling behind. Deep burgundy body, a few dull iron-red veins, broad dark cut facets, one muted pale worn edge. It should look like a primitive worn charm rather than a bright cut ruby or golden pendant. Strong asymmetrical teardrop silhouette, stone dominates; no blood drops, magic particles, heart symbol or extra gems.",
+      "reference_images": [
+        "art/items/refined-v2/gold-signet-ring.png",
+        "art/items/field-kit-v1/holy-water.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-60eacd74-ee61-4ece-b632-8369342d9dfd.png",
+      "source": "art/source/events-trinkets-v1/bloodstone-master.png",
+      "sha256": "738f7d0062ea7327e96d6805128e7c43cca6342ee9830feb6c493f669615fca4"
+    },
+    {
+      "id": "bone-white-charm",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Production inventory icon for Depths, a dark first-person cave crawler. Reference images are STYLE references ONLY: match existing weathered painted pixel clusters and broad readable silhouettes. One isolated worn object fully contained on square transparent canvas with 8% margin, intended native128px/64colours and 64px/40px display. Three or four broad shades per material; restrained charcoal, umber, linen, tarnished silver and muted gold; only subject-specific colour accents. Neutral diffuse material shading, no scene lighting, glow, sparkle, ground, cast shadow, UI frame, letters, label, fake checkerboard or photorealistic fine detail. Genuine transparent alpha outside object and inside holes. Subject: BONE-WHITE CHARM: one short flat tapered piece of ivory bone with a blunt rounded top and forked NOTCHED bottom, three broad simple grooves cut across its lower half. A hole at the top holds a short loop of fraying brown cord that curls behind it. Warm linen bone, dirty umber cut edges, smooth rubbed front, a single old nick. A plain little carved keepsake rather than a skull, tooth, jaw, claw or gothic necklace. No runes, numbers, gemstones, curse cue, eyes or supernatural light. Tall asymmetric silhouette, broad enough to read at 40px.",
+      "reference_images": [
+        "art/items/refined-v2/gold-signet-ring.png",
+        "art/items/field-kit-v1/holy-water.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-bd3da1f1-949b-4a56-b11c-285ee5729103.png",
+      "source": "art/source/events-trinkets-v1/bone-white-charm-master.png",
+      "sha256": "25ba4791862c4a3fb32fefcdb80918d77224458e061f1adc989d7f4902641b89"
+    },
+    {
+      "id": "buried-cache-used",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: precise-object-edit. EDIT TARGET: the supplied buried royal supply crate game sprite. Make its searched/excavated state on the EXACT same square transparent canvas, same camera, shared ground contact and same iron-bound FRONT FACE and BLANK pale stamp square at exactly their present positions. Keep original front boards and black iron strip. Clear the rocks off the lid and move them into a low scree heap left and behind; pry the lid partially back so the dark empty interior reads clearly. Two split lid planks at rear edge show rough hurried work. No coins, jewels, rewards, ore or loose gear. Original mound's footprint remains recognizable, no new floor/background. Same weathered hand-painted pixel clusters, muted slate/umber/ochre, <=64-colour intended native128px, neutral diffuse shading. No new logo, mark, text, outline indicator, UI or glow. Genuine transparent background in all gaps. Show an already worked-over cache, not an intact chest or treasure spill.",
+      "reference_images": [
+        "art/source/events-trinkets-v1/buried-cache-master.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-417bda7c-5957-4467-94e0-e5fe09a35e19.png",
+      "source": "art/source/events-trinkets-v1/buried-cache-used-master.png",
+      "sha256": "e2a06d24f8d254956df3895fb9442f1605453033f8c66ec2cb135c8ba5fae03b"
+    },
+    {
+      "id": "buried-cache",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. ONE buried cache event prop for Depths, dark first-person cave crawler. Reference image is STYLE/MATERIAL reference only: existing collapsed royal supplies. New subject: a low mound of fallen slate and brown gravel partly burying a SINGLE stout rectangular miners' supply crate; only the upper front corner and part of its CLOSED plank lid protrude, crate tilted slightly. A large iron-bound corner, broad scarred oak boards and one BLANK pale wood square on the exposed front plank reserved for an existing royal stamp to be composited as a separate native art layer later; leave this area unmarked. It must read as a buried CRATE, distinct from an ore seam and ordinary scattered crates. Grounded front three-quarter view, full object visible, compact mound 1.25 times wider than high, square transparent canvas with 8% margin. Restrained hand-painted pixel clusters intended for native128px/<=64colours, muted slate grey/ochre/umber/charcoal, 3 shades each material, sparse wear, clear broad masses. Neutral diffuse material shading, no baked floor, cast ground shadow, light, gold spills, royal banner, bodies, skulls, text, invented logo, UI or tiny texture noise. Genuine transparent alpha outside crate and scree. Do not show any treasure yet.",
+      "reference_images": [
+        "art/dressing/landmarks-v1/collapsed-crates.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-cd93cae1-0900-45b4-92b1-2b1622e26f81.png",
+      "source": "art/source/events-trinkets-v1/buried-cache-master.png",
+      "sha256": "a1d90a69ac763ced4ec98346bc960c8c0823c0ae1006570c5fb921ce9cce9d3d"
+    },
+    {
+      "id": "defiled-shrine-used",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: precise-object-edit. Matching RESOLVED/SPENT state of this defiled miners' shrine game sprite. The input image is the EDIT TARGET: preserve EXACT square/rectangular canvas, camera, scale, silhouette, every masonry block, timber lintel, dark recess, wax stubs and framing. Only change the central dark stone: it now has a dull grey fracture across its upper face and a few small chips sitting immediately beside it on the sill; dark smear below it is slightly scuffed. Keep the black stone visibly present, so this generic resolved state does NOT claim it was purified, removed or smashed to pieces: the event can end after several different actions. No new candles, light, symbols, clean stonework or magical glow. Same neutral diffuse shading and chunky restrained hand-painted pixel clusters. True transparent background, no floor, no UI, no text. Entire niche inside original bounds. This should be a clearly disturbed/spent version of the same place, not a rebuilt shrine.",
+      "reference_images": [
+        "art/source/events-trinkets-v1/defiled-shrine-master.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-4059bde8-fa94-44eb-83c6-fdb5d81f53a7.png",
+      "source": "art/source/events-trinkets-v1/defiled-shrine-used-master.png",
+      "sha256": "4924eb763162206d118a39f367133e29bf83372074ba68387130d5cd3fbf3955"
+    },
+    {
+      "id": "defiled-shrine",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: precise-object-edit. Asset: defiled miners' shrine for Depths, a dark first-person cave crawler. INPUT: existing miners-shrine sprite is the EDIT TARGET and exact architectural reference. Preserve its compact front-facing rough-stone arched niche, stepped sill, same camera, contours and canvas placement. Replace the small central miner idol and all candles with ONE palm-sized irregular BLACK STONE on the sill. Goblins have smeared the inside recess and lower sill with a few broad dried reddish-brown streaks; old wax stubs remain at edges, no flames. Keep all damage plausible and restrained. Large dark central stone must read at native 128px. Muted ochre sandstone, charcoal recess and dried umber red, chunky hand-painted pixel clusters, 3 shades per material, little texture noise. No invented runes, skull idol, glowing eyes, blood spray, faces, text or framing. NO floor or full background wall outside the arch. Neutral diffuse material shading, no warm torch pass or emitted light. GENUINE transparent alpha outside the entire niche, inside gaps where appropriate; whole stonework contained. Preserve the original architectural identity. This is a matching state of one asset, not a redesign.",
+      "reference_images": [
+        "art/dressing/landmarks-v1/miners-shrine.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-28701ae5-410a-4f49-9870-9412772cb7dc.png",
+      "source": "art/source/events-trinkets-v1/defiled-shrine-master.png",
+      "sha256": "3f36088f51790501be52d538f35b39c443f66c6473c2bb28a6afbf423d1ac35f"
+    },
+    {
+      "id": "ember-ring",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Production inventory icon for Depths, a dark first-person cave crawler. Reference images are STYLE references ONLY: match existing weathered painted pixel clusters and broad readable silhouettes. One isolated worn object fully contained on square transparent canvas with 8% margin, intended native128px/64colours and 64px/40px display. Three or four broad shades per material; restrained charcoal, umber, linen, tarnished silver and muted gold; only subject-specific colour accents. Neutral diffuse material shading, no scene lighting, glow, sparkle, ground, cast shadow, UI frame, letters, label, fake checkerboard or photorealistic fine detail. Genuine transparent alpha outside object and inside holes. Subject: EMBER RING: a single thick irregular ring band of coal-black iron, seen three-quarter so a large open finger hole reads clearly. Hammered, chipped, dull surfaces, with one narrow dull rust-orange seam running across the front face and a tiny coal-red inset seated flush in the metal. No raised gemstone, flame, glowing halo, lava, bright emission or extra ornament. Low charcoal silhouette, broken pale grey worn edge, slight rusty warmth only. The band is squat and primitive, not a signet or horn guard.",
+      "reference_images": [
+        "art/items/refined-v2/gold-signet-ring.png",
+        "art/items/field-kit-v1/holy-water.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-d9183bcf-f587-402d-a48d-fb92539ed485.png",
+      "source": "art/source/events-trinkets-v1/ember-ring-master.png",
+      "sha256": "853934782087e4c787d7ac51d8143faec2509cb9c15e374ebf3776bf99127f63"
+    },
+    {
+      "id": "fouled-well-used",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: precise-object-edit. EDIT TARGET: the supplied miners' fouled well game sprite. Create its disturbed/resolved state. Preserve EXACT original square canvas, camera, scale, every masonry block and silhouette, rope and bucket placement. Only change the water surface: broad low concentric ripples, the scum broken into two small patches at the edges, a slightly lowered water line and damp finger streaks along the near INNER lip. Water remains muddy olive-brown, neither magical nor newly clear: player may have drunk without purifying it. Keep the same broken bucket and rotted rope, same muted grey/umber/olive pixel-cluster painting, neutral diffuse material shading and transparent outside. No new objects, people, reflections of characters, glow, arrows, text, UI or floor. This is the same stone well after someone has drawn water, not a replacement well. Entire object unchanged in size and position.",
+      "reference_images": [
+        "art/source/events-trinkets-v1/fouled-well-master.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-c870f717-3b39-4b19-a607-c84ee2d1194c.png",
+      "source": "art/source/events-trinkets-v1/fouled-well-used-master.png",
+      "sha256": "352d026a101feb86416c52c97e1c60b830ddc9642864d6e7ff4c3c93a2d0480a"
+    },
+    {
+      "id": "fouled-well",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: ONE miners' fouled well game prop, intended for native 128x128 export, dark first-person cave crawler Depths. Isolated compact squat circular dry-stacked stone well, battered low rim, an elliptical opening seen slightly from above but front-facing overall. Interior shallow water visibly opaque olive-brown and a small scum crescent at the far edge; no glow. One short frayed rotted rope tail drapes over the near-left lip, and a broken old wooden bucket leans against the near-right base. No wooden roof, gantry, winch or long rope. Broad roughly hewn grey-brown stones and stained mortar, a few greenish damp patches. Full base and contents inside a square canvas with 8% clear margin; consistent grounded front 3/4 view like the game's treasure containers, not top-down or isometric scene. Simplified hand-painted pixel-art clusters, strong squat annular silhouette, three or four shades per material, <=64 muted slate/umber/olive/linen colours intended, few broad wear marks, no tiny noise. Neutral diffuse material shading, no cast ground shadow, firelight, magical particles or baked scenery. Genuine transparent alpha outside the entire object and bucket/rope gaps. No floor patch, labels, UI frame, text, invented rune or photoreal detail. Water should look unsafe rather than bright green poison.",
+      "reference_images": [],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-6a425882-837f-4b81-a1ef-7da04ecc9b05.png",
+      "source": "art/source/events-trinkets-v1/fouled-well-master.png",
+      "sha256": "f603e4a4bee21c9dfd4999efb166f19e5aa1ab16d734f52b1219cf22a311faad"
+    },
+    {
+      "id": "gamblers-knucklebone",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Production inventory icon for Depths, a dark first-person cave crawler. Reference images are STYLE references ONLY: match existing weathered painted pixel clusters and broad readable silhouettes. One isolated worn object fully contained on square transparent canvas with 8% margin, intended native128px/64colours and 64px/40px display. Three or four broad shades per material; restrained charcoal, umber, linen, tarnished silver and muted gold; only subject-specific colour accents. Neutral diffuse material shading, no scene lighting, glow, sparkle, ground, cast shadow, UI frame, letters, label, fake checkerboard or photorealistic fine detail. Genuine transparent alpha outside object and inside holes. Subject: GAMBLER'S KNUCKLEBONE: ONE old sheep anklebone used as a gaming piece, squat asymmetric double-knob bone with a pinched waist, tilted diagonally in three-quarter view. Worn ivory and dark umber creases, two or three large drilled black pip holes on the broad upper face, rubbed dark thumb patch at one end. No letters or numbers, dice cube, coins, bag, hands, jewellery mounting, skull or magical decoration. Chunky lobed shape and large pip holes must read at 40px.",
+      "reference_images": [
+        "art/items/refined-v2/gold-signet-ring.png",
+        "art/items/field-kit-v1/holy-water.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-6f269dd1-6b29-4bc1-a471-713790ef5e9a.png",
+      "source": "art/source/events-trinkets-v1/gamblers-knucklebone-master.png",
+      "sha256": "80586fa6395a63c4a081d1838643efa108af83b15b8ee68dc155125c322fd6a6"
+    },
+    {
+      "id": "goblin-gold-torc",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Production inventory icon for Depths, a dark first-person cave crawler. Reference images are STYLE references ONLY: match existing weathered painted pixel clusters and broad readable silhouettes. One isolated worn object fully contained on square transparent canvas with 8% margin, intended native128px/64colours and 64px/40px display. Three or four broad shades per material; restrained charcoal, umber, linen, tarnished silver and muted gold; only subject-specific colour accents. Neutral diffuse material shading, no scene lighting, glow, sparkle, ground, cast shadow, UI frame, letters, label, fake checkerboard or photorealistic fine detail. Genuine transparent alpha outside object and inside holes. Subject: GOBLIN GOLD TORC: ONE heavy crude open neck ring of hammered dull gold, a broad C-shaped collar with two large blunt squared terminals at the front. Three-quarter view, clear large neck opening and gap between terminals. Thick uneven forged bar with two broad twist ridges, shallow hammer dents and grime in creases; old ochre gold, brown shadows, pale worn edges. Goblin workmanship is rough but valuable. No gems, skulls, faces, teeth, curse cues, invented runes or glowing magic. Shape must clearly read as a neck torc, much broader than a finger ring, no chain or hanging pendant.",
+      "reference_images": [
+        "art/items/refined-v2/gold-signet-ring.png",
+        "art/items/field-kit-v1/holy-water.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-c1c3af25-0bd0-4e1c-957e-5145a94c4997.png",
+      "source": "art/source/events-trinkets-v1/goblin-gold-torc-master.png",
+      "sha256": "e5e2e31ad435e0292b4c62b5caaafdd2d0799d3dc4f40a03b2ed3c8c2b970894"
+    },
+    {
+      "id": "moth-wing-brooch",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Production inventory icon for Depths, a dark first-person cave crawler. Reference images are STYLE references ONLY: match existing weathered painted pixel clusters and broad readable silhouettes. One isolated worn object fully contained on square transparent canvas with 8% margin, intended native128px/64colours and 64px/40px display. Three or four broad shades per material; restrained charcoal, umber, linen, tarnished silver and muted gold; only subject-specific colour accents. Neutral diffuse material shading, no scene lighting, glow, sparkle, ground, cast shadow, UI frame, letters, label, fake checkerboard or photorealistic fine detail. Genuine transparent alpha outside object and inside holes. Subject: MOTH-WING BROOCH: tarnished silver pin in the unmistakable shape of a stout moth with two broad triangular dust-grey wings held out flat, short little body, tiny blunt antennae. Outer wing edges nicked; two pale triangular inlays form a quiet symmetrical wing pattern in weathered pewter and grey bone. View face-on with a very slight tilt, no real insect, butterfly shape, jewels, flowers, skulls or magic. Large two-wing silhouette dominates the square; small hinge/catch barely visible at one edge. Low sheen, old functional jewellery, very simple broad engraved wing veins, no intricate filigree.",
+      "reference_images": [
+        "art/items/refined-v2/gold-signet-ring.png",
+        "art/items/field-kit-v1/holy-water.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-07846df7-7f8d-4e14-906c-016570a2586d.png",
+      "source": "art/source/events-trinkets-v1/moth-wing-brooch-master.png",
+      "sha256": "183b6a59fe4be2313e67e4dfaacdee0288f0fc41acb1d539381da78225c72f41"
+    },
+    {
+      "id": "shield-bearers-token",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Production inventory icon for Depths, a dark first-person cave crawler. Reference images are STYLE references ONLY: match existing weathered painted pixel clusters and broad readable silhouettes. One isolated worn object fully contained on square transparent canvas with 8% margin, intended native128px/64colours and 64px/40px display. Three or four broad shades per material; restrained charcoal, umber, linen, tarnished silver and muted gold; only subject-specific colour accents. Neutral diffuse material shading, no scene lighting, glow, sparkle, ground, cast shadow, UI frame, letters, label, fake checkerboard or photorealistic fine detail. Genuine transparent alpha outside object and inside holes. Subject: SHIELD-BEARER'S TOKEN: ONE battered tin military badge shaped as a broad blunt heater shield, plain pale pewter front with one shallow broad dent, a dark iron rolled edge and a broken short pin/catch visible behind at the top. View nearly face-on, slightly clockwise tilted. Keep a large CLEAN BLANK central face to receive the game's existing native seal overlay later. NO invented emblem, crown, cross, letter, rune, star or number. No ribbon or chain, not a full sized shield, no sword. Low old silver/charcoal/linen palette, broad worn edges and two small dents.",
+      "reference_images": [
+        "art/items/refined-v2/gold-signet-ring.png",
+        "art/items/field-kit-v1/holy-water.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-898340ca-6ac3-4f04-864a-743610687a27.png",
+      "source": "art/source/events-trinkets-v1/shield-bearers-token-master.png",
+      "sha256": "bd67738f91f95601fd64486371b2b8d8af2100734991676cced2074f1056eae9"
+    },
+    {
+      "id": "slingers-thumb-ring",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Production inventory icon for Depths, a dark first-person cave crawler. Reference images are STYLE references ONLY: match existing weathered painted pixel clusters and broad readable silhouettes. One isolated worn object fully contained on square transparent canvas with 8% margin, intended native128px/64colours and 64px/40px display. Three or four broad shades per material; restrained charcoal, umber, linen, tarnished silver and muted gold; only subject-specific colour accents. Neutral diffuse material shading, no scene lighting, glow, sparkle, ground, cast shadow, UI frame, letters, label, fake checkerboard or photorealistic fine detail. Genuine transparent alpha outside object and inside holes. Subject: SLINGER'S THUMB-RING: a single practical thumb guard carved from pale honey-brown HORN, thick oval ring with a wide flared lip extending from one side. View three-quarter so the large thumb hole is clearly visible and the projecting guard makes an asymmetrical hook silhouette. Smooth worn inner edge, darker ridged horn grain on the outside, a few broad scratches, one simple dark leather tie at the base. Absolutely no metal, gold, jewel, carved letters, hand, other tools or magic. Horn cream edge, ochre body and deep brown core, low sheen. A tough old archer/slinger's tool, visibly different from a small jewellery band.",
+      "reference_images": [
+        "art/items/refined-v2/gold-signet-ring.png",
+        "art/items/field-kit-v1/holy-water.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-aa68632c-ac93-4992-b64a-9c02ac989824.png",
+      "source": "art/source/events-trinkets-v1/slingers-thumb-ring-master.png",
+      "sha256": "f3c10644f2946193415aed6a430f44bf1f411d486b015fb592197e611ae0da92"
+    }
+  ]
+}

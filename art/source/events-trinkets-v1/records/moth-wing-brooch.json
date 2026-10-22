@@ -1,0 +1,11 @@
+{
+  "id": "moth-wing-brooch",
+  "tool": "built-in image_gen",
+  "prompt": "Use case: stylized-concept. Production inventory icon for Depths, a dark first-person cave crawler. Reference images are STYLE references ONLY: match existing weathered painted pixel clusters and broad readable silhouettes. One isolated worn object fully contained on square transparent canvas with 8% margin, intended native128px/64colours and 64px/40px display. Three or four broad shades per material; restrained charcoal, umber, linen, tarnished silver and muted gold; only subject-specific colour accents. Neutral diffuse material shading, no scene lighting, glow, sparkle, ground, cast shadow, UI frame, letters, label, fake checkerboard or photorealistic fine detail. Genuine transparent alpha outside object and inside holes. Subject: MOTH-WING BROOCH: tarnished silver pin in the unmistakable shape of a stout moth with two broad triangular dust-grey wings held out flat, short little body, tiny blunt antennae. Outer wing edges nicked; two pale triangular inlays form a quiet symmetrical wing pattern in weathered pewter and grey bone. View face-on with a very slight tilt, no real insect, butterfly shape, jewels, flowers, skulls or magic. Large two-wing silhouette dominates the square; small hinge/catch barely visible at one edge. Low sheen, old functional jewellery, very simple broad engraved wing veins, no intricate filigree.",
+  "reference_images": [
+    "art/items/refined-v2/gold-signet-ring.png",
+    "art/items/field-kit-v1/holy-water.png"
+  ],
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-07846df7-7f8d-4e14-906c-016570a2586d.png",
+  "source": "art/source/events-trinkets-v1/moth-wing-brooch-master.png"
+}

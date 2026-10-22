@@ -1,0 +1,11 @@
+{
+  "id": "bloodstone",
+  "tool": "built-in image_gen",
+  "prompt": "Use case: stylized-concept. Production inventory icon for Depths, a dark first-person cave crawler. Reference images are STYLE references ONLY: match existing weathered painted pixel clusters and broad readable silhouettes. One isolated worn object fully contained on square transparent canvas with 8% margin, intended native128px/64colours and 64px/40px display. Three or four broad shades per material; restrained charcoal, umber, linen, tarnished silver and muted gold; only subject-specific colour accents. Neutral diffuse material shading, no scene lighting, glow, sparkle, ground, cast shadow, UI frame, letters, label, fake checkerboard or photorealistic fine detail. Genuine transparent alpha outside object and inside holes. Subject: BLOODSTONE: a single thumb-sized irregular dark-red polished stone, slightly pointed at its base, held by a rough blackened silver claw loop with a short fraying dark cord curling behind. Deep burgundy body, a few dull iron-red veins, broad dark cut facets, one muted pale worn edge. It should look like a primitive worn charm rather than a bright cut ruby or golden pendant. Strong asymmetrical teardrop silhouette, stone dominates; no blood drops, magic particles, heart symbol or extra gems.",
+  "reference_images": [
+    "art/items/refined-v2/gold-signet-ring.png",
+    "art/items/field-kit-v1/holy-water.png"
+  ],
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-60eacd74-ee61-4ece-b632-8369342d9dfd.png",
+  "source": "art/source/events-trinkets-v1/bloodstone-master.png"
+}

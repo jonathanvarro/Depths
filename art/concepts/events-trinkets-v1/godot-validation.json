@@ -1,0 +1,363 @@
+{
+	"captures": [
+		"defiled-shrine-closed-desktop",
+		"defiled-shrine-empty-desktop",
+		"fouled-well-closed-desktop",
+		"fouled-well-empty-desktop",
+		"buried-cache-closed-desktop",
+		"buried-cache-empty-desktop",
+		"defiled-shrine-closed-phone",
+		"defiled-shrine-empty-phone",
+		"fouled-well-closed-phone",
+		"fouled-well-empty-phone",
+		"buried-cache-closed-phone",
+		"buried-cache-empty-phone",
+		"pack-bloodstone-desktop",
+		"pack-shield-bearers-token-desktop",
+		"pack-goblin-gold-torc-desktop",
+		"pack-bloodstone-phone",
+		"pack-shield-bearers-token-phone",
+		"pack-goblin-gold-torc-phone"
+	],
+	"checks": 84,
+	"failed": 0,
+	"issue": 142,
+	"results": [
+		{
+			"check": "Runtime trinket binding res://data/trinkets/bloodstone.tres",
+			"ok": true
+		},
+		{
+			"check": "Retained slot res://data/trinkets/bloodstone.tres",
+			"ok": true
+		},
+		{
+			"check": "Runtime trinket binding res://data/trinkets/moth_wing_brooch.tres",
+			"ok": true
+		},
+		{
+			"check": "Retained slot res://data/trinkets/moth_wing_brooch.tres",
+			"ok": true
+		},
+		{
+			"check": "Runtime trinket binding res://data/trinkets/slingers_thumb_ring.tres",
+			"ok": true
+		},
+		{
+			"check": "Retained slot res://data/trinkets/slingers_thumb_ring.tres",
+			"ok": true
+		},
+		{
+			"check": "Runtime trinket binding res://data/trinkets/ember_ring.tres",
+			"ok": true
+		},
+		{
+			"check": "Retained slot res://data/trinkets/ember_ring.tres",
+			"ok": true
+		},
+		{
+			"check": "Runtime trinket binding res://data/trinkets/gamblers_knucklebone.tres",
+			"ok": true
+		},
+		{
+			"check": "Retained slot res://data/trinkets/gamblers_knucklebone.tres",
+			"ok": true
+		},
+		{
+			"check": "Runtime trinket binding res://data/trinkets/shield_bearers_token.tres",
+			"ok": true
+		},
+		{
+			"check": "Retained slot res://data/trinkets/shield_bearers_token.tres",
+			"ok": true
+		},
+		{
+			"check": "Runtime trinket binding res://data/trinkets/black_pearl_ring.tres",
+			"ok": true
+		},
+		{
+			"check": "Retained slot res://data/trinkets/black_pearl_ring.tres",
+			"ok": true
+		},
+		{
+			"check": "Runtime trinket binding res://data/trinkets/black_pearl_ring_cursed.tres",
+			"ok": true
+		},
+		{
+			"check": "Retained slot res://data/trinkets/black_pearl_ring_cursed.tres",
+			"ok": true
+		},
+		{
+			"check": "Curse image reveals nothing res://data/trinkets/black_pearl_ring_cursed.tres",
+			"ok": true
+		},
+		{
+			"check": "Runtime trinket binding res://data/trinkets/bone_charm.tres",
+			"ok": true
+		},
+		{
+			"check": "Retained slot res://data/trinkets/bone_charm.tres",
+			"ok": true
+		},
+		{
+			"check": "Runtime trinket binding res://data/trinkets/bone_charm_cursed.tres",
+			"ok": true
+		},
+		{
+			"check": "Retained slot res://data/trinkets/bone_charm_cursed.tres",
+			"ok": true
+		},
+		{
+			"check": "Curse image reveals nothing res://data/trinkets/bone_charm_cursed.tres",
+			"ok": true
+		},
+		{
+			"check": "Runtime trinket binding res://data/trinkets/goblin_torc.tres",
+			"ok": true
+		},
+		{
+			"check": "Retained slot res://data/trinkets/goblin_torc.tres",
+			"ok": true
+		},
+		{
+			"check": "Runtime trinket binding res://data/trinkets/goblin_torc_cursed.tres",
+			"ok": true
+		},
+		{
+			"check": "Retained slot res://data/trinkets/goblin_torc_cursed.tres",
+			"ok": true
+		},
+		{
+			"check": "Curse image reveals nothing res://data/trinkets/goblin_torc_cursed.tres",
+			"ok": true
+		},
+		{
+			"check": "Pre-ready resolved restore defiled-shrine",
+			"ok": true
+		},
+		{
+			"check": "Fresh restore defiled-shrine",
+			"ok": true
+		},
+		{
+			"check": "Lit nearest defiled-shrine",
+			"ok": true
+		},
+		{
+			"check": "Mount defiled-shrine",
+			"ok": true
+		},
+		{
+			"check": "No physics or party light defiled-shrine",
+			"ok": true
+		},
+		{
+			"check": "Registered state swap defiled-shrine",
+			"ok": true
+		},
+		{
+			"check": "Pre-ready resolved restore fouled-well",
+			"ok": true
+		},
+		{
+			"check": "Fresh restore fouled-well",
+			"ok": true
+		},
+		{
+			"check": "Lit nearest fouled-well",
+			"ok": true
+		},
+		{
+			"check": "Mount fouled-well",
+			"ok": true
+		},
+		{
+			"check": "No physics or party light fouled-well",
+			"ok": true
+		},
+		{
+			"check": "Registered state swap fouled-well",
+			"ok": true
+		},
+		{
+			"check": "Pre-ready resolved restore buried-cache",
+			"ok": true
+		},
+		{
+			"check": "Fresh restore buried-cache",
+			"ok": true
+		},
+		{
+			"check": "Lit nearest buried-cache",
+			"ok": true
+		},
+		{
+			"check": "Mount buried-cache",
+			"ok": true
+		},
+		{
+			"check": "No physics or party light buried-cache",
+			"ok": true
+		},
+		{
+			"check": "Registered state swap buried-cache",
+			"ok": true
+		},
+		{
+			"check": "Main starts fresh defiled-shrine",
+			"ok": true
+		},
+		{
+			"check": "Actual Main mount defiled-shrine",
+			"ok": true
+		},
+		{
+			"check": "Main completion changes art defiled-shrine",
+			"ok": true
+		},
+		{
+			"check": "Save data/revisit keeps resolved art defiled-shrine",
+			"ok": true
+		},
+		{
+			"check": "Main starts fresh fouled-well",
+			"ok": true
+		},
+		{
+			"check": "Actual Main mount fouled-well",
+			"ok": true
+		},
+		{
+			"check": "Main completion changes art fouled-well",
+			"ok": true
+		},
+		{
+			"check": "Save data/revisit keeps resolved art fouled-well",
+			"ok": true
+		},
+		{
+			"check": "Main starts fresh buried-cache",
+			"ok": true
+		},
+		{
+			"check": "Actual Main mount buried-cache",
+			"ok": true
+		},
+		{
+			"check": "Main completion changes art buried-cache",
+			"ok": true
+		},
+		{
+			"check": "Save data/revisit keeps resolved art buried-cache",
+			"ok": true
+		},
+		{
+			"check": "Saved defiled-shrine-closed-desktop",
+			"ok": true
+		},
+		{
+			"check": "Saved defiled-shrine-empty-desktop",
+			"ok": true
+		},
+		{
+			"check": "Saved fouled-well-closed-desktop",
+			"ok": true
+		},
+		{
+			"check": "Saved fouled-well-empty-desktop",
+			"ok": true
+		},
+		{
+			"check": "Saved buried-cache-closed-desktop",
+			"ok": true
+		},
+		{
+			"check": "Saved buried-cache-empty-desktop",
+			"ok": true
+		},
+		{
+			"check": "Saved defiled-shrine-closed-phone",
+			"ok": true
+		},
+		{
+			"check": "Saved defiled-shrine-empty-phone",
+			"ok": true
+		},
+		{
+			"check": "Saved fouled-well-closed-phone",
+			"ok": true
+		},
+		{
+			"check": "Saved fouled-well-empty-phone",
+			"ok": true
+		},
+		{
+			"check": "Saved buried-cache-closed-phone",
+			"ok": true
+		},
+		{
+			"check": "Saved buried-cache-empty-phone",
+			"ok": true
+		},
+		{
+			"check": "Actual Pack draws bloodstone",
+			"ok": true
+		},
+		{
+			"check": "Actual Pack draws moth-wing-brooch",
+			"ok": true
+		},
+		{
+			"check": "Actual Pack draws slingers-thumb-ring",
+			"ok": true
+		},
+		{
+			"check": "Actual Pack draws ember-ring",
+			"ok": true
+		},
+		{
+			"check": "Actual Pack draws gamblers-knucklebone",
+			"ok": true
+		},
+		{
+			"check": "Actual Pack draws shield-bearers-token",
+			"ok": true
+		},
+		{
+			"check": "Actual Pack draws black-pearl-ring",
+			"ok": true
+		},
+		{
+			"check": "Actual Pack draws bone-white-charm",
+			"ok": true
+		},
+		{
+			"check": "Actual Pack draws goblin-gold-torc",
+			"ok": true
+		},
+		{
+			"check": "Saved pack-bloodstone-desktop",
+			"ok": true
+		},
+		{
+			"check": "Saved pack-shield-bearers-token-desktop",
+			"ok": true
+		},
+		{
+			"check": "Saved pack-goblin-gold-torc-desktop",
+			"ok": true
+		},
+		{
+			"check": "Saved pack-bloodstone-phone",
+			"ok": true
+		},
+		{
+			"check": "Saved pack-shield-bearers-token-phone",
+			"ok": true
+		},
+		{
+			"check": "Saved pack-goblin-gold-torc-phone",
+			"ok": true
+		}
+	]
+}

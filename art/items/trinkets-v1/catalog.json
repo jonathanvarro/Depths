@@ -1,0 +1,378 @@
+{
+  "issue": 142,
+  "items": [
+    {
+      "id": "bloodstone",
+      "name": "Bloodstone",
+      "design": "Rough red charm in blackened silver and cord",
+      "icon": "res://art/items/trinkets-v1/bloodstone.png",
+      "compact_icon": "res://art/items/trinkets-v1/compact64/bloodstone.png",
+      "resources": [
+        "res://data/trinkets/bloodstone.tres"
+      ],
+      "source": "res://art/source/events-trinkets-v1/bloodstone-master.png",
+      "source_sha256": "738f7d0062ea7327e96d6805128e7c43cca6342ee9830feb6c493f669615fca4",
+      "canvas": [
+        128,
+        128
+      ],
+      "colour_limit": 64,
+      "source_bounds": [
+        265,
+        82,
+        1190,
+        1176
+      ],
+      "scale": 0.10237659963436929,
+      "offset": [
+        16,
+        8
+      ]
+    },
+    {
+      "id": "moth-wing-brooch",
+      "name": "Moth-wing brooch",
+      "design": "Broad pewter wings and pale inlay",
+      "icon": "res://art/items/trinkets-v1/moth-wing-brooch.png",
+      "compact_icon": "res://art/items/trinkets-v1/compact64/moth-wing-brooch.png",
+      "resources": [
+        "res://data/trinkets/moth_wing_brooch.tres"
+      ],
+      "source": "res://art/source/events-trinkets-v1/moth-wing-brooch-master.png",
+      "source_sha256": "183b6a59fe4be2313e67e4dfaacdee0288f0fc41acb1d539381da78225c72f41",
+      "canvas": [
+        128,
+        128
+      ],
+      "colour_limit": 64,
+      "source_bounds": [
+        35,
+        339,
+        1229,
+        891
+      ],
+      "scale": 0.09380234505862646,
+      "offset": [
+        8,
+        38
+      ]
+    },
+    {
+      "id": "slingers-thumb-ring",
+      "name": "Slinger\u2019s thumb-ring",
+      "design": "Flared horn guard with a large thumb hole",
+      "icon": "res://art/items/trinkets-v1/slingers-thumb-ring.png",
+      "compact_icon": "res://art/items/trinkets-v1/compact64/slingers-thumb-ring.png",
+      "resources": [
+        "res://data/trinkets/slingers_thumb_ring.tres"
+      ],
+      "source": "res://art/source/events-trinkets-v1/slingers-thumb-ring-master.png",
+      "source_sha256": "f3c10644f2946193415aed6a430f44bf1f411d486b015fb592197e611ae0da92",
+      "canvas": [
+        128,
+        128
+      ],
+      "colour_limit": 64,
+      "source_bounds": [
+        162,
+        293,
+        1130,
+        1034
+      ],
+      "scale": 0.11570247933884298,
+      "offset": [
+        8,
+        21
+      ]
+    },
+    {
+      "id": "ember-ring",
+      "name": "Ember ring",
+      "design": "Thick coal-black iron band with a rust-red seam",
+      "icon": "res://art/items/trinkets-v1/ember-ring.png",
+      "compact_icon": "res://art/items/trinkets-v1/compact64/ember-ring.png",
+      "resources": [
+        "res://data/trinkets/ember_ring.tres"
+      ],
+      "source": "res://art/source/events-trinkets-v1/ember-ring-master.png",
+      "source_sha256": "853934782087e4c787d7ac51d8143faec2509cb9c15e374ebf3776bf99127f63",
+      "canvas": [
+        128,
+        128
+      ],
+      "colour_limit": 64,
+      "source_bounds": [
+        109,
+        246,
+        1172,
+        1012
+      ],
+      "scale": 0.10536218250235184,
+      "offset": [
+        8,
+        23
+      ]
+    },
+    {
+      "id": "gamblers-knucklebone",
+      "name": "Gambler\u2019s knucklebone",
+      "design": "Rubbed ivory gaming bone and three pips",
+      "icon": "res://art/items/trinkets-v1/gamblers-knucklebone.png",
+      "compact_icon": "res://art/items/trinkets-v1/compact64/gamblers-knucklebone.png",
+      "resources": [
+        "res://data/trinkets/gamblers_knucklebone.tres"
+      ],
+      "source": "res://art/source/events-trinkets-v1/gamblers-knucklebone-master.png",
+      "source_sha256": "80586fa6395a63c4a081d1838643efa108af83b15b8ee68dc155125c322fd6a6",
+      "canvas": [
+        128,
+        128
+      ],
+      "colour_limit": 64,
+      "source_bounds": [
+        86,
+        196,
+        1177,
+        1084
+      ],
+      "scale": 0.10265811182401467,
+      "offset": [
+        8,
+        18
+      ]
+    },
+    {
+      "id": "shield-bearers-token",
+      "name": "Shield-bearer\u2019s token",
+      "design": "Dented tin badge and the established forked seal",
+      "icon": "res://art/items/trinkets-v1/shield-bearers-token.png",
+      "compact_icon": "res://art/items/trinkets-v1/compact64/shield-bearers-token.png",
+      "resources": [
+        "res://data/trinkets/shield_bearers_token.tres"
+      ],
+      "source": "res://art/source/events-trinkets-v1/shield-bearers-token-master.png",
+      "source_sha256": "bd67738f91f95601fd64486371b2b8d8af2100734991676cced2074f1056eae9",
+      "canvas": [
+        128,
+        128
+      ],
+      "colour_limit": 64,
+      "source_bounds": [
+        169,
+        102,
+        1092,
+        1151
+      ],
+      "scale": 0.10676835081029552,
+      "offset": [
+        14,
+        8
+      ]
+    },
+    {
+      "id": "black-pearl-ring",
+      "name": "Black pearl ring",
+      "design": "Thin tarnished silver band and one dark pearl",
+      "icon": "res://art/items/trinkets-v1/black-pearl-ring.png",
+      "compact_icon": "res://art/items/trinkets-v1/compact64/black-pearl-ring.png",
+      "resources": [
+        "res://data/trinkets/black_pearl_ring.tres",
+        "res://data/trinkets/black_pearl_ring_cursed.tres"
+      ],
+      "source": "res://art/source/events-trinkets-v1/black-pearl-ring-master.png",
+      "source_sha256": "2fc1ec0fd723fc2f6b1a2e029a1973cac25c68d57010db8a387471f0bf536cf3",
+      "canvas": [
+        128,
+        128
+      ],
+      "colour_limit": 64,
+      "source_bounds": [
+        101,
+        245,
+        1190,
+        987
+      ],
+      "scale": 0.10284664830119375,
+      "offset": [
+        8,
+        26
+      ]
+    },
+    {
+      "id": "bone-white-charm",
+      "name": "Bone-white charm",
+      "design": "Notched carved bone and frayed cord",
+      "icon": "res://art/items/trinkets-v1/bone-white-charm.png",
+      "compact_icon": "res://art/items/trinkets-v1/compact64/bone-white-charm.png",
+      "resources": [
+        "res://data/trinkets/bone_charm.tres",
+        "res://data/trinkets/bone_charm_cursed.tres"
+      ],
+      "source": "res://art/source/events-trinkets-v1/bone-white-charm-master.png",
+      "source_sha256": "25ba4791862c4a3fb32fefcdb80918d77224458e061f1adc989d7f4902641b89",
+      "canvas": [
+        128,
+        128
+      ],
+      "colour_limit": 64,
+      "source_bounds": [
+        402,
+        92,
+        1024,
+        1161
+      ],
+      "scale": 0.10477081384471469,
+      "offset": [
+        31,
+        8
+      ]
+    },
+    {
+      "id": "goblin-gold-torc",
+      "name": "Goblin gold torc",
+      "design": "Heavy open gold collar with blunt terminals",
+      "icon": "res://art/items/trinkets-v1/goblin-gold-torc.png",
+      "compact_icon": "res://art/items/trinkets-v1/compact64/goblin-gold-torc.png",
+      "resources": [
+        "res://data/trinkets/goblin_torc.tres",
+        "res://data/trinkets/goblin_torc_cursed.tres"
+      ],
+      "source": "res://art/source/events-trinkets-v1/goblin-gold-torc-master.png",
+      "source_sha256": "e5e2e31ad435e0292b4c62b5caaafdd2d0799d3dc4f40a03b2ed3c8c2b970894",
+      "canvas": [
+        128,
+        128
+      ],
+      "colour_limit": 64,
+      "source_bounds": [
+        50,
+        280,
+        1204,
+        1027
+      ],
+      "scale": 0.09705372616984402,
+      "offset": [
+        8,
+        28
+      ]
+    }
+  ],
+  "props": [
+    {
+      "id": "defiled-shrine",
+      "name": "A defiled shrine",
+      "mount": "wall",
+      "metres_wide": 1.0,
+      "pixel_size": 0.008928571428571428,
+      "pivot": [
+        64,
+        64
+      ],
+      "textures": [
+        "res://art/props/shrine-events-v1/defiled-shrine.png",
+        "res://art/props/shrine-events-v1/defiled-shrine-used.png"
+      ],
+      "scene": "res://art/props/shrine-events-v1/defiled-shrine.tscn",
+      "event": "res://data/events/object_defiled_shrine.tres",
+      "connected": true,
+      "source_bounds": [
+        116,
+        261,
+        1197,
+        943
+      ],
+      "shared_scale": 0.1036077705827937,
+      "offset": [
+        8,
+        28
+      ],
+      "source_canvas": [
+        1312,
+        1199
+      ],
+      "canvas": [
+        128,
+        128
+      ],
+      "colour_limit": 64
+    },
+    {
+      "id": "fouled-well",
+      "name": "A fouled well",
+      "mount": "floor",
+      "metres_wide": 1.15,
+      "pixel_size": 0.010267857142857143,
+      "pivot": [
+        64,
+        109
+      ],
+      "textures": [
+        "res://art/props/shrine-events-v1/fouled-well.png",
+        "res://art/props/shrine-events-v1/fouled-well-used.png"
+      ],
+      "scene": "res://art/props/shrine-events-v1/fouled-well.tscn",
+      "event": "res://data/events/object_fouled_well.tres",
+      "connected": true,
+      "source_bounds": [
+        68,
+        228,
+        1200,
+        1141
+      ],
+      "shared_scale": 0.0989399293286219,
+      "offset": [
+        8,
+        19
+      ],
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "canvas": [
+        128,
+        128
+      ],
+      "colour_limit": 64
+    },
+    {
+      "id": "buried-cache",
+      "name": "A buried cache",
+      "mount": "floor",
+      "metres_wide": 1.25,
+      "pixel_size": 0.011160714285714286,
+      "pivot": [
+        64,
+        95
+      ],
+      "textures": [
+        "res://art/props/shrine-events-v1/buried-cache.png",
+        "res://art/props/shrine-events-v1/buried-cache-used.png"
+      ],
+      "scene": "res://art/props/shrine-events-v1/buried-cache.tscn",
+      "event": "res://data/events/chest_buried_cache.tres",
+      "connected": true,
+      "source_bounds": [
+        24,
+        366,
+        1230,
+        1030
+      ],
+      "shared_scale": 0.09286898839137644,
+      "offset": [
+        8,
+        33
+      ],
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "canvas": [
+        128,
+        128
+      ],
+      "colour_limit": 64
+    }
+  ],
+  "native_seal_source": "res://art/symbols/crest-v1/forked-seal.svg",
+  "contract": "Props share paired crop/scale/pivot and 64 colours; icons 128/64px; cursed/cleansed pairs share one image. All props/trinkets are connected; shrine retains existing prop_on_wall placement from 639d014."
+}

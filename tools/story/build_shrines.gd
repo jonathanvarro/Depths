@@ -16,8 +16,9 @@ const PICK := preload("res://data/items/pick.tres")
 const ORE := preload("res://data/items/copper_ore.tres")
 const OIL := preload("res://data/items/oil_flask.tres")
 const SHRINE := "res://art/dressing/landmarks-v1/miners-shrine-event.tscn"  # #132's shrine, set in a wall
-const POOL := "res://art/props/room-states-v1/still-pool.tscn"
-const WORKINGS := "res://art/props/room-states-v1/old-workings.tscn"
+const DEFILED_SHRINE := "res://art/props/shrine-events-v1/defiled-shrine.tscn"
+const POOL := "res://art/props/shrine-events-v1/fouled-well.tscn"
+const WORKINGS := "res://art/props/shrine-events-v1/buried-cache.tscn"
 const OBJECT := 4  # DungeonMap.Content.STRANGE_OBJECT
 const CHEST := 2
 
@@ -117,7 +118,7 @@ func _initialize() -> void:
 				_outcome("Heat runs up your arm and into your fists. It doesn't feel like yours.", {"boon": blood}),
 				_outcome("The warmth drains out of you instead.", {"boon": withering}),
 			], 1),
-		], OBJECT, Vector2i(2, 4), SHRINE, 2, true)
+		], OBJECT, Vector2i(2, 4), DEFILED_SHRINE, 2, true)
 
 	# A fouled well: safe with an antidote, a gamble without.
 	_event("object_fouled_well", "A fouled well",

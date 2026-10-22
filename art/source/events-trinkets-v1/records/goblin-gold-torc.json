@@ -1,0 +1,11 @@
+{
+  "id": "goblin-gold-torc",
+  "tool": "built-in image_gen",
+  "prompt": "Use case: stylized-concept. Production inventory icon for Depths, a dark first-person cave crawler. Reference images are STYLE references ONLY: match existing weathered painted pixel clusters and broad readable silhouettes. One isolated worn object fully contained on square transparent canvas with 8% margin, intended native128px/64colours and 64px/40px display. Three or four broad shades per material; restrained charcoal, umber, linen, tarnished silver and muted gold; only subject-specific colour accents. Neutral diffuse material shading, no scene lighting, glow, sparkle, ground, cast shadow, UI frame, letters, label, fake checkerboard or photorealistic fine detail. Genuine transparent alpha outside object and inside holes. Subject: GOBLIN GOLD TORC: ONE heavy crude open neck ring of hammered dull gold, a broad C-shaped collar with two large blunt squared terminals at the front. Three-quarter view, clear large neck opening and gap between terminals. Thick uneven forged bar with two broad twist ridges, shallow hammer dents and grime in creases; old ochre gold, brown shadows, pale worn edges. Goblin workmanship is rough but valuable. No gems, skulls, faces, teeth, curse cues, invented runes or glowing magic. Shape must clearly read as a neck torc, much broader than a finger ring, no chain or hanging pendant.",
+  "reference_images": [
+    "art/items/refined-v2/gold-signet-ring.png",
+    "art/items/field-kit-v1/holy-water.png"
+  ],
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-c1c3af25-0bd0-4e1c-957e-5145a94c4997.png",
+  "source": "art/source/events-trinkets-v1/goblin-gold-torc-master.png"
+}

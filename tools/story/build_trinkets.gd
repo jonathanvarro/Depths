@@ -6,7 +6,7 @@ extends SceneTree
 ## Magic: a modifier (here a benefit with a drawback). Rare: two benefits.
 ## Unique: a playstyle buff. Cursed ones pose as magic until worn. A trinket
 ## has no base numbers to improve, so none are common or fine (owner,
-## 2026-10-21). Icons borrow the jewellery art until ChatGPT's land.
+## 2026-10-21). Unique and curse-pair icons use #142; other jewellery reuses its treasure art.
 
 const DIR := "res://data/trinkets"
 
@@ -32,7 +32,10 @@ func _trinket(id: String, name: String, about: String, tier: String, effects: Di
 	t.description = about
 	t.tier = tier
 	t.effect = _effect(name, effects)
-	t.icon = _icon(icon)
+	var art_id: String = id.trim_suffix("_cursed").replace("_", "-")
+	art_id = {"bone-charm": "bone-white-charm", "goblin-torc": "goblin-gold-torc"}.get(art_id, art_id)
+	var art_path := "res://art/items/trinkets-v1/%s.png" % art_id
+	t.icon = load(art_path) if ResourceLoader.exists(art_path) else _icon(icon)
 	t.attack_min = 0
 	t.attack_max = 0
 	for key in extra:

@@ -1,0 +1,10 @@
+{
+  "id": "defiled-shrine-used",
+  "tool": "built-in image_gen",
+  "prompt": "Use case: precise-object-edit. Matching RESOLVED/SPENT state of this defiled miners' shrine game sprite. The input image is the EDIT TARGET: preserve EXACT square/rectangular canvas, camera, scale, silhouette, every masonry block, timber lintel, dark recess, wax stubs and framing. Only change the central dark stone: it now has a dull grey fracture across its upper face and a few small chips sitting immediately beside it on the sill; dark smear below it is slightly scuffed. Keep the black stone visibly present, so this generic resolved state does NOT claim it was purified, removed or smashed to pieces: the event can end after several different actions. No new candles, light, symbols, clean stonework or magical glow. Same neutral diffuse shading and chunky restrained hand-painted pixel clusters. True transparent background, no floor, no UI, no text. Entire niche inside original bounds. This should be a clearly disturbed/spent version of the same place, not a rebuilt shrine.",
+  "reference_images": [
+    "art/source/events-trinkets-v1/defiled-shrine-master.png"
+  ],
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-4059bde8-fa94-44eb-83c6-fdb5d81f53a7.png",
+  "source": "art/source/events-trinkets-v1/defiled-shrine-used-master.png"
+}

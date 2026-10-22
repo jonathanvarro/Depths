@@ -1,0 +1,164 @@
+{
+  "issue": 142,
+  "checks": 39,
+  "failed": 0,
+  "errors": [],
+  "results": [
+    {
+      "check": "Nine distinct trinket designs",
+      "ok": true
+    },
+    {
+      "check": "Each icon shown at 128/64/40px",
+      "ok": true
+    },
+    {
+      "check": "Native exports load at all sizes",
+      "ok": true
+    },
+    {
+      "check": "All original masters and exact prompts retained",
+      "ok": true
+    },
+    {
+      "check": "Real Pack capture bloodstonephone",
+      "ok": true
+    },
+    {
+      "check": "Real Pack capture bloodstonedesktop",
+      "ok": true
+    },
+    {
+      "check": "Real Pack capture shield-bearers-tokenphone",
+      "ok": true
+    },
+    {
+      "check": "Real Pack capture shield-bearers-tokendesktop",
+      "ok": true
+    },
+    {
+      "check": "Real Pack capture goblin-gold-torcphone",
+      "ok": true
+    },
+    {
+      "check": "Real Pack capture goblin-gold-torcdesktop",
+      "ok": true
+    },
+    {
+      "check": "Encounter tab switches",
+      "ok": true
+    },
+    {
+      "check": "Native prop defiled-shrine",
+      "ok": true
+    },
+    {
+      "check": "Resolved state changes defiled-shrine",
+      "ok": true
+    },
+    {
+      "check": "Paused state holds defiled-shrine",
+      "ok": true
+    },
+    {
+      "check": "Rendered state capture defiled-shrinephone",
+      "ok": true
+    },
+    {
+      "check": "Rendered state capture defiled-shrinedesktop",
+      "ok": true
+    },
+    {
+      "check": "Native prop fouled-well",
+      "ok": true
+    },
+    {
+      "check": "Resolved state changes fouled-well",
+      "ok": true
+    },
+    {
+      "check": "Paused state holds fouled-well",
+      "ok": true
+    },
+    {
+      "check": "Rendered state capture fouled-wellphone",
+      "ok": true
+    },
+    {
+      "check": "Rendered state capture fouled-welldesktop",
+      "ok": true
+    },
+    {
+      "check": "Native prop buried-cache",
+      "ok": true
+    },
+    {
+      "check": "Resolved state changes buried-cache",
+      "ok": true
+    },
+    {
+      "check": "Paused state holds buried-cache",
+      "ok": true
+    },
+    {
+      "check": "Rendered state capture buried-cachephone",
+      "ok": true
+    },
+    {
+      "check": "Rendered state capture buried-cachedesktop",
+      "ok": true
+    },
+    {
+      "check": "Playback starts",
+      "ok": true
+    },
+    {
+      "check": "Playback pauses",
+      "ok": true
+    },
+    {
+      "check": "Contrast backdrop switches",
+      "ok": true
+    },
+    {
+      "check": "No horizontal overflow items844",
+      "ok": true
+    },
+    {
+      "check": "44px controls items844",
+      "ok": true
+    },
+    {
+      "check": "No horizontal overflow props844",
+      "ok": true
+    },
+    {
+      "check": "44px controls props844",
+      "ok": true
+    },
+    {
+      "check": "No horizontal overflow items390",
+      "ok": true
+    },
+    {
+      "check": "44px controls items390",
+      "ok": true
+    },
+    {
+      "check": "No horizontal overflow props390",
+      "ok": true
+    },
+    {
+      "check": "44px controls props390",
+      "ok": true
+    },
+    {
+      "check": "Direct source links",
+      "ok": true
+    },
+    {
+      "check": "No browser script errors",
+      "ok": true
+    }
+  ]
+}

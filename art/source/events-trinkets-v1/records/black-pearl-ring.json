@@ -1,0 +1,11 @@
+{
+  "id": "black-pearl-ring",
+  "tool": "built-in image_gen",
+  "prompt": "Use case: stylized-concept. Production inventory icon for Depths, a dark first-person cave crawler. Reference images are STYLE references ONLY: match existing weathered painted pixel clusters and broad readable silhouettes. One isolated worn object fully contained on square transparent canvas with 8% margin, intended native128px/64colours and 64px/40px display. Three or four broad shades per material; restrained charcoal, umber, linen, tarnished silver and muted gold; only subject-specific colour accents. Neutral diffuse material shading, no scene lighting, glow, sparkle, ground, cast shadow, UI frame, letters, label, fake checkerboard or photorealistic fine detail. Genuine transparent alpha outside object and inside holes. Subject: BLACK PEARL RING: one old tarnished silver band with a SINGLE large nearly spherical black pearl in a simple low four-claw mount. Three-quarter view, clear oval finger hole behind and under the pearl. Pearl is charcoal-black with one broad quiet blue-grey reflected patch, smooth dark body, no rainbow, red crack or eye. Silver band thin enough to distinguish it from the thick coal-black ember band. No curse cue, skull, red mark or supernatural effect: it should look like good jewellery.",
+  "reference_images": [
+    "art/items/refined-v2/gold-signet-ring.png",
+    "art/items/field-kit-v1/holy-water.png"
+  ],
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-b9c5c6e1-9362-4cd6-ae17-d676d41d2d0f.png",
+  "source": "art/source/events-trinkets-v1/black-pearl-ring-master.png"
+}

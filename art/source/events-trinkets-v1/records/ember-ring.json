@@ -1,0 +1,11 @@
+{
+  "id": "ember-ring",
+  "tool": "built-in image_gen",
+  "prompt": "Use case: stylized-concept. Production inventory icon for Depths, a dark first-person cave crawler. Reference images are STYLE references ONLY: match existing weathered painted pixel clusters and broad readable silhouettes. One isolated worn object fully contained on square transparent canvas with 8% margin, intended native128px/64colours and 64px/40px display. Three or four broad shades per material; restrained charcoal, umber, linen, tarnished silver and muted gold; only subject-specific colour accents. Neutral diffuse material shading, no scene lighting, glow, sparkle, ground, cast shadow, UI frame, letters, label, fake checkerboard or photorealistic fine detail. Genuine transparent alpha outside object and inside holes. Subject: EMBER RING: a single thick irregular ring band of coal-black iron, seen three-quarter so a large open finger hole reads clearly. Hammered, chipped, dull surfaces, with one narrow dull rust-orange seam running across the front face and a tiny coal-red inset seated flush in the metal. No raised gemstone, flame, glowing halo, lava, bright emission or extra ornament. Low charcoal silhouette, broken pale grey worn edge, slight rusty warmth only. The band is squat and primitive, not a signet or horn guard.",
+  "reference_images": [
+    "art/items/refined-v2/gold-signet-ring.png",
+    "art/items/field-kit-v1/holy-water.png"
+  ],
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-d9183bcf-f587-402d-a48d-fb92539ed485.png",
+  "source": "art/source/events-trinkets-v1/ember-ring-master.png"
+}

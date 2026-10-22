@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Equipment" format=3]
 
 [ext_resource type="Script" path="res://scripts/boon.gd" id="1_tyiq1"]
-[ext_resource type="Texture2D" path="res://art/items/refined-v2/pearl-necklace.png" id="2_7a0mh"]
+[ext_resource type="Texture2D" path="res://art/items/trinkets-v1/black-pearl-ring.png" id="2_7a0mh"]
 [ext_resource type="Script" path="res://scripts/equipment.gd" id="3_spcut"]
 
 [sub_resource type="Resource" id="Resource_d5whv"]

@@ -9,7 +9,7 @@
 [ext_resource type="Resource" path="res://data/items/copper_ore.tres" id="7_m22pg"]
 [ext_resource type="Resource" path="res://data/items/pick.tres" id="8_c22vp"]
 [ext_resource type="Resource" path="res://data/boons/shaking_hands.tres" id="9_defad"]
-[ext_resource type="PackedScene" path="res://art/props/room-states-v1/old-workings.tscn" id="10_4182w"]
+[ext_resource type="PackedScene" path="res://art/props/shrine-events-v1/buried-cache.tscn" id="10_4182w"]
 [ext_resource type="Script" path="res://scripts/room_event.gd" id="11_53iba"]
 
 [sub_resource type="Resource" id="Resource_a0hpr"]

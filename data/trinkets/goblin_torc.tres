@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Equipment" format=3]
 
 [ext_resource type="Script" path="res://scripts/boon.gd" id="1_s0lfx"]
-[ext_resource type="Texture2D" path="res://art/items/refined-v2/gold-nuggets.png" id="2_807ke"]
+[ext_resource type="Texture2D" path="res://art/items/trinkets-v1/goblin-gold-torc.png" id="2_807ke"]
 [ext_resource type="Script" path="res://scripts/equipment.gd" id="3_36s8w"]
 
 [sub_resource type="Resource" id="Resource_y3vfb"]

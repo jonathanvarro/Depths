@@ -1,0 +1,11 @@
+{
+  "id": "bone-white-charm",
+  "tool": "built-in image_gen",
+  "prompt": "Use case: stylized-concept. Production inventory icon for Depths, a dark first-person cave crawler. Reference images are STYLE references ONLY: match existing weathered painted pixel clusters and broad readable silhouettes. One isolated worn object fully contained on square transparent canvas with 8% margin, intended native128px/64colours and 64px/40px display. Three or four broad shades per material; restrained charcoal, umber, linen, tarnished silver and muted gold; only subject-specific colour accents. Neutral diffuse material shading, no scene lighting, glow, sparkle, ground, cast shadow, UI frame, letters, label, fake checkerboard or photorealistic fine detail. Genuine transparent alpha outside object and inside holes. Subject: BONE-WHITE CHARM: one short flat tapered piece of ivory bone with a blunt rounded top and forked NOTCHED bottom, three broad simple grooves cut across its lower half. A hole at the top holds a short loop of fraying brown cord that curls behind it. Warm linen bone, dirty umber cut edges, smooth rubbed front, a single old nick. A plain little carved keepsake rather than a skull, tooth, jaw, claw or gothic necklace. No runes, numbers, gemstones, curse cue, eyes or supernatural light. Tall asymmetric silhouette, broad enough to read at 40px.",
+  "reference_images": [
+    "art/items/refined-v2/gold-signet-ring.png",
+    "art/items/field-kit-v1/holy-water.png"
+  ],
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-bd3da1f1-949b-4a56-b11c-285ee5729103.png",
+  "source": "art/source/events-trinkets-v1/bone-white-charm-master.png"
+}
