@@ -5,8 +5,9 @@
 [resource]
 script = ExtResource("1")
 display_name = "Limp"
-description = "Each step takes 1 extra time until treated at camp. A dressing binds it for now."
+description = "Each step takes 1 extra time, and they carry 2 fewer slots, until treated at camp. A dressing binds it for now."
 extra_step_time = 1
+carry_penalty = 2
 portrait_condition = ""
 icon_kind = "limp"
 recovery_days = 1

@@ -9,7 +9,8 @@ extends Control
 
 signal closed
 ## An item was moved into the pack.
-signal took(item: SupplyItem, quantity: int)
+## `item` is a SupplyItem, or spare gear (an Equipment) that didn't fit.
+signal took(item, quantity: int)
 
 const COLOR_TEXT := Color("e8d9b0")
 const COLOR_DIM_TEXT := Color(0.85, 0.8, 0.7, 0.65)
@@ -46,9 +47,18 @@ func is_empty() -> bool:
 	return contents.values().all(func(n): return n <= 0)
 
 
-func take(item: SupplyItem) -> void:
+func take(item) -> void:
 	var quantity: int = contents.get(item, 0)
 	if quantity <= 0:
+		return
+	if item is Equipment:  # spare gear: a slot of its own, if there's one
+		if not _party.supplies.has_room_for_gear():
+			return
+		_party.supplies.gear.append(item)
+		_party.supplies.changed.emit()
+		contents.erase(item)
+		took.emit(item, 1)
+		refresh()
 		return
 	var fits: int = _party.supplies.add_what_fits(item, quantity)
 	if fits >= quantity:
@@ -60,9 +70,16 @@ func take(item: SupplyItem) -> void:
 	refresh()
 
 
-## Leaves a stack of `item` here, to free a slot in the pack.
-func put_back(item: SupplyItem) -> void:
-	var stack := item.stack_size()
+## Leaves a stack of `item` here (or a piece of spare gear), to free a slot.
+func put_back(item) -> void:
+	if item is Equipment:
+		if item in _party.supplies.gear:
+			_party.supplies.gear.erase(item)
+			_party.supplies.changed.emit()
+			contents[item] = 1
+			refresh()
+		return
+	var stack: int = item.stack_size()
 	var held: int = _party.supplies.count(item)
 	var dropped: int = _party.supplies.drop(item, held % stack if held % stack != 0 else stack)
 	if dropped > 0:
@@ -80,7 +97,7 @@ func refresh() -> void:
 		child.queue_free()
 	for child in _pack_grid.get_children():
 		child.queue_free()
-	for item: SupplyItem in contents:
+	for item in contents:
 		if contents[item] > 0:
 			_chest_grid.add_child(_tile(item, contents[item], true))
 	if is_empty():
@@ -88,6 +105,8 @@ func refresh() -> void:
 	for item: SupplyItem in _party.supplies.items:
 		if _party.supplies.count(item) > 0:
 			_pack_grid.add_child(_tile(item, _party.supplies.count(item), false))
+	for item: Equipment in _party.supplies.gear:
+		_pack_grid.add_child(_tile(item, 1, false))
 	_take_all.disabled = is_empty()
 	_take_all.get_child(0).queue_redraw()
 	var supplies = _party.supplies
@@ -98,7 +117,7 @@ func refresh() -> void:
 		_pack_heading.text = "Your pack"
 
 
-func _tile(item: SupplyItem, quantity: int, in_chest: bool) -> Control:
+func _tile(item, quantity: int, in_chest: bool) -> Control:
 	var tile := Button.new()
 	tile.custom_minimum_size = TILE_SIZE
 	tile.focus_mode = Control.FOCUS_ALL

@@ -464,6 +464,23 @@ func _smith() -> void:
 			continue
 		var accuracy := "" if is_zero_approx(item.accuracy_bonus) else ", %+d%% to hit" % roundi(item.accuracy_bonus * 100)
 		_shop_row("%s: %d-%d damage%s" % [item.display_name, item.attack_min, item.attack_max, accuracy], item.price, _camp.buy_gear.bind(_party, item), item.icon, _party.supplies.has_room_for_gear())
+	# The forge (2026-10-22): fine pieces once it's built.
+	if _camp.forge_built:
+		var fine: Array = _camp.smith_fine_stock()
+		_text("From the new forge today:" if not fine.is_empty() else "The forge's work is all sold for today.", AMBER)
+		for item: Equipment in fine:
+			var detail := ("armour %d" % item.armour) if item.slot == "body" else ("%d-%d damage" % [item.attack_min, item.attack_max])
+			if item.effect:
+				detail += ", " + item.effect.effects_text()
+			_shop_row("%s: %s" % [item.display_name, detail], item.price, _camp.buy_gear.bind(_party, item), item.icon, _party.supplies.has_room_for_gear())
+	elif _camp.forge_offered():
+		_text("\"With iron like that, I could build a proper forge. Better edges, better stitching. It'd cost - %dg for the bellows and the fire-bricks.\"" % CampState.FORGE_PRICE)
+		var fund := _button("Pay for a forge (%dg)" % CampState.FORGE_PRICE)
+		fund.disabled = _party.supplies.gold < CampState.FORGE_PRICE
+		fund.pressed.connect(func():
+			_camp.build_forge(_party)
+			_refresh_activity())
+		_body.add_child(fund)
 	_text("Coming once there are rules for them: %s." % ", ".join(PackedStringArray(CampState.SMITH_COMING)), MUTED)
 	_text("Bought gear goes in your pack; equip it from there.", MUTED)
 
@@ -578,6 +595,8 @@ func _nurse() -> void:
 			continue
 		if hero.is_cursed():  # a cursed trinket (#135) is lifted first
 			_text("%s can't take off the %s: %s" % [hero.display_name, hero.trinket.display_name.to_lower(), hero.trinket.curse.description], AMBER)
+		elif hero.cursed_gear():  # then cursed weapons and armour
+			_text("%s can't put down the %s: %s" % [hero.display_name, hero.cursed_gear().display_name.to_lower(), hero.cursed_gear().curse.description], AMBER)
 		else:
 			var bane: Boon = hero.boons.filter(func(b): return b["boon"].bane)[0]["boon"]
 			_text("%s still carries %s: %s" % [hero.display_name, bane.display_name.to_lower(), bane.description], AMBER)

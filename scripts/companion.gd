@@ -172,12 +172,21 @@ func add_boon(boon: Boon) -> void:
 
 
 func has_bane() -> bool:
-	return boons.any(func(b): return b["boon"].bane) or is_cursed()
+	return boons.any(func(b): return b["boon"].bane) or is_cursed() or cursed_gear() != null
 
 
 ## Wearing a cursed trinket: it won't come off until cleansed (#135).
 func is_cursed() -> bool:
 	return trinket != null and trinket.curse != null
+
+
+## A cursed weapon or armour worn (2026-10-22): it won't come off until
+## cleansed. Null if none.
+func cursed_gear() -> Equipment:
+	for gear in [weapon, body]:
+		if gear and gear.curse:
+			return gear
+	return null
 
 
 ## Lifts a bane (holy water, the nurse): a cursed trinket first - it's
@@ -189,6 +198,13 @@ func lift_bane() -> Boon:
 		health = mini(health, effective_max_health())
 		emit_changed()
 		return curse
+	var gear := cursed_gear()
+	if gear:
+		var gear_curse: Boon = gear.curse
+		gear.curse = null  # each piece is its own, so the curse is simply gone
+		health = mini(health, effective_max_health())
+		emit_changed()
+		return gear_curse
 	for entry in boons:
 		if entry["boon"].bane:
 			boons.erase(entry)
@@ -212,6 +228,8 @@ func effects() -> Array[Boon]:
 	for gear in [weapon, body]:  # magic and rare weapons and armour (owner, 2026-10-21)
 		if gear and gear.effect:
 			all.append(gear.effect)
+		if gear and gear.curse:
+			all.append(gear.curse)
 	return all
 
 

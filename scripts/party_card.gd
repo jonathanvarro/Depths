@@ -225,6 +225,9 @@ func refresh() -> void:
 		_add_condition(companion.trinket.icon, Color.WHITE, "Wears the %s (%s): %s" % [companion.trinket.display_name.to_lower(), Quality.tier_of(companion.trinket, companion), companion.trinket.effect.effects_text()], Quality.tier_of(companion.trinket, companion))
 		if companion.is_cursed():
 			_add_condition(BOON_MARKS[true], Color.WHITE, "Cursed - %s: %s It won't come off until it's cleansed." % [companion.trinket.curse.display_name, companion.trinket.curse.description])
+	var bad_gear := companion.cursed_gear()
+	if bad_gear:  # cursed weapons and armour (2026-10-22)
+		_add_condition(BOON_MARKS[true], Color.WHITE, "Cursed %s - %s: %s It won't come off until it's cleansed." % [bad_gear.display_name.to_lower(), bad_gear.curse.display_name, bad_gear.curse.description])
 	# Boons and banes (#133): what they do and how long they last.
 	for entry in companion.boons:
 		var boon: Boon = entry["boon"]

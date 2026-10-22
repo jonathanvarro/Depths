@@ -12,6 +12,9 @@ extends Resource
 @export var max_health_penalty := 0
 ## Extra time each step costs while untreated (and not dressed).
 @export var extra_step_time := 0
+## Pack slots that hero's share loses while untreated (and not dressed):
+## a limping hero carries less (#104).
+@export var carry_penalty := 0
 ## Portrait overlays (see PortraitSet.conditions), if the art exists.
 @export var portrait_condition := ""
 @export var dressed_portrait_condition := "bandage"

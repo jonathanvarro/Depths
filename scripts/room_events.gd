@@ -175,6 +175,7 @@ func resolve(party, choice: EventChoice, forced := -1, flags: Array = []) -> Dic
 		chip.call(CHIP_ICONS["gold"], "+%d" % outcome.gold, true, null)
 	for item in outcome.gear:
 		if not party.supplies.has_room_for_gear():
+			result["no_room"][item] = 1  # offered beside the pack (#133)
 			notes.append("no room for %s" % item.display_name.to_lower())
 			chip.call(item.icon, "no room", false, null)
 			continue

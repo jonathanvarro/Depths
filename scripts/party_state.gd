@@ -52,12 +52,29 @@ func remove_member(member: Companion) -> void:
 ## The pack grows with the party. A smaller party may find it over-full:
 ## nothing is lost, but nothing more fits until something goes.
 func update_capacity() -> void:
+	var before: int = supplies.capacity
+	supplies.capacity = maxi(PACK_MINIMUM, PACK_SLOTS_PER_HERO * members.size()) + pack_extra() - pack_lost()
+	if supplies.capacity != before:
+		supplies.changed.emit()
+
+
+## Slots backpacks add (owner, 2026-10-21).
+func pack_extra() -> int:
 	var extra := 0
 	for member in members:
 		if member.back:
-			extra += member.back.pack_slots  # a backpack (owner, 2026-10-21)
-	supplies.capacity = maxi(PACK_MINIMUM, PACK_SLOTS_PER_HERO * members.size()) + extra
-	supplies.changed.emit()
+			extra += member.back.pack_slots
+	return extra
+
+
+## Slots lost to injuries: a limping hero carries less (#104) until the
+## limp is dressed or treated.
+func pack_lost() -> int:
+	var lost := 0
+	for member in living_members():
+		for injury in member.hindering_injuries():
+			lost += injury.carry_penalty
+	return lost
 
 
 ## The luckiest living hero bends coin flips (#77): [bonus, their name].
@@ -125,6 +142,7 @@ func free_slots() -> int:
 
 func advance_time(units := 1) -> void:
 	time_elapsed += units
+	update_capacity()  # injuries come and go (#104)
 	for i in units:
 		supplies.burn(1, oil_rate())
 		var light: Supplies.Light = supplies.light_band()
@@ -170,6 +188,9 @@ func equip(hero: Companion, item: Equipment) -> void:
 			return  # a cursed trinket won't come off
 		supplies.gear.erase(item)
 		_put_on(hero, item)
+		return
+	# Cursed weapons and armour won't come off (2026-10-22).
+	if (item.slot == "body" and hero.body and hero.body.curse) or (item.slot == "weapon" and hero.weapon and hero.weapon.curse):
 		return
 	supplies.gear.erase(item)
 	if item.slot == "body":  # armour (#93)

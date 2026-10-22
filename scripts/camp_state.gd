@@ -13,6 +13,7 @@ extends RefCounted
 signal day_passed(day: int)
 signal changed
 
+const Quests := preload("res://scripts/quests.gd")
 const Supplies := preload("res://scripts/supplies.gd")
 const Recruits := preload("res://scripts/recruits.gd")
 const Progression := preload("res://scripts/progression.gd")
@@ -108,6 +109,13 @@ var best_level := 1
 var quests := {}
 ## Smith work unlocked by quests (resource paths), sold after SMITH_STOCK.
 var smith_unlocks: Array[String] = []
+## A proper forge (2026-10-22): after the iron project, the party can pay
+## the apprentice to build one; then he also sells fine versions of his
+## weapons and armour - one of each a day - at the fine price.
+const FORGE_PRICE := 60
+var forge_built := false
+var fine_stock: Array[Equipment] = []
+var fine_stock_day := -1
 var _used_names: Array = []  # each name comes by once before any repeats
 
 
@@ -319,6 +327,37 @@ func smith_stock() -> Array[Equipment]:
 	return stock
 
 
+## Whether the forge can be paid for: the iron project done, not yet built.
+func forge_offered() -> bool:
+	return not forge_built and Quests.stage(self, "iron_sample") == Quests.Stage.RESOLVED
+
+
+func build_forge(party) -> bool:
+	if not forge_offered() or party.supplies.gold < FORGE_PRICE:
+		return false
+	party.supplies.gold -= FORGE_PRICE
+	party.supplies.changed.emit()
+	forge_built = true
+	changed.emit()
+	return true
+
+
+## Today's fine pieces from the forge (empty without one): each of the
+## smith's weapons and armour, made fine, seeded by the day.
+func smith_fine_stock() -> Array[Equipment]:
+	if not forge_built:
+		return []
+	if fine_stock_day != day:
+		fine_stock.clear()
+		var rng := RandomNumberGenerator.new()
+		rng.seed = hash(["forge", day])
+		var gear_gen = load("res://scripts/gear_gen.gd")  # loaded here: it preloads this script
+		for base in gear_gen.bases():
+			fine_stock.append(gear_gen.make(base, "fine", rng))
+		fine_stock_day = day
+	return fine_stock
+
+
 ## Fight XP from `depth`, limited by what that floor can still teach.
 func take_floor_xp(depth: int, amount: int) -> int:
 	var left: int = xp_left.get(depth, 0)
@@ -401,6 +440,7 @@ func buy_gear(party, item: Equipment) -> bool:
 		return false
 	party.supplies.gold -= item.price
 	party.supplies.gear.append(item)
+	fine_stock.erase(item)  # one of each fine piece a day
 	party.supplies.changed.emit()
 	changed.emit()
 	return true

@@ -388,6 +388,9 @@ var _last_line := ""
 var _last_spoke_at := -100.0
 var _said := {}  # one-off remarks already made
 var _rng := RandomNumberGenerator.new()  # trinket drops and rewards (#135)
+## Finds that didn't fit, waiting to be offered beside the pack (#133):
+## SupplyItem or Equipment -> how many.
+var _overflow := {}
 var _last_lost_remark := 0
 var _eyelid_top: ColorRect
 var _eyelid_bottom: ColorRect
@@ -693,18 +696,19 @@ func _run_event(cell: Vector2i) -> void:
 	_event_screen.show_event(event, _party_state, _room_events, _map.event_flags[cell])
 	var result: Dictionary = await _event_screen.finished
 	_end_encounter()
-	if not result.get("no_room", {}).is_empty():
-		await _offer_no_room(result["no_room"])
+	for item in result.get("no_room", {}):
+		_left_over(item, result["no_room"][item])
+	# A chest may hold finer gear (owner, 2026-10-21).
+	if not result["left"] and event.kind == DungeonMap.Content.CHEST and result["ambush"].is_empty() and not _in_opening:
+		var gear: Equipment = GearGen.drop(_rng, _depth, "chest")
+		if gear:
+			_found_gear(gear, "Underneath: %s." % _a(gear.display_name.to_lower()))
+	await _offer_overflow()
 	_party.locked = false
 	if result["left"]:
 		_map.triggered.erase(cell)
 		return
 	_empty_prop(cell)
-	# A chest may hold finer gear (owner, 2026-10-21).
-	if event.kind == DungeonMap.Content.CHEST and result["ambush"].is_empty() and not _in_opening:
-		var gear: Equipment = GearGen.drop(_rng, _depth, "chest")
-		if gear:
-			_found_gear(gear, "Underneath: %s." % _a(gear.display_name.to_lower()))
 	if Quests.has_flag(_camp_state, "lower_gate", "seen") and not Quests.has_flag(_camp_state, "lower_gate", "ending_shown"):
 		await _slice_ending()
 	if _in_opening and cell in _opening_body_cells():
@@ -767,6 +771,7 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 		await _spoils.play(spoils, _combat.last_blow, Settings.get_value("flashes"))
 	if result == CombatState.Result.VICTORY:
 		_trinket_drops(state)
+		await _offer_overflow()
 	await _stage.exit()  # the fog sinks back; the cave returns
 	_play_place_music()
 	for foe in state.foes:
@@ -855,6 +860,8 @@ func _trinket_drops(state) -> void:
 		if foe.type.drop and _rng.randf() < foe.type.drop_chance:  # a hollow miner's pick (#140)
 			if _party_state.supplies.add_what_fits(foe.type.drop) > 0:
 				_show_message("The %s's %s clatters free. It's in the pack." % [foe.type.display_name.to_lower(), foe.type.drop.display_name.to_lower()])
+			else:
+				_left_over(foe.type.drop, 1)
 		if gear:
 			_found_gear(gear, "The %s carried %s." % [foe.type.display_name.to_lower(), _a(gear.display_name.to_lower())])
 		if find == null:
@@ -862,12 +869,12 @@ func _trinket_drops(state) -> void:
 		var name: String = find.display_name.to_lower()
 		if find is Equipment:
 			if not _party_state.supplies.has_room_for_gear():
-				_show_message("The %s wore %s, but there's no room in the pack." % [foe.type.display_name.to_lower(), _a(name)])
+				_left_over(find, 1)  # offered beside the pack
 				continue
 			_party_state.supplies.gear.append(find)
 			_party_state.supplies.changed.emit()
 		elif _party_state.supplies.add_what_fits(find) == 0:
-			_show_message("The %s wore %s, but there's no room in the pack." % [foe.type.display_name.to_lower(), _a(name)])
+			_left_over(find, 1)
 			continue
 		_show_message("The %s wore %s. It's in the pack." % [foe.type.display_name.to_lower(), _a(name)])
 
@@ -878,10 +885,11 @@ static func _a(noun: String) -> String:
 
 
 ## Finer weapons and armour found (owner, 2026-10-21): into the pack if
-## there's room, else left where it lay.
+## there's room, else offered beside it to swap for.
 func _found_gear(gear: Equipment, line: String) -> void:
 	if not _party_state.supplies.has_room_for_gear():
-		_show_message(line + " No room in the pack - you leave it.")
+		_show_message(line)
+		_left_over(gear, 1)
 		return
 	_party_state.supplies.gear.append(gear)
 	_party_state.supplies.changed.emit()
@@ -1637,6 +1645,7 @@ var _hunger_states := {}  # Companion -> 0 fed, 1 hungry, 2 starving (#64)
 
 ## Strain (#12): announce state changes and let panic take over some moves.
 func _on_party_state_changed(announce := true) -> void:
+	_party_state.update_capacity()  # a limp, dressed or not, changes the pack (#104)
 	_update_wound_dim()
 	for member: Companion in _party_state.living_members():
 		if not member.changed.is_connected(_on_party_state_changed):
@@ -2053,6 +2062,20 @@ func _can_be_niche(cell: Vector2i) -> bool:
 	return floors == 1
 
 
+## Something found that didn't fit: kept aside to offer when the moment ends.
+func _left_over(item, count: int) -> void:
+	_overflow[item] = _overflow.get(item, 0) + count
+
+
+## Offers whatever didn't fit, if anything, then forgets it.
+func _offer_overflow() -> void:
+	if _overflow.is_empty():
+		return
+	var finds := _overflow.duplicate()
+	_overflow.clear()
+	await _offer_no_room(finds)
+
+
 ## Finds that didn't fit (#133): shown like a chest beside the pack, so the
 ## player can leave something else instead. Whatever stays is left behind.
 func _offer_no_room(finds: Dictionary) -> void:
@@ -2081,7 +2104,7 @@ func _open_opening_chest(cell: Vector2i) -> void:
 	_refresh_tutorial_hint()
 
 
-func _on_chest_took(_item: SupplyItem, _quantity: int) -> void:
+func _on_chest_took(_item, _quantity: int) -> void:
 	_chest_looted = true
 	if _chest.is_empty() and _hint == "chest_take":
 		_show_hint("That's everything. Close the chest.", "chest_take")

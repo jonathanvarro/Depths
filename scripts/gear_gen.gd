@@ -39,6 +39,10 @@ const TIER_ODDS := {
 	4: {"magic": 0.6, "rare": 0.4},
 }
 const TOUGH_HEALTH := 10  # as for trinkets: foes with this much health or more
+## Cursed gear (2026-10-22): from floor 2, this share of magic drops hide a
+## bane, shown only once worn; it won't come off until cleansed.
+const CURSED_SHARE := 0.1
+const CURSES := ["withering", "marked", "sickness", "shaking_hands"]
 const ELITE_TIMES := 3.0
 const ORDINARY_TIMES := 0.5
 
@@ -67,7 +71,10 @@ static func drop(rng: RandomNumberGenerator, depth: int, source: String, foe_hea
 		return null
 	var tier := _roll_tier(rng, TIER_ODDS[floor])
 	var pool := bases()
-	return make(pool[rng.randi_range(0, pool.size() - 1)], tier, rng)
+	var item := make(pool[rng.randi_range(0, pool.size() - 1)], tier, rng)
+	if tier == "magic" and floor >= 2 and rng.randf() < CURSED_SHARE:
+		item.curse = load("res://data/boons/%s.tres" % CURSES[rng.randi_range(0, CURSES.size() - 1)])
+	return item
 
 
 static func _roll_tier(rng: RandomNumberGenerator, odds: Dictionary) -> String:

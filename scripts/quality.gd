@@ -26,7 +26,7 @@ const WIDTHS := {"fine": 1, "magic": 2, "rare": 2, "unique": 3, "cursed": 2}
 ## `worn_by` has put it on.
 static func tier_of(item, worn_by: Companion = null) -> String:
 	if item is Equipment:
-		if item.curse and worn_by and worn_by.trinket == item:
+		if item.curse and worn_by and item in [worn_by.trinket, worn_by.weapon, worn_by.body]:
 			return "cursed"
 		return item.tier
 	if item is SupplyItem and item.effect == SupplyItem.Effect.TREASURE:

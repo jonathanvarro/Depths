@@ -119,7 +119,9 @@ func refresh() -> void:
 		child.queue_free()
 	# Pack space (#133): slots used of the pack's size.
 	if supplies.is_limited():
-		var space := _label("Pack space: %d of %d" % [supplies.slots_used(), supplies.capacity], 18, COLOR_DIM_TEXT if supplies.slots_used() < supplies.capacity else COLOR_TEXT)
+		var lost: int = _party.pack_lost()
+		var why := ("  ·  %d lost to a limp" % lost) if lost > 0 else ""
+		var space := _label("Pack space: %d of %d%s" % [supplies.slots_used(), supplies.capacity, why], 18, COLOR_DIM_TEXT if supplies.slots_used() < supplies.capacity else COLOR_TEXT)
 		space.tooltip_text = "Each hero adds %d slots. A slot holds a stack of one kind of supply, or one piece of spare gear." % _party.PACK_SLOTS_PER_HERO
 		_list.add_child(space)
 	_add_gear_rows()
@@ -145,7 +147,9 @@ func _add_gear_rows() -> void:
 		line.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		row.add_child(line)
 		if hero.weapon and not hero.founder:  # recruits can go back to their own kit
-			var away := _small_button("Put away")
+			var away := _small_button("Put away" if not hero.weapon.curse else "Cursed")
+			away.disabled = hero.weapon.curse != null
+			away.tooltip_text = "Holy water or the nurse can lift the curse" if hero.weapon.curse else ""
 			away.pressed.connect(func():
 				_party.supplies.gear.append(hero.weapon)
 				hero.weapon = null
@@ -233,7 +237,10 @@ func _add_gear_rows() -> void:
 					used.emit(_party.wear(hero, item))
 				else:
 					_party.equip(hero, item)
-					used.emit("%s takes up the %s." % [hero.display_name, item.display_name.to_lower()])
+					if item.curse and (hero.weapon == item or hero.body == item):
+						used.emit("The %s bites into %s's hand. Cursed with %s - it won't come off." % [item.display_name.to_lower(), hero.display_name, item.curse.display_name.to_lower()])
+					else:
+						used.emit("%s takes up the %s." % [hero.display_name, item.display_name.to_lower()])
 				refresh())
 			buttons.add_child(equip)
 		var drop := _small_button("Drop")

@@ -573,6 +573,8 @@ The core of the game is tradeoffs. Shrines and gambles leave lasting boons and b
   - Gold, the lantern, a lit torch and what heroes wear take no space. The camp stash has no limit.
   - When a find doesn't fit, it's shown beside the pack like a chest. Tapping a stack in the pack leaves it there, so the player swaps or walks away. The Pack shows the space used and has a Drop button on each supply.
   - The merchant, the smith and the stash won't hand over what doesn't fit. A party that shrinks may find its pack over-full: nothing is lost, but nothing more fits until something goes.
+  - **A limp costs 2 slots** (#104, 2026-10-22). This stacks with its extra step time, and lasts until the limp is dressed or treated. The Pack shows how many slots a limp is costing.
+  - **Spare gear** that doesn't fit, whether from events, fights, chests or a hollow miner's pick, is offered beside the pack like supplies, rather than lost.
 - **Items that open choices:**
   - **Pick:** a tool, kept. Works a seam, breaks rock, smashes a cursed stone.
   - **Spade:** a tool, kept. Digs out a buried cache.
@@ -688,7 +690,12 @@ Found weapons and armour are the smith's common pieces made better, generated wh
 | 4 | 15% | 8% | 60% magic, 40% rare |
 
 - **Prices:** better pieces sell for more, at ×1.5 for fine, ×2.5 for magic and ×4 for rare the base price.
-- **The smith** sells common only for now. Fine gear could come through a camp project later.
+- **The smith** sells common gear. **The forge** (2026-10-22) is the camp project that adds fine gear:
+  - After the iron project, the smith offers to build a proper forge for 60 gold.
+  - Once built, he also sells fine versions of each of his weapons and armour, one of each a day, at the fine price.
+- **Cursed gear** (2026-10-22): from floor 2, one in ten magic drops hides a bane (Withering, Marked, Sickness or Shaking hands).
+  - It shows only its good modifier until worn, then won't be swapped or put away.
+  - Holy water or the nurse lifts the curse for good, and the piece stays.
 - **Uniques:** unique weapons and armour are named one-offs for the story, and come later.
 
 ## Visual and audio direction
