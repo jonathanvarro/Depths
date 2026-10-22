@@ -706,6 +706,8 @@ The current visual baseline is **simple, shadow-heavy pixel environments with de
 
 **Enemy detail direction (2026-10-17, #32):** the owner likes the creature designs but wants simpler enemies for consistency and lower requirements. Follow [the enemy art guide](docs/enemy-art-direction.md): silhouette-led shapes, sparse texture, shared lighting/palettes and registered poses. Its proposed 128px canvas and colour limits have a simpler goblin study for review; the detailed nine-pose set remains preserved as reference, not the final production style.
 
+**Monster horror progression (owner, 2026-10-22, #150–#152):** keep the art dark and gritty throughout the mine. As the party approaches the final floor/objective, monsters become increasingly grotesque and disconnected from reality: recognizable animals give way to wrong anatomy, impossible bodies, then beings whose space, scale or presence cannot be reconciled. The existing breach hounds provide a visual bridge. Use a distinct silhouette, one dominant impossibility and a revealing pose or environmental cue to communicate each design in 2D. The most abstract creatures should retain disturbing physicality. [The enemy art guide](docs/enemy-art-direction.md#descent-into-the-grotesque--owner-direction-2026-10-22) records the stages and review criteria. The new requests are concept exploration; exact floor assignments, the final entity, the relic's nature and production methods remain open. Existing runtime detail and animation budgets continue to apply to later production.
+
 Suggested economical approach:
 
 - Reusable walls, doors, floors, and props assembled into fixed first-person room views.
@@ -717,7 +719,7 @@ Suggested economical approach:
 
 Pixel art is not automatically cheap: consistency, readable expressions, viewpoints, and animation frame counts determine workload. Choose a coherent pixel scale before producing final assets. Use Greed & Darkness as a visual reference, not a source of copied assets or a requirement to reproduce its animation technique.
 
-The interface should preserve the two elements the owner particularly liked: expressive companion portraits and the exploration map. Sound, writing, and reactions should make losses and moments of relief feel personal. Content boundaries and the degree of graphic horror remain undecided.
+The interface should preserve the two elements the owner particularly liked: expressive companion portraits and the exploration map. Sound, writing, and reactions should make losses and moments of relief feel personal. Increasingly grotesque and unreal monster design is established above; exact graphic detail and other content boundaries remain undecided.
 
 **Navigation/menu study (2026-10-17, #37):** [shared interface proposals](docs/navigation-interface-design.md) compare Field kit (quiet exploration controls, dark worn panels, parchment documents) with Field journal (persistent book tabs and paper-led windows). The owner selected Field kit. **Updated direction (#61):** [Pack slots and the hero window](docs/pack-and-hero-window-design.md) records image-only inventory slots with hover/touch details; Equipment opens by default, Status is a tab in the same window, and portrait selection changes the inspected hero while retaining the active tab. A browser study demonstrates all three screens, explicit actions and navigation. Slot counts/categories remain visual proposals. The previous [labelled-row Godot study](docs/pack-screen-design.md) (#39) is preserved; the live Pack and global theme have not yet adopted the revision.
 

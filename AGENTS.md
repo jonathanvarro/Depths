@@ -134,6 +134,11 @@ Templates > Download and Install; already installed on the owner's PC).
   separate FX/symbols) are in `art/enemies/monsters-v1`; four live definitions
   and their builder are connected. `docs/new-monster-art.md` covers the remaining
   state/FX integration, pose-aware tag bounds and bat mounting/clearance.
+  New deeper-creature concept requests #150–#152 follow the owner's 2026-10-22
+  direction: dark/gritty throughout, increasingly grotesque and disconnected
+  from reality toward the final floor. Read `docs/enemy-art-direction.md`
+  before generating them. Preserve phone readability and existing production
+  budgets; concept paintings do not assign lore, floors or a final boss.
 - `scripts/combat_state.gd` – combat rules without visuals (turn order,
   attack/defend/item/retreat, enemy attacks, results); testable directly.
 - `scripts/combat_screen.gd` – combat UI: turn text, log, tappable enemy

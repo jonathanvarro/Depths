@@ -2,6 +2,81 @@
 
 The owner likes the cave environments and creature designs, but wants enemies less detailed than the first generated set: consistent future renders and lower production requirements. This establishes that direction. The numeric limits below are a **proposed working standard**, demonstrated by one goblin study, for review before rebuilding the library (#32).
 
+## Descent into the grotesque — owner direction, 2026-10-22
+
+The art stays **dark and gritty throughout**. As the party approaches the final
+floor and objective, monsters become **increasingly grotesque and disconnected
+from reality**. Familiar bodies gradually stop obeying anatomy, volume,
+perspective and scale. Grotesque physicality continues into the most abstract
+designs: stretched skin, compressed flesh, exposed internal structures or an
+uncomfortable suggestion of something living inside apparently inert forms.
+Increasing abstraction should retain that disturbing, material presence.
+
+The existing breach hounds are the visual bridge. Their low predatory stance,
+stretched jaw and rib shapes can echo through later designs, so the player
+recognizes something familiar becoming harder to comprehend. Different families
+can follow different paths; every animal and goblin need not transform.
+
+The following are relative stages of the descent, not fixed floor assignments:
+
+| Stage | Visual progression | Useful examples from the requested concepts |
+| --- | --- | --- |
+| Upper mine | Recognizable, worn, hungry animals and physically plausible foes establish the ordinary world | Existing rats, bats and goblins |
+| Beyond the breach | Recognizable animals with an unmistakable anatomical wrongness; flesh looks strained by the structure beneath | Underhound's opposed rib cages and sliding teeth; Borrowed Pack's continuous hide |
+| Deeper layers | Bodies cannot contain their own anatomy; folds, cavities and connections violate expected volume or movement | Marrow Shepherd's forming creatures; Unfolding's compressed/extended forms; Weight's interior depth |
+| Near the final objective | The outline, space or apparent environment becomes the creature; scale and presence become difficult to reconcile | Open Door's incompatible view; Hollow Interval's missing body; Sleeper Beyond's architectural shape revealed as part of a body |
+
+These examples come from the open concept requests
+[#150](https://github.com/jonathanvarro/Depths/issues/150),
+[#151](https://github.com/jonathanvarro/Depths/issues/151) and
+[#152](https://github.com/jonathanvarro/Depths/issues/152). Their working names
+and designs remain proposals. This direction does not decide the relic's
+identity, a common origin for the creatures, a final boss or the floor count.
+
+### Making the progression visible in 2D
+
+- **Lead with one dominant impossibility.** A second rib cage, one hide shared
+  by several bodies, or an opening that contains too much depth gives the eye
+  something specific to understand. Supporting details should reinforce it.
+- **Use large contours and negative space.** Wrong joint placement, a strained
+  flesh bridge, a cavity or an impossible fold must survive a small silhouette
+  study. Surface grime and extra teeth alone cannot carry the progression.
+- **Show the revealing state.** Pair a compressed body with its extended form,
+  or an apparently ordinary jaw with the teeth displaced. Preserve identity
+  anchors between states so the change reads as deliberate anatomy. A concept
+  sheet needs only the alternate view that explains its defining wrongness.
+- **Use context for absence and scale.** A creature-shaped hole needs the room
+  behind it; an enormous body part needs small mining or human cues. A contextual
+  composition or separate background/body layer can explain what a standalone
+  transparent sprite cannot. Keep any production method a later proposal.
+- **Keep the materials grounded.** Broad masses of dirty ivory, bruised flesh,
+  wet stone and tarnished metal can share the mine's shadows. Use selective
+  diseased colour and restrained lighting. Later creatures should still feel
+  tangible even when their geometry is impossible.
+
+Review the stages beside each other, first as silhouettes and then at phone
+display size against a room. The progression should be visible without a name,
+description or sound track. Sound, omens and limited motion can reinforce it.
+Keep actionable poses, targeting and warnings clear as fictional anatomy gets
+less comprehensible. The player's controls and HUD remain dependable.
+
+Detailed paintings are allowed for #150–#152's **concept exploration**. Existing
+runtime canvas, palette, transparency, pose-registration and small animation
+budgets below continue to apply when selected concepts enter production.
+Greater horror comes from the design and reveal; it does not require higher
+texture resolution, dense surface detail, long animation cycles or escalating
+gore. Exact graphic detail remains open. Existing delivered art is preserved;
+any revisions should be chosen after concept review.
+
+Prompt addition for the new concepts:
+
+> Dark, gritty Depths creature concept at [relative descent stage]. Keep
+> [recognizable family anchors], with [one dominant physical impossibility].
+> Make the grotesque structure readable through silhouette, material weight
+> and [one revealing state or environmental cue]. Show its relation to the
+> more grounded and more abstract stages. Keep small-view readability and
+> broad shadow masses; supporting detail must serve the central idea.
+
 ## Shared visual rules
 
 **Production follow-up (#33):** the owner requested the remaining enemies in this direction after the goblin study. The complete [cave-simple-v1 set](../art/enemies/cave-simple-v1/README.md) now applies the 128px, shared 32-colour maximum and three-pose contract to rat, spider and goblin, and is connected through EnemyType.scene. Treat those as this family's working limits; exceptional future enemies can be reviewed separately.
