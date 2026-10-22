@@ -1,0 +1,42 @@
+{
+  "issue": 141,
+  "authoring": "Original native pixel cloud shapes and registered native SVG light mark; tools/art/build_monster_effects.py.",
+  "blend": "Normal alpha, nearest, no emission light, no additive white flash.",
+  "integration": "Presentation only. Combat decides when/where; art spends no oil/time and applies no status. Respect existing screen-flashes/settings policy.",
+  "effects": [
+    {
+      "id": "gas-burst",
+      "texture": "res://art/effects/monsters-v1/gas-burst.png",
+      "frames": "res://art/effects/monsters-v1/gas-burst.tres",
+      "frame_count": 4,
+      "frame_size": [
+        128,
+        128
+      ],
+      "fps": 8,
+      "animation": "once"
+    },
+    {
+      "id": "gas-haze",
+      "texture": "res://art/effects/monsters-v1/gas-haze.png",
+      "frame_size": [
+        256,
+        64
+      ],
+      "frame_count": 1,
+      "opacity": "Authored faint alpha34/255; controller owns duration/placement."
+    },
+    {
+      "id": "light-drained",
+      "texture": "res://art/effects/monsters-v1/light-drained.png",
+      "frames": "res://art/effects/monsters-v1/light-drained.tres",
+      "frame_count": 6,
+      "frame_size": [
+        40,
+        48
+      ],
+      "fps": 10,
+      "animation": "once"
+    }
+  ]
+}

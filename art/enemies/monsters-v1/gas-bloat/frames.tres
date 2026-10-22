@@ -1,0 +1,14 @@
+[gd_resource type="SpriteFrames" load_steps=7 format=3]
+[ext_resource type="Texture2D" path="res://art/enemies/monsters-v1/gas-bloat/idle.png" id="idle"]
+[ext_resource type="Texture2D" path="res://art/enemies/monsters-v1/gas-bloat/swell.png" id="swell"]
+[ext_resource type="Texture2D" path="res://art/enemies/monsters-v1/gas-bloat/attack.png" id="attack"]
+[ext_resource type="Texture2D" path="res://art/enemies/monsters-v1/gas-bloat/hurt.png" id="hurt"]
+[ext_resource type="Texture2D" path="res://art/enemies/monsters-v1/gas-bloat/burst-1.png" id="burst-1"]
+[ext_resource type="Texture2D" path="res://art/enemies/monsters-v1/gas-bloat/burst-2.png" id="burst-2"]
+
+[resource]
+animations = [{"frames":[{"duration":1.0,"texture":ExtResource("idle")}],"loop":true,"name":&"idle","speed":8.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("swell")}],"loop":true,"name":&"swell","speed":8.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("attack")}],"loop":false,"name":&"attack","speed":8.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("hurt")}],"loop":false,"name":&"hurt","speed":8.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("burst-1")},{"duration":1.0,"texture":ExtResource("burst-2")}],"loop":false,"name":&"burst","speed":8.0}]

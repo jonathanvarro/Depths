@@ -1,0 +1,21 @@
+{
+  "id": "breach-hound-poses",
+  "monster": "breach-hound",
+  "kind": "registered pose sheet",
+  "layout": [
+    2,
+    2
+  ],
+  "poses": [
+    "idle",
+    "attack",
+    "hurt"
+  ],
+  "source": "art/source/monsters-v1/breach-hound-poses-master.png",
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-3df23e7d-001b-4321-8c21-7f56ae6c5ef1.png",
+  "prompt": "Use case: stylized-concept. Production enemy sprite for Depths, a dark stressful first-person pixel dungeon crawler. Silhouette-led restrained pixel art, large crisp clusters, at most three broad shades per material, warm upper-left highlights and dark cool shadows. Flat sparse surfaces, no individual fur, veins smaller than a large readable mark, no pores/grain/noise, no gradients/dithering/antialiasing, no glossy rendering, no ground shadow, background or text. Serious and unsettling, not cute/cartoon. Front-facing full-body transparent square canvas; keep all anatomy/equipment inside with generous 10% margins. Designed to reduce to a native128x128 sprite with max32 shared colours, bottom-centre scene origin (64,120). No scenery or UI. THREE-POSE registered 2x2 square sprite sheet of the EXACT SAME breach hound in reference: same lean hairless slate/taupe dog-like quadruped, long narrow head, huge toothy mouth, four limbs and narrow tail. Preserve head/body/leg scale and tooth band across poses, same creature from front slight three-quarter. Top left IDLE low stalking as reference, four paws planted. Top right ATTACK violent forward lunge toward viewer, mouth opens slightly, front two paws reaching forward, rear legs push off; same head size, not a giant floating mouth. Bottom left HURT recoils sideways on bent limbs, head turns a little away and jaw clenches, tail tucked, still alive. Bottom right EMPTY. One complete compact hound per equal cell, generous transparent gutter, no overlap/cropped limbs/tail, ground-contact line94% cell height (attack may lift front paws). Keep tail tucked near body so two hounds can stand side by side in combat. No blood, effects, shadows, props or background.",
+  "tool": "built-in image_gen",
+  "reference_images": [
+    "art/source/monsters-v1/breach-hound-idle-master.png"
+  ]
+}

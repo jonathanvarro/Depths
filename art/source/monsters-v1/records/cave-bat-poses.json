@@ -1,0 +1,22 @@
+{
+  "id": "cave-bat-poses",
+  "monster": "cave-bat",
+  "kind": "registered pose sheet",
+  "layout": [
+    2,
+    2
+  ],
+  "poses": [
+    "idle",
+    "swoop",
+    "landed",
+    "hurt"
+  ],
+  "source": "art/source/monsters-v1/cave-bat-poses-master.png",
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-f908c3f6-89e4-45d9-a5be-31b6e4bbc183.png",
+  "prompt": "Use case: stylized-concept. Production enemy sprite for Depths, a dark stressful first-person pixel dungeon crawler. Silhouette-led restrained pixel art, large crisp clusters, at most three broad shades per material, warm upper-left highlights and dark cool shadows. Flat sparse surfaces, no individual fur, veins smaller than a large readable mark, no pores/grain/noise, no gradients/dithering/antialiasing, no glossy rendering, no ground shadow, background or text. Serious and unsettling, not cute/cartoon. Front-facing full-body transparent square canvas; keep all anatomy/equipment inside with generous 10% margins. Designed to reduce to a native128x128 sprite with max32 shared colours, bottom-centre scene origin (64,120). No scenery or UI. Make a registered FOUR-POSE sprite sheet of the SAME cave bat shown in the reference. Reference is exact character identity: same pale ears, pointed muzzle, tawny/dark leather wings, tiny hooked feet. Sheet is exactly a 2x2 equal square-cell grid with generous transparent gutters, no lines, labels or background. One complete bat per cell, no overlap. Every cell represents the same fixed square camera/canvas and same body scale: the head and torso stay the SAME SIZE, never enlarge a narrow pose to fill the cell. Top left: IDLE upside-down hanging, wings wrapped, feet up and pale ears/muzzle down, as reference. Top right: SWOOP/ATTACK, bat upright and diving toward viewer, wings spread wide and raised, head thrust forward; legs tucked. Bottom left: LANDED, crouched low with wings spread on floor and head raised, vulnerable. Bottom right: HURT, recoiling diagonally with one wing bent inward, same complete anatomy. Keep wing tips inside each cell, leave overhead room and a common bottom contact line at 94% cell height for landed/hurt. Airborne poses can sit higher. Use very broad shapes as reference; exactly two wings, two ears, two feet per bat. No bat carried weapons, no ceiling/ground, no glows.",
+  "tool": "built-in image_gen",
+  "reference_images": [
+    "art/source/monsters-v1/cave-bat-idle-master.png"
+  ]
+}

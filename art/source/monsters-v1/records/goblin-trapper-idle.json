@@ -1,0 +1,12 @@
+{
+  "id": "goblin-trapper-idle",
+  "monster": "goblin-trapper",
+  "kind": "identity master",
+  "source": "art/source/monsters-v1/goblin-trapper-idle-master.png",
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-e4e0ade4-43d7-4d2d-b61a-2f334287915f.png",
+  "prompt": "Use case: stylized-concept. Production enemy sprite for Depths, a dark stressful first-person pixel dungeon crawler. Silhouette-led restrained pixel art, large crisp clusters, at most three broad shades per material, warm upper-left highlights and dark cool shadows. Flat sparse surfaces, no individual fur, veins smaller than a large readable mark, no pores/grain/noise, no gradients/dithering/antialiasing, no glossy rendering, no ground shadow, background or text. Serious and unsettling, not cute/cartoon. Front-facing full-body transparent square canvas; keep all anatomy/equipment inside with generous 10% margins. Designed to reduce to a native128x128 sprite with max32 shared colours, bottom-centre scene origin (64,120). No scenery or UI. Lean goblin trapper matching the reference race: ochre-olive skin, pointed ears, angular narrow toothy face, rough dark brown cloth. Two obvious thick coils of rope over one shoulder and a small belt pouch with three large bent hooks visible, one small throwing knife in its right hand, no buckler. Crouched watchful idle, front-facing full body planted feet. Identity from rope coil, hook pouch and low stalking silhouette. Sparse kit, no tiny tools or extra weapons. Reference supplies exact goblin race, palette and pixel simplicity; change its equipment as described. Rope and hooks must read as a few large simple shapes.",
+  "tool": "built-in image_gen",
+  "reference_images": [
+    "art/enemies/cave-simple-v1/goblin/idle.png"
+  ]
+}

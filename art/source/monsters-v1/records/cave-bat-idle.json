@@ -1,0 +1,12 @@
+{
+  "id": "cave-bat-idle",
+  "monster": "cave-bat",
+  "kind": "identity master",
+  "source": "art/source/monsters-v1/cave-bat-idle-master.png",
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-846ac97f-4633-4dc0-928b-e40c0102ffaa.png",
+  "prompt": "Use case: stylized-concept. Production enemy sprite for Depths, a dark stressful first-person pixel dungeon crawler. Silhouette-led restrained pixel art, large crisp clusters, at most three broad shades per material, warm upper-left highlights and dark cool shadows. Flat sparse surfaces, no individual fur, veins smaller than a large readable mark, no pores/grain/noise, no gradients/dithering/antialiasing, no glossy rendering, no ground shadow, background or text. Serious and unsettling, not cute/cartoon. Front-facing full-body transparent square canvas; keep all anatomy/equipment inside with generous 10% margins. Designed to reduce to a native128x128 sprite with max32 shared colours, bottom-centre scene origin (64,120). No scenery or UI. Small leathery cave bat hanging upside down, pale large ears flanking its small angular head at the bottom, dark tawny leather wings wrapped closely around its body above the head. Thin hooked feet at the top are hanging from an unseen ceiling: no branch or ceiling drawn. Folded wings form one broad pointed cocoon; two pale ears and a tiny toothy muzzle are the identity anchors, not big cute eyes. One idle hanging pose, frontal/very slight three-quarter, balanced around centre. The attached goblin is STYLE/PIXEL SIMPLICITY reference only, not anatomy or equipment.",
+  "tool": "built-in image_gen",
+  "reference_images": [
+    "art/enemies/cave-simple-v1/goblin/idle.png"
+  ]
+}

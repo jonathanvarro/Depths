@@ -1,0 +1,1950 @@
+{
+  "issue": 141,
+  "checks": 484,
+  "failures": [],
+  "masters": 23,
+  "families": 11,
+  "drawings": 46,
+  "runtime_pngs": 61,
+  "rgba_canvas_bytes": 3847168,
+  "rgba_canvas_mib": 3.669,
+  "limits": "Common transforms and shared palettes are checked; anatomical continuity also requires visual inspection. Canvas memory excludes engine overhead, not physical iPhone profiling.",
+  "results": [
+    {
+      "check": "All 23 built-in originals retained, including horn correction",
+      "ok": true
+    },
+    {
+      "check": "Immutable master hash: breach-hound-idle",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact original: breach-hound-idle",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: breach-hound-idle",
+      "ok": true
+    },
+    {
+      "check": "Retained references: breach-hound-idle",
+      "ok": true
+    },
+    {
+      "check": "Immutable master hash: breach-hound-poses",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact original: breach-hound-poses",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: breach-hound-poses",
+      "ok": true
+    },
+    {
+      "check": "Retained references: breach-hound-poses",
+      "ok": true
+    },
+    {
+      "check": "Immutable master hash: broodmother-idle",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact original: broodmother-idle",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: broodmother-idle",
+      "ok": true
+    },
+    {
+      "check": "Retained references: broodmother-idle",
+      "ok": true
+    },
+    {
+      "check": "Immutable master hash: broodmother-poses",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact original: broodmother-poses",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: broodmother-poses",
+      "ok": true
+    },
+    {
+      "check": "Retained references: broodmother-poses",
+      "ok": true
+    },
+    {
+      "check": "Immutable master hash: cave-bat-idle",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact original: cave-bat-idle",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: cave-bat-idle",
+      "ok": true
+    },
+    {
+      "check": "Retained references: cave-bat-idle",
+      "ok": true
+    },
+    {
+      "check": "Immutable master hash: cave-bat-poses",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact original: cave-bat-poses",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: cave-bat-poses",
+      "ok": true
+    },
+    {
+      "check": "Retained references: cave-bat-poses",
+      "ok": true
+    },
+    {
+      "check": "Immutable master hash: gas-bloat-idle",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact original: gas-bloat-idle",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: gas-bloat-idle",
+      "ok": true
+    },
+    {
+      "check": "Retained references: gas-bloat-idle",
+      "ok": true
+    },
+    {
+      "check": "Immutable master hash: gas-bloat-poses",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact original: gas-bloat-poses",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: gas-bloat-poses",
+      "ok": true
+    },
+    {
+      "check": "Retained references: gas-bloat-poses",
+      "ok": true
+    },
+    {
+      "check": "Immutable master hash: gate-captain-idle",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact original: gate-captain-idle",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: gate-captain-idle",
+      "ok": true
+    },
+    {
+      "check": "Retained references: gate-captain-idle",
+      "ok": true
+    },
+    {
+      "check": "Immutable master hash: gate-captain-poses",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact original: gate-captain-poses",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: gate-captain-poses",
+      "ok": true
+    },
+    {
+      "check": "Retained references: gate-captain-poses",
+      "ok": true
+    },
+    {
+      "check": "Immutable master hash: gate-captain-rally-fix",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact original: gate-captain-rally-fix",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: gate-captain-rally-fix",
+      "ok": true
+    },
+    {
+      "check": "Retained references: gate-captain-rally-fix",
+      "ok": true
+    },
+    {
+      "check": "Immutable master hash: goblin-brute-idle",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact original: goblin-brute-idle",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: goblin-brute-idle",
+      "ok": true
+    },
+    {
+      "check": "Retained references: goblin-brute-idle",
+      "ok": true
+    },
+    {
+      "check": "Immutable master hash: goblin-brute-poses",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact original: goblin-brute-poses",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: goblin-brute-poses",
+      "ok": true
+    },
+    {
+      "check": "Retained references: goblin-brute-poses",
+      "ok": true
+    },
+    {
+      "check": "Immutable master hash: goblin-trapper-idle",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact original: goblin-trapper-idle",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: goblin-trapper-idle",
+      "ok": true
+    },
+    {
+      "check": "Retained references: goblin-trapper-idle",
+      "ok": true
+    },
+    {
+      "check": "Immutable master hash: goblin-trapper-poses",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact original: goblin-trapper-poses",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: goblin-trapper-poses",
+      "ok": true
+    },
+    {
+      "check": "Retained references: goblin-trapper-poses",
+      "ok": true
+    },
+    {
+      "check": "Immutable master hash: hollow-miner-idle",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact original: hollow-miner-idle",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: hollow-miner-idle",
+      "ok": true
+    },
+    {
+      "check": "Retained references: hollow-miner-idle",
+      "ok": true
+    },
+    {
+      "check": "Immutable master hash: hollow-miner-poses",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact original: hollow-miner-poses",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: hollow-miner-poses",
+      "ok": true
+    },
+    {
+      "check": "Retained references: hollow-miner-poses",
+      "ok": true
+    },
+    {
+      "check": "Immutable master hash: lamp-eater-idle",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact original: lamp-eater-idle",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: lamp-eater-idle",
+      "ok": true
+    },
+    {
+      "check": "Retained references: lamp-eater-idle",
+      "ok": true
+    },
+    {
+      "check": "Immutable master hash: lamp-eater-poses",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact original: lamp-eater-poses",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: lamp-eater-poses",
+      "ok": true
+    },
+    {
+      "check": "Retained references: lamp-eater-poses",
+      "ok": true
+    },
+    {
+      "check": "Immutable master hash: rock-beetle-idle",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact original: rock-beetle-idle",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: rock-beetle-idle",
+      "ok": true
+    },
+    {
+      "check": "Retained references: rock-beetle-idle",
+      "ok": true
+    },
+    {
+      "check": "Immutable master hash: rock-beetle-poses",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact original: rock-beetle-poses",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: rock-beetle-poses",
+      "ok": true
+    },
+    {
+      "check": "Retained references: rock-beetle-poses",
+      "ok": true
+    },
+    {
+      "check": "Immutable master hash: venom-spider-idle",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact original: venom-spider-idle",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: venom-spider-idle",
+      "ok": true
+    },
+    {
+      "check": "Retained references: venom-spider-idle",
+      "ok": true
+    },
+    {
+      "check": "Immutable master hash: venom-spider-poses",
+      "ok": true
+    },
+    {
+      "check": "Byte-exact original: venom-spider-poses",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in prompt: venom-spider-poses",
+      "ok": true
+    },
+    {
+      "check": "Retained references: venom-spider-poses",
+      "ok": true
+    },
+    {
+      "check": "Eleven complete monster families",
+      "ok": true
+    },
+    {
+      "check": "Deliberate native canvas: cave-bat",
+      "ok": true
+    },
+    {
+      "check": "Shared bottom-centre origin: cave-bat",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: cave-bat/idle",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: cave-bat/idle",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: cave-bat/idle",
+      "ok": true
+    },
+    {
+      "check": "Export hash: cave-bat/idle",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: cave-bat/swoop",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: cave-bat/swoop",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: cave-bat/swoop",
+      "ok": true
+    },
+    {
+      "check": "Export hash: cave-bat/swoop",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: cave-bat/landed",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: cave-bat/landed",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: cave-bat/landed",
+      "ok": true
+    },
+    {
+      "check": "Export hash: cave-bat/landed",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: cave-bat/hurt",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: cave-bat/hurt",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: cave-bat/hurt",
+      "ok": true
+    },
+    {
+      "check": "Export hash: cave-bat/hurt",
+      "ok": true
+    },
+    {
+      "check": "One raw-pixel scale for every pose: cave-bat",
+      "ok": true
+    },
+    {
+      "check": "One <=32-colour family palette: cave-bat",
+      "ok": true
+    },
+    {
+      "check": "Required combat animations: cave-bat",
+      "ok": true
+    },
+    {
+      "check": "Measured idle world height: cave-bat",
+      "ok": true
+    },
+    {
+      "check": "Deliberate native canvas: goblin-brute",
+      "ok": true
+    },
+    {
+      "check": "Shared bottom-centre origin: goblin-brute",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: goblin-brute/idle",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: goblin-brute/idle",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: goblin-brute/idle",
+      "ok": true
+    },
+    {
+      "check": "Export hash: goblin-brute/idle",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: goblin-brute/wind-up",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: goblin-brute/wind-up",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: goblin-brute/wind-up",
+      "ok": true
+    },
+    {
+      "check": "Export hash: goblin-brute/wind-up",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: goblin-brute/attack",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: goblin-brute/attack",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: goblin-brute/attack",
+      "ok": true
+    },
+    {
+      "check": "Export hash: goblin-brute/attack",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: goblin-brute/recover",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: goblin-brute/recover",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: goblin-brute/recover",
+      "ok": true
+    },
+    {
+      "check": "Export hash: goblin-brute/recover",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: goblin-brute/hurt",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: goblin-brute/hurt",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: goblin-brute/hurt",
+      "ok": true
+    },
+    {
+      "check": "Export hash: goblin-brute/hurt",
+      "ok": true
+    },
+    {
+      "check": "One raw-pixel scale for every pose: goblin-brute",
+      "ok": true
+    },
+    {
+      "check": "One <=32-colour family palette: goblin-brute",
+      "ok": true
+    },
+    {
+      "check": "Required combat animations: goblin-brute",
+      "ok": true
+    },
+    {
+      "check": "Measured idle world height: goblin-brute",
+      "ok": true
+    },
+    {
+      "check": "Deliberate native canvas: gas-bloat",
+      "ok": true
+    },
+    {
+      "check": "Shared bottom-centre origin: gas-bloat",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: gas-bloat/idle",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: gas-bloat/idle",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: gas-bloat/idle",
+      "ok": true
+    },
+    {
+      "check": "Export hash: gas-bloat/idle",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: gas-bloat/swell",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: gas-bloat/swell",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: gas-bloat/swell",
+      "ok": true
+    },
+    {
+      "check": "Export hash: gas-bloat/swell",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: gas-bloat/attack",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: gas-bloat/attack",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: gas-bloat/attack",
+      "ok": true
+    },
+    {
+      "check": "Export hash: gas-bloat/attack",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: gas-bloat/hurt",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: gas-bloat/hurt",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: gas-bloat/hurt",
+      "ok": true
+    },
+    {
+      "check": "Export hash: gas-bloat/hurt",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: gas-bloat/burst-1",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: gas-bloat/burst-1",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: gas-bloat/burst-1",
+      "ok": true
+    },
+    {
+      "check": "Export hash: gas-bloat/burst-1",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: gas-bloat/burst-2",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: gas-bloat/burst-2",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: gas-bloat/burst-2",
+      "ok": true
+    },
+    {
+      "check": "Export hash: gas-bloat/burst-2",
+      "ok": true
+    },
+    {
+      "check": "One raw-pixel scale for every pose: gas-bloat",
+      "ok": true
+    },
+    {
+      "check": "One <=32-colour family palette: gas-bloat",
+      "ok": true
+    },
+    {
+      "check": "Required combat animations: gas-bloat",
+      "ok": true
+    },
+    {
+      "check": "Measured idle world height: gas-bloat",
+      "ok": true
+    },
+    {
+      "check": "Deliberate native canvas: hollow-miner",
+      "ok": true
+    },
+    {
+      "check": "Shared bottom-centre origin: hollow-miner",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: hollow-miner/idle",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: hollow-miner/idle",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: hollow-miner/idle",
+      "ok": true
+    },
+    {
+      "check": "Export hash: hollow-miner/idle",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: hollow-miner/grab",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: hollow-miner/grab",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: hollow-miner/grab",
+      "ok": true
+    },
+    {
+      "check": "Export hash: hollow-miner/grab",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: hollow-miner/attack",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: hollow-miner/attack",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: hollow-miner/attack",
+      "ok": true
+    },
+    {
+      "check": "Export hash: hollow-miner/attack",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: hollow-miner/hurt",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: hollow-miner/hurt",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: hollow-miner/hurt",
+      "ok": true
+    },
+    {
+      "check": "Export hash: hollow-miner/hurt",
+      "ok": true
+    },
+    {
+      "check": "One raw-pixel scale for every pose: hollow-miner",
+      "ok": true
+    },
+    {
+      "check": "One <=32-colour family palette: hollow-miner",
+      "ok": true
+    },
+    {
+      "check": "Required combat animations: hollow-miner",
+      "ok": true
+    },
+    {
+      "check": "Measured idle world height: hollow-miner",
+      "ok": true
+    },
+    {
+      "check": "Deliberate native canvas: rock-beetle",
+      "ok": true
+    },
+    {
+      "check": "Shared bottom-centre origin: rock-beetle",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: rock-beetle/idle",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: rock-beetle/idle",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: rock-beetle/idle",
+      "ok": true
+    },
+    {
+      "check": "Export hash: rock-beetle/idle",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: rock-beetle/curled",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: rock-beetle/curled",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: rock-beetle/curled",
+      "ok": true
+    },
+    {
+      "check": "Export hash: rock-beetle/curled",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: rock-beetle/attack",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: rock-beetle/attack",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: rock-beetle/attack",
+      "ok": true
+    },
+    {
+      "check": "Export hash: rock-beetle/attack",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: rock-beetle/hurt",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: rock-beetle/hurt",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: rock-beetle/hurt",
+      "ok": true
+    },
+    {
+      "check": "Export hash: rock-beetle/hurt",
+      "ok": true
+    },
+    {
+      "check": "One raw-pixel scale for every pose: rock-beetle",
+      "ok": true
+    },
+    {
+      "check": "One <=32-colour family palette: rock-beetle",
+      "ok": true
+    },
+    {
+      "check": "Required combat animations: rock-beetle",
+      "ok": true
+    },
+    {
+      "check": "Measured idle world height: rock-beetle",
+      "ok": true
+    },
+    {
+      "check": "Deliberate native canvas: venom-spider",
+      "ok": true
+    },
+    {
+      "check": "Shared bottom-centre origin: venom-spider",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: venom-spider/idle",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: venom-spider/idle",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: venom-spider/idle",
+      "ok": true
+    },
+    {
+      "check": "Export hash: venom-spider/idle",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: venom-spider/attack",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: venom-spider/attack",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: venom-spider/attack",
+      "ok": true
+    },
+    {
+      "check": "Export hash: venom-spider/attack",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: venom-spider/hurt",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: venom-spider/hurt",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: venom-spider/hurt",
+      "ok": true
+    },
+    {
+      "check": "Export hash: venom-spider/hurt",
+      "ok": true
+    },
+    {
+      "check": "One raw-pixel scale for every pose: venom-spider",
+      "ok": true
+    },
+    {
+      "check": "One <=32-colour family palette: venom-spider",
+      "ok": true
+    },
+    {
+      "check": "Required combat animations: venom-spider",
+      "ok": true
+    },
+    {
+      "check": "Measured idle world height: venom-spider",
+      "ok": true
+    },
+    {
+      "check": "Deliberate native canvas: broodmother",
+      "ok": true
+    },
+    {
+      "check": "Shared bottom-centre origin: broodmother",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: broodmother/idle",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: broodmother/idle",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: broodmother/idle",
+      "ok": true
+    },
+    {
+      "check": "Export hash: broodmother/idle",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: broodmother/call",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: broodmother/call",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: broodmother/call",
+      "ok": true
+    },
+    {
+      "check": "Export hash: broodmother/call",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: broodmother/attack",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: broodmother/attack",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: broodmother/attack",
+      "ok": true
+    },
+    {
+      "check": "Export hash: broodmother/attack",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: broodmother/hurt",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: broodmother/hurt",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: broodmother/hurt",
+      "ok": true
+    },
+    {
+      "check": "Export hash: broodmother/hurt",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: broodmother/enraged",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: broodmother/enraged",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: broodmother/enraged",
+      "ok": true
+    },
+    {
+      "check": "Export hash: broodmother/enraged",
+      "ok": true
+    },
+    {
+      "check": "One raw-pixel scale for every pose: broodmother",
+      "ok": true
+    },
+    {
+      "check": "One <=32-colour family palette: broodmother",
+      "ok": true
+    },
+    {
+      "check": "Required combat animations: broodmother",
+      "ok": true
+    },
+    {
+      "check": "Measured idle world height: broodmother",
+      "ok": true
+    },
+    {
+      "check": "Deliberate native canvas: goblin-trapper",
+      "ok": true
+    },
+    {
+      "check": "Shared bottom-centre origin: goblin-trapper",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: goblin-trapper/idle",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: goblin-trapper/idle",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: goblin-trapper/idle",
+      "ok": true
+    },
+    {
+      "check": "Export hash: goblin-trapper/idle",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: goblin-trapper/set-snare",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: goblin-trapper/set-snare",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: goblin-trapper/set-snare",
+      "ok": true
+    },
+    {
+      "check": "Export hash: goblin-trapper/set-snare",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: goblin-trapper/attack",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: goblin-trapper/attack",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: goblin-trapper/attack",
+      "ok": true
+    },
+    {
+      "check": "Export hash: goblin-trapper/attack",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: goblin-trapper/hurt",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: goblin-trapper/hurt",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: goblin-trapper/hurt",
+      "ok": true
+    },
+    {
+      "check": "Export hash: goblin-trapper/hurt",
+      "ok": true
+    },
+    {
+      "check": "One raw-pixel scale for every pose: goblin-trapper",
+      "ok": true
+    },
+    {
+      "check": "One <=32-colour family palette: goblin-trapper",
+      "ok": true
+    },
+    {
+      "check": "Required combat animations: goblin-trapper",
+      "ok": true
+    },
+    {
+      "check": "Measured idle world height: goblin-trapper",
+      "ok": true
+    },
+    {
+      "check": "Deliberate native canvas: gate-captain",
+      "ok": true
+    },
+    {
+      "check": "Shared bottom-centre origin: gate-captain",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: gate-captain/idle",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: gate-captain/idle",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: gate-captain/idle",
+      "ok": true
+    },
+    {
+      "check": "Export hash: gate-captain/idle",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: gate-captain/rally",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: gate-captain/rally",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: gate-captain/rally",
+      "ok": true
+    },
+    {
+      "check": "Export hash: gate-captain/rally",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: gate-captain/wind-up",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: gate-captain/wind-up",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: gate-captain/wind-up",
+      "ok": true
+    },
+    {
+      "check": "Export hash: gate-captain/wind-up",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: gate-captain/attack",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: gate-captain/attack",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: gate-captain/attack",
+      "ok": true
+    },
+    {
+      "check": "Export hash: gate-captain/attack",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: gate-captain/hurt",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: gate-captain/hurt",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: gate-captain/hurt",
+      "ok": true
+    },
+    {
+      "check": "Export hash: gate-captain/hurt",
+      "ok": true
+    },
+    {
+      "check": "One raw-pixel scale for every pose: gate-captain",
+      "ok": true
+    },
+    {
+      "check": "One <=32-colour family palette: gate-captain",
+      "ok": true
+    },
+    {
+      "check": "Required combat animations: gate-captain",
+      "ok": true
+    },
+    {
+      "check": "Measured idle world height: gate-captain",
+      "ok": true
+    },
+    {
+      "check": "Corrected rally only; other poses retain originals",
+      "ok": true
+    },
+    {
+      "check": "Deliberate native canvas: lamp-eater",
+      "ok": true
+    },
+    {
+      "check": "Shared bottom-centre origin: lamp-eater",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: lamp-eater/idle",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: lamp-eater/idle",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: lamp-eater/idle",
+      "ok": true
+    },
+    {
+      "check": "Export hash: lamp-eater/idle",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: lamp-eater/drain",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: lamp-eater/drain",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: lamp-eater/drain",
+      "ok": true
+    },
+    {
+      "check": "Export hash: lamp-eater/drain",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: lamp-eater/hurt",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: lamp-eater/hurt",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: lamp-eater/hurt",
+      "ok": true
+    },
+    {
+      "check": "Export hash: lamp-eater/hurt",
+      "ok": true
+    },
+    {
+      "check": "One raw-pixel scale for every pose: lamp-eater",
+      "ok": true
+    },
+    {
+      "check": "One <=32-colour family palette: lamp-eater",
+      "ok": true
+    },
+    {
+      "check": "Required combat animations: lamp-eater",
+      "ok": true
+    },
+    {
+      "check": "Measured idle world height: lamp-eater",
+      "ok": true
+    },
+    {
+      "check": "Deliberate native canvas: breach-hound",
+      "ok": true
+    },
+    {
+      "check": "Shared bottom-centre origin: breach-hound",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: breach-hound/idle",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: breach-hound/idle",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: breach-hound/idle",
+      "ok": true
+    },
+    {
+      "check": "Export hash: breach-hound/idle",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: breach-hound/attack",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: breach-hound/attack",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: breach-hound/attack",
+      "ok": true
+    },
+    {
+      "check": "Export hash: breach-hound/attack",
+      "ok": true
+    },
+    {
+      "check": "Complete nonempty native drawing: breach-hound/hurt",
+      "ok": true
+    },
+    {
+      "check": "Binary clean transparency: breach-hound/hurt",
+      "ok": true
+    },
+    {
+      "check": "Unclipped content with padding: breach-hound/hurt",
+      "ok": true
+    },
+    {
+      "check": "Export hash: breach-hound/hurt",
+      "ok": true
+    },
+    {
+      "check": "One raw-pixel scale for every pose: breach-hound",
+      "ok": true
+    },
+    {
+      "check": "One <=32-colour family palette: breach-hound",
+      "ok": true
+    },
+    {
+      "check": "Required combat animations: breach-hound",
+      "ok": true
+    },
+    {
+      "check": "Measured idle world height: breach-hound",
+      "ok": true
+    },
+    {
+      "check": "All 46 registered pose drawings",
+      "ok": true
+    },
+    {
+      "check": "Two-frame gas-bloat rupture",
+      "ok": true
+    },
+    {
+      "check": "Native readable glyph canvas: intent/swoop",
+      "ok": true
+    },
+    {
+      "check": "Original SVG source: swoop",
+      "ok": true
+    },
+    {
+      "check": "Native readable glyph canvas: intent/curl",
+      "ok": true
+    },
+    {
+      "check": "Original SVG source: curl",
+      "ok": true
+    },
+    {
+      "check": "Native readable glyph canvas: intent/swell",
+      "ok": true
+    },
+    {
+      "check": "Original SVG source: swell",
+      "ok": true
+    },
+    {
+      "check": "Native readable glyph canvas: intent/grab",
+      "ok": true
+    },
+    {
+      "check": "Original SVG source: grab",
+      "ok": true
+    },
+    {
+      "check": "Native readable glyph canvas: intent/drain-light",
+      "ok": true
+    },
+    {
+      "check": "Original SVG source: drain-light",
+      "ok": true
+    },
+    {
+      "check": "Native readable glyph canvas: intent/set-snare",
+      "ok": true
+    },
+    {
+      "check": "Original SVG source: set-snare",
+      "ok": true
+    },
+    {
+      "check": "Native readable glyph canvas: intent/rally",
+      "ok": true
+    },
+    {
+      "check": "Original SVG source: rally",
+      "ok": true
+    },
+    {
+      "check": "Native readable glyph canvas: intent/call-brood",
+      "ok": true
+    },
+    {
+      "check": "Original SVG source: call-brood",
+      "ok": true
+    },
+    {
+      "check": "Native readable glyph canvas: intent/wind-up",
+      "ok": true
+    },
+    {
+      "check": "Native readable glyph canvas: status/grabbed",
+      "ok": true
+    },
+    {
+      "check": "Original SVG source: grabbed",
+      "ok": true
+    },
+    {
+      "check": "Native readable glyph canvas: status/snared",
+      "ok": true
+    },
+    {
+      "check": "Original SVG source: snared",
+      "ok": true
+    },
+    {
+      "check": "Native readable glyph canvas: status/gassed",
+      "ok": true
+    },
+    {
+      "check": "Original SVG source: gassed",
+      "ok": true
+    },
+    {
+      "check": "Native readable glyph canvas: fx/light-drained",
+      "ok": true
+    },
+    {
+      "check": "Original SVG source: light-drained",
+      "ok": true
+    },
+    {
+      "check": "Heavy blow reused instead of duplicate wind-up symbol",
+      "ok": true
+    },
+    {
+      "check": "Compact effect atlas: gas-burst",
+      "ok": true
+    },
+    {
+      "check": "One-shot clears on final frame: gas-burst",
+      "ok": true
+    },
+    {
+      "check": "Gas burst has no opaque white flash",
+      "ok": true
+    },
+    {
+      "check": "Compact effect atlas: gas-haze",
+      "ok": true
+    },
+    {
+      "check": "Compact effect atlas: light-drained",
+      "ok": true
+    },
+    {
+      "check": "One-shot clears on final frame: light-drained",
+      "ok": true
+    },
+    {
+      "check": "All nonvisual resource values retained: cave-bat",
+      "ok": true
+    },
+    {
+      "check": "Live scene without placeholder tint/scale: cave-bat",
+      "ok": true
+    },
+    {
+      "check": "All nonvisual resource values retained: goblin-brute",
+      "ok": true
+    },
+    {
+      "check": "Live scene without placeholder tint/scale: goblin-brute",
+      "ok": true
+    },
+    {
+      "check": "All nonvisual resource values retained: gas-bloat",
+      "ok": true
+    },
+    {
+      "check": "Live scene without placeholder tint/scale: gas-bloat",
+      "ok": true
+    },
+    {
+      "check": "All nonvisual resource values retained: hollow-miner",
+      "ok": true
+    },
+    {
+      "check": "Live scene without placeholder tint/scale: hollow-miner",
+      "ok": true
+    },
+    {
+      "check": "Resource builder retains every gameplay value",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/campaign-v1/actor.gd",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-simple-v1/goblin-combat-desktop.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-simple-v1/goblin-combat-phone.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-simple-v1/native-preview.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-simple-v1/preview.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-simple-v1/rat-combat-desktop.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-simple-v1/rat-combat-phone.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-simple-v1/spider-combat-desktop.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-simple-v1/spider-combat-phone.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-v1/preview.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/style-study-v1/comparison.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/style-study-v1/goblin-detailed-128.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/style-study-v1/goblin-simple-128.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/campaign-v1/archer/attack.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/campaign-v1/archer/draw.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/campaign-v1/archer/frames.tres",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/campaign-v1/archer/hurt.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/campaign-v1/archer/idle.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/campaign-v1/archer/release.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/campaign-v1/archer/scene.tscn",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/campaign-v1/drummer/attack.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/campaign-v1/drummer/frames.tres",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/campaign-v1/drummer/hurt.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/campaign-v1/drummer/idle.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/campaign-v1/drummer/scene.tscn",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/campaign-v1/great-rat/attack.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/campaign-v1/great-rat/frames.tres",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/campaign-v1/great-rat/hurt.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/campaign-v1/great-rat/idle.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/campaign-v1/great-rat/scene.tscn",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/campaign-v1/guard/attack.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/campaign-v1/guard/brace.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/campaign-v1/guard/frames.tres",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/campaign-v1/guard/hurt.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/campaign-v1/guard/idle.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/campaign-v1/guard/scene.tscn",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/campaign-v1/queen/attack.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/campaign-v1/queen/enraged-attack.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/campaign-v1/queen/enraged-frames.tres",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/campaign-v1/queen/enraged-hurt.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/campaign-v1/queen/enraged-idle.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/campaign-v1/queen/frames.tres",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/campaign-v1/queen/hurt.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/campaign-v1/queen/idle.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/campaign-v1/queen/scene.tscn",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/campaign-v1/webspinner/attack.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/campaign-v1/webspinner/frames.tres",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/campaign-v1/webspinner/hurt.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/campaign-v1/webspinner/idle.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/campaign-v1/webspinner/scene.tscn",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-simple-v1/goblin/attack.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-simple-v1/goblin/frames.tres",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-simple-v1/goblin/hurt.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-simple-v1/goblin/idle.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-simple-v1/goblin/scene.tscn",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-simple-v1/rat/attack.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-simple-v1/rat/frames.tres",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-simple-v1/rat/hurt.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-simple-v1/rat/idle.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-simple-v1/rat/scene.tscn",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-simple-v1/spider/attack.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-simple-v1/spider/frames.tres",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-simple-v1/spider/hurt.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-simple-v1/spider/idle.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-simple-v1/spider/scene.tscn",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-v1/goblin/attack.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-v1/goblin/frames.tres",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-v1/goblin/hurt.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-v1/goblin/idle.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-v1/goblin/scene.tscn",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-v1/rat/attack.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-v1/rat/frames.tres",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-v1/rat/hurt.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-v1/rat/idle.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-v1/rat/scene.tscn",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-v1/spider/attack.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-v1/spider/frames.tres",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-v1/spider/hurt.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-v1/spider/idle.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/cave-v1/spider/scene.tscn",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/dark-elves-v1/spearman/attack.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/dark-elves-v1/spearman/frames.tres",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/dark-elves-v1/spearman/hurt.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/dark-elves-v1/spearman/idle.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/dark-elves-v1/spearman/scene.tscn",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/tutorial-v1/small-spider/attack.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/tutorial-v1/small-spider/frames.tres",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/tutorial-v1/small-spider/hurt.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/tutorial-v1/small-spider/idle.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/tutorial-v1/small-spider/scene.tscn",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/tutorial-v1/starved-rat/attack.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/tutorial-v1/starved-rat/frames.tres",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/tutorial-v1/starved-rat/hurt.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/tutorial-v1/starved-rat/idle.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/enemies/tutorial-v1/starved-rat/scene.tscn",
+      "ok": true
+    },
+    {
+      "check": "Preserved earlier art: res://art/ui/backlog96-v1/intent/heavy.png",
+      "ok": true
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="SpriteFrames" path="res://art/enemies/monsters-v1/goblin-brute/frames.tres" id="frames"]
+[ext_resource type="Script" path="res://art/enemies/monsters-v1/pose_bounds.gd" id="mount"]
+
+[node name="goblin-brute" type="Node3D"]
+script = ExtResource("mount")
+pose_tops = {"idle": [39], "wind-up": [28], "attack": [42], "recover": [41], "hurt": [41]}
+metadata/visual_height = 1.679268292682927
+metadata/pivot = Vector2(64, 120)
+metadata/hover_metres = 0.0
+
+[node name="Sprite" type="AnimatedSprite3D" parent="."]
+position = Vector3(0, 1.1609756097560977, 0)
+pixel_size = 0.020731707317073172
+billboard = 1
+shaded = true
+texture_filter = 0
+alpha_cut = 1
+alpha_scissor_threshold = 0.5
+cast_shadow = 0
+sprite_frames = ExtResource("frames")
+animation = &"idle"

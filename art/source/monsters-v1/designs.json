@@ -1,0 +1,135 @@
+[
+  {
+    "id": "cave-bat",
+    "design": "Small leathery cave bat hanging upside down, pale large ears flanking its small angular head at the bottom, dark tawny leather wings wrapped closely around its body above the head. Thin hooked feet at the top are hanging from an unseen ceiling: no branch or ceiling drawn. Folded wings form one broad pointed cocoon; two pale ears and a tiny toothy muzzle are the identity anchors, not big cute eyes. One idle hanging pose, frontal/very slight three-quarter, balanced around centre.",
+    "poses": [
+      "idle",
+      "swoop",
+      "landed",
+      "hurt"
+    ],
+    "height": 0.42,
+    "reference": "art/enemies/cave-simple-v1/goblin/idle.png"
+  },
+  {
+    "id": "goblin-brute",
+    "design": "A goblin brute, one head taller and twice as broad as a common lean goblin. Same long pointed ears, ochre-olive skin, angular toothy goblin face, rough brown leather/cloth kit and rusty iron. Huge stooped shoulders, short neck, squat powerful legs. Crude iron rectangular maul with a simple wooden haft, both hands loosely gripping it low at one side; no buckler or knife, no helmet/crown. One idle pose, full body front-facing and planted feet. Menace from weight and posture, simple shapes.",
+    "poses": [
+      "idle",
+      "wind-up",
+      "attack",
+      "recover",
+      "hurt"
+    ],
+    "height": 1.7,
+    "reference": "art/enemies/cave-simple-v1/goblin/idle.png"
+  },
+  {
+    "id": "gas-bloat",
+    "design": "Gas-bloat from the breach: a drifting taut irregular pear-shaped sac of trapped gas, sickly muted yellow-green, a few broad dark green veins and three/four thin trailing torn tendrils. No feet, hands, wings or recognisable human face. A small dark puckered vent on the lower front, no cute eyes. Broad semi-opaque organic skin masses, opaque sprite body, not a photoreal translucent balloon. Idle floating with tendrils hanging, generous transparent gap below to imply hover. Tragic diseased cave life, restrained non-gory.",
+    "poses": [
+      "idle",
+      "swell",
+      "attack",
+      "hurt",
+      "burst"
+    ],
+    "height": 0.82,
+    "reference": null
+  },
+  {
+    "id": "hollow-miner",
+    "design": "The town's gassed shift, risen: a gaunt adult human miner, grey ashen skin, sunken shadowed eyes, slack exhausted posture. Brown leather miner's cap with a small dead unlit lamp, torn ochre-brown work tunic, suspenders, worn trousers and heavy boots. A rusty iron pick with a short wooden haft held low in one hand. No exposed organs, skeleton, flames, green aura, jewelery or armour. Tragic and unsettling more than gory. One slack swaying idle stance, face toward viewer, full body planted feet. Identity anchors are dead cap lamp, hollow face and pick.",
+    "poses": [
+      "idle",
+      "grab",
+      "attack",
+      "hurt"
+    ],
+    "height": 1.6,
+    "reference": null
+  },
+  {
+    "id": "rock-beetle",
+    "design": "Heavy mine-rock beetle, front-facing slightly elevated view, wide low body with two broad interlocking charcoal/taupe shell plates like rough shale, six clearly countable short legs, two small mandibles and short antennae. Its stone-coloured armour is the identity, no glowing gems/runes, horns or excessive cracks. One idle planted pose. Restrained shallow seams and three-tone broad planes.",
+    "poses": [
+      "idle",
+      "curled",
+      "attack",
+      "hurt"
+    ],
+    "height": 0.48,
+    "reference": null
+  },
+  {
+    "id": "venom-spider",
+    "design": "Dangerous venom-spider kin of the cave spider in the reference: preserve two broad body masses, exactly eight angular jointed leg silhouettes and low forward stance. Change material to sickly dark green-black with a few restrained olive warning patches and two bright pale-green fangs. No hair strands, extra limbs or luminous aura. Idle front-facing slightly elevated so legs read; threatening silhouette, simple clustered forms.",
+    "poses": [
+      "idle",
+      "attack",
+      "hurt"
+    ],
+    "height": 0.62,
+    "reference": "art/enemies/cave-simple-v1/spider/idle.png"
+  },
+  {
+    "id": "broodmother",
+    "design": "Bloated scarred matriarch cave spider, exactly eight strong angular legs, small low head with two broad fangs, huge sagging rear abdomen and one pale weathered egg-sac attached underneath/behind, visible from a frontal slightly elevated view. Dark brown-black and muted ochre, a few large scars, no tiny eyes/fur/eggs individually detailed, no hatchlings, no gore. Heavy asymmetrical old body, not a queen crown. Idle low stance. Exceptional mini-boss intended native192x192, still max32 colours and sparse large clusters.",
+    "poses": [
+      "idle",
+      "call",
+      "attack",
+      "hurt",
+      "enraged"
+    ],
+    "height": 1.18,
+    "reference": "art/enemies/cave-simple-v1/spider/idle.png"
+  },
+  {
+    "id": "goblin-trapper",
+    "design": "Lean goblin trapper matching the reference race: ochre-olive skin, pointed ears, angular narrow toothy face, rough dark brown cloth. Two obvious thick coils of rope over one shoulder and a small belt pouch with three large bent hooks visible, one small throwing knife in its right hand, no buckler. Crouched watchful idle, front-facing full body planted feet. Identity from rope coil, hook pouch and low stalking silhouette. Sparse kit, no tiny tools or extra weapons.",
+    "poses": [
+      "idle",
+      "set-snare",
+      "attack",
+      "hurt"
+    ],
+    "height": 1.32,
+    "reference": "art/enemies/cave-simple-v1/goblin/idle.png"
+  },
+  {
+    "id": "gate-captain",
+    "design": "Goblin gate captain, officer of same ochre-olive pointed-ear race as reference. Broader upright silhouette than basic goblin but leaner than brute. Mismatched scavenged dark rusty iron breastplate and one shoulder plate over brown leather, no crown or ornate heraldry. Heavy rectangular cleaver in right hand and a curved dull brass signal horn on a cord across chest. No shield. Idle planted feet facing viewer, stern angular face, three clear identity anchors: single plate shoulder, horn, cleaver. Serious rough kit.",
+    "poses": [
+      "idle",
+      "rally",
+      "wind-up",
+      "attack",
+      "hurt"
+    ],
+    "height": 1.5,
+    "reference": "art/enemies/campaign-v1/guard/idle.png"
+  },
+  {
+    "id": "lamp-eater",
+    "design": "A pale dusty moth-thing as large as a dog, front-facing, four broad ragged wing lobes, narrow fur-less segmented body, long flexible proboscis curled forward beneath a tiny shadowed head. Two simple thin antennae; only a few large pale ivory/taupe wing patches, no tiny scales/ornamental eye spots or warm fuzzy fur. Drifting idle, wings partially mantled and detached from ground, no lantern or visible prey. Diseased unsettling cave life, clearly a moth silhouette, not a fairy/butterfly.",
+    "poses": [
+      "idle",
+      "drain",
+      "hurt"
+    ],
+    "height": 0.72,
+    "reference": null
+  },
+  {
+    "id": "breach-hound",
+    "design": "Lean hairless breach hound: emaciated dog-like quadruped with slate-grey/brown stretched skin, low shoulders, long narrow head and a wide mouth holding too many large irregular teeth. Four clearly readable planted legs, narrow long tail, no extra limbs, eyes, armour, spikes or gore. Low stalking front-facing slight three-quarter pose, teeth one broad off-white serrated band not tiny detailed render. Hunts in pairs, so a compact readable silhouette with tail held close and no wide effects.",
+    "poses": [
+      "idle",
+      "attack",
+      "hurt"
+    ],
+    "height": 0.82,
+    "reference": null
+  }
+]

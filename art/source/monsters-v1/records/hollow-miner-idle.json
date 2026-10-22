@@ -1,0 +1,10 @@
+{
+  "id": "hollow-miner-idle",
+  "monster": "hollow-miner",
+  "kind": "identity master",
+  "source": "art/source/monsters-v1/hollow-miner-idle-master.png",
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-d076c16c-f048-482e-b79d-f5578dafa95a.png",
+  "prompt": "Use case: stylized-concept. Production enemy sprite for Depths, a dark stressful first-person pixel dungeon crawler. Silhouette-led restrained pixel art, large crisp clusters, at most three broad shades per material, warm upper-left highlights and dark cool shadows. Flat sparse surfaces, no individual fur, veins smaller than a large readable mark, no pores/grain/noise, no gradients/dithering/antialiasing, no glossy rendering, no ground shadow, background or text. Serious and unsettling, not cute/cartoon. Front-facing full-body transparent square canvas; keep all anatomy/equipment inside with generous 10% margins. Designed to reduce to a native128x128 sprite with max32 shared colours, bottom-centre scene origin (64,120). No scenery or UI. The town's gassed shift, risen: a gaunt adult human miner, grey ashen skin, sunken shadowed eyes, slack exhausted posture. Brown leather miner's cap with a small dead unlit lamp, torn ochre-brown work tunic, suspenders, worn trousers and heavy boots. A rusty iron pick with a short wooden haft held low in one hand. No exposed organs, skeleton, flames, green aura, jewelery or armour. Tragic and unsettling more than gory. One slack swaying idle stance, face toward viewer, full body planted feet. Identity anchors are dead cap lamp, hollow face and pick.",
+  "tool": "built-in image_gen",
+  "reference_images": []
+}

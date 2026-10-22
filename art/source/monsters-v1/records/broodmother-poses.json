@@ -1,0 +1,23 @@
+{
+  "id": "broodmother-poses",
+  "monster": "broodmother",
+  "kind": "registered pose sheet",
+  "layout": [
+    3,
+    2
+  ],
+  "poses": [
+    "idle",
+    "call",
+    "attack",
+    "hurt",
+    "enraged"
+  ],
+  "source": "art/source/monsters-v1/broodmother-poses-master.png",
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-5036faad-1abb-4bfa-a107-452622a3e79e.png",
+  "prompt": "Use case: stylized-concept. Production enemy sprite for Depths, a dark stressful first-person pixel dungeon crawler. Silhouette-led restrained pixel art, large crisp clusters, at most three broad shades per material, warm upper-left highlights and dark cool shadows. Flat sparse surfaces, no individual fur, veins smaller than a large readable mark, no pores/grain/noise, no gradients/dithering/antialiasing, no glossy rendering, no ground shadow, background or text. Serious and unsettling, not cute/cartoon. Front-facing full-body transparent square canvas; keep all anatomy/equipment inside with generous 10% margins. Designed to reduce to a native128x128 sprite with max32 shared colours, bottom-centre scene origin (64,120). No scenery or UI. FIVE-POSE registered sheet of the exact SAME Broodmother in the reference, retaining bloated scarred brown abdomen, pale egg-sac/webbing under it, head/fangs and exactly eight legs. Mini-boss native192x192 exception, maximum32 colours per family. LANDSCAPE3:2 THREE columns TWO rows equal square cells, sixth empty, generous clear gutters, no labels/grid/background. Same head/abdomen/leg dimensions and anatomical scale across every pose; do not shrink raised poses. Top left IDLE low spread stance. Top middle CALL: forebody and two front legs raised to call brood, pale egg-sac clearly pushed forward and taut, remaining six legs support weight; no hatchlings or magic glow. Top right ATTACK: weight lunges toward viewer, fangs down, two front legs striking. Bottom left HURT: body lists sideways, a few legs folded defensively, egg-sac unchanged, no gore. Bottom middle ENRAGED: lower head, wider threatening forelegs, damaged shell with one broad dark scar and aggressive weight forward, same creature and colours, not red recolour or new spikes. Bottom right EMPTY. Common bottom planted contactline94% each cell, all tips inside.",
+  "tool": "built-in image_gen",
+  "reference_images": [
+    "art/source/monsters-v1/broodmother-idle-master.png"
+  ]
+}

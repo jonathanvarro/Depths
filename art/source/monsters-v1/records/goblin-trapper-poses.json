@@ -1,0 +1,22 @@
+{
+  "id": "goblin-trapper-poses",
+  "monster": "goblin-trapper",
+  "kind": "registered pose sheet",
+  "layout": [
+    2,
+    2
+  ],
+  "poses": [
+    "idle",
+    "set-snare",
+    "attack",
+    "hurt"
+  ],
+  "source": "art/source/monsters-v1/goblin-trapper-poses-master.png",
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-2c720f98-8e3d-4c4a-9fa6-78de0aae53ed.png",
+  "prompt": "Use case: stylized-concept. Production enemy sprite for Depths, a dark stressful first-person pixel dungeon crawler. Silhouette-led restrained pixel art, large crisp clusters, at most three broad shades per material, warm upper-left highlights and dark cool shadows. Flat sparse surfaces, no individual fur, veins smaller than a large readable mark, no pores/grain/noise, no gradients/dithering/antialiasing, no glossy rendering, no ground shadow, background or text. Serious and unsettling, not cute/cartoon. Front-facing full-body transparent square canvas; keep all anatomy/equipment inside with generous 10% margins. Designed to reduce to a native128x128 sprite with max32 shared colours, bottom-centre scene origin (64,120). No scenery or UI. FOUR-POSE 2x2 square sprite sheet of the EXACT SAME goblin trapper in reference: lean body, pointed ears, rope coil over shoulder, hook pouch, small throwing knife, same ragged kit and palette. Same head/torso/limb/tool scale throughout; do not enlarge crouched pose. One complete figure per equal square cell, transparent gutters and no text/grid/background. Top left IDLE knife held ready, crouched watchful. Top right SET-SNARE: kneels low on one knee, laying one obvious loose loop of thick cord on floor with both hands, knife tucked visibly in belt, rope coil remains on shoulder. Bottom left ATTACK: throwing arm extends toward viewer having released knife, the SAME single knife just forward of his hand inside cell, body twists; no duplicate knife on belt. Bottom right HURT: flinches sideways with free hand drawn to torso, knife low in other hand, rope and hooks remain. Common foot contact line94% cell height and same origin; floor cord stays within cell.",
+  "tool": "built-in image_gen",
+  "reference_images": [
+    "art/source/monsters-v1/goblin-trapper-idle-master.png"
+  ]
+}

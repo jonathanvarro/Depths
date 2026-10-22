@@ -1,0 +1,11 @@
+[gd_resource type="SpriteFrames" load_steps=5 format=3]
+[ext_resource type="Texture2D" path="res://art/enemies/monsters-v1/hollow-miner/idle.png" id="idle"]
+[ext_resource type="Texture2D" path="res://art/enemies/monsters-v1/hollow-miner/grab.png" id="grab"]
+[ext_resource type="Texture2D" path="res://art/enemies/monsters-v1/hollow-miner/attack.png" id="attack"]
+[ext_resource type="Texture2D" path="res://art/enemies/monsters-v1/hollow-miner/hurt.png" id="hurt"]
+
+[resource]
+animations = [{"frames":[{"duration":1.0,"texture":ExtResource("idle")}],"loop":true,"name":&"idle","speed":8.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("grab")}],"loop":true,"name":&"grab","speed":8.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("attack")}],"loop":false,"name":&"attack","speed":8.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("hurt")}],"loop":false,"name":&"hurt","speed":8.0}]

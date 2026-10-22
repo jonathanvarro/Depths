@@ -1,0 +1,23 @@
+{
+  "id": "gate-captain-rally-fix",
+  "monster": "gate-captain",
+  "kind": "pose continuity correction; use rally cell only",
+  "layout": [
+    3,
+    2
+  ],
+  "poses": [
+    "idle",
+    "rally",
+    "wind-up",
+    "attack",
+    "hurt"
+  ],
+  "source": "art/source/monsters-v1/gate-captain-rally-fix-master.png",
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-f3d5bce4-26b7-4b63-bd19-3a3c1bce3d66.png",
+  "prompt": "Use case: precise-object-edit. Edit target is this existing 3-column2-row goblin captain pose sheet. Make ONE correction in TOP-MIDDLE RALLY figure only: he holds a brass horn at his mouth, but an erroneous SECOND BRASS HORN still hangs across his lower chest/waist. REMOVE THAT LOWER HANGING HORN COMPLETELY and restore plain rusty breastplate/brown belt beneath it; the diagonal empty carrying cord may remain. Keep the held horn at his mouth, both hands, cleaver, exact figure size/position, armour/face/boots and all other four poses unchanged. Do not add a second horn, gold ornament, buckle shaped like a horn, new props, marks or writing. Preserve equal grid registration, original canvas dimensions, true transparent background and original pixel palette. This is solely an equipment continuity repair.",
+  "tool": "built-in image_gen",
+  "reference_images": [
+    "art/source/monsters-v1/gate-captain-poses-master.png"
+  ]
+}

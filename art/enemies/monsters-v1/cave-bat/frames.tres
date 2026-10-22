@@ -1,0 +1,12 @@
+[gd_resource type="SpriteFrames" load_steps=5 format=3]
+[ext_resource type="Texture2D" path="res://art/enemies/monsters-v1/cave-bat/idle.png" id="idle"]
+[ext_resource type="Texture2D" path="res://art/enemies/monsters-v1/cave-bat/swoop.png" id="swoop"]
+[ext_resource type="Texture2D" path="res://art/enemies/monsters-v1/cave-bat/landed.png" id="landed"]
+[ext_resource type="Texture2D" path="res://art/enemies/monsters-v1/cave-bat/hurt.png" id="hurt"]
+
+[resource]
+animations = [{"frames":[{"duration":1.0,"texture":ExtResource("idle")}],"loop":true,"name":&"idle","speed":8.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("swoop")}],"loop":false,"name":&"swoop","speed":8.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("landed")}],"loop":true,"name":&"landed","speed":8.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("hurt")}],"loop":false,"name":&"hurt","speed":8.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("swoop")}],"loop":false,"name":&"attack","speed":8.0}]

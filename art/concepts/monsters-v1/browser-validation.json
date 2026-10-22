@@ -1,0 +1,428 @@
+{
+  "checks": 105,
+  "failures": [],
+  "errors": [],
+  "results": [
+    {
+      "check": "Eleven creature families",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: cave-bat/idle",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: cave-bat/swoop",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: cave-bat/landed",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: cave-bat/hurt",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: goblin-brute/idle",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: goblin-brute/wind-up",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: goblin-brute/attack",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: goblin-brute/recover",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: goblin-brute/hurt",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: gas-bloat/idle",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: gas-bloat/swell",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: gas-bloat/attack",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: gas-bloat/hurt",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: gas-bloat/burst-1",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: gas-bloat/burst-2",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: hollow-miner/idle",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: hollow-miner/grab",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: hollow-miner/attack",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: hollow-miner/hurt",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: rock-beetle/idle",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: rock-beetle/curled",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: rock-beetle/attack",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: rock-beetle/hurt",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: venom-spider/idle",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: venom-spider/attack",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: venom-spider/hurt",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: broodmother/idle",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: broodmother/call",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: broodmother/attack",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: broodmother/hurt",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: broodmother/enraged",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: goblin-trapper/idle",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: goblin-trapper/set-snare",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: goblin-trapper/attack",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: goblin-trapper/hurt",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: gate-captain/idle",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: gate-captain/rally",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: gate-captain/wind-up",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: gate-captain/attack",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: gate-captain/hurt",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: lamp-eater/idle",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: lamp-eater/drain",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: lamp-eater/hurt",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: breach-hound/idle",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: breach-hound/attack",
+      "ok": true
+    },
+    {
+      "check": "Native pose loaded: breach-hound/hurt",
+      "ok": true
+    },
+    {
+      "check": "Paused pose holds",
+      "ok": true
+    },
+    {
+      "check": "Pivot overlay is visible and independent",
+      "ok": true
+    },
+    {
+      "check": "Stone contrast background",
+      "ok": true
+    },
+    {
+      "check": "Pose playback starts",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: cave-bat desktop",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: cave-bat phone",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: goblin-brute desktop",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: goblin-brute phone",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: gas-bloat desktop",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: gas-bloat phone",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: hollow-miner desktop",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: hollow-miner phone",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: rock-beetle desktop",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: rock-beetle phone",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: venom-spider desktop",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: venom-spider phone",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: broodmother desktop",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: broodmother phone",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: goblin-trapper desktop",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: goblin-trapper phone",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: gate-captain desktop",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: gate-captain phone",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: lamp-eater desktop",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: lamp-eater phone",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: breach-hound desktop",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: breach-hound phone",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: cave-bat-swoop desktop",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: cave-bat-swoop phone",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: cave-bat-landed desktop",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: cave-bat-landed phone",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: goblin-brute-wind-up desktop",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: goblin-brute-wind-up phone",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: goblin-brute-recover desktop",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: goblin-brute-recover phone",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: gas-bloat-swell desktop",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: gas-bloat-swell phone",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: gas-bloat-burst desktop",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: gas-bloat-burst phone",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: hollow-miner-grab desktop",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: hollow-miner-grab phone",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: hound-pair desktop",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: hound-pair phone",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: gas-and-status desktop",
+      "ok": true
+    },
+    {
+      "check": "Combat capture: gas-and-status phone",
+      "ok": true
+    },
+    {
+      "check": "No creature overflow: 844",
+      "ok": true
+    },
+    {
+      "check": "44px creature controls: 844",
+      "ok": true
+    },
+    {
+      "check": "No creature overflow: 390",
+      "ok": true
+    },
+    {
+      "check": "44px creature controls: 390",
+      "ok": true
+    },
+    {
+      "check": "Effects panel switches",
+      "ok": true
+    },
+    {
+      "check": "Thirteen cue identities including reused heavy",
+      "ok": true
+    },
+    {
+      "check": "All glyphs load at native32, shown32/24/14",
+      "ok": true
+    },
+    {
+      "check": "Effect pause holds",
+      "ok": true
+    },
+    {
+      "check": "Effect playback starts",
+      "ok": true
+    },
+    {
+      "check": "No symbol overflow: 844",
+      "ok": true
+    },
+    {
+      "check": "44px effect controls: 844",
+      "ok": true
+    },
+    {
+      "check": "No symbol overflow: 390",
+      "ok": true
+    },
+    {
+      "check": "44px effect controls: 390",
+      "ok": true
+    },
+    {
+      "check": "No browser errors",
+      "ok": true
+    }
+  ],
+  "limits": "Offline desktop Chrome, simulated phone sizes; no physical iPhone."
+}

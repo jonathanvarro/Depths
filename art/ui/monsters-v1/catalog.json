@@ -1,0 +1,29 @@
+{
+  "issue": 141,
+  "canvas": [
+    32,
+    32
+  ],
+  "authoring": "Original native SVG paths in the existing backlog96 palette; no icon font or external library.",
+  "groups": {
+    "intent": {
+      "swoop": "res://art/ui/monsters-v1/intent/swoop.png",
+      "curl": "res://art/ui/monsters-v1/intent/curl.png",
+      "swell": "res://art/ui/monsters-v1/intent/swell.png",
+      "grab": "res://art/ui/monsters-v1/intent/grab.png",
+      "drain-light": "res://art/ui/monsters-v1/intent/drain-light.png",
+      "set-snare": "res://art/ui/monsters-v1/intent/set-snare.png",
+      "rally": "res://art/ui/monsters-v1/intent/rally.png",
+      "call-brood": "res://art/ui/monsters-v1/intent/call-brood.png",
+      "wind-up": "res://art/ui/backlog96-v1/intent/heavy.png"
+    },
+    "status": {
+      "grabbed": "res://art/ui/monsters-v1/status/grabbed.png",
+      "snared": "res://art/ui/monsters-v1/status/snared.png",
+      "gassed": "res://art/ui/monsters-v1/status/gassed.png"
+    },
+    "fx": {
+      "light-drained": "res://art/ui/monsters-v1/fx/light-drained.png"
+    }
+  }
+}

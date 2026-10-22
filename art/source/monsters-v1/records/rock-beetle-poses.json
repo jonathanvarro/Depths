@@ -1,0 +1,22 @@
+{
+  "id": "rock-beetle-poses",
+  "monster": "rock-beetle",
+  "kind": "registered pose sheet",
+  "layout": [
+    2,
+    2
+  ],
+  "poses": [
+    "idle",
+    "curled",
+    "attack",
+    "hurt"
+  ],
+  "source": "art/source/monsters-v1/rock-beetle-poses-master.png",
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-65585056-3520-4b5b-ba2f-c65cc6261678.png",
+  "prompt": "Use case: stylized-concept. Production enemy sprite for Depths, a dark stressful first-person pixel dungeon crawler. Silhouette-led restrained pixel art, large crisp clusters, at most three broad shades per material, warm upper-left highlights and dark cool shadows. Flat sparse surfaces, no individual fur, veins smaller than a large readable mark, no pores/grain/noise, no gradients/dithering/antialiasing, no glossy rendering, no ground shadow, background or text. Serious and unsettling, not cute/cartoon. Front-facing full-body transparent square canvas; keep all anatomy/equipment inside with generous 10% margins. Designed to reduce to a native128x128 sprite with max32 shared colours, bottom-centre scene origin (64,120). No scenery or UI. FOUR-POSE 2x2 square sprite sheet of the same ROCK BEETLE as reference: same two charcoal/taupe shale shell plates, angular head, two mandibles, short antennae. Correct insect anatomy: SIX legs, three pairs; when unfolded make the third rear pair visible outside the shell too. Keep body/shell/mandibles exactly the same scale across poses. Top left IDLE planted, frontal slightly elevated. Top right CURLED: all six legs and head tucked into a compact stone-like armoured ball, shell plates shut; this clearly reads as protected. Bottom left ATTACK: shell halves slightly lifted, head and mandibles thrust toward viewer, six legs braced, full body. Bottom right HURT: tilted/recoiling on its side, one foreleg lifted and plates slightly gapped, no gore. Equal square cells, generous transparent gutters, no overlap/labels/background, common bottom ground-contact line94% cell height. Every pose fully contained; do not enlarge the curled ball or shrink an extended leg pose.",
+  "tool": "built-in image_gen",
+  "reference_images": [
+    "art/source/monsters-v1/rock-beetle-idle-master.png"
+  ]
+}

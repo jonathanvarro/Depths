@@ -8,6 +8,14 @@ Owner request, 2026-10-21. The late floors need more kinds of foe, and the breac
 
 Plan and behaviour: #140. Research and numbers: [stats, monsters and XP research](stats-monsters-xp-research.md) (#97).
 
+## Artwork delivered · 2026-10-21
+
+All eleven families now have 46 native drawings/scenes plus the requested effects
+and small symbols. The four implemented enemy definitions use their new art;
+other definitions, special-state selection and effect/status hooks remain with
+Claude. [Delivery, exact prompts/sources and integration handoff](new-monster-art.md)
+· [paused review](../art/concepts/monsters-v1/inspector.html).
+
 ## The contract (as `art/enemies/campaign-v1`)
 
 - **Canvas:** 128 × 128 RGBA, transparent, untrimmed, with a bottom-centre pivot at (64,120). The Broodmother is a mini-boss and may use a larger canvas (suggested 160 or 192). That is a deliberate exception: say which.

@@ -1,0 +1,419 @@
+{
+  "issue": 141,
+  "date": "2026-10-21",
+  "tool": "built-in image_gen",
+  "assets": [
+    {
+      "id": "breach-hound-idle",
+      "monster": "breach-hound",
+      "kind": "identity master",
+      "source": "art/source/monsters-v1/breach-hound-idle-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-65eae640-e8f1-4db4-be9c-7e75c77d500e.png",
+      "prompt": "Use case: stylized-concept. Production enemy sprite for Depths, a dark stressful first-person pixel dungeon crawler. Silhouette-led restrained pixel art, large crisp clusters, at most three broad shades per material, warm upper-left highlights and dark cool shadows. Flat sparse surfaces, no individual fur, veins smaller than a large readable mark, no pores/grain/noise, no gradients/dithering/antialiasing, no glossy rendering, no ground shadow, background or text. Serious and unsettling, not cute/cartoon. Front-facing full-body transparent square canvas; keep all anatomy/equipment inside with generous 10% margins. Designed to reduce to a native128x128 sprite with max32 shared colours, bottom-centre scene origin (64,120). No scenery or UI. Lean hairless breach hound: emaciated dog-like quadruped with slate-grey/brown stretched skin, low shoulders, long narrow head and a wide mouth holding too many large irregular teeth. Four clearly readable planted legs, narrow long tail, no extra limbs, eyes, armour, spikes or gore. Low stalking front-facing slight three-quarter pose, teeth one broad off-white serrated band not tiny detailed render. Hunts in pairs, so a compact readable silhouette with tail held close and no wide effects.",
+      "tool": "built-in image_gen",
+      "reference_images": [],
+      "sha256": "38d447bdbd978da2f2e249757c0925ceccafdd4d07c6567b357a637c076aa5c7"
+    },
+    {
+      "id": "breach-hound-poses",
+      "monster": "breach-hound",
+      "kind": "registered pose sheet",
+      "layout": [
+        2,
+        2
+      ],
+      "poses": [
+        "idle",
+        "attack",
+        "hurt"
+      ],
+      "source": "art/source/monsters-v1/breach-hound-poses-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-3df23e7d-001b-4321-8c21-7f56ae6c5ef1.png",
+      "prompt": "Use case: stylized-concept. Production enemy sprite for Depths, a dark stressful first-person pixel dungeon crawler. Silhouette-led restrained pixel art, large crisp clusters, at most three broad shades per material, warm upper-left highlights and dark cool shadows. Flat sparse surfaces, no individual fur, veins smaller than a large readable mark, no pores/grain/noise, no gradients/dithering/antialiasing, no glossy rendering, no ground shadow, background or text. Serious and unsettling, not cute/cartoon. Front-facing full-body transparent square canvas; keep all anatomy/equipment inside with generous 10% margins. Designed to reduce to a native128x128 sprite with max32 shared colours, bottom-centre scene origin (64,120). No scenery or UI. THREE-POSE registered 2x2 square sprite sheet of the EXACT SAME breach hound in reference: same lean hairless slate/taupe dog-like quadruped, long narrow head, huge toothy mouth, four limbs and narrow tail. Preserve head/body/leg scale and tooth band across poses, same creature from front slight three-quarter. Top left IDLE low stalking as reference, four paws planted. Top right ATTACK violent forward lunge toward viewer, mouth opens slightly, front two paws reaching forward, rear legs push off; same head size, not a giant floating mouth. Bottom left HURT recoils sideways on bent limbs, head turns a little away and jaw clenches, tail tucked, still alive. Bottom right EMPTY. One complete compact hound per equal cell, generous transparent gutter, no overlap/cropped limbs/tail, ground-contact line94% cell height (attack may lift front paws). Keep tail tucked near body so two hounds can stand side by side in combat. No blood, effects, shadows, props or background.",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/source/monsters-v1/breach-hound-idle-master.png"
+      ],
+      "sha256": "1c6d5eaf18490bb1399ebd183333aa9c887cab27fb20905152406c429d583883"
+    },
+    {
+      "id": "broodmother-idle",
+      "monster": "broodmother",
+      "kind": "identity master",
+      "source": "art/source/monsters-v1/broodmother-idle-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-2a7c7b89-6770-4e72-9d8a-7b54d891759b.png",
+      "prompt": "Use case: stylized-concept. Production enemy sprite for Depths, a dark stressful first-person pixel dungeon crawler. Silhouette-led restrained pixel art, large crisp clusters, at most three broad shades per material, warm upper-left highlights and dark cool shadows. Flat sparse surfaces, no individual fur, veins smaller than a large readable mark, no pores/grain/noise, no gradients/dithering/antialiasing, no glossy rendering, no ground shadow, background or text. Serious and unsettling, not cute/cartoon. Front-facing full-body transparent square canvas; keep all anatomy/equipment inside with generous 10% margins. Designed to reduce to a native128x128 sprite with max32 shared colours, bottom-centre scene origin (64,120). No scenery or UI. Bloated scarred matriarch cave spider, exactly eight strong angular legs, small low head with two broad fangs, huge sagging rear abdomen and one pale weathered egg-sac attached underneath/behind, visible from a frontal slightly elevated view. Dark brown-black and muted ochre, a few large scars, no tiny eyes/fur/eggs individually detailed, no hatchlings, no gore. Heavy asymmetrical old body, not a queen crown. Idle low stance. Exceptional mini-boss intended native192x192, still max32 colours and sparse large clusters. For this specific mini-boss, the native192px exception supersedes the ordinary128px size above; keep the SAME restrained32-colour treatment. Reference supplies cave-spider family anatomy/pixel simplicity, not its small body proportions. Exactly eight legs, four each side.",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/enemies/cave-simple-v1/spider/idle.png"
+      ],
+      "sha256": "52f578b30c0ed0c4b6335450776292daa19cae3da50953a5ed321b4af1f0c0a4"
+    },
+    {
+      "id": "broodmother-poses",
+      "monster": "broodmother",
+      "kind": "registered pose sheet",
+      "layout": [
+        3,
+        2
+      ],
+      "poses": [
+        "idle",
+        "call",
+        "attack",
+        "hurt",
+        "enraged"
+      ],
+      "source": "art/source/monsters-v1/broodmother-poses-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-5036faad-1abb-4bfa-a107-452622a3e79e.png",
+      "prompt": "Use case: stylized-concept. Production enemy sprite for Depths, a dark stressful first-person pixel dungeon crawler. Silhouette-led restrained pixel art, large crisp clusters, at most three broad shades per material, warm upper-left highlights and dark cool shadows. Flat sparse surfaces, no individual fur, veins smaller than a large readable mark, no pores/grain/noise, no gradients/dithering/antialiasing, no glossy rendering, no ground shadow, background or text. Serious and unsettling, not cute/cartoon. Front-facing full-body transparent square canvas; keep all anatomy/equipment inside with generous 10% margins. Designed to reduce to a native128x128 sprite with max32 shared colours, bottom-centre scene origin (64,120). No scenery or UI. FIVE-POSE registered sheet of the exact SAME Broodmother in the reference, retaining bloated scarred brown abdomen, pale egg-sac/webbing under it, head/fangs and exactly eight legs. Mini-boss native192x192 exception, maximum32 colours per family. LANDSCAPE3:2 THREE columns TWO rows equal square cells, sixth empty, generous clear gutters, no labels/grid/background. Same head/abdomen/leg dimensions and anatomical scale across every pose; do not shrink raised poses. Top left IDLE low spread stance. Top middle CALL: forebody and two front legs raised to call brood, pale egg-sac clearly pushed forward and taut, remaining six legs support weight; no hatchlings or magic glow. Top right ATTACK: weight lunges toward viewer, fangs down, two front legs striking. Bottom left HURT: body lists sideways, a few legs folded defensively, egg-sac unchanged, no gore. Bottom middle ENRAGED: lower head, wider threatening forelegs, damaged shell with one broad dark scar and aggressive weight forward, same creature and colours, not red recolour or new spikes. Bottom right EMPTY. Common bottom planted contactline94% each cell, all tips inside.",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/source/monsters-v1/broodmother-idle-master.png"
+      ],
+      "sha256": "a729aa23aea86bdd80301fefd5acfd3f91e50e8f511dad08f407f9196322b05d"
+    },
+    {
+      "id": "cave-bat-idle",
+      "monster": "cave-bat",
+      "kind": "identity master",
+      "source": "art/source/monsters-v1/cave-bat-idle-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-846ac97f-4633-4dc0-928b-e40c0102ffaa.png",
+      "prompt": "Use case: stylized-concept. Production enemy sprite for Depths, a dark stressful first-person pixel dungeon crawler. Silhouette-led restrained pixel art, large crisp clusters, at most three broad shades per material, warm upper-left highlights and dark cool shadows. Flat sparse surfaces, no individual fur, veins smaller than a large readable mark, no pores/grain/noise, no gradients/dithering/antialiasing, no glossy rendering, no ground shadow, background or text. Serious and unsettling, not cute/cartoon. Front-facing full-body transparent square canvas; keep all anatomy/equipment inside with generous 10% margins. Designed to reduce to a native128x128 sprite with max32 shared colours, bottom-centre scene origin (64,120). No scenery or UI. Small leathery cave bat hanging upside down, pale large ears flanking its small angular head at the bottom, dark tawny leather wings wrapped closely around its body above the head. Thin hooked feet at the top are hanging from an unseen ceiling: no branch or ceiling drawn. Folded wings form one broad pointed cocoon; two pale ears and a tiny toothy muzzle are the identity anchors, not big cute eyes. One idle hanging pose, frontal/very slight three-quarter, balanced around centre. The attached goblin is STYLE/PIXEL SIMPLICITY reference only, not anatomy or equipment.",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/enemies/cave-simple-v1/goblin/idle.png"
+      ],
+      "sha256": "d585ee438a2a96bc496e9706e2807c09dbcc26ba2531c2de2956fe6f5a8acead"
+    },
+    {
+      "id": "cave-bat-poses",
+      "monster": "cave-bat",
+      "kind": "registered pose sheet",
+      "layout": [
+        2,
+        2
+      ],
+      "poses": [
+        "idle",
+        "swoop",
+        "landed",
+        "hurt"
+      ],
+      "source": "art/source/monsters-v1/cave-bat-poses-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-f908c3f6-89e4-45d9-a5be-31b6e4bbc183.png",
+      "prompt": "Use case: stylized-concept. Production enemy sprite for Depths, a dark stressful first-person pixel dungeon crawler. Silhouette-led restrained pixel art, large crisp clusters, at most three broad shades per material, warm upper-left highlights and dark cool shadows. Flat sparse surfaces, no individual fur, veins smaller than a large readable mark, no pores/grain/noise, no gradients/dithering/antialiasing, no glossy rendering, no ground shadow, background or text. Serious and unsettling, not cute/cartoon. Front-facing full-body transparent square canvas; keep all anatomy/equipment inside with generous 10% margins. Designed to reduce to a native128x128 sprite with max32 shared colours, bottom-centre scene origin (64,120). No scenery or UI. Make a registered FOUR-POSE sprite sheet of the SAME cave bat shown in the reference. Reference is exact character identity: same pale ears, pointed muzzle, tawny/dark leather wings, tiny hooked feet. Sheet is exactly a 2x2 equal square-cell grid with generous transparent gutters, no lines, labels or background. One complete bat per cell, no overlap. Every cell represents the same fixed square camera/canvas and same body scale: the head and torso stay the SAME SIZE, never enlarge a narrow pose to fill the cell. Top left: IDLE upside-down hanging, wings wrapped, feet up and pale ears/muzzle down, as reference. Top right: SWOOP/ATTACK, bat upright and diving toward viewer, wings spread wide and raised, head thrust forward; legs tucked. Bottom left: LANDED, crouched low with wings spread on floor and head raised, vulnerable. Bottom right: HURT, recoiling diagonally with one wing bent inward, same complete anatomy. Keep wing tips inside each cell, leave overhead room and a common bottom contact line at 94% cell height for landed/hurt. Airborne poses can sit higher. Use very broad shapes as reference; exactly two wings, two ears, two feet per bat. No bat carried weapons, no ceiling/ground, no glows.",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/source/monsters-v1/cave-bat-idle-master.png"
+      ],
+      "sha256": "b9560ac64857efd5e2f9e8e6e7019aa7f728ce00955d59e7d9a97ffec055c075"
+    },
+    {
+      "id": "gas-bloat-idle",
+      "monster": "gas-bloat",
+      "kind": "identity master",
+      "source": "art/source/monsters-v1/gas-bloat-idle-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-2e8bf0ed-60fa-4e14-8eed-af7c89a611e8.png",
+      "prompt": "Use case: stylized-concept. Production enemy sprite for Depths, a dark stressful first-person pixel dungeon crawler. Silhouette-led restrained pixel art, large crisp clusters, at most three broad shades per material, warm upper-left highlights and dark cool shadows. Flat sparse surfaces, no individual fur, veins smaller than a large readable mark, no pores/grain/noise, no gradients/dithering/antialiasing, no glossy rendering, no ground shadow, background or text. Serious and unsettling, not cute/cartoon. Front-facing full-body transparent square canvas; keep all anatomy/equipment inside with generous 10% margins. Designed to reduce to a native128x128 sprite with max32 shared colours, bottom-centre scene origin (64,120). No scenery or UI. Gas-bloat from the breach: a drifting taut irregular pear-shaped sac of trapped gas, sickly muted yellow-green, a few broad dark green veins and three/four thin trailing torn tendrils. No feet, hands, wings or recognisable human face. A small dark puckered vent on the lower front, no cute eyes. Broad semi-opaque organic skin masses, opaque sprite body, not a photoreal translucent balloon. Idle floating with tendrils hanging, generous transparent gap below to imply hover. Tragic diseased cave life, restrained non-gory.",
+      "tool": "built-in image_gen",
+      "reference_images": [],
+      "sha256": "eaba0ea8b4b2b0f681738a8e109acdb5cdac9cf11a6647ceb92af45de153f048"
+    },
+    {
+      "id": "gas-bloat-poses",
+      "monster": "gas-bloat",
+      "kind": "registered pose sheet",
+      "layout": [
+        3,
+        2
+      ],
+      "poses": [
+        "idle",
+        "swell",
+        "attack",
+        "hurt",
+        "burst-1",
+        "burst-2"
+      ],
+      "source": "art/source/monsters-v1/gas-bloat-poses-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-019b8051-c166-4203-946b-95be21425374.png",
+      "prompt": "Use case: stylized-concept. Production enemy sprite for Depths, a dark stressful first-person pixel dungeon crawler. Silhouette-led restrained pixel art, large crisp clusters, at most three broad shades per material, warm upper-left highlights and dark cool shadows. Flat sparse surfaces, no individual fur, veins smaller than a large readable mark, no pores/grain/noise, no gradients/dithering/antialiasing, no glossy rendering, no ground shadow, background or text. Serious and unsettling, not cute/cartoon. Front-facing full-body transparent square canvas; keep all anatomy/equipment inside with generous 10% margins. Designed to reduce to a native128x128 sprite with max32 shared colours, bottom-centre scene origin (64,120). No scenery or UI. A SIX-POSE registered sprite sheet of the EXACT SAME gas-bloat in the reference: pear-shaped veined yellow-green bladder, little puckered vent below, three/four torn tendrils, no eyes/face/feet. LANDSCAPE 3:2, THREE columns TWO rows of equal square cells, generous transparent gutters, no grid/labels. Each cell the same fixed camera, same body origin and normal scale, generous transparent margin; do not enlarge idle to fill its cell. Top left IDLE unchanged shape hovering. Top middle SWELL: bladder about 20% wider, tight strain creases, tendrils tucked inward, vent pinched. Top right ATTACK: bladder contracts and puckered vent blows one small opaque cloudy puff toward the viewer; no separate giant cloud obscuring silhouette. Bottom left HURT: deflated on one side, recoil, broad dark bruise, no blood. Bottom middle BURST-1: taut bladder splits into two long ragged flaps with broad pale gas escaping between them. Bottom right BURST-2: collapsed hanging torn skin/tendrils and a small dissipating gas cluster, no gore or organs. Common hover origin and body scale across all cells. Body never touches the bottom contact line. Make the states read through shape, not fine surface detail. Exact transparent background.",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/source/monsters-v1/gas-bloat-idle-master.png"
+      ],
+      "sha256": "2e0035c7cc33a08d534b46cc2ec4456b4cdabd1a823bba6c26b2fd3b8c56abbd"
+    },
+    {
+      "id": "gate-captain-idle",
+      "monster": "gate-captain",
+      "kind": "identity master",
+      "source": "art/source/monsters-v1/gate-captain-idle-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-900dfcbc-edef-4edc-97ed-fe68c68658f7.png",
+      "prompt": "Use case: stylized-concept. Production enemy sprite for Depths, a dark stressful first-person pixel dungeon crawler. Silhouette-led restrained pixel art, large crisp clusters, at most three broad shades per material, warm upper-left highlights and dark cool shadows. Flat sparse surfaces, no individual fur, veins smaller than a large readable mark, no pores/grain/noise, no gradients/dithering/antialiasing, no glossy rendering, no ground shadow, background or text. Serious and unsettling, not cute/cartoon. Front-facing full-body transparent square canvas; keep all anatomy/equipment inside with generous 10% margins. Designed to reduce to a native128x128 sprite with max32 shared colours, bottom-centre scene origin (64,120). No scenery or UI. Goblin gate captain, officer of same ochre-olive pointed-ear race as reference. Broader upright silhouette than basic goblin but leaner than brute. Mismatched scavenged dark rusty iron breastplate and one shoulder plate over brown leather, no crown or ornate heraldry. Heavy rectangular cleaver in right hand and a curved dull brass signal horn on a cord across chest. No shield. Idle planted feet facing viewer, stern angular face, three clear identity anchors: single plate shoulder, horn, cleaver. Serious rough kit. Reference guard supplies goblin race and rusty plate materials only; replace its large shield with a heavy cleaver and horn, no copied shield or helmet. Native128px.",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/enemies/campaign-v1/guard/idle.png"
+      ],
+      "sha256": "fb91f6dedeb77acb6968dc0d71e281aed22cacf2e608be7466690894ebe46df2"
+    },
+    {
+      "id": "gate-captain-poses",
+      "monster": "gate-captain",
+      "kind": "registered pose sheet",
+      "layout": [
+        3,
+        2
+      ],
+      "poses": [
+        "idle",
+        "rally",
+        "wind-up",
+        "attack",
+        "hurt"
+      ],
+      "source": "art/source/monsters-v1/gate-captain-poses-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-79344100-633b-4eb5-ad3c-8b7a714a2a5b.png",
+      "prompt": "Use case: stylized-concept. Production enemy sprite for Depths, a dark stressful first-person pixel dungeon crawler. Silhouette-led restrained pixel art, large crisp clusters, at most three broad shades per material, warm upper-left highlights and dark cool shadows. Flat sparse surfaces, no individual fur, veins smaller than a large readable mark, no pores/grain/noise, no gradients/dithering/antialiasing, no glossy rendering, no ground shadow, background or text. Serious and unsettling, not cute/cartoon. Front-facing full-body transparent square canvas; keep all anatomy/equipment inside with generous 10% margins. Designed to reduce to a native128x128 sprite with max32 shared colours, bottom-centre scene origin (64,120). No scenery or UI. FIVE-POSE sprite sheet of EXACT SAME gate captain from reference: same narrow goblin face/ears, asymmetric rusty plate, brown leather, single heavy rectangular cleaver and curved brass horn on cord. LANDSCAPE3:2 THREE columns TWO rows equal square cells, sixth empty, generous transparent gutters. Same head, body, boots, cleaver and horn scale throughout; raised poses never shrink body. Common ground line94% cellheight. Top left IDLE cleaver low, horn hangs on chest. Top middle RALLY: LEFT hand raises the SAME horn to mouth, bell points sideways, blowing; RIGHT hand keeps cleaver low. No second hanging horn. Top right WIND-UP: cleaver raised above right shoulder, knees bent, horn hanging again. Bottom left ATTACK: cleaver slashes down toward viewer, shoulders twist, complete blade inside cell. Bottom middle HURT: recoils with left hand at ribs, cleaver lowered, same gear. Bottom right EMPTY. Front-facing full body; no shield/crown/extra equipment, ground shadow or background.",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/source/monsters-v1/gate-captain-idle-master.png"
+      ],
+      "sha256": "6236d869a407245d95511c8d83396238e9f1fad430d83f58256794c500a9c58f"
+    },
+    {
+      "id": "gate-captain-rally-fix",
+      "monster": "gate-captain",
+      "kind": "pose continuity correction; use rally cell only",
+      "layout": [
+        3,
+        2
+      ],
+      "poses": [
+        "idle",
+        "rally",
+        "wind-up",
+        "attack",
+        "hurt"
+      ],
+      "source": "art/source/monsters-v1/gate-captain-rally-fix-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-f3d5bce4-26b7-4b63-bd19-3a3c1bce3d66.png",
+      "prompt": "Use case: precise-object-edit. Edit target is this existing 3-column2-row goblin captain pose sheet. Make ONE correction in TOP-MIDDLE RALLY figure only: he holds a brass horn at his mouth, but an erroneous SECOND BRASS HORN still hangs across his lower chest/waist. REMOVE THAT LOWER HANGING HORN COMPLETELY and restore plain rusty breastplate/brown belt beneath it; the diagonal empty carrying cord may remain. Keep the held horn at his mouth, both hands, cleaver, exact figure size/position, armour/face/boots and all other four poses unchanged. Do not add a second horn, gold ornament, buckle shaped like a horn, new props, marks or writing. Preserve equal grid registration, original canvas dimensions, true transparent background and original pixel palette. This is solely an equipment continuity repair.",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/source/monsters-v1/gate-captain-poses-master.png"
+      ],
+      "sha256": "d1ac3c1a16fb1600b47a47528fb99dacaade4ab81d3a0c60bc818048b3277944"
+    },
+    {
+      "id": "goblin-brute-idle",
+      "monster": "goblin-brute",
+      "kind": "identity master",
+      "source": "art/source/monsters-v1/goblin-brute-idle-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-9c3965e9-66a4-4144-8951-08fb13296bb9.png",
+      "prompt": "Use case: stylized-concept. Production enemy sprite for Depths, a dark stressful first-person pixel dungeon crawler. Silhouette-led restrained pixel art, large crisp clusters, at most three broad shades per material, warm upper-left highlights and dark cool shadows. Flat sparse surfaces, no individual fur, veins smaller than a large readable mark, no pores/grain/noise, no gradients/dithering/antialiasing, no glossy rendering, no ground shadow, background or text. Serious and unsettling, not cute/cartoon. Front-facing full-body transparent square canvas; keep all anatomy/equipment inside with generous 10% margins. Designed to reduce to a native128x128 sprite with max32 shared colours, bottom-centre scene origin (64,120). No scenery or UI. A goblin brute, one head taller and twice as broad as a common lean goblin. Same long pointed ears, ochre-olive skin, angular toothy goblin face, rough brown leather/cloth kit and rusty iron. Huge stooped shoulders, short neck, squat powerful legs. Crude iron rectangular maul with a simple wooden haft, both hands loosely gripping it low at one side; no buckler or knife, no helmet/crown. One idle pose, full body front-facing and planted feet. Menace from weight and posture, simple shapes. Reference goblin supplies race, palette and pixel simplicity only; replace the narrow body, knife and buckler with the much broader brute body and maul described.",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/enemies/cave-simple-v1/goblin/idle.png"
+      ],
+      "sha256": "39e4b5b81746543d5d60e12f10f8d96ef96a9dc4f0eecd3fabb2444952a82c54"
+    },
+    {
+      "id": "goblin-brute-poses",
+      "monster": "goblin-brute",
+      "kind": "registered pose sheet",
+      "layout": [
+        3,
+        2
+      ],
+      "poses": [
+        "idle",
+        "wind-up",
+        "attack",
+        "recover",
+        "hurt"
+      ],
+      "source": "art/source/monsters-v1/goblin-brute-poses-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-1e38910c-c8bb-4205-82e0-ec37df08eb9f.png",
+      "prompt": "Use case: stylized-concept. Production enemy sprite for Depths, a dark stressful first-person pixel dungeon crawler. Silhouette-led restrained pixel art, large crisp clusters, at most three broad shades per material, warm upper-left highlights and dark cool shadows. Flat sparse surfaces, no individual fur, veins smaller than a large readable mark, no pores/grain/noise, no gradients/dithering/antialiasing, no glossy rendering, no ground shadow, background or text. Serious and unsettling, not cute/cartoon. Front-facing full-body transparent square canvas; keep all anatomy/equipment inside with generous 10% margins. Designed to reduce to a native128x128 sprite with max32 shared colours, bottom-centre scene origin (64,120). No scenery or UI. A FIVE-POSE sprite sheet of the EXACT SAME goblin brute from the reference, same head/ears/face, huge shoulders, proportions, ragged leather kit, iron rectangular maul and skin palette. LANDSCAPE 3:2 canvas divided into THREE columns and TWO rows of equal square cells. Five separate complete figures, sixth cell transparent empty. No labels/grid lines/background. All five have same anatomical scale: head, torso, legs and maul head stay exactly same size. Leave enough room for high maul; do not shrink the wind-up body. Body centre stays at centre of each cell; planted foot contact at 94% cell height. Top left IDLE: original maul held low across body. Top middle WIND-UP: both hands raise maul high above one shoulder, bent knees, obvious imminent heavy blow. Top right ATTACK: hips/shoulders committed forward, maul driven down toward viewer, complete maul inside cell. Bottom left RECOVER: slumped exhausted, open torso, maul head on floor beside him with haft dragged in one hand. Bottom middle HURT: recoil sideways, braced legs, maul lowered, complete body. Bottom right EMPTY. No extra weapons, shields, armor or gore. Broad simple shapes, no texture grain.",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/source/monsters-v1/goblin-brute-idle-master.png"
+      ],
+      "sha256": "07e64932021aa38cec89dd2aee51704809e008c59b0f78a97964625ef0f71428"
+    },
+    {
+      "id": "goblin-trapper-idle",
+      "monster": "goblin-trapper",
+      "kind": "identity master",
+      "source": "art/source/monsters-v1/goblin-trapper-idle-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-e4e0ade4-43d7-4d2d-b61a-2f334287915f.png",
+      "prompt": "Use case: stylized-concept. Production enemy sprite for Depths, a dark stressful first-person pixel dungeon crawler. Silhouette-led restrained pixel art, large crisp clusters, at most three broad shades per material, warm upper-left highlights and dark cool shadows. Flat sparse surfaces, no individual fur, veins smaller than a large readable mark, no pores/grain/noise, no gradients/dithering/antialiasing, no glossy rendering, no ground shadow, background or text. Serious and unsettling, not cute/cartoon. Front-facing full-body transparent square canvas; keep all anatomy/equipment inside with generous 10% margins. Designed to reduce to a native128x128 sprite with max32 shared colours, bottom-centre scene origin (64,120). No scenery or UI. Lean goblin trapper matching the reference race: ochre-olive skin, pointed ears, angular narrow toothy face, rough dark brown cloth. Two obvious thick coils of rope over one shoulder and a small belt pouch with three large bent hooks visible, one small throwing knife in its right hand, no buckler. Crouched watchful idle, front-facing full body planted feet. Identity from rope coil, hook pouch and low stalking silhouette. Sparse kit, no tiny tools or extra weapons. Reference supplies exact goblin race, palette and pixel simplicity; change its equipment as described. Rope and hooks must read as a few large simple shapes.",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/enemies/cave-simple-v1/goblin/idle.png"
+      ],
+      "sha256": "58280f47d55905026dfb4355a3aee9b595f4eb7132311564feea1e2c47d3e4be"
+    },
+    {
+      "id": "goblin-trapper-poses",
+      "monster": "goblin-trapper",
+      "kind": "registered pose sheet",
+      "layout": [
+        2,
+        2
+      ],
+      "poses": [
+        "idle",
+        "set-snare",
+        "attack",
+        "hurt"
+      ],
+      "source": "art/source/monsters-v1/goblin-trapper-poses-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-2c720f98-8e3d-4c4a-9fa6-78de0aae53ed.png",
+      "prompt": "Use case: stylized-concept. Production enemy sprite for Depths, a dark stressful first-person pixel dungeon crawler. Silhouette-led restrained pixel art, large crisp clusters, at most three broad shades per material, warm upper-left highlights and dark cool shadows. Flat sparse surfaces, no individual fur, veins smaller than a large readable mark, no pores/grain/noise, no gradients/dithering/antialiasing, no glossy rendering, no ground shadow, background or text. Serious and unsettling, not cute/cartoon. Front-facing full-body transparent square canvas; keep all anatomy/equipment inside with generous 10% margins. Designed to reduce to a native128x128 sprite with max32 shared colours, bottom-centre scene origin (64,120). No scenery or UI. FOUR-POSE 2x2 square sprite sheet of the EXACT SAME goblin trapper in reference: lean body, pointed ears, rope coil over shoulder, hook pouch, small throwing knife, same ragged kit and palette. Same head/torso/limb/tool scale throughout; do not enlarge crouched pose. One complete figure per equal square cell, transparent gutters and no text/grid/background. Top left IDLE knife held ready, crouched watchful. Top right SET-SNARE: kneels low on one knee, laying one obvious loose loop of thick cord on floor with both hands, knife tucked visibly in belt, rope coil remains on shoulder. Bottom left ATTACK: throwing arm extends toward viewer having released knife, the SAME single knife just forward of his hand inside cell, body twists; no duplicate knife on belt. Bottom right HURT: flinches sideways with free hand drawn to torso, knife low in other hand, rope and hooks remain. Common foot contact line94% cell height and same origin; floor cord stays within cell.",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/source/monsters-v1/goblin-trapper-idle-master.png"
+      ],
+      "sha256": "75fd6e60110dc47dffb6be10a96ea558afe84775892eb297d838ea1047ffd973"
+    },
+    {
+      "id": "hollow-miner-idle",
+      "monster": "hollow-miner",
+      "kind": "identity master",
+      "source": "art/source/monsters-v1/hollow-miner-idle-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-d076c16c-f048-482e-b79d-f5578dafa95a.png",
+      "prompt": "Use case: stylized-concept. Production enemy sprite for Depths, a dark stressful first-person pixel dungeon crawler. Silhouette-led restrained pixel art, large crisp clusters, at most three broad shades per material, warm upper-left highlights and dark cool shadows. Flat sparse surfaces, no individual fur, veins smaller than a large readable mark, no pores/grain/noise, no gradients/dithering/antialiasing, no glossy rendering, no ground shadow, background or text. Serious and unsettling, not cute/cartoon. Front-facing full-body transparent square canvas; keep all anatomy/equipment inside with generous 10% margins. Designed to reduce to a native128x128 sprite with max32 shared colours, bottom-centre scene origin (64,120). No scenery or UI. The town's gassed shift, risen: a gaunt adult human miner, grey ashen skin, sunken shadowed eyes, slack exhausted posture. Brown leather miner's cap with a small dead unlit lamp, torn ochre-brown work tunic, suspenders, worn trousers and heavy boots. A rusty iron pick with a short wooden haft held low in one hand. No exposed organs, skeleton, flames, green aura, jewelery or armour. Tragic and unsettling more than gory. One slack swaying idle stance, face toward viewer, full body planted feet. Identity anchors are dead cap lamp, hollow face and pick.",
+      "tool": "built-in image_gen",
+      "reference_images": [],
+      "sha256": "8007d32620900f7cfdc0d764d5654419c36879e01344a54e99e896d657edcf95"
+    },
+    {
+      "id": "hollow-miner-poses",
+      "monster": "hollow-miner",
+      "kind": "registered pose sheet",
+      "layout": [
+        2,
+        2
+      ],
+      "poses": [
+        "idle",
+        "grab",
+        "attack",
+        "hurt"
+      ],
+      "source": "art/source/monsters-v1/hollow-miner-poses-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-34332cd4-adb4-4937-aac8-728c1f5a4436.png",
+      "prompt": "Use case: stylized-concept. Production enemy sprite for Depths, a dark stressful first-person pixel dungeon crawler. Silhouette-led restrained pixel art, large crisp clusters, at most three broad shades per material, warm upper-left highlights and dark cool shadows. Flat sparse surfaces, no individual fur, veins smaller than a large readable mark, no pores/grain/noise, no gradients/dithering/antialiasing, no glossy rendering, no ground shadow, background or text. Serious and unsettling, not cute/cartoon. Front-facing full-body transparent square canvas; keep all anatomy/equipment inside with generous 10% margins. Designed to reduce to a native128x128 sprite with max32 shared colours, bottom-centre scene origin (64,120). No scenery or UI. A FOUR-POSE registered sheet of the EXACT SAME hollow miner from reference: same gaunt ashen human face, dead circular cap lamp, brown leather cap, ochre shirt, suspenders, brown trousers/boots, same rusty pick. Square sheet 2x2 equal square cells, one complete figure per cell with generous transparent gutters; no background/labels/grid. Same head/torso/leg scale and kit throughout, foot contact at94% cell height. Top left IDLE slack exhausted swaying, pick hanging low. Top right GRAB: both hands reach toward viewer, shoulders hunched, fingers open, pick safely hanging down from a loop at his LEFT hip so equipment remains visible and hands are free. Bottom left ATTACK: both hands swing the pick down diagonally, complete pick within cell; twist torso, don't enlarge head or body. Bottom right HURT: recoils, one hand against ribs, pick lowered in the other, knees bent, feet planted. Tragic empty gaze, no gore, glow, new tools or exposed organs. Simplify surfaces to broad clear shades, not detailed painting.",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/source/monsters-v1/hollow-miner-idle-master.png"
+      ],
+      "sha256": "6410c2c057547594a30b6bcccf49dbc7b31121e0a2a3b43e2fafe013eb4559cb"
+    },
+    {
+      "id": "lamp-eater-idle",
+      "monster": "lamp-eater",
+      "kind": "identity master",
+      "source": "art/source/monsters-v1/lamp-eater-idle-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-86b393c1-546f-4e0f-a5f8-db2dec31aa6d.png",
+      "prompt": "Use case: stylized-concept. Production enemy sprite for Depths, a dark stressful first-person pixel dungeon crawler. Silhouette-led restrained pixel art, large crisp clusters, at most three broad shades per material, warm upper-left highlights and dark cool shadows. Flat sparse surfaces, no individual fur, veins smaller than a large readable mark, no pores/grain/noise, no gradients/dithering/antialiasing, no glossy rendering, no ground shadow, background or text. Serious and unsettling, not cute/cartoon. Front-facing full-body transparent square canvas; keep all anatomy/equipment inside with generous 10% margins. Designed to reduce to a native128x128 sprite with max32 shared colours, bottom-centre scene origin (64,120). No scenery or UI. A pale dusty moth-thing as large as a dog, front-facing, four broad ragged wing lobes, narrow fur-less segmented body, long flexible proboscis curled forward beneath a tiny shadowed head. Two simple thin antennae; only a few large pale ivory/taupe wing patches, no tiny scales/ornamental eye spots or warm fuzzy fur. Drifting idle, wings partially mantled and detached from ground, no lantern or visible prey. Diseased unsettling cave life, clearly a moth silhouette, not a fairy/butterfly.",
+      "tool": "built-in image_gen",
+      "reference_images": [],
+      "sha256": "f8e47b9745fe61ce4475d7fdae1867b1ddb781aefc6ceca0ed5564e572d42cbe"
+    },
+    {
+      "id": "lamp-eater-poses",
+      "monster": "lamp-eater",
+      "kind": "registered pose sheet",
+      "layout": [
+        2,
+        2
+      ],
+      "poses": [
+        "idle",
+        "drain",
+        "hurt"
+      ],
+      "source": "art/source/monsters-v1/lamp-eater-poses-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-eff3b0df-e45c-4c04-ac0e-9898a0b6937d.png",
+      "prompt": "Use case: stylized-concept. Production enemy sprite for Depths, a dark stressful first-person pixel dungeon crawler. Silhouette-led restrained pixel art, large crisp clusters, at most three broad shades per material, warm upper-left highlights and dark cool shadows. Flat sparse surfaces, no individual fur, veins smaller than a large readable mark, no pores/grain/noise, no gradients/dithering/antialiasing, no glossy rendering, no ground shadow, background or text. Serious and unsettling, not cute/cartoon. Front-facing full-body transparent square canvas; keep all anatomy/equipment inside with generous 10% margins. Designed to reduce to a native128x128 sprite with max32 shared colours, bottom-centre scene origin (64,120). No scenery or UI. THREE-POSE2x2 square registered sheet of the exact SAME lamp-eater moth-thing from reference: same dusty ivory/taupe ragged four-lobed wings, segmented body, two antennae and long flesh-toned proboscis. Same head/body and wing scale throughout, don't enlarge the compact pose. Top left IDLE fluttering with wings partially open, curled proboscis. Top right DRAIN/ATTACK: wings mantled forward around body, proboscis uncoiled and reaching diagonally toward lower right to drink from an UNSEEN light source beyond it; no lamp/torch/object drawn. Complete appendage stays inside cell. Bottom left HURT: one wing crumples inward, body cants sideways, proboscis recoils, no gore or powder cloud. Bottom right EMPTY. Equal square cells with generous transparent gutters, fixed origin, hovering body with gap above bottom contactline94%; no grounded feet, no glow, text or background. Preserve a serious moth silhouette and sparse big colour patches.",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/source/monsters-v1/lamp-eater-idle-master.png"
+      ],
+      "sha256": "e1a5e088d66cd54ab4a6e6a73f3422fa0791a6907863168faabacc1b0681548d"
+    },
+    {
+      "id": "rock-beetle-idle",
+      "monster": "rock-beetle",
+      "kind": "identity master",
+      "source": "art/source/monsters-v1/rock-beetle-idle-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-a91b1405-7b03-4fb1-a8d5-7ae184f81c6e.png",
+      "prompt": "Use case: stylized-concept. Production enemy sprite for Depths, a dark stressful first-person pixel dungeon crawler. Silhouette-led restrained pixel art, large crisp clusters, at most three broad shades per material, warm upper-left highlights and dark cool shadows. Flat sparse surfaces, no individual fur, veins smaller than a large readable mark, no pores/grain/noise, no gradients/dithering/antialiasing, no glossy rendering, no ground shadow, background or text. Serious and unsettling, not cute/cartoon. Front-facing full-body transparent square canvas; keep all anatomy/equipment inside with generous 10% margins. Designed to reduce to a native128x128 sprite with max32 shared colours, bottom-centre scene origin (64,120). No scenery or UI. Heavy mine-rock beetle, front-facing slightly elevated view, wide low body with two broad interlocking charcoal/taupe shell plates like rough shale, six clearly countable short legs, two small mandibles and short antennae. Its stone-coloured armour is the identity, no glowing gems/runes, horns or excessive cracks. One idle planted pose. Restrained shallow seams and three-tone broad planes.",
+      "tool": "built-in image_gen",
+      "reference_images": [],
+      "sha256": "7231762afd8ace1494b01dca7b333c4dc2207efc39cf10d317bf9529e5ab890b"
+    },
+    {
+      "id": "rock-beetle-poses",
+      "monster": "rock-beetle",
+      "kind": "registered pose sheet",
+      "layout": [
+        2,
+        2
+      ],
+      "poses": [
+        "idle",
+        "curled",
+        "attack",
+        "hurt"
+      ],
+      "source": "art/source/monsters-v1/rock-beetle-poses-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-65585056-3520-4b5b-ba2f-c65cc6261678.png",
+      "prompt": "Use case: stylized-concept. Production enemy sprite for Depths, a dark stressful first-person pixel dungeon crawler. Silhouette-led restrained pixel art, large crisp clusters, at most three broad shades per material, warm upper-left highlights and dark cool shadows. Flat sparse surfaces, no individual fur, veins smaller than a large readable mark, no pores/grain/noise, no gradients/dithering/antialiasing, no glossy rendering, no ground shadow, background or text. Serious and unsettling, not cute/cartoon. Front-facing full-body transparent square canvas; keep all anatomy/equipment inside with generous 10% margins. Designed to reduce to a native128x128 sprite with max32 shared colours, bottom-centre scene origin (64,120). No scenery or UI. FOUR-POSE 2x2 square sprite sheet of the same ROCK BEETLE as reference: same two charcoal/taupe shale shell plates, angular head, two mandibles, short antennae. Correct insect anatomy: SIX legs, three pairs; when unfolded make the third rear pair visible outside the shell too. Keep body/shell/mandibles exactly the same scale across poses. Top left IDLE planted, frontal slightly elevated. Top right CURLED: all six legs and head tucked into a compact stone-like armoured ball, shell plates shut; this clearly reads as protected. Bottom left ATTACK: shell halves slightly lifted, head and mandibles thrust toward viewer, six legs braced, full body. Bottom right HURT: tilted/recoiling on its side, one foreleg lifted and plates slightly gapped, no gore. Equal square cells, generous transparent gutters, no overlap/labels/background, common bottom ground-contact line94% cell height. Every pose fully contained; do not enlarge the curled ball or shrink an extended leg pose.",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/source/monsters-v1/rock-beetle-idle-master.png"
+      ],
+      "sha256": "c56779ea43968777d17a90fa2639568468dd8c0347a50e854800c232d0c1a7f9"
+    },
+    {
+      "id": "venom-spider-idle",
+      "monster": "venom-spider",
+      "kind": "identity master",
+      "source": "art/source/monsters-v1/venom-spider-idle-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-57a7dfe2-6fe2-43d5-9da1-af3edd99a650.png",
+      "prompt": "Use case: stylized-concept. Production enemy sprite for Depths, a dark stressful first-person pixel dungeon crawler. Silhouette-led restrained pixel art, large crisp clusters, at most three broad shades per material, warm upper-left highlights and dark cool shadows. Flat sparse surfaces, no individual fur, veins smaller than a large readable mark, no pores/grain/noise, no gradients/dithering/antialiasing, no glossy rendering, no ground shadow, background or text. Serious and unsettling, not cute/cartoon. Front-facing full-body transparent square canvas; keep all anatomy/equipment inside with generous 10% margins. Designed to reduce to a native128x128 sprite with max32 shared colours, bottom-centre scene origin (64,120). No scenery or UI. Dangerous venom-spider kin of the cave spider in the reference: preserve two broad body masses, exactly eight angular jointed leg silhouettes and low forward stance. Change material to sickly dark green-black with a few restrained olive warning patches and two bright pale-green fangs. No hair strands, extra limbs or luminous aura. Idle front-facing slightly elevated so legs read; threatening silhouette, simple clustered forms. Reference spider is direct family/proportions/style reference; retain exactly four legs on each side.",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/enemies/cave-simple-v1/spider/idle.png"
+      ],
+      "sha256": "124c6d9c43d4a884d102b3a90d162d5b94323e9bb57440c5ba406ed16ee7ce9a"
+    },
+    {
+      "id": "venom-spider-poses",
+      "monster": "venom-spider",
+      "kind": "registered pose sheet",
+      "layout": [
+        2,
+        2
+      ],
+      "poses": [
+        "idle",
+        "attack",
+        "hurt"
+      ],
+      "source": "art/source/monsters-v1/venom-spider-poses-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-99669800-693a-4910-af0e-0f264c1751cb.png",
+      "prompt": "Use case: stylized-concept. Production enemy sprite for Depths, a dark stressful first-person pixel dungeon crawler. Silhouette-led restrained pixel art, large crisp clusters, at most three broad shades per material, warm upper-left highlights and dark cool shadows. Flat sparse surfaces, no individual fur, veins smaller than a large readable mark, no pores/grain/noise, no gradients/dithering/antialiasing, no glossy rendering, no ground shadow, background or text. Serious and unsettling, not cute/cartoon. Front-facing full-body transparent square canvas; keep all anatomy/equipment inside with generous 10% margins. Designed to reduce to a native128x128 sprite with max32 shared colours, bottom-centre scene origin (64,120). No scenery or UI. THREE-POSE 2x2 square sprite sheet of the EXACT SAME venom spider in the reference. Same green-black/olive shell, bright pale-green paired fangs, exactly EIGHT angular legs (four per side), same two body masses, scale, head and abdomen sizes across poses. Top left IDLE matches reference low spread stance. Top right ATTACK: lifts its two foremost legs and lunges head/fangs toward viewer, abdomen stays same scale, six other legs braced. Bottom left HURT: body pitched to one side, legs folded/recoiling unevenly, one foreleg pulled inward, not a dead curled ball; still eight legs. Bottom right completely empty. Equal square cells with generous transparent gutters, no overlap or cropped legs, body centred with same ground line94% cellheight. Attack/hurt change the gesture distinctly, not just facial details. No web, liquid venom or ground shadow.",
+      "tool": "built-in image_gen",
+      "reference_images": [
+        "art/source/monsters-v1/venom-spider-idle-master.png"
+      ],
+      "sha256": "a843013f63da92a0c9a700bc1060515b4b350a9e27ff01dd5666ea9e542df4d0"
+    }
+  ]
+}

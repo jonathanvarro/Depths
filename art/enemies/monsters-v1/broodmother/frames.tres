@@ -1,0 +1,13 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3]
+[ext_resource type="Texture2D" path="res://art/enemies/monsters-v1/broodmother/idle.png" id="idle"]
+[ext_resource type="Texture2D" path="res://art/enemies/monsters-v1/broodmother/call.png" id="call"]
+[ext_resource type="Texture2D" path="res://art/enemies/monsters-v1/broodmother/attack.png" id="attack"]
+[ext_resource type="Texture2D" path="res://art/enemies/monsters-v1/broodmother/hurt.png" id="hurt"]
+[ext_resource type="Texture2D" path="res://art/enemies/monsters-v1/broodmother/enraged.png" id="enraged"]
+
+[resource]
+animations = [{"frames":[{"duration":1.0,"texture":ExtResource("idle")}],"loop":true,"name":&"idle","speed":8.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("call")}],"loop":true,"name":&"call","speed":8.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("attack")}],"loop":false,"name":&"attack","speed":8.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("hurt")}],"loop":false,"name":&"hurt","speed":8.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("enraged")}],"loop":true,"name":&"enraged","speed":8.0}]

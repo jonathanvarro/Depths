@@ -1,0 +1,10 @@
+{
+  "id": "breach-hound-idle",
+  "monster": "breach-hound",
+  "kind": "identity master",
+  "source": "art/source/monsters-v1/breach-hound-idle-master.png",
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-65eae640-e8f1-4db4-be9c-7e75c77d500e.png",
+  "prompt": "Use case: stylized-concept. Production enemy sprite for Depths, a dark stressful first-person pixel dungeon crawler. Silhouette-led restrained pixel art, large crisp clusters, at most three broad shades per material, warm upper-left highlights and dark cool shadows. Flat sparse surfaces, no individual fur, veins smaller than a large readable mark, no pores/grain/noise, no gradients/dithering/antialiasing, no glossy rendering, no ground shadow, background or text. Serious and unsettling, not cute/cartoon. Front-facing full-body transparent square canvas; keep all anatomy/equipment inside with generous 10% margins. Designed to reduce to a native128x128 sprite with max32 shared colours, bottom-centre scene origin (64,120). No scenery or UI. Lean hairless breach hound: emaciated dog-like quadruped with slate-grey/brown stretched skin, low shoulders, long narrow head and a wide mouth holding too many large irregular teeth. Four clearly readable planted legs, narrow long tail, no extra limbs, eyes, armour, spikes or gore. Low stalking front-facing slight three-quarter pose, teeth one broad off-white serrated band not tiny detailed render. Hunts in pairs, so a compact readable silhouette with tail held close and no wide effects.",
+  "tool": "built-in image_gen",
+  "reference_images": []
+}

@@ -1,0 +1,10 @@
+{
+  "id": "gas-bloat-idle",
+  "monster": "gas-bloat",
+  "kind": "identity master",
+  "source": "art/source/monsters-v1/gas-bloat-idle-master.png",
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-2e8bf0ed-60fa-4e14-8eed-af7c89a611e8.png",
+  "prompt": "Use case: stylized-concept. Production enemy sprite for Depths, a dark stressful first-person pixel dungeon crawler. Silhouette-led restrained pixel art, large crisp clusters, at most three broad shades per material, warm upper-left highlights and dark cool shadows. Flat sparse surfaces, no individual fur, veins smaller than a large readable mark, no pores/grain/noise, no gradients/dithering/antialiasing, no glossy rendering, no ground shadow, background or text. Serious and unsettling, not cute/cartoon. Front-facing full-body transparent square canvas; keep all anatomy/equipment inside with generous 10% margins. Designed to reduce to a native128x128 sprite with max32 shared colours, bottom-centre scene origin (64,120). No scenery or UI. Gas-bloat from the breach: a drifting taut irregular pear-shaped sac of trapped gas, sickly muted yellow-green, a few broad dark green veins and three/four thin trailing torn tendrils. No feet, hands, wings or recognisable human face. A small dark puckered vent on the lower front, no cute eyes. Broad semi-opaque organic skin masses, opaque sprite body, not a photoreal translucent balloon. Idle floating with tendrils hanging, generous transparent gap below to imply hover. Tragic diseased cave life, restrained non-gory.",
+  "tool": "built-in image_gen",
+  "reference_images": []
+}

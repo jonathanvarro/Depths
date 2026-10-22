@@ -1,0 +1,24 @@
+{
+  "id": "gas-bloat-poses",
+  "monster": "gas-bloat",
+  "kind": "registered pose sheet",
+  "layout": [
+    3,
+    2
+  ],
+  "poses": [
+    "idle",
+    "swell",
+    "attack",
+    "hurt",
+    "burst-1",
+    "burst-2"
+  ],
+  "source": "art/source/monsters-v1/gas-bloat-poses-master.png",
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-019b8051-c166-4203-946b-95be21425374.png",
+  "prompt": "Use case: stylized-concept. Production enemy sprite for Depths, a dark stressful first-person pixel dungeon crawler. Silhouette-led restrained pixel art, large crisp clusters, at most three broad shades per material, warm upper-left highlights and dark cool shadows. Flat sparse surfaces, no individual fur, veins smaller than a large readable mark, no pores/grain/noise, no gradients/dithering/antialiasing, no glossy rendering, no ground shadow, background or text. Serious and unsettling, not cute/cartoon. Front-facing full-body transparent square canvas; keep all anatomy/equipment inside with generous 10% margins. Designed to reduce to a native128x128 sprite with max32 shared colours, bottom-centre scene origin (64,120). No scenery or UI. A SIX-POSE registered sprite sheet of the EXACT SAME gas-bloat in the reference: pear-shaped veined yellow-green bladder, little puckered vent below, three/four torn tendrils, no eyes/face/feet. LANDSCAPE 3:2, THREE columns TWO rows of equal square cells, generous transparent gutters, no grid/labels. Each cell the same fixed camera, same body origin and normal scale, generous transparent margin; do not enlarge idle to fill its cell. Top left IDLE unchanged shape hovering. Top middle SWELL: bladder about 20% wider, tight strain creases, tendrils tucked inward, vent pinched. Top right ATTACK: bladder contracts and puckered vent blows one small opaque cloudy puff toward the viewer; no separate giant cloud obscuring silhouette. Bottom left HURT: deflated on one side, recoil, broad dark bruise, no blood. Bottom middle BURST-1: taut bladder splits into two long ragged flaps with broad pale gas escaping between them. Bottom right BURST-2: collapsed hanging torn skin/tendrils and a small dissipating gas cluster, no gore or organs. Common hover origin and body scale across all cells. Body never touches the bottom contact line. Make the states read through shape, not fine surface detail. Exact transparent background.",
+  "tool": "built-in image_gen",
+  "reference_images": [
+    "art/source/monsters-v1/gas-bloat-idle-master.png"
+  ]
+}

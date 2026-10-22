@@ -3,7 +3,7 @@
 [ext_resource type="Resource" path="res://data/items/pick.tres" id="1_ipeha"]
 [ext_resource type="Script" path="res://scripts/injury.gd" id="2_fkw4u"]
 [ext_resource type="Resource" path="res://data/injuries/deep_wound.tres" id="3_kcrhj"]
-[ext_resource type="PackedScene" path="res://art/enemies/cave-simple-v1/goblin/scene.tscn" id="4_j110i"]
+[ext_resource type="PackedScene" path="res://art/enemies/monsters-v1/hollow-miner/scene.tscn" id="4_j110i"]
 [ext_resource type="Script" path="res://scripts/enemy_type.gd" id="5_706y2"]
 
 [resource]
@@ -20,7 +20,5 @@ tactic = 12
 intro = "One of the gassed shift, risen. It grabs and won't let go - hit it to break the hold."
 fears_fire = false
 threat = 4
-tint = Color(0.55, 0.62, 0.68, 1)
-sprite_scale = 1.15
 drop = ExtResource("1_ipeha")
 drop_chance = 0.2

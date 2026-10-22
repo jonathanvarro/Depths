@@ -1,0 +1,10 @@
+{
+  "id": "rock-beetle-idle",
+  "monster": "rock-beetle",
+  "kind": "identity master",
+  "source": "art/source/monsters-v1/rock-beetle-idle-master.png",
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-a91b1405-7b03-4fb1-a8d5-7ae184f81c6e.png",
+  "prompt": "Use case: stylized-concept. Production enemy sprite for Depths, a dark stressful first-person pixel dungeon crawler. Silhouette-led restrained pixel art, large crisp clusters, at most three broad shades per material, warm upper-left highlights and dark cool shadows. Flat sparse surfaces, no individual fur, veins smaller than a large readable mark, no pores/grain/noise, no gradients/dithering/antialiasing, no glossy rendering, no ground shadow, background or text. Serious and unsettling, not cute/cartoon. Front-facing full-body transparent square canvas; keep all anatomy/equipment inside with generous 10% margins. Designed to reduce to a native128x128 sprite with max32 shared colours, bottom-centre scene origin (64,120). No scenery or UI. Heavy mine-rock beetle, front-facing slightly elevated view, wide low body with two broad interlocking charcoal/taupe shell plates like rough shale, six clearly countable short legs, two small mandibles and short antennae. Its stone-coloured armour is the identity, no glowing gems/runes, horns or excessive cracks. One idle planted pose. Restrained shallow seams and three-tone broad planes.",
+  "tool": "built-in image_gen",
+  "reference_images": []
+}

@@ -1,0 +1,23 @@
+{
+  "id": "goblin-brute-poses",
+  "monster": "goblin-brute",
+  "kind": "registered pose sheet",
+  "layout": [
+    3,
+    2
+  ],
+  "poses": [
+    "idle",
+    "wind-up",
+    "attack",
+    "recover",
+    "hurt"
+  ],
+  "source": "art/source/monsters-v1/goblin-brute-poses-master.png",
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-1e38910c-c8bb-4205-82e0-ec37df08eb9f.png",
+  "prompt": "Use case: stylized-concept. Production enemy sprite for Depths, a dark stressful first-person pixel dungeon crawler. Silhouette-led restrained pixel art, large crisp clusters, at most three broad shades per material, warm upper-left highlights and dark cool shadows. Flat sparse surfaces, no individual fur, veins smaller than a large readable mark, no pores/grain/noise, no gradients/dithering/antialiasing, no glossy rendering, no ground shadow, background or text. Serious and unsettling, not cute/cartoon. Front-facing full-body transparent square canvas; keep all anatomy/equipment inside with generous 10% margins. Designed to reduce to a native128x128 sprite with max32 shared colours, bottom-centre scene origin (64,120). No scenery or UI. A FIVE-POSE sprite sheet of the EXACT SAME goblin brute from the reference, same head/ears/face, huge shoulders, proportions, ragged leather kit, iron rectangular maul and skin palette. LANDSCAPE 3:2 canvas divided into THREE columns and TWO rows of equal square cells. Five separate complete figures, sixth cell transparent empty. No labels/grid lines/background. All five have same anatomical scale: head, torso, legs and maul head stay exactly same size. Leave enough room for high maul; do not shrink the wind-up body. Body centre stays at centre of each cell; planted foot contact at 94% cell height. Top left IDLE: original maul held low across body. Top middle WIND-UP: both hands raise maul high above one shoulder, bent knees, obvious imminent heavy blow. Top right ATTACK: hips/shoulders committed forward, maul driven down toward viewer, complete maul inside cell. Bottom left RECOVER: slumped exhausted, open torso, maul head on floor beside him with haft dragged in one hand. Bottom middle HURT: recoil sideways, braced legs, maul lowered, complete body. Bottom right EMPTY. No extra weapons, shields, armor or gore. Broad simple shapes, no texture grain.",
+  "tool": "built-in image_gen",
+  "reference_images": [
+    "art/source/monsters-v1/goblin-brute-idle-master.png"
+  ]
+}

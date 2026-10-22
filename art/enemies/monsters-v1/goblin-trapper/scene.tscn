@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="SpriteFrames" path="res://art/enemies/monsters-v1/goblin-trapper/frames.tres" id="frames"]
+[ext_resource type="Script" path="res://art/enemies/monsters-v1/pose_bounds.gd" id="mount"]
+
+[node name="goblin-trapper" type="Node3D"]
+script = ExtResource("mount")
+pose_tops = {"idle": [33], "set-snare": [41], "attack": [30], "hurt": [35]}
+metadata/visual_height = 1.3050000000000002
+metadata/pivot = Vector2(64, 120)
+metadata/hover_metres = 0.0
+
+[node name="Sprite" type="AnimatedSprite3D" parent="."]
+position = Vector3(0, 0.8400000000000001, 0)
+pixel_size = 0.015000000000000001
+billboard = 1
+shaded = true
+texture_filter = 0
+alpha_cut = 1
+alpha_scissor_threshold = 0.5
+cast_shadow = 0
+sprite_frames = ExtResource("frames")
+animation = &"idle"

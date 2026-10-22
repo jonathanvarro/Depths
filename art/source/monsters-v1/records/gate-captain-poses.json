@@ -1,0 +1,23 @@
+{
+  "id": "gate-captain-poses",
+  "monster": "gate-captain",
+  "kind": "registered pose sheet",
+  "layout": [
+    3,
+    2
+  ],
+  "poses": [
+    "idle",
+    "rally",
+    "wind-up",
+    "attack",
+    "hurt"
+  ],
+  "source": "art/source/monsters-v1/gate-captain-poses-master.png",
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-79344100-633b-4eb5-ad3c-8b7a714a2a5b.png",
+  "prompt": "Use case: stylized-concept. Production enemy sprite for Depths, a dark stressful first-person pixel dungeon crawler. Silhouette-led restrained pixel art, large crisp clusters, at most three broad shades per material, warm upper-left highlights and dark cool shadows. Flat sparse surfaces, no individual fur, veins smaller than a large readable mark, no pores/grain/noise, no gradients/dithering/antialiasing, no glossy rendering, no ground shadow, background or text. Serious and unsettling, not cute/cartoon. Front-facing full-body transparent square canvas; keep all anatomy/equipment inside with generous 10% margins. Designed to reduce to a native128x128 sprite with max32 shared colours, bottom-centre scene origin (64,120). No scenery or UI. FIVE-POSE sprite sheet of EXACT SAME gate captain from reference: same narrow goblin face/ears, asymmetric rusty plate, brown leather, single heavy rectangular cleaver and curved brass horn on cord. LANDSCAPE3:2 THREE columns TWO rows equal square cells, sixth empty, generous transparent gutters. Same head, body, boots, cleaver and horn scale throughout; raised poses never shrink body. Common ground line94% cellheight. Top left IDLE cleaver low, horn hangs on chest. Top middle RALLY: LEFT hand raises the SAME horn to mouth, bell points sideways, blowing; RIGHT hand keeps cleaver low. No second hanging horn. Top right WIND-UP: cleaver raised above right shoulder, knees bent, horn hanging again. Bottom left ATTACK: cleaver slashes down toward viewer, shoulders twist, complete blade inside cell. Bottom middle HURT: recoils with left hand at ribs, cleaver lowered, same gear. Bottom right EMPTY. Front-facing full body; no shield/crown/extra equipment, ground shadow or background.",
+  "tool": "built-in image_gen",
+  "reference_images": [
+    "art/source/monsters-v1/gate-captain-idle-master.png"
+  ]
+}

@@ -126,6 +126,10 @@ Templates > Download and Install; already installed on the owner's PC).
   (BASIC / DARTING / WEB_AND_VENOM / CUNNING, rules in combat_state.gd),
   `intro` hint, and the art scene (Node3D with AnimatedSprite3D "Sprite":
   idle/attack/hurt).
+  #141's eleven new monster art families (46 drawings, special state poses,
+  separate FX/symbols) are in `art/enemies/monsters-v1`; four live definitions
+  and their builder are connected. `docs/new-monster-art.md` covers the remaining
+  state/FX integration, pose-aware tag bounds and bat mounting/clearance.
 - `scripts/combat_state.gd` – combat rules without visuals (turn order,
   attack/defend/item/retreat, enemy attacks, results); testable directly.
 - `scripts/combat_screen.gd` – combat UI: turn text, log, tappable enemy

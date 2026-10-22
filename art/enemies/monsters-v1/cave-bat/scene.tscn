@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="SpriteFrames" path="res://art/enemies/monsters-v1/cave-bat/frames.tres" id="frames"]
+[ext_resource type="Script" path="res://art/enemies/monsters-v1/bat_mount.gd" id="mount"]
+
+[node name="cave-bat" type="Node3D"]
+script = ExtResource("mount")
+pose_tops = {"idle": [28], "swoop": [36], "landed": [76], "hurt": [42], "attack": [36]}
+hanging_top_pixel = 28
+metadata/visual_height = 0.4154838709677419
+metadata/pivot = Vector2(64, 120)
+metadata/hover_metres = 0.0
+
+[node name="Sprite" type="AnimatedSprite3D" parent="."]
+position = Vector3(0, 0.2529032258064516, 0)
+pixel_size = 0.004516129032258064
+billboard = 1
+shaded = true
+texture_filter = 0
+alpha_cut = 1
+alpha_scissor_threshold = 0.5
+cast_shadow = 0
+sprite_frames = ExtResource("frames")
+animation = &"idle"
