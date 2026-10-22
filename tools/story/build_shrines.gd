@@ -15,7 +15,7 @@ const SPADE := preload("res://data/items/spade.tres")
 const PICK := preload("res://data/items/pick.tres")
 const ORE := preload("res://data/items/copper_ore.tres")
 const OIL := preload("res://data/items/oil_flask.tres")
-const NICHE := "res://art/props/room-states-v1/idol-niche.tscn"  # until the shrine art (#132)
+const SHRINE := "res://art/dressing/landmarks-v1/miners-shrine-event.tscn"  # #132's shrine, set in a wall
 const POOL := "res://art/props/room-states-v1/still-pool.tscn"
 const WORKINGS := "res://art/props/room-states-v1/old-workings.tscn"
 const OBJECT := 4  # DungeonMap.Content.STRANGE_OBJECT
@@ -57,7 +57,7 @@ func _choice(label: String, outcomes: Array, time := 1, extra := {}) -> EventCho
 	return c
 
 
-func _event(name: String, title: String, clue: String, choices: Array, kind: int, depths: Vector2i, prop: String, weight := 1) -> void:
+func _event(name: String, title: String, clue: String, choices: Array, kind: int, depths: Vector2i, prop: String, weight := 1, on_wall := false) -> void:
 	var e := RoomEvent.new()
 	e.title = title
 	e.clue = clue
@@ -67,6 +67,7 @@ func _event(name: String, title: String, clue: String, choices: Array, kind: int
 	e.weight = weight
 	e.choices.assign(choices)
 	e.prop = load(prop)
+	e.prop_on_wall = on_wall
 	var path := "res://data/events/%s.tres" % name
 	print(path, " ", "ok" if ResourceSaver.save(e, path) == OK else "FAILED")
 
@@ -99,7 +100,7 @@ func _initialize() -> void:
 				_outcome("As you rise you notice what you hadn't: the loose stones, the thin places in the floor.", {"boon": eyes}),
 				_outcome("Nothing answers. The cold gets into your knees.", {"weight": 2}),
 			], 2),
-		], OBJECT, Vector2i(1, 3), NICHE, 2)
+		], OBJECT, Vector2i(1, 3), SHRINE, 2, true)
 
 	# A defiled shrine: bless it, break it, or gamble on it - and you can
 	# study it first.
@@ -116,7 +117,7 @@ func _initialize() -> void:
 				_outcome("Heat runs up your arm and into your fists. It doesn't feel like yours.", {"boon": blood}),
 				_outcome("The warmth drains out of you instead.", {"boon": withering}),
 			], 1),
-		], OBJECT, Vector2i(2, 4), NICHE, 2)
+		], OBJECT, Vector2i(2, 4), SHRINE, 2, true)
 
 	# A fouled well: safe with an antidote, a gamble without.
 	_event("object_fouled_well", "A fouled well",

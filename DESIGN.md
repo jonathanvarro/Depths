@@ -518,6 +518,14 @@ Deeper floors mix them (depth 1 mostly single rats; depth 3 pairs and trios like
     - A thrown torch sets it off in a flash that scorches the other foes for 3 and the party for 1.
     - Hurt, it swells, and tears open on its next turn.
   - **Hollow miner** (floor 3; 16 health): grabs an exposed hero, who can't act until the miner is hit. It swings its pick at whoever it holds, and drops a pick 20% of the time.
+- **The rest of the catalogue, built 2026-10-22** on #141's art (numbers from #97, plus first guesses for the lamp-eater and breach hound):
+  - **Rock beetle** (floor 2): bites, then curls up. While curled, a blow does at most 1.
+  - **Venom spider** (floors 2–3): its poison burns 2 a turn instead of 1.
+  - **Goblin trapper** (floors 2–4): lays a snare, so the caught hero acts last next round, then throws a knife that reaches the back row.
+  - **Lamp-eater** (floor 3): drinks 12 oil, or 12 of a held torch's life. In the dark, it bites instead.
+  - **Breach hound** (floor 3, in pairs or threes): goes for the weakest hero, and hits 1 harder while another hound stands.
+  - **Broodmother** (rare, floors 2–3): calls two hatchlings once, her bite poisons, and below half health she rages (+2 damage).
+  - **Gate captain** (rare, floors 3–4): its horn braces an ally, then it winds up a heavy blow.
 - **Art:** ChatGPT's art (#141) is connected, including the special poses (the bat landed, the brute's wind-up and recovery, the bloat swelling and bursting, the miner's grab), the gas cloud, and the new intent and status icons.
 - **Elites and depth scaling — tuned 2026-10-21** (`CombatState.prepare`, shared by the game and the playtest bot):
   - **Depth:** foes on floor 3 have +10% health and damage, and floor 4 +20%, rounded. The queen and the guards she calls are included, so she has 38 health and 4–7 damage.
@@ -728,6 +736,8 @@ The interface should preserve the two elements the owner particularly liked: exp
   - **The dripping hall** (floors 1–3): a room hung with stalactites and drips over wide puddles, under a cold blue light.
   - **The pale grotto** (floors 2–3): fungus glowing on every wall and pale mushrooms, under a green light.
   - **The trophy crossing** (floors 3–4): a goblin junction with strung trophies, a torch on either side and their mark.
+  - **The root-choked junction** (floors 2–3, #132's art): root curtains from the roof, roots down the walls and a root across the floor, with the way through still open.
+  - **The king's lost cache** (floors 1–2, #132's art): broken crates and a split barrel by the walls, a fallen royal banner, rubble and spilled grain. Nothing in it can be taken.
   - The name shows the first time the party walks in. From then on, a small inked diamond marks it on the map, and it's listed under Discoveries.
   - Placement is seeded like the dressing. A landmark never shares a room with the stairs, and never sits where the party arrives.
 

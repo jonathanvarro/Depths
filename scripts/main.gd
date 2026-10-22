@@ -139,6 +139,13 @@ const BAT := preload("res://data/enemies/cave_bat.tres")
 const BRUTE := preload("res://data/enemies/goblin_brute.tres")
 const BLOAT := preload("res://data/enemies/gas_bloat.tres")
 const MINER := preload("res://data/enemies/hollow_miner.tres")
+const BEETLE := preload("res://data/enemies/rock_beetle.tres")
+const VENOM_SPIDER := preload("res://data/enemies/venom_spider.tres")
+const TRAPPER := preload("res://data/enemies/goblin_trapper.tres")
+const LAMP_EATER := preload("res://data/enemies/lamp_eater.tres")
+const HOUND := preload("res://data/enemies/breach_hound.tres")
+const BROODMOTHER := preload("res://data/enemies/broodmother.tres")
+const CAPTAIN := preload("res://data/enemies/gate_captain.tres")
 ## The goblin fortress (#44): floor 3 is its outskirts, floor 4 the fortress
 ## with the queen's hall behind a gate.
 const OUTSKIRTS_DEPTH := 3
@@ -159,17 +166,23 @@ const ENCOUNTER_GROUPS := {
 	# floor 3 warms up for the fortress (owner, 2026-10-19, #49).
 	2: [[GREAT_RAT], [GOBLIN], [GOBLIN, RAT], [SPIDER, SPIDER], [GOBLIN, SPIDER], [WEBSPINNER, GOBLIN],
 			[GREAT_RAT, SPIDER], [GREAT_RAT, SPIDER, RAT], [GOBLIN, RAT, RAT], [GOBLIN, SPIDER, RAT],
-			[GOBLIN, GOBLIN, RAT], [GOBLIN, GOBLIN, SPIDER], [BAT, GOBLIN], [BAT, BAT, SPIDER]],
+			[GOBLIN, GOBLIN, RAT], [GOBLIN, GOBLIN, SPIDER], [BAT, GOBLIN], [BAT, BAT, SPIDER],
+			[BEETLE], [BEETLE, RAT], [BEETLE, SPIDER, RAT], [VENOM_SPIDER, GOBLIN], [TRAPPER, GOBLIN], [TRAPPER, GOBLIN, RAT],
+			[BROODMOTHER]],  # rare: one group in many
 	3: [[GOBLIN], [GOBLIN, ARCHER], [GOBLIN, DRUMMER],
 			[GOBLIN, GOBLIN, ARCHER], [GOBLIN, WEBSPINNER, GOBLIN], [GOBLIN, GOBLIN, DRUMMER], [GUARD, GOBLIN, ARCHER],
 			[GOBLIN, ARCHER, DRUMMER], [GUARD, GOBLIN, GOBLIN],
 			[GOBLIN, GOBLIN, ARCHER, RAT], [GOBLIN, GOBLIN, SPIDER, SPIDER], [GOBLIN, GOBLIN, ARCHER, DRUMMER],
 			# The brute, and what came up through the breach (#140).
 			[BRUTE], [BRUTE, ARCHER], [BRUTE, GOBLIN, DRUMMER], [MINER], [MINER, BLOAT], [MINER, MINER],
-			[BLOAT, GOBLIN, ARCHER], [BLOAT, BLOAT, MINER]],
+			[BLOAT, GOBLIN, ARCHER], [BLOAT, BLOAT, MINER],
+			[TRAPPER, GOBLIN, GOBLIN], [VENOM_SPIDER, GOBLIN, ARCHER], [LAMP_EATER, MINER], [LAMP_EATER, BLOAT, MINER],
+			[HOUND, HOUND], [HOUND, HOUND, LAMP_EATER], [HOUND, HOUND, HOUND],
+			[CAPTAIN, GOBLIN, ARCHER], [BROODMOTHER, SPIDER]],  # the captain and the Broodmother are rare
 	4: [[GOBLIN], [GOBLIN, ARCHER], [GUARD, GOBLIN], [GUARD, ARCHER], [GOBLIN, GOBLIN, ARCHER],
 			[GUARD, GOBLIN, ARCHER], [GUARD, GOBLIN, GOBLIN], [GUARD, DRUMMER, GOBLIN], [GUARD, GUARD, ARCHER, GOBLIN],
-			[BRUTE, GUARD], [BRUTE, ARCHER, GOBLIN], [BRUTE, GOBLIN, DRUMMER]],
+			[BRUTE, GUARD], [BRUTE, ARCHER, GOBLIN], [BRUTE, GOBLIN, DRUMMER],
+			[TRAPPER, GUARD, GOBLIN], [CAPTAIN, GUARD, ARCHER]],
 }
 ## Full parties meet groups close to their size (#49): never more enemies
 ## than heroes standing, except one extra for a full party on the deepest
@@ -1253,6 +1266,13 @@ func _create_room_prop(cell: Vector2i,event: RoomEvent) -> Node3D:
 	var node: Node3D = event.prop.instantiate() if event.prop else _placeholder_prop(event.kind)
 	if node:
 		node.position = Vector3(cell.x * CELL_SIZE, 0.0, cell.y * CELL_SIZE)
+		if event.prop_on_wall:
+			# Against a wall of its cell, facing in (the shrine's art, #132).
+			for side in Dressing.SIDES:
+				if _map.is_wall(cell + side):
+					node.position += Vector3(side.x, 0, side.y) * (CELL_SIZE / 2.0 - 0.01)
+					node.rotation.y = Dressing._yaw_facing(-side)
+					break
 		_level.add_child(node)
 		_props[cell] = node
 	return node

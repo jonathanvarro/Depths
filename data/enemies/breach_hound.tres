@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="EnemyType" format=3]
+
+[ext_resource type="Script" path="res://scripts/injury.gd" id="1_338sh"]
+[ext_resource type="Resource" path="res://data/injuries/deep_wound.tres" id="2_8q8nb"]
+[ext_resource type="PackedScene" path="res://art/enemies/monsters-v1/breach-hound/scene.tscn" id="3_ychik"]
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="4_1m4v8"]
+
+[resource]
+script = ExtResource("4_1m4v8")
+display_name = "Breach hound"
+scene = ExtResource("3_ychik")
+max_health = 9
+damage_min = 2
+accuracy = 0.75
+initiative = 13
+injuries = Array[ExtResource("1_338sh")]([ExtResource("2_8q8nb")])
+attack_verb = "savages"
+tactic = 16
+intro = "Breach hounds hunt together and go for the weakest. Each hits harder while another stands."
+threat = 3

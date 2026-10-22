@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="EnemyType" format=3]
+
+[ext_resource type="Script" path="res://scripts/injury.gd" id="1_bl8nq"]
+[ext_resource type="Resource" path="res://data/injuries/deep_wound.tres" id="2_hetnt"]
+[ext_resource type="PackedScene" path="res://art/enemies/monsters-v1/broodmother/scene.tscn" id="3_3pro8"]
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="4_ch0f5"]
+[ext_resource type="Resource" path="res://data/enemies/small_spider.tres" id="5_fqg88"]
+
+[resource]
+script = ExtResource("4_ch0f5")
+display_name = "Broodmother"
+scene = ExtResource("3_3pro8")
+max_health = 20
+damage_min = 2
+damage_max = 4
+accuracy = 0.75
+initiative = 8
+injuries = Array[ExtResource("1_bl8nq")]([ExtResource("2_hetnt")])
+attack_verb = "bites"
+tactic = 17
+intro = "The Broodmother: she calls her hatchlings once, her bite poisons, and below half health she rages."
+threat = 6
+summons = ExtResource("5_fqg88")

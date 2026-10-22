@@ -11,7 +11,7 @@
 [ext_resource type="Resource" path="res://data/items/pick.tres" id="9_2kgsk"]
 [ext_resource type="Resource" path="res://data/boons/blood_of_the_deep.tres" id="10_rd10s"]
 [ext_resource type="Resource" path="res://data/boons/withering.tres" id="11_hu7q2"]
-[ext_resource type="PackedScene" path="res://art/props/room-states-v1/idol-niche.tscn" id="12_5sqcc"]
+[ext_resource type="PackedScene" path="res://art/dressing/landmarks-v1/miners-shrine-event.tscn" id="12_5sqcc"]
 [ext_resource type="Script" path="res://scripts/room_event.gd" id="13_0s4yr"]
 
 [sub_resource type="Resource" id="Resource_q1s70"]
@@ -81,3 +81,4 @@ min_depth = 2
 max_depth = 4
 weight = 2
 prop = ExtResource("12_5sqcc")
+prop_on_wall = true

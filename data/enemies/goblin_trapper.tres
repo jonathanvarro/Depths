@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="EnemyType" format=3]
+
+[ext_resource type="Script" path="res://scripts/injury.gd" id="1_shqao"]
+[ext_resource type="Resource" path="res://data/injuries/limp.tres" id="2_ky06o"]
+[ext_resource type="PackedScene" path="res://art/enemies/monsters-v1/goblin-trapper/scene.tscn" id="3_64u6c"]
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="4_aqoib"]
+
+[resource]
+script = ExtResource("4_aqoib")
+display_name = "Goblin trapper"
+scene = ExtResource("3_64u6c")
+max_health = 10
+damage_min = 2
+injury_chance = 0.05
+injuries = Array[ExtResource("1_shqao")]([ExtResource("2_ky06o")])
+attack_verb = "throws a knife at"
+tactic = 14
+intro = "A goblin trapper lays snares: whoever it catches acts last next round."
+purse = Vector2i(1, 4)
+fears_fire = false
+threat = 3
+row = "back"
+reach_back = true

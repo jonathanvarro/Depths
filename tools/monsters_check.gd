@@ -157,6 +157,72 @@ func _initialize() -> void:
 	check("hitting the miner breaks the hold", not fight.is_grabbed(held))
 	check("it may leave a pick", _e("hollow_miner").drop == load("res://data/items/pick.tres") and _e("hollow_miner").drop_chance > 0.0)
 
+	# The rest of the catalogue (#140).
+	party = _party(["mara", "corin"])
+	mara = party.members[0]
+	fight = _fight(party, ["rock_beetle", "rat"])
+	var beetle = fight.foes[0]
+	fight.enemy_act(beetle)
+	check("a beetle bites, then curls up", beetle.intent == CS.Intent.CURL)
+	fight.enemy_act(beetle)
+	mara.accuracy = 5.0
+	check("curled, a blow barely scratches it", beetle.curled and fight.hero_attack(mara, beetle)["damage"] <= 1)
+	party = _party(["mara"])
+	fight = _fight(party, ["venom_spider"])
+	var vs = fight.foes[0]
+	vs.has_webbed = true
+	vs.intent = CS.Intent.BITE
+	var vt: EnemyType = vs.type.duplicate()
+	vt.accuracy = 1.0
+	vs.type = vt
+	party.members[0].health = 99
+	party.members[0].max_health = 99
+	fight.enemy_act(vs)
+	var hp: int = party.members[0].health
+	fight._tick_venom(party.members[0])
+	check("a venom spider's poison burns 2 a turn", hp - party.members[0].health == 2)
+	party = _party(["mara", "corin"])
+	fight = _fight(party, ["goblin_trapper"])
+	var trapper = fight.foes[0]
+	check("a trapper lays a snare first", trapper.intent == CS.Intent.SNARE)
+	fight.enemy_act(trapper)
+	var snared: Companion = party.members[0] if fight.is_snared(party.members[0]) else party.members[1]
+	fight._build_order()
+	check("the snared hero acts last next round", fight._order[-1] == snared or fight._order.filter(func(a): return a is Companion)[-1] == snared)
+	party = _party(["mara"])
+	party.supplies.has_lantern = true
+	party.supplies.source = party.supplies.Source.LANTERN
+	party.supplies.oil = 60.0
+	fight = _fight(party, ["lamp_eater"])
+	var lamp = fight.foes[0]
+	check("a lamp-eater is drawn to the light", lamp.intent == CS.Intent.DRAIN)
+	var drink: Dictionary = fight.enemy_act(lamp)
+	check("...and drinks the lantern's oil", party.supplies.oil < 60.0 and drink.get("drained", false), party.supplies.oil)
+	party.supplies.oil = 0.0
+	party.supplies.source = party.supplies.Source.NONE
+	fight.plan(lamp)
+	check("in the dark, it bites instead", lamp.intent == CS.Intent.BITE)
+	party = _party(["mara", "corin"])
+	party.members[0].health = 3
+	fight = _fight(party, ["breach_hound", "breach_hound"])
+	check("hounds go for the weakest", fight._choose_target(fight.foes[0]) == party.members[0])
+	party = _party(["mara"])
+	fight = _fight(party, ["broodmother"])
+	var mother = fight.foes[0]
+	check("the Broodmother calls her brood", mother.intent == CS.Intent.BROOD)
+	fight.enemy_act(mother)
+	check("...two hatchlings join", fight.foes.size() == 3 and fight.foes[1].type.display_name == "Small spider")
+	check("...only once", mother.intent == CS.Intent.BITE)
+	mother.health = 5
+	fight.plan(mother)
+	check("below half health she rages", mother.enraged)
+	party = _party(["mara"])
+	fight = _fight(party, ["gate_captain", "goblin"])
+	var captain = fight.foes[0]
+	check("a gate captain rallies first", captain.intent == CS.Intent.RALLY)
+	fight.enemy_act(captain)
+	check("...bracing its ally", fight.foes[1].shielded and captain.intent == CS.Intent.HEAVY)
+
 	# Where they turn up.
 	var main_script = load("res://scripts/main.gd")
 	var groups: Dictionary = main_script.ENCOUNTER_GROUPS
@@ -165,6 +231,8 @@ func _initialize() -> void:
 	check("bats on floors 1-2, not 3-4", on.call(1, "cave_bat") and on.call(2, "cave_bat") and not on.call(3, "cave_bat"))
 	check("the brute on floors 3-4", on.call(3, "goblin_brute") and on.call(4, "goblin_brute") and not on.call(2, "goblin_brute"))
 	check("breach creatures on floor 3, not in the fortress", on.call(3, "gas_bloat") and on.call(3, "hollow_miner") and not on.call(4, "hollow_miner"))
+	check("beetles and trappers from floor 2; hounds and lamp-eaters on 3", on.call(2, "rock_beetle") and on.call(2, "goblin_trapper") and on.call(3, "breach_hound") and on.call(3, "lamp_eater") and not on.call(2, "breach_hound"))
+	check("the Broodmother on floors 2-3; the gate captain on 3-4", on.call(2, "broodmother") and on.call(3, "broodmother") and on.call(4, "gate_captain") and not on.call(4, "broodmother"))
 
 	# In the game: a fight with all four, on their placeholders.
 	var main = main_script.new() if false else load("res://scenes/main.tscn").instantiate()

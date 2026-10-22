@@ -21,3 +21,6 @@ extends Resource
 ## Missing art falls back to a plain placeholder. Unresolved traps require
 ## Keen eyes; their sprung/collapsed remains are visible after resolving.
 @export var prop: PackedScene
+## The prop stands against a wall (a miners' shrine, #132/#133): set back
+## to the nearest wall of its cell, facing into the room.
+@export var prop_on_wall := false

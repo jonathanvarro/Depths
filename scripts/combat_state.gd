@@ -34,7 +34,7 @@ const GOBLIN_SHIELD_CHANCE := 0.4
 ## Enemy intentions (#60): every enemy shows what it will do on its next
 ## turn - the action, never the target - so Defend, targeting and items are
 ## real choices. Each is planned after the enemy acts (and at the start).
-enum Intent { ATTACK, LUNGE, DART, WEB, BITE, SWING, HEAVY, SHIELD, KILLING_BLOW, SHOOT, BASH, BRACE, CALL, SCREECH, CLEAVER, RUSH, RECOVER, BEAT, SWOOP, SWELL, GRAB }
+enum Intent { ATTACK, LUNGE, DART, WEB, BITE, SWING, HEAVY, SHIELD, KILLING_BLOW, SHOOT, BASH, BRACE, CALL, SCREECH, CLEAVER, RUSH, RECOVER, BEAT, SWOOP, SWELL, GRAB, CURL, SNARE, DRAIN, RALLY, BROOD }
 const INTENT_TEXT := {
 	Intent.ATTACK: "attacking",
 	Intent.LUNGE: "lunging",
@@ -57,7 +57,24 @@ const INTENT_TEXT := {
 	Intent.SWOOP: "circling to swoop",
 	Intent.SWELL: "swelling, about to burst",
 	Intent.GRAB: "reaching to grab",
+	Intent.CURL: "curling up",
+	Intent.SNARE: "laying a snare",
+	Intent.DRAIN: "drawn to your light",
+	Intent.RALLY: "raising its horn to rally",
+	Intent.BROOD: "calling her brood",
 }
+## The rest of #140's monsters. A curled beetle takes at most this much
+## from a blow. A snared hero acts last next round. A lamp-eater drinks
+## this much oil, or this much of a torch's life. Hounds hit harder while
+## another hound stands. The Broodmother calls this many hatchlings, once,
+## and rages below half health. A gate captain's rally braces an ally.
+const CURLED_DAMAGE := 1
+const SNARE_INITIATIVE := 10
+const DRAIN_OIL := 12.0
+const DRAIN_TORCH := 12.0
+const PACK_DAMAGE := 1
+const BROOD_HATCHLINGS := 2
+const BROOD_RAGE_DAMAGE := 2
 ## New monsters (#140). A brute recovering from its heavy blow is wide open:
 ## blows land this much harder. A gas-bloat's burst: damage to the front
 ## and back rows and strain for all; killed from the back row, the gas
@@ -133,6 +150,7 @@ class Foe:
 	var enraged := false
 	var calls := 0
 	var elite := ""  # "Hardened", "Savage", "Swift" or "Venomous" (#140)
+	var curled := false  # rock beetle: blows barely scratch it until its next turn
 
 	func in_back() -> bool:
 		return (row_override if row_override != "" else type.row) == "back"
@@ -158,10 +176,13 @@ var _turn := 0
 var _defending := {}  # Companion -> true until their next turn
 var _webbed := {}  # Companion -> true until their next action
 var _venom := {}  # Companion -> turns left
+var _venom_damage := {}  # Companion -> damage per tick (a venom spider's is worse)
 var _opened := {}  # Companion -> true after their first attack (opening shot, #47)
 var _drummed := {}  # Foe -> true: their next hit is stronger (goblin drummer)
 var _grabbed := {}  # Companion -> Foe holding them (hollow miner, #140)
 var depth_scale := 1.0  # see prepare()
+var _snared := {}  # Companion -> true: acts last next round (goblin trapper)
+var _snared_this_round := {}  # who's acting last now, for the card's mark
 ## Things that happened between actions (venom ticking...). The combat
 ## screen shows and clears these after each advance().
 var events: PackedStringArray = []
@@ -290,6 +311,24 @@ func plan(foe: Foe) -> void:
 		EnemyType.Tactic.GRABBER:
 			var holding := _grabbed.values().has(foe)
 			foe.intent = Intent.SWING if holding or foe.intent == Intent.GRAB else Intent.GRAB
+		EnemyType.Tactic.CURLER:
+			foe.intent = Intent.CURL if foe.intent == Intent.BITE else Intent.BITE
+		EnemyType.Tactic.TRAPPER:
+			foe.intent = Intent.SHOOT if foe.intent == Intent.SNARE else Intent.SNARE
+		EnemyType.Tactic.DRAINER:
+			foe.intent = Intent.DRAIN if party.supplies.light_band() != Supplies.Light.OUT else Intent.BITE
+		EnemyType.Tactic.PACK:
+			foe.intent = Intent.LUNGE
+		EnemyType.Tactic.BROOD:
+			if not foe.enraged and hurt:
+				foe.enraged = true
+				events.append("The %s shrieks and lunges, enraged!" % foe.name.to_lower())
+			foe.intent = Intent.BROOD if foe.calls == 0 and foe.intent != Intent.BROOD and not foe.enraged else Intent.BITE
+		EnemyType.Tactic.CAPTAIN:
+			match foe.intent:
+				Intent.RALLY: foe.intent = Intent.HEAVY
+				Intent.HEAVY: foe.intent = Intent.SWING
+				_: foe.intent = Intent.RALLY if living_foes().size() > 1 else Intent.HEAVY
 		_:
 			foe.intent = Intent.ATTACK
 
@@ -409,6 +448,7 @@ func advance() -> void:
 					return
 			else:
 				actor.shielded = false  # a shield lasts until its next turn
+				actor.curled = false  # and a beetle unfolds
 				return
 		_turn += 1
 
@@ -524,6 +564,8 @@ func hero_attack(hero: Companion, target: Foe) -> Dictionary:
 		_opened[hero] = true
 		if target.type.tactic == EnemyType.Tactic.BRUTE and target.intent == Intent.RECOVER:
 			damage += BRUTE_OPENING  # a brute catching its breath is wide open (#140)
+		if target.curled:
+			damage = mini(damage, CURLED_DAMAGE)  # a curled beetle: a scratch at most
 		if target.shielded:
 			damage = maxi(1, damage / 2)
 		if target.in_back() and guard_wall_up():
@@ -636,6 +678,29 @@ func _carry_out(foe: Foe) -> Dictionary:
 			var swollen := "The %s swells and tears open! %s" % [foe.name.to_lower(), _burst(foe, "near")]
 			_check_end()
 			return {"target": null, "hit": false, "damage": 0, "injury": null, "text": swollen}
+		Intent.CURL:
+			foe.curled = true
+			return {"target": null, "hit": false, "damage": 0, "injury": null,
+					"text": "The %s curls into a stony ball." % foe.name.to_lower()}
+		Intent.SNARE:
+			var caught := _choose_target(foe)
+			if caught == null:
+				return {"target": null, "hit": false, "damage": 0, "injury": null, "text": ""}
+			_snared[caught] = true
+			return {"target": caught, "hit": true, "damage": 0, "injury": null,
+					"text": "The %s's snare catches %s's ankle. They'll be last to act next round." % [foe.name.to_lower(), caught.display_name]}
+		Intent.DRAIN:
+			return _drain(foe)
+		Intent.RALLY:
+			var allies := living_foes().filter(func(f: Foe): return f != foe)
+			if not allies.is_empty():
+				var ally: Foe = allies[rng.randi_range(0, allies.size() - 1)]
+				ally.shielded = true
+				return {"target": null, "hit": false, "damage": 0, "injury": null,
+						"text": "The %s blasts its horn - the %s braces behind its guard." % [foe.name.to_lower(), ally.name.to_lower()]}
+			return {"target": null, "hit": false, "damage": 0, "injury": null, "text": ""}
+		Intent.BROOD:
+			return _call_brood(foe)
 		Intent.GRAB:
 			var held := _choose_target(foe)
 			if held == null:
@@ -657,6 +722,10 @@ func _carry_out(foe: Foe) -> Dictionary:
 			damage += ENRAGED_DAMAGE
 		if foe.intent == Intent.RUSH:
 			damage += RUSH_DAMAGE
+		if foe.type.tactic == EnemyType.Tactic.PACK and living_foes().any(func(f: Foe): return f != foe and f.type.tactic == EnemyType.Tactic.PACK):
+			damage += PACK_DAMAGE  # hounds hunt together (#140)
+		if foe.type.tactic == EnemyType.Tactic.BROOD and foe.enraged:
+			damage += BROOD_RAGE_DAMAGE
 		if _drummed.has(foe):
 			damage += DRUM_DAMAGE
 			_drummed.erase(foe)
@@ -677,8 +746,9 @@ func _carry_out(foe: Foe) -> Dictionary:
 		outcome["damage"] = damage
 		var verb: String = "brings down a heavy blow on" if heavy else foe.type.attack_verb
 		outcome["text"] = "The %s %s %s for %d." % [foe.name.to_lower(), verb, target.display_name, damage]
-		if ((foe.type.tactic == EnemyType.Tactic.WEB_AND_VENOM and foe.type.venomous) or foe.elite == "Venomous") and target.is_alive():
+		if ((foe.type.tactic in [EnemyType.Tactic.WEB_AND_VENOM, EnemyType.Tactic.BROOD] and foe.type.venomous) or foe.elite == "Venomous") and target.is_alive():
 			_venom[target] = VENOM_TURNS
+			_venom_damage[target] = maxi(foe.type.venom_damage, 1)
 			outcome["text"] += " Venom burns in the wound."
 		if target.is_alive() and not foe.type.injuries.is_empty() and rng.randf() < foe.type.injury_chance:
 			var injury: Injury = foe.type.injuries[rng.randi_range(0, foe.type.injuries.size() - 1)]
@@ -725,6 +795,45 @@ func hero_throw_torch(hero: Companion, target: Foe) -> Dictionary:
 		outcome["text"] = "%s hurls the burning torch - the %s is burned for %d, but stands its ground." % [hero.display_name, target.name.to_lower(), burn]
 	_check_end()
 	return outcome
+
+
+## Snared: acting last this round (#140), for the card's mark.
+func is_snared(hero: Companion) -> bool:
+	return _snared_this_round.has(hero) or _snared.has(hero)
+
+
+## A lamp-eater drinks the light (#140): oil from the lantern, or a held
+## torch's remaining life. Out of light, it bites instead (planned so).
+func _drain(foe: Foe) -> Dictionary:
+	var supplies = party.supplies
+	var text := ""
+	if supplies.torch_lit():
+		supplies.torch_left = maxf(0.0, supplies.torch_left - DRAIN_TORCH)
+		if supplies.torch_left <= 0.0:
+			supplies.burn(1)  # it gutters out
+		text = "The %s settles on the torch and drinks its flame low." % foe.name.to_lower()
+	elif supplies.has_lantern and supplies.oil > 0.0:
+		supplies.oil = maxf(0.0, supplies.oil - DRAIN_OIL)
+		text = "The %s clings to the lantern and drinks - the light gutters." % foe.name.to_lower()
+	supplies.changed.emit()
+	return {"target": null, "hit": false, "damage": 0, "injury": null, "drained": true, "text": text}
+
+
+## The Broodmother calls her hatchlings (#140), once.
+func _call_brood(mother: Foe) -> Dictionary:
+	mother.calls += 1
+	var hatchling: EnemyType = mother.type.summons
+	if hatchling == null:
+		return {"target": null, "hit": false, "damage": 0, "injury": null, "text": ""}
+	for i in BROOD_HATCHLINGS:
+		var count := foes.filter(func(f: Foe): return f.type.display_name == hatchling.display_name).size() + 1
+		var young := Foe.new(hatchling, "%s %d" % [hatchling.display_name, count])
+		_scale(young)
+		foes.append(young)
+		plan(young)
+		foe_joined.emit(young)
+	return {"target": null, "hit": false, "damage": 0, "injury": null,
+			"text": "The %s's sac splits - hatchlings swarm out!" % mother.name.to_lower()}
 
 
 ## A gas-bloat bursts (#140). `how`: "near" (killed up close, or it
@@ -778,6 +887,8 @@ func _choose_target(foe: Foe = null) -> Companion:
 			pool = exposed if not exposed.is_empty() else living  # flanks
 		EnemyType.Tactic.DARTING:
 			pool = guards if not guards.is_empty() else [_weakest(living)]
+		EnemyType.Tactic.PACK:
+			pool = [_weakest(living)]  # hounds go for the weakest, braced or not
 		EnemyType.Tactic.GRABBER:
 			# It swings at whoever it holds; it grabs whoever isn't braced.
 			var held: Array = living.filter(func(h: Companion): return _grabbed.get(h) == foe)
@@ -799,13 +910,14 @@ func _tick_venom(hero: Companion) -> void:
 	var turns: int = _venom.get(hero, 0)
 	if turns <= 0:
 		return
-	hero.change_health(-VENOM_DAMAGE)
+	var burn: int = _venom_damage.get(hero, VENOM_DAMAGE)
+	hero.change_health(-burn)
 	turns -= 1
 	if turns > 0:
 		_venom[hero] = turns
 	else:
 		_venom.erase(hero)
-	var text := "Venom burns %s (%d)." % [hero.display_name, VENOM_DAMAGE]
+	var text := "Venom burns %s (%d)." % [hero.display_name, burn]
 	if not hero.is_alive():
 		text += _fall_text(hero)
 	events.append(text)
@@ -819,17 +931,22 @@ func _fall_text(hero: Companion) -> String:
 
 func _build_order() -> void:
 	_order.clear()
+	var snared := _snared.duplicate()  # a snare lasts one round (#140)
 	for hero in party.living_members():
 		_order.append(hero)
 	for foe in living_foes():
 		_order.append(foe)
 	# Higher initiative first; ties go to the party.
 	_order.sort_custom(func(a, b):
-		var ia: int = a.effective_initiative() if a is Companion else a.type.initiative
-		var ib: int = b.effective_initiative() if b is Companion else b.type.initiative
+		var ia: int = (a.effective_initiative() - (SNARE_INITIATIVE if _snared.has(a) else 0)) if a is Companion else a.type.initiative
+		var ib: int = (b.effective_initiative() - (SNARE_INITIATIVE if _snared.has(b) else 0)) if b is Companion else b.type.initiative
 		if ia != ib:
 			return ia > ib
 		return a is Companion and not b is Companion)
+	_snared = {}
+	_snared_this_round = {}
+	for hero in snared:
+		_snared_this_round[hero] = true
 
 
 func _check_end() -> void:

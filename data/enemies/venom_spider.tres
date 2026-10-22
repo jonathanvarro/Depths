@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="EnemyType" format=3]
+
+[ext_resource type="Script" path="res://scripts/injury.gd" id="1_p4tv1"]
+[ext_resource type="PackedScene" path="res://art/enemies/monsters-v1/venom-spider/scene.tscn" id="2_wuvvt"]
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="3_6swf0"]
+
+[resource]
+script = ExtResource("3_6swf0")
+display_name = "Venom spider"
+scene = ExtResource("2_wuvvt")
+max_health = 8
+damage_min = 2
+accuracy = 0.75
+initiative = 9
+injury_chance = 0.0
+attack_verb = "bites"
+tactic = 2
+intro = "A venom spider, its colours a warning: its bite burns twice as hard. An antidote will help."
+threat = 3
+row = "back"
+reach_back = true
+web_chance = 0.15
+venom_damage = 2

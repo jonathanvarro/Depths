@@ -36,6 +36,12 @@ enum Tactic {
 	BRUTE,  ## swings, winds up a heavy blow, then recovers - wide open (goblin brute)
 	BLOAT,  ## drifts and puffs; swells when hurt; bursts gas over the party when it dies (gas-bloat)
 	GRABBER,  ## grabs a hero, who can't act until it's hit; swings its pick (hollow miner)
+	CURLER,  ## bites, then curls up: blows barely scratch it until it unfolds (rock beetle)
+	TRAPPER,  ## sets a snare (the hero acts last next round), then throws (goblin trapper)
+	DRAINER,  ## drinks the party's light - lantern oil or a torch's life (lamp-eater)
+	PACK,  ## lunges at the weakest; hits harder while another of its pack stands (breach hound)
+	BROOD,  ## calls hatchlings once, bites with venom, rages below half health (Broodmother)
+	CAPTAIN,  ## rallies an ally behind a raised guard, winds up, strikes (gate captain)
 }
 @export var tactic := Tactic.BASIC
 ## Shown when the fight starts: a hint at how it fights.
@@ -56,6 +62,8 @@ enum Tactic {
 ## Spiders: chance to web again after a bite, and whether bites poison.
 @export_range(0.0, 1.0) var web_chance := 0.25
 @export var venomous := true
+## Venom per tick for a bite that poisons (a venom spider's is worse, #140).
+@export var venom_damage := 1
 ## Who it calls into the fight (the queen's guards, #44).
 @export var summons: EnemyType
 ## Placeholder look until its own art exists: a tint and a size for the

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="EnemyType" format=3]
+
+[ext_resource type="Script" path="res://scripts/injury.gd" id="1_1mj7m"]
+[ext_resource type="Resource" path="res://data/injuries/limp.tres" id="2_hvvk6"]
+[ext_resource type="PackedScene" path="res://art/enemies/monsters-v1/rock-beetle/scene.tscn" id="3_8iit7"]
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="4_q3s3x"]
+
+[resource]
+script = ExtResource("4_q3s3x")
+display_name = "Rock beetle"
+scene = ExtResource("3_8iit7")
+max_health = 10
+damage_min = 2
+accuracy = 0.65
+initiative = 6
+injury_chance = 0.05
+injuries = Array[ExtResource("1_1mj7m")]([ExtResource("2_hvvk6")])
+attack_verb = "bites"
+tactic = 13
+intro = "A rock beetle: curled up, blows barely scratch it. Hit its partner, or brace, until it unfolds."
+threat = 3

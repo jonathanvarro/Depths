@@ -60,7 +60,14 @@ const MONSTER_INTENTS := {
 	CombatState.Intent.SWOOP: preload("res://art/ui/monsters-v1/intent/swoop.png"),
 	CombatState.Intent.SWELL: preload("res://art/ui/monsters-v1/intent/swell.png"),
 	CombatState.Intent.GRAB: preload("res://art/ui/monsters-v1/intent/grab.png"),
+	CombatState.Intent.CURL: preload("res://art/ui/monsters-v1/intent/curl.png"),
+	CombatState.Intent.SNARE: preload("res://art/ui/monsters-v1/intent/set-snare.png"),
+	CombatState.Intent.DRAIN: preload("res://art/ui/monsters-v1/intent/drain-light.png"),
+	CombatState.Intent.RALLY: preload("res://art/ui/monsters-v1/intent/rally.png"),
+	CombatState.Intent.BROOD: preload("res://art/ui/monsters-v1/intent/call-brood.png"),
 }
+const SNARED_MARK := preload("res://art/ui/monsters-v1/status/snared.png")
+const LIGHT_DRAINED := preload("res://art/ui/monsters-v1/fx/light-drained.png")
 const GRABBED_MARK := preload("res://art/ui/monsters-v1/status/grabbed.png")
 const ELITE_COLOUR := Color("e0632f")
 const ELITE_ABOUT := {
@@ -291,6 +298,9 @@ func _enemy_action(foe) -> void:
 		await _fade_out(foe)
 		return
 	_play(foe, "attack", 0.4)
+	if outcome.get("drained", false):
+		# A lamp-eater drinks the light (#141's pop, over the held light).
+		_fx.icon(Vector2(size.x * 0.66, size.y * 0.78), LIGHT_DRAINED, 56.0)
 	_show_enemy_outcome(foe, intent, outcome, was_webbed)
 	_refresh()
 	await get_tree().create_timer(0.5).timeout
@@ -378,6 +388,14 @@ func _rest_pose(foe, sprite: AnimatedSprite3D) -> String:
 			pose = "swell" if foe.intent == CombatState.Intent.SWELL else "idle"
 		EnemyType.Tactic.GRABBER:
 			pose = "grab" if _state.party.living_members().any(func(h): return _state._grabbed.get(h) == foe) else "idle"
+		EnemyType.Tactic.CURLER:
+			pose = "curled" if foe.curled else "idle"
+		EnemyType.Tactic.TRAPPER:
+			pose = "set-snare" if foe.intent == CombatState.Intent.SNARE else "idle"
+		EnemyType.Tactic.CAPTAIN:
+			pose = {CombatState.Intent.RALLY: "rally", CombatState.Intent.HEAVY: "wind-up"}.get(foe.intent, "idle")
+		EnemyType.Tactic.BROOD:
+			pose = "enraged" if foe.enraged else ("call" if foe.intent == CombatState.Intent.BROOD else "idle")
 	return pose if sprite.sprite_frames.has_animation(pose) else "idle"
 
 
@@ -473,7 +491,8 @@ func _intent_icon(intent: int) -> Texture2D:
 		CombatState.Intent.RUSH: return MARKS["rush"]
 		CombatState.Intent.RECOVER: return MARKS["recover"]
 		CombatState.Intent.BEAT: return MARKS["beat"]
-		CombatState.Intent.SWOOP, CombatState.Intent.SWELL, CombatState.Intent.GRAB:
+		CombatState.Intent.SWOOP, CombatState.Intent.SWELL, CombatState.Intent.GRAB, CombatState.Intent.CURL, \
+				CombatState.Intent.SNARE, CombatState.Intent.DRAIN, CombatState.Intent.RALLY, CombatState.Intent.BROOD:
 			return MONSTER_INTENTS[intent]
 	return Glyphs.intention(intent)
 
@@ -595,6 +614,8 @@ func _refresh() -> void:
 			marks.append([MARKS["venom"], "Venom: loses health each turn"])
 		if ongoing and _state.is_grabbed(hero):
 			marks.append([GRABBED_MARK, "Grabbed: can't act until the one holding them is hit"])
+		if ongoing and _state.is_snared(hero):
+			marks.append([SNARED_MARK, "Snared: acts last this round"])
 		if ongoing and _state.is_defending(hero):
 			marks.append([MARKS["guard"], "Defending: takes less damage"])
 		card.set_marks(marks)

@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="EnemyType" format=3]
+
+[ext_resource type="Script" path="res://scripts/injury.gd" id="1_qh4ly"]
+[ext_resource type="Resource" path="res://data/injuries/deep_wound.tres" id="2_sv0j1"]
+[ext_resource type="Resource" path="res://data/injuries/limp.tres" id="3_4uxqe"]
+[ext_resource type="PackedScene" path="res://art/enemies/monsters-v1/gate-captain/scene.tscn" id="4_h18x7"]
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="5_qa83n"]
+
+[resource]
+script = ExtResource("5_qa83n")
+display_name = "Gate captain"
+scene = ExtResource("4_h18x7")
+max_health = 22
+damage_min = 3
+damage_max = 4
+accuracy = 0.75
+initiative = 9
+injury_chance = 0.15
+injuries = Array[ExtResource("1_qh4ly")]([ExtResource("2_sv0j1"), ExtResource("3_4uxqe")])
+attack_verb = "cleaves"
+tactic = 18
+intro = "A gate captain: its horn braces an ally, then it winds up a heavy blow. Brace for it."
+purse = Vector2i(6, 10)
+fears_fire = false
+threat = 6

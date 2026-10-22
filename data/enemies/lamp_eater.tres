@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EnemyType" format=3]
+
+[ext_resource type="Script" path="res://scripts/injury.gd" id="1_oed5a"]
+[ext_resource type="PackedScene" path="res://art/enemies/monsters-v1/lamp-eater/scene.tscn" id="2_lw61c"]
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="3_q426p"]
+
+[resource]
+script = ExtResource("3_q426p")
+display_name = "Lamp-eater"
+scene = ExtResource("2_lw61c")
+max_health = 7
+initiative = 12
+injury_chance = 0.0
+attack_verb = "bites"
+tactic = 15
+intro = "A lamp-eater, drawn to your light: it drinks oil and torch-flame. Kill it before it leaves you in the dark."
+fears_fire = false
+threat = 3

@@ -19,7 +19,11 @@ const KINDS := {
 	"dripping_hall": {"name": "The dripping hall", "floors": [1, 3], "spot": "room"},
 	"pale_grotto": {"name": "The pale grotto", "floors": [2, 3], "spot": "room"},
 	"trophy_crossing": {"name": "The trophy crossing", "floors": [3, 4], "spot": "junction"},
+	# #132's art: roots that broke through, and the king's buried supplies.
+	"root_junction": {"name": "The root-choked junction", "floors": [2, 3], "spot": "junction"},
+	"lost_cache": {"name": "The king's lost cache", "floors": [1, 2], "spot": "room"},
 }
+const ART := "res://art/dressing/landmarks-v1/"
 const PER_FLOOR := 2
 const MIN_ROOM := 6  # cells
 const AWAY_FROM_START := 4  # steps: not where the party arrives
@@ -63,6 +67,8 @@ static func place(level: Node3D, map, depth: int, seed: int, cell_size: float, w
 			"dripping_hall": _build_dripping_hall(piece, map, cells, rng, cell_size, wall_height)
 			"pale_grotto": _build_pale_grotto(piece, map, cells, rng, cell_size, wall_height)
 			"trophy_crossing": _build_trophy_crossing(piece, map, cells, rng, cell_size, wall_height)
+			"root_junction": _build_root_junction(piece, map, cells, rng, cell_size, wall_height)
+			"lost_cache": _build_lost_cache(piece, map, cells, rng, cell_size, wall_height)
 		map.landmarks.append({"id": id, "name": KINDS[id]["name"], "cells": cells, "centre": _centre(cells), "seen": id in seen_before})
 	return used
 
@@ -194,6 +200,48 @@ static func _build_pale_grotto(piece: Node3D, map, cells: Array, rng: RandomNumb
 			var toward: Vector2i = sides[rng.randi() % sides.size()] if not sides.is_empty() else Vector2i(1, 1)
 			Dressing._put(piece, "pale-mushrooms", at + Vector3(toward.x, 0, toward.y) * cell_size * 0.3, 0.0)
 	_glow(piece, _at(_centre(cells), cell_size) + Vector3(0, 1.0, 0), Color(0.55, 0.9, 0.6), 1.1, cell_size * 3.2)
+
+
+static func _art(parent: Node3D, id: String, at: Vector3, yaw: float) -> Node3D:
+	var node: Node3D = load(ART + id + ".tscn").instantiate()
+	node.position = at
+	node.rotation.y = yaw
+	parent.add_child(node)
+	return node
+
+
+## Roots that broke through where passages meet (#132): curtains from the
+## roof, roots down the walls, tangles at their feet, one across the floor.
+## The way through stays open below the fringe.
+static func _build_root_junction(piece: Node3D, map, cells: Array, rng: RandomNumberGenerator, cell_size: float, wall_height: float) -> void:
+	var cell: Vector2i = cells[0]
+	var around: Array = [cell] + Dressing.SIDES.map(func(s): return cell + s).filter(func(c): return map.is_passable(c))
+	for c: Vector2i in around:
+		var at := _at(c, cell_size)
+		_art(piece, "root-curtain-a" if rng.randi() % 2 == 0 else "root-curtain-b", at + Vector3(rng.randf_range(-0.4, 0.4), wall_height - 0.01, rng.randf_range(-0.4, 0.4)), rng.randf_range(0, TAU))
+		for side in Dressing._wall_sides(map, c):
+			if rng.randi() % 2 == 0:
+				var wall := at + Vector3(side.x, 0, side.y) * (cell_size / 2.0 - 0.01)
+				_art(piece, "wall-roots", wall + Vector3(0, 1.3, 0), Dressing._yaw_facing(-side))
+				_art(piece, "root-foot-tangle", at + Vector3(side.x, 0, side.y) * cell_size * 0.36, 0.0)
+	_art(piece, "floor-crossing-root", _at(cell, cell_size), rng.randi_range(0, 3) * PI / 2.0)
+
+
+## The king's earlier expedition stored supplies here, and the roof came
+## down on them (#132): broken crates and a barrel by the walls, a torn
+## banner, rubble and spilled grain. Nothing here can be taken.
+static func _build_lost_cache(piece: Node3D, map, cells: Array, rng: RandomNumberGenerator, cell_size: float, wall_height: float) -> void:
+	var edge_cells: Array = cells.filter(func(c): return not Dressing._wall_sides(map, c).is_empty())
+	for i in mini(3, edge_cells.size()):
+		var c: Vector2i = edge_cells.pop_at(rng.randi_range(0, edge_cells.size() - 1))  # seeded, so it's the same each visit
+		var side: Vector2i = Dressing._wall_sides(map, c)[0]
+		_art(piece, ["collapsed-crates", "split-barrel", "collapsed-crates"][i], _at(c, cell_size) + Vector3(side.x, 0, side.y) * cell_size * 0.3, 0.0)
+	var centre := _at(_centre(cells), cell_size)
+	_art(piece, "fallen-banner", centre + Vector3(rng.randf_range(-0.3, 0.3), 0, rng.randf_range(-0.3, 0.3)), rng.randi_range(0, 3) * PI / 2.0)
+	for id in ["cache-rubble-planks", "cache-spilled-grain"]:
+		var c: Vector2i = cells[rng.randi_range(0, cells.size() - 1)]
+		_art(piece, id, _at(c, cell_size) + Vector3(rng.randf_range(-0.3, 0.3), 0, rng.randf_range(-0.3, 0.3)), rng.randi_range(0, 3) * PI / 2.0)
+	_glow(piece, centre + Vector3(0, 1.2, 0), Color(0.95, 0.8, 0.55), 0.7, cell_size * 3.0)
 
 
 ## Where goblin tunnels meet: trophies strung overhead, a torch either
