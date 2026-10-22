@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="EnemyType" format=3]
+
+[ext_resource type="Script" path="res://scripts/injury.gd" id="1_n2suj"]
+[ext_resource type="Resource" path="res://data/injuries/deep_wound.tres" id="2_3c1p3"]
+[ext_resource type="Resource" path="res://data/injuries/limp.tres" id="3_063hd"]
+[ext_resource type="PackedScene" path="res://art/enemies/cave-simple-v1/goblin/scene.tscn" id="4_1r6o0"]
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="5_trueg"]
+
+[resource]
+script = ExtResource("5_trueg")
+display_name = "Goblin brute"
+scene = ExtResource("4_1r6o0")
+max_health = 18
+damage_min = 3
+damage_max = 5
+accuracy = 0.65
+initiative = 7
+injury_chance = 0.15
+injuries = Array[ExtResource("1_n2suj")]([ExtResource("2_3c1p3"), ExtResource("3_063hd")])
+attack_verb = "pounds"
+tactic = 10
+intro = "A goblin brute hefts its maul. Brace when it winds up; hit it while it catches its breath."
+purse = Vector2i(2, 6)
+fears_fire = false
+threat = 5
+tint = Color(0.78, 0.55, 0.45, 1)
+sprite_scale = 1.3

@@ -34,7 +34,7 @@ const GOBLIN_SHIELD_CHANCE := 0.4
 ## Enemy intentions (#60): every enemy shows what it will do on its next
 ## turn - the action, never the target - so Defend, targeting and items are
 ## real choices. Each is planned after the enemy acts (and at the start).
-enum Intent { ATTACK, LUNGE, DART, WEB, BITE, SWING, HEAVY, SHIELD, KILLING_BLOW, SHOOT, BASH, BRACE, CALL, SCREECH, CLEAVER, RUSH, RECOVER, BEAT }
+enum Intent { ATTACK, LUNGE, DART, WEB, BITE, SWING, HEAVY, SHIELD, KILLING_BLOW, SHOOT, BASH, BRACE, CALL, SCREECH, CLEAVER, RUSH, RECOVER, BEAT, SWOOP, SWELL, GRAB }
 const INTENT_TEXT := {
 	Intent.ATTACK: "attacking",
 	Intent.LUNGE: "lunging",
@@ -54,7 +54,20 @@ const INTENT_TEXT := {
 	Intent.RUSH: "bunching to rush",
 	Intent.RECOVER: "catching its breath",
 	Intent.BEAT: "beating a war drum",
+	Intent.SWOOP: "circling to swoop",
+	Intent.SWELL: "swelling, about to burst",
+	Intent.GRAB: "reaching to grab",
 }
+## New monsters (#140). A brute recovering from its heavy blow is wide open:
+## blows land this much harder. A gas-bloat's burst: damage to the front
+## and back rows and strain for all; killed from the back row, the gas
+## mostly misses; set alight by a thrown torch, it flashes instead,
+## burning the other foes more than the party.
+const BRUTE_OPENING := 2
+const GAS_DAMAGE := {"front": 2, "back": 1}
+const GAS_STRAIN := 6.0
+const FLASH_FOE_DAMAGE := 3
+const FLASH_HERO_DAMAGE := 1
 ## New monsters (#47): a great rat's rush hits harder; a drummer's beat
 ## makes each other goblin's next hit stronger.
 const RUSH_DAMAGE := 2
@@ -133,6 +146,7 @@ var _webbed := {}  # Companion -> true until their next action
 var _venom := {}  # Companion -> turns left
 var _opened := {}  # Companion -> true after their first attack (opening shot, #47)
 var _drummed := {}  # Foe -> true: their next hit is stronger (goblin drummer)
+var _grabbed := {}  # Companion -> Foe holding them (hollow miner, #140)
 ## Things that happened between actions (venom ticking...). The combat
 ## screen shows and clears these after each advance().
 var events: PackedStringArray = []
@@ -150,6 +164,8 @@ func _init(party_state, enemy_types: Array[EnemyType]) -> void:
 		var label := type.display_name if seen[type] == 1 else "%s %d" % [type.display_name, numbered[type]]
 		foes.append(Foe.new(type, label))
 	for foe in foes:
+		if foe.type.tactic == EnemyType.Tactic.SWOOPER:
+			foe.row_override = "back"  # a bat starts in the air
 		plan(foe)
 	_build_order()
 
@@ -197,6 +213,18 @@ func plan(foe: Foe) -> void:
 				foe.intent = Intent.SCREECH
 			else:
 				foe.intent = Intent.SWING
+		EnemyType.Tactic.SWOOPER:
+			foe.intent = Intent.SWOOP if foe.in_back() else Intent.BITE
+		EnemyType.Tactic.BRUTE:
+			match foe.intent:
+				Intent.SWING: foe.intent = Intent.HEAVY
+				Intent.HEAVY: foe.intent = Intent.RECOVER
+				_: foe.intent = Intent.SWING
+		EnemyType.Tactic.BLOAT:
+			foe.intent = Intent.SWELL if hurt else Intent.ATTACK
+		EnemyType.Tactic.GRABBER:
+			var holding := _grabbed.values().has(foe)
+			foe.intent = Intent.SWING if holding or foe.intent == Intent.GRAB else Intent.GRAB
 		_:
 			foe.intent = Intent.ATTACK
 
@@ -307,7 +335,10 @@ func advance() -> void:
 				_check_end()
 				if result != Result.ONGOING:
 					return
-				if actor.is_alive():
+				if actor.is_alive() and is_grabbed(actor):
+					# Held fast (#140): the turn goes on struggling.
+					events.append("%s struggles in the %s's grip." % [actor.display_name, _grabbed[actor].name.to_lower()])
+				elif actor.is_alive():
 					return
 			else:
 				actor.shielded = false  # a shield lasts until its next turn
@@ -345,9 +376,27 @@ func targets_for(hero: Companion) -> Array[Foe]:
 	return living_foes().filter(func(f: Foe): return can_hit(hero, f))
 
 
-## Whether `foe` can strike `hero` (melee reaches only the front).
+## Whether `foe` can strike `hero` (melee reaches only the front; a bat's
+## swoop reaches anyone).
 func foe_can_reach(foe: Foe, hero: Companion) -> bool:
-	return foe.type.reach_back or hero_in_front(hero)
+	return foe.type.reach_back or foe.intent == Intent.SWOOP or hero_in_front(hero)
+
+
+## Held by a hollow miner (#140): can't act until it's hit.
+func is_grabbed(hero: Companion) -> bool:
+	if not _grabbed.has(hero):
+		return false
+	if not _grabbed[hero].is_alive():
+		_grabbed.erase(hero)
+		return false
+	return true
+
+
+## A grabber took a blow: everyone it held is free.
+func _release(foe: Foe) -> void:
+	for hero in _grabbed.keys():
+		if _grabbed[hero] == foe:
+			_grabbed.erase(hero)
 
 
 ## Steps to the other row; takes the hero's turn.
@@ -406,13 +455,18 @@ func hero_attack(hero: Companion, target: Foe) -> Dictionary:
 		if hero.has_talent("opening_shot") and not _opened.has(hero):
 			damage += 2
 		_opened[hero] = true
+		if target.type.tactic == EnemyType.Tactic.BRUTE and target.intent == Intent.RECOVER:
+			damage += BRUTE_OPENING  # a brute catching its breath is wide open (#140)
 		if target.shielded:
 			damage = maxi(1, damage / 2)
 		if target.in_back() and guard_wall_up():
 			damage = maxi(1, floori(damage * GUARD_WALL_FACTOR))
 		target.health = maxi(0, target.health - damage)
+		_release(target)
 		outcome = {"hit": true, "damage": damage, "killed": not target.is_alive()}
 		outcome["text"] = "%s strikes the %s for %d.%s" % [hero.display_name, target.name.to_lower(), damage, " It falls." if outcome["killed"] else ""]
+		if outcome["killed"] and target.type.tactic == EnemyType.Tactic.BLOAT:
+			outcome["text"] += " " + _burst(target, "back" if not hero_in_front(hero) else "near")
 	else:
 		outcome["text"] = "%s misses the %s." % [hero.display_name, target.name.to_lower()]
 	_check_end()
@@ -460,7 +514,11 @@ func _cure_venom(item: SupplyItem) -> String:
 ## Returns {"target": Companion, "hit": bool, "damage": int,
 ## "injury": Injury or null, "text": String}.
 func enemy_act(foe: Foe) -> Dictionary:
+	var acted := foe.intent
 	var outcome := _carry_out(foe)
+	if foe.type.tactic == EnemyType.Tactic.SWOOPER and foe.is_alive():
+		# A bat lands after its swoop, then rises again after biting (#140).
+		foe.row_override = "front" if acted == Intent.SWOOP else "back"
 	if foe.is_alive():
 		plan(foe)
 	return outcome
@@ -506,6 +564,21 @@ func _carry_out(foe: Foe) -> Dictionary:
 					"text": "The %s pounds its drum - the others snarl and surge." % foe.name.to_lower()}
 		Intent.SCREECH:
 			return _screech(foe)
+		Intent.SWELL:
+			foe.health = 0
+			var swollen := "The %s swells and tears open! %s" % [foe.name.to_lower(), _burst(foe, "near")]
+			_check_end()
+			return {"target": null, "hit": false, "damage": 0, "injury": null, "text": swollen}
+		Intent.GRAB:
+			var held := _choose_target(foe)
+			if held == null:
+				return {"target": null, "hit": false, "damage": 0, "injury": null, "text": ""}
+			if is_defending(held) or rng.randf() >= foe.type.accuracy:
+				return {"target": held, "hit": false, "damage": 0, "injury": null,
+						"text": "The %s grabs at %s, who twists free." % [foe.name.to_lower(), held.display_name]}
+			_grabbed[held] = foe
+			return {"target": held, "hit": true, "damage": 0, "injury": null,
+					"text": "The %s seizes %s and won't let go. Hit it to break the hold!" % [foe.name.to_lower(), held.display_name]}
 	var heavy := foe.intent == Intent.HEAVY
 	var target := _choose_target(foe)
 	var outcome := {"target": target, "hit": false, "damage": 0, "injury": null}
@@ -570,14 +643,47 @@ func hero_throw_torch(hero: Companion, target: Foe) -> Dictionary:
 		target.fled = true
 		outcome["fled"] = true
 		outcome["text"] = "%s hurls the burning torch - the %s flees from the flames!" % [hero.display_name, target.name.to_lower()]
+	elif target.type.tactic == EnemyType.Tactic.BLOAT:
+		# Fire and gas (#140): it goes up in a flash, burning its friends.
+		outcome["damage"] = target.health
+		target.health = 0
+		outcome["killed"] = true
+		outcome["text"] = "%s hurls the burning torch - %s" % [hero.display_name, _burst(target, "fire")]
 	else:
 		var burn := rng.randi_range(TORCH_BURN.x, TORCH_BURN.y) + int(hero.boon_total("torch_burn"))
 		target.health = maxi(0, target.health - burn)
+		_release(target)
 		outcome["damage"] = burn
 		outcome["killed"] = not target.is_alive()
 		outcome["text"] = "%s hurls the burning torch - the %s is burned for %d, but stands its ground." % [hero.display_name, target.name.to_lower(), burn]
 	_check_end()
 	return outcome
+
+
+## A gas-bloat bursts (#140). `how`: "near" (killed up close, or it
+## swelled until it tore), "back" (killed from the back row: the gas mostly
+## misses) or "fire" (a thrown torch: a flash that burns the other foes).
+## Returns what happened, and adds it to the events.
+func _burst(bloat: Foe, how: String) -> String:
+	var text := ""
+	if how == "fire":
+		for foe in living_foes():
+			foe.health = maxi(0, foe.health - FLASH_FOE_DAMAGE)
+			_release(foe)
+		for hero: Companion in party.living_members():
+			hero.change_health(-FLASH_HERO_DAMAGE)
+		text = "the gas catches in a roaring flash! Everything nearby is scorched."
+	else:
+		var softer := how == "back"
+		for hero: Companion in party.living_members():
+			var hurt: int = GAS_DAMAGE["front" if hero_in_front(hero) else "back"] - (1 if softer else 0)
+			if hurt > 0:
+				hero.change_health(-hurt)
+			hero.change_strain(GAS_STRAIN * (0.5 if softer else 1.0))
+		text = "Gas billows out of the %s%s" % [bloat.name.to_lower(), " - most of it rolls past." if softer else " over everyone. Eyes stream, lungs burn."]
+	events.append(text)
+	_check_end()
+	return text
 
 
 ## The owner's retreat idea (trial): the fight ends, the party flees.
@@ -605,6 +711,10 @@ func _choose_target(foe: Foe = null) -> Companion:
 			pool = exposed if not exposed.is_empty() else living  # flanks
 		EnemyType.Tactic.DARTING:
 			pool = guards if not guards.is_empty() else [_weakest(living)]
+		EnemyType.Tactic.GRABBER:
+			# It swings at whoever it holds; it grabs whoever isn't braced.
+			var held: Array = living.filter(func(h: Companion): return _grabbed.get(h) == foe)
+			pool = held if not held.is_empty() else (exposed if not exposed.is_empty() else living)
 		_:
 			pool = guards if not guards.is_empty() else living
 	return pool[rng.randi_range(0, pool.size() - 1)]

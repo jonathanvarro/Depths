@@ -392,6 +392,10 @@ func _intent_icon(intent: int) -> Texture2D:
 		CombatState.Intent.RUSH: return MARKS["rush"]
 		CombatState.Intent.RECOVER: return MARKS["recover"]
 		CombatState.Intent.BEAT: return MARKS["beat"]
+		# Placeholders until #141's icons: a swoop lunges, a swell is gas, a grab holds.
+		CombatState.Intent.SWOOP: return Glyphs.intention(CombatState.Intent.LUNGE)
+		CombatState.Intent.SWELL: return MARKS["venom"]
+		CombatState.Intent.GRAB: return Glyphs.intention(CombatState.Intent.WEB)
 	return Glyphs.intention(intent)
 
 
@@ -510,6 +514,8 @@ func _refresh() -> void:
 			marks.append([MARKS["webbed"], "Webbed: their next move is clumsy"])
 		if ongoing and _state.venom_turns(hero) > 0:
 			marks.append([MARKS["venom"], "Venom: loses health each turn"])
+		if ongoing and _state.is_grabbed(hero):
+			marks.append([MARKS["webbed"], "Grabbed: can't act until the one holding them is hit"])
 		if ongoing and _state.is_defending(hero):
 			marks.append([MARKS["guard"], "Defending: takes less damage"])
 		card.set_marks(marks)

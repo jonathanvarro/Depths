@@ -134,6 +134,11 @@ const QUEEN := preload("res://data/enemies/goblin_queen.tres")
 const GREAT_RAT := preload("res://data/enemies/great_rat.tres")
 const WEBSPINNER := preload("res://data/enemies/webspinner.tres")
 const DRUMMER := preload("res://data/enemies/goblin_drummer.tres")
+# New monsters (#140): placeholders until #141's art.
+const BAT := preload("res://data/enemies/cave_bat.tres")
+const BRUTE := preload("res://data/enemies/goblin_brute.tres")
+const BLOAT := preload("res://data/enemies/gas_bloat.tres")
+const MINER := preload("res://data/enemies/hollow_miner.tres")
 ## The goblin fortress (#44): floor 3 is its outskirts, floor 4 the fortress
 ## with the queen's hall behind a gate.
 const OUTSKIRTS_DEPTH := 3
@@ -148,18 +153,23 @@ const QUEEN_FIGHT: Array = [QUEEN, GUARD, GUARD]
 ## Deeper floors mix tactics: rats pick on the weakest while a spider webs
 ## someone or a goblin flanks (#15).
 const ENCOUNTER_GROUPS := {
-	1: [[RAT], [RAT], [SPIDER], [GREAT_RAT], [RAT, RAT], [RAT, SPIDER], [GREAT_RAT, RAT], [RAT, RAT, RAT]],
+	1: [[RAT], [RAT], [SPIDER], [GREAT_RAT], [RAT, RAT], [RAT, SPIDER], [GREAT_RAT, RAT], [RAT, RAT, RAT],
+			[BAT], [BAT, RAT], [BAT, BAT, RAT]],
 	# Floor 1 is onboarding; floor 2 is where the real game starts and
 	# floor 3 warms up for the fortress (owner, 2026-10-19, #49).
 	2: [[GREAT_RAT], [GOBLIN], [GOBLIN, RAT], [SPIDER, SPIDER], [GOBLIN, SPIDER], [WEBSPINNER, GOBLIN],
 			[GREAT_RAT, SPIDER], [GREAT_RAT, SPIDER, RAT], [GOBLIN, RAT, RAT], [GOBLIN, SPIDER, RAT],
-			[GOBLIN, GOBLIN, RAT], [GOBLIN, GOBLIN, SPIDER]],
+			[GOBLIN, GOBLIN, RAT], [GOBLIN, GOBLIN, SPIDER], [BAT, GOBLIN], [BAT, BAT, SPIDER]],
 	3: [[GOBLIN], [GOBLIN, ARCHER], [GOBLIN, DRUMMER],
 			[GOBLIN, GOBLIN, ARCHER], [GOBLIN, WEBSPINNER, GOBLIN], [GOBLIN, GOBLIN, DRUMMER], [GUARD, GOBLIN, ARCHER],
 			[GOBLIN, ARCHER, DRUMMER], [GUARD, GOBLIN, GOBLIN],
-			[GOBLIN, GOBLIN, ARCHER, RAT], [GOBLIN, GOBLIN, SPIDER, SPIDER], [GOBLIN, GOBLIN, ARCHER, DRUMMER]],
+			[GOBLIN, GOBLIN, ARCHER, RAT], [GOBLIN, GOBLIN, SPIDER, SPIDER], [GOBLIN, GOBLIN, ARCHER, DRUMMER],
+			# The brute, and what came up through the breach (#140).
+			[BRUTE], [BRUTE, ARCHER], [BRUTE, GOBLIN, DRUMMER], [MINER], [MINER, BLOAT], [MINER, MINER],
+			[BLOAT, GOBLIN, ARCHER], [BLOAT, BLOAT, MINER]],
 	4: [[GOBLIN], [GOBLIN, ARCHER], [GUARD, GOBLIN], [GUARD, ARCHER], [GOBLIN, GOBLIN, ARCHER],
-			[GUARD, GOBLIN, ARCHER], [GUARD, GOBLIN, GOBLIN], [GUARD, DRUMMER, GOBLIN], [GUARD, GUARD, ARCHER, GOBLIN]],
+			[GUARD, GOBLIN, ARCHER], [GUARD, GOBLIN, GOBLIN], [GUARD, DRUMMER, GOBLIN], [GUARD, GUARD, ARCHER, GOBLIN],
+			[BRUTE, GUARD], [BRUTE, ARCHER, GOBLIN], [BRUTE, GOBLIN, DRUMMER]],
 }
 ## Full parties meet groups close to their size (#49): never more enemies
 ## than heroes standing, except one extra for a full party on the deepest
@@ -826,6 +836,9 @@ func _trinket_drops(state) -> void:
 			continue
 		var find = Trinkets.drop(_rng, _depth, foe.type.max_health)
 		var gear: Equipment = GearGen.drop(_rng, _depth, "foe", foe.type.max_health)
+		if foe.type.drop and _rng.randf() < foe.type.drop_chance:  # a hollow miner's pick (#140)
+			if _party_state.supplies.add_what_fits(foe.type.drop) > 0:
+				_show_message("The %s's %s clatters free. It's in the pack." % [foe.type.display_name.to_lower(), foe.type.drop.display_name.to_lower()])
 		if gear:
 			_found_gear(gear, "The %s carried %s." % [foe.type.display_name.to_lower(), _a(gear.display_name.to_lower())])
 		if find == null:
@@ -1522,6 +1535,8 @@ func _place_foes(foes: Array) -> void:
 		BattleStage.raise(node)
 		_level.add_child(node)
 		_clear_of_panel(node)
+		if foe.type.tactic == EnemyType.Tactic.SWOOPER:
+			node.position.y += 0.9  # a bat flies (#140)
 		foe.node = node
 
 

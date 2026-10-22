@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="EnemyType" format=3]
+
+[ext_resource type="Script" path="res://scripts/injury.gd" id="1_osvf4"]
+[ext_resource type="PackedScene" path="res://art/enemies/campaign-v1/webspinner/scene.tscn" id="2_mfl5g"]
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="3_bg1jl"]
+
+[resource]
+script = ExtResource("3_bg1jl")
+display_name = "Gas-bloat"
+scene = ExtResource("2_mfl5g")
+damage_max = 2
+accuracy = 0.6
+initiative = 6
+injury_chance = 0.0
+attack_verb = "puffs at"
+tactic = 11
+intro = "A gas-bloat drifts closer. Kill it from the back row, or set it alight - but never let it swell."
+fears_fire = false
+threat = 3
+tint = Color(0.78, 0.86, 0.42, 1)
+sprite_scale = 1.1

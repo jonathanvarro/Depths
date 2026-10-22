@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="EnemyType" format=3]
+
+[ext_resource type="Script" path="res://scripts/injury.gd" id="1_ovpn7"]
+[ext_resource type="PackedScene" path="res://art/enemies/campaign-v1/webspinner/scene.tscn" id="2_yfj5n"]
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="3_1o2x2"]
+
+[resource]
+script = ExtResource("3_1o2x2")
+display_name = "Cave bat"
+scene = ExtResource("2_yfj5n")
+max_health = 5
+damage_max = 2
+initiative = 14
+injury_chance = 0.0
+attack_verb = "bites"
+tactic = 9
+intro = "A cave bat flits overhead: only reach can touch it in the air, but it lands after it swoops."
+threat = 2
+tint = Color(0.45, 0.36, 0.42, 1)
+sprite_scale = 0.8

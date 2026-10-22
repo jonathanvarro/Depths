@@ -32,6 +32,10 @@ enum Tactic {
 	QUEEN,  ## calls guards, screeches, and her cleaver is decided by the coin
 	RUSHER,  ## rushes, then catches its breath (great rat, #47)
 	DRUMMER,  ## beats a war drum: the others hit harder next (goblin drummer)
+	SWOOPER,  ## in the air (only reach hits it), swoops at anyone, lands, rises (cave bat, #140)
+	BRUTE,  ## swings, winds up a heavy blow, then recovers - wide open (goblin brute)
+	BLOAT,  ## drifts and puffs; swells when hurt; bursts gas over the party when it dies (gas-bloat)
+	GRABBER,  ## grabs a hero, who can't act until it's hit; swings its pick (hollow miner)
 }
 @export var tactic := Tactic.BASIC
 ## Shown when the fight starts: a hint at how it fights.
@@ -58,3 +62,6 @@ enum Tactic {
 ## shared sprite (#99).
 @export var tint := Color.WHITE
 @export var sprite_scale := 1.0
+## Something it may leave behind when beaten (a hollow miner's pick, #140).
+@export var drop: SupplyItem
+@export_range(0.0, 1.0) var drop_chance := 0.0

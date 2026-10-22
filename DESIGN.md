@@ -509,6 +509,15 @@ Deeper floors mix them (depth 1 mostly single rats; depth 3 pairs and trios like
   - Goblin trapper: snare.
   - Gate captain: optional mini-boss.
 - **Priority:** the cave bat, goblin brute, gas-bloat and hollow miner. The art request (`docs/monster-art-brief.md`) covers the whole set, with poses, effects and icons.
+- **Built 2026-10-21, on tinted placeholders until the art arrives** (`tools/story/build_monsters.gd`):
+  - **Cave bat** (floors 1–2; 5 health): starts in the air, where only reach can hit it unless nothing stands in front of it. Its swoop reaches the back row, then it lands, bites the front, and rises again.
+  - **Goblin brute** (floors 3–4; 18 health, 3–5 damage): swings, winds up a double blow that a braced hero turns aside, then catches its breath. Blows land 2 harder while it recovers.
+  - **Gas-bloat** (floor 3; 6 health): it puffs at the front.
+    - Killed up close, it bursts: 2 damage to the front row, 1 to the back, and nerves fray.
+    - Killed from the back row, the gas mostly rolls past.
+    - A thrown torch sets it off in a flash that scorches the other foes for 3 and the party for 1.
+    - Hurt, it swells, and tears open on its next turn.
+  - **Hollow miner** (floor 3; 16 health): grabs an exposed hero, who can't act until the miner is hit. It swings its pick at whoever it holds, and drops a pick 20% of the time.
 
 ## Resources, rewards, and uncertainty
 
