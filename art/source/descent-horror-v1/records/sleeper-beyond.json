@@ -1,0 +1,16 @@
+{
+  "id": "sleeper-beyond",
+  "issue": 152,
+  "title": "The Sleeper Beyond",
+  "tool": "built-in image_gen",
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-5e09b88e-aa1d-4ae9-8afe-fa27c835f83c.png",
+  "source": "art/source/descent-horror-v1/sleeper-beyond-master.png",
+  "reference_images": [
+    {
+      "path": "art/source/descent-horror-v1/sleeper-beyond-first-master.png",
+      "role": "edit target; refine only finger shape"
+    }
+  ],
+  "prompt": "Use case: precise-object-edit. EDIT TARGET: the supplied Sleeper Beyond concept sheet. Keep the 3:2 page layout, mine cavern, two tiny cloaked figures, vertical dark-water barrier, little lantern, supporting inset positions and gritty painted style. Make ONE targeted correction across the main scene, upper-right inset and lower shape studies: REPLACE THE WORM-LIKE TALON with ONE ENORMOUS CURLED FINGER that initially resembles ANCIENT ARCHITECTURE.\nThe single pale structure must have three broad bent phalange-like lengths, blunt rounded knuckle ridges resembling worn architraves and stepped old masonry, and a SHORT BROAD FLATTENED DULL NAIL at the fingertip. No long pointed claw, fang, talon, serpentine segmentation or worm shape. Its joints should read as column-like spans until the nail and compressed skin-fold at one bend reveal the finger. Make the far mass partly obscure in the water so the viewer assembles the revelation rather than seeing a clean creature silhouette immediately. Retain dirty ivory stone-like SKIN with subtle bodily weight, not actual brickwork or a literal built arch. Only ONE finger; base disappears beyond view. No palm, extra digits, head, eye, entire hand/body, decorative symbols or explanation.\nKeep main mining/human scale cues tiny. Keep lower-right condensation omen unchanged in subject. Preserve the same material palette and quiet terror; no glowing magic or extra monsters. Do not add text or HUD. This is a proposed environmental revelation, not a final-boss or relic design.",
+  "review_status": "Draft; owner selections pending"
+}

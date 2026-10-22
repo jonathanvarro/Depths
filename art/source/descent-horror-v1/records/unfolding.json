@@ -1,0 +1,16 @@
+{
+  "id": "unfolding",
+  "issue": 151,
+  "title": "The Unfolding",
+  "tool": "built-in image_gen",
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-85aba3b7-28aa-43f8-ade1-553458a81e97.png",
+  "source": "art/source/descent-horror-v1/unfolding-master.png",
+  "reference_images": [
+    {
+      "path": "art/concepts/descent-horror-v1/underhound.png",
+      "role": "painting/layout reference only"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. Landscape 3:2 dark gritty creature concept sheet for Depths. Supplied Underhound sheet is a reference for painterly shape language, bruised taupe/ivory tissue and layout, NOT anatomy to copy literally.\nTHE UNFOLDING: the SAME small pale hound-like animal has two states. At rest it is folded very tightly into a fist-sized curled shape beneath a low stone ledge, one long blunt head tucked against tiny folded limbs. When it rises, a continuous succession of folded ribs, elongated segments and hinged limbs emerges from that compact skin. The far body disappears back beneath the same narrow ledge; the amount of organism could never have fitted there. Main extended body has an obvious slender hound-like head and forelegs, then six readable folded structural lengths rather than many random centipede legs. Skin is stretched across tightly nested joints, dirty chalk-grey with bruised fold interiors. No fur, eyes everywhere, horns, fangs on every joint, exposed bloody organs, human victims or tentacles. Its wrongness is compressed volume continuing to unfold.\nLAYOUT left two-thirds: main extended creature in a cramped rough mine chamber, low viewpoint, initial head and forequarters near the viewer, remaining linked rib/joint folds emerging around a bend from the narrow ledge. Environment visibly too small for the unfolding length. One abandoned wooden pick handle near the ledge establishes scale. Upper-right inset: SAME distinctive head and folded ribs in its small fully curled resting state beneath the ledge, plenty of space around it; it should seem harmless in size but wrong in posture. Lower-right omen inset: a crack only hand-width across, lip covered by overlapping long claw-scrapes wider than its opening. Bottom strip: simple small silhouette comparison of curled and extended forms, with a thin unchanged ledge shape as the size reference.\nDark shadow-heavy fantasy concept painting, grave and tactile, broad forms, minimal amber edge light, cold deep rock, readable negative spaces between folds. Clear continuity of identity across the two states; do not make the curled animal and the long one different species. NO text, labels, arrows, HUD, ornate borders, bright magic or glossy overrendering. This is a concept reveal, not a production atlas or a cropped runtime sprite.",
+  "review_status": "Draft; owner selections pending"
+}

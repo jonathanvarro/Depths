@@ -1,0 +1,484 @@
+{
+  "issues": [
+    150,
+    151,
+    152
+  ],
+  "checks": 118,
+  "failed": 0,
+  "scope": "Draft sheets and source integrity; not production art or live game validation",
+  "results": [
+    {
+      "check": "Ten drafts and retained first Sleeper master",
+      "ok": true
+    },
+    {
+      "check": "Ten requested beings",
+      "ok": true
+    },
+    {
+      "check": "All three batches complete as drafts",
+      "ok": true
+    },
+    {
+      "check": "Immutable generated master borrowed-pack",
+      "ok": true
+    },
+    {
+      "check": "Unaltered review copy borrowed-pack",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in output copy borrowed-pack",
+      "ok": true
+    },
+    {
+      "check": "Full landscape sheet borrowed-pack",
+      "ok": true
+    },
+    {
+      "check": "Exact prompt/tool retained borrowed-pack",
+      "ok": true
+    },
+    {
+      "check": "Reference role/hash borrowed-pack/family posture/head reference",
+      "ok": true
+    },
+    {
+      "check": "Reference role/hash borrowed-pack/painting/layout reference only",
+      "ok": true
+    },
+    {
+      "check": "Immutable generated master choir-of-one",
+      "ok": true
+    },
+    {
+      "check": "Unaltered review copy choir-of-one",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in output copy choir-of-one",
+      "ok": true
+    },
+    {
+      "check": "Full landscape sheet choir-of-one",
+      "ok": true
+    },
+    {
+      "check": "Exact prompt/tool retained choir-of-one",
+      "ok": true
+    },
+    {
+      "check": "Reference role/hash choir-of-one/painting/layout reference only",
+      "ok": true
+    },
+    {
+      "check": "Immutable generated master drowned-bell",
+      "ok": true
+    },
+    {
+      "check": "Unaltered review copy drowned-bell",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in output copy drowned-bell",
+      "ok": true
+    },
+    {
+      "check": "Full landscape sheet drowned-bell",
+      "ok": true
+    },
+    {
+      "check": "Exact prompt/tool retained drowned-bell",
+      "ok": true
+    },
+    {
+      "check": "Reference role/hash drowned-bell/painting/layout reference only",
+      "ok": true
+    },
+    {
+      "check": "Immutable generated master hollow-interval",
+      "ok": true
+    },
+    {
+      "check": "Unaltered review copy hollow-interval",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in output copy hollow-interval",
+      "ok": true
+    },
+    {
+      "check": "Full landscape sheet hollow-interval",
+      "ok": true
+    },
+    {
+      "check": "Exact prompt/tool retained hollow-interval",
+      "ok": true
+    },
+    {
+      "check": "Reference role/hash hollow-interval/hound silhouette reference",
+      "ok": true
+    },
+    {
+      "check": "Reference role/hash hollow-interval/painting/layout reference only",
+      "ok": true
+    },
+    {
+      "check": "Immutable generated master marrow-shepherd",
+      "ok": true
+    },
+    {
+      "check": "Unaltered review copy marrow-shepherd",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in output copy marrow-shepherd",
+      "ok": true
+    },
+    {
+      "check": "Full landscape sheet marrow-shepherd",
+      "ok": true
+    },
+    {
+      "check": "Exact prompt/tool retained marrow-shepherd",
+      "ok": true
+    },
+    {
+      "check": "Reference role/hash marrow-shepherd/painting/layout reference only",
+      "ok": true
+    },
+    {
+      "check": "Immutable generated master open-door",
+      "ok": true
+    },
+    {
+      "check": "Unaltered review copy open-door",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in output copy open-door",
+      "ok": true
+    },
+    {
+      "check": "Full landscape sheet open-door",
+      "ok": true
+    },
+    {
+      "check": "Exact prompt/tool retained open-door",
+      "ok": true
+    },
+    {
+      "check": "Reference role/hash open-door/painting/layout reference only",
+      "ok": true
+    },
+    {
+      "check": "Immutable generated master sleeper-beyond-first",
+      "ok": true
+    },
+    {
+      "check": "Unaltered review copy sleeper-beyond-first",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in output copy sleeper-beyond-first",
+      "ok": true
+    },
+    {
+      "check": "Full landscape sheet sleeper-beyond-first",
+      "ok": true
+    },
+    {
+      "check": "Exact prompt/tool retained sleeper-beyond-first",
+      "ok": true
+    },
+    {
+      "check": "Reference role/hash sleeper-beyond-first/painting/layout reference only",
+      "ok": true
+    },
+    {
+      "check": "Immutable generated master sleeper-beyond",
+      "ok": true
+    },
+    {
+      "check": "Unaltered review copy sleeper-beyond",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in output copy sleeper-beyond",
+      "ok": true
+    },
+    {
+      "check": "Full landscape sheet sleeper-beyond",
+      "ok": true
+    },
+    {
+      "check": "Exact prompt/tool retained sleeper-beyond",
+      "ok": true
+    },
+    {
+      "check": "Reference role/hash sleeper-beyond/edit target; refine only finger shape",
+      "ok": true
+    },
+    {
+      "check": "Immutable generated master underhound",
+      "ok": true
+    },
+    {
+      "check": "Unaltered review copy underhound",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in output copy underhound",
+      "ok": true
+    },
+    {
+      "check": "Full landscape sheet underhound",
+      "ok": true
+    },
+    {
+      "check": "Exact prompt/tool retained underhound",
+      "ok": true
+    },
+    {
+      "check": "Reference role/hash underhound/family silhouette and material reference only",
+      "ok": true
+    },
+    {
+      "check": "Immutable generated master unfolding",
+      "ok": true
+    },
+    {
+      "check": "Unaltered review copy unfolding",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in output copy unfolding",
+      "ok": true
+    },
+    {
+      "check": "Full landscape sheet unfolding",
+      "ok": true
+    },
+    {
+      "check": "Exact prompt/tool retained unfolding",
+      "ok": true
+    },
+    {
+      "check": "Reference role/hash unfolding/painting/layout reference only",
+      "ok": true
+    },
+    {
+      "check": "Immutable generated master weight",
+      "ok": true
+    },
+    {
+      "check": "Unaltered review copy weight",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in output copy weight",
+      "ok": true
+    },
+    {
+      "check": "Full landscape sheet weight",
+      "ok": true
+    },
+    {
+      "check": "Exact prompt/tool retained weight",
+      "ok": true
+    },
+    {
+      "check": "Reference role/hash weight/painting/layout reference only",
+      "ok": true
+    },
+    {
+      "check": "Valid review regions underhound",
+      "ok": true
+    },
+    {
+      "check": "Owner choice explicitly pending underhound",
+      "ok": true
+    },
+    {
+      "check": "Handoff covers underhound",
+      "ok": true
+    },
+    {
+      "check": "Valid review regions borrowed-pack",
+      "ok": true
+    },
+    {
+      "check": "Owner choice explicitly pending borrowed-pack",
+      "ok": true
+    },
+    {
+      "check": "Handoff covers borrowed-pack",
+      "ok": true
+    },
+    {
+      "check": "Valid review regions marrow-shepherd",
+      "ok": true
+    },
+    {
+      "check": "Owner choice explicitly pending marrow-shepherd",
+      "ok": true
+    },
+    {
+      "check": "Handoff covers marrow-shepherd",
+      "ok": true
+    },
+    {
+      "check": "Valid review regions drowned-bell",
+      "ok": true
+    },
+    {
+      "check": "Owner choice explicitly pending drowned-bell",
+      "ok": true
+    },
+    {
+      "check": "Handoff covers drowned-bell",
+      "ok": true
+    },
+    {
+      "check": "Valid review regions unfolding",
+      "ok": true
+    },
+    {
+      "check": "Owner choice explicitly pending unfolding",
+      "ok": true
+    },
+    {
+      "check": "Handoff covers unfolding",
+      "ok": true
+    },
+    {
+      "check": "Valid review regions choir-of-one",
+      "ok": true
+    },
+    {
+      "check": "Owner choice explicitly pending choir-of-one",
+      "ok": true
+    },
+    {
+      "check": "Handoff covers choir-of-one",
+      "ok": true
+    },
+    {
+      "check": "Valid review regions weight",
+      "ok": true
+    },
+    {
+      "check": "Owner choice explicitly pending weight",
+      "ok": true
+    },
+    {
+      "check": "Handoff covers weight",
+      "ok": true
+    },
+    {
+      "check": "Valid review regions open-door",
+      "ok": true
+    },
+    {
+      "check": "Owner choice explicitly pending open-door",
+      "ok": true
+    },
+    {
+      "check": "Handoff covers open-door",
+      "ok": true
+    },
+    {
+      "check": "Valid review regions hollow-interval",
+      "ok": true
+    },
+    {
+      "check": "Owner choice explicitly pending hollow-interval",
+      "ok": true
+    },
+    {
+      "check": "Handoff covers hollow-interval",
+      "ok": true
+    },
+    {
+      "check": "Valid review regions sleeper-beyond",
+      "ok": true
+    },
+    {
+      "check": "Owner choice explicitly pending sleeper-beyond",
+      "ok": true
+    },
+    {
+      "check": "Handoff covers sleeper-beyond",
+      "ok": true
+    },
+    {
+      "check": "Concepts stay outside game imports descent-horror-v1",
+      "ok": true
+    },
+    {
+      "check": "Concepts stay outside game imports descent-horror-v1",
+      "ok": true
+    },
+    {
+      "check": "Handoff link ../art/concepts/descent-horror-v1/inspector.html",
+      "ok": true
+    },
+    {
+      "check": "Handoff link ../art/concepts/descent-horror-v1/comparison.png",
+      "ok": true
+    },
+    {
+      "check": "Handoff link ../art/source/descent-horror-v1/generation.json",
+      "ok": true
+    },
+    {
+      "check": "Handoff link enemy-art-direction.md",
+      "ok": true
+    },
+    {
+      "check": "Handoff link ../art/concepts/descent-horror-v1/underhound.png",
+      "ok": true
+    },
+    {
+      "check": "Handoff link ../art/concepts/descent-horror-v1/borrowed-pack.png",
+      "ok": true
+    },
+    {
+      "check": "Handoff link ../art/concepts/descent-horror-v1/marrow-shepherd.png",
+      "ok": true
+    },
+    {
+      "check": "Handoff link ../art/concepts/descent-horror-v1/drowned-bell.png",
+      "ok": true
+    },
+    {
+      "check": "Handoff link ../art/concepts/descent-horror-v1/unfolding.png",
+      "ok": true
+    },
+    {
+      "check": "Handoff link ../art/concepts/descent-horror-v1/choir-of-one.png",
+      "ok": true
+    },
+    {
+      "check": "Handoff link ../art/concepts/descent-horror-v1/weight.png",
+      "ok": true
+    },
+    {
+      "check": "Handoff link ../art/concepts/descent-horror-v1/open-door.png",
+      "ok": true
+    },
+    {
+      "check": "Handoff link ../art/concepts/descent-horror-v1/hollow-interval.png",
+      "ok": true
+    },
+    {
+      "check": "Handoff link ../art/concepts/descent-horror-v1/sleeper-beyond.png",
+      "ok": true
+    },
+    {
+      "check": "Handoff link ../art/concepts/descent-horror-v1/sleeper-beyond-first.png",
+      "ok": true
+    }
+  ]
+}

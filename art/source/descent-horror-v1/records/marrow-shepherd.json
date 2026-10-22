@@ -1,0 +1,16 @@
+{
+  "id": "marrow-shepherd",
+  "issue": 150,
+  "title": "The Marrow Shepherd",
+  "tool": "built-in image_gen",
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-68384f71-b8fd-47ac-bef2-228dbd00d514.png",
+  "source": "art/source/descent-horror-v1/marrow-shepherd-master.png",
+  "reference_images": [
+    {
+      "path": "art/concepts/descent-horror-v1/underhound.png",
+      "role": "painting/layout reference only"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. Asset: landscape 3:2 dark gritty concept sheet for Depths. Supplied Underhound sheet is a REFERENCE for broad painted shadow shapes, bruised taupe/ivory materials and panel layout ONLY. New body and silhouette, not another hound.\nTHE MARROW SHEPHERD: a tall, very narrow nonhuman creature on two slender folded legs, with long low arms making slow careful tending gestures. Its small head is withdrawn into the upper trunk, no human skull face, crown, staff, robes or mage costume. Above both shoulders grows a broad branching BONE CAGE like a warped living nursery; its spaced ribs cradle three tiny sleeping unfinished hound-like shapes. The cage is integrated anatomy, not a backpack tied on with ropes. Below it, the pale abdominal hide parts along a vertical organic seedpod seam, holding one small still-forming pale animal, which an elongated hand gently supports. This is fictional grotesque creature anatomy, no humans, no human infants, no wound gore or blood spray. Mood is patient unnatural care, not aggression.\nMAIN VIEW on left two-thirds: full tall silhouette in a low mine cavity, nursery's negative spaces and three small curled animals clearly visible; dirty ivory bone, dark bruised membrane, broad cool charcoal shadows, slight warm side-lantern light. Right upper alternate view: abdomen pod gently open with a little unfinished hound shape and a supporting long hand; one bone cradle overhead. Right lower environmental omen: an empty bone cradle fixed into a rock wall, hanging crooked with a faint secondary displaced pose suggesting a slow rocking motion. Bottom narrow strip: small filled silhouette studies of the tall branching structure, clear dark form on dull-grey.\nRestrained grave fantasy concept painting with weathered mineral/bone/flesh material. Grotesque physicality without horror cliches, distinct from skeletal wizard, tree monster or giant dog. Keep all important anatomy within primary view, strong simple shape groups, no smothering smoke. No lettering, labels, arrows, symbols, HUD, glossy sculpture look, bright magic, extra faces or tentacles. One clear concept with one explanatory inset and one omen, not an animation atlas.",
+  "review_status": "Draft; owner selections pending"
+}

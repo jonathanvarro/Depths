@@ -1,0 +1,16 @@
+{
+  "id": "choir-of-one",
+  "issue": 151,
+  "title": "The Choir of One",
+  "tool": "built-in image_gen",
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-dc8dff26-7b28-4a51-8d92-b4a5f5d2e6f7.png",
+  "source": "art/source/descent-horror-v1/choir-of-one-master.png",
+  "reference_images": [
+    {
+      "path": "art/concepts/descent-horror-v1/underhound.png",
+      "role": "painting/layout reference only"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. Landscape 3:2 concept-art sheet for Depths. Supplied sheet is REFERENCE for rough painted shadow masses, weathered materials and page layout only. This concept must have NO hound head, teeth, eyes, face or ordinary animal limbs.\nTHE CHOIR OF ONE: a narrow tall fan of blackened rib-like lamellae grows from one pinched root in the rock floor. It resembles charred ribs crossing burnt book pages, but is clearly a living folded structure: thick bruised membrane binds the base, edges are irregular organic ivory-black, one deep interior cavity suggests air passing through. At rest the lamellae stand close together as a thin upright folded blade; opened they splay into one sparse asymmetrical fan, with distinct negative spaces and stretched dark tissue between only some slats. Not a tree, not a skeleton person, not a music instrument, not a literal book or decorative altar.\nMAIN left two-thirds: opened fan in a low old mining cavern, five or seven broad black segments catching just enough grey/amber edge light to read separately. Its thin single base and small abandoned miner's pick establish a body roughly human height. Far passage arches softly repeat its rib spacing, suggesting one presence speaking from multiple distances without extra monsters or glowing waves. UPPER RIGHT: same rooted organism CLOSED and OPEN as two clear shapes, same base and lamella identity. LOWER RIGHT omen: an otherwise empty narrow passage with a pair of boot tracks stopping while faint repeated depressions continue behind and across them, an unsettling return of an absent footfall; no figures or text. BOTTOM band: small strong solid silhouettes of closed blade and opened fan, dull-grey background.\nDark adult gritty fantasy concept painting. Dusty charred black, dark wine-brown membrane, dull dirty ivory breaks, cold heavy rock, tiny off-frame warm lantern contribution. Clear separated shapes rather than black visual mush. Effects and atmosphere must not obscure the actual body. Sound is implied by resonance and spatial repetition, NO written words, musical notes, sound-wave icons, letters, arrows, labels, HUD, decorative sigils, neon, glowing mouth or tentacles. Main subject fully within frame. Concept exploration, no canonical sound mechanics or lore.",
+  "review_status": "Draft; owner selections pending"
+}

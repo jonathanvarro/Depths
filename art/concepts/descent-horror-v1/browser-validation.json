@@ -1,0 +1,317 @@
+{
+  "issues": [
+    150,
+    151,
+    152
+  ],
+  "checks": 76,
+  "failed": 0,
+  "errors": [],
+  "scope": "Offline concept gallery, not live game or animation validation",
+  "results": [
+    {
+      "check": "Ten concept drafts",
+      "ok": true
+    },
+    {
+      "check": "Eleven exact prompts and original masters",
+      "ok": true
+    },
+    {
+      "check": "Original sheet decodes underhound",
+      "ok": true
+    },
+    {
+      "check": "Usable region underhound/sheet",
+      "ok": true
+    },
+    {
+      "check": "Usable region underhound/main",
+      "ok": true
+    },
+    {
+      "check": "Usable region underhound/state",
+      "ok": true
+    },
+    {
+      "check": "Usable region underhound/omen",
+      "ok": true
+    },
+    {
+      "check": "Usable region underhound/small",
+      "ok": true
+    },
+    {
+      "check": "Original sheet decodes borrowed-pack",
+      "ok": true
+    },
+    {
+      "check": "Usable region borrowed-pack/sheet",
+      "ok": true
+    },
+    {
+      "check": "Usable region borrowed-pack/main",
+      "ok": true
+    },
+    {
+      "check": "Usable region borrowed-pack/state",
+      "ok": true
+    },
+    {
+      "check": "Usable region borrowed-pack/omen",
+      "ok": true
+    },
+    {
+      "check": "Usable region borrowed-pack/small",
+      "ok": true
+    },
+    {
+      "check": "Original sheet decodes marrow-shepherd",
+      "ok": true
+    },
+    {
+      "check": "Usable region marrow-shepherd/sheet",
+      "ok": true
+    },
+    {
+      "check": "Usable region marrow-shepherd/main",
+      "ok": true
+    },
+    {
+      "check": "Usable region marrow-shepherd/state",
+      "ok": true
+    },
+    {
+      "check": "Usable region marrow-shepherd/omen",
+      "ok": true
+    },
+    {
+      "check": "Usable region marrow-shepherd/small",
+      "ok": true
+    },
+    {
+      "check": "Original sheet decodes drowned-bell",
+      "ok": true
+    },
+    {
+      "check": "Usable region drowned-bell/sheet",
+      "ok": true
+    },
+    {
+      "check": "Usable region drowned-bell/main",
+      "ok": true
+    },
+    {
+      "check": "Usable region drowned-bell/state",
+      "ok": true
+    },
+    {
+      "check": "Usable region drowned-bell/omen",
+      "ok": true
+    },
+    {
+      "check": "Usable region drowned-bell/small",
+      "ok": true
+    },
+    {
+      "check": "Original sheet decodes unfolding",
+      "ok": true
+    },
+    {
+      "check": "Usable region unfolding/sheet",
+      "ok": true
+    },
+    {
+      "check": "Usable region unfolding/main",
+      "ok": true
+    },
+    {
+      "check": "Usable region unfolding/state",
+      "ok": true
+    },
+    {
+      "check": "Usable region unfolding/omen",
+      "ok": true
+    },
+    {
+      "check": "Usable region unfolding/small",
+      "ok": true
+    },
+    {
+      "check": "Original sheet decodes choir-of-one",
+      "ok": true
+    },
+    {
+      "check": "Usable region choir-of-one/sheet",
+      "ok": true
+    },
+    {
+      "check": "Usable region choir-of-one/main",
+      "ok": true
+    },
+    {
+      "check": "Usable region choir-of-one/state",
+      "ok": true
+    },
+    {
+      "check": "Usable region choir-of-one/omen",
+      "ok": true
+    },
+    {
+      "check": "Usable region choir-of-one/small",
+      "ok": true
+    },
+    {
+      "check": "Original sheet decodes weight",
+      "ok": true
+    },
+    {
+      "check": "Usable region weight/sheet",
+      "ok": true
+    },
+    {
+      "check": "Usable region weight/main",
+      "ok": true
+    },
+    {
+      "check": "Usable region weight/state",
+      "ok": true
+    },
+    {
+      "check": "Usable region weight/omen",
+      "ok": true
+    },
+    {
+      "check": "Usable region weight/small",
+      "ok": true
+    },
+    {
+      "check": "Original sheet decodes open-door",
+      "ok": true
+    },
+    {
+      "check": "Usable region open-door/sheet",
+      "ok": true
+    },
+    {
+      "check": "Usable region open-door/main",
+      "ok": true
+    },
+    {
+      "check": "Usable region open-door/state",
+      "ok": true
+    },
+    {
+      "check": "Usable region open-door/omen",
+      "ok": true
+    },
+    {
+      "check": "Usable region open-door/small",
+      "ok": true
+    },
+    {
+      "check": "Original sheet decodes hollow-interval",
+      "ok": true
+    },
+    {
+      "check": "Usable region hollow-interval/sheet",
+      "ok": true
+    },
+    {
+      "check": "Usable region hollow-interval/main",
+      "ok": true
+    },
+    {
+      "check": "Usable region hollow-interval/state",
+      "ok": true
+    },
+    {
+      "check": "Usable region hollow-interval/omen",
+      "ok": true
+    },
+    {
+      "check": "Usable region hollow-interval/small",
+      "ok": true
+    },
+    {
+      "check": "Original sheet decodes sleeper-beyond",
+      "ok": true
+    },
+    {
+      "check": "Usable region sleeper-beyond/sheet",
+      "ok": true
+    },
+    {
+      "check": "Usable region sleeper-beyond/main",
+      "ok": true
+    },
+    {
+      "check": "Usable region sleeper-beyond/state",
+      "ok": true
+    },
+    {
+      "check": "Usable region sleeper-beyond/omen",
+      "ok": true
+    },
+    {
+      "check": "Usable region sleeper-beyond/small",
+      "ok": true
+    },
+    {
+      "check": "Next wraps through full set",
+      "ok": true
+    },
+    {
+      "check": "Previous wraps through full set",
+      "ok": true
+    },
+    {
+      "check": "Batch membership 150",
+      "ok": true
+    },
+    {
+      "check": "Batch membership 151",
+      "ok": true
+    },
+    {
+      "check": "Batch membership 152",
+      "ok": true
+    },
+    {
+      "check": "Batch membership all",
+      "ok": true
+    },
+    {
+      "check": "Comparison card selects full artwork",
+      "ok": true
+    },
+    {
+      "check": "No horizontal overflow 1280",
+      "ok": true
+    },
+    {
+      "check": "44px controls 1280",
+      "ok": true
+    },
+    {
+      "check": "No horizontal overflow 844",
+      "ok": true
+    },
+    {
+      "check": "44px controls 844",
+      "ok": true
+    },
+    {
+      "check": "No horizontal overflow 390",
+      "ok": true
+    },
+    {
+      "check": "44px controls 390",
+      "ok": true
+    },
+    {
+      "check": "No browser script errors",
+      "ok": true
+    }
+  ]
+}

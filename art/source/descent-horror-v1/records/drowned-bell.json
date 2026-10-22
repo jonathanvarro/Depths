@@ -1,0 +1,16 @@
+{
+  "id": "drowned-bell",
+  "issue": 151,
+  "title": "The Drowned Bell",
+  "tool": "built-in image_gen",
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-729fff6a-5186-4d23-abdd-b8b1b61f94bb.png",
+  "source": "art/source/descent-horror-v1/drowned-bell-master.png",
+  "reference_images": [
+    {
+      "path": "art/concepts/descent-horror-v1/underhound.png",
+      "role": "painting/layout reference only"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. A landscape 3:2 dark gritty concept sheet for Depths. Supplied Underhound sheet is STYLE AND LAYOUT REFERENCE ONLY; no hound anatomy in this new design. Keep broad painted shadow shapes, restrained mineral/ivory/taupe colour, quiet panel divisions and a narrow bottom silhouette strip. This middle-depth being should become less anatomically familiar while feeling horribly physical.\nTHE DROWNED BELL: an airborne pale bell-shaped ORGANISM hanging just above motionless black mine water. One thick irregular flared rim, puckered folds at the crown, thin stretched translucent patches showing three dark heavy organ-lobes hanging INSIDE like a clapper. Bruised membranes and a little mineral crust, no actual metal bell, ropes, chains, church decoration, eyes, face or dangling jellyfish tentacles. Its main readable shape is a diseased asymmetric hanging bell, about human torso size. Water beads form a vertical path upward from the pool into its underside; ripples spread far wider than the small body.\nMAIN left two-thirds: entire living bell above water inside a low flooded old stone cavity, with a half-submerged mine support/abandoned pick for scale, cold shadows and a restrained distant amber light at one edge. Show unsettling organ silhouette through membrane without graphic dissection. UPPER RIGHT inset: same body contracted and expanded as two simple states, clearly same rim/crown and the clapper organ hanging lower. LOWER RIGHT omen/context: broad concentric ripples begin in a still black pool below a recess where no body is yet visible, a few beads suspended above the surface. BOTTOM narrow band: two or three small flat solid silhouettes of expanded/contracted forms on dull-grey.\nAdult serious oppressive fantasy concept painting; grimy pale tissue, dark wet stone, tiny dull olive bruising. One central impossibility: the body drinks the falling water upward while sounding as if far beneath the pool. Static art should show bodily contraction and water relationship; no text or musical notes. No lettering, labels, arrows, logos, HUD, neon, magic aura, cute cartoon or glossy hyper-detailed render. Entire main being in frame and plenty of readable negative space. Scenery is artistic context, not approved floor/lore assignment.",
+  "review_status": "Draft; owner selections pending"
+}

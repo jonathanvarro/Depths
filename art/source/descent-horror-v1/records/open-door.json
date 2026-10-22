@@ -1,0 +1,16 @@
+{
+  "id": "open-door",
+  "issue": 152,
+  "title": "The Open Door",
+  "tool": "built-in image_gen",
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-7d0221a9-9af6-4d41-8cd1-3a62c365ec1c.png",
+  "source": "art/source/descent-horror-v1/open-door-master.png",
+  "reference_images": [
+    {
+      "path": "art/concepts/descent-horror-v1/underhound.png",
+      "role": "painting/layout reference only"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. Landscape 3:2 dark gritty concept-art sheet for Depths, deepest concept batch. Supplied Underhound sheet is style/layout reference only; NO hound body in this concept. Preserve weathered physical material, charcoal shadows, restrained dirty ivory and amber rather than neon magical effects.\nTHE OPEN DOOR: a tall narrow pale organic FRAME stands free on TWO thin jointed supports on solid rock. It resembles a stretched rectangular ring grown from dirty ivory tissue, imperfect and slightly yielding, with no wood planks, hinges, knob, actual door leaf, runes or recognizable exit sign. The aperture contains the SAME small mine chamber but from an incompatible camera angle, looking upward from BENEATH its floor: the mining cart, support timbers and hanging lantern are recognizable echoes, arranged with underside perspective and suspended floor stones above. Outside the frame we look across the chamber normally; inside we clearly look up at its underside. A long indistinct joint or narrow pale shape at the distant interior edge suggests something approaching without revealing a whole entity. The view should feel physically wrong, not a colourful fantasy portal.\nMAIN left two-thirds: entire frame and two thin supports in the solid-floored chamber, three-quarter perspective enough to see its tangible thickness, interior image sharply distinct in perspective but same muted materials/lighting as the surrounding room. Space and changed perspective are the central impossibility, no excessive smoke. UPPER RIGHT: two views of this SAME frame turning from front to oblique while the contained chamber image remains facing the viewer and fixed upright; outer support angles change, interior view holds. LOWER RIGHT omen: a shallow still puddle reflecting an upright ivory frame in front of a rock wall, while the physical wall above it is visibly continuous and solid with NO frame present. Bottom narrow strip: small flat silhouette studies of frontal/angled thin frames and two supports on dull grey.\nSerious grotesque cosmic fantasy painting; the bone-like frame feels like a body reduced to an opening. Large readable contours, useful context, mysterious presence, no literal teeth, tentacles, skull ornament, giant face, magic aura or star field. NO text, arrows, labels, symbols, letters, HUD or map icons. Main frame fully inside canvas; detailed concept exploration, not runtime geometry, no final-boss/relic identity.",
+  "review_status": "Draft; owner selections pending"
+}

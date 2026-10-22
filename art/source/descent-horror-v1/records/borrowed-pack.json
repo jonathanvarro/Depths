@@ -1,0 +1,20 @@
+{
+  "id": "borrowed-pack",
+  "issue": 150,
+  "title": "The Borrowed Pack",
+  "tool": "built-in image_gen",
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-889aa061-a1d9-4cb5-9940-fa868c7db645.png",
+  "source": "art/source/descent-horror-v1/borrowed-pack-master.png",
+  "reference_images": [
+    {
+      "path": "art/source/monsters-v1/breach-hound-idle-master.png",
+      "role": "family posture/head reference"
+    },
+    {
+      "path": "art/concepts/descent-horror-v1/underhound.png",
+      "role": "painting/layout reference only"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. One landscape 3:2 creature concept sheet for Depths. REFERENCE image1 is the approved breach hound (family posture/head/teeth); image2 is the just-drafted Underhound sheet (painting style, material and lighting only). NEW creature, no copying the Underhound's doubled rib trick.\nSUBJECT THE BORROWED PACK: THREE distinct low hairless hound bodies share ONE continuous hide, joined by broad slack folded skin bridges running shoulder to flank. Three readable heads at different depths, three readable torsos, clear negative space between their separated legs; deliberate connected anatomy, not three ordinary dogs standing together and not an unreadable mound. Central hound steps forward and the taut hide visibly pulls its two companions sideways. A small alternate-state inset shows one head retreating beneath the common hide and a head-shaped bulge emerging at a different shoulder. Grotesque strained skin, muscular weight, sloping long bald heads and tooth bands echo the original hound. No human heads, eyes covering bodies, horns, tentacles, ropes, armor or blood spray.\nLAYOUT: left two-thirds main three-quarter full-group view in a dark rough mine passage, all three animals and connecting folds visible, ground spaces separate their feet. Upper-right inset shows the tension/head-migration state in a clean side view of this SAME trio. Lower-right omen inset: three separate sets of pawprints converge into one broad damp drag mark at a bend. Bottom narrow strip has a small flat solid silhouette of the connected trio on muted grey, clearly readable.\nRestrained dark gritty fantasy painting with broad shapes and strong contours, warm upper-left lantern raking on bruised taupe-grey hide, dirty ivory teeth, cold charcoal rock. Grave, adult, physically unpleasant; no cute cartoon, glossy render, neon, decorative tentacles or excessive surface noise. NO lettering, labels, arrows, numbers, HUD or border ornaments. Main view large and full, useful margins. One shared-hide impossibility should read even when reduced. Concept only with painted scenery, not transparent runtime sprites.",
+  "review_status": "Draft; owner selections pending"
+}

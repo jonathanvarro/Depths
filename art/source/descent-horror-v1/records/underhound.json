@@ -1,0 +1,15 @@
+{
+  "id": "underhound",
+  "issue": 150,
+  "title": "The Underhound",
+  "tool": "built-in image_gen",
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-26677080-2f23-4b2d-860a-217827b1c39b.png",
+  "source": "art/source/descent-horror-v1/underhound-master.png",
+  "reference_images": [
+    {
+      "path": "art/source/monsters-v1/breach-hound-idle-master.png",
+      "role": "family silhouette and material reference only"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. Asset: one landscape 3:2 concept-art sheet for Depths, a dark serious first-person dungeon crawler. REFERENCE IMAGE is the existing breach hound: use ONLY its low predatory crouch, sloping long bald head, stretched grey-brown hide and broad irregular tooth band as family anchors; this is a NEW deeper creature concept, not a reskin or production sprite.\nSUBJECT: THE UNDERHOUND. A lean hairless quadruped whose ordinary outer ribs enclose a second rib cage, with both sets visibly pressing the intact thin hide in incompatible directions. Long narrow jaw stays still while an internal tooth-bearing plate slides forward out of it; show this as a clearly separate nested mouth structure. Grotesque anatomical tension, dry bruised flesh and uncomfortable physical weight; no blood spray, human victims or open-gore spectacle. Retain four leg anatomy and an unmistakable animal stance.\nLAYOUT: main painting takes the left two thirds: full animal in a low stalking three-quarter view in a rough mine passage, warm lantern raking from upper left, cold shadow masses. Right top inset shows the same animal's forward lunge and tooth plate extended while outer jaw keeps its length; opposing rib curves must be easy to read. Right bottom inset shows an environmental omen: ordinary pawprints next to curved rib-like impressions stamped into damp clay. Narrow lower margin includes one small flat silhouette study against lighter dull-grey ground. Distinct quiet panel separation, NO text, labels, letters, numbers, arrows, logos or HUD.\nSTYLE: cohesive restrained dark fantasy concept painting, broad sculpted shadow shapes, gritty weathered material, muted dirty ivory/taupe/charcoal/bruise violet, limited selective amber light. Real menace and body horror, not cute, not comic, not glossy photoreal, not a hyper-detailed rendered statue. Main silhouette and its central impossibility must survive a small view. Entire primary creature and useful margins in frame. No extra heads, eyes, horns, tentacles or jewelry. This is concept exploration with scenery, not a transparent game sprite, no stat/encounter/story assignment."
+}

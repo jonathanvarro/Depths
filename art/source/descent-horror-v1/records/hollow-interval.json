@@ -1,0 +1,20 @@
+{
+  "id": "hollow-interval",
+  "issue": 152,
+  "title": "The Hollow Interval",
+  "tool": "built-in image_gen",
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-cf0e060c-b635-46c0-aadc-0c1e9eea8259.png",
+  "source": "art/source/descent-horror-v1/hollow-interval-master.png",
+  "reference_images": [
+    {
+      "path": "art/source/monsters-v1/breach-hound-idle-master.png",
+      "role": "hound silhouette reference"
+    },
+    {
+      "path": "art/concepts/descent-horror-v1/underhound.png",
+      "role": "painting/layout reference only"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. One landscape 3:2 dark gritty concept sheet for Depths. REFERENCE image1 existing breach hound supplies ONLY the low crouch, long sloping bald head, stretched jaw, high shoulder/rib arch and narrow tail silhouette. Reference image2 supplies concept-painting style and panel layout. This is a NEW deepest creature: THE HOLLOW INTERVAL.\nThe hound returns as a HOLE IN THE PICTURE, not as a black-skinned dog. Within its recognizable hound contour there is perfectly flat absolute black absence: NO fur, skin, muscles, volume, highlights, eyes, reflected light or surface. A bright enough stone wall, diagonal timber, suspended dust and a low lantern-lit rock stripe continue on either side but TERMINATE abruptly wherever the silhouette crosses them. The viewer can see that chunks of room, not merely light, are missing. A few grains of dust end at the edge of its extended jaw, briefly tracing an empty inner jaw curve. Keep the black void body sharply readable, not buried in an entirely black scene. The setting and light outside remain tactile.\nMAIN left two-thirds: low hound-shaped absence walking through a charcoal-grey mine chamber across a diagonal timber and a visible band of dusty warm side light. Four negative-space legs, low stretched head and arching shoulders echo the reference; no new tentacles or horns, no glowing outline. UPPER RIGHT alternate context: its outline turns sideways across the passage while straight ordinary pawprints in dust continue forward into depth, a contradiction between present orientation and continuing path; same empty absolute-black body. LOWER RIGHT omen: falling grit and droplets interrupted in a jaw-shaped gap in air, only a few boundary grains outlining an empty serrated mouth, no solid skull or floating head. BOTTOM strip: flat hound outline studies on muted grey, direct echoes of original stalking proportions.\nDark adult cosmic horror by absence, gritty room, broad restrained forms, warm-light/cold-shadow palette. Static composition must reveal interrupted room geometry so it cannot be mistaken for ordinary black animal art. NO text, labels, arrows, HUD, star-field fill, galaxy surface, smoke filling the body, visible eyes, muscle shading or aura. Context matters more than ornament. Concept only, no new game shader or mechanics implemented.",
+  "review_status": "Draft; owner selections pending"
+}

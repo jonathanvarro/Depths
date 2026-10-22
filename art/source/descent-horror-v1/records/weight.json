@@ -1,0 +1,16 @@
+{
+  "id": "weight",
+  "issue": 151,
+  "title": "The Weight",
+  "tool": "built-in image_gen",
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-5c827f53-c2e3-425d-8b05-91e53de52025.png",
+  "source": "art/source/descent-horror-v1/weight-master.png",
+  "reference_images": [
+    {
+      "path": "art/concepts/descent-horror-v1/underhound.png",
+      "role": "painting/layout reference only"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. One landscape 3:2 dark gritty concept sheet for Depths. Reference image is for restrained painting and panel layout ONLY, no borrowed hound or fan anatomy. Middle-to-deep descent: one dominant impossible volume and gravity relationship.\nTHE WEIGHT: an immense solid ivory TEARDROP hangs POINT DOWN, unsupported, above a rough cavern floor. Broad featureless aged ivory skin with sparse dirty mineral stains and two precise organic seams converging at the pointed bottom. No eyes, face, mouth, head, limbs, horns, runes or metallic machinery. At the point the seams part very slightly into three heavy plates. Inside is a sheer dark vertical depth with tiny diminishing interior folds, vastly deeper than the exterior could contain. The body stays simple and oppressive, like an unknown organ mistaken for a mineral.\nMAIN left two-thirds: complete teardrop floating in a low mine chamber, roughly twice a person's height judged by a small abandoned wheelbarrow and pick near the wall. A handful of stones, one broken tool and a strip of ragged cloth hang at different heights around it, their quiet asymmetric orbit implied by suspended arrangement and cloth drawn sideways toward the body. NO glowing orbital rings or energy beams. Cold charcoal cavern with restrained off-frame amber lantern edges, heavy shadows; pale mass and lower cavity read clearly.\nUPPER RIGHT: two views of SAME featureless form, closed and slightly parted at its lower seams; the parted inset lets us see impossible receding inner depth while exterior dimensions remain comparable. LOWER RIGHT omen: coarse grit gathered uphill across an inclined rock shelf and a single old dull gold coin balanced on its edge; no other treasure or symbols. BOTTOM narrow strip: small flat silhouette studies closed/parted with separated suspended stones, on dull-grey.\nSerious tactile grotesque fantasy painting, broad shapes, dirty ivory, bruised dark interior, worn stone and dull iron. It should feel bodily and heavy despite suspension, not a clean sci-fi egg, gemstone, crystal, chandelier, floating boss head or neon magic portal. No text, arrows, labels, HUD, smoke hiding form, gore or glossy render. Full primary body and margins in frame; concept exploration only.",
+  "review_status": "Draft; owner selections pending"
+}
