@@ -491,6 +491,25 @@ Deeper floors mix them (depth 1 mostly single rats; depth 3 pairs and trios like
 
 **Decided 2026-10-16 (#13): enemies appear in the first-person view.** A dedicated formation layout may be explored later. Do not assume the movement or combat of Greed & Darkness is the target. The owner likes its art styling but envisions these systems differently. Three party positions and a compact action set are starting proposals, not settled rules.
 
+**New monsters — decided 2026-10-21 (#140, art #141):**
+
+- **Why:** the late floors are almost all goblins, and the new rewards (boons, trinkets, finer gear) have made them easier. The careful bot wins 30, 30 and 27 of 30, against 24, 29 and 21 before.
+- **The plan:** new monsters first, then elite foes and light depth scaling, tuned until the bot wins about 24 of 30.
+- **The breach family:** **the monsters that came up through the breach after the gas** become a third family of foes from floor 3, foreshadowing the deeper layers:
+  - **Gas-bloat:** bursts gas over the party when killed. Kill it from the back row, or burst it early with a thrown torch.
+  - **Lamp-eater:** its bite drains oil or snuffs a torch.
+  - **Hollow miner:** the town's gassed shift, risen, which the owner likes. It grabs a hero, and may carry a pick.
+  - **Breach hound:** hunts in pairs, going for the weakest.
+- **From the #97 catalogue:**
+  - Cave bat: swoops, then lands.
+  - Rock beetle: curls up.
+  - Venom spider.
+  - Broodmother: optional mini-boss.
+  - Goblin brute: wind-up, blow, recover.
+  - Goblin trapper: snare.
+  - Gate captain: optional mini-boss.
+- **Priority:** the cave bat, goblin brute, gas-bloat and hollow miner. The art request (`docs/monster-art-brief.md`) covers the whole set, with poses, effects and icons.
+
 ## Resources, rewards, and uncertainty
 
 **Decided 2026-10-16 (#10):**
