@@ -1,0 +1,17 @@
+{
+  "id": "sleeper-beyond-revised",
+  "issue": 152,
+  "title": "The Sleeper Beyond — folded vault revision",
+  "tool": "built-in image_gen",
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-27d54d3a-8f9d-4ca0-a4a7-7c99a02e9bcb.png",
+  "source": "art/source/descent-horror-v1/sleeper-beyond-revised-master.png",
+  "reference_images": [
+    {
+      "path": "art/concepts/descent-horror-v1/sleeper-beyond.png",
+      "role": "edit target; original preserved"
+    }
+  ],
+  "prompt": "Use case: precise-object-edit. EDIT TARGET: supplied Sleeper Beyond concept sheet. Reimagine the entire huge pale form across ALL views. Preserve the landscape 3:2 sheet, foreground mine rails, tiny cloaked expedition/lantern scale cues, vertical dark-water barrier, cold distant light, dark gritty painting, right-side contextual/condensation insets and bottom shape-study strip.\nREPLACE THE ENTIRE SINGLE FINGER with a VAST BROAD FOLDED MANTLE / CARAPACE FRAGMENT whose anatomy is unresolved. Its overall silhouette is LOW, WIDE, ASYMMETRIC and ARCHITECTURAL: at least three times wider than its thickness, like a collapsed cathedral vault or enormous folded shell. Several broad transverse ivory plates overlap into crooked stone-like arches and buttresses. A scalloped irregular outer edge, deep offset pleats and one great bend suggest a living mass mistaken for ancient ruins. Wide negative spaces between some plates help it read as an unknown folded structure, not a smooth continuous tube. Its far left and right extents disappear into the dark water and cavern distance; the visible fragment alone dwarfs the party. An opening between two offset plates shows bruised membrane deep inside, hinting at life without revealing the full creature.\nCRITICAL SHAPE: NO cylinder, worm, finger, thumb, hand, pointed claw, elongated rounded protrusion, paired bulbous lobes, symmetric sacs, centered vertical slit or genital resemblance. Remove the nail completely. Do not merely widen the old finger: establish an entirely different broad horizontal silhouette with hard broken arch contours, layered fold planes and asymmetrical mass. No eyes, face, tentacles, humanoid pelvis or literal temple carvings.\nMAIN VIEW: broad ruined-vault-like pale structure beyond the upright dark-water sheet, tiny people/wooden mining work in foreground; the unsettling discovery is that these apparent architectural plates belong to something folded and living. UPPER RIGHT: same broad folded structure from a slightly shifted angle, one immense plate lifted only a little to reveal membrane and the dark depth behind. LOWER RIGHT: keep the dry-rock condensation omen in subject. BOTTOM: new small shape studies show this broad scalloped folded mass with tiny mine supports for scale; remove ALL finger/nail silhouettes.\nWeathered dirty ivory, mineral crust, deep charcoal and muted bruised shadows. Grave cosmic horror and disturbing material weight, sparse useful detail, cold quiet distance plus tiny warm lantern. NO glowing magic, labels, text, arrows, HUD, boss health bars or full body reveal. New proposal only; complete identity, body and relation to the objective remain open.",
+  "review_status": "Owner-requested form revision; revised draft pending review",
+  "revises": "sleeper-beyond"
+}

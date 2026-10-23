@@ -4,12 +4,12 @@
     151,
     152
   ],
-  "checks": 118,
+  "checks": 146,
   "failed": 0,
   "scope": "Draft sheets and source integrity; not production art or live game validation",
   "results": [
     {
-      "check": "Ten drafts and retained first Sleeper master",
+      "check": "Eleven preserved earlier masters and two owner-requested revisions",
       "ok": true
     },
     {
@@ -70,6 +70,30 @@
     },
     {
       "check": "Reference role/hash choir-of-one/painting/layout reference only",
+      "ok": true
+    },
+    {
+      "check": "Immutable generated master drowned-bell-revised",
+      "ok": true
+    },
+    {
+      "check": "Unaltered review copy drowned-bell-revised",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in output copy drowned-bell-revised",
+      "ok": true
+    },
+    {
+      "check": "Full landscape sheet drowned-bell-revised",
+      "ok": true
+    },
+    {
+      "check": "Exact prompt/tool retained drowned-bell-revised",
+      "ok": true
+    },
+    {
+      "check": "Reference role/hash drowned-bell-revised/edit target; original preserved",
       "ok": true
     },
     {
@@ -197,6 +221,30 @@
       "ok": true
     },
     {
+      "check": "Immutable generated master sleeper-beyond-revised",
+      "ok": true
+    },
+    {
+      "check": "Unaltered review copy sleeper-beyond-revised",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in output copy sleeper-beyond-revised",
+      "ok": true
+    },
+    {
+      "check": "Full landscape sheet sleeper-beyond-revised",
+      "ok": true
+    },
+    {
+      "check": "Exact prompt/tool retained sleeper-beyond-revised",
+      "ok": true
+    },
+    {
+      "check": "Reference role/hash sleeper-beyond-revised/edit target; original preserved",
+      "ok": true
+    },
+    {
       "check": "Immutable generated master sleeper-beyond",
       "ok": true
     },
@@ -305,6 +353,10 @@
       "ok": true
     },
     {
+      "check": "Active gallery uses recorded master underhound",
+      "ok": true
+    },
+    {
       "check": "Valid review regions borrowed-pack",
       "ok": true
     },
@@ -314,6 +366,10 @@
     },
     {
       "check": "Handoff covers borrowed-pack",
+      "ok": true
+    },
+    {
+      "check": "Active gallery uses recorded master borrowed-pack",
       "ok": true
     },
     {
@@ -329,6 +385,10 @@
       "ok": true
     },
     {
+      "check": "Active gallery uses recorded master marrow-shepherd",
+      "ok": true
+    },
+    {
       "check": "Valid review regions drowned-bell",
       "ok": true
     },
@@ -338,6 +398,18 @@
     },
     {
       "check": "Handoff covers drowned-bell",
+      "ok": true
+    },
+    {
+      "check": "Active gallery uses recorded master drowned-bell",
+      "ok": true
+    },
+    {
+      "check": "Current owner revision selected drowned-bell",
+      "ok": true
+    },
+    {
+      "check": "Previous draft preserved drowned-bell",
       "ok": true
     },
     {
@@ -353,6 +425,10 @@
       "ok": true
     },
     {
+      "check": "Active gallery uses recorded master unfolding",
+      "ok": true
+    },
+    {
       "check": "Valid review regions choir-of-one",
       "ok": true
     },
@@ -362,6 +438,10 @@
     },
     {
       "check": "Handoff covers choir-of-one",
+      "ok": true
+    },
+    {
+      "check": "Active gallery uses recorded master choir-of-one",
       "ok": true
     },
     {
@@ -377,6 +457,10 @@
       "ok": true
     },
     {
+      "check": "Active gallery uses recorded master weight",
+      "ok": true
+    },
+    {
       "check": "Valid review regions open-door",
       "ok": true
     },
@@ -386,6 +470,10 @@
     },
     {
       "check": "Handoff covers open-door",
+      "ok": true
+    },
+    {
+      "check": "Active gallery uses recorded master open-door",
       "ok": true
     },
     {
@@ -401,6 +489,10 @@
       "ok": true
     },
     {
+      "check": "Active gallery uses recorded master hollow-interval",
+      "ok": true
+    },
+    {
       "check": "Valid review regions sleeper-beyond",
       "ok": true
     },
@@ -410,6 +502,18 @@
     },
     {
       "check": "Handoff covers sleeper-beyond",
+      "ok": true
+    },
+    {
+      "check": "Active gallery uses recorded master sleeper-beyond",
+      "ok": true
+    },
+    {
+      "check": "Current owner revision selected sleeper-beyond",
+      "ok": true
+    },
+    {
+      "check": "Previous draft preserved sleeper-beyond",
       "ok": true
     },
     {
@@ -449,7 +553,7 @@
       "ok": true
     },
     {
-      "check": "Handoff link ../art/concepts/descent-horror-v1/drowned-bell.png",
+      "check": "Handoff link ../art/concepts/descent-horror-v1/drowned-bell-revised.png",
       "ok": true
     },
     {
@@ -473,11 +577,19 @@
       "ok": true
     },
     {
-      "check": "Handoff link ../art/concepts/descent-horror-v1/sleeper-beyond.png",
+      "check": "Handoff link ../art/concepts/descent-horror-v1/sleeper-beyond-revised.png",
       "ok": true
     },
     {
       "check": "Handoff link ../art/concepts/descent-horror-v1/sleeper-beyond-first.png",
+      "ok": true
+    },
+    {
+      "check": "Handoff link ../art/concepts/descent-horror-v1/sleeper-beyond.png",
+      "ok": true
+    },
+    {
+      "check": "Handoff link ../art/concepts/descent-horror-v1/drowned-bell.png",
       "ok": true
     }
   ]

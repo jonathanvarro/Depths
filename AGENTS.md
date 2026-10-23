@@ -139,10 +139,12 @@ Templates > Download and Install; already installed on the owner's PC).
   from reality toward the final floor. Read `docs/enemy-art-direction.md`
   before generating them. Preserve phone readability and existing production
   budgets; concept paintings do not assign lore, floors or a final boss.
-  Ten draft sheets and a retained first Sleeper candidate are ready in
+  Ten current draft sheets and three retained earlier variants are ready in
   `art/concepts/descent-horror-v1/inspector.html`; handoff, selection ledger and
-  presentation proposals: `docs/descent-horror-concepts.md`. All owner choices
-  are pending. Preserve these as concepts; no runtime exports or assignments.
+  presentation proposals: `docs/descent-horror-concepts.md`. Owner feedback
+  prompted a single-clapper Bell and broad folded-vault Sleeper revision; compare
+  Revised/Previous in the gallery. Revised review and production choices remain
+  open. Preserve these as concepts; no runtime exports or assignments.
 - `scripts/combat_state.gd` – combat rules without visuals (turn order,
   attack/defend/item/retreat, enemy attacks, results); testable directly.
 - `scripts/combat_screen.gd` – combat UI: turn text, log, tappable enemy

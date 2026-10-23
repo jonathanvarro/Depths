@@ -4,7 +4,7 @@
     151,
     152
   ],
-  "checks": 76,
+  "checks": 91,
   "failed": 0,
   "errors": [],
   "scope": "Offline concept gallery, not live game or animation validation",
@@ -14,7 +14,7 @@
       "ok": true
     },
     {
-      "check": "Eleven exact prompts and original masters",
+      "check": "Thirteen exact prompts and original masters",
       "ok": true
     },
     {
@@ -282,7 +282,43 @@
       "ok": true
     },
     {
+      "check": "Revision comparison available drowned-bell",
+      "ok": true
+    },
+    {
+      "check": "Revised draft is default drowned-bell",
+      "ok": true
+    },
+    {
+      "check": "Previous draft still loads drowned-bell",
+      "ok": true
+    },
+    {
+      "check": "Current draft labelled drowned-bell",
+      "ok": true
+    },
+    {
+      "check": "Revision comparison available sleeper-beyond",
+      "ok": true
+    },
+    {
+      "check": "Revised draft is default sleeper-beyond",
+      "ok": true
+    },
+    {
+      "check": "Previous draft still loads sleeper-beyond",
+      "ok": true
+    },
+    {
+      "check": "Current draft labelled sleeper-beyond",
+      "ok": true
+    },
+    {
       "check": "Comparison card selects full artwork",
+      "ok": true
+    },
+    {
+      "check": "Unchanged concepts have no misleading revision control",
       "ok": true
     },
     {
@@ -294,6 +330,14 @@
       "ok": true
     },
     {
+      "check": "Revision comparison fits drowned-bell/1280",
+      "ok": true
+    },
+    {
+      "check": "Revision comparison fits sleeper-beyond/1280",
+      "ok": true
+    },
+    {
       "check": "No horizontal overflow 844",
       "ok": true
     },
@@ -302,11 +346,27 @@
       "ok": true
     },
     {
+      "check": "Revision comparison fits drowned-bell/844",
+      "ok": true
+    },
+    {
+      "check": "Revision comparison fits sleeper-beyond/844",
+      "ok": true
+    },
+    {
       "check": "No horizontal overflow 390",
       "ok": true
     },
     {
       "check": "44px controls 390",
+      "ok": true
+    },
+    {
+      "check": "Revision comparison fits drowned-bell/390",
+      "ok": true
+    },
+    {
+      "check": "Revision comparison fits sleeper-beyond/390",
       "ok": true
     },
     {

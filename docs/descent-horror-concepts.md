@@ -14,6 +14,14 @@ The Underhound then supplies the painting/material/layout reference, while
 later bodies become less recognizable. Warm foreground light and cold rock
 shadows connect the sheets; the Sleeper shifts to a colder distant presence.
 
+**Owner revision, 2026-10-22:** the set received positive visual feedback, with
+two forms requested for reimagining. The Bell's paired sacs suggested unintended
+anatomy; it now has a single angular central clapper inside a broader flared hood.
+The Sleeper's elongated finger form is superseded by a vast broad folded mantle
+or carapace, with overlapping plates and broken arch-like contours. Both revised
+drafts await review. The gallery's **Draft: Revised / Previous** control compares
+them with their earlier sheets; the other eight paintings are retained.
+
 Each sheet includes a main painting, an alternate/revealing view, an omen or
 context inset and a small painted shape-study strip. The gallery can magnify
 each region, filter the three batches and compare all ten. Its viewport crops
@@ -26,23 +34,29 @@ are review aids; full original sheets are always one click away.
 | #150 | [Underhound](../art/concepts/descent-horror-v1/underhound.png) | Opposing rib structures and a sliding inner tooth plate on a familiar predator | How strongly ribs should press through/show beneath the hide; the body should stay recognizable |
 | #150 | [Borrowed Pack](../art/concepts/descent-horror-v1/borrowed-pack.png) | Three bodies under one hide; a head retreats into the common skin | Simplification of overlapping legs and flesh bridges at production size |
 | #150 | [Marrow Shepherd](../art/concepts/descent-horror-v1/marrow-shepherd.png) | A narrow tending body, branching bone cradles and a forming animal in an abdominal pod | Nursery gesture and the amount of bodily exposure; no life-cycle lore is fixed |
-| #151 | [Drowned Bell](../art/concepts/descent-horror-v1/drowned-bell.png) | Hanging organic bell, inner clapper-like organs and contraction/expansion | Droplet direction and deep/delayed sound require later motion/audio |
+| #151 | [Drowned Bell](../art/concepts/descent-horror-v1/drowned-bell-revised.png) | Broad flared organic hood, one angular central clapper and contraction/expansion | Review the new outline; droplet direction and deep/delayed sound require later motion/audio |
 | #151 | [Unfolding](../art/concepts/descent-horror-v1/unfolding.png) | A tightly curled animal and an extended form whose length could not fit there | Reveal staging and a presentation that preserves its impossible length |
 | #151 | [Choir of One](../art/concepts/descent-horror-v1/choir-of-one.png) | Closed black blade becomes an organic rib-like fan; repeated passage shapes imply resonance | Multiple voice distances and repeated footsteps remain sound directions |
 | #151 | [Weight](../art/concepts/descent-horror-v1/weight.png) | An ivory teardrop, precise lower seams, deep interior and suspended material | How bodily the form feels; orbit/uphill movement are implied by a still |
 | #152 | [Open Door](../art/concepts/descent-horror-v1/open-door.png) | An organic frame contains an incompatible view of the same mine chamber; false reflection omen | Fixed interior view while the frame turns needs a prototype; it is not an assumed usable exit |
 | #152 | [Hollow Interval](../art/concepts/descent-horror-v1/hollow-interval.png) | The hound becomes flat absence against a visible room; grit outlines an empty jaw | It can read as a black shadow in a still. The foreground post stays visible; room/dust interruption needs a later proof |
-| #152 | [Sleeper Beyond](../art/concepts/descent-horror-v1/sleeper-beyond.png) | Tiny party/mining cues, vertical dark water and one enormous curled finger | Architecture-first recognition needs occlusion and reveal pacing; full body/identity remain unknown |
+| #152 | [Sleeper Beyond](../art/concepts/descent-horror-v1/sleeper-beyond-revised.png) | Tiny party/mining cues, vertical dark water and immense overlapping plates resembling folded vaults | Architecture-first recognition needs occlusion and reveal pacing; full body/identity remain unknown |
 
 The first [Sleeper candidate](../art/concepts/descent-horror-v1/sleeper-beyond-first.png)
 read as a worm-like talon. One targeted built-in edit replaced that shape with
-a blunt finger and broad nail across its views. Both originals and exact prompts
-are retained. The current sheet is a clearer finger proposal; neither version
-is an owner selection or a confirmed final encounter.
+a blunt finger and broad nail across its views. The owner subsequently requested
+a different silhouette for similar anatomical-association reasons. The new broad
+folded structure supersedes that [finger draft](../art/concepts/descent-horror-v1/sleeper-beyond.png).
+The Bell's [paired-organ draft](../art/concepts/descent-horror-v1/drowned-bell.png)
+is likewise retained. All thirteen originals and exact prompts are preserved;
+the revised forms remain proposals, and no final encounter is chosen.
 
 ## Selection ledger
 
-**All ten owner selections are pending.** Working names remain working names.
+**Individual production selections remain open.** The owner likes the overall
+set and requested these two specific revisions. Revised Bell/Sleeper visual
+review is pending; general praise does not assign story roles or production
+work to every creature. Working names remain working names.
 Review the family relationship, escalating wrongness, physical materials and
 main silhouettes before choosing a production direction. Then decide which
 beings need a fight, a room event, a distant encounter or only an omen. The
@@ -75,9 +89,9 @@ Claude's story work remain intact.
 
 ## Files and checks
 
-- `art/concepts/descent-horror-v1/`: ten current sheets plus the first Sleeper
-  candidate, catalogue, offline gallery, responsive captures and reports.
-- `art/source/descent-horror-v1/`: eleven unaltered generated masters, exact
+- `art/concepts/descent-horror-v1/`: ten current sheets plus three earlier
+  variants, catalogue, offline gallery, responsive captures and reports.
+- `art/source/descent-horror-v1/`: thirteen unaltered generated masters, exact
   prompts, reference roles/hashes and original built-in output locations.
 - `tools/art/record_horror_concepts.py`: byte-for-byte copies and manifest.
 - `tools/art/build_horror_concept_review.py`: catalogue and review page.
@@ -88,8 +102,9 @@ Claude's story work remain intact.
 
 All source sheets are **1536×1024**, with scenery. Both source and review folders
 have `.gdignore`; nothing is imported as game art. Source integrity and coverage
-pass **118 checks**, including exact copies and reference hashes. The browser check passes
-**76 checks** at desktop, 844px landscape and 390px widths. Captures are review
+pass **146 checks**, including exact copies, reference hashes and active revision
+bindings. The browser check passes **91 checks** at desktop, 844px landscape and
+390px widths, including previous/revised comparisons. Captures are review
 pages, not Godot or physical-phone views. Shape studies are drawn proposals;
 they are not final native128 silhouettes, aligned animation frames or proof of
 performance. No live-game test is needed for this concept-only delivery.

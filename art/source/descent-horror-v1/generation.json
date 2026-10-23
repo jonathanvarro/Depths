@@ -52,6 +52,26 @@
       "review": "art/concepts/descent-horror-v1/choir-of-one.png"
     },
     {
+      "id": "drowned-bell-revised",
+      "issue": 151,
+      "title": "The Drowned Bell \u2014 single clapper revision",
+      "tool": "built-in image_gen",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-1176dd7f-108d-4c5d-99f9-ea9bde5a0425.png",
+      "source": "art/source/descent-horror-v1/drowned-bell-revised-master.png",
+      "reference_images": [
+        {
+          "path": "art/concepts/descent-horror-v1/drowned-bell.png",
+          "role": "edit target; original preserved",
+          "sha256": "d89536257993a84720c1d3172e1535d942c4ced625f62a75fa9edd86a8f0c1b3"
+        }
+      ],
+      "prompt": "Use case: precise-object-edit. EDIT TARGET: supplied Drowned Bell concept sheet. Revise this creature's silhouette and interior anatomy in ALL its views while keeping the landscape 3:2 sheet, dark flooded mine, black water, scale cue, restrained gritty painting, warm/cold light relationship, main view left, state inset upper right, omen lower right and small shape studies along bottom.\nThe owner sees an unintended paired-sac resemblance. Redesign the living bell as a BROAD FLARED ASYMMETRIC HOOD with a definite outward-curving bell rim and taut ribbed membrane, slightly crooked shoulders and an angular crown. Inside it hangs EXACTLY ONE CENTRAL CLAPPER-LIKE ORGAN: a narrow FLAT, FACETED, DARK OSSIFIED WEDGE, like a worn blade-shaped bone striker, anchored once at the crown and ending above/near the rim. It is clearly a single unpaired solid angular piece. Remove ALL rounded hanging sacs, paired organs, bulbous lobes, soft oval danglers and sac-like bunching. The hood is broad and flattened rather than bag-like. Keep a sparse organic texture and slight bruising so it remains a living unsettling organism.\nMAIN VIEW: full bell-hood over the same black pool; the ONE angular central striker easy to read through the open underside, generous negative space around it. Upper-right contracted/expanded states show the SAME SINGLE STRIKER and hood, no duplicated organ within either state. Lower-right ripples/suspended-droplet omen stays a pool context with no body. Bottom small shapes must reflect the new broad flared hood and one central narrow wedge.\nKeep grotesque dark fantasy physicality, worn ivory membrane, dull charcoal/brown striker, wet rock. No eyes, teeth, human anatomy, genital cues, added limbs, chains, literal metal church bell, magic aura, text, arrows, labels or HUD. The revision should read as an unnerving bell organism with one clapper at a glance, including at a small size. This is a concept draft, not a runtime export.",
+      "review_status": "Owner-requested form revision; revised draft pending review",
+      "revises": "drowned-bell",
+      "sha256": "9121d5b0c7ae9a4908ac08cd89673cc8755a1894827abf55b7f485ec07c0d2e5",
+      "review": "art/concepts/descent-horror-v1/drowned-bell-revised.png"
+    },
+    {
       "id": "drowned-bell",
       "issue": 151,
       "title": "The Drowned Bell",
@@ -150,6 +170,26 @@
       "review_status": "Superseded candidate; claw shape refined to a blunt single finger in the current draft",
       "sha256": "899762de55cd569f715e73f0deb136c79213cc452624ed51a3e7be306cb25e9c",
       "review": "art/concepts/descent-horror-v1/sleeper-beyond-first.png"
+    },
+    {
+      "id": "sleeper-beyond-revised",
+      "issue": 152,
+      "title": "The Sleeper Beyond \u2014 folded vault revision",
+      "tool": "built-in image_gen",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-27d54d3a-8f9d-4ca0-a4a7-7c99a02e9bcb.png",
+      "source": "art/source/descent-horror-v1/sleeper-beyond-revised-master.png",
+      "reference_images": [
+        {
+          "path": "art/concepts/descent-horror-v1/sleeper-beyond.png",
+          "role": "edit target; original preserved",
+          "sha256": "b57d27ef3431ae22428246d8593072011ea6d7bf0a5984ec2646357853344d16"
+        }
+      ],
+      "prompt": "Use case: precise-object-edit. EDIT TARGET: supplied Sleeper Beyond concept sheet. Reimagine the entire huge pale form across ALL views. Preserve the landscape 3:2 sheet, foreground mine rails, tiny cloaked expedition/lantern scale cues, vertical dark-water barrier, cold distant light, dark gritty painting, right-side contextual/condensation insets and bottom shape-study strip.\nREPLACE THE ENTIRE SINGLE FINGER with a VAST BROAD FOLDED MANTLE / CARAPACE FRAGMENT whose anatomy is unresolved. Its overall silhouette is LOW, WIDE, ASYMMETRIC and ARCHITECTURAL: at least three times wider than its thickness, like a collapsed cathedral vault or enormous folded shell. Several broad transverse ivory plates overlap into crooked stone-like arches and buttresses. A scalloped irregular outer edge, deep offset pleats and one great bend suggest a living mass mistaken for ancient ruins. Wide negative spaces between some plates help it read as an unknown folded structure, not a smooth continuous tube. Its far left and right extents disappear into the dark water and cavern distance; the visible fragment alone dwarfs the party. An opening between two offset plates shows bruised membrane deep inside, hinting at life without revealing the full creature.\nCRITICAL SHAPE: NO cylinder, worm, finger, thumb, hand, pointed claw, elongated rounded protrusion, paired bulbous lobes, symmetric sacs, centered vertical slit or genital resemblance. Remove the nail completely. Do not merely widen the old finger: establish an entirely different broad horizontal silhouette with hard broken arch contours, layered fold planes and asymmetrical mass. No eyes, face, tentacles, humanoid pelvis or literal temple carvings.\nMAIN VIEW: broad ruined-vault-like pale structure beyond the upright dark-water sheet, tiny people/wooden mining work in foreground; the unsettling discovery is that these apparent architectural plates belong to something folded and living. UPPER RIGHT: same broad folded structure from a slightly shifted angle, one immense plate lifted only a little to reveal membrane and the dark depth behind. LOWER RIGHT: keep the dry-rock condensation omen in subject. BOTTOM: new small shape studies show this broad scalloped folded mass with tiny mine supports for scale; remove ALL finger/nail silhouettes.\nWeathered dirty ivory, mineral crust, deep charcoal and muted bruised shadows. Grave cosmic horror and disturbing material weight, sparse useful detail, cold quiet distance plus tiny warm lantern. NO glowing magic, labels, text, arrows, HUD, boss health bars or full body reveal. New proposal only; complete identity, body and relation to the objective remain open.",
+      "review_status": "Owner-requested form revision; revised draft pending review",
+      "revises": "sleeper-beyond",
+      "sha256": "bf65d54f2d65c4857ba0373ca44e98f02c9b98956be544f9106d6eaf521823de",
+      "review": "art/concepts/descent-horror-v1/sleeper-beyond-revised.png"
     },
     {
       "id": "sleeper-beyond",

@@ -8,7 +8,7 @@ def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def check(ok,name):
     results.append({'check':name,'ok':bool(ok)})
     if not ok:print('FAIL',name)
-check(len(manifest['assets'])==11,'Ten drafts and retained first Sleeper master')
+check(len(manifest['assets'])==13,'Eleven preserved earlier masters and two owner-requested revisions')
 check(len(cat['entries'])==10,'Ten requested beings')
 check([(n,len([e for e in cat['entries'] if e['issue']==n])) for n in [150,151,152]]==[(150,3),(151,4),(152,3)],'All three batches complete as drafts')
 for e in manifest['assets']:
@@ -27,6 +27,11 @@ for e in cat['entries']:
     check(0<x<w and 0<mid<y<h,'Valid review regions '+e['id'])
     check(e['owner_selection'] is None,'Owner choice explicitly pending '+e['id'])
     check(e['id'] in (ROOT/'docs/descent-horror-concepts.md').read_text(),'Handoff covers '+e['id'])
+    master=next(m for m in manifest['assets'] if m['id']==e['master_id'])
+    check(e['sha256']==master['sha256'] and sha(OUT/e['file'])==master['sha256'],'Active gallery uses recorded master '+e['id'])
+    if e['id'] in ['drowned-bell','sleeper-beyond']:
+        check(e['master_id']==e['id']+'-revised','Current owner revision selected '+e['id'])
+        check(sha(OUT/e['previous']['file'])==e['previous']['sha256'],'Previous draft preserved '+e['id'])
 for p in [OUT,SOURCE]:check((p/'.gdignore').exists(),'Concepts stay outside game imports '+p.name)
 for p in [ROOT/'docs/descent-horror-concepts.md']:
     for target in re.findall(r'\]\(([^)]+)\)',p.read_text()):
