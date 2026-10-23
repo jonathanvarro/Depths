@@ -149,6 +149,9 @@ Templates > Download and Install; already installed on the owner's PC).
   `art/concepts/reference-creatures-v1/inspector.html`; prompts/provenance and
   review notes: `docs/reference-creature-concepts.md`. Supplied references and
   generated masters are retained separately. These remain exploratory concepts.
+  The owner-approved crown-free gothic vampire queen concept (#154) is separate:
+  `art/concepts/vampire-queen-v1/README.md`. Its selected painting and exact edit
+  lineage are preserved; no story role or runtime portrait is assigned.
 - `scripts/combat_state.gd` – combat rules without visuals (turn order,
   attack/defend/item/retreat, enemy attacks, results); testable directly.
 - `scripts/combat_screen.gd` – combat UI: turn text, log, tappable enemy

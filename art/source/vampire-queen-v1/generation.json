@@ -1,0 +1,77 @@
+{
+  "issue": 154,
+  "date": "2026-10-22",
+  "tool": "built-in image_gen",
+  "scope": "Owner-approved visual concept only; no character identity, story or runtime assignment",
+  "selection": {
+    "id": "gothic-sensual-v1",
+    "file": "art/concepts/vampire-queen-v1/vampire-queen.png",
+    "status": "approved as concept",
+    "owner_feedback": "Ok, that version can be used as concept. I do appreciate the changes and the gothic styling works great",
+    "crown": "Removed at owner's request; no crown or replacement headpiece"
+  },
+  "references": [
+    {
+      "id": "user-pixel-reference",
+      "original_file": "C:/Users/jonat/AppData/Local/Temp/codex-clipboard-5e52081b-edb4-4af5-a564-43734fbabb6a.png",
+      "file": "art/source/vampire-queen-v1/reference.png",
+      "role": "User-supplied visual/pose reference for the first painting",
+      "provenance": "User-supplied attachment; creator/licence not provided. Owner identified the crown as belonging to another franchise; it was removed in the second stage.",
+      "size": [
+        166,
+        260
+      ],
+      "mode": "RGBA",
+      "sha256": "1b932b25f2fa5af8d55b63f508d91c7804a787c7f16a20cd9b3eded58b5dc548",
+      "bytes": 80977
+    }
+  ],
+  "stages": [
+    {
+      "id": "initial-crowned-preview",
+      "file": "art/source/vampire-queen-v1/initial-preview.png",
+      "original_file": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-9d8b0f7c-e8a0-4a90-9943-d8115f432b39.png",
+      "input": "user-pixel-reference",
+      "prompt": "Use case: stylized-concept. Create ONE vertical 2:3 dark-fantasy portrait painting of an adult VAMPIRE QUEEN reimagined from the supplied small pixel-art image. The supplied image is a DESIGN/POSE REFERENCE, not an edit target: preserve the recognizable copper-red voluminous swept hair, small slightly tilted gold crown, pearl earrings, jewelled black necklace, black sculptural gown, hand laid elegantly across the upper chest, three-quarter head turn and haughty amused confidence. Transform these cues into a coherent serious gothic vampire queen.\nWaist-up composition, enough room for the crown, hair, shoulders, both hands and jewellery. She is a mature adult aristocrat with cold ivory skin, subtle grey-violet shadows, auburn hair with deep wine-red shadow masses, sharp intelligent eyes, arched brow and a restrained half-smile showing TWO small elegant fangs. Her menace comes from effortless authority and predatory composure. Keep the distinctive expressive face and dramatic hair silhouette; she should not be a generic blank-faced vampire.\nCostume: richly structured black velvet and dark satin gown, broad folded shoulders and fitted bodice, garnet-red lining, a few worn gold details; gold crown with a small deep-red jewel, matching pendant and rings, ivory pearl earrings retained. Dark burgundy lips, elegant fingers, realistic hand anatomy. Regal, fully clothed and commanding, with the reference's confident femininity. No exaggerated anatomy, nudity, pin-up posing, blood splatter or victims.\nStyle: shadow-heavy dark gritty fantasy concept painting with broad readable sculpted shapes and restrained crisp brushwork, tactile aged gold and velvet, painterly rather than photographic, richly atmospheric but not glossy or overly ornate. Warm narrow light from upper left catches red hair and the crown, cool shadows shape pale skin. A dim weathered stone throne alcove fades into charcoal behind her, with no other figures and no distracting scenery. Rich copper, black, dirty gold, ivory and a little garnet form the dominant palette. Maintain readable silhouette and calm unnerving beauty. No text, logos, frame ornament, labels, UI, extra heads, extra arms, duplicate jewellery or glowing magical effects. This is a standalone playful character study, not a game story or boss assignment.",
+      "status": "superseded source only; crown rejected",
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGB",
+      "sha256": "1994312310dedb6a52845aedd97072f11eeb010d26966c8f569e5d987282c4a1",
+      "bytes": 2465735
+    },
+    {
+      "id": "crown-free-preview",
+      "file": "art/source/vampire-queen-v1/crown-free-preview.png",
+      "original_file": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-0c8cdc4b-0b8a-435a-b53c-92db8f9095b6.png",
+      "input": "initial-crowned-preview",
+      "prompt": "Use case: precise-object-edit. Edit the supplied vampire queen portrait. Primary request: REMOVE THE GOLD CROWN ENTIRELY from the top of her copper-red hair. Reconstruct the newly exposed hair and the small area of stone alcove background naturally, matching the existing brushwork, hair volume, perspective and warm light. Leave her bareheaded, with no replacement headpiece, tiara, circlet, jewels or ornament in her hair. Constraints: preserve her exact character identity, facial features, expression, fangs, pointed ears, hair style and colour elsewhere, pose, hands, jewellery worn on ears/neck/wrist/fingers, black and burgundy gown, background, lighting, painterly texture and portrait framing. This is a single localized removal; keep everything outside the crown area as unchanged as possible. Preserve the original vertical 2:3 composition and quality. No text or watermark.",
+      "status": "intermediate source",
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGB",
+      "sha256": "fba6c194fff8dffaa521dcaf6852868c75e1eea242f1aa0905d9ae8c58b01e9b",
+      "bytes": 2221829
+    },
+    {
+      "id": "gothic-sensual-v1",
+      "file": "art/concepts/vampire-queen-v1/vampire-queen.png",
+      "original_file": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-dcf2d924-e6cc-47af-a91e-ed62fea09ee6.png",
+      "input": "crown-free-preview",
+      "prompt": "Use case: identity-preserve. Asset type: standalone vampire queen concept portrait, a sensual gothic fashion revision of the supplied painting. Reimagine this SAME clearly mature adult woman, around 35, with a more daring and alluring gothic treatment. Preserve her recognizable face, copper-red swept curls, pointed ears, subtle fangs, ivory skin and commanding aristocratic personality. She remains bareheaded: absolutely no crown, tiara or head ornament.\nCostume revision: a sumptuous off-the-shoulder black velvet gown with a noticeably lower, sculpted sweetheart neckline and elegant visible cleavage, fitted boned bodice with worn gold tracery, garnet-red silk lining, and sheer black lace sleeves draped from the upper arms. Opaque bodice, confident high-fashion styling. Retain distinctive pearl earrings, garnet pendant, rings and ornate garnet cuff. Her hand rests lightly along the collarbone with relaxed elegant fingers; the other rests at her waist. Give her an assured, inviting yet dangerous gaze directed toward the viewer, subtly parted burgundy lips revealing small fangs, lifted chin and a knowing half-smile. Sensuality comes from costume, expression, posture and light. Natural adult anatomy and realistic hands.\nPreserve vertical 2:3 portrait framing, rendered from hair to hips, and the painterly dark fantasy style. Weathered stone throne alcove and deep wine-red drapery behind her. Rich copper hair against charcoal velvet, pale skin, tarnished gold and small garnet accents. Narrow warm candlelight grazes her face, shoulder and velvet; cooler deep shadows and textured brushwork add gothic menace. Luxurious but weathered, dark and serious. No nudity, explicit sexual activity, blood splatter, extra characters, text, watermark or franchise emblems. This is a playful standalone visual concept, with no game story assignment.",
+      "status": "owner-approved concept",
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGB",
+      "sha256": "28515af06cba19b878709efa42eb99672b20c33f745e5363ae16e76b5e329a9c",
+      "bytes": 2432216
+    }
+  ],
+  "preservation": "Byte-for-byte original PNGs; no resampling, repainting, palette reduction or animation extraction. Source and concept folders excluded from Godot imports."
+}

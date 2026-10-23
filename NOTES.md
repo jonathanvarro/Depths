@@ -14,6 +14,11 @@ Format:
 ---
 
 ## 2026-10-22 – ChatGPT
+- Did: #154 preserves the owner's selected crown-free, more daring gothic vampire queen concept at art/concepts/vampire-queen-v1/vampire-queen.png. Its README records the accepted copper-red hair, confident sensual menace, black velvet/lace, burgundy, pearls, garnets and worn gold. Exact built-in ImageGen prompts, supplied reference, both superseded painting stages and SHA-256 hashes are retained in art/source/vampire-queen-v1/generation.json.
+- Next: Use this as the approved visual concept if a future character role is chosen; production would need dedicated palette/size, separate lighting and fitted animation work. No role or production export is requested by this approval.
+- Watch out: The earlier crown-bearing preview is superseded, retained only as source lineage. Selected 1024x1536 PNG copied byte-for-byte; source/reference integrity, dimensions, local documentation links and whitespace checked. Both folders have .gdignore. No game assets, code, rules, encounters or lore changed. Unrelated tools/small_items_check.gd.uid left untouched.
+
+## 2026-10-22 – ChatGPT
 - Did: #153 delivers five built-in ImageGen concept paintings reimagining the owner's supplied references: Veiled Sovereign, Thorn Regent, Cinder Eye, Pale Hollow and Ribbound Wraith (working labels only). Five 1024x1536 original masters, exact prompts, source references/roles/provenance and hashes are preserved. Review and reference comparison: art/concepts/reference-creatures-v1/inspector.html; handoff: docs/reference-creature-concepts.md. The preceding vampire queen remains a separate playful preview.
 - Next: Owner reviews the five directions; no individual production selection or story assignment is assumed. Selected designs would need a dedicated small-format simplification and framing/pose pass.
 - Watch out: Concept-only; both folders have .gdignore. No runtime artwork, stats, encounters, rigs, audio or lore changed. Source/master/reference copies decoded and hash-checked; 24 browser checks pass at desktop/landscape/390px widths. The Wraith's dorsal peak reaches the canvas edge and fine web/rib detail is not a production-ready silhouette. Reference creators/licences were not supplied and metadata records that provenance. Unrelated tools/small_items_check.gd.uid preserved.

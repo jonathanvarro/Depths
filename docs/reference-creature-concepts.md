@@ -26,7 +26,9 @@ supplied reference alongside each. Original paintings are also linked directly.
 References are user-supplied visual inputs; creator/licence details were not
 provided. Their source records retain that provenance without claiming the
 inputs are project-authored or CC0. The earlier vampire-queen image was a separate
-playful preview and is not one of these five studies.
+playful preview and is not one of these five studies. The owner subsequently
+selected its crown-free gothic revision as a concept; see the separate
+[vampire queen concept](../art/concepts/vampire-queen-v1/README.md) (#154).
 
 ## Scope and preservation
 
