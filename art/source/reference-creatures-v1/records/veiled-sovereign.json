@@ -1,0 +1,16 @@
+{
+  "id": "veiled-sovereign",
+  "title": "Veiled Sovereign",
+  "issue": 153,
+  "tool": "built-in image_gen",
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-a49ccfc6-3afb-4876-ade3-2c421838ba79.png",
+  "source": "art/source/reference-creatures-v1/veiled-sovereign-master.png",
+  "reference_images": [
+    {
+      "path": "art/source/reference-creatures-v1/references/veiled-sovereign.png",
+      "role": "Silhouette/design cues only; new concept painting"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. Create one vertical 2:3 full-body dark-fantasy concept painting, reimagining the SUPPLIED IMAGE as a new exploratory creature study. The image is a silhouette/design reference, not an edit target or a request to copy its drawing.\nVEILED SOVEREIGN (working label only): a very tall slender adult feminine presence, face completely lost beneath a deep black veil, with one thin elliptical crown of crooked thorns hovering horizontally above the hood. Pale tarnished silver segmented armour covers the entire torso, hips and long legs; plates feel old, articulated and slightly organic. A vast black mantle falls around the narrow armoured body, its extended sleeves and trailing folds becoming sparse branch-like webbed shapes. Two main arms only: one elegant long-fingered hand raised in a restrained commanding gesture, the other held low. No exposed breasts, pelvis or nudity. Preserve the striking black veil / pale articulated core / empty face / wide thorn-halo relationship from the reference while redesigning plate contours and drapery.\nComposition: entire halo, hand tips, mantle and feet inside the portrait with breathing room; a solemn near-frontal three-quarter stance. The figure stands or hovers just above a dim mineral floor, with a quiet shadowed stone recess behind. A subdued wine-red haze far behind the crown and cool charcoal surroundings; no bright sci-fi disk or neon energy. Thin raking warm light catches worn silver edges while the veil remains genuinely unreadable.\nStyle: dark, gritty, serious fantasy painting with broad sculpted forms and readable silhouette, tactile aged metal, heavy cloth and sparse useful wear. Retain the reference's stately impossible elegance, avoiding cute cartoon anatomy, glossy rendering, tiny noisy ornament or a generic robe-covered skeleton. Limited dirty ivory, cold silver, black and muted garnet palette. No eyes or face under veil, no extra heads, tentacles, text, logos, labels, border, HUD or game symbols. Single concept illustration, not a sprite sheet, animation rig or approved character/story assignment.",
+  "review_status": "Exploratory concept; no production selection or lore assignment"
+}

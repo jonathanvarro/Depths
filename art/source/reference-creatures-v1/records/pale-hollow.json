@@ -1,0 +1,16 @@
+{
+  "id": "pale-hollow",
+  "title": "Pale Hollow",
+  "issue": 153,
+  "tool": "built-in image_gen",
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-662b6349-3c9e-4d83-82c1-79bcee444dba.png",
+  "source": "art/source/reference-creatures-v1/pale-hollow-master.png",
+  "reference_images": [
+    {
+      "path": "art/source/reference-creatures-v1/references/pale-hollow.png",
+      "role": "Silhouette/design cues only; new concept painting"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. One vertical 2:3 full-body dark-fantasy concept painting reimagining the supplied pale long-limbed creature. The input is a design/silhouette reference only. Preserve its blank head, throat opening, uneven four-arm anatomy, hollow torso and needle-like lower limbs; redesign the body contours into a coherent new being.\nPALE HOLLOW (working label): a genderless nonhuman figure of matte chalk-white membrane over unusually elongated bone, with no human sexual anatomy, clothing details, nipples or genital features. The head is a small smooth vertical oval, without eyes, nose or ordinary mouth. A single ragged DARK CAVITY sits low on the throat where the head meets the chest, with only a few blunt tooth-like internal ridges. It is an organic opening, not an injury: no blood, dissection or exposed organs.\nTorso bends into a large clear negative-space arch beneath one shoulder; the body seems grown around its own missing volume. FOUR arms are intentionally distinct: two long primary arms reach well below the hips with tapering splayed fingers, and two thinner rear arms emerge lower down and remain clearly visible through separate gaps. Exactly four arms and one head. Two very long tapered legs end as pointed supports, subtly offset in a hesitant half-step. Sparse broad tissue folds establish material, not a chaotic web of extra limbs.\nEntire head, hands and pointed feet inside portrait with negative space around every limb. Cold charcoal-grey empty cavern recess and a little low mist at ground, never hiding the supports; soft pale side light and a restrained warmer rim on one edge. Keep a simple uncanny stance as if the body cannot quite decide which limb bears weight.\nSerious gritty painterly creature study, chalk ivory, bruised grey shadows, dead-black throat. Thin asymmetry and wrong anatomy carry the horror; no gore spectacle, added eyes, horns, wings, tentacles, clothing, armour, jewellery or weapon. Broad readable shape groups, tactile weathered material, no glossy white plastic or neon aura. No lettering, labels, borders, logos, HUD or other figures. Concept only, no gameplay or lore assignment.",
+  "review_status": "Exploratory concept; no production selection or lore assignment"
+}

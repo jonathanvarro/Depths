@@ -1,0 +1,193 @@
+{
+  "issue": 153,
+  "status": "Exploratory concepts; selection and production scope open",
+  "entries": [
+    {
+      "id": "veiled-sovereign",
+      "title": "Veiled Sovereign",
+      "issue": 153,
+      "tool": "built-in image_gen",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-a49ccfc6-3afb-4876-ade3-2c421838ba79.png",
+      "source": "art/source/reference-creatures-v1/veiled-sovereign-master.png",
+      "reference_images": [
+        {
+          "path": "art/source/reference-creatures-v1/references/veiled-sovereign.png",
+          "role": "Silhouette/design cues only; new concept painting"
+        }
+      ],
+      "prompt": "Use case: stylized-concept. Create one vertical 2:3 full-body dark-fantasy concept painting, reimagining the SUPPLIED IMAGE as a new exploratory creature study. The image is a silhouette/design reference, not an edit target or a request to copy its drawing.\nVEILED SOVEREIGN (working label only): a very tall slender adult feminine presence, face completely lost beneath a deep black veil, with one thin elliptical crown of crooked thorns hovering horizontally above the hood. Pale tarnished silver segmented armour covers the entire torso, hips and long legs; plates feel old, articulated and slightly organic. A vast black mantle falls around the narrow armoured body, its extended sleeves and trailing folds becoming sparse branch-like webbed shapes. Two main arms only: one elegant long-fingered hand raised in a restrained commanding gesture, the other held low. No exposed breasts, pelvis or nudity. Preserve the striking black veil / pale articulated core / empty face / wide thorn-halo relationship from the reference while redesigning plate contours and drapery.\nComposition: entire halo, hand tips, mantle and feet inside the portrait with breathing room; a solemn near-frontal three-quarter stance. The figure stands or hovers just above a dim mineral floor, with a quiet shadowed stone recess behind. A subdued wine-red haze far behind the crown and cool charcoal surroundings; no bright sci-fi disk or neon energy. Thin raking warm light catches worn silver edges while the veil remains genuinely unreadable.\nStyle: dark, gritty, serious fantasy painting with broad sculpted forms and readable silhouette, tactile aged metal, heavy cloth and sparse useful wear. Retain the reference's stately impossible elegance, avoiding cute cartoon anatomy, glossy rendering, tiny noisy ornament or a generic robe-covered skeleton. Limited dirty ivory, cold silver, black and muted garnet palette. No eyes or face under veil, no extra heads, tentacles, text, logos, labels, border, HUD or game symbols. Single concept illustration, not a sprite sheet, animation rig or approved character/story assignment.",
+      "review_status": "Exploratory concept; no production selection or lore assignment",
+      "sha256": "90bd7afa6ced8dda763c74e8ce3002e6f9f4708cca75a04d8c36f67d1b5bbea3",
+      "review": "art/concepts/reference-creatures-v1/veiled-sovereign.png",
+      "reference_sha256": "56cd0128f2b7d9ca7fe1fe04bc87a25e67a62670bdb4a6a78f4dcd197e2b8731",
+      "file": "veiled-sovereign.png",
+      "reference": "art/source/reference-creatures-v1/references/veiled-sovereign.png",
+      "idea": "Empty veil, pale articulated armour and a thin thorn halo.",
+      "review_focus": "Review the crown/armour relationship and the broad black mantle. Fine cloth webs would need simplification at game scale.",
+      "owner_selection": null,
+      "size": [
+        1024,
+        1536
+      ]
+    },
+    {
+      "id": "thorn-regent",
+      "title": "Thorn Regent",
+      "issue": 153,
+      "tool": "built-in image_gen",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-528462f8-3ab7-4767-a7f5-57f91b7d32a4.png",
+      "source": "art/source/reference-creatures-v1/thorn-regent-master.png",
+      "reference_images": [
+        {
+          "path": "art/source/reference-creatures-v1/references/thorn-regent.png",
+          "role": "Silhouette/design cues only; new concept painting"
+        }
+      ],
+      "prompt": "Use case: stylized-concept. Create one vertical 2:3 full-body dark gritty fantasy concept painting, reimagining the supplied crowned sinewy figure. The supplied image is a visual design reference only; preserve its solemn raised-hand posture, narrow crowned head, red-brown sinewy torso, long trailing lower-body filaments and one massive segmented tail, while inventing a coherent new arrangement.\nTHORN REGENT (working label): an ancient nonhuman monarch, extraordinarily tall and gaunt, with weathered rust-red hide stretched in broad sinew bands over an articulated chest. A small long skull-like face sits on a narrow neck; thorny black mineral spines form a sparse crooked crown grown around the head. Both long arms are raised, palms open in a calm ritual gesture, five readable fingers per hand, not an action scream. No open wounds, wet exposed organs, blood spray or human victims; the body feels ancient and desiccated rather than freshly injured.\nIts waist and lower body dissolve into broad rope-like layers of dark maroon fibrous tissue, hanging like a heavy train and fully covering the pelvic area. One powerful tapering segmented tail curls behind the figure and rises on one side, its blunt plates echoing the torso's banding. Distinguish tail from legs or extra arms with clear space. The trailing anatomy connects organically rather than looking like decorative fabric thrown around a generic skeleton king. No staff, weapon or extra head.\nComposition: full figure including crown, fingertips, tail and ground contact inside frame with useful margins. Empty dim stone recess/mineral chamber, cold dark green-grey haze receding behind the torso, low amber grazing on the russet body and crown. Body and train stay legible against the background. No literal throne or story symbols.\nSerious restrained painterly concept art: broad tactile masses, deep shadows, sparse deliberate striation, rusty crimson/bone-black/grey-green palette, unsettling patient authority. No photoreal corpse, cute cartoon, overly glossy render, densely noisy surface, exaggerated muscles, glowing magic, text, labels, borders, icons or HUD. One standalone concept painting, not a pose atlas or approved game enemy.",
+      "review_status": "Exploratory concept; no production selection or lore assignment",
+      "sha256": "e85ced8dabef5a987c0e336f90cd180d42343120e1a13e24a9230b19b511a56b",
+      "review": "art/concepts/reference-creatures-v1/thorn-regent.png",
+      "reference_sha256": "d323ce57f081101832a272dd54714349f6d7d6a46d5978f3c3ce08438a6b69fa",
+      "file": "thorn-regent.png",
+      "reference": "art/source/reference-creatures-v1/references/thorn-regent.png",
+      "idea": "Raised palms, a sinewy crowned torso, fibrous train and heavy segmented tail.",
+      "review_focus": "The tail and train are deliberately distinct. Hand detail and crown spines are concept-level marks, not registered rig parts.",
+      "owner_selection": null,
+      "size": [
+        1024,
+        1536
+      ]
+    },
+    {
+      "id": "cinder-eye",
+      "title": "Cinder Eye",
+      "issue": 153,
+      "tool": "built-in image_gen",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-b56bed5b-7882-4dab-ab3e-c29bdaeb1e16.png",
+      "source": "art/source/reference-creatures-v1/cinder-eye-master.png",
+      "reference_images": [
+        {
+          "path": "art/source/reference-creatures-v1/references/cinder-eye.png",
+          "role": "Silhouette/design cues only; new concept painting"
+        }
+      ],
+      "prompt": "Use case: stylized-concept. One vertical 2:3 full-body serious dark-fantasy concept painting inspired by the supplied black horned, single-eyed figure. The input is a silhouette and focal-point reference only; make a new arrangement with broader, more readable forms.\nCINDER EYE (working label): an immense upright nonhuman mass of layered black mineral plates and charred fibrous tissue, with a wide shoulder mantle and a lower body tapering into heavy ragged folds. A pair of great crooked branching horn arcs rises around the head, with a few smaller broken prongs growing from the shoulders. There is NO human face: at the exact visual centre beneath the horn crown sits ONE small ember-red ring with a deep empty core, the only eye-like feature. The body has FOUR heavy arms, two hanging lower and two bent outward; keep their negative spaces clear so anatomy reads instead of becoming a heap of spikes. Hands end in a few thick blade-like digits. No extra faces, mouths or scattered eyes.\nPreserve the reference's horned black mass / singular red focus / oppressive red atmosphere relationship. Reimagine its dense surface as broad overlapping carapace plates, a few ribbed folds and restrained torn edges rather than hundreds of tiny spikes. The creature feels partly a body and partly a ruined structure. No polished modern armour, weapons, jewellery or fire explosions.\nFull figure, tips of horns and hands entirely within frame with generous margin. Looming near-frontal still pose in a dim stone hollow, low viewpoint, dark floor beneath; muted deep cinnabar haze behind, cold grey rim just separating silhouette. Small eye-ring is a smouldering detail, not a spotlight, laser or neon symbol. Body remains visibly modelled within the dark masses.\nDark gritty painterly fantasy illustration, physical weight, aged ash-black, rusty maroon, sparse dirty-ivory chips, broad readable shadows. Grave and grotesque without human victims, gore spray or exposed organs. NO text, labels, logos, border ornament, HUD, floating runes, cosmic star fields or extra characters. One exploratory painting, no boss identity, powers, story assignment or sprite atlas.",
+      "review_status": "Exploratory concept; no production selection or lore assignment",
+      "sha256": "ed973218d1b622e361cfb5fb0e4117f47c1e3d09c38eac95e9ed3b462bc9df4f",
+      "review": "art/concepts/reference-creatures-v1/cinder-eye.png",
+      "reference_sha256": "652246a8fc71388dd6f0c8f751db687c6002ba55375f651851c5b77d16bc5c4e",
+      "file": "cinder-eye.png",
+      "reference": "art/source/reference-creatures-v1/references/cinder-eye.png",
+      "idea": "One red eye-ring in a heavy horned mass, with four separated arms.",
+      "review_focus": "The singular eye is the focus. Horn and plate density would need a selected simplification pass before any small sprite.",
+      "owner_selection": null,
+      "size": [
+        1024,
+        1536
+      ]
+    },
+    {
+      "id": "pale-hollow",
+      "title": "Pale Hollow",
+      "issue": 153,
+      "tool": "built-in image_gen",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-662b6349-3c9e-4d83-82c1-79bcee444dba.png",
+      "source": "art/source/reference-creatures-v1/pale-hollow-master.png",
+      "reference_images": [
+        {
+          "path": "art/source/reference-creatures-v1/references/pale-hollow.png",
+          "role": "Silhouette/design cues only; new concept painting"
+        }
+      ],
+      "prompt": "Use case: stylized-concept. One vertical 2:3 full-body dark-fantasy concept painting reimagining the supplied pale long-limbed creature. The input is a design/silhouette reference only. Preserve its blank head, throat opening, uneven four-arm anatomy, hollow torso and needle-like lower limbs; redesign the body contours into a coherent new being.\nPALE HOLLOW (working label): a genderless nonhuman figure of matte chalk-white membrane over unusually elongated bone, with no human sexual anatomy, clothing details, nipples or genital features. The head is a small smooth vertical oval, without eyes, nose or ordinary mouth. A single ragged DARK CAVITY sits low on the throat where the head meets the chest, with only a few blunt tooth-like internal ridges. It is an organic opening, not an injury: no blood, dissection or exposed organs.\nTorso bends into a large clear negative-space arch beneath one shoulder; the body seems grown around its own missing volume. FOUR arms are intentionally distinct: two long primary arms reach well below the hips with tapering splayed fingers, and two thinner rear arms emerge lower down and remain clearly visible through separate gaps. Exactly four arms and one head. Two very long tapered legs end as pointed supports, subtly offset in a hesitant half-step. Sparse broad tissue folds establish material, not a chaotic web of extra limbs.\nEntire head, hands and pointed feet inside portrait with negative space around every limb. Cold charcoal-grey empty cavern recess and a little low mist at ground, never hiding the supports; soft pale side light and a restrained warmer rim on one edge. Keep a simple uncanny stance as if the body cannot quite decide which limb bears weight.\nSerious gritty painterly creature study, chalk ivory, bruised grey shadows, dead-black throat. Thin asymmetry and wrong anatomy carry the horror; no gore spectacle, added eyes, horns, wings, tentacles, clothing, armour, jewellery or weapon. Broad readable shape groups, tactile weathered material, no glossy white plastic or neon aura. No lettering, labels, borders, logos, HUD or other figures. Concept only, no gameplay or lore assignment.",
+      "review_status": "Exploratory concept; no production selection or lore assignment",
+      "sha256": "8beb81582abd2d92e675252e98e255ff75cb12c4ddae28e6665e6ac399a16478",
+      "review": "art/concepts/reference-creatures-v1/pale-hollow.png",
+      "reference_sha256": "49eea0147be34399a6694f71c18ed0c5b2211bba7fee9973b777cbf050203548",
+      "file": "pale-hollow.png",
+      "reference": "art/source/reference-creatures-v1/references/pale-hollow.png",
+      "idea": "A blank head, throat opening, hollow torso and four long uneven arms.",
+      "review_focus": "The torso gap and arm spacing carry the design. No animation, walking support or attack behaviour is implied.",
+      "owner_selection": null,
+      "size": [
+        1024,
+        1536
+      ]
+    },
+    {
+      "id": "ribbound-wraith",
+      "title": "Ribbound Wraith",
+      "issue": 153,
+      "tool": "built-in image_gen",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-94ed01b5-57fa-4d60-8c61-1658b4f5d03b.png",
+      "source": "art/source/reference-creatures-v1/ribbound-wraith-master.png",
+      "reference_images": [
+        {
+          "path": "art/source/reference-creatures-v1/references/ribbound-wraith.png",
+          "role": "Silhouette/design cues only; new concept painting"
+        }
+      ],
+      "prompt": "Use case: stylized-concept. Create one vertical 2:3 full-body dark gritty fantasy concept painting reimagining the supplied rib-caged skeletal wraith. The image is a form/material reference only: preserve the enormous arched rib canopy, small suspended skull, hooked limbs and sparse web-like connective strands, while designing a new readable arrangement.\nRIBBOUND WRAITH (working label): an immense nonhuman skeletal presence folds over a SMALL elongated mask-like skull hanging deep inside an oversized chest cage. The skull has narrow empty sockets and an irregular dry tooth band; it is a fictional creature head, not a real human corpse. The great ribs curve forward and downward like a broken lantern or cage, framing empty darkness around the skull. A jagged dorsal ridge rises above this canopy, with a few long asymmetrical bone spurs. The rib cage should be the dominant simple silhouette, the skull a secondary discovery within it.\nFour distinct long hooked limbs support/frame the form: two higher arching supports and two lower forelimbs curling forward with sparse bony digits. Keep useful negative space between them and the ribs. A few stretched ash-grey fibrous strands bind joints and span rib gaps, without burying the entire body in cotton webbing. Lower anatomy trails away in dry shreds rather than showing ordinary human hips or legs. No organs, fresh wounds, dripping blood, human victims or piled corpses.\nWhole dorsal peak, rib tips and limb ends inside the portrait with breathing room. Low three-quarter viewpoint in a dim rough stone hollow; old ivory and grey bone catch narrow raking light, dark wine-charcoal distance behind, a little grounded dust. The figure feels suspended and leaning toward the viewer, not a generic upright skeleton warrior or a person wearing bones. No weapons or crown.\nSerious restrained painterly concept treatment: broad bone arcs, sparse meaningful texture, deep shadow masses, filthy ivory, ash-grey strands, black cavity and muted maroon. Preserve oppressive organic geometry with clear shape groups. No cartoon, clean plastic bone, glossy render, neon aura, extra heads, floating runes, text, labels, border, logos or HUD. One exploratory painting only, no enemy rules, animation rig or final story role.",
+      "review_status": "Exploratory concept; no production selection or lore assignment",
+      "sha256": "a00ef1a9cc3ebbda5574dd2d24d25b20c509d6e9f8067d768efce3e052f1be99",
+      "review": "art/concepts/reference-creatures-v1/ribbound-wraith.png",
+      "reference_sha256": "4f0264e917050e29ea6e2ee06fdd653b08fdd466cdad489c2ad5a9394b96fd29",
+      "file": "ribbound-wraith.png",
+      "reference": "art/source/reference-creatures-v1/references/ribbound-wraith.png",
+      "idea": "A small hanging skull inside an oversized rib canopy, with hooked limbs and sparse connective strands.",
+      "review_focus": "The dorsal peak reaches the upper canvas edge; a production framing pass would add margin and simplify fine rib/web detail.",
+      "owner_selection": null,
+      "size": [
+        1024,
+        1536
+      ]
+    }
+  ],
+  "references": [
+    {
+      "id": "veiled-sovereign",
+      "title": "Veiled Sovereign",
+      "file": "C:/Users/jonat/AppData/Local/Temp/codex-clipboard-a27d2e8b-e405-4a7a-8f92-a4c5060fd6a6.png",
+      "copy": "art/source/reference-creatures-v1/references/veiled-sovereign.png",
+      "role": "User-supplied visual reference; reimagine silhouette and character cues",
+      "provenance": "User-supplied attachment; creator and licence not provided",
+      "sha256": "56cd0128f2b7d9ca7fe1fe04bc87a25e67a62670bdb4a6a78f4dcd197e2b8731"
+    },
+    {
+      "id": "thorn-regent",
+      "title": "Thorn Regent",
+      "file": "C:/Users/jonat/AppData/Local/Temp/codex-clipboard-02ee5ccb-7a78-4e47-be7b-b38aafdd2b49.png",
+      "copy": "art/source/reference-creatures-v1/references/thorn-regent.png",
+      "role": "User-supplied visual reference; reimagine silhouette and character cues",
+      "provenance": "User-supplied attachment; creator and licence not provided",
+      "sha256": "d323ce57f081101832a272dd54714349f6d7d6a46d5978f3c3ce08438a6b69fa"
+    },
+    {
+      "id": "cinder-eye",
+      "title": "Cinder Eye",
+      "file": "C:/Users/jonat/AppData/Local/Temp/codex-clipboard-2cf17182-583f-4cd5-ae87-2748f4923376.png",
+      "copy": "art/source/reference-creatures-v1/references/cinder-eye.png",
+      "role": "User-supplied visual reference; reimagine silhouette and character cues",
+      "provenance": "User-supplied attachment; creator and licence not provided",
+      "sha256": "652246a8fc71388dd6f0c8f751db687c6002ba55375f651851c5b77d16bc5c4e"
+    },
+    {
+      "id": "pale-hollow",
+      "title": "Pale Hollow",
+      "file": "C:/Users/jonat/AppData/Local/Temp/codex-clipboard-70abb015-555f-42ef-9be7-a1cbd75cfb00.png",
+      "copy": "art/source/reference-creatures-v1/references/pale-hollow.png",
+      "role": "User-supplied visual reference; reimagine silhouette and character cues",
+      "provenance": "User-supplied attachment; creator and licence not provided",
+      "sha256": "49eea0147be34399a6694f71c18ed0c5b2211bba7fee9973b777cbf050203548"
+    },
+    {
+      "id": "ribbound-wraith",
+      "title": "Ribbound Wraith",
+      "file": "C:/Users/jonat/AppData/Local/Temp/codex-clipboard-32440ce1-6998-4379-b051-9b52eb866a6c.png",
+      "copy": "art/source/reference-creatures-v1/references/ribbound-wraith.png",
+      "role": "User-supplied visual reference; reimagine silhouette and character cues",
+      "provenance": "User-supplied attachment; creator and licence not provided",
+      "sha256": "4f0264e917050e29ea6e2ee06fdd653b08fdd466cdad489c2ad5a9394b96fd29"
+    }
+  ]
+}

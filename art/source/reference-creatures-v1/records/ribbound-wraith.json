@@ -1,0 +1,16 @@
+{
+  "id": "ribbound-wraith",
+  "title": "Ribbound Wraith",
+  "issue": 153,
+  "tool": "built-in image_gen",
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-94ed01b5-57fa-4d60-8c61-1658b4f5d03b.png",
+  "source": "art/source/reference-creatures-v1/ribbound-wraith-master.png",
+  "reference_images": [
+    {
+      "path": "art/source/reference-creatures-v1/references/ribbound-wraith.png",
+      "role": "Silhouette/design cues only; new concept painting"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. Create one vertical 2:3 full-body dark gritty fantasy concept painting reimagining the supplied rib-caged skeletal wraith. The image is a form/material reference only: preserve the enormous arched rib canopy, small suspended skull, hooked limbs and sparse web-like connective strands, while designing a new readable arrangement.\nRIBBOUND WRAITH (working label): an immense nonhuman skeletal presence folds over a SMALL elongated mask-like skull hanging deep inside an oversized chest cage. The skull has narrow empty sockets and an irregular dry tooth band; it is a fictional creature head, not a real human corpse. The great ribs curve forward and downward like a broken lantern or cage, framing empty darkness around the skull. A jagged dorsal ridge rises above this canopy, with a few long asymmetrical bone spurs. The rib cage should be the dominant simple silhouette, the skull a secondary discovery within it.\nFour distinct long hooked limbs support/frame the form: two higher arching supports and two lower forelimbs curling forward with sparse bony digits. Keep useful negative space between them and the ribs. A few stretched ash-grey fibrous strands bind joints and span rib gaps, without burying the entire body in cotton webbing. Lower anatomy trails away in dry shreds rather than showing ordinary human hips or legs. No organs, fresh wounds, dripping blood, human victims or piled corpses.\nWhole dorsal peak, rib tips and limb ends inside the portrait with breathing room. Low three-quarter viewpoint in a dim rough stone hollow; old ivory and grey bone catch narrow raking light, dark wine-charcoal distance behind, a little grounded dust. The figure feels suspended and leaning toward the viewer, not a generic upright skeleton warrior or a person wearing bones. No weapons or crown.\nSerious restrained painterly concept treatment: broad bone arcs, sparse meaningful texture, deep shadow masses, filthy ivory, ash-grey strands, black cavity and muted maroon. Preserve oppressive organic geometry with clear shape groups. No cartoon, clean plastic bone, glossy render, neon aura, extra heads, floating runes, text, labels, border, logos or HUD. One exploratory painting only, no enemy rules, animation rig or final story role.",
+  "review_status": "Exploratory concept; no production selection or lore assignment"
+}

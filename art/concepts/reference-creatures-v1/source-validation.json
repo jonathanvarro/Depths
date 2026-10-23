@@ -1,0 +1,58 @@
+{
+  "issue": 153,
+  "masters": [
+    {
+      "id": "cinder-eye",
+      "original_copy": true,
+      "review_copy": true,
+      "decoded_size": [
+        1024,
+        1536
+      ],
+      "sha256": "ed973218d1b622e361cfb5fb0e4117f47c1e3d09c38eac95e9ed3b462bc9df4f"
+    },
+    {
+      "id": "pale-hollow",
+      "original_copy": true,
+      "review_copy": true,
+      "decoded_size": [
+        1024,
+        1536
+      ],
+      "sha256": "8beb81582abd2d92e675252e98e255ff75cb12c4ddae28e6665e6ac399a16478"
+    },
+    {
+      "id": "ribbound-wraith",
+      "original_copy": true,
+      "review_copy": true,
+      "decoded_size": [
+        1024,
+        1536
+      ],
+      "sha256": "a00ef1a9cc3ebbda5574dd2d24d25b20c509d6e9f8067d768efce3e052f1be99"
+    },
+    {
+      "id": "thorn-regent",
+      "original_copy": true,
+      "review_copy": true,
+      "decoded_size": [
+        1024,
+        1536
+      ],
+      "sha256": "e85ced8dabef5a987c0e336f90cd180d42343120e1a13e24a9230b19b511a56b"
+    },
+    {
+      "id": "veiled-sovereign",
+      "original_copy": true,
+      "review_copy": true,
+      "decoded_size": [
+        1024,
+        1536
+      ],
+      "sha256": "90bd7afa6ced8dda763c74e8ce3002e6f9f4708cca75a04d8c36f67d1b5bbea3"
+    }
+  ],
+  "references_verified": 5,
+  "failed": 0,
+  "scope": "Concept source/copy integrity and metadata; no runtime validation"
+}

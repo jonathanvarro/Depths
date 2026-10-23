@@ -1,0 +1,16 @@
+{
+  "id": "cinder-eye",
+  "title": "Cinder Eye",
+  "issue": 153,
+  "tool": "built-in image_gen",
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-b56bed5b-7882-4dab-ab3e-c29bdaeb1e16.png",
+  "source": "art/source/reference-creatures-v1/cinder-eye-master.png",
+  "reference_images": [
+    {
+      "path": "art/source/reference-creatures-v1/references/cinder-eye.png",
+      "role": "Silhouette/design cues only; new concept painting"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. One vertical 2:3 full-body serious dark-fantasy concept painting inspired by the supplied black horned, single-eyed figure. The input is a silhouette and focal-point reference only; make a new arrangement with broader, more readable forms.\nCINDER EYE (working label): an immense upright nonhuman mass of layered black mineral plates and charred fibrous tissue, with a wide shoulder mantle and a lower body tapering into heavy ragged folds. A pair of great crooked branching horn arcs rises around the head, with a few smaller broken prongs growing from the shoulders. There is NO human face: at the exact visual centre beneath the horn crown sits ONE small ember-red ring with a deep empty core, the only eye-like feature. The body has FOUR heavy arms, two hanging lower and two bent outward; keep their negative spaces clear so anatomy reads instead of becoming a heap of spikes. Hands end in a few thick blade-like digits. No extra faces, mouths or scattered eyes.\nPreserve the reference's horned black mass / singular red focus / oppressive red atmosphere relationship. Reimagine its dense surface as broad overlapping carapace plates, a few ribbed folds and restrained torn edges rather than hundreds of tiny spikes. The creature feels partly a body and partly a ruined structure. No polished modern armour, weapons, jewellery or fire explosions.\nFull figure, tips of horns and hands entirely within frame with generous margin. Looming near-frontal still pose in a dim stone hollow, low viewpoint, dark floor beneath; muted deep cinnabar haze behind, cold grey rim just separating silhouette. Small eye-ring is a smouldering detail, not a spotlight, laser or neon symbol. Body remains visibly modelled within the dark masses.\nDark gritty painterly fantasy illustration, physical weight, aged ash-black, rusty maroon, sparse dirty-ivory chips, broad readable shadows. Grave and grotesque without human victims, gore spray or exposed organs. NO text, labels, logos, border ornament, HUD, floating runes, cosmic star fields or extra characters. One exploratory painting, no boss identity, powers, story assignment or sprite atlas.",
+  "review_status": "Exploratory concept; no production selection or lore assignment"
+}

@@ -1,0 +1,105 @@
+{
+  "issue": 153,
+  "checks": 24,
+  "failed": 0,
+  "errors": [],
+  "scope": "Offline concept review, not live game or production validation",
+  "results": [
+    {
+      "check": "Five complete concept paintings",
+      "ok": true
+    },
+    {
+      "check": "Full concept decodes veiled-sovereign",
+      "ok": true
+    },
+    {
+      "check": "Correct supplied reference loads veiled-sovereign",
+      "ok": true
+    },
+    {
+      "check": "Full concept decodes thorn-regent",
+      "ok": true
+    },
+    {
+      "check": "Correct supplied reference loads thorn-regent",
+      "ok": true
+    },
+    {
+      "check": "Full concept decodes cinder-eye",
+      "ok": true
+    },
+    {
+      "check": "Correct supplied reference loads cinder-eye",
+      "ok": true
+    },
+    {
+      "check": "Full concept decodes pale-hollow",
+      "ok": true
+    },
+    {
+      "check": "Correct supplied reference loads pale-hollow",
+      "ok": true
+    },
+    {
+      "check": "Full concept decodes ribbound-wraith",
+      "ok": true
+    },
+    {
+      "check": "Correct supplied reference loads ribbound-wraith",
+      "ok": true
+    },
+    {
+      "check": "Next wraps through set",
+      "ok": true
+    },
+    {
+      "check": "Previous wraps through set",
+      "ok": true
+    },
+    {
+      "check": "Comparison card selects concept",
+      "ok": true
+    },
+    {
+      "check": "Layout fits 1280/false",
+      "ok": true
+    },
+    {
+      "check": "Layout fits 1280/true",
+      "ok": true
+    },
+    {
+      "check": "44px controls 1280",
+      "ok": true
+    },
+    {
+      "check": "Layout fits 844/false",
+      "ok": true
+    },
+    {
+      "check": "Layout fits 844/true",
+      "ok": true
+    },
+    {
+      "check": "44px controls 844",
+      "ok": true
+    },
+    {
+      "check": "Layout fits 390/false",
+      "ok": true
+    },
+    {
+      "check": "Layout fits 390/true",
+      "ok": true
+    },
+    {
+      "check": "44px controls 390",
+      "ok": true
+    },
+    {
+      "check": "No browser errors",
+      "ok": true
+    }
+  ]
+}

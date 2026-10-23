@@ -145,6 +145,10 @@ Templates > Download and Install; already installed on the owner's PC).
   prompted a single-clapper Bell and broad folded-vault Sleeper revision; compare
   Revised/Previous in the gallery. Revised review and production choices remain
   open. Preserve these as concepts; no runtime exports or assignments.
+  Five further reference-led sovereign/creature studies (#153) are in
+  `art/concepts/reference-creatures-v1/inspector.html`; prompts/provenance and
+  review notes: `docs/reference-creature-concepts.md`. Supplied references and
+  generated masters are retained separately. These remain exploratory concepts.
 - `scripts/combat_state.gd` – combat rules without visuals (turn order,
   attack/defend/item/retreat, enemy attacks, results); testable directly.
 - `scripts/combat_screen.gd` – combat UI: turn text, log, tappable enemy

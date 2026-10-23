@@ -1,0 +1,16 @@
+{
+  "id": "thorn-regent",
+  "title": "Thorn Regent",
+  "issue": 153,
+  "tool": "built-in image_gen",
+  "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-528462f8-3ab7-4767-a7f5-57f91b7d32a4.png",
+  "source": "art/source/reference-creatures-v1/thorn-regent-master.png",
+  "reference_images": [
+    {
+      "path": "art/source/reference-creatures-v1/references/thorn-regent.png",
+      "role": "Silhouette/design cues only; new concept painting"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. Create one vertical 2:3 full-body dark gritty fantasy concept painting, reimagining the supplied crowned sinewy figure. The supplied image is a visual design reference only; preserve its solemn raised-hand posture, narrow crowned head, red-brown sinewy torso, long trailing lower-body filaments and one massive segmented tail, while inventing a coherent new arrangement.\nTHORN REGENT (working label): an ancient nonhuman monarch, extraordinarily tall and gaunt, with weathered rust-red hide stretched in broad sinew bands over an articulated chest. A small long skull-like face sits on a narrow neck; thorny black mineral spines form a sparse crooked crown grown around the head. Both long arms are raised, palms open in a calm ritual gesture, five readable fingers per hand, not an action scream. No open wounds, wet exposed organs, blood spray or human victims; the body feels ancient and desiccated rather than freshly injured.\nIts waist and lower body dissolve into broad rope-like layers of dark maroon fibrous tissue, hanging like a heavy train and fully covering the pelvic area. One powerful tapering segmented tail curls behind the figure and rises on one side, its blunt plates echoing the torso's banding. Distinguish tail from legs or extra arms with clear space. The trailing anatomy connects organically rather than looking like decorative fabric thrown around a generic skeleton king. No staff, weapon or extra head.\nComposition: full figure including crown, fingertips, tail and ground contact inside frame with useful margins. Empty dim stone recess/mineral chamber, cold dark green-grey haze receding behind the torso, low amber grazing on the russet body and crown. Body and train stay legible against the background. No literal throne or story symbols.\nSerious restrained painterly concept art: broad tactile masses, deep shadows, sparse deliberate striation, rusty crimson/bone-black/grey-green palette, unsettling patient authority. No photoreal corpse, cute cartoon, overly glossy render, densely noisy surface, exaggerated muscles, glowing magic, text, labels, borders, icons or HUD. One standalone concept painting, not a pose atlas or approved game enemy.",
+  "review_status": "Exploratory concept; no production selection or lore assignment"
+}
