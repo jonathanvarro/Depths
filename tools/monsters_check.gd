@@ -107,7 +107,7 @@ func _initialize() -> void:
 	bloat.health = 1
 	front_before = mara.health
 	fight.hero_attack(corin, bloat)
-	check("killed from the back row, the gas mostly rolls past", mara.health == front_before - 1 and corin.health == corin.max_health)
+	check("killed from the back row, the gas mostly rolls past", mara.health == front_before - 1 and corin.health == corin.max_health, "%d->%d, corin %d/%d, bloat %d, %s" % [front_before, mara.health, corin.health, corin.max_health, bloat.health, str(fight.events)])
 	party = _party(["mara"])
 	mara = party.members[0]
 	party.supplies.add(load("res://data/items/torch.tres"))
@@ -151,10 +151,41 @@ func _initialize() -> void:
 	fight._turn = -1
 	fight.advance()
 	check("a held hero's turn is spent struggling", fight.current_actor() == miner and fight.events.size() > 0 and fight.events[-1].contains("struggles"), str(fight.events))
+	check("...and they wrench free at the end of it (#143)", not fight.is_grabbed(held))
+	miner.intent = CS.Intent.GRAB
+	fight.enemy_act(miner)
+	held = mara if fight.is_grabbed(mara) else corin
 	var free: Companion = corin if held == mara else mara
 	free.accuracy = 5.0
 	fight.hero_attack(free, miner)
 	check("hitting the miner breaks the hold", not fight.is_grabbed(held))
+	# Alone, or with every rescuer down (#143): one turn lost, not every turn.
+	party = _party(["mara"])
+	mara = party.members[0]
+	fight = _fight(party, ["hollow_miner"])
+	miner = fight.foes[0]
+	miner.type = miner_type
+	fight.enemy_act(miner)
+	check("a lone hero can be seized", fight.is_grabbed(mara))
+	fight._order = [mara, miner]
+	fight._turn = -1
+	fight.advance()
+	check("...loses one turn", fight.current_actor() == miner and not fight.is_grabbed(mara))
+	fight.enemy_act(miner)
+	fight.advance()
+	check("...then acts again", fight.current_actor() == mara, str(fight.events))
+	party = _party(["mara", "corin"])
+	fight = _fight(party, ["hollow_miner", "hollow_miner"])
+	for m in fight.foes:
+		m.type = miner_type
+		m.intent = CS.Intent.GRAB
+	fight._choose_target(fight.foes[0])
+	fight._grabbed[party.members[0]] = fight.foes[0]
+	fight._grabbed[party.members[1]] = fight.foes[1]
+	fight._order = [party.members[0], party.members[1], fight.foes[0]]
+	fight._turn = -1
+	fight.advance()
+	check("two held heroes both struggle free", fight.current_actor() == fight.foes[0] and not fight.is_grabbed(party.members[0]) and not fight.is_grabbed(party.members[1]))
 	check("it may leave a pick", _e("hollow_miner").drop == load("res://data/items/pick.tres") and _e("hollow_miner").drop_chance > 0.0)
 
 	# The rest of the catalogue (#140).
@@ -216,6 +247,21 @@ func _initialize() -> void:
 	mother.health = 5
 	fight.plan(mother)
 	check("below half health she rages", mother.enraged)
+	# Her rage adds +2, once (#144).
+	var mt: EnemyType = mother.type.duplicate()
+	mt.accuracy = 1.0
+	mt.damage_min = 4
+	mt.damage_max = 4
+	mt.injury_chance = 0.0
+	mother.type = mt
+	var hit_for := func(enraged: bool) -> int:
+		mother.enraged = enraged
+		mother.intent = CS.Intent.BITE
+		party.members[0].health = party.members[0].max_health
+		return fight.enemy_act(mother)["damage"]
+	var calm: int = hit_for.call(false)
+	var raging: int = hit_for.call(true)
+	check("her rage adds +2 to a bite, once", raging - calm == 2, "%d vs %d" % [calm, raging])
 	party = _party(["mara"])
 	fight = _fight(party, ["gate_captain", "goblin"])
 	var captain = fight.foes[0]

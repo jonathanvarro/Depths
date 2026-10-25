@@ -376,6 +376,7 @@ var _opening_chest_cell := Vector2i(-1, -1)
 var _level_chest_open := false
 var _chest_looted := false
 var _hints_done := {}
+var _tip_queue: Array = []  # first-time tips waiting their turn: [key, text]
 var _steps_taken := 0
 var _opening_fights_done := 0
 var _next_fight_at := 0
@@ -694,6 +695,8 @@ func _run_event(cell: Vector2i) -> void:
 	if not _map.event_flags.has(cell):
 		_map.event_flags[cell] = []
 	_event_screen.show_event(event, _party_state, _room_events, _map.event_flags[cell])
+	if event.choices.any(func(c: EventChoice): return c.missing(_party_state) != ""):
+		_tip("needs_item", "A greyed choice needs something you aren't carrying: a pick, a spade, holy water or an antidote. They take pack space, but open safer ways through.")
 	var result: Dictionary = await _event_screen.finished
 	_end_encounter()
 	for item in result.get("no_room", {}):
@@ -746,6 +749,7 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 	# fight takes place on a dark stage, so enemies never meet the walls.
 	_stage.enter(Settings.get_value("flashes"))  # plays as the fight opens
 	_update_hints("fight")
+	_fight_tips(state)
 	_say("fight_start", true, false, _any_voice())
 	_party.locked = true
 	_touch_pad.visible = false
@@ -1669,6 +1673,12 @@ func _on_party_state_changed(announce := true) -> void:
 				_say("shaken", false, true, member)
 		if hunger > hunger_before and card:
 			card.alert(PartyCard.RATION.icon, Color("e0542f") if hunger == 2 else Color.WHITE)
+		if member.is_cursed() or member.cursed_gear():
+			_tip("cursed", "Cursed: %s can't take it off. Holy water lifts a curse, or the nurse at camp can, for %dg." % [member.display_name, CampState.LIFT_BANE_PRICE])
+		if member.boons.any(func(b): return b["boon"].bane):
+			_tip("bane", "A bane weighs on %s for a few fights; their card shows it. Holy water or the camp's nurse lifts it." % member.display_name)
+		elif not member.boons.is_empty():
+			_tip("boon", "A blessing on %s for a few fights; their card shows it. It fades as the fights go by." % member.display_name)
 	# No random bolting during the opening: panic shows, but the controls
 	# tutorial shouldn't fight the player (#30).
 	var panicking: bool = _party_state.panicking_member() != null and not _in_opening
@@ -2080,6 +2090,7 @@ func _offer_overflow() -> void:
 ## player can leave something else instead. Whatever stays is left behind.
 func _offer_no_room(finds: Dictionary) -> void:
 	_chest.open("No room in your pack", finds, _party_state)
+	_tip("pack_full", "Your pack is full. Tap a stack in your pack to leave it here and make room, or close to leave these behind. A backpack adds space; a limp takes some away.")
 	await _chest.closed
 	_chest.visible = false
 
@@ -2557,6 +2568,45 @@ func _finish_hint() -> void:
 		_hint_queue = []
 		_show_hint(queued[0], queued[1], queued[2], queued[3])
 	_refresh_tutorial_hint()
+	_next_tip()
+
+
+## First-time tips past the opening (2026-10-25): each newer system is
+## explained once, when it first matters, and remembered between campaigns
+## in the settings file. Test runs show them only when asked to.
+func _tip(key: String, text: String) -> void:
+	if _in_opening or _camp.visible or _preparation.visible or ("--script" in OS.get_cmdline_args() and not Engine.has_meta("depths_tips")):
+		return
+	var seen: Array = Settings.get_value("tips_seen")
+	if key in seen:
+		return
+	Settings.set_value("tips_seen", seen + [key])
+	_tip_queue.append([key, text])
+	_next_tip()
+
+
+func _next_tip() -> void:
+	if _tip_queue.is_empty() or _hint_mode == "ok":
+		return
+	var tip: Array = _tip_queue.pop_front()
+	_show_hint(tip[1], "tip_" + tip[0], "ok")
+
+
+## Monsters the opening already taught, or whose intro is only scenery.
+const UNTAUGHT_FOES := ["Rat", "Starved rat", "Spider", "Small spider", "Goblin", "Webspinner", "Goblin queen"]
+
+## A fight's first-time tips: elites, and each kind of monster the first
+## time it's met (#146), from its own intro line.
+func _fight_tips(state: CombatState) -> void:
+	if state.foes.any(func(f): return f.elite != ""):
+		_tip("elite", "Elites carry their edge in their name: Hardened (more health), Savage (hits harder), Swift (acts first) or Venomous (poisons). There's more to learn from beating one.")
+	var met := {}
+	for foe in state.foes:
+		var kind: String = foe.type.display_name
+		if kind in UNTAUGHT_FOES or met.has(kind) or foe.type.intro == "":
+			continue
+		met[kind] = true
+		_tip("foe_" + kind.to_snake_case(), foe.type.intro)
 
 
 ## Speech box just above the portrait cards (#57).

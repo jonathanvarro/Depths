@@ -112,7 +112,11 @@ func _campaign(hero_path: String, run_seed: int, max_days: int) -> Dictionary:
 		"wipes_by_floor": {1: 0, 2: 0, 3: 0, 4: 0}, "first_arrival": {},
 		"gold_found": 0, "gold_contracts": 0, "gold_sold": 0, "gold_spent": 0, "bounty": 0,
 		"gate_tries": 0, "gate_day": 0, "queen_tries": 0, "queen_rounds": 0, "queen_day": 0,
-		"route_bought": 0, "lantern_day": 0, "boons": 0, "banes": 0, "banes_lifted": 0, "trinkets_found": 0, "trinkets_worn": 0, "gear_found": 0, "gear_equipped": 0, "xp_spent_out_day": {}, "levels_at_end": [],
+		"route_bought": 0, "lantern_day": 0, "boons": 0, "banes": 0, "banes_lifted": 0, "trinkets_found": 0, "trinkets_worn": 0, "gear_found": 0, "gear_equipped": 0,
+		# Light (owner question, 2026-10-25): steps by light band, trips cut
+		# short for want of light, and light used.
+		"steps_bright": 0, "steps_steady": 0, "steps_dim": 0, "steps_out": 0,
+		"home_no_light": 0, "torches_lit": 0, "flasks_used": 0, "xp_spent_out_day": {}, "levels_at_end": [],
 		"treated": 0, "recruits_hired": 0, "quest_days": {}, "queen_attempts": [], "gate_attempts": [],
 	}
 	party = PS.new()
@@ -596,6 +600,8 @@ func _walk_to(to: Vector2i, going_home: bool, into_hall := false) -> String:
 			return "stuck"
 		party.advance_time(party.step_time())
 		_keep_light()
+		var band: String = ["out", "dim", "steady", "bright"][party.supplies.light_band()]
+		stats["steps_" + band] += 1
 		var result := _on_enter(next)
 		if result != "ok":
 			return result
@@ -822,8 +828,10 @@ func _keep_light() -> void:
 	var supplies = party.supplies
 	if supplies.has_lantern and supplies.oil < 25.0 and party.cannot_use_reason(OIL) == "":
 		party.use_item(OIL)
+		stats["flasks_used"] += 1
 	if supplies.light_band() == Supplies.Light.OUT and supplies.count(TORCH) > 0 and not supplies.torch_lit():
 		supplies.light_torch(TORCH)
+		stats["torches_lit"] += 1
 
 
 func _should_go_home() -> bool:
@@ -832,6 +840,7 @@ func _should_go_home() -> bool:
 	var supplies = party.supplies
 	var no_light: bool = not supplies.has_lantern and supplies.count(TORCH) == 0 and not supplies.torch_lit()
 	if no_light:
+		stats["home_no_light"] += 1
 		return true
 	var healing: int = supplies.count(DRAUGHT) + supplies.count(RATION)
 	if _health_fraction() < HOME_BELOW and healing == 0:
@@ -915,6 +924,14 @@ func _summarise(all: Dictionary) -> void:
 				_mean(runs.map(func(r): return r["banes_lifted"])), _mean(runs.map(func(r): return r["trinkets_found"])),
 				_mean(runs.map(func(r): return r["trinkets_worn"])), _mean(runs.map(func(r): return r["gear_found"])),
 				_mean(runs.map(func(r): return r["gear_equipped"]))])
+		var light_steps: float = _mean(runs.map(func(r): return r["steps_bright"] + r["steps_steady"] + r["steps_dim"] + r["steps_out"]))
+		print("  light: steps bright %.0f%%, steady %.0f%%, dim %.0f%%, out %.0f%%; torches lit %.1f, oil flasks %.1f; trips ended for want of light %.1f per campaign" % [
+				100.0 * _mean(runs.map(func(r): return r["steps_bright"])) / maxf(1.0, light_steps),
+				100.0 * _mean(runs.map(func(r): return r["steps_steady"])) / maxf(1.0, light_steps),
+				100.0 * _mean(runs.map(func(r): return r["steps_dim"])) / maxf(1.0, light_steps),
+				100.0 * _mean(runs.map(func(r): return r["steps_out"])) / maxf(1.0, light_steps),
+				_mean(runs.map(func(r): return r["torches_lit"])), _mean(runs.map(func(r): return r["flasks_used"])),
+				_mean(runs.map(func(r): return r["home_no_light"]))])
 		var gate_runs: Array = runs.filter(func(r): return r["gate_tries"] > 0)
 		var queen_runs: Array = runs.filter(func(r): return r["queen_tries"] > 0)
 		print("  gate: tried in %d runs (%.1f tries each), broken by day median %s" % [gate_runs.size(), _mean(gate_runs.map(func(r): return r["gate_tries"])),

@@ -517,14 +517,14 @@ Deeper floors mix them (depth 1 mostly single rats; depth 3 pairs and trios like
     - Killed from the back row, the gas mostly rolls past.
     - A thrown torch sets it off in a flash that scorches the other foes for 3 and the party for 1.
     - Hurt, it swells, and tears open on its next turn.
-  - **Hollow miner** (floor 3; 16 health): grabs an exposed hero, who can't act until the miner is hit. It swings its pick at whoever it holds, and drops a pick 20% of the time.
+  - **Hollow miner** (floor 3; 16 health): grabs an exposed hero, who loses their next turn struggling free unless someone hits the miner first (#143). It swings its pick at whoever it holds, and drops a pick 20% of the time.
 - **The rest of the catalogue, built 2026-10-22** on #141's art (numbers from #97, plus first guesses for the lamp-eater and breach hound):
   - **Rock beetle** (floor 2): bites, then curls up. While curled, a blow does at most 1.
   - **Venom spider** (floors 2–3): its poison burns 2 a turn instead of 1.
   - **Goblin trapper** (floors 2–4): lays a snare, so the caught hero acts last next round, then throws a knife that reaches the back row.
   - **Lamp-eater** (floor 3): drinks 12 oil, or 12 of a held torch's life. In the dark, it bites instead.
   - **Breach hound** (floor 3, in pairs or threes): goes for the weakest hero, and hits 1 harder while another hound stands.
-  - **Broodmother** (rare, floors 2–3): calls two hatchlings once, her bite poisons, and below half health she rages (+2 damage).
+  - **Broodmother** (rare, floors 2–3): calls two hatchlings once, her bite poisons, and below half health she rages (+2 damage, applied once: #144).
   - **Gate captain** (rare, floors 3–4): its horn braces an ally, then it winds up a heavy blow.
 - **Art:** ChatGPT's art (#141) is connected, including the special poses (the bat landed, the brute's wind-up and recovery, the bloat swelling and bursting, the miner's grab), the gas cloud, and the new intent and status icons.
 - **Elites and depth scaling — tuned 2026-10-21** (`CombatState.prepare`, shared by the game and the playtest bot):
@@ -763,6 +763,18 @@ Guidance and results are shown as pictures rather than sentences.
 - **Tutorial cards:** one short line, plus an icon. A pulsing gold ring marks the button to press.
 - **Room events:** the story line stays. What changed shows as icon-and-number chips.
 - **Art:** the new icons are placeholders in `art/ui/visual105-v1/` until ChatGPT replaces them.
+
+### First-time tips — implemented 2026-10-25
+
+After the opening, each newer system is explained once, by a "Got it" card, the first time it matters:
+
+- **The first sight of each monster** shows that monster's own intro line (#146). Monsters the opening already taught, and those whose intro is only scenery, are skipped.
+- **Elites:** what Hardened, Savage, Swift and Venomous mean.
+- **A full pack:** how to leave something to make room, and that a backpack adds space while a limp takes some away.
+- **A greyed event choice:** it needs a pick, spade, holy water or antidote.
+- **A blessing, a bane, or cursed gear** is explained when it first lands, including how a curse is lifted.
+
+A fight with several new things shows one card at a time. The cards never appear at camp. Which tips have been seen is kept in the settings file, so a new campaign doesn't repeat them. The forge needs no card, because the smith's offer already explains it.
 
 ## Reusable environment materials
 

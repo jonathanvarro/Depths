@@ -74,7 +74,6 @@ const DRAIN_OIL := 12.0
 const DRAIN_TORCH := 12.0
 const PACK_DAMAGE := 1
 const BROOD_HATCHLINGS := 2
-const BROOD_RAGE_DAMAGE := 2
 ## New monsters (#140). A brute recovering from its heavy blow is wide open:
 ## blows land this much harder. A gas-bloat's burst: damage to the front
 ## and back rows and strain for all; killed from the back row, the gas
@@ -442,8 +441,10 @@ func advance() -> void:
 				if result != Result.ONGOING:
 					return
 				if actor.is_alive() and is_grabbed(actor):
-					# Held fast (#140): the turn goes on struggling.
-					events.append("%s struggles in the %s's grip." % [actor.display_name, _grabbed[actor].name.to_lower()])
+					# Held fast (#140): the turn goes on struggling, and
+					# they wrench free at the end of it (#143).
+					events.append("%s struggles in the %s's grip and wrenches free." % [actor.display_name, _grabbed[actor].name.to_lower()])
+					_grabbed.erase(actor)
 				elif actor.is_alive():
 					return
 			else:
@@ -489,7 +490,8 @@ func foe_can_reach(foe: Foe, hero: Companion) -> bool:
 	return foe.type.reach_back or foe.intent == Intent.SWOOP or hero_in_front(hero)
 
 
-## Held by a hollow miner (#140): can't act until it's hit.
+## Held by a hollow miner (#140): loses their next turn struggling free,
+## unless someone hits the miner first (#143).
 func is_grabbed(hero: Companion) -> bool:
 	if not _grabbed.has(hero):
 		return false
@@ -710,7 +712,7 @@ func _carry_out(foe: Foe) -> Dictionary:
 						"text": "The %s grabs at %s, who twists free." % [foe.name.to_lower(), held.display_name]}
 			_grabbed[held] = foe
 			return {"target": held, "hit": true, "damage": 0, "injury": null,
-					"text": "The %s seizes %s and won't let go. Hit it to break the hold!" % [foe.name.to_lower(), held.display_name]}
+					"text": "The %s seizes %s! Hit it to break the hold, or they lose their next turn struggling free." % [foe.name.to_lower(), held.display_name]}
 	var heavy := foe.intent == Intent.HEAVY
 	var target := _choose_target(foe)
 	var outcome := {"target": target, "hit": false, "damage": 0, "injury": null}
@@ -724,8 +726,6 @@ func _carry_out(foe: Foe) -> Dictionary:
 			damage += RUSH_DAMAGE
 		if foe.type.tactic == EnemyType.Tactic.PACK and living_foes().any(func(f: Foe): return f != foe and f.type.tactic == EnemyType.Tactic.PACK):
 			damage += PACK_DAMAGE  # hounds hunt together (#140)
-		if foe.type.tactic == EnemyType.Tactic.BROOD and foe.enraged:
-			damage += BROOD_RAGE_DAMAGE
 		if _drummed.has(foe):
 			damage += DRUM_DAMAGE
 			_drummed.erase(foe)

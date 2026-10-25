@@ -52,7 +52,7 @@ func _initialize() -> void:
 		"attack_verb": "swings its pick at", "tactic": EnemyType.Tactic.GRABBER, "threat": 4, "fears_fire": false,
 		"injuries": [DEEP_WOUND], "injury_chance": 0.1,
 		"drop": load("res://data/items/pick.tres"), "drop_chance": 0.2,
-		"intro": "One of the gassed shift, risen. It grabs and won't let go - hit it to break the hold.",
+		"intro": "One of the gassed shift, risen. It grabs and won't let go: hit it to break the hold, or lose a turn struggling free.",
 	})
 	# The rest of #140's catalogue, on #141's art. The first five follow the
 	# #97 research numbers; the lamp-eater and breach hound are first guesses.
