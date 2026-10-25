@@ -104,6 +104,9 @@ var place_foe := Callable()
 ## Keeps a foe clear of the action panel after its height changes (a bat
 ## landing, #141); set by main.gd.
 var reframe := Callable()
+## The top message line (main.gd): while it shows, tags keep below it so a
+## back-row foe's tag isn't hidden under the words.
+var keep_clear: Control
 ## Emitted after each hero action (the opening reacts to glancing blows).
 signal hero_acted(hero: Companion, action: Dictionary, outcome: Dictionary)
 
@@ -488,7 +491,12 @@ func _process(_delta: float) -> void:
 			var view := get_viewport().get_visible_rect()
 			var floor_y: float = (_actions.get_global_rect().position.y if _actions.visible else view.end.y) - tag.size.y - 4.0
 			var spot := screen - tag.size / 2.0
-			tag.position = Vector2(clampf(spot.x, view.position.x + 4.0, view.end.x - tag.size.x - 4.0), clampf(spot.y, view.position.y + 14.0, maxf(view.position.y + 14.0, floor_y)))
+			var top: float = view.position.y + 14.0
+			if keep_clear and keep_clear.modulate.a > 0.05 and keep_clear.text != "":
+				var words: Rect2 = keep_clear.get_global_rect()
+				if words.position.x < spot.x + tag.size.x and spot.x < words.end.x:
+					top = maxf(top, words.end.y + 6.0)
+			tag.position = Vector2(clampf(spot.x, view.position.x + 4.0, view.end.x - tag.size.x - 4.0), clampf(spot.y, top, maxf(top, floor_y)))
 			var reachable: bool = _hero == null or _state.can_hit(_hero, foe)
 			tag.modulate = Color.WHITE if foe == _target else Color(1, 1, 1, 0.65 if reachable else 0.35)
 

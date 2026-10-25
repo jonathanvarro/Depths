@@ -3150,6 +3150,7 @@ func _build_ui(minimap: Control) -> void:
 	_combat.coin = coin
 	_combat.place_foe = _place_extra_foe
 	_combat.reframe = _clear_of_panel  # a bat landing (#141)
+	_combat.keep_clear = _message_label  # tags stay below the top line
 	# Settings (#52), above everything, from the Pack or the camp.
 	var settings_layer := CanvasLayer.new()
 	settings_layer.layer = 7

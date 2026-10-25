@@ -136,6 +136,12 @@ func _states(size: String) -> void:
 	check("...and each says so on the selected line", lines[beetle.name].contains("Curled") and lines[miner.name].contains("Holding " + mara.display_name) and lines[spider.name].contains("venom") and lines[bat.name].contains("In the air"), str(lines))
 	await _settle()
 	await _bounds(main, "states, " + size)
+	# The floor's line at the top doesn't cover a back-row tag.
+	main._show_message("Goblin marks daubed on the rock. Somewhere below: drums.")
+	await _settle()
+	var words: Rect2 = main._message_label.get_global_rect()
+	var covered: Array = combat._tags.keys().filter(func(f): return combat._tags[f].visible and combat._tags[f].get_global_rect().intersects(words))
+	check(size + ": no tag hides under the top message", covered.is_empty(), str(covered.map(func(f): return f.name)))
 	if dir != "":
 		root.get_texture().get_image().save_png("%s/readability_%s_%s_states.png" % [dir, tag, size.to_lower()])
 	state._grabbed.clear()
