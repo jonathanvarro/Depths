@@ -38,7 +38,7 @@ func _initialize() -> void:
 	var state = main._combat._state
 	var miner_first: bool = state.foes.all(func(f): return f.elite == "")
 	if miner_first:
-		check("first sight of a hollow miner explains it", main._hint == "tip_foe_hollow_miner" and main._hint_mode == "ok" and main._hint_text == _e("hollow_miner").intro, main._hint)
+		check("first sight of a hollow miner explains it", main._hint == "tip_foe_hollow_miner" and main._hint_mode == "ok" and main._hint_text.begins_with(_e("hollow_miner").intro) and main._hint_text.contains("? beside its move"), main._hint)
 	else:
 		check("an elite in the fight is explained first", main._hint == "tip_elite", main._hint)
 	check("...one card at a time: the rest wait", main._tip_queue.size() >= 1)

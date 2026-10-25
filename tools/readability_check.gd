@@ -53,7 +53,7 @@ func _marks(main, foe) -> Array:
 ## Every shown tag on screen and clear of the action panel.
 func _bounds(main, label: String) -> void:
 	var view: Rect2 = root.get_visible_rect()
-	var panel: Rect2 = main._combat._actions.get_global_rect()
+	var panel: Rect2 = main._combat._actions.get_global_rect() if main._combat._actions.visible else Rect2()  # hidden while a foe acts
 	var bad := []
 	for foe in main._combat._tags:
 		var t: Button = main._combat._tags[foe]
@@ -136,6 +136,28 @@ func _states(size: String) -> void:
 	check("...and each says so on the selected line", lines[beetle.name].contains("Curled") and lines[miner.name].contains("Holding " + mara.display_name) and lines[spider.name].contains("venom") and lines[bat.name].contains("In the air"), str(lines))
 	await _settle()
 	await _bounds(main, "states, " + size)
+	# How it fights, again (#146): "?" by its move shows the intro line,
+	# for whichever enemy is picked, at no cost of a turn.
+	combat._select_target(miner)
+	var actor = state.current_actor()
+	var before_events: int = state.events.size()
+	combat._rules_button.button_pressed = true
+	await process_frame
+	check("? shows how the selected enemy fights", combat._rules_card.visible and combat._rules_label.text.contains(miner.type.intro), combat._rules_label.text)
+	combat._select_target(beetle)
+	await process_frame
+	check("...and stays open as another is picked", combat._rules_card.visible and combat._rules_label.text.contains(beetle.type.intro))
+	check("...without spending a turn", state.current_actor() == actor and state.events.size() == before_events)
+	await _settle()
+	check("...in a card just above the actions, on screen", root.get_visible_rect().encloses(combat._rules_card.get_global_rect()) and combat._rules_card.get_global_rect().end.y <= combat._actions.get_global_rect().position.y, str(combat._rules_card.get_global_rect()))
+	if dir != "":
+		root.get_texture().get_image().save_png("%s/readability_%s_%s_rules.png" % [dir, tag, size.to_lower()])
+	var key := InputEventKey.new()
+	key.physical_keycode = KEY_SLASH
+	key.pressed = true
+	combat._unhandled_input(key)
+	await process_frame
+	check("the ? key closes it again", not combat.show_rules and not combat._rules_card.visible)
 	# The floor's line at the top doesn't cover a back-row tag.
 	main._show_message("Goblin marks daubed on the rock. Somewhere below: drums.")
 	await _settle()

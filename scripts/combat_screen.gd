@@ -43,6 +43,13 @@ var _turn_label: Label
 ## on the action panel, so touch and keyboard players needn't hover.
 var _intent_icon_rect: TextureRect
 var _intent_label: Label
+## "?" beside the selected enemy's move (#146): a card above the actions
+## says how it fights - its intro line - for every enemy picked, until
+## pressed again. A card, not a taller panel, so tags keep their room.
+var _rules_button: Button
+var _rules_card: PanelContainer
+var _rules_label: Label
+var show_rules := false
 var _fx: Control  # combat_fx.gd
 var _health_seen := {}  # Companion -> health, to show each change as a number
 ## How the last enemy fell to a hero: "slash", "smash", "pierce" or "fire"
@@ -446,7 +453,17 @@ func _process(_delta: float) -> void:
 		return
 	if _actions.visible:
 		_update_intent_line()  # always the selected enemy's current plan (#116)
+	else:
+		_rules_card.visible = false  # back with the actions on the party's turn
+	if _rules_card.visible:  # just above the actions, as wide (#146)
+		var panel := _actions.get_global_rect()
+		_rules_card.custom_minimum_size.x = panel.size.x
+		_rules_card.reset_size()
+		_rules_card.global_position = Vector2(panel.position.x, panel.position.y - _rules_card.size.y - 8.0)
+		if _rules_card.get_index() != get_child_count() - 1:
+			move_child(_rules_card, -1)  # above tags added since
 	var camera := get_viewport().get_camera_3d()
+	var placed: Array[Rect2] = []  # tags already set this frame
 	for foe in _tags:
 		if foe.node and foe.node.has_method("set_combat_state"):
 			foe.node.set_combat_state(foe.enraged,foe.shielded)
@@ -497,6 +514,15 @@ func _process(_delta: float) -> void:
 				if words.position.x < spot.x + tag.size.x and spot.x < words.end.x:
 					top = maxf(top, words.end.y + 6.0)
 			tag.position = Vector2(clampf(spot.x, view.position.x + 4.0, view.end.x - tag.size.x - 4.0), clampf(spot.y, top, maxf(top, floor_y)))
+			# Two tags pushed to the same height (below the top line, say)
+			# stack rather than overlap, while there's room above the actions.
+			for i in placed.size():
+				var mine := Rect2(tag.position, tag.size)
+				var hit: Array = placed.filter(func(r: Rect2): return r.intersects(mine))
+				if hit.is_empty() or hit[0].end.y + 4.0 > floor_y:
+					break
+				tag.position.y = hit[0].end.y + 4.0
+			placed.append(Rect2(tag.position, tag.size))
 			var reachable: bool = _hero == null or _state.can_hit(_hero, foe)
 			tag.modulate = Color.WHITE if foe == _target else Color(1, 1, 1, 0.65 if reachable else 0.35)
 
@@ -599,6 +625,13 @@ func _update_intent_line() -> void:
 	var words: Array = ["%s: %s." % [_target.name, CombatState.intent_text(_target)]]
 	words.append_array(_state_words(_target))
 	_intent_label.text = " ".join(words)
+	_rules_card.visible = show_rules and _target.type.intro != "" and _actions.visible
+	_rules_label.text = _target.type.intro  # it names the monster itself
+
+
+## Shows or hides the selected enemy's rules (#146). Costs no turn.
+func toggle_rules() -> void:
+	_rules_button.button_pressed = not _rules_button.button_pressed  # emits toggled
 
 
 ## What sets `foe` apart right now, as marks for its tag (#147): its elite
@@ -658,6 +691,10 @@ func _holding(foe) -> Companion:
 ## previous enemy while choosing an action.
 func _unhandled_input(event: InputEvent) -> void:
 	if not visible or _state == null or not _actions.visible or not event.is_pressed() or event.is_echo():
+		return
+	if event is InputEventKey and event.physical_keycode in [KEY_SLASH, KEY_F1]:
+		toggle_rules()  # how the selected enemy fights (#146)
+		get_viewport().set_input_as_handled()
 		return
 	var step := 0
 	if event.is_action("ui_focus_next") or event.is_action("turn_right"):
@@ -795,6 +832,26 @@ func _build() -> void:
 	_intent_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART  # a state or two can follow (#147)
 	_intent_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	intent_row.add_child(_intent_label)
+	_rules_button = Button.new()
+	_rules_button.text = "?"
+	_rules_button.toggle_mode = true
+	_rules_button.focus_mode = Control.FOCUS_NONE
+	_rules_button.custom_minimum_size = Vector2(44, 44)
+	_rules_button.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+	_rules_button.add_theme_font_size_override("font_size", 22)
+	_rules_button.tooltip_text = "How it fights (? or F1)"
+	_rules_button.toggled.connect(func(on: bool):
+		show_rules = on
+		_update_intent_line())
+	intent_row.add_child(_rules_button)
+	_rules_card = PanelContainer.new()
+	_rules_card.add_theme_stylebox_override("panel", style)
+	_rules_card.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_rules_card.visible = false
+	_rules_label = _label("", 18, COLOR_TEXT)
+	_rules_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_rules_card.add_child(_rules_label)
+	add_child(_rules_card)  # drawn over the tags while open (see _process)
 	rows.add_child(intent_row)
 	_action_buttons = HBoxContainer.new()
 	_action_buttons.add_theme_constant_override("separation", 8)

@@ -2653,7 +2653,7 @@ func _fight_tips(state: CombatState) -> void:
 		if kind in UNTAUGHT_FOES or met.has(kind) or foe.type.intro == "":
 			continue
 		met[kind] = true
-		_tip("foe_" + kind.to_snake_case(), foe.type.intro)
+		_tip("foe_" + kind.to_snake_case(), foe.type.intro + "  (%s ? beside its move to read this again.)" % ("Tap" if _is_touch() else "Click"))
 
 
 ## Speech box just above the portrait cards (#57).

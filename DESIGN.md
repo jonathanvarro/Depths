@@ -799,6 +799,7 @@ Guidance and results are shown as pictures rather than sentences.
 After the opening, each newer system is explained once, by a "Got it" card, the first time it matters:
 
 - **The first sight of each monster** shows that monster's own intro line (#146). Monsters the opening already taught, and those whose intro is only scenery, are skipped.
+  - **Reading it again (#146):** a **?** beside the selected enemy's move (or the ? or F1 key) opens a small card above the actions that says how that enemy fights. It stays open as you pick other enemies, until you press ? again. It costs no turn and can't trigger an attack. It's a card rather than a taller panel, so the enemy tags keep their room. The first-sight tip says the ? is there.
 - **Elites:** what Hardened, Savage, Swift and Venomous mean.
 - **A full pack:** how to leave something to make room, and that a backpack adds space while a limp takes some away.
 - **A greyed event choice:** it needs a pick, spade, holy water or antidote.
