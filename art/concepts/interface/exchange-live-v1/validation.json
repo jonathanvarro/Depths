@@ -1,0 +1,25 @@
+{
+	"captures": [
+		"loot-1280-normal.png",
+		"merchant-1280-normal.png",
+		"loot-1280-larger.png",
+		"merchant-1280-larger.png",
+		"loot-1278-normal.png",
+		"merchant-1278-normal.png",
+		"loot-1278-larger.png",
+		"merchant-1278-larger.png",
+		"loot-1334-normal.png",
+		"merchant-1334-normal.png",
+		"loot-1334-larger.png",
+		"merchant-1334-larger.png",
+		"loot-empty-phone.png",
+		"loot-full-phone.png",
+		"merchant-unloading-phone.png",
+		"merchant-arrival-phone.png",
+		"merchant-overflow-phone.png"
+	],
+	"checks": 310,
+	"failures": [],
+	"main_or_saves": false,
+	"physical_iPhone": false
+}

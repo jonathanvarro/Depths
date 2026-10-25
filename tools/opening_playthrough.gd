@@ -149,12 +149,15 @@ func _do_pack_step() -> void:
 func _loot_chest() -> void:
 	await _snap_once("chest")
 	var chest = main._chest
-	# Tap one item, then take the rest with the take-all icon.
+	# Inspect one item, explicitly take it, then take the rest with the icon.
 	var tiles: Array = chest._chest_grid.get_children().filter(func(c): return c is Button)
 	if not tiles.is_empty():
 		tiles[0].pressed.emit()
 		await process_frame
-	check("tapping a chest item moves it to the pack", chest.contents.size() == main.OPENING_CHEST.size() - 1)
+		check("inspection keeps the chest contents", chest.contents.size() == main.OPENING_CHEST.size())
+		chest._primary.pressed.emit()
+		await process_frame
+	check("Take moves the inspected chest item to the pack", chest.contents.size() == main.OPENING_CHEST.size() - 1)
 	chest._take_all.pressed.emit()
 	await process_frame
 	check("take-all empties the chest", chest.is_empty() and main._party_state.supplies.count(main.DRAUGHT) == 1)

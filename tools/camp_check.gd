@@ -71,16 +71,24 @@ func _initialize() -> void:
 
 	# Merchant: tops up to the starting supplies, once a day.
 	await _open("supplies")
-	check("merchant view with his portrait", main._camp.is_open("supplies") and main._camp._portrait.texture != null)
+	check("merchant view with his portrait", main._camp.is_open("supplies") and main._camp._merchant_view._portrait.texture != null and main._camp._merchant_view.visible)
 	await _snap("merchant")
 	supplies.gold = 8
 	main._camp._refresh_activity()
-	check("buy rations back for 4g each", _press(main._camp, "Buy 4g") and _press(main._camp, "Buy 4g") and supplies.count(ration) == 2 and supplies.gold == 0)
+	var merchant=main._camp._merchant_view
+	merchant.select_item(ration,"left")
+	merchant._primary.pressed.emit()
+	merchant._primary.pressed.emit()
+	check("buy rations back for 4g each", supplies.count(ration) == 2 and supplies.gold == 0)
 
 	# Escape goes back to the clearing.
 	var esc := InputEventAction.new()
 	esc.action = "ui_cancel"
 	esc.pressed = true
+	Input.parse_input_event(esc)
+	await process_frame
+	await process_frame
+	check("Escape clears merchant inspection first", main._camp._current == "supplies" and merchant._key == null)
 	Input.parse_input_event(esc)
 	await process_frame
 	await process_frame

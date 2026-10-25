@@ -1,7 +1,8 @@
 {
   "issues": [
     51,
-    48
+    48,
+    155
   ],
   "date": "2026-10-25",
   "new_raster_generation": false,
@@ -29,6 +30,6 @@
       ]
     }
   ],
-  "glyphs": "Original native SVG outlines for empty weapon, armour and trinket; back slot reuses controls-v1/backpack.svg",
+  "glyphs": "Original native SVG outlines for empty weapon, armour and trinket; back slot reuses controls-v1/backpack.svg; original take-all.svg added for the live loot exchange (#155)",
   "capacity": "The bag has twelve visual compartments per page; real capacity, stack counts, back gear and injury penalties come from PartyState/Supplies. No capacity rule is changed."
 }

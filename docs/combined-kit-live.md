@@ -1,6 +1,8 @@
 # Combined Equipment and backpack · #51 / #48
 
 2026-10-25. The approved physical kit is now the live Godot Pack screen.
+Chest loot, reward overflow and the merchant now share this kit too:
+[loot/trade handoff](loot-and-merchant-kit.md) (#155).
 [Review captures](../art/concepts/interface/combined-live-v1/inspector.html) ·
 [In-game phone](../art/concepts/interface/combined-live-v1/main-1278-normal.png) ·
 [Larger text](../art/concepts/interface/combined-live-v1/main-1278-larger.png)

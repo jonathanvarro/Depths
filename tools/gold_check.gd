@@ -35,6 +35,14 @@ func _open(id: String) -> void:
 	await process_frame
 
 
+func _trade(key: Variant, side: String) -> bool:
+	var view=main._camp._merchant_view
+	view.select_item(key,side)
+	if view._primary==null or view._primary.disabled:return false
+	view._primary.pressed.emit()
+	return true
+
+
 func _to_camp(ending: int) -> void:
 	main._end_expedition(ending)
 	await process_frame
@@ -98,9 +106,9 @@ func _initialize() -> void:
 	await _open("supplies")
 	await _snap("merchant")
 	var before: int = supplies.gold
-	check("sell copper ore for 3g each", _press(main._camp, "Sell 3g") and supplies.gold == before + 3)
-	_press(main._camp, "Sell 3g")
-	_press(main._camp, "Sell %dg" % valuable.price)
+	check("sell copper ore for 3g each", _trade(ore,"right") and supplies.gold == before + 3)
+	_trade(ore,"right")
+	_trade(valuable,"right")
 	check("all treasure sold at its value", supplies.count(ore) == 0 and supplies.count(valuable) == 0 and supplies.gold == before + 6 + valuable.price, str(supplies.gold - before))
 	var torches: int = supplies.count(torch)
 	before = supplies.gold
@@ -109,13 +117,13 @@ func _initialize() -> void:
 	supplies.source = 0
 	supplies.gold = 39
 	main._camp._refresh_activity()
-	check("the lantern needs 40g", not camp.buy_lantern(ps) and not _press(main._camp, "Buy 40g"))
+	check("the lantern needs 40g", not camp.buy_lantern(ps) and not _trade("lantern","left"))
 	supplies.gold = 45
 	main._camp._refresh_activity()
-	check("buy the lantern", _press(main._camp, "Buy 40g") and supplies.has_lantern and supplies.source == 1 and supplies.oil == 100.0 and supplies.gold == 5)
+	check("buy the lantern", _trade("lantern","left") and supplies.has_lantern and supplies.source == 1 and supplies.oil == 100.0 and supplies.gold == 5)
 	supplies.gold = 6
 	main._camp._refresh_activity()
-	check("oil is sold once you have a lantern", _press(main._camp, "Buy 6g") and supplies.gold == 0)
+	check("oil is sold once you have a lantern", _trade(load("res://data/items/oil_flask.tres"),"left") and supplies.gold == 0)
 
 	# Smith: buy gear into the pack; the merchant buys it back at 30%.
 	supplies.gold = 10
@@ -124,7 +132,7 @@ func _initialize() -> void:
 	check("can't afford the axe", not camp.buy_gear(ps, load("res://data/gear/woodcutters_axe.tres")))
 	check("buy a plain knife", _press(main._camp, "Buy 8g") and supplies.gold == 2 and supplies.gear.any(func(g): return g.resource_path == "res://data/gear/plain_knife.tres"))
 	await _open("supplies")
-	check("sell it back for 2g (30%)", _press(main._camp, "Sell 2g") and supplies.gold == 4)
+	check("sell it back for 2g (30%)", _trade(load("res://data/gear/plain_knife.tres"),"right") and supplies.gold == 4)
 
 	# Stash: gold stays safe through a wipe.
 	await _open("rest")

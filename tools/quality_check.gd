@@ -77,7 +77,7 @@ func _initialize() -> void:
 	check("the card frames a worn trinket", card_frames.any(func(c): return c.get_meta("tier") == "magic"))
 	main._chest.open("A test chest", {_item("small_reliquary"): 1, _item("ration"): 1}, ps)
 	await process_frame
-	var tiles: Array = main._chest._chest_grid.get_children().filter(func(t): return t.has_meta("tier"))
+	var tiles: Array = main._chest._chest_grid.find_children("*", "PanelContainer", true, false).filter(func(t): return t.has_meta("tier"))
 	check("a chest frames its rare find, not the ration", tiles.size() == 1 and tiles[0].get_meta("tier") == "rare")
 	if dir != "":
 		for i in 4:

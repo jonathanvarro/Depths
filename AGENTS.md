@@ -278,8 +278,12 @@ Templates > Download and Install; already installed on the owner's PC).
   `_grant_xp`. EnemyType `threat`. Armour (#93): Equipment `slot`, `armour`,
   `initiative_penalty`, `force`, `light`; Companion `body`.
   `tools/progression_check.gd`.
-- `scripts/chest_screen.gd` – chest window beside the pack: drag (set_drag_
-  forwarding), tap, or the take-all icon button; `took` signal.
+- `scripts/chest_screen.gd` + `scripts/merchant_screen.gd` share
+  `scripts/kit_exchange.gd`: canvas loot/stock left, physical backpack right,
+  pinned inspection and explicit Take/Leave/Buy/Sell. Chest drag and Take All,
+  real capacity/overflow, current merchant stock/prices, unloading and charity
+  remain. Escape clears inspection, then closes. Handoff and review:
+  `docs/loot-and-merchant-kit.md` (#155). `took`/`closed` remain the chest API.
 - `scripts/pack_screen.gd` + `scripts/kit_bag.gd` – live combined Field kit:
   Equipment/Status left, shared physical backpack right, pinned inspection below,
   real stack/capacity pages and explicit actions. Open with the backpack or I/B.

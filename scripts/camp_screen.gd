@@ -34,6 +34,7 @@ const NEWS_ICON := preload("res://art/ui/controls-v1/news.svg")
 const Quests := preload("res://scripts/quests.gd")
 const Progression := preload("res://scripts/progression.gd")
 const Sounds := preload("res://scripts/sounds.gd")
+const MerchantScreen := preload("res://scripts/merchant_screen.gd")
 var _ambience: AudioStreamPlayer
 
 var content: Control  # main.gd keeps this inside the safe area
@@ -57,6 +58,7 @@ var _scroll: ScrollContainer
 var _body: VBoxContainer
 var _back: Button
 var _current := ""
+var _merchant_view: Control
 var _last_site := ""
 var _save_button: Button
 var _settings_button: Button
@@ -135,6 +137,9 @@ func _init() -> void:
 	gear.pressed.connect(func(): open_settings.emit())
 	_canvas.add_child(gear)
 	_build_activity()
+	_merchant_view = MerchantScreen.new()
+	content.add_child(_merchant_view)
+	_merchant_view.closed.connect(_close_activity)
 	_note = _label("", ACTION, 14, AMBER)
 	_note.position = Vector2(0, 150)
 	_note.size = Vector2(CANVAS.x, 24)
@@ -347,6 +352,7 @@ func _build_activity() -> void:
 
 func open_activity(id: String) -> void:
 	if not _sites.has(id) or _camp==null or not _camp.site_present(id):return
+	if id!="supplies":_merchant_view.hide()
 	_current = id
 	if _note_tween:
 		_note_tween.kill()
@@ -369,6 +375,7 @@ func open_activity(id: String) -> void:
 func _close_activity() -> void:
 	_current = ""
 	_activity.visible = false
+	_merchant_view.hide()
 	_update_site_art()
 	_day_label.text = _status() if _camp else ""
 	if visible:_focus_available.call_deferred(_last_site)
@@ -382,6 +389,10 @@ func _refresh_activity() -> void:
 	if _current=="supplies":
 		_activity_title.text="Merchant caravan · Unloading" if _camp.merchant_unloading else _sites.supplies.label
 	_day_label.text = _status()
+	if _current=="supplies":
+		_activity.visible=false
+		_merchant()
+		return
 	for child in _body.get_children():
 		_body.remove_child(child)
 		child.queue_free()
@@ -415,40 +426,10 @@ func _talk_row() -> void:
 
 ## The merchant (#42): buy supplies and the lantern, sell treasure and gear.
 func _merchant() -> void:
-	if _camp.merchant_unloading:
-		_text("\"Careful with that chest! The shop opens when I've finished unloading.\"")
-		_text("Caravan unloading. Trading is not available yet.", AMBER)
+	if not _merchant_view.visible:
+		_merchant_view.open(_camp,_party)
 	else:
-		_text("\"Back again, and still breathing. Good for business. What'll it be?\"")
-	if _camp.needs_charity(_party):
-		_text("He looks at your empty hands and sighs. \"Two torches. On account.\"", AMBER)
-		var charity := _button("Take two torches")
-		charity.pressed.connect(func():
-			_camp.give_charity(_party)
-			_refresh_activity())
-		_body.add_child(charity)
-	# Existing emergency torches remain possible; these are not a trade.
-	if _camp.merchant_unloading:return
-	_body.add_child(_label("Buy", HEADING, 16, TEXT))
-	if not _party.supplies.has_lantern:
-		_shop_row("Lantern: brighter than a torch, burns oil. Yours to keep.", CampState.LANTERN_PRICE, func(): _camp.buy_lantern(_party), LANTERN_ICON)
-	for item: SupplyItem in CampState.MERCHANT_STOCK:
-		if item.effect == SupplyItem.Effect.REFILL_LANTERN and not _party.supplies.has_lantern:
-			continue  # oil is for lantern owners
-		var held: int = _party.supplies.count(item)
-		_shop_row("%s (you have %d)" % [item.display_name, held], item.price, _camp.buy.bind(_party, item), item.icon, _party.supplies.room_for(item) > 0)
-	var selling := false
-	for item: SupplyItem in _party.supplies.items:
-		if item.effect == SupplyItem.Effect.TREASURE and _party.supplies.count(item) > 0:
-			if not selling:
-				_body.add_child(_label("Sell", HEADING, 16, TEXT))
-				selling = true
-			_sell_row("%s ×%d" % [item.display_name, _party.supplies.count(item)], CampState.sale_price(item), _camp.sell.bind(_party, item), item.icon, Quality.tier_of(item))
-	for item: Equipment in _party.supplies.gear:
-		if not selling:
-			_body.add_child(_label("Sell", HEADING, 16, TEXT))
-			selling = true
-		_sell_row(item.display_name, CampState.sale_price(item), _camp.sell_gear.bind(_party, item), item.icon, Quality.tier_of(item))
+		_merchant_view.refresh()
 
 
 ## The apprentice smith (#42): plain gear into the pack (equip it there).

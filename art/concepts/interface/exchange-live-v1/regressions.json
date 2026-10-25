@@ -1,0 +1,59 @@
+{
+  "date": "2026-10-25",
+  "engine": "4.7.2",
+  "renderer": "Mobile",
+  "shape": "1278x590 phone",
+  "assertions": 163,
+  "runs": [
+    {
+      "name": "gold_check",
+      "assertions": 24,
+      "failures": 0,
+      "script_errors": 0,
+      "private_save": true,
+      "log_sha256": "3ecdf70a06fb1541c1133045189b5c32d35de8a65f0b8ffdb73086c429789c0a"
+    },
+    {
+      "name": "camp_check",
+      "assertions": 29,
+      "failures": 0,
+      "script_errors": 0,
+      "private_save": true,
+      "log_sha256": "f38f4c016e071e9f0a5c73d3e83a761733941637ea0b16ea959558f94d57bb79"
+    },
+    {
+      "name": "small_items_check",
+      "assertions": 22,
+      "failures": 0,
+      "script_errors": 0,
+      "private_save": true,
+      "log_sha256": "696e42657eff180390286d8b9175d297fc4d8e73fea74b6bf87e8fe1aed25f00"
+    },
+    {
+      "name": "boons_check",
+      "assertions": 40,
+      "failures": 0,
+      "script_errors": 0,
+      "private_save": true,
+      "log_sha256": "3a536fe2c5f16147c397ebc7035a7475996dc7a7277548c63428217e28974fe9"
+    },
+    {
+      "name": "quality_check",
+      "assertions": 15,
+      "failures": 0,
+      "script_errors": 0,
+      "private_save": true,
+      "log_sha256": "b66dd350de73edcb4ada5f5ab156259f5682afa0adcbde11e0f1f7a575419ca6"
+    },
+    {
+      "name": "opening",
+      "assertions": 33,
+      "failures": 0,
+      "script_errors": 0,
+      "private_save": true,
+      "log_sha256": "4ba1782b467ba0d545d04e78fa7814afa2cdfc99cb12ee8e1b67addaf43a08f3"
+    }
+  ],
+  "shutdown_warnings": "Existing full-game harnesses retain RIDs/objects/resources on shutdown. Isolated exchange fixture exits cleanly.",
+  "physical_iPhone": false
+}

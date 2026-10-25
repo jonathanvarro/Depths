@@ -1,270 +1,110 @@
-extends Control
-## An opened chest beside the pack (#69): drag an item from the chest into
-## the pack, tap it to move it, or use the take-all button (an icon) to
-## move everything. Closing leaves anything not taken behind.
-##
-## The pack has room for so much (#133): what doesn't fit stays in the
-## chest, and tapping something in the pack leaves a stack of it here (the
-## part-full one first), freeing a slot.
-
-signal closed
-## An item was moved into the pack.
-## `item` is a SupplyItem, or spare gear (an Equipment) that didn't fit.
-signal took(item, quantity: int)
-
-const COLOR_TEXT := Color("e8d9b0")
-const COLOR_DIM_TEXT := Color(0.85, 0.8, 0.7, 0.65)
-const TILE_SIZE := Vector2(120, 120)
-const Quality := preload("res://scripts/quality.gd")
-
-var content: MarginContainer  # main.gd keeps this inside the safe area
-## What's still in the chest: SupplyItem -> quantity.
-var contents := {}
-
-var _party  # party_state.gd
-var _title: Label
-var _chest_grid: GridContainer
-var _pack_grid: GridContainer
-var _pack_panel: PanelContainer
-var _take_all: Button
-var _pack_heading: Label
-
+extends "res://scripts/kit_exchange.gd"
+## Loot left, the real physical backpack right; explicit moves and drag transfer.
+signal took(item,quantity:int)
+var contents:Dictionary={}
+var _party
+var _chest_grid:GridContainer
+var _pack_grid:Control
+var _pack_panel:Control
+var _pack_heading:Label
 
 func _init() -> void:
-	_build()
-	visible = false
+	super()
+	_chest_grid=_left_grid;_pack_grid=_bag;_pack_panel=_bag_panel;_pack_heading=_space
+	requested.connect(func(entry:Dictionary,side:String):
+		if side=="left":take(entry.item)
+		else:put_back(entry.item))
+	take_all_requested.connect(take_all)
+	visible=false
 
+func open(title:String,items:Dictionary,party_state) -> void:
+	if _party and _party.supplies.changed.is_connected(_request_refresh):
+		_party.supplies.changed.disconnect(_request_refresh)
+	_party=party_state
+	_party.supplies.changed.connect(_request_refresh)
+	contents=items.duplicate()
+	_title.text=title
+	_left_title.text="Contents";_empty.text="Empty"
+	_bag_page=0;clear_inspection()
+	visible=true;refresh()
 
-func open(title: String, items: Dictionary, party_state) -> void:
-	_party = party_state
-	contents = items.duplicate()
-	_title.text = title
-	visible = true
-	refresh()
-
+func _request_refresh() -> void:
+	refresh.call_deferred()
 
 func is_empty() -> bool:
-	return contents.values().all(func(n): return n <= 0)
-
+	return contents.values().all(func(n):return n<=0)
 
 func take(item) -> void:
-	var quantity: int = contents.get(item, 0)
-	if quantity <= 0:
-		return
-	if item is Equipment:  # spare gear: a slot of its own, if there's one
-		if not _party.supplies.has_room_for_gear():
-			return
-		_party.supplies.gear.append(item)
+	var quantity:int=contents.get(item,0)
+	if quantity<=0:return
+	if item is Equipment:
+		var fits:=0
+		while fits<quantity and _party.supplies.has_room_for_gear():
+			_party.supplies.gear.append(item);fits+=1
+		if fits==0:return
+		if fits==quantity:contents.erase(item)
+		else:contents[item]=quantity-fits
 		_party.supplies.changed.emit()
-		contents.erase(item)
-		took.emit(item, 1)
-		refresh()
-		return
-	var fits: int = _party.supplies.add_what_fits(item, quantity)
-	if fits >= quantity:
-		contents.erase(item)
+		took.emit(item,fits)
 	else:
-		contents[item] = quantity - fits
-	if fits > 0:
-		took.emit(item, fits)
+		var fits:int=_party.supplies.add_what_fits(item,quantity)
+		if fits>=quantity:contents.erase(item)
+		else:contents[item]=quantity-fits
+		if fits>0:took.emit(item,fits)
 	refresh()
 
-
-## Leaves a stack of `item` here (or a piece of spare gear), to free a slot.
 func put_back(item) -> void:
 	if item is Equipment:
 		if item in _party.supplies.gear:
 			_party.supplies.gear.erase(item)
 			_party.supplies.changed.emit()
-			contents[item] = 1
-			refresh()
-		return
-	var stack: int = item.stack_size()
-	var held: int = _party.supplies.count(item)
-	var dropped: int = _party.supplies.drop(item, held % stack if held % stack != 0 else stack)
-	if dropped > 0:
-		contents[item] = contents.get(item, 0) + dropped
-		refresh()
-
+			contents[item]=contents.get(item,0)+1
+	else:
+		var held:int=_party.supplies.count(item)
+		var stack:int=item.stack_size()
+		var dropped:int=_party.supplies.drop(item,held%stack if held%stack!=0 else stack)
+		if dropped>0:contents[item]=contents.get(item,0)+dropped
+	refresh()
 
 func take_all() -> void:
-	for item in contents.keys():
-		take(item)
-
+	for item in contents.keys():take(item)
 
 func refresh() -> void:
-	for child in _chest_grid.get_children():
-		child.queue_free()
-	for child in _pack_grid.get_children():
-		child.queue_free()
+	if _party==null or not visible:return
+	var supplies=_party.supplies
+	var left:Array[Dictionary]=[]
 	for item in contents:
-		if contents[item] > 0:
-			_chest_grid.add_child(_tile(item, contents[item], true))
-	if is_empty():
-		_chest_grid.add_child(_label("Empty.", 20, COLOR_DIM_TEXT))
-	for item: SupplyItem in _party.supplies.items:
-		if _party.supplies.count(item) > 0:
-			_pack_grid.add_child(_tile(item, _party.supplies.count(item), false))
-	for item: Equipment in _party.supplies.gear:
-		_pack_grid.add_child(_tile(item, 1, false))
-	_take_all.disabled = is_empty()
-	_take_all.get_child(0).queue_redraw()
-	var supplies = _party.supplies
-	if supplies.is_limited():
-		var full: bool = supplies.slots_used() >= supplies.capacity
-		_pack_heading.text = "Your pack · %d/%d" % [supplies.slots_used(), supplies.capacity] + ("  ·  full: tap a stack to leave it" if full and not is_empty() else "")
-	else:
-		_pack_heading.text = "Your pack"
+		var count:int=contents[item]
+		if count<=0:continue
+		var fits:int=mini(count,maxi(0,supplies.capacity-supplies.slots_used())) if item is Equipment and supplies.is_limited() else (count if item is Equipment else mini(count,supplies.room_for(item)))
+		left.append({"key":item,"item":item,"count":count,"action":"Take %d" % fits if fits>1 else "Take","kind":"take","reason":"Your pack is full" if fits<=0 else "","info":"%d available · %d fit" % [count,fits] if fits>0 and fits<count else ""})
+	var bag:=inventory(supplies)
+	for entry in bag:
+		var item:Resource=entry.item
+		var held:int=supplies.count(item) if item is SupplyItem else 1
+		var count:int=(held%item.stack_size() if held%item.stack_size()!=0 else item.stack_size()) if item is SupplyItem else 1
+		entry.action="Leave %d" % count if count>1 else "Leave"
+		entry.kind="leave"
+		entry.reason="The open flask stays with the lantern" if entry.get("open_flask",false) else ""
+		entry.info="Leaves the part-full stack first" if item is SupplyItem and held>item.stack_size() and held%item.stack_size()!=0 else ""
+	set_view(left,bag,supplies.slots_used(),supplies.capacity,supplies.gold)
+	_take_all.disabled=not left.any(func(e):return e.reason=="")
+	for button:Button in _left_grid.get_children():
+		var item:Resource=button.get_meta("item")
+		button.set_drag_forwarding(func(_at):return _start_drag(item),Callable(),Callable())
+	_bag_panel.set_drag_forwarding(Callable(),_can_drop_on_pack,_drop_on_pack)
+	_bag.set_drag_forwarding(Callable(),_can_drop_on_pack,_drop_on_pack)
+	for button:Button in _bag.slots:
+		button.set_drag_forwarding(Callable(),_can_drop_on_pack,_drop_on_pack)
 
-
-func _tile(item, quantity: int, in_chest: bool) -> Control:
-	var tile := Button.new()
-	tile.custom_minimum_size = TILE_SIZE
-	tile.focus_mode = Control.FOCUS_ALL
-	tile.tooltip_text = "%s\n%s" % [item.display_name, item.description]
-	tile.icon = item.icon
-	tile.expand_icon = true
-	tile.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	tile.vertical_icon_alignment = VERTICAL_ALIGNMENT_TOP
-	tile.text = "%s ×%d" % [item.display_name, quantity]
-	tile.add_theme_font_size_override("font_size", 15)
-	tile.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	tile.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	Quality.apply_to_button(tile, Quality.tier_of(item))  # its quality's border
-	if in_chest:
-		tile.pressed.connect(take.bind(item))  # tap to take
-		tile.set_drag_forwarding(func(_at): return _start_drag(item), Callable(), Callable())
-	else:
-		tile.mouse_filter = Control.MOUSE_FILTER_PASS  # drops land on the pack panel
-		tile.tooltip_text += "
-Tap to leave a stack here."
-		tile.pressed.connect(put_back.bind(item))
-	return tile
-
-
-func _start_drag(item: SupplyItem) -> Variant:
-	var preview := TextureRect.new()
-	preview.texture = item.icon
-	preview.custom_minimum_size = Vector2(72, 72)
-	preview.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	preview.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	preview.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	preview.modulate.a = 0.85
+func _start_drag(item:Resource) -> Variant:
+	if contents.get(item,0)<=0:return null
+	var preview:=_icon(item.icon,Vector2(72,72));preview.modulate.a=0.85
 	set_drag_preview(preview)
-	return {"chest_item": item}
+	return {"chest_item":item}
 
+func _can_drop_on_pack(_at:Vector2,data:Variant) -> bool:
+	return data is Dictionary and data.has("chest_item") and contents.get(data.chest_item,0)>0
 
-func _can_drop_on_pack(_at: Vector2, data: Variant) -> bool:
-	return data is Dictionary and data.has("chest_item")
-
-
-func _drop_on_pack(_at: Vector2, data: Variant) -> void:
-	take(data["chest_item"])
-
-
-func _build() -> void:
-	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	mouse_filter = Control.MOUSE_FILTER_STOP
-	var shade := ColorRect.new()
-	shade.color = Color(0.03, 0.03, 0.03, 0.92)
-	shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	add_child(shade)
-	content = MarginContainer.new()
-	content.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	for side in ["left", "top", "right", "bottom"]:
-		content.add_theme_constant_override("margin_" + side, 32)
-	add_child(content)
-	var column := VBoxContainer.new()
-	column.add_theme_constant_override("separation", 14)
-	content.add_child(column)
-
-	var header := HBoxContainer.new()
-	column.add_child(header)
-	_title = _label("Chest", 30, COLOR_TEXT)
-	_title.theme_type_variation = "PageTitle"  # Cinzel heading (#51)
-	_title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	header.add_child(_title)
-	var close := Button.new()
-	close.text = "Close"
-	close.custom_minimum_size = Vector2(120, 52)
-	close.focus_mode = Control.FOCUS_ALL
-	close.add_theme_font_size_override("font_size", 20)
-	close.pressed.connect(func(): closed.emit())
-	header.add_child(close)
-	visibility_changed.connect(func():
-		if visible: close.grab_focus())
-
-	var sides := HBoxContainer.new()
-	sides.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	sides.add_theme_constant_override("separation", 16)
-	column.add_child(sides)
-	var chest_panel := _panel("In the chest")
-	sides.add_child(chest_panel)
-	_chest_grid = chest_panel.get_meta("grid")
-
-	# Take all: an arrow sweeping into the pack, drawn as an icon.
-	var middle := CenterContainer.new()
-	sides.add_child(middle)
-	_take_all = Button.new()
-	_take_all.custom_minimum_size = Vector2(88, 88)
-	_take_all.focus_mode = Control.FOCUS_ALL
-	_take_all.tooltip_text = "Take everything"
-	_take_all.pressed.connect(take_all)
-	var glyph := Control.new()
-	glyph.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	glyph.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	glyph.draw.connect(_draw_take_all.bind(glyph))
-	_take_all.add_child(glyph)
-	middle.add_child(_take_all)
-
-	_pack_panel = _panel("Your pack")
-	_pack_panel.set_drag_forwarding(Callable(), _can_drop_on_pack, _drop_on_pack)
-	sides.add_child(_pack_panel)
-	_pack_grid = _pack_panel.get_meta("grid")
-	_pack_heading = _pack_panel.get_meta("heading")
-
-
-## Two chevrons pointing right, into an open pack.
-func _draw_take_all(glyph: Control) -> void:
-	var c := glyph.size / 2.0
-	var color := COLOR_TEXT if not _take_all.disabled else Color(COLOR_TEXT, 0.35)
-	for dx in [-22.0, -6.0]:
-		glyph.draw_polyline(PackedVector2Array([c + Vector2(dx, -14), c + Vector2(dx + 12, 0), c + Vector2(dx, 14)]), color, 5.0)
-	var bag := Rect2(c + Vector2(10, -12), Vector2(20, 26))
-	glyph.draw_rect(bag, color, false, 4.0)
-	glyph.draw_line(bag.position + Vector2(4, 0), bag.position + Vector2(4, -6), color, 3.0)
-	glyph.draw_line(bag.position + Vector2(16, 0), bag.position + Vector2(16, -6), color, 3.0)
-
-
-func _panel(heading: String) -> PanelContainer:
-	var panel := PanelContainer.new()
-	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.08, 0.065, 0.05, 0.9)
-	style.border_color = Color(0.35, 0.27, 0.18, 0.9)
-	style.set_border_width_all(1)
-	style.set_content_margin_all(12)
-	panel.add_theme_stylebox_override("panel", style)
-	var column := VBoxContainer.new()
-	column.add_theme_constant_override("separation", 10)
-	column.mouse_filter = Control.MOUSE_FILTER_PASS
-	panel.add_child(column)
-	var title := _label(heading, 22, COLOR_TEXT)
-	column.add_child(title)
-	panel.set_meta("heading", title)
-	var grid := GridContainer.new()
-	grid.columns = 3
-	grid.mouse_filter = Control.MOUSE_FILTER_PASS
-	grid.add_theme_constant_override("h_separation", 10)
-	grid.add_theme_constant_override("v_separation", 10)
-	column.add_child(grid)
-	panel.set_meta("grid", grid)
-	return panel
-
-
-func _label(text: String, size: int, color: Color) -> Label:
-	var label := Label.new()
-	label.text = text
-	label.add_theme_font_size_override("font_size", size)
-	label.add_theme_color_override("font_color", color)
-	return label
+func _drop_on_pack(at:Vector2,data:Variant) -> void:
+	if _can_drop_on_pack(at,data):take(data.chest_item)

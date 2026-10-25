@@ -2098,7 +2098,7 @@ func _offer_overflow() -> void:
 ## player can leave something else instead. Whatever stays is left behind.
 func _offer_no_room(finds: Dictionary) -> void:
 	_chest.open("No room in your pack", finds, _party_state)
-	_tip("pack_full", "Your pack is full. Tap a stack in your pack to leave it here and make room, or close to leave these behind. A backpack adds space; a limp takes some away.")
+	_tip("pack_full", "Your pack is full. Select a stack in your pack, then choose Leave to make room, or close to leave these finds behind. A backpack adds space; a limp takes some away.")
 	await _chest.closed
 	_chest.visible = false
 
@@ -2109,7 +2109,7 @@ func _open_opening_chest(cell: Vector2i) -> void:
 	_chest.open("A battered chest", OPENING_CHEST, _party_state)
 	Sounds.play(self, "chest")
 	_say("chest", true)
-	_show_hint("Drag or tap items into your pack.", "chest_take")
+	_show_hint("Select an item and choose Take, drag it into your pack, or take everything with the arrow.", "chest_take")
 	await _chest.closed
 	_chest.visible = false
 	_party.locked = false

@@ -205,7 +205,8 @@ func _initialize() -> void:
 	check("finds that don't fit are offered, not lost silently", not result["no_room"].is_empty(), str(result["no_room"]))
 	main._offer_no_room(result["no_room"])
 	await process_frame
-	check("...beside the pack, to swap", main._chest.visible and main._chest._pack_heading.text.contains("full"))
+	main._chest.select_item(result["no_room"].keys()[0],"left")
+	check("...beside the pack, to swap", main._chest.visible and main._chest._bag.is_visible_in_tree() and main._chest._primary.disabled)
 	var leftover: SupplyItem = result["no_room"].keys()[0]
 	main._chest.put_back(torch)
 	main._chest.take(leftover)
