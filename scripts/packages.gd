@@ -24,9 +24,31 @@ static func library() -> Array[QuestPackage]:
 ## Packages the story wants on floor `depth` right now.
 static func active(camp, depth: int) -> Array[QuestPackage]:
 	return library().filter(func(p: QuestPackage):
-		return depth >= p.min_depth and depth <= p.max_depth \
+		return p.lair == "" and depth >= p.min_depth and depth <= p.max_depth \
 				and Quests.stage(camp, p.quest) in p.stages \
 				and not Array(p.unless_flags).any(func(f): return Quests.has_flag(camp, p.quest, f)))
+
+
+## How often a floor that can hold a mini-boss lair has one (#145).
+const LAIR_CHANCE := 0.5
+
+## This floor's mini-boss lair, if the dice give it one (#145): [] or one
+## package. A new site seed each day re-rolls it.
+static func lairs(depth: int, seed_value: int) -> Array[QuestPackage]:
+	var rng := RandomNumberGenerator.new()
+	rng.seed = seed_value
+	var fitting := library().filter(func(p: QuestPackage): return p.lair != "" and depth >= p.min_depth and depth <= p.max_depth)
+	var out: Array[QuestPackage] = []
+	if not fitting.is_empty() and rng.randf() < LAIR_CHANCE:
+		out.append(fitting[rng.randi_range(0, fitting.size() - 1)])
+	return out
+
+
+static func find(id: String) -> QuestPackage:
+	for package in library():
+		if package.id == id:
+			return package
+	return null
 
 
 ## Stamps `packages` into `layout`. Returns {"layout", "events": {cell:
@@ -39,7 +61,7 @@ static func place(layout: PackedStringArray, packages: Array, seed_value: int, a
 	var rows := Array(layout)
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed_value
-	var out := {"events": {}, "fights": {}, "placed": [], "failed": []}
+	var out := {"events": {}, "fights": {}, "lairs": {}, "placed": [], "failed": []}
 	for package: QuestPackage in packages:
 		var spots := _spots(rows, package)
 		if spots.is_empty():
@@ -57,11 +79,12 @@ static func place(layout: PackedStringArray, packages: Array, seed_value: int, a
 			if avoid.any(func(c): return area.has_point(c)):
 				continue  # not right against the queen's hall
 			var trial := rows.duplicate()
-			var found := {"events": {}, "fights": {}}
+			var found := {"events": {}, "fights": {}, "lairs": {}}
 			if _stamp(trial, package, at, found, avoid, join):
 				rows.assign(trial)
 				out["events"].merge(found["events"])
 				out["fights"].merge(found["fights"])
+				out["lairs"].merge(found["lairs"])
 				placed = true
 		if not placed:
 			out["failed"].append(package.id)
@@ -115,6 +138,8 @@ static func _stamp(rows: Array, package: QuestPackage, at: Vector2i, out: Dictio
 				symbol = KIND_SYMBOL.get(event.kind, "C")
 			elif symbol == "E":
 				out["fights"][cell] = package.fight
+				if package.lair != "":
+					out["lairs"][cell] = package.id
 			_put(rows, cell, symbol)
 			if symbol == "." and (x == 0 or y == 0 or x == w - 1 or y == h - 1):
 				entrances.append(cell)

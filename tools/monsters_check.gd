@@ -269,6 +269,14 @@ func _initialize() -> void:
 	fight.enemy_act(captain)
 	check("...bracing its ally", fight.foes[1].shielded and captain.intent == CS.Intent.HEAVY)
 
+	# A fight set up for its floor keeps each pattern's opening move (#145):
+	# planning twice used to skip it.
+	party = _party(["mara", "corin"])
+	fight = _fight(party, ["gate_captain", "broodmother", "hollow_miner", "goblin_brute"])
+	fight.prepare(3)
+	var opening: Array = fight.foes.map(func(f): return f.intent)
+	check("after setting up: captain rallies, Broodmother calls, miner grabs, brute swings", opening == [CS.Intent.RALLY, CS.Intent.BROOD, CS.Intent.GRAB, CS.Intent.SWING], str(opening))
+
 	# Where they turn up.
 	var main_script = load("res://scripts/main.gd")
 	var groups: Dictionary = main_script.ENCOUNTER_GROUPS
@@ -278,7 +286,8 @@ func _initialize() -> void:
 	check("the brute on floors 3-4", on.call(3, "goblin_brute") and on.call(4, "goblin_brute") and not on.call(2, "goblin_brute"))
 	check("breach creatures on floor 3, not in the fortress", on.call(3, "gas_bloat") and on.call(3, "hollow_miner") and not on.call(4, "hollow_miner"))
 	check("beetles and trappers from floor 2; hounds and lamp-eaters on 3", on.call(2, "rock_beetle") and on.call(2, "goblin_trapper") and on.call(3, "breach_hound") and on.call(3, "lamp_eater") and not on.call(2, "breach_hound"))
-	check("the Broodmother on floors 2-3; the gate captain on 3-4", on.call(2, "broodmother") and on.call(3, "broodmother") and on.call(4, "gate_captain") and not on.call(4, "broodmother"))
+	# They wait in lairs instead (#145): see lairs_check.gd.
+	check("the Broodmother and the gate captain are in no ordinary fight", [1, 2, 3, 4].all(func(f): return not on.call(f, "broodmother") and not on.call(f, "gate_captain")))
 
 	# In the game: a fight with all four, on their placeholders.
 	var main = main_script.new() if false else load("res://scenes/main.tscn").instantiate()

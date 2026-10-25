@@ -167,8 +167,7 @@ const ENCOUNTER_GROUPS := {
 	2: [[GREAT_RAT], [GOBLIN], [GOBLIN, RAT], [SPIDER, SPIDER], [GOBLIN, SPIDER], [WEBSPINNER, GOBLIN],
 			[GREAT_RAT, SPIDER], [GREAT_RAT, SPIDER, RAT], [GOBLIN, RAT, RAT], [GOBLIN, SPIDER, RAT],
 			[GOBLIN, GOBLIN, RAT], [GOBLIN, GOBLIN, SPIDER], [BAT, GOBLIN], [BAT, BAT, SPIDER],
-			[BEETLE], [BEETLE, RAT], [BEETLE, SPIDER, RAT], [VENOM_SPIDER, GOBLIN], [TRAPPER, GOBLIN], [TRAPPER, GOBLIN, RAT],
-			[BROODMOTHER]],  # rare: one group in many
+			[BEETLE], [BEETLE, RAT], [BEETLE, SPIDER, RAT], [VENOM_SPIDER, GOBLIN], [TRAPPER, GOBLIN], [TRAPPER, GOBLIN, RAT]],
 	3: [[GOBLIN], [GOBLIN, ARCHER], [GOBLIN, DRUMMER],
 			[GOBLIN, GOBLIN, ARCHER], [GOBLIN, WEBSPINNER, GOBLIN], [GOBLIN, GOBLIN, DRUMMER], [GUARD, GOBLIN, ARCHER],
 			[GOBLIN, ARCHER, DRUMMER], [GUARD, GOBLIN, GOBLIN],
@@ -177,13 +176,14 @@ const ENCOUNTER_GROUPS := {
 			[BRUTE], [BRUTE, ARCHER], [BRUTE, GOBLIN, DRUMMER], [MINER], [MINER, BLOAT], [MINER, MINER],
 			[BLOAT, GOBLIN, ARCHER], [BLOAT, BLOAT, MINER],
 			[TRAPPER, GOBLIN, GOBLIN], [VENOM_SPIDER, GOBLIN, ARCHER], [LAMP_EATER, MINER], [LAMP_EATER, BLOAT, MINER],
-			[HOUND, HOUND], [HOUND, HOUND, LAMP_EATER], [HOUND, HOUND, HOUND],
-			[CAPTAIN, GOBLIN, ARCHER], [BROODMOTHER, SPIDER]],  # the captain and the Broodmother are rare
+			[HOUND, HOUND], [HOUND, HOUND, LAMP_EATER], [HOUND, HOUND, HOUND]],
 	4: [[GOBLIN], [GOBLIN, ARCHER], [GUARD, GOBLIN], [GUARD, ARCHER], [GOBLIN, GOBLIN, ARCHER],
 			[GUARD, GOBLIN, ARCHER], [GUARD, GOBLIN, GOBLIN], [GUARD, DRUMMER, GOBLIN], [GUARD, GUARD, ARCHER, GOBLIN],
 			[BRUTE, GUARD], [BRUTE, ARCHER, GOBLIN], [BRUTE, GOBLIN, DRUMMER],
-			[TRAPPER, GUARD, GOBLIN], [CAPTAIN, GUARD, ARCHER]],
+			[TRAPPER, GUARD, GOBLIN]],
 }
+## The Broodmother and the gate captain aren't in these tables: they wait
+## in optional lairs instead (#145, data/packages/lair_*.tres).
 ## Full parties meet groups close to their size (#49): never more enemies
 ## than heroes standing, except one extra for a full party on the deepest
 ## floors; and groups of at least (heroes - 1) when there are any.
@@ -338,6 +338,7 @@ var _message_label: Label
 var _message_tween: Tween
 var _prompt: Control
 var _prompt_label: Label
+var _prompt_buttons: Array[Button] = []  # yes, then no
 var _prompt_action := Callable()
 var _prompt_no_action := Callable()
 var _pack: Control  # pack_screen.gd
@@ -563,7 +564,8 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 		if not avoid.is_empty():
 			var plain = DungeonMap.new(layout, depth)
 			join = plain.walking_distances(plain.find_content(DungeonMap.Content.STAIRS_UP))
-		var stamped: Dictionary = Packages.place(layout, Packages.active(_camp_state, depth) if not _in_opening else [], _site_seed + depth * 7919 + 13, avoid, join)
+		var wanted: Array = [] if _in_opening else Packages.active(_camp_state, depth) + Packages.lairs(depth, _site_seed + depth * 7919 + 29)
+		var stamped: Dictionary = Packages.place(layout, wanted, _site_seed + depth * 7919 + 13, avoid, join)
 		_floors[depth] = DungeonMap.new(stamped["layout"], depth)
 		_floors[depth].marks = marks
 		_assign_events(_floors[depth])
@@ -571,6 +573,7 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 			_floors[depth].events[cell] = stamped["events"][cell]
 		_floors[depth].fight_groups = stamped["fights"]
 		_floors[depth].packages = stamped["placed"]
+		_floors[depth].lairs = stamped["lairs"]
 	_map = _floors[depth]
 
 	_build_level()
@@ -646,6 +649,11 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 		return
 	# A fight fills its room: entering any part of it starts the fight.
 	var fight_cell: Vector2i = _map.encounter_zones.get(cell, Vector2i(-1, -1))
+	if fight_cell != Vector2i(-1, -1) and not _map.triggered.has(fight_cell) and _map.lairs.has(fight_cell):
+		var lair: QuestPackage = Packages.find(_map.lairs[fight_cell])
+		if lair:  # a mini-boss's lair (#145): warned, and free to back away
+			_ask(lair.warning, _lair_fight.bind(fight_cell, lair), _step_back, ["Go in", "Back away"])
+			return
 	if fight_cell != Vector2i(-1, -1) and not _map.triggered.has(fight_cell):
 		_map.enter(fight_cell)
 		var fixed: Array[EnemyType] = []  # a quest package's own fight (#123)
@@ -775,6 +783,8 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 		await _spoils.play(spoils, _combat.last_blow, Settings.get_value("flashes"))
 	if result == CombatState.Result.VICTORY:
 		_trinket_drops(state)
+		if _fight_kind == "lair":
+			_lair_won()
 		await _offer_overflow()
 	await _stage.exit()  # the fog sinks back; the cave returns
 	_play_place_music()
@@ -1433,6 +1443,31 @@ func _queen_fight(cell: Vector2i) -> void:
 	var types: Array[EnemyType] = []
 	types.assign(QUEEN_FIGHT)
 	_start_combat(cell, types)
+
+
+## Into a mini-boss's lair (#145). A full party meets one more foe; one
+## or two heroes face the rest as it is.
+func _lair_fight(cell: Vector2i, lair: QuestPackage) -> void:
+	_map.enter(cell)
+	_fight_kind = "lair"
+	var types: Array[EnemyType] = []
+	types.assign(lair.fight)
+	if _party_state.living_members().size() >= PartyState.MAX_MEMBERS:
+		types.append_array(lair.full_party_extra)
+	_start_combat(cell, types)
+
+
+## A lair's hoard (#145): magic or rare gear for certain, and gold.
+const LAIR_GOLD := 10
+const LAIR_RARE_CHANCE := 0.25
+
+func _lair_won() -> void:
+	var bases := GearGen.bases()
+	var prize: Equipment = GearGen.make(bases[_rng.randi_range(0, bases.size() - 1)], "rare" if _rng.randf() < LAIR_RARE_CHANCE else "magic", _rng)
+	var gold := LAIR_GOLD + 5 * _depth
+	_party_state.supplies.gold += gold
+	_party_state.supplies.changed.emit()
+	_found_gear(prize, "Its hoard: %s, and %d gold." % [_a(prize.display_name.to_lower()), gold])
 
 
 ## Declined the hall: back out the way she came.
@@ -2843,8 +2878,11 @@ func _on_party_moved(cell: Vector2i, facing: int) -> void:
 
 
 ## Shows a yes/no question; `on_yes` runs if the player agrees, `on_no` if not.
-func _ask(question: String, on_yes: Callable, on_no := Callable()) -> void:
+## `answers`: the two buttons' words, yes first (a lair: "Go in", "Back away").
+func _ask(question: String, on_yes: Callable, on_no := Callable(), answers: Array = ["Go", "Stay"]) -> void:
 	_prompt_label.text = question
+	for i in _prompt_buttons.size():
+		_prompt_buttons[i].text = answers[i]
 	_prompt_action = on_yes
 	_prompt_no_action = on_no
 	_prompt.visible = true
@@ -3258,6 +3296,8 @@ func _build_prompt(ui: Control) -> void:
 	_prompt_label = Label.new()
 	_prompt_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_prompt_label.add_theme_font_size_override("font_size", 28)
+	_prompt_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART  # a lair's warning is long (#145)
+	_prompt_label.custom_minimum_size.x = 640
 	box.add_child(_prompt_label)
 	var buttons := HBoxContainer.new()
 	buttons.alignment = BoxContainer.ALIGNMENT_CENTER
@@ -3271,6 +3311,7 @@ func _build_prompt(ui: Control) -> void:
 		button.add_theme_font_size_override("font_size", 28)
 		button.pressed.connect(_answer_prompt.bind(spec[1]))
 		buttons.add_child(button)
+		_prompt_buttons.append(button)
 	_prompt = center
 	_prompt.visible = false
 

@@ -21,3 +21,11 @@ extends Resource
 @export var events: Array[RoomEvent] = []
 ## Who waits at its 'E'.
 @export var fight: Array[EnemyType] = []
+## A mini-boss lair (#145, owner 2026-10-25): placed by chance on about
+## half of its floors rather than by a quest; "brood" or "captain".
+@export var lair := ""
+## Said at the threshold, with Go in or Back away.
+@export_multiline var warning := ""
+## Joins the fight only when the whole party is there. The scaling is kept
+## light on purpose: adventuring solo should be high risk (owner).
+@export var full_party_extra: Array[EnemyType] = []

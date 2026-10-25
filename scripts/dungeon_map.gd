@@ -55,6 +55,8 @@ var event_flags := {}
 var fight_groups := {}
 ## Quest packages on this floor (#123): ids placed.
 var packages: Array = []
+## Mini-boss lairs (#145): the lair's 'E' cell -> its package id.
+var lairs := {}
 ## Floor-specific places, e.g. the fortress's "hall" and "gates" (#44).
 var marks := {}
 ## This floor's landmarks (#117, landmarks.gd): [{id, name, cells, centre, seen}].

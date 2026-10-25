@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="QuestPackage" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="1_diyjh"]
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="2_d7kyi"]
+[ext_resource type="Resource" path="res://data/enemies/broodmother.tres" id="3_a2gfl"]
+[ext_resource type="Resource" path="res://data/enemies/spider.tres" id="4_dpdfb"]
+[ext_resource type="Script" path="res://scripts/quest_package.gd" id="5_utk5t"]
+
+[resource]
+script = ExtResource("5_utk5t")
+id = "lair_brood"
+min_depth = 2
+max_depth = 3
+unless_flags = PackedStringArray()
+rows = PackedStringArray("#######", "#,,,,,#", "#,,E,,#", "#,,,,,#", "###.###")
+fight = Array[ExtResource("2_d7kyi")]([ExtResource("3_a2gfl")])
+lair = "brood"
+warning = "Thick webbing chokes the way ahead, and something large clicks in the dark beyond. A Broodmother's nest. Go in?"
+full_party_extra = Array[ExtResource("2_d7kyi")]([ExtResource("4_dpdfb")])

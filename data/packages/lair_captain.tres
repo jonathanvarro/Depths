@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="QuestPackage" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="1_5nf65"]
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="2_qrtip"]
+[ext_resource type="Resource" path="res://data/enemies/gate_captain.tres" id="3_hlfuf"]
+[ext_resource type="Resource" path="res://data/enemies/goblin.tres" id="4_qcgvs"]
+[ext_resource type="Resource" path="res://data/enemies/goblin_archer.tres" id="5_woal7"]
+[ext_resource type="Script" path="res://scripts/quest_package.gd" id="6_0d8q3"]
+
+[resource]
+script = ExtResource("6_0d8q3")
+id = "lair_captain"
+min_depth = 3
+max_depth = 4
+unless_flags = PackedStringArray()
+rows = PackedStringArray("#######", "#,,,,,#", "#,,E,,#", "#,,,,,#", "###.###")
+fight = Array[ExtResource("2_qrtip")]([ExtResource("3_hlfuf"), ExtResource("4_qcgvs")])
+lair = "captain"
+warning = "A goblin barricade, a horn hung on a spike, and a captain's growl behind it. A gate captain's post. Go in?"
+full_party_extra = Array[ExtResource("2_qrtip")]([ExtResource("5_woal7")])

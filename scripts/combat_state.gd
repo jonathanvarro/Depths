@@ -219,8 +219,10 @@ func prepare(depth: int, kind := "") -> void:
 			if made < MAX_ELITES.get(depth, 0) and rng.randf() < chance:
 				make_elite(foe, ELITES[rng.randi_range(0, ELITES.size() - 1)])
 				made += 1
-	for foe in foes:
-		plan(foe)
+	# Their first moves were planned when the fight was set up; planning
+	# again here skipped each pattern's opening (the Broodmother bit before
+	# calling her brood, the captain swung before rallying, #145). The order
+	# is rebuilt for a Swift elite.
 	_build_order()
 
 

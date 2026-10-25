@@ -530,8 +530,20 @@ Deeper floors mix them (depth 1 mostly single rats; depth 3 pairs and trios like
   - **Goblin trapper** (floors 2–4): lays a snare, so the caught hero acts last next round, then throws a knife that reaches the back row.
   - **Lamp-eater** (floor 3): drinks 12 oil, or 12 of a held torch's life. In the dark, it bites instead.
   - **Breach hound** (floor 3, in pairs or threes): goes for the weakest hero, and hits 1 harder while another hound stands.
-  - **Broodmother** (rare, floors 2–3): calls two hatchlings once, her bite poisons, and below half health she rages (+2 damage, applied once: #144).
-  - **Gate captain** (rare, floors 3–4): its horn braces an ally, then it winds up a heavy blow.
+  - **Broodmother** (a lair on floors 2–3, #145): calls two hatchlings once, her bite poisons, and below half health she rages (+2 damage, applied once: #144).
+  - **Gate captain** (a lair on floors 3–4, #145): its horn braces an ally, then it winds up a heavy blow.
+  - **Mini-boss lairs — owner decision 2026-10-25 (#145):**
+    - **Out of the random tables:** the Broodmother and the gate captain are no longer drawn in ordinary fights. Before, a lone hero met the Broodmother in a quarter of floor-2 fights, while a full party never did.
+    - **Where:** about half of floors 2–4 hold one lair, a side room stamped into rock like a quest package, so it's never on the only route to the stairs.
+      - A Broodmother nest on floors 2–3.
+      - A captain's post on floors 3–4.
+      - A new day's floor re-rolls the lairs, and a beaten lair stays beaten.
+    - **Warning:** its threshold warns, with **Go in** or **Back away**; backing away costs nothing.
+    - **Light scaling: adventuring solo should be high risk.**
+      - The Broodmother calls her two hatchlings whatever the party's size; a full party also meets a spider.
+      - The captain comes with a goblin; a full party also meets an archer.
+      - Lairs have no random elites.
+    - **Reward:** a win pays a magic weapon or armour (rare one time in four) and 10 + 5 × depth gold, besides the fight's usual XP and drops.
 - **Art:** ChatGPT's art (#141) is connected, including the special poses (the bat landed, the brute's wind-up and recovery, the bloat swelling and bursting, the miner's grab), the gas cloud, and the new intent and status icons.
 - **Elites and depth scaling — tuned 2026-10-21** (`CombatState.prepare`, shared by the game and the playtest bot):
   - **Depth:** foes on floor 3 have +10% health and damage, and floor 4 +20%, rounded. The queen and the guards she calls are included, so she has 38 health and 4–7 damage.
