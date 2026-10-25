@@ -1,0 +1,28 @@
+{
+  "issue": 154,
+  "date": "2026-10-25",
+  "tool": "built-in image_gen",
+  "id": "seated-gothic-v2",
+  "file": "art/concepts/vampire-queen-v1/vampire-queen-seated-v2.png",
+  "original_file": "C:/Users/jonat/.codex/generated_images/01a17504-97d9-7d31-8cae-390e4799a3c0/exec-87f5d659-d7b7-4b97-ba59-bb9598fed864.png",
+  "input_file": "art/concepts/vampire-queen-v1/vampire-queen.png",
+  "prompt": "Use case: identity-preserve. Standalone dark gothic fashion portrait for fun, not a game asset. Use the supplied painting as the character identity and painting-style reference. Depict the SAME unmistakably mature adult vampire queen, approximately 35\u201345 years old, copper-red voluminous swept curls, ivory skin, pointed ears, subtle small fangs, pearl earrings and garnet jewellery. Keep her bareheaded, no crown, tiara or franchise symbols. Recompose as an elegant three-quarter seated portrait in a weathered high-backed stone throne: she sits at a slight angle with a relaxed confident posture, one hand resting on the armrest and the other loosely holding the edge of her burgundy-lined velvet cloak. Her expression is knowingly alluring, poised and dangerous, looking toward the viewer. Costume: a daring black velvet evening gown, low sculpted sweetheart neckline, fitted bodice with aged gold filigree, off-the-shoulder sheer lace sleeves, and a high side slit revealing one adult thigh and knee. Opaque fabric fully covers nipples and genitals. The skirt drapes naturally over her lap; fashion-editorial pose with legs naturally together and no intimate-area emphasis. Retain natural adult anatomy, realistic hands and the character's regal authority. Warm candlelight outlines copper hair, bare shoulders and the folds of velvet; cool deep shadows, dark red drapery and old stone give a serious gothic atmosphere. Richly textured painterly fantasy illustration, broad shadow masses, tactile worn materials rather than glossy photography. Vertical 2:3 composition with the complete head, hands and seated gown visible, composed around the face and costume. Sensual adult glamour without nudity or sexual activity. No other figures, victims, blood splatter, text, logos or watermark.",
+  "status": "Accepted as a companion concept; seated setting preferred",
+  "owner_feedback": "The seating on the throne actually does work pretty well. This still works as the concept piece and the setting is actually better ... the background is worth keeping.",
+  "retain": [
+    "Weathered high-backed stone throne",
+    "Candlelight",
+    "Dark red drapery",
+    "Seated composition",
+    "Existing crown-free character identity"
+  ],
+  "scope": "Standalone concept exploration. This acceptance retains the painting and its setting; it does not change the game's general sensuality, story, character roles or runtime art.",
+  "preservation": "Original generated PNG copied byte-for-byte; earlier approved portrait and all sources preserved.",
+  "sha256": "3b164becc1279a7a19c63e56246355f3cce44cd02a2366a4f87ecf6639945858",
+  "input_sha256": "28515af06cba19b878709efa42eb99672b20c33f745e5363ae16e76b5e329a9c",
+  "size": [
+    1024,
+    1536
+  ],
+  "mode": "RGB"
+}

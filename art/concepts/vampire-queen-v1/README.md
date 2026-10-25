@@ -2,10 +2,20 @@
 
 2026-10-22 · #154 · Approved by the owner as concept art.
 
-![Approved crown-free vampire queen](vampire-queen.png)
+![Seated vampire queen with the preferred throne setting](vampire-queen-seated-v2.png)
 
-[Original 1024×1536 painting](vampire-queen.png) ·
+[Earlier approved 1024×1536 portrait](vampire-queen.png) ·
 [Exact prompts, edit lineage and provenance](../../source/vampire-queen-v1/generation.json)
+
+**Seated companion concept · 2026-10-25:** the owner also accepted
+[the seated revision](vampire-queen-seated-v2.png), specifically preferring its
+setting: weathered high-backed stone throne, candlelight, dark red drapery and
+the seated composition. Preserve this environment as a visual reference.
+[Its exact built-in ImageGen prompt and provenance](../../source/vampire-queen-v1/seated-v2.json)
+are retained separately. The setting is part of this painting; a separate
+background layer would be a later export. The earlier portrait remains approved
+and unchanged. This playful exploration does not set a new sensuality direction
+for the game or assign this character a story role.
 
 The owner selected this more daring gothic treatment after reviewing the initial
 portrait and its crown-free revision: “that version can be used as concept.”
