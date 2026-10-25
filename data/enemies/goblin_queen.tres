@@ -20,6 +20,7 @@ injury_chance = 0.15
 attack_verb = "hacks at"
 tactic = 6
 intro = "The goblin queen rises from her seat, cleaver in hand, and shrieks for her guards."
+loot_line = "Among the queen's hoard: %s."
 purse = Vector2i(20, 30)
 row = "back"
 reach_back = true

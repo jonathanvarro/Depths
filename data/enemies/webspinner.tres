@@ -19,6 +19,7 @@ injury_chance = 0.0
 attack_verb = "nips"
 tactic = 2
 intro = "A webspinner hangs back, spinning thread after thread."
+loot_line = "Wrapped in the webspinner's old webbing, from some earlier meal: %s."
 threat = 3
 row = "back"
 reach_back = true

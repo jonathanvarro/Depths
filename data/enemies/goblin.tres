@@ -19,6 +19,7 @@ injuries = Array[Injury]([ExtResource("3"), ExtResource("4")])
 attack_verb = "slashes"
 tactic = 3
 intro = "A goblin circles, looking for an opening."
+loot_line = "Among the goblin's stolen things: %s."
 purse = Vector2i(2, 6)
 threat = 3
 fears_fire = false

@@ -17,4 +17,5 @@ injuries = Array[ExtResource("1_338sh")]([ExtResource("2_8q8nb")])
 attack_verb = "savages"
 tactic = 16
 intro = "Breach hounds hunt together and go for the weakest. Each hits harder while another stands."
+loot_line = "Near where the hound fell, among gnawed bones: %s."
 threat = 3

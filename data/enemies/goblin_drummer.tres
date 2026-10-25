@@ -19,6 +19,7 @@ injury_chance = 0.05
 attack_verb = "swipes at"
 tactic = 8
 intro = "A goblin drummer hangs back. Its beat drives the others to hit harder."
+loot_line = "Among the drummer's stolen things: %s."
 purse = Vector2i(2, 4)
 threat = 4
 row = "back"

@@ -15,5 +15,6 @@ injury_chance = 0.0
 attack_verb = "puffs at"
 tactic = 11
 intro = "A gas-bloat drifts closer. Kill it from the back row, or set it alight - but never let it swell."
+loot_line = "Its burst leaves %s on the floor, swallowed long ago."
 fears_fire = false
 threat = 3

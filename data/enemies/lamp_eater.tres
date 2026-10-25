@@ -14,5 +14,6 @@ injury_chance = 0.0
 attack_verb = "bites"
 tactic = 15
 intro = "A lamp-eater, drawn to your light: it drinks oil and torch-flame. Kill it before it leaves you in the dark."
+loot_line = "Among the broken lamp-glass where it fed: %s."
 fears_fire = false
 threat = 3

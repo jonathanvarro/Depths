@@ -15,4 +15,5 @@ injury_chance = 0.0
 attack_verb = "bites"
 tactic = 9
 intro = "A cave bat flits overhead: only reach can touch it in the air, but it lands after it swoops."
+loot_line = "Under its roost, half-buried in droppings: %s."
 threat = 2

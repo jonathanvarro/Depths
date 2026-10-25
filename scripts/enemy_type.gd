@@ -46,6 +46,10 @@ enum Tactic {
 @export var tactic := Tactic.BASIC
 ## Shown when the fight starts: a hint at how it fights.
 @export var intro := ""
+## Where a find on its body comes from (#148), "%s" for the item ("a
+## silver locket"): goblins steal, beasts drag things to their nests,
+## spiders wrap old meals. Not the hollow miner's pick, which has its own.
+@export var loot_line := ""
 ## Gold dropped when beaten, min-max (goblins carry purses, #42).
 @export var purse := Vector2i.ZERO
 ## A thrown torch (#115, owner 2026-10-19): beasts that fear fire flee from
@@ -73,3 +77,9 @@ enum Tactic {
 ## Something it may leave behind when beaten (a hollow miner's pick, #140).
 @export var drop: SupplyItem
 @export_range(0.0, 1.0) var drop_chance := 0.0
+
+
+## The line for gear or a trinket found on it (#148).
+func loot_text(item: String) -> String:
+	var line := loot_line if loot_line.contains("%s") else "Near the fallen " + display_name.to_lower() + ": %s."
+	return line % item

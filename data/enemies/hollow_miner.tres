@@ -18,6 +18,7 @@ injuries = Array[ExtResource("2_fkw4u")]([ExtResource("3_kcrhj")])
 attack_verb = "swings its pick at"
 tactic = 12
 intro = "One of the gassed shift, risen. It grabs and won't let go: hit it to break the hold, or lose a turn struggling free."
+loot_line = "Still strapped to the hollow miner from its last shift: %s."
 fears_fire = false
 threat = 4
 drop = ExtResource("1_ipeha")

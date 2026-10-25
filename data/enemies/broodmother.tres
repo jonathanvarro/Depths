@@ -19,5 +19,6 @@ injuries = Array[ExtResource("1_bl8nq")]([ExtResource("2_hetnt")])
 attack_verb = "bites"
 tactic = 17
 intro = "The Broodmother: she calls her hatchlings once, her bite poisons, and below half health she rages."
+loot_line = "Wrapped in the Broodmother's nest, among older meals: %s."
 threat = 6
 summons = ExtResource("5_fqg88")

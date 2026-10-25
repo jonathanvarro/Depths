@@ -867,7 +867,7 @@ func _trinket_drops(state) -> void:
 			else:
 				_left_over(foe.type.drop, 1)
 		if gear:
-			_found_gear(gear, "The %s carried %s." % [foe.type.display_name.to_lower(), _a(gear.display_name.to_lower())])
+			_found_gear(gear, foe.type.loot_text(_a(gear.display_name.to_lower())))  # from where it would be (#148)
 		if find == null:
 			continue
 		var name: String = find.display_name.to_lower()
@@ -880,7 +880,7 @@ func _trinket_drops(state) -> void:
 		elif _party_state.supplies.add_what_fits(find) == 0:
 			_left_over(find, 1)
 			continue
-		_show_message("The %s wore %s. It's in the pack." % [foe.type.display_name.to_lower(), _a(name)])
+		_show_message(foe.type.loot_text(_a(name)) + " It's in the pack.")
 
 
 ## "a goblin", "an ash-shaft spear".

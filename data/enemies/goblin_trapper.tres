@@ -16,6 +16,7 @@ injuries = Array[ExtResource("1_shqao")]([ExtResource("2_ky06o")])
 attack_verb = "throws a knife at"
 tactic = 14
 intro = "A goblin trapper lays snares: whoever it catches acts last next round."
+loot_line = "In the trapper's sack of stolen things: %s."
 purse = Vector2i(1, 4)
 fears_fire = false
 threat = 3

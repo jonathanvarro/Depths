@@ -19,4 +19,5 @@ injuries = Array[Injury]([ExtResource("3"), ExtResource("4")])
 attack_verb = "bites"
 tactic = 1
 intro = "The rat darts about, sizing up the weakest."
+loot_line = "The rat had dragged %s into its nest."
 threat = 1

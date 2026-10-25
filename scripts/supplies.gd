@@ -20,12 +20,15 @@ enum Light { OUT, DIM, STEADY, BRIGHT }
 
 const LANTERN_CAPACITY := 100.0
 ## Oil burned per time unit, at an empty and a full lantern. In between it
-## scales with the oil level; a full tank lasts about 110 time units.
-const BURN_AT_EMPTY := 0.5
-const BURN_AT_FULL := 1.5
+## scales with the oil level; a full tank lasts about 120 time units.
+## Loosened slightly (owner, 2026-10-25): the bot spent a third of its steps
+## in the dark. Was 0.5 and 1.5.
+const BURN_AT_EMPTY := 0.45
+const BURN_AT_FULL := 1.35
 const LIGHT_NAMES := {Light.OUT: "Out", Light.DIM: "Dim", Light.STEADY: "Steady", Light.BRIGHT: "Bright"}
 ## Time units a torch burns. It gives steady light, dimming near the end.
-const TORCH_BURN_TIME := 50.0
+## Was 50 until the same loosening (2026-10-25).
+const TORCH_BURN_TIME := 58.0
 const TORCH_DIM_BELOW := 10.0
 ## How strong a torch's light is, against a full lantern's 1.0.
 const TORCH_LIGHT := 0.55

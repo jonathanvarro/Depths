@@ -19,6 +19,7 @@ injuries = Array[Injury]([ExtResource("3"), ExtResource("4")])
 attack_verb = "bites"
 tactic = 2
 intro = "A spider hangs above, spinning."
+loot_line = "Wrapped in old webbing behind it, from some earlier meal: %s."
 row = "back"
 reach_back = true
 threat = 2

@@ -19,6 +19,7 @@ injury_chance = 0.05
 attack_verb = "shoots"
 tactic = 4
 intro = "A goblin archer hangs back, nocking an arrow - it can reach anyone."
+loot_line = "Among the archer's stolen things: %s."
 purse = Vector2i(1, 4)
 row = "back"
 reach_back = true

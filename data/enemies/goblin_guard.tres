@@ -19,6 +19,7 @@ injury_chance = 0.08
 attack_verb = "bashes"
 tactic = 5
 intro = "A goblin guard plants its shield. While it stands, the goblins behind it are hard to hurt."
+loot_line = "Among the guard's stolen things: %s."
 purse = Vector2i(2, 5)
 threat = 4
 fears_fire = false

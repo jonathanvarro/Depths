@@ -20,6 +20,7 @@ injuries = Array[ExtResource("1_n2suj")]([ExtResource("2_3c1p3"), ExtResource("3
 attack_verb = "pounds"
 tactic = 10
 intro = "A goblin brute hefts its maul. Brace when it winds up; hit it while it catches its breath."
+loot_line = "Among the brute's stolen things: %s."
 purse = Vector2i(2, 6)
 fears_fire = false
 threat = 5

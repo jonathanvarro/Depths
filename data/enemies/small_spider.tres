@@ -16,6 +16,7 @@ injury_chance = 0.0
 attack_verb = "bites"
 tactic = 2
 intro = "A small spider hangs above, spinning."
+loot_line = "Wrapped in a scrap of webbing: %s."
 row = "back"
 reach_back = true
 threat = 0

@@ -20,6 +20,7 @@ injuries = Array[ExtResource("1_qh4ly")]([ExtResource("2_sv0j1"), ExtResource("3
 attack_verb = "cleaves"
 tactic = 18
 intro = "A gate captain: its horn braces an ally, then it winds up a heavy blow. Brace for it."
+loot_line = "Among the captain's spoils: %s."
 purse = Vector2i(6, 10)
 fears_fire = false
 threat = 6

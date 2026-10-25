@@ -16,6 +16,7 @@ injury_chance = 0.0
 attack_verb = "bites"
 tactic = 2
 intro = "A venom spider, its colours a warning: its bite burns twice as hard. An antidote will help."
+loot_line = "Wrapped in old webbing behind it, from some earlier meal: %s."
 threat = 3
 row = "back"
 reach_back = true
