@@ -1,0 +1,13 @@
+{
+	"captures": [
+		"main-1280-normal.png",
+		"main-1280-larger.png",
+		"main-1278-normal.png",
+		"main-1278-larger.png"
+	],
+	"checks": 68,
+	"failures": [],
+	"fixture_save": "res://build/kit-review/main-save.dat",
+	"physical_iPhone": false,
+	"shutdown_note": "Main teardown reports CanvasItem/ObjectDB/resource leaks; isolated Pack and fog fixtures finish cleanly. Behaviour assertions are separate from teardown."
+}

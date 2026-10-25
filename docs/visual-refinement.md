@@ -1,5 +1,9 @@
 # Camp, items and quieter interfaces · #112 / #120
 
+**Update · 2026-10-25:** the combined physical Equipment/backpack study has now
+[been integrated into the live Godot Pack](combined-kit-live.md). Statements below
+about the live scrolling list describe this earlier refinement pass.
+
 Owner requested higher camp resolution, more distinctive items and descriptions, reuse of the coins/jewellery mark, less repeated text, more visual controls, and coherent portrait blinking/speech. This pass installs the camp/item/portrait changes and focused live UI cleanup. The combined physical equipment/backpack remains an interactive study for later Godot integration under #51/#48.
 
 ## Camp

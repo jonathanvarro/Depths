@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Depths · Combined kit and combat fog</title>
+<style>body{margin:0;background:#10140f;color:#e6dac1;font:18px/1.5 system-ui,sans-serif}main{max-width:1400px;margin:auto;padding:20px}h1{font:28px Georgia,serif}select,a{color:#e6dac1}select{background:#303027;border:1px solid #66543c;padding:10px;min-height:44px;font:inherit;max-width:100%}img{display:block;width:100%;height:auto;margin:18px 0;border:1px solid #66543c}p{color:#b7ab93}a:focus-visible,select:focus-visible{outline:3px solid #d7b174}</style>
+<main><h1>Field kit and combat fog</h1>
+<label for="view">Review view </label><select id="view">
+<option value="main-1278-normal.png">In game · phone · normal</option>
+<option value="main-1278-larger.png">In game · phone · Larger text</option>
+<option value="main-1280-normal.png">In game · desktop</option>
+<option value="equipment-1278-normal.png">Three-hero fixture · Equipment</option>
+<option value="inspect-1278-larger.png">Three-hero fixture · item comparison · Larger text</option>
+<option value="status-1278-normal.png">Three-hero fixture · Status</option>
+<option value="overflow-phone.png">Fixture · overflow page</option>
+<option value="../../combat-fog-v1/combat-1278.png">Combat fixture · settled fog</option>
+<option value="../../combat-fog-v1/surge-1280-6.png">Combat fixture · held surge</option>
+<option value="../../combat-fog-v1/still-1278.png">Combat fixture · still mode</option>
+</select>
+<img id="capture" src="main-1278-normal.png" alt="Actual Godot capture of the combined Equipment and backpack screen">
+<p id="caption">Actual Godot captures. The in-game views show the real starting party; three-hero and combat views are isolated test fixtures. These are rendered landscape-phone sizes, not physical iPhone tests.</p>
+<p><a href="../../../../docs/combined-kit-live.md">Interface handoff</a> · <a href="../../../../docs/combat-fog.md">Fog artwork and source prompt</a></p>
+</main><script>const picker=document.getElementById('view'),capture=document.getElementById('capture');picker.addEventListener('change',()=>{capture.src=picker.value;capture.alt=picker.selectedOptions[0].textContent});</script></html>

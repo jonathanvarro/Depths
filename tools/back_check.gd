@@ -61,13 +61,15 @@ func _initialize() -> void:
 	ps.supplies.gear.append(_gear("satchel"))
 	main._set_pack(true)
 	await process_frame
+	main._pack.inspect_item(_gear("satchel"))
 	var labels: Array = main._pack._list.find_children("*", "Label", true, false).map(func(l): return l.text)
 	check("the Pack says what a back item does", labels.any(func(t): return t == "Worn: +2 pack slots"), str(labels.slice(0, 8)))
 	ps.equip(ps.members[0], _gear("satchel"))
 	main._pack.refresh()
+	main._pack.inspect_item(ps.members[0].back,true,"back")
 	await process_frame
 	labels = main._pack._list.find_children("*", "Label", true, false).map(func(l): return l.text)
-	check("...and what's worn", labels.any(func(t): return t.contains("On the back: leather satchel (+2 pack slots)")) and labels.any(func(t): return t == "Pack space: 0 of 10" or t.begins_with("Pack space:") and t.ends_with("of 10")), str(labels.slice(0, 8)))
+	check("...and what's worn", labels.any(func(t): return t.contains("+2 pack slots")) and ps.members[0].back == _gear("satchel") and main._pack._capacity.text.ends_with("/ 10"), str(labels.slice(0, 8)))
 	if dir != "":
 		for i in 4:
 			await process_frame

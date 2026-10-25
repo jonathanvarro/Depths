@@ -112,8 +112,14 @@ func _initialize() -> void:
 	main._found_gear(GearGen.make(_gear("leather_jerkin"), "magic", rng), "Underneath: a test.")
 	main._set_pack(true)
 	await process_frame
-	var labels: Array = main._pack._list.find_children("*", "Label", true, false).map(func(l): return l.text)
-	check("the Pack names the quality and what the modifiers do", labels.any(func(t): return t.begins_with("Rare: ")) and labels.any(func(t): return t.begins_with("Magic: ")), str(labels.filter(func(t): return t.begins_with("Rare") or t.begins_with("Magic"))))
+	var shown: Array[String] = []
+	for candidate: Equipment in main._party_state.supplies.gear:
+		if candidate.tier not in ["rare", "magic"]: continue
+		main._pack.inspect_item(candidate)
+		var labels: Array = main._pack._detail_text.get_children().map(func(l): return l.text)
+		if labels.any(func(t): return t.begins_with(candidate.tier.capitalize()+" · ")) and labels.any(func(t): return t.contains(candidate.effect.effects_text())):
+			shown.append(candidate.tier)
+	check("the Pack names the quality and what the modifiers do", "rare" in shown and "magic" in shown, str(shown))
 	if dir != "":
 		for i in 4:
 			await process_frame

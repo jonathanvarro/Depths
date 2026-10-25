@@ -87,14 +87,21 @@ func _initialize() -> void:
 	main._pack.visible = true
 	main._pack.refresh()
 	var helper: Companion = ps.members[1]
+	main._pack.select_hero(helper)
+	main._pack.inspect_item(knife)
 	main._camp.visible = false
 	await _snap("pack_gear")
 	main._camp.visible = true
 	var pack_text := " | ".join(main._pack._list.find_children("*", "Label", true, false).map(func(l): return l.text))
-	check("pack compares the knife for each hero", pack_text.contains("%s: " % helper.display_name) and pack_text.contains("->") and pack_text.contains("1-3 dmg"), pack_text.substr(0, 300))
-	check("a recruit equips it", _press(main._pack, "Equip: %s" % helper.display_name) and helper.weapon == knife)
+	var comparison_hero: Companion = helper.duplicate()
+	comparison_hero.weapon = knife
+	var expected_span := comparison_hero.attack_range()
+	var expected_damage := str(expected_span.x) if expected_span.x == expected_span.y else "%d–%d" % [expected_span.x,expected_span.y]
+	check("pack compares the knife for selected hero", main._pack._selected_hero == helper and pack_text.contains("→") and pack_text.contains(expected_damage+" dmg"), pack_text.substr(0, 300))
+	check("a recruit equips it", _press(main._pack._detail_actions, "Equip") and helper.weapon == knife)
 	main._pack.refresh()
-	check("and can put it away again", _press(main._pack, "Put away") and helper.weapon == null and knife in ps.supplies.gear)
+	main._pack.inspect_item(helper.weapon,true,"weapon")
+	check("and can put it away again", _press(main._pack._detail_actions, "Take off") and helper.weapon == null and knife in ps.supplies.gear)
 	ps.supplies.gear.erase(knife)
 	main._pack.visible = false
 

@@ -280,8 +280,14 @@ Templates > Download and Install; already installed on the owner's PC).
   `tools/progression_check.gd`.
 - `scripts/chest_screen.gd` – chest window beside the pack: drag (set_drag_
   forwarding), tap, or the take-all icon button; `took` signal.
-- `scripts/pack_screen.gd` – the Pack screen (Pack button under the minimap,
-  or I/B). PartyState.use_item(), rest(), cannot_use_reason() do the work.
+- `scripts/pack_screen.gd` + `scripts/kit_bag.gd` – live combined Field kit:
+  Equipment/Status left, shared physical backpack right, pinned inspection below,
+  real stack/capacity pages and explicit actions. Open with the backpack or I/B.
+  PartyState methods keep targeting, gear/curses and supply costs authoritative.
+  Review/checks and earlier-study supersession: `docs/combined-kit-live.md`.
+- `scripts/battle_stage.gd` – authored combat mist surge and low drifting bank
+  (#129), viewport-fitted camera quad and static/plain fade when effects are off.
+  Preserved source/prompt, exporter and real-renderer review: `docs/combat-fog.md`.
 - `audio/placeholder/` – generated placeholder sounds (see its README for
   licence); rebuilt by `tools/make_placeholder_audio.py`.
 - `scripts/sounds.gd` + `audio/dark-v1/` – thirty finished CC0-derived effects

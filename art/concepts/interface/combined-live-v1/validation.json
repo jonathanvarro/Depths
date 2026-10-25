@@ -1,0 +1,27 @@
+{
+	"captures": [
+		"equipment-1280-normal.png",
+		"inspect-1280-normal.png",
+		"status-1280-normal.png",
+		"equipment-1280-larger.png",
+		"inspect-1280-larger.png",
+		"status-1280-larger.png",
+		"equipment-1278-normal.png",
+		"inspect-1278-normal.png",
+		"status-1278-normal.png",
+		"equipment-1278-larger.png",
+		"inspect-1278-larger.png",
+		"status-1278-larger.png",
+		"equipment-1334-normal.png",
+		"inspect-1334-normal.png",
+		"status-1334-normal.png",
+		"equipment-1334-larger.png",
+		"inspect-1334-larger.png",
+		"status-1334-larger.png",
+		"overflow-phone.png"
+	],
+	"checks": 321,
+	"failures": [],
+	"physical_iPhone": false,
+	"uses_main_or_save": false
+}

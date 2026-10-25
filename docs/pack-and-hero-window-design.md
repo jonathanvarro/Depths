@@ -1,6 +1,6 @@
 # Pack slots and the hero window
 
-**Current composition:** the owner's follow-up requires [equipment on the left and the shared backpack always visible on the right](combined-equipment-and-pack.md). Status changes only the left panel. This supersedes the separate-window navigation described below while preserving icon inspection and explicit actions.
+**Current composition:** the owner's follow-up requires [equipment on the left and the shared backpack always visible on the right](combined-equipment-and-pack.md). Status changes only the left panel. This is now [implemented in Godot](combined-kit-live.md) (2026-10-25). It supersedes the separate-window navigation described below while preserving icon inspection and explicit actions.
 
 **2026-10-18 visual follow-up (#109):** the owner requested a more physical backpack. The [leather/canvas Pack and Equipment revision](physical-pack-and-equipment.md) retains this interaction direction, uses current Mara art/role, and limits the equipment study to current Weapon/Body regions. Both versions remain browser studies; the live Godot Pack is unchanged.
 

@@ -192,8 +192,9 @@ func _initialize() -> void:
 	main._party_state.supplies.add(spade)
 	main._set_pack(true)
 	await process_frame
+	main._pack.inspect_item(spade)
 	var labels: Array = main._pack._list.find_children("*", "Label", true, false).map(func(l): return l.text)
-	check("the pack shows its space", labels.any(func(t): return t.begins_with("Pack space:")), str(labels.slice(0, 3)))
+	check("the pack shows its space", main._pack._capacity.text == "%d / %d" % [main._party_state.supplies.slots_used(),main._party_state.supplies.capacity], str(labels.slice(0, 3)))
 	check("supplies can be dropped", main._pack._list.find_children("*", "Button", true, false).any(func(b): return b.text == "Drop"))
 	await _snap("pack")
 	main._set_pack(false)

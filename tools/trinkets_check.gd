@@ -171,14 +171,16 @@ func _initialize() -> void:
 	ps.supplies.gear.append(_t("goblin_torc_cursed"))
 	main._set_pack(true)
 	await process_frame
+	main._pack.inspect_item(_item("amber_pendant"))
 	var buttons: Array = main._pack._list.find_children("*", "Button", true, false)
 	check("the Pack offers to wear jewellery", buttons.any(func(b): return b.text == "Wear"))
 	var lead: Companion = ps.members[0]
 	main._pack.used.emit(ps.wear_treasure(lead, _item("amber_pendant")))
 	main._pack.refresh()
+	main._pack.inspect_item(lead.trinket,true,"trinket")
 	await process_frame
 	var lines: Array = main._pack._list.find_children("*", "Label", true, false).map(func(l): return l.text)
-	check("the Pack shows what the worn trinket does", lines.any(func(t): return t.contains("Wears the amber tear pendant: +3 maximum health")), str(lines.slice(0, 8)))
+	check("the Pack shows what the worn trinket does", lines.any(func(t): return t.contains("+3 maximum health")) and main._pack._from_slot == "trinket", str(lines.slice(0, 8)))
 	if dir != "":
 		for i in 4:
 			await process_frame

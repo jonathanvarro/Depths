@@ -59,14 +59,9 @@ func _press(node, label: String) -> bool:
 
 
 func _press_in_row(item_name: String, label: String) -> bool:
-	for row in main._pack._list.get_children():
-		var titles: Array = row.find_children("*", "Label", true, false).map(func(l): return l.text)
-		if titles.any(func(t): return t.begins_with(item_name)):
-			for b in row.find_children("*", "Button", true, false):
-				if (b.text == label or b.text.begins_with(label + " ·")) and not b.disabled:
-					b.pressed.emit()
-					return true
-	return false
+	if not main._pack.inspect_item_by_name(item_name):
+		return false
+	return _press(main._pack._detail_actions,label)
 
 
 func _watch() -> void:

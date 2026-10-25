@@ -1,0 +1,34 @@
+{
+  "issues": [
+    51,
+    48
+  ],
+  "date": "2026-10-25",
+  "new_raster_generation": false,
+  "original_tool": "built-in image_gen",
+  "original_prompts": "art/source/pack-heroes-v3/generation-manifest.json",
+  "runtime_copies": [
+    {
+      "id": "bag",
+      "file": "art/ui/physical-kit-v1/bag.png",
+      "source": "art/concepts/interface/pack-heroes-v3/assets/bag.png",
+      "sha256": "c3e63dd5b7d87279b4786f87eb9ca15271f545698e5fdb9461b4a163eebd4e01",
+      "size": [
+        768,
+        512
+      ]
+    },
+    {
+      "id": "roll",
+      "file": "art/ui/physical-kit-v1/roll.png",
+      "source": "art/concepts/interface/pack-heroes-v3/assets/roll.png",
+      "sha256": "06e2f4e43f4a7eb326f88c56a70a60870a0962ab8a2a0eb6db5111d00e26c659",
+      "size": [
+        768,
+        512
+      ]
+    }
+  ],
+  "glyphs": "Original native SVG outlines for empty weapon, armour and trinket; back slot reuses controls-v1/backpack.svg",
+  "capacity": "The bag has twelve visual compartments per page; real capacity, stack counts, back gear and injury penalties come from PartyState/Supplies. No capacity rule is changed."
+}

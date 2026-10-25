@@ -1,5 +1,10 @@
 # Equipment left, shared pack right · #109 refinement
 
+**Live implementation · 2026-10-25:** this composition is now connected in
+Godot, including current back gear/trinkets, real item permissions, capacity
+and supply targeting. See [the live kit handoff](combined-kit-live.md).
+The browser studies and their original validation below remain historical.
+
 Owner direction, 2026-10-18: the player needs to see inventory and equipment together. Keep the approved physical backpack on the **right**, put equipment on the **left**, and combine them into one view. This supersedes v3's separate Pack/Equipment pages while retaining its leather/canvas art.
 
 ## Recommended view

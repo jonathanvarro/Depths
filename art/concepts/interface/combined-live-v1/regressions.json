@@ -1,0 +1,56 @@
+{
+  "date": "2026-10-25",
+  "fixture_save_directory": "res://build/kit-review/",
+  "harnesses": [
+    {
+      "check": "back",
+      "passed_assertions": 13,
+      "failures": 0,
+      "shutdown_warnings_recorded": true,
+      "warning_evidence": "Observed in process console at exit; Godot log-file omits these teardown messages."
+    },
+    {
+      "check": "trinkets",
+      "passed_assertions": 29,
+      "failures": 0,
+      "shutdown_warnings_recorded": true,
+      "warning_evidence": "Observed in process console at exit; Godot log-file omits these teardown messages."
+    },
+    {
+      "check": "gear",
+      "passed_assertions": 19,
+      "failures": 0,
+      "shutdown_warnings_recorded": true,
+      "warning_evidence": "Observed in process console at exit; Godot log-file omits these teardown messages."
+    },
+    {
+      "check": "quality",
+      "passed_assertions": 15,
+      "failures": 0,
+      "shutdown_warnings_recorded": true,
+      "warning_evidence": "Observed in process console at exit; Godot log-file omits these teardown messages."
+    },
+    {
+      "check": "boons",
+      "passed_assertions": 40,
+      "failures": 0,
+      "shutdown_warnings_recorded": true,
+      "warning_evidence": "Observed in process console at exit; Godot log-file omits these teardown messages."
+    },
+    {
+      "check": "recruit",
+      "passed_assertions": 26,
+      "failures": 0,
+      "shutdown_warnings_recorded": true,
+      "warning_evidence": "Observed in process console at exit; Godot log-file omits these teardown messages."
+    },
+    {
+      "check": "opening",
+      "passed_assertions": 32,
+      "failures": 0,
+      "shutdown_warnings_recorded": true,
+      "warning_evidence": "Observed in process console at exit; Godot log-file omits these teardown messages."
+    }
+  ],
+  "scope": "Existing harnesses use updated inspection selectors. Full-game shutdown warnings remain; passing behaviour is not a leak-free-runtime claim."
+}
