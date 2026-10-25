@@ -60,9 +60,11 @@ func _initialize() -> void:
 	supplies.light_torch(TORCH)
 	await create_timer(0.3).timeout
 	check("a lit torch shows the torch", view.visible and view._torch.visible and not view._lantern.visible)
-	var rect := Rect2(view.global_position, view._sprite.get_rect().size * view.global_scale)
+	var rect := Rect2(view._sprite.global_position, view._sprite.get_rect().size * view._sprite.global_scale)
 	var screen := Rect2(Vector2.ZERO, root.get_visible_rect().size)
-	check("it sits inside the screen", screen.encloses(rect), str(rect))
+	# Held low (owner, 2026-10-25): the top and sides on screen, the
+	# handle's end below the bottom edge.
+	check("it sits on screen, its handle running off the bottom", rect.position.x >= 0 and rect.end.x <= screen.end.x and rect.position.y >= 0 and rect.end.y > screen.end.y and rect.end.y - screen.end.y < rect.size.y * 0.3, str(rect))
 	await _snap("torch")
 	# Walking and turning: it bobs and sways.
 	var before: Vector3 = view._pivot.position

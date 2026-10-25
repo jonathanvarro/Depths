@@ -10,6 +10,7 @@ const HeldLight3D := preload("res://scripts/held_light_3d.gd")
 const Supplies := preload("res://scripts/supplies.gd")
 const DRAW_SIZE := Vector2(128, 256)  # the space the flat art used
 const RENDER_SIZE := Vector2i(96, 192)  # fewer pixels: chunkier, like the world
+const SUNK := 0.22  # how much of the drawing sits below the screen's edge
 
 var _main: WeakRef
 var _viewport: SubViewport
@@ -82,9 +83,11 @@ func _process(delta: float) -> void:
 		return
 	_apply_supplies(main._party_state.supplies)
 	_animate(main._party, delta)
-	var amount := clampf(main._safe_area.size.y * 0.38 / DRAW_SIZE.y, 0.60, 0.95)
+	# Larger, and held lower so the handle runs off the bottom of the
+	# screen (owner, 2026-10-25): no one needs to see the end of it.
+	var amount := clampf(main._safe_area.size.y * 0.54 / DRAW_SIZE.y, 0.85, 1.35)
 	scale = Vector2.ONE * amount
-	position = Vector2(main._touch_pad.position.x - DRAW_SIZE.x * amount - 18, main._safe_area.size.y - DRAW_SIZE.y * amount - 12)
+	position = Vector2(main._touch_pad.position.x - DRAW_SIZE.x * amount - 8, main._safe_area.size.y - DRAW_SIZE.y * amount * (1.0 - SUNK))
 
 
 func _apply_supplies(supplies) -> void:

@@ -533,6 +533,8 @@ Deeper floors mix them (depth 1 mostly single rats; depth 3 pairs and trios like
     - Chances: 10% each on floor 2 (at most one per fight), 15% on floor 3 and 20% on floor 4 (at most two).
     - Types: Hardened (half again as much health), Savage (+1 damage), Swift (acts sooner) and Venomous (its hits poison).
     - An elite has an orange nameplate, stands a little larger, and is worth a little more XP.
+    - Each elite kind also has its own mark on the tag (#147): a heart for Hardened, a blood drop for Savage, chevrons for Swift, and venom for Venomous. The selected enemy's line spells it out.
+  - **States at a glance (#147):** the tags also mark a bat in the air, a curled beetle, a miner holding someone and a venom spider's stronger poison. The selected enemy's line says it in words, for touch and keyboard. Tags stay on screen and above the action panel, even on a phone with Larger text.
     - Set fights (the gate and the queen) have no elites.
   - **Elites carry the drops:** an elite's chance of a trinket or gear is ×3, and any elite can drop. An ordinary tougher foe's chance is ×0.5.
   - **Bot results** (30 campaigns per hero): Mara 24, Corin 26, Alwen 19, against a target of about 24 and the pre-#133 baseline of 24, 29 and 21. Floor-3 and fortress wipes are back.

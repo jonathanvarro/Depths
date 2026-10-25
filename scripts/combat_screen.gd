@@ -69,6 +69,20 @@ const MONSTER_INTENTS := {
 const SNARED_MARK := preload("res://art/ui/monsters-v1/status/snared.png")
 const LIGHT_DRAINED := preload("res://art/ui/monsters-v1/fx/light-drained.png")
 const GRABBED_MARK := preload("res://art/ui/monsters-v1/status/grabbed.png")
+## Each elite kind's own mark on its tag (#147), so the four aren't told
+## apart by the shared red-orange plate alone.
+const ELITE_MARKS := {
+	"Hardened": preload("res://art/ui/visual105-v1/heart.png"),
+	"Savage": preload("res://art/ui/boons-v2/blood-of-the-deep.png"),
+	"Swift": preload("res://art/ui/visual105-v1/rush.png"),
+	"Venomous": preload("res://art/ui/visual105-v1/venom.png"),
+}
+## A state that changes what works, marked on the tag while it lasts (#147).
+const STATE_MARKS := {
+	"airborne": preload("res://art/ui/monsters-v1/intent/swoop.png"),
+	"curled": preload("res://art/ui/monsters-v1/intent/curl.png"),
+	"holding": preload("res://art/ui/monsters-v1/status/grabbed.png"),
+}
 const ELITE_COLOUR := Color("e0632f")
 const ELITE_ABOUT := {
 	"Hardened": "Hardened: half again as much health.",
@@ -459,7 +473,7 @@ func _process(_delta: float) -> void:
 			bar.visible = not foe.glancing  # no health to whittle down (#69)
 			bar.max_value = foe.type.max_health
 			bar.value = foe.health
-			var marks := []
+			var marks: Array = _state_marks(foe)
 			if foe.shielded:
 				marks.append(MARKS["guard"])
 			if _state._drummed.has(foe):
@@ -469,7 +483,12 @@ func _process(_delta: float) -> void:
 			odds.visible = foe == _target and _hero != null and _state.can_hit(_hero, foe)
 			if odds.visible:
 				odds.text = "%d%%" % roundi(_state.hero_hit_chance(_hero) * 100)
-			tag.position = screen - tag.size / 2.0
+			# Kept on screen and above the action panel (#147): a back-row
+			# tag on a phone at Larger text would otherwise float off the top.
+			var view := get_viewport().get_visible_rect()
+			var floor_y: float = (_actions.get_global_rect().position.y if _actions.visible else view.end.y) - tag.size.y - 4.0
+			var spot := screen - tag.size / 2.0
+			tag.position = Vector2(clampf(spot.x, view.position.x + 4.0, view.end.x - tag.size.x - 4.0), clampf(spot.y, view.position.y + 14.0, maxf(view.position.y + 14.0, floor_y)))
 			var reachable: bool = _hero == null or _state.can_hit(_hero, foe)
 			tag.modulate = Color.WHITE if foe == _target else Color(1, 1, 1, 0.65 if reachable else 0.35)
 
@@ -487,7 +506,7 @@ func _set_marks(row: HBoxContainer, textures: Array) -> void:
 		mark.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		mark.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		mark.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-		mark.custom_minimum_size = Vector2(20, 20)
+		mark.custom_minimum_size = Vector2(24, 24)  # legible on a phone (#147)
 		mark.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		row.add_child(mark)
 
@@ -569,7 +588,62 @@ func _update_intent_line() -> void:
 	if _intent_label == null or _target == null:
 		return
 	_intent_icon_rect.texture = _intent_icon(_target.intent)
-	_intent_label.text = "%s: %s" % [_target.name, CombatState.intent_text(_target)]
+	var words: Array = ["%s: %s." % [_target.name, CombatState.intent_text(_target)]]
+	words.append_array(_state_words(_target))
+	_intent_label.text = " ".join(words)
+
+
+## What sets `foe` apart right now, as marks for its tag (#147): its elite
+## kind, a stronger venom than a common spider's, and a state that changes
+## what works against it (in the air, curled up, holding someone).
+func _state_marks(foe) -> Array:
+	var marks := []
+	if foe.elite != "":
+		marks.append(ELITE_MARKS[foe.elite])
+	elif _strong_venom(foe):
+		marks.append(MARKS["venom"])
+	if _airborne(foe):
+		marks.append(STATE_MARKS["airborne"])
+	if foe.curled:
+		marks.append(STATE_MARKS["curled"])
+	if _holding(foe) != null:
+		marks.append(STATE_MARKS["holding"])
+	return marks
+
+
+## The same, in words, for the selected enemy's line: readable by touch and
+## keyboard, never only on hover.
+func _state_words(foe) -> Array:
+	var words := []
+	if foe.elite != "":
+		words.append(ELITE_ABOUT[foe.elite])
+	elif _strong_venom(foe):
+		words.append("Its venom burns twice as hard.")
+	if _airborne(foe):
+		words.append("In the air: only reach can hit it.")
+	if foe.curled:
+		words.append("Curled up: blows barely scratch it.")
+	var held: Companion = _holding(foe)
+	if held:
+		words.append("Holding %s." % held.display_name)
+	if foe.enraged:
+		words.append("Enraged: hits harder.")
+	return words
+
+
+func _strong_venom(foe) -> bool:
+	return foe.type.tactic == EnemyType.Tactic.WEB_AND_VENOM and foe.type.venomous and foe.type.venom_damage >= 2
+
+
+func _airborne(foe) -> bool:
+	return foe.type.tactic == EnemyType.Tactic.SWOOPER and foe.in_back()
+
+
+func _holding(foe) -> Companion:
+	for hero in _state._grabbed:
+		if _state._grabbed[hero] == foe and hero.is_alive():
+			return hero
+	return null
 
 
 ## Keyboard (#116): Tab, or the turn keys (A/D, ←/→), pick the next or
@@ -620,7 +694,7 @@ func _refresh() -> void:
 		if ongoing and _state.venom_turns(hero) > 0:
 			marks.append([MARKS["venom"], "Venom: loses health each turn"])
 		if ongoing and _state.is_grabbed(hero):
-			marks.append([GRABBED_MARK, "Grabbed: can't act until the one holding them is hit"])
+			marks.append([GRABBED_MARK, "Grabbed: loses their next turn struggling free, unless someone hits the one holding them"])
 		if ongoing and _state.is_snared(hero):
 			marks.append([SNARED_MARK, "Snared: acts last this round"])
 		if ongoing and _state.is_defending(hero):
@@ -710,6 +784,8 @@ func _build() -> void:
 	_intent_icon_rect.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	intent_row.add_child(_intent_icon_rect)
 	_intent_label = _label("", 18, COLOR_TEXT)
+	_intent_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART  # a state or two can follow (#147)
+	_intent_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	intent_row.add_child(_intent_label)
 	rows.add_child(intent_row)
 	_action_buttons = HBoxContainer.new()
