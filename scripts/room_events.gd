@@ -44,6 +44,8 @@ const TREASURE := [
 
 ## The floor being explored; main.gd sets it before an event (#42).
 var depth := 1
+## A bell wire rang during the last choice (#94); main.gd reads and clears it.
+var alarm_raised := false
 ## The camp, for events that move quests on (#123); set by main.gd.
 var camp
 
@@ -103,6 +105,8 @@ func resolve(party, choice: EventChoice, forced := -1, flags: Array = []) -> Dic
 		party.supplies.gold = maxi(0, party.supplies.gold - choice.gold_cost)
 		party.supplies.changed.emit()
 	var outcome: EventOutcome = choice.outcomes[forced] if forced >= 0 and forced < choice.outcomes.size() else _pick_outcome(choice, flags, party.draws_ambush())
+	if outcome and outcome.alarm:
+		alarm_raised = true
 	if outcome and outcome.sets_flag != "" and outcome.sets_flag not in flags:
 		flags.append(outcome.sets_flag)
 	if outcome and outcome.quest != "" and camp != null:

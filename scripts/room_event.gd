@@ -24,3 +24,6 @@ extends Resource
 ## The prop stands against a wall (a miners' shrine, #132/#133): set back
 ## to the nearest wall of its cell, facing into the room.
 @export var prop_on_wall := false
+## A trap no one spotted (#94): this happens as the party walks in - with a
+## fall - instead of the choices.
+@export var sprung: EventOutcome

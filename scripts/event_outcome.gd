@@ -9,6 +9,9 @@ enum Target {
 }
 
 @export var weight := 1
+## A bell wire rang (#94): the next fight on this floor can't be heard
+## first, and they act first.
+@export var alarm := false
 @export_multiline var text := ""
 @export var target := Target.ONE
 ## Immediate change to health (negative hurts).

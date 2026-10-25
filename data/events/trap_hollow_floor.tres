@@ -1,10 +1,13 @@
 [gd_resource type="Resource" script_class="RoomEvent" format=3]
 
-[ext_resource type="Script" path="res://scripts/room_event.gd" id="event"]
-[ext_resource type="PackedScene" path="res://art/props/room-states-v1/hollow-floor.tscn" id="prop"]
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="3_eyapo"]
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="4_hp58y"]
+[ext_resource type="Script" path="res://scripts/supply_item.gd" id="5_7ofix"]
 [ext_resource type="Script" path="res://scripts/event_choice.gd" id="choice"]
-[ext_resource type="Script" path="res://scripts/event_outcome.gd" id="outcome"]
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="event"]
 [ext_resource type="Resource" path="res://data/injuries/limp.tres" id="limp"]
+[ext_resource type="Script" path="res://scripts/event_outcome.gd" id="outcome"]
+[ext_resource type="PackedScene" path="res://art/props/room-states-v1/hollow-floor.tscn" id="prop"]
 
 [sub_resource type="Resource" id="o0_0"]
 script = ExtResource("outcome")
@@ -13,7 +16,6 @@ text = "Slow going, but you find the solid stones."
 
 [sub_resource type="Resource" id="o0_1"]
 script = ExtResource("outcome")
-weight = 1
 text = "A slab tilts under you and your ankle twists."
 health = -1
 injury = ExtResource("limp")
@@ -22,23 +24,20 @@ injury = ExtResource("limp")
 script = ExtResource("choice")
 label = "Test every step"
 time_cost = 4
-outcomes = Array[EventOutcome]([SubResource("o0_0"), SubResource("o0_1")])
+outcomes = Array[ExtResource("outcome")]([SubResource("o0_0"), SubResource("o0_1")])
 
 [sub_resource type="Resource" id="o1_0"]
 script = ExtResource("outcome")
-weight = 1
 text = "You're across before the floor can decide."
 
 [sub_resource type="Resource" id="o1_1"]
 script = ExtResource("outcome")
-weight = 1
 text = "The floor gives way and you drop hard onto broken stone."
 health = -4
 strain = 8.0
 
 [sub_resource type="Resource" id="o1_2"]
 script = ExtResource("outcome")
-weight = 1
 text = "A slab tips and you fall, catching your ankle."
 health = -2
 injury = ExtResource("limp")
@@ -46,16 +45,20 @@ injury = ExtResource("limp")
 [sub_resource type="Resource" id="c1"]
 script = ExtResource("choice")
 label = "Hurry across"
-time_cost = 1
-outcomes = Array[EventOutcome]([SubResource("o1_0"), SubResource("o1_1"), SubResource("o1_2")])
+outcomes = Array[ExtResource("outcome")]([SubResource("o1_0"), SubResource("o1_1"), SubResource("o1_2")])
+
+[sub_resource type="Resource" id="Resource_7msed"]
+script = ExtResource("outcome")
+text = "The floor gives way under you and you drop hard onto broken stone."
+health = -4
 
 [resource]
 script = ExtResource("event")
-prop = ExtResource("prop")
 kind = 3
 title = "Hollow floor"
 clue = "The ground sounds hollow under your boots. A cold draught rises from somewhere below."
-choices = Array[EventChoice]([SubResource("c0"), SubResource("c1")])
+choices = Array[ExtResource("choice")]([SubResource("c0"), SubResource("c1")])
 min_depth = 2
-max_depth = 99
 weight = 2
+prop = ExtResource("prop")
+sprung = SubResource("Resource_7msed")

@@ -1,9 +1,12 @@
 [gd_resource type="Resource" script_class="RoomEvent" format=3]
 
-[ext_resource type="Script" path="res://scripts/room_event.gd" id="event"]
-[ext_resource type="PackedScene" path="res://art/props/room-states-v1/tripwire.tscn" id="prop"]
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="3_vfoq7"]
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="4_vrhbm"]
+[ext_resource type="Script" path="res://scripts/supply_item.gd" id="5_3v0tg"]
 [ext_resource type="Script" path="res://scripts/event_choice.gd" id="choice"]
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="event"]
 [ext_resource type="Script" path="res://scripts/event_outcome.gd" id="outcome"]
+[ext_resource type="PackedScene" path="res://art/props/room-states-v1/tripwire.tscn" id="prop"]
 
 [sub_resource type="Resource" id="o0_0"]
 script = ExtResource("outcome")
@@ -12,7 +15,6 @@ text = "You ease over a taut wire. Nothing happens."
 
 [sub_resource type="Resource" id="o0_1"]
 script = ExtResource("outcome")
-weight = 1
 text = "Your heel catches the wire. Stones crash down from above!"
 health = -3
 strain = 5.0
@@ -21,7 +23,7 @@ strain = 5.0
 script = ExtResource("choice")
 label = "Step over carefully"
 time_cost = 2
-outcomes = Array[EventOutcome]([SubResource("o0_0"), SubResource("o0_1")])
+outcomes = Array[ExtResource("outcome")]([SubResource("o0_0"), SubResource("o0_1")])
 
 [sub_resource type="Resource" id="o1_0"]
 script = ExtResource("outcome")
@@ -30,7 +32,6 @@ text = "The wire parts with a twang. Overhead, a net of stones sags harmlessly."
 
 [sub_resource type="Resource" id="o1_1"]
 script = ExtResource("outcome")
-weight = 1
 text = "The wire snaps back and the stones come down anyway!"
 health = -4
 strain = 5.0
@@ -39,15 +40,20 @@ strain = 5.0
 script = ExtResource("choice")
 label = "Cut the wire"
 time_cost = 3
-outcomes = Array[EventOutcome]([SubResource("o1_0"), SubResource("o1_1")])
+outcomes = Array[ExtResource("outcome")]([SubResource("o1_0"), SubResource("o1_1")])
+
+[sub_resource type="Resource" id="Resource_11k3s"]
+script = ExtResource("outcome")
+text = "Your heel catches a wire you never saw. Stones crash down from above!"
+health = -3
+strain = 5.0
 
 [resource]
 script = ExtResource("event")
-prop = ExtResource("prop")
 kind = 3
 title = "A tripwire"
 clue = "The floor here is too clean, as if someone swept it. Something catches the lantern light at ankle height."
-choices = Array[EventChoice]([SubResource("c0"), SubResource("c1")])
-min_depth = 1
-max_depth = 99
+choices = Array[ExtResource("choice")]([SubResource("c0"), SubResource("c1")])
 weight = 3
+prop = ExtResource("prop")
+sprung = SubResource("Resource_11k3s")

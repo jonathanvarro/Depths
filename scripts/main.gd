@@ -317,6 +317,7 @@ var _wipe_pending := false  # wiped: the save already holds the aftermath
 var _save_queued := false
 var _settings: Control  # settings_screen.gd (#52)
 var _cave_theme: EnvironmentTheme  # floors 1-3; the fortress has its own (#44)
+var _next_opening := ""  # the next fight's round-one side (#73)
 var _fight_kind := ""  # "gate" or "queen" while those fights run (#44)
 var _props := {}  # cell -> prop node for this floor's room contents (#46)
 var _cell_now := Vector2i(-1, -1)
@@ -339,6 +340,7 @@ var _message_tween: Tween
 var _prompt: Control
 var _prompt_label: Label
 var _prompt_buttons: Array[Button] = []  # yes, then no
+var _prompt_choices: HBoxContainer  # where _choose's buttons go
 var _prompt_action := Callable()
 var _prompt_no_action := Callable()
 var _pack: Control  # pack_screen.gd
@@ -630,6 +632,7 @@ func _make_layout(depth: int) -> PackedStringArray:
 
 
 func _on_party_entered_cell(cell: Vector2i) -> void:
+	_look_for_traps(cell)
 	# A landmark (#117): named the first time, marked on the map from then on.
 	var landmark: Dictionary = Landmarks.at_cell(_map, cell)
 	if not landmark.is_empty() and not landmark["seen"]:
@@ -655,7 +658,14 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 		if lair:  # a mini-boss's lair (#145): warned, and free to back away
 			_ask(lair.warning, _lair_fight.bind(fight_cell, lair), _step_back, ["Go in", "Back away"])
 			return
+	if fight_cell != Vector2i(-1, -1) and not _map.triggered.has(fight_cell) and _hears_first(fight_cell):
+		_warn_ahead(fight_cell)
+		return
 	if fight_cell != Vector2i(-1, -1) and not _map.triggered.has(fight_cell):
+		if _map.alarmed and not _in_opening and (not _map.fight_groups.has(fight_cell) or _map.heard.has(fight_cell)):
+			_map.alarmed = false  # the bell warned them (#94)
+			_next_opening = "foes"
+			_show_message("They were ready for you - the bell gave you away.")
 		_map.enter(fight_cell)
 		var fixed: Array[EnemyType] = []  # a quest package's own fight (#123)
 		fixed.assign(_map.fight_groups.get(fight_cell, []))
@@ -667,7 +677,13 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 			return
 		DungeonMap.Content.STAIRS_DOWN:
 			_ask(environment_theme.descent_prompt, _go_to_floor.bind(_depth + 1, Arrival.FROM_ABOVE))
-		DungeonMap.Content.CHEST, DungeonMap.Content.TRAP, DungeonMap.Content.STRANGE_OBJECT, DungeonMap.Content.REST_SPOT:
+		DungeonMap.Content.TRAP:
+			var trap: RoomEvent = _map.events.get(cell)
+			if trap and trap.sprung and not _in_opening and not _party_state.sees_traps() and not _map.spotted.get(cell, false):
+				_spring_trap(cell, trap)  # no one saw it (#94)
+			else:
+				_run_event(cell)
+		DungeonMap.Content.CHEST, DungeonMap.Content.STRANGE_OBJECT, DungeonMap.Content.REST_SPOT:
 			_run_event(cell)
 		DungeonMap.Content.STAIRS_UP:
 			if _depth <= 1:  # floor 1, or the opening's daylight exit
@@ -708,6 +724,9 @@ func _run_event(cell: Vector2i) -> void:
 		_tip("needs_item", "A greyed choice needs something you aren't carrying: a pick, a spade, holy water or an antidote. They take pack space, but open safer ways through.")
 	var result: Dictionary = await _event_screen.finished
 	_end_encounter()
+	if _room_events.alarm_raised:  # a bell wire rang (#94)
+		_room_events.alarm_raised = false
+		_map.alarmed = true
 	for item in result.get("no_room", {}):
 		_left_over(item, result["no_room"][item])
 	# A chest may hold finer gear (owner, 2026-10-21).
@@ -746,6 +765,9 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 	var state = CombatState.new(_party_state, types)
 	if not _in_opening:
 		state.prepare(_depth, _fight_kind)  # deeper is tougher; some elites (#140)
+	if _next_opening != "":
+		state.set_opening(_next_opening)  # struck first, or caught out (#73)
+		_next_opening = ""
 	if opening_spider:
 		for foe in state.foes:
 			foe.has_webbed = true  # the opening's spider bites first (#59)
@@ -1281,8 +1303,8 @@ func _add_room_props() -> void:
 		var event: RoomEvent = _map.events[cell]
 		if _map.solid.has(cell):
 			continue
-		if event.kind == DungeonMap.Content.TRAP and not _party_state.sees_traps() and not _map.triggered.has(cell):
-			continue  # hidden - unless Mara's keen eyes spot it (#95)
+		if event.kind == DungeonMap.Content.TRAP and not _trap_seen(cell):
+			continue  # hidden until spotted: keen eyes (#95), Trap sense, or the light (#94)
 		_create_room_prop(cell,event)
 		if _map.triggered.has(cell):
 			_empty_prop(cell)
@@ -1444,6 +1466,114 @@ func _queen_fight(cell: Vector2i) -> void:
 	var types: Array[EnemyType] = []
 	types.assign(QUEEN_FIGHT)
 	_start_combat(cell, types)
+
+
+# --- Hearing them first (#73, owner 2026-10-25) --------------------------
+
+## How often an ordinary fight is heard before it notices the party.
+const HEAR_FIRST_CHANCE := 0.6
+## Striking first goes wrong this often: they hear you and move first.
+const STRIKE_FIRST_FAILS := 0.25
+## Slip past (a Scout's talent): odds, and what the creeping costs.
+const SLIP_CHANCE := 0.75
+const SLIP_PER_EXTRA_HERO := 0.1
+const SLIP_LOW_LIGHT := 0.1
+const SLIP_TIME := 2
+const SLIP_STRAIN := 4.0
+
+## Whether an ordinary fight's room is heard first. Rolled once per fight.
+## Not lairs, quest fights, the opening or set fights.
+func _hears_first(fight_cell: Vector2i) -> bool:
+	if _in_opening or _fight_kind != "" or _map.lairs.has(fight_cell) or (_map.fight_groups.has(fight_cell) and not _map.heard.has(fight_cell)):
+		return false
+	if _map.alarmed:
+		return false  # a bell rang: they're listening for you (#94)
+	if not _map.heard.has(fight_cell):
+		_map.heard[fight_cell] = _rng.randf() < HEAR_FIRST_CHANCE
+	return _map.heard[fight_cell]
+
+
+## They haven't noticed you: what's ahead, and what to do about it.
+func _warn_ahead(fight_cell: Vector2i) -> void:
+	if not _map.fight_groups.has(fight_cell):  # the same foes if you come back
+		var group: Array[EnemyType] = []
+		group.assign(encounter_pool(_depth, _party_state.living_members().size()).pick_random())
+		_map.fight_groups[fight_cell] = group
+	var group: Array = _map.fight_groups[fight_cell]
+	var choices := [["Fight", _ambush_fight.bind(fight_cell, "")],
+			["Strike first", _ambush_fight.bind(fight_cell, "strike")]]
+	var scout := _slip_leader()
+	if scout:
+		choices.append(["Slip past (%d%%)" % roundi(_slip_chance() * 100), _slip_past.bind(fight_cell, scout)])
+	choices.append(["Back away", _step_back])
+	_choose("Ahead, unaware of you: %s." % _group_words(group), choices)
+	_tip("heard_first", "You heard them first. Strike first to act before them - though they may hear you coming - or back away and come back later. A Scout can learn to slip past.")
+
+
+## Starts the heard fight: as usual, or striking first.
+func _ambush_fight(fight_cell: Vector2i, how: String) -> void:
+	if how == "strike":
+		if _rng.randf() < STRIKE_FIRST_FAILS:
+			_next_opening = "foes"
+			_show_message("A loose stone gives you away - they turn on you first!")
+		else:
+			_next_opening = "party"
+			_show_message("You strike before they know you're there!")
+	_map.enter(fight_cell)
+	var fixed: Array[EnemyType] = []
+	fixed.assign(_map.fight_groups.get(fight_cell, []))
+	_start_combat(fight_cell, fixed)
+
+
+## A standing Scout who has learned to slip past, or null.
+func _slip_leader() -> Companion:
+	for hero: Companion in _party_state.living_members():
+		if hero.has_talent("slip_past"):
+			return hero
+	return null
+
+
+func _slip_chance() -> float:
+	var chance: float = SLIP_CHANCE - SLIP_PER_EXTRA_HERO * (_party_state.living_members().size() - 1)
+	if _party_state.supplies.light_band() <= Supplies.Light.DIM:
+		chance += SLIP_LOW_LIGHT
+	return clampf(chance, 0.2, 0.95)
+
+
+## The Scout leads the party past, light hooded: time and nerves either
+## way; unseen, the room is passed (no XP or loot); seen, they move first.
+func _slip_past(fight_cell: Vector2i, scout: Companion) -> void:
+	_party_state.advance_time(SLIP_TIME)
+	for hero: Companion in _party_state.living_members():
+		hero.change_strain(SLIP_STRAIN)
+	if _rng.randf() < _slip_chance():
+		_map.triggered[fight_cell] = true  # gone from here for this trip
+		_show_message("%s leads the way, light hooded. You slip past unseen." % scout.display_name)
+		return
+	_next_opening = "foes"
+	_show_message("Halfway past, something turns. They've seen you!")
+	_map.enter(fight_cell)
+	var fixed: Array[EnemyType] = []
+	fixed.assign(_map.fight_groups.get(fight_cell, []))
+	_start_combat(fight_cell, fixed)
+
+
+## "two goblins and a goblin archer".
+func _group_words(group: Array) -> String:
+	var counts := {}
+	var order: Array[String] = []
+	for type in group:
+		var name: String = type.display_name.to_lower()
+		if not counts.has(name):
+			order.append(name)
+		counts[name] = counts.get(name, 0) + 1
+	var parts: Array[String] = []
+	for name in order:
+		var n: int = counts[name]
+		parts.append(_a(name) if n == 1 else "%s %ss" % [["", "one", "two", "three", "four"][mini(n, 4)], name])
+	if parts.size() == 1:
+		return parts[0]
+	return ", ".join(parts.slice(0, parts.size() - 1)) + " and " + parts[-1]
 
 
 ## Into a mini-boss's lair (#145). A full party meets one more foe; one
@@ -2193,6 +2323,18 @@ func _on_party_interacted(cell: Vector2i) -> void:
 ## and dies. She has to light the spare (#69).
 func _trip() -> void:
 	_tripped = true
+	await _fall(func():
+		_party_state.supplies.lose_torch()
+		Sounds.play(self, "burnout", -9.0)
+		_show_message("You stumble - the torch flies from your hand and hisses out.")
+		_say("trip", true))
+	_next_fight_at = _steps_taken + OPENING_SPIDER_AFTER_TRIP
+	_refresh_tutorial_hint()
+
+
+## Going down (#94; first made for the opening's trip, #69): the view
+## pitches to the floor with a thud, `on_ground` happens, then a slow rise.
+func _fall(on_ground := Callable()) -> void:
 	_party.locked = true
 	var camera: Camera3D = _party.camera
 	var fall := create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
@@ -2201,10 +2343,8 @@ func _trip() -> void:
 	fall.parallel().tween_property(camera, "position:y", 0.45, 0.3)
 	await fall.finished
 	Sounds.play(self, "stumble", -6.0)
-	_party_state.supplies.lose_torch()
-	Sounds.play(self, "burnout", -9.0)
-	_show_message("You stumble - the torch flies from your hand and hisses out.")
-	_say("trip", true)
+	if on_ground.is_valid():
+		on_ground.call()
 	await get_tree().create_timer(1.4).timeout
 	var rise := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	rise.tween_property(camera, "rotation:x", 0.0, 1.6)
@@ -2212,8 +2352,54 @@ func _trip() -> void:
 	rise.parallel().tween_property(camera, "position:y", Party.EYE_HEIGHT, 1.6)
 	await rise.finished
 	_party.locked = false
-	_next_fight_at = _steps_taken + OPENING_SPIDER_AFTER_TRIP
-	_refresh_tutorial_hint()
+
+
+# --- Traps (#94, owner 2026-10-25) --------------------------------------
+
+## Without keen eyes or Trap sense, spotting a trap comes down to the light.
+const SPOT_CHANCE := {Supplies.Light.BRIGHT: 0.5, Supplies.Light.STEADY: 0.35, Supplies.Light.DIM: 0.15, Supplies.Light.OUT: 0.0}
+
+func _trap_seen(cell: Vector2i) -> bool:
+	return _party_state.sees_traps() or _map.spotted.get(cell, false) or _map.triggered.has(cell)
+
+
+## Coming near a trap: someone may spot it (rolled once per trap).
+func _look_for_traps(cell: Vector2i) -> void:
+	if _in_opening or _map == null:
+		return
+	for side in [Vector2i.ZERO, Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]:
+		var near: Vector2i = cell + side
+		var event: RoomEvent = _map.events.get(near)
+		if event == null or event.kind != DungeonMap.Content.TRAP or _map.triggered.has(near) or _map.spotted.has(near) or _party_state.sees_traps():
+			continue
+		_map.spotted[near] = _rng.randf() < SPOT_CHANCE[_party_state.supplies.light_band()]
+		if _map.spotted[near]:
+			_create_room_prop(near, event)
+			var lead: Companion = _party_state.living_members()[0]
+			_show_message("%s spots something: %s." % [lead.display_name, event.title.to_lower()])
+
+
+## Walking into a trap no one saw: it springs on whoever leads, with a fall.
+func _spring_trap(cell: Vector2i, trap: RoomEvent) -> void:
+	_party.locked = true
+	var choice := EventChoice.new()
+	choice.time_cost = 1
+	choice.outcomes.assign([trap.sprung])
+	var lead: Companion = _party_state.living_members()[0]
+	var health_before := lead.health
+	await _fall(func():
+		_room_events.resolve(_party_state, choice)
+		_show_message(trap.sprung.text)
+		if lead.health < health_before:
+			_bleed_pulse(lead))
+	if _room_events.alarm_raised:
+		_room_events.alarm_raised = false
+		_map.alarmed = true
+	_create_room_prop(cell, trap)
+	_empty_prop(cell)
+	_expedition.events_resolved += 1
+	_tip("trap_sprung", "Traps you don't spot spring as you walk in. Brighter light helps you see them, and so do keen eyes and a Scout's Trap sense. Spotted, a trap can be stepped over, disarmed or left alone.")
+	_party.locked = false
 
 
 ## The companions' bodies, the fire, the chest, and the daylight once the
@@ -2885,10 +3071,40 @@ func _on_party_moved(cell: Vector2i, facing: int) -> void:
 ## `answers`: the two buttons' words, yes first (a lair: "Go in", "Back away").
 func _ask(question: String, on_yes: Callable, on_no := Callable(), answers: Array = ["Go", "Stay"]) -> void:
 	_prompt_label.text = question
+	for child in _prompt_choices.get_children():
+		if child not in _prompt_buttons:
+			child.queue_free()  # a several-answer question's buttons (_choose)
 	for i in _prompt_buttons.size():
 		_prompt_buttons[i].text = answers[i]
+		_prompt_buttons[i].visible = true
 	_prompt_action = on_yes
 	_prompt_no_action = on_no
+	_prompt.visible = true
+	_party.locked = true
+
+
+## Shows a question with several answers, [[label, Callable], ...]. Enter
+## picks the first, Escape the last.
+func _choose(question: String, choices: Array) -> void:
+	for button in _prompt_buttons:
+		button.visible = false
+	for child in _prompt_choices.get_children():
+		if child not in _prompt_buttons:
+			child.queue_free()
+	for choice in choices:
+		var button := Button.new()
+		button.text = choice[0]
+		button.custom_minimum_size = Vector2(120, 72)
+		button.focus_mode = Control.FOCUS_NONE
+		button.add_theme_font_size_override("font_size", 24)
+		var action: Callable = choice[1]
+		button.pressed.connect(func():
+			_prompt_action = action
+			_answer_prompt(true))
+		_prompt_choices.add_child(button)
+	_prompt_label.text = question
+	_prompt_action = choices[0][1]
+	_prompt_no_action = choices[-1][1]
 	_prompt.visible = true
 	_party.locked = true
 
@@ -3317,6 +3533,7 @@ func _build_prompt(ui: Control) -> void:
 		button.pressed.connect(_answer_prompt.bind(spec[1]))
 		buttons.add_child(button)
 		_prompt_buttons.append(button)
+	_prompt_choices = buttons  # _choose adds its own buttons alongside
 	_prompt = center
 	_prompt.visible = false
 

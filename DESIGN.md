@@ -289,7 +289,7 @@ Suggested initial presentation: one campsite screen with a few selectable activi
   - The cave path lists each open route and shows progress toward the next one.
   - This replaces the single floor-2 route at 40g, which the playtest bot never found worth buying (balance proposal 7).
 - **Room contents (#46):** enemies **ambush** and aren't shown.
-  - Chests, objects and rest spots stand in their rooms. Unresolved traps need Keen eyes; their resolved remains are visible to everyone.
+  - Chests, objects and rest spots stand in their rooms. An unresolved trap shows once spotted (#94: keen eyes, Trap sense, a boon, or the light); resolved remains are visible to everyone.
   - The goblin stash opens its cairn, the abandoned pack has a searched variant, and the strongbox has its own closed/opened iron-box art.
   - Every current room event has art. [Resolved-state props](docs/room-prop-states.md) distinguish spent workings, idol niche, pool, rest spots, traps and the iron strongbox; state survives revisiting and saving. Stone/fortress stairs use dedicated artwork; cave roots/pit and opening daylight keep their existing look.
 - **Settings (#52):** master, music and effects volume (separate audio buses), fullscreen on computers, screen flashes on/off, and text size (Normal / Large / Larger, scaling the whole interface).
@@ -328,7 +328,8 @@ Suggested initial presentation: one campsite screen with a few selectable activi
     - Recruits join one level below the best hero and double-earn until they catch up.
   - **Talents** (two to choose from at levels 2 and 4, by role):
     - Warden: Bulwark or Stalwart, then Iron hide or Steel nerves.
-    - Scout and Rogue: Deadeye or Quick hands, then Slip the web or Opening shot.
+    - Scout: Slip past or Quick hands, then Slip the web or Opening shot. (Slip past replaced Deadeye for Scouts on 2026-10-25, #73.)
+    - Rogue: Deadeye or Quick hands, then Slip the web or Opening shot.
     - Brawler: Heavy hands or Thick skull, then Berserker or Unbreakable.
     - Healer: Steady hands or Steel nerves, then Triage or Herbalist.
   - **Armour:** a body slot in the Pack (compared before and after). The smith sells the padded coat (−1) and the leather jerkin (−2, 2 slower). Armour applies after guarding, minimum 1.
@@ -544,6 +545,14 @@ Deeper floors mix them (depth 1 mostly single rats; depth 3 pairs and trios like
       - The captain comes with a goblin; a full party also meets an archer.
       - Lairs have no random elites.
     - **Reward:** a win pays a magic weapon or armour (rare one time in four) and 10 + 5 × depth gold, besides the fight's usual XP and drops.
+  - **Hearing them first — owner decision 2026-10-25 (#73):**
+    - **When:** about 60% of ordinary fights are heard before they notice the party, as it reaches their room. Rolled once per fight, so backing away and coming back finds them as they were. Ambushes from events, lairs, quest fights, the gate and the queen are unchanged.
+    - **The warning** names what's ahead ("Ahead, unaware of you: two goblins and a goblin archer.") and offers:
+      - **Fight:** as usual.
+      - **Strike first:** the whole party acts before them in round one. One time in four, a loose stone gives you away and they act first instead.
+      - **Back away:** step back; they stay where they are, unaware.
+      - **Slip past:** only with a standing Scout who has the **Slip past** talent, a level-2 choice that replaced Deadeye. It costs 2 time and +4 nerves each. Odds are 75%, minus 10% for each hero beyond the first, plus 10% in dim light or darkness. Unseen, the party is past them for this trip, with no XP or loot. Seen, they act first.
+    - A first-time tip explains the choice.
   - **Creature territory, first trial — lamp-eaters (#149, owner chose 2026-10-25):**
     - **Where and how often:** an old lamp store, placed by chance on 2 floors in 5 on floors 2–3, as a side room. Nothing outside the room hints at it yet.
     - **The clue, before anything is decided:** every lamp is dead and the oil licked dry, moth-wings drift in the dust, and something "drinks light". Sealed oil flasks still glint on a high shelf.
@@ -590,6 +599,18 @@ Rewards include treasure, equipment, knowledge, shortcuts, and safe resting plac
 Unknown encounters should offer suggestive evidence while retaining uncertainty. Players should often understand the type of risk they are accepting without knowing the precise outcome. Avoid making repeated arbitrary punishment the main source of difficulty.
 
 *Implemented (#16):* chests, traps, strange objects and rest spots are **room events**, data files in `data/events/` (RoomEvent → EventChoice → EventOutcome). Arriving shows a **clue** that hints at the risk; choices such as search, step carefully, touch or rest spend time, and an always-present **Leave it** keeps the event for later. Investigations ("prod it first", "study it") cost time, add to the clue and keep the event open. Outcomes are picked by weight and can hurt, heal over time, change strain, injure, spill or add lamp oil, give supplies, rest, or spring an **ambush** fight. Each event has a depth range (goblin stash, hollow floor and old campsite only from depth 2). The generator's content mix shifts with depth: deeper floors have more fights and traps and fewer rest spots. First set: abandoned pack, goblin stash, tripwire, hollow floor, pale idol, still pool, dry alcove, old campsite. No gold yet, so rewards are supplies.
+
+**Traps — owner decision 2026-10-25 (#94):**
+- **Spotted or sprung:** a trap someone spots offers its choices: step over, disarm, or leave it. One no one spots springs as the party walks in, on the hero in front, with the shared fall (the camera pitches to the floor, a thud, a slow rise; first made for the opening's trip).
+- **Who spots:** Mara's keen eyes, a boon, or a Scout's **Trap sense** see every trap. (Trap sense is a level-4 choice; it replaced the copied Slip the web, which Mara keeps.) Otherwise it's the light: 50% bright, 35% steady, 15% dim, none in the dark. It's rolled once per trap as the party comes near.
+- **The traps:**
+  - **Tripwire:** stones fall, 3 damage.
+  - **Hollow floor:** 4 damage.
+  - **Bell wire** (floor 2 and down): it rings, so the next fight on that floor can't be heard first and acts first.
+  - **Snare:** a limp.
+  - **Dart plate** (floor 2 and down): 3 damage, with the red flash.
+- **Art:** the snare and dart plate borrow the tripwire and hollow-floor props until their own arrive (#159).
+- **Tip:** a first-time tip explains it the first time a trap springs.
 
 **Starter-cave economy research (2026-10-17, #25):** see [the sourced research and connected paper prototype](docs/starter-cave-economy-research.md) for proposed attributes, XP, rats/spiders/goblins, basic equipment, treasure budgets, delayed healing, camp services, recruitment and worked expedition costs. It separates the wounded survivor's opening escape from the later recruited-party budget, identifies missing reward/rest guarantees in the current generator and explains the connection between finite encounters and recovery safeguards. These are recommendations for owner review, not approved mechanics or playtested balance; individual death/loss rules, cave persistence, combat rules and exact values remain open. The confirmed #8 lone-survivor/timed-effect and #26 stash/recruitment decisions are preserved. No gameplay implementation is included.
 

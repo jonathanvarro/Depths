@@ -1,0 +1,50 @@
+[gd_resource type="Resource" script_class="RoomEvent" format=3]
+
+[ext_resource type="Script" path="res://scripts/event_choice.gd" id="1_vy5ri"]
+[ext_resource type="Script" path="res://scripts/event_outcome.gd" id="2_qyv30"]
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="3_0vsxm"]
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="4_ahfr0"]
+[ext_resource type="Script" path="res://scripts/supply_item.gd" id="5_6b62x"]
+[ext_resource type="Resource" path="res://data/injuries/limp.tres" id="6_geasg"]
+[ext_resource type="PackedScene" path="res://art/props/room-states-v1/tripwire.tscn" id="7_wl3jw"]
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="8_wblt4"]
+
+[sub_resource type="Resource" id="Resource_mwqua"]
+script = ExtResource("2_qyv30")
+weight = 4
+text = "You give it a wide berth."
+
+[sub_resource type="Resource" id="Resource_p341n"]
+script = ExtResource("2_qyv30")
+text = "Your boot clips the loop - it snaps tight around your ankle."
+injury = ExtResource("6_geasg")
+
+[sub_resource type="Resource" id="Resource_nt5xr"]
+script = ExtResource("1_vy5ri")
+label = "Step around it"
+outcomes = Array[ExtResource("2_qyv30")]([SubResource("Resource_mwqua"), SubResource("Resource_p341n")])
+
+[sub_resource type="Resource" id="Resource_vaq3h"]
+script = ExtResource("2_qyv30")
+text = "The loop whips shut on the stick. Harmless now."
+
+[sub_resource type="Resource" id="Resource_rv8bw"]
+script = ExtResource("1_vy5ri")
+label = "Spring it with a stick"
+time_cost = 2
+outcomes = Array[ExtResource("2_qyv30")]([SubResource("Resource_vaq3h")])
+
+[sub_resource type="Resource" id="Resource_40hf7"]
+script = ExtResource("2_qyv30")
+text = "A noose snaps tight around your ankle and yanks you off your feet."
+injury = ExtResource("6_geasg")
+
+[resource]
+script = ExtResource("8_wblt4")
+kind = 3
+title = "A snare"
+clue = "A loop of cord lies half-buried in the grit, staked to the rock."
+choices = Array[ExtResource("1_vy5ri")]([SubResource("Resource_nt5xr"), SubResource("Resource_rv8bw")])
+weight = 2
+prop = ExtResource("7_wl3jw")
+sprung = SubResource("Resource_40hf7")

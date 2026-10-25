@@ -171,6 +171,9 @@ var result := Result.ONGOING
 var rng := RandomNumberGenerator.new()
 
 var _order: Array = []  # Companion or Foe, this round's acting order
+## Who moves first in round one (#73): "party" after striking first, "foes"
+## when they heard you coming; "" goes by initiative as usual.
+var opening := ""
 var _turn := 0
 var _defending := {}  # Companion -> true until their next turn
 var _webbed := {}  # Companion -> true until their next action
@@ -931,6 +934,12 @@ func _fall_text(hero: Companion) -> String:
 	return " %s falls." % hero.display_name
 
 
+## Sets who goes first in round one (#73) and reorders it.
+func set_opening(side: String) -> void:
+	opening = side
+	_build_order()
+
+
 func _build_order() -> void:
 	_order.clear()
 	var snared := _snared.duplicate()  # a snare lasts one round (#140)
@@ -938,8 +947,11 @@ func _build_order() -> void:
 		_order.append(hero)
 	for foe in living_foes():
 		_order.append(foe)
-	# Higher initiative first; ties go to the party.
+	# Higher initiative first; ties go to the party. In round one, a side
+	# that struck first (or was caught out) goes before the other (#73).
 	_order.sort_custom(func(a, b):
+		if round == 1 and opening != "" and (a is Companion) != (b is Companion):
+			return (a is Companion) == (opening == "party")
 		var ia: int = (a.effective_initiative() - (SNARE_INITIATIVE if _snared.has(a) else 0)) if a is Companion else a.type.initiative
 		var ib: int = (b.effective_initiative() - (SNARE_INITIATIVE if _snared.has(b) else 0)) if b is Companion else b.type.initiative
 		if ia != ib:

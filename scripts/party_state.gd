@@ -127,9 +127,9 @@ func oil_rate() -> float:
 	return rate
 
 
-## Traps show: Mara's keen eyes (#95), or a boon.
+## Traps show: Mara's keen eyes (#95), a boon, or a Scout's Trap sense (#94).
 func sees_traps() -> bool:
-	return has_trait("keen_eyes") or living_members().any(func(m: Companion): return m.boon_flag("reveals_traps"))
+	return has_trait("keen_eyes") or living_members().any(func(m: Companion): return m.boon_flag("reveals_traps") or m.has_talent("trap_sense"))
 
 
 func draws_ambush() -> bool:

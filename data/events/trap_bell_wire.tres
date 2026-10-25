@@ -1,0 +1,58 @@
+[gd_resource type="Resource" script_class="RoomEvent" format=3]
+
+[ext_resource type="Script" path="res://scripts/event_choice.gd" id="1_82pcq"]
+[ext_resource type="Script" path="res://scripts/event_outcome.gd" id="2_qe5rh"]
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="3_j2xai"]
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="4_trh73"]
+[ext_resource type="Script" path="res://scripts/supply_item.gd" id="5_c5nqh"]
+[ext_resource type="PackedScene" path="res://art/props/room-states-v1/tripwire.tscn" id="6_ng81j"]
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="7_lysvu"]
+
+[sub_resource type="Resource" id="Resource_yg6m3"]
+script = ExtResource("2_qe5rh")
+weight = 3
+text = "You ease over without a sound."
+
+[sub_resource type="Resource" id="Resource_5ervo"]
+script = ExtResource("2_qe5rh")
+alarm = true
+text = "The bell tinkles. Somewhere ahead, something goes very quiet."
+
+[sub_resource type="Resource" id="Resource_eggm6"]
+script = ExtResource("1_82pcq")
+label = "Step over carefully"
+time_cost = 2
+outcomes = Array[ExtResource("2_qe5rh")]([SubResource("Resource_yg6m3"), SubResource("Resource_5ervo")])
+
+[sub_resource type="Resource" id="Resource_om73q"]
+script = ExtResource("2_qe5rh")
+weight = 4
+text = "You still the bell in your fist and cut the wire."
+
+[sub_resource type="Resource" id="Resource_3tn2s"]
+script = ExtResource("2_qe5rh")
+alarm = true
+text = "The clapper slips your fingers - one clear note rings out."
+
+[sub_resource type="Resource" id="Resource_65pvp"]
+script = ExtResource("1_82pcq")
+label = "Hold the bell and cut it"
+time_cost = 3
+outcomes = Array[ExtResource("2_qe5rh")]([SubResource("Resource_om73q"), SubResource("Resource_3tn2s")])
+
+[sub_resource type="Resource" id="Resource_ekalo"]
+script = ExtResource("2_qe5rh")
+alarm = true
+text = "Your foot snags a wire you never saw. A little bell rings out, bright and terrible. Whatever is down here knows you're coming."
+strain = 3.0
+
+[resource]
+script = ExtResource("7_lysvu")
+kind = 3
+title = "A bell wire"
+clue = "A thin wire across the way, strung with a tiny goblin bell. Ring it and everything down here will know."
+choices = Array[ExtResource("1_82pcq")]([SubResource("Resource_eggm6"), SubResource("Resource_65pvp")])
+min_depth = 2
+weight = 2
+prop = ExtResource("6_ng81j")
+sprung = SubResource("Resource_ekalo")

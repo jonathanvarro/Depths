@@ -57,6 +57,14 @@ var fight_groups := {}
 var packages: Array = []
 ## Mini-boss lairs (#145): the lair's 'E' cell -> its package id.
 var lairs := {}
+## Traps someone has spotted, or missed (#94): cell -> true/false, rolled
+## once as the party comes near.
+var spotted := {}
+## A bell wire rang (#94): the next fight here was waiting for the party.
+var alarmed := false
+## Fights heard before they noticed you (#73): fight cell -> true/false,
+## rolled once, so backing away and coming back finds them as they were.
+var heard := {}
 ## Floor-specific places, e.g. the fortress's "hall" and "gates" (#44).
 var marks := {}
 ## This floor's landmarks (#117, landmarks.gd): [{id, name, cells, centre, seen}].

@@ -112,6 +112,7 @@ func _initialize() -> void:
 	var fight_cell: Vector2i = main._party.cell + main.Party.DIRECTIONS[main._party.facing]
 	main._map.contents[fight_cell] = main.DungeonMap.Content.ENCOUNTER
 	main._map.encounter_zones[fight_cell] = fight_cell
+	main._map.heard[fight_cell] = false  # they've seen you: straight into the fight (#73)
 	main._party.place(main._map, fight_cell)
 	main._on_party_entered_cell(fight_cell)  # as if walking in
 	await create_timer(0.2).timeout

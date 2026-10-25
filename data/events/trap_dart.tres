@@ -1,0 +1,57 @@
+[gd_resource type="Resource" script_class="RoomEvent" format=3]
+
+[ext_resource type="Script" path="res://scripts/event_choice.gd" id="1_a2u73"]
+[ext_resource type="Script" path="res://scripts/event_outcome.gd" id="2_ammb1"]
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="3_2ixku"]
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="4_kgu5h"]
+[ext_resource type="Script" path="res://scripts/supply_item.gd" id="5_ka5mt"]
+[ext_resource type="PackedScene" path="res://art/props/room-states-v1/hollow-floor.tscn" id="6_grots"]
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="7_yw3y8"]
+
+[sub_resource type="Resource" id="Resource_n2x5r"]
+script = ExtResource("2_ammb1")
+weight = 3
+text = "You keep clear of the plate."
+
+[sub_resource type="Resource" id="Resource_5pu53"]
+script = ExtResource("2_ammb1")
+text = "The stone shifts anyway. A dart hisses out and bites your calf."
+health = -3
+
+[sub_resource type="Resource" id="Resource_lv1ea"]
+script = ExtResource("1_a2u73")
+label = "Edge along the far wall"
+time_cost = 2
+outcomes = Array[ExtResource("2_ammb1")]([SubResource("Resource_n2x5r"), SubResource("Resource_5pu53")])
+
+[sub_resource type="Resource" id="Resource_tl48r"]
+script = ExtResource("2_ammb1")
+weight = 3
+text = "The plate clicks against the stone and holds."
+
+[sub_resource type="Resource" id="Resource_ff13y"]
+script = ExtResource("2_ammb1")
+text = "It slips - click - and a dart bites deep."
+health = -3
+
+[sub_resource type="Resource" id="Resource_ogn54"]
+script = ExtResource("1_a2u73")
+label = "Jam the plate with a stone"
+time_cost = 2
+outcomes = Array[ExtResource("2_ammb1")]([SubResource("Resource_tl48r"), SubResource("Resource_ff13y")])
+
+[sub_resource type="Resource" id="Resource_fubqk"]
+script = ExtResource("2_ammb1")
+text = "Click. Darts hiss from the wall, and one bites deep."
+health = -3
+
+[resource]
+script = ExtResource("7_yw3y8")
+kind = 3
+title = "A dart plate"
+clue = "Tiny holes pock the wall at knee height, and one floor stone sits a shade too proud."
+choices = Array[ExtResource("1_a2u73")]([SubResource("Resource_lv1ea"), SubResource("Resource_ogn54")])
+min_depth = 2
+weight = 2
+prop = ExtResource("6_grots")
+sprung = SubResource("Resource_fubqk")
