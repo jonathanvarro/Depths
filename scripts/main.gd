@@ -1042,7 +1042,7 @@ func _start_new_expedition() -> void:
 		_camp_state.bounty_paid = true
 		_party_state.supplies.gold += _camp_state.QUEEN_BOUNTY
 		_party_state.supplies.changed.emit()
-		note = "The camp cheers the queen's death. The quartermaster pays the bounty: %d gold." % _camp_state.QUEEN_BOUNTY
+		note = "The camp cheers. Bounty paid: %d gold. Vael only asks about the way down." % _camp_state.QUEEN_BOUNTY
 	_camp_loop(reward, note)
 
 
@@ -1492,10 +1492,13 @@ func _queen_defeated() -> void:
 		else:
 			_camp_state.stash.gear.append(prize)  # carried up for you
 		_party_state.supplies.changed.emit()
+	# A big moment, but a side quest (#157): end by pointing deeper.
+	var onward := "Whatever the commander is looking for lies further down. The way down continues." \
+			if Quests.has_flag(_camp_state, "lower_gate", "seen") \
+			else "But the commander didn't send you down here for her. Somewhere past the fortress, the way down continues."
+	var hoard := "In her hoard: the %s. " % prize.display_name.to_lower() if prize else ""
 	_results.show_brief("The goblin queen is dead",
-			"Her guards scatter into the dark and the drums fall silent. The fortress is broken. The king's camp will want to hear of this - and pay for it." + ("
-
-In her hoard: the %s." % prize.display_name.to_lower() if prize else ""),
+			"Her guards scatter into the dark and the drums fall silent. The king's camp will want to hear of this - and pay for it.\n" + hoard + onward,
 			"Continue",preload("res://art/illustrations/fortress-v1/victory.png"))
 	await _results.continue_pressed
 	_results.visible = false

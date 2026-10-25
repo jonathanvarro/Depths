@@ -241,7 +241,7 @@ Suggested initial presentation: one campsite screen with a few selectable activi
 - **A wipe** is saved straight away as its aftermath, so quitting can't undo it.
 - **During the opening** only a marker is kept: Continue restarts the escape in the same maze.
 
-**Decided 2026-10-18 (#44): the cave's objective is the goblin fortress and its queen.** *Changed 2026-10-19 (#122): the relic is now the main goal, and the queen is a side quest on the way. The built fortress and queen fight below stay as they are, and the victory wording will need to change once the relic exists.*
+**Decided 2026-10-18 (#44): the cave's objective is the goblin fortress and its queen.** *Changed 2026-10-19 (#122): the relic is now the main goal, and the queen is a side quest on the way. The built fortress and queen fight below stay as they are. Her victory is reworded as a big but not final moment (#157, 2026-10-25).*
 - **Floors:** 1–2 are natural cave; **3 is the fortress outskirts** (palisades, watch posts, goblin marks, war drums); **4 is the fortress**, with the queen's hall.
 - **The gate:** a barred gate on floor 4, held by its guards. Once broken it **stays broken**, even as the cave shifts daily.
 - **The queen:**
@@ -251,7 +251,7 @@ Suggested initial presentation: one campsite screen with a few selectable activi
 - **No retreat** from her fight, with a warning before entering the hall.
 - **New enemies:** a **goblin archer** (back row, reaches the back row) and a **goblin guard** (shield wall), with more possible after ChatGPT's research (#97).
 - **Signposting:** rumours at camp, and signs in the cave (marks, drums, trophies).
-- **Victory:** the site is cleared, with a story beat and a bounty at camp. The next site is "coming later", and the cave stays explorable.
+- **Victory:** ~~the site is cleared~~ a side quest done (The Queen's Claim, #157): a big moment with a story beat and a bounty at camp, then the way down continues. The cave stays explorable.
 - **Proposed numbers** are on #44. **Art** is requested in #99.
 - *Built (2026-10-18), placeholder art:*
   - **Four floors.**
@@ -271,10 +271,10 @@ Suggested initial presentation: one campsite screen with a few selectable activi
   - **Archers** (8 health) stand at the back and reach the back row.
   - **Floor 4 groups** mix guards, archers and goblins.
   - **Victory:**
-    - "The goblin queen is dead" screen.
-    - Contracts stop, and a **50g bounty** is paid at camp.
+    - "The goblin queen is dead" screen, with the full victory illustration. **Decided 2026-10-25 (#157):** it stays a big moment but isn't final. The text ends by pointing deeper ("the way down continues"), worded for whether the lower water gate has been seen yet.
+    - Contracts stop, and a **50g bounty** is paid at camp. Commander Vael only asks about the way down.
     - The hall stays empty, and exploring goes on.
-  - **Camp rumours** at the fire and the cave path track progress.
+  - **Camp rumours** at the fire and the cave path track progress. After the gate breaks or the queen dies, they turn towards the way down rather than treating her as the last thing left.
   - **Simulated** (`tools/balance_sim.gd`, simple play): a fresh party of three beats the queen 92% of the time in about 11 rounds, losing about 36 of 66 health. The gate fight costs about 16.
   - The old "end the expedition at the bottom" stand-in is gone.
 

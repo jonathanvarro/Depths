@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-25 – Claude
+- Did: #157 the queen's death now reads as a finished side quest, not the ending. The victory screen keeps its title and full illustration but drops "The fortress is broken" and ends with a line pointing deeper, worded by whether `lower_gate` has the `seen` flag (main.gd `_queen_defeated`). The text now uses `\n` instead of literal blank lines, which had opened large gaps and shrunk the illustration. The bounty note was shortened to fit and adds Vael asking about the way down. fortress_check.gd gained two #157 checks. Camp rumours (camp_screen.gd `_rumour`) no longer say "only the queen's hall remains", and they turn to the way down after her death. DESIGN.md's #44 section updated.
+- Next: A proper Vael conversation after the queen (a data/conversations entry) would make his reaction a scene instead of a line; not done here.
+- Watch out: Untracked tools/lairs_check.gd.uid and tools/story/build_lairs.gd.uid were left alone (not this task's).
+
 ## 2026-10-25 – ChatGPT
 - Did: #155 brings chest loot, reward overflow and the live merchant into the approved Field kit: canvas stock/finds left, physical shared backpack right, pinned inspection and explicit Take/Leave/Buy/Sell. Shared kit_exchange presentation preserves drag, Take All, actual capacity/stacks/prices, lantern upgrade, unloading and emergency torches. Repeated identical spare gear now survives Leave/partial Take without being overwritten. Opening/full-pack tutorial copy and maintained harness selectors follow inspection. No new raster art; original Take All SVG only. Handoff/review: docs/loot-and-merchant-kit.md and art/concepts/interface/exchange-live-v1/inspector.html.
 - Next: Owner reviews live loot/trade alongside Equipment. Physical iPhone reach/readability/performance remains #66; broader screen consistency remains #51. Smith and other camp services were not expanded in this task.

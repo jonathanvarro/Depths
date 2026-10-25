@@ -171,6 +171,7 @@ func _initialize() -> void:
 	await _win_fight()
 	await create_timer(0.3).timeout
 	check("victory: the queen is dead", main._camp_state.queen_defeated and main._results.visible and main._results._title.text == "The goblin queen is dead")
+	check("a side quest: the victory points deeper (#157)", main._results._illustration.visible and main._results._subtitle.text.contains("the way down continues") and not main._results._subtitle.text.contains("fortress is broken"))
 	await _snap("victory")
 	main._results.continue_pressed.emit()
 	await create_timer(0.2).timeout
@@ -186,6 +187,7 @@ func _initialize() -> void:
 	var gold_before: int = main._party_state.supplies.gold
 	check("the bounty is paid at camp", main._camp_state.bounty_paid and main._camp._note.text.contains("50 gold"))
 	check("no more contracts", main._camp_state.contract.is_empty())
+	check("the camp talks of the way down, not an ending (#157)", main._camp._rumour().contains("way down") and main._camp._note.text.contains("way down"))
 	main._camp_state.rest(main._party_state)
 	check("contracts stay gone on new days", main._camp_state.contract.is_empty())
 	await _snap("camp")

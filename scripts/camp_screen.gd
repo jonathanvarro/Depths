@@ -491,12 +491,16 @@ func _training() -> void:
 			_body.add_child(row)
 
 
-## What the camp says about the goblin queen (#44).
+## What the camp says about the goblin queen (#44): a side quest, so the
+## talk keeps turning to the way down (#157).
 func _rumour() -> String:
+	var below_seen := Quests.has_flag(_camp, "lower_gate", "seen")
 	if _camp.queen_defeated:
-		return "The camp still toasts the goblin queen's death."
+		if below_seen:
+			return "The camp still toasts the goblin queen's death, but the talk has turned to the flooded galleries below the fortress."
+		return "The camp still toasts the goblin queen's death. The commander only asks whether anyone has found the way down."
 	if _camp.gate_broken:
-		return "Word has spread: the fortress gate is broken. Only the queen's hall remains."
+		return "Word has spread: the fortress gate is broken, and the queen waits in her hall. The commander cares more about what lies past it."
 	return "Soldiers swap stories of a goblin queen and her fortress, four floors down, behind a barred gate."
 
 
