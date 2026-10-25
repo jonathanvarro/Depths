@@ -1673,6 +1673,14 @@ func _on_party_state_changed(announce := true) -> void:
 				_say("shaken", false, true, member)
 		if hunger > hunger_before and card:
 			card.alert(PartyCard.RATION.icon, Color("e0542f") if hunger == 2 else Color.WHITE)
+		# First time each gets worse, say what it does and what helps (#64).
+		if state > before and state >= StrainRules.State.UNEASY:
+			_tip("nerves", "%s's nerves are fraying: see the card's border and icon. Shaken heroes fight worse, and panicking ones may bolt. Light, food and rest calm them. %s a card to read what's wrong." % [member.display_name, "Tap" if _is_touch() else "Click"])
+		if hunger > hunger_before:
+			_tip("hunger", "%s is hungry, so their nerves fray faster. Eat a ration from the pack." % member.display_name)
+		var hurt: Array = member.injuries.filter(func(i): return i not in member.dressed)
+		if not hurt.is_empty():
+			_tip("injury", "%s has a %s. %s %s their card to read it again." % [member.display_name, hurt[0].display_name.to_lower(), hurt[0].description, "Tap" if _is_touch() else "Click"])
 		if member.is_cursed() or member.cursed_gear():
 			_tip("cursed", "Cursed: %s can't take it off. Holy water lifts a curse, or the nurse at camp can, for %dg." % [member.display_name, CampState.LIFT_BANE_PRICE])
 		if member.boons.any(func(b): return b["boon"].bane):
@@ -2783,6 +2791,8 @@ func _on_light_band_changed(band: Supplies.Light) -> void:
 			_say("dark")
 		Supplies.Light.OUT:
 			_show_message("The lantern gutters out. Only a faint glow remains.")
+	if band <= Supplies.Light.DIM:
+		_tip("dark", "The light is failing. In dim light nerves fray faster, and in the dark much faster. Pour oil into the lantern, or light a torch, from the pack.")
 
 
 func _on_party_opened_door(cell: Vector2i) -> void:
@@ -2886,7 +2896,7 @@ func _show_message(text: String) -> void:
 	_message_label.text = text
 	_message_label.modulate.a = 1.0
 	_message_tween = create_tween()
-	_message_tween.tween_interval(MESSAGE_SECONDS)
+	_message_tween.tween_interval(maxf(MESSAGE_SECONDS, text.length() / 18.0))  # time to read a long one (#64)
 	_message_tween.tween_property(_message_label, "modulate:a", 0.0, 0.5)
 
 
@@ -3021,9 +3031,13 @@ func _build_ui(minimap: Control) -> void:
 	ui.add_child(_debug_label)
 
 	_message_label = Label.new()
-	_message_label.set_anchors_and_offsets_preset(Control.PRESET_CENTER_TOP)
-	_message_label.grow_horizontal = Control.GROW_DIRECTION_BOTH
-	_message_label.position.y = 48
+	# Across the top, clear of the map, wrapping a long line (a hero's
+	# conditions read out, #64) rather than running off the screen.
+	_message_label.set_anchors_and_offsets_preset(Control.PRESET_TOP_WIDE)
+	_message_label.offset_left = 260
+	_message_label.offset_right = -260
+	_message_label.offset_top = 48
+	_message_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_message_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_message_label.add_theme_font_size_override("font_size", 32)
 	_message_label.add_theme_color_override("font_color", Color("e8d9b0"))
@@ -3208,6 +3222,7 @@ func _build_party_cards(ui: Control) -> void:
 		var card := PartyCard.new()
 		row.add_child(card)
 		_cards.append(card)
+		card.tapped.connect(func(c): _show_message(c.condition_words()))  # #64
 	_party_state.changed.connect(_refresh_cards)
 	_refresh_cards()
 

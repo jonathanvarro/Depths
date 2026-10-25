@@ -358,6 +358,12 @@ Open campaign questions: what counts as completing a site, whether old sites rem
 
 Each companion has a distinct role, personality, vulnerability, and reason to enter the dungeon. Portrait cards communicate physical and emotional condition.
 
+**Reading a hero's condition (#64, 2026-10-25):**
+- **Icons:** the cards already show nerves, hunger, injuries and boons as icons. Each icon says what it does and what helps, but only on hover.
+- **Tap a card:** tapping or clicking a hero's card reads all of that hero's conditions out in words, across the top of the screen. This gives touch players the same route as hover.
+- **First-time tips:** the first time nerves fray, hunger sets in, an injury lands or the light starts failing, a tip explains what it does and what helps.
+- **Messages:** a long message wraps and stays up long enough to read.
+
 **Personality/fear ideas recorded 2026-10-17 (#27):** explore lawful, neutral and lawless outlooks alongside individual values/boundaries; useful mixed-party synergies with disagreements and pair trust; fear as readable temporary strain; and modest class-bounded recruit variation (initially one strength, weakness and particular fear). See [the discussion notes](docs/hero-personality-and-fear.md) for examples, neutral-party trade-offs and open rules. These are proposals to develop, not implemented mechanics or finalized numerical balance. Courage can use the proposed Resolve attribute rather than a duplicate stat; the lone-survivor opening remains unchanged.
 
 *Implementation:* heroes are `Companion` resources in `data/companions/` (name, role, motive, personality, vulnerability, portrait, health, effects over time). The placeholder starting survivor is **Mara**, the guide from the portrait concepts, starting wounded (14/20). One step = one unit of time.

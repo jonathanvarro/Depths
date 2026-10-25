@@ -31,7 +31,12 @@ const STRAIN_BORDERS := {
 ## Condition identities; registered 32px glyphs display at 14px.
 enum Icon { HEALING, WOUNDED, DOWN, INJURY_WOUND, INJURY_LIMP, BLEEDING }
 
+## Tapped or clicked (#64): the hero's conditions, in words, for touch.
+signal tapped(card)
+
 var companion: Companion
+## What each condition icon means, in words (#64), built with the icons.
+var explanations: Array[String] = []
 
 var _portrait: Control
 var _name: Label
@@ -50,7 +55,7 @@ var _marks: Array = []
 
 
 func _init() -> void:
-	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	mouse_filter = Control.MOUSE_FILTER_STOP  # a tap explains the icons (#64)
 	var style := StyleBoxFlat.new()
 	_style = style
 	style.bg_color = Color(0.06, 0.05, 0.05, 0.8)
@@ -196,6 +201,7 @@ func refresh() -> void:
 	tooltip_text = "%s: %s" % [companion.display_name, StrainRules.NAMES[state]]
 
 	_clear_icons()
+	explanations.clear()
 	if companion.is_alive() and companion.bleeding:
 		_add_icon(Icon.BLEEDING, false, "Bleeding: loses health while walking")
 	if companion.is_unconscious():
@@ -209,7 +215,7 @@ func refresh() -> void:
 	for injury in companion.injuries:
 		var is_dressed := injury in companion.dressed
 		var kind := Icon.INJURY_LIMP if injury.icon_kind == "limp" else Icon.INJURY_WOUND
-		_add_icon(kind, is_dressed, injury.display_name + (" (dressed)" if is_dressed else ""))
+		_add_icon(kind, is_dressed, "%s%s: %s" % [injury.display_name, " (dressed)" if is_dressed else "", injury.description])
 		# Portrait overlays, if the art provides them.
 		_portrait.set_condition(injury.portrait_condition, not is_dressed)
 		_portrait.set_condition(injury.dressed_portrait_condition, is_dressed)
@@ -256,6 +262,7 @@ func set_marks(marks: Array) -> void:
 
 ## `tier`: an item's quality, framed with its border (#135).
 func _add_condition(texture: Texture2D, tint: Color, tooltip: String, tier := "") -> void:
+	explanations.append(tooltip)
 	if tier != "" and tier != "common":
 		var framed := Quality.framed(texture, tier, Vector2(ICON_SIZE - 4, ICON_SIZE - 4))
 		framed.tooltip_text = tooltip
@@ -305,6 +312,24 @@ func alert(texture: Texture2D, tint := Color.WHITE) -> void:
 	shake.tween_property(_portrait, "position:x", home.x, 0.04)
 
 
+## The card's conditions as one line (#64): what each icon means, and what
+## helps. Hover shows them one at a time; this is the touch route.
+func condition_words() -> String:
+	if companion == null:
+		return ""
+	if not companion.is_alive():
+		return "%s has fallen." % companion.display_name
+	if explanations.is_empty():
+		return "%s is steady and unhurt." % companion.display_name
+	return "%s - %s" % [companion.display_name, "  ·  ".join(explanations)]
+
+
+func _gui_input(event: InputEvent) -> void:
+	if companion and event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		tapped.emit(self)
+		accept_event()
+
+
 func _clear_icons() -> void:
 	for child in _icons.get_children():
 		child.queue_free()
@@ -322,6 +347,8 @@ func _add_icon(kind: Icon, dressed := false, tooltip := "") -> void:
 	icon.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	icon.tooltip_text = tooltip if tooltip != "" else Icon.keys()[kind].capitalize()
+	if tooltip != "":
+		explanations.append(tooltip)
 	_icons.add_child(icon)
 	if dressed:
 		var band := TextureRect.new()
