@@ -5,14 +5,16 @@ extends Node3D
 ## clip into walls whatever the corridor looks like. With screen flashes
 ## off (Settings), it's a plain fade instead of a surge.
 ##
-## A quad just in front of the camera, with a generated pixel fog until
-## ChatGPT's fog surge art lands (#129).
+## One camera quad, with an authored low fog bank and ten rising matte
+## states (#129). Motion stops when hidden or screen effects are disabled.
 
 const DISTANCE := 0.3  # metres in front of the camera
 const ENTER_TIME := 0.6
 const EXIT_TIME := 0.5
 ## Enemies draw after the stage (transparent objects sort by this).
 const FOE_PRIORITY := 10
+const FOG := preload("res://art/effects/combat-fog-v1/fog-bank.png")
+const SURGE := preload("res://art/effects/combat-fog-v1/surge-matte.png")
 
 const SHADER := """
 shader_type spatial;
@@ -21,33 +23,33 @@ render_mode unshaded, blend_mix, depth_draw_never, depth_test_disabled, cull_dis
 uniform float progress = 0.0;  // 0 clear, 1 the full stage
 uniform float surge = 1.0;     // 1 fog rises from the floor; 0 a plain fade
 uniform float darkness = 0.97;
+uniform float phase = 0.0;
+uniform sampler2D fog_bank : source_color, filter_nearest, repeat_enable;
+uniform sampler2D surge_matte : filter_nearest, repeat_disable;
 
-float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
-float noise(vec2 p) {
-	vec2 i = floor(p);
-	vec2 f = fract(p);
-	f = f * f * (3.0 - 2.0 * f);
-	return mix(mix(hash(i), hash(i + vec2(1.0, 0.0)), f.x), mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), f.x), f.y);
-}
-float fbm(vec2 p) {
-	float v = 0.0;
-	float a = 0.5;
-	for (int i = 0; i < 4; i++) { v += a * noise(p); p *= 2.0; a *= 0.5; }
-	return v;
+vec4 fog_sample(vec2 uv) {
+	float a = fract(uv.x);
+	float b = fract(uv.x + 0.5);
+	float wa = smoothstep(0.0, 0.20, min(a, 1.0-a));
+	float wb = smoothstep(0.0, 0.20, min(b, 1.0-b));
+	return (texture(fog_bank, vec2(a, clamp(uv.y,0.0,1.0))) * wa
+		+ texture(fog_bank, vec2(b, clamp(uv.y,0.0,1.0))) * wb) / (wa+wb);
 }
 
 void fragment() {
-	vec2 uv = floor(UV * vec2(192.0, 108.0)) / vec2(192.0, 108.0);  // pixel steps, like the art
-	float t = TIME * 0.12;
-	float n = fbm(vec2(uv.x * 5.0 + t, uv.y * 4.0 - t * 0.6));
-	// The fog's front rises from the floor (uv.y = 1) to the top.
-	float front = 1.0 - progress * 1.3;
-	float edge = smoothstep(front - 0.1, front + 0.1, uv.y + (n - 0.5) * 0.3);
-	float alpha = mix(progress, edge, surge) * darkness;
-	// Grey drifting fog low down (where the enemies stand), black above.
-	float band = smoothstep(0.72, 1.0, uv.y) * (0.35 + 0.65 * n);
-	vec3 colour = mix(vec3(0.006, 0.006, 0.008), vec3(0.16, 0.155, 0.17), band * 0.6);
-	ALBEDO = colour;
+	vec2 pixel = min(floor(UV * vec2(320.0,180.0)),vec2(319.0,179.0));
+	vec2 uv = (pixel + 0.5) / vec2(320.0,180.0);
+	float frame = floor(clamp(progress,0.0,1.0)*9.0+0.5);
+	vec2 cell = vec2(mod(frame,4.0),floor(frame/4.0));
+	float edge = texture(surge_matte,(cell*vec2(320.0,180.0)+pixel+0.5)/vec2(1280.0,540.0)).a;
+	float alpha = mix(progress,edge,surge)*darkness;
+	vec4 bank = fog_sample(vec2(uv.x+phase*0.012,(uv.y-0.30)/0.70));
+	float band = smoothstep(0.50,0.78,uv.y) * bank.a;
+	vec3 colour = mix(vec3(0.006,0.006,0.008),bank.rgb*0.42,band);
+	float local_y = (uv.y-(1.0-progress*1.45))/0.50;
+	vec4 rolling = fog_sample(vec2(uv.x,local_y));
+	float rim = step(0.0,local_y)*(1.0-smoothstep(0.45,0.95,local_y))*(1.0-progress)*surge;
+	ALBEDO = mix(colour,rolling.rgb*0.50,rim);
 	ALPHA = clamp(alpha, 0.0, 1.0);
 }
 """
@@ -55,12 +57,17 @@ void fragment() {
 var _quad: MeshInstance3D
 var _material: ShaderMaterial
 var _tween: Tween
+var _clock := 0.0
+var _motion := true
+var _camera: Camera3D
 
 
 func _init() -> void:
 	_material = ShaderMaterial.new()
 	_material.shader = Shader.new()
 	_material.shader.code = SHADER
+	_material.set_shader_parameter("fog_bank", FOG)
+	_material.set_shader_parameter("surge_matte", SURGE)
 	_material.render_priority = 0
 	_material.set_shader_parameter("progress", 0.0)
 	_quad = MeshInstance3D.new()
@@ -71,18 +78,41 @@ func _init() -> void:
 	_quad.position = Vector3(0, 0, -DISTANCE)
 	add_child(_quad)
 	visible = false
+	set_process(false)
+	visibility_changed.connect(func(): set_process(visible and _motion))
+
+
+func _process(delta: float) -> void:
+	_clock += delta
+	_material.set_shader_parameter("phase", floorf(_clock * 8.0) / 8.0)
 
 
 ## Sizes the quad to cover the camera's view (call once it's attached).
 func fit(camera: Camera3D) -> void:
-	var height := 2.0 * DISTANCE * tan(deg_to_rad(camera.fov) / 2.0)
-	(_quad.mesh as QuadMesh).size = Vector2(height * 3.0, height) * 1.6  # wide and tall enough for any screen
+	_camera = camera
+	if not camera.get_viewport().size_changed.is_connected(_fit_quad):
+		camera.get_viewport().size_changed.connect(_fit_quad)
+	_fit_quad()
+
+
+func _fit_quad() -> void:
+	if not is_instance_valid(_camera):
+		return
+	var projection := _camera.get_camera_projection()
+	var extent := projection.get_viewport_half_extents()
+	# The authored bank is aligned to the viewport's floor, so keep the full
+	# texture in view instead of cropping it on an oversized camera quad.
+	(_quad.mesh as QuadMesh).size = extent * (2.0 * DISTANCE / projection.get_z_near()) * 1.002
 
 
 ## Fog surges in; the cave fades out. `surge` false gives a plain fade.
 func enter(surge := true) -> void:
+	_motion = surge
+	_clock = 0.0
+	_material.set_shader_parameter("phase", 0.0)
 	_material.set_shader_parameter("surge", 1.0 if surge else 0.0)
 	visible = true
+	set_process(surge)
 	await _go(1.0, ENTER_TIME)
 
 

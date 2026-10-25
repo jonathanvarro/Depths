@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-25 – ChatGPT
+- Did: #129's A9/A10 combat fog is authored and connected in BattleStage: ten rising/receding matte states, a low drifting bank, near-black stage and static plain-fade mode when screen effects are disabled. The viewport quad fits and follows resizing so mist is neither cropped nor left with exposed sides. Exact built-in ImageGen prompt/master and deterministic Godot exporter are preserved. Handoff: docs/combat-fog.md; actual combat captures: art/concepts/combat-fog-v1.
+- Next: Continue the owner's requested combined live Equipment/Pack interface under #51/#48. #129's earlier atmospheric library/controllers remain separate; no new atmosphere rules are introduced by this fog.
+- Watch out: Isolated Mobile-renderer fixture uses real CombatScreen/PartyCard/enemy assets without Main or saves; entry/exit, processing/still mode, enemy priority, resized edge coverage and atlas endpoints checked. Two textures total about 3.16 MiB RGBA before overhead. Physical iPhone untested. Earlier editor-cache sandbox errors were resolved with normal-cache import; final logs clean. Ongoing export_presets.cfg, campaign_playtest.gd and combat script/check changes belong to other work and are excluded.
+
 ## 2026-10-22 – ChatGPT
 - Did: #154 preserves the owner's selected crown-free, more daring gothic vampire queen concept at art/concepts/vampire-queen-v1/vampire-queen.png. Its README records the accepted copper-red hair, confident sensual menace, black velvet/lace, burgundy, pearls, garnets and worn gold. Exact built-in ImageGen prompts, supplied reference, both superseded painting stages and SHA-256 hashes are retained in art/source/vampire-queen-v1/generation.json.
 - Next: Use this as the approved visual concept if a future character role is chosen; production would need dedicated palette/size, separate lighting and fitted animation work. No role or production export is requested by this approval.

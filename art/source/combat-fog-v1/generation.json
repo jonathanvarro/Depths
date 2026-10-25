@@ -1,0 +1,21 @@
+{
+  "issue": 129,
+  "date": "2026-10-25",
+  "tool": "built-in image_gen",
+  "prompt": "Use case: stylized-concept. Asset type: a transparent raster texture for a dark first-person dungeon crawler's combat fog. Create ONE wide horizontal low-lying bank of cold grey mist, seen at ground level straight ahead, on a genuinely transparent background. Broad irregular overlapping sheets and rolling tendrils of dense damp cave mist hug the bottom and taper upward into a few thin wisps, strongest in the bottom third; upper half is empty transparency. Subtle charcoal, slate-grey and muted grey-violet, restrained highlights, shadow-heavy hand-painted pixel-art aesthetic with readable chunky stepped clusters rather than photorealistic smoke or fine particle noise. Soft alpha at the edge is appropriate but the interior shapes should be broad and low-detail for a small game texture. The bank extends evenly across the whole width without a central object; left and right edges should match for horizontal wrapping. No ground surface, landscape, sky, moon, stones, buildings, creatures, figures, eyes, glowing effects, text, frame, border, vignette or checkerboard. This is just atmosphere beneath enemies, never a distracting bright white cloud. Make a landscape composition with generous clear transparent space above the low mist.",
+  "original_file": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-b545847a-3620-4bb2-968e-979210eae2ae.png",
+  "master": "art/source/combat-fog-v1/fog-master.png",
+  "transparent_background": true,
+  "exporter": "tools/art/export_combat_fog.gd",
+  "scope": "Authored fog bank, deterministic ten-state surge matte and a scrolling low fog backdrop; presentation only.",
+  "original_file_sha256": "a551f15673025eab7253067aacc9a8e7cc875eaacb7e3d0a952d4929ce772344",
+  "master_sha256": "a551f15673025eab7253067aacc9a8e7cc875eaacb7e3d0a952d4929ce772344",
+  "master_size": [
+    2172,
+    724
+  ],
+  "alpha_extrema": [
+    0,
+    254
+  ]
+}

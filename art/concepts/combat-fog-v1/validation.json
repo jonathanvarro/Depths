@@ -1,0 +1,19 @@
+{
+	"captures": [
+		"surge-1280-0.png",
+		"surge-1280-3.png",
+		"surge-1280-6.png",
+		"surge-1280-9.png",
+		"combat-1280.png",
+		"still-1280.png",
+		"surge-1278-0.png",
+		"surge-1278-3.png",
+		"surge-1278-6.png",
+		"surge-1278-9.png",
+		"combat-1278.png",
+		"still-1278.png"
+	],
+	"checks": 37,
+	"failures": [],
+	"physical_phone": false
+}

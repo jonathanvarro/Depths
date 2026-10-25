@@ -38,7 +38,9 @@ remain for Claude to wire; the existing combat-stage work is preserved.
 - Enemies are drawn above the darkness, so they can never clip into walls, and they always stand at the same stage positions.
 - With screen flashes off in Settings, it's a plain fade.
 
-This is built (`scripts/battle_stage.gd`) with a generated pixel fog as a stand-in. Art wanted:
+The original generated stand-in in `scripts/battle_stage.gd` is replaced by
+[authored combat fog](combat-fog.md) (2026-10-25), including the surge and settled
+backdrop below. Screen-effects-off keeps a static bank and plain fade.
 
 | # | Effect | What it looks like |
 |---|---|---|

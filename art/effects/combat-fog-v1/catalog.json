@@ -1,0 +1,19 @@
+{
+	"backdrop": "Two overlapping scrolling samples of the authored bank; quantized 8fps; near-black upper stage",
+	"bank_size": [
+		640,
+		214
+	],
+	"blend": "ordinary alpha; never additive",
+	"enter_seconds": 0.6,
+	"exit_seconds": 0.5,
+	"issue": 129,
+	"runtime_texture_bytes": 3312640,
+	"settings": "Screen flashes off: plain fade with static settled bank",
+	"surge_columns": 4,
+	"surge_frame_size": [
+		320,
+		180
+	],
+	"surge_frames": 10
+}
