@@ -564,7 +564,8 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 		if not avoid.is_empty():
 			var plain = DungeonMap.new(layout, depth)
 			join = plain.walking_distances(plain.find_content(DungeonMap.Content.STAIRS_UP))
-		var wanted: Array = [] if _in_opening else Packages.active(_camp_state, depth) + Packages.lairs(depth, _site_seed + depth * 7919 + 29)
+		var wanted: Array = [] if _in_opening else Packages.active(_camp_state, depth) + Packages.lairs(depth, _site_seed + depth * 7919 + 29) \
+				+ Packages.territories(depth, _site_seed + depth * 7919 + 31)
 		var stamped: Dictionary = Packages.place(layout, wanted, _site_seed + depth * 7919 + 13, avoid, join)
 		_floors[depth] = DungeonMap.new(stamped["layout"], depth)
 		_floors[depth].marks = marks

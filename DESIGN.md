@@ -544,6 +544,15 @@ Deeper floors mix them (depth 1 mostly single rats; depth 3 pairs and trios like
       - The captain comes with a goblin; a full party also meets an archer.
       - Lairs have no random elites.
     - **Reward:** a win pays a magic weapon or armour (rare one time in four) and 10 + 5 × depth gold, besides the fight's usual XP and drops.
+  - **Creature territory, first trial — lamp-eaters (#149, owner chose 2026-10-25):**
+    - **Where and how often:** an old lamp store, placed by chance on 2 floors in 5 on floors 2–3, as a side room. Nothing outside the room hints at it yet.
+    - **The clue, before anything is decided:** every lamp is dead and the oil licked dry, moth-wings drift in the dust, and something "drinks light". Sealed oil flasks still glint on a high shelf.
+    - **The choices:**
+      - **Go in, light held high:** three oil flasks, and two lamp-eaters drop on you.
+      - **Hood the light and creep in:** everyone's nerves fray (+6) for one flask. One time in three, a lamp-eater follows the hidden light anyway.
+      - **Leave it:** free. The store waits for a return.
+    - **Art:** it reuses the "old workings" prop for now; a dead-lamp rack is requested from ChatGPT.
+    - **Next:** record whether players read the threat and choose deliberately, before trying the other candidates (the miner discovery and the goblin patrol).
 - **Art:** ChatGPT's art (#141) is connected, including the special poses (the bat landed, the brute's wind-up and recovery, the bloat swelling and bursting, the miner's grab), the gas cloud, and the new intent and status icons.
 - **Elites and depth scaling — tuned 2026-10-21** (`CombatState.prepare`, shared by the game and the playtest bot):
   - **Depth:** foes on floor 3 have +10% health and damage, and floor 4 +20%, rounded. The queen and the guards she calls are included, so she has 38 health and 4–7 damage.

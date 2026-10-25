@@ -94,7 +94,9 @@ func _initialize() -> void:
 	bloat.health = 1
 	var front_before: int = mara.health
 	var back_before: int = corin.health
-	fight.hero_attack(mara, bloat)
+	for i in 10:  # a capped hit chance: retry a miss
+		if bloat.is_alive():
+			fight.hero_attack(mara, bloat)
 	check("killed up close, it bursts: front 2, back 1, nerves fray", mara.health == front_before - 2 and corin.health == back_before - 1 and mara.strain >= 5.0, "%d %d %.1f" % [front_before - mara.health, back_before - corin.health, mara.strain])
 	party = _party(["mara", "corin"])
 	mara = party.members[0]
@@ -106,7 +108,9 @@ func _initialize() -> void:
 	bloat = fight.foes[0]
 	bloat.health = 1
 	front_before = mara.health
-	fight.hero_attack(corin, bloat)
+	for i in 10:  # even a sure hand misses now and then (hit chance is capped)
+		if bloat.is_alive():
+			fight.hero_attack(corin, bloat)
 	check("killed from the back row, the gas mostly rolls past", mara.health == front_before - 1 and corin.health == corin.max_health, "%d->%d, corin %d/%d, bloat %d, %s" % [front_before, mara.health, corin.health, corin.max_health, bloat.health, str(fight.events)])
 	party = _party(["mara"])
 	mara = party.members[0]

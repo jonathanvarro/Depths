@@ -1,0 +1,58 @@
+[gd_resource type="Resource" script_class="RoomEvent" format=3]
+
+[ext_resource type="Script" path="res://scripts/event_choice.gd" id="1_qdlld"]
+[ext_resource type="Script" path="res://scripts/event_outcome.gd" id="2_86m8f"]
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="3_ucvyl"]
+[ext_resource type="Resource" path="res://data/enemies/lamp_eater.tres" id="4_omrib"]
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="5_kbb5c"]
+[ext_resource type="Script" path="res://scripts/supply_item.gd" id="6_3bxfy"]
+[ext_resource type="Resource" path="res://data/items/oil_flask.tres" id="7_6wnyk"]
+[ext_resource type="PackedScene" path="res://art/props/cave-events-v1/old-workings.tscn" id="8_h08jf"]
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="9_8mpuk"]
+
+[sub_resource type="Resource" id="Resource_pb7o7"]
+script = ExtResource("2_86m8f")
+text = "You stride in with your light up. The sealed flasks are yours - and pale shapes unfold from the ceiling, drawn to the flame."
+loot = Dictionary[ExtResource("6_3bxfy"), int]({
+ExtResource("7_6wnyk"): 3
+})
+ambush = Array[ExtResource("3_ucvyl")]([ExtResource("4_omrib"), ExtResource("4_omrib")])
+
+[sub_resource type="Resource" id="Resource_0obls"]
+script = ExtResource("1_qdlld")
+label = "Go in, light held high"
+outcomes = Array[ExtResource("2_86m8f")]([SubResource("Resource_pb7o7")])
+
+[sub_resource type="Resource" id="Resource_yhxcg"]
+script = ExtResource("2_86m8f")
+weight = 2
+text = "In the dark you find one sealed flask by touch and back out. Something shifts overhead, but doesn't follow."
+target = 1
+strain = 6.0
+loot = Dictionary[ExtResource("6_3bxfy"), int]({
+ExtResource("7_6wnyk"): 1
+})
+
+[sub_resource type="Resource" id="Resource_uhyrw"]
+script = ExtResource("2_86m8f")
+text = "A flask clinks against the shelf. Something drops from the ceiling, hungry for the light you're hiding."
+target = 1
+strain = 6.0
+loot = Dictionary[ExtResource("6_3bxfy"), int]({
+ExtResource("7_6wnyk"): 1
+})
+ambush = Array[ExtResource("3_ucvyl")]([ExtResource("4_omrib")])
+
+[sub_resource type="Resource" id="Resource_836fm"]
+script = ExtResource("1_qdlld")
+label = "Hood the light and creep in"
+outcomes = Array[ExtResource("2_86m8f")]([SubResource("Resource_yhxcg"), SubResource("Resource_uhyrw")])
+
+[resource]
+script = ExtResource("9_8mpuk")
+kind = 4
+title = "Dead lamps"
+clue = "An old lamp store. Every lamp is dead - glass smashed, wicks gnawed, the oil licked dry - and moth-wings drift in the dust. Something here drinks light. On a high shelf, sealed flasks still glint."
+choices = Array[ExtResource("1_qdlld")]([SubResource("Resource_0obls"), SubResource("Resource_836fm")])
+min_depth = 99
+prop = ExtResource("8_h08jf")

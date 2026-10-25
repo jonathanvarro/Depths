@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="QuestPackage" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="1_xtt22"]
+[ext_resource type="Resource" path="res://data/events/territory_lamp_eaters.tres" id="2_as4et"]
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="3_pk2dr"]
+[ext_resource type="Script" path="res://scripts/quest_package.gd" id="4_3dbhu"]
+
+[resource]
+script = ExtResource("4_3dbhu")
+id = "territory_lamp_eaters"
+min_depth = 2
+max_depth = 3
+unless_flags = PackedStringArray()
+rows = PackedStringArray("#######", "#,,,,,#", "#,,1,,#", "#,,,,,#", "###.###")
+events = Array[ExtResource("1_xtt22")]([ExtResource("2_as4et")])
+chance = 0.4

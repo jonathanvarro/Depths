@@ -24,7 +24,7 @@ static func library() -> Array[QuestPackage]:
 ## Packages the story wants on floor `depth` right now.
 static func active(camp, depth: int) -> Array[QuestPackage]:
 	return library().filter(func(p: QuestPackage):
-		return p.lair == "" and depth >= p.min_depth and depth <= p.max_depth \
+		return p.lair == "" and p.chance == 0.0 and depth >= p.min_depth and depth <= p.max_depth \
 				and Quests.stage(camp, p.quest) in p.stages \
 				and not Array(p.unless_flags).any(func(f): return Quests.has_flag(camp, p.quest, f)))
 
@@ -41,6 +41,18 @@ static func lairs(depth: int, seed_value: int) -> Array[QuestPackage]:
 	var out: Array[QuestPackage] = []
 	if not fitting.is_empty() and rng.randf() < LAIR_CHANCE:
 		out.append(fitting[rng.randi_range(0, fitting.size() - 1)])
+	return out
+
+
+## Creature territories (#149) that turn up on this floor today: each
+## rolls its own chance. Not the mini-boss lairs, which share one slot.
+static func territories(depth: int, seed_value: int) -> Array[QuestPackage]:
+	var rng := RandomNumberGenerator.new()
+	rng.seed = seed_value
+	var out: Array[QuestPackage] = []
+	for p in library():
+		if p.chance > 0.0 and p.lair == "" and depth >= p.min_depth and depth <= p.max_depth and rng.randf() < p.chance:
+			out.append(p)
 	return out
 
 

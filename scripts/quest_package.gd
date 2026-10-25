@@ -26,6 +26,9 @@ extends Resource
 @export var lair := ""
 ## Said at the threshold, with Go in or Back away.
 @export_multiline var warning := ""
+## A creature's territory (#149): placed by chance on its floors, this
+## often (0 = only when a quest wants it).
+@export_range(0.0, 1.0) var chance := 0.0
 ## Joins the fight only when the whole party is there. The scaling is kept
 ## light on purpose: adventuring solo should be high risk (owner).
 @export var full_party_extra: Array[EnemyType] = []
