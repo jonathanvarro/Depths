@@ -154,7 +154,9 @@ Templates > Download and Install; already installed on the owner's PC).
   paused stepping and twelve real combat UI captures at desktop/phone sizes.
   Owner accepted the idle on 2026-10-25 ("This will work"); `approval.json` pins
   its pixels/source as the reference for attack/hurt. Both new poses are authored
-  and checked; owner family acceptance remains open. No aliases or EnemyType assignment.
+  and checked; owner liked the hounds, then requested an open-maw attack instead
+  of the projecting strip (2026-10-25). Idle/hurt stay unchanged and pinned;
+  revised attack review remains open. No aliases or EnemyType assignment.
   Preserve the approved idle and shared transform; the hurt paw lifts without
   snapping the whole sprite down. Other choices
   and revised review remain open; no encounter assignments.
@@ -282,6 +284,9 @@ Templates > Download and Install; already installed on the owner's PC).
   `is_with_party()`. Secured route (#79): CampState `floor2_reached`,
   `route_open()`, `buy_route()`; CampScreen `cave_chosen(start_depth)`.
   Room props (#46): `RoomEvent.prop`, main.gd `_add_room_props()`.
+  Dedicated snare/dart/bell pairs and dead-lamp store (#158/#159) are connected:
+  `docs/traps-and-dead-lamps.md`. Optional prop-local `mount_in_cell()` anchors
+  separate dart ports to actual rock and keeps traps inside their cells.
   `tools/batch_check.gd`.
 - Starting heroes (#95): `scripts/hero_select.gd` (HEROES list),
   `data/companions/{mara,corin,alwen}.tres`, Companion `trait_id`,

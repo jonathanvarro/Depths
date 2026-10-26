@@ -1,9 +1,14 @@
 {
   "date": "2026-10-25",
-  "decision": "Owner approved the idle",
+  "decision": "Owner accepted idle and hurt; requested replacement of the attack with an open maw",
   "feedback": "This will work",
-  "scope": "Idle art and identity/scale/palette reference for attack and hurt. Full family, combat integration and encounter assignment remain pending.",
+  "scope": "Idle and hurt retained as accepted reference; new open-maw attack awaits visual review. No encounter assignment.",
   "native_png_sha256": "9d66f724f211756eeec8f6e209ed853e6d68eed714184bb308f079a0bf632ffe",
   "native_rgba_sha256": "7419c0a959f0cf71f35b8c21f2285eb76f33e64fe749f2fd1fac667747041abf",
-  "master_sha256": "8ce191e2a996f9d6293654e9670163f07f16977eceab37e768cfbb7020dbc722"
+  "master_sha256": "8ce191e2a996f9d6293654e9670163f07f16977eceab37e768cfbb7020dbc722",
+  "revision_feedback": "The hounds are good but please replace the attach version with an open maw as opposed to the tongue poke",
+  "hurt": {
+    "native_png_sha256": "378d7fb497e455e6be15d9dd8019d80c9dd7df618da200e207d9bb36921d6567",
+    "master_sha256": "5ca1fbaa6c9bdd110cb4b97ccec772b7da51bad7998696dc176f95e54448a602"
+  }
 }

@@ -1,16 +1,17 @@
 # First deeper horror: the Underhound
 
 **Checkpoint 1 delivered, 2026-10-25:** [idle candidate and native/phone review](underhound-idle.md).
-Owner accepted the idle (“This will work”). Matching attack/hurt are now authored
-and checked in the [three-pose review](underhound-poses.md); owner acceptance of
-the new poses remains open. The accepted idle stays their identity/scale reference.
+Owner accepted the idle and liked the hounds, then requested an open-maw attack
+instead of the projecting tooth plate (2026-10-25). Idle/hurt remain unchanged;
+the revised attack is ready in the [three-pose review](underhound-poses.md).
 
 2026-10-25 · Selection made by Codex at the owner's request, refs #150.
 
 The Underhound is the first of the deeper-horror concepts selected for
 production. It bridges the existing breach hound and the later impossible
 bodies: a recognizable, low, long-headed predator with two opposing rib
-structures and a tooth plate that slides independently of its outer muzzle.
+structures and a long blind skull. The production attack now opens a hinged
+maw at the owner's request, superseding the concept's sliding tooth plate.
 The [concept sheet](../art/concepts/descent-horror-v1/underhound.png) establishes
 the identity; it is not a finished sprite sheet.
 
@@ -26,14 +27,14 @@ more demanding designs.
 - **Identity anchors:** long blind wedge of a head, low four-legged stance,
   high ribbed shoulder arch. The lower/inner ribs face against the outer cage.
   Preserve a simple tail and broad clawed feet. No crown, armour or ornament.
-- **Dominant impossibility:** on the attack, the internal tooth plate moves
-  forward while the outer muzzle stays almost closed; the opposed ribs pull
-  in different directions. Three or four broad rib masses must carry this at
-  small size. Avoid individual teeth/veins competing with the silhouette.
+- **Dominant impossibility:** opposing ribs beneath stretched hide, carried by
+  three or four broad masses at small size. The bite opens actual upper/lower
+  jaws with a broad dark interior, without a tongue poke or sliding strip.
+  Avoid fine veins competing with the silhouette.
 - **Idle:** predatory crouch, jaw seam mostly shut, rib arch clearly visible.
-- **Attack:** planted hind contact, shoulders forward, inner jaw displaced;
+- **Attack:** planted hind contact, shoulders forward, open maw;
   expose the opposing ribs through the stretched hide in one readable gesture.
-- **Hurt:** weight recoils sideways, foreleg folds, inner plate retracts; keep
+- **Hurt:** weight recoils sideways, foreleg folds, mouth closes; keep
   the same limbs, anatomy, shared scale and contact origin. No new appendages.
 - **Runtime budget:** three 128×128 RGBA drawings, at most 32 visible RGB
   colours shared across poses, hard alpha, nearest sampling. Common pivot

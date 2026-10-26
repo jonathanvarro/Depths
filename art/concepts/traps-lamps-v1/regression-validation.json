@@ -1,0 +1,12 @@
+{
+  "traps": {
+    "assertions": 12,
+    "failed": 0,
+    "shutdown_warning": "1 CanvasItem RID, 10 ObjectDB instances, 4 resources in use"
+  },
+  "territory": {
+    "assertions": 11,
+    "failed": 0,
+    "shutdown_warning": "1 CanvasItem RID, 10 ObjectDB instances, 4 resources in use"
+  }
+}

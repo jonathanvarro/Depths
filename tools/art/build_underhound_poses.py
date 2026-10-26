@@ -21,6 +21,8 @@ idle_meta = json.loads((SOURCE / 'generation.json').read_text())
 manifest = json.loads((SOURCE / 'poses.json').read_text())
 assert sha(OUT / 'idle.png') == approval['native_png_sha256']
 assert sha(SOURCE / 'idle-master.png') == approval['master_sha256']
+if 'hurt' in approval:
+    assert sha(OUT / 'hurt.png') == approval['hurt']['native_png_sha256']
 for ref in manifest['references']:
     value = sha(ROOT / ref['path'])
     assert not ref.get('sha256') or value == ref['sha256'], ref['path']
@@ -99,7 +101,7 @@ script = ExtResource("mount")
 pose_tops = {{{pose_tops}}}
 metadata/pivot = Vector2(64, 120)
 metadata/visual_height = 0.8
-metadata/status = "Approved idle; new attack/hurt candidates, no encounter assignment"
+metadata/status = "Accepted idle/hurt; open-maw attack revision, no encounter assignment"
 
 [node name="Sprite" type="AnimatedSprite3D" parent="."]
 position = Vector3(0, {56 * pixel_size}, 0)
@@ -114,7 +116,7 @@ sprite_frames = ExtResource("frames")
 animation = &"idle"
 ''')
 catalog = json.loads((OUT / 'catalog.json').read_text())
-catalog.update(status='Owner-approved idle; attack and hurt authored, awaiting family review',
+catalog.update(status='Owner accepted idle/hurt; open-maw attack revision awaiting review',
                animations=names, attack_hurt='Distinct authored poses; no aliases', poses=records,
                shared_registration={'source_canvas': list(source_canvas), 'source_window': source_window,
                                     'scale_xy': [scale_x, scale_y], 'translate_xy': [translate_x, translate_y],
@@ -161,8 +163,8 @@ button[aria-pressed=true]{border-color:#dbb477;color:#fff0cc}label{display:flex;
 canvas{width:var(--size,384px);height:var(--size,384px);image-rendering:pixelated;flex-shrink:0;margin:auto}
 .light{background:#b4b5aa}.strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:16px 0}.strip article{padding:12px;border:1px solid #4a4d3e;text-align:center}.strip img{width:128px;height:128px;image-rendering:pixelated}
 figure{margin:16px 0}figure img{display:block;width:100%;height:auto}figcaption{color:#b6b59f;margin-top:10px}#status{color:#dbb477}
-</style><main><small>APPROVED IDLE · NEW ATTACK / HURT CANDIDATES</small><h1>The Underhound · three-pose review</h1>
-<p>The approved idle is unchanged. Attack lowers the shoulder and slides the inner tooth plate forward; hurt recoils and folds the nearest foreleg. All three share the exact 32-colour palette, body scale and (64,120) origin. The hurt drawing keeps its lifted paw above that origin.</p>
+</style><main><small>ACCEPTED IDLE / HURT · OPEN-MAW ATTACK REVISION</small><h1>The Underhound · three-pose review</h1>
+<p>Idle and hurt are accepted and unchanged. At the owner’s request, attack now opens a broad hinged maw with two rows of teeth, replacing the projecting tooth strip. All three share the exact 32-colour palette, body scale and (64,120) origin. The hurt drawing keeps its lifted paw above that origin.</p>
 <nav aria-label="Pose controls"><button id="play">Play comparison</button><button id="previous">Previous</button><button id="next">Next</button><button class="pose" data-pose="idle">Idle</button><button class="pose" data-pose="attack">Attack</button><button class="pose" data-pose="hurt">Hurt</button></nav>
 <nav aria-label="Pixel inspection"><button class="zoom" data-zoom="1">128 px</button><button class="zoom" data-zoom="0.5">64 px</button><button class="zoom" data-zoom="3">3× nearest</button><label><input id="light" type="checkbox">Light backing</label><label><input id="ghost" type="checkbox">Ghost idle</label><label><input id="guides" type="checkbox">Origin guides</label></nav>
 <p id="status"></p><div class="stage"><canvas id="frame" width="128" height="128" aria-label="Paused Underhound pose inspection"></canvas></div>

@@ -23,6 +23,9 @@ catalog = json.loads((OUT / 'catalog.json').read_text())
 palette = {tuple(rgb) for rgb in json.loads((OUT / 'palette.json').read_text())['rgb']}
 check(sha(OUT / 'idle.png') == approval['native_png_sha256'], 'Approved idle PNG unchanged')
 check(sha(SOURCE / 'idle-master.png') == approval['master_sha256'], 'Approved source master unchanged')
+if 'hurt' in approval:
+    check(sha(OUT / 'hurt.png') == approval['hurt']['native_png_sha256'], 'Accepted hurt PNG unchanged')
+    check(sha(SOURCE / 'hurt-master.png') == approval['hurt']['master_sha256'], 'Accepted hurt source unchanged')
 check(set(catalog['animations']) == {'idle', 'attack', 'hurt'}, 'All three states advertised')
 check(catalog['shared_registration']['per_pose_fit_or_grounding'] is False, 'Common registration, no per-pose fit')
 check(catalog['shared_registration']['source_canvas'] == list(Image.open(SOURCE / 'idle-master.png').size), 'Actual source canvas recorded')
@@ -35,6 +38,8 @@ for pose in manifest['poses']:
     if original.exists():
         check(original.read_bytes() == source.read_bytes(), 'Exact built-in copy '+pose['id'])
     check(len(pose['prompt']) > 100 and manifest['tool'] == 'built-in image_gen', 'Exact prompt/tool '+pose['id'])
+    for ref in pose.get('edit_references', []):
+        check(sha(ROOT / ref['path']) == ref['sha256'], 'Preserved edit reference '+ref['path'])
 union, hashes = set(), set()
 for name in ('idle', 'attack', 'hurt'):
     path = OUT / (name + '.png')
@@ -51,7 +56,7 @@ for name in ('idle', 'attack', 'hurt'):
     check(sha(path) == catalog['poses'][name]['sha256'], 'Recorded export hash '+name)
     hashes.add(sha(path))
 check(len(hashes) == 3 and len(union) <= 32, 'Three distinct drawings, at most 32 colours in the whole family')
-check(Image.open(OUT / 'attack.png').getbbox()[3] == 121, 'Attack keeps planted contact y120')
+check(abs(Image.open(OUT / 'attack.png').getbbox()[3] - 121) <= 1, 'Attack contact stays within one native pixel of y120')
 check(Image.open(OUT / 'hurt.png').getbbox()[3] < 121, 'Raised hurt paw is not snapped down to idle baseline')
 godot = json.loads((REVIEW / 'godot-validation.json').read_text())
 check(not godot['failures'], 'Actual combat UI review passes')

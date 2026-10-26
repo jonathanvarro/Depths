@@ -1,0 +1,118 @@
+{
+  "issues": [
+    158,
+    159
+  ],
+  "canvas": [
+    128,
+    128
+  ],
+  "palette_limit_per_pair": 32,
+  "records": {
+    "snare-closed": {
+      "bounds": [
+        6,
+        25,
+        126,
+        109
+      ],
+      "sha256": "523289dc47da1f117d4a5e57f38997c6e975dd939ecb0a818e70a387a56d9c64"
+    },
+    "snare-used": {
+      "bounds": [
+        18,
+        25,
+        126,
+        107
+      ],
+      "sha256": "a4815d3fceb52273990989950941094189e249f47b36990965a19f69afbff010"
+    },
+    "snare": {
+      "flat": true,
+      "pixel_size": 0.008,
+      "position_y": 0.018,
+      "registration": "Same normalized full canvas for both states; no independent fitting"
+    },
+    "dart-closed": {
+      "bounds": [
+        15,
+        20,
+        113,
+        113
+      ],
+      "sha256": "82aed3b7c7eb4b65e5fed2bb70d91d573ddae9dee94ba1113caaadde6f1c32a9"
+    },
+    "dart-used": {
+      "bounds": [
+        15,
+        19,
+        113,
+        113
+      ],
+      "sha256": "cbe8216269cf544bfb9e0f7e5e56600871aa5873556fcd783caaddd4b27b4856"
+    },
+    "dart": {
+      "flat": true,
+      "pixel_size": 0.008,
+      "position_y": 0.018,
+      "registration": "Same normalized full canvas for both states; no independent fitting"
+    },
+    "bell-closed": {
+      "bounds": [
+        6,
+        94,
+        122,
+        121
+      ],
+      "sha256": "72869a13506c224822e3ef63d5dff49358596b86745cc764e6e1073f7abdb98f"
+    },
+    "bell-used": {
+      "bounds": [
+        6,
+        94,
+        122,
+        121
+      ],
+      "sha256": "b7dfdc1be9096f1ddfc4424799e865bff0f3a8347b9985efe136059c9f72a10a"
+    },
+    "bell": {
+      "flat": false,
+      "pixel_size": 0.0125,
+      "position_y": 0.7000000000000001,
+      "registration": "Same normalized full canvas for both states; no independent fitting"
+    },
+    "lamp-closed": {
+      "bounds": [
+        6,
+        18,
+        123,
+        118
+      ],
+      "sha256": "3833c349fd8bf61841bcfe4db302e29984ff4bf8996245b4ea247275a3f9a689"
+    },
+    "lamp-used": {
+      "bounds": [
+        6,
+        28,
+        123,
+        118
+      ],
+      "sha256": "106afec60bffbde800e39e927a848e135c6c0126f2dd89bdec726a68d1d18960"
+    },
+    "lamp": {
+      "flat": false,
+      "pixel_size": 0.00989010989010989,
+      "position_y": 0.5241758241758242,
+      "registration": "Same normalized full canvas for both states; no independent fitting"
+    },
+    "dart-ports": {
+      "bounds": [
+        25,
+        51,
+        104,
+        78
+      ],
+      "sha256": "42d02ac11686f687958bfd01e76f6f17cd06db5e18e73058d3b0be4a25e05aac"
+    }
+  }
+}

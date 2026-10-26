@@ -7,7 +7,7 @@ script = ExtResource("mount")
 pose_tops = {"idle": [32], "attack": [36], "hurt": [29]}
 metadata/pivot = Vector2(64, 120)
 metadata/visual_height = 0.8
-metadata/status = "Approved idle; new attack/hurt candidates, no encounter assignment"
+metadata/status = "Accepted idle/hurt; open-maw attack revision, no encounter assignment"
 
 [node name="Sprite" type="AnimatedSprite3D" parent="."]
 position = Vector3(0, 0.503370786516854, 0)

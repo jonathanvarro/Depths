@@ -7,8 +7,9 @@ extends SceneTree
 ## Godot --headless --path . --script tools/story/build_traps.gd
 
 const LIMP := preload("res://data/injuries/limp.tres")
-const WIRE := preload("res://art/props/room-states-v1/tripwire.tscn")
-const PLATE := preload("res://art/props/room-states-v1/hollow-floor.tscn")
+const BELL_WIRE := preload("res://art/props/traps-lamps-v1/bell.tscn")
+const SNARE := preload("res://art/props/traps-lamps-v1/snare.tscn")
+const DART := preload("res://art/props/traps-lamps-v1/dart.tscn")
 
 
 func _outcome(fields: Dictionary) -> EventOutcome:
@@ -43,7 +44,7 @@ func _trap(id: String, title: String, clue: String, prop: PackedScene, min_depth
 
 func _initialize() -> void:
 	_trap("trap_bell_wire", "A bell wire",
-			"A thin wire across the way, strung with a tiny goblin bell. Ring it and everything down here will know.", WIRE, 2, [
+			"A thin wire across the way, strung with a tiny goblin bell. Ring it and everything down here will know.", BELL_WIRE, 2, [
 		_choice("Step over carefully", 2, [
 			_outcome({"weight": 3, "text": "You ease over without a sound."}),
 			_outcome({"weight": 1, "alarm": true, "text": "The bell tinkles. Somewhere ahead, something goes very quiet."})]),
@@ -54,7 +55,7 @@ func _initialize() -> void:
 		"text": "Your foot snags a wire you never saw. A little bell rings out, bright and terrible. Whatever is down here knows you're coming."}))
 
 	_trap("trap_snare", "A snare",
-			"A loop of cord lies half-buried in the grit, staked to the rock.", WIRE, 1, [
+			"A loop of cord lies half-buried in the grit, staked to the rock.", SNARE, 1, [
 		_choice("Step around it", 1, [
 			_outcome({"weight": 4, "text": "You give it a wide berth."}),
 			_outcome({"weight": 1, "injury": LIMP, "text": "Your boot clips the loop - it snaps tight around your ankle."})]),
@@ -63,7 +64,7 @@ func _initialize() -> void:
 	], _outcome({"injury": LIMP, "text": "A noose snaps tight around your ankle and yanks you off your feet."}))
 
 	_trap("trap_dart", "A dart plate",
-			"Tiny holes pock the wall at knee height, and one floor stone sits a shade too proud.", PLATE, 2, [
+			"Tiny holes pock the wall at knee height, and one floor stone sits a shade too proud.", DART, 2, [
 		_choice("Edge along the far wall", 2, [
 			_outcome({"weight": 3, "text": "You keep clear of the plate."}),
 			_outcome({"weight": 1, "health": -3, "text": "The stone shifts anyway. A dart hisses out and bites your calf."})]),

@@ -37,7 +37,7 @@ func _initialize() -> void:
 	event.title = "Dead lamps"
 	event.min_depth = 99  # never drawn at random: only its territory places it
 	event.max_depth = 99
-	event.prop = load("res://art/props/cave-events-v1/old-workings.tscn")
+	event.prop = load("res://art/props/traps-lamps-v1/lamp.tscn")
 	event.clue = "An old lamp store. Every lamp is dead - glass smashed, wicks gnawed, the oil licked dry - and moth-wings drift in the dust. Something here drinks light. On a high shelf, sealed flasks still glint."
 	event.choices.assign([
 		_choice("Go in, light held high", [_outcome({

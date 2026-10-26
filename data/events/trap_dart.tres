@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://scripts/enemy_type.gd" id="3_2ixku"]
 [ext_resource type="Script" path="res://scripts/equipment.gd" id="4_kgu5h"]
 [ext_resource type="Script" path="res://scripts/supply_item.gd" id="5_ka5mt"]
-[ext_resource type="PackedScene" path="res://art/props/room-states-v1/hollow-floor.tscn" id="6_grots"]
+[ext_resource type="PackedScene" path="res://art/props/traps-lamps-v1/dart.tscn" id="6_grots"]
 [ext_resource type="Script" path="res://scripts/room_event.gd" id="7_yw3y8"]
 
 [sub_resource type="Resource" id="Resource_n2x5r"]

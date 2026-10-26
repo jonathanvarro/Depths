@@ -3,12 +3,14 @@
 **Owner approved, 2026-10-25:** “This will work.” [approval.json](approval.json)
 pins the accepted source/native pixels as the reference for attack and hurt.
 
-Refs #150 · 2026-10-25. New attack and hurt drawings await owner review;
-they are distinct textures, not aliases.
+Refs #150 · 2026-10-25. Owner liked the hounds and requested an open-maw attack
+instead of the projecting tooth strip. Idle/hurt remain accepted and unchanged;
+the revised attack is ready for review. All three textures are distinct.
 
 All three are 128×128 transparent RGBA, share the approved 32-colour palette and
 `(64,120)` coordinate origin, and use one fixed source-to-native transform.
-Attack keeps planted contact at y120; hurt lifts the nearest paw, with lowest
+Attack's lowest pixel is y121, within one pixel of the original y120 contact;
+hurt lifts the nearest paw, with lowest
 visible pixel y116. Do not recrop or ground each pose independently.
 
 `scene.tscn` mounts all three with nearest sampling, hard alpha and the original

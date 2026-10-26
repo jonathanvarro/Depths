@@ -1,5 +1,5 @@
 {
-  "checks": 38,
+  "checks": 42,
   "failed": 0,
   "results": [
     {
@@ -8,6 +8,14 @@
     },
     {
       "check": "Approved source master unchanged",
+      "ok": true
+    },
+    {
+      "check": "Accepted hurt PNG unchanged",
+      "ok": true
+    },
+    {
+      "check": "Accepted hurt source unchanged",
       "ok": true
     },
     {
@@ -40,6 +48,14 @@
     },
     {
       "check": "Exact prompt/tool attack",
+      "ok": true
+    },
+    {
+      "check": "Preserved edit reference art/source/underhound-v1/attack-master.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved edit reference art/source/underhound-v1/idle-master.png",
       "ok": true
     },
     {
@@ -131,7 +147,7 @@
       "ok": true
     },
     {
-      "check": "Attack keeps planted contact y120",
+      "check": "Attack contact stays within one native pixel of y120",
       "ok": true
     },
     {

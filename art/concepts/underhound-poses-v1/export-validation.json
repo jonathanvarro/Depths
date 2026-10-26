@@ -7,16 +7,16 @@
   "idle_unchanged": true,
   "poses": {
     "attack": {
-      "source": "art/source/underhound-v1/attack-master.png",
-      "source_sha256": "29d58e1051544232c00428051dc071059e51eb3584cdbf16c8cf26e2002b71a8",
+      "source": "art/source/underhound-v1/attack-open-maw-master.png",
+      "source_sha256": "64d0aa5e77973ee4b69991e1c3bbf3abd1bf6e0de03a48d509049af52510d857",
       "bounds": [
-        8,
+        7,
         36,
-        121,
-        121
+        120,
+        122
       ],
-      "lowest_visible_y": 120,
-      "sha256": "3dc4d98801f1389ee2d78343e5aafc1f2a4add2eaa760d2acd1770753eec03b3"
+      "lowest_visible_y": 121,
+      "sha256": "9e975070d64922012f9300dd42060f3e968b6b3b3249c7d0285231071cbb05b4"
     },
     "hurt": {
       "source": "art/source/underhound-v1/hurt-master.png",

@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://scripts/equipment.gd" id="5_kbb5c"]
 [ext_resource type="Script" path="res://scripts/supply_item.gd" id="6_3bxfy"]
 [ext_resource type="Resource" path="res://data/items/oil_flask.tres" id="7_6wnyk"]
-[ext_resource type="PackedScene" path="res://art/props/cave-events-v1/old-workings.tscn" id="8_h08jf"]
+[ext_resource type="PackedScene" path="res://art/props/traps-lamps-v1/lamp.tscn" id="8_h08jf"]
 [ext_resource type="Script" path="res://scripts/room_event.gd" id="9_8mpuk"]
 
 [sub_resource type="Resource" id="Resource_pb7o7"]

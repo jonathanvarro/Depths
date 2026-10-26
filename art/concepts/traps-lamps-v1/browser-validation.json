@@ -1,0 +1,143 @@
+{
+  "checks": 34,
+  "failures": [],
+  "results": [
+    {
+      "ok": true,
+      "label": "All four ready/used pairs decode"
+    },
+    {
+      "ok": true,
+      "label": "Exact zoom 128"
+    },
+    {
+      "ok": true,
+      "label": "Exact zoom 64"
+    },
+    {
+      "ok": true,
+      "label": "Exact zoom 256"
+    },
+    {
+      "ok": true,
+      "label": "Light backing toggles on"
+    },
+    {
+      "ok": true,
+      "label": "Dark backing restored"
+    },
+    {
+      "ok": true,
+      "label": "Actual room capture decodes 0"
+    },
+    {
+      "ok": true,
+      "label": "Actual room capture decodes 1"
+    },
+    {
+      "ok": true,
+      "label": "Actual room capture decodes 2"
+    },
+    {
+      "ok": true,
+      "label": "Actual room capture decodes 3"
+    },
+    {
+      "ok": true,
+      "label": "Actual room capture decodes 4"
+    },
+    {
+      "ok": true,
+      "label": "Actual room capture decodes 5"
+    },
+    {
+      "ok": true,
+      "label": "Actual room capture decodes 6"
+    },
+    {
+      "ok": true,
+      "label": "Actual room capture decodes 7"
+    },
+    {
+      "ok": true,
+      "label": "Actual room capture decodes 8"
+    },
+    {
+      "ok": true,
+      "label": "Actual room capture decodes 9"
+    },
+    {
+      "ok": true,
+      "label": "Actual room capture decodes 10"
+    },
+    {
+      "ok": true,
+      "label": "Actual room capture decodes 11"
+    },
+    {
+      "ok": true,
+      "label": "Actual room capture decodes 12"
+    },
+    {
+      "ok": true,
+      "label": "Actual room capture decodes 13"
+    },
+    {
+      "ok": true,
+      "label": "Actual room capture decodes 14"
+    },
+    {
+      "ok": true,
+      "label": "Actual room capture decodes 15"
+    },
+    {
+      "ok": true,
+      "label": "Actual room capture decodes 16"
+    },
+    {
+      "ok": true,
+      "label": "Actual room capture decodes 17"
+    },
+    {
+      "ok": true,
+      "label": "Actual room capture decodes 18"
+    },
+    {
+      "ok": true,
+      "label": "Actual room capture decodes 19"
+    },
+    {
+      "ok": true,
+      "label": "Actual room capture decodes 20"
+    },
+    {
+      "ok": true,
+      "label": "Actual room capture decodes 21"
+    },
+    {
+      "ok": true,
+      "label": "Actual room capture decodes 22"
+    },
+    {
+      "ok": true,
+      "label": "Actual room capture decodes 23"
+    },
+    {
+      "ok": true,
+      "label": "Page fits 1280"
+    },
+    {
+      "ok": true,
+      "label": "Page fits 844"
+    },
+    {
+      "ok": true,
+      "label": "Page fits 390"
+    },
+    {
+      "ok": true,
+      "label": "No browser errors"
+    }
+  ],
+  "physical_iPhone": false
+}

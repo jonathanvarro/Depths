@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://scripts/equipment.gd" id="4_ahfr0"]
 [ext_resource type="Script" path="res://scripts/supply_item.gd" id="5_6b62x"]
 [ext_resource type="Resource" path="res://data/injuries/limp.tres" id="6_geasg"]
-[ext_resource type="PackedScene" path="res://art/props/room-states-v1/tripwire.tscn" id="7_wl3jw"]
+[ext_resource type="PackedScene" path="res://art/props/traps-lamps-v1/snare.tscn" id="7_wl3jw"]
 [ext_resource type="Script" path="res://scripts/room_event.gd" id="8_wblt4"]
 
 [sub_resource type="Resource" id="Resource_mwqua"]

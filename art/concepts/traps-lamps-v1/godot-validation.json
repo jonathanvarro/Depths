@@ -1,0 +1,32 @@
+{
+	"captures": [
+		"snare-closed-desktop.png",
+		"snare-closed-near-desktop.png",
+		"snare-used-desktop.png",
+		"snare-used-near-desktop.png",
+		"dart-closed-desktop.png",
+		"dart-closed-near-desktop.png",
+		"dart-used-desktop.png",
+		"dart-used-near-desktop.png",
+		"bell-closed-desktop.png",
+		"bell-used-desktop.png",
+		"lamp-closed-desktop.png",
+		"lamp-used-desktop.png",
+		"snare-closed-phone.png",
+		"snare-closed-near-phone.png",
+		"snare-used-phone.png",
+		"snare-used-near-phone.png",
+		"dart-closed-phone.png",
+		"dart-closed-near-phone.png",
+		"dart-used-phone.png",
+		"dart-used-near-phone.png",
+		"bell-closed-phone.png",
+		"bell-used-phone.png",
+		"lamp-closed-phone.png",
+		"lamp-used-phone.png"
+	],
+	"checks": 138,
+	"failures": [],
+	"physical_iPhone": false,
+	"save": "project-local private fixture"
+}

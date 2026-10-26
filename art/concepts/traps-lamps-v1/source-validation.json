@@ -1,0 +1,302 @@
+{
+  "checks": 74,
+  "failures": [],
+  "results": [
+    {
+      "ok": true,
+      "label": "Nine authored textures with built-in source records"
+    },
+    {
+      "ok": true,
+      "label": "Unchanged existing reference art/props/cave-events-v1/tripwire.png"
+    },
+    {
+      "ok": true,
+      "label": "Unchanged existing reference art/props/cave-events-v1/hollow-floor.png"
+    },
+    {
+      "ok": true,
+      "label": "Unchanged existing reference art/props/cave-events-v1/old-workings.png"
+    },
+    {
+      "ok": true,
+      "label": "Pinned master and exact prompt snare-closed"
+    },
+    {
+      "ok": true,
+      "label": "Unaltered original copy snare-closed"
+    },
+    {
+      "ok": true,
+      "label": "Native128 RGBA snare-closed"
+    },
+    {
+      "ok": true,
+      "label": "Hard alpha, clear invisible RGB snare-closed"
+    },
+    {
+      "ok": true,
+      "label": "Export hash snare-closed"
+    },
+    {
+      "ok": true,
+      "label": "Silhouette has transparent margins snare-closed"
+    },
+    {
+      "ok": true,
+      "label": "Pinned master and exact prompt snare-used"
+    },
+    {
+      "ok": true,
+      "label": "Unaltered original copy snare-used"
+    },
+    {
+      "ok": true,
+      "label": "Native128 RGBA snare-used"
+    },
+    {
+      "ok": true,
+      "label": "Hard alpha, clear invisible RGB snare-used"
+    },
+    {
+      "ok": true,
+      "label": "Export hash snare-used"
+    },
+    {
+      "ok": true,
+      "label": "Silhouette has transparent margins snare-used"
+    },
+    {
+      "ok": true,
+      "label": "Pinned master and exact prompt dart-closed"
+    },
+    {
+      "ok": true,
+      "label": "Unaltered original copy dart-closed"
+    },
+    {
+      "ok": true,
+      "label": "Native128 RGBA dart-closed"
+    },
+    {
+      "ok": true,
+      "label": "Hard alpha, clear invisible RGB dart-closed"
+    },
+    {
+      "ok": true,
+      "label": "Export hash dart-closed"
+    },
+    {
+      "ok": true,
+      "label": "Silhouette has transparent margins dart-closed"
+    },
+    {
+      "ok": true,
+      "label": "Pinned master and exact prompt dart-used"
+    },
+    {
+      "ok": true,
+      "label": "Unaltered original copy dart-used"
+    },
+    {
+      "ok": true,
+      "label": "Native128 RGBA dart-used"
+    },
+    {
+      "ok": true,
+      "label": "Hard alpha, clear invisible RGB dart-used"
+    },
+    {
+      "ok": true,
+      "label": "Export hash dart-used"
+    },
+    {
+      "ok": true,
+      "label": "Silhouette has transparent margins dart-used"
+    },
+    {
+      "ok": true,
+      "label": "Pinned master and exact prompt lamp-closed"
+    },
+    {
+      "ok": true,
+      "label": "Unaltered original copy lamp-closed"
+    },
+    {
+      "ok": true,
+      "label": "Native128 RGBA lamp-closed"
+    },
+    {
+      "ok": true,
+      "label": "Hard alpha, clear invisible RGB lamp-closed"
+    },
+    {
+      "ok": true,
+      "label": "Export hash lamp-closed"
+    },
+    {
+      "ok": true,
+      "label": "Silhouette has transparent margins lamp-closed"
+    },
+    {
+      "ok": true,
+      "label": "Pinned master and exact prompt lamp-used"
+    },
+    {
+      "ok": true,
+      "label": "Unaltered original copy lamp-used"
+    },
+    {
+      "ok": true,
+      "label": "Native128 RGBA lamp-used"
+    },
+    {
+      "ok": true,
+      "label": "Hard alpha, clear invisible RGB lamp-used"
+    },
+    {
+      "ok": true,
+      "label": "Export hash lamp-used"
+    },
+    {
+      "ok": true,
+      "label": "Silhouette has transparent margins lamp-used"
+    },
+    {
+      "ok": true,
+      "label": "Pinned master and exact prompt bell-closed"
+    },
+    {
+      "ok": true,
+      "label": "Unaltered original copy bell-closed"
+    },
+    {
+      "ok": true,
+      "label": "Native128 RGBA bell-closed"
+    },
+    {
+      "ok": true,
+      "label": "Hard alpha, clear invisible RGB bell-closed"
+    },
+    {
+      "ok": true,
+      "label": "Export hash bell-closed"
+    },
+    {
+      "ok": true,
+      "label": "Silhouette has transparent margins bell-closed"
+    },
+    {
+      "ok": true,
+      "label": "Pinned master and exact prompt bell-used"
+    },
+    {
+      "ok": true,
+      "label": "Unaltered original copy bell-used"
+    },
+    {
+      "ok": true,
+      "label": "Native128 RGBA bell-used"
+    },
+    {
+      "ok": true,
+      "label": "Hard alpha, clear invisible RGB bell-used"
+    },
+    {
+      "ok": true,
+      "label": "Export hash bell-used"
+    },
+    {
+      "ok": true,
+      "label": "Silhouette has transparent margins bell-used"
+    },
+    {
+      "ok": true,
+      "label": "Pinned master and exact prompt dart-ports"
+    },
+    {
+      "ok": true,
+      "label": "Unaltered original copy dart-ports"
+    },
+    {
+      "ok": true,
+      "label": "Native128 RGBA dart-ports"
+    },
+    {
+      "ok": true,
+      "label": "Hard alpha, clear invisible RGB dart-ports"
+    },
+    {
+      "ok": true,
+      "label": "Export hash dart-ports"
+    },
+    {
+      "ok": true,
+      "label": "Silhouette has transparent margins dart-ports"
+    },
+    {
+      "ok": true,
+      "label": "Distinct pair and shared <=32 colors snare"
+    },
+    {
+      "ok": true,
+      "label": "Shared full source canvas snare"
+    },
+    {
+      "ok": true,
+      "label": "Distinct pair and shared <=32 colors dart"
+    },
+    {
+      "ok": true,
+      "label": "Shared full source canvas dart"
+    },
+    {
+      "ok": true,
+      "label": "Distinct pair and shared <=32 colors bell"
+    },
+    {
+      "ok": true,
+      "label": "Shared full source canvas bell"
+    },
+    {
+      "ok": true,
+      "label": "Distinct pair and shared <=32 colors lamp"
+    },
+    {
+      "ok": true,
+      "label": "Shared full source canvas lamp"
+    },
+    {
+      "ok": true,
+      "label": "Dart holes contain opaque darkness, not transparent cutouts"
+    },
+    {
+      "ok": true,
+      "label": "Only art reference changed; all event rules preserved trap_snare"
+    },
+    {
+      "ok": true,
+      "label": "Only art reference changed; all event rules preserved trap_dart"
+    },
+    {
+      "ok": true,
+      "label": "Only art reference changed; all event rules preserved trap_bell_wire"
+    },
+    {
+      "ok": true,
+      "label": "Only art reference changed; all event rules preserved territory_lamp_eaters"
+    },
+    {
+      "ok": true,
+      "label": "Territory placement/chance preserved"
+    },
+    {
+      "ok": true,
+      "label": "Source/review excluded traps-lamps-v1"
+    },
+    {
+      "ok": true,
+      "label": "Source/review excluded traps-lamps-v1"
+    }
+  ]
+}

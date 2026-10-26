@@ -1328,6 +1328,8 @@ func _create_room_prop(cell: Vector2i,event: RoomEvent) -> Node3D:
 					node.position += Vector3(side.x, 0, side.y) * (CELL_SIZE / 2.0 - 0.01)
 					node.rotation.y = Dressing._yaw_facing(-side)
 					break
+		if node.has_method("mount_in_cell"):
+			node.mount_in_cell(_map, cell, CELL_SIZE)
 		_level.add_child(node)
 		_props[cell] = node
 	return node

@@ -1,0 +1,135 @@
+{
+  "issues": [
+    158,
+    159
+  ],
+  "date": "2026-10-25",
+  "tool": "built-in image_gen",
+  "references": [
+    {
+      "path": "art/props/cave-events-v1/tripwire.png",
+      "role": "Existing material, pixel-style and/or registration reference",
+      "sha256": "5d853669af7f3c2c10c58b77b88f8ee0a4407678031f10dc11096c2664e7c638"
+    },
+    {
+      "path": "art/props/cave-events-v1/hollow-floor.png",
+      "role": "Existing material, pixel-style and/or registration reference",
+      "sha256": "afd58052582da35d1b2f2331a073b788a772db54f8276b48b2ffc80e8e4bea15"
+    },
+    {
+      "path": "art/props/cave-events-v1/old-workings.png",
+      "role": "Existing material, pixel-style and/or registration reference",
+      "sha256": "d3382d64ff56f15cd1ef2b0aee9ebfb47017508db09b8e7440928ff50f2dca07"
+    }
+  ],
+  "assets": [
+    {
+      "id": "snare-closed",
+      "source": "art/source/traps-lamps-v1/snare-closed.png",
+      "original_path": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-5ad475be-9bb0-4d22-92c2-ea0beaa74d36.png",
+      "prompt": "Use case: game-asset. Create ONE isolated cave-floor snare prop for Depths, a dark gritty first-person grid dungeon crawler. Supplied image is a material/pixel-style reference (existing cave trap); do not copy its exact wire trap. New asset: one coarse hemp cord noose lies in a broad oval, half-buried in a few small gray-brown grit clumps, attached by a short trailing cord to a rough wooden stake wedged into a small rock crack near upper right. The loop must be open and clearly legible at 128 pixels. No victim, sticks in the loop, blood, trap jaw or metal bear trap. Direct orthographic TOP-DOWN view for a horizontal floor decal, not a perspective diorama. Sparse localized grit only, no rectangular patch of ground. Entire object on a SQUARE transparent canvas, centered, occupy roughly x12%-88%, y15%-85%, generous transparent margins. Chunky restrained pixel-art intended for native128x128, max32 muted stone/rope/wood colors, broad dark outlines and grouped light, no painterly grain or tiny noisy detail. Warm upper-left cue like reference. True transparent background, no scenery, text, labels, sheet, floor shadow or interface.",
+      "edit_reference": null,
+      "sha256": "68a0cc337076167fbe164b42fef03edf3e75df6ce822285f7aafb771cfe95560",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "id": "snare-used",
+      "source": "art/source/traps-lamps-v1/snare-used.png",
+      "original_path": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-938010d8-461e-4e20-96f8-af677f7c1e78.png",
+      "prompt": "Use case: precise-object-edit. Edit the supplied snare drawing to its SPRUNG/USED state, keeping its exact square canvas, camera angle, absolute scale, rope/wood/stone palette, lighting, scattered grit and clear transparent background. Change only the working parts: the broad open cord noose has pulled almost shut around NOTHING, leaving a narrow small tightened loop and a kinked length of slack cord where the large loop was. The same wooden stake now leans slightly toward the former loop. No boot, body, stick, victim, blood or new objects. Preserve the main cord attachment and rock cluster at upper right, same native128 pixel style and detail. Do NOT refit, recenter, crop or enlarge the remaining shape; even though the noose contracts, all unchanged material stays in its existing full-canvas location. Dark gritty game prop, max32 colors shared with reference, hard transparency, no text, UI, sheet, ground or cast shadow.",
+      "edit_reference": "art/source/traps-lamps-v1/snare-closed.png",
+      "sha256": "cf388fcec78ed525975c59fd3c0abf50069acb7700c013a4f757572bb1bb4f4c",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "id": "dart-closed",
+      "source": "art/source/traps-lamps-v1/dart-closed.png",
+      "original_path": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-e227e85c-1643-48be-8f85-d2eb63554f3a.png",
+      "prompt": "Use case: game-asset. ONE isolated pressure-plate floor prop for Depths. Supplied image is an existing cave-floor texture/sprite STYLE reference. Direct orthographic TOP-DOWN view for a horizontal floor decal. A single broad roughly square slate-gray floor stone sits a little proud inside an irregular narrow broken stone rim: dark seam along two edges, a readable chipped raised lip and three large worn plane values. It is a subtle crude dart-trigger plate set by goblins, not a treasure chest, pit, magical rune, bear trap or machinery. NO darts yet. Sparse small grit chips at the rim, no rectangular ground background, no wall in this particular drawing. Centered square transparent canvas, footprint x12%-88%, y12%-88%, transparent margins. Pixel-art for native128x128, <=32 muted grey brown charcoal colors, crisp stepped shapes, restrained detail, upper-left light, match the cave reference. No text, glow, particles, scene, shadow plane or UI.",
+      "edit_reference": null,
+      "sha256": "147292d26d40d858d9781cb748e6681135ffadc2c911742948c8ba8ff04dfe85",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "id": "dart-used",
+      "source": "art/source/traps-lamps-v1/dart-used.png",
+      "original_path": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-f088d874-c737-410a-b187-c956fc2eff92.png",
+      "prompt": "Use case: precise-object-edit. Edit the supplied pressure-plate floor prop to its SPRUNG/USED state. Keep the exact square full canvas, orthographic top-down angle, absolute size, outer stone rim, chip locations, stone pattern/colors and transparent margins. Press the same central plate down flush inside its rim: remove the proud raised side lip and deepen its surrounding seam. Add TWO spent short wooden darts lying diagonally across the stone near the lower/left edge, each with a small dull iron tip and simple dark feather fletching; readable at native128. No blood, victims, arrows stuck in bodies, explosion or large machinery. Crucially retain the same plate footprint and surrounding stones; no auto-fitting or independent recentering. Same restrained chunky 32-color cave pixel art, genuinely transparent background, no text, UI, environment or shadow plane.",
+      "edit_reference": "art/source/traps-lamps-v1/dart-closed.png",
+      "sha256": "8bd857de10e91c709a05376167805d285b54fde6d6d01dd4d1bfd5d5b5275797",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "id": "lamp-closed",
+      "source": "art/source/traps-lamps-v1/lamp-closed.png",
+      "original_path": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-54b4e793-4823-4937-9d13-45bf78b43073.png",
+      "prompt": "Use case: game-asset. ONE isolated dead-lamp store prop for Depths. The supplied old-workings image is the MATERIAL, SCALE AND PIXEL STYLE reference, not the subject. Front-facing upright view at a slightly elevated first-person angle, on a square transparent canvas. A squat weathered wooden miners' lamp rack, two rough uprights, broad top shelf and lower crossbar, about as wide as tall. Four distinct old oil lanterns hang below: every lantern DEAD, broken dark glass, gnawed short ragged wicks, dry empty reservoirs. No flame, glow, light or shining lit lamp. On the upper shelf stand THREE clearly sealed small squat oil flasks with stoppers, dull gray glass and modest pale specular flecks, separated enough to see at native128. A few pale moth-wing shapes and glass shards lie at the feet. Silhouette should say ruined light supplies even small. No pick, basket, stone wall, room backdrop or characters. Entire rack within x8%-92%, top12%, feet abouty92%; generous empty transparent margins. Restrained chunky pixel-art intended for native128, max32 muted aged wood, charcoal, cool glass and dull iron colors. Broad readable value masses, warm upper-left cue, hard pixel clusters rather than fine illustration. No text, UI, cast ground shadow, mist, neon or extra objects.",
+      "edit_reference": null,
+      "sha256": "78513669e5a1c25190f0ab99c2b461b036a0c0f08fcff374bb39ce6f4fd8e40e",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "id": "lamp-used",
+      "source": "art/source/traps-lamps-v1/lamp-used.png",
+      "original_path": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-30991474-d25a-43c0-8000-8d82fd0fe3e1.png",
+      "prompt": "Use case: precise-object-edit. Edit this exact dead-lamp rack into its SEARCHED/USED state. Remove ONLY the THREE sealed oil flasks on its upper shelf, leaving that shelf empty apart from the same existing glass chips and pale moth wings. Preserve the exact rack, four dead hanging lanterns, broken glass/wicks, wood damage, bolts, side posts, feet, scattered debris, lighting, pixel style, square canvas and all absolute positions. No new containers, no flame or glow, no repairs, no new background. Do not shrink, refit, recenter or crop the rack after removing bottles. The visibly empty upper shelf must clearly distinguish this state at native128. Same coarse max32 muted wood/glass/iron colors and true transparent background. One isolated whole rack only, no labels, UI, sheet or cast shadow.",
+      "edit_reference": "art/source/traps-lamps-v1/lamp-closed.png",
+      "sha256": "499793b1e0a621fb00943e1b6d69f3273ee77bc8a7e44036b0b4a17c0d033fdd",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "id": "bell-closed",
+      "source": "art/source/traps-lamps-v1/bell-closed.png",
+      "original_path": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-aec8beff-9d20-40c4-a271-60ef9cb3c2c9.png",
+      "prompt": "Use case: identity-preserve game-asset edit. Edit the supplied existing cave tripwire sprite into a BELL WIRE variant for Depths. Keep the same square full canvas, ground debris, two short wooden pegs, taut horizontal wire across the bottom of the drawing and existing pixel scale/position. Add ONE small crude dull bronze goblin bell hanging from a tied short string at the wire's center. Bell is a single tapered hollow cup with ONE central clapper, not paired sacks. Make its small cup silhouette and dark open lip clear at native128. It can hang slightly above the floor by lifting the wire midpoint modestly, but preserve the original left/right ground-contact anchors. It must read differently from the plain stone-drop wire. Dark gritty cave pixel-art, max32 muted charcoal/wood/stone/bronze colors, no bright gold or musical symbols. One isolated whole prop, true transparent background; no floor plane, wall, text, labels or UI. Do not output a sheet.",
+      "edit_reference": null,
+      "sha256": "4dad7ea4797afec1a3dcf819d742b080d8bf9697b1841b04dbd9a4ae000c2bf5",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "id": "bell-used",
+      "source": "art/source/traps-lamps-v1/bell-used.png",
+      "original_path": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-8f30e160-8976-4661-9c3e-187e971008b2.png",
+      "prompt": "Use case: precise-object-edit. Edit the supplied bell-wire prop into its resolved/disarmed state, preserving the exact square canvas, absolute scale, left/right stone piles and peg positions, same dark gritty pixel-art and transparent background. The taut wire is CUT near the central bell tie, leaving two slack separated ends sagging toward the floor. The same single dull bronze bell now lies tipped over on the ground immediately below its original center position, with one dark cup lip and one clapper; no second bell. Make the broken/slack wire readable at native128, not a ringing or magical effect. Keep the two peg/rock anchors exactly where they are, all objects inside the existing canvas; do not refit to the changed silhouette. No text, UI, victims, blood, scene, ground patch or cast shadow. One complete isolated used prop, max32 muted colors consistent with reference.",
+      "edit_reference": "art/source/traps-lamps-v1/bell-closed.png",
+      "sha256": "7c223d46ca9416e9f3558c0e02efb29dbd977ca583ed42dec41142be81096a37",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "id": "dart-ports",
+      "source": "art/source/traps-lamps-v1/dart-ports.png",
+      "original_path": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-25d6863a-1559-4cef-9b8a-7dcc534c7ed3.png",
+      "prompt": "Use case: game-asset. ONE small isolated wall-mounted dart-port scar for Depths, a dark gritty dungeon crawler. The supplied cave floor stone is only a MATERIAL/PIXEL-ART reference. Front-facing orthographic wall detail: three tiny black circular dart holes in a short horizontal row, each rim chipped in coarse grey-brown cave stone. Around the holes only a narrow irregular connected stone scar, feathered by a few stepped stone chips into transparency. The holes remain pitch black and fully opaque. No stone slab rectangle, no entire wall, no floor, no pressure plate, no flying darts. This will be mounted flush at knee height on an actual cave wall. Square transparent canvas with the SMALL horizontal scar centered in x12%-88%, y38%-62%, generous transparency above and below. Native128 budget with chunky pixel clusters, <=32 muted grays/browns, subtle upper-left light; no glow, text, UI, shadow plane or environment.",
+      "edit_reference": null,
+      "sha256": "09e0dad3c49248cca963aaf974a25e4bb8650c058feb61980f74649e8e293be3",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    }
+  ]
+}
