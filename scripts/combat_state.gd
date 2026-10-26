@@ -88,7 +88,7 @@ const FLASH_HERO_DAMAGE := 1
 ## modifier and a coloured nameplate. They're worth a little more XP and
 ## hold most of the drop chance (trinkets.gd, gear_gen.gd). At most this
 ## many per fight.
-const ELITE_CHANCE := {2: 0.10, 3: 0.15, 4: 0.20}
+const ELITE_CHANCE := {2: 0.12, 3: 0.18, 4: 0.22}  # nudged up 2026-10-25, after the free torches
 const MAX_ELITES := {2: 1, 3: 2, 4: 2}
 const ELITES := ["Hardened", "Savage", "Swift", "Venomous"]
 const HARDENED_HEALTH := 1.5
@@ -96,7 +96,7 @@ const SAVAGE_DAMAGE := 1
 const SWIFT_INITIATIVE := 3
 ## Deeper floors bite harder (owner, 2026-10-21): foes' health and damage
 ## scale by floor, the queen and her guards included.
-const DEPTH_SCALE := {3: 1.1, 4: 1.2}
+const DEPTH_SCALE := {2: 1.05, 3: 1.15, 4: 1.25}  # was 3: 1.1, 4: 1.2 (retuned 2026-10-25 to ~24/30)
 ## New monsters (#47): a great rat's rush hits harder; a drummer's beat
 ## makes each other goblin's next hit stronger.
 const RUSH_DAMAGE := 2

@@ -43,17 +43,19 @@ func _initialize() -> void:
 
 	# Depth scaling.
 	var shallow = _fight(["goblin"], 2)
-	check("floors 1-2: foes as written", shallow.foes[0].type.max_health == 10 or shallow.foes[0].elite == "Hardened")
+	# Retuned 2026-10-25 (after the free torches): floor 2 +5%, 3 +15%, 4 +25%.
+	check("floor 2: +5% (a goblin 11 health)", shallow.foes[0].type.max_health == 11 or shallow.foes[0].elite == "Hardened")
+	check("floor 1: foes as written", _fight(["goblin"], 1).foes[0].type.max_health == 10)
 	var deep = _fight(["goblin", "goblin", "goblin"], 3, "gate")  # a set fight: no elites
 	var g = deep.foes[0]
-	check("floor 3: +10%, rounded (a goblin 11 health, 2-4 damage)", g.type.max_health == 11 and g.health == 11 and g.type.damage_min == 2 and g.type.damage_max == 4, "%d %d-%d" % [g.type.max_health, g.type.damage_min, g.type.damage_max])
+	check("floor 3: +15%, rounded (a goblin 12 health, 2-5 damage)", g.type.max_health == 12 and g.health == 12 and g.type.damage_min == 2 and g.type.damage_max == 5, "%d %d-%d" % [g.type.max_health, g.type.damage_min, g.type.damage_max])
 	check("set fights have no elites", deep.foes.all(func(f): return f.elite == ""))
 	var queen = _fight(["goblin_queen"], 4, "queen")
-	check("floor 4: +20%, the queen too (32 -> 38 health, 3-6 -> 4-7 damage)", queen.foes[0].type.max_health == 38 and queen.foes[0].type.damage_min == 4 and queen.foes[0].type.damage_max == 7, queen.foes[0].type.max_health)
+	check("floor 4: +25%, the queen too (32 -> 40 health, 3-6 -> 4-8 damage)", queen.foes[0].type.max_health == 40 and queen.foes[0].type.damage_min == 4 and queen.foes[0].type.damage_max == 8, queen.foes[0].type.max_health)
 	check("...and the written queen isn't changed", _e("goblin_queen").max_health == 32)
 	var q = queen.foes[0]
 	queen._call_guard(q)
-	check("a guard she calls is scaled too", queen.foes[-1].type.max_health == roundi(12 * 1.2))
+	check("a guard she calls is scaled too", queen.foes[-1].type.max_health == roundi(12 * 1.25))
 
 	# Elites.
 	var fight = _fight(["goblin"], 2)

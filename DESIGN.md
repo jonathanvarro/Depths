@@ -588,9 +588,11 @@ Deeper floors mix them (depth 1 mostly single rats; depth 3 pairs and trios like
     - **Next:** record whether players read the threat and choose deliberately, before trying the other candidates (the miner discovery and the goblin patrol).
 - **Art:** ChatGPT's art (#141) is connected, including the special poses (the bat landed, the brute's wind-up and recovery, the bloat swelling and bursting, the miner's grab), the gas cloud, and the new intent and status icons.
 - **Elites and depth scaling — tuned 2026-10-21** (`CombatState.prepare`, shared by the game and the playtest bot):
-  - **Depth:** foes on floor 3 have +10% health and damage, and floor 4 +20%, rounded. The queen and the guards she calls are included, so she has 38 health and 4–7 damage.
+  - **Depth:** foes on floor 2 have +5% health and damage, floor 3 +15% and floor 4 +25%, rounded. The queen and the guards she calls are included, so she has 40 health and 4–8 damage.
+    - Retuned 2026-10-25 after the free torches made the bot win 28/30/25. Two runs at these settings gave 28/27/21 and, with floor 4 at +30%, 23/28/19 — the gentler +25% was kept.
+    - The spread between heroes (Corin 27–30, Alwen 19–21) is larger than the overall level's error, and is worth its own look.
   - **Elites:** from floor 2, some foes become elites.
-    - Chances: 10% each on floor 2 (at most one per fight), 15% on floor 3 and 20% on floor 4 (at most two).
+    - Chances: 12% each on floor 2 (at most one per fight), 18% on floor 3 and 22% on floor 4 (at most two). (10/15/20% before the 2026-10-25 retune.)
     - Types: Hardened (half again as much health), Savage (+1 damage), Swift (acts sooner) and Venomous (its hits poison).
     - An elite has an orange nameplate, stands a little larger, and is worth a little more XP.
     - Each elite kind also has its own mark on the tag (#147): a heart for Hardened, a blood drop for Savage, chevrons for Swift, and venom for Venomous. The selected enemy's line spells it out.
