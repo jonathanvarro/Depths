@@ -2,6 +2,10 @@
 
 2026-10-25 · Refs #150 · [Review gallery](../art/concepts/underhound-idle-v1/inspector.html).
 
+**Owner accepted this idle:** “This will work.” The accepted pixel/source hashes
+are pinned in [approval.json](../art/enemies/underhound-v1/approval.json).
+It is now the identity, palette and registration reference for attack/hurt.
+
 The owner selected checkpoint 1: establish the idle at native128. One new
 transparent drawing was made with the built-in ImageGen tool, using the chosen
 Underhound sheet for identity and the current breach-hound idle for production
@@ -54,7 +58,7 @@ One uncompressed native RGBA texture is 64 KiB before engine overhead.
 
 ## Next
 
-Owner reviews this idle before steps 2 and 3. After acceptance, use the same
+Idle acceptance is complete. For steps 2 and 3, use the same
 head, four limbs, ribs, palette, scale and pivot for attack/hurt. Reserve room
 for the displaced inner jaw; do not refit each pose to its own bounds. The
 complete three-pose family needs paused comparison and real combat UI review.

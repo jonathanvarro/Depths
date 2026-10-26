@@ -1,6 +1,6 @@
 {
   "issue": 150,
-  "status": "Idle production candidate awaiting review",
+  "status": "Owner-approved idle; full pose family pending",
   "canvas": [
     128,
     128
@@ -37,5 +37,6 @@
     "idle"
   ],
   "attack_hurt": "Not authored; do not alias them to idle",
-  "floor_or_enemy_type": null
+  "floor_or_enemy_type": null,
+  "owner_approval": "art/enemies/underhound-v1/approval.json"
 }

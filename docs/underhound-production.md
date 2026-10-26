@@ -1,7 +1,8 @@
 # First deeper horror: the Underhound
 
 **Checkpoint 1 delivered, 2026-10-25:** [idle candidate and native/phone review](underhound-idle.md).
-Idle awaits owner review; attack/hurt and the complete family are still pending.
+Owner accepted the idle (“This will work”); attack/hurt and the complete family
+are still pending. Use the accepted idle as their identity and scale reference.
 
 2026-10-25 · Selection made by Codex at the owner's request, refs #150.
 

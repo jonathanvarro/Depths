@@ -55,6 +55,11 @@ rgb.putalpha(Image.fromarray(a[:, :, 3]))
 a = np.array(rgb)
 a[a[:, :, 3] == 0] = 0
 sprite = Image.fromarray(a)
+approval_path = OUT / 'approval.json'
+approval = json.loads(approval_path.read_text()) if approval_path.exists() else None
+if approval:
+    assert sha(master) == approval['master_sha256'], 'Approved master must not change'
+    assert hashlib.sha256(sprite.tobytes()).hexdigest() == approval['native_rgba_sha256'], 'Approved idle pixels must not drift'
 sprite.save(OUT / 'idle.png')
 box = sprite.getbbox()
 colours = sorted({tuple(int(c) for c in p[:3]) for p in a.reshape(-1, 4) if p[3]})
@@ -93,13 +98,15 @@ cast_shadow = 0
 sprite_frames = ExtResource("frames")
 animation = &"idle"
 ''')
-report = {'issue': 150, 'status': 'Idle production candidate awaiting review',
+report = {'issue': 150, 'status': 'Owner-approved idle; full pose family pending' if approval else 'Idle production candidate awaiting review',
           'canvas': [128, 128], 'pivot': [64, 120], 'bounds': list(box), 'visible_colours': len(colours),
           'source_bounds': list(bounds), 'source_to_native_scale': scale, 'source_to_native_offset': list(offset),
           'resize': 'Proportional BOX once, then hard alpha >=128 and 32-colour visible-pixel median cut, no dithering',
           'source': manifest['source'], 'source_sha256': sha(master), 'idle_sha256': sha(OUT / 'idle.png'),
           'pixel_size': pixel_size, 'visual_height_metres': 0.8, 'animations': ['idle'],
           'attack_hurt': 'Not authored; do not alias them to idle', 'floor_or_enemy_type': None}
+if approval:
+    report['owner_approval'] = 'art/enemies/underhound-v1/approval.json'
 write(OUT / 'catalog.json', json.dumps(report, indent=2) + '\n')
 
 font_path = next((ROOT / 'art/fonts/source-sans-3').glob('*.ttf'))
@@ -145,5 +152,8 @@ document.querySelectorAll('[data-zoom]').forEach(b=>b.onclick=()=>zoom(Number(b.
 const views=[['family-1278','Existing breach hound (left) · Underhound (right) · phone'],['idle-cave-1278','Underhound · cave · phone'],['idle-fungal-caverns-1278','Underhound · fungal materials · phone'],['family-1280','Family comparison · desktop'],['idle-cave-1280','Underhound · cave · desktop'],['idle-fungal-caverns-1280','Underhound · fungal materials · desktop'],['native-review','Native128 / 64px review plate']];
 const select=document.querySelector('#view'),render=document.querySelector('#render'),label=document.querySelector('#label');views.forEach(([file,title],i)=>select.add(new Option(title,i)));function show(){const[file,title]=views[select.selectedIndex];render.src=file+'.png';render.alt=title;label.textContent=title+' · Physical iPhone testing and final combat UI clearance remain open.';}select.onchange=show;show();
 </script></html>'''
+if approval:
+    html = html.replace('CHECKPOINT ONE · IDLE CANDIDATE', 'CHECKPOINT ONE · APPROVED IDLE')
+    html = html.replace('Review the idle before attack and hurt are authored.', 'Owner accepted this idle on 2026-10-25. It is the reference for the pending attack and hurt poses.')
 write(REVIEW / 'inspector.html', html)
 print(f'UNDERHOUND_IDLE: {sprite.size}, {len(colours)} visible colours, bounds {box}, contact y120')
