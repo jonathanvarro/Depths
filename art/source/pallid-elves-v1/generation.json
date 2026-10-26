@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-25",
+  "tool": "Built-in image_gen.imagegen",
+  "mode": "generate",
+  "status": "Exploratory concept; owner review pending",
+  "use_case": "stylized-concept",
+  "issue": "https://github.com/jonathanvarro/Depths/issues/162",
+  "prompt": "Use case: stylized-concept.\nAsset type: one landscape dark-fantasy character concept painting for Depths, an intimate waist-up portrait of two adult Pallid Elves, a woman and a man, showing a coherent distinctive lineage.\nPrimary request: visualize the previously described Pallid Elves: porcelain skin, pale gold-white hair, almost-black eyes, long ears swept backward close to the skull, austere gothic beauty and an unnervingly composed presence.\nComposition: both adult faces large and clearly readable, slight three-quarter views so the swept-back ear anatomy is visible, natural portrait-pair composition with room around their heads and ears. The woman has a severe, intelligent expression and loosely gathered pale-gold hair; the man has longer pale-gold-white hair pulled back and a narrow, elegant face. Individual facial structure, not identical twins. They feel alive and thoughtful, with quiet emotion.\nDefining features: very pale cool ivory skin with subtle violet-grey undertones and believable delicate skin texture; dark brown-black irises, clear small catchlights and a restrained natural sclera rim; sharply tapered, elongated ears following backward along the head rather than sticking out sideways. Pale eyebrows and lashes. No glowing eyes, fangs, skull makeup or undead decomposition.\nCostume and materials: weathered charcoal velvet, high collars, restrained black lace, pale inner linen and a little tarnished silver. Elegant mourning-clothes silhouettes, practical believable seams and fabric wear, limited ornament. No crowns, faction insignia, weapons, or magical effects.\nScene and lighting: a subdued ancient stone interior suggested in deep shadow, soft cold ambient light and a restrained warm candle edge that gives the pale faces dimensionality. Keep the faces, hair and distinctive ears dominant; background quiet.\nStyle: polished painterly gothic fantasy concept art with grounded materials, strong broad shadow masses and selective fine face detail. Beautiful but unsettling. Serious, dark and gritty, not cute, anime, glossy fashion photography or brightly coloured high fantasy.\nOutput: a single complete painting, landscape framing, no labels, text, UI, borders or watermark. This is exploratory concept art, not a pixel-art sprite sheet.",
+  "input_images": [],
+  "original_output": "C:\\Users\\jonat\\.codex\\generated_images\\01a14874-f3ec-7623-8d42-2fcc4b08ab5d\\exec-b47dea96-da0d-4cca-8546-a439a213c627.png",
+  "preserved_master": "art/concepts/pallid-elves-v1/pallid-elves-concept.png",
+  "width": 1536,
+  "height": 1024,
+  "sha256": "c4f45079687db92e239c5f9241acfd0c57fd3cf4a3bc70941eb102d5840bce27",
+  "alterations": "None; original PNG copied byte-for-byte",
+  "subjects": "Two adult pallid elves: woman and man; no names or roles assigned",
+  "scope": "Concept painting only; no runtime art, lore, rules, rigs or encounter assignments"
+}

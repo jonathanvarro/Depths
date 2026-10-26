@@ -14,6 +14,11 @@ Format:
 ---
 
 ## 2026-10-25 – ChatGPT
+- Did: #162 visualizes the requested Pallid Elf lineage as an adult woman/man pair using built-in ImageGen: cool ivory skin, pale gold-white hair, dark eyes, long swept-back ears and worn charcoal gothic clothing. Preserved the unaltered 1536x1024 painting at art/concepts/pallid-elves-v1/pallid-elves-concept.png. Exact prompt, original output path, dimensions/hash and no-input-image provenance: art/source/pallid-elves-v1/generation.json; README shows the concept.
+- Next: Owner reviews this exploratory direction. It can inform later character work if selected; no names, culture/history, faction, moral alignment, recruit eligibility or story/encounter roles are assigned. Keep this first study and use versioned siblings for changes.
+- Watch out: Concept painting only, with baked lighting/fine texture/background; no runtime portrait, rig, sprites, code or existing elf replacements. PNG decode/dimensions, byte-identical source/copy SHA-256, prompt/provenance, folder .gdignore exclusions, local links and whitespace checked. Concurrent Underhound pose revisions and trap/lamp assets/scripts are untouched.
+
+## 2026-10-25 – ChatGPT
 - Did: At the owner's request kept only the ember mage concept (#160) and removed the two uncommitted ice-mage/necromancer PNGs from the project. Closed #161 as not planned and recorded the retention decision in art/concepts/gothic-mage-v1/README.md.
 - Next: Keep the ember study for future consideration; no further mage concept or production work is requested.
 - Watch out: Ember painting hash still matches its saved provenance; artwork, prompt and original reference remain unchanged. No companion manifest or runtime export was added. Checked documentation whitespace.
