@@ -1,0 +1,65 @@
+{
+  "canvas": [
+    128,
+    128
+  ],
+  "colours": 32,
+  "idle_unchanged": true,
+  "poses": {
+    "attack": {
+      "source": "art/source/underhound-v1/attack-master.png",
+      "source_sha256": "29d58e1051544232c00428051dc071059e51eb3584cdbf16c8cf26e2002b71a8",
+      "bounds": [
+        8,
+        36,
+        121,
+        121
+      ],
+      "lowest_visible_y": 120,
+      "sha256": "3dc4d98801f1389ee2d78343e5aafc1f2a4add2eaa760d2acd1770753eec03b3"
+    },
+    "hurt": {
+      "source": "art/source/underhound-v1/hurt-master.png",
+      "source_sha256": "5ca1fbaa6c9bdd110cb4b97ccec772b7da51bad7998696dc176f95e54448a602",
+      "bounds": [
+        8,
+        29,
+        121,
+        117
+      ],
+      "lowest_visible_y": 116,
+      "sha256": "378d7fb497e455e6be15d9dd8019d80c9dd7df618da200e207d9bb36921d6567"
+    },
+    "idle": {
+      "bounds": [
+        8,
+        32,
+        120,
+        121
+      ],
+      "lowest_visible_y": 120,
+      "sha256": "9d66f724f211756eeec8f6e209ed853e6d68eed714184bb308f079a0bf632ffe"
+    }
+  },
+  "shared_registration": {
+    "source_canvas": [
+      1254,
+      1254
+    ],
+    "source_window": [
+      -24.571428571428566,
+      -99.10112359550563,
+      1312.5714285714284,
+      1241.303370786517
+    ],
+    "scale_xy": [
+      0.09572649572649573,
+      0.09549356223175966
+    ],
+    "translate_xy": [
+      2.3521367521367518,
+      9.463519313304722
+    ],
+    "per_pose_fit_or_grounding": false
+  }
+}

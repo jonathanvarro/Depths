@@ -14,6 +14,11 @@ Format:
 ---
 
 ## 2026-10-25 – ChatGPT
+- Did: Added Underhound attack/hurt using built-in ImageGen and the owner-approved idle as identity/registration reference (#150). Preserved both unaltered masters/exact prompts, then exported distinct native128 drawings in the same 32-colour palette and fixed coordinate frame. Approved idle/master bytes remain unchanged. Three-pose paused/step/optional-ghost review and twelve actual combat captures: art/concepts/underhound-poses-v1/inspector.html. Handoff: docs/underhound-poses.md. The old idle builder now preserves/rebuilds the full family.
+- Next: Owner reviews the two new poses alongside the accepted idle. Attack exposes the sliding tooth plate; hurt recoils and folds the near foreleg. No new EnemyType, balance, AI, floor, sound or encounter assignment is made; acceptance of the new drawings remains open.
+- Watch out: 38 source, 92 real combat UI, 21 legacy idle and 31 browser checks pass; renderer exits cleanly. Asset-local extra tag headroom avoids the phone Larger label touching the shoulder. Fixture uses one Mara card and copied hound numbers only in memory, no Main/saves; full-party Larger layout and physical iPhone remain untested. Actual generated masters are 1254px square; the earlier 1280px note was a dimension-reporting error, not a changed source. Hurt's lifted paw raises its lowest pixel to y116; retain y120 origin without per-pose grounding. Concurrent Claude camp/playtest commits were preserved.
+
+## 2026-10-25 – ChatGPT
 - Did: Recorded the owner's Underhound idle acceptance ("This will work", #150). art/enemies/underhound-v1/approval.json pins native PNG/pixels and master hashes; catalogue, live review banner and handoff now reflect acceptance. Exporter checks the approved pixels before writing, so a rebuild cannot silently alter the reference. Artwork and earlier review captures are unchanged.
 - Next: Attack/hurt may use this accepted identity, palette, scale and contact origin when requested. Full family review, combat UI clearance and encounter assignment remain pending.
 - Watch out: Acceptance metadata/hash consistency and handoff links checked. No new art, poses, gameplay or encounter assignment was made; Claude's intervening playtest fixes remain untouched.

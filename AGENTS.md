@@ -149,11 +149,14 @@ Templates > Download and Install; already installed on the owner's PC).
   prompted a single-clapper Bell and broad folded-vault Sleeper revision; compare
   Revised/Previous in the gallery. Underhound is selected first for production
   by Codex at the owner's request (2026-10-25): `docs/underhound-production.md`.
-  The idle-only native128/32-colour candidate is in `art/enemies/underhound-v1`;
-  `docs/underhound-idle.md` records its source, preview scene and paused review.
+  The native128/32-colour family is in `art/enemies/underhound-v1`;
+  `docs/underhound-poses.md` records fixed registration, exact source prompts,
+  paused stepping and twelve real combat UI captures at desktop/phone sizes.
   Owner accepted the idle on 2026-10-25 ("This will work"); `approval.json` pins
-  its pixels/source as the reference for attack/hurt. No aliases or EnemyType assignment.
-  The full three-pose family remains pending. Other choices
+  its pixels/source as the reference for attack/hurt. Both new poses are authored
+  and checked; owner family acceptance remains open. No aliases or EnemyType assignment.
+  Preserve the approved idle and shared transform; the hurt paw lifts without
+  snapping the whole sprite down. Other choices
   and revised review remain open; no encounter assignments.
   Five further reference-led sovereign/creature studies (#153) are in
   `art/concepts/reference-creatures-v1/inspector.html`; prompts/provenance and

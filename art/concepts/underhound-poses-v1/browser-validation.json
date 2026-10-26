@@ -1,0 +1,131 @@
+{
+  "checks": 31,
+  "failures": [],
+  "results": [
+    {
+      "ok": true,
+      "label": "Starts paused with no duplicate idle layer"
+    },
+    {
+      "ok": true,
+      "label": "Displayed pixels exactly match idle"
+    },
+    {
+      "ok": true,
+      "label": "Displayed pixels exactly match attack"
+    },
+    {
+      "ok": true,
+      "label": "Displayed pixels exactly match hurt"
+    },
+    {
+      "ok": true,
+      "label": "Displayed pixels exactly match attack"
+    },
+    {
+      "ok": true,
+      "label": "Displayed pixels exactly match idle"
+    },
+    {
+      "ok": true,
+      "label": "Next steps to paused attack"
+    },
+    {
+      "ok": true,
+      "label": "Previous restores clean idle"
+    },
+    {
+      "ok": true,
+      "label": "Optional ghost is visibly distinct"
+    },
+    {
+      "ok": true,
+      "label": "Disabling ghost removes all previous layers"
+    },
+    {
+      "ok": true,
+      "label": "Exact pixel zoom 1"
+    },
+    {
+      "ok": true,
+      "label": "Exact pixel zoom 0.5"
+    },
+    {
+      "ok": true,
+      "label": "Exact pixel zoom 3"
+    },
+    {
+      "ok": true,
+      "label": "Comparison plays"
+    },
+    {
+      "ok": true,
+      "label": "Pause holds an unchanged state"
+    },
+    {
+      "ok": true,
+      "label": "Combat capture decodes 0"
+    },
+    {
+      "ok": true,
+      "label": "Combat capture decodes 1"
+    },
+    {
+      "ok": true,
+      "label": "Combat capture decodes 2"
+    },
+    {
+      "ok": true,
+      "label": "Combat capture decodes 3"
+    },
+    {
+      "ok": true,
+      "label": "Combat capture decodes 4"
+    },
+    {
+      "ok": true,
+      "label": "Combat capture decodes 5"
+    },
+    {
+      "ok": true,
+      "label": "Combat capture decodes 6"
+    },
+    {
+      "ok": true,
+      "label": "Combat capture decodes 7"
+    },
+    {
+      "ok": true,
+      "label": "Combat capture decodes 8"
+    },
+    {
+      "ok": true,
+      "label": "Combat capture decodes 9"
+    },
+    {
+      "ok": true,
+      "label": "Combat capture decodes 10"
+    },
+    {
+      "ok": true,
+      "label": "Combat capture decodes 11"
+    },
+    {
+      "ok": true,
+      "label": "Page fits 1280"
+    },
+    {
+      "ok": true,
+      "label": "Page fits 844"
+    },
+    {
+      "ok": true,
+      "label": "Page fits 390"
+    },
+    {
+      "ok": true,
+      "label": "No browser errors"
+    }
+  ],
+  "physical_iPhone": false
+}

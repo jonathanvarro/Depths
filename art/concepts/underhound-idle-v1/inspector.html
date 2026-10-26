@@ -8,12 +8,13 @@ nav{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}button,select{font:inheri
 .window img{width:var(--size,384px);height:var(--size,384px);image-rendering:pixelated;flex-shrink:0}.caption{font-size:15px;margin:10px 0 0}
 figure{margin:16px 0}figure img{display:block;width:100%;height:auto}figcaption{color:#b6b59f;margin-top:10px}
 </style><main><small>CHECKPOINT ONE · APPROVED IDLE</small><h1>The Underhound</h1>
-<p>Long blind head, four planted legs and opposing rib masses. The sliding inner jaw stays mostly concealed. 128×128 RGBA · 32 colours · common pivot (64,120). Owner accepted this idle on 2026-10-25. It is the reference for the pending attack and hurt poses.</p>
+<p>Long blind head, four planted legs and opposing rib masses. The sliding inner jaw stays mostly concealed. 128×128 RGBA · 32 colours · common pivot (64,120). Owner accepted this idle on 2026-10-25. It is the unchanged reference for the new attack and hurt candidates linked below.</p>
 <nav aria-label="Native pixel zoom"><button data-zoom="1">128 px</button><button data-zoom="0.5">64 px</button><button data-zoom="3">3× nearest</button></nav>
 <div class="cards"><div class="card"><div class="window"><img class="sprite" src="../../enemies/underhound-v1/idle.png" alt="Underhound idle on cave-dark backing"></div><p class="caption">Cave-dark backing</p></div>
 <div class="card"><div class="window light"><img class="sprite" src="../../enemies/underhound-v1/idle.png" alt="Underhound idle on light backing"></div><p class="caption">Light backing · transparent silhouette</p></div></div>
 <h2>First-person size review</h2><p>Actual Godot art fixture with the existing camera and lantern, at 2.4m. The candidate is not assigned to an encounter. No game saves or Main scene are loaded.</p>
 <select id="view" aria-label="First-person review view"></select><figure><img id="render" alt=""><figcaption id="label"></figcaption></figure>
+<p><a href="../underhound-poses-v1/inspector.html">New: review idle, attack and hurt together</a></p>
 <p><a href="../../../docs/underhound-idle.md">Handoff and checks</a> · <a href="../../enemies/underhound-v1/idle.png">Native PNG</a> · <a href="../../source/underhound-v1/generation.json">Exact prompt and source record</a> · <a href="../../../docs/underhound-production.md">Production brief</a></p>
 </main><script>
 function zoom(z){document.documentElement.style.setProperty('--size',(128*z)+'px');document.querySelectorAll('[data-zoom]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.zoom)===z)));}

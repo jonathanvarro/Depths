@@ -1,8 +1,9 @@
 # First deeper horror: the Underhound
 
 **Checkpoint 1 delivered, 2026-10-25:** [idle candidate and native/phone review](underhound-idle.md).
-Owner accepted the idle (“This will work”); attack/hurt and the complete family
-are still pending. Use the accepted idle as their identity and scale reference.
+Owner accepted the idle (“This will work”). Matching attack/hurt are now authored
+and checked in the [three-pose review](underhound-poses.md); owner acceptance of
+the new poses remains open. The accepted idle stays their identity/scale reference.
 
 2026-10-25 · Selection made by Codex at the owner's request, refs #150.
 
@@ -58,5 +59,5 @@ This selects a production subject and its scope. No new EnemyType, stats,
 tactic, encounter table, floor or story role is assigned here; the existing
 breach hound remains unchanged. The Underhound is not automatically placed in
 the Fungal Caverns merely because that environment is being completed alongside
-this decision. After idle acceptance, attack/hurt are the next art step. The other nine
+this decision. The new three-pose family now awaits owner review. The other nine
 concepts retain their existing review status.

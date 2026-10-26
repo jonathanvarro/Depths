@@ -6,6 +6,10 @@
 are pinned in [approval.json](../art/enemies/underhound-v1/approval.json).
 It is now the identity, palette and registration reference for attack/hurt.
 
+**Current family:** attack and hurt are now authored and reviewed alongside this
+unchanged idle. See [three-pose handoff](underhound-poses.md) and its paused
+gallery. The idle-only scene/coverage below describes the original checkpoint.
+
 The owner selected checkpoint 1: establish the idle at native128. One new
 transparent drawing was made with the built-in ImageGen tool, using the chosen
 Underhound sheet for identity and the current breach-hound idle for production
@@ -20,7 +24,7 @@ tooth seam; the later attack must make its independent movement clear.
 
 ## Files and production contract
 
-- `art/source/underhound-v1/idle-master.png`: unaltered generated 1280×1280 RGBA
+- `art/source/underhound-v1/idle-master.png`: unaltered generated 1254×1254 RGBA
   source. [generation.json](../art/source/underhound-v1/generation.json) retains
   the **exact final prompt**, original generated path, explicit reference roles
   and SHA-256 hashes. No CLI/API fallback was used.
@@ -58,8 +62,7 @@ One uncompressed native RGBA texture is 64 KiB before engine overhead.
 
 ## Next
 
-Idle acceptance is complete. For steps 2 and 3, use the same
-head, four limbs, ribs, palette, scale and pivot for attack/hurt. Reserve room
-for the displaced inner jaw; do not refit each pose to its own bounds. The
-complete three-pose family needs paused comparison and real combat UI review.
-There are no attack/hurt aliases or EnemyType/stat/floor changes in this pass.
+Idle acceptance is complete. Steps 2 and 3 are now delivered in
+[the family review](underhound-poses.md), using this same head, limbs, ribs,
+palette, scale and pivot. Owner acceptance of the two new poses remains open.
+There are no EnemyType/stat/floor changes.

@@ -15,6 +15,8 @@ def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 def write(path, text):
+    if (SOURCE / 'poses.json').exists() and path in [OUT / 'frames.tres', OUT / 'scene.tscn', OUT / 'catalog.json']:
+        return  # the family exporter owns these once additional poses exist
     path.write_text(text, encoding='utf-8', newline='\n')
 
 manifest = json.loads((SOURCE / 'generation.json').read_text())
@@ -145,6 +147,7 @@ figure{margin:16px 0}figure img{display:block;width:100%;height:auto}figcaption{
 <div class="card"><div class="window light"><img class="sprite" src="../../enemies/underhound-v1/idle.png" alt="Underhound idle on light backing"></div><p class="caption">Light backing · transparent silhouette</p></div></div>
 <h2>First-person size review</h2><p>Actual Godot art fixture with the existing camera and lantern, at 2.4m. The candidate is not assigned to an encounter. No game saves or Main scene are loaded.</p>
 <select id="view" aria-label="First-person review view"></select><figure><img id="render" alt=""><figcaption id="label"></figcaption></figure>
+<p><a href="../underhound-poses-v1/inspector.html">New: review idle, attack and hurt together</a></p>
 <p><a href="../../../docs/underhound-idle.md">Handoff and checks</a> · <a href="../../enemies/underhound-v1/idle.png">Native PNG</a> · <a href="../../source/underhound-v1/generation.json">Exact prompt and source record</a> · <a href="../../../docs/underhound-production.md">Production brief</a></p>
 </main><script>
 function zoom(z){document.documentElement.style.setProperty('--size',(128*z)+'px');document.querySelectorAll('[data-zoom]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.zoom)===z)));}
@@ -154,6 +157,9 @@ const select=document.querySelector('#view'),render=document.querySelector('#ren
 </script></html>'''
 if approval:
     html = html.replace('CHECKPOINT ONE · IDLE CANDIDATE', 'CHECKPOINT ONE · APPROVED IDLE')
-    html = html.replace('Review the idle before attack and hurt are authored.', 'Owner accepted this idle on 2026-10-25. It is the reference for the pending attack and hurt poses.')
+    html = html.replace('Review the idle before attack and hurt are authored.', 'Owner accepted this idle on 2026-10-25. It is the unchanged reference for the new attack and hurt candidates linked below.')
 write(REVIEW / 'inspector.html', html)
 print(f'UNDERHOUND_IDLE: {sprite.size}, {len(colours)} visible colours, bounds {box}, contact y120')
+if (SOURCE / 'poses.json').exists():
+    import runpy
+    runpy.run_path(str(ROOT / 'tools/art/build_underhound_poses.py'), run_name='__main__')

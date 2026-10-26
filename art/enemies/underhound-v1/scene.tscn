@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=3]
 [ext_resource type="SpriteFrames" path="res://art/enemies/underhound-v1/frames.tres" id="frames"]
-[ext_resource type="Script" path="res://art/enemies/monsters-v1/pose_bounds.gd" id="mount"]
+[ext_resource type="Script" path="res://art/enemies/underhound-v1/mount.gd" id="mount"]
 
-[node name="UnderhoundIdleCandidate" type="Node3D"]
+[node name="UnderhoundPoseFamily" type="Node3D"]
 script = ExtResource("mount")
-pose_tops = {"idle": [32]}
+pose_tops = {"idle": [32], "attack": [36], "hurt": [29]}
 metadata/pivot = Vector2(64, 120)
 metadata/visual_height = 0.8
-metadata/status = "Idle candidate only; not assigned to encounters"
+metadata/status = "Approved idle; new attack/hurt candidates, no encounter assignment"
 
 [node name="Sprite" type="AnimatedSprite3D" parent="."]
 position = Vector3(0, 0.503370786516854, 0)

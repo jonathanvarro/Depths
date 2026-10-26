@@ -1,0 +1,158 @@
+{
+  "checks": 38,
+  "failed": 0,
+  "results": [
+    {
+      "check": "Approved idle PNG unchanged",
+      "ok": true
+    },
+    {
+      "check": "Approved source master unchanged",
+      "ok": true
+    },
+    {
+      "check": "All three states advertised",
+      "ok": true
+    },
+    {
+      "check": "Common registration, no per-pose fit",
+      "ok": true
+    },
+    {
+      "check": "Actual source canvas recorded",
+      "ok": true
+    },
+    {
+      "check": "Preserved reference art/source/underhound-v1/idle-master.png",
+      "ok": true
+    },
+    {
+      "check": "Preserved reference art/enemies/underhound-v1/idle.png",
+      "ok": true
+    },
+    {
+      "check": "Immutable master attack",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in copy attack",
+      "ok": true
+    },
+    {
+      "check": "Exact prompt/tool attack",
+      "ok": true
+    },
+    {
+      "check": "Immutable master hurt",
+      "ok": true
+    },
+    {
+      "check": "Exact built-in copy hurt",
+      "ok": true
+    },
+    {
+      "check": "Exact prompt/tool hurt",
+      "ok": true
+    },
+    {
+      "check": "Native128 RGBA idle",
+      "ok": true
+    },
+    {
+      "check": "Approved palette only idle",
+      "ok": true
+    },
+    {
+      "check": "Binary alpha idle",
+      "ok": true
+    },
+    {
+      "check": "Invisible RGB cleared idle",
+      "ok": true
+    },
+    {
+      "check": "No clipped body/tail/jaw idle",
+      "ok": true
+    },
+    {
+      "check": "Recorded export hash idle",
+      "ok": true
+    },
+    {
+      "check": "Native128 RGBA attack",
+      "ok": true
+    },
+    {
+      "check": "Approved palette only attack",
+      "ok": true
+    },
+    {
+      "check": "Binary alpha attack",
+      "ok": true
+    },
+    {
+      "check": "Invisible RGB cleared attack",
+      "ok": true
+    },
+    {
+      "check": "No clipped body/tail/jaw attack",
+      "ok": true
+    },
+    {
+      "check": "Recorded export hash attack",
+      "ok": true
+    },
+    {
+      "check": "Native128 RGBA hurt",
+      "ok": true
+    },
+    {
+      "check": "Approved palette only hurt",
+      "ok": true
+    },
+    {
+      "check": "Binary alpha hurt",
+      "ok": true
+    },
+    {
+      "check": "Invisible RGB cleared hurt",
+      "ok": true
+    },
+    {
+      "check": "No clipped body/tail/jaw hurt",
+      "ok": true
+    },
+    {
+      "check": "Recorded export hash hurt",
+      "ok": true
+    },
+    {
+      "check": "Three distinct drawings, at most 32 colours in the whole family",
+      "ok": true
+    },
+    {
+      "check": "Attack keeps planted contact y120",
+      "ok": true
+    },
+    {
+      "check": "Raised hurt paw is not snapped down to idle baseline",
+      "ok": true
+    },
+    {
+      "check": "Actual combat UI review passes",
+      "ok": true
+    },
+    {
+      "check": "All twelve combat captures retained",
+      "ok": true
+    },
+    {
+      "check": "Sources/review excluded from runtime underhound-v1",
+      "ok": true
+    },
+    {
+      "check": "Sources/review excluded from runtime underhound-poses-v1",
+      "ok": true
+    }
+  ]
+}
