@@ -14,6 +14,11 @@ Format:
 ---
 
 ## 2026-10-25 – ChatGPT
+- Did: At the owner's request kept only the ember mage concept (#160) and removed the two uncommitted ice-mage/necromancer PNGs from the project. Closed #161 as not planned and recorded the retention decision in art/concepts/gothic-mage-v1/README.md.
+- Next: Keep the ember study for future consideration; no further mage concept or production work is requested.
+- Watch out: Ember painting hash still matches its saved provenance; artwork, prompt and original reference remain unchanged. No companion manifest or runtime export was added. Checked documentation whitespace.
+
+## 2026-10-25 – ChatGPT
 - Did: #160 drafts a gothic mage from the owner's supplied red-haired reference using built-in ImageGen. Crimson/copper curls and confident expression carry into weathered black/burgundy robes, lace, tarnished clasps, a battered spellbook and ember casting. Unaltered 1024x1536 concept: art/concepts/gothic-mage-v1/mage-concept.png. Exact prompt, supplied reference, original paths/dimensions/hashes and provenance: art/source/gothic-mage-v1/generation.json.
 - Next: Owner reviews this exploratory visual direction. No name, class rules, story role, faction, recruit eligibility or production portrait is assigned. Production would require native-size simplification, separate lighting and fitted animation.
 - Watch out: Source/output decode, exact original-copy hashes, folder exclusions, documentation links and whitespace checked. Both folders have .gdignore; game assets/code are unchanged. The reference's screenshot controls were omitted. Reference creator/licence details were not supplied. Underhound artwork and other work remain unchanged.

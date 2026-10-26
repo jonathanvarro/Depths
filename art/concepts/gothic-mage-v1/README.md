@@ -2,6 +2,11 @@
 
 2026-10-25 · [#160](https://github.com/jonathanvarro/Depths/issues/160) · Owner review pending.
 
+**Retention decision, 2026-10-25:** the owner asked to save only this ember mage
+for the moment and discard the ice-mage/necromancer studies (#161). Those two
+uncommitted concepts were removed from the project. This keeps the ember study
+for future consideration; it does not assign a production role.
+
 ![Gothic mage with crimson/copper hair, ember magic and a battered spellbook](mage-concept.png)
 
 One built-in ImageGen concept painting reimagining the owner's supplied image.
