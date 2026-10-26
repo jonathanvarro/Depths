@@ -39,6 +39,14 @@ func _stash_move(side: String, action: String) -> bool:
 	return false
 
 
+## The open camp activity fits without scrolling (owner, 2026-10-25).
+func _fits() -> bool:
+	for i in 3:
+		await process_frame
+	var bar: VScrollBar = main._camp._scroll.get_v_scroll_bar()
+	return bar.max_value <= main._camp._scroll.size.y + 1.0
+
+
 func _body_text() -> String:
 	return " | ".join(main._camp._body.find_children("*", "Label", true, false).map(func(l): return l.text))
 
@@ -125,6 +133,7 @@ func _initialize() -> void:
 	await _open("rest")
 	check("rest says injuries need the nurse", _body_text().contains("Injuries need the nurse"))
 	var seed_before: int = main._site_seed
+	check("the tent fits without scrolling", await _fits())
 	check("a Rest button, without a day count (owner, 2026-10-25)", _press(main._camp, "Rest"))
 	check("rest: day 2, full health, calm", main._camp_state.day == 2 and hero.health == hero.effective_max_health() and hero.strain == 0.0)
 	check("a new day re-seeds the cave", main._site_seed != seed_before and main._floors.is_empty())
@@ -148,11 +157,17 @@ func _initialize() -> void:
 	check("fit again on day 3", main._camp_state.day == 3 and not main._camp_state.is_recovering(hero))
 
 	await _open("fire")
-	check("recruits wait by the fire", _body_text().contains("by the fire") and main._camp_state.candidates.size() == 3)
+	check("recruits wait by the fire", _body_text().contains("By the fire") and main._camp_state.candidates.size() == 3)
+	check("the campfire fits without scrolling, recruits as cards", await _fits(), str(main._camp._scroll.get_v_scroll_bar().max_value))
+	var edge: float = main._camp._scroll.get_global_rect().end.x
+	var cards: Array = main._camp._body.find_children("*", "PanelContainer", true, false)
+	check("...all three cards inside the panel", cards.size() == 3 and cards.all(func(c): return c.get_global_rect().end.x <= edge + 1.0), str(cards.map(func(c): return c.get_global_rect().end.x)) + " vs %.0f" % edge)
+	await _snap("fire")
 
 	# Cave path -> preparation -> a new cave.
 	await _open("cave")
 	check("the cave path names who goes, briefly", _body_text().contains("Going: Mara"))
+	check("the mine path fits without scrolling", await _fits())
 	check("head back down", _press(main._camp, "Head back down"))
 	await create_timer(0.2).timeout
 	check("preparation follows the cave path", not main._camp.visible and main._preparation.visible)

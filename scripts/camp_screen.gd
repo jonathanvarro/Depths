@@ -407,6 +407,7 @@ func _refresh_activity() -> void:
 	for child in _body.get_children():
 		_body.remove_child(child)
 		child.queue_free()
+	_body.add_theme_constant_override("separation", 8)
 	_talk_row()
 	match _current:
 		"supplies": _merchant()
@@ -663,73 +664,100 @@ func _open_stash() -> void:
 ## Recruits by the fire (#41): who they are, their strength and weakness,
 ## and Invite; then the party, where recruits can be sent away.
 func _fire() -> void:
+	# Fits without scrolling (owner, 2026-10-25): orders in brief, the
+	# recruits as compact cards side by side, the party on one line.
 	var full: bool = _party.free_slots() <= 0
-	# Quests and the king's contract, in brief (moved from the mine path).
+	_body.add_theme_constant_override("separation", 4)  # tighter here; reset on refresh
+	var orders := 0
 	for id in Quests.in_log(_camp):
 		if Quests.stage(_camp, id) != Quests.Stage.RESOLVED:
-			_text("%s - %s (floor %d)" % [Quests.INFO[id]["title"], Quests.brief(_camp, id), Quests.INFO[id]["floor"]], AMBER)
+			_small("%s - %s (floor %d)" % [Quests.INFO[id]["title"], Quests.brief(_camp, id), Quests.INFO[id]["floor"]], AMBER)
+			orders += 1
 	if not _camp.contract.is_empty():
 		var c: Dictionary = _camp.contract
-		_text("King's contract: %s (%s)." % [CampState.contract_text(c), "paid" if c["paid"] else "%d of %d" % [c["done"], c["count"]]], AMBER)
-	if _camp.candidates.is_empty():
-		_text("No one is by the fire today.", MUTED)
-	else:
-		_text("Others who made it to the camp sit by the fire. Any of them would join you - for now, for nothing.")
-	_text(_rumour(), MUTED)
-	for recruit: Companion in _camp.candidates:
-		_recruit_row(recruit, full)
-	_body.add_child(_label("Your party", HEADING, 16, TEXT))
-	if _party.members.is_empty():
-		_text("No one. Invite someone to go down with you.", AMBER)
+		_small("King's contract: %s (%s)." % [CampState.contract_text(c), "paid" if c["paid"] else "%d of %d" % [c["done"], c["count"]]], AMBER)
+		orders += 1
+	var talking: bool = _sites.keys().any(func(site): return Story.camp_talk(_camp, site) != "")
+	if orders <= 1 and not talking:
+		_small(_rumour(), MUTED)  # room for the camp's chatter
+	_body.add_child(_label("By the fire" if not _camp.candidates.is_empty() else "No one is by the fire today.", ACTION, 13, AMBER if not _camp.candidates.is_empty() else MUTED))
+	if not _camp.candidates.is_empty():
+		var cards := HBoxContainer.new()
+		cards.add_theme_constant_override("separation", 8)
+		for recruit: Companion in _camp.candidates:
+			cards.add_child(_recruit_card(recruit, full))
+		_body.add_child(cards)
+	var party := HFlowContainer.new()
+	party.add_theme_constant_override("h_separation", 8)
+	party.add_theme_constant_override("v_separation", 4)
+	party.add_child(_label("Party:" if not _party.members.is_empty() else "Party: no one yet. Invite someone.", ACTION, 13, TEXT if not _party.members.is_empty() else AMBER))
 	for hero: Companion in _party.members:
-		var row := HBoxContainer.new()
-		row.add_theme_constant_override("separation", 8)
-		var about := _label("%s · %s · %d/%d health" % [hero.display_name, hero.role, hero.health, hero.effective_max_health()], BODY, 12, TEXT)
-		about.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		row.add_child(about)
-		if hero.founder:
-			row.add_child(_label("Stays", ACTION, 12, MUTED))
-		else:
+		party.add_child(_label("%s (%d/%d)" % [hero.display_name, hero.health, hero.effective_max_health()], BODY, 12, TEXT))
+		if not hero.founder:
 			var dismiss := _button("Dismiss")
+			dismiss.tooltip_text = "Send %s away" % hero.display_name
 			dismiss.pressed.connect(func():
 				_camp.dismiss(_party, hero)
 				_refresh_activity())
-			row.add_child(dismiss)
-		_body.add_child(row)
+			party.add_child(dismiss)
+	_body.add_child(party)
 
 
-func _recruit_row(recruit: Companion, full: bool) -> void:
-	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation", 10)
+## A recruit as a small card (owner, 2026-10-25): face, name and role, the
+## numbers that matter, strength and weakness, and Invite. The rest of who
+## they are is on hover.
+func _recruit_card(recruit: Companion, full: bool) -> Control:
+	var card := PanelContainer.new()
+	var plate := StyleBoxFlat.new()
+	plate.bg_color = Color(0.07, 0.06, 0.05, 0.9)
+	plate.border_color = Color(AMBER, 0.45)
+	plate.set_border_width_all(1)
+	plate.set_content_margin_all(6)
+	card.add_theme_stylebox_override("panel", plate)
+	card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	var damage := str(recruit.attack_min) if recruit.attack_min == recruit.attack_max else "%d-%d" % [recruit.attack_min, recruit.attack_max]
+	card.tooltip_text = "%s\n%d health · %s damage · %d%% to hit · speed %d" % [recruit.personality, recruit.max_health, damage, roundi(recruit.accuracy * 100), recruit.initiative]
+	var box := VBoxContainer.new()
+	box.add_theme_constant_override("separation", 2)
+	card.add_child(box)
+	var top := HBoxContainer.new()
+	top.add_theme_constant_override("separation", 6)
 	var face := TextureRect.new()
 	face.texture = recruit.portrait
-	face.custom_minimum_size = Vector2(56, 56)
+	face.custom_minimum_size = Vector2(40, 40)
 	face.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	face.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	face.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
-	row.add_child(face)
-	var info := VBoxContainer.new()
-	info.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	info.add_theme_constant_override("separation", 0)
-	info.add_child(_label("%s · %s" % [recruit.display_name, recruit.role], ACTION, 14, TEXT))
-	var traits := _label("Strength: %s · Weakness: %s" % [recruit.strength, recruit.weakness], BODY, 11, AMBER)
-	traits.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	info.add_child(traits)
-	var damage := str(recruit.attack_min) if recruit.attack_min == recruit.attack_max else "%d-%d" % [recruit.attack_min, recruit.attack_max]
-	var numbers := _label("%d health · %s damage · %d%% to hit · speed %d" % [recruit.max_health, damage, roundi(recruit.accuracy * 100), recruit.initiative], BODY, 11, MUTED)
-	info.add_child(numbers)
-	var about := _label(recruit.personality, BODY, 11, MUTED)
-	about.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	info.add_child(about)
-	row.add_child(info)
-	var invite := _button("Party full" if full else "Invite")
+	top.add_child(face)
+	var who := VBoxContainer.new()
+	who.add_theme_constant_override("separation", 0)
+	var name_label := _label(recruit.display_name, ACTION, 13, TEXT)
+	name_label.clip_text = true
+	who.add_child(name_label)
+	var stats := _label("%s · %d hp · %s dmg" % [recruit.role, recruit.max_health, damage], BODY, 10, MUTED)
+	stats.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART  # three cards share the width
+	who.add_child(stats)
+	who.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	top.add_child(who)
+	var invite := _button("Full" if full else "Invite")
 	invite.disabled = full
 	invite.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 	invite.pressed.connect(func():
 		_camp.hire(_party, recruit)
 		_refresh_activity())
-	row.add_child(invite)
-	_body.add_child(row)
+	top.add_child(invite)
+	box.add_child(top)
+	var traits := _label("+ %s\n- %s" % [recruit.strength, recruit.weakness], BODY, 10, AMBER)
+	traits.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	box.add_child(traits)
+	return card
+
+
+## A short line in smaller print.
+func _small(text: String, color := TEXT) -> void:
+	var label := _label(text, BODY, 11, color)
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	label.custom_minimum_size = Vector2(_scroll.size.x - 8, 0)
+	_body.add_child(label)
 
 
 func _cave_path() -> void:
