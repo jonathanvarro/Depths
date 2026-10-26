@@ -1,0 +1,350 @@
+{
+  "date": "2026-10-25",
+  "new_raster_art": false,
+  "files": [
+    {
+      "path": "art/dressing/cave-v1/cracks-rubble.png",
+      "sha256": "2336b72ef9fd3012359729292b3b631fdb088e4d55ce3c85edfdcf134dfb8eea"
+    },
+    {
+      "path": "art/dressing/cave-v1/cracks-rubble.tscn",
+      "sha256": "be70991b230e9bd41b0da7611b743c8ed9b9b47792177859937751560b6fbf2b"
+    },
+    {
+      "path": "art/dressing/cave-v1/floor-gravel.png",
+      "sha256": "173dd0200d14990659a61913b5da82c8f4d8703551b59d8ac55c09c9c0622779"
+    },
+    {
+      "path": "art/dressing/cave-v1/floor-gravel.tscn",
+      "sha256": "39be62201b72cc487068125be9718f0799e29774dacf6b38acaa897c3e6dbfd6"
+    },
+    {
+      "path": "art/dressing/cave-v1/flowstone.png",
+      "sha256": "0428a427ac9e09e03bf4ae02d803174c333a3ed29f63c3ca121bc57f9ae29811"
+    },
+    {
+      "path": "art/dressing/cave-v1/flowstone.tscn",
+      "sha256": "a58f27264c7d1be34235e6a63be14a3aedf2af61ec73c24e7e4e74e7e0ede126"
+    },
+    {
+      "path": "art/dressing/cave-v1/puddle-small.png",
+      "sha256": "63c7b448e0091ab00ecc8015b4a68173741d0f3351dfa7c6033ea3f103b14e9e"
+    },
+    {
+      "path": "art/dressing/cave-v1/puddle-small.tscn",
+      "sha256": "7fd98c8aedf0b2cf066f4b88a5f9a9e2b80ae737b10ef7e77f23f29d46ec4f3c"
+    },
+    {
+      "path": "art/dressing/cave-v1/stalactite-single.png",
+      "sha256": "3b770c20d5b2eba34d33795c749d1b506adc9537367bbc07b14cd8d99a9cdef5"
+    },
+    {
+      "path": "art/dressing/cave-v1/stalactite-single.tscn",
+      "sha256": "dcbe51992e4cfc97d7dba3baf6f88f44ecb46c75137b2f6bd8abd7abd1d015c0"
+    },
+    {
+      "path": "art/dressing/cave-v1/stalagmite-broken.png",
+      "sha256": "ed8776960cf76e4a93f06247b068bd893a4a0a99ea88396e8fdd8b49c7f1def8"
+    },
+    {
+      "path": "art/dressing/cave-v1/stalagmite-broken.tscn",
+      "sha256": "4f656cc0eb749045e3cf8847e8555ae4264962c9caa390e2da8f39eba1934be3"
+    },
+    {
+      "path": "art/dressing/cave-v1/stalagmite-stub.png",
+      "sha256": "41afc9ce9a80dc57cfbf5b84dd8fb8ea1710d472b5d44f4e8b62890edb866c58"
+    },
+    {
+      "path": "art/dressing/cave-v1/stalagmite-stub.tscn",
+      "sha256": "89deeeb734599b82fe73f37059818fc8342fecb18a2db71b14559b945daa2ed1"
+    },
+    {
+      "path": "art/dressing/cave-v1/wall-fungus.png",
+      "sha256": "8ee74598ac328368c0e657d3077c26f122f5279ffdfff57b518a92b7d64086b2"
+    },
+    {
+      "path": "art/dressing/cave-v1/wall-fungus.tscn",
+      "sha256": "6f18287df18a371bd63c849393f51c648db25e8413ba8c948491e3b625ee067d"
+    },
+    {
+      "path": "art/dressing/cave-v2/floor-fungus-lit.tscn",
+      "sha256": "76ab71019b8066f0f004eabb4e8ae4e86b8980402faf450bb790e61317cc3952"
+    },
+    {
+      "path": "art/dressing/cave-v2/floor-fungus-pulse.png",
+      "sha256": "68a66491e08091cb82e9aa5f292e6b86d24a811921f1e2bbfe27fcab86424d18"
+    },
+    {
+      "path": "art/dressing/cave-v2/floor-fungus-pulse.tres",
+      "sha256": "6696a9d36585b25d09703562d81086ba37317a5c287c24ee20806f2dd7d19f84"
+    },
+    {
+      "path": "art/dressing/cave-v2/floor-fungus.png",
+      "sha256": "a900c69c0b2d8215b3841f7cbbaa275505e317fbfbff989cc6a1622094c94dde"
+    },
+    {
+      "path": "art/dressing/cave-v2/floor-fungus.tscn",
+      "sha256": "ffcdbaa825a0adf6f73521dd4cc59c68c3821b13bd4535533cb97be978c28fa5"
+    },
+    {
+      "path": "art/dressing/cave-v2/moss-curtain-lit.tscn",
+      "sha256": "8c9eb8461676338a2f847bdd1622349106f019517e6afe3ce246da60d4f8a86f"
+    },
+    {
+      "path": "art/dressing/cave-v2/moss-curtain-pulse.png",
+      "sha256": "12b40f48d3e4646461fc9a706fbd0a2182d7783d006dd712eb2af37f872a4461"
+    },
+    {
+      "path": "art/dressing/cave-v2/moss-curtain-pulse.tres",
+      "sha256": "0b76aa793e985dfdf36b691ce8d34f2cb6b37c8cd451efd10e3b7d480264c5dc"
+    },
+    {
+      "path": "art/dressing/cave-v2/moss-curtain.png",
+      "sha256": "e0dd8d8943e7047a45f1f6616b0a6dd5def29d70b069870d17382654b976fe1f"
+    },
+    {
+      "path": "art/dressing/cave-v2/moss-curtain.tscn",
+      "sha256": "3dd7708cb740a9f9cdf1ef415aa1746fd223bf10102c4b5c356120ba4cc13ed8"
+    },
+    {
+      "path": "art/dressing/landmarks-v1/root-curtain-b.png",
+      "sha256": "bc4c83c3fc0c769dd2a31a10ca81ffe32994da3c7a36e961e57ae6556af146c7"
+    },
+    {
+      "path": "art/dressing/landmarks-v1/root-curtain-b.tscn",
+      "sha256": "47a2b8b1aee88efa59fe2eb4e2caea42d151e5779fc2eca5dffb51fa5a3b083a"
+    },
+    {
+      "path": "art/dressing/landmarks-v1/wall-roots.png",
+      "sha256": "da74d5763943135920b0698bf10a9b4fa4be23b40850cac65b6f538d9783d6c2"
+    },
+    {
+      "path": "art/dressing/landmarks-v1/wall-roots.tscn",
+      "sha256": "5ed5f39f6db00ff327d20f61674fc37f529f986c6a07129b737cc875497af399"
+    },
+    {
+      "path": "art/effects/ambient-v1/drip.png",
+      "sha256": "dd0099ffdd1f3ebc2b1dcb49fd2f7140c4a5bd7a0ec858e94891013818834304"
+    },
+    {
+      "path": "art/effects/ambient-v1/drip.tres",
+      "sha256": "91c99ff1f7a3adc1832957753b2586dd28227ed39ae93f82bdb98f0f2ded1650"
+    },
+    {
+      "path": "art/effects/ambient-v1/fungus-pulse.png",
+      "sha256": "19f6a8ba5961d13f4e0a7c944b8ccbfa5716983eea405758dd0b0c6b5c289a48"
+    },
+    {
+      "path": "art/effects/ambient-v1/fungus-pulse.tres",
+      "sha256": "48f74a7a96bcb0e0cf4d86d7b58a6bd02e98a958c5e56a6b8edcc6b5ce182c2b"
+    },
+    {
+      "path": "art/features/cave-v1/ascent.tscn",
+      "sha256": "5e40a4dbc6218373f03665530f4a0586d43b543ab40d0b11a03b8835fc6ff34b"
+    },
+    {
+      "path": "art/features/cave-v1/blocked.tscn",
+      "sha256": "2ae79c7254907da5169fffe803a75f857c6a5bc8a61502f7d7ba2b4901e5155c"
+    },
+    {
+      "path": "art/features/cave-v1/closed.tscn",
+      "sha256": "a0ed2d144bde1b909739dfcbdbece5ebf7fd319ec5e46e07801e723d6c415f01"
+    },
+    {
+      "path": "art/features/cave-v1/descent.tscn",
+      "sha256": "907618ed01fda29013f986fe639ef7c29e075dfb72bdb0057eaaefe31075bb3d"
+    },
+    {
+      "path": "art/features/cave-v1/hanging-roots.png",
+      "sha256": "9563cf43c3b904c12445a956c226abb7f450aae3981cbafdf9a505c694d200e3"
+    },
+    {
+      "path": "art/features/cave-v1/opened.tscn",
+      "sha256": "2255bab69e819238321beed688a54612132bc1b5230d354240f2c2b7fd7eed5f"
+    },
+    {
+      "path": "art/features/cave-v1/pit-opening.png",
+      "sha256": "59433f49ee33be4053af5b6785147b6e3ae1d7c584fe62229650d70fbc9f4e3d"
+    },
+    {
+      "path": "art/features/cave-v1/root-barrier.png",
+      "sha256": "ca1d64d697d15880c82b49e1dcf3f6177d3b6137a1f7dd47d3add442c00d24a1"
+    },
+    {
+      "path": "art/features/cave-v1/web-intact.png",
+      "sha256": "1df318be18cc316dc9c65bdcc920933ddb8818bb1c8f89f208d06bb087a3dae9"
+    },
+    {
+      "path": "art/features/cave-v1/web-torn.png",
+      "sha256": "e3ed8875950d8466b3a96f01be2e202111e0062e5e4a553bb7f9f0a43f10a45f"
+    },
+    {
+      "path": "art/features/fortress-v1/gate-barred.png",
+      "sha256": "dc5f28e238f6c899dc7bf77ea4b5199a38861239713856b97c3d6af92b5b69af"
+    },
+    {
+      "path": "art/features/fortress-v1/gate-barred.tscn",
+      "sha256": "ad27ccd6124e9c710de3f1c1ee2cd30d6b8447de4960fe50bcda900353023902"
+    },
+    {
+      "path": "art/features/fortress-v1/gate-broken.png",
+      "sha256": "9c5bd2b76253c84d9643f664a13d76141c5c2c55ea4158c5ff91253abfdc922e"
+    },
+    {
+      "path": "art/features/fortress-v1/gate-broken.tscn",
+      "sha256": "d541eaae3c452e4cde67170410c8baa8c50777bd80fef605bbc14535c028b249"
+    },
+    {
+      "path": "art/features/fortress-v1/hall-closed.png",
+      "sha256": "87cf68d0bb71a1e371f6767c8de0d7e429e7499cbbc9e4cbf208a192cf2a9f9c"
+    },
+    {
+      "path": "art/features/fortress-v1/hall-closed.tscn",
+      "sha256": "62d244c3eff0d82135a634a3b2db8bb2d1e99131dd48e92b9c253131f7803737"
+    },
+    {
+      "path": "art/features/fortress-v1/hall-open.png",
+      "sha256": "aa08e004bef5570df1917feecc5f14a385f5817f9a68f0bcb1814d52d556f94b"
+    },
+    {
+      "path": "art/features/fortress-v1/hall-open.tscn",
+      "sha256": "23e4f435861adf0ab77506a58e4e321aaae317d7ff8999ee073c317e11002855"
+    },
+    {
+      "path": "art/features/stone-stairs-v1/fortress-down.tscn",
+      "sha256": "752737664e9958c242cb7c11c231c415e150a4c2f76cc84bbd1e7e5ef4e98895"
+    },
+    {
+      "path": "art/features/stone-stairs-v1/fortress-up.tscn",
+      "sha256": "1d4fafafe6e25a8cd1da0c6f13c9bafcadb270372334f844e6de1e8145a47d59"
+    },
+    {
+      "path": "art/features/stone-stairs-v1/stairs-down.png",
+      "sha256": "59dfbb42b1cd6897e1b56d2d4429c86fa3e82ef8044801c8a4e50c9e33294d4a"
+    },
+    {
+      "path": "art/features/stone-stairs-v1/stairs-up.png",
+      "sha256": "e1ea95ca67472bab2b4d6732aaf756e1c3552ee179fa174d4a694931ad47064b"
+    },
+    {
+      "path": "art/textures/cave-v1/ceiling.png",
+      "sha256": "153cdb8e51e0681ccd30da04dad72b5e6beb5e47ed08713612f566f9ab3218eb"
+    },
+    {
+      "path": "art/textures/cave-v1/ceiling.tres",
+      "sha256": "2f6c91964e26b9cb4ec04f8176de9dd820ad82110b35dbfb6d84b5748c5e78ac"
+    },
+    {
+      "path": "art/textures/cave-v1/floor.png",
+      "sha256": "ad5178b69d670d74ee43a324a79aa1c8502626b336aa7a5703fe1726ddccbbdc"
+    },
+    {
+      "path": "art/textures/cave-v1/floor.tres",
+      "sha256": "f34c2bfd67d537a10dec0325457c2e8ffd0b3bf855f71f8fe3b7a212321aaddb"
+    },
+    {
+      "path": "art/textures/cave-v1/wall.png",
+      "sha256": "827892c54d82e7f712e50b2d971a3cb164dc1f22bf40c0e278502f4d70fcf5c8"
+    },
+    {
+      "path": "art/textures/cave-v1/wall.tres",
+      "sha256": "ac746bf734d48705ca2a90e75fe3346c001eaeadf5f84221fb98d1246bc2eeb7"
+    },
+    {
+      "path": "art/textures/descent-surfaces-v1/fungal-stone-ceiling.png",
+      "sha256": "50af22fc2f2cef1e59682f04334ae4d21aad6c1a40f9b837f4d42feba3d318e9"
+    },
+    {
+      "path": "art/textures/descent-surfaces-v1/fungal-stone-ceiling.tres",
+      "sha256": "d34a2fab3cc5d595a7279e2dc80eabacc04721cc6230dd6f59216f0edb3cfc2e"
+    },
+    {
+      "path": "art/textures/descent-surfaces-v1/fungal-stone-floor.png",
+      "sha256": "9e96cd3589a09bcceda0637360d1db2c2f02c2d7c22911296e8467431fc8b65a"
+    },
+    {
+      "path": "art/textures/descent-surfaces-v1/fungal-stone-floor.tres",
+      "sha256": "f2ca82883d1033a5a8fb2c13fcddd79bf410cba40c32781f382fc931b1034346"
+    },
+    {
+      "path": "art/textures/descent-walls-v1/fungal-stone.png",
+      "sha256": "761d0c6597d50d048852f06142d8fb0e45c042ff1f13737d00aea436da7bb4e0"
+    },
+    {
+      "path": "art/textures/descent-walls-v1/fungal-stone.tres",
+      "sha256": "a1391a54da93e896c66a54eb341a921282971d07870d2b9f16b284502077ff61"
+    },
+    {
+      "path": "art/textures/fortress-v1/ceiling.png",
+      "sha256": "a3dd9253800551b5ac208bf076e45a7c49c912801b7549083d26a349a61a9d90"
+    },
+    {
+      "path": "art/textures/fortress-v1/ceiling.tres",
+      "sha256": "2d65d87be271e012c047d793cc52a48b3290e025d904ba72a23ad07822e8d28b"
+    },
+    {
+      "path": "art/textures/fortress-v1/floor.png",
+      "sha256": "82a36850d25d41157d245cdce88da0a8b783b07058e0533699743c9752829907"
+    },
+    {
+      "path": "art/textures/fortress-v1/floor.tres",
+      "sha256": "3d5aac85f11df005bf568edc4902b155f631c738d1fd9e2c612d5a7c35a98bc7"
+    },
+    {
+      "path": "art/textures/fortress-v1/wall-timber.png",
+      "sha256": "537f70893b720aaa62a970a127fd023faf9ddb752502d56198865b5551c4aa81"
+    },
+    {
+      "path": "art/textures/fortress-v1/wall-timber.tres",
+      "sha256": "a16e5e081ebbb229e1f1381fd19f2aaee9d4e66760fa936769dc5c4b97a1d4f1"
+    },
+    {
+      "path": "art/textures/fortress-v1/wall.png",
+      "sha256": "deee3d0f0d589941c5c4a1972a8d55bc127f15fd67ae485c80be97614d2b3c02"
+    },
+    {
+      "path": "art/textures/fortress-v1/wall.tres",
+      "sha256": "5fb6440aee0a07e200334b6e492dc6816118ac7a5d6ab426a9691fa6b71f14b9"
+    },
+    {
+      "path": "audio/placeholder/ambience_cave.wav",
+      "sha256": "9afbf3efa744cb6609de6dfd1995923bb94d2d7766f86ef999d056f5ce25ee7c"
+    },
+    {
+      "path": "audio/placeholder/ambience_stone.wav",
+      "sha256": "759e333e8692ceb800d3dab5d9ed919ae88a185795d0822efbcd9f206159ab87"
+    },
+    {
+      "path": "audio/placeholder/bump.wav",
+      "sha256": "05485cb2ffd9e728befdb9796d17193d80c827cbbf8a843cede14420d55fe741"
+    },
+    {
+      "path": "audio/placeholder/door_creak.wav",
+      "sha256": "6106e235bfe0197fa3615757aba34a31219cdc52e18f9ce149ea65c024864521"
+    },
+    {
+      "path": "audio/placeholder/footstep_1.wav",
+      "sha256": "dcd68aabb1fa1f5fc8192285a7f403fbe0adf12b62a58c4335fe1a1bf98435a1"
+    },
+    {
+      "path": "audio/placeholder/footstep_2.wav",
+      "sha256": "27e289d494dfc849ab3f5c6085b26da28dd722af0ab3c7114e42ec680eac4a1e"
+    },
+    {
+      "path": "audio/placeholder/footstep_3.wav",
+      "sha256": "92922deae015a9c74d6e1e4c48865b027f1bf917877a130a9bd82f54711e0a9f"
+    },
+    {
+      "path": "audio/placeholder/web_tear.wav",
+      "sha256": "a1b0180864e7810f9882ed7ab415426fc1df64b48f9ba2b896bc45a2aa2b7f7c"
+    },
+    {
+      "path": "themes/cave.tres",
+      "sha256": "7d07f58bbec286996bd6fd305c3f85b642a3ddf125ef91e47ca449a88f7210b8"
+    },
+    {
+      "path": "themes/fortress.tres",
+      "sha256": "6b04ff584762318be0fd6404563b94a9cdbc4fd91bed4b981937f267482c8c00"
+    }
+  ]
+}

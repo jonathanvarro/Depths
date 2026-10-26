@@ -4,7 +4,7 @@
     151,
     152
   ],
-  "checks": 91,
+  "checks": 101,
   "failed": 0,
   "errors": [],
   "scope": "Offline concept gallery, not live game or animation validation",
@@ -15,6 +15,10 @@
     },
     {
       "check": "Thirteen exact prompts and original masters",
+      "ok": true
+    },
+    {
+      "check": "Production status underhound",
       "ok": true
     },
     {
@@ -42,6 +46,10 @@
       "ok": true
     },
     {
+      "check": "Production status borrowed-pack",
+      "ok": true
+    },
+    {
       "check": "Original sheet decodes borrowed-pack",
       "ok": true
     },
@@ -63,6 +71,10 @@
     },
     {
       "check": "Usable region borrowed-pack/small",
+      "ok": true
+    },
+    {
+      "check": "Production status marrow-shepherd",
       "ok": true
     },
     {
@@ -90,6 +102,10 @@
       "ok": true
     },
     {
+      "check": "Production status drowned-bell",
+      "ok": true
+    },
+    {
       "check": "Original sheet decodes drowned-bell",
       "ok": true
     },
@@ -111,6 +127,10 @@
     },
     {
       "check": "Usable region drowned-bell/small",
+      "ok": true
+    },
+    {
+      "check": "Production status unfolding",
       "ok": true
     },
     {
@@ -138,6 +158,10 @@
       "ok": true
     },
     {
+      "check": "Production status choir-of-one",
+      "ok": true
+    },
+    {
       "check": "Original sheet decodes choir-of-one",
       "ok": true
     },
@@ -159,6 +183,10 @@
     },
     {
       "check": "Usable region choir-of-one/small",
+      "ok": true
+    },
+    {
+      "check": "Production status weight",
       "ok": true
     },
     {
@@ -186,6 +214,10 @@
       "ok": true
     },
     {
+      "check": "Production status open-door",
+      "ok": true
+    },
+    {
       "check": "Original sheet decodes open-door",
       "ok": true
     },
@@ -210,6 +242,10 @@
       "ok": true
     },
     {
+      "check": "Production status hollow-interval",
+      "ok": true
+    },
+    {
       "check": "Original sheet decodes hollow-interval",
       "ok": true
     },
@@ -231,6 +267,10 @@
     },
     {
       "check": "Usable region hollow-interval/small",
+      "ok": true
+    },
+    {
+      "check": "Production status sleeper-beyond",
       "ok": true
     },
     {

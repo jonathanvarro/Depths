@@ -21,8 +21,8 @@ func build(map, theme: EnvironmentTheme, size: float, height: float) -> void:
 	cell_size = size
 	wall_height = height
 
-	var wall_mesh := _box(Vector3(cell_size, wall_height, cell_size), theme.wall_material)
-	var variant_mesh := _box(wall_mesh.size, theme.wall_variant_material if theme.wall_variant_material else theme.wall_material)
+	var wall_mesh := _wall_mesh(theme.wall_material)
+	var variant_mesh := _wall_mesh(theme.wall_variant_material if theme.wall_variant_material else theme.wall_material)
 	var tile_mesh := _plane(theme.floor_material, false)
 	var ceiling_mesh := _plane(theme.ceiling_material, true)
 
@@ -150,6 +150,33 @@ func _box(size: Vector3, material: Material) -> BoxMesh:
 	var mesh := BoxMesh.new()
 	mesh.size = size
 	mesh.material = material
+	return mesh
+
+
+## The fungal set uses the whole tile on every face instead of stretching
+## one sixth of BoxMesh's texture atlas. Geometry and instance count stay equal.
+func _wall_mesh(material: Material) -> Mesh:
+	var box := _box(Vector3(cell_size, wall_height, cell_size), material)
+	if not _theme.wall_face_uv:
+		return box
+	var arrays := box.get_mesh_arrays()
+	var vertices: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
+	var normals: PackedVector3Array = arrays[Mesh.ARRAY_NORMAL]
+	var uv: PackedVector2Array = arrays[Mesh.ARRAY_TEX_UV]
+	for i in vertices.size():
+		var p := vertices[i]
+		var n := normals[i]
+		if absf(n.y) > 0.5:
+			uv[i] = Vector2(p.x / cell_size + 0.5, p.z / cell_size + 0.5)
+		elif absf(n.x) > 0.5:
+			uv[i] = Vector2(0.5 - p.z * signf(n.x) / cell_size, 0.5 - p.y / wall_height)
+		else:
+			uv[i] = Vector2(0.5 + p.x * signf(n.z) / cell_size, 0.5 - p.y / wall_height)
+		uv[i] = uv[i].clamp(Vector2.ZERO, Vector2.ONE)
+	arrays[Mesh.ARRAY_TEX_UV] = uv
+	var mesh := ArrayMesh.new()
+	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+	mesh.surface_set_material(0, material)
 	return mesh
 
 

@@ -4,7 +4,7 @@
     151,
     152
   ],
-  "checks": 146,
+  "checks": 149,
   "failed": 0,
   "scope": "Draft sheets and source integrity; not production art or live game validation",
   "results": [
@@ -345,7 +345,15 @@
       "ok": true
     },
     {
-      "check": "Owner choice explicitly pending underhound",
+      "check": "Direct approval of final form not recorded underhound",
+      "ok": true
+    },
+    {
+      "check": "Delegated Underhound production selection recorded",
+      "ok": true
+    },
+    {
+      "check": "Underhound production brief retained",
       "ok": true
     },
     {
@@ -361,7 +369,7 @@
       "ok": true
     },
     {
-      "check": "Owner choice explicitly pending borrowed-pack",
+      "check": "Direct approval of final form not recorded borrowed-pack",
       "ok": true
     },
     {
@@ -377,7 +385,7 @@
       "ok": true
     },
     {
-      "check": "Owner choice explicitly pending marrow-shepherd",
+      "check": "Direct approval of final form not recorded marrow-shepherd",
       "ok": true
     },
     {
@@ -393,7 +401,7 @@
       "ok": true
     },
     {
-      "check": "Owner choice explicitly pending drowned-bell",
+      "check": "Direct approval of final form not recorded drowned-bell",
       "ok": true
     },
     {
@@ -417,7 +425,7 @@
       "ok": true
     },
     {
-      "check": "Owner choice explicitly pending unfolding",
+      "check": "Direct approval of final form not recorded unfolding",
       "ok": true
     },
     {
@@ -433,7 +441,7 @@
       "ok": true
     },
     {
-      "check": "Owner choice explicitly pending choir-of-one",
+      "check": "Direct approval of final form not recorded choir-of-one",
       "ok": true
     },
     {
@@ -449,7 +457,7 @@
       "ok": true
     },
     {
-      "check": "Owner choice explicitly pending weight",
+      "check": "Direct approval of final form not recorded weight",
       "ok": true
     },
     {
@@ -465,7 +473,7 @@
       "ok": true
     },
     {
-      "check": "Owner choice explicitly pending open-door",
+      "check": "Direct approval of final form not recorded open-door",
       "ok": true
     },
     {
@@ -481,7 +489,7 @@
       "ok": true
     },
     {
-      "check": "Owner choice explicitly pending hollow-interval",
+      "check": "Direct approval of final form not recorded hollow-interval",
       "ok": true
     },
     {
@@ -497,7 +505,7 @@
       "ok": true
     },
     {
-      "check": "Owner choice explicitly pending sleeper-beyond",
+      "check": "Direct approval of final form not recorded sleeper-beyond",
       "ok": true
     },
     {
@@ -590,6 +598,10 @@
     },
     {
       "check": "Handoff link ../art/concepts/descent-horror-v1/drowned-bell.png",
+      "ok": true
+    },
+    {
+      "check": "Handoff link underhound-production.md",
       "ok": true
     }
   ]

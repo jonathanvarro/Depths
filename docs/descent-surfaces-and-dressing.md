@@ -1,5 +1,10 @@
 # Matching descent surfaces and remaining cave dressing
 
+**Live integration, 2026-10-25:** the fungal surfaces and selected roots,
+moss/fungus pieces are now used on floor two. [Fungal Caverns](fungal-caverns.md)
+records placement, still mode and live review. Other families/pieces retain
+their library status. The original #139 delivery is recorded below.
+
 2026-10-21 · #139, refs #126/#128/#129/#132.
 
 Twelve new floor/ceiling surfaces complete the six existing deeper wall families.

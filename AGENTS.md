@@ -77,7 +77,11 @@ Templates > Download and Install; already installed on the owner's PC).
   open sounds. Picked via `environment_theme` on Main.
   Six standalone deeper-cave wall families (#126) are available in
   `art/textures/descent-walls-v1`; sources, previews and integration notes:
-  `docs/descent-wall-library.md`. They are not assigned to live floors yet.
+  `docs/descent-wall-library.md`. The fungal family is now live on floor two
+  (`themes/fungal-caverns.tres`); the other five remain unassigned.
+  `docs/fungal-caverns.md` records matched surfaces, sparse theme-specific
+  growth, still mode, full-face wall UVs and restore handling. The optional
+  `EnvironmentTheme.dressing_script` keeps other themes on the original dresser.
   Matching floors/ceilings for all six families and twenty remaining dressing
   entries (#139) are ready in `docs/descent-surfaces-and-dressing.md`; optional
   glow is separate and mood only. Preserve live themes/wall files; new placement
@@ -143,8 +147,10 @@ Templates > Download and Install; already installed on the owner's PC).
   `art/concepts/descent-horror-v1/inspector.html`; handoff, selection ledger and
   presentation proposals: `docs/descent-horror-concepts.md`. Owner feedback
   prompted a single-clapper Bell and broad folded-vault Sleeper revision; compare
-  Revised/Previous in the gallery. Revised review and production choices remain
-  open. Preserve these as concepts; no runtime exports or assignments.
+  Revised/Previous in the gallery. Underhound is selected first for production
+  by Codex at the owner's request (2026-10-25): `docs/underhound-production.md`.
+  This records a three-pose native128 brief, not finished sprites. Other choices
+  and revised review remain open; no runtime exports or encounter assignments.
   Five further reference-led sovereign/creature studies (#153) are in
   `art/concepts/reference-creatures-v1/inspector.html`; prompts/provenance and
   review notes: `docs/reference-creature-concepts.md`. Supplied references and

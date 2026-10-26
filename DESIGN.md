@@ -792,7 +792,9 @@ The interface should preserve the two elements the owner particularly liked: exp
 
 - **Dressing** (`scripts/dressing.gd`) scatters ChatGPT's cave-v1 pieces over each mine floor. The scatter is seeded by site and depth, so a floor looks the same each visit. Cells with stairs, doors or events stay clear.
   - Floor 1: pit props along straight drifts, rails, chalk marks and webs.
-  - Floor 2: damp, fungus and natural rock.
+  - Floor 2: damp, fungus and natural rock. Completed as the Fungal Caverns
+    (2026-10-25), with matched fungal-stone surfaces and a sparse theme-specific
+    roots/moss/fungus dresser; [integration and review](docs/fungal-caverns.md).
   - Floors 3–4: goblin daubs, trophies, litter and lit wall torches.
 - **Purely cosmetic:** dressing never blocks a cell. A lit torch's glow is mood only and doesn't count as light.
 - **Ambience** (`scripts/ambience.gd`) is pure atmosphere and changes no rules:

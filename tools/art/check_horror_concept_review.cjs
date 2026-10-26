@@ -8,6 +8,7 @@ const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),{pa
  check(await page.locator('.concept-card').count()===10,'Ten concept drafts');check(await page.locator('#sources>details').count()===13,'Thirteen exact prompts and original masters');
  for(const e of cat.entries){
   await page.selectOption('#concept',e.id);await page.evaluate(()=>window.viewReady);
+  check((await page.locator('#selection').textContent()).includes(e.id==='underhound'?'Selected first for production':'Production selection pending'),'Production status '+e.id);
   check(await page.locator('#art').evaluate(i=>i.naturalWidth===1536&&i.naturalHeight===1024),'Original sheet decodes '+e.id);
   for(const view of ['sheet','main','state','omen','small']){
    await page.selectOption('#view',view);await page.evaluate(()=>window.viewReady);

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://art/features/cave-v1/descent.tscn" id="base"]
+[ext_resource type="Material" path="res://art/textures/descent-surfaces-v1/fungal-stone-floor.tres" id="floor"]
+
+[node name="PitOpening" instance=ExtResource("base")]
+
+[node name="Ground" parent="." index="0"]
+material_override = ExtResource("floor")

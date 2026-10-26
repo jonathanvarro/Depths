@@ -1,5 +1,9 @@
 # Wall families for the deeper cave · #126
 
+**Live integration, 2026-10-25:** the fungal family now completes the current
+second floor. [Fungal Caverns handoff/review](fungal-caverns.md). The five other
+families remain unassigned. The original library delivery is recorded below.
+
 Six reusable base wall materials follow the connected-environment proposal in [#125](cave-descent-and-quests.md). They form a new standalone art library; the proposed floor count, final lore and environment assignment are not implemented by this task.
 
 [Native/64px overview](../art/concepts/descent-walls-v1/wall-families.png) · [4×4 repetition](../art/concepts/descent-walls-v1/repeat-4x4.png) · [actual Godot lantern view](../art/concepts/descent-walls-v1/drowned-masonry-lantern.png) · [phone-shaped temple view](../art/concepts/descent-walls-v1/sealed-temple-phone-lantern.png)

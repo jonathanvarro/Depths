@@ -1,0 +1,14 @@
+{
+	"captures": [
+		"main-1280-normal.png",
+		"main-1280-larger.png",
+		"main-1278-normal.png",
+		"main-1278-larger.png",
+		"main-phone-before.png",
+		"main-phone-out.png"
+	],
+	"checks": 23,
+	"failures": [],
+	"physical_iPhone": false,
+	"private_save": "build/fungal-review/main-save.dat"
+}

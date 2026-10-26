@@ -152,6 +152,7 @@ const OUTSKIRTS_DEPTH := 3
 const FORTRESS_DEPTH := 4
 const Fortress := preload("res://scripts/fortress.gd")
 const FORTRESS_THEME := preload("res://themes/fortress.tres")
+const FUNGAL_THEME := preload("res://themes/fungal-caverns.tres")
 const GATE_FIGHT: Array = [GUARD, GUARD, ARCHER]
 const QUEEN_FIGHT: Array = [QUEEN, GUARD, GUARD]
 ## Enemy groups an encounter can hold, by floor depth (#14; #15 will give
@@ -316,7 +317,7 @@ var _active_fight: Array[EnemyType] = []
 var _wipe_pending := false  # wiped: the save already holds the aftermath
 var _save_queued := false
 var _settings: Control  # settings_screen.gd (#52)
-var _cave_theme: EnvironmentTheme  # floors 1-3; the fortress has its own (#44)
+var _cave_theme: EnvironmentTheme  # upper mine/outskirts; floor two and fortress have their own
 var _next_opening := ""  # the next fight's round-one side (#73)
 var _fight_kind := ""  # "gate" or "queen" while those fights run (#44)
 var _props := {}  # cell -> prop node for this floor's room contents (#46)
@@ -620,7 +621,8 @@ func _build_level() -> void:
 		_add_fortress_dressing()
 	if not _in_opening and not use_debug_layout:
 		var landmarks := Landmarks.place(_level, _map, _depth, _site_seed, CELL_SIZE, WALL_HEIGHT)  # #117
-		Dressing.dress(_level, _map, _depth, _site_seed, CELL_SIZE, WALL_HEIGHT, landmarks)  # #128
+		var dresser: Script = environment_theme.dressing_script if environment_theme.dressing_script else Dressing
+		dresser.dress(_level, _map, _depth, _site_seed, CELL_SIZE, WALL_HEIGHT, landmarks)  # #128
 
 
 func _make_layout(depth: int) -> PackedStringArray:
@@ -1263,6 +1265,7 @@ func _restore(data: Dictionary) -> void:
 		return
 	_depth = data["depth"]
 	_map = _floors[_depth]
+	_apply_theme()
 	_build_level()
 	_minimap.setup(_map)
 	_full_map_view.setup(_map)
@@ -1407,9 +1410,11 @@ func _placeholder_prop(kind: int) -> Node3D:
 
 # --- The goblin fortress (#44) ------------------------------------------
 
-## Floors 1-3 are cave; the fortress floor has its own look and sound.
+## The damp second floor has its own set; preserve custom/debug themes.
 func _apply_theme() -> void:
 	var theme: EnvironmentTheme = FORTRESS_THEME if _depth >= FORTRESS_DEPTH and not use_debug_layout else _cave_theme
+	if _depth == 2 and not use_debug_layout and _cave_theme.resource_path == "res://themes/cave.tres":
+		theme = FUNGAL_THEME
 	environment_theme = theme
 	_refresh_place_ambience()
 

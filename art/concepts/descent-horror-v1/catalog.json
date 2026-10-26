@@ -5,8 +5,9 @@
     152
   ],
   "date": "2026-10-22",
-  "status": "Draft concepts; all owner selections pending",
-  "scope": "Concept exploration only. No runtime sprites, rigs, EnemyType, stats, encounters or lore assignments.",
+  "selection_updated": "2026-10-25",
+  "status": "Underhound selected first for production at the owner's request; the other nine remain pending",
+  "scope": "Concept paintings and a production subject choice. No runtime sprites, rigs, EnemyType, stats, encounters or lore assignments.",
   "entries": [
     {
       "id": "underhound",
@@ -30,7 +31,13 @@
         1536,
         1024
       ],
-      "owner_feedback": "Positive overall visual feedback; individual production selection unresolved."
+      "owner_feedback": "Owner delegated the first production choice to Codex; Underhound selected. This does not approve finished sprites or assign a floor/story role.",
+      "production_selection": {
+        "date": "2026-10-25",
+        "selected_by": "Codex, at the owner's request",
+        "brief": "docs/underhound-production.md",
+        "scope": "First three-pose production subject; runtime art and encounter assignment not yet made."
+      }
     },
     {
       "id": "borrowed-pack",

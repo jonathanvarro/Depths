@@ -12,6 +12,9 @@ extends Resource
 ## cell centre on the floor, facing -Z (along the passage).
 
 @export var display_name := "Unnamed environment"
+## Optional cosmetic dresser, with the same static dress(...) contract as
+## scripts/dressing.gd. Empty keeps the current depth-based mine dressing.
+@export var dressing_script: Script
 
 @export_group("Surfaces")
 @export var wall_material: Material
@@ -19,6 +22,8 @@ extends Resource
 @export var wall_variant_material: Material
 @export var floor_material: Material
 @export var ceiling_material: Material
+## Opt-in full-tile UVs on each wall face; old themes keep BoxMesh's atlas UVs.
+@export var wall_face_uv := false
 
 @export_group("Closed passage")
 ## Opens when the party steps into it (door, web, curtain of roots...).

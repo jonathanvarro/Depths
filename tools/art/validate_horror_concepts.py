@@ -25,7 +25,10 @@ for e in manifest['assets']:
 for e in cat['entries']:
     x,y,mid=e['split'];w,h=e['size']
     check(0<x<w and 0<mid<y<h,'Valid review regions '+e['id'])
-    check(e['owner_selection'] is None,'Owner choice explicitly pending '+e['id'])
+    check(e['owner_selection'] is None,'Direct approval of final form not recorded '+e['id'])
+    if e['id']=='underhound':
+        check(e.get('production_selection',{}).get('date')=='2026-10-25','Delegated Underhound production selection recorded')
+        check((ROOT/e['production_selection']['brief']).exists(),'Underhound production brief retained')
     check(e['id'] in (ROOT/'docs/descent-horror-concepts.md').read_text(),'Handoff covers '+e['id'])
     master=next(m for m in manifest['assets'] if m['id']==e['master_id'])
     check(e['sha256']==master['sha256'] and sha(OUT/e['file'])==master['sha256'],'Active gallery uses recorded master '+e['id'])

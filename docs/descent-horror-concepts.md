@@ -53,7 +53,11 @@ the revised forms remain proposals, and no final encounter is chosen.
 
 ## Selection ledger
 
-**Individual production selections remain open.** The owner likes the overall
+**2026-10-25: Underhound selected first for production**, by Codex at the owner's
+request. [Production scope and three-pose brief](underhound-production.md).
+This is a subject selection; final sprites, encounter and story assignment are
+not delivered by the selection. The other nine selections remain open.
+The owner likes the overall
 set and requested these two specific revisions. Revised Bell/Sleeper visual
 review is pending; general praise does not assign story roles or production
 work to every creature. Working names remain working names.
@@ -62,8 +66,8 @@ main silhouettes before choosing a production direction. Then decide which
 beings need a fight, a room event, a distant encounter or only an omen. The
 Sleeper's complete body, relation to the relic and final story role remain open.
 
-The request checkboxes for owner selection stay open. No production follow-up
-should treat delivery of these drafts as approval of every proposed creature.
+The other request checkboxes for owner selection stay open. No production
+follow-up should treat delivery of these drafts as approval of every creature.
 
 ## Possible later presentation
 

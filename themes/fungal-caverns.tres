@@ -1,0 +1,52 @@
+[gd_resource type="Resource" script_class="EnvironmentTheme" format=3]
+
+[ext_resource type="Script" path="res://scripts/environment_theme.gd" id="1"]
+[ext_resource type="Material" path="res://art/textures/descent-walls-v1/fungal-stone.tres" id="2"]
+[ext_resource type="Material" path="res://art/textures/descent-walls-v1/fungal-stone.tres" id="3"]
+[ext_resource type="Material" path="res://art/textures/descent-surfaces-v1/fungal-stone-floor.tres" id="4"]
+[ext_resource type="Material" path="res://art/textures/descent-surfaces-v1/fungal-stone-ceiling.tres" id="5"]
+[ext_resource type="AudioStream" path="res://audio/placeholder/ambience_cave.wav" id="6"]
+[ext_resource type="AudioStream" path="res://audio/placeholder/footstep_1.wav" id="7"]
+[ext_resource type="AudioStream" path="res://audio/placeholder/footstep_2.wav" id="8"]
+[ext_resource type="AudioStream" path="res://audio/placeholder/footstep_3.wav" id="9"]
+[ext_resource type="AudioStream" path="res://audio/placeholder/bump.wav" id="10"]
+[ext_resource type="AudioStream" path="res://audio/placeholder/web_tear.wav" id="11"]
+[ext_resource type="PackedScene" path="res://art/features/cave-v1/closed.tscn" id="12"]
+[ext_resource type="PackedScene" path="res://art/features/cave-v1/opened.tscn" id="13"]
+[ext_resource type="PackedScene" path="res://art/features/cave-v1/blocked.tscn" id="14"]
+[ext_resource type="PackedScene" path="res://art/features/fungal-caverns-v1/descent.tscn" id="15"]
+[ext_resource type="PackedScene" path="res://art/features/cave-v1/ascent.tscn" id="16"]
+
+[ext_resource type="Script" path="res://scripts/fungal_dressing.gd" id="dressing"]
+
+[resource]
+script = ExtResource("1")
+display_name = "Fungal caverns"
+dressing_script = ExtResource("dressing")
+wall_face_uv = true
+closed_scene = ExtResource("12")
+opened_scene = ExtResource("13")
+blocked_scene = ExtResource("14")
+descent_scene = ExtResource("15")
+ascent_scene = ExtResource("16")
+wall_material = ExtResource("2")
+wall_variant_material = ExtResource("3")
+floor_material = ExtResource("4")
+ceiling_material = ExtResource("5")
+closed_name = "Spider web"
+closed_open_message = "You tear through the web."
+closed_color = Color(0.9, 0.9, 0.85, 0.18)
+blocked_name = "Tangled roots"
+blocked_message = "Thick roots block the way."
+blocked_color = Color(0.32, 0.22, 0.12, 1)
+descent_name = "Pit"
+descent_prompt = "Climb down into the pit?"
+descent_color = Color(0.02, 0.02, 0.02, 1)
+ascent_name = "Hanging roots"
+ascent_prompt = "Climb the roots back up?"
+exit_message = "Daylight. The way back to camp."
+ascent_color = Color(0.4, 0.3, 0.18, 1)
+ambience = ExtResource("6")
+footstep_sounds = Array[AudioStream]([ExtResource("7"), ExtResource("8"), ExtResource("9")])
+bump_sound = ExtResource("10")
+open_sound = ExtResource("11")

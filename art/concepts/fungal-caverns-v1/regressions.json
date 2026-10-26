@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-25",
+  "runs": [
+    {
+      "name": "dressing_check",
+      "passes": 19,
+      "failures": 0,
+      "private_save": true,
+      "log_sha256": "82c8a1c7867476a0517e6b190ab56a70dfb30072f5cd8b276bb43664a1571c82"
+    },
+    {
+      "name": "save_check",
+      "passes": 18,
+      "failures": 0,
+      "private_save": true,
+      "log_sha256": "45ac9d3c8e1da145acf9c92ac653029b67b3e19e9562c0b106d2e2d27d20595f"
+    },
+    {
+      "name": "fortress_check",
+      "passes": 27,
+      "failures": 0,
+      "private_save": true,
+      "log_sha256": "499f0747c7c9453d768cc48773867bc59338275517d96f722568cab8764b9ef5"
+    }
+  ],
+  "timing": "Continue initially failed in parallel runs; unchanged HEAD and current Main pass alone. Legacy fixed-delay Main fixtures should run sequentially.",
+  "shutdown": "Existing full-game teardown RID/object/resource warnings remain; isolated fungal fixture is clean.",
+  "physical_iPhone": false
+}

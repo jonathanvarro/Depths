@@ -1,0 +1,38 @@
+{
+	"captures": [
+		"hall-1280-lantern.png",
+		"roots-1280-lantern.png",
+		"crossing-1280-lantern.png",
+		"wall-1280-lantern.png",
+		"hall-1278-lantern.png",
+		"roots-1278-lantern.png",
+		"crossing-1278-lantern.png",
+		"wall-1278-lantern.png",
+		"hall-neutral-review.png",
+		"hall-phone-dim.png",
+		"hall-phone-out.png",
+		"hall-phone-still.png"
+	],
+	"categories": [
+		"floor-gravel",
+		"wall-roots",
+		"stalagmite-stub",
+		"stalagmite-broken",
+		"puddle-small",
+		"flowstone",
+		"floor-fungus",
+		"root-curtain-b",
+		"cracks-rubble",
+		"wall-fungus",
+		"stalactite-single",
+		"floor-fungus-lit",
+		"moss-curtain",
+		"moss-curtain-lit"
+	],
+	"checks": 221,
+	"failures": [],
+	"physical_iPhone": false,
+	"pieces_reviewed": 2173,
+	"seeds": 48,
+	"uses_saves": false
+}
