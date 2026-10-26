@@ -1,0 +1,30 @@
+{
+  "issue": 160,
+  "date": "2026-10-25",
+  "tool": "built-in image_gen",
+  "scope": "Exploratory reference-led gothic mage concept; owner visual review pending. No story, class rules or runtime assignment.",
+  "prompt": "Use case: stylized-concept. Use the attached image as a CHARACTER APPEARANCE AND MOOD REFERENCE, not as a background or interface template. Reimagine its clearly adult woman (around 30) as an original gothic mage for Depths, a dark, gritty medieval dungeon crawler. Preserve her distinctive crimson hair with vivid copper-orange tips, loosely gathered braided updo and long curling strands around the face, pale complexion, sharply expressive eyes, strong brows, full lips, curvy adult build and self-assured, slightly dangerous charm. Retain recognizable facial character while moving from glossy illustration to richly painted dark-fantasy concept art.\nCreate one polished vertical three-quarter character painting, framed from the head to mid-thigh with both hands fully visible and hair entirely in frame. She stands at ease in a shadowed cave chamber, eyes engaging the viewer, chin tilted with a knowing half-smile. One hand delicately shapes a small crooked ring of ember-red and copper flame above her fingers; the other steadies a battered leather spellbook with tarnished brass clasps at her hip. The magic should feel old and costly: a few ash motes and fine soot on her fingers, a restrained supernatural light, not a bright videogame explosion. No assigned story identity or character name.\nCostume: a fitted, worn black leather mage bodice with a low, elegant neckline and opaque charcoal fabric underneath, long dark lace sleeves, a loosely draped weathered black robe with an angular high collar and burgundy lining, practical belts with one tiny stoppered reagent bottle, and a small tarnished iron arcane clasp at the neck. Translate the reference's confident gothic sensuality into believable adult adventuring attire: flattering silhouette, bare collarbones, tailored waist, nuanced fabrics and subtle ornament. No crown, recognizable franchise emblem, modern jacket hardware, lingerie ensemble, naked breasts or explicit nudity. Avoid generic wizard hats and oversized decorative pauldrons.\nArt direction: mature gothic fantasy, grounded anatomy, confident sensual poise, serious and atmospheric rather than cartoonish. Broad painterly values and crisp focal detail around the face, hair and casting hand; worn leather, frayed velvet edges, tarnished metal, imperfect materials. Palette charcoal, oxblood, ash gray, copper and restrained ember orange. Soft cool cave fill with a warm ember accent, retaining readable facial planes. Subtle smoky stone background and breathing room around the silhouette. Concept painting only, not pixel art, not an in-game portrait export. One character only. No text, lettering, watermark, UI, pink corner buttons, screenshot borders or collage panels.",
+  "reference": {
+    "path": "art/source/gothic-mage-v1/reference.png",
+    "original_path": "C:/Users/jonat/AppData/Local/Temp/codex-clipboard-7d53ab15-a71e-442a-a350-ee39f4a42833.png",
+    "role": "User-supplied character appearance and mood reference; screenshot UI is not part of the design",
+    "provenance": "Supplied by the owner; creator/licence details were not provided.",
+    "sha256": "fc37e10064df0ecf9c35b88de34d1508b070511cca2c547480242c5b32436723",
+    "dimensions": [
+      778,
+      660
+    ],
+    "mode": "RGBA"
+  },
+  "output": {
+    "path": "art/concepts/gothic-mage-v1/mage-concept.png",
+    "original_path": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-902ed3b4-66f3-43f4-abb1-f26fd1f5de79.png",
+    "unaltered_copy": true,
+    "sha256": "1a808c5adcabe0c7f1f390dd61e068f349a35a24730cb64a144047debb519096",
+    "dimensions": [
+      1024,
+      1536
+    ],
+    "mode": "RGB"
+  }
+}

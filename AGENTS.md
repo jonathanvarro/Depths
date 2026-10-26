@@ -165,6 +165,10 @@ Templates > Download and Install; already installed on the owner's PC).
   The owner-approved crown-free gothic vampire queen concept (#154) is separate:
   `art/concepts/vampire-queen-v1/README.md`. Its selected painting and exact edit
   lineage are preserved; no story role or runtime portrait is assigned.
+  A reference-led gothic mage concept (#160) is in
+  `art/concepts/gothic-mage-v1/README.md`, with its exact built-in ImageGen prompt
+  and supplied reference retained separately. Owner review is pending; no class
+  rules, story identity or runtime portrait is assigned.
 - `scripts/combat_state.gd` – combat rules without visuals (turn order,
   attack/defend/item/retreat, enemy attacks, results); testable directly.
 - `scripts/combat_screen.gd` – combat UI: turn text, log, tappable enemy
