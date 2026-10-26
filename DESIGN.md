@@ -545,6 +545,16 @@ Deeper floors mix them (depth 1 mostly single rats; depth 3 pairs and trios like
       - The captain comes with a goblin; a full party also meets an archer.
       - Lairs have no random elites.
     - **Reward:** a win pays a magic weapon or armour (rare one time in four) and 10 + 5 × depth gold, besides the fight's usual XP and drops.
+  - **Flare — owner decision 2026-10-25 (#74):**
+    - **The action:** under Item, **Flare** takes the hero's turn (from either row).
+    - **Cost:** 10 lantern oil, or 15 of a lit torch's time. It isn't offered in the dark or with under 10 oil.
+    - **Effect by foe:**
+      - Beasts that fear fire are blinded and lose their next action, and a bat in the air drops to the ground.
+      - Goblins and hollow miners squint: −20% to hit on their next action.
+      - Lamp-eaters drink it.
+      - Gas-bloats ignore it; only a thrown torch sets one off.
+    - **Shown:** blinded and squinting foes carry a torch mark on their tag and say so on their line, and the ? card says how each monster takes a flare.
+    - **Throw torch** stays as the all-in move.
   - **Hearing them first — owner decision 2026-10-25 (#73):**
     - **When:** about 60% of ordinary fights are heard before they notice the party, as it reaches their room. Rolled once per fight, so backing away and coming back finds them as they were. Ambushes from events, lairs, quest fights, the gate and the queen are unchanged.
     - **The warning** names what's ahead ("Ahead, unaware of you: two goblins and a goblin archer.") and offers:

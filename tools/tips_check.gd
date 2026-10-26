@@ -36,6 +36,8 @@ func _initialize() -> void:
 	# First sight of a monster: its own intro, one card at a time.
 	main._start_combat(main._party.cell, [_e("hollow_miner"), _e("gas_bloat"), _e("goblin")] as Array[EnemyType])
 	var state = main._combat._state
+	if main._hint == "tip_flare":  # with light to spare, Flare is explained first (#74)
+		main._finish_hint()
 	var miner_first: bool = state.foes.all(func(f): return f.elite == "")
 	if miner_first:
 		check("first sight of a hollow miner explains it", main._hint == "tip_foe_hollow_miner" and main._hint_mode == "ok" and main._hint_text.begins_with(_e("hollow_miner").intro) and main._hint_text.contains("? beside its move"), main._hint)
