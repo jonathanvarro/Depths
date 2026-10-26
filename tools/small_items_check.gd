@@ -128,5 +128,14 @@ func _initialize() -> void:
 	ps.supplies.add_what_fits(load("res://data/items/torch.tres"), 999)
 	var result: Dictionary = main._room_events.resolve(ps, choice)
 	check("event gear that doesn't fit is offered too", result["no_room"].has(outcome.gear[0]))
+	# Free torches on every return (owner playtest, 2026-10-25).
+	var camp2 = load("res://scripts/camp_state.gd").new()
+	var p2 = _party()
+	var torch: SupplyItem = load("res://data/items/torch.tres")
+	while p2.supplies.count(torch) > 0:
+		p2.supplies.take(torch)
+	p2.supplies.add(torch, 1)
+	check("back at camp, torches are topped up to 3, free", camp2.top_up_torches(p2) == 2 and p2.supplies.count(torch) == 3 and p2.supplies.gold == 0)
+	check("...never past 3", camp2.top_up_torches(p2) == 0)
 	print("fails=", fails)
 	quit()

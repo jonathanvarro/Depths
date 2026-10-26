@@ -44,6 +44,8 @@ func _initialize() -> void:
 	else:
 		check("an elite in the fight is explained first", main._hint == "tip_elite", main._hint)
 	check("...one card at a time: the rest wait", main._tip_queue.size() >= 1)
+	if miner_first:
+		check("...and a ring points at the ? button", main._hint_target() == main._combat._rules_button)
 	if dir != "":
 		var w := 0
 		while not main._combat._actions.visible and w < 60:

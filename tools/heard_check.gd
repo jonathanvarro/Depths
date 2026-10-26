@@ -45,8 +45,9 @@ func _initialize() -> void:
 	# The Scout's talent.
 	var scout_options: Array = Progression.TALENTS["Scout"][2].map(func(t): return t[0])
 	var rogue_options: Array = Progression.TALENTS["Rogue"][2].map(func(t): return t[0])
-	check("slip past is a Scout's level-2 talent, in place of Deadeye", scout_options == ["slip_past", "quick_hands"], str(scout_options))
-	check("Mara the Rogue keeps Deadeye and doesn't get it", "slip_past" not in rogue_options and "deadeye" in rogue_options)
+	check("Sharp ears is a Scout's level-2 talent, in place of Deadeye", scout_options == ["sharp_ears", "quick_hands"], str(scout_options))
+	check("Slip past comes at level 4", Progression.TALENTS["Scout"][4].map(func(t): return t[0]).has("slip_past"))
+	check("Mara the Rogue keeps Deadeye and gets neither", "sharp_ears" not in rogue_options and "deadeye" in rogue_options)
 
 	# In the game.
 	var main = load("res://scenes/main.tscn").instantiate()
@@ -71,13 +72,19 @@ func _initialize() -> void:
 				outside = c + side
 		if fight_cell != Vector2i(-1, -1):
 			break
+	check("without Sharp ears, no fight is heard first", not main._hears_first(fight_cell))
+	var scout: Companion = load("res://data/companions/corin.tres").duplicate()
+	scout.display_name = "Wren"
+	scout.role = "Scout"
+	scout.talents.assign(["sharp_ears"])
+	main._party_state.add_member(scout)
 	map.heard[fight_cell] = true
 	main._party.place(map, outside)
 	main._cell_before = outside
 	main._on_party_entered_cell(door)
 	check("heard first: a warning, not a fight", main._prompt.visible and not main._in_combat and main._prompt_label.text.begins_with("Ahead, unaware of you:"), main._prompt_label.text)
 	check("...naming what's ahead", map.fight_groups.has(fight_cell) and main._prompt_label.text.contains(map.fight_groups[fight_cell][0].display_name.to_lower()))
-	check("...Fight, Strike first or Back away; no Scout, no slipping past", _labels(main) == ["Fight", "Strike first", "Back away"], str(_labels(main)))
+	check("...Fight, Strike first or Back away; not yet Slip past", _labels(main) == ["Fight", "Strike first", "Back away"], str(_labels(main)))
 	var words: String = main._prompt_label.text
 	main._answer_prompt(false)  # Escape: back away
 	check("backing away: out again, still unaware", not main._in_combat and main._party.cell == outside and not map.triggered.has(fight_cell))
@@ -85,12 +92,9 @@ func _initialize() -> void:
 	check("...and the same foes when you return", main._prompt.visible and main._prompt_label.text == words)
 	main._answer_prompt(false)
 
-	# A Scout who has learned to slip past.
-	var scout: Companion = load("res://data/companions/corin.tres").duplicate()
-	scout.display_name = "Wren"
-	scout.role = "Scout"
-	scout.talents.assign(["slip_past"])
-	main._party_state.add_member(scout)
+	# The Scout learns to slip past.
+	scout = main._party_state.members.filter(func(h): return h.display_name == "Wren")[0]  # the party's own
+	scout.talents.append("slip_past")
 	main._on_party_entered_cell(door)
 	var labels: Array = _labels(main)
 	check("with a Scout: Slip past, with its odds", labels.size() == 4 and labels[2].begins_with("Slip past ("), str(labels))

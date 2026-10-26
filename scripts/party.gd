@@ -81,7 +81,11 @@ func setup(size: float) -> void:
 
 ## Lantern brightness and reach from its oil level, 0 (out) to 1 (full).
 ## Out isn't pitch black: a faint glow keeps the way back findable.
+## Whether there's real light to see by: the map shows one tile further.
+var lit := true
+
 func set_light(fraction: float) -> void:
+	lit = fraction > 0.0
 	if fraction <= 0.0:
 		_lantern.light_energy = 0.35
 		_lantern.omni_range = cell_size * 1.6
@@ -102,7 +106,7 @@ func place(dungeon_map, at: Vector2i) -> void:
 			break
 	position = _cell_to_world(cell)
 	rotation.y = _facing_to_yaw(facing)
-	map.reveal_around(cell)
+	map.reveal_around(cell, lit)
 	moved.emit(cell, facing)
 
 
@@ -139,7 +143,7 @@ func _try_step(direction: Vector2i) -> void:
 		tween.tween_property(self, "position", position, move_time * 0.4)
 	elif map.door_at(target) == DungeonMap.Door.CLOSED:
 		map.open_door(target)
-		map.reveal_around(target)
+		map.reveal_around(target, lit)
 		opened_door.emit(target)
 		# Lean into it and push through, then settle back.
 		var push := position + Vector3(direction.x, 0, direction.y) * TEAR_PUSH
@@ -157,7 +161,7 @@ func _try_step(direction: Vector2i) -> void:
 		cell = target
 		stepped.emit(cell)
 		tween.tween_property(self, "position", _cell_to_world(cell), move_time)
-		map.reveal_around(cell)
+		map.reveal_around(cell, lit)
 		moved.emit(cell, facing)
 		tween.finished.connect(func(): entered_cell.emit(cell))
 	tween.finished.connect(func(): _busy = false)

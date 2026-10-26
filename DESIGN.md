@@ -328,7 +328,7 @@ Suggested initial presentation: one campsite screen with a few selectable activi
     - Recruits join one level below the best hero and double-earn until they catch up.
   - **Talents** (two to choose from at levels 2 and 4, by role):
     - Warden: Bulwark or Stalwart, then Iron hide or Steel nerves.
-    - Scout: Slip past or Quick hands, then Slip the web or Opening shot. (Slip past replaced Deadeye for Scouts on 2026-10-25, #73.)
+    - Scout: Sharp ears or Quick hands, then Slip past or Trap sense. (Owner playtest, 2026-10-25: hearing fights first is a Scout skill to unlock, not something everyone has early on.)
     - Rogue: Deadeye or Quick hands, then Slip the web or Opening shot.
     - Brawler: Heavy hands or Thick skull, then Berserker or Unbreakable.
     - Healer: Steady hands or Steel nerves, then Triage or Herbalist.
@@ -358,6 +358,14 @@ Open campaign questions: what counts as completing a site, whether old sites rem
 **Decided 2026-10-17 (#8):** the game starts with **one hero**. Their companions were killed in the dungeon and they need to make it out. The party has **three hero slots**; the others fill later (e.g. campfire recruitment, #26). Party state carries between floors, and any effect with a duration (such as healing over time) is completed in full when the party changes floor.
 
 Each companion has a distinct role, personality, vulnerability, and reason to enter the dungeon. Portrait cards communicate physical and emotional condition.
+
+**After the first iPad playtest (owner, 2026-10-25):**
+- **Free torches:** every return to camp tops the party up to 3 torches for free. Gold was too scarce to keep buying them, and that blocked progress past floor 2. More torches and the lantern still cost gold. The results screen says so.
+- **Banter:** now and then, at most once every 30 steps, a hero voices the party's most pressing need: failing light, hunger, frayed nerves, then a wound. Each of the six voices has its own lines.
+- **Right-click** an item in the pack to use it, or to put gear on or take it off, without opening its actions.
+- **With light,** the map reveals one more tile around the party, past open neighbours only, never through rock.
+- **The ? button** has a gold edge, and the tutorial's gold ring circles it while a monster's first-sight tip is up.
+- **Tips name nothing early:** a tip must not name creatures the player hasn't met (the Flare tip had named the lamp-eater).
 
 **Reading a hero's condition (#64, 2026-10-25):**
 - **Icons:** the cards already show nerves, hunger, injuries and boons as icons. Each icon says what it does and what helps, but only on hover.
@@ -556,12 +564,12 @@ Deeper floors mix them (depth 1 mostly single rats; depth 3 pairs and trios like
     - **Shown:** blinded and squinting foes carry a torch mark on their tag and say so on their line, and the ? card says how each monster takes a flare.
     - **Throw torch** stays as the all-in move.
   - **Hearing them first — owner decision 2026-10-25 (#73):**
-    - **When:** about 60% of ordinary fights are heard before they notice the party, as it reaches their room. Rolled once per fight, so backing away and coming back finds them as they were. Ambushes from events, lairs, quest fights, the gate and the queen are unchanged.
+    - **When:** only with a Scout who has **Sharp ears** (a level-2 talent; owner playtest 2026-10-25, which found it too frequent for everyone and too much to learn early). With one, about 40% of ordinary fights are heard before they notice the party, as it reaches their room. Rolled once per fight, so backing away and coming back finds them as they were. Ambushes from events, lairs, quest fights, the gate and the queen are unchanged.
     - **The warning** names what's ahead ("Ahead, unaware of you: two goblins and a goblin archer.") and offers:
       - **Fight:** as usual.
       - **Strike first:** the whole party acts before them in round one. One time in four, a loose stone gives you away and they act first instead.
       - **Back away:** step back; they stay where they are, unaware.
-      - **Slip past:** only with a standing Scout who has the **Slip past** talent, a level-2 choice that replaced Deadeye. It costs 2 time and +4 nerves each. Odds are 75%, minus 10% for each hero beyond the first, plus 10% in dim light or darkness. Unseen, the party is past them for this trip, with no XP or loot. Seen, they act first.
+      - **Slip past:** only with a standing Scout who has the **Slip past** talent, a level-4 choice that builds on Sharp ears. It costs 2 time and +4 nerves each. Odds are 75%, minus 10% for each hero beyond the first, plus 10% in dim light or darkness. Unseen, the party is past them for this trip, with no XP or loot. Seen, they act first.
     - A first-time tip explains the choice.
   - **Creature territory, first trial — lamp-eaters (#149, owner chose 2026-10-25):**
     - **Where and how often:** an old lamp store, placed by chance on 2 floors in 5 on floors 2–3, as a side room. Nothing outside the room hints at it yet.

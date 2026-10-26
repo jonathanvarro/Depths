@@ -446,6 +446,21 @@ func buy_gear(party, item: Equipment) -> bool:
 	return true
 
 
+## The quartermaster's torches (owner playtest, 2026-10-25): every return
+## to camp tops the party up to this many, free. Gold was too scarce to keep
+## buying them, and a party without light can't get anywhere.
+const FREE_TORCHES := 3
+
+## Tops the pack up to FREE_TORCHES. Returns how many were handed over.
+func top_up_torches(party) -> int:
+	var short: int = FREE_TORCHES - party.supplies.count(TORCH)
+	if short <= 0:
+		return 0
+	var given: int = party.supplies.add_what_fits(TORCH, short)
+	changed.emit()
+	return given
+
+
 ## No light and no money: the merchant fronts two torches, once a day, so
 ## the party is never stuck at camp (#41's "always a viable party").
 func needs_charity(party) -> bool:

@@ -161,7 +161,7 @@ func _initialize() -> void:
 	await create_timer(0.3).timeout
 	check("after a wipe: the camp, not a restart", main._camp.visible and camp.day == 2)
 	check("the fallen are gone; Mara, still with the nurse, survived", ps.members.size() == 1 and ps.members[0] == mara and camp.is_recovering(mara))
-	check("everything carried is gone, lantern too", ps.supplies.items.all(func(i): return ps.supplies.count(i) == 0) and not ps.supplies.has_lantern)
+	check("everything carried is gone, lantern too - but the quartermaster's 3 torches", ps.supplies.items.all(func(i): return ps.supplies.count(i) == (3 if i == main.TORCH else 0)) and not ps.supplies.has_lantern)
 	check("the stash survived", camp.stash.count(ration) == 1)
 	await _open("cave")
 	check("cave path: no one fit to go", not _press(main._camp, "Head back down"))
@@ -169,8 +169,7 @@ func _initialize() -> void:
 	await _open("fire")
 	_press(main._camp, "Invite")
 	await _open("supplies")
-	_press(main._camp, "Take two torches")
-	check("with nothing left, the merchant fronts two torches", ps.supplies.count(main.TORCH) == 2)
+	check("with nothing left, the free torches mean no loan is needed", not main._camp_state.needs_charity(ps) and ps.supplies.count(main.TORCH) == 3)
 	await _head_down()
 	check("a recruit goes down with a lit torch", ps.members.size() == 1 and ps.supplies.torch_lit() and main._depth == 1)
 	print("fails=", fails)

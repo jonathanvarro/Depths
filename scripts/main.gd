@@ -635,6 +635,7 @@ func _make_layout(depth: int) -> PackedStringArray:
 
 func _on_party_entered_cell(cell: Vector2i) -> void:
 	_look_for_traps(cell)
+	_banter()
 	# A landmark (#117): named the first time, marked on the map from then on.
 	var landmark: Dictionary = Landmarks.at_cell(_map, cell)
 	if not landmark.is_empty() and not landmark["seen"]:
@@ -1020,7 +1021,9 @@ func _end_expedition(ending: int) -> void:
 		_show_hint("")  # the escape is over: no "walk into the light" on top
 		_results.show_brief("Barely survived", "You stagger out into the daylight, alone.", "To camp")
 	else:
-		_results.show_results(ending, _expedition, _party_state, notes[ending], _homecoming_lines())
+		var note: String = notes[ending] + "
+At camp, the quartermaster tops your torches back up to %d." % CampState.FREE_TORCHES
+		_results.show_results(ending, _expedition, _party_state, note, _homecoming_lines())
 	await _results.continue_pressed
 	_results.visible = false
 	if _in_opening and ending == Expedition.Ending.RETURNED:
@@ -1042,6 +1045,7 @@ func _start_new_expedition() -> void:
 	_end_opening()
 	if returned_from_expedition:
 		_camp_state.expedition_returned()
+		_camp_state.top_up_torches(_party_state)  # free, every return
 		Story.on_return(_camp_state)  # news that waited for a return (#123)
 	for hero: Companion in _party_state.members:
 		hero.appearance.clear()  # washed at camp
@@ -1475,8 +1479,10 @@ func _queen_fight(cell: Vector2i) -> void:
 
 # --- Hearing them first (#73, owner 2026-10-25) --------------------------
 
-## How often an ordinary fight is heard before it notices the party.
-const HEAR_FIRST_CHANCE := 0.6
+## How often an ordinary fight is heard before it notices the party - only
+## with a Scout's Sharp ears (owner playtest, 2026-10-25: too often for
+## everyone, and too much to learn early on).
+const HEAR_FIRST_CHANCE := 0.4
 ## Striking first goes wrong this often: they hear you and move first.
 const STRIKE_FIRST_FAILS := 0.25
 ## Slip past (a Scout's talent): odds, and what the creeping costs.
@@ -1493,6 +1499,8 @@ func _hears_first(fight_cell: Vector2i) -> bool:
 		return false
 	if _map.alarmed:
 		return false  # a bell rang: they're listening for you (#94)
+	if not _party_state.living_members().any(func(h: Companion): return h.has_talent("sharp_ears")):
+		return false
 	if not _map.heard.has(fight_cell):
 		_map.heard[fight_cell] = _rng.randf() < HEAR_FIRST_CHANCE
 	return _map.heard[fight_cell]
@@ -1512,7 +1520,7 @@ func _warn_ahead(fight_cell: Vector2i) -> void:
 		choices.append(["Slip past (%d%%)" % roundi(_slip_chance() * 100), _slip_past.bind(fight_cell, scout)])
 	choices.append(["Back away", _step_back])
 	_choose("Ahead, unaware of you: %s." % _group_words(group), choices)
-	_tip("heard_first", "You heard them first. Strike first to act before them - though they may hear you coming - or back away and come back later. A Scout can learn to slip past.")
+	_tip("heard_first", "Sharp ears: your Scout heard them first. Strike first to act before them - though they may hear you coming - or back away and come back later. A seasoned Scout can learn to slip past.")
 
 
 ## Starts the heard fight: as usual, or striking first.
@@ -2785,6 +2793,8 @@ func _hint_icon_for(key: String) -> Texture2D:
 
 ## The button a tutorial card wants pressed, ringed so the words can be few.
 func _hint_target() -> Control:
+	if _hint.begins_with("tip_foe_") and _in_combat:
+		return _combat._rules_button  # where to read it again (#146)
 	if _hint in ["throw", "force_throw"] and _in_combat:
 		var name := "Throw torch" if _combat._item_buttons.visible else "Item"
 		for row in [_combat._item_buttons, _combat._action_buttons]:
@@ -2891,6 +2901,44 @@ func _say(situation: String, force := false, once := false, who: Companion = nul
 	for card in _cards:
 		if card.companion == hero:
 			card._portrait.talk(minf(seconds, 2.5))
+
+
+## Now and then a hero voices what the party needs (owner playtest,
+## 2026-10-25): hunger, frayed nerves, a wound or failing light - the most
+## pressing first, by whoever it troubles. Never chatty.
+const BANTER_EVERY := 30  # steps, at least, between such remarks
+var _banter_steps := 0
+
+func _banter() -> void:
+	if _in_opening or _in_combat:
+		return
+	_banter_steps += 1
+	if _banter_steps < BANTER_EVERY:
+		return
+	var need := _pressing_need()
+	if need.is_empty():
+		return
+	_banter_steps = 0
+	_say(need[0], false, false, need[1])
+
+
+## [situation, hero] for the most pressing need, or [].
+func _pressing_need() -> Array:
+	var living: Array[Companion] = _party_state.living_members()
+	if living.is_empty():
+		return []
+	if _party_state.supplies.light_band() <= Supplies.Light.DIM:
+		return ["need_light", living.pick_random()]
+	for hero in living:
+		if hero.is_hungry():
+			return ["need_hunger", hero]
+	for hero in living:
+		if hero.strain_state() >= StrainRules.State.SHAKEN:
+			return ["need_nerves", hero]
+	for hero in living:
+		if hero.health * 2 < hero.effective_max_health() or hero.injuries.any(func(i): return i not in hero.dressed):
+			return ["need_hurt", hero]
+	return []
 
 
 ## Anyone standing may call out in a fight, not only the lead (#118).

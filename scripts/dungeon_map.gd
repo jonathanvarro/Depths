@@ -257,8 +257,20 @@ func floor_cell_count() -> int:
 	return count
 
 
-## Marks a cell and its eight neighbours as seen, so nearby walls show on the map.
-func reveal_around(cell: Vector2i) -> void:
+## Marks a cell and its eight neighbours as seen, so nearby walls show on
+## the map. With a light (owner playtest, 2026-10-25), one tile further -
+## past open neighbours only, never through a wall.
+func reveal_around(cell: Vector2i, lit := false) -> void:
 	for dy in range(-1, 2):
 		for dx in range(-1, 2):
 			explored[cell + Vector2i(dx, dy)] = true
+	if not lit:
+		return
+	for dy in range(-1, 2):
+		for dx in range(-1, 2):
+			var near := cell + Vector2i(dx, dy)
+			if near == cell or not is_passable(near):
+				continue
+			for ey in range(-1, 2):
+				for ex in range(-1, 2):
+					explored[near + Vector2i(ex, ey)] = true

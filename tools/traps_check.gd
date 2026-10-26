@@ -30,7 +30,7 @@ func _initialize() -> void:
 	check("bell wire: rings, no harm", bell.sprung.alarm and bell.sprung.health == 0)
 	check("snare: a limp", snare.sprung.injury != null and snare.sprung.injury.display_name == "Limp")
 	check("dart: 3 damage", dart.sprung.health == -3)
-	check("Trap sense is a Scout's level-4 talent, in place of Slip the web", Progression.TALENTS["Scout"][4].map(func(t): return t[0]) == ["trap_sense", "opening_shot"] and "slip_web" in Progression.TALENTS["Rogue"][4].map(func(t): return t[0]))
+	check("Trap sense is a Scout's level-4 talent; Mara keeps Slip the web", "trap_sense" in Progression.TALENTS["Scout"][4].map(func(t): return t[0]) and "slip_web" in Progression.TALENTS["Rogue"][4].map(func(t): return t[0]))
 
 	# In the game: a floor with a trap, and Mara without keen eyes.
 	var main = load("res://scenes/main.tscn").instantiate()

@@ -882,6 +882,15 @@ func _build() -> void:
 	_rules_button.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 	_rules_button.add_theme_font_size_override("font_size", 22)
 	_rules_button.tooltip_text = "How it fights (? or F1)"
+	# Gold-edged so it's noticed (owner playtest: easy to miss).
+	var edge := StyleBoxFlat.new()
+	edge.bg_color = Color(0.16, 0.12, 0.07, 0.95)
+	edge.border_color = Color("e0b45a")
+	edge.set_border_width_all(2)
+	edge.set_corner_radius_all(4)
+	for state_name in ["normal", "hover", "pressed"]:
+		_rules_button.add_theme_stylebox_override(state_name, edge)
+	_rules_button.add_theme_color_override("font_color", Color("f2d27a"))
 	_rules_button.toggled.connect(func(on: bool):
 		show_rules = on
 		_update_intent_line())

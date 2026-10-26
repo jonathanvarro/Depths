@@ -30,10 +30,11 @@ const TALENTS := {
 		4: [["iron_hide", "Iron hide", "Every blow does 1 less"], ["steel_nerves", "Steel nerves", "Strain builds 20% slower"]],
 	},
 	"Scout": {
-		# Slip past replaced Deadeye for Scouts (owner, 2026-10-25, #73).
-		2: [["slip_past", "Slip past", "Leads the party quietly past a fight it hears first"], ["quick_hands", "Quick hands", "Acts sooner (+2 speed)"]],
-		# Trap sense replaced Slip the web for Scouts (owner, 2026-10-25, #94).
-		4: [["trap_sense", "Trap sense", "Always spots traps"], ["opening_shot", "Opening shot", "First attack each fight +2 damage"]],
+		# A Scout's own (owner, 2026-10-25): Sharp ears in place of Deadeye
+		# (#73; hearing fights first is a skill to unlock, not for everyone),
+		# then Slip past (which needs it) or Trap sense (#94).
+		2: [["sharp_ears", "Sharp ears", "Hears some fights before they notice the party"], ["quick_hands", "Quick hands", "Acts sooner (+2 speed)"]],
+		4: [["slip_past", "Slip past", "Leads the party quietly past a fight Sharp ears heard"], ["trap_sense", "Trap sense", "Always spots traps"]],
 	},
 	"Rogue": {
 		2: [["deadeye", "Deadeye", "+5% to hit"], ["quick_hands", "Quick hands", "Acts sooner (+2 speed)"]],

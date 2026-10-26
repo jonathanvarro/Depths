@@ -218,6 +218,7 @@ func _camp_day() -> int:
 	var hurt: bool = party.members.any(func(h: Companion): return h.is_with_party() and (h.health < h.effective_max_health() or h.strain > 30.0 or h.hunger > 40))
 	# Rest when hurt, when nobody is fit, or after every trip (as players do;
 	# it also refreshes the cave and the contract).
+	camp.top_up_torches(party)  # free on every return (owner, 2026-10-25)
 	if fit.is_empty() or hurt or camp.explored_today:
 		camp.rest(party)
 		camp.give_charity(party)

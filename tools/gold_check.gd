@@ -157,7 +157,8 @@ func _initialize() -> void:
 	camp.store(ps, torch)
 	check("no charity while torches sit in the stash", not camp.needs_charity(ps))
 	camp.withdraw(ps, torch)
-	supplies.take(torch)
+	while supplies.count(torch) > 0:  # the free ones too (owner, 2026-10-25)
+		supplies.take(torch)
 	await _open("supplies")
 	camp.stash.gold = 2  # too little for a torch, even counting the stash
 	await _open("supplies")

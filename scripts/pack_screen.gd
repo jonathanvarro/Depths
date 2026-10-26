@@ -400,6 +400,21 @@ func _bind_inspection(button: Button,item: Resource,slot := "") -> void:
 	button.pressed.connect(inspect_item.bind(item,true,slot))
 	button.mouse_entered.connect(inspect_item.bind(item,false,slot))
 	button.focus_entered.connect(inspect_item.bind(item,false,slot))
+	button.gui_input.connect(func(event: InputEvent):
+		if event is InputEventMouseButton and event.pressed and event.button_index==MOUSE_BUTTON_RIGHT:
+			_quick_use(item,slot)
+			button.accept_event())
+
+## Right-click (owner playtest, 2026-10-25): use a supply, or put on or
+## take off gear, without going through its actions. The usual rules apply.
+func _quick_use(item: Resource,slot := "") -> void:
+	inspect_item(item,true,slot)
+	if item is SupplyItem:
+		if _party.cannot_use_reason(item)=="":_perform("use")
+	elif slot!="":
+		if _unequip_reason()=="":_perform("unequip")
+	elif item is Equipment:
+		_perform("equip")
 
 func _add_icon(button: Button,texture: Texture2D,tier: String,extent: Vector2) -> void:
 	var icon:=Quality.framed(texture,tier,extent)
