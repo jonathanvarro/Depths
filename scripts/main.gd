@@ -2837,7 +2837,7 @@ const UNTAUGHT_FOES := ["Rat", "Starved rat", "Spider", "Small spider", "Goblin"
 ## time it's met (#146), from its own intro line.
 func _fight_tips(state: CombatState) -> void:
 	if _party_state.supplies.can_flare():
-		_tip("flare", "Under Item: Flare spends 10 oil, or some of your torch, to blind them all. Beasts lose their next action, goblins and miners aim worse, and lamp-eaters just drink it.")
+		_tip("flare", "Under Item: Flare spends 10 oil, or some of your torch, to blind them all. Beasts lose their next action and armed foes aim worse - though not every creature minds the light. The ? beside an enemy's move says how it takes one.")
 	if state.foes.any(func(f): return f.elite != ""):
 		_tip("elite", "Elites carry their edge in their name: Hardened (more health), Savage (hits harder), Swift (acts first) or Venomous (poisons). There's more to learn from beating one.")
 	var met := {}

@@ -85,7 +85,7 @@ func _process(delta: float) -> void:
 	_animate(main._party, delta)
 	# Larger, and held lower so the handle runs off the bottom of the
 	# screen (owner, 2026-10-25): no one needs to see the end of it.
-	var amount := clampf(main._safe_area.size.y * 0.54 / DRAW_SIZE.y, 0.85, 1.35)
+	var amount := clampf(main._safe_area.size.y * 0.6 / DRAW_SIZE.y, 0.95, 1.5)  # a little larger again (owner, playtest 2026-10-25)
 	scale = Vector2.ONE * amount
 	position = Vector2(main._touch_pad.position.x - DRAW_SIZE.x * amount - 8, main._safe_area.size.y - DRAW_SIZE.y * amount * (1.0 - SUNK))
 
