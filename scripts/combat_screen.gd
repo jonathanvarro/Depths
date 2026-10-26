@@ -76,6 +76,13 @@ const MONSTER_INTENTS := {
 const SNARED_MARK := preload("res://art/ui/monsters-v1/status/snared.png")
 const LIGHT_DRAINED := preload("res://art/ui/monsters-v1/fx/light-drained.png")
 const GRABBED_MARK := preload("res://art/ui/monsters-v1/status/grabbed.png")
+## How a monster takes a flare (#74), for the ? card.
+const FLARE_NOTE := {
+	"dazzle": "A flare blinds it: it loses its next action.",
+	"squint": "A flare makes it squint: it aims worse next time.",
+	"drink": "A flare only feeds it.",
+	"": "A flare does nothing to it; a thrown torch sets it off.",
+}
 ## Each elite kind's own mark on its tag (#147), so the four aren't told
 ## apart by the shared red-orange plate alone.
 const ELITE_MARKS := {
@@ -276,6 +283,14 @@ func _hero_action(hero: Companion, action: Dictionary) -> void:
 			_fx.icon(_card_point(hero) + Vector2(0, -40), action["item"].icon, 48.0)
 		"retreat":
 			_state.retreat()
+		"flare":
+			outcome = _state.hero_flare(hero)
+			_glare()
+			Sounds.play(self, "torch", -4.0)
+			for foe in outcome["dazzled"] + outcome["squinting"]:
+				_fx.icon(_foe_point(foe), TORCH.icon, 44.0)
+			for foe in outcome["dazzled"]:
+				_play(foe, "hurt", 0.35)
 		"throw":
 			var target = _target
 			outcome = _state.hero_throw_torch(hero, target)
@@ -394,6 +409,18 @@ func _play(foe, animation: String, seconds: float) -> void:
 
 
 ## Gas rolls over the party when a bloat bursts (#141's four-frame cloud).
+## A flare's glare (#74): a warm white wash over the scene that fades.
+func _glare() -> void:
+	var wash := ColorRect.new()
+	wash.color = Color(1.0, 0.92, 0.7, 0.55)
+	wash.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	wash.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_fx.add_child(wash)
+	var fade := wash.create_tween()
+	fade.tween_property(wash, "color:a", 0.0, 0.5)
+	fade.tween_callback(wash.queue_free)
+
+
 func _gas_cloud() -> void:
 	var cloud := AnimatedSprite2D.new()
 	cloud.sprite_frames = GAS_BURST
@@ -626,7 +653,7 @@ func _update_intent_line() -> void:
 	words.append_array(_state_words(_target))
 	_intent_label.text = " ".join(words)
 	_rules_card.visible = show_rules and _target.type.intro != "" and _actions.visible
-	_rules_label.text = _target.type.intro  # it names the monster itself
+	_rules_label.text = _target.type.intro + "\n" + FLARE_NOTE.get(CombatState.flare_effect(_target), "")  # it names the monster itself
 
 
 ## Shows or hides the selected enemy's rules (#146). Costs no turn.
@@ -649,6 +676,8 @@ func _state_marks(foe) -> Array:
 		marks.append(STATE_MARKS["curled"])
 	if _holding(foe) != null:
 		marks.append(STATE_MARKS["holding"])
+	if _state.is_dazzled(foe) or _state.is_squinting(foe):
+		marks.append(TORCH.icon)  # in a flare's glare (#74)
 	return marks
 
 
@@ -669,6 +698,10 @@ func _state_words(foe) -> Array:
 		words.append("Holding %s." % held.display_name)
 	if foe.enraged:
 		words.append("Enraged: hits harder.")
+	if _state.is_dazzled(foe):
+		words.append("Blinded: loses its next action.")
+	elif _state.is_squinting(foe):
+		words.append("Squinting: aims worse next time.")
 	return words
 
 
@@ -772,6 +805,15 @@ func _show_items() -> void:
 		var throw := _button("Throw torch")
 		throw.pressed.connect(func(): _action_chosen.emit({"kind": "throw"}))
 		_item_buttons.add_child(throw)
+	# Flare the light at them all (#74): oil, or some of the torch.
+	var supplies = _state.party.supplies
+	var flare := _button("Flare (torch)" if supplies.torch_lit() else "Flare (%d oil)" % roundi(supplies.FLARE_OIL))
+	flare.disabled = not supplies.can_flare() or only_action != ""
+	if not supplies.can_flare():
+		flare.text = "Too dark to flare" if not supplies.has_lantern or supplies.oil <= 0.0 else "Too little oil to flare"
+	flare.tooltip_text = "Blinds them: beasts lose their next action, goblins and miners aim worse, lamp-eaters drink it."
+	flare.pressed.connect(func(): _action_chosen.emit({"kind": "flare"}))
+	_item_buttons.add_child(flare)
 	for item: SupplyItem in _state.party.supplies.items:
 		if not item.usable_in_combat:
 			continue

@@ -142,6 +142,29 @@ func burn(units: int, rate := 1.0) -> void:
 	changed.emit()
 
 
+## A flare in a fight (#74, owner 2026-10-25): the lantern turned up full,
+## or the torch shaken to a blaze. It costs light either way.
+const FLARE_OIL := 10.0
+const FLARE_TORCH := 15.0
+
+func can_flare() -> bool:
+	return torch_lit() or (source == Source.LANTERN and has_lantern and oil >= FLARE_OIL)
+
+
+func spend_flare() -> void:
+	var band_before := light_band()
+	if torch_lit():
+		torch_left = maxf(0.0, torch_left - FLARE_TORCH)
+		if torch_left <= 0.0:
+			source = Source.LANTERN if has_lantern else Source.NONE
+			torch_burnt_out.emit()
+	else:
+		oil = maxf(0.0, oil - FLARE_OIL)
+	if light_band() != band_before:
+		light_band_changed.emit(light_band())
+	changed.emit()
+
+
 ## Lights a torch from the pack and holds it (it replaces the lantern's
 ## light while it burns).
 func light_torch(torch: SupplyItem) -> bool:

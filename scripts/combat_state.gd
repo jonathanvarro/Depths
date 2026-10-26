@@ -180,6 +180,8 @@ var _webbed := {}  # Companion -> true until their next action
 var _venom := {}  # Companion -> turns left
 var _venom_damage := {}  # Companion -> damage per tick (a venom spider's is worse)
 var _opened := {}  # Companion -> true after their first attack (opening shot, #47)
+var _dazzled := {}  # Foe -> true: a flare costs it its next action (#74)
+var _squinting := {}  # Foe -> true: worse aim on its next action (#74)
 var _drummed := {}  # Foe -> true: their next hit is stronger (goblin drummer)
 var _grabbed := {}  # Companion -> Foe holding them (hollow miner, #140)
 var depth_scale := 1.0  # see prepare()
@@ -630,8 +632,13 @@ func _cure_venom(item: SupplyItem) -> String:
 ## Returns {"target": Companion, "hit": bool, "damage": int,
 ## "injury": Injury or null, "text": String}.
 func enemy_act(foe: Foe) -> Dictionary:
+	if _dazzled.has(foe):  # blinded by a flare: this turn is lost (#74)
+		_dazzled.erase(foe)
+		return {"target": null, "hit": false, "damage": 0, "injury": null,
+				"text": "The %s reels from the glare, eyes screwed shut." % foe.name.to_lower()}
 	var acted := foe.intent
 	var outcome := _carry_out(foe)
+	_squinting.erase(foe)  # its eyes have cleared
 	if foe.type.tactic == EnemyType.Tactic.SWOOPER and foe.is_alive():
 		# A bat lands after its swoop, then rises again after biting (#140).
 		foe.row_override = "front" if acted == Intent.SWOOP else "back"
@@ -712,7 +719,7 @@ func _carry_out(foe: Foe) -> Dictionary:
 			var held := _choose_target(foe)
 			if held == null:
 				return {"target": null, "hit": false, "damage": 0, "injury": null, "text": ""}
-			if is_defending(held) or rng.randf() >= foe.type.accuracy:
+			if is_defending(held) or rng.randf() >= _foe_accuracy(foe):
 				return {"target": held, "hit": false, "damage": 0, "injury": null,
 						"text": "The %s grabs at %s, who twists free." % [foe.name.to_lower(), held.display_name]}
 			_grabbed[held] = foe
@@ -723,7 +730,7 @@ func _carry_out(foe: Foe) -> Dictionary:
 	var outcome := {"target": target, "hit": false, "damage": 0, "injury": null}
 	if target == null:
 		return outcome
-	if rng.randf() < foe.type.accuracy:
+	if rng.randf() < _foe_accuracy(foe):
 		var damage := rng.randi_range(foe.type.damage_min, foe.type.damage_max)
 		if foe.enraged:
 			damage += ENRAGED_DAMAGE
@@ -766,6 +773,66 @@ func _carry_out(foe: Foe) -> Dictionary:
 		outcome["text"] = "The %s lunges at %s and misses." % [foe.name.to_lower(), target.display_name]
 	_check_end()
 	return outcome
+
+
+## A flare (#74, owner 2026-10-25): goblins and miners squint this much
+## worse on their next action.
+const SQUINT := 0.2
+
+## What a flare does to `foe`: "dazzle" (a beast that fears fire loses its
+## next action), "squint" (worse aim), "drink" (a lamp-eater feeds on it)
+## or "" (a gas-bloat: only a thrown torch sets one off).
+static func flare_effect(foe: Foe) -> String:
+	match foe.type.tactic:
+		EnemyType.Tactic.DRAINER:
+			return "drink"
+		EnemyType.Tactic.BLOAT:
+			return ""
+	return "dazzle" if foe.type.fears_fire else "squint"
+
+
+## Flares the party's light at every foe: it takes the hero's turn and
+## burns 10 oil, or 15 of a torch. Returns {"text", "dazzled", "squinting"}.
+func hero_flare(hero: Companion) -> Dictionary:
+	var outcome := {"text": "", "dazzled": [], "squinting": []}
+	if not party.supplies.can_flare():
+		return outcome
+	party.supplies.spend_flare()
+	var drank := false
+	for foe in living_foes():
+		match flare_effect(foe):
+			"dazzle":
+				_dazzled[foe] = true
+				outcome["dazzled"].append(foe)
+				if foe.type.tactic == EnemyType.Tactic.SWOOPER and foe.in_back():
+					foe.row_override = "front"  # the glare knocks a bat out of the air
+					plan(foe)
+			"squint":
+				_squinting[foe] = true
+				outcome["squinting"].append(foe)
+			"drink":
+				drank = true
+	var parts := PackedStringArray()
+	if not outcome["dazzled"].is_empty():
+		parts.append("the beasts reel back, blinded")
+	if not outcome["squinting"].is_empty():
+		parts.append("the others squint and curse")
+	if drank:
+		parts.append("the lamp-eater drinks it in")
+	outcome["text"] = "%s flares the light%s" % [hero.display_name, (" - " + ", ".join(parts) + ".") if not parts.is_empty() else "."]
+	return outcome
+
+
+func is_dazzled(foe: Foe) -> bool:
+	return _dazzled.has(foe)
+
+
+func is_squinting(foe: Foe) -> bool:
+	return _squinting.has(foe)
+
+
+func _foe_accuracy(foe: Foe) -> float:
+	return foe.type.accuracy - (SQUINT if _squinting.has(foe) else 0.0)
 
 
 ## Burn damage when a thrown torch hits something that doesn't fear fire.
