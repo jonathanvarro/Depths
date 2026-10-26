@@ -1,0 +1,41 @@
+{
+  "issue": 150,
+  "status": "Idle production candidate awaiting review",
+  "canvas": [
+    128,
+    128
+  ],
+  "pivot": [
+    64,
+    120
+  ],
+  "bounds": [
+    8,
+    32,
+    120,
+    121
+  ],
+  "visible_colours": 32,
+  "source_bounds": [
+    59,
+    236,
+    1229,
+    1168
+  ],
+  "source_to_native_scale": 0.09572649572649573,
+  "source_to_native_offset": [
+    8,
+    32
+  ],
+  "resize": "Proportional BOX once, then hard alpha >=128 and 32-colour visible-pixel median cut, no dithering",
+  "source": "art/source/underhound-v1/idle-master.png",
+  "source_sha256": "8ce191e2a996f9d6293654e9670163f07f16977eceab37e768cfbb7020dbc722",
+  "idle_sha256": "9d66f724f211756eeec8f6e209ed853e6d68eed714184bb308f079a0bf632ffe",
+  "pixel_size": 0.008988764044943821,
+  "visual_height_metres": 0.8,
+  "animations": [
+    "idle"
+  ],
+  "attack_hurt": "Not authored; do not alias them to idle",
+  "floor_or_enemy_type": null
+}

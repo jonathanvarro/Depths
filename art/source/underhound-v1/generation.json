@@ -1,0 +1,23 @@
+{
+  "issue": 150,
+  "date": "2026-10-25",
+  "tool": "built-in image_gen",
+  "asset": "Underhound idle candidate",
+  "source": "art/source/underhound-v1/idle-master.png",
+  "original_path": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-59e171a3-ca6f-4c85-a624-75150c11b040.png",
+  "prompt": "Use case: stylized-concept. Asset type: a single production-candidate IDLE enemy sprite for Depths, a dark first-person pixel dungeon crawler.\nInput image 1 is the Underhound concept sheet: identity reference only. Extract one creature, not the scene or sheet layout. Input image 2 is the existing breach-hound idle sprite: production pixel scale, sparse shading and framing reference only.\nCreate ONE full-body Underhound in a low, weight-bearing predatory idle crouch, facing the viewer in a modest three-quarter front view so the rib structures remain legible. Preserve a long blind wedge-shaped head, no visible eyes, high hunched ribbed shoulders, exactly four substantial legs with broad clawed feet, and one simple tapering tail. The dominant wrongness is two opposing rib structures: three or four strong outer arches curve over the back/shoulders; a few lower rib masses curve back against them beneath taut ash-brown hide. Make their opposing directions readable, with broad negative spaces, without adding limbs or decorating every surface.\nThe long outer muzzle is almost closed in IDLE: a narrow tooth seam and concealed inner sliding jaw, not an open attack maw. Quiet restrained menace and dark, gritty physical weight. No blood spray. Keep a recognizable animal before the deeper impossible forms.\nDraw for a TRUE 128x128 RGBA native pixel grid, with large deliberate crisp clusters, hard stair-step alpha edges and a maximum 32-colour shared palette. It may be presented enlarged as integer nearest-neighbor pixel blocks, but it must look like a restrained 128px game sprite rather than a finely detailed illustration. Group the hide into broad muted ash-brown masses, dull ivory ribs and a few tooth highlights, deep cool charcoal shadows, warm upper-left light cue. Three shades per material; no individual hairs, pores, veins, texture noise, dithering, gradients, smooth antialiasing or painterly detailing.\nTransparent background, no scenery, floor plane, ground shadow, fog, cast shadow, text, borders, labels or UI. One centered isolated creature only, all body parts inside the canvas. Leave generous transparent room around the silhouette for later attack/hurt poses. Target native content roughly x8..120 and y28..120; planted forefeet end on the common contact line y120, visual balance near x64. Preserve transparent pixels below the feet. The body should have about the same 0.8m perceived height as the reference breach hound. Do not depict multiple poses, alternative views or a sprite sheet.",
+  "reference_images": [
+    {
+      "path": "art/concepts/descent-horror-v1/underhound.png",
+      "role": "identity only; one creature extracted conceptually, no scene or sheet layout",
+      "sha256": "6465f632c8aa1247975f8941f39ed17f9ca62a9db9189db0623a900a9221dacf"
+    },
+    {
+      "path": "art/enemies/monsters-v1/breach-hound/idle.png",
+      "role": "existing pixel scale, sparse shading and framing only",
+      "sha256": "3d87a54bbf79a3014700d71042d8b0cf4ade32f33cc547dff91ee8f0578f2b72"
+    }
+  ],
+  "status": "Idle only, awaiting owner review; no encounter assignment or attack/hurt exports",
+  "sha256": "8ce191e2a996f9d6293654e9670163f07f16977eceab37e768cfbb7020dbc722"
+}

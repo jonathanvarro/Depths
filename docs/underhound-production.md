@@ -1,5 +1,8 @@
 # First deeper horror: the Underhound
 
+**Checkpoint 1 delivered, 2026-10-25:** [idle candidate and native/phone review](underhound-idle.md).
+Idle awaits owner review; attack/hurt and the complete family are still pending.
+
 2026-10-25 · Selection made by Codex at the owner's request, refs #150.
 
 The Underhound is the first of the deeper-horror concepts selected for
@@ -54,5 +57,5 @@ This selects a production subject and its scope. No new EnemyType, stats,
 tactic, encounter table, floor or story role is assigned here; the existing
 breach hound remains unchanged. The Underhound is not automatically placed in
 the Fungal Caverns merely because that environment is being completed alongside
-this decision. Finished sprite production is the next art step. The other nine
+this decision. After idle acceptance, attack/hurt are the next art step. The other nine
 concepts retain their existing review status.

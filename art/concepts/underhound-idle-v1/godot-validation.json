@@ -1,0 +1,15 @@
+{
+	"captures": [
+		"idle-cave-1280.png",
+		"family-1280.png",
+		"idle-cave-1278.png",
+		"family-1278.png",
+		"idle-fungal-caverns-1280.png",
+		"idle-fungal-caverns-1278.png"
+	],
+	"checks": 21,
+	"failures": [],
+	"physical_iPhone": false,
+	"scope": "Idle-only scene and first-person display-size review, not combat integration",
+	"uses_Main_or_saves": false
+}
