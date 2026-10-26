@@ -56,6 +56,39 @@ static func in_log(camp) -> Array:
 
 
 ## What to do next, in a few words, for the log.
+## A very short brief for the mine path's reminder card (owner, 2026-10-25).
+static func brief(camp, id: String) -> String:
+	match id:
+		"left_behind":
+			return "Report back to camp." if has_flag(camp, id, "found") else "Find where your party fell."
+		"three_knocks":
+			return "Free the trapped miner."
+		"iron_sample":
+			return "Give the smith the ore." if has_flag(camp, id, "have_ore") else "Bring back iron ore."
+		"lower_gate":
+			return "Find the way down."
+		"queen_claim":
+			return "Optional: the goblin queen."
+	return ""
+
+
+## Who gave it, as a picture to show in silhouette ("" if no one).
+const GIVER_ART := {
+	"Commander Vael": "res://art/portraits/story-slice-v1/commander-edric.png",
+	"the smith": "res://art/camp/highres-v4/smith.png",
+}
+
+
+## The quest the mine path should remind the party of: the first open one
+## that isn't optional or hidden, else the first open one at all; "" if none.
+static func current(camp) -> String:
+	var open: Array = in_log(camp).filter(func(id): return stage(camp, id) != Stage.RESOLVED)
+	for id in open:
+		if id != "queen_claim" and not INFO[id]["hidden"]:
+			return id
+	return open[0] if not open.is_empty() else ""
+
+
 static func next_step(camp, id: String) -> String:
 	var s := stage(camp, id)
 	if s == Stage.RESOLVED:

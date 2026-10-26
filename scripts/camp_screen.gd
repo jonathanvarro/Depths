@@ -35,6 +35,7 @@ const Quests := preload("res://scripts/quests.gd")
 const Progression := preload("res://scripts/progression.gd")
 const Sounds := preload("res://scripts/sounds.gd")
 const MerchantScreen := preload("res://scripts/merchant_screen.gd")
+const StashScreen := preload("res://scripts/stash_screen.gd")
 var _ambience: AudioStreamPlayer
 
 var content: Control  # main.gd keeps this inside the safe area
@@ -59,6 +60,7 @@ var _body: VBoxContainer
 var _back: Button
 var _current := ""
 var _merchant_view: Control
+var _stash_view: Control  # the tent's Store (owner, 2026-10-25)
 var _last_site := ""
 var _save_button: Button
 var _settings_button: Button
@@ -140,6 +142,13 @@ func _init() -> void:
 	_merchant_view = MerchantScreen.new()
 	content.add_child(_merchant_view)
 	_merchant_view.closed.connect(_close_activity)
+	_stash_view = StashScreen.new()
+	content.add_child(_stash_view)
+	_stash_view.closed.connect(func():
+		_stash_view.hide()
+		_activity.visible = _current != ""
+		if _current != "":
+			_refresh_activity())
 	_note = _label("", ACTION, 14, AMBER)
 	_note.position = Vector2(0, 150)
 	_note.size = Vector2(CANVAS.x, 24)
@@ -275,7 +284,7 @@ func _update_site_art() -> void:
 	# News follows the same story availability as the site's conversation.
 	for id in _buttons:
 		if id != "supplies" and _sites.has(id):
-			var news: bool = Story.camp_talk(_camp, id) != ""
+			var news: bool = id == "fire" and _sites.keys().any(func(site): return Story.camp_talk(_camp, site) != "")
 			_buttons[id].text = _sites[id].label
 			_buttons[id].icon = NEWS_ICON if news else null
 			_buttons[id].icon_alignment = HORIZONTAL_ALIGNMENT_RIGHT
@@ -353,6 +362,7 @@ func _build_activity() -> void:
 func open_activity(id: String) -> void:
 	if not _sites.has(id) or _camp==null or not _camp.site_present(id):return
 	if id!="supplies":_merchant_view.hide()
+	_stash_view.hide()
 	_current = id
 	if _note_tween:
 		_note_tween.kill()
@@ -376,6 +386,7 @@ func _close_activity() -> void:
 	_current = ""
 	_activity.visible = false
 	_merchant_view.hide()
+	_stash_view.hide()
 	_update_site_art()
 	_day_label.text = _status() if _camp else ""
 	if visible:_focus_available.call_deferred(_last_site)
@@ -409,7 +420,13 @@ func _refresh_activity() -> void:
 
 ## Someone here has something to say (#123): a talk button at the top.
 func _talk_row() -> void:
-	var id := Story.camp_talk(_camp, _current)
+	if _current != "fire":
+		return  # talk and quests gather at the campfire for now (owner, 2026-10-25)
+	for site in _sites:
+		_talk_button(Story.camp_talk(_camp, site))
+
+
+func _talk_button(id: String) -> void:
 	var talk := Story.conversation(id)
 	if talk == null:
 		return
@@ -476,7 +493,7 @@ func _training() -> void:
 		var next: int = Progression.xp_for_next(hero)
 		var progress := "%d / %d XP" % [hero.xp, next] if next > 0 else "%d XP (the mine's best)" % hero.xp
 		var talents := ", ".join(PackedStringArray(hero.talents.map(func(t): return Progression.talent_name(t))))
-		_text("%s · level %d · %s · STR %d DEX %d VIT %d RES %d%s" % [hero.display_name, hero.level, progress, hero.stat_str, hero.stat_dex, hero.stat_vit, hero.stat_res, (" · " + talents) if talents != "" else ""], MUTED)
+		_text("%s · level %d · %s" % [hero.display_name, hero.level, progress], MUTED)  # details live in the hero window
 		if Progression.ready_to_advance(hero):
 			_text("%s is ready for level %d. Choose one:" % [hero.display_name, hero.level + 1], AMBER)
 			var row := HFlowContainer.new()
@@ -617,65 +634,43 @@ func _nurse() -> void:
 
 func _tent() -> void:
 	_training()
-	# What a night's rest does, and doesn't (#85, #88).
-	_text("Rest until tomorrow: health and strain fully restored. Lasting injuries remain - only the nurse treats those.")
-	var injured: Array = _party.living_members().filter(func(h): return not h.injuries.is_empty() and not _camp.is_recovering(h))
-	if not injured.is_empty():
-		_text("Still injured after resting: %s." % ", ".join(PackedStringArray(injured.map(func(h): return h.display_name))), MUTED)
-	var healed: Array = _party.living_members().filter(func(h): return _camp.is_recovering(h) and _camp.ready_on(h) == _camp.day + 1)
-	if not healed.is_empty():
-		_text("Fit again tomorrow: %s." % ", ".join(PackedStringArray(healed.map(func(h): return h.display_name))), MUTED)
-	if _camp.explored_today:
-		_text("By morning the mine will have shifted: new passages and fresh enemies. The ways you found today will be gone.", AMBER)
-	else:
-		_text("By morning the mine will have shifted: new passages and fresh enemies.", MUTED)
-	var rest := _button("Rest until day %d" % (_camp.day + 1))
+	# Rest, and the stash behind its own button: no scrolling (owner,
+	# 2026-10-25). The day is already on the main screen.
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 10)
+	var rest := _button("Rest")
 	rest.pressed.connect(func():
 		_camp.rest(_party)
 		_refresh_activity()
 		_text("A night's rest. It's day %d." % _camp.day, AMBER))
-	_body.add_child(rest)
-	_body.add_child(_label("Stash", HEADING, 16, TEXT))
-	_text("Stored items and gold stay here, whatever happens down there.", MUTED)
-	var gold_row := HBoxContainer.new()
-	gold_row.add_theme_constant_override("separation", 8)
-	var gold_text := _label("Gold: %d carried · %d in the stash" % [_party.supplies.gold, _camp.stash.gold], BODY, 12, AMBER)
-	gold_text.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	gold_row.add_child(gold_text)
-	for spec in [["Store gold", _camp.store_gold, _party.supplies.gold > 0], ["Take gold", _camp.take_gold, _camp.stash.gold > 0]]:
-		var button := _button(spec[0])
-		button.disabled = not spec[2]
-		var action: Callable = spec[1]
-		button.pressed.connect(func():
-			action.call(_party)
-			_refresh_activity())
-		gold_row.add_child(button)
-	_body.add_child(gold_row)
-	var columns := HBoxContainer.new()
-	columns.add_theme_constant_override("separation", 12)
-	_body.add_child(columns)
-	var pack := _column(columns, "In your pack (%d/%d)" % [_party.supplies.slots_used(), _party.supplies.capacity])
-	var stash := _column(columns, "In the stash")
-	for item: SupplyItem in _party.supplies.items:
-		if _party.supplies.count(item) > 0:
-			_row(pack, "%s ×%d" % [item.display_name, _party.supplies.count(item)], "Store", _camp.store.bind(_party, item))
-	for item: Equipment in _party.supplies.gear:
-		_row(pack, item.display_name, "Store", _camp.store_gear.bind(_party, item))
-	for item: SupplyItem in _camp.stash.items:
-		if _camp.stash.count(item) > 0:
-			_row(stash, "%s ×%d" % [item.display_name, _camp.stash.count(item)], "Take", _camp.withdraw.bind(_party, item), _party.supplies.room_for(item) > 0)
-	for item: Equipment in _camp.stash.gear:
-		_row(stash, item.display_name, "Take", _camp.withdraw_gear.bind(_party, item), _party.supplies.has_room_for_gear())
-	if pack.get_child_count() == 1:
-		pack.add_child(_label("Empty.", BODY, 12, MUTED))
-	if stash.get_child_count() == 1:
-		stash.add_child(_label("Empty.", BODY, 12, MUTED))
+	row.add_child(rest)
+	var about := _label("Heals and calms. Injuries need the nurse. The mine shifts overnight.", BODY, 12, MUTED)
+	about.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	about.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	row.add_child(about)
+	_body.add_child(row)
+	var store := _button("Store")
+	store.tooltip_text = "Store and take items and gold: they stay safe at camp."
+	store.pressed.connect(_open_stash)
+	_body.add_child(store)
+
+
+func _open_stash() -> void:
+	_activity.visible = false
+	_stash_view.open(_camp, _party)
 
 
 ## Recruits by the fire (#41): who they are, their strength and weakness,
 ## and Invite; then the party, where recruits can be sent away.
 func _fire() -> void:
 	var full: bool = _party.free_slots() <= 0
+	# Quests and the king's contract, in brief (moved from the mine path).
+	for id in Quests.in_log(_camp):
+		if Quests.stage(_camp, id) != Quests.Stage.RESOLVED:
+			_text("%s - %s (floor %d)" % [Quests.INFO[id]["title"], Quests.brief(_camp, id), Quests.INFO[id]["floor"]], AMBER)
+	if not _camp.contract.is_empty():
+		var c: Dictionary = _camp.contract
+		_text("King's contract: %s (%s)." % [CampState.contract_text(c), "paid" if c["paid"] else "%d of %d" % [c["done"], c["count"]]], AMBER)
 	if _camp.candidates.is_empty():
 		_text("No one is by the fire today.", MUTED)
 	else:
@@ -738,52 +733,86 @@ func _recruit_row(recruit: Companion, full: bool) -> void:
 
 
 func _cave_path() -> void:
-	# Current orders (#123): the quest log in brief.
-	for id in Quests.in_log(_camp):
-		if Quests.stage(_camp, id) != Quests.Stage.RESOLVED:
-			_text("%s - %s" % [Quests.INFO[id]["title"], Quests.next_step(_camp, id)], AMBER)
+	# A reminder card on the side, and only what's needed to go (owner,
+	# 2026-10-25). Quests, the contract and talk live at the campfire.
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 14)
+	_body.add_child(row)
+	var quest := Quests.current(_camp)
+	if quest != "":
+		row.add_child(_quest_card(quest))
+	var column := VBoxContainer.new()
+	column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	column.add_theme_constant_override("separation", 8)
+	row.add_child(column)
 	var going: Array[Companion] = _camp.available(_party)
-	for hero: Companion in _party.living_members():
-		if _camp.is_recovering(hero):
-			_text("%s is recovering with the nurse until day %d." % [hero.display_name, _camp.ready_on(hero)], MUTED)
-		else:
-			var hurt := " · untreated: " + ", ".join(PackedStringArray(hero.injuries.map(func(i: Injury): return i.display_name.to_lower()))) if not hero.injuries.is_empty() else ""
-			_text("%s: %d/%d health%s" % [hero.display_name, hero.health, hero.effective_max_health(), hurt])
+	var say := func(text: String, color := TEXT):
+		var label := _label(text, BODY, 13, color)
+		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		column.add_child(label)
 	if _party.members.is_empty():
-		_text("Your party is gone. Find companions at the fire.", AMBER)
+		say.call("Your party is gone. Find companions at the fire.", AMBER)
 		return
 	if going.is_empty():
-		_text("No one is fit to go. Rest in your tent to pass the days.", AMBER)
+		say.call("No one is fit to go. Rest in your tent.", AMBER)
 		return
-	# The roster that actually leaves (#87).
+	say.call("Going: %s" % ", ".join(PackedStringArray(going.map(func(h): return h.display_name))), AMBER)
 	var staying: Array = _party.living_members().filter(func(h): return h not in going)
-	_text("Going down: %s." % ", ".join(PackedStringArray(going.map(func(h): return h.display_name))), AMBER)
 	if not staying.is_empty():
-		_text("Staying with the nurse: %s." % ", ".join(PackedStringArray(staying.map(func(h): return "%s (fit on day %d)" % [h.display_name, _camp.ready_on(h)]))), MUTED)
-	_text("The mine is as you left it today." if _camp.explored_today else "The mine has shifted since anyone was last inside.", MUTED)
-	_text(_rumour(), MUTED)
-	if not _camp.contract.is_empty():
-		var c: Dictionary = _camp.contract
-		var state := "paid" if c["paid"] else "%d of %d" % [c["done"], c["count"]]
-		_text("Posted on the trail post, by order of the king: %s (%s)." % [CampState.contract_text(c), state], AMBER)
+		say.call("With the nurse: %s" % ", ".join(PackedStringArray(staying.map(func(h): return "%s (day %d)" % [h.display_name, _camp.ready_on(h)]))), MUTED)
 	var down := _button("Head back down")
 	down.pressed.connect(func(): cave_chosen.emit(1))
-	_body.add_child(down)
+	column.add_child(down)
 	# The scouts' routes (#79): straight down to any floor they've marked,
 	# dearer the deeper it goes.
 	for depth: int in _camp.open_routes():
 		var price: int = _camp.route_price(depth)
-		var route := _button("Scouts' route to floor %d (%dg)" % [depth, price])
+		var route := _button("Route to floor %d (%dg)" % [depth, price])
 		route.disabled = _party.supplies.gold < price
 		route.pressed.connect(func():
 			if _camp.buy_route(_party, depth):
 				cave_chosen.emit(depth))
-		_body.add_child(route)
-	# The next route they'd mark.
+		column.add_child(route)
 	for depth: int in CampState.ROUTE_PRICES:
 		if not _camp.route_open(depth) and (depth == 2 or _camp.times_reached(depth) > 0):
-			_text("The king's scouts say: reach floor %d twice, and they'll mark a safe way down to it - for a price. (%d of %d)" % [depth, _camp.times_reached(depth), CampState.ROUTE_AFTER], MUTED)
+			say.call("Reach floor %d twice for a scouts' route (%d/%d)." % [depth, _camp.times_reached(depth), CampState.ROUTE_AFTER], MUTED)
 			break
+
+
+## The quest to keep in mind (owner, 2026-10-25): who asked, in silhouette,
+## a very short brief, and the floor.
+func _quest_card(id: String) -> Control:
+	var card := PanelContainer.new()
+	var plate := StyleBoxFlat.new()
+	plate.bg_color = Color(0.07, 0.06, 0.05, 0.9)
+	plate.border_color = Color(AMBER, 0.6)
+	plate.set_border_width_all(1)
+	plate.set_content_margin_all(8)
+	card.add_theme_stylebox_override("panel", plate)
+	card.custom_minimum_size = Vector2(150, 0)
+	card.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+	var box := VBoxContainer.new()
+	box.add_theme_constant_override("separation", 3)
+	card.add_child(box)
+	var info: Dictionary = Quests.INFO[id]
+	var art: String = Quests.GIVER_ART.get(info["giver"], "")
+	if art != "" and ResourceLoader.exists(art):
+		var figure := TextureRect.new()
+		figure.texture = load(art)
+		figure.custom_minimum_size = Vector2(134, 64)
+		figure.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		figure.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		figure.modulate = Color(0.10, 0.08, 0.07)  # a silhouette
+		figure.tooltip_text = info["giver"].capitalize() if info["giver"] != "" else ""
+		box.add_child(figure)
+	var title := _label(info["title"], ACTION, 13, AMBER)
+	title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	box.add_child(title)
+	var brief := _label(Quests.brief(_camp, id), BODY, 12, TEXT)
+	brief.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	box.add_child(brief)
+	box.add_child(_label("Floor %d" % info["floor"], BODY, 12, MUTED))
+	return card
 
 
 func _unhandled_input(event: InputEvent) -> void:

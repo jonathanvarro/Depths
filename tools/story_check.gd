@@ -97,12 +97,19 @@ func _initialize() -> void:
 	main._results.continue_pressed.emit()
 	await create_timer(0.3).timeout
 	var cs = main._camp
-	check("the cave path is marked: the commander has something to say", cs._buttons["cave"].icon != null and cs._buttons["cave"].accessibility_name.contains("new conversation"))
+	# Talk gathers at the campfire for now (owner, 2026-10-25).
+	check("the campfire is marked: someone has something to say", cs._buttons["fire"].icon != null and cs._buttons["fire"].accessibility_name.contains("new conversation") and cs._buttons["cave"].icon == null)
 	cs.open_activity("cave")
 	await process_frame
 	var body := " | ".join(cs._body.find_children("*", "Label", true, false).map(func(l): return l.text))
-	check("the cave path lists current orders", body.contains("Those Left Behind"))
-	check("a talk button for the commander", await _talk(main, cs, "Vael", "Go on"))
+	check("the cave path's card reminds of the current quest", body.contains("Those Left Behind") and body.contains("Floor 1"))
+	check("...and has no talk on it", not cs._body.find_children("*", "Button", true, false).any(func(b): return b.text.begins_with("Talk to")))
+	if dir != "":
+		await _snap("camp_cave")
+	cs._close_activity()
+	cs.open_activity("fire")
+	await process_frame
+	check("a talk button for the commander, at the fire", await _talk(main, cs, "Vael", "Go on"))
 	check("...a reminder while the quest is open", Quests.is_active(camp, "left_behind"))
 	Quests.set_flag(camp, "left_behind", "found")
 	cs._refresh_activity()
@@ -112,7 +119,7 @@ func _initialize() -> void:
 	if dir != "":
 		await _snap("camp_orders")
 	cs._close_activity()
-	cs.open_activity("smith")
+	cs.open_activity("fire")
 	await process_frame
 	check("the smith asks for iron", await _talk(main, cs, "smith", "\"I'll bring"))
 	check("...and it's an active quest", Quests.is_active(camp, "iron_sample"))

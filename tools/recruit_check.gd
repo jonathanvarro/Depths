@@ -116,7 +116,7 @@ func _initialize() -> void:
 	var recruit: Companion = ps.members[1]
 	await _open("cave")
 	var roster := " | ".join(main._camp._body.find_children("*", "Label", true, false).map(func(l): return l.text))
-	check("roster: who goes, who stays and when", roster.contains("Going down: %s" % recruit.display_name) and roster.contains("Staying with the nurse: Mara (fit on day 4)"), roster)
+	check("roster: who goes, who stays and when", roster.contains("Going: %s" % recruit.display_name) and roster.contains("With the nurse: Mara (day 4)"), roster)
 	await _head_down()
 	check("Mara stays with the nurse", ps.members.size() == 1 and ps.members[0] == recruit and mara in camp.left_behind)
 	await _to_camp(main.Expedition.Ending.RETURNED)

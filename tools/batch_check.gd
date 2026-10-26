@@ -134,7 +134,7 @@ func _initialize() -> void:
 	check("one trip to floor 2 counted", camp.times_reached(2) == 1)
 	main._camp._buttons["cave"].pressed.emit()
 	await process_frame
-	check("the route isn't offered yet", not _body_text().contains("Scouts' route") and _body_text().contains("(1 of 2)"))
+	check("the route isn't offered yet", not main._camp._body.find_children("*", "Button", true, false).any(func(b): return b.text.begins_with("Route to floor")) and _body_text().contains("(1/2)"))
 	await _head_down()
 	main._go_to_floor(2, main.Arrival.FROM_ABOVE)
 	await _to_camp()
@@ -143,8 +143,8 @@ func _initialize() -> void:
 	main._camp._buttons["cave"].pressed.emit()
 	await process_frame
 	await _snap("route")
-	check("after two trips the route is offered", main._camp._body.find_children("*", "Button", true, false).any(func(b): return b.text.begins_with("Scouts' route to floor 2")))
-	await _head_down("Scouts' route to floor 2")
+	check("after two trips the route is offered", main._camp._body.find_children("*", "Button", true, false).any(func(b): return b.text.begins_with("Route to floor 2")))
+	await _head_down("Route to floor 2")
 	check("it costs 20g and starts on floor 2", ps.supplies.gold == 25 and main._depth == 2, "gold %d depth %d" % [ps.supplies.gold, main._depth])
 	# Deeper routes (owner 2026-10-20): each floor its own, dearer the deeper.
 	var scouts = camp.get_script().new()

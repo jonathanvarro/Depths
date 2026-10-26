@@ -43,6 +43,20 @@ func _trade(key: Variant, side: String) -> bool:
 	return true
 
 
+## The tent's stash (owner, 2026-10-25): Store opens it; gold moves all at once.
+func _stash(key: String) -> bool:
+	if not _press(main._camp, "Store"):
+		return false
+	var view = main._camp._stash_view
+	view.select_item(key, "left" if key == "stash_gold" else "right")
+	var moved := false
+	if view._primary != null and not view._primary.disabled:
+		view._primary.pressed.emit()
+		moved = true
+	view.closed.emit()
+	return moved
+
+
 func _to_camp(ending: int) -> void:
 	main._end_expedition(ending)
 	await process_frame
@@ -136,7 +150,7 @@ func _initialize() -> void:
 
 	# Stash: gold stays safe through a wipe.
 	await _open("rest")
-	check("store gold", _press(main._camp, "Store gold") and camp.stash.gold == 4 and supplies.gold == 0)
+	check("store gold", _stash("pack_gold") and camp.stash.gold == 4 and supplies.gold == 0)
 	supplies.gold = 7
 	await _open("cave")
 	_press(main._camp, "Head back down")
@@ -165,7 +179,7 @@ func _initialize() -> void:
 	check("the merchant fronts two torches", _press(main._camp, "Take two torches") and supplies.count(torch) == 2)
 	check("only once a day", not camp.needs_charity(ps))
 	await _open("rest")
-	check("take the stash gold back", _press(main._camp, "Take gold") and supplies.gold == 2 and camp.stash.gold == 0)
+	check("take the stash gold back", _stash("stash_gold") and supplies.gold == 2 and camp.stash.gold == 0)
 	check("a new contract each day", camp.contract.has("enemy"))
 	print("fails=", fails)
 	quit()
