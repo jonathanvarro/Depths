@@ -26,6 +26,7 @@ const StrainRules := preload("res://scripts/strain.gd")
 const Quests := preload("res://scripts/quests.gd")
 const Story := preload("res://scripts/story.gd")
 const Packages := preload("res://scripts/packages.gd")
+const Wanderers := preload("res://scripts/wanderers.gd")
 
 const TORCH := preload("res://data/items/torch.tres")
 const RATION := preload("res://data/items/ration.tres")
@@ -68,6 +69,8 @@ var cell := Vector2i.ZERO
 var stats := {}
 var steps := 0
 var trinket_rng := RandomNumberGenerator.new()  # trinket drops (#135)
+var wanderers := Wanderers.new()  # wandering monsters, as in the game
+var wander_rng := RandomNumberGenerator.new()
 
 
 func _initialize() -> void:
@@ -103,11 +106,12 @@ func _initialize() -> void:
 func _campaign(hero_path: String, run_seed: int, max_days: int) -> Dictionary:
 	seed(run_seed)
 	events_rules.rng.seed = run_seed
+	wander_rng.seed = run_seed + 1
 	first_seed = run_seed
 	floors.clear()
 	stats = {
 		"won": false, "days": 0, "expeditions": 0, "wipes": 0, "returns": 0, "fight_retreats": 0,
-		"fights": 0, "fights_won": 0, "events": 0, "injuries": 0, "stuck": "",
+		"fights": 0, "fights_won": 0, "wanderers": 0, "events": 0, "injuries": 0, "stuck": "",
 		"damage_by_floor": {1: 0, 2: 0, 3: 0, 4: 0}, "visits_by_floor": {1: 0, 2: 0, 3: 0, 4: 0},
 		"wipes_by_floor": {1: 0, 2: 0, 3: 0, 4: 0}, "first_arrival": {},
 		"gold_found": 0, "gold_contracts": 0, "gold_sold": 0, "gold_spent": 0, "bounty": 0,
@@ -429,6 +433,7 @@ func _enter_floor(to: int, from_above: bool) -> bool:
 	party.advance_time(waited)
 	party.complete_pending_effects()
 	depth = to
+	wanderers.arrive_on(to, party.time_elapsed)
 	if not floors.has(to):
 		var site_seed: int = first_seed + (camp.day - 1) * Main.DAY_SEED_STEP
 		var layout: PackedStringArray = FloorGenerator.generate(site_seed + (to - 1) * Main.FLOOR_SEED_STEP, to < FLOORS, to)
@@ -603,6 +608,9 @@ func _walk_to(to: Vector2i, going_home: bool, into_hall := false) -> String:
 		_keep_light()
 		var band: String = ["out", "dim", "steady", "bright"][party.supplies.light_band()]
 		stats["steps_" + band] += 1
+		var wander := _wanderer_step(next)
+		if wander != "ok":
+			return wander
 		var result := _on_enter(next)
 		if result != "ok":
 			return result
@@ -635,6 +643,24 @@ func _on_enter(at: Vector2i) -> String:
 	return "ok"
 
 
+## Wandering monsters (scripts/wanderers.gd): the bot ignores the warning
+## and fights them where they find it.
+func _wanderer_step(at: Vector2i) -> String:
+	var map = _map()
+	var clear: bool = map.content_at(at) == C.NONE and not map.encounter_zones.has(at)
+	if wanderers.step(party.time_elapsed, wander_rng, clear) != "arrive":
+		return "ok"
+	stats["wanderers"] += 1
+	var result := _fight(Main.encounter_pool(depth, party.living_members().size()).pick_random(), "wander")
+	if result == CS.Result.DEFEAT:
+		return "wiped"
+	if result == CS.Result.RETREAT:
+		party.advance_time(CS.RETREAT_TIME)
+		return "home"
+	_patch_up()
+	return "ok"
+
+
 ## A room event: try investigations, then the first real choice.
 func _event(at: Vector2i) -> String:
 	var map = _map()
@@ -652,6 +678,9 @@ func _event(at: Vector2i) -> String:
 			continue  # a careful player doesn't gamble on a curse (#133)
 		var boons_before := _boon_count()
 		var result: Dictionary = events_rules.resolve(party, choice, -1, flags)
+		if events_rules.stirred:  # a noise: wanderers come (#94, 2026-10-26)
+			events_rules.stirred = false
+			wanderers.stir()
 		var boons_after := _boon_count()
 		stats["boons"] += maxi(0, boons_after.x - boons_before.x)
 		stats["banes"] += maxi(0, boons_after.y - boons_before.y)
@@ -683,6 +712,8 @@ func _fight(group: Array, kind: String) -> int:
 	var state = CS.new(party, types)
 	state.rng.seed = randi()
 	state.prepare(depth, kind)  # deeper is tougher; some elites (#140), as in the game
+	if kind == "wander" and party.supplies.light_band() == Supplies.Light.OUT:
+		state.set_opening("foes")  # in the dark, they find you first
 	var start_health := _total_health()
 	var injuries_before := _injury_count()
 	var guard := 0
@@ -911,6 +942,7 @@ func _summarise(all: Dictionary) -> void:
 				print("  first reached floor %s: day median %s, mean party level %.2f, party size %.1f (%d runs)" % [f,
 						_median(arrivals.map(func(a): return a["day"])), _mean(arrivals.map(func(a): return a["mean_level"])),
 						_mean(arrivals.map(func(a): return a["party"])), arrivals.size()])
+		print("  wanderers %.1f per campaign" % _mean(runs.map(func(r): return r["wanderers"])))
 		print("  fights %.1f (won %.0f%%), fight retreats %.1f, events %.1f, injuries %.1f, nurse treatments %.1f per campaign" % [
 				_mean(runs.map(func(r): return r["fights"])),
 				100.0 * _mean(runs.map(func(r): return r["fights_won"])) / maxf(1.0, _mean(runs.map(func(r): return r["fights"]))),

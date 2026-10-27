@@ -46,6 +46,7 @@ sets_flag = "charm_down"
 script = ExtResource("outcome")
 weight = 1
 text = "The charm clatters on the stones. You freeze. Nothing comes — this time."
+stirs = true
 sets_flag = "charm_down"
 strain = 6.0
 

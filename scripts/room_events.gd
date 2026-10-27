@@ -46,6 +46,9 @@ const TREASURE := [
 var depth := 1
 ## A bell wire rang during the last choice (#94); main.gd reads and clears it.
 var alarm_raised := false
+## The last choice made a noise: wanderers come (scripts/wanderers.gd).
+## Read and cleared like alarm_raised.
+var stirred := false
 ## The camp, for events that move quests on (#123); set by main.gd.
 var camp
 
@@ -107,6 +110,8 @@ func resolve(party, choice: EventChoice, forced := -1, flags: Array = []) -> Dic
 	var outcome: EventOutcome = choice.outcomes[forced] if forced >= 0 and forced < choice.outcomes.size() else _pick_outcome(choice, flags, party.draws_ambush())
 	if outcome and outcome.alarm:
 		alarm_raised = true
+	if outcome and (outcome.alarm or outcome.stirs):
+		stirred = true
 	if outcome and outcome.sets_flag != "" and outcome.sets_flag not in flags:
 		flags.append(outcome.sets_flag)
 	if outcome and outcome.quest != "" and camp != null:

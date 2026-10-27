@@ -27,6 +27,7 @@ const RoomEvents := preload("res://scripts/room_events.gd")
 const Expedition := preload("res://scripts/expedition.gd")
 const SafeArea := preload("res://scripts/safe_area.gd")
 const OpeningGenerator := preload("res://scripts/opening_generator.gd")
+const Wanderers := preload("res://scripts/wanderers.gd")
 const DialogueBox := preload("res://scripts/dialogue_box.gd")
 ## Seconds between unprompted lines, so heroes don't chatter (#57).
 const SPEECH_COOLDOWN := 6.0
@@ -320,6 +321,10 @@ var _settings: Control  # settings_screen.gd (#52)
 var _cave_theme: EnvironmentTheme  # upper mine/outskirts; floor two and fortress have their own
 var _next_opening := ""  # the next fight's round-one side (#73)
 var _fight_kind := ""  # "gate" or "queen" while those fights run (#44)
+## Wandering monsters (owner, 2026-10-26): the floor's clock. Checks that
+## walk a floor for something else can turn them off.
+var _wanderers := Wanderers.new()
+var wandering := true
 var _props := {}  # cell -> prop node for this floor's room contents (#46)
 var _cell_now := Vector2i(-1, -1)
 var _cell_before := Vector2i(-1, -1)  # where to step back to from the hall's door
@@ -551,6 +556,7 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 		_party_state.complete_pending_effects()
 	_floor_started = true
 	_depth = depth
+	_wanderers.arrive_on(depth, _party_state.time_elapsed)
 	_apply_theme()
 	_expedition.visit_floor(depth)
 	if not _floors.has(depth):
@@ -654,6 +660,8 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 		types.assign(OPENING_FIGHTS[_opening_fights_done])
 		_start_combat(cell, types)
 		return
+	if _wander_step(cell):
+		return
 	# A fight fills its room: entering any part of it starts the fight.
 	var fight_cell: Vector2i = _map.encounter_zones.get(cell, Vector2i(-1, -1))
 	if fight_cell != Vector2i(-1, -1) and not _map.triggered.has(fight_cell) and _map.lairs.has(fight_cell):
@@ -730,6 +738,7 @@ func _run_event(cell: Vector2i) -> void:
 	if _room_events.alarm_raised:  # a bell wire rang (#94)
 		_room_events.alarm_raised = false
 		_map.alarmed = true
+	_wanderers_stirred()
 	for item in result.get("no_room", {}):
 		_left_over(item, result["no_room"][item])
 	# A chest may hold finer gear (owner, 2026-10-21).
@@ -875,7 +884,7 @@ func _gather_spoils(state) -> Dictionary:
 		_grant_xp(amount, true)
 		for hero in before:
 			heroes.append({"hero": hero, "from": before[hero], "to": hero.xp})
-	var note := "Nothing more to learn on this floor." if amount <= 0 and _fight_kind == "" else ""
+	var note := "Nothing more to learn on this floor." if amount <= 0 and _fight_kind in ["", "wander"] else ""
 	var contract := ""
 	var c: Dictionary = _camp_state.contract
 	if c.has("enemy") and not c.get("paid", true):
@@ -1278,6 +1287,7 @@ func _restore(data: Dictionary) -> void:
 	_party.rotation.y = -_party.facing * PI / 2.0
 	_party.moved.emit(_party.cell, _party.facing)
 	_show_message("%s · depth %d · continued" % [environment_theme.display_name, _depth])
+	_wanderers.arrive_on(_depth, _party_state.time_elapsed)
 	if data["resume"]:  # an interrupted fight or event happens again
 		var fight: Array[EnemyType] = []
 		for path in data.get("resume_fight", []):
@@ -1528,16 +1538,21 @@ func _warn_ahead(fight_cell: Vector2i) -> void:
 ## Starts the heard fight: as usual, or striking first.
 func _ambush_fight(fight_cell: Vector2i, how: String) -> void:
 	if how == "strike":
-		if _rng.randf() < STRIKE_FIRST_FAILS:
-			_next_opening = "foes"
-			_show_message("A loose stone gives you away - they turn on you first!")
-		else:
-			_next_opening = "party"
-			_show_message("You strike before they know you're there!")
+		_strike_first()
 	_map.enter(fight_cell)
 	var fixed: Array[EnemyType] = []
 	fixed.assign(_map.fight_groups.get(fight_cell, []))
 	_start_combat(fight_cell, fixed)
+
+
+## Striking first: usually you act before them, sometimes they hear you.
+func _strike_first() -> void:
+	if _rng.randf() < STRIKE_FIRST_FAILS:
+		_next_opening = "foes"
+		_show_message("A loose stone gives you away - they turn on you first!")
+	else:
+		_next_opening = "party"
+		_show_message("You strike before they know you're there!")
 
 
 ## A standing Scout who has learned to slip past, or null.
@@ -1808,6 +1823,89 @@ func _clear_of_panel(node: Node3D) -> void:
 
 ## Retreat (trial): bolt to a random spot a few steps away, losing time
 ## (and so lantern oil) on the way.
+# --- Wandering monsters (owner, 2026-10-26; scripts/wanderers.gd) -------
+
+const WANDER_SOUNDS := [
+	"Claws scrape somewhere behind you.",
+	"Something shuffles in the dark, coming closer.",
+	"Far off, stones click. Then again, nearer.",
+	"A low chittering, from the way you came.",
+]
+
+## Each step: wanderers heard, or arriving. True when they've arrived (a
+## fight, or the Scout's choice, has begun).
+func _wander_step(cell: Vector2i) -> bool:
+	if _in_opening or _in_combat or not wandering:
+		return false
+	var clear: bool = _map.content_at(cell) == DungeonMap.Content.NONE and not _map.encounter_zones.has(cell)
+	match _wanderers.step(_party_state.time_elapsed, _rng, clear):
+		"stir":
+			_hear_wanderers(WANDER_SOUNDS.pick_random())
+		"arrive":
+			_wanderers_arrive(cell)
+			return true
+	return false
+
+
+func _hear_wanderers(sound: String) -> void:
+	_show_message(sound)
+	_tip("wanderers", "Linger on a floor and things come looking. When you hear them, make for the stairs or make ready. Deeper floors stir sooner.")
+
+
+## A noisy event (falling stones, a rung bell): they're coming. `before`
+## keeps the event's own message in front.
+func _wanderers_stirred(before := "") -> void:
+	if not _room_events.stirred:
+		return
+	_room_events.stirred = false
+	if not _in_opening and wandering and _wanderers.stir():
+		_hear_wanderers(before + "Something out there heard that.")
+
+
+## They've found the party: a Scout with sharp ears may hear them first.
+func _wanderers_arrive(cell: Vector2i) -> void:
+	var group: Array[EnemyType] = []
+	group.assign(encounter_pool(_depth, _party_state.living_members().size()).pick_random())
+	var hears: bool = not _map.alarmed and _party_state.living_members().any(func(h: Companion): return h.has_talent("sharp_ears"))
+	if hears and _rng.randf() < HEAR_FIRST_CHANCE:
+		var choices := [["Fight", _wander_fight.bind(cell, group, "")],
+				["Strike first", _wander_fight.bind(cell, group, "strike")]]
+		var scout := _slip_leader()
+		if scout:
+			choices.append(["Slip past (%d%%)" % roundi(_slip_chance() * 100), _wander_slip.bind(cell, group, scout)])
+		_choose("Wanderers, not yet aware of you: %s." % _group_words(group), choices)
+		return
+	_wander_fight(cell, group, "")
+
+
+## A wandering group: the floor's usual foes, never elites.
+func _wander_fight(cell: Vector2i, group: Array, how: String) -> void:
+	if how == "strike":
+		_strike_first()
+	elif _party_state.supplies.light_band() == Supplies.Light.OUT:
+		_next_opening = "foes"
+		_show_message("In the dark, they find you first.")
+	var types: Array[EnemyType] = []
+	types.assign(group)
+	_fight_kind = "wander"
+	_start_combat(cell, types)
+
+
+func _wander_slip(cell: Vector2i, group: Array, scout: Companion) -> void:
+	_party_state.advance_time(SLIP_TIME)
+	for hero: Companion in _party_state.living_members():
+		hero.change_strain(SLIP_STRAIN)
+	if _rng.randf() < _slip_chance():
+		_show_message("%s draws everyone into the shadows. They pass by." % scout.display_name)
+		return
+	_next_opening = "foes"
+	_show_message("One of them stops, and sniffs. They've found you!")
+	var types: Array[EnemyType] = []
+	types.assign(group)
+	_fight_kind = "wander"
+	_start_combat(cell, types)
+
+
 func _flee_from(cell: Vector2i) -> void:
 	var distances: Dictionary = _map.walking_distances(cell)
 	var options: Array[Vector2i] = []
@@ -2410,6 +2508,7 @@ func _spring_trap(cell: Vector2i, trap: RoomEvent) -> void:
 	if _room_events.alarm_raised:
 		_room_events.alarm_raised = false
 		_map.alarmed = true
+	_wanderers_stirred(trap.sprung.text + " ")
 	_create_room_prop(cell, trap)
 	_empty_prop(cell)
 	_expedition.events_resolved += 1

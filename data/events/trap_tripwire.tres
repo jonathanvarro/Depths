@@ -16,6 +16,7 @@ text = "You ease over a taut wire. Nothing happens."
 [sub_resource type="Resource" id="o0_1"]
 script = ExtResource("outcome")
 text = "Your heel catches the wire. Stones crash down from above!"
+stirs = true
 health = -3
 strain = 5.0
 
@@ -45,6 +46,7 @@ outcomes = Array[ExtResource("outcome")]([SubResource("o1_0"), SubResource("o1_1
 [sub_resource type="Resource" id="Resource_11k3s"]
 script = ExtResource("outcome")
 text = "Your heel catches a wire you never saw. Stones crash down from above!"
+stirs = true
 health = -3
 strain = 5.0
 

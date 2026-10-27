@@ -852,6 +852,24 @@ Guidance and results are shown as pictures rather than sentences.
 - **Room events:** the story line stays. What changed shows as icon-and-number chips.
 - **Art:** the new icons are placeholders in `art/ui/visual105-v1/` until ChatGPT replaces them.
 
+### Wandering monsters — owner 2026-10-26
+
+Fights used to sit only in rooms. Now lingering on a floor draws wanderers too (`scripts/wanderers.gd`, shared with the playtest bot):
+
+- **Quiet spell on arrival,** then a chance per time unit that rises the longer the party stays. Deeper floors stir sooner and more often:
+
+  | Floor | Quiet | Chance at first | Rises | At most |
+  |---|---|---|---|---|
+  | 1 | 60 | 2% | +1% per 20 time | 6% |
+  | 2 | 50 | 3% | +1% per 20 time | 8% |
+  | 3 | 40 | 4% | +1% per 20 time | 10% |
+
+- Resting and using items count as time on the floor. Taking the stairs resets the clock; after a wanderer there's a 40-time breather.
+- **Warning:** a sound ("Claws scrape somewhere behind you"), then they arrive three steps later — time to reach the stairs or make ready. Never on a room's content; they wait a step.
+- **Noisy events stir them at once:** a rung bell wire, the tripwire's falling stones, the goblin charm clattering (`EventOutcome.stirs`, or `alarm`).
+- **What comes:** the floor's usual groups, never elites; normal XP from the floor's allowance and purses, no chest. In the dark they act first. A Scout with Sharp ears may hear them first: Fight, Strike first, or (with the talent) Slip past.
+- None in the tutorial or the fortress. The clock isn't saved: a loaded game starts the floor's quiet spell again.
+
 ### Healing and the tutorial — owner 2026-10-26
 
 - **Rations** heal each hero 2 health over 20 time (was 4). At 4 gold for 12 health across a party of three they out-healed the 12-gold draught; now they are mainly food, with a little healing.
