@@ -1,0 +1,147 @@
+{
+  "tool": "image_gen.imagegen (built-in)",
+  "prompt_file": "prompts.json",
+  "masters": {
+    "fixer-a": {
+      "file": "res://art/source/fixer-v1/fixer-a-master.png",
+      "sha256": "81e8ab2b76e022e8b8893713cc3fa817eb5a431cb9677ef2c80ec2995ccbcda0",
+      "size": [
+        1254,
+        1254
+      ],
+      "original_path": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-6edf7b86-fad4-4c6c-90c5-7bc60033f547.png"
+    },
+    "fixer-b": {
+      "file": "res://art/source/fixer-v1/fixer-b-master.png",
+      "sha256": "7df524fa9d5d610da60b8b589ee460aef4b7964682f8d9eb8c95551518e2102d",
+      "size": [
+        1254,
+        1254
+      ],
+      "original_path": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-b4da4e9e-0457-4179-80f0-e47c66faa59d.png"
+    },
+    "fixer-c": {
+      "file": "res://art/source/fixer-v1/fixer-c-master.png",
+      "sha256": "e2dda1ecbadd80038a20457d4c5abb8d73e2af192849e3de74b75fc4dc18f50a",
+      "size": [
+        1254,
+        1254
+      ],
+      "original_path": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-7369935c-85f1-4b06-9464-4c056455df72.png"
+    }
+  },
+  "references": {
+    "res://art/portraits/recruit-roster-v1/warden-b/preview.png": "282fa250ca44ef6b31521e960128e4596f3f30ed959eb3c812df051fbf37d9d9",
+    "res://art/portraits/recruit-kit-v1/scout-a/preview.png": "1dee31ff67771296cf2c47aa0f0dd65196f27f0ebdecea69c57ada542efff874"
+  },
+  "b_c_additional_reference": {
+    "file": "res://art/source/fixer-v1/fixer-a-master.png",
+    "sha256": "81e8ab2b76e022e8b8893713cc3fa817eb5a431cb9677ef2c80ec2995ccbcda0",
+    "role": "Shared garment/registration, not identity"
+  },
+  "export_method": "Generated masters; full-square 184px resize with 4px inset; native face-specific v4 lid/lip fitting.",
+  "recipes": {
+    "fixer-a": {
+      "eyes": [
+        [
+          100,
+          69,
+          9,
+          4
+        ],
+        [
+          123,
+          70,
+          6,
+          4
+        ]
+      ],
+      "lip": [
+        [
+          104,
+          95
+        ],
+        [
+          110,
+          94
+        ],
+        [
+          117,
+          95
+        ],
+        [
+          124,
+          96
+        ]
+      ]
+    },
+    "fixer-b": {
+      "eyes": [
+        [
+          100,
+          68,
+          9,
+          4
+        ],
+        [
+          123,
+          69,
+          6,
+          4
+        ]
+      ],
+      "lip": [
+        [
+          104,
+          94
+        ],
+        [
+          111,
+          93
+        ],
+        [
+          118,
+          94
+        ],
+        [
+          124,
+          95
+        ]
+      ]
+    },
+    "fixer-c": {
+      "eyes": [
+        [
+          100,
+          67,
+          9,
+          4
+        ],
+        [
+          123,
+          68,
+          6,
+          4
+        ]
+      ],
+      "lip": [
+        [
+          102,
+          94
+        ],
+        [
+          110,
+          93
+        ],
+        [
+          117,
+          94
+        ],
+        [
+          123,
+          95
+        ]
+      ]
+    }
+  }
+}

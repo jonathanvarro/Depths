@@ -1,0 +1,1122 @@
+{
+  "issue": 163,
+  "canvas": [
+    192,
+    192
+  ],
+  "method": "Generated masters; full-square 184px resize with 4px inset; native face-specific v4 lid/lip fitting.",
+  "masters": {
+    "fixer-a": {
+      "file": "res://art/source/fixer-v1/fixer-a-master.png",
+      "sha256": "dc5c431d2a8655a152a37eade619c500e31009de74a7bc40443753cf83d3f4b7",
+      "size": [
+        1254,
+        1254
+      ],
+      "original_path": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-00bdb431-5077-4a1c-9d44-e2bf59b20cb0.png"
+    },
+    "fixer-b": {
+      "file": "res://art/source/fixer-v1/fixer-b-master.png",
+      "sha256": "64f059a0b645bc27a36cdd9e8cc3f669c2932d4c673aa789ff94e3bbb7418069",
+      "size": [
+        1254,
+        1254
+      ],
+      "original_path": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-3b469114-6671-4711-8f62-7e578aa9a88e.png"
+    },
+    "fixer-c": {
+      "file": "res://art/source/fixer-v1/fixer-c-master.png",
+      "sha256": "598e8b1570ec11a27a08173a710e28fd755097d01cf4f56fbcee8a3362e7dd1e",
+      "size": [
+        1254,
+        1254
+      ],
+      "original_path": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-b452fe25-dea1-4801-a435-9e3e3497df7a.png"
+    }
+  },
+  "faces": [
+    {
+      "id": "fixer-a",
+      "recipe": {
+        "eyes": [
+          [
+            106,
+            56,
+            9,
+            4
+          ],
+          [
+            128,
+            63,
+            6,
+            4
+          ]
+        ],
+        "lip": [
+          [
+            99,
+            78
+          ],
+          [
+            105,
+            79
+          ],
+          [
+            111,
+            81
+          ],
+          [
+            117,
+            82
+          ],
+          [
+            121,
+            83
+          ]
+        ],
+        "ocular": [
+          {
+            "footprint": [
+              [
+                97,
+                53
+              ],
+              [
+                101,
+                51
+              ],
+              [
+                108,
+                53
+              ],
+              [
+                115,
+                56
+              ],
+              [
+                117,
+                59
+              ],
+              [
+                114,
+                62
+              ],
+              [
+                109,
+                62
+              ],
+              [
+                101,
+                58
+              ],
+              [
+                97,
+                56
+              ]
+            ],
+            "half": [
+              [
+                98,
+                53
+              ],
+              [
+                103,
+                55
+              ],
+              [
+                109,
+                57
+              ],
+              [
+                114,
+                59
+              ]
+            ],
+            "lower": [
+              [
+                98,
+                55
+              ],
+              [
+                103,
+                58
+              ],
+              [
+                109,
+                60
+              ],
+              [
+                114,
+                60
+              ]
+            ],
+            "closed": [
+              [
+                98,
+                54
+              ],
+              [
+                103,
+                57
+              ],
+              [
+                109,
+                59
+              ],
+              [
+                114,
+                59
+              ]
+            ]
+          },
+          {
+            "footprint": [
+              [
+                122,
+                59
+              ],
+              [
+                125,
+                58
+              ],
+              [
+                131,
+                60
+              ],
+              [
+                135,
+                63
+              ],
+              [
+                134,
+                67
+              ],
+              [
+                129,
+                68
+              ],
+              [
+                123,
+                65
+              ],
+              [
+                121,
+                62
+              ]
+            ],
+            "half": [
+              [
+                123,
+                60
+              ],
+              [
+                126,
+                61
+              ],
+              [
+                130,
+                63
+              ],
+              [
+                133,
+                65
+              ]
+            ],
+            "lower": [
+              [
+                123,
+                62
+              ],
+              [
+                127,
+                65
+              ],
+              [
+                131,
+                66
+              ],
+              [
+                133,
+                65
+              ]
+            ],
+            "closed": [
+              [
+                123,
+                61
+              ],
+              [
+                126,
+                64
+              ],
+              [
+                130,
+                65
+              ],
+              [
+                133,
+                65
+              ]
+            ]
+          }
+        ]
+      },
+      "neutral_reconstruction_exact": true,
+      "feature_pixels": {
+        "eyes": 248,
+        "mouth": 420
+      },
+      "outputs": {
+        "bandage.png": {
+          "sha256": "97da458815535e6e44da059cfd0cf75b380129f10a95c47e62addc7424e678f7",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 8
+        },
+        "blood.png": {
+          "sha256": "829502a43bb962bbd1daf9426ce7dea76b74e4ad6ddcdc69c5910e2d37d85e06",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 8
+        },
+        "body.png": {
+          "sha256": "7fd77020d66ea7fdcb79b7cbe0c2f7d909e35ef94ebcd7dc573e12dbdb236b85",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 48
+        },
+        "dirt.png": {
+          "sha256": "0120f759565e13f647a8ee61df393971f935682a20b75495ac2a00679a2bb25a",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 1
+        },
+        "eyes-closed.png": {
+          "sha256": "6a5b6b35df478ca4268deebe8ade2a4b46deb80c608bd475e60342a2a1e817c1",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 35
+        },
+        "eyes-half.png": {
+          "sha256": "0d1c33066166c73d8f7342d90da61ac246258fd1b491a119b1198c2b28d1d16a",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 36
+        },
+        "eyes-neutral.png": {
+          "sha256": "db6d23d548dd2e2cbc428cf99568e2d94770db9b9a43f65df425d977e7900fcd",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 36
+        },
+        "head-clean.png": {
+          "sha256": "90789946e64ffb0885e95dd22dbb2461e8e842818044aa8c54231cfdaf4c8a78",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 48
+        },
+        "head.png": {
+          "sha256": "c2b385aded2ab6e8d1d19940edf05237502880fb0086b627180c2bbf8272aa64",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 48
+        },
+        "highlight-left.png": {
+          "sha256": "e8827b6d11bb61e1fcaa350d4eebd51c2332bd1c6ed0ae8891c0f89fdd6d7fe0",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 1
+        },
+        "mouth-neutral.png": {
+          "sha256": "1141849950d36d99989c67574b4e1204537aee4cfa0405df5efe035234ef511a",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 44
+        },
+        "mouth-open.png": {
+          "sha256": "e432da35e6f608a62a0c59662ce42aab0226ed0c274e0d0581c9bc6f887f764d",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 44
+        },
+        "mouth-small.png": {
+          "sha256": "f9f0105031ba32e02011881c9228703d4e0b4d9a6caa5ce8ee026bd82b1db73a",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 44
+        },
+        "pallor.png": {
+          "sha256": "c17019fdc68116eb7d3d11918aa1162e8b764452fab0a240d42f3bef629e8218",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 1
+        },
+        "preview.png": {
+          "sha256": "c2febb8f59ee4c83d77a8c9eebe298ee09498a0a8d4a452eab47474ebcbd142e",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 48
+        },
+        "shadow-left.png": {
+          "sha256": "eb6a6a05fa2713fde95b6ec9e2b8f062205ebfbdb6c5efc51975276b590429a0",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 1
+        }
+      }
+    },
+    {
+      "id": "fixer-b",
+      "recipe": {
+        "eyes": [
+          [
+            107,
+            60,
+            9,
+            4
+          ],
+          [
+            129,
+            66,
+            6,
+            4
+          ]
+        ],
+        "lip": [
+          [
+            102,
+            82
+          ],
+          [
+            108,
+            83
+          ],
+          [
+            115,
+            85
+          ],
+          [
+            120,
+            86
+          ],
+          [
+            124,
+            86
+          ]
+        ],
+        "ocular": [
+          {
+            "footprint": [
+              [
+                97,
+                57
+              ],
+              [
+                101,
+                54
+              ],
+              [
+                108,
+                55
+              ],
+              [
+                115,
+                59
+              ],
+              [
+                117,
+                62
+              ],
+              [
+                112,
+                66
+              ],
+              [
+                105,
+                66
+              ],
+              [
+                99,
+                62
+              ]
+            ],
+            "half": [
+              [
+                99,
+                57
+              ],
+              [
+                104,
+                58
+              ],
+              [
+                110,
+                60
+              ],
+              [
+                115,
+                61
+              ]
+            ],
+            "lower": [
+              [
+                99,
+                58
+              ],
+              [
+                104,
+                62
+              ],
+              [
+                110,
+                64
+              ],
+              [
+                115,
+                62
+              ]
+            ],
+            "closed": [
+              [
+                99,
+                58
+              ],
+              [
+                104,
+                61
+              ],
+              [
+                110,
+                63
+              ],
+              [
+                115,
+                62
+              ]
+            ]
+          },
+          {
+            "footprint": [
+              [
+                121,
+                63
+              ],
+              [
+                124,
+                60
+              ],
+              [
+                130,
+                61
+              ],
+              [
+                135,
+                64
+              ],
+              [
+                135,
+                68
+              ],
+              [
+                130,
+                71
+              ],
+              [
+                124,
+                69
+              ],
+              [
+                121,
+                66
+              ]
+            ],
+            "half": [
+              [
+                123,
+                63
+              ],
+              [
+                126,
+                63
+              ],
+              [
+                131,
+                65
+              ],
+              [
+                134,
+                66
+              ]
+            ],
+            "lower": [
+              [
+                123,
+                65
+              ],
+              [
+                127,
+                68
+              ],
+              [
+                131,
+                69
+              ],
+              [
+                134,
+                67
+              ]
+            ],
+            "closed": [
+              [
+                123,
+                64
+              ],
+              [
+                127,
+                67
+              ],
+              [
+                131,
+                68
+              ],
+              [
+                134,
+                67
+              ]
+            ]
+          }
+        ]
+      },
+      "neutral_reconstruction_exact": true,
+      "feature_pixels": {
+        "eyes": 298,
+        "mouth": 387
+      },
+      "outputs": {
+        "bandage.png": {
+          "sha256": "01bfdaad96827ab4caeb1911e419b3a6aec444de7f0632a230b9d283c1f3227a",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 8
+        },
+        "blood.png": {
+          "sha256": "bff80449dcdf9389e8919717237b999a2e4731bcf3b0e1be2c4eef2356df3bf6",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 8
+        },
+        "body.png": {
+          "sha256": "9a7bade91225e2f724758158f752438e5e47a73246fa4f31188e26f9b8a0059f",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 48
+        },
+        "dirt.png": {
+          "sha256": "8157264cbd812e063549b916e4be28cd3b13891cfddd22bd88c4d0f0cc330829",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 1
+        },
+        "eyes-closed.png": {
+          "sha256": "70919eea86c79289e0432940945c5e7216559d14761e9da8179b9705e5556c49",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 31
+        },
+        "eyes-half.png": {
+          "sha256": "e51a655cdf8b42346cc0ff037794dfa1de25f174f9177edad05d2272a0590d0d",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 41
+        },
+        "eyes-neutral.png": {
+          "sha256": "4ec4e12fe42bfe426cb46aa923e72c3cda41a1b1fcf2a82745e3384f40deaf9d",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 41
+        },
+        "head-clean.png": {
+          "sha256": "0b997f85efeef1cb15715b7acae85d80fd86ce7d0a5d4dc497871f7d31e4ef83",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 48
+        },
+        "head.png": {
+          "sha256": "c7ec1e1ce65c01b270d8225bac8c8e7f48c9804ac22205792b121bb583b33817",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 48
+        },
+        "highlight-left.png": {
+          "sha256": "a068cf7b5175dad4c4ba0bbc2ac18dce5dc143df3626d4aff592bfb1e6b481e0",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 1
+        },
+        "mouth-neutral.png": {
+          "sha256": "4ab9126f01db5b4b6683c8dd6ae0670d5bf10c3d28450cc0aca80030fc7db44c",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 33
+        },
+        "mouth-open.png": {
+          "sha256": "329ac81e0f26aa2ed15e502efb4d56d7812504fa8e87b6b411ecc32135852753",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 36
+        },
+        "mouth-small.png": {
+          "sha256": "7df4326f56f9a5e4b505738ae2d095167fbfd87f1c5ad97b64aaea4e107ec852",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 37
+        },
+        "pallor.png": {
+          "sha256": "a80007914044aebfa269ced0f09c759f1c0f56414eecf799b6f246089d90c07a",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 1
+        },
+        "preview.png": {
+          "sha256": "330ed7cec768ae2437ff089e023d25055b0af5e3b7056db29cfa55b8843227e7",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 48
+        },
+        "shadow-left.png": {
+          "sha256": "8313071924840c44fef8d9cef69b633b49576f32905744be310691e9ac265317",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 1
+        }
+      }
+    },
+    {
+      "id": "fixer-c",
+      "recipe": {
+        "eyes": [
+          [
+            108,
+            56,
+            9,
+            4
+          ],
+          [
+            131,
+            64,
+            6,
+            4
+          ]
+        ],
+        "lip": [
+          [
+            101,
+            78
+          ],
+          [
+            107,
+            79
+          ],
+          [
+            114,
+            81
+          ],
+          [
+            120,
+            83
+          ],
+          [
+            124,
+            84
+          ]
+        ],
+        "ocular": [
+          {
+            "footprint": [
+              [
+                98,
+                52
+              ],
+              [
+                103,
+                51
+              ],
+              [
+                110,
+                53
+              ],
+              [
+                117,
+                57
+              ],
+              [
+                117,
+                61
+              ],
+              [
+                110,
+                63
+              ],
+              [
+                103,
+                60
+              ],
+              [
+                98,
+                56
+              ]
+            ],
+            "half": [
+              [
+                99,
+                53
+              ],
+              [
+                104,
+                54
+              ],
+              [
+                111,
+                57
+              ],
+              [
+                116,
+                59
+              ]
+            ],
+            "lower": [
+              [
+                99,
+                55
+              ],
+              [
+                104,
+                58
+              ],
+              [
+                111,
+                60
+              ],
+              [
+                116,
+                60
+              ]
+            ],
+            "closed": [
+              [
+                99,
+                54
+              ],
+              [
+                104,
+                57
+              ],
+              [
+                111,
+                59
+              ],
+              [
+                116,
+                59
+              ]
+            ]
+          },
+          {
+            "footprint": [
+              [
+                123,
+                60
+              ],
+              [
+                127,
+                59
+              ],
+              [
+                133,
+                61
+              ],
+              [
+                137,
+                64
+              ],
+              [
+                136,
+                68
+              ],
+              [
+                131,
+                70
+              ],
+              [
+                125,
+                67
+              ],
+              [
+                123,
+                63
+              ]
+            ],
+            "half": [
+              [
+                125,
+                61
+              ],
+              [
+                128,
+                63
+              ],
+              [
+                132,
+                65
+              ],
+              [
+                135,
+                66
+              ]
+            ],
+            "lower": [
+              [
+                125,
+                63
+              ],
+              [
+                129,
+                66
+              ],
+              [
+                133,
+                68
+              ],
+              [
+                135,
+                66
+              ]
+            ],
+            "closed": [
+              [
+                125,
+                63
+              ],
+              [
+                129,
+                66
+              ],
+              [
+                133,
+                67
+              ],
+              [
+                135,
+                66
+              ]
+            ]
+          }
+        ]
+      },
+      "neutral_reconstruction_exact": true,
+      "feature_pixels": {
+        "eyes": 273,
+        "mouth": 484
+      },
+      "outputs": {
+        "bandage.png": {
+          "sha256": "97da458815535e6e44da059cfd0cf75b380129f10a95c47e62addc7424e678f7",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 8
+        },
+        "blood.png": {
+          "sha256": "bff80449dcdf9389e8919717237b999a2e4731bcf3b0e1be2c4eef2356df3bf6",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 8
+        },
+        "body.png": {
+          "sha256": "a494570eda5218b15f642b89cdcc63456df6aceab7940c8b9835eee42b733fee",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 48
+        },
+        "dirt.png": {
+          "sha256": "9debab6171b9484cba5ab27d7454e38c6bcd54e8ffcbc96c360fd8f9cd2acab0",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 1
+        },
+        "eyes-closed.png": {
+          "sha256": "ff485c2b3c12c171ad2d7457ef8d5007dd171abbc11bfe55e21edfadae373e95",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 32
+        },
+        "eyes-half.png": {
+          "sha256": "2547f8f86abe24d62a921ece44a0f461dc234405ea908fcd57956190d2b9ec42",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 37
+        },
+        "eyes-neutral.png": {
+          "sha256": "f5e19773eb30a5362b964c95817eeac29bba44dc654c866a94e264c59b8f64ec",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 36
+        },
+        "head-clean.png": {
+          "sha256": "4eac23ac59d2a83daca1990bd3af9091affb62b5081036bb6101ee1eafe3b69e",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 48
+        },
+        "head.png": {
+          "sha256": "60af9a3f104c15cb03a5927ff9ced7031682534ec824f3e76847afb8e9c82925",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 48
+        },
+        "highlight-left.png": {
+          "sha256": "9044195803f27fd3a0710c99b4aba6e7a6ec53b3e9569a4008eae9ffb2b30d03",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 1
+        },
+        "mouth-neutral.png": {
+          "sha256": "10d4cf2ba7d856022d1c0b31cf0a0caee643760189fc1d4cbb03d8064daf4cac",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 42
+        },
+        "mouth-open.png": {
+          "sha256": "55ca82a0969df4711fd70f07ee91a7411e3cf56b415883392900edb4a4e5aaf8",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 41
+        },
+        "mouth-small.png": {
+          "sha256": "6ec842f1bb652ca824ea5decb123ab59a049db9d17a3eea6c336ec8d5dd61d65",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 42
+        },
+        "pallor.png": {
+          "sha256": "6cc11db4444e0cfd0d2093fc5a335686060a3a953f01d32ff653b40d67da7d56",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 1
+        },
+        "preview.png": {
+          "sha256": "1f2a91dcc9a285df9d7b422881bf8e3045cf73db6bea58e1f7b5267b0fc7f70c",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 48
+        },
+        "shadow-left.png": {
+          "sha256": "71429289d686bbc748c7e49432d921619e760310f42d530c08e56d1693762ec0",
+          "size": [
+            192,
+            192
+          ],
+          "colours": 1
+        }
+      }
+    }
+  ],
+  "failures": [],
+  "shared_inputs": {
+    "res://art/portraits/recruit-kit-v1/shared/body.png": "354a59a5cec26c785eb480c2f2652369d2e8b0acfeb3840efc968919c0c0ce9b",
+    "res://art/portraits/recruit-kit-v1/shared/jerkin.png": "b3ee6b1d563c33a4caad913e5ad15e1e52564c7e8b2c94b5b45242d154a52fcb"
+  }
+}

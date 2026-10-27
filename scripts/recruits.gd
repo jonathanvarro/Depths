@@ -34,12 +34,12 @@ const ROLES := {
 		"perk": "Strong back: +2 pack slots, and clears rubble without a tool.", "perk_name": "Strong back",
 	},
 	# The Fixer (#101, owner 2026-10-25): an expedition role more than a
-	# fighting one. Placeholder silhouette until ChatGPT's portraits.
+	# fighting one. Three fitted trader faces and a distinct fallback (#163).
 	"Fixer": {
 		"about": "Knows the price of everything and everyone at camp. Fights from the back with a sling, and not well.",
 		"stats": [1, 2, 2, 3], "aim": 0.72, "speed": 10, "hp": -2, "attack": Vector2i(1, 3),
 		"guard_factor": 0.5, "toughness": 0, "row": "back", "reach": true,
-		"portrait": "res://art/portraits/recruit-silhouettes-v1/scout.png",
+		"portrait": "res://art/portraits/recruit-silhouettes-v1/fixer.png",
 		"perk": "Eye for value: finds sell for 25% more, 10% off at the merchant, and one more recruit by the fire.", "perk_name": "Eye for value",
 	},
 }

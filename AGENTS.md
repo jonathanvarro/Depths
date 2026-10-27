@@ -112,6 +112,10 @@ Templates > Download and Install; already installed on the owner's PC).
   `data/portraits/elves-v1`, with fitted native animation, separate lighting and
   a swordswoman's three combat poses. Handoff: `docs/elves-and-sound-art.md`.
   These Unique rigs have no character/encounter assignment yet.
+  #163 adds three concept-faithful Fixer recruit rigs with red brocade coats,
+  separate lighting and individually tilted native animation: `docs/fixer-portraits.md`.
+  The combined recruit catalog has twelve faces; these three own their full
+  busts (`Unique` art rigs), distinct from the nine reusable plain-body faces.
 - `scripts/portrait_view.gd` – draws a PortraitSet; blink(), talk(), hurt(),
   set_condition().
 - `scripts/party_card.gd` – HUD card per party slot (portrait, name, health

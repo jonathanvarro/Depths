@@ -23,6 +23,21 @@
       "kind": "Unique",
       "id": "unique-alwen-v1",
       "purpose": "Sister Alwen's individual head/body/outfit and facial registration; no shared recruit socket."
+    },
+    {
+      "kind": "Unique",
+      "id": "unique-fixer-a-v1",
+      "purpose": "Concept-faithful Fixer recruit bust with its own garments and tilted facial registration; no generic jerkin substitution."
+    },
+    {
+      "kind": "Unique",
+      "id": "unique-fixer-b-v1",
+      "purpose": "Concept-faithful Fixer recruit bust with its own garments and tilted facial registration; no generic jerkin substitution."
+    },
+    {
+      "kind": "Unique",
+      "id": "unique-fixer-c-v1",
+      "purpose": "Concept-faithful Fixer recruit bust with its own garments and tilted facial registration; no generic jerkin substitution."
     }
   ],
   "portraits": [
@@ -151,6 +166,177 @@
       ],
       "separated_features": true,
       "review": "Textured drawings v4: original lip tissue, smaller shaded openings and curved lids retaining the lower iris in half blinks. V3 clean/neutral components and timing are preserved."
+    },
+    {
+      "id": "fixer-a",
+      "face_id": "fixer-a",
+      "label": "fixer-a",
+      "kind": "Unique",
+      "family": "unique-fixer-a-v1",
+      "resource": "res://data/portraits/fixer-v1/fixer-a.tres",
+      "layers": [
+        "res://art/portraits/fixer-v1/fixer-a/body.png",
+        "res://art/portraits/fixer-v1/fixer-a/head-clean.png",
+        "res://art/portraits/fixer-v1/fixer-a/eyes-neutral.png",
+        "res://art/portraits/fixer-v1/fixer-a/mouth-neutral.png"
+      ],
+      "neutral_eyes": "res://art/portraits/fixer-v1/fixer-a/eyes-neutral.png",
+      "neutral_mouth": "res://art/portraits/fixer-v1/fixer-a/mouth-neutral.png",
+      "frames": [
+        {
+          "name": "Neutral",
+          "eyes": "res://art/portraits/fixer-v1/fixer-a/eyes-neutral.png",
+          "mouth": "res://art/portraits/fixer-v1/fixer-a/mouth-neutral.png"
+        },
+        {
+          "name": "Half lid",
+          "eyes": "res://art/portraits/fixer-v1/fixer-a/eyes-half.png",
+          "mouth": "res://art/portraits/fixer-v1/fixer-a/mouth-neutral.png"
+        },
+        {
+          "name": "Closed",
+          "eyes": "res://art/portraits/fixer-v1/fixer-a/eyes-closed.png",
+          "mouth": "res://art/portraits/fixer-v1/fixer-a/mouth-neutral.png"
+        },
+        {
+          "name": "Small mouth",
+          "eyes": "res://art/portraits/fixer-v1/fixer-a/eyes-neutral.png",
+          "mouth": "res://art/portraits/fixer-v1/fixer-a/mouth-small.png"
+        },
+        {
+          "name": "Open mouth",
+          "eyes": "res://art/portraits/fixer-v1/fixer-a/eyes-neutral.png",
+          "mouth": "res://art/portraits/fixer-v1/fixer-a/mouth-open.png"
+        }
+      ],
+      "eye_box": [
+        86,
+        43,
+        143,
+        80
+      ],
+      "mouth_box": [
+        92,
+        70,
+        136,
+        108
+      ],
+      "separated_features": true,
+      "review": "Fixer concept-faithful rig: own complete red-coat bust, exact resting reconstruction, individually tilted ocular/lip mattes and v4 drawing functions. Neutral animation only."
+    },
+    {
+      "id": "fixer-b",
+      "face_id": "fixer-b",
+      "label": "fixer-b",
+      "kind": "Unique",
+      "family": "unique-fixer-b-v1",
+      "resource": "res://data/portraits/fixer-v1/fixer-b.tres",
+      "layers": [
+        "res://art/portraits/fixer-v1/fixer-b/body.png",
+        "res://art/portraits/fixer-v1/fixer-b/head-clean.png",
+        "res://art/portraits/fixer-v1/fixer-b/eyes-neutral.png",
+        "res://art/portraits/fixer-v1/fixer-b/mouth-neutral.png"
+      ],
+      "neutral_eyes": "res://art/portraits/fixer-v1/fixer-b/eyes-neutral.png",
+      "neutral_mouth": "res://art/portraits/fixer-v1/fixer-b/mouth-neutral.png",
+      "frames": [
+        {
+          "name": "Neutral",
+          "eyes": "res://art/portraits/fixer-v1/fixer-b/eyes-neutral.png",
+          "mouth": "res://art/portraits/fixer-v1/fixer-b/mouth-neutral.png"
+        },
+        {
+          "name": "Half lid",
+          "eyes": "res://art/portraits/fixer-v1/fixer-b/eyes-half.png",
+          "mouth": "res://art/portraits/fixer-v1/fixer-b/mouth-neutral.png"
+        },
+        {
+          "name": "Closed",
+          "eyes": "res://art/portraits/fixer-v1/fixer-b/eyes-closed.png",
+          "mouth": "res://art/portraits/fixer-v1/fixer-b/mouth-neutral.png"
+        },
+        {
+          "name": "Small mouth",
+          "eyes": "res://art/portraits/fixer-v1/fixer-b/eyes-neutral.png",
+          "mouth": "res://art/portraits/fixer-v1/fixer-b/mouth-small.png"
+        },
+        {
+          "name": "Open mouth",
+          "eyes": "res://art/portraits/fixer-v1/fixer-b/eyes-neutral.png",
+          "mouth": "res://art/portraits/fixer-v1/fixer-b/mouth-open.png"
+        }
+      ],
+      "eye_box": [
+        86,
+        43,
+        143,
+        80
+      ],
+      "mouth_box": [
+        92,
+        70,
+        136,
+        108
+      ],
+      "separated_features": true,
+      "review": "Fixer concept-faithful rig: own complete red-coat bust, exact resting reconstruction, individually tilted ocular/lip mattes and v4 drawing functions. Neutral animation only."
+    },
+    {
+      "id": "fixer-c",
+      "face_id": "fixer-c",
+      "label": "fixer-c",
+      "kind": "Unique",
+      "family": "unique-fixer-c-v1",
+      "resource": "res://data/portraits/fixer-v1/fixer-c.tres",
+      "layers": [
+        "res://art/portraits/fixer-v1/fixer-c/body.png",
+        "res://art/portraits/fixer-v1/fixer-c/head-clean.png",
+        "res://art/portraits/fixer-v1/fixer-c/eyes-neutral.png",
+        "res://art/portraits/fixer-v1/fixer-c/mouth-neutral.png"
+      ],
+      "neutral_eyes": "res://art/portraits/fixer-v1/fixer-c/eyes-neutral.png",
+      "neutral_mouth": "res://art/portraits/fixer-v1/fixer-c/mouth-neutral.png",
+      "frames": [
+        {
+          "name": "Neutral",
+          "eyes": "res://art/portraits/fixer-v1/fixer-c/eyes-neutral.png",
+          "mouth": "res://art/portraits/fixer-v1/fixer-c/mouth-neutral.png"
+        },
+        {
+          "name": "Half lid",
+          "eyes": "res://art/portraits/fixer-v1/fixer-c/eyes-half.png",
+          "mouth": "res://art/portraits/fixer-v1/fixer-c/mouth-neutral.png"
+        },
+        {
+          "name": "Closed",
+          "eyes": "res://art/portraits/fixer-v1/fixer-c/eyes-closed.png",
+          "mouth": "res://art/portraits/fixer-v1/fixer-c/mouth-neutral.png"
+        },
+        {
+          "name": "Small mouth",
+          "eyes": "res://art/portraits/fixer-v1/fixer-c/eyes-neutral.png",
+          "mouth": "res://art/portraits/fixer-v1/fixer-c/mouth-small.png"
+        },
+        {
+          "name": "Open mouth",
+          "eyes": "res://art/portraits/fixer-v1/fixer-c/eyes-neutral.png",
+          "mouth": "res://art/portraits/fixer-v1/fixer-c/mouth-open.png"
+        }
+      ],
+      "eye_box": [
+        86,
+        43,
+        143,
+        80
+      ],
+      "mouth_box": [
+        92,
+        70,
+        136,
+        108
+      ],
+      "separated_features": true,
+      "review": "Fixer concept-faithful rig: own complete red-coat bust, exact resting reconstruction, individually tilted ocular/lip mattes and v4 drawing functions. Neutral animation only."
     },
     {
       "id": "mara",

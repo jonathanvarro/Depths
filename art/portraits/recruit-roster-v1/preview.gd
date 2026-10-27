@@ -27,7 +27,9 @@ func _ready() -> void:
 	canvas = Control.new()
 	canvas.size = Vector2(800,560)
 	add_child(canvas)
-	profiles = JSON.parse_string(FileAccess.get_file_as_string("res://art/portraits/recruit-roster-v1/catalog.json")).portraits
+	# This fixed three-column historical scene covers the original nine faces;
+	# later role packs have their own native/phone inspectors (Fixer: #163).
+	profiles = JSON.parse_string(FileAccess.get_file_as_string("res://art/portraits/recruit-roster-v1/catalog.json")).portraits.filter(func(p): return p.role in ["Warden", "Scout", "Brawler"])
 	for col in 3:
 		canvas.add_child(_label(["Warden","Scout","Brawler"][col],Vector2(col*256+16,5),20))
 	for i in profiles.size():

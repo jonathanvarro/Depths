@@ -1,0 +1,27 @@
+{
+  "captures": [
+    "godot-neutral-1280.png",
+    "godot-eyes-half-1280.png",
+    "godot-eyes-closed-1280.png",
+    "godot-mouth-small-1280.png",
+    "godot-mouth-open-1280.png",
+    "godot-warm-bandage-1280.png",
+    "godot-dim-pallor-1280.png",
+    "godot-blood-1280.png",
+    "godot-dirt-1280.png",
+    "godot-neutral-1278.png",
+    "godot-eyes-half-1278.png",
+    "godot-eyes-closed-1278.png",
+    "godot-mouth-small-1278.png",
+    "godot-mouth-open-1278.png",
+    "godot-warm-bandage-1278.png",
+    "godot-dim-pallor-1278.png",
+    "godot-blood-1278.png",
+    "godot-dirt-1278.png"
+  ],
+  "checks": 476,
+  "failures": [],
+  "godot": "4.7.2 Mobile D3D12",
+  "physical_iphone_test": false,
+  "save_scope": "In-memory pack/unpack; no disk saves or player preferences touched"
+}

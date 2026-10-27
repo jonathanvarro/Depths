@@ -12,6 +12,7 @@ The owner chose precise edits to the existing pixels and subsequently spotted a 
 
 - **Reusable NPC/minor-character kit:** `average-covered-adult-v1`, nine individually fitted faces with shared body/jerkin. Worried/exhausted variants remain static.
 - **Unique heroes:** `unique-mara-v1`, `unique-corin-v1`, `unique-alwen-v1`. Each owns its anatomy, garments and face components. Mara's underlayer uses her same face components.
+- **Unique Fixer recruit rigs (#163):** three red-coat busts following the owner's supplied concepts. Each owns its garments, tilted face registration and complete components; [Fixer handoff](fixer-portraits.md). Unique is an art classification, not a new gameplay role or story identity.
 - Every PortraitSet retains its `rig_kind`, `rig_family`, `face_id` and stable resource path. Sharing a canvas or body never permits sharing another face's animation.
 
 Each animated face now uses a **clean character plate**, with its complete eye openings/lashes and lips removed. Separate neutral components restore the original resting portrait **byte-for-byte**. Half/closed lids and speaking drawings start on that clean surface and replace the complete feature, including outer lashes and lip corners. The rounded mouth retracts the corners; the old resting lip line is absent. Corin's open mouth retains his missing front tooth.

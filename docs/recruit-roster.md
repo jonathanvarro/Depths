@@ -1,5 +1,10 @@
 # Recruit faces · nine-character roster
 
+**Current extension (#163):** the combined catalog now has twelve faces.
+[Three concept-faithful Fixer rigs](fixer-portraits.md) have their own red-coat
+busts and fitted animation. This page and its fixed review retain the original
+nine shared-body faces and their verification history.
+
 Artwork for [#82](https://github.com/jonathanvarro/Depths/issues/82), extending
 the [shared portrait kit](recruit-portrait-kit.md). Three faces per role,
 with seven new heads and the original Warden/Scout preserved.

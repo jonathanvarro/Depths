@@ -18,6 +18,9 @@ func check(ok: bool, message: String) -> void:
 
 func _run() -> void:
 	var catalog: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(DIR+"catalog.json"))
+	# This regression fixture owns the original nine faces and fixed review
+	# scene. New Fixer animation/recruit/save coverage: check_fixer_portraits.gd.
+	catalog.portraits = catalog.portraits.filter(func(p): return p.role in ["Warden", "Scout", "Brawler"])
 	check(catalog.portraits.size() == 9,"Nine unique roster entries")
 	var ids: Array[String] = []
 	var body: Texture2D

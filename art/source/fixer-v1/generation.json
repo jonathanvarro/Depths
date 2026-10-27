@@ -1,0 +1,715 @@
+{
+  "tool": "image_gen.imagegen (built-in)",
+  "prompt_file": "prompts.json",
+  "masters": {
+    "fixer-a": {
+      "file": "res://art/source/fixer-v1/fixer-a-master.png",
+      "sha256": "dc5c431d2a8655a152a37eade619c500e31009de74a7bc40443753cf83d3f4b7",
+      "size": [
+        1254,
+        1254
+      ],
+      "original_path": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-00bdb431-5077-4a1c-9d44-e2bf59b20cb0.png"
+    },
+    "fixer-b": {
+      "file": "res://art/source/fixer-v1/fixer-b-master.png",
+      "sha256": "64f059a0b645bc27a36cdd9e8cc3f669c2932d4c673aa789ff94e3bbb7418069",
+      "size": [
+        1254,
+        1254
+      ],
+      "original_path": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-3b469114-6671-4711-8f62-7e578aa9a88e.png"
+    },
+    "fixer-c": {
+      "file": "res://art/source/fixer-v1/fixer-c-master.png",
+      "sha256": "598e8b1570ec11a27a08173a710e28fd755097d01cf4f56fbcee8a3362e7dd1e",
+      "size": [
+        1254,
+        1254
+      ],
+      "original_path": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-b452fe25-dea1-4801-a435-9e3e3497df7a.png"
+    }
+  },
+  "references": {
+    "res://art/source/fixer-v1/references/male-concept.png": "81a9c0653c6a3931a968f158d0ead2b0549a672af5635fdc9dd52c3c8cc76bf1",
+    "res://art/source/fixer-v1/references/female-concept.png": "12faaab48be11b0dc8abc385a319d53abb7d6c865a6ed8bf2f7c6f51db586158"
+  },
+  "c_additional_reference": {
+    "file": "res://art/source/fixer-v1/fixer-a-master.png",
+    "sha256": "dc5c431d2a8655a152a37eade619c500e31009de74a7bc40443753cf83d3f4b7",
+    "role": "Costume, scale and pixel style; not identity"
+  },
+  "owner_reference_provenance": {
+    "supplied": "2026-10-27",
+    "description": "Owner identified these as previously generated Fixer concepts; original generation prompts were not supplied.",
+    "male_clipboard_original": "C:/Users/jonat/AppData/Local/Temp/codex-clipboard-fa76d361-a1be-42db-9789-b31e94c73c49.png",
+    "female_clipboard_original": "C:/Users/jonat/AppData/Local/Temp/codex-clipboard-88ce502b-0401-4d20-aabd-1c1309b1b376.png"
+  },
+  "export_method": "Generated masters; full-square 184px resize with 4px inset; native face-specific v4 lid/lip fitting.",
+  "recipes": {
+    "fixer-a": {
+      "eyes": [
+        [
+          106,
+          56,
+          9,
+          4
+        ],
+        [
+          128,
+          63,
+          6,
+          4
+        ]
+      ],
+      "lip": [
+        [
+          99,
+          78
+        ],
+        [
+          105,
+          79
+        ],
+        [
+          111,
+          81
+        ],
+        [
+          117,
+          82
+        ],
+        [
+          121,
+          83
+        ]
+      ],
+      "ocular": [
+        {
+          "footprint": [
+            [
+              97,
+              53
+            ],
+            [
+              101,
+              51
+            ],
+            [
+              108,
+              53
+            ],
+            [
+              115,
+              56
+            ],
+            [
+              117,
+              59
+            ],
+            [
+              114,
+              62
+            ],
+            [
+              109,
+              62
+            ],
+            [
+              101,
+              58
+            ],
+            [
+              97,
+              56
+            ]
+          ],
+          "half": [
+            [
+              98,
+              53
+            ],
+            [
+              103,
+              55
+            ],
+            [
+              109,
+              57
+            ],
+            [
+              114,
+              59
+            ]
+          ],
+          "lower": [
+            [
+              98,
+              55
+            ],
+            [
+              103,
+              58
+            ],
+            [
+              109,
+              60
+            ],
+            [
+              114,
+              60
+            ]
+          ],
+          "closed": [
+            [
+              98,
+              54
+            ],
+            [
+              103,
+              57
+            ],
+            [
+              109,
+              59
+            ],
+            [
+              114,
+              59
+            ]
+          ]
+        },
+        {
+          "footprint": [
+            [
+              122,
+              59
+            ],
+            [
+              125,
+              58
+            ],
+            [
+              131,
+              60
+            ],
+            [
+              135,
+              63
+            ],
+            [
+              134,
+              67
+            ],
+            [
+              129,
+              68
+            ],
+            [
+              123,
+              65
+            ],
+            [
+              121,
+              62
+            ]
+          ],
+          "half": [
+            [
+              123,
+              60
+            ],
+            [
+              126,
+              61
+            ],
+            [
+              130,
+              63
+            ],
+            [
+              133,
+              65
+            ]
+          ],
+          "lower": [
+            [
+              123,
+              62
+            ],
+            [
+              127,
+              65
+            ],
+            [
+              131,
+              66
+            ],
+            [
+              133,
+              65
+            ]
+          ],
+          "closed": [
+            [
+              123,
+              61
+            ],
+            [
+              126,
+              64
+            ],
+            [
+              130,
+              65
+            ],
+            [
+              133,
+              65
+            ]
+          ]
+        }
+      ]
+    },
+    "fixer-b": {
+      "eyes": [
+        [
+          107,
+          60,
+          9,
+          4
+        ],
+        [
+          129,
+          66,
+          6,
+          4
+        ]
+      ],
+      "lip": [
+        [
+          102,
+          82
+        ],
+        [
+          108,
+          83
+        ],
+        [
+          115,
+          85
+        ],
+        [
+          120,
+          86
+        ],
+        [
+          124,
+          86
+        ]
+      ],
+      "ocular": [
+        {
+          "footprint": [
+            [
+              97,
+              57
+            ],
+            [
+              101,
+              54
+            ],
+            [
+              108,
+              55
+            ],
+            [
+              115,
+              59
+            ],
+            [
+              117,
+              62
+            ],
+            [
+              112,
+              66
+            ],
+            [
+              105,
+              66
+            ],
+            [
+              99,
+              62
+            ]
+          ],
+          "half": [
+            [
+              99,
+              57
+            ],
+            [
+              104,
+              58
+            ],
+            [
+              110,
+              60
+            ],
+            [
+              115,
+              61
+            ]
+          ],
+          "lower": [
+            [
+              99,
+              58
+            ],
+            [
+              104,
+              62
+            ],
+            [
+              110,
+              64
+            ],
+            [
+              115,
+              62
+            ]
+          ],
+          "closed": [
+            [
+              99,
+              58
+            ],
+            [
+              104,
+              61
+            ],
+            [
+              110,
+              63
+            ],
+            [
+              115,
+              62
+            ]
+          ]
+        },
+        {
+          "footprint": [
+            [
+              121,
+              63
+            ],
+            [
+              124,
+              60
+            ],
+            [
+              130,
+              61
+            ],
+            [
+              135,
+              64
+            ],
+            [
+              135,
+              68
+            ],
+            [
+              130,
+              71
+            ],
+            [
+              124,
+              69
+            ],
+            [
+              121,
+              66
+            ]
+          ],
+          "half": [
+            [
+              123,
+              63
+            ],
+            [
+              126,
+              63
+            ],
+            [
+              131,
+              65
+            ],
+            [
+              134,
+              66
+            ]
+          ],
+          "lower": [
+            [
+              123,
+              65
+            ],
+            [
+              127,
+              68
+            ],
+            [
+              131,
+              69
+            ],
+            [
+              134,
+              67
+            ]
+          ],
+          "closed": [
+            [
+              123,
+              64
+            ],
+            [
+              127,
+              67
+            ],
+            [
+              131,
+              68
+            ],
+            [
+              134,
+              67
+            ]
+          ]
+        }
+      ]
+    },
+    "fixer-c": {
+      "eyes": [
+        [
+          108,
+          56,
+          9,
+          4
+        ],
+        [
+          131,
+          64,
+          6,
+          4
+        ]
+      ],
+      "lip": [
+        [
+          101,
+          78
+        ],
+        [
+          107,
+          79
+        ],
+        [
+          114,
+          81
+        ],
+        [
+          120,
+          83
+        ],
+        [
+          124,
+          84
+        ]
+      ],
+      "ocular": [
+        {
+          "footprint": [
+            [
+              98,
+              52
+            ],
+            [
+              103,
+              51
+            ],
+            [
+              110,
+              53
+            ],
+            [
+              117,
+              57
+            ],
+            [
+              117,
+              61
+            ],
+            [
+              110,
+              63
+            ],
+            [
+              103,
+              60
+            ],
+            [
+              98,
+              56
+            ]
+          ],
+          "half": [
+            [
+              99,
+              53
+            ],
+            [
+              104,
+              54
+            ],
+            [
+              111,
+              57
+            ],
+            [
+              116,
+              59
+            ]
+          ],
+          "lower": [
+            [
+              99,
+              55
+            ],
+            [
+              104,
+              58
+            ],
+            [
+              111,
+              60
+            ],
+            [
+              116,
+              60
+            ]
+          ],
+          "closed": [
+            [
+              99,
+              54
+            ],
+            [
+              104,
+              57
+            ],
+            [
+              111,
+              59
+            ],
+            [
+              116,
+              59
+            ]
+          ]
+        },
+        {
+          "footprint": [
+            [
+              123,
+              60
+            ],
+            [
+              127,
+              59
+            ],
+            [
+              133,
+              61
+            ],
+            [
+              137,
+              64
+            ],
+            [
+              136,
+              68
+            ],
+            [
+              131,
+              70
+            ],
+            [
+              125,
+              67
+            ],
+            [
+              123,
+              63
+            ]
+          ],
+          "half": [
+            [
+              125,
+              61
+            ],
+            [
+              128,
+              63
+            ],
+            [
+              132,
+              65
+            ],
+            [
+              135,
+              66
+            ]
+          ],
+          "lower": [
+            [
+              125,
+              63
+            ],
+            [
+              129,
+              66
+            ],
+            [
+              133,
+              68
+            ],
+            [
+              135,
+              66
+            ]
+          ],
+          "closed": [
+            [
+              125,
+              63
+            ],
+            [
+              129,
+              66
+            ],
+            [
+              133,
+              67
+            ],
+            [
+              135,
+              66
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

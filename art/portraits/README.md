@@ -8,6 +8,7 @@ Start with [the classified registry](../../data/portraits/catalog.json) and [pau
 | Unique · Mara | Individual anatomy, neckline, tunic and underlayer variants. | mara-neutral-v1 |
 | Unique · Corin | Individual bald head, neck, broad body and armour. | main-heroes-v1/corin |
 | Unique · Sister Alwen | Individual face, headscarf, body and clothing. | main-heroes-v1/alwen |
+| Unique · Fixer A/B/C | Three concept-faithful recruit busts with their own red coats, tilted face registration and animation. Ordinary recruit roles; art rigs are individual. | fixer-v1; [handoff](../../docs/fixer-portraits.md) |
 
 The existing asset/resource paths remain stable for saves and references. `rig_kind`, `rig_family` and `face_id` identify the real grouping in each PortraitSet. Standard/reusable does **not** mean interchangeable facial animation across heads. New NPCs may reuse a validated body/socket and outfit, but need their own face-matched drawings; additional body shapes require another template. Unique hero components are not stock NPC parts.
 

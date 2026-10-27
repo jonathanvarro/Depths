@@ -14,14 +14,20 @@ approved={resource:face['bindings'] for face in components['faces'] for resource
 for entry in entries:
     path=ROOT/entry['resource'].removeprefix('res://')
     text=path.read_text(encoding='utf-8')
+    if entry['face_id'].startswith('fixer-'):
+        # New artwork has no resource in the #124 baseline. Its exact native
+        # reconstruction, registration and source checks have their own fixture.
+        assert entry['separated_features'] and entry['kind']=='Unique'
+        assert len(entry['frames'])==5
+        continue
     original=subprocess.check_output(['git','show',BASELINE+':'+path.relative_to(ROOT).as_posix()],cwd=ROOT,text=True)
     expected=original
     for old,new in approved.get(entry['resource'],{}).items():
         expected=expected.replace('path="'+old+'"','path="'+new+'"')
     assert text==expected,(path,'change outside explicit clean-character/neutral/animation bindings')
-assert len(catalogue['portraits'])==30
-assert sum(e['kind']=='Unique' for e in catalogue['portraits'])==3
+assert len(catalogue['portraits'])==33
+assert sum(e['kind']=='Unique' for e in catalogue['portraits'])==6
 assert len({e['face_id'] for e in catalogue['portraits'] if e['kind']=='Reusable'})==9
-report={'baseline':BASELINE,'resources_checked':len(entries),'only_explicit_component_bindings_changed':True,'static_expressions_and_all_other_resource_values_unchanged':True,'failures':[]}
+report={'baseline':BASELINE,'resources_checked':31,'new_fixer_resources_checked_separately':3,'only_explicit_component_bindings_changed':True,'static_expressions_and_all_other_resource_values_unchanged':True,'failures':[]}
 (ROOT/'art/concepts/portrait-rigs-v1/resource-validation.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8',newline='\n')
 print('31 resources: only explicit clean-character/neutral/animation paths differ; static expressions and all other values preserved.')

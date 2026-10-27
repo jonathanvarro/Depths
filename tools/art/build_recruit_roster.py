@@ -54,6 +54,10 @@ def resources(id):
         (DATA/(id+('' if emotion=='neutral' else '-'+emotion)+'.tres')).write_text('\n'.join(lines)+'\n',encoding='utf-8',newline='\n')
 
 def main():
+    # Later role packs (e.g. #163 Fixer) own their sources and exporter. Keep
+    # their catalog records when rebuilding these original seven heads.
+    combined_path=OUT/'catalog.json'
+    extras=[e for e in json.loads(combined_path.read_text())['portraits'] if e['id'] not in ORDER] if combined_path.exists() else []
     for folder in [OUT,DATA,REVIEW]:folder.mkdir(parents=True,exist_ok=True)
     body=Image.open(SHARED/'body.png').convert('RGBA')
     outfit=Image.open(SHARED/'jerkin.png').convert('RGBA')
@@ -136,9 +140,14 @@ def main():
             'portrait_set':uri(DATA/(id+'.tres')),'expressions':['neutral','worried','exhausted'],
             'shadow':uri(dest/'shadow-left.png'),'highlight':uri(dest/'highlight-left.png')})
     catalog['portraits'].sort(key=lambda e:ORDER.index(e['id']))
-    catalog['by_role']={r:[e['id'] for e in catalog['portraits'] if e['role']==r] for r in ['Warden','Scout','Brawler']}
+    historical_portraits=list(catalog['portraits'])
+    catalog['portraits'] += extras
+    roles=list(dict.fromkeys(e['role'] for e in catalog['portraits']))
+    catalog['by_role']={r:[e['id'] for e in catalog['portraits'] if e['role']==r] for r in roles}
     assert all(len(ids)==3 for ids in catalog['by_role'].values())
     (OUT/'catalog.json').write_text(json.dumps(catalog,indent=2)+'\n',encoding='utf-8',newline='\n')
+    # The original nine-face contact sheets remain a historical review.
+    catalog['portraits']=historical_portraits
     board=Image.new('RGBA',(648,680),'#202624');draw=ImageDraw.Draw(board)
     card=Image.new('RGBA',(360,368),'#202624');small_draw=ImageDraw.Draw(card)
     for i,e in enumerate(catalog['portraits']):

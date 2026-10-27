@@ -121,6 +121,39 @@
       ],
       "shadow": "res://art/portraits/recruit-roster-v1/brawler-c/shadow-left.png",
       "highlight": "res://art/portraits/recruit-roster-v1/brawler-c/highlight-left.png"
+    },
+    {
+      "id": "fixer-a",
+      "role": "Fixer",
+      "portrait": "res://art/portraits/fixer-v1/fixer-a/preview.png",
+      "portrait_set": "res://data/portraits/fixer-v1/fixer-a.tres",
+      "expressions": [
+        "neutral"
+      ],
+      "shadow": "res://art/portraits/fixer-v1/fixer-a/shadow-left.png",
+      "highlight": "res://art/portraits/fixer-v1/fixer-a/highlight-left.png"
+    },
+    {
+      "id": "fixer-b",
+      "role": "Fixer",
+      "portrait": "res://art/portraits/fixer-v1/fixer-b/preview.png",
+      "portrait_set": "res://data/portraits/fixer-v1/fixer-b.tres",
+      "expressions": [
+        "neutral"
+      ],
+      "shadow": "res://art/portraits/fixer-v1/fixer-b/shadow-left.png",
+      "highlight": "res://art/portraits/fixer-v1/fixer-b/highlight-left.png"
+    },
+    {
+      "id": "fixer-c",
+      "role": "Fixer",
+      "portrait": "res://art/portraits/fixer-v1/fixer-c/preview.png",
+      "portrait_set": "res://data/portraits/fixer-v1/fixer-c.tres",
+      "expressions": [
+        "neutral"
+      ],
+      "shadow": "res://art/portraits/fixer-v1/fixer-c/shadow-left.png",
+      "highlight": "res://art/portraits/fixer-v1/fixer-c/highlight-left.png"
     }
   ],
   "issue": 82,
@@ -139,6 +172,11 @@
       "brawler-a",
       "brawler-b",
       "brawler-c"
+    ],
+    "Fixer": [
+      "fixer-a",
+      "fixer-b",
+      "fixer-c"
     ]
   }
 }

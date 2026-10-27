@@ -22,7 +22,7 @@ def inspect(path):
         return [ext[i] for i in re.findall(r'ExtResource\("([^"]+)"\)',value[1])] if value else []
     stem=path.stem
     face='mara' if stem=='underlayer' else stem.removesuffix('-worried').removesuffix('-exhausted')
-    unique=path.parent==ROOT/'data/portraits' or stem=='underlayer'
+    unique=path.parent==ROOT/'data/portraits' or stem=='underlayer' or face.startswith('fixer-')
     kind='Unique' if unique else 'Reusable'
     family='unique-'+face+'-v1' if unique else 'average-covered-adult-v1'
     # Explicit metadata preserves stable paths and save compatibility.
@@ -37,17 +37,29 @@ def inspect(path):
     frames += [{'name':name,'eyes':texture('eyes'),'mouth':p} for name,p in zip(['Small mouth','Open mouth','Round mouth'],textures('talk_frames'))]
     boxes={'mara':[[80,55,141,85],[92,93,128,112]],'corin':[[80,55,140,81],[87,83,128,104]],'alwen':[[84,56,140,78],[98,87,129,104]]}
     eye,mouth=boxes.get(face,[[78,53,139,82],[89,91,125,108]] if face in ['warden-a','scout-a'] else [[73,51,142,82],[82,89,132,112]])
+    if face.startswith('fixer-'):eye,mouth=[[86,43,143,80],[92,70,136,108]]
     refined=any('/frames-pixel-v4/' in p for p in textures('blink_frames')+textures('talk_frames'))
-    corrected=refined or any('/frames-pixel-v3/' in p for p in textures('blink_frames')+textures('talk_frames'))
+    fixer=face.startswith('fixer-')
+    corrected=fixer or refined or any('/frames-pixel-v3/' in p for p in textures('blink_frames')+textures('talk_frames'))
     return {'id':stem,'face_id':face,'label':UNIQUE.get(face,face)+((' · '+stem.rsplit('-',1)[-1]) if stem!=face else ''),'kind':kind,'family':family,
             'resource':'res://'+path.relative_to(ROOT).as_posix(),'layers':layers,'neutral_eyes':texture('eyes'),'neutral_mouth':texture('mouth'),
-            'frames':frames,'eye_box':eye,'mouth_box':mouth,'separated_features':corrected,'review':('Textured drawings v4: original lip tissue, smaller shaded openings and curved lids retaining the lower iris in half blinks. V3 clean/neutral components and timing are preserved.' if refined else 'Complete components v3: clean underlying face; neutral restores the original exactly.') if corrected else 'Static expression; no neutral blink/talk frames borrowed.'}
+            'frames':frames,'eye_box':eye,'mouth_box':mouth,'separated_features':corrected,'review':('Fixer concept-faithful rig: own complete red-coat bust, exact resting reconstruction, individually tilted ocular/lip mattes and v4 drawing functions. Neutral animation only.' if fixer else ('Textured drawings v4: original lip tissue, smaller shaded openings and curved lids retaining the lower iris in half blinks. V3 clean/neutral components and timing are preserved.' if refined else 'Complete components v3: clean underlying face; neutral restores the original exactly.')) if corrected else 'Static expression; no neutral blink/talk frames borrowed.'}
 
 def main():
     OUT.mkdir(parents=True,exist_ok=True);write(OUT/'.gdignore','')
-    entries=[inspect(p) for p in sorted((ROOT/'data/portraits').rglob('*.tres'))]
+    # Extend the human/recruit registry from its own stable entries and roster;
+    # independently catalogued elf rigs must retain their unique metadata.
+    previous=json.loads((ROOT/'data/portraits/catalog.json').read_text(encoding='utf-8'))
+    paths={ROOT/e['resource'].removeprefix('res://') for e in previous['portraits']}
+    roster=json.loads((ROOT/'art/portraits/recruit-roster-v1/catalog.json').read_text(encoding='utf-8'))
+    for profile in roster['portraits']:
+        for expression in profile['expressions']:
+            suffix='' if expression=='neutral' else '-'+expression
+            paths.add(ROOT/(profile['portrait_set'].removeprefix('res://').removesuffix('.tres')+suffix+'.tres'))
+    entries=[inspect(p) for p in sorted(paths)]
     catalogue={'canvas':[192,192],'families':[{'kind':'Reusable','id':'average-covered-adult-v1','purpose':'Standard NPC/minor character body and outfit socket; each face owns its facial drawings.'}]+[{'kind':'Unique','id':'unique-'+key+'-v1','purpose':label+"'s individual head/body/outfit and facial registration; no shared recruit socket."} for key,label in UNIQUE.items()],
                'portraits':entries,'supporting_resources':[inspect(ROOT/'art/portraits/mara-neutral-v1/underlayer.tres')],'rule':'Sharing a canvas or body never licenses sharing another face\u2019s eye/mouth frames.'}
+    catalogue['families'] += [{'kind':'Unique','id':e['family'],'purpose':'Concept-faithful Fixer recruit bust with its own garments and tilted facial registration; no generic jerkin substitution.'} for e in entries if e['face_id'].startswith('fixer-')]
     write(ROOT/'data/portraits/catalog.json',json.dumps(catalogue,indent=2,ensure_ascii=False)+'\n')
     review=json.loads(json.dumps(catalogue))
     def remap(value):
@@ -63,6 +75,6 @@ def main():
     html=(OUT/'layout.html').read_text(encoding='utf-8').replace('@@data@@','const PORTRAITS='+json.dumps(review,ensure_ascii=False)+';').replace('@@script@@',(OUT/'inspector.js').read_text(encoding='utf-8'))
     write(OUT/'inspector.html',html.rstrip()+'\n')
     write(OUT/'registry-validation.json',json.dumps({'resources':len(entries),'unique':sum(e['kind']=='Unique' for e in entries),'reusable':sum(e['kind']=='Reusable' for e in entries),'paused_by_default':True,'failures':[]},indent=2)+'\n')
-    print(f'Classified {len(entries)} stable portrait paths: 3 unique, 27 reusable/expression resources.')
+    print(f'Classified {len(entries)} stable human/recruit portrait paths; independently catalogued elf rigs preserved.')
 
 if __name__=='__main__':main()
