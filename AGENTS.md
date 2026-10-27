@@ -280,6 +280,11 @@ Templates > Download and Install; already installed on the owner's PC).
 - Settings (#52): `scripts/settings.gd` (static values, `apply()`, audio
   buses Master/Music/Effects; test runs use test_settings.cfg) and
   `scripts/settings_screen.gd`. New sound players should set `bus`.
+  Quest log and Settings share `scripts/field_menu.gd` (#165): responsive frame,
+  persistent header/Close, safe areas, modal focus and Escape handling.
+  `docs/journal-and-settings.md` covers journal list/paper details, compact
+  navigation, immediate preferences, credits and actual caller checks.
+  Preserve `open(camp)` / `open()` / `closed`; callers use `set_safe_area()`.
 - Main heroes (#83): `Companion.main_hero`, `is_unconscious()`,
   `is_with_party()`. Secured route (#79): CampState `floor2_reached`,
   `route_open()`, `buy_route()`; CampScreen `cave_chosen(start_depth)`.

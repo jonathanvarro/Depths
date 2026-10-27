@@ -1,0 +1,186 @@
+{
+  "checks": 45,
+  "failures": [],
+  "results": [
+    {
+      "ok": true,
+      "label": "Every recorded capture selectable"
+    },
+    {
+      "ok": true,
+      "label": "Capture decodes main-journal-normal.png"
+    },
+    {
+      "ok": true,
+      "label": "Capture decodes main-settings-normal.png"
+    },
+    {
+      "ok": true,
+      "label": "Capture decodes main-journal-larger.png"
+    },
+    {
+      "ok": true,
+      "label": "Capture decodes main-settings-larger.png"
+    },
+    {
+      "ok": true,
+      "label": "Capture decodes journal-1280-normal.png"
+    },
+    {
+      "ok": true,
+      "label": "Capture decodes settings-1280-normal.png"
+    },
+    {
+      "ok": true,
+      "label": "Capture decodes credits-1280-normal.png"
+    },
+    {
+      "ok": true,
+      "label": "Capture decodes journal-1280-larger.png"
+    },
+    {
+      "ok": true,
+      "label": "Capture decodes settings-1280-larger.png"
+    },
+    {
+      "ok": true,
+      "label": "Capture decodes credits-1280-larger.png"
+    },
+    {
+      "ok": true,
+      "label": "Capture decodes journal-1278-normal.png"
+    },
+    {
+      "ok": true,
+      "label": "Capture decodes settings-1278-normal.png"
+    },
+    {
+      "ok": true,
+      "label": "Capture decodes credits-1278-normal.png"
+    },
+    {
+      "ok": true,
+      "label": "Capture decodes journal-1278-larger.png"
+    },
+    {
+      "ok": true,
+      "label": "Capture decodes settings-1278-larger.png"
+    },
+    {
+      "ok": true,
+      "label": "Capture decodes credits-1278-larger.png"
+    },
+    {
+      "ok": true,
+      "label": "Capture decodes journal-1334-normal.png"
+    },
+    {
+      "ok": true,
+      "label": "Capture decodes settings-1334-normal.png"
+    },
+    {
+      "ok": true,
+      "label": "Capture decodes credits-1334-normal.png"
+    },
+    {
+      "ok": true,
+      "label": "Capture decodes journal-1334-larger.png"
+    },
+    {
+      "ok": true,
+      "label": "Capture decodes settings-1334-larger.png"
+    },
+    {
+      "ok": true,
+      "label": "Capture decodes credits-1334-larger.png"
+    },
+    {
+      "ok": true,
+      "label": "Capture decodes journal-844-normal.png"
+    },
+    {
+      "ok": true,
+      "label": "Capture decodes journal-detail-844-normal.png"
+    },
+    {
+      "ok": true,
+      "label": "Capture decodes settings-844-normal.png"
+    },
+    {
+      "ok": true,
+      "label": "Capture decodes credits-844-normal.png"
+    },
+    {
+      "ok": true,
+      "label": "Capture decodes journal-844-larger.png"
+    },
+    {
+      "ok": true,
+      "label": "Capture decodes journal-detail-844-larger.png"
+    },
+    {
+      "ok": true,
+      "label": "Capture decodes settings-844-larger.png"
+    },
+    {
+      "ok": true,
+      "label": "Capture decodes credits-844-larger.png"
+    },
+    {
+      "ok": true,
+      "label": "Capture decodes journal-empty-phone.png"
+    },
+    {
+      "ok": true,
+      "label": "Capture decodes journal-scrolled-phone.png"
+    },
+    {
+      "ok": true,
+      "label": "Capture decodes settings-breakpoint-larger.png"
+    },
+    {
+      "ok": true,
+      "label": "Capture decodes title-settings-normal.png"
+    },
+    {
+      "ok": true,
+      "label": "Capture decodes title-settings-larger.png"
+    },
+    {
+      "ok": true,
+      "label": "Capture decodes camp-settings-larger.png"
+    },
+    {
+      "ok": true,
+      "label": "Quick review main-journal-normal.png"
+    },
+    {
+      "ok": true,
+      "label": "Quick review main-settings-normal.png"
+    },
+    {
+      "ok": true,
+      "label": "Quick review main-journal-larger.png"
+    },
+    {
+      "ok": true,
+      "label": "Quick review main-settings-larger.png"
+    },
+    {
+      "ok": true,
+      "label": "Review fits 1280"
+    },
+    {
+      "ok": true,
+      "label": "Review fits 844"
+    },
+    {
+      "ok": true,
+      "label": "Review fits 390"
+    },
+    {
+      "ok": true,
+      "label": "No browser errors"
+    }
+  ]
+}

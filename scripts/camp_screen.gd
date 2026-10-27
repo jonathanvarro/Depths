@@ -137,7 +137,9 @@ func _init() -> void:
 	gear.position = Vector2(550, 326)
 	gear.size = Vector2(74, 30)
 	gear.add_theme_font_size_override("font_size", 11)
-	gear.pressed.connect(func(): open_settings.emit())
+	gear.pressed.connect(func():
+		gear.grab_focus()
+		open_settings.emit())
 	_canvas.add_child(gear)
 	_build_activity()
 	_merchant_view = MerchantScreen.new()

@@ -73,7 +73,9 @@ func _ready() -> void:
 	_begin.pressed.connect(func(): _hero_select.open())
 	column.add_child(_begin)
 	var settings := _menu_button("Settings", 72 if phone else 56, false)
-	settings.pressed.connect(func(): _settings_screen.open())
+	settings.pressed.connect(func():
+		settings.grab_focus()
+		_settings_screen.open())
 	column.add_child(settings)
 	if not phone and not OS.has_feature("web"):  # iPhone apps and web pages don't quit themselves
 		var quit := _menu_button("Quit", 56, false)
@@ -84,7 +86,10 @@ func _ready() -> void:
 	var Settings := preload("res://scripts/settings.gd")
 	Settings.apply(get_tree())
 	_settings_screen = preload("res://scripts/settings_screen.gd").new()
-	add_child(_settings_screen)
+	var settings_layer := CanvasLayer.new()
+	settings_layer.layer = 7
+	add_child(settings_layer)
+	settings_layer.add_child(_settings_screen)
 	_hero_select = preload("res://scripts/hero_select.gd").new()
 	_hero_select.simulate_phone_safe_area=simulate_phone
 	add_child(_hero_select)
@@ -100,6 +105,7 @@ func _ready() -> void:
 func _apply_margins() -> void:
 	var phone := simulate_phone or OS.has_feature("mobile")
 	var insets := SafeArea.insets(get_viewport(), simulate_phone)
+	if _settings_screen: _settings_screen.set_safe_area(insets)
 	_margin.add_theme_constant_override("margin_left", int(maxf(100.0 if phone else 88.0, insets.x + 24)))
 	_margin.add_theme_constant_override("margin_right", int(maxf(64.0, insets.z + 24)))
 	_margin.add_theme_constant_override("margin_top", 56 if phone else 128)

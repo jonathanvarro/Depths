@@ -1,0 +1,12 @@
+{
+  "story": {
+    "checks": 45,
+    "failures": [],
+    "shutdown_cleanup_reported": true
+  },
+  "batch": {
+    "checks": 26,
+    "failures": [],
+    "shutdown_cleanup_reported": true
+  }
+}

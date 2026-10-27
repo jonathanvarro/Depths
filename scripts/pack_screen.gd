@@ -597,7 +597,9 @@ func _header_icon(texture: Texture2D,title: String,callback: Callable) -> Button
 	button.icon=texture;button.expand_icon=true
 	button.add_theme_constant_override("icon_max_width",22)
 	button.accessibility_name=title;button.tooltip_text=title
-	button.pressed.connect(callback)
+	button.pressed.connect(func():
+		button.grab_focus()
+		callback.call())
 	return button
 
 func _build() -> void:

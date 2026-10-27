@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-26 – ChatGPT
+- Did: #165 cleans up the live Quest log and Settings using a shared Field kit modal frame. Journal groups open/completed entries with selected details on reused rough paper; compact views use list/detail navigation. Settings has compact Sound/Display sections, explicit On/Off, immediate text scaling, header credits and persistent Close. Main/title safe areas and title/Pack/camp opener focus are connected. Review: art/concepts/interface/journal-settings-v1/inspector.html; handoff: docs/journal-and-settings.md. Existing quest rules, preferences, credits and bitmap assets are unchanged.
+- Next: Owner reviews the two menus; physical iPhone interaction/readability remains #66. Broader shared-screen review stays #51; preparation and other menus were not redesigned here.
+- Watch out: 479 isolated UI checks pass with clean exit; 65 actual title/Pack/camp checks, 45 story and 26 batch/settings assertions pass; 36 captures and 45 browser checks retained. Main caller fixture reports 1 CanvasItem/2 ObjectDB instances at shutdown; old story/batch runners retain cleanup/resource warnings. Test settings backed up/restored and private fixture saves used. Fixed late minimum-size resize, touch opener focus, modal Tab/map shortcut conflict and reflow focus retention. Concurrent ration/tutorial commit and unrelated tools/roles_check.gd.uid were preserved.
+
 ## 2026-10-25 – ChatGPT
 - Did: #158/#159 connect dedicated snare, dart plate, bell wire and dead-lamp rack ready/resolved pairs, plus separate wall ports: art/props/traps-lamps-v1. Updated/reran both story builders; event changes are art references only. Ten new built-in ImageGen masters/exact prompts are retained across this set and #150's requested open-maw Underhound attack. Idle/hurt are accepted and byte-unchanged; the old projecting attack remains superseded provenance. Reviews: art/concepts/traps-lamps-v1/inspector.html and art/concepts/underhound-poses-v1/inspector.html. Handoff: docs/traps-and-dead-lamps.md; docs/underhound-poses.md.
 - Next: Owner reviews the props and revised open-maw bite. No new Underhound EnemyType, floor, stats or encounter assignment was made. Existing trap spotting, event choices and territory odds remain unchanged.

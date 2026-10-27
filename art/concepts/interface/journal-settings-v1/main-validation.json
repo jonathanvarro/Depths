@@ -1,0 +1,15 @@
+{
+	"captures": [
+		"title-settings-normal.png",
+		"title-settings-larger.png",
+		"main-journal-normal.png",
+		"main-settings-normal.png",
+		"main-journal-larger.png",
+		"main-settings-larger.png",
+		"camp-settings-larger.png"
+	],
+	"checks": 65,
+	"failures": [],
+	"physical_iPhone": false,
+	"save": "private project-local"
+}

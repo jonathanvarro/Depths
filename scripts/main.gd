@@ -3459,11 +3459,8 @@ func _build_ui(minimap: Control) -> void:
 ## and home bar. On desktop there's nothing to avoid.
 func _apply_safe_area() -> void:
 	var insets := _safe_area_insets()
-	if _settings:
-		_settings.content.offset_left = insets.x
-		_settings.content.offset_top = insets.y
-		_settings.content.offset_right = -insets.z
-		_settings.content.offset_bottom = -insets.w
+	for menu in [_settings, _quest_log]:
+		if menu: menu.set_safe_area(insets)
 	for control: Control in [_safe_area, _full_map_margin, _pack.content, _combat.content, _results.content, _preparation.content, _chest.content, _camp.content]:
 		control.offset_left = insets.x
 		control.offset_top = insets.y
