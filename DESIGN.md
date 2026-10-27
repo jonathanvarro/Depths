@@ -93,6 +93,14 @@ Returning safely with useful gains should matter even when the bottom is not rea
 - The fortress's lower water gate is reachable without the queen and ends the slice. The queen becomes a side quest.
 - Quests can't be missed in this slice.
 
+**Slice 2 answers (owner, 2026-10-26; [plan for review](docs/story-slice-2-plan.md)):**
+- **The relic is something alive:** a heart or egg in the deep, waking. The gas and the monsters are its breath and dreams leaking through the breach.
+- **Vael wants it for himself,** in the king's name; the king wants the breach closed.
+- **The dark elves caused the ambush.** They're its **old keepers**, who kept it asleep and killed the vanguard to stop anyone reaching it: guilty, and perhaps right.
+- **Below the fortress: the Drowned Galleries** (floors 5–6).
+- **The campaign runs 12 floors** in six layers to a temple (#125).
+- **The first vision is the living thing,** felt through old stonework.
+
 **Visions and dreams (decided 2026-10-20):**
 - Memories of the past and dream sequences play in a **cold blue tint**: the whole screen drains to blue, portraits included, with deep blue shadows, pale light, a soft vignette and a faint slow shimmer.
 - It fades in and out, and with screen flashes off only the tint remains.
