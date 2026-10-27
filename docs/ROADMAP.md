@@ -1,87 +1,94 @@
 # Depths roadmap
 
-*Written 2026-10-18 from the open and closed issues, DESIGN.md and the commit history. Update it when a phase moves.*
-
-*Scope update 2026-10-19 (#122/#123/#125): the cave now carries the campaign, with the relic as its main goal and the queen as a side quest. The issue counts and delivery checklist below remain the October 18 snapshot. [The expanded descent proposal](cave-descent-and-quests.md) offers a longer-term structure, not authorization to build all of it.*
+*Rewritten 2026-10-27 from the open and closed issues (26 open, 141 closed), DESIGN.md and the commit history. Update it when a phase moves. The October 18 version is in the git history.*
 
 ## Where the project stands
 
-The **first playable is very close to whole**: DESIGN.md defines it as the cave and the campsite as one complete loop. 101 issues are closed and 20 remain open. Most of the open ones are ideas waiting for a decision rather than unfinished work.
+**The first slice is complete and played:** the opening escape, camp, floors 1–4, the goblin fortress, an optional queen and the lower water gate. It has been played on the owner's iPad.
+
+**The second slice has started:**
+- The story is decided ([plan](story-slice-2-plan.md)).
+- Floor 5, the Drowned Galleries, is built with placeholder art.
+- Floor 6 and the new monsters are next.
+
+The campaign is now planned as **12 floors** in six layers, ending at a temple (#125).
 
 ### Built and working
 
 | Area | What's in |
 |---|---|
-| **Opening** | The escape tutorial (#30, #55–#59, #69): Mara (or Corin or Alwen, #95) wakes among the bodies, takes a weapon, learns torches, fights, and climbs out. |
-| **Exploration** | Procedural floors, doors, stairs, a full-screen map, a hand-drawn parchment map (#50), visible room props with used states (#46), and room events with the coin flip (#16, #77). |
-| **Party** | Three main heroes plus recruits (#41, #83, #95). Covers health, injuries, strain, hunger, bleeding, stats, levels and XP (#47), armour (#93), and rows (#72). |
-| **Combat** | Turn-based, with intentions shown as icons (#60). Enemy tactics, coin-flip killing blows, nine monster types, and the goblin fortress and queen (#44). Hits show as slashes, numbers and icons with no text log (#105). |
-| **Camp** | Rest and days, nurse recovery, stash, merchant, smith, contracts, recruits, the secured route and training (#40–#43, #79, #85–#88). |
-| **Economy** | Gold, treasure, prices, and a free kit that's limited (#42, #86, #90–#92). |
-| **Platform** | Saving and loading (#45), settings (#52) and a Windows build (#19). Placeholder sound (#7). |
-| **Art** | ChatGPT's portraits, enemies, cave and fortress textures, props, treasure, UI glyphs, and campaign illustrations. |
+| **Story** | Commander Vael. *Those Left Behind*, *Three Knocks*, the iron sample, the lower gate. Slice 2 so far: *The Dry Passage*, *The Black Fletching* and *The Wounded Keeper*. |
+| **Exploration** | Procedural floors with quest packages, lairs and territories. Traps, landmarks and room events with the coin flip. Wandering monsters. Deep water on floor 5. A hand-drawn map. |
+| **Party** | Three main heroes plus recruits in four roles (Warden, Scout, Brawler, Fixer) with exploring perks. Levels, talents, injuries, strain and hunger. Banter and memories. |
+| **Combat** | Intent icons and 20 monster types, with elites and depth scaling. Mini-boss lairs. Strike first and slip past (Scout talents). Flare. The queen. |
+| **Camp** | Tent and stash, merchant, smith, nurse, recruits at the fire, contracts, routes and quests, all fitting on screen without scrolling. |
+| **Platform** | Saving, settings, phone layouts, and Windows and web builds. The iPad is reached over home Wi-Fi. |
+| **Testing** | 45+ automated checks, three opening play-throughs, and a campaign bot (target: queen dead in about 24 of 30 campaigns per hero). |
 
-### Still open, grouped
+## Phase A: Finish slice 2, the Drowned Galleries *(now)*
 
-- **Finishing the first playable:** #108 camp layout, #64 condition readability (first pass built), #51 shared UI style, #54 music and sound, #99 fortress art (checklist done, issue still open), #48 equipment (only the shield is left), #105 art (replacing the placeholder icons).
-- **Ideas needing a decision:** #73 sneak past or strike first, #94 traps, #107 the story of recovering the bodies, #104 leg injuries and carrying, #76 weapon traits or body-part targeting, #74 light as a weapon, #80 the king's forces, #101 exploration classes, #53 magic, #106 trust.
-- **Phone:** #20 iPhone export, and #66 checking the screens on a real device.
+1. **Floor 6, the Black Reservoir:**
+   - divert the flow to expose the descent;
+   - the old stonework and the first vision (the living thing, in the blue tint);
+   - the slice's ending scene with Vael.
+2. **The new monsters,** from ChatGPT's #150 concepts:
+   - Underhound (a long lunge at the back row);
+   - Borrowed Pack (three heads, one hide);
+   - the Marrow Shepherd, a floor-6 mini-boss that births hounds.
 
----
+   Behaviour and numbers can start with placeholders. Art: #166.
+3. **The playtest bot goes down to floors 5–6.** Then retune so slice 2 is as hard as intended.
+4. **Polish what floor 5 left:**
+   - deep water on the map;
+   - the wanderer clock saved with the game;
+   - a properly wet look for the walls (#166);
+   - ChatGPT's sounds and ending cards (#167).
 
-## Phase 1: Finish and prove the first playable *(now)*
+**Done when:** a player goes from the lower gate through floors 5–6 to the reservoir's ending, the bot's results are on target, and the placeholder art is replaced.
 
-**Goal:** prove the built four-floor cave/camp slice, including an optional queen fight and return to camp. The queen is a slice milestone rather than the campaign ending. The run should hit the DESIGN.md success criteria: the party is tempted to push on, the reasons to leave are clear, and the condition of the party can be read at a glance. Making the queen optional in play still needs the alternative descent and ending-flow work under #122/#123.
+## Phase B: Play it whole *(alongside)*
 
-1. **A full campaign playtest.** Play through the opening, several expeditions, floors 1–4, the gate and the queen. Note pacing, difficulty and confusing moments.
-2. **A balance pass** with the new monsters, levels and armour. Rerun `tools/balance_sim.gd` and tune the XP limits and the queen fight against the playtest.
-3. **#108: recompose the camp** as a connected place (ChatGPT's art, then the hookup).
-4. **#51: shared interface style.** You choose the typography and the direction; then one Godot theme goes across every screen.
-5. **#54: sound and music.** Pick from the auditions, then add music for the title, the cave, combat and the camp.
-6. **Close-outs:**
-   - #99 (fortress art) and #48 (add the shield, or move it to a new issue)
-   - swap in ChatGPT's #105 icons
-   - #64 player check
+- **#119:** an owner playtest of the whole campaign so far, on the iPad. Note pacing, difficulty and anything confusing.
+- **#118:** the playtest question: whom would you hate to lose, and why?
+- **Hero balance:** Alwen wins least often in the bot (21 of 30, against Corin's 25).
 
-**Done when:** a new player completes the four-floor slice without explanations from us, and the playtest notes show no blocking confusion.
+## Phase C: Look and sound *(when ChatGPT's art and audio land)*
 
-## Phase 2: Decisions in the dark *(next)*
+- **#54:** music and recorded sound, replacing placeholders (#167 starts it).
+- **#51:** one shared interface style across every screen. The owner chooses the direction.
+- **#128:** wall and ceiling dressing. **#89:** camp warmth.
 
-**Goal:** exploration choices matter as much as fights. These ideas extend what's already built rather than adding new systems.
+## Phase D: Deeper systems *(each needs a decision first)*
 
-- **#73 Sneak past or strike first:** a choice before a fight, using light, noise and scouting. Probably the biggest gain for strategy.
-- **#94 Traps and tripwires:** built on the tripping animation and the new sprung-trap props.
-- **#107 Story:** go back down for the bodies, and learn it was an ambush. This gives the first expedition a purpose and camp its first story beat.
-- **#104 Leg injuries lower carrying capacity,** tying injuries to the economy.
-- **#74 Light as a weapon** in fights (the torch throw exists already).
+- **#53:** magic, starting from Alwen.
+- **#76:** weapon traits or body-part targeting.
+- **#123:** quest rules: the log, missable quests, rewards.
+- **#133 and #135:** the remaining shrine, boon and trinket ideas.
+- **#106:** trust between party members (low priority). **#110:** paper-doll equipment (later).
 
-## Phase 3: A deeper party *(later)*
+## Phase E: iPhone *(when a device is free)*
 
-**Goal:** more variety between heroes and runs. Each item needs a design discussion first.
+- **#20:** the iPhone export: signing and TestFlight.
+- **#66:** check the Pack and hero windows on a real landscape iPhone.
 
-- **#53 Magic system**, starting from Sister Alwen the healer.
-- **#101 Classes that change exploration**, including the Fixer.
-- **#76 Weapon traits or body-part targeting.**
-- **#80 The king's forces arrive over the days** (builds on the secured route, #79).
-- **#106 Trust between party members** (low priority).
+## Beyond slice 2
 
-## Phase 4: Phone release readiness *(in parallel when a device is free)*
+- **Slice 3** picks up the keeper's choice: the elves murdered your companions, but they may be right. Vael's interest grows.
+- **Floors 7–8,** the Mosslit Hollows and the Garden of Echoes, as proposed in #125.
+- **The monsters keep getting stranger** with depth (#151, #152): wrong animals, then impossible bodies, then living phenomena.
+- **The campaign ends at the temple on floor 12,** where the living thing sleeps.
 
-- **#20 iPhone export setup:** signing and a TestFlight build.
-- **#66 Check on a real landscape iPhone:** the Pack, hero windows, touch sizes and the safe area.
-- A performance check on older devices, and settings for text size and flashes.
+## Next top tasks
 
-## Beyond the four-floor slice
-
-The current campaign direction stays within the cave and its surface camp (#122/#123). [The proposal under #125](cave-descent-and-quests.md) connects deeper cave, fortress, water, fungal growth, an unknown city and a temple/finale, with reusable quest areas and camp material projects. Twelve floors and 48 activities are a concept library, not a committed asset list.
-
-First prove one visible early quest, one hidden multi-room activity and one smith project, then the route below the fortress. Keep using the Phase 1 playtest to judge the cave loop before producing later layers. The older castle/other-refuge route in DESIGN.md is superseded for now.
-
----
-
-## How the work is shared
-
-- **You:** design decisions (recorded on issues and in DESIGN.md) and playtests.
-- **Claude:** game code, tests (`tools/*_check.gd`) and builds.
-- **ChatGPT:** art, research and audio. Each piece arrives with its own check tools.
-- Placeholders let the code go ahead before the art is ready.
+| # | Task | Why now | Size | Waits on | Issue |
+|---|---|---|---|---|---|
+| 1 | **Floor 6, the Black Reservoir:** diverting the flow, the vision, the slice-2 ending | Finishes the slice the owner approved | Large | Nothing (placeholders) | #122 |
+| 2 | **New monsters:** Underhound, Borrowed Pack, Marrow Shepherd | Floors 5–6 reuse floor-3 foes today | Medium | Art from #166 (can start without it) | #150, #166 |
+| 3 | **Bot to floors 5–6, then retune** | The new floors' difficulty is untested | Medium | Tasks 1–2 | #119 |
+| 4 | **Owner iPad playtest** of wanderers, memories and floor 5 | Real feedback before more is built | Owner | The current iPad build | #119, #118 |
+| 5 | **Map and save polish:** water on the map, the wanderer clock saved | Small gaps floor 5 left | Small | The map symbol from #167 (optional) | — |
+| 6 | **Hero balance for Alwen** | The weakest start, by the bot | Small | — | — |
+| 7 | **Hook up ChatGPT's slice-2 art and sounds** | Replaces the placeholders | Medium | ChatGPT (#166, #167) | #166, #167 |
+| 8 | **Shared interface style** | One look across screens | Medium | Owner decision | #51 |
+| 9 | **Magic system** | The biggest remaining design gap for a healer | Large | Owner decision | #53 |
+| 10 | **iPhone export and device check** | Release readiness | Medium | A device | #20, #66 |
