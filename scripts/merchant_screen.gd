@@ -40,10 +40,12 @@ func refresh() -> void:
 	var stock:Array[Dictionary]=[]
 	if trading:
 		if not supplies.has_lantern:
-			stock.append({"key":"lantern","item":null,"name":"Lantern","icon":LANTERN,"description":"Brighter than a torch, burns oil. Yours to keep.","price":CampState.LANTERN_PRICE,"kind":"lantern","action":"Buy · %d"%CampState.LANTERN_PRICE,"reason":_buy_reason(CampState.LANTERN_PRICE,true)})
+			var lantern_price:int=CampState.price_for(_party,CampState.LANTERN_PRICE)  # a Fixer haggles (#101)
+			stock.append({"key":"lantern","item":null,"name":"Lantern","icon":LANTERN,"description":"Brighter than a torch, burns oil. Yours to keep.","price":lantern_price,"kind":"lantern","action":"Buy · %d"%lantern_price,"reason":_buy_reason(lantern_price,true)})
 		for item:SupplyItem in CampState.MERCHANT_STOCK:
 			if item.effect==SupplyItem.Effect.REFILL_LANTERN and not supplies.has_lantern:continue
-			stock.append({"key":item,"item":item,"price":item.price,"kind":"buy","action":"Buy 1 · %d"%item.price,"reason":_buy_reason(item.price,supplies.room_for(item)>0),"info":"Carrying %d"%supplies.count(item)})
+			var price:int=CampState.price_for(_party,item.price)
+			stock.append({"key":item,"item":item,"price":price,"kind":"buy","action":"Buy 1 · %d"%price,"reason":_buy_reason(price,supplies.room_for(item)>0),"info":"Carrying %d"%supplies.count(item)})
 	var bag:=inventory(supplies)
 	for entry in bag:
 		var item:Resource=entry.item
@@ -53,7 +55,7 @@ func refresh() -> void:
 		entry.action="Sell"
 		entry.reason="Trading is not available yet" if not trading else ("The merchant does not buy this supply" if not sellable else "")
 		if sellable:
-			entry.price=CampState.sale_price(item)
+			entry.price=CampState.sell_price(_party,item)
 			entry.action=("Sell 1 · %d" if item is SupplyItem else "Sell · %d")%entry.price
 			entry.info="Sells one item" if item is SupplyItem else ""
 	set_view(stock,bag,supplies.slots_used(),supplies.capacity,supplies.gold)

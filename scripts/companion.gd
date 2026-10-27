@@ -132,6 +132,8 @@ var boons: Array[Dictionary] = []
 ## a cloak or cape whose effect counts like a trinket's.
 @export var back: Equipment
 
+## Set by the party (#101): a standing Warden steadies everyone's nerves.
+var party_calm := 1.0
 var _health_fraction := 0.0  # partial healing carried between time units
 
 
@@ -340,7 +342,7 @@ func change_strain(amount: float) -> void:
 		# Resolve steadies (#47): only gains are scaled, never relief.
 		amount *= clampf(1.0 - 0.08 * (stat_res - 2), 0.75, 1.15) * (0.8 if has_talent("steel_nerves") else 1.0)
 	if amount > 0.0:
-		amount *= boon_product("strain_rate")  # #133
+		amount *= boon_product("strain_rate") * party_calm  # #133; a Warden's presence (#101)
 	var before := strain
 	strain = clampf(strain + amount, 0.0, StrainRules.MAX)
 	if not is_equal_approx(strain, before):

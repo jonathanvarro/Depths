@@ -36,6 +36,7 @@ const Progression := preload("res://scripts/progression.gd")
 const Sounds := preload("res://scripts/sounds.gd")
 const MerchantScreen := preload("res://scripts/merchant_screen.gd")
 const StashScreen := preload("res://scripts/stash_screen.gd")
+const Recruits := preload("res://scripts/recruits.gd")
 var _ambience: AudioStreamPlayer
 
 var content: Control  # main.gd keeps this inside the safe area
@@ -703,53 +704,65 @@ func _fire() -> void:
 	_body.add_child(party)
 
 
-## A recruit as a small card (owner, 2026-10-25): face, name and role, the
-## numbers that matter, strength and weakness, and Invite. The rest of who
-## they are is on hover.
+## A recruit as a small card (owner, 2026-10-25): face, name and role,
+## health and damage, their role's perk (#101), strength and weakness in a
+## word each, and Invite. Four fit across; the details are on hover.
 func _recruit_card(recruit: Companion, full: bool) -> Control:
 	var card := PanelContainer.new()
 	var plate := StyleBoxFlat.new()
 	plate.bg_color = Color(0.07, 0.06, 0.05, 0.9)
 	plate.border_color = Color(AMBER, 0.45)
 	plate.set_border_width_all(1)
-	plate.set_content_margin_all(6)
+	plate.set_content_margin_all(5)
 	card.add_theme_stylebox_override("panel", plate)
 	card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	card.size_flags_stretch_ratio = 1.0
 	var damage := str(recruit.attack_min) if recruit.attack_min == recruit.attack_max else "%d-%d" % [recruit.attack_min, recruit.attack_max]
-	card.tooltip_text = "%s\n%d health · %s damage · %d%% to hit · speed %d" % [recruit.personality, recruit.max_health, damage, roundi(recruit.accuracy * 100), recruit.initiative]
+	card.tooltip_text = "%s
+%s
+Strength: %s
+Weakness: %s
+%d health · %s damage · %d%% to hit · speed %d" % [recruit.personality, Recruits.perk(recruit.role), recruit.strength, recruit.weakness, recruit.max_health, damage, roundi(recruit.accuracy * 100), recruit.initiative]
 	var box := VBoxContainer.new()
-	box.add_theme_constant_override("separation", 2)
+	box.add_theme_constant_override("separation", 1)
 	card.add_child(box)
 	var top := HBoxContainer.new()
-	top.add_theme_constant_override("separation", 6)
+	top.add_theme_constant_override("separation", 4)
 	var face := TextureRect.new()
 	face.texture = recruit.portrait
-	face.custom_minimum_size = Vector2(40, 40)
+	face.custom_minimum_size = Vector2(30, 30)
 	face.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	face.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	top.add_child(face)
 	var who := VBoxContainer.new()
 	who.add_theme_constant_override("separation", 0)
-	var name_label := _label(recruit.display_name, ACTION, 13, TEXT)
+	who.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	var name_label := _label(recruit.display_name, ACTION, 12, TEXT)
 	name_label.clip_text = true
 	who.add_child(name_label)
-	var stats := _label("%s · %d hp · %s dmg" % [recruit.role, recruit.max_health, damage], BODY, 10, MUTED)
-	stats.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART  # three cards share the width
-	who.add_child(stats)
-	who.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	who.add_child(_clipped(recruit.role, 10, MUTED))
 	top.add_child(who)
+	box.add_child(top)
+	box.add_child(_clipped("%d hp · %s dmg" % [recruit.max_health, damage], 10, MUTED))
+	box.add_child(_clipped(Recruits.perk_name(recruit.role), 10, TEXT))
+	box.add_child(_clipped("+ %s" % recruit.strength.get_slice(" (", 0), 10, AMBER))
+	box.add_child(_clipped("- %s" % recruit.weakness.get_slice(" (", 0), 10, AMBER))
 	var invite := _button("Full" if full else "Invite")
 	invite.disabled = full
-	invite.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+	invite.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	invite.pressed.connect(func():
 		_camp.hire(_party, recruit)
 		_refresh_activity())
-	top.add_child(invite)
-	box.add_child(top)
-	var traits := _label("+ %s\n- %s" % [recruit.strength, recruit.weakness], BODY, 10, AMBER)
-	traits.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	box.add_child(traits)
+	box.add_child(invite)
 	return card
+
+
+## A one-line label that clips rather than widening its card.
+func _clipped(text: String, size: int, color: Color) -> Label:
+	var label := _label(text, BODY, size, color)
+	label.clip_text = true
+	label.custom_minimum_size.x = 1
+	return label
 
 
 ## A short line in smaller print.

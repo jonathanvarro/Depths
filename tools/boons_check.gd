@@ -80,9 +80,9 @@ func _initialize() -> void:
 	var two = PartyState.new()
 	for hero in ["mara", "corin", "alwen"]:
 		two.add_member(load("res://data/companions/%s.tres" % hero))
-	check("three heroes carry 12 slots", two.supplies.capacity == 12)
+	check("three heroes carry 12 slots, +2 for Corin's strong back (#101)", two.supplies.capacity == 14)
 	two.remove_member(two.members[2])
-	check("two carry 8", two.supplies.capacity == 8)
+	check("two carry 8, +2 for Corin", two.supplies.capacity == 10)
 
 	# --- Choices that need something.
 	party = PartyState.new()

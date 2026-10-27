@@ -3096,7 +3096,16 @@ func _on_party_blocked(cell: Vector2i) -> void:
 	if tool and _depth != FORTRESS_DEPTH:
 		_ask("Something chokes the passage. Clear it with the %s? (%d time)" % [tool.display_name.to_lower(), CLEAR_PASSAGE_TIME], _clear_passage.bind(cell))
 		return
-	_show_message(environment_theme.blocked_message + ("" if _depth == FORTRESS_DEPTH else " A spade or a pick would clear it."))
+	# A Brawler heaves the rubble aside without a tool (#101).
+	var brawler: Companion = null
+	for hero: Companion in _party_state.living_members():
+		if hero.role == "Brawler":
+			brawler = hero
+			break
+	if brawler and _depth != FORTRESS_DEPTH:
+		_ask("Something chokes the passage. %s could heave it aside. (%d time)" % [brawler.display_name, CLEAR_PASSAGE_TIME], _clear_passage.bind(cell))
+		return
+	_show_message(environment_theme.blocked_message + ("" if _depth == FORTRESS_DEPTH else " A spade or a pick would clear it - or a Brawler."))
 
 
 ## Hacks through a blocked passage with a spade or pick (#133).

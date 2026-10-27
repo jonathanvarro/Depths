@@ -36,6 +36,10 @@ const TALENTS := {
 		2: [["sharp_ears", "Sharp ears", "Hears some fights before they notice the party"], ["quick_hands", "Quick hands", "Acts sooner (+2 speed)"]],
 		4: [["slip_past", "Slip past", "Leads the party quietly past a fight Sharp ears heard"], ["trap_sense", "Trap sense", "Always spots traps"]],
 	},
+	"Fixer": {  # #101: modest in a fight
+		2: [["deadeye", "Deadeye", "+5% to hit"], ["quick_hands", "Quick hands", "Acts sooner (+2 speed)"]],
+		4: [["steel_nerves", "Steel nerves", "Strain builds 20% slower"], ["opening_shot", "Opening shot", "First attack each fight +2 damage"]],
+	},
 	"Rogue": {
 		2: [["deadeye", "Deadeye", "+5% to hit"], ["quick_hands", "Quick hands", "Acts sooner (+2 speed)"]],
 		4: [["slip_web", "Slip the web", "Webs never stick"], ["opening_shot", "Opening shot", "First attack each fight +2 damage"]],

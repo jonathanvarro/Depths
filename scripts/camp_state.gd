@@ -163,7 +163,7 @@ func start(seed_value: int, party = null) -> void:
 
 
 func _fill_fire(party = null) -> void:
-	while candidates.size() < CANDIDATES:
+	while candidates.size() < candidate_count(party):
 		if _used_names.size() >= Recruits.NAMES.size():
 			_used_names.clear()  # everyone's been by once; names may repeat
 		var faces := []  # no two people by the fire or in the party share a face
@@ -176,7 +176,7 @@ func _fill_fire(party = null) -> void:
 				faces.append(person.portrait_set.resource_path)
 		# At least one of the three can hold the front (balance report).
 		var role := ""
-		if candidates.size() == CANDIDATES - 1 and not candidates.any(func(c: Companion): return c.role in FRONT_ROLES):
+		if candidates.size() == candidate_count(party) - 1 and not candidates.any(func(c: Companion): return c.role in FRONT_ROLES):
 			role = FRONT_ROLES[rng.randi_range(0, FRONT_ROLES.size() - 1)]
 		var recruit: Companion = Recruits.make(rng, _used_names, faces, maxi(1, best_level - 1), role)
 		_used_names.append(recruit.display_name)
@@ -386,10 +386,38 @@ func can_afford(party, price: int) -> bool:
 	return party.supplies.gold >= price
 
 
+## A Fixer's eye for value (#101): treasure sells for more, and the
+## merchant knocks something off.
+const FIXER_SALE := 1.25
+const FIXER_DISCOUNT := 0.9
+
+static func has_fixer(party) -> bool:
+	return party != null and party.members.any(func(h): return h.role == "Fixer" and h.is_alive())
+
+
+## What the merchant asks of this party.
+static func price_for(party, price: int) -> int:
+	return ceili(price * FIXER_DISCOUNT) if has_fixer(party) else price
+
+
+## What the merchant pays this party for `item`.
+static func sell_price(party, item) -> int:
+	var price := sale_price(item)
+	if item is SupplyItem and item.effect == SupplyItem.Effect.TREASURE and has_fixer(party):
+		price = roundi(price * FIXER_SALE)
+	return price
+
+
+## How many recruits wait by the fire: one more with a Fixer.
+func candidate_count(party = null) -> int:
+	return CANDIDATES + (1 if has_fixer(party) else 0)
+
+
 func buy(party, item: SupplyItem) -> bool:
-	if not can_trade() or not can_afford(party, item.price) or party.supplies.room_for(item) <= 0:
+	var price := price_for(party, item.price)
+	if not can_trade() or not can_afford(party, price) or party.supplies.room_for(item) <= 0:
 		return false
-	party.supplies.gold -= item.price
+	party.supplies.gold -= price
 	party.supplies.add(item)
 	changed.emit()
 	return true
@@ -397,9 +425,10 @@ func buy(party, item: SupplyItem) -> bool:
 
 func buy_lantern(party) -> bool:
 	var supplies = party.supplies
-	if not can_trade() or supplies.has_lantern or not can_afford(party, LANTERN_PRICE):
+	var price := price_for(party, LANTERN_PRICE)
+	if not can_trade() or supplies.has_lantern or not can_afford(party, price):
 		return false
-	supplies.gold -= LANTERN_PRICE
+	supplies.gold -= price
 	supplies.has_lantern = true
 	supplies.oil = Supplies.LANTERN_CAPACITY
 	supplies.source = Supplies.Source.LANTERN
@@ -418,7 +447,7 @@ static func sale_price(item) -> int:
 func sell(party, item: SupplyItem) -> bool:
 	if not can_trade() or item.effect != SupplyItem.Effect.TREASURE or not party.supplies.take(item):
 		return false
-	party.supplies.gold += sale_price(item)
+	party.supplies.gold += sell_price(party, item)
 	party.supplies.changed.emit()
 	changed.emit()
 	return true

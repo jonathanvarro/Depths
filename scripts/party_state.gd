@@ -53,18 +53,39 @@ func remove_member(member: Companion) -> void:
 ## nothing is lost, but nothing more fits until something goes.
 func update_capacity() -> void:
 	var before: int = supplies.capacity
+	steady_members()  # #101
 	supplies.capacity = maxi(PACK_MINIMUM, PACK_SLOTS_PER_HERO * members.size()) + pack_extra() - pack_lost()
 	if supplies.capacity != before:
 		supplies.changed.emit()
 
 
-## Slots backpacks add (owner, 2026-10-21).
+## Slots backpacks add (owner, 2026-10-21), and a Brawler's strong back
+## (#101).
+const BRAWLER_PACK := 2
+
 func pack_extra() -> int:
 	var extra := 0
 	for member in members:
 		if member.back:
 			extra += member.back.pack_slots
+		if member.role == "Brawler" and member.is_alive():
+			extra += BRAWLER_PACK
 	return extra
+
+
+## Whether a standing hero of `role` is with the party (#101).
+func has_role(role: String) -> bool:
+	return living_members().any(func(h: Companion): return h.role == role)
+
+
+## A Warden's steady presence (#101): everyone's nerves fray this much
+## slower while one stands.
+const WARDEN_CALM := 0.85
+
+func steady_members() -> void:
+	var calm := WARDEN_CALM if has_role("Warden") else 1.0
+	for member in members:
+		member.party_calm = calm
 
 
 ## Slots lost to injuries: a limping hero carries less (#104) until the

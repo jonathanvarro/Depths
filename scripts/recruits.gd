@@ -17,20 +17,41 @@ const ROLES := {
 		"stats": [2, 1, 3, 2], "aim": 0.74, "speed": 10, "hp": 0, "attack": Vector2i(2, 3),
 		"guard_factor": 0.25, "toughness": 0, "weapon": "res://data/gear/wooden_club.tres",
 		"portrait": "res://art/portraits/recruit-silhouettes-v1/warden.png",
+		"perk": "Steady presence: the party's nerves fray 15% slower.", "perk_name": "Steady presence",
 	},
 	"Scout": {
 		"about": "Quick and sharp, with a sling: fights from the back row. Acts early and hits often, but can't take much.",
 		"stats": [1, 3, 1, 2], "aim": 0.81, "speed": 11, "hp": 0, "attack": Vector2i(2, 3),
 		"guard_factor": 0.5, "toughness": 0, "row": "back", "reach": true,
 		"portrait": "res://art/portraits/recruit-silhouettes-v1/scout.png",
+		"perk": "Can learn Sharp ears, Slip past and Trap sense.", "perk_name": "Scout's talents",
 	},
 	"Brawler": {
 		"about": "Hits hard. Careless with it: misses more and takes an extra point from every blow.",
 		"stats": [3, 2, 3, 1], "aim": 0.65, "speed": 9, "hp": -2, "attack": Vector2i(2, 4),
 		"guard_factor": 0.5, "toughness": -1, "weapon": "res://data/gear/woodcutters_axe.tres",
 		"portrait": "res://art/portraits/recruit-silhouettes-v1/brawler.png",
+		"perk": "Strong back: +2 pack slots, and clears rubble without a tool.", "perk_name": "Strong back",
+	},
+	# The Fixer (#101, owner 2026-10-25): an expedition role more than a
+	# fighting one. Placeholder silhouette until ChatGPT's portraits.
+	"Fixer": {
+		"about": "Knows the price of everything and everyone at camp. Fights from the back with a sling, and not well.",
+		"stats": [1, 2, 2, 3], "aim": 0.72, "speed": 10, "hp": -2, "attack": Vector2i(1, 3),
+		"guard_factor": 0.5, "toughness": 0, "row": "back", "reach": true,
+		"portrait": "res://art/portraits/recruit-silhouettes-v1/scout.png",
+		"perk": "Eye for value: finds sell for 25% more, 10% off at the merchant, and one more recruit by the fire.", "perk_name": "Eye for value",
 	},
 }
+## Each role's exploring perk (#101), for the recruit's card.
+static func perk(role: String) -> String:
+	return ROLES.get(role, {}).get("perk", "")
+
+
+static func perk_name(role: String) -> String:
+	return ROLES.get(role, {}).get("perk_name", "")
+
+
 ## One of each per recruit; never a strength and weakness on the same stat.
 const STRENGTHS := [
 	{"name": "Sharp-eyed", "text": "+8% to hit", "stat": "aim_base", "amount": 0.08},

@@ -359,11 +359,20 @@ Open campaign questions: what counts as completing a site, whether old sites rem
 
 Each companion has a distinct role, personality, vulnerability, and reason to enter the dungeon. Portrait cards communicate physical and emotional condition.
 
+**Exploring perks by role — owner decision 2026-10-25 (#101):** each role brings something to an expedition beyond fighting. The perks are built in, not chosen, and show on the recruit's card.
+- **Brawler — Strong back:** +2 pack slots, and heaves rubble out of a blocked passage without a spade or pick (the same time a tool takes).
+- **Warden — Steady presence:** while a Warden stands, everyone's nerves fray 15% slower.
+- **Scout:** its own talents (Sharp ears, Slip past, Trap sense).
+- **Fixer (new recruit role) — Eye for value:** treasure sells for 25% more, there's 10% off at the merchant, and one more recruit waits by the fire.
+  - Weak in a fight: low damage, and a sling from the back row.
+  - Placeholder silhouette until its portraits arrive (#163).
+- **The bot** can recruit a Fixer like any other role. Corin, as a Brawler, also gets the +2 slots.
+
 **Camp screens without scrolling (owner, 2026-10-25):**
 - **Your tent:** one short training line per hero (level-up choices when one is ready), then **Rest** with a single line about what it does. There's no day count, because the day shows on the main screen. A **Store** button opens the stash: the stash on the left, the pack on the right, on the same Field kit view as the merchant. One tap moves one item, or all the gold.
 - **Mine path:** a reminder card for the current quest, showing the giver in silhouette, the quest's title, a very short brief and the floor. Beside it: who's going (and who stays with the nurse), **Head back down**, any scouts' routes, and the next route to earn.
 - **The campfire** now holds the quest list (briefs and floors), the king's contract, and every "Talk to…" prompt. The news marker shows there, for the moment.
-  - It fits without scrolling too. The quest lines are in small print, and the camp's chatter shows only when nothing else is waiting. The recruits are three compact cards side by side: face, name, role, health and damage, strength and weakness, and **Invite**. Their personality and full numbers are on hover. The party sits on one line, with **Dismiss** beside each recruit.
+  - It fits without scrolling too. The quest lines are in small print, and the camp's chatter shows only when nothing else is waiting. The recruits are compact cards side by side (four fit, with a Fixer in the party): face, name, role, health and damage, the role's perk, strength and weakness in a word each, and **Invite**. Their personality and full details are on hover. The party sits on one line, with **Dismiss** beside each recruit.
 
 **After the first iPad playtest (owner, 2026-10-25):**
 - **Free torches:** every return to camp tops the party up to 3 torches for free. Gold was too scarce to keep buying them, and that blocked progress past floor 2. More torches and the lantern still cost gold. The results screen says so.
