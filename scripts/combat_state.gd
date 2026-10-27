@@ -184,6 +184,9 @@ var _dazzled := {}  # Foe -> true: a flare costs it its next action (#74)
 var _squinting := {}  # Foe -> true: worse aim on its next action (#74)
 var _drummed := {}  # Foe -> true: their next hit is stronger (goblin drummer)
 var _grabbed := {}  # Companion -> Foe holding them (hollow miner, #140)
+## [rescuer, freed, foe name] each time a hero's blow freed another from a
+## grip (#118: the freed hero remembers it).
+var rescues: Array = []
 var depth_scale := 1.0  # see prepare()
 var _snared := {}  # Companion -> true: acts last next round (goblin trapper)
 var _snared_this_round := {}  # who's acting last now, for the card's mark
@@ -508,11 +511,13 @@ func is_grabbed(hero: Companion) -> bool:
 	return true
 
 
-## A grabber took a blow: everyone it held is free.
-func _release(foe: Foe) -> void:
+## A grabber took a blow: everyone it held is free. `by`: whose blow.
+func _release(foe: Foe, by: Companion = null) -> void:
 	for hero in _grabbed.keys():
 		if _grabbed[hero] == foe:
 			_grabbed.erase(hero)
+			if by and by != hero:
+				rescues.append([by, hero, foe.name])
 
 
 ## Steps to the other row; takes the hero's turn.
@@ -580,7 +585,7 @@ func hero_attack(hero: Companion, target: Foe) -> Dictionary:
 		if target.in_back() and guard_wall_up():
 			damage = maxi(1, floori(damage * GUARD_WALL_FACTOR))
 		target.health = maxi(0, target.health - damage)
-		_release(target)
+		_release(target, hero)
 		outcome = {"hit": true, "damage": damage, "killed": not target.is_alive()}
 		outcome["text"] = "%s strikes the %s for %d.%s" % [hero.display_name, target.name.to_lower(), damage, " It falls." if outcome["killed"] else ""]
 		if outcome["killed"] and target.type.tactic == EnemyType.Tactic.BLOAT:
@@ -861,7 +866,7 @@ func hero_throw_torch(hero: Companion, target: Foe) -> Dictionary:
 	else:
 		var burn := rng.randi_range(TORCH_BURN.x, TORCH_BURN.y) + int(hero.boon_total("torch_burn"))
 		target.health = maxi(0, target.health - burn)
-		_release(target)
+		_release(target, hero)
 		outcome["damage"] = burn
 		outcome["killed"] = not target.is_alive()
 		outcome["text"] = "%s hurls the burning torch - the %s is burned for %d, but stands its ground." % [hero.display_name, target.name.to_lower(), burn]

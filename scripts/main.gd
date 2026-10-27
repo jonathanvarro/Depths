@@ -803,6 +803,7 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 	var result: int = await _combat.finished
 	for hero: Companion in _party_state.members:
 		hero.fight_ended()  # fight-long boons and banes count down (#133)
+	_fight_memories(state, result)
 	for foe in state.foes:
 		if foe.health <= 0:
 			_expedition.add_defeated(foe.type.display_name)
@@ -841,7 +842,11 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 			match _fight_kind:
 				"gate": _break_gates()
 				"queen": _queen_defeated()
-			_say("fight_won", true, false, _any_voice())
+			if not _newly_ready.is_empty() and _newly_ready[0].is_alive():
+				_say("level_ready", true, false, _newly_ready[0])  # #118
+			else:
+				_say("fight_won", true, false, _any_voice())
+			_newly_ready.clear()
 			_update_hints("fight_over")
 			if _in_opening:
 				_on_opening_fight_won()
@@ -972,9 +977,54 @@ func _grant_xp(amount: int, quiet := false) -> void:
 		var extra := clampi(benchmark - hero.xp, 0, amount)
 		var was_ready := Progression.ready_to_advance(hero)
 		hero.xp += amount + extra
-		if not was_ready and Progression.ready_to_advance(hero) and not quiet:
-			_show_message("%s is ready to advance - choose at camp." % hero.display_name)
+		if not was_ready and Progression.ready_to_advance(hero):
+			_newly_ready.append(hero)  # they say so after the fight (#118)
+			if not quiet:
+				_show_message("%s is ready to advance - choose at camp." % hero.display_name)
 		hero.emit_changed()
+
+
+# --- Memories (#118, owner 2026-10-26) ------------------------------------
+
+## A hero this close to the floor after a won fight remembers it.
+const CLOSE_CALL_HEALTH := 2
+var _trip_memories := {}  # Companion -> the memory this trip gave them
+var _newly_ready: Array[Companion] = []  # ready to advance since the fight began
+
+## What a fight leaves them remembering: being pulled from a grip, a near
+## thing, a mini-boss or the queen falling.
+func _fight_memories(state, result: int) -> void:
+	if _in_opening:
+		return
+	var day: int = _camp_state.day
+	for rescue in state.rescues:
+		var by: Companion = rescue[0]
+		var freed: Companion = rescue[1]
+		if freed.is_alive():
+			_trip_memories[freed] = freed.remember("rescued", "Pulled from the %s's grip by %s" % [rescue[2].to_lower(), by.display_name], day, by.display_name)
+	if result != CombatState.Result.VICTORY:
+		return
+	for hero: Companion in _party_state.living_members():
+		if hero.health <= CLOSE_CALL_HEALTH:
+			_trip_memories[hero] = hero.remember("close_call", "Came through a fight on %d health, floor %d" % [hero.health, _depth], day)
+	if _fight_kind in ["lair", "queen"]:
+		var boss = null
+		for foe in state.foes:
+			if boss == null or foe.type.threat > boss.type.threat:
+				boss = foe
+		if boss:
+			for hero: Companion in _party_state.living_members():
+				_trip_memories[hero] = hero.remember("slew", "Was there when the %s fell" % boss.name, day, boss.name)
+
+
+## Those who came back remember who didn't.
+func _remember_the_fallen() -> void:
+	if _in_opening:
+		return
+	var rows: Array = _expedition.hero_rows(_party_state)
+	for lost in rows.filter(func(r): return not r["back"]):
+		for row in rows.filter(func(r): return r["back"]):
+			row["hero"].remember("lost", "Was there when %s fell" % lost["hero"].display_name, _camp_state.day, lost["hero"].display_name)
 
 
 ## A beaten enemy's purse (goblins, #42).
@@ -1032,7 +1082,9 @@ func _end_expedition(ending: int) -> void:
 	else:
 		var note: String = notes[ending] + "
 At camp, the quartermaster tops your torches back up to %d." % CampState.FREE_TORCHES
+		_remember_the_fallen()
 		_results.show_results(ending, _expedition, _party_state, note, _homecoming_lines())
+	_trip_memories.clear()
 	await _results.continue_pressed
 	_results.visible = false
 	if _in_opening and ending == Expedition.Ending.RETURNED:
@@ -1926,6 +1978,7 @@ func _flee_from(cell: Vector2i) -> void:
 
 
 var _strain_states := {}  # Companion -> last strain state, to announce changes
+var _standing := {}  # Companion -> was standing, to notice a fall (#118)
 var _hunger_states := {}  # Companion -> 0 fed, 1 hungry, 2 starving (#64)
 
 
@@ -1933,6 +1986,14 @@ var _hunger_states := {}  # Companion -> 0 fed, 1 hungry, 2 starving (#64)
 func _on_party_state_changed(announce := true) -> void:
 	_party_state.update_capacity()  # a limp, dressed or not, changes the pack (#104)
 	_update_wound_dim()
+	# A friend falls: someone still standing cries out (#118).
+	for member: Companion in _party_state.members:
+		var up := member.is_alive()
+		if announce and not _in_opening and _standing.get(member, up) and not up:
+			var others: Array[Companion] = _party_state.living_members()
+			if not others.is_empty():
+				_say("ally_down", true, false, others.pick_random(), {"fallen": member.display_name})
+		_standing[member] = up
 	for member: Companion in _party_state.living_members():
 		if not member.changed.is_connected(_on_party_state_changed):
 			member.changed.connect(_on_party_state_changed)  # e.g. strain from a trap
@@ -2978,7 +3039,7 @@ func _build_dialogue_box(ui: Control) -> void:
 ## Unforced lines respect a short cooldown; `once` lines are said only once.
 ## `who` speaks if given (the hurt or frightened hero, #118); otherwise the
 ## lead. A `once` line from a given hero is once per hero per expedition.
-func _say(situation: String, force := false, once := false, who: Companion = null) -> void:
+func _say(situation: String, force := false, once := false, who: Companion = null, names := {}) -> void:
 	var key := situation if who == null else "%s:%s" % [situation, who.display_name]
 	if once and _said.has(key):
 		return
@@ -2995,6 +3056,8 @@ func _say(situation: String, force := false, once := false, who: Companion = nul
 	var line: String = lines.pick(situation, _last_line)
 	if line == "":
 		return
+	for name in names:  # e.g. {"fallen": "Bren"}
+		line = line.replace("{%s}" % name, names[name])
 	_said[key] = true
 	_last_line = line
 	_last_spoke_at = now
@@ -3063,6 +3126,9 @@ func _homecoming_lines() -> Dictionary:
 		var line := ""
 		if not fallen.is_empty():
 			line = lines.pick("camp_grief").replace("{fallen}", fallen.pick_random())
+		if line == "" and _trip_memories.has(hero):  # what this trip gave them
+			var memory: Dictionary = _trip_memories[hero]
+			line = lines.pick("memory_" + memory["kind"]).replace("{who}", memory["about"]).replace("{foe}", memory["about"])
 		if line == "" and hero.health * 2 < hero.effective_max_health():
 			line = lines.pick("camp_hurt")
 		if line == "":

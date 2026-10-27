@@ -6,7 +6,9 @@ extends Resource
 ##
 ## Situations used so far: wake, bodies, bleeding, find_exit, lost, web,
 ## fight_start, fight_won, hurt, panic, dark, daylight; and (#118) shaken,
-## camp_return, camp_hurt, camp_grief ("{fallen}" names who didn't come back).
+## camp_return, camp_hurt, camp_grief ("{fallen}" names who didn't come back);
+## and memories (#118, 2026-10-26): ally_down ("{fallen}"), level_ready,
+## memory_rescued ("{who}"), memory_close_call, memory_slew ("{foe}").
 
 @export var lines: Dictionary[String, PackedStringArray] = {}
 

@@ -860,6 +860,24 @@ Guidance and results are shown as pictures rather than sentences.
 - **Room events:** the story line stays. What changed shows as icon-and-number chips.
 - **Art:** the new icons are placeholders in `art/ui/visual105-v1/` until ChatGPT replaces them.
 
+### Recruit memories — owner 2026-10-26 (#118)
+
+Each hero keeps up to **three memories**, newest first. Each is a fact the game saw, saved with the hero:
+- **Rescued:** pulled from a hollow miner's grip by a friend's blow ("Pulled from the hollow miner's grip by Mara").
+- **Close call:** came through a won fight on 2 health or less.
+- **Slew:** was there when a mini-boss or the queen fell.
+- **Lost:** came back from a trip someone didn't.
+
+A newer memory of the same kind about the same one replaces the older.
+
+**Where they show:**
+- **The hero window:** a "Remembers" list with the day of each.
+- **Homecoming quotes:** grief comes first; otherwise a memory made this trip ("We killed the Broodmother. Remember that, when it's dark."), then wounds, then relief.
+
+**New moments, in every voice:**
+- **A friend falls mid-fight:** someone still standing cries out their name.
+- **A hero becomes ready to advance:** they say so after the fight, in place of the usual victory line.
+
 ### Wandering monsters — owner 2026-10-26
 
 Fights used to sit only in rooms. Now lingering on a floor draws wanderers too (`scripts/wanderers.gd`, shared with the playtest bot):

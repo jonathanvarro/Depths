@@ -337,6 +337,8 @@ func _refresh_status() -> void:
 		if item and item.effect:_status_content.add_child(_wrapped(item.display_name+": "+item.effect.effects_text(),17))
 		if item and item.curse:_status_content.add_child(_wrapped("Cursed: "+item.curse.display_name+" · "+item.curse.effects_text(),17,Color("c39ed5")))
 	if h.trait_name!="":_status_content.add_child(_wrapped(h.trait_name+": "+h.trait_text,17))
+	if not h.memories.is_empty():  # #118
+		_status_content.add_child(_wrapped("Remembers:\n"+"\n".join(h.memories.map(func(m): return "· %s (day %d)" % [m["text"],m["day"]])),17,FieldKit.MUTED))
 	for text: String in [h.strength,h.weakness,h.backstory]:
 		if text!="":_status_content.add_child(_wrapped(text,17,FieldKit.MUTED))
 

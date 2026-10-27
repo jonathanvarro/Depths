@@ -134,6 +134,12 @@ var boons: Array[Dictionary] = []
 
 ## Set by the party (#101): a standing Warden steadies everyone's nerves.
 var party_calm := 1.0
+## What this hero remembers (#118, owner 2026-10-26): facts the game saw,
+## newest first, at most MEMORY_LIMIT. Each is {"kind", "text", "day",
+## "about"}: kind is rescued, close_call, slew or lost; `about` names who
+## or what, for their lines. Saved with the hero.
+@export var memories: Array[Dictionary] = []
+const MEMORY_LIMIT := 3
 var _health_fraction := 0.0  # partial healing carried between time units
 
 
@@ -272,6 +278,17 @@ func trip_ended() -> void:
 		return
 	boons = boons.filter(func(b): return b["boon"].fights > 0)
 	emit_changed()
+
+
+## Keeps a memory; the same kind about the same one replaces the older.
+func remember(kind: String, text: String, day: int, about := "") -> Dictionary:
+	var memory := {"kind": kind, "text": text, "day": day, "about": about}
+	memories.assign(memories.filter(func(m): return not (m["kind"] == kind and m["about"] == about)))
+	memories.push_front(memory)
+	if memories.size() > MEMORY_LIMIT:
+		memories.resize(MEMORY_LIMIT)
+	emit_changed()
+	return memory
 
 
 func has_talent(id: String) -> bool:
