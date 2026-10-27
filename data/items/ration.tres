@@ -7,9 +7,9 @@
 script = ExtResource("1")
 icon = ExtResource("2")
 display_name = "Trail ration"
-description = "Hard bread, dried meat and cheese in a tied cloth. Feeds the party: each hero regains 4 health over 20 time, completed by rest or a floor change."
+description = "Hard bread, dried meat and cheese in a tied cloth. Feeds the party: each hero regains 2 health over 20 time, completed by rest or a floor change."
 effect = 1
-amount = 4
+amount = 2
 duration = 20
 use_time = 1
 use_message = "You eat. Strength returns slowly."

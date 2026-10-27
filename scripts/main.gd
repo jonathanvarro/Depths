@@ -81,10 +81,10 @@ const FORCE_THROW_HEALTH := 4
 ## Tutorial steps worked out from her state (see _refresh_tutorial_hint).
 const TUTORIAL_STEPS := ["", "search", "equip", "drop", "light", "relight", "draught"]
 const DRAUGHT := preload("res://data/items/restorative_draught.tres")
-## The chest after fight 1 (#69): her first healing.
+## The chest after fight 1 (#69): her first healing. No dressing: injuries
+## wait for the mine proper (owner 2026-10-26).
 const OPENING_CHEST := {
 	preload("res://data/items/restorative_draught.tres"): 1,
-	preload("res://data/items/dressing.tres"): 1,
 }
 ## The opening's fights, in order: gentler tutorial creatures, a rat first.
 const OPENING_FIGHTS := [

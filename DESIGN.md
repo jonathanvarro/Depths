@@ -852,6 +852,11 @@ Guidance and results are shown as pictures rather than sentences.
 - **Room events:** the story line stays. What changed shows as icon-and-number chips.
 - **Art:** the new icons are placeholders in `art/ui/visual105-v1/` until ChatGPT replaces them.
 
+### Healing and the tutorial — owner 2026-10-26
+
+- **Rations** heal each hero 2 health over 20 time (was 4). At 4 gold for 12 health across a party of three they out-healed the 12-gold draught; now they are mainly food, with a little healing.
+- **The tutorial chest** holds only the restorative draught. The linen dressing is gone from the tutorial; injuries and dressings are met in the mine proper.
+
 ### First-time tips — implemented 2026-10-25
 
 After the opening, each newer system is explained once, by a "Got it" card, the first time it matters:
