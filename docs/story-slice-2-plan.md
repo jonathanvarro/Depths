@@ -27,7 +27,7 @@ DESIGN.md.
 ### Continuity with slice 1
 
 *Those Left Behind* already found **a route map in a stranger's hand** and **an odd goblin arrow**. Slice 2 pays them off:
-- The arrow is **elf-made, dressed as goblin work.** The smith notices it if you show her (a new talk line).
+- The arrow is **elf-made, dressed as goblin work.** The apprentice smith finds a black feather from it in your pack (a new talk line).
 - The map's hand is **elf script.** It can't be read yet; a wounded elf on floor 5 can read it.
 
 The truth comes out in steps, never from a single note.
@@ -48,7 +48,7 @@ The truth comes out in steps, never from a single note.
 
 | Quest | Given by | Floor | What happens |
 |---|---|---|---|
-| **The Arrow** | the smith (visible) | camp | Show her the odd arrow from slice 1: "That's not goblin work. Someone wanted you to think so." A short talk; it unlocks the next quest. |
+| **The Black Fletching** | the smith (visible) | camp | The apprentice finds a black feather in your pack: "That's not goblin work. Someone wanted you to think it was." |
 | **The Wounded Keeper** | hidden package | 5 | A wounded dark elf, cut off from her people, in a dry room among the pools. Help her (a draught or a dressing) or leave her. Helped, she reads the map: it's the vanguard's route, marked by her own people. She admits the ambush, and why. |
 | **The Dry Passage** | Vael (visible) | 5 | Open the main sluice. Vael's reason is the descent; his questions afterwards are about "what's down there". |
 | **The Stonework** | hidden package | 6 | Old carved stone at the reservoir's edge. Touching it plays **the first vision** (blue tint): a slow heartbeat through rock, something vast turning in its sleep. No words, just the sense of it. Afterwards each hero says one line. |

@@ -28,6 +28,7 @@ const Expedition := preload("res://scripts/expedition.gd")
 const SafeArea := preload("res://scripts/safe_area.gd")
 const OpeningGenerator := preload("res://scripts/opening_generator.gd")
 const Wanderers := preload("res://scripts/wanderers.gd")
+const Galleries := preload("res://scripts/galleries.gd")
 const DialogueBox := preload("res://scripts/dialogue_box.gd")
 ## Seconds between unprompted lines, so heroes don't chatter (#57).
 const SPEECH_COOLDOWN := 6.0
@@ -183,6 +184,11 @@ const ENCOUNTER_GROUPS := {
 			[GUARD, GOBLIN, ARCHER], [GUARD, GOBLIN, GOBLIN], [GUARD, DRUMMER, GOBLIN], [GUARD, GUARD, ARCHER, GOBLIN],
 			[BRUTE, GUARD], [BRUTE, ARCHER, GOBLIN], [BRUTE, GOBLIN, DRUMMER],
 			[TRAPPER, GUARD, GOBLIN]],
+	# The Drowned Galleries (slice 2): the breach's creatures hold the
+	# water. The new monsters (#166) join when their art lands.
+	5: [[MINER], [HOUND], [LAMP_EATER], [MINER, MINER], [HOUND, HOUND], [MINER, BLOAT], [LAMP_EATER, MINER],
+			[HOUND, HOUND, LAMP_EATER], [BLOAT, BLOAT, MINER], [MINER, MINER, HOUND], [VENOM_SPIDER, MINER, BLOAT],
+			[BRUTE, MINER], [HOUND, HOUND, HOUND], [MINER, MINER, MINER], [LAMP_EATER, HOUND, MINER, BLOAT]],
 }
 ## The Broodmother and the gate captain aren't in these tables: they wait
 ## in optional lairs instead (#145, data/packages/lair_*.tres).
@@ -584,6 +590,8 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 		_floors[depth].fight_groups = stamped["fights"]
 		_floors[depth].packages = stamped["placed"]
 		_floors[depth].lairs = stamped["lairs"]
+		if depth == Galleries.DEPTH and not use_debug_layout:  # slice 2
+			Galleries.flood(_floors[depth], _site_seed + depth * 7919 + 37, Quests.has_flag(_camp_state, "dry_passage", "opened"))
 	_map = _floors[depth]
 
 	_build_level()
@@ -619,6 +627,8 @@ func _build_level() -> void:
 	_play_place_music()
 	add_child(_level)
 	_add_room_props()
+	for cell in _map.water:  # floor 5's deep water (placeholder art, #166)
+		_level.add_child(Galleries.water_plane(cell, CELL_SIZE))
 	if _depth == OPENING_DEPTH and _in_opening:
 		_add_opening_dressing()
 	elif _depth == OUTSKIRTS_DEPTH and not use_debug_layout:
@@ -641,6 +651,7 @@ func _make_layout(depth: int) -> PackedStringArray:
 
 func _on_party_entered_cell(cell: Vector2i) -> void:
 	_look_for_traps(cell)
+	_wade(cell)
 	_banter()
 	# A landmark (#117): named the first time, marked on the map from then on.
 	var landmark: Dictionary = Landmarks.at_cell(_map, cell)
@@ -739,6 +750,8 @@ func _run_event(cell: Vector2i) -> void:
 		_room_events.alarm_raised = false
 		_map.alarmed = true
 	_wanderers_stirred()
+	var drained: bool = _room_events.drained  # the main sluice (slice 2)
+	_room_events.drained = false
 	for item in result.get("no_room", {}):
 		_left_over(item, result["no_room"][item])
 	# A chest may hold finer gear (owner, 2026-10-21).
@@ -753,7 +766,9 @@ func _run_event(cell: Vector2i) -> void:
 		return
 	_empty_prop(cell)
 	if Quests.has_flag(_camp_state, "lower_gate", "seen") and not Quests.has_flag(_camp_state, "lower_gate", "ending_shown"):
-		await _slice_ending()
+		await _slice_ending(cell)
+	if drained:
+		await _drain_galleries()
 	if _in_opening and cell in _opening_body_cells():
 		_searched_bodies[cell] = true
 		_say("search_body", true)
@@ -1480,7 +1495,11 @@ func _placeholder_prop(kind: int) -> Node3D:
 
 ## The damp second floor has its own set; preserve custom/debug themes.
 func _apply_theme() -> void:
-	var theme: EnvironmentTheme = FORTRESS_THEME if _depth >= FORTRESS_DEPTH and not use_debug_layout else _cave_theme
+	var theme: EnvironmentTheme = FORTRESS_THEME if _depth == FORTRESS_DEPTH and not use_debug_layout else _cave_theme
+	if _depth >= Galleries.DEPTH and not use_debug_layout:
+		if _galleries_theme == null:
+			_galleries_theme = Galleries.theme_from(_cave_theme)
+		theme = _galleries_theme
 	if _depth == 2 and not use_debug_layout and _cave_theme.resource_path == "res://themes/cave.tres":
 		theme = FUNGAL_THEME
 	environment_theme = theme
@@ -1781,13 +1800,69 @@ func set_vision(on: bool) -> void:
 
 ## The first story slice ends at the lower water gate (docs/first-slice-
 ## plan.md): a short card, then play carries on in the cave as before.
-func _slice_ending() -> void:
+## Slice 2 (owner, 2026-10-26): the gate now opens a stair to floor 5.
+func _slice_ending(cell := Vector2i(-1, -1)) -> void:
 	Quests.set_flag(_camp_state, "lower_gate", "ending_shown")
 	_party.locked = true
 	_results.show_brief("The way down continues",
-			"Below the fortress, the old channels run on into flooded galleries no map has charted. Whatever the commander is looking for, it lies further down.
+			"Below the fortress, the old channels run on into flooded galleries no map has charted. Beside the grate, worn steps go down into the dark water. Whatever the commander is looking for, it lies further down.
 
-This is as far as the cave goes for now. Your campaign carries on - the queen, the camp and the upper floors are still yours to finish.",
+Report to the commander, or take the stair: the Drowned Galleries are floor 5.",
+			"Continue")
+	await _results.continue_pressed
+	_results.visible = false
+	_party.locked = false
+	if cell != Vector2i(-1, -1):
+		_open_gate_stair(cell)
+
+
+## The lower water gate becomes the way down (later days: gate_stair.tres).
+func _open_gate_stair(cell: Vector2i) -> void:
+	_map.contents[cell] = DungeonMap.Content.STAIRS_DOWN
+	_map.events.erase(cell)
+	_map.solid.erase(cell)
+	_map.triggered.erase(cell)
+	_build_level()
+	_minimap.queue_redraw()
+	_full_map_view.queue_redraw()
+
+
+# --- The Drowned Galleries (floor 5, slice 2; galleries.gd) ---------------
+
+var _galleries_theme: EnvironmentTheme
+
+## The deepest floor the story has opened.
+func _deepest_open() -> int:
+	return Galleries.DEPTH if Quests.has_flag(_camp_state, "lower_gate", "seen") else floors_in_site
+
+
+## Wading through deep water: time, nerves, and a guttering torch.
+func _wade(cell: Vector2i) -> void:
+	if _map == null or not _map.is_water(cell) or _in_opening:
+		return
+	_party_state.advance_time(Galleries.WADE_TIME)
+	for hero: Companion in _party_state.living_members():
+		hero.change_strain(Galleries.WADE_STRAIN)
+	if _party_state.supplies.source == Supplies.Source.TORCH:
+		_party_state.supplies.burn(Galleries.WADE_TORCH_SOAK)
+	_tip("wading", "Deep water: wading costs time and nerves, and a torch gutters and burns down faster. A lantern rides above it.")
+
+
+## The main sluice is open: the galleries drain, today and for good.
+func _drain_galleries() -> void:
+	_map.water.clear()
+	_build_level()
+	_minimap.queue_redraw()
+	_show_message("The water falls away. The galleries are dry.")
+	if Quests.has_flag(_camp_state, "dry_passage", "ending_shown"):
+		return
+	Quests.set_flag(_camp_state, "dry_passage", "ending_shown")
+	_save_now()
+	_party.locked = true
+	_results.show_brief("The galleries drain",
+			"All through the galleries, the water drains away down channels cut for it long ago. Where the deepest pool was, a stair of black stone goes down toward the sound of a great weight of water, moving in the dark.
+
+That reservoir is as far as the mine goes for now. The commander will want to hear of this.",
 			"Continue")
 	await _results.continue_pressed
 	_results.visible = false
@@ -3292,7 +3367,7 @@ func _on_party_moved(cell: Vector2i, facing: int) -> void:
 		state = " (used)" if _map.triggered.has(cell) else ""
 	var seed_text: String = "debug layout" if use_debug_layout and _depth == 1 else str(_site_seed)
 	_debug_label.text = "Seed: %s  Depth: %d/%d\nCell: %s  Facing: %s\nHere: %s%s\nContents on floor: %d  Passages: %d\nParty: %s\nTime: %d  Oil: %.1f (%s)" % [
-		seed_text, _depth, floors_in_site, cell, ["N", "E", "S", "W"][facing],
+		seed_text, _depth, _deepest_open(), cell, ["N", "E", "S", "W"][facing],
 		DungeonMap.content_name(content), state, _map.contents.size(), _map.doors.size(),
 		_party_state.summary(), _party_state.time_elapsed, _party_state.supplies.oil,
 		Supplies.LIGHT_NAMES[_party_state.supplies.light_band()]]
@@ -3375,7 +3450,7 @@ func _set_full_map(open: bool) -> void:
 	_full_map.visible = open
 	_party.locked = open
 	if open:
-		_full_map_title.text = "%s · depth %d of %d" % [environment_theme.display_name, _depth, floors_in_site]
+		_full_map_title.text = "%s · depth %d of %d" % [environment_theme.display_name, _depth, _deepest_open()]
 		_full_map_close.grab_focus.call_deferred()
 
 

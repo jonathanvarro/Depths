@@ -15,8 +15,10 @@ extends Resource
 ## Placed while this quest is at one of these stages (quests.gd Stage)...
 @export var quest := ""
 @export var stages: Array[int] = [2]
-## ...and that quest has none of these flags (e.g. the thing is done).
+## ...and that quest has none of these flags (e.g. the thing is done)...
 @export var unless_flags: PackedStringArray = []
+## ...and all of these (e.g. the gate was seen: its stair is open).
+@export var needs_flags: PackedStringArray = []
 @export var rows: PackedStringArray = []
 @export var events: Array[RoomEvent] = []
 ## Who waits at its 'E'.

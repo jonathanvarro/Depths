@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="Conversation" format=3]
+
+[ext_resource type="Script" path="res://scripts/conversation_page.gd" id="page"]
+[ext_resource type="Script" path="res://scripts/conversation_reply.gd" id="reply"]
+[ext_resource type="Script" path="res://scripts/conversation.gd" id="conv"]
+[ext_resource type="Texture2D" path="res://art/portraits/story-slice-v1/commander-edric.png" id="portrait"]
+
+[sub_resource type="Resource" id="r0_0"]
+script = ExtResource("reply")
+label = "\"And then?\""
+next = 1
+
+[sub_resource type="Resource" id="p0"]
+script = ExtResource("page")
+text = "He hears you out about the gate and the stair beneath it without once looking up from his map.\n\n\"Flooded galleries. Old waterworks, older than the goblins, older than the town.\" He taps a mark you can't read. \"Somewhere down there is a main sluice. Open it, and the water goes where it was built to go.\""
+replies = Array[ExtResource("reply")]([SubResource("r0_0")])
+
+[sub_resource type="Resource" id="r1_0"]
+script = ExtResource("reply")
+label = "\"I'll open it.\""
+next = -1
+
+[sub_resource type="Resource" id="p1"]
+script = ExtResource("page")
+text = "\"And then the way is dry, and we see what the water has been hiding.\" For a moment something almost like hunger crosses his face; then it is gone. \"The king wants this business finished. So do I.\""
+replies = Array[ExtResource("reply")]([SubResource("r1_0")])
+
+[resource]
+script = ExtResource("conv")
+speaker = "Commander Edric Vael"
+portrait = ExtResource("portrait")
+pages = Array[ExtResource("page")]([SubResource("p0"), SubResource("p1")])

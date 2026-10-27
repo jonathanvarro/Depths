@@ -1,0 +1,60 @@
+[gd_resource type="Resource" script_class="RoomEvent" format=3]
+
+[ext_resource type="Script" path="res://scripts/event_choice.gd" id="choice"]
+[ext_resource type="Script" path="res://scripts/event_outcome.gd" id="outcome"]
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="event"]
+[ext_resource type="PackedScene" path="res://art/props/opening-bodies-v1/fallen-a.tscn" id="prop"]
+[ext_resource type="Resource" path="res://data/items/restorative_draught.tres" id="item0"]
+[ext_resource type="Resource" path="res://data/items/dressing.tres" id="item1"]
+
+[sub_resource type="Resource" id="o0_0"]
+script = ExtResource("outcome")
+text = "She drinks, grimacing, and the colour comes back to her face. Then she asks for the map you carry, and reads the strange marks over your party's route as easily as her own hand.\n\n\"Ours. We watched your vanguard come down, and we stopped them. What sleeps below must stay asleep.\" She meets your eyes. \"I would do it again.\""
+quest = "keeper"
+quest_flag = "helped"
+quest_stage = 3
+
+[sub_resource type="Resource" id="c0"]
+script = ExtResource("choice")
+label = "Give her a draught"
+time_cost = 1
+requires = ExtResource("item0")
+outcomes = Array[ExtResource("outcome")]([SubResource("o0_0")])
+
+[sub_resource type="Resource" id="o1_0"]
+script = ExtResource("outcome")
+text = "She lets you bind it, watching your hands the whole time. Then she asks for the map you carry, and reads the strange marks over your party's route as easily as her own hand.\n\n\"Ours. We watched your vanguard come down, and we stopped them. What sleeps below must stay asleep.\" She meets your eyes. \"I would do it again.\""
+quest = "keeper"
+quest_flag = "helped"
+quest_stage = 3
+
+[sub_resource type="Resource" id="c1"]
+script = ExtResource("choice")
+label = "Bind her wound"
+time_cost = 2
+requires = ExtResource("item1")
+outcomes = Array[ExtResource("outcome")]([SubResource("o1_0")])
+
+[sub_resource type="Resource" id="o2_0"]
+script = ExtResource("outcome")
+text = "You leave her there. She says nothing, and when you look back, the alcove is empty."
+target = 1
+strain = 4.0
+quest = "keeper"
+quest_flag = "abandoned"
+quest_stage = 3
+
+[sub_resource type="Resource" id="c2"]
+script = ExtResource("choice")
+label = "Walk away"
+time_cost = 1
+outcomes = Array[ExtResource("outcome")]([SubResource("o2_0")])
+
+[resource]
+script = ExtResource("event")
+kind = 4
+title = "A wounded elf"
+clue = "In a dry alcove among the pools, a woman sits against the wall with a hand pressed to her side. Grey skin, long ears, a black-fletched arrow case beside her. A dark elf. She watches you come and does not reach for her knife - she hasn't the strength."
+choices = Array[ExtResource("choice")]([SubResource("c0"), SubResource("c1"), SubResource("c2")])
+min_depth = 99
+prop = ExtResource("prop")

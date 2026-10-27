@@ -15,7 +15,7 @@ const XP_PER_THREAT := 4
 ## Fight XP each floor can give over the whole campaign.
 ## Level 4 is reachable before the queen (owner, 2026-10-19, #49): the
 ## floors and the gate offer 490 of the 440 needed; she can be a quest.
-const FLOOR_XP_LIMIT := {1: 60, 2: 90, 3: 150, 4: 150}
+const FLOOR_XP_LIMIT := {1: 60, 2: 90, 3: 150, 4: 150, 5: 160}
 const GATE_XP := 40
 const QUEEN_XP := 80
 const CLEARED_XP := 40

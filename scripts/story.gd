@@ -16,6 +16,8 @@ static func camp_talk(camp, site: String) -> String:
 		"cave":  # the commander keeps his post by the cave path
 			if Quests.is_active(camp, "left_behind"):
 				return "commander_report" if Quests.has_flag(camp, "left_behind", "found") else "commander_waiting"
+			if Quests.has_flag(camp, "lower_gate", "seen") and Quests.stage(camp, "dry_passage") == S.UNKNOWN:
+				return "commander_galleries"  # slice 2
 		"smith":
 			if not camp.site_present("smith"):
 				return ""
@@ -23,9 +25,13 @@ static func camp_talk(camp, site: String) -> String:
 				return "smith_offer"
 			if Quests.is_active(camp, "iron_sample") and Quests.has_flag(camp, "iron_sample", "have_ore"):
 				return "smith_deliver"
+			if Quests.has_flag(camp, "lower_gate", "seen") and Quests.stage(camp, "the_arrow") == S.UNKNOWN:
+				return "smith_arrow"  # slice 2
 		"fire":
 			if Quests.has_flag(camp, "three_knocks", "miner_at_camp") and not Quests.has_flag(camp, "three_knocks", "thanked"):
 				return "miner_thanks"
+			if Quests.has_flag(camp, "keeper", "helped") and not Quests.has_flag(camp, "keeper", "talked"):
+				return "fire_keeper"  # slice 2: the party argues over her
 	return ""
 
 
@@ -46,6 +52,13 @@ static func after_talk(camp, id: String) -> void:
 			Quests.set_stage(camp, "iron_sample", S.RESOLVED)
 			if CAMP_BLADE not in camp.smith_unlocks:
 				camp.smith_unlocks.append(CAMP_BLADE)
+		"commander_galleries":
+			Quests.set_stage(camp, "dry_passage", S.ACTIVE)
+		"smith_arrow":
+			Quests.set_stage(camp, "the_arrow", S.ACTIVE)
+		"fire_keeper":
+			Quests.set_flag(camp, "keeper", "talked")
+			Quests.set_stage(camp, "the_arrow", S.RESOLVED)
 		"miner_thanks":
 			Quests.set_flag(camp, "three_knocks", "thanked")
 			Quests.set_stage(camp, "three_knocks", S.RESOLVED)

@@ -49,6 +49,8 @@ var alarm_raised := false
 ## The last choice made a noise: wanderers come (scripts/wanderers.gd).
 ## Read and cleared like alarm_raised.
 var stirred := false
+## The last choice opened the main sluice (galleries.gd); main.gd clears it.
+var drained := false
 ## The camp, for events that move quests on (#123); set by main.gd.
 var camp
 
@@ -112,6 +114,8 @@ func resolve(party, choice: EventChoice, forced := -1, flags: Array = []) -> Dic
 		alarm_raised = true
 	if outcome and (outcome.alarm or outcome.stirs):
 		stirred = true
+	if outcome and outcome.drains:
+		drained = true
 	if outcome and outcome.sets_flag != "" and outcome.sets_flag not in flags:
 		flags.append(outcome.sets_flag)
 	if outcome and outcome.quest != "" and camp != null:

@@ -15,6 +15,8 @@ enum Target {
 ## A noise (falling stones, a clatter): wandering monsters come looking
 ## (owner, 2026-10-26). A rung bell does this too.
 @export var stirs := false
+## The main sluice turns (floor 5, The Dry Passage): the galleries drain.
+@export var drains := false
 @export_multiline var text := ""
 @export var target := Target.ONE
 ## Immediate change to health (negative hurts).

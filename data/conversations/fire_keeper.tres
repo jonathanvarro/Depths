@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="Conversation" format=3]
+
+[ext_resource type="Script" path="res://scripts/conversation_page.gd" id="page"]
+[ext_resource type="Script" path="res://scripts/conversation_reply.gd" id="reply"]
+[ext_resource type="Script" path="res://scripts/conversation.gd" id="conv"]
+
+[sub_resource type="Resource" id="r0_0"]
+script = ExtResource("reply")
+label = "Go on"
+next = 1
+
+[sub_resource type="Resource" id="p0"]
+script = ExtResource("page")
+speaker = "narrator"
+text = "No one says her name; she never gave it. But everyone is thinking about the elf among the pools, and what she said."
+replies = Array[ExtResource("reply")]([SubResource("r0_0")])
+
+[sub_resource type="Resource" id="r1_0"]
+script = ExtResource("reply")
+label = "Go on"
+next = 2
+
+[sub_resource type="Resource" id="p1"]
+script = ExtResource("page")
+speaker = "hero"
+text = "\"She told us to our faces. Her people killed ours, to keep us away from something below. And she wasn't sorry.\""
+replies = Array[ExtResource("reply")]([SubResource("r1_0")])
+
+[sub_resource type="Resource" id="p2"]
+script = ExtResource("page")
+speaker = "narrator"
+text = "The argument goes round the fire and comes back no further on. Some want her dead. Some want to know what could be worth that. Someone asks, very quietly, whether the commander already knows.\n\nNo one answers. The fire burns down."
+
+[resource]
+script = ExtResource("conv")
+speaker = "By the fire"
+pages = Array[ExtResource("page")]([SubResource("p0"), SubResource("p1"), SubResource("p2")])

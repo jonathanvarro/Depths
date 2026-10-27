@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="Conversation" format=3]
+
+[ext_resource type="Script" path="res://scripts/conversation_page.gd" id="page"]
+[ext_resource type="Script" path="res://scripts/conversation_reply.gd" id="reply"]
+[ext_resource type="Script" path="res://scripts/conversation.gd" id="conv"]
+[ext_resource type="Texture2D" path="res://art/camp/highres-v4/apprentice.png" id="portrait"]
+
+[sub_resource type="Resource" id="r0_0"]
+script = ExtResource("reply")
+label = "\"Where my party fell.\""
+next = 1
+
+[sub_resource type="Resource" id="p0"]
+script = ExtResource("page")
+text = "He is mending a strap on your pack when he stops, and works something out of the stitching with the tip of his knife: a single black feather, glossy as oil.\n\n\"Where did you pick this up?\""
+replies = Array[ExtResource("reply")]([SubResource("r0_0")])
+
+[sub_resource type="Resource" id="r1_0"]
+script = ExtResource("reply")
+label = "Keep the feather"
+next = -1
+
+[sub_resource type="Resource" id="p1"]
+script = ExtResource("page")
+text = "He turns it under the lamp. \"My master had a knife trimmed with these. Traded it off a pedlar who swore it came up from the deep places - from folk who don't come up.\" He hands it back as if it were hot. \"That's not goblin work. Someone wanted you to think it was.\""
+replies = Array[ExtResource("reply")]([SubResource("r1_0")])
+
+[resource]
+script = ExtResource("conv")
+speaker = "The apprentice smith"
+portrait = ExtResource("portrait")
+pages = Array[ExtResource("page")]([SubResource("p0"), SubResource("p1")])

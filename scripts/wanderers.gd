@@ -5,7 +5,8 @@ extends RefCounted
 ## often. Once stirred, they arrive a few steps later, so a warning sound
 ## gives the player time to reach the stairs or make ready. Noisy events (a
 ## rung bell, falling stones) stir them at once. Taking the stairs resets
-## the clock; after a wanderer there's a breather. The fortress has none.
+## the clock; after a wanderer there's a breather. The fortress (floor 4)
+## has none.
 ##
 ## Shared by main.gd and the campaign playtest, so both follow one rule.
 
@@ -14,6 +15,7 @@ const WANDER := {
 	1: [60, 0.02, 0.06],
 	2: [50, 0.03, 0.08],
 	3: [40, 0.04, 0.10],
+	5: [40, 0.04, 0.10],  # the Drowned Galleries (slice 2)
 }
 ## The chance rises this much for every RISE_EVERY time lingered past quiet.
 const RISE := 0.01

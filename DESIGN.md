@@ -860,6 +860,38 @@ Guidance and results are shown as pictures rather than sentences.
 - **Room events:** the story line stays. What changed shows as icon-and-number chips.
 - **Art:** the new icons are placeholders in `art/ui/visual105-v1/` until ChatGPT replaces them.
 
+### Floor 5, the Drowned Galleries — built 2026-10-27 (slice 2, placeholder art)
+
+Built from the [slice-2 plan](docs/story-slice-2-plan.md); checked by `tools/galleries_check.gd`.
+
+- **The way down:**
+  - The lower water gate (floor 4) now ends in a stair to floor 5, the moment it's seen.
+  - On later days, the stair is a small package (`gate_stair.tres`).
+  - Floor 5 has no way further down yet.
+- **Deep water:**
+  - About 40% of floor 5's passages run deep. Rooms, doors and contents stay dry.
+  - Each step through deep water costs 1 extra time, 1.5 strain for everyone, and 2 extra torch time (it gutters). A lantern is unaffected.
+- **Foes:** the breach creatures hold the water: hollow miners, hounds, lamp-eaters and bloats, with the odd brute or venom spider.
+  - Depth scale: +35%.
+  - Elites: 25%, at most 2.
+  - Wanderers: as on floor 3.
+  - The new monsters join when #166's art lands.
+- **The Dry Passage (Vael):**
+  - The commander asks for it once the gate is seen.
+  - The main sluice, a package on floor 5, turns with 4 time and a little strain.
+  - Turning it drains the galleries at once, and they stay drained on every later day.
+  - An ending card then says the reservoir below is as far as the mine goes for now.
+- **The Black Fletching (the smith):** once the gate is seen, the apprentice finds a black feather in your pack. It's dark-elf work, made to look like goblin.
+- **The Wounded Keeper (hidden, floor 5):**
+  - A dark elf in a dry alcove.
+  - **Helping her** (a draught or a dressing): she reads the map and admits her people ambushed the vanguard, to keep what sleeps below asleep.
+  - **Walking away:** she's gone.
+  - After helping her, the party argues over her at the fire, which settles the black fletching.
+- **Placeholder look until #166:**
+  - Floor 5 reuses the cave's surfaces, so it doesn't look different yet.
+  - The water is a dark, glossy sheet over the floor.
+  - The sluice borrows the lower gate's prop, and the keeper a fallen-body prop.
+
 ### Recruit memories — owner 2026-10-26 (#118)
 
 Each hero keeps up to **three memories**, newest first. Each is a fact the game saw, saved with the hero:

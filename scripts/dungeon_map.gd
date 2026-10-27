@@ -69,6 +69,12 @@ var heard := {}
 var marks := {}
 ## This floor's landmarks (#117, landmarks.gd): [{id, name, cells, centre, seen}].
 var landmarks: Array = []
+## Deep water the party has to wade (floor 5, galleries.gd): cell -> true.
+var water := {}
+
+
+func is_water(cell: Vector2i) -> bool:
+	return water.has(cell)
 
 var _rows: PackedStringArray
 

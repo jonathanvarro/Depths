@@ -26,7 +26,7 @@ static func active(camp, depth: int) -> Array[QuestPackage]:
 	return library().filter(func(p: QuestPackage):
 		return p.lair == "" and p.chance == 0.0 and depth >= p.min_depth and depth <= p.max_depth \
 				and Quests.stage(camp, p.quest) in p.stages \
-				and not Array(p.unless_flags).any(func(f): return Quests.has_flag(camp, p.quest, f)))
+				and not Array(p.unless_flags).any(func(f): return Quests.has_flag(camp, p.quest, f)) 				and Array(p.needs_flags).all(func(f): return Quests.has_flag(camp, p.quest, f)))
 
 
 ## How often a floor that can hold a mini-boss lair has one (#145).
