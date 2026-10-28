@@ -84,6 +84,15 @@ func _initialize() -> void:
 		for i in 6:
 			await process_frame
 		root.get_texture().get_image().save_png("%s/galleries_%s_water.png" % [dir, tag])
+		for c in map.water:
+			map.explored[c] = true
+		main._minimap.setup(map)
+		main._full_map_view.setup(map)
+		main._set_full_map(true)
+		for i in 4:
+			await process_frame
+		root.get_texture().get_image().save_png("%s/galleries_%s_map.png" % [dir, tag])
+		main._set_full_map(false)
 
 	# Wading.
 	var supplies = ps.supplies

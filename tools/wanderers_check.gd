@@ -70,6 +70,13 @@ func _initialize() -> void:
 	main._go_to_floor(2, main.Arrival.FROM_ABOVE)
 	await process_frame
 	check("a new floor starts the clock", main._wanderers.depth == 2 and main._wanderers.quiet == Wanderers.WANDER[2][0])
+	main._wanderers.coming = 2
+	main._wanderers.since = 17
+	var saved: Dictionary = main._save_data()
+	var restored := Wanderers.new()
+	load("res://scripts/save_game.gd").unpack_into(restored, saved.get("wanderers", {}))
+	check("the clock is saved with the game", restored.coming == 2 and restored.since == 17 and restored.depth == 2)
+	main._wanderers.coming = -1
 	main._room_events.stirred = true
 	main._wanderers_stirred()
 	check("a noisy event: they're coming, and you hear it", main._wanderers.coming == Wanderers.WARNING_STEPS and main._message_label.text.contains("heard that"), main._message_label.text)

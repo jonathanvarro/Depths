@@ -1300,6 +1300,7 @@ func _save_data() -> Dictionary:
 		"expedition": SaveGame.pack_object(_expedition, ["_start_heroes"]),
 		"start_heroes": start_heroes,
 		"floors": floors,
+		"wanderers": SaveGame.pack_object(_wanderers),  # the floor's clock, kept across a load
 	}
 
 
@@ -1355,6 +1356,8 @@ func _restore(data: Dictionary) -> void:
 	_party.moved.emit(_party.cell, _party.facing)
 	_show_message("%s · depth %d · continued" % [environment_theme.display_name, _depth])
 	_wanderers.arrive_on(_depth, _party_state.time_elapsed)
+	if data.has("wanderers"):  # saves from before 2026-10-27 start the quiet spell again
+		SaveGame.unpack_into(_wanderers, data["wanderers"])
 	if data["resume"]:  # an interrupted fight or event happens again
 		var fight: Array[EnemyType] = []
 		for path in data.get("resume_fight", []):
