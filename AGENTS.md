@@ -116,6 +116,7 @@ Templates > Download and Install; already installed on the owner's PC).
   separate lighting and individually tilted native animation: `docs/fixer-portraits.md`.
   The combined recruit catalog has twelve faces; these three own their full
   busts (`Unique` art rigs), distinct from the nine reusable plain-body faces.
+  Owner approved all three revised designs on 2026-10-27; preserve this visual direction.
 - `scripts/portrait_view.gd` – draws a PortraitSet; blink(), talk(), hurt(),
   set_condition().
 - `scripts/party_card.gd` – HUD card per party slot (portrait, name, health

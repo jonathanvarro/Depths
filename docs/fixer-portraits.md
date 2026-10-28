@@ -1,5 +1,9 @@
 # Fixer portraits · #163
 
+**Owner approved the three revised portrait designs on 2026-10-27:**
+“Yes, those are fantastic and much more distinctive.” Preserve their red coats,
+worn finery, silver hair streaks and knowing expressions as the Fixer direction.
+
 The three live recruit portraits now follow the owner's supplied Fixer concepts:
 worn burgundy brocade coats, ochre waistcoats, ivory shirts, silver hair streaks
 and personable, knowing expressions. The earlier plain padded-jerkin studies
@@ -106,8 +110,8 @@ role filter; the new Fixers have their own current review and coverage.
   **37 shared-inspector regression checks** pass. Inspectors start paused, step
   and hold exact frames, reveal the actual clean face, and decode all captures.
 
-Source/math checks do not replace visual judgment. Owner review and physical
-iPhone testing (#66) remain separate. The role/Main regression retains its
+The owner has accepted this visual set; physical iPhone testing (#66) remains
+separate. The role/Main regression retains its
 existing shutdown warnings (one CanvasItem RID / two ObjectDB instances);
 isolated Fixer, original roster and registry checks exit cleanly. No player save
 or preferences are changed. Concurrent campaign/story work is outside this art
