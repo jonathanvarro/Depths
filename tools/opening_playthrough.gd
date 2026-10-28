@@ -32,7 +32,9 @@ func check(label: String, ok: bool, detail = "") -> void:
 func _snap(name: String) -> void:
 	for i in 4:
 		await process_frame
-	root.get_texture().get_image().save_png(S + "/op4_" + tag + "_" + name + ".png")
+	var image := root.get_texture().get_image()
+	if image:  # none when run headless (no window): skip the picture
+		image.save_png(S + "/op4_" + tag + "_" + name + ".png")
 
 
 func _snap_once(name: String) -> void:
