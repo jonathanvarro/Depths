@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="QuestPackage" format=3]
+
+[ext_resource type="Script" path="res://scripts/quest_package.gd" id="pkg"]
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="event_script"]
+
+[resource]
+script = ExtResource("pkg")
+id = "sluice_stair"
+min_depth = 5
+max_depth = 5
+quest = "dry_passage"
+stages = Array[int]([3])
+needs_flags = PackedStringArray("opened")
+rows = PackedStringArray("#####", "#,,,#", "#,>,#", "#,,,#", "##.##")

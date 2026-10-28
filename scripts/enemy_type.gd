@@ -42,6 +42,10 @@ enum Tactic {
 	PACK,  ## lunges at the weakest; hits harder while another of its pack stands (breach hound)
 	BROOD,  ## calls hatchlings once, bites with venom, rages below half health (Broodmother)
 	CAPTAIN,  ## rallies an ally behind a raised guard, winds up, strikes (gate captain)
+	# Slice 2's deep monsters (#150, owner-approved plan 2026-10-26).
+	LUNGER,  ## bites, then a long jaw-stretching lunge that reaches the back row (Underhound)
+	HYDRA,  ## three heads, one hide: a bite per head; losing a head throws it off balance (Borrowed Pack)
+	SHEPHERD,  ## births an unfinished hound every other turn until its cage is empty (Marrow Shepherd)
 }
 @export var tactic := Tactic.BASIC
 ## Shown when the fight starts: a hint at how it fights.

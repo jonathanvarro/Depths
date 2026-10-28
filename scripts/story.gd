@@ -18,6 +18,8 @@ static func camp_talk(camp, site: String) -> String:
 				return "commander_report" if Quests.has_flag(camp, "left_behind", "found") else "commander_waiting"
 			if Quests.has_flag(camp, "lower_gate", "seen") and Quests.stage(camp, "dry_passage") == S.UNKNOWN:
 				return "commander_galleries"  # slice 2
+			if Quests.has_flag(camp, "reservoir", "diverted") and not Quests.has_flag(camp, "reservoir", "reported"):
+				return "commander_reservoir"  # slice 2's ending
 		"smith":
 			if not camp.site_present("smith"):
 				return ""
@@ -54,6 +56,9 @@ static func after_talk(camp, id: String) -> void:
 				camp.smith_unlocks.append(CAMP_BLADE)
 		"commander_galleries":
 			Quests.set_stage(camp, "dry_passage", S.ACTIVE)
+		"commander_reservoir":
+			Quests.set_flag(camp, "reservoir", "reported")
+			Quests.set_stage(camp, "reservoir", S.RESOLVED)
 		"smith_arrow":
 			Quests.set_stage(camp, "the_arrow", S.ACTIVE)
 		"fire_keeper":

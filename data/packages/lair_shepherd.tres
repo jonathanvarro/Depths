@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="QuestPackage" format=3]
+
+[ext_resource type="Script" path="res://scripts/quest_package.gd" id="pkg"]
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="enemy"]
+[ext_resource type="Resource" path="res://data/enemies/marrow_shepherd.tres" id="shepherd"]
+[ext_resource type="Resource" path="res://data/enemies/underhound.tres" id="underhound"]
+
+[resource]
+script = ExtResource("pkg")
+id = "lair_shepherd"
+min_depth = 6
+max_depth = 6
+rows = PackedStringArray("#######", "#,,,,,#", "#,,E,,#", "#,,,,,#", "###.###")
+fight = Array[ExtResource("enemy")]([ExtResource("shepherd")])
+lair = "shepherd"
+warning = "Bone cradles hang from the walls here, small ones, and one is still rocking. Something tall moves beyond them, carefully, tenderly. A Marrow Shepherd's fold. Go in?"
+full_party_extra = Array[ExtResource("enemy")]([ExtResource("underhound")])

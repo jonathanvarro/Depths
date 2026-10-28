@@ -7,8 +7,10 @@ extends RefCounted
 ## Static helpers only (no static variables: see #100).
 
 const DEPTH := 5
-## Of the corridor cells, about this share runs deep.
-const FLOODED_SHARE := 0.4
+## Floor 6, the Black Reservoir: deeper water still. The flow gate drains it.
+const RESERVOIR := 6
+## Of the corridor cells, about this share runs deep (floor 5, floor 6).
+const FLOODED_SHARE := {5: 0.4, 6: 0.6}
 ## How far each flooded stretch runs, in cells.
 const STRETCH := Vector2i(3, 7)
 ## A step through deep water: extra time, a little strain, and a torch
@@ -21,7 +23,7 @@ const WATER_COLOR := Color(0.05, 0.12, 0.16, 0.85)
 
 ## Floods stretches of the floor's passages (corridor cells, not rooms,
 ## doors or anything in them). `drained`: the sluice is open - none.
-static func flood(map, seed_value: int, drained: bool) -> void:
+static func flood(map, seed_value: int, drained: bool, depth := DEPTH) -> void:
 	map.water = {}
 	if drained:
 		return
@@ -33,7 +35,7 @@ static func flood(map, seed_value: int, drained: bool) -> void:
 			var cell := Vector2i(x, y)
 			if _floodable(map, cell):
 				corridor.append(cell)
-	var target := int(corridor.size() * FLOODED_SHARE)
+	var target := int(corridor.size() * FLOODED_SHARE.get(depth, 0.4))
 	var guard := 0
 	while map.water.size() < target and guard < 200:
 		guard += 1
@@ -59,15 +61,17 @@ static func _floodable(map, cell: Vector2i) -> bool:
 	return cell != map.start_cell
 
 
-## The galleries' look until #166's art: the cave's surfaces, cold and wet.
-static func theme_from(cave: EnvironmentTheme) -> EnvironmentTheme:
+## The galleries' look until #166/#168's art: the cave's surfaces, cold and
+## wet; the reservoir darker still.
+static func theme_from(cave: EnvironmentTheme, depth := DEPTH) -> EnvironmentTheme:
 	var theme: EnvironmentTheme = cave.duplicate()
-	theme.display_name = "The Drowned Galleries"
+	theme.display_name = "The Black Reservoir" if depth >= RESERVOIR else "The Drowned Galleries"
+	var tint := Color(0.55, 0.68, 0.8) if depth >= RESERVOIR else Color(0.7, 0.85, 0.95)
 	for slot in ["wall_material", "wall_variant_material", "floor_material", "ceiling_material"]:
 		var material = theme.get(slot)
 		if material is BaseMaterial3D:
 			var wet: BaseMaterial3D = material.duplicate()
-			wet.albedo_color = wet.albedo_color * Color(0.7, 0.85, 0.95)
+			wet.albedo_color = wet.albedo_color * tint
 			wet.roughness = minf(wet.roughness, 0.45)
 			theme.set(slot, wet)
 	return theme

@@ -1,0 +1,56 @@
+[gd_resource type="Resource" script_class="Conversation" format=3]
+
+[ext_resource type="Script" path="res://scripts/conversation_page.gd" id="page"]
+[ext_resource type="Script" path="res://scripts/conversation_reply.gd" id="reply"]
+[ext_resource type="Script" path="res://scripts/conversation.gd" id="conv"]
+[ext_resource type="Texture2D" path="res://art/portraits/story-slice-v1/commander-edric.png" id="portrait"]
+
+[sub_resource type="Resource" id="r0_0"]
+script = ExtResource("reply")
+label = "Tell him everything"
+next = 1
+quest = "reservoir"
+flag = "told_all"
+
+[sub_resource type="Resource" id="r0_1"]
+script = ExtResource("reply")
+label = "Keep some of it back"
+next = 2
+quest = "reservoir"
+flag = "kept_back"
+
+[sub_resource type="Resource" id="p0"]
+script = ExtResource("page")
+text = "He listens to all of it - the gate, the reservoir pouring away, the way down laid open beneath it - and for once he does not look at his map.\n\n\"And below the water?\""
+replies = Array[ExtResource("reply")]([SubResource("r0_0"), SubResource("r0_1")])
+
+[sub_resource type="Resource" id="r1_0"]
+script = ExtResource("reply")
+label = "\"Good?\""
+next = 3
+
+[sub_resource type="Resource" id="p1"]
+script = ExtResource("page")
+text = "You tell him: the stonework, the warmth, the heartbeat in the rock. And the elf among the pools, if you met her, and what she said.\n\nHe is very still. Then he smiles, for the first time since you have known him. \"Alive,\" he says softly. \"Good.\""
+replies = Array[ExtResource("reply")]([SubResource("r1_0")])
+
+[sub_resource type="Resource" id="r2_0"]
+script = ExtResource("reply")
+label = "Go on"
+next = 3
+
+[sub_resource type="Resource" id="p2"]
+script = ExtResource("page")
+text = "You give him the gate and the reservoir, and keep the rest. He watches your face while you talk, the way a smith watches metal in the fire.\n\n\"There is more,\" he says. It is not a question. \"There always is. Rest. We go deeper soon.\""
+replies = Array[ExtResource("reply")]([SubResource("r2_0")])
+
+[sub_resource type="Resource" id="p3"]
+script = ExtResource("page")
+speaker = "narrator"
+text = "That night the camp is louder than usual: more soldiers have come down the road, and more are coming. Whatever the commander means to do below, he will not be doing it with one small party.\n\nThis is as far as the story goes for now."
+
+[resource]
+script = ExtResource("conv")
+speaker = "Commander Edric Vael"
+portrait = ExtResource("portrait")
+pages = Array[ExtResource("page")]([SubResource("p0"), SubResource("p1"), SubResource("p2"), SubResource("p3")])

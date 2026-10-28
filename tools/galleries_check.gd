@@ -125,7 +125,7 @@ func _initialize() -> void:
 	main._room_events.resolve(ps, sluice.choices[0])
 	check("turning the wheel opens the sluice", main._room_events.drained and Quests.has_flag(camp, "dry_passage", "opened") and Quests.stage(camp, "dry_passage") == S.RESOLVED)
 	main._room_events.drained = false
-	main._drain_galleries.call()  # waits on the card; answered below
+	main._drain_galleries.call(sluice_cell)  # waits on the card; answered below
 	await process_frame
 	check("...an ending card", main._results.visible)
 	if dir != "":
@@ -133,11 +133,51 @@ func _initialize() -> void:
 	main._results.continue_pressed.emit()
 	await process_frame
 	check("...and the galleries are dry", map.water.is_empty())
+	check("...with a stair down where the wheel was", map.content_at(sluice_cell) == DungeonMap.Content.STAIRS_DOWN)
 	check("the sluice isn't placed again", "sluice" not in _ids(Packages.active(camp, 5)))
 	main._floors.erase(5)
 	main._go_to_floor(5, main.Arrival.FROM_ABOVE)
 	await process_frame
 	check("they stay dry on later days", main._map.water.is_empty())
+
+	# Floor 6, the Black Reservoir.
+	check("the drained sluice opens floor 6", main._deepest_open() == 6 and Quests.is_active(camp, "reservoir") and "sluice_stair" in _ids(Packages.active(camp, 5)))
+	check("the flow gate and the stonework wait there", "flow_gate" in _ids(Packages.active(camp, 6)) and "stonework" in _ids(Packages.active(camp, 6)))
+	main._go_to_floor(6, main.Arrival.FROM_ABOVE)
+	await process_frame
+	map = main._map
+	check("floor 6 is the Black Reservoir, deeper in water", main.environment_theme.display_name == "The Black Reservoir" and map.water.size() >= 12, map.water.size())
+	var gate_cell := Vector2i(-1, -1)
+	var stone_cell := Vector2i(-1, -1)
+	for cell in map.events:
+		if map.events[cell].title == "The flow gate":
+			gate_cell = cell
+		if map.events[cell].title == "Old stonework":
+			stone_cell = cell
+	check("...with the flow gate and the stonework placed", gate_cell != Vector2i(-1, -1) and stone_cell != Vector2i(-1, -1))
+	main._room_events.resolve(ps, map.events[stone_cell].choices[0])
+	main._stonework_vision.call()
+	await process_frame
+	check("touching the stonework plays the vision, in the blue tint", main._conversation.visible and Story.conversation("vision_stonework").vision)
+	if dir != "":
+		for i in 6:
+			await process_frame
+		root.get_texture().get_image().save_png("%s/galleries_%s_vision.png" % [dir, tag])
+	main._conversation.finished.emit()
+	await process_frame
+	check("...once", Quests.has_flag(camp, "reservoir", "vision_shown"))
+	main._room_events.resolve(ps, map.events[gate_cell].choices[0])
+	check("hauling the chains diverts the flow", main._room_events.drained and Quests.has_flag(camp, "reservoir", "diverted"))
+	main._room_events.drained = false
+	main._drain_galleries.call(gate_cell)
+	await process_frame
+	check("...the reservoir falls: the slice's ending card", main._results.visible and main._results._title.text.contains("reservoir") if "_title" in main._results else main._results.visible)
+	main._results.continue_pressed.emit()
+	await process_frame
+	check("...and no stair yet below floor 6", map.water.is_empty() and map.find_content(DungeonMap.Content.STAIRS_DOWN) == Vector2i(-1, -1))
+	check("the commander hears of it at camp", Story.camp_talk(camp, "cave") == "commander_reservoir" and Story.conversation("commander_reservoir") != null)
+	Story.after_talk(camp, "commander_reservoir")
+	check("...and the slice is done", Quests.stage(camp, "reservoir") == S.RESOLVED and Story.camp_talk(camp, "cave") != "commander_reservoir")
 
 	# The gate's stair, the day it's found.
 	main._go_to_floor(4, main.Arrival.FROM_BELOW)

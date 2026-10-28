@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="EnemyType" format=3]
+
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="type"]
+[ext_resource type="Script" path="res://scripts/injury.gd" id="injury_script"]
+[ext_resource type="Resource" path="res://data/injuries/deep_wound.tres" id="wound"]
+[ext_resource type="PackedScene" path="res://art/enemies/monsters-v1/hollow-miner/scene.tscn" id="scene"]
+[ext_resource type="Resource" path="res://data/enemies/unfinished_hound.tres" id="summons"]
+
+[resource]
+script = ExtResource("type")
+scene = ExtResource("scene")
+injuries = Array[ExtResource("injury_script")]([ExtResource("wound")])
+display_name = "Marrow Shepherd"
+max_health = 30
+damage_min = 3
+damage_max = 5
+accuracy = 0.75
+initiative = 7
+injury_chance = 0.15
+attack_verb = "strikes"
+tactic = 21
+intro = "The Marrow Shepherd: every other turn it births an unfinished hound from the bone cage on its back - three in all. Kill it before the cage empties."
+loot_line = "Tangled in the Marrow Shepherd's bone cage: %s."
+threat = 8
+tint = Color(0.92, 0.9, 0.8, 1)
+sprite_scale = 1.35
+summons = ExtResource("summons")

@@ -581,6 +581,10 @@ func _intent_icon(intent: int) -> Texture2D:
 		CombatState.Intent.SWOOP, CombatState.Intent.SWELL, CombatState.Intent.GRAB, CombatState.Intent.CURL, \
 				CombatState.Intent.SNARE, CombatState.Intent.DRAIN, CombatState.Intent.RALLY, CombatState.Intent.BROOD:
 			return MONSTER_INTENTS[intent]
+		# Slice 2's deep monsters borrow marks until #166's icons land.
+		CombatState.Intent.REACH: return Glyphs.intention(CombatState.Intent.LUNGE)
+		CombatState.Intent.BITES: return Glyphs.intention(CombatState.Intent.BITE)
+		CombatState.Intent.BIRTH: return MONSTER_INTENTS[CombatState.Intent.BROOD]
 	return Glyphs.intention(intent)
 
 

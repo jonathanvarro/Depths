@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="Conversation" format=3]
+
+[ext_resource type="Script" path="res://scripts/conversation_page.gd" id="page"]
+[ext_resource type="Script" path="res://scripts/conversation_reply.gd" id="reply"]
+[ext_resource type="Script" path="res://scripts/conversation.gd" id="conv"]
+
+[sub_resource type="Resource" id="r0_0"]
+script = ExtResource("reply")
+label = "Go on"
+next = 1
+
+[sub_resource type="Resource" id="p0"]
+script = ExtResource("page")
+speaker = "narrator"
+text = "Dark. Not the dark of the mine - a dark with weight in it, pressing in from every side.\n\nAnd in the dark, slow as seasons, a beat. Then another. You feel it in your teeth and in the stone under your hand."
+replies = Array[ExtResource("reply")]([SubResource("r0_0")])
+
+[sub_resource type="Resource" id="r1_0"]
+script = ExtResource("reply")
+label = "Go on"
+next = 2
+
+[sub_resource type="Resource" id="p1"]
+script = ExtResource("page")
+speaker = "narrator"
+text = "Something vast lies curled far below, wrapped around itself. It is asleep. It has been asleep a very long time.\n\nIt turns, a little, the way a sleeper turns toward a sound. Toward you."
+replies = Array[ExtResource("reply")]([SubResource("r1_0")])
+
+[sub_resource type="Resource" id="p2"]
+script = ExtResource("page")
+speaker = "hero"
+text = "\"...It's alive. Whatever is down there - it's alive, and it knows we're here.\""
+
+[resource]
+script = ExtResource("conv")
+vision = true
+speaker = "Below"
+pages = Array[ExtResource("page")]([SubResource("p0"), SubResource("p1"), SubResource("p2")])

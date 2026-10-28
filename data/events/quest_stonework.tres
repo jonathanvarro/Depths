@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="RoomEvent" format=3]
+
+[ext_resource type="Script" path="res://scripts/event_choice.gd" id="choice"]
+[ext_resource type="Script" path="res://scripts/event_outcome.gd" id="outcome"]
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="event"]
+
+[sub_resource type="Resource" id="o0_0"]
+script = ExtResource("outcome")
+text = "You lay your palm flat on the stone. For a moment, nothing. Then -"
+quest = "reservoir"
+quest_flag = "touched"
+
+[sub_resource type="Resource" id="c0"]
+script = ExtResource("choice")
+label = "Lay a hand on it"
+time_cost = 1
+outcomes = Array[ExtResource("outcome")]([SubResource("o0_0")])
+
+[resource]
+script = ExtResource("event")
+kind = 4
+title = "Old stonework"
+clue = "Carved stone at the water's edge, older than anything above: not dwarf work, not human, not goblin. The carving is worn almost smooth, as if by hands. It is warm. It should not be warm."
+choices = Array[ExtResource("choice")]([SubResource("c0")])
+min_depth = 99

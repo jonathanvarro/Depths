@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="QuestPackage" format=3]
+
+[ext_resource type="Script" path="res://scripts/quest_package.gd" id="pkg"]
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="event_script"]
+[ext_resource type="Resource" path="res://data/events/quest_flow_gate.tres" id="e0"]
+
+[resource]
+script = ExtResource("pkg")
+id = "flow_gate"
+min_depth = 6
+max_depth = 6
+quest = "reservoir"
+stages = Array[int]([0, 1, 2])
+unless_flags = PackedStringArray("diverted")
+rows = PackedStringArray("#######", "#,,,,,#", "#,,1,,#", "#,,,,,#", "###.###")
+events = Array[ExtResource("event_script")]([ExtResource("e0")])

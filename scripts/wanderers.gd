@@ -16,6 +16,7 @@ const WANDER := {
 	2: [50, 0.03, 0.08],
 	3: [40, 0.04, 0.10],
 	5: [40, 0.04, 0.10],  # the Drowned Galleries (slice 2)
+	6: [35, 0.05, 0.12],  # the Black Reservoir
 }
 ## The chance rises this much for every RISE_EVERY time lingered past quiet.
 const RISE := 0.01

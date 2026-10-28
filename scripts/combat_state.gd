@@ -34,7 +34,7 @@ const GOBLIN_SHIELD_CHANCE := 0.4
 ## Enemy intentions (#60): every enemy shows what it will do on its next
 ## turn - the action, never the target - so Defend, targeting and items are
 ## real choices. Each is planned after the enemy acts (and at the start).
-enum Intent { ATTACK, LUNGE, DART, WEB, BITE, SWING, HEAVY, SHIELD, KILLING_BLOW, SHOOT, BASH, BRACE, CALL, SCREECH, CLEAVER, RUSH, RECOVER, BEAT, SWOOP, SWELL, GRAB, CURL, SNARE, DRAIN, RALLY, BROOD }
+enum Intent { ATTACK, LUNGE, DART, WEB, BITE, SWING, HEAVY, SHIELD, KILLING_BLOW, SHOOT, BASH, BRACE, CALL, SCREECH, CLEAVER, RUSH, RECOVER, BEAT, SWOOP, SWELL, GRAB, CURL, SNARE, DRAIN, RALLY, BROOD, REACH, BITES, BIRTH }
 const INTENT_TEXT := {
 	Intent.ATTACK: "attacking",
 	Intent.LUNGE: "lunging",
@@ -62,6 +62,9 @@ const INTENT_TEXT := {
 	Intent.DRAIN: "drawn to your light",
 	Intent.RALLY: "raising its horn to rally",
 	Intent.BROOD: "calling her brood",
+	Intent.REACH: "its jaw sliding forward",
+	Intent.BITES: "every head snapping",
+	Intent.BIRTH: "its belly opening",
 }
 ## The rest of #140's monsters. A curled beetle takes at most this much
 ## from a blow. A snared hero acts last next round. A lamp-eater drinks
@@ -74,6 +77,12 @@ const DRAIN_OIL := 12.0
 const DRAIN_TORCH := 12.0
 const PACK_DAMAGE := 1
 const BROOD_HATCHLINGS := 2
+## The deep monsters (slice 2): the Underhound's long lunge hits this much
+## harder; the Borrowed Pack has this many heads; the Marrow Shepherd's
+## cage holds this many unfinished hounds.
+const REACH_DAMAGE := 2
+const HYDRA_HEADS := 3
+const SHEPHERD_BIRTHS := 3
 ## New monsters (#140). A brute recovering from its heavy blow is wide open:
 ## blows land this much harder. A gas-bloat's burst: damage to the front
 ## and back rows and strain for all; killed from the back row, the gas
@@ -88,15 +97,15 @@ const FLASH_HERO_DAMAGE := 1
 ## modifier and a coloured nameplate. They're worth a little more XP and
 ## hold most of the drop chance (trinkets.gd, gear_gen.gd). At most this
 ## many per fight.
-const ELITE_CHANCE := {2: 0.12, 3: 0.18, 4: 0.22, 5: 0.25}  # nudged up 2026-10-25, after the free torches
-const MAX_ELITES := {2: 1, 3: 2, 4: 2, 5: 2}
+const ELITE_CHANCE := {2: 0.12, 3: 0.18, 4: 0.22, 5: 0.25, 6: 0.28}  # nudged up 2026-10-25, after the free torches
+const MAX_ELITES := {2: 1, 3: 2, 4: 2, 5: 2, 6: 2}
 const ELITES := ["Hardened", "Savage", "Swift", "Venomous"]
 const HARDENED_HEALTH := 1.5
 const SAVAGE_DAMAGE := 1
 const SWIFT_INITIATIVE := 3
 ## Deeper floors bite harder (owner, 2026-10-21): foes' health and damage
 ## scale by floor, the queen and her guards included.
-const DEPTH_SCALE := {2: 1.05, 3: 1.15, 4: 1.25, 5: 1.35}  # was 3: 1.1, 4: 1.2 (retuned 2026-10-25 to ~24/30)
+const DEPTH_SCALE := {2: 1.05, 3: 1.15, 4: 1.25, 5: 1.35, 6: 1.45}  # was 3: 1.1, 4: 1.2 (retuned 2026-10-25 to ~24/30)
 ## New monsters (#47): a great rat's rush hits harder; a drummer's beat
 ## makes each other goblin's next hit stronger.
 const RUSH_DAMAGE := 2
@@ -150,6 +159,7 @@ class Foe:
 	var calls := 0
 	var elite := ""  # "Hardened", "Savage", "Swift" or "Venomous" (#140)
 	var curled := false  # rock beetle: blows barely scratch it until its next turn
+	var heads := 0  # Borrowed Pack: heads still biting (slice 2)
 
 	func in_back() -> bool:
 		return (row_override if row_override != "" else type.row) == "back"
@@ -158,6 +168,8 @@ class Foe:
 		type = enemy_type
 		name = label
 		health = enemy_type.max_health
+		if enemy_type.tactic == EnemyType.Tactic.HYDRA:
+			heads = HYDRA_HEADS
 
 	## Still in the fight (not dead and not fled).
 	func is_alive() -> bool:
@@ -338,6 +350,13 @@ func plan(foe: Foe) -> void:
 				Intent.RALLY: foe.intent = Intent.HEAVY
 				Intent.HEAVY: foe.intent = Intent.SWING
 				_: foe.intent = Intent.RALLY if living_foes().size() > 1 else Intent.HEAVY
+		EnemyType.Tactic.LUNGER:
+			foe.intent = Intent.REACH if foe.intent == Intent.BITE else Intent.BITE
+		EnemyType.Tactic.HYDRA:
+			foe.intent = Intent.BITES
+		EnemyType.Tactic.SHEPHERD:
+			var room := living_foes().size() < 4
+			foe.intent = Intent.BIRTH if foe.calls < SHEPHERD_BIRTHS and foe.intent != Intent.BIRTH and room else Intent.SWING
 		_:
 			foe.intent = Intent.ATTACK
 
@@ -497,7 +516,7 @@ func targets_for(hero: Companion) -> Array[Foe]:
 ## Whether `foe` can strike `hero` (melee reaches only the front; a bat's
 ## swoop reaches anyone).
 func foe_can_reach(foe: Foe, hero: Companion) -> bool:
-	return foe.type.reach_back or foe.intent == Intent.SWOOP or hero_in_front(hero)
+	return foe.type.reach_back or foe.intent in [Intent.SWOOP, Intent.REACH] or hero_in_front(hero)
 
 
 ## Held by a hollow miner (#140): loses their next turn struggling free,
@@ -641,6 +660,12 @@ func enemy_act(foe: Foe) -> Dictionary:
 		_dazzled.erase(foe)
 		return {"target": null, "hit": false, "damage": 0, "injury": null,
 				"text": "The %s reels from the glare, eyes screwed shut." % foe.name.to_lower()}
+	if foe.type.tactic == EnemyType.Tactic.HYDRA:
+		var left := clampi(ceili(float(HYDRA_HEADS) * foe.health / maxi(1, foe.type.max_health)), 1, HYDRA_HEADS)
+		if left < foe.heads:  # a head died since its last turn
+			foe.heads = left
+			return {"target": null, "hit": false, "damage": 0, "injury": null,
+					"text": "One of the %s's heads hangs dead, and its weight drags the others off balance." % foe.name.to_lower()}
 	var acted := foe.intent
 	var outcome := _carry_out(foe)
 	_squinting.erase(foe)  # its eyes have cleared
@@ -720,6 +745,10 @@ func _carry_out(foe: Foe) -> Dictionary:
 			return {"target": null, "hit": false, "damage": 0, "injury": null, "text": ""}
 		Intent.BROOD:
 			return _call_brood(foe)
+		Intent.BITES:
+			return _many_bites(foe)
+		Intent.BIRTH:
+			return _birth(foe)
 		Intent.GRAB:
 			var held := _choose_target(foe)
 			if held == null:
@@ -731,6 +760,7 @@ func _carry_out(foe: Foe) -> Dictionary:
 			return {"target": held, "hit": true, "damage": 0, "injury": null,
 					"text": "The %s seizes %s! Hit it to break the hold, or they lose their next turn struggling free." % [foe.name.to_lower(), held.display_name]}
 	var heavy := foe.intent == Intent.HEAVY
+	var reaching := foe.intent == Intent.REACH
 	var target := _choose_target(foe)
 	var outcome := {"target": target, "hit": false, "damage": 0, "injury": null}
 	if target == null:
@@ -741,6 +771,8 @@ func _carry_out(foe: Foe) -> Dictionary:
 			damage += ENRAGED_DAMAGE
 		if foe.intent == Intent.RUSH:
 			damage += RUSH_DAMAGE
+		if reaching:
+			damage += REACH_DAMAGE
 		if foe.type.tactic == EnemyType.Tactic.PACK and living_foes().any(func(f: Foe): return f != foe and f.type.tactic == EnemyType.Tactic.PACK):
 			damage += PACK_DAMAGE  # hounds hunt together (#140)
 		if _drummed.has(foe):
@@ -761,7 +793,7 @@ func _carry_out(foe: Foe) -> Dictionary:
 		target.change_health(-damage)
 		outcome["hit"] = true
 		outcome["damage"] = damage
-		var verb: String = "brings down a heavy blow on" if heavy else foe.type.attack_verb
+		var verb: String = "brings down a heavy blow on" if heavy else ("lunges, jaw stretching, at" if reaching else foe.type.attack_verb)
 		outcome["text"] = "The %s %s %s for %d." % [foe.name.to_lower(), verb, target.display_name, damage]
 		if ((foe.type.tactic in [EnemyType.Tactic.WEB_AND_VENOM, EnemyType.Tactic.BROOD] and foe.type.venomous) or foe.elite == "Venomous") and target.is_alive():
 			_venom[target] = VENOM_TURNS
@@ -913,6 +945,52 @@ func _call_brood(mother: Foe) -> Dictionary:
 			"text": "The %s's sac splits - hatchlings swarm out!" % mother.name.to_lower()}
 
 
+## The Borrowed Pack (slice 2): each head still alive bites someone.
+func _many_bites(foe: Foe) -> Dictionary:
+	var hits: Array[String] = []
+	var falls := ""
+	var total := 0
+	var first: Companion = null
+	for i in foe.heads:
+		var target := _choose_target(foe)
+		if target == null:
+			break
+		if first == null:
+			first = target
+		if rng.randf() >= _foe_accuracy(foe):
+			continue
+		var damage := rng.randi_range(foe.type.damage_min, foe.type.damage_max)
+		if is_defending(target):
+			damage = maxi(1, floori(damage * target.guard_factor))
+		damage = maxi(1, damage - target.damage_reduction())
+		target.change_health(-damage)
+		total += damage
+		hits.append("%s (%d)" % [target.display_name, damage])
+		if not target.is_alive():
+			falls += _fall_text(target)
+	_check_end()
+	var text := "The %s's %d heads snap - and miss." % [foe.name.to_lower(), foe.heads] if hits.is_empty() \
+			else "The %s's %d heads snap: %s.%s" % [foe.name.to_lower(), foe.heads, ", ".join(hits), falls]
+	return {"target": first, "hit": total > 0, "damage": total, "injury": null, "text": text}
+
+
+## The Marrow Shepherd (slice 2): one unfinished hound from its cage.
+func _birth(shepherd: Foe) -> Dictionary:
+	shepherd.calls += 1
+	var young_type: EnemyType = shepherd.type.summons
+	if young_type == null:
+		return {"target": null, "hit": false, "damage": 0, "injury": null, "text": ""}
+	var count := foes.filter(func(f: Foe): return f.type.display_name == young_type.display_name).size() + 1
+	var young := Foe.new(young_type, "%s %d" % [young_type.display_name, count])
+	_scale(young)
+	foes.append(young)
+	plan(young)
+	foe_joined.emit(young)
+	var left := SHEPHERD_BIRTHS - shepherd.calls
+	return {"target": null, "hit": false, "damage": 0, "injury": null,
+			"text": "The %s's belly opens like a seedpod - %s slides out, wet and not quite finished.%s" % [shepherd.name.to_lower(), young.name.to_lower(), " The cage is empty." if left <= 0 else ""]}
+
+
 ## A gas-bloat bursts (#140). `how`: "near" (killed up close, or it
 ## swelled until it tore), "back" (killed from the back row: the gas mostly
 ## misses) or "fire" (a thrown torch: a flash that burns the other foes).
@@ -966,6 +1044,12 @@ func _choose_target(foe: Foe = null) -> Companion:
 			pool = guards if not guards.is_empty() else [_weakest(living)]
 		EnemyType.Tactic.PACK:
 			pool = [_weakest(living)]  # hounds go for the weakest, braced or not
+		EnemyType.Tactic.LUNGER:
+			# The long lunge is for the back row; its bite, for whoever's near.
+			var back := living.filter(func(h: Companion): return not hero_in_front(h))
+			pool = back if foe.intent == Intent.REACH and not back.is_empty() else living
+		EnemyType.Tactic.HYDRA:
+			pool = living  # each head picks its own
 		EnemyType.Tactic.GRABBER:
 			# It swings at whoever it holds; it grabs whoever isn't braced.
 			var held: Array = living.filter(func(h: Companion): return _grabbed.get(h) == foe)

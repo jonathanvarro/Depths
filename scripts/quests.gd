@@ -19,6 +19,7 @@ const INFO := {
 	"dry_passage": {"title": "The Dry Passage", "giver": "Commander Vael", "floor": 5, "hidden": false},
 	"the_arrow": {"title": "The Black Fletching", "giver": "the smith", "floor": 5, "hidden": false},
 	"keeper": {"title": "The Wounded Keeper", "giver": "", "floor": 5, "hidden": true},
+	"reservoir": {"title": "The Black Reservoir", "giver": "Commander Vael", "floor": 6, "hidden": false},
 }
 
 
@@ -79,6 +80,8 @@ static func brief(camp, id: String) -> String:
 			return "Ask who fletches in black." if has_flag(camp, "keeper", "helped") else "Find who fletches in black."
 		"keeper":
 			return "Help the wounded elf."
+		"reservoir":
+			return "Report to the commander." if has_flag(camp, id, "diverted") else "Divert the reservoir's flow."
 	return ""
 
 
@@ -126,4 +129,8 @@ static func next_step(camp, id: String) -> String:
 			return "Whoever fletched that arrow came from below. Look for them on floor 5."
 		"keeper":
 			return "A wounded dark elf waits among the pools on floor 5. Help her, or leave her."
+		"reservoir":
+			if has_flag(camp, id, "diverted"):
+				return "Tell Commander Vael what the reservoir was hiding."
+			return "Find the flow gate in the Black Reservoir, floor 6, and divert the water."
 	return ""

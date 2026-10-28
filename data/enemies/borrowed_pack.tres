@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="EnemyType" format=3]
+
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="type"]
+[ext_resource type="Script" path="res://scripts/injury.gd" id="injury_script"]
+[ext_resource type="Resource" path="res://data/injuries/deep_wound.tres" id="wound"]
+[ext_resource type="PackedScene" path="res://art/enemies/monsters-v1/breach-hound/scene.tscn" id="scene"]
+
+[resource]
+script = ExtResource("type")
+scene = ExtResource("scene")
+injuries = Array[ExtResource("injury_script")]([ExtResource("wound")])
+display_name = "Borrowed pack"
+max_health = 24
+damage_min = 1
+damage_max = 3
+accuracy = 0.7
+initiative = 11
+injury_chance = 0.08
+attack_verb = "bites"
+tactic = 20
+intro = "The Borrowed Pack: three heads, one hide. It bites once for every head. Each head that dies drags the rest off balance for a turn."
+loot_line = "Caught in the folds of the Borrowed Pack's hide: %s."
+threat = 6
+tint = Color(0.72, 0.6, 0.6, 1)
+sprite_scale = 1.35

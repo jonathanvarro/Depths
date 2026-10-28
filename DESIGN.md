@@ -892,6 +892,29 @@ Built from the [slice-2 plan](docs/story-slice-2-plan.md); checked by `tools/gal
   - The water is a dark, glossy sheet over the floor.
   - The sluice borrows the lower gate's prop, and the keeper a fallen-body prop.
 
+### Floor 6 and the deep monsters — built 2026-10-27 (slice 2, placeholder art)
+
+Checked by `tools/galleries_check.gd` and `tools/deep_monsters_check.gd`. Art is in #166 (monsters) and #168 (floor 6).
+
+**Floor 6, the Black Reservoir:**
+- **The way down:** opening the sluice on floor 5 turns it into a stair down at once (`sluice_stair.tres` on later days). The commander's *Black Reservoir* quest starts then.
+- **Deep water:** about 60% of the passages run deep, and the floor looks darker than floor 5. Foes are scaled +45%, elites appear on 28% (at most 2), and wanderers come sooner than on floor 5.
+- **The flow gate:** hauling its chains drains the reservoir for good and ends the slice. A card shows a carved shaft going down toward the heartbeat, and says this is as far as the mine goes for now. There's no stair below floor 6 yet.
+- **The old stonework:** laying a hand on it plays **the first vision** (blue tint): something vast curled asleep below, turning toward you. The main hero says one line after it.
+- **The ending:**
+  - Back at camp, Vael hears the story.
+  - **Tell him everything,** and he smiles: "Alive. Good."
+  - **Keep some of it back,** and he knows there's more.
+  - Either way, the choice is saved for slice 3, and more soldiers arrive.
+
+**The deep monsters** (#150's concepts):
+- **Underhound** (floors 5–6; 12 health, 2–4): bites, then its jaw slides forward for a long lunge at the back row (+2 damage). Defending blunts it.
+- **Borrowed Pack** (floors 5–6; 24 health, 1–3): three heads, one hide, and a bite for each head still living. Each head lost, at every third of its health, costs it a turn off balance.
+- **Marrow Shepherd** (floor 6 mini-boss, in a lair; 30 health, 3–5):
+  - Every other turn it births an **unfinished hound** (5 health, a weak pack hound), three in all.
+  - A full party also meets an Underhound.
+  - Its lair is placed by chance, like the Broodmother's.
+
 ### Recruit memories — owner 2026-10-26 (#118)
 
 Each hero keeps up to **three memories**, newest first. Each is a fact the game saw, saved with the hero:

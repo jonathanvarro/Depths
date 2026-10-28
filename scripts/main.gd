@@ -146,6 +146,9 @@ const VENOM_SPIDER := preload("res://data/enemies/venom_spider.tres")
 const TRAPPER := preload("res://data/enemies/goblin_trapper.tres")
 const LAMP_EATER := preload("res://data/enemies/lamp_eater.tres")
 const HOUND := preload("res://data/enemies/breach_hound.tres")
+# Slice 2's deep monsters (placeholder looks until #166).
+const UNDERHOUND := preload("res://data/enemies/underhound.tres")
+const BORROWED := preload("res://data/enemies/borrowed_pack.tres")
 const BROODMOTHER := preload("res://data/enemies/broodmother.tres")
 const CAPTAIN := preload("res://data/enemies/gate_captain.tres")
 ## The goblin fortress (#44): floor 3 is its outskirts, floor 4 the fortress
@@ -188,7 +191,12 @@ const ENCOUNTER_GROUPS := {
 	# water. The new monsters (#166) join when their art lands.
 	5: [[MINER], [HOUND], [LAMP_EATER], [MINER, MINER], [HOUND, HOUND], [MINER, BLOAT], [LAMP_EATER, MINER],
 			[HOUND, HOUND, LAMP_EATER], [BLOAT, BLOAT, MINER], [MINER, MINER, HOUND], [VENOM_SPIDER, MINER, BLOAT],
-			[BRUTE, MINER], [HOUND, HOUND, HOUND], [MINER, MINER, MINER], [LAMP_EATER, HOUND, MINER, BLOAT]],
+			[BRUTE, MINER], [HOUND, HOUND, HOUND], [MINER, MINER, MINER], [LAMP_EATER, HOUND, MINER, BLOAT],
+			[UNDERHOUND], [UNDERHOUND, MINER], [UNDERHOUND, HOUND, HOUND], [BORROWED], [BORROWED, LAMP_EATER]],
+	# The Black Reservoir: the stranger things the water hid.
+	6: [[UNDERHOUND], [BORROWED], [MINER, MINER], [UNDERHOUND, UNDERHOUND], [UNDERHOUND, MINER], [BORROWED, LAMP_EATER],
+			[BORROWED, UNDERHOUND], [UNDERHOUND, HOUND, HOUND], [MINER, MINER, UNDERHOUND], [BLOAT, UNDERHOUND, LAMP_EATER],
+			[BORROWED, MINER, BLOAT], [UNDERHOUND, UNDERHOUND, HOUND], [BORROWED, UNDERHOUND, LAMP_EATER, MINER]],
 }
 ## The Broodmother and the gate captain aren't in these tables: they wait
 ## in optional lairs instead (#145, data/packages/lair_*.tres).
@@ -590,8 +598,10 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 		_floors[depth].fight_groups = stamped["fights"]
 		_floors[depth].packages = stamped["placed"]
 		_floors[depth].lairs = stamped["lairs"]
-		if depth == Galleries.DEPTH and not use_debug_layout:  # slice 2
-			Galleries.flood(_floors[depth], _site_seed + depth * 7919 + 37, Quests.has_flag(_camp_state, "dry_passage", "opened"))
+		if depth >= Galleries.DEPTH and not use_debug_layout:  # slice 2: water, until it's drained
+			var drained := Quests.has_flag(_camp_state, "dry_passage", "opened") if depth == Galleries.DEPTH \
+					else Quests.has_flag(_camp_state, "reservoir", "diverted")
+			Galleries.flood(_floors[depth], _site_seed + depth * 7919 + 37, drained, depth)
 	_map = _floors[depth]
 
 	_build_level()
@@ -768,7 +778,9 @@ func _run_event(cell: Vector2i) -> void:
 	if Quests.has_flag(_camp_state, "lower_gate", "seen") and not Quests.has_flag(_camp_state, "lower_gate", "ending_shown"):
 		await _slice_ending(cell)
 	if drained:
-		await _drain_galleries()
+		await _drain_galleries(cell)
+	if Quests.has_flag(_camp_state, "reservoir", "touched") and not Quests.has_flag(_camp_state, "reservoir", "vision_shown"):
+		await _stonework_vision()
 	if _in_opening and cell in _opening_body_cells():
 		_searched_bodies[cell] = true
 		_say("search_body", true)
@@ -1500,9 +1512,9 @@ func _placeholder_prop(kind: int) -> Node3D:
 func _apply_theme() -> void:
 	var theme: EnvironmentTheme = FORTRESS_THEME if _depth == FORTRESS_DEPTH and not use_debug_layout else _cave_theme
 	if _depth >= Galleries.DEPTH and not use_debug_layout:
-		if _galleries_theme == null:
-			_galleries_theme = Galleries.theme_from(_cave_theme)
-		theme = _galleries_theme
+		if not _deep_themes.has(_depth):
+			_deep_themes[_depth] = Galleries.theme_from(_cave_theme, _depth)
+		theme = _deep_themes[_depth]
 	if _depth == 2 and not use_debug_layout and _cave_theme.resource_path == "res://themes/cave.tres":
 		theme = FUNGAL_THEME
 	environment_theme = theme
@@ -1832,10 +1844,12 @@ func _open_gate_stair(cell: Vector2i) -> void:
 
 # --- The Drowned Galleries (floor 5, slice 2; galleries.gd) ---------------
 
-var _galleries_theme: EnvironmentTheme
+var _deep_themes := {}  # depth -> the galleries' or the reservoir's look
 
 ## The deepest floor the story has opened.
 func _deepest_open() -> int:
+	if Quests.has_flag(_camp_state, "dry_passage", "opened"):
+		return Galleries.RESERVOIR
 	return Galleries.DEPTH if Quests.has_flag(_camp_state, "lower_gate", "seen") else floors_in_site
 
 
@@ -1852,24 +1866,49 @@ func _wade(cell: Vector2i) -> void:
 
 
 ## The main sluice is open: the galleries drain, today and for good.
-func _drain_galleries() -> void:
+## On floor 5 the sluice becomes the stair to floor 6; on floor 6 the
+## flow gate ends slice 2. `cell`: where the wheel or gate was turned.
+func _drain_galleries(cell := Vector2i(-1, -1)) -> void:
 	_map.water.clear()
+	var reservoir := _depth >= Galleries.RESERVOIR
+	if not reservoir:
+		Quests.set_stage(_camp_state, "reservoir", Quests.Stage.ACTIVE)
+		if cell != Vector2i(-1, -1):
+			_open_gate_stair(cell)  # the stair down where the wheel was
 	_build_level()
 	_minimap.queue_redraw()
-	_show_message("The water falls away. The galleries are dry.")
-	if Quests.has_flag(_camp_state, "dry_passage", "ending_shown"):
+	_show_message("The reservoir pours away." if reservoir else "The water falls away. The galleries are dry.")
+	var quest := "reservoir" if reservoir else "dry_passage"
+	if Quests.has_flag(_camp_state, quest, "ending_shown"):
 		return
-	Quests.set_flag(_camp_state, "dry_passage", "ending_shown")
+	Quests.set_flag(_camp_state, quest, "ending_shown")
 	_save_now()
 	_party.locked = true
-	_results.show_brief("The galleries drain",
-			"All through the galleries, the water drains away down channels cut for it long ago. Where the deepest pool was, a stair of black stone goes down toward the sound of a great weight of water, moving in the dark.
+	if reservoir:
+		_results.show_brief("The reservoir falls",
+				"The black water pours away for an hour or more. When it is done, the floor of the reservoir lies bare and glistening, and in the middle of it a shaft goes down, carved, ringed with the same old stonework - down toward the slow beat you can still feel in your teeth.
 
-That reservoir is as far as the mine goes for now. The commander will want to hear of this.",
-			"Continue")
+This is as far as the mine goes for now. The commander will want to hear of this.",
+				"Continue")
+	else:
+		_results.show_brief("The galleries drain",
+				"All through the galleries, the water drains away down channels cut for it long ago. Where the wheel turned, a stair of black stone goes down toward the sound of a great weight of water, moving in the dark.
+
+The Black Reservoir, floor 6, is open.",
+				"Continue")
 	await _results.continue_pressed
 	_results.visible = false
 	_party.locked = false
+
+
+## The old stonework (floor 6): the first vision, in the blue tint.
+func _stonework_vision() -> void:
+	Quests.set_flag(_camp_state, "reservoir", "vision_shown")
+	_party.locked = true
+	var lead: Companion = _party_state.living_members()[0] if not _party_state.living_members().is_empty() else _party_state.members[0]
+	await _conversation.play(Story.conversation("vision_stonework"), lead, _camp_state, _party_state.members)
+	_party.locked = false
+	_save_now()
 
 
 ## Optional legacy presentation adjustments; new art has its own native scale.
