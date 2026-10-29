@@ -1,0 +1,23 @@
+{
+  "captures": [
+    "godot-rest-1280.png",
+    "godot-half-1280.png",
+    "godot-closed-1280.png",
+    "godot-small-1280.png",
+    "godot-open-1280.png",
+    "godot-warm-1280.png",
+    "godot-dim-1280.png",
+    "godot-rest-1278.png",
+    "godot-half-1278.png",
+    "godot-closed-1278.png",
+    "godot-small-1278.png",
+    "godot-open-1278.png",
+    "godot-warm-1278.png",
+    "godot-dim-1278.png"
+  ],
+  "checks": 52,
+  "display": "Windows",
+  "failures": [],
+  "physical_iphone_test": false,
+  "scope": "Isolated PortraitView and resource tests; not live event/conversation integration"
+}

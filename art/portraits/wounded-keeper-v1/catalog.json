@@ -1,0 +1,61 @@
+{
+  "issue": 166,
+  "identity": "wounded-keeper",
+  "rig_kind": "Unique",
+  "rig_family": "unique-wounded-keeper-v1",
+  "canvas": [
+    192,
+    192
+  ],
+  "assignment": "Wounded keeper visual identity; no proper name, stats, recruit eligibility or dialogue rewrite assigned. Existing room/conversation hookup remains Claude work.",
+  "portraits": [
+    {
+      "id": "neutral",
+      "kind": "animated-expression",
+      "portrait_set": "res://data/portraits/wounded-keeper-v1/neutral.tres",
+      "fallback": "res://art/portraits/wounded-keeper-v1/neutral/resting.png",
+      "frames": [
+        "rest",
+        "half",
+        "closed",
+        "small",
+        "open"
+      ]
+    },
+    {
+      "id": "pained",
+      "kind": "animated-expression",
+      "portrait_set": "res://data/portraits/wounded-keeper-v1/pained.tres",
+      "fallback": "res://art/portraits/wounded-keeper-v1/pained/resting.png",
+      "frames": [
+        "rest",
+        "half",
+        "closed",
+        "small",
+        "open"
+      ]
+    },
+    {
+      "id": "defiant",
+      "kind": "animated-expression",
+      "portrait_set": "res://data/portraits/wounded-keeper-v1/defiant.tres",
+      "fallback": "res://art/portraits/wounded-keeper-v1/defiant/resting.png",
+      "frames": [
+        "rest",
+        "half",
+        "closed",
+        "small",
+        "open"
+      ]
+    },
+    {
+      "id": "map-reading",
+      "kind": "static-pose",
+      "portrait_set": "res://data/portraits/wounded-keeper-v1/map-reading.tres",
+      "fallback": "res://art/portraits/wounded-keeper-v1/map-reading/resting.png",
+      "frames": [
+        "rest"
+      ]
+    }
+  ]
+}

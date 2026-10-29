@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-28 – ChatGPT
+- Did: Created #166 wounded keeper art: neutral, pained and defiant native192 Unique dark elf rigs, each with fitted blink/talk drawings and separate lighting, plus a static map-reading pose and flat dialogue fallbacks. Hair/armour/wound/hand remain byte-identical across expressions. Four built-in ImageGen masters, exact prompts, OpenRaster components and registration hashes retained. Review: art/concepts/wounded-keeper-v1/inspector.html; handoff: docs/wounded-keeper-art.md.
+- Next: Owner reviews the keeper. Claude connects the event/dialogue presentation; current RoomEvent has no portrait slot and ConversationScreen uses static NPC textures. The map-reading pose stays static. No name, story changes, recruitment assignment or in-world body prop supplied.
+- Watch out: 186 source checks, 38 headless Godot checks, 52 renderer checks/14 captures and 46 browser checks pass. Rendering used a hidden off-screen Mobile process, without visible game windows. No Main, player saves/preferences, existing elf/recruit catalogs or runtime scripts changed. Physical iPhone and live encounter presentation remain separate. Do not place animation over resting.png: use the clean plate and expression-owned components.
+
 ## 2026-10-27 – ChatGPT
 - Did: First #166 art delivery: native128 shallow/deep water tiles and native192 closed/open sluice, with materials/scenes, shared state registration, cheap world-space water motion and still mode. Four exact built-in ImageGen masters/prompts/provenance retained. Existing floor/water/event/quest rules are unchanged; this is a mounted asset library for Claude's queued hookup. Review: art/concepts/drowned-water-v1/inspector.html; integration details: docs/drowned-water-and-sluice.md.
 - Next: Claude connects surfaces to existing flooded cells/drain flags and the sluice event/stair transition. Keep shallow water distinct from deep-water penalties and preserve dry ledges. Wet walls/dressing, keeper and monsters remain #166/#168 work. The 2m-wide wheel assembly fits the grid; update the existing clue's literal "taller than a man" wording or author a wider alcove before scaling it up.

@@ -90,6 +90,11 @@ Templates > Download and Install; already installed on the owner's PC).
   ready for Claude's live hookup: `docs/drowned-water-and-sluice.md`.
   The water is visual only, with world-space phase and a still toggle; preserve
   existing flood/drain flags, dry ledges and the sluice-to-stair transition.
+  #166's wounded keeper has three expression-specific Unique portrait rigs and
+  a static map-reading pose in `docs/wounded-keeper-art.md`. Use clean plates
+  with their own full eye/mouth replacements; never animate over flat fallbacks.
+  The event/dialogue hookup and owner review remain pending; preserve the
+  independent elf catalog and existing story resources.
   Roots, collapsed royal cache scenery and a miners' shrine with fresh/resolved
   states (#132/#133) are ready in `art/dressing/landmarks-v1`;
   `docs/landmark-art.md` records mounts and the shrine's required wall anchor.

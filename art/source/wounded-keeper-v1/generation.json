@@ -1,0 +1,128 @@
+{
+  "issue": 166,
+  "tool": "image_gen.imagegen (built-in)",
+  "prompts": "prompts.json",
+  "canvas": [
+    192,
+    192
+  ],
+  "registration": {
+    "resize_complete_square": [
+      184,
+      184
+    ],
+    "inset": [
+      4,
+      4
+    ],
+    "palette_colours": 64,
+    "expression_changes": "only the pinned brow/eye/lip regions; all other pixels copied from neutral"
+  },
+  "masters": {
+    "neutral": {
+      "file": "res://art/source/wounded-keeper-v1/neutral-master.png",
+      "sha256": "ed48b06614cde551dbb521b5852921ff97529c55e63bc268a5c3dafcbbb85826",
+      "size": [
+        1254,
+        1254
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-4b2f1cca-5301-4c59-812e-44444b3d7637.png",
+      "input": "existing dark-elf-woman style/anatomy reference"
+    },
+    "pained": {
+      "file": "res://art/source/wounded-keeper-v1/pained-master.png",
+      "sha256": "66505e45e94c005dfbc39d8708646dcf68febc704fbd8154a9cd821e1ca32f69",
+      "size": [
+        1254,
+        1254
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-d0fe3039-3d83-4af6-b0dc-84c70129738e.png",
+      "input": "neutral-master.png edit target"
+    },
+    "defiant": {
+      "file": "res://art/source/wounded-keeper-v1/defiant-master.png",
+      "sha256": "79c2b9650599f7825cd48a4ed202883d7f49632e5957e9b25bcec08dbd63978c",
+      "size": [
+        1254,
+        1254
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-50a2bb68-4681-4a8e-b798-a20ed1b13993.png",
+      "input": "neutral-master.png edit target"
+    },
+    "map-reading": {
+      "file": "res://art/source/wounded-keeper-v1/map-reading-master.png",
+      "sha256": "fc743185ea579fc34880d238e681180a939dcc03b79ea7c4e13eef3ade4f83f7",
+      "size": [
+        1254,
+        1254
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-7f49db02-9e39-4ac8-b106-117b8d84b2a0.png",
+      "input": "neutral-master.png edit target"
+    }
+  },
+  "expressions": [
+    {
+      "id": "neutral",
+      "source_shift": [
+        0,
+        0
+      ],
+      "neutral_reconstruction_exact": true,
+      "outputs": {
+        "character-clean.png": "88840ac42adab101f492e6377ff164dc4b729f93c23ea5e39584448fc4dca53b",
+        "eyes-closed.png": "065c5e2bf3f8d226c427c6a6731a776f86e1420c79fc08b29d2554da64c82f9d",
+        "eyes-half.png": "3f73cdb3dceb7f357b85f0f66a215a07548bfaae9798fa1b2b331a0c1d9d1f53",
+        "eyes-neutral.png": "344acd85f88c96a720f5e73f3614ba86690217ed2b8fc92b67cd8a283a84429a",
+        "highlight.png": "eba993fff6233a7ddd0bd52f311cd278ff9788440b9c4e09146d25f55ba4d29f",
+        "mouth-neutral.png": "db6c0b9602d9ba370d01a3926b6127cad5732a4a2aec6f5ca078bb18dc6c2139",
+        "mouth-open.png": "c968d6696517a7387f59e45688a244161bb4b7b3c56340d680d88522f3edc705",
+        "mouth-small.png": "b82697f59dd801d8b825d23194b3c7d7305a34fd38836bd1eeff901c55e1956a",
+        "resting.png": "5b1d5e2f5065cb7c7f5faa0acb1f8b4e638a4964a0f46d2be1cbc41aa8a77df2",
+        "shadow.png": "ee00e1ba45c82d130d3176713735363380868e537568fe4259627aacd0c151a1"
+      }
+    },
+    {
+      "id": "pained",
+      "source_shift": [
+        0,
+        0
+      ],
+      "neutral_reconstruction_exact": true,
+      "outputs": {
+        "character-clean.png": "c65c6306f6baa410e3cc379d0bcb7cf031a4f0fe8a90fbd3d267382086cd285e",
+        "eyes-closed.png": "bbd7bd25adf2e4c22b701ab66f94845fabbe2f0bc852d635916bec7354ee25a3",
+        "eyes-half.png": "bc7a7f24900eb95e0a199254f5a57be6f0719cec605a22c9296d2d8395c5147e",
+        "eyes-neutral.png": "6ce18b87deaa7e68533ee9a7f44403a3e23d422ca17b199c02fb5616f40f1c6a",
+        "highlight.png": "eba993fff6233a7ddd0bd52f311cd278ff9788440b9c4e09146d25f55ba4d29f",
+        "mouth-neutral.png": "44cb941596330612ec6f71ec3aed526ebdedc010394c1a5cf7eabf8ee26f1f45",
+        "mouth-open.png": "a9e8bfa2c4839f44fd02aa79d0e179c331aad07802516601a1cdc14d11781c0b",
+        "mouth-small.png": "02e06b6906f7d0b11194c67b12fe88fca228f6571cde1e7c70505d6a83f48990",
+        "resting.png": "e333855c308709900b1b04f9f01e2e53a4ff98b345b4f3e96c719f87d8173d34",
+        "shadow.png": "ee00e1ba45c82d130d3176713735363380868e537568fe4259627aacd0c151a1"
+      }
+    },
+    {
+      "id": "defiant",
+      "source_shift": [
+        0,
+        0
+      ],
+      "neutral_reconstruction_exact": true,
+      "outputs": {
+        "character-clean.png": "21bbc061c38f02e8f4b96a1b20ead0fa6fa58034d5e543b9ab38eb6ea8dcf9b3",
+        "eyes-closed.png": "d7ba864a02c14b407dbac15cf1918c705586ad58e7d3ee59615fdc3fcc1d5399",
+        "eyes-half.png": "b640e09757e1cbe9a1cedd821158515e4ccafb87afddc9b45deccc29c1d40628",
+        "eyes-neutral.png": "8b45bbe93c575885a58d6e7525afefc05885a67ca0b91f530415d788d9fa2b53",
+        "highlight.png": "eba993fff6233a7ddd0bd52f311cd278ff9788440b9c4e09146d25f55ba4d29f",
+        "mouth-neutral.png": "028fe9e6a97a3849d878e1d9f925abfdad3c4021ba0b8128ba3133ba27b92380",
+        "mouth-open.png": "a2bba1369cf330aecd57b74b9c8db60f104c40d44de1a87dd31c49f344935d43",
+        "mouth-small.png": "1a9ea9889ae7a362964ca92078e953628b7729c44e331713c48f22885d2cc066",
+        "resting.png": "fbd2afa8584200a97f824a49bbf6a74de4cd64125bf63774a3ca0bdabadd6ff2",
+        "shadow.png": "ee00e1ba45c82d130d3176713735363380868e537568fe4259627aacd0c151a1"
+      }
+    }
+  ],
+  "references": {
+    "art/portraits/dark-elves-v1/dark-elf-woman/resting.png": "390463490c911646357f0d907927dbf699e80d2b521a239475a02f54322a0b56"
+  }
+}

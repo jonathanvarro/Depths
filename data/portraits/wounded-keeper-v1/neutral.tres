@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="PortraitSet" format=3]
+
+[ext_resource type="Script" path="res://scripts/portrait_set.gd" id="script"]
+[ext_resource type="Texture2D" path="res://art/portraits/wounded-keeper-v1/neutral/character-clean.png" id="character-clean"]
+[ext_resource type="Texture2D" path="res://art/portraits/wounded-keeper-v1/neutral/eyes-neutral.png" id="eyes-neutral"]
+[ext_resource type="Texture2D" path="res://art/portraits/wounded-keeper-v1/neutral/mouth-neutral.png" id="mouth-neutral"]
+[ext_resource type="Texture2D" path="res://art/portraits/wounded-keeper-v1/neutral/eyes-half.png" id="eyes-half"]
+[ext_resource type="Texture2D" path="res://art/portraits/wounded-keeper-v1/neutral/eyes-closed.png" id="eyes-closed"]
+[ext_resource type="Texture2D" path="res://art/portraits/wounded-keeper-v1/neutral/mouth-small.png" id="mouth-small"]
+[ext_resource type="Texture2D" path="res://art/portraits/wounded-keeper-v1/neutral/mouth-open.png" id="mouth-open"]
+[ext_resource type="Texture2D" path="res://art/portraits/wounded-keeper-v1/neutral/shadow.png" id="shadow"]
+[ext_resource type="Texture2D" path="res://art/portraits/wounded-keeper-v1/neutral/highlight.png" id="highlight"]
+
+[resource]
+script = ExtResource("script")
+rig_kind = "Unique"
+rig_family = &"unique-wounded-keeper-v1"
+face_id = &"wounded-keeper"
+head = ExtResource("character-clean")
+eyes = ExtResource("eyes-neutral")
+mouth = ExtResource("mouth-neutral")
+blink_frames = Array[Texture2D]([ExtResource("eyes-half"),ExtResource("eyes-closed")])
+talk_frames = Array[Texture2D]([ExtResource("mouth-small"),ExtResource("mouth-open")])
+light_shadow = ExtResource("shadow")
+light_highlight = ExtResource("highlight")

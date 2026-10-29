@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PortraitSet" format=3]
+
+[ext_resource type="Script" path="res://scripts/portrait_set.gd" id="script"]
+[ext_resource type="Texture2D" path="res://art/portraits/wounded-keeper-v1/map-reading/resting.png" id="resting"]
+[ext_resource type="Texture2D" path="res://art/portraits/wounded-keeper-v1/map-reading/shadow.png" id="shadow"]
+[ext_resource type="Texture2D" path="res://art/portraits/wounded-keeper-v1/map-reading/highlight.png" id="highlight"]
+
+[resource]
+script = ExtResource("script")
+rig_kind = "Unique"
+rig_family = &"unique-wounded-keeper-map-reading-v1"
+face_id = &"wounded-keeper"
+head = ExtResource("resting")
+light_shadow = ExtResource("shadow")
+light_highlight = ExtResource("highlight")

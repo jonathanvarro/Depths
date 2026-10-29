@@ -1,0 +1,8 @@
+{
+  "captures": [],
+  "checks": 38,
+  "display": "headless",
+  "failures": [],
+  "physical_iphone_test": false,
+  "scope": "Isolated PortraitView and resource tests; not live event/conversation integration"
+}
