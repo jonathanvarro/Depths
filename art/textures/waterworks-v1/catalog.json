@@ -1,0 +1,25 @@
+{
+  "issue": 166,
+  "walls": {
+    "wet-plain": "res://art/textures/waterworks-v1/wet-plain.tres",
+    "wet-channelled": "res://art/textures/waterworks-v1/wet-channelled.tres"
+  },
+  "props": {
+    "dripping-channel": {
+      "scene": "res://art/dressing/waterworks-v1/dripping-channel.tscn",
+      "mount": "wall-centre",
+      "canvas_metres": 1.8
+    },
+    "broken-pipe": {
+      "scene": "res://art/dressing/waterworks-v1/broken-pipe.tscn",
+      "mount": "wall-centre",
+      "canvas_metres": 0.8
+    },
+    "silted-lamp": {
+      "scene": "res://art/dressing/waterworks-v1/silted-lamp.tscn",
+      "mount": "floor",
+      "canvas_metres": 0.65
+    }
+  },
+  "integration": "Standalone library: no live theme or placement changes. Static drips, no emission, particles, collision or gameplay."
+}

@@ -1,0 +1,26 @@
+{
+  "captures": [
+    "wet-plain-dry-1280.png",
+    "wet-plain-shallow-1280.png",
+    "wet-plain-deep-1280.png",
+    "wet-plain-dim-1280.png",
+    "wet-channelled-dry-1280.png",
+    "wet-channelled-shallow-1280.png",
+    "wet-channelled-deep-1280.png",
+    "wet-channelled-dim-1280.png",
+    "mounts-near-1280.png",
+    "wet-plain-dry-1278.png",
+    "wet-plain-shallow-1278.png",
+    "wet-plain-deep-1278.png",
+    "wet-plain-dim-1278.png",
+    "wet-channelled-dry-1278.png",
+    "wet-channelled-shallow-1278.png",
+    "wet-channelled-deep-1278.png",
+    "wet-channelled-dim-1278.png",
+    "mounts-near-1278.png"
+  ],
+  "checks": 47,
+  "failures": [],
+  "physical_iphone": false,
+  "scope": "Standalone assets and isolated mounting; live dressing/quest placement untouched"
+}

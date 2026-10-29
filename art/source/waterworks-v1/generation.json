@@ -1,0 +1,124 @@
+{
+  "issue": 166,
+  "tool": "Built-in ImageGen",
+  "sources": {
+    "wet-plain": {
+      "sha256": "def33bd6482f74ad71d2c4e7754fe934375356cb84439dd38a35e91b382697d2",
+      "size": [
+        1254,
+        1254
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-cc865156-3967-4833-b8ce-c852d0cd9f6d.png"
+    },
+    "wet-channelled": {
+      "sha256": "bb50d24b9caafd7cca3e6180476d7ee8f64407e91b9823282d04ecb6e032a48b",
+      "size": [
+        1254,
+        1254
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-377994a5-eca5-49a8-9b3f-331c7e4b6ad8.png"
+    },
+    "dripping-channel": {
+      "sha256": "2cc967f4427268bd6a2c2c511cd3692a7635a48e04d10e44bc804900d1a580b2",
+      "size": [
+        1254,
+        1254
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-667a2cba-04be-48ec-add3-62cdc20eab39.png"
+    },
+    "broken-pipe": {
+      "sha256": "fe8e96233356473a7c32f3467799c7ce06e6d5f87caab677472a83ec59ddde81",
+      "size": [
+        1254,
+        1254
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-e381a815-7f5e-4a74-9013-62a9d120ab96.png"
+    },
+    "silted-lamp": {
+      "sha256": "51b2e8b7405ebf2c9e2961b0c66e58ef99424262927f819bd8973fe2f9944d03",
+      "size": [
+        1254,
+        1254
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-5bd92bf7-e790-465f-a223-d43e3c642e47.png"
+    }
+  },
+  "outputs": {
+    "wet-plain": {
+      "path": "res://art/textures/waterworks-v1/wet-plain.png",
+      "sha256": "c6ad3bdceed4a58aec11d1b6b1a3e29763b24c15c5a2ca81019f9eef569e2957",
+      "canvas": [
+        128,
+        128
+      ],
+      "palette": 32,
+      "bounds": [
+        0,
+        0,
+        128,
+        128
+      ]
+    },
+    "wet-channelled": {
+      "path": "res://art/textures/waterworks-v1/wet-channelled.png",
+      "sha256": "1b29ae5825a6660c976815389f17d2cceba84293a1d0699c2129762f64e06acd",
+      "canvas": [
+        128,
+        128
+      ],
+      "palette": 32,
+      "bounds": [
+        0,
+        0,
+        128,
+        128
+      ]
+    },
+    "dripping-channel": {
+      "path": "res://art/dressing/waterworks-v1/dripping-channel.png",
+      "sha256": "f65db652532a7547590b2874c0c8568151a234a2de0f0986f6a79a9993f1d7fa",
+      "canvas": [
+        128,
+        128
+      ],
+      "palette": 32,
+      "bounds": [
+        48,
+        4,
+        80,
+        124
+      ]
+    },
+    "broken-pipe": {
+      "path": "res://art/dressing/waterworks-v1/broken-pipe.png",
+      "sha256": "fc5cba99f96facab5eb07155c7be2eaf7c4e9ecb175bae7cf5f948afc2ae693a",
+      "canvas": [
+        128,
+        128
+      ],
+      "palette": 32,
+      "bounds": [
+        15,
+        11,
+        113,
+        111
+      ]
+    },
+    "silted-lamp": {
+      "path": "res://art/dressing/waterworks-v1/silted-lamp.png",
+      "sha256": "0452fccf733f2241c65ac72d31ca4a364fc0e836ec05a301b2c03df44eed7f25",
+      "canvas": [
+        128,
+        128
+      ],
+      "palette": 32,
+      "bounds": [
+        30,
+        18,
+        102,
+        112
+      ]
+    }
+  },
+  "reference_sha256": "bea4e642b4fe0a8e38cb7832a6774002f212aca970a2ae7775f94537e75fc14a"
+}

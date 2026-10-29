@@ -1,0 +1,5 @@
+{
+  "checks": 51,
+  "failures": [],
+  "scope": "Source/export invariants; no live placement or physical iPhone claims"
+}
