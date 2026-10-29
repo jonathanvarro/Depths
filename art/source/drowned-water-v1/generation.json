@@ -1,0 +1,116 @@
+{
+  "issue": 166,
+  "tool": "image_gen.imagegen (built-in)",
+  "prompts": "prompts.json",
+  "masters": {
+    "shallow": {
+      "path": "res://art/source/drowned-water-v1/shallow-master.png",
+      "sha256": "84015ecee77bfe9ab77b5782795c421b0e18d97fd7574cb2ec376a4f20939a27",
+      "size": [
+        1254,
+        1254
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-299ce224-1f16-45de-bee7-5ffe4ef0c92d.png"
+    },
+    "deep": {
+      "path": "res://art/source/drowned-water-v1/deep-master.png",
+      "sha256": "46ec0c73c9a253e42ee3d99ed4baed6bfe8f9ccf75133548c0317269f37525b0",
+      "size": [
+        1254,
+        1254
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-c3b3c933-a87b-48bd-ab97-f32909435e6b.png"
+    },
+    "sluice-closed": {
+      "path": "res://art/source/drowned-water-v1/sluice-closed-master.png",
+      "sha256": "ae8e8cfabbc4866428776d9225470e11999f70dbdeae642c3fc5a9dd93a1bb9e",
+      "size": [
+        1254,
+        1254
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-4083922c-6a95-4107-af57-1fe8492e8c68.png"
+    },
+    "sluice-open": {
+      "path": "res://art/source/drowned-water-v1/sluice-open-master.png",
+      "sha256": "f926a028e88705828ebf123d394bbf2167b3839eb12ea7f92fa8b5baed00d071",
+      "size": [
+        1254,
+        1254
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-6ca659f4-4865-42c0-932d-42937b306b3a.png"
+    }
+  },
+  "references": {
+    "art/textures/cave-v1/floor.png": "ad5178b69d670d74ee43a324a79aa1c8502626b336aa7a5703fe1726ddccbbdc",
+    "art/props/story-slice-v1/lower-water-gate.png": "d3e8cdd18f006e70378b7dc0fd4d200ab1c9f967eaaaec6ed639071de5c0377e"
+  },
+  "exports": {
+    "shallow": {
+      "path": "res://art/textures/drowned-water-v1/shallow.png",
+      "sha256": "63d3ce39f5fbd5c0b50b90904169b6b491fc09396654e0f0cabf374f33127add",
+      "size": [
+        128,
+        128
+      ],
+      "colours": 32,
+      "opposite_edges_exact": true,
+      "edge_blend_width": 8
+    },
+    "deep": {
+      "path": "res://art/textures/drowned-water-v1/deep.png",
+      "sha256": "fd3427af3646e27cff90f4600d68655ae5e43cb85938b99b8709cd88167b4c6a",
+      "size": [
+        128,
+        128
+      ],
+      "colours": 32,
+      "opposite_edges_exact": true,
+      "edge_blend_width": 8
+    },
+    "sluice-closed": {
+      "path": "res://art/props/drowned-water-v1/sluice-closed.png",
+      "sha256": "be3ae7781269758b6c65aeb91e3cc4b4bd9dbae950b0c495411a0a35db91f753",
+      "size": [
+        192,
+        192
+      ],
+      "colours": 48,
+      "bounds": [
+        6,
+        17,
+        189,
+        181
+      ]
+    },
+    "sluice-open": {
+      "path": "res://art/props/drowned-water-v1/sluice-open.png",
+      "sha256": "41c8d129db222c81a9847b1cc3d9d585f1e955d2feaaea3d1ad0614a7f9aa069",
+      "size": [
+        192,
+        192
+      ],
+      "colours": 48,
+      "bounds": [
+        5,
+        16,
+        189,
+        182
+      ]
+    }
+  },
+  "registration": {
+    "common_full_square_resize": [
+      192,
+      192
+    ],
+    "per_state_fitting": false,
+    "pixel_size": 0.010416666666666666,
+    "sprite_y": 0.895,
+    "floor_contact_from_closed": 180,
+    "world_canvas_width": 2.0,
+    "state_api": {
+      "closed": "sluice-closed",
+      "empty": "sluice-open"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "captures": [
+    "dry-1280.png",
+    "shallow-1280.png",
+    "deep-1280.png",
+    "sluice-closed-1280.png",
+    "sluice-open-1280.png",
+    "dim-still-1280.png",
+    "sluice-closed-near-1280.png",
+    "sluice-open-near-1280.png",
+    "dry-1278.png",
+    "shallow-1278.png",
+    "deep-1278.png",
+    "sluice-closed-1278.png",
+    "sluice-open-1278.png",
+    "dim-still-1278.png",
+    "sluice-closed-near-1278.png",
+    "sluice-open-near-1278.png"
+  ],
+  "checks": 36,
+  "failures": [],
+  "physical_iphone": false,
+  "scope": "Isolated asset library; live floor placement remains Claude's hookup"
+}

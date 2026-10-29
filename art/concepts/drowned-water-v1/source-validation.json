@@ -1,0 +1,6 @@
+{
+  "checks": 53,
+  "failures": [],
+  "raw_rgba_budget_bytes": 425984,
+  "scope": "Asset library only; original gameplay/themes/event data are unchanged. Source math does not certify visual style."
+}

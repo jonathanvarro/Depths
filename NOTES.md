@@ -14,6 +14,11 @@ Format:
 ---
 
 ## 2026-10-27 – ChatGPT
+- Did: First #166 art delivery: native128 shallow/deep water tiles and native192 closed/open sluice, with materials/scenes, shared state registration, cheap world-space water motion and still mode. Four exact built-in ImageGen masters/prompts/provenance retained. Existing floor/water/event/quest rules are unchanged; this is a mounted asset library for Claude's queued hookup. Review: art/concepts/drowned-water-v1/inspector.html; integration details: docs/drowned-water-and-sluice.md.
+- Next: Claude connects surfaces to existing flooded cells/drain flags and the sluice event/stair transition. Keep shallow water distinct from deep-water penalties and preserve dry ledges. Wet walls/dressing, keeper and monsters remain #166/#168 work. The 2m-wide wheel assembly fits the grid; update the existing clue's literal "taller than a man" wording or author a wider alcove before scaling it up.
+- Watch out: 53 source checks, 18 headless scene checks, 36 renderer checks/16 actual captures, 12 motion frames and 79 browser checks pass, with clean logs/exit. Still-mode pixels are fixed; full opposite tile edges match after an explicit eight-pixel export blend. Pair artwork closely matches but is not pixel-identical outside the gate. Four native textures total 416 KiB RGBA. Headless checks by default; render captures used a hidden off-screen process. No Main, saves/preferences/audio or existing theme/asset files changed. Physical iPhone and live placement remain separate.
+
+## 2026-10-27 – ChatGPT
 - Did: Recorded the owner's approval of all three concept-faithful Fixer portrait designs (#163): "Yes, those are fantastic and much more distinctive." The accepted direction keeps the red coats, worn finery, silver hair streaks and knowing expressions. Updated the art handoff and shared instructions.
 - Next: Preserve the accepted designs and their fitted facial registration during future exports; use versioned variants for requested visual changes. Physical iPhone testing remains #66.
 - Watch out: Documentation only; no artwork, animation, resource or gameplay changes. Checked whitespace and the focused diff; prior renderer/source checks remain the applicable validation.

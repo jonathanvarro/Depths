@@ -1,0 +1,17 @@
+{
+  "issue": 166,
+  "scene": "res://art/props/drowned-water-v1/sluice.tscn",
+  "common_full_square_resize": [
+    192,
+    192
+  ],
+  "per_state_fitting": false,
+  "pixel_size": 0.010416666666666666,
+  "sprite_y": 0.895,
+  "floor_contact_from_closed": 180,
+  "world_canvas_width": 2.0,
+  "state_api": {
+    "closed": "sluice-closed",
+    "empty": "sluice-open"
+  }
+}

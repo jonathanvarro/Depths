@@ -1,0 +1,24 @@
+{
+  "captures": [
+    "dry-1280.png",
+    "shallow-1280.png",
+    "deep-1280.png",
+    "sluice-closed-1280.png",
+    "sluice-open-1280.png",
+    "dim-still-1280.png",
+    "sluice-closed-near-1280.png",
+    "sluice-open-near-1280.png",
+    "dry-1278.png",
+    "shallow-1278.png",
+    "deep-1278.png",
+    "sluice-closed-1278.png",
+    "sluice-open-1278.png",
+    "dim-still-1278.png",
+    "sluice-closed-near-1278.png",
+    "sluice-open-near-1278.png"
+  ],
+  "motion_frames": 12,
+  "motion_frame_ms": 250,
+  "source": "Actual isolated Godot 4.7.2 Mobile/D3D12 renderer; no Main/save/preferences",
+  "live_integration": false
+}

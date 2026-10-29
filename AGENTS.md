@@ -86,6 +86,10 @@ Templates > Download and Install; already installed on the owner's PC).
   entries (#139) are ready in `docs/descent-surfaces-and-dressing.md`; optional
   glow is separate and mood only. Preserve live themes/wall files; new placement
   and later floor/lore assignment remain separate work.
+  #166's shallow/deep water surfaces and registered sluice ready/open scene are
+  ready for Claude's live hookup: `docs/drowned-water-and-sluice.md`.
+  The water is visual only, with world-space phase and a still toggle; preserve
+  existing flood/drain flags, dry ledges and the sluice-to-stair transition.
   Roots, collapsed royal cache scenery and a miners' shrine with fresh/resolved
   states (#132/#133) are ready in `art/dressing/landmarks-v1`;
   `docs/landmark-art.md` records mounts and the shrine's required wall anchor.

@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3]
+[ext_resource type="Shader" path="res://art/textures/drowned-water-v1/water.gdshader" id="shader"]
+[ext_resource type="Texture2D" path="res://art/textures/drowned-water-v1/deep.png" id="texture"]
+[resource]
+shader = ExtResource("shader")
+shader_parameter/surface_texture = ExtResource("texture")
+shader_parameter/motion_enabled = true
+shader_parameter/tile_meters = 2.0

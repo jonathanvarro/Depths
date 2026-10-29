@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="Script" path="res://art/textures/drowned-water-v1/surface.gd" id="surface"]
+[node name="ShallowWater" type="MeshInstance3D"]
+script = ExtResource("surface")
+position = Vector3(0, 0.018, 0)
