@@ -1,0 +1,14 @@
+[gd_resource type="SpriteFrames" load_steps=7 format=3]
+[ext_resource type="Texture2D" path="res://art/enemies/marrow-shepherd-v1/idle.png" id="idle"]
+[ext_resource type="Texture2D" path="res://art/enemies/marrow-shepherd-v1/tending.png" id="tending"]
+[ext_resource type="Texture2D" path="res://art/enemies/marrow-shepherd-v1/birthing.png" id="birthing"]
+[ext_resource type="Texture2D" path="res://art/enemies/marrow-shepherd-v1/attack.png" id="attack"]
+[ext_resource type="Texture2D" path="res://art/enemies/marrow-shepherd-v1/hurt.png" id="hurt"]
+[ext_resource type="Texture2D" path="res://art/enemies/marrow-shepherd-v1/defeated.png" id="defeated"]
+[resource]
+animations = [{"frames":[{"duration":1.0,"texture":ExtResource("idle")}],"loop":true,"name":&"idle","speed":8.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("tending")}],"loop":false,"name":&"tending","speed":8.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("birthing")}],"loop":false,"name":&"birthing","speed":8.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("attack")}],"loop":false,"name":&"attack","speed":8.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("hurt")}],"loop":false,"name":&"hurt","speed":8.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("defeated")}],"loop":false,"name":&"defeated","speed":8.0}]

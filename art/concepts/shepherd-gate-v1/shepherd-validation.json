@@ -1,0 +1,33 @@
+{
+	"balance": "Existing breach-hound numbers copied in memory for art review only; no new enemy definition",
+	"captures": [
+		"shepherd-combat-1280-normal-idle.png",
+		"shepherd-combat-1280-normal-tending.png",
+		"shepherd-combat-1280-normal-birthing.png",
+		"shepherd-combat-1280-normal-attack.png",
+		"shepherd-combat-1280-normal-hurt.png",
+		"shepherd-combat-1280-normal-defeated.png",
+		"shepherd-combat-1280-larger-idle.png",
+		"shepherd-combat-1280-larger-tending.png",
+		"shepherd-combat-1280-larger-birthing.png",
+		"shepherd-combat-1280-larger-attack.png",
+		"shepherd-combat-1280-larger-hurt.png",
+		"shepherd-combat-1280-larger-defeated.png",
+		"shepherd-combat-1278-normal-idle.png",
+		"shepherd-combat-1278-normal-tending.png",
+		"shepherd-combat-1278-normal-birthing.png",
+		"shepherd-combat-1278-normal-attack.png",
+		"shepherd-combat-1278-normal-hurt.png",
+		"shepherd-combat-1278-normal-defeated.png",
+		"shepherd-combat-1278-larger-idle.png",
+		"shepherd-combat-1278-larger-tending.png",
+		"shepherd-combat-1278-larger-birthing.png",
+		"shepherd-combat-1278-larger-attack.png",
+		"shepherd-combat-1278-larger-hurt.png",
+		"shepherd-combat-1278-larger-defeated.png"
+	],
+	"checks": 173,
+	"failures": [],
+	"physical_iPhone": false,
+	"uses_Main_or_saves": false
+}

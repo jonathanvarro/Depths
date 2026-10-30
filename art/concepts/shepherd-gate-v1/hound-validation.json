@@ -1,0 +1,21 @@
+{
+	"balance": "Existing breach-hound numbers copied in memory for art review only; no new enemy definition",
+	"captures": [
+		"hound-combat-1280-normal-idle.png",
+		"hound-combat-1280-normal-attack.png",
+		"hound-combat-1280-normal-hurt.png",
+		"hound-combat-1280-larger-idle.png",
+		"hound-combat-1280-larger-attack.png",
+		"hound-combat-1280-larger-hurt.png",
+		"hound-combat-1278-normal-idle.png",
+		"hound-combat-1278-normal-attack.png",
+		"hound-combat-1278-normal-hurt.png",
+		"hound-combat-1278-larger-idle.png",
+		"hound-combat-1278-larger-attack.png",
+		"hound-combat-1278-larger-hurt.png"
+	],
+	"checks": 92,
+	"failures": [],
+	"physical_iPhone": false,
+	"uses_Main_or_saves": false
+}

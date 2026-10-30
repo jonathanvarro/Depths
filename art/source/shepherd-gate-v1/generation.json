@@ -1,0 +1,363 @@
+{
+  "issues": [
+    166,
+    168
+  ],
+  "tool": "Built-in ImageGen",
+  "sources": {
+    "gate-closed": {
+      "sha256": "588a21d3c88baaacf9eeb580ce6de79bfeb074549caa709aab09060ab4144288",
+      "size": [
+        1254,
+        1254
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-3cf0211d-d4b2-457d-9e10-94c0cf18e651.png",
+      "prompt_file": "gate-closed-prompt.txt",
+      "references": []
+    },
+    "gate-open": {
+      "sha256": "07abeeb9f63c54a2d4aba2bcfbcf59a54263a748304c8f22b55f24888806ee8e",
+      "size": [
+        1254,
+        1254
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-aa717d92-5a37-4ebf-8507-5d017ebefa4f.png",
+      "prompt_file": "gate-open-prompt.txt",
+      "references": [
+        {
+          "path": "art/source/shepherd-gate-v1/gate-closed-master.png",
+          "sha256": "588a21d3c88baaacf9eeb580ce6de79bfeb074549caa709aab09060ab4144288"
+        }
+      ]
+    },
+    "gate-open-water": {
+      "sha256": "8999b9e162332580e218aafe47b7b932256a9ecbb38492b018d078b35a645964",
+      "size": [
+        1254,
+        1254
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-f8506e51-2043-49bc-8ec2-b3e8dc829a8e.png",
+      "prompt_file": "gate-open-water-prompt.txt",
+      "references": [
+        {
+          "path": "art/source/shepherd-gate-v1/gate-open-master.png",
+          "sha256": "07abeeb9f63c54a2d4aba2bcfbcf59a54263a748304c8f22b55f24888806ee8e"
+        }
+      ]
+    },
+    "hound-attack": {
+      "sha256": "991d05530fb85431d8232e28162560ecadc02080d7e23690ed97d60c81d1bc02",
+      "size": [
+        1254,
+        1254
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-8cf08d4a-29f6-4b85-acd4-bf85a946fb66.png",
+      "prompt_file": "hound-attack-prompt.txt",
+      "references": [
+        {
+          "path": "art/source/shepherd-gate-v1/hound-idle-master.png",
+          "sha256": "5eb2edbf9b7eda1689b7c3cd179df11cfbb5e8e0c1745f063ef30257a128ba20"
+        }
+      ]
+    },
+    "hound-hurt": {
+      "sha256": "3e0f23712fa4b0bf30197e74c37db1a0ce0efeea8df6fcafbc0c49dd88f7d661",
+      "size": [
+        1254,
+        1254
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-956f3bf9-1c16-4ba7-a131-06bf782dadd5.png",
+      "prompt_file": "hound-hurt-prompt.txt",
+      "references": [
+        {
+          "path": "art/source/shepherd-gate-v1/hound-idle-master.png",
+          "sha256": "5eb2edbf9b7eda1689b7c3cd179df11cfbb5e8e0c1745f063ef30257a128ba20"
+        }
+      ]
+    },
+    "hound-idle": {
+      "sha256": "5eb2edbf9b7eda1689b7c3cd179df11cfbb5e8e0c1745f063ef30257a128ba20",
+      "size": [
+        1254,
+        1254
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-b3c92317-5c3b-4609-be46-f176cb59c5c0.png",
+      "prompt_file": "hound-idle-prompt.txt",
+      "references": [
+        {
+          "path": "art/source/shepherd-gate-v1/shepherd-idle-master.png",
+          "sha256": "91208bf07f0e233ec32425fdd2b2550e036ccc6c471b781c74555818d6aa4697"
+        },
+        {
+          "path": "art/enemies/underhound-v2/idle.png",
+          "sha256": "9d66f724f211756eeec8f6e209ed853e6d68eed714184bb308f079a0bf632ffe"
+        }
+      ]
+    },
+    "shepherd-attack": {
+      "sha256": "1fd482111e5b134ccbefbe116b76059b45a4c65e7c469885908e9e0e730654f3",
+      "size": [
+        1254,
+        1254
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-b0232f77-5346-4443-83ed-fccea93b58f5.png",
+      "prompt_file": "shepherd-attack-prompt.txt",
+      "references": [
+        {
+          "path": "art/source/shepherd-gate-v1/shepherd-idle-master.png",
+          "sha256": "91208bf07f0e233ec32425fdd2b2550e036ccc6c471b781c74555818d6aa4697"
+        }
+      ]
+    },
+    "shepherd-birthing": {
+      "sha256": "5fd6f267ac5df101ed2d09c2a21f62e457e2df5f3749546e37a30077a70146e0",
+      "size": [
+        1254,
+        1254
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-31c895da-897f-4d4f-a15a-4cff489bd3f6.png",
+      "prompt_file": "shepherd-birthing-prompt.txt",
+      "references": [
+        {
+          "path": "art/source/shepherd-gate-v1/shepherd-idle-master.png",
+          "sha256": "91208bf07f0e233ec32425fdd2b2550e036ccc6c471b781c74555818d6aa4697"
+        }
+      ]
+    },
+    "shepherd-defeated": {
+      "sha256": "d1226a55ffa6877aad9038bbc51efed7e01e5070e6c255508bbf6c392a0b23be",
+      "size": [
+        1254,
+        1254
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-3a1c5f40-ced2-40c2-9b64-3d8d13d01da8.png",
+      "prompt_file": "shepherd-defeated-prompt.txt",
+      "references": [
+        {
+          "path": "art/source/shepherd-gate-v1/shepherd-idle-master.png",
+          "sha256": "91208bf07f0e233ec32425fdd2b2550e036ccc6c471b781c74555818d6aa4697"
+        }
+      ]
+    },
+    "shepherd-hurt": {
+      "sha256": "71e0c71e733dc4671da61e9f204a57e9156e83b757202b5ce11b8da56da2c305",
+      "size": [
+        1254,
+        1254
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-a53dfdc8-6752-44a5-b1bd-4584330e92c6.png",
+      "prompt_file": "shepherd-hurt-prompt.txt",
+      "references": [
+        {
+          "path": "art/source/shepherd-gate-v1/shepherd-idle-master.png",
+          "sha256": "91208bf07f0e233ec32425fdd2b2550e036ccc6c471b781c74555818d6aa4697"
+        }
+      ]
+    },
+    "shepherd-idle": {
+      "sha256": "91208bf07f0e233ec32425fdd2b2550e036ccc6c471b781c74555818d6aa4697",
+      "size": [
+        1254,
+        1254
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-f6bf30fc-b8ee-42c2-9e90-eea522427b4a.png",
+      "prompt_file": "shepherd-idle-prompt.txt",
+      "references": [
+        {
+          "path": "art/concepts/descent-horror-v1/marrow-shepherd.png",
+          "sha256": "56aea0bc1fa9e22f505f6e33f0406161defe05e1f2993ab42c0d13bacb51a581"
+        },
+        {
+          "path": "art/enemies/monsters-v1/broodmother/idle.png",
+          "sha256": "c94abf0b753690dc966bd7548ab16e535cc434d398573e84ecec2412f2dbcda5"
+        }
+      ]
+    },
+    "shepherd-tending": {
+      "sha256": "55d346275d334ba5083800c0a2642be14727b37c8a25047bc1223789de1ff4a0",
+      "size": [
+        1254,
+        1254
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-f580d384-501f-4916-a2f6-3f74b03edddd.png",
+      "prompt_file": "shepherd-tending-prompt.txt",
+      "references": [
+        {
+          "path": "art/source/shepherd-gate-v1/shepherd-idle-master.png",
+          "sha256": "91208bf07f0e233ec32425fdd2b2550e036ccc6c471b781c74555818d6aa4697"
+        }
+      ]
+    }
+  },
+  "references": {
+    "art/concepts/descent-horror-v1/marrow-shepherd.png": "56aea0bc1fa9e22f505f6e33f0406161defe05e1f2993ab42c0d13bacb51a581",
+    "art/enemies/monsters-v1/broodmother/idle.png": "c94abf0b753690dc966bd7548ab16e535cc434d398573e84ecec2412f2dbcda5",
+    "art/enemies/underhound-v2/idle.png": "9d66f724f211756eeec8f6e209ed853e6d68eed714184bb308f079a0bf632ffe"
+  },
+  "families": {
+    "shepherd": {
+      "canvas": 192,
+      "pivot": [
+        96,
+        180
+      ],
+      "source_window": [
+        -57.0,
+        -66.50000000000007,
+        1311.0,
+        1301.5
+      ],
+      "source_scale": 0.14035087719298245,
+      "source_translation": [
+        8.0,
+        9.333333333333343
+      ],
+      "per_pose_fit": false,
+      "pixel_size": 0.006424242424242424,
+      "scene": "res://art/enemies/marrow-shepherd-v1/scene.tscn",
+      "poses": {
+        "idle": {
+          "sha256": "f25cd6edf74f4af83ae6df0a9ae6e1b0debd970ad40d6cecd5370a7c618e57b9",
+          "bounds": [
+            31,
+            15,
+            161,
+            180
+          ]
+        },
+        "tending": {
+          "sha256": "c881d990f988d79a439be8c31d7e809eddea19003dd3825f1a05d39d94c56e54",
+          "bounds": [
+            32,
+            14,
+            161,
+            180
+          ]
+        },
+        "birthing": {
+          "sha256": "497d8863d8d8986ebef1ff108434cc851585828ec9372587df498f6b3efde606",
+          "bounds": [
+            31,
+            15,
+            161,
+            180
+          ]
+        },
+        "attack": {
+          "sha256": "6ba06fc6156228d8754baacd834722f3514387dc7bc1cd06a9b99dca5db70f4d",
+          "bounds": [
+            32,
+            14,
+            165,
+            181
+          ]
+        },
+        "hurt": {
+          "sha256": "8201bc0c5966689a2b13551218b3133f076930b8d9dc3f0f4261345567ca88c8",
+          "bounds": [
+            26,
+            13,
+            172,
+            180
+          ]
+        },
+        "defeated": {
+          "sha256": "e8c688dccefb5114a75c17640f122ac3fbbb7e5161808a62e510b6f123a63d67",
+          "bounds": [
+            11,
+            94,
+            180,
+            175
+          ]
+        }
+      }
+    },
+    "hound": {
+      "canvas": 128,
+      "pivot": [
+        64,
+        120
+      ],
+      "source_window": [
+        -89.57142857142857,
+        -175.57142857142864,
+        1343.5714285714287,
+        1257.5714285714284
+      ],
+      "source_scale": 0.08931419457735247,
+      "source_translation": [
+        8.0,
+        15.681020733652318
+      ],
+      "per_pose_fit": false,
+      "pixel_size": 0.0065625,
+      "scene": "res://art/enemies/unfinished-hound-v1/scene.tscn",
+      "poses": {
+        "idle": {
+          "sha256": "855ad871d97a9b0b1b50c4701267e91dc5eb9a11226322807e93e9ca5504d159",
+          "bounds": [
+            28,
+            56,
+            106,
+            120
+          ]
+        },
+        "attack": {
+          "sha256": "fd8cf92e7c76816bc8bbee4d842e3d91bd7e8eef374fb915a13c5ce3c2fcb942",
+          "bounds": [
+            30,
+            65,
+            107,
+            117
+          ]
+        },
+        "hurt": {
+          "sha256": "08f7d4a8832f387cf705a4850c552116fb6d8e40308582818867917cd2fcf761",
+          "bounds": [
+            27,
+            52,
+            107,
+            116
+          ]
+        }
+      }
+    }
+  },
+  "gate": {
+    "scene": "res://art/props/reservoir-flow-gate-v1/scene.tscn",
+    "canvas": 192,
+    "world_canvas_metres": 2.0,
+    "aperture": [
+      50,
+      37,
+      142,
+      168
+    ],
+    "pixel_size": 0.010416666666666666,
+    "sprite_y": 0.85875,
+    "state_api": {
+      "closed": "closed",
+      "empty": "open"
+    },
+    "outputs": {
+      "closed": {
+        "sha256": "8dd1e1a4a1c3386e3611ece557a638279434f18cd5229c2c482922239c31f8a9",
+        "bounds": [
+          3,
+          14,
+          189,
+          177
+        ]
+      },
+      "open": {
+        "sha256": "0837f1fe303ae817ae88236155eced9f869ad543c3d419a5c92a7b78c6f75ddf",
+        "bounds": [
+          3,
+          14,
+          189,
+          177
+        ]
+      }
+    }
+  }
+}

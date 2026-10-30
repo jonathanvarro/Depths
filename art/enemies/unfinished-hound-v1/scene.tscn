@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="SpriteFrames" path="res://art/enemies/unfinished-hound-v1/frames.tres" id="frames"]
+[ext_resource type="Script" path="res://art/enemies/underhound-v1/mount.gd" id="bounds"]
+[node name="Creature" type="Node3D"]
+script = ExtResource("bounds")
+pose_tops = {"idle": [56], "attack": [65], "hurt": [52]}
+metadata/pivot = Vector2(64.0,120)
+metadata/art_issue = 166
+[node name="Sprite" type="AnimatedSprite3D" parent="."]
+position = Vector3(0,0.3675,0)
+pixel_size = 0.0065625
+billboard = 1
+shaded = true
+texture_filter = 0
+alpha_cut = 1
+alpha_scissor_threshold = 0.5
+cast_shadow = 0
+sprite_frames = ExtResource("frames")
+animation = &"idle"

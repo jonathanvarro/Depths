@@ -1,0 +1,5 @@
+{
+  "checks": 95,
+  "failures": [],
+  "scope": "Source/native invariants; owner review and live hookup remain separate"
+}

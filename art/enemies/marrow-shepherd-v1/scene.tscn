@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="SpriteFrames" path="res://art/enemies/marrow-shepherd-v1/frames.tres" id="frames"]
+[ext_resource type="Script" path="res://art/enemies/underhound-v1/mount.gd" id="bounds"]
+[node name="Creature" type="Node3D"]
+script = ExtResource("bounds")
+pose_tops = {"idle": [15], "tending": [14], "birthing": [15], "attack": [14], "hurt": [13], "defeated": [94]}
+metadata/pivot = Vector2(96.0,180)
+metadata/art_issue = 166
+[node name="Sprite" type="AnimatedSprite3D" parent="."]
+position = Vector3(0,0.5396363636363637,0)
+pixel_size = 0.006424242424242424
+billboard = 1
+shaded = true
+texture_filter = 0
+alpha_cut = 1
+alpha_scissor_threshold = 0.5
+cast_shadow = 0
+sprite_frames = ExtResource("frames")
+animation = &"idle"

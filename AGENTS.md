@@ -106,6 +106,9 @@ Templates > Download and Install; already installed on the owner's PC).
   #168 ancient stonework has a separate optional eight-second mineral pulse
   and a fixed wall scene: `docs/descent-production-art.md`. Default is still;
   pass effects preferences explicitly. Existing vision/quest hookup is separate.
+  #168's chain-hoisted flow gate has registered closed/open art and a fixed
+  wall scene in `docs/shepherd-and-flow-gate.md`. Existing drain/quest rules
+  remain unchanged; connect `state="empty"` and the real wall anchor on hookup.
 - `scripts/companion.gd` + `data/companions/*.tres` – hero definitions
   (Companion resource: identity, health, effects over time). The game
   plays with copies, never the .tres itself.
@@ -186,6 +189,11 @@ Templates > Download and Install; already installed on the owner's PC).
   `docs/descent-production-art.md` records source registration, paused review,
   actual combat checks and required LUNGER/HYDRA presentation mappings. Old
   exporter/family remain untouched. No live EnemyType or rule changes.
+  #166 Marrow Shepherd (native192, six poses) and unfinished hound (native128,
+  three poses) are ready in `docs/shepherd-and-flow-gate.md`. Shared32-colour
+  kinship palette, conservative checked world scales and source registration.
+  Reset/review placeholder EnemyType tint/scale and map SHEPHERD presentation
+  during hookup. Cradle occupants illustrate birth, not persistent charge layers.
   Five further reference-led sovereign/creature studies (#153) are in
   `art/concepts/reference-creatures-v1/inspector.html`; prompts/provenance and
   review notes: `docs/reference-creature-concepts.md`. Supplied references and

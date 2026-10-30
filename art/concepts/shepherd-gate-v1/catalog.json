@@ -1,0 +1,67 @@
+{
+  "issues": [
+    166,
+    168
+  ],
+  "families": {
+    "shepherd": {
+      "scene": "res://art/enemies/marrow-shepherd-v1/scene.tscn",
+      "canvas": 192,
+      "poses": [
+        "idle",
+        "tending",
+        "birthing",
+        "attack",
+        "hurt",
+        "defeated"
+      ]
+    },
+    "hound": {
+      "scene": "res://art/enemies/unfinished-hound-v1/scene.tscn",
+      "canvas": 128,
+      "poses": [
+        "idle",
+        "attack",
+        "hurt"
+      ]
+    }
+  },
+  "gate": {
+    "scene": "res://art/props/reservoir-flow-gate-v1/scene.tscn",
+    "canvas": 192,
+    "world_canvas_metres": 2.0,
+    "aperture": [
+      50,
+      37,
+      142,
+      168
+    ],
+    "pixel_size": 0.010416666666666666,
+    "sprite_y": 0.85875,
+    "state_api": {
+      "closed": "closed",
+      "empty": "open"
+    },
+    "outputs": {
+      "closed": {
+        "sha256": "8dd1e1a4a1c3386e3611ece557a638279434f18cd5229c2c482922239c31f8a9",
+        "bounds": [
+          3,
+          14,
+          189,
+          177
+        ]
+      },
+      "open": {
+        "sha256": "0837f1fe303ae817ae88236155eced9f869ad543c3d419a5c92a7b78c6f75ddf",
+        "bounds": [
+          3,
+          14,
+          189,
+          177
+        ]
+      }
+    }
+  },
+  "status": "Standalone library, no live EnemyType, quest, flood rule or placement changes."
+}
