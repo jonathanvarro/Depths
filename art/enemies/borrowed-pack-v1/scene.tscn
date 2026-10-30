@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="SpriteFrames" path="res://art/enemies/borrowed-pack-v1/frames.tres" id="frames"]
+[ext_resource type="Script" path="res://art/enemies/underhound-v1/mount.gd" id="mount"]
+[node name="DescentCreature" type="Node3D"]
+script = ExtResource("mount")
+pose_tops = {"idle": [42], "attack": [49], "hurt": [32], "off-balance": [48], "defeated": [75]}
+metadata/pivot = Vector2(64,120)
+metadata/art_issue = 166
+[node name="Sprite" type="AnimatedSprite3D" parent="."]
+position = Vector3(0,0.6045454545454545,0)
+pixel_size = 0.010795454545454546
+billboard = 1
+shaded = true
+texture_filter = 0
+alpha_cut = 1
+alpha_scissor_threshold = 0.5
+cast_shadow = 0
+sprite_frames = ExtResource("frames")
+animation = &"idle"

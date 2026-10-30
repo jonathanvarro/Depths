@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-29 – ChatGPT
+- Did: Completed the requested #166/#168 production batch: independent ancient stonework with separate optional eight-second pulse, six-state Underhound sibling (original idle/attack/hurt unchanged; new windup/lunge/defeated), and five-state Borrowed Pack. Eleven built-in ImageGen masters, exact prompts/reference lineage and registration edits retained. Review: art/concepts/descent-production-v1/inspector.html; handoff: docs/descent-production-art.md.
+- Next: Claude connects the stonework event and LUNGER/HYDRA presentation states without changing rules, resets/reviews placeholder tints/scales, and handles preference/restore wiring. Owner praised generated drawings; exported full-family review is available. Marrow Shepherd/unfinished hound are next creatures; other floor-six art remains #168.
+- Watch out: 93 source, 44 headless, 173 hound renderer/24 captures, 146 Pack renderer/20 captures, 14 stone renderer/8 captures and 83 browser checks pass. Hidden off-screen rendering, no focus stealing; isolated one-hero combat UI uses borrowed numbers only in memory. Old hound/approved pixels, definitions, live themes, quests, player saves/preferences unchanged. Off-balance is one transient limp-head drawing, not a persistent per-head layer system. Hound uses `windup`; current brute mapping uses `wind-up`. Full-party Larger/physical iPhone/live hookup remain separate. Unrelated deep_monsters_check.gd.uid remains untouched.
+
 ## 2026-10-28 – ChatGPT
 - Did: Added #166 plain/channelled wet slate walls, dripping stone channel, broken iron pipe and silted unlit lamp as an independent native128/32-colour library. Built-in ImageGen masters/prompts/hashes retained; opaque periodic materials and fixed shaded prop scenes exported. Review: art/concepts/waterworks-v1/inspector.html; hookup: docs/waterworks-art.md.
 - Next: Claude assigns the walls and sparse dressing to Drowned Galleries. Use full-face wall UVs, centre wall mounts in real faces, keep floor lamps on dry ledges/drained floor and preserve existing water/sluice/stair authority. Drain tile repetition is noticeable at full coverage; use mainly plain walls. Ancient stonework landmark and remaining monsters are separate #166 work.

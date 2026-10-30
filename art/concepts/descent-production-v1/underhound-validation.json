@@ -1,0 +1,33 @@
+{
+	"balance": "Existing breach-hound numbers copied in memory for art review only; no new enemy definition",
+	"captures": [
+		"underhound-combat-1280-normal-idle.png",
+		"underhound-combat-1280-normal-attack.png",
+		"underhound-combat-1280-normal-hurt.png",
+		"underhound-combat-1280-normal-windup.png",
+		"underhound-combat-1280-normal-lunge.png",
+		"underhound-combat-1280-normal-defeated.png",
+		"underhound-combat-1280-larger-idle.png",
+		"underhound-combat-1280-larger-attack.png",
+		"underhound-combat-1280-larger-hurt.png",
+		"underhound-combat-1280-larger-windup.png",
+		"underhound-combat-1280-larger-lunge.png",
+		"underhound-combat-1280-larger-defeated.png",
+		"underhound-combat-1278-normal-idle.png",
+		"underhound-combat-1278-normal-attack.png",
+		"underhound-combat-1278-normal-hurt.png",
+		"underhound-combat-1278-normal-windup.png",
+		"underhound-combat-1278-normal-lunge.png",
+		"underhound-combat-1278-normal-defeated.png",
+		"underhound-combat-1278-larger-idle.png",
+		"underhound-combat-1278-larger-attack.png",
+		"underhound-combat-1278-larger-hurt.png",
+		"underhound-combat-1278-larger-windup.png",
+		"underhound-combat-1278-larger-lunge.png",
+		"underhound-combat-1278-larger-defeated.png"
+	],
+	"checks": 173,
+	"failures": [],
+	"physical_iPhone": false,
+	"uses_Main_or_saves": false
+}

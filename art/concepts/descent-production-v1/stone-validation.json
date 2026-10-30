@@ -1,0 +1,15 @@
+{
+  "captures": [
+    "stone-still-1280.png",
+    "stone-peak-1280.png",
+    "stone-off-1280.png",
+    "stone-dim-1280.png",
+    "stone-still-1278.png",
+    "stone-peak-1278.png",
+    "stone-off-1278.png",
+    "stone-dim-1278.png"
+  ],
+  "checks": 14,
+  "failures": [],
+  "physical_iphone": false
+}

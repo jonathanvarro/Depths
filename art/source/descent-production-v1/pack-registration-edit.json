@@ -1,0 +1,6 @@
+{
+  "tool": "Built-in ImageGen",
+  "prompt": "Registration edit ONLY, keep the identical defeated three-headed Borrowed Pack body, size, proportions, shading and1254x1254 square transparent canvas. Move the complete existing body DOWN about115 source pixels, so the lowest centre claws that are now around y1020 end near y1135, the same contact band as the original idle. DO NOT resize, zoom, crop or redraw anatomy. Keep all body within frame, no ground or shadow, true transparent background. Preserve the three heads flat and dead beneath the single hide.",
+  "reference": "art/source/descent-production-v1/borrowed-pack-defeated-master.png",
+  "output_hint": "Generated images are saved to C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971 as C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-9bf72d73-1945-4576-8dfe-fc71f5082830.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+}

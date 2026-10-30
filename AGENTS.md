@@ -103,6 +103,9 @@ Templates > Download and Install; already installed on the owner's PC).
   states (#132/#133) are ready in `art/dressing/landmarks-v1`;
   `docs/landmark-art.md` records mounts and the shrine's required wall anchor.
   The new cairn glyph is live on the map; these scenes await placement.
+  #168 ancient stonework has a separate optional eight-second mineral pulse
+  and a fixed wall scene: `docs/descent-production-art.md`. Default is still;
+  pass effects preferences explicitly. Existing vision/quest hookup is separate.
 - `scripts/companion.gd` + `data/companions/*.tres` – hero definitions
   (Companion resource: identity, health, effects over time). The game
   plays with copies, never the .tres itself.
@@ -178,6 +181,11 @@ Templates > Download and Install; already installed on the owner's PC).
   Preserve the approved idle and shared transform; the hurt paw lifts without
   snapping the whole sprite down. Other choices
   and revised review remain open; no encounter assignments.
+  #166 now supplies a complete six-state sibling `art/enemies/underhound-v2`
+  (old idle/attack/hurt pixels unchanged) and five-state `borrowed-pack-v1`.
+  `docs/descent-production-art.md` records source registration, paused review,
+  actual combat checks and required LUNGER/HYDRA presentation mappings. Old
+  exporter/family remain untouched. No live EnemyType or rule changes.
   Five further reference-led sovereign/creature studies (#153) are in
   `art/concepts/reference-creatures-v1/inspector.html`; prompts/provenance and
   review notes: `docs/reference-creature-concepts.md`. Supplied references and

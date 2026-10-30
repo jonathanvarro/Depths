@@ -1,0 +1,31 @@
+{
+  "issues": [
+    166,
+    168
+  ],
+  "families": {
+    "underhound": {
+      "scene": "res://art/enemies/underhound-v2/scene.tscn",
+      "poses": [
+        "idle",
+        "attack",
+        "hurt",
+        "windup",
+        "lunge",
+        "defeated"
+      ]
+    },
+    "borrowed-pack": {
+      "scene": "res://art/enemies/borrowed-pack-v1/scene.tscn",
+      "poses": [
+        "idle",
+        "attack",
+        "hurt",
+        "off-balance",
+        "defeated"
+      ]
+    }
+  },
+  "stone": "res://art/props/ancient-stonework-v1/scene.tscn",
+  "status": "Library ready for review/hookup; original scenes, definitions and rules unchanged."
+}

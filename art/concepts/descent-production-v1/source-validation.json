@@ -1,0 +1,5 @@
+{
+  "checks": 93,
+  "failures": [],
+  "scope": "Source/export invariants; owner visual review and live hookup remain separate"
+}

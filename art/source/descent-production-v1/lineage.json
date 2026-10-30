@@ -1,0 +1,27 @@
+{
+  "tool": "Built-in ImageGen",
+  "original_directory": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971",
+  "original_filenames": {
+    "stonework-master.png": "exec-332db889-45b1-47bd-9d0f-c68647ca57cd.png",
+    "underhound-windup-master.png": "exec-77b6e361-93aa-4c3c-8b34-682a7400a683.png",
+    "underhound-lunge-master.png": "exec-160dd922-4de1-41a9-b989-fbd4185a1ecb.png",
+    "underhound-defeated-master.png": "exec-1fc99e5e-a5e9-4f34-904e-6d15991592c2.png",
+    "underhound-defeated-registered-master.png": "exec-2dd9854d-ee44-49dd-a73b-061aa7789d00.png",
+    "borrowed-pack-idle-master.png": "exec-809856a9-683d-43a3-a1c7-97252ec43d0f.png",
+    "borrowed-pack-attack-master.png": "exec-f70de892-d287-4e55-b688-140c894ede98.png",
+    "borrowed-pack-hurt-master.png": "exec-5fb84e69-05f7-4005-a2d5-d1de0b05eb3b.png",
+    "borrowed-pack-off-balance-master.png": "exec-d26bae29-2d3f-4e7f-b54c-f7cea004a161.png",
+    "borrowed-pack-defeated-master.png": "exec-b9bca226-bded-4c27-b289-d7eaae48faae.png",
+    "borrowed-pack-defeated-registered-master.png": "exec-9bf72d73-1945-4576-8dfe-fc71f5082830.png"
+  },
+  "references": {
+    "stonework": [],
+    "underhound-windup,lunge,defeated": ["art/source/underhound-v1/idle-master.png"],
+    "borrowed-pack-idle": ["art/concepts/descent-horror-v1/borrowed-pack.png", "art/enemies/underhound-v1/idle.png"],
+    "borrowed-pack-attack,hurt,off-balance,defeated": ["art/source/descent-production-v1/borrowed-pack-idle-master.png"],
+    "underhound-defeated-registered": ["art/source/descent-production-v1/underhound-defeated-master.png"],
+    "borrowed-pack-defeated-registered": ["art/source/descent-production-v1/borrowed-pack-defeated-master.png"]
+  },
+  "prompt_files": ["prompts.json", "additional-prompts.json", "registration-edit.json", "pack-registration-edit.json"],
+  "note": "A first defeated-Pack call ended without a returned image when the tool host restarted. The identical prompt was rerun; only the returned image is listed. Registered edits changed nearby rendering slightly; do not claim pixel-identical translations. Unaltered masters retained."
+}

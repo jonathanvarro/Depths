@@ -1,0 +1,239 @@
+{
+  "issues": [
+    166,
+    168
+  ],
+  "tool": "Built-in ImageGen",
+  "sources": {
+    "borrowed-pack-attack-master.png": {
+      "sha256": "8b996a0d1c5ee6e01dd1267808289a07df6516113d1191e8e11bb65fc8ca00d8",
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    "borrowed-pack-defeated-master.png": {
+      "sha256": "2b208a787a8c8581bfcfe1e8fc4026b3aac7e60c3f6aae3744bc0aa7e6eb7d97",
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    "borrowed-pack-defeated-registered-master.png": {
+      "sha256": "f9e778c953ba091e92d84e0694c739d9a1d07987c90c56eb8396995f86844812",
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    "borrowed-pack-hurt-master.png": {
+      "sha256": "c532f6d8287dc0278b15380489b79e5bc86ab0a209d28d0adef0c6862766030e",
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    "borrowed-pack-idle-master.png": {
+      "sha256": "8527cf0a5f5aabca3c0051df25c12b9c5306438443dc64c463082ae37f61c117",
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    "borrowed-pack-off-balance-master.png": {
+      "sha256": "eaa2989dadf7aed5756557181a98f34dd53e488920e94ac185facc6a53b16e89",
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    "stonework-master.png": {
+      "sha256": "848df118169a8439a60a323c5a22b009ffc51365319ca679d766516fe88aaba5",
+      "size": [
+        1024,
+        1536
+      ]
+    },
+    "underhound-defeated-master.png": {
+      "sha256": "c5a3c82e007c579b4a898432a8bd52047427866c6da9f623b4a4e59fc80331ef",
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    "underhound-defeated-registered-master.png": {
+      "sha256": "2d312cab30294a0ba162bf187eaaa7e68e3937a42e5bb913e6007a44b94a3161",
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    "underhound-lunge-master.png": {
+      "sha256": "bd6ed435afbe5f8faa0742663d4e3632ce878ff3d9f5e73e52d21647a04c5d73",
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    "underhound-windup-master.png": {
+      "sha256": "5f0eba38939d736a26fbd7c497a02a596d39f9af157d06670dfe1206124d79da",
+      "size": [
+        1254,
+        1254
+      ]
+    }
+  },
+  "outputs": {
+    "underhound": {
+      "idle": {
+        "sha256": "9d66f724f211756eeec8f6e209ed853e6d68eed714184bb308f079a0bf632ffe",
+        "bounds": [
+          8,
+          32,
+          120,
+          121
+        ]
+      },
+      "attack": {
+        "sha256": "9e975070d64922012f9300dd42060f3e968b6b3b3249c7d0285231071cbb05b4",
+        "bounds": [
+          7,
+          36,
+          120,
+          122
+        ]
+      },
+      "hurt": {
+        "sha256": "378d7fb497e455e6be15d9dd8019d80c9dd7df618da200e207d9bb36921d6567",
+        "bounds": [
+          8,
+          29,
+          121,
+          117
+        ]
+      },
+      "windup": {
+        "sha256": "db761af92d59bb5c98a3d35456e821e81523bc95eb871ac035d71040ef3279c5",
+        "bounds": [
+          8,
+          34,
+          122,
+          121
+        ]
+      },
+      "lunge": {
+        "sha256": "aadede537d96a6f5466e1d83c67b47c4663d9c964138028cb41870210b7a22de",
+        "bounds": [
+          7,
+          42,
+          120,
+          115
+        ]
+      },
+      "defeated": {
+        "sha256": "009cab8b9f8f1fb3f3f089f1e5f8f298ea2d7341599e2092b46bb17936e8f942",
+        "bounds": [
+          6,
+          78,
+          119,
+          126
+        ]
+      }
+    },
+    "borrowed-pack": {
+      "idle": {
+        "sha256": "5219ff000f643bc72b0afe0ac0626cd9546415bd43057abf15be8d9e86a3ec14",
+        "bounds": [
+          7,
+          42,
+          121,
+          120
+        ]
+      },
+      "attack": {
+        "sha256": "aff5afe1b6887387c7eecf1052825cb3bd04d17e8e889e6dc533ab7e0229053b",
+        "bounds": [
+          11,
+          49,
+          121,
+          121
+        ]
+      },
+      "hurt": {
+        "sha256": "ce7b1dd3f71ab70812e62ef33360cc859dbb841d734ef9f63e94cb743e894ffd",
+        "bounds": [
+          7,
+          32,
+          124,
+          117
+        ]
+      },
+      "off-balance": {
+        "sha256": "690fbc18c10a638540ee347b84bc93626fa7e608d93560227cf7f7b976cdef44",
+        "bounds": [
+          7,
+          48,
+          121,
+          115
+        ]
+      },
+      "defeated": {
+        "sha256": "c21ae3574f67ca8dd4d43d9693ae4dcc26f1797866440ae2d414b758c45c2e83",
+        "bounds": [
+          7,
+          75,
+          123,
+          126
+        ]
+      }
+    },
+    "stone": {
+      "sha256": "23afc3bcfb46a1d15169fa4618807414597496ca69e0b5a1e43cc659dfa3696c",
+      "bounds": [
+        40,
+        8,
+        151,
+        184
+      ],
+      "pulse_pixels": 1442
+    }
+  },
+  "preserved": {
+    "res://art/enemies/underhound-v1/idle.png": "9d66f724f211756eeec8f6e209ed853e6d68eed714184bb308f079a0bf632ffe",
+    "res://art/enemies/underhound-v1/attack.png": "9e975070d64922012f9300dd42060f3e968b6b3b3249c7d0285231071cbb05b4",
+    "res://art/enemies/underhound-v1/hurt.png": "378d7fb497e455e6be15d9dd8019d80c9dd7df618da200e207d9bb36921d6567"
+  },
+  "hound_registration": {
+    "source_window": [
+      -24.571428571428566,
+      -99.10112359550563,
+      1312.5714285714284,
+      1241.303370786517
+    ],
+    "per_pose_fit": false,
+    "pivot": [
+      64,
+      120
+    ],
+    "defeated_source": "underhound-defeated-registered-master.png",
+    "note": "ImageGen registration edit retained separately; source gesture has small below-pivot settling."
+  },
+  "pack_registration": {
+    "source_window": [
+      -41.8,
+      -117.99999999999994,
+      1295.8,
+      1219.6000000000001
+    ],
+    "scale": 0.09569377990430622,
+    "translate": [
+      4,
+      11.291866028708128
+    ],
+    "per_pose_fit": false,
+    "pivot": [
+      64,
+      120
+    ]
+  }
+}

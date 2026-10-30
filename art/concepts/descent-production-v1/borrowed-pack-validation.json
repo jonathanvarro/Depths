@@ -1,0 +1,29 @@
+{
+	"balance": "Existing breach-hound numbers copied in memory for art review only; no new enemy definition",
+	"captures": [
+		"borrowed-pack-combat-1280-normal-idle.png",
+		"borrowed-pack-combat-1280-normal-attack.png",
+		"borrowed-pack-combat-1280-normal-hurt.png",
+		"borrowed-pack-combat-1280-normal-off-balance.png",
+		"borrowed-pack-combat-1280-normal-defeated.png",
+		"borrowed-pack-combat-1280-larger-idle.png",
+		"borrowed-pack-combat-1280-larger-attack.png",
+		"borrowed-pack-combat-1280-larger-hurt.png",
+		"borrowed-pack-combat-1280-larger-off-balance.png",
+		"borrowed-pack-combat-1280-larger-defeated.png",
+		"borrowed-pack-combat-1278-normal-idle.png",
+		"borrowed-pack-combat-1278-normal-attack.png",
+		"borrowed-pack-combat-1278-normal-hurt.png",
+		"borrowed-pack-combat-1278-normal-off-balance.png",
+		"borrowed-pack-combat-1278-normal-defeated.png",
+		"borrowed-pack-combat-1278-larger-idle.png",
+		"borrowed-pack-combat-1278-larger-attack.png",
+		"borrowed-pack-combat-1278-larger-hurt.png",
+		"borrowed-pack-combat-1278-larger-off-balance.png",
+		"borrowed-pack-combat-1278-larger-defeated.png"
+	],
+	"checks": 146,
+	"failures": [],
+	"physical_iPhone": false,
+	"uses_Main_or_saves": false
+}

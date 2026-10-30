@@ -1,0 +1,5 @@
+{
+  "tool": "Built-in ImageGen",
+  "prompt": "Precise registration correction ONLY. Keep this exact defeated Underhound drawing, pixel style, identity, scale, silhouette and1254x1254 transparent canvas. Translate the ENTIRE unchanged creature STRAIGHT DOWN exactly104 source pixels, so its lowest paw contact moves from y1063 to y1167. Do not resize, recenter horizontally, redraw anatomy, change expression, or add shadows. Preserve clear transparent space below and above; no part clipped. One same collapsed dead hound with no background or ground.",
+  "reference": "art/source/descent-production-v1/underhound-defeated-master.png"
+}

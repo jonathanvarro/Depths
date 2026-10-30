@@ -1,0 +1,14 @@
+[gd_resource type="SpriteFrames" load_steps=7 format=3]
+[ext_resource type="Texture2D" path="res://art/enemies/underhound-v2/idle.png" id="idle"]
+[ext_resource type="Texture2D" path="res://art/enemies/underhound-v2/attack.png" id="attack"]
+[ext_resource type="Texture2D" path="res://art/enemies/underhound-v2/hurt.png" id="hurt"]
+[ext_resource type="Texture2D" path="res://art/enemies/underhound-v2/windup.png" id="windup"]
+[ext_resource type="Texture2D" path="res://art/enemies/underhound-v2/lunge.png" id="lunge"]
+[ext_resource type="Texture2D" path="res://art/enemies/underhound-v2/defeated.png" id="defeated"]
+[resource]
+animations = [{"frames":[{"duration":1.0,"texture":ExtResource("idle")}],"loop":true,"name":&"idle","speed":8.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("attack")}],"loop":false,"name":&"attack","speed":8.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("hurt")}],"loop":false,"name":&"hurt","speed":8.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("windup")}],"loop":false,"name":&"windup","speed":8.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("lunge")}],"loop":false,"name":&"lunge","speed":8.0},
+{"frames":[{"duration":1.0,"texture":ExtResource("defeated")}],"loop":false,"name":&"defeated","speed":8.0}]
