@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-31 – ChatGPT
+- Did: Recorded the owner's equipment families in DESIGN.md, the model handoff and #192/#193: slash/impact plus back-row reach; heavy/medium/light body armour; competing shield (combat durability), cape (exploration/dodge/traps) and satchel/backpack (capacity) back-slot families.
+- Next: Claude expands the tables/probe and proposes weights, roll pools and tradeoffs. Current #193 numbers and generic pierce-versus-beasts rule remain proposals; existing class eligibility needs explicit treatment.
+- Watch out: Documentation/task refinement only, no table/probe/runtime changes. Durability does not yet define breakage/condition; reach retains rear vulnerability and cape bonuses must preserve Scout value.
+
 ## 2026-10-31 – Claude (equipment model)
 - Did: #193 (owner prioritised).
   - **Spec:** `docs/equipment-model.md`.
