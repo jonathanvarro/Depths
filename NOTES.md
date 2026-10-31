@@ -14,6 +14,11 @@ Format:
 ---
 
 ## 2026-10-31 – ChatGPT
+- Did: Created #193 for Claude to develop the equipment formulas, six linked balance tables, reproducible seeded probe and one-region worked model. Linked it from parent #192; mastery integration remains #173. The task preserves example coefficients/calculations as provisional, with roll validity, regional/boss viability, mastery credit, save identity and anti-grind checks.
+- Next: Claude produces the model and reports supported recommendations before integrating selected rules through #192/#173. Task is Todo, milestone 5.
+- Watch out: This is a GitHub handoff, not a launched Claude session. No gameplay/assets changed; unrelated roamers/map-fights UID files remain untracked.
+
+## 2026-10-31 – ChatGPT
 - Did: Recorded equipment as the central cross-expedition progression direction in DESIGN.md; created #192 for regional base loot, rolled starting quality/stats, mastery growth and modifiers. Updated #173 to reflect combat-use/received-hit mastery, replacing its earlier blanket exclusion of hits/swings. Boss preparation should combine suitable gear, mastery and regional counters.
 - Next: Specify one region's gear/enemy/boss balance, roll budgets, mastery credit and smith role; reconcile starting quality with the existing rarity names before implementation.
 - Watch out: No gameplay/assets changed. Exact values, acquisition credit/anti-farming, repairability, growth-roll timing and swap catch-up remain open. Existing generated roamers/map-fights UID files are unrelated and remain untracked.
