@@ -32,6 +32,7 @@ func _init() -> void:
 	_workspace.add_child(_display_scroll)
 	if not OS.has_feature("mobile"): _toggle(display.column, "Fullscreen", "fullscreen")
 	_toggle(display.column, "Screen flashes", "flashes")
+	_toggle(display.column, "Fights on the map (trial)", "map_fights")  # off: the battle stage (#171)
 	display.column.add_child(text_label("Text size", 20))
 	var sizes := HBoxContainer.new()
 	sizes.add_theme_constant_override("separation", 6)

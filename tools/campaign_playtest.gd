@@ -628,7 +628,7 @@ func _on_enter(at: Vector2i) -> String:
 		var types: Array = map.fight_groups.get(fight_cell, [])  # a quest package's own fight
 		if types.is_empty():
 			types = Main.encounter_pool(depth, party.living_members().size()).pick_random()
-		var result := _fight(types, "")
+		var result := _fight(types, "", not map.fight_groups.has(fight_cell))  # room fights stand on the map (#171)
 		if result == CS.Result.DEFEAT:
 			return "wiped"
 		if result == CS.Result.RETREAT:
@@ -651,7 +651,7 @@ func _wanderer_step(at: Vector2i) -> String:
 	if wanderers.step(party.time_elapsed, wander_rng, clear) != "arrive":
 		return "ok"
 	stats["wanderers"] += 1
-	var result := _fight(Main.encounter_pool(depth, party.living_members().size()).pick_random(), "wander")
+	var result := _fight(Main.encounter_pool(depth, party.living_members().size()).pick_random(), "wander", true)
 	if result == CS.Result.DEFEAT:
 		return "wiped"
 	if result == CS.Result.RETREAT:
@@ -705,7 +705,7 @@ func _event(at: Vector2i) -> String:
 # --- Fights --------------------------------------------------------------
 
 ## Runs a fight with the bot's policy. `kind` is "", "gate" or "queen".
-func _fight(group: Array, kind: String) -> int:
+func _fight(group: Array, kind: String, on_map := false) -> int:
 	stats["fights"] += 1
 	var types: Array[EnemyType] = []
 	types.assign(group)
@@ -717,7 +717,10 @@ func _fight(group: Array, kind: String) -> int:
 	var start_health := _total_health()
 	var injuries_before := _injury_count()
 	var guard := 0
-	while state.result == CS.Result.ONGOING and guard < 400:
+	if on_map and MAP_FIGHTS:
+		_field_fight(state)
+		guard = 0
+	while not state.field and state.result == CS.Result.ONGOING and guard < 400:
 		var actor = state.current_actor()
 		if actor is Companion:
 			_hero_turn(state, actor, kind)
@@ -760,6 +763,114 @@ func _fight(group: Array, kind: String) -> int:
 	elif state.result == CS.Result.RETREAT:
 		stats["fight_retreats"] += 1
 	return state.result
+
+
+# --- Fights on the map (#171), as main.gd plays them ---------------------
+
+const MAP_FIGHTS := true
+
+## The leader reaches the party from an open side; the rest queue behind it
+## or spread round (main.gd's _begin_field_fight). Then rounds: one party
+## action, then each foe acts if it can reach, or closes in.
+func _field_fight(state) -> void:
+	var map = _map()
+	var start: Vector2i = cell
+	state.field = true
+	state.party_cell = cell
+	state.open_cell = func(c: Vector2i) -> bool: return map.is_passable(c)
+	var sides: Array = [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT].filter(func(s): return map.is_passable(cell + s))
+	var leader: Vector2i = cell + (sides[randi() % sides.size()] if not sides.is_empty() else Vector2i.UP)
+	state.facing = leader - cell
+	var taken := {cell: true}
+	var distances: Dictionary = map.walking_distances(leader)
+	var spots: Array = distances.keys().filter(func(c): return not taken.has(c) and map.content_at(c) == 0)
+	spots.sort_custom(func(a, b): return distances[a] < distances[b])
+	for i in state.foes.size():
+		state.foes[i].cell = spots[mini(i, spots.size() - 1)] if not spots.is_empty() else leader
+	for foe in state.foes:
+		state.plan(foe)
+	state.foe_joined.connect(func(foe):
+		var free: Array = spots.filter(func(c): return not state.living_foes().any(func(f): return f.cell == c))
+		foe.cell = free[0] if not free.is_empty() else leader)
+	if state.opening == "foes":
+		_field_foes(state, map)
+	var guard := 0
+	while state.result == CS.Result.ONGOING and guard < 200:
+		state.field_round_start()
+		if state.result != CS.Result.ONGOING:
+			break
+		_field_party(state, map)
+		if state.result != CS.Result.ONGOING:
+			break
+		_field_foes(state, map)
+		if state.result != CS.Result.ONGOING:
+			break
+		state.field_round_end()
+		guard += 1
+	if guard >= 200:
+		stats["stuck"] = "a map fight ran 200 rounds"
+	cell = start  # walking resumes from where the fight began
+
+
+## The party's one action: run from a lost cause, drink when low, step off a
+## marked tile (or brace), turn to the weakest neighbour and strike, shoot,
+## or wait for them to come.
+func _field_party(state, map) -> void:
+	var foes: Array = state.living_foes()
+	if _health_fraction() < 0.2 and foes.any(func(f): return f.health * 2 > f.type.max_health):
+		state.retreat()
+		return
+	for hero: Companion in party.living_members():
+		if float(hero.health) / maxf(1.0, hero.effective_max_health()) < 0.3 and party.cannot_use_reason(DRAUGHT, true) == "":
+			state.hero_use_item(DRAUGHT)
+			return
+	if foes.any(func(f): return f.marked_cell == state.party_cell):
+		var taken := {}
+		for f in foes:
+			taken[f.cell] = true
+		for side in [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]:
+			var next: Vector2i = state.party_cell + side
+			if map.is_passable(next) and not taken.has(next):
+				state.party_cell = next  # step off the marked tile
+				return
+		state.unit_brace()
+		return
+	var near: Array = foes.filter(func(f): return state.side_of(f) != "far")
+	if not near.is_empty():
+		near.sort_custom(func(a, b): return a.health < b.health)
+		state.facing = near[0].cell - state.party_cell  # turning is free
+		state.unit_strike()
+		return
+	for foe in foes:
+		if not state.shooters(foe).is_empty():
+			state.unit_shoot(foe)
+			return
+	# Nothing in reach: wait for them to come.
+
+
+func _field_foes(state, map) -> void:
+	var order: Array = state.living_foes()
+	order.sort_custom(func(a, b): return a.type.initiative > b.type.initiative)
+	var distances: Dictionary = map.walking_distances(state.party_cell)
+	for foe in order:
+		if not foe.is_alive() or state.result != CS.Result.ONGOING:
+			continue
+		if state.foe_in_range(foe):
+			if foe.intent in [CS.Intent.KILLING_BLOW, CS.Intent.CLEAVER]:
+				state.prepare_killing_blow(foe)
+			state.enemy_act(foe)
+			continue
+		var taken := {state.party_cell: true}
+		for f in state.living_foes():
+			taken[f.cell] = true
+		var best: Vector2i = foe.cell
+		for side in [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]:
+			var next: Vector2i = foe.cell + side
+			if map.is_passable(next) and not taken.has(next) and distances.get(next, 999) < distances.get(best, 999):
+				best = next
+		if best != foe.cell:
+			foe.cell = best
+			state.plan(foe)
 
 
 ## A hero's turn: brace against a heavy blow when hurt, drink when low,

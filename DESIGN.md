@@ -139,6 +139,12 @@ House of Necrosis was used as a reference: you grow strong during a run, grow at
   - **Phase 3:** the phone layout, tuning (rear damage, how far shooting reaches), summons placement and the campaign bot.
   - **Classes (#179):** for example, Shoot's ammo.
 
+**Phase 3 — 2026-10-31:**
+- **Phone:** at 844×390 the raised pad, the panel, the foe and its tag all fit.
+- **The campaign bot fights on the map:** room fights and wanderers, as the game does. Its policy: step off marked tiles (or Brace), turn to the weakest neighbour and Strike, Shoot if it can, and otherwise wait.
+- **Result** (30 campaigns per hero): Mara 24, Corin 28, Alwen 14, against 23, 26 and 15 on the stage. Balance is unchanged overall. Alwen's weak start remains and goes to the class rework (#179); rear damage (+50%) and reach (2 cells) are kept.
+- **Settings → "Fights on the map (trial)"** switches back to the battle stage, so the owner can compare the two.
+
 **Built straight into the game,** not as a separate prototype. The owner judges the on-map fights after playing them.
 
 ## Map and dungeon progression

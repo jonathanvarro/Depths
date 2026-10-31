@@ -1099,7 +1099,7 @@ func _remember_the_fallen() -> void:
 const ROAM_STEP_TIME := 0.22
 
 func _map_fights_active() -> bool:
-	return fights_on_map and not _in_opening and not use_debug_layout and _map != null
+	return fights_on_map and Settings.get_value("map_fights") and not _in_opening and not use_debug_layout and _map != null
 
 
 ## The room fights on this floor, standing in their rooms.

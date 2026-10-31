@@ -13,6 +13,7 @@ const TEXT_SIZES := {"Normal": 1.0, "Large": 1.15, "Larger": 1.3}
 const DEFAULTS := {
 	"Master": 1.0, "Music": 0.8, "Effects": 1.0,
 	"fullscreen": false, "flashes": true, "text_size": "Normal",
+	"map_fights": true,  # fights on the map (#171 trial); off: the battle stage
 	"tips_seen": [],  # first-time tips already shown (2026-10-25)
 }
 ## Current values live in engine metadata, not static variables: static
