@@ -133,7 +133,7 @@ func _initialize() -> void:
 	var guard := 0
 	while not main._results.visible and guard < 100:  # a fight in progress ends first
 		if main._in_combat and main._combat._actions.visible:
-			_press(main._combat, "Defend")
+			_press(main._combat, "Brace" if main._combat._state.field else "Defend")  # on the map, the party braces (#171)
 		await create_timer(0.1).timeout
 		guard += 1
 	var after := SaveGame.read()

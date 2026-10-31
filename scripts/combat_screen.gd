@@ -132,23 +132,128 @@ func _init() -> void:
 
 
 ## Runs a whole fight; emits `finished` with the result when it's over.
-func run(state, cards: Array) -> void:
-	_state = state
-	_cards = cards
-	last_blow = "slash"
-	_note_health()
-	for tag in _tags.values():
-		tag.queue_free()
-	_tags.clear()
-	for foe in state.foes:
-		_add_tag(foe)
-	state.foe_joined.connect(func(foe):
-		if place_foe.is_valid():
-			place_foe.call(foe)
-		_add_tag(foe))
-	_select_target(state.living_foes()[0])
-	visible = true
+## Fights on the map (#171 phase 2): main.gd's hooks. "step_foe":
+## Callable(foe) -> bool moves a foe a cell closer; "danger": Callable()
+## redraws the marked tiles.
+var field_hooks := {}
+## Waiting for the party's one action this round (a step counts).
+var awaiting_field_action := false
+var _field_buttons: HBoxContainer
 
+
+## A fight on the map: the party acts once as a unit, then every foe acts
+## if it can reach, or closes in.
+func run_field(state, cards: Array) -> void:
+	_begin(state, cards)
+	if state.opening == "foes":
+		await _field_foes_turn()
+	while state.result == CombatState.Result.ONGOING:
+		state.field_round_start()
+		if not state.events.is_empty():
+			_show_health_changes(MARKS["venom"])
+			state.events.clear()
+		if state.result != CombatState.Result.ONGOING:
+			break
+		_refresh()
+		_hero = state.party.living_members()[0]
+		_mark_turn(null)
+		_redraw_danger()
+		_show_field_actions(true)
+		awaiting_field_action = true
+		var action: Dictionary = await _action_chosen
+		awaiting_field_action = false
+		_show_field_actions(false)
+		await _field_action(action)
+		if state.result != CombatState.Result.ONGOING:
+			break
+		await _field_foes_turn()
+		if state.result != CombatState.Result.ONGOING:
+			break
+		state.field_round_end()
+	_redraw_danger(true)
+	await _end_run()
+
+
+## The party stepped during its action: that was its move this round.
+func field_stepped() -> void:
+	if awaiting_field_action:
+		_action_chosen.emit({"kind": "step"})
+
+
+func _field_foes_turn() -> void:
+	var order: Array = _state.living_foes()
+	order.sort_custom(func(a, b): return a.type.initiative > b.type.initiative)
+	for foe in order:
+		if not foe.is_alive() or _state.result != CombatState.Result.ONGOING:
+			continue
+		if _state.foe_in_range(foe):
+			await get_tree().create_timer(ENEMY_PAUSE).timeout
+			await _enemy_action(foe)
+		elif field_hooks.has("step_foe") and field_hooks["step_foe"].call(foe):
+			_state.plan(foe)  # its plan, from where it now stands
+	_refresh()
+	_redraw_danger()
+
+
+func _redraw_danger(clear := false) -> void:
+	if field_hooks.has("danger"):
+		field_hooks["danger"].call(clear)
+
+
+func _field_action(action: Dictionary) -> void:
+	_note_health()
+	var outcome := {}
+	match action["kind"]:
+		"strike":
+			var target = _state.foe_ahead()
+			for o in _state.unit_strike():
+				await _show_attack(o["hero"], target, o)
+		"shoot":
+			var target = _target
+			for o in _state.unit_shoot(target):
+				await _show_attack(o["hero"], target, o)
+		"brace":
+			_state.unit_brace()
+			Sounds.play(self, "block", -10.0)
+			for hero in _state.party.living_members():
+				_fx.icon(_card_point(hero), MARKS["guard"], 48.0)
+		"step", "wait":
+			pass
+		_:
+			await _hero_action(_hero, action)  # an item, a flare, the torch, retreat
+			return
+	_show_health_changes()
+	_refresh()
+	hero_acted.emit(_hero, action, outcome)
+	await get_tree().create_timer(0.2).timeout
+
+
+func _show_field_actions(shown: bool) -> void:
+	_actions.visible = shown
+	_action_buttons.visible = false
+	_item_buttons.visible = false
+	_field_buttons.visible = shown
+	_update_field_buttons()
+	_update_intent_line()
+
+
+## Strike needs a foe ahead; Shoot needs someone with reach behind and a
+## target along the line ahead.
+func _update_field_buttons() -> void:
+	if _field_buttons == null or _state == null or not _state.field:
+		return
+	for button: Button in _field_buttons.get_children():
+		match button.text:
+			"Strike":
+				button.disabled = _state.foe_ahead() == null
+			"Shoot":
+				button.disabled = _state.shooters(_target).is_empty()
+			"Retreat":
+				button.disabled = no_retreat
+
+
+func run(state, cards: Array) -> void:
+	_begin(state, cards)
 	while state.result == CombatState.Result.ONGOING:
 		var actor = state.current_actor()
 		_refresh()
@@ -176,13 +281,34 @@ func run(state, cards: Array) -> void:
 			var living: Array = state.living_foes()
 			if not living.is_empty():
 				_select_target(living[0])
+	await _end_run()
 
+
+func _end_run() -> void:
 	_mark_turn(null)
 	_hero = null
 	_refresh()
 	await get_tree().create_timer(0.8).timeout
 	visible = false
-	finished.emit(state.result)
+	finished.emit(_state.result)
+
+
+func _begin(state, cards: Array) -> void:
+	_state = state
+	_cards = cards
+	last_blow = "slash"
+	_note_health()
+	for tag in _tags.values():
+		tag.queue_free()
+	_tags.clear()
+	for foe in state.foes:
+		_add_tag(foe)
+	state.foe_joined.connect(func(foe):
+		if place_foe.is_valid():
+			place_foe.call(foe)
+		_add_tag(foe))
+	_select_target(state.living_foes()[0])
+	visible = true
 
 
 ## An enemy's tag (#105): its next move as an icon, its name, a health bar,
@@ -251,27 +377,7 @@ func _hero_action(hero: Companion, action: Dictionary) -> void:
 		"attack":
 			var target = _target
 			outcome = _state.hero_attack(hero, target)
-			var at := _foe_point(target)
-			if not outcome["hit"]:
-				Sounds.play(self, "miss", -8.0)
-				_fx.number(at, "miss", CombatFx.COLOR_DULL, 34)
-			elif outcome.get("glanced", false):
-				Sounds.play(self, "block")
-				_fx.slash(at)
-				_fx.icon(at + Vector2(0, -30), MARKS["armour"])  # its hard legs turn the blade
-				_fx.number(at + Vector2(60, -40), str(outcome["damage"]), CombatFx.COLOR_DULL, 34, 0.12)
-			else:
-				if outcome["killed"]:
-					last_blow = strike_of(hero)
-				_fx.slash(at, outcome["damage"] >= 5)
-				Sounds.play(self, "block" if target.shielded else "hit")
-				if target.shielded:
-					_fx.icon(at + Vector2(-50, -20), MARKS["guard"], 34.0)
-				# The slash lands, then the number follows it (#105).
-				_fx.number(at + Vector2(70, -50), str(outcome["damage"]), CombatFx.COLOR_DAMAGE, 72 if outcome["killed"] else CombatFx.NUMBER_SIZE, 0.12)
-				await _play(target, "hurt", 0.35)
-				if outcome["killed"]:
-					await _fade_out(target)
+			await _show_attack(hero, target, outcome)
 		"defend":
 			_state.hero_defend(hero)
 			Sounds.play(self, "block", -10.0)
@@ -309,6 +415,31 @@ func _hero_action(hero: Companion, action: Dictionary) -> void:
 	_refresh()
 	hero_acted.emit(hero, action, outcome)
 	await get_tree().create_timer(0.25).timeout
+
+
+## A hero's blow at `target`, as the screen shows it.
+func _show_attack(hero: Companion, target, outcome: Dictionary) -> void:
+	var at := _foe_point(target)
+	if not outcome["hit"]:
+		Sounds.play(self, "miss", -8.0)
+		_fx.number(at, "miss", CombatFx.COLOR_DULL, 34)
+	elif outcome.get("glanced", false):
+		Sounds.play(self, "block")
+		_fx.slash(at)
+		_fx.icon(at + Vector2(0, -30), MARKS["armour"])  # its hard legs turn the blade
+		_fx.number(at + Vector2(60, -40), str(outcome["damage"]), CombatFx.COLOR_DULL, 34, 0.12)
+	else:
+		if outcome["killed"]:
+			last_blow = strike_of(hero)
+		_fx.slash(at, outcome["damage"] >= 5)
+		Sounds.play(self, "block" if target.shielded else "hit")
+		if target.shielded:
+			_fx.icon(at + Vector2(-50, -20), MARKS["guard"], 34.0)
+		# The slash lands, then the number follows it (#105).
+		_fx.number(at + Vector2(70, -50), str(outcome["damage"]), CombatFx.COLOR_DAMAGE, 72 if outcome["killed"] else CombatFx.NUMBER_SIZE, 0.12)
+		await _play(target, "hurt", 0.35)
+		if outcome["killed"]:
+			await _fade_out(target)
 
 
 func _enemy_action(foe) -> void:
@@ -504,6 +635,12 @@ func _process(_delta: float) -> void:
 		return
 	if _actions.visible:
 		_update_intent_line()  # always the selected enemy's current plan (#116)
+		if _state.field:
+			if _target == null or not _target.is_alive():
+				var living: Array = _state.living_foes()
+				if not living.is_empty():
+					_select_target(living[0])
+			_update_field_buttons()
 	else:
 		_rules_card.visible = false  # back with the actions on the party's turn
 	if _rules_card.visible:  # just above the actions, as wide (#146)
@@ -679,6 +816,8 @@ func _update_intent_line() -> void:
 	_intent_icon_rect.texture = _intent_icon(_target.intent)
 	var words: Array = ["%s: %s." % [_target.name, CombatState.intent_text(_target)]]
 	words.append_array(_state_words(_target))
+	if _state.field and _target.marked_cell == _state.party_cell:
+		words.append("It will land where you stand: step away, or Brace.")  # #171
 	_intent_label.text = " ".join(words)
 	_rules_card.visible = show_rules and _target.type.intro != "" and _actions.visible
 	_rules_label.text = _target.type.intro + "\n" + FLARE_NOTE.get(CombatState.flare_effect(_target), "")  # it names the monster itself
@@ -855,10 +994,12 @@ func _show_items() -> void:
 	var back := _button("Back")
 	back.disabled = only_action != ""
 	back.pressed.connect(func():
-		_action_buttons.visible = true
+		_action_buttons.visible = not _state.field
+		_field_buttons.visible = _state.field
 		_item_buttons.visible = false)
 	_item_buttons.add_child(back)
 	_action_buttons.visible = false
+	_field_buttons.visible = false
 	_item_buttons.visible = true
 
 
@@ -943,6 +1084,23 @@ func _build() -> void:
 		else:
 			button.pressed.connect(func(): _action_chosen.emit({"kind": kind}))
 		_action_buttons.add_child(button)
+	# On the map (#171): one action for the whole party; stepping (the
+	# movement pad) and turning (free) happen on the map itself.
+	_field_buttons = HBoxContainer.new()
+	_field_buttons.add_theme_constant_override("separation", 8)
+	_field_buttons.visible = false
+	rows.add_child(_field_buttons)
+	for spec in [["Strike", "strike"], ["Shoot", "shoot"], ["Brace", "brace"], ["Item", ""], ["Wait", "wait"], ["Retreat", "retreat"]]:
+		var button := _button(spec[0])
+		var kind: String = spec[1]
+		if kind == "":
+			button.pressed.connect(_show_items)
+		else:
+			button.pressed.connect(func(): _action_chosen.emit({"kind": kind}))
+		_field_buttons.add_child(button)
+	_field_buttons.get_child(0).tooltip_text = "Your front row strikes the enemy you face. Turning is free."
+	_field_buttons.get_child(1).tooltip_text = "Your back row's reach attacks the chosen enemy, along the line you face."
+	_field_buttons.get_child(2).tooltip_text = "Everyone defends: heavy blows are turned aside."
 	_item_buttons = HBoxContainer.new()
 	_item_buttons.add_theme_constant_override("separation", 8)
 	_item_buttons.visible = false

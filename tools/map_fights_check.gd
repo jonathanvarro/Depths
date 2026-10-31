@@ -39,6 +39,60 @@ func _initialize() -> void:
 	g.cell = Vector2i(2, 1)
 	check("...and stops beside the party", not Roamers.step_toward(map, g, Vector2i(1, 1), {}))
 
+	# Phase 2's rules: the party as one unit, facing a way.
+	var party = load("res://scripts/party_state.gd").new()
+	party.add_member(load("res://data/companions/mara.tres").duplicate())
+	party.add_member(load("res://data/companions/alwen.tres").duplicate())
+	var mara: Companion = party.members[0]
+	var alwen: Companion = party.members[1]
+	mara.row = "front"
+	alwen.row = "back"
+	var hit_hard: EnemyType = load("res://data/enemies/breach_hound.tres").duplicate()
+	hit_hard.damage_min = 4
+	hit_hard.damage_max = 4
+	hit_hard.accuracy = 1.0
+	var three: Array[EnemyType] = [hit_hard, hit_hard, hit_hard]
+	var state = load("res://scripts/combat_state.gd").new(party, three)
+	state.field = true
+	state.party_cell = Vector2i(5, 5)
+	state.facing = Vector2i.UP
+	var ahead = state.foes[0]
+	var beside = state.foes[1]
+	var behind = state.foes[2]
+	ahead.cell = Vector2i(5, 4)
+	beside.cell = Vector2i(6, 5)
+	behind.cell = Vector2i(5, 6)
+	check("sides: ahead, beside, behind", state.side_of(ahead) == "front" and state.side_of(beside) == "side" and state.side_of(behind) == "rear")
+	check("a blow from ahead finds the front row", state.foe_can_reach(ahead, mara) and not state.foe_can_reach(ahead, alwen))
+	check("...from the side or behind, the back row", state.foe_can_reach(beside, alwen) and not state.foe_can_reach(beside, mara) and state.foe_can_reach(behind, alwen))
+	behind.intent = load("res://scripts/combat_state.gd").Intent.BITE
+	behind.marked_cell = Vector2i(-1, -1)
+	var before_hp: int = alwen.health
+	var out: Dictionary = state.enemy_act(behind)
+	check("...and harder from behind", out.get("behind", false) and before_hp - alwen.health >= 5, "%d damage" % (before_hp - alwen.health))
+	alwen.health = alwen.max_health
+	ahead.intent = load("res://scripts/combat_state.gd").Intent.HEAVY
+	ahead.marked_cell = state.party_cell
+	state.party_cell = Vector2i(5, 6) + Vector2i(1, 0)  # stepped aside
+	out = state.enemy_act(ahead)
+	check("stepping off a marked tile dodges the blow", out.get("dodged", false), out.get("text", ""))
+	state.party_cell = Vector2i(5, 5)
+	var strikes: Array = state.unit_strike()
+	check("Strike: the front row hits the one it faces", strikes.size() == 1 and strikes[0]["hero"] == mara)
+	alwen.weapon = null  # her own reach, not her weapon's
+	alwen.reach = true
+	ahead.health = 0
+	behind.cell = Vector2i(5, 3)
+	check("Shoot: the back row's reach carries along the line ahead", state.shooters(behind).has(alwen))
+	var far: EnemyType = load("res://data/enemies/rat.tres")
+	var lone: Array[EnemyType] = [far]
+	var far_state = load("res://scripts/combat_state.gd").new(party, lone)
+	far_state.field = true
+	far_state.party_cell = Vector2i(5, 5)
+	far_state.foes[0].cell = Vector2i(5, 2)
+	far_state.foes[0].intent = load("res://scripts/combat_state.gd").Intent.LUNGE
+	check("a foe out of reach must close in first", not far_state.foe_in_range(far_state.foes[0]))
+
 	# In the game.
 	var main = load("res://scenes/main.tscn").instantiate()
 	main.play_opening = false
@@ -99,5 +153,27 @@ func _initialize() -> void:
 		main._wait()
 		beats += 1
 	check("beside the party, the fight begins", main._in_combat and main._fight_kind == "wander", beats)
+	var fight = main._combat._state
+	check("...right there on the map, not on the stage", fight.field and not main._stage.visible if "visible" in main._stage else fight.field)
+	check("...its foes standing in cells of their own", fight.foes.all(func(f): return f.cell != Vector2i(-1, -1)) and fight.foes.map(func(f): return f.cell).size() == fight.foes.size())
+	check("...the one that reached you, ahead", fight.side_of(fight.foes[0]) == "front")
+	for i in 40:
+		if main._combat.awaiting_field_action:
+			break
+		await process_frame
+	check("the party's one action: Strike, Shoot, Brace, Item, Wait, Retreat", main._combat.awaiting_field_action and main._combat._field_buttons.visible and main._touch_pad.visible)
+	if dir != "":
+		for i in 20:
+			await process_frame
+		var shot := root.get_texture().get_image()
+		if shot:
+			shot.save_png("%s/map_fights_%s_fight.png" % [dir, tag])
+	var round_before: int = fight.round
+	main._combat._action_chosen.emit({"kind": "wait"})
+	for i in 80:  # up to 8 s: the foes' turns play their animations
+		if main._combat.awaiting_field_action or fight.result != 0:
+			break
+		await create_timer(0.1).timeout
+	check("...then the foes act or close in, and a new round", fight.round == round_before + 1 or fight.result != 0)
 	print("fails=", fails)
 	quit()

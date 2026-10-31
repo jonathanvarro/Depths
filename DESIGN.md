@@ -122,6 +122,23 @@ House of Necrosis was used as a reference: you grow strong during a run, grow at
 - **Not in phase 1:** the Scout's "heard first" choice (that awareness moves to the Scout class, #179), and monsters on the minimap.
 - **Switching it off:** `Main.fights_on_map` turns it off; four older checks do this to test the old room fights.
 
+**Phase 2, the fight stays on the map — built 2026-10-31** (`tools/map_fights_check.gd`):
+- **Where it happens:** when a map group reaches the party, the fight happens right there. There's no fog stage. The party turns to face the attacker, and the foes take their own cells (the rest of the group fills the nearest free cells, so a room lets them spread round you and a corridor makes them queue).
+- **A round:** the party takes **one action**, then each foe acts if it's beside you (or, for reach and archers, in a straight open line up to 2 cells), and otherwise closes in a cell.
+- **The party's actions:**
+  - **Strike:** the front row hits the foe it faces.
+  - **Shoot:** back-row heroes with reach hit the chosen foe along the line ahead.
+  - **Brace:** everyone defends.
+  - **Item:** includes Flare and Throw torch.
+  - **Wait, Retreat.**
+  - **A step on the pad** is also the round's action. Turning is free.
+- **Rows by direction:** front blows hit the front row; side and rear blows hit the back row (anyone if there's no back row); **rear blows do +50%**.
+- **Danger tiles:** heavy blows, lunges and killing blows mark the party's tile when planned, and if the party has moved off it, the blow hits empty stone. The tile shows red on the floor, and since you can't see your own floor, the intent line says "step away, or Brace" and the screen's edge glows red.
+- **Layout:** the pad rises above the fight panel. A foe right in front stands at the far side of its cell, raised a little, so the panel doesn't hide it.
+- **Still to do:**
+  - **Phase 3:** the phone layout, tuning (rear damage, how far shooting reaches), summons placement and the campaign bot.
+  - **Classes (#179):** for example, Shoot's ammo.
+
 **Built straight into the game,** not as a separate prototype. The owner judges the on-map fights after playing them.
 
 ## Map and dungeon progression

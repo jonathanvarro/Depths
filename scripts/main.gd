@@ -671,6 +671,10 @@ func _make_layout(depth: int) -> PackedStringArray:
 
 
 func _on_party_entered_cell(cell: Vector2i) -> void:
+	if _in_combat and _combat._state and _combat._state.field:
+		_wade(cell)
+		_combat.field_stepped()  # the step was the party's action (#171)
+		return
 	_look_for_traps(cell)
 	_wade(cell)
 	if _map_beat(cell):
@@ -831,21 +835,33 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 			foe.has_webbed = true  # the opening's spider bites first (#59)
 			foe.glancing = true  # and only fire drives it off (#69)
 			state.plan(foe)
-	_party.face_open(cell if cell != _party.cell else Vector2i(-1, -1))  # never fight a wall (#111)
-	_place_foes(state.foes)
+	# On the map (#171 phase 2): the fight stays where it began.
+	var on_map: bool = _engaged != null and _map_fights_active()
+	if on_map:
+		_face_toward(cell)  # face the one that reached you
+		_begin_field_fight(state, cell)
+	else:
+		_party.face_open(cell if cell != _party.cell else Vector2i(-1, -1))  # never fight a wall (#111)
+		_place_foes(state.foes)
 	_in_combat = true
 	# Fog surges up from the floor and the cave fades to near-black: the
 	# fight takes place on a dark stage, so enemies never meet the walls.
-	_stage.enter(Settings.get_value("flashes"))  # plays as the fight opens
+	if not on_map:
+		_stage.enter(Settings.get_value("flashes"))  # plays as the fight opens
 	_update_hints("fight")
 	_fight_tips(state)
 	_say("fight_start", true, false, _any_voice())
-	_party.locked = true
-	_touch_pad.visible = false
+	_party.locked = not on_map  # on the map, the pad still steps and turns
+	_touch_pad.visible = on_map
+	if on_map:
+		_wait_button.visible = false  # Wait is on the fight panel
 	_pack_button.disabled = true
 	if _music:
 		_music.play("combat")
-	_combat.run(state, _cards)
+	if on_map:
+		_combat.run_field(state, _cards)
+	else:
+		_combat.run(state, _cards)
 	var result: int = await _combat.finished
 	for hero: Companion in _party_state.members:
 		hero.fight_ended()  # fight-long boons and banes count down (#133)
@@ -868,7 +884,10 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 		if _fight_kind == "lair":
 			_lair_won()
 		await _offer_overflow()
-	await _stage.exit()  # the fog sinks back; the cave returns
+	if state.field:
+		_end_field_fight()
+	else:
+		await _stage.exit()  # the fog sinks back; the cave returns
 	_play_place_music()
 	for foe in state.foes:
 		if is_instance_valid(foe.node):
@@ -1216,6 +1235,183 @@ func _map_fight_over(won: bool) -> void:
 	group.cell = group.home
 	group.noticed = false
 	_show_group(group)
+
+
+# --- Fights on the map, phase 2: the fight stays in the corridor ---------
+
+var _danger_marks: Array[Node3D] = []
+var _danger_edge: Control  # a red edge while the party stands on a marked tile
+var _field_step_check := Callable()
+
+## The foes take cells: the leader where it reached the party, the rest in
+## the nearest free cells behind or around it. The party keeps the pad.
+func _begin_field_fight(state, leader_cell: Vector2i) -> void:
+	state.field = true
+	state.party_cell = _party.cell
+	state.facing = _party.DIRECTIONS[_party.facing]
+	state.open_cell = func(c: Vector2i) -> bool: return _map.is_passable(c)
+	var taken := {_party.cell: true}
+	var spots: Array[Vector2i] = _free_cells_near(leader_cell, state.foes.size(), taken)
+	for i in state.foes.size():
+		var foe = state.foes[i]
+		foe.cell = spots[mini(i, spots.size() - 1)] if not spots.is_empty() else leader_cell
+		taken[foe.cell] = true
+		_place_field_foe(foe)
+	for foe in state.foes:
+		state.plan(foe)  # plans from where they stand (marks the tiles)
+	# The pad stays live on the map: it rises above the fight panel.
+	_touch_pad.add_theme_constant_override("margin_bottom", 24 + int(_combat._actions.get_combined_minimum_size().y) + 16)
+	_lift_field_foes.call_deferred()
+	_combat.field_hooks = {"step_foe": _field_step_foe, "danger": _draw_danger}
+	_combat.place_foe = func(foe):
+		var near: Array[Vector2i] = _free_cells_near(_party.cell, 1, _occupied(state))
+		foe.cell = near[0] if not near.is_empty() else _party.cell
+		_place_field_foe(foe)
+	_field_step_check = _party.step_check
+	_party.step_check = func(target: Vector2i) -> String:
+		if not _combat.awaiting_field_action:
+			return "busy"
+		if _occupied(state).has(target):
+			return "blocked_by_foe"
+		return ""
+
+
+## Turns the party to face an adjacent cell (free, as turning always is).
+func _face_toward(cell: Vector2i) -> void:
+	var f: int = _party.DIRECTIONS.find(cell - _party.cell)
+	if f < 0 or f == _party.facing:
+		return
+	_party.facing = f
+	_party.rotation.y = -f * PI / 2.0
+	_party.moved.emit(_party.cell, f)
+
+
+func _end_field_fight() -> void:
+	_draw_danger(true)
+	_party.step_check = _field_step_check
+	_field_step_check = Callable()
+	_combat.place_foe = _place_extra_foe
+	_combat.field_hooks = {}
+	_wait_button.visible = true
+	_touch_pad.add_theme_constant_override("margin_bottom", 24)
+
+
+func _occupied(state) -> Dictionary:
+	var cells := {}
+	for foe in state.living_foes():
+		cells[foe.cell] = true
+	return cells
+
+
+## Up to `count` open cells nearest `from` (by walking), not in `taken`.
+func _free_cells_near(from: Vector2i, count: int, taken: Dictionary) -> Array[Vector2i]:
+	var out: Array[Vector2i] = []
+	var distances: Dictionary = _map.walking_distances(from)
+	var cells: Array = distances.keys()
+	cells.sort_custom(func(a, b): return distances[a] < distances[b])
+	for c: Vector2i in cells:
+		if out.size() >= count:
+			break
+		if not taken.has(c) and _map.content_at(c) == DungeonMap.Content.NONE:
+			out.append(c)
+	return out
+
+
+func _place_field_foe(foe) -> void:
+	var node: Node3D = foe.type.scene.instantiate()
+	node.position = Vector3(foe.cell.x * CELL_SIZE, 0.0, foe.cell.y * CELL_SIZE)
+	_dress_foe(node, foe.type)
+	if foe.elite != "":
+		_mark_elite(node)
+	_level.add_child(node)
+	foe.node = node
+
+
+## A foe out of reach closes one cell, by the shortest open way that isn't
+## taken. True if it moved.
+func _field_step_foe(foe) -> bool:
+	var state = _combat._state
+	var taken := _occupied(state)
+	taken[_party.cell] = true
+	var distances: Dictionary = _map.walking_distances(_party.cell)
+	var best: Vector2i = foe.cell
+	var best_d: int = distances.get(foe.cell, 999)
+	for side in [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]:
+		var next: Vector2i = foe.cell + side
+		if taken.has(next) or not _map.is_passable(next):
+			continue
+		if distances.get(next, 999) < best_d:
+			best = next
+			best_d = distances[next]
+	if best == foe.cell:
+		return false
+	foe.cell = best
+	if is_instance_valid(foe.node):
+		var tween := create_tween().set_parallel()
+		tween.tween_property(foe.node, "position:x", best.x * CELL_SIZE, ROAM_STEP_TIME)
+		tween.tween_property(foe.node, "position:z", best.y * CELL_SIZE, ROAM_STEP_TIME)
+		tween.chain().tween_callback(_lift_field_foes)
+	return true
+
+
+## Foes stand on the floor, but one close in front would hide behind the
+## fight panel. The cave's ceiling is real here (no fog stage), so rather
+## than lift it high, it stands at the far side of its cell, raised a little.
+const FIELD_FOE_SETBACK := 0.7  # metres toward the far side of its cell
+const FIELD_FOE_MAX_LIFT := 0.45
+
+func _lift_field_foes() -> void:
+	if not _in_combat or _combat._state == null or not _combat._state.field:
+		return
+	for foe in _combat._state.living_foes():
+		if not is_instance_valid(foe.node):
+			continue
+		var away: Vector2i = foe.cell - _party.cell
+		var setback := Vector3(signi(away.x), 0, signi(away.y)) * FIELD_FOE_SETBACK if absi(away.x) + absi(away.y) == 1 else Vector3.ZERO
+		foe.node.position = Vector3(foe.cell.x * CELL_SIZE, 0.0, foe.cell.y * CELL_SIZE) + setback
+		_clear_of_panel(foe.node)
+		foe.node.position.y = minf(foe.node.position.y, FIELD_FOE_MAX_LIFT)
+
+
+## The tiles a dangerous move will hit, marked on the floor (#171).
+func _draw_danger(clear := false) -> void:
+	if _danger_edge == null:
+		_danger_edge = ReferenceRect.new()
+		_danger_edge.border_color = Color(0.9, 0.12, 0.08, 0.7)
+		_danger_edge.border_width = 10.0
+		_danger_edge.editor_only = false
+		_danger_edge.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		_danger_edge.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		_message_label.get_parent().add_child(_danger_edge)
+	_danger_edge.visible = false
+	for mark in _danger_marks:
+		if is_instance_valid(mark):
+			mark.queue_free()
+	_danger_marks.clear()
+	if clear or _combat._state == null:
+		return
+	for foe in _combat._state.living_foes():
+		if foe.marked_cell == Vector2i(-1, -1):
+			continue
+		var mesh := PlaneMesh.new()
+		mesh.size = Vector2(CELL_SIZE * 0.9, CELL_SIZE * 0.9)
+		var material := StandardMaterial3D.new()
+		material.albedo_color = Color(0.85, 0.12, 0.08, 0.35)
+		material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		mesh.material = material
+		var mark := MeshInstance3D.new()
+		mark.mesh = mesh
+		mark.position = Vector3(foe.marked_cell.x * CELL_SIZE, 0.14, foe.marked_cell.y * CELL_SIZE)
+		add_child(mark)
+		_danger_marks.append(mark)
+	# Where you stand is marked too: the floor under you is out of view, so
+	# the screen's edge glows red while you're on a marked tile.
+	var standing_on: bool = _combat._state.living_foes().any(func(f): return f.marked_cell == _party.cell)
+	if _danger_edge:
+		_danger_edge.visible = standing_on
+	if not _danger_marks.is_empty():
+		_tip("danger_tiles", "A heavy blow or a lunge is coming at the tile marked red - and when it's yours, the screen's edge glows red. Step off it and the blow hits empty stone; stepping is the party's action for the round.")
 
 
 ## Wait: a beat passes where the party stands.
@@ -3590,6 +3786,10 @@ func _clear_passage(cell: Vector2i) -> void:
 
 
 func _on_party_moved(cell: Vector2i, facing: int) -> void:
+	if _in_combat and _combat._state and _combat._state.field:
+		_combat._state.party_cell = cell  # where the unit stands and faces (#171)
+		_combat._state.facing = _party.DIRECTIONS[facing]
+		_lift_field_foes.call_deferred()
 	if cell != _cell_now:
 		_cell_before = _cell_now
 		_cell_now = cell

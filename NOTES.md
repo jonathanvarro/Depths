@@ -18,6 +18,14 @@ Format:
 - Next: Owner reviews the first shortlist: Bottled Echo, Surveyor's Chain, Gravewax, Silt Listener, Goblin Tollkeeper and Lend Courage. These tasks preserve proposals; they do not approve implementation or names.
 - Watch out: No gameplay or art changed. Existing #171 field-combat work and Claude's uncommitted handoff are preserved. Sources are linked in each issue; local-only concept images/records remain unpublished.
 
+## 2026-10-31 – Claude (later)
+- Did: #171 phase 2, the fight stays on the map.
+  - **CombatState `field` mode:** foe cells, party_cell/facing, side_of, line_to, foe_in_range, unit_strike/shoot/brace, field_round_start/end, rear damage, marked tiles (`Foe.marked_cell`, dodged).
+  - **CombatScreen `run_field()`:** one party action, then foes act or step via `field_hooks`. The attack visuals are split into `_show_attack()`.
+  - **main.gd:** `_begin_field_fight`/`_end_field_fight`, foe placement, `_field_step_foe`, danger tiles plus a red edge, the pad raised above the panel. `_party.step_check` gates steps to the party's action.
+- Next: phase 3 (phone layout, tuning, bot); then classes (#179).
+- Watch out: set fights (gate, queen, lairs, quest fights) still use the stage. A field-fight step skips room content (traps, events) in that cell.
+
 ## 2026-10-31 – Claude
 - Did: #171 phase 1, monsters on the map (`scripts/roamers.gd`; main.gd "Fights on the map" section).
   - Room fights stand in their rooms and notice by sight or room entry.

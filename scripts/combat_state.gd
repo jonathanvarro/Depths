@@ -160,6 +160,8 @@ class Foe:
 	var elite := ""  # "Hardened", "Savage", "Swift" or "Venomous" (#140)
 	var curled := false  # rock beetle: blows barely scratch it until its next turn
 	var heads := 0  # Borrowed Pack: heads still biting (slice 2)
+	var cell := Vector2i(-1, -1)  # where it stands, in a fight on the map (#171)
+	var marked_cell := Vector2i(-1, -1)  # the tile its dangerous move will hit
 	var staggered := false  # Borrowed Pack: lost a head this turn (its pose)
 
 	func in_back() -> bool:
@@ -179,6 +181,23 @@ class Foe:
 
 var party  # party_state.gd
 var foes: Array[Foe] = []
+## A fight on the map (#171 phase 2; DESIGN.md "The party as one unit"): the
+## party is one unit in one cell, facing a way. Blows from the front land on
+## the front row; from the side or behind, on the back row - harder from
+## behind. Dangerous moves mark the party's tile and miss if it has moved.
+var field := false
+var party_cell := Vector2i.ZERO
+var facing := Vector2i.UP  # the way the front row faces
+## How far a reaching or shooting attack carries along a straight line.
+const FIELD_REACH := 2
+## A blow from behind lands this much harder.
+const REAR_DAMAGE := 1.5
+## Moves that mark the tile they'll hit (so stepping off it avoids them).
+const MARKED_INTENTS: Array[Intent] = [Intent.HEAVY, Intent.REACH, Intent.KILLING_BLOW, Intent.CLEAVER]
+## Moves that don't need to reach the party: summons, drums, shields...
+const FAR_INTENTS: Array[Intent] = [Intent.CALL, Intent.BROOD, Intent.BIRTH, Intent.BEAT, Intent.SHIELD, Intent.BRACE, Intent.RALLY, Intent.CURL, Intent.SCREECH, Intent.RECOVER, Intent.SWELL, Intent.DRAIN]
+## Whether a cell can be stood in or seen through (set by main.gd).
+var open_cell := Callable()
 var round := 1
 var result := Result.ONGOING
 var rng := RandomNumberGenerator.new()
@@ -281,6 +300,11 @@ func make_elite(foe: Foe, kind: String) -> void:
 ## Picks what `foe` will do on its next turn (shown to the player).
 ## Call again after changing a foe's state from outside (e.g. has_webbed).
 func plan(foe: Foe) -> void:
+	_plan(foe)
+	foe.marked_cell = party_cell if field and foe.intent in MARKED_INTENTS else Vector2i(-1, -1)
+
+
+func _plan(foe: Foe) -> void:
 	var hurt := foe.health * 2 < foe.type.max_health
 	match foe.type.tactic:
 		EnemyType.Tactic.DARTING:
@@ -501,10 +525,66 @@ func foe_in_front(foe: Foe) -> bool:
 	return not foe.in_back() or not living_foes().any(func(f: Foe): return not f.in_back())
 
 
+## Where `foe` stands relative to the party: "front", "side", "rear", or
+## "far" (not beside it). A distant foe in a straight line counts by its
+## direction when it reaches (see in_line).
+func side_of(foe: Foe) -> String:
+	var d := foe.cell - party_cell
+	if absi(d.x) + absi(d.y) != 1:
+		return "far"
+	return "front" if d == facing else ("rear" if d == -facing else "side")
+
+
+## A straight, open line from the party to `foe`, at most `reach` cells.
+## Returns the direction of the line, or Vector2i.ZERO.
+func line_to(foe: Foe, reach := FIELD_REACH) -> Vector2i:
+	var d := foe.cell - party_cell
+	if (d.x != 0 and d.y != 0) or d == Vector2i.ZERO or absi(d.x) + absi(d.y) > reach:
+		return Vector2i.ZERO
+	var step := Vector2i(signi(d.x), signi(d.y))
+	var cell := party_cell + step
+	while cell != foe.cell:
+		if open_cell.is_valid() and not open_cell.call(cell):
+			return Vector2i.ZERO
+		if foes.any(func(f: Foe): return f.is_alive() and f.cell == cell):
+			return Vector2i.ZERO  # another foe stands in the way
+		cell += step
+	return step
+
+
+## The foe in the cell the front row faces, or null.
+func foe_ahead() -> Foe:
+	for foe in living_foes():
+		if foe.cell == party_cell + facing:
+			return foe
+	return null
+
+
+## Whether the foe's blow comes from behind the party.
+func from_behind(foe: Foe) -> bool:
+	return field and line_to(foe, FIELD_REACH) == -facing
+
+
+## Whether `foe` can act against the party from where it stands.
+func foe_in_range(foe: Foe) -> bool:
+	if not field or foe.intent in FAR_INTENTS:
+		return true
+	if side_of(foe) != "far":
+		return true
+	var reaches: bool = foe.type.reach_back or foe.type.tactic == EnemyType.Tactic.ARCHER or foe.intent in [Intent.REACH, Intent.SWOOP, Intent.SHOOT]
+	return reaches and line_to(foe) != Vector2i.ZERO
+
+
 ## Whether `hero` can attack `foe` from where they stand.
 func can_hit(hero: Companion, foe: Foe) -> bool:
 	if not foe.is_alive():
 		return false
+	if field:
+		# The front row strikes the foe it faces; reach carries along the
+		# line ahead, from either row.
+		if hero_in_front(hero) and foe == foe_ahead():
+			return true
+		return hero.has_reach() and line_to(foe) == facing
 	if not hero_in_front(hero) and not hero.has_reach():
 		return false  # back row without reach: defend or use items
 	return foe_in_front(foe) or hero.has_reach()
@@ -517,6 +597,19 @@ func targets_for(hero: Companion) -> Array[Foe]:
 ## Whether `foe` can strike `hero` (melee reaches only the front; a bat's
 ## swoop reaches anyone).
 func foe_can_reach(foe: Foe, hero: Companion) -> bool:
+	if field:
+		# Direction is the formation: the front takes blows from ahead, the
+		# back row from the sides and behind (if there's no back row, anyone).
+		var side := side_of(foe)
+		if side == "far":
+			var line := line_to(foe)
+			side = "front" if line == facing else ("rear" if line == -facing else "side")
+		if foe.intent == Intent.SWOOP:
+			return true
+		if side == "front":
+			return hero_in_front(hero)
+		var back: Array = party.living_members().filter(func(h: Companion): return h.row == "back")
+		return back.is_empty() or hero.row == "back"
 	return foe.type.reach_back or foe.intent in [Intent.SWOOP, Intent.REACH] or hero_in_front(hero)
 
 
@@ -653,6 +746,70 @@ func _cure_venom(item: SupplyItem) -> String:
 	return "%s: %s" % [patient.display_name, item.use_message]
 
 
+# --- Unit actions, on the map (#171; owner 2026-10-31) --------------------
+
+## Strike: every front-row hero attacks the foe they face.
+func unit_strike() -> Array:
+	var outcomes := []
+	var target := foe_ahead()
+	for hero: Companion in party.living_members():
+		if target == null or not target.is_alive():
+			break
+		if hero_in_front(hero) and not is_grabbed(hero):
+			var outcome := hero_attack(hero, target)
+			outcome["hero"] = hero
+			outcomes.append(outcome)
+	return outcomes
+
+
+## Shoot: the back row's reaching attacks at `target`, along the line ahead.
+func unit_shoot(target: Foe) -> Array:
+	var outcomes := []
+	for hero: Companion in party.living_members():
+		if target == null or not target.is_alive():
+			break
+		if not hero_in_front(hero) and hero.has_reach() and can_hit(hero, target) and not is_grabbed(hero):
+			var outcome := hero_attack(hero, target)
+			outcome["hero"] = hero
+			outcomes.append(outcome)
+	return outcomes
+
+
+## Who could Shoot at `target` now.
+func shooters(target: Foe) -> Array[Companion]:
+	return party.living_members().filter(func(h: Companion): return not hero_in_front(h) and h.has_reach() and target != null and can_hit(h, target))
+
+
+## Brace: the whole party defends until its next action.
+func unit_brace() -> void:
+	for hero: Companion in party.living_members():
+		hero_defend(hero)
+
+
+## The start of the party's action on the map: last round's guard drops,
+## venom bites, held heroes struggle free.
+func field_round_start() -> void:
+	_defending.clear()
+	for hero: Companion in party.living_members():
+		_tick_venom(hero)
+		if hero.is_alive() and is_grabbed(hero) and not _grab_fresh.has(hero):
+			events.append("%s struggles in the %s's grip and wrenches free." % [hero.display_name, _grabbed[hero].name.to_lower()])
+			_grabbed.erase(hero)
+	_grab_fresh.clear()
+	_check_end()
+
+
+## The end of a round on the map: time passes.
+func field_round_end() -> void:
+	round += 1
+	party.advance_time(ROUND_TIME)
+	_snared = {}
+	_check_end()
+
+
+var _grab_fresh := {}  # Companion -> grabbed this round (held one more turn)
+
+
 ## Carries out the foe's shown intent, then plans its next one.
 ## Returns {"target": Companion, "hit": bool, "damage": int,
 ## "injury": Injury or null, "text": String}.
@@ -669,8 +826,14 @@ func enemy_act(foe: Foe) -> Dictionary:
 			foe.staggered = true
 			return {"target": null, "hit": false, "damage": 0, "injury": null,
 					"text": "One of the %s's heads hangs dead, and its weight drags the others off balance." % foe.name.to_lower()}
+	foe.shielded = false if field else foe.shielded  # a shield lasts until its next turn
+	foe.curled = false if field else foe.curled
 	var acted := foe.intent
 	var outcome := _carry_out(foe)
+	if field:
+		for hero in _grabbed:
+			if _grabbed[hero] == foe and outcome.get("target") == hero and acted == Intent.GRAB:
+				_grab_fresh[hero] = true
 	_squinting.erase(foe)  # its eyes have cleared
 	if foe.type.tactic == EnemyType.Tactic.SWOOPER and foe.is_alive():
 		# A bat lands after its swoop, then rises again after biting (#140).
@@ -764,6 +927,10 @@ func _carry_out(foe: Foe) -> Dictionary:
 					"text": "The %s seizes %s! Hit it to break the hold, or they lose their next turn struggling free." % [foe.name.to_lower(), held.display_name]}
 	var heavy := foe.intent == Intent.HEAVY
 	var reaching := foe.intent == Intent.REACH
+	if field and foe.marked_cell != Vector2i(-1, -1) and foe.marked_cell != party_cell:
+		var missed := "The %s's %s smashes into the empty stone where you stood." % [foe.name.to_lower(), "lunge" if reaching else "blow"]
+		foe.marked_cell = Vector2i(-1, -1)
+		return {"target": null, "hit": false, "damage": 0, "injury": null, "text": missed, "dodged": true}
 	var target := _choose_target(foe)
 	var outcome := {"target": target, "hit": false, "damage": 0, "injury": null}
 	if target == null:
@@ -783,6 +950,9 @@ func _carry_out(foe: Foe) -> Dictionary:
 			_drummed.erase(foe)
 		if heavy:
 			damage *= HEAVY_MULTIPLIER
+		var behind := from_behind(foe)
+		if behind:
+			damage = ceili(damage * REAR_DAMAGE)  # struck from behind (#171)
 		if heavy and is_defending(target):
 			damage = 0  # braced for it: the heavy blow is turned aside
 		elif is_defending(target):
@@ -797,7 +967,8 @@ func _carry_out(foe: Foe) -> Dictionary:
 		outcome["hit"] = true
 		outcome["damage"] = damage
 		var verb: String = "brings down a heavy blow on" if heavy else ("lunges, jaw stretching, at" if reaching else foe.type.attack_verb)
-		outcome["text"] = "The %s %s %s for %d." % [foe.name.to_lower(), verb, target.display_name, damage]
+		outcome["text"] = "The %s %s %s for %d%s." % [foe.name.to_lower(), verb, target.display_name, damage, " - from behind" if behind else ""]
+		outcome["behind"] = behind
 		if ((foe.type.tactic in [EnemyType.Tactic.WEB_AND_VENOM, EnemyType.Tactic.BROOD] and foe.type.venomous) or foe.elite == "Venomous") and target.is_alive():
 			_venom[target] = VENOM_TURNS
 			_venom_damage[target] = maxi(foe.type.venom_damage, 1)
@@ -966,6 +1137,8 @@ func _many_bites(foe: Foe) -> Dictionary:
 		if is_defending(target):
 			damage = maxi(1, floori(damage * target.guard_factor))
 		damage = maxi(1, damage - target.damage_reduction())
+		if from_behind(foe):
+			damage = ceili(damage * REAR_DAMAGE)
 		target.change_health(-damage)
 		total += damage
 		hits.append("%s (%d)" % [target.display_name, damage])
