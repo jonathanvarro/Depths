@@ -1,0 +1,57 @@
+{
+  "_about": "Table 2 of 6: roll tables (#193). Rolled once, when an item is created, in this order: quality -> stat roll within quality -> growth potential -> modifiers (modifiers.json). Equip, stash, travel and reload never reroll. Coefficients are ChatGPT's illustrative seeds plus Claude's proposals: for review, not approved balance.",
+  "quality": {
+    "_about": "Starting quality: how well it was made. Fixed for the item's life (a proposal: not repairable condition; see the spec). Weights are among equipment drops.",
+    "order": ["cracked", "bent", "ordinary", "fine", "exceptional"],
+    "weights": {"cracked": 0.10, "bent": 0.20, "ordinary": 0.45, "fine": 0.20, "exceptional": 0.05},
+    "weapon": {
+      "cracked": {"damage": -1, "accuracy": -0.04},
+      "bent": {"damage": -1, "accuracy": -0.02},
+      "ordinary": {"damage": 0, "accuracy": 0.0},
+      "fine": {"damage": 0, "accuracy": 0.02},
+      "exceptional": {"damage": 1, "accuracy": 0.03}
+    },
+    "body": {
+      "_about": "Flat armour is very strong against small enemy damage ranges, so quality changes health and handling, not armour.",
+      "cracked": {"health": -2, "initiative_penalty": 0},
+      "bent": {"health": -1, "initiative_penalty": 0},
+      "ordinary": {"health": 0, "initiative_penalty": 0},
+      "fine": {"health": 1, "initiative_penalty": 0},
+      "exceptional": {"health": 2, "initiative_penalty": -1}
+    }
+  },
+  "stat_roll": {
+    "_about": "Small variation within a quality, so two 'fine' swords differ a little. Weapons: the top of the damage range and accuracy in percentage points. Armour: health.",
+    "weapon_damage_max": {"-1": 0.10, "0": 0.80, "1": 0.10},
+    "weapon_accuracy_points": {"-2": 0.15, "-1": 0.20, "0": 0.30, "1": 0.20, "2": 0.15},
+    "body_health": {"-1": 0.20, "0": 0.60, "1": 0.20}
+  },
+  "growth": {
+    "_about": "Growth potential, rolled once at creation and shown on the item: how much each mastery level adds. Worse-made pieces lean toward faster growth (they 'wear in'), so a cracked find can be worth keeping.",
+    "rates": {
+      "damage": {"slow": 0.25, "steady": 0.5, "swift": 0.75},
+      "accuracy": {"slow": 0.005, "steady": 0.01, "swift": 0.015},
+      "health": {"slow": 0.34, "steady": 0.67, "swift": 1.0},
+      "handling": {"slow": 0.0, "steady": 0.17, "swift": 0.34}
+    },
+    "weights_by_quality": {
+      "cracked": {"slow": 0.10, "steady": 0.40, "swift": 0.50},
+      "bent": {"slow": 0.15, "steady": 0.45, "swift": 0.40},
+      "ordinary": {"slow": 0.25, "steady": 0.50, "swift": 0.25},
+      "fine": {"slow": 0.35, "steady": 0.45, "swift": 0.20},
+      "exceptional": {"slow": 0.50, "steady": 0.40, "swift": 0.10}
+    }
+  },
+  "modifier_count": {
+    "_about": "How many modifiers by region tier (separate from drop chance and from quality).",
+    "1": {"0": 0.80, "1": 0.18, "2": 0.02},
+    "2": {"0": 0.60, "1": 0.32, "2": 0.08},
+    "3": {"0": 0.45, "1": 0.40, "2": 0.15}
+  },
+  "formulas": {
+    "weapon_damage": "base range + quality damage + stat roll (max only) + floor(mastery * damage growth); shift both ends, min >= 1, min <= max",
+    "weapon_accuracy": "base accuracy + quality accuracy + stat roll + mastery * accuracy growth + modifiers; added to the hero's accuracy inside the game's existing hit chance (strain, light, webs, 10%-95% clamp)",
+    "body_health": "quality health + stat roll + floor(mastery * health growth) + modifiers",
+    "body_handling": "initiative penalty + quality handling - floor(mastery * handling growth), never below 0"
+  }
+}

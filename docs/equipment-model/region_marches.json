@@ -1,0 +1,42 @@
+{
+  "_about": "Table 5 of 6: regional encounters (#193), worked slice: the Goblin Marches and the Queen's Hold (region 2, floors 3-4). Health, damage and threat are read from data/enemies/*.tres by the probe and scaled by the floor (combat_state DEPTH_SCALE). Armour and weaknesses are PROPOSALS (enemies have no armour in the game today; 'strike' is presentation only), so the probe reports both today's rules and the proposed ones.",
+  "region": 2,
+  "floor": 4,
+  "region_threat": 3.5,
+  "strike_rules": {
+    "_about": "Proposal: a smash ignores 1 armour; a slash does +1 to an unarmoured foe; a pierce does +1 to beasts (hounds, bloats) and reaches.",
+    "smash": {"ignore_armour": 1},
+    "slash": {"bonus_vs_unarmoured": 1},
+    "pierce": {"bonus_vs_beast": 1}
+  },
+  "ordinary": [
+    {"id": "goblin", "family": "goblin", "armour": 0, "counter": "anything; blades best"},
+    {"id": "goblin_archer", "family": "goblin", "armour": 0, "row": "back", "counter": "reach or Shoot; close the gap"},
+    {"id": "goblin_guard", "family": "goblin", "armour": 2, "counter": "smash, Biting; the guard wall halves damage to those behind it"},
+    {"id": "goblin_drummer", "family": "goblin", "armour": 0, "counter": "kill first: it powers the others"},
+    {"id": "goblin_brute", "family": "goblin", "armour": 1, "slow": true, "counter": "Brace the heavy blow, strike while it recovers; kite it"},
+    {"id": "hollow_miner", "family": "breach", "armour": 1, "slow": true, "counter": "hit it to free a grabbed hero; kite it"},
+    {"id": "breach_hound", "family": "beast", "armour": 0, "counter": "pierce, hound-breaker; corridors (they hit harder in a pack)"},
+    {"id": "gas_bloat", "family": "beast", "armour": 0, "counter": "kill it from the back row or with a thrown torch"}
+  ],
+  "dangerous_combinations": [
+    {"group": ["goblin_guard", "goblin", "goblin_archer"], "why": "the guard wall halves damage to the goblins behind it; the archer shoots past"},
+    {"group": ["goblin_brute", "goblin_drummer", "goblin"], "why": "the drummer lifts the brute's already-heavy blows"},
+    {"group": ["breach_hound", "breach_hound", "breach_hound"], "why": "a pack hits harder while another stands; fast"}
+  ],
+  "elite": {"id": "goblin_brute", "elite": "Hardened", "why": "the optional elite: 18+ health and a heavy blow"},
+  "boss": {
+    "id": "goblin_queen",
+    "armour": 2,
+    "family": "goblin",
+    "guards": {"id": "goblin_guard", "every_rounds": 3, "max": 2},
+    "counters": ["smash or Biting (her armour)", "goblin-bane", "Brace her cleaver (the coin)", "kill guards as they come or burst her down"]
+  },
+  "party_model": {
+    "_about": "A typical party arriving on floor 4. Levels reset each expedition (#172); level adds 2 health. Accuracy is aim + dexterity as companion.gd computes it.",
+    "level": 3,
+    "front": [{"name": "melee", "health": 26, "accuracy": 0.69, "strength_bonus": 1}, {"name": "scout", "health": 20, "accuracy": 0.80, "strength_bonus": 0}],
+    "back": [{"name": "mage", "health": 18, "accuracy": 0.65, "strength_bonus": 0}],
+    "draughts": 2
+  }
+}

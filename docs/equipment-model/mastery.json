@@ -1,0 +1,120 @@
+{
+  "_about": "Table 4 of 6: mastery (#193). Mastery points build up on a particular item (fractional progress is kept and shown). Owner direction 2026-10-31: weapons earn mastery by fighting, armour by being struck. Caps per fight and a share for simply taking part keep 'take avoidable hits' from being the best way to progress. Proposals, not approved balance.",
+  "levels": [
+    {
+      "level": 1,
+      "points": 12
+    },
+    {
+      "level": 2,
+      "points": 30
+    },
+    {
+      "level": 3,
+      "points": 54,
+      "smith": "temper"
+    },
+    {
+      "level": 4,
+      "points": 84
+    },
+    {
+      "level": 5,
+      "points": 120
+    },
+    {
+      "level": 6,
+      "points": 162,
+      "smith": "temper"
+    }
+  ],
+  "cap_level": 6,
+  "weapon_credit": {
+    "_about": "Per action of the wielder, scaled by the foe's threat: threat_factor = clamp(foe threat / region_threat, 0.25, 2). region_threat is the region's usual foe threat (region table).",
+    "hit": 1.0,
+    "miss": 0.25,
+    "kill": 1.0,
+    "per_fight_cap": 8.0
+  },
+  "armour_credit": {
+    "_about": "Per blow that reaches the wearer (blocked or not), scaled by the attacker's threat factor; plus a share for every fight the wearer stands in, so a careful player still progresses.",
+    "struck": 1.0,
+    "fight_taken_part": 1.0,
+    "per_fight_cap": 5.0
+  },
+  "extraction": {
+    "_about": "Bringing an item home: each worn item gains this on a successful return (not a wipe).",
+    "worn_item": 3.0
+  },
+  "trivial_foes": {
+    "_about": "Foes far below the region's level teach little.",
+    "threat_factor_floor": 0.25
+  },
+  "catch_up": {
+    "_about": "Practised hands: a new item learns faster while its level is this far below the best item of the same slot the hero owns.",
+    "levels_behind": 2,
+    "multiplier": 2.0
+  },
+  "smith_temper": {
+    "_about": "At mastery 3 and 6 the smith turns mastery into one chosen improvement (#173), for gold and a regional material. The smith remembers improvements after the item is lost; rebuilding needs the investment again.",
+    "options": [
+      {
+        "id": "edge",
+        "slots": [
+          "weapon"
+        ],
+        "effect": {
+          "accuracy": 0.03
+        },
+        "text": "+3% to hit"
+      },
+      {
+        "id": "weight",
+        "slots": [
+          "weapon"
+        ],
+        "effect": {
+          "damage_max": 1
+        },
+        "text": "+1 to the top of the damage range"
+      },
+      {
+        "id": "refit",
+        "slots": [
+          "body"
+        ],
+        "effect": {
+          "initiative_penalty": -1
+        },
+        "text": "1 less slowing"
+      },
+      {
+        "id": "plate",
+        "slots": [
+          "body"
+        ],
+        "effect": {
+          "armour": 1
+        },
+        "text": "+1 armour (mastery 6 only)",
+        "min_level": 6
+      }
+    ],
+    "cost": {
+      "3": {
+        "gold": 25,
+        "material": 1
+      },
+      "6": {
+        "gold": 60,
+        "material": 2
+      }
+    },
+    "materials": {
+      "1": "iron ore",
+      "2": "goblin-forged scrap",
+      "3": "black ore"
+    }
+  },
+  "_tuning": "2026-10-31: thresholds doubled after the first probe run (mastery 3 came in about 5 fights)."
+}
