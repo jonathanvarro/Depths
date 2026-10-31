@@ -14,6 +14,11 @@ Format:
 ---
 
 ## 2026-10-31 – ChatGPT
+- Did: Recorded equipment as the central cross-expedition progression direction in DESIGN.md; created #192 for regional base loot, rolled starting quality/stats, mastery growth and modifiers. Updated #173 to reflect combat-use/received-hit mastery, replacing its earlier blanket exclusion of hits/swings. Boss preparation should combine suitable gear, mastery and regional counters.
+- Next: Specify one region's gear/enemy/boss balance, roll budgets, mastery credit and smith role; reconcile starting quality with the existing rarity names before implementation.
+- Watch out: No gameplay/assets changed. Exact values, acquisition credit/anti-farming, repairability, growth-roll timing and swap catch-up remain open. Existing generated roamers/map-fights UID files are unrelated and remain untracked.
+
+## 2026-10-31 – ChatGPT
 - Did: Simplified live Field kit (#191): larger backpack, far-left portrait selection, full selected identity once, and hover/tap item cards with contextual actions below the brief. Long descriptions scroll; cards leave their source reachable and stay hidden during drags. Added selected-hero draught/dressing/holy-water targeting through optional PartyState recipients, preserving default callers and shared food/light effects. Extended Claude's committed gear dragging to medicine, portraits and the hero area with stale/foreign-payload guards. Review: `art/concepts/interface/pack-context-v1/inspector.html`; handoff: `docs/contextual-field-kit.md`.
 - Next: Owner reviews the updated layout; physical iPhone usability remains #66. Potion throwing would need its own gameplay implementation.
 - Watch out: `479112d` was committed by Claude during this task; its gear rules are retained. Chest/merchant framing is unchanged. Context/Pack/Main/exchange and back/trinket/drag checks pass; existing Main teardown resource warnings remain. No player save/settings used by the new fixture. Unrelated generated roamers/map-fights UIDs are left out of this change.
