@@ -14,6 +14,11 @@ Format:
 ---
 
 ## 2026-10-31 – ChatGPT
+- Did: Tabled eleven proposed equipment bases each for Cave & Mine and Goblin Territory in docs/early-region-equipment-art.md; created #194/#195 art requests with the full tables, visual cues, concept-first review and current inventory export requirements. Each includes slash/impact/reach, ranged/staff, heavy/medium/light armour and shield/cape/pack choices. Both are Todo in milestone 5.
+- Next: Artist audits reusable existing art, reviews ordinary-base silhouettes, then produces selected icons. Claude reconciles proposed names with stable data/equipment IDs and #192/#193; exact stats/class eligibility are not art decisions.
+- Watch out: No art/runtime changes or new live base IDs. No item wear; no extra shield slot or guaranteed trap immunity. Current data/equipment migrations and probe edits belong to concurrent work and are excluded from this handoff commit.
+
+## 2026-10-31 – ChatGPT
 - Did: Recorded the owner's explicit no-item-wear decision in DESIGN.md, the equipment model and #192/#193. Shield durability means protection/survivability; no use-driven deterioration, durability depletion, breakage or repair upkeep. Cracked/bent remain starting-quality descriptors.
 - Next: Keep this constraint in equipment tables, UI and implementation. Stat/quality improvements are separate from wear; no condition meter is needed.
 - Watch out: Documentation/tasks only; no gameplay, balance-table or probe changes.
