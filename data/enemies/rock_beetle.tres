@@ -20,3 +20,4 @@ tactic = 13
 intro = "A rock beetle: curled up, blows barely scratch it. Hit its partner, or brace, until it unfolds."
 loot_line = "Wedged under the beetle's shell, scraped up from the rock: %s."
 threat = 3
+slow = true

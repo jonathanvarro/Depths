@@ -23,3 +23,4 @@ fears_fire = false
 threat = 4
 drop = ExtResource("1_ipeha")
 drop_chance = 0.2
+slow = true

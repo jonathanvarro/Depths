@@ -181,6 +181,8 @@ func field_stepped() -> void:
 
 
 func _field_foes_turn() -> void:
+	if field_hooks.has("round"):
+		field_hooks["round"].call()
 	var order: Array = _state.living_foes()
 	order.sort_custom(func(a, b): return a.type.initiative > b.type.initiative)
 	for foe in order:
@@ -189,6 +191,10 @@ func _field_foes_turn() -> void:
 		if _state.foe_in_range(foe):
 			await get_tree().create_timer(ENEMY_PAUSE).timeout
 			await _enemy_action(foe)
+		elif field_hooks.has("lost") and field_hooks["lost"].call(foe):
+			_state.give_up(foe)  # out of sight too long: it's lost you
+			if _tags.has(foe):
+				_tags[foe].visible = false
 		elif field_hooks.has("step_foe") and field_hooks["step_foe"].call(foe):
 			_state.plan(foe)  # its plan, from where it now stands
 	_refresh()
@@ -1090,7 +1096,9 @@ func _build() -> void:
 	_field_buttons.add_theme_constant_override("separation", 8)
 	_field_buttons.visible = false
 	rows.add_child(_field_buttons)
-	for spec in [["Strike", "strike"], ["Shoot", "shoot"], ["Brace", "brace"], ["Item", ""], ["Wait", "wait"], ["Retreat", "retreat"]]:
+	# No Retreat on the map (owner 2026-10-31): you get away by moving - the
+	# stairs, a door shut behind you, or out of their sight.
+	for spec in [["Strike", "strike"], ["Shoot", "shoot"], ["Brace", "brace"], ["Item", ""], ["Wait", "wait"]]:
 		var button := _button(spec[0])
 		var kind: String = spec[1]
 		if kind == "":

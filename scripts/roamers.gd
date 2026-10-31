@@ -30,6 +30,7 @@ class Group:
 	var cell := NOWHERE
 	var types: Array[EnemyType] = []
 	var noticed := false
+	var rested := false  # a slow group rests every other beat
 	var node: Node3D  # its sprite on the map, set by main.gd
 
 	func is_wanderer() -> bool:
@@ -69,7 +70,7 @@ static func sees(map, from: Vector2i, to: Vector2i, reach: int) -> bool:
 	var step := Vector2i(signi(to.x - from.x), signi(to.y - from.y))
 	var cell := from + step
 	while cell != to:
-		if not map.is_passable(cell):
+		if not map.is_passable(cell) or map.door_at(cell) == 1:  # a shut door hides you
 			return false
 		cell += step
 	return true
@@ -89,6 +90,10 @@ static func notices(map, group: Group, party_cell: Vector2i, band: int) -> bool:
 static func step_toward(map, group: Group, target: Vector2i, blocked: Dictionary) -> bool:
 	if adjacent(group.cell, target):
 		return false
+	if not group.types.is_empty() and group.types[0].slow:
+		group.rested = not group.rested  # slow: every other beat (#171)
+		if group.rested:
+			return false
 	var path: Array[Vector2i] = map.walking_path(group.cell, target)
 	if path.size() < 3:
 		return false

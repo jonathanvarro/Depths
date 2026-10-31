@@ -18,3 +18,4 @@ intro = "A gas-bloat drifts closer. Kill it from the back row, or set it alight 
 loot_line = "Its burst leaves %s on the floor, swallowed long ago."
 fears_fire = false
 threat = 3
+slow = true

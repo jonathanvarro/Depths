@@ -162,6 +162,8 @@ class Foe:
 	var heads := 0  # Borrowed Pack: heads still biting (slice 2)
 	var cell := Vector2i(-1, -1)  # where it stands, in a fight on the map (#171)
 	var marked_cell := Vector2i(-1, -1)  # the tile its dangerous move will hit
+	var gave_up := false  # lost the party's trail (#171): out of the fight
+	var rested := false  # a slow foe: rested this beat, moves the next
 	var staggered := false  # Borrowed Pack: lost a head this turn (its pose)
 
 	func in_back() -> bool:
@@ -186,6 +188,8 @@ var foes: Array[Foe] = []
 ## the front row; from the side or behind, on the back row - harder from
 ## behind. Dangerous moves mark the party's tile and miss if it has moved.
 var field := false
+## The party got away on the map (stairs, or every foe lost the trail).
+var escaped := false
 var party_cell := Vector2i.ZERO
 var facing := Vector2i.UP  # the way the front row faces
 ## How far a reaching or shooting attack carries along a straight line.
@@ -1195,6 +1199,21 @@ func _burst(bloat: Foe, how: String) -> String:
 
 ## The owner's retreat idea (trial): the fight ends, the party flees.
 ## Where they end up and the time cost are handled by the caller.
+## On the map, the party got away: up or down the stairs, or out of sight.
+func escape() -> void:
+	escaped = true
+	result = Result.RETREAT
+
+
+## A foe lost the party's trail and leaves the fight. If none are left
+## hunting, the party has got away.
+func give_up(foe: Foe) -> void:
+	foe.gave_up = true
+	foe.fled = true
+	if living_foes().is_empty():
+		escape()
+
+
 func retreat() -> String:
 	result = Result.RETREAT
 	return "You flee blindly into the dark."
@@ -1301,4 +1320,7 @@ func _check_end() -> void:
 	if party.living_members().is_empty():
 		result = Result.DEFEAT
 	elif living_foes().is_empty():
-		result = Result.VICTORY
+		# Any that lost your trail are still out there: you got away, you
+		# didn't win (#171).
+		result = Result.RETREAT if foes.any(func(f: Foe): return f.gave_up) else Result.VICTORY
+		escaped = result == Result.RETREAT

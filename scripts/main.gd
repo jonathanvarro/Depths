@@ -673,6 +673,7 @@ func _make_layout(depth: int) -> PackedStringArray:
 func _on_party_entered_cell(cell: Vector2i) -> void:
 	if _in_combat and _combat._state and _combat._state.field:
 		_wade(cell)
+		_field_moved(cell)
 		_combat.field_stepped()  # the step was the party's action (#171)
 		return
 	_look_for_traps(cell)
@@ -922,7 +923,13 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 			_map.triggered.erase(cell)  # they're still there, at full strength
 			_map_fight_over(false)
 			_expedition.retreats += 1
-			_flee_from(cell)
+			if state.escaped:  # by moving, on the map (#171)
+				_show_message("You got away.")
+				if _escape_stairs:
+					_escape_stairs = false
+					_on_party_entered_cell.call_deferred(_party.cell)  # the stairs' prompt
+			else:
+				_flee_from(cell)
 			if _in_opening:
 				_next_fight_at = _steps_taken + OPENING_REFIGHT_AFTER  # it follows her
 			_check_opening_exit()
@@ -1262,7 +1269,9 @@ func _begin_field_fight(state, leader_cell: Vector2i) -> void:
 	# The pad stays live on the map: it rises above the fight panel.
 	_touch_pad.add_theme_constant_override("margin_bottom", 24 + int(_combat._actions.get_combined_minimum_size().y) + 16)
 	_lift_field_foes.call_deferred()
-	_combat.field_hooks = {"step_foe": _field_step_foe, "danger": _draw_danger}
+	_unseen.clear()
+	_door_hold.clear()
+	_combat.field_hooks = {"step_foe": _field_step_foe, "danger": _draw_danger, "lost": _field_lost, "round": _field_round}
 	_combat.place_foe = func(foe):
 		var near: Array[Vector2i] = _free_cells_near(_party.cell, 1, _occupied(state))
 		foe.cell = near[0] if not near.is_empty() else _party.cell
@@ -1292,6 +1301,12 @@ func _end_field_fight() -> void:
 	_field_step_check = Callable()
 	_combat.place_foe = _place_extra_foe
 	_combat.field_hooks = {}
+	for door_cell in _door_hold:
+		_map.open_door(door_cell)  # they were forcing it
+	if not _door_hold.is_empty():
+		_build_level()
+	_door_hold.clear()
+	_unseen.clear()
 	_wait_button.visible = true
 	_touch_pad.add_theme_constant_override("margin_bottom", 24)
 
@@ -1323,7 +1338,7 @@ func _place_field_foe(foe) -> void:
 	_dress_foe(node, foe.type)
 	if foe.elite != "":
 		_mark_elite(node)
-	_level.add_child(node)
+	_roamer_root.add_child(node)  # not in the level: a shut door rebuilds it
 	foe.node = node
 
 
@@ -1331,8 +1346,14 @@ func _place_field_foe(foe) -> void:
 ## taken. True if it moved.
 func _field_step_foe(foe) -> bool:
 	var state = _combat._state
+	if foe.type.slow:
+		foe.rested = not foe.rested  # slow: every other beat (#171)
+		if foe.rested:
+			return false
 	var taken := _occupied(state)
 	taken[_party.cell] = true
+	for door_cell in _door_hold:
+		taken[door_cell] = true  # the shut door holds them
 	var distances: Dictionary = _map.walking_distances(_party.cell)
 	var best: Vector2i = foe.cell
 	var best_d: int = distances.get(foe.cell, 999)
@@ -1371,6 +1392,61 @@ func _lift_field_foes() -> void:
 		foe.node.position = Vector3(foe.cell.x * CELL_SIZE, 0.0, foe.cell.y * CELL_SIZE) + setback
 		_clear_of_panel(foe.node)
 		foe.node.position.y = minf(foe.node.position.y, FIELD_FOE_MAX_LIFT)
+
+
+# Getting away on the map (owner 2026-10-31): no Retreat button. Stairs take
+# you off the floor mid-fight; a door shuts behind you and holds them a
+# couple of beats; out of their sight for a few beats, they lose the trail.
+const DOOR_HOLD := 2  # beats a shut door holds them
+const LOSE_TRAIL := 3  # beats out of sight before a foe gives up
+var _escape_stairs := false
+var _door_hold := {}  # door cell -> beats it still holds
+var _unseen := {}  # Foe -> beats it hasn't seen the party
+
+
+## The party stepped during a fight: onto the stairs, it's away; through a
+## doorway, the door shuts behind it.
+func _field_moved(cell: Vector2i) -> void:
+	var state = _combat._state
+	var content: int = _map.content_at(cell)
+	if content in [DungeonMap.Content.STAIRS_UP, DungeonMap.Content.STAIRS_DOWN]:
+		_escape_stairs = true
+		state.escape()
+		return
+	var door: Vector2i = _cell_before
+	if _map.door_at(door) == DungeonMap.Door.OPEN and not _occupied(state).has(door):
+		_map.doors[door] = DungeonMap.Door.CLOSED
+		_door_hold[door] = DOOR_HOLD
+		_build_level()
+		_show_message("You pull the door shut behind you.")
+		_tip("escape_door", "A door shut behind you holds them for a moment. Out of their sight for a few beats, they lose your trail - or take the stairs.")
+
+
+## A foes' turn begins: shut doors give way in time.
+func _field_round() -> void:
+	for door_cell in _door_hold.keys():
+		_door_hold[door_cell] -= 1
+		if _door_hold[door_cell] <= 0:
+			_door_hold.erase(door_cell)
+			_map.open_door(door_cell)
+			_build_level()
+			_show_message("The door bursts open.")
+
+
+## True once `foe` has gone LOSE_TRAIL beats without sight of the party.
+func _field_lost(foe) -> bool:
+	var band: int = _party_state.supplies.light_band()
+	var reach: int = Roamers.SIGHT.get(band, 3) + 1
+	if Roamers.adjacent(foe.cell, _party.cell) or Roamers.sees(_map, foe.cell, _party.cell, reach):
+		_unseen.erase(foe)
+		return false
+	_unseen[foe] = _unseen.get(foe, 0) + 1
+	if _unseen[foe] < LOSE_TRAIL:
+		return false
+	if is_instance_valid(foe.node):
+		foe.node.visible = false
+	_show_message("The %s has lost your trail." % foe.name.to_lower())
+	return true
 
 
 ## The tiles a dangerous move will hit, marked on the floor (#171).

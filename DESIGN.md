@@ -145,6 +145,13 @@ House of Necrosis was used as a reference: you grow strong during a run, grow at
 - **Result** (30 campaigns per hero): Mara 24, Corin 28, Alwen 14, against 23, 26 and 15 on the stage. Balance is unchanged overall. Alwen's weak start remains and goes to the class rework (#179); rear damage (+50%) and reach (2 cells) are kept.
 - **Settings → "Fights on the map (trial)"** switches back to the battle stage, so the owner can compare the two.
 
+**Escaping on the map — owner 2026-10-31.** There's no Retreat in map fights. You get away by moving:
+- **Stairs:** step onto them mid-fight and you're away; the stairs' prompt follows.
+- **Doors:** stepping through a doorway shuts the door behind you, and it holds them for 2 beats before bursting open.
+- **Losing the trail:** a monster that can't see you (light-based sight +1; a shut door blocks it) for **3 beats** gives up. If every monster still in the fight has lost you, you've got away; a fight where some lost you counts as getting away, not a win.
+- **Slow monsters** (hollow miner, gas-bloat, Marrow Shepherd, rock beetle) move every other beat, on the map and in fights, so you can outrun them. Hounds keep pace.
+- **The bot** (it can't use doors well): getting away costs one more blow from every foe in reach. Queen dead in 16/28/9 of 30, down from 24/28/14: escaping is now costly, and balance needs a decision.
+
 **Built straight into the game,** not as a separate prototype. The owner judges the on-map fights after playing them.
 
 ## Map and dungeon progression

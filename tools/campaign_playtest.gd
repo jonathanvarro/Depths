@@ -818,7 +818,13 @@ func _field_fight(state) -> void:
 func _field_party(state, map) -> void:
 	var foes: Array = state.living_foes()
 	if _health_fraction() < 0.2 and foes.any(func(f): return f.health * 2 > f.type.max_health):
-		state.retreat()
+		# No Retreat on the map: getting away by moving costs a round or two
+		# of blows - every foe in reach gets one more (an approximation).
+		for foe in foes:
+			if state.result == CS.Result.ONGOING and state.foe_in_range(foe):
+				state.enemy_act(foe)
+		if state.result == CS.Result.ONGOING:
+			state.escape()
 		return
 	for hero: Companion in party.living_members():
 		if float(hero.health) / maxf(1.0, hero.effective_max_health()) < 0.3 and party.cannot_use_reason(DRAUGHT, true) == "":
@@ -860,6 +866,10 @@ func _field_foes(state, map) -> void:
 				state.prepare_killing_blow(foe)
 			state.enemy_act(foe)
 			continue
+		if foe.type.slow:
+			foe.rested = not foe.rested  # slow: every other beat
+			if foe.rested:
+				continue
 		var taken := {state.party_cell: true}
 		for f in state.living_foes():
 			taken[f.cell] = true

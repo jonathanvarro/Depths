@@ -92,6 +92,16 @@ func _initialize() -> void:
 	far_state.foes[0].cell = Vector2i(5, 2)
 	far_state.foes[0].intent = load("res://scripts/combat_state.gd").Intent.LUNGE
 	check("a foe out of reach must close in first", not far_state.foe_in_range(far_state.foes[0]))
+	far_state.give_up(far_state.foes[0])
+	check("when every foe has lost your trail, you got away", far_state.result == 3 and far_state.escaped)
+	var slow_group := Roamers.Group.new()
+	slow_group.types.assign([load("res://data/enemies/hollow_miner.tres")])
+	slow_group.cell = Vector2i(7, 3)
+	var moves := 0
+	for i in 4:
+		if Roamers.step_toward(map, slow_group, Vector2i(1, 1), {}):
+			moves += 1
+	check("slow monsters (hollow miners, bloats) move every other beat", moves == 2, moves)
 
 	# In the game.
 	var main = load("res://scenes/main.tscn").instantiate()
@@ -142,6 +152,7 @@ func _initialize() -> void:
 		if gr != wanderer:
 			main._groups.erase(gr)
 			gr.node.queue_free()
+	wanderer.types.assign([load("res://data/enemies/rat.tres")])  # a quick one: slow ones rest every other beat
 	var time_before: int = main._party_state.time_elapsed
 	var before: int = walk.get(wanderer.cell, 99)
 	main._wait()
@@ -175,5 +186,29 @@ func _initialize() -> void:
 			break
 		await create_timer(0.1).timeout
 	check("...then the foes act or close in, and a new round", fight.round == round_before + 1 or fight.result != 0)
+	check("no Retreat button: you get away by moving", not main._combat._field_buttons.get_children().any(func(b): return b.text == "Retreat"))
+	if fight.result == 0:
+		var hunter = fight.living_foes()[0]
+		var hidden_cell := Vector2i(-1, -1)
+		for c in main._map.walking_distances(main._party.cell):
+			if main._map.walking_distances(main._party.cell)[c] >= 6 and not Roamers.sees(main._map, c, main._party.cell, 9):
+				hidden_cell = c
+				break
+		hunter.cell = hidden_cell
+		var lost := [main._field_lost(hunter), main._field_lost(hunter), main._field_lost(hunter)]
+		check("out of sight for three beats, a foe loses your trail", lost == [false, false, true], lost)
+		hunter.cell = hidden_cell  # well away from the doorway
+		var door: Vector2i = main._party.cell + main._party.DIRECTIONS[(main._party.facing + 2) % 4]
+		if main._map.is_passable(door):
+			main._map.doors[door] = main.DungeonMap.Door.OPEN
+			main._cell_before = door
+			main._field_moved(hidden_cell)  # a plain cell: the party stands on the arrival stairs
+			check("stepping through a doorway shuts the door behind you", main._map.door_at(door) == main.DungeonMap.Door.CLOSED and main._door_hold.has(door))
+			main._field_round()
+			main._field_round()
+			check("...which holds them a couple of beats, then bursts open", main._map.door_at(door) == main.DungeonMap.Door.OPEN)
+		var stairs: Vector2i = main._map.find_content(main.DungeonMap.Content.STAIRS_UP)
+		main._field_moved(stairs)
+		check("onto the stairs mid-fight: you got away", fight.escaped and fight.result == 3)
 	print("fails=", fails)
 	quit()

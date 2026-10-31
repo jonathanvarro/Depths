@@ -56,6 +56,9 @@ enum Tactic {
 @export var loot_line := ""
 ## Gold dropped when beaten, min-max (goblins carry purses, #42).
 @export var purse := Vector2i.ZERO
+## Slow on the map (#171, owner 2026-10-31): it moves only every other beat,
+## so a party can outrun it. Hounds and the like keep pace.
+@export var slow := false
 ## A thrown torch (#115, owner 2026-10-19): beasts that fear fire flee from
 ## it; goblins stand their ground and are burned instead.
 @export var fears_fire := true
