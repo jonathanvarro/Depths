@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-31 – ChatGPT
+- Did: Preserved the owner's House of Necrosis-inspired brainstorm as seven open design-review tasks: #182 equipment, #183 consumables, #184 enemy behaviours, #185 statuses, #186 magic, #187 encounter packages and #188 balance safeguards. All have decision-needed labels, milestone 6 (Later), cross-links and Todo status on project 2.
+- Next: Owner reviews the first shortlist: Bottled Echo, Surveyor's Chain, Gravewax, Silt Listener, Goblin Tollkeeper and Lend Courage. These tasks preserve proposals; they do not approve implementation or names.
+- Watch out: No gameplay or art changed. Existing #171 field-combat work and Claude's uncommitted handoff are preserved. Sources are linked in each issue; local-only concept images/records remain unpublished.
+
 ## 2026-10-31 – Claude
 - Did: #171 phase 1, monsters on the map (`scripts/roamers.gd`; main.gd "Fights on the map" section).
   - Room fights stand in their rooms and notice by sight or room entry.
