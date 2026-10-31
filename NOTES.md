@@ -13,6 +13,16 @@ Format:
 
 ---
 
+## 2026-10-31 – Claude (equipment model)
+- Did: #193 (owner prioritised).
+  - **Spec:** `docs/equipment-model.md`.
+  - **Six tables:** `docs/equipment-model/` (bases, rolls, modifiers, mastery, region_marches, generated examples json/csv).
+  - **Probe:** `python tools/balance/equipment_probe.py`, seed 193. It reads the enemy .tres and DEPTH_SCALE, checks normalisation and validity, reproduces the #193 examples, and writes probe-report.md.
+  - **Worked region:** the Goblin Marches; the queen boss has several viable loadouts.
+  - **Tuning so far:** mastery thresholds doubled after the first run.
+- Next: owner review of the decisions listed in the spec; then runtime integration via #192/#173.
+- Watch out: nothing live changed. Enemy armour and strike types are proposals; the boss sim is simplified (a lower bound).
+
 ## 2026-10-31 – ChatGPT
 - Did: Created #193 for Claude to develop the equipment formulas, six linked balance tables, reproducible seeded probe and one-region worked model. Linked it from parent #192; mastery integration remains #173. The task preserves example coefficients/calculations as provisional, with roll validity, regional/boss viability, mastery credit, save identity and anti-grind checks.
 - Next: Claude produces the model and reports supported recommendations before integrating selected rules through #192/#173. Task is Todo, milestone 5.
