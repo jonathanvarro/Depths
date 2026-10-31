@@ -3,7 +3,7 @@ extends SceneTree
 const PACK := preload("res://scripts/pack_screen.gd")
 const PARTY := preload("res://scripts/party_state.gd")
 const SAFE := preload("res://scripts/safe_area.gd")
-const OUT := "res://art/concepts/interface/combined-live-v1/"
+const OUT := "res://build/pack-context-check/"
 var checks:=0
 var failures:Array[String]=[]
 var captures:Array[String]=[]
@@ -22,6 +22,7 @@ func settle() -> void:
 	for i in 8:await process_frame
 
 func snap(name:String) -> void:
+	if DisplayServer.get_name()=="headless":return
 	await settle();await RenderingServer.frame_post_draw
 	check(root.get_texture().get_image().save_png(OUT+name+".png")==OK,"Capture "+name)
 	captures.append(name+".png")
@@ -58,6 +59,7 @@ func labels() -> String:
 	return "\n".join(pack.find_children("*","Label",true,false).filter(func(l):return l.is_visible_in_tree()).map(func(l):return l.text))
 
 func run() -> void:
+	DirAccess.make_dir_recursive_absolute(OUT)
 	# In-memory settings only. Quality borders consult this without reading a slot.
 	Engine.set_meta("depths_settings",preload("res://scripts/settings.gd").DEFAULTS.duplicate())
 	Engine.set_meta("depths_settings_loaded",true)
@@ -79,7 +81,7 @@ func run() -> void:
 			pack.refresh();await settle()
 			var tag:="%d-%s"%[shape.x,"larger" if scale_factor>1 else "normal"]
 			check(pack._bag.get_global_rect().position.x>pack._equipment.get_global_rect().end.x,"Equipment left, bag right "+tag)
-			check(pack._details.get_global_rect().position.y>=pack._bag.get_global_rect().end.y-1,"Inspection never covers bag "+tag)
+			check(not pack._details.visible,"No reserved inspection strip "+tag)
 			for slot:Button in pack._slot_buttons.values():
 				check(pack._equipment.get_global_rect().grow(1).encloses(slot.get_global_rect()),"Loadout fits left panel "+tag)
 			for b:Button in pack.find_children("*","Button",true,false):
@@ -89,6 +91,8 @@ func run() -> void:
 				check(root.get_visible_rect().encloses(rect),"Target inside viewport "+b.accessibility_name+" "+tag)
 			await snap("equipment-"+tag)
 			pack.inspect_item(gear("simple_spear"));await settle()
+			check(pack.content.get_global_rect().encloses(pack._details.get_global_rect()),"Item card stays in safe area "+tag)
+			check(pack._detail_actions.global_position.y>=pack._detail_scroll.get_global_rect().end.y,"Actions below description "+tag)
 			check(labels().contains("Replaces") and labels().contains("→"),"Visible actual gear comparison "+tag)
 			await snap("inspect-"+tag)
 			pack.set_status(true);await settle()
@@ -115,12 +119,13 @@ func run() -> void:
 	party.members[1].founder=false  # exercise the existing recruit permission
 	pack.refresh();await settle();await click(action("unequip"),true)
 	check(party.members[1].weapon==null and gear("simple_spear") in party.supplies.gear,"Unequip recruit returns item")
+	party.members[0].health=party.members[0].effective_max_health()-2
 	pack.select_hero(party.members[0]);pack.inspect_item(item("restorative_draught"));await settle()
-	check(labels().contains("Treats Corin"),"Draught names actual model target, not inspected hero")
+	check(labels().contains("For Mara"),"Draught names selected hero")
 	var count:int=party.supplies.count(item("restorative_draught"))
 	await click(action("use"),true)
 	check(party.supplies.count(item("restorative_draught"))==count-1 and party.time_elapsed==time_before+item("restorative_draught").use_time,"Use consumes one and exact time")
-	check(not party.members[1].pending_effects.is_empty(),"Healing follows existing most-hurt targeting")
+	check(not party.members[0].pending_effects.is_empty() and party.members[1].pending_effects.is_empty(),"Healing targets selected hero")
 	pack.inspect_item(item("amber_pendant"));await settle();await click(action("wear"),true)
 	check(party.members[0].trinket!=null,"Treasure wears through real model")
 	pack.inspect_item(party.members[0].trinket,true,"trinket");await settle();await click(action("unequip"))

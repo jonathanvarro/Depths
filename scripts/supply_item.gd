@@ -10,7 +10,7 @@ extends Resource
 enum Effect {
 	REFILL_LANTERN,  ## pours `amount` oil into the lantern
 	FEED_PARTY,  ## every living hero heals `amount` over `duration`
-	HEAL_ONE,  ## the most hurt living hero heals `amount` over `duration`
+	HEAL_ONE,  ## one hero heals `amount` over `duration`; most hurt if no recipient
 	DRESS_INJURY,  ## binds one injury until camp (#11)
 	LIGHT_TORCH,  ## lights a torch to hold; it burns down (#59)
 	TREASURE,  ## not usable: sold to the merchant for `price` (#42)

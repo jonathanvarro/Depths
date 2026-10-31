@@ -1,5 +1,10 @@
 # Combined Equipment and backpack · #51 / #48
 
+**Current layout:** [Contextual Field kit, 2026-10-31](contextual-field-kit.md)
+(#191) replaces this original bottom strip with a larger bag, portrait rail,
+floating item cards and selected-hero treatment. This document records the
+2026-10-25 implementation and its historical verification.
+
 2026-10-25. The approved physical kit is now the live Godot Pack screen.
 Chest loot, reward overflow and the merchant now share this kit too:
 [loot/trade handoff](loot-and-merchant-kit.md) (#155).

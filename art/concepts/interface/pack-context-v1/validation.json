@@ -1,0 +1,27 @@
+{
+	"captures": [
+		"equipment-1280-normal.png",
+		"inspect-1280-normal.png",
+		"equipment-1280-larger.png",
+		"inspect-1280-larger.png",
+		"equipment-1278-normal.png",
+		"inspect-1278-normal.png",
+		"equipment-1278-larger.png",
+		"inspect-1278-larger.png",
+		"equipment-844-normal.png",
+		"inspect-844-normal.png",
+		"equipment-844-larger.png",
+		"inspect-844-larger.png",
+		"equipment-1334-normal.png",
+		"inspect-1334-normal.png",
+		"equipment-1334-larger.png",
+		"inspect-1334-larger.png",
+		"long-description-phone.png",
+		"unavailable-phone.png",
+		"status-phone.png"
+	],
+	"checks": 601,
+	"failures": [],
+	"physical_iPhone": false,
+	"uses_player_files": false
+}

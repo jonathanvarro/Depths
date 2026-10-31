@@ -340,12 +340,29 @@ func most_hurt() -> Companion:
 	return worst
 
 
-## Why `item` can't be used right now, or "" if it can.
-func cannot_use_reason(item: SupplyItem, in_combat := false) -> String:
+## Why `item` can't be used right now, or "" if it can. An explicit recipient
+## targets single-hero medicine; omitted retains legacy automatic targeting.
+## Food and light sources always retain their shared-party effects.
+func cannot_use_reason(item: SupplyItem, in_combat := false, recipient: Companion = null) -> String:
 	if in_combat and not item.usable_in_combat:
 		return "Not during a fight"
 	if supplies.count(item) <= 0 and not (item.effect == SupplyItem.Effect.REFILL_LANTERN and supplies.open_flask > 0.0):
 		return "None left"
+	if recipient != null and item.effect in [SupplyItem.Effect.HEAL_ONE, SupplyItem.Effect.DRESS_INJURY, SupplyItem.Effect.LIFT_BANE]:
+		if recipient not in members:
+			return "That hero is not in the party"
+		if not recipient.is_alive() and not (item.effect == SupplyItem.Effect.HEAL_ONE and recipient.is_unconscious()):
+			return "Needs a conscious hero"
+		match item.effect:
+			SupplyItem.Effect.HEAL_ONE:
+				if recipient.health >= recipient.effective_max_health():
+					return recipient.display_name + " is not hurt"
+			SupplyItem.Effect.DRESS_INJURY:
+				if recipient.hindering_injuries().is_empty():
+					return "No injury to bind on " + recipient.display_name
+			SupplyItem.Effect.LIFT_BANE:
+				if not recipient.has_bane():
+					return recipient.display_name + " is not cursed"
 	match item.effect:
 		SupplyItem.Effect.TREASURE:
 			return "Sell it at camp"
@@ -379,8 +396,8 @@ func cannot_use_reason(item: SupplyItem, in_combat := false) -> String:
 
 ## Uses one `item` (outside combat). Returns a message to show, or "" if it
 ## couldn't be used.
-func use_item(item: SupplyItem, in_combat := false) -> String:
-	if cannot_use_reason(item, in_combat) != "":
+func use_item(item: SupplyItem, in_combat := false, recipient: Companion = null) -> String:
+	if cannot_use_reason(item, in_combat, recipient) != "":
 		return ""
 	match item.effect:
 		SupplyItem.Effect.REFILL_LANTERN:
@@ -391,12 +408,12 @@ func use_item(item: SupplyItem, in_combat := false) -> String:
 				member.eat()
 				member.add_effect_over_time("health", _healing(item.amount), item.duration)
 		SupplyItem.Effect.HEAL_ONE:
-			var target := most_hurt()
+			var target := recipient if recipient != null else most_hurt()
 			supplies.take(item)
 			target.add_effect_over_time("health", _healing(item.amount), item.duration)
 		SupplyItem.Effect.DRESS_INJURY:
 			supplies.take(item)
-			var patient := first_undressed_injured()
+			var patient := recipient if recipient != null else first_undressed_injured()
 			patient.dress_injury()
 			if living_members().any(func(m: Companion): return m.has_talent("steady_hands")):
 				patient.add_effect_over_time("health", 4, 20)  # steady hands (#47)
@@ -404,7 +421,8 @@ func use_item(item: SupplyItem, in_combat := false) -> String:
 			supplies.light_torch(item)
 		SupplyItem.Effect.LIFT_BANE:
 			supplies.take(item)
-			for member in living_members():
+			var patients: Array = [recipient] if recipient != null else living_members()
+			for member in patients:
 				if member.has_bane():
 					var lifted: Boon = member.lift_bane()
 					if not in_combat:

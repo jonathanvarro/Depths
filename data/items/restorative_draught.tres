@@ -7,7 +7,7 @@
 script = ExtResource("1")
 icon = ExtResource("2")
 display_name = "Restorative draught"
-description = "Dark herbal liquor in a round, cloth-bound bottle. The most hurt hero regains 10 health over 20 time, completed by rest or a floor change."
+description = "Dark herbal liquor in a round, cloth-bound bottle. Restores 10 health to one hero over 20 time, completed by rest or a floor change."
 effect = 2
 amount = 10
 duration = 20

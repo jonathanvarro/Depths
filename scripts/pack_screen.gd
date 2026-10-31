@@ -37,7 +37,7 @@ var _page := 0
 var _status := false
 var _refresh_pending := false
 var _entries: Array[Dictionary] = []
-var _hero_row: HBoxContainer
+var _hero_row: VBoxContainer
 var _hero_summary: Label
 var _equip_tab: Button
 var _status_tab: Button
@@ -51,8 +51,18 @@ var _pages: HBoxContainer
 var _capacity: Label
 var _details: PanelContainer
 var _detail_icon: TextureRect
+var _detail_title: Label
 var _detail_text: VBoxContainer
 var _detail_actions: HBoxContainer
+var _detail_scroll: ScrollContainer
+var _detail_column: VBoxContainer
+var _anchor_rect := Rect2()
+var _anchor_focus := ""
+var _hero_panel: VBoxContainer
+var _workspace: HBoxContainer
+var _header: HBoxContainer
+var _title: Label
+var _save: Button
 var _close: Button
 var _time_label: Label
 var _light_title: Label
@@ -94,6 +104,19 @@ func _unhandled_input(event: InputEvent) -> void:
 		else:
 			closed.emit()
 		get_viewport().set_input_as_handled()
+
+func _input(event: InputEvent) -> void:
+	if not is_visible_in_tree() or _selection == null:
+		return
+	var point := Vector2.ZERO
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		point = event.position
+	elif event is InputEventScreenTouch and event.pressed:
+		point = event.position
+	else:
+		return
+	if not _details.get_global_rect().has_point(point) and not _anchor_rect.has_point(point):
+		clear_inspection()
 
 func refresh() -> void:
 	_refresh_pending = false
@@ -146,18 +169,22 @@ func clear_inspection() -> void:
 	_selection = null
 	_from_slot = ""
 	_pinned = false
+	_anchor_focus = ""
 	_serial += 1
 	if is_instance_valid(_detail_text):
 		_refresh_details()
 		_highlight_slots()
 
-func inspect_item(item: Resource, pin := true, worn_slot := "") -> void:
-	if item == null or (not pin and _pinned):
+func inspect_item(item: Resource, pin := true, worn_slot := "", source: Control = null) -> void:
+	if item == null or (not pin and (_pinned or get_viewport().gui_is_dragging())):
 		return
 	_selection = item
 	_from_slot = worn_slot
 	_pinned = pin
+	_anchor_focus=source.get_meta("kit_focus","") if source!=null else ""
 	_serial += 1
+	_detail_scroll.scroll_vertical=0
+	_anchor_rect = _item_rect(item, worn_slot)
 	_refresh_details()
 	_highlight_slots()
 
@@ -215,23 +242,18 @@ func _refresh_light() -> void:
 func _refresh_heroes() -> void:
 	_clear(_hero_row)
 	for hero: Companion in _party.members:
-		var button:=_button("",Vector2(80,56))
-		button.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+		var button:=_button("",Vector2(64,64))
 		button.toggle_mode=true
 		button.button_pressed=hero==_selected_hero
 		button.accessibility_name="Inspect "+hero.display_name
 		button.tooltip_text=hero.display_name
 		button.set_meta("kit_focus","hero:"+str(hero.get_instance_id()))
 		_hero_row.add_child(button)
-		var row:=HBoxContainer.new()
-		row.mouse_filter=Control.MOUSE_FILTER_IGNORE
-		row.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-		row.offset_left=4;row.offset_right=-4;row.offset_top=4;row.offset_bottom=-4
-		row.add_theme_constant_override("separation",4)
-		button.add_child(row)
+		button.set_drag_forwarding(Callable(),_can_drop_on_hero.bind(hero),_drop_on_hero.bind(hero))
 		var portrait:=PortraitView.new()
-		portrait.custom_minimum_size=Vector2(40,40)
-		row.add_child(portrait)
+		portrait.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		portrait.offset_left=4;portrait.offset_right=-4;portrait.offset_top=4;portrait.offset_bottom=-4
+		button.add_child(portrait)
 		portrait.show_portrait(hero.portrait_set,hero.portrait)
 		portrait.set_animated(hero.is_alive())
 		portrait.modulate=Color.WHITE if hero.is_alive() else Color(0.45,0.45,0.45)
@@ -240,16 +262,11 @@ func _refresh_heroes() -> void:
 		for injury in hero.injuries:
 			portrait.set_condition(injury.portrait_condition,injury not in hero.dressed)
 			portrait.set_condition(injury.dressed_portrait_condition,injury in hero.dressed)
-		var name_label:=_label(hero.display_name,16)
-		name_label.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
-		name_label.size_flags_horizontal=Control.SIZE_EXPAND_FILL
-		name_label.size_flags_vertical=Control.SIZE_SHRINK_CENTER
-		row.add_child(name_label)
 		button.pressed.connect(select_hero.bind(hero))
 	if _selected_hero:
 		var h:=_selected_hero
 		var state: String=StrainRules.NAMES[h.strain_state()] if h.is_alive() else ("Unconscious" if h.is_unconscious() else "Fallen")
-		_hero_summary.text="%s · %d/%d · %s" % [h.role,h.health,h.effective_max_health(),state]
+		_hero_summary.text="%s · %s · %d/%d · %s" % [h.display_name,h.role,h.health,h.effective_max_health(),state]
 	else:
 		_hero_summary.text=""
 	set_status(_status)
@@ -284,7 +301,15 @@ func _refresh_equipment() -> void:
 			_add_icon(button,EMPTY_ICONS[slot],"common",Vector2(32,32))
 			button.get_child(0).modulate.a=0.45
 			button.disabled=true
+	_fit_equipment()
 	_highlight_slots()
+
+func _fit_equipment() -> void:
+	if not is_instance_valid(_equipment_slots):return
+	# In short phone windows the slot glyphs/accessibility names carry the
+	# labels, keeping two full rows of touch targets inside the canvas roll.
+	for box in _equipment_slots.get_children():
+		box.get_child(0).visible=_equipment.size.y>=140
 
 func _highlight_slots() -> void:
 	var receiving: String=_selection.slot if _selection is Equipment else ""
@@ -403,9 +428,12 @@ func _refresh_bag() -> void:
 	_bag._fit()
 
 func _bind_inspection(button: Button,item: Resource,slot := "") -> void:
-	button.pressed.connect(inspect_item.bind(item,true,slot))
-	button.mouse_entered.connect(inspect_item.bind(item,false,slot))
-	button.focus_entered.connect(inspect_item.bind(item,false,slot))
+	# The custom item card replaces delayed, detached engine tooltips.
+	button.tooltip_text=""
+	button.pressed.connect(inspect_item.bind(item,true,slot,button))
+	button.mouse_entered.connect(inspect_item.bind(item,false,slot,button))
+	button.focus_entered.connect(inspect_item.bind(item,false,slot,button))
+	button.mouse_exited.connect(_leave_preview)
 	button.gui_input.connect(func(event: InputEvent):
 		if event is InputEventMouseButton and event.pressed and event.button_index==MOUSE_BUTTON_RIGHT:
 			_quick_use(item,slot)
@@ -422,31 +450,65 @@ func _slot_for(item: Resource) -> String:
 	return ""
 
 func _drag_from_bag(_at: Vector2,item: Resource) -> Variant:
-	if _slot_for(item)=="":
+	if not _bag_has(item) or (_slot_for(item)=="" and not (item is SupplyItem and item.effect not in [SupplyItem.Effect.TREASURE,SupplyItem.Effect.TOOL])):
 		return null
+	clear_inspection()
 	set_drag_preview(_drag_preview(item))
-	return {"kit_drag":"bag","item":item}
+	return {"kit_drag":"bag","item":item,"party":_party}
 
 func _drag_from_slot(_at: Vector2,slot: String,item: Equipment) -> Variant:
 	if item==null:
 		return null
 	set_drag_preview(_drag_preview(item))
-	return {"kit_drag":"slot","slot":slot,"item":item}
+	clear_inspection()
+	return {"kit_drag":"slot","slot":slot,"item":item,"party":_party,"hero":_selected_hero}
 
 func _can_drop_on_slot(_at: Vector2,data: Variant,slot: String) -> bool:
-	return data is Dictionary and data.get("kit_drag")=="bag" and _slot_for(data.item)==slot and _equip_reason(slot)==""
+	if not _valid_bag_drag(data):return false
+	if _slot_for(data.item)=="":return _can_drop_on_hero(_at,data,_selected_hero)
+	return _slot_for(data.item)==slot and _equip_reason(slot)==""
 
 func _drop_on_slot(_at: Vector2,data: Variant,slot: String) -> void:
 	if not _can_drop_on_slot(_at,data,slot):
+		return
+	if _slot_for(data.item)=="":
+		_drop_on_hero(_at,data,_selected_hero)
 		return
 	inspect_item(data.item,true)
 	_perform("wear" if data.item is SupplyItem else "equip")
 
 func _can_drop_on_bag(_at: Vector2,data: Variant) -> bool:
-	if not (data is Dictionary and data.get("kit_drag")=="slot"):
+	if not (data is Dictionary and data.get("kit_drag")=="slot" and data.get("party")==_party and data.get("hero")==_selected_hero and data.get("slot","") in SLOT_NAMES):
 		return false
 	var held:Equipment=_selected_hero.get(data.slot) if _selected_hero else null
-	return held==data.item and _selected_hero.is_alive() and held.curse==null and not (data.slot=="weapon" and _selected_hero.founder)
+	return held!=null and held==data.get("item") and _selected_hero in _party.members and _selected_hero.is_alive() and held.curse==null and not (data.slot=="weapon" and _selected_hero.founder)
+
+func _can_drop_on_selected(at: Vector2,data: Variant) -> bool:
+	return _can_drop_on_hero(at,data,_selected_hero)
+
+func _drop_on_selected(at: Vector2,data: Variant) -> void:
+	_drop_on_hero(at,data,_selected_hero)
+
+func _bag_has(item: Resource) -> bool:
+	if item is Equipment:return item in _party.supplies.gear
+	if item is SupplyItem:return _party.supplies.count(item)>0 or (item.effect==SupplyItem.Effect.REFILL_LANTERN and _party.supplies.open_flask>0)
+	return false
+
+func _valid_bag_drag(data: Variant) -> bool:
+	return data is Dictionary and data.get("kit_drag")=="bag" and data.get("party")==_party and data.get("item") is Resource and _bag_has(data.item)
+
+func _can_drop_on_hero(_at: Vector2,data: Variant,hero: Companion) -> bool:
+	if not _valid_bag_drag(data) or hero not in _party.members:return false
+	var slot:=_slot_for(data.item)
+	if slot!="":return _equip_reason(slot,hero)==""
+	return data.item is SupplyItem and _party.cannot_use_reason(data.item,false,hero)==""
+
+func _drop_on_hero(at: Vector2,data: Variant,hero: Companion) -> void:
+	if not _can_drop_on_hero(at,data,hero):return
+	select_hero(hero)
+	inspect_item(data.item,true)
+	var slot:=_slot_for(data.item)
+	_perform(("wear" if data.item is SupplyItem else "equip") if slot!="" else "use")
 
 func _drop_on_bag(_at: Vector2,data: Variant) -> void:
 	if not _can_drop_on_bag(_at,data):
@@ -464,7 +526,7 @@ func _drag_preview(item: Resource) -> Control:
 func _quick_use(item: Resource,slot := "") -> void:
 	inspect_item(item,true,slot)
 	if item is SupplyItem:
-		if _party.cannot_use_reason(item)=="":_perform("use")
+		if _party.cannot_use_reason(item,false,_selected_hero)=="":_perform("use")
 	elif slot!="":
 		if _unequip_reason()=="":_perform("unequip")
 	elif item is Equipment:
@@ -480,12 +542,16 @@ func _refresh_details() -> void:
 	_clear(_detail_text)
 	_clear(_detail_actions)
 	_detail_icon.texture=null
+	# Measure off-screen: hidden containers do not settle wrapped text reliably.
+	# The previous card's rectangle must not intercept the next pocket's click.
+	_details.visible=_selection!=null
+	_details.position=Vector2(-10000,-10000)
 	if _selection==null:
 		return
 	var item:=_selection
 	_detail_icon.texture=item.icon
 	var tier:=Quality.tier_of(item,_selected_hero if _from_slot!="" else null)
-	_detail_text.add_child(_wrapped(("" if tier=="common" else tier.capitalize()+" · ")+item.display_name,21))
+	_detail_title.text=("" if tier=="common" else tier.capitalize()+" · ")+item.display_name
 	var description:=_wrapped(item.description,17,FieldKit.MUTED)
 	_detail_text.add_child(description)
 	if _from_slot!="":
@@ -495,6 +561,7 @@ func _refresh_details() -> void:
 			if item.curse:_detail_text.add_child(_wrapped("Cursed: "+item.curse.effects_text()+". Holy water or the nurse can lift it.",17))
 		_action("Take off","unequip",_unequip_reason())
 		_detail_text.move_child(description,_detail_text.get_child_count()-1)
+		_position_details.call_deferred()
 		return
 	if item is Equipment:
 		var now:Equipment=_selected_hero.get(item.slot) if _selected_hero else null
@@ -513,31 +580,44 @@ func _refresh_details() -> void:
 			_detail_text.add_child(_wrapped("Worn: "+charm.effect.effects_text(),17))
 			_action("Wear","wear",_equip_reason("trinket"))
 		else:
-			var reason:String=_party.cannot_use_reason(item)
+			var reason:String=_party.cannot_use_reason(item,false,_selected_hero)
 			var target:=_use_target(item)
 			if target!="":_detail_text.add_child(_wrapped(target,17))
-			_action("Use · %d time" % item.use_time,"use",reason)
+			if item.effect not in [SupplyItem.Effect.TOOL,SupplyItem.Effect.TREASURE]:
+				_action(_use_verb(item),"use",reason)
+			else:
+				_detail_text.add_child(_wrapped(reason,17,FieldKit.MUTED))
 	_action("Drop","drop")
 	_detail_text.move_child(description,_detail_text.get_child_count()-1)
+	_position_details.call_deferred()
+
+func _use_verb(item: SupplyItem) -> String:
+	match item.effect:
+		SupplyItem.Effect.HEAL_ONE:return "Drink"
+		SupplyItem.Effect.FEED_PARTY:return "Eat"
+		SupplyItem.Effect.DRESS_INJURY:return "Bandage"
+		SupplyItem.Effect.REFILL_LANTERN:return "Refill"
+		SupplyItem.Effect.LIGHT_TORCH:return "Light"
+		SupplyItem.Effect.CURE_VENOM:return "Drink"
+		SupplyItem.Effect.LIFT_BANE:return "Apply"
+	return "Use"
 
 func _use_target(item: SupplyItem) -> String:
 	match item.effect:
 		SupplyItem.Effect.HEAL_ONE:
-			var patient:Companion=_party.most_hurt()
-			return "Treats "+patient.display_name+" (most hurt)" if patient else ""
+			return "For "+_selected_hero.display_name+" · %d time" % item.use_time if _selected_hero else ""
 		SupplyItem.Effect.DRESS_INJURY:
-			var patient:Companion=_party.first_undressed_injured()
-			return "Binds "+patient.display_name+"'s injury" if patient else ""
+			return "For "+_selected_hero.display_name+" · %d time" % item.use_time if _selected_hero else ""
 		SupplyItem.Effect.FEED_PARTY:return "Feeds the party"
 		SupplyItem.Effect.REFILL_LANTERN:return "Refills the shared lantern"+(" · %d oil in the open flask" % roundi(_party.supplies.open_flask) if _party.supplies.open_flask>0 else "")
 		SupplyItem.Effect.LIFT_BANE:
-			for hero in _party.living_members():
-				if hero.has_bane():return "Lifts a curse from "+hero.display_name
+			return "For "+_selected_hero.display_name+" · %d time" % item.use_time if _selected_hero else ""
 	return ""
 
-func _equip_reason(slot: String) -> String:
-	if _selected_hero==null or not _selected_hero.is_alive():return "Needs a conscious hero"
-	var held:Equipment=_selected_hero.get(slot)
+func _equip_reason(slot: String,hero: Companion = null) -> String:
+	if hero==null:hero=_selected_hero
+	if hero==null or hero not in _party.members or not hero.is_alive():return "Needs a conscious hero"
+	var held:Equipment=hero.get(slot)
 	if held and held.curse:return "Cursed · holy water or the nurse can lift it"
 	return ""
 
@@ -569,7 +649,7 @@ func _perform(kind: String) -> void:
 	var h:=_selected_hero
 	match kind:
 		"use":
-			var message:String=_party.use_item(item)
+			var message:String=_party.use_item(item,false,h)
 			if message!="":used.emit(message)
 		"wear":
 			if _equip_reason("trinket")=="":used.emit(_party.wear_treasure(h,item))
@@ -598,6 +678,7 @@ func _perform(kind: String) -> void:
 				_party.supplies.changed.emit()
 				_party.changed.emit()
 			clear_inspection()
+	clear_inspection()
 	_request_refresh()
 
 func _numbers(hero: Companion,weapon: Equipment) -> String:
@@ -656,6 +737,68 @@ func _header_icon(texture: Texture2D,title: String,callback: Callable) -> Button
 		callback.call())
 	return button
 
+func _item_rect(item: Resource,slot: String) -> Rect2:
+	if slot!="" and _slot_buttons.has(slot):
+		return _slot_buttons[slot].get_global_rect()
+	for button in _bag.slots:
+		if button.has_meta("item") and button.get_meta("item")==item and button.get_meta("kit_focus","")==_anchor_focus:
+			return button.get_global_rect()
+	for button in _bag.slots:
+		if button.has_meta("item") and button.get_meta("item")==item:
+			return button.get_global_rect()
+	return Rect2(_bag.global_position+_bag.size*0.5,Vector2.ZERO)
+
+func _leave_preview() -> void:
+	var serial:=_serial
+	await get_tree().create_timer(0.16).timeout
+	if not is_inside_tree() or serial!=_serial or _pinned or _selection==null:
+		return
+	var point:=get_global_mouse_position()
+	var focus:=get_viewport().gui_get_focus_owner()
+	if not _details.get_global_rect().grow(8).has_point(point) and not _anchor_rect.grow(8).has_point(point) and not (focus!=null and _details.is_ancestor_of(focus)):
+		clear_inspection()
+
+func _position_details() -> void:
+	if _selection==null or not is_visible_in_tree():return
+	var serial:=_serial
+	var safe:=content.get_global_rect().grow(-8)
+	_anchor_rect=_item_rect(_selection,_from_slot)
+	var width:=minf(380,safe.size.x)
+	var max_height:=minf(360,safe.size.y)
+	var below:=safe.end.y-_anchor_rect.end.y-8
+	var above:=_anchor_rect.position.y-safe.position.y-8
+	var left:=_anchor_rect.position.x-safe.position.x-8
+	var right:=safe.end.x-_anchor_rect.end.x-8
+	# A hover card must leave its source reachable for clicking and dragging.
+	# In short landscape windows, use the room beside the pocket instead.
+	var beside:=maxf(above,below)<max_height and maxf(left,right)>=200
+	if beside:width=minf(width,maxf(left,right))
+	_details.position=Vector2(-10000,-10000)
+	_details.size=Vector2(width,max_height)
+	# Wrapping must settle at the card's width before measuring its height.
+	await get_tree().process_frame
+	if serial!=_serial or _selection==null:return
+	var height:=minf(max_height,_detail_text.get_combined_minimum_size().y+_detail_column.get_child(0).size.y+_detail_actions.size.y+40)
+	_details.size=Vector2(width,height)
+	var point:=Vector2(_anchor_rect.get_center().x-width*0.5,_anchor_rect.end.y+8)
+	if beside and below<height and above<height:
+		point=Vector2(_anchor_rect.position.x-width-8 if left>=right else _anchor_rect.end.x+8,_anchor_rect.get_center().y-height*0.5)
+	elif point.y+height>safe.end.y:
+		point.y=_anchor_rect.position.y-height-8
+	point.x=clampf(point.x,safe.position.x,maxf(safe.position.x,safe.end.x-width))
+	point.y=clampf(point.y,safe.position.y,maxf(safe.position.y,safe.end.y-height))
+	_details.global_position=point
+	_details.visible=true
+
+func _fit_workspace() -> void:
+	var compact:=content.size.x<820
+	_save.text="Save" if compact else "Save & exit"
+	_save.custom_minimum_size.x=44 if compact else 102
+	_title.text="Kit" if content.size.x<700 else "Field kit"
+	_hero_summary.add_theme_font_size_override("font_size",15 if content.size.x<700 else 17)
+	_hero_panel.size_flags_stretch_ratio=0.7
+	if _selection!=null:_position_details.call_deferred()
+
 func _build() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	mouse_filter=Control.MOUSE_FILTER_STOP
@@ -670,74 +813,92 @@ func _build() -> void:
 	var column:=VBoxContainer.new()
 	column.add_theme_constant_override("separation",8)
 	content.add_child(column)
-	var header:=HBoxContainer.new()
-	header.add_theme_constant_override("separation",8)
-	column.add_child(header)
-	var title:=_label("Field kit",26)
-	title.theme_type_variation="PageTitle"
-	title.size_flags_horizontal=Control.SIZE_EXPAND_FILL
-	title.size_flags_vertical=Control.SIZE_SHRINK_CENTER
-	header.add_child(title)
-	header.add_child(_icon(COIN_ICON,Vector2(20,20)))
+	_header=HBoxContainer.new()
+	_header.add_theme_constant_override("separation",8)
+	column.add_child(_header)
+	_title=_label("Field kit",26)
+	_title.theme_type_variation="PageTitle"
+	_title.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+	_title.size_flags_vertical=Control.SIZE_SHRINK_CENTER
+	_header.add_child(_title)
+	_header.add_child(_icon(COIN_ICON,Vector2(20,20)))
 	_time_label=_label("");_time_label.size_flags_vertical=Control.SIZE_SHRINK_CENTER
-	header.add_child(_time_label)
-	_light_icon=_icon(LANTERN_ICON,Vector2(30,36));header.add_child(_light_icon)
-	var light:=VBoxContainer.new();light.size_flags_vertical=Control.SIZE_SHRINK_CENTER;header.add_child(light)
+	_header.add_child(_time_label)
+	_light_icon=_icon(LANTERN_ICON,Vector2(30,36));_header.add_child(_light_icon)
+	var light:=VBoxContainer.new();light.size_flags_vertical=Control.SIZE_SHRINK_CENTER;_header.add_child(light)
 	_light_title=_label("");_light_title.visible=false;light.add_child(_light_title)
 	_lantern_label=_label("",16);light.add_child(_lantern_label)
 	_lantern_bar=ProgressBar.new();_lantern_bar.show_percentage=false;_lantern_bar.custom_minimum_size=Vector2(98,8)
 	light.add_child(_lantern_bar)
 	_light_note=_label("");_light_note.visible=false;light.add_child(_light_note)
-	var save:=_button("Save & exit",Vector2(102,44));save.pressed.connect(func():save_and_exit.emit());header.add_child(save)
-	header.add_child(_header_icon(JOURNAL_ICON,"Quest journal",func():open_quests.emit()))
-	header.add_child(_header_icon(SETTINGS_ICON,"Settings",func():open_settings.emit()))
-	_close=_header_icon(CLOSE_ICON,"Close pack",func():closed.emit());header.add_child(_close)
-	var workspace:=HBoxContainer.new();workspace.size_flags_vertical=Control.SIZE_EXPAND_FILL
-	workspace.add_theme_constant_override("separation",20);column.add_child(workspace)
-	var left:=VBoxContainer.new();left.size_flags_horizontal=Control.SIZE_EXPAND_FILL;left.size_flags_stretch_ratio=1.0
-	left.add_theme_constant_override("separation",4);workspace.add_child(left)
-	_hero_row=HBoxContainer.new();_hero_row.add_theme_constant_override("separation",6);left.add_child(_hero_row)
-	_hero_summary=_label("",17,FieldKit.MUTED);left.add_child(_hero_summary)
-	var tabs:=HBoxContainer.new();left.add_child(tabs)
+	_save=_button("Save & exit",Vector2(102,44));_save.pressed.connect(func():save_and_exit.emit());_header.add_child(_save)
+	_save.accessibility_name="Save and exit"
+	_header.add_child(_header_icon(JOURNAL_ICON,"Quest journal",func():open_quests.emit()))
+	_header.add_child(_header_icon(SETTINGS_ICON,"Settings",func():open_settings.emit()))
+	_close=_header_icon(CLOSE_ICON,"Close pack",func():closed.emit());_header.add_child(_close)
+	_workspace=HBoxContainer.new();_workspace.size_flags_vertical=Control.SIZE_EXPAND_FILL
+	_workspace.add_theme_constant_override("separation",12);column.add_child(_workspace)
+	_hero_row=VBoxContainer.new();_hero_row.add_theme_constant_override("separation",4);_workspace.add_child(_hero_row)
+	_hero_panel=VBoxContainer.new();_hero_panel.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+	_hero_panel.custom_minimum_size.x=170
+	_hero_panel.add_theme_constant_override("separation",4);_workspace.add_child(_hero_panel)
+	_hero_panel.set_drag_forwarding(Callable(),_can_drop_on_selected,_drop_on_selected)
+	_hero_summary=_wrapped("",17,FieldKit.MUTED);_hero_panel.add_child(_hero_summary)
+	var tabs:=HBoxContainer.new();_hero_panel.add_child(tabs)
 	_equip_tab=_button("Equipment");_equip_tab.toggle_mode=true;_equip_tab.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+	_equip_tab.add_theme_font_size_override("font_size",16)
 	_equip_tab.pressed.connect(set_status.bind(false));tabs.add_child(_equip_tab)
+	_equip_tab.set_drag_forwarding(Callable(),_can_drop_on_selected,_drop_on_selected)
 	_status_tab=_button("Status");_status_tab.toggle_mode=true;_status_tab.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+	_status_tab.add_theme_font_size_override("font_size",16)
 	_status_tab.pressed.connect(set_status.bind(true));tabs.add_child(_status_tab)
-	var panel:=Control.new();panel.size_flags_vertical=Control.SIZE_EXPAND_FILL;left.add_child(panel)
+	_status_tab.set_drag_forwarding(Callable(),_can_drop_on_selected,_drop_on_selected)
+	var panel:=Control.new();panel.size_flags_vertical=Control.SIZE_EXPAND_FILL;_hero_panel.add_child(panel)
+	panel.set_drag_forwarding(Callable(),_can_drop_on_selected,_drop_on_selected)
 	_equipment=Control.new();_equipment.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);panel.add_child(_equipment)
-	_equipment.resized.connect(func():
-		if is_instance_valid(_equipment_slots):_equipment_slots.columns=2 if _equipment.size.y>=145 else 4)
+	_equipment.resized.connect(_fit_equipment)
+	_equipment.set_drag_forwarding(Callable(),_can_drop_on_selected,_drop_on_selected)
 	var roll:=_icon(ROLL,Vector2.ZERO);roll.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);_equipment.add_child(roll)
 	roll.stretch_mode=TextureRect.STRETCH_SCALE
 	roll.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
 	_equipment_slots=GridContainer.new();_equipment_slots.columns=2
 	_equipment_slots.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_equipment_slots.anchor_left=0.02;_equipment_slots.anchor_right=0.98
-	_equipment_slots.anchor_top=0.06;_equipment_slots.anchor_bottom=0.94
+	_equipment_slots.anchor_top=0.0;_equipment_slots.anchor_bottom=1.0
 	_equipment_slots.offset_top=0;_equipment_slots.offset_bottom=0
 	_equipment_slots.add_theme_constant_override("h_separation",6)
 	_equipment_slots.add_theme_constant_override("v_separation",4)
 	_equipment.add_child(_equipment_slots)
 	_status_scroll=ScrollContainer.new();_status_scroll.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_status_scroll.set_drag_forwarding(Callable(),_can_drop_on_selected,_drop_on_selected)
 	_status_scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;_status_scroll.follow_focus=true;panel.add_child(_status_scroll)
 	_status_content=VBoxContainer.new();_status_content.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 	_status_content.add_theme_constant_override("separation",8);_status_scroll.add_child(_status_content)
 	_inventory_scroll=_status_scroll;_injuries=_status_content
-	var right:=Control.new();right.size_flags_horizontal=Control.SIZE_EXPAND_FILL;right.size_flags_stretch_ratio=1.0;workspace.add_child(right)
+	var right:=Control.new();right.size_flags_horizontal=Control.SIZE_EXPAND_FILL;right.size_flags_stretch_ratio=1.3;_workspace.add_child(right)
+	right.custom_minimum_size.x=230
 	_bag=BagView.new();_bag.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);right.add_child(_bag)
+	_bag.offset_bottom=-44;_bag.pocket_focus=true;_bag.clip_contents=true
+	_bag.mouse_filter=Control.MOUSE_FILTER_STOP
+	_bag.set_drag_forwarding(Callable(),_can_drop_on_bag,_drop_on_bag)
 	_bag.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
 	var lower:=HBoxContainer.new();lower.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE);lower.offset_top=-44
 	lower.add_theme_constant_override("separation",8);right.add_child(lower)
 	_capacity=_label("",17);_capacity.size_flags_horizontal=Control.SIZE_EXPAND_FILL;_capacity.size_flags_vertical=Control.SIZE_SHRINK_CENTER;lower.add_child(_capacity)
 	_pages=HBoxContainer.new();lower.add_child(_pages)
-	_details=PanelContainer.new();_details.custom_minimum_size=Vector2(0,116)
-	_details.add_theme_stylebox_override("panel",FieldKit.plate(Color("191d17"),FieldKit.EDGE,8))
-	column.add_child(_details)
-	var detail_row:=HBoxContainer.new();detail_row.add_theme_constant_override("separation",12);_details.add_child(detail_row)
-	_detail_icon=_icon(null,Vector2(56,56));detail_row.add_child(_detail_icon)
-	var detail_scroll:=ScrollContainer.new();detail_scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;detail_scroll.follow_focus=true
-	detail_scroll.size_flags_horizontal=Control.SIZE_EXPAND_FILL;detail_row.add_child(detail_scroll)
-	_detail_text=VBoxContainer.new();_detail_text.size_flags_horizontal=Control.SIZE_EXPAND_FILL;_detail_text.add_theme_constant_override("separation",3);detail_scroll.add_child(_detail_text)
-	_detail_actions=HBoxContainer.new();_detail_actions.size_flags_vertical=Control.SIZE_SHRINK_CENTER
-	_detail_actions.add_theme_constant_override("separation",6);detail_row.add_child(_detail_actions)
+	_details=PanelContainer.new();_details.visible=false
+	_details.add_theme_stylebox_override("panel",FieldKit.plate(Color("191d17"),FieldKit.AMBER,8))
+	add_child(_details)
+	_details.mouse_exited.connect(_leave_preview)
+	_detail_column=VBoxContainer.new();_detail_column.add_theme_constant_override("separation",8);_details.add_child(_detail_column)
+	var detail_header:=HBoxContainer.new();_detail_column.add_child(detail_header)
+	_detail_icon=_icon(null,Vector2(44,44));detail_header.add_child(_detail_icon)
+	_detail_title=_wrapped("",20);_detail_title.size_flags_vertical=Control.SIZE_SHRINK_CENTER;detail_header.add_child(_detail_title)
+	detail_header.add_child(_header_icon(CLOSE_ICON,"Close item details",clear_inspection))
+	_detail_scroll=ScrollContainer.new();_detail_scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;_detail_scroll.follow_focus=true
+	_detail_scroll.size_flags_vertical=Control.SIZE_EXPAND_FILL;_detail_column.add_child(_detail_scroll)
+	_detail_text=VBoxContainer.new();_detail_text.size_flags_horizontal=Control.SIZE_EXPAND_FILL;_detail_text.add_theme_constant_override("separation",6);_detail_scroll.add_child(_detail_text)
+	_detail_actions=HBoxContainer.new();_detail_actions.add_theme_constant_override("separation",6);_detail_column.add_child(_detail_actions)
+	content.resized.connect(_fit_workspace)
+	_fit_workspace.call_deferred()
 	_list=self

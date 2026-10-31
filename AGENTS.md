@@ -346,10 +346,15 @@ Templates > Download and Install; already installed on the owner's PC).
   remain. Escape clears inspection, then closes. Handoff and review:
   `docs/loot-and-merchant-kit.md` (#155). `took`/`closed` remain the chest API.
 - `scripts/pack_screen.gd` + `scripts/kit_bag.gd` – live combined Field kit:
-  Equipment/Status left, shared physical backpack right, pinned inspection below,
-  real stack/capacity pages and explicit actions. Open with the backpack or I/B.
-  PartyState methods keep targeting, gear/curses and supply costs authoritative.
-  Review/checks and earlier-study supersession: `docs/combined-kit-live.md`.
+  portrait rail far left, Equipment/Status beside it, larger shared backpack right.
+  Hover/tap item cards contain descriptions and contextual actions below; long
+  text scrolls. Drag medicine/gear to portraits or the selected hero area; gear
+  also fits its matching slot and returns to the bag. Optional PartyState
+  recipient targets single-hero medicine; omitted retains automatic targeting.
+  Food/light stay shared. Gear/curses, costs, stacks/capacity/pages remain model
+  controlled. Open with backpack or I/B. Current handoff/checks:
+  `docs/contextual-field-kit.md` (#191); earlier `docs/combined-kit-live.md`.
+  `KitBag.pocket_focus` is Pack-only; preserve the default trade framing.
 - `scripts/battle_stage.gd` – authored combat mist surge and low drifting bank
   (#129), viewport-fitted camera quad and static/plain fade when effects are off.
   Preserved source/prompt, exporter and real-renderer review: `docs/combat-fog.md`.

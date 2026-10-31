@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Depths · Backpack and selected hero</title>
+<style>
+body{margin:0;background:#10140f;color:#e6dac1;font:18px/1.5 system-ui,sans-serif}main{max-width:1400px;margin:auto;padding:20px}h1{font:28px Georgia,serif}select,a{color:#e6dac1}select{background:#303027;border:1px solid #66543c;padding:10px;min-height:44px;font:inherit;max-width:100%}img{display:block;width:100%;height:auto;margin:18px 0;border:1px solid #66543c}p{color:#b7ab93}a:focus-visible,select:focus-visible{outline:3px solid #d7b174}
+</style>
+<main><h1>Backpack and selected hero</h1>
+<label for="view">Review view </label><select id="view">
+<option value="equipment-1278-normal.png">Phone · larger backpack and portrait rail</option>
+<option value="inspect-1278-normal.png">Phone · item card with actions below</option>
+<option value="equipment-1278-larger.png">Phone · Larger interface setting</option>
+<option value="inspect-1278-larger.png">Phone · item card · Larger setting</option>
+<option value="equipment-844-normal.png">Compact phone · backpack</option>
+<option value="inspect-844-normal.png">Compact phone · item card</option>
+<option value="equipment-844-larger.png">Compact phone · Larger setting</option>
+<option value="inspect-844-larger.png">Compact phone · item card · Larger setting</option>
+<option value="equipment-1334-normal.png">Wide phone · backpack</option>
+<option value="inspect-1334-normal.png">Wide phone · item card</option>
+<option value="equipment-1334-larger.png">Wide phone · Larger setting</option>
+<option value="inspect-1334-larger.png">Wide phone · item card · Larger setting</option>
+<option value="equipment-1280-normal.png">Desktop · backpack</option>
+<option value="inspect-1280-normal.png">Desktop · item card</option>
+<option value="equipment-1280-larger.png">Desktop · Larger setting</option>
+<option value="inspect-1280-larger.png">Desktop · item card · Larger setting</option>
+<option value="unavailable-phone.png">Unavailable treatment · visible reason</option>
+<option value="long-description-phone.png">Long description · scrollable body, fixed actions</option>
+<option value="status-phone.png">Status · selected hero and shared bag</option>
+</select>
+<img id="capture" src="equipment-1278-normal.png" alt="Actual Godot capture: a portrait rail, selected hero equipment, and a larger physical backpack">
+<p>Actual Godot Mobile renderer captures using three heroes and real inventory. Hover or tap opens an item card in the game; the selector above switches saved views. Mouse and touch gestures are checked, including medicine dragged to a portrait or the selected hero area. Physical iPhone testing remains separate.</p>
+<p><a href="../../../../docs/contextual-field-kit.md">Current interface handoff</a> · <a href="validation.json">Recorded checks</a> · <a href="../combined-live-v1/inspector.html">Earlier layout</a></p>
+</main><script>
+const picker=document.getElementById('view'),capture=document.getElementById('capture');
+picker.addEventListener('change',()=>{capture.src=picker.value;capture.alt=picker.selectedOptions[0].textContent});
+</script></html>

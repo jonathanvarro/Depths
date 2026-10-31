@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-31 – ChatGPT
+- Did: Simplified live Field kit (#191): larger backpack, far-left portrait selection, full selected identity once, and hover/tap item cards with contextual actions below the brief. Long descriptions scroll; cards leave their source reachable and stay hidden during drags. Added selected-hero draught/dressing/holy-water targeting through optional PartyState recipients, preserving default callers and shared food/light effects. Extended Claude's committed gear dragging to medicine, portraits and the hero area with stale/foreign-payload guards. Review: `art/concepts/interface/pack-context-v1/inspector.html`; handoff: `docs/contextual-field-kit.md`.
+- Next: Owner reviews the updated layout; physical iPhone usability remains #66. Potion throwing would need its own gameplay implementation.
+- Watch out: `479112d` was committed by Claude during this task; its gear rules are retained. Chest/merchant framing is unchanged. Context/Pack/Main/exchange and back/trinket/drag checks pass; existing Main teardown resource warnings remain. No player save/settings used by the new fixture. Unrelated generated roamers/map-fights UIDs are left out of this change.
+
 ## 2026-10-31 – Claude (drag and drop)
 - Did: Pack drag and drop (owner request). Drag gear (or a valuable worn as a trinket) from the bag onto its slot to put it on; drag it from a slot back to the bag to take it off. It goes through the same `_perform("equip"/"wear"/"unequip")` and reasons as the buttons. Uses `set_drag_forwarding` on the bag tiles, slot buttons and slot boxes (empty slot buttons are disabled). Checked by `tools/pack_drag_check.gd`.
 - Next: none required. Chest/merchant (kit_exchange) drag is unchanged.

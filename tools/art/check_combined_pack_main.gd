@@ -1,7 +1,7 @@
 extends SceneTree
 ## Shipping Main integration with a private fixture slot, no owner save/settings.
 const SAVE:=preload("res://scripts/save_game.gd")
-const OUT:="res://art/concepts/interface/combined-live-v1/"
+const OUT:="res://build/pack-context-check/"
 var checks:=0
 var failures:Array[String]=[]
 var captures:Array[String]=[]
@@ -21,11 +21,13 @@ func settle() -> void:
 	for i in 10:await process_frame
 
 func snap(name:String) -> void:
+	if DisplayServer.get_name()=="headless":return
 	await settle();await RenderingServer.frame_post_draw
 	check(root.get_texture().get_image().save_png(OUT+name+".png")==OK,"Capture "+name)
 	captures.append(name+".png")
 
 func run() -> void:
+	DirAccess.make_dir_recursive_absolute(OUT)
 	for shape in [Vector2i(1280,720),Vector2i(1278,590)]:
 		root.size=shape
 		var main=load("res://scenes/main.tscn").instantiate()
