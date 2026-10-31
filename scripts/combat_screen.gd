@@ -337,7 +337,7 @@ func _enemy_action(foe) -> void:
 	if outcome.get("fled", false):
 		await _fade_out(foe)
 		return
-	_play(foe, "attack", 0.4)
+	_play(foe, _action_pose(foe, intent, outcome), 0.4)
 	if outcome.get("drained", false):
 		# A lamp-eater drinks the light (#141's pop, over the held light).
 		_fx.icon(Vector2(size.x * 0.66, size.y * 0.78), LIGHT_DRAINED, 56.0)
@@ -396,10 +396,23 @@ func _show_enemy_outcome(foe, intent: int, outcome: Dictionary, was_webbed: Dict
 	_show_health_changes()
 
 
+## The pose for what a foe just did: the Underhound's lunge, the Borrowed
+## Pack staggering, the Shepherd giving birth; an attack otherwise.
+func _action_pose(foe, intent: int, outcome: Dictionary) -> String:
+	if foe.type.tactic == EnemyType.Tactic.HYDRA and foe.staggered:
+		return "off-balance"
+	match intent:
+		CombatState.Intent.REACH: return "lunge"
+		CombatState.Intent.BIRTH: return "birthing"
+	return "attack"
+
+
 func _play(foe, animation: String, seconds: float) -> void:
 	var sprite: AnimatedSprite3D = foe.node.get_node_or_null("Sprite") if foe.node else null
 	if sprite == null:
 		return
+	if not sprite.sprite_frames.has_animation(animation):
+		animation = "attack"
 	_busy[foe] = true
 	sprite.play(animation)
 	await get_tree().create_timer(seconds).timeout
@@ -454,6 +467,13 @@ func _rest_pose(foe, sprite: AnimatedSprite3D) -> String:
 			pose = {CombatState.Intent.RALLY: "rally", CombatState.Intent.HEAVY: "wind-up"}.get(foe.intent, "idle")
 		EnemyType.Tactic.BROOD:
 			pose = "enraged" if foe.enraged else ("call" if foe.intent == CombatState.Intent.BROOD else "idle")
+		# Slice 2's deep monsters (#166's families).
+		EnemyType.Tactic.LUNGER:
+			pose = "windup" if foe.intent == CombatState.Intent.REACH else "idle"
+		EnemyType.Tactic.HYDRA:
+			pose = "off-balance" if foe.staggered else "idle"
+		EnemyType.Tactic.SHEPHERD:
+			pose = "birthing" if foe.intent == CombatState.Intent.BIRTH else "tending"
 	return pose if sprite.sprite_frames.has_animation(pose) else "idle"
 
 
@@ -468,6 +488,10 @@ func _fade_out(foe) -> void:
 		sprite.play("burst")
 		_gas_cloud()
 		await get_tree().create_timer(0.35).timeout
+	elif sprite and sprite.sprite_frames.has_animation("defeated") and foe.health <= 0:
+		_busy[foe] = true  # the newer families collapse before they fade (#166)
+		sprite.play("defeated")
+		await get_tree().create_timer(0.5).timeout
 	if sprite:
 		var tween := create_tween()
 		tween.tween_property(sprite, "modulate:a", 0.0, 0.4)

@@ -12,5 +12,5 @@ max_depth = 5
 quest = "dry_passage"
 stages = Array[int]([0, 1, 2])
 unless_flags = PackedStringArray("opened")
-rows = PackedStringArray("#######", "#,,,,,#", "#,,1,,#", "#,,,,,#", "###.###")
+rows = PackedStringArray("#######", "#,,1,,#", "#,,,,,#", "#,,,,,#", "###.###")
 events = Array[ExtResource("event_script")]([ExtResource("e0")])

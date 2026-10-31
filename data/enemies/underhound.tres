@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/enemy_type.gd" id="type"]
 [ext_resource type="Script" path="res://scripts/injury.gd" id="injury_script"]
 [ext_resource type="Resource" path="res://data/injuries/deep_wound.tres" id="wound"]
-[ext_resource type="PackedScene" path="res://art/enemies/monsters-v1/breach-hound/scene.tscn" id="scene"]
+[ext_resource type="PackedScene" path="res://art/enemies/underhound-v2/scene.tscn" id="scene"]
 
 [resource]
 script = ExtResource("type")
@@ -21,5 +21,3 @@ tactic = 19
 intro = "An Underhound: it bites, then its jaw slides forward for a long lunge that reaches the back row. Defending blunts it."
 loot_line = "In the Underhound's wake, among bones that were never quite its own: %s."
 threat = 4
-tint = Color(0.82, 0.9, 0.84, 1)
-sprite_scale = 1.1

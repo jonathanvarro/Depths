@@ -638,7 +638,7 @@ func _build_level() -> void:
 	add_child(_level)
 	_add_room_props()
 	for cell in _map.water:  # floor 5's deep water (placeholder art, #166)
-		_level.add_child(Galleries.water_plane(cell, CELL_SIZE))
+		_level.add_child(Galleries.water_surface(cell, CELL_SIZE, Settings.get_value("flashes")))
 	if _depth == OPENING_DEPTH and _in_opening:
 		_add_opening_dressing()
 	elif _depth == OUTSKIRTS_DEPTH and not use_debug_layout:
@@ -781,6 +781,8 @@ func _run_event(cell: Vector2i) -> void:
 		await _drain_galleries(cell)
 	if Quests.has_flag(_camp_state, "reservoir", "touched") and not Quests.has_flag(_camp_state, "reservoir", "vision_shown"):
 		await _stonework_vision()
+	if Quests.has_flag(_camp_state, "keeper", "helped") and not Quests.has_flag(_camp_state, "keeper", "heard"):
+		await _keeper_talk()
 	if _in_opening and cell in _opening_body_cells():
 		_searched_bodies[cell] = true
 		_say("search_body", true)
@@ -1422,6 +1424,8 @@ func _create_room_prop(cell: Vector2i,event: RoomEvent) -> Node3D:
 					break
 		if node.has_method("mount_in_cell"):
 			node.mount_in_cell(_map, cell, CELL_SIZE)
+		if node.has_method("set_motion"):  # the stonework's slow pulse (#168)
+			node.set_motion(Settings.get_value("flashes"))
 		_level.add_child(node)
 		_props[cell] = node
 	return node
@@ -1898,6 +1902,15 @@ The Black Reservoir, floor 6, is open.",
 				"Continue")
 	await _results.continue_pressed
 	_results.visible = false
+	_party.locked = false
+
+
+## The wounded keeper reads the map (floor 5), with her own portrait (#166).
+func _keeper_talk() -> void:
+	Quests.set_flag(_camp_state, "keeper", "heard")
+	_party.locked = true
+	var lead: Companion = _party_state.living_members()[0] if not _party_state.living_members().is_empty() else _party_state.members[0]
+	await _conversation.play(Story.conversation("keeper_talk"), lead, _camp_state, _party_state.members)
 	_party.locked = false
 
 

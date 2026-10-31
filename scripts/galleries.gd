@@ -18,7 +18,13 @@ const STRETCH := Vector2i(3, 7)
 const WADE_TIME := 1
 const WADE_STRAIN := 1.5
 const WADE_TORCH_SOAK := 2
-const WATER_COLOR := Color(0.05, 0.12, 0.16, 0.85)
+const WATER_COLOR := Color(0.05, 0.12, 0.16, 0.85)  # the placeholder pool
+## ChatGPT's #166 art: deep water, wet slate walls, drowned masonry.
+const DEEP_WATER := preload("res://art/textures/drowned-water-v1/deep.tscn")
+const WET_WALL := preload("res://art/textures/waterworks-v1/wet-plain.tres")
+const WET_WALL_VARIANT := preload("res://art/textures/waterworks-v1/wet-channelled.tres")
+const DROWNED_FLOOR := preload("res://art/textures/descent-surfaces-v1/drowned-masonry-floor.tres")
+const DROWNED_CEILING := preload("res://art/textures/descent-surfaces-v1/drowned-masonry-ceiling.tres")
 
 
 ## Floods stretches of the floor's passages (corridor cells, not rooms,
@@ -61,23 +67,36 @@ static func _floodable(map, cell: Vector2i) -> bool:
 	return cell != map.start_cell
 
 
-## The galleries' look until #166/#168's art: the cave's surfaces, cold and
-## wet; the reservoir darker still.
+## The galleries' look (#166): wet slate walls, drowned masonry floors and
+## ceilings, full-face wall tiles. The reservoir uses them darker until
+## #168's own surfaces land.
 static func theme_from(cave: EnvironmentTheme, depth := DEPTH) -> EnvironmentTheme:
 	var theme: EnvironmentTheme = cave.duplicate()
 	theme.display_name = "The Black Reservoir" if depth >= RESERVOIR else "The Drowned Galleries"
-	var tint := Color(0.55, 0.68, 0.8) if depth >= RESERVOIR else Color(0.7, 0.85, 0.95)
-	for slot in ["wall_material", "wall_variant_material", "floor_material", "ceiling_material"]:
-		var material = theme.get(slot)
-		if material is BaseMaterial3D:
-			var wet: BaseMaterial3D = material.duplicate()
-			wet.albedo_color = wet.albedo_color * tint
-			wet.roughness = minf(wet.roughness, 0.45)
-			theme.set(slot, wet)
+	theme.wall_material = WET_WALL
+	theme.wall_variant_material = WET_WALL_VARIANT
+	theme.floor_material = DROWNED_FLOOR
+	theme.ceiling_material = DROWNED_CEILING
+	theme.wall_face_uv = true
+	if depth >= RESERVOIR:
+		for slot in ["wall_material", "wall_variant_material", "floor_material", "ceiling_material"]:
+			var material = theme.get(slot)
+			if material is BaseMaterial3D:
+				var dark: BaseMaterial3D = material.duplicate()
+				dark.albedo_color = dark.albedo_color * Color(0.72, 0.78, 0.86)
+				theme.set(slot, dark)
 	return theme
 
 
-## A placeholder pool surface over a flooded cell.
+## ChatGPT's deep water over a flooded cell (#166). `animate` false holds it
+## still (screen effects off).
+static func water_surface(cell: Vector2i, cell_size: float, animate: bool) -> Node3D:
+	var surface = DEEP_WATER.instantiate()
+	surface.configure(cell, cell_size, animate)
+	return surface
+
+
+## The plain placeholder pool, kept for reference.
 static func water_plane(cell: Vector2i, cell_size: float) -> MeshInstance3D:
 	var mesh := PlaneMesh.new()
 	mesh.size = Vector2(cell_size, cell_size)

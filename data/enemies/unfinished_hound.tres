@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/enemy_type.gd" id="type"]
 [ext_resource type="Script" path="res://scripts/injury.gd" id="injury_script"]
 [ext_resource type="Resource" path="res://data/injuries/deep_wound.tres" id="wound"]
-[ext_resource type="PackedScene" path="res://art/enemies/monsters-v1/breach-hound/scene.tscn" id="scene"]
+[ext_resource type="PackedScene" path="res://art/enemies/unfinished-hound-v1/scene.tscn" id="scene"]
 
 [resource]
 script = ExtResource("type")
@@ -21,5 +21,3 @@ tactic = 16
 intro = "Born half-made from the Shepherd's cage. Weak alone, it hits harder while another of its pack stands."
 loot_line = "%s, among the unfinished hound's remains."
 threat = 1
-tint = Color(0.96, 0.84, 0.8, 1)
-sprite_scale = 0.75

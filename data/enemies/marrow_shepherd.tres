@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/enemy_type.gd" id="type"]
 [ext_resource type="Script" path="res://scripts/injury.gd" id="injury_script"]
 [ext_resource type="Resource" path="res://data/injuries/deep_wound.tres" id="wound"]
-[ext_resource type="PackedScene" path="res://art/enemies/monsters-v1/hollow-miner/scene.tscn" id="scene"]
+[ext_resource type="PackedScene" path="res://art/enemies/marrow-shepherd-v1/scene.tscn" id="scene"]
 [ext_resource type="Resource" path="res://data/enemies/unfinished_hound.tres" id="summons"]
 
 [resource]
@@ -22,6 +22,4 @@ tactic = 21
 intro = "The Marrow Shepherd: every other turn it births an unfinished hound from the bone cage on its back - three in all. Kill it before the cage empties."
 loot_line = "Tangled in the Marrow Shepherd's bone cage: %s."
 threat = 8
-tint = Color(0.92, 0.9, 0.8, 1)
-sprite_scale = 1.35
 summons = ExtResource("summons")

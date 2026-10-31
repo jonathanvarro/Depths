@@ -68,6 +68,9 @@ func _initialize() -> void:
 	var map = main._map
 	check("floor 5 is the Drowned Galleries", main.environment_theme.display_name == "The Drowned Galleries" and main._deepest_open() == 5, main.environment_theme.display_name)
 	check("its passages run deep with water", map.water.size() >= 8, map.water.size())
+	check("ChatGPT's wet walls and drowned floors (#166)", main.environment_theme.wall_material == Galleries.WET_WALL and main.environment_theme.floor_material == Galleries.DROWNED_FLOOR and main.environment_theme.wall_face_uv)
+	check("...and deep water over each flooded cell", main._level.find_children("*", "", true, false).filter(func(n): return n.has_method("set_motion") and n.has_method("configure")).size() == map.water.size())
+	check("the keeper speaks with her own portrait", Story.conversation("keeper_talk") != null and Story.conversation("keeper_talk").portrait != null)
 	check("...only passages: no rooms, doors or anything in them", map.water.keys().all(func(c): return not map._is_room_cell(c) and not map.doors.has(c) and map.content_at(c) == DungeonMap.Content.NONE))
 	check("no way further down yet", map.find_content(DungeonMap.Content.STAIRS_DOWN) == Vector2i(-1, -1))
 	var sluice_cell := Vector2i(-1, -1)

@@ -12,5 +12,5 @@ max_depth = 6
 quest = "reservoir"
 stages = Array[int]([0, 1, 2])
 unless_flags = PackedStringArray("diverted")
-rows = PackedStringArray("#######", "#,,,,,#", "#,,1,,#", "#,,,,,#", "###.###")
+rows = PackedStringArray("#######", "#,,1,,#", "#,,,,,#", "#,,,,,#", "###.###")
 events = Array[ExtResource("event_script")]([ExtResource("e0")])

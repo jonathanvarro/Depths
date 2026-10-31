@@ -9,7 +9,7 @@
 
 [sub_resource type="Resource" id="o0_0"]
 script = ExtResource("outcome")
-text = "She drinks, grimacing, and the colour comes back to her face. Then she asks for the map you carry, and reads the strange marks over your party's route as easily as her own hand.\n\n\"Ours. We watched your vanguard come down, and we stopped them. What sleeps below must stay asleep.\" She meets your eyes. \"I would do it again.\""
+text = "She drinks, grimacing, and the colour comes back to her face. Then she holds out her hand for the map you carry."
 quest = "keeper"
 quest_flag = "helped"
 quest_stage = 3
@@ -23,7 +23,7 @@ outcomes = Array[ExtResource("outcome")]([SubResource("o0_0")])
 
 [sub_resource type="Resource" id="o1_0"]
 script = ExtResource("outcome")
-text = "She lets you bind it, watching your hands the whole time. Then she asks for the map you carry, and reads the strange marks over your party's route as easily as her own hand.\n\n\"Ours. We watched your vanguard come down, and we stopped them. What sleeps below must stay asleep.\" She meets your eyes. \"I would do it again.\""
+text = "She lets you bind it, watching your hands the whole time. Then she holds out her hand for the map you carry."
 quest = "keeper"
 quest_flag = "helped"
 quest_stage = 3

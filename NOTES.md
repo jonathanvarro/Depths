@@ -13,6 +13,16 @@ Format:
 
 ---
 
+## 2026-10-30 – Claude
+- Did: Connected #166/#168 art.
+  - **Floor 5:** wet-plain/channelled walls, drowned masonry floor/ceiling, full-face UVs; floor 6 uses the same set, darker. Deep-water scene on every flooded cell, still when screen effects are off.
+  - **Props on real walls:** the sluice, flow gate and stonework (its pulse also follows screen effects). Their packages now put the event cell against the back wall.
+  - **Monsters:** Underhound v2, Borrowed Pack, Marrow Shepherd and unfinished hound, with placeholder tint/scale reset. Pose mapping: windup/lunge (LUNGER), off-balance (HYDRA, via the new `Foe.staggered`), tending/birthing (SHEPHERD), and `defeated` before the fade.
+  - **The keeper:** speaks in a short talk with her map-reading portrait (`keeper_talk.tres`).
+  - Also: recorded the owner's expedition-loop decisions (DESIGN.md "The expedition loop", #171-#177; art request #178). Tests now run headless via `tools/run_checks.sh` (da40753).
+- Next: Claude starts the expedition loop (#171-#177). Still open from #166/#168: waterworks dressing placement, reservoir-specific surfaces, the vision still, the ending illustration, the stairs and intent icons. The keeper's animated PortraitView in conversations is not done (static fallback for now).
+- Watch out: `Galleries.water_plane()` stays as the old placeholder; `water_surface()` is live. The fight shows a monster's own art only when the scene has the pose; otherwise it falls back to `attack`.
+
 ## 2026-10-29 – ChatGPT
 - Did: Created #166's Marrow Shepherd six-pose native192 family and unfinished hound's three native128 poses, sharing a fixed32-colour palette, plus #168's registered chain-hoisted flow gate pair. Twelve built-in ImageGen masters, per-image exact prompts, originals and reference hashes retained. Review: art/concepts/shepherd-gate-v1/inspector.html; hookup: docs/shepherd-and-flow-gate.md.
 - Next: Owner reviews the batch; Claude connects scene resources, SHEPHERD tending/birthing/defeated presentation and flow-gate resolved/wall placement. Reset/review old placeholder tint/scales. Existing combat/spawn/drain/quest/save timing stays authoritative. Intent/status symbols and remaining reservoir surfaces/open water/vision/ending/stairs remain separate.

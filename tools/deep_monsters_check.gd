@@ -91,6 +91,19 @@ func _initialize() -> void:
 	check("the Marrow Shepherd keeps a lair on floor 6", "lair_shepherd" in lairs)
 	check("...and nowhere shallower", not range(1, 6).any(func(d): return Packages.library().any(func(p): return p.id == "lair_shepherd" and d >= p.min_depth and d <= p.max_depth)))
 
+	# ChatGPT's families (#166) carry every pose the fight asks for.
+	var poses := {"underhound": ["idle", "attack", "hurt", "windup", "lunge", "defeated"],
+			"borrowed_pack": ["idle", "attack", "hurt", "off-balance", "defeated"],
+			"marrow_shepherd": ["idle", "tending", "birthing", "attack", "hurt", "defeated"],
+			"unfinished_hound": ["idle", "attack", "hurt"]}
+	for id in poses:
+		var type: EnemyType = load("res://data/enemies/%s.tres" % id)
+		var node: Node3D = type.scene.instantiate()
+		var frames: SpriteFrames = node.get_node("Sprite").sprite_frames
+		var missing: Array = poses[id].filter(func(p): return not frames.has_animation(p))
+		check("%s: its own art, every pose, no placeholder tint" % type.display_name, missing.is_empty() and type.tint == Color.WHITE and is_equal_approx(type.sprite_scale, 1.0), missing)
+		node.free()
+
 	# The combat screen shows their moves.
 	var screen = load("res://scripts/combat_screen.gd").new()
 	check("every new move has a mark", [I.REACH, I.BITES, I.BIRTH].all(func(i): return screen._intent_icon(i) != null))

@@ -160,6 +160,7 @@ class Foe:
 	var elite := ""  # "Hardened", "Savage", "Swift" or "Venomous" (#140)
 	var curled := false  # rock beetle: blows barely scratch it until its next turn
 	var heads := 0  # Borrowed Pack: heads still biting (slice 2)
+	var staggered := false  # Borrowed Pack: lost a head this turn (its pose)
 
 	func in_back() -> bool:
 		return (row_override if row_override != "" else type.row) == "back"
@@ -660,10 +661,12 @@ func enemy_act(foe: Foe) -> Dictionary:
 		_dazzled.erase(foe)
 		return {"target": null, "hit": false, "damage": 0, "injury": null,
 				"text": "The %s reels from the glare, eyes screwed shut." % foe.name.to_lower()}
+	foe.staggered = false
 	if foe.type.tactic == EnemyType.Tactic.HYDRA:
 		var left := clampi(ceili(float(HYDRA_HEADS) * foe.health / maxi(1, foe.type.max_health)), 1, HYDRA_HEADS)
 		if left < foe.heads:  # a head died since its last turn
 			foe.heads = left
+			foe.staggered = true
 			return {"target": null, "hit": false, "damage": 0, "injury": null,
 					"text": "One of the %s's heads hangs dead, and its weight drags the others off balance." % foe.name.to_lower()}
 	var acted := foe.intent
