@@ -112,6 +112,16 @@ House of Necrosis was used as a reference: you grow strong during a run, grow at
   - About 6–9 people met at camp over time, each with a class, a face, a trait and lines. Memories carry over.
   - A death is permanent by default, but **the nurse can attempt a resurrection** (details to decide) if too many are lost. That gives the nurse a real job.
 
+**Phase 1, monsters on the map — built 2026-10-31** (`scripts/roamers.gd`, `tools/map_fights_check.gd`):
+- **On the map:** each ordinary room fight stands in its room as its leader's sprite. Lairs, quest fights and the fortress's set fights keep the old trigger.
+- **Noticing:** a group notices the party by sight (a straight, open line; 1, 2, 4 or 5 cells by the light, from out to bright) or when the party walks into its room.
+- **Closing in:** once it has noticed, it closes **one cell per beat** (a step or **Wait**: Space, the period key, or the pad's Wait button). Turning is free.
+- **Fighting:** beside the party, the fight begins (still on the battle stage in phase 1). Walking up to a group that hasn't seen you means **you strike first**.
+- **Wanderers** appear 5–8 steps off, out of sight if possible, already on the trail.
+- **After a fight:** a beaten group is gone. One you ran from goes home unaware, and a wanderer loses the trail.
+- **Not in phase 1:** the Scout's "heard first" choice (that awareness moves to the Scout class, #179), and monsters on the minimap.
+- **Switching it off:** `Main.fights_on_map` turns it off; four older checks do this to test the old room fights.
+
 **Built straight into the game,** not as a separate prototype. The owner judges the on-map fights after playing them.
 
 ## Map and dungeon progression

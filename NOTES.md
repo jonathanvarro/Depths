@@ -13,6 +13,16 @@ Format:
 
 ---
 
+## 2026-10-31 – Claude
+- Did: #171 phase 1, monsters on the map (`scripts/roamers.gd`; main.gd "Fights on the map" section).
+  - Room fights stand in their rooms and notice by sight or room entry.
+  - Noticed groups close in one cell per beat (step or the new Wait); beside the party, the fight begins on the stage.
+  - Walking up to an unaware group means striking first; wanderers spawn out of sight and hunt.
+  - `fights_on_map` false restores the old trigger; heard/landmarks/traps/wanderers checks use it.
+  - Also recorded the party-as-one-unit decisions (DESIGN.md; #179 classes, #180 named cast, #181 art).
+- Next: Phase 2: the fight stays in the corridor, with unit actions, direction-based rows, rear damage, marked danger tiles and moving mid-fight.
+- Watch out: groups aren't saved; a load puts room groups back home and drops wanderers. The campaign bot doesn't know about map fights yet.
+
 ## 2026-10-30 – Claude
 - Did: Connected #166/#168 art.
   - **Floor 5:** wet-plain/channelled walls, drowned masonry floor/ceiling, full-face UVs; floor 6 uses the same set, darker. Deep-water scene on every flooded cell, still when screen effects are off.

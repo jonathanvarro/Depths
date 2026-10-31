@@ -35,6 +35,7 @@ func _initialize() -> void:
 	# In the game: a floor with a trap, and Mara without keen eyes.
 	var main = load("res://scenes/main.tscn").instantiate()
 	main.play_opening = false
+	main.fights_on_map = false  # tests the old room fights (#171 has its own check)
 	main.floor_seed = 21
 	root.add_child(main)
 	await create_timer(0.5).timeout

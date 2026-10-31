@@ -30,6 +30,7 @@ func _initialize() -> void:
 	for seed in [11, 23, 57]:
 		var main = load("res://scenes/main.tscn").instantiate()
 		main.play_opening = false
+		main.fights_on_map = false  # tests the old room fights (#171 has its own check)
 		main.floor_seed = seed
 		root.add_child(main)
 		await create_timer(0.4).timeout

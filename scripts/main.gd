@@ -29,6 +29,7 @@ const SafeArea := preload("res://scripts/safe_area.gd")
 const OpeningGenerator := preload("res://scripts/opening_generator.gd")
 const Wanderers := preload("res://scripts/wanderers.gd")
 const Galleries := preload("res://scripts/galleries.gd")
+const Roamers := preload("res://scripts/roamers.gd")
 const DialogueBox := preload("res://scripts/dialogue_box.gd")
 ## Seconds between unprompted lines, so heroes don't chatter (#57).
 const SPEECH_COOLDOWN := 6.0
@@ -240,6 +241,7 @@ const KEY_BINDINGS := {
 	"toggle_debug": [KEY_F3],
 	"toggle_map": [KEY_M, KEY_TAB],
 	"toggle_pack": [KEY_I, KEY_B],
+	"wait": [KEY_SPACE, KEY_PERIOD],  # a beat passes (#171)
 	"debug_hurt": [KEY_H],  # only while the F3 overlay is open
 	"debug_heal": [KEY_J],
 	"debug_injure": [KEY_K],
@@ -339,6 +341,12 @@ var _fight_kind := ""  # "gate" or "queen" while those fights run (#44)
 ## walk a floor for something else can turn them off.
 var _wanderers := Wanderers.new()
 var wandering := true
+## Fights on the map (#171, trial): monsters stand and move on the map.
+## Checks that walk into rooms for something else can turn it off.
+var fights_on_map := true
+var _groups: Array = []  # Roamers.Group on this floor
+var _roamer_root: Node3D
+var _engaged = null  # the Roamers.Group being fought
 var _props := {}  # cell -> prop node for this floor's room contents (#46)
 var _cell_now := Vector2i(-1, -1)
 var _cell_before := Vector2i(-1, -1)  # where to step back to from the hall's door
@@ -543,6 +551,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		_party_state.members[0].change_strain(20.0)
 	elif _debug_label.visible and event.is_action_pressed("debug_injure") and not _party_state.members.is_empty():
 		_party_state.members[0].add_injury(DEBUG_INJURIES.pick_random())
+	elif event.is_action_pressed("wait"):
+		_wait()
 	elif event.is_action_pressed("toggle_map"):
 		_set_full_map(not _full_map.visible)
 	elif _full_map.visible and event.is_action_pressed("ui_cancel"):
@@ -613,6 +623,7 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 	elif arrival == Arrival.FROM_BELOW:
 		cell = _map.find_content(DungeonMap.Content.STAIRS_DOWN)
 	_party.place(_map, cell)
+	_spawn_room_groups()
 	if _in_opening:
 		pass  # the wake-up shows the opening line once the bodies are in view
 	elif arrival == Arrival.OPENING and not use_debug_layout:
@@ -662,6 +673,8 @@ func _make_layout(depth: int) -> PackedStringArray:
 func _on_party_entered_cell(cell: Vector2i) -> void:
 	_look_for_traps(cell)
 	_wade(cell)
+	if _map_beat(cell):
+		return  # a fight began on the map (#171)
 	_banter()
 	# A landmark (#117): named the first time, marked on the map from then on.
 	var landmark: Dictionary = Landmarks.at_cell(_map, cell)
@@ -685,6 +698,8 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 		return
 	# A fight fills its room: entering any part of it starts the fight.
 	var fight_cell: Vector2i = _map.encounter_zones.get(cell, Vector2i(-1, -1))
+	if _group_at_home(fight_cell) != null:
+		fight_cell = Vector2i(-1, -1)  # it stands on the map instead (#171)
 	if fight_cell != Vector2i(-1, -1) and not _map.triggered.has(fight_cell) and _map.lairs.has(fight_cell):
 		var lair: QuestPackage = Packages.find(_map.lairs[fight_cell])
 		if lair:  # a mini-boss's lair (#145): warned, and free to back away
@@ -703,6 +718,8 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 		fixed.assign(_map.fight_groups.get(fight_cell, []))
 		_start_combat(fight_cell, fixed)
 		return
+	if _group_at_home(cell) != null:
+		return  # a room fight's empty spot, its monsters out hunting (#171)
 	var content: int = _map.enter(cell)
 	match content:
 		DungeonMap.Content.NONE:
@@ -866,6 +883,7 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 	match result:
 		CombatState.Result.VICTORY:
 			_party.locked = false
+			_map_fight_over(true)
 			if spoils.is_empty():
 				_show_message("The way is clear.")
 			match _fight_kind:
@@ -883,6 +901,7 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 		CombatState.Result.RETREAT:
 			_party.locked = false
 			_map.triggered.erase(cell)  # they're still there, at full strength
+			_map_fight_over(false)
 			_expedition.retreats += 1
 			_flee_from(cell)
 			if _in_opening:
@@ -1054,6 +1073,159 @@ func _remember_the_fallen() -> void:
 	for lost in rows.filter(func(r): return not r["back"]):
 		for row in rows.filter(func(r): return r["back"]):
 			row["hero"].remember("lost", "Was there when %s fell" % lost["hero"].display_name, _camp_state.day, lost["hero"].display_name)
+
+
+# --- Fights on the map, phase 1 (#171; DESIGN.md "The expedition loop") ----
+
+const ROAM_STEP_TIME := 0.22
+
+func _map_fights_active() -> bool:
+	return fights_on_map and not _in_opening and not use_debug_layout and _map != null
+
+
+## The room fights on this floor, standing in their rooms.
+func _spawn_room_groups() -> void:
+	_clear_groups()
+	if not _map_fights_active():
+		return
+	var size := maxi(1, _party_state.living_members().size())
+	for group in Roamers.room_groups(_map, func(_c): return encounter_pool(_depth, size).pick_random()):
+		_place_group(group)
+
+
+func _clear_groups() -> void:
+	for group in _groups:
+		if is_instance_valid(group.node):
+			group.node.queue_free()
+	_groups.clear()
+	_engaged = null
+	if _roamer_root == null:
+		_roamer_root = Node3D.new()
+		_roamer_root.name = "Roamers"
+		add_child(_roamer_root)
+
+
+func _place_group(group) -> void:
+	_groups.append(group)
+	_show_group(group)
+
+
+## Its leader's sprite stands in its cell.
+func _show_group(group) -> void:
+	if is_instance_valid(group.node):
+		group.node.queue_free()
+	var node: Node3D = group.types[0].scene.instantiate()
+	_dress_foe(node, group.types[0])
+	node.position = Vector3(group.cell.x * CELL_SIZE, 0.0, group.cell.y * CELL_SIZE)
+	_roamer_root.add_child(node)
+	group.node = node
+
+
+func _group_at_home(cell: Vector2i):
+	for group in _groups:
+		if group.home == cell:
+			return group
+	return null
+
+
+## A wanderer appears out of sight, already on the party's trail.
+func _spawn_wanderer() -> void:
+	var taken := {}
+	for group in _groups:
+		taken[group.cell] = true
+	var spot: Vector2i = Roamers.spawn_cell(_map, _party.cell, _rng, taken)
+	if spot == Roamers.NOWHERE:
+		return
+	var group := Roamers.Group.new()
+	group.cell = spot
+	group.noticed = true
+	group.types.assign(encounter_pool(_depth, maxi(1, _party_state.living_members().size())).pick_random())
+	_place_group(group)
+
+
+## A beat on the map: they notice, they close in, and a fight begins if
+## one reaches the party. True when a fight began.
+func _map_beat(party_cell: Vector2i) -> bool:
+	if not _map_fights_active() or _in_combat or _groups.is_empty():
+		return false
+	# Walked right up to one that hadn't seen you: you strike first.
+	for group in _groups:
+		if not group.noticed and Roamers.adjacent(group.cell, party_cell):
+			_next_opening = "party"
+			_show_message("They haven't seen you - you strike first!")
+			_engage(group)
+			return true
+	var band: int = _party_state.supplies.light_band()
+	var newly := false
+	for group in _groups:
+		if not group.noticed and Roamers.notices(_map, group, party_cell, band):
+			group.noticed = true
+			newly = true
+	if newly:
+		_show_message("Something ahead has seen you.")
+		_tip("map_fights", "Monsters stand on the map now. Once they've seen you, they close in a step each time you move or wait. Turning is free. Fight where they can only come at you one way, or walk up on one that hasn't seen you to strike first.")
+	var taken := {}
+	for group in _groups:
+		taken[group.cell] = true
+	for group in _groups:
+		if group.noticed:
+			var from: Vector2i = group.cell
+			if Roamers.step_toward(_map, group, party_cell, taken):
+				taken.erase(from)
+				taken[group.cell] = true
+				_move_group_node(group)
+	for group in _groups:
+		if group.noticed and Roamers.adjacent(group.cell, party_cell):
+			_engage(group)
+			return true
+	return false
+
+
+func _move_group_node(group) -> void:
+	if not is_instance_valid(group.node):
+		return
+	var tween := create_tween()
+	tween.tween_property(group.node, "position", Vector3(group.cell.x * CELL_SIZE, 0.0, group.cell.y * CELL_SIZE), ROAM_STEP_TIME)
+
+
+func _engage(group) -> void:
+	_engaged = group
+	if group.home != Roamers.NOWHERE:
+		_map.enter(group.home)
+	_fight_kind = "wander" if group.is_wanderer() else ""
+	if is_instance_valid(group.node):
+		group.node.visible = false
+	var types: Array[EnemyType] = []
+	types.assign(group.types)
+	_start_combat(group.cell, types)
+
+
+## After a fight on the map: the beaten group is gone; one you ran from goes
+## home (a wanderer loses the trail).
+func _map_fight_over(won: bool) -> void:
+	var group = _engaged
+	_engaged = null
+	if group == null:
+		return
+	if won or group.is_wanderer():
+		_groups.erase(group)
+		if is_instance_valid(group.node):
+			group.node.queue_free()
+		return
+	_map.triggered.erase(group.home)
+	group.cell = group.home
+	group.noticed = false
+	_show_group(group)
+
+
+## Wait: a beat passes where the party stands.
+func _wait() -> void:
+	if _in_combat or _in_opening or _party.locked or _party.paused or _ending:
+		return
+	_party_state.advance_time(_party_state.step_time())
+	if _wander_step(_party.cell):
+		return
+	_map_beat(_party.cell)
 
 
 ## A beaten enemy's purse (goblins, #42).
@@ -1372,6 +1544,7 @@ func _restore(data: Dictionary) -> void:
 	_wanderers.arrive_on(_depth, _party_state.time_elapsed)
 	if data.has("wanderers"):  # saves from before 2026-10-27 start the quiet spell again
 		SaveGame.unpack_into(_wanderers, data["wanderers"])
+	_spawn_room_groups()  # back in their rooms; wanderers lose the trail
 	if data["resume"]:  # an interrupted fight or event happens again
 		var fight: Array[EnemyType] = []
 		for path in data.get("resume_fight", []):
@@ -1849,6 +2022,7 @@ func _open_gate_stair(cell: Vector2i) -> void:
 # --- The Drowned Galleries (floor 5, slice 2; galleries.gd) ---------------
 
 var _deep_themes := {}  # depth -> the galleries' or the reservoir's look
+var _wait_button: Button
 
 ## The deepest floor the story has opened.
 func _deepest_open() -> int:
@@ -2046,6 +2220,9 @@ func _wanderers_stirred(before := "") -> void:
 
 ## They've found the party: a Scout with sharp ears may hear them first.
 func _wanderers_arrive(cell: Vector2i) -> void:
+	if _map_fights_active():
+		_spawn_wanderer()  # they come looking across the map (#171)
+		return
 	var group: Array[EnemyType] = []
 	group.assign(encounter_pool(_depth, _party_state.living_members().size()).pick_random())
 	var hears: bool = not _map.alarmed and _party_state.living_members().any(func(h: Companion): return h.has_talent("sharp_ears"))
@@ -3678,6 +3855,19 @@ func _build_ui(minimap: Control) -> void:
 	for spec in [[TURN_LEFT_ICON, "turn_left"], ["▲", "move_forward"], [TURN_RIGHT_ICON, "turn_right"],
 			["", ""], ["▼", "move_back"], ["", ""]]:
 		pad.add_child(_make_touch_button(spec[0], spec[1]))
+	# Wait (#171): a beat passes where you stand - they come to you.
+	var spacer: Node = pad.get_child(5)
+	pad.remove_child(spacer)
+	spacer.queue_free()
+	var wait_button := Button.new()
+	wait_button.text = "Wait"
+	wait_button.custom_minimum_size = TOUCH_BUTTON_SIZE
+	wait_button.focus_mode = Control.FOCUS_NONE
+	wait_button.add_theme_font_size_override("font_size", 20)
+	wait_button.modulate.a = 0.75
+	wait_button.pressed.connect(_wait)
+	pad.add_child(wait_button)
+	_wait_button = wait_button
 	pad_corner.add_child(pad)
 	ui.add_child(pad_corner)
 	_touch_pad = pad_corner
