@@ -84,6 +84,34 @@ House of Necrosis was used as a reference: you grow strong during a run, grow at
 7. **The monster journal.** A brief for each monster, with its weaknesses and immunities, filled in as you meet it. Until then, its moves show as "?".
 8. **Killers evolve.** A monster that downs a hero becomes an elite on the spot.
 
+**The party as one unit — decided 2026-10-31** (refines 1–2 above).
+- **One tile, one group.** The party shares a cell, and each beat it takes **one unit action**:
+
+  | Action | Who acts |
+  |---|---|
+  | **Strike** | Every front-row member |
+  | **Shoot** | The back row's ranged attack, which spends ammo |
+  | **Brace** | Defend: heavy blows are turned aside |
+  | **Cast** | The mage picks a spell |
+  | **Item / Flare / Throw torch** | One member |
+  | **Step / Wait** | The whole group; turning is free |
+
+- **Direction is the formation.**
+  - A blow from the way you face lands on one front-row member, chosen by the monster's habits.
+  - A blow from the side or behind lands on the back row.
+  - **From behind it does extra damage** (start at +50%, tuned in the trial).
+- **Movement is defence.** Dangerous moves mark the tiles they'll hit (the Underhound's lunge line, a bloat's burst, a heavy swing) before they land. Stepping out costs the beat but avoids the blow.
+- **Four classes**, duplicates allowed, so any party of three has a gap:
+  - **Melee:** armour and health, for the front row; little awareness, no magic.
+  - **Scout:** awareness (seeing and hearing monsters on the map, spotting traps), for the back row; light armour.
+  - **Mage:** neither armoured nor aware, but casts spells (#170).
+  - **Fixer:** weaker in a fight, but finds more treasure and gets better prices. **Clears blockages** such as rubble, taking that over from the Brawler. Traps stay with the scout.
+- **Parties of 1–3.** Going solo or in a pair is high-risk in fights and exploration, but **experience isn't split**: one hero gets the full share, a pair half each.
+- **Characters.** Each has their class's standard skills plus **one personal trait**. The main heroes: **Corin is melee, Mara the scout, Alwen the mage.** The starting hero keeps their story protection (they wake at camp instead of dying), not extra power.
+- **A named cast instead of random recruits.**
+  - About 6–9 people met at camp over time, each with a class, a face, a trait and lines. Memories carry over.
+  - A death is permanent by default, but **the nurse can attempt a resurrection** (details to decide) if too many are lost. That gives the nurse a real job.
+
 **Built straight into the game,** not as a separate prototype. The owner judges the on-map fights after playing them.
 
 ## Map and dungeon progression
