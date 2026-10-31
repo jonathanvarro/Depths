@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-31 – ChatGPT (equipment artwork)
+- Did: Created the complete 22-design Cave & Mine / Goblin Territory shape-review set for #194/#195: sixteen new individual ImageGen masters and six safely retained designs. Each has a 128px candidate, preserved source/prompt/hash and advisory stable-ID comparison. Regional contact sheets and an interactive gallery compare native/64/32px, greyscale, silhouettes, dark/parchment and the existing backpack proportions. Review: `art/concepts/early-equipment-v1/inspector.html`; handoff/audit: `docs/early-equipment-art-review.md`. Export and browser checks pass.
+- Next: Owner selects/refines ordinary base shapes; then promote selected icons, explicitly reconcile working names with Claude's #192/#193 stable IDs, bind and check real Pack/merchant/loot. Both art issues remain In Progress because selection/live review is pending.
+- Watch out: All new exports are candidates under `.gdignore`, no live bindings or item rules changed. Existing sources/icons stay intact; copied visible pixels are preserved. Satchel tool loops are not prominent in the retained design; several existing IDs have materially different names/shapes, recorded per item. Concurrent equipment-model/gameplay changes are left untouched.
+
 ## 2026-10-31 – ChatGPT
 - Did: Tabled eleven proposed equipment bases each for Cave & Mine and Goblin Territory in docs/early-region-equipment-art.md; created #194/#195 art requests with the full tables, visual cues, concept-first review and current inventory export requirements. Each includes slash/impact/reach, ranged/staff, heavy/medium/light armour and shield/cape/pack choices. Both are Todo in milestone 5.
 - Next: Artist audits reusable existing art, reviews ordinary-base silhouettes, then produces selected icons. Claude reconciles proposed names with stable data/equipment IDs and #192/#193; exact stats/class eligibility are not art decisions.

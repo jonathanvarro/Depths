@@ -1,0 +1,251 @@
+{
+  "date": "2026-10-31",
+  "issues": [
+    194,
+    195
+  ],
+  "use_case": "stylized-concept",
+  "stage": "base-shape review, not live runtime bindings",
+  "assets": [
+    {
+      "id": "quarry-hammer",
+      "source": "art/source/early-equipment-v1/quarry-hammer-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-2cbd1dcc-019a-42df-9612-13d253f6f502.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "prompt": "Use case: stylized-concept. Asset type: an individual equipment concept cutout for Depths, a dark gritty medieval dungeon crawler, designed to read in a 128x128 inventory pocket. Subject: QUARRY HAMMER, an ordinary practical mine worker's one-handed impact tool. One compact solid rectangular soot-dark iron head, a thick slightly curved ash-wood haft, a modest dark leather grip wrap. Clearly a hammer, not a pickaxe, not a mace. Whole item diagonally from lower-left grip to upper-right head, with generous clear padding around every edge. Restrained hand-painted pixel-art rendering: bold coherent shapes, coarse deliberate pixel clusters, crisp stepped outline, muted iron grey and weathered warm brown, a few dull rust stains, broad readable material planes. Serviceable handmade construction; ageing is appearance, not breakage or a durability mechanic. Neutral diffuse object lighting with restrained readable edge accents, no dramatic lighting. A single isolated complete object, genuinely transparent background with preserved alpha; no floor, no cast shadow outside the object, no painted checkerboard, no hand or person, no text, no label, no icon border, no rarity colour, no emblem, gold, gems, magical glow or extra props. This is a cohesive base-shape study, not a photograph or glossy high-detail product render.",
+      "input_images": [],
+      "status": "concept; owner selection pending",
+      "sha256": "7754d04b461a1b38adc8dedee3debadc3c73cdab0360b94476f605f71546585d",
+      "canvas": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "id": "miners-sling",
+      "source": "art/source/early-equipment-v1/miners-sling-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-79a257e2-6f33-48ad-9bd2-2f060715b37c.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "prompt": "Use case: stylized-concept. Asset type: ONE individual equipment concept cutout for Depths, a dark gritty medieval dungeon crawler. Designed for a small 128x128 inventory pocket. Restrained hand-painted pixel-art illustration, bold coherent silhouettes, coarse deliberate pixel clusters, crisp stepped outline, limited muted earthy material colours, readable broad planes, serviceable ordinary handmade construction. Neutral diffuse lighting, restrained highlights. Whole single object centered with generous clear padding on all sides. Genuinely transparent background and alpha; no painted checkerboard, floor, scene, drop shadow, hand, person, lettering, icon frame, rarity border, insignia, gold decoration, gemstones, magic glow or extra props. Not a photograph or glossy high-detail product render. Ordinary base shape only; old material texture does not imply item wear or breakage. Subject: MINER'S SLING. One simple broad worn brown leather cradle holding a single rounded grey stone, with two distinctly separated thick tan cords. The two loose cords curve upward apart and end in one small finger loop and one release knot, all fully visible and untangled. Cradle low in the composition, cords make an open readable V-shaped silhouette. A practical hand sling, not a slingshot, bow, necklace, handbag or weapon on a stick. Clear empty transparent spaces between the cords. Strong chunky cords and broad cradle must remain visible at tiny size.",
+      "input_images": [],
+      "status": "concept; owner selection pending",
+      "sha256": "d2c30f40d6199c214d4656deb1687af8c376d9f4638597fbe14fcfa1e627a774",
+      "canvas": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "id": "hazel-walking-staff",
+      "source": "art/source/early-equipment-v1/hazel-walking-staff-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-f9707521-0e48-4d75-a704-ec18e78239a9.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "prompt": "Use case: stylized-concept. Asset type: ONE individual equipment concept cutout for Depths, a dark gritty medieval dungeon crawler. Designed for a small 128x128 inventory pocket. Restrained hand-painted pixel-art illustration, bold coherent silhouettes, coarse deliberate pixel clusters, crisp stepped outline, limited muted earthy material colours, readable broad planes, serviceable ordinary handmade construction. Neutral diffuse lighting, restrained highlights. Whole single object centered with generous clear padding on all sides. Genuinely transparent background and alpha; no painted checkerboard, floor, scene, drop shadow, hand, person, lettering, icon frame, rarity border, insignia, gold decoration, gemstones, magic glow or extra props. Not a photograph or glossy high-detail product render. Ordinary base shape only; old material texture does not imply item wear or breakage. Subject: HAZEL WALKING STAFF. A full-length slender hazel-wood staff with an irregular natural crooked head, blunt rounded tip and base, a single short binding of dirty ochre linen at its hand grip. Long diagonal from lower-left base to upper-right hooked tip, whole staff visible. Distinct natural bend at the upper fifth, not a fork, pick, club or ornate wizard staff. Muted warm hazel brown wood, no crystal, runes or magic. Emphasize a long spare stick silhouette with a readable crook.",
+      "input_images": [],
+      "status": "concept; owner selection pending",
+      "sha256": "c105dbc70e04e3a55b95793a47eb66117a38d1188f4929b0469c6b0755589f50",
+      "canvas": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "id": "quilted-work-coat",
+      "source": "art/source/early-equipment-v1/quilted-work-coat-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-743a025d-1a35-4f23-8dba-304acd34347e.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "prompt": "Use case: stylized-concept. Asset type: ONE individual equipment concept cutout for Depths, a dark gritty medieval dungeon crawler. Designed for a small 128x128 inventory pocket. Restrained hand-painted pixel-art illustration, bold coherent silhouettes, coarse deliberate pixel clusters, crisp stepped outline, limited muted earthy material colours, readable broad planes, serviceable ordinary handmade construction. Neutral diffuse lighting, restrained highlights. Whole single object centered with generous clear padding on all sides. Genuinely transparent background and alpha; no painted checkerboard, floor, scene, drop shadow, hand, person, lettering, icon frame, rarity border, insignia, gold decoration, gemstones, magic glow or extra props. Not a photograph or glossy high-detail product render. Ordinary base shape only; old material texture does not imply item wear or breakage. Subject: QUILTED WORK COAT, medium body armour from a cave and mine. One empty padded long-sleeved work coat seen from the front, sleeves angled slightly apart so both are clearly visible, short mid-thigh hem, broad vertical/diamond quilt channels in muted ochre-brown linen, dark leather reinforcement patches on the elbows, plain tied closures. A medium-weight padded coat with soft shoulders and substantial sleeves, visually between a fitted sleeveless light leather jerkin and a broad heavy iron-plated mining coat. No human/mannequin, no trousers, gloves or equipment attached. Body garment only with readable empty neckline and sleeve openings.",
+      "input_images": [],
+      "status": "concept; owner selection pending",
+      "sha256": "b6fe9c182528ad989ec83ccdb8a50d3ef9338e09f5da2ff88e552f080fe7c5dc",
+      "canvas": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "id": "riveted-mining-coat",
+      "source": "art/source/early-equipment-v1/riveted-mining-coat-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-ba79ee0c-0884-40a6-9021-ed5b029f28f9.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "prompt": "Use case: stylized-concept. Asset type: ONE individual equipment concept cutout for Depths, a dark gritty medieval dungeon crawler. Designed for a small 128x128 inventory pocket. Restrained hand-painted pixel-art illustration, bold coherent silhouettes, coarse deliberate pixel clusters, crisp stepped outline, limited muted earthy material colours, readable broad planes, serviceable ordinary handmade construction. Neutral diffuse lighting, restrained highlights. Whole single object centered with generous clear padding on all sides. Genuinely transparent background and alpha; no painted checkerboard, floor, scene, drop shadow, hand, person, lettering, icon frame, rarity border, insignia, gold decoration, gemstones, magic glow or extra props. Not a photograph or glossy high-detail product render. Ordinary base shape only; old material texture does not imply item wear or breakage. Subject: RIVETED MINING COAT, HEAVY body armour for the mine region. One empty broad-shouldered thick charcoal-brown work coat with full stout sleeves, mid-thigh length and a square substantial outline. Three or four large dull soot-iron reinforcement plates cover the chest and shoulders, mounted with crude broad rivets over heavy fabric; large readable plates rather than tiny scales or chainmail. Heavy iron shoulder caps, thick collar, plain leather fastening. Dark grey metal must contrast against ochre padded cloth visible below the plates. This should read appreciably heavier and wider than an unplated quilted coat and a fitted sleeveless jerkin. Front view with slightly separated sleeves. Garment only, no human/mannequin, helmet, gloves, trousers or weapon.",
+      "input_images": [],
+      "status": "concept; owner selection pending",
+      "sha256": "85add933e8c9489f6bad7d359d8c9bc006ebb1c5ffbeef58619ee0a8f552c5c9",
+      "canvas": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "id": "survey-cape",
+      "source": "art/source/early-equipment-v1/survey-cape-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-42d6bb9d-3254-4371-9cdb-3397ec2dba50.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "prompt": "Use case: stylized-concept. Asset type: ONE individual equipment concept cutout for Depths, a dark gritty medieval dungeon crawler. Designed for a small 128x128 inventory pocket. Restrained hand-painted pixel-art illustration, bold coherent silhouettes, coarse deliberate pixel clusters, crisp stepped outline, limited muted earthy material colours, readable broad planes, serviceable ordinary handmade construction. Neutral diffuse lighting, restrained highlights. Whole single object centered with generous clear padding on all sides. Genuinely transparent background and alpha; no painted checkerboard, floor, scene, drop shadow, hand, person, lettering, icon frame, rarity border, insignia, gold decoration, gemstones, magic glow or extra props. Not a photograph or glossy high-detail product render. Ordinary base shape only; old material texture does not imply item wear or breakage. Subject: SURVEY CAPE, an ordinary short HOODED waxed work cape for cave explorers. Empty charcoal-olive waxed cloth garment draped as one compact broad triangular shoulder cape, deep readable hood at top, short upper-thigh hem, a plain dull clasp, a few large stiff angular folds and slightly asymmetric weathered hem. Read as light practical protective outdoor cloth, not armour, a long robe, dress, poncho with sleeves, or a wizard's gown. Waxy muted highlights, earthy brown-grey shadows. The cape must remain visibly shorter and broader than a full-length cloak. No person, mannequin, sleeves, insignia, attached supplies or weapon.",
+      "input_images": [],
+      "status": "concept; owner selection pending",
+      "sha256": "6e0ba9f9bcbe712d434adf43e6db552be8e96c3d340ed7d36fc416a5766822ad",
+      "canvas": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "id": "notched-falchion",
+      "source": "art/source/early-equipment-v1/notched-falchion-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-6bc689ce-4b56-4ec2-bd8c-ff3c7c297add.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "prompt": "Use case: stylized-concept. Asset type: ONE individual equipment concept cutout for Depths, a dark gritty medieval dungeon crawler. Designed for a small 128x128 inventory pocket. Restrained hand-painted pixel-art illustration, bold coherent silhouettes, coarse deliberate pixel clusters, crisp stepped outline, limited muted earthy material colours, readable broad planes, serviceable ordinary handmade construction. Neutral diffuse lighting, restrained highlights. Whole single object centered with generous clear padding on all sides. Genuinely transparent background and alpha; no painted checkerboard, floor, scene, drop shadow, hand, person, lettering, icon frame, rarity border, insignia, gold decoration, gemstones, magic glow or extra props. Not a photograph or glossy high-detail product render. Ordinary base shape only; old material texture does not imply item wear or breakage. Subject: NOTCHED FALCHION from goblin territory: one ordinary broad single-edged curved iron cutting sword with an expanded forward-weighted blade, a clipped slightly hooked tip and just two shallow old nicks along the cutting edge. Small asymmetric utilitarian iron guard, coarse oxblood-brown cloth grip wrapping, plain squat pommel. Diagonal lower-left hilt to upper-right blade. Stolen military metal with crude modifications: blackened steel, a few pale honed planes, coarse rivets, rough leather. Clearly distinct from a straight short sword: broad curved silhouette and heavy forward end. Intact serviceable construction, not a giant fantasy cleaver, broken blade, saw or heavily spiked object.",
+      "input_images": [],
+      "status": "concept; owner selection pending",
+      "sha256": "c6ca73329fbc476dc48e869de59a695a5990fb8ac2629e98c78977c10dde3dad",
+      "canvas": [
+        1312,
+        1199
+      ]
+    },
+    {
+      "id": "gatebreaker-mace",
+      "source": "art/source/early-equipment-v1/gatebreaker-mace-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-77db6ab8-b1a0-4eb3-a03a-9824d20062b6.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "prompt": "Use case: stylized-concept. Asset type: ONE individual equipment concept cutout for Depths, a dark gritty medieval dungeon crawler. Designed for a small 128x128 inventory pocket. Restrained hand-painted pixel-art illustration, bold coherent silhouettes, coarse deliberate pixel clusters, crisp stepped outline, limited muted earthy material colours, readable broad planes, serviceable ordinary handmade construction. Neutral diffuse lighting, restrained highlights. Whole single object centered with generous clear padding on all sides. Genuinely transparent background and alpha; no painted checkerboard, floor, scene, drop shadow, hand, person, lettering, icon frame, rarity border, insignia, gold decoration, gemstones, magic glow or extra props. Not a photograph or glossy high-detail product render. Ordinary base shape only; old material texture does not imply item wear or breakage. Subject: GATEBREAKER MACE from goblin territory. One short one-handed impact weapon with a compact broad dark iron head formed by six thick blunt FLANGES around a solid central core, not a ball and not spikes. Thick rough ash haft reinforced near the head by a plain iron collar; coarse dark leather grip below. Head is slightly forward-heavy but practical in one hand. Diagonal lower-left handle to upper-right head. Stolen military gear with crude field reinforcement, soot-blackened iron and blunt pale steel striking planes. Strong compact cog-like head silhouette, unmistakably different from a rectangular quarry hammer, a wooden club and a spear. Intact serviceable item; no exaggerated fantasy teeth or ornament.",
+      "input_images": [],
+      "status": "concept; owner selection pending",
+      "sha256": "1f35a277c98a74212aecd45427b7702255653a1ed94d55f2f001c48b21f7f23f",
+      "canvas": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "id": "garrison-spear",
+      "source": "art/source/early-equipment-v1/garrison-spear-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-197110b4-0c29-41e6-a678-e5158fb0e919.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "prompt": "Use case: stylized-concept. Asset type: ONE individual equipment concept cutout for Depths, a dark gritty medieval dungeon crawler. Designed for a small 128x128 inventory pocket. Restrained hand-painted pixel-art illustration, bold coherent silhouettes, coarse deliberate pixel clusters, crisp stepped outline, limited muted earthy material colours, readable broad planes, serviceable ordinary handmade construction. Neutral diffuse lighting, restrained highlights. Whole single object centered with generous clear padding on all sides. Genuinely transparent background and alpha; no painted checkerboard, floor, scene, drop shadow, hand, person, lettering, icon frame, rarity border, insignia, gold decoration, gemstones, magic glow or extra props. Not a photograph or glossy high-detail product render. Ordinary base shape only; old material texture does not imply item wear or breakage. Subject: GARRISON SPEAR from goblin territory. One whole long reach weapon, dark reinforced wooden shaft and a BROAD leaf-shaped plain steel spearhead, socket reinforced with two ordinary dark iron bands. Dull iron butt cap, a restrained short strip of oxblood grip binding below the socket. Diagonal lower-left butt to upper-right point, entire long straight shaft and broad leaf point visible. Clearly longer than a one-handed mace or baton, head broader than a basic narrow mine spear. Stolen military equipment reworked with coarse iron collars and blackened wood; no huge barbs, banners, tassels, magical components or symbols.",
+      "input_images": [],
+      "status": "concept; owner selection pending",
+      "sha256": "383c69da14f7eea28e0b95c8e2f4e348d157a5c0b961f9cf77e6f92be1dca6cb",
+      "canvas": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "id": "sentry-shortbow",
+      "source": "art/source/early-equipment-v1/sentry-shortbow-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-7b08970b-de23-4287-8159-584af2f847dc.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "prompt": "Use case: stylized-concept. Asset type: ONE individual equipment concept cutout for Depths, a dark gritty medieval dungeon crawler. Designed for a small 128x128 inventory pocket. Restrained hand-painted pixel-art illustration, bold coherent silhouettes, coarse deliberate pixel clusters, crisp stepped outline, limited muted earthy material colours, readable broad planes, serviceable ordinary handmade construction. Neutral diffuse lighting, restrained highlights. Whole single object centered with generous clear padding on all sides. Genuinely transparent background and alpha; no painted checkerboard, floor, scene, drop shadow, hand, person, lettering, icon frame, rarity border, insignia, gold decoration, gemstones, magic glow or extra props. Not a photograph or glossy high-detail product render. Ordinary base shape only; old material texture does not imply item wear or breakage. Subject: SENTRY'S SHORTBOW from goblin territory. One compact curved wooden self bow with a visibly taut single bowstring and plain muted oxblood cloth at the grip. A short asymmetric slightly recurved silhouette, dark weathered wood with restrained pale cut end grain, a couple of plain rawhide reinforcing wraps near the tips. Seen at a slight three-quarter angle, bow from lower-left to upper-right; string fully visible as a thick readable tan line enclosing transparent negative space. Strong bow outline, no crossbow mechanism. No arrow, quiver, projectile, hand, ornaments, blades, skull, tribal markings or extra items.",
+      "input_images": [],
+      "status": "concept; owner selection pending",
+      "sha256": "ee4704ea4028213fa1c83ffef9ae725888764f52d84046ed21f42000bd3d346f",
+      "canvas": [
+        1285,
+        1224
+      ]
+    },
+    {
+      "id": "cinderwood-baton",
+      "source": "art/source/early-equipment-v1/cinderwood-baton-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-e308f302-e0eb-4749-8484-7dced07b0b33.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "prompt": "Use case: stylized-concept. Asset type: ONE individual equipment concept cutout for Depths, a dark gritty medieval dungeon crawler. Designed for a small 128x128 inventory pocket. Restrained hand-painted pixel-art illustration, bold coherent silhouettes, coarse deliberate pixel clusters, crisp stepped outline, limited muted earthy material colours, readable broad planes, serviceable ordinary handmade construction. Neutral diffuse lighting, restrained highlights. Whole single object centered with generous clear padding on all sides. Genuinely transparent background and alpha; no painted checkerboard, floor, scene, drop shadow, hand, person, lettering, icon frame, rarity border, insignia, gold decoration, gemstones, magic glow or extra props. Not a photograph or glossy high-detail product render. Ordinary base shape only; old material texture does not imply item wear or breakage. Subject: CINDERWOOD BATON from goblin territory, an ordinary mage-weapon base with no visible magical effect. One SHORT dark wood baton, blunt rounded ends, slightly thicker near its charred upper tip, one broad plain dark iron binding just below that tip, a simple coarse leather grip at the lower third. Compact diagonal lower-left grip to upper-right charred tip. Blackened charcoal-brown wood with a little visible warm cut grain, dull grey band. Entire object intact and serviceable. A small solid wooden baton, not a long quarterstaff or a torch: no flame, smoke, glowing ember, crystal, rune, spikes, dangling ornament or extra bands.",
+      "input_images": [],
+      "status": "concept; owner selection pending",
+      "sha256": "652e622efcba0d158bf5593a8be07e2743f2fddc8769cf9702feb29202948361",
+      "canvas": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "id": "raiders-leather-vest",
+      "source": "art/source/early-equipment-v1/raiders-leather-vest-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-dea21948-7122-4fa1-adc3-bd9e410c44f6.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "prompt": "Use case: stylized-concept. Asset type: ONE individual equipment concept cutout for Depths, a dark gritty medieval dungeon crawler. Designed for a small 128x128 inventory pocket. Restrained hand-painted pixel-art illustration, bold coherent silhouettes, coarse deliberate pixel clusters, crisp stepped outline, limited muted earthy material colours, readable broad planes, serviceable ordinary handmade construction. Neutral diffuse lighting, restrained highlights. Whole single object centered with generous clear padding on all sides. Genuinely transparent background and alpha; no painted checkerboard, floor, scene, drop shadow, hand, person, lettering, icon frame, rarity border, insignia, gold decoration, gemstones, magic glow or extra props. Not a photograph or glossy high-detail product render. Ordinary base shape only; old material texture does not imply item wear or breakage. Subject: RAIDER'S LEATHER VEST, LIGHT body armour from goblin territory. One empty slim fitted SLEEVELESS asymmetrical dark leather vest seen from the front. Narrow overlapping brown-black leather panels wrap diagonally across the chest, one offset coarse buckle strap, short uneven waist hem, narrow shoulder coverage and open arm holes. A small amount of desaturated oxblood cloth visible inside the collar. Light flexible construction, visibly less bulky than a padded sleeved guard coat or dense scale armour. Dark stitched edges and a few practical crude rivets, not studded with spikes or armoured shoulder plates. Garment only; no mannequin, body, sleeves, trousers, belt kit or hanging trophies.",
+      "input_images": [],
+      "status": "concept; owner selection pending",
+      "sha256": "0ee80249f061ff41b11fd4e5ca905a4db2d8e9c7d31a0ac8c6471b158acf0160",
+      "canvas": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "id": "riveted-guard-coat",
+      "source": "art/source/early-equipment-v1/riveted-guard-coat-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-96a14b59-b4f9-42e4-9d74-5b2f73aefd58.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "prompt": "Use case: stylized-concept. Asset type: ONE individual equipment concept cutout for Depths, a dark gritty medieval dungeon crawler. Designed for a small 128x128 inventory pocket. Restrained hand-painted pixel-art illustration, bold coherent silhouettes, coarse deliberate pixel clusters, crisp stepped outline, limited muted earthy material colours, readable broad planes, serviceable ordinary handmade construction. Neutral diffuse lighting, restrained highlights. Whole single object centered with generous clear padding on all sides. Genuinely transparent background and alpha; no painted checkerboard, floor, scene, drop shadow, hand, person, lettering, icon frame, rarity border, insignia, gold decoration, gemstones, magic glow or extra props. Not a photograph or glossy high-detail product render. Ordinary base shape only; old material texture does not imply item wear or breakage. Subject: RIVETED GUARD COAT, MEDIUM body armour from goblin territory. One empty full-sleeved charcoal-brown padded coat, front view, broad quilted panels and a short mid-thigh hem, modest squared shoulders. A SMALL NUMBER of widely SPACED narrow vertical iron strips riveted onto the chest; ample soft quilted fabric visible between the strips. Plain coarse fastening, restrained oxblood inner collar and cuffs. Stolen military protective work clothing adapted in the field. Medium weight and handling: more coverage than a fitted sleeveless leather vest, but distinctly less metal and bulk than a dense overlapping scale coat. No broad breastplate or dense scales. Garment alone, no human/mannequin, helmet, gloves, trousers or weapon.",
+      "input_images": [],
+      "status": "concept; owner selection pending",
+      "sha256": "fe6d17d8f25b8906d4cddb1cbdda937078022aed00f9a8a25c55fb49f6732fa6",
+      "canvas": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "id": "garrison-scale-coat",
+      "source": "art/source/early-equipment-v1/garrison-scale-coat-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-ab4f6c1a-aa52-4bf9-8c23-7a651bd079e2.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "prompt": "Use case: stylized-concept. Asset type: ONE individual equipment concept cutout for Depths, a dark gritty medieval dungeon crawler. Designed for a small 128x128 inventory pocket. Restrained hand-painted pixel-art illustration, bold coherent silhouettes, coarse deliberate pixel clusters, crisp stepped outline, limited muted earthy material colours, readable broad planes, serviceable ordinary handmade construction. Neutral diffuse lighting, restrained highlights. Whole single object centered with generous clear padding on all sides. Genuinely transparent background and alpha; no painted checkerboard, floor, scene, drop shadow, hand, person, lettering, icon frame, rarity border, insignia, gold decoration, gemstones, magic glow or extra props. Not a photograph or glossy high-detail product render. Ordinary base shape only; old material texture does not imply item wear or breakage. Subject: GARRISON SCALE COAT, HEAVY body armour from goblin territory. A single empty broad-shouldered thick coat covered across the chest, upper arms and short thigh-length skirt with DENSE OVERLAPPING LARGE IRON SCALES. Readable rows of chunky dark grey rounded-point scales, each thick enough to remain legible when reduced; layered heavy shoulder coverage, thick padded dark brown undercoat visible at the collar and cuffs, simple centre fastening and a little desaturated oxblood inner cloth. Broad squat heavy silhouette distinct from a slim leather vest and the lighter widely spaced iron-strip guard coat. Front view, full stout sleeves slightly apart. Ordinary stolen garrison equipment with rough rivets and dull metal, not ornate ceremonial armour, not chainmail, not a broad solid breastplate. Garment only; no mannequin, body, helmet, gloves, trousers or weapon.",
+      "input_images": [],
+      "status": "concept; owner selection pending",
+      "sha256": "2f0b290f401a6b92fa903e3d49f52592a40247da185347faa22b2f4563e36c61",
+      "canvas": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "id": "gate-guards-shield",
+      "source": "art/source/early-equipment-v1/gate-guards-shield-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-b84d58c5-3b67-45a2-aaad-4955a8c48afa.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "prompt": "Use case: stylized-concept. Asset type: ONE individual equipment concept cutout for Depths, a dark gritty medieval dungeon crawler. Designed for a small 128x128 inventory pocket. Restrained hand-painted pixel-art illustration, bold coherent silhouettes, coarse deliberate pixel clusters, crisp stepped outline, limited muted earthy material colours, readable broad planes, serviceable ordinary handmade construction. Neutral diffuse lighting, restrained highlights. Whole single object centered with generous clear padding on all sides. Genuinely transparent background and alpha; no painted checkerboard, floor, scene, drop shadow, hand, person, lettering, icon frame, rarity border, insignia, gold decoration, gemstones, magic glow or extra props. Not a photograph or glossy high-detail product render. Ordinary base shape only; old material texture does not imply item wear or breakage. Subject: GATE GUARD'S SHIELD from goblin territory. One tall vertical wooden plank shield with an angular shallow gabled top, slightly tapering sides and a blunt clipped lower end. Rough dark stained timber boards strongly bound by TWO BROAD HORIZONTAL BLACK IRON RIBS with crude readable rivets. A plain dark metal edge at the top and base, a small ordinary central fixing, NO large round boss. Frontal three-quarter object view showing slight thickness. Tall strong rectangle/pentagon silhouette, clearly different from a round mine buckler, no heraldry, lettering, red paint design, skulls, spikes, stolen franchise emblem or insignia. Whole shield isolated, intact and serviceable; no hands or straps outside its silhouette.",
+      "input_images": [],
+      "status": "concept; owner selection pending",
+      "sha256": "6bf0cd7cbc601395af18f45c7ddf5c4ae03e3c08ad1e0576eb51e1defd0f3590",
+      "canvas": [
+        1070,
+        1470
+      ]
+    },
+    {
+      "id": "raiders-mantle",
+      "source": "art/source/early-equipment-v1/raiders-mantle-master.png",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-52c4155f-9530-4ce5-9459-134f00e8ba3e.png",
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "prompt": "Use case: stylized-concept. Asset type: ONE individual equipment concept cutout for Depths, a dark gritty medieval dungeon crawler. Designed for a small 128x128 inventory pocket. Restrained hand-painted pixel-art illustration, bold coherent silhouettes, coarse deliberate pixel clusters, crisp stepped outline, limited muted earthy material colours, readable broad planes, serviceable ordinary handmade construction. Neutral diffuse lighting, restrained highlights. Whole single object centered with generous clear padding on all sides. Genuinely transparent background and alpha; no painted checkerboard, floor, scene, drop shadow, hand, person, lettering, icon frame, rarity border, insignia, gold decoration, gemstones, magic glow or extra props. Not a photograph or glossy high-detail product render. Ordinary base shape only; old material texture does not imply item wear or breakage. Subject: RAIDER'S MANTLE from goblin territory. One short HOODLESS charcoal-brown cloth shoulder mantle, wide at the shoulders, compact split and irregular angled hem ending around the upper thigh, two broad hanging flaps with restrained dull OXBLOOD lining exposed at their lower inner folds. Empty rounded neckline with one plain small dark iron clasp. Broad soft folds rather than tiny fraying; slightly asymmetric field-modified cloth, light and flexible. Unmistakably hoodless and shorter than a long cloak, visually separate from a hooded waxed survey cape and a tall frame backpack. No sleeves, metal armour plates, person, mannequin, weapon, symbols, gold trim, tassels or additional equipment.",
+      "input_images": [],
+      "status": "concept; owner selection pending",
+      "sha256": "a6cc30eff1af5041584ee12eaa6b647b405d8894c7452244eeb4c13bc6b6f635",
+      "canvas": [
+        1254,
+        1254
+      ]
+    }
+  ]
+}

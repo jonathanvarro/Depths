@@ -2,6 +2,11 @@
 
 Art requests: [#194 Cave & Mine](https://github.com/jonathanvarro/Depths/issues/194) · [#195 Goblin Territory](https://github.com/jonathanvarro/Depths/issues/195).
 
+**Artwork available · 2026-10-31:** [Review the complete 22-design set](../art/concepts/early-equipment-v1/inspector.html).
+Sixteen new drawings and six retained designs have individual candidate exports
+and size/silhouette checks. [Source/reuse audit and mapping handoff](early-equipment-art-review.md).
+Shape selection and explicit runtime reconciliation remain pending.
+
 2026-10-31. Owner requested equipment tables and art tasks for Cave & Mine and Goblin Territory. Category direction is agreed; the specific names, appearance and role descriptions below are proposed bases for art review. No numeric stats or new item IDs are assigned. Coordinate with #192/#193 and Claude's current migration into data/equipment/.
 
 ## Cave & Mine — improvised tools and expedition equipment

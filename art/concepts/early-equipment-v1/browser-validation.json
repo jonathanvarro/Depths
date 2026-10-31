@@ -1,0 +1,19 @@
+{
+  "checks": 491,
+  "failures": [],
+  "viewports": [
+    [
+      1440,
+      1000
+    ],
+    [
+      1278,
+      590
+    ],
+    [
+      844,
+      390
+    ]
+  ],
+  "physical_iPhone": false
+}

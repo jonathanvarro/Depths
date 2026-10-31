@@ -1,0 +1,952 @@
+{
+  "issues": [
+    194,
+    195
+  ],
+  "date": "2026-10-31",
+  "stage": "complete base-shape review set; no design selected or live binding",
+  "runtime_bindings_changed": false,
+  "canvas": [
+    128,
+    128
+  ],
+  "padding_minimum": 8,
+  "colour_limit": 64,
+  "items": [
+    {
+      "id": "surveyors-shortsword",
+      "name": "Surveyor’s Shortsword",
+      "region": "cave-mine",
+      "family": "Blade · slash",
+      "category": "weapon",
+      "cue": "Short straight blade, plain guard, wrapped grip",
+      "status": "proposed; owner review pending",
+      "runtime_binding": null,
+      "source": "art/source/story-slice-v1/companion-short-sword-master.png",
+      "source_kind": "retained_existing_art",
+      "source_provenance": "art/source/story-slice-v1/generation.json",
+      "reuse_icon": "art/items/story-slice-v1/companion-short-sword.png",
+      "candidate_base_id": null,
+      "mapping_note": "Visual reuse of the companion sword only. Its founder/no-drop base is not a new droppable base.",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_sha256": "bad1fe0d154e9b9e9425350f63851c1c5dee73f4053a07c778df8dc36accf988",
+      "source_url": "../../source/story-slice-v1/companion-short-sword-master.png",
+      "registration": {
+        "method": "existing 128px visible RGBA unchanged; invisible RGB zeroed in candidate only",
+        "source_icon": "art/items/story-slice-v1/companion-short-sword.png",
+        "source_icon_sha256": "ce8e5a7605cd56e424bd0b7134907cee7f03411a6932b3a06687ffed8b56e0cc"
+      },
+      "candidate_icon": "candidates128/surveyors-shortsword.png",
+      "icon_sha256": "d372ffb18953d3176fcb36d5ce227459798b3af01238d24314a3580de3ee28fd",
+      "alpha_bounds": [
+        8,
+        8,
+        119,
+        120
+      ],
+      "visible_colours": 62
+    },
+    {
+      "id": "quarry-hammer",
+      "name": "Quarry Hammer",
+      "region": "cave-mine",
+      "family": "Blunt · impact",
+      "category": "weapon",
+      "cue": "Compact rectangular iron head, thick ash haft",
+      "status": "proposed; owner review pending",
+      "runtime_binding": null,
+      "source": "art/source/early-equipment-v1/quarry-hammer-master.png",
+      "source_kind": "new_imagegen",
+      "source_provenance": "art/source/early-equipment-v1/generation.json",
+      "candidate_base_id": null,
+      "mapping_note": "No exact ordinary hammer base in the audited table.",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_sha256": "7754d04b461a1b38adc8dedee3debadc3c73cdab0360b94476f605f71546585d",
+      "source_url": "../../source/early-equipment-v1/quarry-hammer-master.png",
+      "registration": {
+        "method": "existing fitted(): direct source crop, Lanczos reduction, hard alpha, no-dither 64-colour quantization",
+        "source_bounds": [
+          102,
+          33,
+          1228,
+          1205
+        ],
+        "scale": 0.09556313993174062,
+        "offset": [
+          10,
+          8
+        ]
+      },
+      "candidate_icon": "candidates128/quarry-hammer.png",
+      "icon_sha256": "0262c026507c51a59158d9b084e5ecfed79492aece3d19bbb3ec834b447b9c43",
+      "alpha_bounds": [
+        10,
+        8,
+        118,
+        120
+      ],
+      "visible_colours": 64
+    },
+    {
+      "id": "shaft-spear",
+      "name": "Shaft Spear",
+      "region": "cave-mine",
+      "family": "Reach melee",
+      "category": "weapon",
+      "cue": "Long ash shaft, narrow plain iron point",
+      "status": "proposed; owner review pending",
+      "runtime_binding": null,
+      "source": "art/items/starter-v1/simple-spear.png",
+      "source_kind": "retained_existing_art",
+      "source_provenance": "art/items/starter-v1/generation-manifest.json",
+      "reuse_icon": "art/items/refined-v2/simple-spear.png",
+      "candidate_base_id": "ash_spear",
+      "mapping_note": "Strong visual match; proposed display name still requires explicit reconciliation.",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_sha256": "11c101e0685af50d558d80404de7f37df9764f1742604846ec9c18ed5f1b9e56",
+      "source_url": "../../items/starter-v1/simple-spear.png",
+      "registration": {
+        "method": "existing 128px visible RGBA unchanged; invisible RGB zeroed in candidate only",
+        "source_icon": "art/items/refined-v2/simple-spear.png",
+        "source_icon_sha256": "a05b947df402cf0f537102fad283f15b18f81e379729a9a32122c165b2799154"
+      },
+      "candidate_icon": "candidates128/shaft-spear.png",
+      "icon_sha256": "0ec02b8698a765c5e7b19775803bce0849b5849ac7896aca4f6d213b4f1dc029",
+      "alpha_bounds": [
+        10,
+        8,
+        117,
+        120
+      ],
+      "visible_colours": 64
+    },
+    {
+      "id": "miners-sling",
+      "name": "Miner’s Sling",
+      "region": "cave-mine",
+      "family": "Ranged",
+      "category": "weapon",
+      "cue": "Broad cradle, two separated cords, finger loop and release knot",
+      "status": "proposed; owner review pending",
+      "runtime_binding": null,
+      "source": "art/source/early-equipment-v1/miners-sling-master.png",
+      "source_kind": "new_imagegen",
+      "source_provenance": "art/source/early-equipment-v1/generation.json",
+      "candidate_base_id": null,
+      "mapping_note": "Ranged base and ammunition rules remain separate design work.",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_sha256": "d2c30f40d6199c214d4656deb1687af8c376d9f4638597fbe14fcfa1e627a774",
+      "source_url": "../../source/early-equipment-v1/miners-sling-master.png",
+      "registration": {
+        "method": "existing fitted(): direct source crop, Lanczos reduction, hard alpha, no-dither 64-colour quantization",
+        "source_bounds": [
+          73,
+          65,
+          1208,
+          1198
+        ],
+        "scale": 0.0986784140969163,
+        "offset": [
+          8,
+          8
+        ]
+      },
+      "candidate_icon": "candidates128/miners-sling.png",
+      "icon_sha256": "6d383282234c460754f0fcf72cb7582a42267f03903e95e23cb9756dc36972c8",
+      "alpha_bounds": [
+        8,
+        8,
+        120,
+        120
+      ],
+      "visible_colours": 64
+    },
+    {
+      "id": "hazel-walking-staff",
+      "name": "Hazel Walking Staff",
+      "region": "cave-mine",
+      "family": "Staff · mage base",
+      "category": "weapon",
+      "cue": "Natural crooked head and a plain linen grip",
+      "status": "proposed; owner review pending",
+      "runtime_binding": null,
+      "source": "art/source/early-equipment-v1/hazel-walking-staff-master.png",
+      "source_kind": "new_imagegen",
+      "source_provenance": "art/source/early-equipment-v1/generation.json",
+      "candidate_base_id": null,
+      "mapping_note": "New shape, not a replacement for the cracked starting staff; magic rules unassigned.",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_sha256": "c105dbc70e04e3a55b95793a47eb66117a38d1188f4929b0469c6b0755589f50",
+      "source_url": "../../source/early-equipment-v1/hazel-walking-staff-master.png",
+      "registration": {
+        "method": "existing fitted(): direct source crop, Lanczos reduction, hard alpha, no-dither 64-colour quantization",
+        "source_bounds": [
+          112,
+          42,
+          1199,
+          1213
+        ],
+        "scale": 0.09564474807856532,
+        "offset": [
+          12,
+          8
+        ]
+      },
+      "candidate_icon": "candidates128/hazel-walking-staff.png",
+      "icon_sha256": "44e4df055564a041e9f975cd096cc62ac436e05b781e0bd54c309f3c6acceaa2",
+      "alpha_bounds": [
+        12,
+        8,
+        116,
+        120
+      ],
+      "visible_colours": 64
+    },
+    {
+      "id": "waxed-work-jerkin",
+      "name": "Waxed Work Jerkin",
+      "region": "cave-mine",
+      "family": "Light armour",
+      "category": "body",
+      "cue": "Fitted sleeveless leather and narrow shoulder coverage",
+      "status": "proposed; owner review pending",
+      "runtime_binding": null,
+      "source": "art/source/backlog96-v1/leather-armour.png",
+      "source_kind": "retained_existing_art",
+      "source_provenance": "art/source/backlog96-v1/generation-manifest.json",
+      "reuse_icon": "art/items/refined-v2/leather-jerkin.png",
+      "candidate_base_id": "leather_jerkin",
+      "mapping_note": "Retain the existing fitted jerkin as the light silhouette; waxed finish/name remain a proposed variant.",
+      "source_cell": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_sha256": "278453f2aef0fa410ba6de2989a9e162e51b57fbb7912452d4ee4dbf00198858",
+      "source_url": "../../source/backlog96-v1/leather-armour.png",
+      "registration": {
+        "method": "existing 128px visible RGBA unchanged; invisible RGB zeroed in candidate only",
+        "source_icon": "art/items/refined-v2/leather-jerkin.png",
+        "source_icon_sha256": "936aa036ed8fc8f2cfc808cf2f04565496772f87dd47a7f756369403642bea28"
+      },
+      "candidate_icon": "candidates128/waxed-work-jerkin.png",
+      "icon_sha256": "092d5886c5824b21d6a12824b6d5bfaeaf6d8e1c635b70ca268b673c9293c519",
+      "alpha_bounds": [
+        16,
+        8,
+        112,
+        120
+      ],
+      "visible_colours": 64
+    },
+    {
+      "id": "quilted-work-coat",
+      "name": "Quilted Work Coat",
+      "region": "cave-mine",
+      "family": "Medium armour",
+      "category": "body",
+      "cue": "Padded sleeves, broad quilting and leather elbow patches",
+      "status": "proposed; owner review pending",
+      "runtime_binding": null,
+      "source": "art/source/early-equipment-v1/quilted-work-coat-master.png",
+      "source_kind": "new_imagegen",
+      "source_provenance": "art/source/early-equipment-v1/generation.json",
+      "candidate_base_id": "quilted_coat",
+      "mapping_note": "Existing quilted_coat art is sleeveless; this new sleeved proposal is not automatically a replacement.",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_sha256": "b6fe9c182528ad989ec83ccdb8a50d3ef9338e09f5da2ff88e552f080fe7c5dc",
+      "source_url": "../../source/early-equipment-v1/quilted-work-coat-master.png",
+      "registration": {
+        "method": "existing fitted(): direct source crop, Lanczos reduction, hard alpha, no-dither 64-colour quantization",
+        "source_bounds": [
+          64,
+          56,
+          1212,
+          1209
+        ],
+        "scale": 0.0971379011274935,
+        "offset": [
+          8,
+          8
+        ]
+      },
+      "candidate_icon": "candidates128/quilted-work-coat.png",
+      "icon_sha256": "32c12a91e9c0407284ba2f59f38078de2760f37715a0a6cb79ceb28b41f7174e",
+      "alpha_bounds": [
+        8,
+        8,
+        120,
+        120
+      ],
+      "visible_colours": 63
+    },
+    {
+      "id": "riveted-mining-coat",
+      "name": "Riveted Mining Coat",
+      "region": "cave-mine",
+      "family": "Heavy armour",
+      "category": "body",
+      "cue": "Broad shoulders, large riveted iron plates over thick cloth",
+      "status": "proposed; owner review pending",
+      "runtime_binding": null,
+      "source": "art/source/early-equipment-v1/riveted-mining-coat-master.png",
+      "source_kind": "new_imagegen",
+      "source_provenance": "art/source/early-equipment-v1/generation.json",
+      "candidate_base_id": null,
+      "mapping_note": "No exact heavy mine-coat base in the audited table.",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_sha256": "85add933e8c9489f6bad7d359d8c9bc006ebb1c5ffbeef58619ee0a8f552c5c9",
+      "source_url": "../../source/early-equipment-v1/riveted-mining-coat-master.png",
+      "registration": {
+        "method": "existing fitted(): direct source crop, Lanczos reduction, hard alpha, no-dither 64-colour quantization",
+        "source_bounds": [
+          36,
+          57,
+          1218,
+          1206
+        ],
+        "scale": 0.09475465313028765,
+        "offset": [
+          8,
+          9
+        ]
+      },
+      "candidate_icon": "candidates128/riveted-mining-coat.png",
+      "icon_sha256": "3ce3d8b1f56b88814fe4a807b3e662ae537e44b99a8509b7b6634ca2af44e403",
+      "alpha_bounds": [
+        8,
+        9,
+        120,
+        118
+      ],
+      "visible_colours": 63
+    },
+    {
+      "id": "pit-shield",
+      "name": "Pit Shield",
+      "region": "cave-mine",
+      "family": "Back · combat",
+      "category": "back",
+      "cue": "Round timber shield with iron boss and rim",
+      "status": "proposed; owner review pending",
+      "runtime_binding": null,
+      "source": "art/items/starter-v1/wooden-shield.png",
+      "source_kind": "retained_existing_art",
+      "source_provenance": "art/items/starter-v1/generation-manifest.json",
+      "reuse_icon": null,
+      "candidate_base_id": "buckler",
+      "mapping_note": "Round-shield visual candidate only; reconcile Pit Shield with the iron-rimmed buckler base.",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_sha256": "383fcf51ea46696b6b2c3f579cde95842773090f691c20831fc6f59600b09a6b",
+      "source_url": "../../items/starter-v1/wooden-shield.png",
+      "registration": {
+        "method": "existing fitted(): direct source crop, Lanczos reduction, hard alpha, no-dither 64-colour quantization",
+        "source_bounds": [
+          183,
+          79,
+          1114,
+          1187
+        ],
+        "scale": 0.10108303249097472,
+        "offset": [
+          17,
+          8
+        ]
+      },
+      "candidate_icon": "candidates128/pit-shield.png",
+      "icon_sha256": "47dd3d80d558e18ce6095b0cf7c8ddebd18dcda8339f6f398c5f15bc06b2bf30",
+      "alpha_bounds": [
+        17,
+        8,
+        111,
+        120
+      ],
+      "visible_colours": 64
+    },
+    {
+      "id": "survey-cape",
+      "name": "Survey Cape",
+      "region": "cave-mine",
+      "family": "Back · exploration",
+      "category": "back",
+      "cue": "Compact hooded waxed cape, stiff angular folds",
+      "status": "proposed; owner review pending",
+      "runtime_binding": null,
+      "source": "art/source/early-equipment-v1/survey-cape-master.png",
+      "source_kind": "new_imagegen",
+      "source_provenance": "art/source/early-equipment-v1/generation.json",
+      "candidate_base_id": "oilcloth_cloak",
+      "mapping_note": "Short hooded cape differs from the live long cloak; select a variant/name before binding.",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_sha256": "6e0ba9f9bcbe712d434adf43e6db552be8e96c3d340ed7d36fc416a5766822ad",
+      "source_url": "../../source/early-equipment-v1/survey-cape-master.png",
+      "registration": {
+        "method": "existing fitted(): direct source crop, Lanczos reduction, hard alpha, no-dither 64-colour quantization",
+        "source_bounds": [
+          127,
+          83,
+          1146,
+          1140
+        ],
+        "scale": 0.10596026490066225,
+        "offset": [
+          10,
+          8
+        ]
+      },
+      "candidate_icon": "candidates128/survey-cape.png",
+      "icon_sha256": "f490eb96272f42c5630b5e14c9209d5cee7fef79b70981dc3fc44a24ece4aaa4",
+      "alpha_bounds": [
+        10,
+        8,
+        118,
+        120
+      ],
+      "visible_colours": 63
+    },
+    {
+      "id": "prospectors-satchel",
+      "name": "Prospector’s Satchel",
+      "region": "cave-mine",
+      "family": "Back · capacity",
+      "category": "back",
+      "cue": "Low leather flap bag, broad looped carrying strap",
+      "status": "proposed; owner review pending",
+      "runtime_binding": null,
+      "source": "art/source/field-kit-v1/leather-satchel-master.png",
+      "source_kind": "retained_existing_art",
+      "source_provenance": "art/source/field-kit-v1/generation.json",
+      "reuse_icon": "art/items/field-kit-v1/leather-satchel.png",
+      "candidate_base_id": "satchel",
+      "mapping_note": "Existing low bag is a strong reusable silhouette. External tool loops in the written brief are not prominent in this retained design.",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_sha256": "05f29829b9cfb5406f937cd535845a18bf67785a67e7ef71a2b65824052c11b9",
+      "source_url": "../../source/field-kit-v1/leather-satchel-master.png",
+      "registration": {
+        "method": "existing 128px visible RGBA unchanged; invisible RGB zeroed in candidate only",
+        "source_icon": "art/items/field-kit-v1/leather-satchel.png",
+        "source_icon_sha256": "fe312b06d088b17f50fc6e69fdd9474dbeec475bb1332b6984ce0dd7a6b02f07"
+      },
+      "candidate_icon": "candidates128/prospectors-satchel.png",
+      "icon_sha256": "fe312b06d088b17f50fc6e69fdd9474dbeec475bb1332b6984ce0dd7a6b02f07",
+      "alpha_bounds": [
+        8,
+        11,
+        120,
+        117
+      ],
+      "visible_colours": 64
+    },
+    {
+      "id": "notched-falchion",
+      "name": "Notched Falchion",
+      "region": "goblin-territory",
+      "family": "Blade · slash",
+      "category": "weapon",
+      "cue": "Broad forward-weighted curved blade and asymmetric guard",
+      "status": "proposed; owner review pending",
+      "runtime_binding": null,
+      "source": "art/source/early-equipment-v1/notched-falchion-master.png",
+      "source_kind": "new_imagegen",
+      "source_provenance": "art/source/early-equipment-v1/generation.json",
+      "candidate_base_id": "goblin_cleaver",
+      "mapping_note": "Possible replacement/variant for the cleaver silhouette; not an approved stable-ID mapping.",
+      "source_canvas": [
+        1312,
+        1199
+      ],
+      "source_sha256": "c6ca73329fbc476dc48e869de59a695a5990fb8ac2629e98c78977c10dde3dad",
+      "source_url": "../../source/early-equipment-v1/notched-falchion-master.png",
+      "registration": {
+        "method": "existing fitted(): direct source crop, Lanczos reduction, hard alpha, no-dither 64-colour quantization",
+        "source_bounds": [
+          27,
+          31,
+          1290,
+          1173
+        ],
+        "scale": 0.08867775138558986,
+        "offset": [
+          8,
+          13
+        ]
+      },
+      "candidate_icon": "candidates128/notched-falchion.png",
+      "icon_sha256": "a0745b4c33ac0e657869412d9ddb6ff115692bd163febade3898d3d4200f747f",
+      "alpha_bounds": [
+        8,
+        13,
+        120,
+        114
+      ],
+      "visible_colours": 63
+    },
+    {
+      "id": "gatebreaker-mace",
+      "name": "Gatebreaker Mace",
+      "region": "goblin-territory",
+      "family": "Blunt · impact",
+      "category": "weapon",
+      "cue": "Compact blunt flanged iron head, reinforced short haft",
+      "status": "proposed; owner review pending",
+      "runtime_binding": null,
+      "source": "art/source/early-equipment-v1/gatebreaker-mace-master.png",
+      "source_kind": "new_imagegen",
+      "source_provenance": "art/source/early-equipment-v1/generation.json",
+      "candidate_base_id": "light_mace",
+      "mapping_note": "Visually heavier than the existing Light mace name; decide variant/base identity.",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_sha256": "1f35a277c98a74212aecd45427b7702255653a1ed94d55f2f001c48b21f7f23f",
+      "source_url": "../../source/early-equipment-v1/gatebreaker-mace-master.png",
+      "registration": {
+        "method": "existing fitted(): direct source crop, Lanczos reduction, hard alpha, no-dither 64-colour quantization",
+        "source_bounds": [
+          48,
+          47,
+          1227,
+          1209
+        ],
+        "scale": 0.09499575911789652,
+        "offset": [
+          8,
+          9
+        ]
+      },
+      "candidate_icon": "candidates128/gatebreaker-mace.png",
+      "icon_sha256": "0426f6591fffd181451332afe06f75cd1f602e417a9b6f639cfee033b48786a0",
+      "alpha_bounds": [
+        8,
+        9,
+        120,
+        119
+      ],
+      "visible_colours": 63
+    },
+    {
+      "id": "garrison-spear",
+      "name": "Garrison Spear",
+      "region": "goblin-territory",
+      "family": "Reach melee",
+      "category": "weapon",
+      "cue": "Broad leaf point, reinforced socket and long dark shaft",
+      "status": "proposed; owner review pending",
+      "runtime_binding": null,
+      "source": "art/source/early-equipment-v1/garrison-spear-master.png",
+      "source_kind": "new_imagegen",
+      "source_provenance": "art/source/early-equipment-v1/generation.json",
+      "candidate_base_id": "boar_spear",
+      "mapping_note": "Leaf-point garrison spear lacks a boar-spear crossbar; mapping remains unresolved.",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_sha256": "383c69da14f7eea28e0b95c8e2f4e348d157a5c0b961f9cf77e6f92be1dca6cb",
+      "source_url": "../../source/early-equipment-v1/garrison-spear-master.png",
+      "registration": {
+        "method": "existing fitted(): direct source crop, Lanczos reduction, hard alpha, no-dither 64-colour quantization",
+        "source_bounds": [
+          56,
+          17,
+          1235,
+          1237
+        ],
+        "scale": 0.09180327868852459,
+        "offset": [
+          10,
+          8
+        ]
+      },
+      "candidate_icon": "candidates128/garrison-spear.png",
+      "icon_sha256": "914dff073cac92c4ddcebef32523d20bceb94995cea21beac7d09d701ffb3de8",
+      "alpha_bounds": [
+        10,
+        8,
+        118,
+        120
+      ],
+      "visible_colours": 62
+    },
+    {
+      "id": "sentry-shortbow",
+      "name": "Sentry’s Shortbow",
+      "region": "goblin-territory",
+      "family": "Ranged",
+      "category": "weapon",
+      "cue": "Compact curved bow, readable string and oxblood grip",
+      "status": "proposed; owner review pending",
+      "runtime_binding": null,
+      "source": "art/source/early-equipment-v1/sentry-shortbow-master.png",
+      "source_kind": "new_imagegen",
+      "source_provenance": "art/source/early-equipment-v1/generation.json",
+      "candidate_base_id": null,
+      "mapping_note": "New ranged shape; base identity and ammunition remain separate.",
+      "source_canvas": [
+        1285,
+        1224
+      ],
+      "source_sha256": "ee4704ea4028213fa1c83ffef9ae725888764f52d84046ed21f42000bd3d346f",
+      "source_url": "../../source/early-equipment-v1/sentry-shortbow-master.png",
+      "registration": {
+        "method": "existing fitted(): direct source crop, Lanczos reduction, hard alpha, no-dither 64-colour quantization",
+        "source_bounds": [
+          38,
+          51,
+          1257,
+          1156
+        ],
+        "scale": 0.0918785890073831,
+        "offset": [
+          8,
+          13
+        ]
+      },
+      "candidate_icon": "candidates128/sentry-shortbow.png",
+      "icon_sha256": "07b658f2f4520a99bc14e67ae4c23090f2791373feaa3e7af565a336bcd8340b",
+      "alpha_bounds": [
+        8,
+        13,
+        120,
+        115
+      ],
+      "visible_colours": 63
+    },
+    {
+      "id": "cinderwood-baton",
+      "name": "Cinderwood Baton",
+      "region": "goblin-territory",
+      "family": "Staff · mage base",
+      "category": "weapon",
+      "cue": "Short charred wooden baton and a single iron binding",
+      "status": "proposed; owner review pending",
+      "runtime_binding": null,
+      "source": "art/source/early-equipment-v1/cinderwood-baton-master.png",
+      "source_kind": "new_imagegen",
+      "source_provenance": "art/source/early-equipment-v1/generation.json",
+      "candidate_base_id": null,
+      "mapping_note": "New mage-weapon shape; no spell effects or class rules assigned.",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_sha256": "652e622efcba0d158bf5593a8be07e2743f2fddc8769cf9702feb29202948361",
+      "source_url": "../../source/early-equipment-v1/cinderwood-baton-master.png",
+      "registration": {
+        "method": "existing fitted(): direct source crop, Lanczos reduction, hard alpha, no-dither 64-colour quantization",
+        "source_bounds": [
+          223,
+          136,
+          1120,
+          1135
+        ],
+        "scale": 0.11211211211211211,
+        "offset": [
+          13,
+          8
+        ]
+      },
+      "candidate_icon": "candidates128/cinderwood-baton.png",
+      "icon_sha256": "fac4e2b2f52541a7d55c9b46b36d4a868aa2b1c3f878cf328edd0bf744b12e38",
+      "alpha_bounds": [
+        13,
+        8,
+        114,
+        120
+      ],
+      "visible_colours": 64
+    },
+    {
+      "id": "raiders-leather-vest",
+      "name": "Raider’s Leather Vest",
+      "region": "goblin-territory",
+      "family": "Light armour",
+      "category": "body",
+      "cue": "Sleeveless diagonal leather panels and offset fastening",
+      "status": "proposed; owner review pending",
+      "runtime_binding": null,
+      "source": "art/source/early-equipment-v1/raiders-leather-vest-master.png",
+      "source_kind": "new_imagegen",
+      "source_provenance": "art/source/early-equipment-v1/generation.json",
+      "candidate_base_id": null,
+      "mapping_note": "No exact asymmetric light vest base in the audited table.",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_sha256": "0ee80249f061ff41b11fd4e5ca905a4db2d8e9c7d31a0ac8c6471b158acf0160",
+      "source_url": "../../source/early-equipment-v1/raiders-leather-vest-master.png",
+      "registration": {
+        "method": "existing fitted(): direct source crop, Lanczos reduction, hard alpha, no-dither 64-colour quantization",
+        "source_bounds": [
+          238,
+          73,
+          1015,
+          1185
+        ],
+        "scale": 0.10071942446043165,
+        "offset": [
+          25,
+          8
+        ]
+      },
+      "candidate_icon": "candidates128/raiders-leather-vest.png",
+      "icon_sha256": "9467992250b59b94e6cc37ecb15099c4058b23f722dc27abdbddd093381369dd",
+      "alpha_bounds": [
+        25,
+        8,
+        103,
+        120
+      ],
+      "visible_colours": 63
+    },
+    {
+      "id": "riveted-guard-coat",
+      "name": "Riveted Guard Coat",
+      "region": "goblin-territory",
+      "family": "Medium armour",
+      "category": "body",
+      "cue": "Padded sleeves and spaced vertical iron strips",
+      "status": "proposed; owner review pending",
+      "runtime_binding": null,
+      "source": "art/source/early-equipment-v1/riveted-guard-coat-master.png",
+      "source_kind": "new_imagegen",
+      "source_provenance": "art/source/early-equipment-v1/generation.json",
+      "candidate_base_id": "studded_jerkin",
+      "mapping_note": "A strip-reinforced sleeved coat differs from a studded jerkin; decide base/variant before binding.",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_sha256": "fe6d17d8f25b8906d4cddb1cbdda937078022aed00f9a8a25c55fb49f6732fa6",
+      "source_url": "../../source/early-equipment-v1/riveted-guard-coat-master.png",
+      "registration": {
+        "method": "existing fitted(): direct source crop, Lanczos reduction, hard alpha, no-dither 64-colour quantization",
+        "source_bounds": [
+          21,
+          61,
+          1233,
+          1204
+        ],
+        "scale": 0.0924092409240924,
+        "offset": [
+          8,
+          11
+        ]
+      },
+      "candidate_icon": "candidates128/riveted-guard-coat.png",
+      "icon_sha256": "c4c9000559280001cd6885ee4d21c944962313cbce5bc08b5bdd7a8ae30d528d",
+      "alpha_bounds": [
+        8,
+        11,
+        120,
+        117
+      ],
+      "visible_colours": 62
+    },
+    {
+      "id": "garrison-scale-coat",
+      "name": "Garrison Scale Coat",
+      "region": "goblin-territory",
+      "family": "Heavy armour",
+      "category": "body",
+      "cue": "Dense overlapping iron scales and substantial shoulders",
+      "status": "proposed; owner review pending",
+      "runtime_binding": null,
+      "source": "art/source/early-equipment-v1/garrison-scale-coat-master.png",
+      "source_kind": "new_imagegen",
+      "source_provenance": "art/source/early-equipment-v1/generation.json",
+      "candidate_base_id": "goblin_scale",
+      "mapping_note": "Possible heavy variant of the Goblin scale shirt; full sleeves and coat hem are a new proposal.",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_sha256": "2f0b290f401a6b92fa903e3d49f52592a40247da185347faa22b2f4563e36c61",
+      "source_url": "../../source/early-equipment-v1/garrison-scale-coat-master.png",
+      "registration": {
+        "method": "existing fitted(): direct source crop, Lanczos reduction, hard alpha, no-dither 64-colour quantization",
+        "source_bounds": [
+          38,
+          74,
+          1215,
+          1188
+        ],
+        "scale": 0.0951571792693288,
+        "offset": [
+          8,
+          11
+        ]
+      },
+      "candidate_icon": "candidates128/garrison-scale-coat.png",
+      "icon_sha256": "5bf1ff334a51de66368fc8f39c4c33a8a2aa6472536c857c56a0b4e3f0b443ed",
+      "alpha_bounds": [
+        8,
+        11,
+        120,
+        117
+      ],
+      "visible_colours": 64
+    },
+    {
+      "id": "gate-guards-shield",
+      "name": "Gate Guard’s Shield",
+      "region": "goblin-territory",
+      "family": "Back · combat",
+      "category": "back",
+      "cue": "Tall angular plank shield with two broad iron ribs",
+      "status": "proposed; owner review pending",
+      "runtime_binding": null,
+      "source": "art/source/early-equipment-v1/gate-guards-shield-master.png",
+      "source_kind": "new_imagegen",
+      "source_provenance": "art/source/early-equipment-v1/generation.json",
+      "candidate_base_id": "goblin_shield",
+      "mapping_note": "Live goblin_shield is named round; this tall new shape requires explicit base/variant reconciliation.",
+      "source_canvas": [
+        1070,
+        1470
+      ],
+      "source_sha256": "6bf0cd7cbc601395af18f45c7ddf5c4ae03e3c08ad1e0576eb51e1defd0f3590",
+      "source_url": "../../source/early-equipment-v1/gate-guards-shield-master.png",
+      "registration": {
+        "method": "existing fitted(): direct source crop, Lanczos reduction, hard alpha, no-dither 64-colour quantization",
+        "source_bounds": [
+          222,
+          37,
+          859,
+          1433
+        ],
+        "scale": 0.08022922636103152,
+        "offset": [
+          38,
+          8
+        ]
+      },
+      "candidate_icon": "candidates128/gate-guards-shield.png",
+      "icon_sha256": "16156d4a3b3ab9d720df1d5298f1cb75b34812d7b2377564ff469e24751b6d92",
+      "alpha_bounds": [
+        38,
+        8,
+        89,
+        120
+      ],
+      "visible_colours": 62
+    },
+    {
+      "id": "raiders-mantle",
+      "name": "Raider’s Mantle",
+      "region": "goblin-territory",
+      "family": "Back · exploration",
+      "category": "back",
+      "cue": "Short hoodless mantle, split hem and restrained oxblood lining",
+      "status": "proposed; owner review pending",
+      "runtime_binding": null,
+      "source": "art/source/early-equipment-v1/raiders-mantle-master.png",
+      "source_kind": "new_imagegen",
+      "source_provenance": "art/source/early-equipment-v1/generation.json",
+      "candidate_base_id": "shadow_cape",
+      "mapping_note": "Mundane mantle visual candidate; no magic or changed cape stats implied.",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_sha256": "a6cc30eff1af5041584ee12eaa6b647b405d8894c7452244eeb4c13bc6b6f635",
+      "source_url": "../../source/early-equipment-v1/raiders-mantle-master.png",
+      "registration": {
+        "method": "existing fitted(): direct source crop, Lanczos reduction, hard alpha, no-dither 64-colour quantization",
+        "source_bounds": [
+          168,
+          128,
+          1086,
+          1127
+        ],
+        "scale": 0.11211211211211211,
+        "offset": [
+          12,
+          8
+        ]
+      },
+      "candidate_icon": "candidates128/raiders-mantle.png",
+      "icon_sha256": "82a48abad87367f35dd782247b54ee9eafa2744cf31f2e6a1e9a5f673f58afab",
+      "alpha_bounds": [
+        12,
+        8,
+        115,
+        120
+      ],
+      "visible_colours": 57
+    },
+    {
+      "id": "quartermasters-pack",
+      "name": "Quartermaster’s Pack",
+      "region": "goblin-territory",
+      "family": "Back · capacity",
+      "category": "back",
+      "cue": "Tall canvas pack, exposed timber rails and tied rolls",
+      "status": "proposed; owner review pending",
+      "runtime_binding": null,
+      "source": "art/source/field-kit-v1/miners-frame-pack-master.png",
+      "source_kind": "retained_existing_art",
+      "source_provenance": "art/source/field-kit-v1/generation.json",
+      "reuse_icon": "art/items/field-kit-v1/miners-frame-pack.png",
+      "candidate_base_id": "frame_pack",
+      "mapping_note": "Existing frame_pack is region 1 in the audited table. Art reuse does not move its region or create a new pack base.",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "source_sha256": "9097cc82939fae9b90a4dfb2d8eea868f292b316f26a29b73a4a030a2e79c0c3",
+      "source_url": "../../source/field-kit-v1/miners-frame-pack-master.png",
+      "registration": {
+        "method": "existing 128px visible RGBA unchanged; invisible RGB zeroed in candidate only",
+        "source_icon": "art/items/field-kit-v1/miners-frame-pack.png",
+        "source_icon_sha256": "11832dc51409b2c1059172d9d6e1af562c6f7b17292e84fead9bb1954ec1c09e"
+      },
+      "candidate_icon": "candidates128/quartermasters-pack.png",
+      "icon_sha256": "11832dc51409b2c1059172d9d6e1af562c6f7b17292e84fead9bb1954ec1c09e",
+      "alpha_bounds": [
+        30,
+        8,
+        97,
+        120
+      ],
+      "visible_colours": 64
+    }
+  ]
+}

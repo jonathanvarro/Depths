@@ -248,6 +248,12 @@ Templates > Download and Install; already installed on the owner's PC).
 - `scripts/equipment.gd` + `data/gear/*.tres` – weapons (#58). Companion
   `weapon` sets attack range/accuracy; PartyState.equip()/drop(); carried gear
   is `Supplies.gear`. RoomEvent outcomes can give `gear`.
+  #194/#195's complete 22-design early-region equipment art review is in
+  `art/concepts/early-equipment-v1/inspector.html`: sixteen new masters, six
+  retained designs, individual candidate128 exports, size/silhouette checks and
+  exact prompts. Read `docs/early-equipment-art-review.md` for reuse and advisory
+  ID comparisons. Shape selection and runtime mapping remain pending; candidates
+  are ignored by Godot and do not replace approved icons or #192/#193 data.
 - Light sources (#59): `Supplies.source` is LANTERN, TORCH (held, burns
   `torch_left`, `torch_burnt_out` signal) or NONE; `has_lantern`. Torch
   supply effect LIGHT_TORCH; CombatState.hero_throw_torch() scares a foe off.
