@@ -13,7 +13,7 @@
    "damage": "3-5",
    "to_hit_bonus": "+4%",
    "strike_vs_goblin": 4.38,
-   "strike_vs_queen": 2.19
+   "strike_vs_queen": 2.92
   },
   {
    "seed": 199,
@@ -27,7 +27,7 @@
    "damage": "4-6",
    "to_hit_bonus": "+4%",
    "strike_vs_goblin": 5.11,
-   "strike_vs_queen": 2.92
+   "strike_vs_queen": 3.65
   },
   {
    "seed": 199,
@@ -41,7 +41,7 @@
    "damage": "6-8",
    "to_hit_bonus": "+4%",
    "strike_vs_goblin": 6.57,
-   "strike_vs_queen": 4.38
+   "strike_vs_queen": 5.11
   },
   {
    "seed": 199,
@@ -55,7 +55,7 @@
    "damage": "2-4",
    "to_hit_bonus": "+2%",
    "strike_vs_goblin": 3.55,
-   "strike_vs_queen": 1.42
+   "strike_vs_queen": 2.13
   },
   {
    "seed": 199,
@@ -69,7 +69,7 @@
    "damage": "3-5",
    "to_hit_bonus": "+2%",
    "strike_vs_goblin": 4.26,
-   "strike_vs_queen": 2.13
+   "strike_vs_queen": 2.84
   },
   {
    "seed": 199,
@@ -83,7 +83,7 @@
    "damage": "5-7",
    "to_hit_bonus": "+2%",
    "strike_vs_goblin": 5.68,
-   "strike_vs_queen": 3.55
+   "strike_vs_queen": 4.26
   },
   {
    "seed": 199,
@@ -97,7 +97,7 @@
    "damage": "3-5",
    "to_hit_bonus": "+5%",
    "strike_vs_goblin": 4.44,
-   "strike_vs_queen": 2.22
+   "strike_vs_queen": 2.96
   },
   {
    "seed": 199,
@@ -111,7 +111,7 @@
    "damage": "3-5",
    "to_hit_bonus": "+5%",
    "strike_vs_goblin": 4.44,
-   "strike_vs_queen": 2.22
+   "strike_vs_queen": 2.96
   },
   {
    "seed": 199,
@@ -125,7 +125,7 @@
    "damage": "4-6",
    "to_hit_bonus": "+5%",
    "strike_vs_goblin": 5.18,
-   "strike_vs_queen": 2.96
+   "strike_vs_queen": 3.7
   },
   {
    "seed": 199,
@@ -139,7 +139,7 @@
    "damage": "2-4",
    "to_hit_bonus": "-1%",
    "strike_vs_goblin": 3.4,
-   "strike_vs_queen": 2.04
+   "strike_vs_queen": 2.72
   },
   {
    "seed": 199,
@@ -153,7 +153,7 @@
    "damage": "3-5",
    "to_hit_bonus": "-1%",
    "strike_vs_goblin": 4.08,
-   "strike_vs_queen": 2.72
+   "strike_vs_queen": 3.4
   },
   {
    "seed": 199,
@@ -167,7 +167,7 @@
    "damage": "5-7",
    "to_hit_bonus": "-1%",
    "strike_vs_goblin": 5.44,
-   "strike_vs_queen": 4.08
+   "strike_vs_queen": 4.76
   },
   {
    "seed": 199,
@@ -181,7 +181,7 @@
    "damage": "3-5",
    "to_hit_bonus": "+1%",
    "strike_vs_goblin": 3.5,
-   "strike_vs_queen": 2.8
+   "strike_vs_queen": 3.5
   },
   {
    "seed": 199,
@@ -195,7 +195,7 @@
    "damage": "4-6",
    "to_hit_bonus": "+1%",
    "strike_vs_goblin": 4.2,
-   "strike_vs_queen": 3.5
+   "strike_vs_queen": 4.2
   },
   {
    "seed": 199,
@@ -209,7 +209,7 @@
    "damage": "6-8",
    "to_hit_bonus": "+1%",
    "strike_vs_goblin": 5.6,
-   "strike_vs_queen": 4.9
+   "strike_vs_queen": 5.6
   },
   {
    "seed": 199,
@@ -223,7 +223,7 @@
    "damage": "3-5",
    "to_hit_bonus": "+2%",
    "strike_vs_goblin": 3.55,
-   "strike_vs_queen": 2.84
+   "strike_vs_queen": 3.55
   },
   {
    "seed": 199,
@@ -237,7 +237,7 @@
    "damage": "4-6",
    "to_hit_bonus": "+2%",
    "strike_vs_goblin": 4.26,
-   "strike_vs_queen": 3.55
+   "strike_vs_queen": 4.26
   },
   {
    "seed": 199,
@@ -251,7 +251,7 @@
    "damage": "6-8",
    "to_hit_bonus": "+2%",
    "strike_vs_goblin": 5.68,
-   "strike_vs_queen": 4.97
+   "strike_vs_queen": 5.68
   },
   {
    "seed": 199,
@@ -265,7 +265,7 @@
    "damage": "3-5",
    "to_hit_bonus": "+0%",
    "strike_vs_goblin": 4.83,
-   "strike_vs_queen": 4.14
+   "strike_vs_queen": 4.83
   },
   {
    "seed": 199,
@@ -279,7 +279,7 @@
    "damage": "4-6",
    "to_hit_bonus": "+0%",
    "strike_vs_goblin": 5.52,
-   "strike_vs_queen": 4.83
+   "strike_vs_queen": 5.52
   },
   {
    "seed": 199,
@@ -293,7 +293,7 @@
    "damage": "6-8",
    "to_hit_bonus": "+0%",
    "strike_vs_goblin": 6.9,
-   "strike_vs_queen": 6.21
+   "strike_vs_queen": 6.9
   },
   {
    "seed": 199,
@@ -307,7 +307,7 @@
    "damage": "3-5",
    "to_hit_bonus": "-1%",
    "strike_vs_goblin": 3.4,
-   "strike_vs_queen": 2.72
+   "strike_vs_queen": 3.4
   },
   {
    "seed": 199,
@@ -321,7 +321,7 @@
    "damage": "4-6",
    "to_hit_bonus": "-1%",
    "strike_vs_goblin": 4.08,
-   "strike_vs_queen": 3.4
+   "strike_vs_queen": 4.08
   },
   {
    "seed": 199,
@@ -335,7 +335,7 @@
    "damage": "6-8",
    "to_hit_bonus": "-1%",
    "strike_vs_goblin": 5.44,
-   "strike_vs_queen": 4.76
+   "strike_vs_queen": 5.44
   },
   {
    "seed": 199,
@@ -349,7 +349,7 @@
    "damage": "3-7",
    "to_hit_bonus": "+0%",
    "strike_vs_goblin": 4.14,
-   "strike_vs_queen": 2.76
+   "strike_vs_queen": 3.45
   },
   {
    "seed": 199,
@@ -363,7 +363,7 @@
    "damage": "3-7",
    "to_hit_bonus": "+0%",
    "strike_vs_goblin": 4.14,
-   "strike_vs_queen": 2.76
+   "strike_vs_queen": 3.45
   },
   {
    "seed": 199,
@@ -377,7 +377,7 @@
    "damage": "4-8",
    "to_hit_bonus": "+0%",
    "strike_vs_goblin": 4.83,
-   "strike_vs_queen": 3.45
+   "strike_vs_queen": 4.14
   },
   {
    "seed": 199,
@@ -391,7 +391,7 @@
    "damage": "3-6",
    "to_hit_bonus": "-6%",
    "strike_vs_goblin": 3.46,
-   "strike_vs_queen": 2.2
+   "strike_vs_queen": 2.83
   },
   {
    "seed": 199,
@@ -405,7 +405,7 @@
    "damage": "5-8",
    "to_hit_bonus": "-6%",
    "strike_vs_goblin": 4.72,
-   "strike_vs_queen": 3.46
+   "strike_vs_queen": 4.09
   },
   {
    "seed": 199,
@@ -419,7 +419,7 @@
    "damage": "7-10",
    "to_hit_bonus": "-6%",
    "strike_vs_goblin": 5.98,
-   "strike_vs_queen": 4.72
+   "strike_vs_queen": 5.35
   },
   {
    "seed": 199,
@@ -433,7 +433,7 @@
    "damage": "4-7",
    "to_hit_bonus": "-4%",
    "strike_vs_goblin": 4.22,
-   "strike_vs_queen": 2.92
+   "strike_vs_queen": 3.57
   },
   {
    "seed": 199,
@@ -447,7 +447,7 @@
    "damage": "4-7",
    "to_hit_bonus": "-4%",
    "strike_vs_goblin": 4.22,
-   "strike_vs_queen": 2.92
+   "strike_vs_queen": 3.57
   },
   {
    "seed": 199,
@@ -461,7 +461,7 @@
    "damage": "5-8",
    "to_hit_bonus": "-4%",
    "strike_vs_goblin": 4.87,
-   "strike_vs_queen": 3.57
+   "strike_vs_queen": 4.22
   },
   {
    "seed": 199,
@@ -475,7 +475,7 @@
    "damage": "2-4",
    "to_hit_bonus": "-9%",
    "strike_vs_goblin": 2.4,
-   "strike_vs_queen": 1.2
+   "strike_vs_queen": 1.8
   },
   {
    "seed": 199,
@@ -489,7 +489,7 @@
    "damage": "2-4",
    "to_hit_bonus": "-9%",
    "strike_vs_goblin": 2.4,
-   "strike_vs_queen": 1.2
+   "strike_vs_queen": 1.8
   },
   {
    "seed": 199,
@@ -503,7 +503,7 @@
    "damage": "3-5",
    "to_hit_bonus": "-9%",
    "strike_vs_goblin": 3.0,
-   "strike_vs_queen": 1.8
+   "strike_vs_queen": 2.4
   },
   {
    "seed": 199,
@@ -517,7 +517,7 @@
    "damage": "4-6",
    "to_hit_bonus": "-4%",
    "strike_vs_goblin": 4.55,
-   "strike_vs_queen": 2.6
+   "strike_vs_queen": 3.25
   },
   {
    "seed": 199,
@@ -531,7 +531,7 @@
    "damage": "4-6",
    "to_hit_bonus": "+0%",
    "strike_vs_goblin": 4.86,
-   "strike_vs_queen": 2.78
+   "strike_vs_queen": 3.47
   },
   {
    "seed": 199,
@@ -545,7 +545,7 @@
    "damage": "5-7",
    "to_hit_bonus": "+5%",
    "strike_vs_goblin": 5.92,
-   "strike_vs_queen": 3.7
+   "strike_vs_queen": 4.44
   },
   {
    "seed": 199,
@@ -559,7 +559,7 @@
    "damage": "4-6",
    "to_hit_bonus": "-3%",
    "strike_vs_goblin": 4.62,
-   "strike_vs_queen": 2.64
+   "strike_vs_queen": 3.3
   },
   {
    "seed": 199,
@@ -573,7 +573,7 @@
    "damage": "5-7",
    "to_hit_bonus": "-0%",
    "strike_vs_goblin": 5.52,
-   "strike_vs_queen": 3.45
+   "strike_vs_queen": 4.14
   },
   {
    "seed": 199,
@@ -587,7 +587,7 @@
    "damage": "7-9",
    "to_hit_bonus": "+3%",
    "strike_vs_goblin": 7.2,
-   "strike_vs_queen": 5.04
+   "strike_vs_queen": 5.76
   },
   {
    "seed": 199,
@@ -595,13 +595,13 @@
    "name": "Cracked goblin cleaver of the lamplighter",
    "base": "goblin_cleaver",
    "quality": "cracked",
-   "growth": "accuracy swift/damage swift",
+   "growth": "accuracy swift/damage steady",
    "mods": "the lantern burns 10% slower",
    "mastery": 0,
    "damage": "3-5",
    "to_hit_bonus": "-8%",
    "strike_vs_goblin": 3.66,
-   "strike_vs_queen": 1.83
+   "strike_vs_queen": 2.44
   },
   {
    "seed": 199,
@@ -609,12 +609,12 @@
    "name": "Cracked goblin cleaver of the lamplighter",
    "base": "goblin_cleaver",
    "quality": "cracked",
-   "growth": "accuracy swift/damage swift",
+   "growth": "accuracy swift/damage steady",
    "mods": "the lantern burns 10% slower",
    "mastery": 3,
-   "damage": "5-7",
+   "damage": "4-6",
    "to_hit_bonus": "-4%",
-   "strike_vs_goblin": 5.24,
+   "strike_vs_goblin": 4.58,
    "strike_vs_queen": 3.27
   },
   {
@@ -623,12 +623,12 @@
    "name": "Cracked goblin cleaver of the lamplighter",
    "base": "goblin_cleaver",
    "quality": "cracked",
-   "growth": "accuracy swift/damage swift",
+   "growth": "accuracy swift/damage steady",
    "mods": "the lantern burns 10% slower",
    "mastery": 6,
-   "damage": "7-9",
+   "damage": "6-8",
    "to_hit_bonus": "+1%",
-   "strike_vs_goblin": 7.0,
+   "strike_vs_goblin": 6.3,
    "strike_vs_queen": 4.9
   },
   {
@@ -643,7 +643,7 @@
    "damage": "4-6",
    "to_hit_bonus": "-3%",
    "strike_vs_goblin": 4.62,
-   "strike_vs_queen": 2.64
+   "strike_vs_queen": 3.3
   },
   {
    "seed": 199,
@@ -657,7 +657,7 @@
    "damage": "5-7",
    "to_hit_bonus": "-2%",
    "strike_vs_goblin": 5.4,
-   "strike_vs_queen": 3.37
+   "strike_vs_queen": 4.05
   },
   {
    "seed": 199,
@@ -671,7 +671,7 @@
    "damage": "7-9",
    "to_hit_bonus": "-0%",
    "strike_vs_goblin": 6.9,
-   "strike_vs_queen": 4.83
+   "strike_vs_queen": 5.52
   },
   {
    "seed": 199,
@@ -913,7 +913,7 @@
    "name": "Fine goblin scale shirt",
    "base": "goblin_scale",
    "quality": "fine",
-   "growth": "health swift/handling slow",
+   "growth": "health swift/handling steady",
    "mods": "",
    "mastery": 0,
    "armour": 3,
@@ -926,7 +926,7 @@
    "name": "Fine goblin scale shirt",
    "base": "goblin_scale",
    "quality": "fine",
-   "growth": "health swift/handling slow",
+   "growth": "health swift/handling steady",
    "mods": "",
    "mastery": 3,
    "armour": 3,
@@ -939,12 +939,12 @@
    "name": "Fine goblin scale shirt",
    "base": "goblin_scale",
    "quality": "fine",
-   "growth": "health swift/handling slow",
+   "growth": "health swift/handling steady",
    "mods": "",
    "mastery": 6,
    "armour": 3,
    "health": "+7",
-   "slowing": 3
+   "slowing": 2
   },
   {
    "seed": 199,

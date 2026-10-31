@@ -25,10 +25,10 @@ Sanity check: two front fighters, 5–7 at 80% against 2 armour: **6.4** expecte
 
 | Body armour | Health M0 (p10 / p50 / p90) | M3 | M6 | Slowing M0 → M6 |
 |---|---|---|---|---|
-| Studded jerkin (armour 2) | -2 / +0 / +2 | +0 / +2 / +4 | +2 / +4 / +6 | 0.9 → 0.9 |
-| Goblin scale shirt (armour 3) | -2 / +0 / +2 | +0 / +2 / +4 | +2 / +4 / +6 | 2.9 → 1.9 |
+| Studded jerkin (armour 2) | -2 / +0 / +2 | +0 / +2 / +4 | +1 / +4 / +6 | 0.9 → 0.9 |
+| Goblin scale shirt (armour 3) | -2 / +0 / +2 | +0 / +2 / +4 | +2 / +4 / +7 | 2.9 → 1.9 |
 
-**How rare are the combinations?** Of 30000 region-2 items: exceptional 5.2%; exceptional with swift growth 0.65%; two modifiers 7.9%; exceptional, swift and two modifiers 0.043%; carrying a drawback 2.0%. Nothing required should hang on the rarest of these.
+**How rare are the combinations?** Of 30000 region-2 items: exceptional 5.2%; exceptional with swift growth 1.60%; two modifiers 7.9%; exceptional, swift and two modifiers 0.110%; carrying a drawback 2.0%. Nothing required should hang on the rarest of these.
 
 ## Regional matchups (floor 4)
 
@@ -36,16 +36,16 @@ Expected damage of one **Strike** (both front-row heroes attack; a melee hero wi
 
 | Loadout | Goblin (13 hp) | Goblin archer (10 hp) | Goblin guard (15 hp) | Goblin drummer (11 hp) | Goblin brute (23 hp) | Hollow miner (20 hp) | Breach hound (11 hp) | Gas-bloat (8 hp) | Goblin queen (40 hp) |
 |---|---|---|---|---|---|---|---|---|---|
-| Fresh ordinary sword and jerkin (M0) | 7.1 → 8.7 (2) | 7.1 → 8.7 (2) | 7.1 → 3.9 (4) | 7.1 → 8.7 (2) | 7.1 → 5.5 (5) | 7.1 → 5.5 (4) | 7.1 → 8.7 (2) | 7.1 → 8.7 (1) | 7.1 → 3.9 (11) |
-| Exceptional sword, slow growth (M0) | 9.0 → 10.7 (2) | 9.0 → 10.7 (1) | 9.0 → 5.7 (3) | 9.0 → 10.7 (2) | 9.0 → 7.4 (4) | 9.0 → 7.4 (3) | 9.0 → 10.7 (2) | 9.0 → 10.7 (1) | 9.0 → 5.7 (7) |
-| Ordinary sword and jerkin, mastered (M3) | 8.7 → 10.3 (2) | 8.7 → 10.3 (1) | 8.7 → 5.5 (3) | 8.7 → 10.3 (2) | 8.7 → 7.1 (4) | 8.7 → 7.1 (3) | 8.7 → 10.3 (2) | 8.7 → 10.3 (1) | 8.7 → 5.5 (8) |
-| Cracked sword, swift growth, well mastered (M6) | 11.3 → 12.8 (2) | 11.3 → 12.8 (1) | 11.3 → 8.2 (2) | 11.3 → 12.8 (1) | 11.3 → 9.8 (3) | 11.3 → 9.8 (3) | 11.3 → 12.8 (1) | 11.3 → 12.8 (1) | 11.3 → 8.2 (5) |
-| Light mace (smash) as the counter (M2) | 8.1 → 8.1 (2) | 8.1 → 8.1 (2) | 8.1 → 6.7 (3) | 8.1 → 8.1 (2) | 8.1 → 8.1 (3) | 8.1 → 8.1 (3) | 8.1 → 8.1 (2) | 8.1 → 8.1 (1) | 8.1 → 6.7 (7) |
-| Biting goblin cleaver (M1) | 7.7 → 9.1 (2) | 7.7 → 9.1 (2) | 7.7 → 6.3 (3) | 7.7 → 9.1 (2) | 7.7 → 7.7 (3) | 7.7 → 7.7 (3) | 7.7 → 9.1 (2) | 7.7 → 9.1 (1) | 7.7 → 6.3 (7) |
-| Sword of the goblin-bane (M1) | 10.3 → 11.9 (2) | 10.3 → 11.9 (1) | 10.3 → 7.1 (3) | 10.3 → 11.9 (1) | 10.3 → 8.7 (3) | 7.1 → 5.5 (4) | 7.1 → 8.7 (2) | 7.1 → 8.7 (1) | 10.3 → 7.1 (6) |
-| Region-1 leftovers: oak club, old jerkin (M3) | 6.7 → 6.7 (2) | 6.7 → 6.7 (2) | 6.7 → 5.2 (3) | 6.7 → 6.7 (2) | 6.7 → 6.7 (4) | 6.7 → 6.7 (4) | 6.7 → 6.7 (2) | 6.7 → 6.7 (2) | 6.7 → 5.2 (8) |
-| Deep start: fresh ordinary gear, level 1 | 7.1 → 8.7 (2) | 7.1 → 8.7 (2) | 7.1 → 3.9 (4) | 7.1 → 8.7 (2) | 7.1 → 5.5 (5) | 7.1 → 5.5 (4) | 7.1 → 8.7 (2) | 7.1 → 8.7 (1) | 7.1 → 3.9 (11) |
-| Deep start: mastered mace and jerkin, level 1 | 8.1 → 8.1 (2) | 8.1 → 8.1 (2) | 8.1 → 6.7 (3) | 8.1 → 8.1 (2) | 8.1 → 8.1 (3) | 8.1 → 8.1 (3) | 8.1 → 8.1 (2) | 8.1 → 8.1 (1) | 8.1 → 6.7 (7) |
+| Fresh ordinary sword and jerkin (M0) | 7.1 → 8.7 (2) | 7.1 → 8.7 (2) | 7.1 → 3.9 (4) | 7.1 → 8.7 (2) | 7.1 → 5.5 (5) | 7.1 → 5.5 (4) | 7.1 → 8.7 (2) | 7.1 → 8.7 (1) | 7.1 → 5.5 (8) |
+| Exceptional sword, slow growth (M0) | 9.0 → 10.7 (2) | 9.0 → 10.7 (1) | 9.0 → 5.7 (3) | 9.0 → 10.7 (2) | 9.0 → 7.4 (4) | 9.0 → 7.4 (3) | 9.0 → 10.7 (2) | 9.0 → 10.7 (1) | 9.0 → 7.4 (6) |
+| Ordinary sword and jerkin, mastered (M3) | 8.7 → 10.3 (2) | 8.7 → 10.3 (1) | 8.7 → 5.5 (3) | 8.7 → 10.3 (2) | 8.7 → 7.1 (4) | 8.7 → 7.1 (3) | 8.7 → 10.3 (2) | 8.7 → 10.3 (1) | 8.7 → 7.1 (6) |
+| Cracked sword, swift growth, well mastered (M6) | 11.3 → 12.8 (2) | 11.3 → 12.8 (1) | 11.3 → 8.2 (2) | 11.3 → 12.8 (1) | 11.3 → 9.8 (3) | 11.3 → 9.8 (3) | 11.3 → 12.8 (1) | 11.3 → 12.8 (1) | 11.3 → 9.8 (5) |
+| Light mace (smash) as the counter (M2) | 8.1 → 8.1 (2) | 8.1 → 8.1 (2) | 8.1 → 6.7 (3) | 8.1 → 8.1 (2) | 8.1 → 8.1 (3) | 8.1 → 8.1 (3) | 8.1 → 8.1 (2) | 8.1 → 8.1 (1) | 8.1 → 8.1 (5) |
+| Biting goblin cleaver (M1) | 7.7 → 9.1 (2) | 7.7 → 9.1 (2) | 7.7 → 6.3 (3) | 7.7 → 9.1 (2) | 7.7 → 7.7 (3) | 7.7 → 7.7 (3) | 7.7 → 9.1 (2) | 7.7 → 9.1 (1) | 7.7 → 7.7 (6) |
+| Sword of the goblin-bane (M1) | 10.3 → 11.9 (2) | 10.3 → 11.9 (1) | 10.3 → 7.1 (3) | 10.3 → 11.9 (1) | 10.3 → 8.7 (3) | 7.1 → 5.5 (4) | 7.1 → 8.7 (2) | 7.1 → 8.7 (1) | 10.3 → 8.7 (5) |
+| Region-1 leftovers: oak club, old jerkin (M3) | 6.7 → 6.7 (2) | 6.7 → 6.7 (2) | 6.7 → 5.2 (3) | 6.7 → 6.7 (2) | 6.7 → 6.7 (4) | 6.7 → 6.7 (4) | 6.7 → 6.7 (2) | 6.7 → 6.7 (2) | 6.7 → 6.7 (7) |
+| Deep start: fresh ordinary gear, level 1 | 7.1 → 8.7 (2) | 7.1 → 8.7 (2) | 7.1 → 3.9 (4) | 7.1 → 8.7 (2) | 7.1 → 5.5 (5) | 7.1 → 5.5 (4) | 7.1 → 8.7 (2) | 7.1 → 8.7 (1) | 7.1 → 5.5 (8) |
+| Deep start: mastered mace and jerkin, level 1 | 8.1 → 8.1 (2) | 8.1 → 8.1 (2) | 8.1 → 6.7 (3) | 8.1 → 8.1 (2) | 8.1 → 8.1 (3) | 8.1 → 8.1 (3) | 8.1 → 8.1 (2) | 8.1 → 8.1 (1) | 8.1 → 8.1 (5) |
 
 Each cell: today → proposed (actions to kill under the proposal).
 
@@ -55,16 +55,16 @@ Each cell: today → proposed (actions to kill under the proposal).
 
 | Loadout | Wins | Rounds (median) | Health left when won |
 |---|---|---|---|
-| Fresh ordinary sword and jerkin (M0) | 35% | 20.0 | 26% |
-| Exceptional sword, slow growth (M0) | 86% | 15 | 40% |
-| Ordinary sword and jerkin, mastered (M3) | 89% | 15.0 | 41% |
-| Cracked sword, swift growth, well mastered (M6) | 99% | 10 | 59% |
-| Light mace (smash) as the counter (M2) | 95% | 13.0 | 48% |
-| Biting goblin cleaver (M1) | 89% | 13 | 44% |
-| Sword of the goblin-bane (M1) | 96% | 12.0 | 48% |
-| Region-1 leftovers: oak club, old jerkin (M3) | 82% | 16.0 | 39% |
-| Deep start: fresh ordinary gear, level 1 | 16% | 20 | 26% |
-| Deep start: mastered mace and jerkin, level 1 | 88% | 13 | 45% |
+| Fresh ordinary sword and jerkin (M0) | 56% | 17 | 32% |
+| Exceptional sword, slow growth (M0) | 92% | 13 | 44% |
+| Ordinary sword and jerkin, mastered (M3) | 94% | 13.0 | 46% |
+| Cracked sword, swift growth, well mastered (M6) | 100% | 9.0 | 65% |
+| Light mace (smash) as the counter (M2) | 97% | 11 | 53% |
+| Biting goblin cleaver (M1) | 94% | 12 | 48% |
+| Sword of the goblin-bane (M1) | 97% | 10.0 | 54% |
+| Region-1 leftovers: oak club, old jerkin (M3) | 90% | 14.0 | 43% |
+| Deep start: fresh ordinary gear, level 1 | 33% | 17 | 30% |
+| Deep start: mastered mace and jerkin, level 1 | 92% | 12 | 50% |
 
 ## Mastery pace
 

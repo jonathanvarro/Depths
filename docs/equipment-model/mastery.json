@@ -56,7 +56,7 @@
     "multiplier": 2.0
   },
   "smith_temper": {
-    "_about": "At mastery 3 and 6 the smith turns mastery into one chosen improvement (#173), for gold and a regional material. The smith remembers improvements after the item is lost; rebuilding needs the investment again.",
+    "_about": "At mastery 3 and 6 the smith turns mastery into one chosen improvement (#173), for gold and a regional material. The smith remembers improvements after the item is lost; rebuilding needs the investment again. Owner, 2026-10-31: tempering needs the item's own region's material, so old gear tops out.",
     "options": [
       {
         "id": "edge",
@@ -114,7 +114,9 @@
       "1": "iron ore",
       "2": "goblin-forged scrap",
       "3": "black ore"
-    }
+    },
+    "own_region_only": true
   },
-  "_tuning": "2026-10-31: thresholds doubled after the first probe run (mastery 3 came in about 5 fights)."
+  "_tuning": "2026-10-31: thresholds doubled after the first probe run (mastery 3 came in about 5 fights).",
+  "_decided": "Owner, 2026-10-31: pace kept (mastery 3 in about 1.4 expeditions, 6 in about 4.3), tempering at 3 and 6."
 }

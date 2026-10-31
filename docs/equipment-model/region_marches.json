@@ -4,39 +4,141 @@
   "floor": 4,
   "region_threat": 3.5,
   "strike_rules": {
-    "_about": "Proposal: a smash ignores 1 armour; a slash does +1 to an unarmoured foe; a pierce does +1 to beasts (hounds, bloats) and reaches.",
-    "smash": {"ignore_armour": 1},
-    "slash": {"bonus_vs_unarmoured": 1},
-    "pierce": {"bonus_vs_beast": 1}
+    "_about": "Owner, 2026-10-31: real rules. Blunt (smash) ignores 1 armour; blades (slash) do +1 to an unarmoured foe. Pierce has no general bonus (not approved); reach is its strength.",
+    "smash": {
+      "ignore_armour": 1
+    },
+    "slash": {
+      "bonus_vs_unarmoured": 1
+    },
+    "pierce": {}
   },
   "ordinary": [
-    {"id": "goblin", "family": "goblin", "armour": 0, "counter": "anything; blades best"},
-    {"id": "goblin_archer", "family": "goblin", "armour": 0, "row": "back", "counter": "reach or Shoot; close the gap"},
-    {"id": "goblin_guard", "family": "goblin", "armour": 2, "counter": "smash, Biting; the guard wall halves damage to those behind it"},
-    {"id": "goblin_drummer", "family": "goblin", "armour": 0, "counter": "kill first: it powers the others"},
-    {"id": "goblin_brute", "family": "goblin", "armour": 1, "slow": true, "counter": "Brace the heavy blow, strike while it recovers; kite it"},
-    {"id": "hollow_miner", "family": "breach", "armour": 1, "slow": true, "counter": "hit it to free a grabbed hero; kite it"},
-    {"id": "breach_hound", "family": "beast", "armour": 0, "counter": "pierce, hound-breaker; corridors (they hit harder in a pack)"},
-    {"id": "gas_bloat", "family": "beast", "armour": 0, "counter": "kill it from the back row or with a thrown torch"}
+    {
+      "id": "goblin",
+      "family": "goblin",
+      "armour": 0,
+      "counter": "anything; blades best"
+    },
+    {
+      "id": "goblin_archer",
+      "family": "goblin",
+      "armour": 0,
+      "row": "back",
+      "counter": "reach or Shoot; close the gap"
+    },
+    {
+      "id": "goblin_guard",
+      "family": "goblin",
+      "armour": 2,
+      "counter": "smash, Biting; the guard wall halves damage to those behind it"
+    },
+    {
+      "id": "goblin_drummer",
+      "family": "goblin",
+      "armour": 0,
+      "counter": "kill first: it powers the others"
+    },
+    {
+      "id": "goblin_brute",
+      "family": "goblin",
+      "armour": 1,
+      "slow": true,
+      "counter": "Brace the heavy blow, strike while it recovers; kite it"
+    },
+    {
+      "id": "hollow_miner",
+      "family": "breach",
+      "armour": 1,
+      "slow": true,
+      "counter": "hit it to free a grabbed hero; kite it"
+    },
+    {
+      "id": "breach_hound",
+      "family": "beast",
+      "armour": 0,
+      "counter": "pierce, hound-breaker; corridors (they hit harder in a pack)"
+    },
+    {
+      "id": "gas_bloat",
+      "family": "beast",
+      "armour": 0,
+      "counter": "kill it from the back row or with a thrown torch"
+    }
   ],
   "dangerous_combinations": [
-    {"group": ["goblin_guard", "goblin", "goblin_archer"], "why": "the guard wall halves damage to the goblins behind it; the archer shoots past"},
-    {"group": ["goblin_brute", "goblin_drummer", "goblin"], "why": "the drummer lifts the brute's already-heavy blows"},
-    {"group": ["breach_hound", "breach_hound", "breach_hound"], "why": "a pack hits harder while another stands; fast"}
+    {
+      "group": [
+        "goblin_guard",
+        "goblin",
+        "goblin_archer"
+      ],
+      "why": "the guard wall halves damage to the goblins behind it; the archer shoots past"
+    },
+    {
+      "group": [
+        "goblin_brute",
+        "goblin_drummer",
+        "goblin"
+      ],
+      "why": "the drummer lifts the brute's already-heavy blows"
+    },
+    {
+      "group": [
+        "breach_hound",
+        "breach_hound",
+        "breach_hound"
+      ],
+      "why": "a pack hits harder while another stands; fast"
+    }
   ],
-  "elite": {"id": "goblin_brute", "elite": "Hardened", "why": "the optional elite: 18+ health and a heavy blow"},
+  "elite": {
+    "id": "goblin_brute",
+    "elite": "Hardened",
+    "why": "the optional elite: 18+ health and a heavy blow"
+  },
   "boss": {
     "id": "goblin_queen",
-    "armour": 2,
+    "armour": 1,
     "family": "goblin",
-    "guards": {"id": "goblin_guard", "every_rounds": 3, "max": 2},
-    "counters": ["smash or Biting (her armour)", "goblin-bane", "Brace her cleaver (the coin)", "kill guards as they come or burst her down"]
+    "guards": {
+      "id": "goblin_guard",
+      "every_rounds": 3,
+      "max": 2
+    },
+    "counters": [
+      "smash or Biting (her armour)",
+      "goblin-bane",
+      "Brace her cleaver (the coin)",
+      "kill guards as they come or burst her down"
+    ]
   },
   "party_model": {
     "_about": "A typical party arriving on floor 4. Levels reset each expedition (#172); level adds 2 health. Accuracy is aim + dexterity as companion.gd computes it.",
     "level": 3,
-    "front": [{"name": "melee", "health": 26, "accuracy": 0.69, "strength_bonus": 1}, {"name": "scout", "health": 20, "accuracy": 0.80, "strength_bonus": 0}],
-    "back": [{"name": "mage", "health": 18, "accuracy": 0.65, "strength_bonus": 0}],
+    "front": [
+      {
+        "name": "melee",
+        "health": 26,
+        "accuracy": 0.69,
+        "strength_bonus": 1
+      },
+      {
+        "name": "scout",
+        "health": 20,
+        "accuracy": 0.8,
+        "strength_bonus": 0
+      }
+    ],
+    "back": [
+      {
+        "name": "mage",
+        "health": 18,
+        "accuracy": 0.65,
+        "strength_bonus": 0
+      }
+    ],
     "draughts": 2
-  }
+  },
+  "_decided": "Owner, 2026-10-31: enemy armour becomes a real rule (guard 2, brute 1, hollow miner 1, the queen 1)."
 }

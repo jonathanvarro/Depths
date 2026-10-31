@@ -107,16 +107,18 @@ The boss is the goblin queen (40 health; guards join every 3 rounds, up to 2). W
 
 | Loadout | Wins |
 |---|---|
-| Fresh ordinary sword and jerkin (mastery 0) | 35% |
-| Exceptional sword, slow growth (mastery 0) | 86% |
-| Ordinary sword and jerkin, mastery 3 | 89% |
-| Cracked sword, swift growth, mastery 6 | 99% |
-| **Light mace as the counter**, mastery 2 | 95% |
-| **Biting goblin cleaver**, mastery 1 | 89% |
-| **Sword of the goblin-bane**, mastery 1 | 96% |
-| Region-1 leftovers (oak club, old jerkin), mastery 3 | 82% |
-| Deep start, level 1, fresh ordinary gear | 16% |
-| Deep start, level 1, mastered mace and jerkin | 88% |
+| Fresh ordinary sword and jerkin (mastery 0) | 56% |
+| Exceptional sword, slow growth (mastery 0) | 92% |
+| Ordinary sword and jerkin, mastery 3 | 94% |
+| Cracked sword, swift growth, mastery 6 | 100% |
+| **Light mace as the counter**, mastery 2 | 97% |
+| **Biting goblin cleaver**, mastery 1 | 94% |
+| **Sword of the goblin-bane**, mastery 1 | 97% |
+| Region-1 leftovers (oak club, old jerkin), mastery 3 | 90% |
+| Deep start, level 1, fresh ordinary gear | 33% |
+| Deep start, level 1, mastered mace and jerkin | 92% |
+
+*Rerun after the owner's decisions: the queen has armour 1, growth is not tied to quality, and there's no pierce bonus. With armour 2 the rates were 35, 86, 89, 99, 95, 89, 96, 82, 16 and 88%.*
 
 **What this supports:**
 1. **Several ways to be boss-ready, and no single key:**
@@ -127,7 +129,7 @@ The boss is the goblin queen (40 health; guards join every 3 rounds, up to 2). W
    Fresh ordinary gear is not enough, which is your direction: mastery and counters matter for the boss.
 2. **Ordinary regional gear handles ordinary fights:** two Strikes for most goblins and hounds, and 3–5 for guards and brutes.
 3. **Counters compete with mastery:** a mace at mastery 2 (95%) beats a sword at mastery 3 (89%) against this armoured boss, so swapping is worth it.
-4. **Deep starts (#189) work with the right gear:** at level 1, fresh gear struggles (16%) but mastered gear holds (88%). Character level still matters: fresh gear wins 35% at level 3 against 16% at level 1.
+4. **Deep starts (#189) work with the right gear:** at level 1, fresh gear struggles (33%) but mastered gear holds (92%). Character level still matters: fresh gear wins 56% at level 3 against 33% at level 1.
 5. **No lottery:**
    - exceptional quality is 5.2% of drops;
    - exceptional with swift growth is 0.65%;
@@ -137,9 +139,10 @@ The boss is the goblin queen (40 health; guards join every 3 rounds, up to 2). W
    Nothing required needs these.
 
 **What needs care:**
-1. **Flat enemy armour makes +1 damage swing hard.** Against the queen's proposed armour 2, a mere +1 damage (exceptional quality) lifts the win rate from 35% to 86%. Either give the queen armour 1, or let exceptional quality add +1 to the top of the range only. The probe makes this easy to compare.
-2. **Old gear stays good with mastery.** Region-1 leftovers at mastery 3 win 82%. That may be fine (your favourite club carries on), but it weakens the pull of the new region's loot. One option is that tempering needs the region's own material, so old gear can't be tempered past its region.
-3. **Swift growth at mastery 6 is very strong** (99%, finishing with 59% health). The cap of 6 and the slower thresholds keep it far off, at 4+ expeditions, but that is the ceiling to watch.
+1. **Flat enemy armour makes +1 damage swing hard.** At the proposed armour 2, a plain +1 damage (exceptional quality) took the win rate from 35% to 86%. **Decided:** the queen has armour 1.
+2. **Old gear stays good with mastery.** Region-1 leftovers at mastery 3 win 90%. **Decided:** tempering needs the item's own region's material, so old gear tops out; this probe doesn't model tempering yet.
+3. **Swift growth at mastery 6 is very strong** (100%). The cap of 6 and the thresholds keep it at 4+ expeditions, but that is the ceiling to watch.
+4. **The boss may now be on the easy side.** Most prepared loadouts win 92–97% even in this simple model, which leaves out the party's other tools. Tune the queen in play.
 
 **What's untested:**
 - The boss model is simple (both front heroes strike every round; no Brace, stepping, Flare or back-row attacks). Real fights have more tools, so treat these rates as a lower bound.
@@ -182,14 +185,20 @@ vs worn: +1 damage, −2% to hit   [green / red]
 - **Static `.tres` items** (starting weapons, the shop) are ordinary quality, steady growth, no modifiers, until found or bought as new instances.
 - **Nothing in this model touches player saves.**
 
-## Decisions for the owner
+## Decisions — the owner, 2026-10-31
 
-1. The quality words and what they do, and whether cracked/bent are fixed quality (recommended) or repairable.
-2. Whether enemy armour and strike types (smash, slash, pierce) become real rules, and the queen's armour (1 or 2).
-3. The mastery pace: mastery 3 in about 1.4 expeditions and mastery 6 in about 4.3, with tempering at 3 and 6.
-4. Whether old-region gear can be tempered with newer materials.
-5. The modifier list, and whether drawbacks belong on weapons and armour (today only trinkets have them).
-6. The inspection layout.
+1. **Quality:** cracked, bent, ordinary, fine and exceptional, with the proposed effects.
+   - **Fixed starting quality:** no wear, breakage or repair.
+   - **Growth is not tied to quality:** every piece has the same odds of slow, steady or swift growth.
+2. **Enemy armour and strike types become real rules:**
+   - **Armour:** goblin guard 2, brute 1, hollow miner 1, **the queen 1**.
+   - **Strike types:** blunt ignores 1 armour, and blades do +1 to unarmoured foes. Pierce has no general bonus; reach is its strength.
+3. **Mastery pace kept:** mastery 3 in about 1.4 expeditions and mastery 6 in about 4.3, with tempering at 3 and 6.
+4. **Tempering needs the item's own region's material.**
+5. **The modifier list as proposed,** with drawbacks on weapons and armour only paired with a strength.
+6. **The inspection layout as proposed.**
+
+Also from the owner, recorded above: heavy, medium and light armour; a back slot holding a shield, cape or pack. Those families still need adding to the tables.
 
 ## Next implementation scope
 

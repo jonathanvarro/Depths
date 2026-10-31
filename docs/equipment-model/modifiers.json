@@ -2,23 +2,269 @@
   "_about": "Table 3 of 6: modifiers (#193). Each has a strength budget; an item's total budget is at most 'max_budget'. A drawback gives budget back (negative cost), and is only ever paired with a real strength. 'conflicts' can't roll together; the same modifier never rolls twice. Kinds: offensive, defensive, positional, expedition. Proposals, not approved balance.",
   "max_budget": 3,
   "modifiers": [
-    {"id": "keen", "name": "Keen", "slots": ["weapon"], "kind": "offensive", "cost": 1, "effect": {"accuracy": 0.04}, "text": "+4% to hit"},
-    {"id": "heavy", "name": "Heavy", "slots": ["weapon"], "kind": "offensive", "cost": 2, "effect": {"damage": 1}, "text": "+1 damage", "conflicts": ["light_balanced"]},
-    {"id": "light_balanced", "name": "Light-balanced", "slots": ["weapon"], "kind": "offensive", "cost": 1, "effect": {"initiative": 2}, "text": "acts sooner (+2 speed)", "conflicts": ["heavy"]},
-    {"id": "biting", "name": "Biting", "slots": ["weapon"], "kind": "offensive", "cost": 1, "effect": {"ignore_armour": 1}, "text": "ignores 1 of a foe's armour"},
-    {"id": "goblin_bane", "name": "of the goblin-bane", "slots": ["weapon"], "kind": "offensive", "cost": 1, "regions": [2], "effect": {"damage_vs": {"goblin": 2}}, "text": "+2 damage to goblins"},
-    {"id": "hound_breaker", "name": "of the hound-breaker", "slots": ["weapon"], "kind": "offensive", "cost": 1, "regions": [2, 3], "effect": {"damage_vs": {"beast": 2}}, "text": "+2 damage to beasts and breach creatures"},
-    {"id": "back_rank", "name": "of the back rank", "slots": ["weapon"], "kind": "positional", "cost": 1, "reach_only": true, "effect": {"back_row_damage": 1}, "text": "+1 damage from the back row"},
-    {"id": "flanker", "name": "Flanker's", "slots": ["weapon"], "kind": "positional", "cost": 1, "effect": {"damage_from_side": 1}, "text": "+1 damage to a foe beside the party, not ahead (needs map fights)"},
-    {"id": "steady", "name": "of steady nerves", "slots": ["weapon", "body"], "kind": "expedition", "cost": 1, "effect": {"strain_rate": 0.85}, "text": "nerves fray 15% slower"},
-    {"id": "lamplighter", "name": "of the lamplighter", "slots": ["weapon", "body"], "kind": "expedition", "cost": 1, "effect": {"oil_rate": 0.9}, "text": "the lantern burns 10% slower"},
-    {"id": "warded", "name": "Warded", "slots": ["body"], "kind": "defensive", "cost": 1, "effect": {"max_health": 2}, "text": "+2 maximum health"},
-    {"id": "braced", "name": "Braced", "slots": ["body"], "kind": "defensive", "cost": 1, "effect": {"brace_armour": 1}, "text": "+1 armour while bracing"},
-    {"id": "sure_footed", "name": "Sure-footed", "slots": ["body"], "kind": "positional", "cost": 2, "effect": {"rear_damage_taken": 1.25}, "text": "blows from behind hurt less (x1.25, not x1.5)"},
-    {"id": "mending", "name": "of mending", "slots": ["body"], "kind": "defensive", "cost": 1, "effect": {"healing": 1.2}, "text": "healing on the wearer works 20% better"},
-    {"id": "mole", "name": "of the mole", "slots": ["body"], "kind": "expedition", "cost": 2, "min_region": 2, "effect": {"reveals_traps": true}, "text": "spots traps"},
-    {"id": "unwieldy", "name": "Unwieldy", "slots": ["weapon", "body"], "kind": "drawback", "cost": -1, "effect": {"initiative": -2}, "text": "acts later (-2 speed)", "conflicts": ["light_balanced"]},
-    {"id": "brittle", "name": "Brittle", "slots": ["weapon", "body"], "kind": "drawback", "cost": -1, "effect": {"mastery_needed": 1.25}, "text": "needs 25% more use to master"},
-    {"id": "thirsty", "name": "Thirsty", "slots": ["body"], "kind": "drawback", "cost": -1, "effect": {"oil_rate": 1.1}, "text": "the lantern burns 10% faster", "conflicts": ["lamplighter"]}
-  ]
+    {
+      "id": "keen",
+      "name": "Keen",
+      "slots": [
+        "weapon"
+      ],
+      "kind": "offensive",
+      "cost": 1,
+      "effect": {
+        "accuracy": 0.04
+      },
+      "text": "+4% to hit"
+    },
+    {
+      "id": "heavy",
+      "name": "Heavy",
+      "slots": [
+        "weapon"
+      ],
+      "kind": "offensive",
+      "cost": 2,
+      "effect": {
+        "damage": 1
+      },
+      "text": "+1 damage",
+      "conflicts": [
+        "light_balanced"
+      ]
+    },
+    {
+      "id": "light_balanced",
+      "name": "Light-balanced",
+      "slots": [
+        "weapon"
+      ],
+      "kind": "offensive",
+      "cost": 1,
+      "effect": {
+        "initiative": 2
+      },
+      "text": "acts sooner (+2 speed)",
+      "conflicts": [
+        "heavy"
+      ]
+    },
+    {
+      "id": "biting",
+      "name": "Biting",
+      "slots": [
+        "weapon"
+      ],
+      "kind": "offensive",
+      "cost": 1,
+      "effect": {
+        "ignore_armour": 1
+      },
+      "text": "ignores 1 of a foe's armour"
+    },
+    {
+      "id": "goblin_bane",
+      "name": "of the goblin-bane",
+      "slots": [
+        "weapon"
+      ],
+      "kind": "offensive",
+      "cost": 1,
+      "regions": [
+        2
+      ],
+      "effect": {
+        "damage_vs": {
+          "goblin": 2
+        }
+      },
+      "text": "+2 damage to goblins"
+    },
+    {
+      "id": "hound_breaker",
+      "name": "of the hound-breaker",
+      "slots": [
+        "weapon"
+      ],
+      "kind": "offensive",
+      "cost": 1,
+      "regions": [
+        2,
+        3
+      ],
+      "effect": {
+        "damage_vs": {
+          "beast": 2
+        }
+      },
+      "text": "+2 damage to beasts and breach creatures"
+    },
+    {
+      "id": "back_rank",
+      "name": "of the back rank",
+      "slots": [
+        "weapon"
+      ],
+      "kind": "positional",
+      "cost": 1,
+      "reach_only": true,
+      "effect": {
+        "back_row_damage": 1
+      },
+      "text": "+1 damage from the back row"
+    },
+    {
+      "id": "flanker",
+      "name": "Flanker's",
+      "slots": [
+        "weapon"
+      ],
+      "kind": "positional",
+      "cost": 1,
+      "effect": {
+        "damage_from_side": 1
+      },
+      "text": "+1 damage to a foe beside the party, not ahead (needs map fights)"
+    },
+    {
+      "id": "steady",
+      "name": "of steady nerves",
+      "slots": [
+        "weapon",
+        "body"
+      ],
+      "kind": "expedition",
+      "cost": 1,
+      "effect": {
+        "strain_rate": 0.85
+      },
+      "text": "nerves fray 15% slower"
+    },
+    {
+      "id": "lamplighter",
+      "name": "of the lamplighter",
+      "slots": [
+        "weapon",
+        "body"
+      ],
+      "kind": "expedition",
+      "cost": 1,
+      "effect": {
+        "oil_rate": 0.9
+      },
+      "text": "the lantern burns 10% slower"
+    },
+    {
+      "id": "warded",
+      "name": "Warded",
+      "slots": [
+        "body"
+      ],
+      "kind": "defensive",
+      "cost": 1,
+      "effect": {
+        "max_health": 2
+      },
+      "text": "+2 maximum health"
+    },
+    {
+      "id": "braced",
+      "name": "Braced",
+      "slots": [
+        "body"
+      ],
+      "kind": "defensive",
+      "cost": 1,
+      "effect": {
+        "brace_armour": 1
+      },
+      "text": "+1 armour while bracing"
+    },
+    {
+      "id": "sure_footed",
+      "name": "Sure-footed",
+      "slots": [
+        "body"
+      ],
+      "kind": "positional",
+      "cost": 2,
+      "effect": {
+        "rear_damage_taken": 1.25
+      },
+      "text": "blows from behind hurt less (x1.25, not x1.5)"
+    },
+    {
+      "id": "mending",
+      "name": "of mending",
+      "slots": [
+        "body"
+      ],
+      "kind": "defensive",
+      "cost": 1,
+      "effect": {
+        "healing": 1.2
+      },
+      "text": "healing on the wearer works 20% better"
+    },
+    {
+      "id": "mole",
+      "name": "of the mole",
+      "slots": [
+        "body"
+      ],
+      "kind": "expedition",
+      "cost": 2,
+      "min_region": 2,
+      "effect": {
+        "reveals_traps": true
+      },
+      "text": "spots traps"
+    },
+    {
+      "id": "unwieldy",
+      "name": "Unwieldy",
+      "slots": [
+        "weapon",
+        "body"
+      ],
+      "kind": "drawback",
+      "cost": -1,
+      "effect": {
+        "initiative": -2
+      },
+      "text": "acts later (-2 speed)",
+      "conflicts": [
+        "light_balanced"
+      ]
+    },
+    {
+      "id": "brittle",
+      "name": "Brittle",
+      "slots": [
+        "weapon",
+        "body"
+      ],
+      "kind": "drawback",
+      "cost": -1,
+      "effect": {
+        "mastery_needed": 1.25
+      },
+      "text": "needs 25% more use to master"
+    },
+    {
+      "id": "thirsty",
+      "name": "Thirsty",
+      "slots": [
+        "body"
+      ],
+      "kind": "drawback",
+      "cost": -1,
+      "effect": {
+        "oil_rate": 1.1
+      },
+      "text": "the lantern burns 10% faster",
+      "conflicts": [
+        "lamplighter"
+      ]
+    }
+  ],
+  "_decided": "Owner, 2026-10-31: this list; drawbacks on weapons and armour only paired with a strength."
 }

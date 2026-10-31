@@ -1,52 +1,52 @@
 armour,base,damage,growth,health,item,mastery,mods,name,quality,seed,slowing,strike_vs_goblin,strike_vs_queen,to_hit_bonus
-,iron_sword,3-5,damage steady,,0,0,,Iron sword,ordinary,199,,4.38,2.19,+4%
-,iron_sword,4-6,damage steady,,0,3,,Iron sword,ordinary,199,,5.11,2.92,+4%
-,iron_sword,6-8,damage steady,,0,6,,Iron sword,ordinary,199,,6.57,4.38,+4%
-,iron_sword,2-4,damage steady,,1,0,,Cracked iron sword,cracked,199,,3.55,1.42,+2%
-,iron_sword,3-5,damage steady,,1,3,,Cracked iron sword,cracked,199,,4.26,2.13,+2%
-,iron_sword,5-7,damage steady,,1,6,,Cracked iron sword,cracked,199,,5.68,3.55,+2%
-,iron_sword,3-5,damage slow,,2,0,acts sooner (+2 speed),Light-balanced iron sword,ordinary,199,,4.44,2.22,+5%
-,iron_sword,3-5,damage slow,,2,3,acts sooner (+2 speed),Light-balanced iron sword,ordinary,199,,4.44,2.22,+5%
-,iron_sword,4-6,damage slow,,2,6,acts sooner (+2 speed),Light-balanced iron sword,ordinary,199,,5.18,2.96,+5%
-,iron_sword,2-4,damage steady,,3,0,ignores 1 of a foe's armour,Biting cracked iron sword,cracked,199,,3.4,2.04,-1%
-,iron_sword,3-5,damage steady,,3,3,ignores 1 of a foe's armour,Biting cracked iron sword,cracked,199,,4.08,2.72,-1%
-,iron_sword,5-7,damage steady,,3,6,ignores 1 of a foe's armour,Biting cracked iron sword,cracked,199,,5.44,4.08,-1%
-,light_mace,3-5,damage steady,,0,0,,Fine light mace,fine,199,,3.5,2.8,+1%
-,light_mace,4-6,damage steady,,0,3,,Fine light mace,fine,199,,4.2,3.5,+1%
-,light_mace,6-8,damage steady,,0,6,,Fine light mace,fine,199,,5.6,4.9,+1%
-,light_mace,3-5,damage steady,,1,0,,Light mace,ordinary,199,,3.55,2.84,+2%
-,light_mace,4-6,damage steady,,1,3,,Light mace,ordinary,199,,4.26,3.55,+2%
-,light_mace,6-8,damage steady,,1,6,,Light mace,ordinary,199,,5.68,4.97,+2%
-,light_mace,3-5,damage steady,,2,0,+2 damage to goblins,Light mace of the goblin-bane,ordinary,199,,4.83,4.14,+0%
-,light_mace,4-6,damage steady,,2,3,+2 damage to goblins,Light mace of the goblin-bane,ordinary,199,,5.52,4.83,+0%
-,light_mace,6-8,damage steady,,2,6,+2 damage to goblins,Light mace of the goblin-bane,ordinary,199,,6.9,6.21,+0%
-,light_mace,3-5,damage steady,,3,0,,Light mace,ordinary,199,,3.4,2.72,-1%
-,light_mace,4-6,damage steady,,3,3,,Light mace,ordinary,199,,4.08,3.4,-1%
-,light_mace,6-8,damage steady,,3,6,,Light mace,ordinary,199,,5.44,4.76,-1%
-,boar_spear,3-7,damage slow,,0,0,"+1 damage from the back row, +4% to hit",Keen boar spear of the back rank,ordinary,199,,4.14,2.76,+0%
-,boar_spear,3-7,damage slow,,0,3,"+1 damage from the back row, +4% to hit",Keen boar spear of the back rank,ordinary,199,,4.14,2.76,+0%
-,boar_spear,4-8,damage slow,,0,6,"+1 damage from the back row, +4% to hit",Keen boar spear of the back rank,ordinary,199,,4.83,3.45,+0%
-,boar_spear,3-6,damage swift,,1,0,,Boar spear,ordinary,199,,3.46,2.2,-6%
-,boar_spear,5-8,damage swift,,1,3,,Boar spear,ordinary,199,,4.72,3.46,-6%
-,boar_spear,7-10,damage swift,,1,6,,Boar spear,ordinary,199,,5.98,4.72,-6%
-,boar_spear,4-7,damage slow,,2,0,,Exceptional boar spear,exceptional,199,,4.22,2.92,-4%
-,boar_spear,4-7,damage slow,,2,3,,Exceptional boar spear,exceptional,199,,4.22,2.92,-4%
-,boar_spear,5-8,damage slow,,2,6,,Exceptional boar spear,exceptional,199,,4.87,3.57,-4%
-,boar_spear,2-4,damage slow,,3,0,,Bent boar spear,bent,199,,2.4,1.2,-9%
-,boar_spear,2-4,damage slow,,3,3,,Bent boar spear,bent,199,,2.4,1.2,-9%
-,boar_spear,3-5,damage slow,,3,6,,Bent boar spear,bent,199,,3.0,1.8,-9%
-,goblin_cleaver,4-6,accuracy swift/damage slow,,0,0,,Goblin cleaver,ordinary,199,,4.55,2.6,-4%
-,goblin_cleaver,4-6,accuracy swift/damage slow,,0,3,,Goblin cleaver,ordinary,199,,4.86,2.78,+0%
-,goblin_cleaver,5-7,accuracy swift/damage slow,,0,6,,Goblin cleaver,ordinary,199,,5.92,3.7,+5%
-,goblin_cleaver,4-6,accuracy steady/damage steady,,1,0,,Goblin cleaver,ordinary,199,,4.62,2.64,-3%
-,goblin_cleaver,5-7,accuracy steady/damage steady,,1,3,,Goblin cleaver,ordinary,199,,5.52,3.45,-0%
-,goblin_cleaver,7-9,accuracy steady/damage steady,,1,6,,Goblin cleaver,ordinary,199,,7.2,5.04,+3%
-,goblin_cleaver,3-5,accuracy swift/damage swift,,2,0,the lantern burns 10% slower,Cracked goblin cleaver of the lamplighter,cracked,199,,3.66,1.83,-8%
-,goblin_cleaver,5-7,accuracy swift/damage swift,,2,3,the lantern burns 10% slower,Cracked goblin cleaver of the lamplighter,cracked,199,,5.24,3.27,-4%
-,goblin_cleaver,7-9,accuracy swift/damage swift,,2,6,the lantern burns 10% slower,Cracked goblin cleaver of the lamplighter,cracked,199,,7.0,4.9,+1%
-,goblin_cleaver,4-6,accuracy slow/damage steady,,3,0,,Goblin cleaver,ordinary,199,,4.62,2.64,-3%
-,goblin_cleaver,5-7,accuracy slow/damage steady,,3,3,,Goblin cleaver,ordinary,199,,5.4,3.37,-2%
-,goblin_cleaver,7-9,accuracy slow/damage steady,,3,6,,Goblin cleaver,ordinary,199,,6.9,4.83,-0%
+,iron_sword,3-5,damage steady,,0,0,,Iron sword,ordinary,199,,4.38,2.92,+4%
+,iron_sword,4-6,damage steady,,0,3,,Iron sword,ordinary,199,,5.11,3.65,+4%
+,iron_sword,6-8,damage steady,,0,6,,Iron sword,ordinary,199,,6.57,5.11,+4%
+,iron_sword,2-4,damage steady,,1,0,,Cracked iron sword,cracked,199,,3.55,2.13,+2%
+,iron_sword,3-5,damage steady,,1,3,,Cracked iron sword,cracked,199,,4.26,2.84,+2%
+,iron_sword,5-7,damage steady,,1,6,,Cracked iron sword,cracked,199,,5.68,4.26,+2%
+,iron_sword,3-5,damage slow,,2,0,acts sooner (+2 speed),Light-balanced iron sword,ordinary,199,,4.44,2.96,+5%
+,iron_sword,3-5,damage slow,,2,3,acts sooner (+2 speed),Light-balanced iron sword,ordinary,199,,4.44,2.96,+5%
+,iron_sword,4-6,damage slow,,2,6,acts sooner (+2 speed),Light-balanced iron sword,ordinary,199,,5.18,3.7,+5%
+,iron_sword,2-4,damage steady,,3,0,ignores 1 of a foe's armour,Biting cracked iron sword,cracked,199,,3.4,2.72,-1%
+,iron_sword,3-5,damage steady,,3,3,ignores 1 of a foe's armour,Biting cracked iron sword,cracked,199,,4.08,3.4,-1%
+,iron_sword,5-7,damage steady,,3,6,ignores 1 of a foe's armour,Biting cracked iron sword,cracked,199,,5.44,4.76,-1%
+,light_mace,3-5,damage steady,,0,0,,Fine light mace,fine,199,,3.5,3.5,+1%
+,light_mace,4-6,damage steady,,0,3,,Fine light mace,fine,199,,4.2,4.2,+1%
+,light_mace,6-8,damage steady,,0,6,,Fine light mace,fine,199,,5.6,5.6,+1%
+,light_mace,3-5,damage steady,,1,0,,Light mace,ordinary,199,,3.55,3.55,+2%
+,light_mace,4-6,damage steady,,1,3,,Light mace,ordinary,199,,4.26,4.26,+2%
+,light_mace,6-8,damage steady,,1,6,,Light mace,ordinary,199,,5.68,5.68,+2%
+,light_mace,3-5,damage steady,,2,0,+2 damage to goblins,Light mace of the goblin-bane,ordinary,199,,4.83,4.83,+0%
+,light_mace,4-6,damage steady,,2,3,+2 damage to goblins,Light mace of the goblin-bane,ordinary,199,,5.52,5.52,+0%
+,light_mace,6-8,damage steady,,2,6,+2 damage to goblins,Light mace of the goblin-bane,ordinary,199,,6.9,6.9,+0%
+,light_mace,3-5,damage steady,,3,0,,Light mace,ordinary,199,,3.4,3.4,-1%
+,light_mace,4-6,damage steady,,3,3,,Light mace,ordinary,199,,4.08,4.08,-1%
+,light_mace,6-8,damage steady,,3,6,,Light mace,ordinary,199,,5.44,5.44,-1%
+,boar_spear,3-7,damage slow,,0,0,"+1 damage from the back row, +4% to hit",Keen boar spear of the back rank,ordinary,199,,4.14,3.45,+0%
+,boar_spear,3-7,damage slow,,0,3,"+1 damage from the back row, +4% to hit",Keen boar spear of the back rank,ordinary,199,,4.14,3.45,+0%
+,boar_spear,4-8,damage slow,,0,6,"+1 damage from the back row, +4% to hit",Keen boar spear of the back rank,ordinary,199,,4.83,4.14,+0%
+,boar_spear,3-6,damage swift,,1,0,,Boar spear,ordinary,199,,3.46,2.83,-6%
+,boar_spear,5-8,damage swift,,1,3,,Boar spear,ordinary,199,,4.72,4.09,-6%
+,boar_spear,7-10,damage swift,,1,6,,Boar spear,ordinary,199,,5.98,5.35,-6%
+,boar_spear,4-7,damage slow,,2,0,,Exceptional boar spear,exceptional,199,,4.22,3.57,-4%
+,boar_spear,4-7,damage slow,,2,3,,Exceptional boar spear,exceptional,199,,4.22,3.57,-4%
+,boar_spear,5-8,damage slow,,2,6,,Exceptional boar spear,exceptional,199,,4.87,4.22,-4%
+,boar_spear,2-4,damage slow,,3,0,,Bent boar spear,bent,199,,2.4,1.8,-9%
+,boar_spear,2-4,damage slow,,3,3,,Bent boar spear,bent,199,,2.4,1.8,-9%
+,boar_spear,3-5,damage slow,,3,6,,Bent boar spear,bent,199,,3.0,2.4,-9%
+,goblin_cleaver,4-6,accuracy swift/damage slow,,0,0,,Goblin cleaver,ordinary,199,,4.55,3.25,-4%
+,goblin_cleaver,4-6,accuracy swift/damage slow,,0,3,,Goblin cleaver,ordinary,199,,4.86,3.47,+0%
+,goblin_cleaver,5-7,accuracy swift/damage slow,,0,6,,Goblin cleaver,ordinary,199,,5.92,4.44,+5%
+,goblin_cleaver,4-6,accuracy steady/damage steady,,1,0,,Goblin cleaver,ordinary,199,,4.62,3.3,-3%
+,goblin_cleaver,5-7,accuracy steady/damage steady,,1,3,,Goblin cleaver,ordinary,199,,5.52,4.14,-0%
+,goblin_cleaver,7-9,accuracy steady/damage steady,,1,6,,Goblin cleaver,ordinary,199,,7.2,5.76,+3%
+,goblin_cleaver,3-5,accuracy swift/damage steady,,2,0,the lantern burns 10% slower,Cracked goblin cleaver of the lamplighter,cracked,199,,3.66,2.44,-8%
+,goblin_cleaver,4-6,accuracy swift/damage steady,,2,3,the lantern burns 10% slower,Cracked goblin cleaver of the lamplighter,cracked,199,,4.58,3.27,-4%
+,goblin_cleaver,6-8,accuracy swift/damage steady,,2,6,the lantern burns 10% slower,Cracked goblin cleaver of the lamplighter,cracked,199,,6.3,4.9,+1%
+,goblin_cleaver,4-6,accuracy slow/damage steady,,3,0,,Goblin cleaver,ordinary,199,,4.62,3.3,-3%
+,goblin_cleaver,5-7,accuracy slow/damage steady,,3,3,,Goblin cleaver,ordinary,199,,5.4,4.05,-2%
+,goblin_cleaver,7-9,accuracy slow/damage steady,,3,6,,Goblin cleaver,ordinary,199,,6.9,5.52,-0%
 2,studded_jerkin,,health steady,-2,0,0,"blows from behind hurt less (x1.25, not x1.5)",Sure-footed cracked studded jerkin,cracked,199,1,,,
 2,studded_jerkin,,health steady,+0,0,3,"blows from behind hurt less (x1.25, not x1.5)",Sure-footed cracked studded jerkin,cracked,199,1,,,
 2,studded_jerkin,,health steady,+2,0,6,"blows from behind hurt less (x1.25, not x1.5)",Sure-footed cracked studded jerkin,cracked,199,1,,,
@@ -65,9 +65,9 @@ armour,base,damage,growth,health,item,mastery,mods,name,quality,seed,slowing,str
 3,goblin_scale,,health swift/handling swift,+0,1,0,+1 armour while bracing,Braced fine goblin scale shirt,fine,199,3,,,
 3,goblin_scale,,health swift/handling swift,+3,1,3,+1 armour while bracing,Braced fine goblin scale shirt,fine,199,2,,,
 3,goblin_scale,,health swift/handling swift,+6,1,6,+1 armour while bracing,Braced fine goblin scale shirt,fine,199,1,,,
-3,goblin_scale,,health swift/handling slow,+1,2,0,,Fine goblin scale shirt,fine,199,3,,,
-3,goblin_scale,,health swift/handling slow,+4,2,3,,Fine goblin scale shirt,fine,199,3,,,
-3,goblin_scale,,health swift/handling slow,+7,2,6,,Fine goblin scale shirt,fine,199,3,,,
+3,goblin_scale,,health swift/handling steady,+1,2,0,,Fine goblin scale shirt,fine,199,3,,,
+3,goblin_scale,,health swift/handling steady,+4,2,3,,Fine goblin scale shirt,fine,199,3,,,
+3,goblin_scale,,health swift/handling steady,+7,2,6,,Fine goblin scale shirt,fine,199,2,,,
 3,goblin_scale,,health slow/handling steady,+0,3,0,,Bent goblin scale shirt,bent,199,3,,,
 3,goblin_scale,,health slow/handling steady,+1,3,3,,Bent goblin scale shirt,bent,199,3,,,
 3,goblin_scale,,health slow/handling steady,+2,3,6,,Bent goblin scale shirt,bent,199,2,,,
