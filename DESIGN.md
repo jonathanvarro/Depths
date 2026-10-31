@@ -67,6 +67,7 @@ House of Necrosis was used as a reference: you grow strong during a run, grow at
    - Exactly how hero actions count in a beat during a fight is part of the trial.
 2. **Levels reset each expedition.**
    - Every expedition starts at level 1, with quick early advancement and choices made underground.
+   - **Underground camps preserve the expedition (owner, 2026-10-31):** reaching an underground camp does not end the current expedition or reset its levels. Returning to the surface ends that expedition; departing again starts a fresh level-1 expedition, including departure by fast travel to a deeper camp. Camp arrival alone must not trigger a new-expedition reset. Underground camp recovery, supplies and travel costs remain separate design decisions.
    - Personality, role, scars and memories stay.
    - The campaign-wide XP limits per floor are replaced.
 3. **Mastery.** A particular weapon or armour grows through meaningful fights survived and successful returns, never through swings or hits taken. The smith turns that into a chosen improvement, using materials from deeper down. Lose the item, lose its mastery; the smith still knows how to make the improvement again.

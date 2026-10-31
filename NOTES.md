@@ -14,6 +14,11 @@ Format:
 ---
 
 ## 2026-10-31 – ChatGPT
+- Did: Recorded the owner's expedition boundary decision in DESIGN.md and #172: underground camp arrival preserves the current expedition and levels; returning to the surface ends it, and the next departure starts at level 1, including fast travel to a deeper camp.
+- Next: Apply this boundary when implementing expedition resets and underground camps. Camp healing/rest, supply access and travel costs are separate decisions.
+- Watch out: Documentation/task clarification only; no camp, travel, XP, save or other gameplay code changed.
+
+## 2026-10-31 – ChatGPT
 - Did: Preserved the owner's House of Necrosis-inspired brainstorm as seven open design-review tasks: #182 equipment, #183 consumables, #184 enemy behaviours, #185 statuses, #186 magic, #187 encounter packages and #188 balance safeguards. All have decision-needed labels, milestone 6 (Later), cross-links and Todo status on project 2.
 - Next: Owner reviews the first shortlist: Bottled Echo, Surveyor's Chain, Gravewax, Silt Listener, Goblin Tollkeeper and Lend Courage. These tasks preserve proposals; they do not approve implementation or names.
 - Watch out: No gameplay or art changed. Existing #171 field-combat work and Claude's uncommitted handoff are preserved. Sources are linked in each issue; local-only concept images/records remain unpublished.
