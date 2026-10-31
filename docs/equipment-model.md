@@ -5,7 +5,9 @@ Claude, 2026-10-31, under #192 and following the owner's direction recorded ther
 - **Results:** [probe-report.md](equipment-model/probe-report.md).
 - **Status of the numbers:** every coefficient is a proposal. Changing one in the JSON changes the model, with no code edits.
 
-**Owner refinement after this model (2026-10-31, #192/#193):** body armour should have heavy/medium/light families, and the shared back/utility slot should offer shield (combat durability), cape (exploration/dodge/traps), or satchel/backpack (capacity). Blade/slashing and blunt/impact interact with monster weaknesses; reach enables back-row melee contribution. The tables/probe below have not yet been expanded to these families. Their proposed generic pierce-versus-beasts bonus is not approved by this refinement. Exact family stats/class eligibility and the meaning of durability (survivability versus item condition) remain open.
+**Owner refinement after this model (2026-10-31, #192/#193):** body armour should have heavy/medium/light families, and the shared back/utility slot should offer shield (protection/survivability), cape (exploration/dodge/traps), or satchel/backpack (capacity). Blade/slashing and blunt/impact interact with monster weaknesses; reach enables back-row melee contribution. The tables/probe below have not yet been expanded to these families. Their proposed generic pierce-versus-beasts bonus is not approved by this refinement. Exact family stats/class eligibility remain open.
+
+**No item wear (owner, 2026-10-31):** no deterioration, durability depletion, breakage through use or wear-driven repair upkeep. Shield durability means survivability. Cracked/bent describe starting quality; combat does not worsen those descriptors.
 
 ## The idea in one paragraph
 

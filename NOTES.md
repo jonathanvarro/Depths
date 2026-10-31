@@ -14,6 +14,11 @@ Format:
 ---
 
 ## 2026-10-31 – ChatGPT
+- Did: Recorded the owner's explicit no-item-wear decision in DESIGN.md, the equipment model and #192/#193. Shield durability means protection/survivability; no use-driven deterioration, durability depletion, breakage or repair upkeep. Cracked/bent remain starting-quality descriptors.
+- Next: Keep this constraint in equipment tables, UI and implementation. Stat/quality improvements are separate from wear; no condition meter is needed.
+- Watch out: Documentation/tasks only; no gameplay, balance-table or probe changes.
+
+## 2026-10-31 – ChatGPT
 - Did: Recorded the owner's equipment families in DESIGN.md, the model handoff and #192/#193: slash/impact plus back-row reach; heavy/medium/light body armour; competing shield (combat durability), cape (exploration/dodge/traps) and satchel/backpack (capacity) back-slot families.
 - Next: Claude expands the tables/probe and proposes weights, roll pools and tradeoffs. Current #193 numbers and generic pierce-versus-beasts rule remain proposals; existing class eligibility needs explicit treatment.
 - Watch out: Documentation/task refinement only, no table/probe/runtime changes. Durability does not yet define breakage/condition; reach retains rear vulnerability and cape bonuses must preserve Scout value.
