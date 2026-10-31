@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-31 – Claude (drag and drop)
+- Did: Pack drag and drop (owner request). Drag gear (or a valuable worn as a trinket) from the bag onto its slot to put it on; drag it from a slot back to the bag to take it off. It goes through the same `_perform("equip"/"wear"/"unequip")` and reasons as the buttons. Uses `set_drag_forwarding` on the bag tiles, slot buttons and slot boxes (empty slot buttons are disabled). Checked by `tools/pack_drag_check.gd`.
+- Next: none required. Chest/merchant (kit_exchange) drag is unchanged.
+- Watch out: the pack screen is shared Field kit work; the new functions sit just above `_quick_use`.
+
 ## 2026-10-31 – ChatGPT
 - Did: Created #190 artwork task for bird's-eye underground base camps, starting with the ledge Overlook above the goblin hold; concept review precedes production/later camps. Created #189 to preserve fast-travel brainstorming: discover on foot, secure the approach, report at surface, contribute a route kit/provisioning crate/gold, then connect permanently. Both tasks are Todo in milestone 6 (Later).
 - Next: Owner chooses travel funding/costs and storage/return/time rules in #189; artist develops the first camp concept under #190. Underground camp arrival keeps levels; a new surface departure starts at level 1 (#172).

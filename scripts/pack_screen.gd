@@ -275,6 +275,8 @@ func _refresh_equipment() -> void:
 		button.tooltip_text=button.accessibility_name
 		box.add_child(button)
 		_slot_buttons[slot]=button
+		button.set_drag_forwarding(_drag_from_slot.bind(slot,item),_can_drop_on_slot.bind(slot),_drop_on_slot.bind(slot))
+		box.set_drag_forwarding(Callable(),_can_drop_on_slot.bind(slot),_drop_on_slot.bind(slot))  # an empty slot's button is disabled
 		if item:
 			_add_icon(button,item.icon,Quality.tier_of(item,_selected_hero),Vector2(40,40))
 			_bind_inspection(button,item,slot)
@@ -366,9 +368,11 @@ func _refresh_bag() -> void:
 		for state in ["normal","disabled"]:
 			button.add_theme_stylebox_override(state,StyleBoxEmpty.new())
 		button.add_theme_stylebox_override("hover",FieldKit.plate(Color(0.3,0.24,0.13,0.32),FieldKit.AMBER,2))
+		button.set_drag_forwarding(Callable(),_can_drop_on_bag,_drop_on_bag)
 		if index<_entries.size():
 			var entry:=_entries[index]
 			var item:Resource=entry.item
+			button.set_drag_forwarding(_drag_from_bag.bind(item),_can_drop_on_bag,_drop_on_bag)
 			button.accessibility_name=item.display_name+(" ×%d" % entry.count if entry.count>1 else "")
 			button.tooltip_text=button.accessibility_name
 			button.set_meta("item",item)
@@ -406,6 +410,54 @@ func _bind_inspection(button: Button,item: Resource,slot := "") -> void:
 		if event is InputEventMouseButton and event.pressed and event.button_index==MOUSE_BUTTON_RIGHT:
 			_quick_use(item,slot)
 			button.accept_event())
+
+## Drag and drop (owner, 2026-10-31): drag gear from the pack onto its slot
+## to put it on, or from a slot back into the pack to take it off. The same
+## rules as the buttons (curses, a conscious hero, the founder's weapon).
+func _slot_for(item: Resource) -> String:
+	if item is Equipment:
+		return item.slot
+	if item is SupplyItem and Trinkets.for_treasure(item)!=null:
+		return "trinket"  # a valuable worn as a trinket (#135)
+	return ""
+
+func _drag_from_bag(_at: Vector2,item: Resource) -> Variant:
+	if _slot_for(item)=="":
+		return null
+	set_drag_preview(_drag_preview(item))
+	return {"kit_drag":"bag","item":item}
+
+func _drag_from_slot(_at: Vector2,slot: String,item: Equipment) -> Variant:
+	if item==null:
+		return null
+	set_drag_preview(_drag_preview(item))
+	return {"kit_drag":"slot","slot":slot,"item":item}
+
+func _can_drop_on_slot(_at: Vector2,data: Variant,slot: String) -> bool:
+	return data is Dictionary and data.get("kit_drag")=="bag" and _slot_for(data.item)==slot and _equip_reason(slot)==""
+
+func _drop_on_slot(_at: Vector2,data: Variant,slot: String) -> void:
+	if not _can_drop_on_slot(_at,data,slot):
+		return
+	inspect_item(data.item,true)
+	_perform("wear" if data.item is SupplyItem else "equip")
+
+func _can_drop_on_bag(_at: Vector2,data: Variant) -> bool:
+	if not (data is Dictionary and data.get("kit_drag")=="slot"):
+		return false
+	var held:Equipment=_selected_hero.get(data.slot) if _selected_hero else null
+	return held==data.item and _selected_hero.is_alive() and held.curse==null and not (data.slot=="weapon" and _selected_hero.founder)
+
+func _drop_on_bag(_at: Vector2,data: Variant) -> void:
+	if not _can_drop_on_bag(_at,data):
+		return
+	inspect_item(data.item,true,data.slot)
+	_perform("unequip")
+
+func _drag_preview(item: Resource) -> Control:
+	var preview:=Quality.framed(item.icon,Quality.tier_of(item),Vector2(52,52))
+	preview.modulate.a=0.85
+	return preview
 
 ## Right-click (owner playtest, 2026-10-25): use a supply, or put on or
 ## take off gear, without going through its actions. The usual rules apply.
