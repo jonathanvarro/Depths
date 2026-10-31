@@ -46,6 +46,46 @@ Preparation should create responsibility: the player can connect outcomes to cho
 - Investigation provides clues but consumes resources, including time.
 - Procedural layouts should use consistent rules and reusable authored encounters so discoveries remain understandable.
 
+## The expedition loop — decided 2026-10-30
+
+House of Necrosis was used as a reference: you grow strong during a run, grow attached to what you carry, and learn the cave even when you lose everything. The owner reviewed proposals from Claude and ChatGPT and decided the points below. They are built after slice 2's art hookup.
+
+**What lasts and what resets:**
+
+| Layer | Lasts? | What |
+|---|---|---|
+| **Identity** | Yes | Personality, class/role, scars, memories (#118) |
+| **Campaign** | Yes | Story progress, opened routes, camp improvements, the stash |
+| **Possessions** | **At risk** | Worn and carried gear, supplies, gold, and **mastery** on gear |
+| **Expedition power** | **Resets each expedition** | Levels and talents. Fast early levelling underground |
+| **Player knowledge** | Yes | The monster journal, and how enemies behave |
+
+1. **Fights on the map (trial).**
+   - The full on-map version is built first, as a trial. Then the owner chooses between it and keeping the combat stage with the ground shaping the fight.
+   - The party stays in one cell, and its front and back rows decide who strikes and who is struck.
+   - **A group move is one beat: enemies respond once.** Looking, inspecting and browsing the pack are free.
+   - Exactly how hero actions count in a beat during a fight is part of the trial.
+2. **Levels reset each expedition.**
+   - Every expedition starts at level 1, with quick early advancement and choices made underground.
+   - Personality, role, scars and memories stay.
+   - The campaign-wide XP limits per floor are replaced.
+3. **Mastery.** A particular weapon or armour grows through meaningful fights survived and successful returns, never through swings or hits taken. The smith turns that into a chosen improvement, using materials from deeper down. Lose the item, lose its mastery; the smith still knows how to make the improvement again.
+4. **A wipe loses worn gear too.**
+   - Today only the pack is lost: main heroes keep what they wear (checked 2026-10-30).
+   - Now worn gear and its mastery go as well.
+   - Story progress, routes and the stash are never lost.
+5. **A basic fallback kit after a wipe:** camp hands out plain gear, like the free torches.
+6. **Unknown brews.**
+   - Cave brews found underground are identified by drinking, throwing, or a talent.
+   - Bought medicine stays reliable.
+   - Colours, shapes and stopper marks reshuffle **each expedition** and stay consistent within it, across saves and floors. Identifying one bottle identifies all its kind.
+   - Shapes and marks as well as colour, for phones and colour-blind players.
+   - An inconclusive test reveals nothing it couldn't show.
+7. **The monster journal.** A brief for each monster, with its weaknesses and immunities, filled in as you meet it. Until then, its moves show as "?".
+8. **Killers evolve.** A monster that downs a hero becomes an elite on the spot.
+
+**Built straight into the game,** not as a separate prototype. The owner judges the on-map fights after playing them.
+
 ## Map and dungeon progression
 
 Preserve the readable map from the visual concepts, adapted to the grid. Show explored rooms and routes, the current location, blocked doors, uncertain passages, stairs, and known routes toward safety. Notes and unresolved discoveries provide reasons to revisit rooms.
