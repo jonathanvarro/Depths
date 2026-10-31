@@ -24,11 +24,12 @@ import re
 import statistics
 
 ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".."))
-MODEL = os.path.join(ROOT, "docs", "equipment-model")
+MODEL = os.path.join(ROOT, "docs", "equipment-model")  # outputs: examples, report
+TABLES = os.path.join(ROOT, "data", "equipment")  # the live tables the game reads
 
 
 def load(name):
-    with open(os.path.join(MODEL, name), encoding="utf-8") as f:
+    with open(os.path.join(TABLES, name), encoding="utf-8") as f:
         return json.load(f)
 
 
@@ -177,8 +178,9 @@ def stats(item, level):
     q = ROLLS["quality"]["body"][item["quality"]]
     health = q["health"] + item["health_roll"] + math.floor(level * growth_rate(item, "health") + 1e-9) + mod_effect.get("max_health", 0)
     handling = math.floor(level * growth_rate(item, "handling") + 1e-9)
-    init = max(0, base["initiative_penalty"] + q["initiative_penalty"] - handling)
-    return {"armour": base["armour"], "health": health, "initiative_penalty": init, "mods": mod_effect}
+    init = max(0, base.get("initiative_penalty", 0) + q["initiative_penalty"] - handling)
+    return {"armour": base.get("armour", 0), "guard": base.get("guard", 0), "pack_slots": base.get("pack_slots", 0),
+            "health": health, "initiative_penalty": init, "mods": mod_effect}
 
 
 def level_for(points, brittle=False):

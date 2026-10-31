@@ -28,7 +28,7 @@ Sanity check: two front fighters, 5–7 at 80% against 2 armour: **6.4** expecte
 | Studded jerkin (armour 2) | -2 / +0 / +2 | +0 / +2 / +4 | +1 / +4 / +6 | 0.9 → 0.9 |
 | Goblin scale shirt (armour 3) | -2 / +0 / +2 | +0 / +2 / +4 | +2 / +4 / +7 | 2.9 → 1.9 |
 
-**How rare are the combinations?** Of 30000 region-2 items: exceptional 5.2%; exceptional with swift growth 1.60%; two modifiers 7.9%; exceptional, swift and two modifiers 0.110%; carrying a drawback 2.0%. Nothing required should hang on the rarest of these.
+**How rare are the combinations?** Of 40000 region-2 items: exceptional 5.2%; exceptional with swift growth 1.46%; two modifiers 8.0%; exceptional, swift and two modifiers 0.107%; carrying a drawback 1.5%. Nothing required should hang on the rarest of these.
 
 ## Regional matchups (floor 4)
 
@@ -80,4 +80,4 @@ With practised hands (double gain while 2+ levels behind the hero's best item of
 
 ## Checks
 
-**All checks passed** (30000 items generated).
+**All checks passed** (40000 items generated).

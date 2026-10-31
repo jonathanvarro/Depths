@@ -129,7 +129,8 @@
       "name": "of steady nerves",
       "slots": [
         "weapon",
-        "body"
+        "body",
+        "back"
       ],
       "kind": "expedition",
       "cost": 1,
@@ -143,7 +144,8 @@
       "name": "of the lamplighter",
       "slots": [
         "weapon",
-        "body"
+        "body",
+        "back"
       ],
       "kind": "expedition",
       "cost": 1,
@@ -156,7 +158,8 @@
       "id": "warded",
       "name": "Warded",
       "slots": [
-        "body"
+        "body",
+        "back"
       ],
       "kind": "defensive",
       "cost": 1,
@@ -182,7 +185,8 @@
       "id": "sure_footed",
       "name": "Sure-footed",
       "slots": [
-        "body"
+        "body",
+        "back"
       ],
       "kind": "positional",
       "cost": 2,
@@ -208,7 +212,8 @@
       "id": "mole",
       "name": "of the mole",
       "slots": [
-        "body"
+        "body",
+        "back"
       ],
       "kind": "expedition",
       "cost": 2,

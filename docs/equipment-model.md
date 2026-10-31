@@ -1,7 +1,7 @@
 # Equipment model: rolls, growth, mastery and a worked region (#193)
 
 Claude, 2026-10-31, under #192 and following the owner's direction recorded there. **This is a model for owner review: it changes nothing in the game.**
-- **What's here:** a specification, six linked tables in `docs/equipment-model/` and a reproducible probe (`python tools/balance/equipment_probe.py`, seed 193).
+- **What's here:** a specification, six linked tables (the five live ones in `data/equipment/`, read by the game; generated examples in `docs/equipment-model/`) and a reproducible probe (`python tools/balance/equipment_probe.py`, seed 193).
 - **Results:** [probe-report.md](equipment-model/probe-report.md).
 - **Status of the numbers:** every coefficient is a proposal. Changing one in the JSON changes the model, with no code edits.
 
@@ -198,7 +198,20 @@ vs worn: +1 damage, −2% to hit   [green / red]
 5. **The modifier list as proposed,** with drawbacks on weapons and armour only paired with a strength.
 6. **The inspection layout as proposed.**
 
-Also from the owner, recorded above: heavy, medium and light armour; a back slot holding a shield, cape or pack. Those families still need adding to the tables.
+**Armour weights and the back slot** (owner, 2026-10-31; now in `data/equipment/bases.json`):
+- **Body armour weights:**
+  - **Light:** quilted coat, armour 1, no slowing.
+  - **Medium:** jerkins, armour 2, a little slowing.
+  - **Heavy:** goblin scale, keeper's mail, armour 3, slows the most, and grows handling.
+- **The back slot holds one of three kinds:**
+  - **Shield:** buckler, goblin round shield. Guard (+1 armour against blows from the front); grows health.
+  - **Cape:** oilcloth cloak, wool cape, shadow-dyed cape. Exploration: rear blows hurt less, trap spotting, nerves and light.
+  - **Pack:** satchel, frame pack. Capacity.
+- **Proposed class eligibility, enforced with #179:**
+  - **Melee:** all armour weights and all back kinds.
+  - **Scout:** light or medium armour; no shields.
+  - **Mage:** light armour; no shields.
+  - **Fixer:** light or medium armour; no shields.
 
 ## Next implementation scope
 
