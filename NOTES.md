@@ -14,6 +14,11 @@ Format:
 ---
 
 ## 2026-10-31 – ChatGPT
+- Did: Created #190 artwork task for bird's-eye underground base camps, starting with the ledge Overlook above the goblin hold; concept review precedes production/later camps. Created #189 to preserve fast-travel brainstorming: discover on foot, secure the approach, report at surface, contribute a route kit/provisioning crate/gold, then connect permanently. Both tasks are Todo in milestone 6 (Later).
+- Next: Owner chooses travel funding/costs and storage/return/time rules in #189; artist develops the first camp concept under #190. Underground camp arrival keeps levels; a new surface departure starts at level 1 (#172).
+- Watch out: Unlock costs, material economy, later camp locations/services and travel rules are proposals, not approved implementation. Existing scouts' per-trip paid routes need explicit migration. No game/art assets changed; concurrent field-combat and DESIGN.md changes remain untouched.
+
+## 2026-10-31 – ChatGPT
 - Did: Recorded the owner's expedition boundary decision in DESIGN.md and #172: underground camp arrival preserves the current expedition and levels; returning to the surface ends it, and the next departure starts at level 1, including fast travel to a deeper camp.
 - Next: Apply this boundary when implementing expedition resets and underground camps. Camp healing/rest, supply access and travel costs are separate decisions.
 - Watch out: Documentation/task clarification only; no camp, travel, XP, save or other gameplay code changed.
