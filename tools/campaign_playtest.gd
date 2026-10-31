@@ -861,15 +861,13 @@ func _field_foes(state, map) -> void:
 	for foe in order:
 		if not foe.is_alive() or state.result != CS.Result.ONGOING:
 			continue
+		if state.rests_this_turn(foe):
+			continue  # slow: every other turn
 		if state.foe_in_range(foe):
 			if foe.intent in [CS.Intent.KILLING_BLOW, CS.Intent.CLEAVER]:
 				state.prepare_killing_blow(foe)
 			state.enemy_act(foe)
 			continue
-		if foe.type.slow:
-			foe.rested = not foe.rested  # slow: every other beat
-			if foe.rested:
-				continue
 		var taken := {state.party_cell: true}
 		for f in state.living_foes():
 			taken[f.cell] = true

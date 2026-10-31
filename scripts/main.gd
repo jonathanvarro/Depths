@@ -1270,8 +1270,7 @@ func _begin_field_fight(state, leader_cell: Vector2i) -> void:
 	_touch_pad.add_theme_constant_override("margin_bottom", 24 + int(_combat._actions.get_combined_minimum_size().y) + 16)
 	_lift_field_foes.call_deferred()
 	_unseen.clear()
-	_door_hold.clear()
-	_combat.field_hooks = {"step_foe": _field_step_foe, "danger": _draw_danger, "lost": _field_lost, "round": _field_round}
+	_combat.field_hooks = {"step_foe": _field_step_foe, "danger": _draw_danger, "lost": _field_lost}
 	_combat.place_foe = func(foe):
 		var near: Array[Vector2i] = _free_cells_near(_party.cell, 1, _occupied(state))
 		foe.cell = near[0] if not near.is_empty() else _party.cell
@@ -1301,11 +1300,6 @@ func _end_field_fight() -> void:
 	_field_step_check = Callable()
 	_combat.place_foe = _place_extra_foe
 	_combat.field_hooks = {}
-	for door_cell in _door_hold:
-		_map.open_door(door_cell)  # they were forcing it
-	if not _door_hold.is_empty():
-		_build_level()
-	_door_hold.clear()
 	_unseen.clear()
 	_wait_button.visible = true
 	_touch_pad.add_theme_constant_override("margin_bottom", 24)
@@ -1346,14 +1340,8 @@ func _place_field_foe(foe) -> void:
 ## taken. True if it moved.
 func _field_step_foe(foe) -> bool:
 	var state = _combat._state
-	if foe.type.slow:
-		foe.rested = not foe.rested  # slow: every other beat (#171)
-		if foe.rested:
-			return false
 	var taken := _occupied(state)
 	taken[_party.cell] = true
-	for door_cell in _door_hold:
-		taken[door_cell] = true  # the shut door holds them
 	var distances: Dictionary = _map.walking_distances(_party.cell)
 	var best: Vector2i = foe.cell
 	var best_d: int = distances.get(foe.cell, 999)
@@ -1395,42 +1383,19 @@ func _lift_field_foes() -> void:
 
 
 # Getting away on the map (owner 2026-10-31): no Retreat button. Stairs take
-# you off the floor mid-fight; a door shuts behind you and holds them a
-# couple of beats; out of their sight for a few beats, they lose the trail.
-const DOOR_HOLD := 2  # beats a shut door holds them
+# you off the floor mid-fight; out of their sight for a few beats, they lose
+# the trail; slow monsters can be outrun. Doors, once open, stay open.
 const LOSE_TRAIL := 3  # beats out of sight before a foe gives up
 var _escape_stairs := false
-var _door_hold := {}  # door cell -> beats it still holds
 var _unseen := {}  # Foe -> beats it hasn't seen the party
 
 
-## The party stepped during a fight: onto the stairs, it's away; through a
-## doorway, the door shuts behind it.
+## The party stepped during a fight: onto the stairs, it's away.
 func _field_moved(cell: Vector2i) -> void:
-	var state = _combat._state
 	var content: int = _map.content_at(cell)
 	if content in [DungeonMap.Content.STAIRS_UP, DungeonMap.Content.STAIRS_DOWN]:
 		_escape_stairs = true
-		state.escape()
-		return
-	var door: Vector2i = _cell_before
-	if _map.door_at(door) == DungeonMap.Door.OPEN and not _occupied(state).has(door):
-		_map.doors[door] = DungeonMap.Door.CLOSED
-		_door_hold[door] = DOOR_HOLD
-		_build_level()
-		_show_message("You pull the door shut behind you.")
-		_tip("escape_door", "A door shut behind you holds them for a moment. Out of their sight for a few beats, they lose your trail - or take the stairs.")
-
-
-## A foes' turn begins: shut doors give way in time.
-func _field_round() -> void:
-	for door_cell in _door_hold.keys():
-		_door_hold[door_cell] -= 1
-		if _door_hold[door_cell] <= 0:
-			_door_hold.erase(door_cell)
-			_map.open_door(door_cell)
-			_build_level()
-			_show_message("The door bursts open.")
+		_combat._state.escape()
 
 
 ## True once `foe` has gone LOSE_TRAIL beats without sight of the party.

@@ -181,13 +181,13 @@ func field_stepped() -> void:
 
 
 func _field_foes_turn() -> void:
-	if field_hooks.has("round"):
-		field_hooks["round"].call()
 	var order: Array = _state.living_foes()
 	order.sort_custom(func(a, b): return a.type.initiative > b.type.initiative)
 	for foe in order:
 		if not foe.is_alive() or _state.result != CombatState.Result.ONGOING:
 			continue
+		if _state.rests_this_turn(foe):
+			continue  # slow: it moves or strikes only every other turn (#171)
 		if _state.foe_in_range(foe):
 			await get_tree().create_timer(ENEMY_PAUSE).timeout
 			await _enemy_action(foe)
@@ -822,6 +822,8 @@ func _update_intent_line() -> void:
 	_intent_icon_rect.texture = _intent_icon(_target.intent)
 	var words: Array = ["%s: %s." % [_target.name, CombatState.intent_text(_target)]]
 	words.append_array(_state_words(_target))
+	if _state.field and _target.type.slow:
+		words.append("Slow: it rests this turn." if _state.will_rest(_target) else "Slow: it acts this turn, then rests.")
 	if _state.field and _target.marked_cell == _state.party_cell:
 		words.append("It will land where you stand: step away, or Brace.")  # #171
 	_intent_label.text = " ".join(words)

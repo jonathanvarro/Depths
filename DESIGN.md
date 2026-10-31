@@ -148,10 +148,12 @@ House of Necrosis was used as a reference: you grow strong during a run, grow at
 
 **Escaping on the map — owner 2026-10-31.** There's no Retreat in map fights. You get away by moving:
 - **Stairs:** step onto them mid-fight and you're away; the stairs' prompt follows.
-- **Doors:** stepping through a doorway shuts the door behind you, and it holds them for 2 beats before bursting open.
+- **Doors** stay open once opened (owner, 2026-10-31: keep it simple).
 - **Losing the trail:** a monster that can't see you (light-based sight +1; a shut door blocks it) for **3 beats** gives up. If every monster still in the fight has lost you, you've got away; a fight where some lost you counts as getting away, not a win.
-- **Slow monsters** (hollow miner, gas-bloat, Marrow Shepherd, rock beetle) move every other beat, on the map and in fights, so you can outrun them. Hounds keep pace.
-- **The bot** (it can't use doors well): getting away costs one more blow from every foe in reach. Queen dead in 16/28/9 of 30, down from 24/28/14: escaping is now costly, and balance needs a decision.
+- **Slow monsters** (hollow miner, gas-bloat, Marrow Shepherd, rock beetle) **act only every other turn**, whether that's moving or attacking. In a fight a slow monster acts on its first turn, then rests, then acts.
+  - **Kiting:** strike while it rests and step away before it acts. Walking up beside one just after it has acted is the blunder.
+  - **Showing it:** the intent line says "Slow: it rests this turn" or "it acts this turn, then rests". On the map, slow groups also move every other beat.
+- **The bot** (it can't use doors well): getting away costs one more blow from every foe in reach. Queen dead in 21/29/11 of 30 with the slow rhythm (24/28/14 before escape became positional). Alwen's weakness is for the class rework (#179).
 
 **Built straight into the game,** not as a separate prototype. The owner judges the on-map fights after playing them.
 

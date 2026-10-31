@@ -163,7 +163,8 @@ class Foe:
 	var cell := Vector2i(-1, -1)  # where it stands, in a fight on the map (#171)
 	var marked_cell := Vector2i(-1, -1)  # the tile its dangerous move will hit
 	var gave_up := false  # lost the party's trail (#171): out of the fight
-	var rested := false  # a slow foe: rested this beat, moves the next
+	var rested := false  # a slow foe: rested its last turn, acts the next
+	var acted_once := false  # a slow foe has had its first turn
 	var staggered := false  # Borrowed Pack: lost a head this turn (its pose)
 
 	func in_back() -> bool:
@@ -1199,6 +1200,22 @@ func _burst(bloat: Foe, how: String) -> String:
 
 ## The owner's retreat idea (trial): the fight ends, the party flees.
 ## Where they end up and the time cost are handled by the caller.
+## A slow foe on the map (owner 2026-10-31) moves or strikes only every
+## other turn: it acts on its first turn, rests the next, and so on. Call
+## once per foe per foes' turn; true when it rests this one.
+func rests_this_turn(foe: Foe) -> bool:
+	if not field or not foe.type.slow:
+		return false
+	foe.rested = not foe.rested if foe.acted_once else false
+	foe.acted_once = true
+	return foe.rested
+
+
+## Whether a slow foe will rest on its coming turn (for the intent line).
+func will_rest(foe: Foe) -> bool:
+	return field and foe.type.slow and foe.acted_once and not foe.rested
+
+
 ## On the map, the party got away: up or down the stairs, or out of sight.
 func escape() -> void:
 	escaped = true

@@ -102,6 +102,14 @@ func _initialize() -> void:
 		if Roamers.step_toward(map, slow_group, Vector2i(1, 1), {}):
 			moves += 1
 	check("slow monsters (hollow miners, bloats) move every other beat", moves == 2, moves)
+	var miner_fight = load("res://scripts/combat_state.gd").new(party, [load("res://data/enemies/hollow_miner.tres")] as Array[EnemyType])
+	miner_fight.field = true
+	var miner = miner_fight.foes[0]
+	var rhythm := []
+	for i in 4:
+		rhythm.append(miner_fight.rests_this_turn(miner))
+	check("in a fight, a slow monster acts, rests, acts, rests - moving or striking alike", rhythm == [false, true, false, true], rhythm)
+	check("...and says when it will rest, so you can kite it", miner_fight.will_rest(miner) == false and (func(): miner_fight.rests_this_turn(miner); return miner_fight.will_rest(miner)).call())
 
 	# In the game.
 	var main = load("res://scenes/main.tscn").instantiate()
@@ -197,16 +205,12 @@ func _initialize() -> void:
 		hunter.cell = hidden_cell
 		var lost := [main._field_lost(hunter), main._field_lost(hunter), main._field_lost(hunter)]
 		check("out of sight for three beats, a foe loses your trail", lost == [false, false, true], lost)
-		hunter.cell = hidden_cell  # well away from the doorway
 		var door: Vector2i = main._party.cell + main._party.DIRECTIONS[(main._party.facing + 2) % 4]
 		if main._map.is_passable(door):
 			main._map.doors[door] = main.DungeonMap.Door.OPEN
 			main._cell_before = door
 			main._field_moved(hidden_cell)  # a plain cell: the party stands on the arrival stairs
-			check("stepping through a doorway shuts the door behind you", main._map.door_at(door) == main.DungeonMap.Door.CLOSED and main._door_hold.has(door))
-			main._field_round()
-			main._field_round()
-			check("...which holds them a couple of beats, then bursts open", main._map.door_at(door) == main.DungeonMap.Door.OPEN)
+			check("doors, once open, stay open (owner 2026-10-31)", main._map.door_at(door) == main.DungeonMap.Door.OPEN)
 		var stairs: Vector2i = main._map.find_content(main.DungeonMap.Content.STAIRS_UP)
 		main._field_moved(stairs)
 		check("onto the stairs mid-fight: you got away", fight.escaped and fight.result == 3)
