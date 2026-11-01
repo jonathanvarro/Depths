@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="EnemyType" format=3]
 
+[ext_resource type="Resource" path="res://data/items/rat_pelt.tres" id="salvage"]
 [ext_resource type="Script" path="res://scripts/enemy_type.gd" id="1"]
 [ext_resource type="PackedScene" path="res://art/enemies/cave-simple-v1/rat/scene.tscn" id="2"]
 [ext_resource type="Resource" path="res://data/injuries/deep_wound.tres" id="3"]
@@ -21,3 +22,6 @@ tactic = 1
 intro = "The rat darts about, sizing up the weakest."
 loot_line = "The rat had dragged %s into its nest."
 threat = 1
+drop = ExtResource("salvage")
+drop_chance = 0.5
+family = "beast"

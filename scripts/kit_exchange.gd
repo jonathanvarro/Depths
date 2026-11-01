@@ -137,7 +137,9 @@ func _properties(entry:Dictionary) -> String:
 	elif item.slot=="body":parts.append("Armour %d · speed −%d"%[item.armour,item.initiative_penalty])
 	elif item.slot=="back":parts.append(Equipment.back_text(item))
 	if item.effect and item.slot!="back":parts.append(item.effect.effects_text())
-	return " · ".join(parts)
+	var text:=" · ".join(parts)
+	var lines:PackedStringArray=load("res://scripts/gear_model.gd").card_lines(item)  # mastery and growth (#192)
+	return text+("\n"+"\n".join(lines) if not lines.is_empty() else "")
 
 func _render_left() -> void:
 	_clear(_left_grid)

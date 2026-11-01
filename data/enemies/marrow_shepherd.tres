@@ -24,3 +24,4 @@ loot_line = "Tangled in the Marrow Shepherd's bone cage: %s."
 threat = 8
 summons = ExtResource("summons")
 slow = true
+family = "breach"

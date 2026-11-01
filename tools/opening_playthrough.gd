@@ -140,8 +140,8 @@ func _do_pack_step() -> void:
 	match key:
 		"equip": _press_in_row(main._opening_weapon.display_name, "Equip")
 		"drop": _press_in_row(main._starting_weapon.display_name, "Drop")
-		"light", "relight": _press_in_row(main.TORCH.display_name, "Use")
-		"draught": _press_in_row("Restorative draught", "Use")
+		"light", "relight": _press_in_row(main.TORCH.display_name, "Light")  # the Pack names it (#191)
+		"draught": _press_in_row("Restorative draught", "Drink")  # the Pack names it (#191)
 	await process_frame
 	if main._hint not in ["equip", "drop", "light", "relight", "draught"] or main._hint == key:
 		main._set_pack(false)

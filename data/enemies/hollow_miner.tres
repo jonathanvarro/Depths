@@ -24,3 +24,5 @@ threat = 4
 drop = ExtResource("1_ipeha")
 drop_chance = 0.2
 slow = true
+family = "breach"
+armour = 1

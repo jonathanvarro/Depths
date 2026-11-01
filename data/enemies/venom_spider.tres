@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="EnemyType" format=3]
 
+[ext_resource type="Resource" path="res://data/items/spider_silk.tres" id="salvage"]
 [ext_resource type="Script" path="res://scripts/injury.gd" id="1_p4tv1"]
 [ext_resource type="PackedScene" path="res://art/enemies/monsters-v1/venom-spider/scene.tscn" id="2_wuvvt"]
 [ext_resource type="Script" path="res://scripts/enemy_type.gd" id="3_6swf0"]
@@ -22,3 +23,6 @@ row = "back"
 reach_back = true
 web_chance = 0.15
 venom_damage = 2
+drop = ExtResource("salvage")
+drop_chance = 0.6
+family = "beast"

@@ -6,6 +6,7 @@ extends RefCounted
 ## later). Retreat is a trial of the owner's idea: flee to a random nearby
 ## spot at a cost of time and light. All numbers are first guesses to tune.
 
+const GearModel := preload("res://scripts/gear_model.gd")
 const Supplies := preload("res://scripts/supplies.gd")
 
 enum Result { ONGOING, VICTORY, DEFEAT, RETREAT }
@@ -184,6 +185,10 @@ class Foe:
 
 var party  # party_state.gd
 var foes: Array[Foe] = []
+## Gear mastery earned this fight (#192/#193): Equipment -> points, capped
+## per item per fight. main.gd and the playtest bot award it afterwards.
+var mastery_gain := {}
+var region := 1  # the floor's region, for how much a foe teaches
 ## A fight on the map (#171 phase 2; DESIGN.md "The party as one unit"): the
 ## party is one unit in one cell, facing a way. Blows from the front land on
 ## the front row; from the side or behind, on the back row - harder from
@@ -255,6 +260,7 @@ func _init(party_state, enemy_types: Array[EnemyType]) -> void:
 ## elites). The game and the playtest bot both call this, so they match.
 func prepare(depth: int, kind := "") -> void:
 	depth_scale = DEPTH_SCALE.get(depth, 1.0)
+	region = GearModel.region_of(depth)
 	for foe in foes:
 		_scale(foe)
 	if kind == "":
@@ -696,6 +702,7 @@ func hero_attack(hero: Companion, target: Foe) -> Dictionary:
 		_opened[hero] = true
 		if target.type.tactic == EnemyType.Tactic.BRUTE and target.intent == Intent.RECOVER:
 			damage += BRUTE_OPENING  # a brute catching its breath is wide open (#140)
+		damage = _versus_armour(hero.weapon, target, damage)  # #192
 		if target.curled:
 			damage = mini(damage, CURLED_DAMAGE)  # a curled beetle: a scratch at most
 		if target.shielded:
@@ -706,10 +713,14 @@ func hero_attack(hero: Companion, target: Foe) -> Dictionary:
 		_release(target, hero)
 		outcome = {"hit": true, "damage": damage, "killed": not target.is_alive()}
 		outcome["text"] = "%s strikes the %s for %d.%s" % [hero.display_name, target.name.to_lower(), damage, " It falls." if outcome["killed"] else ""]
+		_credit(hero.weapon, "hit", target)
+		if outcome["killed"]:
+			_credit(hero.weapon, "kill", target)
 		if outcome["killed"] and target.type.tactic == EnemyType.Tactic.BLOAT:
 			outcome["text"] += " " + _burst(target, "back" if not hero_in_front(hero) else "near")
 	else:
 		outcome["text"] = "%s misses the %s." % [hero.display_name, target.name.to_lower()]
+		_credit(hero.weapon, "miss", target)
 	_check_end()
 	return outcome
 
@@ -957,18 +968,21 @@ func _carry_out(foe: Foe) -> Dictionary:
 			damage *= HEAVY_MULTIPLIER
 		var behind := from_behind(foe)
 		if behind:
-			damage = ceili(damage * REAR_DAMAGE)  # struck from behind (#171)
+			damage = ceili(damage * _rear_damage(target))  # struck from behind (#171)
 		if heavy and is_defending(target):
 			damage = 0  # braced for it: the heavy blow is turned aside
 		elif is_defending(target):
 			damage = maxi(1, floori(damage * target.guard_factor))
 		if damage > 0:
-			damage = maxi(1, damage - target.damage_reduction())  # toughness, talents, armour (#93)
+			damage = maxi(1, damage - target.damage_reduction() - _gear_guard(foe, target))  # toughness, talents, armour (#93), gear (#192)
 		if heavy and damage == 0:
 			outcome["text"] = "%s braces and turns aside the %s's heavy blow!" % [target.display_name, foe.name.to_lower()]
 			_check_end()
 			return outcome
 		target.change_health(-damage)
+		_credit(target.body, "struck", foe)  # armour learns from blows (#192)
+		if target.back and target.back.guard > 0:
+			_credit(target.back, "struck", foe)
 		outcome["hit"] = true
 		outcome["damage"] = damage
 		var verb: String = "brings down a heavy blow on" if heavy else ("lunges, jaw stretching, at" if reaching else foe.type.attack_verb)
@@ -1124,6 +1138,59 @@ func _call_brood(mother: Foe) -> Dictionary:
 			"text": "The %s's sac splits - hatchlings swarm out!" % mother.name.to_lower()}
 
 
+# --- Gear in the fight (#192/#193; owner decisions 2026-10-31) -------------
+
+## A blow against `target`'s armour: blunt ignores 1, Biting ignores 1 more;
+## a blade does +1 to a foe with none; goblin-bane and hound-breaker bite
+## their kind. At least 1 gets through.
+func _versus_armour(weapon: Equipment, target: Foe, damage: int) -> int:
+	var traits: Dictionary = weapon.traits if weapon else {}
+	var strike: String = weapon.strike if weapon else "smash"
+	var armour: int = target.type.armour - int(traits.get("ignore_armour", 0)) - (1 if strike == "smash" else 0)
+	if strike == "slash" and target.type.armour == 0:
+		damage += 1
+	var versus: Dictionary = traits.get("damage_vs", {})
+	damage += int(versus.get(target.type.family, 0))
+	if target.type.family == "breach":
+		damage += int(versus.get("beast", 0))  # hound-breaker: beasts and breach creatures
+	return maxi(1, damage - maxi(0, armour))
+
+
+## Gear's extra protection from `foe`'s blow: a shield guards against blows
+## from the front; Braced armour while bracing.
+func _gear_guard(foe: Foe, hero: Companion) -> int:
+	var extra := 0
+	if hero.back and hero.back.guard > 0:
+		var from_front := not field or side_of(foe) == "front" or line_to(foe) == facing
+		if from_front:
+			extra += hero.back.guard
+	if hero.body and is_defending(hero):
+		extra += int(hero.body.traits.get("brace_armour", 0))
+	return extra
+
+
+## How much harder a blow from behind lands on `hero` (Sure-footed gear
+## softens it).
+func _rear_damage(hero: Companion) -> float:
+	var rear := REAR_DAMAGE
+	for item in [hero.body, hero.back]:
+		if item and item.traits.has("rear_damage_taken"):
+			rear = minf(rear, float(item.traits["rear_damage_taken"]))
+	return rear
+
+
+## Mastery credit for `item` (#192): a hit, a miss, a kill, or a blow taken,
+## scaled by how threatening the foe is for the region; capped per fight.
+func _credit(item: Equipment, kind: String, foe: Foe) -> void:
+	if item == null or item.base_id == "":
+		return
+	var t: Dictionary = GearModel.tables()["mastery"]
+	var key := "weapon_credit" if item.slot == "weapon" else "armour_credit"
+	var amount: float = float(t[key].get(kind, 0.0)) * GearModel.threat_factor(foe.type.threat, region)
+	var cap: float = float(t[key]["per_fight_cap"])
+	mastery_gain[item] = minf(cap, float(mastery_gain.get(item, 0.0)) + amount)
+
+
 ## The Borrowed Pack (slice 2): each head still alive bites someone.
 func _many_bites(foe: Foe) -> Dictionary:
 	var hits: Array[String] = []
@@ -1141,10 +1208,11 @@ func _many_bites(foe: Foe) -> Dictionary:
 		var damage := rng.randi_range(foe.type.damage_min, foe.type.damage_max)
 		if is_defending(target):
 			damage = maxi(1, floori(damage * target.guard_factor))
-		damage = maxi(1, damage - target.damage_reduction())
+		damage = maxi(1, damage - target.damage_reduction() - _gear_guard(foe, target))
 		if from_behind(foe):
-			damage = ceili(damage * REAR_DAMAGE)
+			damage = ceili(damage * _rear_damage(target))
 		target.change_health(-damage)
+		_credit(target.body, "struck", foe)
 		total += damage
 		hits.append("%s (%d)" % [target.display_name, damage])
 		if not target.is_alive():

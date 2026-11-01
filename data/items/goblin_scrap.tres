@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="SupplyItem" format=3]
+
+[ext_resource type="Script" path="res://scripts/supply_item.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/items/refined-v2/copper-ore.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+icon = ExtResource("2")
+display_name = "Goblin-forged scrap"
+description = "Bent goblin iron: a buckle, a blade-end, a rivet plate. Rough, but the smith can work it into a temper. (A tempering material; it also sells. Placeholder picture.)"
+effect = 5
+use_time = 0
+price = 3
+a_name = "a lump of goblin-forged scrap"
+stack = 6

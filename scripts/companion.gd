@@ -314,7 +314,11 @@ func refresh_stats() -> void:
 
 ## Acting order in a fight: armour slows (#93).
 func effective_initiative() -> int:
-	return initiative - (body.initiative_penalty if body else 0) - (back.initiative_penalty if back else 0)
+	var speed := 0  # Light-balanced or Unwieldy gear (#192)
+	for item in [weapon, body]:
+		if item:
+			speed += int(item.traits.get("initiative", 0))
+	return initiative + speed - (body.initiative_penalty if body else 0) - (back.initiative_penalty if back else 0)
 
 
 ## Taken off every blow: toughness, talents and body armour (#47, #93).

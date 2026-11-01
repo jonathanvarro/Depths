@@ -56,6 +56,13 @@ enum Tactic {
 @export var loot_line := ""
 ## Gold dropped when beaten, min-max (goblins carry purses, #42).
 @export var purse := Vector2i.ZERO
+## Armour (owner, 2026-10-31, #192): taken off each of the party's blows
+## (at least 1 gets through). A blunt weapon ignores 1; a blade does +1 to
+## a foe with none.
+@export var armour := 0
+## "goblin", "beast" or "breach": what a goblin-bane or hound-breaker
+## weapon bites into.
+@export var family := ""
 ## Slow on the map (#171, owner 2026-10-31): it moves only every other beat,
 ## so a party can outrun it. Hounds and the like keep pace.
 @export var slow := false

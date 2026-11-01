@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="EnemyType" format=3]
 
+[ext_resource type="Resource" path="res://data/items/spider_silk.tres" id="salvage"]
 [ext_resource type="Script" path="res://scripts/enemy_type.gd" id="1"]
 [ext_resource type="PackedScene" path="res://art/enemies/cave-simple-v1/spider/scene.tscn" id="2"]
 [ext_resource type="Resource" path="res://data/injuries/deep_wound.tres" id="3"]
@@ -23,3 +24,6 @@ loot_line = "Wrapped in old webbing behind it, from some earlier meal: %s."
 row = "back"
 reach_back = true
 threat = 2
+drop = ExtResource("salvage")
+drop_chance = 0.5
+family = "beast"

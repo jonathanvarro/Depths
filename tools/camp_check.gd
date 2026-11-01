@@ -117,7 +117,7 @@ func _initialize() -> void:
 
 	# Smith: stock shown, nothing for sale yet.
 	await _open("smith")
-	check("smith sells plain gear; shield and coat still coming", _body_text().contains(load("res://data/gear/plain_knife.tres").display_name) and _body_text().contains("Coming once"))
+	check("the smith shows today's wares, like the merchant (#196)", main._camp._smith_view.visible and not main._camp._camp.smith_wares().is_empty())
 
 	# Nurse: treatment takes Mara out for the wound's days.
 	await _open("treatment")

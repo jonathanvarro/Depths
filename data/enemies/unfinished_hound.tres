@@ -21,3 +21,4 @@ tactic = 16
 intro = "Born half-made from the Shepherd's cage. Weak alone, it hits harder while another of its pack stands."
 loot_line = "%s, among the unfinished hound's remains."
 threat = 1
+family = "beast"

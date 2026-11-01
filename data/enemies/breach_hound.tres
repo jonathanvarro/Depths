@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="EnemyType" format=3]
 
+[ext_resource type="Resource" path="res://data/items/hound_hide.tres" id="salvage"]
 [ext_resource type="Script" path="res://scripts/injury.gd" id="1_338sh"]
 [ext_resource type="Resource" path="res://data/injuries/deep_wound.tres" id="2_8q8nb"]
 [ext_resource type="PackedScene" path="res://art/enemies/monsters-v1/breach-hound/scene.tscn" id="3_ychik"]
@@ -19,3 +20,6 @@ tactic = 16
 intro = "Breach hounds hunt together and go for the weakest. Each hits harder while another stands."
 loot_line = "Near where the hound fell, among gnawed bones: %s."
 threat = 3
+drop = ExtResource("salvage")
+drop_chance = 0.4
+family = "beast"

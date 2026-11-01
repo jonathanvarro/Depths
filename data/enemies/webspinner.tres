@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="EnemyType" format=3]
 
+[ext_resource type="Resource" path="res://data/items/spider_silk.tres" id="salvage"]
 [ext_resource type="Script" path="res://scripts/enemy_type.gd" id="1"]
 [ext_resource type="PackedScene" path="res://art/enemies/campaign-v1/webspinner/scene.tscn" id="2"]
 [ext_resource type="Resource" path="res://data/injuries/deep_wound.tres" id="3"]
@@ -25,3 +26,6 @@ row = "back"
 reach_back = true
 web_chance = 0.6
 venomous = false
+drop = ExtResource("salvage")
+drop_chance = 0.7
+family = "beast"

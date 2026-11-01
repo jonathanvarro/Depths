@@ -161,6 +161,26 @@ House of Necrosis was used as a reference: you grow strong during a run, grow at
 
 **Built straight into the game,** not as a separate prototype. The owner judges the on-map fights after playing them.
 
+## Owner playtest fixes — 2026-10-31
+
+- **Early gold: salvage.** Beasts now leave something to sell at the merchant instead of purses:
+  - **Rat pelt** (1g): rats 50%, great rats 60%.
+  - **Spider silk** (2g): spiders 50%, webspinners 70%, venom spiders 60%.
+  - **Bat wing** (1g): cave bats 50%.
+  - **Breach-hound hide** (3g): 40%.
+  - **Beetle shell** (2g): 50%.
+
+  They stack in the pack. The game reports "You take a rat pelt from the rat". Icons: #196.
+- **Gear sells for more:** the merchant and the smith now buy gear back at **50%** (was 30%).
+- **The smith uses the merchant's exchange:**
+  - **The wares:** eight pieces of the day's work on the left, no scrolling, new each day and rolled by the gear tables (#192). They come from the regions the party has reached.
+  - **Before the forge** they're plain, rough work (cracked, bent or ordinary, nothing extra). **After it**, anything up to exceptional, with modifiers.
+  - **The pack** sits on the right, and the smith buys gear back.
+  - **The forge offer** is a button. Quest unlocks (the camp-forged blade) are always on offer.
+  - **Shields** wait for their rules.
+- **Corin falling** in a bat fight with two recruits (owner report): not reproduced. A fallen main hero is knocked out and the others fight on (`tools/main_hero_down_check.gd`).
+- **Windows build crash:** a new game crashed the release build. The Settings screen asked for the game window before it existed; a one-line guard fixes it.
+
 ## Map and dungeon progression
 
 Preserve the readable map from the visual concepts, adapted to the grid. Show explored rooms and routes, the current location, blocked doors, uncertain passages, stairs, and known routes toward safety. Notes and unresolved discoveries provide reasons to revisit rooms.

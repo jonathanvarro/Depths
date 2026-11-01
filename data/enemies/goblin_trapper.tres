@@ -22,3 +22,4 @@ fears_fire = false
 threat = 3
 row = "back"
 reach_back = true
+family = "goblin"

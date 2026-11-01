@@ -868,6 +868,7 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 	for hero: Companion in _party_state.members:
 		hero.fight_ended()  # fight-long boons and banes count down (#133)
 	_fight_memories(state, result)
+	_award_mastery(state, result)
 	for foe in state.foes:
 		if foe.health <= 0:
 			_expedition.add_defeated(foe.type.display_name)
@@ -988,7 +989,9 @@ func _trinket_drops(state) -> void:
 		var gear: Equipment = GearGen.drop(_rng, _depth, "foe", foe.type.max_health, foe.elite != "")
 		if foe.type.drop and _rng.randf() < foe.type.drop_chance:  # a hollow miner's pick (#140)
 			if _party_state.supplies.add_what_fits(foe.type.drop) > 0:
-				_show_message("The %s's %s clatters free. It's in the pack." % [foe.type.display_name.to_lower(), foe.type.drop.display_name.to_lower()])
+				# Salvage (owner, 2026-10-31): a beast's pelt or silk sells at camp.
+				var what: String = foe.type.drop.a_name if foe.type.drop.a_name != "" else foe.type.drop.display_name.to_lower()
+				_show_message("You take %s from the %s. It's in the pack." % [what, foe.type.display_name.to_lower()])
 			else:
 				_left_over(foe.type.drop, 1)
 		if gear:
@@ -1057,6 +1060,41 @@ func _grant_xp(amount: int, quiet := false) -> void:
 			if not quiet:
 				_show_message("%s is ready to advance - choose at camp." % hero.display_name)
 		hero.emit_changed()
+
+
+# --- Gear mastery (#192/#193, owner 2026-10-31) -----------------------------
+
+## After a fight: each item's earned mastery, and a share for armour that
+## stood through it (so a careful player isn't behind). Level-ups are said.
+func _award_mastery(state, result: int) -> void:
+	if _in_opening:
+		return
+	var t: Dictionary = GearModel.tables()["mastery"]
+	if result != CombatState.Result.DEFEAT:
+		for hero: Companion in _party_state.members:
+			if hero.is_with_party() and hero.body and hero.body.base_id != "":
+				state.mastery_gain[hero.body] = minf(float(t["armour_credit"]["per_fight_cap"]),
+						float(state.mastery_gain.get(hero.body, 0.0)) + float(t["armour_credit"]["fight_taken_part"]))
+	var owned := GearModel.owned_by(_party_state)
+	for item in state.mastery_gain:
+		var level := GearModel.award(item, state.mastery_gain[item], owned)
+		if level > 0:
+			var who := ""
+			for hero: Companion in _party_state.members:
+				if item in [hero.weapon, hero.body, hero.back]:
+					who = hero.display_name + "'s "
+			_show_message("%s%s reaches mastery %d." % [who, item.display_name.to_lower() if who != "" else item.display_name, level])
+			_tip("mastery", "Gear learns as you use it: weapons by fighting, armour by taking blows. Each mastery level adds what its growth promises - see the item's card. At mastery 3 and 6 the smith can temper it.")
+
+
+## Home in one piece: everything worn learns from the trip.
+func _bring_home_mastery() -> void:
+	var bonus: float = float(GearModel.tables()["mastery"]["extraction"]["worn_item"])
+	var owned := GearModel.owned_by(_party_state)
+	for hero: Companion in _party_state.members:
+		if hero.is_with_party():
+			for item in [hero.weapon, hero.body, hero.back]:
+				GearModel.award(item, bonus, owned)
 
 
 # --- Memories (#118, owner 2026-10-26) ------------------------------------
@@ -1514,6 +1552,8 @@ func _end_expedition(ending: int) -> void:
 		_main_heroes_wake_at_camp()
 		_wipe_pending = true
 		_save_now()
+	elif not _in_opening:
+		_bring_home_mastery()
 	if _in_opening and ending == Expedition.Ending.RETURNED:
 		_hints_done[_hint] = true
 		_show_hint("")  # the escape is over: no "walk into the light" on top

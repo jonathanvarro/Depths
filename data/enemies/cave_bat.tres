@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="EnemyType" format=3]
 
+[ext_resource type="Resource" path="res://data/items/bat_wing.tres" id="salvage"]
 [ext_resource type="Script" path="res://scripts/injury.gd" id="1_ovpn7"]
 [ext_resource type="PackedScene" path="res://art/enemies/monsters-v1/cave-bat/scene.tscn" id="2_yfj5n"]
 [ext_resource type="Script" path="res://scripts/enemy_type.gd" id="3_1o2x2"]
@@ -17,3 +18,6 @@ tactic = 9
 intro = "A cave bat flits overhead: only reach can touch it in the air, but it lands after it swoops."
 loot_line = "Under its roost, half-buried in droppings: %s."
 threat = 2
+drop = ExtResource("salvage")
+drop_chance = 0.5
+family = "beast"

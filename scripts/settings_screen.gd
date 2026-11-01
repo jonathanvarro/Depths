@@ -170,7 +170,8 @@ func _layout_body() -> void:
 	# Narrow viewports use a single scrollable column, with both sections in it.
 	# Normal landscape phones keep two independently scrollable sections.
 	var compact := area.x < 650
-	var focused := get_viewport().gui_get_focus_owner()
+	var viewport := get_viewport()  # none while the screen is still being built or torn down
+	var focused: Control = viewport.gui_get_focus_owner() if viewport else null
 	var restore_focus := focused != null and _display_panel.is_ancestor_of(focused)
 	if compact:
 		# One scroll, with Display's panel below Sound; no nested touch scrolling.

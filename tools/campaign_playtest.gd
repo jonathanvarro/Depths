@@ -13,6 +13,7 @@ extends SceneTree
 ##
 ##   Godot --headless --path . --script tools/campaign_playtest.gd -- [runs per hero] [max days] [json out]
 
+const GearModel := preload("res://scripts/gear_model.gd")
 const PS := preload("res://scripts/party_state.gd")
 const CS := preload("res://scripts/combat_state.gd")
 const CampState := preload("res://scripts/camp_state.gd")
@@ -358,6 +359,12 @@ func _mean_level() -> float:
 
 
 func _back_at_camp(ending: int) -> void:
+	if ending != 1:  # home in one piece: worn gear learns from the trip (#192)
+		var owned := GearModel.owned_by(party)
+		for hero: Companion in party.members:
+			if hero.is_with_party():
+				for item in [hero.weapon, hero.body, hero.back]:
+					GearModel.award(item, 3.0, owned)
 	if ending == 1:  # wiped (#83): main heroes wake hurt; recruits are lost
 		for hero: Companion in party.members:
 			if hero.is_unconscious():
@@ -747,6 +754,13 @@ func _fight(group: Array, kind: String, on_map := false) -> int:
 	if state.result == CS.Result.VICTORY:
 		stats["fights_won"] += 1
 		_award_xp(state, kind)
+	# Gear mastery, as main.gd awards it (#192).
+	var owned := GearModel.owned_by(party)
+	for hero: Companion in party.members:
+		if hero.is_with_party() and hero.body and hero.body.base_id != "":
+			state.mastery_gain[hero.body] = minf(5.0, float(state.mastery_gain.get(hero.body, 0.0)) + 1.0)
+	for item in state.mastery_gain:
+		GearModel.award(item, state.mastery_gain[item], owned)
 		# Tougher foes sometimes leave a trinket (#135), as in the game.
 		for foe in state.foes:
 			if foe.health > 0:

@@ -274,6 +274,145 @@ static func name_of(item: Equipment) -> String:
 	return name
 
 
+# --- Mastery (#192/#193) --------------------------------------------------
+
+## How much a foe teaches: its threat against the region's usual, from a
+## quarter (trivial) to double.
+static func threat_factor(threat: int, region: int) -> float:
+	var t: Dictionary = tables()["mastery"]
+	var usual: float = float(t["region_threat"].get(str(region), 3.0))
+	return clampf(threat / usual, float(t["trivial_foes"]["threat_factor_floor"]), 2.0)
+
+
+## Adds mastery to `item`; practised hands double it while the item is 2+
+## levels behind the best of its slot among `owned`. Returns the new level
+## if it rose, else -1.
+static func award(item: Equipment, points: float, owned: Array = []) -> int:
+	if item == null or item.base_id == "" or points <= 0.0:
+		return -1
+	var t: Dictionary = tables()["mastery"]
+	var before := level_of(item)
+	var best := 0
+	for other in owned:
+		if other is Equipment and other != item and other.slot == item.slot and other.base_id != "":
+			best = maxi(best, level_of(other))
+	if best - before >= int(t["catch_up"]["levels_behind"]):
+		points *= float(t["catch_up"]["multiplier"])
+	item.mastery += points
+	var after := level_of(item)
+	if after != before:
+		apply(item)
+		return after
+	return -1
+
+
+## The smith's tempering (#173): at mastery 3, then 6, one chosen
+## improvement each. Returns 3 or 6 when one is due, else 0.
+static func temper_due(item: Equipment) -> int:
+	if item == null or item.base_id == "":
+		return 0
+	var level := level_of(item)
+	if level >= 6 and item.tempers.size() == 1:
+		return 6
+	if level >= 3 and item.tempers.is_empty():
+		return 3
+	return 0
+
+
+## The choices for `item` at that step: [{id, text}].
+static func temper_options(item: Equipment) -> Array:
+	var due := temper_due(item)
+	var out: Array = []
+	for o in tables()["mastery"]["smith_temper"]["options"]:
+		if item.slot in o["slots"] and due >= int(o.get("min_level", 0)) and o["id"] not in item.tempers:
+			out.append(o)
+	return out
+
+
+## Gold and material for that step, and which material (its own region's).
+static func temper_cost(item: Equipment) -> Dictionary:
+	var t: Dictionary = tables()["mastery"]["smith_temper"]
+	var cost: Dictionary = t["cost"].get(str(temper_due(item)), {"gold": 0, "material": 0})
+	var region := str(int(base(item.base_id).get("region", 1)))
+	return {"gold": int(cost["gold"]), "material": int(cost["material"]), "material_id": t["materials"][region]}
+
+
+## Every weapon, armour and back piece the party holds, worn or carried.
+static func owned_by(party) -> Array:
+	var out: Array = party.supplies.gear.duplicate()
+	for hero in party.members:
+		for item in [hero.weapon, hero.body, hero.back]:
+			if item:
+				out.append(item)
+	return out
+
+
+# --- The item card (#192 phase 4; owner-approved layout 2026-10-31) --------
+
+const GROWTH_WORDS := {"damage": "damage", "accuracy": "to hit", "health": "health", "handling": "handling"}
+
+## What an item's card adds: mastery and progress, growth and what the next
+## level brings, modifiers and tempering in words, and whether the smith can
+## temper it. Plain text lines (the cards wrap them); no special glyphs, so
+## the web build's fonts can show them.
+static func card_lines(item: Equipment) -> PackedStringArray:
+	var lines := PackedStringArray()
+	if item == null or item.base_id == "":
+		return lines
+	var level := level_of(item)
+	var next := next_points(item)
+	if next > 0.0:
+		lines.append("Mastery %d · %s / %d to mastery %d" % [level, _num(item.mastery), roundi(next), level + 1])
+	else:
+		lines.append("Mastery %d: as far as it goes" % level)
+	var growth := PackedStringArray()
+	for stat in item.growth:
+		var rate := _rate(item, stat)
+		var every := "" if rate <= 0.0 else ("+%s per level" % _num(rate * (100.0 if stat == "accuracy" else 1.0)) if rate >= 1.0 or stat == "accuracy" else ("+1 every %d levels" if is_equal_approx(1.0 / rate, roundf(1.0 / rate)) else "+1 about every %d levels") % roundi(1.0 / rate))
+		growth.append("%s %s%s" % [item.growth[stat], GROWTH_WORDS.get(stat, stat), " (" + every + ("%" if stat == "accuracy" else "") + ")" if every != "" else ""])
+	if not growth.is_empty():
+		lines.append("Growth: " + ", ".join(growth))
+	if next > 0.0:
+		var ahead: Equipment = item.duplicate()
+		ahead.mastery = next
+		apply(ahead)
+		var change := _change(item, ahead)
+		if change != "":
+			lines.append("At mastery %d: %s" % [level + 1, change])
+	for id in item.mods:
+		var m := modifier(id)
+		lines.append("%s: %s" % [m.get("name", id).trim_prefix("of ").capitalize() if m.get("name", "").begins_with("of ") else m.get("name", id), m.get("text", "")])
+	for id in item.tempers:
+		for o in tables()["mastery"]["smith_temper"]["options"]:
+			if o["id"] == id:
+				lines.append("Tempered: " + o["text"])
+	if temper_due(item) > 0:
+		lines.append("Ready to temper at the smith")
+	return lines
+
+
+static func _num(x: float) -> String:
+	return str(roundi(x)) if is_equal_approx(x, roundf(x)) else "%.1f" % x
+
+
+## What changed between two copies of an item, in words.
+static func _change(a: Equipment, b: Equipment) -> String:
+	var parts := PackedStringArray()
+	if a.slot == "weapon":
+		if a.attack_min != b.attack_min or a.attack_max != b.attack_max:
+			parts.append("damage %d-%d" % [b.attack_min, b.attack_max])
+		if not is_equal_approx(a.accuracy_bonus, b.accuracy_bonus):
+			parts.append("%+d%% to hit" % roundi(b.accuracy_bonus * 100))
+	else:
+		var ha: int = a.effect.max_health if a.effect else 0
+		var hb: int = b.effect.max_health if b.effect else 0
+		if ha != hb:
+			parts.append("%+d health in all" % hb)
+		if a.initiative_penalty != b.initiative_penalty:
+			parts.append("slower by %d" % b.initiative_penalty if b.initiative_penalty > 0 else "no slowing")
+	return ", ".join(parts)
+
+
 # --- Old gear -------------------------------------------------------------
 
 ## An item the new rules can track: the heroes' own pieces, the smith's

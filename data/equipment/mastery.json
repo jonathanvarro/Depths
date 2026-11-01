@@ -111,12 +111,18 @@
       }
     },
     "materials": {
-      "1": "iron ore",
-      "2": "goblin-forged scrap",
-      "3": "black ore"
+      "1": "copper_ore",
+      "2": "goblin_scrap",
+      "3": "black_ore"
     },
     "own_region_only": true
   },
   "_tuning": "2026-10-31: thresholds doubled after the first probe run (mastery 3 came in about 5 fights).",
-  "_decided": "Owner, 2026-10-31: pace kept (mastery 3 in about 1.4 expeditions, 6 in about 4.3), tempering at 3 and 6."
+  "_decided": "Owner, 2026-10-31: pace kept (mastery 3 in about 1.4 expeditions, 6 in about 4.3), tempering at 3 and 6.",
+  "region_threat": {
+    "_about": "A region's usual foe threat: a foe this threatening gives full credit (threat factor 1).",
+    "1": 2.0,
+    "2": 3.5,
+    "3": 4.5
+  }
 }

@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="EnemyType" format=3]
 
+[ext_resource type="Resource" path="res://data/items/rat_pelt.tres" id="salvage"]
 [ext_resource type="Script" path="res://scripts/enemy_type.gd" id="1"]
 [ext_resource type="PackedScene" path="res://art/enemies/campaign-v1/great-rat/scene.tscn" id="2"]
 [ext_resource type="Resource" path="res://data/injuries/deep_wound.tres" id="3"]
@@ -21,3 +22,6 @@ tactic = 7
 intro = "A great rat bunches its haunches: it rushes hard, then has to catch its breath."
 loot_line = "In the great rat's nest of rags and bones: %s."
 threat = 2
+drop = ExtResource("salvage")
+drop_chance = 0.6
+family = "beast"

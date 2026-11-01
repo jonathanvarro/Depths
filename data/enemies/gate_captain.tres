@@ -24,3 +24,4 @@ loot_line = "Among the captain's spoils: %s."
 purse = Vector2i(6, 10)
 fears_fire = false
 threat = 6
+family = "goblin"

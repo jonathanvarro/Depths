@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="EnemyType" format=3]
 
+[ext_resource type="Resource" path="res://data/items/black_ore.tres" id="salvage"]
 [ext_resource type="Script" path="res://scripts/enemy_type.gd" id="type"]
 [ext_resource type="Script" path="res://scripts/injury.gd" id="injury_script"]
 [ext_resource type="Resource" path="res://data/injuries/deep_wound.tres" id="wound"]
@@ -21,3 +22,6 @@ tactic = 20
 intro = "The Borrowed Pack: three heads, one hide. It bites once for every head. Each head that dies drags the rest off balance for a turn."
 loot_line = "Caught in the folds of the Borrowed Pack's hide: %s."
 threat = 6
+family = "beast"
+drop = ExtResource("salvage")
+drop_chance = 0.4

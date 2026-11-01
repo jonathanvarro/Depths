@@ -146,10 +146,19 @@ func _initialize() -> void:
 	await _open("smith")
 	await _snap("smith")
 	check("can't afford the axe", not camp.buy_gear(ps, load("res://data/gear/woodcutters_axe.tres")))
-	check("buy a plain knife", _press(main._camp, "Buy 8g") and supplies.gold == 2 and supplies.gear.any(func(g): return g.base_id == "riveted_knife"))  # your own item now (#192)
+	# The smith's wares (#196): today's pieces, bought from his exchange.
+	var ware: Equipment = camp.smith_wares()[0]
+	supplies.gold = camp.price_for(ps, ware.price) + 2
+	var smith_view = main._camp._smith_view
+	smith_view.refresh()
+	smith_view.select_item(ware, "left")
+	var bought: bool = smith_view._primary != null and not smith_view._primary.disabled
+	if bought:
+		smith_view._primary.pressed.emit()
+	check("buy one of the smith's pieces", bought and supplies.gold == 2 and ware in supplies.gear, supplies.gold)  # your own item now (#192)
 	await _open("supplies")
-	var knife = supplies.gear.filter(func(g): return g.base_id == "riveted_knife")[0]
-	check("sell it back for 2g (30%)", _trade(knife,"right") and supplies.gold == 4)
+	check("sell it back to the merchant", _trade(ware,"right") and supplies.gold > 2, supplies.gold)
+	supplies.gold = 4
 
 	# Stash: gold stays safe through a wipe.
 	await _open("rest")

@@ -37,6 +37,7 @@ func _blow(party, hero: Companion) -> int:
 	hero.accuracy = 5.0
 	var foe = combat.foes[0]
 	foe.type = foe.type.duplicate()
+	foe.type.armour = 0  # armour (#192) would floor the blow and hide the trinket's +1
 	foe.health = 99
 	return combat.hero_attack(hero, foe)["damage"]
 

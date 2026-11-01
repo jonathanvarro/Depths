@@ -18,3 +18,4 @@ tactic = 1
 intro = "The rat is all bones and teeth, darting at the weakest."
 loot_line = "The starved rat had dragged %s into its nest."
 threat = 0
+family = "beast"

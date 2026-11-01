@@ -20,3 +20,4 @@ loot_line = "Wrapped in a scrap of webbing: %s."
 row = "back"
 reach_back = true
 threat = 0
+family = "beast"

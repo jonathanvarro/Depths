@@ -21,7 +21,7 @@ const Progression := preload("res://scripts/progression.gd")
 const TORCH := preload("res://data/items/torch.tres")
 ## Gold (#42): the lantern upgrade, and what the merchant pays for gear.
 const LANTERN_PRICE := 40
-const GEAR_RESALE := 0.3
+const GEAR_RESALE := 0.5  # was 0.3; finds are worth selling (owner, 2026-10-31)
 ## What the merchant and the smith sell.
 const MERCHANT_STOCK: Array[SupplyItem] = [
 	preload("res://data/items/torch.tres"),
@@ -328,6 +328,72 @@ func smith_stock() -> Array[Equipment]:
 	return stock
 
 
+## The smith's work for the day (owner, 2026-10-31): a few pieces, new each
+## day, rolled by the equipment tables (#192) from the regions the party has
+## reached. Before the forge: plain, rough work with nothing extra. After
+## it: anything up to exceptional, with modifiers. Quest unlocks (the
+## camp-forged blade) are always there. Shields wait for their rules.
+const SMITH_WARES := 8
+var wares: Array[Equipment] = []
+var wares_day := -1
+
+func smith_wares() -> Array[Equipment]:
+	if wares_day != day:
+		wares.clear()
+		var rng := RandomNumberGenerator.new()
+		rng.seed = hash(["smith", day, forge_built])
+		var deepest := 1
+		for depth in floors_reached:
+			if int(floors_reached[depth]) > 0:
+				deepest = maxi(deepest, int(depth))
+		var region := GearModel.region_of(deepest)
+		var pool: Array = GearModel.tables()["bases"]["bases"].filter(func(b): return int(b["region"]) <= region 				and not b.get("no_drop", false) and b.get("kind", "") != "shield")
+		for path in smith_unlocks:
+			if ResourceLoader.exists(path):
+				wares.append(GearModel.ensure_instance(load(path)))
+		while wares.size() < SMITH_WARES and not pool.is_empty():
+			var b: Dictionary = pool[rng.randi_range(0, pool.size() - 1)]
+			var quality := ""
+			if not forge_built:
+				quality = ["cracked", "bent", "ordinary", "ordinary", "ordinary"][rng.randi_range(0, 4)]
+			var item := GearModel.generate(rng, b["id"], quality)
+			if not forge_built and not item.mods.is_empty():
+				item.mods = PackedStringArray()
+				GearModel.apply(item)
+			wares.append(item)
+		wares_day = day
+	return wares
+
+
+## Tempering (#173; owner 2026-10-31): the smith turns mastery 3 or 6 into
+## one chosen improvement, for gold and a piece of the item's own region's
+## material (copper ore, goblin-forged scrap, black ore), from the pack or
+## the stash. Returns why not, or "" when it's done.
+func temper(party, item: Equipment, option_id: String) -> String:
+	if not site_present("smith"):
+		return "The smith is away"
+	if GearModel.temper_due(item) == 0:
+		return "Not ready: mastery 3, then 6"
+	if not GearModel.temper_options(item).any(func(o): return o["id"] == option_id):
+		return "Not a choice for this piece"
+	var cost := GearModel.temper_cost(item)
+	var material: SupplyItem = load("res://data/items/%s.tres" % cost["material_id"])
+	var have: int = party.supplies.count(material) + stash.count(material)
+	if party.supplies.gold < price_for(party, cost["gold"]):
+		return "Need %d gold" % price_for(party, cost["gold"])
+	if have < cost["material"]:
+		return "Needs %d %s" % [cost["material"], material.display_name.to_lower()]
+	party.supplies.gold -= price_for(party, cost["gold"])
+	for i in cost["material"]:
+		if not party.supplies.take(material):
+			stash.take(material)
+	item.tempers.append(option_id)
+	GearModel.apply(item)
+	party.supplies.changed.emit()
+	changed.emit()
+	return ""
+
+
 ## Whether the forge can be paid for: the iron project done, not yet built.
 func forge_offered() -> bool:
 	return not forge_built and Quests.stage(self, "iron_sample") == Quests.Stage.RESOLVED
@@ -339,6 +405,7 @@ func build_forge(party) -> bool:
 	party.supplies.gold -= FORGE_PRICE
 	party.supplies.changed.emit()
 	forge_built = true
+	wares_day = -1  # the forge's first work, today
 	changed.emit()
 	return true
 
@@ -454,8 +521,8 @@ func sell(party, item: SupplyItem) -> bool:
 	return true
 
 
-func sell_gear(party, item: Equipment) -> bool:
-	if not can_trade() or item not in party.supplies.gear:
+func sell_gear(party, item: Equipment, at_smith := false) -> bool:
+	if not (can_trade() or (at_smith and site_present("smith"))) or item not in party.supplies.gear:
 		return false
 	party.supplies.gear.erase(item)
 	party.supplies.gold += sale_price(item)
@@ -466,11 +533,13 @@ func sell_gear(party, item: Equipment) -> bool:
 
 ## The smith's stock (#42): plain gear into the pack, to equip there.
 func buy_gear(party, item: Equipment) -> bool:
-	if not site_present("smith") or not can_afford(party, item.price) or not party.supplies.has_room_for_gear():
+	var price := price_for(party, item.price)  # a Fixer haggles here too (#101)
+	if not site_present("smith") or not can_afford(party, price) or not party.supplies.has_room_for_gear():
 		return false
-	party.supplies.gold -= item.price
+	party.supplies.gold -= price
 	party.supplies.gear.append(GearModel.ensure_instance(item))  # your own piece, from now on (#192)
-	fine_stock.erase(item)  # one of each fine piece a day
+	fine_stock.erase(item)
+	wares.erase(item)  # one of each a day  # one of each fine piece a day
 	party.supplies.changed.emit()
 	changed.emit()
 	return true

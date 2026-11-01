@@ -7,6 +7,7 @@ signal open_settings
 signal open_quests
 signal used(message: String)
 
+const GearModel := preload("res://scripts/gear_model.gd")
 const Supplies := preload("res://scripts/supplies.gd")
 const StrainRules := preload("res://scripts/strain.gd")
 const Trinkets := preload("res://scripts/trinkets.gd")
@@ -559,6 +560,7 @@ func _refresh_details() -> void:
 			if item.slot=="back":_detail_text.add_child(_wrapped(Equipment.back_text(item),17))
 			elif item.effect:_detail_text.add_child(_wrapped(item.effect.effects_text(),17))
 			if item.curse:_detail_text.add_child(_wrapped("Cursed: "+item.curse.effects_text()+". Holy water or the nurse can lift it.",17))
+			for line in GearModel.card_lines(item):_detail_text.add_child(_wrapped(line,17))  # mastery and growth (#192)
 		_action("Take off","unequip",_unequip_reason())
 		_detail_text.move_child(description,_detail_text.get_child_count()-1)
 		_position_details.call_deferred()
@@ -573,6 +575,7 @@ func _refresh_details() -> void:
 		if now:_detail_text.add_child(_wrapped("Replaces "+now.display_name,17))
 		if item.slot=="back":_detail_text.add_child(_wrapped("Worn: "+Equipment.back_text(item),17))
 		elif item.effect:_detail_text.add_child(_wrapped("Worn: "+item.effect.effects_text(),17))
+		for line in GearModel.card_lines(item):_detail_text.add_child(_wrapped(line,17))  # mastery and growth (#192)
 		_action("Wear" if item.slot=="trinket" else "Equip","equip",_equip_reason(item.slot))
 	else:
 		var charm:Equipment=Trinkets.for_treasure(item) if item.effect==SupplyItem.Effect.TREASURE else null

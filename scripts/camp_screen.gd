@@ -35,6 +35,7 @@ const Quests := preload("res://scripts/quests.gd")
 const Progression := preload("res://scripts/progression.gd")
 const Sounds := preload("res://scripts/sounds.gd")
 const MerchantScreen := preload("res://scripts/merchant_screen.gd")
+const SmithScreen := preload("res://scripts/smith_screen.gd")
 const StashScreen := preload("res://scripts/stash_screen.gd")
 const Recruits := preload("res://scripts/recruits.gd")
 var _ambience: AudioStreamPlayer
@@ -61,6 +62,7 @@ var _body: VBoxContainer
 var _back: Button
 var _current := ""
 var _merchant_view: Control
+var _smith_view: Control  # the smith on the same exchange (owner, 2026-10-31)
 var _stash_view: Control  # the tent's Store (owner, 2026-10-25)
 var _last_site := ""
 var _save_button: Button
@@ -145,6 +147,9 @@ func _init() -> void:
 	_merchant_view = MerchantScreen.new()
 	content.add_child(_merchant_view)
 	_merchant_view.closed.connect(_close_activity)
+	_smith_view = SmithScreen.new()
+	content.add_child(_smith_view)
+	_smith_view.closed.connect(_close_activity)
 	_stash_view = StashScreen.new()
 	content.add_child(_stash_view)
 	_stash_view.closed.connect(func():
@@ -365,6 +370,7 @@ func _build_activity() -> void:
 func open_activity(id: String) -> void:
 	if not _sites.has(id) or _camp==null or not _camp.site_present(id):return
 	if id!="supplies":_merchant_view.hide()
+	if id!="smith":_smith_view.hide()
 	_stash_view.hide()
 	_current = id
 	if _note_tween:
@@ -389,6 +395,7 @@ func _close_activity() -> void:
 	_current = ""
 	_activity.visible = false
 	_merchant_view.hide()
+	_smith_view.hide()
 	_stash_view.hide()
 	_update_site_art()
 	_day_label.text = _status() if _camp else ""
@@ -406,6 +413,10 @@ func _refresh_activity() -> void:
 	if _current=="supplies":
 		_activity.visible=false
 		_merchant()
+		return
+	if _current=="smith":
+		_activity.visible=false
+		_smith()
 		return
 	for child in _body.get_children():
 		_body.remove_child(child)
@@ -453,8 +464,17 @@ func _merchant() -> void:
 		_merchant_view.refresh()
 
 
-## The apprentice smith (#42): plain gear into the pack (equip it there).
+## The apprentice smith (#42; owner 2026-10-31): the same exchange as the
+## merchant - today's wares beside the pack.
 func _smith() -> void:
+	if not _smith_view.visible:
+		_smith_view.open(_camp,_party)
+	else:
+		_smith_view.refresh()
+
+
+## The old list version, kept until the checks that read it move over.
+func _smith_list() -> void:
 	_text("The apprentice wipes his hands. \"It's not much. But it'll hold.\"")
 	for item: Equipment in _camp.smith_stock():  # with quest unlocks (#123)
 		if item.slot == "back":  # backpacks, cloaks and capes

@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="EnemyType" format=3]
 
+[ext_resource type="Resource" path="res://data/items/goblin_scrap.tres" id="salvage"]
 [ext_resource type="Script" path="res://scripts/enemy_type.gd" id="1"]
 [ext_resource type="PackedScene" path="res://art/enemies/cave-simple-v1/goblin/scene.tscn" id="2"]
 [ext_resource type="Resource" path="res://data/injuries/deep_wound.tres" id="3"]
@@ -23,3 +24,6 @@ loot_line = "Among the goblin's stolen things: %s."
 purse = Vector2i(2, 6)
 threat = 3
 fears_fire = false
+family = "goblin"
+drop = ExtResource("salvage")
+drop_chance = 0.3
