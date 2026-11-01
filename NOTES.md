@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-11-01 – ChatGPT (one low-poly character style study)
+- Did: #205 follows #203 with one original Rook-inspired shaped low-poly head/body, three fitted outfits, shield/cape/pack, blended cloth joints, standing/seated/reading pose clips and paused idle/blink. Isolated project: tools/character_lowpoly; actual captures/native96/native192 cards, script-free all-variant native model and three portable skinned GLBs: art/concepts/character-lowpoly-v1/inspector.html. Handoff: docs/lowpoly-character-study.md.
+- Next: Owner reviews face, proportions, faceting and wardrobe style before extending to named cast. No likeness approval or live integration assumed; named portraits and existing illustrations remain separate.
+- Watch out:719 Mobile/688 headless,104 packaged-source and33 Chrome gallery checks pass; independent native load/skin/pose passes. Native default2,642 visible triangles/five single-surface meshes; portable GLBs use additional palette surfaces after runtime GLB import lost vertex-colour material enablement. Reimported colour/skin/poses checked. One body size, fixed fingers, rigid armour, simple weighted cape/no collision, static pose clips and no physical iPhone benchmark. Restricted editor preferences/shader-cache warnings recorded. Concurrent equipment/audio/gameplay changes and other handoff entries excluded.
+
 ## 2026-11-01 – ChatGPT (modular 3D trial)
 - Did: #203 supplies an isolated Godot4.7.2 review in tools/character_3d_trial: two distinct original procedural head studies, shared16-bone/rest body, three outfits, shield/cape/pack, standing/seated/reading, portrait/full-body/front/back and rudimentary blink/talk. Actual Mobile captures/native192/native96 cards, static native scene snapshots, hashes and gallery: art/concepts/character-3d-trial-v1/inspector.html. Report/limits: docs/modular-character-3d-trial.md.
 - Next: Owner reviews the reusable wardrobe approach separately from primitive face/style quality. An authored skinned body/face trial is the next decision if selected; accepted2D portraits and #181/#197-#201 remain unchanged.

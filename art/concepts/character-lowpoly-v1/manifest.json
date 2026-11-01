@@ -1,0 +1,164 @@
+{
+  "issue": 205,
+  "date": "2026-11-01",
+  "origin": "Original authored cross-sections, planar meshes and vertex-colour materials; no external models or generated illustrations.",
+  "renderer": "Godot 4.7.2 / Mobile / D3D12 / AMD Radeon RX 9070 XT",
+  "files": {
+    "angle-0.png": {
+      "sha256": "48fcb2e1bea0f36453f753c947b702689d1fee38a045ccd14833885574ba3963",
+      "bytes": 48115
+    },
+    "angle-2.png": {
+      "sha256": "63e0803be25e2fd7c1dbc1c0de255d05e356ecd15d522f1a668d62a6f759e5a5",
+      "bytes": 38326
+    },
+    "angle-3.png": {
+      "sha256": "368341fe498f2c9cbe10426df781691e3bf9ef6e66e8082bc0c0f9e2847819ba",
+      "bytes": 37716
+    },
+    "blink.png": {
+      "sha256": "61609a8c3e8924e69b20ed2be3ab7ded939e6c8973311135097f792c51cdd8a8",
+      "bytes": 46410
+    },
+    "card-0-192.png": {
+      "sha256": "632b5f1b4b27c228e550b5e92a08264a8685309be86baaf8513d5cedfc299c05",
+      "bytes": 9239
+    },
+    "card-0-96.png": {
+      "sha256": "284f6dbad7298b700f290187d03809666060b86f7a20da597e0a7177d43e670d",
+      "bytes": 4291
+    },
+    "card-1-192.png": {
+      "sha256": "632b5f1b4b27c228e550b5e92a08264a8685309be86baaf8513d5cedfc299c05",
+      "bytes": 9239
+    },
+    "card-1-96.png": {
+      "sha256": "284f6dbad7298b700f290187d03809666060b86f7a20da597e0a7177d43e670d",
+      "bytes": 4291
+    },
+    "card-2-192.png": {
+      "sha256": "632b5f1b4b27c228e550b5e92a08264a8685309be86baaf8513d5cedfc299c05",
+      "bytes": 9239
+    },
+    "card-2-96.png": {
+      "sha256": "284f6dbad7298b700f290187d03809666060b86f7a20da597e0a7177d43e670d",
+      "bytes": 4291
+    },
+    "face-front.png": {
+      "sha256": "da8338e8ef8a11b4659456d0de296eb5313a71338fda7e6190e480b2c4b7bcc4",
+      "bytes": 47407
+    },
+    "figure-0.png": {
+      "sha256": "b910d724dc81aaabdf27c75294c56c4597dfcccab3e14ef21c1ed3e5f4212bde",
+      "bytes": 48942
+    },
+    "figure-1.png": {
+      "sha256": "1d000d3eb5bb22d048abd191a6295f007cc0ebc2138f929974da3425bb100017",
+      "bytes": 49205
+    },
+    "figure-2.png": {
+      "sha256": "966225f439f44ebba7781c395765bf89a01635924758fe6546c0856d8e45af38",
+      "bytes": 48501
+    },
+    "phone.png": {
+      "sha256": "21444f92ed3c67e06945aafe7b67eef1f98b8b87990796af275a37c73e01772c",
+      "bytes": 66332
+    },
+    "portable-roundtrip.png": {
+      "sha256": "536bd9d8caf1748e16b613ee19cc1fe351497621dceea388949da9f3f890ef5f",
+      "bytes": 21159
+    },
+    "portrait-0.png": {
+      "sha256": "b656132a4724c569e552d572c7a3262a307d7f320bb354f83ee0572503090277",
+      "bytes": 47183
+    },
+    "portrait-1.png": {
+      "sha256": "2ee4f5694b8b6edc39693385239af3b774f0a41023ff178cd6c99e75fbc31e16",
+      "bytes": 45836
+    },
+    "portrait-2.png": {
+      "sha256": "9e6b65ddf292dac3bc437ac0c71f8b2f50133d4f5ad007614f21e243eaa64a64",
+      "bytes": 47270
+    },
+    "reading-0.png": {
+      "sha256": "8d77aafe2d5131348c9b25fa3bf2d667aa9e21f20030cb3300803ad588fcfcca",
+      "bytes": 59840
+    },
+    "reading-1.png": {
+      "sha256": "4607fa0850c0259b5e5cd91466964578b702f7a66c0596459efbeee739bc478f",
+      "bytes": 58973
+    },
+    "reading-2.png": {
+      "sha256": "6c1e8336b43c28e741fc5c75af46b3c3fe204e593644fa9ff01102ddd4467c76",
+      "bytes": 58536
+    },
+    "report.json": {
+      "sha256": "a5f17a79c95900d22e06777fa12fdfae1f3f23794048ddac7065694d20e223e8",
+      "bytes": 279
+    },
+    "seated-0.png": {
+      "sha256": "ff48edfc369efec3c4cdac78998d2c8b20e3bf289fa696b5a304609c8f906781",
+      "bytes": 61641
+    },
+    "seated-1.png": {
+      "sha256": "cc8d7ebbb650db23a72169d927f0be557156b3c745a70c8cd62162ba287f92cd",
+      "bytes": 61785
+    },
+    "seated-2.png": {
+      "sha256": "841c617abe54176683dd832baa8576a461f6d458c94be75b4ba822f80989c731",
+      "bytes": 60445
+    },
+    "traveller-0.glb": {
+      "sha256": "f3e00363dde4879caaaa9309d11c5418e16c247964bbd0cfb8526126596f6eec",
+      "bytes": 576444
+    },
+    "traveller-1.glb": {
+      "sha256": "1a1aae7567eb5ecdea9e95af415c16a1b3c47078a78427d487de7f0c859cc0b0",
+      "bytes": 551732
+    },
+    "traveller-2.glb": {
+      "sha256": "fee813849416c03f8f2aac89f775eea0717f5e2f301c33d8e0c3cf86bf939577",
+      "bytes": 585656
+    },
+    "traveller.tscn": {
+      "sha256": "be61f9ea6bf03c646426d4ddec7ab10a496583ee967163db5486c4583b9286e0",
+      "bytes": 769019
+    },
+    "utility-0.png": {
+      "sha256": "e96b4bfc04bd259168f2e70ea7144101a6b5e3b9594dc6034b9174b719468d15",
+      "bytes": 50585
+    },
+    "utility-2.png": {
+      "sha256": "86a28be0805049d4942510ef3fdd9ff8798c1153d2bc6aad8b610cdda199be47",
+      "bytes": 48263
+    },
+    "utility-back-0.png": {
+      "sha256": "76d30a6e26fdf6face6a9eb54489764ffb6ea281e12de9e05c65d5a25ac5f724",
+      "bytes": 42660
+    },
+    "utility-back-2.png": {
+      "sha256": "70841560a9039d43214f49fed03086b935e32cedd2f24fa98ac899bf6ab39a4f",
+      "bytes": 40488
+    }
+  },
+  "source_sha256": {
+    "character.gd": "81ad975088ea0664c32c6c79c48b07c0cd8396006d5dc87af24aa523443bef5a",
+    "check.gd": "a128c79e4daa6107ef7f574859928f3bac0e2e61f5a36e9b2935709950ea635b",
+    "check_export.gd": "95ad5ff9c20fc52fff4568992676de680655eabe077ae7ce840f26919e2c08c8",
+    "review.gd": "a55cde161ecfc9633aff0c180ee50b863e46c7bc2a9844f6b02f1f0bc9fe23b5"
+  },
+  "overview": "Cropped/resized actual captures with labels; no model retouch or synthesized imagery.",
+  "limits": [
+    "Owner style/likeness review pending",
+    "One body size",
+    "Flat-shaded palette, no texture UVs",
+    "Rigid armour and fingers",
+    "Pose clips, not a locomotion library",
+    "Cape bends with spine/hips; no cloth or collision simulation",
+    "GLBs export one visible outfit and cape each, no hidden reading prop",
+    "Portable GLBs use extra palette-material surfaces for reliable colour on import; native project has fewer surfaces",
+    "Native scene retains all variants; caller controls visibility",
+    "No physical iPhone benchmark or live integration"
+  ],
+  "environment_warning": "Restricted editor preferences and user://vulkan shader-cache directory unavailable; renderer continued without caching, exit 0."
+}

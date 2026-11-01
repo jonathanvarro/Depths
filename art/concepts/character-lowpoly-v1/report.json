@@ -1,0 +1,15 @@
+{
+	"checks": 719,
+	"combinations": 27,
+	"display": "Windows",
+	"failures": [],
+	"mixed_weight_vertices": 3612,
+	"renderer": "mobile",
+	"stats": {
+		"meshes_total": 11,
+		"meshes_visible": 5,
+		"triangles_total": 4523,
+		"triangles_visible": 2642,
+		"weighted_vertices": 4836
+	}
+}
