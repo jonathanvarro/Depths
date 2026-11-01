@@ -1,0 +1,59 @@
+{
+  "commit": "6bbad67d9136fe43f9d684188d6941508c5357f5",
+  "items": [
+    {
+      "id": "rat_pelt",
+      "resource": "data/items/rat_pelt.tres",
+      "sha256": "c72446eafc316ccd19cd4dccd03f66d99b188fb85f57a56b648b25f5fabb8e1a",
+      "text": "[gd_resource type=\"Resource\" script_class=\"SupplyItem\" format=3]\n\n[ext_resource type=\"Script\" path=\"res://scripts/supply_item.gd\" id=\"1\"]\n[ext_resource type=\"Texture2D\" path=\"res://art/items/refined-v2/fine-cloth.png\" id=\"2\"]\n\n[resource]\nscript = ExtResource(\"1\")\nicon = ExtResource(\"2\")\ndisplay_name = \"Rat pelt\"\ndescription = \"A greasy little hide. The tanner's boy at the camp pays a coin or two for them. (Salvage: sell it at the merchant. Placeholder picture.)\"\neffect = 5\nuse_time = 0\nprice = 1\na_name = \"a rat pelt\"\nstack = 6\n",
+      "old_icon": "res://art/items/refined-v2/fine-cloth.png"
+    },
+    {
+      "id": "spider_silk",
+      "resource": "data/items/spider_silk.tres",
+      "sha256": "762e20073e974f68875da0e7dbc70a7c3603814da1ad7eb9da1d96bb43a8e547",
+      "text": "[gd_resource type=\"Resource\" script_class=\"SupplyItem\" format=3]\n\n[ext_resource type=\"Script\" path=\"res://scripts/supply_item.gd\" id=\"1\"]\n[ext_resource type=\"Texture2D\" path=\"res://art/items/refined-v2/spice-pouch.png\" id=\"2\"]\n\n[resource]\nscript = ExtResource(\"1\")\nicon = ExtResource(\"2\")\ndisplay_name = \"Spider silk\"\ndescription = \"Grey silk wound off a dead spider's spinnerets. Strong as wire; the merchant sells it on to bowyers. (Salvage: sell it at the merchant. Placeholder picture.)\"\neffect = 5\nuse_time = 0\nprice = 2\na_name = \"a hank of spider silk\"\nstack = 6\n",
+      "old_icon": "res://art/items/refined-v2/spice-pouch.png"
+    },
+    {
+      "id": "bat_wing",
+      "resource": "data/items/bat_wing.tres",
+      "sha256": "659f768f40a827b90b2b25e21e46b783fb8a58eebc95bcdce98cc5b29abd1888",
+      "text": "[gd_resource type=\"Resource\" script_class=\"SupplyItem\" format=3]\n\n[ext_resource type=\"Script\" path=\"res://scripts/supply_item.gd\" id=\"1\"]\n[ext_resource type=\"Texture2D\" path=\"res://art/items/refined-v2/fine-cloth.png\" id=\"2\"]\n\n[resource]\nscript = ExtResource(\"1\")\nicon = ExtResource(\"2\")\ndisplay_name = \"Bat wing\"\ndescription = \"A leathery wing, folded. Herbalists down the valley grind them for something. (Salvage: sell it at the merchant. Placeholder picture.)\"\neffect = 5\nuse_time = 0\nprice = 1\na_name = \"a bat wing\"\nstack = 6\n",
+      "old_icon": "res://art/items/refined-v2/fine-cloth.png"
+    },
+    {
+      "id": "hound_hide",
+      "resource": "data/items/hound_hide.tres",
+      "sha256": "d7d40f4a3da6b6b1a3ad998cd128ecc586664dafb68eebae64dd83fca1e21184",
+      "text": "[gd_resource type=\"Resource\" script_class=\"SupplyItem\" format=3]\n\n[ext_resource type=\"Script\" path=\"res://scripts/supply_item.gd\" id=\"1\"]\n[ext_resource type=\"Texture2D\" path=\"res://art/items/refined-v2/fine-cloth.png\" id=\"2\"]\n\n[resource]\nscript = ExtResource(\"1\")\nicon = ExtResource(\"2\")\ndisplay_name = \"Breach-hound hide\"\ndescription = \"Hairless, grey and too thick for a dog's. Someone always wants it, and doesn't say why. (Salvage: sell it at the merchant. Placeholder picture.)\"\neffect = 5\nuse_time = 0\nprice = 3\na_name = \"a breach-hound hide\"\nstack = 3\n",
+      "old_icon": "res://art/items/refined-v2/fine-cloth.png"
+    },
+    {
+      "id": "beetle_shell",
+      "resource": "data/items/beetle_shell.tres",
+      "sha256": "ed39844050d1c16e373ea6e58db66c8c41b9c03ad9efa2e0f0544bd4d754ca85",
+      "text": "[gd_resource type=\"Resource\" script_class=\"SupplyItem\" format=3]\n\n[ext_resource type=\"Script\" path=\"res://scripts/supply_item.gd\" id=\"1\"]\n[ext_resource type=\"Texture2D\" path=\"res://art/items/refined-v2/copper-ore.png\" id=\"2\"]\n\n[resource]\nscript = ExtResource(\"1\")\nicon = ExtResource(\"2\")\ndisplay_name = \"Beetle shell\"\ndescription = \"A plate of a rock beetle's shell, hard as slate. Armourers like it. (Salvage: sell it at the merchant. Placeholder picture.)\"\neffect = 5\nuse_time = 0\nprice = 2\na_name = \"a beetle shell\"\nstack = 4\n",
+      "old_icon": "res://art/items/refined-v2/copper-ore.png"
+    },
+    {
+      "id": "black_ore",
+      "resource": "data/items/black_ore.tres",
+      "sha256": "d52cab5e5df5ce5024a214040c69e58bc7fc84f004bbffffc9f76a0a9fcb515f",
+      "text": "[gd_resource type=\"Resource\" script_class=\"SupplyItem\" format=3]\n\n[ext_resource type=\"Script\" path=\"res://scripts/supply_item.gd\" id=\"1\"]\n[ext_resource type=\"Texture2D\" path=\"res://art/items/refined-v2/copper-ore.png\" id=\"2\"]\n\n[resource]\nscript = ExtResource(\"1\")\nicon = ExtResource(\"2\")\ndisplay_name = \"Black ore\"\ndescription = \"Heavy, glassy and cold. It came up from somewhere deep. The smith wants it for the finest tempering. (A tempering material; it also sells. Placeholder picture.)\"\neffect = 5\nuse_time = 0\nprice = 6\na_name = \"a lump of black ore\"\nstack = 4\n",
+      "old_icon": "res://art/items/refined-v2/copper-ore.png"
+    },
+    {
+      "id": "goblin_scrap",
+      "resource": "data/items/goblin_scrap.tres",
+      "sha256": "0e56e1a4e7f71ac6b5e8b572a4df1398d74808f80b4b1892ad717bfa2db5201b",
+      "text": "[gd_resource type=\"Resource\" script_class=\"SupplyItem\" format=3]\n\n[ext_resource type=\"Script\" path=\"res://scripts/supply_item.gd\" id=\"1\"]\n[ext_resource type=\"Texture2D\" path=\"res://art/items/refined-v2/copper-ore.png\" id=\"2\"]\n\n[resource]\nscript = ExtResource(\"1\")\nicon = ExtResource(\"2\")\ndisplay_name = \"Goblin-forged scrap\"\ndescription = \"Bent goblin iron: a buckle, a blade-end, a rivet plate. Rough, but the smith can work it into a temper. (A tempering material; it also sells. Placeholder picture.)\"\neffect = 5\nuse_time = 0\nprice = 3\na_name = \"a lump of goblin-forged scrap\"\nstack = 6\n",
+      "old_icon": "res://art/items/refined-v2/copper-ore.png"
+    }
+  ],
+  "shared_art": {
+    "res://art/items/refined-v2/fine-cloth.png": "db92fa565fe5dce5a3266a5a5b3f0a5d79387f44309780709970aa14929bc854",
+    "res://art/items/refined-v2/spice-pouch.png": "568341ed4fc6cba92bcc2ba45871dc2fd26d25e54c947556f3852a90d8147d11",
+    "res://art/items/refined-v2/copper-ore.png": "9a135858fe233dbd14a1204c927372423db287933fd5cb87ce1d8cfd6b166a08"
+  }
+}

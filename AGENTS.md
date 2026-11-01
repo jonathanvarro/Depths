@@ -167,6 +167,12 @@ Templates > Download and Install; already installed on the owner's PC).
   Tools/treatments and the four back-slot items use `art/items/field-kit-v1`;
   eleven specific boon/bane glyphs are in `art/ui/boons-v2` (#138).
   Sources, builder bindings and native/display-size review: `docs/field-kit-art.md`.
+  Seven salvage/smith-material items (#196/#202) now use `art/items/salvage-v1`:
+  five distinct animal materials, black ore and goblin-forged scrap. Native128
+  icons and directly exported compact64 siblings, hard alpha and64-colour budget.
+  Exact sources, binding invariants and real Pack/loot/merchant phone review:
+  `docs/salvage-and-material-icons.md`. Only icon URIs and obsolete picture notes
+  changed; preserve resource identities, prices, stacks, effects and smith rules.
 - `scripts/injury.gd` + `data/injuries/*.tres` – lasting injuries (max
   health penalty, extra step time, portrait overlay names). Companion holds
   `injuries` and `dressed`; F3 + K injures the first hero for testing.

@@ -1,0 +1,350 @@
+{
+  "items": [
+    {
+      "id": "rat-pelt",
+      "resource": "data/items/rat_pelt.tres",
+      "name": "Rat pelt",
+      "prompt": "Use case: stylized-concept. Asset type: one small inventory icon for Depths, a dark gritty dungeon crawler. Rough hand-painted game object with broad readable planes and restrained fine detail, intended to reduce cleanly to a 128px/64-colour icon and be readable at 64 and 40px. Slightly elevated three-quarter view, neutral soft light from upper left, muted natural materials, modest edge highlights. One centered isolated object/group filling about 75 percent of a square canvas, generous transparent padding. GENUINELY transparent background. No ground, scenery, vignette, backdrop gradient, label, lettering, symbol, border, magical glow, hands or people. Not pristine or symmetrical; worn material character without excessive random scratches.\nSubject: RAT PELT. A small compact roll of coarse greasy grey-brown fur and hide, bound once with plain flax twine. One open curled end reveals a dull pale-tan leather underside; the short ragged fur edges break the cylindrical outline. Angle the little roll diagonally lower-left to upper-right. Make the furry texture and curled hollow end clear even at tiny size. This is an ordinary prepared trade material, not an animal figure: no head, eyes, paws, tail, blood or wet flesh. Keep it practical and grubby, not a luxurious fur garment.",
+      "transparent": true,
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-2b045b38-5ffe-451e-96d3-f7d076b14b46.png",
+      "source": "art/source/salvage-v1/rat-pelt-master.png",
+      "sha256": "be7b25653428fe8dd03134e9bdcf6bdb8049787ffbfbf9a487347b3bbd0061ae",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "export": "res://art/items/salvage-v1/rat-pelt.png",
+      "compact": "res://art/items/salvage-v1/compact64/rat-pelt.png",
+      "registration": {
+        "128": {
+          "source_bounds": [
+            80,
+            234,
+            1197,
+            1063
+          ],
+          "scale": 0.10026857654431513,
+          "offset": [
+            8,
+            22
+          ]
+        },
+        "64": {
+          "source_bounds": [
+            80,
+            234,
+            1197,
+            1063
+          ],
+          "scale": 0.050134288272157566,
+          "offset": [
+            4,
+            11
+          ]
+        }
+      },
+      "export_sha256": "9e08d8600119a6de2e618219f656a1c537ffb08815e3e3db95fdedd6a6899915",
+      "old_icon": "res://art/items/refined-v2/fine-cloth.png",
+      "description": "A greasy little hide. The tanner's boy at the camp pays a coin or two for them. (Salvage: sell it at the merchant.)",
+      "bound": true
+    },
+    {
+      "id": "spider-silk",
+      "resource": "data/items/spider_silk.tres",
+      "name": "Spider silk",
+      "prompt": "Use case: stylized-concept. Asset type: one small inventory icon for Depths, a dark gritty dungeon crawler. Rough hand-painted game object with broad readable planes and restrained fine detail, intended to reduce cleanly to a 128px/64-colour icon and be readable at 64 and 40px. Slightly elevated three-quarter view, neutral soft light from upper left, muted natural materials, modest edge highlights. One centered isolated object/group filling about 75 percent of a square canvas, generous transparent padding. GENUINELY transparent background. No ground, scenery, vignette, backdrop gradient, label, lettering, symbol, border, magical glow, hands or people. Not pristine or symmetrical; worn material character without excessive random scratches.\nSubject: SPIDER SILK. One loose compact hank of dull pearl-grey silk wound around the middle of a short crooked dark wooden stick. The two blunt stick ends project clearly at upper-left and lower-right. Thick overlapping silky loops form an irregular oval around its middle, with just two or three loose thread ends. Strong contrast between pale fibrous silk and dark wood. Roughly gathered valuable raw material, not a perfectly neat spool or a pouch. Keep the few large loops legible and the silhouette compact. No spider, web background, feathers, bow, needle, glitter or luminous strands.",
+      "transparent": true,
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-425c04fd-18b3-43e5-9dc1-14718f3e1adc.png",
+      "source": "art/source/salvage-v1/spider-silk-master.png",
+      "sha256": "3f6ee53b4058841bce4c301707333fad917f7afbd48bcdd15108cfbc6eeecc2a",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "export": "res://art/items/salvage-v1/spider-silk.png",
+      "compact": "res://art/items/salvage-v1/compact64/spider-silk.png",
+      "registration": {
+        "128": {
+          "source_bounds": [
+            95,
+            79,
+            1195,
+            1184
+          ],
+          "scale": 0.10135746606334842,
+          "offset": [
+            8,
+            8
+          ]
+        },
+        "64": {
+          "source_bounds": [
+            95,
+            79,
+            1195,
+            1184
+          ],
+          "scale": 0.05067873303167421,
+          "offset": [
+            4,
+            4
+          ]
+        }
+      },
+      "export_sha256": "4ca01cf0d368478942d5ab4ba39eb87ef062a8ddd52041d393d2b04c586aff31",
+      "old_icon": "res://art/items/refined-v2/spice-pouch.png",
+      "description": "Grey silk wound off a dead spider's spinnerets. Strong as wire; the merchant sells it on to bowyers. (Salvage: sell it at the merchant.)",
+      "bound": true
+    },
+    {
+      "id": "bat-wing",
+      "resource": "data/items/bat_wing.tres",
+      "name": "Bat wing",
+      "prompt": "Use case: stylized-concept. Asset type: one small inventory icon for Depths, a dark gritty dungeon crawler. Rough hand-painted game object with broad readable planes and restrained fine detail, intended to reduce cleanly to a 128px/64-colour icon and be readable at 64 and 40px. Slightly elevated three-quarter view, neutral soft light from upper left, muted natural materials, modest edge highlights. One centered isolated object/group filling about 75 percent of a square canvas, generous transparent padding. GENUINELY transparent background. No ground, scenery, vignette, backdrop gradient, label, lettering, symbol, border, magical glow, hands or people. Not pristine or symmetrical; worn material character without excessive random scratches.\nSubject: BAT WING. One compact folded leathery bat-wing specimen as a trade material: a swept triangular silhouette, three clear scallops along the trailing edge, long dark supporting ribs visible beneath dry umber-brown membrane. It is partly folded rather than spread into a giant fan, with the thin ends safely tucked within the silhouette. The matte creased membrane catches a little dull warm light; darker ribs give it structure. No head, face, body, eyes, claws, blood, wound or wet tissue. No mounting board, bottle, string tie or scenery. Keep this a plain dry material specimen, not a living creature, glove or bird feather.",
+      "transparent": true,
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-c3be8570-0914-48e8-b359-f66579a01885.png",
+      "source": "art/source/salvage-v1/bat-wing-master.png",
+      "sha256": "9a383283655ade5fc1d3f0354a4ae686bddd1126ef6f775d223cc01c7700ea75",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "export": "res://art/items/salvage-v1/bat-wing.png",
+      "compact": "res://art/items/salvage-v1/compact64/bat-wing.png",
+      "registration": {
+        "128": {
+          "source_bounds": [
+            197,
+            141,
+            1161,
+            1107
+          ],
+          "scale": 0.11594202898550725,
+          "offset": [
+            8,
+            8
+          ]
+        },
+        "64": {
+          "source_bounds": [
+            197,
+            141,
+            1161,
+            1107
+          ],
+          "scale": 0.057971014492753624,
+          "offset": [
+            4,
+            4
+          ]
+        }
+      },
+      "export_sha256": "61a35d26fd60bcc1c1889c406ebad92aba5892a1b5e058719e94807c4603e03d",
+      "old_icon": "res://art/items/refined-v2/fine-cloth.png",
+      "description": "A leathery wing, folded. Herbalists down the valley grind them for something. (Salvage: sell it at the merchant.)",
+      "bound": true
+    },
+    {
+      "id": "hound-hide",
+      "resource": "data/items/hound_hide.tres",
+      "name": "Breach-hound hide",
+      "prompt": "Use case: stylized-concept. Asset type: one small inventory icon for Depths, a dark gritty dungeon crawler. Rough hand-painted game object with broad readable planes and restrained fine detail, intended to reduce cleanly to a 128px/64-colour icon and be readable at 64 and 40px. Slightly elevated three-quarter view, neutral soft light from upper left, muted natural materials, modest edge highlights. One centered isolated object/group filling about 75 percent of a square canvas, generous transparent padding. GENUINELY transparent background. No ground, scenery, vignette, backdrop gradient, label, lettering, symbol, border, magical glow, hands or people. Not pristine or symmetrical; worn material character without excessive random scratches.\nSubject: BREACH-HOUND HIDE. A single compact folded sheet of thick hairless grey hide, like very tough pebbled leather. Two heavy overlapping folds create a low broad blocky silhouette with uneven naturally cut edges. Cool slate-grey outer surface, darker creases, dull muted tan-grey inner edge visible on one fold. Coarse grain, slight puckering and dry ingrained dirt; not polished, smooth or soft fabric. A plain prepared trade material only: no animal shape, face, fur, blood, wound or wet flesh. No string tie, garment seams, buckles or decorations. Clearly thicker and heavier than an ordinary cloth scrap, distinct from a rolled furry pelt.",
+      "transparent": true,
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-e1250f1f-2dcf-4eff-93db-a209b8f2f719.png",
+      "source": "art/source/salvage-v1/hound-hide-master.png",
+      "sha256": "cbea001aed68d65fdde734e94dfab1e977be82380bbabe3d5557afa6334a984a",
+      "source_canvas": [
+        1433,
+        1098
+      ],
+      "export": "res://art/items/salvage-v1/hound-hide.png",
+      "compact": "res://art/items/salvage-v1/compact64/hound-hide.png",
+      "registration": {
+        "128": {
+          "source_bounds": [
+            79,
+            97,
+            1374,
+            1010
+          ],
+          "scale": 0.08648648648648649,
+          "offset": [
+            8,
+            24
+          ]
+        },
+        "64": {
+          "source_bounds": [
+            79,
+            97,
+            1374,
+            1010
+          ],
+          "scale": 0.043243243243243246,
+          "offset": [
+            4,
+            12
+          ]
+        }
+      },
+      "export_sha256": "224e22fde82a6cef4ceed11f3224213c2ffef5480b29c3a8d15915af6706eed8",
+      "old_icon": "res://art/items/refined-v2/fine-cloth.png",
+      "description": "Hairless, grey and too thick for a dog's. Someone always wants it, and doesn't say why. (Salvage: sell it at the merchant.)",
+      "bound": true
+    },
+    {
+      "id": "beetle-shell",
+      "resource": "data/items/beetle_shell.tres",
+      "name": "Beetle shell",
+      "prompt": "Use case: stylized-concept. Asset type: one small inventory icon for Depths, a dark gritty dungeon crawler. Rough hand-painted game object with broad readable planes and restrained fine detail, intended to reduce cleanly to a 128px/64-colour icon and be readable at 64 and 40px. Slightly elevated three-quarter view, neutral soft light from upper left, muted natural materials, modest edge highlights. One centered isolated object/group filling about 75 percent of a square canvas, generous transparent padding. GENUINELY transparent background. No ground, scenery, vignette, backdrop gradient, label, lettering, symbol, border, magical glow, hands or people. Not pristine or symmetrical; worn material character without excessive random scratches.\nSubject: ROCK BEETLE SHELL. One single curved hard carapace plate, broad oval tapering to one uneven point, viewed at a slight angle so its thickness and arch are clear. Dark slate-blue/charcoal chitin with coarse stone-like grain, two or three broad curved growth ridges and a chipped irregular edge. A dull grey underside is visible only along one side. Emphasize a continuous convex shell shape, unlike a lumpy ore rock or a metal shield. No insect legs, animal body, face, eye, blood, wet tissue, handle, iron boss, strap or ornament. Dry recovered material, heavy and natural, with restrained light catching its curved rim.",
+      "transparent": true,
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-568c0233-8174-4d40-9957-467597640ce6.png",
+      "source": "art/source/salvage-v1/beetle-shell-master.png",
+      "sha256": "bec2384686856ea3289c82f6c1bfb7fab708f6384d2f0a9abfd6f9eb84fde41b",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "export": "res://art/items/salvage-v1/beetle-shell.png",
+      "compact": "res://art/items/salvage-v1/compact64/beetle-shell.png",
+      "registration": {
+        "128": {
+          "source_bounds": [
+            57,
+            169,
+            1212,
+            1142
+          ],
+          "scale": 0.09696969696969697,
+          "offset": [
+            8,
+            17
+          ]
+        },
+        "64": {
+          "source_bounds": [
+            57,
+            169,
+            1212,
+            1142
+          ],
+          "scale": 0.048484848484848485,
+          "offset": [
+            4,
+            8
+          ]
+        }
+      },
+      "export_sha256": "3197ccf3b95134e9309682413965a4d29cab529330a109997828f2bc9558b627",
+      "old_icon": "res://art/items/refined-v2/copper-ore.png",
+      "description": "A plate of a rock beetle's shell, hard as slate. Armourers like it. (Salvage: sell it at the merchant.)",
+      "bound": true
+    },
+    {
+      "id": "black-ore",
+      "resource": "data/items/black_ore.tres",
+      "name": "Black ore",
+      "prompt": "Use case: stylized-concept. Asset type: one small inventory icon for Depths, a dark gritty dungeon crawler. Rough hand-painted game object with broad readable planes and restrained fine detail, intended to reduce cleanly to a 128px/64-colour icon and be readable at 64 and 40px. Slightly elevated three-quarter view, neutral soft light from upper left, muted natural materials, modest edge highlights. One centered isolated object/group filling about 75 percent of a square canvas, generous transparent padding. GENUINELY transparent background. No ground, scenery, vignette, backdrop gradient, label, lettering, symbol, border, magical glow, hands or people. Not pristine or symmetrical; worn material character without excessive random scratches.\nSubject: BLACK ORE. One small heavy irregular coal-black mineral lump with a few broad glassy fracture faces set in a rough dark stony crust. Angular asymmetric silhouette, almost black central faces, readable dull slate-grey edge catches and a thin natural silvery-grey mineral seam. Strong simple faceting at small size, but not a cut gemstone, polished crystal cluster or pile of coal. The material feels dense, cold and pulled from deep rock. No gold/copper colour, magic, aura, glow, inscriptions, symbols, pedestal, tools or extra stones. Keep highlights restrained and non-emissive while retaining enough edge separation on a dark inventory background.",
+      "transparent": true,
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-4d016056-963a-47ad-b357-1fd08d1f2ade.png",
+      "source": "art/source/salvage-v1/black-ore-master.png",
+      "sha256": "befed78301064c44a73149956f5e73ccdc042c412684f8ac09d54a8389614d12",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "export": "res://art/items/salvage-v1/black-ore.png",
+      "compact": "res://art/items/salvage-v1/compact64/black-ore.png",
+      "registration": {
+        "128": {
+          "source_bounds": [
+            115,
+            142,
+            1154,
+            1150
+          ],
+          "scale": 0.10779595765158806,
+          "offset": [
+            8,
+            9
+          ]
+        },
+        "64": {
+          "source_bounds": [
+            115,
+            142,
+            1154,
+            1150
+          ],
+          "scale": 0.05389797882579403,
+          "offset": [
+            4,
+            5
+          ]
+        }
+      },
+      "export_sha256": "10bf90c690a203a8916f8ace76f02268ec2fb1bf563603174f1a7ed4e7279d3c",
+      "old_icon": "res://art/items/refined-v2/copper-ore.png",
+      "description": "Heavy, glassy and cold. It came up from somewhere deep. The smith wants it for the finest tempering. (A tempering material; it also sells.)",
+      "bound": true
+    },
+    {
+      "id": "goblin-scrap",
+      "resource": "data/items/goblin_scrap.tres",
+      "name": "Goblin-forged scrap",
+      "prompt": "Use case: stylized-concept. Asset type: one small inventory icon for Depths, a dark gritty dungeon crawler. Rough hand-painted game object with broad readable planes and restrained fine detail, intended to reduce cleanly to a 128px/64-colour icon and be readable at 64 and 40px. Slightly elevated three-quarter view, neutral soft light from upper left, muted natural materials, modest edge highlights. One centered isolated object/group filling about 75 percent of a square canvas, generous transparent padding. GENUINELY transparent background. No ground, scenery, vignette, backdrop gradient, label, lettering, symbol, border, magical glow, hands or people. Not pristine or symmetrical; worn material character without excessive random scratches.\nSubject: GOBLIN-FORGED SCRAP. A compact group of three small salvaged iron offcuts: one bent square buckle, one short uneven flat iron fragment, and one crooked rivet plate with two coarse off-centre rivets. The pieces overlap loosely into a chunky asymmetrical cluster with one clear square opening from the buckle. Soot-dark hand-forged metal, blunt irregular edges, dull cold highlights, a little ingrained reddish-brown oxidation in seams. Looks crude but materially useful to a smith, not a pile of glittering treasure or a manufactured clean hardware kit. No complete weapon, sharp projecting blade, tool handle, coins, insignia, stamped text, wire tie, cloth, hands or other objects. Retain the square opening and coarse rivets as the large readable details.",
+      "transparent": true,
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-12dcff25-0279-4870-9e12-985c72015b29.png",
+      "source": "art/source/salvage-v1/goblin-scrap-master.png",
+      "sha256": "c070a445f4a043da18179c26d466ed1b1f10c4313337f6adb26e82896cea0535",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "export": "res://art/items/salvage-v1/goblin-scrap.png",
+      "compact": "res://art/items/salvage-v1/compact64/goblin-scrap.png",
+      "registration": {
+        "128": {
+          "source_bounds": [
+            75,
+            162,
+            1190,
+            1076
+          ],
+          "scale": 0.10044843049327354,
+          "offset": [
+            8,
+            18
+          ]
+        },
+        "64": {
+          "source_bounds": [
+            75,
+            162,
+            1190,
+            1076
+          ],
+          "scale": 0.05022421524663677,
+          "offset": [
+            4,
+            9
+          ]
+        }
+      },
+      "export_sha256": "2ec78f3dab5842a7c7df4401ceda7b7a005278b84f295aa73d9e1a9d1e2cb8fc",
+      "old_icon": "res://art/items/refined-v2/copper-ore.png",
+      "description": "Bent goblin iron: a buckle, a blade-end, a rivet plate. Rough, but the smith can work it into a temper. (A tempering material; it also sells.)",
+      "bound": true
+    }
+  ],
+  "runtime_canvas": [
+    128,
+    128
+  ],
+  "compact_canvas": [
+    64,
+    64
+  ],
+  "visible_colours": 64,
+  "gameplay_unchanged": true
+}

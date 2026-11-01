@@ -1,0 +1,21 @@
+{
+	"captures": [
+		"pack-1280-normal.png",
+		"loot-1280-normal.png",
+		"merchant-1280-normal.png",
+		"pack-1278-normal.png",
+		"loot-1278-normal.png",
+		"merchant-1278-normal.png",
+		"pack-1278-larger.png",
+		"loot-1278-larger.png",
+		"merchant-1278-larger.png",
+		"pack-1334-larger.png",
+		"loot-1334-larger.png",
+		"merchant-1334-larger.png"
+	],
+	"checks": 50,
+	"failures": [],
+	"physical_iphone_tested": false,
+	"renderer": "mobile",
+	"uses_player_files": false
+}

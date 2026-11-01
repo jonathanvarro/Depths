@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="SupplyItem" format=3]
 
 [ext_resource type="Script" path="res://scripts/supply_item.gd" id="1"]
-[ext_resource type="Texture2D" path="res://art/items/refined-v2/fine-cloth.png" id="2"]
+[ext_resource type="Texture2D" path="res://art/items/salvage-v1/rat-pelt.png" id="2"]
 
 [resource]
 script = ExtResource("1")
 icon = ExtResource("2")
 display_name = "Rat pelt"
-description = "A greasy little hide. The tanner's boy at the camp pays a coin or two for them. (Salvage: sell it at the merchant. Placeholder picture.)"
+description = "A greasy little hide. The tanner's boy at the camp pays a coin or two for them. (Salvage: sell it at the merchant.)"
 effect = 5
 use_time = 0
 price = 1
