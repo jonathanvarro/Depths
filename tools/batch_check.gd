@@ -160,6 +160,11 @@ func _initialize() -> void:
 	check("floor 4's isn't open after one trip", not scouts.route_open(4))
 
 	# --- #52: Settings from the Pack.
+	for i in 6:  # the fights above earn quick levels (#172): choose them first
+		if not main._prompt.visible:
+			break
+		main._answer_prompt(true)
+		await process_frame
 	main._set_pack(true)
 	await process_frame
 	check("Settings opens from the Pack", _press(main._pack, "Settings") and main._settings.visible)

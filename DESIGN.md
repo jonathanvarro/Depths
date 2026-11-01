@@ -210,6 +210,14 @@ Numbers are first guesses for the bot and the owner's playtests to tune.
 
   **Main heroes:** Corin is Melee, Mara a Scout, Alwen a Mage. Old saves and recruits convert on load (Warden and Brawler become Melee, Rogue becomes Scout, Healer becomes Mage). Recruits borrow the older roles' faces and lines until the named cast (#180).
 - **The bot after all of this (2026-11-01, 30 campaigns each, 45 days):** the queen falls in **0 / 5 / 2** campaigns for Mara / Corin / Alwen, down from 23 / 27 / 12. Wipes average 2.4–3.7 a campaign, mostly on floor 2. Parties reach floor 4 at level 3 or so. Levels resetting, and wipes costing worn gear, make the campaign much harder. This needs tuning before the owner's next playtest; the levers are the thresholds, the spare kit and the drink/throw numbers.
+- **Tuning after the loop (Claude, 2026-11-01):**
+  - **Levels come faster:** 10 / 28 / 56 XP for levels 2 / 3 / 4 (was 25 / 70 / 140). Parties now reach floor 2 at about level 3.3 (was 2.1) and floor 4 at level 4.
+  - **A scouts' route brings its levels** (`Progression.route_xp`): starting on floor 3 by route, everyone arrives with level 3's experience and chooses on arrival. Before, a route dropped a level-1 party on a deep floor.
+  - **The bot now plays by the real rules:** a wipe loses worn gear for the spare kit (#174), and it takes the deepest route it can afford. `BOT_KEEP_LEVELS=1` skips the level reset, for comparison.
+  - **Result (30 campaigns each):** the queen falls in **5 / 9 / 5** (Mara / Corin / Alwen), up from 0 / 5 / 2. Wipes on floor 2 fell by about a third.
+  - **What's left is the reset itself.** With levels kept (`BOT_KEEP_LEVELS`), the same rules give about 10 / 15 / 12 out of 15. The party reaches floor 4 at level 4 but worn down and short of light, so it tries the queen about once a campaign instead of two or three times.
+  - **Ruled out:** opening each route after one visit instead of two made no difference, so the owner's rule stays. Making the bot save gold for routes cost it lanterns and did worse.
+  - **Possible next levers (owner's call):** a rest on floor 3 before the fortress, a cheaper or sooner route to floor 4, or a gentler floor 4.
 - **Experience** still goes in full to everyone with the party. DESIGN's "a pair half each" reads like a split, while #179 says "unsplit", so this waits for the owner.
 
 ## Map and dungeon progression

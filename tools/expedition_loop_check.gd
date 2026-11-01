@@ -45,6 +45,8 @@ func _initialize() -> void:
 	Progression.advance(corin, "bulwark")
 	Progression.reset(corin)
 	check("...Bulwark's guard comes back off", corin.guard_factor > 0.15, corin.guard_factor)
+	check("a scouts' route brings the skipped floors' levels: level 3 on floor 3, never past level 4",
+			Progression.route_xp(3) == Progression.THRESHOLDS[3] and Progression.route_xp(6) == Progression.THRESHOLDS[Progression.MAX_LEVEL] and Progression.route_xp(1) == 0)
 
 	# #177: a killer turns Savage, keeping its wounds.
 	party = _party(["mara"])

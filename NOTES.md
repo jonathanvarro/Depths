@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-11-01 – Claude (difficulty tuning after the expedition loop)
+- Did: Faster levels (Progression.THRESHOLDS 10/28/56, was 25/70/140). A scouts' route now brings the skipped floors' levels (Progression.route_xp; main.gd offers the choices on arrival). The campaign bot now loses worn gear on a wipe (#174) and takes the deepest affordable route; BOT_KEEP_LEVELS=1 skips the level reset, for comparison. Queen wins went from 0/5/2 to 5/9/5 of 30 (Mara/Corin/Alwen). Details and what's left: DESIGN.md "Tuning after the loop". batch_check now answers the level-up prompts the earlier fights earn; expedition_loop_check covers route_xp.
+- Next: The owner decides whether to soften the reset's cost further (a floor-3 rest before the fortress, a cheaper/sooner floor-4 route, or a gentler floor 4). The named cast (#180) is paused while visuals are evaluated.
+- Watch out: Two visits still open a route (the owner's rule); one visit made no difference in the bot. ROUTE_AFTER was briefly 1 during testing and is back to 2. Known failure: gear_check "the Pack names the quality" (ChatGPT's). Running the bot alongside the suite makes gold_check and wanderers_check fail; they pass alone.
+
 ## 2026-11-01 – ChatGPT (one low-poly character style study)
 - Did: #205 follows #203 with one original Rook-inspired shaped low-poly head/body, three fitted outfits, shield/cape/pack, blended cloth joints, standing/seated/reading pose clips and paused idle/blink. Isolated project: tools/character_lowpoly; actual captures/native96/native192 cards, script-free all-variant native model and three portable skinned GLBs: art/concepts/character-lowpoly-v1/inspector.html. Handoff: docs/lowpoly-character-study.md.
 - Next: Owner reviews face, proportions, faceting and wardrobe style before extending to named cast. No likeness approval or live integration assumed; named portraits and existing illustrations remain separate.

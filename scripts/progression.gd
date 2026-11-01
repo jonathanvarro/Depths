@@ -13,7 +13,9 @@ extends RefCounted
 ## and gear mastery stay. An underground camp keeps the expedition going.
 
 ## Total XP needed to reach level 2, 3 and 4 (index = current level).
-const THRESHOLDS := [0, 0, 25, 70, 140]
+## Tuned 2026-11-01 (was 25/70/140): a party leaves floor 1 at about
+## level 3 and reaches floor 4 at level 4.
+const THRESHOLDS := [0, 0, 10, 28, 56]
 const MAX_LEVEL := 4
 const XP_PER_THREAT := 4
 ## Retired by #172 (levels reset each expedition); kept so old saves load.
@@ -139,6 +141,13 @@ static func reset(hero: Companion) -> void:
 	hero.refresh_stats()
 	hero.health = mini(hero.health, hero.max_health)
 	hero.emit_changed()
+
+
+## A scouts' route start (tuning 2026-11-01): the party arrives with the
+## experience the skipped floors would have given - level 2 on floor 2,
+## level 3 on floor 3, and so on. The choices are offered on arrival.
+static func route_xp(start_depth: int) -> int:
+	return THRESHOLDS[clampi(start_depth, 1, MAX_LEVEL)]
 
 
 static func talent_name(id: String) -> String:

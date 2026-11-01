@@ -1691,6 +1691,10 @@ func _camp_loop(reward := 0, note := "") -> void:
 		for depth in range(1, start_depth):
 			_expedition.visit_floor(depth)  # the scouts led them through
 		_show_message("Day %d. Expedition %d: the scouts' route, straight to floor %d." % [_camp_state.day, _expedition.number, start_depth])
+		for hero: Companion in _party_state.members:
+			if hero.is_with_party():
+				hero.xp = maxi(hero.xp, Progression.route_xp(start_depth))
+		_offer_level_ups.call_deferred()
 	else:
 		_show_message("Day %d. Expedition %d: back into the mine." % [_camp_state.day, _expedition.number])
 	_light_torch_if_dark()

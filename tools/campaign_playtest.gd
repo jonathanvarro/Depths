@@ -149,8 +149,14 @@ func _campaign(hero_path: String, run_seed: int, max_days: int) -> Dictionary:
 			continue  # rested or waited a day
 		stats["expeditions"] += 1
 		for hero: Companion in party.members:
-			Progression.reset(hero)  # a fresh expedition starts at level 1 (#172)
+			if OS.get_environment("BOT_KEEP_LEVELS") == "":
+				Progression.reset(hero)  # a fresh expedition starts at level 1 (#172)
 		load("res://scripts/brews.gd").shuffle(party.supplies, camp.day)  # #175
+		if start_depth > 1:  # the route's catch-up levels
+			for hero: Companion in party.members:
+				if hero.is_with_party():
+					hero.xp = maxi(hero.xp, Progression.route_xp(start_depth))
+					_level_up(hero)
 		var ending := _expedition(start_depth)
 		_back_at_camp(ending)
 		if stats["stuck"] != "":
@@ -222,9 +228,10 @@ func _camp_day() -> int:
 		return -1
 	camp.give_charity(party)
 	var start := 1
-	# The deepest route the party is ready for and can afford with gold to spare.
+	# The deepest route the party can afford with gold to spare (the route
+	# brings its own levels: Progression.route_xp).
 	for depth: int in camp.open_routes():
-		if _gold() >= camp.route_price(depth) + 20 and _mean_level() >= depth - 0.5:
+		if _gold() >= camp.route_price(depth):
 			start = depth
 	if start > 1:
 		camp.take_gold(party)
@@ -362,6 +369,14 @@ func _back_at_camp(ending: int) -> void:
 			if hero.is_unconscious():
 				hero.health = 1
 				hero.add_injury(DEEP_WOUND)
+				# #174: worn gear is lost; the camp's plain spare kit.
+				var kit: Array = GearModel.fallback_kit(hero)
+				hero.weapon = kit[0]
+				hero.body = kit[1]
+				hero.back = null
+				hero.trinket = null
+				hero.refresh_stats()
+				hero.health = clampi(hero.health, 1, hero.max_health)
 		party.supplies.lose_everything()
 	camp.expedition_returned()
 	Story.on_return(camp)
@@ -933,16 +948,20 @@ func _award_xp(state, kind: String) -> void:
 	for hero: Companion in party.members:
 		if hero.is_with_party():
 			hero.xp += amount
-			# Chosen underground (#172): the first talent, or the best attribute.
-			while Progression.ready_to_advance(hero):
-				var options := Progression.choices(hero)
-				var pick: String = options[0][0] if not options.is_empty() else ""
-				if hero.level + 1 == 3:
-					for key in Progression.ATTRIBUTES:
-						if hero.get(key) < Progression.ATTRIBUTE_CAP and (pick == "" or pick not in Progression.ATTRIBUTES or hero.get(key) > hero.get(pick)):
-							pick = key
-				if not camp.advance(hero, pick):
-					break
+			_level_up(hero)
+
+
+## Chosen underground (#172): the first talent, or the best attribute.
+func _level_up(hero: Companion) -> void:
+	while Progression.ready_to_advance(hero):
+		var options := Progression.choices(hero)
+		var pick: String = options[0][0] if not options.is_empty() else ""
+		if hero.level + 1 == 3:
+			for key in Progression.ATTRIBUTES:
+				if hero.get(key) < Progression.ATTRIBUTE_CAP and (pick == "" or pick not in Progression.ATTRIBUTES or hero.get(key) > hero.get(pick)):
+					pick = key
+		if not camp.advance(hero, pick):
+			break
 
 
 # --- Between fights --------------------------------------------------------
