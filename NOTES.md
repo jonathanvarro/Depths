@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-11-01 – Claude (the scouts' refuge on floor 3)
+- Did: The owner chose a floor-3 rest stop. scripts/refuge.gd places a rest spot beside floor 3's stairs down with data/events/refuge_scouts.tres (campfire prop). Making camp (60 time, once a trip) heals everyone to full (new EventOutcome.recover), eases strain, and leaves lamp oil and a torch; levels are kept (an underground camp). The bot rests there when hurt (BOT_NO_REFUGE=1 leaves it out). Queen wins went from 5/9/5 to 5/14/6 of 30, and the gate breaks about a week sooner. New tools/refuge_check.gd. wanderers_check now answers Mara's hear-first question (she's a Scout since #179).
+- Next: The owner reviews the refuge's numbers (first guesses) and whether floor-2 wipes need easing. Stash access, saving there and the Overlook art remain separate.
+- Watch out: Known failure: gear_check "the Pack names the quality" (ChatGPT's). The refuge is a once-per-floor-cache rest spot, so a second trip on the same day finds it already used.
+
 ## 2026-11-01 – Claude (difficulty tuning after the expedition loop)
 - Did: Faster levels (Progression.THRESHOLDS 10/28/56, was 25/70/140). A scouts' route now brings the skipped floors' levels (Progression.route_xp; main.gd offers the choices on arrival). The campaign bot now loses worn gear on a wipe (#174) and takes the deepest affordable route; BOT_KEEP_LEVELS=1 skips the level reset, for comparison. Queen wins went from 0/5/2 to 5/9/5 of 30 (Mara/Corin/Alwen). Details and what's left: DESIGN.md "Tuning after the loop". batch_check now answers the level-up prompts the earlier fights earn; expedition_loop_check covers route_xp.
 - Next: The owner decides whether to soften the reset's cost further (a floor-3 rest before the fortress, a cheaper/sooner floor-4 route, or a gentler floor 4). The named cast (#180) is paused while visuals are evaluated.

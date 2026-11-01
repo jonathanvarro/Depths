@@ -206,6 +206,11 @@ func resolve(party, choice: EventChoice, forced := -1, flags: Array = []) -> Dic
 	if outcome.rest:
 		party.rest()
 		notes.append("rested")
+		if outcome.recover:
+			for hero: Companion in party.members:
+				if hero.is_with_party():
+					hero.change_health(hero.effective_max_health())
+			notes.append("everyone recovered")
 		chip.call(CHIP_ICONS["rest"], "", true, null)
 	result["ambush"] = outcome.ambush.duplicate()
 	result["story"] = outcome.text

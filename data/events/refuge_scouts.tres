@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="RoomEvent" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="event"]
+[ext_resource type="PackedScene" path="res://art/features/campfire-v1/scene.tscn" id="prop"]
+[ext_resource type="Script" path="res://scripts/event_choice.gd" id="choice"]
+[ext_resource type="Script" path="res://scripts/event_outcome.gd" id="outcome"]
+[ext_resource type="Resource" path="res://data/items/torch.tres" id="torch"]
+
+[sub_resource type="Resource" id="o0_0"]
+script = ExtResource("outcome")
+weight = 1
+text = "You bank the scouts' fire and sleep in turns. The fortress drums carry up the stair, but nothing comes. The scouts left lamp oil and a torch for whoever came next."
+target = 1
+strain = -40.0
+oil = 100.0
+loot = Dictionary[SupplyItem, int]({ExtResource("torch"): 1})
+rest = true
+recover = true
+
+[sub_resource type="Resource" id="c0"]
+script = ExtResource("choice")
+label = "Make camp (60 time)"
+time_cost = 40
+outcomes = Array[EventOutcome]([SubResource("o0_0")])
+
+[resource]
+script = ExtResource("event")
+prop = ExtResource("prop")
+kind = 5
+title = "The scouts' refuge"
+clue = "A fire pit ringed with stones, still warm, under a low shelf of rock. Bedrolls are stacked dry against the wall, and a royal mark is scratched beside them: the king's scouts camp here before the fortress."
+choices = Array[EventChoice]([SubResource("c0")])
+min_depth = 99
+max_depth = 99
+weight = 1

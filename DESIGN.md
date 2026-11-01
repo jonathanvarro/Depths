@@ -218,6 +218,10 @@ Numbers are first guesses for the bot and the owner's playtests to tune.
   - **What's left is the reset itself.** With levels kept (`BOT_KEEP_LEVELS`), the same rules give about 10 / 15 / 12 out of 15. The party reaches floor 4 at level 4 but worn down and short of light, so it tries the queen about once a campaign instead of two or three times.
   - **Ruled out:** opening each route after one visit instead of two made no difference, so the owner's rule stays. Making the bot save gold for routes cost it lanterns and did worse.
   - **Possible next levers (owner's call):** a rest on floor 3 before the fortress, a cheaper or sooner route to floor 4, or a gentler floor 4.
+- **The scouts' refuge — built (owner chose the floor-3 rest stop, 2026-11-01):** a campfire on floor 3, in the empty room cell nearest the stairs down, outside any fight's room. The owner's underground-camp rule applies: the expedition and its levels carry on.
+  - **Making camp (once a trip; the cave shifts each day):** 60 time. Everyone with the party heals to full, and an unconscious hero comes round. Strain eases by 20 for resting plus 40 more. The scouts leave a flask's worth of lamp oil and one torch.
+  - **Numbers are first guesses;** recovery, supplies and costs were left open by the owner. No stash access, saving or Overlook art yet; the Overlook stays for "after a major theme area".
+  - **Bot (30 campaigns each):** the queen falls in **5 / 14 / 6**, up from 5 / 9 / 5 (same-day runs without it: 2 / 6 / 2 of 15). The gate breaks about a week sooner (median day 6–13, was 15–20). Floor-2 wipes are still the biggest drain for Mara and Alwen.
 - **Experience** still goes in full to everyone with the party. DESIGN's "a pair half each" reads like a split, while #179 says "unsplit", so this waits for the owner.
 
 ## Map and dungeon progression

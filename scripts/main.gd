@@ -13,6 +13,7 @@ const GearGen := preload("res://scripts/gear_gen.gd")
 const Bestiary := preload("res://scripts/bestiary.gd")
 const Classes := preload("res://scripts/classes.gd")
 const Brews := preload("res://scripts/brews.gd")
+const Refuge := preload("res://scripts/refuge.gd")
 const GearModel := preload("res://scripts/gear_model.gd")
 const TURN_LEFT_ICON := preload("res://art/ui/controls-v1/turn-left.svg")
 const SPADE := preload("res://data/items/spade.tres")
@@ -606,11 +607,20 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 		var wanted: Array = [] if _in_opening else Packages.active(_camp_state, depth) + Packages.lairs(depth, _site_seed + depth * 7919 + 29) \
 				+ Packages.territories(depth, _site_seed + depth * 7919 + 31)
 		var stamped: Dictionary = Packages.place(layout, wanted, _site_seed + depth * 7919 + 13, avoid, join)
+		var refuge := Vector2i(-1, -1)
+		if depth == Refuge.DEPTH and not use_debug_layout and not _in_opening:  # a rest before the fortress
+			var placed: Dictionary = Refuge.place(stamped["layout"], depth)
+			stamped["layout"] = placed["layout"]
+			refuge = placed["cell"]
+			if refuge != Vector2i(-1, -1):
+				marks["refuge"] = refuge
 		_floors[depth] = DungeonMap.new(stamped["layout"], depth)
 		_floors[depth].marks = marks
 		_assign_events(_floors[depth])
 		for cell in stamped["events"]:
 			_floors[depth].events[cell] = stamped["events"][cell]
+		if refuge != Vector2i(-1, -1):
+			_floors[depth].events[refuge] = Refuge.EVENT
 		_floors[depth].fight_groups = stamped["fights"]
 		_floors[depth].packages = stamped["placed"]
 		_floors[depth].lairs = stamped["lairs"]

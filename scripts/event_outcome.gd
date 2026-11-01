@@ -37,6 +37,9 @@ enum Target {
 @export var gear: Array[Equipment] = []
 ## The party rests here (as at a rest spot).
 @export var rest := false
+## With rest: everyone with the party is healed to full (the scouts'
+## refuge, an underground camp).
+@export var recover := false
 ## Enemies that attack once the text is read.
 @export var ambush: Array[EnemyType] = []
 ## A blessing or curse on whoever acted, or everyone (#133).

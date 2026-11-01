@@ -90,6 +90,9 @@ func _initialize() -> void:
 	main._wanderers.coming = 1
 	main._on_party_entered_cell(clear)
 	await process_frame
+	if main._prompt.visible:  # Mara's a Scout (#179): she may hear them first
+		main._answer_prompt(true)  # Fight
+		await process_frame
 	check("they find you: a fight where you stand", main._in_combat and main._fight_kind == "wander")
 	var state = main._combat._state
 	check("...the floor's usual foes, never elites", state != null and state.foes.all(func(f): return f.elite == ""))

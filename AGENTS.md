@@ -342,6 +342,11 @@ Templates > Download and Install; already installed on the owner's PC).
   EnemyType tactics ARCHER/GUARD/QUEEN, `summons`, placeholder `tint` and
   `sprite_scale`; CombatState `foe_joined`, guard wall, rage.
   `tools/fortress_check.gd`.
+- Scouts' refuge (2026-11-01): `scripts/refuge.gd` places a rest spot ('R')
+  with `data/events/refuge_scouts.tres` (campfire prop) beside floor 3's stairs
+  down; `DungeonMap.marks["refuge"]`. EventOutcome `recover` heals everyone
+  to full with `rest`. An underground camp: never call `Progression.reset`.
+  `tools/refuge_check.gd`; the bot's `BOT_NO_REFUGE=1` leaves it out.
 - Settings (#52): `scripts/settings.gd` (static values, `apply()`, audio
   buses Master/Music/Effects; test runs use test_settings.cfg) and
   `scripts/settings_screen.gd`. New sound players should set `bus`.

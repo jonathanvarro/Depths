@@ -28,6 +28,7 @@ const Quests := preload("res://scripts/quests.gd")
 const Story := preload("res://scripts/story.gd")
 const Packages := preload("res://scripts/packages.gd")
 const Wanderers := preload("res://scripts/wanderers.gd")
+const Refuge := preload("res://scripts/refuge.gd")
 
 const TORCH := preload("res://data/items/torch.tres")
 const RATION := preload("res://data/items/ration.tres")
@@ -117,7 +118,7 @@ func _campaign(hero_path: String, run_seed: int, max_days: int) -> Dictionary:
 		"wipes_by_floor": {1: 0, 2: 0, 3: 0, 4: 0}, "first_arrival": {},
 		"gold_found": 0, "gold_contracts": 0, "gold_sold": 0, "gold_spent": 0, "bounty": 0,
 		"gate_tries": 0, "gate_day": 0, "queen_tries": 0, "queen_rounds": 0, "queen_day": 0,
-		"route_bought": 0, "lantern_day": 0, "boons": 0, "banes": 0, "banes_lifted": 0, "trinkets_found": 0, "trinkets_worn": 0, "gear_found": 0, "gear_equipped": 0,
+		"route_bought": 0, "refuge_rests": 0, "lantern_day": 0, "boons": 0, "banes": 0, "banes_lifted": 0, "trinkets_found": 0, "trinkets_worn": 0, "gear_found": 0, "gear_equipped": 0,
 		# Light (owner question, 2026-10-25): steps by light band, trips cut
 		# short for want of light, and light used.
 		"steps_bright": 0, "steps_steady": 0, "steps_dim": 0, "steps_out": 0,
@@ -462,6 +463,13 @@ func _enter_floor(to: int, from_above: bool) -> bool:
 			var plain = DungeonMap.new(layout, to)
 			join = plain.walking_distances(plain.find_content(C.STAIRS_UP))
 		var stamped: Dictionary = Packages.place(layout, Packages.active(camp, to), site_seed + to * 7919 + 13, avoid, join)
+		var refuge := Vector2i(-1, -1)
+		if to == Refuge.DEPTH and OS.get_environment("BOT_NO_REFUGE") == "":
+			var placed: Dictionary = Refuge.place(stamped["layout"], to)
+			stamped["layout"] = placed["layout"]
+			refuge = placed["cell"]
+			if refuge != Vector2i(-1, -1):
+				marks["refuge"] = refuge
 		var map = DungeonMap.new(stamped["layout"], to)
 		map.marks = marks
 		for c in map.contents:
@@ -470,6 +478,8 @@ func _enter_floor(to: int, from_above: bool) -> bool:
 				map.events[c] = event
 		for c in stamped["events"]:
 			map.events[c] = stamped["events"][c]
+		if refuge != Vector2i(-1, -1):
+			map.events[refuge] = Refuge.EVENT
 		map.fight_groups = stamped["fights"]
 		floors[to] = map
 	var map = _map()
@@ -497,7 +507,11 @@ func _explore_floor() -> String:
 			stats["stuck"] = "exploring floor %d went round 200 times" % depth
 			return "stuck"
 		if _should_go_home():
-			return "home"
+			var rested := _use_refuge()
+			if rested != "ok":
+				return "home" if rested == "none" else rested
+			if _should_go_home():
+				return "home"
 		var target := _next_target(map, skip)
 		if target == Vector2i(-1, -1):
 			break
@@ -506,6 +520,10 @@ func _explore_floor() -> String:
 			return walked
 		if cell != target and not map.triggered.has(target):
 			skip[target] = true
+	if _health_fraction() < 1.0:
+		var rested := _use_refuge()  # make camp before the fortress
+		if rested not in ["ok", "none"]:
+			return rested
 	if _should_go_home():
 		return "home"
 	if depth < FORTRESS_DEPTH:
@@ -517,6 +535,19 @@ func _explore_floor() -> String:
 			return walked
 		return "down"
 	return _fortress()
+
+
+## Walks to this floor's refuge and makes camp there, if it has one not yet
+## used. Returns "none" (no refuge to use), "ok", or the walk's trouble.
+func _use_refuge() -> String:
+	var map = _map()
+	var at: Vector2i = map.marks.get("refuge", Vector2i(-1, -1))
+	if at == Vector2i(-1, -1) or map.triggered.has(at):
+		return "none"
+	var walked := _walk_to(at, false)
+	if walked == "ok":
+		stats["refuge_rests"] += 1
+	return walked
 
 
 ## The fortress floor (#44): break the gate, then face the queen.
@@ -592,7 +623,7 @@ func _next_target(map, skip := {}) -> Vector2i:
 	var best := Vector2i(-1, -1)
 	for c in map.contents:
 		var kind: int = map.contents[c]
-		if map.triggered.has(c) or skip.has(c) or kind in [C.STAIRS_UP, C.STAIRS_DOWN, C.TRAP]:
+		if map.triggered.has(c) or skip.has(c) or kind in [C.STAIRS_UP, C.STAIRS_DOWN, C.TRAP] or c == map.marks.get("refuge"):
 			continue  # traps are hidden; you find them by walking
 		var at: Vector2i = c
 		if not distances.has(at):
@@ -1100,10 +1131,11 @@ func _summarise(all: Dictionary) -> void:
 				100.0 * _mean(runs.map(func(r): return r["fights_won"])) / maxf(1.0, _mean(runs.map(func(r): return r["fights"]))),
 				_mean(runs.map(func(r): return r["fight_retreats"])), _mean(runs.map(func(r): return r["events"])),
 				_mean(runs.map(func(r): return r["injuries"])), _mean(runs.map(func(r): return r["treated"]))])
-		print("  gold per campaign: found %.0f, contracts %.0f, sold %.0f, spent %.0f; lantern bought in %d runs; route bought %.1f times" % [
+		print("  gold per campaign: found %.0f, contracts %.0f, sold %.0f, spent %.0f; lantern bought in %d runs; route bought %.1f times; refuge rests %.1f" % [
 				_mean(runs.map(func(r): return r["gold_found"])), _mean(runs.map(func(r): return r["gold_contracts"])),
 				_mean(runs.map(func(r): return r["gold_sold"])), _mean(runs.map(func(r): return r["gold_spent"])),
-				runs.filter(func(r): return r["lantern_day"] > 0).size(), _mean(runs.map(func(r): return r["route_bought"]))])
+				runs.filter(func(r): return r["lantern_day"] > 0).size(), _mean(runs.map(func(r): return r["route_bought"])),
+				_mean(runs.map(func(r): return r["refuge_rests"]))])
 		print("  boons gained %.1f, banes gained %.1f, banes lifted %.1f per campaign (#133); trinkets found %.1f, worn %.1f (#135); gear found %.1f, equipped %.1f" % [
 				_mean(runs.map(func(r): return r["boons"])), _mean(runs.map(func(r): return r["banes"])),
 				_mean(runs.map(func(r): return r["banes_lifted"])), _mean(runs.map(func(r): return r["trinkets_found"])),
