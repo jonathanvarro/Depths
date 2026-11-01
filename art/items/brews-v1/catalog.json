@@ -1,0 +1,163 @@
+{
+  "canvas": [
+    64,
+    64
+  ],
+  "glass_palette_limit": 12,
+  "layer_order": [
+    "glass",
+    "liquid mask applied as tint/filled cavity",
+    "stopper stamp",
+    "identified label only when known"
+  ],
+  "shapes": [
+    {
+      "id": "brew-squat",
+      "export": "res://art/items/brews-v1/brew-squat.png",
+      "stamp_center": [
+        32,
+        9
+      ],
+      "registration": {
+        "source_bounds": [
+          135,
+          80,
+          1119,
+          1212
+        ],
+        "scale": 0.04946996466431095,
+        "offset": [
+          7,
+          4
+        ]
+      },
+      "label_side": 16
+    },
+    {
+      "id": "brew-tall",
+      "export": "res://art/items/brews-v1/brew-tall.png",
+      "stamp_center": [
+        32,
+        9
+      ],
+      "registration": {
+        "source_bounds": [
+          321,
+          40,
+          707,
+          1495
+        ],
+        "scale": 0.03848797250859107,
+        "offset": [
+          24,
+          4
+        ]
+      },
+      "label_side": 13
+    },
+    {
+      "id": "brew-flask",
+      "export": "res://art/items/brews-v1/brew-flask.png",
+      "stamp_center": [
+        32,
+        14
+      ],
+      "registration": {
+        "source_bounds": [
+          170,
+          16,
+          1367,
+          1008
+        ],
+        "scale": 0.04678362573099415,
+        "offset": [
+          4,
+          9
+        ]
+      },
+      "label_side": 16
+    },
+    {
+      "id": "brew-vial",
+      "export": "res://art/items/brews-v1/brew-vial.png",
+      "stamp_center": [
+        32,
+        9
+      ],
+      "registration": {
+        "source_bounds": [
+          258,
+          71,
+          536,
+          1899
+        ],
+        "scale": 0.030634573304157548,
+        "offset": [
+          27,
+          4
+        ]
+      },
+      "label_side": 9
+    },
+    {
+      "id": "brew-gourd",
+      "export": "res://art/items/brews-v1/brew-gourd.png",
+      "stamp_center": [
+        32,
+        9
+      ],
+      "registration": {
+        "source_bounds": [
+          236,
+          7,
+          995,
+          1273
+        ],
+        "scale": 0.044233807266982623,
+        "offset": [
+          15,
+          4
+        ]
+      },
+      "label_side": 16
+    },
+    {
+      "id": "brew-jar",
+      "export": "res://art/items/brews-v1/brew-jar.png",
+      "stamp_center": [
+        32,
+        9
+      ],
+      "registration": {
+        "source_bounds": [
+          87,
+          27,
+          1167,
+          1235
+        ],
+        "scale": 0.046357615894039736,
+        "offset": [
+          7,
+          4
+        ]
+      },
+      "label_side": 16
+    }
+  ],
+  "colours": [
+    "#a54b43",
+    "#b58b3d",
+    "#75895b",
+    "#557f94",
+    "#8773a5",
+    "#b4a887"
+  ],
+  "marks": [
+    "eye",
+    "tooth",
+    "spiral",
+    "hand",
+    "moon",
+    "cross"
+  ]
+}

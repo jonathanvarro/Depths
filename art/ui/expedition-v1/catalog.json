@@ -1,0 +1,39 @@
+{
+  "glyphs": [
+    "marks/eye",
+    "marks/tooth",
+    "marks/spiral",
+    "marks/hand",
+    "marks/moon",
+    "marks/cross",
+    "journal/fire",
+    "journal/flare",
+    "journal/reach",
+    "journal/thrown-torch",
+    "journal/brace",
+    "journal/poison",
+    "journal/immune",
+    "journal/weak-to",
+    "mastery/one",
+    "mastery/two",
+    "mastery/full",
+    "mastery/improve",
+    "combat/long-lunge",
+    "combat/birthing",
+    "combat/off-balance",
+    "combat/tastes-blood",
+    "map/deep-water",
+    "labels/restorative",
+    "labels/caustic",
+    "labels/slumber",
+    "labels/frenzy",
+    "labels/revealing"
+  ],
+  "splash_frames": 6,
+  "native_glyph_canvas": [
+    32,
+    32
+  ],
+  "display_px": 20,
+  "brews_have_no_effect_mapping": true
+}

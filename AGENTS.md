@@ -51,6 +51,14 @@ Templates > Download and Install; already installed on the owner's PC).
 ## Project structure
 
 - `DESIGN.md` – living design direction and proposed first playable scope.
+- `docs/descent-completion-art.md` – #166/#167/#168/#178/#190 library handoff:
+  matched Reservoir surfaces, opaque water inset/wet stairs, vision and ending
+  cards, fire backdrop, 216 layered brew appearances, journal/mastery/combat/map
+  symbols and 26 enemy silhouettes. Review: `art/concepts/descent-completion-v1/inspector.html`.
+  The Overlook is a connected camp concept awaiting layout selection and later
+  terrain/site separation. No live bindings changed; #181 named companion
+  portraits are deferred for owner research. Preserve controller-owned flood,
+  identification, knowledge and expedition rules on hookup.
 - `docs/cave-descent-and-quests.md` – proposed twelve-floor cave campaign and 48 activity concepts (#125), including quest packages, camp projects and story persistence. Read alongside #122/#123; floor count, lore and new mechanics are not approved or implemented.
 - `docs/boons-curses-and-gambling-review.md` – #134 audit of the #133 shrine system, costs/odds/durations, research and proposed improvements; recorded probes in `docs/boons-curses-review-data.json`. Reward bugs are #136/#137; #135 trinkets were in progress during review. Recommendations do not change live rules.
 - `AGENTS.md` / `CLAUDE.md` – shared assistant instructions and entry point.

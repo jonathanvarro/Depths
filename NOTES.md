@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-31 – ChatGPT (remaining artwork library)
+- Did: Started all requested remaining art batches except #181 named companion portraits. Added seventeen individual ImageGen masters with exact prompts/hashes: Reservoir wall/floor/ceiling, opaque water inset/wet stairs, vision/three ending cards/fire backdrop, six modular brew shapes and the connected Overlook camp concept. Added 28 native glyphs, six splash frames, a journal frame/26 actual-enemy silhouettes and an export-safe brew compositor with 216 distinct appearances. Review: `art/concepts/descent-completion-v1/inspector.html`; hookup and limits: `docs/descent-completion-art.md`. 69 source, 810 headless/817 renderer and 153 browser checks pass; seven actual Mobile captures and desktop/phone review frames retained.
+- Next: Owner reviews the Overlook composition before separate terrain/sites/state layers. Claude can connect the independent Reservoir/story/brew/symbol libraries, preserving existing controller rules. Named companion portraits wait for owner research. #167 audio and optional deep smith ore/gate-stair variant remain outstanding; issues stay open for review/hookup.
+- Watch out: No live themes, flood/stair rules, item/effect mapping, discovery facts, saves or named cast changed. The Overlook painting has baked sites and cannot yet hide unavailable ones; normalized anchors/state intentions are proposals only. Restricted editor import refreshed assets but emitted an editor-preference safe-save warning; isolated resource/render/browser fixtures are clean and use no player files. Concurrent Claude gameplay/settings/smith and opening-playthrough changes remain untouched.
+
 ## 2026-10-31 – ChatGPT (handworked finish)
 - Did: Recorded owner feedback that the equipment designs are liked but too symmetrical/clean. Added two comparative ImageGen edits (Riveted Mining Coat and Garrison Spear), preserving originals and exact prompts/source hashes. Review: `art/concepts/equipment-handworked-v1/inspector.html`; guidance in `docs/early-equipment-art-review.md`. Validated candidate padding, alpha, palette and unchanged originals.
 - Next: Use restrained handwork/material irregularity in subsequent refinement; the coat is the stronger end, not a requirement for damage/patches everywhere. These are two samples, not a completed 22-item finish pass.

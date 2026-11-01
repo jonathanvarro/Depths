@@ -1,0 +1,18 @@
+{
+  "stage": "concept for owner review; no production layers or live hit areas",
+  "canvas": [1600, 900],
+  "anchors_normalized": {
+    "fire_conversation": [0.24, 0.34, 0.15, 0.20],
+    "stash_supplies": [0.08, 0.33, 0.15, 0.18],
+    "survey_table": [0.46, 0.32, 0.17, 0.20],
+    "back_to_mine": [0.01, 0.04, 0.18, 0.17],
+    "onward_path": [0.69, 0.62, 0.22, 0.26]
+  },
+  "future_separated_layers": ["terrain_and_distant_hold", "shelter", "fire_and_sitting_stones", "stash_and_crates", "survey_table", "route_ropes_and_markers", "foreground_ledge_occluder", "local_light_overlays", "optional_current_party_occupants"],
+  "state_plan": {
+    "discovered": "Bare defensible terrain and readable routes; minimal rough shelter, no assumed supplies or services",
+    "provisioned": "Selected shelter/fire/stash layers; the current painting proposes this composition",
+    "connected": "Additional route rope, marker, supplied crates and optional local light layers after travel rules are approved"
+  },
+  "limits": "No named occupants, shops, healing or travel costs assigned. Preserve expedition levels on underground arrival. Produce independent terrain/sites only after layout selection."
+}

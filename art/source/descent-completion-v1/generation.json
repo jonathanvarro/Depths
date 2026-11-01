@@ -1,0 +1,380 @@
+{
+  "date": "2026-10-31",
+  "tool": "built-in image_gen",
+  "assets": [
+    {
+      "id": "overlook",
+      "group": "camp",
+      "transparent": false,
+      "prompt": "Use case: stylized-concept. Landscape 16:9 concept painting for Depths, a dark gritty medieval first-person cave crawler. Bird's-eye three-quarter view of a SMALL UNDERGROUND REFUGE on a broad defensible rocky ledge above an immense cavern containing a DISTANT crude goblin fortress. The foreground ledge is a believable connected place: a modest unlit sleeping shelter built against rock, a small warm campfire circle with empty sitting stones, battered supply crates and a recognisable stash chest grouped near the shelter, one rough survey table. Uneven trampled paths connect these sites organically across continuous ground. A readable narrow trail enters from the upper-left mine tunnel and a different rope-lined path descends along the right cliff toward the far goblin territory. Clear foreground ledge edge, quiet midground targets, distant fortress silhouettes and tiny hostile lights for scale. Hand-painted dark fantasy, rough carved shapes, irregular stone, patched canvas, damp soot-dark umber/slate, restrained warm refuge light against cold cavern distance. Weathered and humanly imperfect, not polished or symmetrical. No people, named NPCs, vendors, active combat, labels, text, UI, floating buttons, logos, faction emblems or magical healing. No ceiling sky or daylight. Provide a composition study, not separated production layers; enough calm space between targets for landscape phone readability.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-25708f5b-52c9-4091-b780-ac62d116457f.png",
+      "source": "art/source/descent-completion-v1/overlook-master.png",
+      "sha256": "4ae1069ac1912b11038ddea98ff0726262099ee4dd932e2c1237e32f12c8456a",
+      "source_canvas": [
+        1672,
+        940
+      ],
+      "export": "res://art/concepts/descent-completion-v1/overlook-concept.png",
+      "export_sha256": "ed9101e4bc72670faf86372560c895b292e65fa10827c4141cf03f4ea730de76",
+      "registration": null
+    },
+    {
+      "id": "vision",
+      "group": "illustrations",
+      "transparent": false,
+      "prompt": "Use case: stylized-concept. Full-screen 16:9 atmospheric vision still for Depths, a dark gritty cave crawler. A vast sleeping presence FELT THROUGH ROCK, almost entirely withheld: rough black slate ribs of the earth recede into blue-black darkness, an immense slow organic fold curves through a distant fissure, a faint cold mineral reflection suggests a heartbeat deep below. Abstract spatial dread and impossible scale, felt more than seen. No defined face, eye, teeth, limbs, heart anatomy, egg, organs or identifiable final monster. No paired rounded masses. A single broad folded geological/organic curve disappearing past the frame. Restrained dark fantasy painted illustration with substantial irregular material shapes and sparse readable details; no photoreal noise. Neutral desaturated slate/charcoal with a very restrained cold blue undertone; the game adds its own blue vision filter, so do not flood the painting in saturated cyan. Low contrast foreground, a quiet distant focal seam. No people, text, UI, border, symbols, religious marks, lettering, gore or magic beam. A threatening dream impression suitable behind dialogue; reserve lower left and lower fifth as quiet dark shapes.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-ff46949f-7567-47b0-9059-158a9a1355bf.png",
+      "source": "art/source/descent-completion-v1/vision-master.png",
+      "sha256": "f3c67efb6b1f0d6dbf777cd2490ac4630268e15033c5e3abd6e32a48a8b6e926",
+      "source_canvas": [
+        1672,
+        941
+      ],
+      "export": "res://art/illustrations/descent-v1/vision.png",
+      "export_sha256": "364cf1f799afda27197d25c9e50530d431b36755038460af21d2ebf0bd8a528a",
+      "registration": null
+    },
+    {
+      "id": "brew-squat",
+      "group": "brews",
+      "transparent": true,
+      "prompt": "Use case: stylized-concept. ONE isolated empty glass potion vessel for a modular 64x64 inventory icon in Depths, dark gritty medieval fantasy. Front-facing UPRIGHT SQUAT ROUND BOTTLE, short narrow central neck and broad low round belly, flat stable base, plain broad brown cork at top. Whole vessel centered with ample transparent padding. Thick weathered neutral smoky-clear glass, readable chunky pale-grey edge facets, some uneven hand-blown thickness, tiny surface scuffs, simple dark cork. EMPTY neutral interior: no liquid, tint, label, wax seal, stamp, markings or magical glow. Preserve clear interior as transparent or translucent glass so a separate liquid-colour layer can be applied; strongest glass detail belongs to outline and rim. Restrained painted pixel-art, broad clusters, crisp stepped silhouette, muted charcoal/grey/dirty ivory and cork umber, not glossy product photography or smooth vector. No hands, people, props, cast shadow, floor, text, frame or checkerboard. Genuine transparent background. Centre the cork on the top vertical axis; no tilted vessel.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-96d83498-d2ef-4176-b3a5-2b6fdc94f5cd.png",
+      "source": "art/source/descent-completion-v1/brew-squat-master.png",
+      "sha256": "44886b3f37292e7024715cd4c05ba83449e3e82a0e2ed7a49645d97cdb47008a",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "stamp_center": [
+        32,
+        9
+      ],
+      "export": "res://art/items/brews-v1/brew-squat.png",
+      "export_sha256": "09936809828ad7556468e48d7f02a11b0e731ec1cafc17e023e73ed110d1ef08",
+      "registration": {
+        "source_bounds": [
+          135,
+          80,
+          1119,
+          1212
+        ],
+        "scale": 0.04946996466431095,
+        "offset": [
+          7,
+          4
+        ]
+      },
+      "label_side": 16
+    },
+    {
+      "id": "brew-tall",
+      "group": "brews",
+      "transparent": true,
+      "prompt": "Use case: stylized-concept. ONE isolated empty glass brew vessel for modular 64x64 inventory art in Depths, dark gritty medieval fantasy. Upright FRONT view, whole object centered, generous transparent padding, broad brown plain cork centred at top. Neutral smoky-clear hand-blown glass: irregular thickness, chunky subdued grey/ivory edge facets, sparse scuffs, coarse painted pixel clusters and crisp stepped silhouette. Interior EMPTY and genuinely transparent/translucent so a SEPARATE liquid layer behind the glass can show. No liquid, colour tint, labels, stamps, seal, writing, UI, shadow, floor, extra props or people. Not product photography. True transparent background. Shape: TALL NARROW apothecary bottle, long rectangular slightly uneven shoulders, modest narrow neck, almost straight vertical body sides and blunt squared bottom. Slender height-to-width about 2.4:1. Keep its silhouette clearly different from a round squat bottle.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-46a580e6-bb5f-4080-a0ca-6138b3235d16.png",
+      "source": "art/source/descent-completion-v1/brew-tall-master.png",
+      "sha256": "629a148dfae08099356d93159359b983480da800760027a2a2c84fb4073bda42",
+      "source_canvas": [
+        1024,
+        1536
+      ],
+      "stamp_center": [
+        32,
+        9
+      ],
+      "export": "res://art/items/brews-v1/brew-tall.png",
+      "export_sha256": "7899fcce7a7fa52f0b6a0d533a07efaa8292be12d52b83731809bcf15cd4b454",
+      "registration": {
+        "source_bounds": [
+          321,
+          40,
+          707,
+          1495
+        ],
+        "scale": 0.03848797250859107,
+        "offset": [
+          24,
+          4
+        ]
+      },
+      "label_side": 13
+    },
+    {
+      "id": "brew-flask",
+      "group": "brews",
+      "transparent": true,
+      "prompt": "Use case: stylized-concept. ONE isolated empty glass brew vessel for modular 64x64 inventory art in Depths, dark gritty medieval fantasy. Upright FRONT view, whole object centered, generous transparent padding, broad brown plain cork centred at top. Neutral smoky-clear hand-blown glass: irregular thickness, chunky subdued grey/ivory edge facets, sparse scuffs, coarse painted pixel clusters and crisp stepped silhouette. Interior EMPTY and genuinely transparent/translucent so a SEPARATE liquid layer behind the glass can show. No liquid, colour tint, labels, stamps, seal, writing, UI, shadow, floor, extra props or people. Not product photography. True transparent background. Shape: a FLATTENED OVAL travelling FLASK with a broad shallow oval body and a short central neck. Seen front-on, visibly wider than tall in its body, not a spherical bottle; two subtly flattened side facets and a small stable base. No straps or handles.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-fe59453e-7cd6-4d5f-9cb8-3cd595ab5bdd.png",
+      "source": "art/source/descent-completion-v1/brew-flask-master.png",
+      "sha256": "eecbaadad8047e84845344fa6477c62e439a626781042b28694142c9d86f4465",
+      "source_canvas": [
+        1536,
+        1024
+      ],
+      "stamp_center": [
+        32,
+        14
+      ],
+      "export": "res://art/items/brews-v1/brew-flask.png",
+      "export_sha256": "5bfcae86a144be2c843cfaeb2c3d236eb4a73362969cd9f476366f03e1426b20",
+      "registration": {
+        "source_bounds": [
+          170,
+          16,
+          1367,
+          1008
+        ],
+        "scale": 0.04678362573099415,
+        "offset": [
+          4,
+          9
+        ]
+      },
+      "label_side": 16
+    },
+    {
+      "id": "reservoir-wall",
+      "group": "textures",
+      "transparent": false,
+      "prompt": "Use case: stylized-concept. ONE square seamless tileable environment texture for Depths dark gritty dungeon crawler, intended native128x128 with 32 muted colours. Flat orthographic material swatch filling the entire square, opaque. Restrained painted pixel-art clusters, broad irregular stone planes and modest texture; neutral diffuse illumination, no directional light or cast shadow, no perspective, props, water glow, lettering, borders or emblems. Cold soot-slate palette: blue-grey charcoal, muted mineral brown, sparse dirty pale calcite. Hand-worked eroded stone, never perfect symmetry or uniform clean tiles. Subject: rough cistern WALL courses of huge mismatched dark slate blocks, uneven eroded joints, a broad subdued horizontal old WATERLINE stain crossing the lower third. Patchy mineral tide deposits and damp lower stones, restrained and flat. Repeat edges should connect in both axes without a border, the waterline band integrated rather than a drawn stripe. No open water surface, holes, windows or architecture view.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-df573d25-cf94-402c-9bff-f6fb76e47e2f.png",
+      "source": "art/source/descent-completion-v1/reservoir-wall-master.png",
+      "sha256": "e218ff46dca4f5487c37f875a717ea0ea92054871651fa124082a6cc8bcb0af6",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "export": "res://art/textures/reservoir-v1/reservoir-wall.png",
+      "export_sha256": "2e3b1745f064e91b5751cb83dcfcc580db8054c721feee85136dce234afa167f",
+      "registration": null
+    },
+    {
+      "id": "brew-vial",
+      "group": "brews",
+      "transparent": true,
+      "prompt": "Use case: stylized-concept. ONE isolated empty glass brew vessel for modular 64x64 inventory art in Depths, dark gritty medieval fantasy. Upright FRONT view, whole object centered, generous transparent padding, broad brown plain cork centred at top. Neutral smoky-clear hand-blown glass: irregular thickness, chunky subdued grey/ivory edge facets, sparse scuffs, coarse painted pixel clusters and crisp stepped silhouette. Interior EMPTY and genuinely transparent/translucent so a SEPARATE liquid layer behind the glass can show. No liquid, colour tint, labels, stamps, seal, writing, UI, shadow, floor, extra props or people. Not product photography. True transparent background. Shape: a very SLIM VIAL with almost no shoulders, a narrow straight test-tube-like body, gently rounded sealed bottom and a small uneven cork. Entire vessel has height-to-width about 4:1, with enough thickness to read at tiny icon size; shorter visible glass neck, no long bottle shoulders.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-c0c5ecbd-f73a-4641-be6a-75248c521c0e.png",
+      "source": "art/source/descent-completion-v1/brew-vial-master.png",
+      "sha256": "8148f42abf9bc641654437e3fc2ea513a6bdf051cf0b696cea73272fb922cdb3",
+      "source_canvas": [
+        793,
+        1983
+      ],
+      "stamp_center": [
+        32,
+        9
+      ],
+      "export": "res://art/items/brews-v1/brew-vial.png",
+      "export_sha256": "727a81502b569ae000be0d8901dbb3b1cf2d4cdf25ffebcefb94ce8b087cb85c",
+      "registration": {
+        "source_bounds": [
+          258,
+          71,
+          536,
+          1899
+        ],
+        "scale": 0.030634573304157548,
+        "offset": [
+          27,
+          4
+        ]
+      },
+      "label_side": 9
+    },
+    {
+      "id": "brew-gourd",
+      "group": "brews",
+      "transparent": true,
+      "prompt": "Use case: stylized-concept. ONE isolated empty glass brew vessel for modular 64x64 inventory art in Depths, dark gritty medieval fantasy. Upright FRONT view, whole object centered, generous transparent padding, broad brown plain cork centred at top. Neutral smoky-clear hand-blown glass: irregular thickness, chunky subdued grey/ivory edge facets, sparse scuffs, coarse painted pixel clusters and crisp stepped silhouette. Interior EMPTY and genuinely transparent/translucent so a SEPARATE liquid layer behind the glass can show. No liquid, colour tint, labels, stamps, seal, writing, UI, shadow, floor, extra props or people. Not product photography. True transparent background. Shape: a GOURD-SHAPED GLASS bottle, two unequal connected lobes: smaller upper bulb, narrow waist and large lower pear-shaped bulb. One centred narrow neck and plain cork. Asymmetric hand-blown outline, obviously glass rather than an actual opaque plant gourd; keep a large clear interior in both bulbs, no straps or leather.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-7f88e554-227d-458e-a81e-148732bef1f0.png",
+      "source": "art/source/descent-completion-v1/brew-gourd-master.png",
+      "sha256": "20d116b3dc3cbaa65842af59c5122775325f69ae96dde66cede8daf4130eda60",
+      "source_canvas": [
+        1230,
+        1278
+      ],
+      "stamp_center": [
+        32,
+        9
+      ],
+      "export": "res://art/items/brews-v1/brew-gourd.png",
+      "export_sha256": "a4673e315e19759e68fa22bc8b42526416755064782d2f0252dc65c804ff3ee7",
+      "registration": {
+        "source_bounds": [
+          236,
+          7,
+          995,
+          1273
+        ],
+        "scale": 0.044233807266982623,
+        "offset": [
+          15,
+          4
+        ]
+      },
+      "label_side": 16
+    },
+    {
+      "id": "brew-jar",
+      "group": "brews",
+      "transparent": true,
+      "prompt": "Use case: stylized-concept. ONE isolated empty glass brew vessel for modular 64x64 inventory art in Depths, dark gritty medieval fantasy. Upright FRONT view, whole object centered, generous transparent padding, broad brown plain cork centred at top. Neutral smoky-clear hand-blown glass: irregular thickness, chunky subdued grey/ivory edge facets, sparse scuffs, coarse painted pixel clusters and crisp stepped silhouette. Interior EMPTY and genuinely transparent/translucent so a SEPARATE liquid layer behind the glass can show. No liquid, colour tint, labels, stamps, seal, writing, UI, shadow, floor, extra props or people. Not product photography. True transparent background. Shape: a SHORT WIDE-MOUTH JAR, nearly cylindrical broad body, squared low shoulders and a thick wide cork. A few fine superficial crazing lines on ONE lower glass facet, intact and watertight, not a broken container. Broad open glass interior, rough slightly irregular rolled rim. Clearly a broad-neck jar rather than a narrow-neck potion bottle.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-50aeee5b-f5f6-46d3-9324-cc6afc4b102d.png",
+      "source": "art/source/descent-completion-v1/brew-jar-master.png",
+      "sha256": "d52440f1bdc716ebc30686ed9dbe2931f0524a02d868bb8bd2b496e2ec620815",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "stamp_center": [
+        32,
+        9
+      ],
+      "export": "res://art/items/brews-v1/brew-jar.png",
+      "export_sha256": "0f7dfd32d519529ab356207a7896c8b077d1ea9832b5cdaec51ebb4af7060ac9",
+      "registration": {
+        "source_bounds": [
+          87,
+          27,
+          1167,
+          1235
+        ],
+        "scale": 0.046357615894039736,
+        "offset": [
+          7,
+          4
+        ]
+      },
+      "label_side": 16
+    },
+    {
+      "id": "reservoir-floor",
+      "group": "textures",
+      "transparent": false,
+      "prompt": "Use case: stylized-concept. ONE square seamless tileable environment texture for Depths dark gritty dungeon crawler, intended native128x128 with 32 muted colours. Flat orthographic material swatch filling the entire square, opaque. Restrained painted pixel-art clusters, broad irregular stone planes and modest texture; neutral diffuse illumination, no directional light or cast shadow, no perspective, props, water glow, lettering, borders or emblems. Cold soot-slate palette: blue-grey charcoal, muted mineral brown, sparse dirty pale calcite. Hand-worked eroded stone, never perfect symmetry or uniform clean tiles. Subject: TOP-DOWN walkway paving made of broad uneven ancient black slate flags. Smoothed worn centres and modest darker damp seams, mineral grit at joints. Slightly wet edges of individual slabs, no mirror reflections, pools, footprints or loose props. Unbroken supporting surface, no pits. Seamless edges; calm broad texture that does not overpower room props.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-b6546537-08e8-420a-8ff5-50cb36cf0d1e.png",
+      "source": "art/source/descent-completion-v1/reservoir-floor-master.png",
+      "sha256": "8dfe0df3f7e34a96a5c4912182e9dc4617eb742d81d0328525f8aea0dda067a3",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "export": "res://art/textures/reservoir-v1/reservoir-floor.png",
+      "export_sha256": "89b6adbbd1ca3b43677c6bc4c0a5cfc5442f011460354df42d1ad3a5a7e9652d",
+      "registration": null
+    },
+    {
+      "id": "reservoir-ceiling",
+      "group": "textures",
+      "transparent": false,
+      "prompt": "Use case: stylized-concept. ONE square seamless tileable environment texture for Depths dark gritty dungeon crawler, intended native128x128 with 32 muted colours. Flat orthographic material swatch filling the entire square, opaque. Restrained painted pixel-art clusters, broad irregular stone planes and modest texture; neutral diffuse illumination, no directional light or cast shadow, no perspective, props, water glow, lettering, borders or emblems. Cold soot-slate palette: blue-grey charcoal, muted mineral brown, sparse dirty pale calcite. Hand-worked eroded stone, never perfect symmetry or uniform clean tiles. Subject: orthographic underside of a massive old cistern VAULT, broad shallow fissured black slate blocks, eroded mineral-dark joints, subdued calcite streaks and damp blotches. No stalactites, holes, water drops, lamp, roots or perspective arch. Flat repeatable stone material filling the whole square, quiet large forms.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-0dd60065-eb5b-48d3-be2c-11f0eb63eee0.png",
+      "source": "art/source/descent-completion-v1/reservoir-ceiling-master.png",
+      "sha256": "a46c1ae9214510aa266113e547439c811413113c8c20a43f3db7483be7593b8f",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "export": "res://art/textures/reservoir-v1/reservoir-ceiling.png",
+      "export_sha256": "7ad73528755575f149a24f217d8ad3d8d314e0bfcaf16becac61a90767a50386",
+      "registration": null
+    },
+    {
+      "id": "reservoir-edge",
+      "group": "world",
+      "transparent": false,
+      "prompt": "Use case: stylized-concept. ONE 2:1 wide environmental inset for Depths first-person dungeon crawler. A low rough black-slate WALKWAY LIP across the bottom quarter, and an immense opaque deep black water surface extending into a dim cistern beyond it. View looking slightly DOWN off the edge, readable vertical drop between narrow foreground stone coping and water several metres below. Faint broad reflections from an unseen vaulted wall, sparse flat ripples, far wall barely sensed in darkness. No stairs, doors, bodies, creatures, lights, people, glowing waves, text or UI. Restrained painted pixel art and broad irregular shapes suitable for native256x128 world display. Palette cold soot charcoal/slate with a little mineral umber, no saturated blue. Entire image opaque: black water must occlude geometry behind, no transparent hole. Architectural depth cue, not a photograph or a walkable floor texture.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-ad985bc1-f543-4c62-9c87-c3717a0826aa.png",
+      "source": "art/source/descent-completion-v1/reservoir-edge-master.png",
+      "sha256": "566df6538a054d0faea6f0c6c33fa25f4c44b952f552c71e98d529f4fcf521b4",
+      "source_canvas": [
+        1774,
+        887
+      ],
+      "export": "res://art/props/reservoir-finish-v1/water-edge.png",
+      "export_sha256": "d3bfa17eab414150a4b3c170b798e7e85fe47a6f8425723e0420aa49d1913f31",
+      "registration": null
+    },
+    {
+      "id": "reservoir-stairs",
+      "group": "world",
+      "transparent": true,
+      "prompt": "Use case: stylized-concept. One front-facing complete architectural PROP CUTOUT for Depths first-person grid cave crawler, native192x192. WET BLACK STONE STEPS descending away and downward into an opaque dark stairwell opening, framed by a broken-edged low slate threshold and two modest rough stone cheeks. Broad shallow near tread, progressively narrower steps receding into darkness, uneven hand-cut eroded edges and silt in corners. Intact route, no collapsing treads. Entire surrounding silhouette visible with padding, no extra floor plane beyond threshold. The dark internal aperture MUST remain opaque to hide the room beyond; only OUTSIDE the stone assembly genuinely transparent. Coarse restrained painted pixel-art clusters, muted cold charcoal/grey and mineral brown, neutral diffuse shading, subtle damp surfaces not glossy mirrors. No flowing water, torches, light glow, closed gate, rails, characters, lettering, UI or frame. A square front view for mounting in a 2-metre dungeon wall, no isometric side angle.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-bc6a78cf-800d-4575-b7a2-4d901719ab10.png",
+      "source": "art/source/descent-completion-v1/reservoir-stairs-master.png",
+      "sha256": "bda5b6e1f876992955d69ae85a9fdb7d52ebccb71095885c8b0d8b8edc914d05",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "export": "res://art/props/reservoir-finish-v1/stairs.png",
+      "export_sha256": "1d9911aa5f242630a781b56907fcb2eb76d455296e8240ffa8f474abdb3bfefb",
+      "registration": null
+    },
+    {
+      "id": "reservoir-ending",
+      "group": "illustrations",
+      "transparent": false,
+      "prompt": "Use case: stylized-concept. A landscape 16:9 story illustration for Depths, a dark gritty medieval cave crawler, for a 640x360 ending card or conversation background. Grounded hand-painted dark fantasy with broad readable shapes, worn irregular stone, restrained earthy charcoal/slate/umber, cold damp darkness and sparse meaningful warm accents. Avoid pristine symmetry, glossy perfect masonry, microscopic noise and oversaturated colour. Full opaque scene, no frame, text, lettering, UI, symbols, logos or named characters. Quiet dark shapes in lower fifth and lower-left for dialogue/portrait placement. Subject: the BLACK RESERVOIR drained low, a vast subterranean cistern with uneven stone walkways and silted terraces now exposed. Far below the foreground walkway, beyond the last dark water, a SINGLE immense broad sleeping curve disappears beneath ancient rock. It is barely distinguishable from folded geology: suggest unbelievable scale without exposing a whole being, face, eye, limbs or anatomy. A narrow newly exposed stair threads down from the foreground into the unknown, visibly tiny against the distant curve. Architecture and waterlines establish depth. No paired rounded masses, corpses, gore, battle, magical glow or final-boss reveal. A restrained story-end glimpse of a route continuing downward.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-f02ffdc0-aacf-4794-9040-d46b97391e30.png",
+      "source": "art/source/descent-completion-v1/reservoir-ending-master.png",
+      "sha256": "6b5842d1e7d269e3ffbd31a78bda611e5cb115c612f5ae05bd18e83295425268",
+      "source_canvas": [
+        1672,
+        941
+      ],
+      "export": "res://art/illustrations/descent-v1/reservoir-ending.png",
+      "export_sha256": "3a95936cc52f046feb7d78ad58d4c365cf21150c1f74715868f8f08a603f5cc3",
+      "registration": null
+    },
+    {
+      "id": "lower-gate-card",
+      "group": "illustrations",
+      "transparent": false,
+      "prompt": "Use case: stylized-concept. A landscape 16:9 story illustration for Depths, a dark gritty medieval cave crawler, for a 640x360 ending card or conversation background. Grounded hand-painted dark fantasy with broad readable shapes, worn irregular stone, restrained earthy charcoal/slate/umber, cold damp darkness and sparse meaningful warm accents. Avoid pristine symmetry, glossy perfect masonry, microscopic noise and oversaturated colour. Full opaque scene, no frame, text, lettering, UI, symbols, logos or named characters. Quiet dark shapes in lower fifth and lower-left for dialogue/portrait placement. Subject: THE WAY DOWN CONTINUES. At the bottom of a rough goblin fortress passage, a worn iron grate stands beside a narrow side stair descending into black still water. Foreground rough flagstones, rusty utilitarian grille on the right, the wet stair running down along its left stone cheek and vanishing into darkness. Distant cold damp air behind the bars, one very faint warm reflected torch colour on near rough stone, no actual torch prop required. A threshold image, readable gate and descending route, no vast creature revealed.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-8ea91202-0ebe-413c-bb57-f37d5ffd18fd.png",
+      "source": "art/source/descent-completion-v1/lower-gate-card-master.png",
+      "sha256": "dcab120f70e9c780b9327db55386f42cbb84acf24e01c9e6808591ca8513e742",
+      "source_canvas": [
+        1672,
+        941
+      ],
+      "export": "res://art/illustrations/descent-v1/lower-gate-card.png",
+      "export_sha256": "c927932da09a866a1344d2fdd4ac8fe4a8018690e93145ea78bd82c008a7ece6",
+      "registration": null
+    },
+    {
+      "id": "galleries-drained-card",
+      "group": "illustrations",
+      "transparent": false,
+      "prompt": "Use case: stylized-concept. A landscape 16:9 story illustration for Depths, a dark gritty medieval cave crawler, for a 640x360 ending card or conversation background. Grounded hand-painted dark fantasy with broad readable shapes, worn irregular stone, restrained earthy charcoal/slate/umber, cold damp darkness and sparse meaningful warm accents. Avoid pristine symmetry, glossy perfect masonry, microscopic noise and oversaturated colour. Full opaque scene, no frame, text, lettering, UI, symbols, logos or named characters. Quiet dark shapes in lower fifth and lower-left for dialogue/portrait placement. Subject: THE GALLERIES DRAIN. A formerly flooded low vaulted old mine water gallery has drained, leaving broad high-water stains on slate walls, shallow residual pools along side channels, silt on rough paving and a narrow BLACK STONE STAIR newly visible where the deepest pool stood. The foreground is an inhabited-scale rough waterworks passage; an open sluice frame lies far to one side, without stealing focus from the descending stair. The stair leads down into an unseen greater space, only darkness beyond. No creature silhouette, body, face or final sleeping-presence reveal; preserve that for a later reservoir image.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-5259bad3-332e-4908-aceb-97d909072461.png",
+      "source": "art/source/descent-completion-v1/galleries-drained-card-master.png",
+      "sha256": "bfb0fbf92373d309870713b3572abeb6d965e2ff6e4568f821daa83582b0ddbf",
+      "source_canvas": [
+        1672,
+        941
+      ],
+      "export": "res://art/illustrations/descent-v1/galleries-drained-card.png",
+      "export_sha256": "785c8c67aac98e4f8abe81dcf51b2b25454a5978ae7f9b41ef4792decd6b2b33",
+      "registration": null
+    },
+    {
+      "id": "by-the-fire",
+      "group": "illustrations",
+      "transparent": false,
+      "prompt": "Use case: stylized-concept. A landscape 16:9 story illustration for Depths, a dark gritty medieval cave crawler, for a 640x360 ending card or conversation background. Grounded hand-painted dark fantasy with broad readable shapes, worn irregular stone, restrained earthy charcoal/slate/umber, cold damp darkness and sparse meaningful warm accents. Avoid pristine symmetry, glossy perfect masonry, microscopic noise and oversaturated colour. Full opaque scene, no frame, text, lettering, UI, symbols, logos or named characters. Quiet dark shapes in lower fifth and lower-left for dialogue/portrait placement. Subject: BY THE FIRE. A night cave-mouth campfire circle seen LOW AND CLOSE at seated human eye level. A modest irregular ring of stones with a small warm ember-rich fire just right of centre, empty rough sitting logs and a worn bedroll on the far side, patched anonymous shelter barely visible in deep background. Near-side rock catches restrained amber firelight; beyond the ring lies cold dark woodland/cave-mouth night. No visible people, faces, silhouettes, vendors, elaborate buildings or luxury. Leave lower-left especially quiet and dark so the current hero portrait can sit there. Serious exhausted refuge after an expedition, not a festive bonfire. Still illustration only, no baked UI or animated glow layers.",
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-c4e55db0-8e56-4329-8293-7a7e90a5bd75.png",
+      "source": "art/source/descent-completion-v1/by-the-fire-master.png",
+      "sha256": "920c1bacf72e76ba609d95952e226e86b866205761a8aac57d7efa4f2ecdeeb2",
+      "source_canvas": [
+        1672,
+        941
+      ],
+      "export": "res://art/illustrations/descent-v1/by-the-fire.png",
+      "export_sha256": "a0c35322362da5ffaf876c8e1a6e9bd6164266bd8134898604fda47d8e02294f",
+      "registration": null
+    }
+  ]
+}

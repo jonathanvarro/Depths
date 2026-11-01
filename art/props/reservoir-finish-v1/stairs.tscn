@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="Texture2D" path="res://art/props/reservoir-finish-v1/stairs.png" id="art"]
+[node name="ReservoirStairs" type="Node3D"]
+metadata/art_issue = 168
+metadata/mount = "fixed wall, caller supplies real wall anchor"
+[node name="Sprite" type="Sprite3D" parent="."]
+position = Vector3(0,0.9270833333333334,0)
+pixel_size = 0.010416666666666666
+billboard = 0
+shaded = true
+texture_filter = 0
+alpha_cut = 1
+cast_shadow = 0
+texture = ExtResource("art")

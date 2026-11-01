@@ -1,0 +1,161 @@
+{
+	"items": [
+		{
+			"enemy": "borrowed_pack.tres",
+			"source_scene": "res://art/enemies/borrowed-pack-v1/scene.tscn",
+			"source_texture": "res://art/enemies/borrowed-pack-v1/idle.png",
+			"thumbnail": "res://art/ui/expedition-v1/thumbnails/borrowed_pack.png"
+		},
+		{
+			"enemy": "breach_hound.tres",
+			"source_scene": "res://art/enemies/monsters-v1/breach-hound/scene.tscn",
+			"source_texture": "res://art/enemies/monsters-v1/breach-hound/idle.png",
+			"thumbnail": "res://art/ui/expedition-v1/thumbnails/breach_hound.png"
+		},
+		{
+			"enemy": "broodmother.tres",
+			"source_scene": "res://art/enemies/monsters-v1/broodmother/scene.tscn",
+			"source_texture": "res://art/enemies/monsters-v1/broodmother/idle.png",
+			"thumbnail": "res://art/ui/expedition-v1/thumbnails/broodmother.png"
+		},
+		{
+			"enemy": "cave_bat.tres",
+			"source_scene": "res://art/enemies/monsters-v1/cave-bat/scene.tscn",
+			"source_texture": "res://art/enemies/monsters-v1/cave-bat/idle.png",
+			"thumbnail": "res://art/ui/expedition-v1/thumbnails/cave_bat.png"
+		},
+		{
+			"enemy": "gas_bloat.tres",
+			"source_scene": "res://art/enemies/monsters-v1/gas-bloat/scene.tscn",
+			"source_texture": "res://art/enemies/monsters-v1/gas-bloat/idle.png",
+			"thumbnail": "res://art/ui/expedition-v1/thumbnails/gas_bloat.png"
+		},
+		{
+			"enemy": "gate_captain.tres",
+			"source_scene": "res://art/enemies/monsters-v1/gate-captain/scene.tscn",
+			"source_texture": "res://art/enemies/monsters-v1/gate-captain/idle.png",
+			"thumbnail": "res://art/ui/expedition-v1/thumbnails/gate_captain.png"
+		},
+		{
+			"enemy": "goblin.tres",
+			"source_scene": "res://art/enemies/cave-simple-v1/goblin/scene.tscn",
+			"source_texture": "res://art/enemies/cave-simple-v1/goblin/idle.png",
+			"thumbnail": "res://art/ui/expedition-v1/thumbnails/goblin.png"
+		},
+		{
+			"enemy": "goblin_archer.tres",
+			"source_scene": "res://art/enemies/campaign-v1/archer/scene.tscn",
+			"source_texture": "res://art/enemies/campaign-v1/archer/idle.png",
+			"thumbnail": "res://art/ui/expedition-v1/thumbnails/goblin_archer.png"
+		},
+		{
+			"enemy": "goblin_brute.tres",
+			"source_scene": "res://art/enemies/monsters-v1/goblin-brute/scene.tscn",
+			"source_texture": "res://art/enemies/monsters-v1/goblin-brute/idle.png",
+			"thumbnail": "res://art/ui/expedition-v1/thumbnails/goblin_brute.png"
+		},
+		{
+			"enemy": "goblin_drummer.tres",
+			"source_scene": "res://art/enemies/campaign-v1/drummer/scene.tscn",
+			"source_texture": "res://art/enemies/campaign-v1/drummer/idle.png",
+			"thumbnail": "res://art/ui/expedition-v1/thumbnails/goblin_drummer.png"
+		},
+		{
+			"enemy": "goblin_guard.tres",
+			"source_scene": "res://art/enemies/campaign-v1/guard/scene.tscn",
+			"source_texture": "res://art/enemies/campaign-v1/guard/idle.png",
+			"thumbnail": "res://art/ui/expedition-v1/thumbnails/goblin_guard.png"
+		},
+		{
+			"enemy": "goblin_queen.tres",
+			"source_scene": "res://art/enemies/campaign-v1/queen/scene.tscn",
+			"source_texture": "res://art/enemies/campaign-v1/queen/idle.png",
+			"thumbnail": "res://art/ui/expedition-v1/thumbnails/goblin_queen.png"
+		},
+		{
+			"enemy": "goblin_trapper.tres",
+			"source_scene": "res://art/enemies/monsters-v1/goblin-trapper/scene.tscn",
+			"source_texture": "res://art/enemies/monsters-v1/goblin-trapper/idle.png",
+			"thumbnail": "res://art/ui/expedition-v1/thumbnails/goblin_trapper.png"
+		},
+		{
+			"enemy": "great_rat.tres",
+			"source_scene": "res://art/enemies/campaign-v1/great-rat/scene.tscn",
+			"source_texture": "res://art/enemies/campaign-v1/great-rat/idle.png",
+			"thumbnail": "res://art/ui/expedition-v1/thumbnails/great_rat.png"
+		},
+		{
+			"enemy": "hollow_miner.tres",
+			"source_scene": "res://art/enemies/monsters-v1/hollow-miner/scene.tscn",
+			"source_texture": "res://art/enemies/monsters-v1/hollow-miner/idle.png",
+			"thumbnail": "res://art/ui/expedition-v1/thumbnails/hollow_miner.png"
+		},
+		{
+			"enemy": "lamp_eater.tres",
+			"source_scene": "res://art/enemies/monsters-v1/lamp-eater/scene.tscn",
+			"source_texture": "res://art/enemies/monsters-v1/lamp-eater/idle.png",
+			"thumbnail": "res://art/ui/expedition-v1/thumbnails/lamp_eater.png"
+		},
+		{
+			"enemy": "marrow_shepherd.tres",
+			"source_scene": "res://art/enemies/marrow-shepherd-v1/scene.tscn",
+			"source_texture": "res://art/enemies/marrow-shepherd-v1/idle.png",
+			"thumbnail": "res://art/ui/expedition-v1/thumbnails/marrow_shepherd.png"
+		},
+		{
+			"enemy": "rat.tres",
+			"source_scene": "res://art/enemies/cave-simple-v1/rat/scene.tscn",
+			"source_texture": "res://art/enemies/cave-simple-v1/rat/idle.png",
+			"thumbnail": "res://art/ui/expedition-v1/thumbnails/rat.png"
+		},
+		{
+			"enemy": "rock_beetle.tres",
+			"source_scene": "res://art/enemies/monsters-v1/rock-beetle/scene.tscn",
+			"source_texture": "res://art/enemies/monsters-v1/rock-beetle/idle.png",
+			"thumbnail": "res://art/ui/expedition-v1/thumbnails/rock_beetle.png"
+		},
+		{
+			"enemy": "small_spider.tres",
+			"source_scene": "res://art/enemies/tutorial-v1/small-spider/scene.tscn",
+			"source_texture": "res://art/enemies/tutorial-v1/small-spider/idle.png",
+			"thumbnail": "res://art/ui/expedition-v1/thumbnails/small_spider.png"
+		},
+		{
+			"enemy": "spider.tres",
+			"source_scene": "res://art/enemies/cave-simple-v1/spider/scene.tscn",
+			"source_texture": "res://art/enemies/cave-simple-v1/spider/idle.png",
+			"thumbnail": "res://art/ui/expedition-v1/thumbnails/spider.png"
+		},
+		{
+			"enemy": "starved_rat.tres",
+			"source_scene": "res://art/enemies/tutorial-v1/starved-rat/scene.tscn",
+			"source_texture": "res://art/enemies/tutorial-v1/starved-rat/idle.png",
+			"thumbnail": "res://art/ui/expedition-v1/thumbnails/starved_rat.png"
+		},
+		{
+			"enemy": "underhound.tres",
+			"source_scene": "res://art/enemies/underhound-v2/scene.tscn",
+			"source_texture": "res://art/enemies/underhound-v2/idle.png",
+			"thumbnail": "res://art/ui/expedition-v1/thumbnails/underhound.png"
+		},
+		{
+			"enemy": "unfinished_hound.tres",
+			"source_scene": "res://art/enemies/unfinished-hound-v1/scene.tscn",
+			"source_texture": "res://art/enemies/unfinished-hound-v1/idle.png",
+			"thumbnail": "res://art/ui/expedition-v1/thumbnails/unfinished_hound.png"
+		},
+		{
+			"enemy": "venom_spider.tres",
+			"source_scene": "res://art/enemies/monsters-v1/venom-spider/scene.tscn",
+			"source_texture": "res://art/enemies/monsters-v1/venom-spider/idle.png",
+			"thumbnail": "res://art/ui/expedition-v1/thumbnails/venom_spider.png"
+		},
+		{
+			"enemy": "webspinner.tres",
+			"source_scene": "res://art/enemies/campaign-v1/webspinner/scene.tscn",
+			"source_texture": "res://art/enemies/campaign-v1/webspinner/idle.png",
+			"thumbnail": "res://art/ui/expedition-v1/thumbnails/webspinner.png"
+		}
+	],
+	"knowledge_state_owned_by_caller": true
+}
