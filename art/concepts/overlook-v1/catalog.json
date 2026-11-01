@@ -1,0 +1,624 @@
+{
+  "assets": [
+    {
+      "id": "terrain-clean",
+      "prompt": "Use case: precise-object-edit.\nAsset type: clean terrain plate for a layered landscape game camp, same 16:9 composition.\nInput image 1 is the EDIT TARGET: the owner-approved Overlook painting. Preserve its camera, framing, ledge silhouette, mine entrance in upper left, walkable paths, rope-guarded descending path on the right, foreground rock masses, enormous cavern and entire distant goblin fortress.\nRemove ONLY the removable foreground camp furnishings: the patchwork canvas shelter and poles, beds and rugs, barrels/crates/baskets beside it, open stash chests on the left, central campfire including its ring and sitting stones, the survey table and stools, and loose foreground timber/supply boxes. Reveal plausible continuous rough bare slate and existing craggy rock behind them. Remove the local campfire's warm orange pool from the empty ground. Retain the mine's torch and the two routes, and the tiny distant fortress lights. No human figures.\nDo not redesign the landscape or fortress. Do not shift any major rock outline or route. Match the same detailed dark gritty painted materials and uneven handworked world, but do not add objects, writing, structures or fantasy symbols. Cool neutral rock at the former campsite. The final image must be a believable empty refuge that matches the approved composition exactly, with no ghost furniture, warm ground hotspot or cropped edges. Opaque full-canvas landscape output.",
+      "transparent": false,
+      "refs": [
+        "E:/GitHub/Depths/art/concepts/descent-completion-v1/overlook-concept.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-a41aca6f-aef5-40ec-8b1f-09996ad5547c.png",
+      "source": "art/source/overlook-v1/terrain-clean-master.png",
+      "sha256": "a20adf172b01274132e7aa5878253b41f922567e0b32c74f1ef90f83d08380f8",
+      "registration": {
+        "source_canvas": [
+          1672,
+          941
+        ],
+        "export_canvas": [
+          1600,
+          900
+        ],
+        "full_frame": true
+      },
+      "export": "res://art/camp/overlook-v1/terrain.png",
+      "export_sha256": "db896501e3bbffaa5ec54f1027363c47548d3f131c712a80dbb777e1dff5e711",
+      "reference_records": [
+        {
+          "path": "art/concepts/descent-completion-v1/overlook-concept.png",
+          "sha256": "ed9101e4bc72670faf86372560c895b292e65fa10827c4141cf03f4ea730de76"
+        }
+      ]
+    },
+    {
+      "id": "shelter",
+      "prompt": "Use case: background-extraction.\nAsset type: independent shelter cutout for the approved Overlook camp.\nInput image 1 is the EDIT TARGET, a crop of the selected painting. Isolate the ENTIRE existing patchwork shelter and its own furnishings: crooked timber poles and crossbars, ragged brown canvas, bedrolls, small rug, two barrels and the small supply bin beneath/beside the canopy. Preserve the exact three-quarter elevated camera, roof angles, worn textures, cloth tears and arrangement. Remove every piece of surrounding cavern rock and ground, and remove the partial open chest cut off at the bottom-left edge. Do not add people or furnishings.\nTransparent background is required, not black or checkerboard. Retain the object's natural subdued contact shadow only at its feet, no broad floor patch. Whole shelter must fit within the canvas with transparent padding; do not crop poles or roof. Match the detailed dark gritty painterly material style and muted neutral cave lighting. Keep it makeshift, uneven and modest; no clean symmetry, ornate decorations, firelight baked onto surrounding ground or writing.",
+      "transparent": true,
+      "refs": [
+        "E:/GitHub/Depths/art/source/overlook-v1/shelter-reference.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-53cdf923-e588-4646-819b-610d64178830.png",
+      "source": "art/source/overlook-v1/shelter-master.png",
+      "sha256": "833879dd85411d3febd33c15230cda7cb8eac0df0b829b31a1d80d2a3f7a3a8a",
+      "registration": {
+        "source_bounds": [
+          158,
+          23,
+          1619,
+          876
+        ],
+        "native_canvas": [
+          864,
+          460
+        ],
+        "content_offset": [
+          45,
+          4
+        ],
+        "content_size": [
+          774,
+          452
+        ],
+        "source_scale": 0.52989449003517,
+        "rect": [
+          280,
+          142,
+          432,
+          230
+        ]
+      },
+      "hero_visual_id": "",
+      "export": "res://art/camp/overlook-v1/sites/shelter.png",
+      "export_sha256": "b42638eb04c0c2ea73c2b58b9bbc20e31d018c984a942851ff7515c96439e8c8",
+      "reference_records": [
+        {
+          "path": "art/source/overlook-v1/shelter-reference.png",
+          "sha256": "69b85b31b12ce64ba0d4a63a8776b56552f5c876b4141f4c12ec7a77693575b2"
+        }
+      ]
+    },
+    {
+      "id": "stash",
+      "prompt": "Use case: background-extraction.\nAsset type: independent stash/supply chest cutout for a layered Overlook camp.\nInput image 1 is the EDIT TARGET. Isolate the two open rough timber stash chests exactly as arranged: larger front chest and its open angled lid, rear smaller chest, broad imperfect planks, dark iron straps, loop handles, dark cloth contents. Preserve this elevated three-quarter perspective and original asymmetry, scale relationship and weathering. Remove all cavern ground, rocks, tree/poles, surrounding campfire glow and the unrelated barrel in the upper right.\nGenuinely transparent background, entire chest group with generous transparent margins and no cut-off lid. Keep only small neutral foot/contact shadows, no floor patch. Muted realistic painted dark-fantasy materials, no gold piles, luxury ornament, people, writing or labels. The chest must feel used and under-resourced, not broken or freshly manufactured.",
+      "transparent": true,
+      "refs": [
+        "E:/GitHub/Depths/art/source/overlook-v1/stash-reference.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-83b532f4-eb69-433b-b162-37eb461f4efa.png",
+      "source": "art/source/overlook-v1/stash-master.png",
+      "sha256": "6a359d820ae2dafcc7cdd6189dfffca8bd459d2ee86fc564a04d593d32684aeb",
+      "registration": {
+        "source_bounds": [
+          85,
+          84,
+          1529,
+          949
+        ],
+        "native_canvas": [
+          526,
+          340
+        ],
+        "content_offset": [
+          4,
+          15
+        ],
+        "content_size": [
+          518,
+          310
+        ],
+        "source_scale": 0.3587257617728532,
+        "rect": [
+          116,
+          326,
+          263,
+          170
+        ]
+      },
+      "hero_visual_id": "",
+      "export": "res://art/camp/overlook-v1/sites/stash.png",
+      "export_sha256": "aa3c165e2d6a0159a5bc5b91305b846383099df41dd4df5176bf738f24cdb0ae",
+      "reference_records": [
+        {
+          "path": "art/source/overlook-v1/stash-reference.png",
+          "sha256": "2bf410816245810d6650f056da4d64f42a3d91207bbb007b8660a5d772281966"
+        }
+      ]
+    },
+    {
+      "id": "survey",
+      "prompt": "Use case: background-extraction.\nAsset type: survey-table camp prop with transparent background.\nInput image 1 is the EDIT TARGET. Extract the existing crooked timber survey table, its legs and cross braces, small stool, two small timber boxes under/beside it, old parchment route sheet, plain cup and map weights. Keep their original relative positions, the same elevated three-quarter camera and right-side tabletop angle. The parchment is weathered and largely blank with indistinct charcoal smudges, no legible writing. Preserve irregular plank ends, worn edges and hand-built proportions, no refined cabinetry. Remove ALL surrounding cavern, rocks and ground; no rectangular floor patch, no extra people, no lantern or luminous marks. Neutral subdued painted cave lighting, small contact shadows only. Complete group on genuinely transparent canvas with margins, nothing clipped.",
+      "transparent": true,
+      "refs": [
+        "E:/GitHub/Depths/art/source/overlook-v1/survey-reference.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-1f93a35f-f321-4cb7-8b41-3b32d1bf8633.png",
+      "source": "art/source/overlook-v1/survey-master.png",
+      "sha256": "f52ce31b88e80f6803b6d9d2d5eef760306c3433bb2f89148ed5382c2e4bf5e3",
+      "registration": {
+        "source_bounds": [
+          46,
+          82,
+          1486,
+          1004
+        ],
+        "native_canvas": [
+          490,
+          340
+        ],
+        "content_offset": [
+          4,
+          15
+        ],
+        "content_size": [
+          482,
+          309
+        ],
+        "source_scale": 0.3347222222222222,
+        "rect": [
+          710,
+          305,
+          245,
+          170
+        ]
+      },
+      "hero_visual_id": "",
+      "export": "res://art/camp/overlook-v1/sites/survey.png",
+      "export_sha256": "da19caea103db1804ca09c575b1f257ad082096c2074465bb98571cac9f2e0d8",
+      "reference_records": [
+        {
+          "path": "art/source/overlook-v1/survey-reference.png",
+          "sha256": "bd08684bdb36c4c522bd8d11abe41258ba1a7c9ab1134481abe71ccd56d711c4"
+        }
+      ]
+    },
+    {
+      "id": "firepit",
+      "prompt": "Use case: precise-object-edit.\nAsset type: unlit campfire furniture layer, genuinely transparent background.\nInput image 1 is the EDIT TARGET. Preserve the exact elevated three-quarter arrangement of the rough stone fire ring and the four blocky sitting stones around it. REMOVE all flames, orange glow, embers, surrounding floor and cave rock. In the centre retain dark charred short sticks and ash inside the ring, with no light emission. Keep the sitting stones' individual irregular shapes and spacing from the reference. Dark neutral grey slate, dirty chipped edges, detailed painted dark fantasy materials. This is one independent reusable furniture group, no people, no new props or writing. Fully transparent exterior with natural tiny contact shadows, no opaque ground rectangle. Complete all four sitting stones, ring and charred logs with transparent padding.",
+      "transparent": true,
+      "refs": [
+        "E:/GitHub/Depths/art/source/overlook-v1/firepit-reference.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-9d0fda3d-1b9b-42be-ac78-81e81c79e31a.png",
+      "source": "art/source/overlook-v1/firepit-master.png",
+      "sha256": "4d4bcd89bae2e76cb74050de87f82fceab9b42f2b4bd4baa52c7a974f32f90d3",
+      "registration": {
+        "source_bounds": [
+          92,
+          146,
+          1533,
+          906
+        ],
+        "native_canvas": [
+          540,
+          338
+        ],
+        "content_offset": [
+          4,
+          28
+        ],
+        "content_size": [
+          532,
+          281
+        ],
+        "source_scale": 0.3691880638445524,
+        "rect": [
+          380,
+          365,
+          270,
+          169
+        ]
+      },
+      "hero_visual_id": "",
+      "export": "res://art/camp/overlook-v1/sites/firepit.png",
+      "export_sha256": "a3d582cc0a18eb21df4c52818bf6df753a4be8b6732e777fa37881fcf4a911ee",
+      "reference_records": [
+        {
+          "path": "art/source/overlook-v1/firepit-reference.png",
+          "sha256": "6c3b61902cd8ebc5bb892a60349a5d7150a56a8078ff2abcaa15bc8293fcd334"
+        }
+      ]
+    },
+    {
+      "id": "supplies",
+      "prompt": "Use case: background-extraction.\nAsset type: loose supply cluster for the foreground of the approved Overlook.\nInput image 1 is the EDIT TARGET. Extract the small rough open timber supply crate with bundled short lengths of firewood and two uneven spare planks leaning diagonally across it. Preserve the low elevated three-quarter view and weathered wood. The entire little cluster should be complete, with modest asymmetry and believable construction, not shattered debris. Remove ALL rock, ground, distant camp parts and orange ground illumination. No weapons, people, labels, badges or new objects. Fully transparent exterior and transparent canvas margins; only tiny neutral contact shadow at its feet. Dark gritty painterly materials matching the selected camp.",
+      "transparent": true,
+      "refs": [
+        "E:/GitHub/Depths/art/source/overlook-v1/supplies-reference.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-d4e176c5-a91a-43f6-9825-c01bff1bdd5a.png",
+      "source": "art/source/overlook-v1/supplies-master.png",
+      "sha256": "9dfd8bb46d969ea56a2e70256cf1d3a2722c85f63d4b0ec4a865fc12d484fdbb",
+      "registration": {
+        "source_bounds": [
+          227,
+          74,
+          1624,
+          859
+        ],
+        "native_canvas": [
+          548,
+          286
+        ],
+        "content_offset": [
+          26,
+          4
+        ],
+        "content_size": [
+          495,
+          278
+        ],
+        "source_scale": 0.354140127388535,
+        "rect": [
+          151,
+          500,
+          274,
+          143
+        ]
+      },
+      "hero_visual_id": "",
+      "export": "res://art/camp/overlook-v1/sites/supplies.png",
+      "export_sha256": "2dd73a70992375ddd9fe36c136182bb7171a3058a79667e38879b2703349b74b",
+      "reference_records": [
+        {
+          "path": "art/source/overlook-v1/supplies-reference.png",
+          "sha256": "ab53bd03154aa891aac065d3e9c704c76b500bd8cc816049ba67755d1736fe17"
+        }
+      ]
+    },
+    {
+      "id": "flame",
+      "prompt": "Use case: stylized-concept.\nAsset type: isolated campfire FLAME overlay, transparent background.\nCreate only a modest low campfire flame mass for the charred logs in the attached Overlook firepit. Input image 1 is a style/scale reference, not the output background. The flame has several irregular tongues, a warm amber/orange outer body and small pale golden core at its base; it is 1.2 times as tall as it is wide. Painterly realistic dark-fantasy fire, restrained, no explosive flare, no flying sparks. Bottom centre is the origin; fully transparent around the flames with soft natural luminous edge. No rocks, logs, coals, smoke, people, floor, backdrop, text or light pool. The whole flame fits with generous transparent margins. It will be animated subtly by a shader and placed on a separate unlit firepit.",
+      "transparent": true,
+      "refs": [
+        "E:/GitHub/Depths/art/source/overlook-v1/firepit-reference.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-ac6f4c9b-4291-40bf-93d8-1e9080c16069.png",
+      "source": "art/source/overlook-v1/flame-master.png",
+      "sha256": "558d40bb504a765bc84c47e4bfd2ef807a2c838330394053fd1343a2d9eb2dc0",
+      "registration": {
+        "source_bounds": [
+          292,
+          173,
+          872,
+          1158
+        ],
+        "native_canvas": [
+          98,
+          122
+        ],
+        "content_offset": [
+          15,
+          4
+        ],
+        "content_size": [
+          67,
+          114
+        ],
+        "source_scale": 0.11573604060913706,
+        "rect": [
+          468,
+          375,
+          49,
+          61
+        ]
+      },
+      "hero_visual_id": "",
+      "export": "res://art/camp/overlook-v1/fx/flame.png",
+      "export_sha256": "6f593533c46c489f727891e136a0b2f415674f179c1548fb043e2739ebe7accb",
+      "reference_records": [
+        {
+          "path": "art/source/overlook-v1/firepit-reference.png",
+          "sha256": "6c3b61902cd8ebc5bb892a60349a5d7150a56a8078ff2abcaa15bc8293fcd334"
+        }
+      ]
+    },
+    {
+      "id": "lantern",
+      "prompt": "Use case: stylized-concept.\nAsset type: small independent hanging oil lantern for the approved Overlook camp.\nInput image 1 is a STYLE reference for worn timber and dark painted materials, not a background to reproduce. Paint one modest old iron oil lantern, its four-sided glass housing viewed from a slightly elevated three-quarter angle. Dented irregular dark iron frame, soot-marked cloudy glass, small loop handle on top, low steady wick glow inside. An ordinary practical lamp, not ornate treasure; no symbols or writing. Complete lantern isolated with transparent padding on a truly transparent background. No pole, hook, table, ground, broad halo, people or backdrop. Local glow will be a separate engine layer. Keep its light subdued and the iron readable in the dark.",
+      "transparent": true,
+      "refs": [
+        "E:/GitHub/Depths/art/source/overlook-v1/survey-reference.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-ed8143d5-5a1e-4977-943f-c887f7d99561.png",
+      "source": "art/source/overlook-v1/lantern-master.png",
+      "sha256": "d2dcdc976d6484f2809ae46a4c3d7ec771b7936c90e95647e0112b054c1bae33",
+      "registration": {
+        "source_bounds": [
+          191,
+          33,
+          996,
+          1298
+        ],
+        "native_canvas": [
+          44,
+          72
+        ],
+        "content_offset": [
+          4,
+          7
+        ],
+        "content_size": [
+          36,
+          57
+        ],
+        "source_scale": 0.04472049689440994,
+        "rect": [
+          638,
+          213,
+          22,
+          36
+        ]
+      },
+      "hero_visual_id": "",
+      "export": "res://art/camp/overlook-v1/sites/lantern.png",
+      "export_sha256": "91eb63541ebceb80494a1212c18a5a1569d58fc6dd23be937286e99f6cb1ea63",
+      "reference_records": [
+        {
+          "path": "art/source/overlook-v1/survey-reference.png",
+          "sha256": "bd08684bdb36c4c522bd8d11abe41258ba1a7c9ab1134481abe71ccd56d711c4"
+        }
+      ]
+    },
+    {
+      "id": "corin-equipment",
+      "prompt": "Use case: identity-preserve.\nAsset type: full-body seated companion activity, transparent cutout.\nInput image 1 is the project-generated Corin appearance reference. Preserve the bald head, broad self-assured face, stocky muscular build, brown padded leather vest and plain off-white shirt. Input image 2 is only a reference for the Overlook's elevated camera and painted materials.\nShow this adult man seated on a low invisible seat, feet planted and body turned three-quarter toward the viewer's left. He is calmly checking the buckles and straps of a small plain leather travel pack held across his knees, both hands visibly occupied with a strap. Relaxed concentration, shoulders down, no action gesture. Dark worn trousers and practical boots. Match the camp's roughly 35-degree downward viewing angle and dark gritty painterly finish.\nOnly the complete man and small pack, on genuine transparent background with margins around all extremities. No seat, rocks, ground, cave scenery, other people, writing, armour ornament or additional equipment. Neutral dim cave lighting. No new identity, costume or portrait system design is requested.",
+      "transparent": true,
+      "refs": [
+        "E:/GitHub/Depths/art/portraits/main-heroes-v1/corin/preview.png",
+        "E:/GitHub/Depths/art/concepts/descent-completion-v1/overlook-concept.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-4e5305e1-5236-46a9-b282-82d2fd4fcaef.png",
+      "source": "art/source/overlook-v1/corin-equipment-master.png",
+      "sha256": "54d880f8c2eafd43ebc6904e51b8e72c5bc96367e7b960afddd6c8f9b87e757a",
+      "registration": {
+        "source_bounds": [
+          107,
+          69,
+          971,
+          1470
+        ],
+        "native_canvas": [
+          224,
+          336
+        ],
+        "content_offset": [
+          11,
+          4
+        ],
+        "content_size": [
+          202,
+          328
+        ],
+        "source_scale": 0.23411848679514632,
+        "rect": [
+          557,
+          356,
+          112,
+          168
+        ]
+      },
+      "hero_visual_id": "corin",
+      "export": "res://art/camp/overlook-v1/companions/corin-equipment.png",
+      "export_sha256": "161cd9b3b4915dd4740c2199ead339677613e9c0c8ec49ab18159b13042441e2",
+      "reference_records": [
+        {
+          "path": "art/portraits/main-heroes-v1/corin/preview.png",
+          "sha256": "3546ca23be4fe8a1b5d6da43f68ceb9f6530e31dd8923e321678ed3f891ca3e6"
+        },
+        {
+          "path": "art/concepts/descent-completion-v1/overlook-concept.png",
+          "sha256": "ed9101e4bc72670faf86372560c895b292e65fa10827c4141cf03f4ea730de76"
+        }
+      ]
+    },
+    {
+      "id": "mara-warming",
+      "prompt": "Use case: identity-preserve.\nAsset type: full-body camp companion cutout, hands warming, transparent background.\nInput image 1 is the existing project-generated Mara appearance reference: adult woman with tied-back dark brown hair and loose strands, a practical plain brown tunic with a simple belt. Preserve this face/hair/costume direction. Input image 2 supplies ONLY the approved Overlook's elevated camera and dark painterly material style.\nPaint her seated on a low invisible seat, viewed from above at roughly 35 degrees, three-quarter body facing toward the viewer's RIGHT. Lean forward gently with BOTH hands extended, palms toward an unseen fire just to her right. Relaxed and tired but comfortable, shoulders lowered, practical dark trousers and worn boots. Keep the gesture clear at small camp scale.\nComplete figure and hands on GENUINELY TRANSPARENT background with ample clear margins. No chair, stool, fire, rock, floor, camp scenery, other people, writing or new costume ornament. No backdrop gradient, vignette, halo or rectangular shadow; the surrounding canvas is completely empty alpha, including between limbs. Neutral diffuse cave illumination on the character itself, with fire glow supplied separately by the engine.",
+      "transparent": true,
+      "refs": [
+        "E:/GitHub/Depths/art/portraits/mara-neutral-v1/preview.png",
+        "E:/GitHub/Depths/art/concepts/descent-completion-v1/overlook-concept.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-46a62922-336d-4464-a8b4-c42c489f4cac.png",
+      "source": "art/source/overlook-v1/mara-warming-master.png",
+      "sha256": "685e6a24e7d27c1811dca10c2f9e8f52a0c3d440c08345244735efa79f1b8bb1",
+      "registration": {
+        "source_bounds": [
+          253,
+          25,
+          1171,
+          1192
+        ],
+        "native_canvas": [
+          336,
+          336
+        ],
+        "content_offset": [
+          39,
+          4
+        ],
+        "content_size": [
+          258,
+          328
+        ],
+        "source_scale": 0.2810625535561268,
+        "rect": [
+          330,
+          350,
+          168,
+          168
+        ]
+      },
+      "hero_visual_id": "mara",
+      "export": "res://art/camp/overlook-v1/companions/mara-warming.png",
+      "export_sha256": "469340aeee8163f3bd5516b0cee0454f58bcf0414b51a85c8329945ca18bf1dc",
+      "reference_records": [
+        {
+          "path": "art/portraits/mara-neutral-v1/preview.png",
+          "sha256": "ebfc7cb2e5911f5d32b1997483afd85d64a2f7f76225ff5241310b42b6b41fd7"
+        },
+        {
+          "path": "art/concepts/descent-completion-v1/overlook-concept.png",
+          "sha256": "ed9101e4bc72670faf86372560c895b292e65fa10827c4141cf03f4ea730de76"
+        }
+      ]
+    },
+    {
+      "id": "alwen-reading",
+      "prompt": "Use case: identity-preserve.\nAsset type: seated full-body camp companion activity cutout, reading.\nInput image 1 is the existing project-generated Alwen appearance reference: adult woman, loosely wrapped grey headscarf over dark brown hair, serious thoughtful face, dark grey-brown practical cloak and simple layered linen clothing. Preserve these cues. Input image 2 is ONLY the approved Overlook's painterly style and elevated camera reference.\nShow her seated compactly on a low invisible bed edge, seen from above at roughly 35 degrees, body turned three-quarter toward the viewer's left. A small worn open book lies in both hands above her lap. Head bent slightly to read, feet on the ground, posture quietly absorbed. Plain boots and dark skirt/trousers beneath the cloak. The pages have faint indistinct marks but no legible text. Whole person, hands, book and feet visible.\nGenuinely transparent empty canvas with margins. NO bench, bed, rock, floor, scenery, other people, light pool, background gradient, vignette, glow halo, jewellery, holy symbols or invented costume ornament. Natural dim neutral diffuse illumination only on the figure. Detailed dark gritty game painting, a quiet activity rather than a new portrait.",
+      "transparent": true,
+      "refs": [
+        "E:/GitHub/Depths/art/portraits/main-heroes-v1/alwen/preview.png",
+        "E:/GitHub/Depths/art/concepts/descent-completion-v1/overlook-concept.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-f451bc4c-e612-4c93-9ce0-0d5b4c8eed37.png",
+      "source": "art/source/overlook-v1/alwen-reading-master.png",
+      "sha256": "f84db9776f0d4be631ed32f8664775e5326f7eb7d6fc6a2eead8ffc6ad4f01fe",
+      "registration": {
+        "source_bounds": [
+          166,
+          94,
+          896,
+          1461
+        ],
+        "native_canvas": [
+          196,
+          310
+        ],
+        "content_offset": [
+          17,
+          4
+        ],
+        "content_size": [
+          161,
+          302
+        ],
+        "source_scale": 0.22092172640819313,
+        "rect": [
+          699,
+          316,
+          98,
+          155
+        ]
+      },
+      "hero_visual_id": "alwen",
+      "export": "res://art/camp/overlook-v1/companions/alwen-reading.png",
+      "export_sha256": "a9111aecf4d3561d77872c26415bc2688ca71dcc54a6a52b738bb356ae22421d",
+      "reference_records": [
+        {
+          "path": "art/portraits/main-heroes-v1/alwen/preview.png",
+          "sha256": "7a2582119c9e0244599a33f0f3bdc3a8e8e690f0ff05196e930957cfb2a7b75d"
+        },
+        {
+          "path": "art/concepts/descent-completion-v1/overlook-concept.png",
+          "sha256": "ed9101e4bc72670faf86372560c895b292e65fa10827c4141cf03f4ea730de76"
+        }
+      ]
+    },
+    {
+      "id": "fixer-planning",
+      "prompt": "Use case: identity-preserve.\nAsset type: standing full-body Fixer recruit camp activity cutout, planning a route.\nInput image 1 is the existing PROJECT-GENERATED Fixer-a portrait, not a new character brief: tousled dark hair with silver streaks, short moustache and pointed goatee, worn burgundy brocade coat with restrained gold stitching, ochre waistcoat, ivory shirt and simple dark neckcloth. Preserve those approved distinctive costume and face cues. Input image 2 supplies only the elevated Overlook camera and painterly materials.\nShow the same adult man standing casually and leaning forward slightly, seen from above at roughly 35 degrees, three-quarter body facing toward the viewer's right. One hand points downward and slightly right at an unseen waist-high survey map; the other rests near that same invisible tabletop. Both hands remain inside the image. Dark fitted practical trousers, travel boots, small plain satchel. A thoughtful knowing expression, quiet route-planning, no grand gesture.\nONLY the complete man on genuinely transparent canvas with padding. Do NOT draw the table, map, scenery, rocks, ground, seat or other people. Absolutely no background gradient, vignette, cast-light halo or opaque patch around the silhouette. Neutral cave illumination on the figure. No new jewellery, symbols, writing, names, effects or equipment bonuses. Match the dark gritty painted game world.",
+      "transparent": true,
+      "refs": [
+        "E:/GitHub/Depths/art/portraits/fixer-v1/fixer-a/preview.png",
+        "E:/GitHub/Depths/art/concepts/descent-completion-v1/overlook-concept.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-160e8ea2-e557-4ee0-82a0-c418f5161b72.png",
+      "source": "art/source/overlook-v1/fixer-planning-master.png",
+      "sha256": "9d37d01bfe21d3e8a04b067b2d3b71a8f76a8b5807fccf9c17273a72b1b2e9d8",
+      "registration": {
+        "source_bounds": [
+          0,
+          0,
+          967,
+          1499
+        ],
+        "native_canvas": [
+          302,
+          408
+        ],
+        "content_offset": [
+          22,
+          4
+        ],
+        "content_size": [
+          258,
+          400
+        ],
+        "source_scale": 0.266844563042028,
+        "rect": [
+          659,
+          245,
+          151,
+          204
+        ]
+      },
+      "hero_visual_id": "fixer-a",
+      "export": "res://art/camp/overlook-v1/companions/fixer-planning.png",
+      "export_sha256": "ed268b6ea93cccc76645485e2262e759ab500bc648e90f5f9e016b7a9a53388b",
+      "reference_records": [
+        {
+          "path": "art/portraits/fixer-v1/fixer-a/preview.png",
+          "sha256": "c2febb8f59ee4c83d77a8c9eebe298ee09498a0a8d4a452eab47474ebcbd142e"
+        },
+        {
+          "path": "art/concepts/descent-completion-v1/overlook-concept.png",
+          "sha256": "ed9101e4bc72670faf86372560c895b292e65fa10827c4141cf03f4ea730de76"
+        }
+      ]
+    },
+    {
+      "id": "mara-relaxing",
+      "prompt": "Use case: identity-preserve.\nAsset type: full-body relaxed companion cutout, transparent background.\nInput image 1 is the project-generated Mara identity reference: adult woman with tied-back dark brown hair and loose strands, plain brown travel tunic, practical dark trousers and worn boots. Keep those established face, hair and costume cues. Input image 2 is only an elevated-camera and painted-material reference from the Overlook.\nShow Mara relaxing after a long journey: reclining diagonally with legs stretched comfortably toward the lower right, ankles loosely crossed, weight supported on one forearm behind her while the other hand rests on her lap. Head slightly lowered, calm thoughtful expression, no smile required. View her from above at the camp's roughly 35-degree downward angle. Modest everyday clothing and ordinary comfortable posture, whole figure visible.\nOnly the complete woman on genuinely transparent empty canvas with generous margins. No bed, blanket, chair, rock, floor, cave, other people or backdrop. No gradient, vignette, coloured halo, light pool or shadow rectangle behind the figure. Neutral soft dim illumination only on her, detailed dark gritty painterly style. No writing, jewellery, effects or extra equipment.",
+      "transparent": true,
+      "refs": [
+        "E:/GitHub/Depths/art/portraits/mara-neutral-v1/preview.png",
+        "E:/GitHub/Depths/art/concepts/descent-completion-v1/overlook-concept.png"
+      ],
+      "original_path": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-f4798f0e-aac4-4055-afcd-d41747d15aef.png",
+      "source": "art/source/overlook-v1/mara-relaxing-master.png",
+      "sha256": "0865fecfd6818d66801e694e5a5e7897da62c44346898a6259174012c29938c1",
+      "registration": {
+        "source_bounds": [
+          42,
+          17,
+          1442,
+          1046
+        ],
+        "native_canvas": [
+          350,
+          238
+        ],
+        "content_offset": [
+          18,
+          4
+        ],
+        "content_size": [
+          313,
+          230
+        ],
+        "source_scale": 0.22351797862001943,
+        "rect": [
+          424,
+          268,
+          175,
+          119
+        ]
+      },
+      "hero_visual_id": "mara",
+      "export": "res://art/camp/overlook-v1/companions/mara-relaxing.png",
+      "export_sha256": "13918ff8869e0b9601185bc5f76e3a763ef1d29202e2e7b7cd3c47a7c2580b6b",
+      "reference_records": [
+        {
+          "path": "art/portraits/mara-neutral-v1/preview.png",
+          "sha256": "ebfc7cb2e5911f5d32b1997483afd85d64a2f7f76225ff5241310b42b6b41fd7"
+        },
+        {
+          "path": "art/concepts/descent-completion-v1/overlook-concept.png",
+          "sha256": "ed9101e4bc72670faf86372560c895b292e65fa10827c4141cf03f4ea730de76"
+        }
+      ]
+    }
+  ],
+  "source_manifest": "../../source/overlook-v1/generation.json"
+}

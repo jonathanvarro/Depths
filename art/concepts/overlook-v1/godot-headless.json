@@ -1,0 +1,9 @@
+{
+	"captures": [],
+	"checks": 160,
+	"failures": [],
+	"native_mouse_touch_keyboard": true,
+	"physical_iphone_tested": false,
+	"renderer": "mobile",
+	"uses_player_files": false
+}

@@ -1,0 +1,333 @@
+{
+  "canvas": [
+    1600,
+    900
+  ],
+  "selected_reference": "res://art/concepts/descent-completion-v1/overlook-concept.png",
+  "terrain": "res://art/camp/overlook-v1/terrain.png",
+  "layers": [
+    {
+      "id": "shelter",
+      "texture": "res://art/camp/overlook-v1/sites/shelter.png",
+      "rect": [
+        280,
+        142,
+        432,
+        230
+      ],
+      "z": 10,
+      "hero_visual_id": "",
+      "states": [
+        "provisioned",
+        "connected"
+      ]
+    },
+    {
+      "id": "stash",
+      "texture": "res://art/camp/overlook-v1/sites/stash.png",
+      "rect": [
+        116,
+        326,
+        263,
+        170
+      ],
+      "z": 20,
+      "hero_visual_id": "",
+      "states": [
+        "provisioned",
+        "connected"
+      ]
+    },
+    {
+      "id": "survey",
+      "texture": "res://art/camp/overlook-v1/sites/survey.png",
+      "rect": [
+        710,
+        305,
+        245,
+        170
+      ],
+      "z": 20,
+      "hero_visual_id": "",
+      "states": [
+        "provisioned",
+        "connected"
+      ]
+    },
+    {
+      "id": "firepit",
+      "texture": "res://art/camp/overlook-v1/sites/firepit.png",
+      "rect": [
+        380,
+        365,
+        270,
+        169
+      ],
+      "z": 16,
+      "hero_visual_id": "",
+      "states": [
+        "provisioned",
+        "connected"
+      ]
+    },
+    {
+      "id": "supplies",
+      "texture": "res://art/camp/overlook-v1/sites/supplies.png",
+      "rect": [
+        151,
+        500,
+        274,
+        143
+      ],
+      "z": 20,
+      "hero_visual_id": "",
+      "states": [
+        "connected"
+      ]
+    },
+    {
+      "id": "lantern",
+      "texture": "res://art/camp/overlook-v1/sites/lantern.png",
+      "rect": [
+        638,
+        213,
+        22,
+        36
+      ],
+      "z": 20,
+      "hero_visual_id": "",
+      "states": [
+        "connected"
+      ]
+    },
+    {
+      "id": "flame",
+      "texture": "res://art/camp/overlook-v1/fx/flame.png",
+      "rect": [
+        468,
+        375,
+        49,
+        61
+      ],
+      "z": 30,
+      "hero_visual_id": "",
+      "states": [
+        "provisioned",
+        "connected"
+      ]
+    },
+    {
+      "id": "corin-equipment",
+      "texture": "res://art/camp/overlook-v1/companions/corin-equipment.png",
+      "rect": [
+        557,
+        356,
+        112,
+        168
+      ],
+      "z": 23,
+      "hero_visual_id": "corin",
+      "states": [
+        "provisioned",
+        "connected"
+      ]
+    },
+    {
+      "id": "mara-warming",
+      "texture": "res://art/camp/overlook-v1/companions/mara-warming.png",
+      "rect": [
+        330,
+        350,
+        168,
+        168
+      ],
+      "z": 23,
+      "hero_visual_id": "mara",
+      "states": [
+        "provisioned",
+        "connected"
+      ]
+    },
+    {
+      "id": "alwen-reading",
+      "texture": "res://art/camp/overlook-v1/companions/alwen-reading.png",
+      "rect": [
+        699,
+        316,
+        98,
+        155
+      ],
+      "z": 23,
+      "hero_visual_id": "alwen",
+      "states": [
+        "provisioned",
+        "connected"
+      ]
+    },
+    {
+      "id": "fixer-planning",
+      "texture": "res://art/camp/overlook-v1/companions/fixer-planning.png",
+      "rect": [
+        659,
+        245,
+        151,
+        204
+      ],
+      "z": 14,
+      "hero_visual_id": "fixer-a",
+      "states": [
+        "provisioned",
+        "connected"
+      ]
+    },
+    {
+      "id": "mara-relaxing",
+      "texture": "res://art/camp/overlook-v1/companions/mara-relaxing.png",
+      "rect": [
+        424,
+        268,
+        175,
+        119
+      ],
+      "z": 23,
+      "hero_visual_id": "mara",
+      "states": [
+        "provisioned",
+        "connected"
+      ]
+    }
+  ],
+  "targets": [
+    {
+      "id": "mine",
+      "label": "Back to the mine",
+      "rect": [
+        24,
+        66,
+        215,
+        174
+      ],
+      "requires": []
+    },
+    {
+      "id": "stash",
+      "label": "Stash",
+      "rect": [
+        110,
+        321,
+        270,
+        180
+      ],
+      "requires": [
+        "stash"
+      ]
+    },
+    {
+      "id": "fire",
+      "label": "Talk by the fire",
+      "rect": [
+        389,
+        369,
+        261,
+        167
+      ],
+      "requires": [
+        "firepit"
+      ]
+    },
+    {
+      "id": "survey",
+      "label": "Survey table",
+      "rect": [
+        707,
+        301,
+        253,
+        179
+      ],
+      "requires": [
+        "survey"
+      ]
+    },
+    {
+      "id": "onward",
+      "label": "Toward the hold",
+      "rect": [
+        1105,
+        465,
+        257,
+        217
+      ],
+      "requires": []
+    }
+  ],
+  "states": [
+    "discovered",
+    "provisioned",
+    "connected"
+  ],
+  "max_present_companions": 3,
+  "still_phase": 0,
+  "runtime_bindings_changed": false,
+  "foreground_polygon": [
+    [
+      0,
+      690
+    ],
+    [
+      150,
+      600
+    ],
+    [
+      291,
+      615
+    ],
+    [
+      420,
+      704
+    ],
+    [
+      610,
+      628
+    ],
+    [
+      689,
+      548
+    ],
+    [
+      745,
+      512
+    ],
+    [
+      797,
+      502
+    ],
+    [
+      868,
+      475
+    ],
+    [
+      969,
+      523
+    ],
+    [
+      1050,
+      602
+    ],
+    [
+      1119,
+      683
+    ],
+    [
+      1242,
+      789
+    ],
+    [
+      1370,
+      900
+    ],
+    [
+      0,
+      900
+    ]
+  ]
+}

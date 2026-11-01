@@ -1,9 +1,10 @@
 # Descent library completion — #166 / #167 / #168 / #178 / #190
 
 [Interactive review](../art/concepts/descent-completion-v1/inspector.html).
+The selected Overlook now has a [separated production library and native interaction review](overlook-production-art.md).
 This is a standalone artwork delivery, ready for selection and Claude's hookup.
-The Overlook composition was selected by the owner on 2026-10-31; production
-layers remain to be authored. Named companion portraits (#181) are excluded at the owner's request.
+The Overlook composition was selected by the owner on 2026-10-31; its production
+layers are delivered in the linked follow-up. Named companion portraits (#181) are excluded from this batch.
 No live scene, item, theme, quest, save, flood or knowledge rules are changed.
 
 ## Black Reservoir
@@ -157,11 +158,11 @@ symbols/frame are editable SVG. Original project artwork is unchanged.
 
 Validation records accompany the gallery. Source exports pass 69 checks;
 Godot passes 810 headless checks and 817 checks including seven real captures.
-Browser review passes 154 checks across desktop and landscape-phone widths; physical iPhone
+Browser review passes 155 checks across desktop and landscape-phone widths; physical iPhone
 review and live gameplay integration remain separate.
 
 The optional deep smith material and dedicated floor-4 gate-stair variant were
 not drawn. #167's audio work remains outstanding. #190's composition is selected;
-production separation and live hookup remain outstanding;
+production separation is delivered separately in `docs/overlook-production-art.md`, with live hookup outstanding;
 the other libraries await owner review and live hookup. #181 named companion
 portraits remain deferred for the owner's research.

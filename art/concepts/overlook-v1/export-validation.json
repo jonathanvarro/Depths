@@ -1,0 +1,116 @@
+{
+  "checks": 39,
+  "failures": [],
+  "imagegen_outputs": 13,
+  "not_delivered": [
+    "corin-tending (service rejection; equipment-checking substitute supplied)"
+  ],
+  "textures": [
+    {
+      "path": "art/camp/overlook-v1/terrain.png",
+      "size": [
+        1600,
+        900
+      ],
+      "rgba_bytes": 5760000
+    },
+    {
+      "path": "art/camp/overlook-v1/companions/alwen-reading.png",
+      "size": [
+        196,
+        310
+      ],
+      "rgba_bytes": 243040
+    },
+    {
+      "path": "art/camp/overlook-v1/companions/corin-equipment.png",
+      "size": [
+        224,
+        336
+      ],
+      "rgba_bytes": 301056
+    },
+    {
+      "path": "art/camp/overlook-v1/companions/fixer-planning.png",
+      "size": [
+        302,
+        408
+      ],
+      "rgba_bytes": 492864
+    },
+    {
+      "path": "art/camp/overlook-v1/companions/mara-relaxing.png",
+      "size": [
+        350,
+        238
+      ],
+      "rgba_bytes": 333200
+    },
+    {
+      "path": "art/camp/overlook-v1/companions/mara-warming.png",
+      "size": [
+        336,
+        336
+      ],
+      "rgba_bytes": 451584
+    },
+    {
+      "path": "art/camp/overlook-v1/fx/flame.png",
+      "size": [
+        98,
+        122
+      ],
+      "rgba_bytes": 47824
+    },
+    {
+      "path": "art/camp/overlook-v1/sites/firepit.png",
+      "size": [
+        540,
+        338
+      ],
+      "rgba_bytes": 730080
+    },
+    {
+      "path": "art/camp/overlook-v1/sites/lantern.png",
+      "size": [
+        44,
+        72
+      ],
+      "rgba_bytes": 12672
+    },
+    {
+      "path": "art/camp/overlook-v1/sites/shelter.png",
+      "size": [
+        864,
+        460
+      ],
+      "rgba_bytes": 1589760
+    },
+    {
+      "path": "art/camp/overlook-v1/sites/stash.png",
+      "size": [
+        526,
+        340
+      ],
+      "rgba_bytes": 715360
+    },
+    {
+      "path": "art/camp/overlook-v1/sites/supplies.png",
+      "size": [
+        548,
+        286
+      ],
+      "rgba_bytes": 626912
+    },
+    {
+      "path": "art/camp/overlook-v1/sites/survey.png",
+      "size": [
+        490,
+        340
+      ],
+      "rgba_bytes": 666400
+    }
+  ],
+  "rgba_bytes": 11970752,
+  "approved_reference_unchanged": true
+}

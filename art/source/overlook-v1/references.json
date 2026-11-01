@@ -1,0 +1,39 @@
+{
+  "source": "art/concepts/descent-completion-v1/overlook-concept.png",
+  "canvas": [
+    1600,
+    900
+  ],
+  "crops": {
+    "shelter": [
+      270,
+      130,
+      715,
+      380
+    ],
+    "stash": [
+      110,
+      315,
+      395,
+      495
+    ],
+    "survey": [
+      700,
+      290,
+      970,
+      475
+    ],
+    "firepit": [
+      375,
+      360,
+      645,
+      530
+    ],
+    "supplies": [
+      140,
+      495,
+      440,
+      650
+    ]
+  }
+}

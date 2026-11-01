@@ -62,6 +62,14 @@ Templates > Download and Install; already installed on the owner's PC).
   No live bindings changed; #181 named companion
   portraits are deferred for owner research. Preserve controller-owned flood,
   identification, knowledge and expedition rules on hookup.
+- `docs/overlook-production-art.md` – #190's separated Overlook production set
+  in `art/camp/overlook-v1/scene.tscn`: clean terrain, six independent site groups,
+  five existing-design companion activities, local fire/lamp glow, distant haze
+  and exact still mode. Native mouse/touch/keyboard and phone safe-area review:
+  `art/concepts/overlook-v1/inspector.html`. `target_activated` reports a selection;
+  story, travel, storage and present-party mapping stay caller-owned. No live
+  camp/rules replaced. Corin checks a pack in place of a service-rejected sword
+  drawing. Named portrait work remains separate; never invent missing occupants.
 - `docs/cave-descent-and-quests.md` – proposed twelve-floor cave campaign and 48 activity concepts (#125), including quest packages, camp projects and story persistence. Read alongside #122/#123; floor count, lore and new mechanics are not approved or implemented.
 - `docs/boons-curses-and-gambling-review.md` – #134 audit of the #133 shrine system, costs/odds/durations, research and proposed improvements; recorded probes in `docs/boons-curses-review-data.json`. Reward bugs are #136/#137; #135 trinkets were in progress during review. Recommendations do not change live rules.
 - `AGENTS.md` / `CLAUDE.md` – shared assistant instructions and entry point.

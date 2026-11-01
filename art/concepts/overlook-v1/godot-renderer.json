@@ -1,0 +1,29 @@
+{
+	"captures": [
+		"discovered-1280.png",
+		"provisioned-1280.png",
+		"cold-camp-1280.png",
+		"connected-1280-normal.png",
+		"targets-1280-normal.png",
+		"connected-1278-normal.png",
+		"targets-1278-normal.png",
+		"connected-1278-larger.png",
+		"targets-1278-larger.png",
+		"connected-1334-larger.png",
+		"targets-1334-larger.png",
+		"connected-844-larger.png",
+		"targets-844-larger.png",
+		"connected-667-normal.png",
+		"targets-667-normal.png",
+		"focused-stash-1278.png",
+		"empty-party-1278.png",
+		"planning-resting-1278.png",
+		"effects-moving-1278.png"
+	],
+	"checks": 183,
+	"failures": [],
+	"native_mouse_touch_keyboard": true,
+	"physical_iphone_tested": false,
+	"renderer": "mobile",
+	"uses_player_files": false
+}
