@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-31 – ChatGPT (Overlook approval)
+- Did: Recorded the owner's explicit selection of the Overlook composition for #190, pinned the unchanged source/export in `art/concepts/descent-completion-v1/overlook-approval.json`, and updated the design, gallery and handoff. Underground refuges provide an earned pause after a major theme area, present-companion activities (sharpening, warming, reading, strategizing, relaxing), story, stash access and a glimpse of the next zone.
+- Next: Preserve this composition while authoring independent terrain, site, occupant and optional light layers; leave room for only the current party and coherent empty states. Named companion portraits still await owner research.
+- Watch out: Approval selects the composition, not completed production layers or live mechanics. No wear/repair upkeep, healing, buffs, time costs, travel/stash rules or new cast assigned. Existing Claude playtest/design/handoff changes were preserved and excluded from this commit.
+
 ## 2026-10-31 – ChatGPT (remaining artwork library)
 - Did: Started all requested remaining art batches except #181 named companion portraits. Added seventeen individual ImageGen masters with exact prompts/hashes: Reservoir wall/floor/ceiling, opaque water inset/wet stairs, vision/three ending cards/fire backdrop, six modular brew shapes and the connected Overlook camp concept. Added 28 native glyphs, six splash frames, a journal frame/26 actual-enemy silhouettes and an export-safe brew compositor with 216 distinct appearances. Review: `art/concepts/descent-completion-v1/inspector.html`; hookup and limits: `docs/descent-completion-art.md`. 69 source, 810 headless/817 renderer and 153 browser checks pass; seven actual Mobile captures and desktop/phone review frames retained.
 - Next: Owner reviews the Overlook composition before separate terrain/sites/state layers. Claude can connect the independent Reservoir/story/brew/symbol libraries, preserving existing controller rules. Named companion portraits wait for owner research. #167 audio and optional deep smith ore/gate-stair variant remain outstanding; issues stay open for review/hookup.

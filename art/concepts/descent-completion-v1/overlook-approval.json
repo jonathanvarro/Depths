@@ -1,0 +1,21 @@
+{
+  "approved_on": "2026-10-31",
+  "decision": "Owner selected this composition for the Overlook and underground-refuge direction",
+  "owner_quote": "the Overlook perfectly captures what I was thinking",
+  "source": "art/source/descent-completion-v1/overlook-master.png",
+  "source_sha256": "4ae1069ac1912b11038ddea98ff0726262099ee4dd932e2c1237e32f12c8456a",
+  "selected_export": "res://art/concepts/descent-completion-v1/overlook-concept.png",
+  "export_sha256": "ed9101e4bc72670faf86372560c895b292e65fa10827c4141cf03f4ea730de76",
+  "role": "A small rest area after beating a major theme area, with story, stash access and a glimpse of the next zone",
+  "present_companion_activities": [
+    "sharpening swords",
+    "warming by the fire",
+    "reading a book",
+    "strategizing",
+    "relaxing"
+  ],
+  "next": "Preserve this composition while separating terrain, sites, current-party occupants, foreground and optional local lighting",
+  "production_layers_complete": false,
+  "live_integration_changed": false,
+  "named_companion_portraits_deferred": true
+}

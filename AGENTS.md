@@ -55,8 +55,11 @@ Templates > Download and Install; already installed on the owner's PC).
   matched Reservoir surfaces, opaque water inset/wet stairs, vision and ending
   cards, fire backdrop, 216 layered brew appearances, journal/mastery/combat/map
   symbols and 26 enemy silhouettes. Review: `art/concepts/descent-completion-v1/inspector.html`.
-  The Overlook is a connected camp concept awaiting layout selection and later
-  terrain/site separation. No live bindings changed; #181 named companion
+  The Overlook composition is owner-approved (2026-10-31): an earned pause after
+  a major theme area, with present companions doing quiet activities, story,
+  stash access and a view toward the next region. Preserve the selected layout
+  during terrain/site/occupant separation; approval is recorded beside the art.
+  No live bindings changed; #181 named companion
   portraits are deferred for owner research. Preserve controller-owned flood,
   identification, knowledge and expedition rules on hookup.
 - `docs/cave-descent-and-quests.md` – proposed twelve-floor cave campaign and 48 activity concepts (#125), including quest packages, camp projects and story persistence. Read alongside #122/#123; floor count, lore and new mechanics are not approved or implemented.

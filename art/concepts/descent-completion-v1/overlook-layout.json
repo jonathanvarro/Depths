@@ -1,5 +1,5 @@
 {
-  "stage": "concept for owner review; no production layers or live hit areas",
+  "stage": "owner-selected composition, 2026-10-31; production separation pending; no live hit areas",
   "canvas": [1600, 900],
   "anchors_normalized": {
     "fire_conversation": [0.24, 0.34, 0.15, 0.20],
@@ -14,5 +14,7 @@
     "provisioned": "Selected shelter/fire/stash layers; the current painting proposes this composition",
     "connected": "Additional route rope, marker, supplied crates and optional local light layers after travel rules are approved"
   },
-  "limits": "No named occupants, shops, healing or travel costs assigned. Preserve expedition levels on underground arrival. Produce independent terrain/sites only after layout selection."
+  "companion_activity_plan": ["sharpening swords", "warming by the fire", "reading a book", "strategizing", "relaxing"],
+  "refuge_role": "Earned pause after beating a major theme area; take in the victory and story, access the stash, glimpse the next zone",
+  "limits": "Preserve the selected composition during independent terrain/site/occupant/light authoring. Show only the current party. No named occupants, shops, healing, buffs, wear/repair, activity time costs or travel/stash rules assigned. Preserve expedition levels on underground arrival."
 }

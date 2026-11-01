@@ -2,8 +2,8 @@
 
 [Interactive review](../art/concepts/descent-completion-v1/inspector.html).
 This is a standalone artwork delivery, ready for selection and Claude's hookup.
-The Overlook is a composition study; its production layers follow owner layout
-selection. Named companion portraits (#181) are excluded at the owner's request.
+The Overlook composition was selected by the owner on 2026-10-31; production
+layers remain to be authored. Named companion portraits (#181) are excluded at the owner's request.
 No live scene, item, theme, quest, save, flood or knowledge rules are changed.
 
 ## Black Reservoir
@@ -109,7 +109,7 @@ which entries are listed, keeps unencountered entries dark, and replaces or
 reveals detail only after meeting a monster. Do not invent weaknesses or expose
 undiscovered facts from the illustration catalogue.
 
-## Overlook concept
+## Overlook — selected composition, 2026-10-31
 
 `art/concepts/descent-completion-v1/overlook-concept.png` is a 1600×900 bird's-eye
 study of a continuous sheltered ledge above a distant goblin hold. Fire,
@@ -117,9 +117,19 @@ supply/stash, survey table and both paths belong to the same terrain. The
 gallery can outline proposed targets; `overlook-layout.json` records normalized
 anchors, future layers and discovered/provisioned/connected state intentions.
 
-The current painting proposes the provisioned composition. It is not separated
-terrain/site artwork and cannot yet hide individual sites. After owner layout
-selection, author a clean landscape, independent site/occupant/foreground
+The owner confirmed that this composition "perfectly captures what I was thinking".
+It is the selected reference for a small, earned refuge after beating a major
+theme area: time to absorb the victory, take in story, access the stash and
+glimpse the next zone. Present companions should inhabit the area through quiet
+activities: sharpening swords, warming by the fire, reading a book, strategizing
+or relaxing. Keep figures subordinate to the intimate camp and enormous vista;
+only current party members should appear. These are characterization activities,
+not new item wear/repair, stat bonuses, time costs or automatic recovery rules.
+
+`overlook-approval.json` pins the unchanged source and selected export hashes.
+The current painting depicts the provisioned composition. It is not separated
+terrain/site artwork and cannot yet hide individual sites. Preserve this selected
+layout while authoring a clean landscape, independent site/occupant/foreground
 layers and optional local glow, registered together. Keep the refuge coherent
 without people, supplies or services. No NPC roster, shop, free treatment,
 travel costs or deeper camp count is assigned. Underground arrival preserves
@@ -147,10 +157,11 @@ symbols/frame are editable SVG. Original project artwork is unchanged.
 
 Validation records accompany the gallery. Source exports pass 69 checks;
 Godot passes 810 headless checks and 817 checks including seven real captures.
-Browser review passes 153 checks across desktop and landscape-phone widths; physical iPhone
+Browser review passes 154 checks across desktop and landscape-phone widths; physical iPhone
 review and live gameplay integration remain separate.
 
 The optional deep smith material and dedicated floor-4 gate-stair variant were
-not drawn. #167's audio work remains outstanding. #190 stays at concept review;
+not drawn. #167's audio work remains outstanding. #190's composition is selected;
+production separation and live hookup remain outstanding;
 the other libraries await owner review and live hookup. #181 named companion
 portraits remain deferred for the owner's research.
