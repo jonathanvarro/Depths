@@ -1,0 +1,71 @@
+{
+  "date": "2026-10-31",
+  "issues": [
+    194,
+    195
+  ],
+  "assets": [
+    {
+      "id": "riveted-mining-coat",
+      "prompt": "Use case: precise-object-edit. Edit the supplied equipment illustration for Depths. This image is the EDIT TARGET. Preserve its recognizable item design, overall silhouette, pose/orientation, materials, broad palette, restrained painted pixel-art style and transparent background. Keep the entire isolated object inside the canvas. The owner likes the design but finds the craftsmanship too symmetrical, smooth and clean. Make a restrained, visible handworked roughness pass, with irregularities readable at 128px: broad physical construction differences, not a uniform noise/grunge filter. Remain practical, serviceable and structurally sound. No new props, people, text, emblem, UI border, glowing effects, blood, major holes or exaggerated damage. These permanent material/construction details do not depict a durability or repair system. Genuine transparent background, preserve alpha. Vary the shoulder plate outlines slightly left versus right; one shoulder sits modestly lower. Make chest plates subtly different widths with uneven hand-cut edges, a few small hammer dents and imperfectly spaced rivets. Stagger leather strap lengths and buckle placement. Show uneven stitching, ingrained soot at seams and elbows, a modest old linen patch on ONE elbow, and an uneven but intact cloth hem. Reduce polished metal edge brightness. Keep the existing broad heavy mining coat and ochre padding; do not turn it into broken armour or change it into another type.",
+      "input": "E:/GitHub/Depths/art/source/early-equipment-v1/riveted-mining-coat-master.png",
+      "tool": "built-in image_gen",
+      "input_role": "edit target",
+      "status": "revised candidate; review pending",
+      "original_generated": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-b3386c57-c63f-4bce-bb61-b3013795dff8.png",
+      "source": "art/source/equipment-handworked-v1/riveted-mining-coat-master.png",
+      "sha256": "83d02f22b1e4c481ee28b0da5688f37cca0ebd1b9c61f6d223a142dfdbc6d007",
+      "input_sha256": "85add933e8c9489f6bad7d359d8c9bc006ebb1c5ffbeef58619ee0a8f552c5c9",
+      "export_sha256": "afed6c4c9b7c8dd6e67a2c36285cf2e5dbee30631170c3f92d50f4d430e9cf50",
+      "registration": {
+        "source_bounds": [
+          27,
+          52,
+          1228,
+          1215
+        ],
+        "scale": 0.093255620316403,
+        "offset": [
+          8,
+          10
+        ]
+      }
+    },
+    {
+      "id": "garrison-spear",
+      "prompt": "Use case: precise-object-edit. Edit the supplied equipment illustration for Depths. This image is the EDIT TARGET. Preserve its recognizable item design, overall silhouette, pose/orientation, materials, broad palette, restrained painted pixel-art style and transparent background. Keep the entire isolated object inside the canvas. The owner likes the design but finds the craftsmanship too symmetrical, smooth and clean. Make a restrained, visible handworked roughness pass, with irregularities readable at 128px: broad physical construction differences, not a uniform noise/grunge filter. Remain practical, serviceable and structurally sound. No new props, people, text, emblem, UI border, glowing effects, blood, major holes or exaggerated damage. These permanent material/construction details do not depict a durability or repair system. Genuine transparent background, preserve alpha. The shaft should read as hand-shaped timber rather than a perfectly cylindrical manufactured rod: modest natural waviness while remaining nearly straight and usable, a few broad grain ridges and a smoothed small knot. Make grip wrapping uneven, iron socket bands slightly mismatched, and the leaf-shaped head subtly asymmetric with irregular hand-forged bevels, small hammer marks and a couple of restrained oxidation patches. Preserve the long spear, broad leaf point and muted oxblood grip; no banana bend, large cracks, splinters, broken point or big added barbs.",
+      "input": "E:/GitHub/Depths/art/source/early-equipment-v1/garrison-spear-master.png",
+      "tool": "built-in image_gen",
+      "input_role": "edit target",
+      "status": "revised candidate; review pending",
+      "original_generated": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-f6a94bb2-8d38-4283-ba34-5b53b70326eb.png",
+      "source": "art/source/equipment-handworked-v1/garrison-spear-master.png",
+      "sha256": "daeebf76f50e354354587f0dd879bb0649ec1808e4011877b95af24d9ef90877",
+      "input_sha256": "383c69da14f7eea28e0b95c8e2f4e348d157a5c0b961f9cf77e6f92be1dca6cb",
+      "export_sha256": "2b8e00848e32ffcec4213b3305fe4c6dc445ca17c86c48fa0add4afc8da0c884",
+      "registration": {
+        "source_bounds": [
+          57,
+          17,
+          1235,
+          1238
+        ],
+        "scale": 0.09172809172809172,
+        "offset": [
+          10,
+          8
+        ]
+      }
+    },
+    {
+      "id": "notched-falchion",
+      "prompt": "Use case: precise-object-edit. Edit the supplied equipment illustration for Depths. This image is the EDIT TARGET. Preserve its recognizable item design, overall silhouette, pose/orientation, materials, broad palette, restrained painted pixel-art style and transparent background. Keep the entire isolated object inside the canvas. The owner likes the design but finds the craftsmanship too symmetrical, smooth and clean. Make a restrained, visible handworked roughness pass, with irregularities readable at 128px: broad physical construction differences, not a uniform noise/grunge filter. Remain practical, serviceable and structurally sound. No new props, people, text, emblem, UI border, glowing effects, blood, major holes or exaggerated damage. These permanent material/construction details do not depict a durability or repair system. Genuine transparent background, preserve alpha. Keep the same broad curved falchion, grip and asymmetric guard. Give the blade an uneven hand-ground bevel instead of a perfectly continuous glossy strip, subtle hammer depressions and sparse small dark oxidation spots near the spine. Its cutting edge is still serviceable, with a couple of tiny irregular nicks, not serrations. Make the leather/cloth grip wrapping a little uneven with one coarse old binding stitch. Slightly imperfect guard riveting and dull steel reflections. Preserve its silhouette, balance, length and ordinary base identity; do not add spikes or make it ruined.",
+      "input": "E:/GitHub/Depths/art/source/early-equipment-v1/notched-falchion-master.png",
+      "tool": "built-in image_gen",
+      "input_role": "edit target",
+      "status": "image service rejected edit (violence category); no revised output",
+      "original_generated": null,
+      "source": null
+    }
+  ]
+}

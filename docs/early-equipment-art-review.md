@@ -17,6 +17,22 @@ names/IDs with Claude's #192/#193 migration before binding it.
 
 ## Design direction
 
+**Owner feedback · 2026-10-31:** the full set is liked and workable, but its
+symmetry, clean manufacture, smooth metal edges and straight uniform spear
+shaft feel too perfect for this world. Future refinement should add restrained
+handwork and material irregularity: mismatched plate outlines/fastenings,
+uneven stitching, hand-ground bevels, natural timber grain and modest waviness,
+ingrained seam dirt and sparse oxidation. Retain useful silhouettes and ordinary
+serviceability; avoid identical scratches everywhere or a blanket grunge filter.
+This is permanent visual character, with no use-driven deterioration mechanic.
+
+[Compare two representative revisions](../art/concepts/equipment-handworked-v1/inspector.html):
+the Riveted Mining Coat and Garrison Spear. Originals remain preserved; these
+studies are not applied across all 22 designs. The coat shows the stronger end
+of the pass and should not set a requirement for dents/patches on every item.
+The image service rejected the falchion edit with a violence-category error;
+its prompt/failure is recorded and its original retained without a substitute.
+
 Mine equipment uses ordinary work materials: warm hazel/ash timber, brown
 leather, ochre quilting and dull soot iron. Five weapon silhouettes distinguish
 a straight blade, rectangular hammer, narrow spear, open sling and crooked staff.

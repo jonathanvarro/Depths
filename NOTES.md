@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-31 – ChatGPT (handworked finish)
+- Did: Recorded owner feedback that the equipment designs are liked but too symmetrical/clean. Added two comparative ImageGen edits (Riveted Mining Coat and Garrison Spear), preserving originals and exact prompts/source hashes. Review: `art/concepts/equipment-handworked-v1/inspector.html`; guidance in `docs/early-equipment-art-review.md`. Validated candidate padding, alpha, palette and unchanged originals.
+- Next: Use restrained handwork/material irregularity in subsequent refinement; the coat is the stronger end, not a requirement for damage/patches everywhere. These are two samples, not a completed 22-item finish pass.
+- Watch out: Falchion edit was rejected by the image service (violence category); original retained, no replacement claimed. No deterioration rules or live bindings changed. Unrelated opening-playthrough changes remain untouched.
+
 ## 2026-10-31 – ChatGPT (equipment artwork)
 - Did: Created the complete 22-design Cave & Mine / Goblin Territory shape-review set for #194/#195: sixteen new individual ImageGen masters and six safely retained designs. Each has a 128px candidate, preserved source/prompt/hash and advisory stable-ID comparison. Regional contact sheets and an interactive gallery compare native/64/32px, greyscale, silhouettes, dark/parchment and the existing backpack proportions. Review: `art/concepts/early-equipment-v1/inspector.html`; handoff/audit: `docs/early-equipment-art-review.md`. Export and browser checks pass.
 - Next: Owner selects/refines ordinary base shapes; then promote selected icons, explicitly reconcile working names with Claude's #192/#193 stable IDs, bind and check real Pack/merchant/loot. Both art issues remain In Progress because selection/live review is pending.
