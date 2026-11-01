@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-10-31 – ChatGPT (named companion tasks)
+- Did: Created #197 branna, #198 nessa, #199 maelin, #200 rook portrait/reuse tasks and #201 for the broader named roster, regional introductions and Vessa/Orren/Iven/Sael proposals. Linked all to #180/#181; first four are selected for development, not final likeness/biography approval. Rook audits the approved male Fixer rig first.
+- Next: Develop/review the written identity and introduction briefs, then selected neutral portraits and fitted native192 rigs. Use the broader plan as input to docs/named-cast.md; no new story canon, trait values or recruitment assignment was made.
+- Watch out: No art/gameplay changes or Claude session launched. Existing keeper/commander and alternative starting-hero rules remain; local-only references stay private. Concurrent Overlook layers, equipment/gameplay changes and Claude's handoff are untouched.
+
 ## 2026-10-31 – ChatGPT (Overlook approval)
 - Did: Recorded the owner's explicit selection of the Overlook composition for #190, pinned the unchanged source/export in `art/concepts/descent-completion-v1/overlook-approval.json`, and updated the design, gallery and handoff. Underground refuges provide an earned pause after a major theme area, present-companion activities (sharpening, warming, reading, strategizing, relaxing), story, stash access and a glimpse of the next zone.
 - Next: Preserve this composition while authoring independent terrain, site, occupant and optional light layers; leave room for only the current party and coherent empty states. Named companion portraits still await owner research.
