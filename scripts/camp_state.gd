@@ -62,7 +62,7 @@ const CONTRACTS := [
 ## How many recruits wait at the fire (#41).
 const CANDIDATES := 3
 ## Roles that stand in the front row.
-const FRONT_ROLES := ["Warden", "Brawler"]
+const FRONT_ROLES := ["Melee"]  # the classes (#179); older Wardens and Brawlers count too
 
 var day := 1
 ## Story-controlled physical sites (#108). Missing keys preserve today's
@@ -106,6 +106,8 @@ var floor2_reached := 0  # older saves' count, from when only floor 2 had a rout
 ## the highest level any hero has taken (recruits join one below it).
 var xp_left := Progression.FLOOR_XP_LIMIT.duplicate()
 var best_level := 1
+## The monster journal (#176): name -> what the party knows. See bestiary.gd.
+var bestiary := {}
 ## Quests and story flags (#123): id -> {"stage", "flags"}; see quests.gd.
 var quests := {}
 ## Smith work unlocked by quests (resource paths), sold after SMITH_STOCK.
@@ -177,9 +179,9 @@ func _fill_fire(party = null) -> void:
 				faces.append(person.portrait_set.resource_path)
 		# At least one of the three can hold the front (balance report).
 		var role := ""
-		if candidates.size() == candidate_count(party) - 1 and not candidates.any(func(c: Companion): return c.role in FRONT_ROLES):
+		if candidates.size() == candidate_count(party) - 1 and not candidates.any(func(c: Companion): return load("res://scripts/classes.gd").of(c.role) in FRONT_ROLES):
 			role = FRONT_ROLES[rng.randi_range(0, FRONT_ROLES.size() - 1)]
-		var recruit: Companion = Recruits.make(rng, _used_names, faces, maxi(1, best_level - 1), role)
+		var recruit: Companion = Recruits.make(rng, _used_names, faces, 1, role)  # levels start each expedition (#172)
 		_used_names.append(recruit.display_name)
 		candidates.append(recruit)
 

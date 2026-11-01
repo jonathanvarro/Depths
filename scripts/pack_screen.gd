@@ -576,7 +576,7 @@ func _refresh_details() -> void:
 		if item.slot=="back":_detail_text.add_child(_wrapped("Worn: "+Equipment.back_text(item),17))
 		elif item.effect:_detail_text.add_child(_wrapped("Worn: "+item.effect.effects_text(),17))
 		for line in GearModel.card_lines(item):_detail_text.add_child(_wrapped(line,17))  # mastery and growth (#192)
-		_action("Wear" if item.slot=="trinket" else "Equip","equip",_equip_reason(item.slot))
+		_action("Wear" if item.slot=="trinket" else "Equip","equip",_equip_reason(item.slot,null,item))
 	else:
 		var charm:Equipment=Trinkets.for_treasure(item) if item.effect==SupplyItem.Effect.TREASURE else null
 		if charm:
@@ -617,11 +617,12 @@ func _use_target(item: SupplyItem) -> String:
 			return "For "+_selected_hero.display_name+" · %d time" % item.use_time if _selected_hero else ""
 	return ""
 
-func _equip_reason(slot: String,hero: Companion = null) -> String:
+func _equip_reason(slot: String,hero: Companion = null,item: Equipment = null) -> String:
 	if hero==null:hero=_selected_hero
 	if hero==null or hero not in _party.members or not hero.is_alive():return "Needs a conscious hero"
 	var held:Equipment=hero.get(slot)
 	if held and held.curse:return "Cursed · holy water or the nurse can lift it"
+	if item:return load("res://scripts/classes.gd").refuses(hero,item)  # #179
 	return ""
 
 func _unequip_reason() -> String:

@@ -10,6 +10,9 @@ const Ambience := preload("res://scripts/ambience.gd")
 const Recruits := preload("res://scripts/recruits.gd")
 const Trinkets := preload("res://scripts/trinkets.gd")
 const GearGen := preload("res://scripts/gear_gen.gd")
+const Bestiary := preload("res://scripts/bestiary.gd")
+const Classes := preload("res://scripts/classes.gd")
+const Brews := preload("res://scripts/brews.gd")
 const GearModel := preload("res://scripts/gear_model.gd")
 const TURN_LEFT_ICON := preload("res://art/ui/controls-v1/turn-left.svg")
 const SPADE := preload("res://data/items/spade.tres")
@@ -499,6 +502,8 @@ func _ready() -> void:
 	_party.bumped.connect(func(_cell): _play_effect(environment_theme.bump_sound))
 	_party.panicked.connect(_on_party_panicked)
 	_party_state.changed.connect(_on_party_state_changed)
+	_party_state.brew_revealed.connect(_reveal_floor)  # a revealing brew (#175)
+	Brews.refresh(_party_state.supplies)
 	_on_party_state_changed(false)  # note starting states without announcing them
 	add_child(_party)
 	_party.setup(CELL_SIZE)
@@ -869,6 +874,8 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 		hero.fight_ended()  # fight-long boons and banes count down (#133)
 	_fight_memories(state, result)
 	_award_mastery(state, result)
+	if not _in_opening:
+		Bestiary.record(_camp_state, state, _depth)  # the monster journal (#176)
 	for foe in state.foes:
 		if foe.health <= 0:
 			_expedition.add_defeated(foe.type.display_name)
@@ -916,6 +923,7 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 			else:
 				_say("fight_won", true, false, _any_voice())
 			_newly_ready.clear()
+			_offer_level_ups.call_deferred()  # #172
 			_update_hints("fight_over")
 			if _in_opening:
 				_on_opening_fight_won()
@@ -1041,25 +1049,57 @@ func _fight_xp(state) -> int:
 			for foe in state.foes:
 				if not foe.is_alive():
 					threat += foe.type.threat
-			amount = _camp_state.take_floor_xp(_depth, threat * Progression.XP_PER_THREAT)
+			amount = threat * Progression.XP_PER_THREAT  # no floor limits: levels last a trip (#172)
 	return amount
 
 
-## Everyone with the party gets the full award; anyone below the camp's
-## benchmark (one level under its best) gets it twice until they catch up.
-func _grant_xp(amount: int, quiet := false) -> void:
-	var benchmark: int = Progression.THRESHOLDS[maxi(1, _camp_state.best_level - 1)] if _camp_state.best_level > 1 else 0
+## Everyone with the party gets the full award (a smaller party's isn't
+## split). Level-ups are chosen there and then (#172).
+func _grant_xp(amount: int, _quiet := false) -> void:
 	for hero: Companion in _party_state.members:
 		if not hero.is_with_party():
 			continue
-		var extra := clampi(benchmark - hero.xp, 0, amount)
 		var was_ready := Progression.ready_to_advance(hero)
-		hero.xp += amount + extra
+		hero.xp += amount
 		if not was_ready and Progression.ready_to_advance(hero):
 			_newly_ready.append(hero)  # they say so after the fight (#118)
-			if not quiet:
-				_show_message("%s is ready to advance - choose at camp." % hero.display_name)
 		hero.emit_changed()
+
+
+## A revealing brew (#175): every room and corridor of this floor shows on
+## the map (not what's in them).
+func _reveal_floor() -> void:
+	if _map == null:
+		return
+	for y in _map.height:
+		for x in _map.width:
+			var cell := Vector2i(x, y)
+			if _map.is_passable(cell):
+				_map.reveal_around(cell)
+	_minimap.queue_redraw()
+	_full_map_view.queue_redraw()
+
+
+## Level-ups underground (#172): after a fight, each hero who's ready picks a
+## talent or an attribute point, one question at a time.
+func _offer_level_ups() -> void:
+	if _in_opening or _prompt.visible or _ending:
+		return
+	for hero: Companion in _party_state.members:
+		if not hero.is_with_party() or not Progression.ready_to_advance(hero):
+			continue
+		var options := Progression.choices(hero)
+		if options.is_empty():
+			Progression.advance(hero, "")
+			continue
+		var answers: Array = []
+		for option in options:
+			var id: String = option[0]
+			answers.append(["%s: %s" % [option[1], option[2]], func():
+				_camp_state.advance(hero, id)
+				_offer_level_ups.call_deferred()])
+		_choose("%s reaches level %d. Choose one:" % [hero.display_name, hero.level + 1], answers)
+		return
 
 
 # --- Gear mastery (#192/#193, owner 2026-10-31) -----------------------------
@@ -1545,7 +1585,7 @@ func _end_expedition(ending: int) -> void:
 	_party.locked = true  # after closing overlays, which unlock on close
 	var notes := {
 		Expedition.Ending.RETURNED: "You stagger out into the daylight, alone." if _in_opening else "You climb out into the daylight.",
-		Expedition.Ending.WIPED: "Everyone falls, and everything they carried is lost. Recruits don't come back; a main hero wakes at camp, badly hurt. New companions wait by the fire.",
+		Expedition.Ending.WIPED: "Everyone falls, and everything they carried and wore is lost. Recruits don't come back; a main hero wakes at camp, badly hurt, in the camp's plain spare kit. New companions wait by the fire.",
 		Expedition.Ending.REACHED_BOTTOM: "You stood where the others fell, and lived to climb back.",
 	}
 	if ending == Expedition.Ending.WIPED:
@@ -1635,6 +1675,9 @@ func _camp_loop(reward := 0, note := "") -> void:
 	_party_state.field_binds = 0
 	_camp.visible = false
 	_camp_state.leave_behind(_party_state)
+	for hero: Companion in _party_state.members:
+		Progression.reset(hero)  # a fresh expedition starts at level 1 (#172)
+	Brews.shuffle(_party_state.supplies, _rng.randi())  # new looks for the brews (#175)
 	_expedition = Expedition.new(_party_state, _expedition.number + 1)
 	for key: String in _said.keys():
 		if key.contains(":"):
@@ -1669,7 +1712,21 @@ func _main_heroes_wake_at_camp() -> void:
 		if hero.is_unconscious():
 			hero.health = 1
 			hero.add_injury(DEBUG_INJURIES[0])  # a deep wound
+			_lose_worn_gear(hero)
 			hero.emit_changed()
+
+
+## A wipe loses what the heroes wore too, mastery and all (#174, owner
+## 2026-10-30); the camp hands out a plain spare kit. Story progress, routes
+## and the stash are untouched.
+func _lose_worn_gear(hero: Companion) -> void:
+	var kit: Array = GearModel.fallback_kit(hero)
+	hero.weapon = kit[0]
+	hero.body = kit[1]
+	hero.back = null
+	hero.trinket = null
+	hero.refresh_stats()
+	hero.health = clampi(hero.health, 1, hero.max_health)
 
 
 ## Camp changes (buying, hiring, resting) save once things settle.
@@ -1803,6 +1860,10 @@ func _restore(data: Dictionary) -> void:
 		SaveGame.unpack_into(map, pair[1])
 		_floors[pair[0]] = map
 	_floor_started = true
+	for hero in _party_state.members + _camp_state.candidates + _camp_state.left_behind:
+		Classes.migrate(hero)  # roles become the four classes (#179)
+		hero.refresh_stats()
+	Brews.refresh(_party_state.supplies)  # this expedition's looks (#175)
 	_party_state.changed.emit()
 	_party_state.supplies.changed.emit()
 	_refresh_cards()
@@ -3341,6 +3402,8 @@ func _on_combat_enemy_acted(_foe, _outcome: Dictionary) -> void:
 
 ## Fight 3: her blows glance off; after a swing or two, the throw is taught.
 func _on_combat_hero_acted(_hero: Companion, action: Dictionary, outcome: Dictionary) -> void:
+	if action["kind"] == "brew":
+		_show_message(outcome["text"])  # what the thrown brew did (#175)
 	if not _in_opening or _opening_fights_done != OPENING_FIGHTS.size() - 1:
 		return
 	if action["kind"] != "attack":
@@ -3850,16 +3913,16 @@ func _on_party_blocked(cell: Vector2i) -> void:
 	if tool and _depth != FORTRESS_DEPTH:
 		_ask("Something chokes the passage. Clear it with the %s? (%d time)" % [tool.display_name.to_lower(), CLEAR_PASSAGE_TIME], _clear_passage.bind(cell))
 		return
-	# A Brawler heaves the rubble aside without a tool (#101).
-	var brawler: Companion = null
+	# A Fixer clears blockages without a tool (#179; once the Brawler's).
+	var fixer: Companion = null
 	for hero: Companion in _party_state.living_members():
-		if hero.role == "Brawler":
-			brawler = hero
+		if hero.role == "Fixer":
+			fixer = hero
 			break
-	if brawler and _depth != FORTRESS_DEPTH:
-		_ask("Something chokes the passage. %s could heave it aside. (%d time)" % [brawler.display_name, CLEAR_PASSAGE_TIME], _clear_passage.bind(cell))
+	if fixer and _depth != FORTRESS_DEPTH:
+		_ask("Something chokes the passage. %s knows how to shift it. (%d time)" % [fixer.display_name, CLEAR_PASSAGE_TIME], _clear_passage.bind(cell))
 		return
-	_show_message(environment_theme.blocked_message + ("" if _depth == FORTRESS_DEPTH else " A spade or a pick would clear it - or a Brawler."))
+	_show_message(environment_theme.blocked_message + ("" if _depth == FORTRESS_DEPTH else " A spade or a pick would clear it - or a Fixer."))
 
 
 ## Hacks through a blocked passage with a spade or pick (#133).

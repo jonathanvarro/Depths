@@ -6,7 +6,9 @@ extends RefCounted
 ## The game starts with a lone survivor; the other slots fill later
 ## (recruitment at the campfire, #17).
 
+const Classes := preload("res://scripts/classes.gd")
 signal changed
+signal brew_revealed  # a revealing brew was drunk: show the floor's rooms (#175)
 
 const GearModel := preload("res://scripts/gear_model.gd")
 const Supplies := preload("res://scripts/supplies.gd")
@@ -71,7 +73,7 @@ func pack_extra() -> int:
 		if member.back:
 			extra += member.back.pack_slots
 		if member.role == "Brawler" and member.is_alive():
-			extra += BRAWLER_PACK
+			extra += BRAWLER_PACK  # only an unmigrated save's; classes (#179) have none
 	return extra
 
 
@@ -85,7 +87,7 @@ func has_role(role: String) -> bool:
 const WARDEN_CALM := 0.85
 
 func steady_members() -> void:
-	var calm := WARDEN_CALM if has_role("Warden") else 1.0
+	var calm := WARDEN_CALM if has_role("Warden") else 1.0  # an unconverted Warden only: classes (#179) have no such perk
 	for member in members:
 		member.party_calm = calm
 
@@ -215,6 +217,8 @@ func equip(hero: Companion, item: Equipment) -> void:
 	# Cursed weapons and armour won't come off (2026-10-22).
 	if (item.slot == "body" and hero.body and hero.body.curse) or (item.slot == "weapon" and hero.weapon and hero.weapon.curse):
 		return
+	if Classes.refuses(hero, item) != "":
+		return  # #179: what the class may wear
 	supplies.gear.erase(item)
 	if item.slot == "body":  # armour (#93)
 		if hero.body:
@@ -350,6 +354,12 @@ func cannot_use_reason(item: SupplyItem, in_combat := false, recipient: Companio
 		return "Not during a fight"
 	if supplies.count(item) <= 0 and not (item.effect == SupplyItem.Effect.REFILL_LANTERN and supplies.open_flask > 0.0):
 		return "None left"
+	if item.effect == SupplyItem.Effect.BREW:
+		if in_combat:
+			return "Throw it at a foe"
+		if living_members().is_empty():
+			return "No one to drink it"
+		return ""
 	if recipient != null and item.effect in [SupplyItem.Effect.HEAL_ONE, SupplyItem.Effect.DRESS_INJURY, SupplyItem.Effect.LIFT_BANE]:
 		if recipient not in members:
 			return "That hero is not in the party"
@@ -402,6 +412,9 @@ func use_item(item: SupplyItem, in_combat := false, recipient: Companion = null)
 	if cannot_use_reason(item, in_combat, recipient) != "":
 		return ""
 	match item.effect:
+		SupplyItem.Effect.BREW:  # #175: drinking is the test
+			var drinker := recipient if recipient != null and recipient.is_alive() else (most_hurt() if most_hurt() != null and most_hurt().is_alive() else living_members()[0])
+			return load("res://scripts/brews.gd").drink(self, item, drinker)
 		SupplyItem.Effect.REFILL_LANTERN:
 			supplies.refill(item)
 		SupplyItem.Effect.FEED_PARTY:

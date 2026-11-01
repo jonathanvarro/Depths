@@ -69,7 +69,7 @@ func _initialize() -> void:
 	# The fire: three recruits with a role, strength and weakness.
 	var camp = main._camp_state
 	check("three recruits by the fire", camp.candidates.size() == 3)
-	check("each has a role, strength and weakness", camp.candidates.all(func(c): return c.role in ["Warden", "Scout", "Brawler", "Fixer"] and c.strength != "" and c.weakness != "" and c.portrait != null))
+	check("each has a role, strength and weakness", camp.candidates.all(func(c): return c.role in ["Melee", "Scout", "Mage", "Fixer"] and c.strength != "" and c.weakness != "" and c.portrait != null))
 	# A Fixer has only a placeholder silhouette until its faces arrive (#163).
 	var faced: Array = camp.candidates.filter(func(c): return c.role != "Fixer")
 	var sets: Array = faced.map(func(c): return c.portrait_set)

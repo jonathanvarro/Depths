@@ -30,7 +30,9 @@ func _initialize() -> void:
 	check("bell wire: rings, no harm", bell.sprung.alarm and bell.sprung.health == 0)
 	check("snare: a limp", snare.sprung.injury != null and snare.sprung.injury.display_name == "Limp")
 	check("dart: 3 damage", dart.sprung.health == -3)
-	check("Trap sense is a Scout's level-4 talent; Mara keeps Slip the web", "trap_sense" in Progression.TALENTS["Scout"][4].map(func(t): return t[0]) and "slip_web" in Progression.TALENTS["Rogue"][4].map(func(t): return t[0]))
+	var a_scout := Companion.new()
+	a_scout.role = "Scout"
+	check("Trap sense comes with the Scout class; Slip the web is a level-4 talent", a_scout.has_talent("trap_sense") and "slip_web" in Progression.TALENTS["Scout"][4].map(func(t): return t[0]))
 
 	# In the game: a floor with a trap, and Mara without keen eyes.
 	var main = load("res://scenes/main.tscn").instantiate()
@@ -44,6 +46,7 @@ func _initialize() -> void:
 	var ps = main._party_state
 	var mara: Companion = ps.living_members()[0]
 	mara.trait_id = ""  # without her keen eyes, spotting is down to the light
+	mara.role = "Melee"  # ...and not a Scout, who always spots them (#179)
 	var map = main._map
 	var trap_cell := Vector2i(-1, -1)
 	for y in map.height:

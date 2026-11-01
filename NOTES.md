@@ -28,6 +28,24 @@ Format:
 - Next: Preserve this composition while authoring independent terrain, site, occupant and optional light layers; leave room for only the current party and coherent empty states. Named companion portraits still await owner research.
 - Watch out: Approval selects the composition, not completed production layers or live mechanics. No wear/repair upkeep, healing, buffs, time costs, travel/stash rules or new cast assigned. Existing Claude playtest/design/handoff changes were preserved and excluded from this commit.
 
+## 2026-10-31 – Claude (expedition loop and the four classes)
+- Did (DESIGN.md "The expedition loop and classes — built 2026-10-31"):
+  - **#172:** `Progression.reset()` runs on each departure from camp (`main._camp_loop`, and the bot); thresholds 25/70/140; no floor limits. `main._offer_level_ups()` asks after a won fight. `Companion.raised` and `base_guard_factor` let a reset undo attribute points and Bulwark.
+  - **#174:** `main._lose_worn_gear()` and `GearModel.fallback_kit()`.
+  - **#175:** `scripts/brews.gd`, five `data/items/brew_*.tres` (`SupplyItem.Effect.BREW`, `brew`). The looks live on `Supplies.brew_looks`/`brews_known`. Icons use ChatGPT's `art/items/brews-v1/compose.gd`. Throw buttons are in the fight's Item menu (`CombatState.hero_throw_brew`, `put_to_sleep`).
+  - **#176:** `scripts/bestiary.gd`, `CampState.bestiary`, `CombatState.seen_moves`; a Monsters button in `quest_log.gd`.
+  - **#177:** `CombatState._taste_blood()` runs in `enemy_act`.
+  - **#179:** `scripts/classes.gd` holds the class skills, the old-role mapping and wearing rules (`Classes.refuses`). Companion `has_talent` counts class skills. The main heroes' `.tres` roles are changed, saves migrate in `_restore`, the Fixer clears rubble, and the Brawler's pack slots and the Warden's calm are retired.
+  - **Tests:** a new `tools/expedition_loop_check.gd`, and old-role checks updated.
+- Next:
+  - The named cast (#180): needs the owner's resurrection rules.
+  - Mage spells (#170).
+  - The journal could use ChatGPT's `art/ui/expedition-v1` frame and silhouettes.
+- Watch out:
+  - Brew items are shared resources renamed in place, and `Brews.item()` holds them in `Engine` meta so they aren't reloaded plain.
+  - Level-ups use the yes/no prompt (`_choose`); any check that expects no prompt after a win must answer it first.
+  - XP is still the full amount for everyone; "a pair half each" in DESIGN waits for the owner.
+
 ## 2026-10-31 – Claude (playtest fixes, equipment phases 3 and 4)
 - Did:
   - **Equipment phase 2:** `scripts/gear_model.gd`; items roll from `data/equipment`; older gear converts once.

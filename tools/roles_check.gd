@@ -1,9 +1,9 @@
 extends SceneTree
-## Exploring perks by role (#101, owner 2026-10-25): a Brawler carries 2
-## more and heaves rubble aside without a tool; a standing Warden steadies
-## everyone's nerves (15% slower); a Fixer gets 25% more for treasure, 10%
-## off at the merchant, and one more recruit by the fire. Each recruit's
-## card says what they bring. Args: tag, screenshot dir.
+## Exploring perks by class (#101, then the four classes #179, owner
+## 2026-10-31): a Melee hero has more health; a Fixer gets 25% more for
+## treasure, 10% off at the merchant, one more recruit by the fire, and
+## clears rubble without a tool. Each recruit's card says what they bring.
+## Args: tag, screenshot dir.
 
 const Recruits := preload("res://scripts/recruits.gd")
 const CampState := preload("res://scripts/camp_state.gd")
@@ -37,28 +37,16 @@ func _initialize() -> void:
 	# The Fixer, a new recruit role.
 	var fixer := _recruit("Fixer")
 	check("a Fixer can be recruited, with lines of their own", fixer.role == "Fixer" and fixer.dialogue != null and fixer.dialogue.lines.has("need_light") and fixer.row == "back")
-	check("every role's card says what they bring", ["Warden", "Scout", "Brawler", "Fixer"].all(func(r): return Recruits.perk(r) != ""))
+	check("every class's card says what they bring", ["Melee", "Scout", "Mage", "Fixer"].all(func(r): return Recruits.perk(r) != ""))
+	check("an older role asks for its class (#179)", _recruit("Brawler").role == "Melee" and _recruit("Warden").role == "Melee")
 
-	# Brawler: a strong back.
+	# Melee: armour and health.
 	var party = _party(["mara"])
-	party.update_capacity()
-	var alone: int = party.supplies.capacity
-	party.add_member(_recruit("Brawler"))
-	party.update_capacity()
-	check("a Brawler carries 2 more", party.supplies.capacity == alone + party.PACK_SLOTS_PER_HERO * 0 + 2 or party.supplies.capacity == maxi(party.PACK_MINIMUM, party.PACK_SLOTS_PER_HERO * 2) + 2, "%d -> %d" % [alone, party.supplies.capacity])
-
-	# Warden: steady presence.
-	party = _party(["mara"])
-	party.update_capacity()
-	var mara: Companion = party.members[0]
-	mara.strain = 0.0
-	mara.change_strain(20.0)
-	var plain: float = mara.strain
-	party.add_member(_recruit("Warden"))
-	party.update_capacity()
-	mara.strain = 0.0
-	mara.change_strain(20.0)
-	check("with a Warden standing, nerves fray 15% slower", is_equal_approx(mara.strain, plain * 0.85), "%.2f vs %.2f" % [mara.strain, plain])
+	var melee := _recruit("Melee")
+	var as_scout: Companion = melee.duplicate()
+	as_scout.role = "Scout"
+	as_scout.refresh_stats()
+	check("a Melee hero has 4 more health", melee.max_health == as_scout.max_health + 4, "%d vs %d" % [melee.max_health, as_scout.max_health])
 
 	# Fixer: an eye for value.
 	party = _party(["mara"])
@@ -87,12 +75,11 @@ func _initialize() -> void:
 	main._go_to_floor(2, main.Arrival.FROM_ABOVE)
 	await process_frame
 	main._on_party_blocked(main._party.cell)
-	check("no tool, no Brawler: the rubble stays", not main._prompt.visible)
-	ps.add_member(_recruit("Brawler"))
-	main._on_party_blocked(main._party.cell)
-	check("a Brawler offers to heave it aside", main._prompt.visible and main._prompt_label.text.contains("heave"), main._prompt_label.text)
-	main._answer_prompt(false)
+	check("no tool, no Fixer: the rubble stays", not main._prompt.visible)
 	ps.add_member(_recruit("Fixer"))
+	main._on_party_blocked(main._party.cell)
+	check("a Fixer offers to shift it (#179)", main._prompt.visible and main._prompt_label.text.contains("shift"), main._prompt_label.text)
+	main._answer_prompt(false)
 	main._end_expedition(main.Expedition.Ending.RETURNED)
 	await process_frame
 	main._results.continue_pressed.emit()

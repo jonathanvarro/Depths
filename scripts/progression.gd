@@ -3,18 +3,20 @@ extends RefCounted
 ## research, docs/stats-monsters-xp-research.md).
 ##
 ## Levels 1-4 in the cave: a talent choice at levels 2 and 4, +1 attribute
-## at level 3, +2 maximum health each level. Level-ups are chosen at camp.
-## Everyone active gets the full XP of a fight; each floor only teaches so
-## much fight XP over the whole campaign (the cave regenerates daily), with
-## one-off awards for the gate, the queen and clearing the cave.
+## at level 3, +2 maximum health each level. Everyone active gets the full
+## XP of a fight, with one-off awards for the gate, the queen and clearing
+## the cave.
+##
+## Levels last one expedition (#172, owner 2026-10-30/31): every departure
+## from the surface starts at level 1, levels come quickly, and the choices
+## are made underground after a fight. Personality, role, scars, memories
+## and gear mastery stay. An underground camp keeps the expedition going.
 
 ## Total XP needed to reach level 2, 3 and 4 (index = current level).
-const THRESHOLDS := [0, 0, 80, 220, 440]
+const THRESHOLDS := [0, 0, 25, 70, 140]
 const MAX_LEVEL := 4
 const XP_PER_THREAT := 4
-## Fight XP each floor can give over the whole campaign.
-## Level 4 is reachable before the queen (owner, 2026-10-19, #49): the
-## floors and the gate offer 490 of the 440 needed; she can be a quest.
+## Retired by #172 (levels reset each expedition); kept so old saves load.
 const FLOOR_XP_LIMIT := {1: 60, 2: 90, 3: 150, 4: 150, 5: 160, 6: 170}
 const GATE_XP := 40
 const QUEEN_XP := 80
@@ -23,18 +25,27 @@ const CLEARED_XP := 40
 const ATTRIBUTES := {"stat_str": "Strength", "stat_dex": "Dexterity", "stat_vit": "Vitality", "stat_res": "Resolve"}
 const ATTRIBUTE_CAP := 4
 
-## Two talents to choose from at levels 2 and 4, by role: [id, name, effect].
+## Two talents to choose from at levels 2 and 4, by class (#179): [id, name,
+## effect]. A Scout's Sharp ears and Trap sense are now standard skills.
+## Older role keys stay below for old saves' recruits.
 const TALENTS := {
+	"Melee": {
+		2: [["bulwark", "Bulwark", "Defending takes only 15% of a blow"], ["heavy_hands", "Heavy hands", "+1 damage"]],
+		4: [["iron_hide", "Iron hide", "Every blow does 1 less"], ["berserker", "Berserker", "+2 damage while below half health"]],
+	},
+	"Mage": {
+		2: [["steady_hands", "Steady hands", "Dressings also heal 4"], ["steel_nerves", "Steel nerves", "Strain builds 20% slower"]],
+		4: [["triage", "Triage", "Two dressing-free bindings a trip"], ["herbalist", "Herbalist", "Healing items heal another 25%"]],
+	},
 	"Warden": {
 		2: [["bulwark", "Bulwark", "Defending takes only 15% of a blow"], ["stalwart", "Stalwart", "+4 maximum health"]],
 		4: [["iron_hide", "Iron hide", "Every blow does 1 less"], ["steel_nerves", "Steel nerves", "Strain builds 20% slower"]],
 	},
 	"Scout": {
-		# A Scout's own (owner, 2026-10-25): Sharp ears in place of Deadeye
-		# (#73; hearing fights first is a skill to unlock, not for everyone),
-		# then Slip past (which needs it) or Trap sense (#94).
-		2: [["sharp_ears", "Sharp ears", "Hears some fights before they notice the party"], ["quick_hands", "Quick hands", "Acts sooner (+2 speed)"]],
-		4: [["slip_past", "Slip past", "Leads the party quietly past a fight Sharp ears heard"], ["trap_sense", "Trap sense", "Always spots traps"]],
+		# Sharp ears and Trap sense come with the class (#179); Slip past
+		# builds on hearing fights first.
+		2: [["deadeye", "Deadeye", "+5% to hit"], ["quick_hands", "Quick hands", "Acts sooner (+2 speed)"]],
+		4: [["slip_past", "Slip past", "Leads the party quietly past a fight Sharp ears heard"], ["slip_web", "Slip the web", "Webs never stick"]],
 	},
 	"Fixer": {  # #101: modest in a fight
 		2: [["deadeye", "Deadeye", "+5% to hit"], ["quick_hands", "Quick hands", "Acts sooner (+2 speed)"]],
@@ -53,7 +64,7 @@ const TALENTS := {
 		4: [["triage", "Triage", "Two dressing-free bindings a trip"], ["herbalist", "Herbalist", "Healing items heal another 25%"]],
 	},
 }
-const DEFAULT_ROLE := "Brawler"
+const DEFAULT_ROLE := "Melee"
 
 
 static func xp_for_next(hero: Companion) -> int:
@@ -88,6 +99,7 @@ static func advance(hero: Companion, choice: String) -> bool:
 	hero.level += 1
 	if choice in ATTRIBUTES:
 		hero.set(choice, hero.get(choice) + 1)
+		hero.raised.append(choice)  # undone when the expedition ends (#172)
 	elif choice != "":
 		hero.talents.append(choice)
 	hero.refresh_stats()
@@ -111,6 +123,22 @@ static func auto_advance(hero: Companion) -> void:
 				pick = best
 		if not advance(hero, pick):
 			break
+
+
+## A fresh expedition (#172): back to level 1, the talents and attribute
+## points of the last one undone. Everything else about the hero stays.
+static func reset(hero: Companion) -> void:
+	if not hero.uses_stats:
+		return
+	for key in hero.raised:
+		hero.set(key, hero.get(key) - 1)
+	hero.raised.clear()
+	hero.talents.clear()
+	hero.level = 1
+	hero.xp = 0
+	hero.refresh_stats()
+	hero.health = mini(hero.health, hero.max_health)
+	hero.emit_changed()
 
 
 static func talent_name(id: String) -> String:

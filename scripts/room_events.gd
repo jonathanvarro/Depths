@@ -17,6 +17,8 @@ const CHIP_ICONS := {
 const BOON_ICONS := {false: preload("res://art/ui/boons-v1/boon.png"), true: preload("res://art/ui/boons-v1/bane.png")}
 
 ## Supplies found by any choice, for the expedition record (#17).
+const Classes := preload("res://scripts/classes.gd")
+const Brews := preload("res://scripts/brews.gd")
 signal loot_found(loot: Dictionary)
 signal gold_found(amount: int)
 
@@ -169,7 +171,8 @@ func resolve(party, choice: EventChoice, forced := -1, flags: Array = []) -> Dic
 		notes.append("lantern %s" % ("refilled" if outcome.oil > 0 else "spilled"))
 		chip.call(CHIP_ICONS["oil"].icon, "+" if outcome.oil > 0 else "-", outcome.oil > 0, null)
 	var loot: Dictionary = outcome.loot.duplicate()
-	for i in outcome.treasure:
+	var finds: int = outcome.treasure + (Classes.FIXER_TREASURE if outcome.treasure > 0 and party.has_role("Fixer") else 0)  # #179
+	for i in finds:
 		var find: SupplyItem = random_treasure(depth)
 		loot[find] = loot.get(find, 0) + 1
 	if not loot.is_empty():
@@ -179,6 +182,10 @@ func resolve(party, choice: EventChoice, forced := -1, flags: Array = []) -> Dic
 		if fits < loot[item]:
 			result["no_room"][item] = loot[item] - fits
 		notes.append("found %s ×%d" % [item.display_name.to_lower(), loot[item]])
+		if Brews.is_brew(item) and fits > 0:
+			var sniffed: String = Brews.on_found(party, item)
+			if sniffed != "":
+				notes.append(sniffed.trim_suffix("."))
 		chip.call(item.icon, "×%d" % loot[item] if item.icon else "%s ×%d" % [item.display_name, loot[item]], true, null)
 	if outcome.gold > 0:
 		party.supplies.gold += outcome.gold
@@ -211,6 +218,8 @@ func resolve(party, choice: EventChoice, forced := -1, flags: Array = []) -> Dic
 
 ## One valuable fit for `floor_depth`, picked by weight.
 func random_treasure(floor_depth: int) -> SupplyItem:
+	if randf() < Brews.FIND_CHANCE:  # an unknown brew (#175)
+		return Brews.item(Brews.KINDS[randi_range(0, Brews.KINDS.size() - 1)])
 	var pool := TREASURE.filter(func(t): return t[1] <= maxi(1, floor_depth))
 	var total := 0
 	for entry in pool:

@@ -38,7 +38,7 @@ func _initialize() -> void:
 	var corin: Companion = ps.members[0]
 	var mara: Companion = ps.members[1]
 	var alwen: Companion = ps.members[2]
-	check("heroes keep their numbers", corin.max_health == 26 and mara.max_health == 20 and alwen.max_health == 18 and is_equal_approx(mara.accuracy, 0.8) and mara.initiative == 12)
+	check("heroes keep their numbers", corin.max_health == 30 and mara.max_health == 20 and alwen.max_health == 18 and is_equal_approx(mara.accuracy, 0.8) and mara.initiative == 12)
 	var sword: Equipment = load("res://data/gear/iron_sword.tres")
 	corin.weapon = sword
 	mara.weapon = sword
@@ -52,14 +52,14 @@ func _initialize() -> void:
 	check("...but relief isn't scaled", is_equal_approx(alwen.strain, 3.4))
 
 	# --- Levels and talents.
-	mara.xp = 80
-	check("80 XP: ready for level 2", Progression.ready_to_advance(mara))
+	mara.xp = Progression.THRESHOLDS[2]
+	check("%d XP: ready for level 2 (quick levels, #172)" % Progression.THRESHOLDS[2], Progression.ready_to_advance(mara))
 	var options: Array = Progression.choices(mara)
-	check("level 2 offers two rogue talents", options.size() == 2 and options[0][0] == "deadeye")
+	check("level 2 offers two scout talents", options.size() == 2 and options[0][0] == "deadeye")
 	var hp_before := mara.max_health
 	Progression.advance(mara, "deadeye")
 	check("level 2: +2 health, Deadeye +5% to hit", mara.level == 2 and mara.max_health == hp_before + 2 and is_equal_approx(mara.accuracy, 0.85), "%d %.2f" % [mara.max_health, mara.accuracy])
-	mara.xp = 220
+	mara.xp = Progression.THRESHOLDS[3]
 	check("level 3 offers an attribute", Progression.choices(mara).any(func(c): return c[0] == "stat_vit"))
 	Progression.advance(mara, "stat_vit")
 	check("level 3: Vitality +1 is +4 health, plus +2 a level (28)", mara.level == 3 and mara.stat_vit == 3 and mara.max_health == 28, str(mara.max_health))
@@ -134,8 +134,7 @@ func _initialize() -> void:
 			main._combat._state._check_end()
 			main._combat._action_chosen.emit({"kind": "defend"})
 		await create_timer(0.1).timeout
-	check("a won fight gives 4 XP per threat (rat 1 + spider 2 = 12)", hero.xp == 12 and main._camp_state.xp_left[1] == 48, "%d XP, %d left" % [hero.xp, main._camp_state.xp_left[1]])
-	main._camp_state.xp_left[1] = 0
+	check("a won fight gives 4 XP per threat (rat 1 + spider 2 = 12)", hero.xp == 12, "%d XP" % hero.xp)
 	main._start_combat(main._party.cell, foe_types)
 	guard = 0
 	while main._in_combat and guard < 200:
@@ -146,7 +145,7 @@ func _initialize() -> void:
 			main._combat._state._check_end()
 			main._combat._action_chosen.emit({"kind": "defend"})
 		await create_timer(0.1).timeout
-	check("once a floor's lessons run out, fights give no XP", hero.xp == 12)
+	check("no floor limits any more: the next fight teaches as much (#172)", hero.xp == 24, hero.xp)
 	hero.xp = 90
 	main._end_expedition(main.Expedition.Ending.RETURNED)
 	await process_frame
@@ -163,7 +162,7 @@ func _initialize() -> void:
 	main._camp_state.best_level = 3
 	main._camp_state.candidates.clear()
 	main._camp_state._fill_fire(main._party_state)
-	check("recruits now join a level behind (level 2)", main._camp_state.candidates.all(func(c): return c.level == 2 and c.xp >= 80 and c.talents.size() == 1))
+	check("recruits join at level 1, like everyone setting out (#172)", main._camp_state.candidates.all(func(c): return c.level == 1 and c.talents.is_empty()))
 	main._camp_state.hire(main._party_state, main._camp_state.candidates[0])
 	var smith_coat: Equipment = load("res://data/gear/padded_coat.tres")
 	main._party_state.supplies.gear.append(smith_coat)

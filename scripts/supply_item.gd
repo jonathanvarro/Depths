@@ -17,6 +17,7 @@ enum Effect {
 	TOOL,  ## not used up: carrying it opens choices on events (pick, spade; #133)
 	CURE_VENOM,  ## clears spider venom from one hero (in fights too); also purifies water
 	LIFT_BANE,  ## lifts one bane from a hero; also blesses evil shrines (#133)
+	BREW,  ## an unknown cave brew (#175): drunk outside a fight, thrown in one; see brews.gd
 }
 
 @export var display_name := "Supply"
@@ -41,6 +42,9 @@ enum Effect {
 ## How many fit in one pack slot (#133). 0: by kind - treasure 3, tools 1,
 ## everything else 5.
 @export var stack := 0
+## For a BREW: which kind it really is (restorative, caustic, slumber,
+## frenzy, revealing). Its look and name come from brews.gd.
+@export var brew := ""
 
 
 func with_article() -> String:

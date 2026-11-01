@@ -181,6 +181,36 @@ House of Necrosis was used as a reference: you grow strong during a run, grow at
 - **Corin falling** in a bat fight with two recruits (owner report): not reproduced. A fallen main hero is knocked out and the others fight on (`tools/main_hero_down_check.gd`).
 - **Windows build crash:** a new game crashed the release build. The Settings screen asked for the game window before it existed; a one-line guard fixes it.
 
+## The expedition loop and classes — built 2026-10-31 (Claude)
+
+Numbers are first guesses for the bot and the owner's playtests to tune.
+
+- **Levels reset (#172).** Every departure from the surface camp starts each hero at level 1: talents and the level-3 attribute point are undone. Level 2 comes at 25 XP, level 3 at 70 and level 4 at 140 (it was 80/220/440 over the whole campaign). The floor XP limits are gone.
+  - **Choosing:** after a won fight, anyone ready picks there and then, one question per hero.
+  - **What stays:** gear and its mastery, scars, memories and role.
+  - **Saves:** a save at camp doesn't reset anyone; the reset happens on leaving. Underground camps don't exist yet; when they do, they mustn't call it.
+- **A wipe (#174)** loses what the heroes wore as well as the pack. A main hero wakes in the camp's spare kit: an ordinary copy of their starting weapon and a quilted coat, with nothing on the back.
+- **Unknown brews (#175):** restorative, caustic, slumber, frenzy and revealing.
+  - **Finding them:** one treasure find in five is a brew.
+  - **How they look:** each kind has its own glass shape, liquid colour and stopper mark (ChatGPT's compositor). The looks reshuffle on each departure and are saved.
+  - **Drinking** (outside a fight): heals 8 / burns 3 / a calming sleep that costs time / strain / shows the floor's rooms on the map.
+  - **Throwing** (in a fight, at the chosen foe): heals it / 6 damage that no armour stops / it loses its next turn / it turns Savage / the journal learns its weaknesses.
+  - **Naming:** a test that shows something names the kind for the rest of the expedition. Drinking a restorative unhurt, or throwing one at an unhurt foe, names nothing. An Alwen (field medic) or a Fixer names a brew as it's found.
+- **The monster journal (#176)** is on a Monsters button in the quest log.
+  - **It records:** times met, kills, the deepest floor, the monster's brief, and the moves it has made, with "?" for the rest.
+  - **After the first kill** (or a revealing brew), it adds weaknesses: armour or not, fire, being slow, the back row. It lasts the whole campaign.
+- **Killers evolve (#177).** A foe that downs a hero becomes Savage on the spot (+1 damage) and keeps its wounds. The message is "The rat tastes blood - Savage rat!"
+- **The four classes (#179):**
+  - **Melee:** +4 health and the front row. The Warden's steady presence, and both their talents.
+  - **Scout:** Sharp ears and Trap sense come standard. Talents: Deadeye or Quick hands, then Slip past or Slip the web.
+  - **Mage:** the Healer's talents for now. Spells are #170. Light armour only.
+  - **Fixer:** −5% to hit, better prices, one more find in treasure rooms, and clears rubble without a tool (that was the Brawler's).
+
+  **Armour by class:** Melee wears any; Scout and Fixer light or medium; Mage light only. The back slot follows `bases.json`.
+
+  **Main heroes:** Corin is Melee, Mara a Scout, Alwen a Mage. Old saves and recruits convert on load (Warden and Brawler become Melee, Rogue becomes Scout, Healer becomes Mage). Recruits borrow the older roles' faces and lines until the named cast (#180).
+- **Experience** still goes in full to everyone with the party. DESIGN's "a pair half each" reads like a split, while #179 says "unsplit", so this waits for the owner.
+
 ## Map and dungeon progression
 
 Preserve the readable map from the visual concepts, adapted to the grid. Show explored rooms and routes, the current location, blocked doors, uncertain passages, stairs, and known routes toward safety. Notes and unresolved discoveries provide reasons to revisit rooms.

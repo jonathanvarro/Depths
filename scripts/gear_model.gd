@@ -337,6 +337,33 @@ static func temper_cost(item: Equipment) -> Dictionary:
 	return {"gold": int(cost["gold"]), "material": int(cost["material"]), "material_id": t["materials"][region]}
 
 
+## After a wipe (#174, owner 2026-10-30): the camp's plain spare kit for
+## `hero`: an ordinary weapon like the one they started with, and a quilted
+## coat. No modifiers, middling rolls, no mastery.
+static func fallback_kit(hero: Companion) -> Array:
+	var rng := RandomNumberGenerator.new()
+	rng.seed = hash([hero.display_name, "spare kit"])
+	var weapon_base := "oak_club"
+	if hero.companion_weapon and hero.companion_weapon.base_id != "":
+		weapon_base = hero.companion_weapon.base_id
+	elif hero.companion_weapon:
+		weapon_base = _base_for(hero.companion_weapon)
+	var kit: Array = []
+	for id in [weapon_base, "quilted_coat"]:
+		var item := generate(rng, id, "ordinary")
+		item.damage_roll = 0
+		item.accuracy_roll = 0.0
+		item.health_roll = 0
+		var g := {}
+		for stat in item.growth:
+			g[stat] = "steady"
+		item.growth = g
+		item.mods = PackedStringArray()
+		apply(item)
+		kit.append(item)
+	return kit
+
+
 ## Every weapon, armour and back piece the party holds, worn or carried.
 static func owned_by(party) -> Array:
 	var out: Array = party.supplies.gear.duplicate()

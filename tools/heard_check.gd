@@ -42,12 +42,11 @@ func _initialize() -> void:
 	fight.set_opening("foes")
 	check("caught out: the foes go first", fight._order.slice(0, 2).all(func(a): return not a is Companion))
 
-	# The Scout's talent.
-	var scout_options: Array = Progression.TALENTS["Scout"][2].map(func(t): return t[0])
-	var rogue_options: Array = Progression.TALENTS["Rogue"][2].map(func(t): return t[0])
-	check("Sharp ears is a Scout's level-2 talent, in place of Deadeye", scout_options == ["sharp_ears", "quick_hands"], str(scout_options))
+	# The Scout's skill (#179): standard for the class, not a talent.
+	var scout := Companion.new()
+	scout.role = "Scout"
+	check("Sharp ears comes with the Scout class", scout.has_talent("sharp_ears") and "sharp_ears" not in Progression.TALENTS["Scout"][2].map(func(t): return t[0]))
 	check("Slip past comes at level 4", Progression.TALENTS["Scout"][4].map(func(t): return t[0]).has("slip_past"))
-	check("Mara the Rogue keeps Deadeye and gets neither", "sharp_ears" not in rogue_options and "deadeye" in rogue_options)
 
 	# In the game.
 	var main = load("res://scenes/main.tscn").instantiate()
@@ -73,8 +72,10 @@ func _initialize() -> void:
 				outside = c + side
 		if fight_cell != Vector2i(-1, -1):
 			break
+	for hero in main._party_state.members:
+		hero.role = "Melee"  # nobody aware: Mara is a Scout now (#179)
 	check("without Sharp ears, no fight is heard first", not main._hears_first(fight_cell))
-	var scout: Companion = load("res://data/companions/corin.tres").duplicate()
+	scout = load("res://data/companions/corin.tres").duplicate()
 	scout.display_name = "Wren"
 	scout.role = "Scout"
 	scout.talents.assign(["sharp_ears"])

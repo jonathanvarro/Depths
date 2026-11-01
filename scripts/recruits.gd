@@ -12,26 +12,28 @@ const FACES := "res://art/portraits/recruit-roster-v1/catalog.json"
 const Progression := preload("res://scripts/progression.gd")
 
 const ROLES := {
-	"Warden": {
-		"about": "A protector. Tough, and when defending takes only a quarter of a blow.",
+	"Melee": {  # the four classes (#179): the Warden and Brawler become Melee
+		"about": "Front row: armour and health. When defending takes only a quarter of a blow.",
 		"stats": [2, 1, 3, 2], "aim": 0.74, "speed": 10, "hp": 0, "attack": Vector2i(2, 3),
 		"guard_factor": 0.25, "toughness": 0, "weapon": "res://data/gear/wooden_club.tres",
 		"portrait": "res://art/portraits/recruit-silhouettes-v1/warden.png",
-		"perk": "Steady presence: the party's nerves fray 15% slower.", "perk_name": "Steady presence",
+		"perk": "Armour and health: +4 health, and defending takes a quarter of a blow.", "perk_name": "Armour and health",
+		"faces": "Warden",
 	},
 	"Scout": {
 		"about": "Quick and sharp, with a sling: fights from the back row. Acts early and hits often, but can't take much.",
 		"stats": [1, 3, 1, 2], "aim": 0.81, "speed": 11, "hp": 0, "attack": Vector2i(2, 3),
 		"guard_factor": 0.5, "toughness": 0, "row": "back", "reach": true,
 		"portrait": "res://art/portraits/recruit-silhouettes-v1/scout.png",
-		"perk": "Can learn Sharp ears, Slip past and Trap sense.", "perk_name": "Scout's talents",
+		"perk": "Hears some fights first and always spots traps.", "perk_name": "Awareness",
 	},
-	"Brawler": {
-		"about": "Hits hard. Careless with it: misses more and takes an extra point from every blow.",
-		"stats": [3, 2, 3, 1], "aim": 0.65, "speed": 9, "hp": -2, "attack": Vector2i(2, 4),
-		"guard_factor": 0.5, "toughness": -1, "weapon": "res://data/gear/woodcutters_axe.tres",
-		"portrait": "res://art/portraits/recruit-silhouettes-v1/brawler.png",
-		"perk": "Strong back: +2 pack slots, and clears rubble without a tool.", "perk_name": "Strong back",
+	"Mage": {  # spells come with #170; until then a weak back-row sling
+		"about": "Casts spells (coming). Unarmoured and unaware; fights from the back with a sling.",
+		"stats": [1, 2, 2, 3], "aim": 0.72, "speed": 10, "hp": -2, "attack": Vector2i(1, 3),
+		"guard_factor": 0.5, "toughness": 0, "row": "back", "reach": true,
+		"portrait": "res://art/portraits/recruit-silhouettes-v1/scout.png",
+		"perk": "Spells, once they exist (#170).", "perk_name": "Spells",
+		"faces": "Brawler",
 	},
 	# The Fixer (#101, owner 2026-10-25): an expedition role more than a
 	# fighting one. Three fitted trader faces and a distinct fallback (#163).
@@ -40,7 +42,7 @@ const ROLES := {
 		"stats": [1, 2, 2, 3], "aim": 0.72, "speed": 10, "hp": -2, "attack": Vector2i(1, 3),
 		"guard_factor": 0.5, "toughness": 0, "row": "back", "reach": true,
 		"portrait": "res://art/portraits/recruit-silhouettes-v1/fixer.png",
-		"perk": "Eye for value: finds sell for 25% more, 10% off at the merchant, and one more recruit by the fire.", "perk_name": "Eye for value",
+		"perk": "Eye for value: finds sell for 25% more, 10% off at the merchant, one more find in treasure rooms, and clears rubble.", "perk_name": "Eye for value",
 	},
 }
 ## Each role's exploring perk (#101), for the recruit's card.
@@ -84,7 +86,8 @@ static func lines_for(hero: Companion) -> DialogueLines:
 
 
 static func _lines_path(role: String) -> String:
-	return "res://data/dialogue/recruit_%s.tres" % role.to_lower()
+	var voice: String = ROLES.get(role, {}).get("faces", role)  # a class borrows an older role's voice and faces (#179)
+	return "res://data/dialogue/recruit_%s.tres" % voice.to_lower()
 
 
 ## Faces for a role from the roster catalog: [{id, portrait, portrait_set}].
@@ -100,6 +103,7 @@ static func faces_for(role: String) -> Array:
 static func make(rng: RandomNumberGenerator, taken: Array = [], faces_in_use: Array = [], level := 1, role := "") -> Companion:
 	if role == "":
 		role = ROLES.keys()[rng.randi_range(0, ROLES.size() - 1)]
+	role = load("res://scripts/classes.gd").of(role)  # an older role asks for its class (#179)
 	var spec: Dictionary = ROLES[role]
 	var hero := Companion.new()
 	var free_names := NAMES.filter(func(n): return n not in taken)
@@ -127,7 +131,7 @@ static func make(rng: RandomNumberGenerator, taken: Array = [], faces_in_use: Ar
 	if spec.has("weapon"):
 		hero.weapon = load(spec["weapon"])
 	hero.portrait = load(spec["portrait"])
-	var faces := faces_for(role)
+	var faces := faces_for(spec.get("faces", role))
 	var free_faces := faces.filter(func(f): return f["portrait_set"] not in faces_in_use)
 	if not free_faces.is_empty():
 		faces = free_faces

@@ -192,6 +192,12 @@ func lose_torch() -> void:
 	changed.emit()
 
 
+## Unknown brews (#175): this expedition's looks (kind -> [shape, colour,
+## mark]) and the kinds named so far. See brews.gd.
+var brew_looks := {}
+var brews_known: Array = []
+
+
 ## A party wipe (#41): everything carried is lost, lantern included.
 func lose_everything() -> void:
 	items.clear()

@@ -17,6 +17,7 @@ const StrainRules := preload("res://scripts/strain.gd")
 ## Strain (#12) builds from time, darkness, lost health, injury and hunger;
 ## see strain.gd for the rules and states.
 
+const Classes := preload("res://scripts/classes.gd")
 @export var display_name := "Unnamed"
 @export var role := ""
 ## Why they came into the dungeon (and why they might stay or leave).
@@ -70,6 +71,10 @@ const StrainRules := preload("res://scripts/strain.gd")
 @export var level := 1
 @export var xp := 0
 @export var talents: Array[String] = []
+## Attribute points taken this expedition, undone at its end (#172).
+@export var raised: Array[String] = []
+## Guard before Bulwark lowered it, so a fresh expedition restores it.
+@export var base_guard_factor := -1.0
 @export_group("")
 ## A recruit's strength and weakness, as shown at the fire (#41).
 @export var strength := ""
@@ -292,7 +297,7 @@ func remember(kind: String, text: String, day: int, about := "") -> Dictionary:
 
 
 func has_talent(id: String) -> bool:
-	return id in talents
+	return id in talents or id in Classes.skills(role)  # class skills (#179)
 
 
 ## Recomputes the derived numbers from attributes, level and talents (#47).
@@ -301,12 +306,17 @@ func refresh_stats() -> void:
 	if not uses_stats:
 		return
 	max_health = 12 + 4 * stat_vit + hp_bonus + 2 * (level - 1)
+	if role == "Melee":
+		max_health += Classes.MELEE_HEALTH  # armour and health (#179)
 	if has_talent("stalwart"):
 		max_health += 4
 	if has_talent("unbreakable"):
 		max_health += 6
-	accuracy = aim_base + 0.04 * (stat_dex - 2) + (0.05 if has_talent("deadeye") else 0.0)
+	accuracy = aim_base + 0.04 * (stat_dex - 2) + (0.05 if has_talent("deadeye") else 0.0) + (Classes.FIXER_AIM if role == "Fixer" else 0.0)
 	initiative = speed_base + 2 * (stat_dex - 2) + (2 if has_talent("quick_hands") else 0)
+	if base_guard_factor < 0.0:
+		base_guard_factor = guard_factor
+	guard_factor = base_guard_factor
 	if has_talent("bulwark"):
 		guard_factor = minf(guard_factor, 0.15)
 	health = mini(health, max_health)

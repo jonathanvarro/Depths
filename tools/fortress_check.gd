@@ -176,6 +176,9 @@ func _initialize() -> void:
 	main._results.continue_pressed.emit()
 	await create_timer(0.2).timeout
 	check("exploring goes on afterwards", not main._party.locked)
+	while main._prompt.visible and main._prompt_label.text.contains("reaches level"):
+		main._answer_prompt(true)  # level-ups are chosen underground (#172)
+		await process_frame
 	main._on_party_entered_cell(inside)
 	check("the empty hall asks nothing", not main._prompt.visible)
 

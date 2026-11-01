@@ -507,10 +507,11 @@ func _smith_list() -> void:
 	_text("Bought gear goes in your pack; equip it from there.", MUTED)
 
 
-## Level-ups (#47): each hero's level, XP and attributes; anyone ready
-## chooses a talent (levels 2 and 4) or an attribute point (level 3).
+## Levels (#47, #172): each hero's level from the last trip. Levels last one
+## expedition and are chosen underground; anyone still ready may choose here.
 func _training() -> void:
 	_body.add_child(_label("Training", HEADING, 16, TEXT))
+	_text("Levels last one expedition: everyone sets out at level 1 and chooses talents underground.", MUTED)
 	for hero: Companion in _party.members:
 		if not hero.uses_stats:
 			continue

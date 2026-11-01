@@ -189,6 +189,10 @@ var foes: Array[Foe] = []
 ## per item per fight. main.gd and the playtest bot award it afterwards.
 var mastery_gain := {}
 var region := 1  # the floor's region, for how much a foe teaches
+## Moves each foe made this fight, for the monster journal (#176): Foe -> [Intent].
+var seen_moves := {}
+## Kinds a revealing brew lit up this fight: the journal learns them (#175).
+var studied: Array = []
 ## A fight on the map (#171 phase 2; DESIGN.md "The party as one unit"): the
 ## party is one unit in one cell, facing a way. Blows from the front land on
 ## the front row; from the side or behind, on the back row - harder from
@@ -306,6 +310,27 @@ func make_elite(foe: Foe, kind: String) -> void:
 	foe.health = type.max_health
 	foe.elite = kind
 	foe.name = "%s %s" % [kind, foe.name.substr(0, 1).to_lower() + foe.name.substr(1)]
+
+
+## A slumber brew (#175): the foe loses its next turn, as a dazzle does.
+func put_to_sleep(foe: Foe) -> void:
+	_dazzled[foe] = "asleep"
+
+
+## Throws a brew at `target` (#175); see brews.gd.
+func hero_throw_brew(hero: Companion, target: Foe, brew: SupplyItem) -> Dictionary:
+	_webbed.erase(hero)
+	var out: Dictionary = load("res://scripts/brews.gd").throw_at(self, brew, target)
+	_check_end()
+	return out
+
+
+## Killers evolve (#177, owner 2026-10-30): a foe that downs a hero becomes
+## a Savage elite on the spot, keeping the wounds it already has.
+func _taste_blood(foe: Foe) -> void:
+	var health := foe.health
+	make_elite(foe, "Savage")
+	foe.health = mini(health, foe.type.max_health)
 
 
 ## Picks what `foe` will do on its next turn (shown to the player).
@@ -831,9 +856,10 @@ var _grab_fresh := {}  # Companion -> grabbed this round (held one more turn)
 ## "injury": Injury or null, "text": String}.
 func enemy_act(foe: Foe) -> Dictionary:
 	if _dazzled.has(foe):  # blinded by a flare: this turn is lost (#74)
+		var asleep: bool = _dazzled[foe] is String and _dazzled[foe] == "asleep"
 		_dazzled.erase(foe)
 		return {"target": null, "hit": false, "damage": 0, "injury": null,
-				"text": "The %s reels from the glare, eyes screwed shut." % foe.name.to_lower()}
+				"text": ("The %s sways, asleep on its feet." if asleep else "The %s reels from the glare, eyes screwed shut.") % foe.name.to_lower()}
 	foe.staggered = false
 	if foe.type.tactic == EnemyType.Tactic.HYDRA:
 		var left := clampi(ceili(float(HYDRA_HEADS) * foe.health / maxi(1, foe.type.max_health)), 1, HYDRA_HEADS)
@@ -845,7 +871,17 @@ func enemy_act(foe: Foe) -> Dictionary:
 	foe.shielded = false if field else foe.shielded  # a shield lasts until its next turn
 	foe.curled = false if field else foe.curled
 	var acted := foe.intent
+	if not seen_moves.has(foe):
+		seen_moves[foe] = []
+	if acted not in seen_moves[foe]:
+		seen_moves[foe].append(acted)
+	var standing: Array = party.members.filter(func(h): return h.is_alive())
 	var outcome := _carry_out(foe)
+	if foe.is_alive() and foe.elite == "" and standing.any(func(h): return not h.is_alive()):
+		var was_name := foe.name.to_lower()
+		_taste_blood(foe)
+		outcome["evolved"] = true
+		outcome["text"] = str(outcome.get("text", "")) + " The %s tastes blood - %s!" % [was_name, foe.name]
 	if field:
 		for hero in _grabbed:
 			if _grabbed[hero] == foe and outcome.get("target") == hero and acted == Intent.GRAB:

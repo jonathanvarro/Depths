@@ -148,6 +148,9 @@ func _campaign(hero_path: String, run_seed: int, max_days: int) -> Dictionary:
 		if start_depth < 0:
 			continue  # rested or waited a day
 		stats["expeditions"] += 1
+		for hero: Companion in party.members:
+			Progression.reset(hero)  # a fresh expedition starts at level 1 (#172)
+		load("res://scripts/brews.gd").shuffle(party.supplies, camp.day)  # #175
 		var ending := _expedition(start_depth)
 		_back_at_camp(ending)
 		if stats["stuck"] != "":
@@ -196,17 +199,6 @@ func _note_quests() -> void:
 ## One visit to camp. Returns the depth to head down to, or -1 if the day
 ## was spent resting or waiting.
 func _camp_day() -> int:
-	# Level-ups first (#47): the first talent, or the best attribute.
-	for hero: Companion in party.members:
-		while Progression.ready_to_advance(hero):
-			var options := Progression.choices(hero)
-			var pick: String = options[0][0] if not options.is_empty() else ""
-			if hero.level + 1 == 3:
-				for key in Progression.ATTRIBUTES:
-					if hero.get(key) < Progression.ATTRIBUTE_CAP and (pick == "" or pick not in Progression.ATTRIBUTES or hero.get(key) > hero.get(pick)):
-						pick = key
-			if not camp.advance(hero, pick):
-				break
 	# Lasting injuries go to the nurse (#43).
 	for hero: Companion in party.members:
 		if not hero.hindering_injuries().is_empty() and not camp.is_recovering(hero):
@@ -481,7 +473,7 @@ func _explore_floor() -> String:
 	var map = _map()
 	# A floor with nothing left to teach (#47): straight for the stairs,
 	# as a player chasing the queen would.
-	var exploring: bool = depth == FORTRESS_DEPTH or camp.xp_left.get(depth, 0) > 0
+	var exploring: bool = depth == FORTRESS_DEPTH or party.members.any(func(h): return h.is_with_party() and h.level < Progression.MAX_LEVEL)
 	var skip := {}  # rooms only reachable through the queen's hall
 	var rounds := 0
 	while exploring:
@@ -934,15 +926,22 @@ func _award_xp(state, kind: String) -> void:
 			for foe in state.foes:
 				if not foe.is_alive():
 					threat += foe.type.threat
-			amount = camp.take_floor_xp(depth, threat * Progression.XP_PER_THREAT)
-			if camp.xp_left.get(depth, 0) <= 0 and not stats["xp_spent_out_day"].has(str(depth)):
-				stats["xp_spent_out_day"][str(depth)] = camp.day
+			amount = threat * Progression.XP_PER_THREAT
 	if amount <= 0:
 		return
-	var benchmark: int = Progression.THRESHOLDS[maxi(1, camp.best_level - 1)] if camp.best_level > 1 else 0
 	for hero: Companion in party.members:
 		if hero.is_with_party():
-			hero.xp += amount + clampi(benchmark - hero.xp, 0, amount)
+			hero.xp += amount
+			# Chosen underground (#172): the first talent, or the best attribute.
+			while Progression.ready_to_advance(hero):
+				var options := Progression.choices(hero)
+				var pick: String = options[0][0] if not options.is_empty() else ""
+				if hero.level + 1 == 3:
+					for key in Progression.ATTRIBUTES:
+						if hero.get(key) < Progression.ATTRIBUTE_CAP and (pick == "" or pick not in Progression.ATTRIBUTES or hero.get(key) > hero.get(pick)):
+							pick = key
+				if not camp.advance(hero, pick):
+					break
 
 
 # --- Between fights --------------------------------------------------------

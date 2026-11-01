@@ -1,6 +1,7 @@
 extends "res://scripts/field_menu.gd"
 ## Read-only quest journal; hidden entries still come solely from Quests.in_log().
 const Quests := preload("res://scripts/quests.gd")
+const Bestiary := preload("res://scripts/bestiary.gd")
 const PAPER := preload("res://art/ui/map-v1/parchment.png")
 const INK := Color("30291e")
 
@@ -15,6 +16,8 @@ var _buttons: Dictionary = {}
 var _selected_id := ""
 var _compact := false
 var _detail_open := false
+var _monsters := false  # showing the monster journal (#176)
+var _mode: Button
 
 func _init() -> void:
 	super()
@@ -24,6 +27,13 @@ func _init() -> void:
 	_back.pressed.connect(_show_list)
 	_header.add_child(_back)
 	_header.move_child(_back, _header.get_child_count() - 2)
+	_mode = action_button("Monsters")
+	_mode.pressed.connect(func():
+		_monsters = not _monsters
+		_selected_id = ""
+		_build())
+	_header.add_child(_mode)
+	_header.move_child(_mode, _header.get_child_count() - 2)
 	_list_scroll = ScrollContainer.new()
 	_list_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	_list_scroll.follow_focus = true
@@ -63,6 +73,17 @@ func _clear(node: Node) -> void:
 
 func open(camp) -> void:
 	_camp = camp
+	_build()
+	begin_open()
+
+func _build() -> void:
+	var camp = _camp
+	_heading.text = "Monsters" if _monsters else "Quest log"
+	_mode.text = "Quests" if _monsters else "Monsters"
+	_back.text = "All monsters" if _monsters else "All quests"
+	if _monsters:
+		_build_monsters()
+		return
 	var ids: Array = Quests.in_log(camp)
 	# Stable INFO order within each group.
 	ids = ids.filter(func(id): return Quests.stage(camp, id) != Quests.Stage.RESOLVED) + ids.filter(func(id): return Quests.stage(camp, id) == Quests.Stage.RESOLVED)
@@ -100,7 +121,36 @@ func open(camp) -> void:
 	_detail_open = false
 	_list_scroll.scroll_vertical = 0
 	_draw_detail()
-	begin_open()
+	_layout_body()
+
+func _build_monsters() -> void:
+	_clear(_list)
+	_buttons.clear()
+	var ids: Array = Bestiary.names(_camp)
+	for id: String in ids:
+		var e: Dictionary = _camp.bestiary[id]
+		var button := action_button("")
+		button.toggle_mode = true
+		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		button.theme_type_variation = "ItemRow"
+		var row := VBoxContainer.new()
+		row.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		row.offset_left = 12; row.offset_right = -12
+		row.offset_top = 9; row.offset_bottom = -9
+		row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		button.add_child(row)
+		row.add_child(text_label(id, 20, Kit.TEXT))
+		row.add_child(text_label("Killed %d" % e["killed"] if int(e["killed"]) > 0 else "Not yet killed", 16, Kit.MUTED))
+		button.custom_minimum_size.y = 78
+		button.accessibility_name = id
+		button.pressed.connect(select_quest.bind(id))
+		_list.add_child(button)
+		_buttons[id] = button
+	if not ids.has(_selected_id): _selected_id = ids[0] if not ids.is_empty() else ""
+	_detail_open = false
+	_list_scroll.scroll_vertical = 0
+	_draw_detail()
+	_layout_body()
 
 func select_quest(id: String) -> void:
 	if not _buttons.has(id): return
@@ -115,7 +165,16 @@ func _draw_detail() -> void:
 	_detail_scroll.scroll_vertical = 0
 	for id in _buttons: _buttons[id].set_pressed_no_signal(id == _selected_id)
 	if _selected_id.is_empty():
-		_detail.add_child(text_label("No quests recorded.", 24, INK))
+		_detail.add_child(text_label("No monsters met yet." if _monsters else "No quests recorded.", 24, INK))
+		return
+	if _monsters:
+		var lines := Bestiary.page(_camp, _selected_id)
+		var title := text_label(_selected_id, 26, INK)
+		title.add_theme_font_override("font", Kit.HEADING)
+		_detail.add_child(text_label(lines[0], 17, Color("65503b")))
+		_detail.add_child(title)
+		for i in range(1, lines.size()):
+			_detail.add_child(text_label(lines[i], 21, INK))
 		return
 	var info: Dictionary = Quests.INFO[_selected_id]
 	var stage: int = Quests.stage(_camp, _selected_id)

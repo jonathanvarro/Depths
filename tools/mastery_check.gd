@@ -75,11 +75,15 @@ func _initialize() -> void:
 	check("a goblin-bane blade bites goblins harder", _mean_hit(bane, "goblin") > sword_goblin + 1.5)
 
 	# Mastery credit.
-	var state = _fight(_item("iron_sword"), "goblin")
-	var mara: Companion = state.party.members[0]
-	mara.accuracy = 1.0
-	state.foes[0].health = 999
-	state.hero_attack(mara, state.foes[0])
+	var state
+	var mara: Companion
+	for i in 20:  # hit chance is capped below 100%: try until the first blow lands
+		state = _fight(_item("iron_sword"), "goblin")
+		mara = state.party.members[0]
+		mara.accuracy = 1.0
+		state.foes[0].health = 999
+		if state.hero_attack(mara, state.foes[0])["hit"]:
+			break
 	var first: float = state.mastery_gain.get(mara.weapon, 0.0)
 	check("a hit teaches the weapon, scaled by the foe's threat", first > 0.5 and first < 2.0, first)
 	for i in 30:

@@ -403,6 +403,17 @@ func _hero_action(hero: Companion, action: Dictionary) -> void:
 				_fx.icon(_foe_point(foe), TORCH.icon, 44.0)
 			for foe in outcome["dazzled"]:
 				_play(foe, "hurt", 0.35)
+		"brew":
+			var target = _target
+			outcome = _state.hero_throw_brew(hero, target, action["item"])
+			var at := _foe_point(target)
+			_fx.icon(at, action["item"].icon, 56.0)
+			if outcome["damage"] > 0:
+				_fx.number(at + Vector2(60, -40), str(outcome["damage"]), Color("b5d36a"), CombatFx.NUMBER_SIZE, 0.12)
+				await _play(target, "hurt", 0.35)
+			if outcome["killed"]:
+				last_blow = "fire"
+				await _fade_out(target)
 		"throw":
 			var target = _target
 			outcome = _state.hero_throw_torch(hero, target)
@@ -990,6 +1001,13 @@ func _show_items() -> void:
 	flare.pressed.connect(func(): _action_chosen.emit({"kind": "flare"}))
 	_item_buttons.add_child(flare)
 	for item: SupplyItem in _state.party.supplies.items:
+		if item.effect == SupplyItem.Effect.BREW:  # thrown at the chosen foe (#175)
+			var lob := _button("Throw %s ×%d" % [item.display_name.to_lower(), _state.party.supplies.count(item)])
+			lob.icon = item.icon
+			lob.disabled = only_action != ""
+			lob.pressed.connect(func(): _action_chosen.emit({"kind": "brew", "item": item}))
+			_item_buttons.add_child(lob)
+			continue
 		if not item.usable_in_combat:
 			continue
 		var reason: String = _state.party.cannot_use_reason(item, true)

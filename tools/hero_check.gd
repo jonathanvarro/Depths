@@ -30,7 +30,7 @@ func _initialize() -> void:
 	var cards: Array = screen.find_children("*", "Button", true, false).filter(func(b): return b.text.begins_with("Wake as"))
 	check("three heroes to choose from", cards.size() == 3, str(cards.map(func(b): return b.text)))
 	var text: String = " | ".join(screen.find_children("*", "Label", true, false).map(func(l): return l.text))
-	check("each shows a role and a trait", text.contains("Rogue") and text.contains("Brawler") and text.contains("Healer") and text.contains("Keen eyes") and text.contains("Grudge") and text.contains("Field medic"))
+	check("each shows a role and a trait", text.contains("Scout") and text.contains("Melee") and text.contains("Mage") and text.contains("Keen eyes") and text.contains("Grudge") and text.contains("Field medic"))
 	if dir != "":
 		for i in 4: await process_frame
 		root.get_texture().get_image().save_png(dir + "/hero_" + tag + "_choice.png")
