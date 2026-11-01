@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-11-01 – ChatGPT (modular 3D trial)
+- Did: #203 supplies an isolated Godot4.7.2 review in tools/character_3d_trial: two distinct original procedural head studies, shared16-bone/rest body, three outfits, shield/cape/pack, standing/seated/reading, portrait/full-body/front/back and rudimentary blink/talk. Actual Mobile captures/native192/native96 cards, static native scene snapshots, hashes and gallery: art/concepts/character-3d-trial-v1/inspector.html. Report/limits: docs/modular-character-3d-trial.md.
+- Next: Owner reviews the reusable wardrobe approach separately from primitive face/style quality. An authored skinned body/face trial is the next decision if selected; accepted2D portraits and #181/#197-#201 remain unchanged.
+- Watch out: Rigid-part technical blockout, not production skinning or approved likenesses; joint seams, rigid cape and approximate hand/prop/seating fit remain. One body shape only, no live integration or physical iPhone benchmark. 1943 Mobile/1884 headless,104 source and34 browser checks pass; sandbox shader-cache creation warning is recorded (exit0). Other agent salvage/gameplay and unrelated UID/import files untouched.
+
 ## 2026-11-01 – ChatGPT (seven inventory material icons)
 - Did: Created seven individual ImageGen masters and bound their native128 icons to rat pelt, spider silk, bat wing, breach-hound hide, beetle shell, black ore and goblin-forged scrap (#196/#202). Added directly exported64px siblings, source prompts/hashes/registration, dark/parchment/greyscale comparisons and12 actual Pack/loot/merchant captures at desktop/phone Normal/Larger. Review: `art/concepts/salvage-v1/inspector.html`; handoff: `docs/salvage-and-material-icons.md`. 102 export/invariant,38 headless,50 Mobile-renderer and75 browser checks pass.
 - Next: #196's equipment-base pictures remain separate; reconcile/reuse selected #194/#195 art before drawing duplicates. Companion visual-system brainstorming and named portraits were untouched. Physical iPhone inspection remains separate.

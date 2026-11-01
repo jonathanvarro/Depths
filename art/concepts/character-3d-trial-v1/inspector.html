@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Depths · Modular 3D companion trial</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,sans-serif;background:#161d23;color:#e4e7e7}body{max-width:1240px;margin:auto;padding:24px}h1{font-size:26px}p{max-width:85ch;color:#bac5c8;line-height:1.6}label{display:inline-flex;flex-direction:column;gap:6px;margin:0 16px 12px 0}select,button{font:inherit;min-height:44px;background:#26333b;color:#fff;border:1px solid #637179;padding:8px}img{max-width:100%;height:auto}figure{margin:12px 0 28px}figcaption{color:#bac5c8;margin:10px 0}.cards{display:flex;gap:20px;flex-wrap:wrap}.cards img{image-rendering:pixelated}a{color:#c9b78f}details{line-height:1.7}code{color:#d8c5a2}.models{display:flex;gap:20px;flex-wrap:wrap}
+</style></head><body>
+<h1>Modular 3D companions · technical blockout</h1>
+<p>Two exploratory identities share one 16-bone body and the same wardrobe. These are original primitive meshes, not final Rook/Branna likenesses. Existing portraits and the live game are unchanged.</p>
+<figure><img src="overview.png" alt="Actual Godot renders comparing three outfits, portraits, reading and pack views"><figcaption>Actual Godot 4.7.2 Mobile renders. Overview tiles are reduced for layout; individual captures below are unretouched.</figcaption></figure>
+<label>View<select id="capture"><option value="standing">Standing</option><option value="portrait">Portrait</option><option value="seated">Seated</option><option value="reading">Reading</option><option value="back">Back</option></select></label>
+<label>Outfit / utility sample<select id="sample"><option value="0">Travel cloth / shield</option><option value="1">Quilted medium / cape</option><option value="2">Heavy plates / frame pack</option></select></label>
+<figure><img id="selected" src="standing-0.png" alt="Interactive review screenshot"><figcaption id="caption">Standing · travel cloth / shield</figcaption></figure>
+<h2>Native card-size renders</h2><div class="cards">
+<figure><img src="rook-0-96.png" width="96" height="96" alt="Rook-inspired study cloth at native 96 pixels"><figcaption>Rook study · cloth</figcaption></figure>
+<figure><img src="rook-2-96.png" width="96" height="96" alt="Rook-inspired study plates at native 96 pixels"><figcaption>Rook study · plates</figcaption></figure>
+<figure><img src="branna-0-96.png" width="96" height="96" alt="Branna-inspired study cloth at native 96 pixels"><figcaption>Branna study · cloth</figcaption></figure>
+<figure><img src="branna-2-96.png" width="96" height="96" alt="Branna-inspired study plates at native 96 pixels"><figcaption>Branna study · plates</figcaption></figure>
+</div>
+<h2>Phone-shaped captures</h2><figure><img src="phone-1278.png" alt="Landscape phone-shaped review with seated characters and controls"></figure>
+<details><summary>What remains unresolved</summary><p>The faces, rigid joint seams, cape and hand-to-book fit need authored geometry/skinning. Only one body-proportion set was tested. No emotion library, cloth simulation, live equipment integration or physical iPhone benchmark is claimed. About 10k triangles and 116 mesh nodes per identity includes hidden wardrobe choices; production should merge compatible surfaces and profile visible costs.</p></details>
+<h2>Runnable source and snapshots</h2><p>Open <code>tools/character_3d_trial/project.godot</code> in Godot 4.7.2 and press F5. That isolated review lets you mix all outfits, utilities and poses. These files are independent static scene snapshots:</p>
+<div class="models"><a href="rook-study.tscn">Rook study scene</a><a href="branna-study.tscn">Branna study scene</a><a href="report.json">Renderer checks</a><a href="manifest.json">Source and hashes</a></div>
+<script>
+const capture=document.getElementById('capture'), sample=document.getElementById('sample'), selected=document.getElementById('selected'), caption=document.getElementById('caption');
+function update(){selected.src=`${capture.value}-${sample.value}.png`;caption.textContent=capture.options[capture.selectedIndex].text+' · '+(capture.value==='back'?'medium outfit, selected utility':sample.options[sample.selectedIndex].text);selected.alt=caption.textContent;}
+capture.addEventListener('change',update);sample.addEventListener('change',update);
+</script></body></html>

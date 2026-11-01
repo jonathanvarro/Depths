@@ -1,0 +1,16 @@
+{
+	"checks": 1943,
+	"combinations_per_identity": 27,
+	"display": "Windows",
+	"failures": [],
+	"identity_ids": [
+		"rook",
+		"branna"
+	],
+	"meshes_including_hidden": {
+		"meshes": 116,
+		"triangles": 9950
+	},
+	"note": "Original procedural rigid-part trial. No live game, assets, saves or settings loaded.",
+	"renderer": "mobile"
+}

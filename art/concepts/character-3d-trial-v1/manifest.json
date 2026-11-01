@@ -1,0 +1,213 @@
+{
+  "date": "2026-11-01",
+  "issue": 203,
+  "source": "Original procedural meshes in tools/character_3d_trial/character.gd",
+  "inputs": "No external models, image references or generated image masters",
+  "renderer": "Godot 4.7.2 Mobile / D3D12 / Radeon RX 9070 XT",
+  "limits": "Rigid-part technical prototype; not production skinning, likeness approval or phone benchmark",
+  "renderer_warning": "Sandbox prevents user://vulkan shader-cache directory creation; renderer continues without cache and exits 0.",
+  "files": {
+    "back-0-render.png": {
+      "sha256": "0ab8a1cf08f893b60e5dad15fddf79136bb2fde6e67c8a012d6500333a523569",
+      "bytes": 118612
+    },
+    "back-0.png": {
+      "sha256": "b676385c24c3ea716b50d3328ef386634a9f113ad9c7dff5c3e8b79516a28d22",
+      "bytes": 169006
+    },
+    "back-1-render.png": {
+      "sha256": "9bdf1e3bf9754684e6fdd9dfe17f752faf77e34b7c456e47d93fd1998d82100f",
+      "bytes": 104437
+    },
+    "back-1.png": {
+      "sha256": "f1528513a03c7e4942a256f05012cb9e73e53718ccabd5e75a532cc90ef8661c",
+      "bytes": 153999
+    },
+    "back-2-render.png": {
+      "sha256": "91ea01fe96b8c674b3ac2b6efb4a3e5f7896e6df64ff0ecb74e69692ee47af39",
+      "bytes": 119288
+    },
+    "back-2.png": {
+      "sha256": "0871937f04e33120c6e7c6b0131a6d9a1d84c5fd3d36355a0f5c17d53c82b6ff",
+      "bytes": 169975
+    },
+    "branna-0-192.png": {
+      "sha256": "f9472aceb42b2f999cc52493d44cec2879afb3c2547cc75d02787efaee7d8c06",
+      "bytes": 13226
+    },
+    "branna-0-96.png": {
+      "sha256": "c074a7ca5a7ebd1eb6a85dd6cf015de7c643c5a75d09146875be1216df945614",
+      "bytes": 5018
+    },
+    "branna-1-192.png": {
+      "sha256": "aca5b9175638a382955b100ffe82cf310d2049a71a525731e2b77a90f3092d60",
+      "bytes": 14003
+    },
+    "branna-1-96.png": {
+      "sha256": "17a82f1c7d2cb3861969929cb780f764fbff88b199c53b7286e3f6936e966b97",
+      "bytes": 5331
+    },
+    "branna-2-192.png": {
+      "sha256": "03dce6b2b665a949f2be727f65391949d85ba7966e609b0f45ac51a3da7ab4f2",
+      "bytes": 14693
+    },
+    "branna-2-96.png": {
+      "sha256": "fa5f76cf3c77000384aacef8b154108409341dfe6282d1888a592d13b89965cc",
+      "bytes": 5553
+    },
+    "branna-study.tscn": {
+      "sha256": "10bc34a760f4eaeb81782f2270d37764b6e679e1e1a25931bd56459a5d33a72a",
+      "bytes": 58136
+    },
+    "phone-1278-render.png": {
+      "sha256": "0f7e0ceecf1f7dd95890ec8d93af3f708f49561984dae78ff8bda0cf0cffcac9",
+      "bytes": 59136
+    },
+    "phone-1278.png": {
+      "sha256": "264f621634c01fd5c01a139a8439f23df77bfde772ca22f8ad8acd018dea51e0",
+      "bytes": 107708
+    },
+    "phone-1334-render.png": {
+      "sha256": "1781bd7f14e6441982295b075f0b09c7941b15bde8cf408def8902edfe916d36",
+      "bytes": 89949
+    },
+    "phone-1334.png": {
+      "sha256": "6051179e82ce33099075bc53ea8bc8d1fcded5395c9cb45a9d709eed8b13bcc7",
+      "bytes": 138247
+    },
+    "portrait-0-render.png": {
+      "sha256": "9b6f8b67259c9c1cac6d43e7abfd2ff279228660114ca121ecb5873ed65024a9",
+      "bytes": 101277
+    },
+    "portrait-0.png": {
+      "sha256": "bd5b194668247a828aee9d709dc9b05386b3fca56215e557cbb25b2b8c332130",
+      "bytes": 149452
+    },
+    "portrait-1-render.png": {
+      "sha256": "3c451533205ba7c892c6f5bf35581d26ff1d97418917bfecb81157c13ae736cc",
+      "bytes": 103722
+    },
+    "portrait-1.png": {
+      "sha256": "b38130f332f3257e7f78e806e35038b5cc5812edbf546f13c47d1d2821de68fd",
+      "bytes": 152442
+    },
+    "portrait-2-render.png": {
+      "sha256": "50c74ef98a7c2358f75e5d31e0003adf68f5f0dd51d7bf22e46406958b84bbb9",
+      "bytes": 120873
+    },
+    "portrait-2.png": {
+      "sha256": "8738444421d583b6442c74168dfb7caf8f7666486fd265e42fc2913cc78dc837",
+      "bytes": 170490
+    },
+    "reading-0-render.png": {
+      "sha256": "e53fc237f6d1718edf07db7cb14fe747c787df5b5b37c9947535fe947f15a774",
+      "bytes": 113287
+    },
+    "reading-0.png": {
+      "sha256": "89222ee3556fd05e44099118466c629066824fdccca2df88ec9c61d04554a808",
+      "bytes": 163122
+    },
+    "reading-1-render.png": {
+      "sha256": "2f7db1d8d489926871ba2fac1971277829801fa4b5c8534298e44a36a75337fd",
+      "bytes": 117308
+    },
+    "reading-1.png": {
+      "sha256": "5947960309efc54efae2cc7fba1152e772a6950915e2b14ad193ba3b4673abc4",
+      "bytes": 167919
+    },
+    "reading-2-render.png": {
+      "sha256": "cfd8b310486c4e104ea1c0d371bc7f1def3fcfdfaa1e94d5ee04952165fa86dd",
+      "bytes": 122282
+    },
+    "reading-2.png": {
+      "sha256": "3081c188e002622464157cd8d410673b6715d3e78f52f733e209ee71b5d05345",
+      "bytes": 171810
+    },
+    "report.json": {
+      "sha256": "aa1a52aff41c8213f31a44ba0713e34f15f0cd9a5423846a22ecdc1555ce9c6b",
+      "bytes": 329
+    },
+    "rook-0-192.png": {
+      "sha256": "b7f7dace844e7e03f1e0a7cfea0aeb520739d6ea08197597b754c647b1d87eaf",
+      "bytes": 14434
+    },
+    "rook-0-96.png": {
+      "sha256": "6532440ffc485fc69273385870e7bec8de24a093d6f054db4f830b7fc76c2d35",
+      "bytes": 5350
+    },
+    "rook-1-192.png": {
+      "sha256": "e0c30b81f1173f57182881a7b9be798ff54243fc4c7d2c9915d59e8bba8b572e",
+      "bytes": 15194
+    },
+    "rook-1-96.png": {
+      "sha256": "540e1c76386b3623a4db994f3c54afe5e54158f8c8751b3c48b9b8787efc7aff",
+      "bytes": 5673
+    },
+    "rook-2-192.png": {
+      "sha256": "4229cb3589d72975ac4488c495f33c1f912882641c293e87831a978220541656",
+      "bytes": 15888
+    },
+    "rook-2-96.png": {
+      "sha256": "3e9de1e8c5f422abf6f06ec7187ccfa34e8f87756877ab3e68ca755774825ec5",
+      "bytes": 5897
+    },
+    "rook-study.tscn": {
+      "sha256": "ee26b95211aec96da52e4102997db916abd13dd5d79c9c6cddb64a462e577112",
+      "bytes": 58791
+    },
+    "seated-0-render.png": {
+      "sha256": "b941d5f66f55348ab04058e6f611756dea1f25f30099dffab17df8f05a53503b",
+      "bytes": 114656
+    },
+    "seated-0.png": {
+      "sha256": "d185cf8945c4baff5c9442d6ffe39eeef8089af031b62916d922e185fb2dff20",
+      "bytes": 162426
+    },
+    "seated-1-render.png": {
+      "sha256": "91f260446fdf7dbf984289faeb9fed452cfaaf57ce172a3abf55c5f94ba26766",
+      "bytes": 119817
+    },
+    "seated-1.png": {
+      "sha256": "6a66ec63fec11bf1ba0d8d6ffe2ff9068394753fed2bfeefc10dd2b55783783a",
+      "bytes": 169100
+    },
+    "seated-2-render.png": {
+      "sha256": "b62983d6c6f8575dea9bcfb096a2d27b2501a6a5588ca1bd2f77a73fa01c93ab",
+      "bytes": 124453
+    },
+    "seated-2.png": {
+      "sha256": "0e847880f7529e42e7cd95ffe679a70bacdc58417699a5e9bf10ce9e1e9ee9f0",
+      "bytes": 173738
+    },
+    "standing-0-render.png": {
+      "sha256": "97f142bbf3acf394aa2fb51b1bc74d98b5c99244180c7cc6b0b9f3c091883b47",
+      "bytes": 112709
+    },
+    "standing-0.png": {
+      "sha256": "e63912c16c28c6a6a85f0bdb539b5dabc45fdbe042df88d05d64c83479a178e1",
+      "bytes": 161461
+    },
+    "standing-1-render.png": {
+      "sha256": "0017be1b82e5783c3c06ab5620b4e2e5af325bd5a2a062c32f0ae6c86437c517",
+      "bytes": 120180
+    },
+    "standing-1.png": {
+      "sha256": "3c947c6a67426af96f1c36188cc774ada857cc8706160732bb89fcf2bc574393",
+      "bytes": 169470
+    },
+    "standing-2-render.png": {
+      "sha256": "97109979b46a27d3c9b90b6f046cf0fad5662cc0d63391f7eee62a6c801ad1b5",
+      "bytes": 118765
+    },
+    "standing-2.png": {
+      "sha256": "2f5c9c7f09c92e4dda0b82348f625c12613eab88eba2524b2b45148e6da8750f",
+      "bytes": 169338
+    }
+  },
+  "source_files": {
+    "character.gd": "d98d5656b7a80569c7d74c6ef6bdfeadb557303cf852a2cdb9df9ee997266129",
+    "review.gd": "432032dfd2037f4136e78533bab127aae0380be5e1a9aadfff7b2058e274c946",
+    "check.gd": "d80e281d4660ebc6445c60d4d0a047b200000e0afe1128daeeb2839558fc586d",
+    "project.godot": "3f8317a7f85dbf9da314dd7545ec90304369507c0cd0d0cf7092f7fae1cdf2f0"
+  }
+}

@@ -1,0 +1,15 @@
+config_version=5
+
+[application]
+config/name="Depths - Modular Character Trial"
+run/main_scene="res://review.tscn"
+
+[display]
+window/size/viewport_width=1280
+window/size/viewport_height=800
+
+[rendering]
+renderer/rendering_method="mobile"
+renderer/rendering_method.mobile="mobile"
+rendering_device/driver.windows="d3d12"
+textures/default_filters/use_nearest_mipmap_filter=false
