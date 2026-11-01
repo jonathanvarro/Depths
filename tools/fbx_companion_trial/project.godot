@@ -1,0 +1,12 @@
+[application]
+config/name="Depths - Local FBX companion trial"
+run/main_scene="res://review.tscn"
+
+[display]
+window/size/viewport_width=1440
+window/size/viewport_height=960
+
+[rendering]
+renderer/rendering_method="mobile"
+renderer/rendering_method.mobile="mobile"
+rendering_device/driver.windows="d3d12"

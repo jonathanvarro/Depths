@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-11-01 – ChatGPT (local supplied-FBX companion trial)
+- Did: #206 expands the supplied rigged FBX into one fitted expedition outfit, copper/silver-crop appearances and standing/sit-down/seated-idle/stand-up clips while retaining the source idle. Reusable tools: tools/fbx_companion_trial; private local gallery: build/local-fbx-trial/review/inspector.html; handoff: docs/fbx-companion-trial.md. Local native model exports, actual66-frame motion GIF and native192/96 portraits are included beside the review.
+- Next: Owner reviews source-model style, shared outfit fit and seated motion before extending the cast. Variations share one face/body shape; named likeness and live portrait/camp/equipment binding remain separate.
+- Watch out: Supplied FBX/PNG, derived models, baked meshes and all captures remain LOCAL in ignored build output; only generic tools/template and this handoff are committed. Source body uses8 influences/vertex, hair4; rest-space scale/bind reconciliation, joined shell offsets, covered-body masking and full65-bone mapping are required.313 Mobile/311 headless,194 local-source/capture and18 Chrome checks pass; native exports reload without script/intermediate dependencies. Source bytes are preserved. About2,600/2,624 triangles,4/5 surfaces; no physical iPhone profile, cloth simulation, foot IK or full face animation. Restricted shader-cache/editor-preference warnings recorded. Other equipment/audio/gameplay work and notes are excluded.
+
 ## 2026-11-01 – Claude (the scouts' refuge on floor 3)
 - Did: The owner chose a floor-3 rest stop. scripts/refuge.gd places a rest spot beside floor 3's stairs down with data/events/refuge_scouts.tres (campfire prop). Making camp (60 time, once a trip) heals everyone to full (new EventOutcome.recover), eases strain, and leaves lamp oil and a torch; levels are kept (an underground camp). The bot rests there when hurt (BOT_NO_REFUGE=1 leaves it out). Queen wins went from 5/9/5 to 5/14/6 of 30, and the gate breaks about a week sooner. New tools/refuge_check.gd. wanderers_check now answers Mara's hear-first question (she's a Scout since #179).
 - Next: The owner reviews the refuge's numbers (first guesses) and whether floor-2 wipes need easing. Stash access, saving there and the Overlook art remain separate.
