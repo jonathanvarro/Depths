@@ -222,6 +222,11 @@ Numbers are first guesses for the bot and the owner's playtests to tune.
   - **Making camp (once a trip; the cave shifts each day):** 60 time. Everyone with the party heals to full, and an unconscious hero comes round. Strain eases by 20 for resting plus 40 more. The scouts leave a flask's worth of lamp oil and one torch.
   - **Numbers are first guesses;** recovery, supplies and costs were left open by the owner. No stash access, saving or Overlook art yet; the Overlook stays for "after a major theme area".
   - **Bot (30 campaigns each):** the queen falls in **5 / 14 / 6**, up from 5 / 9 / 5 (same-day runs without it: 2 / 6 / 2 of 15). The gate breaks about a week sooner (median day 6–13, was 15–20). Floor-2 wipes are still the biggest drain for Mara and Alwen.
+- **Floor 2 eased (owner's go-ahead, 2026-11-01):**
+  - **Lone monsters:** on floors 1–2 a full party can meet any group, a single monster included (`Main.EASY_DEPTH`). Before, three heroes only ever met groups of two or three. This is the change that mattered.
+  - **No depth bonus on floor 2** (monsters were 5% tougher), and **elites half as likely** there (6%, was 12%). On their own these barely moved floor-2 wipes.
+  - **Bot (30 campaigns each):** floor-2 wipes 85 across all 90 campaigns, down from 105 (about a fifth fewer). The queen falls in **11 / 11 / 5** (Mara / Corin / Alwen). The run before the lone-monster change gave 7 / 19 / 10, so differences of this size are mostly chance.
+  - **The hard part is now floor 4:** a visit there costs 42–50 health, most of the remaining wipes.
 - **Experience** still goes in full to everyone with the party. DESIGN's "a pair half each" reads like a split, while #179 says "unsplit", so this waits for the owner.
 
 ## Map and dungeon progression

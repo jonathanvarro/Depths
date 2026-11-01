@@ -43,8 +43,9 @@ func _initialize() -> void:
 
 	# Depth scaling.
 	var shallow = _fight(["goblin"], 2)
-	# Retuned 2026-10-25 (after the free torches): floor 2 +5%, 3 +15%, 4 +25%.
-	check("floor 2: +5% (a goblin 11 health)", shallow.foes[0].type.max_health == 11 or shallow.foes[0].elite == "Hardened")
+	# Retuned 2026-10-25 (after the free torches): 3 +15%, 4 +25%; floor 2's
+	# +5% came off 2026-11-01, easing floor 2.
+	check("floor 2: foes as written (a goblin 10 health)", shallow.foes[0].type.max_health == 10 or shallow.foes[0].elite == "Hardened")
 	check("floor 1: foes as written", _fight(["goblin"], 1).foes[0].type.max_health == 10)
 	var deep = _fight(["goblin", "goblin", "goblin"], 3, "gate")  # a set fight: no elites
 	var g = deep.foes[0]
@@ -94,7 +95,7 @@ func _initialize() -> void:
 			var f = CS.new(_party(), [_e("goblin"), _e("goblin")] as Array[EnemyType])
 			f.prepare(depth)
 			counts[depth] += f.foes.filter(func(x): return x.elite != "").size()
-	check("elites: rarer on floor 2 (about 1 foe in 10) than floor 4 (1 in 5)", counts[2] > 40 and counts[2] < 120 and counts[4] > counts[2] * 1.4, str(counts))
+	check("elites: rarer on floor 2 (about 1 foe in 17, eased 2026-11-01) than floor 4 (1 in 5)", counts[2] > 15 and counts[2] < 80 and counts[4] > counts[2] * 2, str(counts))
 	var none := 0
 	for i in 200:
 		var f = CS.new(_party(), [_e("rat"), _e("rat")] as Array[EnemyType])

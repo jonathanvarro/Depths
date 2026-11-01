@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-11-01 – Claude (floor 2 eased)
+- Did: On floors 1-2 a full party can now meet any group, lone monsters included (Main.EASY_DEPTH in encounter_pool). Floor 2 lost its +5% depth bonus (DEPTH_SCALE) and its elite chance halved to 6%. Bot: floor-2 wipes 105 -> 85 across 90 campaigns; queen 11/11/5 of 30, within run-to-run noise of earlier runs. elites_check updated to the new numbers. Details: DESIGN.md "Floor 2 eased".
+- Next: Floor 4 is now the main drain (42-50 health a visit). A playtest by the owner should say whether the curve feels right before more tuning.
+- Watch out: Bot runs of 30 campaigns swing by about +-8 queen wins per hero between runs; compare floor wipe counts, which move less. Known failure: gear_check "the Pack names the quality" (ChatGPT's).
+
 ## 2026-11-01 – ChatGPT (local supplied-FBX companion trial)
 - Did: #206 expands the supplied rigged FBX into one fitted expedition outfit, copper/silver-crop appearances and standing/sit-down/seated-idle/stand-up clips while retaining the source idle. Reusable tools: tools/fbx_companion_trial; private local gallery: build/local-fbx-trial/review/inspector.html; handoff: docs/fbx-companion-trial.md. Local native model exports, actual66-frame motion GIF and native192/96 portraits are included beside the review.
 - Next: Owner reviews source-model style, shared outfit fit and seated motion before extending the cast. Variations share one face/body shape; named likeness and live portrait/camp/equipment binding remain separate.

@@ -171,6 +171,8 @@ const QUEEN_FIGHT: Array = [QUEEN, GUARD, GUARD]
 ## from those no larger than the party.
 ## Deeper floors mix tactics: rats pick on the weakest while a spider webs
 ## someone or a goblin flanks (#15).
+## Floors where a full party can still meet a lone monster (encounter_pool).
+const EASY_DEPTH := 2
 const ENCOUNTER_GROUPS := {
 	1: [[RAT], [RAT], [SPIDER], [GREAT_RAT], [RAT, RAT], [RAT, SPIDER], [GREAT_RAT, RAT], [RAT, RAT, RAT],
 			[BAT], [BAT, RAT], [BAT, BAT, RAT]],
@@ -1575,12 +1577,16 @@ func _take_purse(foe) -> int:
 
 
 ## The enemy groups a party of `party_size` can meet at `depth` (#49).
+## Down to EASY_DEPTH any group fits; deeper, a full party meets groups
+## close to its own size.
 static func encounter_pool(depth: int, party_size: int) -> Array:
 	var groups: Array = ENCOUNTER_GROUPS.get(clampi(depth, 1, ENCOUNTER_GROUPS.size()))
 	var cap := party_size + (1 if party_size >= PartyState.MAX_MEMBERS and depth >= 3 else 0)
 	var fitting := groups.filter(func(g: Array): return g.size() <= cap)
 	if fitting.is_empty():
 		return [[groups[0][0]]]
+	if depth <= EASY_DEPTH:
+		return fitting  # any size: lone monsters too (eased 2026-11-01)
 	var close := fitting.filter(func(g: Array): return g.size() >= party_size - 1)
 	return close if not close.is_empty() else fitting
 
