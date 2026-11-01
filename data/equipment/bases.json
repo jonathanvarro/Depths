@@ -2,6 +2,66 @@
   "_about": "Table 1 of 6 (live data, read by the game): base items (#193). Stable IDs, slot, region tier and starting numbers. Region 1 = the Old Workings (floors 1-2), 2 = the Goblin Marches and the Queen's Hold (floors 3-4), 3 = the Drowned Galleries (floors 5-6, sketch only). 'grows' lists the stats mastery improves. 'strike' is the damage type the regional table's weaknesses refer to (a proposal: today it is presentation only). Existing bases keep their live numbers; new ones are marked new.",
   "bases": [
     {
+      "id": "companion_short_sword",
+      "name": "Short sword",
+      "slot": "weapon",
+      "region": 1,
+      "damage": [
+        3,
+        5
+      ],
+      "accuracy": 0.05,
+      "light": true,
+      "force": false,
+      "reach": false,
+      "strike": "slash",
+      "grows": [
+        "damage"
+      ],
+      "live": "companion_short_sword",
+      "no_drop": true
+    },
+    {
+      "id": "companion_mace",
+      "name": "Light mace",
+      "slot": "weapon",
+      "region": 1,
+      "damage": [
+        3,
+        5
+      ],
+      "accuracy": 0.0,
+      "light": true,
+      "force": false,
+      "reach": false,
+      "strike": "smash",
+      "grows": [
+        "damage"
+      ],
+      "live": "companion_mace",
+      "no_drop": true
+    },
+    {
+      "id": "camp_forged_blade",
+      "name": "Camp-forged blade",
+      "slot": "weapon",
+      "region": 1,
+      "damage": [
+        4,
+        6
+      ],
+      "accuracy": 0.0,
+      "light": true,
+      "force": false,
+      "reach": false,
+      "strike": "slash",
+      "grows": [
+        "damage"
+      ],
+      "live": "camp_forged_blade",
+      "no_drop": true
+    },
+    {
       "id": "riveted_knife",
       "name": "Riveted knife",
       "slot": "weapon",
@@ -134,7 +194,10 @@
       "grows": [
         "damage"
       ],
-      "new": true
+      "new": true,
+      "template": "simple_spear",
+      "price": 36,
+      "description": "A broad-bladed spear with a crossbar to stop what it skewers."
     },
     {
       "id": "goblin_cleaver",
@@ -154,7 +217,10 @@
         "accuracy",
         "damage"
       ],
-      "new": true
+      "new": true,
+      "template": "woodcutters_axe",
+      "price": 34,
+      "description": "A heavy goblin blade, more chopper than sword. Crude, and it bites."
     },
     {
       "id": "quilted_coat",
@@ -193,7 +259,10 @@
         "health"
       ],
       "new": true,
-      "weight": "medium"
+      "weight": "medium",
+      "template": "leather_jerkin",
+      "price": 52,
+      "description": "Leather set with iron studs. Better made than it looks."
     },
     {
       "id": "goblin_scale",
@@ -207,7 +276,10 @@
         "handling"
       ],
       "new": true,
-      "weight": "heavy"
+      "weight": "heavy",
+      "template": "leather_jerkin",
+      "price": 70,
+      "description": "Overlapping goblin-forged scales on a stiff backing. It stops a lot, and slows you."
     },
     {
       "id": "drowned_pick",
@@ -227,7 +299,10 @@
         "damage"
       ],
       "new": true,
-      "sketch": true
+      "sketch": true,
+      "template": "woodcutters_axe",
+      "price": 45,
+      "description": "A miner's pick, black with silt. It goes through anything."
     },
     {
       "id": "keeper_mail",
@@ -242,7 +317,10 @@
       ],
       "new": true,
       "sketch": true,
-      "weight": "heavy"
+      "weight": "heavy",
+      "template": "leather_jerkin",
+      "price": 80,
+      "description": "Fine dark rings, older than the mine."
     },
     {
       "id": "buckler",
@@ -255,7 +333,10 @@
       "grows": [
         "health"
       ],
-      "new": true
+      "new": true,
+      "template": "wool_cape",
+      "price": 22,
+      "description": "A small iron-rimmed shield, strapped to the back between fights. Placeholder picture."
     },
     {
       "id": "goblin_shield",
@@ -269,7 +350,10 @@
         "health",
         "handling"
       ],
-      "new": true
+      "new": true,
+      "template": "wool_cape",
+      "price": 34,
+      "description": "A round goblin shield of hide on wood. Placeholder picture."
     },
     {
       "id": "oilcloth_cloak",
@@ -307,7 +391,10 @@
       "effect": {
         "rear_damage_taken": 1.25,
         "trap_spotting": 0.15
-      }
+      },
+      "template": "oilcloth_cloak",
+      "price": 30,
+      "description": "Dyed the colour of the dark. Things behind you see less of you."
     },
     {
       "id": "satchel",

@@ -13,6 +13,7 @@ extends RefCounted
 signal day_passed(day: int)
 signal changed
 
+const GearModel := preload("res://scripts/gear_model.gd")
 const Quests := preload("res://scripts/quests.gd")
 const Supplies := preload("res://scripts/supplies.gd")
 const Recruits := preload("res://scripts/recruits.gd")
@@ -468,7 +469,7 @@ func buy_gear(party, item: Equipment) -> bool:
 	if not site_present("smith") or not can_afford(party, item.price) or not party.supplies.has_room_for_gear():
 		return false
 	party.supplies.gold -= item.price
-	party.supplies.gear.append(item)
+	party.supplies.gear.append(GearModel.ensure_instance(item))  # your own piece, from now on (#192)
 	fine_stock.erase(item)  # one of each fine piece a day
 	party.supplies.changed.emit()
 	changed.emit()

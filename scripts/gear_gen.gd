@@ -10,6 +10,7 @@ extends RefCounted
 ## pieces sell for more. Uniques are named one-offs for the story, later.
 
 const CampState := preload("res://scripts/camp_state.gd")
+const GearModel := preload("res://scripts/gear_model.gd")
 
 ## Modifiers: name, whether it goes before or after the item's name, and
 ## its effect (Boon fields). "rare_only" and "reach_only" limit where they
@@ -69,10 +70,10 @@ static func drop(rng: RandomNumberGenerator, depth: int, source: String, foe_hea
 		chance *= ELITE_TIMES if elite else ORDINARY_TIMES
 	if rng.randf() >= chance:
 		return null
-	var tier := _roll_tier(rng, TIER_ODDS[floor])
-	var pool := bases()
-	var item := make(pool[rng.randi_range(0, pool.size() - 1)], tier, rng)
-	if tier == "magic" and floor >= 2 and rng.randf() < CURSED_SHARE:
+	# Since 2026-10-31 (#192): a piece of the floor's region, rolled by the
+	# equipment tables (quality, growth, modifiers).
+	var item := GearModel.random_find(rng, depth)
+	if not item.mods.is_empty() and floor >= 2 and rng.randf() < CURSED_SHARE:
 		item.curse = load("res://data/boons/%s.tres" % CURSES[rng.randi_range(0, CURSES.size() - 1)])
 	return item
 

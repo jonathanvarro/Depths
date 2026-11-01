@@ -5,6 +5,7 @@ extends SceneTree
 ## the hero, and survive a save. Args: tag, screenshot dir.
 
 const GearGen := preload("res://scripts/gear_gen.gd")
+const GearModel := preload("res://scripts/gear_model.gd")
 const Quality := preload("res://scripts/quality.gd")
 const SaveGame := preload("res://scripts/save_game.gd")
 const CampState := preload("res://scripts/camp_state.gd")
@@ -65,14 +66,18 @@ func _initialize() -> void:
 	# Drops by floor.
 	var counts := {1: {}, 4: {}}
 	var chests := {1: 0, 4: 0}
+	var regions := {1: {}, 4: {}}
 	for depth in [1, 4]:
 		for i in 4000:
 			var find := GearGen.drop(rng, depth, "chest")
 			if find:
 				chests[depth] += 1
 				counts[depth][find.tier] = counts[depth].get(find.tier, 0) + 1
-	check("floor 1 chests: about 1 in 10, all fine", chests[1] > 300 and chests[1] < 500 and counts[1].keys() == ["fine"], "%d %s" % [chests[1], counts[1]])
-	check("floor 4 chests: about 15 in 100, magic and rare", chests[4] > 480 and chests[4] < 720 and not counts[4].has("fine") and counts[4].get("rare", 0) > 100, "%d %s" % [chests[4], counts[4]])
+				regions[depth][GearModel.base(find.base_id)["region"]] = true
+	# Since #192 (owner 2026-10-31): a find is the floor's region's gear,
+	# with 0-2 modifiers by region (the border: common, magic, rare).
+	check("floor 1 chests: about 1 in 10, Old Workings gear, mostly plain", chests[1] > 300 and chests[1] < 500 and regions[1].keys() == [1.0] and counts[1].get("common", 0) > chests[1] * 0.6, "%d %s" % [chests[1], counts[1]])
+	check("floor 4 chests: about 15 in 100, Goblin Marches gear, more modifiers", chests[4] > 480 and chests[4] < 720 and regions[4].keys() == [2.0] and counts[4].get("magic", 0) + counts[4].get("rare", 0) > chests[4] * 0.25, "%d %s" % [chests[4], counts[4]])
 	var weak := 0
 	for i in 2000:
 		if GearGen.drop(rng, 3, "foe", 5):

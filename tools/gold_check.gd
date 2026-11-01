@@ -146,9 +146,10 @@ func _initialize() -> void:
 	await _open("smith")
 	await _snap("smith")
 	check("can't afford the axe", not camp.buy_gear(ps, load("res://data/gear/woodcutters_axe.tres")))
-	check("buy a plain knife", _press(main._camp, "Buy 8g") and supplies.gold == 2 and supplies.gear.any(func(g): return g.resource_path == "res://data/gear/plain_knife.tres"))
+	check("buy a plain knife", _press(main._camp, "Buy 8g") and supplies.gold == 2 and supplies.gear.any(func(g): return g.base_id == "riveted_knife"))  # your own item now (#192)
 	await _open("supplies")
-	check("sell it back for 2g (30%)", _trade(load("res://data/gear/plain_knife.tres"),"right") and supplies.gold == 4)
+	var knife = supplies.gear.filter(func(g): return g.base_id == "riveted_knife")[0]
+	check("sell it back for 2g (30%)", _trade(knife,"right") and supplies.gold == 4)
 
 	# Stash: gold stays safe through a wipe.
 	await _open("rest")

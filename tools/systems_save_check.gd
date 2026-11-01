@@ -46,7 +46,7 @@ func _initialize() -> void:
 			continue
 		if find.curse and find.slot == "weapon" and cursed_weapon == null:
 			cursed_weapon = find
-		elif not find.curse and find.tier == "magic" and made == null:
+		elif not find.curse and find.tier == "magic" and find.effect != null and made == null:  # an item with an effect (#192)
 			made = find
 	var cursed_trinket: Equipment = Trinkets.all().filter(func(t): return t.curse != null)[0]
 
@@ -77,7 +77,7 @@ func _initialize() -> void:
 	check("a bane and its count", mara.boons.size() == 1 and mara.boons[0]["boon"].resource_path.ends_with("sickness.tres") and mara.boons[0]["fights_left"] == 2, str(mara.boons))
 	check("a cursed trinket, still cursed", mara.trinket != null and mara.trinket.display_name == cursed_trinket.display_name and mara.is_cursed())
 	check("...and its clean self, for when it's lifted", mara.trinket.cleansed != null)
-	check("the back slot", mara.back != null and mara.back.resource_path.ends_with("satchel.tres"))
+	check("the back slot", mara.back != null and mara.back.base_id == "satchel")  # your own satchel, as an item (#192)
 	check("a cursed weapon: name, curse and damage", mara.weapon and mara.weapon.display_name == weapon_name and mara.cursed_gear() == mara.weapon and mara.attack_range() == weapon_range, "%s %s" % [mara.weapon.display_name if mara.weapon else "none", mara.attack_range()])
 	var carried: Array = ps.supplies.gear.filter(func(g): return g.display_name == made_name)
 	check("made gear in the pack keeps its tier and effect", carried.size() == 1 and carried[0].tier == "magic" and carried[0].effect != null and carried[0].effect.effects_text() == made_effect, str(ps.supplies.gear.map(func(g): return g.display_name)))
@@ -108,7 +108,7 @@ func _initialize() -> void:
 	ps = main._party_state
 	check("continue at camp: the forge stands", camp.forge_built)
 	check("...with today's stock, less what was bought", camp.smith_fine_stock().map(func(g): return g.display_name) == left, str(camp.smith_fine_stock().map(func(g): return g.display_name)))
-	check("...and what was bought is carried", ps.supplies.gear.any(func(g): return g.display_name == bought.display_name and g.tier == "fine"))
+	check("...and what was bought is carried, as your own fine item (#192)", ps.supplies.gear.any(func(g): return g.base_id != "" and g.quality == "fine"))
 	check("routes remembered", camp.floors_reached == routes, str(camp.floors_reached))
 	check("the lifted curse stays lifted", not ps.members[0].is_cursed() and ps.members[0].trinket != null)
 	await _drop(main)

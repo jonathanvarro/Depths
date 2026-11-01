@@ -10,6 +10,7 @@ const Ambience := preload("res://scripts/ambience.gd")
 const Recruits := preload("res://scripts/recruits.gd")
 const Trinkets := preload("res://scripts/trinkets.gd")
 const GearGen := preload("res://scripts/gear_gen.gd")
+const GearModel := preload("res://scripts/gear_model.gd")
 const TURN_LEFT_ICON := preload("res://art/ui/controls-v1/turn-left.svg")
 const SPADE := preload("res://data/items/spade.tres")
 const PICK := preload("res://data/items/pick.tres")
@@ -1746,6 +1747,11 @@ func _restore(data: Dictionary) -> void:
 	_camp_state.recovering = {}
 	for pair in data["recovering"]:
 		_camp_state.recovering[people[pair[0]]] = pair[1]
+	# Older saves' gear becomes items with mastery (#192), once.
+	for hero in people:
+		GearModel.instance_hero(hero)
+	for kit in [_party_state.supplies, _camp_state.stash]:
+		kit.gear.assign(kit.gear.map(func(g): return GearModel.ensure_instance(g)))
 	_camp_state.rng.state = data["camp_rng"]
 	_expedition = Expedition.new(_party_state, data["expedition"]["number"])
 	SaveGame.unpack_into(_expedition, data["expedition"])
@@ -2123,8 +2129,7 @@ const LAIR_GOLD := 10
 const LAIR_RARE_CHANCE := 0.25
 
 func _lair_won() -> void:
-	var bases := GearGen.bases()
-	var prize: Equipment = GearGen.make(bases[_rng.randi_range(0, bases.size() - 1)], "rare" if _rng.randf() < LAIR_RARE_CHANCE else "magic", _rng)
+	var prize: Equipment = GearModel.random_find(_rng, _depth, 2 if _rng.randf() < LAIR_RARE_CHANCE else 1)  # #192
 	var gold := LAIR_GOLD + 5 * _depth
 	_party_state.supplies.gold += gold
 	_party_state.supplies.changed.emit()

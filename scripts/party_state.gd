@@ -8,6 +8,7 @@ extends RefCounted
 
 signal changed
 
+const GearModel := preload("res://scripts/gear_model.gd")
 const Supplies := preload("res://scripts/supplies.gd")
 const Trinkets := preload("res://scripts/trinkets.gd")
 const StrainRules := preload("res://scripts/strain.gd")
@@ -31,6 +32,7 @@ func add_member(definition: Companion) -> bool:
 	if members.size() >= MAX_MEMBERS:
 		return false
 	var member: Companion = definition.duplicate()
+	GearModel.instance_hero(member)  # worn pieces become items with mastery (#192)
 	member.talents = definition.talents.duplicate()
 	member.refresh_stats()
 	member.pending_effects = []

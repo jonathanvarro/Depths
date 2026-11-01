@@ -31,6 +31,30 @@ extends Resource
 ## "smash" for clubs and maces, "pierce" for spears.
 @export_enum("slash", "smash", "pierce") var strike := "slash"
 
+@export_group("Item")
+## Equipment as individual items (#192/#193, owner 2026-10-31; gear_model.gd).
+## Rolled once when found; never rerolled. Empty base_id: an older or
+## special piece the new rules don't track (a broken knife, a trinket).
+@export var base_id := ""
+@export_enum("cracked", "bent", "ordinary", "fine", "exceptional") var quality := "ordinary"
+@export var damage_roll := 0
+@export var accuracy_roll := 0.0
+@export var health_roll := 0
+## Stat -> "slow", "steady" or "swift": what each mastery level adds.
+@export var growth: Dictionary = {}
+## Modifier IDs (data/equipment/modifiers.json).
+@export var mods: PackedStringArray = []
+## Mastery points earned on this item (fractions kept).
+@export var mastery := 0.0
+## The smith's improvements at mastery 3 and 6 ("edge", "weight", "refit", "plate").
+@export var tempers: PackedStringArray = []
+## Modifier effects the fight rules read (ignore_armour, damage_vs...).
+@export var traits: Dictionary = {}
+## A shield's guard: armour against blows from the front.
+@export var guard := 0
+@export var gear_version := 0
+@export var instance_id := 0
+
 @export_group("Trinket")
 ## Trinkets (#135; owner 2026-10-21), and cloaks and capes on the back:
 ## what wearing it does, as long as it's worn.
