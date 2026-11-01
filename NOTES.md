@@ -45,6 +45,7 @@ Format:
   - Brew items are shared resources renamed in place, and `Brews.item()` holds them in `Engine` meta so they aren't reloaded plain.
   - Level-ups use the yes/no prompt (`_choose`); any check that expects no prompt after a win must answer it first.
   - XP is still the full amount for everyone; "a pair half each" in DESIGN waits for the owner.
+  - The bot's fight block was broken by phase 3's mastery edit (it failed to parse on 2026-10-31); fixed. Its new numbers are in DESIGN: the queen falls far less often now. Tune before the next playtest.
 
 ## 2026-10-31 – Claude (playtest fixes, equipment phases 3 and 4)
 - Did:

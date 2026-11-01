@@ -743,16 +743,17 @@ func _fight(group: Array, kind: String, on_map := false) -> int:
 				var coins := randi_range(foe.type.purse.x, foe.type.purse.y)
 				party.supplies.gold += coins
 				stats["gold_found"] += coins
+	# Gear mastery, as main.gd awards it (#192).
+	var owned := GearModel.owned_by(party)
+	if state.result != CS.Result.DEFEAT:
+		for hero: Companion in party.members:
+			if hero.is_with_party() and hero.body and hero.body.base_id != "":
+				state.mastery_gain[hero.body] = minf(5.0, float(state.mastery_gain.get(hero.body, 0.0)) + 1.0)
+	for item in state.mastery_gain:
+		GearModel.award(item, state.mastery_gain[item], owned)
 	if state.result == CS.Result.VICTORY:
 		stats["fights_won"] += 1
 		_award_xp(state, kind)
-	# Gear mastery, as main.gd awards it (#192).
-	var owned := GearModel.owned_by(party)
-	for hero: Companion in party.members:
-		if hero.is_with_party() and hero.body and hero.body.base_id != "":
-			state.mastery_gain[hero.body] = minf(5.0, float(state.mastery_gain.get(hero.body, 0.0)) + 1.0)
-	for item in state.mastery_gain:
-		GearModel.award(item, state.mastery_gain[item], owned)
 		# Tougher foes sometimes leave a trinket (#135), as in the game.
 		for foe in state.foes:
 			if foe.health > 0:

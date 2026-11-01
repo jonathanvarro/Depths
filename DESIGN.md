@@ -209,6 +209,7 @@ Numbers are first guesses for the bot and the owner's playtests to tune.
   **Armour by class:** Melee wears any; Scout and Fixer light or medium; Mage light only. The back slot follows `bases.json`.
 
   **Main heroes:** Corin is Melee, Mara a Scout, Alwen a Mage. Old saves and recruits convert on load (Warden and Brawler become Melee, Rogue becomes Scout, Healer becomes Mage). Recruits borrow the older roles' faces and lines until the named cast (#180).
+- **The bot after all of this (2026-11-01, 30 campaigns each, 45 days):** the queen falls in **0 / 5 / 2** campaigns for Mara / Corin / Alwen, down from 23 / 27 / 12. Wipes average 2.4–3.7 a campaign, mostly on floor 2. Parties reach floor 4 at level 3 or so. Levels resetting, and wipes costing worn gear, make the campaign much harder. This needs tuning before the owner's next playtest; the levers are the thresholds, the spare kit and the drink/throw numbers.
 - **Experience** still goes in full to everyone with the party. DESIGN's "a pair half each" reads like a split, while #179 says "unsplit", so this waits for the owner.
 
 ## Map and dungeon progression
