@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-11-02 – Claude (per-body animation downloads)
+- Did: Recorded the owner's decision to re-download Mixamo clips with each base body loaded instead of hand-retargeting: plan in docs/animation-library.md ("Plan: download each clip on its own body") and a comment on #215. Upload the Dying FBXs #210's masters came from; save to Animations/Mixamo_Female/ and Mixamo_Male/; Mixamo_Originals stays untouched.
+- Next: Owner downloads #215's four clips (Idle, Walking, Stand To Sit, Sitting Idle) on both bodies. Then an assistant checks that bones/rest match each master exactly, plays them, and updates the list. #215 becomes verification; retargeting is only the fallback.
+- Watch out: If Mixamo offers to re-rig a body, stop: a new skeleton breaks the master/garment fit. Other uncommitted equipment/audio/AGENTS/NOTES changes in the working tree were left out of this commit.
+
 ## 2026-11-01 – ChatGPT (editable Blender base masters)
 - Did: Completed #210 with both true supplied Dying FBXs in local female_base.blend / male_base.blend, neutral/rest modelling, preserved source Actions/OBSlot,39 source hashes,65/49-bone fit audit, shared collection/material/mask/export contract and beginner workflow. Review: build/local-blender-kit-v1/review/inspector.html; handoff: docs/blender-base-contract.md; reusable tools: tools/blender_kit. Recovered the unchanged female packed texture after checking both UV maps; no new faces, clothing or live binding.
 - Next: #211–#213 fit garments against the separate masters. #215 retargets the supplied idle/walk/seated clips before #214's full motion matrix; direct assignment was actually tested and is unsuitable on both fits. Shared clip statuses are updated in docs/animation-library.md, distinguishing source verification from owner/garment acceptance.
