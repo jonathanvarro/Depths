@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-11-02 – Claude (sound audit)
+- Did: Audited the game's sounds at the owner's request and opened #217 (audio, on the board). Footsteps, the floor 1-4 background loops, the wall bump and passage-opening sounds are still audio/placeholder files in the four themes. Prayers, monster cries, map notice/danger cues, traps, brews, level-ups, stairs, Pack actions and the smith's temper have no sound of their own (prayers borrow "block").
+- Next: ChatGPT delivers #217's files; Claude hooks them into sounds.gd and the themes. The owner still has to listen to "Below the Sluice" (#167).
+- Watch out: No code changed. A fresh Windows build (build/windows/Depths.exe) was exported today from the working tree, including the other assistant's uncommitted icon/audio work.
+
 ## 2026-11-02 – ChatGPT (#214 native editable wardrobe review)
 - Did: Added an isolated Godot4.7.2 Mobile review with both supplied fits, five independent garment toggles, body/view/angle selectors, native pause/touch seek/frame steps, foldable tools and source details. Local launcher: build/local-blender-kit-v1/assembly-v1/START_REVIEW.cmd; gallery: review/inspector.html; handoff: docs/blender-wardrobe-review.md. Two editable review .blend copies remain byte-identical to the garment masters. New self-contained GLBs preserve all source body faces in six/five disjoint coverage regions on the original65/49-joint rigs. No32-body duplication or cumulative cutting; all32 selections match Blender, including restored-body motion.
 - Next: #214 stays In Progress for #215's final body-specific animation verification. The designated Mixamo_Female/Mixamo_Male folders were not present on read; legacy fitting clips remain explicitly temporary. Chair-height sit-down and reclined ground idle are not a continuous sequence. Final portrait/style/likeness acceptance and live hookup remain separate; source heads/pixels are unchanged. Parent #209 receives a candidate handoff, not a claim that the dependency is complete.
