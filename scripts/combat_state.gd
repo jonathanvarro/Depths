@@ -227,6 +227,7 @@ var _venom := {}  # Companion -> turns left
 var _venom_damage := {}  # Companion -> damage per tick (a venom spider's is worse)
 var _opened := {}  # Companion -> true after their first attack (opening shot, #47)
 var _dazzled := {}  # Foe -> true: a flare costs it its next action (#74)
+var _bound := {}  # Foe -> turns it is held in place by a Mage's Bind (#170)
 var _squinting := {}  # Foe -> true: worse aim on its next action (#74)
 var _drummed := {}  # Foe -> true: their next hit is stronger (goblin drummer)
 var _grabbed := {}  # Companion -> Foe holding them (hollow miner, #140)
@@ -855,6 +856,12 @@ var _grab_fresh := {}  # Companion -> grabbed this round (held one more turn)
 ## Returns {"target": Companion, "hit": bool, "damage": int,
 ## "injury": Injury or null, "text": String}.
 func enemy_act(foe: Foe) -> Dictionary:
+	if _bound.has(foe):  # held by a prayer (#170): no move, no blow
+		_bound[foe] -= 1
+		if _bound[foe] <= 0:
+			_bound.erase(foe)
+		return {"target": null, "hit": false, "damage": 0, "injury": null,
+				"text": "The %s strains against the binding." % foe.name.to_lower()}
 	if _dazzled.has(foe):  # blinded by a flare: this turn is lost (#74)
 		var asleep: bool = _dazzled[foe] is String and _dazzled[foe] == "asleep"
 		_dazzled.erase(foe)
@@ -1087,6 +1094,43 @@ func hero_flare(hero: Companion) -> Dictionary:
 		parts.append("the lamp-eater drinks it in")
 	outcome["text"] = "%s flares the light%s" % [hero.display_name, (" - " + ", ".join(parts) + ".") if not parts.is_empty() else "."]
 	return outcome
+
+
+## A Mage's prayer in a fight (#170, spells.gd): Mend, Holy light or Bind
+## (at `target`). Returns {"text", "failed", "healed", "dazzled"}.
+func hero_cast(hero: Companion, id: String, target: Foe = null) -> Dictionary:
+	var Spells = load("res://scripts/spells.gd")
+	var outcome := {"text": "", "failed": false, "healed": null, "dazzled": []}
+	if Spells.cannot_cast(hero, id, true) != "" or (id == "bind" and (target == null or not target.is_alive())):
+		return outcome
+	_webbed.erase(hero)
+	var failed: String = Spells.spend(hero, rng)
+	if failed != "":
+		outcome["failed"] = true
+		outcome["text"] = failed
+		return outcome
+	match id:
+		"mend":
+			outcome["healed"] = party.most_hurt()
+			outcome["text"] = Spells.mend(party)
+		"light":
+			party.supplies.kindle(Spells.LIGHT_TIME)
+			for foe in living_foes():
+				if flare_effect(foe) == "dazzle":
+					_dazzled[foe] = true
+					outcome["dazzled"].append(foe)
+				elif flare_effect(foe) == "squint":
+					_squinting[foe] = true
+			outcome["text"] = "%s calls down a holy light%s" % [hero.display_name, " - the beasts reel back, blinded." if not outcome["dazzled"].is_empty() else "."]
+		"bind":
+			var turns: int = Spells.BIND_BOSS_TURNS if target.type.tactic == EnemyType.Tactic.QUEEN else Spells.BIND_TURNS
+			_bound[target] = turns
+			outcome["text"] = "%s's prayer binds the %s in place." % [hero.display_name, target.name.to_lower()]
+	return outcome
+
+
+func is_bound(foe: Foe) -> bool:
+	return _bound.has(foe)
 
 
 func is_dazzled(foe: Foe) -> bool:

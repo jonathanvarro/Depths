@@ -13,6 +13,7 @@ signal _action_chosen(action: Dictionary)
 const CombatState := preload("res://scripts/combat_state.gd")
 const Glyphs := preload("res://art/ui/backlog96-v1/glyphs.gd")
 const CombatFx := preload("res://scripts/combat_fx.gd")
+const Spells := preload("res://scripts/spells.gd")
 const Sounds := preload("res://scripts/sounds.gd")
 const COLOR_TEXT := Color("e8d9b0")
 const COLOR_DIM_TEXT := Color(0.85, 0.8, 0.7, 0.75)
@@ -186,6 +187,10 @@ func _field_foes_turn() -> void:
 	for foe in order:
 		if not foe.is_alive() or _state.result != CombatState.Result.ONGOING:
 			continue
+		if _state.is_bound(foe):  # held by a prayer: it neither moves nor strikes (#170)
+			await get_tree().create_timer(ENEMY_PAUSE).timeout
+			await _enemy_action(foe)
+			continue
 		if _state.rests_this_turn(foe):
 			continue  # slow: it moves or strikes only every other turn (#171)
 		if _state.foe_in_range(foe):
@@ -256,6 +261,9 @@ func _update_field_buttons() -> void:
 				button.disabled = _state.shooters(_target).is_empty()
 			"Retreat":
 				button.disabled = no_retreat
+			"Cast":
+				button.visible = _state.party.living_members().any(func(h): return Spells.is_caster(h))
+				button.disabled = _caster() == null
 
 
 func run(state, cards: Array) -> void:
@@ -414,6 +422,19 @@ func _hero_action(hero: Companion, action: Dictionary) -> void:
 			if outcome["killed"]:
 				last_blow = "fire"
 				await _fade_out(target)
+		"cast":  # a Mage's prayer (#170)
+			var caster: Companion = action["caster"]
+			var target = _target if action["spell"] == "bind" else null
+			outcome = _state.hero_cast(caster, action["spell"], target)
+			Sounds.play(self, "block", -14.0)
+			if outcome["failed"]:
+				_fx.number(_card_point(caster), "falters", CombatFx.COLOR_DULL, 34)
+			elif action["spell"] == "light":
+				_glare()
+				for foe in outcome["dazzled"]:
+					_play(foe, "hurt", 0.35)
+			elif action["spell"] == "bind":
+				_fx.icon(_foe_point(target), GRABBED_MARK, 56.0)
 		"throw":
 			var target = _target
 			outcome = _state.hero_throw_torch(hero, target)
@@ -460,7 +481,7 @@ func _show_attack(hero: Companion, target, outcome: Dictionary) -> void:
 
 
 func _enemy_action(foe) -> void:
-	if foe.intent in [CombatState.Intent.KILLING_BLOW, CombatState.Intent.CLEAVER] and coin:
+	if foe.intent in [CombatState.Intent.KILLING_BLOW, CombatState.Intent.CLEAVER] and coin and not _state.is_bound(foe):
 		# The coin decides (#77): shown in the open, no turning it down.
 		var target: Companion = _state.prepare_killing_blow(foe)
 		if target:
@@ -983,6 +1004,41 @@ func _show_actions(shown: bool) -> void:
 		_show_items()
 
 
+## The Mage who can cast now (#170): the first conscious caster with casts.
+func _caster() -> Companion:
+	for hero: Companion in _state.party.living_members():
+		if Spells.is_caster(hero) and hero.casts > 0:
+			return hero
+	return null
+
+
+## The Mage's prayers, as the Item list shows items.
+func _show_spells() -> void:
+	for child in _item_buttons.get_children():
+		child.queue_free()
+	var caster := _caster()
+	if caster != null:
+		for id: String in Spells.known(caster):
+			if not Spells.SPELLS[id]["fight"]:
+				continue
+			var button := _button("%s (%d)" % [Spells.name_of(id), caster.casts])
+			button.tooltip_text = Spells.describe(id)
+			button.disabled = only_action != "" or (id == "bind" and (_target == null or not _target.is_alive()))
+			if id == "mend" and _state.party.most_hurt() == null:
+				button.disabled = true
+			button.pressed.connect(func(): _action_chosen.emit({"kind": "cast", "spell": id, "caster": caster}))
+			_item_buttons.add_child(button)
+	var back := _button("Back")
+	back.pressed.connect(func():
+		_action_buttons.visible = not _state.field
+		_field_buttons.visible = _state.field
+		_item_buttons.visible = false)
+	_item_buttons.add_child(back)
+	_action_buttons.visible = false
+	_field_buttons.visible = false
+	_item_buttons.visible = true
+
+
 func _show_items() -> void:
 	for child in _item_buttons.get_children():
 		child.queue_free()
@@ -1118,10 +1174,13 @@ func _build() -> void:
 	rows.add_child(_field_buttons)
 	# No Retreat on the map (owner 2026-10-31): you get away by moving - the
 	# stairs, a door shut behind you, or out of their sight.
-	for spec in [["Strike", "strike"], ["Shoot", "shoot"], ["Brace", "brace"], ["Item", ""], ["Wait", "wait"]]:
+	for spec in [["Strike", "strike"], ["Shoot", "shoot"], ["Brace", "brace"], ["Cast", "cast"], ["Item", ""], ["Wait", "wait"]]:
 		var button := _button(spec[0])
 		var kind: String = spec[1]
-		if kind == "":
+		if kind == "cast":
+			button.pressed.connect(_show_spells)  # a Mage's prayers (#170)
+			button.visible = false
+		elif kind == "":
 			button.pressed.connect(_show_items)
 		else:
 			button.pressed.connect(func(): _action_chosen.emit({"kind": kind}))
@@ -1129,6 +1188,7 @@ func _build() -> void:
 	_field_buttons.get_child(0).tooltip_text = "Your front row strikes the enemy you face. Turning is free."
 	_field_buttons.get_child(1).tooltip_text = "Your back row's reach attacks the chosen enemy, along the line you face."
 	_field_buttons.get_child(2).tooltip_text = "Everyone defends: heavy blows are turned aside."
+	_field_buttons.get_child(3).tooltip_text = "Your Mage prays: a few casts each trip."
 	_item_buttons = HBoxContainer.new()
 	_item_buttons.add_theme_constant_override("separation", 8)
 	_item_buttons.visible = false

@@ -34,6 +34,7 @@ const MERCHANT_STOCK: Array[SupplyItem] = [
 	preload("res://data/items/holy_water.tres"),
 	preload("res://data/items/spade.tres"),
 	preload("res://data/items/pick.tres"),
+	preload("res://data/items/votive_candle.tres"),  # a Mage's cast back (#170)
 ]
 ## The nurse lifts a bane for this much (#133).
 const LIFT_BANE_PRICE := 20

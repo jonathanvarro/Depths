@@ -124,10 +124,25 @@ func burn_rate() -> float:
 	return BURN_AT_EMPTY + (BURN_AT_FULL - BURN_AT_EMPTY) * oil / LANTERN_CAPACITY
 
 
+## A Mage's Holy light (#170): time left in its glow. While it lasts the
+## light is bright and neither oil nor torch burns.
+var glow_left := 0.0
+
+
+func kindle(time: float) -> void:
+	var band_before := light_band()
+	glow_left = maxf(glow_left, time)
+	if light_band() != band_before:
+		light_band_changed.emit(light_band())
+	changed.emit()
+
+
 ## `rate`: boons and banes can make the lantern burn slower or faster (#133).
 func burn(units: int, rate := 1.0) -> void:
 	var band_before := light_band()
-	if source == Source.TORCH:
+	if glow_left > 0.0:
+		glow_left = maxf(0.0, glow_left - units)
+	elif source == Source.TORCH:
 		if not torch_burns:
 			return
 		torch_left = maxf(0.0, torch_left - units)
@@ -219,6 +234,8 @@ func torch_lit() -> bool:
 ## 0 (out) to 1 (full): how strong the light is. Combat can read this as
 ## the lantern's advantage later.
 func light_fraction() -> float:
+	if glow_left > 0.0:
+		return 1.0
 	match source:
 		Source.TORCH:
 			return TORCH_LIGHT * (0.6 if torch_left < TORCH_DIM_BELOW else 1.0)
@@ -228,6 +245,8 @@ func light_fraction() -> float:
 
 
 func light_band() -> Light:
+	if glow_left > 0.0:
+		return Light.BRIGHT
 	match source:
 		Source.NONE:
 			return Light.OUT

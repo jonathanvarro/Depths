@@ -366,6 +366,13 @@ Templates > Download and Install; already installed on the owner's PC).
   down; `DungeonMap.marks["refuge"]`. EventOutcome `recover` heals everyone
   to full with `rest`. An underground camp: never call `Progression.reset`.
   `tools/refuge_check.gd`; the bot's `BOT_NO_REFUGE=1` leaves it out.
+- Magic (#170, 2026-11-02): `scripts/spells.gd` (prayers: Mend, Holy light,
+  Bind, Watchful eye; CASTS per trip, refilled in `Progression.reset`;
+  miscasts when Shaken/Panicking). Companion `spells` (from tomes, kept) and
+  `casts`; SupplyItem effects TOME (`spell`) and CANDLE; `Supplies.glow_left`
+  (`kindle`), `PartyState.watch_left`, `Minimap.sensed`; CombatState
+  `hero_cast`/`is_bound`; Cast in map fights and the Pack's Status tab.
+  `tools/magic_check.gd`. Art: #216.
 - Settings (#52): `scripts/settings.gd` (static values, `apply()`, audio
   buses Master/Music/Effects; test runs use test_settings.cfg) and
   `scripts/settings_screen.gd`. New sound players should set `bus`.

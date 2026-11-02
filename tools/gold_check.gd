@@ -88,9 +88,14 @@ func _initialize() -> void:
 	var coins := EventChoice.new()
 	coins.outcomes = [pack.choices[0].outcomes[3]]
 	main._room_events.resolve(ps, coins)
-	var found_items: Array = supplies.items.filter(func(i): return i.effect == SupplyItem.Effect.TREASURE and supplies.count(i) > 0)
+	# A valuable: treasure, or now and then a brew (#175), a tome or a candle (#170).
+	var found_items: Array = supplies.items.filter(func(i): return i.effect in [SupplyItem.Effect.TREASURE, SupplyItem.Effect.BREW, SupplyItem.Effect.TOME, SupplyItem.Effect.CANDLE] and supplies.count(i) > 0)
 	check("a chest gives coins and a random valuable", supplies.gold == 5 and found_items.size() == 1 and found_items[0].icon != null, str(found_items.map(func(i): return i.display_name)))
 	var valuable: SupplyItem = found_items[0]
+	if valuable.effect != SupplyItem.Effect.TREASURE:  # the rest is about plain treasure
+		supplies.drop(valuable, 1)
+		supplies.add(trinket)
+		valuable = trinket
 	check("the expedition counts the gold", main._expedition.gold_found == 5)
 	check("treasure can't be used, only sold", ps.cannot_use_reason(valuable) == "Sell it at camp")
 

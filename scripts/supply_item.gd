@@ -18,6 +18,8 @@ enum Effect {
 	CURE_VENOM,  ## clears spider venom from one hero (in fights too); also purifies water
 	LIFT_BANE,  ## lifts one bane from a hero; also blesses evil shrines (#133)
 	BREW,  ## an unknown cave brew (#175): drunk outside a fight, thrown in one; see brews.gd
+	TOME,  ## a Mage reads it and learns `spell` for good (#170, spells.gd)
+	CANDLE,  ## gives a Mage `amount` casts back, outside a fight (#170)
 }
 
 @export var display_name := "Supply"
@@ -45,6 +47,8 @@ enum Effect {
 ## For a BREW: which kind it really is (restorative, caustic, slumber,
 ## frenzy, revealing). Its look and name come from brews.gd.
 @export var brew := ""
+## For a TOME: the spell it teaches (spells.gd).
+@export var spell := ""
 
 
 func with_article() -> String:

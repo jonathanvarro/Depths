@@ -29,6 +29,7 @@ const Story := preload("res://scripts/story.gd")
 const Packages := preload("res://scripts/packages.gd")
 const Wanderers := preload("res://scripts/wanderers.gd")
 const Refuge := preload("res://scripts/refuge.gd")
+const Spells := preload("res://scripts/spells.gd")
 
 const TORCH := preload("res://data/items/torch.tres")
 const RATION := preload("res://data/items/ration.tres")
@@ -73,6 +74,7 @@ var steps := 0
 var trinket_rng := RandomNumberGenerator.new()  # trinket drops (#135)
 var wanderers := Wanderers.new()  # wandering monsters, as in the game
 var wander_rng := RandomNumberGenerator.new()
+var prayer_rng := RandomNumberGenerator.new()  # miscasts (#170)
 
 
 func _initialize() -> void:
@@ -118,7 +120,7 @@ func _campaign(hero_path: String, run_seed: int, max_days: int) -> Dictionary:
 		"wipes_by_floor": {1: 0, 2: 0, 3: 0, 4: 0}, "first_arrival": {},
 		"gold_found": 0, "gold_contracts": 0, "gold_sold": 0, "gold_spent": 0, "bounty": 0,
 		"gate_tries": 0, "gate_day": 0, "queen_tries": 0, "queen_rounds": 0, "queen_day": 0,
-		"route_bought": 0, "refuge_rests": 0, "lantern_day": 0, "boons": 0, "banes": 0, "banes_lifted": 0, "trinkets_found": 0, "trinkets_worn": 0, "gear_found": 0, "gear_equipped": 0,
+		"route_bought": 0, "refuge_rests": 0, "casts": 0, "tomes_read": 0, "lantern_day": 0, "boons": 0, "banes": 0, "banes_lifted": 0, "trinkets_found": 0, "trinkets_worn": 0, "gear_found": 0, "gear_equipped": 0,
 		# Light (owner question, 2026-10-25): steps by light band, trips cut
 		# short for want of light, and light used.
 		"steps_bright": 0, "steps_steady": 0, "steps_dim": 0, "steps_out": 0,
@@ -880,6 +882,12 @@ func _field_party(state, map) -> void:
 			state.escape()
 		return
 	for hero: Companion in party.living_members():
+		if float(hero.health) / maxf(1.0, hero.effective_max_health()) < 0.4:
+			var caster := _caster("mend", true)  # a Mage's Mend first (#170)
+			if caster != null:
+				state.hero_cast(caster, "mend")
+				stats["casts"] += 1
+				return
 		if float(hero.health) / maxf(1.0, hero.effective_max_health()) < 0.3 and party.cannot_use_reason(DRAUGHT, true) == "":
 			state.hero_use_item(DRAUGHT)
 			return
@@ -1010,7 +1018,23 @@ func _boon_count() -> Vector2i:
 	return count
 
 
+## A Mage who can cast `id` now (#170), or null.
+func _caster(id: String, in_fight: bool) -> Companion:
+	for hero: Companion in party.living_members():
+		if Spells.cannot_cast(hero, id, in_fight) == "":
+			return hero
+	return null
+
+
 func _patch_up() -> void:
+	for item: SupplyItem in party.supplies.items.duplicate():  # read any new prayer (#170)
+		if item.effect == SupplyItem.Effect.TOME and party.cannot_use_reason(item) == "":
+			party.use_item(item)
+			stats["tomes_read"] += 1
+	for hero: Companion in party.living_members():
+		if float(hero.health) / hero.effective_max_health() < 0.5 and _caster("mend", false) != null:
+			Spells.cast_in_field(party, _caster("mend", false), "mend", prayer_rng)
+			stats["casts"] += 1
 	if party.cannot_use_reason(HOLY_WATER) == "":
 		party.use_item(HOLY_WATER)  # lift a bane in the field
 		stats["banes_lifted"] += 1
@@ -1136,6 +1160,8 @@ func _summarise(all: Dictionary) -> void:
 				_mean(runs.map(func(r): return r["gold_sold"])), _mean(runs.map(func(r): return r["gold_spent"])),
 				runs.filter(func(r): return r["lantern_day"] > 0).size(), _mean(runs.map(func(r): return r["route_bought"])),
 				_mean(runs.map(func(r): return r["refuge_rests"]))])
+		print("  prayers cast %.1f, tomes read %.1f per campaign (#170)" % [
+				_mean(runs.map(func(r): return r["casts"])), _mean(runs.map(func(r): return r["tomes_read"]))])
 		print("  boons gained %.1f, banes gained %.1f, banes lifted %.1f per campaign (#133); trinkets found %.1f, worn %.1f (#135); gear found %.1f, equipped %.1f" % [
 				_mean(runs.map(func(r): return r["boons"])), _mean(runs.map(func(r): return r["banes"])),
 				_mean(runs.map(func(r): return r["banes_lifted"])), _mean(runs.map(func(r): return r["trinkets_found"])),

@@ -12,6 +12,7 @@ const Supplies := preload("res://scripts/supplies.gd")
 const StrainRules := preload("res://scripts/strain.gd")
 const Trinkets := preload("res://scripts/trinkets.gd")
 const Quality := preload("res://scripts/quality.gd")
+const Spells := preload("res://scripts/spells.gd")
 const FieldKit := preload("res://art/ui/field-kit-v1/style.gd")
 const PortraitView := preload("res://scripts/portrait_view.gd")
 const BagView := preload("res://scripts/kit_bag.gd")
@@ -75,6 +76,7 @@ var _lantern_label: Label
 var _list: Control
 var _inventory_scroll: ScrollContainer
 var _injuries: VBoxContainer
+var _prayer_rng:=RandomNumberGenerator.new()  # miscasts (#170)
 
 func setup(party_state) -> void:
 	_party = party_state
@@ -357,6 +359,7 @@ func _refresh_status() -> void:
 				used.emit("The field medic binds the wound without a dressing.")
 				_request_refresh())
 		_status_content.add_child(bind)
+	_add_prayers(h)
 	for entry in h.boons:
 		var boon:Boon=entry.boon
 		_status_content.add_child(_wrapped("%s · %s\n%s" % [boon.display_name,boon.duration_text(entry.fights_left),boon.effects_text()],17))
@@ -524,6 +527,28 @@ func _drag_preview(item: Resource) -> Control:
 
 ## Right-click (owner playtest, 2026-10-25): use a supply, or put on or
 ## take off gear, without going through its actions. The usual rules apply.
+## A Mage's prayers (#170): casts left this trip, and the ones that can be
+## said outside a fight.
+func _add_prayers(h: Companion) -> void:
+	if not Spells.is_caster(h):return
+	_status_content.add_child(_label("Prayers · %d of %d casts left" % [h.casts,Spells.CASTS],18))
+	for id:String in Spells.known(h):
+		var reason:=Spells.cannot_cast(h,id,false)
+		if reason=="" and id=="mend" and _party.most_hurt()==null:reason="No one is hurt"
+		if reason=="Only in a fight" or not Spells.SPELLS[id]["field"]:
+			_status_content.add_child(_wrapped("%s (in a fight): %s" % [Spells.name_of(id),Spells.describe(id)],17,FieldKit.MUTED))
+			continue
+		var cast:=_button("Cast "+Spells.name_of(id),Vector2(150,44))
+		cast.disabled=reason!=""
+		cast.tooltip_text=Spells.describe(id)+("
+"+reason if reason!="" else "")
+		cast.pressed.connect(func():
+			var message:=Spells.cast_in_field(_party,h,id,_prayer_rng)
+			if message!="":used.emit(message)
+			_request_refresh())
+		_status_content.add_child(cast)
+		_status_content.add_child(_wrapped(Spells.describe(id),17,FieldKit.MUTED))
+
 func _quick_use(item: Resource,slot := "") -> void:
 	inspect_item(item,true,slot)
 	if item is SupplyItem:
@@ -603,6 +628,8 @@ func _use_verb(item: SupplyItem) -> String:
 		SupplyItem.Effect.LIGHT_TORCH:return "Light"
 		SupplyItem.Effect.CURE_VENOM:return "Drink"
 		SupplyItem.Effect.LIFT_BANE:return "Apply"
+		SupplyItem.Effect.TOME:return "Read"
+		SupplyItem.Effect.CANDLE:return "Pray"
 	return "Use"
 
 func _use_target(item: SupplyItem) -> String:

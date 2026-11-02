@@ -145,6 +145,10 @@ var party_calm := 1.0
 ## or what, for their lines. Saved with the hero.
 @export var memories: Array[Dictionary] = []
 const MEMORY_LIMIT := 3
+## Magic (#170, spells.gd): prayers learned from tomes, kept all campaign
+## (Mend comes with being a Mage), and casts left this trip.
+@export var spells: Array[String] = []
+var casts := 3
 var _health_fraction := 0.0  # partial healing carried between time units
 
 

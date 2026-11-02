@@ -26,6 +26,11 @@ signal gold_found(amount: int)
 ## Cheap finds near the top, richer ones deeper. Art: ChatGPT's treasure
 ## sets (#90, #91); values are game data in each item.
 const TREASURE := [
+	# Prayer books for a Mage (#170): found, never sold at camp.
+	[preload("res://data/items/tome_light.tres"), 1, 1],
+	[preload("res://data/items/tome_bind.tres"), 2, 1],
+	[preload("res://data/items/tome_watch.tres"), 2, 1],
+	[preload("res://data/items/votive_candle.tres"), 1, 2],
 	[preload("res://data/items/amethyst.tres"), 1, 3],
 	[preload("res://data/items/fine_cloth.tres"), 1, 3],
 	[preload("res://data/items/silver_trinket.tres"), 1, 3],

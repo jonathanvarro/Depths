@@ -487,6 +487,8 @@ func _ready() -> void:
 	_build_ui(_minimap)
 	_party = Party.new()
 	_party.moved.connect(_minimap.on_party_moved)
+	_minimap.sensed = _sensed_cells  # a Mage's Watchful eye (#170)
+	_full_map_view.sensed = _sensed_cells
 	_party.moved.connect(_full_map_view.on_party_moved)
 	_party.moved.connect(_on_party_moved)
 	_party.entered_cell.connect(_on_party_entered_cell)
@@ -1298,7 +1300,16 @@ func _map_beat(party_cell: Vector2i) -> bool:
 	return false
 
 
+## Where the floor's monsters stand, while a Mage's Watchful eye lasts (#170).
+func _sensed_cells() -> Array:
+	if _party_state == null or _party_state.watch_left <= 0:
+		return []
+	return _groups.map(func(g): return g.cell)
+
+
 func _move_group_node(group) -> void:
+	if _party_state.watch_left > 0:
+		_minimap.queue_redraw()
 	if not is_instance_valid(group.node):
 		return
 	var tween := create_tween()
@@ -3422,8 +3433,8 @@ func _on_combat_enemy_acted(_foe, _outcome: Dictionary) -> void:
 
 ## Fight 3: her blows glance off; after a swing or two, the throw is taught.
 func _on_combat_hero_acted(_hero: Companion, action: Dictionary, outcome: Dictionary) -> void:
-	if action["kind"] == "brew":
-		_show_message(outcome["text"])  # what the thrown brew did (#175)
+	if action["kind"] in ["brew", "cast"] and outcome.get("text", "") != "":
+		_show_message(outcome["text"])  # what the thrown brew (#175) or the prayer (#170) did
 	if not _in_opening or _opening_fights_done != OPENING_FIGHTS.size() - 1:
 		return
 	if action["kind"] != "attack":

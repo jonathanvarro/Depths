@@ -204,7 +204,7 @@ Numbers are first guesses for the bot and the owner's playtests to tune.
 - **The four classes (#179):**
   - **Melee:** +4 health and the front row. The Warden's steady presence, and both their talents.
   - **Scout:** Sharp ears and Trap sense come standard. Talents: Deadeye or Quick hands, then Slip past or Slip the web.
-  - **Mage:** the Healer's talents for now. Spells are #170. Light armour only.
+  - **Mage:** the Healer's talents, plus prayers (see "Magic", #170). Light armour only.
   - **Fixer:** −5% to hit, better prices, one more find in treasure rooms, and clears rubble without a tool (that was the Brawler's).
 
   **Armour by class:** Melee wears any; Scout and Fixer light or medium; Mage light only. The back slot follows `bases.json`.
@@ -232,6 +232,32 @@ Numbers are first guesses for the bot and the owner's playtests to tune.
   - **Bot (30 campaigns each):** the queen falls in **12 / 21 / 13** (Mara / Corin / Alwen), against 11 / 11 / 5 before. Floor-4 wipes fell from 62 to 42 across the 90 campaigns. That's close to the numbers before the expedition loop (23 / 27 / 12), with Alwen back to hers.
   - **Still hard:** a floor-4 visit costs about 35–41 health; floor 2 is now the commonest place to fall again.
 - **Experience** still goes in full to everyone with the party. DESIGN's "a pair half each" reads like a split, while #179 says "unsplit", so this waits for the owner.
+
+## Magic — decided 2026-11-02 (#170, #53)
+
+**Owner decisions:**
+- **Prayers first.** The basic spells are prayers (faith). The **end-game spells are borrowed from the thing sleeping below**. **Items** (trinkets or weapons) can also grant spells.
+- **A few casts per trip,** restored by ingredients or items.
+- **Only a Mage casts,** unless another hero wears an item that grants a spell.
+- **Learned from tomes,** separate from the level-up talents.
+- **The first spells:** healing, light, holding a monster in place, and seeing monsters on the minimap.
+- **Prayers can go wrong.**
+
+**Built 2026-11-02 (Claude, `scripts/spells.gd`, `tools/magic_check.gd`).** The numbers are first guesses:
+- **Casts:** a Mage sets out with **3 casts** each trip. They come back on leaving the surface camp, as the levels reset. A **votive candle** (merchant, 12g, or found) gives one back outside a fight.
+- **Tomes:** every Mage knows **Mend**. The other three prayers come from tomes found in treasure: Holy light from floor 1, Bind and Watchful eye from floor 2. Reading one takes 5 time and teaches that Mage for the whole campaign; a spare copy can be sold.
+- **The prayers:**
+
+  | Prayer | Where | What it does |
+  |---|---|---|
+  | **Mend** | anywhere | The most hurt hero heals 8 at once. |
+  | **Holy light** | anywhere | Bright light for 40 time, with no oil or torch burning. In a fight it also blinds them like a flare. |
+  | **Bind** | in a fight | The chosen foe loses its next 2 turns: it neither moves nor strikes. The queen shakes it off after 1. |
+  | **Watchful eye** | outside a fight | For 60 time, every monster group on the floor shows on the map. |
+
+- **Where:** in a fight, **Cast** sits beside Brace (only when a Mage is in the party) and lists the fighting prayers with the casts left. Outside a fight, the Mage's **Status** tab in the Pack lists their prayers with Cast buttons.
+- **Miscasts:** a **Shaken** caster's prayer fails 15% of the time, a **Panicking** one's 30%. The cast is spent, nothing happens ("Alwen's prayer falters. Nothing answers.") and the caster gains 6 strain.
+- **Not yet:** the end-game borrowed spells (worse miscasts), items that grant spells, and art (#216).
 
 ## Map and dungeon progression
 

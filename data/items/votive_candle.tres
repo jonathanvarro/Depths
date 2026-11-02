@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="SupplyItem" format=3]
+
+[ext_resource type="Texture2D" path="res://art/items/refined-v2/torch.png" id="icon"]
+[ext_resource type="Script" path="res://scripts/supply_item.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+icon = ExtResource("icon")
+display_name = "Votive candle"
+description = "A stub of blessed tallow from the camp's shrine. A Mage who prays by it, outside a fight, gets one cast back."
+effect = 11
+amount = 1
+use_time = 3
+usable_in_combat = false
+price = 12
+stack = 3
+a_name = "a votive candle"

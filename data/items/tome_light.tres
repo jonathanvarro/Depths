@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="SupplyItem" format=3]
+
+[ext_resource type="Texture2D" path="res://art/ui/controls-v1/journal.svg" id="icon"]
+[ext_resource type="Script" path="res://scripts/supply_item.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+icon = ExtResource("icon")
+display_name = "Tome: Holy light"
+description = "A prayer book with a sun pressed into its cover. A Mage who reads it learns Holy light: a glow that needs no oil, and blinds foes in a fight."
+effect = 10
+use_time = 5
+usable_in_combat = false
+price = 30
+stack = 1
+a_name = "a tome of holy light"
+spell = "light"

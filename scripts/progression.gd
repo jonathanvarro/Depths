@@ -138,6 +138,7 @@ static func reset(hero: Companion) -> void:
 	hero.talents.clear()
 	hero.level = 1
 	hero.xp = 0
+	load("res://scripts/spells.gd").refill(hero)  # casts come back each trip (#170)
 	hero.refresh_stats()
 	hero.health = mini(hero.health, hero.max_health)
 	hero.emit_changed()

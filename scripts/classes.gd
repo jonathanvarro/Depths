@@ -6,7 +6,7 @@ extends RefCounted
 ##   Brawler's place.
 ## - Scout: awareness. Hears some fights first and always spots traps; the
 ##   back row, light or medium armour.
-## - Mage: spells (#170, still to come); light armour only.
+## - Mage: prayers (#170, spells.gd); light armour only.
 ## - Fixer: weaker in a fight, but better prices, more treasure, and clears
 ##   blockages such as rubble (taken over from the Brawler).
 ##
@@ -29,7 +29,7 @@ const FIXER_TREASURE := 1  # one more find in a treasure room
 const ABOUT := {
 	"Melee": "Front row. Armour and health; little awareness, no magic.",
 	"Scout": "Back row. Hears some fights before they notice the party and always spots traps. Light or medium armour.",
-	"Mage": "Casts spells (coming). Light armour only; no awareness.",
+	"Mage": "Prays: a few casts each trip, more prayers from tomes. Light armour only; no awareness.",
 	"Fixer": "Weaker in a fight, but better prices, more treasure, and clears rubble without a tool.",
 }
 

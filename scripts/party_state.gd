@@ -14,6 +14,7 @@ const GearModel := preload("res://scripts/gear_model.gd")
 const Supplies := preload("res://scripts/supplies.gd")
 const Trinkets := preload("res://scripts/trinkets.gd")
 const StrainRules := preload("res://scripts/strain.gd")
+const Spells := preload("res://scripts/spells.gd")
 const MAX_MEMBERS := 3
 ## Pack space (owner, 2026-10-21, #133): slots per hero, and never fewer
 ## than PACK_MINIMUM so a lone hero can carry a kit and still find things.
@@ -132,6 +133,8 @@ func can_field_bind(hero: Companion) -> bool:
 
 ## Bindings used this trip (field_bind_used kept for the first one).
 var field_binds := 0
+## A Mage's Watchful eye (#170): time left showing the floor's monsters.
+var watch_left := 0
 
 
 func field_bind(hero: Companion) -> bool:
@@ -176,6 +179,7 @@ func advance_time(units := 1) -> void:
 			member.change_strain(StrainRules.per_time_unit(member, light))
 	for member in members:
 		member.advance_time(units)
+	watch_left = maxi(0, watch_left - units)
 	changed.emit()
 
 
@@ -354,6 +358,15 @@ func cannot_use_reason(item: SupplyItem, in_combat := false, recipient: Companio
 		return "Not during a fight"
 	if supplies.count(item) <= 0 and not (item.effect == SupplyItem.Effect.REFILL_LANTERN and supplies.open_flask > 0.0):
 		return "None left"
+	if item.effect in [SupplyItem.Effect.TOME, SupplyItem.Effect.CANDLE]:  # #170
+		var reader := _spell_reader(item, recipient)
+		if reader == null:
+			if not living_members().any(func(m: Companion): return Spells.is_caster(m)):
+				return "Needs a Mage"
+			if item.effect == SupplyItem.Effect.TOME:
+				return "Already known"
+			return "Casts are full"
+		return ""
 	if item.effect == SupplyItem.Effect.BREW:
 		if in_combat:
 			return "Throw it at a foe"
@@ -412,6 +425,20 @@ func use_item(item: SupplyItem, in_combat := false, recipient: Companion = null)
 	if cannot_use_reason(item, in_combat, recipient) != "":
 		return ""
 	match item.effect:
+		SupplyItem.Effect.TOME:  # #170: a Mage learns the prayer for good
+			var reader := _spell_reader(item, recipient)
+			supplies.take(item)
+			reader.spells.append(item.spell)
+			reader.emit_changed()
+			advance_time(item.use_time)
+			return "%s learns %s." % [reader.display_name, Spells.name_of(item.spell)]
+		SupplyItem.Effect.CANDLE:
+			var reader := _spell_reader(item, recipient)
+			supplies.take(item)
+			reader.casts = mini(Spells.CASTS, reader.casts + maxi(1, item.amount))
+			reader.emit_changed()
+			advance_time(item.use_time)
+			return "%s prays by the candle's light (%d casts)." % [reader.display_name, reader.casts]
 		SupplyItem.Effect.BREW:  # #175: drinking is the test
 			var drinker := recipient if recipient != null and recipient.is_alive() else (most_hurt() if most_hurt() != null and most_hurt().is_alive() else living_members()[0])
 			return load("res://scripts/brews.gd").drink(self, item, drinker)
@@ -446,6 +473,23 @@ func use_item(item: SupplyItem, in_combat := false, recipient: Companion = null)
 	if not in_combat:  # in a fight, the round's time covers it
 		advance_time(item.use_time)
 	return item.use_message
+
+
+## Who a tome or candle is for: `recipient` if they can use it, else the
+## first Mage who can.
+func _spell_reader(item: SupplyItem, recipient: Companion) -> Companion:
+	var can := func(m: Companion) -> bool:
+		if m == null or m not in members or not m.is_alive() or not Spells.is_caster(m):
+			return false
+		if item.effect == SupplyItem.Effect.TOME:
+			return item.spell not in Spells.known(m)
+		return m.casts < Spells.CASTS
+	if can.call(recipient):
+		return recipient
+	for m in living_members():
+		if can.call(m):
+			return m
+	return null
 
 
 func _healing(amount: int) -> int:

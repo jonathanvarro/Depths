@@ -40,6 +40,8 @@ var reveal_all := false:
 	set(value):
 		reveal_all=value
 		queue_redraw()
+## Returns cells to mark as monsters (a Mage's Watchful eye, #170).
+var sensed := Callable()
 var _cache_key := -1
 var _edges: Array = []
 var _known_floor := {}
@@ -184,6 +186,9 @@ func _draw() -> void:
 		var spot: Vector2i=landmark["centre"]
 		if (landmark["seen"] or reveal_all) and cells.has_point(spot):
 			_draw_landmark(origin+(Vector2(spot-cells.position)+Vector2.ONE*.5)*tile,tile)
+	if sensed.is_valid():
+		for cell: Vector2i in sensed.call():
+			if cells.has_point(cell):_draw_marker(GLYPHS.danger,origin+(Vector2(cell-cells.position)+Vector2.ONE*.5)*tile,tile,Color(1,.55,.45))
 	_draw_arrow(origin+(Vector2(party_cell-cells.position)+Vector2.ONE*.5)*tile,tile)
 	if full_view and rail>0:_draw_notes(notes,Rect2(Vector2(size.x-rail-10,30),Vector2(rail-12,size.y-50)))
 
