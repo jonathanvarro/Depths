@@ -21,9 +21,11 @@ before #214's complete animation matrix can pass. No source art was uploaded.
 #211–#213 now have separately fitted editable local candidates (2026-11-02):
 [garment handoff and checks](blender-expedition-garments.md), with one comparison
 gallery at `build/local-blender-kit-v1/garments-v1/review/inspector.html`.
-#214 still owns the interactive Godot wardrobe and portrait acceptance. The
-temporary legacy-clip fitting references do not supersede the owner's per-body
-download plan in [the animation list](animation-library.md); #215 remains open.
+#214's [native wardrobe review](blender-wardrobe-review.md) now supplies the
+interactive Godot project, desktop/phone layouts and native96/192 cards. Final
+animation acceptance remains open with #215. Temporary legacy-clip fitting
+references do not supersede the owner's per-body download plan in
+[the animation list](animation-library.md).
 
 Preserve the garment interfaces during final assembly. The same agent can work
 sequentially through the set; separate agents must coordinate ownership before

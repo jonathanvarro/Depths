@@ -69,3 +69,14 @@ original #210 profile. All full-kit body masks in GLBs are static candidates,
 not a live removable-equipment system.
 The legacy-clip retargets are temporary fitting references. The owner's newer
 per-body download plan in docs/animation-library.md still governs #215.
+
+#214's native wardrobe project is prepared by `prepare_wardrobe.py` in Blender.
+See [the wardrobe handoff](../../docs/blender-wardrobe-review.md) for the full
+workflow. It retains two editable review copies and exports disjoint body
+coverage regions on each original rig, enabling all32 clothing selections.
+`wardrobe_actor.gd`, `wardrobe_review.gd` and `check_wardrobe.gd` are copied to the
+ignored standalone project; they never load live game scripts or player files.
+Native captures/cards, real-frame GIFs and the local gallery are packaged by
+`package_wardrobe.py`; `validate_wardrobe.py` and `check_wardrobe_gallery.cjs`
+verify delivery. Supplied/derived art stays local. Final animation acceptance
+still awaits #215; no new faces or final runtime wardrobe architecture is implied.

@@ -206,7 +206,8 @@ python tools/blender_kit/validate_garment_artifacts.py
 node tools/blender_kit/check_garment_review.cjs
 ```
 
-Only generic tools/docs/non-asset summaries go to Git. #214 still owns the full
-interactive Godot wardrobe review, real96/192 portrait acceptance, landscape
-phone integration and later live hookup. These files do not replace the
+Only generic tools/docs/non-asset summaries go to Git. #214's
+[interactive wardrobe review](blender-wardrobe-review.md) now provides real
+Godot controls,96/192 captures and landscape phone-shaped layouts. Final
+animation/portrait acceptance and later live hookup remain separate. These files do not replace the
 approved2D portrait/camp/equipment system or establish new story/class identities.

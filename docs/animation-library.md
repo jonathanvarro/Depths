@@ -184,6 +184,13 @@ is recorded; no foot locking, source-root editing or contact IK. Read
 [the garment handoff](blender-expedition-garments.md) for exact lineage,
 local captures and limits. Other supplied clips remain untested.
 
+#214's [native wardrobe review](blender-wardrobe-review.md) (2026-11-02) checks
+these same candidate Actions with reversible clothing, full restored-body
+deformation, three sampled times/angles, native96/192 cards and recorded
+ground-envelope/hips positions. This adds presentation evidence, not new clips
+or approval: #215's per-body downloads and matching sit/hold acceptance remain
+open, and the raw-clip statuses above are unchanged.
+
 ## Adding a clip
 
 1. Download from Mixamo as **FBX**, **Without Skin**, at 60 fps, once with

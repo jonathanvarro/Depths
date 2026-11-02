@@ -63,9 +63,15 @@ Templates > Download and Install; already installed on the owner's PC).
   `build/local-blender-kit-v1/garments-v1/review/inspector.html`.
   Reversible per-piece body masks retain opening boundary faces; GLB full-kit
   masks are baked review candidates, not live removable wardrobes. Source skin
-  pixels/rest/Actions remain intact. #214 still owns interactive Godot wardrobe,
-  portrait acceptance and later hookup; chair sit-down and ground-seated idle
+  pixels/rest/Actions remain intact. Chair sit-down and ground-seated idle
   are separate stress-test clips, not an approved continuous transition.
+- `docs/blender-wardrobe-review.md` – #214's isolated native Mobile wardrobe
+  controls, disjoint reversible body regions, pause/scrub/frame steps, actual
+  desktop/phone captures and native96/192 cards. Local launcher and gallery:
+  `build/local-blender-kit-v1/assembly-v1/START_REVIEW.cmd` and
+  `review/inspector.html`. Two editable Blender copies and complete skinned GLBs
+  stay local. #214 remains open for #215's final body-specific animation checks;
+  source heads are unchanged and likeness/style acceptance is separate.
 - `DESIGN.md` – living design direction and proposed first playable scope.
 - `docs/descent-completion-art.md` – #166/#167/#168/#178/#190 library handoff:
   matched Reservoir surfaces, opaque water inset/wet stairs, vision and ending
