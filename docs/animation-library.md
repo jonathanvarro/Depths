@@ -130,14 +130,45 @@ until someone checks; please fill them in when you do.
   armature/modifier, so its orphaned Action is not working male motion.
 - #210 preserved true source masters and measured the direct-copy gap; see
   [the base contract](blender-base-contract.md). #215 retargets the existing
-  supplied clips; #214 performs complete garment/motion acceptance.
+  supplied clips; #214 performs complete garment/motion acceptance. The
+  owner now prefers per-body re-downloads (see the plan below), which would
+  replace most of #215's retargeting.
+
+## Plan: download each clip on its own body (owner decision, 2026-11-02)
+
+Instead of hand-retargeting `Mixamo_Originals` onto each body, the owner will
+re-download the clips from Mixamo with each base body loaded. Mixamo fits an
+animation to whichever character is loaded, so each clip arrives already
+matching that body's skeleton and rest pose. Evidence it works: each base's
+own Dying clip was downloaded that way and already passes #210's checks.
+
+- **Upload:** `Base Female - Dying.fbx` / `Base Male - Dying.fbx`, the same
+  files #210 built the masters from ([base contract](blender-base-contract.md)).
+  If Mixamo offers to re-rig the body, **stop**: a new skeleton would no
+  longer match the masters or clothing fitted to them.
+- **Download settings:** FBX, Without Skin, 60 fps. Note whether *In Place*
+  was ticked.
+- **Folders:** `G:/My Drive/3D Objects/Animations/Mixamo_Female/` and
+  `.../Mixamo_Male/`, keeping Mixamo's clip names. `Mixamo_Originals/` stays
+  untouched as the record of the first batch.
+- **Order:** #215's four first (Idle, Walking, Stand To Sit, Sitting Idle) on
+  both bodies, to prove the approach; then the rest as needed.
+- **Checking:** an assistant audits the new folders, confirms the skeleton
+  and rest pose match the master exactly, watches them play, and adds Male /
+  Female statuses here. If a per-body download still doesn't match, fall
+  back to #215's retargeting for that clip.
+
+This doesn't scale to many body shapes (each needs every clip again); if the
+game later has several builds, Godot's import-time retargeting can share one
+set. For two bodies, re-downloading is simpler.
 
 ## Adding a clip
 
-1. Download from Mixamo as **FBX**, **Without Skin**, at 60 fps, using the same
-   character as the existing clips so the skeleton matches. Write down whether
-   *In Place* was ticked.
-2. Save it to `Mixamo_Originals/` with Mixamo's name.
+1. Download from Mixamo as **FBX**, **Without Skin**, at 60 fps, once with
+   each base body loaded (see the plan above). Write down whether *In Place*
+   was ticked.
+2. Save each copy to that body's folder (`Mixamo_Female/` or `Mixamo_Male/`)
+   with Mixamo's name.
 3. Add a row above (frames and seconds can come from re-running
    `tools/blender_kit/audit_clips.py`, or from Blender's timeline).
 4. Mention the new clip in your `NOTES.md` handoff entry.
