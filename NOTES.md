@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-11-01 – ChatGPT (Blender clothing production task handoff)
+- Did: Created #209 parent kit brief and five linked Todo tasks: #210 male/female Blender masters and rig contract, #211 tunic/belt, #212 trousers, #213 boots, #214 assembly/animation/export/Godot review. Agent entry point: docs/blender-expedition-kit-tasks.md. No modelling or agent dispatch performed.
+- Next: The next agent starts #210, then creates the garments against its shared fit contract and completes #214's assembled review. First upper garment is a simple tunic; padded jacket follows after that fit works. Actual editable .blend masters and both real body fits are required.
+- Watch out: Owner deferred face painting/features; supplied sources and all derived art/exports/captures remain LOCAL in ignored output. Current G:/My Drive/3D Objects/Base Female - Dying.fbx and Base Male - Dying.fbx were not audited here because the metadata read was denied; do not infer missing files or substitute #206's earlier female-only source. Preserve rig/rest/Actions/slots and existing2D/live rules. Task completion delivers reviewable candidates, not owner style approval. Other equipment/audio/gameplay changes and notes excluded.
+
 ## 2026-11-01 – Claude (floor 2 eased)
 - Did: On floors 1-2 a full party can now meet any group, lone monsters included (Main.EASY_DEPTH in encounter_pool). Floor 2 lost its +5% depth bonus (DEPTH_SCALE) and its elite chance halved to 6%. Bot: floor-2 wipes 105 -> 85 across 90 campaigns; queen 11/11/5 of 30, within run-to-run noise of earlier runs. elites_check updated to the new numbers. Details: DESIGN.md "Floor 2 eased".
 - Next: Floor 4 is now the main drain (42-50 health a visit). A playtest by the owner should say whether the curve feels right before more tuning.
