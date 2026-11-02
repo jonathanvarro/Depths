@@ -12,6 +12,12 @@ Parent: [#209 — Blender expedition kit](https://github.com/jonathanvarro/Depth
 | 2 | [#213 — Mid-calf leather boots](https://github.com/jonathanvarro/Depths/issues/213) | Male/female left/right fits with clear soles/cuffs and working ankle/toe deformation |
 | 3 | [#214 — Assembly, animation and Godot review](https://github.com/jonathanvarro/Depths/issues/214) | Complete kits, real motion/fit checks, independent exports and one local review entry point |
 
+#210 is prepared (2026-11-01): [actual base/fit contract](blender-base-contract.md),
+editable local female/male masters and review in `build/local-blender-kit-v1`.
+The65/49-bone pair has different rest spaces; both original dying Actions are
+verified, but other supplied clips need [#215 — target-specific retargeting](https://github.com/jonathanvarro/Depths/issues/215)
+before #214's complete animation matrix can pass. No source art was uploaded.
+
 Start with **#210**, then implement the garments against that contract. The garment interfaces must agree before final assembly. The same agent can work sequentially through the set; separate agents must coordinate ownership before modifying shared Blender masters or handoff files. No agent is launched by this task-creation pass.
 
 ## Scope to preserve

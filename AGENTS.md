@@ -50,6 +50,12 @@ Templates > Download and Install; already installed on the owner's PC).
 
 ## Project structure
 
+- `docs/blender-base-contract.md` – #210's true female/male editable Blender
+  masters, separate65/49-bone fit/rest contracts, preserved source Actions/slots,
+  source catalogue and neutral/animation/export guide. Models, textures, exports
+  and captures stay LOCAL in `build/local-blender-kit-v1`; reusable tools are in
+  `tools/blender_kit`. #215 tracks retargeting other supplied clips before #214
+  can accept the full garment/motion matrix. No face or live-game change.
 - `DESIGN.md` – living design direction and proposed first playable scope.
 - `docs/descent-completion-art.md` – #166/#167/#168/#178/#190 library handoff:
   matched Reservoir surfaces, opaque water inset/wet stairs, vision and ending

@@ -11,8 +11,8 @@ out of git (see `docs/blender-expedition-kit-tasks.md`).
 - **Originals:** `G:/My Drive/3D Objects/Animations/Mixamo_Originals/`, as
   downloaded from Mixamo. Never edit or rename these; work on copies.
 - **Working copies:** `build/local-blender-kit-v1/source/clips/` (git-ignored),
-  copied by #210's `tools/blender_kit/audit_sources.py`, which records each
-  file's SHA-256 in `build/local-blender-kit-v1/clip-sources.json`.
+  copied during #210. `audit_sources.py` / `audit_clips.py` inspect the copies;
+  hashes are in `clip-sources.json` and `kit-manifest.json` beside them.
 - **Base bodies:** `G:/My Drive/3D Objects/` — `Base Female Mesh.blend`,
   `Base Male Mesh.blend`, and the rigged `Base Female - Dying.fbx` /
   `Base Male - Dying.fbx`.
@@ -24,14 +24,18 @@ From #210's audit (`tools/blender_kit/audit_clips.py`, output
 
 - 60 frames per second, one Action each, no mesh inside (skeleton only).
 - The same 49-bone Mixamo skeleton (`mixamorig:Hips`, `mixamorig:Head` …),
-  with the same bone names as both base bodies.
-- **Male body:** bone lengths match exactly (ratio 1.0), so the clips were
-  downloaded on the male skeleton.
-- **Female body:** same bone names, different proportions (bone lengths
+  with49 names shared by both bases; the female base also has16 extra
+  ring/pinky joints.
+- **Male body:** bone lengths match exactly (ratio1.0), but its current
+  lowered-arm rest pose differs from the clip rigs. Matching lengths do not
+  establish a compatible rest basis or prove which download character was used.
+- **Female body:** shared names, different proportions (bone lengths
   0.5–1.43× the male's). Expect clips to need retargeting, not a straight
   copy, before they look right on her.
 - Matching names alone don't prove a clip works. The audit marks every
-  pairing "measured, not approved" until someone has watched it play.
+  pairing "measured, not approved". #210 also actually assigned Idle, Walking
+  and Sitting Idle: both fits need rest-space retargeting (#215). Source-motion
+  verification is not final garment/clip acceptance.
 
 ## Status words
 
@@ -40,6 +44,7 @@ From #210's audit (`tools/blender_kit/audit_clips.py`, output
 | untested | Downloaded and audited; nobody has watched it on this body yet |
 | works | Watched in Blender on this body, front/side/back, no obvious breakage |
 | needs fix | Plays but something is wrong; say what in Notes |
+| source-verified | Reopen/source/export deformation agrees; full multi-angle garment playback and owner acceptance remain separate |
 | approved | Owner has accepted it for the game |
 | dropped | Not going to be used; say why in Notes |
 
@@ -56,7 +61,7 @@ until someone checks; please fill them in when you do.
 
 | Clip file | Frames | Seconds | Loops? | In place? | Male | Female | Notes |
 |---|---|---|---|---|---|---|---|
-| Walking.fbx | 1–53 | 0.87 | ? | ? | untested | untested | |
+| Walking.fbx | 1–53 | 0.87 | ? | ? | needs fix | needs fix | 2026-11-01 ChatGPT #210: direct assignment gives wrong limb axes on both fits; retarget in #215 (local transfer-validation.json). |
 | Female Walk.fbx | 1–70 | 1.15 | ? | ? | untested | untested | |
 | Start Walking.fbx | 1–177 | 2.93 | ? | ? | untested | untested | |
 | Injured Walking.fbx | 1–61 | 1.00 | ? | ? | untested | untested | |
@@ -73,7 +78,7 @@ until someone checks; please fill them in when you do.
 
 | Clip file | Frames | Seconds | Loops? | In place? | Male | Female | Notes |
 |---|---|---|---|---|---|---|---|
-| Idle.fbx | 1–241 | 4.00 | ? | ? | untested | untested | |
+| Idle.fbx | 1–241 | 4.00 | ? | ? | needs fix | needs fix | 2026-11-01 ChatGPT #210: direct assignment gives wrong limb axes on both fits; retarget in #215 (local transfer-validation.json). |
 | Unarmed Idle.fbx | 1–115 | 1.90 | ? | ? | untested | untested | |
 | Look Over Shoulder.fbx | 1–227 | 3.77 | ? | ? | untested | untested | |
 | Standing Greeting.fbx | 1–306 | 5.08 | ? | ? | untested | untested | |
@@ -85,7 +90,7 @@ until someone checks; please fill them in when you do.
 |---|---|---|---|---|---|---|---|
 | Stand To Sit.fbx | 1–135 | 2.23 | ? | ? | untested | untested | |
 | Sitting.fbx | 1–421 | 7.00 | ? | ? | untested | untested | |
-| Sitting Idle.fbx | 1–616 | 10.25 | ? | ? | untested | untested | |
+| Sitting Idle.fbx | 1–616 | 10.25 | ? | ? | needs fix | needs fix | 2026-11-01 ChatGPT #210: direct assignment gives wrong limb axes on both fits; retarget in #215 (local transfer-validation.json). |
 | Sitting Talking.fbx | 1–2644 | 44.05 | ? | ? | untested | untested | Very long; largest file (5.6 MB) |
 | Situp To Idle.fbx | 1–265 | 4.40 | ? | ? | untested | untested | |
 
@@ -107,7 +112,7 @@ until someone checks; please fill them in when you do.
 |---|---|---|---|---|---|---|---|
 | Hit To Body.fbx | 1–70 | 1.15 | ? | ? | untested | untested | |
 | Standing Death Right 02.fbx | 1–141 | 2.33 | ? | ? | untested | untested | |
-| *Dying* (inside `Base … - Dying.fbx`) | 1–261 | 4.33 | ? | ? | untested | untested | Comes attached to each rigged base, not a separate file |
+| *Dying* (inside `Base … - Dying.fbx`) | 1–261 | 4.33 | No: standing → fallen | No: source body travels | source-verified | source-verified | 2026-11-01 ChatGPT #210: each own Action/OBSlot survives reopen; source/GLB deformation matches at six frames incl. between keys; Godot import/motion passes. Full garment/multi-angle motion acceptance remains pending. |
 
 ### Single poses (2 frames, not motion)
 
@@ -121,7 +126,11 @@ until someone checks; please fill them in when you do.
 
 - `Base Female Mesh.blend` and `Base Male Mesh.blend` each hold an Action
   named `mixamo.com`, frames 1–998 (16.6 s). What it is hasn't been recorded
-  yet; whoever opens it, please name it here.
+  yet; it is not an approved alternate clip. The male reference has no
+  armature/modifier, so its orphaned Action is not working male motion.
+- #210 preserved true source masters and measured the direct-copy gap; see
+  [the base contract](blender-base-contract.md). #215 retargets the existing
+  supplied clips; #214 performs complete garment/motion acceptance.
 
 ## Adding a clip
 

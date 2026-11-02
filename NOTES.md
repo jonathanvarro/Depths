@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-11-01 – ChatGPT (editable Blender base masters)
+- Did: Completed #210 with both true supplied Dying FBXs in local female_base.blend / male_base.blend, neutral/rest modelling, preserved source Actions/OBSlot,39 source hashes,65/49-bone fit audit, shared collection/material/mask/export contract and beginner workflow. Review: build/local-blender-kit-v1/review/inspector.html; handoff: docs/blender-base-contract.md; reusable tools: tools/blender_kit. Recovered the unchanged female packed texture after checking both UV maps; no new faces, clothing or live binding.
+- Next: #211–#213 fit garments against the separate masters. #215 retargets the supplied idle/walk/seated clips before #214's full motion matrix; direct assignment was actually tested and is unsuitable on both fits. Shared clip statuses are updated in docs/animation-library.md, distinguishing source verification from owner/garment acceptance.
+- Watch out:92 Blender reopen/source/GLB checks,54 actual transfer diagnostics,5323 native Mobile import/skin/material/motion checks and25 browser checks pass;12 actual pose renders,39 unchanged original files and working-copy export are verified. Raw source scale/proportions/feet offsets remain explicit, not aesthetically normalized. The standalone editor import has its known preference safe-save warning; runtime is clean. All supplied/derived art remains LOCAL in ignored output, with no external asset upload. Prior equipment/audio changes, #204 and other assistants' work remain untouched and excluded.
+
 ## 2026-11-01 – Claude (animation library list)
 - Did: Added docs/animation-library.md, the shared list of all 34 Mixamo clips plus the Dying clip in the rigged bases: frames, seconds, grouping and a male/female status column each. Numbers come from #210's existing audit (build/local-blender-kit-v1/clip-audit.json); nothing in tools/blender_kit or the local kit was touched. AGENTS.md "Read first" now says NOTES.md is where assistants coordinate and points 3D work at the list.
 - Next: Whoever tests a clip on a body updates its status there. "Loops?" and "In place?" are still `?` for every clip.
