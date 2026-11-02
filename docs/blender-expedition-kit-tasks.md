@@ -18,7 +18,16 @@ The65/49-bone pair has different rest spaces; both original dying Actions are
 verified, but other supplied clips need [#215 — target-specific retargeting](https://github.com/jonathanvarro/Depths/issues/215)
 before #214's complete animation matrix can pass. No source art was uploaded.
 
-Start with **#210**, then implement the garments against that contract. The garment interfaces must agree before final assembly. The same agent can work sequentially through the set; separate agents must coordinate ownership before modifying shared Blender masters or handoff files. No agent is launched by this task-creation pass.
+#211–#213 now have separately fitted editable local candidates (2026-11-02):
+[garment handoff and checks](blender-expedition-garments.md), with one comparison
+gallery at `build/local-blender-kit-v1/garments-v1/review/inspector.html`.
+#214 still owns the interactive Godot wardrobe and portrait acceptance. The
+temporary legacy-clip fitting references do not supersede the owner's per-body
+download plan in [the animation list](animation-library.md); #215 remains open.
+
+Preserve the garment interfaces during final assembly. The same agent can work
+sequentially through the set; separate agents must coordinate ownership before
+modifying shared Blender masters or handoff files. No agent is launched here.
 
 ## Scope to preserve
 

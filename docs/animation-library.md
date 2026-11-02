@@ -162,6 +162,28 @@ This doesn't scale to many body shapes (each needs every clip again); if the
 game later has several builds, Godot's import-time retargeting can share one
 set. For two bodies, re-downloading is simpler.
 
+## Garment fitting references (2026-11-02, ChatGPT)
+
+#211–#213 include temporary retargeted **copies** of four legacy clips in
+`build/local-blender-kit-v1/garments-v1/{female,male}_garments.blend`. This does
+not change the raw-clip statuses above or supersede the per-body download plan.
+These are garment stress tests, not approved animation choices; #215 stays open.
+
+| Legacy source | Local Action on each fit | Candidate status / findings |
+|---|---|---|
+| Idle.fbx | fit.female.idle / fit.male.idle | Source/export-verified; actual front/side/back start/middle/end captures. Rest-space axis error corrected. |
+| Walking.fbx | fit.female.walk / fit.male.walk | Source/export-verified; between-key checks and12 real gait samples per fit. Source lateral travel retained; loop/in-place acceptance remains open. |
+| Stand To Sit.fbx | fit.female.sit_down / fit.male.sit_down | Source/export-verified; ends at chair height. Seat/hand contact is not finalized. |
+| Sitting Idle.fbx | fit.female.seated / fit.male.seated | Source/export-verified; a reclined ground sit, **not** a continuous hold for Stand To Sit. |
+| Each body's original Dying | Original Action / OBSlot retained | Rechecked with garments and independent Blender/Godot exports; no source motion edits. |
+
+All candidate copies retain60fps, full original durations and explicit saved
+Action slots. Additional female ring/pinky joints retain their rest-relative
+pose under the animated parent. Target-only vertical toe-height reconciliation
+is recorded; no foot locking, source-root editing or contact IK. Read
+[the garment handoff](blender-expedition-garments.md) for exact lineage,
+local captures and limits. Other supplied clips remain untested.
+
 ## Adding a clip
 
 1. Download from Mixamo as **FBX**, **Without Skin**, at 60 fps, once with

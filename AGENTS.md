@@ -54,8 +54,18 @@ Templates > Download and Install; already installed on the owner's PC).
   masters, separate65/49-bone fit/rest contracts, preserved source Actions/slots,
   source catalogue and neutral/animation/export guide. Models, textures, exports
   and captures stay LOCAL in `build/local-blender-kit-v1`; reusable tools are in
-  `tools/blender_kit`. #215 tracks retargeting other supplied clips before #214
-  can accept the full garment/motion matrix. No face or live-game change.
+  `tools/blender_kit`. #215 now verifies the owner's planned per-body Mixamo
+  downloads; legacy-clip retargets are temporary fitting references only.
+  No face or live-game change.
+- `docs/blender-expedition-garments.md` – #211–#213's editable tunic/belt,
+  trousers and left/right boots on both preserved rigs. Local masters, eight
+  rigged exports and138 actual renders:
+  `build/local-blender-kit-v1/garments-v1/review/inspector.html`.
+  Reversible per-piece body masks retain opening boundary faces; GLB full-kit
+  masks are baked review candidates, not live removable wardrobes. Source skin
+  pixels/rest/Actions remain intact. #214 still owns interactive Godot wardrobe,
+  portrait acceptance and later hookup; chair sit-down and ground-seated idle
+  are separate stress-test clips, not an approved continuous transition.
 - `DESIGN.md` – living design direction and proposed first playable scope.
 - `docs/descent-completion-art.md` – #166/#167/#168/#178/#190 library handoff:
   matched Reservoir surfaces, opaque water inset/wet stairs, vision and ending

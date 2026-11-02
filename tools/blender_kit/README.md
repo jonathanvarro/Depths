@@ -15,12 +15,12 @@ separate so the tools never write to the owner's source folders.
 ```powershell
 $blenderKitExe = 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe'
 $env:BLENDER_USER_RESOURCES = 'E:/GitHub/Depths/build/local-blender-kit-v1/blender-user'
-& $blenderKitExe --background --factory-startup --disable-autoexec --python tools/blender_kit/audit_sources.py --python-exit-code 1
-& $blenderKitExe --background --factory-startup --disable-autoexec --python tools/blender_kit/audit_clips.py --python-exit-code 1
-& $blenderKitExe --background --factory-startup --disable-autoexec --python tools/blender_kit/prepare_masters.py --python-exit-code 1
-& $blenderKitExe --background --factory-startup --disable-autoexec --python tools/blender_kit/check_and_export.py --python-exit-code 1
-& $blenderKitExe --background --factory-startup --disable-autoexec --python tools/blender_kit/check_transfer.py --python-exit-code 1
-& $blenderKitExe --background --factory-startup --disable-autoexec --python tools/blender_kit/capture_review.py --python-exit-code 1
+& $blenderKitExe --background --factory-startup --disable-autoexec --python-exit-code 1 --python tools/blender_kit/audit_sources.py
+& $blenderKitExe --background --factory-startup --disable-autoexec --python-exit-code 1 --python tools/blender_kit/audit_clips.py
+& $blenderKitExe --background --factory-startup --disable-autoexec --python-exit-code 1 --python tools/blender_kit/prepare_masters.py
+& $blenderKitExe --background --factory-startup --disable-autoexec --python-exit-code 1 --python tools/blender_kit/check_and_export.py
+& $blenderKitExe --background --factory-startup --disable-autoexec --python-exit-code 1 --python tools/blender_kit/check_transfer.py
+& $blenderKitExe --background --factory-startup --disable-autoexec --python-exit-code 1 --python tools/blender_kit/capture_review.py
 python tools/blender_kit/prepare_smoke.py
 ```
 
@@ -48,13 +48,24 @@ The screenshots are real CPU renders, without image generation or retouching.
 For later garment **working copies**, export without changing the saved file:
 
 ```powershell
-& $blenderKitExe --background --disable-autoexec 'E:/GitHub/Depths/build/local-blender-kit-v1/female_working.blend' --python tools/blender_kit/export_current.py --python-exit-code 1 -- --name female-working-kit
+& $blenderKitExe --background --disable-autoexec 'E:/GitHub/Depths/build/local-blender-kit-v1/female_working.blend' --python-exit-code 1 --python tools/blender_kit/export_current.py -- --name female-working-kit
 ```
 
 That helper exports the one scene-fit rig and visible meshes carrying the same
 `fit_id` and an Armature modifier bound to it. It excludes helpers and writes a
 separate local `exports/female-working-kit.glb`. It does not author weights,
-retarget, generate coverage, remove hidden body geometry, approve fit or save
+retarget, approve fit or save
 the `.blend`. Reimport and inspect it afterward. The strict base regression
 checker is for the preserved base masters, not arbitrary finished wardrobes.
 Existing named exports are protected unless `--replace` is explicitly supplied.
+
+
+Garment production (#211–#213) uses the additional steps in
+[docs/blender-expedition-garments.md](../../docs/blender-expedition-garments.md).
+For a saved garment working copy, export_current.py recomputes logical-piece
+coverage and bakes non-skin mask/thickness modifiers into the candidate export;
+the editable master is not saved or flattened. Base-only exports retain the
+original #210 profile. All full-kit body masks in GLBs are static candidates,
+not a live removable-equipment system.
+The legacy-clip retargets are temporary fitting references. The owner's newer
+per-body download plan in docs/animation-library.md still governs #215.
