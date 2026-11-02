@@ -13,7 +13,7 @@ const TEXT_SIZES := {"Normal": 1.0, "Large": 1.15, "Larger": 1.3}
 const DEFAULTS := {
 	"Master": 1.0, "Music": 0.8, "Effects": 1.0,
 	"fullscreen": false, "flashes": true, "text_size": "Normal",
-	"map_fights": true,  # fights on the map (#171 trial); off: the battle stage
+	"map_fights": true,  # fights on the map (#171, owner chose 2026-11-02); the battle stage is set aside
 	"tips_seen": [],  # first-time tips already shown (2026-10-25)
 }
 ## Current values live in engine metadata, not static variables: static
@@ -39,6 +39,8 @@ static func load_settings() -> void:
 	if config.load(path()) != OK:
 		return
 	for key in _values():
+		if key == "map_fights":
+			continue  # no longer a choice: a saved "off" from the trial is ignored
 		_values()[key] = config.get_value("settings", key, _values()[key])
 
 

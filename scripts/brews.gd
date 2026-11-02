@@ -37,8 +37,23 @@ const FIND_CHANCE := 0.2
 static func item(kind: String) -> SupplyItem:
 	var key := "brew_item_" + kind
 	if not Engine.has_meta(key):
-		Engine.set_meta(key, load("res://data/items/brew_%s.tres" % kind))
+		_hold(key, load("res://data/items/brew_%s.tres" % kind))
 	return Engine.get_meta(key)
+
+
+## Keeps a value in the engine's metadata until the game closes. The drawn
+## icons must go before the renderer shuts down, or quitting crashes (#204).
+static func _hold(key: String, value: Variant) -> void:
+	var tree := Engine.get_main_loop() as SceneTree
+	if tree != null and not tree.root.tree_exiting.is_connected(_forget):
+		tree.root.tree_exiting.connect(_forget)
+	Engine.set_meta(key, value)
+
+
+static func _forget() -> void:
+	for key in Engine.get_meta_list():
+		if String(key).begins_with("brew_"):
+			Engine.remove_meta(key)
 
 
 static func is_brew(i) -> bool:
@@ -100,7 +115,7 @@ static func _icon(look: Array, kind: String) -> Texture2D:
 	if Engine.has_meta(key):
 		return Engine.get_meta(key)
 	var tex := ImageTexture.create_from_image(BrewArt.compose(look[0], int(look[1]), look[2], kind))
-	Engine.set_meta(key, tex)
+	_hold(key, tex)
 	return tex
 
 

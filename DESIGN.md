@@ -60,7 +60,7 @@ House of Necrosis was used as a reference: you grow strong during a run, grow at
 | **Expedition power** | **Resets each expedition** | Levels and talents. Fast early levelling underground |
 | **Player knowledge** | Yes | The monster journal, and how enemies behave |
 
-1. **Fights on the map (trial).**
+1. **Fights on the map** (a trial; the owner chose it on 2026-11-02).
    - The full on-map version is built first, as a trial. Then the owner chooses between it and keeping the combat stage with the ground shaping the fight.
    - The party stays in one cell, and its front and back rows decide who strikes and who is struck.
    - **A group move is one beat: enemies respond once.** Looking, inspecting and browsing the pack are free.
@@ -148,7 +148,8 @@ House of Necrosis was used as a reference: you grow strong during a run, grow at
 - **Phone:** at 844×390 the raised pad, the panel, the foe and its tag all fit.
 - **The campaign bot fights on the map:** room fights and wanderers, as the game does. Its policy: step off marked tiles (or Brace), turn to the weakest neighbour and Strike, Shoot if it can, and otherwise wait.
 - **Result** (30 campaigns per hero): Mara 24, Corin 28, Alwen 14, against 23, 26 and 15 on the stage. Balance is unchanged overall. Alwen's weak start remains and goes to the class rework (#179); rear damage (+50%) and reach (2 cells) are kept.
-- **Settings → "Fights on the map (trial)"** switches back to the battle stage, so the owner can compare the two.
+- **Settings → "Fights on the map (trial)"** switched back to the battle stage, so the owner could compare the two.
+- **Decided (owner, 2026-11-02): fights stay on the map.** The trial switch is gone from Settings, and a saved "off" is ignored. The battle stage is set aside, not deleted: its code stays (`Main.fights_on_map`, used by four older checks), unfinished.
 
 **Escaping on the map — owner 2026-10-31.** There's no Retreat in map fights. You get away by moving:
 - **Stairs:** step onto them mid-fight and you're away; the stairs' prompt follows.
@@ -227,6 +228,9 @@ Numbers are first guesses for the bot and the owner's playtests to tune.
   - **No depth bonus on floor 2** (monsters were 5% tougher), and **elites half as likely** there (6%, was 12%). On their own these barely moved floor-2 wipes.
   - **Bot (30 campaigns each):** floor-2 wipes 85 across all 90 campaigns, down from 105 (about a fifth fewer). The queen falls in **11 / 11 / 5** (Mara / Corin / Alwen). The run before the lone-monster change gave 7 / 19 / 10, so differences of this size are mostly chance.
   - **The hard part is now floor 4:** a visit there costs 42–50 health, most of the remaining wipes.
+- **Floor 4 eased (owner's go-ahead, 2026-11-02):** monsters there are **15% tougher** (was 25%, the same as floor 3 now) and **elites 18%** (was 22%). The queen has 37 health and 3–7 damage (was 40 and 4–8).
+  - **Bot (30 campaigns each):** the queen falls in **12 / 21 / 13** (Mara / Corin / Alwen), against 11 / 11 / 5 before. Floor-4 wipes fell from 62 to 42 across the 90 campaigns. That's close to the numbers before the expedition loop (23 / 27 / 12), with Alwen back to hers.
+  - **Still hard:** a floor-4 visit costs about 35–41 health; floor 2 is now the commonest place to fall again.
 - **Experience** still goes in full to everyone with the party. DESIGN's "a pair half each" reads like a split, while #179 says "unsplit", so this waits for the owner.
 
 ## Map and dungeon progression

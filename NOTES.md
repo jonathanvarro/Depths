@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-11-02 – Claude (fights on the map, exit crash, floor 4)
+- Did: Owner chose fights on the map (#171): the Settings trial switch is gone and a saved "off" is ignored (settings.gd); the battle-stage code stays, set aside. Fixed #204: brews.gd kept drawn icons in Engine metadata past the renderer's shutdown, so every quit crashed (the game too, and headless checks with Main); `_hold()` now drops them when the root leaves the tree. Eased floor 4: DEPTH_SCALE 1.25 -> 1.15, ELITE_CHANCE 0.22 -> 0.18. Bot queen wins 12/21/13 (was 11/11/5), floor-4 wipes 62 -> 42. Closed #172-#177/#179 (and #173: mastery was built in 4ba3dd3).
+- Next: Owner playtest of the Windows build. Magic (#170) needs the owner's choices; ChatGPT's research doc was never delivered.
+- Watch out: gear_check's "the Pack names the quality" fails on the other assistant's uncommitted gear_model.gd/bases.json work, not this commit. Their uncommitted equipment/audio/AGENTS/NOTES changes were left out.
+
 ## 2026-11-02 – Claude (per-body animation downloads)
 - Did: Recorded the owner's decision to re-download Mixamo clips with each base body loaded instead of hand-retargeting: plan in docs/animation-library.md ("Plan: download each clip on its own body") and a comment on #215. Upload the Dying FBXs #210's masters came from; save to Animations/Mixamo_Female/ and Mixamo_Male/; Mixamo_Originals stays untouched.
 - Next: Owner downloads #215's four clips (Idle, Walking, Stand To Sit, Sitting Idle) on both bodies. Then an assistant checks that bones/rest match each master exactly, plays them, and updates the list. #215 becomes verification; retargeting is only the fallback.

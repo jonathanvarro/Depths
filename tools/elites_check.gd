@@ -44,7 +44,7 @@ func _initialize() -> void:
 	# Depth scaling.
 	var shallow = _fight(["goblin"], 2)
 	# Retuned 2026-10-25 (after the free torches): 3 +15%, 4 +25%; floor 2's
-	# +5% came off 2026-11-01, easing floor 2.
+	# +5% came off 2026-11-01, and floor 4 eased to +15% on 2026-11-02.
 	check("floor 2: foes as written (a goblin 10 health)", shallow.foes[0].type.max_health == 10 or shallow.foes[0].elite == "Hardened")
 	check("floor 1: foes as written", _fight(["goblin"], 1).foes[0].type.max_health == 10)
 	var deep = _fight(["goblin", "goblin", "goblin"], 3, "gate")  # a set fight: no elites
@@ -52,11 +52,11 @@ func _initialize() -> void:
 	check("floor 3: +15%, rounded (a goblin 12 health, 2-5 damage)", g.type.max_health == 12 and g.health == 12 and g.type.damage_min == 2 and g.type.damage_max == 5, "%d %d-%d" % [g.type.max_health, g.type.damage_min, g.type.damage_max])
 	check("set fights have no elites", deep.foes.all(func(f): return f.elite == ""))
 	var queen = _fight(["goblin_queen"], 4, "queen")
-	check("floor 4: +25%, the queen too (32 -> 40 health, 3-6 -> 4-8 damage)", queen.foes[0].type.max_health == 40 and queen.foes[0].type.damage_min == 4 and queen.foes[0].type.damage_max == 8, queen.foes[0].type.max_health)
+	check("floor 4: +15%, the queen too (32 -> 37 health, 3-6 -> 3-7 damage)", queen.foes[0].type.max_health == 37 and queen.foes[0].type.damage_min == 3 and queen.foes[0].type.damage_max == 7, queen.foes[0].type.max_health)
 	check("...and the written queen isn't changed", _e("goblin_queen").max_health == 32)
 	var q = queen.foes[0]
 	queen._call_guard(q)
-	check("a guard she calls is scaled too", queen.foes[-1].type.max_health == roundi(12 * 1.25))
+	check("a guard she calls is scaled too", queen.foes[-1].type.max_health == roundi(12 * 1.15))
 
 	# Elites.
 	var fight = _fight(["goblin"], 2)
@@ -95,7 +95,7 @@ func _initialize() -> void:
 			var f = CS.new(_party(), [_e("goblin"), _e("goblin")] as Array[EnemyType])
 			f.prepare(depth)
 			counts[depth] += f.foes.filter(func(x): return x.elite != "").size()
-	check("elites: rarer on floor 2 (about 1 foe in 17, eased 2026-11-01) than floor 4 (1 in 5)", counts[2] > 15 and counts[2] < 80 and counts[4] > counts[2] * 2, str(counts))
+	check("elites: rarer on floor 2 (about 1 foe in 17, eased 2026-11-01) than floor 4 (about 1 in 6)", counts[2] > 15 and counts[2] < 80 and counts[4] > counts[2] * 2, str(counts))
 	var none := 0
 	for i in 200:
 		var f = CS.new(_party(), [_e("rat"), _e("rat")] as Array[EnemyType])
