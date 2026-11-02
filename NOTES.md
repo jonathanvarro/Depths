@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-11-01 – Claude (animation library list)
+- Did: Added docs/animation-library.md, the shared list of all 34 Mixamo clips plus the Dying clip in the rigged bases: frames, seconds, grouping and a male/female status column each. Numbers come from #210's existing audit (build/local-blender-kit-v1/clip-audit.json); nothing in tools/blender_kit or the local kit was touched. AGENTS.md "Read first" now says NOTES.md is where assistants coordinate and points 3D work at the list.
+- Next: Whoever tests a clip on a body updates its status there. "Loops?" and "In place?" are still `?` for every clip.
+- Watch out: All clips match the male skeleton's bone lengths exactly; the female's differ (0.5-1.43x), so expect retargeting. Another assistant's #210 work and uncommitted equipment/audio changes were in the working tree at the time and were left out of this commit.
+
 ## 2026-11-01 – ChatGPT (Blender clothing production task handoff)
 - Did: Created #209 parent kit brief and five linked Todo tasks: #210 male/female Blender masters and rig contract, #211 tunic/belt, #212 trousers, #213 boots, #214 assembly/animation/export/Godot review. Agent entry point: docs/blender-expedition-kit-tasks.md. No modelling or agent dispatch performed.
 - Next: The next agent starts #210, then creates the garments against its shared fit contract and completes #214's assembled review. First upper garment is a simple tunic; padded jacket follows after that fit works. Actual editable .blend masters and both real body fits are required.

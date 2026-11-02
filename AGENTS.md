@@ -72,6 +72,9 @@ Templates > Download and Install; already installed on the owner's PC).
   drawing. Named portrait work remains separate; never invent missing occupants.
 - `docs/cave-descent-and-quests.md` – proposed twelve-floor cave campaign and 48 activity concepts (#125), including quest packages, camp projects and story persistence. Read alongside #122/#123; floor count, lore and new mechanics are not approved or implemented.
 - `docs/boons-curses-and-gambling-review.md` – #134 audit of the #133 shrine system, costs/odds/durations, research and proposed improvements; recorded probes in `docs/boons-curses-review-data.json`. Reward bugs are #136/#137; #135 trinkets were in progress during review. Recommendations do not change live rules.
+- `docs/animation-library.md` – shared list of every character animation clip
+  (source, frames, per-body status). Clips stay local; update the list when
+  adding, testing or dropping one.
 - `AGENTS.md` / `CLAUDE.md` – shared assistant instructions and entry point.
 - `NOTES.md` – handoff history between assistants.
 - `project.godot` – Godot project settings. Prefer changing settings in the
@@ -446,6 +449,11 @@ with the owner handing off between them. They cannot see each other's
 conversations, so this repo is the only shared memory.
 
 1. **Read first.** Before changing anything, read this file and `NOTES.md`.
+   `NOTES.md` is where Claude and ChatGPT coordinate: its newest entries say
+   what the last assistant did, what's next and what to watch out for.
+   Decisions agreed with the owner go in the GitHub issue as well, so they
+   aren't lost in a chat the other assistant can't see. For 3D models or
+   animation, also read `docs/animation-library.md` and keep it current.
 2. **One assistant at a time.** Don't assume the working tree is untouched
    since the last session — check `git status` and `git log` first.
 3. **Small, focused changes.** Do the task asked; don't refactor unrelated code.
