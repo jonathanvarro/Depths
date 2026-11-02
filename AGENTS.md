@@ -72,6 +72,15 @@ Templates > Download and Install; already installed on the owner's PC).
   `review/inspector.html`. Two editable Blender copies and complete skinned GLBs
   stay local. #214 remains open for #215's final body-specific animation checks;
   source heads are unchanged and likeness/style acceptance is separate.
+- `docs/mixamo-animation-requests.md` – #215's prepared per-body intake and
+  owner-requested private Drive pack (`3D Objects/Animations/Animation Requests - Depths`).
+  Each body folder contains the exact source FBX, instructions and Downloads.
+  This explicitly authorized two private model copies; all other art remains
+  local/out of Git. Request Idle, in-place Walking, Stand To Sit and **Sitting**
+  (chair hold); old Sitting Idle is a ground pose. Four bind-audit regression
+  probes pass; eight returned clips are still awaited. Shared presentation-only
+  normalization gives about1.70m/1.80m against fixed rest-sole references; never
+  apply it to source FBXs/bind rigs or conceal animated contact defects.
 - `DESIGN.md` – living design direction and proposed first playable scope.
 - `docs/descent-completion-art.md` – #166/#167/#168/#178/#190 library handoff:
   matched Reservoir surfaces, opaque water inset/wet stairs, vision and ending

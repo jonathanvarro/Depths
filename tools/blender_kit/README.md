@@ -80,3 +80,12 @@ Native captures/cards, real-frame GIFs and the local gallery are packaged by
 `package_wardrobe.py`; `validate_wardrobe.py` and `check_wardrobe_gallery.cjs`
 verify delivery. Supplied/derived art stays local. Final animation acceptance
 still awaits #215; no new faces or final runtime wardrobe architecture is implied.
+
+The owner-authorized normalization/request pass is described in
+[docs/mixamo-animation-requests.md](../../docs/mixamo-animation-requests.md).
+`display_normalization.json` changes only the shared display parent and fixed
+ground reference; FBXs, bind rigs, clothing and source Actions remain untouched.
+`prepare_animation_requests.py` creates local request sheets and a source-hash
+manifest; Drive operations remain explicit connector actions. After the owner
+returns per-body files, materialize them into the ignored intake cache and run
+`audit_body_downloads.py -- --probe`. Bind compatibility is not motion approval.

@@ -26,6 +26,11 @@ slightly below zero (female-0.03870, male-0.03421). Do not move vertices or appl
 the dying pose to correct that. Any later game display scale/root-placement
 choice must be explicit and consistent, preserving the source bind spaces.
 
+The owner-authorized display normalization now uses a shared parent scale and
+fixed rest-sole reference in the isolated review (2026-11-02):
+[Mixamo request/normalization handoff](mixamo-animation-requests.md).
+The source files, their bind transforms and upload FBX bytes stay unchanged.
+
 The supplied `Base Male Mesh.blend` has no rig/modifier despite retained groups;
 its small same-named FBX is unweighted. Neither substitutes for the real rigged
 male Dying FBX. The female source FBX has a stale external texture path. Its

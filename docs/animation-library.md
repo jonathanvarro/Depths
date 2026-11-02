@@ -89,7 +89,7 @@ until someone checks; please fill them in when you do.
 | Clip file | Frames | Seconds | Loops? | In place? | Male | Female | Notes |
 |---|---|---|---|---|---|---|---|
 | Stand To Sit.fbx | 1–135 | 2.23 | ? | ? | untested | untested | |
-| Sitting.fbx | 1–421 | 7.00 | ? | ? | untested | untested | |
+| Sitting.fbx | 1–421 | 7.00 | ? | ? | untested | untested | 2026-11-02 ChatGPT: source start pose inspected against Stand To Sit end; hips/feet height differs0.00113 source units, sampled axes <2.48°. Chosen for per-body chair-hold requests; actual body playback remains untested. |
 | Sitting Idle.fbx | 1–616 | 10.25 | ? | ? | needs fix | needs fix | 2026-11-01 ChatGPT #210: direct assignment gives wrong limb axes on both fits; retarget in #215 (local transfer-validation.json). |
 | Sitting Talking.fbx | 1–2644 | 44.05 | ? | ? | untested | untested | Very long; largest file (5.6 MB) |
 | Situp To Idle.fbx | 1–265 | 4.40 | ? | ? | untested | untested | |
@@ -148,11 +148,16 @@ own Dying clip was downloaded that way and already passes #210's checks.
   longer match the masters or clothing fitted to them.
 - **Download settings:** FBX, Without Skin, 60 fps. Note whether *In Place*
   was ticked.
-- **Folders:** `G:/My Drive/3D Objects/Animations/Mixamo_Female/` and
-  `.../Mixamo_Male/`, keeping Mixamo's clip names. `Mixamo_Originals/` stays
-  untouched as the record of the first batch.
-- **Order:** #215's four first (Idle, Walking, Stand To Sit, Sitting Idle) on
-  both bodies, to prove the approach; then the rest as needed.
+- **Current folders:** `3D Objects/Animations/Animation Requests - Depths/`
+  in private Drive now has `Base Female` / `Base Male`, each with the verified
+  upload FBX, instructions and a `Downloads` child. Owner explicitly requested
+  these private copies on2026-11-02. Earlier `Mixamo_Female` / `Mixamo_Male`
+  paths remain valid intake alternatives. `Mixamo_Originals` stays untouched.
+- **Order:** Idle, Walking (In Place), Stand To Sit and **Sitting** (chair hold)
+  on both bodies. The supplied Sitting start closely matches the chair
+  transition; Sitting Idle is a different ground pose. This refinement follows
+  the owner's delegated preparation request; see
+  [the request pack and source-pose evidence](mixamo-animation-requests.md).
 - **Checking:** an assistant audits the new folders, confirms the skeleton
   and rest pose match the master exactly, watches them play, and adds Male /
   Female statuses here. If a per-body download still doesn't match, fall
@@ -161,6 +166,12 @@ own Dying clip was downloaded that way and already passes #210's checks.
 This doesn't scale to many body shapes (each needs every clip again); if the
 game later has several builds, Godot's import-time retargeting can share one
 set. For two bodies, re-downloading is simpler.
+
+The two ready upload files retain exact source bytes, bind rigs and body fits.
+Display normalization is a separate shared parent scale/ground reference;
+it does not change the FBXs. Both Drive return folders are verified empty.
+#215's prepared auditor passes four known-compatible/incompatible regression
+probes and reports eight missing downloads, not final animation approval.
 
 ## Garment fitting references (2026-11-02, ChatGPT)
 

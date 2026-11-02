@@ -51,6 +51,7 @@ def main():
         with Image.open(OUT/'review'/capture['file']) as image:
             check(list(image.size)==capture['size'] and image.getextrema()[0][0]!=image.getextrema()[0][1],'Actual nonblank capture '+capture['file'])
     for source,target in [('wardrobe_actor.gd','actor.gd'),('wardrobe_review.gd','review.gd'),('check_wardrobe.gd','check.gd')]:check(sha(Path(__file__).with_name(source))==sha(OUT/target),'Reviewed source matches reusable tool '+source)
+    check(sha(Path(__file__).with_name('display_normalization.json'))==sha(OUT/'display_normalization.json'),'Reviewed fixed display normalization matches source')
     result={'checks':checks,'failures':[],'actual_captures':len(native['captures']),'native_portrait_cards':24,'source_files_unchanged':39,'blender_export_checks':manifest['checks'],'native_checks':native['checks'],'final_animation_acceptance_pending':215,'all_art_local':True}
     (OUT/'review/artifact-validation.json').write_text(json.dumps(result,indent=2)+'\n',encoding='utf-8');print('WARDROBE_ARTIFACTS',checks,'checks, no failures')
 if __name__=='__main__':main()

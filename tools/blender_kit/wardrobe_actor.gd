@@ -11,9 +11,16 @@ var selected_bits:=31
 var current_motion:="rest"
 var motion_time:=0.0
 var playing:=false
+var display_scale:=1.0
+var expected_display_height:=0.0
 
 func setup(identity:String,data:Dictionary)->void:
 	fit=identity;record=data
+	var policy:Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://display_normalization.json"))
+	display_scale=float(policy.source_unit_to_metres);expected_display_height=float(policy.fits[record.fit_id].display_body_height)
+	# One uniform scale for both bodies preserves natural height differences.
+	# This parent reference is fixed for every clip and clothing selection.
+	scale=Vector3.ONE*display_scale;position.y=-float(record.floor_y)*display_scale
 	model=load("res://"+str(record.export)).instantiate();add_child(model)
 	skeleton=model.find_children("*","Skeleton3D",true,false)[0]
 	player=model.find_children("*","AnimationPlayer",true,false)[0]

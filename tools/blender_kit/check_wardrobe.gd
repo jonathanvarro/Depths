@@ -48,7 +48,8 @@ func visible_deformation(actor:Node3D)->void:
 			if baked:lowest=minf(lowest,(mesh.global_transform*baked.get_aabb()).position.y)
 	if is_finite(lowest):
 		var hips:Vector3=actor.skeleton.to_global(actor.skeleton.get_bone_global_pose(actor.skeleton.find_bone("mixamorig_Hips")).origin)
-		contact_samples.append({"fit":actor.fit,"motion":app.current_motion,"seconds":actor.motion_time,"angle":app.angle_index,"visible_min_y":lowest,"reference_floor_y":actor.record.floor_y,"visible_envelope_minus_floor":lowest-float(actor.record.floor_y),"actual_hips_world":[hips.x,hips.y,hips.z],"floor_or_root_adjusted":false})
+		var source_hips:Vector3=actor.to_local(hips)
+		contact_samples.append({"fit":actor.fit,"motion":app.current_motion,"seconds":actor.motion_time,"angle":app.angle_index,"visible_min_y":lowest,"reference_floor_y":0.0,"visible_envelope_minus_floor":lowest,"visible_envelope_minus_floor_source_units":lowest/actor.display_scale,"display_hips_world":[hips.x,hips.y,hips.z],"source_hips":[source_hips.x,source_hips.y,source_hips.z],"display_scale":actor.display_scale,"source_root_modified":false,"reference_fixed_for_all_poses":true})
 func coverage_matrix(repeats:=2)->void:
 	for repeat_index in repeats:
 		for bits in range(32) if repeat_index==0 else range(31,-1,-1):
@@ -88,6 +89,17 @@ func run()->void:
 		check(actor.clips.size()==5,"Exactly five supplied/fitting clips "+actor.fit)
 		check(actor.meshes.size()==actor.record.body_chunks.size()+actor.record.garments.size(),"Every canonical mesh maps to one real node "+actor.fit)
 		check(actor.skeleton.get_bone_count()==int(actor.record.bones),"Preserved rig "+actor.fit)
+		check(is_equal_approx(actor.scale.x,app.actors[0].scale.x),"Same uniform display scale on both body families")
+		actor.set_garments(0);var bounds:=AABB();var first:=true
+		if DisplayServer.get_name()!="headless":
+			await settle();await RenderingServer.frame_post_draw
+			for mesh:MeshInstance3D in actor.meshes.values():
+				if not mesh.visible:continue
+				var body_bounds:AABB=mesh.global_transform*mesh.bake_mesh_from_current_skeleton_pose().get_aabb()
+				if first:bounds=body_bounds;first=false
+				else:bounds=bounds.merge(body_bounds)
+			check(absf(bounds.size.y-actor.expected_display_height)<.0002,"Actual restored body has the intended metric display height "+actor.fit)
+		actor.set_garments(31)
 	coverage_matrix()
 	for motion in ["rest","idle","walk","sit_down","seated","dying"]:
 		app.set_motion(motion,0,true);var length:float=app.actors[0].duration()

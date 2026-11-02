@@ -143,6 +143,7 @@ def main():
     (OUT/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf-8')
     for source,name in [('wardrobe_actor.gd','actor.gd'),('wardrobe_review.gd','review.gd'),('check_wardrobe.gd','check.gd')]:
         shutil.copy2(Path(__file__).with_name(source),OUT/name)
+    shutil.copy2(Path(__file__).with_name('display_normalization.json'),OUT/'display_normalization.json')
     (OUT/'project.godot').write_text('''config_version=5
 [application]
 config/name="Depths · editable kit review"

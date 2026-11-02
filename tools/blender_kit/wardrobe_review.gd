@@ -107,7 +107,7 @@ func make_panel(fit:String)->void:
 	var key=DirectionalLight3D.new();key.rotation_degrees=Vector3(-35,-25,0);key.light_energy=1.4;key.light_color=Color("fff0db");key.shadow_enabled=true;stage.add_child(key)
 	var fill=DirectionalLight3D.new();fill.rotation_degrees=Vector3(-20,150,0);fill.light_energy=.5;fill.light_color=Color("a6bdcb");stage.add_child(fill)
 	var actor=Actor.new();stage.add_child(actor);actor.setup(fit,manifest.fits[fit]);actors.append(actor)
-	var ground=MeshInstance3D.new();var plane=PlaneMesh.new();plane.size=Vector2(30,30);ground.mesh=plane;ground.position.y=float(manifest.fits[fit].floor_y);var material=StandardMaterial3D.new();material.albedo_color=Color("303b3b");material.roughness=1;ground.material_override=material;stage.add_child(ground)
+	var ground=MeshInstance3D.new();var plane=PlaneMesh.new();plane.size=Vector2(30,30);ground.mesh=plane;ground.position.y=0;var material=StandardMaterial3D.new();material.albedo_color=Color("303b3b");material.roughness=1;ground.material_override=material;stage.add_child(ground)
 	var camera=Camera3D.new();camera.projection=Camera3D.PROJECTION_ORTHOGONAL;camera.current=true;stage.add_child(camera);cameras.append(camera)
 	var count=Label.new();count.add_theme_font_size_override("font_size",13);count.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;panel.add_child(count);counts.append(count)
 
@@ -159,12 +159,13 @@ func aim(camera:Camera3D,actor:Node3D,aspect:float,portrait:bool)->void:
 	var direction:Vector3=[Vector3(0,0,1),Vector3(.65,0,1),Vector3(1,0,0),Vector3(0,0,-1)][angle_index].normalized()
 	var points:Array[Vector3]=actor.bone_points();var bounds:=AABB(points[0],Vector3.ZERO)
 	for point in points:bounds=bounds.expand(point)
-	var focus:Vector3=actor.head_position()+Vector3(0,.08,0) if portrait else bounds.get_center()
-	camera.position=focus+direction*10+Vector3(0,.03 if portrait else .12,0);camera.look_at(focus)
-	if portrait:camera.size=1.12;return
+	var unit:float=actor.display_scale
+	var focus:Vector3=actor.head_position()+Vector3(0,.08*unit,0) if portrait else bounds.get_center()
+	camera.position=focus+direction*10+Vector3(0,(.03 if portrait else .12)*unit,0);camera.look_at(focus)
+	if portrait:camera.size=1.12*unit;return
 	var inverse:=camera.global_transform.affine_inverse();var projected:=AABB(inverse*points[0],Vector3.ZERO)
 	for point in points:projected=projected.expand(inverse*point)
-	camera.size=maxf(projected.size.y+.55,(projected.size.x+.55)/maxf(.2,aspect))*1.10
+	camera.size=maxf(projected.size.y+.55*unit,(projected.size.x+.55*unit)/maxf(.2,aspect))*1.10
 
 func frame_cameras()->void:
 	if cameras.size()!=2:return
@@ -175,6 +176,7 @@ func frame_cameras()->void:
 func show_details()->void:
 	var text:="[b]Editable kit / local review[/b]\n\nAll original bodies, rigs and skin pixels are retained. Garments use independently named meshes and reversible body regions. No live game or player files are loaded.\n\n"
 	text+="[b]Animation limits[/b]\n#215's body-specific downloads are not present. Idle, walk, chair sit-down and ground-seated clips are temporary legacy retargets. Chair sit-down and ground idle are not a continuous sequence. Extra female finger joints retain parent-relative rest articulation. Source lateral travel is retained; no floor/seat/hand IK. Playback stops at each real endpoint: looping and in-place status are not approved.\n\n"
+	text+="[b]Display normalization[/b]\nOne common scale presents the two bodies at about1.70m/1.80m, preserving their6% height difference. Each fixed rest-sole reference is at y=0. Only the presentation parent changes; source mesh, rest rig, Actions and Mixamo uploads remain unchanged. This is a review reference, not a character-height stat or animated foot correction.\n\n"
 	for actor in actors:
 		var data:Dictionary=actor.stats();text+="[b]%s[/b] · %d triangles / %d surfaces / %d materials / %d joints\n%d textures / %d pixels (RGBA8 base level ≈ %.2f MiB; GPU overhead/mips excluded).\n"%[actor.fit.capitalize(),data.triangles,data.surfaces,data.materials,data.bones,data.texture_count,data.texture_pixels,data.texture_pixels*4/1048576.0]
 		for motion in actor.record.motions:text+="%s · %s · %s · %d–%d @ %dfps\n"%[motion.id,motion.source,motion.action,motion.frames[0],motion.frames[1],motion.fps]

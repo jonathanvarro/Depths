@@ -1,8 +1,9 @@
 # Editable wardrobe review · #214
 
 2026-11-02. The isolated Godot/Blender review is ready locally. **#214 remains
-open for #215's final per-body animation verification.** The designated
-`Mixamo_Female` / `Mixamo_Male` folders were not present when checked; no new
+open for #215's final per-body animation verification.** The owner's new
+[private Drive request folders](mixamo-animation-requests.md) now contain both
+source models and instructions; return folders are verified empty. No new
 animation download, custom performance or final motion approval is implied.
 Owner art acceptance remains separate.
 
@@ -71,8 +72,12 @@ Visible counts update when clothes change. Bare-body triangles are1,826/904,
 exactly matching the supplied sources; their split regions use more surfaces
 than a monolithic body. The female texture is unchanged RGBA data:4MiB at an
 RGBA8 base level, excluding mips/format/renderer overhead. GLBs are approximately
-4.34MB/3.12MB on disk; animation storage is included. Body height, object scale
-and proportions remain explicit source values, not normalized human-height art.
+4.34MB/3.12MB on disk; animation storage is included. Source body height, object
+scale and proportions remain unchanged. The review's common presentation parent
+now scales these to about1.70m/1.80m and puts each fixed rest-sole reference at
+y=0. No bind/pose changes or animated floor corrections are applied; see
+`tools/blender_kit/display_normalization.json`. These are display references,
+not character-height stats. Portrait framing uses the same common factor.
 
 ## Animation and fit acceptance still pending
 
@@ -98,8 +103,9 @@ fixed review floor, sampled female walk bounds reach−0.0353 source units;
 male ground-seated bounds reach−0.1031; original dying reaches−0.0514/−0.0481.
 Negative values indicate intersection with the reference plane. These contact
 limits remain part of #215/#214's unfinished animation acceptance, not passed
-collision/grounding tests. Rest sole clearance is0.002 on both fits; no root
-or floor offset is changed between poses.
+collision/grounding tests. Rest sole clearance is0.002 source units on both
+fits (about0.000887 display metres). The normalized report includes display
+and source-unit gaps/hips; its presentation reference is fixed across poses.
 
 96/192 portraits judge the supplied geometry and clothing readability only.
 The featureless source heads are preserved; no face painting, named likeness,
@@ -113,7 +119,7 @@ portrait/style approval are not inferred from desktop renders.
   four samples of every clip, including between keys. Maximum geometric error
   remains below0.00010 source units. Both source and review `.blend` bytes stay
   unchanged; the copies are actually reopened during preparation.
--2,595 native Mobile checks cover real imported rigs, visible surfaces, repeated
+-2,599 native Mobile checks cover real imported rigs, visible surfaces, repeated
   forward/reverse wardrobe switching, the animation/angle matrix, actual mouse
   and touch buttons/slider/menu input, pause/endpoint behavior and screen bounds.
   Desktop1440×900, phone shapes1278×590/1334×750 and compact852×393 are captured.
@@ -121,11 +127,11 @@ portrait/style approval are not inferred from desktop renders.
 -163 actual Godot captures include24 native96/192 cards, the sampled motion
   matrix, six removal states per fit, seven UI views and24 gait frames.
   Two12-frame GIFs and six contact sheets use only those actual images.
--394 artifact checks verify all39 copied sources, exact master/export hashes,
+-395 artifact checks verify all39 copied sources, exact master/export hashes,
   embedded original skin pixels, GLB rig/motion/counts and complete nonblank
   capture coverage. Native runtime logs are clean. The restricted editor import
   retains its existing preference safe-save warning.
--1,352 headless control/coverage checks and115 browser gallery checks also pass.
+-1,354 headless control/coverage checks and115 browser gallery checks also pass.
   The generated one-click launcher was exercised directly. Browser controls,
   links and native-card sizing are checked at desktop and phone widths.
 
