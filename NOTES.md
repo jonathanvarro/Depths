@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-11-03 – Claude (grain layer on the KayKit pilot, #224)
+
+- **Done:** owner asked for a grain layer. The pilot's shared material now multiplies `grain-floor1.png` (floor 1's wall texture, light and dark only) over every piece in world space, at the walls' 64 pixels to a 2 m cell. The colours are lifted 12% to compensate. Tune with `GRAIN` in `tools/art/build_kaykit_pilot.py`. Models and UVs are unchanged. New captures are in `art/concepts/kaykit-pilot-v1/`; the earlier smooth ones are kept as `*-on-smooth.png`, with a close-up in `crates-smooth-vs-grain.png`.
+- **Checks:** kaykit_pilot_check (which now checks the grain), dressing_check and visual_check pass. The pilot is still off by default.
+
 ## 2026-11-03 – Claude (CC0 3D pilot: KayKit props on floor 1, #224)
 
 - **Done:** owner said yes to the pilot. Downloaded KayKit Dungeon Remastered 1.0 (CC0; licence re-checked on itch.io, in the download and on the Godot Asset Library) and copied ten store models unchanged into `art/third-party/kaykit-dungeon-remastered/`, with hashes and the record in `CREDITS.md`. The recolour tool snaps the shared texture to floor 1's own 32 colours. `scripts/kaykit_pilot.gd` puts small stacks against room walls on floor 1. It is **off by default**: turn it on with Main `kaykit_pilot` or `Depths.exe -- --kaykit-pilot`. Captures are in `art/concepts/kaykit-pilot-v1/`; results are in `docs/free-3d-assets.md`.

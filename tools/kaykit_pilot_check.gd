@@ -70,6 +70,7 @@ func _initialize() -> void:
 	var shared: Material = meshes[0].material_override if not meshes.is_empty() else null
 	check("every piece shares one material", shared != null and meshes.all(func(m): return m.material_override == shared))
 	check("...with the recoloured 256 texture", shared != null and shared.albedo_texture.get_width() == 256)
+	check("...and the walls' grain over it, in world space", shared != null and shared.detail_enabled and shared.detail_albedo != null and shared.uv2_world_triplanar)
 	check("the floor's pieces stay within a phone budget", triangles < 60000, "%d triangles in %d pieces" % [triangles, pilot.get_child_count() if pilot else 0])
 	var cells := {}  # cell -> its biggest piece's name, biggest first below
 	for piece: Node3D in pilot.get_children():

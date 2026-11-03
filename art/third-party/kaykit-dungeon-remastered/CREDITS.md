@@ -41,6 +41,8 @@ the file names lose their `.gltf` infix (`barrel_large.gltf.glb` becomes
   `dungeon_texture.png` (1024 square), shrunk to 256 square, muted, and
   snapped to 32 colours sampled from the live floor 1 art (cave-v1 walls,
   floor and dressing). `palette-floor1.png` shows those 32 colours.
+  `grain-floor1.png` is made by us from floor 1's own wall texture (its
+  light and dark only), laid over the pieces as a grit layer.
   Rebuild with `python tools/art/build_kaykit_pilot.py <dungeon_texture.png>`.
 - **In the game:** each model's own embedded texture is discarded on
   import, and every piece uses the recoloured texture instead

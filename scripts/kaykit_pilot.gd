@@ -22,6 +22,9 @@ const PIECES := {
 const SMALL := ["bottle_A_brown", "bottle_B_green"]  # beside a bigger piece
 ## One in this many room cells against a wall gets a little stack of stores.
 const ODDS := 5
+## The grain repeats once per this many metres: the walls' 64 pixels to a
+## 2 m cell, so props and walls share a pixel size.
+const GRAIN_METRES := 2.0
 
 
 ## Dresses floor 1's rooms. Returns how many pieces it placed.
@@ -80,11 +83,20 @@ static func _put(root: Node3D, id: String, at: Vector3, yaw: float, shared: Mate
 
 
 ## The material a floor's pieces share: the recoloured texture, matte,
-## sampled crisply like the painted dressing.
+## sampled crisply like the painted dressing, with the walls' grain
+## multiplied over it in world space (owner, 2026-11-03). World space keeps
+## the grain the same size on a bottle and a crate, and needs no new UVs.
 static func material() -> StandardMaterial3D:
 	var shared := StandardMaterial3D.new()
 	shared.albedo_texture = load(DIR + "texture-floor1.png")
 	shared.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST_WITH_MIPMAPS
 	shared.roughness = 1.0
 	shared.metallic_specular = 0.1
+	shared.detail_enabled = true
+	shared.detail_albedo = load(DIR + "grain-floor1.png")
+	shared.detail_blend_mode = BaseMaterial3D.BLEND_MODE_MUL
+	shared.detail_uv_layer = BaseMaterial3D.DETAIL_UV_2
+	shared.uv2_triplanar = true
+	shared.uv2_world_triplanar = true
+	shared.uv2_scale = Vector3.ONE / GRAIN_METRES
 	return shared

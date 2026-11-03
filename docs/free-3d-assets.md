@@ -142,9 +142,14 @@ KayKit Dungeon Remastered on floor 1, **off by default**. To see it:
   - Up close, the props are smooth and evenly coloured while the walls are
     chunky pixel texture, so the props read slightly cleaner than their
     surroundings. Colour isn't the mismatch; surface detail is.
-  - If adopted, options are a grain or dirt layer in the shared material,
-    or keeping 3D props for larger furniture and staying 2D for small
-    clutter.
+  - **Grain layer (owner, 2026-11-03):** to close that gap, the shared
+    material now multiplies the wall texture's own light and dark over
+    every piece. It's laid in world space at the walls' density (64 pixels
+    to a 2 m cell), so props and walls share a pixel size, and the colours
+    are lifted 12% to make up for the darkening. The strength is `GRAIN`
+    in the recolour tool. The models and their UVs are unchanged. Compare
+    `crates-smooth-vs-grain.png`; the earlier smooth captures are kept as
+    `*-on-smooth.png`.
 - **Effort:** about half a day, including the licence check, the record
   and the recolour tool. Adding more KayKit pieces now costs minutes each.
 - **Found on the way:** Godot had stopped importing *any* new file, because
