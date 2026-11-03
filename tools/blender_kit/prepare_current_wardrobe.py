@@ -26,6 +26,12 @@ CHAIR = BASE / 'animation-requests-v1/female-chair-intake-v1'
 # Optional per-fit seated override (#218): fit -> intake folder whose
 # source-manifest.json names the hold. Unset keeps assembly-v2's selection.
 SEATED = {}
+# Optional fit -> folder holding <fit>_garments.blend / <fit>-manifest.json
+# (e.g. the male T-pose rebind). Unset uses garments-v1.
+GARMENTS = {}
+# Fits whose clips must be converted afresh: cached conversions belong to an
+# older rest pose and their rig fingerprint no longer matches.
+NO_CACHE = set()
 
 
 def sha(path):
@@ -53,7 +59,7 @@ def prepare_fit(fit):
             assert metrics['shared_bones'] == (65 if fit == 'female' else 49)
             assert not metrics['parent_mismatches'] and metrics['max_relative_bone_length_error'] < .0001
         selection[key] = entry
-    original_path = BASE / 'garments-v1' / (fit + '_garments.blend')
+    original_path = GARMENTS.get(fit, BASE / 'garments-v1') / (fit + '_garments.blend')
     original_hash = sha(original_path)
     record = json.loads((original_path.parent / (fit + '-manifest.json')).read_text(encoding='utf-8'))
     master = SOURCES / (fit + '_current.blend')
@@ -74,7 +80,8 @@ def prepare_fit(fit):
         # must match; the new assembly is independently exported/reimported.
         cache = CHAIR if fit == 'female' and key in ['sit_down', 'stand_up'] else INTAKE / 'candidates-v1'
         cache_record = json.loads((cache / (fit + '-manifest.json')).read_text(encoding='utf-8'))
-        cached = next((m for m in cache_record['motions'] if m['id'] == key and m['source_sha256'] == entry['sha256']), None)
+        cached = None if fit in NO_CACHE else next(
+            (m for m in cache_record['motions'] if m['id'] == key and m['source_sha256'] == entry['sha256']), None)
         if cached:
             assert sha(Path(entry['destination'])) == entry['sha256']
             assert cache_record['source_rig_digest'] == rig_hash

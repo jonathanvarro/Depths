@@ -106,6 +106,10 @@ Templates > Download and Install; already installed on the owner's PC).
   sit-down whose hands ease out of her left thigh (`hand_lift.py`, source clip
   kept). Judge hand/leg contact from renders: automatic inside tests proved
   unreliable on these meshes (see the doc).
+- `docs/male-tpose-rebind.md` – #221: the male rebound in his T-pose
+  (`male-tpose-v1`, `rebind_male_tpose.py`), clothing rebuilt on it and all
+  male clips reconverted; `assembly-v5` = v4 + this male. Original male
+  master, garments-v1 and assemblies v1–v4 untouched.
 - `DESIGN.md` – living design direction and proposed first playable scope.
 - `docs/descent-completion-art.md` – #166/#167/#168/#178/#190 library handoff:
   matched Reservoir surfaces, opaque water inset/wet stairs, vision and ending

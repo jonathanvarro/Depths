@@ -4,8 +4,19 @@
   "source_unit_to_metres": 0.44341862717489255,
   "ground_reference": "Each outfit's fixed rest sole reference becomes display y=0; never recomputed from an animated pose",
   "fits": {
-    "female-v1": {"source_body_height": 3.8344277516007423, "display_body_height": 1.700256689616111},
-    "male-v1": {"source_body_height": 4.059369385242462, "display_body_height": 1.8}
+    "female-v1": {
+      "source_body_height": 3.8344277516007423,
+      "display_body_height": 1.700256689616111
+    },
+    "male-v1": {
+      "source_body_height": 4.059369385242462,
+      "display_body_height": 1.8
+    },
+    "male-tpose-v1": {
+      "source_body_height": 4.063733030110598,
+      "display_body_height": 1.8019349214169076,
+      "note": "Male rebound in his T-pose (owner request 2026-11-03); same display scale, so the rest-pose change shows as ~1.9 mm."
+    }
   },
   "preserve_body_height_ratio": true,
   "physical_height_or_gameplay_stat": false,

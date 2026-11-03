@@ -18,6 +18,11 @@ Format:
 - Next: Playtest mastery pace after removing bonuses; develop family stock and comparison/growth-range prototypes separately. Existing fixed growth is unchanged; damage-based credit remains an option to test. Compensated drawbacks still need a design.
 - Watch out: mastery_check and gear_model_check pass (fails=0; 4500 general finds +500 two-property rolls, legacy drawback and save roundtrip). Main-based mastery fixture retains existing shutdown resource warnings, exits 0. Checks used a private build-local APPDATA folder; first restricted run could not write its test save, rerun succeeded privately. Prior equipment/audio/Blender changes are preserved and excluded.
 
+## 2026-11-03 – Claude (male T-pose rebind, assembly-v5, #221)
+- Did: Owner asked to make the male's T-pose his real rest/bind pose and redo his clothing/clip conversions. New local male-tpose-v1 master (rebind_male_tpose.py: minimal per-bone turns to his download rest, mesh baked, pose applied as rest; weights/names/lengths unchanged; Dying rebaked). Clothing rebuilt with the unchanged garment builder (build_male_tpose_garments.py). assembly-v5 = v4 + rebound male, all male clips converted afresh. Checks: conversions <0.000003; body vs v4 mean 0.002, max ~0.075 at 4 shoulder verts; 778 Blender, 3273 native, 1404 headless, 514 artifact pass. Doc: docs/male-tpose-rebind.md.
+- Next: Owner reviews assembly-v5 (START_REVIEW.cmd). #218 polish continues on top of v5.
+- Watch out: display_normalization.json gained a male-tpose-v1 entry, so v2-v4's stored copies no longer match it byte-for-byte. prepare_current_wardrobe.py gained default-preserving GARMENTS/NO_CACHE hooks. Other uncommitted equipment/audio/AGENTS/NOTES work excluded.
+
 ## 2026-11-03 – Claude (owner review of v4 hand lift, #218)
 - Did: Owner rechecked the strengthened v4 sit-down: "much improved", still "a little rough" with "some pass through still". Recorded in docs/female-chair-hold-review.md and on #218.
 - Next: Owner decides whether to keep refining (needs moment/angle or a screenshot of the remaining pass-through) or accept v4 for now. A hand-placed animator pass with hand IK targets on the knees is the cleaner long-term option.
