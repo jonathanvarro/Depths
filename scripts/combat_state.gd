@@ -740,13 +740,10 @@ func hero_attack(hero: Companion, target: Foe) -> Dictionary:
 		outcome = {"hit": true, "damage": damage, "killed": not target.is_alive()}
 		outcome["text"] = "%s strikes the %s for %d.%s" % [hero.display_name, target.name.to_lower(), damage, " It falls." if outcome["killed"] else ""]
 		_credit(hero.weapon, "hit", target)
-		if outcome["killed"]:
-			_credit(hero.weapon, "kill", target)
 		if outcome["killed"] and target.type.tactic == EnemyType.Tactic.BLOAT:
 			outcome["text"] += " " + _burst(target, "back" if not hero_in_front(hero) else "near")
 	else:
 		outcome["text"] = "%s misses the %s." % [hero.display_name, target.name.to_lower()]
-		_credit(hero.weapon, "miss", target)
 	_check_end()
 	return outcome
 

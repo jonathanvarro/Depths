@@ -128,13 +128,8 @@ static func _pick_mods(rng: RandomNumberGenerator, b: Dictionary, count: int) ->
 			break
 		if _fits(chosen, m):
 			chosen.append(m)
-	if count >= 2 and chosen.size() >= 1 and rng.randf() < 0.25:  # a drawback buys a stronger strength
-		var drawbacks: Array = pool.filter(func(m): return m["kind"] == "drawback")
-		_shuffle(rng, drawbacks)
-		for d in drawbacks:
-			if _fits(chosen.slice(0, 1), d):
-				chosen = chosen.slice(0, 1) + [d]
-				break
+	# #219: keep strengths until drawbacks buy a genuinely stronger benefit.
+	# Saved drawbacks retain their existing effects.
 	return chosen.map(func(m): return m["id"])
 
 

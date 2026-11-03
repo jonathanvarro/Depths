@@ -84,6 +84,18 @@ func _initialize() -> void:
 	var deep := GearModel.random_find(rng, 3)
 	check("a floor-3 find is goblin-marches gear", int(GearModel.base(deep.base_id)["region"]) == 2, deep.base_id)
 
+	var uncompensated := 0
+	for i in 500:
+		var pair := GearModel.generate(rng, "iron_sword", "ordinary", 2)
+		if pair.mods.size() != 2 or Array(pair.mods).any(func(id): return GearModel.modifier(id)["kind"] == "drawback"):
+			uncompensated += 1
+	check("two-property prizes retain two strengths", uncompensated == 0, uncompensated)
+	var legacy_drawback := _fixed("iron_sword", "ordinary", "steady")
+	legacy_drawback.mods = PackedStringArray(["keen", "brittle"])
+	legacy_drawback.mastery = 12.0
+	GearModel.apply(legacy_drawback)
+	check("existing drawbacks still work", GearModel.level_of(legacy_drawback) == 0 and GearModel.next_points(legacy_drawback) == 15.0)
+
 	# Saving: exactly the same item after a load.
 	var found := GearModel.random_find(rng, 4, 2)
 	found.mastery = 33.5

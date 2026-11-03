@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-11-02 – ChatGPT (equipment engagement corrections, #219)
+- Did: Removed return-home and participation mastery, plus miss/kill bonuses. Successful strikes and landed incoming blows earn mastery with existing threat scaling/caps; HP lost is not rewarded. Removed uncompensated drawback substitution for new rolls; saved drawbacks still work. Recorded owner proposals for equipment-source identity, smith family slots, simple stat/growth comparisons and saved per-level growth-range rolls in docs/equipment-engagement-review.md.
+- Next: Playtest mastery pace after removing bonuses; develop family stock and comparison/growth-range prototypes separately. Existing fixed growth is unchanged; damage-based credit remains an option to test. Compensated drawbacks still need a design.
+- Watch out: mastery_check and gear_model_check pass (fails=0; 4500 general finds +500 two-property rolls, legacy drawback and save roundtrip). Main-based mastery fixture retains existing shutdown resource warnings, exits 0. Checks used a private build-local APPDATA folder; first restricted run could not write its test save, rerun succeeded privately. Prior equipment/audio/Blender changes are preserved and excluded.
+
 ## 2026-11-02 – Claude (female hold chosen, #218)
 - Did: Owner chose Sitting.fbx as the female chair hold; recorded in docs/female-chair-hold-review.md, docs/animation-library.md and on #218. Sitting Idle is kept as an unused alternative.
 - Next: Export/reimport and Godot native checks on received.female.hold_sitting (local female-hold-intake-v1/female_hold.blend), then add it to the wardrobe review between Stand To Sit and Sit To Stand with explicit placement.

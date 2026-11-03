@@ -3,7 +3,7 @@ extends SceneTree
 ## 2026-10-31): blows earn a weapon mastery, blows taken earn armour
 ## mastery, scaled by the foe's threat and capped per fight; mastery levels
 ## add the item's growth; practised hands double a lagging item's gain; a
-## trip home adds a little. Enemy armour: blunt ignores 1, blades do +1 to
+## trip home grants nothing. Enemy armour: blunt ignores 1, blades do +1 to
 ## the unarmoured, goblin-bane bites goblins, a shield guards the front.
 ## Args: tag, screenshot dir.
 
@@ -96,6 +96,11 @@ func _initialize() -> void:
 	state.enemy_act(state.foes[0])
 	check("a blow taken teaches the armour", state.mastery_gain.get(mara.body, 0.0) > 0.0)
 
+	var no_bonus = _fight(_item("iron_sword"), "goblin")
+	no_bonus._credit(no_bonus.party.members[0].weapon, "miss", no_bonus.foes[0])
+	no_bonus._credit(no_bonus.party.members[0].weapon, "kill", no_bonus.foes[0])
+	check("no miss or kill bonus", no_bonus.mastery_gain.get(no_bonus.party.members[0].weapon, 0.0) == 0.0)
+
 	# Levels and growth; practised hands.
 	var blade := _item("iron_sword")
 	check("mastery 3 adds the growth: 3-5 becomes 4-6", GearModel.award(blade, 54.0) == 3 and blade.attack_min == 4 and blade.attack_max == 6, "%d-%d" % [blade.attack_min, blade.attack_max])
@@ -103,15 +108,18 @@ func _initialize() -> void:
 	GearModel.award(fresh, 6.0, [blade])
 	check("practised hands: a new item 2+ levels behind learns double", is_equal_approx(fresh.mastery, 12.0) and GearModel.level_of(fresh) == 1, fresh.mastery)
 
-	# In the game: a trip home teaches what's worn.
+	# Passive participation and returning grant no mastery.
 	var main = load("res://scenes/main.tscn").instantiate()
 	main.play_opening = false
 	root.add_child(main)
 	await create_timer(0.5).timeout
 	var hero: Companion = main._party_state.members[0]
 	hero.weapon = _item("iron_sword")
-	main._bring_home_mastery()
-	check("home in one piece: worn gear learns a little", is_equal_approx(hero.weapon.mastery, 3.0), hero.weapon.mastery)
+	hero.body = _item("studded_jerkin")
+	var idle = CombatState.new(main._party_state, [])
+	main._award_mastery(idle, CombatState.Result.VICTORY)
+	check("participation alone teaches neither weapon nor armour", hero.weapon.mastery == 0.0 and hero.body.mastery == 0.0)
+	check("no return-home bonus or award path", GearModel.tables()["mastery"]["extraction"]["worn_item"] == 0 and not main.has_method("_bring_home_mastery"))
 	# Tempering at the smith (#173).
 	var camp = main._camp_state
 	camp.set_site_present("smith", true)

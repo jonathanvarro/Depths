@@ -1118,17 +1118,11 @@ func _offer_level_ups() -> void:
 
 # --- Gear mastery (#192/#193, owner 2026-10-31) -----------------------------
 
-## After a fight: each item's earned mastery, and a share for armour that
-## stood through it (so a careful player isn't behind). Level-ups are said.
-func _award_mastery(state, result: int) -> void:
+## Apply mastery from weapon hits and blows taken. Returning and merely
+## participating grant nothing (#219). Level-ups are said.
+func _award_mastery(state, _result: int) -> void:
 	if _in_opening:
 		return
-	var t: Dictionary = GearModel.tables()["mastery"]
-	if result != CombatState.Result.DEFEAT:
-		for hero: Companion in _party_state.members:
-			if hero.is_with_party() and hero.body and hero.body.base_id != "":
-				state.mastery_gain[hero.body] = minf(float(t["armour_credit"]["per_fight_cap"]),
-						float(state.mastery_gain.get(hero.body, 0.0)) + float(t["armour_credit"]["fight_taken_part"]))
 	var owned := GearModel.owned_by(_party_state)
 	for item in state.mastery_gain:
 		var level := GearModel.award(item, state.mastery_gain[item], owned)
@@ -1139,16 +1133,6 @@ func _award_mastery(state, result: int) -> void:
 					who = hero.display_name + "'s "
 			_show_message("%s%s reaches mastery %d." % [who, item.display_name.to_lower() if who != "" else item.display_name, level])
 			_tip("mastery", "Gear learns as you use it: weapons by fighting, armour by taking blows. Each mastery level adds what its growth promises - see the item's card. At mastery 3 and 6 the smith can temper it.")
-
-
-## Home in one piece: everything worn learns from the trip.
-func _bring_home_mastery() -> void:
-	var bonus: float = float(GearModel.tables()["mastery"]["extraction"]["worn_item"])
-	var owned := GearModel.owned_by(_party_state)
-	for hero: Companion in _party_state.members:
-		if hero.is_with_party():
-			for item in [hero.weapon, hero.body, hero.back]:
-				GearModel.award(item, bonus, owned)
 
 
 # --- Memories (#118, owner 2026-10-26) ------------------------------------
@@ -1619,8 +1603,6 @@ func _end_expedition(ending: int) -> void:
 		_main_heroes_wake_at_camp()
 		_wipe_pending = true
 		_save_now()
-	elif not _in_opening:
-		_bring_home_mastery()
 	if _in_opening and ending == Expedition.Ending.RETURNED:
 		_hints_done[_hint] = true
 		_show_hint("")  # the escape is over: no "walk into the light" on top

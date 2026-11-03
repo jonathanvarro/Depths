@@ -1,5 +1,5 @@
 {
-  "_about": "Table 4 of 6: mastery (#193). Mastery points build up on a particular item (fractional progress is kept and shown). Owner direction 2026-10-31: weapons earn mastery by fighting, armour by being struck. Caps per fight and a share for simply taking part keep 'take avoidable hits' from being the best way to progress. Proposals, not approved balance.",
+  "_about": "Owner revision 2026-11-02 (#219): combat-only mastery from successful strikes and landed blows received, with existing threat scaling and caps. No miss, kill, participation or return bonus. HP lost is not rewarded.",
   "levels": [
     {
       "level": 1,
@@ -32,19 +32,19 @@
   "weapon_credit": {
     "_about": "Per action of the wielder, scaled by the foe's threat: threat_factor = clamp(foe threat / region_threat, 0.25, 2). region_threat is the region's usual foe threat (region table).",
     "hit": 1.0,
-    "miss": 0.25,
-    "kill": 1.0,
+    "miss": 0.0,
+    "kill": 0.0,
     "per_fight_cap": 8.0
   },
   "armour_credit": {
-    "_about": "Per blow that reaches the wearer (blocked or not), scaled by the attacker's threat factor; plus a share for every fight the wearer stands in, so a careful player still progresses.",
+    "_about": "Per landed blow reaching the wearer, scaled by attacker threat, regardless of HP lost. No participation bonus.",
     "struck": 1.0,
-    "fight_taken_part": 1.0,
+    "fight_taken_part": 0.0,
     "per_fight_cap": 5.0
   },
   "extraction": {
-    "_about": "Bringing an item home: each worn item gains this on a successful return (not a wipe).",
-    "worn_item": 3.0
+    "_about": "Zero retained for paper-probe compatibility. Returning grants nothing.",
+    "worn_item": 0.0
   },
   "trivial_foes": {
     "_about": "Foes far below the region's level teach little.",

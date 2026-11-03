@@ -1,5 +1,7 @@
 # Equipment model: rolls, growth, mastery and a worked region (#193)
 
+**2026-11-02 revision (#219):** combat-only mastery now supersedes the passive return/participation and miss/kill bonuses below. New rolls no longer replace a benefit with an uncompensated drawback; existing saved drawbacks remain effective. The earlier pace estimates and fixed-growth presentation require a new playtest. [Owner feedback and follow-up](equipment-engagement-review.md).
+
 Claude, 2026-10-31, under #192 and following the owner's direction recorded there. **This is a model for owner review: it changes nothing in the game.**
 - **What's here:** a specification, six linked tables (the five live ones in `data/equipment/`, read by the game; generated examples in `docs/equipment-model/`) and a reproducible probe (`python tools/balance/equipment_probe.py`, seed 193).
 - **Results:** [probe-report.md](equipment-model/probe-report.md).
