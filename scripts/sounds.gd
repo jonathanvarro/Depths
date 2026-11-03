@@ -4,6 +4,13 @@ extends RefCounted
 ## Sources, edits and licences: audio/dark-v1/CREDITS.md and catalog.json.
 
 const EFFECTS := {
+	"wander_claws": preload("res://audio/galleries-v1/wander-claws.wav"),
+	"wander_shuffle": preload("res://audio/galleries-v1/wander-shuffle.wav"),
+	"wander_stones": preload("res://audio/galleries-v1/wander-stones.wav"),
+	"wander_chitter": preload("res://audio/galleries-v1/wander-chitter.wav"),
+	"wade": preload("res://audio/galleries-v1/wade-1.wav"),
+	"sluice": preload("res://audio/galleries-v1/sluice-wheel.wav"),
+	"drain": preload("res://audio/galleries-v1/water-drain.wav"),
 	"hit": preload("res://audio/dark-v1/hit-1.wav"),
 	"block": preload("res://audio/dark-v1/block-wood.wav"),
 	"block_metal": preload("res://audio/dark-v1/block-metal.wav"),
@@ -24,17 +31,24 @@ const EFFECTS := {
 	"drum": preload("res://audio/dark-v1/drum-hit.wav"),
 }
 const VARIANTS := {
+	"wade": [preload("res://audio/galleries-v1/wade-1.wav"), preload("res://audio/galleries-v1/wade-2.wav"), preload("res://audio/galleries-v1/wade-3.wav")],
 	"hit": [preload("res://audio/dark-v1/hit-1.wav"),preload("res://audio/dark-v1/hit-2.wav"),preload("res://audio/dark-v1/hit-3.wav")],
 	"miss": [preload("res://audio/dark-v1/miss-1.wav"),preload("res://audio/dark-v1/miss-2.wav")],
 	"coins": [preload("res://audio/dark-v1/coins-1.wav"),preload("res://audio/dark-v1/coins-2.wav")],
 }
 const LOOPS := {
+	"galleries": preload("res://audio/galleries-v1/galleries-loop.wav"),
 	"camp": preload("res://audio/dark-v1/camp-ambience-loop.wav"),
 	"outskirts": preload("res://audio/dark-v1/outskirts-ambience-loop.wav"),
 	"torch": preload("res://audio/dark-v1/torch-burn-loop.wav"),
 }
 const HEARTBEAT := preload("res://audio/dark-v1/heartbeat.wav")
 static var _rng: RandomNumberGenerator
+const WANDER_KEYS := ["wander_claws", "wander_shuffle", "wander_stones", "wander_chitter"]
+
+
+static func warning_index() -> int:
+	return _random().randi_range(0, WANDER_KEYS.size() - 1)
 
 
 static func _random() -> RandomNumberGenerator:

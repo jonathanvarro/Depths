@@ -1,0 +1,311 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-11-01",
+  "assets": [
+    {
+      "id": "boar_spear",
+      "prompt": "Use case: precise-object-edit. Edit target: supplied worn spear inventory art. Create the boar-spear variant for the same dark gritty dungeon equipment family. Preserve its diagonal bottom-left to top-right framing, broad leaf blade, scratched dull iron, rough subtly crooked wooden shaft and mismatched worn leather wrapping. Add a clearly readable short forged iron crossbar immediately beneath the blade socket, perpendicular to the shaft, projecting to both sides to stop what it skewers. Two simple blunt lugs, no decoration. Fully visible single isolated object, actual transparent background, no cast shadow, no person, no blood, no lettering. Keep economical hand-painted pixel-friendly material clusters and restrained warm grey/umber palette. Hand-forged asymmetry, dents and small rust pits rather than pristine factory geometry. Leave generous transparent margins.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-4eb4e450-c706-4332-b608-a321f5d8edb7.png",
+      "source": "art/source/equipment-live-v1/boar_spear-master.png",
+      "reference": "art/source/equipment-handworked-v1/garrison-spear-master.png",
+      "sha256": "870317e5d1f0786037daa9056b31e1adaddac3e97731df53684290a5d2bcb814",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "registration": {
+        "128": {
+          "source_bounds": [
+            57,
+            15,
+            1237,
+            1238
+          ],
+          "scale": 0.09157808667211774,
+          "offset": [
+            10,
+            8
+          ]
+        },
+        "64": {
+          "source_bounds": [
+            57,
+            15,
+            1237,
+            1238
+          ],
+          "scale": 0.04578904333605887,
+          "offset": [
+            5,
+            4
+          ]
+        }
+      },
+      "name": "Boar spear",
+      "export": "res://art/items/equipment-live-v1/boar_spear.png",
+      "compact": "res://art/items/equipment-live-v1/compact64/boar_spear.png",
+      "description": "A broad-bladed spear with a crossbar to stop what it skewers.",
+      "reference_sha256": "daeebf76f50e354354587f0dd879bb0649ec1808e4011877b95af24d9ef90877"
+    },
+    {
+      "id": "studded_jerkin",
+      "prompt": "Use case: precise-object-edit. Supplied image is the edit target, a sleeveless leather vest inventory asset. Make a studded jerkin variant in the same dark gritty hand-painted pixel-friendly style. Preserve the compact sleeveless silhouette and crossed off-centre fastening, dark brown leather and muted oxblood lining. Add unmistakable widely spaced small blunt iron studs across the chest and shoulders, irregular hammered heads with dull highlights. Worn creased patched leather, lopsided hem, one repaired seam, mismatched rivets and mildly dented buckle; useful equipment, not wreckage. Handworked irregularity should read in the outline and broad folds, not only noisy surface scratches. Restrained umber/iron palette. Isolated single empty garment front-three-quarter view fully visible, no mannequin/person, transparent background, no text, no shadow, generous margins. No added weapons or decorations.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-7e1e5dbc-62f0-4b39-88b2-fee17db5aa87.png",
+      "source": "art/source/equipment-live-v1/studded_jerkin-master.png",
+      "reference": "art/source/early-equipment-v1/raiders-leather-vest-master.png",
+      "sha256": "0bfe05598cfd56c0f388bd8c11794f94f5132c4ac3c3db28315ebadebb0ac8f6",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "registration": {
+        "128": {
+          "source_bounds": [
+            237,
+            72,
+            1018,
+            1189
+          ],
+          "scale": 0.10026857654431513,
+          "offset": [
+            25,
+            8
+          ]
+        },
+        "64": {
+          "source_bounds": [
+            237,
+            72,
+            1018,
+            1189
+          ],
+          "scale": 0.050134288272157566,
+          "offset": [
+            12,
+            4
+          ]
+        }
+      },
+      "name": "Studded jerkin",
+      "export": "res://art/items/equipment-live-v1/studded_jerkin.png",
+      "compact": "res://art/items/equipment-live-v1/compact64/studded_jerkin.png",
+      "description": "Leather set with iron studs. Better made than it looks.",
+      "reference_sha256": "0ee80249f061ff41b11fd4e5ca905a4db2d8e9c7d31a0ac8c6471b158acf0160"
+    },
+    {
+      "id": "goblin_shield",
+      "prompt": "Use case: stylized-concept. Asset: isolated inventory icon master for a goblin ROUND SHIELD, dark gritty dungeon crawler. One modest round hide-covered wooden shield seen from the front at a slight tilt. Uneven circular silhouette, patched dull grey-brown rawhide stretched over timber, coarse off-centre stitches and lashings, a battered iron boss, mismatched small edge plates with a missing interval exposing wood, dull iron nails. A short gouge and water staining, useful battered equipment rather than destroyed wreck. No spikes, horns, symbols, ornament, lettering, person, background, cast shadow or scene. Actual transparent background. Economical hand-painted pixel-friendly clusters and crisp silhouette, sombre muted umber/charcoal/iron with small restrained warm highlights. The round silhouette and big stitched hide patch distinguish it from the plain timber-and-iron buckler. Handworked asymmetry and imperfections in construction, not perfect concentric circles, not glossy. Centre full object with generous transparent margins, square canvas.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-37937ee0-4c36-4cc6-9fff-7f1cef2549c0.png",
+      "source": "art/source/equipment-live-v1/goblin_shield-master.png",
+      "reference": null,
+      "sha256": "c8fdf9a1b2d62b7a5197453fe1ce1a10f5b5a5377546cf4de5c2d07bd6d4fab4",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "registration": {
+        "128": {
+          "source_bounds": [
+            56,
+            49,
+            1202,
+            1207
+          ],
+          "scale": 0.09671848013816926,
+          "offset": [
+            8,
+            8
+          ]
+        },
+        "64": {
+          "source_bounds": [
+            56,
+            49,
+            1202,
+            1207
+          ],
+          "scale": 0.04835924006908463,
+          "offset": [
+            4,
+            4
+          ]
+        }
+      },
+      "name": "Goblin round shield",
+      "export": "res://art/items/equipment-live-v1/goblin_shield.png",
+      "compact": "res://art/items/equipment-live-v1/compact64/goblin_shield.png",
+      "description": "A round goblin shield of hide on wood."
+    },
+    {
+      "id": "goblin_scale",
+      "prompt": "Use case: precise-object-edit. Supplied edit target is a scale coat inventory drawing. Adapt it to a goblin SCALE SHIRT for the same gritty dungeon family. Shorten the long skirt into a waist-length shirt with one irregular hanging corner, shorten sleeves to elbows. Preserve overlapping dull iron scales on stiff brown backing, front fastenings and the overall front-three-quarter readable silhouette. Crucially make it hand-built and visibly imperfect: mixed scale sizes, some twisted overlapping rows, a small repaired gap filled with brown leather, mismatched straps, dented edges and restrained rust specks. Broad uneven construction and silhouette rather than only grain. It should look serviceable, heavy and uncomfortable. No perfectly symmetric clean armour, no decoration, no spikes, no person/mannequin/body, no blood, no text, no cast shadow or background. Actual transparent background, all garment inside generous margins, restrained dark iron/umber/oxblood with economical pixel-friendly painted clusters.",
+      "original": "C:\\Users\\jonat\\.codex\\generated_images\\01a14858-bf41-7241-a1a3-335ffc204971\\exec-3dfa069c-81a4-4a01-bb24-05f3e1fa1f10.png",
+      "source": "art/source/equipment-live-v1/goblin_scale-master.png",
+      "reference": "art/source/early-equipment-v1/garrison-scale-coat-master.png",
+      "sha256": "fbaad9f080c8ff32ec079f38ff0c8ada3f9f6552d5bf57d0d6b1b29593cff375",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "registration": {
+        "128": {
+          "source_bounds": [
+            72,
+            75,
+            1183,
+            1170
+          ],
+          "scale": 0.10081008100810081,
+          "offset": [
+            8,
+            9
+          ]
+        },
+        "64": {
+          "source_bounds": [
+            72,
+            75,
+            1183,
+            1170
+          ],
+          "scale": 0.050405040504050404,
+          "offset": [
+            4,
+            4
+          ]
+        }
+      },
+      "name": "Goblin scale shirt",
+      "export": "res://art/items/equipment-live-v1/goblin_scale.png",
+      "compact": "res://art/items/equipment-live-v1/compact64/goblin_scale.png",
+      "description": "Overlapping goblin-forged scales on a stiff backing. It stops a lot, and slows you.",
+      "reference_sha256": "2f0b290f401a6b92fa903e3d49f52592a40247da185347faa22b2f4563e36c61"
+    },
+    {
+      "id": "goblin_cleaver",
+      "source": "art/source/early-equipment-v1/notched-falchion-master.png",
+      "reuse": "Retained broad chipped single-edged chopper; no new generation.",
+      "sha256": "c6ca73329fbc476dc48e869de59a695a5990fb8ac2629e98c78977c10dde3dad",
+      "source_canvas": [
+        1312,
+        1199
+      ],
+      "registration": {
+        "128": {
+          "source_bounds": [
+            27,
+            31,
+            1290,
+            1173
+          ],
+          "scale": 0.08867775138558986,
+          "offset": [
+            8,
+            13
+          ]
+        },
+        "64": {
+          "source_bounds": [
+            27,
+            31,
+            1290,
+            1173
+          ],
+          "scale": 0.04433887569279493,
+          "offset": [
+            4,
+            6
+          ]
+        }
+      },
+      "name": "Goblin cleaver",
+      "export": "res://art/items/equipment-live-v1/goblin_cleaver.png",
+      "compact": "res://art/items/equipment-live-v1/compact64/goblin_cleaver.png",
+      "description": "A heavy goblin blade, more chopper than sword. Crude, and it bites."
+    },
+    {
+      "id": "buckler",
+      "source": "art/items/starter-v1/wooden-shield.png",
+      "reuse": "Retained round timber shield with iron rim/boss; source is a large original, not an upscaled runtime icon.",
+      "sha256": "383fcf51ea46696b6b2c3f579cde95842773090f691c20831fc6f59600b09a6b",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "registration": {
+        "128": {
+          "source_bounds": [
+            183,
+            79,
+            1114,
+            1187
+          ],
+          "scale": 0.10108303249097472,
+          "offset": [
+            17,
+            8
+          ]
+        },
+        "64": {
+          "source_bounds": [
+            183,
+            79,
+            1114,
+            1187
+          ],
+          "scale": 0.05054151624548736,
+          "offset": [
+            8,
+            4
+          ]
+        }
+      },
+      "name": "Iron-rimmed buckler",
+      "export": "res://art/items/equipment-live-v1/buckler.png",
+      "compact": "res://art/items/equipment-live-v1/compact64/buckler.png",
+      "description": "A small iron-rimmed shield, strapped to the back between fights."
+    },
+    {
+      "id": "shadow_cape",
+      "source": "art/source/early-equipment-v1/raiders-mantle-master.png",
+      "reuse": "Retained short dark mantle with split uneven hem and oxblood underside.",
+      "sha256": "a6cc30eff1af5041584ee12eaa6b647b405d8894c7452244eeb4c13bc6b6f635",
+      "source_canvas": [
+        1254,
+        1254
+      ],
+      "registration": {
+        "128": {
+          "source_bounds": [
+            168,
+            128,
+            1086,
+            1127
+          ],
+          "scale": 0.11211211211211211,
+          "offset": [
+            12,
+            8
+          ]
+        },
+        "64": {
+          "source_bounds": [
+            168,
+            128,
+            1086,
+            1127
+          ],
+          "scale": 0.056056056056056056,
+          "offset": [
+            6,
+            4
+          ]
+        }
+      },
+      "name": "Shadow-dyed cape",
+      "export": "res://art/items/equipment-live-v1/shadow_cape.png",
+      "compact": "res://art/items/equipment-live-v1/compact64/shadow_cape.png",
+      "description": "Dyed the colour of the dark. Things behind you see less of you."
+    }
+  ]
+}

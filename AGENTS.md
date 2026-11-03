@@ -355,6 +355,10 @@ Templates > Download and Install; already installed on the owner's PC).
   exact prompts. Read `docs/early-equipment-art-review.md` for reuse and advisory
   ID comparisons. Shape selection and runtime mapping remain pending; candidates
   are ignored by Godot and do not replace approved icons or #192/#193 data.
+  #196's seven borrowed base pictures now have dedicated128/64 exports and
+  optional per-base icon bindings, including existing generated-item restore:
+  `docs/equipment-icon-cleanup.md`; review `art/concepts/equipment-live-v1/inspector.html`.
+  Shared templates, all rolls and previous22-design candidates are preserved.
 - Light sources (#59): `Supplies.source` is LANTERN, TORCH (held, burns
   `torch_left`, `torch_burnt_out` signal) or NONE; `has_lantern`. Torch
   supply effect LIGHT_TORCH; CombatState.hero_throw_torch() scares a foe off.
@@ -492,6 +496,11 @@ Templates > Download and Install; already installed on the owner's PC).
   drum bed on floor 3 and restarts cave ambience after camp. Separate stems/torch
   loop are available. Review and integration: `docs/elves-and-sound-art.md`.
   Current music/softened footsteps remain; broader #54 stays open.
+  #167/#54 adds four wanderer warnings, three wading steps, sluice/drain,
+  Galleries ambience and the original72s deeper-cave score candidate, with live
+  hooks and independent Music/Effects controls: `docs/galleries-sound-and-music.md`.
+  Review `art/concepts/galleries-audio-v1/inspector.html`; existing music/foley
+  remain. The new score awaits owner listening review.
 - `scripts/dungeon_map.gd` – grid data (`is_wall`), cell contents
   (`Content` enum, `content_at`, `enter`), and explored cells. Layout text
   uses ',' for room floor and '.' for corridor floor (rooms are found from

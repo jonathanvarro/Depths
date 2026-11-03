@@ -197,7 +197,8 @@
       "new": true,
       "template": "simple_spear",
       "price": 36,
-      "description": "A broad-bladed spear with a crossbar to stop what it skewers."
+      "description": "A broad-bladed spear with a crossbar to stop what it skewers.",
+      "icon": "res://art/items/equipment-live-v1/boar_spear.png"
     },
     {
       "id": "goblin_cleaver",
@@ -220,7 +221,8 @@
       "new": true,
       "template": "woodcutters_axe",
       "price": 34,
-      "description": "A heavy goblin blade, more chopper than sword. Crude, and it bites."
+      "description": "A heavy goblin blade, more chopper than sword. Crude, and it bites.",
+      "icon": "res://art/items/equipment-live-v1/goblin_cleaver.png"
     },
     {
       "id": "quilted_coat",
@@ -262,7 +264,8 @@
       "weight": "medium",
       "template": "leather_jerkin",
       "price": 52,
-      "description": "Leather set with iron studs. Better made than it looks."
+      "description": "Leather set with iron studs. Better made than it looks.",
+      "icon": "res://art/items/equipment-live-v1/studded_jerkin.png"
     },
     {
       "id": "goblin_scale",
@@ -279,7 +282,8 @@
       "weight": "heavy",
       "template": "leather_jerkin",
       "price": 70,
-      "description": "Overlapping goblin-forged scales on a stiff backing. It stops a lot, and slows you."
+      "description": "Overlapping goblin-forged scales on a stiff backing. It stops a lot, and slows you.",
+      "icon": "res://art/items/equipment-live-v1/goblin_scale.png"
     },
     {
       "id": "drowned_pick",
@@ -336,7 +340,8 @@
       "new": true,
       "template": "wool_cape",
       "price": 22,
-      "description": "A small iron-rimmed shield, strapped to the back between fights. Placeholder picture."
+      "description": "A small iron-rimmed shield, strapped to the back between fights.",
+      "icon": "res://art/items/equipment-live-v1/buckler.png"
     },
     {
       "id": "goblin_shield",
@@ -353,7 +358,8 @@
       "new": true,
       "template": "wool_cape",
       "price": 34,
-      "description": "A round goblin shield of hide on wood. Placeholder picture."
+      "description": "A round goblin shield of hide on wood.",
+      "icon": "res://art/items/equipment-live-v1/goblin_shield.png"
     },
     {
       "id": "oilcloth_cloak",
@@ -394,7 +400,8 @@
       },
       "template": "oilcloth_cloak",
       "price": 30,
-      "description": "Dyed the colour of the dark. Things behind you see less of you."
+      "description": "Dyed the colour of the dark. Things behind you see less of you.",
+      "icon": "res://art/items/equipment-live-v1/shadow_cape.png"
     },
     {
       "id": "satchel",

@@ -102,7 +102,10 @@ func _choose(choice: EventChoice) -> void:
 		var heads: bool = await coin.flip(_event.title, choice.heads_text, choice.tails_text, chance, note)
 		visible = true
 		forced = 0 if heads else 1
+	var was_drained: bool = _rules.drained
 	var result: Dictionary = _rules.resolve(_party, choice, forced, _flags)
+	if _rules.drained and not was_drained:
+		Sounds.play(self, "sluice", -5.0, 0.0)
 	for item in result.get("no_room", {}):
 		_no_room[item] = _no_room.get(item, 0) + result["no_room"][item]
 	if choice.investigation and result["ambush"].is_empty():

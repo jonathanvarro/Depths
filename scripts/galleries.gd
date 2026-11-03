@@ -78,6 +78,7 @@ static func theme_from(cave: EnvironmentTheme, depth := DEPTH) -> EnvironmentThe
 	theme.floor_material = DROWNED_FLOOR
 	theme.ceiling_material = DROWNED_CEILING
 	theme.wall_face_uv = true
+	theme.ambience = preload("res://audio/galleries-v1/galleries-loop.wav")
 	if depth >= RESERVOIR:
 		for slot in ["wall_material", "wall_variant_material", "floor_material", "ceiling_material"]:
 			var material = theme.get(slot)

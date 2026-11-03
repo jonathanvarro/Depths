@@ -5,7 +5,7 @@ extends Node
 ## Licences and credits: audio/music/README.md.
 
 const FOLDER := "res://audio/music/"
-const PLACES := ["title", "cave", "fortress", "combat", "camp"]
+const PLACES := ["title", "cave", "fortress", "combat", "camp", "galleries"]
 const FADE := 1.5  # seconds
 const VOLUME_DB := -8.0
 
@@ -24,6 +24,8 @@ func _init() -> void:
 
 
 static func track_for(where: String) -> AudioStream:
+	if where == "galleries":
+		return preload("res://audio/galleries-v1/below-the-sluice.wav")
 	for extension in [".ogg", ".mp3", ".wav"]:
 		var path: String = FOLDER + where + extension
 		if ResourceLoader.exists(path):

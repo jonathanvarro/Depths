@@ -1,0 +1,206 @@
+{
+  "assets": [
+    {
+      "id": "wander-claws",
+      "label": "Claws scraping behind",
+      "file": "audio/galleries-v1/wander-claws.wav",
+      "rate": 44100,
+      "channels": 1,
+      "seconds": 2.4,
+      "loop": false,
+      "music": false,
+      "peak_dbfs": -6.374976450526644,
+      "rms_dbfs": -27.451168793701118,
+      "sha256": "b41e6c6bf50ce6ec564701e21cfc14f72a0d27fcfacebda710e047bd6e8db9d3",
+      "inputs": [
+        "rpg/creak3"
+      ],
+      "processing": "Recorded creak3 .83x, 180\u20132100Hz; sparse .137/.271/.419s reflections at .13/n. Quiet scraping, no close impact."
+    },
+    {
+      "id": "wander-shuffle",
+      "label": "Shuffling closer",
+      "file": "audio/galleries-v1/wander-shuffle.wav",
+      "rate": 44100,
+      "channels": 1,
+      "seconds": 2.2,
+      "loop": false,
+      "music": false,
+      "peak_dbfs": -6.375528689433151,
+      "rms_dbfs": -35.9803064540446,
+      "sha256": "df39469587dda524f7037a8325cb23aa23fa6c628d65d298d87d98123e31dc63",
+      "inputs": [
+        "impact/footstep_concrete_001",
+        "impact/footstep_concrete_003",
+        "rpg/cloth4"
+      ],
+      "processing": "Cloth4 .72x and concrete steps001 .78x /003 .85x at .15/.81s; damp 70\u20132600Hz reflections."
+    },
+    {
+      "id": "wander-stones",
+      "label": "Distant stones clicking",
+      "file": "audio/galleries-v1/wander-stones.wav",
+      "rate": 44100,
+      "channels": 1,
+      "seconds": 2.4,
+      "loop": false,
+      "music": false,
+      "peak_dbfs": -6.375528689433151,
+      "rms_dbfs": -35.60158254695931,
+      "sha256": "e39ea09880234c392a1659e262f3f941a00a38b796f37cfb8519669f58047868",
+      "inputs": [
+        "rpg/metalClick"
+      ],
+      "processing": "Damped recorded metalClick .83x used as small stone contact; three irregular taps grow nearer, no attack impact."
+    },
+    {
+      "id": "wander-chitter",
+      "label": "Low chittering behind",
+      "file": "audio/galleries-v1/wander-chitter.wav",
+      "rate": 44100,
+      "channels": 1,
+      "seconds": 2.4,
+      "loop": false,
+      "music": false,
+      "peak_dbfs": -6.375528689433151,
+      "rms_dbfs": -25.450320936220592,
+      "sha256": "2f599037a625d3e6115b408bcbe3b82eb4d327e3b68203d284b90da04ab9493f",
+      "inputs": [
+        "queen"
+      ],
+      "processing": "Recorded balloon friction .68x, 260\u20131900Hz, two .65s calls with .07s fades and quiet reflections. Not an actor/animal recording."
+    },
+    {
+      "id": "wade-1",
+      "label": "Knee-deep step 1",
+      "file": "audio/galleries-v1/wade-1.wav",
+      "rate": 44100,
+      "channels": 1,
+      "seconds": 1.8,
+      "loop": false,
+      "music": false,
+      "peak_dbfs": -6.375528689433151,
+      "rms_dbfs": -35.96056627769467,
+      "sha256": "e17731c61ce9163dc5f38b5e67f87a726d731a0a0ee971124e4c7f1983f5d3ea",
+      "inputs": [
+        "impact/footstep_concrete_001",
+        "water/splash_03"
+      ],
+      "processing": "splash_03 at 0.76x, 65\u20133200Hz, concrete foot weight .24 at .045s; low short rock reflections."
+    },
+    {
+      "id": "wade-2",
+      "label": "Knee-deep step 2",
+      "file": "audio/galleries-v1/wade-2.wav",
+      "rate": 44100,
+      "channels": 1,
+      "seconds": 1.8,
+      "loop": false,
+      "music": false,
+      "peak_dbfs": -6.374976450526644,
+      "rms_dbfs": -32.869615637848696,
+      "sha256": "ff074e8ed0d1d57b56e16dd33fa7d4f71a94d9546b1f4a5a1b746753a8977ad0",
+      "inputs": [
+        "impact/footstep_concrete_002",
+        "water/splash_08"
+      ],
+      "processing": "splash_08 at 0.83x, 65\u20133200Hz, concrete foot weight .24 at .045s; low short rock reflections."
+    },
+    {
+      "id": "wade-3",
+      "label": "Knee-deep step 3",
+      "file": "audio/galleries-v1/wade-3.wav",
+      "rate": 44100,
+      "channels": 1,
+      "seconds": 1.8,
+      "loop": false,
+      "music": false,
+      "peak_dbfs": -6.375528689433151,
+      "rms_dbfs": -37.47427144467376,
+      "sha256": "3cf9b06d46e5fc2bcbc1a869a23606691fcb4cbe885ed025cb95f5ee6c129cdb",
+      "inputs": [
+        "impact/footstep_concrete_003",
+        "water/splash_12"
+      ],
+      "processing": "splash_12 at 0.79x, 65\u20133200Hz, concrete foot weight .24 at .045s; low short rock reflections."
+    },
+    {
+      "id": "sluice-wheel",
+      "label": "Sluice wheel turning",
+      "file": "audio/galleries-v1/sluice-wheel.wav",
+      "rate": 44100,
+      "channels": 1,
+      "seconds": 4.0,
+      "loop": false,
+      "music": false,
+      "peak_dbfs": -6.374976450526644,
+      "rms_dbfs": -24.798483662516965,
+      "sha256": "8a7a4386fb679a5032933b76cff0753734bc3e6b7db37133a1603b43d9c22eba",
+      "inputs": [
+        "impact/impactMetal_medium_002",
+        "rpg/creak1",
+        "rpg/creak2",
+        "rpg/metalLatch"
+      ],
+      "processing": "Creak1 .48x, creak2 .51x at1s; dull latch at.16s and settling iron at2.3s; no bright spring/ring."
+    },
+    {
+      "id": "water-drain",
+      "label": "Water rushing away",
+      "file": "audio/galleries-v1/water-drain.wav",
+      "rate": 44100,
+      "channels": 1,
+      "seconds": 8.8,
+      "loop": false,
+      "music": false,
+      "peak_dbfs": -6.375528689433151,
+      "rms_dbfs": -24.99691550353493,
+      "sha256": "66cbd155e91b7e2bbcffd35d8e0dee879c5b85a172444aaf58b52afd57f562fe",
+      "inputs": [
+        "water/loop_water_02"
+      ],
+      "processing": "loop_water_02 .8x 60\u20132600Hz, 2.2s rise, 4.6s receding tail, faded zero endpoints."
+    },
+    {
+      "id": "galleries-loop",
+      "label": "Drowned Galleries ambience",
+      "file": "audio/galleries-v1/galleries-loop.wav",
+      "rate": 44100,
+      "channels": 1,
+      "seconds": 24.0,
+      "loop": true,
+      "music": false,
+      "peak_dbfs": -6.374976450526644,
+      "rms_dbfs": -30.87183671533105,
+      "sha256": "762141ea668d28fbf1326443eb4ae249f19277781f8c8638d7ac1ba74170faf4",
+      "inputs": [
+        "water/bubble_02",
+        "water/loop_water_03",
+        "wind"
+      ],
+      "processing": "Water03 .72x 80\u20131600Hz, wind .8x 65\u2013470Hz, six subdued bubble02-derived drips. 24s cyclic crossfade; hollow non-musical air."
+    },
+    {
+      "id": "below-the-sluice",
+      "label": "Below the Sluice \u00b7 original score",
+      "file": "audio/galleries-v1/below-the-sluice.wav",
+      "rate": 44100,
+      "channels": 1,
+      "seconds": 72.0,
+      "loop": true,
+      "music": true,
+      "peak_dbfs": -11.883594988998107,
+      "rms_dbfs": -21.411622514836495,
+      "sha256": "975b4987a0e21180cae548b0809c94ba040e6b3549153e80ce923e2265ea411a",
+      "inputs": [
+        "original composition and additive/modal synthesis; seed 16754"
+      ],
+      "processing": "Original 72s D-centred three-phrase score, detuned bowed harmonic voices and sparse modal struck strings. No sampled music, beat grid, voices or external composer. PCM16 delivery; cyclic join checked after decode."
+    }
+  ],
+  "checks": 44,
+  "failures": [],
+  "original_music_preserved": true,
+  "preserved_earlier_files": 126,
+  "physical_iphone_tested": false
+}

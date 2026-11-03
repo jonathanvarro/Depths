@@ -207,6 +207,7 @@ static func apply(item: Equipment) -> void:
 	var b := base(item.base_id)
 	if b.is_empty():
 		return
+	refresh_art(item)
 	var rolls: Dictionary = tables()["rolls"]
 	var level := level_of(item)
 	var effects: Dictionary = {}
@@ -507,6 +508,8 @@ static func _change(a: Equipment, b: Equipment) -> String:
 ## mastery (once). Items with no base (a broken knife, trinkets) are kept
 ## as they are.
 static func ensure_instance(item: Equipment) -> Equipment:
+	if item != null and item.base_id != NOWHERE:
+		refresh_art(item)  # existing saves keep their rolls, but get current base art
 	if item == null or item.base_id != NOWHERE or item.slot == "trinket":
 		return item
 	var id := _base_for(item)
@@ -528,6 +531,14 @@ static func ensure_instance(item: Equipment) -> Equipment:
 	inst.mods = mods
 	apply(inst)
 	return inst
+
+
+## Presentation only: template resources may be shared by several bases.
+static func refresh_art(item: Equipment) -> void:
+	var b := base(item.base_id)
+	if b.has("icon"):
+		item.icon = load(b["icon"]) as Texture2D
+		item.description = b.get("description", item.description)
 
 
 static func _base_for(item: Equipment) -> String:

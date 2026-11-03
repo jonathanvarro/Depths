@@ -501,7 +501,9 @@ func _ready() -> void:
 	_party.interacted.connect(_on_party_interacted)
 	_party.opened_door.connect(_on_opening_web_torn)
 	_build_audio()
-	_party.stepped.connect(func(_cell): _footstep_player.play())
+	_party.stepped.connect(func(cell):
+		if _map == null or not _map.is_water(cell) or _in_opening:
+			_footstep_player.play())
 	_party.stepped.connect(func(_cell): _party_state.advance_time(_party_state.step_time()))
 	_party.stepped.connect(_on_opening_step)
 	_party.bumped.connect(func(_cell): _update_hints("bumped"))
@@ -2064,6 +2066,8 @@ func _apply_theme() -> void:
 func _refresh_place_ambience() -> void:
 	if _ambience_player == null:
 		return
+	# Water/air foley follows Effects; the existing ambience keeps its routing.
+	_ambience_player.bus = "Effects" if _depth >= Galleries.DEPTH and not _in_opening else "Music"
 	var stream: AudioStream = Sounds.LOOPS["outskirts"] if _depth == OUTSKIRTS_DEPTH and not use_debug_layout and not _camp_state.queen_defeated else environment_theme.ambience
 	if _ambience_player.stream != stream:
 		_ambience_player.stop()
@@ -2397,6 +2401,7 @@ func _deepest_open() -> int:
 func _wade(cell: Vector2i) -> void:
 	if _map == null or not _map.is_water(cell) or _in_opening:
 		return
+	Sounds.play(self, "wade", FOOTSTEP_VOLUME_DB, 0.035)
 	_party_state.advance_time(Galleries.WADE_TIME)
 	for hero: Companion in _party_state.living_members():
 		hero.change_strain(Galleries.WADE_STRAIN)
@@ -2409,6 +2414,7 @@ func _wade(cell: Vector2i) -> void:
 ## On floor 5 the sluice becomes the stair to floor 6; on floor 6 the
 ## flow gate ends slice 2. `cell`: where the wheel or gate was turned.
 func _drain_galleries(cell := Vector2i(-1, -1)) -> void:
+	Sounds.play(self, "drain", -6.0, 0.0)
 	_map.water.clear()
 	var reservoir := _depth >= Galleries.RESERVOIR
 	if not reservoir:
@@ -2558,14 +2564,17 @@ func _wander_step(cell: Vector2i) -> bool:
 	var clear: bool = _map.content_at(cell) == DungeonMap.Content.NONE and not _map.encounter_zones.has(cell)
 	match _wanderers.step(_party_state.time_elapsed, _rng, clear):
 		"stir":
-			_hear_wanderers(WANDER_SOUNDS.pick_random())
+			var index := Sounds.warning_index()
+			_hear_wanderers(WANDER_SOUNDS[index], index)
 		"arrive":
 			_wanderers_arrive(cell)
 			return true
 	return false
 
 
-func _hear_wanderers(sound: String) -> void:
+func _hear_wanderers(sound: String, sound_index := -1) -> void:
+	var index := Sounds.warning_index() if sound_index < 0 else sound_index
+	Sounds.play(self, Sounds.WANDER_KEYS[index], -12.0, 0.025)
 	_show_message(sound)
 	_tip("wanderers", "Linger on a floor and things come looking. When you hear them, make for the stairs or make ready. Deeper floors stir sooner.")
 
@@ -4104,7 +4113,7 @@ func _build_audio() -> void:
 ## The cave's music, or the fortress's on its floor (#54).
 func _play_place_music() -> void:
 	if _music and not _in_combat:
-		_music.play("fortress" if _depth == FORTRESS_DEPTH else "cave")
+		_music.play("galleries" if _depth >= Galleries.DEPTH and not _in_opening else ("fortress" if _depth == FORTRESS_DEPTH else "cave"))
 
 
 func _play_effect(sound: AudioStream) -> void:

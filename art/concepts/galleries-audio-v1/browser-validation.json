@@ -1,0 +1,6 @@
+{
+  "checks": 39,
+  "failures": [],
+  "headless_browser": true,
+  "physical_iphone": false
+}

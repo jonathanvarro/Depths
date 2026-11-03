@@ -12,6 +12,12 @@ One looping track per place, read by `scripts/music.gd` (any of .ogg, .mp3 or .w
 
 A missing file means silence for that place. The owner chose free-licensed tracks (2026-10-18).
 
+Floors5/6 now select the separate original72s candidate **Below the Sluice** in
+`audio/galleries-v1/below-the-sluice.wav` (#167/#54,2026-11-01). It is an original
+offline synthesized score, awaiting owner listening review; existing approved
+tracks above are unchanged. See `docs/galleries-sound-and-music.md` and the new
+library's `CREDITS.md` for format, provenance and audition.
+
 ## Licences
 
 Record every track here before committing it: title, artist, source URL, licence (CC0 or CC-BY) and the attribution text to credit.
