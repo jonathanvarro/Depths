@@ -258,6 +258,10 @@ eases out of her left thigh, and right fingertips off it, over frames
 clip, including Dying, is converted onto the new rest (see
 [the rebind doc](male-tpose-rebind.md)).
 
+`assembly-v6` (#218, 2026-11-03) raises the female hands to rest on her
+knees from late in the sit-down, through the hold and early stand-up
+(`*.handrest` copies; sources unchanged).
+
 | Body | Clip | Frames | Status | Notes |
 |---|---|---|---|---|
 | Female | Sitting.fbx | 1–421 / 7.00s | in assembly-v3; export/Godot checks pass | Owner's chosen hold, now the female *Seated* motion and middle of the aligned chair sequence: same seat height and legs as the sit-down end; ends 0.002 from stand-up placement. Looks around, arms shift; lower body still. |

@@ -168,8 +168,35 @@ needs the moment and angle (a screenshot is enough). A cleaner long-term fix
 is an animator pass in Blender with hand IK targets resting on the knees,
 rather than a computed offset.
 
-Not checked: the stand-up and the hold for similar hand-in-thigh moments
-(the owner saw it only in the sit-down), and the male body.
+## Assembly-v6: hands resting on her knees (2026-11-03)
+
+**Owner review (screenshot, side view, 1.57 s into the sit-down):** her hands
+are still in her thighs; "a solution would be just raise her hands higher".
+
+Side renders of every chair clip showed more than the sit-down: from about
+frame 90 of the sit-down, through the whole hold and the first ~60 frames
+of the stand-up, both hands were buried in her thighs (the source poses rest
+them on her legs, and her thighs and trousers are thicker). Raising them only
+in the sit-down would have dropped them back in at the hold.
+
+`hand_lift.lift_window` gained a fixed `direction`. On top of v4's sit-down
+lift, both hands are raised straight up: left 0.25, right 0.22 source units
+(chosen from side/front renders of 0.15, 0.25 and 0.35; less still sank, more
+floated). The lift eases in over sit-down frames 76–100 and stays to its end,
+is constant through the hold, and eases out over stand-up frames 40–70 as
+she rises. Copies: `received.female.sit_down.handlift.handrest`,
+`received.female.seated.handrest`, `received.female.stand_up.handrest`; the
+sources stay in the editable input.
+
+Checks: the hand-to-hips gaps at both chair-sequence joins are identical to
+v5, and the first sit-down and last stand-up frames are unchanged. 778
+Blender export/reimport, 3,273 native and 1,404 headless Godot 4.7.2 Mobile
+checks and 514 artifact checks pass. Before/after (side and front):
+`assembly-v6/hands-on-knees-v5-vs-v6.png`. Build: `prepare_wardrobe_v6.py`,
+Godot import and `check.gd` native/headless, then `package_wardrobe_v6.py`.
+Male unchanged from v5.
+
+Not checked: male hand contacts; a real chair.
 
 Rebuild: Blender `--python tools/blender_kit/prepare_wardrobe_v3.py`, copy
 the updated `wardrobe_actor.gd`/`wardrobe_review.gd`/`check_wardrobe.gd` in

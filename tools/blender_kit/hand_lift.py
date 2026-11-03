@@ -91,9 +91,12 @@ def solve_arm(rig, side, lift):
         bpy.context.view_layer.update()
 
 
-def lift_window(rig, action, side, window, amount, thigh='UpLeg'):
+def lift_window(rig, action, side, window, amount, thigh='UpLeg', direction=None):
     """Return (corrected action, report). `window` is (start, full_from,
-    full_to, end) in source frames. The source action is untouched."""
+    full_to, end) in source frames; a start before the first frame (or an end
+    after the last) keeps the lift full there. `direction` is a fixed world
+    vector (e.g. straight up) instead of "out of the thigh". The source action
+    is untouched."""
     corrected = action.copy()
     corrected.name = action.name + '.handlift'
     corrected.use_fake_user = True
@@ -105,7 +108,7 @@ def lift_window(rig, action, side, window, amount, thigh='UpLeg'):
     directions = {}
     for f in frames:
         frame(f)
-        directions[f] = outward(rig, side, thigh)
+        directions[f] = Vector(direction).normalized() if direction else outward(rig, side, thigh)
     lifts = {}
     for f in frames:
         total = sum((directions[g] * math.exp(-(g - f) ** 2 / 128) for g in frames if abs(g - f) <= 20),
@@ -138,6 +141,7 @@ def lift_window(rig, action, side, window, amount, thigh='UpLeg'):
     report = {'source_action': action.name, 'corrected_action': corrected.name,
               'slot': corrected.slots[0].identifier, 'side': side, 'thigh_bone': thigh,
               'window_frames': list(window), 'lift_source_units': amount,
+              'direction': list(direction) if direction else 'out of the thigh (side and up)',
               'frames_changed': [changed[0], changed[-1]] if changed else [],
               'source_curves_modified': False}
     return corrected, report

@@ -105,7 +105,9 @@ Templates > Download and Install; already installed on the owner's PC).
   (`prepare_wardrobe_v4.py`/`package_wardrobe_v4.py`) adds a corrected female
   sit-down whose hands ease out of her left thigh (`hand_lift.py`, source clip
   kept). Judge hand/leg contact from renders: automatic inside tests proved
-  unreliable on these meshes (see the doc).
+  unreliable on these meshes (see the doc). `assembly-v6`
+  (`prepare_wardrobe_v6.py`) rests her hands on her knees from late in the
+  sit-down through the hold and early stand-up.
 - `docs/male-tpose-rebind.md` – #221: the male rebound in his T-pose
   (`male-tpose-v1`, `rebind_male_tpose.py`), clothing rebuilt on it and all
   male clips reconverted; `assembly-v5` = v4 + this male. Original male

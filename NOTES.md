@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-11-03 – Claude (female hands on her knees, assembly-v6, #218)
+- Did: Owner screenshot showed her hands still inside her thighs (side view). They were buried from late sit-down through the whole hold and early stand-up. hand_lift.py gained a fixed direction; prepare_wardrobe_v6.py raises both hands straight up (left 0.25, right 0.22) with the same lift on both sides of each join. assembly-v6 passes all checks; docs/female-chair-hold-review.md has the details.
+- Next: Owner reviews assembly-v6 (START_REVIEW.cmd). Male hand contacts and a real chair are still unchecked.
+- Watch out: amounts were chosen from renders, not an automatic test. Earlier assemblies are untouched.
+
 ## 2026-11-03 – Claude (owner approved the male T-pose, #221)
 - Did: Owner reviewed assembly-v5 ("That looks great"). Recorded in docs/male-tpose-rebind.md and closed #221.
 - Next: male-tpose-v1 is now the male base for new Blender work; #218's female sit-down polish stays open.
