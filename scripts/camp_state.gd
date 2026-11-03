@@ -537,8 +537,8 @@ func buy_lantern(party) -> bool:
 
 
 static func sale_price(item) -> int:
-	if item is Equipment:  # unidentified: what it shows, a plain piece (2026-11-03)
-		return floori(GearModel.known(item).price * GEAR_RESALE)
+	if item is Equipment:  # unidentified: what it shows, a plain piece; mastery adds a little (2026-11-03)
+		return floori(GearModel.known(item).price * GEAR_RESALE * (1.0 + GearModel.mastery_value(item)))
 	return item.price
 
 

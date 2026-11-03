@@ -276,6 +276,13 @@ Found weapons, armour and back pieces with properties (modifiers) arrive **unide
   - **Discern:** a Mage's prayer, one cast, reads every unidentified piece the party holds (see *Magic*).
 - **Also fixed:** a piece's price no longer creeps up each time its numbers are recalculated, as on a mastery level. 15 of the 24 bases had no price of their own, so each recalculation multiplied the current price again.
 
+**Mastery and value — decided 2026-11-03.** Mastery makes a piece worth a little more when sold. The bonus is kept small so it encourages selling used gear without making "master it quickly, then sell it" a way to farm gold.
+
+- **+10% sale price per mastery level, up to +30% at mastery 3.** Mastery 4–6 adds nothing more. The numbers are in `data/equipment/mastery.json`, under "resale".
+- **Selling only:** the price paid to buy a piece doesn't change. The bonus counts for an unidentified piece too, on top of its plain-piece price.
+- **Why it isn't a farm:** mastery 3 takes 54 points, earned only from landed blows or hits taken. That's at least seven fights at the per-fight cap, and weak monsters teach a quarter as much. An iron sword gains about 7 gold that way, roughly 1 gold per fight.
+- The item card says how much mastery adds ("Mastery adds 20% to its sale price (up to 30%)").
+
 ## Map and dungeon progression
 
 Preserve the readable map from the visual concepts, adapted to the grid. Show explored rooms and routes, the current location, blocked doors, uncertain passages, stairs, and known routes toward safety. Notes and unresolved discoveries provide reasons to revisit rooms.

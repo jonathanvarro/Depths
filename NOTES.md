@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-11-03 – Claude (mastery adds a capped resale bonus)
+
+- **Done:** owner direction: mastery should make gear worth more, but not become a gold farm. Each mastery level now adds 10% to the sale price, stopping at +30% at mastery 3. The values live in `data/equipment/mastery.json` "resale"; the rule is `GearModel.mastery_value()`, used by `CampState.sale_price()`. Buying prices are unchanged. The item card shows the bonus. DESIGN.md has it under "Mastery and value".
+- **Checks:** identify_check covers the bonus and its cap; the full suite passes.
+
 ## 2026-11-03 – Claude (identification of found gear, #223)
 
 - **Done:** found weapons, armour and back pieces with properties now arrive unidentified. Their type, quality and border show; their properties and any curse don't, though worn pieces work in full. There are three ways to identify: the smith (10 gold for magic, 20 for rare, worn or carried), a single-use touchstone (merchant at 12 gold, also in chests) and a new Mage prayer, Discern (from a tome; one cast reads everything). Unidentified pieces sell as plain ones. Decisions are in DESIGN.md "Identification" and on #223.

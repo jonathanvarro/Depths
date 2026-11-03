@@ -180,6 +180,13 @@ static func level_of(item: Equipment) -> int:
 	return level
 
 
+## How much more `item` sells for thanks to its mastery: a share of its
+## value, capped low (mastery.json "resale"; owner, 2026-11-03).
+static func mastery_value(item: Equipment) -> float:
+	var r: Dictionary = tables()["mastery"]["resale"]
+	return float(r["per_level"]) * mini(level_of(item), int(r["max_levels"]))
+
+
 ## Points to reach the next level (0 at the cap).
 static func next_points(item: Equipment) -> float:
 	var need := 1.25 if "brittle" in item.mods else 1.0
@@ -463,6 +470,9 @@ static func card_lines(item: Equipment) -> PackedStringArray:
 		for o in tables()["mastery"]["smith_temper"]["options"]:
 			if o["id"] == id:
 				lines.append("Tempered: " + o["text"])
+	if mastery_value(item) > 0.0:
+		var r: Dictionary = tables()["mastery"]["resale"]
+		lines.append("Mastery adds %d%% to its sale price (up to %d%%)" % [roundi(mastery_value(item) * 100), roundi(float(r["per_level"]) * int(r["max_levels"]) * 100)])
 	if temper_due(item) > 0:
 		lines.append("Ready to temper at the smith")
 	return lines

@@ -71,6 +71,20 @@ func _initialize() -> void:
 	var true_price := floori(sword.price * CampState.GEAR_RESALE)
 	check("unidentified, it sells as a plain piece", CampState.sale_price(sword) == floori(plain.price * CampState.GEAR_RESALE) and CampState.sale_price(sword) < true_price, "%d < %d" % [CampState.sale_price(sword), true_price])
 
+	# Mastery adds a little to the sale price, up to mastery 3 (owner, 2026-11-03).
+	var used := GearModel.generate(rng, "iron_sword", "ordinary")
+	used.mods = PackedStringArray()
+	GearModel.apply(used)
+	var fresh := CampState.sale_price(used)
+	used.mastery = 30.0  # mastery 2
+	GearModel.apply(used)
+	check("mastery 2: it sells for 20% more", CampState.sale_price(used) == floori(used.price * CampState.GEAR_RESALE * 1.2) and CampState.sale_price(used) > fresh, "%d vs %d" % [CampState.sale_price(used), fresh])
+	check("...and the card says so", "
+".join(GearModel.card_lines(used)).contains("Mastery adds 20% to its sale price (up to 30%)"))
+	used.mastery = 162.0  # mastery 6
+	GearModel.apply(used)
+	check("...but no more than 30%, however far it's mastered", CampState.sale_price(used) == floori(used.price * CampState.GEAR_RESALE * 1.3))
+
 	# The smith.
 	var camp = CampState.new()
 	var party = _party(["alwen", "corin"])

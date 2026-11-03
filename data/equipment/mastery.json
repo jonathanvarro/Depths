@@ -29,6 +29,11 @@
     }
   ],
   "cap_level": 6,
+  "resale": {
+    "_about": "Owner, 2026-11-03: mastery makes a piece worth more when sold, but only a little and only up to mastery 3, so it encourages selling used gear without making mastering-to-sell a gold farm.",
+    "per_level": 0.1,
+    "max_levels": 3
+  },
   "weapon_credit": {
     "_about": "Per action of the wielder, scaled by the foe's threat: threat_factor = clamp(foe threat / region_threat, 0.25, 2). region_threat is the region's usual foe threat (region table).",
     "hit": 1.0,
