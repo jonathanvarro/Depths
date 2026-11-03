@@ -29,6 +29,42 @@ const EFFECTS := {
 	"gate": preload("res://audio/dark-v1/gate-break.wav"),
 	"queen": preload("res://audio/dark-v1/queen-screech.wav"),
 	"drum": preload("res://audio/dark-v1/drum-hit.wav"),
+	# Field sounds (#217): ChatGPT's audio/field-v1, sources in its CREDITS.md.
+	"passage_roots": preload("res://audio/field-v1/passage-roots.wav"),
+	"prayer_cast": preload("res://audio/field-v1/prayer-cast.wav"),
+	"prayer_mend": preload("res://audio/field-v1/prayer-mend.wav"),
+	"prayer_light": preload("res://audio/field-v1/prayer-light.wav"),
+	"prayer_watch": preload("res://audio/field-v1/prayer-watch.wav"),
+	"prayer_miscast": preload("res://audio/field-v1/prayer-miscast.wav"),
+	"prayer_bind": preload("res://audio/field-v1/prayer-bind.wav"),
+	"rat_hurt": preload("res://audio/field-v1/rat-hurt.wav"),
+	"rat_death": preload("res://audio/field-v1/rat-death.wav"),
+	"spider_hurt": preload("res://audio/field-v1/spider-hurt.wav"),
+	"spider_death": preload("res://audio/field-v1/spider-death.wav"),
+	"goblin_hurt": preload("res://audio/field-v1/goblin-hurt.wav"),
+	"goblin_death": preload("res://audio/field-v1/goblin-death.wav"),
+	"beetle_hurt": preload("res://audio/field-v1/beetle-hurt.wav"),
+	"beetle_death": preload("res://audio/field-v1/beetle-death.wav"),
+	"bat_hurt": preload("res://audio/field-v1/bat-hurt.wav"),
+	"bat_death": preload("res://audio/field-v1/bat-death.wav"),
+	"deep_hurt": preload("res://audio/field-v1/deep-hurt.wav"),
+	"deep_death": preload("res://audio/field-v1/deep-death.wav"),
+	"map_noticed": preload("res://audio/field-v1/map-noticed.wav"),
+	"map_heavy_blow": preload("res://audio/field-v1/map-heavy-blow.wav"),
+	"trap_dart": preload("res://audio/field-v1/trap-dart.wav"),
+	"trap_snare": preload("res://audio/field-v1/trap-snare.wav"),
+	"trap_alarm_bell": preload("res://audio/field-v1/trap-alarm-bell.wav"),
+	"trap_tripwire": preload("res://audio/field-v1/trap-tripwire.wav"),
+	"brew_drink": preload("res://audio/field-v1/brew-drink.wav"),
+	"brew_shatter": preload("res://audio/field-v1/brew-shatter.wav"),
+	"level_up": preload("res://audio/field-v1/level-up.wav"),
+	"stairs_down": preload("res://audio/field-v1/stairs-down.wav"),
+	"stairs_up": preload("res://audio/field-v1/stairs-up.wav"),
+	"pack_eat": preload("res://audio/field-v1/pack-eat.wav"),
+	"pack_bandage": preload("res://audio/field-v1/pack-bandage.wav"),
+	"pack_oil": preload("res://audio/field-v1/pack-oil.wav"),
+	"pack_tome": preload("res://audio/field-v1/pack-tome.wav"),
+	"smith_temper": preload("res://audio/field-v1/smith-temper.wav"),
 }
 const VARIANTS := {
 	"wade": [preload("res://audio/galleries-v1/wade-1.wav"), preload("res://audio/galleries-v1/wade-2.wav"), preload("res://audio/galleries-v1/wade-3.wav")],
@@ -45,6 +81,42 @@ const LOOPS := {
 const HEARTBEAT := preload("res://audio/dark-v1/heartbeat.wav")
 static var _rng: RandomNumberGenerator
 const WANDER_KEYS := ["wander_claws", "wander_shuffle", "wander_stones", "wander_chitter"]
+
+
+## The field sound family (#217) for an enemy type, by its file name:
+## "rat", "spider", "goblin", "beetle", "bat" or "deep" (the deeper,
+## stranger things). Add "_hurt" or "_death".
+static func creature(type) -> String:
+	var id: String = type.resource_path.get_file().get_basename() if type else ""
+	for family in ["rat", "spider", "goblin", "beetle", "bat"]:
+		if id.contains(family):
+			return family
+	if id in ["webspinner", "broodmother"]:
+		return "spider"
+	if id == "gate_captain":
+		return "goblin"
+	return "deep"
+
+
+## The sound for using `item` (#217), or "".
+static func for_item(item) -> String:
+	if not item is SupplyItem:
+		return ""
+	match item.effect:
+		SupplyItem.Effect.FEED_PARTY: return "pack_eat"
+		SupplyItem.Effect.HEAL_ONE, SupplyItem.Effect.DRESS_INJURY: return "pack_bandage"
+		SupplyItem.Effect.REFILL_LANTERN: return "pack_oil"
+		SupplyItem.Effect.TOME: return "pack_tome"
+		SupplyItem.Effect.CANDLE: return "prayer_cast"
+		SupplyItem.Effect.BREW: return "brew_drink"
+	return ""
+
+
+## A prayer's sound (#217): its own, or the shared one; the miscast if it faltered.
+static func prayer(id: String, failed: bool) -> String:
+	if failed:
+		return "prayer_miscast"
+	return "prayer_" + id if EFFECTS.has("prayer_" + id) else "prayer_cast"
 
 
 static func warning_index() -> int:

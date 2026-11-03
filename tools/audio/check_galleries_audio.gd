@@ -56,7 +56,7 @@ func run() -> void:
 	main._music=MUSIC.new();main.add_child(main._music);main._play_place_music()
 	check(main._music.place=="galleries" and MUSIC.track_for("galleries").resource_path.ends_with("below-the-sluice.wav"),"Deeper floor selects the new score")
 	main._depth=1;main.environment_theme=load("res://themes/cave.tres");main._refresh_place_ambience();main._play_place_music()
-	check(main._ambience_player.bus=="Music" and main._music.place=="cave","Leaving the Galleries restores existing audio routing/music")
+	check(main._ambience_player.bus=="Effects" and main._music.place=="cave","Leaving the Galleries keeps the place bed on Effects (#217's field ambience) and restores the cave music")
 	main._depth=5;main._minimap=Control.new();main.add_child(main._minimap)
 	QUESTS.set_flag(main._camp_state,"dry_passage","ending_shown")
 	main._drain_galleries()

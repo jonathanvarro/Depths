@@ -13,6 +13,15 @@ Format:
 
 ---
 
+## 2026-11-03 – Claude (ChatGPT's work committed; #217 field sounds merged and live)
+
+- **Done (owner's request while ChatGPT is out):**
+  - Committed ChatGPT's finished 2026-11-01 work unchanged (5b9c223): #196 equipment icons and the #167/#54 Galleries sound hookup. It was held back only by the #204 crash, now fixed; its own checks (108 and 39) and the full suite passed first.
+  - Merged `codex/audio-backlog-217` (551fcfc). Conflicts were resolved by keeping both NOTES sides, taking the branch's evidence hash and combining the music README.
+  - Connected all 46 field sounds. Themes: four soft stone steps, per-theme beds, bump, web tear and stone door; the place bed now plays on Effects everywhere. Hooks: a creature's hurt or death cry (one per blow, six families mapped by enemy file name), each prayer and the falter, eating, bandaging, oil, tomes and candles, drinking or throwing a brew, each trap's own sound, stairs on an accepted move, level-up, map notice, a new heavy-blow mark and the smith's temper. `passage-roots` is registered but unused, because no theme has root passages yet.
+- **Checks:** new `tools/field_sound_check.gd`. batch_check and ChatGPT's check_galleries_audio now expect the bed on Effects (the intended #217 change). Full suite passes.
+- **Next:** owner listening review on headphones and phone speakers (#217 stays open for that), then 3 and 4 of the owner's list: Reservoir surfaces and the story pictures.
+
 ## 2026-11-03 – Claude (KayKit props adopted on floor 1, #224 closed)
 
 - **Done:** the owner adopted the floor 1 KayKit props with the grain, as they are; look and feel will be evaluated later. Main `kaykit_pilot` now defaults to on; untick it or start with `-- --no-kaykit` to leave the props out. Full suite passes with them on.

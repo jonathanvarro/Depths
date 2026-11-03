@@ -400,6 +400,7 @@ func _hero_action(hero: Companion, action: Dictionary) -> void:
 			_state.hero_move(hero)
 		"item":
 			_state.hero_use_item(action["item"])
+			Sounds.play(self, Sounds.for_item(action["item"]), -6.0)
 			_fx.icon(_card_point(hero) + Vector2(0, -40), action["item"].icon, 48.0)
 		"retreat":
 			_state.retreat()
@@ -414,6 +415,7 @@ func _hero_action(hero: Companion, action: Dictionary) -> void:
 		"brew":
 			var target = _target
 			outcome = _state.hero_throw_brew(hero, target, action["item"])
+			Sounds.play(self, "brew_shatter", -5.0)
 			var at := _foe_point(target)
 			_fx.icon(at, action["item"].icon, 56.0)
 			if outcome["damage"] > 0:
@@ -426,7 +428,7 @@ func _hero_action(hero: Companion, action: Dictionary) -> void:
 			var caster: Companion = action["caster"]
 			var target = _target if action["spell"] == "bind" else null
 			outcome = _state.hero_cast(caster, action["spell"], target)
-			Sounds.play(self, "block", -14.0)
+			Sounds.play(self, Sounds.prayer(action["spell"], outcome["failed"]), -6.0, 0.0)
 			if outcome["failed"]:
 				_fx.number(_card_point(caster), "falters", CombatFx.COLOR_DULL, 34)
 			elif action["spell"] == "light":
@@ -580,6 +582,8 @@ func _play(foe, animation: String, seconds: float) -> void:
 	var sprite: AnimatedSprite3D = foe.node.get_node_or_null("Sprite") if foe.node else null
 	if sprite == null:
 		return
+	if animation == "hurt":  # one cry per blow: its death if it fell (#217)
+		Sounds.play(self, Sounds.creature(foe.type) + ("_death" if foe.health <= 0 else "_hurt"), -6.0)
 	if not sprite.sprite_frames.has_animation(animation):
 		animation = "attack"
 	_busy[foe] = true

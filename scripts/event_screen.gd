@@ -61,6 +61,15 @@ var coin: Control
 
 
 ## `flags`: the room's remembered preparation (main.gd keeps it per cell).
+## A sprung trap's own sound (#217); a hollow floor drops, others stumble.
+func _trap_sound() -> String:
+	var id := _event.resource_path.get_file().get_basename()
+	var own: String = {"trap_dart": "trap_dart", "trap_snare": "trap_snare", "trap_bell_wire": "trap_alarm_bell", "trap_tripwire": "trap_tripwire"}.get(id, "")
+	if own != "":
+		return own
+	return "fall" if _event.prop and _event.prop.resource_path.contains("hollow-floor") else "stumble"
+
+
 func show_event(event: RoomEvent, party_state, rules, flags: Array = []) -> void:
 	_flags = flags
 	_event = event
@@ -103,6 +112,7 @@ func _choose(choice: EventChoice) -> void:
 		visible = true
 		forced = 0 if heads else 1
 	var was_drained: bool = _rules.drained
+	var was_alarmed: bool = _rules.alarm_raised
 	var result: Dictionary = _rules.resolve(_party, choice, forced, _flags)
 	if _rules.drained and not was_drained:
 		Sounds.play(self, "sluice", -5.0, 0.0)
@@ -117,8 +127,8 @@ func _choose(choice: EventChoice) -> void:
 	_body.text = result["story"]
 	if _event.kind == 2:  # DungeonMap.Content.CHEST: the lid comes up (#54)
 		Sounds.play(self, "chest")
-	elif _event.kind == 3 and result["changes"].any(func(change): return not change["good"]):
-		Sounds.play(self, "fall" if _event.prop and _event.prop.resource_path.contains("hollow-floor") else "stumble", -7.0)
+	elif _event.kind == 3 and (result["changes"].any(func(change): return not change["good"]) or (_rules.alarm_raised and not was_alarmed)):
+		Sounds.play(self, _trap_sound(), -6.0)
 	_clear_chips()
 	_add_chips(result["changes"])
 	_clear_buttons()

@@ -501,6 +501,14 @@ Templates > Download and Install; already installed on the owner's PC).
   hooks and independent Music/Effects controls: `docs/galleries-sound-and-music.md`.
   Review `art/concepts/galleries-audio-v1/inspector.html`; existing music/foley
   remain. The new score awaits owner listening review.
+  #217's 46 field sounds (`audio/field-v1`, ChatGPT; credits in its CREDITS.md)
+  are live (2026-11-03): the four themes use the soft stone steps, their own
+  beds (place bed now always on Effects), wall bump and web/stone-door
+  passages; `Sounds` keys for prayers (`Sounds.prayer`), creature cries
+  (`Sounds.creature` family + _hurt/_death, one per blow), Pack items
+  (`Sounds.for_item`), brews, traps (`EventScreen._trap_sound`), stairs,
+  level-ups, map notice/heavy-blow and the smith's temper.
+  `tools/field_sound_check.gd`. Owner listening/mix review remains.
 - `scripts/dungeon_map.gd` – grid data (`is_wall`), cell contents
   (`Content` enum, `content_at`, `enter`), and explored cells. Layout text
   uses ',' for room floor and '.' for corridor floor (rooms are found from

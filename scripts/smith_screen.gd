@@ -129,7 +129,7 @@ func _on_identify(id:int) -> void:
 func _on_temper(id:int) -> void:
 	var choice:Array=_temper_choices[id]
 	var why:String=_camp.temper(_party,choice[0],choice[1])
-	if why=="":Sounds.play(self,"purchase",-7.0)
+	if why=="":Sounds.play(self,"smith_temper",-5.0)
 	else:_extra.tooltip_text=why;_empty.text=why
 	refresh()
 

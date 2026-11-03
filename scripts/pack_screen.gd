@@ -8,6 +8,7 @@ signal open_quests
 signal used(message: String)
 
 const GearModel := preload("res://scripts/gear_model.gd")
+const Sounds := preload("res://scripts/sounds.gd")
 const Supplies := preload("res://scripts/supplies.gd")
 const StrainRules := preload("res://scripts/strain.gd")
 const Trinkets := preload("res://scripts/trinkets.gd")
@@ -545,7 +546,9 @@ func _add_prayers(h: Companion) -> void:
 "+reason if reason!="" else "")
 		cast.pressed.connect(func():
 			var message:=Spells.cast_in_field(_party,h,id,_prayer_rng)
-			if message!="":used.emit(message)
+			if message!="":
+				Sounds.play(self,Sounds.prayer(id,message.contains("falters")),-6.0,0.0)
+				used.emit(message)
 			_request_refresh())
 		_status_content.add_child(cast)
 		_status_content.add_child(_wrapped(Spells.describe(id),17,FieldKit.MUTED))
@@ -690,7 +693,9 @@ func _perform(kind: String) -> void:
 	match kind:
 		"use":
 			var message:String=_party.use_item(item,false,h)
-			if message!="":used.emit(message)
+			if message!="":
+				Sounds.play(self,Sounds.for_item(item),-6.0)
+				used.emit(message)
 		"wear":
 			if _equip_reason("trinket")=="":used.emit(_party.wear_treasure(h,item))
 		"equip":

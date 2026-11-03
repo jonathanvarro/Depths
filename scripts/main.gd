@@ -758,7 +758,9 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 		DungeonMap.Content.NONE:
 			return
 		DungeonMap.Content.STAIRS_DOWN:
-			_ask(environment_theme.descent_prompt, _go_to_floor.bind(_depth + 1, Arrival.FROM_ABOVE))
+			_ask(environment_theme.descent_prompt, func():
+				Sounds.play(self, "stairs_down", -6.0, 0.0)
+				_go_to_floor(_depth + 1, Arrival.FROM_ABOVE))
 		DungeonMap.Content.TRAP:
 			var trap: RoomEvent = _map.events.get(cell)
 			if trap and trap.sprung and not _in_opening and not _party_state.sees_traps() and not _map.spotted.get(cell, false):
@@ -772,7 +774,9 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 				_ask("%s Leave the mine?" % environment_theme.exit_message,
 						_end_expedition.bind(Expedition.Ending.RETURNED))
 			else:
-				_ask(environment_theme.ascent_prompt, _go_to_floor.bind(_depth - 1, Arrival.FROM_BELOW))
+				_ask(environment_theme.ascent_prompt, func():
+					Sounds.play(self, "stairs_up", -6.0, 0.0)
+					_go_to_floor(_depth - 1, Arrival.FROM_BELOW))
 		_:
 			# Placeholder for real encounters: for now contents just announce themselves.
 			var content_text := DungeonMap.content_name(content)
@@ -1113,11 +1117,13 @@ func _offer_level_ups() -> void:
 		var options := Progression.choices(hero)
 		if options.is_empty():
 			Progression.advance(hero, "")
+			Sounds.play(self, "level_up", -5.0, 0.0)
 			continue
 		var answers: Array = []
 		for option in options:
 			var id: String = option[0]
 			answers.append(["%s: %s" % [option[1], option[2]], func():
+				Sounds.play(self, "level_up", -5.0, 0.0)
 				_camp_state.advance(hero, id)
 				_offer_level_ups.call_deferred()])
 		_choose("%s reaches level %d. Choose one:" % [hero.display_name, hero.level + 1], answers)
@@ -1273,6 +1279,7 @@ func _map_beat(party_cell: Vector2i) -> bool:
 			group.noticed = true
 			newly = true
 	if newly:
+		Sounds.play(self, "map_noticed", -6.0, 0.0)
 		_show_message("Something ahead has seen you.")
 		_tip("map_fights", "Monsters stand on the map now. Once they've seen you, they close in a step each time you move or wait. Turning is free. Fight where they can only come at you one way, or walk up on one that hasn't seen you to strike first.")
 	var taken := {}
@@ -1519,8 +1526,10 @@ func _draw_danger(clear := false) -> void:
 		_danger_edge.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 		_message_label.get_parent().add_child(_danger_edge)
 	_danger_edge.visible = false
+	var before := {}  # cells already marked: only a new mark sounds its warning (#217)
 	for mark in _danger_marks:
 		if is_instance_valid(mark):
+			before[mark.position] = true
 			mark.queue_free()
 	_danger_marks.clear()
 	if clear or _combat._state == null:
@@ -1540,6 +1549,9 @@ func _draw_danger(clear := false) -> void:
 		mark.position = Vector3(foe.marked_cell.x * CELL_SIZE, 0.14, foe.marked_cell.y * CELL_SIZE)
 		add_child(mark)
 		_danger_marks.append(mark)
+		if not before.has(mark.position):
+			Sounds.play(self, "map_heavy_blow", -6.0, 0.0)
+			before[mark.position] = true
 	# Where you stand is marked too: the floor under you is out of view, so
 	# the screen's edge glows red while you're on a marked tile.
 	var standing_on: bool = _combat._state.living_foes().any(func(f): return f.marked_cell == _party.cell)
@@ -2066,8 +2078,8 @@ func _apply_theme() -> void:
 func _refresh_place_ambience() -> void:
 	if _ambience_player == null:
 		return
-	# Water/air foley follows Effects; the existing ambience keeps its routing.
-	_ambience_player.bus = "Effects" if _depth >= Galleries.DEPTH and not _in_opening else "Music"
+	# Every place's bed is foley now (#217's field ambience): Effects.
+	_ambience_player.bus = "Effects"
 	var stream: AudioStream = Sounds.LOOPS["outskirts"] if _depth == OUTSKIRTS_DEPTH and not use_debug_layout and not _camp_state.queen_defeated else environment_theme.ambience
 	if _ambience_player.stream != stream:
 		_ambience_player.stop()
