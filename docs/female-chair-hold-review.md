@@ -113,6 +113,25 @@ review. Everything in it stays local and ignored.
   the Playwright gallery script wasn't run because Playwright isn't
   installed on this PC.
 
+### Owner review (2026-11-02)
+
+The owner watched the chair sequence: "quite smooth", no visible jump or pop
+at either join, and the clothing "looks great". So no crossfade is needed for
+now. They noticed **her arm passing through her leg**. Measuring the female
+master (hand/forearm and sleeve points against the trousers, every second
+frame; `review/arm-leg-intersections.json`, renders `review/arm-leg-*.png`):
+
+- While seated (hold, and the end of sit-down) her hands rest on her knees
+  and 1–5 fingertip points sit inside the trousers in nearly every frame,
+  up to about 0.015 source units (~6 mm at display scale).
+- During stand-up, around frame 105, the left hand brushes into the side of
+  the thigh as she pushes up, up to about 0.05 source units (~2 cm).
+
+These are the source poses meeting the trouser thickness, not an alignment
+problem. Possible fixes, not chosen yet: give the trousers a little less
+bulk over the knee/thigh tops in this copy, or lift the hands slightly with
+a small correction layer on top of the clips (source curves untouched).
+
 Rebuild: Blender `--python tools/blender_kit/prepare_wardrobe_v3.py`, copy
 the updated `wardrobe_actor.gd`/`wardrobe_review.gd`/`check_wardrobe.gd` in
 as `actor.gd`/`review.gd`/`check.gd` if `prepare_wardrobe` copied older
