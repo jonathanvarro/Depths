@@ -198,6 +198,13 @@ Templates > Download and Install; already installed on the owner's PC).
   states (#132/#133) are ready in `art/dressing/landmarks-v1`;
   `docs/landmark-art.md` records mounts and the shrine's required wall anchor.
   The new cairn glyph is live on the map; these scenes await placement.
+  #168's Reservoir finish is live (2026-11-03): `Galleries.theme_from` gives
+  floor 6 the reservoir-v1 wall/floor/ceiling; `Galleries.dress_reservoir`
+  mounts water-edge insets on walls beside deep water (one in three) and,
+  once diverted, the wet stairs beside the flow gate (looks only; no floor
+  7). Story cards: lower gate, galleries drained, reservoir ending; the
+  vision painting and the fireside backdrop (fire keeper, miner's thanks).
+  `tools/descent_finish_check.gd`.
   #168 ancient stonework has a separate optional eight-second mineral pulse
   and a fixed wall scene: `docs/descent-production-art.md`. Default is still;
   pass effects preferences explicitly. Existing vision/quest hookup is separate.

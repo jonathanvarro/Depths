@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scripts/conversation_page.gd" id="page"]
 [ext_resource type="Script" path="res://scripts/conversation_reply.gd" id="reply"]
 [ext_resource type="Script" path="res://scripts/conversation.gd" id="conv"]
+[ext_resource type="Texture2D" path="res://art/illustrations/descent-v1/by-the-fire.png" id="backdrop"]
 
 [sub_resource type="Resource" id="r0_0"]
 script = ExtResource("reply")
@@ -33,5 +34,6 @@ text = "The argument goes round the fire and comes back no further on. Some want
 
 [resource]
 script = ExtResource("conv")
+backdrop = ExtResource("backdrop")
 speaker = "By the fire"
 pages = Array[ExtResource("page")]([SubResource("p0"), SubResource("p1"), SubResource("p2")])

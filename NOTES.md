@@ -13,6 +13,12 @@ Format:
 
 ---
 
+## 2026-11-03 – Claude (Black Reservoir finish and the story pictures, #168 closed)
+
+- **Done (items 3 and 4 of the owner's list):** floor 6 now uses its own reservoir-v1 surfaces (one wall, so the waterline lines up). About one wall in three beside deep water shows ChatGPT's black-water edge. After the flow gate diverts the water, the wet stairs stand beside the gate; they're for looks only, with no floor 7. Story cards: the lower gate (slice 1 ending), the galleries draining, and the reservoir's end. The stonework vision shows its painting, and the two camp-fire talks (fire keeper, miner's thanks) use the fireside backdrop.
+- **Checks:** new `tools/descent_finish_check.gd` (desktop and phone captures of floor 6 and a card). Full suite passes.
+- **Still open:** item 5 (small symbols: mastery marks, journal marks, combat intentions, the map's deep-water glyph, which #167 still needs) and item 6 (waterworks dressing, the keeper's animated portrait).
+
 ## 2026-11-03 – Claude (ChatGPT's work committed; #217 field sounds merged and live)
 
 - **Done (owner's request while ChatGPT is out):**

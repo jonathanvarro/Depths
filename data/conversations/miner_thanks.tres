@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://scripts/conversation_reply.gd" id="2_rddwr"]
 [ext_resource type="Texture2D" path="res://art/portraits/story-slice-v1/hask-miner.png" id="3_eanq2"]
 [ext_resource type="Script" path="res://scripts/conversation.gd" id="4_eg1hy"]
+[ext_resource type="Texture2D" path="res://art/illustrations/descent-v1/by-the-fire.png" id="backdrop"]
 
 [sub_resource type="Resource" id="Resource_otes6"]
 script = ExtResource("1_u438k")
@@ -13,6 +14,7 @@ He leans in. \"There's good iron on the first floor - a dark seam with rust-red 
 
 [resource]
 script = ExtResource("4_eg1hy")
+backdrop = ExtResource("backdrop")
 speaker = "Hask, a miner"
 portrait = ExtResource("3_eanq2")
 pages = Array[ExtResource("1_u438k")]([SubResource("Resource_otes6")])

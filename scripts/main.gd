@@ -688,6 +688,8 @@ func _build_level() -> void:
 		dresser.dress(_level, _map, _depth, _site_seed, CELL_SIZE, WALL_HEIGHT, landmarks)  # #128
 		if kaykit_pilot and not "--no-kaykit" in OS.get_cmdline_user_args():  # #224, adopted 2026-11-03
 			KayKitPilot.dress(_level, _map, _depth, _site_seed, CELL_SIZE, landmarks)
+		if _depth >= Galleries.RESERVOIR:  # water edges, then the stairs by the gate (#168)
+			Galleries.dress_reservoir(_level, _map, CELL_SIZE, _site_seed, Quests.has_flag(_camp_state, "reservoir", "diverted"))
 
 
 func _make_layout(depth: int) -> PackedStringArray:
@@ -2378,7 +2380,7 @@ func _slice_ending(cell := Vector2i(-1, -1)) -> void:
 			"Below the fortress, the old channels run on into flooded galleries no map has charted. Beside the grate, worn steps go down into the dark water. Whatever the commander is looking for, it lies further down.
 
 Report to the commander, or take the stair: the Drowned Galleries are floor 5.",
-			"Continue")
+			"Continue", preload("res://art/illustrations/descent-v1/lower-gate-card.png"))
 	await _results.continue_pressed
 	_results.visible = false
 	_party.locked = false
@@ -2447,13 +2449,13 @@ func _drain_galleries(cell := Vector2i(-1, -1)) -> void:
 				"The black water pours away for an hour or more. When it is done, the floor of the reservoir lies bare and glistening, and in the middle of it a shaft goes down, carved, ringed with the same old stonework - down toward the slow beat you can still feel in your teeth.
 
 This is as far as the mine goes for now. The commander will want to hear of this.",
-				"Continue")
+				"Continue", preload("res://art/illustrations/descent-v1/reservoir-ending.png"))
 	else:
 		_results.show_brief("The galleries drain",
 				"All through the galleries, the water drains away down channels cut for it long ago. Where the wheel turned, a stair of black stone goes down toward the sound of a great weight of water, moving in the dark.
 
 The Black Reservoir, floor 6, is open.",
-				"Continue")
+				"Continue", preload("res://art/illustrations/descent-v1/galleries-drained-card.png"))
 	await _results.continue_pressed
 	_results.visible = false
 	_party.locked = false

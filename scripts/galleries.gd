@@ -25,6 +25,15 @@ const WET_WALL := preload("res://art/textures/waterworks-v1/wet-plain.tres")
 const WET_WALL_VARIANT := preload("res://art/textures/waterworks-v1/wet-channelled.tres")
 const DROWNED_FLOOR := preload("res://art/textures/descent-surfaces-v1/drowned-masonry-floor.tres")
 const DROWNED_CEILING := preload("res://art/textures/descent-surfaces-v1/drowned-masonry-ceiling.tres")
+## The reservoir's own matched surfaces and finish pieces (#168, ChatGPT;
+## docs/descent-completion-art.md).
+const RESERVOIR_WALL := preload("res://art/textures/reservoir-v1/reservoir-wall.tres")
+const RESERVOIR_FLOOR := preload("res://art/textures/reservoir-v1/reservoir-floor.tres")
+const RESERVOIR_CEILING := preload("res://art/textures/reservoir-v1/reservoir-ceiling.tres")
+const WATER_EDGE := preload("res://art/props/reservoir-finish-v1/water-edge.tscn")
+const RESERVOIR_STAIRS := preload("res://art/props/reservoir-finish-v1/stairs.tscn")
+## One in this many wall faces beside deep water shows the black water beyond.
+const WATER_EDGE_ODDS := 3
 
 
 ## Floods stretches of the floor's passages (corridor cells, not rooms,
@@ -68,8 +77,7 @@ static func _floodable(map, cell: Vector2i) -> bool:
 
 
 ## The galleries' look (#166): wet slate walls, drowned masonry floors and
-## ceilings, full-face wall tiles. The reservoir uses them darker until
-## #168's own surfaces land.
+## ceilings, full-face wall tiles. The reservoir has its own slate set (#168).
 static func theme_from(cave: EnvironmentTheme, depth := DEPTH) -> EnvironmentTheme:
 	var theme: EnvironmentTheme = cave.duplicate()
 	theme.display_name = "The Black Reservoir" if depth >= RESERVOIR else "The Drowned Galleries"
@@ -80,13 +88,52 @@ static func theme_from(cave: EnvironmentTheme, depth := DEPTH) -> EnvironmentThe
 	theme.wall_face_uv = true
 	theme.ambience = preload("res://audio/galleries-v1/galleries-loop.wav")
 	if depth >= RESERVOIR:
-		for slot in ["wall_material", "wall_variant_material", "floor_material", "ceiling_material"]:
-			var material = theme.get(slot)
-			if material is BaseMaterial3D:
-				var dark: BaseMaterial3D = material.duplicate()
-				dark.albedo_color = dark.albedo_color * Color(0.72, 0.78, 0.86)
-				theme.set(slot, dark)
+		theme.wall_material = RESERVOIR_WALL
+		theme.wall_variant_material = null  # one wall: its waterline must line up
+		theme.floor_material = RESERVOIR_FLOOR
+		theme.ceiling_material = RESERVOIR_CEILING
 	return theme
+
+
+## The reservoir's finish (#168): while it's flooded, some walls beside the
+## deep water open on a worn lip over far black water; once the flow gate
+## has diverted it, wet black stairs go down beside the gate - the shaft the
+## ending speaks of. Looks only: the stairs lead nowhere yet (no floor 7).
+static func dress_reservoir(level: Node3D, map, cell_size: float, seed: int, diverted: bool) -> int:
+	const Dressing := preload("res://scripts/dressing.gd")
+	var rng := RandomNumberGenerator.new()
+	rng.seed = hash([seed, "reservoir finish"])
+	var root := Node3D.new()
+	root.name = "ReservoirFinish"
+	level.add_child(root)
+	for cell in map.water:
+		var sides: Array[Vector2i] = Dressing._wall_sides(map, cell)
+		if sides.is_empty() or rng.randi() % WATER_EDGE_ODDS != 0:
+			continue
+		_mount(root, WATER_EDGE.instantiate(), cell, sides[rng.randi() % sides.size()], cell_size)
+	if diverted:
+		for cell in map.events:
+			if not map.events[cell].resource_path.ends_with("quest_flow_gate.tres"):
+				continue
+			var sides: Array[Vector2i] = Dressing._wall_sides(map, cell)
+			# The gate takes the first wall (main.gd's room props); the stairs the next.
+			if sides.size() >= 2:
+				_mount(root, RESERVOIR_STAIRS.instantiate(), cell, sides[1], cell_size)
+			else:
+				for step in Dressing.SIDES:
+					var next: Vector2i = cell + step
+					var beside: Array[Vector2i] = Dressing._wall_sides(map, next) if map.is_passable(next) else []
+					if not beside.is_empty():
+						_mount(root, RESERVOIR_STAIRS.instantiate(), next, beside[0], cell_size)
+						break
+	return root.get_child_count()
+
+
+## Stands `node` against the wall on `side` of `cell`, facing into it.
+static func _mount(root: Node3D, node: Node3D, cell: Vector2i, side: Vector2i, cell_size: float) -> void:
+	node.position = Vector3(cell.x, 0, cell.y) * cell_size + Vector3(side.x, 0, side.y) * (cell_size / 2.0 - 0.02)
+	node.rotation.y = atan2(float(-side.x), float(-side.y))
+	root.add_child(node)
 
 
 ## ChatGPT's deep water over a flooded cell (#166). `animate` false holds it
