@@ -21,6 +21,19 @@ out of git (see `docs/blender-expedition-kit-tasks.md`).
   female/male and individual/locomotion namespaces. Current catalogue and
   body/native checks: [received-animation-library.md](received-animation-library.md).
 
+### Padded jacket review · #220 (2026-11-03)
+
+`build/local-padded-jacket-v2/` uses assembly-v6's six existing Actions per
+body, including the current female chair hand-rest Actions and all approved male
+T-pose conversions. No clip is added, renamed, retimed or edited. Reopened
+Action key/handle/slot hashes, source body/UV/weights and rest rig agree exactly
+with the pinned source masters. The Tunic/Jacket switch reuses the skeleton
+and preserves its exact paused pose. Native motion/sequence/coverage and
+phone-size checks are documented in [padded-jacket-production.md](padded-jacket-production.md).
+This verifies the garment's export and switching; source contact/loop and
+owner animation acceptance remain separate under #214/#215/#218. Those issues
+stay open and existing clip statuses are not promoted.
+
 ## What every clip shares (measured 2026-11-01)
 
 From #210's audit (`tools/blender_kit/audit_clips.py`, output
