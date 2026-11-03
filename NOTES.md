@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-11-02 – Claude (female hold chosen, #218)
+- Did: Owner chose Sitting.fbx as the female chair hold; recorded in docs/female-chair-hold-review.md, docs/animation-library.md and on #218. Sitting Idle is kept as an unused alternative.
+- Next: Export/reimport and Godot native checks on received.female.hold_sitting (local female-hold-intake-v1/female_hold.blend), then add it to the wardrobe review between Stand To Sit and Sit To Stand with explicit placement.
+- Watch out: Docs-only change. Other uncommitted equipment/audio/AGENTS/NOTES work excluded.
+
 ## 2026-11-02 – Claude (female chair hold, #218)
 - Did: Audited the owner's new female Sitting.fbx and Sitting Idle.fbx against her Stand To Sit end / Sit To Stand start: both 60fps, 65 joints, matched lengths, uncrossed, clean loops. Sitting (7s) matches seat height and legs and ends 0.002 from the stand-up placement; it looks around/shifts arms. Sitting Idle (3s) is near-still but sits ~0.1 higher with knees/hands off. Converted both into a separate local female-hold-intake-v1/female_hold.blend with 16 renders and a comparison sheet. Tool: tools/blender_kit/review_female_hold_intake.py; write-up: docs/female-chair-hold-review.md; findings commented on #218.
 - Next: Owner picks a hold (Sitting recommended). Then GLB export/reimport and Godot native checks, add it to assembly-v2, define sit-down -> hold -> stand-up placement (sit-down still ~1.07 off) and review contacts.

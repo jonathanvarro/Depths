@@ -11,6 +11,9 @@ They are compared with the female chair transitions from
 [the transition review](female-chair-transition-review.md): the last frame of
 Stand To Sit (sit-down) and the first frame of Sit To Stand (stand-up).
 
+**Owner decision (2026-11-02): use Sitting.fbx as the female chair hold.**
+Sitting Idle stays in the intake as a retained alternative, not in use.
+
 ## Findings
 
 Both: 60fps, all 65 female joints, bone lengths/hierarchy match her body
@@ -62,7 +65,7 @@ source curves are not edited to hide it.
 - Not done: independent GLB export/reimport and Godot native checks (the
   pipeline ChatGPT ran for earlier clips), adding the hold to assembly-v2,
   the explicit placement/blend for sit-down → hold → stand-up, hand/seat
-  contact review, and the owner's style choice between the two holds.
+  contact review, and owner style approval of the finished sequence.
 
 Reproduce with Blender 5.2.3 from `E:/GitHub/Depths`:
 `blender --background --factory-startup --python-exit-code 1 --python
