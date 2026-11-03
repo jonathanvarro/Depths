@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-11-03 – Claude (owner approved the male T-pose, #221)
+- Did: Owner reviewed assembly-v5 ("That looks great"). Recorded in docs/male-tpose-rebind.md and closed #221.
+- Next: male-tpose-v1 is now the male base for new Blender work; #218's female sit-down polish stays open.
+- Watch out: physical-iPhone performance is still unchecked.
+
 ## 2026-11-02 – ChatGPT (equipment engagement corrections, #219)
 - Did: Removed return-home and participation mastery, plus miss/kill bonuses. Successful strikes and landed incoming blows earn mastery with existing threat scaling/caps; HP lost is not rewarded. Removed uncompensated drawback substitution for new rolls; saved drawbacks still work. Recorded owner proposals for equipment-source identity, smith family slots, simple stat/growth comparisons and saved per-level growth-range rolls in docs/equipment-engagement-review.md.
 - Next: Playtest mastery pace after removing bonuses; develop family stock and comparison/growth-range prototypes separately. Existing fixed growth is unchanged; damage-based credit remains an option to test. Compensated drawbacks still need a design.

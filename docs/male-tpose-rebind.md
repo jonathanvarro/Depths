@@ -63,4 +63,5 @@ and assemblies v1–v4 are unchanged.
   their artifact validation would flag that; the assemblies themselves work.
 - Object names stay `rig.male.v1` / `body.male.v1`, since the tools look them
   up by name; the manifest's male `fit_id` is `male-tpose-v1`.
-- Not done: owner review; physical-iPhone performance.
+- Owner reviewed assembly-v5 on 2026-11-03: "That looks great". #221 is
+  closed. Not done: physical-iPhone performance.
