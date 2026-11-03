@@ -120,9 +120,10 @@ at either join, and the clothing "looks great". So no crossfade is needed for
 now. They noticed **her arm passing through her leg**: in the sit-down, front
 view, clothes on and off, her left arm through her left leg.
 
-- **Found by rendering, not by measurement.** Front/quarter close-ups show her
-  left hand buried inside her left knee at about frames 57–89 of the sit-down
-  (only one hand is visible at the knee there). Automatic inside tests were
+- **Found by rendering, not by measurement.** Front close-ups show her left
+  hand buried inside her left thigh at about frames 57–89 of the sit-down
+  (her left arm runs down into the thigh and the hand disappears), with her
+  right hand's fingertips also pressing into the inner side of that thigh. Automatic inside tests were
   tried and proved unreliable on this model, and the numbers first posted on
   #218 were wrong: the body's full-weight clothing-coverage groups hid every
   hand vertex from the bone lookup, the trousers are open at the waist and
@@ -131,21 +132,27 @@ view, clothes on and off, her left arm through her left leg.
   measurements; judge contact from renders.
 - **Fix (owner chose "lift the hands"):** `tools/blender_kit/hand_lift.py`
   makes a corrected copy of the female sit-down, `received.female.sit_down.handlift`.
-  The left hand eases out from the thigh from frame 42, is fully lifted
-  (0.11 source units) over 58–90 and back to the source pose by 110. The
-  direction is "away from the thigh bone, toward the hand", averaged over
-  ±20 frames. A two-bone solve keeps the elbow on its side and the hand's
-  world rotation, so fingers keep their pose. The source Action is
-  unchanged and kept in the editable input.
+  Her left hand moves out by 0.25 source units and her right hand by 0.08,
+  both easing in from frame 42, fully moved over 58–90 and back on the
+  source pose by 110. The direction is the outer top of each hand's own
+  thigh (her side plus up, taken from the hips and made perpendicular to the
+  thigh bone), averaged over ±20 frames. A two-bone solve keeps each elbow on
+  its side and the hand's world rotation, so fingers keep their pose. The
+  source Action is unchanged and kept in the editable input.
+- **First attempt didn't work (owner review):** a 0.11 lift "away from the
+  thigh axis toward the hand" barely moved anything, since the whole hand was
+  inside the thigh, and larger amounts in that direction pushed the hand
+  down between the knees. The fixed side-and-up direction replaced it.
 - **Checks:** frames 1–42 and 110–135 are identical to the source (so the
   end of sit-down and both chair-sequence joins are unchanged; join numbers
-  match v3 exactly). Only the left arm moves; hand rotation change 0°. Peak
-  hand speed is 1.33× the source and the largest frame-to-frame speed change
-  1.2×, because the hand travels a little further around the knee. Renders
-  `assembly-v4/review-hand-lift-before-after.png` show her left hand in front
-  of the knee instead of inside it, clothes on and off.
+  match v3 exactly). Only the arms move; hand rotation change 0°. Peak hand
+  speed equals the source (left 0.0388 vs 0.0379, right unchanged) and the
+  largest frame-to-frame speed change is slightly lower than the source.
+  `assembly-v4/review/godot-sitdown-middle-v3-vs-v4.png` puts the real Godot
+  front capture of v3 (matching the owner's screenshot) beside v4: her left
+  arm now comes down outside the thigh with the hand on the outer knee.
 
-## Assembly-v4: v3 plus the lifted left hand
+## Assembly-v4: v3 plus the lifted hands
 
 `build/local-blender-kit-v1/assembly-v4/` is assembly-v3 with only the female
 sit-down swapped for the hand-lift copy. Same gallery and launcher layout
@@ -155,7 +162,7 @@ checks pass, with no script errors and 215 captures. assembly-v3 is
 unchanged. Build: `prepare_wardrobe_v4.py` then `package_wardrobe_v4.py`
 (after the Godot import and native/headless `check.gd` runs).
 
-Not checked: the stand-up and the hold for similar hand-in-knee moments
+Not checked: the stand-up and the hold for similar hand-in-thigh moments
 (the owner saw it only in the sit-down), and the male body.
 
 Rebuild: Blender `--python tools/blender_kit/prepare_wardrobe_v3.py`, copy

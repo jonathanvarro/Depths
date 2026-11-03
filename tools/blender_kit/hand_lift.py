@@ -17,7 +17,7 @@ The source Action is never changed: the result is a copy named
 import math
 
 import bpy
-from mathutils import Matrix
+from mathutils import Matrix, Vector
 
 
 def frame(f):
@@ -42,14 +42,22 @@ def weight(f, start, full_from, full_to, end):
 
 
 def outward(rig, side, thigh):
-    """Unit vector from the thigh bone's axis toward the hand (world)."""
+    """Unit vector out of the thigh toward its outer top: the body's own
+    side plus up, made perpendicular to the thigh bone (world). A direction
+    "from the thigh axis toward the hand" was tried first; it swings
+    unpredictably when the hand is buried near the axis and pushed the hand
+    down between the knees."""
     world = rig.matrix_world
     leg = rig.pose.bones[f'mixamorig:{side}{thigh}']
-    head, tail = world @ leg.head, world @ leg.tail
-    hand = world @ rig.pose.bones[f'mixamorig:{side}Hand'].head
-    axis = tail - head
-    t = max(0.0, min(1.0, (hand - head).dot(axis) / axis.length_squared))
-    return (hand - (head + axis * t)).normalized()
+    axis = (world @ leg.tail - world @ leg.head).normalized()
+    hips = rig.pose.bones['mixamorig:Hips']
+    # The body's left/right and up from the hips, so it follows her turning.
+    basis = (world @ hips.matrix).to_3x3().normalized()
+    lateral = basis @ Vector((1, 0, 0)) * (1 if side == 'Left' else -1)
+    up = basis @ Vector((0, 1, 0))
+    wanted = lateral + up
+    wanted -= axis * wanted.dot(axis)
+    return wanted.normalized()
 
 
 def solve_arm(rig, side, lift):
