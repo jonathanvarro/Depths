@@ -86,7 +86,7 @@ func run()->void:
 	root.size=Vector2i(1440,900);app=load("res://review.tscn").instantiate();root.add_child(app);await settle()
 	check(app.actors.size()==2,"Both true body fits")
 	for actor in app.actors:
-		check(actor.clips.size()==5,"Exactly five supplied/fitting clips "+actor.fit)
+		check(actor.clips.size()==actor.record.motions.size(),"Exact supplied motion set "+actor.fit)
 		check(actor.meshes.size()==actor.record.body_chunks.size()+actor.record.garments.size(),"Every canonical mesh maps to one real node "+actor.fit)
 		check(actor.skeleton.get_bone_count()==int(actor.record.bones),"Preserved rig "+actor.fit)
 		check(is_equal_approx(actor.scale.x,app.actors[0].scale.x),"Same uniform display scale on both body families")
@@ -101,11 +101,12 @@ func run()->void:
 			check(absf(bounds.size.y-actor.expected_display_height)<.0002,"Actual restored body has the intended metric display height "+actor.fit)
 		actor.set_garments(31)
 	coverage_matrix()
-	for motion in ["rest","idle","walk","sit_down","seated","dying"]:
+	for motion in app.MOTIONS:
 		app.set_motion(motion,0,true);var length:float=app.actors[0].duration()
-		var samples:=[0.0] if motion=="rest" else [0.0,length*.5+1.0/120.0,length]
+		var samples:=[0.0] if motion=="rest" else [0.0,.5+1.0/120.0/maxf(length,.001),1.0]
 		for sample_index in samples.size():
-			app.set_motion(motion,samples[sample_index],true)
+			app.set_motion_fraction(motion,samples[sample_index],true)
+			for actor in app.actors:check(is_equal_approx(actor.motion_time,samples[sample_index]*actor.duration()),"Each body uses its own clip time "+actor.fit+motion)
 			for angle in [0,2,3]:
 				app.angle_index=angle;app.frame_cameras();await settle(1)
 				for actor in app.actors:visible_deformation(actor)
@@ -132,7 +133,7 @@ func run()->void:
 		var event=InputEventMouseButton.new();event.button_index=MOUSE_BUTTON_LEFT;event.position=item_position;event.pressed=on;event.button_mask=MOUSE_BUTTON_MASK_LEFT if on else 0;Input.parse_input_event(event);await settle(1)
 	check(app.fit_index==2,"Mouse chooses real body popup item")
 	app.fit_index=0;app.selectors.fit.select(0);app.update_panels()
-	app.set_motion("walk",app.actors[0].duration(),true);app.set_paused(false);await settle(3);check(app.paused,"Unapproved loop stops at actual endpoint")
+	app.set_motion("walk",app.review_duration(),true);app.set_paused(false);await settle(3);check(app.paused,"Unapproved loop stops at actual endpoint")
 	for index in [1,2,0]:
 		app.fit_index=index;app.update_panels();await settle()
 		check(app.panels[0].visible==(index!=2) and app.panels[1].visible==(index!=1),"Body selector "+str(index))
@@ -152,10 +153,10 @@ func run()->void:
 	await portrait_cards()
 	root.size=Vector2i(1440,900);app.set_garments(31);app.view_index=0;app.selectors.view.select(0);app.angle_index=1;await settle(5)
 	for frame in 12:
-		app.set_motion("walk",app.actors[0].duration()*frame/12.0,true);await capture("walk-frame-%02d"%frame)
+		app.set_motion_fraction("walk",frame/12.0,true);await capture("walk-frame-%02d"%frame)
 	var totals:={}
 	for actor in app.actors:totals[actor.fit]=actor.stats()
-	var report={"checks":checks,"failures":failures,"captures":captures,"contact_and_root_samples":contact_samples,"counts":totals,"renderer":RenderingServer.get_current_rendering_method(),"display":DisplayServer.get_name(),"all_art_local":true,"physical_iphone_tested":false,"final_animation_acceptance_pending":215}
+	var report={"checks":checks,"failures":failures,"captures":captures,"contact_and_root_samples":contact_samples,"counts":totals,"renderer":RenderingServer.get_current_rendering_method(),"display":DisplayServer.get_name(),"all_art_local":true,"physical_iphone_tested":false,"final_animation_acceptance_pending":app.manifest.get("final_animation_acceptance_pending",215)}
 	var report_path:="res://review/headless-validation.json" if DisplayServer.get_name()=="headless" else "res://review/validation.json"
 	var file=FileAccess.open(report_path,FileAccess.WRITE);file.store_string(JSON.stringify(report,"\t")+"\n");file.close()
 	app.queue_free();await settle();print("WARDROBE_CHECKS ",checks," checks, ",failures.size()," failures");quit(0 if failures.is_empty() else 1)

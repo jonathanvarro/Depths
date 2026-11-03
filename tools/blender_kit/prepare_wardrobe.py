@@ -41,7 +41,7 @@ def build(fit):
     rig=bpy.data.objects['rig.'+fit+'.v1'];body=bpy.data.objects['body.'+fit+'.v1']
     original=rig.animation_data.action;body_name=body.name;rig_hash=digest_rig(rig);skin_hash=skin_digest(body,rig)
     motions=[{'id':'dying','action':original.name,'frames':[1,261],'fps':60,'source':'Base '+fit.title()+' - Dying.fbx','temporary':False}]
-    motions += [dict(m,temporary=True) for m in record['motions']]
+    motions += [dict(m,temporary=not record.get('received_profile',False)) for m in record['motions']]
     keep={m['action'] for m in motions}
     for action in list(bpy.data.actions):
         if action.name not in keep:bpy.data.actions.remove(action,do_unlink=True)
@@ -131,7 +131,7 @@ def build(fit):
         'source_master_sha256':source_hash,'export':'assets/'+path.name,'export_sha256':sha(path),
         'bones':65 if fit=='female' else 49,'body_chunks':chunks,'body_triangles_by_selection':expected_counts,
         'garments':[{'name':o['name'],'piece':o['piece']} for o in record['garments']],
-        'motions':motions,'max_independent_deformation_error':maximum,'per_body_downloads_verified':False,
+        'motions':motions,'max_independent_deformation_error':maximum,'per_body_downloads_verified':record.get('received_profile',False),
         'floor_y':min(record['parameters']['boot.'+side]['sole_bottom'] for side in ['left','right'])-.002}
 
 def main():

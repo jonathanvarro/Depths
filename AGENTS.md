@@ -70,8 +70,14 @@ Templates > Download and Install; already installed on the owner's PC).
   desktop/phone captures and native96/192 cards. Local launcher and gallery:
   `build/local-blender-kit-v1/assembly-v1/START_REVIEW.cmd` and
   `review/inspector.html`. Two editable Blender copies and complete skinned GLBs
-  stay local. #214 remains open for #215's final body-specific animation checks;
-  source heads are unchanged and likeness/style acceptance is separate.
+  stay local. This is the retained earlier fitting review. Current delivery:
+  `docs/current-wardrobe-review.md` / `assembly-v2/review/inspector.html` uses
+  per-body idle/walk/sit/seated/stand-up/Dying, exact reversible coverage and
+  native phone review. Male sleeve/boot fit repairs affect only its new copy.
+  #214/#215 have a reviewable current candidate but remain open; calm female
+  idle, contacts, registration/loops and final animation polish are tracked
+  in #218 without waiving the original acceptance criteria. Source heads are
+  unchanged and likeness/style acceptance is separate.
 - `docs/mixamo-animation-requests.md` – #215's prepared per-body intake and
   owner-requested private Drive pack (`3D Objects/Animations/Animation Requests - Depths`).
   Each body folder contains the exact source FBX, instructions and Downloads.
@@ -81,8 +87,9 @@ Templates > Download and Install; already installed on the owner's PC).
   lengths/hierarchy. `docs/received-animation-library.md` catalogs both packs
   and individuals; eight source-world converted motions pass body/export/native
   samples. The new male Sitting Idle is a chair asset; older namesakes differ.
-  Female talking crosses a leg; a quiet matching female chair hold and final
-  placement/contact/loop acceptance remain pending. Earlier review stays intact.
+  Female talking crosses a leg and is now a labelled seated garment stress test
+  in assembly-v2; quiet sitting and final placement/contact/loop polish are #218,
+  not a gate on inspecting the current kit. Earlier reviews stay intact.
   The owner's subsequent female sit-down/stand-up pair is separately checked in
   `docs/female-chair-transition-review.md`: similar chair endpoints, explicit
   placement alignment needed, quiet hold still missing. No source/master edits.

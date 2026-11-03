@@ -107,3 +107,14 @@ and captures both transitions. `package_chair_intake.py` verifies originals and
 packages the actual captures. Handoff: [female chair review](../../docs/female-chair-transition-review.md).
 The native checker accepts per-body motion counts/capture selection from its
 summary while retaining the earlier two-body/five-motion defaults.
+
+Current #214/#215 assembly: `prepare_current_wardrobe.py` builds assembly-v2
+from the verified received Actions and the new male stand-up. It verifies cache
+identities and original rigs/skin, preserves original masters, and independently
+checks all exports. `refine_review_fit.py` repairs male sleeve/calf clearance in
+the new copy only. `package_current_wardrobe.py` packages and validates the native
+captures; pass the assembly-v2 path to `check_wardrobe_gallery.cjs`.
+Handoff: [current wardrobe review](../../docs/current-wardrobe-review.md).
+Female talking is a labelled seated stress test; calm idle/sequence/contact/loop
+polish stays #218. UI playback retains actual seconds; matrix samples use each
+body's own relative clip time, and the selected fit controls timeline duration.

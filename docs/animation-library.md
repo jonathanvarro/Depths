@@ -207,13 +207,22 @@ preserved. This is not owner approval, loop approval or live integration.
 | Female | Sitting Talking.fbx |1–2699 /44.97s| Converted/reviewed conversation pose; crosses a leg, not the missing quiet chair hold |
 | Male | Neutral Idle.fbx |1–526 /8.75s| Source/bind audited; body playback pending |
 | Male | Stand To Sit.fbx |1–135 /2.23s| Converted; sampled body/GLB/native review passes |
-| Male | Sit To Stand.fbx |1–136 /2.25s| Source/bind audited; body playback pending |
+| Male | Sit To Stand.fbx |1–136 /2.25s| Converted and independently checked on the body in assembly-v2; native stand-up matrix passes |
 | Male | Sitting Idle.fbx |1–258 /4.28s| Converted/reviewed chair idle; different asset from the older 616-frame ground pose |
 
 Seconds are(last−first)/60; filenames and hashes are preserved in the local
 manifest. All loops and final sit/hold continuity remain unapproved. Male
 sit/hold needs explicit clip-placement alignment; female needs the matching
 quiet hold. Earlier fitting masters/reviewer stay unchanged.
+
+**Current assembled delivery:** [assembly-v2](current-wardrobe-review.md) uses
+the chosen body-specific idle/walk, chair transitions, female seated talking /
+male chair idle, and both original Dying Actions. All six per-body Actions have
+reopen/fit, independent export and real native motion/angle/coverage checks.
+Female conversation is an explicit seated stress test, sufficient to inspect
+the kit; a calm hold is still unavailable. #214/#215 remain open, with final
+contact/registration/loop/quiet-idle polish tracked in #218 without waiving their
+acceptance criteria.
 
 ## Female chair follow-up (2026-11-02)
 
@@ -228,7 +237,8 @@ Sit-down end and stand-up start have similar posture but different root
 placement (about 1.074 source units); explicit placement alignment and full
 sequence/contact checks remain. A quiet matching seated hold is still missing;
 Sitting Talking remains a conversation pose. No loops or final continuity are
-approved, and #214/#215 stay open. This is one additional motion plus a retained
+approved; the assembled candidate is now delivered and remaining polish is #218.
+This is one additional motion plus a retained
 re-upload version, not two new locomotion packs.
 
 ## Garment fitting references (2026-11-02, ChatGPT)

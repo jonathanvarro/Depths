@@ -1,5 +1,10 @@
 # Editable wardrobe review · #214
 
+**Current delivery:** [the per-body assembly-v2 review](current-wardrobe-review.md)
+supersedes this earlier fitting candidate. #214/#215 have a current reviewable
+handoff but remain open, with known motion limits tracked in #218. The assembly-v1 assets and
+historical findings below remain preserved.
+
 2026-11-02. The isolated Godot/Blender review is ready locally. **#214 remains
 open for #215's final per-body animation verification.** The owner's new
 [private Drive request folders](mixamo-animation-requests.md) now contain both

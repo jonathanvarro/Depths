@@ -13,7 +13,7 @@ def main():
         elapsed=next(m for m in data['motions'] if m['id']=='walk')['frames'][1]-1
         duration=elapsed/60*1000;timings=[round(duration*(i+1)/120)*10-round(duration*i/120)*10 for i in range(12)]
         frames[0].save(REVIEW/(fit+'-walk.gif'),save_all=True,append_images=frames[1:],duration=timings,loop=0,optimize=False)
-    for motion in ['rest','idle','walk','sit_down','seated','dying']:
+    for motion in manifest.get('motion_order',['rest','idle','walk','sit_down','seated','dying']):
         samples=[0] if motion=='rest' else [0,1,2];columns=3*len(samples)
         sheet=Image.new('RGB',(columns*180,2*185),'#151c1c');draw=ImageDraw.Draw(sheet)
         for row,fit in enumerate(['female','male']):
@@ -27,8 +27,17 @@ def main():
         cards+=f'''<article data-fit="{fit}"><h2>{fit.title()} fit</h2><img class="model" src="{fit}-rest-0-0.png" alt="Actual {fit} native render"><p>{stats['triangles']:,} triangles · {stats['surfaces']} visible surfaces · {stats['bones']} joints</p><p><a href="../{data['master']}">Editable Blender master</a> · <a href="../{data['export']}">Reversible review GLB</a></p></article>'''
     template=Path(__file__).with_name('wardrobe.template.html').read_text(encoding='utf-8')
     template=template.replace('@@CARDS@@',cards).replace('@@CAPTURES@@',str(len(report['captures']))).replace('@@CHECKS@@',str(report['checks']))
+    if manifest.get('version',1)>=2:
+        template=template.replace('<strong>Final animation acceptance is pending #215.</strong> These are the existing temporary fitting clips. Chair-height sit-down and reclined ground idle are separate poses.',
+            '<strong>Current per-body animation review.</strong> Each body uses its own uploaded clips. Female seated is a crossed-leg talking stress test; male seated is a chair idle. Calm female sitting, source contacts and seamless transitions remain visible follow-up limits.')
+        template=template.replace('Idle · fitting','Idle · body pack').replace('Walk · fitting','Walk · body pack')
+        template=template.replace('Ground sit · separate clip','Seated · talk / idle').replace('Ground seated','Seated stress test')
+        template=template.replace('<option value="dying">','<option value="stand_up">Stand-up · chair</option><option value="dying">')
+        template=template.replace('<a href="sheet-dying.png">','<a href="sheet-stand_up.png">Chair stand-up</a><a href="sheet-dying.png">')
+        template=template.replace('The source clip\'s loop/in-place status is unapproved;',
+            'Matrix samples use each body\'s own start/middle/end. Interactive playback retains original seconds. Both walks travel, and loop status is unapproved;')
     (REVIEW/'inspector.html').write_text(template,encoding='utf-8')
-    doc=ROOT/'docs/blender-wardrobe-review.md'
+    doc=ROOT/('docs/current-wardrobe-review.md' if manifest.get('version',1)>=2 else 'docs/blender-wardrobe-review.md')
     if doc.exists():(OUT/'START_HERE.md').write_text(doc.read_text(encoding='utf-8'),encoding='utf-8')
     print('WARDROBE_GALLERY',len(report['captures']),'actual captures; 24 native cards; two real-frame GIFs')
 if __name__=='__main__':main()

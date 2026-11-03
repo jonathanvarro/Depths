@@ -1,5 +1,11 @@
 # Female chair transition follow-up · #215
 
+Current handoff: [assembly-v2](current-wardrobe-review.md) now uses these
+transitions alongside each body's pack motions and original Dying. Female
+talking is a labelled seated stress test, sufficient for garment verification;
+the missing calm hold and sequence/contact polish are #218. Earlier intake and
+findings below remain unchanged; #214/#215 remain open for final acceptance.
+
 2026-11-02. The owner uploaded female `Sit To Stand.fbx` and re-uploaded
 `Stand To Sit.fbx`. Both are retained separately from the earlier 27-file batch:
 `build/local-blender-kit-v1/animation-requests-v1/female-chair-intake-v1/`.

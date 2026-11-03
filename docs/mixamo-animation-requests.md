@@ -5,8 +5,9 @@ for separate Google Drive model/request folders so they can obtain animations.
 The private request pack is ready. The owner has now returned27 clips,
 including both locomotion packs; current results are in
 [received-animation-library.md](received-animation-library.md).
-**Final #215/#214 acceptance still needs a quiet female chair hold and sequence/
-contact acceptance. No Mixamo animations were acquired automatically.**
+**The current kit/verification handoff is now [assembly-v2](current-wardrobe-review.md).
+Female talking supplies the seated stress test; a calm hold and final sequence/
+contact polish remain #218. No Mixamo animations were acquired automatically.**
 
 ## Normalization decision
 

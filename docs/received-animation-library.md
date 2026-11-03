@@ -1,5 +1,10 @@
 # Uploaded per-body animation library · #215
 
+Current delivery: [assembly-v2](current-wardrobe-review.md) combines the chosen
+per-body clips, both stand-ups and refined male garments in the interactive
+reviewer. #214/#215 remain open for final acceptance; female talking serves
+as the explicit seated fit test, while calm sitting/contact/loop polish is #218.
+
 Follow-up: the owner has since added female Sit To Stand and re-uploaded Stand
 To Sit. [The transition review](female-chair-transition-review.md) records both
 separately; a quiet female chair hold remains missing. The 27-file catalogue

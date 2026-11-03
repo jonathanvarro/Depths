@@ -1,7 +1,7 @@
 extends Control
 ## #214: isolated native review, never loads the game, saves or preferences.
 const Actor=preload("res://actor.gd")
-const MOTIONS=["rest","idle","walk","sit_down","seated","dying"]
+var MOTIONS:Array=["rest","idle","walk","sit_down","seated","dying"]
 const ANGLES=["Front","Three-quarter","Side","Back"]
 const PIECES=["tunic","belt","trousers","boot.left","boot.right"]
 var manifest:Dictionary
@@ -30,10 +30,12 @@ var view_index:=0
 var angle_index:=1
 var paused:=true
 var phone_insets:=true
+var review_time:=0.0
 
 func _ready()->void:
 	get_tree().root.gui_embed_subwindows=true
 	manifest=JSON.parse_string(FileAccess.get_file_as_string("res://manifest.json"))
+	MOTIONS=manifest.get("motion_order",MOTIONS)
 	var kit_theme=Theme.new();kit_theme.default_font_size=16
 	for state in ["normal","hover","pressed","focus"]:
 		var style=StyleBoxFlat.new();style.bg_color=Color("655438") if state=="pressed" else Color("28312f")
@@ -59,7 +61,7 @@ func _ready()->void:
 	var choices=HBoxContainer.new();choices.add_theme_constant_override("separation",8);column.add_child(choices);tool_rows.append(choices)
 	selectors.fit=choice(choices,["Fit: Both","Fit: Female","Fit: Male"],110)
 	selectors.fit.item_selected.connect(func(index):fit_index=index;update_panels())
-	selectors.motion=choice(choices,["Neutral fit","Idle · fitting","Walk · fitting","Sit down · chair","Ground sit · fitting","Dying · original"],170)
+	selectors.motion=choice(choices,manifest.get("motion_labels",["Neutral fit","Idle · fitting","Walk · fitting","Sit down · chair","Ground sit · fitting","Dying · original"]),170)
 	selectors.motion.item_selected.connect(func(index):set_motion(MOTIONS[index],0,true))
 	selectors.view=choice(choices,["Full figure","Portrait"],115)
 	selectors.view.item_selected.connect(func(index):view_index=index;frame_cameras())
@@ -82,7 +84,7 @@ func _ready()->void:
 	time_label=Label.new();time_label.custom_minimum_size.x=122;transport.add_child(time_label)
 	preview_row=HBoxContainer.new();preview_row.size_flags_vertical=SIZE_EXPAND_FILL;preview_row.add_theme_constant_override("separation",10);column.add_child(preview_row)
 	for fit in ["female","male"]:make_panel(fit)
-	var footer=Label.new();footer.text="Temporary fitting motions · final clips pending #215 · source faces unchanged";footer.add_theme_font_size_override("font_size",13);footer.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;column.add_child(footer)
+	var footer=Label.new();footer.text=manifest.get("review_footer","Temporary fitting motions · final clips pending #215 · source faces unchanged");footer.add_theme_font_size_override("font_size",13);footer.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;column.add_child(footer)
 	details=PopupPanel.new();details.theme=kit_theme;add_child(details)
 	var scroll=ScrollContainer.new();scroll.custom_minimum_size=Vector2(500,250);scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;details.add_child(scroll)
 	details_text=RichTextLabel.new();details_text.name="DetailsText";details_text.fit_content=true;details_text.custom_minimum_size.x=480;details_text.size_flags_horizontal=SIZE_EXPAND_FILL;details_text.bbcode_enabled=true;scroll.add_child(details_text)
@@ -119,6 +121,7 @@ func update_layout()->void:
 
 func update_panels()->void:
 	for i in 2:panels[i].visible=fit_index==0 or fit_index==i+1
+	if not actors.is_empty():set_motion(current_motion,minf(review_time,review_duration()),true)
 	call_deferred("frame_cameras")
 
 func set_piece(index:int,on:bool)->void:
@@ -135,25 +138,40 @@ func set_garments(bits:int)->void:
 func set_motion(key:String,time:float,stop:bool)->void:
 	current_motion=key;selectors.motion.select(MOTIONS.find(key))
 	for actor in actors:actor.set_motion(key,time)
+	review_time=clampf(time,0,review_duration())
 	if stop:set_paused(true)
-	timeline.max_value=actors[0].duration();timeline.set_value_no_signal(actors[0].motion_time);timeline.editable=key!="rest"
+	timeline.max_value=review_duration();timeline.set_value_no_signal(review_time);timeline.editable=key!="rest"
 	play_button.disabled=key=="rest"
 	for control in frame_buttons:control.disabled=key=="rest"
 	refresh_time();frame_cameras()
+
+func review_duration()->float:
+	var length:=0.0
+	for i in actors.size():
+		if fit_index==0 or fit_index==i+1:length=maxf(length,actors[i].duration())
+	return length
+
+func set_motion_fraction(key:String,fraction:float,stop:bool)->void:
+	# Matrix inspection samples each body's own clip, including its real end.
+	# Interactive playback still advances both at their original seconds/FPS.
+	set_motion(key,0,stop)
+	for actor in actors:actor.set_motion(key,clampf(fraction,0,1)*actor.duration())
+	review_time=clampf(fraction,0,1)*review_duration()
+	timeline.set_value_no_signal(review_time);refresh_time();frame_cameras()
 
 func set_paused(value:bool)->void:
 	paused=value;play_button.text="Play" if paused else "Pause"
 	for actor in actors:actor.playing=not paused
 
 func toggle_play()->void:
-	if paused and actors[0].motion_time>=actors[0].duration():set_motion(current_motion,0,true)
+	if paused and review_time>=review_duration():set_motion(current_motion,0,true)
 	set_paused(not paused)
 
 func step_frame(direction:int)->void:
-	set_motion(current_motion,actors[0].motion_time+direction/60.0,true)
+	set_motion(current_motion,review_time+direction/60.0,true)
 
 func refresh_time()->void:
-	time_label.text="%.1f / %.0f fr"%[actors[0].motion_time*60+1,actors[0].duration()*60+1]
+	time_label.text="%.2f / %.2fs"%[review_time,review_duration()]
 
 func aim(camera:Camera3D,actor:Node3D,aspect:float,portrait:bool)->void:
 	var direction:Vector3=[Vector3(0,0,1),Vector3(.65,0,1),Vector3(1,0,0),Vector3(0,0,-1)][angle_index].normalized()
@@ -175,7 +193,7 @@ func frame_cameras()->void:
 
 func show_details()->void:
 	var text:="[b]Editable kit / local review[/b]\n\nAll original bodies, rigs and skin pixels are retained. Garments use independently named meshes and reversible body regions. No live game or player files are loaded.\n\n"
-	text+="[b]Animation limits[/b]\n#215's body-specific downloads are not present. Idle, walk, chair sit-down and ground-seated clips are temporary legacy retargets. Chair sit-down and ground idle are not a continuous sequence. Extra female finger joints retain parent-relative rest articulation. Source lateral travel is retained; no floor/seat/hand IK. Playback stops at each real endpoint: looping and in-place status are not approved.\n\n"
+	text+="[b]Animation limits[/b]\n"+str(manifest.get("animation_limits","#215's body-specific downloads are not present. Idle, walk, chair sit-down and ground-seated clips are temporary legacy retargets. Chair sit-down and ground idle are not a continuous sequence. Extra female finger joints retain parent-relative rest articulation. Source lateral travel is retained; no floor/seat/hand IK. Playback stops at each real endpoint: looping and in-place status are not approved."))+"\n\n"
 	text+="[b]Display normalization[/b]\nOne common scale presents the two bodies at about1.70m/1.80m, preserving their6% height difference. Each fixed rest-sole reference is at y=0. Only the presentation parent changes; source mesh, rest rig, Actions and Mixamo uploads remain unchanged. This is a review reference, not a character-height stat or animated foot correction.\n\n"
 	for actor in actors:
 		var data:Dictionary=actor.stats();text+="[b]%s[/b] · %d triangles / %d surfaces / %d materials / %d joints\n%d textures / %d pixels (RGBA8 base level ≈ %.2f MiB; GPU overhead/mips excluded).\n"%[actor.fit.capitalize(),data.triangles,data.surfaces,data.materials,data.bones,data.texture_count,data.texture_pixels,data.texture_pixels*4/1048576.0]
@@ -190,12 +208,13 @@ func _unhandled_key_input(event:InputEvent)->void:
 		if event.keycode==KEY_ESCAPE:details.hide()
 		elif event.keycode==KEY_SPACE and current_motion!="rest":toggle_play();get_viewport().set_input_as_handled()
 		elif event.keycode in [KEY_LEFT,KEY_RIGHT]:step_frame(-1 if event.keycode==KEY_LEFT else 1);get_viewport().set_input_as_handled()
-		elif event.keycode in [KEY_HOME,KEY_END]:set_motion(current_motion,0 if event.keycode==KEY_HOME else actors[0].duration(),true);get_viewport().set_input_as_handled()
+		elif event.keycode in [KEY_HOME,KEY_END]:set_motion(current_motion,0 if event.keycode==KEY_HOME else review_duration(),true);get_viewport().set_input_as_handled()
 
 func _process(delta:float)->void:
 	if actors.is_empty():return
-	for actor in actors:actor.step(delta)
 	if not paused:
-		timeline.set_value_no_signal(actors[0].motion_time);refresh_time()
-		if not actors[0].playing:set_paused(true)
+		review_time=minf(review_duration(),review_time+delta)
+		for actor in actors:actor.set_motion(current_motion,review_time)
+		timeline.set_value_no_signal(review_time);refresh_time()
+		if review_time>=review_duration():set_paused(true)
 	frame_cameras()
