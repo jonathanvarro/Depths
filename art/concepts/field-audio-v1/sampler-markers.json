@@ -1,0 +1,72 @@
+[
+  {
+    "id": "step-stone-1",
+    "start": 0,
+    "seconds": 0.52
+  },
+  {
+    "id": "step-stone-2",
+    "start": 0.97,
+    "seconds": 0.52
+  },
+  {
+    "id": "wall-bump",
+    "start": 1.94,
+    "seconds": 0.66
+  },
+  {
+    "id": "passage-roots",
+    "start": 3.05,
+    "seconds": 1.3
+  },
+  {
+    "id": "prayer-mend",
+    "start": 4.8,
+    "seconds": 2.0
+  },
+  {
+    "id": "rat-hurt",
+    "start": 7.25,
+    "seconds": 0.92
+  },
+  {
+    "id": "goblin-death",
+    "start": 8.620000000000001,
+    "seconds": 1.9724943310657597
+  },
+  {
+    "id": "map-heavy-blow",
+    "start": 11.042494331065761,
+    "seconds": 1.2
+  },
+  {
+    "id": "trap-alarm-bell",
+    "start": 12.692494331065761,
+    "seconds": 2.1
+  },
+  {
+    "id": "brew-shatter",
+    "start": 15.242494331065762,
+    "seconds": 1.25
+  },
+  {
+    "id": "pack-bandage",
+    "start": 16.942494331065763,
+    "seconds": 1.25
+  },
+  {
+    "id": "pack-oil",
+    "start": 18.642494331065762,
+    "seconds": 1.35
+  },
+  {
+    "id": "smith-temper",
+    "start": 20.442494331065763,
+    "seconds": 1.35
+  },
+  {
+    "id": "ambience-fungal",
+    "start": 22.242494331065764,
+    "seconds": 4.0
+  }
+]

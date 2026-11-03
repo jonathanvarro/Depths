@@ -1,0 +1,506 @@
+{
+  "audio/dark-v1/CREDITS.md": {
+    "sha256": "17d3123b6c13c24c0e04c6cb1068d9093d8173e3b917dc424b55dd749aa9ebf9",
+    "normalize_text_eol": true
+  },
+  "audio/dark-v1/block-metal.wav": {
+    "sha256": "c5b6ab2990c1be154a9e21f2bb2f6b53513c6427cbe2720e187a44f534ae6d0d",
+    "normalize_text_eol": false
+  },
+  "audio/dark-v1/block-metal.wav.import": {
+    "sha256": "94a0bc58d15be11cbe0fc5508f67b2c74d9a1595b8beb69e2de2f5fbe41c3bff",
+    "normalize_text_eol": true
+  },
+  "audio/dark-v1/block-wood.wav": {
+    "sha256": "8011779dce9867022f000538a36a5ca25524f7c8fa7b9924c5d21f364ecb1ba5",
+    "normalize_text_eol": false
+  },
+  "audio/dark-v1/block-wood.wav.import": {
+    "sha256": "93b8a7933fe7a5d882194adab3bb30c2313be951f2dccf48be3bed4e743d90e8",
+    "normalize_text_eol": true
+  },
+  "audio/dark-v1/camp-ambience-loop.wav": {
+    "sha256": "13793ef70092446c01c6eec33df697f9b9e0cf43a9be3abce44155a1f252b62b",
+    "normalize_text_eol": false
+  },
+  "audio/dark-v1/camp-ambience-loop.wav.import": {
+    "sha256": "9dad315afed4493cb21e06eb04f3830fce2357f348d813e4a7f77cc7794de530",
+    "normalize_text_eol": true
+  },
+  "audio/dark-v1/camp-fire-loop.wav": {
+    "sha256": "1bfe771d7b7a2ad0dc00c2336ccbf52e6ebd925cd7ea81f4942775742ecacc24",
+    "normalize_text_eol": false
+  },
+  "audio/dark-v1/camp-fire-loop.wav.import": {
+    "sha256": "63af7d55f425147d5f90761596e48387b7a7f42aaa72f08c0014ac5d97b5c42f",
+    "normalize_text_eol": true
+  },
+  "audio/dark-v1/camp-voices-loop.wav": {
+    "sha256": "d861519be8a1d7508770f2a61a62c3bec5243d5c03374e583ae6875e8ffe4a4a",
+    "normalize_text_eol": false
+  },
+  "audio/dark-v1/camp-voices-loop.wav.import": {
+    "sha256": "dcea05a214d522e559ad82213da5acb355a46bd628a1059e261417cb17a98dca",
+    "normalize_text_eol": true
+  },
+  "audio/dark-v1/camp-wind-loop.wav": {
+    "sha256": "af067f4179126bd23b4303cde3fed2c9100c7bef23a92949569f77d0277f5abe",
+    "normalize_text_eol": false
+  },
+  "audio/dark-v1/camp-wind-loop.wav.import": {
+    "sha256": "2008df157423a0c53eba594c1e6b7bdfc066c91082e0f05243245f42ba19fc17",
+    "normalize_text_eol": true
+  },
+  "audio/dark-v1/catalog.json": {
+    "sha256": "cbb2a49b7c7ce4aa572aa0f5b6ec064d0eeb4f6617dc49c9744035cd8fbf9713",
+    "normalize_text_eol": true
+  },
+  "audio/dark-v1/chest-open.wav": {
+    "sha256": "974db07065e8fad10da11d7ecb7aeba9370c386384158736039bbf0e0fa6ae86",
+    "normalize_text_eol": false
+  },
+  "audio/dark-v1/chest-open.wav.import": {
+    "sha256": "f924265679c3580dfafb4a72d85f1ddb4aeddc534c87fcc74944264274feaa3f",
+    "normalize_text_eol": true
+  },
+  "audio/dark-v1/coin-flip.wav": {
+    "sha256": "22fb7edb2ca6eee06de54aebd663f1c19611b95503479d5d1b532fff43c6f3e4",
+    "normalize_text_eol": false
+  },
+  "audio/dark-v1/coin-flip.wav.import": {
+    "sha256": "2f9da7a9247fab6cbbd543b110903901f45d3d970f209f0689b49ad81c7c98c9",
+    "normalize_text_eol": true
+  },
+  "audio/dark-v1/coins-1.wav": {
+    "sha256": "07cd493ad7dccd743fb88cbed88954e93ad886bda46433e4617f1989278839d3",
+    "normalize_text_eol": false
+  },
+  "audio/dark-v1/coins-1.wav.import": {
+    "sha256": "dae9ad30b196eeda5b110d002fa283b5331fd989341f03fb4ea9ca41ca1f334e",
+    "normalize_text_eol": true
+  },
+  "audio/dark-v1/coins-2.wav": {
+    "sha256": "2821f6587369cb0467410f89f545c6bfdd4654147bb4e9a4046a9811d0b67168",
+    "normalize_text_eol": false
+  },
+  "audio/dark-v1/coins-2.wav.import": {
+    "sha256": "6f8720a62cdcbb400ea38dc63fb3a743cf36bb25d1c4ef3f4269bbef9056ec4b",
+    "normalize_text_eol": true
+  },
+  "audio/dark-v1/distant-drums-loop.wav": {
+    "sha256": "876f1846fb21e301e596b4705972da7b491ed4d9510b0c5b54ed068ccb16d598",
+    "normalize_text_eol": false
+  },
+  "audio/dark-v1/distant-drums-loop.wav.import": {
+    "sha256": "7e7f6c23daa9ff6a7f2555ddacdd5203351f553368473debd0306040dbd4e3e3",
+    "normalize_text_eol": true
+  },
+  "audio/dark-v1/drum-hit.wav": {
+    "sha256": "05a9b01b7f4b3882272ca4a978b9931927b6874160d68ddf2bb511e2d4da9400",
+    "normalize_text_eol": false
+  },
+  "audio/dark-v1/drum-hit.wav.import": {
+    "sha256": "b78d17fcb2f201a14fcd991bb477f47148c0015b23cc475ce6ffa56c7c388e86",
+    "normalize_text_eol": true
+  },
+  "audio/dark-v1/fall.wav": {
+    "sha256": "11777f65f4108f695b6bffa0f17c37549e474df51bcd5e7941b4f9976a26a558",
+    "normalize_text_eol": false
+  },
+  "audio/dark-v1/fall.wav.import": {
+    "sha256": "7bd6cc215c8bbc77150badfbde19da65b18106a426e38d37458c5671b2f7a955",
+    "normalize_text_eol": true
+  },
+  "audio/dark-v1/gate-break.wav": {
+    "sha256": "ceb4dea26d59aced821fbc558f81b7d316cb736781ef801da4eb3630627bfcf8",
+    "normalize_text_eol": false
+  },
+  "audio/dark-v1/gate-break.wav.import": {
+    "sha256": "ce9c67ed14f15e9e2ee45fe2487fa39b7f064ec14810f9784d24ab6566ed72e5",
+    "normalize_text_eol": true
+  },
+  "audio/dark-v1/heartbeat.wav": {
+    "sha256": "34c7dce2abc3c8e1fc0249005161b942962870ddf415c6a5dff325867cf69b24",
+    "normalize_text_eol": false
+  },
+  "audio/dark-v1/heartbeat.wav.import": {
+    "sha256": "750f37dda7367474ef8f3ac781ffaa17aaab8852f727252efdf383ebf040193d",
+    "normalize_text_eol": true
+  },
+  "audio/dark-v1/hit-1.wav": {
+    "sha256": "82ec0aba5e8c4fabb5bc2da0beb736a214023d2ec1e3aadce048b62692b6c110",
+    "normalize_text_eol": false
+  },
+  "audio/dark-v1/hit-1.wav.import": {
+    "sha256": "30e215d4092abd4653a2546ae39985d7f73d9753bf6e8df6d4bc457397be534e",
+    "normalize_text_eol": true
+  },
+  "audio/dark-v1/hit-2.wav": {
+    "sha256": "86a1329d12c3e02771c994989e08d4c0966c339e5f596fd1e768bb0c06706878",
+    "normalize_text_eol": false
+  },
+  "audio/dark-v1/hit-2.wav.import": {
+    "sha256": "e32a60e5ff781cf61675cab6069dcf18d20f093216ed63debe068fca76fcdfec",
+    "normalize_text_eol": true
+  },
+  "audio/dark-v1/hit-3.wav": {
+    "sha256": "0c4ec012c354c76fe36da00731c87daa42bf39af3277fadaf85addbd48ad6276",
+    "normalize_text_eol": false
+  },
+  "audio/dark-v1/hit-3.wav.import": {
+    "sha256": "81581974155b33295e0c639c8228b13f8189036aee7f93533bc2526f60f585c5",
+    "normalize_text_eol": true
+  },
+  "audio/dark-v1/miss-1.wav": {
+    "sha256": "69503f7d9419ff3d59ef3140b551b30cdcc6ce55d86d5f7066211cd53bf92a7f",
+    "normalize_text_eol": false
+  },
+  "audio/dark-v1/miss-1.wav.import": {
+    "sha256": "f2d65010638231b8b182846e184893fa342f9a785def4fceac6c1ebd319c6bab",
+    "normalize_text_eol": true
+  },
+  "audio/dark-v1/miss-2.wav": {
+    "sha256": "6dd010ee83bcae7e70c347ae91baf5f328a942a1198b5cf7f66137d62ae59980",
+    "normalize_text_eol": false
+  },
+  "audio/dark-v1/miss-2.wav.import": {
+    "sha256": "7168e224a3dfb45be950b08424799fe0a93ec3f1836b4ccde0f5544fd5999447",
+    "normalize_text_eol": true
+  },
+  "audio/dark-v1/outskirts-ambience-loop.wav": {
+    "sha256": "a6d15da233c3f48435af9e493a1b094caa2655f8cc760ab3717a8b971f2b254a",
+    "normalize_text_eol": false
+  },
+  "audio/dark-v1/outskirts-ambience-loop.wav.import": {
+    "sha256": "c4634c31481c649bd386081e06c450928f7cd952d379875a1cc6e8a41ec82dce",
+    "normalize_text_eol": true
+  },
+  "audio/dark-v1/purchase.wav": {
+    "sha256": "44bf234a4145d6586409b9b48c1a351957bfc8460abd023ddd92695de01415aa",
+    "normalize_text_eol": false
+  },
+  "audio/dark-v1/purchase.wav.import": {
+    "sha256": "38d6b3c375c1ead7dab8368b2f0602dd5ddf2345f9b5ff467ad1ec7a8bdc4d05",
+    "normalize_text_eol": true
+  },
+  "audio/dark-v1/queen-screech.wav": {
+    "sha256": "5eec96fdac18fc4f2946e3f32b90f2449a5b76c996ead96bcdcca3659a7c31bd",
+    "normalize_text_eol": false
+  },
+  "audio/dark-v1/queen-screech.wav.import": {
+    "sha256": "918bfafa5d9d1fe7acef75b1fc3787b013f71df90822a5dada69e3d5d605dee3",
+    "normalize_text_eol": true
+  },
+  "audio/dark-v1/stumble.wav": {
+    "sha256": "1fbe78f3614c382fad0cc5fc99b97b056b599327207f4ef16207678f742b73c4",
+    "normalize_text_eol": false
+  },
+  "audio/dark-v1/stumble.wav.import": {
+    "sha256": "1a0d23bbd92c391261d3420c15272b1ca6fe533c30f3edcbc13a88b5db0de4b0",
+    "normalize_text_eol": true
+  },
+  "audio/dark-v1/torch-burn-loop.wav": {
+    "sha256": "1bb6f85b6d1d579b539a4d93c5af7e89536e3e109c18170d929b6f2c0a59e74e",
+    "normalize_text_eol": false
+  },
+  "audio/dark-v1/torch-burn-loop.wav.import": {
+    "sha256": "0e90940a210cbdcfc0fdc27f669be06e2cb60160deafd0f3e89d84502621ca7f",
+    "normalize_text_eol": true
+  },
+  "audio/dark-v1/torch-burnout.wav": {
+    "sha256": "20f2c69e01723a3da662c6b06b912681def0e4c91712b31cf6578dd06f016d94",
+    "normalize_text_eol": false
+  },
+  "audio/dark-v1/torch-burnout.wav.import": {
+    "sha256": "5c5e166b8a5942b4349d1959be975eb3cc907b95df6eaf1a75ae4ad29f5c15a1",
+    "normalize_text_eol": true
+  },
+  "audio/dark-v1/torch-light.wav": {
+    "sha256": "9265c97c871dc44137e867fc9b6dc1a17f740ff605b70c6794125f17d07c6f18",
+    "normalize_text_eol": false
+  },
+  "audio/dark-v1/torch-light.wav.import": {
+    "sha256": "3bc4b6879673cc455873f581a3cd69cc7b71d5cd0a1204fa57b9bca764315a29",
+    "normalize_text_eol": true
+  },
+  "audio/dark-v1/ui-click.wav": {
+    "sha256": "f7c3ba3f93af9809819517e6a4fb98802d720914b2ae58641986daceb957430e",
+    "normalize_text_eol": false
+  },
+  "audio/dark-v1/ui-click.wav.import": {
+    "sha256": "e757fb2d885595ed0d2dc4cd4e5f68b69fbf3b92bfb60ddd5e7fa86c781de0bf",
+    "normalize_text_eol": true
+  },
+  "audio/dark-v1/venom.wav": {
+    "sha256": "87e2a05ddde6169759b8f9bd97a0a800a46356b44f9d32aa88d05a2bbc8761fe",
+    "normalize_text_eol": false
+  },
+  "audio/dark-v1/venom.wav.import": {
+    "sha256": "1a7da47e91088af0ad863086c18e5e6b80f90ccb16eff310c5d3211c6c357c36",
+    "normalize_text_eol": true
+  },
+  "audio/dark-v1/web-spit.wav": {
+    "sha256": "89101932b43cb4e993e4b0eb5c71606e0b49ddb6b398498b346cf0c40212e6aa",
+    "normalize_text_eol": false
+  },
+  "audio/dark-v1/web-spit.wav.import": {
+    "sha256": "2516dcc18c078139870f7e1551f51585e93fdf5602793123aa7273b8f8744ad5",
+    "normalize_text_eol": true
+  },
+  "audio/music/camp.wav": {
+    "sha256": "6d0852a758dc41a763cd33b0693fa878e36d7f1d0149f7674bc82241a7a90de1",
+    "normalize_text_eol": false
+  },
+  "audio/music/camp.wav.import": {
+    "sha256": "fd208adab6e4e94c3ed3add69c43a6b3e9f2048b4a8420f3f2e07f67abca6b5e",
+    "normalize_text_eol": true
+  },
+  "audio/music/cave.ogg": {
+    "sha256": "d010bb0c3f9e9f855e0ce36486f30673db414739c02d62344398197927fdc24a",
+    "normalize_text_eol": false
+  },
+  "audio/music/cave.ogg.import": {
+    "sha256": "bd3f0136d1456bf553db108051d1294be52d52d476f4eb0a8a455f618f60e77a",
+    "normalize_text_eol": true
+  },
+  "audio/music/combat.wav": {
+    "sha256": "2b5618139d5bd5f0796404b66909186b17120736886efeb54e58317181a136c9",
+    "normalize_text_eol": false
+  },
+  "audio/music/combat.wav.import": {
+    "sha256": "4946d9e9255681070ab4dea32ecd4f9fa9b03347c0fed74849d53d718e8671bf",
+    "normalize_text_eol": true
+  },
+  "audio/music/fortress.wav": {
+    "sha256": "a4d95514029dd928e5637c3b9edd659b8eaf14fa78d8afb2ab7ec4da064e4417",
+    "normalize_text_eol": false
+  },
+  "audio/music/fortress.wav.import": {
+    "sha256": "7be7e62be5a5467416924b6485d1d89cf6b1814351ac30f91cbc7b4e5ea4622f",
+    "normalize_text_eol": true
+  },
+  "audio/music/title.ogg": {
+    "sha256": "d03da43ad9122b0269e747445a687a6865688cba6e48275e724a125a6e090068",
+    "normalize_text_eol": false
+  },
+  "audio/music/title.ogg.import": {
+    "sha256": "9be93213dbeca00960593762f2a6857595dc7b5013ca9df5d70251f12463709a",
+    "normalize_text_eol": true
+  },
+  "art/items/starter-v1/README.md": {
+    "sha256": "36c74f22194f41d81b6f9526a81a98076cc4afc56dc7c845b9d6ef6eddbb35f4",
+    "normalize_text_eol": true
+  },
+  "art/items/starter-v1/antivenom.png": {
+    "sha256": "8fa70ca54d4a56808763f1740f86fc0fa942a4d356070e1c519eaf8526fc9ed6",
+    "normalize_text_eol": false
+  },
+  "art/items/starter-v1/antivenom.png.import": {
+    "sha256": "dd6187303a785bf8b67f40ce4b4f41837fb9bbb19e822faffad3b44289ada8b0",
+    "normalize_text_eol": true
+  },
+  "art/items/starter-v1/clean-dressing.png": {
+    "sha256": "3718b90b6359be6c9d01660e4d4e10985f53c09e05adbb7917169d8d7b69363c",
+    "normalize_text_eol": false
+  },
+  "art/items/starter-v1/clean-dressing.png.import": {
+    "sha256": "208060e524a692692a5fe95a698a58691207b287373a42847a157e1ef8a50d95",
+    "normalize_text_eol": true
+  },
+  "art/items/starter-v1/generation-manifest.json": {
+    "sha256": "61b3548871db3518bdcf2d9bc9bd4a279381e8c82a365e1513c65b2c1505b1c1",
+    "normalize_text_eol": true
+  },
+  "art/items/starter-v1/iron-sword.png": {
+    "sha256": "a0e2dd35d0303859f354ae837eb1f08b93e814f3f80e477c739299288824a0e2",
+    "normalize_text_eol": false
+  },
+  "art/items/starter-v1/iron-sword.png.import": {
+    "sha256": "5d2107ca62243ffdda62809bc14fbf8c3928ebb159fec937042e5385f739b810",
+    "normalize_text_eol": true
+  },
+  "art/items/starter-v1/oil-flask.png": {
+    "sha256": "de4d982558fab48aa7df8ae18a5d1f17bf80b6523d3a5c85621c72b5c6fbeedb",
+    "normalize_text_eol": false
+  },
+  "art/items/starter-v1/oil-flask.png.import": {
+    "sha256": "87185040eaf6146672229e03cf1b7ac067f8827a98a15ae9e4e98e80b70a2751",
+    "normalize_text_eol": true
+  },
+  "art/items/starter-v1/padded-coat.png": {
+    "sha256": "ddca18f19002b022a1613e047ba7d6f8397415bd45d91aadae633701d68589ec",
+    "normalize_text_eol": false
+  },
+  "art/items/starter-v1/padded-coat.png.import": {
+    "sha256": "2a04790ecd460cf1a6e7e7a806cbc12d56ce99aa4b1b54ea1ce3306817af9353",
+    "normalize_text_eol": true
+  },
+  "art/items/starter-v1/party-ration.png": {
+    "sha256": "e4914c94ccb9e88083310ae750a33374843847a605790daec2d8b6aab02c0436",
+    "normalize_text_eol": false
+  },
+  "art/items/starter-v1/party-ration.png.import": {
+    "sha256": "83e127d3c5ba2b560ebc5c2b3e46a3f3c141f5223e0231290b160d186834f8ee",
+    "normalize_text_eol": true
+  },
+  "art/items/starter-v1/plain-knife.png": {
+    "sha256": "5eeb11ecdf2d278ba17f89c5b7b076e194d545128069c35f4c7307d1badeb9fa",
+    "normalize_text_eol": false
+  },
+  "art/items/starter-v1/plain-knife.png.import": {
+    "sha256": "938a7b13cc83414a4f47b8ed5462473d88cc760b70268b36ee2e3446166ce9f0",
+    "normalize_text_eol": true
+  },
+  "art/items/starter-v1/plain-staff.png": {
+    "sha256": "11f2cdde9d46aa4a7558d018c02c51a6ba804e201ba1ca45dddccbdf893c1d7c",
+    "normalize_text_eol": false
+  },
+  "art/items/starter-v1/plain-staff.png.import": {
+    "sha256": "b5244b03ffe1ea65009849d3f68b4345a22c033056765ed8dded724df82c32fa",
+    "normalize_text_eol": true
+  },
+  "art/items/starter-v1/preview.png": {
+    "sha256": "f3432bfe9e86802b2d754d7b2da0a8c856027fa938c247c82fba1f0b853fca34",
+    "normalize_text_eol": false
+  },
+  "art/items/starter-v1/preview.png.import": {
+    "sha256": "53ec611aa53439df7a76173b52a4e02978771e3ea3031dd7f6d88ae18742adda",
+    "normalize_text_eol": true
+  },
+  "art/items/starter-v1/restorative-draught.png": {
+    "sha256": "49db6872720c2e5b60c544081ceb7120dc1fa6b76f00ce3796553424e16c1cf6",
+    "normalize_text_eol": false
+  },
+  "art/items/starter-v1/restorative-draught.png.import": {
+    "sha256": "12b7aadea9043349396c8866cc0cb6270dce94aa5680316756e4f7e829bb543b",
+    "normalize_text_eol": true
+  },
+  "art/items/starter-v1/simple-spear.png": {
+    "sha256": "11c101e0685af50d558d80404de7f37df9764f1742604846ec9c18ed5f1b9e56",
+    "normalize_text_eol": false
+  },
+  "art/items/starter-v1/simple-spear.png.import": {
+    "sha256": "5d85e86ece6cea13e3b1f024243c3e68a6410f90c1c22c15ab2245d145db0232",
+    "normalize_text_eol": true
+  },
+  "art/items/starter-v1/validation.json": {
+    "sha256": "2c53e258ce56a59ba0e8cb228cf41efdb6766e7b41eef7d02b0736393ef47f98",
+    "normalize_text_eol": true
+  },
+  "art/items/starter-v1/woodcutters-axe.png": {
+    "sha256": "9d30d98f5a8bece4faa7882de7a8a3f61d25cc7628ebf9dbce8c7ee5720053a8",
+    "normalize_text_eol": false
+  },
+  "art/items/starter-v1/woodcutters-axe.png.import": {
+    "sha256": "b3b0393481458b986534678ea64fd671790b2f8e29218a6fd1554d22981a24c6",
+    "normalize_text_eol": true
+  },
+  "art/items/starter-v1/wooden-club.png": {
+    "sha256": "54943cb657543d7b8dc3c399db2c4cdbef5a2a658ed07ec37ce6a9854b251e1b",
+    "normalize_text_eol": false
+  },
+  "art/items/starter-v1/wooden-club.png.import": {
+    "sha256": "0990035678ffd2845efb878b02d49ba0fbba1132be780ff6251e462d7e412586",
+    "normalize_text_eol": true
+  },
+  "art/items/starter-v1/wooden-shield.png": {
+    "sha256": "383fcf51ea46696b6b2c3f579cde95842773090f691c20831fc6f59600b09a6b",
+    "normalize_text_eol": false
+  },
+  "art/items/starter-v1/wooden-shield.png.import": {
+    "sha256": "601fe47acafb240810d25a96351a1a64ab73f6e725847ba80aba1f40c4fe98b1",
+    "normalize_text_eol": true
+  },
+  "art/source/early-equipment-v1/.gdignore": {
+    "sha256": "2bc031e2601f17fc9280770b55fd01ca40ee56df8f7ba736b82b59d96e6a2d8c",
+    "normalize_text_eol": false
+  },
+  "art/source/early-equipment-v1/brief.json": {
+    "sha256": "a43add678e346c2728b60c6ea5ad351ad9e2f8fa67f027c25638fd4002f4c99f",
+    "normalize_text_eol": true
+  },
+  "art/source/early-equipment-v1/cinderwood-baton-master.png": {
+    "sha256": "652e622efcba0d158bf5593a8be07e2743f2fddc8769cf9702feb29202948361",
+    "normalize_text_eol": false
+  },
+  "art/source/early-equipment-v1/garrison-scale-coat-master.png": {
+    "sha256": "2f0b290f401a6b92fa903e3d49f52592a40247da185347faa22b2f4563e36c61",
+    "normalize_text_eol": false
+  },
+  "art/source/early-equipment-v1/garrison-spear-master.png": {
+    "sha256": "383c69da14f7eea28e0b95c8e2f4e348d157a5c0b961f9cf77e6f92be1dca6cb",
+    "normalize_text_eol": false
+  },
+  "art/source/early-equipment-v1/gate-guards-shield-master.png": {
+    "sha256": "6bf0cd7cbc601395af18f45c7ddf5c4ae03e3c08ad1e0576eb51e1defd0f3590",
+    "normalize_text_eol": false
+  },
+  "art/source/early-equipment-v1/gatebreaker-mace-master.png": {
+    "sha256": "1f35a277c98a74212aecd45427b7702255653a1ed94d55f2f001c48b21f7f23f",
+    "normalize_text_eol": false
+  },
+  "art/source/early-equipment-v1/generation.json": {
+    "sha256": "3153d66e13a7661dc8c44fef10f5bfeba2d2e2ee8e83bccfc64765a715dd652b",
+    "normalize_text_eol": true
+  },
+  "art/source/early-equipment-v1/hazel-walking-staff-master.png": {
+    "sha256": "c105dbc70e04e3a55b95793a47eb66117a38d1188f4929b0469c6b0755589f50",
+    "normalize_text_eol": false
+  },
+  "art/source/early-equipment-v1/miners-sling-master.png": {
+    "sha256": "d2c30f40d6199c214d4656deb1687af8c376d9f4638597fbe14fcfa1e627a774",
+    "normalize_text_eol": false
+  },
+  "art/source/early-equipment-v1/notched-falchion-master.png": {
+    "sha256": "c6ca73329fbc476dc48e869de59a695a5990fb8ac2629e98c78977c10dde3dad",
+    "normalize_text_eol": false
+  },
+  "art/source/early-equipment-v1/quarry-hammer-master.png": {
+    "sha256": "7754d04b461a1b38adc8dedee3debadc3c73cdab0360b94476f605f71546585d",
+    "normalize_text_eol": false
+  },
+  "art/source/early-equipment-v1/quilted-work-coat-master.png": {
+    "sha256": "b6fe9c182528ad989ec83ccdb8a50d3ef9338e09f5da2ff88e552f080fe7c5dc",
+    "normalize_text_eol": false
+  },
+  "art/source/early-equipment-v1/raiders-leather-vest-master.png": {
+    "sha256": "0ee80249f061ff41b11fd4e5ca905a4db2d8e9c7d31a0ac8c6471b158acf0160",
+    "normalize_text_eol": false
+  },
+  "art/source/early-equipment-v1/raiders-mantle-master.png": {
+    "sha256": "a6cc30eff1af5041584ee12eaa6b647b405d8894c7452244eeb4c13bc6b6f635",
+    "normalize_text_eol": false
+  },
+  "art/source/early-equipment-v1/riveted-guard-coat-master.png": {
+    "sha256": "fe6d17d8f25b8906d4cddb1cbdda937078022aed00f9a8a25c55fb49f6732fa6",
+    "normalize_text_eol": false
+  },
+  "art/source/early-equipment-v1/riveted-mining-coat-master.png": {
+    "sha256": "85add933e8c9489f6bad7d359d8c9bc006ebb1c5ffbeef58619ee0a8f552c5c9",
+    "normalize_text_eol": false
+  },
+  "art/source/early-equipment-v1/sentry-shortbow-master.png": {
+    "sha256": "ee4704ea4028213fa1c83ffef9ae725888764f52d84046ed21f42000bd3d346f",
+    "normalize_text_eol": false
+  },
+  "art/source/early-equipment-v1/survey-cape-master.png": {
+    "sha256": "6e0ba9f9bcbe712d434adf43e6db552be8e96c3d340ed7d36fc416a5766822ad",
+    "normalize_text_eol": false
+  },
+  "art/source/equipment-handworked-v1/.gdignore": {
+    "sha256": "6f0f91dfed03323a70edcf7fde7d37dae37cc8bb49537c9b26fa224eaa977af7",
+    "normalize_text_eol": false
+  },
+  "art/source/equipment-handworked-v1/garrison-spear-master.png": {
+    "sha256": "daeebf76f50e354354587f0dd879bb0649ec1808e4011877b95af24d9ef90877",
+    "normalize_text_eol": false
+  },
+  "art/source/equipment-handworked-v1/generation.json": {
+    "sha256": "0dfa1fd4ec5188f1aac363fec18de178dc027d0bda93ba79c16c00ab53c61c2d",
+    "normalize_text_eol": true
+  },
+  "art/source/equipment-handworked-v1/riveted-mining-coat-master.png": {
+    "sha256": "83d02f22b1e4c481ee28b0da5688f37cca0ebd1b9c61f6d223a142dfdbc6d007",
+    "normalize_text_eol": false
+  }
+}

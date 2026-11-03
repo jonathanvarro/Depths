@@ -1,0 +1,3033 @@
+{
+  "checks": 755,
+  "failures": [],
+  "runtime_assets": 57,
+  "field_assets": 46,
+  "decoded_pcm_mib": 28.598615646362305,
+  "preserved_earlier_files": 126,
+  "deterministic_field_rebuild": true,
+  "results": [
+    {
+      "ok": true,
+      "label": "Complete field asset count"
+    },
+    {
+      "ok": true,
+      "label": "Every requested role has a named asset"
+    },
+    {
+      "ok": true,
+      "label": "All field assets distinct"
+    },
+    {
+      "ok": true,
+      "label": "Source licence/identity fire"
+    },
+    {
+      "ok": true,
+      "label": "Retained primary CC0 page fire"
+    },
+    {
+      "ok": true,
+      "label": "Unchanged licence evidence fire"
+    },
+    {
+      "ok": true,
+      "label": "Source licence/identity wind"
+    },
+    {
+      "ok": true,
+      "label": "Retained primary CC0 page wind"
+    },
+    {
+      "ok": true,
+      "label": "Unchanged licence evidence wind"
+    },
+    {
+      "ok": true,
+      "label": "Source licence/identity crowd"
+    },
+    {
+      "ok": true,
+      "label": "Retained primary CC0 page crowd"
+    },
+    {
+      "ok": true,
+      "label": "Unchanged licence evidence crowd"
+    },
+    {
+      "ok": true,
+      "label": "Source licence/identity queen"
+    },
+    {
+      "ok": true,
+      "label": "Retained primary CC0 page queen"
+    },
+    {
+      "ok": true,
+      "label": "Unchanged licence evidence queen"
+    },
+    {
+      "ok": true,
+      "label": "Source licence/identity heartbeat"
+    },
+    {
+      "ok": true,
+      "label": "Retained primary CC0 page heartbeat"
+    },
+    {
+      "ok": true,
+      "label": "Unchanged licence evidence heartbeat"
+    },
+    {
+      "ok": true,
+      "label": "Source licence/identity kenney-impact"
+    },
+    {
+      "ok": true,
+      "label": "Original archive licence kenney-impact"
+    },
+    {
+      "ok": true,
+      "label": "Source licence/identity kenney-rpg"
+    },
+    {
+      "ok": true,
+      "label": "Original archive licence kenney-rpg"
+    },
+    {
+      "ok": true,
+      "label": "Source licence/identity wind"
+    },
+    {
+      "ok": true,
+      "label": "Retained primary CC0 page wind"
+    },
+    {
+      "ok": true,
+      "label": "Unchanged licence evidence wind"
+    },
+    {
+      "ok": true,
+      "label": "Source licence/identity queen"
+    },
+    {
+      "ok": true,
+      "label": "Retained primary CC0 page queen"
+    },
+    {
+      "ok": true,
+      "label": "Unchanged licence evidence queen"
+    },
+    {
+      "ok": true,
+      "label": "Source licence/identity water"
+    },
+    {
+      "ok": true,
+      "label": "Retained primary CC0 page water"
+    },
+    {
+      "ok": true,
+      "label": "Unchanged licence evidence water"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/CREDITS.md"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/block-metal.wav"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/block-metal.wav.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/block-wood.wav"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/block-wood.wav.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/camp-ambience-loop.wav"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/camp-ambience-loop.wav.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/camp-fire-loop.wav"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/camp-fire-loop.wav.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/camp-voices-loop.wav"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/camp-voices-loop.wav.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/camp-wind-loop.wav"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/camp-wind-loop.wav.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/catalog.json"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/chest-open.wav"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/chest-open.wav.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/coin-flip.wav"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/coin-flip.wav.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/coins-1.wav"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/coins-1.wav.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/coins-2.wav"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/coins-2.wav.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/distant-drums-loop.wav"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/distant-drums-loop.wav.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/drum-hit.wav"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/drum-hit.wav.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/fall.wav"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/fall.wav.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/gate-break.wav"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/gate-break.wav.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/heartbeat.wav"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/heartbeat.wav.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/hit-1.wav"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/hit-1.wav.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/hit-2.wav"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/hit-2.wav.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/hit-3.wav"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/hit-3.wav.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/miss-1.wav"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/miss-1.wav.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/miss-2.wav"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/miss-2.wav.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/outskirts-ambience-loop.wav"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/outskirts-ambience-loop.wav.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/purchase.wav"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/purchase.wav.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/queen-screech.wav"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/queen-screech.wav.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/stumble.wav"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/stumble.wav.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/torch-burn-loop.wav"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/torch-burn-loop.wav.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/torch-burnout.wav"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/torch-burnout.wav.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/torch-light.wav"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/torch-light.wav.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/ui-click.wav"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/ui-click.wav.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/venom.wav"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/venom.wav.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/web-spit.wav"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/dark-v1/web-spit.wav.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/music/camp.wav"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/music/camp.wav.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/music/cave.ogg"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/music/cave.ogg.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/music/combat.wav"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/music/combat.wav.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/music/fortress.wav"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/music/fortress.wav.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/music/title.ogg"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged audio/music/title.ogg.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/items/starter-v1/README.md"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/items/starter-v1/antivenom.png"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/items/starter-v1/antivenom.png.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/items/starter-v1/clean-dressing.png"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/items/starter-v1/clean-dressing.png.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/items/starter-v1/generation-manifest.json"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/items/starter-v1/iron-sword.png"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/items/starter-v1/iron-sword.png.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/items/starter-v1/oil-flask.png"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/items/starter-v1/oil-flask.png.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/items/starter-v1/padded-coat.png"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/items/starter-v1/padded-coat.png.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/items/starter-v1/party-ration.png"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/items/starter-v1/party-ration.png.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/items/starter-v1/plain-knife.png"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/items/starter-v1/plain-knife.png.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/items/starter-v1/plain-staff.png"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/items/starter-v1/plain-staff.png.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/items/starter-v1/preview.png"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/items/starter-v1/preview.png.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/items/starter-v1/restorative-draught.png"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/items/starter-v1/restorative-draught.png.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/items/starter-v1/simple-spear.png"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/items/starter-v1/simple-spear.png.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/items/starter-v1/validation.json"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/items/starter-v1/woodcutters-axe.png"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/items/starter-v1/woodcutters-axe.png.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/items/starter-v1/wooden-club.png"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/items/starter-v1/wooden-club.png.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/items/starter-v1/wooden-shield.png"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/items/starter-v1/wooden-shield.png.import"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/source/early-equipment-v1/.gdignore"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/source/early-equipment-v1/brief.json"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/source/early-equipment-v1/cinderwood-baton-master.png"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/source/early-equipment-v1/garrison-scale-coat-master.png"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/source/early-equipment-v1/garrison-spear-master.png"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/source/early-equipment-v1/gate-guards-shield-master.png"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/source/early-equipment-v1/gatebreaker-mace-master.png"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/source/early-equipment-v1/generation.json"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/source/early-equipment-v1/hazel-walking-staff-master.png"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/source/early-equipment-v1/miners-sling-master.png"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/source/early-equipment-v1/notched-falchion-master.png"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/source/early-equipment-v1/quarry-hammer-master.png"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/source/early-equipment-v1/quilted-work-coat-master.png"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/source/early-equipment-v1/raiders-leather-vest-master.png"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/source/early-equipment-v1/raiders-mantle-master.png"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/source/early-equipment-v1/riveted-guard-coat-master.png"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/source/early-equipment-v1/riveted-mining-coat-master.png"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/source/early-equipment-v1/sentry-shortbow-master.png"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/source/early-equipment-v1/survey-cape-master.png"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/source/equipment-handworked-v1/.gdignore"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/source/equipment-handworked-v1/garrison-spear-master.png"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/source/equipment-handworked-v1/generation.json"
+    },
+    {
+      "ok": true,
+      "label": "Earlier asset unchanged art/source/equipment-handworked-v1/riveted-mining-coat-master.png"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 step-stone-1"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash step-stone-1"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC step-stone-1"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints step-stone-1"
+    },
+    {
+      "ok": true,
+      "label": "Deliberately quiet step step-stone-1"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance step-stone-1"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member impact/footstep_concrete_000"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/cloth1"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits step-stone-1"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting step-stone-1"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression step-stone-1"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 step-stone-2"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash step-stone-2"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC step-stone-2"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints step-stone-2"
+    },
+    {
+      "ok": true,
+      "label": "Deliberately quiet step step-stone-2"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance step-stone-2"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member impact/footstep_concrete_001"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/cloth2"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits step-stone-2"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting step-stone-2"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression step-stone-2"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 step-stone-3"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash step-stone-3"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC step-stone-3"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints step-stone-3"
+    },
+    {
+      "ok": true,
+      "label": "Deliberately quiet step step-stone-3"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance step-stone-3"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member impact/footstep_concrete_002"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/cloth3"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits step-stone-3"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting step-stone-3"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression step-stone-3"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 step-stone-4"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash step-stone-4"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC step-stone-4"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints step-stone-4"
+    },
+    {
+      "ok": true,
+      "label": "Deliberately quiet step step-stone-4"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance step-stone-4"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member impact/footstep_concrete_003"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/cloth4"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits step-stone-4"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting step-stone-4"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression step-stone-4"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 ambience-cave"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash ambience-cave"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC ambience-cave"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints ambience-cave"
+    },
+    {
+      "ok": true,
+      "label": "No large boundary sample jump ambience-cave"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance ambience-cave"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member water/bubble_02"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits ambience-cave"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting ambience-cave"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression ambience-cave"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 ambience-fungal"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash ambience-fungal"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC ambience-fungal"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints ambience-fungal"
+    },
+    {
+      "ok": true,
+      "label": "No large boundary sample jump ambience-fungal"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance ambience-fungal"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member water/bubble_02"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member water/loop_bubbles_02"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits ambience-fungal"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting ambience-fungal"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression ambience-fungal"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 ambience-stone"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash ambience-stone"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC ambience-stone"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints ambience-stone"
+    },
+    {
+      "ok": true,
+      "label": "No large boundary sample jump ambience-stone"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance ambience-stone"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member impact/impactMining_002"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member water/bubble_02"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits ambience-stone"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting ambience-stone"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression ambience-stone"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 ambience-fortress"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash ambience-fortress"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC ambience-fortress"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints ambience-fortress"
+    },
+    {
+      "ok": true,
+      "label": "No large boundary sample jump ambience-fortress"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance ambience-fortress"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/creak2"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/metalLatch"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits ambience-fortress"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting ambience-fortress"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression ambience-fortress"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 wall-bump"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash wall-bump"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC wall-bump"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints wall-bump"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance wall-bump"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member impact/impactSoft_heavy_001"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/cloth2"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits wall-bump"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting wall-bump"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression wall-bump"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 passage-web"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash passage-web"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC passage-web"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints passage-web"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance passage-web"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/cloth3"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/cloth4"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits passage-web"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting passage-web"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression passage-web"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 passage-roots"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash passage-roots"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC passage-roots"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints passage-roots"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance passage-roots"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member impact/impactWood_light_003"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/cloth4"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/creak1"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits passage-roots"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting passage-roots"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression passage-roots"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 passage-stone-door"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash passage-stone-door"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC passage-stone-door"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints passage-stone-door"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance passage-stone-door"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member impact/impactMining_001"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member impact/impactSoft_heavy_003"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/creak2"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits passage-stone-door"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting passage-stone-door"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression passage-stone-door"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 prayer-cast"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash prayer-cast"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC prayer-cast"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints prayer-cast"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance prayer-cast"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits prayer-cast"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting prayer-cast"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression prayer-cast"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 prayer-mend"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash prayer-mend"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC prayer-mend"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints prayer-mend"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance prayer-mend"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits prayer-mend"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting prayer-mend"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression prayer-mend"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 prayer-light"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash prayer-light"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC prayer-light"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints prayer-light"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance prayer-light"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits prayer-light"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting prayer-light"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression prayer-light"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 prayer-watch"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash prayer-watch"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC prayer-watch"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints prayer-watch"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance prayer-watch"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits prayer-watch"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting prayer-watch"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression prayer-watch"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 prayer-miscast"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash prayer-miscast"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC prayer-miscast"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints prayer-miscast"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance prayer-miscast"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits prayer-miscast"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting prayer-miscast"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression prayer-miscast"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 prayer-bind"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash prayer-bind"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC prayer-bind"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints prayer-bind"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance prayer-bind"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/metalClick"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/metalLatch"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits prayer-bind"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting prayer-bind"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression prayer-bind"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 rat-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash rat-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC rat-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints rat-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance rat-hurt"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits rat-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting rat-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression rat-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 rat-death"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash rat-death"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC rat-death"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints rat-death"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance rat-death"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/cloth2"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits rat-death"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting rat-death"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression rat-death"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 spider-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash spider-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC spider-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints spider-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance spider-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member impact/impactWood_light_002"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits spider-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting spider-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression spider-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 spider-death"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash spider-death"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC spider-death"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints spider-death"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance spider-death"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member impact/impactWood_light_002"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/cloth2"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits spider-death"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting spider-death"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression spider-death"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 goblin-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash goblin-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC goblin-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints goblin-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance goblin-hurt"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits goblin-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting goblin-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression goblin-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 goblin-death"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash goblin-death"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC goblin-death"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints goblin-death"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance goblin-death"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/cloth2"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits goblin-death"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting goblin-death"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression goblin-death"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 beetle-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash beetle-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC beetle-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints beetle-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance beetle-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member impact/impactPlate_light_002"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits beetle-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting beetle-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression beetle-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 beetle-death"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash beetle-death"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC beetle-death"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints beetle-death"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance beetle-death"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member impact/impactPlate_light_002"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/cloth2"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits beetle-death"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting beetle-death"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression beetle-death"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 bat-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash bat-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC bat-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints bat-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance bat-hurt"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits bat-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting bat-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression bat-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 bat-death"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash bat-death"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC bat-death"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints bat-death"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance bat-death"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/cloth2"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits bat-death"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting bat-death"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression bat-death"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 deep-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash deep-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC deep-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints deep-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance deep-hurt"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits deep-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting deep-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression deep-hurt"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 deep-death"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash deep-death"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC deep-death"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints deep-death"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance deep-death"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/cloth2"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits deep-death"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting deep-death"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression deep-death"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 map-noticed"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash map-noticed"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC map-noticed"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints map-noticed"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance map-noticed"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/drawKnife2"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits map-noticed"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting map-noticed"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression map-noticed"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 map-heavy-blow"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash map-heavy-blow"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC map-heavy-blow"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints map-heavy-blow"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance map-heavy-blow"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member impact/impactSoft_heavy_002"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/metalLatch"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits map-heavy-blow"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting map-heavy-blow"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression map-heavy-blow"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 trap-dart"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash trap-dart"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC trap-dart"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints trap-dart"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance trap-dart"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/drawKnife1"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/metalClick"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits trap-dart"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting trap-dart"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression trap-dart"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 trap-snare"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash trap-snare"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC trap-snare"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints trap-snare"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance trap-snare"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/clothBelt2"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/metalLatch"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits trap-snare"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting trap-snare"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression trap-snare"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 trap-alarm-bell"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash trap-alarm-bell"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC trap-alarm-bell"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints trap-alarm-bell"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance trap-alarm-bell"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member impact/impactBell_heavy_001"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits trap-alarm-bell"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting trap-alarm-bell"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression trap-alarm-bell"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 trap-tripwire"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash trap-tripwire"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC trap-tripwire"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints trap-tripwire"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance trap-tripwire"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member impact/impactMining_001"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member impact/impactMining_003"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member impact/impactMining_004"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/clothBelt"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits trap-tripwire"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting trap-tripwire"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression trap-tripwire"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 brew-drink"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash brew-drink"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC brew-drink"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints brew-drink"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance brew-drink"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/handleSmallLeather"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member water/bubble_03"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member water/slime_01"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits brew-drink"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting brew-drink"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression brew-drink"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 brew-shatter"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash brew-shatter"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC brew-shatter"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints brew-shatter"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance brew-shatter"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member impact/impactGlass_medium_002"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member water/splash_05"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits brew-shatter"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting brew-shatter"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression brew-shatter"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 level-up"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash level-up"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC level-up"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints level-up"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance level-up"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits level-up"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting level-up"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression level-up"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 stairs-down"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash stairs-down"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC stairs-down"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints stairs-down"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance stairs-down"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member impact/footstep_concrete_002"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member impact/footstep_concrete_004"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/cloth1"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits stairs-down"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting stairs-down"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression stairs-down"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 stairs-up"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash stairs-up"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC stairs-up"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints stairs-up"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance stairs-up"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member impact/footstep_concrete_002"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member impact/footstep_concrete_004"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/cloth1"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits stairs-up"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting stairs-up"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression stairs-up"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 pack-eat"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash pack-eat"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC pack-eat"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints pack-eat"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance pack-eat"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member impact/footstep_grass_002"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/cloth4"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member water/slime_03"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits pack-eat"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting pack-eat"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression pack-eat"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 pack-bandage"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash pack-bandage"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC pack-bandage"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints pack-bandage"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance pack-bandage"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/cloth1"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/cloth3"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/clothBelt"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits pack-bandage"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting pack-bandage"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression pack-bandage"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 pack-oil"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash pack-oil"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC pack-oil"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints pack-oil"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance pack-oil"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/handleSmallLeather2"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/metalClick"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member water/bubble_01"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member water/splash_08"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits pack-oil"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting pack-oil"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression pack-oil"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 pack-tome"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash pack-tome"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC pack-tome"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints pack-tome"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance pack-tome"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/bookFlip2"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/bookOpen"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member rpg/bookPlace1"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits pack-tome"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting pack-tome"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression pack-tome"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 smith-temper"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash smith-temper"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC smith-temper"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints smith-temper"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance smith-temper"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member impact/impactMetal_heavy_001"
+    },
+    {
+      "ok": true,
+      "label": "Exact source member impact/impactPlate_medium_002"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits smith-temper"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting smith-temper"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression smith-temper"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 wander-claws"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash wander-claws"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC wander-claws"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints wander-claws"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance wander-claws"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits wander-claws"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting wander-claws"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression wander-claws"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 wander-shuffle"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash wander-shuffle"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC wander-shuffle"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints wander-shuffle"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance wander-shuffle"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits wander-shuffle"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting wander-shuffle"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression wander-shuffle"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 wander-stones"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash wander-stones"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC wander-stones"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints wander-stones"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance wander-stones"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits wander-stones"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting wander-stones"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression wander-stones"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 wander-chitter"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash wander-chitter"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC wander-chitter"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints wander-chitter"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance wander-chitter"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits wander-chitter"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting wander-chitter"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression wander-chitter"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 wade-1"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash wade-1"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC wade-1"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints wade-1"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance wade-1"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits wade-1"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting wade-1"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression wade-1"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 wade-2"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash wade-2"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC wade-2"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints wade-2"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance wade-2"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits wade-2"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting wade-2"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression wade-2"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 wade-3"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash wade-3"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC wade-3"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints wade-3"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance wade-3"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits wade-3"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting wade-3"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression wade-3"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 sluice-wheel"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash sluice-wheel"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC sluice-wheel"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints sluice-wheel"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance sluice-wheel"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits sluice-wheel"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting sluice-wheel"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression sluice-wheel"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 water-drain"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash water-drain"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC water-drain"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints water-drain"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance water-drain"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits water-drain"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting water-drain"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression water-drain"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 galleries-loop"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash galleries-loop"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC galleries-loop"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints galleries-loop"
+    },
+    {
+      "ok": true,
+      "label": "No large boundary sample jump galleries-loop"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance galleries-loop"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits galleries-loop"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting galleries-loop"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression galleries-loop"
+    },
+    {
+      "ok": true,
+      "label": "Mono44.1k PCM16 below-the-sluice"
+    },
+    {
+      "ok": true,
+      "label": "Duration/hash below-the-sluice"
+    },
+    {
+      "ok": true,
+      "label": "Headroom/DC below-the-sluice"
+    },
+    {
+      "ok": true,
+      "label": "Joined/faded endpoints below-the-sluice"
+    },
+    {
+      "ok": true,
+      "label": "No large boundary sample jump below-the-sluice"
+    },
+    {
+      "ok": true,
+      "label": "Recorded member or original synthesis provenance below-the-sluice"
+    },
+    {
+      "ok": true,
+      "label": "No import gain/timing edits below-the-sluice"
+    },
+    {
+      "ok": true,
+      "label": "Explicit loop setting below-the-sluice"
+    },
+    {
+      "ok": true,
+      "label": "Intended compression below-the-sluice"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries step-stone-1.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries step-stone-2.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries step-stone-3.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries step-stone-4.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries ambience-cave.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries ambience-fungal.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries ambience-stone.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries ambience-fortress.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries wall-bump.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries passage-web.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries passage-roots.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries passage-stone-door.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries prayer-cast.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries prayer-mend.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries prayer-light.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries prayer-watch.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries prayer-miscast.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries prayer-bind.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries rat-hurt.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries rat-death.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries spider-hurt.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries spider-death.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries goblin-hurt.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries goblin-death.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries beetle-hurt.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries beetle-death.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries bat-hurt.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries bat-death.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries deep-hurt.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries deep-death.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries map-noticed.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries map-heavy-blow.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries trap-dart.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries trap-snare.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries trap-alarm-bell.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries trap-tripwire.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries brew-drink.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries brew-shatter.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries level-up.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries stairs-down.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries stairs-up.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries pack-eat.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries pack-bandage.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries pack-oil.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries pack-tome.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries smith-temper.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries wander-claws.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries wander-shuffle.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries wander-stones.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries wander-chitter.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries wade-1.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries wade-2.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries wade-3.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries sluice-wheel.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries water-drain.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries galleries-loop.wav"
+    },
+    {
+      "ok": true,
+      "label": "Deterministic field rebuild / retained Galleries below-the-sluice.wav"
+    }
+  ],
+  "owner_listening_pending": true,
+  "live_hooks_changed": false
+}

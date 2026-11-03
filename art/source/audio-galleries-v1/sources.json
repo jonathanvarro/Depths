@@ -1,0 +1,47 @@
+{
+  "checked": "2026-11-01",
+  "sources": [
+    {
+      "id": "wind",
+      "title": "Mild Wind Background Noise",
+      "author": "Bashar3A",
+      "page": "https://opengameart.org/content/mild-wind-background-noise",
+      "match": "wind background noise 2.wav",
+      "file": "wind.wav",
+      "download": "https://opengameart.org/sites/default/files/wind%20background%20noise%202.wav",
+      "source": "art/source/audio-dark-v1/files/wind.wav",
+      "sha256": "9f1fd5c8b37949e6889a7f6acbd822f66e0ab4e918d72bda58d8d8c2c7e85a80",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "evidence": "art/source/audio-dark-v1/evidence/wind.html",
+      "evidence_sha256": "3c704e634c740244be4b28fb002f0aa2885d83b8931925ed9ad28ece7a14ad42"
+    },
+    {
+      "id": "queen",
+      "title": "Insect or alien scream",
+      "author": "qubodup",
+      "page": "https://opengameart.org/content/insect-or-alien-scream",
+      "match": ".flac",
+      "file": "insect-scream.flac",
+      "download": "https://opengameart.org/sites/default/files/insectoralien.flac",
+      "source": "art/source/audio-dark-v1/files/insect-scream.flac",
+      "sha256": "274d956faa2be61bbdb8a8bedc8f992860dde7c405773a70880f478f83e400ff",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "evidence": "art/source/audio-dark-v1/evidence/queen.html",
+      "evidence_sha256": "faed69194d4a44ede7fde7c825a738e4e92d9360400fe0c1cc75c771c76fd32c"
+    },
+    {
+      "id": "water",
+      "author": "rubberduck",
+      "title": "40 CC0 water / splash / slime SFX",
+      "page": "https://opengameart.org/content/40-cc0-water-splash-slime-sfx",
+      "download": "https://opengameart.org/sites/default/files/water-splash-slime-sfx.zip",
+      "source": "art/source/audio-galleries-v1/water-splash-slime-sfx.zip",
+      "sha256": "7cd39abb49d4362a37ba18dc0e454c7dc1d08029d4e5b683149046bc237b2eba",
+      "license": "CC0-1.0",
+      "evidence": "art/source/audio-galleries-v1/evidence/water-pack.html",
+      "evidence_sha256": "d01e32213573fd0e140a1b32ff6bcf6b892dd39e8531a6620747fa6e4d8187bd"
+    }
+  ]
+}

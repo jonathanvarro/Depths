@@ -12,6 +12,17 @@ One looping track per place, read by `scripts/music.gd` (any of .ogg, .mp3 or .w
 
 A missing file means silence for that place. The owner chose free-licensed tracks (2026-10-18).
 
+The separately supplied deeper-cave candidate is **Below the Sluice**:
+`audio/galleries-v1/below-the-sluice.wav`, an original72s offline composition
+(seed16754; additive/modal synthesis) prepared for #167/#54. Its source recipe is
+`tools/audio/build_galleries_audio.py`; its exact catalogue and provenance are
+`audio/galleries-v1/catalog.json` and `CREDITS.md`. It uses no sampled music or
+third-party composer performance, so no external track attribution is required.
+This records an original project contribution, not a new CC0 dedication or a
+change to the five approved tracks' licences. Owner listening and live hookup
+are still pending on this asset branch. Combined listening hub:
+`art/concepts/field-audio-v1/inspector.html`.
+
 ## Licences
 
 Record every track here before committing it: title, artist, source URL, licence (CC0 or CC-BY) and the attribution text to credit.
