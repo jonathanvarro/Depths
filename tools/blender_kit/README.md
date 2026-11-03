@@ -89,3 +89,13 @@ ground reference; FBXs, bind rigs, clothing and source Actions remain untouched.
 manifest; Drive operations remain explicit connector actions. After the owner
 returns per-body files, materialize them into the ignored intake cache and run
 `audit_body_downloads.py -- --probe`. Bind compatibility is not motion approval.
+
+The owner has now returned27 files in pack/individual subfolders. Current
+workflow and catalogue: [received-animation-library.md](../../docs/received-animation-library.md).
+Use `audit_received_library.py` for the whole batch; the old flat-cache missing
+report is not current cloud absence. `convert_received_candidates.py` preserves
+uploaded world joint poses on the unchanged original rigs, without limb/root/
+floor corrections. `review_received_candidates.py -- --mode check|export|capture`
+reuses established checks in a separate version. `prepare_received_smoke.py`,
+`package_received_review.py` and `check_received_gallery.cjs` complete the native
+checks and gallery. Female talking is retained; a quiet chair hold is pending.

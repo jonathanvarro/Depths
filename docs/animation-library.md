@@ -16,6 +16,10 @@ out of git (see `docs/blender-expedition-kit-tasks.md`).
 - **Base bodies:** `G:/My Drive/3D Objects/` — `Base Female Mesh.blend`,
   `Base Male Mesh.blend`, and the rigged `Base Female - Dying.fbx` /
   `Base Male - Dying.fbx`.
+- **New per-body uploads:**27 files in
+  `build/local-blender-kit-v1/animation-requests-v1/received-v1/`, with separate
+  female/male and individual/locomotion namespaces. Current catalogue and
+  body/native checks: [received-animation-library.md](received-animation-library.md).
 
 ## What every clip shares (measured 2026-11-01)
 
@@ -169,9 +173,47 @@ set. For two bodies, re-downloading is simpler.
 
 The two ready upload files retain exact source bytes, bind rigs and body fits.
 Display normalization is a separate shared parent scale/ground reference;
-it does not change the FBXs. Both Drive return folders are verified empty.
-#215's prepared auditor passes four known-compatible/incompatible regression
-probes and reports eight missing downloads, not final animation approval.
+it does not change the FBXs. The owner has now returned27 files, including two
+ten-clip locomotion packs. Eight selected motions have exact world-pose
+conversion and sampled Blender/native review; a quiet female matching chair
+hold and final sequence/contact acceptance remain open. The older flat-cache
+"eight missing" report is historical preflight, not the current library state.
+
+## New per-body batch (2026-11-02)
+
+All27 uploads are 60fps, with 65 female /49 male joints and body-matched bone
+lengths/hierarchy. Mixamo rebased their rest orientations, so direct Action
+assignment is still unsuitable. Eight selected candidates use source-world
+matrix conversion into the unchanged target rest rig; source travel/timing are
+preserved. This is not owner approval, loop approval or live integration.
+
+| Pack role | Female file · frames | Male file · frames | Current status |
+|---|---|---|---|
+| Idle | idle.fbx ·1–501 | idle.fbx ·1–501 | Both converted; sampled body/GLB/native review passes |
+| Walk | walking.fbx ·1–58 | walking.fbx ·1–63 | Both converted/reviewed; traveling, not in-place |
+| Run | running.fbx ·1–43 | standard run.fbx ·1–44 | Source/bind audited; body playback pending |
+| Jump | jump.fbx ·1–101 | jump.fbx ·1–131 | Source/bind audited; body playback pending |
+| Strafe left | left strafe.fbx ·1–41 | left strafe.fbx ·1–41 | Source/bind audited; body playback pending |
+| Strafe right | right strafe.fbx ·1–41 | right strafe.fbx ·1–41 | Source/bind audited; body playback pending |
+| Walk strafe left | left strafe walk.fbx ·1–56 | left strafe walking.fbx ·1–63 | Source/bind audited; body playback pending |
+| Walk strafe right | right strafe walk.fbx ·1–56 | right strafe walking.fbx ·1–63 | Source/bind audited; body playback pending |
+| Turn left | left turn.fbx ·1–71 | left turn 90.fbx ·1–57 | Source/bind audited; body playback pending |
+| Turn right | right turn.fbx ·1–71 | right turn 90.fbx ·1–57 | Source/bind audited; body playback pending |
+
+| Body | Individual file | Frames / seconds | Current status |
+|---|---|---|---|
+| Female | Standing Idle.fbx |1–361 /6.00s| Source/bind audited; body playback pending |
+| Female | Stand To Sit.fbx |1–135 /2.23s| Converted; sampled body/GLB/native review passes |
+| Female | Sitting Talking.fbx |1–2699 /44.97s| Converted/reviewed conversation pose; crosses a leg, not the missing quiet chair hold |
+| Male | Neutral Idle.fbx |1–526 /8.75s| Source/bind audited; body playback pending |
+| Male | Stand To Sit.fbx |1–135 /2.23s| Converted; sampled body/GLB/native review passes |
+| Male | Sit To Stand.fbx |1–136 /2.25s| Source/bind audited; body playback pending |
+| Male | Sitting Idle.fbx |1–258 /4.28s| Converted/reviewed chair idle; different asset from the older 616-frame ground pose |
+
+Seconds are(last−first)/60; filenames and hashes are preserved in the local
+manifest. All loops and final sit/hold continuity remain unapproved. Male
+sit/hold needs explicit clip-placement alignment; female needs the matching
+quiet hold. Earlier fitting masters/reviewer stay unchanged.
 
 ## Garment fitting references (2026-11-02, ChatGPT)
 

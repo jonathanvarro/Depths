@@ -2,8 +2,11 @@
 
 2026-11-02. Owner authorized normalization as appropriate, then #215, and asked
 for separate Google Drive model/request folders so they can obtain animations.
-The private request pack is ready. **Final #215/#214 acceptance waits for the
-eight returned FBXs. No Mixamo animations were acquired automatically.**
+The private request pack is ready. The owner has now returned27 clips,
+including both locomotion packs; current results are in
+[received-animation-library.md](received-animation-library.md).
+**Final #215/#214 acceptance still needs a quiet female chair hold and sequence/
+contact acceptance. No Mixamo animations were acquired automatically.**
 
 ## Normalization decision
 
@@ -54,7 +57,8 @@ this is an animation/rig pass, not texture authoring. Do not substitute the
 unweighted `Base Male Mesh.fbx`.
 
 Completed connector readback verified the model names, sizes, parent folders,
-instructions and empty return folders. All observed files/folders remain
+instructions and initially empty return folders. They are now populated with
+the owner's uploads. All observed files/folders remain
 unshared; no permissions were added. URLs/IDs and verified metadata are retained
 locally in `build/local-blender-kit-v1/animation-requests-v1/drive-handoff.json`.
 Source identity hashes and the two request sheets are beside it. Link the
@@ -93,10 +97,14 @@ Keep ground idle separately in the catalog; do not relabel it as chair idle.
 
 ## #215 intake is prepared, not approved
 
-Both new Drive return folders are empty on connector readback. The local audit
-therefore reports `awaiting_downloads`, zero incoming clips and eight missing
-requests. Four regression probes pass: each body's own Dying source is bind
-compatible, and the legacy direct-assignment Idle correctly fails on both fits.
+The initial flat-cache audit reported eight requests awaited, with four passing
+regression probes. The current owner batch uses27 original filenames in
+individual/pack subfolders; **do not interpret the older flat-cache report as
+current cloud absence or ask the owner to rename/re-download all these clips**.
+Use the received manifest and new library audit. Both pack idle/walk pairs,
+transitions and two seated candidates have been converted and body/native
+checked. The remaining specific request is the quiet female matching chair
+hold; her uploaded talking clip is retained as a separate conversation pose.
 
 `audit_body_downloads.py` inspects incoming files without saving/importing them
 into authoritative masters. It checks exact shared labels/parents, parent-local

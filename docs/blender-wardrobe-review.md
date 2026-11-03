@@ -3,8 +3,11 @@
 2026-11-02. The isolated Godot/Blender review is ready locally. **#214 remains
 open for #215's final per-body animation verification.** The owner's new
 [private Drive request folders](mixamo-animation-requests.md) now contain both
-source models and instructions; return folders are verified empty. No new
-animation download, custom performance or final motion approval is implied.
+source models/instructions, and the owner has now returned27 clips. The
+[received-animation gallery](received-animation-library.md) reviews eight new
+candidates separately. This interactive reviewer retains its earlier fitting
+clips until the quiet female chair hold and final sequence/contact checks are
+complete. No custom performance or final motion approval is implied.
 Owner art acceptance remains separate.
 
 ## Open and use

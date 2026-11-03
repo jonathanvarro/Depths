@@ -77,8 +77,13 @@ Templates > Download and Install; already installed on the owner's PC).
   Each body folder contains the exact source FBX, instructions and Downloads.
   This explicitly authorized two private model copies; all other art remains
   local/out of Git. Request Idle, in-place Walking, Stand To Sit and **Sitting**
-  (chair hold); old Sitting Idle is a ground pose. Four bind-audit regression
-  probes pass; eight returned clips are still awaited. Shared presentation-only
+  (chair hold). Current owner batch:27 uploads, all60fps with matching body
+  lengths/hierarchy. `docs/received-animation-library.md` catalogs both packs
+  and individuals; eight source-world converted motions pass body/export/native
+  samples. The new male Sitting Idle is a chair asset; older namesakes differ.
+  Female talking crosses a leg; a quiet matching female chair hold and final
+  placement/contact/loop acceptance remain pending. Earlier review stays intact.
+  Shared presentation-only
   normalization gives about1.70m/1.80m against fixed rest-sole references; never
   apply it to source FBXs/bind rigs or conceal animated contact defects.
 - `DESIGN.md` – living design direction and proposed first playable scope.
