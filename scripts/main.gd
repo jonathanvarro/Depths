@@ -510,7 +510,9 @@ func _ready() -> void:
 	_party.opened_door.connect(func(_cell): _update_hints("web_torn"))
 	_party.opened_door.connect(func(_cell): _say("web"))
 	_party.moved.connect(func(_cell, _facing): _update_hints("moved"))
-	_party.bumped.connect(func(_cell): _play_effect(environment_theme.bump_sound))
+	_party.bumped.connect(func(cell):
+		var blocked: bool = _map != null and _map.door_at(cell) == DungeonMap.Door.BLOCKED and environment_theme.blocked_sound != null
+		_play_effect(environment_theme.blocked_sound if blocked else environment_theme.bump_sound))
 	_party.panicked.connect(_on_party_panicked)
 	_party_state.changed.connect(_on_party_state_changed)
 	_party_state.brew_revealed.connect(_reveal_floor)  # a revealing brew (#175)

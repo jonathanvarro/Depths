@@ -27,12 +27,19 @@ static func record(camp, state, depth: int) -> void:
 
 
 static func _facts(type: EnemyType) -> Dictionary:
-	return {"id": type.resource_path.get_file().get_basename(), "brief": type.intro, "armour": type.armour, "fears_fire": type.fears_fire, "slow": type.slow,
+	var flare := "dazzle" if type.fears_fire else "squint"
+	if type.tactic == EnemyType.Tactic.DRAINER:
+		flare = "drink"
+	elif type.tactic == EnemyType.Tactic.BLOAT:
+		flare = "none"
+	return {"id": type.resource_path.get_file().get_basename(), "flare": flare, "brief": type.intro, "armour": type.armour, "fears_fire": type.fears_fire, "slow": type.slow,
 		"back": type.row == "back", "reach_back": type.reach_back, "family": type.family,
 		"venom": type.venomous and type.tactic in [EnemyType.Tactic.WEB_AND_VENOM, EnemyType.Tactic.BROOD]}
 
 
 const ART := "res://art/ui/expedition-v1/"
+## Moves worth bracing for, or stepping off the marked tile.
+const BIG_BLOWS := [CombatState.Intent.HEAVY, CombatState.Intent.KILLING_BLOW, CombatState.Intent.CLEAVER, CombatState.Intent.REACH]
 
 
 ## The monster's silhouette for its page (#178): ChatGPT's thumbnails, by
@@ -47,15 +54,20 @@ static func thumbnail(camp, key: String) -> Texture2D:
 	return load(path) if id != "" and ResourceLoader.exists(path) else null
 
 
-## The page's marks (#178), only for what the party has learned (after a
-## kill or a study, like the weaknesses): [mark, frame ("weak", "immune"
-## or ""), words]. Frames sit round a smaller mark.
+## The page's marks (#178), only for what the party has learned: [mark,
+## frame ("weak", "immune" or ""), words]. Frames sit round a smaller mark.
+## A big blow it has been seen winding up shows at once; the rest after a
+## kill or a study, like the weaknesses.
 static func marks(camp, key: String) -> Array:
 	var e: Dictionary = camp.bestiary.get(key, {})
-	if e.is_empty() or (int(e["killed"]) == 0 and not e.get("studied", false)):
+	if e.is_empty():
 		return []
-	var f: Dictionary = e["facts"]
 	var out := []
+	if e["moves"].any(func(m): return int(m) in BIG_BLOWS):
+		out.append([ART + "journal/brace.png", "", "Winds up big blows: brace, or step aside"])
+	if int(e["killed"]) == 0 and not e.get("studied", false):
+		return out
+	var f: Dictionary = e["facts"]
 	if f.get("fears_fire", false):
 		out.append([ART + "journal/fire.png", "weak", "Weak to fire"])
 		out.append([ART + "journal/thrown-torch.png", "", "A thrown torch drives it off"])
@@ -65,6 +77,10 @@ static func marks(camp, key: String) -> Array:
 		out.append([ART + "journal/reach.png", "", "Keeps to the back row: reach it"])
 	if f.get("venom", false):
 		out.append([ART + "journal/poison.png", "", "Venomous bite"])
+	match f.get("flare", ""):
+		"dazzle": out.append([ART + "journal/flare.png", "weak", "A flare blinds it"])
+		"squint": out.append([ART + "journal/flare.png", "", "A flare only makes it squint"])
+		"drink", "none": out.append([ART + "journal/flare.png", "immune", "A flare does it no harm" if f["flare"] == "none" else "It drinks a flare's light"])
 	return out
 
 

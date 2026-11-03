@@ -236,6 +236,10 @@ var _grabbed := {}  # Companion -> Foe holding them (hollow miner, #140)
 ## grip (#118: the freed hero remembers it).
 var rescues: Array = []
 var depth_scale := 1.0  # see prepare()
+var floor_depth := 1  # the floor this fight is on (prepare)
+## Killers evolve (#177) from this floor down; 1: everywhere (the live rule).
+## The playtest bot can raise it to test balance.
+var taste_from := 1
 var _snared := {}  # Companion -> true: acts last next round (goblin trapper)
 var _snared_this_round := {}  # who's acting last now, for the card's mark
 ## Things that happened between actions (venom ticking...). The combat
@@ -266,6 +270,7 @@ func _init(party_state, enemy_types: Array[EnemyType]) -> void:
 ## elites). The game and the playtest bot both call this, so they match.
 func prepare(depth: int, kind := "") -> void:
 	depth_scale = DEPTH_SCALE.get(depth, 1.0)
+	floor_depth = depth
 	region = GearModel.region_of(depth)
 	for foe in foes:
 		_scale(foe)
@@ -883,7 +888,7 @@ func enemy_act(foe: Foe) -> Dictionary:
 		seen_moves[foe].append(acted)
 	var standing: Array = party.members.filter(func(h): return h.is_alive())
 	var outcome := _carry_out(foe)
-	if foe.is_alive() and foe.elite == "" and standing.any(func(h): return not h.is_alive()):
+	if foe.is_alive() and foe.elite == "" and floor_depth >= taste_from and standing.any(func(h): return not h.is_alive()):
 		var was_name := foe.name.to_lower()
 		_taste_blood(foe)
 		outcome["evolved"] = true

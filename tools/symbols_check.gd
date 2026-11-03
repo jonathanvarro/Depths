@@ -95,6 +95,16 @@ func _initialize() -> void:
 	Bestiary.record(camp, state, 1)
 	var learned: Array = Bestiary.marks(camp, key)
 	check("killed: what's learned shows as marks", not learned.is_empty() and learned.any(func(m): return m[0].ends_with("reach.png")), learned.map(func(m): return m[2]))
+	check("...and how a flare takes it", learned.any(func(m): return m[0].ends_with("flare.png")))
+	camp.bestiary[key]["moves"].append(CombatState.Intent.HEAVY)
+	check("a big blow seen: the brace mark", Bestiary.marks(camp, key).any(func(m): return m[0].ends_with("brace.png")))
+	var lamp_camp = load("res://scripts/camp_state.gd").new()
+	var lamp_fight = CombatState.new(party, [load("res://data/enemies/lamp_eater.tres")] as Array[EnemyType])
+	lamp_fight.prepare(1)
+	lamp_fight.foes[0].health = 0
+	Bestiary.record(lamp_camp, lamp_fight, 2)
+	var lamp_marks: Array = Bestiary.marks(lamp_camp, lamp_fight.foes[0].type.display_name)
+	check("the lamp-eater's page: a flare feeds it", lamp_marks.any(func(m): return m[0].ends_with("flare.png") and m[1] == "immune" and m[2].contains("drinks")), lamp_marks.map(func(m): return m[2]))
 	camp.bestiary[key]["facts"].erase("id")
 	check("an older save's entry still finds its silhouette by name", Bestiary.thumbnail(camp, key) != null)
 

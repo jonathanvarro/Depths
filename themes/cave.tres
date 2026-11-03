@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" path="res://audio/field-v1/step-stone-4.wav" id="step4"]
 [ext_resource type="AudioStream" path="res://audio/field-v1/wall-bump.wav" id="10"]
 [ext_resource type="AudioStream" path="res://audio/field-v1/passage-web.wav" id="11"]
+[ext_resource type="AudioStream" path="res://audio/field-v1/passage-roots.wav" id="roots"]
 [ext_resource type="PackedScene" path="res://art/features/cave-v1/closed.tscn" id="12"]
 [ext_resource type="PackedScene" path="res://art/features/cave-v1/opened.tscn" id="13"]
 [ext_resource type="PackedScene" path="res://art/features/cave-v1/blocked.tscn" id="14"]
@@ -47,3 +48,4 @@ ambience = ExtResource("6")
 footstep_sounds = Array[AudioStream]([ExtResource("7"), ExtResource("8"), ExtResource("9"), ExtResource("step4")])
 bump_sound = ExtResource("10")
 open_sound = ExtResource("11")
+blocked_sound = ExtResource("roots")

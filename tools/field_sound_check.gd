@@ -29,6 +29,7 @@ func _initialize() -> void:
 	var web: EnvironmentTheme = load("res://themes/cave.tres")
 	var door: EnvironmentTheme = load("res://themes/stone.tres")
 	check("webs tear, doors scrape", web.open_sound.resource_path.ends_with("passage-web.wav") and door.open_sound.resource_path.ends_with("passage-stone-door.wav"))
+	check("tangled roots rustle when pushed; barred doors just bump", web.blocked_sound.resource_path.ends_with("passage-roots.wav") and load("res://themes/fungal-caverns.tres").blocked_sound != null and door.blocked_sound == null)
 
 	# Monsters.
 	var missing := []

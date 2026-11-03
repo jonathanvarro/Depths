@@ -122,6 +122,8 @@ func _campaign(hero_path: String, run_seed: int, max_days: int) -> Dictionary:
 		"gate_tries": 0, "gate_day": 0, "queen_tries": 0, "queen_rounds": 0, "queen_day": 0,
 		"route_bought": 0, "refuge_rests": 0, "casts": 0, "tomes_read": 0, "lantern_day": 0, "boons": 0, "banes": 0, "banes_lifted": 0, "trinkets_found": 0, "trinkets_worn": 0, "gear_found": 0, "gear_equipped": 0,
 		"gear_identified": 0, "gear_sold": 0, "identify_spent": 0,
+		# Why parties die (floor 2 balance, 2026-11-03): one entry per wipe in a fight.
+		"wipe_log": [],
 		# Light (owner question, 2026-10-25): steps by light band, trips cut
 		# short for want of light, and light used.
 		"steps_bright": 0, "steps_steady": 0, "steps_dim": 0, "steps_out": 0,
@@ -709,7 +711,7 @@ func _on_enter(at: Vector2i) -> String:
 		map.enter(fight_cell)
 		var types: Array = map.fight_groups.get(fight_cell, [])  # a quest package's own fight
 		if types.is_empty():
-			types = Main.encounter_pool(depth, party.living_members().size()).pick_random()
+			types = _pool(depth).pick_random()
 		var result := _fight(types, "", not map.fight_groups.has(fight_cell))  # room fights stand on the map (#171)
 		if result == CS.Result.DEFEAT:
 			return "wiped"
@@ -733,7 +735,7 @@ func _wanderer_step(at: Vector2i) -> String:
 	if wanderers.step(party.time_elapsed, wander_rng, clear) != "arrive":
 		return "ok"
 	stats["wanderers"] += 1
-	var result := _fight(Main.encounter_pool(depth, party.living_members().size()).pick_random(), "wander", true)
+	var result := _fight(_pool(depth).pick_random(), "wander", true)
 	if result == CS.Result.DEFEAT:
 		return "wiped"
 	if result == CS.Result.RETREAT:
@@ -787,6 +789,16 @@ func _event(at: Vector2i) -> String:
 # --- Fights --------------------------------------------------------------
 
 ## Runs a fight with the bot's policy. `kind` is "", "gate" or "queen".
+## The floor's encounter groups, as in the game. BOT_NO_SPIDER_GOBLIN=1
+## (balance test, 2026-11-03) leaves floor 2's web/venom spider + goblin
+## pairs out, as if they lived on floor 3.
+func _pool(at: int) -> Array:
+	var pool: Array = Main.encounter_pool(at, party.living_members().size())
+	if at == 2 and OS.get_environment("BOT_NO_SPIDER_GOBLIN") != "":
+		pool = pool.filter(func(g: Array): return not (g.has(Main.GOBLIN) and (g.has(Main.WEBSPINNER) or g.has(Main.VENOM_SPIDER))))
+	return pool
+
+
 func _fight(group: Array, kind: String, on_map := false) -> int:
 	stats["fights"] += 1
 	var types: Array[EnemyType] = []
@@ -794,9 +806,20 @@ func _fight(group: Array, kind: String, on_map := false) -> int:
 	var state = CS.new(party, types)
 	state.rng.seed = randi()
 	state.prepare(depth, kind)  # deeper is tougher; some elites (#140), as in the game
+	if OS.get_environment("BOT_TASTE_FROM") != "":  # balance test (2026-11-03)
+		state.taste_from = int(OS.get_environment("BOT_TASTE_FROM"))
 	if kind == "wander" and party.supplies.light_band() == Supplies.Light.OUT:
 		state.set_opening("foes")  # in the dark, they find you first
 	var start_health := _total_health()
+	var start_max := 0
+	for hero: Companion in party.living_members():
+		start_max += hero.effective_max_health()
+	var going_in := {"floor": depth, "kind": kind if kind != "" else ("map" if on_map else "room"),
+		"group": " + ".join(PackedStringArray(group.map(func(t): return t.display_name))),
+		"health": float(start_health) / maxf(1.0, start_max), "size": party.living_members().size(),
+		"level": _mean(party.living_members().map(func(h): return h.level)), "light": party.supplies.light_band(),
+		"strain": _mean(party.living_members().map(func(h): return h.strain))}
+	going_in["elites_start"] = state.foes.filter(func(f): return f.elite != "").size()
 	var injuries_before := _injury_count()
 	var guard := 0
 	if on_map and MAP_FIGHTS:
@@ -816,6 +839,11 @@ func _fight(group: Array, kind: String, on_map := false) -> int:
 	if guard >= 400:
 		stats["stuck"] = "a fight ran 400 turns (%s)" % ", ".join(PackedStringArray(group.map(func(t): return t.display_name)))
 	stats["damage_by_floor"][depth] += maxi(0, start_health - _total_health())
+	if party.living_members().is_empty():
+		going_in["elites"] = state.foes.filter(func(f): return f.elite != "").size()
+		going_in["tasted"] = state.foes.filter(func(f): return f.tasted).size()
+		going_in["rounds"] = state.round
+		stats["wipe_log"].append(going_in)
 	stats["injuries"] += maxi(0, _injury_count() - injuries_before)
 	if kind == "queen":
 		stats["queen_rounds"] = state.round
@@ -1146,6 +1174,29 @@ func _health_fraction() -> float:
 	return float(have) / maxf(1.0, most)
 
 
+## The wipe log, floor by floor: how they went in and what they met.
+func _print_wipes(runs: Array) -> void:
+	var log: Array = []
+	for r in runs:
+		log.append_array(r["wipe_log"])
+	for f in [1, 2, 3, 4]:
+		var here: Array = log.filter(func(w): return w["floor"] == f)
+		if here.is_empty():
+			continue
+		var kinds := {}
+		var groups := {}
+		for w in here:
+			kinds[w["kind"]] = kinds.get(w["kind"], 0) + 1
+			groups[w["group"]] = groups.get(w["group"], 0) + 1
+		var top: Array = groups.keys()
+		top.sort_custom(func(a, b): return groups[a] > groups[b])
+		print("    floor %d: %d fight wipes; kinds %s; going in: health %.0f%%, party %.1f, level %.1f, strain %.0f, dim/out light %d, elite from the start %d, a foe tasted blood %d, rounds %.1f" % [f, here.size(), kinds,
+				100.0 * _mean(here.map(func(w): return w["health"])), _mean(here.map(func(w): return w["size"])), _mean(here.map(func(w): return w["level"])),
+				_mean(here.map(func(w): return w["strain"])), here.filter(func(w): return w["light"] <= Supplies.Light.DIM).size(), here.filter(func(w): return w["elites_start"] > 0).size(),
+				here.filter(func(w): return w["tasted"] > 0).size(), _mean(here.map(func(w): return w["rounds"]))])
+		print("      most: %s" % ", ".join(PackedStringArray(top.slice(0, 6).map(func(g): return "%s ×%d" % [g, groups[g]]))))
+
+
 func _total_health() -> int:
 	var total := 0
 	for hero: Companion in party.members:
@@ -1172,6 +1223,8 @@ func _summarise(all: Dictionary) -> void:
 			print("  days to win: median %s (range %d-%d); expeditions median %s" % [_median(won.map(func(r): return r["days"])),
 					won.map(func(r): return r["days"]).min(), won.map(func(r): return r["days"]).max(), _median(won.map(func(r): return r["expeditions"]))])
 		print("  wipes per campaign: mean %.2f; by floor %s" % [_mean(runs.map(func(r): return r["wipes"])), _sum_dicts(runs, "wipes_by_floor")])
+		if OS.get_environment("BOT_WIPES") != "":
+			_print_wipes(runs)
 		var dmg := _sum_dicts(runs, "damage_by_floor")
 		var vis := _sum_dicts(runs, "visits_by_floor")
 		var per_visit := {}

@@ -58,6 +58,8 @@ extends Resource
 @export var ascent_scene: PackedScene
 
 @export_group("Sound")
+## Pushing at a blocked passage (tangled roots...); empty plays the bump.
+@export var blocked_sound: AudioStream
 ## Loops for as long as the party is in this environment.
 @export var ambience: AudioStream
 ## One is picked at random for each step, with slight pitch variation.

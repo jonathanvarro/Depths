@@ -13,6 +13,15 @@ Format:
 
 ---
 
+## 2026-11-03 – Claude (floor 2 balance study #226; journal flare/brace marks; roots sound; docs tidy)
+
+- **Floor 2 study:** the bot now logs every fight wipe (`BOT_WIPES=1`): floor, group, health, party size, level, strain, light, elites at the start, tasted blood and rounds. Floor 2 wipes come mostly from wanderers and map fights. The deadliest groups are web or venom spider + goblin. Tasting blood shows up in nearly every wipe but doesn't cause them (test A barely helps). Moving the spider + goblin pairs to floor 3 (test B) cut floor-2 wipes by about 37% and raised queen wins to 20/20/15. Proposal on #226, **not applied**: waiting for the owner. Test knobs: `BOT_NO_SPIDER_GOBLIN=1`, `BOT_TASTE_FROM=3`; `CombatState.taste_from` defaults to 1, the live rule.
+- **Leftovers:**
+  - Journal pages gain the flare mark (blinds it / only squints / no harm / drinks the light) after a kill, and the brace mark as soon as a big blow (heavy, killing blow, cleaver, long lunge) has been seen.
+  - Tangled-roots blocked passages now rustle with `passage-roots` (new `EnvironmentTheme.blocked_sound`, set on the cave and fungal themes).
+  - `docs/equipment-model/.gdignore` stops Godot importing the examples CSV as translations (the stray `.import` and `.translation` files are gone).
+- **Checks:** symbols_check and field_sound_check cover the new marks and the roots. Full suite passes.
+
 ## 2026-11-03 – Claude (identification polish: Status tab, bot reads before selling, #223)
 
 - **Done:**
