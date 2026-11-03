@@ -122,6 +122,7 @@ func _initialize() -> void:
 		if candidate.tier not in ["rare", "magic"]: continue
 		main._pack.inspect_item(candidate)
 		var labels: Array = main._pack._detail_text.get_children().map(func(l): return l.text)
+		labels.append(main._pack._detail_title.text)  # the quality heads the card since #191
 		if labels.any(func(t): return t.begins_with(candidate.tier.capitalize()+" · ")) and labels.any(func(t): return t.contains(candidate.effect.effects_text())):
 			shown.append(candidate.tier)
 	check("the Pack names the quality and what the modifiers do", "rare" in shown and "magic" in shown, str(shown))

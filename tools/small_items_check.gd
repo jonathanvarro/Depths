@@ -71,7 +71,7 @@ func _initialize() -> void:
 		var early := GearGen.drop(rng, 1, "chest")
 		if early and early.curse:
 			shallow_curses += 1
-	check("deeper, some magic gear hides a curse", cursed != null and cursed.tier == "magic")
+	check("deeper, some magic or rare gear hides a curse", cursed != null and cursed.tier in ["magic", "rare"])  # any piece with modifiers (#192)
 	check("never on floor 1", shallow_curses == 0)
 	party = _party()
 	mara = party.members[0]

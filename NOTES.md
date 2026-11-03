@@ -13,6 +13,12 @@ Format:
 
 ---
 
+## 2026-11-03 – Claude (cleanup: two outdated checks, missing .uid files)
+
+- **Done:** `gear_check` now reads the Pack card's title, where #191 moved the quality name. `small_items_check` accepts a cursed rare piece as well as a magic one, since #192 curses any piece with modifiers. Both failed on clean HEAD too: test-only fixes, no game change. Committed the `.uid` files for spells, classes, magic_check and refuge_check.
+- **Suite:** all checks pass.
+- **Watch out:** the working tree still holds ChatGPT's uncommitted #167 Galleries audio hookup and #196 equipment icons, which overlap the files on branch `codex/audio-backlog-217`. Not touched.
+
 ## 2026-11-03 – Claude (female hands on her knees, assembly-v6, #218)
 - Did: Owner screenshot showed her hands still inside her thighs (side view). They were buried from late sit-down through the whole hold and early stand-up. hand_lift.py gained a fixed direction; prepare_wardrobe_v6.py raises both hands straight up (left 0.25, right 0.22) with the same lift on both sides of each join. assembly-v6 passes all checks; docs/female-chair-hold-review.md has the details.
 - Next: Owner reviews assembly-v6 (START_REVIEW.cmd). Male hand contacts and a real chair are still unchecked.
