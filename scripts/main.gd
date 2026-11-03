@@ -164,6 +164,7 @@ const FORTRESS_DEPTH := 4
 const Fortress := preload("res://scripts/fortress.gd")
 const FORTRESS_THEME := preload("res://themes/fortress.tres")
 const FUNGAL_THEME := preload("res://themes/fungal-caverns.tres")
+const KayKitPilot := preload("res://scripts/kaykit_pilot.gd")
 const GATE_FIGHT: Array = [GUARD, GUARD, ARCHER]
 const QUEEN_FIGHT: Array = [QUEEN, GUARD, GUARD]
 ## Enemy groups an encounter can hold, by floor depth (#14; #15 will give
@@ -303,6 +304,8 @@ void fragment() {
 }
 ## Play the opening escape (#30) when a new game starts.
 @export var play_opening := true
+## #224 pilot: floor 1 dressing from the CC0 KayKit pack (scripts/kaykit_pilot.gd).
+@export var kaykit_pilot := false
 ## Red edge flashes when bleeding costs health (#71). Settings (#52) can
 ## turn this off for players sensitive to flashing.
 @export var screen_flashes := true
@@ -680,6 +683,8 @@ func _build_level() -> void:
 		var landmarks := Landmarks.place(_level, _map, _depth, _site_seed, CELL_SIZE, WALL_HEIGHT)  # #117
 		var dresser: Script = environment_theme.dressing_script if environment_theme.dressing_script else Dressing
 		dresser.dress(_level, _map, _depth, _site_seed, CELL_SIZE, WALL_HEIGHT, landmarks)  # #128
+		if kaykit_pilot or "--kaykit-pilot" in OS.get_cmdline_user_args():  # #224: off until the owner chooses
+			KayKitPilot.dress(_level, _map, _depth, _site_seed, CELL_SIZE, landmarks)
 
 
 func _make_layout(depth: int) -> PackedStringArray:

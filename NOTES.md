@@ -13,6 +13,12 @@ Format:
 
 ---
 
+## 2026-11-03 – Claude (CC0 3D pilot: KayKit props on floor 1, #224)
+
+- **Done:** owner said yes to the pilot. Downloaded KayKit Dungeon Remastered 1.0 (CC0; licence re-checked on itch.io, in the download and on the Godot Asset Library) and copied ten store models unchanged into `art/third-party/kaykit-dungeon-remastered/`, with hashes and the record in `CREDITS.md`. The recolour tool snaps the shared texture to floor 1's own 32 colours. `scripts/kaykit_pilot.gd` puts small stacks against room walls on floor 1. It is **off by default**: turn it on with Main `kaykit_pilot` or `Depths.exe -- --kaykit-pilot`. Captures are in `art/concepts/kaykit-pilot-v1/`; results are in `docs/free-3d-assets.md`.
+- **Also fixed:** headless `--import` had stopped importing any new file, because the Blender masters under build/ fail without Blender and cancel the whole pass. `project.godot` now has `filesystem/import/blender/enabled=false`; the game never loads `.blend`.
+- **Watch out:** the material is per floor, never static (a static render resource is what crashed quits in #204). The owner decides adopt, adjust or keep generating on #224.
+
 ## 2026-11-03 – Claude (free 3D asset shortlist, CC0 first)
 
 - **Done:** owner direction: start 3D work from free assets rather than generating, and favour CC0. `docs/free-3d-assets.md` has a plain-language licence guide and a shortlist, each licence checked on its own page today. CC0: KayKit (best pilot: one recolourable gradient texture), Kenney (stand-ins), Poly Haven and ambientCG (surfaces). Quaternius has switched to its own QAL licence, which bars redistributing the files, so keep them local; its free animation library is the backup if Mixamo goes away. Pilot issue #224 (floor 1 dressing with KayKit).

@@ -138,7 +138,12 @@ Templates > Download and Install; already installed on the owner's PC).
   from free assets, **favouring CC0** (KayKit, Kenney, Poly Haven,
   ambientCG). Plain-language licence guide; Quaternius is now its own QAL
   licence (not CC0: keep its files out of this public repo). Record source,
-  licence and changes for every asset. Pilot: #224.
+  licence and changes for every asset. Pilot #224: KayKit props on floor 1
+  (`scripts/kaykit_pilot.gd`, off unless Main `kaykit_pilot` or
+  `-- --kaykit-pilot`), CC0 files and record in `art/third-party/`,
+  recolour `tools/art/build_kaykit_pilot.py`, `tools/kaykit_pilot_check.gd`.
+  `project.godot` turns off Blender import: `.blend` masters under build/
+  broke every headless import.
 - `docs/animation-library.md` – shared list of every character animation clip
   (source, frames, per-body status). Clips stay local; update the list when
   adding, testing or dropping one.

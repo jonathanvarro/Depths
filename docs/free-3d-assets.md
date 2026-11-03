@@ -116,6 +116,44 @@ if *that asset's own page* says CC0, and record it.
 recoloured, placed with the existing dresser and compared in the game at
 desktop and phone size against what's there now.
 
+## Pilot result (2026-11-03, #224)
+
+KayKit Dungeon Remastered on floor 1, **off by default**. To see it:
+- start the game with `-- --kaykit-pilot` (for example
+  `Depths.exe -- --kaykit-pilot`); or
+- tick `kaykit_pilot` on the Main node in the editor.
+
+- **What's in:** ten CC0 models (barrels, kegs, boxes, crates, rubble,
+  bottles) in `art/third-party/kaykit-dungeon-remastered/`, each with its
+  record in `CREDITS.md` there. `scripts/kaykit_pilot.gd` stands little
+  stacks of stores against room walls, about one in five such cells, on
+  top of the existing dressing. It never uses stairs, doors or event cells,
+  and nothing blocks the way.
+- **Recolour:** the pack's one shared texture is shrunk to 256 square,
+  muted, and snapped to 32 colours sampled from floor 1's own art
+  (`tools/art/build_kaykit_pilot.py`). Every piece on a floor shares one
+  material.
+- **Cost:** 22 pieces and about 6,700 triangles on the test floor, one
+  256 texture. Comfortable for a phone.
+- **How it looks:** compare `art/concepts/kaykit-pilot-v1/` (the same view
+  at desktop and phone size, with and without).
+  - The colours sit well with the walls; from a distance the pieces blend
+    in.
+  - Up close, the props are smooth and evenly coloured while the walls are
+    chunky pixel texture, so the props read slightly cleaner than their
+    surroundings. Colour isn't the mismatch; surface detail is.
+  - If adopted, options are a grain or dirt layer in the shared material,
+    or keeping 3D props for larger furniture and staying 2D for small
+    clutter.
+- **Effort:** about half a day, including the licence check, the record
+  and the recolour tool. Adding more KayKit pieces now costs minutes each.
+- **Found on the way:** Godot had stopped importing *any* new file, because
+  Blender masters under `build/` (the companion kit's local work) failed to
+  import in headless runs. That cancelled the whole import pass.
+  `project.godot` now sets `filesystem/import/blender/enabled=false`. The
+  game never loads `.blend` files, and the review projects under `build/`
+  are separate Godot projects with their own settings.
+
 ## Record every asset
 
 The same habit as `audio/dark-v1/CREDITS.md`. For each asset kept, note:
