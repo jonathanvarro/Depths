@@ -18,6 +18,11 @@ Format:
 - Next: Playtest mastery pace after removing bonuses; develop family stock and comparison/growth-range prototypes separately. Existing fixed growth is unchanged; damage-based credit remains an option to test. Compensated drawbacks still need a design.
 - Watch out: mastery_check and gear_model_check pass (fails=0; 4500 general finds +500 two-property rolls, legacy drawback and save roundtrip). Main-based mastery fixture retains existing shutdown resource warnings, exits 0. Checks used a private build-local APPDATA folder; first restricted run could not write its test save, rerun succeeded privately. Prior equipment/audio/Blender changes are preserved and excluded.
 
+## 2026-11-03 – Claude (owner review of v4 hand lift, #218)
+- Did: Owner rechecked the strengthened v4 sit-down: "much improved", still "a little rough" with "some pass through still". Recorded in docs/female-chair-hold-review.md and on #218.
+- Next: Owner decides whether to keep refining (needs moment/angle or a screenshot of the remaining pass-through) or accept v4 for now. A hand-placed animator pass with hand IK targets on the knees is the cleaner long-term option.
+- Watch out: Docs only. Other uncommitted equipment/audio/AGENTS/NOTES work excluded.
+
 ## 2026-11-03 – Claude (stronger hand lift in assembly-v4, #218)
 - Did: Owner's review showed the first v4 lift (0.11, "thigh axis toward hand") changed almost nothing: at ~frame 69 her whole left hand is inside her left thigh. hand_lift.py now pushes toward the outer top of each thigh (her side + up from the hips, perpendicular to the thigh bone). v4 rebuilt with left 0.25 and right-fingertip 0.08 lifts, frames 42-110. Speeds match the source; frames outside the window and chair-sequence joins identical to v3. 780 Blender, 3273 native, 1404 headless, 514 artifact checks pass. v3/v4 Godot front capture: assembly-v4/review/godot-sitdown-middle-v3-vs-v4.png.
 - Next: Owner rechecks v4 sit-down (front). Still open in #218: stand-up/hold and male hand contacts, real chair contact, loops, style approval.

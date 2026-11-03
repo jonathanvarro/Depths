@@ -162,6 +162,12 @@ checks pass, with no script errors and 215 captures. assembly-v3 is
 unchanged. Build: `prepare_wardrobe_v4.py` then `package_wardrobe_v4.py`
 (after the Godot import and native/headless `check.gd` runs).
 
+**Owner review of v4 (2026-11-03):** "much improved", but still "a little
+rough" with "some pass through still". Not yet located; the next round
+needs the moment and angle (a screenshot is enough). A cleaner long-term fix
+is an animator pass in Blender with hand IK targets resting on the knees,
+rather than a computed offset.
+
 Not checked: the stand-up and the hold for similar hand-in-thigh moments
 (the owner saw it only in the sit-down), and the male body.
 
