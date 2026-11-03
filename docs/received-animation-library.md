@@ -1,5 +1,10 @@
 # Uploaded per-body animation library · #215
 
+Follow-up: the owner has since added female Sit To Stand and re-uploaded Stand
+To Sit. [The transition review](female-chair-transition-review.md) records both
+separately; a quiet female chair hold remains missing. The 27-file catalogue
+below describes the preserved first batch.
+
 2026-11-02. The owner populated the private request folders with 27 clips:
 13 female and 14 male. Both include a ten-animation locomotion pack; the other
 seven are individual idle/seated clips. All originals are preserved, with Drive

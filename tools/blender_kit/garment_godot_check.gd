@@ -27,7 +27,7 @@ func run()->void:
 	var light:=DirectionalLight3D.new();root.add_child(light);light.rotation_degrees=Vector3(-40,-25,0);light.light_energy=1.5
 	var world:=WorldEnvironment.new();world.environment=Environment.new();world.environment.background_mode=Environment.BG_COLOR;world.environment.background_color=Color(.12,.15,.15);world.environment.ambient_light_source=Environment.AMBIENT_SOURCE_COLOR;world.environment.ambient_light_color=Color(.8,.85,.85);world.environment.ambient_light_energy=.7;root.add_child(world)
 	var summary:Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://summary.json"));var totals:={}
-	for fit in ["female","male"]:
+	for fit in summary:
 		var model:Node3D=load("res://"+fit+"_kit.glb").instantiate();root.add_child(model);await process_frame
 		var skeleton:Skeleton3D=model.find_children("*","Skeleton3D",true,false)[0];var player:AnimationPlayer=model.find_children("*","AnimationPlayer",true,false)[0]
 		var meshes:=model.find_children("*","MeshInstance3D",true,false);check(meshes.size()==11,fit+" complete masked body and ten garment meshes")
@@ -51,7 +51,7 @@ func run()->void:
 		var clips:Array[String]=[]
 		for name in player.get_animation_list():
 			if name!="RESET":clips.append(name)
-		check(clips.size()==5,fit+" exactly five intended motions")
+		check(clips.size()==int(summary[fit].get("motions",5)),fit+" intended motion count")
 		var samples:=0
 		for clip in clips:
 			var length:float=player.get_animation(clip).length
@@ -64,7 +64,7 @@ func run()->void:
 					if DisplayServer.get_name()!="headless":
 						var baked:=instance.bake_mesh_from_current_skeleton_pose();check(baked!=null and baked.get_aabb().size.distance_to(bounds.size)<.025,fit+" native skin bake matches CPU "+clip+instance.name)
 					samples+=1
-				if DisplayServer.get_name()!="headless" and clip.contains("idle") and is_zero_approx(time):
+				if DisplayServer.get_name()!="headless" and clip.contains(str(summary[fit].get("capture_clip_contains","idle"))) and is_zero_approx(time):
 					check(root.get_texture().get_image().save_png("res://native-"+fit+".png")==OK,fit+" actual native import render")
 			player.stop()
 		model.free();await process_frame;totals[fit]={"triangles":triangles,"surfaces":surfaces,"deformed_mesh_samples":samples}

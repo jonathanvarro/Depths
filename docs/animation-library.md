@@ -215,6 +215,22 @@ manifest. All loops and final sit/hold continuity remain unapproved. Male
 sit/hold needs explicit clip-placement alignment; female needs the matching
 quiet hold. Earlier fitting masters/reviewer stay unchanged.
 
+## Female chair follow-up (2026-11-02)
+
+The owner added `Sit To Stand.fbx` (1–136, 2.250s) and re-uploaded
+`Stand To Sit.fbx` (1–135, 2.233s), both on her 65-joint body at 60fps.
+[Separate intake review](female-chair-transition-review.md): both transitions
+are converted and sampled body/independent-export/native checked. The earlier
+27-file batch and candidate masters remain unchanged. The new sit-down's three
+audited poses match the earlier version, despite different file bytes.
+
+Sit-down end and stand-up start have similar posture but different root
+placement (about 1.074 source units); explicit placement alignment and full
+sequence/contact checks remain. A quiet matching seated hold is still missing;
+Sitting Talking remains a conversation pose. No loops or final continuity are
+approved, and #214/#215 stay open. This is one additional motion plus a retained
+re-upload version, not two new locomotion packs.
+
 ## Garment fitting references (2026-11-02, ChatGPT)
 
 #211–#213 include temporary retargeted **copies** of four legacy clips in

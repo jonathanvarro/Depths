@@ -83,6 +83,9 @@ Templates > Download and Install; already installed on the owner's PC).
   samples. The new male Sitting Idle is a chair asset; older namesakes differ.
   Female talking crosses a leg; a quiet matching female chair hold and final
   placement/contact/loop acceptance remain pending. Earlier review stays intact.
+  The owner's subsequent female sit-down/stand-up pair is separately checked in
+  `docs/female-chair-transition-review.md`: similar chair endpoints, explicit
+  placement alignment needed, quiet hold still missing. No source/master edits.
   Shared presentation-only
   normalization gives about1.70m/1.80m against fixed rest-sole references; never
   apply it to source FBXs/bind rigs or conceal animated contact defects.
