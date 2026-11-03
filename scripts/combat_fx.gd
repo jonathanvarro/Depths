@@ -9,6 +9,7 @@ const COLOR_HEAL := Color("7fd36a")
 const COLOR_DULL := Color(0.8, 0.78, 0.72)
 const NUMBER_SIZE := 52
 const ICON_SIZE := 44.0
+const SPLASH := preload("res://art/ui/expedition-v1/splash/frames.tres")  # #178
 
 
 ## One streak: a tapered stroke from `from` to `to` that sweeps in, then fades.
@@ -107,6 +108,28 @@ func icon(at: Vector2, texture: Texture2D, size := ICON_SIZE) -> void:
 	tween.tween_property(rect, "scale", Vector2.ONE, 0.18).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	tween.tween_property(rect, "position:y", rect.position.y - 24.0, 0.7)
 	tween.parallel().tween_property(rect, "modulate:a", 0.0, 0.3).set_delay(0.4)
+	tween.tween_callback(rect.queue_free)
+
+
+## A thrown brew shatters at `at` (#178): ChatGPT's six splash frames,
+## tinted to the liquid, then gone.
+func splash(at: Vector2, tint := Color.WHITE, size := 128.0) -> void:
+	var animation: StringName = SPLASH.get_animation_names()[0]
+	var rect := TextureRect.new()
+	rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	rect.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	rect.size = Vector2(size, size)
+	rect.position = at - rect.size / 2.0
+	rect.modulate = tint
+	rect.texture = SPLASH.get_frame_texture(animation, 0)
+	add_child(rect)
+	var tween := rect.create_tween()
+	for i in SPLASH.get_frame_count(animation):
+		var frame := SPLASH.get_frame_texture(animation, i)
+		tween.tween_callback(func(): rect.texture = frame)
+		tween.tween_interval(0.06)
 	tween.tween_callback(rect.queue_free)
 
 

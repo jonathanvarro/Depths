@@ -12,6 +12,12 @@ extends RefCounted
 
 const BrewArt := preload("res://art/items/brews-v1/compose.gd")
 const KINDS := ["restorative", "caustic", "slumber", "frenzy", "revealing"]
+
+
+## The colour of `item`'s liquid this expedition (for its splash, #178).
+static func liquid_colour(supplies, item: SupplyItem) -> Color:
+	var look = supplies.brew_looks.get(item.brew) if item and supplies else null
+	return BrewArt.COLOURS[int(look[1])] if look else Color.WHITE
 const COLOUR_NAMES := ["rust-red", "ochre", "moss-green", "slate-blue", "violet", "milky"]
 const SHAPE_NAMES := {"squat": "squat bottle", "tall": "tall bottle", "flask": "flask", "vial": "vial", "gourd": "gourd", "jar": "cracked jar"}
 const MARK_NAMES := {"eye": "an eye", "tooth": "a tooth", "spiral": "a spiral", "hand": "a hand", "moon": "a moon", "cross": "a cross"}

@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://scripts/conversation_reply.gd" id="reply"]
 [ext_resource type="Script" path="res://scripts/conversation.gd" id="conv"]
 [ext_resource type="Texture2D" path="res://art/portraits/wounded-keeper-v1/map-reading/resting.png" id="portrait"]
+[ext_resource type="Resource" path="res://data/portraits/wounded-keeper-v1/defiant.tres" id="defiant"]
 
 [sub_resource type="Resource" id="r0_0"]
 script = ExtResource("reply")
@@ -22,6 +23,7 @@ next = -1
 
 [sub_resource type="Resource" id="p1"]
 script = ExtResource("page")
+expression = ExtResource("defiant")
 text = "\"What sleeps below must stay asleep. Your king does not know what he is digging for.\" She meets your eyes. \"I would do it again.\""
 replies = Array[ExtResource("reply")]([SubResource("r1_0")])
 

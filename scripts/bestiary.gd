@@ -27,9 +27,45 @@ static func record(camp, state, depth: int) -> void:
 
 
 static func _facts(type: EnemyType) -> Dictionary:
-	return {"brief": type.intro, "armour": type.armour, "fears_fire": type.fears_fire, "slow": type.slow,
+	return {"id": type.resource_path.get_file().get_basename(), "brief": type.intro, "armour": type.armour, "fears_fire": type.fears_fire, "slow": type.slow,
 		"back": type.row == "back", "reach_back": type.reach_back, "family": type.family,
 		"venom": type.venomous and type.tactic in [EnemyType.Tactic.WEB_AND_VENOM, EnemyType.Tactic.BROOD]}
+
+
+const ART := "res://art/ui/expedition-v1/"
+
+
+## The monster's silhouette for its page (#178): ChatGPT's thumbnails, by
+## enemy file. Older saves lack the id: found by name. Null if none.
+static func thumbnail(camp, key: String) -> Texture2D:
+	var id: String = camp.bestiary.get(key, {}).get("facts", {}).get("id", "")
+	if id == "":
+		for file in DirAccess.get_files_at("res://data/enemies/"):
+			if file.ends_with(".tres") and load("res://data/enemies/" + file).display_name == key:
+				id = file.get_basename()
+	var path := ART + "thumbnails/%s.png" % id
+	return load(path) if id != "" and ResourceLoader.exists(path) else null
+
+
+## The page's marks (#178), only for what the party has learned (after a
+## kill or a study, like the weaknesses): [mark, frame ("weak", "immune"
+## or ""), words]. Frames sit round a smaller mark.
+static func marks(camp, key: String) -> Array:
+	var e: Dictionary = camp.bestiary.get(key, {})
+	if e.is_empty() or (int(e["killed"]) == 0 and not e.get("studied", false)):
+		return []
+	var f: Dictionary = e["facts"]
+	var out := []
+	if f.get("fears_fire", false):
+		out.append([ART + "journal/fire.png", "weak", "Weak to fire"])
+		out.append([ART + "journal/thrown-torch.png", "", "A thrown torch drives it off"])
+	else:
+		out.append([ART + "journal/fire.png", "immune", "Not troubled by fire"])
+	if f.get("back", false):
+		out.append([ART + "journal/reach.png", "", "Keeps to the back row: reach it"])
+	if f.get("venom", false):
+		out.append([ART + "journal/poison.png", "", "Venomous bite"])
+	return out
 
 
 ## Names in the order first met is lost to dictionaries; alphabetical reads

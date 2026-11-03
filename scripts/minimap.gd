@@ -28,6 +28,7 @@ const GLYPHS := {
 	"blocked":preload("res://art/ui/backlog96-v1/map/blocked.png"),
 	"danger":preload("res://art/ui/backlog96-v1/map/danger.png"),
 	"object":preload("res://art/ui/backlog96-v1/map/object.png"),
+	"water":preload("res://art/ui/expedition-v1/map/deep-water.png"),  # #167's three waves
 	"landmark":preload("res://art/ui/backlog96-v1/map/landmark.png"),
 	"frontier":preload("res://art/ui/backlog96-v1/map/frontier.png")
 }
@@ -142,16 +143,14 @@ func _draw() -> void:
 		if cells.has_point(cell):
 			var at:=origin+Vector2(cell-cells.position)*tile
 			draw_rect(Rect2(at,Vector2.ONE*tile),Color(.40,.31,.20,.045))
-	# Deep water (floor 5): a wash and a couple of inked ripples (until #167's mark).
+	# Deep water (floors 5-6): a wash, and #167's three waves inked on each
+	# discovered cell (explored/unknown rules unchanged).
 	for cell: Vector2i in map.water:
 		if not _known_floor.has(cell) or not cells.has_point(cell):continue
 		var at:=origin+Vector2(cell-cells.position)*tile
 		draw_rect(Rect2(at,Vector2.ONE*tile),Color(.16,.30,.38,.22))
 		if tile>=6:
-			for row in [.38,.68]:
-				var wave:=PackedVector2Array()
-				for k in 5:wave.append(at+Vector2(tile*(.15+.175*k),tile*(row+(.06 if k%2==0 else -.06))))
-				draw_polyline(wave,Color(.12,.24,.32,.55),maxf(1.0,width*.8),true)
+			draw_texture_rect(GLYPHS.water,Rect2(at+Vector2.ONE*tile*.1,Vector2.ONE*tile*.8),false,Color(INK,.8))
 	for edge in _edges:
 		if not cells.has_point(edge.cell):continue
 		var points:=PackedVector2Array()

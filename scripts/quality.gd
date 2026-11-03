@@ -93,6 +93,50 @@ static func apply_to_button(button: Button, tier: String) -> void:
 		button.add_child(_studs())
 
 
+## Mastery marks (#178, ChatGPT's art/ui/expedition-v1/mastery): one notch
+## at mastery 1-2, two at 3-5, full at 6; the smith's mark instead while a
+## temper is due. Null for an item with no mastery yet.
+static func mastery_mark(item) -> Texture2D:
+	if not item is Equipment or item.base_id == "":
+		return null
+	var GearModel = load("res://scripts/gear_model.gd")
+	if GearModel.temper_due(item) > 0:
+		return load("res://art/ui/expedition-v1/mastery/improve.png")
+	var level: int = GearModel.level_of(item)
+	if level <= 0:
+		return null
+	return load("res://art/ui/expedition-v1/mastery/%s.png" % ("one" if level < 3 else ("two" if level < 6 else "full")))
+
+
+## Puts `item`'s mastery mark in the top-right corner of `tile`, on a small
+## dark backing so it reads over any icon. Leaves the item's border alone.
+static func add_mastery(tile: Control, item, mark_size := 14.0) -> void:
+	var texture := mastery_mark(item)
+	if texture == null:
+		return
+	var backing := Panel.new()
+	var box := StyleBoxFlat.new()
+	box.bg_color = Color(0.03, 0.03, 0.02, 0.78)
+	box.set_corner_radius_all(3)
+	backing.add_theme_stylebox_override("panel", box)
+	backing.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	backing.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	backing.offset_left = -mark_size - 6
+	backing.offset_right = -2
+	backing.offset_top = 2
+	backing.offset_bottom = mark_size + 6
+	backing.set_meta("mastery_mark", true)
+	var mark := TextureRect.new()
+	mark.texture = texture
+	mark.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	mark.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	mark.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	mark.offset_left = 2; mark.offset_top = 2; mark.offset_right = -2; mark.offset_bottom = -2
+	mark.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	backing.add_child(mark)
+	tile.add_child(backing)
+
+
 ## Rare's corner studs: a second cue besides colour.
 static func _studs() -> Control:
 	var studs := Control.new()

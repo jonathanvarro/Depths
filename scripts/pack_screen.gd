@@ -300,6 +300,7 @@ func _refresh_equipment() -> void:
 		box.set_drag_forwarding(Callable(),_can_drop_on_slot.bind(slot),_drop_on_slot.bind(slot))  # an empty slot's button is disabled
 		if item:
 			_add_icon(button,item.icon,Quality.tier_of(item,_selected_hero),Vector2(40,40))
+			Quality.add_mastery(button,item,22.0)
 			_bind_inspection(button,item,slot)
 		else:
 			_add_icon(button,EMPTY_ICONS[slot],"common",Vector2(32,32))
@@ -407,6 +408,7 @@ func _refresh_bag() -> void:
 			button.tooltip_text=button.accessibility_name
 			button.set_meta("item",item)
 			_add_icon(button,item.icon,Quality.tier_of(item),Vector2(36,36))
+			Quality.add_mastery(button,item,22.0)
 			_bind_inspection(button,item)
 			if entry.count!=1:
 				var badge:=_label("×%d" % entry.count if entry.count>0 else "≈",15,FieldKit.AMBER)

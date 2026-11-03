@@ -7,4 +7,8 @@ extends Resource
 ## hero (lit in the lower left), or nobody (narration).
 @export_enum("npc", "npc2", "hero", "narrator") var speaker := "npc"
 @export_multiline var text := ""
+## The first speaker's animated face for this page (#166): a PortraitSet
+## expression rig, which blinks and talks while the page shows. Empty keeps
+## the conversation's own picture (a static pose stays still).
+@export var expression: PortraitSet
 @export var replies: Array[ConversationReply] = []

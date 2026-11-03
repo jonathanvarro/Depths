@@ -190,6 +190,7 @@ func _tile(entry:Dictionary,side:String) -> Button:
 	icon.offset_left=5;icon.offset_right=-5;icon.offset_top=4;icon.offset_bottom=-5
 	if side=="left" and entry.has("price"):icon.offset_bottom=-22
 	button.add_child(icon)
+	Quality.add_mastery(button,entry.get("item"))
 	var count:int=entry.get("count",1)
 	if count!=1 and not (side=="left" and entry.has("price")):
 		var badge:=_label("×%d" % count if count>0 else "≈",15,FieldKit.AMBER)

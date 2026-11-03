@@ -150,6 +150,7 @@ class Foe:
 	var fled := false
 	var shielded := false  # goblin: halves damage until its next turn
 	var has_webbed := false  # spider: opens with a web once
+	var tasted := false  # tasted blood when a hero fell: a Savage of its own making
 	var intent := Intent.ATTACK  # what it does next turn (#60)
 	## Blows glance off: 0-1 damage and it never falls (the opening's
 	## spider, which only fire drives off, #69). Its health isn't shown.
@@ -331,6 +332,7 @@ func hero_throw_brew(hero: Companion, target: Foe, brew: SupplyItem) -> Dictiona
 func _taste_blood(foe: Foe) -> void:
 	var health := foe.health
 	make_elite(foe, "Savage")
+	foe.tasted = true
 	foe.health = mini(health, foe.type.max_health)
 
 

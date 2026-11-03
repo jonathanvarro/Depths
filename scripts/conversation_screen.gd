@@ -15,6 +15,7 @@ signal finished
 
 const Quests := preload("res://scripts/quests.gd")
 const Settings := preload("res://scripts/settings.gd")
+const PortraitView := preload("res://scripts/portrait_view.gd")
 const TEXT := Color("e8d9b0")
 const MUTED := Color(0.85, 0.8, 0.7, 0.75)
 const GOLD := Color("f2c94c")
@@ -167,6 +168,7 @@ func _frame(parent: Control, picture: Texture2D, label: String, size: Vector2) -
 	face.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	face.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	column.add_child(face)
+	frame.set_meta("face", face)
 	var name := Label.new()
 	name.text = label
 	name.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -207,6 +209,7 @@ func _show_page(talk: Conversation, page: ConversationPage):
 			_name.text = ""
 	_name.visible = _name.text != ""
 	_light(who)
+	_show_expression(page)
 	_text.text = _fill(page.text)
 	for child in _replies.get_children():
 		_replies.remove_child(child)
@@ -234,6 +237,33 @@ func _show_page(talk: Conversation, page: ConversationPage):
 		if chosen.flag != "":
 			Quests.set_flag(_camp, chosen.quest, chosen.flag)
 	return chosen
+
+
+## A page's animated expression for the first speaker (#166): the static
+## picture gives way to a PortraitView that blinks, and talks for the line
+## when she's the one speaking. A page without one shows the picture again.
+func _show_expression(page: ConversationPage) -> void:
+	var frame: PanelContainer = _frames.get("npc")
+	if frame == null:
+		return
+	var face: TextureRect = frame.get_meta("face")
+	var view: Control = frame.get_meta("view") if frame.has_meta("view") else null
+	if page.expression == null:
+		face.visible = true
+		if view:
+			view.visible = false
+		return
+	if view == null:
+		view = PortraitView.new()
+		view.custom_minimum_size = face.custom_minimum_size
+		face.add_sibling(view)
+		frame.set_meta("view", view)
+	if view.portrait_set != page.expression:
+		view.show_portrait(page.expression)
+	face.visible = false
+	view.visible = true
+	if page.speaker == "npc":
+		view.talk(clampf(page.text.length() * 0.035, 0.8, 4.0))
 
 
 ## Fills in the main hero's name and pronouns.

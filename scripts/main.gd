@@ -688,6 +688,8 @@ func _build_level() -> void:
 		dresser.dress(_level, _map, _depth, _site_seed, CELL_SIZE, WALL_HEIGHT, landmarks)  # #128
 		if kaykit_pilot and not "--no-kaykit" in OS.get_cmdline_user_args():  # #224, adopted 2026-11-03
 			KayKitPilot.dress(_level, _map, _depth, _site_seed, CELL_SIZE, landmarks)
+		if _depth == Galleries.DEPTH:  # the galleries' waterworks (#166)
+			Galleries.dress_galleries(_level, _map, CELL_SIZE, _site_seed)
 		if _depth >= Galleries.RESERVOIR:  # water edges, then the stairs by the gate (#168)
 			Galleries.dress_reservoir(_level, _map, CELL_SIZE, _site_seed, Quests.has_flag(_camp_state, "reservoir", "diverted"))
 

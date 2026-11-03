@@ -13,6 +13,19 @@ Format:
 
 ---
 
+## 2026-11-03 – Claude (symbols, waterworks and the keeper's face; #166, #167, #178 closed)
+
+- **Done (items 5 and 6 of the owner's list):**
+  - Mastery marks on Pack and trade tiles: one notch, two, full, or the smith's mark while a temper is due.
+  - The Underhound's long lunge and the Shepherd's birthing have their own intent icons. A foe that tastes blood shows that mark instead of the plain Savage one. The Borrowed Pack shows "off balance".
+  - A thrown brew splashes in its liquid's colour.
+  - The map inks the deep-water glyph.
+  - Bestiary pages show the monster's silhouette, plus marks only for facts already learned (fire, thrown torch, back row, venom).
+  - Floor 5 has the waterworks dressing: channels and pipes on walls, dead lamps only on dry floor against walls.
+  - The keeper's talk keeps her still map-reading pose, then shows her animated defiant face, talking, on the second page (new `ConversationPage.expression`).
+- **Checks:** new `tools/symbols_check.gd` with desktop and phone captures. The Pack's mastery mark is 22 px so it reads on the large tiles. Full suite passes.
+- **Not done:** the bestiary's flare/brace marks (no fact behind them yet).
+
 ## 2026-11-03 – Claude (Black Reservoir finish and the story pictures, #168 closed)
 
 - **Done (items 3 and 4 of the owner's list):** floor 6 now uses its own reservoir-v1 surfaces (one wall, so the waterline lines up). About one wall in three beside deep water shows ChatGPT's black-water edge. After the flow gate diverts the water, the wet stairs stand beside the gate; they're for looks only, with no floor 7. Story cards: the lower gate (slice 1 ending), the galleries draining, and the reservoir's end. The stonework vision shows its painting, and the two camp-fire talks (fire keeper, miner's thanks) use the fireside backdrop.

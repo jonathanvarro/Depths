@@ -152,6 +152,27 @@ func _build_monsters() -> void:
 	_draw_detail()
 	_layout_body()
 
+## A journal mark in ink, 28 px; "weak" and "immune" frame a smaller mark.
+func _journal_mark(path: String, frame: String, words: String) -> Control:
+	var box := Control.new()
+	box.custom_minimum_size = Vector2(28, 28)
+	box.tooltip_text = words
+	box.accessibility_name = words
+	var layers := [[path, 7.0 if frame != "" else 2.0]]
+	if frame != "":
+		layers.push_front([Bestiary.ART + "journal/%s.png" % ("weak-to" if frame == "weak" else "immune"), 0.0])
+	for layer in layers:
+		var art := TextureRect.new()
+		art.texture = load(layer[0])
+		art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		art.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		art.offset_left = layer[1]; art.offset_top = layer[1]; art.offset_right = -layer[1]; art.offset_bottom = -layer[1]
+		art.modulate = INK
+		art.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		box.add_child(art)
+	return box
+
 func select_quest(id: String) -> void:
 	if not _buttons.has(id): return
 	_selected_id = id
@@ -172,7 +193,30 @@ func _draw_detail() -> void:
 		var title := text_label(_selected_id, 26, INK)
 		title.add_theme_font_override("font", Kit.HEADING)
 		_detail.add_child(text_label(lines[0], 17, Color("65503b")))
-		_detail.add_child(title)
+		# Its silhouette beside the name, and marks for what's been learned (#178).
+		var head := HBoxContainer.new()
+		head.add_theme_constant_override("separation", 12)
+		var picture := Bestiary.thumbnail(_camp, _selected_id)
+		if picture:
+			var thumb := TextureRect.new()
+			thumb.texture = picture
+			thumb.custom_minimum_size = Vector2(64, 64)
+			thumb.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			thumb.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			thumb.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+			thumb.modulate = INK
+			head.add_child(thumb)
+		title.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		head.add_child(title)
+		_detail.add_child(head)
+		var learned := Bestiary.marks(_camp, _selected_id)
+		if not learned.is_empty():
+			var row := HBoxContainer.new()
+			row.add_theme_constant_override("separation", 8)
+			for mark in learned:
+				row.add_child(_journal_mark(mark[0], mark[1], mark[2]))
+			_detail.add_child(row)
 		for i in range(1, lines.size()):
 			_detail.add_child(text_label(lines[i], 21, INK))
 		return

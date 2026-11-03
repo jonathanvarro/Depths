@@ -97,7 +97,12 @@ const STATE_MARKS := {
 	"airborne": preload("res://art/ui/monsters-v1/intent/swoop.png"),
 	"curled": preload("res://art/ui/monsters-v1/intent/curl.png"),
 	"holding": preload("res://art/ui/monsters-v1/status/grabbed.png"),
+	# ChatGPT's #178/#166 marks (art/ui/expedition-v1).
+	"off_balance": preload("res://art/ui/expedition-v1/combat/off-balance.png"),
+	"tastes_blood": preload("res://art/ui/expedition-v1/combat/tastes-blood.png"),
 }
+const LONG_LUNGE := preload("res://art/ui/expedition-v1/combat/long-lunge.png")
+const BIRTHING := preload("res://art/ui/expedition-v1/combat/birthing.png")
 const ELITE_COLOUR := Color("e0632f")
 const ELITE_ABOUT := {
 	"Hardened": "Hardened: half again as much health.",
@@ -417,6 +422,7 @@ func _hero_action(hero: Companion, action: Dictionary) -> void:
 			outcome = _state.hero_throw_brew(hero, target, action["item"])
 			Sounds.play(self, "brew_shatter", -5.0)
 			var at := _foe_point(target)
+			_fx.splash(at, load("res://scripts/brews.gd").liquid_colour(_state.party.supplies, action["item"]))
 			_fx.icon(at, action["item"].icon, 56.0)
 			if outcome["damage"] > 0:
 				_fx.number(at + Vector2(60, -40), str(outcome["damage"]), Color("b5d36a"), CombatFx.NUMBER_SIZE, 0.12)
@@ -784,10 +790,10 @@ func _intent_icon(intent: int) -> Texture2D:
 		CombatState.Intent.SWOOP, CombatState.Intent.SWELL, CombatState.Intent.GRAB, CombatState.Intent.CURL, \
 				CombatState.Intent.SNARE, CombatState.Intent.DRAIN, CombatState.Intent.RALLY, CombatState.Intent.BROOD:
 			return MONSTER_INTENTS[intent]
-		# Slice 2's deep monsters borrow marks until #166's icons land.
-		CombatState.Intent.REACH: return Glyphs.intention(CombatState.Intent.LUNGE)
+		# Slice 2's deep monsters: their own marks (#166/#178).
+		CombatState.Intent.REACH: return LONG_LUNGE
 		CombatState.Intent.BITES: return Glyphs.intention(CombatState.Intent.BITE)
-		CombatState.Intent.BIRTH: return MONSTER_INTENTS[CombatState.Intent.BROOD]
+		CombatState.Intent.BIRTH: return BIRTHING
 	return Glyphs.intention(intent)
 
 
@@ -877,7 +883,9 @@ func toggle_rules() -> void:
 ## what works against it (in the air, curled up, holding someone).
 func _state_marks(foe) -> Array:
 	var marks := []
-	if foe.elite != "":
+	if foe.tasted:
+		marks.append(STATE_MARKS["tastes_blood"])
+	elif foe.elite != "":
 		marks.append(ELITE_MARKS[foe.elite])
 	elif _strong_venom(foe):
 		marks.append(MARKS["venom"])
@@ -885,6 +893,8 @@ func _state_marks(foe) -> Array:
 		marks.append(STATE_MARKS["airborne"])
 	if foe.curled:
 		marks.append(STATE_MARKS["curled"])
+	if foe.staggered:
+		marks.append(STATE_MARKS["off_balance"])
 	if _holding(foe) != null:
 		marks.append(STATE_MARKS["holding"])
 	if _state.is_dazzled(foe) or _state.is_squinting(foe):
@@ -896,7 +906,9 @@ func _state_marks(foe) -> Array:
 ## keyboard, never only on hover.
 func _state_words(foe) -> Array:
 	var words := []
-	if foe.elite != "":
+	if foe.tasted:
+		words.append("Tasted blood when one of you fell: hits 1 harder.")
+	elif foe.elite != "":
 		words.append(ELITE_ABOUT[foe.elite])
 	elif _strong_venom(foe):
 		words.append("Its venom burns twice as hard.")
@@ -904,6 +916,8 @@ func _state_words(foe) -> Array:
 		words.append("In the air: only reach can hit it.")
 	if foe.curled:
 		words.append("Curled up: blows barely scratch it.")
+	if foe.staggered:
+		words.append("Off balance: a dead head drags at the rest.")
 	var held: Companion = _holding(foe)
 	if held:
 		words.append("Holding %s." % held.display_name)

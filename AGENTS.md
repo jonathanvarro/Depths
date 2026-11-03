@@ -205,6 +205,16 @@ Templates > Download and Install; already installed on the owner's PC).
   7). Story cards: lower gate, galleries drained, reservoir ending; the
   vision painting and the fireside backdrop (fire keeper, miner's thanks).
   `tools/descent_finish_check.gd`.
+  #178/#166/#167 symbols and finish (2026-11-03): `Quality.add_mastery`
+  puts a mastery notch (one/two/full, or the smith's mark while a temper is
+  due) on Pack and trade tiles; combat REACH/BIRTH intents, `Foe.tasted`
+  (tastes-blood mark) and off-balance marks; `CombatFx.splash` tints a thrown
+  brew's shatter (`Brews.liquid_colour`); the map inks #167's deep-water
+  glyph; the bestiary page shows silhouettes and learned-fact marks
+  (`Bestiary.thumbnail`/`marks`). Floor 5 gets `Galleries.dress_galleries`
+  (channels, pipes, dry-floor lamps). `ConversationPage.expression` swaps the
+  first speaker to an animated, talking PortraitView for that page (the
+  keeper's defiant face). `tools/symbols_check.gd`.
   #168 ancient stonework has a separate optional eight-second mineral pulse
   and a fixed wall scene: `docs/descent-production-art.md`. Default is still;
   pass effects preferences explicitly. Existing vision/quest hookup is separate.

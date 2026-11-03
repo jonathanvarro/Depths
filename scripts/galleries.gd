@@ -34,6 +34,15 @@ const WATER_EDGE := preload("res://art/props/reservoir-finish-v1/water-edge.tscn
 const RESERVOIR_STAIRS := preload("res://art/props/reservoir-finish-v1/stairs.tscn")
 ## One in this many wall faces beside deep water shows the black water beyond.
 const WATER_EDGE_ODDS := 3
+## The galleries' waterworks dressing (#166; docs/waterworks-art.md): wall
+## pieces with the centre height each needs, and the dead lamp on dry floor.
+const WATERWORKS := {
+	"dripping-channel": [preload("res://art/dressing/waterworks-v1/dripping-channel.tscn"), 1.23],
+	"broken-pipe": [preload("res://art/dressing/waterworks-v1/broken-pipe.tscn"), 0.9],
+}
+const SILTED_LAMP := preload("res://art/dressing/waterworks-v1/silted-lamp.tscn")
+const WALL_PIECE_ODDS := 7  # one wall-side cell in this many
+const LAMP_ODDS := 14  # one dry room cell against a wall in this many
 
 
 ## Floods stretches of the floor's passages (corridor cells, not rooms,
@@ -129,9 +138,46 @@ static func dress_reservoir(level: Node3D, map, cell_size: float, seed: int, div
 	return root.get_child_count()
 
 
+## The galleries' waterworks (#166): dripping channels and broken pipes on
+## walls, sparse and never two alike side by side; dead lamps on dry floor
+## against a wall, out of the walking line. Looks only: nothing blocks.
+static func dress_galleries(level: Node3D, map, cell_size: float, seed: int) -> int:
+	const Dressing := preload("res://scripts/dressing.gd")
+	var rng := RandomNumberGenerator.new()
+	rng.seed = hash([seed, "waterworks"])
+	var root := Node3D.new()
+	root.name = "Waterworks"
+	level.add_child(root)
+	var ids: Array = WATERWORKS.keys()
+	var last := ""
+	for y in map.height:
+		for x in map.width:
+			var cell := Vector2i(x, y)
+			if not Dressing._clear(map, cell):
+				continue
+			var sides: Array[Vector2i] = Dressing._wall_sides(map, cell)
+			if sides.is_empty():
+				continue
+			var side: Vector2i = sides[rng.randi() % sides.size()]
+			if rng.randi() % WALL_PIECE_ODDS == 0:
+				var id: String = ids[rng.randi() % ids.size()]
+				if id == last:
+					id = ids[(ids.find(id) + 1) % ids.size()]  # no two alike in a row
+				last = id
+				var piece: Node3D = WATERWORKS[id][0].instantiate()
+				_mount(root, piece, cell, side, cell_size)
+				piece.position.y = WATERWORKS[id][1]
+			elif not map.is_water(cell) and map._is_room_cell(cell) and rng.randi() % LAMP_ODDS == 0:
+				var lamp: Node3D = SILTED_LAMP.instantiate()
+				lamp.position = Vector3(cell.x, 0, cell.y) * cell_size + Vector3(side.x, 0, side.y) * cell_size * 0.32
+				lamp.rotation.y = atan2(float(-side.x), float(-side.y))
+				root.add_child(lamp)
+	return root.get_child_count()
+
+
 ## Stands `node` against the wall on `side` of `cell`, facing into it.
 static func _mount(root: Node3D, node: Node3D, cell: Vector2i, side: Vector2i, cell_size: float) -> void:
-	node.position = Vector3(cell.x, 0, cell.y) * cell_size + Vector3(side.x, 0, side.y) * (cell_size / 2.0 - 0.02)
+	node.position = Vector3(cell.x, 0, cell.y) * cell_size + Vector3(side.x, 0, side.y) * (cell_size / 2.0 - 0.025)
 	node.rotation.y = atan2(float(-side.x), float(-side.y))
 	root.add_child(node)
 
