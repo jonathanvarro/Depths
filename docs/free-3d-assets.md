@@ -118,10 +118,14 @@ desktop and phone size against what's there now.
 
 ## Pilot result (2026-11-03, #224)
 
-KayKit Dungeon Remastered on floor 1, **off by default**. To see it:
-- start the game with `-- --kaykit-pilot` (for example
-  `Depths.exe -- --kaykit-pilot`); or
-- tick `kaykit_pilot` on the Main node in the editor.
+KayKit Dungeon Remastered on floor 1. **Adopted by the owner on
+2026-11-03, with the grain layer, as it is**; look and feel will be
+evaluated later. It's on by default. To leave it out, untick
+`kaykit_pilot` on the Main node, or start with `-- --no-kaykit`.
+
+**Owner's note on reuse:** the same models can serve other places by
+changing only the shared texture and grain, for example green moss on
+the humid fungal floor. A follow-up issue tracks it.
 
 - **What's in:** ten CC0 models (barrels, kegs, boxes, crates, rubble,
   bottles) in `art/third-party/kaykit-dungeon-remastered/`, each with its

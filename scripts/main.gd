@@ -304,8 +304,9 @@ void fragment() {
 }
 ## Play the opening escape (#30) when a new game starts.
 @export var play_opening := true
-## #224 pilot: floor 1 dressing from the CC0 KayKit pack (scripts/kaykit_pilot.gd).
-@export var kaykit_pilot := false
+## Floor 1's KayKit stores (#224, CC0; scripts/kaykit_pilot.gd). Adopted by
+## the owner 2026-11-03; off for tests that compare the bare floor.
+@export var kaykit_pilot := true
 ## Red edge flashes when bleeding costs health (#71). Settings (#52) can
 ## turn this off for players sensitive to flashing.
 @export var screen_flashes := true
@@ -683,7 +684,7 @@ func _build_level() -> void:
 		var landmarks := Landmarks.place(_level, _map, _depth, _site_seed, CELL_SIZE, WALL_HEIGHT)  # #117
 		var dresser: Script = environment_theme.dressing_script if environment_theme.dressing_script else Dressing
 		dresser.dress(_level, _map, _depth, _site_seed, CELL_SIZE, WALL_HEIGHT, landmarks)  # #128
-		if kaykit_pilot or "--kaykit-pilot" in OS.get_cmdline_user_args():  # #224: off until the owner chooses
+		if kaykit_pilot and not "--no-kaykit" in OS.get_cmdline_user_args():  # #224, adopted 2026-11-03
 			KayKitPilot.dress(_level, _map, _depth, _site_seed, CELL_SIZE, landmarks)
 
 

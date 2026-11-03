@@ -1,6 +1,6 @@
 extends SceneTree
-## #224 pilot: floor 1 dressing from the CC0 KayKit pack. Off by default;
-## with it on, miners' stores stand against room walls, every piece shares
+## #224: floor 1 dressing from the CC0 KayKit pack, adopted 2026-11-03.
+## Miners' stores stand against room walls, every piece shares
 ## one recoloured texture and stays within a phone budget. Saves the same
 ## view with and without the pilot. Args: tag, screenshot dir.
 
@@ -55,13 +55,8 @@ func _initialize() -> void:
 		main._go_to_floor(1, main.Arrival.FROM_ABOVE)
 		await process_frame
 	await process_frame
-	check("off by default: floor 1 has no pilot pieces", _pilot() == null)
-
-	main.kaykit_pilot = true
-	main._build_level()
-	await process_frame
 	var pilot := _pilot()
-	check("switched on, floor 1's rooms get miners' stores", pilot != null and pilot.get_child_count() >= 6, pilot.get_child_count() if pilot else 0)
+	check("adopted: floor 1's rooms get miners' stores by default", pilot != null and pilot.get_child_count() >= 6, pilot.get_child_count() if pilot else 0)
 	var meshes: Array = pilot.find_children("*", "MeshInstance3D", true, false) if pilot else []
 	var triangles := 0
 	for m: MeshInstance3D in meshes:
@@ -94,6 +89,8 @@ func _initialize() -> void:
 		await _snap(dir, "kaykit_%s_on" % tag)
 		main.kaykit_pilot = false
 		main._build_level()
+		await process_frame
+		check("...and switched off, they're gone", _pilot() == null)
 		await _snap(dir, "kaykit_%s_off" % tag)
 	print("fails=", fails)
 	quit()

@@ -4,9 +4,8 @@ extends RefCounted
 ## (barrels, kegs, boxes, crates, rubble, bottles) stand against room
 ## walls, on top of the existing dressing.
 ##
-## Off unless Main.kaykit_pilot is on (or the game starts with
-## `-- --kaykit-pilot`), so the live look is unchanged until the owner
-## chooses. Every piece shares one recoloured texture
+## Adopted by the owner on 2026-11-03: on by default (Main.kaykit_pilot;
+## `-- --no-kaykit` leaves it out). Every piece shares one recoloured texture
 ## (tools/art/build_kaykit_pilot.py) and one material. Purely cosmetic and
 ## seeded like dressing.gd: nothing blocks, hides or lights anything.
 

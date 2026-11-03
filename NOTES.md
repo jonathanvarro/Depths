@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-11-03 – Claude (KayKit props adopted on floor 1, #224 closed)
+
+- **Done:** the owner adopted the floor 1 KayKit props with the grain, as they are; look and feel will be evaluated later. Main `kaykit_pilot` now defaults to on; untick it or start with `-- --no-kaykit` to leave the props out. Full suite passes with them on.
+- **Next:** #225, the owner's reuse idea: the same models re-skinned per theme (moss on the fungal floor, scorched in the fortress) by building a new shared texture and grain. Not started.
+
 ## 2026-11-03 – Claude (grain layer on the KayKit pilot, #224)
 
 - **Done:** owner asked for a grain layer. The pilot's shared material now multiplies `grain-floor1.png` (floor 1's wall texture, light and dark only) over every piece in world space, at the walls' 64 pixels to a 2 m cell. The colours are lifted 12% to compensate. Tune with `GRAIN` in `tools/art/build_kaykit_pilot.py`. Models and UVs are unchanged. New captures are in `art/concepts/kaykit-pilot-v1/`; the earlier smooth ones are kept as `*-on-smooth.png`, with a close-up in `crates-smooth-vs-grain.png`.
