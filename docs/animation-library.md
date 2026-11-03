@@ -241,6 +241,19 @@ approved; the assembled candidate is now delivered and remaining polish is #218.
 This is one additional motion plus a retained
 re-upload version, not two new locomotion packs.
 
+## Female chair hold (2026-11-02, Claude, #218)
+
+The owner uploaded female `Sitting.fbx` and `Sitting Idle.fbx`;
+[hold review](female-chair-hold-review.md). Both are 60fps, 65 joints, matched
+to her body, uncrossed and loop cleanly; converted into a separate
+`female_hold.blend` and rendered. No export/Godot check or assembly-v2
+hookup yet; owner picks between them.
+
+| Body | Clip | Frames | Status | Notes |
+|---|---|---|---|---|
+| Female | Sitting.fbx | 1–421 / 7.00s | untested in engine | Recommended hold: same seat height and legs as the sit-down end; ends 0.002 from stand-up placement. Looks around, arms shift; lower body still. |
+| Female | Sitting Idle.fbx | 1–179 / 2.97s | untested in engine | Stiller alternative (~1° motion) but sits ~0.1 higher, knees ~18° and hands 24–39° off the transitions; needs a blend. |
+
 ## Garment fitting references (2026-11-02, ChatGPT)
 
 #211–#213 include temporary retargeted **copies** of four legacy clips in
