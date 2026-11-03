@@ -134,6 +134,11 @@ Templates > Download and Install; already installed on the owner's PC).
   drawing. Named portrait work remains separate; never invent missing occupants.
 - `docs/cave-descent-and-quests.md` – proposed twelve-floor cave campaign and 48 activity concepts (#125), including quest packages, camp projects and story persistence. Read alongside #122/#123; floor count, lore and new mechanics are not approved or implemented.
 - `docs/boons-curses-and-gambling-review.md` – #134 audit of the #133 shrine system, costs/odds/durations, research and proposed improvements; recorded probes in `docs/boons-curses-review-data.json`. Reward bugs are #136/#137; #135 trinkets were in progress during review. Recommendations do not change live rules.
+- `docs/free-3d-assets.md` – owner direction (2026-11-03): start 3D work
+  from free assets, **favouring CC0** (KayKit, Kenney, Poly Haven,
+  ambientCG). Plain-language licence guide; Quaternius is now its own QAL
+  licence (not CC0: keep its files out of this public repo). Record source,
+  licence and changes for every asset. Pilot: #224.
 - `docs/animation-library.md` – shared list of every character animation clip
   (source, frames, per-body status). Clips stay local; update the list when
   adding, testing or dropping one.

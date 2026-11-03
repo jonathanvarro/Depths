@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-11-03 – Claude (free 3D asset shortlist, CC0 first)
+
+- **Done:** owner direction: start 3D work from free assets rather than generating, and favour CC0. `docs/free-3d-assets.md` has a plain-language licence guide and a shortlist, each licence checked on its own page today. CC0: KayKit (best pilot: one recolourable gradient texture), Kenney (stand-ins), Poly Haven and ambientCG (surfaces). Quaternius has switched to its own QAL licence, which bars redistributing the files, so keep them local; its free animation library is the backup if Mixamo goes away. Pilot issue #224 (floor 1 dressing with KayKit).
+- **Watch out:** the repo is **public**, so only CC0 files may be committed. Record every asset's source, licence link and date, hash and changes.
+
 ## 2026-11-03 – Claude (mastery adds a capped resale bonus)
 
 - **Done:** owner direction: mastery should make gear worth more, but not become a gold farm. Each mastery level now adds 10% to the sale price, stopping at +30% at mastery 3. The values live in `data/equipment/mastery.json` "resale"; the rule is `GearModel.mastery_value()`, used by `CampState.sale_price()`. Buying prices are unchanged. The item card shows the bonus. DESIGN.md has it under "Mastery and value".
