@@ -111,6 +111,20 @@ func run()->void:
 				app.angle_index=angle;app.frame_cameras();await settle(1)
 				for actor in app.actors:visible_deformation(actor)
 				await capture("%s-%d-%d"%[motion,sample_index,angle])
+	# Sequence joins: hips aligned sideways, floor untouched, frames either side.
+	for key in app.manifest.get("sequences",{}):
+		for actor in app.actors:
+			check(actor.sequence_offsets.has(key),"Sequence aligned "+actor.fit+"/"+str(key))
+			for join in actor.joins:
+				check(float(join.aligned_horizontal_residual)<.0001,"Hips continue across join "+actor.fit+"/"+str(join.from)+">"+str(join.to))
+		app.set_motion(key,0,true)
+		for j in app.actors[0].join_times(key).size():
+			for side in [-1,0]:
+				for actor in app.actors:actor.set_motion(key,float(actor.join_times(key)[j])+side/60.0)
+				for angle in [0,2]:
+					app.angle_index=angle;app.frame_cameras();await settle(1)
+					for actor in app.actors:visible_deformation(actor)
+					await capture("%s-join%d-%s-%d"%[key,j,"before" if side<0 else "after",angle])
 	# Removal views prove the native renderer, not just triangle accounting.
 	app.angle_index=1;app.set_motion("rest",0,true)
 	for bits in [0,3,4,24,12,31]:app.set_garments(bits);await capture("selection-"+str(bits))
@@ -149,7 +163,7 @@ func run()->void:
 	await pointer(app.controls_button,true);await settle();check(app.viewports[0].size.y>200,"Touch folds tools to enlarge phone review")
 	await capture("ui-phone-unfolded-preview",true)
 	await pointer(app.controls_button,false);check(app.tool_rows[0].visible,"Mouse restores review tools")
-	app.show_details();await settle();check(app.details.visible and app.details_text.text.contains("#215"),"Visible source and dependency details");await capture("ui-source-details",true);await key(KEY_ESCAPE);check(not app.details.visible,"Escape closes actual details popup")
+	app.show_details();await settle();check(app.details.visible and (app.details_text.text.contains("#215") or app.details_text.text.contains("#218")),"Visible source and dependency details");await capture("ui-source-details",true);await key(KEY_ESCAPE);check(not app.details.visible,"Escape closes actual details popup")
 	await portrait_cards()
 	root.size=Vector2i(1440,900);app.set_garments(31);app.view_index=0;app.selectors.view.select(0);app.angle_index=1;await settle(5)
 	for frame in 12:
@@ -157,6 +171,10 @@ func run()->void:
 	var totals:={}
 	for actor in app.actors:totals[actor.fit]=actor.stats()
 	var report={"checks":checks,"failures":failures,"captures":captures,"contact_and_root_samples":contact_samples,"counts":totals,"renderer":RenderingServer.get_current_rendering_method(),"display":DisplayServer.get_name(),"all_art_local":true,"physical_iphone_tested":false,"final_animation_acceptance_pending":app.manifest.get("final_animation_acceptance_pending",215)}
+	var joins:=[]
+	for actor in app.actors:
+		for join in actor.joins:joins.append(join.merged({"fit":actor.fit}))
+	report["sequence_joins"]=joins
 	var report_path:="res://review/headless-validation.json" if DisplayServer.get_name()=="headless" else "res://review/validation.json"
 	var file=FileAccess.open(report_path,FileAccess.WRITE);file.store_string(JSON.stringify(report,"\t")+"\n");file.close()
 	app.queue_free();await settle();print("WARDROBE_CHECKS ",checks," checks, ",failures.size()," failures");quit(0 if failures.is_empty() else 1)

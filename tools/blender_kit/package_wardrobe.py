@@ -36,8 +36,14 @@ def main():
         template=template.replace('<a href="sheet-dying.png">','<a href="sheet-stand_up.png">Chair stand-up</a><a href="sheet-dying.png">')
         template=template.replace('The source clip\'s loop/in-place status is unapproved;',
             'Matrix samples use each body\'s own start/middle/end. Interactive playback retains original seconds. Both walks travel, and loop status is unapproved;')
+    if manifest.get('version',1)>=3:
+        template=template.replace('Female seated is a crossed-leg talking stress test; male seated is a chair idle. Calm female sitting, source contacts and seamless transitions remain visible follow-up limits.',
+            'Both bodies now sit in a calm chair hold (#218). <em>Chair sequence</em> plays sit-down, hold and stand-up back to back with the hips aligned sideways at each join; hand snaps at joins and source contacts remain visible limits.')
+        template=template.replace('Seated · talk / idle','Seated · chair hold').replace('Seated stress test','Seated chair hold')
+        template=template.replace('<option value="dying">','<option value="chair_sequence">Chair sequence · aligned</option><option value="dying">')
+        template=template.replace('<a href="sheet-dying.png">','<a href="sheet-chair_sequence.png">Chair sequence</a><a href="chair-sequence-joins-sheet.png">Sequence joins</a><a href="sheet-dying.png">')
     (REVIEW/'inspector.html').write_text(template,encoding='utf-8')
-    doc=ROOT/('docs/current-wardrobe-review.md' if manifest.get('version',1)>=2 else 'docs/blender-wardrobe-review.md')
+    doc=ROOT/('docs/female-chair-hold-review.md' if manifest.get('version',1)>=3 else 'docs/current-wardrobe-review.md' if manifest.get('version',1)>=2 else 'docs/blender-wardrobe-review.md')
     if doc.exists():(OUT/'START_HERE.md').write_text(doc.read_text(encoding='utf-8'),encoding='utf-8')
     print('WARDROBE_GALLERY',len(report['captures']),'actual captures; 24 native cards; two real-frame GIFs')
 if __name__=='__main__':main()

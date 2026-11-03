@@ -247,11 +247,13 @@ The owner uploaded female `Sitting.fbx` and `Sitting Idle.fbx`;
 [hold review](female-chair-hold-review.md). Both are 60fps, 65 joints, matched
 to her body, uncrossed and loop cleanly; converted into a separate
 `female_hold.blend` and rendered. No export/Godot check or assembly-v2
-hookup yet. **Owner chose Sitting (2026-11-02).**
+hookup at first. **Owner chose Sitting (2026-11-02)**; it is now in
+`assembly-v3` with an aligned sit-down → hold → stand-up chair sequence for
+both bodies (see the hold review).
 
 | Body | Clip | Frames | Status | Notes |
 |---|---|---|---|---|
-| Female | Sitting.fbx | 1–421 / 7.00s | chosen; untested in engine | Owner's chosen hold: same seat height and legs as the sit-down end; ends 0.002 from stand-up placement. Looks around, arms shift; lower body still. |
+| Female | Sitting.fbx | 1–421 / 7.00s | in assembly-v3; export/Godot checks pass | Owner's chosen hold, now the female *Seated* motion and middle of the aligned chair sequence: same seat height and legs as the sit-down end; ends 0.002 from stand-up placement. Looks around, arms shift; lower body still. |
 | Female | Sitting Idle.fbx | 1–179 / 2.97s | not in use | Retained stiller alternative (~1° motion) but sits ~0.1 higher, knees ~18° and hands 24–39° off the transitions; needs a blend. |
 
 ## Garment fitting references (2026-11-02, ChatGPT)

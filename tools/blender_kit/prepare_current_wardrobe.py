@@ -23,6 +23,9 @@ OUT = BASE / 'assembly-v2'
 SOURCES = OUT / 'editable-inputs'
 INTAKE = BASE / 'animation-requests-v1/received-v1'
 CHAIR = BASE / 'animation-requests-v1/female-chair-intake-v1'
+# Optional per-fit seated override (#218): fit -> intake folder whose
+# source-manifest.json names the hold. Unset keeps assembly-v2's selection.
+SEATED = {}
 
 
 def sha(path):
@@ -38,7 +41,11 @@ def prepare_fit(fit):
                                    ('sit_down', 'individual', 'Stand To Sit.fbx'),
                                    ('seated', 'individual', 'Sitting Talking.fbx' if fit == 'female' else 'Sitting Idle.fbx'),
                                    ('stand_up', 'individual', 'Sit To Stand.fbx')]:
-        if fit == 'female' and key in ['sit_down', 'stand_up']:
+        if key == 'seated' and fit in SEATED:
+            folder, name = SEATED[fit]
+            hold = json.loads((folder / 'source-manifest.json').read_text(encoding='utf-8'))['files']
+            entry = next(e for e in hold if e['name'] == name)
+        elif fit == 'female' and key in ['sit_down', 'stand_up']:
             entry = next(e for e in chair if e['name'] == name) | {'collection': 'chair-follow-up'}
         else:
             entry = next(e for e in library if e['fit'] == fit and e['collection'] == collection and e['name'] == name)

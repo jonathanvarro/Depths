@@ -52,7 +52,7 @@ def main():
         for motion in manifest.get('motion_order',['rest','idle','walk','sit_down','seated','dying']):
             for sample in [0] if motion=='rest' else [0,1,2]:
                 for angle in [0,2,3]:check(any(c.get('fit')==fit and c.get('motion')==motion and c.get('angle')==angle and c['file']==f'{fit}-{motion}-{sample}-{angle}.png' for c in native['captures']),'Exact native matrix entry '+fit+motion+str(sample)+str(angle))
-    expected_captures=163+18*(len(manifest.get('motion_order',range(6)))-6)
+    expected_captures=163+18*(len(manifest.get('motion_order',range(6)))-6)+16*len(manifest.get('sequences',{}))
     check(len(native['captures'])==expected_captures,'Complete raw models, UI, native cards and motion frames')
     for capture in native['captures']:
         with Image.open(OUT/'review'/capture['file']) as image:

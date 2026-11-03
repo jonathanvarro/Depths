@@ -108,7 +108,7 @@ func make_panel(fit:String)->void:
 	var world=WorldEnvironment.new();var environment=Environment.new();environment.background_mode=Environment.BG_COLOR;environment.background_color=Color("293335");environment.ambient_light_source=Environment.AMBIENT_SOURCE_COLOR;environment.ambient_light_color=Color("b7c3c4");environment.ambient_light_energy=.65;world.environment=environment;stage.add_child(world)
 	var key=DirectionalLight3D.new();key.rotation_degrees=Vector3(-35,-25,0);key.light_energy=1.4;key.light_color=Color("fff0db");key.shadow_enabled=true;stage.add_child(key)
 	var fill=DirectionalLight3D.new();fill.rotation_degrees=Vector3(-20,150,0);fill.light_energy=.5;fill.light_color=Color("a6bdcb");stage.add_child(fill)
-	var actor=Actor.new();stage.add_child(actor);actor.setup(fit,manifest.fits[fit]);actors.append(actor)
+	var actor=Actor.new();stage.add_child(actor);actor.sequences=manifest.get("sequences",{});actor.setup(fit,manifest.fits[fit]);actors.append(actor)
 	var ground=MeshInstance3D.new();var plane=PlaneMesh.new();plane.size=Vector2(30,30);ground.mesh=plane;ground.position.y=0;var material=StandardMaterial3D.new();material.albedo_color=Color("303b3b");material.roughness=1;ground.material_override=material;stage.add_child(ground)
 	var camera=Camera3D.new();camera.projection=Camera3D.PROJECTION_ORTHOGONAL;camera.current=true;stage.add_child(camera);cameras.append(camera)
 	var count=Label.new();count.add_theme_font_size_override("font_size",13);count.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;panel.add_child(count);counts.append(count)

@@ -62,13 +62,62 @@ source curves are not edited to hide it.
   are in `review/`, with `hold-comparison-sheet.png` putting sit-down end,
   both holds and stand-up start side by side. There is no chair prop, so she
   sits on air in the renders.
-- Not done: independent GLB export/reimport and Godot native checks (the
-  pipeline ChatGPT ran for earlier clips), adding the hold to assembly-v2,
-  the explicit placement/blend for sit-down → hold → stand-up, hand/seat
-  contact review, and owner style approval of the finished sequence.
+- Done in assembly-v3 (below): engine export/checks, wardrobe review and
+  the sit-down → hold → stand-up placement.
+- Not done: a crossfade at the joins, hand/seat contact review against a real
+  chair, walk/idle loop decisions, and owner style approval.
 
-Reproduce with Blender 5.2.3 from `E:/GitHub/Depths`:
+Reproduce the intake with Blender 5.2.3 from `E:/GitHub/Depths`:
 `blender --background --factory-startup --python-exit-code 1 --python
 tools/blender_kit/review_female_hold_intake.py -- --build --capture`.
 It audits first, refuses to replace a manually edited `female_hold.blend`,
 and never writes outside its intake folder.
+
+## Assembly-v3: wardrobe review with the hold and a chair sequence
+
+`build/local-blender-kit-v1/assembly-v3/` is a new copy of the current
+wardrobe review. assembly-v2 is unchanged. Open `review/inspector.html` for
+the gallery, or double-click `START_REVIEW.cmd` for the interactive Godot
+review. Everything in it stays local and ignored.
+
+- **Clips:** the same as assembly-v2, except the female *Seated* motion is now
+  the chosen hold (`Sitting.fbx`, 1–421) instead of Sitting Talking. Male
+  seated stays chair Sitting Idle.
+- **Chair sequence:** a new review motion that plays sit-down, seated and
+  stand-up back to back for each body. At each join the reviewer moves the
+  whole model sideways so the hips continue from where the previous clip
+  ended. It never moves her up or down, so the floor stays fixed and any
+  seat-height difference stays visible. The source curves are unchanged.
+  This placement is the reviewer's (`wardrobe_actor.gd`, `align_sequence`),
+  which is the pattern a game scene would follow.
+- **Measured joins** (source units; one unit ≈ 0.44m at display scale):
+
+  | Body | Sit-down → seated | Seated → stand-up |
+  |---|---|---|
+  | Female | shift 1.073, height gap 0.0013 | extra shift 0.0006, height gap 0.00001 |
+  | Male | shift 0.906, height gap −0.0011 | extra shift ~0, height gap 0.00001 |
+
+  The second join's total placement is about the same as the first because
+  the hold ends where it started; only a tiny extra shift is needed. After
+  alignment the hips continue exactly (residual 0). The remaining
+  difference at joins is pose: mostly the right hand (female ~10° into the
+  hold, ~18° out of it), which shows as a small snap without a crossfade.
+- **Checks:** 778 independent Blender export/reimport checks (largest
+  deformation error below 0.0001 source units), 3,273 native Godot 4.7.2
+  Mobile checks and 1,404 headless checks, 514 artifact/lineage checks, all
+  passing with no script errors. 215 actual captures, including 16 frames
+  either side of both joins (`chair-sequence-joins-sheet.png`). Seated and
+  sequence frames keep a 0.011–0.015m visible gap above the floor; that
+  is the source pose, not foot locking. The gallery was checked in the
+  built-in browser (every capture loads, all links resolve, no overflow);
+  the Playwright gallery script wasn't run because Playwright isn't
+  installed on this PC.
+
+Rebuild: Blender `--python tools/blender_kit/prepare_wardrobe_v3.py`, copy
+the updated `wardrobe_actor.gd`/`wardrobe_review.gd`/`check_wardrobe.gd` in
+as `actor.gd`/`review.gd`/`check.gd` if `prepare_wardrobe` copied older
+ones, import the project in Godot, run `--script check.gd` native and
+headless, then `python tools/blender_kit/package_wardrobe_v3.py`. The shared
+reviewer scripts gained the optional sequence support, so assembly-v2's
+stored copies no longer match the tools byte-for-byte; rerunning v2's
+validation would flag that, but v2 itself is unchanged.

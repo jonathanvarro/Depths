@@ -96,6 +96,12 @@ Templates > Download and Install; already installed on the owner's PC).
   Shared presentation-only
   normalization gives about1.70m/1.80m against fixed rest-sole references; never
   apply it to source FBXs/bind rigs or conceal animated contact defects.
+- `docs/female-chair-hold-review.md` – #218's owner-chosen female chair hold
+  (Sitting.fbx) and `assembly-v3`: the wardrobe review with that hold plus a
+  "chair sequence" (sit-down → hold → stand-up) whose clips the reviewer
+  aligns sideways at each join (`wardrobe_actor.gd` `align_sequence`); the
+  floor and source curves never move. Build: `prepare_wardrobe_v3.py`,
+  `package_wardrobe_v3.py`. assembly-v2 is unchanged.
 - `DESIGN.md` – living design direction and proposed first playable scope.
 - `docs/descent-completion-art.md` – #166/#167/#168/#178/#190 library handoff:
   matched Reservoir surfaces, opaque water inset/wet stairs, vision and ending
