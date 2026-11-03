@@ -117,24 +117,46 @@ review. Everything in it stays local and ignored.
 
 The owner watched the chair sequence: "quite smooth", no visible jump or pop
 at either join, and the clothing "looks great". So no crossfade is needed for
-now. They noticed **her arm passing through her leg**. Measuring the female
-master (hand/forearm and sleeve points against the trousers, every second
-frame; renders `review/arm-leg-*.png`):
+now. They noticed **her arm passing through her leg**: in the sit-down, front
+view, clothes on and off, her left arm through her left leg.
 
-- **Correction:** a first measurement reported fingertips ~0.015 inside the
-  trousers while seated and ~0.05 at stand-up frame 105. Those came from a
-  faulty inside test (one sleeve point 0.1–0.2 away from the cloth was
-  counted as inside). The corrected test (`review/arm-leg-intersections-v2.json`)
-  only counts a point as inside when it lies behind the nearest surface.
-- With the corrected test, no hand or finger point enters the trousers or the
-  thighs in sit-down, hold or stand-up. Only the tunic sleeve touches the
-  trousers, by up to ~0.006 source units (~3 mm on screen).
-- So the clipping the owner saw is not yet located by measurement. The next
-  step is for the owner to name the motion, moment and view (and whether
-  clothes were on) so it can be measured there.
+- **Found by rendering, not by measurement.** Front/quarter close-ups show her
+  left hand buried inside her left knee at about frames 57–89 of the sit-down
+  (only one hand is visible at the knee there). Automatic inside tests were
+  tried and proved unreliable on this model, and the numbers first posted on
+  #218 were wrong: the body's full-weight clothing-coverage groups hid every
+  hand vertex from the bone lookup, the trousers are open at the waist and
+  cuffs, and the low-poly leg isn't a clean closed surface once the arms are
+  removed. A local leg-axis measure also overstated depths. Don't reuse those
+  measurements; judge contact from renders.
+- **Fix (owner chose "lift the hands"):** `tools/blender_kit/hand_lift.py`
+  makes a corrected copy of the female sit-down, `received.female.sit_down.handlift`.
+  The left hand eases out from the thigh from frame 42, is fully lifted
+  (0.11 source units) over 58–90 and back to the source pose by 110. The
+  direction is "away from the thigh bone, toward the hand", averaged over
+  ±20 frames. A two-bone solve keeps the elbow on its side and the hand's
+  world rotation, so fingers keep their pose. The source Action is
+  unchanged and kept in the editable input.
+- **Checks:** frames 1–42 and 110–135 are identical to the source (so the
+  end of sit-down and both chair-sequence joins are unchanged; join numbers
+  match v3 exactly). Only the left arm moves; hand rotation change 0°. Peak
+  hand speed is 1.33× the source and the largest frame-to-frame speed change
+  1.2×, because the hand travels a little further around the knee. Renders
+  `assembly-v4/review-hand-lift-before-after.png` show her left hand in front
+  of the knee instead of inside it, clothes on and off.
 
-A hand-lift correction (`tools/blender_kit/hand_lift.py`, local and not yet
-used) is ready for when the real contact is found.
+## Assembly-v4: v3 plus the lifted left hand
+
+`build/local-blender-kit-v1/assembly-v4/` is assembly-v3 with only the female
+sit-down swapped for the hand-lift copy. Same gallery and launcher layout
+(`review/inspector.html`, `START_REVIEW.cmd`). 780 Blender export/reimport,
+3,273 native and 1,404 headless Godot 4.7.2 Mobile checks and 514 artifact
+checks pass, with no script errors and 215 captures. assembly-v3 is
+unchanged. Build: `prepare_wardrobe_v4.py` then `package_wardrobe_v4.py`
+(after the Godot import and native/headless `check.gd` runs).
+
+Not checked: the stand-up and the hold for similar hand-in-knee moments
+(the owner saw it only in the sit-down), and the male body.
 
 Rebuild: Blender `--python tools/blender_kit/prepare_wardrobe_v3.py`, copy
 the updated `wardrobe_actor.gd`/`wardrobe_review.gd`/`check_wardrobe.gd` in

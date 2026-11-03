@@ -249,7 +249,9 @@ to her body, uncrossed and loop cleanly; converted into a separate
 `female_hold.blend` and rendered. No export/Godot check or assembly-v2
 hookup at first. **Owner chose Sitting (2026-11-02)**; it is now in
 `assembly-v3` with an aligned sit-down → hold → stand-up chair sequence for
-both bodies (see the hold review).
+both bodies (see the hold review). `assembly-v4` adds a corrected copy of the
+female Stand To Sit (`received.female.sit_down.handlift`) whose left hand
+eases out of her left knee over frames 42–110; the source clip is unchanged.
 
 | Body | Clip | Frames | Status | Notes |
 |---|---|---|---|---|

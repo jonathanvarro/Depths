@@ -17,6 +17,9 @@ import prepare_wardrobe as wardrobe
 
 OUT = current.BASE / 'assembly-v3'
 HOLD = current.BASE / 'animation-requests-v1/female-hold-intake-v1'
+# Optional fit -> callback run on each editable input after its clips are
+# assembled, before export (assembly-v4 uses it for the hand lift).
+AFTER_FIT = {}
 
 
 def main():
@@ -27,6 +30,8 @@ def main():
     (current.SOURCES / '.gdignore').touch()
     for fit in ['female', 'male']:
         current.prepare_fit(fit)
+        if fit in AFTER_FIT:
+            AFTER_FIT[fit]()
     # Name the female seated clip for what it now is.
     record_path = current.SOURCES / 'female-manifest.json'
     record = json.loads(record_path.read_text(encoding='utf-8'))

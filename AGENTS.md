@@ -101,7 +101,11 @@ Templates > Download and Install; already installed on the owner's PC).
   "chair sequence" (sit-down → hold → stand-up) whose clips the reviewer
   aligns sideways at each join (`wardrobe_actor.gd` `align_sequence`); the
   floor and source curves never move. Build: `prepare_wardrobe_v3.py`,
-  `package_wardrobe_v3.py`. assembly-v2 is unchanged.
+  `package_wardrobe_v3.py`. assembly-v2 is unchanged. `assembly-v4`
+  (`prepare_wardrobe_v4.py`/`package_wardrobe_v4.py`) adds a corrected female
+  sit-down whose left hand eases out of her knee (`hand_lift.py`, source clip
+  kept). Judge hand/leg contact from renders: automatic inside tests proved
+  unreliable on these meshes (see the doc).
 - `DESIGN.md` – living design direction and proposed first playable scope.
 - `docs/descent-completion-art.md` – #166/#167/#168/#178/#190 library handoff:
   matched Reservoir surfaces, opaque water inset/wet stairs, vision and ending
