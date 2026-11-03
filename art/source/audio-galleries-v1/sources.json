@@ -40,7 +40,8 @@
       "source": "art/source/audio-galleries-v1/water-splash-slime-sfx.zip",
       "sha256": "7cd39abb49d4362a37ba18dc0e454c7dc1d08029d4e5b683149046bc237b2eba",
       "license": "CC0-1.0",
-      "evidence": "art/source/audio-galleries-v1/evidence/water-pack.html"
+      "evidence": "art/source/audio-galleries-v1/evidence/water-pack.html",
+      "evidence_sha256": "d01e32213573fd0e140a1b32ff6bcf6b892dd39e8531a6620747fa6e4d8187bd"
     }
   ]
 }

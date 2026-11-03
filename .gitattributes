@@ -3,3 +3,4 @@
 
 # Preserve captured licence pages and archive licence files byte-for-byte.
 art/source/audio-dark-v1/evidence/* -text -diff
+art/source/audio-galleries-v1/evidence/* -text -diff
