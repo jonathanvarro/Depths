@@ -277,6 +277,10 @@ Found weapons, armour and back pieces with properties (modifiers) arrive **unide
   - **Discern:** a Mage's prayer, one cast, reads every unidentified piece the party holds (see *Magic*).
 - **Also fixed:** a piece's price no longer creeps up each time its numbers are recalculated, as on a mastery level. 15 of the 24 bases had no price of their own, so each recalculation multiplied the current price again.
 
+- **Price kept for now (owner, 2026-11-03):** identification is rare in bot play (0.1–0.3 pieces a campaign). The owner is leaving the smith's 10/20 gold as it is. Ideas saved for later, if it should matter more:
+  - identified magic and rare pieces sell for more, so reading them pays;
+  - breaking down identified magic pieces into a resource item (for example a material for the smith).
+
 **Mastery and value — decided 2026-11-03.** Mastery makes a piece worth a little more when sold. The bonus is kept small so it encourages selling used gear without making "master it quickly, then sell it" a way to farm gold.
 
 - **+10% sale price per mastery level, up to +30% at mastery 3.** Mastery 4–6 adds nothing more. The numbers are in `data/equipment/mastery.json`, under "resale".
