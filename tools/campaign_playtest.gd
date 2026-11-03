@@ -121,6 +121,7 @@ func _campaign(hero_path: String, run_seed: int, max_days: int) -> Dictionary:
 		"gold_found": 0, "gold_contracts": 0, "gold_sold": 0, "gold_spent": 0, "bounty": 0,
 		"gate_tries": 0, "gate_day": 0, "queen_tries": 0, "queen_rounds": 0, "queen_day": 0,
 		"route_bought": 0, "refuge_rests": 0, "casts": 0, "tomes_read": 0, "lantern_day": 0, "boons": 0, "banes": 0, "banes_lifted": 0, "trinkets_found": 0, "trinkets_worn": 0, "gear_found": 0, "gear_equipped": 0,
+		"gear_identified": 0, "gear_sold": 0, "identify_spent": 0,
 		# Light (owner question, 2026-10-25): steps by light band, trips cut
 		# short for want of light, and light used.
 		"steps_bright": 0, "steps_steady": 0, "steps_dim": 0, "steps_out": 0,
@@ -255,6 +256,7 @@ func _gold() -> int:
 func _shop() -> void:
 	camp.take_gold(party)
 	_wear_trinkets()
+	_read_and_sell_gear()
 	if camp.can_trade():
 		for item in party.supplies.items.duplicate():
 			while item.effect == SupplyItem.Effect.TREASURE and party.supplies.count(item) > 0:
@@ -310,15 +312,48 @@ func _take_gear(gear: Equipment) -> void:
 			stats["gear_equipped"] += 1
 
 
+## Spare weapons and armour at camp (#223), as a careful player would: an
+## unidentified piece goes to the smith if the fee leaves a reserve for
+## supplies; then each spare is worn if it's now known to be better (and not
+## cursed), else sold. One that can't be read sells as a plain piece.
+const IDENTIFY_RESERVE := 15
+
+func _read_and_sell_gear() -> void:
+	var spares: Array = party.supplies.gear.filter(func(g: Equipment): return g.slot in ["weapon", "body"])
+	for gear: Equipment in spares:
+		if not gear.identified and camp.site_present("smith") and party.supplies.gold >= camp.identify_price(party, gear) + IDENTIFY_RESERVE:
+			var fee: int = camp.identify_price(party, gear)
+			if camp.identify(party, gear).begins_with("Identified"):
+				stats["gear_identified"] += 1
+				stats["identify_spent"] += fee
+				stats["gold_spent"] += fee
+		if gear.curse and gear.identified:
+			continue  # sold below, never worn
+		for hero: Companion in party.living_members():
+			if gear in party.supplies.gear and _better(hero, gear):
+				party.equip(hero, gear)
+				stats["gear_equipped"] += 1
+	if not (camp.can_trade() or camp.site_present("smith")):
+		return
+	for gear: Equipment in party.supplies.gear.filter(func(g: Equipment): return g.slot in ["weapon", "body"]):
+		var price := CampState.sale_price(gear)
+		if camp.sell_gear(party, gear, camp.site_present("smith")):
+			stats["gear_sold"] += 1
+			stats["gold_sold"] += price
+
+
 ## Is `gear` an upgrade for `hero`? Weapons by expected damage per swing,
-## armour by armour, then by quality.
-func _better(hero: Companion, gear: Equipment) -> bool:
+## armour by armour, then by quality. Judged on what shows: an unidentified
+## piece by its plain numbers (#223).
+func _better(hero: Companion, real: Equipment) -> bool:
+	var gear: Equipment = GearModel.known(real)
 	if gear.slot == "body":
-		var now: Equipment = hero.body
-		return now == null or gear.armour > now.armour or (gear.armour == now.armour and gear.tier != "common" and now.tier == "common")
+		var now: Equipment = GearModel.known(hero.body)
+		return now == null or gear.armour > now.armour or (gear.armour == now.armour and real.tier != "common" and hero.body.tier == "common")
 	if gear.slot != "weapon" or (hero.has_reach() and not gear.reach):
 		return false
 	var held: Equipment = hero.weapon
+	hero.weapon = GearModel.known(held)  # what it can see of its own weapon too
 	var before := _swing(hero)
 	hero.weapon = gear
 	var after := _swing(hero)
@@ -1160,6 +1195,9 @@ func _summarise(all: Dictionary) -> void:
 				_mean(runs.map(func(r): return r["gold_sold"])), _mean(runs.map(func(r): return r["gold_spent"])),
 				runs.filter(func(r): return r["lantern_day"] > 0).size(), _mean(runs.map(func(r): return r["route_bought"])),
 				_mean(runs.map(func(r): return r["refuge_rests"]))])
+		print("  gear identified %.1f (%.0f gold to the smith), spare gear sold %.1f per campaign (#223)" % [
+				_mean(runs.map(func(r): return r["gear_identified"])), _mean(runs.map(func(r): return r["identify_spent"])),
+				_mean(runs.map(func(r): return r["gear_sold"]))])
 		print("  prayers cast %.1f, tomes read %.1f per campaign (#170)" % [
 				_mean(runs.map(func(r): return r["casts"])), _mean(runs.map(func(r): return r["tomes_read"]))])
 		print("  boons gained %.1f, banes gained %.1f, banes lifted %.1f per campaign (#133); trinkets found %.1f, worn %.1f (#135); gear found %.1f, equipped %.1f" % [

@@ -183,5 +183,22 @@ func _initialize() -> void:
 		identify_button.pressed.emit()
 		await process_frame
 	check("...which reads it", shown.identified and shown.display_name == "Fine heavy iron sword")
+	# The Status tab: a worn unidentified piece shows only what shows (#223).
+	var hero: Companion = main._party_state.members[0]
+	var hidden_sword := _found(["heavy"], rng)
+	hero.weapon = hidden_sword
+	main._pack._selected_hero = hero
+	main._pack._refresh_status()
+	var status := "
+".join(main._pack._status_content.get_children().filter(func(c): return c is Label).map(func(l): return l.text))
+	var plain_line: String = main._pack._numbers(hero, GearModel.known(hidden_sword))
+	var true_line: String = main._pack._numbers(hero, hidden_sword)
+	check("Status: a worn unidentified sword shows its plain numbers, not the hidden +1", status.contains(plain_line) and not status.contains(true_line) and plain_line != true_line, "%s | %s" % [plain_line, true_line])
+	check("...and the hero really wears the true sword again afterwards", hero.weapon == hidden_sword)
+	GearModel.identify(hidden_sword)
+	main._pack._refresh_status()
+	status = "
+".join(main._pack._status_content.get_children().filter(func(c): return c is Label).map(func(l): return l.text))
+	check("...once read, the true numbers show", status.contains(true_line))
 	print("fails=", fails)
 	quit()

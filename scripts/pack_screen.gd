@@ -340,7 +340,7 @@ func _refresh_status() -> void:
 		_status_content.add_child(stats)
 		for pair in [["Strength",h.stat_str],["Dexterity",h.stat_dex],["Vitality",h.stat_vit],["Resolve",h.stat_res]]:
 			stats.add_child(_label("%s  %d" % pair,17))
-	_status_content.add_child(_wrapped(_numbers(h,h.weapon)+" · armour %d · speed %d" % [h.damage_reduction(),h.effective_initiative()],17))
+	_status_content.add_child(_wrapped(_as_known(h,func(): return _numbers(h,h.weapon)+" · armour %d · speed %d" % [h.damage_reduction(),h.effective_initiative()]),17))
 	_status_content.add_child(_label("Strain %d · %s" % [roundi(h.strain),StrainRules.NAMES[h.strain_state()]],18))
 	var strain:=ProgressBar.new();strain.max_value=100;strain.value=h.strain
 	strain.show_percentage=false;strain.custom_minimum_size.y=8
@@ -367,7 +367,8 @@ func _refresh_status() -> void:
 		_status_content.add_child(_wrapped("%s · %s\n%s" % [boon.display_name,boon.duration_text(entry.fights_left),boon.effects_text()],17))
 	for slot in ["weapon","body","back","trinket"]:
 		var item:Equipment=h.get(slot)
-		if item and item.effect:_status_content.add_child(_wrapped(item.display_name+": "+item.effect.effects_text(),17))
+		var seen:Equipment=GearModel.known(item)  # unidentified: only what shows (#223)
+		if seen and seen.effect:_status_content.add_child(_wrapped(item.display_name+": "+seen.effect.effects_text(),17))
 		if item and item.curse:_status_content.add_child(_wrapped("Cursed: "+item.curse.display_name+" · "+item.curse.effects_text(),17,Color("c39ed5")))
 	if h.trait_name!="":_status_content.add_child(_wrapped(h.trait_name+": "+h.trait_text,17))
 	if not h.memories.is_empty():  # #118
@@ -730,6 +731,22 @@ func _perform(kind: String) -> void:
 			clear_inspection()
 	clear_inspection()
 	_request_refresh()
+
+## Runs `measure` with each unidentified worn piece swapped for what shows
+## of it, so the Status numbers don't give its hidden properties away (#223).
+## A worn curse is already known: it bit when it went on.
+func _as_known(h: Companion,measure: Callable):
+	var worn:={}
+	for slot in ["weapon","body","back"]:
+		var item:Equipment=h.get(slot)
+		if item and not item.identified:
+			worn[slot]=item
+			var seen:=GearModel.known(item)
+			seen.curse=item.curse
+			h.set(slot,seen)
+	var value=measure.call()
+	for slot in worn:h.set(slot,worn[slot])
+	return value
 
 func _numbers(hero: Companion,weapon: Equipment) -> String:
 	var held:=hero.weapon

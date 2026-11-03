@@ -269,6 +269,7 @@ Found weapons, armour and back pieces with properties (modifiers) arrive **unide
 - **What shows:** the type, the quality (cracked to exceptional) and the border colour (blue for one property, gold for two). Its plain numbers show as if it had no properties, for example "Unidentified fine iron sword". The card says how many properties are hidden.
 - **What's hidden:** the properties and any curse.
 - **Wearing it:** allowed, and it works in full, hidden properties included. It stays unidentified while worn. A curse still shows itself when the piece is put on, because it won't come off.
+  - The hero's Status tab shows only what shows: damage, hit chance, armour, speed and the piece's listed effects are worked out as if it were the plain piece, until it's read. Health stays true (the health bar is real).
 - **Selling:** the merchant and the smith pay for an unidentified piece as if it were plain. Identify it first to get its full value.
 - **Ways to identify:**
   - **The smith:** 10 gold for a magic piece, 20 for a rare one, worn or carried. His screen has an Identify button.

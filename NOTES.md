@@ -13,6 +13,15 @@ Format:
 
 ---
 
+## 2026-11-03 – Claude (identification polish: Status tab, bot reads before selling, #223)
+
+- **Done:**
+  - The Pack's Status tab no longer gives away a worn unidentified piece. The numbers line and the effects list are worked out with the plain piece swapped in (`_as_known`); max health stays true.
+  - The playtest bot judges finds on what shows (`GearModel.known`).
+  - At camp the bot now reads unidentified spare weapons and armour at the smith when it can afford the fee plus a 15-gold reserve. It then wears a spare if it's now known to be better and not cursed, and sells the rest. It never sold gear before.
+- **Bot (30 per hero):** queen wins Mara/Corin/Alwen 13/19/14 (usual range). Spare pieces sold about 2.4–3 per campaign; identified only 0.1–0.3. Most unidentified finds look like upgrades on their plain numbers alone and are worn at once, and gold at camp is usually tight.
+- **Checks:** identify_check covers the Status tab. Full suite passes.
+
 ## 2026-11-03 – Claude (symbols, waterworks and the keeper's face; #166, #167, #178 closed)
 
 - **Done (items 5 and 6 of the owner's list):**
