@@ -119,18 +119,22 @@ The owner watched the chair sequence: "quite smooth", no visible jump or pop
 at either join, and the clothing "looks great". So no crossfade is needed for
 now. They noticed **her arm passing through her leg**. Measuring the female
 master (hand/forearm and sleeve points against the trousers, every second
-frame; `review/arm-leg-intersections.json`, renders `review/arm-leg-*.png`):
+frame; renders `review/arm-leg-*.png`):
 
-- While seated (hold, and the end of sit-down) her hands rest on her knees
-  and 1–5 fingertip points sit inside the trousers in nearly every frame,
-  up to about 0.015 source units (~6 mm at display scale).
-- During stand-up, around frame 105, the left hand brushes into the side of
-  the thigh as she pushes up, up to about 0.05 source units (~2 cm).
+- **Correction:** a first measurement reported fingertips ~0.015 inside the
+  trousers while seated and ~0.05 at stand-up frame 105. Those came from a
+  faulty inside test (one sleeve point 0.1–0.2 away from the cloth was
+  counted as inside). The corrected test (`review/arm-leg-intersections-v2.json`)
+  only counts a point as inside when it lies behind the nearest surface.
+- With the corrected test, no hand or finger point enters the trousers or the
+  thighs in sit-down, hold or stand-up. Only the tunic sleeve touches the
+  trousers, by up to ~0.006 source units (~3 mm on screen).
+- So the clipping the owner saw is not yet located by measurement. The next
+  step is for the owner to name the motion, moment and view (and whether
+  clothes were on) so it can be measured there.
 
-These are the source poses meeting the trouser thickness, not an alignment
-problem. Possible fixes, not chosen yet: give the trousers a little less
-bulk over the knee/thigh tops in this copy, or lift the hands slightly with
-a small correction layer on top of the clips (source curves untouched).
+A hand-lift correction (`tools/blender_kit/hand_lift.py`, local and not yet
+used) is ready for when the real contact is found.
 
 Rebuild: Blender `--python tools/blender_kit/prepare_wardrobe_v3.py`, copy
 the updated `wardrobe_actor.gd`/`wardrobe_review.gd`/`check_wardrobe.gd` in
