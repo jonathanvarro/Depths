@@ -13,6 +13,13 @@ Format:
 
 ---
 
+## 2026-11-03 – Claude (identification of found gear, #223)
+
+- **Done:** found weapons, armour and back pieces with properties now arrive unidentified. Their type, quality and border show; their properties and any curse don't, though worn pieces work in full. There are three ways to identify: the smith (10 gold for magic, 20 for rare, worn or carried), a single-use touchstone (merchant at 12 gold, also in chests) and a new Mage prayer, Discern (from a tome; one cast reads everything). Unidentified pieces sell as plain ones. Decisions are in DESIGN.md "Identification" and on #223.
+- **Also fixed:** gear prices crept up on every mastery level or temper. 15 of 24 bases have no price in bases.json, so `apply()` multiplied the item's current price again. It now uses the base's own .tres price.
+- **Checks:** new `tools/identify_check.gd`; camp_check covers the smith's Identify button at desktop and phone size. Full suite passes. Bot (30 per hero), queen wins Mara/Corin/Alwen: old code 11/17/9, new 10/10/11, gold from selling about the same. The same code swings about 5 per hero between runs, so this is within noise.
+- **Watch out:** the touchstone borrows the black-ore icon until #216 delivers its own art. While worn, the hero's Status numbers still include a hidden property's effect.
+
 ## 2026-11-03 – Claude (cleanup: two outdated checks, missing .uid files)
 
 - **Done:** `gear_check` now reads the Pack card's title, where #191 moved the quality name. `small_items_check` accepts a cursed rare piece as well as a magic one, since #192 curses any piece with modifiers. Both failed on clean HEAD too: test-only fixes, no game change. Committed the `.uid` files for spells, classes, magic_check and refuge_check.

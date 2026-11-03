@@ -419,6 +419,12 @@ Templates > Download and Install; already installed on the owner's PC).
   (`kindle`), `PartyState.watch_left`, `Minimap.sensed`; CombatState
   `hero_cast`/`is_bound`; Cast in map fights and the Pack's Status tab.
   `tools/magic_check.gd`. Art: #216.
+- Identification (#223, 2026-11-03): Equipment `identified`; GearModel
+  `conceal` (found pieces with modifiers: GearGen.drop, lair prizes),
+  `known` (what shows: no modifiers or curse; numbers, cards, resale) and
+  `identify`. Smith: CampState `identify`/`IDENTIFY_PRICE`, SmithScreen
+  Identify menu. Touchstone (SupplyItem effect IDENTIFY; PartyState
+  `touchstone`, `unidentified`) and the Discern prayer. `tools/identify_check.gd`.
 - Settings (#52): `scripts/settings.gd` (static values, `apply()`, audio
   buses Master/Music/Effects; test runs use test_settings.cfg) and
   `scripts/settings_screen.gd`. New sound players should set `bus`.

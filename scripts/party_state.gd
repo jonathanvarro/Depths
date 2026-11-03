@@ -367,6 +367,8 @@ func cannot_use_reason(item: SupplyItem, in_combat := false, recipient: Companio
 				return "Already known"
 			return "Casts are full"
 		return ""
+	if item.effect == SupplyItem.Effect.IDENTIFY and unidentified().is_empty():
+		return "Nothing to identify"
 	if item.effect == SupplyItem.Effect.BREW:
 		if in_combat:
 			return "Throw it at a foe"
@@ -432,6 +434,10 @@ func use_item(item: SupplyItem, in_combat := false, recipient: Companion = null)
 			reader.emit_changed()
 			advance_time(item.use_time)
 			return "%s learns %s." % [reader.display_name, Spells.name_of(item.spell)]
+		SupplyItem.Effect.IDENTIFY:  # the rarest piece first
+			var pieces := unidentified()
+			pieces.sort_custom(func(a: Equipment, b: Equipment): return a.mods.size() > b.mods.size())
+			return touchstone(pieces[0])
 		SupplyItem.Effect.CANDLE:
 			var reader := _spell_reader(item, recipient)
 			supplies.take(item)
@@ -473,6 +479,26 @@ func use_item(item: SupplyItem, in_combat := false, recipient: Companion = null)
 	if not in_combat:  # in a fight, the round's time covers it
 		advance_time(item.use_time)
 	return item.use_message
+
+
+## Unidentified pieces, worn or carried (owner, 2026-11-03).
+func unidentified() -> Array:
+	return GearModel.owned_by(self).filter(func(i: Equipment): return not i.identified)
+
+
+## A touchstone reads `piece`. Returns what it turned out to be, or "".
+func touchstone(piece: Equipment) -> String:
+	var stone: SupplyItem = null
+	for item in supplies.items:
+		if item is SupplyItem and item.effect == SupplyItem.Effect.IDENTIFY:
+			stone = item
+	if stone == null or piece == null or piece.identified or not supplies.take(stone):
+		return ""
+	advance_time(stone.use_time)
+	var text := GearModel.identify(piece)
+	supplies.changed.emit()
+	changed.emit()
+	return text
 
 
 ## Who a tome or candle is for: `recipient` if they can use it, else the

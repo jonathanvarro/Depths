@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="SupplyItem" format=3]
+
+[ext_resource type="Texture2D" path="res://art/items/salvage-v1/black-ore.png" id="icon"]
+[ext_resource type="Script" path="res://scripts/supply_item.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+icon = ExtResource("icon")
+display_name = "Touchstone"
+description = "A smooth black assayer's stone. Drag a found piece's edge across it and the streak tells what the metal hides. Reads one unidentified piece, then crumbles."
+effect = 12
+use_time = 3
+usable_in_combat = false
+price = 12
+stack = 3
+a_name = "a touchstone"

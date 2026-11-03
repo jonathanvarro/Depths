@@ -91,6 +91,16 @@ static func generate(rng: RandomNumberGenerator, base_id: String, quality := "",
 	return item
 
 
+## The base's own price: bases.json, else its live or stand-in .tres. Never
+## the item's current price, which already counts quality and modifiers
+## (each apply() would multiply it again).
+static func _base_price(b: Dictionary, item: Equipment) -> int:
+	if b.has("price"):
+		return int(b["price"])
+	var file: String = b.get("live", b.get("template", ""))
+	return load("res://data/gear/%s.tres" % file).price if file != "" else item.price
+
+
 ## The base's look and feel: its live .tres, or a stand-in's until new art.
 static func _template(b: Dictionary) -> Equipment:
 	var file: String = b.get("live", b.get("template", ""))
@@ -240,7 +250,7 @@ static func apply(item: Equipment) -> void:
 	item.traits = traits
 	item.display_name = name_of(item)
 	item.tier = ["common", "magic", "rare"][mini(2, item.mods.size())]
-	var base_price: int = int(b.get("price", item.price))
+	var base_price := _base_price(b, item)
 	item.price = roundi(base_price * QUALITY_PRICE.get(item.quality, 1.0) * (1.0 + 0.5 * item.mods.size()))
 	if effects.is_empty():
 		item.effect = null
@@ -258,7 +268,7 @@ static func apply(item: Equipment) -> void:
 static func name_of(item: Equipment) -> String:
 	var b := base(item.base_id)
 	var name: String = b.get("name", item.display_name)
-	for id in item.mods:
+	for id in (item.mods if item.identified else PackedStringArray()):
 		var m_name: String = modifier(id).get("name", "")
 		if m_name.begins_with("of "):
 			name = "%s %s" % [name, m_name]
@@ -266,7 +276,49 @@ static func name_of(item: Equipment) -> String:
 			name = "%s %s" % [m_name, name.substr(0, 1).to_lower() + name.substr(1)]
 	if item.quality != "ordinary":  # the quality word leads: "Cracked keen iron sword"
 		name = "%s %s" % [item.quality.capitalize(), name.substr(0, 1).to_lower() + name.substr(1)]
+	if not item.identified:  # "Unidentified fine iron sword"
+		name = "Unidentified %s" % (name.substr(0, 1).to_lower() + name.substr(1))
 	return name
+
+
+# --- Identification (owner, 2026-11-03) -----------------------------------
+
+## A found piece with modifiers starts unidentified: its type, quality and
+## border show, its modifiers and any curse don't. It works in full anyway.
+static func conceal(item: Equipment) -> Equipment:
+	if item != null and item.base_id != NOWHERE and not item.mods.is_empty():
+		item.identified = false
+		apply(item)
+	return item
+
+
+## What the party can tell of `item`: the piece itself once identified,
+## else the same piece with no modifiers and no curse (for its numbers,
+## effect and resale price).
+static func known(item: Equipment) -> Equipment:
+	if item == null or item.identified:
+		return item
+	var plain: Equipment = item.duplicate()
+	plain.mods = PackedStringArray()
+	plain.curse = null
+	apply(plain)
+	return plain
+
+
+## Reads `item`: its modifiers and any curse show. Returns what it turned
+## out to be, or "" if there was nothing to read.
+static func identify(item: Equipment) -> String:
+	if item == null or item.identified:
+		return ""
+	item.identified = true
+	apply(item)
+	var parts := PackedStringArray()
+	for id in item.mods:
+		parts.append(modifier(id).get("text", ""))
+	var text := "Identified: %s (%s)." % [item.display_name, ", ".join(parts)]
+	if item.curse:
+		text += " It carries a curse: %s." % item.curse.display_name.to_lower()
+	return text
 
 
 # --- Mastery (#192/#193) --------------------------------------------------
@@ -401,7 +453,10 @@ static func card_lines(item: Equipment) -> PackedStringArray:
 		var change := _change(item, ahead)
 		if change != "":
 			lines.append("At mastery %d: %s" % [level + 1, change])
-	for id in item.mods:
+	if not item.identified:
+		var hidden := item.mods.size()
+		lines.append("Unidentified: %d hidden propert%s. The smith, a touchstone or the Discern prayer can read it." % [hidden, "y" if hidden == 1 else "ies"])
+	for id in (item.mods if item.identified else PackedStringArray()):
 		var m := modifier(id)
 		lines.append("%s: %s" % [m.get("name", id).trim_prefix("of ").capitalize() if m.get("name", "").begins_with("of ") else m.get("name", id), m.get("text", "")])
 	for id in item.tempers:

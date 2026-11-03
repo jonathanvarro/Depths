@@ -11,6 +11,7 @@ extends RefCounted
 ##   answers. The cast is spent and their nerves fray.
 
 const StrainRules := preload("res://scripts/strain.gd")
+const GearModel := preload("res://scripts/gear_model.gd")
 
 const CASTS := 3
 ## id -> name, what it does, and where it can be cast.
@@ -19,8 +20,9 @@ const SPELLS := {
 	"light": {"name": "Holy light", "text": "A steady glow for %d time: bright light without oil. In a fight it blinds them like a flare.", "fight": true, "field": true},
 	"bind": {"name": "Bind", "text": "Holds the chosen foe in place: it loses its next %d turns.", "fight": true, "field": false},
 	"watch": {"name": "Watchful eye", "text": "For %d time, the monsters on this floor show on the map.", "fight": false, "field": true},
+	"discern": {"name": "Discern", "text": "Reveals the hidden properties, and any curse, of every unidentified piece the party wears or carries.", "fight": false, "field": true},
 }
-const ORDER := ["mend", "light", "bind", "watch"]
+const ORDER := ["mend", "light", "bind", "watch", "discern"]
 const STARTING := ["mend"]
 const MEND := 8
 const LIGHT_TIME := 40
@@ -102,6 +104,8 @@ static func cast_in_field(party, hero: Companion, id: String, rng: RandomNumberG
 		return ""
 	if id == "mend" and party.most_hurt() == null:
 		return ""
+	if id == "discern" and party.unidentified().is_empty():
+		return ""
 	var failed := spend(hero, rng)
 	party.advance_time(1)
 	if failed != "":
@@ -116,4 +120,11 @@ static func cast_in_field(party, hero: Companion, id: String, rng: RandomNumberG
 			party.watch_left = WATCH_TIME
 			party.changed.emit()
 			return "%s prays, and the floor's monsters show on the map." % hero.display_name
+		"discern":  # owner, 2026-11-03: identification
+			var read := PackedStringArray()
+			for piece: Equipment in party.unidentified():
+				read.append(GearModel.identify(piece))
+			party.changed.emit()
+			party.supplies.changed.emit()
+			return "%s prays over the gear. %s" % [hero.display_name, " ".join(read)]
 	return ""

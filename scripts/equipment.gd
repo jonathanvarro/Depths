@@ -54,6 +54,11 @@ extends Resource
 @export var guard := 0
 @export var gear_version := 0
 @export var instance_id := 0
+## Found pieces start unidentified (owner, 2026-11-03; gear_model.gd
+## conceal/identify): type, quality and border show, but not the modifiers
+## or a curse until the smith, a touchstone or Discern reads them. They
+## work in full all the same.
+@export var identified := true
 
 @export_group("Trinket")
 ## Trinkets (#135; owner 2026-10-21), and cloaks and capes on the back:

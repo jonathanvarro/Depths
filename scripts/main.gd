@@ -2243,7 +2243,7 @@ const LAIR_GOLD := 10
 const LAIR_RARE_CHANCE := 0.25
 
 func _lair_won() -> void:
-	var prize: Equipment = GearModel.random_find(_rng, _depth, 2 if _rng.randf() < LAIR_RARE_CHANCE else 1)  # #192
+	var prize: Equipment = GearModel.conceal(GearModel.random_find(_rng, _depth, 2 if _rng.randf() < LAIR_RARE_CHANCE else 1))  # #192; read it later
 	var gold := LAIR_GOLD + 5 * _depth
 	_party_state.supplies.gold += gold
 	_party_state.supplies.changed.emit()

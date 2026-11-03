@@ -535,6 +535,7 @@ func _add_prayers(h: Companion) -> void:
 	for id:String in Spells.known(h):
 		var reason:=Spells.cannot_cast(h,id,false)
 		if reason=="" and id=="mend" and _party.most_hurt()==null:reason="No one is hurt"
+		if reason=="" and id=="discern" and _party.unidentified().is_empty():reason="Nothing to identify"
 		if reason=="Only in a fight" or not Spells.SPELLS[id]["field"]:
 			_status_content.add_child(_wrapped("%s (in a fight): %s" % [Spells.name_of(id),Spells.describe(id)],17,FieldKit.MUTED))
 			continue
@@ -583,10 +584,11 @@ func _refresh_details() -> void:
 	if _from_slot!="":
 		if item is Equipment:
 			if item.slot=="back":_detail_text.add_child(_wrapped(Equipment.back_text(item),17))
-			elif item.effect:_detail_text.add_child(_wrapped(item.effect.effects_text(),17))
+			elif GearModel.known(item).effect:_detail_text.add_child(_wrapped(GearModel.known(item).effect.effects_text(),17))
 			if item.curse:_detail_text.add_child(_wrapped("Cursed: "+item.curse.effects_text()+". Holy water or the nurse can lift it.",17))
 			for line in GearModel.card_lines(item):_detail_text.add_child(_wrapped(line,17))  # mastery and growth (#192)
 		_action("Take off","unequip",_unequip_reason())
+		_identify_action(item)
 		_detail_text.move_child(description,_detail_text.get_child_count()-1)
 		_position_details.call_deferred()
 		return
@@ -594,14 +596,16 @@ func _refresh_details() -> void:
 		var now:Equipment=_selected_hero.get(item.slot) if _selected_hero else null
 		var comparison:=""
 		if _selected_hero:
-			if item.slot=="weapon":comparison=_numbers(_selected_hero,now)+" → "+_numbers(_selected_hero,item)
-			elif item.slot=="body":comparison=_armour(_selected_hero,now)+" → "+_armour(_selected_hero,item)
+			var seen:=GearModel.known(item)  # unidentified: only what shows (2026-11-03)
+			if item.slot=="weapon":comparison=_numbers(_selected_hero,now)+" → "+_numbers(_selected_hero,seen)
+			elif item.slot=="body":comparison=_armour(_selected_hero,now)+" → "+_armour(_selected_hero,seen)
 		if comparison!="":_detail_text.add_child(_wrapped(comparison,17))
 		if now:_detail_text.add_child(_wrapped("Replaces "+now.display_name,17))
 		if item.slot=="back":_detail_text.add_child(_wrapped("Worn: "+Equipment.back_text(item),17))
-		elif item.effect:_detail_text.add_child(_wrapped("Worn: "+item.effect.effects_text(),17))
+		elif GearModel.known(item).effect:_detail_text.add_child(_wrapped("Worn: "+GearModel.known(item).effect.effects_text(),17))
 		for line in GearModel.card_lines(item):_detail_text.add_child(_wrapped(line,17))  # mastery and growth (#192)
 		_action("Wear" if item.slot=="trinket" else "Equip","equip",_equip_reason(item.slot,null,item))
+		_identify_action(item)
 	else:
 		var charm:Equipment=Trinkets.for_treasure(item) if item.effect==SupplyItem.Effect.TREASURE else null
 		if charm:
@@ -674,6 +678,11 @@ func _action(title: String,kind: String,reason := "") -> void:
 	_detail_actions.add_child(button)
 	if reason!="":_detail_text.add_child(_wrapped(reason,17,FieldKit.MUTED))
 
+## Identify with a touchstone, when one is carried (owner, 2026-11-03).
+func _identify_action(item: Resource) -> void:
+	if item is Equipment and not item.identified and _party.supplies.items.any(func(i):return i.effect==SupplyItem.Effect.IDENTIFY):
+		_action("Identify","identify")
+
 func _perform(kind: String) -> void:
 	if _selection==null or not _selection_available():return
 	var item:=_selection
@@ -693,6 +702,9 @@ func _perform(kind: String) -> void:
 					used.emit("The %s bites into %s's hand. Cursed with %s — it won't come off." % [item.display_name.to_lower(),h.display_name,item.curse.display_name.to_lower()])
 				else:
 					used.emit(h.display_name+" equips "+item.display_name+".")
+		"identify":
+			var read:String=_party.touchstone(item)
+			if read!="":used.emit(read)
 		"drop":
 			if item is Equipment:_party.drop(item)
 			else:_party.supplies.drop(item,1)

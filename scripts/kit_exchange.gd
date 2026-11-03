@@ -128,8 +128,9 @@ func _tier(entry:Dictionary) -> String:
 	return Quality.tier_of(entry.item) if entry.get("item") else "common"
 
 func _properties(entry:Dictionary) -> String:
-	var item:Resource=entry.get("item")
-	if not item is Equipment:return ""
+	var full:Resource=entry.get("item")
+	if not full is Equipment:return ""
+	var item:Equipment=load("res://scripts/gear_model.gd").known(full)  # unidentified: only what shows
 	var parts:=PackedStringArray()
 	if item.slot=="weapon":
 		parts.append("Base damage %d–%d · accuracy %+.0f%%"%[item.attack_min,item.attack_max,item.accuracy_bonus*100])
@@ -138,7 +139,7 @@ func _properties(entry:Dictionary) -> String:
 	elif item.slot=="back":parts.append(Equipment.back_text(item))
 	if item.effect and item.slot!="back":parts.append(item.effect.effects_text())
 	var text:=" · ".join(parts)
-	var lines:PackedStringArray=load("res://scripts/gear_model.gd").card_lines(item)  # mastery and growth (#192)
+	var lines:PackedStringArray=load("res://scripts/gear_model.gd").card_lines(full)  # mastery and growth (#192)
 	return text+("\n"+"\n".join(lines) if not lines.is_empty() else "")
 
 func _render_left() -> void:

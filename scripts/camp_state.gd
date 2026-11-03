@@ -35,9 +35,13 @@ const MERCHANT_STOCK: Array[SupplyItem] = [
 	preload("res://data/items/spade.tres"),
 	preload("res://data/items/pick.tres"),
 	preload("res://data/items/votive_candle.tres"),  # a Mage's cast back (#170)
+	preload("res://data/items/touchstone.tres"),  # reads an unidentified piece (2026-11-03)
 ]
 ## The nurse lifts a bane for this much (#133).
 const LIFT_BANE_PRICE := 20
+## The smith reads an unidentified piece for this much, by its border
+## (owner, 2026-11-03).
+const IDENTIFY_PRICE := {"magic": 10, "rare": 20}
 const SMITH_STOCK: Array[Equipment] = [
 	preload("res://data/gear/plain_knife.tres"),
 	preload("res://data/gear/wooden_club.tres"),
@@ -372,6 +376,29 @@ func smith_wares() -> Array[Equipment]:
 ## one chosen improvement, for gold and a piece of the item's own region's
 ## material (copper ore, goblin-forged scrap, black ore), from the pack or
 ## the stash. Returns why not, or "" when it's done.
+## What the smith asks to read `item`.
+func identify_price(party, item: Equipment) -> int:
+	return price_for(party, IDENTIFY_PRICE.get(item.tier, IDENTIFY_PRICE["rare"]))
+
+
+## The smith reads an unidentified piece, worn or carried. Returns what it
+## turned out to be, or why not ("" never: a reason starts with no "Identified").
+func identify(party, item: Equipment) -> String:
+	if not site_present("smith"):
+		return "The smith is away"
+	if item == null or item.identified:
+		return "Nothing to read"
+	var price := identify_price(party, item)
+	if party.supplies.gold < price:
+		return "Need %d gold" % price
+	party.supplies.gold -= price
+	var text := GearModel.identify(item)
+	party.supplies.changed.emit()
+	party.changed.emit()
+	changed.emit()
+	return text
+
+
 func temper(party, item: Equipment, option_id: String) -> String:
 	if not site_present("smith"):
 		return "The smith is away"
@@ -510,8 +537,8 @@ func buy_lantern(party) -> bool:
 
 
 static func sale_price(item) -> int:
-	if item is Equipment:
-		return floori(item.price * GEAR_RESALE)
+	if item is Equipment:  # unidentified: what it shows, a plain piece (2026-11-03)
+		return floori(GearModel.known(item).price * GEAR_RESALE)
 	return item.price
 
 

@@ -116,8 +116,23 @@ func _initialize() -> void:
 	check("Escape returns to the clearing", main._camp._current == "" and main._camp._buttons["supplies"].visible)
 
 	# Smith: stock shown, nothing for sale yet.
+	var GearModel := load("res://scripts/gear_model.gd")
+	var find: Equipment = GearModel.generate(RandomNumberGenerator.new(), "iron_sword", "fine", 1)
+	find.mods = PackedStringArray(["keen"])  # one property: a magic piece, 10 gold to read
+	GearModel.conceal(find)
+	supplies.gear.append(find)
+	supplies.gold = 30
 	await _open("smith")
 	check("the smith shows today's wares, like the merchant (#196)", main._camp._smith_view.visible and not main._camp._camp.smith_wares().is_empty())
+	var smith = main._camp._smith_view
+	check("...and offers to identify a found piece (2026-11-03)", smith._identify.visible and smith._identify.text == "Identify (1)" and smith._identify.get_global_rect().end.x <= smith.get_viewport_rect().size.x)
+	await _snap("smith")
+	smith._show_identify()
+	smith._identify_menu.hide()
+	smith._on_identify(0)
+	await process_frame
+	check("...reading it for gold: the note says what it is", find.identified and supplies.gold == 20 and smith._read_note.visible and smith._read_note.text.begins_with("Identified") and not smith._identify.visible)
+	await _snap("smith_read")
 
 	# Nurse: treatment takes Mara out for the wound's days.
 	await _open("treatment")

@@ -20,6 +20,7 @@ enum Effect {
 	BREW,  ## an unknown cave brew (#175): drunk outside a fight, thrown in one; see brews.gd
 	TOME,  ## a Mage reads it and learns `spell` for good (#170, spells.gd)
 	CANDLE,  ## gives a Mage `amount` casts back, outside a fight (#170)
+	IDENTIFY,  ## a touchstone: reads one unidentified piece (owner, 2026-11-03)
 }
 
 @export var display_name := "Supply"

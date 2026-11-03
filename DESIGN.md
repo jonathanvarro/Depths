@@ -256,10 +256,25 @@ Numbers are first guesses for the bot and the owner's playtests to tune.
   | **Holy light** | anywhere | Bright light for 40 time, with no oil or torch burning. In a fight it also blinds them like a flare. |
   | **Bind** | in a fight | The chosen foe loses its next 2 turns: it neither moves nor strikes. The queen shakes it off after 1. |
   | **Watchful eye** | outside a fight | For 60 time, every monster group on the floor shows on the map. |
+  | **Discern** | outside a fight | Identifies every unidentified piece the party wears or carries (see *Identification*). Its tome can turn up from floor 1. |
 
 - **Where:** in a fight, **Cast** sits beside Brace (only when a Mage is in the party) and lists the fighting prayers with the casts left. Outside a fight, the Mage's **Status** tab in the Pack lists their prayers with Cast buttons.
 - **Miscasts:** a **Shaken** caster's prayer fails 15% of the time, a **Panicking** one's 30%. The cast is spent, nothing happens ("Alwen's prayer falters. Nothing answers.") and the caster gains 6 strain.
-- **Not yet:** the end-game borrowed spells (worse miscasts), items that grant spells, and art (#216).
+- **Not yet:** the end-game borrowed spells (worse miscasts), items that grant spells, and art (#216). Later spells: #222.
+
+## Identification — decided 2026-11-03
+
+Found weapons, armour and back pieces with properties (modifiers) arrive **unidentified**. This covers chest finds, tougher foes' drops and lair prizes. Gear bought from the smith or the forge is always known.
+
+- **What shows:** the type, the quality (cracked to exceptional) and the border colour (blue for one property, gold for two). Its plain numbers show as if it had no properties, for example "Unidentified fine iron sword". The card says how many properties are hidden.
+- **What's hidden:** the properties and any curse.
+- **Wearing it:** allowed, and it works in full, hidden properties included. It stays unidentified while worn. A curse still shows itself when the piece is put on, because it won't come off.
+- **Selling:** the merchant and the smith pay for an unidentified piece as if it were plain. Identify it first to get its full value.
+- **Ways to identify:**
+  - **The smith:** 10 gold for a magic piece, 20 for a rare one, worn or carried. His screen has an Identify button.
+  - **A touchstone:** a single-use item, 12 gold at the merchant, also found in chests. The Identify button on an unidentified piece's card in the Pack reads that piece. Using the stone from the pack reads the rarest piece first.
+  - **Discern:** a Mage's prayer, one cast, reads every unidentified piece the party holds (see *Magic*).
+- **Also fixed:** a piece's price no longer creeps up each time its numbers are recalculated, as on a mastery level. 15 of the 24 bases had no price of their own, so each recalculation multiplied the current price again.
 
 ## Map and dungeon progression
 

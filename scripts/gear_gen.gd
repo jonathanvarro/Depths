@@ -75,7 +75,7 @@ static func drop(rng: RandomNumberGenerator, depth: int, source: String, foe_hea
 	var item := GearModel.random_find(rng, depth)
 	if not item.mods.is_empty() and floor >= 2 and rng.randf() < CURSED_SHARE:
 		item.curse = load("res://data/boons/%s.tres" % CURSES[rng.randi_range(0, CURSES.size() - 1)])
-	return item
+	return GearModel.conceal(item)  # read later: smith, touchstone or Discern
 
 
 static func _roll_tier(rng: RandomNumberGenerator, odds: Dictionary) -> String:
