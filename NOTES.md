@@ -13,6 +13,18 @@ Format:
 
 ---
 
+## 2026-11-03 – Claude (owner playtest notes filed)
+
+- **Did:** filed the owner's first playtest notes as issues (no code changed):
+  - #227: centre the results, expedition and tent screens; the tent becomes Rest / Store / Back with no day line.
+  - #228: restage the commander's first scene: narration apart, speech bubbles, per-hero spoken replies, accept marked.
+  - #229: camp days 1–2 without traders; campfire prompt, then the mine-path marker; the smith's quest after quest 1, at his site; Pack at camp; merchant like the field kit.
+  - #230: floor 1 has too many rest spots and too few fights; the first quest was hard to finish; the vine prompt and leftover webs; relight a torch early.
+  - #231 (later): XP and level-ups over the portraits.
+  - Comments on #226 (elite goblins met before plain ones) and #225 (owner loves the KayKit boxes and barrels).
+- **Next:** the owner picks an order; #226's floor 2 fix is still waiting on that plan.
+- **Watch out:** #230's quest problem isn't diagnosed yet: check whether `left_behind` fitted, is marked, and whether search and report are clear.
+
 ## 2026-11-03 – Claude (floor 2 balance study #226; journal flare/brace marks; roots sound; docs tidy)
 
 - **Floor 2 study:** the bot now logs every fight wipe (`BOT_WIPES=1`): floor, group, health, party size, level, strain, light, elites at the start, tasted blood and rounds. Floor 2 wipes come mostly from wanderers and map fights. The deadliest groups are web or venom spider + goblin. Tasting blood shows up in nearly every wipe but doesn't cause them (test A barely helps). Moving the spider + goblin pairs to floor 3 (test B) cut floor-2 wipes by about 37% and raised queen wins to 20/20/15. Proposal on #226, **not applied**: waiting for the owner. Test knobs: `BOT_NO_SPIDER_GOBLIN=1`, `BOT_TASTE_FROM=3`; `CombatState.taste_from` defaults to 1, the live rule.
