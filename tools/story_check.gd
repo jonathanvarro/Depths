@@ -313,7 +313,9 @@ func _step3() -> void:
 	main._go_to_floor(1, main.Arrival.FROM_ABOVE)
 	var map = main._map
 	check("with the order given, floor 1 holds the ambush site", "left_behind" in map.packages and map.fight_groups.size() == 1)
+	var site: Rect2i = map.marks.get("quests", {}).get("left_behind", Rect2i())
 	var fight_cell: Vector2i = map.fight_groups.keys()[0]
+	check("the map knows where the site is, and it still has something to do (#230)", site.has_point(fight_cell) and main._quest_site_open("left_behind"))
 	var room: Array = map.room_around(fight_cell)
 	main._party.place(map, room.filter(func(c): return map.content_at(c) == 0)[0])
 	main._on_party_entered_cell(main._party.cell)
@@ -338,6 +340,7 @@ func _step3() -> void:
 	screen._choose(screen._event.choices[1])
 	await process_frame
 	check("gathering their maps finds the evidence", Quests.has_flag(camp, "left_behind", "found") and screen._body.text.contains("arrow"))
+	check("...and the site's map mark goes once it's done (#230)", not main._quest_site_open("left_behind"))
 	if dir != "":
 		await _snap("evidence")
 	screen._finish({"left": false, "ambush": [] as Array[EnemyType]})

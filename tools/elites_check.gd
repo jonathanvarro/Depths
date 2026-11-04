@@ -102,6 +102,16 @@ func _initialize() -> void:
 		f.prepare(1)
 		none += f.foes.filter(func(x): return x.elite != "").size()
 	check("no elites on floor 1", none == 0)
+	# Only kinds already beaten come as elites (owner playtest, #226).
+	var unmet := 0
+	var met := 0
+	for i in 400:
+		var f = CS.new(_party(), [_e("goblin"), _e("rat")] as Array[EnemyType])
+		f.beaten = ["Rat"]
+		f.prepare(4)
+		unmet += f.foes.filter(func(x): return x.elite != "" and x.type.display_name == "Goblin").size()
+		met += f.foes.filter(func(x): return x.elite != "" and x.type.display_name == "Rat").size()
+	check("no elite goblin before a plain one is beaten; rats, once beaten, can be", unmet == 0 and met > 20, "goblin %d, rat %d" % [unmet, met])
 
 	# Drops favour elites.
 	var rng := RandomNumberGenerator.new()

@@ -24,7 +24,7 @@ const ROOM_CONTENT_CHANCE := 0.75
 ## (#16). Depths past the table use its last row. Stairs are placed
 ## separately (#4).
 const ROOM_CONTENT_WEIGHTS := [
-	{"E": 2, "C": 3, "T": 1, "O": 1, "R": 2},
+	{"E": 3, "C": 3, "T": 1, "O": 1, "R": 1},  # owner playtest: fewer rests, more fights (#230)
 	{"E": 3, "C": 2, "T": 2, "O": 1, "R": 1},
 	{"E": 3, "C": 2, "T": 3, "O": 2, "R": 1},
 ]

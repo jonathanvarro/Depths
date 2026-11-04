@@ -407,8 +407,8 @@ func cannot_use_reason(item: SupplyItem, in_combat := false, recipient: Companio
 			if supplies.lantern_is_full():
 				return "Lantern is full"
 		SupplyItem.Effect.LIGHT_TORCH:
-			if supplies.torch_lit():
-				return "One is already lit"
+			if supplies.torch_lit() and supplies.torch_left >= Supplies.TORCH_BURN_TIME:
+				return "One was just lit"
 		SupplyItem.Effect.FEED_PARTY:
 			if most_hurt() == null and not living_members().any(func(m: Companion): return m.is_hungry()):
 				return "Nobody needs it"
@@ -466,7 +466,12 @@ func use_item(item: SupplyItem, in_combat := false, recipient: Companion = null)
 			if living_members().any(func(m: Companion): return m.has_talent("steady_hands")):
 				patient.add_effect_over_time("health", 4, 20)  # steady hands (#47)
 		SupplyItem.Effect.LIGHT_TORCH:
+			var stub: bool = supplies.torch_lit()
 			supplies.light_torch(item)
+			if stub:
+				if not in_combat:
+					advance_time(item.use_time)
+				return "You light a fresh torch and drop the old stub."  # #230
 		SupplyItem.Effect.LIFT_BANE:
 			supplies.take(item)
 			var patients: Array = [recipient] if recipient != null else living_members()

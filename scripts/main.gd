@@ -179,11 +179,13 @@ const ENCOUNTER_GROUPS := {
 			[BAT], [BAT, RAT], [BAT, BAT, RAT]],
 	# Floor 1 is onboarding; floor 2 is where the real game starts and
 	# floor 3 warms up for the fortress (owner, 2026-10-19, #49).
-	2: [[GREAT_RAT], [GOBLIN], [GOBLIN, RAT], [SPIDER, SPIDER], [GOBLIN, SPIDER], [WEBSPINNER, GOBLIN],
+	# The web/venom spider + goblin pairs moved to floor 3 (#226): together
+	# they caused most floor-2 wipes.
+	2: [[GREAT_RAT], [GOBLIN], [GOBLIN, RAT], [SPIDER, SPIDER], [GOBLIN, SPIDER],
 			[GREAT_RAT, SPIDER], [GREAT_RAT, SPIDER, RAT], [GOBLIN, RAT, RAT], [GOBLIN, SPIDER, RAT],
 			[GOBLIN, GOBLIN, RAT], [GOBLIN, GOBLIN, SPIDER], [BAT, GOBLIN], [BAT, BAT, SPIDER],
-			[BEETLE], [BEETLE, RAT], [BEETLE, SPIDER, RAT], [VENOM_SPIDER, GOBLIN], [TRAPPER, GOBLIN], [TRAPPER, GOBLIN, RAT]],
-	3: [[GOBLIN], [GOBLIN, ARCHER], [GOBLIN, DRUMMER],
+			[BEETLE], [BEETLE, RAT], [BEETLE, SPIDER, RAT], [TRAPPER, GOBLIN], [TRAPPER, GOBLIN, RAT]],
+	3: [[GOBLIN], [GOBLIN, ARCHER], [GOBLIN, DRUMMER], [WEBSPINNER, GOBLIN], [VENOM_SPIDER, GOBLIN],
 			[GOBLIN, GOBLIN, ARCHER], [GOBLIN, WEBSPINNER, GOBLIN], [GOBLIN, GOBLIN, DRUMMER], [GUARD, GOBLIN, ARCHER],
 			[GOBLIN, ARCHER, DRUMMER], [GUARD, GOBLIN, GOBLIN],
 			[GOBLIN, GOBLIN, ARCHER, RAT], [GOBLIN, GOBLIN, SPIDER, SPIDER], [GOBLIN, GOBLIN, ARCHER, DRUMMER],
@@ -493,6 +495,8 @@ func _ready() -> void:
 	_party.moved.connect(_minimap.on_party_moved)
 	_minimap.sensed = _sensed_cells  # a Mage's Watchful eye (#170)
 	_full_map_view.sensed = _sensed_cells
+	_minimap.quest_open = _quest_site_open  # quest sites still to do (#230)
+	_full_map_view.quest_open = _quest_site_open
 	_party.moved.connect(_full_map_view.on_party_moved)
 	_party.moved.connect(_on_party_moved)
 	_party.entered_cell.connect(_on_party_entered_cell)
@@ -635,6 +639,14 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 			_floors[depth].events[refuge] = Refuge.EVENT
 		_floors[depth].fight_groups = stamped["fights"]
 		_floors[depth].packages = stamped["placed"]
+		# Visible quests' sites, marked on the map once seen (owner playtest, #230).
+		var sites := {}
+		for id in stamped["sites"]:
+			var package: QuestPackage = Packages.find(id)
+			if package.lair == "" and package.chance == 0.0 and Quests.INFO.has(package.quest) and not Quests.INFO[package.quest]["hidden"]:
+				sites[package.quest] = stamped["sites"][id]
+		if not sites.is_empty():
+			marks["quests"] = sites
 		_floors[depth].lairs = stamped["lairs"]
 		if depth >= Galleries.DEPTH and not use_debug_layout:  # slice 2: water, until it's drained
 			var drained := Quests.has_flag(_camp_state, "dry_passage", "opened") if depth == Galleries.DEPTH \
@@ -843,6 +855,8 @@ func _run_event(cell: Vector2i) -> void:
 		await _stonework_vision()
 	if Quests.has_flag(_camp_state, "keeper", "helped") and not Quests.has_flag(_camp_state, "keeper", "heard"):
 		await _keeper_talk()
+	if Quests.is_active(_camp_state, "left_behind") and Quests.has_flag(_camp_state, "left_behind", "found"):
+		_tip("report_left_behind", "You have what Commander Vael wanted. Report to him at camp: he keeps his post by the path to the mine.")  # what next, said plainly (#230)
 	if _in_opening and cell in _opening_body_cells():
 		_searched_bodies[cell] = true
 		_say("search_body", true)
@@ -865,6 +879,7 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 		types.assign(encounter_pool(_depth, _party_state.living_members().size()).pick_random())
 	var state = CombatState.new(_party_state, types)
 	if not _in_opening:
+		state.beaten = _camp_state.bestiary.keys().filter(func(k): return int(_camp_state.bestiary[k].get("killed", 0)) > 0)  # elites only of kinds already beaten (#226)
 		state.prepare(_depth, _fight_kind)  # deeper is tougher; some elites (#140)
 	if _next_opening != "":
 		state.set_opening(_next_opening)  # struck first, or caught out (#73)
@@ -3957,7 +3972,7 @@ func _on_party_blocked(cell: Vector2i) -> void:
 			tool = item
 			break
 	if tool and _depth != FORTRESS_DEPTH:
-		_ask("Something chokes the passage. Clear it with the %s? (%d time)" % [tool.display_name.to_lower(), CLEAR_PASSAGE_TIME], _clear_passage.bind(cell))
+		_ask("Something chokes the passage. Clear it with the %s? (%d time)" % [tool.display_name.to_lower(), CLEAR_PASSAGE_TIME], _clear_passage.bind(cell), Callable(), ["Clear it", "Leave it"])
 		return
 	# A Fixer clears blockages without a tool (#179; once the Brawler's).
 	var fixer: Companion = null
@@ -3966,7 +3981,7 @@ func _on_party_blocked(cell: Vector2i) -> void:
 			fixer = hero
 			break
 	if fixer and _depth != FORTRESS_DEPTH:
-		_ask("Something chokes the passage. %s knows how to shift it. (%d time)" % [fixer.display_name, CLEAR_PASSAGE_TIME], _clear_passage.bind(cell))
+		_ask("Something chokes the passage. %s knows how to shift it. (%d time)" % [fixer.display_name, CLEAR_PASSAGE_TIME], _clear_passage.bind(cell), Callable(), ["Clear it", "Leave it"])
 		return
 	_show_message(environment_theme.blocked_message + ("" if _depth == FORTRESS_DEPTH else " A spade or a pick would clear it - or a Fixer."))
 
@@ -3975,9 +3990,29 @@ func _on_party_blocked(cell: Vector2i) -> void:
 func _clear_passage(cell: Vector2i) -> void:
 	_party_state.advance_time(CLEAR_PASSAGE_TIME)
 	_map.doors[cell] = DungeonMap.Door.OPEN
+	_map.marks["cleared"] = _map.marks.get("cleared", []) + [cell]  # no torn web left behind (#230)
 	_level.refresh_door(cell)
-	_play_effect(environment_theme.open_sound)
+	_play_effect(environment_theme.blocked_sound if environment_theme.blocked_sound else environment_theme.open_sound)
 	_show_message("You hack your way through.")
+
+
+## What to do on reaching a visible quest's site (#230).
+const QUEST_SITE_HINTS := {
+	"left_behind": "This is where your party fell. Walk into the bodies to search them for what Commander Vael asked for.",
+}
+
+
+## Whether a quest's site on this floor still has something to do (#230).
+func _quest_site_open(quest: String) -> bool:
+	return Packages.active(_camp_state, _depth).any(func(p): return p.quest == quest)
+
+
+## Stepping into a visible quest's site: say what to do there, once (#230).
+func _note_quest_site(cell: Vector2i) -> void:
+	var sites: Dictionary = _map.marks.get("quests", {})
+	for quest in sites:
+		if sites[quest].has_point(cell) and _quest_site_open(quest):
+			_tip("site_" + quest, QUEST_SITE_HINTS.get(quest, 'This is the place for "%s".' % Quests.INFO[quest]["title"]))
 
 
 func _on_party_moved(cell: Vector2i, facing: int) -> void:
@@ -3988,6 +4023,7 @@ func _on_party_moved(cell: Vector2i, facing: int) -> void:
 	if cell != _cell_now:
 		_cell_before = _cell_now
 		_cell_now = cell
+		_note_quest_site(cell)
 	var content: int = _map.content_at(cell)
 	var state := ""
 	if content != DungeonMap.Content.NONE:

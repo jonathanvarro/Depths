@@ -66,6 +66,7 @@ var events_rules  # room_events.gd
 var party
 var camp
 var floors := {}  # depth -> DungeonMap (kept until a day passes, as in game)
+var beaten := {}  # monster kinds (display names) beaten this campaign: elites come only from these (#226)
 var first_seed := 0
 var depth := 0
 var cell := Vector2i.ZERO
@@ -113,6 +114,7 @@ func _campaign(hero_path: String, run_seed: int, max_days: int) -> Dictionary:
 	wander_rng.seed = run_seed + 1
 	first_seed = run_seed
 	floors.clear()
+	beaten.clear()
 	stats = {
 		"won": false, "days": 0, "expeditions": 0, "wipes": 0, "returns": 0, "fight_retreats": 0,
 		"fights": 0, "fights_won": 0, "wanderers": 0, "events": 0, "injuries": 0, "stuck": "",
@@ -789,14 +791,9 @@ func _event(at: Vector2i) -> String:
 # --- Fights --------------------------------------------------------------
 
 ## Runs a fight with the bot's policy. `kind` is "", "gate" or "queen".
-## The floor's encounter groups, as in the game. BOT_NO_SPIDER_GOBLIN=1
-## (balance test, 2026-11-03) leaves floor 2's web/venom spider + goblin
-## pairs out, as if they lived on floor 3.
+## The floor's encounter groups, as in the game.
 func _pool(at: int) -> Array:
-	var pool: Array = Main.encounter_pool(at, party.living_members().size())
-	if at == 2 and OS.get_environment("BOT_NO_SPIDER_GOBLIN") != "":
-		pool = pool.filter(func(g: Array): return not (g.has(Main.GOBLIN) and (g.has(Main.WEBSPINNER) or g.has(Main.VENOM_SPIDER))))
-	return pool
+	return Main.encounter_pool(at, party.living_members().size())
 
 
 func _fight(group: Array, kind: String, on_map := false) -> int:
@@ -805,6 +802,7 @@ func _fight(group: Array, kind: String, on_map := false) -> int:
 	types.assign(group)
 	var state = CS.new(party, types)
 	state.rng.seed = randi()
+	state.beaten = beaten.keys()  # elites only of kinds already beaten (#226), as in the game
 	state.prepare(depth, kind)  # deeper is tougher; some elites (#140), as in the game
 	if OS.get_environment("BOT_TASTE_FROM") != "":  # balance test (2026-11-03)
 		state.taste_from = int(OS.get_environment("BOT_TASTE_FROM"))
@@ -850,6 +848,7 @@ func _fight(group: Array, kind: String, on_map := false) -> int:
 	for foe in state.foes:
 		if foe.health <= 0:
 			camp.count_kill(foe.type.display_name)
+			beaten[foe.type.display_name] = true
 			if foe.type.purse.y > 0:
 				var coins := randi_range(foe.type.purse.x, foe.type.purse.y)
 				party.supplies.gold += coins

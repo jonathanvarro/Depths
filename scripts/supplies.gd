@@ -182,8 +182,10 @@ func spend_flare() -> void:
 
 ## Lights a torch from the pack and holds it (it replaces the lantern's
 ## light while it burns).
+## A fresh torch can replace a burning one before it's out; what's left of
+## the old one is thrown away (owner playtest, #230).
 func light_torch(torch: SupplyItem) -> bool:
-	if source == Source.TORCH or not take(torch):
+	if (torch_lit() and torch_left >= TORCH_BURN_TIME) or not take(torch):
 		return false
 	var band_before := light_band()
 	source = Source.TORCH

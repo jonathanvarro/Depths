@@ -73,10 +73,10 @@ func _initialize() -> void:
 	for cell in main._map.events:
 		if main._props.has(cell):
 			shown += 1
-			if main._map.events[cell].kind == main.DungeonMap.Content.TRAP:
+			if main._map.events[cell].kind == main.DungeonMap.Content.TRAP and not main._trap_seen(cell):  # a spotted one shows
 				traps_shown += 1
 	check("room contents stand in their rooms", shown > 0, "%d props" % shown)
-	check("traps stay hidden", traps_shown == 0)
+	check("traps stay hidden until spotted", traps_shown == 0)
 	var box: RoomEvent = load("res://data/events/chest_strongbox.tres")
 	var cell: Vector2i = main._party.cell + main.Party.DIRECTIONS[main._party.facing]
 	main._map.events[cell] = box

@@ -45,5 +45,13 @@ func _initialize() -> void:
 	c.foes[1].health = 0
 	c._check_end()
 	check("with the queen still standing, the fight goes on", c.result == CS.Result.ONGOING and c.foes[0].is_alive())
+	# A fresh torch before the old one is out (#230): the stub is lost.
+	var torch: SupplyItem = load("res://data/items/torch.tres")
+	var r = _party()
+	check("a torch just lit can't be replaced", r.cannot_use_reason(torch) != "" and not r.supplies.light_torch(torch))
+	r.supplies.torch_left = 10.0
+	var left: int = r.supplies.count(torch)
+	var said: String = r.use_item(torch)
+	check("a burning one can: full again, one torch spent", r.supplies.torch_left > r.supplies.TORCH_BURN_TIME - 5.0 and r.supplies.count(torch) == left - 1 and said.contains("stub"), said)
 	print("fails=", fails)
 	quit()

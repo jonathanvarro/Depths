@@ -250,6 +250,7 @@ func _initialize() -> void:
 		var time_before: int = ps.time_elapsed
 		main._clear_passage(blocked)
 		check("a spade clears a blocked passage", map.door_at(blocked) == main.DungeonMap.Door.OPEN and ps.time_elapsed == time_before + main.CLEAR_PASSAGE_TIME)
+		check("...leaving an open way, not a torn web (#230)", blocked in map.marks.get("cleared", []) and not main._level._door_nodes.has(blocked))
 	else:
 		check("a blocked passage to clear on this floor", false)
 	print("fails=", fails)

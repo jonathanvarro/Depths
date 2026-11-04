@@ -444,6 +444,10 @@ Templates > Download and Install; already installed on the owner's PC).
   down; `DungeonMap.marks["refuge"]`. EventOutcome `recover` heals everyone
   to full with `rest`. An underground camp: never call `Progression.reset`.
   `tools/refuge_check.gd`; the bot's `BOT_NO_REFUGE=1` leaves it out.
+- Playtest fixes (2026-11-03, #230/#226): visible quests' package sites are
+  `map.marks["quests"]` (amber cairn once seen, until done; once-only site
+  tips); cleared blockages are `marks["cleared"]` (no torn web). Elites
+  only come from kinds already beaten (`CombatState.beaten`).
 - Magic (#170, 2026-11-02): `scripts/spells.gd` (prayers: Mend, Holy light,
   Bind, Watchful eye; CASTS per trip, refilled in `Progression.reset`;
   miscasts when Shaken/Panicking). Companion `spells` (from tomes, kept) and

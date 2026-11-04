@@ -268,6 +268,12 @@ func _init(party_state, enemy_types: Array[EnemyType]) -> void:
 ## Sets the fight up for its floor (#140): deeper foes are tougher, and
 ## some become elites. `kind`: "", "gate" or "queen" (set fights have no
 ## elites). The game and the playtest bot both call this, so they match.
+## Monster kinds (display names) the party has beaten before: only those
+## can come as elites, so a Savage goblin never comes before a plain one
+## (owner playtest, #226). null: any kind can (tests that build fights).
+var beaten = null
+
+
 func prepare(depth: int, kind := "") -> void:
 	depth_scale = DEPTH_SCALE.get(depth, 1.0)
 	floor_depth = depth
@@ -278,7 +284,7 @@ func prepare(depth: int, kind := "") -> void:
 		var chance: float = ELITE_CHANCE.get(depth, 0.0)
 		var made := 0
 		for foe in foes:
-			if made < MAX_ELITES.get(depth, 0) and rng.randf() < chance:
+			if made < MAX_ELITES.get(depth, 0) and rng.randf() < chance and (beaten == null or foe.type.display_name in beaten):
 				make_elite(foe, ELITES[rng.randi_range(0, ELITES.size() - 1)])
 				made += 1
 	# Their first moves were planned when the fight was set up; planning

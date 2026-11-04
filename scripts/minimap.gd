@@ -17,6 +17,7 @@ const SEEN_FROM_AFAR := [6,7]
 const PAPER := preload("res://art/ui/map-v1/paper.tres")
 const QUIET_PAPER := preload("res://art/ui/map-v1/quiet-centre.png")
 const INK := Color("403529")
+const QUEST_TINT := Color(1.0, 0.72, 0.3)  # a quest's site (#230)
 const GLYPHS := {
 	"party":preload("res://art/ui/backlog96-v1/map/party.png"),
 	"up":preload("res://art/ui/backlog96-v1/map/up.png"),
@@ -43,6 +44,8 @@ var reveal_all := false:
 		queue_redraw()
 ## Returns cells to mark as monsters (a Mage's Watchful eye, #170).
 var sensed := Callable()
+## quest id -> bool: whether its site still has something to do (#230).
+var quest_open := Callable()
 var _cache_key := -1
 var _edges: Array = []
 var _known_floor := {}
@@ -185,6 +188,17 @@ func _draw() -> void:
 		var spot: Vector2i=landmark["centre"]
 		if (landmark["seen"] or reveal_all) and cells.has_point(spot):
 			_draw_landmark(origin+(Vector2(spot-cells.position)+Vector2.ONE*.5)*tile,tile)
+	# Visible quests' sites once any of it is seen, until done (#230): the
+	# cairn in amber.
+	for quest in map.marks.get("quests", {}):
+		var site: Rect2i=map.marks["quests"][quest]
+		var spot:=site.get_center()
+		var seen:=reveal_all
+		for y in range(site.position.y,site.end.y):
+			for x in range(site.position.x,site.end.x):
+				seen=seen or map.explored.has(Vector2i(x,y))
+		if seen and cells.has_point(spot) and (not quest_open.is_valid() or quest_open.call(quest)):
+			_draw_marker(GLYPHS.landmark,origin+(Vector2(spot-cells.position)+Vector2.ONE*.5)*tile,tile,QUEST_TINT)
 	if sensed.is_valid():
 		for cell: Vector2i in sensed.call():
 			if cells.has_point(cell):_draw_marker(GLYPHS.danger,origin+(Vector2(cell-cells.position)+Vector2.ONE*.5)*tile,tile,Color(1,.55,.45))

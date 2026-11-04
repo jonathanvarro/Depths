@@ -13,6 +13,19 @@ Format:
 
 ---
 
+## 2026-11-03 – Claude (playtest fixes: floor 1 and floor 2, #230, #226)
+
+- **Floor 1:** room contents are now 3 fights, 3 chests, 1 trap, 1 strange object and 1 rest spot (were 2 fights and 2 rests).
+- **The first quest:** `Packages.place` now records each placed package's area (`sites`). Main stores the visible quests' sites in `map.marks["quests"]`.
+  - The map draws the cairn in amber at a site once any of it is seen, until the site has nothing left to do (`Minimap.quest_open` ← main `_quest_site_open`).
+  - Stepping into the site shows a once-only tip (`QUEST_SITE_HINTS`); finding the evidence shows a tip saying to report to Vael at the mine path.
+- **Blocked passages:** the prompt says "Clear it / Leave it" (not Go / Stay). A cleared blockage leaves an open way, not the theme's torn web (`map.marks["cleared"]`, LevelBuilder), and rustles with the blocked sound.
+- **Torches:** a fresh torch can replace a burning one; the stub is thrown away. It's refused only while the current one is untouched.
+- **Floor 2 (#226):** the web/venom spider + goblin pairs moved to floor 3. Elites now come only from kinds the party has already beaten (`CombatState.beaten`, from the journal's kills; the bot keeps its own `beaten`). The bot's `BOT_NO_SPIDER_GOBLIN` knob is gone.
+- **Checks:** torch, elites, boons and story checks cover these.
+- **Next:** camp and screens (#227–#229).
+- **Watch out:** the site marker reuses the landmark cairn, tinted; a dedicated quest glyph would be a small art request.
+
 ## 2026-11-03 – Claude (owner playtest notes filed)
 
 - **Did:** filed the owner's first playtest notes as issues (no code changed):

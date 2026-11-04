@@ -73,7 +73,7 @@ static func place(layout: PackedStringArray, packages: Array, seed_value: int, a
 	var rows := Array(layout)
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed_value
-	var out := {"events": {}, "fights": {}, "lairs": {}, "placed": [], "failed": []}
+	var out := {"events": {}, "fights": {}, "lairs": {}, "placed": [], "failed": [], "sites": {}}
 	for package: QuestPackage in packages:
 		var spots := _spots(rows, package)
 		if spots.is_empty():
@@ -97,6 +97,7 @@ static func place(layout: PackedStringArray, packages: Array, seed_value: int, a
 				out["events"].merge(found["events"])
 				out["fights"].merge(found["fights"])
 				out["lairs"].merge(found["lairs"])
+				out["sites"][package.id] = Rect2i(at, Vector2i(package.rows[0].length(), package.rows.size()))
 				placed = true
 		if not placed:
 			out["failed"].append(package.id)
