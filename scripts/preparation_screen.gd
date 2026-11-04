@@ -40,11 +40,13 @@ func _init() -> void:
 	column.add_theme_constant_override("separation", 14)
 	content.add_child(column)
 	_title = _label("", HEADING, 32, TEXT)
+	_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER  # centred, not edge to edge (#227)
 	column.add_child(_title)
 
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 32)
 	row.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	row.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	column.add_child(row)
 	var party_column := VBoxContainer.new()
 	party_column.add_theme_constant_override("separation", 10)
@@ -54,7 +56,7 @@ func _init() -> void:
 	_cards.add_theme_constant_override("separation", 8)
 	party_column.add_child(_cards)
 	var pack_column := VBoxContainer.new()
-	pack_column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	pack_column.custom_minimum_size = Vector2(340, 0)
 	pack_column.add_theme_constant_override("separation", 6)
 	row.add_child(pack_column)
 	pack_column.add_child(_label("Pack", HEADING, 24, TEXT))
@@ -70,7 +72,7 @@ func _init() -> void:
 	_enter = Button.new()
 	_enter.text = "Enter the mine"
 	_enter.custom_minimum_size = Vector2(280, 64)
-	_enter.size_flags_horizontal = Control.SIZE_SHRINK_END
+	_enter.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	_enter.add_theme_font_override("font", ACTION)
 	_enter.add_theme_font_size_override("font_size", 24)
 	_enter.add_theme_color_override("font_color", AMBER)

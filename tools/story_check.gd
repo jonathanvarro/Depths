@@ -42,6 +42,25 @@ func _talk(main, cs, who: String, a: String = "", b: String = "", c: String = ""
 		return false
 	talk.pressed.emit()
 	await process_frame
+	return await _answer(main, a, b, c)
+
+
+## Walks up to the smith: his news plays there, then his wares (#229).
+func _visit_smith(main, cs, a: String = "", b: String = "") -> bool:
+	cs._close_activity()
+	main._camp_state.set_site_present("smith", true)
+	cs.open_activity("smith")
+	await process_frame
+	if not main._conversation.visible:
+		return false
+	var done: bool = await _answer(main, a, b)
+	await process_frame
+	var opened: bool = cs._smith_view.visible
+	cs._close_activity()
+	return done and opened
+
+
+func _answer(main, a: String = "", b: String = "", c: String = "") -> bool:
 	for reply in [a, b, c]:
 		if not main._conversation.visible:
 			break
@@ -111,6 +130,7 @@ func _initialize() -> void:
 	await process_frame
 	check("a talk button for the commander, at the fire", await _talk(main, cs, "Vael", "Go on"))
 	check("...a reminder while the quest is open", Quests.is_active(camp, "left_behind"))
+	check("the smith keeps his errand until the first order is done (#229)", main.Story.camp_talk(camp, "smith") == "")
 	Quests.set_flag(camp, "left_behind", "found")
 	cs._refresh_activity()
 	await process_frame
@@ -121,12 +141,13 @@ func _initialize() -> void:
 	cs._close_activity()
 	cs.open_activity("fire")
 	await process_frame
-	check("the smith asks for iron", await _talk(main, cs, "smith", "\"I'll bring"))
+	check("the smith's errand isn't told at the fire", not cs._body.find_children("*", "Button", true, false).any(func(b): return b.text.contains("smith")))
+	check("the smith asks for iron at his anvil, once the first order is done", await _visit_smith(main, cs, "\"I'll bring"))
 	check("...and it's an active quest", Quests.is_active(camp, "iron_sample"))
 	Quests.set_flag(camp, "iron_sample", "have_ore")
 	cs._refresh_activity()
 	await process_frame
-	check("bringing the ore resolves it", await _talk(main, cs, "smith", "Go on") and Quests.stage(camp, "iron_sample") == Quests.Stage.RESOLVED)
+	check("bringing the ore resolves it", await _visit_smith(main, cs, "Go on") and Quests.stage(camp, "iron_sample") == Quests.Stage.RESOLVED)
 	check("...and the smith sells the camp-forged blade", camp.smith_stock().any(func(g): return g.display_name == "Camp-forged blade"))
 	cs._close_activity()
 	Quests.set_flag(camp, "three_knocks", "crew_sent")

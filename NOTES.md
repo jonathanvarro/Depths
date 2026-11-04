@@ -13,6 +13,22 @@ Format:
 
 ---
 
+## 2026-11-03 – Claude (playtest fixes: camp and screens, #227, #229)
+
+- **Centred screens:** the results screen keeps a column of at most 900 px with title, text, chips and button centred, and short endings sit mid-screen. The expedition screen's party and pack form a centred block with the button below.
+- **Tent:** three centred buttons, Rest / Store / Back. The explanation moved to Rest's tooltip and the day line is gone. Training shows only while someone is still owed a level.
+- **First days:** `begin_arrivals` hides the merchant, the nurse and the smith until day 3 (`CampState.ARRIVAL_DAY`, `traders_arrival_day`). The caravan no longer has an "unloading" step on new stories.
+- **Guide:** `CampScreen.guide_target()` shows an amber "▼ Start here" over the fire while alone, then "▼ Into the mine", on days 1–2 until the party has been down that day.
+- **Smith:** his errand waits until Those Left Behind is resolved, and his talk plays when you walk up to him (then his wares open). It no longer shows at the fire.
+- **Pack at camp:** a Pack button sits beside Save & exit (I/B too). The Pack sits just above the camp in the canvas and won't open over a place's own screen.
+- **Trades** (`kit_exchange.gd`, so merchant, smith, chest and stash):
+  - right-click does a tile's action at once;
+  - hover tooltips give the name, properties, description, price and right-click action;
+  - pack tiles show their sale price, with the stack count moved to the top corner.
+- **Checks:** new `tools/first_days_check.gd`; camp_check (the tent) and story_check (the smith) were updated.
+- **Next:** #228, the commander's first scene (narration apart, speech bubbles, per-hero replies).
+- **Watch out:** the trades' hover text uses the plain tooltip. The Pack's richer hover card (#191) could replace it later.
+
 ## 2026-11-03 – Claude (playtest fixes: floor 1 and floor 2, #230, #226)
 
 - **Floor 1:** room contents are now 3 fights, 3 chests, 1 trap, 1 strange object and 1 rest spot (were 2 fights and 2 rests).

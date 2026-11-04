@@ -12,6 +12,7 @@ signal cave_chosen(start_depth: int)
 ## Save and go back to the title (#45).
 signal save_and_exit
 signal open_settings
+signal open_pack  # check items and equipment at camp (owner playtest, #229)
 
 const DIR := "res://art/camp/highres-v4/"
 const PORTRAIT_DIR := DIR
@@ -45,6 +46,8 @@ var content: Control  # main.gd keeps this inside the safe area
 var _camp  # camp_state.gd
 var _party  # party_state.gd
 var _note: Label  # a passing announcement over the clearing
+var _guide: Label  # the first days' pointer: the fire, then the mine path (#229)
+var _smith_talking := false
 var _note_tween: Tween
 var _canvas: Control
 var _buttons := {}  # site id -> Button
@@ -67,6 +70,7 @@ var _stash_view: Control  # the tent's Store (owner, 2026-10-25)
 var _last_site := ""
 var _save_button: Button
 var _settings_button: Button
+var _pack_button: Button
 ## Presentation toggle for a still review or reduced-motion integration.
 var animate_lights := true:
 	set(value):
@@ -129,6 +133,14 @@ func _init() -> void:
 	save.add_theme_font_size_override("font_size", 11)
 	save.pressed.connect(func(): save_and_exit.emit())
 	_canvas.add_child(save)
+	var pack := _button("Pack")
+	_pack_button = pack
+	pack.position = Vector2(340, 326)
+	pack.size = Vector2(90, 30)
+	pack.add_theme_font_size_override("font_size", 11)
+	pack.tooltip_text = "Check your items and equipment"
+	pack.pressed.connect(func(): open_pack.emit())
+	_canvas.add_child(pack)
 	var gear := _button("")
 	gear.icon=SETTINGS_ICON
 	gear.expand_icon=true
@@ -163,6 +175,13 @@ func _init() -> void:
 	_note.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_note.modulate.a = 0.0
 	_canvas.add_child(_note)
+	_guide = _label("", ACTION, 13, AMBER)
+	_guide.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_guide.add_theme_color_override("font_outline_color", Color("101513"))
+	_guide.add_theme_constant_override("outline_size", 4)
+	_guide.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_guide.visible = false
+	_canvas.add_child(_guide)
 	content.resized.connect(_fit)
 	_ambience = Sounds.make_loop(self, "camp", -22.0)
 	visibility_changed.connect(func():
@@ -214,6 +233,11 @@ func announce(text: String) -> void:
 	_note_tween = create_tween()
 	_note_tween.tween_interval(3.0)
 	_note_tween.tween_property(_note, "modulate:a", 0.0, 0.8)
+
+
+## A place's own screen is open (a trade, the stash, a site's panel).
+func is_busy() -> bool:
+	return _current != "" or _stash_view.visible
 
 
 func is_open(id: String) -> bool:
@@ -274,6 +298,7 @@ func _update_site_art() -> void:
 	if _camp==null:return
 	_save_button.visible=_current==""
 	_settings_button.visible=_current==""
+	_pack_button.visible=_current==""
 	_dressing.refresh(_camp)
 	for id in _site_art:
 		var present: bool=_camp.site_present(id)
@@ -289,10 +314,11 @@ func _update_site_art() -> void:
 	_site_art["cave"].get_node("Notice").visible=has_contract
 	var occupied: bool = _camp.recovering.keys().any(func(hero):return _camp.is_recovering(hero))
 	_site_art["treatment"].get_node("OccupiedCot").visible=occupied
+	_place_guide()
 	# News follows the same story availability as the site's conversation.
 	for id in _buttons:
 		if id != "supplies" and _sites.has(id):
-			var news: bool = id == "fire" and _sites.keys().any(func(site): return Story.camp_talk(_camp, site) != "")
+			var news: bool = (id == "fire" and _sites.keys().any(func(site): return site != "smith" and Story.camp_talk(_camp, site) != "")) 					or (id == "smith" and Story.camp_talk(_camp, "smith") != "")
 			_buttons[id].text = _sites[id].label
 			_buttons[id].icon = NEWS_ICON if news else null
 			_buttons[id].icon_alignment = HORIZONTAL_ALIGNMENT_RIGHT
@@ -300,6 +326,27 @@ func _update_site_art() -> void:
 			_buttons[id].add_theme_constant_override("icon_max_width", 14)
 			_buttons[id].tooltip_text = "Someone here has news" if news else ""
 			_buttons[id].accessibility_name = _sites[id].label + (", new conversation" if news else "")
+
+
+## Where to go next on the first two days (owner playtest, #229): the fire
+## to find companions, then the mine path once there's a party. Gone once
+## the party has been down today, and from day 3.
+func guide_target() -> String:
+	if _camp == null or _party == null or _camp.day > 2 or _camp.explored_today:
+		return ""
+	return "fire" if _party.members.size() < 2 else "cave"
+
+
+func _place_guide() -> void:
+	var target := guide_target()
+	_guide.visible = target != "" and _current == "" and _buttons.has(target) and _buttons[target].visible
+	if not _guide.visible:
+		return
+	var rect: Rect2 = Rect2(_buttons[target].position, _buttons[target].size)
+	_guide.text = "▼ Start here" if target == "fire" else "▼ Into the mine"
+	_guide.size = Vector2(140, 18)
+	_guide.position = Vector2(rect.get_center().x - 70, rect.end.y - 42)
+	_canvas.move_child(_guide, -1)
 
 
 ## Scales the 640 x 360 scene to fit the safe area, centred.
@@ -312,7 +359,7 @@ func _fit() -> void:
 	_canvas.position = (room - CANVAS * ratio) / 2.0
 	# Keep global/activity controls comfortably tappable at Larger UI scale.
 	var height:=maxf(30.0,44.0/ratio)
-	for button in [_save_button,_settings_button,_back]:
+	for button in [_save_button,_settings_button,_pack_button,_back]:
 		if button:
 			button.custom_minimum_size.y=height
 			button.size.y=height
@@ -323,6 +370,8 @@ func _fit() -> void:
 		_save_button.position.x=_settings_button.position.x-114
 		_save_button.position.y=CANVAS.y-height-4
 		_settings_button.position.y=CANVAS.y-height-4
+		_pack_button.size.x=90
+		_pack_button.position=Vector2(_save_button.position.x-100,CANVAS.y-height-4)
 	for button in _body.find_children("*","Button",true,false):button.custom_minimum_size.y=height
 
 
@@ -416,7 +465,9 @@ func _refresh_activity() -> void:
 		return
 	if _current=="smith":
 		_activity.visible=false
-		_smith()
+		await _smith_talk()
+		if _current=="smith":
+			_smith()
 		return
 	for child in _body.get_children():
 		_body.remove_child(child)
@@ -438,7 +489,8 @@ func _talk_row() -> void:
 	if _current != "fire":
 		return  # talk and quests gather at the campfire for now (owner, 2026-10-25)
 	for site in _sites:
-		_talk_button(Story.camp_talk(_camp, site))
+		if site != "smith":  # the smith speaks at his own anvil (owner playtest, #229)
+			_talk_button(Story.camp_talk(_camp, site))
 
 
 func _talk_button(id: String) -> void:
@@ -454,6 +506,21 @@ func _talk_button(id: String) -> void:
 		Story.after_talk(_camp, id)
 		_refresh_activity())
 	_body.add_child(button)
+
+
+## The smith has something to say: it's said on arriving at his anvil,
+## then his wares open (owner playtest, #229).
+func _smith_talk() -> void:
+	var id := Story.camp_talk(_camp, "smith")
+	var talk := Story.conversation(id)
+	if talk == null or conversation == null or _smith_talking:
+		return
+	_smith_talking = true  # a refresh mid-talk mustn't start it again
+	var heroes: Array = _party.members.filter(func(h): return h.founder or h.main_hero)
+	await conversation.play(talk, heroes[0] if not heroes.is_empty() else (_party.members[0] if not _party.members.is_empty() else null), _camp, _party.members)
+	Story.after_talk(_camp, id)
+	_smith_talking = false
+	_update_site_art()
 
 
 ## The merchant (#42): buy supplies and the lantern, sell treasure and gear.
@@ -657,27 +724,31 @@ func _nurse() -> void:
 			_body.add_child(treat)
 
 
+## The tent (owner playtest, #227): three centred buttons - Rest, Store,
+## Back. No explanations or day line; the day is on the main screen and
+## the tooltips say the rest. A hero still owed a level (rare: levels are
+## chosen underground) gets the choice above them.
 func _tent() -> void:
-	_training()
-	# Rest, and the stash behind its own button: no scrolling (owner,
-	# 2026-10-25). The day is already on the main screen.
-	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation", 10)
+	if _party.members.any(func(h): return h.uses_stats and Progression.ready_to_advance(h)):
+		_training()
+	var column := VBoxContainer.new()
+	column.add_theme_constant_override("separation", 10)
+	column.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	var rest := _button("Rest")
+	rest.tooltip_text = "Sleep until morning: heals and calms. Injuries need the nurse. The mine shifts overnight."
 	rest.pressed.connect(func():
 		_camp.rest(_party)
-		_refresh_activity()
-		_text("A night's rest. It's day %d." % _camp.day, AMBER))
-	row.add_child(rest)
-	var about := _label("Heals and calms. Injuries need the nurse. The mine shifts overnight.", BODY, 12, MUTED)
-	about.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	about.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	row.add_child(about)
-	_body.add_child(row)
+		_refresh_activity())
 	var store := _button("Store")
 	store.tooltip_text = "Store and take items and gold: they stay safe at camp."
 	store.pressed.connect(_open_stash)
-	_body.add_child(store)
+	var back := _button("Back")
+	back.pressed.connect(_close_activity)
+	for button: Button in [rest, store, back]:
+		button.custom_minimum_size = Vector2(150, 34)
+		button.size_flags_horizontal = Control.SIZE_FILL
+		column.add_child(button)
+	_body.add_child(column)
 
 
 func _open_stash() -> void:

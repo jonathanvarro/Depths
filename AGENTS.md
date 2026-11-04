@@ -403,7 +403,11 @@ Templates > Download and Install; already installed on the owner's PC).
   CampState `site_presence` / `set_site_present()` controls availability;
   absent keys default present for older saves. New story starts use #80's
   `begin_arrivals()`: unloading merchant opens after the first post-tutorial
-  expedition return; smith appears after the first camp rest.
+  expedition return; smith appears after the first camp rest. Since #229
+  (2026-11-03) the merchant, nurse and smith all arrive on day 3
+  (`ARRIVAL_DAY`); `CampScreen.guide_target()` points at the fire, then the
+  mine path, on days 1–2; the Pack opens at camp; the smith's talk plays at
+  his site. `tools/first_days_check.gd`.
   `Injury.recovery_days`.
   `tools/camp_check.gd` drives every place (args: desk|phone, screenshot dir).
   Higher-resolution camp/items, shared seal, focused live interface cleanup and

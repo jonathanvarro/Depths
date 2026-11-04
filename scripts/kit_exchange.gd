@@ -180,7 +180,7 @@ func _tile(entry:Dictionary,side:String) -> Button:
 	button.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 	button.accessibility_name=_name(entry)
 	button.toggle_mode=true
-	button.tooltip_text=button.accessibility_name
+	button.tooltip_text=_hover_text(entry)
 	button.set_meta("exchange_key",entry.key);button.set_meta("exchange_side",side)
 	button.set_meta("item",entry.get("item"))
 	button.add_theme_stylebox_override("normal",FieldKit.plate(Color(0.04,0.045,0.03,0.20),Color(0.39,0.32,0.23,0.4),2) if side=="left" else StyleBoxEmpty.new())
@@ -188,26 +188,57 @@ func _tile(entry:Dictionary,side:String) -> Button:
 	var icon:=Quality.framed(_texture(entry),_tier(entry),Vector2(32,32))
 	icon.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	icon.offset_left=5;icon.offset_right=-5;icon.offset_top=4;icon.offset_bottom=-5
-	if side=="left" and entry.has("price"):icon.offset_bottom=-22
+	if entry.has("price"):icon.offset_bottom=-22 if side=="left" else -16
 	button.add_child(icon)
 	Quality.add_mastery(button,entry.get("item"))
 	var count:int=entry.get("count",1)
 	if count!=1 and not (side=="left" and entry.has("price")):
 		var badge:=_label("×%d" % count if count>0 else "≈",15,FieldKit.AMBER)
-		badge.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
-		badge.offset_left=-35;badge.offset_top=-21;badge.offset_right=-3;badge.offset_bottom=-1
+		if entry.has("price"):  # the sale price takes the bottom: the count goes up top
+			badge.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT)
+			badge.offset_left=-35;badge.offset_top=1;badge.offset_right=-3;badge.offset_bottom=21
+		else:
+			badge.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
+			badge.offset_left=-35;badge.offset_top=-21;badge.offset_right=-3;badge.offset_bottom=-1
 		badge.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT;button.add_child(badge)
-	if side=="left" and entry.has("price"):
+	if entry.has("price"):  # what it costs, or what it sells for (owner playtest, #229)
+		var small:=side!="left"
 		var price:=HBoxContainer.new();price.mouse_filter=Control.MOUSE_FILTER_IGNORE
-		price.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE);price.offset_top=-22
+		price.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE);price.offset_top=-16 if small else -22
 		price.alignment=BoxContainer.ALIGNMENT_CENTER
-		price.add_child(_icon(COIN,Vector2(14,14)))
-		price.add_child(_label(str(entry.price),15,FieldKit.AMBER))
+		price.add_theme_constant_override("separation",2)
+		price.add_child(_icon(COIN,Vector2(10,10) if small else Vector2(14,14)))
+		price.add_child(_label(str(entry.price),12 if small else 15,FieldKit.AMBER))
 		button.add_child(price)
 	button.pressed.connect(select_item.bind(entry.key,side,true))
+	button.gui_input.connect(_right_click.bind(entry,side))
 	button.mouse_entered.connect(select_item.bind(entry.key,side,false))
 	button.focus_entered.connect(select_item.bind(entry.key,side,false))
 	return button
+
+## Right-click does the tile's action at once: buy, sell or take (owner
+## playtest, #229). Not when it's refused (no gold, no room...).
+func _right_click(event:InputEvent,entry:Dictionary,side:String) -> void:
+	if event is InputEventMouseButton and event.button_index==MOUSE_BUTTON_RIGHT and event.pressed:
+		get_viewport().set_input_as_handled()
+		if entry.get("reason","")=="":
+			select_item(entry.key,side,true)
+			requested.emit(entry,side)
+
+
+## The tile's hover text: name, what it does and, in a trade, its price.
+func _hover_text(entry:Dictionary) -> String:
+	var lines:=[_name(entry)]
+	var properties:=_properties(entry)
+	if properties!="":lines.append(properties)
+	var description:=_description(entry)
+	if description!="":lines.append(description)
+	if entry.has("price"):lines.append(("Buy for %d gold" if entry.get("kind","")!="sell" else "Sells for %d gold")%entry.price)
+	if entry.get("reason","")!="":lines.append(entry.reason)
+	else:lines.append("Right-click: %s" % entry.get("action","Take"))
+	return "
+".join(PackedStringArray(lines))
+
 
 func _show_details() -> void:
 	_clear(_detail_text);_clear(_detail_actions);_detail_icon.texture=null;_primary=null

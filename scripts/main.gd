@@ -4096,10 +4096,12 @@ func _set_debug(enabled: bool) -> void:
 
 ## Opens or closes the pack screen; like the map, the party waits meanwhile.
 func _set_pack(open: bool) -> void:
-	if open and (_prompt.visible or _full_map.visible or _in_combat or _event_screen.visible or _chest.visible or _camp.visible):
+	if open and (_prompt.visible or _full_map.visible or _in_combat or _event_screen.visible or _chest.visible):
 		return
+	if open and _camp.visible and _camp.is_busy():
+		return  # not over a trade or the stash
 	_pack.visible = open
-	_party.locked = open
+	_party.locked = open or _camp.visible
 	_update_hints("pack")
 	_pack.refresh()
 	_layout_hint()
@@ -4363,6 +4365,8 @@ func _build_ui(minimap: Control) -> void:
 	canvas.add_child(_camp)
 	_camp.save_and_exit.connect(save_and_exit)
 	_camp.open_settings.connect(func(): _settings.open())
+	_camp.open_pack.connect(_set_pack.bind(true))
+	canvas.move_child(_pack, _camp.get_index())  # just above the camp, so it opens there too (#229)
 	_camp.conversation = _conversation  # people at camp with news (#123)
 	_preparation = PreparationScreen.new()
 	canvas.add_child(_preparation)

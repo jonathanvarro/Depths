@@ -23,7 +23,8 @@ static func camp_talk(camp, site: String) -> String:
 		"smith":
 			if not camp.site_present("smith"):
 				return ""
-			if Quests.stage(camp, "iron_sample") in [S.UNKNOWN, S.OFFERED]:
+			# His errand waits until the commander's first order is done (#229).
+			if Quests.stage(camp, "iron_sample") in [S.UNKNOWN, S.OFFERED] and Quests.stage(camp, "left_behind") == S.RESOLVED:
 				return "smith_offer"
 			if Quests.is_active(camp, "iron_sample") and Quests.has_flag(camp, "iron_sample", "have_ore"):
 				return "smith_deliver"

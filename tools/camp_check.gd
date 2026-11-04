@@ -148,7 +148,9 @@ func _initialize() -> void:
 
 	# Tent: rest (day 2), stash.
 	await _open("rest")
-	check("rest says injuries need the nurse", _body_text().contains("Injuries need the nurse"))
+	var tent_buttons: Array = main._camp._body.find_children("*", "Button", true, false)
+	check("the tent is three buttons: Rest, Store, Back (#227)", tent_buttons.map(func(b): return b.text) == ["Rest", "Store", "Back"] and _body_text().strip_edges() == "", tent_buttons.map(func(b): return b.text))
+	check("rest says injuries need the nurse (its tooltip)", tent_buttons[0].tooltip_text.contains("Injuries need the nurse"))
 	var seed_before: int = main._site_seed
 	check("the tent fits without scrolling", await _fits())
 	check("a Rest button, without a day count (owner, 2026-10-25)", _press(main._camp, "Rest"))

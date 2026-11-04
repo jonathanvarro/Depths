@@ -78,6 +78,11 @@ var site_presence: Dictionary = {}
 var merchant_unloading := false
 ## Zero means no pending arrival (including older saves).
 var smith_arrival_day := 0
+## The merchant and the nurse arrive with him on day 3 (owner playtest,
+## #229: no gold and no injuries to spend on before then).
+var traders_arrival_day := 0
+## When the merchant, nurse and smith arrive on a new story.
+const ARRIVAL_DAY := 3
 const SITE_IDS := ["supplies", "treatment", "rest", "smith", "fire", "cave"]
 ## Items and gear left in the tent; they survive a party wipe.
 var stash = Supplies.new()
@@ -141,9 +146,10 @@ func set_site_present(id: String, present: bool) -> void:
 
 ## Owner's starting composition; story entry calls this once, not on rest.
 func begin_arrivals() -> void:
-	site_presence = {"smith": false}
-	merchant_unloading = true
-	smith_arrival_day = day + 1
+	site_presence = {"smith": false, "supplies": false, "treatment": false}
+	merchant_unloading = false
+	smith_arrival_day = ARRIVAL_DAY
+	traders_arrival_day = ARRIVAL_DAY
 	changed.emit()
 
 
@@ -240,6 +246,10 @@ func rest(party) -> void:
 	if smith_arrival_day > 0 and day >= smith_arrival_day:
 		site_presence["smith"] = true
 		smith_arrival_day = 0
+	if traders_arrival_day > 0 and day >= traders_arrival_day:
+		site_presence["supplies"] = true
+		site_presence["treatment"] = true
+		traders_arrival_day = 0
 	explored_today = false
 	if not candidates.is_empty():
 		candidates.pop_front()  # the longest-waiting moves on

@@ -40,6 +40,10 @@ var _tint: ColorRect
 var _ledger: VBoxContainer  # chips and hero rows
 var _chips: HFlowContainer
 var _heroes: VBoxContainer
+var _column: VBoxContainer
+## The column's widest, so the eye never crosses the whole screen (owner
+## playtest, #227): it sits centred with the button beneath it.
+const COLUMN_WIDTH := 900.0
 
 
 func _init() -> void:
@@ -64,14 +68,18 @@ func _init() -> void:
 	for side in ["left", "top", "right", "bottom"]:
 		content.add_theme_constant_override("margin_" + side, 32)
 	add_child(content)
+	content.resized.connect(_fit)
 	var column := VBoxContainer.new()
 	column.add_theme_constant_override("separation", 14)
 	content.add_child(column)
+	_column = column
 	_title = _label(34, COLOR_TEXT)
+	_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_title.theme_type_variation = "PageTitle"  # Cinzel heading (#51)
 	column.add_child(_title)
 	_subtitle = _label(20, COLOR_DIM_TEXT)
 	_subtitle.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	column.add_child(_subtitle)
 	_illustration = TextureRect.new()
 	_illustration.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
@@ -88,13 +96,14 @@ func _init() -> void:
 	_chips = HFlowContainer.new()
 	_chips.add_theme_constant_override("h_separation", 10)
 	_chips.add_theme_constant_override("v_separation", 8)
+	_chips.alignment = FlowContainer.ALIGNMENT_CENTER
 	_ledger.add_child(_chips)
 	_heroes = VBoxContainer.new()
 	_heroes.add_theme_constant_override("separation", 8)
 	_ledger.add_child(_heroes)
 	_button = Button.new()
 	_button.custom_minimum_size = Vector2(260, 60)
-	_button.size_flags_horizontal = Control.SIZE_SHRINK_END
+	_button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	_button.focus_mode = Control.FOCUS_NONE
 	_button.add_theme_font_size_override("font_size", 22)
 	_button.pressed.connect(func(): continue_pressed.emit())
@@ -102,10 +111,18 @@ func _init() -> void:
 	visible = false
 
 
+## Side margins that keep the column centred and no wider than COLUMN_WIDTH.
+func _fit() -> void:
+	var side := maxf(32.0, (content.size.x - COLUMN_WIDTH) / 2.0)
+	content.add_theme_constant_override("margin_left", int(side))
+	content.add_theme_constant_override("margin_right", int(side))
+
+
 ## `quotes`: Companion -> a line they say on getting back (#118).
 func show_results(ending: int, expedition, party, note: String, quotes := {}) -> void:
 	_illustration.visible = false
 	_ledger.visible = true
+	_column.alignment = BoxContainer.ALIGNMENT_BEGIN
 	_backdrop.visible = true
 	var wiped := ending == Expedition.Ending.WIPED
 	_backdrop.texture = WIPE_BACKDROP if wiped else BACKDROP
@@ -144,6 +161,7 @@ func show_brief(title: String, note: String, button: String, illustration: Textu
 	_illustration.texture = illustration
 	_illustration.visible = illustration != null
 	_ledger.visible = false
+	_column.alignment = BoxContainer.ALIGNMENT_CENTER  # a short ending sits mid-screen
 	_backdrop.visible = false
 	_tint.color = Color(0, 0, 0, 0)
 	_title.text = title
