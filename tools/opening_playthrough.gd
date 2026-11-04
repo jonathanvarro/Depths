@@ -324,9 +324,11 @@ func _initialize() -> void:
 	_press(main._results, "To camp")
 	await create_timer(0.2).timeout
 	# The commander waits outside (#122): answer, then on to camp.
-	check("the commander meets the survivor", main._conversation.visible and main._conversation._name.text.contains("Vael"))
+	check("the commander meets the survivor", main._conversation.visible and main._conversation._talk.speaker.contains("Vael"))
 	await _snap("commander")
-	main._conversation.choose("\"We were ambushed")
+	main._conversation.choose("Go on")  # the narration, then his question
+	await process_frame
+	main._conversation.choose("We were ambushed")
 	for i in 6:
 		await process_frame
 		if not main._conversation.visible:

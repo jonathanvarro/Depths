@@ -481,6 +481,11 @@ Templates > Download and Install; already installed on the owner's PC).
   `docs/traps-and-dead-lamps.md`. Optional prop-local `mount_in_cell()` anchors
   separate dart ports to actual rock and keeps traps inside their cells.
   `tools/batch_check.gd`.
+- Conversations (#122/#228): `scripts/conversation_screen.gd` plays
+  `data/conversations/*.tres`: speaker right of centre, their bubble top-left,
+  narration pages as a plain caption, your hero's bubble at the bottom (kept,
+  greyed, while they answer). Replies: short `label`, spoken `said`/`said_by`
+  (per hero name), `accepts` marks taking a quest. `tools/conversation_check.gd`.
 - Starting heroes (#95): `scripts/hero_select.gd` (HEROES list),
   `data/companions/{mara,corin,alwen}.tres`, Companion `trait_id`,
   `trait_name`, `trait_text`, `backstory`, `pronouns`; SaveGame

@@ -93,14 +93,17 @@ func _initialize() -> void:
 	var camp = main._camp_state
 	main._conversation.play(main.COMMANDER_FIRST, main._party_state.members[0], camp)
 	await process_frame
+	check("he's introduced by narration first, then speaks (#228)", main._conversation._replies.get_child_count() == 1 and not main._conversation._name.visible)
+	main._conversation.choose("Go on")
+	await process_frame
 	check("the commander's opening offers three answers", main._conversation._replies.get_child_count() == 3)
-	main._conversation.choose("\"Find what")
+	main._conversation.choose("Find what")
 	await process_frame
 	check("each answer has its own reply", main._conversation._text.text.contains("didn't tell you"))
 	check("...and the hero's name fills in", main._conversation._text.text.contains(main._party_state.members[0].display_name))
 	main._conversation.choose("Go on")
 	await process_frame
-	main._conversation.choose("\"I'll find them")
+	main._conversation.choose("I'll find them")
 	await create_timer(0.4).timeout
 	check("the order becomes an active quest", Quests.is_active(camp, "left_behind") and Quests.has_flag(camp, "story", "asked_what"))
 	check("...and the conversation closes", not main._conversation.visible)

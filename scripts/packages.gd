@@ -10,7 +10,14 @@ const KIND_SYMBOL := {2: "C", 3: "T", 4: "O", 5: "R"}
 const SIDES: Array[Vector2i] = [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]
 
 
+## Read once: the packages don't change while the game runs, and listing
+## the folder on every floor (and every check) was slow.
+static var _library: Array[QuestPackage] = []
+
+
 static func library() -> Array[QuestPackage]:
+	if not _library.is_empty():
+		return _library.duplicate()
 	var found: Array[QuestPackage] = []
 	for file in DirAccess.get_files_at(DIR):
 		file = file.trim_suffix(".remap")
@@ -18,7 +25,8 @@ static func library() -> Array[QuestPackage]:
 			var package := load(DIR.path_join(file)) as QuestPackage
 			if package:
 				found.append(package)
-	return found
+	_library = found
+	return found.duplicate()
 
 
 ## Packages the story wants on floor `depth` right now.

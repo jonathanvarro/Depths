@@ -8,35 +8,58 @@
 
 [sub_resource type="Resource" id="Resource_tjfbn"]
 script = ExtResource("3_j4kar")
-label = "\"We were ambushed.\""
-next = 1
+label = "We were ambushed"
+next = 2
 quest = "story"
 flag = "told_ambush"
+said_by = {
+"Corin": "\"Ambushed. They hit us in the dark before we could form a line.\"",
+"Mara": "\"We were ambushed. I led them in, and something was waiting for us.\"",
+"Sister Alwen": "\"We were ambushed. I tended who I could reach. It wasn't enough.\""
+}
 
 [sub_resource type="Resource" id="Resource_4r1gf"]
 script = ExtResource("3_j4kar")
-label = "\"Not yet.\""
-next = 2
+label = "Not yet"
+next = 3
 quest = "story"
 flag = "told_not_yet"
+said_by = {
+"Corin": "\"Not yet. Give me a blade and a day, and I'll go back.\"",
+"Mara": "\"Not yet. But I know the way down now.\"",
+"Sister Alwen": "\"Not yet. We were too busy trying to stay alive.\""
+}
 
 [sub_resource type="Resource" id="Resource_cjiw5"]
 script = ExtResource("3_j4kar")
-label = "\"Find what? They never told me.\""
-next = 3
+label = "Find what?"
+next = 4
 quest = "story"
 flag = "asked_what"
+said_by = {
+"Corin": "\"Find what? We were told to march, never why.\"",
+"Mara": "\"Find what? I led them down there and nobody told me what for.\"",
+"Sister Alwen": "\"Find what? They sent a nurse into a mine and never said why.\""
+}
+
+[sub_resource type="Resource" id="Resource_narr1"]
+script = ExtResource("3_j4kar")
+next = 1
+
+[sub_resource type="Resource" id="Resource_narr0"]
+script = ExtResource("2_r7od4")
+speaker = "narrator"
+text = "Soldiers in the king's colours stand at the mine entrance. Their commander steps forward: grey at the temples, armour scrubbed clean, eyes that miss nothing."
+replies = Array[ExtResource("3_j4kar")]([SubResource("Resource_narr1")])
 
 [sub_resource type="Resource" id="Resource_6g6o8"]
 script = ExtResource("2_r7od4")
-text = "Soldiers in the king's colours stand at the mine entrance. Their commander steps forward: grey at the temples, armour scrubbed clean, eyes that miss nothing.
-
-\"Edric Vael, commander of this expedition. You went down with the survey party. Tell me - did you find it?\""
+text = "\"Edric Vael, commander of this expedition. You went down with the survey party. Tell me - did you find it?\""
 replies = Array[ExtResource("3_j4kar")]([SubResource("Resource_tjfbn"), SubResource("Resource_4r1gf"), SubResource("Resource_cjiw5")])
 
 [sub_resource type="Resource" id="Resource_4tdd2"]
 script = ExtResource("3_j4kar")
-next = 4
+next = 5
 
 [sub_resource type="Resource" id="Resource_8u8d1"]
 script = ExtResource("2_r7od4")
@@ -45,7 +68,7 @@ replies = Array[ExtResource("3_j4kar")]([SubResource("Resource_4tdd2")])
 
 [sub_resource type="Resource" id="Resource_gimte"]
 script = ExtResource("3_j4kar")
-next = 4
+next = 5
 
 [sub_resource type="Resource" id="Resource_obvxk"]
 script = ExtResource("2_r7od4")
@@ -54,7 +77,7 @@ replies = Array[ExtResource("3_j4kar")]([SubResource("Resource_gimte")])
 
 [sub_resource type="Resource" id="Resource_lgnmi"]
 script = ExtResource("3_j4kar")
-next = 4
+next = 5
 
 [sub_resource type="Resource" id="Resource_hr3q8"]
 script = ExtResource("2_r7od4")
@@ -63,9 +86,15 @@ replies = Array[ExtResource("3_j4kar")]([SubResource("Resource_lgnmi")])
 
 [sub_resource type="Resource" id="Resource_fflwa"]
 script = ExtResource("3_j4kar")
-label = "\"I'll find them.\""
+label = "I'll find them"
 quest = "left_behind"
 stage = 2
+said_by = {
+"Corin": "\"I'll find them. And whatever did this to them.\"",
+"Mara": "\"I'll find them. I owe them that much.\"",
+"Sister Alwen": "\"I'll find them. Someone should bring them home.\""
+}
+accepts = true
 
 [sub_resource type="Resource" id="Resource_moxlj"]
 script = ExtResource("2_r7od4")
@@ -77,4 +106,4 @@ script = ExtResource("5_aq5t2")
 speaker = "Commander Edric Vael"
 portrait = ExtResource("4_hgm1o")
 backdrop = ExtResource("1_qlru0")
-pages = Array[ExtResource("2_r7od4")]([SubResource("Resource_6g6o8"), SubResource("Resource_8u8d1"), SubResource("Resource_obvxk"), SubResource("Resource_hr3q8"), SubResource("Resource_moxlj")])
+pages = Array[ExtResource("2_r7od4")]([SubResource("Resource_narr0"), SubResource("Resource_6g6o8"), SubResource("Resource_8u8d1"), SubResource("Resource_obvxk"), SubResource("Resource_hr3q8"), SubResource("Resource_moxlj")])

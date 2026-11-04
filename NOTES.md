@@ -13,6 +13,21 @@ Format:
 
 ---
 
+## 2026-11-03 – Claude (the commander's first scene restaged, #228)
+
+- **Layout** (`conversation_screen.gd`, so every conversation gets it):
+  - the person you talk to stands just right of centre (`NPC_CENTRE`);
+  - their words go in a speech bubble left of centre near the top, with a small tail pointing at them;
+  - narration pages (`speaker = "narrator"`) use the same spot as a plain caption: no name, no tail, muted text;
+  - your hero's words go in a bubble near the bottom, pointing at the party cards. It stays on screen, greyed, while the other side answers; their bubble greys while you speak.
+- **Replies:** `ConversationReply.said_by` (keyed by hero name: "Mara", "Corin", "Sister Alwen") and `said` give the spoken line; the button shows the short `label`. A quoted label with no `said` is spoken as written, so the older conversations still work. `accepts = true` marks a button in gold with "Accept: <quest title>".
+- **Beat:** after you pick a spoken reply, your line shows lit for 0.8–2.5 s (a click, tap, Enter or Escape skips it) before the answer. `--script` runs skip it.
+- **The scene:** `commander_first.tres` now opens with a narration page, then his question. Its four replies have summary buttons and a line for each starting hero; "I'll find them" accepts Those Left Behind.
+- **Checks:** new `tools/conversation_check.gd` plays it as all three heroes and measures placement (desk and phone sizes). story_check and `opening_playthrough.gd` were updated for the narration page and new labels.
+- **Next:** the owner playtests the new build. The other commander and keeper conversations already use the layout; they could get per-hero lines and narration pages too.
+- **Faster checks:** `Packages.library()` now reads the packages folder once and keeps the list. territory_check went from about 6 minutes, past the suite's 5-minute limit, to 4 seconds, and floor generation reads one folder fewer.
+- **Watch out:** the bubble width is set in `_place()` from the portrait's position and set again a frame later; without the second pass the first bubble stayed too tall.
+
 ## 2026-11-03 – Claude (playtest fixes: camp and screens, #227, #229)
 
 - **Centred screens:** the results screen keeps a column of at most 900 px with title, text, chips and button centred, and short endings sit mid-screen. The expedition screen's party and pack form a centred block with the button below.
