@@ -1,0 +1,20 @@
+{
+  "source": "https://kenney.nl/assets/furniture-kit",
+  "download": "https://opengameart.org/sites/default/files/kenney_furniturePack.zip",
+  "licence": "CC0-1.0",
+  "author": "Kenney",
+  "source_sha256": "8b5c18565274fa6bb45ca18abf0f90896f00a446d6810364406b8de4b70d355e",
+  "export_sha256": "7c2123bb2ee2fc00adb2ce7540d30ce46b90366f2ea867683d372b0b3118d680",
+  "triangles": 142,
+  "dimensions_metres": {
+    "width": 0.4,
+    "depth": 0.32,
+    "seat_height": 0.43
+  },
+  "changes": [
+    "Reduced to camp-seat proportions",
+    "Recoloured upholstery and frame as matte dark wood",
+    "Joined into one mesh and material",
+    "Centred at floor level"
+  ]
+}

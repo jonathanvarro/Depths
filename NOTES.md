@@ -13,6 +13,12 @@ Format:
 
 ---
 
+## 2026-11-04 – ChatGPT (prayer artwork and wooden stool, #216/#218)
+- Did: Supplied three distinct 128/64 prayer tome icons, votive candle, four original devotional SVG marks and a separate Bound mark. The exact built-in ImageGen prompts and original masters are retained in art/source/prayers-v1. Native export uses hard alpha and a 64-colour budget. Adapted Kenney's CC0 square stool into a 142-triangle, one-material dark wooden stool with a fixed 43 cm seat. Original OBJ/MTL/licence and changes are recorded. Handoff: docs/prayers-and-stool-art.md.
+- Review: build/prayer-stool-review-v1/inspector.html compares all assets at phone sizes and includes actual native captures. build/local-stool-review-v1/START_REVIEW.cmd runs both jacket bodies with the fixed stool during the aligned chair sequence. The 55 native prayer, 13 stool-reference, 32 artifact and 16 browser checks pass.
+- Next: Claude can bind the four item resources and prayer/Bound marks using the catalog. Discern is a newer prayer outside the original four-prayer brief and can have a follow-up art request. Owner reviews the stool contact captures. This work is on codex/prayer-art-stool, with live game/rule hookup left to Claude.
+- Watch out: The stool uses the same physical dimensions for both bodies and keeps its transform fixed during the sequence. Coat/seat overlap remains visible in the current motions, so #214/#215/#218 retain their outstanding contact/animation criteria. Character assets and captures stay local/ignored. Only the CC0 prop, original item art, reusable tools and handoff are committed.
+
 ## 2026-11-04 – Claude (owner review of assembly-v6, #218)
 - Did: Owner reviewed v6's hands-on-knees fix: about 80% corrected, good enough for now. Recorded in docs/female-chair-hold-review.md and #218.
 - Next: Hand/thigh polish is parked. #218 stays open for the other items (male hand contacts, a real chair, loops, style approval).

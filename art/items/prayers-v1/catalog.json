@@ -1,0 +1,41 @@
+{
+  "issue": 216,
+  "items": [
+    {
+      "id": "tome_light",
+      "resource": "res://data/items/tome_light.tres",
+      "native": "res://art/items/prayers-v1/tome_light.png",
+      "compact": "res://art/items/prayers-v1/tome_light-64.png"
+    },
+    {
+      "id": "tome_bind",
+      "resource": "res://data/items/tome_bind.tres",
+      "native": "res://art/items/prayers-v1/tome_bind.png",
+      "compact": "res://art/items/prayers-v1/tome_bind-64.png"
+    },
+    {
+      "id": "tome_watch",
+      "resource": "res://data/items/tome_watch.tres",
+      "native": "res://art/items/prayers-v1/tome_watch.png",
+      "compact": "res://art/items/prayers-v1/tome_watch-64.png"
+    },
+    {
+      "id": "votive_candle",
+      "resource": "res://data/items/votive_candle.tres",
+      "native": "res://art/items/prayers-v1/votive_candle.png",
+      "compact": "res://art/items/prayers-v1/votive_candle-64.png"
+    }
+  ],
+  "prayer_marks": {
+    "mend": "mend.svg",
+    "light": "holy-light.svg",
+    "bind": "bind.svg",
+    "watch": "watchful-eye.svg"
+  },
+  "status_mark": "bound.svg",
+  "mark_root": "res://art/ui/prayers-v1/",
+  "native_pixels": 128,
+  "compact_pixels": 64,
+  "visible_palette_budget": 64,
+  "alpha": "binary"
+}

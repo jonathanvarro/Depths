@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Depths · Prayers and camp stool</title>
+<style>
+:root { color-scheme:dark; font:17px/1.5 system-ui,sans-serif; background:#162021; color:#e2d9c1 }
+* { box-sizing:border-box }
+body { max-width:1200px; margin:auto; padding:24px }
+h1,h2 { font-family:Georgia,serif; font-weight:normal }
+a { color:#dbc18e }
+.items,.marks { display:flex; flex-wrap:wrap; gap:20px }
+figure { margin:0; padding:18px; background:#243031; border:1px solid #58605a; min-width:150px }
+.item { width:128px; height:128px; object-fit:contain; image-rendering:pixelated }
+.marks img { width:32px; height:32px; object-fit:contain }
+.capture { display:block; width:100%; height:auto; margin:16px 0 }
+label { display:flex; align-items:center; gap:12px; margin:20px 0 }
+select { min-height:44px; font:inherit; padding:6px 10px }
+.note { border-left:3px solid #ac956b; padding:12px 18px; background:#243031 }
+@media(max-width:680px) { body { padding:14px } figure { min-width:130px; padding:12px } }
+</style>
+<h1>Prayers and a camp stool</h1>
+<p>Worn devotional books and a votive candle, with simple prayer marks for the Field Kit and combat.</p>
+<label>Icon size <select id="size"><option>128</option><option>64</option><option>48</option></select></label>
+<div class="items">
+<figure><img class="item" data-item="tome_light" src="items/tome_light.png" alt="Sun-stamped Holy light tome"><figcaption>Holy light</figcaption></figure>
+<figure><img class="item" data-item="tome_bind" src="items/tome_bind.png" alt="Chained Bind tome"><figcaption>Bind</figcaption></figure>
+<figure><img class="item" data-item="tome_watch" src="items/tome_watch.png" alt="Eye-stamped Watchful eye tome"><figcaption>Watchful eye</figcaption></figure>
+<figure><img class="item" data-item="votive_candle" src="items/votive_candle.png" alt="Stub of tallow in an iron holder"><figcaption>Votive candle</figcaption></figure>
+</div>
+<h2>Prayer and status marks</h2>
+<div class="marks">
+<figure><img src="marks/mend.svg" alt=""><figcaption>Mend</figcaption></figure>
+<figure><img src="marks/holy-light.svg" alt=""><figcaption>Holy light</figcaption></figure>
+<figure><img src="marks/bind.svg" alt=""><figcaption>Bind</figcaption></figure>
+<figure><img src="marks/watchful-eye.svg" alt=""><figcaption>Watchful eye</figcaption></figure>
+<figure><img src="marks/bound.svg" alt=""><figcaption>Bound</figcaption></figure>
+</div>
+<h2>Native renderer comparison</h2>
+<img class="capture" src="captures/native-prayers.png" alt="Godot-rendered 128 and 64 pixel items and 32, 24 and 16 pixel marks">
+<h2>Wooden stool</h2>
+<p>A 142-triangle adaptation of Kenney’s CC0 square stool, recoloured as dark timber. The same 43 cm seat height is used on both bodies. The horizontal anchor stays fixed throughout the chair sequence.</p>
+<img class="capture" src="captures/seated-side.png" alt="Both bodies on the fixed wooden stool reference">
+<details><summary>Approach and stand-up views</summary>
+<img class="capture" src="captures/sit-approach.png" alt="Approaching the seat">
+<img class="capture" src="captures/stand-rise.png" alt="Rising from the seat">
+</details>
+<p class="note">The fixed seat exposes some coat and seat overlap during the current motions. Final contact polish continues under #218. Run the adjacent local-stool-review-v1/START_REVIEW.cmd to play, pause and step the sequence.</p>
+<p><a href="native-prayers.json">Prayer renderer checks</a> · <a href="stool-validation.json">Stool checks</a> · <a href="artifact-validation.json">Export checks</a></p>
+<script>
+document.querySelector('#size').addEventListener('change', event => {
+    const size = Number(event.target.value);
+    for (const item of document.querySelectorAll('.item')) {
+        item.src = 'items/' + item.dataset.item + (size < 128 ? '-64' : '') + '.png';
+        item.style.width = size + 'px';
+        item.style.height = size + 'px';
+    }
+    for (const mark of document.querySelectorAll('.marks img')) {
+        const pixels = size === 128 ? 32 : size === 64 ? 24 : 16;
+        mark.style.width = pixels + 'px';
+        mark.style.height = pixels + 'px';
+    }
+});
+</script>
+</html>

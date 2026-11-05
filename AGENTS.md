@@ -50,6 +50,16 @@ Templates > Download and Install; already installed on the owner's PC).
 
 ## Project structure
 
+- `docs/prayers-and-stool-art.md` – #216's native128/compact64 prayer tomes
+  and votive candle in `art/items/prayers-v1`, plus four devotional glyphs
+  and a separate Bound mark in `art/ui/prayers-v1`. Claude's live bindings
+  remain a hookup step. #218's fixed 43 cm wooden stool is a 142-triangle
+  Kenney CC0 adaptation in `art/dressing/camp-stool-v1/stool.tscn`.
+  Source/licence/edit records are beside it. Private character contact review
+  uses `build/local-stool-review-v1/START_REVIEW.cmd`; the combined local
+  gallery is `build/prayer-stool-review-v1/inspector.html`. Seat/coat overlap
+  stays visible for #218's contact review.
+
 - `docs/blender-base-contract.md` – #210's true female/male editable Blender
   masters, separate65/49-bone fit/rest contracts, preserved source Actions/slots,
   source catalogue and neutral/animation/export guide. Models, textures, exports

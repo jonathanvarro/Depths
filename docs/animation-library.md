@@ -8,6 +8,13 @@ out of git (see `docs/blender-expedition-kit-tasks.md`).
 
 ## Where the files live
 
+The 2026-11-04 stool contact review (#218) reuses the existing six Actions
+per body from the checked padded-jacket-v2 snapshot. A fixed 43 cm wooden
+seat is anchored once beside each aligned chair sequence. This adds a
+physical contact reference and leaves the current clip statuses intact.
+Actual approach/hold/rise captures and remaining coat/seat overlap are
+recorded in [prayers-and-stool-art.md](prayers-and-stool-art.md).
+
 - **Originals:** `G:/My Drive/3D Objects/Animations/Mixamo_Originals/`, as
   downloaded from Mixamo. Never edit or rename these; work on copies.
 - **Working copies:** `build/local-blender-kit-v1/source/clips/` (git-ignored),
