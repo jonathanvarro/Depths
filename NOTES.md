@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-11-04 – ChatGPT (shared Drive asset library)
+- Did: Located and verified the owner's new Assets folder under My Drive / 3D Objects. Recorded it as a reusable source in docs/free-3d-assets.md. Its private connector ID/link are saved locally in build/asset-library/drive-source.json.
+- Next: Check this folder when sourcing assets supplied by the owner, retaining author/licence records with the original files.
+- Watch out: The folder was empty when checked. Existing per-body animation requests are in the separate Animations folder.
+
 ## 2026-11-04 – ChatGPT (prayer artwork and wooden stool, #216/#218)
 - Did: Supplied three distinct 128/64 prayer tome icons, votive candle, four original devotional SVG marks and a separate Bound mark. The exact built-in ImageGen prompts and original masters are retained in art/source/prayers-v1. Native export uses hard alpha and a 64-colour budget. Adapted Kenney's CC0 square stool into a 142-triangle, one-material dark wooden stool with a fixed 43 cm seat. Original OBJ/MTL/licence and changes are recorded. Handoff: docs/prayers-and-stool-art.md.
 - Review: build/prayer-stool-review-v1/inspector.html compares all assets at phone sizes and includes actual native captures. build/local-stool-review-v1/START_REVIEW.cmd runs both jacket bodies with the fixed stool during the aligned chair sequence. The 55 native prayer, 13 stool-reference, 32 artifact and 16 browser checks pass.

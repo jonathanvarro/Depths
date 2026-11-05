@@ -22,6 +22,16 @@ CC0. For any other licence, keep the raw files local (as the Blender kit
 and Mixamo clips already are) and commit only the game's own scenes and
 notes.
 
+## Owner's shared Drive library
+
+The owner added `My Drive / 3D Objects / Assets` on 2026-11-04 for asset
+storage and reuse. Check this folder through the Drive connector when looking
+for project assets. Keep source downloads, author names and supplied licence
+files together, then prepare versioned working copies in the project.
+The folder's private connector reference is saved locally in
+`build/asset-library/drive-source.json`. Existing animation requests remain
+under `3D Objects / Animations`.
+
 ## Shortlist
 
 ### First choice: CC0, safe to commit
