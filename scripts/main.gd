@@ -451,7 +451,7 @@ var _music: Node  # music.gd: a track per place (#54)
 var _conversation: Control  # conversation_screen.gd (#122)
 var _quest_log: Control  # quest_log.gd (#123)
 var _stage: Node3D  # battle_stage.gd: fog and darkness behind every fight
-var _spoils: Control  # spoils_screen.gd: gold and XP after a won fight
+var _spoils: Control  # spoils_screen.gd: retired by #231 (spoils show on the cards), kept for its arrival art
 var _vision: CanvasLayer  # vision_filter.gd: the cold blue of memories and dreams
 var _ambience: Node  # ambience.gd: fog, creeping darkness, eyes beyond the light (#129)
 var _wound_overlay: ColorRect
@@ -927,15 +927,17 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 		if foe.health <= 0:
 			_expedition.add_defeated(foe.type.display_name)
 			_camp_state.count_kill(foe.type.display_name)  # today's contract (#42)
-	# A win: the spoils, on the dark stage, arriving the way the last enemy
-	# fell (owner, 2026-10-20). Otherwise purses are picked up as before.
+	# A win: the spoils show on the party's own cards (#231): XP bars fill,
+	# "+N XP" rises off each portrait, a level-up mark pops in, and the gold
+	# and contract go in the message line. Nothing stops play, so fights
+	# can follow one another on the field. Otherwise purses are picked up.
 	var spoils := _gather_spoils(state) if result == CombatState.Result.VICTORY else {}
 	if result != CombatState.Result.VICTORY:
 		for foe in state.foes:
 			if foe.health <= 0:
 				_loot_purse(foe)
 	if not spoils.is_empty():
-		await _spoils.play(spoils, _combat.last_blow, Settings.get_value("flashes"))
+		_show_spoils(spoils)
 	if result == CombatState.Result.VICTORY:
 		_trinket_drops(state)
 		if _fight_kind == "lair":
@@ -1030,6 +1032,26 @@ func _gather_spoils(state) -> Dictionary:
 	if gold == 0 and heroes.is_empty() and note == "":
 		return {}
 	return {"gold": gold, "heroes": heroes, "note": note, "contract": contract}
+
+
+## A won fight's spoils on the party cards and the message line (#231).
+func _show_spoils(spoils: Dictionary) -> void:
+	for entry in spoils.get("heroes", []):
+		for card in _cards:
+			if card.companion == entry["hero"]:
+				card.show_xp_gain(entry["from"], entry["to"])
+	var lead: PanelContainer = _cards[0]
+	for card in _cards:
+		if card.companion and card.companion.is_with_party():
+			lead = card
+			break
+	lead.show_gold(spoils.get("gold", 0))
+	var words := []
+	for key in ["note", "contract"]:
+		if spoils.get(key, "") != "":
+			words.append(spoils[key])
+	if not words.is_empty():
+		_show_message(".  ".join(words))
 
 
 ## Tougher foes sometimes leave a trinket (#135): fine or rare jewellery,

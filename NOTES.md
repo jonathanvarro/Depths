@@ -13,6 +13,18 @@ Format:
 
 ---
 
+## 2026-11-04 – Claude (spoils on the party cards, #231)
+
+- **No spoils screen:** a won fight no longer stops on a "Spoils" box. Each party card shows:
+  - a thin gold XP bar under health and strain;
+  - "+N XP" rising off the portrait (`PartyCard.show_xp_gain`);
+  - a level-up arrow on the portrait's corner while a level is owed.
+
+  Gold rises off the lead's card with a coin (`show_gold`). The floor note and contract go in the message line (main `_show_spoils`).
+- **Fix:** the card's "L1+" mark used old thresholds (80/220/440). It now uses `Progression.ready_to_advance`.
+- **Kept:** `spoils_screen.gd` and its arrival art (slash, smash, pierce, fire) aren't shown any more. The node is still built and `tools/art/check_results_art.gd` still expects it, so remove both together if it's dropped for good.
+- **Checks:** `tools/spoils_check.gd` was rewritten for the cards.
+
 ## 2026-11-04 – Claude (every story talk in the new layout, Refs #228)
 
 - **Talks rewritten** (commander report, galleries and reservoir; keeper; smith's offer, arrow and delivery; miner): an opening narration page where there was one, short summary buttons, and a spoken line for Mara, Corin and Sister Alwen on every reply that is said aloud. Action replies such as "Keep the feather" stay unspoken.

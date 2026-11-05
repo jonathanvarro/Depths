@@ -12,6 +12,13 @@ const RATION := preload("res://data/items/ration.tres")
 const Quality := preload("res://scripts/quality.gd")
 ## Boon (false) and bane (true) marks when a Boon has no icon of its own (#133).
 const BOON_MARKS := {false: preload("res://art/ui/boons-v1/boon.png"), true: preload("res://art/ui/boons-v1/bane.png")}
+const Progression := preload("res://scripts/progression.gd")
+## A won fight's experience shows on the card itself (#231): a thin bar
+## that fills, "+N XP" rising off the portrait, and the level-up mark.
+const LEVEL_MARK := preload("res://art/ui/results-v1/level-up.png")
+const COLOR_XP := Color("d9b44a")
+const COLOR_XP_TEXT := Color("f2d27a")
+const COIN := preload("res://art/ui/results-v1/coin-pouch.png")
 
 const PORTRAIT_SIZE := Vector2(96, 96)
 const ICON_SIZE := 14.0
@@ -48,6 +55,9 @@ var _style: StyleBoxFlat
 var _strain_bar: ProgressBar
 var _turn_marker: ColorRect
 var _row_label: Label
+var _xp_bar: ProgressBar
+var _level_mark: TextureRect  # top corner of the portrait while a level is owed
+var _xp_tween: Tween
 ## Show the hero's combat row (only meaningful with company, #72).
 var show_row := false
 ## Fight-only conditions from the combat screen (#105): [texture, tooltip].
@@ -110,6 +120,21 @@ func _init() -> void:
 	_icons.offset_left = 3
 	_icons.alignment = BoxContainer.ALIGNMENT_END
 	frame.add_child(_icons)
+	_level_mark = TextureRect.new()
+	_level_mark.texture = LEVEL_MARK
+	_level_mark.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	_level_mark.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	_level_mark.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	_level_mark.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT)
+	_level_mark.offset_left = -30
+	_level_mark.offset_bottom = 28
+	_level_mark.offset_right = -2
+	_level_mark.offset_top = 2
+	_level_mark.pivot_offset = Vector2(14, 13)
+	_level_mark.tooltip_text = "Ready to level up"
+	_level_mark.mouse_filter = Control.MOUSE_FILTER_PASS
+	_level_mark.visible = false
+	frame.add_child(_level_mark)
 
 	_bar = ProgressBar.new()
 	_bar.show_percentage = false
@@ -131,6 +156,17 @@ func _init() -> void:
 	_strain_bar.add_theme_stylebox_override("background", strain_back)
 	_strain_bar.add_theme_stylebox_override("fill", strain_fill)
 	column.add_child(_strain_bar)
+	_xp_bar = ProgressBar.new()
+	_xp_bar.show_percentage = false
+	_xp_bar.custom_minimum_size = Vector2(PORTRAIT_SIZE.x, 4)
+	_xp_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var xp_back := StyleBoxFlat.new()
+	xp_back.bg_color = COLOR_HEALTH_BACK
+	var xp_fill := StyleBoxFlat.new()
+	xp_fill.bg_color = COLOR_XP
+	_xp_bar.add_theme_stylebox_override("background", xp_back)
+	_xp_bar.add_theme_stylebox_override("fill", xp_fill)
+	column.add_child(_xp_bar)
 	_health_text = Label.new()
 	_health_text.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_health_text.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -160,6 +196,8 @@ func show_empty() -> void:
 	_row_label.text = ""
 	_bar.value = 0
 	_strain_bar.value = 0
+	_xp_bar.value = 0
+	_level_mark.visible = false
 	_style.border_color = STRAIN_BORDERS[StrainRules.State.STEADY]
 	_health_text.text = ""
 	_clear_icons()
@@ -172,7 +210,13 @@ func refresh() -> void:
 		return
 	_name.text = companion.display_name
 	# Level, a mark when ready to advance at camp (#47), and the row (#72).
-	var ready := "+" if companion.level < 4 and companion.xp >= [0, 0, 80, 220, 440][mini(companion.level + 1, 4)] and companion.uses_stats else ""
+	var owed := companion.uses_stats and Progression.ready_to_advance(companion)
+	var ready := "+" if owed else ""
+	_xp_bar.visible = companion.uses_stats
+	_level_mark.visible = owed
+	if _xp_tween == null or not _xp_tween.is_running():
+		_set_xp_span(companion.xp)
+		_xp_bar.value = companion.xp
 	_row_label.text = "L%d%s%s" % [companion.level, ready, (" " + ("back" if companion.row == "back" else "front")) if show_row else ""]
 	var cap := companion.effective_max_health()  # lowered by untreated injuries
 	_bar.max_value = cap
@@ -280,6 +324,94 @@ func _add_condition(texture: Texture2D, tint: Color, tooltip: String, tier := ""
 	icon.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	icon.mouse_filter = Control.MOUSE_FILTER_PASS
 	_icons.add_child(icon)
+
+
+## The XP band the bar shows: this level's threshold to the next.
+func _set_xp_span(xp: int) -> void:
+	var level := 1
+	for l in range(1, Progression.THRESHOLDS.size()):
+		if xp >= Progression.THRESHOLDS[l]:
+			level = l
+	_xp_bar.min_value = Progression.THRESHOLDS[level]
+	_xp_bar.max_value = Progression.THRESHOLDS[level + 1] if level + 1 < Progression.THRESHOLDS.size() else Progression.THRESHOLDS[level] + 1
+
+
+## A won fight's experience (#231): "+N XP" rises off the portrait, the bar
+## fills from `from` to `to`, and the level-up mark pops in if one is owed.
+func show_xp_gain(from: int, to: int) -> void:
+	if companion == null or to <= from or not companion.uses_stats:
+		return
+	_set_xp_span(from)
+	_xp_bar.value = from
+	var crossed: bool = _xp_bar.max_value <= to
+	var label := Label.new()
+	label.text = "+%d XP" % (to - from)
+	label.add_theme_font_size_override("font_size", 20)
+	label.add_theme_color_override("font_color", COLOR_XP_TEXT)
+	label.add_theme_color_override("font_outline_color", Color.BLACK)
+	label.add_theme_constant_override("outline_size", 6)
+	label.top_level = true
+	label.z_index = 20  # over the speech box and messages
+	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(label)
+	label.reset_size()
+	label.global_position = global_position + Vector2((size.x - label.size.x) / 2.0, 40.0)
+	var rise := label.create_tween()
+	rise.tween_property(label, "global_position:y", label.global_position.y - 56.0, 1.4).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
+	rise.parallel().tween_property(label, "modulate:a", 0.0, 0.5).set_delay(0.9)
+	rise.tween_callback(label.queue_free)
+	if _xp_tween:
+		_xp_tween.kill()
+	_xp_tween = create_tween()
+	_xp_tween.tween_property(_xp_bar, "value", float(mini(to, int(_xp_bar.max_value))), 0.8).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	if crossed:
+		_xp_tween.tween_callback(_level_up_pop)
+	_xp_tween.tween_callback(refresh)
+
+
+## Gold from a won fight (#231): a coin and "+N" rise above the card.
+func show_gold(amount: int) -> void:
+	if amount <= 0:
+		return
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 4)
+	row.top_level = true
+	row.z_index = 20  # over the speech box and messages
+	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var coin := TextureRect.new()
+	coin.texture = COIN
+	coin.custom_minimum_size = Vector2(26, 26)
+	coin.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	coin.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	coin.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	row.add_child(coin)
+	var label := Label.new()
+	label.text = "+%d" % amount
+	label.add_theme_font_size_override("font_size", 20)
+	label.add_theme_color_override("font_color", Color("f2c94c"))
+	label.add_theme_color_override("font_outline_color", Color.BLACK)
+	label.add_theme_constant_override("outline_size", 6)
+	row.add_child(label)
+	row.name = "Gold"
+	add_child(row)
+	row.reset_size()
+	row.global_position = global_position + Vector2((size.x - row.size.x) / 2.0, 8.0)
+	var rise := row.create_tween()
+	rise.tween_property(row, "global_position:y", row.global_position.y - 64.0, 1.6).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
+	rise.parallel().tween_property(row, "modulate:a", 0.0, 0.5).set_delay(1.1)
+	rise.tween_callback(row.queue_free)
+
+
+func _level_up_pop() -> void:
+	_level_mark.visible = true
+	_level_mark.scale = Vector2(0.3, 0.3)
+	var pop := _level_mark.create_tween()
+	pop.tween_property(_level_mark, "scale", Vector2(1.4, 1.4), 0.18).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	pop.tween_property(_level_mark, "scale", Vector2.ONE, 0.2)
+	var glow := create_tween()
+	glow.tween_property(_style, "border_color", COLOR_XP, 0.1)
+	glow.tween_interval(0.5)
+	glow.tween_callback(refresh)
 
 
 ## Something got worse (#64): a big icon rises from the portrait and fades,
