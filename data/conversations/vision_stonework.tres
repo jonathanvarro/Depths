@@ -31,6 +31,11 @@ replies = Array[ExtResource("reply")]([SubResource("r1_0")])
 script = ExtResource("page")
 speaker = "hero"
 text = "\"...It's alive. Whatever is down there - it's alive, and it knows we're here.\""
+text_by = {
+"Corin": "\"...It's alive. Whatever's down there is alive. And it's seen us.\"",
+"Mara": "\"...It's alive. Whatever is down there - it's alive, and it knows we're here.\"",
+"Sister Alwen": "\"...It's alive. I felt its heart. And it knows we're here.\""
+}
 
 [resource]
 script = ExtResource("conv")

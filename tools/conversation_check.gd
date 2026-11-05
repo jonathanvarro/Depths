@@ -56,6 +56,31 @@ func _initialize() -> void:
 				missing.append(reply.label)
 	check("each reply has a spoken line for Mara, Corin and Alwen", missing.is_empty(), missing)
 
+	# Every story talk: pages link up, quoted replies have a line for each
+	# starting hero, and accept marks name real quests.
+	var problems := []
+	for file in DirAccess.get_files_at("res://data/conversations"):
+		file = file.trim_suffix(".remap")
+		if not file.ends_with(".tres"):
+			continue
+		var each: Conversation = load("res://data/conversations/" + file)
+		for i in each.pages.size():
+			var page: ConversationPage = each.pages[i]
+			if page.speaker == "hero" and not names.all(func(n): return page.text_by.has(n)):
+				problems.append("%s p%d: hero text" % [file, i])
+			for reply in page.replies:
+				if reply.next >= each.pages.size() or reply.next == i:
+					problems.append("%s p%d: next %d" % [file, i, reply.next])
+				if reply.label != "Go on" and reply.spoken_by(null) == "" and reply.said_by.is_empty() and reply.accepts == "":
+					pass  # an action, not words (e.g. "Keep the feather")
+				elif reply.label != "Go on" and reply.accepts == "" and not names.all(func(n): return reply.said_by.has(n)):
+					problems.append("%s p%d: %s" % [file, i, reply.label])
+				if reply.accepts != "" and not Quests.INFO.has(reply.accepts):
+					problems.append("%s p%d: accepts %s" % [file, i, reply.accepts])
+				if reply.label.begins_with("\""):
+					problems.append("%s p%d: quoted label %s" % [file, i, reply.label])
+	check("every story talk: summary buttons, a line per hero, pages that link up", problems.is_empty(), problems)
+
 	for path in HEROES:
 		var hero: Companion = load(path).duplicate()
 		var camp = main.CampState.new()

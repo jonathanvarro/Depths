@@ -8,27 +8,36 @@
 
 [sub_resource type="Resource" id="r0_0"]
 script = ExtResource("reply")
-label = "\"You killed them.\""
 next = 1
 
 [sub_resource type="Resource" id="p0"]
 script = ExtResource("page")
-text = "She reads the strange marks over your party's route as easily as her own hand, and something in her face closes.\n\n\"Ours. We watched your vanguard come down, and we stopped them.\""
+speaker = "narrator"
+text = "She reads the strange marks over your party's route as easily as her own hand, and something in her face closes."
 replies = Array[ExtResource("reply")]([SubResource("r0_0")])
 
 [sub_resource type="Resource" id="r1_0"]
 script = ExtResource("reply")
-label = "Go on"
-next = -1
+label = "You killed them"
+next = 2
+said_by = {
+"Corin": "\"You killed them. My whole company - that was you, not the goblins?\"",
+"Mara": "\"You killed them. They followed me down, and you killed them.\"",
+"Sister Alwen": "\"You killed them. I was there when they died. I couldn't save one.\""
+}
 
 [sub_resource type="Resource" id="p1"]
 script = ExtResource("page")
+text = "\"Ours. We watched your vanguard come down, and we stopped them.\""
+replies = Array[ExtResource("reply")]([SubResource("r1_0")])
+
+[sub_resource type="Resource" id="p2"]
+script = ExtResource("page")
 expression = ExtResource("defiant")
 text = "\"What sleeps below must stay asleep. Your king does not know what he is digging for.\" She meets your eyes. \"I would do it again.\""
-replies = Array[ExtResource("reply")]([SubResource("r1_0")])
 
 [resource]
 script = ExtResource("conv")
 speaker = "The wounded keeper"
 portrait = ExtResource("portrait")
-pages = Array[ExtResource("page")]([SubResource("p0"), SubResource("p1")])
+pages = Array[ExtResource("page")]([SubResource("p0"), SubResource("p1"), SubResource("p2")])

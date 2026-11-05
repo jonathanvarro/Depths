@@ -345,14 +345,15 @@ func _show_page(talk: Conversation, page: ConversationPage):
 			who = _hero
 		_:
 			who = ""
+	var text: String = page.text_by.get(_hero.display_name, page.text) if _hero else page.text
 	if page.speaker == "hero":
-		_speak_hero(_fill(page.text))
+		_speak_hero(_fill(text))
 		if _say.visible:
 			_say.modulate = GREYED  # what they said before stays, greyed
 	else:
 		_name.text = speaker_name
 		_name.visible = speaker_name != ""
-		_text.text = _fill(page.text)
+		_text.text = _fill(text)
 		var narration := speaker_name == ""
 		_say_tail.visible = not narration
 		_say_style.bg_color = CAPTION if narration else BUBBLE
@@ -373,9 +374,9 @@ func _show_page(talk: Conversation, page: ConversationPage):
 	for reply in replies:
 		var button := Button.new()
 		button.text = _fill(reply.label) if reply else "Go on"
-		if reply and reply.accepts and Quests.INFO.has(reply.quest):
+		if reply and reply.accepts != "" and Quests.INFO.has(reply.accepts):
 			# Taking on a quest is marked, so it's a clear choice (#228).
-			button.text += "   -   Accept: " + Quests.INFO[reply.quest].title
+			button.text += "   -   Accept: " + Quests.INFO[reply.accepts].title
 			button.add_theme_color_override("font_color", GOLD)
 			button.add_theme_color_override("font_focus_color", GOLD)
 			button.add_theme_color_override("font_hover_color", GOLD)

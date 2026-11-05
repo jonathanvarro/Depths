@@ -94,7 +94,7 @@ said_by = {
 "Mara": "\"I'll find them. I owe them that much.\"",
 "Sister Alwen": "\"I'll find them. Someone should bring them home.\""
 }
-accepts = true
+accepts = "left_behind"
 
 [sub_resource type="Resource" id="Resource_moxlj"]
 script = ExtResource("2_r7od4")

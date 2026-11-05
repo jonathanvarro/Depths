@@ -25,6 +25,11 @@ next = 2
 script = ExtResource("page")
 speaker = "hero"
 text = "\"She told us to our faces. Her people killed ours, to keep us away from something below. And she wasn't sorry.\""
+text_by = {
+"Corin": "\"She said it to my face. Not goblins - her people. They cut down my company to keep us out. And she'd do it again.\"",
+"Mara": "\"She told us to our faces. Her people killed mine, to keep us away from something below. And she wasn't sorry.\"",
+"Sister Alwen": "\"She told us. Her people killed ours, to keep us away from something below. She wasn't sorry. I don't know what to do with that.\""
+}
 replies = Array[ExtResource("reply")]([SubResource("r1_0")])
 
 [sub_resource type="Resource" id="p2"]

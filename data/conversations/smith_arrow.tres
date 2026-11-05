@@ -7,26 +7,42 @@
 
 [sub_resource type="Resource" id="r0_0"]
 script = ExtResource("reply")
-label = "\"Where my party fell.\""
 next = 1
 
 [sub_resource type="Resource" id="p0"]
 script = ExtResource("page")
-text = "He is mending a strap on your pack when he stops, and works something out of the stitching with the tip of his knife: a single black feather, glossy as oil.\n\n\"Where did you pick this up?\""
+speaker = "narrator"
+text = "He is mending a strap on your pack when he stops, and works something out of the stitching with the tip of his knife: a single black feather, glossy as oil."
 replies = Array[ExtResource("reply")]([SubResource("r0_0")])
 
 [sub_resource type="Resource" id="r1_0"]
 script = ExtResource("reply")
-label = "Keep the feather"
-next = -1
+label = "Where my party fell"
+next = 2
+said_by = {
+"Corin": "\"Where my company fell. Off one of the arrows.\"",
+"Mara": "\"Where my party fell. It must have come up with me.\"",
+"Sister Alwen": "\"Where our people fell. I must have carried it out with the bandages.\""
+}
 
 [sub_resource type="Resource" id="p1"]
 script = ExtResource("page")
-text = "He turns it under the lamp. \"My master had a knife trimmed with these. Traded it off a pedlar who swore it came up from the deep places - from folk who don't come up.\" He hands it back as if it were hot. \"That's not goblin work. Someone wanted you to think it was.\""
+text = "\"Where did you pick this up?\""
 replies = Array[ExtResource("reply")]([SubResource("r1_0")])
+
+[sub_resource type="Resource" id="r2_0"]
+script = ExtResource("reply")
+label = "Keep the feather"
+next = -1
+accepts = "the_arrow"
+
+[sub_resource type="Resource" id="p2"]
+script = ExtResource("page")
+text = "He turns it under the lamp. \"My master had a knife trimmed with these. Traded it off a pedlar who swore it came up from the deep places - from folk who don't come up.\" He hands it back as if it were hot. \"That's not goblin work. Someone wanted you to think it was.\""
+replies = Array[ExtResource("reply")]([SubResource("r2_0")])
 
 [resource]
 script = ExtResource("conv")
 speaker = "The apprentice smith"
 portrait = ExtResource("portrait")
-pages = Array[ExtResource("page")]([SubResource("p0"), SubResource("p1")])
+pages = Array[ExtResource("page")]([SubResource("p0"), SubResource("p1"), SubResource("p2")])

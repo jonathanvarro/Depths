@@ -162,16 +162,18 @@ func _initialize() -> void:
 
 	# The keeper: map-reading still, then her defiant face, talking.
 	var talk: Conversation = load("res://data/conversations/keeper_talk.tres")
-	check("her talk's second page has her defiant face", talk.pages[1].expression != null and talk.pages[1].expression.resource_path.ends_with("defiant.tres"))
+	check("her talk's last page has her defiant face", talk.pages[2].expression != null and talk.pages[2].expression.resource_path.ends_with("defiant.tres"))
 	main._conversation.play(talk, main._party_state.members[0], main._camp_state, main._party_state.members)
 	await process_frame
 	var frame: PanelContainer = main._conversation._frames.get("npc")
 	check("...the first page keeps the still map-reading pose", frame.get_meta("face").visible and not frame.has_meta("view"))
-	main._conversation.choose("\"You killed them")
+	main._conversation.choose("Go on")  # the narration
+	await process_frame
+	main._conversation.choose("You killed them")
 	for i in 6:
 		await process_frame
 	var portrait: Control = frame.get_meta("view") if frame.has_meta("view") else null
-	check("...then her face moves: the defiant rig, talking", portrait != null and portrait.visible and not frame.get_meta("face").visible and portrait.portrait_set == talk.pages[1].expression and portrait._talk_tween != null and portrait._talk_tween.is_valid())
+	check("...then her face moves: the defiant rig, talking", portrait != null and portrait.visible and not frame.get_meta("face").visible and portrait.portrait_set == talk.pages[2].expression and portrait._talk_tween != null and portrait._talk_tween.is_valid())
 	await _snap(dir, "symbols_%s_keeper" % tag)
 	main._conversation.choose("Go on")
 	await process_frame

@@ -65,7 +65,11 @@ func _answer(main, a: String = "", b: String = "", c: String = "") -> bool:
 		if not main._conversation.visible:
 			break
 		if reply != "":
-			main._conversation.choose(reply)
+			for i in 4:  # past any narration ("Go on") to the reply
+				if main._conversation.choose(reply):
+					break
+				main._conversation.choose("Go on")
+				await process_frame
 			await process_frame
 	for i in 4:
 		if not main._conversation.visible:
@@ -137,7 +141,7 @@ func _initialize() -> void:
 	Quests.set_flag(camp, "left_behind", "found")
 	cs._refresh_activity()
 	await process_frame
-	check("with the evidence found, he hears the report", await _talk(main, cs, "Vael", "Show him", "\"What happens", "\"I'll find a way"))
+	check("with the evidence found, he hears the report", await _talk(main, cs, "Vael", "Show him", "What happens", "I'll find a way"))
 	check("...which ends the quest and gives the next ones", Quests.stage(camp, "left_behind") == Quests.Stage.RESOLVED and Quests.is_active(camp, "lower_gate") and Quests.is_active(camp, "queen_claim"))
 	if dir != "":
 		await _snap("camp_orders")
@@ -145,7 +149,7 @@ func _initialize() -> void:
 	cs.open_activity("fire")
 	await process_frame
 	check("the smith's errand isn't told at the fire", not cs._body.find_children("*", "Button", true, false).any(func(b): return b.text.contains("smith")))
-	check("the smith asks for iron at his anvil, once the first order is done", await _visit_smith(main, cs, "\"I'll bring"))
+	check("the smith asks for iron at his anvil, once the first order is done", await _visit_smith(main, cs, "I'll bring"))
 	check("...and it's an active quest", Quests.is_active(camp, "iron_sample"))
 	Quests.set_flag(camp, "iron_sample", "have_ore")
 	cs._refresh_activity()
@@ -291,7 +295,9 @@ func _vision_check() -> void:
 	main._conversation.play(talk, main._party_state.members[0], main._camp_state)
 	await create_timer(0.8).timeout
 	check("a vision conversation plays in the blue tint", main._vision.is_on())
-	main._conversation.choose("")
+	for i in talk.pages.size():
+		main._conversation.choose("")
+		await process_frame
 	await create_timer(1.2).timeout
 	check("...and the present returns after it", not main._vision.is_on() and not main._conversation.visible)
 	main.set_vision(true)

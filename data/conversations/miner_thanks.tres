@@ -6,15 +6,32 @@
 [ext_resource type="Script" path="res://scripts/conversation.gd" id="4_eg1hy"]
 [ext_resource type="Texture2D" path="res://art/illustrations/descent-v1/by-the-fire.png" id="backdrop"]
 
-[sub_resource type="Resource" id="Resource_otes6"]
-script = ExtResource("1_u438k")
-text = "The miner you found behind the rubble is sitting at the fire, a blanket round his shoulders. \"They said it was you who heard me. I'd have died in there.\"
+[sub_resource type="Resource" id="r0_0"]
+script = ExtResource("2_rddwr")
+next = 1
 
-He leans in. \"There's good iron on the first floor - a dark seam with rust-red streaks, where the old workings end. The smith'd want it.\""
+[sub_resource type="Resource" id="p0"]
+script = ExtResource("1_u438k")
+speaker = "narrator"
+text = "The miner you found behind the rubble is sitting at the fire, a blanket round his shoulders."
+replies = Array[ExtResource("2_rddwr")]([SubResource("r0_0")])
+
+[sub_resource type="Resource" id="r1_0"]
+script = ExtResource("2_rddwr")
+next = 2
+
+[sub_resource type="Resource" id="p1"]
+script = ExtResource("1_u438k")
+text = "\"They said it was you who heard me. I'd have died in there.\""
+replies = Array[ExtResource("2_rddwr")]([SubResource("r1_0")])
+
+[sub_resource type="Resource" id="p2"]
+script = ExtResource("1_u438k")
+text = "He leans in. \"There's good iron on the first floor - a dark seam with rust-red streaks, where the old workings end. The smith'd want it.\""
 
 [resource]
 script = ExtResource("4_eg1hy")
 backdrop = ExtResource("backdrop")
 speaker = "Hask, a miner"
 portrait = ExtResource("3_eanq2")
-pages = Array[ExtResource("1_u438k")]([SubResource("Resource_otes6")])
+pages = Array[ExtResource("1_u438k")]([SubResource("p0"), SubResource("p1"), SubResource("p2")])

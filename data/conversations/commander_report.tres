@@ -5,45 +5,76 @@
 [ext_resource type="Texture2D" path="res://art/portraits/story-slice-v1/commander-edric.png" id="3_16t82"]
 [ext_resource type="Script" path="res://scripts/conversation.gd" id="4_uo60j"]
 
-[sub_resource type="Resource" id="Resource_llfuq"]
+[sub_resource type="Resource" id="r0_0"]
 script = ExtResource("2_e0pqa")
-label = "Show him the arrow"
 next = 1
 
-[sub_resource type="Resource" id="Resource_pnv35"]
+[sub_resource type="Resource" id="p0"]
 script = ExtResource("1_gtmdc")
-text = "You set the survey map on his table, and beside it the arrow.
+speaker = "narrator"
+text = "You set the survey map on his table, and beside it the arrow.\n\nHe unrolls the map first. Your party's route is there in the surveyor's neat hand - and over it, someone else's: marks at the very turns where you were caught. He is quiet for a long moment."
+replies = Array[ExtResource("2_e0pqa")]([SubResource("r0_0")])
 
-He unrolls the map first. Your party's route is there in the surveyor's neat hand - and over it, someone else's: marks at the very turns where you were caught. He is quiet for a long moment.
-
-\"None of your people drew these.\""
-replies = Array[ExtResource("2_e0pqa")]([SubResource("Resource_llfuq")])
-
-[sub_resource type="Resource" id="Resource_f30p4"]
+[sub_resource type="Resource" id="r1_0"]
 script = ExtResource("2_e0pqa")
-label = "\"What happens now?\""
+label = "Show him the arrow"
 next = 2
+said_by = {
+"Corin": "\"No. And this was in one of my company. Goblin arrow, or so it looks.\"",
+"Mara": "\"No. And this was in the wall where they fell.\"",
+"Sister Alwen": "\"No. And I took this out of one of ours. Too late to matter.\""
+}
 
-[sub_resource type="Resource" id="Resource_cdhuw"]
+[sub_resource type="Resource" id="p1"]
 script = ExtResource("1_gtmdc")
-text = "He turns the arrow in his fingers. Goblin-made shaft. The fletching is black and glossy, cut from no bird you know.
+text = "\"None of your people drew these.\""
+replies = Array[ExtResource("2_e0pqa")]([SubResource("r1_0")])
 
-\"Goblins fletch with crow, if they bother at all.\" He lays it down very carefully. \"Say nothing of this at the fire. Not yet.\""
-replies = Array[ExtResource("2_e0pqa")]([SubResource("Resource_f30p4")])
-
-[sub_resource type="Resource" id="Resource_1s6k4"]
+[sub_resource type="Resource" id="r2_0"]
 script = ExtResource("2_e0pqa")
-label = "\"I'll find a way down.\""
+next = 3
+
+[sub_resource type="Resource" id="p2"]
+script = ExtResource("1_gtmdc")
+speaker = "narrator"
+text = "He turns the arrow in his fingers. Goblin-made shaft. The fletching is black and glossy, cut from no bird you know."
+replies = Array[ExtResource("2_e0pqa")]([SubResource("r2_0")])
+
+[sub_resource type="Resource" id="r3_0"]
+script = ExtResource("2_e0pqa")
+label = "What happens now?"
+next = 4
+said_by = {
+"Corin": "\"Then who did it? And what do we do about them?\"",
+"Mara": "\"Then what happens now?\"",
+"Sister Alwen": "\"Then what happens now - to them, and to us?\""
+}
+
+[sub_resource type="Resource" id="p3"]
+script = ExtResource("1_gtmdc")
+text = "\"Goblins fletch with crow, if they bother at all.\" He lays it down very carefully. \"Say nothing of this at the fire. Not yet.\""
+replies = Array[ExtResource("2_e0pqa")]([SubResource("r3_0")])
+
+[sub_resource type="Resource" id="r4_0"]
+script = ExtResource("2_e0pqa")
+label = "I'll find a way down"
+next = -1
 quest = "story"
 flag = "reported"
+said_by = {
+"Corin": "\"Queen or no queen, I'll get us past that fortress.\"",
+"Mara": "\"I'll find a way down. I've done it before.\"",
+"Sister Alwen": "\"I'll find a way down. Someone has to keep them alive while we look.\""
+}
+accepts = "lower_gate"
 
-[sub_resource type="Resource" id="Resource_ym1dk"]
+[sub_resource type="Resource" id="p4"]
 script = ExtResource("1_gtmdc")
 text = "\"Now we go deeper. Below the fortress the old water channels run down to - \" he stops himself. \"To where my orders point. The goblins hold the way. There is a bounty on their queen, if you want it. But I need a way past that fortress, with her or without her.\""
-replies = Array[ExtResource("2_e0pqa")]([SubResource("Resource_1s6k4")])
+replies = Array[ExtResource("2_e0pqa")]([SubResource("r4_0")])
 
 [resource]
 script = ExtResource("4_uo60j")
 speaker = "Commander Edric Vael"
 portrait = ExtResource("3_16t82")
-pages = Array[ExtResource("1_gtmdc")]([SubResource("Resource_pnv35"), SubResource("Resource_cdhuw"), SubResource("Resource_ym1dk")])
+pages = Array[ExtResource("1_gtmdc")]([SubResource("p0"), SubResource("p1"), SubResource("p2"), SubResource("p3"), SubResource("p4")])

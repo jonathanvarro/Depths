@@ -17,8 +17,9 @@ extends Resource
 ## spoken as it is.
 @export_multiline var said := ""
 @export var said_by: Dictionary = {}
-## Marks the button as taking on `quest` ("Accept: Those Left Behind").
-@export var accepts := false
+## A quest this reply takes on (an ID in quests.gd INFO): the button is
+## marked "Accept: <its title>" in gold. Empty: an ordinary reply.
+@export var accepts := ""
 
 
 ## The line `hero` speaks for this reply, or "" if it isn't spoken.

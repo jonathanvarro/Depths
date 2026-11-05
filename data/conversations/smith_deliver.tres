@@ -5,12 +5,41 @@
 [ext_resource type="Texture2D" path="res://art/camp/highres-v4/apprentice.png" id="3_vgxpr"]
 [ext_resource type="Script" path="res://scripts/conversation.gd" id="4_avcmb"]
 
-[sub_resource type="Resource" id="Resource_wost7"]
+[sub_resource type="Resource" id="r0_0"]
+script = ExtResource("2_tege7")
+next = 1
+
+[sub_resource type="Resource" id="p0"]
 script = ExtResource("1_u7262")
-text = "He weighs the ore in both hands and grins for the first time since he arrived. \"Good iron. Proper iron.\" Two days of hammering later, a blade lies on his anvil, bright and light. \"It's yours to buy - I still have to eat.\""
+speaker = "narrator"
+text = "He weighs the ore in both hands and grins for the first time since he arrived."
+replies = Array[ExtResource("2_tege7")]([SubResource("r0_0")])
+
+[sub_resource type="Resource" id="r1_0"]
+script = ExtResource("2_tege7")
+next = 2
+
+[sub_resource type="Resource" id="p1"]
+script = ExtResource("1_u7262")
+text = "\"Good iron. Proper iron.\""
+replies = Array[ExtResource("2_tege7")]([SubResource("r1_0")])
+
+[sub_resource type="Resource" id="r2_0"]
+script = ExtResource("2_tege7")
+next = 3
+
+[sub_resource type="Resource" id="p2"]
+script = ExtResource("1_u7262")
+speaker = "narrator"
+text = "Two days of hammering later, a blade lies on his anvil, bright and light."
+replies = Array[ExtResource("2_tege7")]([SubResource("r2_0")])
+
+[sub_resource type="Resource" id="p3"]
+script = ExtResource("1_u7262")
+text = "\"It's yours to buy - I still have to eat.\""
 
 [resource]
 script = ExtResource("4_avcmb")
 speaker = "The apprentice smith"
 portrait = ExtResource("3_vgxpr")
-pages = Array[ExtResource("1_u7262")]([SubResource("Resource_wost7")])
+pages = Array[ExtResource("1_u7262")]([SubResource("p0"), SubResource("p1"), SubResource("p2"), SubResource("p3")])
