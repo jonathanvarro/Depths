@@ -196,6 +196,10 @@ checks and 514 artifact checks pass. Before/after (side and front):
 Godot import and `check.gd` native/headless, then `package_wardrobe_v6.py`.
 Male unchanged from v5.
 
+**Owner review of v6 (2026-11-04):** about 80% corrected, "good enough for
+the moment". Remaining hand/thigh polish is parked, not abandoned; an
+animator pass with hand IK targets on the knees is still the cleaner fix.
+
 Not checked: male hand contacts; a real chair.
 
 Rebuild: Blender `--python tools/blender_kit/prepare_wardrobe_v3.py`, copy

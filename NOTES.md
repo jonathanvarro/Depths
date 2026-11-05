@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-11-04 – Claude (owner review of assembly-v6, #218)
+- Did: Owner reviewed v6's hands-on-knees fix: about 80% corrected, good enough for now. Recorded in docs/female-chair-hold-review.md and #218.
+- Next: Hand/thigh polish is parked. #218 stays open for the other items (male hand contacts, a real chair, loops, style approval).
+- Watch out: nothing new.
+
 ## 2026-11-03 – Claude (the commander's first scene restaged, #228)
 
 - **Layout** (`conversation_screen.gd`, so every conversation gets it):
