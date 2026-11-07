@@ -1,0 +1,60 @@
+[gd_resource type="Resource" script_class="Conversation" format=3]
+
+[ext_resource type="Script" path="res://scripts/conversation_page.gd" id="page"]
+[ext_resource type="Script" path="res://scripts/conversation_reply.gd" id="reply"]
+[ext_resource type="Script" path="res://scripts/conversation.gd" id="conv"]
+[ext_resource type="Texture2D" path="res://art/camp/highres-v4/merchant.png" id="portrait"]
+
+[sub_resource type="Resource" id="r0_0"]
+script = ExtResource("reply")
+next = 1
+
+[sub_resource type="Resource" id="p0"]
+script = ExtResource("page")
+speaker = "narrator"
+text = "A covered wagon has pulled in beside the road, its mules still steaming. A broad man in a travel-stained coat is handing crates down to a boy, counting each one aloud."
+replies = Array[ExtResource("reply")]([SubResource("r0_0")])
+
+[sub_resource type="Resource" id="r1_0"]
+script = ExtResource("reply")
+label = "Who sent you?"
+next = 2
+said_by = {
+"Corin": "\"Supplies, this far out? Who sent you?\"",
+"Mara": "\"You came a long way for a hole in a hill. Who sent you?\"",
+"Sister Alwen": "\"Bandages, I hope, in some of those. Who sent you?\""
+}
+
+[sub_resource type="Resource" id="p1"]
+script = ExtResource("page")
+text = "\"Careful with that one, it's lamp oil!\" He turns, wipes his hands on his coat, and looks you over. \"You'll be from the mine. Good. Then you're the ones I'm here for.\""
+replies = Array[ExtResource("reply")]([SubResource("r1_0")])
+
+[sub_resource type="Resource" id="r2_0"]
+script = ExtResource("reply")
+next = 3
+
+[sub_resource type="Resource" id="p2"]
+script = ExtResource("page")
+text = "\"The commander's quartermaster. A letter with the king's seal on it, and coin enough to make the road worth it.\" He taps a crate. \"I'm to keep this camp in food, light and bandages for as long as the king wants his mine dug. Whatever comes up out of it, I buy, too.\""
+replies = Array[ExtResource("reply")]([SubResource("r2_0")])
+
+[sub_resource type="Resource" id="r3_0"]
+script = ExtResource("reply")
+label = "Let's see what you have"
+said_by = {
+"Corin": "\"Then let's see what you've got.\"",
+"Mara": "\"Then let's see what you brought.\"",
+"Sister Alwen": "\"Show me the bandages first.\""
+}
+
+[sub_resource type="Resource" id="p3"]
+script = ExtResource("page")
+text = "\"The stall's open as of now. Fair prices - fairer than you'll find anywhere else within three days' ride, which is to say, the only prices.\" He grins. \"Come back with something worth selling.\""
+replies = Array[ExtResource("reply")]([SubResource("r3_0")])
+
+[resource]
+script = ExtResource("conv")
+speaker = "The merchant"
+portrait = ExtResource("portrait")
+pages = Array[ExtResource("page")]([SubResource("p0"), SubResource("p1"), SubResource("p2"), SubResource("p3")])

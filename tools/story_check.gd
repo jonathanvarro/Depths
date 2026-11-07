@@ -346,8 +346,12 @@ func _step3() -> void:
 	var site: Rect2i = map.marks.get("quests", {}).get("left_behind", Rect2i())
 	var fight_cell: Vector2i = map.fight_groups.keys()[0]
 	check("the map knows where the site is, and it still has something to do (#230)", site.has_point(fight_cell) and main._quest_site_open("left_behind"))
+	check("it's named, and already on the map from arrival (#234)", map.marks.get("quest_names", {}).get("left_behind", "") == "Where the survey party fell" and map.explored.has(fight_cell) and main._minimap._notes().any(func(n): return n.title == "Where the survey party fell"))
 	var room: Array = map.room_around(fight_cell)
 	main._party.place(map, room.filter(func(c): return map.content_at(c) == 0)[0])
+	main._cell_before = Vector2i(-1, -1)
+	main._note_quest_site(main._party.cell)
+	check("...and walking in names it", main._message_label.text == "Where the survey party fell.", main._message_label.text)
 	main._on_party_entered_cell(main._party.cell)
 	await create_timer(0.3).timeout
 	var names: Array = main._combat._state.foes.map(func(f): return f.type.display_name) if main._in_combat else []

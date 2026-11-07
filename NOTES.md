@@ -13,6 +13,18 @@ Format:
 
 ---
 
+## 2026-11-06 – Claude (playtest 2: first quest, floor 2 gate, merchant, guide, Pack hint; #232, #234, #235, #237)
+
+- **Pack hint (#232):** the tutorial card moves left of the Pack's item card (or above it) so its buttons stay visible. Main `_layout_hint` follows `_pack._details`. The opening playthrough checks it.
+- **First quest (#234):** `QUEST_SITE_NAMES` names Those Left Behind's site "Where the survey party fell". On floor 1 its room is revealed on the map from arrival, named on the full map and first under Discoveries. Walking in announces it, and a tip says Vael marked it.
+  - A test over 40 seeds found the site was always placed and reachable. The problem was finding it.
+- **Camp guide (#235):** "Start here" points at your tent until it's opened (`CampState.tent_seen`), then "Find company" at the fire, then "Into the mine".
+- **Floor 2 gate and merchant (#237):** `Story.way_down_open`: floor 1's stairs refuse while Those Left Behind is active, with a message. The bot obeys it too.
+  - Reporting to Vael brings the merchant, unloading. Walking up plays `merchant_arrival` (the quartermaster sent him), then the stall opens (flag `story/merchant_met`).
+  - The nurse and smith still arrive on day 3, pending the owner's choice on #238 (proposal posted).
+- **Waiting on the owner:** #233 (levels vs skills), #236 (panic from choices), #238 (nurse and smith timing).
+- **Watch out:** the `minimap.gd` draw code already has a local `width`, so don't reuse that name inside its loops.
+
 ## 2026-11-04 – Claude (spoils on the party cards, #231)
 
 - **No spoils screen:** a won fight no longer stops on a "Spoils" box. Each party card shows:

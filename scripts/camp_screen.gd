@@ -318,7 +318,7 @@ func _update_site_art() -> void:
 	# News follows the same story availability as the site's conversation.
 	for id in _buttons:
 		if id != "supplies" and _sites.has(id):
-			var news: bool = (id == "fire" and _sites.keys().any(func(site): return site != "smith" and Story.camp_talk(_camp, site) != "")) 					or (id == "smith" and Story.camp_talk(_camp, "smith") != "")
+			var news: bool = (id == "fire" and _sites.keys().any(func(site): return site not in ["smith", "supplies"] and Story.camp_talk(_camp, site) != "")) 					or (id in ["smith", "supplies"] and Story.camp_talk(_camp, id) != "")
 			_buttons[id].text = _sites[id].label
 			_buttons[id].icon = NEWS_ICON if news else null
 			_buttons[id].icon_alignment = HORIZONTAL_ALIGNMENT_RIGHT
@@ -334,6 +334,8 @@ func _update_site_art() -> void:
 func guide_target() -> String:
 	if _camp == null or _party == null or _camp.day > 2 or _camp.explored_today:
 		return ""
+	if not _camp.tent_seen:
+		return "rest"  # your tent first (#235), then the fire, then the mine
 	return "fire" if _party.members.size() < 2 else "cave"
 
 
@@ -343,7 +345,7 @@ func _place_guide() -> void:
 	if not _guide.visible:
 		return
 	var rect: Rect2 = Rect2(_buttons[target].position, _buttons[target].size)
-	_guide.text = "▼ Start here" if target == "fire" else "▼ Into the mine"
+	_guide.text = {"rest": "▼ Start here", "fire": "▼ Find company", "cave": "▼ Into the mine"}[target]
 	_guide.size = Vector2(140, 18)
 	_guide.position = Vector2(rect.get_center().x - 70, rect.end.y - 42)
 	_canvas.move_child(_guide, -1)
@@ -422,6 +424,8 @@ func open_activity(id: String) -> void:
 	if id!="smith":_smith_view.hide()
 	_stash_view.hide()
 	_current = id
+	if id == "rest" and not _camp.tent_seen:
+		_camp.tent_seen = true
 	if _note_tween:
 		_note_tween.kill()
 	_note.modulate.a = 0.0  # announcements belong to the clearing
@@ -461,11 +465,13 @@ func _refresh_activity() -> void:
 	_day_label.text = _status()
 	if _current=="supplies":
 		_activity.visible=false
-		_merchant()
+		await _site_talk("supplies")  # his arrival (#237)
+		if _current=="supplies":
+			_merchant()
 		return
 	if _current=="smith":
 		_activity.visible=false
-		await _smith_talk()
+		await _site_talk("smith")
 		if _current=="smith":
 			_smith()
 		return
@@ -489,7 +495,7 @@ func _talk_row() -> void:
 	if _current != "fire":
 		return  # talk and quests gather at the campfire for now (owner, 2026-10-25)
 	for site in _sites:
-		if site != "smith":  # the smith speaks at his own anvil (owner playtest, #229)
+		if site not in ["smith", "supplies"]:  # they speak at their own sites (#229, #237)
 			_talk_button(Story.camp_talk(_camp, site))
 
 
@@ -510,8 +516,8 @@ func _talk_button(id: String) -> void:
 
 ## The smith has something to say: it's said on arriving at his anvil,
 ## then his wares open (owner playtest, #229).
-func _smith_talk() -> void:
-	var id := Story.camp_talk(_camp, "smith")
+func _site_talk(site: String) -> void:
+	var id := Story.camp_talk(_camp, site)
 	var talk := Story.conversation(id)
 	if talk == null or conversation == null or _smith_talking:
 		return

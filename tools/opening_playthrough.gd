@@ -137,6 +137,14 @@ func _do_pack_step() -> void:
 	main._set_pack(true)
 	await process_frame
 	await _snap_once("pack_" + key)
+	# The tutorial card stays clear of the item card it points at (#232).
+	var item_name: String = {"equip": main._opening_weapon.display_name, "drop": main._starting_weapon.display_name if main._starting_weapon else "", "light": main.TORCH.display_name, "relight": main.TORCH.display_name, "draught": "Restorative draught"}.get(key, "")
+	if main._pack.inspect_item_by_name(item_name):
+		await process_frame
+		await process_frame
+		if main._hint_box.visible:
+			check("the %s card leaves the item's buttons clear" % key, not main._hint_box.get_global_rect().intersects(main._pack._details.get_global_rect()), "%s vs %s" % [main._hint_box.get_global_rect(), main._pack._details.get_global_rect()])
+		await _snap_once("pack_open_" + key)
 	match key:
 		"equip": _press_in_row(main._opening_weapon.display_name, "Equip")
 		"drop": _press_in_row(main._starting_weapon.display_name, "Drop")

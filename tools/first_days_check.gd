@@ -63,7 +63,11 @@ func _initialize() -> void:
 	var screen = main._camp
 	check("day 1: no merchant, nurse or smith yet (#229)", camp.day == 1 and not camp.site_present("supplies") and not camp.site_present("treatment") and not camp.site_present("smith"))
 	check("...and their places can't be opened", not screen._buttons.supplies.visible and not screen._buttons.treatment.visible and not screen._buttons.smith.visible)
-	check("alone: the guide points at the fire", screen.guide_target() == "fire" and screen._guide.visible and screen._guide.text.contains("Start here"))
+	check("first, the guide points at your tent (#235)", screen.guide_target() == "rest" and screen._guide.visible and screen._guide.text.contains("Start here"))
+	await _snap("day1_tent")
+	screen.open_activity("rest")
+	screen._close_activity()
+	check("then, alone, at the fire", screen.guide_target() == "fire" and screen._guide.visible and screen._guide.text.contains("company"))
 	await _snap("day1_fire")
 	camp.hire(party, camp.candidates[0])
 	screen._refresh_activity()
@@ -91,14 +95,33 @@ func _initialize() -> void:
 	check("after going down today, no guide", not screen._guide.visible)
 	camp.rest(party)
 	screen._update_site_art()
-	check("day 3: the merchant, the nurse and the smith have arrived", camp.site_present("supplies") and camp.site_present("treatment") and camp.site_present("smith") and camp.can_trade())
+	check("day 3: the nurse and the smith have arrived, not the merchant", camp.site_present("treatment") and camp.site_present("smith") and not camp.site_present("supplies"))
 	check("...and the guide is gone", screen.guide_target() == "" and not screen._guide.visible)
 
-	# The merchant: sale prices, hover text, right-click to sell.
+	# The first order: floor 1's way down waits for the report (#237).
+	var Story = load("res://scripts/story.gd")
+	main.Quests.set_stage(camp, "left_behind", main.Quests.Stage.ACTIVE)
+	check("floor 2 is shut while the first order is unreported (#237)", not Story.way_down_open(camp, 1) and Story.way_down_open(camp, 2))
+	main.Quests.set_flag(camp, "left_behind", "found")
+	Story.after_talk(camp, "commander_report")
+	screen._update_site_art()
+	check("the report opens it, and brings the merchant, unloading", Story.way_down_open(camp, 1) and camp.site_present("supplies") and camp.merchant_unloading and not camp.can_trade())
+	check("...he has news at his stall", Story.camp_talk(camp, "supplies") == "merchant_arrival")
+
+	# His arrival: he introduces himself, then the stall opens.
 	var gear: Equipment = load("res://data/gear/iron_sword.tres").duplicate()
 	party.supplies.gear.append(gear)
 	screen.open_activity("supplies")
 	await process_frame
+	check("walking up to him plays his arrival", main._conversation.visible and main._conversation._talk.speaker == "The merchant")
+	await _snap("merchant_arrival")
+	for i in 8:
+		if not main._conversation.visible:
+			break
+		main._conversation.choose("")
+		await process_frame
+	await create_timer(0.5).timeout
+	check("...after which he trades", camp.can_trade() and main.Quests.has_flag(camp, "story", "merchant_met") and screen._merchant_view.visible)
 	var merchant = screen._merchant_view
 	var tile: Button = null
 	for slot: Button in merchant._bag.slots:

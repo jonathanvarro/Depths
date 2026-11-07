@@ -647,12 +647,27 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 				sites[package.quest] = stamped["sites"][id]
 		if not sites.is_empty():
 			marks["quests"] = sites
+			# Named sites (#234): the quest-giver marked them on your map, so
+			# the room shows from the start, named, until the quest is done.
+			var names := {}
+			for quest in sites:
+				if QUEST_SITE_NAMES.has(quest):
+					names[quest] = QUEST_SITE_NAMES[quest]
+					var rect: Rect2i = sites[quest]
+					for y in range(rect.position.y, rect.end.y):
+						for x in range(rect.position.x, rect.end.x):
+							if _floors[depth].is_passable(Vector2i(x, y)):
+								_floors[depth].reveal_around(Vector2i(x, y))
+			marks["quest_names"] = names
 		_floors[depth].lairs = stamped["lairs"]
 		if depth >= Galleries.DEPTH and not use_debug_layout:  # slice 2: water, until it's drained
 			var drained := Quests.has_flag(_camp_state, "dry_passage", "opened") if depth == Galleries.DEPTH \
 					else Quests.has_flag(_camp_state, "reservoir", "diverted")
 			Galleries.flood(_floors[depth], _site_seed + depth * 7919 + 37, drained, depth)
 	_map = _floors[depth]
+	for quest in _map.marks.get("quest_names", {}):
+		if _quest_site_open(quest):
+			_tip.call_deferred("marked_" + quest, "Commander Vael marked \"%s\" on your map. Press M or tap the map to see the way." % _map.marks["quest_names"][quest])
 
 	_build_level()
 	_minimap.setup(_map)
@@ -776,6 +791,9 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 		DungeonMap.Content.NONE:
 			return
 		DungeonMap.Content.STAIRS_DOWN:
+			if not _in_opening and not Story.way_down_open(_camp_state, _depth):
+				_show_message("Not yet. Commander Vael's order comes first: find where your party fell, then report to him.")  # #237
+				return
 			_ask(environment_theme.descent_prompt, func():
 				Sounds.play(self, "stairs_down", -6.0, 0.0)
 				_go_to_floor(_depth + 1, Arrival.FROM_ABOVE))
@@ -3672,7 +3690,18 @@ func _layout_hint() -> void:
 		y = view.y - insets.w - size.y - 24.0  # along the bottom, clear of the header
 	if not screen_open and _hint_mode == "ok":
 		y = view.y * 0.42 - size.y / 2.0
-	_hint_box.position = Vector2((view.x - size.x) / 2.0, y)
+	var x := (view.x - size.x) / 2.0
+	# Never over the Pack's item card and its buttons (#232): beside it on
+	# the left, or above it if there's no room.
+	if in_pack and _pack._details.visible:
+		var card: Rect2 = _pack._details.get_global_rect().grow(12.0)
+		if card.intersects(Rect2(Vector2(x, y), size)):
+			var left := insets.x + 16.0
+			if card.position.x - size.x >= left:
+				x = minf(x, card.position.x - size.x)
+			else:
+				y = maxf(insets.y + 70.0, card.position.y - size.y)
+	_hint_box.position = Vector2(x, y)
 
 
 ## The picture for a tutorial card (#105).
@@ -4019,6 +4048,11 @@ func _clear_passage(cell: Vector2i) -> void:
 
 
 ## What to do on reaching a visible quest's site (#230).
+## Named quest sites (#234): shown on the map from arrival, announced on
+## entering, listed with the floor's discoveries.
+const QUEST_SITE_NAMES := {
+	"left_behind": "Where the survey party fell",
+}
 const QUEST_SITE_HINTS := {
 	"left_behind": "This is where your party fell. Walk into the bodies to search them for what Commander Vael asked for.",
 }
@@ -4034,6 +4068,9 @@ func _note_quest_site(cell: Vector2i) -> void:
 	var sites: Dictionary = _map.marks.get("quests", {})
 	for quest in sites:
 		if sites[quest].has_point(cell) and _quest_site_open(quest):
+			var name: String = _map.marks.get("quest_names", {}).get(quest, "")
+			if name != "" and not sites[quest].has_point(_cell_before):
+				_show_message(name + ".")  # announced like a landmark (#234)
 			_tip("site_" + quest, QUEST_SITE_HINTS.get(quest, 'This is the place for "%s".' % Quests.INFO[quest]["title"]))
 
 
@@ -4337,6 +4374,9 @@ func _build_ui(minimap: Control) -> void:
 	_pack.setup(_party_state)
 	_pack.visible = false
 	_pack.closed.connect(_set_pack.bind(false))
+	# The Pack's item card can open under a tutorial card: move it aside (#232).
+	_pack._details.visibility_changed.connect(func(): _layout_hint.call_deferred())
+	_pack._details.item_rect_changed.connect(func(): _layout_hint.call_deferred())
 	_pack.save_and_exit.connect(save_and_exit)
 	_pack.used.connect(_show_message)
 	_pack.used.connect(func(_m): _refresh_tutorial_hint())

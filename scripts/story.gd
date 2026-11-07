@@ -20,6 +20,9 @@ static func camp_talk(camp, site: String) -> String:
 				return "commander_galleries"  # slice 2
 			if Quests.has_flag(camp, "reservoir", "diverted") and not Quests.has_flag(camp, "reservoir", "reported"):
 				return "commander_reservoir"  # slice 2's ending
+		"supplies":  # the merchant introduces himself as he unloads (#237)
+			if camp.site_present("supplies") and camp.merchant_unloading and not Quests.has_flag(camp, "story", "merchant_met"):
+				return "merchant_arrival"
 		"smith":
 			if not camp.site_present("smith"):
 				return ""
@@ -43,6 +46,13 @@ static func conversation(id: String) -> Conversation:
 	return load(path) if id != "" and ResourceLoader.exists(path) else null
 
 
+## Floor 1's way down stays shut while the commander's first order is
+## unreported (owner playtest, #237). Campaigns without the story, and
+## every other floor, are open.
+static func way_down_open(camp, depth: int) -> bool:
+	return depth != 1 or Quests.stage(camp, "left_behind") != Quests.Stage.ACTIVE
+
+
 ## What a finished conversation changes beyond its replies' quest steps.
 static func after_talk(camp, id: String) -> void:
 	var S := Quests.Stage
@@ -51,6 +61,14 @@ static func after_talk(camp, id: String) -> void:
 			Quests.set_stage(camp, "left_behind", S.RESOLVED)
 			Quests.set_stage(camp, "lower_gate", S.ACTIVE)
 			Quests.set_stage(camp, "queen_claim", S.ACTIVE)
+			# The report brings the supply caravan (#237): it pulls in and
+			# unloads, and the merchant introduces himself at his stall.
+			camp.set_site_present("supplies", true)
+			if not Quests.has_flag(camp, "story", "merchant_met"):
+				camp.set_merchant_unloading(true)
+		"merchant_arrival":
+			Quests.set_flag(camp, "story", "merchant_met")
+			camp.set_merchant_unloading(false)
 		"smith_deliver":
 			Quests.set_stage(camp, "iron_sample", S.RESOLVED)
 			if CAMP_BLADE not in camp.smith_unlocks:

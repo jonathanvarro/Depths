@@ -183,7 +183,7 @@ func _campaign(hero_path: String, run_seed: int, max_days: int) -> Dictionary:
 ## People at camp with news (first slice): the bot listens, answering with
 ## the first reply each time, as the conversation screen would apply it.
 func _talk_at_camp() -> void:
-	for site in ["cave", "smith", "fire"]:
+	for site in ["cave", "supplies", "smith", "fire"]:
 		var id := Story.camp_talk(camp, site)
 		var talk := Story.conversation(id)
 		if talk == null:
@@ -567,6 +567,8 @@ func _explore_floor() -> String:
 			return rested
 	if _should_go_home():
 		return "home"
+	if not Story.way_down_open(camp, depth):
+		return "home"  # report the first order before floor 2 (#237)
 	if depth < FORTRESS_DEPTH:
 		var down: Vector2i = map.find_content(C.STAIRS_DOWN)
 		if down == Vector2i(-1, -1):

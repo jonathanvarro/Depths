@@ -78,8 +78,8 @@ var site_presence: Dictionary = {}
 var merchant_unloading := false
 ## Zero means no pending arrival (including older saves).
 var smith_arrival_day := 0
-## The merchant and the nurse arrive with him on day 3 (owner playtest,
-## #229: no gold and no injuries to spend on before then).
+## The nurse arrives on day 3 (owner playtest, #229). The merchant now
+## comes once the first order is reported (#237, Story.after_talk).
 var traders_arrival_day := 0
 ## When the merchant, nurse and smith arrive on a new story.
 const ARRIVAL_DAY := 3
@@ -99,6 +99,8 @@ var _charity_on := 0
 ## True once someone has gone down today: the cave they mapped is lost if
 ## the party rests (#85).
 var explored_today := false
+## The first-days guide (#235) points at your tent until you've looked in.
+var tent_seen := false
 ## The goblin fortress (#44): lasting progress that survives the cave
 ## shifting each day.
 var gate_broken := false
@@ -247,7 +249,6 @@ func rest(party) -> void:
 		site_presence["smith"] = true
 		smith_arrival_day = 0
 	if traders_arrival_day > 0 and day >= traders_arrival_day:
-		site_presence["supplies"] = true
 		site_presence["treatment"] = true
 		traders_arrival_day = 0
 	explored_today = false

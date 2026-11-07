@@ -198,7 +198,15 @@ func _draw() -> void:
 			for x in range(site.position.x,site.end.x):
 				seen=seen or map.explored.has(Vector2i(x,y))
 		if seen and cells.has_point(spot) and (not quest_open.is_valid() or quest_open.call(quest)):
-			_draw_marker(GLYPHS.landmark,origin+(Vector2(spot-cells.position)+Vector2.ONE*.5)*tile,tile,QUEST_TINT)
+			var at:=origin+(Vector2(spot-cells.position)+Vector2.ONE*.5)*tile
+			_draw_marker(GLYPHS.landmark,at,tile,QUEST_TINT)
+			# A named site (#234): its name beside it on the full map.
+			var site_name: String=map.marks.get("quest_names",{}).get(quest,"")
+			if full_view and site_name!="":
+				var font:=get_theme_default_font()
+				var label_width:=font.get_string_size(site_name,HORIZONTAL_ALIGNMENT_LEFT,-1,15).x
+				var pos:=at+Vector2(-label_width/2.0,-maxf(tile*.6,16.0))
+				draw_string(font,pos,site_name,HORIZONTAL_ALIGNMENT_LEFT,-1,16,Color(0.42,0.22,0.04))
 	if sensed.is_valid():
 		for cell: Vector2i in sensed.call():
 			if cells.has_point(cell):_draw_marker(GLYPHS.danger,origin+(Vector2(cell-cells.position)+Vector2.ONE*.5)*tile,tile,Color(1,.55,.45))
@@ -216,6 +224,9 @@ func _draw_landmark(center: Vector2, tile: float) -> void:
 
 func _notes() -> Array:
 	var notes: Array=[]
+	for quest in map.marks.get("quest_names",{}):  # named quest sites first (#234)
+		if not quest_open.is_valid() or quest_open.call(quest):
+			notes.append({"title":map.marks["quest_names"][quest],"used":false,"content":-2})
 	for landmark: Dictionary in map.landmarks:
 		if landmark["seen"]:notes.append({"title":landmark["name"],"used":false,"content":-1})
 	var titles: Dictionary={}
@@ -240,7 +251,8 @@ func _draw_notes(notes: Array, rect: Rect2) -> void:
 	var count:=clampi(int(floor((rect.size.y-58)/62))+1,0,notes.size())
 	for i in count:
 		var y: float=rect.position.y+40+i*62
-		if notes[i].content==-1:_draw_landmark(Vector2(rect.position.x+8,y-4),20)
+		if notes[i].content==-2:_draw_marker(GLYPHS.landmark,Vector2(rect.position.x+8,y-4),20,QUEST_TINT)
+		elif notes[i].content==-1:_draw_landmark(Vector2(rect.position.x+8,y-4),20)
 		else:_draw_marker(marker_for(notes[i].content,notes[i].used),Vector2(rect.position.x+8,y-4),20)
 		var text: String=notes[i].title
 		while text.length()>3 and font.get_string_size(text,HORIZONTAL_ALIGNMENT_LEFT,-1,14).x>rect.size.x-28:text=text.left(-2)+"…"
