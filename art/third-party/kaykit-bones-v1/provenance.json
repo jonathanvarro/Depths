@@ -1,0 +1,113 @@
+{
+  "verified_on": "2026-11-06",
+  "licence": "CC0-1.0",
+  "author": "Kay Lousberg",
+  "halloween_repository": "https://github.com/KayKit-Game-Assets/KayKit-Halloween-Bits-1.0",
+  "skeletons_repository": "https://github.com/KayKit-Game-Assets/KayKit-Character-Pack-Skeletons-1.0",
+  "files": [
+    {
+      "file": "halloween/bone_A.bin",
+      "sha256": "a39dcfc6f52655f8d93b8af90626e7a7aca0565584df2e35cef9ff305964523b",
+      "git_blob_sha1": "d2c7934af0a44491b1f9b48dc69bc5cd116566e7",
+      "bytes": 7592,
+      "official_path": "addons/kaykit_halloween_bits/Assets/gltf/bone_A.bin",
+      "release_commit": "6dc69bf6b2fa766a985754f35ec6a0324090e6c6"
+    },
+    {
+      "file": "halloween/bone_A.gltf",
+      "sha256": "c6b8c11d07feb98d777d7327c7634f2b40c2d23e0d27018f2477f9d6eca02c00",
+      "git_blob_sha1": "3d4ddb16756b6068208999650a39fd540afa7583",
+      "bytes": 3059,
+      "official_path": "addons/kaykit_halloween_bits/Assets/gltf/bone_A.gltf",
+      "release_commit": "6dc69bf6b2fa766a985754f35ec6a0324090e6c6"
+    },
+    {
+      "file": "halloween/bone_B.bin",
+      "sha256": "ecc833d6b2f887af15d71bdfed35403b66d10025ce06812e4682203630d42968",
+      "git_blob_sha1": "b70aca08522a31b248f417c78c720cb4ea234995",
+      "bytes": 6056,
+      "official_path": "addons/kaykit_halloween_bits/Assets/gltf/bone_B.bin",
+      "release_commit": "6dc69bf6b2fa766a985754f35ec6a0324090e6c6"
+    },
+    {
+      "file": "halloween/bone_B.gltf",
+      "sha256": "5889565817ed466dfe80c2952e5e983f190ab6690de57993b700dee2e664911a",
+      "git_blob_sha1": "52d5ed955c86a4c216ae135c03597df340e4b6a1",
+      "bytes": 3057,
+      "official_path": "addons/kaykit_halloween_bits/Assets/gltf/bone_B.gltf",
+      "release_commit": "6dc69bf6b2fa766a985754f35ec6a0324090e6c6"
+    },
+    {
+      "file": "halloween/halloweenbits_texture.png",
+      "sha256": "1e671e9b176b290a35ce8f5f22c773b3f5e9c7a9cf0e1991de51e44dd3a23e7c",
+      "git_blob_sha1": "82313b530486a944133d4aaacfeaf099f07218c3",
+      "bytes": 15093,
+      "official_path": "addons/kaykit_halloween_bits/Assets/fbx(unity)/halloweenbits_texture.png",
+      "release_commit": "6dc69bf6b2fa766a985754f35ec6a0324090e6c6"
+    },
+    {
+      "file": "halloween/LICENSE.txt",
+      "sha256": "a514c41d8d5f2a07c94c55acd29ba94f50b86837f972e37edb4cbdeb7ba0e0e0",
+      "git_blob_sha1": "1c10d234eb090aa374f7fb3c23a7da71e74197e3",
+      "bytes": 877,
+      "official_path": "addons/kaykit_halloween_bits/Assets/LICENSE.txt",
+      "release_commit": "6dc69bf6b2fa766a985754f35ec6a0324090e6c6"
+    },
+    {
+      "file": "halloween/ribcage.bin",
+      "sha256": "71f60385c15b987d2549cc44d0e5ec4b44b41987c0803c05b612d818062f9ea9",
+      "git_blob_sha1": "754ae4f0eed54f41c6a9dcaf41e152d2e56dd43f",
+      "bytes": 52272,
+      "official_path": "addons/kaykit_halloween_bits/Assets/gltf/ribcage.bin",
+      "release_commit": "6dc69bf6b2fa766a985754f35ec6a0324090e6c6"
+    },
+    {
+      "file": "halloween/ribcage.gltf",
+      "sha256": "ff40320e576fe686a815c43aea656fcd9202a6a944d047182c821300a0aaec6e",
+      "git_blob_sha1": "8c737852082a2213a44e0bf4404ae343dea82f9a",
+      "bytes": 3071,
+      "official_path": "addons/kaykit_halloween_bits/Assets/gltf/ribcage.gltf",
+      "release_commit": "6dc69bf6b2fa766a985754f35ec6a0324090e6c6"
+    },
+    {
+      "file": "halloween/skull.bin",
+      "sha256": "8ae758022680edf252cb6c17a51baabd0ce1be355676dfe79a57e7374482cc9c",
+      "git_blob_sha1": "a3f407457824ef45909e66717a0d90815e6adf04",
+      "bytes": 12560,
+      "official_path": "addons/kaykit_halloween_bits/Assets/gltf/skull.bin",
+      "release_commit": "6dc69bf6b2fa766a985754f35ec6a0324090e6c6"
+    },
+    {
+      "file": "halloween/skull.gltf",
+      "sha256": "d8660d809db38d5b8279e01b1014eb58a2302e3d18316dd4ce784eb7431ef36e",
+      "git_blob_sha1": "c045e51034bf3d51fe2021fe6c5be7eeed917a3d",
+      "bytes": 3058,
+      "official_path": "addons/kaykit_halloween_bits/Assets/gltf/skull.gltf",
+      "release_commit": "6dc69bf6b2fa766a985754f35ec6a0324090e6c6"
+    },
+    {
+      "file": "skeletons/LICENSE.txt",
+      "sha256": "5d822abca4e08c5a91d329e5372b3dc605cba8d994f752cb0f7dfdb7a0a79954",
+      "git_blob_sha1": "5de5a1e35003680bd6b97b4c247eed71d51a9fb7",
+      "bytes": 914,
+      "official_path": "addons/kaykit_character_pack_skeletons/LICENSE.txt",
+      "release_commit": "15b62b9bad122f72926c10fb14d622c73819fa54"
+    },
+    {
+      "file": "skeletons/Skeleton_Minion.glb",
+      "sha256": "6ffc003f895bed0b074791e0e490846210a2e2f8fc7da300aba53cc185f95968",
+      "git_blob_sha1": "3b7e7ee4f1c8dd6dd99ddad27824ef1dc52ff12d",
+      "bytes": 4814296,
+      "official_path": "addons/kaykit_character_pack_skeletons/Characters/gltf/Skeleton_Minion.glb",
+      "release_commit": "15b62b9bad122f72926c10fb14d622c73819fa54"
+    },
+    {
+      "file": "skeletons/skeleton_texture.png",
+      "sha256": "15741a25c53e04fa9bf3beac3bc0de442359404b1ff9be863b892cb551ad3657",
+      "git_blob_sha1": "00bf24bd5fd17937e08fd90f819a7bc69de432b8",
+      "bytes": 17037,
+      "official_path": "addons/kaykit_character_pack_skeletons/Assets/fbx/skeleton_texture.png",
+      "release_commit": "15b62b9bad122f72926c10fb14d622c73819fa54"
+    }
+  ]
+}

@@ -13,6 +13,24 @@ Format:
 
 ---
 
+## 2026-11-06 – ChatGPT (CC0 bone scenery, #239)
+
+- Did. Verified the owner's two KayKit Drive uploads against the official
+  release blobs. Retained 13 selected originals, both CC0 licences and exact
+  provenance under art/third-party/kaykit-bones-v1. Added six static models,
+  two muted shared atlases and four reusable scenes in art/dressing/bone-decor-v1.
+- Checks. Godot 4.7.2 Mobile passed 139 checks, source/artifact verification
+  passed 100, and the browser gallery passed 17 including phone sizes.
+  The local light/angle review has 33 native captures at
+  E:/GitHub/Depths/build/local-bone-decor-v1/inspector.html.
+- Next. Review the decor and choose placements. The complete fallen/seated
+  skeletons retain KayKit's oversized heads and clothing as style studies.
+- Watch out. Scene materials use the existing cave grain. Full skeleton poses
+  are baked static scenery. Their source Actions are preserved and catalogued.
+  Shared main has ongoing gameplay edits, so this delivery is isolated on
+  codex/bone-decor-library. Handoff and rebuild steps are in
+  docs/bone-decor-library.md.
+
 ## 2026-11-06 – Claude (playtest 2: first quest, floor 2 gate, merchant, guide, Pack hint; #232, #234, #235, #237)
 
 - **Pack hint (#232):** the tutorial card moves left of the Pack's item card (or above it) so its buttons stay visible. Main `_layout_hint` follows `_pack._details`. The opening playthrough checks it.

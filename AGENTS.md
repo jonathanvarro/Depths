@@ -50,6 +50,16 @@ Templates > Download and Install; already installed on the owner's PC).
 
 ## Project structure
 
+- `docs/bone-decor-library.md` – #239's CC0 KayKit loose bones, skull,
+  ribcage and two static skeleton studies from the shared Drive Assets folder.
+  Four reusable recipes are in `art/dressing/bone-decor-v1`; the selected
+  originals, licences and official-blob verification are in
+  `art/third-party/kaykit-bones-v1`. Muted shared256 atlases reuse the
+  cave props' world-space grain. Native light/angle comparison:
+  `build/local-bone-decor-v1/inspector.html`. The complete skeleton studies
+  retain the pack's oversized heads/clothing for style review. Room placement
+  and story/encounter assignments remain caller-owned.
+
 - `docs/blender-base-contract.md` – #210's true female/male editable Blender
   masters, separate65/49-bone fit/rest contracts, preserved source Actions/slots,
   source catalogue and neutral/animation/export guide. Models, textures, exports
