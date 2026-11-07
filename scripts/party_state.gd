@@ -358,6 +358,8 @@ func cannot_use_reason(item: SupplyItem, in_combat := false, recipient: Companio
 		return "Not during a fight"
 	if supplies.count(item) <= 0 and not (item.effect == SupplyItem.Effect.REFILL_LANTERN and supplies.open_flask > 0.0):
 		return "None left"
+	if item.effect == SupplyItem.Effect.TOME and item.skill != "":  # a manual (#233)
+		return "" if _skill_reader(item, recipient) != null else "Everyone knows it"
 	if item.effect in [SupplyItem.Effect.TOME, SupplyItem.Effect.CANDLE]:  # #170
 		var reader := _spell_reader(item, recipient)
 		if reader == null:
@@ -427,6 +429,12 @@ func use_item(item: SupplyItem, in_combat := false, recipient: Companion = null)
 	if cannot_use_reason(item, in_combat, recipient) != "":
 		return ""
 	match item.effect:
+		SupplyItem.Effect.TOME when item.skill != "":  # a manual: a skill for good (#233)
+			var student := _skill_reader(item, recipient)
+			supplies.take(item)
+			advance_time(item.use_time)
+			load("res://scripts/progression.gd").learn(student, item.skill)
+			return "%s studies it and learns %s." % [student.display_name, load("res://scripts/progression.gd").talent_name(item.skill)]
 		SupplyItem.Effect.TOME:  # #170: a Mage learns the prayer for good
 			var reader := _spell_reader(item, recipient)
 			supplies.take(item)
@@ -459,10 +467,14 @@ func use_item(item: SupplyItem, in_combat := false, recipient: Companion = null)
 			var target := recipient if recipient != null else most_hurt()
 			supplies.take(item)
 			target.add_effect_over_time("health", _healing(item.amount), item.duration)
+			if not living_members().is_empty():
+				load("res://scripts/progression.gd").note_deed(living_members()[0], "healed", _healing(item.amount))  # Herbalist (#233)
 		SupplyItem.Effect.DRESS_INJURY:
 			supplies.take(item)
 			var patient := recipient if recipient != null else first_undressed_injured()
 			patient.dress_injury()
+			if not living_members().is_empty():
+				load("res://scripts/progression.gd").note_deed(living_members()[0], "dressed")  # Steady hands (#233)
 			if living_members().any(func(m: Companion): return m.has_talent("steady_hands")):
 				patient.add_effect_over_time("health", 4, 20)  # steady hands (#47)
 		SupplyItem.Effect.LIGHT_TORCH:
@@ -504,6 +516,19 @@ func touchstone(piece: Equipment) -> String:
 	supplies.changed.emit()
 	changed.emit()
 	return text
+
+
+## Who a manual is for (#233): `recipient` if they don't know its skill
+## yet, else the first in the party who doesn't.
+func _skill_reader(item: SupplyItem, recipient: Companion) -> Companion:
+	var can := func(m: Companion) -> bool:
+		return m != null and m in members and m.is_alive() and m.uses_stats and not m.has_talent(item.skill)
+	if can.call(recipient):
+		return recipient
+	for m in living_members():
+		if can.call(m):
+			return m
+	return null
 
 
 ## Who a tome or candle is for: `recipient` if they can use it, else the

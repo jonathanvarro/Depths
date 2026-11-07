@@ -5,6 +5,7 @@ extends SceneTree
 const Progression := preload("res://scripts/progression.gd")
 const SaveGame := preload("res://scripts/save_game.gd")
 
+const StrainRulesForCheck := preload("res://scripts/strain.gd")
 var fails := 0
 var main
 
@@ -54,15 +55,36 @@ func _initialize() -> void:
 	# --- Levels and talents.
 	mara.xp = Progression.THRESHOLDS[2]
 	check("%d XP: ready for level 2 (quick levels, #172)" % Progression.THRESHOLDS[2], Progression.ready_to_advance(mara))
-	var options: Array = Progression.choices(mara)
-	check("level 2 offers two scout talents", options.size() == 2 and options[0][0] == "deadeye")
+	check("a level offers no choices now (#233)", Progression.choices(mara).is_empty())
 	var hp_before := mara.max_health
-	Progression.advance(mara, "deadeye")
-	check("level 2: +2 health, Deadeye +5% to hit", mara.level == 2 and mara.max_health == hp_before + 2 and is_equal_approx(mara.accuracy, 0.85), "%d %.2f" % [mara.max_health, mara.accuracy])
+	var aim_before := mara.accuracy
+	Progression.advance(mara)
+	check("level 2: +2 health and +2% to hit, by itself", mara.level == 2 and mara.max_health == hp_before + 2 and is_equal_approx(mara.accuracy, aim_before + 0.02), "%d %.2f" % [mara.max_health, mara.accuracy])
 	mara.xp = Progression.THRESHOLDS[3]
-	check("level 3 offers an attribute", Progression.choices(mara).any(func(c): return c[0] == "stat_vit"))
-	Progression.advance(mara, "stat_vit")
-	check("level 3: Vitality +1 is +4 health, plus +2 a level (28)", mara.level == 3 and mara.stat_vit == 3 and mara.max_health == 28, str(mara.max_health))
+	Progression.advance(mara)
+	check("level 3: the same again", mara.level == 3 and mara.max_health == hp_before + 4 and is_equal_approx(mara.accuracy, aim_before + 0.04), str(mara.max_health))
+
+	# --- Skills (#233): deeds, manuals and quests teach them, for good.
+	var learned := []
+	mara.learned_skill.connect(func(id): learned.append(id))
+	for i in 5:
+		Progression.note_deed(mara, "braced")
+	check("bracing 5 times isn't enough for Bulwark", not mara.has_talent("bulwark"))
+	Progression.note_deed(mara, "braced")
+	check("the 6th teaches it: defending takes only 15%", mara.has_talent("bulwark") and is_equal_approx(mara.guard_factor, 0.15) and learned == ["bulwark"])
+	Progression.reset(mara)
+	check("skills outlast the expedition; levels don't", mara.has_talent("bulwark") and mara.level == 1)
+	var manual: SupplyItem = load("res://data/items/manual_triage.tres")
+	ps.supplies.add(manual, 1)
+	var read: String = ps.use_item(manual, false, mara)
+	check("a manual teaches its skill to whoever reads it", mara.has_talent("triage") and read.contains("Triage"), read)
+	var camp_for_quest = load("res://scripts/camp_state.gd").new()
+	load("res://scripts/story.gd").after_talk(camp_for_quest, "commander_report", mara)
+	check("reporting the first quest teaches Steel nerves", mara.has_talent("steel_nerves"))
+	var shocks_before: int = mara.deeds.get("shocks", 0)
+	mara.change_strain(StrainRulesForCheck.TRAP)
+	check("a big shock counts towards Steel nerves", mara.deeds.get("shocks", 0) == shocks_before + 1)
+	mara.change_strain(-mara.strain)
 
 	# --- Armour.
 	var coat: Equipment = load("res://data/gear/padded_coat.tres")
@@ -154,15 +176,18 @@ func _initialize() -> void:
 	main._camp._buttons["rest"].pressed.emit()
 	await process_frame
 	var tent := " | ".join(main._camp._body.find_children("*", "Label", true, false).map(func(l): return l.text))
-	check("the tent shows training and a level-up choice", tent.contains("Training") and tent.contains("ready for level 2"))
+	check("the tent shows training: levels come by themselves (#233)", tent.contains("Training") and tent.contains("come by themselves"))
 	if dir != "":
 		for i in 4: await process_frame
 		root.get_texture().get_image().save_png(dir + "/progression_" + tag + "_training.png")
-	check("choose Deadeye at camp", _press(main._camp, "Deadeye") and hero.level == 2 and main._camp_state.best_level == 2)
+	Progression.learn(hero, "deadeye")
+	var level_now := hero.level
+	check("a level taken at camp counts towards the best", main._camp_state.advance(hero, "") and hero.level == level_now + 1 and main._camp_state.best_level >= hero.level, "L%d best %d" % [hero.level, main._camp_state.best_level])
+	level_now = hero.level
 	main._camp_state.best_level = 3
 	main._camp_state.candidates.clear()
 	main._camp_state._fill_fire(main._party_state)
-	check("recruits join at level 1, like everyone setting out (#172)", main._camp_state.candidates.all(func(c): return c.level == 1 and c.talents.is_empty()))
+	check("recruits join at level 1, like everyone setting out (#172)", main._camp_state.candidates.all(func(c): return c.level == 1))
 	main._camp_state.hire(main._party_state, main._camp_state.candidates[0])
 	var smith_coat: Equipment = load("res://data/gear/padded_coat.tres")
 	main._party_state.supplies.gear.append(smith_coat)
@@ -177,7 +202,7 @@ func _initialize() -> void:
 	root.add_child(main)
 	await create_timer(0.5).timeout
 	var back: Companion = main._party_state.members[0]
-	check("level, XP, talents and armour survive a save", back.level == 2 and back.talents == ["deadeye"] and back.body != null and back.body.armour == 1 and main._camp_state.best_level == 3, "L%d %s" % [back.level, back.talents])
+	check("level, XP, skills and armour survive a save", back.level == level_now and "deadeye" in back.talents and back.body != null and back.body.armour == 1 and main._camp_state.best_level == 3, "L%d %s" % [back.level, back.talents])
 	SaveGame.delete()
 	print("fails=", fails)
 	quit()

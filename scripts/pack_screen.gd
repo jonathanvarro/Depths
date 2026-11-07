@@ -362,6 +362,7 @@ func _refresh_status() -> void:
 				_request_refresh())
 		_status_content.add_child(bind)
 	_add_prayers(h)
+	_add_skills(h)
 	for entry in h.boons:
 		var boon:Boon=entry.boon
 		_status_content.add_child(_wrapped("%s · %s\n%s" % [boon.display_name,boon.duration_text(entry.fights_left),boon.effects_text()],17))
@@ -531,6 +532,23 @@ func _drag_preview(item: Resource) -> Control:
 
 ## Right-click (owner playtest, 2026-10-25): use a supply, or put on or
 ## take off gear, without going through its actions. The usual rules apply.
+## Skills (#233): what the hero knows for good, and the nearest ones their
+## deeds are teaching them.
+func _add_skills(h: Companion) -> void:
+	if not h.uses_stats:return
+	var P=load("res://scripts/progression.gd")
+	var known:=h.talents.filter(func(id):return P.SKILLS.has(id))
+	_status_content.add_child(_label("Skills",18))
+	if known.is_empty():
+		_status_content.add_child(_wrapped("None yet. Deeds teach them, and so do manuals found below.",17,FieldKit.MUTED))
+	for id in known:
+		_status_content.add_child(_wrapped("%s: %s" % [P.SKILLS[id]["name"],P.SKILLS[id]["text"]],17))
+	var learning:Array=P.skill_progress(h)
+	learning.sort_custom(func(a,b):return float(a[1])/a[2]>float(b[1])/b[2])
+	for entry in learning.slice(0,3):
+		var s:Dictionary=P.SKILLS[entry[0]]
+		_status_content.add_child(_wrapped("Learning %s · %s %d of %d" % [s["name"],s["how"].to_lower(),entry[1],entry[2]],16,FieldKit.MUTED))
+
 ## A Mage's prayers (#170): casts left this trip, and the ones that can be
 ## said outside a fight.
 func _add_prayers(h: Companion) -> void:

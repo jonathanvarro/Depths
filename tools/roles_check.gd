@@ -75,7 +75,7 @@ func _initialize() -> void:
 	main._go_to_floor(2, main.Arrival.FROM_ABOVE)
 	await process_frame
 	main._on_party_blocked(main._party.cell)
-	check("no tool, no Fixer: the rubble stays", not main._prompt.visible)
+	check("no tool, no Fixer: only forcing it by hand is offered (#236)", main._prompt.visible and main._prompt_label.text.contains("Force a way through"), main._prompt_label.text if "_prompt_label" in main else "")
 	ps.add_member(_recruit("Fixer"))
 	main._on_party_blocked(main._party.cell)
 	check("a Fixer offers to shift it (#179)", main._prompt.visible and main._prompt_label.text.contains("shift"), main._prompt_label.text)

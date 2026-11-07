@@ -13,6 +13,25 @@ Format:
 
 ---
 
+## 2026-11-06 – Claude (levels and skills split, #233; panic from events, #236)
+
+- **Levels (#233):** automatic. `Progression.advance` gives +2 health and +2% to hit (`Companion.refresh_stats`). `choices()` returns nothing, and main says "X reaches level N" after a fight. The camp tent's Training only reports.
+- **Skills (#233):** `Progression.SKILLS` is the catalogue. They are stored in `Companion.talents` and kept for good: `reset` no longer clears them, and old saves keep their picks. They are learned four ways:
+  - **deeds:** `Companion.deeds` counters through `Progression.note_deed`. Hooks: combat_state (hits, felled, opened, fought_hurt, braced, struck), party_state (healed, dressed), main (webs) and companion (shocks, any strain gain ≥ `SHOCK_DEED`);
+  - **manuals:** TOME items with `skill` (`data/items/manual_*.tres`, in TREASURE);
+  - **quest rewards:** `Story.REWARDS`, through `after_talk(camp, id, hero)`;
+  - **a camp trainer:** #240 (needs art and an arrival point).
+
+  `Companion.learned_skill` is announced by main `_on_skill_learned`. The Pack's Status tab lists skills and the three nearest deeds.
+- **Panic (#236):** `strain.gd` TIME, MISSING_HEALTH and PER_INJURY are now 0. New shocks:
+  - STRUCK, every blow in a fight;
+  - TRAP, on a sprung trap;
+  - WEB_BARE, tearing a web without a lit torch;
+  - FORCED, a new "Force it" choice on blocked passages with no tool or Fixer (also costs 2 health and double time);
+  - BANE, a curse from an event.
+- **Balance (bot, 10 campaigns per hero):** queen wins 30/30 (was 20/30), wipes 38 (was 70). Easier: permanent skills pile up and nerves fray less. Tune the deed counts and shock sizes after the owner plays it.
+- **Checks:** progression, expedition_loop, spoils, roles and refuge checks were updated for the new rules.
+
 ## 2026-11-06 – Claude (playtest 2: first quest, floor 2 gate, merchant, guide, Pack hint; #232, #234, #235, #237)
 
 - **Pack hint (#232):** the tutorial card moves left of the Pack's item card (or above it) so its buttons stay visible. Main `_layout_hint` follows `_pack._details`. The opening playthrough checks it.

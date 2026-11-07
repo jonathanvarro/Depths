@@ -66,7 +66,7 @@ func _initialize() -> void:
 	var ps = main._party_state
 	var hero: Companion = ps.members[0]
 	hero.xp = Progression.THRESHOLDS[3]
-	Progression.advance(hero, Progression.choices(hero)[0][0])
+	Progression.advance(hero)
 	Progression.advance(hero, "stat_vit")
 	hero.health = 3
 	hero.change_strain(60.0 - hero.strain)

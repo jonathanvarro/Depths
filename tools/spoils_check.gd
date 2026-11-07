@@ -92,7 +92,7 @@ func _initialize() -> void:
 	check("the gold rises off the lead's card too", gained_gold > 0 and coin != null and coin.get_child(1).text == "+%d" % gained_gold, gained_gold)
 	await create_timer(1.0).timeout
 	await _snap("level_mark")
-	check("the bar fills and the level-up mark pops in", card._level_mark.visible and card._row_label.text.contains("+") and Progression.ready_to_advance(lead))
+	check("the bar fills, and the level comes by itself (#233)", lead.level == 2, "L%d: %s" % [lead.level, main._message_label.text])
 	g = 0
 	while main._in_combat and g < 60:
 		await create_timer(0.05).timeout

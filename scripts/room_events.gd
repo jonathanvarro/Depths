@@ -19,6 +19,7 @@ const BOON_ICONS := {false: preload("res://art/ui/boons-v1/boon.png"), true: pre
 ## Supplies found by any choice, for the expedition record (#17).
 const Classes := preload("res://scripts/classes.gd")
 const Brews := preload("res://scripts/brews.gd")
+const StrainRules := preload("res://scripts/strain.gd")
 signal loot_found(loot: Dictionary)
 signal gold_found(amount: int)
 
@@ -31,6 +32,10 @@ const TREASURE := [
 	[preload("res://data/items/tome_bind.tres"), 2, 1],
 	[preload("res://data/items/tome_watch.tres"), 2, 1],
 	[preload("res://data/items/tome_discern.tres"), 1, 1],
+	# Manuals (#233): anyone who reads one learns a skill for good.
+	[preload("res://data/items/manual_triage.tres"), 1, 1],
+	[preload("res://data/items/manual_thick_skull.tres"), 2, 1],
+	[preload("res://data/items/manual_slip_past.tres"), 2, 1],
 	[preload("res://data/items/touchstone.tres"), 1, 2],  # reads a found piece (2026-11-03)
 	[preload("res://data/items/votive_candle.tres"), 1, 2],
 	[preload("res://data/items/amethyst.tres"), 1, 3],
@@ -162,6 +167,8 @@ func resolve(party, choice: EventChoice, forced := -1, flags: Array = []) -> Dic
 			chip.call(CHIP_ICONS["strain"], "-" if outcome.strain < 0 else "+", outcome.strain < 0, hero)
 		if outcome.boon:
 			hero.add_boon(outcome.boon)
+			if outcome.boon.bane:
+				hero.change_strain(StrainRules.BANE)  # a curse settles on you (#236)
 			notes.append("%s: %s" % [hero.display_name, outcome.boon.display_name.to_lower()])
 			chip.call(outcome.boon.icon if outcome.boon.icon else BOON_ICONS[outcome.boon.bane], outcome.boon.display_name, not outcome.boon.bane, hero)
 		if outcome.lift_bane:

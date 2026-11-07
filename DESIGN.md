@@ -235,6 +235,25 @@ Numbers are first guesses for the bot and the owner's playtests to tune.
   - **Still hard:** a floor-4 visit costs about 35–41 health; floor 2 is now the commonest place to fall again.
 - **Experience** still goes in full to everyone with the party. DESIGN's "a pair half each" reads like a split, while #179 says "unsplit", so this waits for the owner.
 
+## Levels, skills and panic — decided 2026-11-06 (#233, #236)
+
+- **Levels are a small automatic gain (#233).** A level gives +2 maximum health and +2% to hit, with no choice to make. Levels still reset each expedition (#172).
+- **Skills are their own thing, kept for good (#233).** They are the former talents (Bulwark, Deadeye, Slip the web...). They come from four places:
+  - **deeds:** brace 6 times for Bulwark, land 30 blows for Deadeye, force through 5 webs for Slip the web, endure 12 big shocks for Steel nerves... (`Progression.SKILLS`);
+  - **manuals** found below;
+  - **quest rewards:** Steel nerves for reporting your dead, Heavy hands for the smith's iron, Stalwart from the miner, Unbreakable for the reservoir;
+  - **a trainer at camp:** #240, still to come.
+
+  The Pack's Status tab lists each hero's skills and the nearest ones their deeds are teaching.
+- **Panic comes from events and choices (#236).** Strain no longer rises with time, missing health or old injuries. Darkness and hunger still count, since light and food are choices. Shocks:
+  - every blow taken in a fight;
+  - being caught by a trap;
+  - tearing a web by hand with no lit torch;
+  - forcing a blocked passage with no spade, pick or Fixer (a new option);
+  - a curse settling on you (shrines, fouled wells).
+
+  All numbers are first guesses in `scripts/strain.gd`.
+
 ## Magic — decided 2026-11-02 (#170, #53)
 
 **Owner decisions:**

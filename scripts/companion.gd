@@ -18,6 +18,9 @@ const StrainRules := preload("res://scripts/strain.gd")
 ## see strain.gd for the rules and states.
 
 const Classes := preload("res://scripts/classes.gd")
+## A skill learned for good (#233): main.gd announces it.
+signal learned_skill(id: String)
+
 @export var display_name := "Unnamed"
 @export var role := ""
 ## Why they came into the dungeon (and why they might stay or leave).
@@ -67,10 +70,12 @@ const Classes := preload("res://scripts/classes.gd")
 @export var hp_bonus := 0
 ## A personal strength/weakness on the top of their damage (Strong arm).
 @export var damage_max_mod := 0
-## Level 1-4 and total XP (#47); talents chosen at levels 2 and 4.
+## Level 1-4 and total XP (#47). `talents` are skills, kept for good (#233);
+## `deeds` counts what the hero has done towards learning more.
 @export var level := 1
 @export var xp := 0
 @export var talents: Array[String] = []
+@export var deeds: Dictionary = {}
 ## Attribute points taken this expedition, undone at its end (#172).
 @export var raised: Array[String] = []
 ## Guard before Bulwark lowered it, so a fresh expedition restores it.
@@ -316,7 +321,7 @@ func refresh_stats() -> void:
 		max_health += 4
 	if has_talent("unbreakable"):
 		max_health += 6
-	accuracy = aim_base + 0.04 * (stat_dex - 2) + (0.05 if has_talent("deadeye") else 0.0) + (Classes.FIXER_AIM if role == "Fixer" else 0.0)
+	accuracy = aim_base + 0.02 * (level - 1) + 0.04 * (stat_dex - 2) + (0.05 if has_talent("deadeye") else 0.0) + (Classes.FIXER_AIM if role == "Fixer" else 0.0)
 	initiative = speed_base + 2 * (stat_dex - 2) + (2 if has_talent("quick_hands") else 0)
 	if base_guard_factor < 0.0:
 		base_guard_factor = guard_factor
@@ -373,6 +378,8 @@ func change_health(amount: int) -> void:
 func change_strain(amount: float) -> void:
 	if strain_locked:
 		return
+	if amount >= StrainRules.SHOCK_DEED:
+		load("res://scripts/progression.gd").note_deed(self, "shocks")  # Steel nerves (#233)
 	if amount > 0.0 and uses_stats:
 		# Resolve steadies (#47): only gains are scaled, never relief.
 		amount *= clampf(1.0 - 0.08 * (stat_res - 2), 0.75, 1.15) * (0.8 if has_talent("steel_nerves") else 1.0)

@@ -509,7 +509,7 @@ func _talk_button(id: String) -> void:
 		if conversation:
 			var heroes: Array = _party.members.filter(func(h): return h.founder or h.main_hero)
 			await conversation.play(talk, heroes[0] if not heroes.is_empty() else (_party.members[0] if not _party.members.is_empty() else null), _camp, _party.members)
-		Story.after_talk(_camp, id)
+		Story.after_talk(_camp, id, _lead())
 		_refresh_activity())
 	_body.add_child(button)
 
@@ -524,7 +524,7 @@ func _site_talk(site: String) -> void:
 	_smith_talking = true  # a refresh mid-talk mustn't start it again
 	var heroes: Array = _party.members.filter(func(h): return h.founder or h.main_hero)
 	await conversation.play(talk, heroes[0] if not heroes.is_empty() else (_party.members[0] if not _party.members.is_empty() else null), _camp, _party.members)
-	Story.after_talk(_camp, id)
+	Story.after_talk(_camp, id, _lead())
 	_smith_talking = false
 	_update_site_art()
 
@@ -580,11 +580,17 @@ func _smith_list() -> void:
 	_text("Bought gear goes in your pack; equip it from there.", MUTED)
 
 
-## Levels (#47, #172): each hero's level from the last trip. Levels last one
-## expedition and are chosen underground; anyone still ready may choose here.
+## Who learns a quest's reward skill (#233): the main hero, else the first.
+func _lead() -> Companion:
+	var heroes: Array = _party.members.filter(func(h): return h.founder or h.main_hero)
+	return heroes[0] if not heroes.is_empty() else (_party.members[0] if not _party.members.is_empty() else null)
+
+
+## Levels (#47, #172, #233): each hero's level from the last trip. Levels last
+## one expedition and come by themselves; skills are kept for good.
 func _training() -> void:
 	_body.add_child(_label("Training", HEADING, 16, TEXT))
-	_text("Levels last one expedition: everyone sets out at level 1 and chooses talents underground.", MUTED)
+	_text("Levels last one expedition and come by themselves. Skills are kept for good.", MUTED)
 	for hero: Companion in _party.members:
 		if not hero.uses_stats:
 			continue
@@ -592,18 +598,8 @@ func _training() -> void:
 		var progress := "%d / %d XP" % [hero.xp, next] if next > 0 else "%d XP (the mine's best)" % hero.xp
 		var talents := ", ".join(PackedStringArray(hero.talents.map(func(t): return Progression.talent_name(t))))
 		_text("%s · level %d · %s" % [hero.display_name, hero.level, progress], MUTED)  # details live in the hero window
-		if Progression.ready_to_advance(hero):
-			_text("%s is ready for level %d. Choose one:" % [hero.display_name, hero.level + 1], AMBER)
-			var row := HFlowContainer.new()
-			row.add_theme_constant_override("h_separation", 8)
-			for option in Progression.choices(hero):
-				var pick := _button("%s: %s" % [option[1], option[2]])
-				var id: String = option[0]
-				pick.pressed.connect(func():
-					_camp.advance(hero, id)
-					_refresh_activity())
-				row.add_child(pick)
-			_body.add_child(row)
+		if talents != "":
+			_text("Skills: " + talents, MUTED)
 
 
 ## What the camp says about the goblin queen (#44): a side quest, so the

@@ -53,9 +53,22 @@ static func way_down_open(camp, depth: int) -> bool:
 	return depth != 1 or Quests.stage(camp, "left_behind") != Quests.Stage.ACTIVE
 
 
+## Skills given for finishing a quest (#233): the talk that ends it -> skill,
+## learned by the hero who was there (the main hero).
+const REWARDS := {
+	"commander_report": "steel_nerves",  # you went back to your dead
+	"smith_deliver": "heavy_hands",  # a proper blade, and how to swing it
+	"miner_thanks": "stalwart",  # a miner's tricks for staying on your feet
+	"commander_reservoir": "unbreakable",
+}
+
+
 ## What a finished conversation changes beyond its replies' quest steps.
-static func after_talk(camp, id: String) -> void:
+## `hero`: who was there, to learn any reward skill.
+static func after_talk(camp, id: String, hero: Companion = null) -> void:
 	var S := Quests.Stage
+	if hero and REWARDS.has(id):
+		load("res://scripts/progression.gd").learn(hero, REWARDS[id])
 	match id:
 		"commander_report":
 			Quests.set_stage(camp, "left_behind", S.RESOLVED)

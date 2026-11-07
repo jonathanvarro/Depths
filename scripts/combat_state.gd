@@ -227,6 +227,8 @@ var _webbed := {}  # Companion -> true until their next action
 var _venom := {}  # Companion -> turns left
 var _venom_damage := {}  # Companion -> damage per tick (a venom spider's is worse)
 var _opened := {}  # Companion -> true after their first attack (opening shot, #47)
+const Progression := preload("res://scripts/progression.gd")
+const StrainRules := preload("res://scripts/strain.gd")
 var _dazzled := {}  # Foe -> true: a flare costs it its next action (#74)
 var _bound := {}  # Foe -> turns it is held in place by a Mage's Bind (#170)
 var _squinting := {}  # Foe -> true: worse aim on its next action (#74)
@@ -738,6 +740,11 @@ func hero_attack(hero: Companion, target: Foe) -> Dictionary:
 			damage += int(hero.boon_total("back_row_damage"))  # a slinger's ring
 		if hero.has_talent("opening_shot") and not _opened.has(hero):
 			damage += 2
+		if not _opened.has(hero):
+			Progression.note_deed(hero, "opened")  # first blow of the fight (#233)
+		if hero.health * 2 < hero.effective_max_health():
+			Progression.note_deed(hero, "fought_hurt")
+		Progression.note_deed(hero, "hits")
 		_opened[hero] = true
 		if target.type.tactic == EnemyType.Tactic.BRUTE and target.intent == Intent.RECOVER:
 			damage += BRUTE_OPENING  # a brute catching its breath is wide open (#140)
@@ -753,6 +760,8 @@ func hero_attack(hero: Companion, target: Foe) -> Dictionary:
 		outcome = {"hit": true, "damage": damage, "killed": not target.is_alive()}
 		outcome["text"] = "%s strikes the %s for %d.%s" % [hero.display_name, target.name.to_lower(), damage, " It falls." if outcome["killed"] else ""]
 		_credit(hero.weapon, "hit", target)
+		if outcome["killed"]:
+			Progression.note_deed(hero, "felled")
 		if outcome["killed"] and target.type.tactic == EnemyType.Tactic.BLOAT:
 			outcome["text"] += " " + _burst(target, "back" if not hero_in_front(hero) else "near")
 	else:
@@ -765,6 +774,7 @@ func hero_attack(hero: Companion, target: Foe) -> Dictionary:
 func hero_defend(hero: Companion) -> String:
 	_defending[hero] = true
 	_webbed.erase(hero)
+	Progression.note_deed(hero, "braced")  # Bulwark (#233)
 	var steadies: float = hero.boon_total("defend_steadies")  # a shield-bearer's token (#135)
 	if steadies > 0.0:
 		for member in party.living_members():
@@ -1033,6 +1043,8 @@ func _carry_out(foe: Foe) -> Dictionary:
 			_check_end()
 			return outcome
 		target.change_health(-damage)
+		target.change_strain(StrainRules.STRUCK)  # every blow shakes (#236)
+		Progression.note_deed(target, "struck")  # Stalwart, Iron hide (#233)
 		_credit(target.body, "struck", foe)  # armour learns from blows (#192)
 		if target.back and target.back.guard > 0:
 			_credit(target.back, "struck", foe)

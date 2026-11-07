@@ -200,7 +200,7 @@ func _talk_at_camp() -> void:
 				if reply.flag != "":
 					Quests.set_flag(camp, reply.quest, reply.flag)
 			page = reply.next if reply else -1
-		Story.after_talk(camp, id)
+		Story.after_talk(camp, id, party.members[0] if not party.members.is_empty() else null)
 
 
 ## The day each quest first resolved, for the report.

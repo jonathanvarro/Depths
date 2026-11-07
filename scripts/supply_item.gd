@@ -50,6 +50,9 @@ enum Effect {
 @export var brew := ""
 ## For a TOME: the spell it teaches (spells.gd).
 @export var spell := ""
+## For a TOME that's a manual (#233): the skill it teaches anyone who reads
+## it (progression.gd SKILLS), instead of a prayer.
+@export var skill := ""
 
 
 func with_article() -> String:

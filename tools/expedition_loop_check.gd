@@ -36,15 +36,11 @@ func _initialize() -> void:
 	var corin: Companion = party.members[0]
 	var vit := corin.stat_vit
 	corin.xp = Progression.THRESHOLDS[3]
-	Progression.advance(corin, Progression.choices(corin)[0][0])
-	Progression.advance(corin, "stat_vit")
-	check("quick early levels: level 3 at %d XP" % Progression.THRESHOLDS[3], corin.level == 3 and corin.stat_vit == vit + 1 and corin.talents.size() == 1)
+	Progression.auto_advance(corin)
+	check("quick early levels: level 3 at %d XP, by themselves (#233)" % Progression.THRESHOLDS[3], corin.level == 3 and corin.stat_vit == vit)
+	Progression.learn(corin, "bulwark")
 	Progression.reset(corin)
-	check("a fresh expedition: level 1, no talents, the attribute point undone", corin.level == 1 and corin.xp == 0 and corin.talents.is_empty() and corin.stat_vit == vit and corin.raised.is_empty())
-	corin.xp = Progression.THRESHOLDS[2]
-	Progression.advance(corin, "bulwark")
-	Progression.reset(corin)
-	check("...Bulwark's guard comes back off", corin.guard_factor > 0.15, corin.guard_factor)
+	check("a fresh expedition: level 1, but skills are kept (#233)", corin.level == 1 and corin.xp == 0 and corin.has_talent("bulwark") and corin.guard_factor <= 0.15 and corin.raised.is_empty())
 	check("a scouts' route brings the skipped floors' levels: level 3 on floor 3, never past level 4",
 			Progression.route_xp(3) == Progression.THRESHOLDS[3] and Progression.route_xp(6) == Progression.THRESHOLDS[Progression.MAX_LEVEL] and Progression.route_xp(1) == 0)
 
@@ -130,11 +126,11 @@ func _initialize() -> void:
 			break
 	check("brews turn up among treasure finds", found)
 
-	# #172 in the game: a level-up is chosen there and then.
+	# #172/#233 in the game: a level comes at once, by itself.
 	var hero: Companion = ps.members[0]
 	hero.xp = Progression.THRESHOLDS[2]
 	main._offer_level_ups()
-	check("ready underground: the choice is offered at once", main._prompt.visible and main._prompt_label.text.contains("level 2"), main._prompt_label.text)
+	check("ready underground: the level comes at once, no question", not main._prompt.visible and hero.level == 2 and main._message_label.text.contains("level 2"), main._message_label.text)
 	if dir != "":
 		await create_timer(0.3).timeout
 		root.get_viewport().get_texture().get_image().save_png(dir.path_join("level_up.png"))

@@ -1167,8 +1167,7 @@ func _reveal_floor() -> void:
 	_full_map_view.queue_redraw()
 
 
-## Level-ups underground (#172): after a fight, each hero who's ready picks a
-## talent or an attribute point, one question at a time.
+## Level-ups underground (#172): automatic since #233, a small gain each.
 func _offer_level_ups() -> void:
 	if _in_opening or _prompt.visible or _ending:
 		return
@@ -1179,6 +1178,7 @@ func _offer_level_ups() -> void:
 		if options.is_empty():
 			Progression.advance(hero, "")
 			Sounds.play(self, "level_up", -5.0, 0.0)
+			_show_message("%s reaches level %d: +2 health, +2%% to hit." % [hero.display_name, hero.level])
 			continue
 		var answers: Array = []
 		for option in options:
@@ -3314,6 +3314,8 @@ func _spring_trap(cell: Vector2i, trap: RoomEvent) -> void:
 	var health_before := lead.health
 	await _fall(func():
 		_room_events.resolve(_party_state, choice)
+		for hero in _party_state.living_members():  # caught: the shock of it (#236)
+			hero.change_strain(StrainRules.TRAP if hero == lead else StrainRules.TRAP / 2.0)
 		_show_message(trap.sprung.text)
 		if lead.health < health_before:
 			_bleed_pulse(lead))
@@ -4009,7 +4011,22 @@ func _on_light_band_changed(band: Supplies.Light) -> void:
 func _on_party_opened_door(cell: Vector2i) -> void:
 	_level.refresh_door(cell)
 	_play_effect(environment_theme.open_sound)
+	# A web (#236): a lit torch burns it; tearing it by hand frays nerves,
+	# and teaches Slip the web in time (#233).
+	if "web" in environment_theme.closed_name.to_lower() and not _in_opening and _party_state.supplies.source != Supplies.Source.TORCH:
+		for hero in _party_state.living_members():
+			hero.change_strain(StrainRules.WEB_BARE)
+		if not _party_state.living_members().is_empty():
+			Progression.note_deed(_party_state.living_members()[0], "webs")
+		_show_message("You tear through the web by hand. It clings; skin crawls. (A lit torch would burn it.)")
+		return
 	_show_message(environment_theme.closed_open_message)
+
+
+## A skill learned for good (#233): said, with the level-up sound.
+func _on_skill_learned(id: String, hero: Companion) -> void:
+	Sounds.play(self, "level_up", -5.0, 0.0)
+	_show_message(Progression.learned_text(hero, id))
 
 
 func _on_party_blocked(cell: Vector2i) -> void:
@@ -4034,7 +4051,22 @@ func _on_party_blocked(cell: Vector2i) -> void:
 	if fixer and _depth != FORTRESS_DEPTH:
 		_ask("Something chokes the passage. %s knows how to shift it. (%d time)" % [fixer.display_name, CLEAR_PASSAGE_TIME], _clear_passage.bind(cell), Callable(), ["Clear it", "Leave it"])
 		return
+	if _depth != FORTRESS_DEPTH and not _in_opening:
+		# Or force it (#236): it can be done, but it costs nerve and skin.
+		_ask("Something chokes the passage. Force a way through by hand? (%d time; it will fray everyone's nerves)" % (CLEAR_PASSAGE_TIME * 2), _force_passage.bind(cell), Callable(), ["Force it", "Leave it"])
+		return
 	_show_message(environment_theme.blocked_message + ("" if _depth == FORTRESS_DEPTH else " A spade or a pick would clear it - or a Fixer."))
+
+
+## Forcing a blocked passage with no tool (#236): slow, bloody, unnerving.
+func _force_passage(cell: Vector2i) -> void:
+	_party_state.advance_time(CLEAR_PASSAGE_TIME)  # _clear_passage adds the rest
+	for hero in _party_state.living_members():
+		hero.change_strain(StrainRules.FORCED)
+	if not _party_state.living_members().is_empty():
+		_party_state.living_members()[0].change_health(-2)
+	_clear_passage(cell)
+	_show_message("You claw a way through, hands torn. No one likes the sound the rock made.")
 
 
 ## Hacks through a blocked passage with a spade or pick (#133).
@@ -4538,6 +4570,8 @@ func _refresh_cards() -> void:
 			var hero: Companion = _party_state.members[i]
 			if not hero.changed.is_connected(card.refresh):
 				hero.changed.connect(card.refresh)
+			if not hero.learned_skill.is_connected(_on_skill_learned):
+				hero.learned_skill.connect(_on_skill_learned.bind(hero))
 			card.show_row = _party_state.members.size() > 1
 			card.show_companion(hero)
 		else:

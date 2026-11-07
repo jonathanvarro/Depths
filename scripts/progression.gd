@@ -7,6 +7,12 @@ extends RefCounted
 ## XP of a fight, with one-off awards for the gate, the queen and clearing
 ## the cave.
 ##
+## Levels and skills split (#233, owner 2026-11-06): a level is a small
+## automatic gain (+2 maximum health, +2% to hit), with no choices. Skills
+## are their own thing and kept for good: earned by deeds (a hero who braces
+## often learns Bulwark), read from manuals found below, taught at camp, or
+## given for quests. `talents` holds them; old talent picks became skills.
+##
 ## Levels last one expedition (#172, owner 2026-10-30/31): every departure
 ## from the surface starts at level 1, levels come quickly, and the choices
 ## are made underground after a fight. Personality, role, scars, memories
@@ -69,6 +75,70 @@ const TALENTS := {
 const DEFAULT_ROLE := "Melee"
 
 
+## Skills (#233): id -> name, what it does, and the deed that teaches it:
+## a counter in Companion.deeds and how many times. A count of 0: not
+## learned by deeds (a manual, a trainer or a quest).
+const SKILLS := {
+	"bulwark": {"name": "Bulwark", "text": "Defending takes only 15% of a blow", "deed": "braced", "count": 6, "how": "Brace in fights"},
+	"heavy_hands": {"name": "Heavy hands", "text": "+1 damage", "deed": "felled", "count": 12, "how": "Fell foes"},
+	"iron_hide": {"name": "Iron hide", "text": "Every blow does 1 less", "deed": "struck", "count": 40, "how": "Take blows and stand"},
+	"berserker": {"name": "Berserker", "text": "+2 damage while below half health", "deed": "fought_hurt", "count": 10, "how": "Land blows while badly hurt"},
+	"deadeye": {"name": "Deadeye", "text": "+5% to hit", "deed": "hits", "count": 30, "how": "Land blows"},
+	"quick_hands": {"name": "Quick hands", "text": "Acts sooner (+2 speed)", "deed": "opened", "count": 8, "how": "Strike first in fights"},
+	"opening_shot": {"name": "Opening shot", "text": "First attack each fight +2 damage", "deed": "opened", "count": 20, "how": "Strike first in fights"},
+	"steady_hands": {"name": "Steady hands", "text": "Dressings also heal 4", "deed": "dressed", "count": 6, "how": "Dress wounds"},
+	"herbalist": {"name": "Herbalist", "text": "Healing items heal another 25%", "deed": "healed", "count": 60, "how": "Heal with draughts and herbs"},
+	"steel_nerves": {"name": "Steel nerves", "text": "Strain builds 20% slower", "deed": "shocks", "count": 12, "how": "Endure frights and shocks"},
+	"slip_web": {"name": "Slip the web", "text": "Webs never stick", "deed": "webs", "count": 5, "how": "Force through webs"},
+	"stalwart": {"name": "Stalwart", "text": "+4 maximum health", "deed": "struck", "count": 20, "how": "Take blows and stand"},
+	"unbreakable": {"name": "Unbreakable", "text": "+6 maximum health", "deed": "", "count": 0, "how": "A quest's reward"},
+	"triage": {"name": "Triage", "text": "Two dressing-free bindings a trip", "deed": "", "count": 0, "how": "A manual"},
+	"thick_skull": {"name": "Thick skull", "text": "No longer takes extra damage", "deed": "", "count": 0, "how": "A manual"},
+	"slip_past": {"name": "Slip past", "text": "Leads the party quietly past a fight Sharp ears heard", "deed": "", "count": 0, "how": "A manual"},
+}
+
+
+## Learns skill `id` for good (#233). False if already known.
+static func learn(hero: Companion, id: String) -> bool:
+	if hero == null or id == "" or id in hero.talents or not SKILLS.has(id):
+		return false
+	hero.talents.append(id)
+	hero.refresh_stats()
+	hero.emit_changed()
+	hero.learned_skill.emit(id)
+	return true
+
+
+## A deed done (#233): counts it, and teaches any skill it completes.
+## Returns the ids learned (usually none).
+static func note_deed(hero: Companion, deed: String, amount := 1) -> Array:
+	if hero == null or not hero.uses_stats or amount <= 0:
+		return []
+	var before: int = hero.deeds.get(deed, 0)
+	hero.deeds[deed] = before + amount
+	var learned := []
+	for id in SKILLS:
+		var s: Dictionary = SKILLS[id]
+		if s["deed"] == deed and s["count"] > 0 and before < s["count"] and before + amount >= s["count"] and learn(hero, id):
+			learned.append(id)
+	return learned
+
+
+## "Mara learns Bulwark: defending takes only 15% of a blow."
+static func learned_text(hero: Companion, id: String) -> String:
+	return "%s learns %s: %s." % [hero.display_name, SKILLS[id]["name"], SKILLS[id]["text"].to_lower()]
+
+
+## Skills deeds can still teach `hero`, with progress: [[id, done, needed]].
+static func skill_progress(hero: Companion) -> Array:
+	var out := []
+	for id in SKILLS:
+		var s: Dictionary = SKILLS[id]
+		if s["count"] > 0 and not hero.has_talent(id):
+			out.append([id, mini(hero.deeds.get(s["deed"], 0), s["count"]), s["count"]])
+	return out
+
+
 static func xp_for_next(hero: Companion) -> int:
 	return THRESHOLDS[hero.level + 1] if hero.level < MAX_LEVEL else -1
 
@@ -77,9 +147,13 @@ static func ready_to_advance(hero: Companion) -> bool:
 	return hero.level < MAX_LEVEL and hero.xp >= THRESHOLDS[hero.level + 1]
 
 
-## What the next level offers: talents [[id, name, text]...] or attributes
-## [["stat_str", "Strength", "+1"]...].
-static func choices(hero: Companion) -> Array:
+## What the next level offers. Since #233 levels are automatic: nothing.
+## (The talent tables above stay for reference and old saves.)
+static func choices(_hero: Companion) -> Array:
+	return []
+
+
+static func _old_choices(hero: Companion) -> Array:
 	var next := hero.level + 1
 	if next == 3:
 		var raise := []
@@ -91,51 +165,34 @@ static func choices(hero: Companion) -> Array:
 	return table.get(next, []).filter(func(t): return t[0] not in hero.talents)
 
 
-## Takes the next level with `choice` (a talent or attribute id).
-static func advance(hero: Companion, choice: String) -> bool:
+## Takes the next level: +2 maximum health and +2% to hit, automatically
+## (#233). `_choice` is ignored; kept for older callers.
+static func advance(hero: Companion, _choice := "") -> bool:
 	if not ready_to_advance(hero):
 		return false
-	var valid := choices(hero).map(func(c): return c[0])
-	if choice not in valid and not valid.is_empty():
-		return false
 	hero.level += 1
-	if choice in ATTRIBUTES:
-		hero.set(choice, hero.get(choice) + 1)
-		hero.raised.append(choice)  # undone when the expedition ends (#172)
-	elif choice != "":
-		hero.talents.append(choice)
+	var before := hero.max_health
 	hero.refresh_stats()
+	hero.health = mini(hero.max_health, hero.health + maxi(0, hero.max_health - before))  # the new health comes filled
 	hero.emit_changed()
 	return true
 
 
-## A recruit joining part-way up takes sensible choices (first talent, their
-## best attribute).
+## Every level owed, at once (levels are automatic, #233).
 static func auto_advance(hero: Companion) -> void:
 	while ready_to_advance(hero):
-		var options := choices(hero)
-		var pick := ""
-		if not options.is_empty():
-			pick = options[0][0]
-			if hero.level + 1 == 3:
-				var best := ""
-				for key in ATTRIBUTES:
-					if hero.get(key) < ATTRIBUTE_CAP and (best == "" or hero.get(key) > hero.get(best)):
-						best = key
-				pick = best
-		if not advance(hero, pick):
+		if not advance(hero):
 			break
 
 
-## A fresh expedition (#172): back to level 1, the talents and attribute
-## points of the last one undone. Everything else about the hero stays.
+## A fresh expedition (#172): back to level 1, any attribute points of the
+## last one undone (old saves). Skills stay (#233), as does everything else.
 static func reset(hero: Companion) -> void:
 	if not hero.uses_stats:
 		return
 	for key in hero.raised:
 		hero.set(key, hero.get(key) - 1)
 	hero.raised.clear()
-	hero.talents.clear()
 	hero.level = 1
 	hero.xp = 0
 	load("res://scripts/spells.gd").refill(hero)  # casts come back each trip (#170)
@@ -152,6 +209,8 @@ static func route_xp(start_depth: int) -> int:
 
 
 static func talent_name(id: String) -> String:
+	if SKILLS.has(id):
+		return SKILLS[id]["name"]
 	for role in TALENTS:
 		for level in TALENTS[role]:
 			for t in TALENTS[role][level]:
