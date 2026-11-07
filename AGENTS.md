@@ -50,6 +50,17 @@ Templates > Download and Install; already installed on the owner's PC).
 
 ## Project structure
 
+- `docs/mine-props-3d.md` – #241's worn 3D support frame and repaired sibling,
+  standing/hanging lanterns and the carved miners' shrine, with fresh/used
+  states and optional glow/still mode. New reusable scenes are under
+  `art/dressing/mine-3d-v1`. Local native/browser review and editable masters
+  are in `build/local-mine-props-v1`. Ten selected CC0 lantern/candle source
+  files, licences and pinned blob records are retained under
+  `art/third-party/kaykit-mine-props-v1`. Static geometry uses one shared
+  palette and existing cave grain. Hookup uses existing Dressing placement,
+  shrine wall anchors, closed/empty state and set_motion. Live scene bindings
+  remain a separate integration step. Delivery branch is codex/mine-props-3d.
+
 - `docs/blender-base-contract.md` – #210's true female/male editable Blender
   masters, separate65/49-bone fit/rest contracts, preserved source Actions/slots,
   source catalogue and neutral/animation/export guide. Models, textures, exports

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Depths · Mine props</title>
+<style>
+:root { color-scheme:dark; font:17px/1.5 system-ui,sans-serif; background:#141c1e; color:#e3d8bc }
+* { box-sizing:border-box }
+body { max-width:1440px; margin:auto; padding:24px }
+h1,h2 { font-family:Georgia,serif; font-weight:normal }
+h1 { font-size:36px; margin-bottom:8px }
+h2 { font-size:24px; margin:0 0 12px }
+nav { display:flex; flex-wrap:wrap; gap:16px; margin:24px 0 }
+label { display:flex; align-items:center; gap:10px }
+select { min-height:44px; padding:8px; font:inherit; background:#283331; color:inherit }
+.grid { display:grid; grid-template-columns:1fr 1fr; gap:20px }
+article { background:#243030; border:1px solid #586254; padding:16px; min-width:0 }
+article img,.corridor { display:block; width:100%; height:auto; background:#202a2b }
+article p { margin-bottom:0 }
+p { max-width:1100px }
+a { color:#d8bc85 }
+.note { padding:16px; background:#243030; border-left:3px solid #bca574 }
+@media(max-width:680px) { body { padding:14px } .grid { grid-template-columns:1fr } }
+</style>
+<h1>Timber, lanterns and the miners’ shrine</h1>
+<p>Irregular timber, worn iron and rough masonry, with the cave’s shared grain.</p>
+<img class="corridor" src="captures/corridor.png" alt="The support frame, lantern and shrine mounted in a two-metre mine corridor">
+<nav>
+<label>Lighting <select id="light"><option value="cave">Cave</option><option value="neutral">Neutral</option></select></label>
+<label>Angle <select id="angle"><option value="0">Three-quarter</option><option value="1">Front</option><option value="2">Side</option></select></label>
+<label>State <select id="state"><option value="fresh">Fresh / lit</option><option value="used">Used / out</option></select></label>
+<label>Frame <select id="support"><option value="support">Worn</option><option value="support-damaged">Repaired</option></select></label>
+</nav>
+<div class="grid">
+<article data-name="support"><h2>Mine support</h2><img src="captures/support-cave-0-fresh.png" alt="Irregular timber frame with iron straps"><p>Worn and repaired variants. Clear passage beneath the braces.</p></article>
+<article data-name="lantern-standing"><h2>Standing lantern</h2><img src="captures/lantern-standing-cave-0-fresh.png" alt="Worn standing iron lantern"><p>Floor origin, warm panes and an extinguished state.</p></article>
+<article data-name="lantern-hanging"><h2>Hanging lantern</h2><img src="captures/lantern-hanging-cave-0-fresh.png" alt="Iron lantern suspended from a wall bracket"><p>Wall plate, chain and the same lantern body proportions.</p></article>
+<article data-name="miners-shrine"><h2>Miners’ shrine</h2><img src="captures/miners-shrine-cave-0-fresh.png" alt="Wooden miner with a pick in a stone niche above candle offerings"><p>Carved miner, blue cloth, mineral offerings and candles. Used state leaves stubs, ash and an empty cup.</p></article>
+</div>
+<p class="note">The native review includes an Animate switch for the lantern and candle glow. These images are actual Godot still captures. Open START_REVIEW.cmd in this folder for the interactive review.</p>
+<p><a href="START_HERE.md">Asset handoff</a> · <a href="validation.json">Native checks</a> · <a href="artifact-validation.json">Source verification</a></p>
+<script>
+function update() {
+    const light=document.querySelector('#light').value;
+    const angle=document.querySelector('#angle').value;
+    const state=document.querySelector('#state').value;
+    for (const card of document.querySelectorAll('[data-name]')) {
+        const support=card.dataset.name==='support';
+        const id=support?document.querySelector('#support').value:card.dataset.name;
+        card.querySelector('img').src='captures/'+id+'-'+light+'-'+angle+'-'+(support?'fresh':state)+'.png';
+    }
+}
+for (const control of document.querySelectorAll('select')) control.addEventListener('change',update);
+</script>
+</html>

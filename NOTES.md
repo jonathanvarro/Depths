@@ -13,6 +13,29 @@ Format:
 
 ---
 
+## 2026-11-07 – ChatGPT (3D supports, lanterns and miners' shrine, #241)
+
+- Did. Built reusable 3D scenes in art/dressing/mine-3d-v1. Worn and repaired
+  frames, standing and wall-hung lanterns, and a rough shrine with a carved
+  wooden miner and pick. The shrine's empty state removes the cloth and ore,
+  empties its cup and leaves candle stubs and ash. Lantern and candle glow
+  have a subtle animation, exact still mode and set_motion compatibility.
+- Sources. Ten selected KayKit CC0 lantern/candle originals match the pinned
+  official Git blobs. Source bytes and provenance are in
+  art/third-party/kaykit-mine-props-v1. Framing, stonework, carving and other
+  offerings use authored geometry. Local Blender masters retain separate pieces.
+- Checks. Native Godot 4.7.2 Mobile passes 172 checks covering actual GLB
+  bounds/UVs/triangle counts, open passage rays, state registration, glow
+  behavior and phone controls. The browser passes 30 checks. Review has
+  52 native captures, including a mounted corridor and phone screens.
+- Next. Review E:/GitHub/Depths/build/local-mine-props-v1/inspector.html.
+  START_REVIEW.cmd opens the interactive native review. Claude can bind
+  scenes through existing dressing and wall-mounted event paths. Handoff
+  and rebuild steps are in docs/mine-props-3d.md.
+- Watch out. The new scenes add no world light or collision. Supply and event
+  rules stay caller-owned. Current live bindings use the earlier library.
+  Delivery is isolated on codex/mine-props-3d to preserve shared-main edits.
+
 ## 2026-11-06 – Claude (levels and skills split, #233; panic from events, #236)
 
 - **Levels (#233):** automatic. `Progression.advance` gives +2 health and +2% to hit (`Companion.refresh_stats`). `choices()` returns nothing, and main says "X reaches level N" after a fight. The camp tent's Training only reports.
