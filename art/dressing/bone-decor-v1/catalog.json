@@ -58,12 +58,12 @@
       "family": "skeletons",
       "triangles": 5156,
       "dimensions": [
-        1.3137333393096924,
-        1.6621828079223633,
-        0.7464531660079956
+        1.7438311576843262,
+        1.667458176612854,
+        0.7613229155540466
       ],
-      "source_scale": 0.7617328748505833,
-      "sha256": "ce10cb132503391c62ee737ddfcd5936d0f780a262f4056a9ad1cca7b3e9d774"
+      "source_scale": 1.0111135137823173,
+      "sha256": "80583b111759b3fedb785bc4c29573825452953f9d36fcf3bf62ba47428dc560"
     },
     {
       "name": "skeleton-seated",
@@ -71,18 +71,29 @@
       "family": "skeletons",
       "triangles": 5156,
       "dimensions": [
-        0.996313214302063,
-        0.9797182083129883,
-        1.367978811264038
+        1.3224921226501465,
+        1.1201883554458618,
+        1.2759019136428833
       ],
-      "source_scale": 0.7617328748505833,
-      "sha256": "f837c8ff610ef7389559bc602bc1ee32493e20bc48819cad883087914bab4537"
+      "source_scale": 1.0111135137823173,
+      "sha256": "b29080d33d2e0d01e0a09da00f13d680b0d1847e6529db92249c9f6fadcfab8a"
     }
   ],
   "source_preserved": true,
+  "head_fit": {
+    "rest_scale_xyz": [
+      0.25999999046325684,
+      0.2800000011920929,
+      0.30000001192092896
+    ],
+    "rest_lift": 0.11301387844241284,
+    "head_height_fraction": 0.17883701230798435,
+    "head_height_metres": 0.29508107030817415
+  },
   "skeleton_changes": [
     "Sampled named source poses as static scenery",
     "Removed separate eye mesh",
+    "Reduced skull and jaw together in rest space to match current character proportions",
     "Combined static pieces and uniformly scaled the rest height to 1.65m"
   ]
 }

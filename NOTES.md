@@ -13,6 +13,22 @@ Format:
 
 ---
 
+## 2026-11-06 – ChatGPT (skeleton head proportions, #239)
+
+- Did. Reduced and narrowed the complete skeletons' skulls and jaws together,
+  with a shared rest-space correction before sampling the two scenery poses.
+  Compared current human masters locally. Resulting head height is 17.9% of
+  the normalized 1.65 m standing height. Neck joins are adjusted above the collar.
+- Checks. Rebuilt both static models and inspected native front, side, high
+  and three-quarter views for neck/jaw alignment and floor contact. Native
+  Mobile, source/artifact and browser checks pass. Updated local preview at
+  E:/GitHub/Depths/build/local-bone-decor-v1/inspector.html.
+- Next. Owner review and placement selection. Heavy source clothing and broad
+  limbs still give these complete skeletons a stylized silhouette.
+- Watch out. New metric bounds are in the catalog and docs/bone-decor-library.md.
+  Delivery continues on codex/bone-decor-library. Original source rig, Actions,
+  licences and hashes remain intact.
+
 ## 2026-11-06 – ChatGPT (CC0 bone scenery, #239)
 
 - Did. Verified the owner's two KayKit Drive uploads against the official

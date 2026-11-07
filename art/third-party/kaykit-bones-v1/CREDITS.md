@@ -26,8 +26,11 @@ The original files are retained unchanged under the two source subfolders.
 The game library in art/dressing/bone-decor-v1 uses uniformly scaled exports,
 two muted 256 px atlases and the existing cave-prop grain. Death_A_Pose and
 Sit_Floor_Pose are sampled into static meshes. The separate emissive eye mesh
-is omitted from the scenery versions. Their clothing and exaggerated head
-proportions are retained for style review.
+is omitted from the scenery versions. At the owner's request, the derived
+skulls and jaws are reduced together in rest space to approximately 18% of
+standing height, with their neck attachment adjusted before sampling poses.
+The complete scenery uses a 1.65 m rest-height reference. Heavy clothing
+and broad limbs retain the pack's style. Originals are preserved unchanged.
 
 Rebuild using tools/bone_decor/prepare_textures.py, followed by Blender running
 tools/bone_decor/export_models.py. The derived catalog records each pose,

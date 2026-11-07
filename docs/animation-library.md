@@ -13,6 +13,9 @@ Sit_Floor_Pose from KayKit Skeletons 1.0's Skeleton_Minion.glb into static
 floor and seated scenery. The original pack and its included Actions are
 retained under art/third-party/kaykit-bones-v1/skeletons. Source lineage,
 geometry and review details are in [bone-decor-library.md](bone-decor-library.md).
+The owner's head correction (2026-11-06) is applied to derived skull/jaw
+geometry in rest space before both pose samples. Original Actions and rig
+are preserved. These are static scenery exports, not new character clips.
 
 - **Originals:** `G:/My Drive/3D Objects/Animations/Mixamo_Originals/`, as
   downloaded from Mixamo. Never edit or rename these; work on copies.

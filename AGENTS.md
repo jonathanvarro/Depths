@@ -57,7 +57,9 @@ Templates > Download and Install; already installed on the owner's PC).
   `art/third-party/kaykit-bones-v1`. Muted shared256 atlases reuse the
   cave props' world-space grain. Native light/angle comparison:
   `build/local-bone-decor-v1/inspector.html`. The complete skeleton studies
-  retain the pack's oversized heads/clothing for style review. Room placement
+  have owner-requested smaller skulls/jaws matching the current character
+  head proportions (17.9% of standing height). Source clothing and broad limbs
+  retain the pack's style for review. Room placement
   and story/encounter assignments remain caller-owned.
 
 - `docs/blender-base-contract.md` – #210's true female/male editable Blender

@@ -27,10 +27,32 @@ The GLBs carry geometry and atlas UVs. Apply material-halloween.tres when
 placing loose pieces directly; the four recipes assign their shared material.
 
 The complete skeleton studies are uniformly scaled from a 1.65 m rest height.
-The fallen pose occupies approximately 1.31 × 1.66 m before its recipe's yaw.
-The seated pose is approximately 1.37 m high. These retain KayKit's oversized
-heads and clothing, so their visual selection is still a review decision.
+The fallen pose occupies approximately 1.74 × 1.67 m before its recipe's yaw.
+The seated pose is approximately 1.28 m high. The owner's head correction
+fits the skull and jaw to the existing character proportions. Their heavy
+clothing and broad limbs retain the source style for review.
 The separate glowing-eye mesh is omitted from the static scenery.
+
+## Head proportion correction
+
+The owner requested smaller heads on 2026-11-06. The source skull and jaw
+together occupied about 45% of standing height. A local comparison with
+the current male and female masters found head-weighted bounds of approximately
+19.0% and 17.7% respectively. These bounds include some neck and are a style
+reference for this scenery correction.
+
+The derived skull and jaw now use one shared rest-space transform around
+the head joint, with width/depth/height factors of 0.26/0.28/0.30 and a
+0.113 m upward adjustment in source space. This retains their mutual fit and
+places the spine inside the skull base above the collar. It is applied before
+sampling either source pose. Final whole-body normalization then restores
+the 1.65 m standing reference. The resulting head is 29.5 cm tall, or 17.9%
+of standing height. The same correction is used for both scenery poses.
+
+Native front, side, high and three-quarter views were inspected in neutral
+and cave lighting for neck attachment, jaw alignment and floor contact.
+The revised exports keep the original topology and UVs. The original CC0
+rigged source and its Actions retain their supplied bytes.
 
 The source poses are baked as single-mesh scenery, with one material surface
 per model. Each pack uses a shared muted 256 × 256 atlas. The wrapper scenes
