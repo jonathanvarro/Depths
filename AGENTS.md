@@ -50,6 +50,17 @@ Templates > Download and Install; already installed on the owner's PC).
 
 ## Project structure
 
+- `docs/traps-sites-and-mist-3d.md` – #244/#247's Calming herbs icon, seven
+  3D trap/idol/pool scenes and first-person mist. Herb resource and Ambience
+  are wired on codex/traps-sites-mist-3d; event prop hookup remains pending.
+  Scenes are under `art/props/traps-sites-3d-v1`, with immediate ready/alternate/
+  resolved states and optional pool motion. Dart ports retain real wall mounting.
+  Select art from actual outcomes rather than assuming every cleared trap fired.
+  `art/effects/exploration-mist-v1` uses three low world-registered sheets,
+  existing fog alpha, light bands and Settings flashes for exact still mode.
+  No visibility/encounter/traversal rules change. Local gallery, native controls
+  and editable masters are in `build/local-traps-sites-mist-v1`.
+
 - `docs/cave-formations-and-growth-3d.md` – #243's fourteen 3D decor scenes
   under `art/dressing/cave-growth-3d-v1`: eight mineral/rubble pieces, three
   root mounts and three fungal forms. Metric floor/wall/ceiling envelopes
