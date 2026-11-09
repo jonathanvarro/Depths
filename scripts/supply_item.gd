@@ -21,6 +21,7 @@ enum Effect {
 	TOME,  ## a Mage reads it and learns `spell` for good (#170, spells.gd)
 	CANDLE,  ## gives a Mage `amount` casts back, outside a fight (#170)
 	IDENTIFY,  ## a touchstone: reads one unidentified piece (owner, 2026-11-03)
+	CALM,  ## calming herbs: everyone's strain falls by `amount` (owner, 2026-11-08)
 }
 
 @export var display_name := "Supply"

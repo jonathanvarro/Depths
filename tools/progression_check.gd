@@ -84,7 +84,14 @@ func _initialize() -> void:
 	var shocks_before: int = mara.deeds.get("shocks", 0)
 	mara.change_strain(StrainRulesForCheck.TRAP)
 	check("a big shock counts towards Steel nerves", mara.deeds.get("shocks", 0) == shocks_before + 1)
+	var herbs: SupplyItem = load("res://data/items/calming_herbs.tres")
+	ps.supplies.add(herbs, 1)
+	var shaken := mara.strain
+	ps.use_item(herbs)
+	check("calming herbs settle everyone's nerves (2026-11-08)", mara.strain <= shaken - herbs.amount + 1.0, "%.1f -> %.1f" % [shaken, mara.strain])
+	check("...and the merchant sells them", herbs in load("res://scripts/camp_state.gd").MERCHANT_STOCK)
 	mara.change_strain(-mara.strain)
+	check("no use when everyone is calm", ps.cannot_use_reason(herbs) != "" or ps.supplies.count(herbs) == 0)
 
 	# --- Armour.
 	var coat: Equipment = load("res://data/gear/padded_coat.tres")

@@ -34,6 +34,7 @@ const Spells := preload("res://scripts/spells.gd")
 const TORCH := preload("res://data/items/torch.tres")
 const RATION := preload("res://data/items/ration.tres")
 const DRESSING := preload("res://data/items/dressing.tres")
+const HERBS := preload("res://data/items/calming_herbs.tres")  # 2026-11-08
 const DRAUGHT := preload("res://data/items/restorative_draught.tres")
 const OIL := preload("res://data/items/oil_flask.tres")
 const IRON_SWORD := preload("res://data/gear/iron_sword.tres")
@@ -274,7 +275,7 @@ func _shop() -> void:
 				stats["lantern_day"] = camp.day
 		var size: int = maxi(1, party.members.size())
 		var wants := {TORCH: 2 if party.supplies.has_lantern else 4, OIL: 2 if party.supplies.has_lantern else 0,
-				RATION: size, DRAUGHT: 2, DRESSING: 2}
+				RATION: size, DRAUGHT: 2, DRESSING: 2, HERBS: 2}
 		for item in wants:
 			while party.supplies.count(item) < wants[item] and party.supplies.gold >= item.price:
 				if not camp.buy(party, item):
@@ -1107,6 +1108,9 @@ func _patch_up() -> void:
 			party.use_item(DRAUGHT)
 	if party.first_undressed_injured() and party.cannot_use_reason(DRESSING) == "":
 		party.use_item(DRESSING)
+	# Calming herbs once anyone is shaken (2026-11-08).
+	if party.living_members().any(func(h: Companion): return h.strain_state() >= StrainRules.State.SHAKEN) and party.cannot_use_reason(HERBS) == "":
+		party.use_item(HERBS)
 	var hungry: bool = party.living_members().any(func(h): return h.is_hungry())
 	if hungry and party.cannot_use_reason(RATION) == "":
 		party.use_item(RATION)

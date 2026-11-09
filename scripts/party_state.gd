@@ -371,6 +371,8 @@ func cannot_use_reason(item: SupplyItem, in_combat := false, recipient: Companio
 		return ""
 	if item.effect == SupplyItem.Effect.IDENTIFY and unidentified().is_empty():
 		return "Nothing to identify"
+	if item.effect == SupplyItem.Effect.CALM and not living_members().any(func(m: Companion): return m.strain >= 5.0):
+		return "Everyone is calm"
 	if item.effect == SupplyItem.Effect.BREW:
 		if in_combat:
 			return "Throw it at a foe"
@@ -442,6 +444,12 @@ func use_item(item: SupplyItem, in_combat := false, recipient: Companion = null)
 			reader.emit_changed()
 			advance_time(item.use_time)
 			return "%s learns %s." % [reader.display_name, Spells.name_of(item.spell)]
+		SupplyItem.Effect.CALM:  # calming herbs: nerves settle (2026-11-08)
+			supplies.take(item)
+			for member in living_members():
+				member.change_strain(-item.amount)
+			advance_time(item.use_time)
+			return item.use_message if item.use_message != "" else "The bitter herbs go round. Breathing slows; hands stop shaking."
 		SupplyItem.Effect.IDENTIFY:  # the rarest piece first
 			var pieces := unidentified()
 			pieces.sort_custom(func(a: Equipment, b: Equipment): return a.mods.size() > b.mods.size())

@@ -37,6 +37,7 @@ const TREASURE := [
 	[preload("res://data/items/manual_thick_skull.tres"), 2, 1],
 	[preload("res://data/items/manual_slip_past.tres"), 2, 1],
 	[preload("res://data/items/touchstone.tres"), 1, 2],  # reads a found piece (2026-11-03)
+	[preload("res://data/items/calming_herbs.tres"), 1, 3],  # keeps panic in check (2026-11-08)
 	[preload("res://data/items/votive_candle.tres"), 1, 2],
 	[preload("res://data/items/amethyst.tres"), 1, 3],
 	[preload("res://data/items/fine_cloth.tres"), 1, 3],

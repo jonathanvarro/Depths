@@ -253,6 +253,9 @@ Numbers are first guesses for the bot and the owner's playtests to tune.
   - a curse settling on you (shrines, fouled wells).
 
   All numbers are first guesses in `scripts/strain.gd`.
+- **Middle ground (owner, 2026-11-08).** Event-only panic made the game too easy. Time, missing health and old injuries wear on nerves again at half their old rate, and the shocks are a little stronger. Two things keep it in check:
+  - **Calming herbs:** bought from the merchant or found below; everyone's strain drops by 20.
+  - **The Bone charm** trinket: strain builds 25% slower.
 
 ## Magic — decided 2026-11-02 (#170, #53)
 

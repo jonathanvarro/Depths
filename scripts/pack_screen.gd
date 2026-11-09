@@ -657,6 +657,7 @@ func _use_verb(item: SupplyItem) -> String:
 		SupplyItem.Effect.CURE_VENOM:return "Drink"
 		SupplyItem.Effect.LIFT_BANE:return "Apply"
 		SupplyItem.Effect.TOME:return "Read"
+		SupplyItem.Effect.CALM:return "Share"
 		SupplyItem.Effect.CANDLE:return "Pray"
 	return "Use"
 

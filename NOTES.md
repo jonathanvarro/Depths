@@ -13,6 +13,18 @@ Format:
 
 ---
 
+## 2026-11-08 – Claude (panic middle ground and Calming herbs, #236 follow-up)
+
+- **Owner, 2026-11-08:** the event-only panic was over-tuned (too easy). The middle ground is that some panic builds over a trip, and items keep it in check.
+- **strain.gd:**
+  - TIME, MISSING_HEALTH and PER_INJURY are back at half their old rates (0.04 / 0.12 / 0.04).
+  - The shocks are a little stronger: STRUCK 4, TRAP 15, WEB_BARE 8, FORCED 12, BANE 18.
+- **Calming herbs** (`data/items/calming_herbs.tres`, new effect CALM): everyone's strain drops by 20, using 2 time. The merchant sells them for 8 gold and they turn up among finds. The Pack button says "Share". The icon borrows the antidote vial for now; art request #244.
+- **The lasting option** is the existing Bone charm trinket: strain builds 25% slower.
+- **Bot** (10 campaigns per hero; it now buys 2 herbs and uses them once anyone is Shaken): queen 26/30, wipes 42. Before #236 it was 20/30 and 70; event-only, 30/30 and 38.
+  - Two bot map fights stalled for 200 rounds (#245): bot or game, still to find out.
+- **Watch out:** another assistant's uncommitted #234 work (first-quest site, main.gd/minimap.gd and story_check) was in the working copy. It was left as it was, and its NOTES entry was not committed by this change.
+
 ## 2026-11-06 – Claude (levels and skills split, #233; panic from events, #236)
 
 - **Levels (#233):** automatic. `Progression.advance` gives +2 health and +2% to hit (`Companion.refresh_stats`). `choices()` returns nothing, and main says "X reaches level N" after a fight. The camp tent's Training only reports.

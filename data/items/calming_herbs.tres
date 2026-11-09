@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="SupplyItem" format=3]
+
+[ext_resource type="Texture2D" path="res://art/items/field-kit-v1/antidote.png" id="icon"]
+[ext_resource type="Script" path="res://scripts/supply_item.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+icon = ExtResource("icon")
+display_name = "Calming herbs"
+description = "A twist of bitter leaves the miners chew to steady their nerves. Shared round, everyone's strain falls by 20."
+effect = 13
+amount = 20
+use_time = 2
+usable_in_combat = false
+price = 8
+a_name = "calming herbs"
