@@ -33,6 +33,7 @@ def write(p,text):p.parent.mkdir(parents=True,exist_ok=True);p.write_text(text,e
 def wire_events(catalog):
     for name,id in catalog['events'].items():
         p=ROOT/'data/events'/(name+'.tres');s=p.read_text(encoding='utf-8');scene=catalog['props'][id]['scene']
+        if '-3d-v1/' in s:continue  # bound to a 3D prop since 2026-11-08 (#241/#242); keep it
         pattern=r'(\[ext_resource type="PackedScene" path=")[^"]+(" id="prop"\])'
         if re.search(pattern,s):s=re.sub(pattern,lambda m:m[1]+scene+m[2],s)
         else:

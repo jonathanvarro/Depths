@@ -13,6 +13,17 @@ Format:
 
 ---
 
+## 2026-11-08 – Claude (ChatGPT's 3D props and decor merged and hooked up: #239, #241, #242, #243)
+
+- **Merged** `codex/cave-growth-3d` (which carries #241 and #242) and `codex/bone-decor-library`. Only the NOTES and AGENTS conflicts needed fixing; both sides were kept. Not merged: `codex/prayer-art-stool` (#216 prayer icons and a stool reference) and the padded-jacket branches (#220, wardrobe).
+- **Events** now point at the 3D scenes: strongbox, old workings, dry alcove, cold camp, abandoned pack (`art/props/expedition-3d-v1`) and the miners' shrine (`art/dressing/mine-3d-v1`, also in `tools/story/build_shrines.gd`). Main's `state`/`set_motion` handling works unchanged. `build_backlog96_art.py` now skips events already bound to a `-3d-v1` prop, so rerunning it can't undo them. The 3D `chest.tscn` has no event yet.
+- **Dressing** (`dressing.gd`): `MODELS` swaps matching 2D cut-outs for 3D scenes by id, and adds new ones.
+  - Swaps: supports (1 in 3 damaged), rails along local Z (1 in 4 broken), stalactites and stalagmites, flowstone, wall fungus to shelf fungus, mushrooms.
+  - New: wall/hanging/floor roots (floors 1–3), rubble, fungal mats (2–3), scattered bones (1–4), small remains (2–4), unlit or occasionally lit lanterns (floor 1, glow follows the effects setting), and a rare skeleton in a room corner (floors 2+).
+  - Pieces carry their id in meta `dressing_id`. `fungal_dressing.gd` uses `MODELS_BY_PATH`, and its fungus glows (mood only).
+- **Check:** new `tools/models_3d_check.gd` (event props and their empty state; decor per floor; screenshots).
+- **Watch out:** the other assistant's uncommitted #234 work was set aside with git stash during the merge and restored unchanged. It is still uncommitted.
+
 ## 2026-11-08 – Claude (panic middle ground and Calming herbs, #236 follow-up)
 
 - **Owner, 2026-11-08:** the event-only panic was over-tuned (too easy). The middle ground is that some panic builds over a trip, and items keep it in check.

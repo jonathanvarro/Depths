@@ -51,13 +51,17 @@ static func dress(level:Node3D,map,depth:int,seed:int,cell_size:float,wall_heigh
 				id=FLOOR[rng.randi()%FLOOR.size()]
 				at=centre+Vector3(side.x,0,side.y)*cell_size*0.24
 				yaw=rng.randi_range(0,3)*PI/2.0
-			var piece:Node3D=load(ART+id+".tscn").instantiate()
+			var model:String=BaseDressing.MODELS_BY_PATH.get(id,"")  # a 3D piece where there is one (#243)
+			var piece:Node3D=load(model if model!="" else ART+id+".tscn").instantiate()
+			if model!="" and "glow_enabled" in piece and (id.ends_with("-lit") or id.ends_with("wall-fungus")):
+				piece.glow_enabled=true  # the caverns' fungus glows (mood only)
+				piece.set_motion(Settings.get_value("flashes"))
 			piece.position=at;piece.rotation.y=yaw
 			piece.set_meta("dressing_id",id.get_file());piece.set_meta("cell",cell)
 			piece.set_meta("mount","wall" if roll<5 else ("ceiling" if roll<7 else ("edge" if roll<9 else "floor")))
 			root.add_child(piece)
 			if id.ends_with("puddle-small"):piece.get_node("Sprite").modulate*=Color(0.7,0.76,0.6,1)
-			if id.ends_with("wall-fungus"):
+			if id.ends_with("wall-fungus") and model=="":
 				root._effect(piece,PULSE,Vector3(0,0,0.03),0.0045,0.5)
 			elif id.ends_with("flowstone") and rng.randi()%2==0:
 				root._effect(piece,DRIP,Vector3(0,-0.7,0.035),0.006,0.6)

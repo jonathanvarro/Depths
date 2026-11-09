@@ -14,23 +14,61 @@ const DungeonMap := preload("res://scripts/dungeon_map.gd")
 const DIR := "res://art/dressing/cave-v1/"
 const AMBIENT := "res://art/effects/ambient-v1/"
 const SIDES: Array[Vector2i] = [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]
+const Settings := preload("res://scripts/settings.gd")
+## ChatGPT's 3D pieces (2026-11-08: #239, #241-#243) stand in for the
+## matching 2D cut-outs, by id, and add new ones. Same mounts: floor pieces
+## at floor level, wall pieces at the face with local +Z into the room,
+## ceiling pieces at the roof.
+const GROWTH := "res://art/dressing/cave-growth-3d-v1/"
+const MINE := "res://art/dressing/mine-3d-v1/"
+const EXPEDITION := "res://art/props/expedition-3d-v1/"
+const BONES := "res://art/dressing/bone-decor-v1/"
+const MODELS := {
+	"mine-support": MINE + "support.tscn", "mine-support-damaged": MINE + "support-damaged.tscn",
+	"mine-rails": EXPEDITION + "rails.tscn", "mine-rails-broken": EXPEDITION + "rails-broken.tscn",
+	"lantern-hanging": MINE + "lantern-hanging.tscn", "lantern-standing": MINE + "lantern-standing.tscn",
+	"stalactite-single": GROWTH + "stalactite-single.tscn", "stalactite-pair": GROWTH + "stalactite-single.tscn",
+	"stalactite-cluster": GROWTH + "stalactite-cluster.tscn",
+	"stalagmite-stub": GROWTH + "stalagmite-stub.tscn", "stalagmite-tall": GROWTH + "stalagmite-tall.tscn",
+	"stalagmite-broken": GROWTH + "stalagmite-broken.tscn", "stalagmite-cluster": GROWTH + "stalagmite-cluster.tscn",
+	"flowstone": GROWTH + "flowstone-wall.tscn", "wall-fungus": GROWTH + "shelf-fungus.tscn",
+	"pale-mushrooms": GROWTH + "mushroom-clump.tscn", "fungal-mat": GROWTH + "fungal-mat.tscn",
+	"rubble-cluster": GROWTH + "rubble-cluster.tscn",
+	"wall-roots": GROWTH + "wall-roots.tscn", "hanging-roots": GROWTH + "hanging-roots.tscn",
+	"floor-roots": GROWTH + "floor-roots.tscn",
+	"scattered-bones": BONES + "scattered-bones.tscn", "small-remains": BONES + "small-remains.tscn",
+	"fallen-skeleton": BONES + "fallen-skeleton.tscn", "seated-skeleton": BONES + "seated-skeleton.tscn",
+}
+## The fungal caverns' pieces by their 2D path (fungal_dressing.gd).
+const MODELS_BY_PATH := {
+	"cave-v1/wall-fungus": GROWTH + "shelf-fungus.tscn", "landmarks-v1/wall-roots": GROWTH + "wall-roots.tscn",
+	"cave-v1/flowstone": GROWTH + "flowstone-wall.tscn", "landmarks-v1/root-curtain-b": GROWTH + "hanging-roots.tscn",
+	"cave-v1/stalactite-single": GROWTH + "stalactite-single.tscn", "cave-v2/floor-fungus": GROWTH + "mushroom-clump.tscn",
+	"cave-v2/floor-fungus-lit": GROWTH + "mushroom-clump.tscn",
+	"cave-v1/stalagmite-stub": GROWTH + "stalagmite-stub.tscn", "cave-v1/stalagmite-broken": GROWTH + "stalagmite-broken.tscn",
+}
+## One in this many room corners (floors 2+) holds a skeleton.
+const SKELETON_ODDS := 45
 
 ## id -> [first floor, last floor] (from the catalogue).
 const WALL := {
 	"flowstone": [1, 2], "cracks-rubble": [1, 4], "burnt-sconce": [1, 2],
 	"goblin-torch-lit": [3, 4], "goblin-daubs": [3, 4], "wall-fungus": [2, 3],
 	"chalk-arrow": [1, 2], "chalk-cross": [1, 2], "chalk-tally": [1, 2],
+	"wall-roots": [1, 3], "lantern-hanging": [1, 1],
 }
 ## How high each wall piece's centre sits, in metres (default 1.3).
 const WALL_HEIGHTS := {"cracks-rubble": 0.5, "burnt-sconce": 1.6, "goblin-torch-lit": 1.45,
-		"flowstone": 1.2, "wall-fungus": 0.9, "goblin-daubs": 1.2}
+		"flowstone": 1.2, "wall-fungus": 0.9, "goblin-daubs": 1.2, "wall-roots": 1.15, "lantern-hanging": 1.9}
 const CEILING := {
 	"stalactite-single": [1, 3], "stalactite-pair": [1, 3], "stalactite-cluster": [1, 3],
-	"web-strand": [1, 2], "hanging-trophies": [3, 4],
+	"web-strand": [1, 2], "hanging-trophies": [3, 4], "hanging-roots": [1, 3],
 }
 const EDGE := {
 	"stalagmite-stub": [1, 3], "stalagmite-tall": [1, 3], "stalagmite-broken": [1, 3],
 	"pale-mushrooms": [2, 3], "rat-nest": [1, 2],
+	"stalagmite-cluster": [1, 3], "rubble-cluster": [1, 4], "floor-roots": [1, 3], "fungal-mat": [2, 3],
+	"scattered-bones": [1, 4], "small-remains": [2, 4], "lantern-standing": [1, 1],
 }
 const DECAL := {
 	"puddle-small": [1, 2], "puddle-wide": [1, 2], "floor-gravel": [1, 4],
@@ -74,9 +112,10 @@ static func dress(level: Node3D, map, depth: int, seed: int, cell_size: float, w
 				since_support += 1
 				if since_support >= SUPPORT_EVERY and rng.randf() < 0.6:
 					since_support = 0
-					_put(root, "mine-support", centre, _yaw_across(corridor))
+					_put(root, "mine-support-damaged" if rng.randi() % 3 == 0 else "mine-support", centre, _yaw_across(corridor))
 				elif rng.randi() % 5 == 0:
-					_put(root, "mine-rails", centre, _yaw_along(corridor))
+					# 3D rails run along local Z; the 2D decal ran along X.
+					_put(root, "mine-rails-broken" if rng.randi() % 4 == 0 else "mine-rails", centre, _yaw_facing(corridor))
 			if not sides.is_empty() and not walls.is_empty() and rng.randi() % (WALL_ODDS * _thin(walls)) == 0:
 				var side: Vector2i = sides[rng.randi() % sides.size()]
 				var id: String = walls[rng.randi() % walls.size()]
@@ -84,8 +123,9 @@ static func dress(level: Node3D, map, depth: int, seed: int, cell_size: float, w
 				at.y = WALL_HEIGHTS.get(id, 1.3)
 				at += _along_wall(side) * rng.randf_range(-0.45, 0.45)
 				var piece := _put(root, id, at, _yaw_facing(-side))
-				if id == "wall-fungus":
+				if id == "wall-fungus" and not MODELS.has(id):
 					_effect(piece, "fungus-pulse", Vector3(0, 0, 0.03), 0.0045, false, 0.8)
+				_light_lantern(piece, rng)
 			if not ceiling.is_empty() and rng.randi() % (CEILING_ODDS * _thin(ceiling)) == 0:
 				var id: String = ceiling[rng.randi() % ceiling.size()]
 				var at := centre + Vector3(rng.randf_range(-0.5, 0.5), wall_height - 0.01, rng.randf_range(-0.5, 0.5))
@@ -98,7 +138,14 @@ static func dress(level: Node3D, map, depth: int, seed: int, cell_size: float, w
 					id = "stalagmite-stub"  # keep narrow drifts walkable to the eye
 				var toward: Vector2i = sides[rng.randi() % sides.size()] if not sides.is_empty() else Vector2i([-1, 1][rng.randi() % 2], [-1, 1][rng.randi() % 2])
 				var at := centre + Vector3(toward.x, 0, toward.y) * cell_size * 0.36
-				_put(root, id, at, 0.0)
+				_light_lantern(_put(root, id, at, rng.randf() * TAU if MODELS.has(id) else 0.0), rng)
+			# Now and then the dead of an earlier party, in a room's corner (#239).
+			if depth >= 2 and sides.size() >= 2 and map._is_room_cell(cell) and rng.randi() % SKELETON_ODDS == 0:
+				var wall: Vector2i = sides[rng.randi() % sides.size()]
+				if rng.randi() % 2 == 0:
+					_put(root, "seated-skeleton", centre + Vector3(wall.x, 0, wall.y) * cell_size * 0.3, _yaw_facing(-wall))
+				else:
+					_put(root, "fallen-skeleton", centre, rng.randf() * TAU)
 			if not decals.is_empty() and rng.randi() % DECAL_ODDS == 0:
 				var id: String = decals[rng.randi() % decals.size()]
 				var at := centre + Vector3(rng.randf_range(-0.35, 0.35), 0, rng.randf_range(-0.35, 0.35))
@@ -172,8 +219,19 @@ static func _along_wall(side: Vector2i) -> Vector3:
 	return Vector3(side.y, 0, side.x).abs()
 
 
+## An old mine lantern: mostly long dead, now and then still burning (its
+## glow is mood only, no light; #241). Follows the effects setting.
+static func _light_lantern(piece: Node3D, rng: RandomNumberGenerator) -> void:
+	if piece == null or not str(piece.get_meta("dressing_id", "")).begins_with("lantern") or not "lit" in piece:
+		return
+	piece.lit = rng.randi() % 3 == 0
+	if piece.has_method("set_motion"):
+		piece.set_motion(Settings.get_value("flashes"))
+
+
 static func _put(root: Node3D, id: String, at: Vector3, yaw: float) -> Node3D:
-	var node: Node3D = load(DIR + id + ".tscn").instantiate()
+	var node: Node3D = load(MODELS.get(id, DIR + id + ".tscn")).instantiate()
+	node.set_meta("dressing_id", id)
 	node.position = at
 	node.rotation.y = yaw
 	root.add_child(node)
