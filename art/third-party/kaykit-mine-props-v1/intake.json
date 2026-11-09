@@ -1,0 +1,66 @@
+{
+  "repository": "KayKit-Game-Assets/KayKit-Halloween-Bits-1.0",
+  "commit": "6dc69bf6b2fa766a985754f35ec6a0324090e6c6",
+  "files": [
+    {
+      "file": "halloween/lantern_hanging.gltf",
+      "official_path": "addons/kaykit_halloween_bits/Assets/gltf/lantern_hanging.gltf",
+      "git_blob_sha1": "1d2c98e5d060740493d92000f7d4adabb5505971",
+      "bytes": 3080
+    },
+    {
+      "file": "halloween/lantern_hanging.bin",
+      "official_path": "addons/kaykit_halloween_bits/Assets/gltf/lantern_hanging.bin",
+      "git_blob_sha1": "07ceac5548aebbdf0cc2b6ece236da6e38eec45a",
+      "bytes": 19472
+    },
+    {
+      "file": "halloween/lantern_standing.gltf",
+      "official_path": "addons/kaykit_halloween_bits/Assets/gltf/lantern_standing.gltf",
+      "git_blob_sha1": "aef8c644fcf4d4542ea22345bd5a56d26ff2a9d8",
+      "bytes": 3084
+    },
+    {
+      "file": "halloween/lantern_standing.bin",
+      "official_path": "addons/kaykit_halloween_bits/Assets/gltf/lantern_standing.bin",
+      "git_blob_sha1": "f4c8b5992935c7b632616477589fb02f53f89718",
+      "bytes": 12400
+    },
+    {
+      "file": "halloween/candle.gltf",
+      "official_path": "addons/kaykit_halloween_bits/Assets/gltf/candle.gltf",
+      "git_blob_sha1": "23c3a8b4d26519403b044591d2cd37bd5b01f00e",
+      "bytes": 3037
+    },
+    {
+      "file": "halloween/candle.bin",
+      "official_path": "addons/kaykit_halloween_bits/Assets/gltf/candle.bin",
+      "git_blob_sha1": "42a8f71faf6ca63c0df6e3afaa5514afa5d7db5d",
+      "bytes": 3308
+    },
+    {
+      "file": "halloween/candle_melted.gltf",
+      "official_path": "addons/kaykit_halloween_bits/Assets/gltf/candle_melted.gltf",
+      "git_blob_sha1": "072d1739f0ba40297afa15cbd49e2a43ad441a28",
+      "bytes": 3052
+    },
+    {
+      "file": "halloween/candle_melted.bin",
+      "official_path": "addons/kaykit_halloween_bits/Assets/gltf/candle_melted.bin",
+      "git_blob_sha1": "81faa64eafa25b634b51992dc76133feef9be262",
+      "bytes": 3308
+    },
+    {
+      "file": "halloween/halloweenbits_texture.png",
+      "official_path": "addons/kaykit_halloween_bits/Assets/gltf/halloweenbits_texture.png",
+      "git_blob_sha1": "82313b530486a944133d4aaacfeaf099f07218c3",
+      "bytes": 15093
+    },
+    {
+      "file": "halloween/LICENSE.txt",
+      "official_path": "addons/kaykit_halloween_bits/Assets/LICENSE.txt",
+      "git_blob_sha1": "1c10d234eb090aa374f7fb3c23a7da71e74197e3",
+      "bytes": 877
+    }
+  ]
+}

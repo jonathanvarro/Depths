@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3]
+[ext_resource type="Script" path="res://art/dressing/mine-3d-v1/prop.gd" id="script"]
+[ext_resource type="Material" path="res://art/dressing/mine-3d-v1/palette.tres" id="material"]
+[ext_resource type="PackedScene" path="res://art/dressing/mine-3d-v1/shrine-base.glb" id="shrine-base"]
+[ext_resource type="PackedScene" path="res://art/dressing/mine-3d-v1/offerings-fresh.glb" id="offerings-fresh"]
+[ext_resource type="PackedScene" path="res://art/dressing/mine-3d-v1/offerings-spent.glb" id="offerings-spent"]
+[sub_resource type="CylinderMesh" id="flame"]
+top_radius=0.0
+bottom_radius=0.009
+height=0.032
+radial_segments=6
+rings=1
+
+[node name="MineProp" type="Node3D"]
+script=ExtResource("script")
+palette_material=ExtResource("material")
+
+[node name="Base" parent="." instance=ExtResource("shrine-base")]
+
+[node name="Fresh" parent="." instance=ExtResource("offerings-fresh")]
+
+[node name="Spent" parent="." instance=ExtResource("offerings-spent")]
+visible=false
+
+[node name="Flames" type="Node3D" parent="."]
+
+[node name="Flame0" type="MeshInstance3D" parent="Flames"]
+position=Vector3(-0.29,0.176,0.43)
+mesh=SubResource("flame")
+
+[node name="Flame1" type="MeshInstance3D" parent="Flames"]
+position=Vector3(-0.14,0.126,0.4)
+mesh=SubResource("flame")
+
+[node name="Flame2" type="MeshInstance3D" parent="Flames"]
+position=Vector3(0.29,0.20600000000000002,0.41)
+mesh=SubResource("flame")

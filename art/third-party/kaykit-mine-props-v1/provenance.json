@@ -1,0 +1,76 @@
+{
+  "repository": "KayKit-Game-Assets/KayKit-Halloween-Bits-1.0",
+  "commit": "6dc69bf6b2fa766a985754f35ec6a0324090e6c6",
+  "files": [
+    {
+      "file": "halloween/lantern_hanging.gltf",
+      "official_path": "addons/kaykit_halloween_bits/Assets/gltf/lantern_hanging.gltf",
+      "git_blob_sha1": "1d2c98e5d060740493d92000f7d4adabb5505971",
+      "bytes": 3080,
+      "sha256": "b78ac136d5e7edc169247f42d3ddc87478bb9c511c80b6830a666fcfc745b054"
+    },
+    {
+      "file": "halloween/lantern_hanging.bin",
+      "official_path": "addons/kaykit_halloween_bits/Assets/gltf/lantern_hanging.bin",
+      "git_blob_sha1": "07ceac5548aebbdf0cc2b6ece236da6e38eec45a",
+      "bytes": 19472,
+      "sha256": "70b22bad9a65b155b5f574ea523e63fa576b1946a4b77c6645e8023c82ac18db"
+    },
+    {
+      "file": "halloween/lantern_standing.gltf",
+      "official_path": "addons/kaykit_halloween_bits/Assets/gltf/lantern_standing.gltf",
+      "git_blob_sha1": "aef8c644fcf4d4542ea22345bd5a56d26ff2a9d8",
+      "bytes": 3084,
+      "sha256": "7fbaed7c4f33181d22c015e11aa9b3d8d04f77f1658b6a80ed2dc23746fb7fc5"
+    },
+    {
+      "file": "halloween/lantern_standing.bin",
+      "official_path": "addons/kaykit_halloween_bits/Assets/gltf/lantern_standing.bin",
+      "git_blob_sha1": "f4c8b5992935c7b632616477589fb02f53f89718",
+      "bytes": 12400,
+      "sha256": "aaaf6525e6a7d70c50f631fff91b8931e1571418e097ef0ecc99c8da9cc24387"
+    },
+    {
+      "file": "halloween/candle.gltf",
+      "official_path": "addons/kaykit_halloween_bits/Assets/gltf/candle.gltf",
+      "git_blob_sha1": "23c3a8b4d26519403b044591d2cd37bd5b01f00e",
+      "bytes": 3037,
+      "sha256": "838ca7e1c0b1caaa553aae98b36d994fc18a6234574744bafdddae64d428b80c"
+    },
+    {
+      "file": "halloween/candle.bin",
+      "official_path": "addons/kaykit_halloween_bits/Assets/gltf/candle.bin",
+      "git_blob_sha1": "42a8f71faf6ca63c0df6e3afaa5514afa5d7db5d",
+      "bytes": 3308,
+      "sha256": "967670a4871df019615e68e5ebc9f3ee6ef26bce3c37a07b175f7b34f44aa535"
+    },
+    {
+      "file": "halloween/candle_melted.gltf",
+      "official_path": "addons/kaykit_halloween_bits/Assets/gltf/candle_melted.gltf",
+      "git_blob_sha1": "072d1739f0ba40297afa15cbd49e2a43ad441a28",
+      "bytes": 3052,
+      "sha256": "4b97f5d138e3a80b2fa7e9f7ac6f1b4a7e3f58345cfa5581b5d4a52a0fb4a0bd"
+    },
+    {
+      "file": "halloween/candle_melted.bin",
+      "official_path": "addons/kaykit_halloween_bits/Assets/gltf/candle_melted.bin",
+      "git_blob_sha1": "81faa64eafa25b634b51992dc76133feef9be262",
+      "bytes": 3308,
+      "sha256": "1048d72c88a46a7020b5b0470e427f20369e84ba05240127ae2bd02709ae307b"
+    },
+    {
+      "file": "halloween/halloweenbits_texture.png",
+      "official_path": "addons/kaykit_halloween_bits/Assets/gltf/halloweenbits_texture.png",
+      "git_blob_sha1": "82313b530486a944133d4aaacfeaf099f07218c3",
+      "bytes": 15093,
+      "sha256": "1e671e9b176b290a35ce8f5f22c773b3f5e9c7a9cf0e1991de51e44dd3a23e7c"
+    },
+    {
+      "file": "halloween/LICENSE.txt",
+      "official_path": "addons/kaykit_halloween_bits/Assets/LICENSE.txt",
+      "git_blob_sha1": "1c10d234eb090aa374f7fb3c23a7da71e74197e3",
+      "bytes": 877,
+      "sha256": "a514c41d8d5f2a07c94c55acd29ba94f50b86837f972e37edb4cbdeb7ba0e0e0"
+    }
+  ]
+}

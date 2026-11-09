@@ -25,6 +25,82 @@ Format:
   - Two bot map fights stalled for 200 rounds (#245): bot or game, still to find out.
 - **Watch out:** another assistant's uncommitted #234 work (first-quest site, main.gd/minimap.gd and story_check) was in the working copy. It was left as it was, and its NOTES entry was not committed by this change.
 
+## 2026-11-08 – ChatGPT (3D cave formations, roots and fungi, #243)
+
+- Did. Built the owner's two batches in order. Fourteen metric scenes in
+  art/dressing/cave-growth-3d-v1 cover low/tall/broken/clustered stalagmites,
+  hanging mineral forms, shallow draped flowstone, rubble, wall/ceiling/floor
+  roots, mushrooms, shelf fungus and a low fungal mat. Caps have optional
+  mood emission, off by default, with a slow pulse and exact still mode.
+- Sources. Rubble reuses the existing verified CC0 KayKit source. Other forms
+  use authored geometry and the preceding mine exporter. Roots have curved,
+  irregular branching paths and transported cross-sections. Original painted
+  cave/root/fungal designs supply scale and material direction. Source and
+  tool/export lineage are recorded in the new catalog and CREDITS.md.
+- Checks. Godot 4.7.2 Mobile passes 311 checks for actual bounds, UVs, budgets,
+  mounts, headroom, no added lights/collision, glow/still behavior and phone
+  controls. Browser passes 21 checks. There are 107 native captures, including
+  both mounted room compositions. The extended mesh exporter reproduces the
+  preceding mine models/catalog unchanged with its default arguments.
+- Next. Review E:/GitHub/Depths/build/local-cave-growth-v1/inspector.html.
+  START_REVIEW.cmd opens the native controls. Editable local masters retain
+  separate pieces. Handoff and rebuild steps are in
+  docs/cave-formations-and-growth-3d.md. Claude can connect catalog mounts to
+  the existing sparse dressers and effects preference.
+- Watch out. These are decor scenes. Passage roots, hazards, gameplay light,
+  theme/floor assignment and persistence stay controller-owned. Current live
+  dressing still uses the earlier art. Delivery is on codex/cave-growth-3d.
+
+## 2026-11-08 – ChatGPT (3D containers, rest sites and workings, #242)
+
+- Did. Built the owner's three batches in order. Eight recipes and sixteen
+  GLBs are in art/props/expedition-3d-v1. Chest/strongbox have hinged lids,
+  closed/open/empty states and visible decorative contents. Searched pack,
+  dry alcove, cold camp and old workings have matched fresh/used states.
+  Two-metre rails have an intact and bent/broken sibling.
+- Sources. Three selected CC0 Dungeon Remastered originals match official
+  pinned blobs. The wooden chest keeps its source hinge. Bed geometry is
+  lowered and warped with authored rumpled blankets. Strongbox, pack, fire
+  remains, workings and rails use authored geometry and prior mesh helpers.
+  Original bytes and changes are recorded under
+  art/third-party/kaykit-containers-rest-v1.
+- Checks. Godot 4.7.2 Mobile passes 574 checks, including actual GLB dimensions,
+  UVs, budgets, state registration, interrupted lid motion and phone controls.
+  Source/artifact verification and 24 browser checks pass. There are 102 native
+  captures. The preceding mine builder was rerun after making its helpers
+  importable. Its existing model/catalog outputs reproduce unchanged.
+- Next. Review E:/GitHub/Depths/build/local-expedition-props-v1/inspector.html.
+  START_REVIEW.cmd opens native state/motion controls. Handoff and rebuild
+  steps are in docs/containers-rest-workings-3d.md. Claude can connect the new
+  scenes through current event/dressing paths and builders.
+- Watch out. Decorative contents represent an open container and do not
+  enumerate real loot. Rest rewards, state persistence, collision and movement
+  rules stay controller-owned. Live bindings still use the earlier art.
+  Work is isolated on codex/containers-rest-workings-3d.
+
+## 2026-11-07 – ChatGPT (3D supports, lanterns and miners' shrine, #241)
+
+- Did. Built reusable 3D scenes in art/dressing/mine-3d-v1. Worn and repaired
+  frames, standing and wall-hung lanterns, and a rough shrine with a carved
+  wooden miner and pick. The shrine's empty state removes the cloth and ore,
+  empties its cup and leaves candle stubs and ash. Lantern and candle glow
+  have a subtle animation, exact still mode and set_motion compatibility.
+- Sources. Ten selected KayKit CC0 lantern/candle originals match the pinned
+  official Git blobs. Source bytes and provenance are in
+  art/third-party/kaykit-mine-props-v1. Framing, stonework, carving and other
+  offerings use authored geometry. Local Blender masters retain separate pieces.
+- Checks. Native Godot 4.7.2 Mobile passes 172 checks covering actual GLB
+  bounds/UVs/triangle counts, open passage rays, state registration, glow
+  behavior and phone controls. The browser passes 30 checks. Review has
+  52 native captures, including a mounted corridor and phone screens.
+- Next. Review E:/GitHub/Depths/build/local-mine-props-v1/inspector.html.
+  START_REVIEW.cmd opens the interactive native review. Claude can bind
+  scenes through existing dressing and wall-mounted event paths. Handoff
+  and rebuild steps are in docs/mine-props-3d.md.
+- Watch out. The new scenes add no world light or collision. Supply and event
+  rules stay caller-owned. Current live bindings use the earlier library.
+  Delivery is isolated on codex/mine-props-3d to preserve shared-main edits.
+
 ## 2026-11-06 – Claude (levels and skills split, #233; panic from events, #236)
 
 - **Levels (#233):** automatic. `Progression.advance` gives +2 health and +2% to hit (`Companion.refresh_stats`). `choices()` returns nothing, and main says "X reaches level N" after a fight. The camp tent's Training only reports.

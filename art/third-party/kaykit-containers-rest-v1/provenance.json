@@ -1,0 +1,27 @@
+{
+  "repository": "KayKit-Game-Assets/KayKit-Dungeon-Remastered-1.0",
+  "commit": "b0ca9bd96a8072ab36a3a5464f00ed1e06a16d07",
+  "files": [
+    {
+      "file": "chest.glb",
+      "official_path": "addons/kaykit_dungeon_remastered/Assets/gltf/chest.glb",
+      "git_blob_sha1": "534c76a794d4b531a91619871845e92e3ca6e432",
+      "bytes": 81412,
+      "sha256": "f72fd2201cd42ad399928a0b7bcc34d5b0e6d0624aeaf824fef81852109955f8"
+    },
+    {
+      "file": "bed_floor.gltf.glb",
+      "official_path": "addons/kaykit_dungeon_remastered/Assets/gltf/bed_floor.gltf.glb",
+      "git_blob_sha1": "101a79b7702e3ee957fe751c39315a5ddae8917b",
+      "bytes": 25496,
+      "sha256": "85540803ba0ba9666470d54e3033dcdb36815be12bca77f2166b850a46e3adab"
+    },
+    {
+      "file": "LICENSE.txt",
+      "official_path": "addons/kaykit_dungeon_remastered/Assets/LICENSE.txt",
+      "git_blob_sha1": "686cf4ee3931b75d4ecfac6308f9d3287553748c",
+      "bytes": 829,
+      "sha256": "c5f17abf619731f57f6bbff450f6484214605c13aa96bb75bbcfc70930941ff7"
+    }
+  ]
+}

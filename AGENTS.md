@@ -50,6 +50,39 @@ Templates > Download and Install; already installed on the owner's PC).
 
 ## Project structure
 
+- `docs/cave-formations-and-growth-3d.md` – #243's fourteen 3D decor scenes
+  under `art/dressing/cave-growth-3d-v1`: eight mineral/rubble pieces, three
+  root mounts and three fungal forms. Metric floor/wall/ceiling envelopes
+  and conservative budgets are in catalog.json. Fungal cap glow is optional,
+  off by default, with a slow pulse and exact still mode through set_motion.
+  Local native/browser review and editable masters are in
+  `build/local-cave-growth-v1`. Rubble reuses the existing verified CC0 source.
+  Other forms use authored geometry and the previous mesh helpers, whose
+  default exports reproduce unchanged. Delivery branch is codex/cave-growth-3d.
+  Live dressing/theme hookup remains pending.
+
+- `docs/containers-rest-workings-3d.md` – #242's eight new 3D recipes under
+  `art/props/expedition-3d-v1`: hinged chest/strongbox, searched pack, two cold
+  rest sites, picked-clean workings and intact/bent rails. Containers preserve
+  closed/open/empty, with interrupted-motion handling and immediate still mode.
+  Local gallery and editable Blender pieces are in
+  `build/local-expedition-props-v1`. Three pinned CC0 originals are retained
+  under `art/third-party/kaykit-containers-rest-v1`. The builder imports the
+  preceding mine prop mesh helpers and extends their shared palette. Existing
+  mine exports reproduce unchanged. Delivery branch is
+  codex/containers-rest-workings-3d. Live event/dressing hookup remains pending.
+
+- `docs/mine-props-3d.md` – #241's worn 3D support frame and repaired sibling,
+  standing/hanging lanterns and the carved miners' shrine, with fresh/used
+  states and optional glow/still mode. New reusable scenes are under
+  `art/dressing/mine-3d-v1`. Local native/browser review and editable masters
+  are in `build/local-mine-props-v1`. Ten selected CC0 lantern/candle source
+  files, licences and pinned blob records are retained under
+  `art/third-party/kaykit-mine-props-v1`. Static geometry uses one shared
+  palette and existing cave grain. Hookup uses existing Dressing placement,
+  shrine wall anchors, closed/empty state and set_motion. Live scene bindings
+  remain a separate integration step. Delivery branch is codex/mine-props-3d.
+
 - `docs/blender-base-contract.md` – #210's true female/male editable Blender
   masters, separate65/49-bone fit/rest contracts, preserved source Actions/slots,
   source catalogue and neutral/animation/export guide. Models, textures, exports

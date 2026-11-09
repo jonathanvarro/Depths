@@ -1,0 +1,283 @@
+{
+  "issue": 243,
+  "assets": [
+    {
+      "id": "stalagmite-stub",
+      "triangles": 86,
+      "min": [
+        -0.13136674463748932,
+        -0.11552996188402176,
+        0.0
+      ],
+      "max": [
+        0.1378355473279953,
+        0.1196388527750969,
+        0.3418276906013489
+      ],
+      "sha256": "8c543592b617c92042fabb9bf7d36b7e242623dd03f733cad2e5e00c48fd1001",
+      "mount": "floor",
+      "optional_glow": false
+    },
+    {
+      "id": "stalagmite-tall",
+      "triangles": 86,
+      "min": [
+        -0.15199407935142517,
+        -0.1660814881324768,
+        0.0
+      ],
+      "max": [
+        0.15832382440567017,
+        0.1467723697423935,
+        0.9510217905044556
+      ],
+      "sha256": "28937dd75b604ad69b3821062f17fb9a4fd198ffd6243bbafc4ce29f6dcbce64",
+      "mount": "floor",
+      "optional_glow": false
+    },
+    {
+      "id": "stalagmite-broken",
+      "triangles": 68,
+      "min": [
+        -0.18214017152786255,
+        -0.18364253640174866,
+        0.0
+      ],
+      "max": [
+        0.17148900032043457,
+        0.19763143360614777,
+        0.4648747444152832
+      ],
+      "sha256": "8383f0dc1f3bc6694ea4b5c081b552995ec35b179bd94859af1568061cd1b249",
+      "mount": "floor",
+      "optional_glow": false
+    },
+    {
+      "id": "stalagmite-cluster",
+      "triangles": 258,
+      "min": [
+        -0.282904714345932,
+        -0.17128725349903107,
+        0.0
+      ],
+      "max": [
+        0.23710572719573975,
+        0.23075315356254578,
+        0.6808580756187439
+      ],
+      "sha256": "850fb36d8adc63c1c21e53ed5a7d9253163265bd7a9779c94d67348d28b24a12",
+      "mount": "floor",
+      "optional_glow": false
+    },
+    {
+      "id": "stalactite-single",
+      "triangles": 86,
+      "min": [
+        -0.12530167400836945,
+        -0.12090587615966797,
+        -0.5506071448326111
+      ],
+      "max": [
+        0.13652561604976654,
+        0.11992092430591583,
+        0.0
+      ],
+      "sha256": "f2822286aa24e5bcda36edb0d7b3923904386449998a5bc03e9322f03ebca794",
+      "mount": "ceiling",
+      "optional_glow": false
+    },
+    {
+      "id": "stalactite-cluster",
+      "triangles": 258,
+      "min": [
+        -0.286410391330719,
+        -0.23921632766723633,
+        -0.6503866314888
+      ],
+      "max": [
+        0.227385476231575,
+        0.16360853612422943,
+        0.0
+      ],
+      "sha256": "b8cfbd8afc8d6165f8763f1a9ddd12066f528290250c330d4d00d5b8d190013e",
+      "mount": "ceiling",
+      "optional_glow": false
+    },
+    {
+      "id": "flowstone-wall",
+      "triangles": 178,
+      "min": [
+        -0.33619675040245056,
+        -0.12799233198165894,
+        -0.5225176215171814
+      ],
+      "max": [
+        0.34155577421188354,
+        0.003000000026077032,
+        0.5450000166893005
+      ],
+      "sha256": "c39a2bea78d54c68b9f752361d15fb6bcef1940f129e7fccfcf8a7097d19fd07",
+      "mount": "wall",
+      "optional_glow": false
+    },
+    {
+      "id": "rubble-cluster",
+      "triangles": 390,
+      "min": [
+        -0.36000001430511475,
+        -0.2700234055519104,
+        0.0
+      ],
+      "max": [
+        0.36000001430511475,
+        0.2700234055519104,
+        0.6300545930862427
+      ],
+      "sha256": "0e868c60840815586fc57e0876c76d150356e116590623f9a1c268a427f6f3e8",
+      "mount": "floor",
+      "optional_glow": false
+    },
+    {
+      "id": "wall-roots",
+      "triangles": 864,
+      "min": [
+        -0.49371880292892456,
+        -0.1229567676782608,
+        -0.47117361426353455
+      ],
+      "max": [
+        0.4745520353317261,
+        0.05994420126080513,
+        0.5591984391212463
+      ],
+      "sha256": "02b93f35f6329032541a2c74b571f13620c485aa14b72ec6c90931a61f989a14",
+      "mount": "wall",
+      "optional_glow": false
+    },
+    {
+      "id": "hanging-roots",
+      "triangles": 864,
+      "min": [
+        -0.33875033259391785,
+        -0.10670411586761475,
+        -0.6216866374015808
+      ],
+      "max": [
+        0.5907809734344482,
+        0.03692571446299553,
+        0.018614355474710464
+      ],
+      "sha256": "034da129099595deaaf0d972c8808682c6caf80ec21466e7decd67fd0a7f71f0",
+      "mount": "ceiling",
+      "optional_glow": false
+    },
+    {
+      "id": "floor-roots",
+      "triangles": 864,
+      "min": [
+        -0.4668935537338257,
+        -0.4020557999610901,
+        -0.003176756203174591
+      ],
+      "max": [
+        0.44156965613365173,
+        0.3559659421443939,
+        0.09419787675142288
+      ],
+      "sha256": "51b67a013cda36b7625f5d72fd734eded29c350e9261956ffde72dbbf238f53b",
+      "mount": "floor",
+      "optional_glow": false
+    },
+    {
+      "id": "mushroom-clump",
+      "triangles": 366,
+      "min": [
+        -0.2203938215970993,
+        -0.2242366075515747,
+        -0.006819675676524639
+      ],
+      "max": [
+        0.2587090730667114,
+        0.14898213744163513,
+        0.310906320810318
+      ],
+      "sha256": "c464a88a96047421ce231f4ca5af9d1ddb6610209a5f6f5f80df65d5ec8b3eab",
+      "mount": "floor",
+      "optional_glow": true
+    },
+    {
+      "id": "shelf-fungus",
+      "triangles": 168,
+      "min": [
+        -0.36399999260902405,
+        -0.20590078830718994,
+        -0.1067124679684639
+      ],
+      "max": [
+        0.313400000333786,
+        -0.004999999888241291,
+        0.3219255208969116
+      ],
+      "sha256": "45c888b4150aabc1dba8755d06ed82c1924738ed260a960ad118e296b75bfa0d",
+      "mount": "wall",
+      "optional_glow": true
+    },
+    {
+      "id": "fungal-mat",
+      "triangles": 526,
+      "min": [
+        -0.23037828505039215,
+        -0.1995410919189453,
+        -0.012779643759131432
+      ],
+      "max": [
+        0.2334861159324646,
+        0.1994202733039856,
+        0.08099998533725739
+      ],
+      "sha256": "0f18e1fcb9cd05add75b1420a7f693f72f9f619db5cd4a2b172b30abd4a636fd",
+      "mount": "floor",
+      "optional_glow": true
+    }
+  ],
+  "palette": {
+    "wood": "59432e",
+    "wood_light": "73583b",
+    "wood_dark": "352a20",
+    "split": "241f19",
+    "iron": "383d3c",
+    "iron_edge": "555b57",
+    "rust": "754b35",
+    "stone": "606158",
+    "stone_light": "77786b",
+    "stone_dark": "42473f",
+    "wax": "b9a87a",
+    "wick": "24221b",
+    "cloth": "465b5c",
+    "cloth_dark": "2e4143",
+    "ore": "444b49",
+    "ash": "777366",
+    "copper": "866040",
+    "glass": "ca8f42",
+    "mineral": "a29d84",
+    "mineral_dark": "807c69",
+    "root": "62503a",
+    "root_dark": "3d3629",
+    "fungus_cap": "828c69",
+    "fungus_edge": "b0aa86",
+    "fungus_under": "5f6852",
+    "mould": "626e4c"
+  },
+  "sources": [
+    {
+      "file": "art/third-party/kaykit-dungeon-remastered/models/rubble_half.glb",
+      "sha256": "7514ccbda643c13d5a782579e4f01ee6402eec5519590d3f048d396cdaedec24",
+      "licence": "art/third-party/kaykit-dungeon-remastered/LICENSE.txt"
+    }
+  ],
+  "cell_metres": 2,
+  "wall_metres": 2.4,
+  "wall_facing": "+Z",
+  "builder_sha256": "3a30077a29aae06830d50db4bd8546be9994260f11f12a17fb8cdfa0a4bebd9c",
+  "helpers_sha256": "8ce154cc6449436050b94936fcd40f93591e40a1c43efe4ffcb932c4ed58793b"
+}
