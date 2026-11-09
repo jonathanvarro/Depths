@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3]
+[ext_resource type="Script" path="res://art/props/fortress-waterworks-3d-v1/prop.gd" id="script"]
+[ext_resource type="Material" path="res://art/props/fortress-waterworks-3d-v1/palette.tres" id="palette"]
+[ext_resource type="PackedScene" path="res://art/props/fortress-waterworks-3d-v1/palisade-intact.glb" id="palisade-intact"]
+[ext_resource type="PackedScene" path="res://art/props/fortress-waterworks-3d-v1/palisade-broken.glb" id="palisade-broken"]
+
+[node name="Structure" type="Node3D"]
+script=ExtResource("script")
+palette_material=ExtResource("palette")
+metadata/asset_id="palisade"
+metadata/mount="floor"
+
+[node name="Fresh" parent="." instance=ExtResource("palisade-intact")]
+
+[node name="Spent" parent="." instance=ExtResource("palisade-broken")]
+visible=false

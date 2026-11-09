@@ -50,6 +50,18 @@ Templates > Download and Install; already installed on the owner's PC).
 
 ## Project structure
 
+- `docs/fortress-and-waterworks-3d.md` – #246's ten reusable 3D scenes in
+  `art/props/fortress-waterworks-3d-v1`: intact/broken palisade, watch post,
+  overhead walkway, empty hanging cage, bracket, throne/platform, sluice,
+  chain-hoisted flow gate, hollow pipe and gutter. Machinery has registered
+  closed/open/empty states, interrupted-motion handling, immediate restored
+  states and still mode. Fixed envelopes keep raised gates below the ceiling;
+  the cage belongs in a side alcove. Local editable masters/native/browser
+  review are in `build/local-fortress-waterworks-v1`. CC0 chair source and
+  original licence are retained; other geometry uses the previous mine helpers.
+  Delivery is on codex/fortress-waterworks-3d. Live placement and all fortress,
+  flood, quest, travel and save authority remain separate.
+
 - `docs/cave-formations-and-growth-3d.md` – #243's fourteen 3D decor scenes
   under `art/dressing/cave-growth-3d-v1`: eight mineral/rubble pieces, three
   root mounts and three fungal forms. Metric floor/wall/ceiling envelopes
