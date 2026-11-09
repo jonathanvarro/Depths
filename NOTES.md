@@ -13,6 +13,17 @@ Format:
 
 ---
 
+## 2026-11-08 – Claude (tactical view prototype: fights seen from above, #248)
+
+- **Owner:** keep first-person exploration, and try fights on a top-down board.
+- **Built:** `scripts/tactical_view.gd`, a Node3D on Main.
+  - `enter(main, state)` is called after `_begin_field_fight` when `Settings.tactical_view` is on (the default; a Display toggle). It tweens a second camera from the party's eyes to 8 m above and 3.4 m behind, turned with the party. It hides ceilings (the `ceiling` group from LevelBuilder, now tagged) and high dressing, thins the fog, raises ambient light and adds a soft light overhead.
+  - On the board: a party ring with a facing arrow; red tiles a foe will strike next (`foe_in_range`, `marked_cell`); orange outlines for its reach; gold rings under foes the party can hit (`can_hit`).
+  - `exit()` (from `_end_field_fight`) tweens back and restores everything. `_lift_field_foes` stands foes on their tiles while the view is up.
+- **Not covered:** dark-stage fights (event ambushes); moving is still the relative pad; no tap-to-move. Next steps wait on the owner's decision (#248).
+- **Check:** `tools/tactical_check.gd` (lift, ceilings, marks, return, the setting off; desk and phone screenshots).
+- **Watch out:** only this change's main.gd hunks were committed. The other assistant's uncommitted #234 edits in main.gd and other files stay in the working copy.
+
 ## 2026-11-08 – Claude (ChatGPT's 3D props and decor merged and hooked up: #239, #241, #242, #243)
 
 - **Merged** `codex/cave-growth-3d` (which carries #241 and #242) and `codex/bone-decor-library`. Only the NOTES and AGENTS conflicts needed fixing; both sides were kept. Not merged: `codex/prayer-art-stool` (#216 prayer icons and a stool reference) and the padded-jacket branches (#220, wardrobe).

@@ -51,6 +51,9 @@ const QuestLog := preload("res://scripts/quest_log.gd")
 const Story := preload("res://scripts/story.gd")
 const Packages := preload("res://scripts/packages.gd")
 const BattleStage := preload("res://scripts/battle_stage.gd")
+const TacticalView := preload("res://scripts/tactical_view.gd")
+## Prototype (owner, 2026-11-08): a fight on the map seen from above.
+var _tactical: Node3D
 const SpoilsScreen := preload("res://scripts/spoils_screen.gd")
 const VisionFilter := preload("res://scripts/vision_filter.gd")
 ## The commander waiting outside after the escape (#122, first slice).
@@ -525,6 +528,8 @@ func _ready() -> void:
 	add_child(_party)
 	_party.setup(CELL_SIZE)
 	_ambience.attach(_party, _party.camera)
+	_tactical = TacticalView.new()
+	add_child(_tactical)
 	_stage = BattleStage.new()  # fights take place on a dark stage (owner, 2026-10-20)
 	_party.camera.add_child(_stage)
 	_stage.fit(_party.camera)
@@ -912,6 +917,8 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 	if on_map:
 		_face_toward(cell)  # face the one that reached you
 		_begin_field_fight(state, cell)
+		if Settings.get_value("tactical_view"):
+			_tactical.enter(self, state)  # the camera lifts above the room
 	else:
 		_party.face_open(cell if cell != _party.cell else Vector2i(-1, -1))  # never fight a wall (#111)
 		_place_foes(state.foes)
@@ -1457,6 +1464,7 @@ func _face_toward(cell: Vector2i) -> void:
 
 
 func _end_field_fight() -> void:
+	_tactical.exit()
 	_draw_danger(true)
 	_party.step_check = _field_step_check
 	_field_step_check = Callable()
@@ -1536,6 +1544,9 @@ func _lift_field_foes() -> void:
 		return
 	for foe in _combat._state.living_foes():
 		if not is_instance_valid(foe.node):
+			continue
+		if _tactical.active:  # seen from above: everyone stands on their tile
+			foe.node.position = Vector3(foe.cell.x * CELL_SIZE, 0.0, foe.cell.y * CELL_SIZE)
 			continue
 		var away: Vector2i = foe.cell - _party.cell
 		var setback := Vector3(signi(away.x), 0, signi(away.y)) * FIELD_FOE_SETBACK if absi(away.x) + absi(away.y) == 1 else Vector3.ZERO

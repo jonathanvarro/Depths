@@ -39,7 +39,7 @@ func build(map, theme: EnvironmentTheme, size: float, height: float) -> void:
 			var content: int = map.content_at(cell)
 			if content != DungeonMap.Content.STAIRS_DOWN:
 				_add_mesh(tile_mesh, at)
-			_add_mesh(ceiling_mesh, at + Vector3(0, wall_height, 0))
+			_add_mesh(ceiling_mesh, at + Vector3(0, wall_height, 0)).add_to_group("ceiling")  # hidden from above (tactical view)
 			if content == DungeonMap.Content.STAIRS_DOWN:
 				_add_feature(theme.descent_scene, _make_descent(), cell)
 			elif content == DungeonMap.Content.STAIRS_UP:
@@ -141,11 +141,12 @@ func _cell_center(cell: Vector2i) -> Vector3:
 	return Vector3(cell.x * cell_size, 0.0, cell.y * cell_size)
 
 
-func _add_mesh(mesh: Mesh, at: Vector3) -> void:
+func _add_mesh(mesh: Mesh, at: Vector3) -> MeshInstance3D:
 	var instance := MeshInstance3D.new()
 	instance.mesh = mesh
 	instance.position = at
 	add_child(instance)
+	return instance
 
 
 func _box(size: Vector3, material: Material) -> BoxMesh:

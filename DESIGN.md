@@ -257,6 +257,12 @@ Numbers are first guesses for the bot and the owner's playtests to tune.
   - **Calming herbs:** bought from the merchant or found below; everyone's strain drops by 20.
   - **The Bone charm** trinket: strain builds 25% slower.
 
+## Fights seen from above — prototype 2026-11-08 (#248)
+
+The owner's view: 3D suits exploration, but first-person combat isn't engaging. A board seen from above could open up strategy (highlighted tiles, attacks from tiles away), at the cost of exploration if that view were used everywhere.
+
+The prototype keeps exploration in first person. A fight on the map lifts the camera above the room to show the party, the foes, the tiles they threaten and who can be struck, then drops back when the fight ends. The rules are unchanged. It can be switched off in Settings for comparison. Whether to keep it, and what comes next, is undecided.
+
 ## Magic — decided 2026-11-02 (#170, #53)
 
 **Owner decisions:**
