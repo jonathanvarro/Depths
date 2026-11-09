@@ -50,6 +50,17 @@ Templates > Download and Install; already installed on the owner's PC).
 
 ## Project structure
 
+- `docs/cave-formations-and-growth-3d.md` – #243's fourteen 3D decor scenes
+  under `art/dressing/cave-growth-3d-v1`: eight mineral/rubble pieces, three
+  root mounts and three fungal forms. Metric floor/wall/ceiling envelopes
+  and conservative budgets are in catalog.json. Fungal cap glow is optional,
+  off by default, with a slow pulse and exact still mode through set_motion.
+  Local native/browser review and editable masters are in
+  `build/local-cave-growth-v1`. Rubble reuses the existing verified CC0 source.
+  Other forms use authored geometry and the previous mesh helpers, whose
+  default exports reproduce unchanged. Delivery branch is codex/cave-growth-3d.
+  Live dressing/theme hookup remains pending.
+
 - `docs/containers-rest-workings-3d.md` – #242's eight new 3D recipes under
   `art/props/expedition-3d-v1`: hinged chest/strongbox, searched pack, two cold
   rest sites, picked-clean workings and intact/bent rails. Containers preserve

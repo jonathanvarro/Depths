@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="Script" path="res://art/dressing/cave-growth-3d-v1/appearance.gd" id="script"]
+[ext_resource type="Material" path="res://art/dressing/cave-growth-3d-v1/palette.tres" id="palette"]
+[ext_resource type="PackedScene" path="res://art/dressing/cave-growth-3d-v1/hanging-roots.glb" id="model"]
+[node name="CaveGrowth" type="Node3D"]
+script=ExtResource("script")
+palette_material=ExtResource("palette")
+metadata/asset_id="hanging-roots"
+metadata/mount="ceiling"
+[node name="Model" parent="." instance=ExtResource("model")]

@@ -13,6 +13,32 @@ Format:
 
 ---
 
+## 2026-11-08 – ChatGPT (3D cave formations, roots and fungi, #243)
+
+- Did. Built the owner's two batches in order. Fourteen metric scenes in
+  art/dressing/cave-growth-3d-v1 cover low/tall/broken/clustered stalagmites,
+  hanging mineral forms, shallow draped flowstone, rubble, wall/ceiling/floor
+  roots, mushrooms, shelf fungus and a low fungal mat. Caps have optional
+  mood emission, off by default, with a slow pulse and exact still mode.
+- Sources. Rubble reuses the existing verified CC0 KayKit source. Other forms
+  use authored geometry and the preceding mine exporter. Roots have curved,
+  irregular branching paths and transported cross-sections. Original painted
+  cave/root/fungal designs supply scale and material direction. Source and
+  tool/export lineage are recorded in the new catalog and CREDITS.md.
+- Checks. Godot 4.7.2 Mobile passes 311 checks for actual bounds, UVs, budgets,
+  mounts, headroom, no added lights/collision, glow/still behavior and phone
+  controls. Browser passes 21 checks. There are 107 native captures, including
+  both mounted room compositions. The extended mesh exporter reproduces the
+  preceding mine models/catalog unchanged with its default arguments.
+- Next. Review E:/GitHub/Depths/build/local-cave-growth-v1/inspector.html.
+  START_REVIEW.cmd opens the native controls. Editable local masters retain
+  separate pieces. Handoff and rebuild steps are in
+  docs/cave-formations-and-growth-3d.md. Claude can connect catalog mounts to
+  the existing sparse dressers and effects preference.
+- Watch out. These are decor scenes. Passage roots, hazards, gameplay light,
+  theme/floor assignment and persistence stay controller-owned. Current live
+  dressing still uses the earlier art. Delivery is on codex/cave-growth-3d.
+
 ## 2026-11-08 – ChatGPT (3D containers, rest sites and workings, #242)
 
 - Did. Built the owner's three batches in order. Eight recipes and sixteen

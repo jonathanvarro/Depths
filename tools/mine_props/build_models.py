@@ -238,7 +238,7 @@ def offerings(spent):
         for i in range(3):
             lump('Candle ash',(-.26+i*.11,-.43,.006),(.04,.03,.006),'ash',i)
 
-def export(name, build):
+def export(name, build, material_groups=None):
     bpy.ops.object.select_all(action='SELECT')
     bpy.ops.object.delete(use_global=False)
     build()
@@ -246,12 +246,16 @@ def export(name, build):
     objects=[o for o in bpy.context.scene.objects if o.type=='MESH']
     # Editable masters retain individual pieces and their material names.
     bpy.ops.wm.save_as_mainfile(filepath=str(MASTERS/(name+'.blend')))
-    grouped={'Body':([],[]), 'Glass':([],[])}
+    if material_groups is None:
+        material_groups={'glass':'Glass'}
+    grouped={'Body':([],[])}
+    for group in material_groups.values():
+        grouped[group]=([],[])
     for obj in objects:
         vertices=[obj.matrix_world@v.co for v in obj.data.vertices]
         for polygon in obj.data.polygons:
             colour=obj.data.materials[polygon.material_index].name
-            group='Glass' if colour=='glass' else 'Body'
+            group=material_groups.get(colour,'Body')
             destination,faces=grouped[group]
             first=len(destination)
             destination.extend(vertices[i] for i in polygon.vertices)
