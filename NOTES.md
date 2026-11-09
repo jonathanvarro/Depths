@@ -13,6 +13,33 @@ Format:
 
 ---
 
+## 2026-11-08 – ChatGPT (3D containers, rest sites and workings, #242)
+
+- Did. Built the owner's three batches in order. Eight recipes and sixteen
+  GLBs are in art/props/expedition-3d-v1. Chest/strongbox have hinged lids,
+  closed/open/empty states and visible decorative contents. Searched pack,
+  dry alcove, cold camp and old workings have matched fresh/used states.
+  Two-metre rails have an intact and bent/broken sibling.
+- Sources. Three selected CC0 Dungeon Remastered originals match official
+  pinned blobs. The wooden chest keeps its source hinge. Bed geometry is
+  lowered and warped with authored rumpled blankets. Strongbox, pack, fire
+  remains, workings and rails use authored geometry and prior mesh helpers.
+  Original bytes and changes are recorded under
+  art/third-party/kaykit-containers-rest-v1.
+- Checks. Godot 4.7.2 Mobile passes 574 checks, including actual GLB dimensions,
+  UVs, budgets, state registration, interrupted lid motion and phone controls.
+  Source/artifact verification and 24 browser checks pass. There are 102 native
+  captures. The preceding mine builder was rerun after making its helpers
+  importable. Its existing model/catalog outputs reproduce unchanged.
+- Next. Review E:/GitHub/Depths/build/local-expedition-props-v1/inspector.html.
+  START_REVIEW.cmd opens native state/motion controls. Handoff and rebuild
+  steps are in docs/containers-rest-workings-3d.md. Claude can connect the new
+  scenes through current event/dressing paths and builders.
+- Watch out. Decorative contents represent an open container and do not
+  enumerate real loot. Rest rewards, state persistence, collision and movement
+  rules stay controller-owned. Live bindings still use the earlier art.
+  Work is isolated on codex/containers-rest-workings-3d.
+
 ## 2026-11-07 – ChatGPT (3D supports, lanterns and miners' shrine, #241)
 
 - Did. Built reusable 3D scenes in art/dressing/mine-3d-v1. Worn and repaired

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Depths · Containers and mine remains</title>
+<style>
+:root { color-scheme:dark; font:17px/1.5 system-ui,sans-serif; background:#141c1e; color:#e3d8bc }
+* { box-sizing:border-box }
+body { max-width:1440px; margin:auto; padding:24px }
+h1,h2,h3 { font-family:Georgia,serif; font-weight:normal }
+h1 { font-size:36px; margin-bottom:8px }
+h2 { font-size:28px; margin:32px 0 14px }
+h3 { font-size:23px; margin:0 0 12px }
+nav { display:flex; flex-wrap:wrap; gap:18px; margin:24px 0 }
+label { display:flex; align-items:center; gap:10px }
+select { min-height:44px; padding:8px; font:inherit; background:#283331; color:inherit }
+.grid { display:grid; grid-template-columns:1fr 1fr; gap:20px }
+article { background:#243030; border:1px solid #586254; padding:16px; min-width:0 }
+img { display:block; width:100%; height:auto; background:#202a2b }
+article p { margin-bottom:0 }
+p { max-width:1100px }
+a { color:#d8bc85 }
+.note { padding:16px; background:#243030; border-left:3px solid #bca574 }
+@media(max-width:680px) { body { padding:14px } .grid { grid-template-columns:1fr } }
+</style>
+<h1>Containers, rest sites and old workings</h1>
+<p>Three matching batches for the upper mine, using worn wood, canvas, iron and the existing cave grain.</p>
+<nav>
+<label>Lighting <select id="light"><option value="cave">Cave</option><option value="neutral">Neutral</option></select></label>
+<label>Angle <select id="angle"><option value="0">Three-quarter</option><option value="1">Front</option><option value="2">High view</option></select></label>
+<label>State <select id="state"><option value="closed">Closed / fresh</option><option value="open">Open containers</option><option value="empty">Empty / used</option></select></label>
+</nav>
+<h2>Chests and strongboxes</h2>
+<div class="grid">
+<article data-name="chest" data-kind="container"><h3>Wooden chest</h3><img src="captures/chest-cave-0-closed.png" alt="Worn iron-bound wooden chest"><p>Arched lid on its original hinge. Closed, open and empty states.</p></article>
+<article data-name="strongbox" data-kind="container"><h3>Iron strongbox</h3><img src="captures/strongbox-cave-0-closed.png" alt="Small battered iron strongbox"><p>Flat dented lid, riveted straps and a broken lock in the empty state.</p></article>
+</div>
+<h2>Packs and rest spots</h2>
+<div class="grid">
+<article data-name="abandoned-pack"><h3>Abandoned pack</h3><img src="captures/abandoned-pack-cave-0-closed.png" alt="Patched canvas pack with worn straps"><p>Searched state folds the flap back, exposes the mouth and leaves a loose strap.</p></article>
+<article data-name="dry-alcove"><h3>Dry alcove</h3><img src="captures/dry-alcove-cave-0-closed.png" alt="An old bedroll on dry ground"><p>Rolled blanket, irregular canvas and a rumpled used state.</p></article>
+<article data-name="cold-camp"><h3>Cold campsite</h3><img src="captures/cold-camp-cave-0-closed.png" alt="Bedroll beside a cold fire ring"><p>Cold ash, charred sticks, a cup and a small bag. Used state spreads the ashes.</p></article>
+</div>
+<h2>Old workings and rails</h2>
+<div class="grid">
+<article data-name="old-workings"><h3>Old workings</h3><img src="captures/old-workings-cave-0-closed.png" alt="Worked rock, pit props, ore trough and an old pick"><p>Picked-clean state leaves the trough and rock with the ore removed.</p></article>
+<article data-name="rails" data-kind="static"><h3>Mine rails</h3><img src="captures/rails-cave-0-closed.png" alt="Rusty iron rails on split sleepers"><p>Two-metre section with worn rail heads and square spikes.</p></article>
+<article data-name="rails-broken" data-kind="static"><h3>Broken rails</h3><img src="captures/rails-broken-cave-0-closed.png" alt="Bent rail and broken sleeper"><p>A raised, bent end and a split sleeper. The two rail scenes share their grid registration.</p></article>
+</div>
+<p class="note">The native review opens with START_REVIEW.cmd in this folder. Its Animate lid switch shows the actual hinge transition. This gallery uses native still captures.</p>
+<p><a href="START_HERE.md">Handoff and rebuild</a> · <a href="validation.json">Native checks</a> · <a href="artifact-validation.json">Source verification</a></p>
+<script>
+function update() {
+    const light=document.querySelector('#light').value;
+    const angle=document.querySelector('#angle').value;
+    const state=document.querySelector('#state').value;
+    for (const card of document.querySelectorAll('[data-name]')) {
+        let displayState=state;
+        if (card.dataset.kind==='static' || (state==='open' && card.dataset.kind!=='container')) displayState='closed';
+        card.querySelector('img').src='captures/'+card.dataset.name+'-'+light+'-'+angle+'-'+displayState+'.png';
+    }
+}
+for (const control of document.querySelectorAll('select')) control.addEventListener('change',update);
+</script>
+</html>

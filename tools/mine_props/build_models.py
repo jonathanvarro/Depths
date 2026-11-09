@@ -17,13 +17,7 @@ from mathutils import Vector
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / 'art/third-party/kaykit-mine-props-v1'
 ART = ROOT / 'art/dressing/mine-3d-v1'
-parser = argparse.ArgumentParser()
-parser.add_argument('--workspace', type=Path, required=True)
-args = parser.parse_args(sys.argv[sys.argv.index('--') + 1:])
-MASTERS = args.workspace / 'build/local-mine-props-v1/masters'
-ART.mkdir(parents=True, exist_ok=True)
-MASTERS.mkdir(parents=True, exist_ok=True)
-(MASTERS/'.gdignore').write_text('', encoding='utf-8')
+MASTERS = None
 
 COLOURS = {
     'wood': '59432e', 'wood_light': '73583b', 'wood_dark': '352a20',
@@ -293,16 +287,24 @@ def export(name, build):
     return {'id':name,'triangles':triangles,'min':low,'max':high,
             'sha256':hashlib.sha256(path.read_bytes()).hexdigest()}
 
-assets=[]
-for name,build in [('support',lambda:support(False)),('support-damaged',lambda:support(True)),
-                   ('lantern-standing',lambda:lantern(False)),('lantern-hanging',lambda:lantern(True)),
-                   ('shrine-base',shrine_base),('offerings-fresh',lambda:offerings(False)),
-                   ('offerings-spent',lambda:offerings(True))]:
-    assets.append(export(name,build))
-for entry in json.loads((SOURCE/'provenance.json').read_text(encoding='utf-8'))['files']:
-    assert hashlib.sha256((SOURCE/entry['file']).read_bytes()).hexdigest()==entry['sha256']
-(ART/'catalog.json').write_text(json.dumps({'issue':241,'assets':assets,
-    'palette':COLOURS,'candle_flames':[[x,z+height,-y] for x,y,z,height in CANDLES],
-    'support_clearance':{'width':1.60,'height':1.85},
-    'wall_facing':'+Z','cell_metres':2.0,'wall_metres':2.4},indent=2)+'\n',encoding='utf-8')
-print('MINE_PROPS',[(a['id'],a['triangles']) for a in assets])
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--workspace', type=Path, required=True)
+    args = parser.parse_args(sys.argv[sys.argv.index('--') + 1:])
+    MASTERS = args.workspace / 'build/local-mine-props-v1/masters'
+    ART.mkdir(parents=True, exist_ok=True)
+    MASTERS.mkdir(parents=True, exist_ok=True)
+    (MASTERS/'.gdignore').write_text('', encoding='utf-8')
+    assets=[]
+    for name,build in [('support',lambda:support(False)),('support-damaged',lambda:support(True)),
+                       ('lantern-standing',lambda:lantern(False)),('lantern-hanging',lambda:lantern(True)),
+                       ('shrine-base',shrine_base),('offerings-fresh',lambda:offerings(False)),
+                       ('offerings-spent',lambda:offerings(True))]:
+        assets.append(export(name,build))
+    for entry in json.loads((SOURCE/'provenance.json').read_text(encoding='utf-8'))['files']:
+        assert hashlib.sha256((SOURCE/entry['file']).read_bytes()).hexdigest()==entry['sha256']
+    (ART/'catalog.json').write_text(json.dumps({'issue':241,'assets':assets,
+        'palette':COLOURS,'candle_flames':[[x,z+height,-y] for x,y,z,height in CANDLES],
+        'support_clearance':{'width':1.60,'height':1.85},
+        'wall_facing':'+Z','cell_metres':2.0,'wall_metres':2.4},indent=2)+'\n',encoding='utf-8')
+    print('MINE_PROPS',[(a['id'],a['triangles']) for a in assets])

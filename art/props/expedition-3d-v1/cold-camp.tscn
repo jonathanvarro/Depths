@@ -1,0 +1,14 @@
+[gd_scene load_steps=5 format=3]
+[ext_resource type="Script" path="res://art/props/expedition-3d-v1/prop.gd" id="script"]
+[ext_resource type="Material" path="res://art/props/expedition-3d-v1/palette.tres" id="palette"]
+[ext_resource type="PackedScene" path="res://art/props/expedition-3d-v1/camp-fresh.glb" id="camp-fresh"]
+[ext_resource type="PackedScene" path="res://art/props/expedition-3d-v1/camp-spent.glb" id="camp-spent"]
+
+[node name="ExpeditionProp" type="Node3D"]
+script=ExtResource("script")
+palette_material=ExtResource("palette")
+
+[node name="Fresh" parent="." instance=ExtResource("camp-fresh")]
+
+[node name="Spent" parent="." instance=ExtResource("camp-spent")]
+visible=false

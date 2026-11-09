@@ -50,6 +50,17 @@ Templates > Download and Install; already installed on the owner's PC).
 
 ## Project structure
 
+- `docs/containers-rest-workings-3d.md` – #242's eight new 3D recipes under
+  `art/props/expedition-3d-v1`: hinged chest/strongbox, searched pack, two cold
+  rest sites, picked-clean workings and intact/bent rails. Containers preserve
+  closed/open/empty, with interrupted-motion handling and immediate still mode.
+  Local gallery and editable Blender pieces are in
+  `build/local-expedition-props-v1`. Three pinned CC0 originals are retained
+  under `art/third-party/kaykit-containers-rest-v1`. The builder imports the
+  preceding mine prop mesh helpers and extends their shared palette. Existing
+  mine exports reproduce unchanged. Delivery branch is
+  codex/containers-rest-workings-3d. Live event/dressing hookup remains pending.
+
 - `docs/mine-props-3d.md` – #241's worn 3D support frame and repaired sibling,
   standing/hanging lanterns and the carved miners' shrine, with fresh/used
   states and optional glow/still mode. New reusable scenes are under
