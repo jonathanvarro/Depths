@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Depths · Bones and remains</title>
+<style>
+:root { color-scheme:dark; font:17px/1.5 system-ui,sans-serif; background:#141c1e; color:#e3d8bc }
+* { box-sizing:border-box }
+body { max-width:1440px; margin:auto; padding:24px }
+h1,h2 { font-family:Georgia,serif; font-weight:normal }
+h1 { font-size:36px; margin-bottom:8px }
+h2 { font-size:24px; margin:0 0 12px }
+nav { display:flex; flex-wrap:wrap; gap:20px; margin:24px 0 }
+label { display:flex; align-items:center; gap:12px }
+select { min-height:44px; padding:8px; font:inherit; background:#283331; color:inherit }
+.grid { display:grid; grid-template-columns:1fr 1fr; gap:20px }
+article { background:#243030; border:1px solid #586254; padding:16px; min-width:0 }
+article img { display:block; width:100%; height:auto; aspect-ratio:2.8; object-fit:contain; background:#222a2c }
+p { max-width:1000px }
+a { color:#d8bc85 }
+.note { padding:16px; background:#243030; border-left:3px solid #bca574 }
+@media(max-width:680px) { body { padding:14px } .grid { grid-template-columns:1fr } }
+</style>
+<h1>Bones and remains</h1>
+<p>CC0 KayKit assets supplied through the shared Drive library, with muted bone colours and the cave props’ world-space grain.</p>
+<nav>
+<label>Lighting <select id="light"><option value="cave">Cave light</option><option value="neutral">Neutral light</option></select></label>
+<label>Angle <select id="angle"><option value="0">Three-quarter</option><option value="1">Front</option><option value="2">Side</option><option value="3">High view</option></select></label>
+</nav>
+<div class="grid">@@CARDS@@</div>
+<p class="note">The skeletons now use smaller, narrower skulls with their jaws fitted together at the neck. Head height is about 18% of standing height, matching the current character models. Their heavy clothing and broad limbs remain visible for style review.</p>
+<p>Run START_REVIEW.cmd in this folder for the live Godot comparison. Original source models, licences and source hashes are recorded with the reusable assets.</p>
+<p><a href="captures/overview.png">Native overview</a> · <a href="validation.json">Renderer checks</a> · <a href="artifact-validation.json">Source and artifact checks</a> · <a href="START_HERE.md">Library handoff</a></p>
+<script>
+function update() {
+    const light = document.querySelector('#light').value;
+    const angle = document.querySelector('#angle').value;
+    for (const card of document.querySelectorAll('[data-name]')) {
+        card.querySelector('img').src = 'captures/' + card.dataset.name + '-' + light + '-' + angle + '.png';
+    }
+}
+for (const control of document.querySelectorAll('select')) control.addEventListener('change', update);
+</script>
+</html>

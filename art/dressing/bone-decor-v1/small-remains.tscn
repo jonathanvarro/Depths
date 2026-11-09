@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3]
+[ext_resource type="Script" path="res://art/dressing/bone-decor-v1/appearance.gd" id="script"]
+[ext_resource type="Material" path="res://art/dressing/bone-decor-v1/material-halloween.tres" id="material"]
+[ext_resource type="PackedScene" path="res://art/dressing/bone-decor-v1/skull.glb" id="m0"]
+[ext_resource type="PackedScene" path="res://art/dressing/bone-decor-v1/ribcage.glb" id="m1"]
+[ext_resource type="PackedScene" path="res://art/dressing/bone-decor-v1/bone_A.glb" id="m2"]
+[ext_resource type="PackedScene" path="res://art/dressing/bone-decor-v1/bone_B.glb" id="m3"]
+
+[node name="BoneDecor" type="Node3D"]
+script = ExtResource("script")
+appearance = ExtResource("material")
+
+[node name="Piece0" parent="." instance=ExtResource("m0")]
+position = Vector3(0, 0, -0.37)
+rotation_degrees = Vector3(0, 12, 0)
+
+[node name="Piece1" parent="." instance=ExtResource("m1")]
+position = Vector3(0, 0, -0.04)
+rotation_degrees = Vector3(0, 0, 0)
+
+[node name="Piece2" parent="." instance=ExtResource("m2")]
+position = Vector3(-0.13, 0, 0.29)
+rotation_degrees = Vector3(0, 78, 0)
+
+[node name="Piece3" parent="." instance=ExtResource("m2")]
+position = Vector3(0.12, 0, 0.33)
+rotation_degrees = Vector3(0, 102, 0)
+
+[node name="Piece4" parent="." instance=ExtResource("m3")]
+position = Vector3(-0.26, 0, -0.07)
+rotation_degrees = Vector3(0, 40, 0)

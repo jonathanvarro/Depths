@@ -1,0 +1,99 @@
+{
+  "assets": [
+    {
+      "name": "bone_A",
+      "pose": null,
+      "family": "halloween",
+      "triangles": 204,
+      "dimensions": [
+        0.3400000035762787,
+        0.09650303423404694,
+        0.13277055323123932
+      ],
+      "source_scale": 0.4809128237117596,
+      "sha256": "ed52b07fa5321c556c538b42706955d94e66991e38c7c285b4ce1b3a479b17ba"
+    },
+    {
+      "name": "bone_B",
+      "pose": null,
+      "family": "halloween",
+      "triangles": 220,
+      "dimensions": [
+        0.25,
+        0.11820565909147263,
+        0.07201923429965973
+      ],
+      "source_scale": 0.41233714956770406,
+      "sha256": "87ce047770459df82be1938867c3fc5c10b01efe84a9fe107bc1eeb133cf6e92"
+    },
+    {
+      "name": "skull",
+      "pose": null,
+      "family": "halloween",
+      "triangles": 344,
+      "dimensions": [
+        0.20000000298023224,
+        0.19773271679878235,
+        0.19578784704208374
+      ],
+      "source_scale": 0.21796727057711962,
+      "sha256": "991b5f8cb2e8dd1866da9524ddc79830e5ddefb346630e810efaaca810da2dd5"
+    },
+    {
+      "name": "ribcage",
+      "pose": null,
+      "family": "halloween",
+      "triangles": 1240,
+      "dimensions": [
+        0.3400000333786011,
+        0.3002856373786926,
+        0.34507519006729126
+      ],
+      "source_scale": 0.4020798701390473,
+      "sha256": "76bf492ff2e4e00ab98d09656ad161173be3f6557347731eac6e6c64199c4904"
+    },
+    {
+      "name": "skeleton-fallen",
+      "pose": "Death_A_Pose",
+      "family": "skeletons",
+      "triangles": 5156,
+      "dimensions": [
+        1.7438311576843262,
+        1.667458176612854,
+        0.7613229155540466
+      ],
+      "source_scale": 1.0111135137823173,
+      "sha256": "80583b111759b3fedb785bc4c29573825452953f9d36fcf3bf62ba47428dc560"
+    },
+    {
+      "name": "skeleton-seated",
+      "pose": "Sit_Floor_Pose",
+      "family": "skeletons",
+      "triangles": 5156,
+      "dimensions": [
+        1.3224921226501465,
+        1.1201883554458618,
+        1.2759019136428833
+      ],
+      "source_scale": 1.0111135137823173,
+      "sha256": "b29080d33d2e0d01e0a09da00f13d680b0d1847e6529db92249c9f6fadcfab8a"
+    }
+  ],
+  "source_preserved": true,
+  "head_fit": {
+    "rest_scale_xyz": [
+      0.25999999046325684,
+      0.2800000011920929,
+      0.30000001192092896
+    ],
+    "rest_lift": 0.11301387844241284,
+    "head_height_fraction": 0.17883701230798435,
+    "head_height_metres": 0.29508107030817415
+  },
+  "skeleton_changes": [
+    "Sampled named source poses as static scenery",
+    "Removed separate eye mesh",
+    "Reduced skull and jaw together in rest space to match current character proportions",
+    "Combined static pieces and uniformly scaled the rest height to 1.65m"
+  ]
+}

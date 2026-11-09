@@ -120,6 +120,40 @@ Format:
 - **Balance (bot, 10 campaigns per hero):** queen wins 30/30 (was 20/30), wipes 38 (was 70). Easier: permanent skills pile up and nerves fray less. Tune the deed counts and shock sizes after the owner plays it.
 - **Checks:** progression, expedition_loop, spoils, roles and refuge checks were updated for the new rules.
 
+## 2026-11-06 – ChatGPT (skeleton head proportions, #239)
+
+- Did. Reduced and narrowed the complete skeletons' skulls and jaws together,
+  with a shared rest-space correction before sampling the two scenery poses.
+  Compared current human masters locally. Resulting head height is 17.9% of
+  the normalized 1.65 m standing height. Neck joins are adjusted above the collar.
+- Checks. Rebuilt both static models and inspected native front, side, high
+  and three-quarter views for neck/jaw alignment and floor contact. Native
+  Mobile, source/artifact and browser checks pass. Updated local preview at
+  E:/GitHub/Depths/build/local-bone-decor-v1/inspector.html.
+- Next. Owner review and placement selection. Heavy source clothing and broad
+  limbs still give these complete skeletons a stylized silhouette.
+- Watch out. New metric bounds are in the catalog and docs/bone-decor-library.md.
+  Delivery continues on codex/bone-decor-library. Original source rig, Actions,
+  licences and hashes remain intact.
+
+## 2026-11-06 – ChatGPT (CC0 bone scenery, #239)
+
+- Did. Verified the owner's two KayKit Drive uploads against the official
+  release blobs. Retained 13 selected originals, both CC0 licences and exact
+  provenance under art/third-party/kaykit-bones-v1. Added six static models,
+  two muted shared atlases and four reusable scenes in art/dressing/bone-decor-v1.
+- Checks. Godot 4.7.2 Mobile passed 139 checks, source/artifact verification
+  passed 100, and the browser gallery passed 17 including phone sizes.
+  The local light/angle review has 33 native captures at
+  E:/GitHub/Depths/build/local-bone-decor-v1/inspector.html.
+- Next. Review the decor and choose placements. The complete fallen/seated
+  skeletons retain KayKit's oversized heads and clothing as style studies.
+- Watch out. Scene materials use the existing cave grain. Full skeleton poses
+  are baked static scenery. Their source Actions are preserved and catalogued.
+  Shared main has ongoing gameplay edits, so this delivery is isolated on
+  codex/bone-decor-library. Handoff and rebuild steps are in
+  docs/bone-decor-library.md.
+
 ## 2026-11-06 – Claude (playtest 2: first quest, floor 2 gate, merchant, guide, Pack hint; #232, #234, #235, #237)
 
 - **Pack hint (#232):** the tutorial card moves left of the Pack's item card (or above it) so its buttons stay visible. Main `_layout_hint` follows `_pack._details`. The opening playthrough checks it.

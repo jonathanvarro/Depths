@@ -83,6 +83,18 @@ Templates > Download and Install; already installed on the owner's PC).
   shrine wall anchors, closed/empty state and set_motion. Live scene bindings
   remain a separate integration step. Delivery branch is codex/mine-props-3d.
 
+- `docs/bone-decor-library.md` – #239's CC0 KayKit loose bones, skull,
+  ribcage and two static skeleton studies from the shared Drive Assets folder.
+  Four reusable recipes are in `art/dressing/bone-decor-v1`; the selected
+  originals, licences and official-blob verification are in
+  `art/third-party/kaykit-bones-v1`. Muted shared256 atlases reuse the
+  cave props' world-space grain. Native light/angle comparison:
+  `build/local-bone-decor-v1/inspector.html`. The complete skeleton studies
+  have owner-requested smaller skulls/jaws matching the current character
+  head proportions (17.9% of standing height). Source clothing and broad limbs
+  retain the pack's style for review. Room placement
+  and story/encounter assignments remain caller-owned.
+
 - `docs/blender-base-contract.md` – #210's true female/male editable Blender
   masters, separate65/49-bone fit/rest contracts, preserved source Actions/slots,
   source catalogue and neutral/animation/export guide. Models, textures, exports
