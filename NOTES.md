@@ -13,6 +13,35 @@ Format:
 
 ---
 
+## 2026-11-09 – ChatGPT (stairs/transitions, blockers and regional skins, #250/#225)
+
+- Did. Completed the selected batches in order. Ten reusable scenes in
+  art/features/transitions-3d-v1 cover stone/timber stairs up/down, a recessed
+  cave ledge, root climb, daylight mouth/vista, intact/torn silk and dense
+  roots. Two pinned official CC0 stair originals and their licence are kept;
+  the other forms use authored geometry and the unchanged mine helpers.
+- Materials. art/materials/regional-props-v1 supplies fungal, scorched and
+  waterlogged shared atlases/world grain for the existing KayKit props.
+  Original meshes, UVs, scales, floor-1 atlas and adopted pilot are preserved.
+  One material per selected region; no added glow, particles or world light.
+- Checks. Godot 4.7.2 Mobile passes 323 checks with 105 actual native captures,
+  including both light modes, eye-height/overhead views, phone shapes, real
+  LevelBuilder floor omission and both corridor rotations. Actual regional
+  vertex/index/UV signatures match. Source/export/runtime hashes are checked.
+  Browser review passes 16 checks for every view/light combination, filters,
+  touch targets and overflow. Native error log is clean.
+- Next. Review E:/GitHub/Depths/build/local-transitions-regional-v1/inspector.html
+  or START_REVIEW.cmd there. Editable per-piece Blender masters stay local.
+  Handoff/rebuild: docs/transitions-blockers-and-regional-materials.md.
+  Delivery branch codex/transitions-blockers-regional-3d; live hookup and
+  owner visual acceptance remain pending.
+- Watch out. Features use floor centre and -Z, unlike the +Z wall-prop art.
+  Descents require the existing omitted floor tile; do not cover the recess.
+  Root cap joins the ceiling group for overhead hiding/restoration. Regional
+  atlases fit original KayKit gradient UVs, not authored palette-point UVs.
+  No theme, live placement, travel, arrival, collision, RNG, passage or saved
+  state changed. Physical iPhone performance remains untested.
+
 ## 2026-11-08 – Claude (tactical view prototype: fights seen from above, #248)
 
 - **Owner:** keep first-person exploration, and try fights on a top-down board.

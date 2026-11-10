@@ -1,0 +1,13 @@
+[gd_scene load_steps=5 format=3]
+[ext_resource type="Script" path="res://art/features/transitions-3d-v1/appearance.gd" id="script"]
+[ext_resource type="Material" path="res://art/features/transitions-3d-v1/palette.tres" id="palette"]
+[ext_resource type="PackedScene" path="res://art/features/transitions-3d-v1/fortress-down.glb" id="model"]
+[ext_resource type="Material" path="res://art/textures/fortress-v1/floor.tres" id="ground"]
+[node name="PassageFeature" type="Node3D"]
+script=ExtResource("script")
+palette_material=ExtResource("palette")
+ground_material=ExtResource("ground")
+metadata/asset_id="fortress-down"
+metadata/direction="down"
+metadata/forward="-Z"
+[node name="Model" parent="." instance=ExtResource("model")]

@@ -1,0 +1,24 @@
+{
+  "repository": "KayKit-Game-Assets/KayKit-Dungeon-Remastered-1.0",
+  "commit": "b0ca9bd96a8072ab36a3a5464f00ed1e06a16d07",
+  "files": [
+    {
+      "file": "stairs-stone.glb",
+      "official_path": "addons/kaykit_dungeon_remastered/Assets/gltf/stairs.gltf.glb",
+      "git_blob_sha1": "e780d3d62d3fb62055ded1f0c7aaf0e917f60e32",
+      "bytes": 43368
+    },
+    {
+      "file": "stairs-wood.glb",
+      "official_path": "addons/kaykit_dungeon_remastered/Assets/gltf/stairs_wood.gltf.glb",
+      "git_blob_sha1": "1852cd6ec6994479d0a3f25090943c51ab35297c",
+      "bytes": 34632
+    },
+    {
+      "file": "LICENSE.txt",
+      "official_path": "LICENSE.txt",
+      "git_blob_sha1": "686cf4ee3931b75d4ecfac6308f9d3287553748c",
+      "bytes": 829
+    }
+  ]
+}
