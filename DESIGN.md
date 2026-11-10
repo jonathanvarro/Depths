@@ -261,7 +261,7 @@ Numbers are first guesses for the bot and the owner's playtests to tune.
 
 The owner's view: 3D suits exploration, but first-person combat isn't engaging. A board seen from above could open up strategy (highlighted tiles, attacks from tiles away), at the cost of exploration if that view were used everywhere.
 
-The prototype keeps exploration in first person. A fight on the map lifts the camera above the room to show the party, the foes, the tiles they threaten and who can be struck, then drops back when the fight ends. The rules are unchanged. It can be switched off in Settings for comparison. Whether to keep it, and what comes next, is undecided.
+The prototype keeps exploration in first person. A fight on the map lifts the camera above the room to show the party, the foes, the tiles they threaten and who can be struck, then drops back when the fight ends. The rules are unchanged. It can be switched off in Settings for comparison. **Kept (owner, 2026-11-08: "Keep it, go further").** Round 2 adds tapping the board: a neighbouring tile to step, a foe to strike or shoot. Event ambushes are now fought on the board too. Lairs, the gate and the queen keep the dark stage until their foes are balanced for the board.
 
 ## Magic — decided 2026-11-02 (#170, #53)
 

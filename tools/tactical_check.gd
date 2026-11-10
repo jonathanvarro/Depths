@@ -71,6 +71,44 @@ func _initialize() -> void:
 	check("tiles show what the foes threaten", not tactical._marks.is_empty(), tactical._marks.size())
 	await _snap("board")
 
+	# Tapping the board (#248): a step, then a strike.
+	var state = main._combat._state
+	var g0 := 0
+	while not main._combat.awaiting_field_action and g0 < 50:
+		await create_timer(0.1).timeout
+		g0 += 1
+	var free: Vector2i = Vector2i(-1, -1)
+	for side in [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]:
+		var next: Vector2i = state.party_cell + side
+		if main._map.is_passable(next) and not state.living_foes().any(func(f): return f.cell == next):
+			free = next
+			break
+	var screen_point: Vector2 = tactical._camera.unproject_position(Vector3(free.x * main.CELL_SIZE, 0.0, free.y * main.CELL_SIZE))
+	check("a tap on screen finds its tile", tactical.cell_at(screen_point) == free, "%s vs %s" % [tactical.cell_at(screen_point), free])
+	check("the tiles you can step to are outlined", tactical._marks.size() > 0)
+	check("tapping a free tile beside you steps there", tactical.act_on(free))
+	await create_timer(0.8).timeout
+	check("...and the party moved, using its action", main._party.cell == free, main._party.cell)
+	var g1 := 0
+	while not main._combat.awaiting_field_action and main._in_combat and g1 < 60:
+		await create_timer(0.1).timeout
+		g1 += 1
+	if main._in_combat:
+		var foe = state.living_foes()[0]
+		var beside: Vector2i = Vector2i(-1, -1)
+		for side in [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]:
+			if main._map.is_passable(state.party_cell + side) and not state.living_foes().any(func(f): return f != foe and f.cell == state.party_cell + side):
+				beside = state.party_cell + side
+				break
+		foe.cell = beside
+		var health_before: int = foe.health
+		for h in main._party_state.members:
+			h.aim_base = 2.0
+			h.refresh_stats()
+		check("tapping a foe beside you turns to it and strikes", tactical.act_on(beside) and state.foe_ahead() == foe)
+		await create_timer(1.0).timeout
+		check("...the blow lands", foe.health < health_before or not foe.is_alive(), "%d -> %d" % [health_before, foe.health])
+
 	# The fight ends: back into the party's eyes.
 	for foe in main._combat._state.foes:
 		foe.health = 0
@@ -87,12 +125,33 @@ func _initialize() -> void:
 	check("...and the board's marks are gone", tactical._marks.is_empty())
 	await _snap("after")
 
+	# An ambush from an event takes the board too, facing open ground.
+	main._clear_groups()
+	main._engaged = null
+	main._fight_kind = ""
+	main._start_combat(main._party.cell, [load("res://data/enemies/rat.tres")] as Array[EnemyType])
+	await create_timer(1.0).timeout
+	var ahead: Vector2i = main._party.cell + main._party.DIRECTIONS[main._party.facing]
+	check("an event's ambush is fought on the board", main._in_combat and main._combat._state.field and tactical.active)
+	check("...never facing a wall", main._map.is_passable(ahead))
+	for foe in main._combat._state.foes:
+		foe.health = 0
+	main._combat._state._check_end()
+	var g2 := 0
+	while main._in_combat and g2 < 100:
+		if main._combat.awaiting_field_action:
+			main._combat._action_chosen.emit({"kind": "wait"})
+		await create_timer(0.1).timeout
+		g2 += 1
+	await create_timer(1.2).timeout
+	check("...and it ends like any other", not main._in_combat and not tactical.active)
+
 	# Switched off: fights stay in first person.
 	Settings.set_value("tactical_view", false)
 	main._spawn_room_groups()
 	if await _fight(main):
 		await create_timer(0.5).timeout
-		check("switched off in Settings, a fight stays in first person", not tactical.active and root.get_viewport().get_camera_3d() == main._party.camera)
+		check("switched off in Settings, a fight stays in first person", not tactical.active and root.get_viewport().get_camera_3d() == main._party.camera, "active %s, camera %s" % [tactical.active, root.get_viewport().get_camera_3d()])
 	Settings.set_value("tactical_view", true)
 	print("fails=", fails)
 	quit()

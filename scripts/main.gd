@@ -914,8 +914,17 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 			state.plan(foe)
 	# On the map (#171 phase 2): the fight stays where it began.
 	var on_map: bool = _engaged != null and _map_fights_active()
+	# Seen from above (#248), other fights take the board too: an ambush from
+	# an event, a quest site's guards. Lairs, the gate and the queen keep their
+	# own stage for now (their foes plan differently on the board).
+	var ambush_on_board: bool = not on_map and _map_fights_active() and Settings.get_value("tactical_view") and _fight_kind == ""
+	if ambush_on_board:
+		on_map = true
 	if on_map:
-		_face_toward(cell)  # face the one that reached you
+		if ambush_on_board:
+			_party.face_open(cell if cell != _party.cell else Vector2i(-1, -1))  # never fight a wall (#111)
+		else:
+			_face_toward(cell)  # face the one that reached you
 		_begin_field_fight(state, cell)
 		if Settings.get_value("tactical_view"):
 			_tactical.enter(self, state)  # the camera lifts above the room

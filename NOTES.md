@@ -13,6 +13,20 @@ Format:
 
 ---
 
+## 2026-11-09 – Claude (tactical view, round 2: tap the board; ambushes on it, #248)
+
+- **Owner, after playing the prototype (2026-11-08):** "Keep it, go further".
+- **Tap the board** (`TacticalView._unhandled_input`, `cell_at`, `act_on`), only while the party's action is awaited:
+  - a free tile beside the party steps there (`Party._try_step`, facing kept);
+  - a foe beside you turns to it (free) and Strikes;
+  - a foe along an open line is Shot if anyone can;
+  - any other foe is selected, so its intent shows.
+
+  Pale outlines mark the tiles the party can step to.
+- **Event ambushes** (`_fight_kind == ""`, no map group) are fought on the board too when the view is on, facing open ground. Lairs, the gate and the queen keep the dark stage: the Broodmother plans differently on the board, which needs its own balancing.
+- **Checks:** tactical_check covers tile picking, a tapped step, a tapped strike and an ambush on the board. framing_check and readability_check run with the view off, since they test the first-person fight, and switch it back on when they finish (settings are saved to test_settings.cfg).
+- **Next:** see #248 (enemy tokens or 3D models; lairs, gate and queen on the board; more tile tactics).
+
 ## 2026-11-08 – Claude (tactical view prototype: fights seen from above, #248)
 
 - **Owner:** keep first-person exploration, and try fights on a top-down board.

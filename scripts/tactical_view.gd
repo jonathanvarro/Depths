@@ -7,6 +7,11 @@ extends Node3D
 ##
 ## Switched on and off in Settings ("tactical_view"). Main calls enter()
 ## when a fight on the map begins and exit() when it ends.
+##
+## On the board (owner: "keep it, go further", 2026-11-08): tap a tile next
+## to the party to step there (facing stays, so you can back away), tap a
+## foe beside you to turn and strike it, or one along an open line to shoot
+## it if anyone can. Pale outlines show where the party can step.
 
 const TWEEN_TIME := 0.8
 const HEIGHT := 8.0  # metres above the party
@@ -16,6 +21,7 @@ const THREAT := Color(0.9, 0.16, 0.1, 0.42)  # a tile a foe will strike next
 const REACH := Color(0.95, 0.55, 0.15, 0.75)  # a tile a foe can reach (outlined)
 const TARGET := Color(0.95, 0.85, 0.35, 0.9)  # a foe the party can hit now
 const PARTY := Color(0.95, 0.8, 0.35)
+const STEP := Color(0.85, 0.85, 0.8, 0.45)  # a tile the party can step to
 
 var active := false
 var _main
@@ -113,6 +119,63 @@ func _process(delta: float) -> void:
 		_update_marks()
 
 
+## A tap or click on the board (#248).
+func _unhandled_input(event: InputEvent) -> void:
+	if not active or _main == null or not _main._combat.awaiting_field_action:
+		return
+	var at := Vector2(-1, -1)
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		at = event.position
+	elif event is InputEventScreenTouch and event.pressed:
+		at = event.position
+	if at.x < 0.0:
+		return
+	var cell := cell_at(at)
+	if cell != Vector2i(-1, -1) and act_on(cell):
+		get_viewport().set_input_as_handled()
+
+
+## The map cell under a point on screen, or (-1, -1).
+func cell_at(point: Vector2) -> Vector2i:
+	var origin := _camera.project_ray_origin(point)
+	var direction := _camera.project_ray_normal(point)
+	if absf(direction.y) < 0.001:
+		return Vector2i(-1, -1)
+	var t := -origin.y / direction.y
+	if t <= 0.0:
+		return Vector2i(-1, -1)
+	var hit := origin + direction * t
+	var size: float = _main.CELL_SIZE
+	return Vector2i(roundi(hit.x / size), roundi(hit.z / size))
+
+
+## Does what a tap on `cell` means. True if it did something.
+func act_on(cell: Vector2i) -> bool:
+	var combat = _main._combat
+	var party_cell: Vector2i = _state.party_cell
+	var foe = null
+	for f in _state.living_foes():
+		if f.cell == cell:
+			foe = f
+	var d := cell - party_cell
+	var adjacent := absi(d.x) + absi(d.y) == 1
+	if foe:
+		combat._select_target(foe)
+		if adjacent:
+			_main._face_toward(cell)  # turning is free
+			if _state.foe_ahead() == foe:
+				combat._action_chosen.emit({"kind": "strike"})
+				return true
+		if not _state.shooters(foe).is_empty():
+			combat._action_chosen.emit({"kind": "shoot"})
+			return true
+		return true  # chosen: its intent shows on the panel
+	if adjacent and _main._map.is_passable(cell):
+		_main._party._try_step(d)  # the step is the party's action
+		return true
+	return false
+
+
 ## Above and a little behind the party, looking down at it, turned with it.
 func _board_transform() -> Transform3D:
 	var party: Node3D = _main._party
@@ -179,7 +242,13 @@ func _update_marks() -> void:
 			if _state.can_hit(hero, foe):
 				targets.append(foe.cell)
 				break
-	var key := str(threat.keys()) + str(reach.keys()) + str(targets) + str(party_cell)
+	var steps := []
+	if _main._combat.awaiting_field_action:
+		for side in [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]:
+			var next: Vector2i = party_cell + side
+			if _main._map.is_passable(next) and not _state.living_foes().any(func(f): return f.cell == next):
+				steps.append(next)
+	var key := str(threat.keys()) + str(reach.keys()) + str(targets) + str(party_cell) + str(steps)
 	if key == _last_key:
 		return
 	_last_key = key
@@ -188,6 +257,9 @@ func _update_marks() -> void:
 	for cell in reach:
 		if not threat.has(cell):
 			_outline(cell, REACH, size * 0.86, 0.05)
+	for cell in steps:
+		if not reach.has(cell) and not threat.has(cell):
+			_outline(cell, STEP, size * 0.7, 0.04)
 	for cell in threat:
 		_tile(cell, THREAT, size * 0.92, 0.07)
 	for cell in targets:

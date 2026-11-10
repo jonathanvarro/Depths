@@ -66,6 +66,7 @@ func _bounds(main, label: String) -> void:
 
 
 func _initialize() -> void:
+	load("res://scripts/settings.gd").set_value("tactical_view", false)  # about the first-person fight (#248 keeps it as an option)
 	var args := OS.get_cmdline_user_args()
 	tag = args[0] if args.size() > 0 else "desk"
 	dir = args[1] if args.size() > 1 else ""
@@ -75,6 +76,7 @@ func _initialize() -> void:
 		await _elites(size)
 		await _states(size)
 	Settings.set_value("text_size", "Normal", self)
+	load("res://scripts/settings.gd").set_value("tactical_view", true)  # back to the default for later checks
 	print("fails=", fails)
 	quit()
 
