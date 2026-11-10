@@ -89,6 +89,11 @@ const NEVER := 1 << 30
 const OPENING_STEP_LIMIT := 110
 ## At or below this in the spider fight, the game makes her throw the torch.
 const FORCE_THROW_HEALTH := 4
+## The opening spider (owner, 2026-11-09): a few exchanges before the torch
+## is suggested - after this many swings, or once Mara is down to this much
+## health, whichever comes first. FORCE_THROW_HEALTH still insists below.
+const SPIDER_EXCHANGES := 3
+const SPIDER_HINT_HEALTH := 9
 ## Tutorial steps worked out from her state (see _refresh_tutorial_hint).
 const TUTORIAL_STEPS := ["", "search", "equip", "drop", "light", "relight", "draught"]
 const DRAUGHT := preload("res://data/items/restorative_draught.tres")
@@ -255,6 +260,7 @@ const KEY_BINDINGS := {
 	"toggle_map": [KEY_M, KEY_TAB],
 	"toggle_pack": [KEY_I, KEY_B],
 	"wait": [KEY_SPACE, KEY_PERIOD],  # a beat passes (#171)
+	"quick_torch": [KEY_T],  # light a torch from the pack (owner, 2026-11-09)
 	"debug_hurt": [KEY_H],  # only while the F3 overlay is open
 	"debug_heal": [KEY_J],
 	"debug_injure": [KEY_K],
@@ -581,6 +587,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		_party_state.members[0].add_injury(DEBUG_INJURIES.pick_random())
 	elif event.is_action_pressed("wait"):
 		_wait()
+	elif event.is_action_pressed("quick_torch"):
+		_quick_torch()
 	elif event.is_action_pressed("toggle_map"):
 		_set_full_map(not _full_map.visible)
 	elif _full_map.visible and event.is_action_pressed("ui_cancel"):
@@ -712,6 +720,7 @@ func _build_level() -> void:
 		_level.add_child(Galleries.water_surface(cell, CELL_SIZE, Settings.get_value("flashes")))
 	if _depth == OPENING_DEPTH and _in_opening:
 		_add_opening_dressing()
+		Dressing.dress_opening(_level, _map, _site_seed, CELL_SIZE, WALL_HEIGHT)  # the new 3D pieces (2026-11-09)
 	elif _depth == OUTSKIRTS_DEPTH and not use_debug_layout:
 		_add_outskirts_dressing()
 	elif _depth==FORTRESS_DEPTH:
@@ -996,6 +1005,11 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 		CombatState.Result.VICTORY:
 			_party.locked = false
 			_map_fight_over(true)
+			# Won while standing on something not yet seen to (the fallen
+			# party's bodies, owner playtest 2026-11-09): the fight took the
+			# step that would have opened it, so open it now.
+			if _map.events.has(_party.cell) and not _map.triggered.has(_party.cell):
+				_on_party_entered_cell.call_deferred(_party.cell)
 			if spoils.is_empty():
 				_show_message("The way is clear.")
 			match _fight_kind:
@@ -1643,6 +1657,26 @@ func _draw_danger(clear := false) -> void:
 
 
 ## Wait: a beat passes where the party stands.
+## T: light a torch from the pack, as the Pack's Light does (2026-11-09).
+## Not mid-fight (the torch is thrown there), at camp or over a screen.
+func _quick_torch() -> void:
+	if _in_combat or _party.locked or _party.paused or _ending or _camp.visible or _pack.visible:
+		return
+	var supplies = _party_state.supplies
+	if supplies.torch_lit() and supplies.torch_left > supplies.TORCH_BURN_TIME * 0.25:
+		_show_message("Torch: yours still burns well.")  # a quick key shouldn't waste one
+		return
+	var reason: String = _party_state.cannot_use_reason(TORCH)
+	if reason != "":
+		_show_message("Torch: " + reason.to_lower() + ".")
+		return
+	var message: String = _party_state.use_item(TORCH)
+	Sounds.play(self, Sounds.for_item(TORCH), -6.0, 0.0)
+	_show_message(message if message != "" else "You light a torch.")
+	_update_lantern()
+	_refresh_tutorial_hint()
+
+
 func _wait() -> void:
 	if _in_combat or _in_opening or _party.locked or _party.paused or _ending:
 		return
@@ -3517,6 +3551,8 @@ func _on_combat_enemy_acted(_foe, _outcome: Dictionary) -> void:
 	if not _party_state.supplies.torch_lit():
 		return
 	var hero: Companion = _party_state.members[0]
+	if hero.health <= SPIDER_HINT_HEALTH:
+		_suggest_throw()
 	if hero.health <= FORCE_THROW_HEALTH and _combat.only_action == "":
 		_combat.only_action = "throw"
 		_say("forced_throw", true)
@@ -3534,7 +3570,13 @@ func _on_combat_hero_acted(_hero: Companion, action: Dictionary, outcome: Dictio
 	_spider_swings += 1
 	if outcome.get("glanced", false):
 		_say("spider_glance", true)
-	if _spider_swings >= 1 and not _hints_done.has("throw") and _hint != "throw" and _party_state.supplies.torch_lit():
+	if _spider_swings >= SPIDER_EXCHANGES:
+		_suggest_throw()
+
+
+## The torch hint, once: after a few exchanges or once she's hurt (#69).
+func _suggest_throw() -> void:
+	if not _hints_done.has("throw") and _hint not in ["throw", "force_throw"] and _party_state.supplies.torch_lit():
 		_show_hint("Blades glance off. Throw your torch!", "throw")
 
 

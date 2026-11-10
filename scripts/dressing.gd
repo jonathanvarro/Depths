@@ -155,6 +155,62 @@ static func dress(level: Node3D, map, depth: int, seed: int, cell_size: float, w
 	return root.get_child_count()
 
 
+## The opening escape's caves (owner, 2026-11-09): a natural, lost-feeling
+## cave below the workings - formations, roots, rubble, a few old bones and
+## the odd broken frame where the miners once reached; no lanterns or rails,
+## nobody comes this way. Sparse, seeded, and clear of the bodies, the fire,
+## the chest and the way out (anything solid or with contents).
+## [id, mount, one in how many eligible cells]
+const OPENING := [
+	["stalactite-single", "ceiling", 6], ["stalactite-cluster", "ceiling", 14], ["hanging-roots", "ceiling", 16],
+	["wall-roots", "wall", 9], ["flowstone", "wall", 12],
+	["stalagmite-stub", "edge", 10], ["stalagmite-broken", "edge", 16], ["rubble-cluster", "edge", 12],
+	["scattered-bones", "edge", 14], ["floor-roots", "edge", 18],
+]
+
+
+static func dress_opening(level: Node3D, map, seed: int, cell_size: float, wall_height: float) -> int:
+	var rng := RandomNumberGenerator.new()
+	rng.seed = hash([seed, "opening dressing"])
+	var root := Node3D.new()
+	root.name = "Dressing"
+	level.add_child(root)
+	for y in map.height:
+		for x in map.width:
+			var cell := Vector2i(x, y)
+			if not _clear(map, cell) or map.solid.has(cell) or SIDES.any(func(s): return map.solid.has(cell + s)):
+				continue
+			var centre := Vector3(x * cell_size, 0.0, y * cell_size)
+			var sides := _wall_sides(map, cell)
+			var corridor := _corridor_axis(map, cell)
+			if corridor != Vector2i.ZERO and rng.randi() % 9 == 0:
+				_put(root, "mine-support-damaged", centre, _yaw_across(corridor))  # where the miners gave up
+				continue
+			for entry in OPENING:
+				if rng.randi() % int(entry[2]) != 0:
+					continue
+				var id: String = entry[0]
+				match entry[1]:
+					"ceiling":
+						_put(root, id, centre + Vector3(rng.randf_range(-0.5, 0.5), wall_height - 0.01, rng.randf_range(-0.5, 0.5)), rng.randf() * TAU)
+					"wall":
+						if sides.is_empty():
+							continue
+						var side: Vector2i = sides[rng.randi() % sides.size()]
+						var at := centre + Vector3(side.x, 0, side.y) * (cell_size / 2.0 - 0.01)
+						at.y = WALL_HEIGHTS.get(id, 1.2)
+						_put(root, id, at + _along_wall(side) * rng.randf_range(-0.4, 0.4), _yaw_facing(-side))
+					"edge":
+						if id == "stalagmite-stub" and corridor != Vector2i.ZERO and rng.randi() % 2 == 0:
+							continue  # keep the narrow ways readable
+						var toward: Vector2i = sides[rng.randi() % sides.size()] if not sides.is_empty() else Vector2i([-1, 1][rng.randi() % 2], [-1, 1][rng.randi() % 2])
+						_put(root, id, centre + Vector3(toward.x, 0, toward.y) * cell_size * 0.36, rng.randf() * TAU)
+				break  # one piece a cell at most
+			if sides.size() >= 2 and rng.randi() % 5 == 0:
+				_corner_web(root, centre, sides, cell_size, wall_height)
+	return root.get_child_count()
+
+
 ## The ids allowed at `depth`.
 static func _pool(table: Dictionary, depth: int) -> Array:
 	var ids := []

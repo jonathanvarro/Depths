@@ -13,6 +13,16 @@ Format:
 
 ---
 
+## 2026-11-09 – Claude (opening caves dressed in 3D; spider exchanges; T for a torch; first quest's bodies fixed)
+
+- **The first quest couldn't be finished by walking in (owner playtest).** Stepping onto the fallen party wakes the rats guarding the room, and the fight took that step, so the search never opened while you stood on the bodies. Main now opens an untriggered event under the party when a fight is won.
+  - New `tools/quest_walk_check.gd` walks it for real; story_check opens the event directly, so it missed this.
+  - The bot reaches floor 2 every run, but it opens events its own way, so it can't catch this kind of bug.
+- **The opening spider:** the torch is suggested after `SPIDER_EXCHANGES` (3) swings, or once Mara is at `SPIDER_HINT_HEALTH` (9) or less, whichever comes first (`_suggest_throw`). It used to be after the first swing. The forced throw at `FORCE_THROW_HEALTH` (4) stays. The opening playthrough checks the timing.
+- **Opening caves:** `Dressing.dress_opening` adds a sparse, natural 3D cave from main's opening branch: stalactites, hanging and wall roots, flowstone, stalagmites, rubble, scattered bones, floor roots, the odd damaged support and corner webs. It stays clear of solid cells (the bodies, the fire) and their neighbours, and of contents.
+- **T, a quick torch** (`quick_torch`, main `_quick_torch`): lights one from the pack outside fights. It won't replace a torch with more than a quarter left. torch_check presses it.
+- **Watch out:** the other assistant's uncommitted work (AGENTS.md, a docs file, `tools/testing/`, and #234 files) was left alone; only this change's main.gd hunks were committed.
+
 ## 2026-11-09 – Claude (light rules the overhead board, #248)
 
 - **Owner, 2026-11-09:** light should still matter at the strategic level. Darkness shows the tiles beside the party and 2 straight ahead; a torch keeps the normal camera and shows 2 tiles.

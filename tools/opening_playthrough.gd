@@ -18,6 +18,8 @@ var _last_state = null
 var throw_used := false
 var lowest := 99
 var health_at_throw := -1
+var hint_swings := -1  # spider swings when the torch was first suggested (2026-11-09)
+var hint_health := -1
 var forced_seen := false
 var snapped := {}
 var paused_frames := 0
@@ -67,6 +69,9 @@ func _press_in_row(item_name: String, label: String) -> bool:
 
 
 func _watch() -> void:
+	if main._hint == "throw" and hint_swings < 0:
+		hint_swings = main._spider_swings
+		hint_health = main._party_state.members[0].health
 	if main._hint_box.visible:
 		hints_seen[main._hint] = main._hint_label.text
 		if main._hint_mode != "":
@@ -318,6 +323,7 @@ func _initialize() -> void:
 	check("draught drunk", main._hints_done.has("draught"))
 	check("tripped and relit the spare", main._tripped and main._hints_done.has("relight"))
 	check("threw the torch at the spider", throw_used)
+	check("the torch is suggested only after a few exchanges or once hurt", hint_swings < 0 or hint_swings >= main.SPIDER_EXCHANGES or hint_health <= main.SPIDER_HINT_HEALTH, "swings %d, health %d" % [hint_swings, hint_health])
 	if force:
 		check("forced throw at low health", forced_seen and health_at_throw <= main.FORCE_THROW_HEALTH, "%d" % health_at_throw)
 	check("darkness started the panic", main._panic_started and cards_seen.get("panic") == "ok")

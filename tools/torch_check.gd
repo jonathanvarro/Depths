@@ -53,5 +53,27 @@ func _initialize() -> void:
 	var left: int = r.supplies.count(torch)
 	var said: String = r.use_item(torch)
 	check("a burning one can: full again, one torch spent", r.supplies.torch_left > r.supplies.TORCH_BURN_TIME - 5.0 and r.supplies.count(torch) == left - 1 and said.contains("stub"), said)
+
+	# T lights a torch from the pack (owner, 2026-11-09).
+	var main = load("res://scenes/main.tscn").instantiate()
+	main.play_opening = false
+	main.floor_seed = 11
+	root.add_child(main)
+	await create_timer(0.5).timeout
+	var supplies = main._party_state.supplies
+	supplies.add(torch, 2)
+	supplies.source = supplies.Source.NONE
+	var press := InputEventKey.new()
+	press.physical_keycode = KEY_T
+	press.pressed = true
+	Input.parse_input_event(press)
+	await process_frame
+	await process_frame
+	check("T lights a torch from the pack", supplies.torch_lit(), main._message_label.text)
+	var count: int = supplies.count(torch)
+	Input.parse_input_event(press)
+	await process_frame
+	await process_frame
+	check("...and won't waste a fresh one", supplies.count(torch) == count and main._message_label.text.begins_with("Torch:"), main._message_label.text)
 	print("fails=", fails)
 	quit()
