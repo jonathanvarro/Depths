@@ -8,6 +8,27 @@ out of git (see `docs/blender-expedition-kit-tasks.md`).
 
 ## Where the files live
 
+### CC0 rat pilot exception (#252 / #251, 2026-11-09)
+
+`art/enemies/rat-3d-v1/rat.glb` is a public CC0-derived animated rat, separate
+from the private Blender/Mixamo body kit below. Original br-n518 archives and
+licence declaration are retained in `art/third-party/oga-rat-v1`; editable
+adapted master is local in `build/local-rat-landmarks-v1/masters/rat-adapted.blend`.
+The original 21-bone hierarchy is preserved. Native Mobile source/export samples,
+floor correction, actual loop endpoints and phone-board review are checked;
+owner acceptance and live dispatch remain pending. No per-body human status changes.
+
+| Clip | Frames @24fps | Seconds | Loop / travel | Status |
+|---|---|---:|---|---|
+| rat idle | 0–16 | 0.667 | loop / in place | source-derived; native checked |
+| rat attack | 0–16 | 0.667 | once / fixed outer root | source-derived; native checked |
+| rat hurt | 0–10 | 0.417 | once / fixed outer root | authored from idle; native checked |
+| rat fall | 0–16 | 0.667 | once / fixed outer root | source death + internal height repair; native checked |
+| rat walk / run | 0–16 each | 0.667 each | loop / in place | source-derived + closing frame; native checked |
+
+These are review candidates, not owner-approved replacements. Exact samples,
+sources and API: [rat-and-shrine-landmarks-3d.md](rat-and-shrine-landmarks-3d.md).
+
 The separate CC0 scenery library (#239, 2026-11-06) samples Death_A_Pose and
 Sit_Floor_Pose from KayKit Skeletons 1.0's Skeleton_Minion.glb into static
 floor and seated scenery. The original pack and its included Actions are

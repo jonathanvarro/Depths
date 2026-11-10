@@ -1,0 +1,33 @@
+{
+  "page": "https://opengameart.org/content/rat-0",
+  "author": "br-n518",
+  "licence": "CC0-1.0",
+  "checked": "2026-11-09",
+  "files": [
+    {
+      "file": "rat_source.7z",
+      "bytes": 1167383,
+      "sha256": "3c8ec130b6a3ec3c93e0290107bcebdd5b34e23fd9205fab373feffea27cc883"
+    },
+    {
+      "file": "rat_godot.zip",
+      "bytes": 571697,
+      "sha256": "b01fb1976ae19ed80713853ec7c28b8cb098d1ced9e8c902791aa33fc4f7b28c"
+    },
+    {
+      "file": "source-page.html",
+      "bytes": 36747,
+      "sha256": "50ca10fd8601b3fba21cea8cd2e9e6c5524b5b1204b0ab38a2fd5dac71004883"
+    },
+    {
+      "file": "godot/rat.dae",
+      "bytes": 637516,
+      "sha256": "c7a0d7ed7139561f78d5084bd1697297d0185b84d7810b8a607f2735f4911bbb"
+    },
+    {
+      "file": "godot/rat.png",
+      "bytes": 439120,
+      "sha256": "b5ef72933348583c79f789dc3f3316163c600911fc38d5398aaa7d04bf4450bf"
+    }
+  ]
+}

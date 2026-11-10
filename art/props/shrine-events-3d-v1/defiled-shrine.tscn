@@ -1,0 +1,13 @@
+[gd_scene load_steps=6 format=3]
+[ext_resource type="Script" path="res://art/props/shrine-events-3d-v1/prop.gd" id="script"]
+[ext_resource type="Material" path="res://art/props/shrine-events-3d-v1/palette.tres" id="palette"]
+[ext_resource type="PackedScene" path="res://art/props/shrine-events-3d-v1/shrine-base.glb" id="shrine-base"]
+[ext_resource type="PackedScene" path="res://art/props/shrine-events-3d-v1/shrine-fresh.glb" id="shrine-fresh"]
+[ext_resource type="PackedScene" path="res://art/props/shrine-events-3d-v1/shrine-spent.glb" id="shrine-spent"]
+[node name="Landmark" type="Node3D"]
+script=ExtResource("script")
+palette_material=ExtResource("palette")
+[node name="Base" parent="." instance=ExtResource("shrine-base")]
+[node name="Fresh" parent="." instance=ExtResource("shrine-fresh")]
+[node name="Spent" parent="." instance=ExtResource("shrine-spent")]
+visible=false
