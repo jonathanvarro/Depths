@@ -12,10 +12,23 @@ extends Node3D
 ## to the party to step there (facing stays, so you can back away), tap a
 ## foe beside you to turn and strike it, or one along an open line to shoot
 ## it if anyone can. Pale outlines show where the party can step.
+##
+## Light still rules the board (owner, 2026-11-09): only tiles the party's
+## light reaches can be seen; the rest is shrouded and any foe standing
+## there is hidden, tag and all. Less light also draws the camera in.
+## Darkness: the tiles beside you and two straight ahead; a guttering light
+## a little more; a torch or a steady lantern two all round, three ahead;
+## a bright light three all round, four ahead. Walls block the light.
 
 const TWEEN_TIME := 0.8
-const HEIGHT := 8.0  # metres above the party
-const BACK := 3.4  # metres behind the party, so the board tilts towards you
+const Supplies := preload("res://scripts/supplies.gd")
+## By light band (Supplies.Light OUT, DIM, STEADY, BRIGHT): how far the
+## party sees all round and straight ahead, in tiles, and where the camera
+## sits - metres above the party, and behind it so the board tilts to you.
+const SIGHT := {0: [1.0, 2], 1: [1.5, 2], 2: [2.0, 3], 3: [3.0, 4]}
+const CAMERA := {0: [5.5, 2.4], 1: [6.5, 2.8], 2: [8.0, 3.4], 3: [9.0, 3.8]}
+const SHROUD := 7  # tiles round the party the shroud covers
+const SHROUD_COLOUR := Color(0.01, 0.01, 0.012, 0.96)
 const FOG := 0.012  # the cave's fog, thinned so the room reads from above
 const THREAT := Color(0.9, 0.16, 0.1, 0.42)  # a tile a foe will strike next
 const REACH := Color(0.95, 0.55, 0.15, 0.75)  # a tile a foe can reach (outlined)
@@ -37,6 +50,9 @@ var _ambient_before := 0.0
 var _tween: Tween
 var _refresh := 0.0
 var _last_key := ""
+var _shroud: MultiMeshInstance3D
+## The tiles the party's light reaches now (Vector2i -> true).
+var seen := {}
 
 
 ## Lifts the view above the fight. `main` is main.gd; `state` the fight.
@@ -71,7 +87,79 @@ func enter(main, state) -> void:
 		_tween.tween_property(_env, "fog_density", FOG, TWEEN_TIME)
 		_tween.tween_property(_env, "ambient_light_energy", maxf(_ambient_before, 1.1), TWEEN_TIME)
 	_last_key = ""
+	_shroud = MultiMeshInstance3D.new()
+	var box := BoxMesh.new()
+	box.size = Vector3(main.CELL_SIZE, main.WALL_HEIGHT + 0.2, main.CELL_SIZE)
+	var multimesh := MultiMesh.new()
+	multimesh.transform_format = MultiMesh.TRANSFORM_3D
+	multimesh.mesh = box
+	_shroud.multimesh = multimesh
+	_shroud.material_override = _flat(SHROUD_COLOUR)
+	add_child(_shroud)
 	_update_marks()
+
+
+## The party's light band now (Supplies.Light).
+func light_band() -> int:
+	return _main._party_state.supplies.light_band()
+
+
+## The tiles the party's light reaches: within the band's range all round,
+## further straight ahead, and never through rock.
+func visible_cells() -> Dictionary:
+	var out := {}
+	var at: Vector2i = _state.party_cell
+	var sight: Array = SIGHT[light_band()]
+	var radius: float = sight[0]
+	var span := int(ceil(maxf(radius, sight[1])))
+	var facing: Vector2i = _state.facing
+	for dy in range(-span, span + 1):
+		for dx in range(-span, span + 1):
+			var cell := at + Vector2i(dx, dy)
+			var d := Vector2i(dx, dy)
+			var in_light: bool = dx * dx + dy * dy <= radius * radius + 0.26
+			var ahead: bool = d != Vector2i.ZERO and Vector2i(signi(d.x), signi(d.y)) == facing and (d.x == 0 or d.y == 0) and absi(d.x) + absi(d.y) <= sight[1]
+			if (in_light or ahead) and _clear_line(at, cell):
+				out[cell] = true
+	return out
+
+
+## True if nothing solid stands between `from` and `to` (the end itself may
+## be a wall: you see the rock face).
+func _clear_line(from: Vector2i, to: Vector2i) -> bool:
+	var steps := maxi(absi(to.x - from.x), absi(to.y - from.y)) * 3
+	for i in range(1, steps):
+		var t := float(i) / steps
+		var cell := Vector2i(roundi(lerpf(from.x, to.x, t)), roundi(lerpf(from.y, to.y, t)))
+		if cell != to and cell != from and not _main._map.is_passable(cell):
+			return false
+	return true
+
+
+## Black over every tile near the party that the light doesn't reach.
+func _update_shroud() -> void:
+	if _shroud == null:
+		return
+	var at: Vector2i = _state.party_cell
+	var size: float = _main.CELL_SIZE
+	var cells := []
+	for dy in range(-SHROUD, SHROUD + 1):
+		for dx in range(-SHROUD, SHROUD + 1):
+			var cell := at + Vector2i(dx, dy)
+			if not seen.has(cell):
+				cells.append(cell)
+	var multimesh := _shroud.multimesh
+	multimesh.instance_count = cells.size()
+	for i in cells.size():
+		var cell: Vector2i = cells[i]
+		multimesh.set_instance_transform(i, Transform3D(Basis(), Vector3(cell.x * size, (_main.WALL_HEIGHT + 0.2) / 2.0, cell.y * size)))
+
+
+## Foes the light doesn't reach are hidden from the board, tags and all.
+func _hide_unseen_foes() -> void:
+	for foe in _state.foes:
+		if is_instance_valid(foe.node) and foe.is_alive():
+			foe.node.visible = seen.has(foe.cell)
 
 
 ## Drops the view back into the party's eyes.
@@ -82,6 +170,13 @@ func exit() -> void:
 	_clear_marks()
 	if is_instance_valid(_party_token):
 		_party_token.queue_free()
+	if is_instance_valid(_shroud):
+		_shroud.queue_free()
+	_shroud = null
+	seen.clear()
+	for foe in _state.foes:  # first person has its own darkness
+		if is_instance_valid(foe.node) and foe.is_alive():
+			foe.node.visible = true
 	if _tween:
 		_tween.kill()
 	var eye: Camera3D = _main._party.camera
@@ -159,6 +254,8 @@ func act_on(cell: Vector2i) -> bool:
 			foe = f
 	var d := cell - party_cell
 	var adjacent := absi(d.x) + absi(d.y) == 1
+	if foe and not seen.has(foe.cell):
+		foe = null  # you can't pick out what you can't see
 	if foe:
 		combat._select_target(foe)
 		if adjacent:
@@ -181,7 +278,8 @@ func _board_transform() -> Transform3D:
 	var party: Node3D = _main._party
 	var at: Vector3 = party.global_position
 	var back: Vector3 = party.global_transform.basis.z.normalized()  # the party looks along -Z
-	var eye := at + Vector3(0, HEIGHT, 0) + back * BACK
+	var place: Array = CAMERA[light_band()]  # less light, a closer view
+	var eye: Vector3 = at + Vector3(0, place[0], 0) + back * float(place[1])
 	return Transform3D(Basis(), eye).looking_at(at, -party.global_transform.basis.z.normalized())
 
 
@@ -233,7 +331,18 @@ func _update_marks() -> void:
 	var reach := {}
 	var targets := []
 	var party_cell: Vector2i = _state.party_cell
+	var lit := visible_cells()
+	if lit != seen:
+		seen = lit
+		_update_shroud()
+	_hide_unseen_foes()
 	for foe in _state.living_foes():
+		if not seen.has(foe.cell):
+			# Unseen: no outlines or rings give it away. If it's about to
+			# strike you, your tile still glows red: you hear it coming.
+			if _state.foe_in_range(foe) and foe.intent != _state.Intent.RECOVER:
+				threat[foe.marked_cell if foe.marked_cell != Vector2i(-1, -1) else party_cell] = true
+			continue
 		for cell in _reach_cells(foe):
 			reach[cell] = true
 		if _state.foe_in_range(foe) and foe.intent != _state.Intent.RECOVER:

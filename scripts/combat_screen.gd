@@ -715,7 +715,7 @@ func _process(_delta: float) -> void:
 		if foe.node and foe.node.visible and not foe.is_alive() and not foe.fled and not _fading.has(foe):
 			_fade_out(foe)
 		var tag: Button = _tags[foe]
-		tag.visible = foe.is_alive() and foe.node != null and not camera.is_position_behind(foe.node.global_position)
+		tag.visible = foe.is_alive() and foe.node != null and foe.node.visible and not camera.is_position_behind(foe.node.global_position)  # unseen in the dark: no tag (#248)
 		if tag.visible:
 			# Back-row tags sit higher, so a row behind doesn't hide the row in front (#72).
 			# Neighbours alternate heights too, so tags don't collide.

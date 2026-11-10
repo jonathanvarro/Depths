@@ -71,6 +71,43 @@ func _initialize() -> void:
 	check("tiles show what the foes threaten", not tactical._marks.is_empty(), tactical._marks.size())
 	await _snap("board")
 
+	# Light rules the board (owner, 2026-11-09).
+	var supplies = main._party_state.supplies
+	var source_was = supplies.source
+	var torch_was: float = supplies.torch_left
+	var heights := {}
+	for band in [["dark", 0], ["torch", 2], ["bright", 3]]:
+		supplies.glow_left = 0.0
+		match band[1]:
+			0: supplies.source = supplies.Source.NONE
+			2:
+				supplies.source = supplies.Source.TORCH
+				supplies.torch_left = supplies.TORCH_BURN_TIME
+			3: supplies.glow_left = 50.0
+		tactical._last_key = ""
+		tactical._update_marks()
+		await create_timer(0.6).timeout
+		heights[band[0]] = tactical._camera.global_position.y - main._party.global_position.y
+		var at: Vector2i = main._combat._state.party_cell
+		var beside_seen: bool = [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT].all(func(s): return tactical.seen.has(at + s) or not main._map.is_passable(at + s))
+		check("%s: the light band is as set" % band[0], tactical.light_band() == band[1], tactical.light_band())
+		check("%s: the tiles beside you are seen" % band[0], beside_seen)
+		var far := at + Vector2i(2, 2)
+		check("%s: a diagonal two away is %s" % [band[0], "seen if open" if band[1] == 3 else "shrouded"], tactical.seen.has(far) == (band[1] == 3 and tactical._clear_line(at, far)) or (band[1] == 3 and not tactical.seen.has(far)))
+		var unseen_foe = null
+		for foe in main._combat._state.living_foes():
+			if not tactical.seen.has(foe.cell):
+				unseen_foe = foe
+		if unseen_foe:
+			check("%s: a foe out of the light is hidden, tag and all" % band[0], not unseen_foe.node.visible and not main._combat._tags[unseen_foe].visible)
+		await _snap("light_" + band[0])
+	check("less light draws the camera in", heights["dark"] < heights["torch"] and heights["torch"] < heights["bright"], heights)
+	supplies.glow_left = 0.0
+	supplies.source = source_was
+	supplies.torch_left = torch_was
+	tactical._last_key = ""
+	tactical._update_marks()
+
 	# Tapping the board (#248): a step, then a strike.
 	var state = main._combat._state
 	var g0 := 0

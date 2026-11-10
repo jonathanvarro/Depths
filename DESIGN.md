@@ -263,6 +263,14 @@ The owner's view: 3D suits exploration, but first-person combat isn't engaging. 
 
 The prototype keeps exploration in first person. A fight on the map lifts the camera above the room to show the party, the foes, the tiles they threaten and who can be struck, then drops back when the fight ends. The rules are unchanged. It can be switched off in Settings for comparison. **Kept (owner, 2026-11-08: "Keep it, go further").** Round 2 adds tapping the board: a neighbouring tile to step, a foe to strike or shoot. Event ambushes are now fought on the board too. Lairs, the gate and the queen keep the dark stage until their foes are balanced for the board.
 
+**Light rules the board (owner, 2026-11-09).** Only tiles the party's light reaches can be seen; the rest is shrouded, and foes standing there are hidden. Less light also draws the camera in:
+- **darkness:** the tiles beside you and 2 straight ahead;
+- **a guttering light:** a little more;
+- **a torch or a steady lantern:** 2 all round and 3 ahead;
+- **bright light:** 3 all round and 4 ahead.
+
+Walls block the light.
+
 ## Magic — decided 2026-11-02 (#170, #53)
 
 **Owner decisions:**

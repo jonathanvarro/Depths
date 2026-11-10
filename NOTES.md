@@ -13,6 +13,19 @@ Format:
 
 ---
 
+## 2026-11-09 – Claude (light rules the overhead board, #248)
+
+- **Owner, 2026-11-09:** light should still matter at the strategic level. Darkness shows the tiles beside the party and 2 straight ahead; a torch keeps the normal camera and shows 2 tiles.
+- **Built (`tactical_view.gd`):** `SIGHT` by `Supplies.light_band()`, in tiles all round / straight ahead:
+  - OUT 1 / 2;
+  - DIM 1.5 / 2 (diagonals included);
+  - STEADY (a torch or a mid lantern) 2 / 3;
+  - BRIGHT (a full lantern or a candle's glow) 3 / 4.
+
+  `visible_cells()` blocks the light with walls (`_clear_line`). A black MultiMesh shroud covers unseen tiles within 7 of the party. `CAMERA` sets the camera's height and distance back by band: 5.5 m in the dark up to 9 m bright.
+- **Unseen foes** are hidden (`node.visible`), and their tags too: `combat_screen.gd` tag visibility now follows `foe.node.visible`. They give no outlines or rings, can't be picked by tapping, and the party's own tile still glows red if one is about to strike.
+- **Check:** tactical_check covers dark, torch and bright (light band, neighbours seen, diagonal shrouded, hidden foe and tag, camera height), with screenshots.
+
 ## 2026-11-09 – Claude (tactical view, round 2: tap the board; ambushes on it, #248)
 
 - **Owner, after playing the prototype (2026-11-08):** "Keep it, go further".
