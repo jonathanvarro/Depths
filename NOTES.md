@@ -13,6 +13,20 @@ Format:
 
 ---
 
+## 2026-11-11 – Claude (the Goblin King's fight moves to the overhead board, #257)
+
+- Owner choice: the King's hall is fought on the board (main `_start_combat`: `_fight_kind` "queen" now takes the board like ambushes). With the board off it stays on the dark stage.
+  - No way out: no Retreat button on the board, and `_field_lost` never lets the King or his guards lose the trail.
+  - His called guards appear beside the party, as joins already did on the board.
+- The bot fights him on the board too, never fleeing. 90-campaign batches, dark stage → board:
+  - campaigns that beat him: 73/88 → 45/84;
+  - wipes against him: 80 → 131;
+  - rounds in a winning fight: median 11–13 → 22–30.
+
+  On the board the party has one action a round against three foes. **Tuning is the owner's call** (asked on #257).
+- fortress_check reads the board's buttons; enemy_models_check covers the board King (capture `build/shots_king/models_desk_king_board.png`).
+- **Seen, not fixed:** the party figure on the board (Mara here) reads as dark spidery limbs from the steep overhead camera; the same in ordinary fights.
+
 ## 2026-11-11 – Claude (armour and shield mastery thresholds lowered, #219)
 
 - Did: owner chose to lower only the armour and shield thresholds. They now
