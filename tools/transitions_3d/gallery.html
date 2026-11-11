@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Depths · Transitions, blockers and regional props</title>
+<style>
+:root{color-scheme:dark;font:17px/1.5 system-ui,sans-serif;background:#141c1e;color:#e3d8bc}
+*{box-sizing:border-box}body{max-width:1440px;margin:auto;padding:24px}
+h1,h2,h3{font-family:Georgia,serif;font-weight:normal}h1{font-size:36px}h2{font-size:28px;margin:30px 0 14px}h3{font-size:22px;margin:0 0 12px}
+nav{display:flex;flex-wrap:wrap;gap:18px;margin:24px 0}label{display:flex;align-items:center;gap:10px}
+select{min-height:44px;padding:8px;font:inherit;background:#283331;color:inherit}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.regions{grid-template-columns:repeat(2,1fr)}
+article{background:#243030;border:1px solid #586254;padding:14px;min-width:0}img{display:block;width:100%;height:auto;background:#202a2b}
+article p{font-size:15px;margin:8px 0 0}a{color:#d8bc85}.note{padding:16px;background:#243030;border-left:3px solid #bca574}[hidden]{display:none!important}
+@media(max-width:1000px){.grid{grid-template-columns:1fr 1fr}}@media(max-width:680px){body{padding:14px}.grid{grid-template-columns:1fr}}
+</style>
+<h1>Transitions, passage blockers and regional props</h1>
+<p>Ten 3D features and three regional material variants, with the original prop geometry preserved.</p>
+<nav>
+<label>Batch <select id="batch"><option value="all">All three</option><option value="transitions">Stairs and cave transitions</option><option value="blockers">Passage blockers</option><option value="regions">Regional materials</option></select></label>
+<label>Lighting <select id="light"><option value="cave">Environment</option><option value="neutral">Neutral</option></select></label>
+<label>View <select id="angle"><option value="0">Three-quarter</option><option value="1">Eye height</option><option value="2">Overhead</option></select></label>
+</nav>
+<section data-batch="transitions"><h2>Stairs and cave transitions</h2>
+<p>Descending flights sit below the floor. The real LevelBuilder supplies their cell aperture and corridor rotation.</p>
+<img id="stairs-room" src="captures/level-1-1.png" alt="Recessed stone stairs in the actual LevelBuilder fixture">
+<div class="grid">@@TRANSITIONS@@</div></section>
+<section data-batch="blockers"><h2>Passage blockers</h2>
+<p>The torn web leaves its former centre clear. Dense roots retain their blocked-passage role.</p>
+<img id="web-room" src="captures/level-3-1.png" alt="Intact 3D web across a corridor built by LevelBuilder">
+<div class="grid">@@BLOCKERS@@</div></section>
+<section data-batch="regions"><h2>Regional materials</h2>
+<p>Same source meshes, scale and UVs. Each region shares one atlas/material and a small world-space stain/grain texture. Neutral lighting gives a direct colour comparison.</p>
+<div class="grid regions">@@REGIONS@@</div></section>
+<p class="note">Run START_REVIEW.cmd beside this gallery for native controls. These are reusable art libraries. Live theme assignment, floor placement and gameplay integration remain pending. No travel, passage, collision, encounter or saved-state rules changed.</p>
+<p><a href="START_HERE.md">Handoff and rebuilding</a> · <a href="validation.json">Native checks</a> · <a href="artifact-validation.json">Source and export verification</a></p>
+<script>
+function update(){
+ const batch=document.querySelector('#batch').value,light=document.querySelector('#light').value,angle=document.querySelector('#angle').value;
+ for(const section of document.querySelectorAll('[data-batch]'))section.hidden=batch!=='all'&&batch!==section.dataset.batch;
+ for(const card of document.querySelectorAll('[data-name]'))card.querySelector('img').src='captures/'+card.dataset.name+'-'+light+'-'+angle+'.png';
+ const view=angle==='2'?'2':'1';
+ document.querySelector('#stairs-room').src='captures/level-1-'+view+'.png';
+ document.querySelector('#web-room').src='captures/level-3-'+view+'.png';
+}
+for(const control of document.querySelectorAll('select'))control.addEventListener('change',update);
+</script>
+</html>

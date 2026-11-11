@@ -1,0 +1,84 @@
+{
+  "issue": 225,
+  "base_atlas": {
+    "file": "art/third-party/kaykit-dungeon-remastered/texture-floor1.png",
+    "sha256": "5c9c8f1ad1b53fb8a3851d6ee84338f8ed5b6f63bfcf12c2382753cfee8eb14b"
+  },
+  "regions": [
+    {
+      "id": "fungal",
+      "wall": "art/textures/descent-walls-v1/fungal-stone.png",
+      "floor": "art/textures/descent-surfaces-v1/fungal-stone-floor.png",
+      "tint": [
+        0.82,
+        0.94,
+        0.7
+      ],
+      "detail_tint": [
+        0.76,
+        0.88,
+        0.6
+      ],
+      "roughness": 0.96,
+      "specular": 0.1,
+      "read": "Damp olive wood and subdued patchy moss",
+      "wall_sha256": "761d0c6597d50d048852f06142d8fb0e45c042ff1f13737d00aea436da7bb4e0",
+      "floor_sha256": "9e96cd3589a09bcceda0637360d1db2c2f02c2d7c22911296e8467431fc8b65a",
+      "atlas_sha256": "af7d57ed77e3461c6ba6f9a5d00b86b81bfaa02c9d02e4fa44821cd63c19d9bd",
+      "grain_sha256": "32c6c23e788e75f308bb875029836a812a81aaa261c54d50c2faf9e210831104",
+      "material_sha256": "7e41be192c0dd0c185bc0a16ff7e1c6594604e8574ddf80a37615eeb9022ba24"
+    },
+    {
+      "id": "scorched",
+      "wall": "art/textures/fortress-v1/wall.png",
+      "floor": "art/textures/fortress-v1/floor.png",
+      "tint": [
+        0.69,
+        0.62,
+        0.53
+      ],
+      "detail_tint": [
+        0.58,
+        0.53,
+        0.47
+      ],
+      "roughness": 1.0,
+      "specular": 0.08,
+      "read": "Smoke-darkened timber and char stains",
+      "wall_sha256": "deee3d0f0d589941c5c4a1972a8d55bc127f15fd67ae485c80be97614d2b3c02",
+      "floor_sha256": "82a36850d25d41157d245cdce88da0a8b783b07058e0533699743c9752829907",
+      "atlas_sha256": "99483a9b55dfcc5d93cf0c9696d575f5de880c8a3357675674742768e0f2df56",
+      "grain_sha256": "3e2a1c65ff986a571d6d4da0e3bd3bb1603e7d82704afce857b6d337aca8a242",
+      "material_sha256": "85c03778a4274018a74742ff9d1e52ed7ccd0e8f6e1cd1d836f382ec6ac17654"
+    },
+    {
+      "id": "waterlogged",
+      "wall": "art/textures/waterworks-v1/wet-plain.png",
+      "floor": "art/textures/descent-surfaces-v1/drowned-masonry-floor.png",
+      "tint": [
+        0.68,
+        0.83,
+        0.86
+      ],
+      "detail_tint": [
+        0.68,
+        0.8,
+        0.77
+      ],
+      "roughness": 0.82,
+      "specular": 0.18,
+      "read": "Cold swollen wood, damp silt and mineral stains",
+      "wall_sha256": "c6ad3bdceed4a58aec11d1b6b1a3e29763b24c15c5a2ca81019f9eef569e2957",
+      "floor_sha256": "14a49d59d66dc5bd9e8ac454f8f7df2d60551740dd648bbfbd84a9db2c1faa0c",
+      "atlas_sha256": "fbd8f2307ac1309350558f86654d016a3f2a37521bb7ec6eac431747a0d86c26",
+      "grain_sha256": "233258384b92b6df4db7fd157b03aecb6c170a8511eb7bcfdcc3cb265c9f51c3",
+      "material_sha256": "711a74e7028b007452244d34ee90258e9d49dc96bc4c1943d6b9192613a13093"
+    }
+  ],
+  "builder_sha256": "0488ad64b070df5e6c27e4bc83565d58a5807486bc3f0bb1a06083ed000135b1",
+  "models_unchanged": {
+    "art/third-party/kaykit-dungeon-remastered/models/barrel_large.glb": "9fae6a79056241baf253fe9272dc7a7ddb174e1caf153eb5013c58a596722148",
+    "art/third-party/kaykit-dungeon-remastered/models/box_large.glb": "6dacda267f04769f8ebbb7e991885785054923ea3d5eb19e833768a911d5b661",
+    "art/third-party/kaykit-dungeon-remastered/models/bottle_B_green.glb": "dd509e40346972ca15dd77c89ebf50f582346acf7587f2a40bae48c6704ca8af"
+  }
+}

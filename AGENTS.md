@@ -97,6 +97,19 @@ Templates > Download and Install; already installed on the owner's PC).
   No visibility/encounter/traversal rules change. Local gallery, native controls
   and editable masters are in `build/local-traps-sites-mist-v1`.
 
+- `docs/transitions-blockers-and-regional-materials.md` – #250/#225's ten 3D
+  feature scenes and three regional KayKit materials. Features in
+  `art/features/transitions-3d-v1` use the LevelBuilder floor-centre/-Z
+  convention, true recessed descents, registered intact/torn webs and a
+  ceiling-tagged root-climb cap. Ground aprons accept per-instance theme floors.
+  `art/materials/regional-props-v1` gives unchanged original KayKit UVs/meshes
+  fungal, scorched and waterlogged atlases/world grain, one shared material
+  per selected region. Do not use these atlases on authored palette-point UVs.
+  Local native/browser review and editable masters are in
+  `build/local-transitions-regional-v1`. Delivery branch is
+  codex/transitions-blockers-regional-3d. Theme/dresser hookup remains pending;
+  travel, passage state, collision, floor assignment and RNG stay caller-owned.
+
 - `docs/cave-formations-and-growth-3d.md` – #243's fourteen 3D decor scenes
   under `art/dressing/cave-growth-3d-v1`: eight mineral/rubble pieces, three
   root mounts and three fungal forms. Metric floor/wall/ceiling envelopes

@@ -1,0 +1,235 @@
+{
+  "issue": 250,
+  "assets": [
+    {
+      "id": "stone-up",
+      "triangles": 1470,
+      "min": [
+        -0.9034779071807861,
+        -0.8938841819763184,
+        -0.006506286561489105
+      ],
+      "max": [
+        0.9031659960746765,
+        0.9889633655548096,
+        2.366474151611328
+      ],
+      "sha256": "a30b6e6685bfd9c64adc62242c369820e6b4b62a2afeaaa80457dbb715a17c61",
+      "batch": "transitions",
+      "direction": "up",
+      "floor_aperture": false
+    },
+    {
+      "id": "stone-down",
+      "triangles": 982,
+      "min": [
+        -1.0,
+        -1.0,
+        -0.9375
+      ],
+      "max": [
+        1.0,
+        1.0,
+        0.25841426849365234
+      ],
+      "sha256": "4978ced317d390f28108df0d5c22b188e951779232eab9db2cd6f83bea58a055",
+      "batch": "transitions",
+      "direction": "down",
+      "floor_aperture": true
+    },
+    {
+      "id": "fortress-up",
+      "triangles": 816,
+      "min": [
+        -0.8552480340003967,
+        -0.824999988079071,
+        0.0
+      ],
+      "max": [
+        0.8625624775886536,
+        0.9730715155601501,
+        2.366474151611328
+      ],
+      "sha256": "275ee15890aeebbd1e5c3b56066a27093854635aeef2d1c9727f99cdbd27a012",
+      "batch": "transitions",
+      "direction": "up",
+      "floor_aperture": false
+    },
+    {
+      "id": "fortress-down",
+      "triangles": 768,
+      "min": [
+        -1.0,
+        -1.0,
+        -0.9375
+      ],
+      "max": [
+        1.0,
+        1.0,
+        0.3806706666946411
+      ],
+      "sha256": "49a64003df71d4c4f9beb11fbccad8b0202a8c3ce760dde929caa7f4220d825a",
+      "batch": "transitions",
+      "direction": "down",
+      "floor_aperture": true
+    },
+    {
+      "id": "cave-ledge-down",
+      "triangles": 494,
+      "min": [
+        -1.0,
+        -1.0,
+        -0.8999999761581421
+      ],
+      "max": [
+        1.0,
+        1.0,
+        0.09669742733240128
+      ],
+      "sha256": "e161e5fe0e73d58f36e3cbaad75a603d61be6b2aff91488b2173088dc5e63416",
+      "batch": "transitions",
+      "direction": "down",
+      "floor_aperture": true
+    },
+    {
+      "id": "root-climb-up",
+      "triangles": 1526,
+      "min": [
+        -0.6853291392326355,
+        -0.5081925392150879,
+        0.05353955179452896
+      ],
+      "max": [
+        0.6928462386131287,
+        0.5051782727241516,
+        2.3999521732330322
+      ],
+      "sha256": "7f22bd16efb2dc5037afb8f73e8e9b99ef02626ff75a387ee58ce483e5cccfe1",
+      "batch": "transitions",
+      "direction": "up",
+      "floor_aperture": false
+    },
+    {
+      "id": "daylight-mouth",
+      "triangles": 426,
+      "min": [
+        -0.9933918714523315,
+        0.02568759024143219,
+        -0.060524553060531616
+      ],
+      "max": [
+        0.9837854504585266,
+        0.5799999833106995,
+        2.369577407836914
+      ],
+      "sha256": "7b1e5b1fe08306369eeef9541b44925db9f3c062cb7ab07a033b537a8f91cf77",
+      "batch": "transitions",
+      "direction": "passage",
+      "floor_aperture": false
+    },
+    {
+      "id": "web-intact",
+      "triangles": 1120,
+      "min": [
+        -0.9425597190856934,
+        -0.07021231204271317,
+        0.09950705617666245
+      ],
+      "max": [
+        0.9424049258232117,
+        0.068190798163414,
+        2.3006880283355713
+      ],
+      "sha256": "4c826c0a53bb9e39aa88e4be1566a11cf94d7d8dcbce8111c01caf16f0365f36",
+      "batch": "blockers",
+      "direction": "passage",
+      "floor_aperture": false
+    },
+    {
+      "id": "web-torn",
+      "triangles": 196,
+      "min": [
+        -0.9425597190856934,
+        -0.15269401669502258,
+        0.4108697772026062
+      ],
+      "max": [
+        0.9424049258232117,
+        0.068190798163414,
+        2.29756760597229
+      ],
+      "sha256": "39f94aeb5a929ef9370bc1e6d22588f09f6a8a5397d7d4f5d050313629dff24e",
+      "batch": "blockers",
+      "direction": "passage",
+      "floor_aperture": false
+    },
+    {
+      "id": "root-barrier",
+      "triangles": 2212,
+      "min": [
+        -0.9960711002349854,
+        -0.2874642312526703,
+        -0.06691516935825348
+      ],
+      "max": [
+        1.0059312582015991,
+        0.18933266401290894,
+        2.384938955307007
+      ],
+      "sha256": "89ba19973199841e9b66e7a49ba792af415defeec7a951dd02f24ced90a9edab",
+      "batch": "blockers",
+      "direction": "passage",
+      "floor_aperture": false
+    }
+  ],
+  "palette": {
+    "wood": "59432e",
+    "wood_light": "73583b",
+    "wood_dark": "352a20",
+    "split": "241f19",
+    "iron": "383d3c",
+    "iron_edge": "555b57",
+    "rust": "754b35",
+    "stone": "606158",
+    "stone_light": "77786b",
+    "stone_dark": "42473f",
+    "wax": "b9a87a",
+    "wick": "24221b",
+    "cloth": "465b5c",
+    "cloth_dark": "2e4143",
+    "ore": "444b49",
+    "ash": "777366",
+    "copper": "866040",
+    "glass": "ca8f42",
+    "root": "675039",
+    "root_dark": "3e3429",
+    "web": "a7afa3",
+    "ground": "606158",
+    "sky": "b3c3be",
+    "void": "11191a",
+    "roof_rock": "42473f",
+    "roof_void": "11191a",
+    "distance": "77877a",
+    "distance_dark": "526457",
+    "outside_path": "a5aa91"
+  },
+  "sources": [
+    {
+      "file": "art/third-party/kaykit-transitions-v1/stairs-stone.glb",
+      "sha256": "5ba16e5d919aaa8958435c4b73c1f8a94c98febeacf716faa1359f24e6b27d70"
+    },
+    {
+      "file": "art/third-party/kaykit-transitions-v1/stairs-wood.glb",
+      "sha256": "3b2cf5c08aec60ea7b217e1c499885d803419dc39a2968e8da0da5e725adb140"
+    },
+    {
+      "file": "art/third-party/kaykit-transitions-v1/LICENSE.txt",
+      "sha256": "c5f17abf619731f57f6bbff450f6484214605c13aa96bb75bbcfc70930941ff7"
+    }
+  ],
+  "cell_metres": 2,
+  "wall_metres": 2.4,
+  "forward": "-Z",
+  "builder_sha256": "8db712addc4182097b0dca146aae16c28b8a589882abcb7bcad0263d8729bde4",
+  "helpers_sha256": "8ce154cc6449436050b94936fcd40f93591e40a1c43efe4ffcb932c4ed58793b"
+}
