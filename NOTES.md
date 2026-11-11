@@ -13,6 +13,20 @@ Format:
 
 ---
 
+## 2026-11-11 – ChatGPT (Discern, board figures and the King's dark stage)
+
+- Did: bound Discern's new split-seal picture and the four delivered prayer
+  item icons. Broadened the lead figures and removed the hanging climb roots
+  from the overhead view. The King's dark-stage view now has local lighting,
+  flank positions for his guards, and no cave walls cutting through his model.
+- Reviewed: three neutral named-cast likenesses and the proposed Fixer-a reuse
+  for Rook (#197–#200). Rechecked equipment and field sound, verified the
+  two jacket fits and fixed-seat review, and updated the horror concept ledger.
+  The public CC0 stool and its sources are available; the private models stay
+  in the local review.
+- Next: [Floor 4 art handoff](docs/floor-four-art-finish.md) lists the open
+  visual decisions, contact work and listening review.
+
 ## 2026-11-11 – Claude (committed the #234 survey-site follow-up)
 
 - Did: committed an uncommitted #234 follow-up another assistant left on 2026-11-07 (owner asked to clear it). It matches the issue's spec: the survey party's site is named on the map only once seen, and stays on floor 1 until the report is given to Vael. story_check: fails 0. Their note follows.

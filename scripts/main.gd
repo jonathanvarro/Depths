@@ -941,7 +941,7 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 	# Fog surges up from the floor and the cave fades to near-black: the
 	# fight takes place on a dark stage, so enemies never meet the walls.
 	if not on_map:
-		_stage.enter(Settings.get_value("flashes"))  # plays as the fight opens
+		_stage.enter(Settings.get_value("flashes"), _fight_kind == "queen")
 	_update_hints("fight")
 	_fight_tips(state)
 	_say("fight_start", true, false, _any_voice())
@@ -2509,6 +2509,11 @@ func _place_extra_foe(foe) -> void:
 	var right := _party.global_transform.basis.x
 	var node: Node3D = foe.type.scene.instantiate()  # the dark stage keeps the painted art
 	node.position = _party.position + forward * CELL_SIZE * 1.0 + right * randf_range(-1.0, 1.0)
+	if _fight_kind == "queen":
+		# Reinforcements come in along the flanks, clear of the King's staff.
+		var side := signf((node.position - _party.position).dot(right))
+		node.position = _party.position + forward * 3.35 + right * side * 1.92
+		BattleStage.dress_king_stage_foe(node, false)
 	_dress_foe(node, foe.type)
 	BattleStage.raise(node)
 	_level.add_child(node)
@@ -2668,6 +2673,8 @@ func _place_foes(foes: Array) -> void:
 	# their tags don't overlap), with the back row a little further off.
 	var ordered: Array = foes.filter(func(f): return not f.in_back()) + foes.filter(func(f): return f.in_back())
 	var offsets: Array = spread.get(ordered.size(), [0.0])
+	var king_stage := _fight_kind == "queen"
+	var guard_side := -1.0
 	for i in ordered.size():
 		var foe = ordered[i]
 		var depth := distance + (CELL_SIZE * 0.5 if foe.in_back() and ahead_open else 0.0)
@@ -2676,6 +2683,14 @@ func _place_foes(foes: Array) -> void:
 		# stand on the map and the board.
 		var node: Node3D = foe.type.scene.instantiate()
 		node.position = _party.position + forward * depth + right * offsets[mini(i, offsets.size() - 1)]
+		if king_stage:
+			var is_king: bool = foe.type == QUEEN
+			if is_king:
+				node.position = _party.position + forward * 3.05
+			else:
+				node.position = _party.position + forward * 2.65 + right * guard_side * 1.47
+				guard_side *= -1.0
+			BattleStage.dress_king_stage_foe(node, is_king)
 		_dress_foe(node, foe.type)
 		if foe.elite != "":
 			_mark_elite(node)

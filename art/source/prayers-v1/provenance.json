@@ -1,0 +1,10 @@
+{
+  "tool": "built-in image_gen",
+  "prompts": "prompts.json",
+  "masters": {
+    "tome_bind.png": "f8ee51b6be31f25853c5e295c8e984c410c6bd5fd88cb4451dd5807ee91e99d6",
+    "tome_light.png": "891da851cd3f01197ca0385adee9a971ef6db346a1e228a9856d12a132bc1e63",
+    "tome_watch.png": "287d25a63e9381d6c0d8107936de000b762e45f3df6e50477b271c7fe06fc5a5",
+    "votive_candle.png": "48eaa5611522d149a4b8233e6cf2c35f40cc8084db2a927cebf48ae5c8c2c15a"
+  }
+}
