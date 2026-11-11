@@ -551,8 +551,9 @@ Templates > Download and Install; already installed on the owner's PC).
   EnemyType tactics ARCHER/GUARD/QUEEN, `summons`, placeholder `tint` and
   `sprite_scale`; CombatState `foe_joined`, guard wall, rage.
   `tools/fortress_check.gd`. Since #257 (2026-11-11) the boss is the Goblin
-  King (`data/enemies/goblin_king.tres`, 3D model only, also on the dark
-  stage); internal names stay "queen" (`QUEEN`, `queen_defeated`,
+  King (`data/enemies/goblin_king.tres`, 3D model only). His hall is fought
+  on the overhead board when it's on (no Retreat, never loses the trail;
+  `_field_lost`), else on the dark stage; internal names stay "queen" (`QUEEN`, `queen_defeated`,
   `queen_claim`, Tactic.QUEEN, Intent.CLEAVER) so saves keep working, and
   `goblin_queen.tres` stays for old saves. His rules are still the Queen's.
 - Scouts' refuge (2026-11-01): `scripts/refuge.gd` places a rest spot ('R')

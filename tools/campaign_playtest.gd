@@ -664,7 +664,7 @@ func _fortress() -> String:
 		return walked
 	stats["queen_tries"] += 1
 	var before := _snapshot()
-	var result := _fight(Main.QUEEN_FIGHT, "queen")
+	var result := _fight(Main.QUEEN_FIGHT, "queen", true)  # on the board, as in the game (#257)
 	before["won"] = result == CS.Result.VICTORY
 	before["rounds"] = stats["queen_rounds"]
 	stats["queen_attempts"].append(before)
@@ -844,6 +844,7 @@ func _fight(group: Array, kind: String, on_map := false) -> int:
 	var worn := _worn_gear(state)  # mastery pace (#219)
 	var guard := 0
 	if on_map and MAP_FIGHTS:
+		_field_kind = kind
 		_field_fight(state)
 		guard = 0
 	while not state.field and state.result == CS.Result.ONGOING and guard < 400:
@@ -1073,9 +1074,12 @@ func _field_fight(state) -> void:
 ## The party's one action: run from a lost cause, drink when low, step off a
 ## marked tile (or brace), turn to the weakest neighbour and strike, shoot,
 ## or wait for them to come.
+var _field_kind := ""  # the fight running on the map: "queen" has no way out
+
+
 func _field_party(state, map) -> void:
 	var foes: Array = state.living_foes()
-	if _health_fraction() < 0.2 and foes.any(func(f): return f.health * 2 > f.type.max_health):
+	if _field_kind != "queen" and _health_fraction() < 0.2 and foes.any(func(f): return f.health * 2 > f.type.max_health):
 		# No Retreat on the map: getting away by moving costs a round or two
 		# of blows - every foe in reach gets one more (an approximation).
 		for foe in foes:

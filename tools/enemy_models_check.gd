@@ -157,8 +157,23 @@ func _initialize() -> void:
 	guard_view.queue_free()
 	archer_view.queue_free()
 	check("the boss fight is the Goblin King's", main.QUEEN.display_name == "Goblin King" and main.QUEEN_FIGHT[0] == main.QUEEN)
-	# He has no painting: on the dark stage he is his model, standing on the
-	# floor (never lifted like a sprite), guards beside him.
+	# Seen from above, his hall is fought on the board, models all round,
+	# and nobody loses the trail: there's no turning back.
+	main._fight_kind = ""
+	main._queen_fight(main._party.cell)
+	await create_timer(1.4).timeout
+	state = main._combat._state
+	var board_king = state.foes.filter(func(f): return f.type == main.QUEEN)[0]
+	check("the King's fight is on the board", state.field and main._tactical.active and main._combat.no_retreat)
+	check("...the King and his guards are 3D models on their tiles", state.foes.all(func(f): return FoeView.is_model(f.node) and absf(f.node.position.y) < 0.01))
+	check("...and never lose the trail", not main._field_lost(board_king))
+	await _snap("king_board")
+	main._fight_kind = ""
+	main._combat.no_retreat = false
+	await _end_fight(main)
+	await create_timer(1.0).timeout
+	# With the board off he has no painting: on the dark stage he is his
+	# model, standing on the floor (never lifted like a sprite).
 	Settings.set_value("tactical_view", false)
 	main._queen_fight(main._party.cell)
 	await create_timer(1.4).timeout

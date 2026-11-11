@@ -930,9 +930,10 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 	# On the map (#171 phase 2): the fight stays where it began.
 	var on_map: bool = _engaged != null and _map_fights_active()
 	# Seen from above (#248), other fights take the board too: an ambush from
-	# an event, a quest site's guards. Lairs, the gate and the queen keep their
-	# own stage for now (their foes plan differently on the board).
-	var ambush_on_board: bool = not on_map and _map_fights_active() and Settings.get_value("tactical_view") and _fight_kind == ""
+	# an event, a quest site's guards, and the Goblin King's hall (#257: he
+	# and his guards are 3D models). Lairs and the gate keep their own stage
+	# for now (the Broodmother plans differently on the board).
+	var ambush_on_board: bool = not on_map and _map_fights_active() and Settings.get_value("tactical_view") and _fight_kind in ["", "queen"]
 	if ambush_on_board:
 		on_map = true
 	if on_map:
@@ -1605,6 +1606,8 @@ func _field_moved(cell: Vector2i) -> void:
 
 ## True once `foe` has gone LOSE_TRAIL beats without sight of the party.
 func _field_lost(foe) -> bool:
+	if _fight_kind == "queen":
+		return false  # the King's hall: no turning back
 	var band: int = _party_state.supplies.light_band()
 	var reach: int = Roamers.SIGHT.get(band, 3) + 1
 	if Roamers.adjacent(foe.cell, _party.cell) or Roamers.sees(_map, foe.cell, _party.cell, reach):

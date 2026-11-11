@@ -166,7 +166,11 @@ func _initialize() -> void:
 	while not main._combat._actions.visible and guarded < 50:
 		await create_timer(0.1).timeout
 		guarded += 1
-	check("no retreat from her", main._combat._action_buttons.get_children().any(func(b): return b.text == "Retreat" and b.disabled))
+	# On the board (#257) there's no Retreat button, and they never lose the trail.
+	var no_way_out: bool = (not main._combat._field_buttons.get_children().any(func(b): return b.text == "Retreat" and not b.disabled)
+			and not main._field_lost(state.foes[0])) if state.field \
+			else main._combat._action_buttons.get_children().any(func(b): return b.text == "Retreat" and b.disabled)
+	check("no retreat from the King", no_way_out, "field %s buttons %s" % [state.field, (main._combat._field_buttons if state.field else main._combat._action_buttons).get_children().map(func(b): return "%s%s" % [b.text, "(off)" if b.disabled else ""])])
 	await _snap("queen")
 	await _win_fight()
 	await create_timer(0.3).timeout
