@@ -50,6 +50,12 @@ Templates > Download and Install; already installed on the owner's PC).
 
 ## Project structure
 
+- `docs/spiders-and-goblin-3d.md` describes #255's three shared-rig spider
+  variants and reusable goblin base in `art/enemies/field-creatures-3d-v1`.
+  The goblin has separate hand-bound knife and buckler meshes. Local review is
+  `build/local-spiders-goblin-v1/inspector.html`. Live pose dispatch remains
+  part of #251. Use the owner's #253 private-desktop launcher for GPU checks.
+
 - `docs/cave-formations-and-growth-3d.md` – #243's fourteen 3D decor scenes
   under `art/dressing/cave-growth-3d-v1`: eight mineral/rubble pieces, three
   root mounts and three fungal forms. Metric floor/wall/ceiling envelopes

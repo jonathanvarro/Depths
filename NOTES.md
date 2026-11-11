@@ -13,6 +13,19 @@ Format:
 
 ---
 
+## 2026-11-10 – ChatGPT (3D spider family and goblin base, #255 / #251)
+
+- Built the ordinary, web-spinner and venom spiders on one CC0 source rig,
+  then a clothed goblin base with separate hand-bound knife and buckler.
+  Fixed floor origins, still mode and paused samples are shared. Original
+  sources and declarations are pinned in `art/third-party/oga-creatures-v1`.
+- Passed 2,884 native and 156 game-view checks with 312 captures. Both GPU
+  runs used the private background desktop and kept foreground focus intact.
+- Review at `E:/GitHub/Depths/build/local-spiders-goblin-v1/inspector.html`.
+  The rebuild guide and model API are in `docs/spiders-and-goblin-3d.md`.
+  `codex/spiders-goblin-3d` delivers the art. Live model-aware combat dispatch
+  remains open under #251. The game fixture has the existing #249 exit warning.
+
 ## 2026-11-09 – Claude (light rules the overhead board, #248)
 
 - **Owner, 2026-11-09:** light should still matter at the strategic level. Darkness shows the tiles beside the party and 2 straight ahead; a torch keeps the normal camera and shows 2 tiles.
