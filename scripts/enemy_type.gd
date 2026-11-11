@@ -8,6 +8,17 @@ extends Resource
 ## A Node3D scene with an AnimatedSprite3D named "Sprite" that has
 ## "idle", "attack" and "hurt" animations (see art/enemies/).
 @export var scene: PackedScene
+## A 3D model for the same foe (#251): shown instead of `scene` while the
+## "enemy_models" setting is on. `scene` stays as the sprite fallback.
+@export var model: PackedScene
+
+
+## The art to show for this foe: the 3D model if there is one and models
+## are on, else the sprite scene.
+func view_scene() -> PackedScene:
+	if model and load("res://scripts/settings.gd").get_value("enemy_models"):
+		return model
+	return scene
 @export var max_health := 6
 @export var damage_min := 1
 @export var damage_max := 3

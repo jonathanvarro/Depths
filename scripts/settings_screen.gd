@@ -33,6 +33,7 @@ func _init() -> void:
 	if not OS.has_feature("mobile"): _toggle(display.column, "Fullscreen", "fullscreen")
 	_toggle(display.column, "Screen flashes", "flashes")
 	_toggle(display.column, "Fights seen from above (prototype)", "tactical_view")
+	_toggle(display.column, "3D enemies", "enemy_models")
 	display.column.add_child(text_label("Text size", 20))
 	var sizes := HBoxContainer.new()
 	sizes.add_theme_constant_override("separation", 6)

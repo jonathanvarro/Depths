@@ -26,23 +26,31 @@ const ODDS := 5
 const GRAIN_METRES := 2.0
 
 
-## Dresses floor 1's rooms. Returns how many pieces it placed.
+## Deeper floors (#225, owner-approved regional skins, 2026-11-11): the same
+## pieces in each region's own material, a little sparser.
+const REGIONS := {2: "fungal", 3: "scorched", 4: "scorched", 5: "waterlogged", 6: "waterlogged"}
+const DEEPER_ODDS := 7
+const Skins := preload("res://art/materials/regional-props-v1/skins.gd")
+
+
+## Dresses a floor's rooms. Returns how many pieces it placed.
 static func dress(level: Node3D, map, depth: int, seed: int, cell_size: float, avoid := {}) -> int:
-	if depth != 1:
+	if depth != 1 and not REGIONS.has(depth):
 		return 0
 	var rng := RandomNumberGenerator.new()
 	rng.seed = hash([seed, depth, "kaykit pilot"])
 	var root := Node3D.new()
 	root.name = "KayKitPilot"
 	level.add_child(root)
-	var shared := material()  # one per floor, freed with it (never static: #204)
+	var shared: Material = material() if depth == 1 else Skins.material(REGIONS[depth])  # one per floor (never static: #204)
+	var odds := ODDS if depth == 1 else DEEPER_ODDS
 	for y in map.height:
 		for x in map.width:
 			var cell := Vector2i(x, y)
 			if not map._is_room_cell(cell) or not Dressing._clear(map, cell) or avoid.has(cell):
 				continue
 			var sides: Array[Vector2i] = Dressing._wall_sides(map, cell)
-			if sides.is_empty() or rng.randi() % ODDS != 0:
+			if sides.is_empty() or rng.randi() % odds != 0:
 				continue
 			var side: Vector2i = sides[rng.randi() % sides.size()]
 			var along := Vector3(side.y, 0, side.x).abs()

@@ -42,6 +42,17 @@ var _state
 var _camera: Camera3D
 var _light: OmniLight3D
 var _party_token: Node3D
+## The lead hero's 3D figure in the ring (#251), and what it last showed.
+var _figure: Node3D
+var _figure_from := Vector3.ZERO
+var _figure_health := -1
+## Board figures by hero name; anyone else is the generic recruit.
+const FIGURES := {
+	"Mara": "res://art/enemies/combat-roster-3d-v1/mara.tscn",
+	"Corin": "res://art/enemies/combat-roster-3d-v1/corin.tscn",
+	"Sister Alwen": "res://art/enemies/combat-roster-3d-v1/alwen.tscn",
+}
+const RECRUIT_FIGURE := "res://art/enemies/combat-roster-3d-v1/recruit.tscn"
 var _marks: Array[Node3D] = []
 var _hidden: Array[Node3D] = []
 var _env: Environment
@@ -208,6 +219,7 @@ func _process(delta: float) -> void:
 	if is_instance_valid(_party_token):
 		_party_token.global_position = Vector3(at.x, 0.02, at.z)
 		_party_token.rotation.y = _main._party.rotation.y
+		_animate_figure()
 	_refresh -= delta
 	if _refresh <= 0.0:
 		_refresh = 0.15
@@ -320,6 +332,58 @@ func _build_party_token() -> void:
 	arrow.rotation_degrees = Vector3(-90, 0, 0)
 	arrow.position = Vector3(0, 0.05, -0.95)
 	_party_token.add_child(arrow)
+	# The lead hero stands in the ring (#251): the party's main hero, or the
+	# first still standing. The cards still show who else is there.
+	_figure = null
+	var lead: Companion = _lead()
+	if lead and load("res://scripts/settings.gd").get_value("enemy_models"):
+		_figure = load(FIGURES.get(lead.display_name, RECRUIT_FIGURE)).instantiate()
+		_figure.rotation.y = PI  # figures face +Z; the party looks along -Z
+		_party_token.add_child(_figure)
+		_figure.set_motion(load("res://scripts/settings.gd").get_value("flashes"))
+		_figure_health = lead.health
+		if not _main._combat.hero_acted.is_connected(_on_hero_acted):
+			_main._combat.hero_acted.connect(_on_hero_acted)
+
+
+func _lead() -> Companion:
+	var party = _main._party_state
+	for hero: Companion in party.living_members():
+		if hero.main_hero:
+			return hero
+	return party.living_members()[0] if not party.living_members().is_empty() else null
+
+
+## The figure strikes, shoots or braces with the party's action.
+func _on_hero_acted(_hero, action: Dictionary, _outcome: Dictionary) -> void:
+	if not active or not is_instance_valid(_figure):
+		return
+	match action.get("kind", ""):
+		"strike", "shoot", "attack", "throw", "brew": _figure.play("attack")
+		"brace", "defend": _figure.play("defend")
+		"cast": _figure.play("cast")
+
+
+## Walks while the party moves, flinches when the lead is hurt, falls if
+## they go down; otherwise idles (attack and hurt return to idle themselves).
+func _animate_figure() -> void:
+	if not is_instance_valid(_figure):
+		return
+	var lead: Companion = _lead()
+	var moving: bool = _main._party.global_position.distance_to(_figure_from) > 0.01
+	_figure_from = _main._party.global_position
+	var pose: String = str(_figure.get("current_pose"))
+	if lead and lead.health < _figure_health:
+		_figure.play("hurt")
+	elif lead == null:
+		if pose != "fall":
+			_figure.play("fall")
+	elif moving and pose in ["idle", "walk"]:
+		if pose != "walk":
+			_figure.play("walk")
+	elif not moving and pose == "walk":
+		_figure.play("idle")
+	_figure_health = lead.health if lead else -1
 
 
 ## Tiles: what each foe threatens next turn, what it could reach, and a

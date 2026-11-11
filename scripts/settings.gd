@@ -15,6 +15,7 @@ const DEFAULTS := {
 	"fullscreen": false, "flashes": true, "text_size": "Normal",
 	"map_fights": true,  # fights on the map (#171, owner chose 2026-11-02); the battle stage is set aside
 	"tactical_view": true,  # prototype (owner, 2026-11-08): fights on the map seen from above
+	"enemy_models": true,  # 3D enemy models where they exist (#251); off: the painted sprites
 	"tips_seen": [],  # first-time tips already shown (2026-10-25)
 }
 ## Current values live in engine metadata, not static variables: static

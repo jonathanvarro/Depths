@@ -15,6 +15,7 @@ const Glyphs := preload("res://art/ui/backlog96-v1/glyphs.gd")
 const CombatFx := preload("res://scripts/combat_fx.gd")
 const Spells := preload("res://scripts/spells.gd")
 const Sounds := preload("res://scripts/sounds.gd")
+const FoeView := preload("res://scripts/foe_view.gd")  # sprites or 3D models (#251)
 const COLOR_TEXT := Color("e8d9b0")
 const COLOR_DIM_TEXT := Color(0.85, 0.8, 0.7, 0.75)
 const ENEMY_PAUSE := 0.45
@@ -581,23 +582,29 @@ func _action_pose(foe, intent: int, outcome: Dictionary) -> String:
 	match intent:
 		CombatState.Intent.REACH: return "lunge"
 		CombatState.Intent.BIRTH: return "birthing"
+	# A 3D model's own gesture for the move, where it has one (#251): the
+	# spiders' web and venom bite, the drummer's beat, the trapper's snare,
+	# the Broodmother calling her brood, the guard bracing, the archer's draw.
+	var gesture: String = {CombatState.Intent.WEB: "web", CombatState.Intent.BITE: "venom", CombatState.Intent.BEAT: "drum",
+			CombatState.Intent.SNARE: "snare", CombatState.Intent.BROOD: "call", CombatState.Intent.CALL: "call",
+			CombatState.Intent.BRACE: "brace", CombatState.Intent.SHOOT: "draw"}.get(intent, "")
+	if gesture != "" and FoeView.is_model(foe.node) and FoeView.has_pose(foe.node, gesture):
+		return gesture
 	return "attack"
 
 
 func _play(foe, animation: String, seconds: float) -> void:
-	var sprite: AnimatedSprite3D = foe.node.get_node_or_null("Sprite") if foe.node else null
-	if sprite == null:
+	var node: Node3D = foe.node if foe.node and is_instance_valid(foe.node) else null
+	if node == null or (FoeView.sprite_of(node) == null and not FoeView.is_model(node)):
 		return
 	if animation == "hurt":  # one cry per blow: its death if it fell (#217)
 		Sounds.play(self, Sounds.creature(foe.type) + ("_death" if foe.health <= 0 else "_hurt"), -6.0)
-	if not sprite.sprite_frames.has_animation(animation):
-		animation = "attack"
 	_busy[foe] = true
-	sprite.play(animation)
+	FoeView.play(node, animation)  # a sprite animation or a model's clip (#251)
 	await get_tree().create_timer(seconds).timeout
 	_busy.erase(foe)
-	if is_instance_valid(sprite):
-		sprite.play(_rest_pose(foe, sprite))
+	if is_instance_valid(node) and foe.is_alive():
+		FoeView.play(node, _rest_pose(foe, node), "idle")
 
 
 ## Gas rolls over the party when a bloat bursts (#141's four-frame cloud).
@@ -627,7 +634,7 @@ func _gas_cloud() -> void:
 ## The pose a foe holds between actions (#141's state drawings): a bat on
 ## the ground, a brute winding up or catching its breath, a bloat swelling,
 ## a miner holding someone. Idle otherwise, or when the art lacks the pose.
-func _rest_pose(foe, sprite: AnimatedSprite3D) -> String:
+func _rest_pose(foe, node: Node) -> String:
 	var pose := "idle"
 	match foe.type.tactic:
 		EnemyType.Tactic.SWOOPER:
@@ -653,13 +660,21 @@ func _rest_pose(foe, sprite: AnimatedSprite3D) -> String:
 			pose = "off-balance" if foe.staggered else "idle"
 		EnemyType.Tactic.SHEPHERD:
 			pose = "birthing" if foe.intent == CombatState.Intent.BIRTH else "tending"
-	return pose if sprite.sprite_frames.has_animation(pose) else "idle"
+	return pose if FoeView.has_pose(node, pose) else "idle"
 
 
 func _fade_out(foe) -> void:
 	if _fading.has(foe):
 		return
 	_fading[foe] = true
+	if FoeView.is_model(foe.node):
+		# A 3D model (#251) falls and lies still, then goes from the board.
+		_busy[foe] = true
+		FoeView.play(foe.node, "fall", "fall")
+		await get_tree().create_timer(FoeView.fade_time(foe.node)).timeout
+		if is_instance_valid(foe.node):
+			foe.node.visible = false
+		return
 	var sprite: AnimatedSprite3D = foe.node.get_node_or_null("Sprite") if foe.node else null
 	if sprite and sprite.sprite_frames.has_animation("burst"):
 		# A gas-bloat tears open (#141), and the gas rolls over the party.
@@ -706,11 +721,15 @@ func _process(_delta: float) -> void:
 		# The held pose for its state, between actions (#141).
 		var held: AnimatedSprite3D = foe.node.get_node_or_null("Sprite") if foe.node else null
 		if held and foe.is_alive() and not _busy.has(foe):
-			var pose := _rest_pose(foe, held)
+			var pose := _rest_pose(foe, foe.node)
 			if held.animation != pose:
 				held.play(pose)
 				if foe.type.tactic == EnemyType.Tactic.SWOOPER and reframe.is_valid():
 					reframe.call(foe.node)
+		elif FoeView.is_model(foe.node) and foe.is_alive() and not _busy.has(foe):
+			var pose := _rest_pose(foe, foe.node)  # a model holds its state's clip too
+			if FoeView.current(foe.node) not in [pose, FoeView.MODEL_POSES.get(pose, pose)]:
+				FoeView.play(foe.node, pose, "idle")
 		# Fallen without a blow of ours (a gas burst, its own swell): fade it.
 		if foe.node and foe.node.visible and not foe.is_alive() and not foe.fled and not _fading.has(foe):
 			_fade_out(foe)

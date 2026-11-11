@@ -132,7 +132,9 @@ func _choose(choice: EventChoice) -> void:
 	_clear_chips()
 	_add_chips(result["changes"])
 	_clear_buttons()
-	_add_button("Continue", func(): _finish({"left": false, "ambush": result["ambush"]}))
+	var fired: bool = _event.kind == 3 and (result["changes"].any(func(change): return not change["good"]) or (_rules.alarm_raised and not was_alarmed))
+	var picked: int = _event.choices.find(choice)
+	_add_button("Continue", func(): _finish({"left": false, "ambush": result["ambush"], "choice": picked, "fired": fired}))
 
 
 func _finish(result: Dictionary) -> void:

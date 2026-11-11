@@ -4,11 +4,13 @@
 [ext_resource type="Script" path="res://scripts/injury.gd" id="1_p4tv1"]
 [ext_resource type="PackedScene" path="res://art/enemies/monsters-v1/venom-spider/scene.tscn" id="2_wuvvt"]
 [ext_resource type="Script" path="res://scripts/enemy_type.gd" id="3_6swf0"]
+[ext_resource type="PackedScene" path="res://art/enemies/field-creatures-3d-v1/venom-spider.tscn" id="model3d"]
 
 [resource]
 script = ExtResource("3_6swf0")
 display_name = "Venom spider"
 scene = ExtResource("2_wuvvt")
+model = ExtResource("model3d")
 max_health = 8
 damage_min = 2
 accuracy = 0.75

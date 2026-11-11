@@ -4,11 +4,13 @@
 [ext_resource type="Resource" path="res://data/injuries/limp.tres" id="2_ky06o"]
 [ext_resource type="PackedScene" path="res://art/enemies/monsters-v1/goblin-trapper/scene.tscn" id="3_64u6c"]
 [ext_resource type="Script" path="res://scripts/enemy_type.gd" id="4_aqoib"]
+[ext_resource type="PackedScene" path="res://art/enemies/combat-roster-3d-v1/goblin-trapper.tscn" id="model3d"]
 
 [resource]
 script = ExtResource("4_aqoib")
 display_name = "Goblin trapper"
 scene = ExtResource("3_64u6c")
+model = ExtResource("model3d")
 max_health = 10
 damage_min = 2
 injury_chance = 0.05

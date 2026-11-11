@@ -13,6 +13,33 @@ Format:
 
 ---
 
+## 2026-11-11 – Claude (3D combat models, environment props and audio integrated: #251, #252, #246, #247, #250, #225, #217)
+
+- **Merged** the delivery branches (only notes and docs conflicted; both sides kept):
+  - background-asset-checks (#253);
+  - rat-landmarks-3d (#252);
+  - combat-roster-3d, which includes spiders-goblin-3d (#251/#255);
+  - fortress-goblin-direction;
+  - fortress-waterworks-3d (#246);
+  - traps-sites-mist-3d (#247/#244: herb icon and first-person mist, already wired on the branch);
+  - transitions-blockers-regional-3d (#250/#225).
+
+  The other assistant's uncommitted #234 work was set aside and restored unchanged; it is still uncommitted.
+- **Model-aware combat** (`scripts/foe_view.gd`): `CombatScreen` plays poses, held state poses, gestures and falls through FoeView, for sprites (the "Sprite" AnimatedSprite3D) or models (play/sample/set_motion). Models stand on their tile, face the party, take no sprite scale or tint, and fall and lie still before leaving the board. Light visibility and the tag height (`visual_height`) are unchanged.
+  - `_action_pose` uses the model's own clip where there is one: web, venom bite, drum, snare, call, brace, draw.
+  - The dark stage (lairs, gate, queen, opening, or the board off) keeps the painted sprites: it is framed for them.
+- **Enemies:** `EnemyType.model` and `view_scene()`, with the Settings "enemy_models" ("3D enemies") switch; `scene` stays the sprite fallback. Models on: rat (pilot; scene given `visual_height` 0.47), great rat, spider, web-spinner, venom spider, goblin drummer, goblin trapper, Broodmother. Plain goblins, the archer, the guard and the queen wait for #257 (Goblin King direction).
+- **Party figure:** the board's ring holds the lead hero's figure (Mara, Corin, Alwen, or the recruit). It walks, strikes or shoots, braces, casts, flinches and falls with the party.
+- **Environment:**
+  - **Events with 3D props:** traps (tripwire, bell, snare, dart plate, hollow floor), idol (now `prop_on_wall`), pool, defiled shrine, fouled well, buried cache, sluice, flow gate. Builders updated: build_shrines, build_traps.
+  - **Prop states follow the outcome** (`EventScreen` result "choice"/"fired"; main `_empty_prop(cell, state)`, kept in `map.marks["prop_state"]`): fired = empty, stepped round = closed, disarmed = open.
+  - **Themes:** cave/fungal webs intact/torn, root barrier, root climb (and the cave ledge); stone and fortress 3D flights. Galleries use the 3D pipe and gutter. KayKit props now also on floors 2–6 in fungal/scorched/waterlogged skins (sparser).
+  - **Not placed yet:** the opening's daylight mouth, and the palisade, watch post, walkway, cage and throne (they need reserved fortress space).
+- **Audio #217:** all live already (roots sound on root passages).
+- **Checks:** new `enemy_models_check` and `environment_3d_check`.
+  - `run_checks.sh` now resets test settings before each check (a fixture had left flashes off, which broke the opening's bleeding dim), and skips non-suite capture fixtures (no "fails=").
+  - tactical_check clears a spider's web before testing a tapped strike.
+
 ## 2026-11-11 – ChatGPT (fortress goblin direction and the Goblin King)
 
 - Did: recorded the owner's choice of references 1 and 2 for the fortress

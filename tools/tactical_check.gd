@@ -68,6 +68,9 @@ func _initialize() -> void:
 	check("...looking down on the party", cam.global_transform.basis.z.y > 0.8, cam.global_transform.basis.z)
 	check("ceilings are out of the way", _ceilings_hidden(main))
 	check("the party has a token, facing its way", is_instance_valid(tactical._party_token))
+	check("...with the lead hero's 3D figure in it (#251)", is_instance_valid(tactical._figure) and tactical._figure.scene_file_path.ends_with("mara.tscn"), tactical._figure.scene_file_path if tactical._figure else "none")
+	tactical._on_hero_acted(null, {"kind": "strike"}, {})
+	check("...who strikes with the party", tactical._figure.current_pose == "attack")
 	check("tiles show what the foes threaten", not tactical._marks.is_empty(), tactical._marks.size())
 	await _snap("board")
 
@@ -142,6 +145,7 @@ func _initialize() -> void:
 		for h in main._party_state.members:
 			h.aim_base = 2.0
 			h.refresh_stats()
+		state._webbed.clear()  # a spider's web spoils one blow: not what this tests
 		check("tapping a foe beside you turns to it and strikes", tactical.act_on(beside) and state.foe_ahead() == foe)
 		await create_timer(1.0).timeout
 		check("...the blow lands", foe.health < health_before or not foe.is_alive(), "%d -> %d" % [health_before, foe.health])

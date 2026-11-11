@@ -51,6 +51,7 @@ const QuestLog := preload("res://scripts/quest_log.gd")
 const Story := preload("res://scripts/story.gd")
 const Packages := preload("res://scripts/packages.gd")
 const BattleStage := preload("res://scripts/battle_stage.gd")
+const FoeView := preload("res://scripts/foe_view.gd")  # sprite or 3D model foes (#251)
 const TacticalView := preload("res://scripts/tactical_view.gd")
 ## Prototype (owner, 2026-11-08): a fight on the map seen from above.
 var _tactical: Node3D
@@ -878,7 +879,12 @@ func _run_event(cell: Vector2i) -> void:
 	if result["left"]:
 		_map.triggered.erase(cell)
 		return
-	_empty_prop(cell)
+	# What the trap's art shows now follows what happened (#247): it went
+	# off; it was stepped round and is still set; or it was disarmed.
+	var prop_state := "empty"
+	if event.kind == DungeonMap.Content.TRAP and not result.get("fired", true):
+		prop_state = "closed" if result.get("choice", -1) == 0 else "open"
+	_empty_prop(cell, prop_state)
 	if Quests.has_flag(_camp_state, "lower_gate", "seen") and not Quests.has_flag(_camp_state, "lower_gate", "ending_shown"):
 		await _slice_ending(cell)
 	if drained:
@@ -1322,10 +1328,11 @@ func _place_group(group) -> void:
 func _show_group(group) -> void:
 	if is_instance_valid(group.node):
 		group.node.queue_free()
-	var node: Node3D = group.types[0].scene.instantiate()
+	var node: Node3D = group.types[0].view_scene().instantiate()
 	_dress_foe(node, group.types[0])
 	node.position = Vector3(group.cell.x * CELL_SIZE, 0.0, group.cell.y * CELL_SIZE)
 	_roamer_root.add_child(node)
+	FoeView.face(node, _party.global_position)
 	group.node = node
 
 
@@ -1520,12 +1527,13 @@ func _free_cells_near(from: Vector2i, count: int, taken: Dictionary) -> Array[Ve
 
 
 func _place_field_foe(foe) -> void:
-	var node: Node3D = foe.type.scene.instantiate()
+	var node: Node3D = foe.type.view_scene().instantiate()
 	node.position = Vector3(foe.cell.x * CELL_SIZE, 0.0, foe.cell.y * CELL_SIZE)
 	_dress_foe(node, foe.type)
 	if foe.elite != "":
 		_mark_elite(node)
 	_roamer_root.add_child(node)  # not in the level: a shut door rebuilds it
+	FoeView.face(node, _party.global_position)
 	foe.node = node
 
 
@@ -1568,8 +1576,9 @@ func _lift_field_foes() -> void:
 	for foe in _combat._state.living_foes():
 		if not is_instance_valid(foe.node):
 			continue
-		if _tactical.active:  # seen from above: everyone stands on their tile
+		if _tactical.active or FoeView.is_model(foe.node):  # on its tile, feet on the floor (#251)
 			foe.node.position = Vector3(foe.cell.x * CELL_SIZE, 0.0, foe.cell.y * CELL_SIZE)
+			FoeView.face(foe.node, _party.global_position)
 			continue
 		var away: Vector2i = foe.cell - _party.cell
 		var setback := Vector3(signi(away.x), 0, signi(away.y)) * FIELD_FOE_SETBACK if absi(away.x) + absi(away.y) == 1 else Vector3.ZERO
@@ -2096,14 +2105,23 @@ func _create_room_prop(cell: Vector2i,event: RoomEvent) -> Node3D:
 	return node
 
 
-func _empty_prop(cell: Vector2i) -> void:
+## A resolved event's prop (#247): "empty" by default (used, sprung,
+## searched); a trap stepped round stays "closed" (still set) and one
+## disarmed shows "open". The state is kept on the map for a return visit.
+func _empty_prop(cell: Vector2i, state := "") -> void:
+	if _map != null and state != "":
+		if not _map.marks.has("prop_state"):
+			_map.marks["prop_state"] = {}
+		_map.marks["prop_state"][cell] = state
+	if state == "" and _map != null:
+		state = _map.marks.get("prop_state", {}).get(cell, "empty")
 	var node = _props.get(cell)
 	# A trap hidden from this hero gains its resolved prop immediately.
 	if node == null and _map != null and _map.triggered.has(cell) and not _map.solid.has(cell):
 		var event: RoomEvent = _map.events.get(cell)
 		if event:node = _create_room_prop(cell,event)
 	if node and "state" in node:
-		node.set("state", "empty")
+		node.set("state", state)
 
 
 ## Simple shapes until the props arrive (#96): a pale stone for strange
@@ -2463,7 +2481,7 @@ func _add_fortress_dressing() -> void:
 func _place_extra_foe(foe) -> void:
 	var forward := -_party.global_transform.basis.z
 	var right := _party.global_transform.basis.x
-	var node: Node3D = foe.type.scene.instantiate()
+	var node: Node3D = foe.type.view_scene().instantiate()
 	node.position = _party.position + forward * CELL_SIZE * 1.0 + right * randf_range(-1.0, 1.0)
 	_dress_foe(node, foe.type)
 	BattleStage.raise(node)
@@ -2595,6 +2613,10 @@ func _stonework_vision() -> void:
 
 ## Optional legacy presentation adjustments; new art has its own native scale.
 func _dress_foe(node: Node3D, type: EnemyType) -> void:
+	if FoeView.is_model(node):
+		# A 3D model (#251) is made to size: no sprite scale or tint.
+		FoeView.set_motion(node, Settings.get_value("flashes"))
+		return
 	node.scale *= type.sprite_scale
 	var sprite := node.get_node_or_null("Sprite")
 	if sprite and type.tint != Color.WHITE:
@@ -2623,6 +2645,9 @@ func _place_foes(foes: Array) -> void:
 	for i in ordered.size():
 		var foe = ordered[i]
 		var depth := distance + (CELL_SIZE * 0.5 if foe.in_back() and ahead_open else 0.0)
+		# The dark stage keeps the painted art (2026-11-11): it is framed for
+		# it, and first person is where those paintings belong. The 3D models
+		# stand on the map and the board.
 		var node: Node3D = foe.type.scene.instantiate()
 		node.position = _party.position + forward * depth + right * offsets[mini(i, offsets.size() - 1)]
 		_dress_foe(node, foe.type)
@@ -2630,13 +2655,15 @@ func _place_foes(foes: Array) -> void:
 			_mark_elite(node)
 		BattleStage.raise(node)
 		_level.add_child(node)
+		FoeView.raise_model(node)  # a model draws over the fog too (#251)
+		FoeView.face(node, _party.global_position)
 		_clear_of_panel(node)
 		foe.node = node
 
 
 ## An elite (#140) stands a little larger, with a hot rim of colour.
 func _mark_elite(node: Node3D) -> void:
-	node.scale *= 1.1
+	node.scale *= 1.1  # a 3D model too; only sprites take the colour rim
 	var sprite: SpriteBase3D = node.get_node_or_null("Sprite")
 	if sprite:
 		sprite.modulate = sprite.modulate * Color(1.25, 0.95, 0.85)
@@ -2651,6 +2678,17 @@ func _clear_of_panel(node: Node3D) -> void:
 	# The panel's top, from its own size: it may not be laid out yet when
 	# the first fight starts. 16 is the fight screen's margin.
 	var line: float = screen_height - 16.0 - _combat._actions.get_combined_minimum_size().y - 8.0
+	if FoeView.is_model(node):
+		# A 3D model keeps its feet on the floor (#251): instead of lifting
+		# it, step it back until its feet show above the panel.
+		var away := -camera.global_transform.basis.z
+		away.y = 0.0
+		away = away.normalized()
+		for step in 8:
+			if camera.is_position_behind(node.global_position) or camera.unproject_position(node.global_position).y <= line:
+				return
+			node.global_position += away * 0.35
+		return
 	for attempt in 2:  # the second pass corrects for perspective
 		var lowest := -INF
 		var distance := 0.0

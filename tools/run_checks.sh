@@ -28,10 +28,19 @@ run() {
 	fi
 }
 
+# Each check starts from the default settings: a check that changes one
+# (and stops before putting it back) mustn't change the next (2026-11-11).
+TEST_SETTINGS="${APPDATA:-$HOME/.local/share}/Godot/app_userdata/Depths/test_settings.cfg"
 for f in tools/*_check.gd; do
+	# Only the suite's own checks (they print "fails="); native capture
+	# fixtures with their own report format run separately (#253).
+	grep -q 'fails=' "$f" || continue
+	rm -f "$TEST_SETTINGS"
 	run "$(basename "$f" .gd)" --script "$f" -- desk "$SHOTS"
 done
+rm -f "$TEST_SETTINGS"
 for hero in mara corin alwen; do
+	rm -f "$TEST_SETTINGS"
 	run "opening $hero" --script tools/opening_playthrough.gd -- desk "$SHOTS" 7 "" "$hero"
 done
 echo "failed: $failed"

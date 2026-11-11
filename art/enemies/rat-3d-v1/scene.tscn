@@ -5,4 +5,5 @@
 [node name="RatPilot" type="Node3D"]
 script=ExtResource("1")
 palette_material=ExtResource("3")
+metadata/visual_height=0.47
 [node name="Model" parent="." instance=ExtResource("2")]

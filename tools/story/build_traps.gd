@@ -7,9 +7,9 @@ extends SceneTree
 ## Godot --headless --path . --script tools/story/build_traps.gd
 
 const LIMP := preload("res://data/injuries/limp.tres")
-const BELL_WIRE := preload("res://art/props/traps-lamps-v1/bell.tscn")
-const SNARE := preload("res://art/props/traps-lamps-v1/snare.tscn")
-const DART := preload("res://art/props/traps-lamps-v1/dart.tscn")
+const BELL_WIRE := preload("res://art/props/traps-sites-3d-v1/bell-alarm.tscn")  # 3D (#247)
+const SNARE := preload("res://art/props/traps-sites-3d-v1/snare.tscn")  # 3D (#247)
+const DART := preload("res://art/props/traps-sites-3d-v1/dart-plate.tscn")  # 3D (#247)
 
 
 func _outcome(fields: Dictionary) -> EventOutcome:

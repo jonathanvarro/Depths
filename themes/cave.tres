@@ -13,11 +13,11 @@
 [ext_resource type="AudioStream" path="res://audio/field-v1/wall-bump.wav" id="10"]
 [ext_resource type="AudioStream" path="res://audio/field-v1/passage-web.wav" id="11"]
 [ext_resource type="AudioStream" path="res://audio/field-v1/passage-roots.wav" id="roots"]
-[ext_resource type="PackedScene" path="res://art/features/cave-v1/closed.tscn" id="12"]
-[ext_resource type="PackedScene" path="res://art/features/cave-v1/opened.tscn" id="13"]
-[ext_resource type="PackedScene" path="res://art/features/cave-v1/blocked.tscn" id="14"]
-[ext_resource type="PackedScene" path="res://art/features/cave-v1/descent.tscn" id="15"]
-[ext_resource type="PackedScene" path="res://art/features/cave-v1/ascent.tscn" id="16"]
+[ext_resource type="PackedScene" path="res://art/features/transitions-3d-v1/web-intact.tscn" id="12"]
+[ext_resource type="PackedScene" path="res://art/features/transitions-3d-v1/web-torn.tscn" id="13"]
+[ext_resource type="PackedScene" path="res://art/features/transitions-3d-v1/root-barrier.tscn" id="14"]
+[ext_resource type="PackedScene" path="res://art/features/transitions-3d-v1/cave-ledge-down.tscn" id="15"]
+[ext_resource type="PackedScene" path="res://art/features/transitions-3d-v1/root-climb-up.tscn" id="16"]
 
 [resource]
 script = ExtResource("1")

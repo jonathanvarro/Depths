@@ -5,10 +5,12 @@
 [ext_resource type="PackedScene" path="res://art/enemies/campaign-v1/webspinner/scene.tscn" id="2"]
 [ext_resource type="Resource" path="res://data/injuries/deep_wound.tres" id="3"]
 [ext_resource type="Resource" path="res://data/injuries/limp.tres" id="4"]
+[ext_resource type="PackedScene" path="res://art/enemies/field-creatures-3d-v1/webspinner.tscn" id="model3d"]
 
 [resource]
 script = ExtResource("1")
 scene = ExtResource("2")
+model = ExtResource("model3d")
 injuries = Array[Injury]([ExtResource("3"), ExtResource("4")])
 display_name = "Webspinner"
 max_health = 8

@@ -38,7 +38,9 @@ const WATER_EDGE_ODDS := 3
 ## pieces with the centre height each needs, and the dead lamp on dry floor.
 const WATERWORKS := {
 	"dripping-channel": [preload("res://art/dressing/waterworks-v1/dripping-channel.tscn"), 1.23],
-	"broken-pipe": [preload("res://art/dressing/waterworks-v1/broken-pipe.tscn"), 0.9],
+	# The 3D pipe and gutter (#246) mount at 1.2 m on the real wall face.
+	"broken-pipe": [preload("res://art/props/fortress-waterworks-3d-v1/broken-pipe.tscn"), 1.2],
+	"wall-gutter": [preload("res://art/props/fortress-waterworks-3d-v1/wall-gutter.tscn"), 1.2],
 }
 const SILTED_LAMP := preload("res://art/dressing/waterworks-v1/silted-lamp.tscn")
 const WALL_PIECE_ODDS := 7  # one wall-side cell in this many

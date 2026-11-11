@@ -5,11 +5,13 @@
 [ext_resource type="PackedScene" path="res://art/enemies/monsters-v1/broodmother/scene.tscn" id="3_3pro8"]
 [ext_resource type="Script" path="res://scripts/enemy_type.gd" id="4_ch0f5"]
 [ext_resource type="Resource" path="res://data/enemies/small_spider.tres" id="5_fqg88"]
+[ext_resource type="PackedScene" path="res://art/enemies/combat-roster-3d-v1/broodmother.tscn" id="model3d"]
 
 [resource]
 script = ExtResource("4_ch0f5")
 display_name = "Broodmother"
 scene = ExtResource("3_3pro8")
+model = ExtResource("model3d")
 max_health = 20
 damage_min = 2
 damage_max = 4

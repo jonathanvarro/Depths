@@ -16,9 +16,9 @@ const PICK := preload("res://data/items/pick.tres")
 const ORE := preload("res://data/items/copper_ore.tres")
 const OIL := preload("res://data/items/oil_flask.tres")
 const SHRINE := "res://art/dressing/mine-3d-v1/miners-shrine.tscn"  # #241's 3D shrine, set in a wall (was #132's)
-const DEFILED_SHRINE := "res://art/props/shrine-events-v1/defiled-shrine.tscn"
-const POOL := "res://art/props/shrine-events-v1/fouled-well.tscn"
-const WORKINGS := "res://art/props/shrine-events-v1/buried-cache.tscn"
+const DEFILED_SHRINE := "res://art/props/shrine-events-3d-v1/defiled-shrine.tscn"  # 3D (#252)
+const POOL := "res://art/props/shrine-events-3d-v1/fouled-well.tscn"  # 3D (#252)
+const WORKINGS := "res://art/props/shrine-events-3d-v1/buried-cache.tscn"  # 3D (#252)
 const OBJECT := 4  # DungeonMap.Content.STRANGE_OBJECT
 const CHEST := 2
 
