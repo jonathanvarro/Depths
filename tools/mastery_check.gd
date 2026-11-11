@@ -95,6 +95,17 @@ func _initialize() -> void:
 	state.foes[0].type.accuracy = 1.0
 	state.enemy_act(state.foes[0])
 	check("a blow taken teaches the armour", state.mastery_gain.get(mara.body, 0.0) > 0.0)
+	# The Borrowed Pack's many bites teach a shield too, as single blows do (#219).
+	var pack = _fight(_item("iron_sword"), "borrowed_pack")
+	var bitten: Companion = pack.party.members[0]
+	bitten.body = _item("studded_jerkin")
+	bitten.back = _item("buckler")
+	bitten.health = 999
+	pack.foes[0].type = pack.foes[0].type.duplicate()
+	pack.foes[0].type.accuracy = 1.0
+	pack._many_bites(pack.foes[0])
+	check("many bites teach the shield as well as the armour", pack.mastery_gain.get(bitten.back, 0.0) > 0.0 and pack.mastery_gain.get(bitten.body, 0.0) > 0.0,
+			[pack.mastery_gain.get(bitten.back, 0.0), pack.mastery_gain.get(bitten.body, 0.0)])
 
 	var no_bonus = _fight(_item("iron_sword"), "goblin")
 	no_bonus._credit(no_bonus.party.members[0].weapon, "miss", no_bonus.foes[0])

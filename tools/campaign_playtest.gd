@@ -77,6 +77,7 @@ var trinket_rng := RandomNumberGenerator.new()  # trinket drops (#135)
 var wanderers := Wanderers.new()  # wandering monsters, as in the game
 var wander_rng := RandomNumberGenerator.new()
 var prayer_rng := RandomNumberGenerator.new()  # miscasts (#170)
+var item_age := {}  # Equipment -> {day, expedition, fights, front, back} since first worn (#219)
 
 
 func _initialize() -> void:
@@ -137,7 +138,11 @@ func _campaign(hero_path: String, run_seed: int, max_days: int) -> Dictionary:
 		"steps_bright": 0, "steps_steady": 0, "steps_dim": 0, "steps_out": 0,
 		"home_no_light": 0, "torches_lit": 0, "flasks_used": 0, "xp_spent_out_day": {}, "levels_at_end": [],
 		"treated": 0, "recruits_hired": 0, "quest_days": {}, "queen_attempts": [], "gate_attempts": [],
+		# Gear mastery pace (#219): each level an item reaches, and each
+		# fight's raw gain (before practised hands) by slot and row.
+		"mastery_levels": [], "mastery_fights": {}, "mastery_rounds": {}, "mastery_end": [],
 	}
+	item_age.clear()
 	party = PS.new()
 	party.add_member(load(hero_path))
 	var lead: Companion = party.members[0]
@@ -181,6 +186,10 @@ func _campaign(hero_path: String, run_seed: int, max_days: int) -> Dictionary:
 			break
 	stats["days"] = camp.day
 	stats["levels_at_end"] = party.members.map(func(h): return h.level)
+	for hero: Companion in party.members:
+		for item in [hero.weapon, hero.body, hero.back]:
+			if item and item.base_id != "" and item_age.has(item):
+				stats["mastery_end"].append({"slot": _slot_of(item), "level": GearModel.level_of(item), "fights": item_age[item]["fights"]})
 	return stats
 
 
@@ -296,6 +305,16 @@ func _shop() -> void:
 		if hero.has_bane() and party.supplies.gold >= CampState.LIFT_BANE_PRICE + 20 and camp.lift_bane(party, hero):
 			stats["gold_spent"] += CampState.LIFT_BANE_PRICE
 			stats["banes_lifted"] += 1
+	# BOT_SHIELDS=1 (#219 measurement): everyone with a free back slot carries
+	# a plain buckler, to see how shields learn in each row (the smith doesn't
+	# sell shields yet, and the bot otherwise ignores found ones).
+	if OS.get_environment("BOT_SHIELDS") != "":
+		for hero: Companion in party.members:
+			if hero.back == null:
+				var rng := RandomNumberGenerator.new()
+				rng.seed = camp.day
+				hero.back = GearModel.generate(rng, "buckler", "ordinary")
+				hero.refresh_stats()
 	if camp.site_present("smith"):
 		for hero: Companion in party.members:
 			if hero.body == null:
@@ -406,12 +425,7 @@ func _mean_level() -> float:
 
 
 func _back_at_camp(ending: int) -> void:
-	if ending != 1:  # home in one piece: worn gear learns from the trip (#192)
-		var owned := GearModel.owned_by(party)
-		for hero: Companion in party.members:
-			if hero.is_with_party():
-				for item in [hero.weapon, hero.body, hero.back]:
-					GearModel.award(item, 3.0, owned)
+	# Returning home grants no mastery (#219).
 	if ending == 1:  # wiped (#83): main heroes wake hurt; recruits are lost
 		for hero: Companion in party.members:
 			if hero.is_unconscious():
@@ -827,6 +841,7 @@ func _fight(group: Array, kind: String, on_map := false) -> int:
 		"strain": _mean(party.living_members().map(func(h): return h.strain))}
 	going_in["elites_start"] = state.foes.filter(func(f): return f.elite != "").size()
 	var injuries_before := _injury_count()
+	var worn := _worn_gear(state)  # mastery pace (#219)
 	var guard := 0
 	if on_map and MAP_FIGHTS:
 		_field_fight(state)
@@ -861,14 +876,14 @@ func _fight(group: Array, kind: String, on_map := false) -> int:
 				var coins := randi_range(foe.type.purse.x, foe.type.purse.y)
 				party.supplies.gold += coins
 				stats["gold_found"] += coins
-	# Gear mastery, as main.gd awards it (#192).
+	# Gear mastery, as main.gd awards it: only weapon hits and blows taken,
+	# no participation or return bonus (#219).
 	var owned := GearModel.owned_by(party)
-	if state.result != CS.Result.DEFEAT:
-		for hero: Companion in party.members:
-			if hero.is_with_party() and hero.body and hero.body.base_id != "":
-				state.mastery_gain[hero.body] = minf(5.0, float(state.mastery_gain.get(hero.body, 0.0)) + 1.0)
+	_note_mastery(state, worn)
 	for item in state.mastery_gain:
+		var before := GearModel.level_of(item)
 		GearModel.award(item, state.mastery_gain[item], owned)
+		_note_levels(item, before)
 	if state.result == CS.Result.VICTORY:
 		stats["fights_won"] += 1
 		_award_xp(state, kind)
@@ -888,6 +903,110 @@ func _fight(group: Array, kind: String, on_map := false) -> int:
 	elif state.result == CS.Result.RETREAT:
 		stats["fight_retreats"] += 1
 	return state.result
+
+
+# --- Gear mastery pace (#219) ----------------------------------------------
+
+func _slot_of(item: Equipment) -> String:
+	return "shield" if item.slot == "back" else ("armour" if item.slot == "body" else item.slot)
+
+
+## Each living hero's worn weapon, armour and shield as a fight starts, with
+## the hero's row then. Ages the items by one fight.
+func _worn_gear(state) -> Array:
+	var worn := []
+	for hero: Companion in party.living_members():
+		var front: bool = state.hero_in_front(hero)
+		for item in [hero.weapon, hero.body, hero.back]:
+			if item == null or item.base_id == "":
+				continue
+			if item.slot == "back" and item.guard <= 0:
+				continue  # a pack, not a shield: never learns
+			if not item_age.has(item):
+				item_age[item] = {"day": camp.day, "expedition": stats["expeditions"], "fights": 0, "front": 0, "back": 0}
+			item_age[item]["fights"] += 1
+			item_age[item]["front" if front else "back"] += 1
+			worn.append([item, front])
+	return worn
+
+
+func _note_mastery(state, worn: Array) -> void:
+	for entry in worn:
+		var item: Equipment = entry[0]
+		var key := "%s %s" % [_slot_of(item), "front" if entry[1] else "back"]
+		var gain: float = float(state.mastery_gain.get(item, 0.0))
+		var cap: float = float(GearModel.tables()["mastery"]["weapon_credit" if item.slot == "weapon" else "armour_credit"]["per_fight_cap"])
+		var row: Array = stats["mastery_fights"].get(key, [0, 0.0, 0, 0])
+		row[0] += 1
+		row[1] += gain
+		row[2] += 1 if gain >= cap - 0.001 else 0
+		row[3] += 1 if gain <= 0.0 else 0
+		stats["mastery_fights"][key] = row
+		if entry[1] or item.slot == "weapon":
+			var bucket := "%s r%s" % [_slot_of(item), "1-2" if state.round <= 2 else ("3-4" if state.round <= 4 else ("5-7" if state.round <= 7 else "8+"))]
+			var b: Array = stats["mastery_rounds"].get(bucket, [0, 0.0])
+			b[0] += 1
+			b[1] += gain
+			stats["mastery_rounds"][bucket] = b
+
+
+func _note_levels(item: Equipment, before: int) -> void:
+	if not item_age.has(item):
+		return
+	var age: Dictionary = item_age[item]
+	for level in range(before + 1, GearModel.level_of(item) + 1):
+		stats["mastery_levels"].append({"slot": _slot_of(item), "level": level, "fights": age["fights"],
+				"days": camp.day - age["day"], "expeditions": stats["expeditions"] - age["expedition"] + 1,
+				"row": "front" if age["front"] >= age["back"] else "back"})
+
+
+func _print_mastery(runs: Array) -> void:
+	var levels := []
+	for r in runs:
+		levels.append_array(r["mastery_levels"])
+	for slot in ["weapon", "armour", "shield"]:
+		for row in ["", "front", "back"]:
+			if slot == "weapon" and row != "":
+				continue
+			var parts := []
+			for level in range(1, 7):
+				var hits: Array = levels.filter(func(e): return e["slot"] == slot and e["level"] == level and (row == "" or e["row"] == row))
+				if hits.is_empty():
+					continue
+				parts.append("L%d %s fights / %s days / %s trips (%d)" % [level, _median(hits.map(func(e): return e["fights"])),
+						_median(hits.map(func(e): return e["days"])), _median(hits.map(func(e): return e["expeditions"])), hits.size()])
+			print("  mastery %s%s: %s" % [slot, " (" + row + " row)" if row != "" else "", "; ".join(PackedStringArray(parts)) if not parts.is_empty() else "none"])
+	var fights := {}
+	for r in runs:
+		for key in r["mastery_fights"]:
+			var a: Array = fights.get(key, [0, 0.0, 0, 0])
+			for i in 4:
+				a[i] += r["mastery_fights"][key][i]
+			fights[key] = a
+	var keys := fights.keys()
+	keys.sort()
+	for key in keys:
+		var a: Array = fights[key]
+		print("  per fight, %s: %.2f points; at cap %.0f%%, nothing %.0f%% (%d item-fights)" % [key, a[1] / maxf(1, a[0]),
+				100.0 * a[2] / maxf(1, a[0]), 100.0 * a[3] / maxf(1, a[0]), a[0]])
+	var rounds := {}
+	for r in runs:
+		for key in r["mastery_rounds"]:
+			var a: Array = rounds.get(key, [0, 0.0])
+			a[0] += r["mastery_rounds"][key][0]
+			a[1] += r["mastery_rounds"][key][1]
+			rounds[key] = a
+	var rkeys := rounds.keys()
+	rkeys.sort()
+	print("  points per fight by fight length (front row and weapons): %s" % ", ".join(PackedStringArray(rkeys.map(func(k): return "%s %.2f (%d)" % [k, rounds[k][1] / maxf(1, rounds[k][0]), rounds[k][0]]))))
+	var ends := []
+	for r in runs:
+		ends.append_array(r["mastery_end"])
+	for slot in ["weapon", "armour", "shield"]:
+		var spread := {}
+		for e in ends.filter(func(e): return e["slot"] == slot):
+			spread[e["level"]] = spread.get(e["level"], 0) + 1
+		print("  worn %s mastery at the end: %s" % [slot, spread])
 
 
 # --- Fights on the map (#171), as main.gd plays them ---------------------
@@ -1074,6 +1193,9 @@ func _hero_turn(state, hero: Companion, kind: String) -> void:
 	if heavy and fraction < 0.6 and state.hero_in_front(hero):
 		state.hero_defend(hero)
 		return
+	if _stalling(state, hero, kind, fraction):
+		state.hero_defend(hero)
+		return
 	var reachable: Array = state.targets_for(hero)
 	if reachable.is_empty():
 		if party.living_members().size() > 1 and hero.row == "back" and not hero.has_reach():
@@ -1083,6 +1205,22 @@ func _hero_turn(state, hero: Companion, kind: String) -> void:
 		return
 	reachable.sort_custom(func(a, b): return a.health < b.health)
 	state.hero_attack(hero, reachable[0])
+
+
+## BOT_STALL=1 (#219 measurement): a player farming armour mastery. With one
+## foe left, everyone braces instead of finishing it while any front-row
+## armour is short of its per-fight cap and the party is healthy.
+func _stalling(state, hero: Companion, kind: String, fraction: float) -> bool:
+	if OS.get_environment("BOT_STALL") == "" or kind in ["queen", "gate"] or state.living_foes().size() != 1:
+		return false
+	if fraction < 0.6 or _health_fraction() < 0.6 or state.round > 40:
+		return false
+	var cap: float = float(GearModel.tables()["mastery"]["armour_credit"]["per_fight_cap"])
+	for h: Companion in party.living_members():
+		if state.hero_in_front(h) and h.body and h.body.base_id != "" and float(state.mastery_gain.get(h.body, 0.0)) < cap - 0.001:
+			stats["stall_turns"] = stats.get("stall_turns", 0) + 1
+			return true
+	return false
 
 
 ## main.gd's _award_fight_xp and _grant_xp.
@@ -1282,6 +1420,8 @@ func _summarise(all: Dictionary) -> void:
 		print("  wipes per campaign: mean %.2f; by floor %s" % [_mean(runs.map(func(r): return r["wipes"])), _sum_dicts(runs, "wipes_by_floor")])
 		if OS.get_environment("BOT_WIPES") != "":
 			_print_wipes(runs)
+		if OS.get_environment("BOT_MASTERY") != "":
+			_print_mastery(runs)
 		var dmg := _sum_dicts(runs, "damage_by_floor")
 		var vis := _sum_dicts(runs, "visits_by_floor")
 		var per_visit := {}

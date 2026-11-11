@@ -13,6 +13,24 @@ Format:
 
 ---
 
+## 2026-11-11 – Claude (mastery pace remeasured, #219)
+
+- Did: the campaign bot still gave the removed mastery bonuses (+1 armour
+  per fight taken part in, +3 per worn item on coming home); removed, so it
+  now matches the game. `BOT_MASTERY=1` prints mastery pace (fights, days and
+  trips to each level, per slot and row; points per fight by fight length).
+  Measurement-only switches: `BOT_SHIELDS=1` (everyone carries a buckler),
+  `BOT_STALL=1` (brace against the last foe to farm armour). Small fix: the
+  Borrowed Pack's many bites now teach a shield too (mastery_check covers it).
+- Findings (90 campaigns each, posted on #219): weapons reach mastery 3 in
+  about 25–30 fights (4–5 days), 6 in 72–90 (12–15 days), about 3× slower
+  than the pace the owner approved on 2026-10-31. Armour is 2–3× slower than
+  weapons and almost never reaches 6. Back-row armour/shields learn at about
+  half the front's rate (81–86% of fights teach nothing). Per-fight caps
+  are hit in 1–5% of fights, so longer fights teach more, and bracing
+  against one goblin fills the armour cap in about 5 rounds.
+- Next: owner decisions on #219 (pace, back row, prolonging). No rules changed.
+
 ## 2026-11-11 – Claude (Goblin King replaces the Queen, fortress goblins in 3D, #257; bot fight stalls, #245)
 
 - **Merged** ChatGPT's `codex/fortress-goblins-3d` (notes and animation-library conflicts: both sides kept).

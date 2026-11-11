@@ -1315,6 +1315,8 @@ func _many_bites(foe: Foe) -> Dictionary:
 			damage = ceili(damage * _rear_damage(target))
 		target.change_health(-damage)
 		_credit(target.body, "struck", foe)
+		if target.back and target.back.guard > 0:
+			_credit(target.back, "struck", foe)  # as in enemy_act (#219)
 		total += damage
 		hits.append("%s (%d)" % [target.display_name, damage])
 		if not target.is_alive():
