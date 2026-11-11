@@ -2,9 +2,10 @@ extends Node3D
 ## Model presentation only; callers still own intent, damage, visibility and loot.
 @export var animate_motion:=true
 @export var palette_material: Material
+@export var draw_still_time := 0.38
 var player: AnimationPlayer
 var current_pose:="idle"
-const STATIC_TIME:={"idle":0.0,"walk":0.0,"attack":0.29,"hurt":0.125,"fall":1.0,"web":0.25,"venom":0.29,"draw":0.38,"brace":0.38,"drum":0.46,"snare":0.38,"enraged":0.46,"call":0.38,"cast":0.50,"defend":0.33}
+const STATIC_TIME:={"idle":0.0,"walk":0.0,"attack":0.29,"hurt":0.125,"web":0.25,"venom":0.29,"brace":0.38,"drum":0.46,"snare":0.38,"enraged":0.46,"call":0.38,"cast":0.50,"defend":0.33}
 
 func _ready() -> void:
 	player=find_child("AnimationPlayer",true,false) as AnimationPlayer
@@ -22,7 +23,12 @@ func play(pose: String) -> void:
 	current_pose=pose
 	player.play(pose);player.advance(0)
 	if not animate_motion:
-		sample(pose,player.get_animation(pose).length if pose=="fall" else float(STATIC_TIME.get(pose,0)))
+		var still_time := float(STATIC_TIME.get(pose, 0))
+		if pose == "draw":
+			still_time = draw_still_time
+		elif pose == "fall":
+			still_time = player.get_animation(pose).length
+		sample(pose, still_time)
 
 func sample(pose: String, seconds: float) -> void:
 	if not player.has_animation(pose):return

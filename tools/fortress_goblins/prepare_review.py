@@ -7,17 +7,19 @@ ROOT = Path(__file__).resolve().parents[2]
 TOOL = Path(__file__).resolve().parent
 parser = argparse.ArgumentParser()
 parser.add_argument("--workspace",type=Path,required=True)
+parser.add_argument("--review-output",type=Path)
 args = parser.parse_args()
-out = args.workspace/"build/local-fortress-goblins-3d-v1"
+out = args.review_output or args.workspace/"build/local-fortress-goblins-3d-v1"
 out.mkdir(parents=True,exist_ok=True)
 
-for path in ("art/enemies/fortress-goblins-3d-v1","art/enemies/combat-roster-3d-v1"):
+for path in ("art/enemies/fortress-goblins-3d-v1","art/enemies/combat-roster-3d-v1",
+             "art/props/treatment-supplies-v1"):
     shutil.copytree(ROOT/path,out/path,dirs_exist_ok=True)
 for path in ("art/textures/cave-v1/floor.png","art/third-party/kaykit-dungeon-remastered/grain-floor1.png"):
     target = out/path
     target.parent.mkdir(parents=True,exist_ok=True)
     shutil.copy2(ROOT/path,target)
-for name in ("review.gd","check.gd"):
+for name in ("review.gd","check.gd","check_polish.gd"):
     shutil.copy2(TOOL/name,out/name)
 (out/"project.godot").write_text('''config_version=5
 [application]

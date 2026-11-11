@@ -10,7 +10,9 @@ out of git (see `docs/blender-expedition-kit-tasks.md`).
 
 The [fortress goblin review](fortress-goblins-3d.md) (#257, 2026-11-11)
 contains common goblin idle/attack/hurt/fall, guard brace and the archer's
-revised draw/attack, all at 24 fps. The King uses an independent 15-bone rig
+revised draw/attack, all at 24 fps. The follow-up archer uses a 58th bone
+for the string midpoint. The tips stay on the bow, and both clips release
+at frame 8. Reduced motion holds the draw at frame 6. The King uses an independent 15-bone rig
 with idle (48 frames), planted weight shift (32), attack (34), hurt (15)
 and fall (32). Fixed staff and hand anchors, held still poses and the
 separate staff release were checked in Godot.

@@ -13,6 +13,17 @@ Format:
 
 ---
 
+## 2026-11-11 – ChatGPT (Fortress polish and treatment pickup, #257 / #238)
+
+- Did: added the Goblin King's bestiary silhouette, the fortress archer's
+  animated draw and release, and matching treatment-supply icons and 3D pickup.
+  The archer's live Shoot clip releases at frame 8 before combat resets the pose.
+- Next: integrate `codex/fortress-treatment-art` and assign the pickup once the
+  nurse's quest chooses its treatment supplies. The King silhouette uses the
+  enemy resource ID; the existing bestiary lookup handles it.
+- Watch out: the sealed packet leaves its contents open. See
+  `docs/treatment-supply-art.md` for the asset paths and local review.
+
 ## 2026-11-11 – ChatGPT (Goblin King combat motions and victory art, #257)
 
 - Did: added attack, recoil and fall to the King's existing idle and plant.
