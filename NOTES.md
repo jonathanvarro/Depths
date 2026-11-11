@@ -13,6 +13,10 @@ Format:
 
 ---
 
+## 2026-11-11 – Claude (check screenshots on a hidden desktop, closes #253)
+
+- Did: PR #254 (the hidden-desktop launcher) was already merged. The last gap was `tools/run_checks.sh --shots`, which still opened an off-screen but real window. It now runs each check through `tools/testing/background_godot.py`. Tried with teardown/fortress: passes, real screenshots, `test_was_foreground` false. Plain `run_checks.sh` stays headless.
+
 ## 2026-11-11 – Claude (stray TextureRect at exit, #249)
 
 - Did: the leftover was `ConversationScreen._portrait`, a TextureRect kept only for tools to read and never put in the scene, so nothing freed it. The screen now frees it when it goes (`_notification` PREDELETE). Shutdown no longer reports the CanvasItem RID or the 2 leaked objects.
