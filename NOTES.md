@@ -13,6 +13,13 @@ Format:
 
 ---
 
+## 2026-11-11 – Claude (interface audit for owner approval, #169/#51; 3D status; #253 follow-up)
+
+- Did: audited every screen at desktop/phone, Normal/Larger: `docs/interface-audit.md` + `docs/interface-audit-v1/board.jpg`, captured by `tools/ui_audit_capture.gd` (hidden desktop; not in the suite). Eight findings; the worst is camp fire/tent/nurse/cave text at ~8 px on phones, unaffected by Text size. Nothing applied: #169 asks for owner approval first.
+- 3D sets (#225/#246/#247/#250/#252/#255/#251): already live via b27dd96 and PR #258; posted status on each. Only owner review remains, plus 3D art for twelve foes in #251.
+- `background_godot.py` now runs Godot in a kill-on-close job: the console build's child game process survived a timeout before.
+- Next: owner approves/edits the audit fixes; then apply 1, then 2–3 via UiTheme, then 4–8.
+
 ## 2026-11-11 – Claude (check screenshots on a hidden desktop, closes #253)
 
 - Did: PR #254 (the hidden-desktop launcher) was already merged. The last gap was `tools/run_checks.sh --shots`, which still opened an off-screen but real window. It now runs each check through `tools/testing/background_godot.py`. Tried with teardown/fortress: passes, real screenshots, `test_was_foreground` false. Plain `run_checks.sh` stays headless.
