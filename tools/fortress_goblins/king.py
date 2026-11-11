@@ -1,9 +1,75 @@
 """A purpose-built hunch rig and planted-staff motion study for the Goblin King."""
 import math
 import bpy
+from mathutils import Matrix, Quaternion, Vector
 
 from mesh_parts import Mesh
-from build_roster import make_action, rotate
+from build_roster import activate, make_action, points_for, rotate
+
+
+def settle_collapse(rig, meshes):
+    """Settle the body and release the staff independently onto the tile."""
+    body_meshes=meshes[:2]
+    action=bpy.data.actions["fall"]
+    activate(rig,action,32)
+    best=None
+    for pitch in range(-105,-69,7):
+        for roll in range(-28,29,14):
+            for yaw in range(-30,31,15):
+                turn=Quaternion((0,0,1),math.radians(yaw))
+                side=Quaternion((0,1,0),math.radians(roll))
+                tilt=Quaternion((1,0,0),math.radians(pitch))
+                rotation=turn@side@tilt
+                rig.rotation_quaternion=rotation
+                bpy.context.view_layer.update()
+                points=points_for(body_meshes)
+                spans=[max(p[i] for p in points)-min(p[i] for p in points) for i in range(3)]
+                score=spans[2]+2*max(0,max(spans[:2])-1.82)+.001*abs(yaw)
+                if best is None or score<best[0]:
+                    best=(score,rotation.copy())
+    activate(rig,bpy.data.actions["idle"],0)
+    staff=rig.pose.bones["staff"]
+    staff_neutral=staff.matrix.copy()
+    drop=Vector((0,0,1)).rotation_difference(Vector((.02,.999,.03)).normalized())
+    target_rotation=drop@staff_neutral.to_quaternion()
+    keys=[]
+    for frame in range(33):
+        activate(rig,action,frame)
+        amount=min(1,max(0,(frame-13)/14))
+        amount=amount*amount*(3-2*amount)
+        rig.rotation_quaternion=rig.rotation_quaternion.slerp(best[1],amount)
+        bpy.context.view_layer.update()
+        current=rig.matrix_world@staff.matrix
+        if amount>0:
+            body_low=min(p.z for p in points_for(body_meshes))
+            target=Vector((.34,-.96,body_low+.15))
+            rotation=current.to_quaternion().slerp(target_rotation,amount)
+            matrix=Matrix.LocRotScale(current.translation.lerp(target,amount),rotation,Vector((1,1,1)))
+            staff.matrix=rig.matrix_world.inverted()@matrix
+        keys.append((frame,rig.rotation_quaternion.copy(),staff.matrix_basis.copy()))
+    for frame,rotation,pose in keys:
+        rig.rotation_quaternion=rotation
+        rig.keyframe_insert("rotation_quaternion",frame=frame)
+        staff.matrix_basis=pose
+        for prop in ("location","rotation_quaternion","scale"):
+            staff.keyframe_insert(prop,frame=frame,group="staff")
+    # The detached staff swings across the tile just before it lands. Turn
+    # only as much as needed so its horns and the far hand clear that edge.
+    rotations=[]
+    yaw_options=(0,*[v for step in range(2,31,2) for v in (-step,step)])
+    for frame in range(33):
+        activate(rig,action,frame)
+        points=points_for(meshes)
+        def clearance(angle):
+            c,s=math.cos(math.radians(angle)),math.sin(math.radians(angle))
+            x=[c*p.x-s*p.y for p in points]
+            y=[s*p.x+c*p.y for p in points]
+            return max(max(x)-min(x),max(y)-min(y))
+        angle=min(yaw_options,key=lambda a:max(0,clearance(a)-1.98)*10+abs(a)*.002)
+        rotations.append(Quaternion((0,0,1),math.radians(angle))@rig.rotation_quaternion)
+    for frame,rotation in enumerate(rotations):
+        rig.rotation_quaternion=rotation
+        rig.keyframe_insert("rotation_quaternion",frame=frame)
 
 
 def create_king(palette):
@@ -136,6 +202,53 @@ def create_king(palette):
         rotate(arm.pose.bones["head"],(12*amount,-3*amount,7*amount))
         rotate(arm.pose.bones["shoulder_R"],(-7*amount,4*amount,0))
         rotate(arm.pose.bones["forearm_R"],(-6*amount,0,2*amount))
+
+    def strike(arm, amount):
+        # Negative is the weight shift and windup. The positive beat is a
+        # downward blow with the free hand while the staff carries his weight.
+        windup=max(0,-amount)
+        impact=max(0,amount)
+        bones=arm.pose.bones
+        rotate(bones["spine"],(7*windup-7*impact,-7*windup+4*impact,
+                               9*windup-6*impact))
+        rotate(bones["head"],(-10*windup+15*impact,0,-7*impact))
+        rotate(bones["shoulder_R"],(27*windup-9*impact,
+                                   16*windup-5*impact,-8*windup+5*impact))
+        rotate(bones["forearm_R"],(23*windup-9*impact,4*windup,3*impact))
+        rotate(bones["hand_R"],(8*windup-14*impact,-7*windup,0))
+
+    def stagger(arm, amount):
+        bones=arm.pose.bones
+        rotate(bones["spine"],(15*amount,-17*amount,12*amount))
+        rotate(bones["head"],(12*amount,9*amount,-17*amount))
+        rotate(bones["shoulder_R"],(-17*amount,19*amount,-6*amount))
+        rotate(bones["forearm_R"],(-9*amount,0,5*amount))
+
+    def fall(arm, amount):
+        bones=arm.pose.bones
+        turn=Quaternion((0,0,1),math.radians(-41)*amount)
+        lean=Quaternion((1,0,0),math.radians(-86)*amount)
+        arm.rotation_quaternion=turn@lean
+        arm.location=(-.18*amount,-.52*amount,-.30*amount)
+        rotate(bones["spine"],(-9*amount,5*amount,-6*amount))
+        rotate(bones["head"],(8*amount,-9*amount,3*amount))
+        rotate(bones["shoulder_R"],(-21*amount,8*amount,9*amount))
+        rotate(bones["forearm_R"],(-14*amount,7*amount,-8*amount))
+        rotate(bones["shoulder_L"],(7*amount,-35*amount,-3*amount))
+        rotate(bones["forearm_L"],(19*amount,-10*amount,4*amount))
+        rotate(bones["thigh_L"],(-18*amount,-8*amount,11*amount))
+        rotate(bones["foot_L"],(27*amount,0,3*amount))
+        # After release, keep the staff inside the same tile with a slight roll.
+        rotate(bones["staff"],(-10*amount,1*amount,-10*amount))
+        basis=bones["staff"].bone.matrix_local.to_3x3().inverted()
+        bones["staff"].location+=basis@Vector((-.18,-.27,.12))*amount
+
     make_action(rig,"idle",baseline,[(0,0),(12,.8),(24,0),(36,-.8),(48,0)],idle)
     make_action(rig,"plant",baseline,[(0,0),(7,.38),(15,1),(22,1),(32,0)],plant)
+    make_action(rig,"attack",baseline,[(0,0),(7,-.52),(13,-1),(18,1),
+                (22,.76),(28,.24),(34,0)],strike)
+    make_action(rig,"hurt",baseline,[(0,0),(4,1),(8,.54),(15,0)],stagger)
+    make_action(rig,"fall",baseline,[(0,0),(7,.10),(15,.47),(22,.89),
+                (27,1),(32,1)],fall)
+    settle_collapse(rig,meshes)
     return rig,meshes

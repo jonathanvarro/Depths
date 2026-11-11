@@ -1,0 +1,16 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-11-11",
+  "assets": [
+    {
+      "id": "victory",
+      "master": "victory-master.png",
+      "sha256": "fb015ef048675a7e06532a9d52bab9cbda479bdd78de92fbab0fb34a1163c84b",
+      "reference_images": [
+        "art/concepts/fortress-goblins-v1/fortress-lineup.png",
+        "art/illustrations/fortress-v1/victory.png"
+      ],
+      "prompt": "Create a new widescreen 16:9 story card for Depths, aftermath of defeating the Goblin King. Use the second image as reference for the existing fortress hall's architecture and camera, and the rightmost character of the first image only for the King's broken iron circlet and horned animal skull staff. Show an empty crude throne in a bleak old-stone-and-timber hall, the distinctive thick staff fallen diagonally across the lowest stair and a thin broken three-point iron circlet on a folded piece of dark russet cloth nearby. A ray of cold light touches the skull and crown, with one weak warm torch off to a side, wet grit, ragged banners and a far low arch into darkness. Quiet aftermath, no people or bodies, no gore, no text or UI. Clear wide composition, keep narrative objects in the center half and foreground readable when reduced to 640 × 360. Gritty painterly realism, muted stone and timber."
+    }
+  ]
+}

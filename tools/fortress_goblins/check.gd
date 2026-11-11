@@ -120,6 +120,10 @@ func verify(app, entry: Dictionary) -> void:
 		sk.force_update_all_bone_transforms()
 		check(start_staff.distance_to(sk.get_bone_global_pose(sk.find_bone("staff")).origin) < .001,"Planted staff anchor")
 		check(start_grip.distance_to(sk.get_bone_global_pose(sk.find_bone("hand_L")).origin) < .001,"Planted hand anchor")
+		var cue_frames := {"attack":18.0,"hurt":4.0,"fall":32.0}
+		for cue in cue_frames:
+			actor.play(cue)
+			check(absf(actor.player.current_animation_position - cue_frames[cue]/24.0) < .001,"King still frame " + cue)
 	for piece in ["Knife","RoleKit","Kit"]:
 		var node = actor.find_child(piece,true,false)
 		if node is Node3D:

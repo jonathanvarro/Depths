@@ -13,6 +13,17 @@ Format:
 
 ---
 
+## 2026-11-11 – ChatGPT (Goblin King combat motions and victory art, #257)
+
+- Did: added attack, recoil and fall to the King's existing idle and plant.
+  Still mode holds the important frames, and the staff drops separately.
+  A 640 × 360 victory card with the dropped staff and broken circlet is
+  included. The first-person and simulated-board review passed 691 Mobile
+  checks, with 108 captures. See `docs/fortress-goblins-3d.md`.
+- Next: the live encounter swap, its combat cue timing and story text.
+  Preserve completed fortress saves and the lower water gate. The current
+  game still uses the Queen. The archer bowstring remains a separate polish.
+
 ## 2026-11-11 – ChatGPT (first 3D fortress goblin and King pass, #257)
 
 - Did: revised common goblin, crested shield guard and hooded archer; built the

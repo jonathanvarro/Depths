@@ -2,6 +2,7 @@
 import argparse
 import hashlib
 import json
+import shutil
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[2]
@@ -23,6 +24,9 @@ for asset in catalog["assets"]:
     assert (out/"masters"/(asset["id"]+".blend")).is_file()
 for filename in check["captures"]:
     assert (out/"captures"/filename).read_bytes()[:8]==b"\x89PNG\r\n\x1a\n"
+victory=ROOT/"art/illustrations/fortress-king-v1/victory.png"
+if victory.is_file():
+    shutil.copy2(victory,out/"king-victory.png")
 page='''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Depths · Fortress goblin review</title>
 <style>
@@ -41,6 +45,7 @@ select,button{min-height:44px;background:#292c27;color:inherit;border:1px solid 
 <button id="prev" aria-label="Previous sample">−</button><button id="next" aria-label="Next sample">+</button>
 <output id="label" aria-live="polite"></output></div>
 <figure><img id="detail" alt=""></figure>
+__VICTORY__
 <p><a href="validation.json">Godot validation</a>. Use START_REVIEW.cmd for continuous playback and exact frame stepping.</p>
 <script type="application/json" id="data">__CATALOG__</script>
 <script>
@@ -75,5 +80,6 @@ get('prev').onclick = () => { frame = Math.max(0,frame-1); render(); };
 get('next').onclick = () => { frame = Math.min(4,frame+1); render(); };
 choose();
 </script></html>'''
-(out/"inspector.html").write_text(page.replace("__CATALOG__",json.dumps(catalog)),encoding="utf-8")
+illustration='<h2>After the fight</h2><figure><img src="king-victory.png" alt="The fallen skull staff and broken circlet before an empty throne"></figure>' if victory.is_file() else ''
+(out/"inspector.html").write_text(page.replace("__CATALOG__",json.dumps(catalog)).replace("__VICTORY__",illustration),encoding="utf-8")
 print("Fortress gallery",len(catalog["assets"]),"models and",len(check["captures"]),"captures.")
