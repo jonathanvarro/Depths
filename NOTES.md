@@ -13,6 +13,21 @@ Format:
 
 ---
 
+## 2026-11-11 – Claude (fortress structures placed; the opening's daylight mouth, #246, #250)
+
+- `scripts/fortress_dressing.gd` (called from main `_add_fortress_dressing`) places #246's 3D pieces on floor 4:
+  - the throne at the hall cell farthest from every gate, facing the nearest;
+  - a watch post in a hall corner;
+  - two palisades along the hall walls ("empty" = broken once `gate_broken`);
+  - two wall brackets;
+  - an overhead walkway across the hall's middle (ceiling);
+  - up to two empty hanging cages in dead-end side passages.
+
+  Nothing goes on a gate, beside one, or on the throne's cell. Looks only; seeded.
+- The opening's exit uses the 3D daylight mouth (`transitions-3d-v1/daylight-mouth.tscn`).
+- Foes that join mid-fight on the dark stage (`_place_extra_foe`) use the sprite scene, like the rest of the stage.
+- environment_3d_check covers the fortress pieces (none on a gate; palisades follow the gate).
+
 ## 2026-11-11 – Claude (3D combat models, environment props and audio integrated: #251, #252, #246, #247, #250, #225, #217)
 
 - **Merged** the delivery branches (only notes and docs conflicted; both sides kept):

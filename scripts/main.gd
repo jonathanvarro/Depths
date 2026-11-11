@@ -712,7 +712,7 @@ func _build_level() -> void:
 	var visual_theme: EnvironmentTheme=environment_theme
 	if _depth==OPENING_DEPTH and _in_opening and _exit_cell!=Vector2i(-1,-1):
 		visual_theme=environment_theme.duplicate()
-		visual_theme.ascent_scene=preload("res://art/features/daylight-exit-v1/scene.tscn")
+		visual_theme.ascent_scene=preload("res://art/features/transitions-3d-v1/daylight-mouth.tscn")  # 3D (#250)
 	_level.build(_map, visual_theme, CELL_SIZE, WALL_HEIGHT)
 	_play_place_music()
 	add_child(_level)
@@ -2462,26 +2462,17 @@ func _add_outskirts_dressing() -> void:
 
 
 ## A decorative seat at the back of the existing hall; no new blocker.
+## The fortress in 3D (#246, 2026-11-11): throne, palisades, watch post,
+## brackets, walkway and cages, placed clear of the gates (fortress_dressing.gd).
 func _add_fortress_dressing() -> void:
-	var hall: Array=_map.marks.get("hall",[])
-	if hall.is_empty():return
-	var seat: Vector2i=hall[0]
-	var best: float=-1.0
-	for cell: Vector2i in hall:
-		if _map.is_wall(cell) or _map.content_at(cell)!=DungeonMap.Content.NONE:continue
-		var distance:=100000.0
-		for gate: Vector2i in _map.marks.get("gates",[]):distance=minf(distance,Vector2(cell).distance_squared_to(Vector2(gate)))
-		if distance>best:best=distance;seat=cell
-	var throne:=preload("res://art/props/fortress-v1/throne.tscn").instantiate()
-	throne.position=Vector3(seat.x*CELL_SIZE,0,seat.y*CELL_SIZE)
-	_level.add_child(throne)
+	load("res://scripts/fortress_dressing.gd").dress(_level, _map, _site_seed, CELL_SIZE, WALL_HEIGHT, _camp_state.gate_broken)
 
 
 ## A foe that joins mid-fight (the queen's guards) appears beside the others.
 func _place_extra_foe(foe) -> void:
 	var forward := -_party.global_transform.basis.z
 	var right := _party.global_transform.basis.x
-	var node: Node3D = foe.type.view_scene().instantiate()
+	var node: Node3D = foe.type.scene.instantiate()  # the dark stage keeps the painted art
 	node.position = _party.position + forward * CELL_SIZE * 1.0 + right * randf_range(-1.0, 1.0)
 	_dress_foe(node, foe.type)
 	BattleStage.raise(node)

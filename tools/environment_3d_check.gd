@@ -75,5 +75,21 @@ func _initialize() -> void:
 		var meshes: Array = pilot.find_children("*", "MeshInstance3D", true, false) if pilot else []
 		skins[depth] = meshes[0].material_override.resource_path.get_file() if not meshes.is_empty() else "none"
 	check("KayKit props on floors 2, 3 and 5 in fungal, scorched and waterlogged skins", skins.get(2) == "fungal.tres" and skins.get(3) == "scorched.tres" and skins.get(5) == "waterlogged.tres", skins)
+	# The fortress (#246): its structures, clear of the gates; palisades
+	# broken once the gate is.
+	for broken in [false, true]:
+		main._camp_state.gate_broken = broken
+		main._floors.erase(4)
+		main._go_to_floor(4, main.Arrival.FROM_ABOVE)
+		await process_frame
+		var fort = main._level.get_node_or_null("Fortress3D")
+		var pieces: Array = fort.get_children() if fort else []
+		var kinds: Array = pieces.map(func(n): return n.get_meta("fortress_piece", ""))
+		var gates: Array = main._map.marks.get("gates", [])
+		var on_gate: Array = pieces.filter(func(n): return Vector2i(roundi(n.position.x / main.CELL_SIZE), roundi(n.position.z / main.CELL_SIZE)) in gates)
+		check("fortress (gate %s): throne, palisades, walkway and more" % ("broken" if broken else "barred"), "throne" in kinds and "palisade" in kinds and "overhead-walkway" in kinds, kinds)
+		check("...none on a gate", on_gate.is_empty(), on_gate.size())
+		var palisades: Array = pieces.filter(func(n): return n.get_meta("fortress_piece", "") == "palisade")
+		check("...palisades %s" % ("broken" if broken else "intact"), palisades.all(func(n): return n.state == ("empty" if broken else "closed")))
 	print("fails=", fails)
 	quit()
