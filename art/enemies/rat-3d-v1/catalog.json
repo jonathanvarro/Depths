@@ -1,0 +1,63 @@
+{
+  "source": "br-n518, https://opengameart.org/content/rat-0",
+  "licence": "CC0-1.0",
+  "triangles": 270,
+  "source_bones": 21,
+  "scale": 0.48,
+  "origin": "floor-centred full idle envelope; front +Z in Godot",
+  "source_rest_low": [
+    -0.6141585111618042,
+    -1.3427006006240845,
+    -9.892323760141153e-08
+  ],
+  "source_rest_high": [
+    0.6141583919525146,
+    2.105344295501709,
+    0.9709011316299438
+  ],
+  "clips": {
+    "attack": {
+      "frames": [
+        0.0,
+        16.0
+      ],
+      "fps": 24
+    },
+    "fall": {
+      "frames": [
+        0.0,
+        16.0
+      ],
+      "fps": 24
+    },
+    "hurt": {
+      "frames": [
+        0.0,
+        10.0
+      ],
+      "fps": 24
+    },
+    "idle": {
+      "frames": [
+        0.0,
+        16.0
+      ],
+      "fps": 24
+    },
+    "run": {
+      "frames": [
+        0.0,
+        16.0
+      ],
+      "fps": 24
+    },
+    "walk": {
+      "frames": [
+        0.0,
+        16.0
+      ],
+      "fps": 24
+    }
+  },
+  "sha256": "67dc01ff0c1b72dc1dea173af64b3bab32849950e0185cd7d820771ef54ba24c"
+}

@@ -1,0 +1,8 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="Script" path="res://art/enemies/rat-3d-v1/rat.gd" id="1"]
+[ext_resource type="PackedScene" path="res://art/enemies/rat-3d-v1/rat.glb" id="2"]
+[ext_resource type="Material" path="res://art/enemies/rat-3d-v1/hide.tres" id="3"]
+[node name="RatPilot" type="Node3D"]
+script=ExtResource("1")
+palette_material=ExtResource("3")
+[node name="Model" parent="." instance=ExtResource("2")]

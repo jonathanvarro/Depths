@@ -73,6 +73,31 @@ Format:
 - **Unseen foes** are hidden (`node.visible`), and their tags too: `combat_screen.gd` tag visibility now follows `foe.node.visible`. They give no outlines or rings, can't be picked by tapping, and the party's own tile still glows red if one is about to strike.
 - **Check:** tactical_check covers dark, torch and bright (light band, neighbours seen, diagonal shrouded, hidden foe and tag, camera height), with screenshots.
 
+## 2026-11-09 – ChatGPT (rat pilot, then shrine/well/cache, #252 / #251)
+
+- Did: delivered one isolated 3D rat candidate (270 triangles, original
+  21-bone CC0 rig, 128px muted hide) with idle/attack/hurt/fall and optional
+  in-place walk/run. Corrected source fall height; closed walk/run cycles;
+  hurt shares the evaluated idle endpoint. Original archives/declaration are
+  pinned unchanged. Three worn 3D event landmarks have permanent bases and
+  registered untouched/resolved groups: defiled shrine, fouled well and buried
+  cache. Prior art, data, combat/event rules and named portraits stay intact.
+- Checks: 951 native Mobile checks and 150 isolated captures; 37 live fixture
+  checks and 20 captures use the real tactical camera, HUD and event mounts
+  through runtime-only candidate insertion. Exact skin envelopes/loop seams,
+  pause/still mode, phone controls, UVs/budgets and state restore checked.
+  Source/artifact and browser review are packaged alongside the native review.
+- Next: open E:/GitHub/Depths/build/local-rat-landmarks-v1/inspector.html or
+  START_REVIEW.cmd. Editable local masters sit beside the review. Handoff:
+  docs/rat-and-shrine-landmarks-3d.md. Owner review and live assignment remain;
+  #251's wider party/enemy library is not complete. Branch codex/rat-landmarks-3d.
+- Watch out: do not simply replace EnemyType.scene: combat still dispatches
+  through AnimatedSprite3D Sprite. Add model-aware poses/fall/fade/facing and
+  review first-person framing while keeping feet on the floor. Shrine needs
+  its real wall anchor at floor height; update build_shrines.gd with event
+  bindings on hookup. The existing full-game shutdown warning (#249) remains;
+  focused new-asset review finishes cleanly. Physical iPhone not tested.
+
 ## 2026-11-09 – Claude (tactical view, round 2: tap the board; ambushes on it, #248)
 
 - **Owner, after playing the prototype (2026-11-08):** "Keep it, go further".

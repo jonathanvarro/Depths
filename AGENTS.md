@@ -50,6 +50,17 @@ Templates > Download and Install; already installed on the owner's PC).
 
 ## Project structure
 
+- `docs/rat-and-shrine-landmarks-3d.md` – #252/#251's first CC0 3D rat
+  pilot (`art/enemies/rat-3d-v1`, 270 triangles, 21 bones, six short clips)
+  and the three registered fresh/resolved shrine/well/cache scenes in
+  `art/props/shrine-events-3d-v1`. Local native review, editable masters and
+  actual board/phone captures: `build/local-rat-landmarks-v1/inspector.html`.
+  Rat uses play/sample/set_motion, +Z front and a fixed metric floor origin;
+  CombatScreen's current Sprite-only dispatch needs a model-aware adapter
+  before live assignment. Events and story builder still use old art.
+  Owner review/hookup and wider party/enemy work in #251 remain open.
+  Delivery branch: codex/rat-landmarks-3d. Named portraits stay deferred.
+
 - `docs/cave-formations-and-growth-3d.md` – #243's fourteen 3D decor scenes
   under `art/dressing/cave-growth-3d-v1`: eight mineral/rubble pieces, three
   root mounts and three fungal forms. Metric floor/wall/ceiling envelopes

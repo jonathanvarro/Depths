@@ -1,0 +1,3 @@
+# Preserve downloaded evidence/source bytes and omit raw publisher markup/mesh diffs.
+source-page.html binary
+godot/rat.dae binary
