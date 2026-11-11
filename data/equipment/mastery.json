@@ -28,6 +28,15 @@
       "smith": "temper"
     }
   ],
+  "armour_levels": [
+    {"level": 1, "points": 4},
+    {"level": 2, "points": 10},
+    {"level": 3, "points": 18, "smith": "temper"},
+    {"level": 4, "points": 28},
+    {"level": 5, "points": 40},
+    {"level": 6, "points": 54, "smith": "temper"}
+  ],
+  "_armour_levels": "Owner, 2026-11-11 (#219): armour and shields learn only from landed blows (about a third of a weapon's points per fight), so they use a third of the weapon thresholds and keep pace with weapons. Weapon thresholds unchanged.",
   "cap_level": 6,
   "resale": {
     "_about": "Owner, 2026-11-03: mastery makes a piece worth more when sold, but only a little and only up to mastery 3, so it encourages selling used gear without making mastering-to-sell a gold farm.",

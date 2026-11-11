@@ -171,10 +171,19 @@ static func random_find(rng: RandomNumberGenerator, depth: int, min_mods := 0) -
 
 # --- An item's numbers ----------------------------------------------------
 
+## The mastery thresholds for `item`: armour and shields have their own,
+## lower ones, as they learn only from blows taken (#219, owner 2026-11-11).
+static func level_rows(item: Equipment) -> Array:
+	var t: Dictionary = tables()["mastery"]
+	if item.slot != "weapon" and t.has("armour_levels"):
+		return t["armour_levels"]
+	return t["levels"]
+
+
 static func level_of(item: Equipment) -> int:
 	var need := 1.25 if "brittle" in item.mods else 1.0
 	var level := 0
-	for row in tables()["mastery"]["levels"]:
+	for row in level_rows(item):
 		if item.mastery >= float(row["points"]) * need:
 			level = int(row["level"])
 	return level
@@ -190,7 +199,7 @@ static func mastery_value(item: Equipment) -> float:
 ## Points to reach the next level (0 at the cap).
 static func next_points(item: Equipment) -> float:
 	var need := 1.25 if "brittle" in item.mods else 1.0
-	for row in tables()["mastery"]["levels"]:
+	for row in level_rows(item):
 		if item.mastery < float(row["points"]) * need:
 			return float(row["points"]) * need
 	return 0.0
@@ -510,6 +519,8 @@ static func _change(a: Equipment, b: Equipment) -> String:
 static func ensure_instance(item: Equipment) -> Equipment:
 	if item != null and item.base_id != NOWHERE:
 		refresh_art(item)  # existing saves keep their rolls, but get current base art
+		if item.slot != "weapon":
+			apply(item)  # armour/shield thresholds fell (#219): saved points may now mean a higher level
 	if item == null or item.base_id != NOWHERE or item.slot == "trinket":
 		return item
 	var id := _base_for(item)

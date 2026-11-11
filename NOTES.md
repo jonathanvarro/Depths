@@ -13,6 +13,22 @@ Format:
 
 ---
 
+## 2026-11-11 – Claude (armour and shield mastery thresholds lowered, #219)
+
+- Did: owner chose to lower only the armour and shield thresholds. They now
+  use `armour_levels` in `data/equipment/mastery.json` (4/10/18/28/40/54,
+  a third of the weapon thresholds); weapons are unchanged.
+  `GearModel.level_rows(item)` picks the table. On load, `ensure_instance`
+  re-applies armour/shields, so saved points take their new level's growth.
+  mastery_check covers it.
+- Result (bot, 90 campaigns): armour reaches mastery 3 in 21–32 fights
+  (weapons 27–30) and mastery 6 in 38–120. 32 worn pieces reached
+  mastery 6 by campaign end, up from 3.
+- Next: the other #219 proposals (back-row credit, bracing/prolonging,
+  shield-only-when-it-guards) are left for later owner review. The owner
+  thinks shields are only partly implemented and may be revisited, perhaps
+  as back equipment. Back-slot cloaks never learn (only shields do).
+
 ## 2026-11-11 – Claude (mastery pace remeasured, #219)
 
 - Did: the campaign bot still gave the removed mastery bonuses (+1 armour

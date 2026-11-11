@@ -118,6 +118,22 @@ func _initialize() -> void:
 	var fresh := _item("light_mace")
 	GearModel.award(fresh, 6.0, [blade])
 	check("practised hands: a new item 2+ levels behind learns double", is_equal_approx(fresh.mastery, 12.0) and GearModel.level_of(fresh) == 1, fresh.mastery)
+	# Armour and shields have their own, lower thresholds (#219, owner 2026-11-11).
+	var coat := _item("studded_jerkin")
+	var buckler := _item("buckler")
+	var sword18 := _item("iron_sword")
+	GearModel.award(sword18, 18.0)
+	check("18 points: armour and shield reach mastery 3, a weapon only 1",
+			GearModel.award(coat, 18.0) == 3 and GearModel.award(buckler, 18.0) == 3 and GearModel.level_of(sword18) == 1,
+			[GearModel.level_of(coat), GearModel.level_of(buckler), GearModel.level_of(sword18)])
+	check("...armour's next threshold is 28, mastery 6 at 54", GearModel.next_points(coat) == 28.0 and GearModel.award(coat, 36.0) == 6)
+	check("...a temper is due for armour at its mastery 3", GearModel.temper_due(buckler) == 3)
+	var saved := _item("studded_jerkin")
+	saved.mastery = 18.0  # points saved under the old thresholds (mastery 1 then)
+	var health_before: int = saved.effect.max_health if saved.effect else 0
+	GearModel.ensure_instance(saved)
+	var health_after: int = saved.effect.max_health if saved.effect else 0
+	check("...an older save's armour takes its new level's growth on load", GearModel.level_of(saved) == 3 and health_after > health_before, [health_before, health_after])
 
 	# Passive participation and returning grant no mastery.
 	var main = load("res://scenes/main.tscn").instantiate()
