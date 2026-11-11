@@ -1,0 +1,17 @@
+[gd_scene load_steps=6 format=3]
+[ext_resource type="Script" path="res://art/props/expedition-3d-v1/prop.gd" id="1"]
+[ext_resource type="Material" path="res://art/dressing/mine-3d-v1/palette.tres" id="2"]
+[ext_resource type="PackedScene" path="res://art/props/mining-finds-3d-v1/coal-seam-base.glb" id="3"]
+[ext_resource type="PackedScene" path="res://art/props/mining-finds-3d-v1/coal-seam-fresh.glb" id="4"]
+[ext_resource type="PackedScene" path="res://art/props/mining-finds-3d-v1/coal-seam-spent.glb" id="5"]
+
+[node name="MiningFind" type="Node3D"]
+script=ExtResource("1")
+palette_material=ExtResource("2")
+
+[node name="Frame" parent="." instance=ExtResource("3")]
+
+[node name="Fresh" parent="." instance=ExtResource("4")]
+
+[node name="Spent" parent="." instance=ExtResource("5")]
+visible=false

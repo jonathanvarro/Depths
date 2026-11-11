@@ -1,0 +1,20 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-11-11",
+  "assets": [
+    {
+      "id": "mattock",
+      "master": "mattock-master.png",
+      "sha256": "ebd69a6e9e7360f440ed49565aaa4c03d25840f48a36bbca9257858fc961fd7b",
+      "reference_images": [],
+      "prompt": "Depths dark medieval inventory icon, isolated object and real transparent background. An old mining mattock with a two-ended, distinctly asymmetric iron head: long narrow down-curved pick on one side and a broad transverse digging adze blade on the other. The transverse blade is blunt and squared with a slightly chipped edge. Scuffed dark ash haft and a rough iron collar, handworked imperfections. Show the complete compact tool in a diagonal from lower left to upper right, ample margin. Pixel-friendly painterly detail, broad muted grey highlights over blackened iron and brown wood, easy to read at 40 pixels. No shadow, ground, text or extra object."
+    },
+    {
+      "id": "coal",
+      "master": "coal-master.png",
+      "sha256": "1e2ff7667a4c5570945833d6800bb9f6f700e10df7d69f78ff83aefd9de1f17b",
+      "reference_images": [],
+      "prompt": "Depths dark medieval inventory icon on genuine transparent background, a single hand-sized lump of bituminous coal in three-quarter view. Low broad angular irregular shape with charcoal-black layered cleats, broken crumbly edges, two smoky grey satin highlights on the fractured faces, black powder embedded in its seams. One object, no gems, no metal veins, no warm gold or blue flecks, no sparkles, no ground shadow or text. Distinct readable silhouette and broad subtle light-dark forms designed for a 40-pixel slot. Centered, generous margins."
+    }
+  ]
+}

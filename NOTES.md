@@ -13,6 +13,18 @@ Format:
 
 ---
 
+## 2026-11-11 – ChatGPT (mining finds and camp skills trainer artwork)
+
+- Did: dedicated fresh and searched 3D tool rack and coal seam, bound to
+  both early mining events and their generator. Mattock and coal now use
+  individual icons, alongside the existing sledge. New trainer portrait and
+  transparent shelter scene are ready to place.
+- Checks: 16 headless and 24 Mobile art checks, eight private desktop captures,
+  and the 30-floor mining regression reports zero failed assertions.
+- Next: hook up the trainer's camp placement, arrival and lessons when their
+  story placement is decided. See `docs/mining-finds-and-trainer-art.md` for
+  the art, source prompts, mounting notes and validation limits.
+
 ## 2026-11-11 – ChatGPT (first regional equipment icon bindings, #194/#195)
 
 - Did: used the Quarry Hammer master for the Miner's sledge and authored a
