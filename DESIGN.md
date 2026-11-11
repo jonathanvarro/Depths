@@ -527,6 +527,8 @@ Suggested initial presentation: one campsite screen with a few selectable activi
 - **A wipe** is saved straight away as its aftermath, so quitting can't undo it.
 - **During the opening** only a marker is kept: Continue restarts the escape in the same maze.
 
+**Decided 2026-11-11:** The Goblin King is the next direction for the floor-four boss, replacing the Queen in the optional fortress encounter. See the [fortress goblin concept sheet](art/concepts/fortress-goblins-v1/README.md) for the King, shield guard and archer. The implementation described below still uses the Queen.
+
 **Decided 2026-10-18 (#44): the cave's objective is the goblin fortress and its queen.** *Changed 2026-10-19 (#122): the relic is now the main goal, and the queen is a side quest on the way. The built fortress and queen fight below stay as they are. Her victory is reworded as a big but not final moment (#157, 2026-10-25).*
 - **Floors:** 1–2 are natural cave; **3 is the fortress outskirts** (palisades, watch posts, goblin marks, war drums); **4 is the fortress**, with the queen's hall.
 - **The gate:** a barred gate on floor 4, held by its guards. Once broken it **stays broken**, even as the cave shifts daily.

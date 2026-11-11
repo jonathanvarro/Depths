@@ -1,0 +1,44 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-11-11",
+  "output": "fortress-lineup.png",
+  "dimensions": [
+    1672,
+    941
+  ],
+  "sha256": "c9d7bf18fa7dc65b4a81f8bfef2c1a6dc0d458964b465d932e8150c67d0cc755",
+  "prompt": "Create a new original wide landscape production concept sheet for the dark dungeon game Depths, three clearly separated full-body figures at common world scale on one ground line. Use the three supplied reference images in order only as role and silhouette inspiration. Left third: a lean, wiry fortress goblin shield guard, gray-olive skin, wide pointed ears, a narrow dark iron helmet with a short uneven central crest, rough brown wraps and a scrap-hide waistcloth, scarred circular plank shield with a blunt iron boss, rough iron cudgel, guarded crouch. Middle third: a lean goblin archer of the same species, patchy muted moss hood with ears showing at the sides, staggered stance and a crooked large cavewood bow canted well outside the body silhouette, taut string and one nocked arrow, worn high quiver; pose from a slight front three-quarter angle with clear space between the bow and the hood. Right third: the Goblin King, a hulking older male goblin, visibly broader than both soldiers together in body mass and only somewhat taller because of his low hunch. Huge low-slung forearms, wide pointed ears and deep-set amber eyes shared with the soldiers, broad olive-ash skin masses, a thin crooked iron circlet with only three broken points, one hand bracing on a thick crooked wooden staff topped with a weathered horned animal skull. Make the crown, ears, and staff read as separate shapes from above. Torn dark russet cloth and simple lashings. His stance is asymmetric and weight-bearing, as though he has just levered himself up and is pausing to take his weight on the staff. Original game concept illustration with broad painterly material masses and planar, easily modelled forms, serious gritty medieval cave fortress atmosphere, muted olives, soot, bark and tarnished iron, warm rim light plus quiet cool fill, slightly textured plain charcoal backdrop bright enough to read dark gear, minimal shadows at feet. Show complete bodies, feet and props with breathing room, no overlap or separate inset views. No words, labels, logos, watermarks or border. Simplify small detail for overhead phone readability. Do not copy the exact reference poses, facial features or equipment designs.",
+  "input_folder": "build/local-fortress-goblin-direction-v1/references",
+  "references": [
+    {
+      "file": "reference-1.png",
+      "role": "guard and fortress goblin silhouette",
+      "status": "used",
+      "sha256": "761eb22373e986c3500765f9e8560041b6ea56a09b6e1b86002bb5b63c9cc641"
+    },
+    {
+      "file": "reference-2.png",
+      "role": "archer silhouette",
+      "status": "used",
+      "sha256": "2336fa9f283e5f601875e191553a91daac6078de5ef3c4a87bd91a9b1b79e523"
+    },
+    {
+      "file": "reference-3.png",
+      "role": "armoured gate captain study",
+      "status": "deferred",
+      "sha256": "c0e4de3c2740f6ee51ecd75ad3a70c785ee9da816f5d903edfa73231cc4bf23f"
+    },
+    {
+      "file": "reference-4.png",
+      "role": "three-headed ritual figure study",
+      "status": "deferred",
+      "sha256": "15e520b94362a7bee790eb0fc77886247e6d7b514e2dbe15c7af7b07821bfc53"
+    },
+    {
+      "file": "reference-5.png",
+      "role": "King posture and silhouette",
+      "status": "used",
+      "sha256": "8c4c0315a1022310d8a2cf5a82f4995f1fd182037e11948e9ee6036dc09b2845"
+    }
+  ]
+}

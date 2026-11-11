@@ -13,6 +13,18 @@ Format:
 
 ---
 
+## 2026-11-11 – ChatGPT (fortress goblin direction and the Goblin King)
+
+- Did: recorded the owner's choice of references 1 and 2 for the fortress
+  goblins and 5 for the Goblin King, the planned successor to the Queen in
+  the optional floor-four fight. The guard, archer and King concept sheet and
+  exact prompt are in `art/concepts/fortress-goblins-v1`.
+- Next: use the sheet for the guard/archer refresh and the King's production
+  model. The Queen is still the live boss. The King needs encounter and story
+  integration and compatibility checks for already-completed fortress saves.
+- Watch out: references 3 and 4 are deferred. Original attachments are in
+  the ignored `build/local-fortress-goblin-direction-v1/references` folder.
+
 ## 2026-11-10 – Claude (floor 1: rarer landmarks, a tool rack, coal to sell)
 
 - **Floor-1 review (owner):**
