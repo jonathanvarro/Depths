@@ -13,6 +13,18 @@ Format:
 
 ---
 
+## 2026-11-11 – ChatGPT (first 3D fortress goblin and King pass, #257)
+
+- Did: revised common goblin, crested shield guard and hooded archer; built the
+  King's original hunch rig, crown and skull staff. King idle and plant hold
+  the staff grip. Review, editable masters and 93 Mobile captures are in
+  `build/local-fortress-goblins-3d-v1`; 603 checks pass.
+- Next: review the lineup and King footprint, finish the King's combat
+  poses and the archer's bowstring, then handle live encounter/quest hookup.
+- Watch out: `codex/fortress-goblins-3d` uses #251's roster as its base. The
+  fixtures leave the live Queen encounter alone. See
+  `docs/fortress-goblins-3d.md`.
+
 ## 2026-11-11 – ChatGPT (3D combat roster through the Goblin Fortress, #251)
 
 - Did: added the great rat, archer, guard, drummer, trapper, Goblin Queen,

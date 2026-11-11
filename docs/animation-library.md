@@ -8,6 +8,12 @@ out of git (see `docs/blender-expedition-kit-tasks.md`).
 
 ## Where the files live
 
+The [fortress goblin review](fortress-goblins-3d.md) (#257, 2026-11-11)
+contains common goblin idle/attack/hurt/fall, guard brace and the archer's
+revised draw/attack, all at 24 fps. The King uses an independent 15-bone rig
+with idle (48 frames) and planted weight shift (32 frames), pending full combat
+poses. Fixed staff and hand anchors were checked in Godot.
+
 The [3D combat roster](combat-roster-3d.md) (#251, 2026-11-11) adds eleven
 board candidates. The clips are 24 fps and stored in
 `art/enemies/combat-roster-3d-v1`, with frame counts in its catalog.
