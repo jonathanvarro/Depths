@@ -13,6 +13,17 @@ Format:
 
 ---
 
+## 2026-11-11 – ChatGPT (first regional equipment icon bindings, #194/#195)
+
+- Did: used the Quarry Hammer master for the Miner's sledge and authored a
+  distinct Goblin Territory Light mace. Only the two icon references changed.
+  The review audits the 22 earlier candidates against the live items.
+- Checks: 30 headless and 42 Mobile, including 12 real Pack/loot/merchant
+  captures and old generated mace restore across five qualities. See
+  `docs/regional-equipment-icons.md`.
+- Next: review candidates that would change an item's silhouette or lack a
+  live base. Feature branch `codex/regional-equipment-icons`.
+
 ## 2026-11-10 – Claude (floor 1: rarer landmarks, a tool rack, coal to sell)
 
 - **Floor-1 review (owner):**
