@@ -9,10 +9,8 @@ const SLEDGE := "res://data/gear/miners_sledge.tres"
 const PICK := preload("res://data/items/pick.tres")
 const COAL := preload("res://data/items/coal.tres")
 const ORE := preload("res://data/items/copper_ore.tres")
-## Art: the old workings' 3D prop stands in until a tool rack and a coal
-## face are modelled (art requests on GitHub).
-const RACK_PROP := "res://art/props/expedition-3d-v1/old-workings.tscn"
-const SEAM_PROP := "res://art/props/expedition-3d-v1/old-workings.tscn"
+const RACK_PROP := "res://art/props/mining-finds-3d-v1/tool-rack.tscn"
+const SEAM_PROP := "res://art/props/mining-finds-3d-v1/coal-seam.tscn"
 const CHEST := 2  # DungeonMap.Content.CHEST: finds
 
 
@@ -49,6 +47,7 @@ func _event(name: String, title: String, clue: String, choices: Array, depths: V
 	e.weight = weight
 	e.choices.assign(choices)
 	e.prop = load(prop)
+	e.prop_on_wall = true
 	var path := "res://data/events/%s.tres" % name
 	print(path, " ", "ok" if ResourceSaver.save(e, path) == OK else "FAILED")
 

@@ -175,7 +175,8 @@
       "grows": [
         "damage"
       ],
-      "live": "companion_mace"
+      "live": "companion_mace",
+      "icon": "res://art/items/regional-equipment-v1/light_mace.png"
     },
     {
       "id": "boar_spear",

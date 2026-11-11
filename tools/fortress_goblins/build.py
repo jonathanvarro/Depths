@@ -27,6 +27,35 @@ LABELS = {
     "fortress-archer":"Fortress archer",
     "goblin-king":"Goblin King",
 }
+STRING_PULL = "BowstringPull"
+
+
+def add_string_control(rig):
+    bpy.ops.object.select_all(action="DESELECT")
+    rig.select_set(True)
+    bpy.context.view_layer.objects.active = rig
+    bpy.ops.object.mode_set(mode="EDIT")
+    hand = rig.data.edit_bones["hand_L"]
+    pull = rig.data.edit_bones.new(STRING_PULL)
+    pull.parent = hand
+    pull.head = hand.head
+    pull.tail = hand.tail
+    pull.roll = hand.roll
+    bpy.ops.object.mode_set(mode="OBJECT")
+    activate(rig, bpy.data.actions["idle"], 0)
+
+
+def string_geometry(kit, lower, upper):
+    sides = 5
+    start = len(kit.vertices)
+    kit.segment(lower, upper, [(0,.008),(.5,.0075),(1,.007)],
+                "hand_L", "linen", "cream", sides)
+    # One continuous string, with the shared middle ring bound to the pull.
+    middle = kit.groups["hand_L"][-2*sides:-sides]
+    assert middle == list(range(start+sides, start+2*sides))
+    del kit.groups["hand_L"][-2*sides:-sides]
+    kit.groups[STRING_PULL] = middle
+    return lower.lerp(upper, .5)
 
 
 def recolour(obj):
@@ -35,7 +64,7 @@ def recolour(obj):
     set_uv(obj.data,PALETTE,[shades.get(c,c) for c in palette])
 
 
-def aim_archer(rig):
+def aim_archer(rig, string_middle):
     baseline={bone.name:bone.matrix_basis.copy() for bone in rig.pose.bones}
     arms={}
     for side in "LR":
@@ -43,8 +72,12 @@ def aim_archer(rig):
     local=rig.matrix_world.inverted()
     targets={"L":local@Vector((.42,-.154,.995)), "R":local@Vector((-.092,-.20,1.055))}
     poles={"L":local@Vector((.35,-.054,.82)), "R":local@Vector((-.45,.013,.98))}
+    pull = rig.pose.bones[STRING_PULL]
+    midpoint_offset = pull.matrix.inverted() @ local @ string_middle
+    pinch_offset = local.to_3x3() @ Vector((.0,-.025,-.045))
 
-    def aim(arm, amount):
+    def aim(arm, values):
+        amount, tension = values
         for side,(upper,lower,grip) in arms.items():
             shoulder,elbow,wrist=upper.translation,lower.translation,grip.translation
             top_length=(elbow-shoulder).length
@@ -71,8 +104,18 @@ def aim_archer(rig):
             arm.pose.bones["hand_"+side].matrix=hand
             bpy.context.view_layer.update()
         rotate(arm.pose.bones["head"],(0,-2*amount,9*amount))
-    make_action(rig,"draw",baseline,[(0,0),(5,.58),(10,1),(15,1),(20,0)],aim)
-    make_action(rig,"attack",baseline,[(0,0),(7,.83),(10,1),(12,.68),(19,0)],aim)
+        if tension:
+            grip = arm.pose.bones["hand_R"].head + pinch_offset
+            matrix = pull.matrix.copy()
+            matrix.translation += tension * (grip - matrix @ midpoint_offset)
+            pull.matrix = matrix
+            bpy.context.view_layer.update()
+
+    # Combat plays "draw" for SHOOT and returns to idle at 0.4 seconds.
+    make_action(rig,"draw",baseline,[(0,(0,0)),(2,(.58,.58)),(5,(1,1)),
+                                    (7,(1,1)),(8,(1,0)),(9,(.68,0)),(16,(0,0))],aim)
+    make_action(rig,"attack",baseline,[(0,(0,0)),(3,(.62,.62)),(6,(1,1)),
+                                      (7,(1,1)),(8,(1,0)),(10,(.68,0)),(19,(0,0))],aim)
 
 
 def fortress_goblin(name, workspace):
@@ -80,9 +123,16 @@ def fortress_goblin(name, workspace):
     body = bpy.data.objects["GoblinBody"]
     details, equipment = Mesh(), Mesh()
     if name=="fortress-archer":
-        costume, bow = fit_goblin("goblin-archer",rig,body,PALETTE)
+        add_string_control(rig)
+        string_middle = None
+
+        def fit_string(kit, lower, upper):
+            nonlocal string_middle
+            string_middle = string_geometry(kit, lower, upper)
+
+        costume, bow = fit_goblin("goblin-archer",rig,body,PALETTE,fit_string)
         bpy.data.objects.remove(bpy.data.objects["Knife"],do_unlink=True)
-        aim_archer(rig)
+        aim_archer(rig,string_middle)
         activate(rig,bpy.data.actions["idle"],0)
         details.loft([(1.051,.154,.106,.005,-.024),(1.14,.168,.14,-.006,-.042),
                       (1.238,.139,.138,-.011,-.069),(1.294,.096,.092,-.027,-.061),
@@ -171,12 +221,14 @@ def export(name, rig, meshes, output):
         counts[mesh.name]=len(mesh.data.loop_triangles)
     height=clips["idle"]["high"][2]
     actor=LOCAL if name=="goblin-king" else ROSTER
+    still_time='draw_still_time=0.25\n' if name=="fortress-archer" else ''
     (ART/(name+".tscn")).write_text(
         '[gd_scene load_steps=4 format=3]\n'
         f'[ext_resource type="Script" path="{actor}actor.gd" id="1"]\n'
         f'[ext_resource type="Material" path="{ROSTER}palette.tres" id="2"]\n'
         f'[ext_resource type="PackedScene" path="{LOCAL}{name}.glb" id="3"]\n'
         '[node name="Actor" type="Node3D"]\nscript=ExtResource("1")\npalette_material=ExtResource("2")\n'
+        f'{still_time}'
         f'metadata/visual_height={height}\n'
         '[node name="Model" parent="." instance=ExtResource("3")]\n',encoding="utf-8")
     print("FORTRESS",name,sum(counts.values()),height,flush=True)
@@ -188,8 +240,9 @@ def export(name, rig, meshes, output):
 def main():
     parser=argparse.ArgumentParser()
     parser.add_argument("--workspace",type=Path,required=True)
+    parser.add_argument("--review-output",type=Path)
     args=parser.parse_args(sys.argv[sys.argv.index("--")+1:])
-    output=args.workspace/"build/local-fortress-goblins-3d-v1"
+    output=args.review_output or args.workspace/"build/local-fortress-goblins-3d-v1"
     (output/"masters").mkdir(parents=True,exist_ok=True)
     assets=[]
     for name in LABELS:

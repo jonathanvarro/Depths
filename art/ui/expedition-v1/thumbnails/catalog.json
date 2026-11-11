@@ -67,6 +67,12 @@
 			"thumbnail": "res://art/ui/expedition-v1/thumbnails/goblin_guard.png"
 		},
 		{
+			"enemy": "goblin_king.tres",
+			"source_scene": "res://art/enemies/fortress-goblins-3d-v1/goblin-king.tscn",
+			"source_pose": "idle at 0 s, low three-quarter camera",
+			"thumbnail": "res://art/ui/expedition-v1/thumbnails/goblin_king.png"
+		},
+		{
 			"enemy": "goblin_queen.tres",
 			"source_scene": "res://art/enemies/campaign-v1/queen/scene.tscn",
 			"source_texture": "res://art/enemies/campaign-v1/queen/idle.png",
