@@ -1,0 +1,60 @@
+[gd_resource type="Resource" script_class="RoomEvent" format=3]
+
+[ext_resource type="Script" path="res://scripts/event_choice.gd" id="1_ks6f4"]
+[ext_resource type="Script" path="res://scripts/event_outcome.gd" id="2_dexyg"]
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="3_il1gr"]
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="4_her7e"]
+[ext_resource type="Resource" path="res://data/gear/mattock.tres" id="5_bolrv"]
+[ext_resource type="Script" path="res://scripts/supply_item.gd" id="6_grg5b"]
+[ext_resource type="Resource" path="res://data/gear/miners_sledge.tres" id="7_47h8i"]
+[ext_resource type="Resource" path="res://data/items/pick.tres" id="8_ehmtx"]
+[ext_resource type="Resource" path="res://data/items/coal.tres" id="9_ym1kh"]
+[ext_resource type="PackedScene" path="res://art/props/expedition-3d-v1/old-workings.tscn" id="10_84glr"]
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="11_cmppq"]
+
+[sub_resource type="Resource" id="Resource_tx1of"]
+script = ExtResource("2_dexyg")
+weight = 2
+text = "Most of what hangs here has rusted through, but one mattock is still sound, its haft dark with old hands."
+gear = Array[ExtResource("4_her7e")]([ExtResource("5_bolrv")])
+
+[sub_resource type="Resource" id="Resource_1xqvn"]
+script = ExtResource("2_dexyg")
+weight = 2
+text = "Behind the rotten picks hangs a miner's sledge, its iron head still true."
+gear = Array[ExtResource("4_her7e")]([ExtResource("7_47h8i")])
+
+[sub_resource type="Resource" id="Resource_5yjw4"]
+script = ExtResource("2_dexyg")
+text = "Only a short miner's pick is fit to use. Not much in a fight, but it works a seam or breaks through fallen rock."
+loot = Dictionary[ExtResource("6_grg5b"), int]({
+ExtResource("8_ehmtx"): 1
+})
+
+[sub_resource type="Resource" id="Resource_r18tg"]
+script = ExtResource("1_ks6f4")
+label = "Take what's still good"
+time_cost = 2
+outcomes = Array[ExtResource("2_dexyg")]([SubResource("Resource_tx1of"), SubResource("Resource_1xqvn"), SubResource("Resource_5yjw4")])
+
+[sub_resource type="Resource" id="Resource_8ocbg"]
+script = ExtResource("2_dexyg")
+text = "A few lumps of coal the miners never burned. The merchant will pay a little for them."
+loot = Dictionary[ExtResource("6_grg5b"), int]({
+ExtResource("9_ym1kh"): 2
+})
+
+[sub_resource type="Resource" id="Resource_iis52"]
+script = ExtResource("1_ks6f4")
+label = "Search the shelf above"
+investigation = true
+outcomes = Array[ExtResource("2_dexyg")]([SubResource("Resource_8ocbg")])
+
+[resource]
+script = ExtResource("11_cmppq")
+title = "A tool rack"
+clue = "Picks, hammers and mattocks hang from wooden pegs where the miners left them. Most have rusted through."
+choices = Array[ExtResource("1_ks6f4")]([SubResource("Resource_r18tg"), SubResource("Resource_iis52")])
+max_depth = 2
+weight = 2
+prop = ExtResource("10_84glr")

@@ -13,10 +13,16 @@ const Dressing := preload("res://scripts/dressing.gd")
 const DungeonMap := preload("res://scripts/dungeon_map.gd")
 const GOBLIN_MARK := preload("res://art/props/fortress-v1/goblin-mark.tscn")
 
-## id -> name, floors, and the kind of spot it needs.
+## id -> name, floors, the kind of spot it needs, and how likely it is to be
+## picked (weight, default 3). More, rarer floor-1 places (owner,
+## 2026-11-10): the new ones weigh 1, so a floor's pair varies far more.
 const KINDS := {
 	"working_face": {"name": "The old working face", "floors": [1, 2], "spot": "dead_end"},
 	"dripping_hall": {"name": "The dripping hall", "floors": [1, 3], "spot": "room"},
+	"collapsed_shaft": {"name": "The collapsed shaft", "floors": [1, 1], "spot": "dead_end", "weight": 1},
+	"timbered_drift": {"name": "The timbered drift", "floors": [1, 1], "spot": "drift", "weight": 1},
+	"flooded_sump": {"name": "The flooded sump", "floors": [1, 1], "spot": "room", "weight": 1},
+	"old_cave_in": {"name": "The old cave-in", "floors": [1, 2], "spot": "room", "weight": 1},
 	"pale_grotto": {"name": "The pale grotto", "floors": [2, 3], "spot": "room"},
 	"trophy_crossing": {"name": "The trophy crossing", "floors": [3, 4], "spot": "junction"},
 	# #132's art: roots that broke through, and the king's buried supplies.
@@ -40,12 +46,21 @@ static func place(level: Node3D, map, depth: int, seed: int, cell_size: float, w
 	var rng := RandomNumberGenerator.new()
 	rng.seed = hash([seed, depth, "landmarks"])
 	var kinds := KINDS.keys().filter(func(k): return depth >= KINDS[k]["floors"][0] and depth <= KINDS[k]["floors"][1])
-	# Shuffle with our own generator, so the choice is seeded too.
-	for i in range(kinds.size() - 1, 0, -1):
-		var j := rng.randi_range(0, i)
-		var swap = kinds[i]
-		kinds[i] = kinds[j]
-		kinds[j] = swap
+	# A weighted order, drawn with our own generator so it's seeded too:
+	# common places come up first more often, rare ones now and then.
+	var ordered := []
+	while not kinds.is_empty():
+		var total := 0
+		for k in kinds:
+			total += int(KINDS[k].get("weight", 3))
+		var roll := rng.randi_range(1, total)
+		for k in kinds:
+			roll -= int(KINDS[k].get("weight", 3))
+			if roll <= 0:
+				ordered.append(k)
+				kinds.erase(k)
+				break
+	kinds = ordered
 	var distances: Dictionary = map.walking_distances(map.start_cell)
 	var root := Node3D.new()
 	root.name = "Landmarks"
@@ -69,6 +84,10 @@ static func place(level: Node3D, map, depth: int, seed: int, cell_size: float, w
 			"trophy_crossing": _build_trophy_crossing(piece, map, cells, rng, cell_size, wall_height)
 			"root_junction": _build_root_junction(piece, map, cells, rng, cell_size, wall_height)
 			"lost_cache": _build_lost_cache(piece, map, cells, rng, cell_size, wall_height)
+			"collapsed_shaft": _build_collapsed_shaft(piece, map, cells, rng, cell_size, wall_height)
+			"timbered_drift": _build_timbered_drift(piece, map, cells, rng, cell_size, wall_height)
+			"flooded_sump": _build_flooded_sump(piece, map, cells, rng, cell_size, wall_height)
+			"old_cave_in": _build_old_cave_in(piece, map, cells, rng, cell_size, wall_height)
 		map.landmarks.append({"id": id, "name": KINDS[id]["name"], "cells": cells, "centre": _centre(cells), "seen": id in seen_before})
 	return used
 
@@ -106,6 +125,17 @@ static func _spots(map, kind: String, distances: Dictionary, used: Dictionary) -
 				"junction":
 					if not map._is_room_cell(cell) and open.size() >= 3:
 						spots.append([cell])
+				"drift":  # three cells of straight corridor in a row
+					var axis: Vector2i = Dressing._corridor_axis(map, cell)
+					if axis == Vector2i.ZERO or map._is_room_cell(cell):
+						continue
+					var run := [cell]
+					for i in 2:
+						var next: Vector2i = run[-1] + axis
+						if Dressing._clear(map, next) and not used.has(next) and Dressing._corridor_axis(map, next) == axis and distances.get(next, 0) >= AWAY_FROM_START:
+							run.append(next)
+					if run.size() == 3:
+						spots.append(run)
 				"room":
 					if not map._is_room_cell(cell) or rooms_seen.has(cell):
 						continue
@@ -154,7 +184,7 @@ static func _build_working_face(piece: Node3D, map, cells: Array, rng: RandomNum
 	var inward: Vector2i = Dressing.SIDES.filter(func(s): return map.is_passable(end + s))[0]
 	var axis := Vector2i(absi(inward.x), absi(inward.y))
 	for cell: Vector2i in cells:
-		Dressing._put(piece, "mine-rails", _at(cell, cell_size), Dressing._yaw_along(axis))
+		Dressing._put(piece, "mine-rails", _at(cell, cell_size), Dressing._yaw_facing(axis))  # 3D rails run along local Z
 		Dressing._put(piece, "mine-support", _at(cell, cell_size) + Vector3(inward.x, 0, inward.y) * cell_size * 0.3, Dressing._yaw_across(axis))
 	var face := _at(end, cell_size) - Vector3(inward.x, 0, inward.y) * (cell_size / 2.0 - 0.01)
 	for h in [0.5, 1.4]:
@@ -185,6 +215,86 @@ static func _build_dripping_hall(piece: Node3D, map, cells: Array, rng: RandomNu
 				var wall := at + Vector3(side.x, 0, side.y) * (cell_size / 2.0 - 0.01)
 				Dressing._put(piece, "flowstone", wall + Vector3(0, 1.2, 0) + Dressing._along_wall(side) * rng.randf_range(-0.4, 0.4), Dressing._yaw_facing(-side))
 	_glow(piece, _at(_centre(cells), cell_size) + Vector3(0, wall_height - 0.4, 0), Color(0.45, 0.75, 0.85), 0.6, cell_size * 3.2)
+
+
+## A shaft that came down long ago (2026-11-10): rubble choking the end of
+## the drift, a split frame, roots hanging through, and a thin grey light
+## from somewhere far above.
+static func _build_collapsed_shaft(piece: Node3D, map, cells: Array, rng: RandomNumberGenerator, cell_size: float, wall_height: float) -> void:
+	var end: Vector2i = cells[0]
+	var inward: Vector2i = Dressing.SIDES.filter(func(s): return map.is_passable(end + s))[0]
+	var axis := Vector2i(absi(inward.x), absi(inward.y))
+	var at := _at(end, cell_size)
+	var back := -Vector3(inward.x, 0, inward.y)
+	Dressing._put(piece, "rubble-cluster", at + back * 0.45, rng.randf() * TAU)
+	Dressing._put(piece, "rubble-cluster", at + back * 0.1 + Dressing._along_wall(inward) * 0.4, rng.randf() * TAU)
+	Dressing._put(piece, "mine-support-damaged", _at(cells[min(1, cells.size() - 1)], cell_size), Dressing._yaw_across(axis))
+	for i in 2:
+		Dressing._put(piece, "hanging-roots", at + Vector3(rng.randf_range(-0.4, 0.4), wall_height - 0.01, rng.randf_range(-0.4, 0.4)), rng.randf() * TAU)
+	Dressing._put(piece, "scattered-bones", at + Vector3(inward.x, 0, inward.y) * 0.3, rng.randf() * TAU)
+	_glow(piece, at + Vector3(0, wall_height - 0.2, 0), Color(0.72, 0.8, 0.95), 0.9, cell_size * 1.8)
+
+
+## A straight drift the miners shored up properly (2026-11-10): a frame in
+## every cell, rails underfoot, and their old lanterns, one still burning.
+static func _build_timbered_drift(piece: Node3D, map, cells: Array, rng: RandomNumberGenerator, cell_size: float, wall_height: float) -> void:
+	var axis: Vector2i = Dressing._corridor_axis(map, cells[0])
+	var lit := rng.randi_range(0, cells.size() - 1)
+	for i in cells.size():
+		var cell: Vector2i = cells[i]
+		var at := _at(cell, cell_size)
+		Dressing._put(piece, "mine-support-damaged" if i == 1 else "mine-support", at, Dressing._yaw_across(axis))
+		Dressing._put(piece, "mine-rails-broken" if i == 2 else "mine-rails", at, Dressing._yaw_facing(axis))
+		var sides := Dressing._wall_sides(map, cell)
+		if not sides.is_empty():
+			var side: Vector2i = sides[i % sides.size()]
+			var lantern := Dressing._put(piece, "lantern-hanging", at + Vector3(side.x, 0, side.y) * (cell_size / 2.0 - 0.01) + Vector3(0, 1.9, 0), Dressing._yaw_facing(-side))
+			if "lit" in lantern:
+				lantern.lit = i == lit
+	_glow(piece, _at(cells[lit], cell_size) + Vector3(0, 1.6, 0), Color(1.0, 0.72, 0.4), 0.45, cell_size * 1.6)
+
+
+## A room where the groundwater rose and stayed (2026-11-10): black water
+## pooled over part of the floor under dripping formations. It's only
+## water: it doesn't slow or hurt anyone.
+static func _build_flooded_sump(piece: Node3D, map, cells: Array, rng: RandomNumberGenerator, cell_size: float, wall_height: float) -> void:
+	var Galleries = load("res://scripts/galleries.gd")
+	var pool := cells.duplicate()
+	for i in range(pool.size() - 1, 0, -1):
+		var j := rng.randi_range(0, i)
+		var swap = pool[i]
+		pool[i] = pool[j]
+		pool[j] = swap
+	var wet := pool.slice(0, maxi(2, pool.size() / 3))
+	for cell: Vector2i in wet:
+		piece.add_child(Galleries.water_surface(cell, cell_size, false))
+		var drop := Dressing._put(piece, "stalactite-cluster" if rng.randi() % 3 == 0 else "stalactite-single", _at(cell, cell_size) + Vector3(rng.randf_range(-0.4, 0.4), wall_height - 0.01, rng.randf_range(-0.4, 0.4)), rng.randf() * TAU)
+		Dressing._effect(drop, "drip", Vector3(0, -0.8, 0), 0.006, true, 0.85)
+	for cell: Vector2i in cells:
+		for side in Dressing._wall_sides(map, cell):
+			if rng.randi() % 3 == 0:
+				var wall := _at(cell, cell_size) + Vector3(side.x, 0, side.y) * (cell_size / 2.0 - 0.01)
+				Dressing._put(piece, "flowstone", wall + Vector3(0, 1.2, 0), Dressing._yaw_facing(-side))
+	_glow(piece, _at(_centre(cells), cell_size) + Vector3(0, wall_height - 0.5, 0), Color(0.4, 0.6, 0.75), 0.55, cell_size * 3.0)
+
+
+## Where the roof came in on someone (2026-11-10): rubble heaped along one
+## wall, a skeleton half under it, broken stone everywhere.
+static func _build_old_cave_in(piece: Node3D, map, cells: Array, rng: RandomNumberGenerator, cell_size: float, wall_height: float) -> void:
+	var edge_cells: Array = cells.filter(func(c): return not Dressing._wall_sides(map, c).is_empty())
+	if edge_cells.is_empty():
+		edge_cells = cells
+	var heap: Vector2i = edge_cells[rng.randi_range(0, edge_cells.size() - 1)]
+	var sides := Dressing._wall_sides(map, heap)
+	var side: Vector2i = sides[0] if not sides.is_empty() else Vector2i.UP
+	var at := _at(heap, cell_size)
+	for offset in [0.3, -0.25]:
+		Dressing._put(piece, "rubble-cluster", at + Vector3(side.x, 0, side.y) * cell_size * 0.28 + Dressing._along_wall(side) * offset, rng.randf() * TAU)
+	Dressing._put(piece, "fallen-skeleton", at - Vector3(side.x, 0, side.y) * 0.15, Dressing._yaw_facing(-side))
+	for i in 3:
+		var c: Vector2i = cells[rng.randi_range(0, cells.size() - 1)]
+		Dressing._put(piece, "stalagmite-broken" if i == 0 else "scattered-bones" if i == 1 else "rubble-cluster", _at(c, cell_size) + Vector3(rng.randf_range(-0.4, 0.4), 0, rng.randf_range(-0.4, 0.4)), rng.randf() * TAU)
+	_glow(piece, at + Vector3(0, 1.4, 0), Color(0.85, 0.75, 0.6), 0.35, cell_size * 2.0)
 
 
 ## Fungus over every wall, its glow pulsing, pale mushrooms underfoot.

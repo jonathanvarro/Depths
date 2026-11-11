@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Equipment" format=3]
+
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/items/field-kit-v1/miners-pick.png" id="art_icon"]
+
+[resource]
+script = ExtResource("1")
+icon = ExtResource("art_icon")
+display_name = "Mattock"
+description = "A miner's two-headed digging tool, one end a pick, the other a broad blade. Heavy and slow to recover, but it bites deep."
+attack_min = 3
+attack_max = 6
+accuracy_bonus = -0.1
+price = 18
+strike = "pierce"

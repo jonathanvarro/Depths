@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SupplyItem" format=3]
+
+[ext_resource type="Script" path="res://scripts/supply_item.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/items/salvage-v1/black-ore.png" id="art_icon"]
+
+[resource]
+script = ExtResource("1")
+icon = ExtResource("art_icon")
+display_name = "Lump of coal"
+description = "Black, crumbling and dusty. Worth little on its own, but the camp burns through it and the merchant pays a couple of coins a lump."
+effect = 5
+use_time = 0
+price = 2
+a_name = "a lump of coal"

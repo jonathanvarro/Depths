@@ -13,6 +13,25 @@ Format:
 
 ---
 
+## 2026-11-10 – Claude (floor 1: rarer landmarks, a tool rack, coal to sell)
+
+- **Floor-1 review (owner):**
+  - a 31×31 floor with up to 9 rectangular rooms, about 260 open tiles, stairs about 36 steps from arrival;
+  - 2.4 fights, 3.5 finds, 0.6 traps, 0.8 objects and 0.7 rests per floor;
+  - about 5 webs and 1–2 rubble blockages;
+  - its special areas were the Those Left Behind site, the dark seam and three landmarks, with the cache and the dripping hall on almost every floor.
+- **More, rarer landmarks** (`landmarks.gd`): four new kinds, built from the 3D pieces, each weighing 1 against the default 3:
+  - the collapsed shaft (a dead end, with a grey light from above);
+  - the timbered drift (a new "drift" spot: 3 straight corridor cells with frames, rails and lanterns, one lit);
+  - the flooded sump (a room; water is looks only);
+  - the old cave-in (floors 1–2: rubble and a half-buried skeleton).
+
+  Kinds are now drawn in weighted order. Over 30 floors no kind is on more than 14, and the new ones on 4 to 8. Also fixed: the old working face's 3D rails now run along the drift.
+- **Tool rack** (`chest_tool_rack`, floors 1–2, built by `tools/story/build_mine_finds.gd`): "Take what's still good" gives a Mattock (3–6, −10% to hit, pierce), a Miner's sledge (2–5, smash) or the Miner's pick tool. The shelf gives 2 coal.
+- **Coal** (`data/items/coal.tres`, treasure, 2 gold): from the rack's shelf and the new **coal seam** (`chest_coal_seam`, floors 1–2). A pick gets 4 coal plus a copper ore; by hand, 1–2. The merchant buys it.
+- **Art:** both events borrow the 3D old-workings prop, and the items borrow icons; requested in #256.
+- **Checks:** new `tools/mine_finds_check.gd`. landmarks_check now requires only the common kinds; the rare ones are covered over 30 floors.
+
 ## 2026-11-09 – Claude (opening caves dressed in 3D; spider exchanges; T for a torch; first quest's bodies fixed)
 
 - **The first quest couldn't be finished by walking in (owner playtest).** Stepping onto the fallen party wakes the rats guarding the room, and the fight took that step, so the search never opened while you stood on the bodies. Main now opens an untriggered event under the party when a fight is won.
