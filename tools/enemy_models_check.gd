@@ -163,7 +163,7 @@ func _initialize() -> void:
 	main._queen_fight(main._party.cell)
 	await create_timer(1.4).timeout
 	state = main._combat._state
-	var board_king = state.foes.filter(func(f): return f.type == main.QUEEN)[0]
+	var board_king = state.foes.filter(func(f): return f.type.tactic == EnemyType.Tactic.QUEEN)[0]
 	check("the King's fight is on the board", state.field and main._tactical.active and main._combat.no_retreat)
 	check("...the King and his guards are 3D models on their tiles", state.foes.all(func(f): return FoeView.is_model(f.node) and absf(f.node.position.y) < 0.01))
 	check("...and never lose the trail", not main._field_lost(board_king))
@@ -178,7 +178,7 @@ func _initialize() -> void:
 	main._queen_fight(main._party.cell)
 	await create_timer(1.4).timeout
 	state = main._combat._state
-	var king = state.foes.filter(func(f): return f.type == main.QUEEN)[0]
+	var king = state.foes.filter(func(f): return f.type.tactic == EnemyType.Tactic.QUEEN)[0]
 	check("on the dark stage, the King is his 3D model", FoeView.is_model(king.node) and not state.field)
 	check("...feet at the party's floor", absf(king.node.global_position.y - main._party.global_position.y) < 0.05, king.node.global_position.y)
 	check("...planting his staff to call his guards", main._combat._action_pose(king, main.CombatState.Intent.CALL, {}) == "plant")

@@ -171,6 +171,7 @@ const CAPTAIN := preload("res://data/enemies/gate_captain.tres")
 const OUTSKIRTS_DEPTH := 3
 const FORTRESS_DEPTH := 4
 const Fortress := preload("res://scripts/fortress.gd")
+const FortressDressing := preload("res://scripts/fortress_dressing.gd")
 const FORTRESS_THEME := preload("res://themes/fortress.tres")
 const FUNGAL_THEME := preload("res://themes/fungal-caverns.tres")
 const KayKitPilot := preload("res://scripts/kaykit_pilot.gd")
@@ -1459,11 +1460,21 @@ func _begin_field_fight(state, leader_cell: Vector2i) -> void:
 	state.open_cell = func(c: Vector2i) -> bool: return _map.is_passable(c)
 	var taken := {_party.cell: true}
 	var spots: Array[Vector2i] = _free_cells_near(leader_cell, state.foes.size(), taken)
+	if _fight_kind == "queen":
+		spots = _throne_spots(state, spots)  # the King at his throne, guards in front (#257)
 	for i in state.foes.size():
 		var foe = state.foes[i]
 		foe.cell = spots[mini(i, spots.size() - 1)] if not spots.is_empty() else leader_cell
 		taken[foe.cell] = true
 		_place_field_foe(foe)
+		if _fight_kind == "queen" and foe.type.tactic == EnemyType.Tactic.QUEEN and is_instance_valid(foe.node):
+			# His throne's fires light him across the hall (#257).
+			var glow := OmniLight3D.new()
+			glow.light_color = Color(1.0, 0.62, 0.32)
+			glow.light_energy = 2.2
+			glow.omni_range = 4.5
+			glow.position = Vector3(0, 2.6, 0.6)
+			foe.node.add_child(glow)
 	for foe in state.foes:
 		state.plan(foe)  # plans from where they stand (marks the tiles)
 	# The pad stays live on the map: it rises above the fight panel.
@@ -1472,7 +1483,9 @@ func _begin_field_fight(state, leader_cell: Vector2i) -> void:
 	_unseen.clear()
 	_combat.field_hooks = {"step_foe": _field_step_foe, "danger": _draw_danger, "lost": _field_lost}
 	_combat.place_foe = func(foe):
-		var near: Array[Vector2i] = _free_cells_near(_party.cell, 1, _occupied(state))
+		var busy: Dictionary = _occupied(state)
+		busy[_party.cell] = true  # never on the party's own tile (#257: a called guard landed there)
+		var near: Array[Vector2i] = _free_cells_near(_party.cell, 1, busy)
 		foe.cell = near[0] if not near.is_empty() else _party.cell
 		_place_field_foe(foe)
 	_field_step_check = _party.step_check
@@ -1482,6 +1495,36 @@ func _begin_field_fight(state, leader_cell: Vector2i) -> void:
 		if _occupied(state).has(target):
 			return "blocked_by_foe"
 		return ""
+
+
+## The Goblin King's hall (#257, owner 2026-11-11): he waits before his
+## throne and his guards stand between him and the party. One cell per foe,
+## in the fight's own order; `fallback` if the hall gives no room.
+func _throne_spots(state, fallback: Array[Vector2i]) -> Array[Vector2i]:
+	var king: Vector2i = FortressDressing.king_cell(_map)
+	if king == Vector2i(-1, -1) or king == _party.cell:
+		return fallback
+	var from_party: Dictionary = _map.walking_distances(_party.cell)
+	var from_king: Dictionary = _map.walking_distances(king)
+	if not from_party.has(king):
+		return fallback
+	# Guards: free cells nearer the party than the King is, closest to him.
+	var between: Array = []
+	for c: Vector2i in from_king:
+		if c != king and c != _party.cell and from_party.has(c) and from_party[c] < from_party[king] 				and _map.content_at(c) == DungeonMap.Content.NONE:
+			between.append(c)
+	between.sort_custom(func(a, b): return from_king[a] < from_king[b] or (from_king[a] == from_king[b] and from_party[a] < from_party[b]))
+	var out: Array[Vector2i] = []
+	var next := 0
+	for foe in state.foes:
+		if foe.type.tactic == EnemyType.Tactic.QUEEN:
+			out.append(king)
+		elif next < between.size():
+			out.append(between[next])
+			next += 1
+		else:
+			return fallback
+	return out
 
 
 ## Turns the party to face an adjacent cell (free, as turning always is).
@@ -2468,7 +2511,7 @@ func _add_outskirts_dressing() -> void:
 ## The fortress in 3D (#246, 2026-11-11): throne, palisades, watch post,
 ## brackets, walkway and cages, placed clear of the gates (fortress_dressing.gd).
 func _add_fortress_dressing() -> void:
-	load("res://scripts/fortress_dressing.gd").dress(_level, _map, _site_seed, CELL_SIZE, WALL_HEIGHT, _camp_state.gate_broken)
+	FortressDressing.dress(_level, _map, _site_seed, CELL_SIZE, WALL_HEIGHT, _camp_state.gate_broken)
 
 
 ## A foe that joins mid-fight (the queen's guards) appears beside the others.

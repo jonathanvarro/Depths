@@ -162,6 +162,20 @@ func _initialize() -> void:
 	await create_timer(0.3).timeout
 	var state = main._combat._state
 	check("the queen and two guards", main._in_combat and state.foes.size() == 3 and state.foes[0].type.display_name == queen.display_name)
+	if state.field:  # the board (#257): the King at his throne, guards between
+		var king_at: Vector2i = load("res://scripts/fortress_dressing.gd").king_cell(map)
+		var from_party: Dictionary = map.walking_distances(main._party.cell)
+		var king_foe = state.foes.filter(func(f): return f.type.tactic == EnemyType.Tactic.QUEEN)[0]
+		var guards: Array = state.foes.filter(func(f): return f.type.tactic != EnemyType.Tactic.QUEEN)
+		check("the King waits before his throne", king_foe.cell == king_at, "%s vs %s" % [king_foe.cell, king_at])
+		check("...his guards stand between him and the party", guards.all(func(g): return from_party.get(g.cell, 99) < from_party.get(king_foe.cell, 0)),
+				"%s; party %s" % [guards.map(func(g): return g.cell), main._party.cell])
+		await create_timer(0.4).timeout
+		check("...and he is seen across the hall, lit by his throne's fires", main._tactical.seen.has(king_foe.cell) and king_foe.node.visible)
+		var called: Dictionary = state._call_guard(king_foe)
+		var newcomer = state.foes[-1]
+		check("a guard he calls never lands on the party's tile", newcomer.cell != main._party.cell and not state.living_foes().any(func(f): return f != newcomer and f.cell == newcomer.cell),
+				"%s, party %s" % [newcomer.cell, main._party.cell])
 	var guarded := 0.0
 	while not main._combat._actions.visible and guarded < 50:
 		await create_timer(0.1).timeout

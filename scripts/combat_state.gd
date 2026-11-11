@@ -391,8 +391,8 @@ func _plan(foe: Foe) -> void:
 			var roll := rng.randf()
 			if foe.type.summons and foe.calls < QUEEN_CALLS and guards < 2 and foe.intent != Intent.CALL and roll < QUEEN_CALL_CHANCE:
 				foe.intent = Intent.CALL
-			elif foe.intent != Intent.CLEAVER and rng.randf() < cleaver:
-				foe.intent = Intent.CLEAVER
+			elif foe.intent != Intent.CLEAVER and rng.randf() < cleaver and (not field or side_of(foe) != "far"):
+				foe.intent = Intent.CLEAVER  # on the board, only once he's beside you (#257)
 			elif foe.intent != Intent.SCREECH and rng.randf() < QUEEN_SCREECH_CHANCE:
 				foe.intent = Intent.SCREECH
 			else:
@@ -623,7 +623,10 @@ func foe_in_range(foe: Foe) -> bool:
 		return true
 	if side_of(foe) != "far":
 		return true
-	var reaches: bool = foe.type.reach_back or foe.type.tactic == EnemyType.Tactic.ARCHER or foe.intent in [Intent.REACH, Intent.SWOOP, Intent.SHOOT]
+	# The Goblin King's long reach is the dark stage's back row; on the board
+	# he walks up to swing his staff (#257), his guards meeting you first.
+	var long_reach: bool = foe.type.reach_back and foe.type.tactic != EnemyType.Tactic.QUEEN
+	var reaches: bool = long_reach or foe.type.tactic == EnemyType.Tactic.ARCHER or foe.intent in [Intent.REACH, Intent.SWOOP, Intent.SHOOT]
 	return reaches and line_to(foe) != Vector2i.ZERO
 
 

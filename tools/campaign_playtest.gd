@@ -1032,10 +1032,12 @@ func _field_fight(state) -> void:
 	spots.sort_custom(func(a, b): return distances[a] < distances[b])
 	for i in state.foes.size():
 		state.foes[i].cell = spots[mini(i, spots.size() - 1)] if not spots.is_empty() else leader
+	if _field_kind == "queen":
+		_throne_start(state, map)  # the King at his throne, guards in front, as in the game (#257)
 	for foe in state.foes:
 		state.plan(foe)
 	state.foe_joined.connect(func(foe):
-		var free: Array = spots.filter(func(c): return not state.living_foes().any(func(f): return f.cell == c))
+		var free: Array = spots.filter(func(c): return c != state.party_cell and not state.living_foes().any(func(f): return f.cell == c))
 		foe.cell = free[0] if not free.is_empty() else leader)
 	if state.opening == "foes":
 		_field_foes(state, map)
@@ -1142,6 +1144,28 @@ func _field_party(state, map) -> void:
 			state.party_cell = next
 			state.facing = side
 			return
+
+
+## main.gd `_throne_spots`: the King before his throne, his guards the
+## cells nearest him on the party's side.
+func _throne_start(state, map) -> void:
+	var king: Vector2i = load("res://scripts/fortress_dressing.gd").king_cell(map)
+	var from_party: Dictionary = map.walking_distances(state.party_cell)
+	if king == Vector2i(-1, -1) or king == state.party_cell or not from_party.has(king):
+		return
+	var from_king: Dictionary = map.walking_distances(king)
+	var between: Array = []
+	for c: Vector2i in from_king:
+		if c != king and c != state.party_cell and from_party.has(c) and from_party[c] < from_party[king] and map.content_at(c) == 0:
+			between.append(c)
+	between.sort_custom(func(a, b): return from_king[a] < from_king[b] or (from_king[a] == from_king[b] and from_party[a] < from_party[b]))
+	var next := 0
+	for foe in state.foes:
+		if foe.type.tactic == EnemyType.Tactic.QUEEN:
+			foe.cell = king
+		elif next < between.size():
+			foe.cell = between[next]
+			next += 1
 
 
 ## Whether `foe`'s marked blow would land with the party at `at`: a foe that

@@ -13,6 +13,25 @@ Format:
 
 ---
 
+## 2026-11-11 – Claude (the Goblin King waits at his throne, #257)
+
+- Owner choice: on the board the King's fight starts with him on the tile before his throne, his two guards the cells nearest him on the party's side.
+  - `FortressDressing.throne_seat` / `king_cell` are shared with the dressing; main uses `_throne_spots`.
+- **Seeing him:** his throne's fires light his tile and the ones round it (tactical `visible_cells`), and a warm light rides on him. The camera rises and centres to frame the party and the King together (`_board_transform`).
+- **Rules on the board only:**
+  - no long reach: he walks up, guards first (combat_state `foe_in_range`);
+  - he only raises his staff once beside you, so no mark on your tile from across the hall.
+
+  The dark stage is unchanged.
+- **Bug fixed:** a guard he called could appear on the party's own tile (main `place_foe` now excludes it; the bot likewise).
+- **Bot** mirrors the throne start. 90-campaign batches, campaigns that beat him:
+  - dark stage 73/88;
+  - board, before 45/84;
+  - board from the throne 66/87 and 63/85.
+
+  No stalls.
+- fortress_check covers the throne start, the guards between, his light and the called guard; capture `build/shots_king/fortress_desk_queen.png`.
+
 ## 2026-11-11 – Claude (the Goblin King's fight moves to the overhead board, #257)
 
 - Owner choice: the King's hall is fought on the board (main `_start_combat`: `_fight_kind` "queen" now takes the board like ambushes). With the board off it stays on the dark stage.

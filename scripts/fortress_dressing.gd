@@ -18,6 +18,37 @@ const BRACKETS := 2
 const CAGES := 2
 
 
+## The throne's cell: the hall cell farthest from every gate (also where the
+## Goblin King waits when his fight begins, #257).
+static func throne_seat(map) -> Vector2i:
+	var hall: Array = map.marks.get("hall", [])
+	if hall.is_empty():
+		return Vector2i(-1, -1)
+	var gates: Array = map.marks.get("gates", [])
+	var seat: Vector2i = hall[0]
+	var best := -1.0
+	for cell: Vector2i in hall:
+		if map.is_wall(cell) or map.content_at(cell) != 0:
+			continue
+		var distance := 1e9
+		for gate: Vector2i in gates:
+			distance = minf(distance, Vector2(cell).distance_squared_to(Vector2(gate)))
+		if distance > best:
+			best = distance
+			seat = cell
+	return seat
+
+
+## Where the King stands at the start of his fight: on the tile in front of
+## his throne (toward the nearest gate), or on the throne's own tile.
+static func king_cell(map) -> Vector2i:
+	var seat := throne_seat(map)
+	if seat == Vector2i(-1, -1):
+		return seat
+	var front: Vector2i = seat + _toward_nearest(seat, map.marks.get("gates", []))
+	return front if front in map.marks.get("hall", []) and map.is_passable(front) else seat
+
+
 static func dress(level: Node3D, map, seed: int, cell_size: float, wall_height: float, gate_broken: bool) -> int:
 	var hall: Array = map.marks.get("hall", [])
 	if hall.is_empty():
@@ -31,17 +62,7 @@ static func dress(level: Node3D, map, seed: int, cell_size: float, wall_height: 
 	var at := func(cell: Vector2i) -> Vector3: return Vector3(cell.x * cell_size, 0.0, cell.y * cell_size)
 
 	# The throne: the hall cell farthest from every gate, facing the nearest.
-	var seat: Vector2i = hall[0]
-	var best := -1.0
-	for cell: Vector2i in hall:
-		if map.is_wall(cell) or map.content_at(cell) != 0:
-			continue
-		var distance := 1e9
-		for gate: Vector2i in gates:
-			distance = minf(distance, Vector2(cell).distance_squared_to(Vector2(gate)))
-		if distance > best:
-			best = distance
-			seat = cell
+	var seat: Vector2i = throne_seat(map)
 	var toward: Vector2i = _toward_nearest(seat, gates)
 	_put(root, "throne", at.call(seat), Dressing._yaw_facing(toward), "")
 

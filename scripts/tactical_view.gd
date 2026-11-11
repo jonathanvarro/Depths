@@ -132,6 +132,17 @@ func visible_cells() -> Dictionary:
 			var ahead: bool = d != Vector2i.ZERO and Vector2i(signi(d.x), signi(d.y)) == facing and (d.x == 0 or d.y == 0) and absi(d.x) + absi(d.y) <= sight[1]
 			if (in_light or ahead) and _clear_line(at, cell):
 				out[cell] = true
+	# The Goblin King sits in the light of his throne's fires (#257): seen
+	# across the hall, while his guards come out of the dark.
+	if _main._fight_kind == "queen":
+		for foe in _state.living_foes():
+			if foe.type.tactic != EnemyType.Tactic.QUEEN:
+				continue
+			for dy in range(-1, 2):
+				for dx in range(-1, 2):  # the fires light the tiles round him too
+					var lit_cell: Vector2i = foe.cell + Vector2i(dx, dy)
+					if _clear_line(at, lit_cell):
+						out[lit_cell] = true
 	return out
 
 
@@ -291,8 +302,19 @@ func _board_transform() -> Transform3D:
 	var at: Vector3 = party.global_position
 	var back: Vector3 = party.global_transform.basis.z.normalized()  # the party looks along -Z
 	var place: Array = CAMERA[light_band()]  # less light, a closer view
-	var eye: Vector3 = at + Vector3(0, place[0], 0) + back * float(place[1])
-	return Transform3D(Basis(), eye).looking_at(at, -party.global_transform.basis.z.normalized())
+	var look: Vector3 = at
+	if _main._fight_kind == "queen":
+		# The King's hall (#257): its fires show the whole of it. The view
+		# takes in the party and the King at his throne, rising to fit.
+		place = CAMERA[CAMERA.keys().max()]
+		for foe in (_state.living_foes() if _state else []):
+			if foe.type.tactic == EnemyType.Tactic.QUEEN and is_instance_valid(foe.node):
+				var king: Vector3 = Vector3(foe.node.global_position.x, at.y, foe.node.global_position.z)
+				look = at.lerp(king, 0.5)
+				var span: float = at.distance_to(king)
+				place = [maxf(place[0], span * 0.95 + 3.0), maxf(place[1], span * 0.35 + 2.0)]
+	var eye: Vector3 = look + Vector3(0, place[0], 0) + back * float(place[1])
+	return Transform3D(Basis(), eye).looking_at(look, -party.global_transform.basis.z.normalized())
 
 
 ## Ceilings and anything hung from them would hide the board.
