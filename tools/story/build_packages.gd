@@ -64,8 +64,8 @@ func _initialize() -> void:
 	var fallen := _event("left_behind_fallen", "Where they fell",
 			"The rest of your party lies where the ambush caught them. Rats have been at the packs. A survey case lies open beside the guide's hand.",
 			[_choice("Look them over", [_outcome("The guide, the surveyor, the two porters. None of them ran. Whatever came, it came from both sides at once.")], 1, true),
-			_choice("Gather their maps and anything strange", [_outcome(
-					"The survey map is rolled tight in its case - and someone has marked it in a hand none of your party used. Wedged under the guide is an arrow: a goblin shaft, fletched with something black and glossy that no goblin you know would use.",
+			_choice("Collect evidence for Commander Vael", [_outcome(
+					"The survey map is rolled tight in its case - and someone has marked it in a hand none of your party used. Wedged under the guide is an arrow: a goblin shaft, fletched with something black and glossy that no goblin you know would use.\n\nEvidence found: the marked survey map and black-fletched arrow. Report to Commander Vael at camp.",
 					{"quest": "left_behind", "quest_flag": "found"})], 3)],
 			2, "res://art/props/opening-bodies-v1/fallen-a.tscn")
 	var packs := _event("left_behind_packs", "Their packs",
@@ -73,7 +73,7 @@ func _initialize() -> void:
 			[_choice("Take what's left", [_outcome("A ration in waxed cloth, clean linen, and a few coins the rats couldn't eat.",
 					{"loot": {ration: 1, dressing: 1}, "gold": 6})], 2)],
 			2, "res://art/props/opening-bodies-v1/fallen-b.tscn")
-	_package("left_behind", Vector2i(1, 1), "left_behind", [A], ["found"], [
+	_package("left_behind", Vector2i(1, 1), "left_behind", [A], [], [
 		"#######",
 		"#,,,,,#",
 		"#,1,2,#",

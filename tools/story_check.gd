@@ -346,7 +346,10 @@ func _step3() -> void:
 	var site: Rect2i = map.marks.get("quests", {}).get("left_behind", Rect2i())
 	var fight_cell: Vector2i = map.fight_groups.keys()[0]
 	check("the map knows where the site is, and it still has something to do (#230)", site.has_point(fight_cell) and main._quest_site_open("left_behind"))
-	check("it's named, and already on the map from arrival (#234)", map.marks.get("quest_names", {}).get("left_behind", "") == "Where the survey party fell" and map.explored.has(fight_cell) and main._minimap._notes().any(func(n): return n.title == "Where the survey party fell"))
+	map.explored.clear()
+	check("the named site stays unknown until seen (#234)", map.marks.get("quest_names", {}).get("left_behind", "") == "Where the survey party fell" and not main._minimap._notes().any(func(n): return n.title == "Where the survey party fell"))
+	map.reveal_around(fight_cell)
+	check("once seen, its name appears in discoveries", main._minimap._notes().any(func(n): return n.title == "Where the survey party fell"))
 	var room: Array = map.room_around(fight_cell)
 	main._party.place(map, room.filter(func(c): return map.content_at(c) == 0)[0])
 	main._cell_before = Vector2i(-1, -1)
@@ -374,7 +377,8 @@ func _step3() -> void:
 	screen._choose(screen._event.choices[1])
 	await process_frame
 	check("gathering their maps finds the evidence", Quests.has_flag(camp, "left_behind", "found") and screen._body.text.contains("arrow"))
-	check("...and the site's map mark goes once it's done (#230)", not main._quest_site_open("left_behind"))
+	check("the site remains until the report (#234)", main._quest_site_open("left_behind"))
+	check("the evidence result explicitly directs the player to report", screen._body.text.contains("Evidence found:") and screen._body.text.contains("Report to Commander Vael at camp."))
 	if dir != "":
 		await _snap("evidence")
 	screen._finish({"left": false, "ambush": [] as Array[EnemyType]})
@@ -385,5 +389,10 @@ func _step3() -> void:
 	check("the find survives saving", Quests.has_flag(main._camp_state, "left_behind", "found"))
 	main._floors.clear()
 	main._go_to_floor(1, main.Arrival.FROM_ABOVE)
-	check("once found, the site isn't stamped into new floors", "left_behind" not in main._map.packages)
+	check("evidence in hand, a new floor still has the site", "left_behind" in main._map.packages)
+	Quests.set_stage(main._camp_state, "left_behind", Quests.Stage.RESOLVED)
+	check("reporting hides the cached site's map mark", not main._quest_site_open("left_behind") and not main._minimap._notes().any(func(n): return n.title == "Where the survey party fell"))
+	main._floors.clear()
+	main._go_to_floor(1, main.Arrival.FROM_ABOVE)
+	check("after reporting, new floors omit the site", "left_behind" not in main._map.packages)
 	await _drop(main)

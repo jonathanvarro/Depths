@@ -13,6 +13,24 @@ Format:
 
 ---
 
+## 2026-11-11 – Claude (committed the #234 survey-site follow-up)
+
+- Did: committed an uncommitted #234 follow-up another assistant left on 2026-11-07 (owner asked to clear it). It matches the issue's spec: the survey party's site is named on the map only once seen, and stays on floor 1 until the report is given to Vael. story_check: fails 0. Their note follows.
+
+Checked the existing #230/#234 quest/map implementation and package generator.
+Those Left Behind now keeps its floor-1 package eligible through evidence
+collection until the commander resolves the quest. Its named amber map site and
+discoveries entry appear only after exploration; removed the automatic reveal
+and the inaccurate claim that Vael marked the route. Entry announcements remain.
+The evidence choice names Vael explicitly, and its result identifies both clues
+and directs the player back to him. The generator source matches the resources.
+No quest IDs, flags, report dialogue or save format changed. Existing explored
+cells remain explored on reload. Cached terrain is retained; the resolved site's
+marker disappears, and subsequent generated floors omit the package.
+Updated tools/story_check.gd for unseen/seen names, entry, evidence wording,
+persistence through the find and removal after reporting, alongside its existing
+400-seed placement/reachability and story/save checks.
+
 ## 2026-11-11 – Claude (the Goblin King waits at his throne, #257)
 
 - Owner choice: on the board the King's fight starts with him on the tile before his throne, his two guards the cells nearest him on the party's side.

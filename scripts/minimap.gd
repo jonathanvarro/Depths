@@ -193,11 +193,7 @@ func _draw() -> void:
 	for quest in map.marks.get("quests", {}):
 		var site: Rect2i=map.marks["quests"][quest]
 		var spot:=site.get_center()
-		var seen:=reveal_all
-		for y in range(site.position.y,site.end.y):
-			for x in range(site.position.x,site.end.x):
-				seen=seen or map.explored.has(Vector2i(x,y))
-		if seen and cells.has_point(spot) and (not quest_open.is_valid() or quest_open.call(quest)):
+		if _quest_site_seen(quest) and cells.has_point(spot) and (not quest_open.is_valid() or quest_open.call(quest)):
 			var at:=origin+(Vector2(spot-cells.position)+Vector2.ONE*.5)*tile
 			_draw_marker(GLYPHS.landmark,at,tile,QUEST_TINT)
 			# A named site (#234): its name beside it on the full map.
@@ -222,10 +218,17 @@ func _draw_marker(texture: Texture2D, center: Vector2, tile: float, tint:=Color.
 func _draw_landmark(center: Vector2, tile: float) -> void:
 	_draw_marker(GLYPHS.landmark,center,tile)
 
+func _quest_site_seen(quest: String) -> bool:
+	if reveal_all:return true
+	var site: Rect2i=map.marks.get("quests",{}).get(quest,Rect2i())
+	for cell in map.explored:
+		if site.has_point(cell):return true
+	return false
+
 func _notes() -> Array:
 	var notes: Array=[]
 	for quest in map.marks.get("quest_names",{}):  # named quest sites first (#234)
-		if not quest_open.is_valid() or quest_open.call(quest):
+		if _quest_site_seen(quest) and (not quest_open.is_valid() or quest_open.call(quest)):
 			notes.append({"title":map.marks["quest_names"][quest],"used":false,"content":-2})
 	for landmark: Dictionary in map.landmarks:
 		if landmark["seen"]:notes.append({"title":landmark["name"],"used":false,"content":-1})

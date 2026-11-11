@@ -662,28 +662,17 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 				sites[package.quest] = stamped["sites"][id]
 		if not sites.is_empty():
 			marks["quests"] = sites
-			# Named sites (#234): the quest-giver marked them on your map, so
-			# the room shows from the start, named, until the quest is done.
-			var names := {}
+			# Names are metadata; exploration reveals them like other landmarks.
+			marks["quest_names"] = {}
 			for quest in sites:
 				if QUEST_SITE_NAMES.has(quest):
-					names[quest] = QUEST_SITE_NAMES[quest]
-					var rect: Rect2i = sites[quest]
-					for y in range(rect.position.y, rect.end.y):
-						for x in range(rect.position.x, rect.end.x):
-							if _floors[depth].is_passable(Vector2i(x, y)):
-								_floors[depth].reveal_around(Vector2i(x, y))
-			marks["quest_names"] = names
+					marks["quest_names"][quest] = QUEST_SITE_NAMES[quest]
 		_floors[depth].lairs = stamped["lairs"]
 		if depth >= Galleries.DEPTH and not use_debug_layout:  # slice 2: water, until it's drained
 			var drained := Quests.has_flag(_camp_state, "dry_passage", "opened") if depth == Galleries.DEPTH \
 					else Quests.has_flag(_camp_state, "reservoir", "diverted")
 			Galleries.flood(_floors[depth], _site_seed + depth * 7919 + 37, drained, depth)
 	_map = _floors[depth]
-	for quest in _map.marks.get("quest_names", {}):
-		if _quest_site_open(quest):
-			_tip.call_deferred("marked_" + quest, "Commander Vael marked \"%s\" on your map. Press M or tap the map to see the way." % _map.marks["quest_names"][quest])
-
 	_build_level()
 	_minimap.setup(_map)
 	_full_map_view.setup(_map)
@@ -4217,7 +4206,7 @@ func _clear_passage(cell: Vector2i) -> void:
 
 
 ## What to do on reaching a visible quest's site (#230).
-## Named quest sites (#234): shown on the map from arrival, announced on
+## Named quest sites (#234): shown on the map once seen, announced on
 ## entering, listed with the floor's discoveries.
 const QUEST_SITE_NAMES := {
 	"left_behind": "Where the survey party fell",
@@ -4240,7 +4229,10 @@ func _note_quest_site(cell: Vector2i) -> void:
 			var name: String = _map.marks.get("quest_names", {}).get(quest, "")
 			if name != "" and not sites[quest].has_point(_cell_before):
 				_show_message(name + ".")  # announced like a landmark (#234)
-			_tip("site_" + quest, QUEST_SITE_HINTS.get(quest, 'This is the place for "%s".' % Quests.INFO[quest]["title"]))
+			if quest == "left_behind" and Quests.has_flag(_camp_state, quest, "found"):
+				_tip("report_left_behind", "Evidence collected. Report to Commander Vael at camp, by the path to the mine.")
+			else:
+				_tip("site_" + quest, QUEST_SITE_HINTS.get(quest, 'This is the place for "%s".' % Quests.INFO[quest]["title"]))
 
 
 func _on_party_moved(cell: Vector2i, facing: int) -> void:

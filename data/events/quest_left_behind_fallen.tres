@@ -20,13 +20,13 @@ outcomes = Array[ExtResource("2_ibj3p")]([SubResource("Resource_nji8p")])
 
 [sub_resource type="Resource" id="Resource_887wi"]
 script = ExtResource("2_ibj3p")
-text = "The survey map is rolled tight in its case - and someone has marked it in a hand none of your party used. Wedged under the guide is an arrow: a goblin shaft, fletched with something black and glossy that no goblin you know would use."
+text = "The survey map is rolled tight in its case - and someone has marked it in a hand none of your party used. Wedged under the guide is an arrow: a goblin shaft, fletched with something black and glossy that no goblin you know would use.\n\nEvidence found: the marked survey map and black-fletched arrow. Report to Commander Vael at camp."
 quest = "left_behind"
 quest_flag = "found"
 
 [sub_resource type="Resource" id="Resource_xiv6q"]
 script = ExtResource("1_8ei27")
-label = "Gather their maps and anything strange"
+label = "Collect evidence for Commander Vael"
 time_cost = 3
 outcomes = Array[ExtResource("2_ibj3p")]([SubResource("Resource_887wi")])
 
