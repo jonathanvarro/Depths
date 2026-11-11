@@ -29,6 +29,31 @@ owner acceptance and live dispatch remain pending. No per-body human status chan
 These are review candidates, not owner-approved replacements. Exact samples,
 sources and API: [rat-and-shrine-landmarks-3d.md](rat-and-shrine-landmarks-3d.md).
 
+The [3D combat roster](combat-roster-3d.md) (#251, 2026-11-11) adds eleven
+board candidates. The clips are 24 fps and stored in
+`art/enemies/combat-roster-3d-v1`, with frame counts in its catalog.
+
+| Roster additions | Clips in addition to idle, attack, hurt and fall |
+|---|---|
+| Great rat | Walk and run loops |
+| Goblin archer, guard, drummer and trapper | Draw, brace, drum and snare, respectively |
+| Goblin Queen | Enraged |
+| Broodmother | Walk loop, call, web and venom |
+| Mara, Corin, Sister Alwen and generic recruit | Walk loop and defend. Alwen also has cast |
+
+The party kit uses an original 15-bone rig. The enemy rigs derive from the
+recorded CC0 sources. These clips have no dependency on the private library.
+
+The CC0-derived 3D enemy library (#255) stores game clips in
+`art/enemies/field-creatures-3d-v1`. These use the verified spider and goblin
+sources listed in [the asset handoff](spiders-and-goblin-3d.md). The editable
+adaptations stay in `build/local-spiders-goblin-v1/masters`.
+
+| Rig | Clips at 24 fps | Review |
+|---|---|---|
+| Spider family, 45 bones | Idle and walk loop over frames 0–16. Attack, fall, web and venom use 0–16. Hurt uses 0–10. | Evaluated Blender and Godot samples checked |
+| Goblin, 57 bones | Idle loops over 0–48. Attack uses 0–18, hurt 0–12, fall 0–25. | Baked poses and hand attachments checked in Godot |
+
 The separate CC0 scenery library (#239, 2026-11-06) samples Death_A_Pose and
 Sit_Floor_Pose from KayKit Skeletons 1.0's Skeleton_Minion.glb into static
 floor and seated scenery. The original pack and its included Actions are

@@ -1,0 +1,39 @@
+{
+  "checked": "2026-11-09",
+  "files": [
+    {
+      "file": "spider.blend",
+      "url": "https://opengameart.org/sites/default/files/spider_1.blend",
+      "bytes": 784128,
+      "sha256": "01e0d50597ba9d4a1d5ebaaa78da89ef6fd79df207f3fa9962b3e4e069b0112b"
+    },
+    {
+      "file": "spider.png",
+      "url": "https://opengameart.org/sites/default/files/spider_7.png",
+      "bytes": 170489,
+      "sha256": "d7845fd1ef1b2387767f62296b44d6dfd0de9770ec77de5f37245b57720ed003"
+    },
+    {
+      "file": "goblin.blend",
+      "url": "https://opengameart.org/sites/default/files/goblin-FINAL.blend",
+      "bytes": 7498900,
+      "sha256": "cec34eb0c06d6efd35b42f8a70c7921a0d404aa6755ac6ba526a6b4585faab1a"
+    },
+    {
+      "file": "spider-page.html",
+      "url": "https://opengameart.org/content/spider-2",
+      "author": "br-n518",
+      "licence": "CC0-1.0",
+      "bytes": 25760,
+      "sha256": "da966712cd5ab423f4d998018193cc43e0c39a585dd9b64c2e092af6affa91d1"
+    },
+    {
+      "file": "goblin-page.html",
+      "url": "https://opengameart.org/content/goblin-1",
+      "author": "CDmir; collaborator TinyWorlds",
+      "licence": "CC0-1.0",
+      "bytes": 39701,
+      "sha256": "16ad9211e707da01daebaabdd893a1667ce154b5f3f397b5a78792cf22cbfb3b"
+    }
+  ]
+}
