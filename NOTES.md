@@ -13,6 +13,22 @@ Format:
 
 ---
 
+## 2026-11-11 – ChatGPT (mining and fortress art integration, #256 / #257)
+
+- Did: integrated `55391bf`, `e00686e` and `9bcec03` into the current game.
+  The floor 1–2 tool rack and coal seam use their own fresh/searched models,
+  and coal, mattock, miner's sledge and generated light mace use dedicated
+  icons. The live archer releases the bowstring during Shoot, and the Goblin
+  King has his own bestiary silhouette. The previous Queen entry still loads.
+- Checked: mining and fortress rules, regional icons, live Shoot dispatch and
+  the journal's ID and name lookups. Rendered mining states at landscape phone
+  sizes and ran the live enemy-model checks through the private-desktop
+  launcher. All assertions passed. Some fixtures logged Godot resource
+  cleanup diagnostics on exit.
+- Next: bind the delivered trainer shelter/portrait and nurse pickup when their
+  quests and arrival rules are ready (#240 / #238). The King’s dark-stage
+  readability and a dedicated Discern tome icon remain open.
+
 ## 2026-11-11 – Claude (armour and shield mastery thresholds lowered, #219)
 
 - Did: owner chose to lower only the armour and shield thresholds. They now

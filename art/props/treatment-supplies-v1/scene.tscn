@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://art/props/treatment-supplies-v1/bundle.glb" id="1"]
+[ext_resource type="Material" path="res://art/enemies/combat-roster-3d-v1/palette.tres" id="2"]
+
+[node name="TreatmentSupplies" type="Node3D"]
+
+[node name="Bundle" parent="." instance=ExtResource("1")]
+
+[node name="TreatmentBundle" parent="Bundle" index="0"]
+material_override = ExtResource("2")
+
+[editable path="Bundle"]

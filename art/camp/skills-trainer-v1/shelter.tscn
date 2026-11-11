@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="Texture2D" path="res://art/camp/skills-trainer-v1/shelter.png" id="1"]
+[node name="SkillsTrainerShelter" type="Node2D"]
+texture_filter = 2
+[node name="Base" type="Sprite2D" parent="."]
+centered = false
+position = Vector2(-92.16, -90)
+scale = Vector2(0.36, 0.36)
+texture = ExtResource("1")
+light_mask = 2

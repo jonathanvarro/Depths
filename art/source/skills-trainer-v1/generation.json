@@ -1,0 +1,24 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-11-11",
+  "assets": [
+    {
+      "id": "trainer",
+      "master": "trainer-master.png",
+      "sha256": "fe097f99c2bba5da4fa56bffb5259d79bf9ff82bf8ffcea3c5cb64ed4bf4d95d",
+      "reference_images": [
+        "art/portraits/main-heroes-v1/alwen/preview.png"
+      ],
+      "prompt": "Create a new square dialogue portrait for Depths, using the supplied character portrait only as a visual scale and muted ink/painterly pixel-art reference. A middle-aged woman veteran and practical camp skills instructor, close-cropped salt-and-pepper hair with one longer swept forelock, prominent weathered nose, calm steady gaze, one split eyebrow, closed relaxed mouth. A faded ochre neckerchief, sturdy patch-stitched dark green leather training vest and rolled linen shoulder. Face turned slightly to the viewer's right, bust to the lower edge, eyes high and ample margin above the head. Quiet broad neutral light for later in-game tinting, natural skin, worn restrained colors, confident and observant rather than glamorous. Real transparent background, no lights, weapons, scenery, symbols or text."
+    },
+    {
+      "id": "shelter",
+      "master": "shelter-master.png",
+      "sha256": "20eefaefe20cfd8c745c1b34c22e0e8686083eaca1f6350995f2bbd66445ccac",
+      "reference_images": [
+        "art/camp/highres-v4/smith.png"
+      ],
+      "prompt": "Create one isolated transparent-background sprite concept for a skills trainer's small outdoor campsite station in Depths. Match the perspective and material palette of the supplied smith site reference, without its forge and tools. Low open-front shelter of faded olive-brown patchwork canvas over crooked poles, quiet drill space under it: one training post wrapped with straw and rope, a short unpainted practice bench with two battered wooden practice staves leaned against it, rolled exercise mat, a dry water bucket and two pale chalk marks on the bench. A small unlit lantern hanging from one post. Slight elevated front three-quarter view, wide silhouette, feet/poles visible on a common ground line. Keep the objects close as one readable site at phone size. Worn dark medieval camp material with subdued neutral highlights, no person, no scenery, no baked floor or glow, no logos or words. Genuine alpha all around the objects."
+    }
+  ]
+}

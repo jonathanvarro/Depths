@@ -1,0 +1,8 @@
+{
+  "scene": "res://art/props/treatment-supplies-v1/scene.tscn",
+  "placement": "floor-centre",
+  "front": "+Z",
+  "triangles": 484,
+  "surfaces": 1,
+  "sha256": "fb729ae0abbda2a6e7d9e325f2f8121c5b7c474fe7a4a98fec89464013a5a84b"
+}

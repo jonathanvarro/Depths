@@ -9,7 +9,7 @@ from mesh_parts import Mesh, prior_colours, set_uv
 GOBLINS = ("goblin-archer", "goblin-guard", "goblin-drummer", "goblin-trapper", "goblin-queen")
 
 
-def fit_goblin(name, rig, body, palette):
+def fit_goblin(name, rig, body, palette, string_mesh=None):
     x = body.data
     base = prior_colours(x, palette)
     if name == "goblin-queen":
@@ -38,7 +38,10 @@ def fit_goblin(name, rig, body, palette):
         for i,(first,last) in enumerate(zip(arc,arc[1:])):
             kit.segment(first,last,[(0,.021),(.5,.023),(1,.020)],"hand_L",
                         "wood_light" if i in (0,5) else "wood","sack",6)
-        kit.segment(arc[0],arc[-1],[(0,.008),(1,.007)],"hand_L","linen","cream",5)
+        if string_mesh:
+            string_mesh(kit, Vector(arc[0]), Vector(arc[-1]))
+        else:
+            kit.segment(arc[0],arc[-1],[(0,.008),(1,.007)],"hand_L","linen","cream",5)
         costume.segment((-.14,.20,.57),(.097,.20,1.02),[(0,.067),(.8,.055),(1,.056)],
                         "spine3","leather","leather_light")
         for i in range(4):
