@@ -147,7 +147,7 @@ const SPIDER := preload("res://data/enemies/spider.tres")
 const GOBLIN := preload("res://data/enemies/goblin.tres")
 const ARCHER := preload("res://data/enemies/goblin_archer.tres")
 const GUARD := preload("res://data/enemies/goblin_guard.tres")
-const QUEEN := preload("res://data/enemies/goblin_queen.tres")
+const QUEEN := preload("res://data/enemies/goblin_king.tres")  # the Goblin King since #257; goblin_queen.tres stays for old saves
 const GREAT_RAT := preload("res://data/enemies/great_rat.tres")
 const WEBSPINNER := preload("res://data/enemies/webspinner.tres")
 const DRUMMER := preload("res://data/enemies/goblin_drummer.tres")
@@ -766,7 +766,7 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 		_full_map_view.queue_redraw()
 	# The queen's hall (#44): a warning, then no turning back.
 	if _depth == FORTRESS_DEPTH and cell in _map.marks.get("hall", []) and not _camp_state.queen_defeated:
-		_ask("The queen's hall. Once you step inside, there's no turning back. Go in?",
+		_ask("The King's hall. Once you step inside, there's no turning back. Go in?",
 				_queen_fight.bind(cell), _step_back)
 		return
 	# Opening: the next fight comes once she's walked far enough (#56).
@@ -2229,7 +2229,7 @@ func _fortress_signs(depth: int) -> void:
 		_show_message("Goblin marks daubed on the rock. Somewhere below: drums.")
 	elif depth == FORTRESS_DEPTH:
 		_show_message("Worked stone and timber: the goblin fortress." if _camp_state.gate_broken
-				else "Worked stone and timber: the goblin fortress. Her hall lies beyond a barred gate.")
+				else "Worked stone and timber: the goblin fortress. The King's hall lies beyond a barred gate.")
 
 
 func _gate_fight() -> void:
@@ -2252,7 +2252,7 @@ func _break_gates() -> void:
 		_map.doors[gate] = DungeonMap.Door.OPEN
 	_build_level()
 	Sounds.play(self, "gate", -6.0)
-	_show_message("The gate splinters. The way to the queen's hall is open.")
+	_show_message("The gate splinters. The way to the King's hall is open.")
 	_save_now()
 
 
@@ -2418,7 +2418,7 @@ func _queen_defeated() -> void:
 	_camp_state.contract = {}
 	_save_now()
 	_party.locked = true
-	# Her hoard holds something unique (#135).
+	# His hoard holds something unique (#135).
 	var owned: Array = _party_state.members.map(func(h): return h.trinket) + _party_state.supplies.gear
 	var prize: Equipment = Trinkets.unique_reward(_rng, owned)
 	if prize:
@@ -2430,11 +2430,11 @@ func _queen_defeated() -> void:
 	# A big moment, but a side quest (#157): end by pointing deeper.
 	var onward := "Whatever the commander is looking for lies further down. The way down continues." \
 			if Quests.has_flag(_camp_state, "lower_gate", "seen") \
-			else "But the commander didn't send you down here for her. Somewhere past the fortress, the way down continues."
-	var hoard := "In her hoard: the %s. " % prize.display_name.to_lower() if prize else ""
-	_results.show_brief("The goblin queen is dead",
-			"Her guards scatter into the dark and the drums fall silent. The king's camp will want to hear of this - and pay for it.\n" + hoard + onward,
-			"Continue",preload("res://art/illustrations/fortress-v1/victory.png"))
+			else "But the commander didn't send you down here for him. Somewhere past the fortress, the way down continues."
+	var hoard := "In his hoard: the %s. " % prize.display_name.to_lower() if prize else ""
+	_results.show_brief("The Goblin King is dead",
+			"His guards scatter into the dark and the drums fall silent. The camp will want to hear of this - and pay for it.\n" + hoard + onward,
+			"Continue",preload("res://art/illustrations/fortress-king-v1/victory.png"))
 	await _results.continue_pressed
 	_results.visible = false
 	_party.locked = false
@@ -3860,7 +3860,7 @@ func _next_tip() -> void:
 
 
 ## Monsters the opening already taught, or whose intro is only scenery.
-const UNTAUGHT_FOES := ["Rat", "Starved rat", "Spider", "Small spider", "Goblin", "Webspinner", "Goblin queen"]
+const UNTAUGHT_FOES := ["Rat", "Starved rat", "Spider", "Small spider", "Goblin", "Webspinner", "Goblin queen", "Goblin King"]
 
 ## A fight's first-time tips: elites, and each kind of monster the first
 ## time it's met (#146), from its own intro line.

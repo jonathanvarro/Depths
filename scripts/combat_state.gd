@@ -49,9 +49,9 @@ const INTENT_TEXT := {
 	Intent.SHOOT: "nocking an arrow",
 	Intent.BASH: "readying a shield bash",
 	Intent.BRACE: "bracing behind its shield",
-	Intent.CALL: "calling her guards",
-	Intent.SCREECH: "drawing breath to screech",
-	Intent.CLEAVER: "raising her cleaver",
+	Intent.CALL: "calling for guards",
+	Intent.SCREECH: "drawing breath to bellow",
+	Intent.CLEAVER: "raising his staff",
 	Intent.RUSH: "bunching to rush",
 	Intent.RECOVER: "catching its breath",
 	Intent.BEAT: "beating a war drum",
@@ -385,7 +385,7 @@ func _plan(foe: Foe) -> void:
 			if not foe.enraged and foe.health * 2 <= foe.type.max_health:
 				foe.enraged = true
 				foe.row_override = "front"
-				events.append("The goblin queen roars and storms forward, enraged!")
+				events.append("The Goblin King roars and storms forward, enraged!")
 			var guards := living_foes().filter(func(f: Foe): return f.type.tactic == EnemyType.Tactic.GUARD).size()
 			var cleaver := QUEEN_ENRAGED_CLEAVER_CHANCE if foe.enraged else QUEEN_CLEAVER_CHANCE
 			var roll := rng.randf()
@@ -449,14 +449,14 @@ func _call_guard(queen: Foe) -> Dictionary:
 	plan(guard)
 	foe_joined.emit(guard)
 	return {"target": null, "hit": false, "damage": 0, "injury": null,
-			"text": "The queen shrieks - %s rushes in to guard her!" % guard.name.to_lower()}
+			"text": "The King bellows - %s rushes in to guard him!" % guard.name.to_lower()}
 
 
 func _screech(queen: Foe) -> Dictionary:
 	for hero: Companion in party.living_members():
 		hero.change_strain(SCREECH_STRAIN)
 	return {"target": null, "hit": false, "damage": 0, "injury": null,
-			"text": "The queen's screech rattles everyone's nerves."}
+			"text": "The King's bellow rattles everyone's nerves."}
 
 
 ## The coin's result for the next killing blow: 1 heads, 0 tails, -1 not
@@ -486,13 +486,13 @@ func _killing_blow(foe: Foe) -> Dictionary:
 	var heads: bool = coin == 1 if coin != -1 else rng.randf() < killing_blow_odds(target)
 	coin = -1
 	if heads:
-		outcome["text"] = "The %s's %s whistles past %s!" % [foe.name.to_lower(), "cleaver" if foe.intent == Intent.CLEAVER else "killing blow", target.display_name]
+		outcome["text"] = "The %s's %s whistles past %s!" % [foe.name.to_lower(), "staff" if foe.intent == Intent.CLEAVER else "killing blow", target.display_name]
 		return outcome
 	var damage: int = maxi(1, foe.type.damage_max * HEAVY_MULTIPLIER - target.damage_reduction())
 	target.change_health(-damage)
 	outcome["hit"] = true
 	outcome["damage"] = damage
-	outcome["text"] = "The %s's %s lands on %s for %d!" % [foe.name.to_lower(), "cleaver" if foe.intent == Intent.CLEAVER else "killing blow", target.display_name, damage]
+	outcome["text"] = "The %s's %s lands on %s for %d!" % [foe.name.to_lower(), "staff" if foe.intent == Intent.CLEAVER else "killing blow", target.display_name, damage]
 	if target.is_alive() and not foe.type.injuries.is_empty():
 		var injury: Injury = foe.type.injuries[rng.randi_range(0, foe.type.injuries.size() - 1)]
 		if target.add_injury(injury):

@@ -5,11 +5,13 @@
 [ext_resource type="PackedScene" path="res://art/enemies/cave-simple-v1/goblin/scene.tscn" id="2"]
 [ext_resource type="Resource" path="res://data/injuries/deep_wound.tres" id="3"]
 [ext_resource type="Resource" path="res://data/injuries/limp.tres" id="4"]
+[ext_resource type="PackedScene" path="res://art/enemies/fortress-goblins-3d-v1/fortress-goblin.tscn" id="model3d"]
 
 [resource]
 script = ExtResource("1")
 display_name = "Goblin"
 scene = ExtResource("2")
+model = ExtResource("model3d")
 max_health = 10
 damage_min = 2
 damage_max = 4

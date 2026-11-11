@@ -13,6 +13,25 @@ Format:
 
 ---
 
+## 2026-11-11 – Claude (Goblin King replaces the Queen, fortress goblins in 3D, #257; bot fight stalls, #245)
+
+- **Merged** ChatGPT's `codex/fortress-goblins-3d` (notes and animation-library conflicts: both sides kept).
+- **Goblin King** (`data/enemies/goblin_king.tres`) is the floor-4 boss: main `QUEEN` points at him.
+  - Same numbers and rules as the Queen (calls guards, bellows, enrages, coin blow). The owner's King-specific rules are still open.
+  - He has no painting, so he is his 3D model everywhere, the dark stage included. There he's dim and half hidden behind his painted guards (capture: `build/shots_king/models_desk_king.png`); owner review pending.
+  - His call and bellow play his staff "plant" clip (combat_screen `_action_pose`).
+  - The victory card is ChatGPT's King card.
+  - Every player-facing line is now about the King: rumours, quest ("The King's Claim"), hall prompt, gate, intents, commander's bounty, Corin's reply.
+  - Internal names stay "queen" (`queen_defeated`, `queen_claim`, Tactic.QUEEN, Intent.CLEAVER), so saves are unaffected. `goblin_queen.tres` stays for old saves.
+- **Goblin, guard and archer** have their 3D models (board/map fights). The guard braces and the archer draws with their own clips.
+- **#245 (bot only):** in a map fight the bot only waited when nothing was in reach, so a foe two tiles off with a ranged or far move (web-spinner, trapper) stalled it forever. The bot now closes in. It never steps into a blow that would land there, and it ignores marks from foes that can't reach (a goblin stuck behind its trapper in a corridor).
+  - A real fight can't stall this way: snares and webs never stop the party moving, and stepping or walking away is always possible.
+  - 450 bot campaigns, no stalls.
+  - Bot extras: `BOT_SEED=hero:seed` plays one campaign; `BOT_TRACE=1` prints the last rounds of a stalled fight, and a stall now records the fight's state.
+  - Note: a single seed doesn't replay the same campaign it had in a batch (state carries over between campaigns).
+- **Observed:** a foe stuck behind another still shows a marked tile it could never hit (misleading on the board, not a stall).
+- environment_3d_check's trap test tries a few seeded rolls (stepping round a snare can spring it; it failed about 1 in 4).
+
 ## 2026-11-11 – ChatGPT (Goblin King combat motions and victory art, #257)
 
 - Did: added attack, recoil and fall to the King's existing idle and plant.

@@ -88,10 +88,15 @@ func _initialize() -> void:
 	events_rules = RoomEvents.new()
 	var all := {}
 	var started := Time.get_ticks_msec()
+	var only := OS.get_environment("BOT_SEED")  # "hero:seed" plays just that campaign (#245)
 	for hero in HEROES:
 		all[hero] = []
 		for i in runs:
 			var run_seed := 1000 + i * 7919 + HEROES.keys().find(hero) * 104729
+			if only != "":
+				if i > 0 or not only.begins_with(hero + ":"):
+					continue
+				run_seed = int(only.get_slice(":", 1))
 			var result := _campaign(HEROES[hero], run_seed, max_days)
 			result["hero"] = hero
 			result["seed"] = run_seed
@@ -919,7 +924,11 @@ func _field_fight(state) -> void:
 		state.field_round_start()
 		if state.result != CS.Result.ONGOING:
 			break
+		if guard > 194 and OS.get_environment("BOT_TRACE") != "":
+			print("round %d: party %s foes %s" % [guard, state.party_cell, state.living_foes().map(func(f): return "%s@%s %s rests=%s" % [f.name, f.cell, CS.Intent.keys()[f.intent], state.rests_this_turn(f)])])
 		_field_party(state, map)
+		if guard > 194 and OS.get_environment("BOT_TRACE") != "":
+			print("  party now %s; foes %s" % [state.party_cell, state.living_foes().map(func(f): return "%s marked %s" % [f.cell, f.marked_cell])])
 		if state.result != CS.Result.ONGOING:
 			break
 		_field_foes(state, map)
@@ -929,6 +938,16 @@ func _field_fight(state) -> void:
 		guard += 1
 	if guard >= 200:
 		stats["stuck"] = "a map fight ran 200 rounds"
+		# What the fight looked like when it stalled (#245).
+		var lines := ["party at %s facing %s, health %.2f" % [state.party_cell, state.facing, _health_fraction()]]
+		for foe in state.living_foes():
+			lines.append("  %s at %s hp %d/%d intent %s marked %s in_range %s side %s path %s" % [foe.name, foe.cell, foe.health, foe.type.max_health,
+					CS.Intent.keys()[foe.intent], foe.marked_cell, state.foe_in_range(foe), state.side_of(foe), map.walking_distances(state.party_cell).get(foe.cell, -1)])
+		for hero in party.living_members():
+			lines.append("  %s hp %d strain %s row %s" % [hero.display_name, hero.health, hero.strain, hero.row])
+		stats["stuck"] += "
+" + "
+".join(lines)
 	cell = start  # walking resumes from where the fight began
 
 
@@ -956,7 +975,7 @@ func _field_party(state, map) -> void:
 		if float(hero.health) / maxf(1.0, hero.effective_max_health()) < 0.3 and party.cannot_use_reason(DRAUGHT, true) == "":
 			state.hero_use_item(DRAUGHT)
 			return
-	if foes.any(func(f): return f.marked_cell == state.party_cell):
+	if foes.any(func(f): return f.marked_cell == state.party_cell and _mark_lands(state, f, state.party_cell)):
 		var taken := {}
 		for f in foes:
 			taken[f.cell] = true
@@ -977,7 +996,40 @@ func _field_party(state, map) -> void:
 		if not state.shooters(foe).is_empty():
 			state.unit_shoot(foe)
 			return
-	# Nothing in reach: wait for them to come.
+	# Nothing in reach: close in on the nearest, as a player would (#245: a
+	# trapper or web-spinner two tiles off kept snaring or webbing, and a
+	# bot that only waited never fought it).
+	var distances: Dictionary = map.walking_distances(state.party_cell)
+	var nearest = null
+	for foe in foes:
+		if distances.has(foe.cell) and (nearest == null or distances[foe.cell] < distances[nearest.cell]):
+			nearest = foe
+	if nearest == null:
+		return  # none can be walked to: wait for them to come
+	var from_foe: Dictionary = map.walking_distances(nearest.cell)
+	var taken := {}
+	for f in foes:
+		taken[f.cell] = true
+	for side in [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]:
+		var next: Vector2i = state.party_cell + side
+		# Never into a blow that would land there (it would only step back off).
+		if foes.any(func(f): return f.marked_cell == next and _mark_lands(state, f, next)):
+			continue
+		if map.is_passable(next) and not taken.has(next) and from_foe.get(next, 999) < from_foe.get(state.party_cell, 999):
+			state.party_cell = next
+			state.facing = side
+			return
+
+
+## Whether `foe`'s marked blow would land with the party at `at`: a foe that
+## can't reach that cell (a goblin stuck behind its trapper, #245) never
+## swings, so its mark is no reason to keep away.
+func _mark_lands(state, foe, at: Vector2i) -> bool:
+	var was: Vector2i = state.party_cell
+	state.party_cell = at
+	var lands: bool = state.foe_in_range(foe)
+	state.party_cell = was
+	return lands
 
 
 func _field_foes(state, map) -> void:

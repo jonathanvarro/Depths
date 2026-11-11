@@ -66,7 +66,7 @@ func _initialize() -> void:
 	check("over 400 caves, floor 4 keeps its stairs up and a hall", lost == 0, "%d lost" % lost)
 	var CS = load("res://scripts/combat_state.gd")
 	var PS = load("res://scripts/party_state.gd")
-	var queen: EnemyType = load("res://data/enemies/goblin_queen.tres")
+	var queen: EnemyType = load("res://data/enemies/goblin_king.tres")
 	var guard: EnemyType = load("res://data/enemies/goblin_guard.tres")
 	var archer: EnemyType = load("res://data/enemies/goblin_archer.tres")
 
@@ -170,7 +170,7 @@ func _initialize() -> void:
 	await _snap("queen")
 	await _win_fight()
 	await create_timer(0.3).timeout
-	check("victory: the queen is dead", main._camp_state.queen_defeated and main._results.visible and main._results._title.text == "The goblin queen is dead")
+	check("victory: the queen is dead", main._camp_state.queen_defeated and main._results.visible and main._results._title.text == "The Goblin King is dead")
 	check("a side quest: the victory points deeper (#157)", main._results._illustration.visible and main._results._subtitle.text.contains("the way down continues") and not main._results._subtitle.text.contains("fortress is broken"))
 	await _snap("victory")
 	main._results.continue_pressed.emit()

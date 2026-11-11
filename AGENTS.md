@@ -550,7 +550,11 @@ Templates > Download and Install; already installed on the owner's PC).
   `_fight_kind`; CampState `gate_broken`/`queen_defeated`/`bounty_paid`;
   EnemyType tactics ARCHER/GUARD/QUEEN, `summons`, placeholder `tint` and
   `sprite_scale`; CombatState `foe_joined`, guard wall, rage.
-  `tools/fortress_check.gd`.
+  `tools/fortress_check.gd`. Since #257 (2026-11-11) the boss is the Goblin
+  King (`data/enemies/goblin_king.tres`, 3D model only, also on the dark
+  stage); internal names stay "queen" (`QUEEN`, `queen_defeated`,
+  `queen_claim`, Tactic.QUEEN, Intent.CLEAVER) so saves keep working, and
+  `goblin_queen.tres` stays for old saves. His rules are still the Queen's.
 - Scouts' refuge (2026-11-01): `scripts/refuge.gd` places a rest spot ('R')
   with `data/events/refuge_scouts.tres` (campfire prop) beside floor 3's stairs
   down; `DungeonMap.marks["refuge"]`. EventOutcome `recover` heals everyone

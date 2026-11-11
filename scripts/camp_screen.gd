@@ -608,11 +608,11 @@ func _rumour() -> String:
 	var below_seen := Quests.has_flag(_camp, "lower_gate", "seen")
 	if _camp.queen_defeated:
 		if below_seen:
-			return "The camp still toasts the goblin queen's death, but the talk has turned to the flooded galleries below the fortress."
-		return "The camp still toasts the goblin queen's death. The commander only asks whether anyone has found the way down."
+			return "The camp still toasts the Goblin King's fall, but the talk has turned to the flooded galleries below the fortress."
+		return "The camp still toasts the Goblin King's fall. The commander only asks whether anyone has found the way down."
 	if _camp.gate_broken:
-		return "Word has spread: the fortress gate is broken, and the queen waits in her hall. The commander cares more about what lies past it."
-	return "Soldiers swap stories of a goblin queen and her fortress, four floors down, behind a barred gate."
+		return "Word has spread: the fortress gate is broken, and the Goblin King waits in his hall. The commander cares more about what lies past it."
+	return "Soldiers swap stories of a Goblin King and his fortress, four floors down, behind a barred gate."
 
 
 ## Top-right: the day and the purse.

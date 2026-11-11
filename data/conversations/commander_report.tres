@@ -62,7 +62,7 @@ next = -1
 quest = "story"
 flag = "reported"
 said_by = {
-"Corin": "\"Queen or no queen, I'll get us past that fortress.\"",
+"Corin": "\"King or no king, I'll get us past that fortress.\"",
 "Mara": "\"I'll find a way down. I've done it before.\"",
 "Sister Alwen": "\"I'll find a way down. Someone has to keep them alive while we look.\""
 }
@@ -70,7 +70,7 @@ accepts = "lower_gate"
 
 [sub_resource type="Resource" id="p4"]
 script = ExtResource("1_gtmdc")
-text = "\"Now we go deeper. Below the fortress the old water channels run down to - \" he stops himself. \"To where my orders point. The goblins hold the way. There is a bounty on their queen, if you want it. But I need a way past that fortress, with her or without her.\""
+text = "\"Now we go deeper. Below the fortress the old water channels run down to - \" he stops himself. \"To where my orders point. The goblins hold the way. There is a bounty on their king, if you want it. But I need a way past that fortress, with him or without him.\""
 replies = Array[ExtResource("2_e0pqa")]([SubResource("r4_0")])
 
 [resource]

@@ -69,7 +69,7 @@ He unrolls the map first. Your party's route is there in the surveyor's neat han
 
 \"Goblins fletch with crow, if they bother at all.\" He lays it down very carefully. \"Say nothing of this at the fire. Not yet.\"", [
 			_reply("\"What happens now?\"", 2)]),
-		_page("\"Now we go deeper. Below the fortress the old water channels run down to - \" he stops himself. \"To where my orders point. The goblins hold the way. There is a bounty on their queen, if you want it. But I need a way past that fortress, with her or without her.\"", [
+		_page("\"Now we go deeper. Below the fortress the old water channels run down to - \" he stops himself. \"To where my orders point. The goblins hold the way. There is a bounty on their king, if you want it. But I need a way past that fortress, with him or without him.\"", [
 			_reply("\"I'll find a way down.\"", -1, "story", -1, "reported")]),
 	])
 	_save("smith_offer", "The apprentice smith", "res://art/camp/highres-v4/apprentice.png", [

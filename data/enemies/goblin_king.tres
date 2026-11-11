@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="EnemyType" format=3]
+
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="1"]
+[ext_resource type="PackedScene" path="res://art/enemies/fortress-goblins-3d-v1/goblin-king.tscn" id="2"]
+[ext_resource type="Resource" path="res://data/injuries/deep_wound.tres" id="3"]
+[ext_resource type="Resource" path="res://data/injuries/limp.tres" id="4"]
+[ext_resource type="Resource" path="res://data/enemies/goblin_guard.tres" id="5"]
+
+[resource]
+script = ExtResource("1")
+scene = ExtResource("2")
+model = ExtResource("2")
+injuries = Array[Injury]([ExtResource("3"), ExtResource("4")])
+display_name = "Goblin King"
+max_health = 32
+damage_min = 3
+damage_max = 6
+accuracy = 0.75
+initiative = 10
+injury_chance = 0.15
+attack_verb = "clubs"
+tactic = 6
+intro = "Hunched on his staff, the Goblin King heaves himself up from the throne and bellows for his guards."
+loot_line = "Among the King's hoard: %s."
+purse = Vector2i(20, 30)
+row = "back"
+reach_back = true
+summons = ExtResource("5")
+threat = 10
+fears_fire = false
+family = "goblin"
+armour = 1

@@ -14,7 +14,7 @@ const INFO := {
 	"three_knocks": {"title": "Three Knocks", "giver": "", "floor": 2, "hidden": true},
 	"iron_sample": {"title": "Iron for the Apprentice", "giver": "the smith", "floor": 1, "hidden": false},
 	"lower_gate": {"title": "The Way Down", "giver": "Commander Vael", "floor": 4, "hidden": false},
-	"queen_claim": {"title": "The Queen's Claim", "giver": "Commander Vael", "floor": 4, "hidden": false},
+	"queen_claim": {"title": "The King's Claim", "giver": "Commander Vael", "floor": 4, "hidden": false},
 	# Slice 2, the Drowned Galleries (docs/story-slice-2-plan.md).
 	"dry_passage": {"title": "The Dry Passage", "giver": "Commander Vael", "floor": 5, "hidden": false},
 	"the_arrow": {"title": "The Black Fletching", "giver": "the smith", "floor": 5, "hidden": false},
@@ -73,7 +73,7 @@ static func brief(camp, id: String) -> String:
 		"lower_gate":
 			return "Find the way down."
 		"queen_claim":
-			return "Optional: the goblin queen."
+			return "Optional: the Goblin King."
 		"dry_passage":
 			return "Open the main sluice."
 		"the_arrow":
@@ -122,7 +122,7 @@ static func next_step(camp, id: String) -> String:
 		"lower_gate":
 			return "Find a way past the fortress to the water below, on floor 4."
 		"queen_claim":
-			return "Optional: the goblin queen holds the fortress hall on floor 4."
+			return "Optional: the Goblin King holds the fortress hall on floor 4."
 		"dry_passage":
 			return "Find the main sluice in the Drowned Galleries, floor 5, and open it."
 		"the_arrow":

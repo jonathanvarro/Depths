@@ -141,6 +141,37 @@ func _initialize() -> void:
 	check("with 3D enemies off, the painted sprite is back", FoeView.sprite_of(foe.node) != null and not FoeView.is_model(foe.node))
 	await _end_fight(main)
 	Settings.set_value("enemy_models", true)
+
+	# The fortress goblins and the Goblin King (#257).
+	for path in ["goblin", "goblin_guard", "goblin_archer", "goblin_king"]:
+		var t: EnemyType = load("res://data/enemies/%s.tres" % path)
+		var node: Node3D = t.view_scene().instantiate()
+		root.add_child(node)
+		check("%s has a 3D model with idle, attack, hurt and fall" % path, FoeView.is_model(node) and ["idle", "attack", "hurt", "fall"].all(func(p): return FoeView.has_pose(node, p)))
+		node.queue_free()
+	var guard_view: Node3D = load("res://data/enemies/goblin_guard.tres").model.instantiate()
+	var archer_view: Node3D = load("res://data/enemies/goblin_archer.tres").model.instantiate()
+	root.add_child(guard_view)
+	root.add_child(archer_view)
+	check("the guard braces and the archer draws with their own clips", FoeView.has_pose(guard_view, "brace") and FoeView.has_pose(archer_view, "draw"))
+	guard_view.queue_free()
+	archer_view.queue_free()
+	check("the boss fight is the Goblin King's", main.QUEEN.display_name == "Goblin King" and main.QUEEN_FIGHT[0] == main.QUEEN)
+	# He has no painting: on the dark stage he is his model, standing on the
+	# floor (never lifted like a sprite), guards beside him.
+	Settings.set_value("tactical_view", false)
+	main._queen_fight(main._party.cell)
+	await create_timer(1.4).timeout
+	state = main._combat._state
+	var king = state.foes.filter(func(f): return f.type == main.QUEEN)[0]
+	check("on the dark stage, the King is his 3D model", FoeView.is_model(king.node) and not state.field)
+	check("...feet at the party's floor", absf(king.node.global_position.y - main._party.global_position.y) < 0.05, king.node.global_position.y)
+	check("...planting his staff to call his guards", main._combat._action_pose(king, main.CombatState.Intent.CALL, {}) == "plant")
+	check("...and raising his staff for the coin blow", main.CombatState.INTENT_TEXT[main.CombatState.Intent.CLEAVER] == "raising his staff")
+	await _snap("king")
+	main._fight_kind = ""  # no victory card in this check
+	main._combat.no_retreat = false
+	await _end_fight(main)
 	Settings.set_value("tactical_view", true)
 	print("fails=", fails)
 	quit()

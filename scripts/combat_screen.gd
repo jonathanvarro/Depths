@@ -500,7 +500,7 @@ func _enemy_action(foe) -> void:
 			var luck: Array = _state.party.luck()
 			if luck[1] != "":
 				notes.append("%s's luck" % luck[1])
-			var title := "The queen raises her cleaver over %s!" % target.display_name if foe.intent == CombatState.Intent.CLEAVER else "The %s lunges for %s's throat!" % [foe.name.to_lower(), target.display_name]
+			var title := "The King raises his staff over %s!" % target.display_name if foe.intent == CombatState.Intent.CLEAVER else "The %s lunges for %s's throat!" % [foe.name.to_lower(), target.display_name]
 			var heads: bool = await coin.flip(title,
 					"the blow whistles past", "a crushing hit and a lasting injury",
 					_state.killing_blow_odds(target), ", ".join(notes))
@@ -590,6 +590,9 @@ func _action_pose(foe, intent: int, outcome: Dictionary) -> String:
 			CombatState.Intent.BRACE: "brace", CombatState.Intent.SHOOT: "draw"}.get(intent, "")
 	if gesture != "" and FoeView.is_model(foe.node) and FoeView.has_pose(foe.node, gesture):
 		return gesture
+	# The Goblin King (#257) plants his staff to call his guards or bellow.
+	if intent in [CombatState.Intent.CALL, CombatState.Intent.SCREECH] and FoeView.is_model(foe.node) and FoeView.has_pose(foe.node, "plant"):
+		return "plant"
 	return "attack"
 
 

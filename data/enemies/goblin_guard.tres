@@ -5,12 +5,14 @@
 [ext_resource type="PackedScene" path="res://art/enemies/campaign-v1/guard/scene.tscn" id="2"]
 [ext_resource type="Resource" path="res://data/injuries/deep_wound.tres" id="3"]
 [ext_resource type="Resource" path="res://data/injuries/limp.tres" id="4"]
+[ext_resource type="PackedScene" path="res://art/enemies/fortress-goblins-3d-v1/fortress-guard.tscn" id="model3d"]
 
 [resource]
 script = ExtResource("1")
 scene = ExtResource("2")
 injuries = Array[Injury]([ExtResource("3"), ExtResource("4")])
 display_name = "Goblin guard"
+model = ExtResource("model3d")
 max_health = 12
 damage_min = 2
 damage_max = 3

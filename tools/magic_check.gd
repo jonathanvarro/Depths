@@ -132,7 +132,7 @@ func _initialize() -> void:
 	var first: Dictionary = fight.enemy_act(goblin)
 	var second: Dictionary = fight.enemy_act(goblin)
 	check("...for two of its turns: no blow, no move", first["target"] == null and second["target"] == null and not fight.is_bound(goblin), second["text"])
-	var queen_fight = CS.new(party, [load("res://data/enemies/goblin_queen.tres")] as Array[EnemyType])
+	var queen_fight = CS.new(party, [load("res://data/enemies/goblin_king.tres")] as Array[EnemyType])
 	queen_fight.prepare(4, "queen")
 	queen_fight.hero_cast(alwen, "bind", queen_fight.foes[0])
 	queen_fight.enemy_act(queen_fight.foes[0])

@@ -56,14 +56,21 @@ func _initialize() -> void:
 	var trap: RoomEvent = load("res://data/events/trap_snare.tres")
 	var screen = main._event_screen
 	var result := {}
-	screen.finished.connect(func(r): result.merge(r), CONNECT_ONE_SHOT)  # a lambda can't reassign a local
-	screen.show_event(trap, main._party_state, main._room_events, [])
-	screen._choose(trap.choices[0])
-	await process_frame
-	for b in screen.find_children("*", "Button", true, false):
-		if b.text == "Continue":
-			b.pressed.emit()
-	await process_frame
+	# Stepping round can still spring it (one of its two outcomes): try a
+	# few rolls for the one where it didn't.
+	for attempt in 12:
+		result.clear()
+		main._room_events.rng.seed = 4100 + attempt
+		screen.finished.connect(func(r): result.merge(r), CONNECT_ONE_SHOT)  # a lambda can't reassign a local
+		screen.show_event(trap, main._party_state, main._room_events, [])
+		screen._choose(trap.choices[0])
+		await process_frame
+		for b in screen.find_children("*", "Button", true, false):
+			if b.text == "Continue":
+				b.pressed.emit()
+		await process_frame
+		if not result.get("fired", true):
+			break
 	check("stepping round a trap reports it didn't fire", result.get("choice", -1) == 0 and not result.get("fired", true), "%s / buttons %s" % [result, screen.find_children("*", "Button", true, false).map(func(b): return b.text)])
 
 	# The KayKit props on deeper floors, in their regions' skins.

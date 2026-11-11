@@ -51,9 +51,9 @@ func _initialize() -> void:
 	var g = deep.foes[0]
 	check("floor 3: +15%, rounded (a goblin 12 health, 2-5 damage)", g.type.max_health == 12 and g.health == 12 and g.type.damage_min == 2 and g.type.damage_max == 5, "%d %d-%d" % [g.type.max_health, g.type.damage_min, g.type.damage_max])
 	check("set fights have no elites", deep.foes.all(func(f): return f.elite == ""))
-	var queen = _fight(["goblin_queen"], 4, "queen")
+	var queen = _fight(["goblin_king"], 4, "queen")
 	check("floor 4: +15%, the queen too (32 -> 37 health, 3-6 -> 3-7 damage)", queen.foes[0].type.max_health == 37 and queen.foes[0].type.damage_min == 3 and queen.foes[0].type.damage_max == 7, queen.foes[0].type.max_health)
-	check("...and the written queen isn't changed", _e("goblin_queen").max_health == 32)
+	check("...and the written queen isn't changed", _e("goblin_king").max_health == 32)
 	var q = queen.foes[0]
 	queen._call_guard(q)
 	check("a guard she calls is scaled too", queen.foes[-1].type.max_health == roundi(12 * 1.15))
