@@ -50,6 +50,13 @@ Templates > Download and Install; already installed on the owner's PC).
 
 ## Project structure
 
+- `docs/combat-roster-3d.md` describes #251's remaining board art, including
+  great rat, four goblin roles, queen, Broodmother and four party figures.
+  Native review and Blender masters are in `build/local-combat-roster-v1`.
+  The branch `codex/combat-roster-3d` builds on #255. Use the metric floor
+  origin, +Z front and per-scene visual height for the eventual model-aware
+  combat hookup. The current sprites and gameplay bindings are preserved.
+
 - `docs/spiders-and-goblin-3d.md` describes #255's three shared-rig spider
   variants and reusable goblin base in `art/enemies/field-creatures-3d-v1`.
   The goblin has separate hand-bound knife and buckler meshes. Local review is

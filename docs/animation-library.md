@@ -8,6 +8,21 @@ out of git (see `docs/blender-expedition-kit-tasks.md`).
 
 ## Where the files live
 
+The [3D combat roster](combat-roster-3d.md) (#251, 2026-11-11) adds eleven
+board candidates. The clips are 24 fps and stored in
+`art/enemies/combat-roster-3d-v1`, with frame counts in its catalog.
+
+| Roster additions | Clips in addition to idle, attack, hurt and fall |
+|---|---|
+| Great rat | Walk and run loops |
+| Goblin archer, guard, drummer and trapper | Draw, brace, drum and snare, respectively |
+| Goblin Queen | Enraged |
+| Broodmother | Walk loop, call, web and venom |
+| Mara, Corin, Sister Alwen and generic recruit | Walk loop and defend. Alwen also has cast |
+
+The party kit uses an original 15-bone rig. The enemy rigs derive from the
+recorded CC0 sources. These clips have no dependency on the private library.
+
 The CC0-derived 3D enemy library (#255) stores game clips in
 `art/enemies/field-creatures-3d-v1`. These use the verified spider and goblin
 sources listed in [the asset handoff](spiders-and-goblin-3d.md). The editable

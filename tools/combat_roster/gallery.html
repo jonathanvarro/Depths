@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Depths · 3D combat roster</title>
+<style>
+:root{color-scheme:dark;background:#161b1b;color:#e5d7bc;font:16px system-ui}
+body{max-width:1320px;margin:auto;padding:24px}
+h1,h2{font-family:Georgia,serif;font-weight:normal}
+h1{font-size:clamp(2rem,6vw,3rem);margin:0 0 .75rem}
+p,figcaption{color:#c8bfac;line-height:1.45}
+a{color:#e0bc7b}
+.group,.controls{display:flex;gap:8px;flex-wrap:wrap;align-items:end;margin:12px 0}
+button,select{font:inherit;color:inherit;background:#262d29;border:1px solid #74634c;border-radius:4px;min-height:44px;padding:8px 12px}
+button[aria-pressed=true]{background:#624837;color:#fff2d6}
+button:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid #e0bc7b;outline-offset:3px}
+figure{margin:0;background:#212523;border:1px solid #4a4e41;border-radius:6px;overflow:hidden}
+img{display:block;width:100%}
+figcaption{padding:10px 12px}
+label{display:grid;gap:4px;color:#c8bfac}
+output{align-self:center;margin-left:8px}
+#gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:16px}
+#comparison{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,315px),1fr));gap:12px}
+section{margin:32px 0}
+#stats{color:#c5b79c}
+@media(max-width:700px){body{padding:12px}}
+</style>
+</head>
+<body>
+<h1>3D combat roster</h1>
+<nav class="group" aria-label="Creature" id="enemies"></nav>
+<nav class="group" aria-label="Party member" id="party"></nav>
+<div id="gallery">
+  <section>
+    <h2>Pose review</h2>
+    <div class="controls">
+      <label>Pose <select id="pose"></select></label>
+      <label>View <select id="view"><option value="quarter">Three-quarter</option><option value="front">Front idle</option></select></label>
+      <button id="previous" aria-label="Previous pose sample">−</button>
+      <button id="next" aria-label="Next pose sample">+</button>
+      <output id="frame" aria-live="polite"></output>
+    </div>
+    <figure><img id="pose-image" alt=""><figcaption id="stats"></figcaption></figure>
+  </section>
+  <section>
+    <h2>In-game view</h2>
+    <div class="controls">
+      <label>View <select id="game-view"></select></label>
+      <label>Screen <select id="width"><option value="1278">1278 × 590</option><option value="852">852 × 393</option><option value="667">667 × 375</option></select></label>
+    </div>
+    <figure><img id="game-image" alt=""><figcaption id="game-caption"></figcaption></figure>
+  </section>
+</div>
+<section>
+  <h2>At common scale</h2>
+  <div id="comparison">
+    <figure><img src="captures/goblin-lineup.png" alt="Archer, guard, drummer, trapper and queen"><figcaption>Archer, guard, drummer, trapper, queen</figcaption></figure>
+    <figure><img src="captures/party-lineup.png" alt="Four party figures side by side"><figcaption>Mara, Corin, Sister Alwen, recruit</figcaption></figure>
+    <figure><img src="captures/creature-scale.png" alt="Two rats and two spiders"><figcaption>Rat, great rat, web-spinner, Broodmother</figcaption></figure>
+    <figure><img src="live/party-formation-852.png" alt="Three heroes sharing the party tile"><figcaption>Three figures sharing the party’s tile at 852 × 393</figcaption></figure>
+  </div>
+</section>
+<p>For exact frame stepping, continuous playback and equipment toggles, open START_REVIEW.cmd beside this gallery.</p>
+<p><a href="START_HERE.md">Handoff and rebuild</a> · <a href="validation.json">Native validation</a> · <a href="live/validation.json">In-game validation</a></p>
+<script type="application/json" id="catalog">__CATALOG__</script>
+<script>
+const get = id => document.getElementById(id);
+const assets = JSON.parse(get('catalog').textContent).assets;
+let selected = assets.find(asset => asset.id === 'goblin-queen');
+let sample = 0;
+const defaults = ['idle','attack','hurt','fall'];
+
+for (const asset of assets) {
+  const button = document.createElement('button');
+  button.textContent = asset.label;
+  button.dataset.asset = asset.id;
+  button.onclick = () => { selected = asset; configure(); };
+  get(asset.party ? 'party' : 'enemies').append(button);
+}
+
+function configure() {
+  sample = 0;
+  for (const button of document.querySelectorAll('[data-asset]')) {
+    button.setAttribute('aria-pressed',String(button.dataset.asset === selected.id));
+  }
+  const poses = [...defaults, ...Object.keys(selected.clips).filter(pose => ![...defaults,'run','walk'].includes(pose))];
+  get('pose').replaceChildren(...poses.map(pose => new Option(pose,pose)));
+  const views = selected.party
+    ? [['leader','Single figure'],['attack','Single figure attacking'],['formation','Three heroes']]
+    : [...defaults.map(pose => [pose,pose]),
+       ['dark','Darkness'],['bright','Bright lantern'],['first','First person']];
+  const special = ['draw','brace','drum','snare','enraged','call'].find(pose => poses.includes(pose));
+  if (special) views.push([special,special]);
+  get('game-view').replaceChildren(...views.map(([id,label]) => new Option(label,id)));
+  render();
+}
+
+function render() {
+  const pose = get('pose').value;
+  const front = get('view').value === 'front';
+  const poseImage = get('pose-image');
+  get('pose').disabled = front;
+  get('previous').disabled = front || sample === 0;
+  get('next').disabled = front || sample === 4;
+  get('frame').value = front ? '' : 'Frame ' + selected.clips[pose].samples[sample].frame;
+  poseImage.src = 'captures/' + selected.id + (front ? '-front' : '-' + pose + '-' + sample) + '.png';
+  poseImage.alt = selected.label + ' · ' + (front ? 'front idle' : pose);
+  get('stats').textContent = selected.triangles.toLocaleString() + ' triangles · ' + selected.height.toFixed(2) + ' m standing height';
+
+  const view = get('game-view').value;
+  const width = get('width').value;
+  let file, size;
+  const standard = selected.party || defaults.includes(view);
+  get('width').disabled = !standard;
+  if (view === 'formation') file = 'party-formation-' + width;
+  else if (selected.party) file = selected.id + '-' + view + '-' + width;
+  else if (defaults.includes(view)) file = selected.id + '-steady-' + view + '-' + width;
+  else if (view === 'dark' || view === 'bright') file = selected.id + '-band' + (view === 'dark' ? 0 : 3) + '-852';
+  else if (view === 'first') file = selected.id + '-first-person';
+  else file = selected.id + '-steady-' + view + '-852';
+  size = standard ? get('width').selectedOptions[0].text : view === 'first' ? '1278 × 590' : '852 × 393';
+  get('game-image').src = 'live/' + file + '.png';
+  get('game-image').alt = selected.label + ' in the game · ' + view;
+  get('game-caption').textContent = get('game-view').selectedOptions[0].text + ' · ' + size;
+}
+
+get('pose').onchange = () => { sample = 0; render(); };
+for (const id of ['view','game-view','width']) get(id).onchange = render;
+get('previous').onclick = () => { sample = Math.max(0,sample-1); render(); };
+get('next').onclick = () => { sample = Math.min(4,sample+1); render(); };
+configure();
+</script>
+</body>
+</html>
