@@ -86,3 +86,8 @@ and [Godot 4.7.2 Windows window activation implementation](https://github.com/go
 `background_godot.py` on its own hidden desktop instead of an off-screen
 window. Set `PYTHON` if `python` isn't on the path. Logs for the last
 check are in `%TEMP%/depths-checks`.
+
+Godot's console build starts the real game as a second process. The helper
+runs both inside a Windows job (2026-11-11): a timeout stops every process
+the test started, closing the job stops any it left behind, and the
+foreground check covers the game window, not just the console.
