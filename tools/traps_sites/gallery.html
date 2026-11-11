@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Depths · Herbs, traps, strange sites and mist</title>
+<style>
+:root{color-scheme:dark;font:17px/1.5 system-ui,sans-serif;background:#141c1e;color:#e3d8bc}
+*{box-sizing:border-box}body{max-width:1440px;margin:auto;padding:24px}
+h1,h2,h3{font-family:Georgia,serif;font-weight:normal}h1{font-size:36px}h2{font-size:28px;margin:30px 0 14px}h3{font-size:22px;margin:0 0 12px}
+nav{display:flex;flex-wrap:wrap;gap:18px;margin:24px 0}label{display:flex;align-items:center;gap:10px}
+select,button{min-height:44px;padding:8px;font:inherit;background:#283331;color:inherit}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}article{background:#243030;border:1px solid #586254;padding:14px;min-width:0}
+img{display:block;width:100%;height:auto;background:#202a2b}article p{font-size:15px;margin:8px 0 0}a{color:#d8bc85}
+.icons{display:flex;gap:24px;align-items:center;padding:16px;background:#243030}.icons img{width:auto;image-rendering:pixelated}
+.note{padding:16px;background:#243030;border-left:3px solid #bca574}[hidden]{display:none!important}
+@media(max-width:1000px){.grid{grid-template-columns:1fr 1fr}}@media(max-width:680px){body{padding:14px}.grid{grid-template-columns:1fr}}
+</style>
+<h1>Herbs, traps, strange sites and mist</h1>
+<h2>Calming herbs</h2>
+<p>Dried bitter leaves with worn flax binding. Native 128 and compact 64 exports use the existing field-kit format.</p>
+<div class="icons"><img src="art/items/field-kit-v1/calming-herbs.png" alt="128px herb icon"><img src="art/items/field-kit-v1/compact64/calming-herbs.png" alt="64px herb icon"></div>
+<img src="captures/herbs-pack-852.png" alt="The new icon in the actual landscape phone Pack screen">
+<nav>
+<label>Batch <select id="batch"><option value="all">Both</option><option value="traps">Traps</option><option value="sites">Idol and pool</option></select></label>
+<label>Lighting <select id="light"><option value="cave">Cave</option><option value="neutral">Neutral</option></select></label>
+<label>Angle <select id="angle"><option value="0">Three-quarter</option><option value="1">High view</option><option value="2">Side</option></select></label>
+<label>State <select id="state"><option value="closed">Ready / present</option><option value="open">Cleared / alternate</option><option value="empty">Resolved</option></select></label>
+</nav>
+<section data-batch="traps"><h2>Traps</h2><div class="grid">@@TRAPS@@</div></section>
+<section data-batch="sites"><h2>Idol and pool</h2><div class="grid">@@SITES@@</div></section>
+<h2>First-person exploration mist</h2>
+<p>Live-game integration follows the lantern and existing reduced-effects setting. It stands aside during combat, the opening and camp.</p>
+<img src="captures/live-mist.png" alt="Mist in the actual first-person dungeon with the normal HUD">
+<nav><label>Room <select id="room"><option value="0">Trap chamber</option><option value="1">Idol and pool chamber</option></select></label>
+<label>View <select id="fog"><option value="mist">Still mist</option><option value="clear">No mist</option><option value="drift">Later phase</option><option value="low-light">Low light</option><option value="resolved">Resolved props</option></select></label></nav>
+<img id="room-image" src="captures/room-0-mist.png" alt="Native first-person room comparison">
+<p><button id="play">Play mist preview</button></p>
+<img id="motion" src="mist-motion.gif" alt="Native mist movement over 7.2 seconds" hidden>
+<p class="note">The herb icon and exploration mist are wired in this branch. The new 3D event props are a reusable library awaiting event hookup. Native controls are in START_REVIEW.cmd beside this gallery. Trap outcomes, costs and traversal remain caller-owned.</p>
+<p><a href="START_HERE.md">Handoff and rebuilding</a> · <a href="validation.json">Native checks</a> · <a href="artifact-validation.json">Source/export verification</a></p>
+<script>
+function update(){
+ const batch=document.querySelector('#batch').value,light=document.querySelector('#light').value,angle=document.querySelector('#angle').value,state=document.querySelector('#state').value;
+ for(const section of document.querySelectorAll('[data-batch]'))section.hidden=batch!=='all'&&batch!==section.dataset.batch;
+ for(const card of document.querySelectorAll('[data-name]'))card.querySelector('img').src='captures/'+card.dataset.name+'-'+light+'-'+angle+'-'+state+'.png';
+ document.querySelector('#room-image').src='captures/room-'+document.querySelector('#room').value+'-'+document.querySelector('#fog').value+'.png';
+}
+for(const control of document.querySelectorAll('select'))control.addEventListener('change',update);
+document.querySelector('#play').addEventListener('click',()=>{const image=document.querySelector('#motion');image.hidden=!image.hidden;document.querySelector('#play').textContent=image.hidden?'Play mist preview':'Hide mist preview';if(!image.hidden)image.src='mist-motion.gif?play='+Date.now();});
+</script>
+</html>

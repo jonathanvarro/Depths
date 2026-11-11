@@ -165,6 +165,38 @@ Format:
 - **Check:** `tools/tactical_check.gd` (lift, ceilings, marks, return, the setting off; desk and phone screenshots).
 - **Watch out:** only this change's main.gd hunks were committed. The other assistant's uncommitted #234 edits in main.gd and other files stay in the working copy.
 
+## 2026-11-08 – ChatGPT (herbs, traps, idol/pool and exploration mist, #244/#247)
+
+- Did. Followed the owner's order. Calming herbs now has a distinct leaf/flax
+  bundle at native128/compact64, using the field-kit fitter and only changing
+  its resource icon URI. Exact built-in ImageGen master/prompt/hash lineage is
+  preserved. Seven 3D scenes and twenty GLBs provide tripwire, bell alarm,
+  snare, dart slab/real-wall ports, hollow floor/pit, idol niche and still pool.
+  Ready/alternate/resolved states share roots; the pool has gentle optional
+  motion and exact still mode. No event resources/rules were changed.
+- Mist. Owner clarified first-person dungeon view. Ambience now instantiates
+  art/effects/exploration-mist-v1, three world-registered sheets below y0.5m,
+  reusing existing authored fog alpha. Existing light bands and floor-1
+  attenuation control brightness/opacity; Settings flashes freezes phase.
+  Existing combat/opening/camp/ending gates remain. No TIME-based shader,
+  volumetrics, extra world light, collision or gameplay visibility change.
+- Checks. Isolated Godot 4.7.2 Mobile passes 387 checks and captures 154 native
+  views, including twelve motion samples. Live Pack passes15 with three actual
+  desktop/phone captures; live Main/Ambience passes7 with a dungeon capture.
+  Browser passes38. Packaging checks source/model/builder/helper/runtime hashes.
+  Isolated/Pack logs are clean; full Main teardown reports one TextureRect and
+  one Object orphan warning, tracked in #249. Physical iPhone untested.
+- Next. Review E:/GitHub/Depths/build/local-traps-sites-mist-v1/inspector.html
+  or START_REVIEW.cmd. Editable masters remain beside the review. Handoff is
+  docs/traps-sites-and-mist-3d.md. Delivery branch codex/traps-sites-mist-3d
+  preserves the concurrent gameplay work; herb/mist bindings take effect when
+  merged. Claude can connect the event scenes through the existing interfaces.
+- Watch out. Do not assume a consumed event means a trap fired or idol fell.
+  Choose ready/disarmed/sprung or present/removed/toppled from actual outcomes.
+  Pit dark inset does not excavate geometry or change movement. Pool art does
+  not mark a cell flooded or declare the water safe. Damage, rewards, costs,
+  lore, traversal, floor assignment and saved state remain caller-owned.
+
 ## 2026-11-08 – Claude (ChatGPT's 3D props and decor merged and hooked up: #239, #241, #242, #243)
 
 - **Merged** `codex/cave-growth-3d` (which carries #241 and #242) and `codex/bone-decor-library`. Only the NOTES and AGENTS conflicts needed fixing; both sides were kept. Not merged: `codex/prayer-art-stool` (#216 prayer icons and a stool reference) and the padded-jacket branches (#220, wardrobe).

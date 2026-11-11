@@ -1,0 +1,44 @@
+{
+  "tool": "built-in image_gen",
+  "original_path": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-71593fc1-aef9-4d8c-a1c8-a21be7fc084f.png",
+  "prompt": "Create one isolated inventory item icon for Depths, a dark gritty medieval dungeon crawler. Subject: Calming herbs, a small twist of dried bitter leaves miners chew to steady their nerves. A distinctive compact fan-shaped bundle of six to nine broad curled sage-grey and dull olive leaves, some bruised brown edges, a few thin exposed stems, tightly bound at the lower third by two turns of worn flax thread. The leaves themselves are clearly visible, no bag, no bottle, no paper packet. One tiny torn leaf hangs sideways to break symmetry. Restrained hand-painted pixel-friendly game item illustration, strong simple silhouette, broad material planes and sparse crisp highlights rather than tiny botanical realism. Worn earthy olive, muted sage, warm flax binding and deep brown contour shadows, neutral material shading with no cast shadow or dramatic coloured lighting. Three-quarter view tilted slightly diagonally, bundle fills about 78 percent of the square with generous clear padding on all sides. No text, border, UI, ground, scenery, symbol, flowers, magical glow or extra objects. Actual transparent background. Make it readable when reduced to 64 by 64 pixels and stylistically compatible with rustic field-kit inventory art.",
+  "transparent_background": true,
+  "sha256": "83771393492717b87b03a4624e8d33992e15d4b15c9aac20c7bbf4dd95b9327b",
+  "exports": [
+    {
+      "file": "art/items/field-kit-v1/calming-herbs.png",
+      "sha256": "d7d2d3267bdcd4342ea5fabea32e9f1acbe239a23d2acf687f9972208c362c72",
+      "canvas": 128,
+      "colours": 64,
+      "source_bounds": [
+        205,
+        52,
+        1122,
+        1216
+      ],
+      "scale": 0.09621993127147767,
+      "offset": [
+        20,
+        8
+      ]
+    },
+    {
+      "file": "art/items/field-kit-v1/compact64/calming-herbs.png",
+      "sha256": "a62660b718360cf9e6eb088674f82c5883de25e5aeb4ede7584a8f25120d914a",
+      "canvas": 64,
+      "colours": 32,
+      "source_bounds": [
+        205,
+        52,
+        1122,
+        1216
+      ],
+      "scale": 0.048109965635738834,
+      "offset": [
+        10,
+        4
+      ]
+    }
+  ],
+  "nonvisual_resource_sha256": "eedbb7a80533345cd123d87a6529dbe426936d1ca1b599e818b7e7a8f40a0798"
+}

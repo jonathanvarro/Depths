@@ -1,0 +1,24 @@
+[gd_scene load_steps=7 format=3]
+[ext_resource type="Script" path="res://art/props/traps-sites-3d-v1/prop.gd" id="script"]
+[ext_resource type="Material" path="res://art/props/traps-sites-3d-v1/palette.tres" id="palette"]
+[ext_resource type="PackedScene" path="res://art/props/traps-sites-3d-v1/dart-plate-closed.glb" id="closed"]
+[ext_resource type="PackedScene" path="res://art/props/traps-sites-3d-v1/dart-plate-open.glb" id="open"]
+[ext_resource type="PackedScene" path="res://art/props/traps-sites-3d-v1/dart-plate-empty.glb" id="empty"]
+[ext_resource type="PackedScene" path="res://art/props/traps-sites-3d-v1/dart-ports.glb" id="ports"]
+
+[node name="CaveSite" type="Node3D"]
+script=ExtResource("script")
+palette_material=ExtResource("palette")
+metadata/asset_id="dart-plate"
+
+[node name="Fresh" parent="." instance=ExtResource("closed")]
+
+[node name="Open" parent="." instance=ExtResource("open")]
+visible=false
+
+[node name="Spent" parent="." instance=ExtResource("empty")]
+visible=false
+
+[node name="Ports" parent="." instance=ExtResource("ports")]
+visible=false
+position=Vector3(0,0.48,-0.985)

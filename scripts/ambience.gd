@@ -18,7 +18,7 @@ const StrainRules := preload("res://scripts/strain.gd")
 const Settings := preload("res://scripts/settings.gd")
 const DIR := "res://art/effects/ambient-v1/"
 const DARKNESS := preload("res://art/effects/ambient-v1/darkness.tres")
-const FOG := preload("res://art/effects/ambient-v1/fog-strip.png")
+const MIST := preload("res://art/effects/exploration-mist-v1/mist.tscn")
 const EYES := ["eyes-rat", "eyes-cluster", "eyes-unknown"]
 const EYE_HEIGHTS := {"eyes-rat": 0.3, "eyes-cluster": 0.7, "eyes-unknown": 1.45, "shadow": 1.0}
 ## How strongly the darkness closes in, by light and by the worst nerves.
@@ -28,23 +28,6 @@ const NERVE_DARKNESS := {StrainRules.State.UNEASY: 0.2, StrainRules.State.SHAKEN
 const FOG_LIGHT := {Supplies.Light.OUT: 0.25, Supplies.Light.DIM: 0.55, Supplies.Light.STEADY: 0.85, Supplies.Light.BRIGHT: 1.0}
 const EASE := 0.5  # darkness strength per second
 const SIGHTING_GAP := Vector2(20.0, 40.0)  # seconds between sightings
-const FOG_SHADER := """
-shader_type spatial;
-render_mode unshaded, cull_disabled, depth_draw_never, shadows_disabled;
-uniform sampler2D fog_texture : source_color, filter_nearest, repeat_enable;
-uniform float opacity = 1.0;
-uniform vec3 centre;
-varying vec3 world;
-void vertex() { world = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz; }
-void fragment() {
-	// Fixed in the world, drifting slowly; fades out toward the plane's edge.
-	vec4 a = texture(fog_texture, world.xz * vec2(0.18, 0.36) + vec2(TIME * 0.012, 0.0));
-	vec4 b = texture(fog_texture, world.zx * vec2(0.13, 0.3) - vec2(TIME * 0.008, 0.0));
-	float edge = 1.0 - smoothstep(3.0, 5.5, length(world.xz - centre.xz));
-	ALBEDO = mix(a.rgb, b.rgb, 0.5);
-	ALPHA = clamp(a.a + b.a, 0.0, 1.0) * opacity * edge;
-}
-"""
 
 var main: Node  # main.gd: the party, its supplies and nerves, the floor
 ## Under the HUD; main.gd puts it on its canvas.
@@ -60,8 +43,7 @@ var _strength := 0.0
 var _frame_time := 0.0
 var _frame := 0
 var _until_sighting := 0.0
-var _fog: MeshInstance3D
-var _fog_material: ShaderMaterial
+var _fog: Node3D
 var _dust: Array[AnimatedSprite3D] = []
 var _rng := RandomNumberGenerator.new()
 
@@ -82,16 +64,7 @@ func _init() -> void:
 
 ## Called once the party exists: the fog and dust travel with it.
 func attach(party: Node3D, camera: Camera3D) -> void:
-	_fog_material = ShaderMaterial.new()
-	_fog_material.shader = Shader.new()
-	_fog_material.shader.code = FOG_SHADER
-	_fog_material.set_shader_parameter("fog_texture", FOG)
-	var plane := PlaneMesh.new()
-	plane.size = Vector2(11, 11)
-	_fog = MeshInstance3D.new()
-	_fog.mesh = plane
-	_fog.material_override = _fog_material
-	_fog.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	_fog = MIST.instantiate()
 	_fog.top_level = true  # level with the floor, whatever the camera does
 	party.add_child(_fog)
 	for at in [Vector3(-0.55, 0.15, -1.5), Vector3(0.6, -0.1, -1.9)]:
@@ -124,9 +97,9 @@ func _process(delta: float) -> void:
 	if _fog:
 		_fog.visible = not quiet
 		var at: Vector3 = main._party.global_position
-		_fog.global_position = Vector3(at.x, 0.14, at.z)
-		_fog_material.set_shader_parameter("centre", at)
-		_fog_material.set_shader_parameter("opacity", FOG_LIGHT.get(light, 1.0) * (0.7 if main._depth <= 1 else 1.0))
+		_fog.set_centre(at)
+		_fog.set_light_strength(FOG_LIGHT.get(light, 1.0) * (0.7 if main._depth <= 1 else 1.0))
+		_fog.set_motion(flashes)
 	for dust in _dust:
 		dust.visible = not quiet and flashes and light >= Supplies.Light.STEADY
 	# Something watching, now and then.
