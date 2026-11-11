@@ -2,6 +2,7 @@ extends Control
 ## Choosing a starting hero (#95): three main heroes side by side, each with
 ## a portrait, role, one-line backstory and their special trait. The one
 ## chosen wakes in the cave; the others don't exist in that game.
+const UiTheme := preload("res://scripts/ui_theme.gd")
 
 signal chosen(path: String)
 signal cancelled
@@ -12,8 +13,8 @@ const HEROES := [
 	"res://data/companions/alwen.tres",
 ]
 const TEXT := Color("e6dac1")
-const MUTED := Color("b3a78f")
-const AMBER := Color("dbb477")
+const MUTED := Color("b7ab93")
+const AMBER := Color("d7b174")
 const HEADING := preload("res://art/fonts/heading-cinzel.tres")
 const BODY := preload("res://art/fonts/body-source-sans.tres")
 const SafeArea := preload("res://scripts/safe_area.gd")
@@ -78,7 +79,7 @@ func _card(path: String) -> Control:
 	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	var style := StyleBoxFlat.new()
 	style.bg_color = Color(0.09, 0.08, 0.06)
-	style.border_color = Color(0.45, 0.36, 0.22)
+	style.border_color = UiTheme.EDGE
 	style.set_border_width_all(1)
 	style.set_content_margin_all(12)
 	panel.add_theme_stylebox_override("panel", style)

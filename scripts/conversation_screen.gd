@@ -15,6 +15,7 @@ extends Control
 ## - The world behind fades slightly while the conversation lasts and
 ##   returns when it ends.
 ## Replies can move quests on (quests.gd). `play()` returns at the end.
+const UiTheme := preload("res://scripts/ui_theme.gd")
 
 signal _replied(reply)
 signal _beat_done
@@ -23,7 +24,7 @@ signal finished
 const Quests := preload("res://scripts/quests.gd")
 const Settings := preload("res://scripts/settings.gd")
 const PortraitView := preload("res://scripts/portrait_view.gd")
-const TEXT := Color("e8d9b0")
+const TEXT := Color("e6dac1")
 const MUTED := Color(0.85, 0.8, 0.7, 0.75)
 const GOLD := Color("f2c94c")
 const NPC_SIZE := Vector2(240, 240)
@@ -297,8 +298,8 @@ func _build_frames(talk: Conversation, party: Array) -> void:
 func _frame(parent: Control, picture: Texture2D, label: String, size: Vector2) -> PanelContainer:
 	var frame := PanelContainer.new()
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.05, 0.045, 0.04, 0.92)
-	style.border_color = Color(0.35, 0.27, 0.18, 0.9)
+	style.bg_color = UiTheme.overlay_colour(0.92)
+	style.border_color = UiTheme.EDGE
 	style.set_border_width_all(2)
 	style.set_content_margin_all(4)
 	frame.add_theme_stylebox_override("panel", style)
@@ -332,7 +333,7 @@ func _light(who) -> void:
 		var lit: bool = typeof(key) == typeof(who) and key == who
 		var dim_to: Color = Color(0.75, 0.75, 0.75) if who is String and who == "" and key is String else DIM
 		var style := frame.get_theme_stylebox("panel") as StyleBoxFlat
-		style.border_color = GOLD if lit else Color(0.35, 0.27, 0.18, 0.9)
+		style.border_color = GOLD if lit else UiTheme.EDGE
 		frame.pivot_offset = frame.size / 2.0
 		var tween := frame.create_tween().set_parallel()
 		tween.tween_property(frame, "modulate", Color.WHITE if lit else dim_to, 0.15)

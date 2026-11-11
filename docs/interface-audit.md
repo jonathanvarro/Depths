@@ -37,3 +37,30 @@ layouts without scrolling, phone safe areas and keyboard focus.
 1 (readability) first, then 2–3 together through UiTheme (one pass over the
 screen scripts), then 4–8, which are small. Each step re-runs the check
 suite and this capture at all four sizes.
+
+## Applied (owner approved all eight, 2026-11-11)
+
+1. **Camp panels** (`camp_screen.gd`): the panel for the fire, tent, nurse
+   and mine path now lives in screen space over the clearing, not inside the
+   640×360 picture. `_place_activity` scales it to fill the screen times the
+   Text size, so its contents reflow and scroll; the nurse's portrait gives
+   way when the panel gets narrow. Shared Field kit panel, smooth text.
+2. **Panels** (`ui_theme.gd`): `UiTheme.EDGE`, `overlay_colour(alpha)` and
+   `chip(good)` replace the hand-made recipes in the event card, dialogue
+   box, conversation frames, tutorial card, combat panel, party cards and
+   hero select. The teal camp panel is gone.
+3. **Palette**: one amber (`d7b174`), cream (`e6dac1`) and muted
+   (`b7ab93`) everywhere; `UiTheme.GOOD`/`BAD` for gain/loss; events and
+   results share `UiTheme.chip`.
+4. **Results**: hero rows sit in an overlay panel.
+5. **Preparation**: inside the same framed panel as the other menus, 28 pt
+   Cinzel title. No Close: when it shows, the party has already left camp
+   (who stays behind and the trip's level reset are settled), so going back
+   would need the departure reworked.
+6. **Quest log**: the empty note is centred, and the paper's inner margins
+   are wider (44/36) so text clears the torn edge.
+7. **Settings**: Text size is the first row under Display.
+8. **Trade screens**: with nothing selected the strip is slim and says
+   "Tap an item to see it here."
+
+![After, at phone size](interface-audit-v1/after.jpg)

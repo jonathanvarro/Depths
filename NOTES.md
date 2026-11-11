@@ -13,6 +13,15 @@ Format:
 
 ---
 
+## 2026-11-11 – Claude (interface fixes applied, #169/#51)
+
+- Did: owner approved all eight audit fixes; applied them (details in `docs/interface-audit.md`, after board `docs/interface-audit-v1/after.jpg`).
+  - Camp fire/tent/nurse/cave panel now lives in screen space (`CampScreen._place_activity`), scales with Text size, scrolls.
+  - `UiTheme` gained `TEXT/MUTED/AMBER/EDGE`, `overlay_colour()`, `GOOD/BAD`, `chip()`; old near-duplicate colours and panel recipes replaced in the screen scripts and main.gd's hint card.
+  - Results hero rows in a panel; Preparation framed (no Close: the party has already left camp); quest log empty note centred with wider paper margins; Settings puts Text size first; trade strip slim with a hint when empty.
+- Checks: full suite failed 0; camp/first_days/batch rerun after the last preparation tweak.
+- Watch out: the floating "+12 XP" on Results still drifts outside the new panel (animation). The camp clearing's own buttons (Pack, Save & exit) are still small on phones; not part of the eight.
+
 ## 2026-11-11 – Claude (interface audit for owner approval, #169/#51; 3D status; #253 follow-up)
 
 - Did: audited every screen at desktop/phone, Normal/Larger: `docs/interface-audit.md` + `docs/interface-audit-v1/board.jpg`, captured by `tools/ui_audit_capture.gd` (hidden desktop; not in the suite). Eight findings; the worst is camp fire/tent/nurse/cave text at ~8 px on phones, unaffected by Text size. Nothing applied: #169 asks for owner approval first.

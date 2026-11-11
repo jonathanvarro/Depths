@@ -53,8 +53,8 @@ func _init() -> void:
 	_paper.add_child(page)
 	var margin := MarginContainer.new()
 	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	for side in ["left", "right"]: margin.add_theme_constant_override("margin_" + side, 30)
-	for side in ["top", "bottom"]: margin.add_theme_constant_override("margin_" + side, 25)
+	for side in ["left", "right"]: margin.add_theme_constant_override("margin_" + side, 44)  # inside the torn edge (#169)
+	for side in ["top", "bottom"]: margin.add_theme_constant_override("margin_" + side, 36)
 	_paper.add_child(margin)
 	_detail_scroll = ScrollContainer.new()
 	_detail_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
@@ -186,7 +186,11 @@ func _draw_detail() -> void:
 	_detail_scroll.scroll_vertical = 0
 	for id in _buttons: _buttons[id].set_pressed_no_signal(id == _selected_id)
 	if _selected_id.is_empty():
-		_detail.add_child(text_label("No monsters met yet." if _monsters else "No quests recorded.", 24, INK))
+		var empty := text_label("No monsters met yet." if _monsters else "No quests recorded.", 24, INK)
+		empty.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER  # on the paper, not its corner (#169)
+		empty.custom_minimum_size.y = 120
+		empty.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		_detail.add_child(empty)
 		return
 	if _monsters:
 		var lines := Bestiary.page(_camp, _selected_id)

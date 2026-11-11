@@ -2,6 +2,7 @@ extends Node3D
 ## Exploration prototype: generates the floors of one site, dressed by an
 ## environment theme, and handles moving between them, plus the map, touch
 ## controls, messages, and debug overlay.
+const UiTheme := preload("res://scripts/ui_theme.gd")
 
 const DungeonMap := preload("res://scripts/dungeon_map.gd")
 const Dressing := preload("res://scripts/dressing.gd")
@@ -4064,8 +4065,8 @@ func _build_hint() -> void:
 	layer.add_child(_hint_shade)
 	_hint_box = PanelContainer.new()
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.05, 0.045, 0.04, 0.94)
-	style.border_color = Color("dbb477")
+	style.bg_color = UiTheme.overlay_colour(0.94)
+	style.border_color = Color("d7b174")
 	style.set_border_width_all(2)
 	style.set_corner_radius_all(6)
 	style.set_content_margin_all(18)
@@ -4086,7 +4087,7 @@ func _build_hint() -> void:
 	column.add_child(_hint_icon)
 	_hint_label = Label.new()
 	_hint_label.add_theme_font_size_override("font_size", 25)
-	_hint_label.add_theme_color_override("font_color", Color("f0e2bb"))
+	_hint_label.add_theme_color_override("font_color", Color("e6dac1"))
 	_hint_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_hint_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_hint_label.custom_minimum_size = Vector2(540, 0)
@@ -4489,7 +4490,7 @@ func _build_ui(minimap: Control) -> void:
 	_message_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_message_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_message_label.add_theme_font_size_override("font_size", 32)
-	_message_label.add_theme_color_override("font_color", Color("e8d9b0"))
+	_message_label.add_theme_color_override("font_color", Color("e6dac1"))
 	_message_label.add_theme_color_override("font_shadow_color", Color.BLACK)
 	_message_label.modulate.a = 0.0
 	ui.add_child(_message_label)
@@ -4649,7 +4650,7 @@ func _build_full_map(ui: CanvasLayer) -> void:
 	_full_map_title.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 	_full_map_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_full_map_title.add_theme_font_size_override("font_size", 28)
-	_full_map_title.add_theme_color_override("font_color", Color("e8d9b0"))
+	_full_map_title.add_theme_color_override("font_color", Color("e6dac1"))
 	header.add_child(_full_map_title)
 	_full_map_close=Button.new()
 	_full_map_close.text="Close"

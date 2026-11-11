@@ -20,9 +20,12 @@ const HEADING := preload("res://art/fonts/heading-cinzel.tres")
 const BODY := preload("res://art/fonts/body-source-sans.tres")
 const ACTION := preload("res://art/fonts/action-source-sans.tres")
 const TEXT := Color("e6dac1")
-const MUTED := Color("b3a78f")
-const AMBER := Color("dbb477")
+const MUTED := Color("b7ab93")
+const AMBER := Color("d7b174")
 const CANVAS := Vector2(640, 360)
+## A place's panel at Normal text on a 640x360-shaped screen, in the units
+## its contents are laid out in; it grows to fill the screen (#169).
+const ACTIVITY := Vector2(608, 340)
 const COIN_ICON := preload("res://art/symbols/crest-v1/currency-coin.svg")
 const SETTINGS_ICON := preload("res://art/ui/controls-v1/settings.svg")
 const BACK_ICON := preload("res://art/ui/controls-v1/back.svg")
@@ -361,7 +364,7 @@ func _fit() -> void:
 	_canvas.position = (room - CANVAS * ratio) / 2.0
 	# Keep global/activity controls comfortably tappable at Larger UI scale.
 	var height:=maxf(30.0,44.0/ratio)
-	for button in [_save_button,_settings_button,_pack_button,_back]:
+	for button in [_save_button,_settings_button,_pack_button]:
 		if button:
 			button.custom_minimum_size.y=height
 			button.size.y=height
@@ -374,19 +377,42 @@ func _fit() -> void:
 		_settings_button.position.y=CANVAS.y-height-4
 		_pack_button.size.x=90
 		_pack_button.position=Vector2(_save_button.position.x-100,CANVAS.y-height-4)
-	for button in _body.find_children("*","Button",true,false):button.custom_minimum_size.y=height
+	_place_activity(room)
+	var touch:=maxf(30.0,44.0/_activity.scale.x)
+	for button in [_back]+_body.find_children("*","Button",true,false):button.custom_minimum_size.y=touch
+	_back.size.y=touch
+
+
+## Scales a place's panel to the screen: as large as ACTIVITY allows, times
+## the Text size, filling the rest so its contents reflow and scroll (#169).
+func _place_activity(room: Vector2) -> void:
+	var margin := Vector2(16, 12)
+	var text: float = get_tree().root.content_scale_factor if is_inside_tree() else 1.0
+	var s := minf((room.x - margin.x * 2) / ACTIVITY.x, (room.y - margin.y * 2) / ACTIVITY.y) * text
+	_activity.scale = Vector2.ONE * s
+	_activity.size = ((room - margin * 2) / s).floor()
+	_activity.position = margin
+	_layout_activity()
+
+
+func _layout_activity() -> void:
+	_back.position = Vector2(_activity.size.x - 52, 10)
+	var npc: String = _sites.get(_current, {}).get("npc", "")
+	var left := 222.0 if npc != "" and _activity.size.x >= 520 else 18.0
+	_portrait.visible = left > 18.0
+	_scroll.position = Vector2(left, 50)
+	_scroll.size = Vector2(_activity.size.x - left - 14, _activity.size.y - 62)
 
 
 func _build_activity() -> void:
+	# A place's panel fills the screen above the clearing, in the shared
+	# Field kit panel, scaled with Text size (#169). It used to live inside
+	# the 640x360 picture, so on a phone its text stayed small at any size.
 	_activity = Panel.new()
-	_activity.position = Vector2(36, 24)
-	_activity.size = Vector2(568, 316)
-	var style := StyleBoxFlat.new()
-	style.bg_color = Color("1b2421")
-	style.border_color = Color("938263")
-	style.set_border_width_all(1)
-	_activity.add_theme_stylebox_override("panel", style)
-	_canvas.add_child(_activity)
+	_activity.size = ACTIVITY
+	_activity.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR  # smooth text (the clearing is pixel art)
+	_activity.mouse_filter = Control.MOUSE_FILTER_STOP
+	content.add_child(_activity)
 	_activity_title = _label("", HEADING, 20, TEXT)
 	_activity_title.position = Vector2(18, 10)
 	_activity.add_child(_activity_title)
@@ -436,9 +462,7 @@ func open_activity(id: String) -> void:
 	_activity_title.text = site["label"]
 	var npc: String = site["npc"]
 	_portrait.texture = load(PORTRAIT_DIR + npc + ".png") if npc != "" else null
-	var left := 222.0 if npc != "" else 18.0
-	_scroll.position = Vector2(left, 50)
-	_scroll.size = Vector2(_activity.size.x - left - 14, _activity.size.y - 62)
+	_layout_activity()
 	_activity.visible = true
 	_refresh_activity()
 	_back.grab_focus()

@@ -11,7 +11,7 @@ const Sounds := preload("res://scripts/sounds.gd")
 ## Flip() result: true for heads (the good outcome).
 signal landed(heads: bool)
 
-const COLOR_TEXT := Color("f0e2bb")
+const COLOR_TEXT := Color("e6dac1")
 const COLOR_DIM := Color(0.85, 0.8, 0.7, 0.75)
 const GOLD := Color("d9a441")
 const GOLD_DARK := Color("8a5d1c")

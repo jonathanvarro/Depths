@@ -12,9 +12,10 @@ const StrainRules := preload("res://scripts/strain.gd")
 const HEADING := preload("res://art/fonts/heading-cinzel.tres")
 const ACTION := preload("res://art/fonts/action-source-sans.tres")
 const BODY := preload("res://art/fonts/body-source-sans.tres")
+const Kit := preload("res://art/ui/field-kit-v1/style.gd")
 const TEXT := Color("e6dac1")
-const MUTED := Color("b3a78f")
-const AMBER := Color("dbb477")
+const MUTED := Color("b7ab93")
+const AMBER := Color("d7b174")
 
 var content: MarginContainer  # main.gd keeps this inside the safe area
 
@@ -28,7 +29,7 @@ func _init() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	var shade := ColorRect.new()
-	shade.color = Color(0.03, 0.035, 0.03, 1.0)
+	shade.color = Color(0.025, 0.03, 0.025, 1.0)
 	shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(shade)
 	content = MarginContainer.new()
@@ -36,10 +37,18 @@ func _init() -> void:
 	for side in ["left", "top", "right", "bottom"]:
 		content.add_theme_constant_override("margin_" + side, 32)
 	add_child(content)
+	# The same framed panel as the other menus (#169). No Close: by now the
+	# party has left camp (who stays behind is already settled).
+	var frame := PanelContainer.new()
+	frame.add_theme_stylebox_override("panel", Kit.plate(Color("20231c"), Kit.EDGE, 22))
+	frame.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	frame.size_flags_vertical = Control.SIZE_FILL
+	frame.custom_minimum_size = Vector2(760, 0)
+	content.add_child(frame)
 	var column := VBoxContainer.new()
 	column.add_theme_constant_override("separation", 14)
-	content.add_child(column)
-	_title = _label("", HEADING, 32, TEXT)
+	frame.add_child(column)
+	_title = _label("", HEADING, 28, TEXT)
 	_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER  # centred, not edge to edge (#227)
 	column.add_child(_title)
 

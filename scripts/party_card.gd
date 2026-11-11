@@ -2,6 +2,7 @@ extends PanelContainer
 ## One hero's portrait card: animated portrait, name, health bar, and small
 ## condition icons. An empty party slot shows as a faint placeholder.
 ## Kept deliberately quiet: supplies and details live elsewhere (#10).
+const UiTheme := preload("res://scripts/ui_theme.gd")
 
 const PortraitView := preload("res://scripts/portrait_view.gd")
 const Glyphs := preload("res://art/ui/backlog96-v1/glyphs.gd")
@@ -29,7 +30,7 @@ const EMPTY_ALPHA := 0.35
 const COLOR_STRAIN := Color("8e6bb8")
 ## Card border per strain state: calm to alarmed.
 const STRAIN_BORDERS := {
-	StrainRules.State.STEADY: Color(0.35, 0.27, 0.18, 0.9),
+	StrainRules.State.STEADY: UiTheme.EDGE,
 	StrainRules.State.UNEASY: Color("b0893a"),
 	StrainRules.State.SHAKEN: Color("d0682a"),
 	StrainRules.State.PANICKING: Color("e0332a"),
@@ -68,8 +69,8 @@ func _init() -> void:
 	mouse_filter = Control.MOUSE_FILTER_STOP  # a tap explains the icons (#64)
 	var style := StyleBoxFlat.new()
 	_style = style
-	style.bg_color = Color(0.06, 0.05, 0.05, 0.8)
-	style.border_color = Color(0.35, 0.27, 0.18, 0.9)
+	style.bg_color = UiTheme.overlay_colour(0.8)
+	style.border_color = UiTheme.EDGE
 	style.set_border_width_all(1)
 	style.set_content_margin_all(4)
 	add_theme_stylebox_override("panel", style)
@@ -80,7 +81,7 @@ func _init() -> void:
 	add_child(column)
 
 	_turn_marker = ColorRect.new()  # gold bar: this hero's turn in combat
-	_turn_marker.color = Color("e8c25a")
+	_turn_marker.color = Color("d7b174")
 	_turn_marker.custom_minimum_size = Vector2(0, 4)
 	_turn_marker.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_turn_marker.visible = false
@@ -100,13 +101,13 @@ func _init() -> void:
 	column.add_child(name_row)
 	_name = Label.new()
 	_name.add_theme_font_size_override("font_size", 18)
-	_name.add_theme_color_override("font_color", Color("e8d9b0"))
+	_name.add_theme_color_override("font_color", Color("e6dac1"))
 	_name.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_name.clip_text = true
 	name_row.add_child(_name)
 	_row_label = Label.new()
 	_row_label.add_theme_font_size_override("font_size", 12)
-	_row_label.add_theme_color_override("font_color", Color("b3a78f"))
+	_row_label.add_theme_color_override("font_color", Color("b7ab93"))
 	_row_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	name_row.add_child(_row_label)
 	# Condition icons sit along the portrait's bottom edge, so a few of them

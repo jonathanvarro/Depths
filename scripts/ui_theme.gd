@@ -7,6 +7,36 @@ extends RefCounted
 
 const FieldKit := preload("res://art/ui/field-kit-v1/style.gd")
 
+## One palette for every screen (#169): the Field kit's colours, plus the
+## darker see-through panel used over the 3D view and the gain/loss edges.
+const TEXT := FieldKit.TEXT
+const MUTED := FieldKit.MUTED
+const AMBER := FieldKit.AMBER
+const EDGE := FieldKit.EDGE
+const OVERLAY := Color(0.06, 0.055, 0.045)
+const GOOD := Color("6fae5a")
+const BAD := Color("b5463a")
+
+
+## The panel colour for things drawn over the dungeon (event cards, the
+## dialogue box, party cards, the combat panel), at the given opacity.
+static func overlay_colour(alpha: float) -> Color:
+	return Color(OVERLAY, alpha)
+
+
+## A gain/loss chip's frame (events and results): green or red edged, or
+## `colour` when given.
+static func chip(good: bool, colour := Color(0, 0, 0, 0)) -> StyleBoxFlat:
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color(0.09, 0.08, 0.065, 0.92)
+	style.border_color = colour if colour.a > 0 else (GOOD if good else BAD)
+	style.set_border_width_all(1)
+	style.set_corner_radius_all(4)
+	style.set_content_margin_all(4)
+	style.content_margin_left = 6
+	style.content_margin_right = 8
+	return style
+
 ## Merges the theme into Godot's global default once. (A theme on the
 ## window wouldn't reach screens inside CanvasLayers, which is most of ours.
 ## No static cache: static variables kept scripts alive at exit, #100.)

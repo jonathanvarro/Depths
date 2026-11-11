@@ -30,10 +30,7 @@ func _init() -> void:
 	_display_scroll = display.scroll
 	_display_panel = _display_scroll.get_child(0)
 	_workspace.add_child(_display_scroll)
-	if not OS.has_feature("mobile"): _toggle(display.column, "Fullscreen", "fullscreen")
-	_toggle(display.column, "Screen flashes", "flashes")
-	_toggle(display.column, "Fights seen from above (prototype)", "tactical_view")
-	_toggle(display.column, "3D enemies", "enemy_models")
+	# Text size first: it's what you need to read the rest (#169).
 	display.column.add_child(text_label("Text size", 20))
 	var sizes := HBoxContainer.new()
 	sizes.add_theme_constant_override("separation", 6)
@@ -48,6 +45,10 @@ func _init() -> void:
 		choice.pressed.connect(_choose_text_size.bind(size_name))
 		sizes.add_child(choice)
 		_sizes[size_name] = choice
+	if not OS.has_feature("mobile"): _toggle(display.column, "Fullscreen", "fullscreen")
+	_toggle(display.column, "Screen flashes", "flashes")
+	_toggle(display.column, "Fights seen from above (prototype)", "tactical_view")
+	_toggle(display.column, "3D enemies", "enemy_models")
 	_credits_scroll = ScrollContainer.new()
 	_credits_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	_credits_scroll.follow_focus = true
