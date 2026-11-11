@@ -175,6 +175,12 @@ func _init() -> void:
 	resized.connect(_place)
 
 
+## _portrait is never added to the tree, so free it with the screen (#249).
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_PREDELETE and is_instance_valid(_portrait) and _portrait.get_parent() == null:
+		_portrait.free()
+
+
 func _bubble() -> PanelContainer:
 	var bubble := PanelContainer.new()
 	var style := StyleBoxFlat.new()

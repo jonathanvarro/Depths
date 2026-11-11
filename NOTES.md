@@ -13,6 +13,12 @@ Format:
 
 ---
 
+## 2026-11-11 – Claude (stray TextureRect at exit, #249)
+
+- Did: the leftover was `ConversationScreen._portrait`, a TextureRect kept only for tools to read and never put in the scene, so nothing freed it. The screen now frees it when it goes (`_notification` PREDELETE). Shutdown no longer reports the CanvasItem RID or the 2 leaked objects.
+- New `tools/teardown_check.gd` (in the suite): frees Main after floor 2 and fails if any stray node is left; it failed before the fix.
+- Watch out: headless, `tools/exploration_mist_check.gd` stops after the floor seed without printing its result (it isn't in the suite; it wants a real renderer). The remaining exit lines (NavMeshGeometryParser RIDs, a Thread, static strings) are Godot's own and appear for every script run.
+
 ## 2026-11-11 – Claude (committed the #234 survey-site follow-up)
 
 - Did: committed an uncommitted #234 follow-up another assistant left on 2026-11-07 (owner asked to clear it). It matches the issue's spec: the survey party's site is named on the map only once seen, and stays on floor 1 until the report is given to Vael. story_check: fails 0. Their note follows.
