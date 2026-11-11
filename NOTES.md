@@ -42,6 +42,24 @@ Format:
 - **T, a quick torch** (`quick_torch`, main `_quick_torch`): lights one from the pack outside fights. It won't replace a torch with more than a quarter left. torch_check presses it.
 - **Watch out:** the other assistant's uncommitted work (AGENTS.md, a docs file, `tools/testing/`, and #234 files) was left alone; only this change's main.gd hunks were committed.
 
+## 2026-11-09 – ChatGPT (automated checks stay off the active desktop, #253)
+
+- Did: recorded the owner's preference in AGENTS.md and added
+  tools/testing/background_godot.py. Imports/logic use headless mode; Windows
+  GPU screenshot checks launch on a temporary desktop that is never displayed.
+  The helper has logs, timeout/cleanup and no foreground fallback. It does not
+  move, minimize or activate other apps or change normal game window settings.
+- Checks: a real Mobile/D3D12 cube render survived a window resize and saved
+  a nonblank capture on the private desktop; foreground stayed unchanged.
+  The full rat/landmark review also passes 951 native checks there. Local
+  results: build/local-background-check-v1. Usage: docs/background-asset-checks.md.
+- Next: use this helper for unattended native captures. Open visible interactive
+  previews only on the owner's request. Do not rely on Start-Process Hidden
+  alone: it hides the console but not Godot's own game window.
+- Watch out: restricted sandboxes can deny CreateDesktop; use normal approved
+  Windows execution or stop the visual run, never fall back to the active
+  desktop. No fullscreen/topmost or live desktop keyboard input in checks.
+
 ## 2026-11-09 – Claude (light rules the overhead board, #248)
 
 - **Owner, 2026-11-09:** light should still matter at the strategic level. Darkness shows the tiles beside the party and 2 straight ahead; a torch keeps the normal camera and shows 2 tiles.

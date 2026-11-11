@@ -645,6 +645,16 @@ conversations, so this repo is the only shared memory.
    conflicts. Never force-push.
 5. **Leave a handoff note.** At the end of a task, add an entry to the top of
    `NOTES.md` (see the format there).
+6. **Keep checks out of the owner's way (2026-11-09).** Automated tests must
+   not steal focus, minimize active apps or open previews over the owner's
+   work. Use headless Godot for imports and checks that do not need rendered
+   images. For Windows GPU captures, use `tools/testing/background_godot.py`
+   to run on an isolated desktop that is never displayed; see
+   `docs/background-asset-checks.md`. Hiding a launcher console alone is not
+   enough. Never fall back to the active desktop if isolation fails, and do
+   not use fullscreen, always-on-top or forced-focus calls in checks. Open
+   interactive previews on the visible desktop only when the owner requests
+   them. Normal game/editor operation is unchanged.
 
 ## Conventions
 
