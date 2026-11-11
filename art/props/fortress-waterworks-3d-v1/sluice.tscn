@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3]
+[ext_resource type="Script" path="res://art/props/fortress-waterworks-3d-v1/prop.gd" id="script"]
+[ext_resource type="Material" path="res://art/props/fortress-waterworks-3d-v1/palette.tres" id="palette"]
+[ext_resource type="PackedScene" path="res://art/props/fortress-waterworks-3d-v1/sluice-frame.glb" id="sluice-frame"]
+[ext_resource type="PackedScene" path="res://art/props/fortress-waterworks-3d-v1/sluice-shutter.glb" id="sluice-shutter"]
+[ext_resource type="PackedScene" path="res://art/props/fortress-waterworks-3d-v1/sluice-wheel.glb" id="sluice-wheel"]
+
+[node name="Structure" type="Node3D"]
+script=ExtResource("script")
+palette_material=ExtResource("palette")
+metadata/asset_id="sluice"
+metadata/mount="floor-wall"
+lift_metres=1.04
+lift_origin=Vector3(0.27,0.15,0.22)
+spin_axis=Vector3(0,0,1)
+
+[node name="Lift" type="Node3D" parent="."]
+position=Vector3(0.27,0.15,0.22)
+
+[node name="Wheel" type="Node3D" parent="."]
+position=Vector3(-0.56,1.1,0.26)
+
+[node name="Frame" parent="." instance=ExtResource("sluice-frame")]
+
+[node name="Model" parent="Lift" instance=ExtResource("sluice-shutter")]
+
+[node name="Model" parent="Wheel" instance=ExtResource("sluice-wheel")]

@@ -176,6 +176,34 @@ Format:
 - **Check:** new `tools/models_3d_check.gd` (event props and their empty state; decor per floor; screenshots).
 - **Watch out:** the other assistant's uncommitted #234 work was set aside with git stash during the merge and restored unchanged. It is still uncommitted.
 
+## 2026-11-08 – ChatGPT (3D fortress structures and waterworks, #246)
+
+- Did. Built ten reusable scenes and sixteen GLBs under
+  art/props/fortress-waterworks-3d-v1. Fortress includes an intact/broken
+  palisade, watch post, overhead walkway, empty cage, wall bracket and raised
+  throne. Waterworks includes a wheel-operated sluice, chain-hoisted gate,
+  hollow broken pipe and open gutter. Palette, grain and faceted budgets
+  continue the earlier 3D batches. Existing painted families are preserved.
+- Sources. Throne uses one pinned official CC0 KayKit chair, rotated and
+  fitted beneath authored backing, repairs, red cloth and platform. Exact
+  original and licence bytes plus hashes are retained. Other meshes use
+  authored geometry and the unchanged mine helpers. Editable Blender masters
+  remain local under build/local-fortress-waterworks-v1/masters.
+- Checks. Godot 4.7.2 Mobile passes 381 checks; browser passes 32. There are
+  106 actual captures including both mounted rooms, phone shapes, intact/
+  broken, closed/open/resolved and paused mechanical poses. Checks cover
+  imported bounds/UVs/budgets, raised ceiling clearance, outflow wall coverage,
+  fixed registration, interrupted motion, immediate restore and still mode.
+- Next. Review E:/GitHub/Depths/build/local-fortress-waterworks-v1/inspector.html
+  or run START_REVIEW.cmd there. Handoff and rebuild are in
+  docs/fortress-and-waterworks-3d.md. Delivery is on
+  codex/fortress-waterworks-3d; owner visual review and live hookup remain.
+- Watch out. Gates reveal an opaque outflow throat, not a new walkable route.
+  Their state never drains the map or resolves quests. Chains have no rope
+  simulation. Cage must stay out of the travel/sightline in an edge alcove;
+  walkway is scenery. Fortress, flood, stair, quest, save and effects
+  preference remain controller-owned. Physical iPhone is untested.
+
 ## 2026-11-08 – Claude (panic middle ground and Calming herbs, #236 follow-up)
 
 - **Owner, 2026-11-08:** the event-only panic was over-tuned (too easy). The middle ground is that some panic builds over a trip, and items keep it in check.

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Depths · Fortress structures and waterworks</title>
+<style>
+:root { color-scheme:dark; font:17px/1.5 system-ui,sans-serif; background:#141c1e; color:#e3d8bc }
+* { box-sizing:border-box }
+body { max-width:1440px; margin:auto; padding:24px }
+h1,h2,h3 { font-family:Georgia,serif; font-weight:normal }
+h1 { font-size:36px; margin-bottom:8px }
+h2 { font-size:28px; margin:30px 0 14px }
+h3 { font-size:22px; margin:0 0 12px }
+nav { display:flex; flex-wrap:wrap; gap:18px; margin:24px 0 }
+label { display:flex; align-items:center; gap:10px }
+select,input,button { min-height:44px; padding:8px; font:inherit; background:#283331; color:inherit }
+input { width:180px }
+.grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px }
+.poses { grid-template-columns:repeat(2,1fr) }
+article { background:#243030; border:1px solid #586254; padding:14px; min-width:0 }
+img { display:block; width:100%; height:auto; background:#202a2b }
+article p { margin:8px 0 0; font-size:15px }
+a { color:#d8bc85 }
+.note { padding:16px; background:#243030; border-left:3px solid #bca574 }
+[hidden] { display:none !important }
+@media(max-width:1000px) { .grid { grid-template-columns:1fr 1fr } }
+@media(max-width:680px) { body { padding:14px } .grid { grid-template-columns:1fr } }
+</style>
+<h1>Fortress structures and waterworks</h1>
+<p>Ten reusable 3D scenes. Crooked timber and scavenged iron give way to slate-framed machinery.</p>
+<nav>
+<label>Batch <select id="batch"><option value="all">Both</option><option value="fortress">Fortress</option><option value="waterworks">Waterworks</option></select></label>
+<label>Lighting <select id="light"><option value="cave">Environment</option><option value="neutral">Neutral</option></select></label>
+<label>Angle <select id="angle"><option value="0">Three-quarter</option><option value="1">Front</option><option value="2">Side</option></select></label>
+<label>State <select id="state"><option value="closed">Closed / intact</option><option value="open">Open</option><option value="empty">Resolved / broken</option></select></label>
+</nav>
+<section data-batch="fortress">
+<h2>Goblin fortress</h2>
+<img class="room" src="captures/room-0-closed.png" alt="Fortress structures mounted in a cave chamber">
+<div class="grid">@@FORTRESS@@</div>
+</section>
+<section data-batch="waterworks">
+<h2>Waterworks machinery</h2>
+<img class="room" src="captures/room-1-closed.png" alt="Sluice, chain gate, broken pipe and gutter mounted in a waterworks chamber">
+<div class="grid">@@WATERWORKS@@</div>
+<h2>Paused gate movement</h2>
+<p>These captures keep the camera and lighting fixed. The native review can play and interrupt the opening motion.</p>
+<label>Lift <input id="phase" type="range" min="0" max="100" step="25" value="50"><output id="phase-value">50%</output></label>
+<div class="grid poses">
+<article><h3>Sluice wheel</h3><img id="sluice-phase" src="captures/sluice-phase-50.png" alt="Sluice shutter paused halfway"></article>
+<article><h3>Chain hoist</h3><img id="flow-gate-phase" src="captures/flow-gate-phase-50.png" alt="Flow shutter paused halfway"></article>
+</div>
+</section>
+<p class="note">Run START_REVIEW.cmd in this folder for native controls. Motion is off by default in the inspector. Scenes support still mode and immediate restored states. Room arrangements illustrate mounting; gameplay placement remains pending.</p>
+<p><a href="START_HERE.md">Handoff and rebuild</a> · <a href="validation.json">Native checks</a> · <a href="artifact-validation.json">Source and export verification</a></p>
+<script>
+function update() {
+    const batch=document.querySelector('#batch').value;
+    const light=document.querySelector('#light').value;
+    const angle=document.querySelector('#angle').value;
+    const selected=document.querySelector('#state').value;
+    for (const section of document.querySelectorAll('[data-batch]')) {
+        section.hidden=batch!=='all' && batch!==section.dataset.batch;
+        const roomState=selected==='empty'?'empty':'closed';
+        section.querySelector('.room').src='captures/room-'+(section.dataset.batch==='fortress'?'0':'1')+'-'+roomState+'.png';
+    }
+    for (const card of document.querySelectorAll('[data-name]')) {
+        const state=card.dataset.kind==='gate'?selected:(card.dataset.kind==='palisade' && selected==='empty'?'empty':'closed');
+        card.querySelector('img').src='captures/'+card.dataset.name+'-'+light+'-'+angle+'-'+state+'.png';
+    }
+}
+function pose() {
+    const value=document.querySelector('#phase').value;
+    document.querySelector('#phase-value').textContent=value+'%';
+    for (const name of ['sluice','flow-gate']) {
+        document.querySelector('#'+name+'-phase').src='captures/'+name+(value==='0'?'-cave-0-closed':(value==='100'?'-cave-0-open':'-phase-'+value))+'.png';
+    }
+}
+for (const control of document.querySelectorAll('select')) control.addEventListener('change',update);
+document.querySelector('#phase').addEventListener('input',pose);
+</script>
+</html>

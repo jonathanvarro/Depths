@@ -1,0 +1,20 @@
+{
+  "repository": "KayKit-Game-Assets/KayKit-Dungeon-Remastered-1.0",
+  "commit": "b0ca9bd96a8072ab36a3a5464f00ed1e06a16d07",
+  "files": [
+    {
+      "file": "chair.glb",
+      "official_path": "addons/kaykit_dungeon_remastered/Assets/gltf/chair.gltf.glb",
+      "git_blob_sha1": "d714e3eace33b64d3a2190025a57dd9762e50a6f",
+      "bytes": 36252,
+      "sha256": "5f133281686d398304c0a458c4d407dd483eeea8aba67220b585ceb89366efa2"
+    },
+    {
+      "file": "LICENSE.txt",
+      "official_path": "LICENSE.txt",
+      "git_blob_sha1": "686cf4ee3931b75d4ecfac6308f9d3287553748c",
+      "bytes": 829,
+      "sha256": "c5f17abf619731f57f6bbff450f6484214605c13aa96bb75bbcfc70930941ff7"
+    }
+  ]
+}
