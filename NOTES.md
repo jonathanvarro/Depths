@@ -13,6 +13,17 @@ Format:
 
 ---
 
+## 2026-11-11 – ChatGPT (story-earned camp services, #238 / #240)
+
+- Did: recorded the owner's revised sequence in DESIGN.md. Trade opens
+  on the first real expedition return. The nurse waits for recovered
+  supplies. The apprentice sells basic goods early and offers a separate,
+  deeper ore quest for metalworking. The trainer arrives after the Marches,
+  with an advanced lesson tied to the optional Goblin King.
+- Next: decide the nurse's supplies, the smith's deposit location and the
+  trainer's lesson choices. Floor 2 return and a Floor 3 deposit are a
+  proposed smith milestone. Preserve earned unlocks for existing saves.
+
 ## 2026-11-11 – Claude (fortress structures placed; the opening's daylight mouth, #246, #250)
 
 - `scripts/fortress_dressing.gd` (called from main `_add_fortress_dressing`) places #246's 3D pieces on floor 4:

@@ -460,6 +460,21 @@ Suggested initial presentation: one campsite screen with a few selectable activi
 
 **Starting camp and arrivals (owner, 2026-10-18, #80):** your tent, recruitment fire and nurse's tent are established. The merchant caravan is visibly unloading; trading opens on the first expedition return **after the tutorial escape**. The apprentice smith arrives after the first night/rest at camp. These are independent triggers: resting before setting out brings the smith but leaves the merchant unloading. The cave path remains accessible as permanent terrain. New stories use this sequence; established saves retain their services. Existing starting supplies and emergency torches remain available; no new prices, waiting penalties or rest costs. [Arrival art, implementation and review](docs/camp-arrivals.md).
 
+### Camp services earned through the story
+
+**Owner direction, 2026-11-11 (#238, #240):** Let the party experience the problem a camp service solves, then make its arrival or upgrade a reward for what the party did underground. This is the next camp sequence. The current build still uses the later day-three rule (#229) for these arrivals.
+
+| Service | Agreed direction |
+|---|---|
+| Merchant | The caravan starts unloading. Trading opens on the first expedition return after the tutorial escape, so early finds can fund the next trip. |
+| Nurse | Delay treatment until the party returns with supplies gathered in the mines or Fungal Caverns. Aim for injured parties to carry the effects through another run or two. The supplies are the unlock, so a party that avoids injury can still earn the service. |
+| Apprentice smith | Introduce the apprentice early and let the party buy basic goods. Later, when metal weapons would matter, the apprentice points the party to an ore deposit on a specific floor. Completing that quest unlocks metalworking. Separate the arrival from the forge upgrade. |
+| Skills trainer | Bring in the trainer after a return from the Goblin Marches, when the party has already had a reason to brace, dress wounds or manage strain. Make the first lesson address a problem they have experienced. Defeating the optional Goblin King earns an advanced lesson on return. Basic training stays available on the lower-water-gate route. |
+
+**Proposed placement for review.** Give the nurse's supply objective clear pickup locations across the Old Workings and Fungal Caverns. Have the smith offer the iron quest on the first return from the Fungal Caverns and point toward a particular deposit in the Goblin Marches, so the reward helps before the fortress. Exact nurse supplies, the ore location and the initial and advanced lessons are open. The existing iron quest currently points to Floor 1. Move its briefing and deposit together when implementing the new sequence.
+
+Keep the existing field treatment available while the nurse is away. Show a lasting injury and its effect before the next departure, so the player can see what treatment will later change. Persist earned arrivals and upgrades. Retain services and forge progress in established saves.
+
 **Decided 2026-10-17 (#41): recruitment at the fire.**
 - **Roles:**
   - **Warden:** protector; tough, good at Defend, draws attacks.
