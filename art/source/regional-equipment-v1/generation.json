@@ -1,0 +1,14 @@
+{
+  "tool": "built-in ImageGen",
+  "date": "2026-11-11",
+  "assets": [
+    {
+      "id": "light_mace",
+      "file": "light-mace-master.png",
+      "sha256": "776e5983e503cf47871f9168f66e3fbe4876a039e8a353cd5b0b3fe8f8dd104f",
+      "reference": "art/source/story-slice-v1/companion-mace-master.png",
+      "reference_sha256": "28dfc0eb33eb25e815c509fb50b695d6253c303b9881a82c8b7eae2c90d76420",
+      "prompt": "Create a new isolated transparent-background inventory icon for Depths. Use the supplied existing companion light mace only as a scale and illustration reference. Create the distinct Goblin Territory light mace: very compact narrow iron head with short uneven blunt flanges, a slim subtly crooked dark ash haft, a narrow soot-brown rawhide grip with a single faded oxblood binding, and a small battered metal butt ring. Asymmetric hand-worked iron with one nick and light oxidization at the flange roots. The whole item is diagonally placed from lower left to upper right with ample margin, a readable narrow silhouette and three broad light/shadow masses. Dark medieval, restrained painterly pixel-friendly material treatment, warm grey worn steel edge over charcoal faces, weathered wood. Small practical item, not a heavy spiked hammer. Show one object, no floor, no shadow outside object, no letters, no borders, no decorative crest. Genuine transparency around the object. Design to reduce directly to 128 and 64 pixels."
+    }
+  ]
+}

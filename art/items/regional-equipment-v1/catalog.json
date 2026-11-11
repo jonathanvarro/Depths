@@ -1,0 +1,50 @@
+{
+  "items": [
+    {
+      "id": "miners_sledge",
+      "name": "Miner’s sledge",
+      "region": "Cave & Mine",
+      "source": "art/source/early-equipment-v1/quarry-hammer-master.png",
+      "source_sha256": "7754d04b461a1b38adc8dedee3debadc3c73cdab0360b94476f605f71546585d",
+      "old": "art/items/refined-v2/wooden-club.png",
+      "binding": "data/gear/miners_sledge.tres",
+      "export": "res://art/items/regional-equipment-v1/miners_sledge.png",
+      "compact": "res://art/items/regional-equipment-v1/compact64/miners_sledge.png"
+    },
+    {
+      "id": "light_mace",
+      "name": "Light mace",
+      "region": "Goblin Territory",
+      "source": "art/source/regional-equipment-v1/light-mace-master.png",
+      "source_sha256": "776e5983e503cf47871f9168f66e3fbe4876a039e8a353cd5b0b3fe8f8dd104f",
+      "old": "art/items/story-slice-v1/companion-mace.png",
+      "binding": "data/equipment/bases.json",
+      "export": "res://art/items/regional-equipment-v1/light_mace.png",
+      "compact": "res://art/items/regional-equipment-v1/compact64/light_mace.png"
+    }
+  ],
+  "candidate_audit": {
+    "surveyors-shortsword": "The existing sword belongs to the founder. Keep the proposed ordinary shortsword separate.",
+    "quarry-hammer": "Adopted for the actual Miner's sledge in the tool rack.",
+    "shaft-spear": "The live Ash-shaft spear already has this narrow profile.",
+    "miners-sling": "No corresponding live sling base.",
+    "hazel-walking-staff": "No corresponding live walking-staff base.",
+    "waxed-work-jerkin": "The live Patched leather jerkin already has this silhouette.",
+    "quilted-work-coat": "Hold. The live description specifies sleeveless quilting.",
+    "riveted-mining-coat": "No corresponding live plate-reinforced mine coat.",
+    "pit-shield": "The existing Iron-rimmed buckler now has a dedicated round shield.",
+    "survey-cape": "Hold. A short hooded cape differs from the live Oilcloth cloak.",
+    "prospectors-satchel": "The live Leather satchel already uses this bag.",
+    "notched-falchion": "The live Goblin cleaver uses this picture.",
+    "gatebreaker-mace": "Keep the heavier concept. The actual Light mace receives its own narrower variant.",
+    "garrison-spear": "The live Boar spear already has the related crossbar adaptation.",
+    "sentry-shortbow": "No corresponding live weapon base.",
+    "cinderwood-baton": "No corresponding live weapon base.",
+    "raiders-leather-vest": "No exact asymmetric vest base. The studded variant is already used separately.",
+    "riveted-guard-coat": "Hold. The live Studded jerkin has a dedicated sleeveless icon.",
+    "garrison-scale-coat": "Hold. The live scale shirt has a shorter dedicated icon.",
+    "gate-guards-shield": "Hold. The live goblin shield is round and has a dedicated icon.",
+    "raiders-mantle": "The live Shadow-dyed cape uses this picture.",
+    "quartermasters-pack": "The existing Miner's frame pack is already pictured and remains a Cave & Mine base."
+  }
+}

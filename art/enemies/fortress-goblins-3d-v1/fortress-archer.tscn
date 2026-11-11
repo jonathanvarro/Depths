@@ -5,5 +5,6 @@
 [node name="Actor" type="Node3D"]
 script=ExtResource("1")
 palette_material=ExtResource("2")
+draw_still_time=0.25
 metadata/visual_height=1.3299
 [node name="Model" parent="." instance=ExtResource("3")]

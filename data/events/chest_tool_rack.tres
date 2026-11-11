@@ -9,7 +9,7 @@
 [ext_resource type="Resource" path="res://data/gear/miners_sledge.tres" id="7_47h8i"]
 [ext_resource type="Resource" path="res://data/items/pick.tres" id="8_ehmtx"]
 [ext_resource type="Resource" path="res://data/items/coal.tres" id="9_ym1kh"]
-[ext_resource type="PackedScene" path="res://art/props/expedition-3d-v1/old-workings.tscn" id="10_84glr"]
+[ext_resource type="PackedScene" path="res://art/props/mining-finds-3d-v1/tool-rack.tscn" id="10_84glr"]
 [ext_resource type="Script" path="res://scripts/room_event.gd" id="11_cmppq"]
 
 [sub_resource type="Resource" id="Resource_tx1of"]
@@ -58,3 +58,4 @@ choices = Array[ExtResource("1_ks6f4")]([SubResource("Resource_r18tg"), SubResou
 max_depth = 2
 weight = 2
 prop = ExtResource("10_84glr")
+prop_on_wall = true

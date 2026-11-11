@@ -6,10 +6,12 @@
 |---|---|---:|
 | Common goblin | Bare head, rough wraps, small buckler and knife | 2,491 |
 | Shield guard | Narrow crested helm, broad round shield and iron cudgel | 2,999 |
-| Archer | Low moss hood, prominent quiver and a wide, hand-posed draw with the bow clear of the torso | 2,967 |
+| Archer | Low moss hood, prominent quiver and a wide draw with a string that follows the draw hand | 2,977 |
 | King | Low hunch, oversized right forearm, broken iron circlet and horned-skull staff | 3,712 |
 
-The three goblins retain the 57-bone [CC0 goblin rig](https://opengameart.org/content/goblin-1) by CDmir and TinyWorlds via the #255 adaptation. Their four common motions stay available. The guard has brace and the archer has draw. The archer's current bowstring holds its resting shape during draw. The original source and declaration are in art/third-party/oga-creatures-v1.
+The three goblins retain the 57-bone [CC0 goblin rig](https://opengameart.org/content/goblin-1) by CDmir and TinyWorlds via the #255 adaptation. The guard has brace. The archer has one additional control for the centre of the string, with both tips bound to the bow hand. Both `draw` and `attack` reach full tension and release at frame 8 (0.333 s), inside the current 0.4 s combat gesture. With motion reduced, the archer holds a drawn pose. The original source and declaration are in art/third-party/oga-creatures-v1.
+
+The 64 × 64 [Goblin King silhouette](../art/ui/expedition-v1/thumbnails/goblin_king.png) is a profile of the live model. The camera gives the broken circlet and horned-skull staff room against the King's hunch. The existing bestiary lookup uses the `goblin_king` resource ID.
 
 The King's original 15-bone rig has idle, plant, attack, hurt and fall at 24 fps. The free arm swings while the staff supports him. He releases the staff during his fall. The still frames are plant 15, attack 18, hurt 4 and fall 32. The staff and gripping hand keep their anchors during the planted weight shift. The attack clip is 34 frames, so the live cue should allow the visible windup before frame 18. Combat effects and timing are caller-owned.
 
@@ -21,4 +23,4 @@ The [King's victory illustration](../art/illustrations/fortress-king-v1/victory.
 
 Run tools/fortress_goblins/build.py in Blender 5.2 background mode with --factory-startup --disable-autoexec --python-exit-code 1, then -- --workspace E:/GitHub/Depths. It uses the existing #255 goblin.blend master under build/local-spiders-goblin-v1/masters. The output is art/enemies/fortress-goblins-3d-v1. Run prepare_review.py with the same workspace, import the review folder headlessly, and use the private-desktop Godot launcher with --script res://check.gd. Use native-check as its report folder. Run package_review.py to verify the captures and build the gallery.
 
-The branch is codex/fortress-goblins-3d, stacked on codex/combat-roster-3d for the shared palette and motion contract. The Queen remains the live boss.
+The original branch is codex/fortress-goblins-3d, stacked on codex/combat-roster-3d for the shared palette and motion contract. The string and silhouette are on codex/fortress-treatment-art. See [the follow-up review and rebuild](treatment-supply-art.md).
