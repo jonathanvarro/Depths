@@ -24,11 +24,16 @@ Same rules as the game, nothing drawn; 30 campaigns in 103 s. No stuck runs.
 
 ## What stands out
 
-1. **Floor 4 is still a cliff.** Floors 1–3 cost single-digit health a
-   visit; the fortress costs 30–46. October's report said the same.
-2. **Parties are at the level cap (4) by day 4.** Every hero reaches floor 4
-   on day 4 at level 4, so the last three-quarters of a long campaign earns
-   nothing. Losing campaigns just repeat floor 4 until day 60.
+1. **Floor 4's "cliff" is its two boss fights.** Floors 1–3 cost
+   single-digit health a visit; the fortress costs 30–46. A rerun that
+   splits it (2026-11-12, `damage_bosses` in the bot) shows floor 4 without
+   the gate and King fights costs 10–15 a visit, a normal step past floor 3
+   (6–10). About 70% of floor 4's damage is the gate and the King, the
+   optional no-retreat climax. The lever is the King's difficulty (#257).
+2. ~~Parties are at the level cap by day 4.~~ **Not a problem (corrected
+   2026-11-12):** levels reset at every departure (#172), so reaching level
+   4 by floor 4 is the designed pace. Lasting growth is skills, gear mastery
+   and gear.
 3. **Mara's runs are the weak ones:** 4 of 10 never beat the King, with the
    most wipes and the most trips cut short by darkness (32 per campaign).
 4. **Light ends more trips than anything else.** About a fifth of all steps

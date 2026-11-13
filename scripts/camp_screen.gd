@@ -133,14 +133,14 @@ func _init() -> void:
 	_save_button=save
 	save.position = Vector2(440, 326)
 	save.size = Vector2(104, 30)
-	save.add_theme_font_size_override("font_size", 11)
+	save.add_theme_font_size_override("font_size", 14)  # readable on a phone (#169)
 	save.pressed.connect(func(): save_and_exit.emit())
 	_canvas.add_child(save)
 	var pack := _button("Pack")
 	_pack_button = pack
 	pack.position = Vector2(340, 326)
 	pack.size = Vector2(90, 30)
-	pack.add_theme_font_size_override("font_size", 11)
+	pack.add_theme_font_size_override("font_size", 14)
 	pack.tooltip_text = "Check your items and equipment"
 	pack.pressed.connect(func(): open_pack.emit())
 	_canvas.add_child(pack)
@@ -153,7 +153,7 @@ func _init() -> void:
 	_settings_button=gear
 	gear.position = Vector2(550, 326)
 	gear.size = Vector2(74, 30)
-	gear.add_theme_font_size_override("font_size", 11)
+	gear.add_theme_font_size_override("font_size", 14)
 	gear.pressed.connect(func():
 		gear.grab_focus()
 		open_settings.emit())
@@ -369,14 +369,14 @@ func _fit() -> void:
 			button.custom_minimum_size.y=height
 			button.size.y=height
 	if _save_button:
-		_save_button.size.x=104
+		_save_button.size.x=116
 		_settings_button.size.x=height
 		_settings_button.position.x=CANVAS.x-height-16
-		_save_button.position.x=_settings_button.position.x-114
+		_save_button.position.x=_settings_button.position.x-124
 		_save_button.position.y=CANVAS.y-height-4
 		_settings_button.position.y=CANVAS.y-height-4
-		_pack_button.size.x=90
-		_pack_button.position=Vector2(_save_button.position.x-100,CANVAS.y-height-4)
+		_pack_button.size.x=96
+		_pack_button.position=Vector2(_save_button.position.x-106,CANVAS.y-height-4)
 	_place_activity(room)
 	var touch:=maxf(30.0,44.0/_activity.scale.x)
 	for button in [_back]+_body.find_children("*","Button",true,false):button.custom_minimum_size.y=touch

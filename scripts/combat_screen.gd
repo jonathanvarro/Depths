@@ -516,7 +516,13 @@ func _enemy_action(foe) -> void:
 	if outcome.get("fled", false):
 		await _fade_out(foe)
 		return
-	_play(foe, _action_pose(foe, intent, outcome), 0.4)
+	var pose := _action_pose(foe, intent, outcome)
+	# A slow swing (the Goblin King's staff, #257): the blow lands when the
+	# clip reaches it, not when the windup starts.
+	var delay: float = foe.type.strike_delay if pose == "attack" and is_instance_valid(foe.node) and FoeView.is_model(foe.node) and outcome.get("target") != null else 0.0
+	_play(foe, pose, maxf(0.4, delay + 0.4))
+	if delay > 0.0:
+		await get_tree().create_timer(delay).timeout
 	if outcome.get("drained", false):
 		# A lamp-eater drinks the light (#141's pop, over the held light).
 		_fx.icon(Vector2(size.x * 0.66, size.y * 0.78), LIGHT_DRAINED, 56.0)

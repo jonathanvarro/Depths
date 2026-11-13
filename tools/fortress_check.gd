@@ -116,6 +116,7 @@ func _initialize() -> void:
 		c.plan(q)
 		if q.intent == CS.Intent.CLEAVER: cleavers += 1
 	check("an enraged queen swings the cleaver often", cleavers > 100, "%d/400" % cleavers)
+	check("the King's blow lands when his staff does, not at the windup (#257)", queen.strike_delay >= 0.6 and queen.strike_delay <= 0.8, str(queen.strike_delay))
 
 	# In game: floor 4.
 	main = load("res://scenes/main.tscn").instantiate()

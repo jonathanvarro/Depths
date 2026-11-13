@@ -13,6 +13,15 @@ Format:
 
 ---
 
+## 2026-11-12 – Claude (King's blow timing, camp buttons, bot findings, #257/#169/#119)
+
+- Did:
+  - `EnemyType.strike_delay` (#257): on a 3D model's attack, CombatScreen waits this long before the hit, sound and damage show. The King's is 0.75 s (his clip lands at frame 18 of 34). fortress_check asserts it.
+  - Camp clearing buttons (Pack, Save & exit, Settings) are font 14, a bit wider: readable on phones.
+  - The results screen's floating "+12 XP" in the audit was the capture tool's timing (it opened results a second after a won fight), not a game bug.
+  - Bot: `damage_bosses` splits the gate/King fights out of floor 4's damage. Floor 4 without them costs 10–15 health a visit (floor 3: 6–10); ~70% of floor 4's damage is the boss fights. Owner keeps the King's difficulty as is (2026-11-12).
+  - `docs/balance-report-2026-11.md` corrected: the "level cap by day 4" finding was wrong. Levels reset every departure (#172), so that's the designed pace.
+
 ## 2026-11-11 – Claude (interface fixes applied, #169/#51)
 
 - Did: owner approved all eight audit fixes; applied them (details in `docs/interface-audit.md`, after board `docs/interface-audit-v1/after.jpg`).

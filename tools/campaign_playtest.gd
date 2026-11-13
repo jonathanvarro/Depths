@@ -126,6 +126,7 @@ func _campaign(hero_path: String, run_seed: int, max_days: int) -> Dictionary:
 		"won": false, "days": 0, "expeditions": 0, "wipes": 0, "returns": 0, "fight_retreats": 0,
 		"fights": 0, "fights_won": 0, "wanderers": 0, "events": 0, "injuries": 0, "stuck": "",
 		"damage_by_floor": {1: 0, 2: 0, 3: 0, 4: 0}, "visits_by_floor": {1: 0, 2: 0, 3: 0, 4: 0},
+		"damage_bosses": 0,  # the gate and the King's fights, inside floor 4's damage
 		"wipes_by_floor": {1: 0, 2: 0, 3: 0, 4: 0}, "first_arrival": {},
 		"gold_found": 0, "gold_contracts": 0, "gold_sold": 0, "gold_spent": 0, "bounty": 0,
 		"gate_tries": 0, "gate_day": 0, "queen_tries": 0, "queen_rounds": 0, "queen_day": 0,
@@ -861,6 +862,8 @@ func _fight(group: Array, kind: String, on_map := false) -> int:
 	if guard >= 400:
 		stats["stuck"] = "a fight ran 400 turns (%s)" % ", ".join(PackedStringArray(group.map(func(t): return t.display_name)))
 	stats["damage_by_floor"][depth] += maxi(0, start_health - _total_health())
+	if kind in ["gate", "queen"]:
+		stats["damage_bosses"] += maxi(0, start_health - _total_health())
 	if party.living_members().is_empty():
 		going_in["elites"] = state.foes.filter(func(f): return f.elite != "").size()
 		going_in["tasted"] = state.foes.filter(func(f): return f.tasted).size()
@@ -1456,6 +1459,8 @@ func _summarise(all: Dictionary) -> void:
 		for f in dmg:
 			per_visit[f] = snappedf(float(dmg[f]) / maxf(1.0, vis[f]), 0.1)
 		print("  health lost per floor visit: %s (visits %s)" % [per_visit, vis])
+		var bosses: int = runs.reduce(func(a, r): return a + r["damage_bosses"], 0)
+		print("  floor 4 without the gate and King fights: %.1f per visit (bosses %d of %d)" % [float(dmg[4] - bosses) / maxf(1.0, vis[4]), bosses, dmg[4]])
 		for f in ["1", "2", "3", "4"]:
 			var arrivals: Array = runs.filter(func(r): return r["first_arrival"].has(f)).map(func(r): return r["first_arrival"][f])
 			if not arrivals.is_empty():

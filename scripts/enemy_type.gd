@@ -99,6 +99,9 @@ enum Tactic {
 ## shared sprite (#99).
 @export var tint := Color.WHITE
 @export var sprite_scale := 1.0
+## Seconds into its 3D model's attack clip when the blow lands (#257): the
+## hit, sound and damage wait for it, so a slow windup reads. 0 = at once.
+@export var strike_delay := 0.0
 ## Something it may leave behind when beaten (a hollow miner's pick, #140).
 @export var drop: SupplyItem
 @export_range(0.0, 1.0) var drop_chance := 0.0
