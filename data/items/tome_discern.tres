@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="SupplyItem" format=3]
 
-[ext_resource type="Texture2D" path="res://art/ui/controls-v1/journal.svg" id="icon"]
+[ext_resource type="Texture2D" path="res://art/items/discern-v1/tome-discern-128.png" id="icon"]
 [ext_resource type="Script" path="res://scripts/supply_item.gd" id="1"]
 
 [resource]

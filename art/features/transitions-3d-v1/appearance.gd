@@ -4,6 +4,9 @@ extends Node3D
 @export var ground_material: Material
 
 func _ready() -> void:
+	# The strands can cover the party token when a fight starts on the climb.
+	if get_meta("asset_id", "") == "root-climb-up":
+		add_to_group("ceiling")
 	var ground: Material=palette_material
 	if ground_material!=null:
 		ground=ground_material.duplicate()

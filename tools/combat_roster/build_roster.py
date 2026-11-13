@@ -411,22 +411,30 @@ def build(name, workspace, out):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--workspace",type=Path,required=True)
+    parser.add_argument("--party-only",action="store_true")
     args = parser.parse_args(sys.argv[sys.argv.index("--")+1:])
-    out = args.workspace/"build/local-combat-roster-v1"
+    out = args.workspace/("build/local-party-board-v2" if args.party_only else "build/local-combat-roster-v1")
     (out/"masters").mkdir(parents=True,exist_ok=True)
-    palette_png(ART/"palette.png",PALETTE)
-    assets = [build(name,args.workspace,out) for name in IDS]
-    (ART/"catalog.json").write_text(json.dumps({"assets":assets,"palette":PALETTE},indent=2)+"\n",encoding="utf-8")
+    catalog = ART/"catalog.json"
+    if not args.party_only:
+        palette_png(ART/"palette.png",PALETTE)
+    assets = [build(name,args.workspace,out) for name in (HEROES if args.party_only else IDS)]
+    entries = assets
+    if args.party_only:
+        updates = {entry["id"]:entry for entry in assets}
+        entries = [updates.get(entry["id"],entry) for entry in json.loads(catalog.read_text(encoding="utf-8"))["assets"]]
+    catalog.write_text(json.dumps({"assets":entries,"palette":PALETTE},indent=2)+"\n",encoding="utf-8",newline="\n")
     for asset in assets:
         name = asset["id"]
+        material = "party-palette" if asset["party"] else "palette"
         (ART/(name+".tscn")).write_text(
             '[gd_scene load_steps=4 format=3]\n'
             '[ext_resource type="Script" path="res://art/enemies/combat-roster-3d-v1/actor.gd" id="1"]\n'
-            '[ext_resource type="Material" path="res://art/enemies/combat-roster-3d-v1/palette.tres" id="2"]\n'
+            f'[ext_resource type="Material" path="res://art/enemies/combat-roster-3d-v1/{material}.tres" id="2"]\n'
             f'[ext_resource type="PackedScene" path="res://art/enemies/combat-roster-3d-v1/{name}.glb" id="3"]\n'
             '[node name="Actor" type="Node3D"]\nscript=ExtResource("1")\npalette_material=ExtResource("2")\n'
             f'metadata/visual_height={asset["height"]}\n'
-            '[node name="Model" parent="." instance=ExtResource("3")]\n',encoding="utf-8")
+            '[node name="Model" parent="." instance=ExtResource("3")]\n',encoding="utf-8",newline="\n")
 
 
 if __name__=="__main__":

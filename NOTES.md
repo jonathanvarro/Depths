@@ -22,6 +22,28 @@ Format:
   - Bot: `damage_bosses` splits the gate/King fights out of floor 4's damage. Floor 4 without them costs 10–15 health a visit (floor 3: 6–10); ~70% of floor 4's damage is the boss fights. Owner keeps the King's difficulty as is (2026-11-12).
   - `docs/balance-report-2026-11.md` corrected: the "level cap by day 4" finding was wrong. Levels reset every departure (#172), so that's the designed pace.
 
+## 2026-11-12 – ChatGPT (PR #259 merge resolution)
+
+- Did: brought the latest interface fixes into the Floor 4 art branch and
+  kept both sets of handoff notes below.
+- Checked: headless import, fortress and enemy models, plus the camp
+  regression on the private desktop at 1278 × 590. All assertions passed.
+  The camp fixture logged a missing item metadata warning during the stash check.
+
+## 2026-11-11 – ChatGPT (Discern, board figures and the King's dark stage)
+
+- Did: bound Discern's new split-seal picture and the four delivered prayer
+  item icons. Broadened the lead figures and removed the hanging climb roots
+  from the overhead view. The King's dark-stage view now has local lighting,
+  flank positions for his guards, and no cave walls cutting through his model.
+- Reviewed: three neutral named-cast likenesses and the proposed Fixer-a reuse
+  for Rook (#197–#200). Rechecked equipment and field sound, verified the
+  two jacket fits and fixed-seat review, and updated the horror concept ledger.
+  The public CC0 stool and its sources are available; the private models stay
+  in the local review.
+- Next: [Floor 4 art handoff](docs/floor-four-art-finish.md) lists the open
+  visual decisions, contact work and listening review.
+
 ## 2026-11-11 – Claude (interface fixes applied, #169/#51)
 
 - Did: owner approved all eight audit fixes; applied them (details in `docs/interface-audit.md`, after board `docs/interface-audit-v1/after.jpg`).

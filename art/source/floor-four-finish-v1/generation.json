@@ -1,0 +1,26 @@
+{
+  "tool": "built-in ImageGen",
+  "input": "text only",
+  "assets": {
+    "tome-discern": {
+      "file": "tome-discern.png",
+      "sha256": "2ef8410bc1726ba4f8956acc45c4086dff8d7445104f18917ac02469ee375da4",
+      "prompt": "A single isolated inventory icon asset for Depths, a dark gritty medieval cave dungeon crawler. Show one closed reliquary-keeper's prayer book, the Tome of Discernment, at a compact three-quarter angle with its cover dominant and worn parchment page edges visible. Charcoal-blue stained hide, rubbed uneven corners, rough stitches and a single broken deep-ochre wax seal on a thin dull brass clasp; the seal has two large visibly separated halves, a strong symbol of uncovering what was hidden. Readable simple silhouette at 64 pixels, broad areas of colour, restrained hand-painted late-90s dungeon RPG item art, warm edge light, convincing battered materials. Fill about 80 percent of the square with generous clearance on every side. Genuine transparent alpha background. One object only, no writing, lettering, glow, effects, scenery, ground shadow, pedestal or watermark."
+    },
+    "branna": {
+      "file": "branna.png",
+      "sha256": "933cc8c4533b246af3871b593b0c6e099765e1e2b495f5f691ef64be19fe678d",
+      "prompt": "Square neutral head-and-shoulders character portrait for Depths, a dark medieval mine and cave RPG. Adult real human proportions, richly observed painted game art with a rough restrained late-90s RPG palette, dark materials, subtle wear and distinct facial planes. Large face readable on a 96-pixel card, near-frontal three-quarter view with both eyes and entire mouth readable, shoulders and full hairline in frame. Soft broad neutral gray studio lighting, even enough for a later game light layer. Genuine transparent background outside silhouette. One bust only, no background, frame, text, glow or strong rim light. Branna, a broad-faced mine rescue worker in her late forties. Cropped salt-and-pepper hair with a flat brushed side, sturdy neck, weathered brown skin, faint soot at the collar and a charcoal reinforced work coat over a dull ochre shirt. Warm, practical, steady and protective. Broad jaw and broad straight nose, relaxed mouth, direct grounded gaze."
+    },
+    "nessa": {
+      "file": "nessa.png",
+      "sha256": "83206e1402474e383038583f4adb1f0e0291897db8a7b91f6945cc141350fe12",
+      "prompt": "Square neutral head-and-shoulders character portrait for Depths, a dark medieval mine and cave RPG. Adult real human proportions, richly observed painted game art with a rough restrained late-90s RPG palette, dark materials, subtle wear and distinct facial planes. Large face readable on a 96-pixel card, near-frontal three-quarter view with both eyes and entire mouth readable, shoulders and full hairline in frame. Soft broad neutral gray studio lighting, even enough for a later game light layer. Genuine transparent background outside silhouette. One bust only, no background, frame, text, glow or strong rim light. Nessa, a lean female survey assistant in her thirties. Narrow angular face, uneven short practical dark-ash fringe with one small loose strand, cool olive wind-weathered skin and fine freckles, waxed gray-green short survey cape and a single folded map edge under her shoulder strap. Observant, slightly uncertain, composed. Clean brows, narrow chin, no hood, no makeup."
+    },
+    "maelin": {
+      "file": "maelin.png",
+      "sha256": "e3d0fdb845655e8edec5cadc7a6f6bb4a0deaf24296ec919f096f086be61b41a",
+      "prompt": "Square neutral head-and-shoulders character portrait for Depths, a dark medieval mine and cave RPG. Adult real human proportions, richly observed painted game art with a rough restrained late-90s RPG palette, dark materials, subtle wear and distinct facial planes. Large face readable on a 96-pixel card, near-frontal three-quarter view with both eyes and entire mouth readable, shoulders and full hairline in frame. Soft broad neutral gray studio lighting, even enough for a later game light layer. Genuine transparent background outside silhouette. One bust only, no background, frame, text, glow or strong rim light. Maelin, an unlicensed female scholar in her thirties. Copper-red hair in a low pinned coil with one loose wave, long expressive face, pale warm skin, dark intricately stitched travelling collar, dull pewter clasp and the corner of a battered closed notebook just visible at her shoulder. Quiet self-assurance and curiosity, restrained gothic silhouette, no elaborate jewellery."
+    }
+  }
+}
