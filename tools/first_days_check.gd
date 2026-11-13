@@ -95,7 +95,7 @@ func _initialize() -> void:
 	check("after going down today, no guide", not screen._guide.visible)
 	camp.rest(party)
 	screen._update_site_art()
-	check("day 3: the nurse and the smith have arrived, not the merchant", camp.site_present("treatment") and camp.site_present("smith") and not camp.site_present("supplies"))
+	check("day 3: only the smith arrives by day", not camp.site_present("treatment") and camp.site_present("smith") and not camp.site_present("supplies"))
 	check("...and the guide is gone", screen.guide_target() == "" and not screen._guide.visible)
 
 	# The first order: floor 1's way down waits for the report (#237).

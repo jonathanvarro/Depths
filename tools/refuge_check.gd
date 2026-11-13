@@ -76,7 +76,53 @@ func _initialize() -> void:
 	check("...leaves a torch", ps.supplies.count(load("res://data/items/torch.tres")) == torches + 1, result["text"])
 	check("...and keeps the expedition's levels", hero.level == 3)
 
+	main._party.place(map, cell)
+	main._run_event(cell)
+	check("the refuge opens the layered Overlook", main._overlook.visible and main._party.locked)
 	if dir != "":
+		await RenderingServer.frame_post_draw
+		root.get_texture().get_image().save_png(dir.path_join("overlook.png"))
+	main._overlook.target_activated.emit("stash")
+	check("the Overlook opens the persistent camp stash", main._overlook_stash.visible and main._overlook_stash._camp == main._camp_state)
+	main._overlook_stash.closed.emit()
+	main._overlook.target_activated.emit("fire")
+	check("the fire opens the original rest choice", main._event_screen.visible and not main._overlook.visible)
+	await main._event_screen._choose(Refuge.EVENT.choices[0])
+	main._event_screen._finish({"left": false, "ambush": []})
+	await process_frame
+	check("after resting the Overlook reopens with a cold fire", main._overlook.visible and not main._overlook.fire_burning)
+	main._overlook.target_activated.emit("onward")
+	check("the hold path returns to exploration on the same floor", not main._overlook.visible and not main._party.locked and main._depth == 3)
+
+	var camp = main._camp_state
+	camp.begin_arrivals()
+	check("the trainer is absent before the first Floor 3 return", not camp.site_present("trainer"))
+	camp.record_depth(3, false)
+	check("a wipe alone does not bring the trainer", not camp.site_present("trainer"))
+	camp.record_depth(3)
+	ps.supplies.gold = 100
+	check("the trainer takes gold and teaches an existing skill", camp.teach(ps, hero, "bulwark") and "bulwark" in hero.talents and ps.supplies.gold == 88)
+	check("a duplicate or early advanced lesson takes no gold", not camp.teach(ps, hero, "bulwark") and not camp.teach(ps, hero, "iron_hide") and ps.supplies.gold == 88)
+	camp.bounty_paid = true
+	check("the King bounty opens the advanced lesson", camp.teach(ps, hero, "iron_hide") and ps.supplies.gold == 64)
+
+	main._floors.erase(2)
+	main._go_to_floor(2, main.Arrival.FROM_ABOVE)
+	var pickup: RoomEvent = load("res://data/events/quest_treatment_supplies.tres")
+	check("the Floor 2 return objective uses the 3D pickup", main._map.events.values().has(pickup) and pickup.prop.resource_path.contains("treatment-supplies-v1"))
+	var supplies: SupplyItem = camp.TREATMENT_SUPPLIES
+	ps.supplies.add(supplies)
+	check("a recovered bundle opens the nurse once", camp.receive_treatment_supplies(ps) and camp.site_present("treatment") and ps.supplies.count(supplies) == 0 and not camp.receive_treatment_supplies(ps))
+
+	if dir != "":
+		main._camp.open(camp, ps)
+		await RenderingServer.frame_post_draw
+		root.get_texture().get_image().save_png(dir.path_join("trainer-shelter.png"))
+		main._camp.open_activity("trainer")
+		await RenderingServer.frame_post_draw
+		check("the trainer panel shows the portrait at phone size", main._camp._portrait.visible and main._camp._portrait.texture != null)
+		root.get_texture().get_image().save_png(dir.path_join("trainer.png"))
+		main._camp.hide()
 		for side in [Vector2i.LEFT, Vector2i.RIGHT, Vector2i.UP, Vector2i.DOWN]:
 			if map.is_passable(cell + side * 2):
 				main._party.place(map, cell + side * 2)

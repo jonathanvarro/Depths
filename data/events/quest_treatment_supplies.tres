@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="RoomEvent" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/event_choice.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/event_outcome.gd" id="3"]
+[ext_resource type="Resource" path="res://data/items/treatment_supplies.tres" id="4"]
+[ext_resource type="PackedScene" path="res://art/props/treatment-supplies-v1/scene.tscn" id="5"]
+
+[sub_resource type="Resource" id="outcome"]
+script = ExtResource("3")
+text = "The packet is still sealed. The relief camp can use the bundle."
+loot = Dictionary[SupplyItem, int]({ExtResource("4"): 1})
+
+[sub_resource type="Resource" id="choice"]
+script = ExtResource("2")
+label = "Take the treatment supplies"
+outcomes = Array[EventOutcome]([SubResource("outcome")])
+
+[resource]
+script = ExtResource("1")
+kind = 4
+title = "The relief bundle"
+clue = "A linen roll and a waxed packet lie beside the old track, tied with red cord."
+prop = ExtResource("5")
+choices = Array[EventChoice]([SubResource("choice")])
+min_depth = 99
+max_depth = 99

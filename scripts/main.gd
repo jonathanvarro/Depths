@@ -15,6 +15,7 @@ const Bestiary := preload("res://scripts/bestiary.gd")
 const Classes := preload("res://scripts/classes.gd")
 const Brews := preload("res://scripts/brews.gd")
 const Refuge := preload("res://scripts/refuge.gd")
+const TREATMENT_EVENT := preload("res://data/events/quest_treatment_supplies.tres")
 const GearModel := preload("res://scripts/gear_model.gd")
 const TURN_LEFT_ICON := preload("res://art/ui/controls-v1/turn-left.svg")
 const SPADE := preload("res://data/items/spade.tres")
@@ -399,6 +400,8 @@ var _prompt_no_action := Callable()
 var _pack: Control  # pack_screen.gd
 var _combat: Control  # combat_screen.gd
 var _event_screen: Control  # event_screen.gd
+var _overlook: Control
+var _overlook_stash: Control
 var _room_events = RoomEvents.new()
 var _expedition  # expedition.gd: this expedition's record (#17)
 var _results: Control  # results_screen.gd
@@ -575,6 +578,11 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if is_instance_valid(_overlook) and _overlook.visible:
+		if event.is_action_pressed("ui_cancel"):
+			_overlook_target("mine")
+		get_viewport().set_input_as_handled()
+		return
 	if _hint_mode == "ok" and event.is_action_pressed("ui_accept"):
 		_finish_hint()
 		get_viewport().set_input_as_handled()
@@ -646,6 +654,11 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 			refuge = placed["cell"]
 			if refuge != Vector2i(-1, -1):
 				marks["refuge"] = refuge
+		var treatment := Vector2i(-1, -1)
+		if depth == 2 and not use_debug_layout and not _camp_state.site_present("treatment"):
+			var placed: Dictionary = Refuge.place(stamped["layout"], depth, "O")
+			stamped["layout"] = placed["layout"]
+			treatment = placed["cell"]
 		_floors[depth] = DungeonMap.new(stamped["layout"], depth)
 		_floors[depth].marks = marks
 		_assign_events(_floors[depth])
@@ -653,6 +666,8 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 			_floors[depth].events[cell] = stamped["events"][cell]
 		if refuge != Vector2i(-1, -1):
 			_floors[depth].events[refuge] = Refuge.EVENT
+		if treatment != Vector2i(-1, -1):
+			_floors[depth].events[treatment] = TREATMENT_EVENT
 		_floors[depth].fight_groups = stamped["fights"]
 		_floors[depth].packages = stamped["placed"]
 		# Visible quests' sites, marked on the map once seen (owner playtest, #230).
@@ -792,6 +807,10 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 		return
 	if _group_at_home(cell) != null:
 		return  # a room fight's empty spot, its monsters out hunting (#171)
+	if _map.events.get(cell) == Refuge.EVENT:
+		_map.discovered[cell] = true
+		_run_event(cell)
+		return
 	var content: int = _map.enter(cell)
 	match content:
 		DungeonMap.Content.NONE:
@@ -837,11 +856,16 @@ func _assign_events(map) -> void:
 
 ## A room event (#16): clue, choices, "Leave it". Leaving keeps it for later;
 ## an ambush starts a fight.
-func _run_event(cell: Vector2i) -> void:
+func _run_event(cell: Vector2i, at_overlook := false) -> void:
 	var event: RoomEvent = _map.events.get(cell)
 	if event == null:
 		_show_message(DungeonMap.content_name(_map.content_at(cell)))
 		return
+	if event == Refuge.EVENT and not at_overlook:
+		_open_overlook(cell)
+		return
+	if at_overlook:
+		_map.enter(cell)
 	_party.locked = true
 	_begin_encounter(cell)
 	_room_events.depth = _depth  # deeper floors hold richer treasure (#42)
@@ -869,6 +893,11 @@ func _run_event(cell: Vector2i) -> void:
 	_party.locked = false
 	if result["left"]:
 		_map.triggered.erase(cell)
+		if at_overlook:
+			_open_overlook(cell)
+		return
+	if event == TREATMENT_EVENT and _party_state.supplies.count(CampState.TREATMENT_SUPPLIES) == 0:
+		_map.triggered.erase(cell)
 		return
 	# What the trap's art shows now follows what happened (#247): it went
 	# off; it was stepped round and is still set; or it was disarmed.
@@ -891,10 +920,61 @@ func _run_event(cell: Vector2i) -> void:
 		_say("search_body", true)
 		_refresh_tutorial_hint()
 	_expedition.events_resolved += 1
+	if at_overlook:
+		_open_overlook(cell)
 	if not result["ambush"].is_empty():
 		var types: Array[EnemyType] = []
 		types.assign(result["ambush"])
 		_start_combat(cell, types)
+
+
+func _open_overlook(cell: Vector2i) -> void:
+	_party.locked = true
+	if not is_instance_valid(_overlook):
+		var layer := CanvasLayer.new()
+		layer.layer = 3
+		add_child(layer)
+		_overlook = preload("res://art/camp/overlook-v1/scene.tscn").instantiate()
+		layer.add_child(_overlook)
+		_overlook.mouse_filter = Control.MOUSE_FILTER_STOP
+		_overlook.target_activated.connect(_overlook_target)
+		_overlook_stash = preload("res://scripts/stash_screen.gd").new()
+		layer.add_child(_overlook_stash)
+		_overlook_stash.closed.connect(func():
+			_overlook_stash.hide()
+			_save_now()
+			_open_overlook(_party.cell))
+	_overlook.set_safe_area(_safe_area_insets())
+	var insets := _safe_area_insets()
+	_overlook_stash.content.offset_left = insets.x
+	_overlook_stash.content.offset_top = insets.y
+	_overlook_stash.content.offset_right = -insets.z
+	_overlook_stash.content.offset_bottom = -insets.w
+	_overlook.set_text_scale(Settings.TEXT_SIZES.get(Settings.get_value("text_size"), 1.0))
+	_overlook.animate_lights = Settings.get_value("flashes")
+	_overlook.fire_burning = not _map.triggered.has(cell)
+	_overlook.set_occupants(Refuge.activities(_party_state.living_members(), _overlook.fire_burning))
+	_overlook.show()
+
+
+func _overlook_target(target: String) -> void:
+	var cell: Vector2i = _party.cell
+	_overlook.hide()
+	match target:
+		"fire":
+			if not _map.triggered.has(cell):
+				_run_event(cell, true)
+				return
+			_choose("The fire has burned down to ash.", [["Back", _open_overlook.bind(cell)]])
+		"stash":
+			_overlook_stash.open(_camp_state, _party_state)
+		"survey":
+			_choose("The scouts' notes place the fortress just below the refuge.",
+				[["Back", _open_overlook.bind(cell)]])
+		"mine", "onward":
+			_party.locked = false
+			if target == "onward":
+				_show_message("The way to the hold is down the nearby stair.")
 
 
 ## A fight (#14): enemies appear ahead in the first-person view and the
@@ -1800,13 +1880,13 @@ At camp, the quartermaster tops your torches back up to %d." % CampState.FREE_TO
 		await _conversation.play(COMMANDER_FIRST, _party_state.members[0], _camp_state, _party_state.members)
 	if ending == Expedition.Ending.WIPED:
 		_party_state.supplies.lose_everything()  # the campaign goes on (#41)
-	_start_new_expedition()
+	_start_new_expedition(ending == Expedition.Ending.RETURNED)
 	_wipe_pending = false
 
 
 ## Placeholder camp stop, then back into the cave from the top. The cave
 ## remembers what was explored, opened and cleared.
-func _start_new_expedition() -> void:
+func _start_new_expedition(returned_alive := true) -> void:
 	var returned_from_expedition := not _in_opening
 	if _in_opening:
 		for item in starting_supplies:  # restocked at camp (#69)
@@ -1833,14 +1913,18 @@ func _start_new_expedition() -> void:
 		if not hero.is_with_party():
 			_party_state.remove_member(hero)
 	_camp_state.rejoin(_party_state)
-	_camp_state.record_depth(_expedition.deepest)  # towards the scouts' routes (#79)
+	_camp_state.record_depth(_expedition.deepest, returned_alive)
 	var reward: int = _camp_state.collect_contract(_party_state)
 	var note := ""
+	if returned_from_expedition and returned_alive and _camp_state.receive_treatment_supplies(_party_state):
+		note = "The nurse has set up her tent with the supplies you brought back."
 	if _camp_state.queen_defeated and not _camp_state.bounty_paid:
 		_camp_state.bounty_paid = true
 		_party_state.supplies.gold += _camp_state.QUEEN_BOUNTY
 		_party_state.supplies.changed.emit()
-		note = "The camp cheers. Bounty paid: %d gold. Vael only asks about the way down." % _camp_state.QUEEN_BOUNTY
+		if note != "":
+			note += "\n"
+		note += "The camp cheers. Bounty paid: %d gold. Vael only asks about the way down." % _camp_state.QUEEN_BOUNTY
 	_camp_loop(reward, note)
 
 
@@ -4332,6 +4416,8 @@ func _set_debug(enabled: bool) -> void:
 
 ## Opens or closes the pack screen; like the map, the party waits meanwhile.
 func _set_pack(open: bool) -> void:
+	if open and is_instance_valid(_overlook) and (_overlook.visible or _overlook_stash.visible):
+		return
 	if open and (_prompt.visible or _full_map.visible or _in_combat or _event_screen.visible or _chest.visible):
 		return
 	if open and _camp.visible and _camp.is_busy():
@@ -4346,6 +4432,8 @@ func _set_pack(open: bool) -> void:
 ## Opens or closes the full-screen map. The party can't move while it's open,
 ## and it can't open over a yes/no prompt.
 func _set_full_map(open: bool) -> void:
+	if open and is_instance_valid(_overlook) and (_overlook.visible or _overlook_stash.visible):
+		return
 	if open and (_prompt.visible or _pack.visible or _in_combat or _event_screen.visible or _in_opening or _camp.visible):
 		return
 	_full_map.visible = open

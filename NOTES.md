@@ -13,6 +13,21 @@ Format:
 
 ---
 
+## 2026-11-12 – ChatGPT (camp art hookup, #190 / #238 / #240)
+
+- Did: connected the Overlook to the Floor 3 scouts' refuge. The fire uses
+  the existing once-per-expedition rest, the chests open the persistent
+  stash, and both paths return to exploration. The scene shows only
+  supported appearances for the actual party and respects reduced motion.
+- Added: trainer shelter and portrait after a successful Floor 3 return.
+  Bulwark, Steady hands and Steel nerves cost 12 gold each. The King bounty
+  unlocks Iron hide for 24 gold. A sealed supply bundle on Floor 2 brings
+  the nurse on the first successful return with it. Older nurse schedules
+  and camps with treatment already available keep their saved state.
+- Review: the private chair trial lifts the side and rear hem without
+  changing the rigs, clips or fixed stool. See `docs/camp-art-hookup.md`.
+  Named portrait animation is waiting on likeness and reuse sign-off.
+
 ## 2026-11-12 – Claude (#219 owner decisions: bracing, shields, buckler; #260 opened)
 
 - Owner decisions (2026-11-12): King difficulty stays; braced blows teach armour/shield half (food and light still drain while you stall); back-row armour stays as is; shields learn only from blows their guard stops; the smith sells a buckler.

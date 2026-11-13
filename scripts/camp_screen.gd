@@ -78,7 +78,9 @@ var _pack_button: Button
 var animate_lights := true:
 	set(value):
 		animate_lights=value
-		for site in _site_art.values():site.animate_lights=value
+		for id in _site_art:
+			if id != "trainer":
+				_site_art[id].animate_lights=value
 		if _dressing:_dressing.animate_lights=value
 
 
@@ -110,6 +112,7 @@ func _init() -> void:
 	var layout: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(DIR + "layout.json"))
 	for site in layout["sites"]:
 		_add_site(site)
+	_add_site({"id": "trainer", "label": "Skills trainer", "npc": "", "rect": [375, 64, 107, 56]})
 	_dressing=preload("res://art/camp/highres-v4/dressing.gd").new()
 	_canvas.add_child(_dressing)
 	_canvas.move_child(_dressing,_site_art.fire.get_index()+1)
@@ -252,9 +255,15 @@ func _add_site(site: Dictionary) -> void:
 	_sites[id] = site
 	var r: Array = site["rect"]
 	var rect := Rect2(r[0], r[1], r[2], r[3])
-	var art: Node2D = load(DIR + id + ".tscn").instantiate()
+	var art: Node2D
+	if id == "trainer":
+		art = preload("res://art/camp/skills-trainer-v1/shelter.tscn").instantiate()
+		art.position = Vector2(428, 112)
+		art.scale = Vector2.ONE * 0.56
+	else:
+		art = load(DIR + id + ".tscn").instantiate()
+		art.animate_lights = animate_lights
 	# Textures retain registered positions on the common landscape canvas.
-	art.animate_lights=animate_lights
 	_canvas.add_child(art)
 	_site_art[id]=art
 	if id=="supplies":
@@ -397,8 +406,7 @@ func _place_activity(room: Vector2) -> void:
 
 func _layout_activity() -> void:
 	_back.position = Vector2(_activity.size.x - 52, 10)
-	var npc: String = _sites.get(_current, {}).get("npc", "")
-	var left := 222.0 if npc != "" and _activity.size.x >= 520 else 18.0
+	var left := 222.0 if _portrait.texture and _activity.size.x >= 520 else 18.0
 	_portrait.visible = left > 18.0
 	_scroll.position = Vector2(left, 50)
 	_scroll.size = Vector2(_activity.size.x - left - 14, _activity.size.y - 62)
@@ -462,6 +470,8 @@ func open_activity(id: String) -> void:
 	_activity_title.text = site["label"]
 	var npc: String = site["npc"]
 	_portrait.texture = load(PORTRAIT_DIR + npc + ".png") if npc != "" else null
+	if id == "trainer":
+		_portrait.texture = preload("res://art/camp/skills-trainer-v1/trainer.png")
 	_layout_activity()
 	_activity.visible = true
 	_refresh_activity()
@@ -511,7 +521,33 @@ func _refresh_activity() -> void:
 		"rest": _tent()
 		"fire": _fire()
 		"cave": _cave_path()
+		"trainer": _trainer()
 	_fit()
+
+
+func _trainer() -> void:
+	_text("You’ve stood in the Marches. Tell me what nearly got you killed, and we’ll work on it.")
+	for hero: Companion in _party.living_members():
+		if not hero.uses_stats:
+			continue
+		_text(hero.display_name, AMBER)
+		for id: String in CampState.TRAINER_LESSONS:
+			if id == "iron_hide" and not _camp.bounty_paid:
+				continue
+			var lesson: Dictionary = Progression.SKILLS[id]
+			var price: int = CampState.TRAINER_LESSONS[id]
+			var known := id in hero.talents
+			var row := HBoxContainer.new()
+			var detail := _label("%s · %s" % [lesson.name, lesson.text], BODY, 13, TEXT)
+			detail.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+			detail.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			row.add_child(detail)
+			var button := _button("Known" if known else "%d gold" % price)
+			button.accessibility_name = "%s, %s" % [lesson.name, button.text]
+			button.disabled = known or not _camp.can_afford(_party, price)
+			button.pressed.connect(func(): _camp.teach(_party, hero, id))
+			row.add_child(button)
+			_body.add_child(row)
 
 
 ## Someone here has something to say (#123): a talk button at the top.
@@ -917,6 +953,8 @@ func _cave_path() -> void:
 		say.call("No one is fit to go. Rest in your tent.", AMBER)
 		return
 	say.call("Going: %s" % ", ".join(PackedStringArray(going.map(func(h): return h.display_name))), AMBER)
+	if not _camp.site_present("treatment"):
+		say.call("Bring back the relief bundle from the Fungal Caverns so the nurse can set up her tent.", MUTED)
 	var staying: Array = _party.living_members().filter(func(h): return h not in going)
 	if not staying.is_empty():
 		say.call("With the nurse: %s" % ", ".join(PackedStringArray(staying.map(func(h): return "%s (day %d)" % [h.display_name, _camp.ready_on(h)]))), MUTED)
