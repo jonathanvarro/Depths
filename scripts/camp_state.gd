@@ -79,12 +79,14 @@ var site_presence: Dictionary = {}
 var merchant_unloading := false
 ## Zero means no pending arrival (including older saves).
 var smith_arrival_day := 0
-## The nurse arrives on day 3 (owner playtest, #229). The merchant now
-## comes once the first order is reported (#237, Story.after_talk).
+## Pending nurse arrival from older saves. New campaigns bring her supplies.
 var traders_arrival_day := 0
-## When the merchant, nurse and smith arrive on a new story.
+## When the apprentice smith arrives on a new story.
 const ARRIVAL_DAY := 3
-const SITE_IDS := ["supplies", "treatment", "rest", "smith", "fire", "cave"]
+const SITE_IDS := ["supplies", "treatment", "rest", "smith", "fire", "cave", "trainer"]
+const TRAINER_LESSONS := {"bulwark": 12, "steady_hands": 12, "steel_nerves": 12, "iron_hide": 24}
+const TREATMENT_SUPPLIES := preload("res://data/items/treatment_supplies.tres")
+var training_unlocked := false
 ## Items and gear left in the tent; they survive a party wipe.
 var stash = Supplies.new()
 ## Companion -> the day they're fit again after treatment.
@@ -136,7 +138,24 @@ var _used_names: Array = []  # each name comes by once before any repeats
 
 
 func site_present(id: String) -> bool:
+	if id == "trainer":
+		return training_unlocked or bounty_paid
 	return id in SITE_IDS and bool(site_presence.get(id, true))
+
+
+func teach(party, hero: Companion, lesson: String) -> bool:
+	if not site_present("trainer") or hero == null or hero not in party.living_members() or not hero.uses_stats:
+		return false
+	if not TRAINER_LESSONS.has(lesson) or lesson in hero.talents or (lesson == "iron_hide" and not bounty_paid):
+		return false
+	var price: int = TRAINER_LESSONS[lesson]
+	if not can_afford(party, price):
+		return false
+	party.supplies.gold -= price
+	Progression.learn(hero, lesson)
+	party.supplies.changed.emit()
+	changed.emit()
+	return true
 
 
 ## No schedule is invented here; story code decides when a site arrives.
@@ -152,7 +171,7 @@ func begin_arrivals() -> void:
 	site_presence = {"smith": false, "supplies": false, "treatment": false}
 	merchant_unloading = false
 	smith_arrival_day = ARRIVAL_DAY
-	traders_arrival_day = ARRIVAL_DAY
+	traders_arrival_day = 0
 	changed.emit()
 
 
@@ -170,6 +189,14 @@ func can_trade() -> bool:
 ## The tutorial escape does not count; Main calls this for later returns.
 func expedition_returned() -> void:
 	set_merchant_unloading(false)
+
+
+func receive_treatment_supplies(party) -> bool:
+	if site_present("treatment") or not party.supplies.take(TREATMENT_SUPPLIES):
+		return false
+	traders_arrival_day = 0
+	set_site_present("treatment", true)
+	return true
 
 
 ## Seeds the camp and puts the first recruits by the fire.
@@ -302,7 +329,9 @@ func ready_on(hero: Companion) -> int:
 
 
 ## An expedition got down to `deepest`: it counts toward every route on the way.
-func record_depth(deepest: int) -> void:
+func record_depth(deepest: int, returned_alive := true) -> void:
+	if deepest >= 3 and returned_alive:
+		training_unlocked = true
 	for depth in ROUTE_PRICES:
 		if deepest >= depth:
 			floors_reached[depth] = times_reached(depth) + 1

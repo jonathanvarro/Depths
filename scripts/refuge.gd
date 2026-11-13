@@ -12,10 +12,29 @@ const EVENT := preload("res://data/events/refuge_scouts.tres")
 const DEPTH := 3
 
 
+static func activities(members: Array, burning: bool) -> Array[String]:
+	var result: Array[String] = []
+	var survey_taken := false
+	for hero: Companion in members:
+		if hero.display_name == "Sister Alwen":
+			survey_taken = true
+			break
+	for hero: Companion in members:
+		match hero.display_name:
+			"Mara": result.append("mara-warming" if burning else "mara-relaxing")
+			"Corin": result.append("corin-equipment")
+			"Sister Alwen": result.append("alwen-reading")
+			_:
+				if not survey_taken and hero.portrait_set and hero.portrait_set.face_id == &"fixer-a":
+					result.append("fixer-planning")
+					survey_taken = true
+	return result
+
+
 ## Marks the refuge on `layout`: the empty room cell closest to the stairs
 ## down, outside any fight's room. Returns {"layout", "cell"}; cell is
 ## (-1, -1) when the floor has no room for it.
-static func place(layout: PackedStringArray, depth: int) -> Dictionary:
+static func place(layout: PackedStringArray, depth: int, symbol := "R") -> Dictionary:
 	var map = DungeonMap.new(layout, depth)
 	var down: Vector2i = map.find_content(DungeonMap.Content.STAIRS_DOWN)
 	var out := {"layout": layout, "cell": Vector2i(-1, -1)}
@@ -34,7 +53,7 @@ static func place(layout: PackedStringArray, depth: int) -> Dictionary:
 		return out
 	var rows := PackedStringArray(layout)
 	var row := rows[best.y]
-	rows[best.y] = row.substr(0, best.x) + "R" + row.substr(best.x + 1)
+	rows[best.y] = row.substr(0, best.x) + symbol + row.substr(best.x + 1)
 	out["layout"] = rows
 	out["cell"] = best
 	return out

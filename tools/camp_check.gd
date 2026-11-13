@@ -86,7 +86,8 @@ func _initialize() -> void:
 	await create_timer(0.3).timeout
 	check("after the results comes the camp", main._camp.visible and main._camp_state.day == 1)
 	check("arriving heals nothing by itself", hero.health == 6 and wound in hero.injuries)
-	check("six labelled places", main._camp._buttons.size() == 6 and main._camp._buttons.values().all(func(b): return b.text != "" and b.size.x >= 44 and b.size.y >= 44))
+	var visible_places: Array = main._camp._buttons.values().filter(func(b): return b.visible)
+	check("six initial labelled places", visible_places.size() == 6 and visible_places.all(func(b): return b.text != "" and b.size.x >= 44 and b.size.y >= 44))
 	await _snap("clearing")
 	check("keyboard focus starts on a place", main._camp._buttons.values().any(func(b): return b.has_focus()))
 

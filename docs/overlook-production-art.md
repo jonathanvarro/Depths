@@ -7,8 +7,9 @@
 The owner selected the composition on 2026-10-31 and authorized all five next
 steps: clean landscape, separate camp objects, existing-companion activities,
 restrained effects/still mode, and phone interaction review. This delivers the
-standalone asset set and native scene. Live camp/story/stash/travel integration
-remains separate; the current surface camp and gameplay scripts are unchanged.
+standalone asset set and native scene. The Floor 3 scouts' refuge now uses
+it for the existing rest choice, stash access and a view toward the hold.
+See [camp hookup](camp-art-hookup.md) for the game flow.
 
 ## Files and registration
 
