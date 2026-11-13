@@ -29,5 +29,5 @@ def export(record, key, directory, sizes, colours):
 if __name__ == "__main__":
     record = json.loads((SOURCE / "generation.json").read_text(encoding="utf-8"))["assets"]
     export(record, "tome-discern", ROOT / "art/items/discern-v1", (64, 128), 64)
-    for name in ("branna", "nessa", "maelin"):
+    for name in ("branna", "nessa", "maelin", "maelin-v2", "maelin-v3"):
         export(record, name, ROOT / "art/concepts/named-cast-v1", (96, 192), 64)

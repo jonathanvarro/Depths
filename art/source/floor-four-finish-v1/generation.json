@@ -1,6 +1,6 @@
 {
   "tool": "built-in ImageGen",
-  "input": "text only",
+  "input": "text only unless a source image is listed",
   "assets": {
     "tome-discern": {
       "file": "tome-discern.png",
@@ -21,6 +21,17 @@
       "file": "maelin.png",
       "sha256": "e3d0fdb845655e8edec5cadc7a6f6bb4a0deaf24296ec919f096f086be61b41a",
       "prompt": "Square neutral head-and-shoulders character portrait for Depths, a dark medieval mine and cave RPG. Adult real human proportions, richly observed painted game art with a rough restrained late-90s RPG palette, dark materials, subtle wear and distinct facial planes. Large face readable on a 96-pixel card, near-frontal three-quarter view with both eyes and entire mouth readable, shoulders and full hairline in frame. Soft broad neutral gray studio lighting, even enough for a later game light layer. Genuine transparent background outside silhouette. One bust only, no background, frame, text, glow or strong rim light. Maelin, an unlicensed female scholar in her thirties. Copper-red hair in a low pinned coil with one loose wave, long expressive face, pale warm skin, dark intricately stitched travelling collar, dull pewter clasp and the corner of a battered closed notebook just visible at her shoulder. Quiet self-assurance and curiosity, restrained gothic silhouette, no elaborate jewellery."
+    },
+    "maelin-v2": {
+      "file": "maelin-v2.png",
+      "sha256": "5564421d463e5f25fcb35dca0c22e8fd08d21921e6f34720717372b88e2b0f7b",
+      "prompt": "Use case: stylized-concept. A new neutral head-and-shoulders likeness study for Maelin, adult unlicensed scholar and mage in Depths, a gritty medieval cave RPG. Imagine a field scholar who just recognized an anomaly and is privately delighted by it. Give her deep copper-red hair pulled into a rough short braid tucked behind her neck, with a distinct swept quiff and a few unkempt strands; subtle freckles and a slightly crooked narrow nose, hooded amber-brown eyes, a raised brow and the smallest closed-lip hint of a smile. Clearly adult in her mid-thirties, recognizably human, natural facial proportions. Worn plum-black travelling coat with a high asymmetric collar folded down on one side, a small run of faded aubergine embroidery, a bent pewter clasp and the scuffed corner of a notebook kept low at the outer shoulder if it fits. Rough, textured painted RPG portrait, bold facial planes and large readable shapes at 96 pixels. Desaturated earthy skin, copper hair, faded wine and charcoal fabric. Soft neutral diffuse light with readable eye sockets and a clean mouth for separately fitted blink and talk art later. Square composition, nearly frontal with a slight head turn, both eyes and mouth fully visible, crown and hair comfortably within the frame and face dominant, bust centered with full shoulder silhouette and generous transparent padding. Genuine transparent background. One bust, no text, border, backdrop, jewellery, spell glow, flames or colored rim light."
+    },
+    "maelin-v3": {
+      "file": "maelin-v3.png",
+      "sha256": "79381d9c54e46274baecc87f1bab0b05dae2a42ecb4a385ebf20bcbda92c170b",
+      "edit_target": "maelin-v2.png",
+      "prompt": "Use case: precise-object-edit. Edit the supplied transparent Maelin portrait, changing only the color of every visible hair strand, including the swept forelock, short tucked braid and flyaways, from copper red to natural dark dirty blonde. Use muted ash-beige and wheat blonde midtones, soft tan highlights, and darker cool taupe roots and shadows. Make the result unmistakably dark blonde at 96 pixels while preserving its gritty worn painterly texture. Hair only: absolutely preserve exact face, expression, skin color, eyebrows, eyes, coat, notebook, composition, scale, edge silhouette and existing transparent alpha. No red, orange, bright gold, platinum or color cast elsewhere. Same framing and transparent background."
     }
   }
 }

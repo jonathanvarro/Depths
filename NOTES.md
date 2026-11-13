@@ -13,6 +13,15 @@ Format:
 
 ---
 
+## 2026-11-12 – ChatGPT (named companion likenesses, #197–#199)
+
+- Owner approved Branna and Nessa, liked Maelin's revised likeness and
+  requested dirty-blonde hair. The new version keeps the swept braid,
+  raised brow and asymmetric plum-black collar. The gallery shows the
+  new colour and both earlier studies at 192 and 96 pixels.
+- Branna and Nessa are ready for facial layers. The Rook face assignment
+  remains open. See `docs/named-cast.md`.
+
 ## 2026-11-12 – Claude (#219 owner decisions: bracing, shields, buckler; #260 opened)
 
 - Owner decisions (2026-11-12): King difficulty stays; braced blows teach armour/shield half (food and light still drain while you stall); back-row armour stays as is; shields learn only from blows their guard stops; the smith sells a buckler.
