@@ -13,6 +13,16 @@ Format:
 
 ---
 
+## 2026-11-12 – Claude (#219 owner decisions: bracing, shields, buckler; #260 opened)
+
+- Owner decisions (2026-11-12): King difficulty stays; braced blows teach armour/shield half (food and light still drain while you stall); back-row armour stays as is; shields learn only from blows their guard stops; the smith sells a buckler.
+- Did:
+  - `CombatState._credit_blow` / `_shield_blocks` / `BRACED_MASTERY` (0.5): armour and shield credit from a landed blow, halved while bracing; the shield only when the blow comes from the front (the same test as its guard).
+  - `data/gear/buckler.tres` (bases.json buckler now `live`), in `SMITH_STOCK`; the smith's "coming once there are rules" shield line is gone.
+  - mastery_check: braced half; a blow from behind teaches armour but not the shield.
+  - Opened #260: back row melee with long weapons already works (spear), but ranged weapons and spells should grow with use (sling is built into the hero today).
+- Bot remeasure (10/hero, BOT_MASTERY): armour pace about as before (the bot rarely braces). The bot still never buys or wears a shield.
+
 ## 2026-11-12 – Claude (King's blow timing, camp buttons, bot findings, #257/#169/#119)
 
 - Did:

@@ -600,7 +600,6 @@ func _smith_list() -> void:
 			_camp.build_forge(_party)
 			_refresh_activity())
 		_body.add_child(fund)
-	_text("Coming once there are rules for them: %s." % ", ".join(PackedStringArray(CampState.SMITH_COMING)), MUTED)
 	_text("Bought gear goes in your pack; equip it from there.", MUTED)
 
 

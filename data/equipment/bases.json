@@ -339,7 +339,7 @@
         "health"
       ],
       "new": true,
-      "template": "wool_cape",
+      "live": "buckler",
       "price": 22,
       "description": "A small iron-rimmed shield, strapped to the back between fights.",
       "icon": "res://art/items/equipment-live-v1/buckler.png"

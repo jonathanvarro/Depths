@@ -188,6 +188,9 @@ var party  # party_state.gd
 var foes: Array[Foe] = []
 ## Gear mastery earned this fight (#192/#193): Equipment -> points, capped
 ## per item per fight. main.gd and the playtest bot award it afterwards.
+## A blow taken while bracing teaches armour and shield this much of a
+## normal one (owner, 2026-11-12, #219).
+const BRACED_MASTERY := 0.5
 var mastery_gain := {}
 var region := 1  # the floor's region, for how much a foe teaches
 ## Moves each foe made this fight, for the monster journal (#176): Foe -> [Intent].
@@ -1048,9 +1051,7 @@ func _carry_out(foe: Foe) -> Dictionary:
 		target.change_health(-damage)
 		target.change_strain(StrainRules.STRUCK)  # every blow shakes (#236)
 		Progression.note_deed(target, "struck")  # Stalwart, Iron hide (#233)
-		_credit(target.body, "struck", foe)  # armour learns from blows (#192)
-		if target.back and target.back.guard > 0:
-			_credit(target.back, "struck", foe)
+		_credit_blow(target, foe)  # armour and shield learn from blows (#192, #219)
 		outcome["hit"] = true
 		outcome["damage"] = damage
 		var verb: String = "brings down a heavy blow on" if heavy else ("lunges, jaw stretching, at" if reaching else foe.type.attack_verb)
@@ -1265,10 +1266,8 @@ func _versus_armour(weapon: Equipment, target: Foe, damage: int) -> int:
 ## from the front; Braced armour while bracing.
 func _gear_guard(foe: Foe, hero: Companion) -> int:
 	var extra := 0
-	if hero.back and hero.back.guard > 0:
-		var from_front := not field or side_of(foe) == "front" or line_to(foe) == facing
-		if from_front:
-			extra += hero.back.guard
+	if _shield_blocks(foe, hero):
+		extra += hero.back.guard
 	if hero.body and is_defending(hero):
 		extra += int(hero.body.traits.get("brace_armour", 0))
 	return extra
@@ -1284,14 +1283,29 @@ func _rear_damage(hero: Companion) -> float:
 	return rear
 
 
+## A shield's guard stops this foe's blow: it comes from the front.
+func _shield_blocks(foe: Foe, hero: Companion) -> bool:
+	return hero.back != null and hero.back.guard > 0 and (not field or side_of(foe) == "front" or line_to(foe) == facing)
+
+
+## A landed blow teaches the hero's armour, and their shield if its guard
+## stopped part of it (owner, 2026-11-12, #219). Taken while bracing, it
+## teaches half: bracing a weak foe on purpose is slow, not free.
+func _credit_blow(hero: Companion, foe: Foe) -> void:
+	var share := BRACED_MASTERY if is_defending(hero) else 1.0
+	_credit(hero.body, "struck", foe, share)
+	if _shield_blocks(foe, hero):
+		_credit(hero.back, "struck", foe, share)
+
+
 ## Mastery credit for `item` (#192): a hit, a miss, a kill, or a blow taken,
 ## scaled by how threatening the foe is for the region; capped per fight.
-func _credit(item: Equipment, kind: String, foe: Foe) -> void:
+func _credit(item: Equipment, kind: String, foe: Foe, share := 1.0) -> void:
 	if item == null or item.base_id == "":
 		return
 	var t: Dictionary = GearModel.tables()["mastery"]
 	var key := "weapon_credit" if item.slot == "weapon" else "armour_credit"
-	var amount: float = float(t[key].get(kind, 0.0)) * GearModel.threat_factor(foe.type.threat, region)
+	var amount: float = float(t[key].get(kind, 0.0)) * GearModel.threat_factor(foe.type.threat, region) * share
 	var cap: float = float(t[key]["per_fight_cap"])
 	mastery_gain[item] = minf(cap, float(mastery_gain.get(item, 0.0)) + amount)
 
@@ -1317,9 +1331,7 @@ func _many_bites(foe: Foe) -> Dictionary:
 		if from_behind(foe):
 			damage = ceili(damage * _rear_damage(target))
 		target.change_health(-damage)
-		_credit(target.body, "struck", foe)
-		if target.back and target.back.guard > 0:
-			_credit(target.back, "struck", foe)  # as in enemy_act (#219)
+		_credit_blow(target, foe)  # as in enemy_act (#219)
 		total += damage
 		hits.append("%s (%d)" % [target.display_name, damage])
 		if not target.is_alive():

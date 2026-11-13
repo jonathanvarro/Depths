@@ -56,9 +56,9 @@ const SMITH_STOCK: Array[Equipment] = [
 	preload("res://data/gear/frame_pack.tres"),
 	preload("res://data/gear/oilcloth_cloak.tres"),
 	preload("res://data/gear/wool_cape.tres"),
+	# Shields can be bought (owner, 2026-11-12, #219); worn on the back.
+	preload("res://data/gear/buckler.tres"),
 ]
-## Not for sale until shields have rules.
-const SMITH_COMING := ["a rough wooden shield (16g)"]
 ## Contracts the king's camp posts, one a day (#42).
 const CONTRACTS := [
 	{"enemy": "Goblin", "plural": "goblins", "count": 3, "reward": 15},

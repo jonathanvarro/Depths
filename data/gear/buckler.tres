@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Equipment" format=3]
+
+[ext_resource type="Texture2D" path="res://art/items/equipment-live-v1/buckler.png" id="icon"]
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="2_xy01i"]
+
+[resource]
+script = ExtResource("2_xy01i")
+icon = ExtResource("icon")
+display_name = "Iron-rimmed buckler"
+description = "A small iron-rimmed shield, strapped to the back between fights."
+attack_min = 0
+attack_max = 0
+price = 22
+slot = "back"
+guard = 1

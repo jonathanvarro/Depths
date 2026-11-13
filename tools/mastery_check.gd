@@ -95,6 +95,34 @@ func _initialize() -> void:
 	state.foes[0].type.accuracy = 1.0
 	state.enemy_act(state.foes[0])
 	check("a blow taken teaches the armour", state.mastery_gain.get(mara.body, 0.0) > 0.0)
+	# Bracing teaches half (owner, 2026-11-12, #219).
+	var open_blow = _fight(_item("iron_sword"), "goblin")
+	var braced_blow = _fight(_item("iron_sword"), "goblin")
+	var gains := []
+	for fight in [open_blow, braced_blow]:
+		var hero: Companion = fight.party.members[0]
+		hero.body = _item("studded_jerkin")
+		hero.back = _item("buckler")
+		hero.health = 999
+		if fight == braced_blow:
+			fight.hero_defend(hero)
+		fight._credit_blow(hero, fight.foes[0])
+		gains.append([fight.mastery_gain.get(hero.body, 0.0), fight.mastery_gain.get(hero.back, 0.0)])
+	check("a blow taken while bracing teaches armour and shield half", gains[0][0] > 0.0 and is_equal_approx(gains[1][0], gains[0][0] * 0.5) and is_equal_approx(gains[1][1], gains[0][1] * 0.5), gains)
+	# A shield learns only from blows its guard stops: from the front (#219).
+	var flank = _fight(_item("iron_sword"), "goblin")
+	var guarded: Companion = flank.party.members[0]
+	guarded.body = _item("studded_jerkin")
+	guarded.back = _item("buckler")
+	flank.field = true
+	flank.party_cell = Vector2i(5, 5)
+	flank.facing = Vector2i.UP
+	flank.foes[0].cell = Vector2i(5, 6)  # behind
+	flank._credit_blow(guarded, flank.foes[0])
+	check("a blow from behind teaches the armour but not the shield", flank.mastery_gain.get(guarded.body, 0.0) > 0.0 and flank.mastery_gain.get(guarded.back, 0.0) == 0.0)
+	flank.foes[0].cell = Vector2i(5, 4)  # in front
+	flank._credit_blow(guarded, flank.foes[0])
+	check("...one from the front teaches the shield", flank.mastery_gain.get(guarded.back, 0.0) > 0.0)
 	# The Borrowed Pack's many bites teach a shield too, as single blows do (#219).
 	var pack = _fight(_item("iron_sword"), "borrowed_pack")
 	var bitten: Companion = pack.party.members[0]
