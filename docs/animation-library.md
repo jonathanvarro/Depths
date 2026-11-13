@@ -41,6 +41,8 @@ separate staff release were checked in Godot.
 The [3D combat roster](combat-roster-3d.md) (#251, 2026-11-11) adds eleven
 board candidates. The clips are 24 fps and stored in
 `art/enemies/combat-roster-3d-v1`, with frame counts in its catalog.
+The Floor 4 readability pass broadens the lead figures' clothing silhouettes.
+The four party models retain the same rig joints and authored clips.
 
 | Roster additions | Clips in addition to idle, attack, hurt and fall |
 |---|---|

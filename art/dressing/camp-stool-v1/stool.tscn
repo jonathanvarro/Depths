@@ -1,0 +1,4 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="PackedScene" path="res://art/dressing/camp-stool-v1/stool.glb" id="1"]
+[node name="CampStool" type="Node3D"]
+[node name="WoodenStool" parent="." instance=ExtResource("1")]

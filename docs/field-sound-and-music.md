@@ -1,10 +1,10 @@
 # Field sound and deeper-cave music delivery · #217 / #167 / #54
 
 2026-11-03. Listening hub: `art/concepts/field-audio-v1/inspector.html`.
-This isolated branch supplies assets and a precise hookup list; it does not
-change live scripts/themes or Claude's concurrent model work. #217 remains open
-for hookup/mix review; #54/#167 retain their own outstanding integration/listening
-and non-audio requirements. No existing approved audio or game volumes changed.
+The field pack is now live through the floor themes and gameplay hooks. The
+November 11 regression rechecked passage, step and ambience assets, creature
+reactions, prayer cues, traps, Pack actions and the Effects bus. Listening and
+mix judgement remain open under #217 and #54.
 
 ## Delivered files
 

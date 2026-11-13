@@ -65,6 +65,12 @@ func _initialize() -> void:
 	var state = main._combat._state
 	var foe = state.foes[0]
 	check("on the board, a rat is its 3D model", FoeView.is_model(foe.node) and state.field and main._tactical.active)
+	var climbs: Array = main._level.find_children("*", "Node3D", true, false).filter(
+		func(node): return node.get_meta("asset_id", "") == "root-climb-up")
+	check("hanging climb roots clear the board", not climbs.is_empty() and climbs.all(
+		func(node): return not node.is_visible_in_tree()))
+	check("Mara uses the new board figure and material",
+		main._tactical._figure.scene_file_path.ends_with("/mara.tscn") and main._tactical._figure.palette_material.emission_enabled)
 	check("...feet on its tile", absf(foe.node.position.y) < 0.01 and Vector2i(roundi(foe.node.position.x / main.CELL_SIZE), roundi(foe.node.position.z / main.CELL_SIZE)) == foe.cell, foe.node.position)
 	var to_party: Vector3 = (main._party.global_position - foe.node.global_position)
 	to_party.y = 0.0
@@ -101,6 +107,8 @@ func _initialize() -> void:
 	check("...then leaves the board", not falling.node.visible)
 	await _end_fight(main)
 	await create_timer(1.2).timeout
+	check("climb roots return in first person", climbs.all(
+		func(node): return is_instance_valid(node) and node.is_visible_in_tree()))
 
 	# First person, on the dark stage (a lair, the gate, the queen, or the
 	# view off): the painted art, which the stage is framed for.
@@ -175,6 +183,8 @@ func _initialize() -> void:
 	# With the board off he has no painting: on the dark stage he is his
 	# model, standing on the floor (never lifted like a sprite).
 	Settings.set_value("tactical_view", false)
+	var eye: Camera3D = main._party.camera
+	var cave_mask := eye.cull_mask
 	main._queen_fight(main._party.cell)
 	await create_timer(1.4).timeout
 	state = main._combat._state
@@ -183,10 +193,17 @@ func _initialize() -> void:
 	check("...feet at the party's floor", absf(king.node.global_position.y - main._party.global_position.y) < 0.05, king.node.global_position.y)
 	check("...planting his staff to call his guards", main._combat._action_pose(king, main.CombatState.Intent.CALL, {}) == "plant")
 	check("...and raising his staff for the coin blow", main.CombatState.INTENT_TEXT[main.CombatState.Intent.CLEAVER] == "raising his staff")
+	var king_x := eye.unproject_position(king.node.global_position).x
+	var guard_x: Array = state.foes.filter(func(f): return f != king).map(
+		func(f): return eye.unproject_position(f.node.global_position).x)
+	check("...the guards flank the King on the dark stage", guard_x.min() < king_x and king_x < guard_x.max())
+	check("...the stage clears cave geometry and lights the King",
+		eye.cull_mask != cave_mask and king.node.find_children("*", "OmniLight3D", true, false).size() == 2)
 	await _snap("king")
 	main._fight_kind = ""  # no victory card in this check
 	main._combat.no_retreat = false
 	await _end_fight(main)
+	check("...the cave is visible again after the stage", eye.cull_mask == cave_mask)
 	Settings.set_value("tactical_view", true)
 	print("fails=", fails)
 	quit()

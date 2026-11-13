@@ -70,14 +70,18 @@ def make_hero(name, palette, animate):
     def panel(mesh, outline, y, depth, bone, base, edge):
         mesh.panel([(x*width, z*tall) for x,z in outline], y, depth, bone, base, edge)
 
-    loft(body, [(.78,.16,.11,0,.02),(.92,.18,.13,0,.015),(1.12,.19,.13,0,0),
-                (1.31,.24,.13,0,0),(1.40,.17,.11,0,0),(1.45,.078,.065,0,-.025)],
+    loft(body, [(.78,.17,.12,0,.02),(.92,.19,.15,0,.015),(1.12,.22,.16,0,0),
+                (1.31,.27,.175,0,.012),(1.40,.228,.155,0,.01),(1.45,.083,.078,0,-.025)],
          "spine", coat, highlight)
+    # A broad sewn shoulder yoke stays readable from directly above.
+    loft(body, [(1.30,.269,.179,0,.013),(1.386,.251,.166,0,.01),
+                (1.43,.158,.121,0,0),(1.453,.086,.081,0,-.02)],
+         "spine", highlight, coat, 9, .045)
     loft(body, [(.75,.16,.105,0,.02),(.88,.17,.12,0,.025),(.95,.15,.115,0,.018)],
          "root", "linen_dark", "pelt")
-    loft(body, [(.88,.177,.135,0,.015),(.932,.181,.137,0,.015)],
+    loft(body, [(.88,.19,.153,0,.015),(.932,.195,.154,0,.015)],
          "spine", "leather", "leather_light", 9)
-    panel(body, [(-.05,.882),(.055,.884),(.058,.928),(-.05,.93)], -.13, .021,
+    panel(body, [(-.05,.882),(.055,.884),(.058,.928),(-.05,.93)], -.144, .021,
           "spine", "brass_dark", "brass")
     loft(head, [(1.405,.056,.057,0,-.018),(1.49,.061,.066,0,-.023)],
          "head", "skin_shadow", "skin_warm")
@@ -99,15 +103,15 @@ def make_hero(name, palette, animate):
                  bone+"_"+side, base, light)
 
         knee_y, boot_y = -.06*sign, -.005-.07*sign
-        limb((.105,.04,.87),(.14,knee_y,.46),[(0,.097),(.43,.094),(1,.062)],
+        limb((.105,.04,.87),(.14,knee_y,.46),[(0,.101),(.43,.097),(1,.068)],
              "thigh","linen_dark","pelt")
         limb((.14,knee_y,.50),(.16,boot_y,.105),[(0,.065),(.4,.068),(1,.052)],
              "shin","pelt_dark","leather")
         stone(body,.16*sign,boot_y-.050,.070,.067,.126,.064,"foot_"+side,
               "wood_dark","leather",8)
-        limb((.206,0,1.35),(.315,-.037,1.085),[(0,.089),(.47,.074),(1,.056)],
+        limb((.206,0,1.35),(.315,-.037,1.085),[(0,.103),(.47,.088),(1,.066)],
              "upperarm",coat if name != "corin" else "linen",highlight)
-        limb((.312,-.04,1.113),(.29,-.24,.99),[(0,.059),(.58,.051),(1,.043)],
+        limb((.312,-.04,1.113),(.29,-.24,.99),[(0,.070),(.58,.061),(1,.048)],
              "forearm","linen_dark" if name == "alwen" else "leather","linen")
         stone(body,.29*sign,-.24,.988,.046,.055,.053,"hand_"+side,"skin_warm","skin_high",7)
     if name == "mara":
@@ -117,7 +121,7 @@ def make_hero(name, palette, animate):
                  "head","hair","hair_high")
         line(head,(-.071,-.043,1.711),(.082,-.095,1.631),[(0,.052),(.65,.038),(1,.014)],
              "head","hair_high","hair")
-        panel(body,[(-.174,1.36),(-.107,1.39),(.156,.935),(.09,.923)],-.136,.018,
+        panel(body,[(-.174,1.36),(-.107,1.39),(.156,.935),(.09,.923)],-.172,.028,
               "spine","leather","leather_light")
         stone(body,.15,.09,.93,.075,.075,.096,"spine","sack","leather_light")
         panel(equipment,[(-.318,.96),(-.254,.974),(-.251,1.128),(-.293,1.27),
@@ -129,7 +133,7 @@ def make_hero(name, palette, animate):
         panel(head,[(.034,1.659),(.051,1.684),(.056,1.624),(.045,1.608)],
               -.105,.014,"head","scar","skin_shadow")
         for x in (-.145,-.095,-.045,.01,.065,.12,.171):
-            line(body,(x,-.128,1.348-abs(x)*.17),(x*.87,-.137,.961),
+            line(body,(x,-.166,1.348-abs(x)*.17),(x*.87,-.151,.961),
                  [(0,.015),(.5,.016),(1,.009)],"spine","leather_light","cloth")
         stone(body,-.217,-.01,1.35,.115,.137,.063,"upperarm_R","leather","leather_light",7)
         panel(equipment,[(-.329,.948),(-.253,.942),(-.249,1.18),(-.265,1.55),
@@ -146,8 +150,8 @@ def make_hero(name, palette, animate):
                    (1.37,.215,.147,0,.013),(1.437,.096,.105,0,-.001)],
              "spine","wool","wool_light",10)
         panel(body,[(-.16,1.29),(.035,1.208),(.168,1.33),(.05,.952),(-.04,.96)],
-              -.142,.027,"spine","wool","linen_dark")
-        stone(body,.083,-.151,1.198,.029,.015,.037,"spine","brass_dark","brass_edge",6)
+              -.176,.032,"spine","wool","linen_dark")
+        stone(body,.083,-.182,1.198,.029,.015,.037,"spine","brass_dark","brass_edge",6)
         line(equipment,(-.31,-.248,.35),(-.293,-.23,1.59),
              [(0,.026),(.5,.032),(.84,.027),(1,.044)],"hand_R","wood","wood_light")
         line(equipment,(-.291,-.23,1.53),(-.34,-.219,1.68),[(0,.041),(.65,.025),(1,.014)],
@@ -161,7 +165,7 @@ def make_hero(name, palette, animate):
         stone(body,.003,.155,1.359,.164,.078,.046,"spine","sack","linen")
         for x in (-.113,.113):
             panel(body,[(x-.025,1.37),(x+.023,1.38),(x+.018,.919),(x-.016,.922)],
-                  -.139,.017,"spine","leather","leather_light")
+                  -.175,.024,"spine","leather","leather_light")
         line(equipment,(-.32,-.26,.79),(-.29,-.241,1.37),[(0,.033),(.64,.050),(1,.064)],
              "hand_R","wood","wood_light")
     meshes = [part.finish(label,rig,palette) for part,label in

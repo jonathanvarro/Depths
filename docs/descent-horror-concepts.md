@@ -55,10 +55,13 @@ the revised forms remain proposals, and no final encounter is chosen.
 
 **2026-10-25: Underhound selected first for production**, by Codex at the owner's
 request. [Production scope and three-pose brief](underhound-production.md).
-This is a subject selection; final sprites, encounter and story assignment are
-not delivered by the selection. The other nine selections remain open.
-The owner likes the overall
-set and requested these two specific revisions. Revised Bell/Sleeper visual
+**2026-11-11 status.** All ten concept sheets are available for review.
+Underhound, Borrowed Pack and Marrow Shepherd now have dedicated game sprite
+families in their enemy resources. Underhound and Borrowed Pack appear in the
+Floor 5–6 encounter pools. The Shepherd's birth pose and unfinished hound
+have a [separate production handoff](shepherd-and-flow-gate.md).
+
+The owner likes the overall set and requested the two revisions above. Revised Bell/Sleeper visual
 review is pending; general praise does not assign story roles or production
 work to every creature. Working names remain working names.
 Review the family relationship, escalating wrongness, physical materials and
