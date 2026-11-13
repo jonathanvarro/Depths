@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1")
 icon = ExtResource("2")
-display_name = "Treatment supplies"
-description = "Clean linen and a sealed packet for the relief camp. Bring the bundle back to the surface."
+display_name = "Medicinal supplies"
+description = "Dried medicinal caps and clean linen, wrapped for the relief camp. Bring the bundle back to the surface."
 effect = 6
-a_name = "a bundle of treatment supplies"
+a_name = "a bundle of medicinal supplies"

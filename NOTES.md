@@ -21,9 +21,9 @@ Format:
   supported appearances for the actual party and respects reduced motion.
 - Added: trainer shelter and portrait after a successful Floor 3 return.
   Bulwark, Steady hands and Steel nerves cost 12 gold each. The King bounty
-  unlocks Iron hide for 24 gold. A sealed supply bundle on Floor 2 brings
-  the nurse on the first successful return with it. Older nurse schedules
-  and camps with treatment already available keep their saved state.
+  unlocks Iron hide for 24 gold. Medicinal supplies from the Fungal
+  Caverns bring the nurse on the first successful return with them. Older
+  nurse schedules and camps with treatment available keep their saved state.
 - Review: the private chair trial lifts the side and rear hem without
   changing the rigs, clips or fixed stool. See `docs/camp-art-hookup.md`.
   Named portrait animation is waiting on likeness and reuse sign-off.

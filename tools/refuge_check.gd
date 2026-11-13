@@ -111,7 +111,10 @@ func _initialize() -> void:
 	var pickup: RoomEvent = load("res://data/events/quest_treatment_supplies.tres")
 	check("the Floor 2 return objective uses the 3D pickup", main._map.events.values().has(pickup) and pickup.prop.resource_path.contains("treatment-supplies-v1"))
 	var supplies: SupplyItem = camp.TREATMENT_SUPPLIES
-	ps.supplies.add(supplies)
+	check("the medicine is named and illustrated in the pack", supplies.display_name == "Medicinal supplies" and supplies.icon != null)
+	var count_before: int = ps.supplies.count(supplies)
+	rooms.resolve(ps, pickup.choices[0])
+	check("taking the medicine adds it to the pack", count_before == 0 and ps.supplies.count(supplies) == 1)
 	check("a recovered bundle opens the nurse once", camp.receive_treatment_supplies(ps) and camp.site_present("treatment") and ps.supplies.count(supplies) == 0 and not camp.receive_treatment_supplies(ps))
 
 	if dir != "":

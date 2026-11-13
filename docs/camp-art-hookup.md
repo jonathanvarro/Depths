@@ -9,9 +9,9 @@ continues with its current levels, time and party.
 The trainer appears at the relief camp after a successful Floor 3 return.
 Bulwark, Steady hands and Steel nerves cost 12 gold each. The King bounty
 adds Iron hide for 24 gold. The panel uses the delivered shelter and portrait.
-The sealed treatment bundle is near the lower stair on Floor 2 while the
-nurse is absent. Carry it back to the surface to open treatment. Its exact
-contents are left unspecified, and the existing save format stores site state.
+A bundle of dried medicinal caps and clean linen lies near the lower stair
+in the Fungal Caverns (Floor 2) while the nurse is absent. Carry it back to
+the surface to open treatment. The existing save format stores site state.
 
 The private jacket trial raises the side and rear hem on both fits and keeps
 the published stool geometry, animation tracks and body rigs fixed. Compare

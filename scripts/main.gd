@@ -1917,7 +1917,7 @@ func _start_new_expedition(returned_alive := true) -> void:
 	var reward: int = _camp_state.collect_contract(_party_state)
 	var note := ""
 	if returned_from_expedition and returned_alive and _camp_state.receive_treatment_supplies(_party_state):
-		note = "The nurse has set up her tent with the supplies you brought back."
+		note = "The nurse has set up her tent with the medicines you brought back."
 	if _camp_state.queen_defeated and not _camp_state.bounty_paid:
 		_camp_state.bounty_paid = true
 		_party_state.supplies.gold += _camp_state.QUEEN_BOUNTY

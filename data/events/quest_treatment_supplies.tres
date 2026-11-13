@@ -8,18 +8,18 @@
 
 [sub_resource type="Resource" id="outcome"]
 script = ExtResource("3")
-text = "The packet is still sealed. The relief camp can use the bundle."
+text = "The dried caps are still sealed. The nurse can use them to treat wounds."
 loot = Dictionary[SupplyItem, int]({ExtResource("4"): 1})
 
 [sub_resource type="Resource" id="choice"]
 script = ExtResource("2")
-label = "Take the treatment supplies"
+label = "Take the medicinal supplies"
 outcomes = Array[EventOutcome]([SubResource("outcome")])
 
 [resource]
 script = ExtResource("1")
 kind = 4
-title = "The relief bundle"
+title = "The medicine bundle"
 clue = "A linen roll and a waxed packet lie beside the old track, tied with red cord."
 prop = ExtResource("5")
 choices = Array[EventChoice]([SubResource("choice")])

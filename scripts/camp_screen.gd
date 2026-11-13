@@ -954,7 +954,7 @@ func _cave_path() -> void:
 		return
 	say.call("Going: %s" % ", ".join(PackedStringArray(going.map(func(h): return h.display_name))), AMBER)
 	if not _camp.site_present("treatment"):
-		say.call("Bring back the relief bundle from the Fungal Caverns so the nurse can set up her tent.", MUTED)
+		say.call("Bring back the medicinal supplies from the Fungal Caverns so the nurse can set up her tent.", MUTED)
 	var staying: Array = _party.living_members().filter(func(h): return h not in going)
 	if not staying.is_empty():
 		say.call("With the nurse: %s" % ", ".join(PackedStringArray(staying.map(func(h): return "%s (day %d)" % [h.display_name, _camp.ready_on(h)]))), MUTED)
