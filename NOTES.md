@@ -13,6 +13,14 @@ Format:
 
 ---
 
+## 2026-11-12 – ChatGPT (named companion likenesses, #197–#199)
+
+- Owner approved Branna, Nessa and Maelin's dirty-blonde revision. Use
+  `maelin-v3.png` for her rig. The gallery shows the approved likeness
+  and both earlier studies at 192 and 96 pixels.
+- All three are ready for facial layers. The Rook face assignment remains
+  open. See `docs/named-cast.md`.
+
 ## 2026-11-12 – Claude (#219 owner decisions: bracing, shields, buckler; #260 opened)
 
 - Owner decisions (2026-11-12): King difficulty stays; braced blows teach armour/shield half (food and light still drain while you stall); back-row armour stays as is; shields learn only from blows their guard stops; the smith sells a buckler.
