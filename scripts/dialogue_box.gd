@@ -1,11 +1,12 @@
 extends PanelContainer
 ## A hero's spoken line, shown beside the portrait cards while the portrait
 ## talks (#57). Lines fade after a time that suits their length.
+const UiTheme := preload("res://scripts/ui_theme.gd")
 
 const SECONDS_PER_CHARACTER := 0.06
 const MIN_SECONDS := 2.5
-const COLOR_NAME := Color("dbb477")
-const COLOR_TEXT := Color("e8d9b0")
+const COLOR_NAME := Color("d7b174")
+const COLOR_TEXT := Color("e6dac1")
 
 var _name: Label
 var _text: Label
@@ -15,8 +16,8 @@ var _tween: Tween
 func _init() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.05, 0.045, 0.04, 0.85)
-	style.border_color = Color(0.35, 0.27, 0.18, 0.9)
+	style.bg_color = UiTheme.overlay_colour(0.85)
+	style.border_color = UiTheme.EDGE
 	style.set_border_width_all(1)
 	style.set_content_margin_all(10)
 	add_theme_stylebox_override("panel", style)

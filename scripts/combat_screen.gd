@@ -4,6 +4,7 @@ extends Control
 ## movement pad). Runs the fight with combat_state.gd and shows what happens
 ## as slashes, claw marks, numbers and icons rather than sentences (#105).
 ## Layout follows ChatGPT's combat study (art/expedition-v1/combat-*.png).
+const UiTheme := preload("res://scripts/ui_theme.gd")
 
 signal finished(result: int)  # combat_state.gd Result
 ## After each enemy turn (the opening reacts to the spider's poison, #59).
@@ -16,7 +17,7 @@ const CombatFx := preload("res://scripts/combat_fx.gd")
 const Spells := preload("res://scripts/spells.gd")
 const Sounds := preload("res://scripts/sounds.gd")
 const FoeView := preload("res://scripts/foe_view.gd")  # sprites or 3D models (#251)
-const COLOR_TEXT := Color("e8d9b0")
+const COLOR_TEXT := Color("e6dac1")
 const COLOR_DIM_TEXT := Color(0.85, 0.8, 0.7, 0.75)
 const ENEMY_PAUSE := 0.45
 const TAG_HEIGHT := 0.9  # metres above an enemy's feet
@@ -1144,8 +1145,8 @@ func _build() -> void:
 	panel.grow_horizontal = Control.GROW_DIRECTION_BEGIN
 	panel.grow_vertical = Control.GROW_DIRECTION_BEGIN
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.06, 0.05, 0.05, 0.85)
-	style.border_color = Color(0.35, 0.27, 0.18, 0.9)
+	style.bg_color = UiTheme.overlay_colour(0.85)
+	style.border_color = UiTheme.EDGE
 	style.set_border_width_all(1)
 	style.set_content_margin_all(10)
 	panel.add_theme_stylebox_override("panel", style)
@@ -1176,7 +1177,7 @@ func _build() -> void:
 	# Gold-edged so it's noticed (owner playtest: easy to miss).
 	var edge := StyleBoxFlat.new()
 	edge.bg_color = Color(0.16, 0.12, 0.07, 0.95)
-	edge.border_color = Color("e0b45a")
+	edge.border_color = Color("d7b174")
 	edge.set_border_width_all(2)
 	edge.set_corner_radius_all(4)
 	for state_name in ["normal", "hover", "pressed"]:

@@ -78,3 +78,16 @@ local probe results are in `build/local-background-check-v1`.
 
 Engine references: [headless command-line option](https://docs.godotengine.org/en/stable/tutorials/editor/command_line_tutorial.html)
 and [Godot 4.7.2 Windows window activation implementation](https://github.com/godotengine/godot/blob/4.7.2-stable/platform/windows/display_server_windows.cpp).
+
+## The check suite (2026-11-11)
+
+`bash tools/run_checks.sh` runs every check headless. With `--shots DIR`
+(real renderer, screenshots saved to DIR) each check now goes through
+`background_godot.py` on its own hidden desktop instead of an off-screen
+window. Set `PYTHON` if `python` isn't on the path. Logs for the last
+check are in `%TEMP%/depths-checks`.
+
+Godot's console build starts the real game as a second process. The helper
+runs both inside a Windows job (2026-11-11): a timeout stops every process
+the test started, closing the job stops any it left behind, and the
+foreground check covers the game window, not just the console.

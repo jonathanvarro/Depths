@@ -4,13 +4,14 @@ extends Control
 ## row per hero - health, experience, a level-up mark, nerves and new
 ## injuries - in place of the old text ledger. Also shows short story cards
 ## (show_brief).
+const UiTheme := preload("res://scripts/ui_theme.gd")
 
 signal continue_pressed
 
 const Expedition := preload("res://scripts/expedition.gd")
 const Progression := preload("res://scripts/progression.gd")
 const Glyphs := preload("res://art/ui/backlog96-v1/glyphs.gd")
-const COLOR_TEXT := Color("e8d9b0")
+const COLOR_TEXT := Color("e6dac1")
 const COLOR_DIM_TEXT := Color(0.85, 0.8, 0.7, 0.85)
 const COLOR_LOSS := Color("e28c7c")
 const COLOR_GAIN := Color("bfe3a8")
@@ -98,9 +99,14 @@ func _init() -> void:
 	_chips.add_theme_constant_override("v_separation", 8)
 	_chips.alignment = FlowContainer.ALIGNMENT_CENTER
 	_ledger.add_child(_chips)
+	# The heroes sit in a panel, not straight on the painting (#169).
+	var frame := PanelContainer.new()
+	frame.add_theme_stylebox_override("panel", UiTheme.FieldKit.plate(UiTheme.overlay_colour(0.8), UiTheme.EDGE, 12))
+	frame.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_ledger.add_child(frame)
 	_heroes = VBoxContainer.new()
 	_heroes.add_theme_constant_override("separation", 8)
-	_ledger.add_child(_heroes)
+	frame.add_child(_heroes)
 	_button = Button.new()
 	_button.custom_minimum_size = Vector2(260, 60)
 	_button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
@@ -222,15 +228,7 @@ func _hero_row(row: Dictionary, quote := "") -> Control:
 ## An icon and a number: green-edged for gains, red for losses.
 func _chip(parent: Control, icon: Texture2D, text: String, good: bool, colour := Color(0, 0, 0, 0)) -> void:
 	var chip := PanelContainer.new()
-	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.08, 0.07, 0.06, 0.9)
-	style.border_color = colour if colour.a > 0 else (Color("6fae5a") if good else Color("b5463a"))
-	style.set_border_width_all(1)
-	style.set_corner_radius_all(4)
-	style.set_content_margin_all(4)
-	style.content_margin_left = 6
-	style.content_margin_right = 8
-	chip.add_theme_stylebox_override("panel", style)
+	chip.add_theme_stylebox_override("panel", UiTheme.chip(good, colour))
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 4)
 	chip.add_child(row)

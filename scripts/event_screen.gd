@@ -2,12 +2,13 @@ extends CenterContainer
 ## Shows a room event (#16): its clue, its choices and "Leave it". Each
 ## choice spends time and shows what happened; investigations add to the
 ## clue and keep the event open. Emits `finished` when the player is done.
+const UiTheme := preload("res://scripts/ui_theme.gd")
 
 ## {"left": bool, "ambush": Array[EnemyType]}
 signal finished(result: Dictionary)
 
 const Sounds := preload("res://scripts/sounds.gd")
-const COLOR_TEXT := Color("e8d9b0")
+const COLOR_TEXT := Color("e6dac1")
 const COLOR_DIM_TEXT := Color(0.85, 0.8, 0.7, 0.85)
 
 var _rules  # room_events.gd
@@ -30,8 +31,8 @@ func _init() -> void:
 	var panel := PanelContainer.new()
 	panel.custom_minimum_size = Vector2(560, 0)
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.05, 0.045, 0.04, 0.94)
-	style.border_color = Color(0.35, 0.27, 0.18, 0.9)
+	style.bg_color = UiTheme.overlay_colour(0.94)
+	style.border_color = UiTheme.EDGE
 	style.set_border_width_all(1)
 	style.set_content_margin_all(18)
 	panel.add_theme_stylebox_override("panel", style)
@@ -153,15 +154,7 @@ func _clear_chips() -> void:
 func _add_chips(changes: Array) -> void:
 	for change in changes:
 		var chip := PanelContainer.new()
-		var style := StyleBoxFlat.new()
-		style.bg_color = Color(0.1, 0.085, 0.07)
-		style.border_color = Color("6fae5a") if change["good"] else Color("b5463a")
-		style.set_border_width_all(1)
-		style.set_corner_radius_all(4)
-		style.set_content_margin_all(4)
-		style.content_margin_left = 6
-		style.content_margin_right = 8
-		chip.add_theme_stylebox_override("panel", style)
+		chip.add_theme_stylebox_override("panel", UiTheme.chip(change["good"]))
 		var row := HBoxContainer.new()
 		row.add_theme_constant_override("separation", 4)
 		chip.add_child(row)

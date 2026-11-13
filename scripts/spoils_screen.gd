@@ -19,7 +19,7 @@ const ARRIVALS := {
 	"pierce": preload("res://art/ui/results-v1/pierce-frames.tres"),
 	"fire": preload("res://art/ui/results-v1/fire-frames.tres"),
 }
-const TEXT := Color("e8d9b0")
+const TEXT := Color("e6dac1")
 const MUTED := Color(0.85, 0.8, 0.7, 0.7)
 const AMBER := Color("f2c94c")
 const HOLD := 2.6  # seconds before it closes by itself

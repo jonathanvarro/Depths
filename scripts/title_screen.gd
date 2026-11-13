@@ -8,8 +8,8 @@ const DISPLAY := preload("res://art/fonts/title-cinzel.tres")
 const ACTION := preload("res://art/fonts/action-source-sans.tres")
 const BODY := preload("res://art/fonts/body-source-sans.tres")
 const TEXT := Color("e6dac1")
-const MUTED := Color("b3a78f")
-const AMBER := Color("dbb477")
+const MUTED := Color("b7ab93")
+const AMBER := Color("d7b174")
 const GAME_SCENE := "res://scenes/main.tscn"
 
 ## Preview the iPhone layout (notch margins, no Quit) on Windows.

@@ -243,7 +243,12 @@ func _hover_text(entry:Dictionary) -> String:
 func _show_details() -> void:
 	_clear(_detail_text);_clear(_detail_actions);_detail_icon.texture=null;_primary=null
 	var entry:=selected_entry()
-	if _key==null or entry.is_empty():return
+	if _key==null or entry.is_empty():
+		# Nothing picked: a short line, and the strip stays slim (#169).
+		_details.custom_minimum_size.y=56
+		_detail_text.add_child(_wrapped("Tap an item to see it here.",17,FieldKit.MUTED))
+		return
+	_details.custom_minimum_size.y=100
 	_detail_icon.texture=_texture(entry)
 	var tier:=_tier(entry)
 	_detail_text.add_child(_wrapped((tier.capitalize()+" · " if tier!="common" else "")+_name(entry),21))

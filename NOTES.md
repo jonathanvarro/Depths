@@ -13,6 +13,14 @@ Format:
 
 ---
 
+## 2026-11-12 – ChatGPT (PR #259 merge resolution)
+
+- Did: brought the latest interface fixes into the Floor 4 art branch and
+  kept both sets of handoff notes below.
+- Checked: headless import, fortress and enemy models, plus the camp
+  regression on the private desktop at 1278 × 590. All assertions passed.
+  The camp fixture logged a missing item metadata warning during the stash check.
+
 ## 2026-11-11 – ChatGPT (Discern, board figures and the King's dark stage)
 
 - Did: bound Discern's new split-seal picture and the four delivered prayer
@@ -26,6 +34,32 @@ Format:
   in the local review.
 - Next: [Floor 4 art handoff](docs/floor-four-art-finish.md) lists the open
   visual decisions, contact work and listening review.
+
+## 2026-11-11 – Claude (interface fixes applied, #169/#51)
+
+- Did: owner approved all eight audit fixes; applied them (details in `docs/interface-audit.md`, after board `docs/interface-audit-v1/after.jpg`).
+  - Camp fire/tent/nurse/cave panel now lives in screen space (`CampScreen._place_activity`), scales with Text size, scrolls.
+  - `UiTheme` gained `TEXT/MUTED/AMBER/EDGE`, `overlay_colour()`, `GOOD/BAD`, `chip()`; old near-duplicate colours and panel recipes replaced in the screen scripts and main.gd's hint card.
+  - Results hero rows in a panel; Preparation framed (no Close: the party has already left camp); quest log empty note centred with wider paper margins; Settings puts Text size first; trade strip slim with a hint when empty.
+- Checks: full suite failed 0; camp/first_days/batch rerun after the last preparation tweak.
+- Watch out: the floating "+12 XP" on Results still drifts outside the new panel (animation). The camp clearing's own buttons (Pack, Save & exit) are still small on phones; not part of the eight.
+
+## 2026-11-11 – Claude (interface audit for owner approval, #169/#51; 3D status; #253 follow-up)
+
+- Did: audited every screen at desktop/phone, Normal/Larger: `docs/interface-audit.md` + `docs/interface-audit-v1/board.jpg`, captured by `tools/ui_audit_capture.gd` (hidden desktop; not in the suite). Eight findings; the worst is camp fire/tent/nurse/cave text at ~8 px on phones, unaffected by Text size. Nothing applied: #169 asks for owner approval first.
+- 3D sets (#225/#246/#247/#250/#252/#255/#251): already live via b27dd96 and PR #258; posted status on each. Only owner review remains, plus 3D art for twelve foes in #251.
+- `background_godot.py` now runs Godot in a kill-on-close job: the console build's child game process survived a timeout before.
+- Next: owner approves/edits the audit fixes; then apply 1, then 2–3 via UiTheme, then 4–8.
+
+## 2026-11-11 – Claude (check screenshots on a hidden desktop, closes #253)
+
+- Did: PR #254 (the hidden-desktop launcher) was already merged. The last gap was `tools/run_checks.sh --shots`, which still opened an off-screen but real window. It now runs each check through `tools/testing/background_godot.py`. Tried with teardown/fortress: passes, real screenshots, `test_was_foreground` false. Plain `run_checks.sh` stays headless.
+
+## 2026-11-11 – Claude (stray TextureRect at exit, #249)
+
+- Did: the leftover was `ConversationScreen._portrait`, a TextureRect kept only for tools to read and never put in the scene, so nothing freed it. The screen now frees it when it goes (`_notification` PREDELETE). Shutdown no longer reports the CanvasItem RID or the 2 leaked objects.
+- New `tools/teardown_check.gd` (in the suite): frees Main after floor 2 and fails if any stray node is left; it failed before the fix.
+- Watch out: headless, `tools/exploration_mist_check.gd` stops after the floor seed without printing its result (it isn't in the suite; it wants a real renderer). The remaining exit lines (NavMeshGeometryParser RIDs, a Thread, static strings) are Godot's own and appear for every script run.
 
 ## 2026-11-11 – Claude (committed the #234 survey-site follow-up)
 
