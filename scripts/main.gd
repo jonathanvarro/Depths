@@ -1968,9 +1968,7 @@ func _start_new_expedition(returned_alive := true) -> void:
 		_camp_state.bounty_paid = true
 		_party_state.supplies.gold += _camp_state.QUEEN_BOUNTY
 		_party_state.supplies.changed.emit()
-		if note != "":
-			note += "\n"
-		note += "The camp cheers. Bounty paid: %d gold. Vael only asks about the way down." % _camp_state.QUEEN_BOUNTY
+		note = "The camp cheers. Bounty paid: %d gold. Vael only asks about the way down." % _camp_state.QUEEN_BOUNTY
 	_camp_loop(reward, note)
 
 
