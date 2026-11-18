@@ -20,6 +20,10 @@ Format:
   existing rules and alternate painted scene.
 - Bitter Moss now has a dedicated fresh and scraped 3D prop in the real
   Floor 2 quest. See `docs/early-creatures-3d.md` for the model and prop review.
+## 2026-11-18 – Claude (full suite after the 11-17 batch)
+
+- Full suite: 70 of 73 passed first time. Fixed the three: `merchant_nurse` replies now use summary labels with a line per starting hero (builder updated, rebuilt); held_light_check sets first person (the default view is now above, #248); small_items_check counts the four new smith weapons in the forge's fine stock. All three pass now.
+
 
 ## 2026-11-18 – ChatGPT (goblin models and view toggle, #251)
 

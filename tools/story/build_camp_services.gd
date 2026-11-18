@@ -11,9 +11,11 @@ const NURSE := "res://art/camp/highres-v4/nurse.png"
 const SMITH := "res://art/camp/highres-v4/apprentice.png"
 
 
-func _reply(label: String, next := -1, quest := "", stage := -1, flag := "") -> ConversationReply:
+func _reply(label: String, next := -1, quest := "", stage := -1, flag := "", said_by := {}, accepts := "") -> ConversationReply:
 	var r := ConversationReply.new()
 	r.label = label
+	r.said_by = said_by
+	r.accepts = accepts
 	r.next = next
 	r.quest = quest
 	r.stage = stage
@@ -42,10 +44,19 @@ func _initialize() -> void:
 	var O := Quests.Stage.OFFERED
 	_save("merchant_nurse", "The merchant", MERCHANT, [
 		_page("The merchant watches your party limp past his stall. \"You need a proper nurse up here, not my bandages. I know one - she'll come with my next wagon. But she won't set foot in a camp without bitter moss for her salves, and I can't get it.\"", [
-			_reply("\"Where does it grow?\"", 1)]),
+			_reply("Where does it grow?", 1, "", -1, "", {
+				"Mara": "\"Bitter moss. Where does it grow?\"",
+				"Corin": "\"A nurse would be worth a walk. Where does it grow?\"",
+				"Sister Alwen": "\"I know the stuff. Where does it grow down here?\""})]),
 		_page("\"In the damp caverns, the second floor down - pale stuff on the wet rock, smells like old pennies. Bring me a good handful and I'll send word to her.\"", [
-			_reply("\"I'll find it.\"", -1, "healing_moss", A),
-			_reply("\"Not now.\"", -1, "healing_moss", O),
+			_reply("I'll find it", -1, "healing_moss", A, "", {
+				"Mara": "\"I'll find it.\"",
+				"Corin": "\"I'll bring you a handful. Send for her.\"",
+				"Sister Alwen": "\"I'll gather it myself. She'll be needed.\""}, "healing_moss"),
+			_reply("Not now", -1, "healing_moss", O, "", {
+				"Mara": "\"Not now.\"",
+				"Corin": "\"Later. We've other business down there.\"",
+				"Sister Alwen": "\"Not yet. Ask me again.\""}),
 		])])
 	_save("nurse_arrival", "The nurse", NURSE, [
 		_page("A woman in a patched apron is unpacking jars beside the far tent, sorting the bitter moss into neat bundles. \"You're the ones who brought this? Good. It's fresh.\"", [

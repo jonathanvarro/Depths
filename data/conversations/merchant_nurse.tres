@@ -7,8 +7,13 @@
 
 [sub_resource type="Resource" id="Resource_bbytc"]
 script = ExtResource("2_22qip")
-label = "\"Where does it grow?\""
+label = "Where does it grow?"
 next = 1
+said_by = {
+"Corin": "\"A nurse would be worth a walk. Where does it grow?\"",
+"Mara": "\"Bitter moss. Where does it grow?\"",
+"Sister Alwen": "\"I know the stuff. Where does it grow down here?\""
+}
 
 [sub_resource type="Resource" id="Resource_y3lla"]
 script = ExtResource("1_i8cd2")
@@ -17,15 +22,26 @@ replies = Array[ExtResource("2_22qip")]([SubResource("Resource_bbytc")])
 
 [sub_resource type="Resource" id="Resource_nblyd"]
 script = ExtResource("2_22qip")
-label = "\"I'll find it.\""
+label = "I'll find it"
 quest = "healing_moss"
 stage = 2
+said_by = {
+"Corin": "\"I'll bring you a handful. Send for her.\"",
+"Mara": "\"I'll find it.\"",
+"Sister Alwen": "\"I'll gather it myself. She'll be needed.\""
+}
+accepts = "healing_moss"
 
 [sub_resource type="Resource" id="Resource_h0s87"]
 script = ExtResource("2_22qip")
-label = "\"Not now.\""
+label = "Not now"
 quest = "healing_moss"
 stage = 1
+said_by = {
+"Corin": "\"Later. We've other business down there.\"",
+"Mara": "\"Not now.\"",
+"Sister Alwen": "\"Not yet. Ask me again.\""
+}
 
 [sub_resource type="Resource" id="Resource_su7re"]
 script = ExtResource("1_i8cd2")
