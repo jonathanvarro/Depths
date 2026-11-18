@@ -13,6 +13,20 @@ Format:
 
 ---
 
+## 2026-11-18 – ChatGPT (goblin models and view toggle, #251)
+
+- Resolved the model branch against the view toggle. The Captain's dark
+  stage switches to first person before applying its lighting and cull mask.
+
+## 2026-11-17 – ChatGPT (Gate Captain and Goblin Brute, #251)
+
+- Built two rigged goblin models with distinct equipment and combat poses.
+  The Captain has a brass horn rally and a raised cleaver warning.
+  The Brute raises a two-handed maul and lowers it when recovering.
+- The Brute uses the model on the overhead board. The Captain's lair retains
+  its dark stage and uses the Captain model with 3D enemies enabled. The
+  earlier paintings remain available through the 3D-enemy setting.
+- Rebuild, editable masters and local review in `docs/goblin-elites-3d.md`.
 ## 2026-11-18 – Claude (the named cast and bringing back the dead, #180/#201)
 
 - Owner decisions (2026-11-17): resume the named cast, with random recruits still filling gaps; the nurse can revive a fallen companion only if their body was recovered, for a price and a lasting scar.

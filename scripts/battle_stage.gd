@@ -62,7 +62,7 @@ var _clock := 0.0
 var _motion := true
 var _camera: Camera3D
 var _cave_mask := 0
-var _king_stage := false
+var _isolate_foes := false
 
 
 func _init() -> void:
@@ -110,26 +110,26 @@ func _fit_quad() -> void:
 
 
 ## Fog surges in; the cave fades out. `surge` false gives a plain fade.
-func enter(surge := true, isolate_king := false) -> void:
+func enter(surge := true, isolate_foes := false) -> void:
 	_motion = surge
 	_clock = 0.0
 	_material.set_shader_parameter("phase", 0.0)
 	_material.set_shader_parameter("surge", 1.0 if surge else 0.0)
 	visible = true
 	set_process(surge)
-	_king_stage = isolate_king
-	if _king_stage:
+	_isolate_foes = isolate_foes
+	if _isolate_foes:
 		_cave_mask = _camera.cull_mask
 	await _go(1.0, ENTER_TIME)
-	if _king_stage:
+	if _isolate_foes:
 		_camera.cull_mask = KING_STAGE_LAYER
 
 
 ## The fog sinks back; the cave fades in.
 func exit() -> void:
-	if _king_stage:
+	if _isolate_foes:
 		_camera.cull_mask = _cave_mask
-		_king_stage = false
+		_isolate_foes = false
 	await _go(0.0, EXIT_TIME)
 	visible = false
 
@@ -160,14 +160,14 @@ static func raise(node: Node) -> void:
 		node.render_priority = FOE_PRIORITY
 
 
-## The King's 3D body needs a depth buffer clear of cave walls once the
-## curtain is up. The painted guards share the stage, with their own silhouettes.
-static func dress_king_stage_foe(node: Node3D, king: bool) -> void:
+## A 3D foe needs a depth buffer clear of cave walls once the curtain is up.
+## Its painted allies share the stage layer.
+static func dress_stage_foe(node: Node3D, lit_model: bool) -> void:
 	for mesh: GeometryInstance3D in node.find_children("*", "GeometryInstance3D", true, false):
 		mesh.layers = KING_STAGE_LAYER
 	if node is GeometryInstance3D:
 		node.layers = KING_STAGE_LAYER
-	if king:
+	if lit_model:
 		_king_light(node, Vector3(-1.05, 1.95, 1.40), Color("f3c88e"), 3.4)
 		_king_light(node, Vector3(.85, 1.5, -.75), Color("b0bbbe"), 2.0)
 
