@@ -28,8 +28,8 @@ const FIXER_AIM := -0.05  # weaker in a fight
 const FIXER_TREASURE := 1  # one more find in a treasure room
 const ABOUT := {
 	"Melee": "Front row. Armour and health; little awareness, no magic.",
-	"Scout": "Back row. Hears some fights before they notice the party and always spots traps. Light or medium armour.",
-	"Mage": "Prays: a few casts each trip, more prayers from tomes. Light armour only; no awareness.",
+	"Scout": "Back row. Hears some fights before they notice the party and always spots traps. Heavy armour slows them more.",
+	"Mage": "Prays: a few casts each trip, more prayers from tomes. Armour past light slows them more; no awareness.",
 	"Fixer": "Weaker in a fight, but better prices, more treasure, and clears rubble without a tool.",
 }
 
@@ -49,9 +49,28 @@ static func skills(role: String) -> Array:
 	return SKILLS.get(of(role), [])
 
 
-## Why `hero` can't wear `item`, or "".
+## Armour heavier than a class is used to slows it more; Melee carry heavy
+## armour better (owner, 2026-11-17, #192: anyone may wear any weight).
+## Class -> weight -> extra initiative lost (negative: less).
+const ARMOUR_DRAG := {
+	"Melee": {"heavy": -1},
+	"Scout": {"heavy": 1},
+	"Fixer": {"heavy": 1},
+	"Mage": {"medium": 1, "heavy": 2},
+}
+
+
+static func armour_drag(hero: Companion, item: Equipment) -> int:
+	if hero == null or item == null or item.slot != "body" or item.base_id == "":
+		return 0
+	var weight: String = load("res://scripts/gear_model.gd").base(item.base_id).get("weight", "")
+	return int(ARMOUR_DRAG.get(of(hero.role), {}).get(weight, 0))
+
+
+## Why `hero` can't wear `item`, or "". Any body armour fits anyone now
+## (it slows them instead: armour_drag); the back slot keeps its rules.
 static func refuses(hero: Companion, item: Equipment) -> String:
-	if item == null or item.base_id == "" or item.slot not in ["body", "back"]:
+	if item == null or item.base_id == "" or item.slot != "back":
 		return ""
 	var gear = load("res://scripts/gear_model.gd")
 	var allowed: Dictionary = gear.tables()["bases"].get("classes", {}).get(of(hero.role).to_lower(), {})

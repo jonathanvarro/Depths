@@ -79,7 +79,7 @@ func _initialize() -> void:
 	await _to_camp(main, main.Expedition.Ending.RETURNED)
 	var camp = main._camp_state
 	check("returning to camp autosaves at camp", SaveGame.read().get("at_camp", false))
-	var recruit: Companion = camp.candidates[0]
+	var recruit: Companion = camp.candidates.filter(func(c): return c.named_id == "")[0]  # a random recruit (the named cast have still portraits, #180)
 	camp.hire(ps, recruit)
 	camp.treat(hero)
 	ps.supplies.gold = 12

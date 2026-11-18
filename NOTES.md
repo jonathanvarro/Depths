@@ -27,6 +27,30 @@ Format:
   its dark stage and uses the Captain model with 3D enemies enabled. The
   earlier paintings remain available through the 3D-enemy setting.
 - Rebuild, editable masters and local review in `docs/goblin-elites-3d.md`.
+## 2026-11-18 – Claude (the named cast and bringing back the dead, #180/#201)
+
+- Owner decisions (2026-11-17): resume the named cast, with random recruits still filling gaps; the nurse can revive a fallen companion only if their body was recovered, for a price and a lasting scar.
+- Did:
+  - `scripts/named_cast.gd`: Branna (Melee; after the commander's report), Rook (Fixer, Fixer-a rig; after meeting the merchant), Nessa (Scout; first floor-2 return), Maelin (Mage; after the bitter moss). They come to the fire once each (`CampState.named_met`) and wait there; the daily rotation skips them. `Companion.named_id`. Faces: the #197–#199 likenesses copied to `art/portraits/named-cast-v1` as still portraits (no blink/talk rig yet); Rook uses fixer-a (not yet reserved from the random pool).
+  - Resurrection: a companion who falls while the party gets home is carried out (`CampState.carry_home`, main's return loop; not on a wipe). At the nurse: "Bring X back" for 40 gold; they lose 3 maximum health for good, wake shaken, and wait by the fire. `fallen` is saved.
+  - Checks: new `tools/named_cast_check.gd`; save_check hires a random recruit (named ones have still portraits).
+- Open: wiped parties' bodies can't yet be recovered on a later trip; named portraits need eye/mouth rigs (ChatGPT, #197–#200); named companions use their class's voice lines.
+
+## 2026-11-18 – Claude (any armour weight for anyone, #192)
+
+- Owner decision (2026-11-17): anyone may wear heavy armour, with penalties; Melee shrug off part of it.
+- Did: `Classes.refuses` no longer locks body armour (the back slot keeps its rules). `Classes.ARMOUR_DRAG` / `armour_drag`: heavy costs a Scout or Fixer 1 more initiative, a Mage 1 for medium and 2 for heavy; a Melee 1 less for heavy. `Companion.effective_initiative` applies it. bases.json "classes" body lists now allow all weights. Class descriptions updated. gear_check covers it. There is no dodge stat in the game, so the penalty is initiative only.
+
+## 2026-11-18 – Claude (slings, bows, staff and wand, #260)
+
+- Owner decisions (2026-11-17): ranged weapon items that learn mastery; spells don't gain their own mastery, the staff or wand does.
+- Did:
+  - New weapons (bases.json + data/gear): Leather sling (2–3, reach, no Strength), Short bow (region 2, 2–4), Prayer wand (1–2, reach, focus), Oak staff (1–3, melee, focus). Alwen's Split walking staff is now a base and a focus. All sold by the smith.
+  - `Equipment.focus`; `Spells.focus_power` (+1 at the focus's mastery 3, +2 at 6): Mend +2 per step, Holy light +10, Watchful eye +20, Bind +1 turn at 6. Casting in a fight credits the focus like a hit (mastery stays combat-only).
+  - New Scout and Fixer recruits carry a sling item, Mages a wand (the built-in `reach` stays for old saves).
+  - Placeholder icons drawn in `art/items/ranged-focus-v1` (sling, short bow, wand; oak staff from starter-v1). Proper icons requested on #260.
+  - magic_check covers focus power, cast credit and recruit kit; gear_check counts the new bases.
+- Bot (5/hero): no stuck runs.
 
 ## 2026-11-18 – Claude (strategic / exploration view toggle, #248)
 

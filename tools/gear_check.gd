@@ -29,7 +29,7 @@ func _initialize() -> void:
 	var rng := RandomNumberGenerator.new()
 	rng.seed = 21
 	var sword := _gear("iron_sword")
-	check("bases are the smith's weapons and armour, no back gear", GearGen.bases().size() == 7 and GearGen.bases().all(func(b): return b.slot in ["weapon", "body"]))
+	check("bases are the smith's weapons and armour (with the back row's, #260), no back gear", GearGen.bases().size() == 11 and GearGen.bases().all(func(b): return b.slot in ["weapon", "body"]))
 
 	# Fine.
 	var fine := GearGen.make(sword, "fine", rng)
@@ -130,5 +130,19 @@ func _initialize() -> void:
 		for i in 4:
 			await process_frame
 		root.get_texture().get_image().save_png(dir + "/gear_" + tag + "_pack.png")
+	# Any armour weight, for anyone (owner, 2026-11-17, #192): heavier than a
+	# class is used to slows it more; Melee carry heavy armour better.
+	var Classes = load("res://scripts/classes.gd")
+	var GM = load("res://scripts/gear_model.gd")
+	var heavy: Equipment = GM.generate(rng, "goblin_scale", "ordinary")
+	var light_coat: Equipment = GM.generate(rng, "quilted_coat", "ordinary")
+	var mage := Companion.new(); mage.role = "Mage"; mage.initiative = 10
+	var melee := Companion.new(); melee.role = "Melee"; melee.initiative = 10
+	check("a Mage may wear heavy armour now", Classes.refuses(mage, heavy) == "")
+	mage.body = heavy
+	melee.body = heavy.duplicate()
+	check("...but it slows a Mage more than a Melee", mage.effective_initiative() < melee.effective_initiative(), [mage.effective_initiative(), melee.effective_initiative()])
+	mage.body = light_coat
+	check("...and light armour costs a Mage nothing extra", Classes.armour_drag(mage, light_coat) == 0)
 	print("fails=", fails)
 	quit()

@@ -86,6 +86,8 @@ signal learned_skill(id: String)
 @export var weakness := ""
 ## The campaign's first hero (Mara): can't be dismissed at camp.
 @export var founder := false
+## One of the named cast (#180): their id in named_cast.gd, or "".
+@export var named_id := ""
 ## A main hero (#83): falling leaves them unconscious, not dead - carried
 ## by the party until a draught or a rest revives them.
 @export var main_hero := false
@@ -337,7 +339,8 @@ func effective_initiative() -> int:
 	for item in [weapon, body]:
 		if item:
 			speed += int(item.traits.get("initiative", 0))
-	return initiative + speed - (body.initiative_penalty if body else 0) - (back.initiative_penalty if back else 0)
+	var armour: int = maxi(0, body.initiative_penalty + load("res://scripts/classes.gd").armour_drag(self, body)) if body else 0  # #192
+	return initiative + speed - armour - (back.initiative_penalty if back else 0)
 
 
 ## Taken off every blow: toughness, talents and body armour (#47, #93).

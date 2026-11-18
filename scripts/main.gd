@@ -1888,6 +1888,8 @@ func _start_new_expedition() -> void:
 	# with the nurse rejoin (#41).
 	for hero: Companion in _party_state.members.duplicate():
 		if not hero.is_with_party():
+			if not hero.is_alive() and not hero.main_hero and not _wipe_pending:
+				_camp_state.carry_home(hero)  # the others carried them out (#180)
 			_party_state.remove_member(hero)
 	_camp_state.rejoin(_party_state)
 	_camp_state.record_depth(_expedition.deepest)  # towards the scouts' routes (#79)
@@ -2025,7 +2027,7 @@ func _save_now() -> void:
 ## Everything a save needs, as plain data.
 func _save_data() -> Dictionary:
 	var people: Array = []  # every hero object once; referenced by index
-	for hero in _party_state.members + _camp_state.left_behind + _camp_state.candidates:
+	for hero in _party_state.members + _camp_state.left_behind + _camp_state.candidates + _camp_state.fallen:
 		if hero not in people:
 			people.append(hero)
 	var index := func(hero): return people.find(hero)
@@ -2062,7 +2064,8 @@ func _save_data() -> Dictionary:
 		"party": party.map(func(h): return index.call(h)),
 		"time": _party_state.time_elapsed,
 		"supplies": supplies,
-		"camp": SaveGame.pack_object(_camp_state, ["stash", "candidates", "left_behind", "recovering", "rng"]),
+		"camp": SaveGame.pack_object(_camp_state, ["stash", "candidates", "left_behind", "recovering", "rng", "fallen"]),
+		"fallen": _camp_state.fallen.map(func(h): return index.call(h)),
 		"stash": SaveGame.pack_object(_camp_state.stash),
 		"candidates": _camp_state.candidates.map(func(h): return index.call(h)),
 		"left_behind": _camp_state.left_behind.map(func(h): return index.call(h)),
@@ -2091,6 +2094,7 @@ func _restore(data: Dictionary) -> void:
 	SaveGame.unpack_into(_camp_state.stash, data["stash"])
 	_camp_state.candidates.assign(data["candidates"].map(func(i): return people[i]))
 	_camp_state.left_behind.assign(data["left_behind"].map(func(i): return people[i]))
+	_camp_state.fallen.assign(data.get("fallen", []).map(func(i): return people[i]))  # carried home (#180)
 	_camp_state.recovering = {}
 	for pair in data["recovering"]:
 		_camp_state.recovering[people[pair[0]]] = pair[1]

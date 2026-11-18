@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Equipment" format=3]
+
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/items/ranged-focus-v1/wand.png" id="icon"]
+
+[resource]
+script = ExtResource("1")
+icon = ExtResource("icon")
+display_name = "Prayer wand"
+description = "A thin blackthorn rod, worn smooth. A weak bolt from the back row, and a Mage's prayers grow with it."
+attack_min = 1
+attack_max = 2
+accuracy_bonus = 0.0
+price = 14
+reach = true
+force = false
+strike = "smash"
+focus = true

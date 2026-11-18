@@ -1078,7 +1078,7 @@ func _show_spells() -> void:
 			if not Spells.SPELLS[id]["fight"]:
 				continue
 			var button := _button("%s (%d)" % [Spells.name_of(id), caster.casts])
-			button.tooltip_text = Spells.describe(id)
+			button.tooltip_text = Spells.describe(id, caster)
 			button.disabled = only_action != "" or (id == "bind" and (_target == null or not _target.is_alive()))
 			if id == "mend" and _state.party.most_hurt() == null:
 				button.disabled = true
