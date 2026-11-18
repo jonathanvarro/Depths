@@ -41,6 +41,66 @@ func _end_fight(main) -> void:
 		g += 1
 
 
+func _check_goblin_elites(main) -> void:
+	var brute: EnemyType = load("res://data/enemies/goblin_brute.tres")
+	var captain: EnemyType = load("res://data/enemies/gate_captain.tres")
+	main._fight_kind = ""
+	main._start_combat(main._party.cell, [brute] as Array[EnemyType])
+	await create_timer(1.2).timeout
+	var foe = main._combat._state.foes[0]
+	var intent = main.CombatState.Intent
+	main._combat.keep_clear.text = ""
+	check("the Brute uses its 3D model on the board", main._combat._state.field and FoeView.is_model(foe.node))
+	foe.intent = intent.HEAVY
+	await process_frame
+	await process_frame
+	check("heavy intent shows the Brute's held wind-up instead of its attack", FoeView.current(foe.node) == "wind-up")
+	var camera := root.get_camera_3d()
+	var body := camera.unproject_position(foe.node.global_position + Vector3.UP)
+	var tag_rect: Rect2 = main._combat._tags[foe].get_global_rect()
+	check("the Brute's board tag sits beside the body", body.x < tag_rect.position.x or body.x > tag_rect.end.x)
+	check("the Brute has a distinct heavy swing", main._combat._action_pose(foe, intent.HEAVY, {}) == "heavy")
+	await _snap("brute_wind_up")
+	foe.intent = intent.RECOVER
+	await process_frame
+	await process_frame
+	check("recover intent shows the Brute's lowered maul", FoeView.current(foe.node) == "recover")
+	await _snap("brute_recover")
+	await _end_fight(main)
+	await create_timer(1.0).timeout
+
+	var lair: QuestPackage = load("res://data/packages/lair_captain.tres")
+	var eye: Camera3D = main._party.camera
+	var cave_mask := eye.cull_mask
+	for enabled in [true, false]:
+		Settings.set_value("enemy_models", enabled)
+		main._lair_fight(main._party.cell, lair)
+		await create_timer(1.2).timeout
+		var state = main._combat._state
+		foe = state.foes.filter(func(f): return f.type == captain)[0]
+		check("the Captain's lair stays on the dark stage", not state.field)
+		if enabled:
+			main._combat.keep_clear.text = ""
+			check("the Captain's lair has the grounded model and its ally", FoeView.is_model(foe.node)
+				and absf(foe.node.global_position.y - main._party.global_position.y) < .05 and state.foes.size() > 1)
+			check("local light and a clear stage keep the Captain visible", eye.cull_mask != cave_mask
+				and foe.node.find_children("*", "OmniLight3D", true, false).size() == 2)
+			foe.intent = intent.RALLY
+			await process_frame
+			await process_frame
+			check("the Captain holds the horn up before rallying", FoeView.current(foe.node) == "rally")
+			check("rally dispatches to the horn clip", main._combat._action_pose(foe, intent.RALLY, {}) == "horn")
+			check("the Captain has a distinct heavy cleave", main._combat._action_pose(foe, intent.HEAVY, {}) == "heavy")
+			await _snap("captain_rally")
+		else:
+			check("with models off the Captain's lair uses the existing sprite", FoeView.sprite_of(foe.node) != null)
+		main._fight_kind = ""  # skip the hoard overlay in the fixture
+		await _end_fight(main)
+		await create_timer(1.0).timeout
+		check("the Captain's stage restores the cave camera", eye.cull_mask == cave_mask)
+	Settings.set_value("enemy_models", true)
+
+
 func _initialize() -> void:
 	var args := OS.get_cmdline_user_args()
 	tag = args[0] if args.size() > 0 else "desk"
@@ -205,5 +265,6 @@ func _initialize() -> void:
 	await _end_fight(main)
 	check("...the cave is visible again after the stage", eye.cull_mask == cave_mask)
 	Settings.set_value("tactical_view", true)
+	await _check_goblin_elites(main)
 	print("fails=", fails)
 	quit()

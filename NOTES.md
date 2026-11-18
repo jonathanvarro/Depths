@@ -13,6 +13,16 @@ Format:
 
 ---
 
+## 2026-11-17 – ChatGPT (Gate Captain and Goblin Brute, #251)
+
+- Built two rigged goblin models with distinct equipment and combat poses.
+  The Captain has a brass horn rally and a raised cleaver warning.
+  The Brute raises a two-handed maul and lowers it when recovering.
+- The Brute uses the model on the overhead board. The Captain's lair retains
+  its dark stage and uses the Captain model with 3D enemies enabled. The
+  earlier paintings remain available through the 3D-enemy setting.
+- Rebuild, editable masters and local review in `docs/goblin-elites-3d.md`.
+
 ## 2026-11-12 – Claude (#219 owner decisions: bracing, shields, buckler; #260 opened)
 
 - Owner decisions (2026-11-12): King difficulty stays; braced blows teach armour/shield half (food and light still drain while you stall); back-row armour stays as is; shields learn only from blows their guard stops; the smith sells a buckler.

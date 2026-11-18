@@ -86,7 +86,7 @@ func verify(app, entry: Dictionary) -> void:
 				await capture(app,"%s-%s-%d" % [name,pose,index])
 		if pose == "idle":
 			idle_start = first
-		if pose in ["idle","walk","run"]:
+		if loop == Animation.LOOP_LINEAR:
 			check(displacement(first,last) < .015, "%s %s loop seam %.4f" % [name,pose,displacement(first,last)])
 		check(motion > .006, "%s %s moves %.4f m" % [name,pose,motion])
 		if pose == "fall":
@@ -159,7 +159,7 @@ func lineup(app, ids: Array, name: String, separation: float, height: float) -> 
 	var group := Node3D.new()
 	app.stage.add_child(group)
 	for i in ids.size():
-		var path: String = ids[i] if ids[i].begins_with("res://") else app.ART+ids[i]+".tscn"
+		var path: String = ids[i] if ids[i].begins_with("res://") else app.asset_root+ids[i]+".tscn"
 		var item: Node3D = load(path).instantiate()
 		group.add_child(item)
 		item.position = Vector3((i-(ids.size()-1)*.5)*separation,0,0)
@@ -179,14 +179,15 @@ func run() -> void:
 	var app = load("res://review.tscn").instantiate()
 	root.add_child(app)
 	await settle()
-	var catalog: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(app.ART+"catalog.json"))
+	var catalog: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(app.asset_root+"catalog.json"))
 	for index in catalog.assets.size():
 		app.selected = index
 		app.angle = 0
 		app.load_prop()
 		await settle()
 		await verify(app,catalog.assets[index])
-	await lineup(app,["fortress-goblin","fortress-guard","fortress-archer","goblin-king"],"lineup",1.38,2.26)
+	var lineup_ids: Array = ["fortress-goblin","fortress-guard","fortress-archer","goblin-king"] if app.asset_root == app.ART else app.ids
+	await lineup(app,lineup_ids,"lineup",1.38,2.26)
 	var report := {"checks":checks,"failures":failures,"captures":captures,
 		"maximum_native_skin_difference_metres":maximum_skin_error,
 		"renderer":RenderingServer.get_current_rendering_method()}
