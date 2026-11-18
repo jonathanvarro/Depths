@@ -287,6 +287,117 @@
       "icon": "res://art/items/equipment-live-v1/goblin_scale.png"
     },
     {
+      "id": "sling",
+      "name": "Leather sling",
+      "slot": "weapon",
+      "region": 1,
+      "damage": [
+        2,
+        3
+      ],
+      "accuracy": 0.0,
+      "light": false,
+      "force": false,
+      "reach": true,
+      "strike": "smash",
+      "grows": [
+        "damage"
+      ],
+      "new": true,
+      "live": "sling",
+      "price": 8,
+      "description": "A leather pouch on two cords. Throws a stone hard from the back row; strength doesn't help.",
+      "icon": "res://art/items/ranged-focus-v1/sling.png"
+    },
+    {
+      "id": "short_bow",
+      "name": "Short bow",
+      "slot": "weapon",
+      "region": 2,
+      "damage": [
+        2,
+        4
+      ],
+      "accuracy": 0.03,
+      "light": false,
+      "force": false,
+      "reach": true,
+      "strike": "pierce",
+      "grows": [
+        "damage"
+      ],
+      "new": true,
+      "live": "short_bow",
+      "price": 26,
+      "description": "A hunter's bow, short enough for tunnels. Shoots from the back row; strength doesn't help.",
+      "icon": "res://art/items/ranged-focus-v1/short-bow.png"
+    },
+    {
+      "id": "wand",
+      "name": "Prayer wand",
+      "slot": "weapon",
+      "region": 1,
+      "damage": [
+        1,
+        2
+      ],
+      "accuracy": 0.0,
+      "light": false,
+      "force": false,
+      "reach": true,
+      "strike": "smash",
+      "grows": [
+        "damage"
+      ],
+      "new": true,
+      "live": "wand",
+      "price": 14,
+      "description": "A thin blackthorn rod, worn smooth. A weak bolt from the back row, and a Mage's prayers grow with it.",
+      "icon": "res://art/items/ranged-focus-v1/wand.png"
+    },
+    {
+      "id": "oak_staff",
+      "name": "Oak staff",
+      "slot": "weapon",
+      "region": 1,
+      "damage": [
+        1,
+        3
+      ],
+      "accuracy": 0.0,
+      "light": false,
+      "force": true,
+      "reach": false,
+      "strike": "smash",
+      "grows": [
+        "damage"
+      ],
+      "new": true,
+      "live": "oak_staff",
+      "price": 12,
+      "description": "A Mage's walking staff. A plain blow up close, and a Mage's prayers grow with it.",
+      "icon": "res://art/items/ranged-focus-v1/oak-staff.png"
+    },
+    {
+      "id": "cracked_staff",
+      "name": "Split walking staff",
+      "slot": "weapon",
+      "region": 1,
+      "damage": [
+        1,
+        2
+      ],
+      "accuracy": 0.0,
+      "light": true,
+      "force": false,
+      "reach": false,
+      "strike": "smash",
+      "grows": [
+        "damage"
+      ],
+      "live": "cracked_staff"
+    },
+    {
       "id": "drowned_pick",
       "name": "Drowned miner's pick",
       "slot": "weapon",

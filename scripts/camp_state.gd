@@ -58,6 +58,12 @@ const SMITH_STOCK: Array[Equipment] = [
 	preload("res://data/gear/wool_cape.tres"),
 	# Shields can be bought (owner, 2026-11-12, #219); worn on the back.
 	preload("res://data/gear/buckler.tres"),
+	# The back row's weapons (owner, 2026-11-17, #260): slings and bows that
+	# learn, and a Mage's staff or wand, which their prayers grow with.
+	preload("res://data/gear/sling.tres"),
+	preload("res://data/gear/short_bow.tres"),
+	preload("res://data/gear/wand.tres"),
+	preload("res://data/gear/oak_staff.tres"),
 ]
 ## Contracts the king's camp posts, one a day (#42).
 const CONTRACTS := [

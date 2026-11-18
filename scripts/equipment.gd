@@ -52,6 +52,9 @@ extends Resource
 @export var traits: Dictionary = {}
 ## A shield's guard: armour against blows from the front.
 @export var guard := 0
+## A staff or wand (#260, owner 2026-11-17): a Mage's prayers grow stronger
+## with its mastery, and casting in a fight teaches it.
+@export var focus := false
 @export var gear_version := 0
 @export var instance_id := 0
 ## Found pieces start unidentified (owner, 2026-11-03; gear_model.gd

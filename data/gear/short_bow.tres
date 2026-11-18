@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Equipment" format=3]
+
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/items/ranged-focus-v1/short-bow.png" id="icon"]
+
+[resource]
+script = ExtResource("1")
+icon = ExtResource("icon")
+display_name = "Short bow"
+description = "A hunter's bow, short enough for tunnels. Shoots from the back row; strength doesn't help."
+attack_min = 2
+attack_max = 4
+accuracy_bonus = 0.03
+price = 26
+reach = true
+force = false
+strike = "pierce"

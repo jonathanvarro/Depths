@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Equipment" format=3]
+
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/items/ranged-focus-v1/sling.png" id="icon"]
+
+[resource]
+script = ExtResource("1")
+icon = ExtResource("icon")
+display_name = "Leather sling"
+description = "A leather pouch on two cords. Throws a stone hard from the back row; strength doesn't help."
+attack_min = 2
+attack_max = 3
+accuracy_bonus = 0.0
+price = 8
+reach = true
+force = false
+strike = "smash"

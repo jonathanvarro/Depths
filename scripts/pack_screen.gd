@@ -559,11 +559,11 @@ func _add_prayers(h: Companion) -> void:
 		if reason=="" and id=="mend" and _party.most_hurt()==null:reason="No one is hurt"
 		if reason=="" and id=="discern" and _party.unidentified().is_empty():reason="Nothing to identify"
 		if reason=="Only in a fight" or not Spells.SPELLS[id]["field"]:
-			_status_content.add_child(_wrapped("%s (in a fight): %s" % [Spells.name_of(id),Spells.describe(id)],17,FieldKit.MUTED))
+			_status_content.add_child(_wrapped("%s (in a fight): %s" % [Spells.name_of(id),Spells.describe(id,h)],17,FieldKit.MUTED))
 			continue
 		var cast:=_button("Cast "+Spells.name_of(id),Vector2(150,44))
 		cast.disabled=reason!=""
-		cast.tooltip_text=Spells.describe(id)+("
+		cast.tooltip_text=Spells.describe(id,h)+("
 "+reason if reason!="" else "")
 		cast.pressed.connect(func():
 			var message:=Spells.cast_in_field(_party,h,id,_prayer_rng)
@@ -572,7 +572,7 @@ func _add_prayers(h: Companion) -> void:
 				used.emit(message)
 			_request_refresh())
 		_status_content.add_child(cast)
-		_status_content.add_child(_wrapped(Spells.describe(id),17,FieldKit.MUTED))
+		_status_content.add_child(_wrapped(Spells.describe(id,h),17,FieldKit.MUTED))
 
 func _quick_use(item: Resource,slot := "") -> void:
 	inspect_item(item,true,slot)

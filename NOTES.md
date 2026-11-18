@@ -13,6 +13,17 @@ Format:
 
 ---
 
+## 2026-11-18 – Claude (slings, bows, staff and wand, #260)
+
+- Owner decisions (2026-11-17): ranged weapon items that learn mastery; spells don't gain their own mastery, the staff or wand does.
+- Did:
+  - New weapons (bases.json + data/gear): Leather sling (2–3, reach, no Strength), Short bow (region 2, 2–4), Prayer wand (1–2, reach, focus), Oak staff (1–3, melee, focus). Alwen's Split walking staff is now a base and a focus. All sold by the smith.
+  - `Equipment.focus`; `Spells.focus_power` (+1 at the focus's mastery 3, +2 at 6): Mend +2 per step, Holy light +10, Watchful eye +20, Bind +1 turn at 6. Casting in a fight credits the focus like a hit (mastery stays combat-only).
+  - New Scout and Fixer recruits carry a sling item, Mages a wand (the built-in `reach` stays for old saves).
+  - Placeholder icons drawn in `art/items/ranged-focus-v1` (sling, short bow, wand; oak staff from starter-v1). Proper icons requested on #260.
+  - magic_check covers focus power, cast credit and recruit kit; gear_check counts the new bases.
+- Bot (5/hero): no stuck runs.
+
 ## 2026-11-18 – Claude (strategic / exploration view toggle, #248)
 
 - Owner decision (2026-11-17): a toggle between the strategic (overhead) view and the exploration (first-person) view, left to the player.

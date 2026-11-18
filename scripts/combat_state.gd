@@ -1138,9 +1138,9 @@ func hero_cast(hero: Companion, id: String, target: Foe = null) -> Dictionary:
 	match id:
 		"mend":
 			outcome["healed"] = party.most_hurt()
-			outcome["text"] = Spells.mend(party)
+			outcome["text"] = Spells.mend(party, null, hero)
 		"light":
-			party.supplies.kindle(Spells.LIGHT_TIME)
+			party.supplies.kindle(Spells.light_time(hero))
 			for foe in living_foes():
 				if flare_effect(foe) == "dazzle":
 					_dazzled[foe] = true
@@ -1149,9 +1149,14 @@ func hero_cast(hero: Companion, id: String, target: Foe = null) -> Dictionary:
 					_squinting[foe] = true
 			outcome["text"] = "%s calls down a holy light%s" % [hero.display_name, " - the beasts reel back, blinded." if not outcome["dazzled"].is_empty() else "."]
 		"bind":
-			var turns: int = Spells.BIND_BOSS_TURNS if target.type.tactic == EnemyType.Tactic.QUEEN else Spells.BIND_TURNS
+			var turns: int = Spells.BIND_BOSS_TURNS if target.type.tactic == EnemyType.Tactic.QUEEN else Spells.bind_turns(hero)
 			_bound[target] = turns
 			outcome["text"] = "%s's prayer binds the %s in place." % [hero.display_name, target.name.to_lower()]
+	# A staff or wand learns from the prayers cast through it (#260).
+	if hero.weapon and hero.weapon.focus:
+		var about: Foe = target if target else (living_foes()[0] if not living_foes().is_empty() else null)
+		if about:
+			_credit(hero.weapon, "hit", about)
 	return outcome
 
 

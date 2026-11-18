@@ -8,7 +8,7 @@
 script = ExtResource("1")
 icon = ExtResource("campaign_art")
 display_name = "Split walking staff"
-description = "A nurse's worn staff, split with the grain above its cloth grip. Light in the hand; unreliable under a hard blow."
+description = "A nurse's worn staff, split with the grain above its cloth grip. Light in the hand; her prayers grow with it."
 attack_min = 1
 attack_max = 2
 accuracy_bonus = 0.0
@@ -16,3 +16,4 @@ price = 0
 force = false
 light = true
 strike = "smash"
+focus = true

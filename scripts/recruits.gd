@@ -24,13 +24,15 @@ const ROLES := {
 		"about": "Quick and sharp, with a sling: fights from the back row. Acts early and hits often, but can't take much.",
 		"stats": [1, 3, 1, 2], "aim": 0.81, "speed": 11, "hp": 0, "attack": Vector2i(2, 3),
 		"guard_factor": 0.5, "toughness": 0, "row": "back", "reach": true,
+		"weapon": "res://data/gear/sling.tres",  # an item that learns (#260)
 		"portrait": "res://art/portraits/recruit-silhouettes-v1/scout.png",
 		"perk": "Hears some fights first and always spots traps.", "perk_name": "Awareness",
 	},
-	"Mage": {  # prays (#170); a weak back-row sling between casts
-		"about": "Prays: a few casts each trip, starting with Mend; tomes teach more. Unarmoured and unaware; fights from the back with a sling.",
+	"Mage": {  # prays (#170); a wand: a weak back-row bolt, and the focus (#260)
+		"about": "Prays: a few casts each trip, starting with Mend; tomes teach more, and a staff or wand makes them stronger. Unarmoured and unaware; a weak bolt from the back.",
 		"stats": [1, 2, 2, 3], "aim": 0.72, "speed": 10, "hp": -2, "attack": Vector2i(1, 3),
 		"guard_factor": 0.5, "toughness": 0, "row": "back", "reach": true,
+		"weapon": "res://data/gear/wand.tres",  # prayers grow with it (#260)
 		"portrait": "res://art/portraits/recruit-silhouettes-v1/scout.png",
 		"perk": "Casts prayers: Mend to start, more from tomes found below.", "perk_name": "Prayers",
 		"faces": "Brawler",
@@ -42,6 +44,7 @@ const ROLES := {
 		"about": "Knows the price of everything and everyone at camp. Fights from the back with a sling, and not well.",
 		"stats": [1, 2, 2, 3], "aim": 0.72, "speed": 10, "hp": -2, "attack": Vector2i(1, 3),
 		"guard_factor": 0.5, "toughness": 0, "row": "back", "reach": true,
+		"weapon": "res://data/gear/sling.tres",
 		"portrait": "res://art/portraits/recruit-silhouettes-v1/fixer.png",
 		"perk": "Eye for value: finds sell for 25% more, 10% off at the merchant, one more find in treasure rooms, and clears rubble.", "perk_name": "Eye for value",
 	},

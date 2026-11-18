@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Equipment" format=3]
+
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/items/ranged-focus-v1/oak-staff.png" id="icon"]
+
+[resource]
+script = ExtResource("1")
+icon = ExtResource("icon")
+display_name = "Oak staff"
+description = "A Mage's walking staff. A plain blow up close, and a Mage's prayers grow with it."
+attack_min = 1
+attack_max = 3
+accuracy_bonus = 0.0
+price = 12
+reach = false
+force = true
+strike = "smash"
+focus = true
