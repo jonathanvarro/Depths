@@ -13,6 +13,15 @@ Format:
 
 ---
 
+## 2026-11-18 – Claude (strategic / exploration view toggle, #248)
+
+- Owner decision (2026-11-17): a toggle between the strategic (overhead) view and the exploration (first-person) view, left to the player.
+- Did:
+  - The overhead view (`tactical_view.gd`) now also runs while exploring (`enter(main, null)`): light-limited shroud, ceilings hidden, room groups out of the light hidden, tap a tile beside the party to step. `enter` can be called again while up to switch between a fight and exploring; `refresh_level` re-hides a new floor's ceilings.
+  - main: View button beside Pack ("Above"/"Eyes") and the V key (`_toggle_view`); `_wants_overhead` / `_apply_view` on floor changes, fight ends, Settings close. The setting `tactical_view` is the same choice, now labelled "View from above (V)". The opening, camp and the dark stage stay first person. Field fights follow the choice, also mid-fight. The hand-held light hides while viewing from above.
+  - Default stays "above" (the board fights the owner chose); first person is one press away.
+  - tactical_check covers V both ways and exploring from above after a fight; enemy_models_check drops to first person before checking the climb roots.
+
 ## 2026-11-17 – Claude (camp services earned through quests, #238/#123)
 
 - Owner decisions (2026-11-17): nurse and smith tied to quests; floor-3 ore quest; nurse quest with moss from floor 2.

@@ -77,7 +77,7 @@ func _process(delta: float) -> void:
 	var main = _main.get_ref() if _main else null
 	if main == null or not is_instance_valid(main._party):
 		return
-	visible = not (main._ending or main._in_combat or main._pack.visible or main._chest.visible or main._full_map.visible or main._event_screen.visible or main._camp.visible or main._preparation.visible)
+	visible = not (main._ending or main._in_combat or main._tactical.active or main._pack.visible or main._chest.visible or main._full_map.visible or main._event_screen.visible or main._camp.visible or main._preparation.visible)
 	_viewport.render_target_update_mode = SubViewport.UPDATE_WHEN_VISIBLE if visible else SubViewport.UPDATE_DISABLED
 	if not visible:
 		return
