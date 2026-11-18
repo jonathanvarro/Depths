@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-11-18 – Claude (any armour weight for anyone, #192)
+
+- Owner decision (2026-11-17): anyone may wear heavy armour, with penalties; Melee shrug off part of it.
+- Did: `Classes.refuses` no longer locks body armour (the back slot keeps its rules). `Classes.ARMOUR_DRAG` / `armour_drag`: heavy costs a Scout or Fixer 1 more initiative, a Mage 1 for medium and 2 for heavy; a Melee 1 less for heavy. `Companion.effective_initiative` applies it. bases.json "classes" body lists now allow all weights. Class descriptions updated. gear_check covers it. There is no dodge stat in the game, so the penalty is initiative only.
+
 ## 2026-11-18 – Claude (slings, bows, staff and wand, #260)
 
 - Owner decisions (2026-11-17): ranged weapon items that learn mastery; spells don't gain their own mastery, the staff or wand does.

@@ -551,7 +551,7 @@
     "pack": "capacity: pack slots, some slowing"
   },
   "classes": {
-    "_about": "Proposed eligibility for the four classes (#179); enforced when the classes are built.",
+    "_about": "Who may wear what (#179). Body: anyone, any weight (owner, 2026-11-17, #192); heavier than the class is used to slows it more (classes.gd ARMOUR_DRAG). Back: as listed.",
     "melee": {
       "body": [
         "light",
@@ -567,7 +567,8 @@
     "scout": {
       "body": [
         "light",
-        "medium"
+        "medium",
+        "heavy"
       ],
       "back": [
         "cape",
@@ -576,7 +577,9 @@
     },
     "mage": {
       "body": [
-        "light"
+        "light",
+        "medium",
+        "heavy"
       ],
       "back": [
         "cape",
@@ -586,7 +589,8 @@
     "fixer": {
       "body": [
         "light",
-        "medium"
+        "medium",
+        "heavy"
       ],
       "back": [
         "cape",

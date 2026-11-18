@@ -337,7 +337,8 @@ func effective_initiative() -> int:
 	for item in [weapon, body]:
 		if item:
 			speed += int(item.traits.get("initiative", 0))
-	return initiative + speed - (body.initiative_penalty if body else 0) - (back.initiative_penalty if back else 0)
+	var armour: int = maxi(0, body.initiative_penalty + load("res://scripts/classes.gd").armour_drag(self, body)) if body else 0  # #192
+	return initiative + speed - armour - (back.initiative_penalty if back else 0)
 
 
 ## Taken off every blow: toughness, talents and body armour (#47, #93).
