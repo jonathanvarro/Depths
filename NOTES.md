@@ -13,6 +13,15 @@ Format:
 
 ---
 
+## 2026-11-18 – Claude (the named cast and bringing back the dead, #180/#201)
+
+- Owner decisions (2026-11-17): resume the named cast, with random recruits still filling gaps; the nurse can revive a fallen companion only if their body was recovered, for a price and a lasting scar.
+- Did:
+  - `scripts/named_cast.gd`: Branna (Melee; after the commander's report), Rook (Fixer, Fixer-a rig; after meeting the merchant), Nessa (Scout; first floor-2 return), Maelin (Mage; after the bitter moss). They come to the fire once each (`CampState.named_met`) and wait there; the daily rotation skips them. `Companion.named_id`. Faces: the #197–#199 likenesses copied to `art/portraits/named-cast-v1` as still portraits (no blink/talk rig yet); Rook uses fixer-a (not yet reserved from the random pool).
+  - Resurrection: a companion who falls while the party gets home is carried out (`CampState.carry_home`, main's return loop; not on a wipe). At the nurse: "Bring X back" for 40 gold; they lose 3 maximum health for good, wake shaken, and wait by the fire. `fallen` is saved.
+  - Checks: new `tools/named_cast_check.gd`; save_check hires a random recruit (named ones have still portraits).
+- Open: wiped parties' bodies can't yet be recovered on a later trip; named portraits need eye/mouth rigs (ChatGPT, #197–#200); named companions use their class's voice lines.
+
 ## 2026-11-18 – Claude (any armour weight for anyone, #192)
 
 - Owner decision (2026-11-17): anyone may wear heavy armour, with penalties; Melee shrug off part of it.

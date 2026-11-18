@@ -86,6 +86,8 @@ signal learned_skill(id: String)
 @export var weakness := ""
 ## The campaign's first hero (Mara): can't be dismissed at camp.
 @export var founder := false
+## One of the named cast (#180): their id in named_cast.gd, or "".
+@export var named_id := ""
 ## A main hero (#83): falling leaves them unconscious, not dead - carried
 ## by the party until a draught or a rest revives them.
 @export var main_hero := false

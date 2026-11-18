@@ -714,6 +714,16 @@ func _price_icon(button: Button) -> void:
 
 
 func _nurse() -> void:
+	# The dead you carried home (#180): she can try to bring one back.
+	for hero: Companion in _camp.fallen:
+		_text("%s lies under a sheet in the far tent. \"I can try. It costs, and they won't come back whole.\"" % hero.display_name, AMBER)
+		var back := _button("Bring %s back (%dg, -%d health for good)" % [hero.display_name, CampState.REVIVE_PRICE, CampState.REVIVE_SCAR])
+		back.disabled = _party.supplies.gold < CampState.REVIVE_PRICE
+		back.pressed.connect(func():
+			if _camp.revive(_party, hero):
+				announce("%s breathes again, and waits by the fire." % hero.display_name)
+			_refresh_activity())
+		_body.add_child(back)
 	# Banes that outlasted the trip (#133).
 	for hero: Companion in _party.living_members():
 		if not hero.has_bane():
