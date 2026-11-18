@@ -4,12 +4,14 @@
 [ext_resource type="Script" path="res://scripts/injury.gd" id="1_1mj7m"]
 [ext_resource type="Resource" path="res://data/injuries/limp.tres" id="2_hvvk6"]
 [ext_resource type="PackedScene" path="res://art/enemies/monsters-v1/rock-beetle/scene.tscn" id="3_8iit7"]
+[ext_resource type="PackedScene" path="res://art/enemies/early-creatures-3d-v1/rock-beetle.tscn" id="model"]
 [ext_resource type="Script" path="res://scripts/enemy_type.gd" id="4_q3s3x"]
 
 [resource]
 script = ExtResource("4_q3s3x")
 display_name = "Rock beetle"
 scene = ExtResource("3_8iit7")
+model = ExtResource("model")
 max_health = 10
 damage_min = 2
 accuracy = 0.65

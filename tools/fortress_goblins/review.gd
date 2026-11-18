@@ -78,7 +78,7 @@ func load_prop() -> void:
 	if prop:stage.remove_child(prop);prop.queue_free()
 	prop=load(asset_root+ids[selected]+".tscn").instantiate();stage.add_child(prop)
 	poses.clear();var picker:=controls[2] as OptionButton;picker.clear()
-	for p in ["idle","attack","heavy","wind-up","rally","horn","recover","hurt","fall","walk","run","draw","brace","drum","snare","enraged","call","web","venom","defend","cast","plant"]:
+	for p in ["idle","attack","heavy","wind-up","rally","horn","recover","hurt","fall","walk","run","draw","brace","drum","snare","enraged","call","web","venom","defend","cast","plant","landed","swoop","bite","curled","grab","swell","drain","lunge"]:
 		if prop.player.has_animation(p):poses.append(p);picker.add_item(p)
 	if pose not in poses:pose="idle"
 	(controls[5] as CheckButton).set_pressed_no_signal(true)

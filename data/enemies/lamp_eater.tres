@@ -2,12 +2,14 @@
 
 [ext_resource type="Script" path="res://scripts/injury.gd" id="1_oed5a"]
 [ext_resource type="PackedScene" path="res://art/enemies/monsters-v1/lamp-eater/scene.tscn" id="2_lw61c"]
+[ext_resource type="PackedScene" path="res://art/enemies/early-creatures-3d-v1/lamp-eater.tscn" id="model"]
 [ext_resource type="Script" path="res://scripts/enemy_type.gd" id="3_q426p"]
 
 [resource]
 script = ExtResource("3_q426p")
 display_name = "Lamp-eater"
 scene = ExtResource("2_lw61c")
+model = ExtResource("model")
 max_health = 7
 initiative = 12
 injury_chance = 0.0

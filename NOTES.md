@@ -13,6 +13,14 @@ Format:
 
 ---
 
+## 2026-11-18 – ChatGPT (remaining early enemies and Bitter Moss, #251/#238)
+
+- Added original low-poly models for the cave bat, rock beetle, hollow
+  miner, gas-bloat, lamp-eater and breach hound. They keep each enemy's
+  existing rules and alternate painted scene.
+- Bitter Moss now has a dedicated fresh and scraped 3D prop in the real
+  Floor 2 quest. See `docs/early-creatures-3d.md` for the model and prop review.
+
 ## 2026-11-18 – ChatGPT (goblin models and view toggle, #251)
 
 - Resolved the model branch against the view toggle. The Captain's dark

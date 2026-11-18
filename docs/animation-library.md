@@ -44,6 +44,12 @@ either a horn rally or a maul recovery. At 24 fps, both have frames 0–36 for
 idle, 0–17 for attack, 0–18 for heavy, 0–12 for hurt and 0–26 for fall.
 Held poses run 0–24, and the Captain's horn action runs 0–17.
 
+The [six early creature models](early-creatures-3d.md) use original rigs
+with 24 fps clips. All have idle (0–24), attack (0–18), hurt (0–12), and
+fall (0–24). Bat landed, beetle curled, miner grab and bloat swell are held
+loops (0–24). Bat swoop and bite, lamp-eater drain and breach-hound lunge
+are action clips (0–18).
+
 The [3D combat roster](combat-roster-3d.md) (#251, 2026-11-11) adds eleven
 board candidates. The clips are 24 fps and stored in
 `art/enemies/combat-roster-3d-v1`, with frame counts in its catalog.

@@ -2,12 +2,14 @@
 
 [ext_resource type="Script" path="res://scripts/injury.gd" id="1_osvf4"]
 [ext_resource type="PackedScene" path="res://art/enemies/monsters-v1/gas-bloat/scene.tscn" id="2_mfl5g"]
+[ext_resource type="PackedScene" path="res://art/enemies/early-creatures-3d-v1/gas-bloat.tscn" id="model"]
 [ext_resource type="Script" path="res://scripts/enemy_type.gd" id="3_bg1jl"]
 
 [resource]
 script = ExtResource("3_bg1jl")
 display_name = "Gas-bloat"
 scene = ExtResource("2_mfl5g")
+model = ExtResource("model")
 damage_max = 2
 accuracy = 0.6
 initiative = 6

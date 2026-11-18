@@ -589,13 +589,17 @@ func _action_pose(foe, intent: int, outcome: Dictionary) -> String:
 	match intent:
 		CombatState.Intent.REACH: return "lunge"
 		CombatState.Intent.BIRTH: return "birthing"
+	if intent == CombatState.Intent.BITE and foe.type.tactic == EnemyType.Tactic.SWOOPER and FoeView.is_model(foe.node):
+		return "bite"
 	# A 3D model's own gesture for the move, where it has one (#251): the
 	# spiders' web and venom bite, the drummer's beat, the trapper's snare,
 	# the Broodmother calling her brood, the guard bracing, the archer's draw.
 	var gesture: String = {CombatState.Intent.WEB: "web", CombatState.Intent.BITE: "venom", CombatState.Intent.BEAT: "drum",
 			CombatState.Intent.SNARE: "snare", CombatState.Intent.BROOD: "call", CombatState.Intent.CALL: "call",
 			CombatState.Intent.BRACE: "brace", CombatState.Intent.SHOOT: "draw", CombatState.Intent.HEAVY: "heavy",
-			CombatState.Intent.RALLY: "horn", CombatState.Intent.RECOVER: "recover"}.get(intent, "")
+			CombatState.Intent.RALLY: "horn", CombatState.Intent.RECOVER: "recover", CombatState.Intent.SWOOP: "swoop",
+			CombatState.Intent.CURL: "curled", CombatState.Intent.GRAB: "grab", CombatState.Intent.DRAIN: "drain",
+			CombatState.Intent.LUNGE: "lunge"}.get(intent, "")
 	if gesture != "" and FoeView.is_model(foe.node) and FoeView.has_pose(foe.node, gesture):
 		return gesture
 	# The Goblin King (#257) plants his staff to call his guards or bellow.
@@ -682,6 +686,8 @@ func _fade_out(foe) -> void:
 		# A 3D model (#251) falls and lies still, then goes from the board.
 		_busy[foe] = true
 		FoeView.play(foe.node, "fall", "fall")
+		if foe.type.tactic == EnemyType.Tactic.BLOAT:
+			_gas_cloud()
 		await get_tree().create_timer(FoeView.fade_time(foe.node)).timeout
 		if is_instance_valid(foe.node):
 			foe.node.visible = false
