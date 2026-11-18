@@ -60,6 +60,10 @@ func _initialize() -> void:
 			var dressing: Node3D = main._level.get_node_or_null("Dressing")
 			var crowded := dressing.get_children().filter(func(p): return taken.has(_cell_of(main, p))).size() if dressing else 0
 			check("seed %d floor %d: no ordinary dressing inside a landmark" % [seed, depth], crowded == 0, crowded)
+			var fortress: Node3D = main._level.get_node_or_null("Fortress3D")
+			if fortress:  # the fortress's own cages keep out of the goblins' cages (#117)
+				var doubled := fortress.get_children().filter(func(p): return p.scene_file_path.ends_with("hanging-cage.tscn") and taken.has(_cell_of(main, p))).size()
+				check("seed %d floor 4: the fortress hangs no cage inside a landmark" % seed, doubled == 0, doubled)
 			if dir != "" and seed == 57:
 				map.encounter_zones.clear()
 				for landmark in landmarks.filter(func(l): return l["id"] == "working_face"):

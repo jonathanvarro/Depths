@@ -15,7 +15,6 @@ const Bestiary := preload("res://scripts/bestiary.gd")
 const Classes := preload("res://scripts/classes.gd")
 const Brews := preload("res://scripts/brews.gd")
 const Refuge := preload("res://scripts/refuge.gd")
-const TREATMENT_EVENT := preload("res://data/events/quest_treatment_supplies.tres")
 const GearModel := preload("res://scripts/gear_model.gd")
 const TURN_LEFT_ICON := preload("res://art/ui/controls-v1/turn-left.svg")
 const SPADE := preload("res://data/items/spade.tres")
@@ -57,6 +56,7 @@ const FoeView := preload("res://scripts/foe_view.gd")  # sprite or 3D model foes
 const TacticalView := preload("res://scripts/tactical_view.gd")
 ## Prototype (owner, 2026-11-08): a fight on the map seen from above.
 var _tactical: Node3D
+var _view_button: Button  # strategic or exploration view (#248)
 const SpoilsScreen := preload("res://scripts/spoils_screen.gd")
 const VisionFilter := preload("res://scripts/vision_filter.gd")
 ## The commander waiting outside after the escape (#122, first slice).
@@ -265,6 +265,7 @@ const KEY_BINDINGS := {
 	"toggle_pack": [KEY_I, KEY_B],
 	"wait": [KEY_SPACE, KEY_PERIOD],  # a beat passes (#171)
 	"quick_torch": [KEY_T],  # light a torch from the pack (owner, 2026-11-09)
+	"toggle_view": [KEY_V],  # strategic (overhead) or exploration view (#248)
 	"debug_hurt": [KEY_H],  # only while the F3 overlay is open
 	"debug_heal": [KEY_J],
 	"debug_injure": [KEY_K],
@@ -600,6 +601,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		_wait()
 	elif event.is_action_pressed("quick_torch"):
 		_quick_torch()
+	elif event.is_action_pressed("toggle_view"):
+		_toggle_view()
 	elif event.is_action_pressed("toggle_map"):
 		_set_full_map(not _full_map.visible)
 	elif _full_map.visible and event.is_action_pressed("ui_cancel"):
@@ -654,11 +657,6 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 			refuge = placed["cell"]
 			if refuge != Vector2i(-1, -1):
 				marks["refuge"] = refuge
-		var treatment := Vector2i(-1, -1)
-		if depth == 2 and not use_debug_layout and not _camp_state.site_present("treatment"):
-			var placed: Dictionary = Refuge.place(stamped["layout"], depth, "O")
-			stamped["layout"] = placed["layout"]
-			treatment = placed["cell"]
 		_floors[depth] = DungeonMap.new(stamped["layout"], depth)
 		_floors[depth].marks = marks
 		_assign_events(_floors[depth])
@@ -666,8 +664,6 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 			_floors[depth].events[cell] = stamped["events"][cell]
 		if refuge != Vector2i(-1, -1):
 			_floors[depth].events[refuge] = Refuge.EVENT
-		if treatment != Vector2i(-1, -1):
-			_floors[depth].events[treatment] = TREATMENT_EVENT
 		_floors[depth].fight_groups = stamped["fights"]
 		_floors[depth].packages = stamped["placed"]
 		# Visible quests' sites, marked on the map once seen (owner playtest, #230).
@@ -692,6 +688,7 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 	_build_level()
 	_minimap.setup(_map)
 	_full_map_view.setup(_map)
+	_apply_view.call_deferred()  # a new level: lift or lower the view to the player's choice (#248)
 	var cell: Vector2i = _map.start_cell
 	if arrival == Arrival.FROM_ABOVE:
 		cell = _map.find_content(DungeonMap.Content.STAIRS_UP)
@@ -709,6 +706,46 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 		_show_message("%s · depth %d" % [environment_theme.display_name, depth])
 	_fortress_signs(depth)
 	_save_now()  # autosave on every floor change (#45)
+
+
+## The player's view (#248, owner 2026-11-17): from above (strategic) or
+## through the party's eyes (exploration), switched any time with V or the
+## View button. The Settings switch is the same choice. The opening and the
+## dark stage stay first person.
+func _wants_overhead() -> bool:
+	return Settings.get_value("tactical_view") and not _in_opening and _map != null and not _camp.visible and not _ending
+
+
+func _toggle_view() -> void:
+	if _in_opening or _camp.visible or _ending:
+		return
+	Settings.set_value("tactical_view", not Settings.get_value("tactical_view"))
+	if _in_combat and _combat._state and _combat._state.field:
+		if Settings.get_value("tactical_view"):
+			_tactical.enter(self, _combat._state)
+		else:
+			_tactical.exit()
+	elif not _in_combat:
+		_apply_view()
+	_update_view_button()
+
+
+## Lifts or lowers the view to match the player's choice (not mid-fight).
+func _apply_view() -> void:
+	_update_view_button()
+	if _tactical == null or _in_combat:
+		return
+	if _wants_overhead():
+		_tactical.enter(self, null)
+	else:
+		_tactical.exit()
+	_update_view_button()
+
+
+func _update_view_button() -> void:
+	if _view_button:
+		_view_button.text = "Eyes" if Settings.get_value("tactical_view") else "Above"
+		_view_button.visible = not _in_opening
 
 
 func _build_level() -> void:
@@ -730,10 +767,12 @@ func _build_level() -> void:
 		Dressing.dress_opening(_level, _map, _site_seed, CELL_SIZE, WALL_HEIGHT)  # the new 3D pieces (2026-11-09)
 	elif _depth == OUTSKIRTS_DEPTH and not use_debug_layout:
 		_add_outskirts_dressing()
-	elif _depth==FORTRESS_DEPTH:
-		_add_fortress_dressing()
+	var landmarks := {}
 	if not _in_opening and not use_debug_layout:
-		var landmarks := Landmarks.place(_level, _map, _depth, _site_seed, CELL_SIZE, WALL_HEIGHT)  # #117
+		landmarks = Landmarks.place(_level, _map, _depth, _site_seed, CELL_SIZE, WALL_HEIGHT)  # #117
+	if _depth == FORTRESS_DEPTH and not _in_opening:
+		_add_fortress_dressing()  # after the landmarks, so its cages keep out of theirs (#117)
+	if not _in_opening and not use_debug_layout:
 		var dresser: Script = environment_theme.dressing_script if environment_theme.dressing_script else Dressing
 		dresser.dress(_level, _map, _depth, _site_seed, CELL_SIZE, WALL_HEIGHT, landmarks)  # #128
 		if kaykit_pilot and not "--no-kaykit" in OS.get_cmdline_user_args():  # #224, adopted 2026-11-03
@@ -896,9 +935,6 @@ func _run_event(cell: Vector2i, at_overlook := false) -> void:
 		if at_overlook:
 			_open_overlook(cell)
 		return
-	if event == TREATMENT_EVENT and _party_state.supplies.count(CampState.TREATMENT_SUPPLIES) == 0:
-		_map.triggered.erase(cell)
-		return
 	# What the trap's art shows now follows what happened (#247): it went
 	# off; it was stepped round and is still set; or it was disarmed.
 	var prop_state := "empty"
@@ -1015,8 +1051,11 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 		_begin_field_fight(state, cell)
 		if Settings.get_value("tactical_view"):
 			_tactical.enter(self, state)  # the camera lifts above the room
+		else:
+			_tactical.exit()
 	else:
 		_party.face_open(cell if cell != _party.cell else Vector2i(-1, -1))  # never fight a wall (#111)
+		_tactical.exit()  # the dark stage is seen through the party's eyes
 		_place_foes(state.foes)
 	_in_combat = true
 	# Fog surges up from the floor and the cave fades to near-black: the
@@ -1073,6 +1112,7 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 		if is_instance_valid(foe.node):
 			foe.node.queue_free()
 	_in_combat = false
+	_apply_view()
 	_end_encounter()
 	_combat.only_action = ""
 	_combat.no_retreat = false
@@ -1608,7 +1648,10 @@ func _face_toward(cell: Vector2i) -> void:
 
 
 func _end_field_fight() -> void:
-	_tactical.exit()
+	if _wants_overhead():
+		_tactical.enter(self, null)  # back to exploring from above (#248)
+	else:
+		_tactical.exit()
 	_draw_danger(true)
 	_party.step_check = _field_step_check
 	_field_step_check = Callable()
@@ -1848,6 +1891,7 @@ static func encounter_pool(depth: int, party_size: int) -> Array:
 
 ## Ends the expedition (#17) and shows what it gained and cost.
 func _end_expedition(ending: int) -> void:
+	_tactical.exit()  # camp is seen as itself (#248)
 	if _ending:
 		return
 	_ending = true
@@ -1913,11 +1957,9 @@ func _start_new_expedition(returned_alive := true) -> void:
 		if not hero.is_with_party():
 			_party_state.remove_member(hero)
 	_camp_state.rejoin(_party_state)
-	_camp_state.record_depth(_expedition.deepest, returned_alive)
+	_camp_state.record_depth(_expedition.deepest, returned_from_expedition and returned_alive)
 	var reward: int = _camp_state.collect_contract(_party_state)
 	var note := ""
-	if returned_from_expedition and returned_alive and _camp_state.receive_treatment_supplies(_party_state):
-		note = "The nurse has set up her tent with the medicines you brought back."
 	if _camp_state.queen_defeated and not _camp_state.bounty_paid:
 		_camp_state.bounty_paid = true
 		_party_state.supplies.gold += _camp_state.QUEEN_BOUNTY
@@ -2157,6 +2199,7 @@ func _restore(data: Dictionary) -> void:
 	_build_level()
 	_minimap.setup(_map)
 	_full_map_view.setup(_map)
+	_apply_view.call_deferred()  # a new level: lift or lower the view to the player's choice (#248)
 	_party.place(_map, data["cell"])
 	_party.facing = data["facing"]
 	_party.rotation.y = -_party.facing * PI / 2.0
@@ -4575,7 +4618,22 @@ func _build_ui(minimap: Control) -> void:
 	pack_button.focus_mode = Control.FOCUS_NONE
 	pack_button.modulate.a = 0.8
 	pack_button.pressed.connect(func(): _set_pack(true))
-	map_column.add_child(pack_button)
+	# The view (#248, owner 2026-11-17): from above or through the party's
+	# eyes, whenever the player likes.
+	var buttons := HBoxContainer.new()
+	buttons.alignment = BoxContainer.ALIGNMENT_END
+	buttons.add_theme_constant_override("separation", 8)
+	buttons.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_view_button = Button.new()
+	_view_button.custom_minimum_size = Vector2(96, 52)
+	_view_button.focus_mode = Control.FOCUS_NONE
+	_view_button.modulate.a = 0.8
+	_view_button.tooltip_text = "Switch between the view from above and the party's eyes (V)"
+	_view_button.pressed.connect(_toggle_view)
+	buttons.add_child(_view_button)
+	buttons.add_child(pack_button)
+	map_column.add_child(buttons)
+	_update_view_button()
 	ui.add_child(map_corner)
 
 	_debug_label = Label.new()
@@ -4686,6 +4744,7 @@ func _build_ui(minimap: Control) -> void:
 	_settings = SettingsScreen.new()
 	settings_layer.add_child(_settings)
 	_settings.closed.connect(_update_wound_dim)
+	_settings.closed.connect(_apply_view)  # the view may have changed (#248); not mid-fight
 	_pack.open_settings.connect(func(): _settings.open())
 	_event_screen.coin = coin
 	_camp = CampScreen.new()

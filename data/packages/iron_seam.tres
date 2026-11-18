@@ -8,6 +8,8 @@
 [resource]
 script = ExtResource("4_77xdh")
 id = "iron_seam"
+min_depth = 3
+max_depth = 3
 quest = "iron_sample"
 unless_flags = PackedStringArray("have_ore")
 rows = PackedStringArray("#####", "#,1,#", "#,,,#", "##.##")

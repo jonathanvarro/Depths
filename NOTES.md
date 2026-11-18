@@ -21,12 +21,37 @@ Format:
   supported appearances for the actual party and respects reduced motion.
 - Added: trainer shelter and portrait after a successful Floor 3 return.
   Bulwark, Steady hands and Steel nerves cost 12 gold each. The King bounty
-  unlocks Iron hide for 24 gold. Medicinal supplies from the Fungal
-  Caverns bring the nurse on the first successful return with them. Older
-  nurse schedules and camps with treatment available keep their saved state.
+  unlocks Iron hide for 24 gold. The Bitter Moss nurse quest and Floor 3
+  iron quest are preserved from main.
 - Review: the private chair trial lifts the side and rear hem without
   changing the rigs, clips or fixed stool. See `docs/camp-art-hookup.md`.
   Named portrait animation is waiting on likeness and reuse sign-off.
+
+## 2026-11-18 – Claude (strategic / exploration view toggle, #248)
+
+- Owner decision (2026-11-17): a toggle between the strategic (overhead) view and the exploration (first-person) view, left to the player.
+- Did:
+  - The overhead view (`tactical_view.gd`) now also runs while exploring (`enter(main, null)`): light-limited shroud, ceilings hidden, room groups out of the light hidden, tap a tile beside the party to step. `enter` can be called again while up to switch between a fight and exploring; `refresh_level` re-hides a new floor's ceilings.
+  - main: View button beside Pack ("Above"/"Eyes") and the V key (`_toggle_view`); `_wants_overhead` / `_apply_view` on floor changes, fight ends, Settings close. The setting `tactical_view` is the same choice, now labelled "View from above (V)". The opening, camp and the dark stage stay first person. Field fights follow the choice, also mid-fight. The hand-held light hides while viewing from above.
+  - Default stays "above" (the board fights the owner chose); first person is one press away.
+  - tactical_check covers V both ways and exploring from above after a fight; enemy_models_check drops to first person before checking the climb roots.
+
+## 2026-11-17 – Claude (camp services earned through quests, #238/#123)
+
+- Owner decisions (2026-11-17): nurse and smith tied to quests; floor-3 ore quest; nurse quest with moss from floor 2.
+- Did:
+  - New quest `healing_moss` ("Bitter Moss", the merchant, floor 2): `merchant_nurse` talk at his stall once he trades; package `healing_moss` (a moss patch on floor 2); on the next return the nurse is there (`Story.on_return`) and introduces herself at her tent (`nurse_arrival`; camp_screen plays treatment talk at its own site).
+  - The smith arrives after a return from floor 2 (`CampState.smith_after_floor`, set in `begin_arrivals`; `record_depth`), with `smith_arrival`, then his iron errand; the iron seam package moved to floor 3 (Hask's line too).
+  - New stories no longer use `ARRIVAL_DAY`; older saves with a pending day still get it.
+  - Builder: `tools/story/build_camp_services.gd`. first_days_check and story_check updated; bot listens at the nurse's tent.
+- Bot (5/hero): moss done by day 2–4, iron by day 5–7, no stuck runs.
+
+## 2026-11-17 – Claude (#118 Mage voice and light lines; #117 floor-4 landmark; #51 closed)
+
+- #118: Mages had borrowed the Brawler's lines; `data/dialogue/recruit_mage.tres` gives them their own (ROLES "voice" key; a Mage hired earlier with the Brawler's lines takes the new ones). Every recruit voice gains torch_out / torch_lit / dark, so a recruit leading the party speaks for the light. Mage description/perk now describes prayers (was "spells, once they exist"). reactions_check covers all of it.
+- #117: new floor-4 landmark "The goblins' cages" (dead end: two hanging cages on brackets, bones, goblin mark, a torch; fortress-waterworks 3D pieces). Floor 4 had only the trophy crossing. main.gd now places landmarks before the fortress dressing, whose cages skip landmark cells (landmarks_check). The landmarks already use the 3D decor through Dressing.MODELS.
+- Left on both issues: the owner's playtest questions (whom would you hate to lose; which places you recognise).
+- #51 closed by the owner.
 
 ## 2026-11-12 – Claude (#219 owner decisions: bracing, shields, buckler; #260 opened)
 

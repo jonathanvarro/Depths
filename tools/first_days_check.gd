@@ -1,6 +1,6 @@
 extends SceneTree
 ## Owner playtest fixes for camp and screens (#227, #229): the merchant,
-## nurse and smith arrive on day 3; a guide points at the fire, then the
+## nurse and smith are earned through the story (#238); a guide points at the fire, then the
 ## mine path; the Pack opens at camp; trades show sale prices, hover text
 ## and sell on a right-click; the results and expedition screens are
 ## centred. Args: tag, screenshot dir.
@@ -95,7 +95,7 @@ func _initialize() -> void:
 	check("after going down today, no guide", not screen._guide.visible)
 	camp.rest(party)
 	screen._update_site_art()
-	check("day 3: only the smith arrives by day", not camp.site_present("treatment") and camp.site_present("smith") and not camp.site_present("supplies"))
+	check("day 3: no one comes by the day any more (#238)", not camp.site_present("treatment") and not camp.site_present("smith") and not camp.site_present("supplies"))
 	check("...and the guide is gone", screen.guide_target() == "" and not screen._guide.visible)
 
 	# The first order: floor 1's way down waits for the report (#237).
@@ -140,6 +140,23 @@ func _initialize() -> void:
 	await process_frame
 	check("a right-click sells it", gear not in party.supplies.gear and party.supplies.gold == gold + price, party.supplies.gold - gold)
 	screen._close_activity()
+
+	# The nurse is earned (#238): the merchant asks for bitter moss from floor 2.
+	check("the merchant asks for bitter moss for his nurse", Story.camp_talk(camp, "supplies") == "merchant_nurse" or main.Quests.stage(camp, "healing_moss") == main.Quests.Stage.ACTIVE)
+	main.Quests.set_stage(camp, "healing_moss", main.Quests.Stage.ACTIVE)
+	check("...a floor-2 package holds the moss", load("res://data/packages/healing_moss.tres").min_depth == 2)
+	main.Quests.set_flag(camp, "healing_moss", "have_moss")
+	Story.on_return(camp)
+	check("bringing it back brings the nurse, who introduces herself", camp.site_present("treatment") and Story.camp_talk(camp, "treatment") == "nurse_arrival")
+	Story.after_talk(camp, "nurse_arrival")
+	check("...once", Story.camp_talk(camp, "treatment") == "")
+	# The smith comes with the wagon after a return from floor 2.
+	camp.record_depth(1)
+	check("a floor-1 return doesn't bring the smith", not camp.site_present("smith"))
+	camp.record_depth(2)
+	check("a floor-2 return brings him, with his introduction", camp.site_present("smith") and Story.camp_talk(camp, "smith") == "smith_arrival")
+	Story.after_talk(camp, "smith_arrival")
+	check("...then his iron errand, now on floor 3", Story.camp_talk(camp, "smith") == "smith_offer" and load("res://data/packages/iron_seam.tres").min_depth == 3)
 
 	# The expedition screen: centred.
 	main._preparation.show_for(2, party)

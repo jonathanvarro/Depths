@@ -81,12 +81,16 @@ var merchant_unloading := false
 var smith_arrival_day := 0
 ## Pending nurse arrival from older saves. New campaigns bring her supplies.
 var traders_arrival_day := 0
-## When the apprentice smith arrives on a new story.
+## When the merchant, nurse and smith arrived on older stories (by day).
+## New stories earn them (owner, 2026-11-17, #238): the merchant after the
+## first report, the nurse after the bitter moss (Story.on_return), the
+## smith after a return from this floor.
 const ARRIVAL_DAY := 3
+const SMITH_AFTER_FLOOR := 2
+## A pending smith: he comes after a return from this deep (0 = none).
+var smith_after_floor := 0
 const SITE_IDS := ["supplies", "treatment", "rest", "smith", "fire", "cave", "trainer"]
 const TRAINER_LESSONS := {"bulwark": 12, "steady_hands": 12, "steel_nerves": 12, "iron_hide": 24}
-const TREATMENT_SUPPLIES := preload("res://data/items/treatment_supplies.tres")
-var training_unlocked := false
 ## Items and gear left in the tent; they survive a party wipe.
 var stash = Supplies.new()
 ## Companion -> the day they're fit again after treatment.
@@ -139,7 +143,7 @@ var _used_names: Array = []  # each name comes by once before any repeats
 
 func site_present(id: String) -> bool:
 	if id == "trainer":
-		return training_unlocked or bounty_paid
+		return bool(site_presence.get("trainer", false)) or bounty_paid
 	return id in SITE_IDS and bool(site_presence.get(id, true))
 
 
@@ -170,8 +174,9 @@ func set_site_present(id: String, present: bool) -> void:
 func begin_arrivals() -> void:
 	site_presence = {"smith": false, "supplies": false, "treatment": false}
 	merchant_unloading = false
-	smith_arrival_day = ARRIVAL_DAY
+	smith_arrival_day = 0  # no longer by the day (#238)
 	traders_arrival_day = 0
+	smith_after_floor = SMITH_AFTER_FLOOR
 	changed.emit()
 
 
@@ -189,14 +194,6 @@ func can_trade() -> bool:
 ## The tutorial escape does not count; Main calls this for later returns.
 func expedition_returned() -> void:
 	set_merchant_unloading(false)
-
-
-func receive_treatment_supplies(party) -> bool:
-	if site_present("treatment") or not party.supplies.take(TREATMENT_SUPPLIES):
-		return false
-	traders_arrival_day = 0
-	set_site_present("treatment", true)
-	return true
 
 
 ## Seeds the camp and puts the first recruits by the fire.
@@ -331,7 +328,12 @@ func ready_on(hero: Companion) -> int:
 ## An expedition got down to `deepest`: it counts toward every route on the way.
 func record_depth(deepest: int, returned_alive := true) -> void:
 	if deepest >= 3 and returned_alive:
-		training_unlocked = true
+		set_site_present("trainer", true)
+	if smith_after_floor > 0 and deepest >= smith_after_floor:  # the apprentice comes up with the wagon (#238)
+		smith_after_floor = 0
+		site_presence["smith"] = true
+		load("res://scripts/quests.gd").set_flag(self, "story", "smith_due")
+		changed.emit()
 	for depth in ROUTE_PRICES:
 		if deepest >= depth:
 			floors_reached[depth] = times_reached(depth) + 1

@@ -27,7 +27,7 @@ replies = Array[ExtResource("2_rddwr")]([SubResource("r1_0")])
 
 [sub_resource type="Resource" id="p2"]
 script = ExtResource("1_u438k")
-text = "He leans in. \"There's good iron on the first floor - a dark seam with rust-red streaks, where the old workings end. The smith'd want it.\""
+text = "He leans in. \"There's good iron on the third floor - a dark seam with rust-red streaks, where the old workings end. The smith'd want it.\""
 
 [resource]
 script = ExtResource("4_eg1hy")

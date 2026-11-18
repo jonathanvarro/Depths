@@ -330,7 +330,7 @@ func _update_site_art() -> void:
 	# News follows the same story availability as the site's conversation.
 	for id in _buttons:
 		if id != "supplies" and _sites.has(id):
-			var news: bool = (id == "fire" and _sites.keys().any(func(site): return site not in ["smith", "supplies"] and Story.camp_talk(_camp, site) != "")) 					or (id in ["smith", "supplies"] and Story.camp_talk(_camp, id) != "")
+			var news: bool = (id == "fire" and _sites.keys().any(func(site): return site not in ["smith", "supplies", "treatment"] and Story.camp_talk(_camp, site) != "")) 					or (id in ["smith", "supplies", "treatment"] and Story.camp_talk(_camp, id) != "")
 			_buttons[id].text = _sites[id].label
 			_buttons[id].icon = NEWS_ICON if news else null
 			_buttons[id].icon_alignment = HORIZONTAL_ALIGNMENT_RIGHT
@@ -509,6 +509,12 @@ func _refresh_activity() -> void:
 		if _current=="smith":
 			_smith()
 		return
+	if _current=="treatment" and Story.camp_talk(_camp,"treatment")!="":
+		_activity.visible=false
+		await _site_talk("treatment")  # the nurse introduces herself at her tent (#238)
+		if _current!="treatment":
+			return
+		_activity.visible=true
 	for child in _body.get_children():
 		_body.remove_child(child)
 		child.queue_free()
@@ -555,7 +561,7 @@ func _talk_row() -> void:
 	if _current != "fire":
 		return  # talk and quests gather at the campfire for now (owner, 2026-10-25)
 	for site in _sites:
-		if site not in ["smith", "supplies"]:  # they speak at their own sites (#229, #237)
+		if site not in ["smith", "supplies", "treatment"]:  # they speak at their own sites (#229, #237, #238)
 			_talk_button(Story.camp_talk(_camp, site))
 
 
@@ -953,8 +959,6 @@ func _cave_path() -> void:
 		say.call("No one is fit to go. Rest in your tent.", AMBER)
 		return
 	say.call("Going: %s" % ", ".join(PackedStringArray(going.map(func(h): return h.display_name))), AMBER)
-	if not _camp.site_present("treatment"):
-		say.call("Bring back the medicinal supplies from the Fungal Caverns so the nurse can set up her tent.", MUTED)
 	var staying: Array = _party.living_members().filter(func(h): return h not in going)
 	if not staying.is_empty():
 		say.call("With the nurse: %s" % ", ".join(PackedStringArray(staying.map(func(h): return "%s (day %d)" % [h.display_name, _camp.ready_on(h)]))), MUTED)

@@ -34,7 +34,7 @@ static func activities(members: Array, burning: bool) -> Array[String]:
 ## Marks the refuge on `layout`: the empty room cell closest to the stairs
 ## down, outside any fight's room. Returns {"layout", "cell"}; cell is
 ## (-1, -1) when the floor has no room for it.
-static func place(layout: PackedStringArray, depth: int, symbol := "R") -> Dictionary:
+static func place(layout: PackedStringArray, depth: int) -> Dictionary:
 	var map = DungeonMap.new(layout, depth)
 	var down: Vector2i = map.find_content(DungeonMap.Content.STAIRS_DOWN)
 	var out := {"layout": layout, "cell": Vector2i(-1, -1)}
@@ -53,7 +53,7 @@ static func place(layout: PackedStringArray, depth: int, symbol := "R") -> Dicti
 		return out
 	var rows := PackedStringArray(layout)
 	var row := rows[best.y]
-	rows[best.y] = row.substr(0, best.x) + symbol + row.substr(best.x + 1)
+	rows[best.y] = row.substr(0, best.x) + "R" + row.substr(best.x + 1)
 	out["layout"] = rows
 	out["cell"] = best
 	return out
