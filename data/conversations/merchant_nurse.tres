@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="Conversation" format=3]
+
+[ext_resource type="Script" path="res://scripts/conversation_page.gd" id="1_i8cd2"]
+[ext_resource type="Script" path="res://scripts/conversation_reply.gd" id="2_22qip"]
+[ext_resource type="Texture2D" path="res://art/camp/highres-v4/merchant.png" id="3_pu81m"]
+[ext_resource type="Script" path="res://scripts/conversation.gd" id="4_chn77"]
+
+[sub_resource type="Resource" id="Resource_bbytc"]
+script = ExtResource("2_22qip")
+label = "\"Where does it grow?\""
+next = 1
+
+[sub_resource type="Resource" id="Resource_y3lla"]
+script = ExtResource("1_i8cd2")
+text = "The merchant watches your party limp past his stall. \"You need a proper nurse up here, not my bandages. I know one - she'll come with my next wagon. But she won't set foot in a camp without bitter moss for her salves, and I can't get it.\""
+replies = Array[ExtResource("2_22qip")]([SubResource("Resource_bbytc")])
+
+[sub_resource type="Resource" id="Resource_nblyd"]
+script = ExtResource("2_22qip")
+label = "\"I'll find it.\""
+quest = "healing_moss"
+stage = 2
+
+[sub_resource type="Resource" id="Resource_h0s87"]
+script = ExtResource("2_22qip")
+label = "\"Not now.\""
+quest = "healing_moss"
+stage = 1
+
+[sub_resource type="Resource" id="Resource_su7re"]
+script = ExtResource("1_i8cd2")
+text = "\"In the damp caverns, the second floor down - pale stuff on the wet rock, smells like old pennies. Bring me a good handful and I'll send word to her.\""
+replies = Array[ExtResource("2_22qip")]([SubResource("Resource_nblyd"), SubResource("Resource_h0s87")])
+
+[resource]
+script = ExtResource("4_chn77")
+speaker = "The merchant"
+portrait = ExtResource("3_pu81m")
+pages = Array[ExtResource("1_i8cd2")]([SubResource("Resource_y3lla"), SubResource("Resource_su7re")])

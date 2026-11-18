@@ -13,6 +13,16 @@ Format:
 
 ---
 
+## 2026-11-17 – Claude (camp services earned through quests, #238/#123)
+
+- Owner decisions (2026-11-17): nurse and smith tied to quests; floor-3 ore quest; nurse quest with moss from floor 2.
+- Did:
+  - New quest `healing_moss` ("Bitter Moss", the merchant, floor 2): `merchant_nurse` talk at his stall once he trades; package `healing_moss` (a moss patch on floor 2); on the next return the nurse is there (`Story.on_return`) and introduces herself at her tent (`nurse_arrival`; camp_screen plays treatment talk at its own site).
+  - The smith arrives after a return from floor 2 (`CampState.smith_after_floor`, set in `begin_arrivals`; `record_depth`), with `smith_arrival`, then his iron errand; the iron seam package moved to floor 3 (Hask's line too).
+  - New stories no longer use `ARRIVAL_DAY`; older saves with a pending day still get it.
+  - Builder: `tools/story/build_camp_services.gd`. first_days_check and story_check updated; bot listens at the nurse's tent.
+- Bot (5/hero): moss done by day 2–4, iron by day 5–7, no stuck runs.
+
 ## 2026-11-17 – Claude (#118 Mage voice and light lines; #117 floor-4 landmark; #51 closed)
 
 - #118: Mages had borrowed the Brawler's lines; `data/dialogue/recruit_mage.tres` gives them their own (ROLES "voice" key; a Mage hired earlier with the Brawler's lines takes the new ones). Every recruit voice gains torch_out / torch_lit / dark, so a recruit leading the party speaks for the light. Mage description/perk now describes prayers (was "spells, once they exist"). reactions_check covers all of it.
