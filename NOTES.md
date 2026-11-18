@@ -19,7 +19,7 @@ Format:
   Maelin. Face-specific clean plates and matching neutral patches reproduce
   the approved busts. Each rig has separate condition and lighting layers.
 - Review paused frames at 192 or 96 pixels through the named-cast gallery.
-  The story and recruit mapping can select these resources when ready.
+  Named recruits and older named saves use their own fitted rigs.
 
 ## 2026-11-12 – ChatGPT (named companion likenesses, #197–#199)
 
