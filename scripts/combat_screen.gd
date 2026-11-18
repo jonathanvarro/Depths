@@ -519,7 +519,7 @@ func _enemy_action(foe) -> void:
 	var pose := _action_pose(foe, intent, outcome)
 	# A slow swing (the Goblin King's staff, #257): the blow lands when the
 	# clip reaches it, not when the windup starts.
-	var delay: float = foe.type.strike_delay if pose == "attack" and is_instance_valid(foe.node) and FoeView.is_model(foe.node) and outcome.get("target") != null else 0.0
+	var delay: float = foe.type.strike_delay if pose in ["attack", "heavy"] and is_instance_valid(foe.node) and FoeView.is_model(foe.node) and outcome.get("target") != null else 0.0
 	_play(foe, pose, maxf(0.4, delay + 0.4))
 	if delay > 0.0:
 		await get_tree().create_timer(delay).timeout
@@ -594,7 +594,8 @@ func _action_pose(foe, intent: int, outcome: Dictionary) -> String:
 	# the Broodmother calling her brood, the guard bracing, the archer's draw.
 	var gesture: String = {CombatState.Intent.WEB: "web", CombatState.Intent.BITE: "venom", CombatState.Intent.BEAT: "drum",
 			CombatState.Intent.SNARE: "snare", CombatState.Intent.BROOD: "call", CombatState.Intent.CALL: "call",
-			CombatState.Intent.BRACE: "brace", CombatState.Intent.SHOOT: "draw"}.get(intent, "")
+			CombatState.Intent.BRACE: "brace", CombatState.Intent.SHOOT: "draw", CombatState.Intent.HEAVY: "heavy",
+			CombatState.Intent.RALLY: "horn", CombatState.Intent.RECOVER: "recover"}.get(intent, "")
 	if gesture != "" and FoeView.is_model(foe.node) and FoeView.has_pose(foe.node, gesture):
 		return gesture
 	# The Goblin King (#257) plants his staff to call his guards or bellow.
@@ -738,7 +739,7 @@ func _process(_delta: float) -> void:
 					reframe.call(foe.node)
 		elif FoeView.is_model(foe.node) and foe.is_alive() and not _busy.has(foe):
 			var pose := _rest_pose(foe, foe.node)  # a model holds its state's clip too
-			if FoeView.current(foe.node) not in [pose, FoeView.MODEL_POSES.get(pose, pose)]:
+			if FoeView.current(foe.node) != FoeView.model_pose(foe.node, pose):
 				FoeView.play(foe.node, pose, "idle")
 		# Fallen without a blow of ours (a gas burst, its own swell): fade it.
 		if foe.node and foe.node.visible and not foe.is_alive() and not foe.fled and not _fading.has(foe):
@@ -773,6 +774,14 @@ func _process(_delta: float) -> void:
 			var view := get_viewport().get_visible_rect()
 			var floor_y: float = (_actions.get_global_rect().position.y if _actions.visible else view.end.y) - tag.size.y - 4.0
 			var spot := screen - tag.size / 2.0
+			# On the steep board camera the Brute's maul crosses the usual
+			# label position. Leave room beside its model for the intent tag.
+			var clearance: float = foe.node.get_meta("board_tag_clearance", 0.0)
+			if _state.field and clearance > 0.0:
+				var direction := 1.0 if screen.x <= view.get_center().x else -1.0
+				var anchor: Vector3 = foe.node.global_position + Vector3.UP * lift
+				var edge := camera.unproject_position(anchor + camera.global_basis.x * clearance * direction)
+				spot.x = edge.x + (4.0 if direction > 0.0 else -tag.size.x - 4.0)
 			var top: float = view.position.y + 14.0
 			if keep_clear and keep_clear.modulate.a > 0.05 and keep_clear.text != "":
 				var words: Rect2 = keep_clear.get_global_rect()
@@ -1069,7 +1078,7 @@ func _show_spells() -> void:
 			if not Spells.SPELLS[id]["fight"]:
 				continue
 			var button := _button("%s (%d)" % [Spells.name_of(id), caster.casts])
-			button.tooltip_text = Spells.describe(id)
+			button.tooltip_text = Spells.describe(id, caster)
 			button.disabled = only_action != "" or (id == "bind" and (_target == null or not _target.is_alive()))
 			if id == "mend" and _state.party.most_hurt() == null:
 				button.disabled = true

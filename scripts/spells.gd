@@ -38,14 +38,39 @@ static func name_of(id: String) -> String:
 	return SPELLS[id]["name"]
 
 
-static func describe(id: String) -> String:
+static func describe(id: String, hero: Companion = null) -> String:
 	var text: String = SPELLS[id]["text"]
 	match id:
-		"mend": return text % MEND
-		"light": return text % LIGHT_TIME
-		"bind": return text % BIND_TURNS
-		"watch": return text % WATCH_TIME
+		"mend": return text % mend_amount(hero)
+		"light": return text % light_time(hero)
+		"bind": return text % bind_turns(hero)
+		"watch": return text % watch_time(hero)
 	return text
+
+
+## How much a Mage's staff or wand adds to their prayers (#260, owner
+## 2026-11-17): 0, then 1 at its mastery 3 and 2 at mastery 6.
+static func focus_power(hero: Companion) -> int:
+	if hero == null or hero.weapon == null or not hero.weapon.focus:
+		return 0
+	var level: int = load("res://scripts/gear_model.gd").level_of(hero.weapon)
+	return 2 if level >= 6 else (1 if level >= 3 else 0)
+
+
+static func mend_amount(hero: Companion = null) -> int:
+	return MEND + 2 * focus_power(hero)
+
+
+static func light_time(hero: Companion = null) -> int:
+	return LIGHT_TIME + 10 * focus_power(hero)
+
+
+static func bind_turns(hero: Companion = null) -> int:
+	return BIND_TURNS + (1 if focus_power(hero) >= 2 else 0)
+
+
+static func watch_time(hero: Companion = null) -> int:
+	return WATCH_TIME + 20 * focus_power(hero)
 
 
 static func is_caster(hero: Companion) -> bool:
@@ -89,12 +114,12 @@ static func spend(hero: Companion, rng: RandomNumberGenerator) -> String:
 
 
 ## Mend: the most hurt hero (or `who`) heals at once.
-static func mend(party, who: Companion = null) -> String:
+static func mend(party, who: Companion = null, caster: Companion = null) -> String:
 	var target: Companion = who if who != null else party.most_hurt()
 	if target == null:
 		return "No one is hurt."
 	var before := target.health
-	target.change_health(MEND)
+	target.change_health(mend_amount(caster))
 	return "%s is mended (+%d)." % [target.display_name, target.health - before]
 
 
@@ -112,12 +137,12 @@ static func cast_in_field(party, hero: Companion, id: String, rng: RandomNumberG
 		return failed
 	match id:
 		"mend":
-			return mend(party)
+			return mend(party, null, hero)
 		"light":
-			party.supplies.kindle(LIGHT_TIME)
+			party.supplies.kindle(light_time(hero))
 			return "A pale light gathers around %s." % hero.display_name
 		"watch":
-			party.watch_left = WATCH_TIME
+			party.watch_left = watch_time(hero)
 			party.changed.emit()
 			return "%s prays, and the floor's monsters show on the map." % hero.display_name
 		"discern":  # owner, 2026-11-03: identification

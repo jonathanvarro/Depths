@@ -38,6 +38,12 @@ with idle (48 frames), planted weight shift (32), attack (34), hurt (15)
 and fall (32). Fixed staff and hand anchors, held still poses and the
 separate staff release were checked in Godot.
 
+The [Gate Captain and Goblin Brute](goblin-elites-3d.md) extend that family
+with separate heavy strikes (contact at frame 7), held wind-up loops and
+either a horn rally or a maul recovery. At 24 fps, both have frames 0–36 for
+idle, 0–17 for attack, 0–18 for heavy, 0–12 for hurt and 0–26 for fall.
+Held poses run 0–24, and the Captain's horn action runs 0–17.
+
 The [3D combat roster](combat-roster-3d.md) (#251, 2026-11-11) adds eleven
 board candidates. The clips are 24 fps and stored in
 `art/enemies/combat-roster-3d-v1`, with frame counts in its catalog.

@@ -112,6 +112,7 @@ static func after_talk(camp, id: String, hero: Companion = null) -> void:
 			Quests.set_flag(camp, "three_knocks", "thanked")
 			Quests.set_stage(camp, "three_knocks", S.RESOLVED)
 			Quests.set_flag(camp, "iron_sample", "seam_told")
+	load("res://scripts/named_cast.gd").arrive(camp)  # someone new by the fire? (#180)
 	camp.changed.emit()
 
 
@@ -124,3 +125,4 @@ static func on_return(camp) -> void:
 		camp.set_site_present("treatment", true)
 	if Quests.has_flag(camp, "three_knocks", "crew_sent") and not Quests.has_flag(camp, "three_knocks", "miner_at_camp"):
 		Quests.set_flag(camp, "three_knocks", "miner_at_camp")
+	load("res://scripts/named_cast.gd").arrive(camp)  # someone new by the fire? (#180)

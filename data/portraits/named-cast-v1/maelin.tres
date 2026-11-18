@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="PortraitSet" format=3]
+
+[ext_resource type="Script" path="res://scripts/portrait_set.gd" id="script"]
+[ext_resource type="Texture2D" path="res://art/portraits/named-cast-v1/maelin/body.png" id="body"]
+[ext_resource type="Texture2D" path="res://art/portraits/named-cast-v1/maelin/head-clean.png" id="head"]
+[ext_resource type="Texture2D" path="res://art/portraits/named-cast-v1/maelin/eyes-neutral.png" id="eyes"]
+[ext_resource type="Texture2D" path="res://art/portraits/named-cast-v1/maelin/mouth-neutral.png" id="mouth"]
+[ext_resource type="Texture2D" path="res://art/portraits/named-cast-v1/maelin/eyes-half.png" id="eyes-half"]
+[ext_resource type="Texture2D" path="res://art/portraits/named-cast-v1/maelin/eyes-closed.png" id="eyes-closed"]
+[ext_resource type="Texture2D" path="res://art/portraits/named-cast-v1/maelin/mouth-small.png" id="mouth-small"]
+[ext_resource type="Texture2D" path="res://art/portraits/named-cast-v1/maelin/mouth-open.png" id="mouth-open"]
+[ext_resource type="Texture2D" path="res://art/portraits/named-cast-v1/maelin/blood.png" id="blood"]
+[ext_resource type="Texture2D" path="res://art/portraits/named-cast-v1/maelin/dirt.png" id="dirt"]
+[ext_resource type="Texture2D" path="res://art/portraits/named-cast-v1/maelin/bandage.png" id="bandage"]
+[ext_resource type="Texture2D" path="res://art/portraits/named-cast-v1/maelin/pallor.png" id="pallor"]
+[ext_resource type="Texture2D" path="res://art/portraits/named-cast-v1/maelin/shadow-left.png" id="shadow-left"]
+[ext_resource type="Texture2D" path="res://art/portraits/named-cast-v1/maelin/highlight-left.png" id="highlight-left"]
+
+[resource]
+script = ExtResource("script")
+rig_kind = "Unique"
+rig_family = &"unique-maelin-v1"
+face_id = &"maelin"
+body = ExtResource("body")
+head = ExtResource("head")
+eyes = ExtResource("eyes")
+mouth = ExtResource("mouth")
+conditions = {"blood": ExtResource("blood"), "dirt": ExtResource("dirt"), "bandage": ExtResource("bandage"), "pallor": ExtResource("pallor")}
+blink_frames = Array[Texture2D]([ExtResource("eyes-half"), ExtResource("eyes-closed")])
+talk_frames = Array[Texture2D]([ExtResource("mouth-small"), ExtResource("mouth-open")])
+light_shadow = ExtResource("shadow-left")
+light_highlight = ExtResource("highlight-left")

@@ -3,9 +3,10 @@ extends Node3D
 @export var animate_motion:=true
 @export var palette_material: Material
 @export var draw_still_time := 0.38
+@export var held_poses: PackedStringArray
 var player: AnimationPlayer
 var current_pose:="idle"
-const STATIC_TIME:={"idle":0.0,"walk":0.0,"attack":0.29,"hurt":0.125,"web":0.25,"venom":0.29,"brace":0.38,"drum":0.46,"snare":0.38,"enraged":0.46,"call":0.38,"cast":0.50,"defend":0.33}
+const STATIC_TIME:={"idle":0.0,"walk":0.0,"attack":0.29,"heavy":0.29,"horn":0.25,"hurt":0.125,"web":0.25,"venom":0.29,"brace":0.38,"drum":0.46,"snare":0.38,"enraged":0.46,"call":0.38,"cast":0.50,"defend":0.33}
 
 func _ready() -> void:
 	player=find_child("AnimationPlayer",true,false) as AnimationPlayer
@@ -13,7 +14,7 @@ func _ready() -> void:
 		mesh.material_override=palette_material
 		mesh.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	for pose in player.get_animation_list():
-		player.get_animation(pose).loop_mode=Animation.LOOP_LINEAR if pose in ["idle","walk","run"] else Animation.LOOP_NONE
+		player.get_animation(pose).loop_mode=Animation.LOOP_LINEAR if pose in ["idle","walk","run"] or pose in held_poses else Animation.LOOP_NONE
 	player.animation_finished.connect(_finished)
 	play(current_pose)
 

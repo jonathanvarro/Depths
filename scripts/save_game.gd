@@ -146,3 +146,6 @@ static func unpack_into(object: Object, data: Dictionary) -> void:
 			object.set(key, typed_dict)
 		else:
 			object.set(key, value)
+	if object is Companion and object.named_id != "" and object.portrait_set == null:
+		# Older named companions saved the still portrait only.
+		load("res://scripts/named_cast.gd").apply_portrait(object)
