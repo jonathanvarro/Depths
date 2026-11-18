@@ -47,6 +47,7 @@ var _figure: Node3D
 var _figure_from := Vector3.ZERO
 var _figure_health := -1
 ## Board figures by hero name; anyone else is the generic recruit.
+const Party := preload("res://scripts/party.gd")
 const FIGURES := {
 	"Mara": "res://art/enemies/combat-roster-3d-v1/mara.tscn",
 	"Corin": "res://art/enemies/combat-roster-3d-v1/corin.tscn",
@@ -66,9 +67,20 @@ var _shroud: MultiMeshInstance3D
 var seen := {}
 
 
-## Lifts the view above the fight. `main` is main.gd; `state` the fight.
+## Lifts the view above the party. `main` is main.gd; `state` the fight,
+## or null to explore from above (owner, 2026-11-17: the player picks the
+## view, any time). Called again while up, it just switches what it shows.
 func enter(main, state) -> void:
 	_main = main
+	if active:
+		if state != _state:
+			_restore_foes()
+			_clear_marks()
+			_last_key = ""
+		_state = state
+		refresh_level()
+		_update_marks()
+		return
 	_state = state
 	active = true
 	var eye: Camera3D = main._party.camera
@@ -119,11 +131,11 @@ func light_band() -> int:
 ## further straight ahead, and never through rock.
 func visible_cells() -> Dictionary:
 	var out := {}
-	var at: Vector2i = _state.party_cell
+	var at: Vector2i = _party_cell()
 	var sight: Array = SIGHT[light_band()]
 	var radius: float = sight[0]
 	var span := int(ceil(maxf(radius, sight[1])))
-	var facing: Vector2i = _state.facing
+	var facing: Vector2i = _party_facing()
 	for dy in range(-span, span + 1):
 		for dx in range(-span, span + 1):
 			var cell := at + Vector2i(dx, dy)
@@ -134,7 +146,7 @@ func visible_cells() -> Dictionary:
 				out[cell] = true
 	# The Goblin King sits in the light of his throne's fires (#257): seen
 	# across the hall, while his guards come out of the dark.
-	if _main._fight_kind == "queen":
+	if _state and _main._fight_kind == "queen":
 		for foe in _state.living_foes():
 			if foe.type.tactic != EnemyType.Tactic.QUEEN:
 				continue
@@ -162,7 +174,7 @@ func _clear_line(from: Vector2i, to: Vector2i) -> bool:
 func _update_shroud() -> void:
 	if _shroud == null:
 		return
-	var at: Vector2i = _state.party_cell
+	var at: Vector2i = _party_cell()
 	var size: float = _main.CELL_SIZE
 	var cells := []
 	for dy in range(-SHROUD, SHROUD + 1):
@@ -177,11 +189,49 @@ func _update_shroud() -> void:
 		multimesh.set_instance_transform(i, Transform3D(Basis(), Vector3(cell.x * size, (_main.WALL_HEIGHT + 0.2) / 2.0, cell.y * size)))
 
 
-## Foes the light doesn't reach are hidden from the board, tags and all.
+## Foes the light doesn't reach are hidden from the board, tags and all;
+## exploring, so are the groups waiting in their rooms.
 func _hide_unseen_foes() -> void:
-	for foe in _state.foes:
-		if is_instance_valid(foe.node) and foe.is_alive():
-			foe.node.visible = seen.has(foe.cell)
+	if _state:
+		for foe in _state.foes:
+			if is_instance_valid(foe.node) and foe.is_alive():
+				foe.node.visible = seen.has(foe.cell)
+	else:
+		for group in _main._groups:
+			if is_instance_valid(group.node):
+				group.node.visible = seen.has(group.cell)
+
+
+## Everyone shows again (first person has its own darkness).
+func _restore_foes() -> void:
+	if _state:
+		for foe in _state.foes:
+			if is_instance_valid(foe.node) and foe.is_alive():
+				foe.node.visible = true
+	for group in _main._groups:
+		if is_instance_valid(group.node):
+			group.node.visible = true
+
+
+## Where the party stands and faces: the fight's, or the explorer's.
+func _party_cell() -> Vector2i:
+	return _state.party_cell if _state else _main._party.cell
+
+
+func _party_facing() -> Vector2i:
+	return _state.facing if _state else Party.DIRECTIONS[_main._party.facing]
+
+
+## The level was rebuilt (a new floor): hide its ceilings too.
+func refresh_level() -> void:
+	if not active:
+		return
+	for node in _hidden:
+		if is_instance_valid(node):
+			node.visible = true
+	_hide_overhead(_main)
+	_last_key = ""
+	seen.clear()
 
 
 ## Drops the view back into the party's eyes.
@@ -196,9 +246,8 @@ func exit() -> void:
 		_shroud.queue_free()
 	_shroud = null
 	seen.clear()
-	for foe in _state.foes:  # first person has its own darkness
-		if is_instance_valid(foe.node) and foe.is_alive():
-			foe.node.visible = true
+	_restore_foes()
+	_state = null
 	if _tween:
 		_tween.kill()
 	var eye: Camera3D = _main._party.camera
@@ -239,7 +288,12 @@ func _process(delta: float) -> void:
 
 ## A tap or click on the board (#248).
 func _unhandled_input(event: InputEvent) -> void:
-	if not active or _main == null or not _main._combat.awaiting_field_action:
+	if not active or _main == null:
+		return
+	if _state == null:
+		_explore_tap(event)
+		return
+	if not _main._combat.awaiting_field_action:
 		return
 	var at := Vector2(-1, -1)
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
@@ -250,6 +304,21 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	var cell := cell_at(at)
 	if cell != Vector2i(-1, -1) and act_on(cell):
+		get_viewport().set_input_as_handled()
+
+
+## Exploring from above: a tap on a tile beside the party steps there.
+func _explore_tap(event: InputEvent) -> void:
+	var at := Vector2(-1, -1)
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		at = event.position
+	elif event is InputEventScreenTouch and event.pressed:
+		at = event.position
+	if at.x < 0.0 or _main._party.locked or _main._party.paused or _main._party._busy:
+		return
+	var d: Vector2i = cell_at(at) - _main._party.cell
+	if absi(d.x) + absi(d.y) == 1:
+		_main._party._try_step(d)
 		get_viewport().set_input_as_handled()
 
 
@@ -411,7 +480,12 @@ func _animate_figure() -> void:
 ## Tiles: what each foe threatens next turn, what it could reach, and a
 ## ring under every foe the party can strike now. Rebuilt when they change.
 func _update_marks() -> void:
-	if _state == null:
+	if _state == null:  # exploring: just the light and what it shows
+		var lit_now := visible_cells()
+		if lit_now != seen:
+			seen = lit_now
+			_update_shroud()
+		_hide_unseen_foes()
 		return
 	var threat := {}
 	var reach := {}

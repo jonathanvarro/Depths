@@ -23,9 +23,17 @@ static func camp_talk(camp, site: String) -> String:
 		"supplies":  # the merchant introduces himself as he unloads (#237)
 			if camp.site_present("supplies") and camp.merchant_unloading and not Quests.has_flag(camp, "story", "merchant_met"):
 				return "merchant_arrival"
+			# He knows a nurse who'd come for bitter moss (#238).
+			if camp.can_trade() and not camp.site_present("treatment") and Quests.stage(camp, "healing_moss") in [S.UNKNOWN, S.OFFERED]:
+				return "merchant_nurse"
+		"treatment":
+			if camp.site_present("treatment") and Quests.has_flag(camp, "story", "nurse_due") and not Quests.has_flag(camp, "story", "nurse_met"):
+				return "nurse_arrival"
 		"smith":
 			if not camp.site_present("smith"):
 				return ""
+			if Quests.has_flag(camp, "story", "smith_due") and not Quests.has_flag(camp, "story", "smith_met"):
+				return "smith_arrival"  # first, his introduction (#238)
 			# His errand waits until the commander's first order is done (#229).
 			if Quests.stage(camp, "iron_sample") in [S.UNKNOWN, S.OFFERED] and Quests.stage(camp, "left_behind") == S.RESOLVED:
 				return "smith_offer"
@@ -82,6 +90,10 @@ static func after_talk(camp, id: String, hero: Companion = null) -> void:
 		"merchant_arrival":
 			Quests.set_flag(camp, "story", "merchant_met")
 			camp.set_merchant_unloading(false)
+		"nurse_arrival":
+			Quests.set_flag(camp, "story", "nurse_met")
+		"smith_arrival":
+			Quests.set_flag(camp, "story", "smith_met")
 		"smith_deliver":
 			Quests.set_stage(camp, "iron_sample", S.RESOLVED)
 			if CAMP_BLADE not in camp.smith_unlocks:
@@ -105,5 +117,10 @@ static func after_talk(camp, id: String, hero: Companion = null) -> void:
 
 ## A camp return: news that arrives after an expedition (the miner's crew).
 static func on_return(camp) -> void:
+	# The bitter moss brings the nurse (#238): she's here when you get back.
+	if Quests.has_flag(camp, "healing_moss", "have_moss") and Quests.stage(camp, "healing_moss") != Quests.Stage.RESOLVED:
+		Quests.set_stage(camp, "healing_moss", Quests.Stage.RESOLVED)
+		Quests.set_flag(camp, "story", "nurse_due")
+		camp.set_site_present("treatment", true)
 	if Quests.has_flag(camp, "three_knocks", "crew_sent") and not Quests.has_flag(camp, "three_knocks", "miner_at_camp"):
 		Quests.set_flag(camp, "three_knocks", "miner_at_camp")

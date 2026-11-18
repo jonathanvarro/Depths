@@ -107,7 +107,7 @@ static func dress(level: Node3D, map, seed: int, cell_size: float, wall_height: 
 	for y in map.height:
 		for x in map.width:
 			var cell := Vector2i(x, y)
-			if cages >= CAGES or not Dressing._clear(map, cell) or map._is_room_cell(cell) or cell in gates or near_gate.call(cell):
+			if cages >= CAGES or not Dressing._clear(map, cell) or map._is_room_cell(cell) or cell in gates or near_gate.call(cell) 					or not load("res://scripts/landmarks.gd").at_cell(map, cell).is_empty():  # not inside the goblins' cages (#117)
 				continue
 			var open: Array = Dressing.SIDES.filter(func(s): return map.is_passable(cell + s))
 			if open.size() != 1 or rng.randi() % 2 != 0:

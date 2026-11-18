@@ -82,5 +82,5 @@ He unrolls the map first. Your party's route is there in the surveyor's neat han
 	_save("miner_thanks", "Hask, a miner", "res://art/portraits/story-slice-v1/hask-miner.png", [
 		_page("The miner you found behind the rubble is sitting at the fire, a blanket round his shoulders. \"They said it was you who heard me. I'd have died in there.\"
 
-He leans in. \"There's good iron on the first floor - a dark seam with rust-red streaks, where the old workings end. The smith'd want it.\"")])
+He leans in. \"There's good iron on the third floor - a dark seam with rust-red streaks, where the old workings end. The smith'd want it.\"")])
 	quit()

@@ -107,6 +107,9 @@ func _initialize() -> void:
 	check("...then leaves the board", not falling.node.visible)
 	await _end_fight(main)
 	await create_timer(1.2).timeout
+	if main._tactical.active:  # exploring from above after the fight (#248): back to the party's eyes
+		main._toggle_view()
+		await create_timer(1.2).timeout
 	check("climb roots return in first person", climbs.all(
 		func(node): return is_instance_valid(node) and node.is_visible_in_tree()))
 

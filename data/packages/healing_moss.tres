@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="QuestPackage" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="1_et8qg"]
+[ext_resource type="Resource" path="res://data/events/quest_healing_moss.tres" id="2_ula7r"]
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="3_uelc7"]
+[ext_resource type="Script" path="res://scripts/quest_package.gd" id="4_u2a6j"]
+
+[resource]
+script = ExtResource("4_u2a6j")
+id = "healing_moss"
+min_depth = 2
+max_depth = 2
+quest = "healing_moss"
+unless_flags = PackedStringArray("have_moss")
+needs_flags = PackedStringArray()
+rows = PackedStringArray("#####", "#,1,#", "#,,,#", "##.##")
+events = Array[ExtResource("1_et8qg")]([ExtResource("2_ula7r")])

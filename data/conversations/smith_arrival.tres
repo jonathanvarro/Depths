@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Conversation" format=3]
+
+[ext_resource type="Script" path="res://scripts/conversation_page.gd" id="1_lsr1u"]
+[ext_resource type="Script" path="res://scripts/conversation_reply.gd" id="2_xhbom"]
+[ext_resource type="Texture2D" path="res://art/camp/highres-v4/apprentice.png" id="3_ecb08"]
+[ext_resource type="Script" path="res://scripts/conversation.gd" id="4_nclww"]
+
+[sub_resource type="Resource" id="Resource_h88mf"]
+script = ExtResource("1_lsr1u")
+text = "A thin young man is hammering a bent rail flat on a borrowed anvil. \"The quartermaster sent me with the last wagon. Apprentice smith. I've knives, clubs, a spear or two - plain things.\" He looks at your gear. \"Bring me something worth working, and I'll do better.\""
+
+[resource]
+script = ExtResource("4_nclww")
+speaker = "The apprentice smith"
+portrait = ExtResource("3_ecb08")
+pages = Array[ExtResource("1_lsr1u")]([SubResource("Resource_h88mf")])

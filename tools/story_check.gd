@@ -234,14 +234,14 @@ func _steps456() -> void:
 	main._floors.clear()
 	main._go_to_floor(2, main.Arrival.FROM_ABOVE)
 	check("once he's safe, the rock fall isn't stamped again", "three_knocks" not in main._map.packages)
-	# The iron seam: on floor 1 while the smith's quest is open.
+	# The iron seam: on floor 3 while the smith's quest is open (#238).
 	main._floors.clear()
-	main._go_to_floor(1, main.Arrival.FROM_ABOVE)
+	main._go_to_floor(3, main.Arrival.FROM_ABOVE)
 	check("no seam before the smith asks", "iron_seam" not in main._map.packages)
 	Quests.set_stage(camp, "iron_sample", Quests.Stage.ACTIVE)
 	main._floors.clear()
-	main._go_to_floor(1, main.Arrival.FROM_ABOVE)
-	check("with his request, floor 1 has the dark seam", "iron_seam" in main._map.packages)
+	main._go_to_floor(3, main.Arrival.FROM_ABOVE)
+	check("with his request, floor 3 has the dark seam", "iron_seam" in main._map.packages)
 	await _do_event(main, "A dark seam", "Chip out")
 	check("chipping out a sample gives the ore", Quests.has_flag(camp, "iron_sample", "have_ore") and main.Story.camp_talk(camp, "smith") == "smith_deliver")
 	# The lower gate: reachable without the queen's hall.

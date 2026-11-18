@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="RoomEvent" format=3]
+
+[ext_resource type="Script" path="res://scripts/event_choice.gd" id="1_ac6oi"]
+[ext_resource type="Script" path="res://scripts/event_outcome.gd" id="2_x3kjq"]
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="3_ykmi8"]
+[ext_resource type="Script" path="res://scripts/equipment.gd" id="4_5k08j"]
+[ext_resource type="Script" path="res://scripts/supply_item.gd" id="5_p6ga1"]
+[ext_resource type="PackedScene" path="res://art/dressing/cave-growth-3d-v1/mushroom-clump.tscn" id="6_lyck3"]
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="7_n6kni"]
+
+[sub_resource type="Resource" id="Resource_hwnc0"]
+script = ExtResource("2_x3kjq")
+text = "You scrape a dripping handful into a cloth and wrap it tight. The merchant will send for his nurse."
+quest = "healing_moss"
+quest_flag = "have_moss"
+
+[sub_resource type="Resource" id="Resource_e16nn"]
+script = ExtResource("1_ac6oi")
+label = "Gather a good handful"
+time_cost = 2
+outcomes = Array[ExtResource("2_x3kjq")]([SubResource("Resource_hwnc0")])
+
+[resource]
+script = ExtResource("7_n6kni")
+kind = 4
+title = "Bitter moss"
+clue = "Pale moss carpets the wet rock here, thick as a fleece. It smells sharp, like old coins."
+choices = Array[ExtResource("1_ac6oi")]([SubResource("Resource_e16nn")])
+min_depth = 99
+prop = ExtResource("6_lyck3")

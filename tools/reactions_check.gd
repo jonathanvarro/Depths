@@ -28,10 +28,16 @@ func _initialize() -> void:
 	for role in Recruits.ROLES:
 		var recruit: Companion = Recruits.make(rng, [], [], 1, role)
 		var missing := []
-		for situation in ["fight_start", "fight_won", "hurt", "shaken", "panic", "camp_return", "camp_hurt", "camp_grief"]:
+		for situation in ["fight_start", "fight_won", "hurt", "shaken", "panic", "camp_return", "camp_hurt", "camp_grief",
+				"need_light", "need_hunger", "need_nerves", "need_hurt", "ally_down", "level_ready",
+				"torch_out", "torch_lit", "dark"]:  # a recruit leading the party speaks for the light too (2026-11-17)
 			if recruit.dialogue == null or recruit.dialogue.pick(situation) == "":
 				missing.append(situation)
 		check("a %s has lines for every situation" % role, missing.is_empty(), str(missing))
+	var mage := Recruits.make(rng, [], [], 1, "Mage")
+	check("a Mage speaks in their own voice, not the Brawler's (#118)", Recruits.lines_for(mage).resource_path.ends_with("recruit_mage.tres"))
+	mage.dialogue = load("res://data/dialogue/recruit_brawler.tres")  # hired before Mages had a voice
+	check("...and so does a Mage hired before they had one", Recruits.lines_for(mage).resource_path.ends_with("recruit_mage.tres"))
 	var old := Recruits.make(rng, [], [], 1, "Scout")
 	old.dialogue = null  # a recruit from a save made before they could talk
 	check("a recruit from an older save speaks in their role's voice", Recruits.lines_for(old) != null and Recruits.lines_for(old).pick("hurt") != "")

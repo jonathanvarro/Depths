@@ -82,8 +82,14 @@ var smith_arrival_day := 0
 ## The nurse arrives on day 3 (owner playtest, #229). The merchant now
 ## comes once the first order is reported (#237, Story.after_talk).
 var traders_arrival_day := 0
-## When the merchant, nurse and smith arrive on a new story.
+## When the merchant, nurse and smith arrived on older stories (by day).
+## New stories earn them (owner, 2026-11-17, #238): the merchant after the
+## first report, the nurse after the bitter moss (Story.on_return), the
+## smith after a return from this floor.
 const ARRIVAL_DAY := 3
+const SMITH_AFTER_FLOOR := 2
+## A pending smith: he comes after a return from this deep (0 = none).
+var smith_after_floor := 0
 const SITE_IDS := ["supplies", "treatment", "rest", "smith", "fire", "cave"]
 ## Items and gear left in the tent; they survive a party wipe.
 var stash = Supplies.new()
@@ -151,8 +157,9 @@ func set_site_present(id: String, present: bool) -> void:
 func begin_arrivals() -> void:
 	site_presence = {"smith": false, "supplies": false, "treatment": false}
 	merchant_unloading = false
-	smith_arrival_day = ARRIVAL_DAY
-	traders_arrival_day = ARRIVAL_DAY
+	smith_arrival_day = 0  # no longer by the day (#238)
+	traders_arrival_day = 0
+	smith_after_floor = SMITH_AFTER_FLOOR
 	changed.emit()
 
 
@@ -303,6 +310,11 @@ func ready_on(hero: Companion) -> int:
 
 ## An expedition got down to `deepest`: it counts toward every route on the way.
 func record_depth(deepest: int) -> void:
+	if smith_after_floor > 0 and deepest >= smith_after_floor:  # the apprentice comes up with the wagon (#238)
+		smith_after_floor = 0
+		site_presence["smith"] = true
+		load("res://scripts/quests.gd").set_flag(self, "story", "smith_due")
+		changed.emit()
 	for depth in ROUTE_PRICES:
 		if deepest >= depth:
 			floors_reached[depth] = times_reached(depth) + 1
