@@ -11,8 +11,9 @@ enum Stage { UNKNOWN, OFFERED, ACTIVE, RESOLVED }
 ## log only once found (stage OFFERED or later).
 const INFO := {
 	"left_behind": {"title": "Those Left Behind", "giver": "Commander Vael", "floor": 1, "hidden": false},
+	"healing_moss": {"title": "Bitter Moss", "giver": "the merchant", "floor": 2, "hidden": false},
 	"three_knocks": {"title": "Three Knocks", "giver": "", "floor": 2, "hidden": true},
-	"iron_sample": {"title": "Iron for the Apprentice", "giver": "the smith", "floor": 1, "hidden": false},
+	"iron_sample": {"title": "Iron for the Apprentice", "giver": "the smith", "floor": 3, "hidden": false},
 	"lower_gate": {"title": "The Way Down", "giver": "Commander Vael", "floor": 4, "hidden": false},
 	"queen_claim": {"title": "The King's Claim", "giver": "Commander Vael", "floor": 4, "hidden": false},
 	# Slice 2, the Drowned Galleries (docs/story-slice-2-plan.md).
@@ -68,6 +69,8 @@ static func brief(camp, id: String) -> String:
 			return "Report back to camp." if has_flag(camp, id, "found") else "Find where your party fell."
 		"three_knocks":
 			return "Free the trapped miner."
+		"healing_moss":
+			return "Bring the moss back to camp." if has_flag(camp, id, "have_moss") else "Gather bitter moss."
 		"iron_sample":
 			return "Give the smith the ore." if has_flag(camp, id, "have_ore") else "Bring back iron ore."
 		"lower_gate":
@@ -89,6 +92,7 @@ static func brief(camp, id: String) -> String:
 const GIVER_ART := {
 	"Commander Vael": "res://art/portraits/story-slice-v1/commander-edric.png",
 	"the smith": "res://art/camp/highres-v4/smith.png",
+	"the merchant": "res://art/camp/highres-v4/merchant.png",
 }
 
 
@@ -115,10 +119,14 @@ static func next_step(camp, id: String) -> String:
 			if has_flag(camp, id, "crew_sent"):
 				return "A camp crew will bring the miner back after your next return."
 			return "Someone is tapping behind the rubble. Get them out, or mark it for a crew."
+		"healing_moss":
+			if has_flag(camp, id, "have_moss"):
+				return "Bring the moss back to camp; the merchant will send for his nurse."
+			return "Gather bitter moss from the wet rock of the damp caverns, floor 2."
 		"iron_sample":
 			if has_flag(camp, id, "have_ore"):
 				return "Bring the iron ore to the smith."
-			return "Take an iron sample from a seam in the mine."
+			return "Take an iron sample from the dark seam on floor 3."
 		"lower_gate":
 			return "Find a way past the fortress to the water below, on floor 4."
 		"queen_claim":

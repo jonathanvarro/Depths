@@ -33,12 +33,15 @@ func _end_fight(main) -> void:
 	main._combat._state._check_end()
 	var g := 0
 	while main._in_combat and g < 120:
-		if main._combat.awaiting_field_action:
+		if main._chest.visible:
+			main._chest.closed.emit()  # leave overflow from the forced wins
+		elif main._combat.awaiting_field_action:
 			main._combat._action_chosen.emit({"kind": "wait"})
 		elif main._combat._actions.visible:
 			main._combat._action_chosen.emit({"kind": "defend"})
 		await create_timer(0.1).timeout
 		g += 1
+	check("the fixture leaves the fight", not main._in_combat)
 
 
 func _check_goblin_elites(main) -> void:
@@ -167,6 +170,9 @@ func _initialize() -> void:
 	check("...then leaves the board", not falling.node.visible)
 	await _end_fight(main)
 	await create_timer(1.2).timeout
+	if main._tactical.active:  # exploring from above after the fight (#248): back to the party's eyes
+		main._toggle_view()
+		await create_timer(1.2).timeout
 	check("climb roots return in first person", climbs.all(
 		func(node): return is_instance_valid(node) and node.is_visible_in_tree()))
 

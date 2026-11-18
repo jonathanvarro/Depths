@@ -118,7 +118,7 @@ func _initialize() -> void:
 					_outcome("The face cracks and stones rain down - but you come away with the iron.", {"quest": "iron_sample", "quest_flag": "have_ore", "health": -2, "strain": 6.0}),
 				], 6)],
 			2, "res://art/props/story-slice-v1/iron-seam.tscn")
-	_package("iron_seam", Vector2i(1, 1), "iron_sample", [A], ["have_ore"], [
+	_package("iron_seam", Vector2i(3, 3), "iron_sample", [A], ["have_ore"], [
 		"#####",
 		"#,1,#",
 		"#,,,#",

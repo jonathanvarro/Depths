@@ -199,7 +199,7 @@ func _campaign(hero_path: String, run_seed: int, max_days: int) -> Dictionary:
 ## People at camp with news (first slice): the bot listens, answering with
 ## the first reply each time, as the conversation screen would apply it.
 func _talk_at_camp() -> void:
-	for site in ["cave", "supplies", "smith", "fire"]:
+	for site in ["cave", "supplies", "smith", "treatment", "fire"]:
 		var id := Story.camp_talk(camp, site)
 		var talk := Story.conversation(id)
 		if talk == null:

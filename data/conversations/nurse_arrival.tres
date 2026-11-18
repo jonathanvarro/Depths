@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Conversation" format=3]
+
+[ext_resource type="Script" path="res://scripts/conversation_page.gd" id="1_ich81"]
+[ext_resource type="Script" path="res://scripts/conversation_reply.gd" id="2_ba2i3"]
+[ext_resource type="Texture2D" path="res://art/camp/highres-v4/nurse.png" id="3_0oeqo"]
+[ext_resource type="Script" path="res://scripts/conversation.gd" id="4_a66w6"]
+
+[sub_resource type="Resource" id="Resource_3j0ae"]
+script = ExtResource("2_ba2i3")
+next = 1
+
+[sub_resource type="Resource" id="Resource_3a3f2"]
+script = ExtResource("1_ich81")
+text = "A woman in a patched apron is unpacking jars beside the far tent, sorting the bitter moss into neat bundles. \"You're the ones who brought this? Good. It's fresh.\""
+replies = Array[ExtResource("2_ba2i3")]([SubResource("Resource_3j0ae")])
+
+[sub_resource type="Resource" id="Resource_3n33b"]
+script = ExtResource("1_ich81")
+text = "\"I can dress what the mine does to you - the deep cuts, the bad legs. Some of it takes days to mend, and you'll go down without them while it does. Bring me your wounded.\""
+
+[resource]
+script = ExtResource("4_a66w6")
+speaker = "The nurse"
+portrait = ExtResource("3_0oeqo")
+pages = Array[ExtResource("1_ich81")]([SubResource("Resource_3a3f2"), SubResource("Resource_3n33b")])

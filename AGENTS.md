@@ -511,9 +511,12 @@ Templates > Download and Install; already installed on the owner's PC).
   CampState `site_presence` / `set_site_present()` controls availability;
   absent keys default present for older saves. New story starts use #80's
   `begin_arrivals()`: unloading merchant opens after the first post-tutorial
-  expedition return; smith appears after the first camp rest. Since #229
-  (2026-11-03) the merchant, nurse and smith all arrive on day 3
-  (`ARRIVAL_DAY`); `CampScreen.guide_target()` points at the fire, then the
+  expedition return; smith appears after the first camp rest. Since #238
+  (2026-11-17) they're earned: the merchant after the first report, the
+  nurse after the merchant's bitter-moss quest (`healing_moss`, floor 2;
+  `Story.on_return`), the smith after a return from floor 2
+  (`CampState.smith_after_floor`, `record_depth`); his iron seam is on
+  floor 3. Older saves keep `ARRIVAL_DAY`; `CampScreen.guide_target()` points at the fire, then the
   mine path, on days 1–2; the Pack opens at camp; the smith's talk plays at
   his site. `tools/first_days_check.gd`.
   `Injury.recovery_days`.

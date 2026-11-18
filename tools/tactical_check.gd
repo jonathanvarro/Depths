@@ -162,7 +162,15 @@ func _initialize() -> void:
 		g += 1
 	await create_timer(1.2).timeout
 	cam = root.get_viewport().get_camera_3d()
-	check("when it ends, the view drops back into first person", not tactical.active and cam == main._party.camera and not _ceilings_hidden(main))
+	# The player chose the view from above (#248): exploring stays up there.
+	check("when it ends, the view stays above for exploring (#248)", tactical.active and tactical._state == null and cam != main._party.camera and _ceilings_hidden(main))
+	main._toggle_view()  # V: through the party's eyes
+	await create_timer(1.2).timeout
+	cam = root.get_viewport().get_camera_3d()
+	check("V drops the view into first person", not tactical.active and cam == main._party.camera and not _ceilings_hidden(main) and not Settings.get_value("tactical_view"))
+	main._toggle_view()  # and back up
+	await create_timer(1.2).timeout
+	check("...and lifts it again, exploring from above", tactical.active and tactical._state == null and Settings.get_value("tactical_view") and main._view_button.text == "Eyes")
 	check("...and the board's marks are gone", tactical._marks.is_empty())
 	await _snap("after")
 
@@ -185,10 +193,11 @@ func _initialize() -> void:
 		await create_timer(0.1).timeout
 		g2 += 1
 	await create_timer(1.2).timeout
-	check("...and it ends like any other", not main._in_combat and not tactical.active)
+	check("...and it ends like any other, back to exploring from above", not main._in_combat and tactical.active and tactical._state == null)
 
 	# Switched off: fights stay in first person.
-	Settings.set_value("tactical_view", false)
+	main._toggle_view()
+	await create_timer(1.2).timeout  # the view settles into the party's eyes
 	main._spawn_room_groups()
 	if await _fight(main):
 		await create_timer(0.5).timeout
