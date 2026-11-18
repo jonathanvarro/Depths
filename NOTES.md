@@ -13,6 +13,10 @@ Format:
 
 ---
 
+## 2026-11-18 – Claude (full suite after the 11-17 batch)
+
+- Full suite: 70 of 73 passed first time. Fixed the three: `merchant_nurse` replies now use summary labels with a line per starting hero (builder updated, rebuilt); held_light_check sets first person (the default view is now above, #248); small_items_check counts the four new smith weapons in the forge's fine stock. All three pass now.
+
 ## 2026-11-18 – Claude (the named cast and bringing back the dead, #180/#201)
 
 - Owner decisions (2026-11-17): resume the named cast, with random recruits still filling gaps; the nurse can revive a fallen companion only if their body was recovered, for a price and a lasting scar.
