@@ -37,6 +37,7 @@ func _initialize() -> void:
 	var args := OS.get_cmdline_user_args()
 	tag = args[0] if args.size() > 0 else "desk"
 	dir = args[1] if args.size() > 1 else ""
+	load("res://scripts/settings.gd").set_value("tactical_view", false)  # the held light is a first-person view (#248)
 	var main = load("res://scenes/main.tscn").instantiate()
 	main.play_opening = false
 	main.floor_seed = 11

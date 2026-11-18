@@ -28,6 +28,11 @@ Format:
   and both earlier studies at 192 and 96 pixels.
 - All three are ready for facial layers. The Rook face assignment remains
   open. See `docs/named-cast.md`.
+## 2026-11-18 – Claude (full suite after the 11-17 batch)
+
+- Full suite: 70 of 73 passed first time. Fixed the three: `merchant_nurse` replies now use summary labels with a line per starting hero (builder updated, rebuilt); held_light_check sets first person (the default view is now above, #248); small_items_check counts the four new smith weapons in the forge's fine stock. All three pass now.
+
+
 ## 2026-11-18 – ChatGPT (goblin models and view toggle, #251)
 
 - Resolved the model branch against the view toggle. The Captain's dark
