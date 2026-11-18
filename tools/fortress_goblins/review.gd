@@ -1,6 +1,7 @@
 extends Control
 const ART:="res://art/enemies/fortress-goblins-3d-v1/"
 const CAMERAS:={3:Vector3(0,8,3.4),5:Vector3(0,5.5,2.4),6:Vector3(0,9,3.8)}
+@export var asset_root := ART
 var ids: Array=[]
 var selected:=0
 var angle:=0
@@ -21,7 +22,7 @@ var poses: Array=[]
 var tiles: Node3D
 
 func _ready() -> void:
-	var catalog: Dictionary=JSON.parse_string(FileAccess.get_file_as_string(ART+"catalog.json"))
+	var catalog: Dictionary=JSON.parse_string(FileAccess.get_file_as_string(asset_root+"catalog.json"))
 	for a in catalog.assets:ids.append(a.id)
 	var bg:=ColorRect.new();bg.color=Color("141a1b");bg.set_anchors_and_offsets_preset(PRESET_FULL_RECT);add_child(bg)
 	var margin:=MarginContainer.new();margin.set_anchors_and_offsets_preset(PRESET_FULL_RECT);add_child(margin)
@@ -75,9 +76,9 @@ func _process(_dt: float) -> void:
 
 func load_prop() -> void:
 	if prop:stage.remove_child(prop);prop.queue_free()
-	prop=load(ART+ids[selected]+".tscn").instantiate();stage.add_child(prop)
+	prop=load(asset_root+ids[selected]+".tscn").instantiate();stage.add_child(prop)
 	poses.clear();var picker:=controls[2] as OptionButton;picker.clear()
-	for p in ["idle","attack","hurt","fall","walk","run","draw","brace","drum","snare","enraged","call","web","venom","defend","cast","plant"]:
+	for p in ["idle","attack","heavy","wind-up","rally","horn","recover","hurt","fall","walk","run","draw","brace","drum","snare","enraged","call","web","venom","defend","cast","plant"]:
 		if prop.player.has_animation(p):poses.append(p);picker.add_item(p)
 	if pose not in poses:pose="idle"
 	(controls[5] as CheckButton).set_pressed_no_signal(true)

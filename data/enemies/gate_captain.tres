@@ -5,11 +5,14 @@
 [ext_resource type="Resource" path="res://data/injuries/limp.tres" id="3_4uxqe"]
 [ext_resource type="PackedScene" path="res://art/enemies/monsters-v1/gate-captain/scene.tscn" id="4_h18x7"]
 [ext_resource type="Script" path="res://scripts/enemy_type.gd" id="5_qa83n"]
+[ext_resource type="PackedScene" path="res://art/enemies/goblin-elites-3d-v1/gate-captain.tscn" id="model"]
 
 [resource]
 script = ExtResource("5_qa83n")
 display_name = "Gate captain"
 scene = ExtResource("4_h18x7")
+model = ExtResource("model")
+strike_delay = 0.2916667
 max_health = 22
 damage_min = 3
 damage_max = 4

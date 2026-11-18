@@ -29,7 +29,10 @@ static func is_model(node: Node) -> bool:
 	return node != null and sprite_of(node) == null and node.has_method("play") and node.has_method("sample")
 
 
-static func _model_pose(pose: String) -> String:
+static func model_pose(node: Node, pose: String) -> String:
+	var player: AnimationPlayer = node.get("player")
+	if player and player.has_animation(pose):
+		return pose
 	return MODEL_POSES.get(pose, pose)
 
 
@@ -40,7 +43,7 @@ static func has_pose(node: Node, pose: String) -> bool:
 		return sprite.sprite_frames.has_animation(pose)
 	if is_model(node):
 		var player: AnimationPlayer = node.get("player")
-		return player != null and player.has_animation(_model_pose(pose))
+		return player != null and player.has_animation(model_pose(node, pose))
 	return false
 
 
@@ -50,7 +53,7 @@ static func play(node: Node, pose: String, fallback := "attack") -> void:
 	if sprite:
 		sprite.play(pose if sprite.sprite_frames.has_animation(pose) else fallback)
 	elif is_model(node):
-		node.play(_model_pose(pose) if has_pose(node, pose) else fallback)
+		node.play(model_pose(node, pose) if has_pose(node, pose) else fallback)
 
 
 ## The pose it shows now.

@@ -6,11 +6,14 @@
 [ext_resource type="Resource" path="res://data/injuries/limp.tres" id="3_063hd"]
 [ext_resource type="PackedScene" path="res://art/enemies/monsters-v1/goblin-brute/scene.tscn" id="4_1r6o0"]
 [ext_resource type="Script" path="res://scripts/enemy_type.gd" id="5_trueg"]
+[ext_resource type="PackedScene" path="res://art/enemies/goblin-elites-3d-v1/goblin-brute.tscn" id="model"]
 
 [resource]
 script = ExtResource("5_trueg")
 display_name = "Goblin brute"
 scene = ExtResource("4_1r6o0")
+model = ExtResource("model")
+strike_delay = 0.2916667
 max_health = 18
 damage_min = 3
 damage_max = 5
