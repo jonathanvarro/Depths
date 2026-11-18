@@ -28,7 +28,10 @@ const KINDS := {
 	# #132's art: roots that broke through, and the king's buried supplies.
 	"root_junction": {"name": "The root-choked junction", "floors": [2, 3], "spot": "junction"},
 	"lost_cache": {"name": "The king's lost cache", "floors": [1, 2], "spot": "room"},
+	# The fortress (2026-11-17, #117): a second place to know floor 4 by.
+	"goblin_cages": {"name": "The goblins' cages", "floors": [4, 4], "spot": "dead_end"},
 }
+const FORTRESS := "res://art/props/fortress-waterworks-3d-v1/"
 const ART := "res://art/dressing/landmarks-v1/"
 const PER_FLOOR := 2
 const MIN_ROOM := 6  # cells
@@ -88,6 +91,7 @@ static func place(level: Node3D, map, depth: int, seed: int, cell_size: float, w
 			"timbered_drift": _build_timbered_drift(piece, map, cells, rng, cell_size, wall_height)
 			"flooded_sump": _build_flooded_sump(piece, map, cells, rng, cell_size, wall_height)
 			"old_cave_in": _build_old_cave_in(piece, map, cells, rng, cell_size, wall_height)
+			"goblin_cages": _build_goblin_cages(piece, map, cells, rng, cell_size, wall_height)
 		map.landmarks.append({"id": id, "name": KINDS[id]["name"], "cells": cells, "centre": _centre(cells), "seen": id in seen_before})
 	return used
 
@@ -377,3 +381,37 @@ static func _build_trophy_crossing(piece: Node3D, map, cells: Array, rng: Random
 			Dressing._put(piece, id, wall + Vector3(0, 1.45 if lit < 2 else 1.2, 0), Dressing._yaw_facing(-wall_side))
 			lit += 1
 			break
+
+
+## Where the goblins keep what they catch (2026-11-17): a dead-end drift with
+## empty cages hung from iron brackets, bones underneath, their mark and one
+## smoky torch. Nothing is in the cages, and nothing here can be taken.
+static func _build_goblin_cages(piece: Node3D, map, cells: Array, rng: RandomNumberGenerator, cell_size: float, wall_height: float) -> void:
+	var end: Vector2i = cells[0]
+	var inward: Vector2i = Dressing.SIDES.filter(func(s): return map.is_passable(end + s))[0]
+	var back := -Vector3(inward.x, 0, inward.y)
+	var at := _at(end, cell_size)
+	var along := Dressing._along_wall(inward)
+	for offset in [-0.32, 0.32]:
+		_fortress(piece, "hanging-cage", at + back * 0.25 + along * offset + Vector3(0, wall_height - 0.01, 0), rng.randf() * TAU)
+	for side in Dressing._wall_sides(map, end):
+		if side == -inward:
+			continue  # brackets on the side walls, holding the cages up
+		_fortress(piece, "hanging-bracket", at + Vector3(side.x, 0, side.y) * (cell_size / 2.0 - 0.01) + Vector3(0, 1.6, 0), Dressing._yaw_facing(-side))
+	Dressing._put(piece, "scattered-bones", at + back * 0.2, rng.randf() * TAU)
+	Dressing._put(piece, "goblin-litter", _at(cells[min(1, cells.size() - 1)], cell_size), 0.0)
+	var mark := GOBLIN_MARK.instantiate()
+	mark.position = at + Vector3(inward.x, 0, inward.y) * 0.55 + along * 0.5
+	piece.add_child(mark)
+	var walls := Dressing._wall_sides(map, cells[min(1, cells.size() - 1)])
+	if not walls.is_empty():
+		var wall := _at(cells[min(1, cells.size() - 1)], cell_size) + Vector3(walls[0].x, 0, walls[0].y) * (cell_size / 2.0 - 0.01)
+		Dressing._put(piece, "goblin-torch-lit", wall + Vector3(0, 1.45, 0), Dressing._yaw_facing(-walls[0]))
+
+
+static func _fortress(parent: Node3D, id: String, at: Vector3, yaw: float) -> Node3D:
+	var node: Node3D = load(FORTRESS + id + ".tscn").instantiate()
+	node.position = at
+	node.rotation.y = yaw
+	parent.add_child(node)
+	return node

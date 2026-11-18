@@ -715,10 +715,12 @@ func _build_level() -> void:
 		Dressing.dress_opening(_level, _map, _site_seed, CELL_SIZE, WALL_HEIGHT)  # the new 3D pieces (2026-11-09)
 	elif _depth == OUTSKIRTS_DEPTH and not use_debug_layout:
 		_add_outskirts_dressing()
-	elif _depth==FORTRESS_DEPTH:
-		_add_fortress_dressing()
+	var landmarks := {}
 	if not _in_opening and not use_debug_layout:
-		var landmarks := Landmarks.place(_level, _map, _depth, _site_seed, CELL_SIZE, WALL_HEIGHT)  # #117
+		landmarks = Landmarks.place(_level, _map, _depth, _site_seed, CELL_SIZE, WALL_HEIGHT)  # #117
+	if _depth == FORTRESS_DEPTH and not _in_opening:
+		_add_fortress_dressing()  # after the landmarks, so its cages keep out of theirs (#117)
+	if not _in_opening and not use_debug_layout:
 		var dresser: Script = environment_theme.dressing_script if environment_theme.dressing_script else Dressing
 		dresser.dress(_level, _map, _depth, _site_seed, CELL_SIZE, WALL_HEIGHT, landmarks)  # #128
 		if kaykit_pilot and not "--no-kaykit" in OS.get_cmdline_user_args():  # #224, adopted 2026-11-03

@@ -27,13 +27,14 @@ const ROLES := {
 		"portrait": "res://art/portraits/recruit-silhouettes-v1/scout.png",
 		"perk": "Hears some fights first and always spots traps.", "perk_name": "Awareness",
 	},
-	"Mage": {  # spells come with #170; until then a weak back-row sling
-		"about": "Casts spells (coming). Unarmoured and unaware; fights from the back with a sling.",
+	"Mage": {  # prays (#170); a weak back-row sling between casts
+		"about": "Prays: a few casts each trip, starting with Mend; tomes teach more. Unarmoured and unaware; fights from the back with a sling.",
 		"stats": [1, 2, 2, 3], "aim": 0.72, "speed": 10, "hp": -2, "attack": Vector2i(1, 3),
 		"guard_factor": 0.5, "toughness": 0, "row": "back", "reach": true,
 		"portrait": "res://art/portraits/recruit-silhouettes-v1/scout.png",
-		"perk": "Spells, once they exist (#170).", "perk_name": "Spells",
+		"perk": "Casts prayers: Mend to start, more from tomes found below.", "perk_name": "Prayers",
 		"faces": "Brawler",
+		"voice": "Mage",  # their own voice (#118, 2026-11-17), not the Brawler's
 	},
 	# The Fixer (#101, owner 2026-10-25): an expedition role more than a
 	# fighting one. Three fitted trader faces and a distinct fallback (#163).
@@ -78,15 +79,16 @@ const NAMES := [
 ## What a hero says: their own lines, or (for a recruit saved before
 ## recruits could talk) their role's (#118).
 static func lines_for(hero: Companion) -> DialogueLines:
-	if hero.dialogue:
-		return hero.dialogue
+	if hero.dialogue and not (hero.role == "Mage" and hero.dialogue.resource_path.ends_with("recruit_brawler.tres")):
+		return hero.dialogue  # (a Mage hired before they had a voice takes theirs)
 	if ROLES.has(hero.role):
 		return load(_lines_path(hero.role))
 	return null
 
 
 static func _lines_path(role: String) -> String:
-	var voice: String = ROLES.get(role, {}).get("faces", role)  # a class borrows an older role's voice and faces (#179)
+	var spec: Dictionary = ROLES.get(role, {})
+	var voice: String = spec.get("voice", spec.get("faces", role))  # a class borrows an older role's voice and faces (#179)
 	return "res://data/dialogue/recruit_%s.tres" % voice.to_lower()
 
 

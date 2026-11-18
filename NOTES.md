@@ -13,6 +13,13 @@ Format:
 
 ---
 
+## 2026-11-17 – Claude (#118 Mage voice and light lines; #117 floor-4 landmark; #51 closed)
+
+- #118: Mages had borrowed the Brawler's lines; `data/dialogue/recruit_mage.tres` gives them their own (ROLES "voice" key; a Mage hired earlier with the Brawler's lines takes the new ones). Every recruit voice gains torch_out / torch_lit / dark, so a recruit leading the party speaks for the light. Mage description/perk now describes prayers (was "spells, once they exist"). reactions_check covers all of it.
+- #117: new floor-4 landmark "The goblins' cages" (dead end: two hanging cages on brackets, bones, goblin mark, a torch; fortress-waterworks 3D pieces). Floor 4 had only the trophy crossing. main.gd now places landmarks before the fortress dressing, whose cages skip landmark cells (landmarks_check). The landmarks already use the 3D decor through Dressing.MODELS.
+- Left on both issues: the owner's playtest questions (whom would you hate to lose; which places you recognise).
+- #51 closed by the owner.
+
 ## 2026-11-12 – Claude (#219 owner decisions: bracing, shields, buckler; #260 opened)
 
 - Owner decisions (2026-11-12): King difficulty stays; braced blows teach armour/shield half (food and light still drain while you stall); back-row armour stays as is; shields learn only from blows their guard stops; the smith sells a buckler.
