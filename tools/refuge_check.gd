@@ -100,6 +100,9 @@ func _initialize() -> void:
 	camp.record_depth(3, false)
 	check("a wipe alone does not bring the trainer", not camp.site_present("trainer"))
 	camp.record_depth(3)
+	var restored_camp = main.CampState.new()
+	main.SaveGame.unpack_into(restored_camp, main.SaveGame.pack_object(camp, ["stash", "rng"]))
+	check("the trainer stays available after a save and load", restored_camp.site_present("trainer"))
 	ps.supplies.gold = 100
 	check("the trainer takes gold and teaches an existing skill", camp.teach(ps, hero, "bulwark") and "bulwark" in hero.talents and ps.supplies.gold == 88)
 	check("a duplicate or early advanced lesson takes no gold", not camp.teach(ps, hero, "bulwark") and not camp.teach(ps, hero, "iron_hide") and ps.supplies.gold == 88)

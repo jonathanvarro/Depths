@@ -58,6 +58,12 @@ const SMITH_STOCK: Array[Equipment] = [
 	preload("res://data/gear/wool_cape.tres"),
 	# Shields can be bought (owner, 2026-11-12, #219); worn on the back.
 	preload("res://data/gear/buckler.tres"),
+	# The back row's weapons (owner, 2026-11-17, #260): slings and bows that
+	# learn, and a Mage's staff or wand, which their prayers grow with.
+	preload("res://data/gear/sling.tres"),
+	preload("res://data/gear/short_bow.tres"),
+	preload("res://data/gear/wand.tres"),
+	preload("res://data/gear/oak_staff.tres"),
 ]
 ## Contracts the king's camp posts, one a day (#42).
 const CONTRACTS := [
@@ -97,6 +103,14 @@ var stash = Supplies.new()
 var recovering := {}
 ## Recruits waiting at the fire; each new day one leaves, one arrives (#41).
 var candidates: Array[Companion] = []
+## The named cast who have come to camp (#180), by id.
+var named_met: Array[String] = []
+## Companions whose bodies the party carried home (#180, owner 2026-11-17):
+## the nurse can try to bring them back.
+var fallen: Array[Companion] = []
+const REVIVE_PRICE := 40
+## What coming back costs them for good: maximum health.
+const REVIVE_SCAR := 3
 ## Heroes recovering in the nurse's tent while the others are down below.
 var left_behind: Array[Companion] = []
 var rng := RandomNumberGenerator.new()
@@ -278,7 +292,9 @@ func rest(party) -> void:
 		traders_arrival_day = 0
 	explored_today = false
 	if not candidates.is_empty():
-		candidates.pop_front()  # the longest-waiting moves on
+		var leaving: Array = candidates.filter(func(c: Companion): return c.named_id == "")
+		if not leaving.is_empty():
+			candidates.erase(leaving[0])  # the longest-waiting moves on; the named cast wait (#180)
 	_fill_fire(party)
 	post_contract()
 	for hero in recovering.keys():
@@ -325,6 +341,32 @@ func ready_on(hero: Companion) -> int:
 	return maxi(day, recovering.get(hero, day))
 
 
+## The party carried `hero`'s body home (#180).
+func carry_home(hero: Companion) -> void:
+	if hero not in fallen:
+		fallen.append(hero)
+		changed.emit()
+
+
+## The nurse brings a fallen companion back (#180): for a price, and a
+## lasting scar. They wait by the fire to be asked again.
+func revive(party, hero: Companion) -> bool:
+	if hero not in fallen or not site_present("treatment") or party.supplies.gold < REVIVE_PRICE:
+		return false
+	party.supplies.gold -= REVIVE_PRICE
+	party.supplies.changed.emit()
+	fallen.erase(hero)
+	hero.hp_bonus -= REVIVE_SCAR
+	hero.injuries.clear()
+	hero.dressed.clear()
+	hero.refresh_stats()
+	hero.health = hero.effective_max_health()
+	hero.strain = 40.0  # they remember dying
+	candidates.push_front(hero)
+	changed.emit()
+	return true
+
+
 ## An expedition got down to `deepest`: it counts toward every route on the way.
 func record_depth(deepest: int, returned_alive := true) -> void:
 	if deepest >= 3 and returned_alive:
@@ -337,6 +379,7 @@ func record_depth(deepest: int, returned_alive := true) -> void:
 	for depth in ROUTE_PRICES:
 		if deepest >= depth:
 			floors_reached[depth] = times_reached(depth) + 1
+	load("res://scripts/named_cast.gd").arrive(self)  # a first floor-2 return brings Nessa (#180)
 
 
 ## How many expeditions have reached `depth`.

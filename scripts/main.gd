@@ -1041,6 +1041,8 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 	# and his guards are 3D models). Lairs and the gate keep their own stage
 	# for now (the Broodmother plans differently on the board).
 	var ambush_on_board: bool = not on_map and _map_fights_active() and Settings.get_value("tactical_view") and _fight_kind in ["", "queen"]
+	var isolate_stage := _fight_kind == "queen" or (_fight_kind == "lair" and types.has(CAPTAIN)
+		and CAPTAIN.view_scene() == CAPTAIN.model)
 	if ambush_on_board:
 		on_map = true
 	if on_map:
@@ -1056,12 +1058,12 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 	else:
 		_party.face_open(cell if cell != _party.cell else Vector2i(-1, -1))  # never fight a wall (#111)
 		_tactical.exit()  # the dark stage is seen through the party's eyes
-		_place_foes(state.foes)
+		_place_foes(state.foes, isolate_stage)
 	_in_combat = true
 	# Fog surges up from the floor and the cave fades to near-black: the
 	# fight takes place on a dark stage, so enemies never meet the walls.
 	if not on_map:
-		_stage.enter(Settings.get_value("flashes"), _fight_kind == "queen")
+		_stage.enter(Settings.get_value("flashes"), isolate_stage)
 	_update_hints("fight")
 	_fight_tips(state)
 	_say("fight_start", true, false, _any_voice())
@@ -1955,6 +1957,8 @@ func _start_new_expedition(returned_alive := true) -> void:
 	# with the nurse rejoin (#41).
 	for hero: Companion in _party_state.members.duplicate():
 		if not hero.is_with_party():
+			if not hero.is_alive() and not hero.main_hero and not _wipe_pending:
+				_camp_state.carry_home(hero)  # the others carried them out (#180)
 			_party_state.remove_member(hero)
 	_camp_state.rejoin(_party_state)
 	_camp_state.record_depth(_expedition.deepest, returned_from_expedition and returned_alive)
@@ -2094,7 +2098,7 @@ func _save_now() -> void:
 ## Everything a save needs, as plain data.
 func _save_data() -> Dictionary:
 	var people: Array = []  # every hero object once; referenced by index
-	for hero in _party_state.members + _camp_state.left_behind + _camp_state.candidates:
+	for hero in _party_state.members + _camp_state.left_behind + _camp_state.candidates + _camp_state.fallen:
 		if hero not in people:
 			people.append(hero)
 	var index := func(hero): return people.find(hero)
@@ -2131,7 +2135,8 @@ func _save_data() -> Dictionary:
 		"party": party.map(func(h): return index.call(h)),
 		"time": _party_state.time_elapsed,
 		"supplies": supplies,
-		"camp": SaveGame.pack_object(_camp_state, ["stash", "candidates", "left_behind", "recovering", "rng"]),
+		"camp": SaveGame.pack_object(_camp_state, ["stash", "candidates", "left_behind", "recovering", "rng", "fallen"]),
+		"fallen": _camp_state.fallen.map(func(h): return index.call(h)),
 		"stash": SaveGame.pack_object(_camp_state.stash),
 		"candidates": _camp_state.candidates.map(func(h): return index.call(h)),
 		"left_behind": _camp_state.left_behind.map(func(h): return index.call(h)),
@@ -2160,6 +2165,7 @@ func _restore(data: Dictionary) -> void:
 	SaveGame.unpack_into(_camp_state.stash, data["stash"])
 	_camp_state.candidates.assign(data["candidates"].map(func(i): return people[i]))
 	_camp_state.left_behind.assign(data["left_behind"].map(func(i): return people[i]))
+	_camp_state.fallen.assign(data.get("fallen", []).map(func(i): return people[i]))  # carried home (#180)
 	_camp_state.recovering = {}
 	for pair in data["recovering"]:
 		_camp_state.recovering[people[pair[0]]] = pair[1]
@@ -2641,7 +2647,7 @@ func _place_extra_foe(foe) -> void:
 		# Reinforcements come in along the flanks, clear of the King's staff.
 		var side := signf((node.position - _party.position).dot(right))
 		node.position = _party.position + forward * 3.35 + right * side * 1.92
-		BattleStage.dress_king_stage_foe(node, false)
+		BattleStage.dress_stage_foe(node, false)
 	_dress_foe(node, foe.type)
 	BattleStage.raise(node)
 	_level.add_child(node)
@@ -2789,7 +2795,7 @@ func _on_camp_day_passed(day: int) -> void:
 
 
 ## Stands the enemies in front of the party, spread across the corridor.
-func _place_foes(foes: Array) -> void:
+func _place_foes(foes: Array, isolate_stage := false) -> void:
 	var forward := -_party.global_transform.basis.z
 	var right := _party.global_transform.basis.x
 	# The battle stage hides the cave, so enemies always take the same spots,
@@ -2806,10 +2812,10 @@ func _place_foes(foes: Array) -> void:
 	for i in ordered.size():
 		var foe = ordered[i]
 		var depth := distance + (CELL_SIZE * 0.5 if foe.in_back() and ahead_open else 0.0)
-		# The dark stage keeps the painted art (2026-11-11): it is framed for
-		# it, and first person is where those paintings belong. The 3D models
-		# stand on the map and the board.
-		var node: Node3D = foe.type.scene.instantiate()
+		# The captain's lair stays on the dark stage. Use its model there so
+		# the horn and cleaver poses are visible in the captain's own encounter.
+		var art: PackedScene = foe.type.view_scene() if _fight_kind == "lair" and foe.type == CAPTAIN else foe.type.scene
+		var node: Node3D = art.instantiate()
 		node.position = _party.position + forward * depth + right * offsets[mini(i, offsets.size() - 1)]
 		if king_stage:
 			var is_king: bool = foe.type == QUEEN
@@ -2818,7 +2824,8 @@ func _place_foes(foes: Array) -> void:
 			else:
 				node.position = _party.position + forward * 2.65 + right * guard_side * 1.47
 				guard_side *= -1.0
-			BattleStage.dress_king_stage_foe(node, is_king)
+		if isolate_stage:
+			BattleStage.dress_stage_foe(node, FoeView.is_model(node))
 		_dress_foe(node, foe.type)
 		if foe.elite != "":
 			_mark_elite(node)

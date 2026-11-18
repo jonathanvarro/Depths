@@ -184,5 +184,31 @@ func _initialize() -> void:
 		var shot := root.get_texture().get_image()
 		if shot:
 			shot.save_png("%s/magic_%s_fight.png" % [dir, tag])
+	# A staff or wand (#260, owner 2026-11-17): prayers grow with its mastery,
+	# and casting in a fight teaches it.
+	var GearModel = load("res://scripts/gear_model.gd")
+	var focus_party = load("res://scripts/party_state.gd").new()
+	focus_party.add_member(_hero("alwen"))
+	var seer: Companion = focus_party.members[0]  # the party's own copy, its gear made items
+	check("Alwen's staff is a focus that can learn", seer.weapon.focus and seer.weapon.base_id != "", seer.weapon.base_id)
+	check("...fresh, it adds nothing", Spells.mend_amount(seer) == Spells.MEND)
+	GearModel.award(seer.weapon, 54.0)
+	var mastered: int = GearModel.level_of(seer.weapon)
+	check("...mastered, Mend heals more", mastered >= 3 and Spells.mend_amount(seer) > Spells.MEND and Spells.describe("mend", seer).contains(str(Spells.mend_amount(seer))), [mastered, Spells.mend_amount(seer)])
+	var cast_fight = CS.new(focus_party, [load("res://data/enemies/rat.tres")] as Array[EnemyType])
+	seer.strain = 0
+	seer.casts = 3
+	seer.health = 3
+	cast_fight.hero_cast(seer, "mend")
+	check("casting in a fight teaches the staff", cast_fight.mastery_gain.get(seer.weapon, 0.0) > 0.0)
+	var scout: Companion = load("res://scripts/recruits.gd").make(rng, [], [], 1, "Scout")
+	var wand_mage: Companion = load("res://scripts/recruits.gd").make(rng, [], [], 1, "Mage")
+	var hired = load("res://scripts/party_state.gd").new()
+	hired.add_member(scout)
+	hired.add_member(wand_mage)
+	scout = hired.members[0]
+	wand_mage = hired.members[1]
+	check("a Scout recruit carries a sling that learns, from the back row", scout.weapon != null and scout.weapon.base_id == "sling" and scout.has_reach())
+	check("...a Mage, a wand: a focus with a weak bolt", wand_mage.weapon != null and wand_mage.weapon.base_id == "wand" and wand_mage.weapon.focus and wand_mage.has_reach())
 	print("fails=", fails)
 	quit()

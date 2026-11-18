@@ -8,11 +8,13 @@ TOOL = Path(__file__).resolve().parent
 parser = argparse.ArgumentParser()
 parser.add_argument("--workspace",type=Path,required=True)
 parser.add_argument("--review-output",type=Path)
+parser.add_argument("--elites",action="store_true")
 args = parser.parse_args()
-out = args.review_output or args.workspace/"build/local-fortress-goblins-3d-v1"
+out = args.review_output or args.workspace/"build"/("local-goblin-elites-v1" if args.elites else "local-fortress-goblins-3d-v1")
 out.mkdir(parents=True,exist_ok=True)
 
-for path in ("art/enemies/fortress-goblins-3d-v1","art/enemies/combat-roster-3d-v1",
+family = "art/enemies/goblin-elites-3d-v1" if args.elites else "art/enemies/fortress-goblins-3d-v1"
+for path in (family,"art/enemies/combat-roster-3d-v1",
              "art/props/treatment-supplies-v1"):
     shutil.copytree(ROOT/path,out/path,dirs_exist_ok=True)
 for path in ("art/textures/cave-v1/floor.png","art/third-party/kaykit-dungeon-remastered/grain-floor1.png"):
@@ -50,6 +52,6 @@ anchor_bottom=1.0
 grow_horizontal=2
 grow_vertical=2
 script=ExtResource("1")
-''',encoding="utf-8")
+'''+f'asset_root = "res://{family}/"\n',encoding="utf-8")
 godot = args.workspace/"build/research-godot-4.7.2/Godot_v4.7.2-stable_win64_console.exe"
 (out/"START_REVIEW.cmd").write_text(f'@echo off\n"{godot}" --path "%~dp0." %*\n',encoding="utf-8")
