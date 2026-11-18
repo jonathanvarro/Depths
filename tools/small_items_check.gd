@@ -51,13 +51,13 @@ func _initialize() -> void:
 	party.supplies.gold = 100
 	check("it costs 60 gold", camp.build_forge(party) and party.supplies.gold == 40 and camp.forge_built)
 	var stock: Array = camp.smith_fine_stock()
-	check("the forge sells fine versions of the smith's weapons and armour", stock.size() == 7 and stock.all(func(g): return g.tier == "fine"), str(stock.map(func(g): return g.display_name)))
+	check("the forge sells fine versions of the smith's weapons and armour", stock.size() == 11 and stock.all(func(g): return g.tier == "fine"), str(stock.map(func(g): return g.display_name)))
 	check("...the same pieces all day", camp.smith_fine_stock() == stock)
 	var piece: Equipment = stock[0]
 	party.supplies.gold = 200
 	check("bought, it's gone for today", camp.buy_gear(party, piece) and piece not in camp.smith_fine_stock())
 	camp.day += 1
-	check("tomorrow the forge has new work", camp.smith_fine_stock().size() == 7)
+	check("tomorrow the forge has new work", camp.smith_fine_stock().size() == 11)
 
 	# Cursed weapons and armour.
 	var rng := RandomNumberGenerator.new()

@@ -26,6 +26,11 @@ Format:
 - Review: the private chair trial lifts the side and rear hem without
   changing the rigs, clips or fixed stool. See `docs/camp-art-hookup.md`.
   Named portrait animation is waiting on likeness and reuse sign-off.
+## 2026-11-18 – Claude (full suite after the 11-17 batch)
+
+- Full suite: 70 of 73 passed first time. Fixed the three: `merchant_nurse` replies now use summary labels with a line per starting hero (builder updated, rebuilt); held_light_check sets first person (the default view is now above, #248); small_items_check counts the four new smith weapons in the forge's fine stock. All three pass now.
+
+
 ## 2026-11-18 – ChatGPT (goblin models and view toggle, #251)
 
 - Resolved the model branch against the view toggle. The Captain's dark
