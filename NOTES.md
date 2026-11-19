@@ -20,6 +20,19 @@ Format:
   existing rules and alternate painted scene.
 - Bitter Moss now has a dedicated fresh and scraped 3D prop in the real
   Floor 2 quest. See `docs/early-creatures-3d.md` for the model and prop review.
+## 2026-11-12 – ChatGPT (camp art hookup, #190 / #238 / #240)
+
+- Did: connected the Overlook to the Floor 3 scouts' refuge. The fire uses
+  the existing once-per-expedition rest, the chests open the persistent
+  stash, and both paths return to exploration. The scene shows only
+  supported appearances for the actual party and respects reduced motion.
+- Added: trainer shelter and portrait after a successful Floor 3 return.
+  Bulwark, Steady hands and Steel nerves cost 12 gold each. The King bounty
+  unlocks Iron hide for 24 gold. The Bitter Moss nurse quest and Floor 3
+  iron quest are preserved from main.
+- Review: the private chair trial lifts the side and rear hem without
+  changing the rigs, clips or fixed stool. See `docs/camp-art-hookup.md`.
+  Named portrait animation is waiting on likeness and reuse sign-off.
 ## 2026-11-18 – Claude (full suite after the 11-17 batch)
 
 - Full suite: 70 of 73 passed first time. Fixed the three: `merchant_nurse` replies now use summary labels with a line per starting hero (builder updated, rebuilt); held_light_check sets first person (the default view is now above, #248); small_items_check counts the four new smith weapons in the forge's fine stock. All three pass now.
