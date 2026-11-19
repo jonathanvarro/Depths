@@ -92,7 +92,7 @@ func verify(app, entry: Dictionary) -> void:
 		if pose == "fall":
 			var start_bounds := point_bounds(first)
 			var end_bounds := point_bounds(last)
-			if name in ["great-rat","broodmother"]:
+			if name in ["great-rat","broodmother","rock-beetle","lamp-eater","breach-hound"]:
 				# Tail and folded legs can stick up. Verify the changed resting
 				# silhouette and floor contact rather than overall height alone.
 				check(displacement(first,last) > .3 and end_bounds.position.y < .025,
@@ -187,7 +187,7 @@ func run() -> void:
 		await settle()
 		await verify(app,catalog.assets[index])
 	var lineup_ids: Array = ["fortress-goblin","fortress-guard","fortress-archer","goblin-king"] if app.asset_root == app.ART else app.ids
-	await lineup(app,lineup_ids,"lineup",1.38,2.26)
+	await lineup(app,lineup_ids,"lineup",1.2 if lineup_ids.size() > 4 else 1.38,3.4 if lineup_ids.size() > 4 else 2.26)
 	var report := {"checks":checks,"failures":failures,"captures":captures,
 		"maximum_native_skin_difference_metres":maximum_skin_error,
 		"renderer":RenderingServer.get_current_rendering_method()}
