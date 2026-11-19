@@ -13,6 +13,17 @@ Format:
 
 ---
 
+## 2026-11-18 – ChatGPT (Floor 4 merges and ranged/focus icons, #260)
+
+- Merged #261 (Overlook and trainer), #262 (named animated portraits) and
+  #264 (six early 3D enemies and Bitter Moss). Handoff-note conflicts retain
+  both sides. The Bitter Moss and Floor 3 iron quests stay current.
+- Added generated sling, short-bow, prayer-wand and oak-staff icons at
+  128 and 64 px. Equipment resources and base catalogue use the new images.
+  Prompts, hashes, export checks and preview in `docs/ranged-focus-icons.md`.
+- Checked the real purchase flow and Pack inspection at 1278 × 590 on the
+  private desktop. Seven equipment, story, camp and save regressions passed.
+
 ## 2026-11-18 – ChatGPT (remaining early enemies and Bitter Moss, #251/#238)
 
 - Added original low-poly models for the cave bat, rock beetle, hollow
