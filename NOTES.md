@@ -13,6 +13,21 @@ Format:
 
 ---
 
+## 2026-11-18 – ChatGPT (named companion portrait layers, #197–#199)
+
+- Added unique animated PortraitSets for Branna, Nessa and dirty-blonde
+  Maelin. Face-specific clean plates and matching neutral patches reproduce
+  the approved busts. Each rig has separate condition and lighting layers.
+- Review paused frames at 192 or 96 pixels through the named-cast gallery.
+  Named recruits and older named saves use their own fitted rigs.
+
+## 2026-11-12 – ChatGPT (named companion likenesses, #197–#199)
+
+- Owner approved Branna, Nessa and Maelin's dirty-blonde revision. Use
+  `maelin-v3.png` for her rig. The gallery shows the approved likeness
+  and both earlier studies at 192 and 96 pixels.
+- All three are ready for facial layers. The Rook face assignment remains
+  open. See `docs/named-cast.md`.
 ## 2026-11-12 – ChatGPT (camp art hookup, #190 / #238 / #240)
 
 - Did: connected the Overlook to the Floor 3 scouts' refuge. The fire uses
