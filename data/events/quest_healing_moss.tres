@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://scripts/enemy_type.gd" id="3_ykmi8"]
 [ext_resource type="Script" path="res://scripts/equipment.gd" id="4_5k08j"]
 [ext_resource type="Script" path="res://scripts/supply_item.gd" id="5_p6ga1"]
-[ext_resource type="PackedScene" path="res://art/dressing/cave-growth-3d-v1/mushroom-clump.tscn" id="6_lyck3"]
+[ext_resource type="PackedScene" path="res://art/props/bitter-moss-v1/scene.tscn" id="6_lyck3"]
 [ext_resource type="Script" path="res://scripts/room_event.gd" id="7_n6kni"]
 
 [sub_resource type="Resource" id="Resource_hwnc0"]

@@ -3,12 +3,14 @@
 [ext_resource type="Resource" path="res://data/items/bat_wing.tres" id="salvage"]
 [ext_resource type="Script" path="res://scripts/injury.gd" id="1_ovpn7"]
 [ext_resource type="PackedScene" path="res://art/enemies/monsters-v1/cave-bat/scene.tscn" id="2_yfj5n"]
+[ext_resource type="PackedScene" path="res://art/enemies/early-creatures-3d-v1/cave-bat.tscn" id="model"]
 [ext_resource type="Script" path="res://scripts/enemy_type.gd" id="3_1o2x2"]
 
 [resource]
 script = ExtResource("3_1o2x2")
 display_name = "Cave bat"
 scene = ExtResource("2_yfj5n")
+model = ExtResource("model")
 max_health = 5
 damage_max = 2
 initiative = 14

@@ -19,6 +19,41 @@ Format:
 - Next: owner picks signature gear per named companion if wanted; the map could show where a body lies once seen.
 - Watch out: the cave re-seeds each day, so a body's cell moves with the new layout (it stays on its floor). `tools/lost_bodies_check.gd`.
 
+## 2026-11-18 – ChatGPT (remaining early enemies and Bitter Moss, #251/#238)
+
+- Added original low-poly models for the cave bat, rock beetle, hollow
+  miner, gas-bloat, lamp-eater and breach hound. They keep each enemy's
+  existing rules and alternate painted scene.
+- Bitter Moss now has a dedicated fresh and scraped 3D prop in the real
+  Floor 2 quest. See `docs/early-creatures-3d.md` for the model and prop review.
+## 2026-11-18 – ChatGPT (named companion portrait layers, #197–#199)
+
+- Added unique animated PortraitSets for Branna, Nessa and dirty-blonde
+  Maelin. Face-specific clean plates and matching neutral patches reproduce
+  the approved busts. Each rig has separate condition and lighting layers.
+- Review paused frames at 192 or 96 pixels through the named-cast gallery.
+  Named recruits and older named saves use their own fitted rigs.
+
+## 2026-11-12 – ChatGPT (named companion likenesses, #197–#199)
+
+- Owner approved Branna, Nessa and Maelin's dirty-blonde revision. Use
+  `maelin-v3.png` for her rig. The gallery shows the approved likeness
+  and both earlier studies at 192 and 96 pixels.
+- All three are ready for facial layers. The Rook face assignment remains
+  open. See `docs/named-cast.md`.
+## 2026-11-12 – ChatGPT (camp art hookup, #190 / #238 / #240)
+
+- Did: connected the Overlook to the Floor 3 scouts' refuge. The fire uses
+  the existing once-per-expedition rest, the chests open the persistent
+  stash, and both paths return to exploration. The scene shows only
+  supported appearances for the actual party and respects reduced motion.
+- Added: trainer shelter and portrait after a successful Floor 3 return.
+  Bulwark, Steady hands and Steel nerves cost 12 gold each. The King bounty
+  unlocks Iron hide for 24 gold. The Bitter Moss nurse quest and Floor 3
+  iron quest are preserved from main.
+- Review: the private chair trial lifts the side and rear hem without
+  changing the rigs, clips or fixed stool. See `docs/camp-art-hookup.md`.
+  Named portrait animation is waiting on likeness and reuse sign-off.
 ## 2026-11-18 – Claude (full suite after the 11-17 batch)
 
 - Full suite: 70 of 73 passed first time. Fixed the three: `merchant_nurse` replies now use summary labels with a line per starting hero (builder updated, rebuilt); held_light_check sets first person (the default view is now above, #248); small_items_check counts the four new smith weapons in the forge's fine stock. All three pass now.

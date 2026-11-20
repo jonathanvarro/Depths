@@ -85,8 +85,7 @@ var site_presence: Dictionary = {}
 var merchant_unloading := false
 ## Zero means no pending arrival (including older saves).
 var smith_arrival_day := 0
-## The nurse arrives on day 3 (owner playtest, #229). The merchant now
-## comes once the first order is reported (#237, Story.after_talk).
+## Pending nurse arrival from older saves. New campaigns bring her supplies.
 var traders_arrival_day := 0
 ## When the merchant, nurse and smith arrived on older stories (by day).
 ## New stories earn them (owner, 2026-11-17, #238): the merchant after the
@@ -96,7 +95,8 @@ const ARRIVAL_DAY := 3
 const SMITH_AFTER_FLOOR := 2
 ## A pending smith: he comes after a return from this deep (0 = none).
 var smith_after_floor := 0
-const SITE_IDS := ["supplies", "treatment", "rest", "smith", "fire", "cave"]
+const SITE_IDS := ["supplies", "treatment", "rest", "smith", "fire", "cave", "trainer"]
+const TRAINER_LESSONS := {"bulwark": 12, "steady_hands": 12, "steel_nerves": 12, "iron_hide": 24}
 ## Items and gear left in the tent; they survive a party wipe.
 var stash = Supplies.new()
 ## Companion -> the day they're fit again after treatment.
@@ -162,7 +162,24 @@ var _used_names: Array = []  # each name comes by once before any repeats
 
 
 func site_present(id: String) -> bool:
+	if id == "trainer":
+		return bool(site_presence.get("trainer", false)) or bounty_paid
 	return id in SITE_IDS and bool(site_presence.get(id, true))
+
+
+func teach(party, hero: Companion, lesson: String) -> bool:
+	if not site_present("trainer") or hero == null or hero not in party.living_members() or not hero.uses_stats:
+		return false
+	if not TRAINER_LESSONS.has(lesson) or lesson in hero.talents or (lesson == "iron_hide" and not bounty_paid):
+		return false
+	var price: int = TRAINER_LESSONS[lesson]
+	if not can_afford(party, price):
+		return false
+	party.supplies.gold -= price
+	Progression.learn(hero, lesson)
+	party.supplies.changed.emit()
+	changed.emit()
+	return true
 
 
 ## No schedule is invented here; story code decides when a site arrives.
@@ -330,7 +347,6 @@ func ready_on(hero: Companion) -> int:
 	return maxi(day, recovering.get(hero, day))
 
 
-## An expedition got down to `deepest`: it counts toward every route on the way.
 ## The party carried `hero`'s body home (#180).
 func carry_home(hero: Companion) -> void:
 	if hero not in fallen:
@@ -393,7 +409,10 @@ func revive(party, hero: Companion) -> bool:
 	return true
 
 
-func record_depth(deepest: int) -> void:
+## An expedition got down to `deepest`: it counts toward every route on the way.
+func record_depth(deepest: int, returned_alive := true) -> void:
+	if deepest >= 3 and returned_alive:
+		set_site_present("trainer", true)
 	if smith_after_floor > 0 and deepest >= smith_after_floor:  # the apprentice comes up with the wagon (#238)
 		smith_after_floor = 0
 		site_presence["smith"] = true

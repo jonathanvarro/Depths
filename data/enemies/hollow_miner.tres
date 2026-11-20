@@ -4,12 +4,14 @@
 [ext_resource type="Script" path="res://scripts/injury.gd" id="2_fkw4u"]
 [ext_resource type="Resource" path="res://data/injuries/deep_wound.tres" id="3_kcrhj"]
 [ext_resource type="PackedScene" path="res://art/enemies/monsters-v1/hollow-miner/scene.tscn" id="4_j110i"]
+[ext_resource type="PackedScene" path="res://art/enemies/early-creatures-3d-v1/hollow-miner.tscn" id="model"]
 [ext_resource type="Script" path="res://scripts/enemy_type.gd" id="5_706y2"]
 
 [resource]
 script = ExtResource("5_706y2")
 display_name = "Hollow miner"
 scene = ExtResource("4_j110i")
+model = ExtResource("model")
 max_health = 16
 damage_min = 2
 damage_max = 4

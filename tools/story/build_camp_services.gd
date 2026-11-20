@@ -81,7 +81,7 @@ func _initialize() -> void:
 	got.quest_flag = "have_moss"
 	gather.outcomes.assign([got])
 	moss.choices.assign([gather])
-	moss.prop = load("res://art/dressing/cave-growth-3d-v1/mushroom-clump.tscn")
+	moss.prop = load("res://art/props/bitter-moss-v1/scene.tscn")
 	var path := "res://data/events/quest_healing_moss.tres"
 	print(path, " ", "ok" if ResourceSaver.save(moss, path) == OK else "FAILED")
 	var p := QuestPackage.new()

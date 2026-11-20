@@ -9,11 +9,15 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--workspace",type=Path,required=True)
 parser.add_argument("--review-output",type=Path)
 parser.add_argument("--elites",action="store_true")
+parser.add_argument("--creatures",action="store_true")
 args = parser.parse_args()
-out = args.review_output or args.workspace/"build"/("local-goblin-elites-v1" if args.elites else "local-fortress-goblins-3d-v1")
+folder = "local-early-creatures-v1" if args.creatures else ("local-goblin-elites-v1" if args.elites else "local-fortress-goblins-3d-v1")
+out = args.review_output or args.workspace/"build"/folder
 out.mkdir(parents=True,exist_ok=True)
 
 family = "art/enemies/goblin-elites-3d-v1" if args.elites else "art/enemies/fortress-goblins-3d-v1"
+if args.creatures:
+    family = "art/enemies/early-creatures-3d-v1"
 for path in (family,"art/enemies/combat-roster-3d-v1",
              "art/props/treatment-supplies-v1"):
     shutil.copytree(ROOT/path,out/path,dirs_exist_ok=True)

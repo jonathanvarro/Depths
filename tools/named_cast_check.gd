@@ -69,10 +69,14 @@ func _initialize() -> void:
 	root.add_child(main)
 	await create_timer(0.5).timeout
 	var ghost: Companion = NamedCast.make(main._camp_state, "nessa")
+	check("Nessa uses her unique animated rig", ghost.portrait_set != null and ghost.portrait_set.face_id == &"nessa")
+	ghost.portrait_set = null  # represent a save made with only the flat portrait
 	main._camp_state.fallen.append(ghost)
 	var data: Dictionary = main._save_data()
 	main._camp_state.fallen.clear()
 	main._restore(data)
 	check("a save keeps the body at camp, and who it was", main._camp_state.fallen.size() == 1 and main._camp_state.fallen[0].named_id == "nessa" and main._camp_state.fallen[0].display_name == "Nessa")
+	check("the older flat portrait save is upgraded to the named rig",
+		main._camp_state.fallen[0].portrait_set != null and main._camp_state.fallen[0].portrait_set.face_id == &"nessa")
 	print("fails=", fails)
 	quit()

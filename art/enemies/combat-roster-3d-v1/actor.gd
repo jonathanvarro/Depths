@@ -6,7 +6,8 @@ extends Node3D
 @export var held_poses: PackedStringArray
 var player: AnimationPlayer
 var current_pose:="idle"
-const STATIC_TIME:={"idle":0.0,"walk":0.0,"attack":0.29,"heavy":0.29,"horn":0.25,"hurt":0.125,"web":0.25,"venom":0.29,"brace":0.38,"drum":0.46,"snare":0.38,"enraged":0.46,"call":0.38,"cast":0.50,"defend":0.33}
+const STATIC_TIME:={"idle":0.0,"walk":0.0,"attack":0.29,"heavy":0.29,"horn":0.25,"hurt":0.125,"web":0.25,"venom":0.29,"brace":0.38,"drum":0.46,"snare":0.38,"enraged":0.46,"call":0.38,"cast":0.50,"defend":0.33,
+	"swoop":7.0/24.0,"bite":7.0/24.0,"drain":7.0/24.0,"lunge":7.0/24.0}
 
 func _ready() -> void:
 	player=find_child("AnimationPlayer",true,false) as AnimationPlayer

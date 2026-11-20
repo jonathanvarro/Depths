@@ -10,13 +10,13 @@ const Quests := preload("res://scripts/quests.gd")
 ## id -> who they are, and when they come (see due()). Faces: the reviewed
 ## likenesses (#197-#199) and the Fixer-a rig for Rook (#200).
 const CAST := {
-	"branna": {"name": "Branna", "role": "Melee", "portrait": "res://art/portraits/named-cast-v1/branna.png",
+	"branna": {"name": "Branna", "role": "Melee", "portrait": "res://art/portraits/named-cast-v1/branna.png", "portrait_set": "res://data/portraits/named-cast-v1/branna.tres",
 		"intro": "Mine rescue worker. Came up to sort the dead miners' belongings, and stayed to see who killed them.", "when": "report"},
 	"rook": {"name": "Rook", "role": "Fixer", "portrait_set": "res://data/portraits/fixer-v1/fixer-a.tres",
 		"intro": "Expedition broker. Has already sold the merchant two crates he didn't know he needed.", "when": "merchant"},
-	"nessa": {"name": "Nessa", "role": "Scout", "portrait": "res://art/portraits/named-cast-v1/nessa.png",
+	"nessa": {"name": "Nessa", "role": "Scout", "portrait": "res://art/portraits/named-cast-v1/nessa.png", "portrait_set": "res://data/portraits/named-cast-v1/nessa.tres",
 		"intro": "Survey assistant. Says the old survey of the second floor is wrong, and wants to see for herself.", "when": "floor2"},
-	"maelin": {"name": "Maelin", "role": "Mage", "portrait": "res://art/portraits/named-cast-v1/maelin.png",
+	"maelin": {"name": "Maelin", "role": "Mage", "portrait": "res://art/portraits/named-cast-v1/maelin.png", "portrait_set": "res://data/portraits/named-cast-v1/maelin.tres",
 		"intro": "Unlicensed scholar. Wants to know why the bitter moss grows where it does, and what else does.", "when": "moss"},
 }
 
@@ -54,12 +54,18 @@ static func make(camp, id: String) -> Companion:
 	hero.named_id = id
 	hero.personality = who["intro"]
 	_second_strength(camp.rng, hero)
+	apply_portrait(hero)
+	return hero
+
+
+static func apply_portrait(hero: Companion) -> void:
+	if not CAST.has(hero.named_id):
+		return
+	var who: Dictionary = CAST[hero.named_id]
 	if who.has("portrait_set"):
 		hero.portrait_set = load(who["portrait_set"])
-	else:
-		hero.portrait_set = null
+	if who.has("portrait"):
 		hero.portrait = load(who["portrait"])
-	return hero
 
 
 ## Named companions carry two strengths beside their weakness; random
