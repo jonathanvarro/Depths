@@ -53,9 +53,28 @@ static func make(camp, id: String) -> Companion:
 	hero.display_name = who["name"]
 	hero.named_id = id
 	hero.personality = who["intro"]
+	_second_strength(camp.rng, hero)
 	if who.has("portrait_set"):
 		hero.portrait_set = load(who["portrait_set"])
 	else:
 		hero.portrait_set = null
 		hero.portrait = load(who["portrait"])
 	return hero
+
+
+## Named companions carry two strengths beside their weakness; random
+## recruits one of each (#180, owner 2026-11-18: random soldiers are the
+## lesser hires). Never on the stat of the first strength or the weakness.
+static func _second_strength(rng: RandomNumberGenerator, hero: Companion) -> void:
+	var taken := []
+	for mod in Recruits.STRENGTHS + Recruits.WEAKNESSES:
+		if hero.strength.begins_with(mod["name"] + " ") or hero.weakness.begins_with(mod["name"] + " "):
+			taken.append(mod["stat"])
+	var free: Array = Recruits.STRENGTHS.filter(func(m): return m["stat"] not in taken)
+	if free.is_empty():
+		return
+	var extra: Dictionary = free[rng.randi_range(0, free.size() - 1)]
+	hero.set(extra["stat"], hero.get(extra["stat"]) + extra["amount"])
+	hero.strength += "; %s (%s)" % [extra["name"], extra["text"]]
+	hero.refresh_stats()
+	hero.health = hero.max_health

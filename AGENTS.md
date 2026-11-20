@@ -583,6 +583,11 @@ Templates > Download and Install; already installed on the owner's PC).
   `identify`. Smith: CampState `identify`/`IDENTIFY_PRICE`, SmithScreen
   Identify menu. Touchstone (SupplyItem effect IDENTIFY; PartyState
   `touchstone`, `unidentified`) and the Discern prayer. `tools/identify_check.gd`.
+- Bodies after a wipe (#180, 2026-11-18): only main heroes wake at camp;
+  others lie on their floor (`CampState.lost_bodies`, `carried`, `pick_up`,
+  `bring_home`, `drop_carried`; main.gd `_leave_the_bodies`, `_place_bodies`,
+  `_pick_up_body`, map `marks["bodies"]`). Named companions roll two
+  strengths; `Equipment.named_for` is named-only gear. `tools/lost_bodies_check.gd`.
 - Settings (#52): `scripts/settings.gd` (static values, `apply()`, audio
   buses Master/Music/Effects; test runs use test_settings.cfg) and
   `scripts/settings_screen.gd`. New sound players should set `bus`.

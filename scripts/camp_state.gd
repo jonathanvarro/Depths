@@ -109,6 +109,12 @@ var named_met: Array[String] = []
 ## the nurse can try to bring them back.
 var fallen: Array[Companion] = []
 const REVIVE_PRICE := 40
+## Bodies left below by a full wipe (#180, owner 2026-11-18): [{hero, depth}].
+## Only the main hero wakes at camp; a later trip can find the others on
+## the floor where they fell and carry them home.
+var lost_bodies: Array = []
+## Bodies the party has picked up this trip, on their way home.
+var carried: Array[Companion] = []
 ## What coming back costs them for good: maximum health.
 const REVIVE_SCAR := 3
 ## Heroes recovering in the nurse's tent while the others are down below.
@@ -330,6 +336,42 @@ func carry_home(hero: Companion) -> void:
 	if hero not in fallen:
 		fallen.append(hero)
 		changed.emit()
+
+
+## A full wipe left `hero` lying on floor `depth` (#180).
+func leave_body(hero: Companion, depth: int) -> void:
+	if bodies_on(depth).has(hero) or hero in fallen:
+		return
+	carried.erase(hero)
+	lost_bodies.append({"hero": hero, "depth": depth})
+	changed.emit()
+
+
+## Who lies on floor `depth`.
+func bodies_on(depth: int) -> Array:
+	return lost_bodies.filter(func(b): return b["depth"] == depth).map(func(b): return b["hero"])
+
+
+## The party found `hero`'s body and carries it.
+func pick_up(hero: Companion) -> void:
+	lost_bodies = lost_bodies.filter(func(b): return b["hero"] != hero)
+	if hero not in carried:
+		carried.append(hero)
+	changed.emit()
+
+
+## Home with them: the carried bodies go to the nurse's tent.
+func bring_home() -> void:
+	for hero in carried:
+		carry_home(hero)
+	carried.clear()
+
+
+## Wiped again while carrying: they lie on this floor now.
+func drop_carried(depth: int) -> void:
+	for hero in carried.duplicate():
+		leave_body(hero, depth)
+	carried.clear()
 
 
 ## The nurse brings a fallen companion back (#180): for a price, and a

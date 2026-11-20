@@ -13,6 +13,12 @@ Format:
 
 ---
 
+## 2026-11-18 – Claude (bodies after a wipe; named vs random, #180)
+
+- Did: owner rule 2026-11-18. A full wipe wakes only the main hero at camp; every other companion's body stays on the floor they fell on (`CampState.lost_bodies`, with worn kit). Entering that floor lays them in far room cells (`main._place_bodies`, `map.marks["bodies"]` cell -> name, solid) with the opening's body props, and the floor message names them. Walking into one carries it (`CampState.carried`); a normal return hands carried bodies to the nurse (`bring_home` -> `fallen`, revive as before); a wipe while carrying drops them on that floor. Saved as `lost_bodies` / `carried`. Named companions now roll two strengths (random recruits one), and `Equipment.named_for` makes gear only that named companion can use (`Classes.refuses`); no such item is authored yet.
+- Next: owner picks signature gear per named companion if wanted; the map could show where a body lies once seen.
+- Watch out: the cave re-seeds each day, so a body's cell moves with the new layout (it stays on its floor). `tools/lost_bodies_check.gd`.
+
 ## 2026-11-18 – Claude (full suite after the 11-17 batch)
 
 - Full suite: 70 of 73 passed first time. Fixed the three: `merchant_nurse` replies now use summary labels with a line per starting hero (builder updated, rebuilt); held_light_check sets first person (the default view is now above, #248); small_items_check counts the four new smith weapons in the forge's fine stock. All three pass now.

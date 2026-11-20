@@ -880,7 +880,8 @@ Weakness: %s
 	box.add_child(top)
 	box.add_child(_clipped("%d hp · %s dmg" % [recruit.max_health, damage], 10, MUTED))
 	box.add_child(_clipped(Recruits.perk_name(recruit.role), 10, TEXT))
-	box.add_child(_clipped("+ %s" % recruit.strength.get_slice(" (", 0), 10, AMBER))
+	var strengths := Array(recruit.strength.split("; ")).map(func(t: String): return t.get_slice(" (", 0))
+	box.add_child(_clipped("+ %s" % ", ".join(strengths), 10, AMBER))  # named: two (#180)
 	box.add_child(_clipped("- %s" % recruit.weakness.get_slice(" (", 0), 10, AMBER))
 	var invite := _button("Full" if full else "Invite")
 	invite.disabled = full

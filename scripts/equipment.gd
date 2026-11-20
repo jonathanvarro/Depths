@@ -55,6 +55,9 @@ extends Resource
 ## A staff or wand (#260, owner 2026-11-17): a Mage's prayers grow stronger
 ## with its mastery, and casting in a fight teaches it.
 @export var focus := false
+## A named companion's own gear (#180, owner 2026-11-18): only the hero with
+## this named_id can use it. Random recruits never can.
+@export var named_for := ""
 @export var gear_version := 0
 @export var instance_id := 0
 ## Found pieces start unidentified (owner, 2026-11-03; gear_model.gd

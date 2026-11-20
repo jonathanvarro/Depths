@@ -70,6 +70,8 @@ static func armour_drag(hero: Companion, item: Equipment) -> int:
 ## Why `hero` can't wear `item`, or "". Any body armour fits anyone now
 ## (it slows them instead: armour_drag); the back slot keeps its rules.
 static func refuses(hero: Companion, item: Equipment) -> String:
+	if item != null and item.named_for != "" and item.named_for != hero.named_id:  # their own gear (#180)
+		return "Only %s can use %s" % [item.named_for.capitalize(), item.display_name]
 	if item == null or item.base_id == "" or item.slot != "back":
 		return ""
 	var gear = load("res://scripts/gear_model.gd")

@@ -678,6 +678,7 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 					else Quests.has_flag(_camp_state, "reservoir", "diverted")
 			Galleries.flood(_floors[depth], _site_seed + depth * 7919 + 37, drained, depth)
 	_map = _floors[depth]
+	_place_bodies()  # lost in a wipe, waiting to be found (#180)
 	_build_level()
 	_minimap.setup(_map)
 	_full_map_view.setup(_map)
@@ -698,6 +699,9 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 	else:
 		_show_message("%s · depth %d" % [environment_theme.display_name, depth])
 	_fortress_signs(depth)
+	var lost: Array = _camp_state.bodies_on(depth).map(func(h): return h.display_name)
+	if not lost.is_empty() and not _in_opening:  # #180
+		_show_message("%s · depth %d · somewhere here lie %s" % [environment_theme.display_name, depth, " and ".join(lost)])
 	_save_now()  # autosave on every floor change (#45)
 
 
@@ -763,6 +767,8 @@ func _build_level() -> void:
 	var landmarks := {}
 	if not _in_opening and not use_debug_layout:
 		landmarks = Landmarks.place(_level, _map, _depth, _site_seed, CELL_SIZE, WALL_HEIGHT)  # #117
+	if not _in_opening:
+		_add_body_props()  # #180
 	if _depth == FORTRESS_DEPTH and not _in_opening:
 		_add_fortress_dressing()  # after the landmarks, so its cages keep out of theirs (#117)
 	if not _in_opening and not use_debug_layout:
@@ -1833,10 +1839,11 @@ func _end_expedition(ending: int) -> void:
 	_party.locked = true  # after closing overlays, which unlock on close
 	var notes := {
 		Expedition.Ending.RETURNED: "You stagger out into the daylight, alone." if _in_opening else "You climb out into the daylight.",
-		Expedition.Ending.WIPED: "Everyone falls, and everything they carried and wore is lost. Recruits don't come back; a main hero wakes at camp, badly hurt, in the camp's plain spare kit. New companions wait by the fire.",
+		Expedition.Ending.WIPED: "Everyone falls, and everything they carried is lost. A main hero wakes at camp, badly hurt, in the camp's plain spare kit. The others lie where they fell, on floor %d: a later trip can find them and carry them home to the nurse." % _depth,
 		Expedition.Ending.REACHED_BOTTOM: "You stood where the others fell, and lived to climb back.",
 	}
 	if ending == Expedition.Ending.WIPED:
+		_leave_the_bodies()
 		_main_heroes_wake_at_camp()
 		_wipe_pending = true
 		_save_now()
@@ -1891,6 +1898,8 @@ func _start_new_expedition() -> void:
 			if not hero.is_alive() and not hero.main_hero and not _wipe_pending:
 				_camp_state.carry_home(hero)  # the others carried them out (#180)
 			_party_state.remove_member(hero)
+	if not _wipe_pending:
+		_camp_state.bring_home()  # bodies found below, home to the nurse (#180)
 	_camp_state.rejoin(_party_state)
 	_camp_state.record_depth(_expedition.deepest)  # towards the scouts' routes (#79)
 	var reward: int = _camp_state.collect_contract(_party_state)
@@ -1955,6 +1964,87 @@ func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST or what == NOTIFICATION_APPLICATION_PAUSED:
 		if is_node_ready() and _party_state:
 			_save_now()
+
+
+## A full wipe (#180, owner 2026-11-18): only a main hero wakes at camp; the
+## others' bodies stay on this floor, worn kit and all, for a later trip to
+## find. Bodies already being carried home fall here too.
+func _leave_the_bodies() -> void:
+	if _in_opening:
+		return
+	_camp_state.drop_carried(_depth)
+	for hero: Companion in _party_state.members:
+		if not hero.main_hero:
+			_camp_state.leave_body(hero, _depth)
+
+
+## Lays the bodies lost on this floor in empty room cells (once per floor
+## layout; the cave shifts each day, so a new day lays them afresh).
+func _place_bodies() -> void:
+	if _in_opening or use_debug_layout or _map == null:
+		return
+	var lying: Dictionary = _map.marks.get("bodies", {})
+	var names: Array = _camp_state.bodies_on(_depth).map(func(h): return h.display_name)
+	for cell in lying.keys():
+		if lying[cell] not in names:  # already picked up
+			lying.erase(cell)
+			_map.solid.erase(cell)
+	var rng := RandomNumberGenerator.new()
+	rng.seed = _site_seed + _depth * 7919 + 41 + _camp_state.day
+	var start: Vector2i = _map.find_content(DungeonMap.Content.STAIRS_UP)
+	var distances: Dictionary = _map.walking_distances(start if start != Vector2i(-1, -1) else _map.start_cell)
+	var far := 0
+	for c in distances:
+		far = maxi(far, distances[c])
+	for name in names:
+		if name in lying.values():
+			continue
+		var spots: Array = distances.keys().filter(func(c: Vector2i):
+			return distances[c] * 2 >= far and _map._is_room_cell(c) and _map.content_at(c) == DungeonMap.Content.NONE 					and not _map.encounter_zones.has(c) and not _map.solid.has(c) and not lying.has(c) and c not in _map.water)
+		if spots.is_empty():
+			spots = distances.keys().filter(func(c: Vector2i): return c != start and _map.content_at(c) == DungeonMap.Content.NONE and not _map.solid.has(c) and not lying.has(c))
+		if spots.is_empty():
+			continue
+		var cell: Vector2i = spots[rng.randi_range(0, spots.size() - 1)]
+		lying[cell] = name
+		_map.solid[cell] = true
+	if not lying.is_empty():
+		_map.marks["bodies"] = lying
+	else:
+		_map.marks.erase("bodies")
+
+
+func _add_body_props() -> void:
+	var lying: Dictionary = _map.marks.get("bodies", {})
+	var i := 0
+	for cell: Vector2i in lying:
+		var path: String = body_scenes[i % body_scenes.size()] if not body_scenes.is_empty() else ""
+		var body: Node3D = load(path).instantiate() if path != "" and ResourceLoader.exists(path) else _placeholder_body()
+		body.position = Vector3(cell.x * CELL_SIZE, 0.0, cell.y * CELL_SIZE)
+		body.name = "Body_%d_%d" % [cell.x, cell.y]
+		_level.add_child(body)
+		i += 1
+
+
+## Walking into a body lost in a wipe: the party wraps it to carry home.
+func _pick_up_body(cell: Vector2i) -> bool:
+	var lying: Dictionary = _map.marks.get("bodies", {})
+	if not lying.has(cell):
+		return false
+	var name: String = lying[cell]
+	for hero: Companion in _camp_state.bodies_on(_depth):
+		if hero.display_name == name:
+			_camp_state.pick_up(hero)
+			break
+	lying.erase(cell)
+	_map.solid.erase(cell)
+	var prop := _level.get_node_or_null("Body_%d_%d" % [cell.x, cell.y])
+	if prop:
+		prop.queue_free()
+	_show_message("You find %s where they fell, and wrap them in a cloak to carry home. The nurse may yet bring them back." % name)
+	_say("ally_down", true, false, null, {"fallen": name})
+	_save_now()
+	return true
 
 
 ## A full wipe (#83): recruits are lost, but an unconscious main hero
@@ -2027,7 +2117,7 @@ func _save_now() -> void:
 ## Everything a save needs, as plain data.
 func _save_data() -> Dictionary:
 	var people: Array = []  # every hero object once; referenced by index
-	for hero in _party_state.members + _camp_state.left_behind + _camp_state.candidates + _camp_state.fallen:
+	for hero in _party_state.members + _camp_state.left_behind + _camp_state.candidates + _camp_state.fallen 			+ _camp_state.carried + _camp_state.lost_bodies.map(func(b): return b["hero"]):
 		if hero not in people:
 			people.append(hero)
 	var index := func(hero): return people.find(hero)
@@ -2064,8 +2154,10 @@ func _save_data() -> Dictionary:
 		"party": party.map(func(h): return index.call(h)),
 		"time": _party_state.time_elapsed,
 		"supplies": supplies,
-		"camp": SaveGame.pack_object(_camp_state, ["stash", "candidates", "left_behind", "recovering", "rng", "fallen"]),
+		"camp": SaveGame.pack_object(_camp_state, ["stash", "candidates", "left_behind", "recovering", "rng", "fallen", "lost_bodies", "carried"]),
 		"fallen": _camp_state.fallen.map(func(h): return index.call(h)),
+		"lost_bodies": _camp_state.lost_bodies.map(func(b): return [index.call(b["hero"]), b["depth"]]),
+		"carried": _camp_state.carried.map(func(h): return index.call(h)),
 		"stash": SaveGame.pack_object(_camp_state.stash),
 		"candidates": _camp_state.candidates.map(func(h): return index.call(h)),
 		"left_behind": _camp_state.left_behind.map(func(h): return index.call(h)),
@@ -2095,6 +2187,8 @@ func _restore(data: Dictionary) -> void:
 	_camp_state.candidates.assign(data["candidates"].map(func(i): return people[i]))
 	_camp_state.left_behind.assign(data["left_behind"].map(func(i): return people[i]))
 	_camp_state.fallen.assign(data.get("fallen", []).map(func(i): return people[i]))  # carried home (#180)
+	_camp_state.lost_bodies.assign(data.get("lost_bodies", []).map(func(p): return {"hero": people[p[0]], "depth": p[1]}))
+	_camp_state.carried.assign(data.get("carried", []).map(func(i): return people[i]))
 	_camp_state.recovering = {}
 	for pair in data["recovering"]:
 		_camp_state.recovering[people[pair[0]]] = pair[1]
@@ -3432,6 +3526,8 @@ func _on_party_interacted(cell: Vector2i) -> void:
 	if _in_opening and cell == _opening_fire_cell():
 		_show_message("The fire is dying. It won't last, and it can't be carried.")
 		_say("fire", false, true)
+		return
+	if _pick_up_body(cell):
 		return
 	if _map.triggered.has(cell):
 		_show_message("Nothing more to take.")
