@@ -1,0 +1,11 @@
+{
+  "selected_treatment": "reliquary-brass",
+  "approved_on": "2026-11-21",
+  "owner_feedback": "Reliquary brass works great",
+  "placement": {
+    "left": "flat left edge, beveled right corners",
+    "centre": "beveled left and right corners",
+    "right": "beveled left corners, flat right edge"
+  },
+  "scope": "Approved visual direction; live Godot menu adaptation remains separate."
+}

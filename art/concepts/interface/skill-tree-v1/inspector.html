@@ -29,20 +29,25 @@
           </section>
           <footer class="page-footer"><span>Learned skills endure</span><span>Deeds <b>·</b> Manuals <b>·</b> Quests <b>·</b> Training</span></footer>
         </div>
-        <aside class="inspection" id="inspection" aria-label="Selected skill" aria-live="polite">
+      </div>
+    </section>
+        <aside class="inspection" id="inspection" aria-label="Skill description" hidden>
+          <header class="card-header">
           <button class="dismiss" aria-label="Close skill description">×</button>
           <div class="detail-kind" id="detail-kind"></div>
           <div class="detail-seal"><img id="detail-icon" alt=""></div>
           <h2 id="detail-name"></h2>
           <div class="detail-state" id="detail-state"></div>
-          <p class="flavour" id="detail-flavour"></p>
+          </header>
+          <div class="card-body" tabindex="0" aria-label="Skill details">
           <p class="effect" id="detail-effect"></p>
-          <div class="detail-rule"></div>
+          <p class="flavour" id="detail-flavour"></p>
+          </div>
+          <footer class="card-footer">
           <p class="unlock" id="detail-unlock"></p>
           <div class="detail-caption" id="detail-caption"></div>
+          </footer>
         </aside>
-      </div>
-    </section>
     <div class="review-footer"><p>Hover or select a seal to inspect. Compare Corin and Branna: the same class training, a different personal path.</p><a href="../gothic-buttons-v1/inspector.html">Menu buttons</a><a href="../../../../docs/skill-tree-concept.md">Design notes</a></div>
   </main>
   <script src="concept.js"></script>

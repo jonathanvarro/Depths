@@ -51,10 +51,12 @@ const heroes = [
   ]},
 ];
 let current=heroes[0], selected=null, selectionPinned=false;
+let hoverTimer=null;
 const byId=id=>document.getElementById(id);
 const image=key=>ART+icons[key];
 const panel=byId('inspection');
-const compact=()=>window.matchMedia('(max-width:1100px), (max-height:650px) and (min-width:640px)').matches;
+const clearHover=()=>{clearTimeout(hoverTimer);hoverTimer=null;};
+function leavePreview(){clearHover();if(!selectionPinned)hoverTimer=setTimeout(()=>dismiss(false),160);}
 function createNode(data){
   const button=document.createElement('button');
   button.type='button'; button.className='skill'+(data.personal?' trait':'')+(data.rank>0||data.state==='Known'?' learned':'')+(data.state==='Story locked'?' locked':'');
@@ -66,13 +68,17 @@ function createNode(data){
   button.append(seal,label);
   if(data.personal){const state=document.createElement('span');state.className='state';state.textContent=data.state;button.append(state);}
   else{const pips=document.createElement('span');pips.className='pips';pips.setAttribute('aria-hidden','true');for(let i=0;i<data.max;i++){const pip=document.createElement('i');pip.className='pip'+(i<data.rank?' filled':'');pips.append(pip);}button.append(pips);}
-  button.addEventListener('mouseenter',()=>{if(!compact()&&!selectionPinned)inspect(data,button);});
-  button.addEventListener('focus',()=>{if(!compact()&&!selectionPinned)inspect(data,button);});
-  button.addEventListener('click',()=>{selectionPinned=true;inspect(data,button);});
+  button.addEventListener('pointerenter',event=>{clearHover();if(event.pointerType==='mouse'&&!selectionPinned)inspect(data,button);});
+  button.addEventListener('pointerleave',leavePreview);
+  button.addEventListener('focus',()=>{clearHover();if(button.matches(':focus-visible')&&!selectionPinned)inspect(data,button);});
+  button.addEventListener('click',()=>{clearHover();selectionPinned=true;inspect(data,button);});
   return button;
 }
 function inspect(data,button){
+  clearHover();
+  if(selected)selected.removeAttribute('aria-describedby');
   selected=button;
+  button.setAttribute('aria-describedby','inspection');
   document.querySelectorAll('.skill').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
   byId('detail-kind').textContent=data.personal?'Personal trait':current.role+' training';
   byId('detail-icon').src=image(data.icon);
@@ -83,23 +89,49 @@ function inspect(data,button){
   byId('detail-unlock').textContent=data.unlock;
   byId('detail-caption').textContent=data.personal?'Unique to '+current.name:'Shared by heroes of this class';
   panel.hidden=false;
+  positionCard();
+}
+function positionCard(){
+  if(panel.hidden||!selected)return;
+  const screen=document.querySelector('.screen').getBoundingClientRect();
+  const rootStyle=getComputedStyle(document.documentElement);
+  const safe=side=>Math.max(12,parseFloat(rootStyle.getPropertyValue('--safe-'+side))||0);
+  const bounds={left:Math.max(screen.left,safe('left')),right:Math.min(screen.right,innerWidth-safe('right')),top:Math.max(screen.top,safe('top')),bottom:Math.min(screen.bottom,innerHeight-safe('bottom'))};
+  const source=selected.getBoundingClientRect();
+  if(source.bottom<bounds.top||source.top>bounds.bottom){dismiss(false);return;}
+  const rightSpace=bounds.right-source.right-12;
+  const leftSpace=source.left-bounds.left-12;
+  const side=rightSpace>=Math.min(340,bounds.right-bounds.left)||rightSpace>=leftSpace?'right':'left';
+  const space=side==='right'?rightSpace:leftSpace;
+  const width=Math.min(340,Math.max(230,space),bounds.right-bounds.left);
+  panel.style.width=width+'px';
+  panel.style.maxHeight=Math.min(420,bounds.bottom-bounds.top)+'px';
+  const height=panel.getBoundingClientRect().height;
+  const x=side==='right'?source.right+12:source.left-width-12;
+  const y=Math.max(bounds.top,Math.min(source.top,bounds.bottom-height));
+  panel.style.left=Math.max(bounds.left,Math.min(x,bounds.right-width))+'px';
+  panel.style.top=y+'px';
+  panel.dataset.side=side;
+  panel.style.setProperty('--arrow-y',Math.max(16,Math.min(source.top+25-y,height-26))+'px');
 }
 function chooseHero(hero){
-  current=hero;selectionPinned=false;selected=null;
+  dismiss(false);current=hero;
   byId('hero-name').textContent=hero.name;byId('hero-role').textContent=hero.role;
   byId('class-note').textContent='Shared by '+hero.role+' heroes';
   document.querySelectorAll('.hero').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.hero===hero.id)));
   byId('class-tree').replaceChildren();
   for(const pair of classes[hero.role]){const branch=document.createElement('div');branch.className='branch';pair.forEach(d=>branch.append(createNode(d)));byId('class-tree').append(branch);}
   byId('personal-tree').replaceChildren(...hero.traits.map(createNode));
-  if(compact()) panel.hidden=true;
-  else inspect(hero.traits[0],byId('personal-tree').firstElementChild);
 }
 for(const hero of heroes){const b=document.createElement('button');b.className='hero';b.type='button';b.dataset.hero=hero.id;b.setAttribute('aria-label',hero.name+', '+hero.role);b.setAttribute('aria-pressed','false');const img=document.createElement('img');img.src=ART+hero.portrait;img.alt='';b.append(img);b.addEventListener('click',()=>chooseHero(hero));document.querySelector('.heroes').append(b);}
-function dismiss(){const previous=selected;selected=null;selectionPinned=true;if(previous)previous.focus({preventScroll:true});panel.hidden=true;document.querySelectorAll('.skill').forEach(b=>b.setAttribute('aria-pressed','false'));selectionPinned=false;}
-document.querySelector('.dismiss').addEventListener('click',dismiss);
-document.addEventListener('keydown',event=>{if(event.key==='Escape')dismiss();});
-document.addEventListener('pointerdown',event=>{if(compact()&&!panel.hidden&&!panel.contains(event.target)&&!event.target.closest('.skill'))dismiss();});
-window.matchMedia('(max-width:1100px), (max-height:650px) and (min-width:640px)').addEventListener('change',()=>chooseHero(current));
+function dismiss(restoreFocus=true){clearHover();const previous=selected;selected=null;selectionPinned=true;if(previous){previous.removeAttribute('aria-describedby');if(restoreFocus)previous.focus({preventScroll:true});}panel.hidden=true;document.querySelectorAll('.skill').forEach(b=>b.setAttribute('aria-pressed','false'));selectionPinned=false;}
+document.querySelector('.dismiss').addEventListener('click',()=>dismiss());
+panel.addEventListener('pointerenter',clearHover);
+panel.addEventListener('pointerleave',leavePreview);
+document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!panel.hidden){event.preventDefault();dismiss();}});
+document.addEventListener('pointerdown',event=>{if(!panel.hidden&&!panel.contains(event.target)&&!event.target.closest('.skill'))dismiss(false);});
+document.addEventListener('focusin',event=>{if(!selectionPinned&&!panel.hidden&&!panel.contains(event.target)&&!event.target.closest('.skill'))dismiss(false);});
+window.addEventListener('resize',positionCard);
+window.addEventListener('scroll',positionCard,true);
 chooseHero(current);
 

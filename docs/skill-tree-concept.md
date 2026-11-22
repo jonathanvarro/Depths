@@ -5,6 +5,11 @@ structural references. Small, shared class improvements belong above the
 named character's larger special traits. Menus should feel more distinctive
 and gothic; their outside edges stay straight and their inward corners bevel.
 
+**Owner review, 2026-11-21:** Reliquary brass is approved ("works great").
+The skill paths should use the landscape width, with no fixed description
+column. Hover/tap descriptions should follow the backpack inventory pattern.
+This revision implements that presentation in the concept inspector.
+
 ## Selectable skill-screen concept
 
 Open `art/concepts/interface/skill-tree-v1/inspector.html`. It uses the
@@ -13,8 +18,9 @@ grain, brass accents, approved portraits and existing glyphs.
 
 - **Above:** six compact class-training seals. Four small rank marks suggest
   modest improvements. Health and accuracy sit alongside class-appropriate
-  options; the Mage has Spell reserve. The three vertical pairs are visual
-  groupings, not approved prerequisite chains.
+  options; the Mage has Spell reserve. They now run horizontally across the
+  full available width. Connecting lines are visual groupings, not approved
+  prerequisite chains.
 - **Below:** three larger personal medallions. Known traits retain a bright
   rim; later story traits retain a dim symbol and lock. The connecting line
   expresses a personal path, not automatic unlock logic.
@@ -22,13 +28,17 @@ grain, brass accents, approved portraits and existing glyphs.
   comparison. Corin's proposed identity develops his existing Grudge into
   retaliation and personal endurance. Branna's proposed identity grows from
   rescue work into protection and recovery. Mara and Alwen also have examples.
-- **Inspection:** desktop hover previews a description; click pins it.
-  Touch selects and opens a scrollable description card. Escape/Close returns
-  to the seals; native buttons support keyboard focus. Locked traits can be
-  inspected. Hero selection stays on the left.
-- **Phone:** at low landscape heights the six class skills form one row so
-  both halves fit together. A tapped description temporarily overlays part
-  of the tree. Long descriptions scroll within that card.
+- **Inspection:** initially hidden on every screen size; it reserves no
+  layout space. Mouse hover or keyboard focus previews a card beside the
+  source; click/tap pins it. Moving from the source into the card keeps it
+  readable. Unpinned previews disappear after leaving; Close, outside click
+  or Escape dismisses a pinned card. Escape/Close restores source focus.
+  The selected node stays reachable. Long descriptions scroll within the
+  card while its heading, unlock information and Close remain accessible.
+  Locked traits can be inspected. Hero selection stays on the left.
+- **Landscape:** class training and personal paths each span the width to
+  the right of the portrait rail. The two sections remain visible together
+  on phone shapes; compact layouts omit the explanatory footer.
 
 This is an independent visual proposal. Current `Progression` rules remain:
 expedition levels reset, while learned skills persist. The screen explicitly
@@ -44,9 +54,9 @@ No save, class, quest, trait resource or live screen is changed.
 Open `art/concepts/interface/gothic-buttons-v1/inspector.html`.
 
 1. **Worn iron:** restrained double frame, small rivets and smoke-dark metal.
-2. **Reliquary brass:** tarnished inlay and a small pointed-arch accent. This
-   is the strongest candidate for the requested gothic direction, with room
-   to use the quieter iron variant for secondary controls.
+2. **Reliquary brass — owner selected:** tarnished inlay and a small
+   pointed-arch accent. `selection.json` records the approval and the three
+   placement rules. Its frame is reflected in the revised skill heading.
 3. **Carved slate:** cool stone, shallow engraving and a few chipped corners.
 
 Each has left/centre/right variants. The left has a flat left edge and
@@ -58,7 +68,8 @@ Keep the 44px minimum hit area when adapting these shapes for Godot.
 Nine original scalable frame studies live in its `assets` folder, generated
 by `tools/art/build_gothic_button_concepts.py`. Labels remain real text,
 separate from frames. These are reusable design sources, not drop-in Godot
-StyleBoxes or approved replacements. CSS stretches the frame for comparison;
+StyleBoxes. Reliquary brass is the approved visual direction; live Godot menu
+adaptation is separate. CSS stretches the frame for comparison;
 production should preserve corner widths through a polygon or sliced frame.
 The owner's reference screenshots are not redistributed in this delivery.
 
@@ -66,9 +77,14 @@ The owner's reference screenshots are not redistributed in this delivery.
 
 Headless Chrome checked all images/fonts, hero switching, equal shared-class
 panels, different personal panels, Mage spell reserve inspection, touch-size
-controls, Escape, button selection and unavailable states. Both skill sections
-fit at 1278×590, 844×390 and 667×375 without page overflow. All skill hit areas
-are at least 67px in these samples. The button sheet scrolls vertically on a
+controls, Escape, button selection and unavailable states. The revision also
+checks initial card hiding, hover preview/leave, moving into a card, pinning,
+outside dismissal, keyboard focus, emulated touch, a long-text scrolling
+stress case and simulated 47px side / 21px bottom safe margins. All nine
+nodes at each of four sizes retain reachable sources and bounded cards.
+Both skill sections fit at 1440×900, 1278×590, 844×390 and 667×375 without
+page overflow. All skill hit areas are at least 86px in these samples.
+The button sheet scrolls vertically on a
 phone because it compares three treatments; each individual button remains
 at least 58px high. See `validation.json` and the `captures` directories beside
 the inspectors. These are browser concept captures, not running-game footage
