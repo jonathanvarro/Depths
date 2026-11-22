@@ -720,15 +720,30 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 ## View button. The Settings switch is the same choice. The opening and the
 ## dark stage stay first person.
 func _wants_overhead() -> bool:
-	return Settings.get_value("tactical_view") and not _in_opening and _map != null and not _camp.visible and not _ending
+	return _overhead_on() and not _in_opening and _map != null and not _camp.visible and not _ending
+
+
+## The first floors are explored and fought through the party's eyes (owner
+## playtest, 2026-11-21: exploring from above was less fun). The view from
+## above opens from this floor on, for the more complex fights.
+@export var overhead_from_floor := 4
+
+
+func _overhead_allowed() -> bool:
+	return _depth >= overhead_from_floor
+
+
+## The player wants the view from above, and this floor allows it.
+func _overhead_on() -> bool:
+	return Settings.get_value("view_above") and _overhead_allowed()
 
 
 func _toggle_view() -> void:
-	if _in_opening or _camp.visible or _ending:
+	if _in_opening or _camp.visible or _ending or not _overhead_allowed():
 		return
-	Settings.set_value("tactical_view", not Settings.get_value("tactical_view"))
+	Settings.set_value("view_above", not Settings.get_value("view_above"))
 	if _in_combat and _combat._state and _combat._state.field:
-		if Settings.get_value("tactical_view"):
+		if Settings.get_value("view_above"):
 			_tactical.enter(self, _combat._state)
 		else:
 			_tactical.exit()
@@ -751,8 +766,8 @@ func _apply_view() -> void:
 
 func _update_view_button() -> void:
 	if _view_button:
-		_view_button.text = "Eyes" if Settings.get_value("tactical_view") else "Above"
-		_view_button.visible = not _in_opening
+		_view_button.text = "Eyes" if Settings.get_value("view_above") else "Above"
+		_view_button.visible = not _in_opening and _overhead_allowed()
 
 
 func _build_level() -> void:
@@ -1049,7 +1064,7 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 	# an event, a quest site's guards, and the Goblin King's hall (#257: he
 	# and his guards are 3D models). Lairs and the gate keep their own stage
 	# for now (the Broodmother plans differently on the board).
-	var ambush_on_board: bool = not on_map and _map_fights_active() and Settings.get_value("tactical_view") and _fight_kind in ["", "queen"]
+	var ambush_on_board: bool = not on_map and _map_fights_active() and _overhead_on() and _fight_kind in ["", "queen"]
 	var isolate_stage := _fight_kind == "queen" or (_fight_kind == "lair" and types.has(CAPTAIN)
 		and CAPTAIN.view_scene() == CAPTAIN.model)
 	if ambush_on_board:
@@ -1060,7 +1075,7 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 		else:
 			_face_toward(cell)  # face the one that reached you
 		_begin_field_fight(state, cell)
-		if Settings.get_value("tactical_view"):
+		if _overhead_on():
 			_tactical.enter(self, state)  # the camera lifts above the room
 		else:
 			_tactical.exit()
@@ -1118,11 +1133,13 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 		_end_field_fight()
 	else:
 		await _stage.exit()  # the fog sinks back; the cave returns
-	_play_place_music()
 	for foe in state.foes:
 		if is_instance_valid(foe.node):
 			foe.node.queue_free()
 	_in_combat = false
+	# The fight's music eases back down into the place's (owner, 2026-11-21:
+	# it used to keep playing, as this ran while still "in combat").
+	_play_place_music(Music.AFTER_FIGHT)
 	_apply_view()
 	_end_encounter()
 	_combat.only_action = ""
@@ -4655,9 +4672,9 @@ func _build_audio() -> void:
 
 
 ## The cave's music, or the fortress's on its floor (#54).
-func _play_place_music() -> void:
+func _play_place_music(fade := -1.0) -> void:
 	if _music and not _in_combat:
-		_music.play("galleries" if _depth >= Galleries.DEPTH and not _in_opening else ("fortress" if _depth == FORTRESS_DEPTH else "cave"))
+		_music.play_with_fade(fade, "galleries" if _depth >= Galleries.DEPTH and not _in_opening else ("fortress" if _depth == FORTRESS_DEPTH else "cave"))
 
 
 func _play_effect(sound: AudioStream) -> void:

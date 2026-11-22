@@ -90,6 +90,11 @@ founder/cursed-item restrictions and supply-use costs are unchanged.
   "Replaces / arrow" assertion now verifies the actual two stat rows.
 - Existing journal/settings: 495 renderer-backed checks, with outputs
   redirected into ignored build output rather than overwriting prior reviews.
+- After incorporating the latest main branch, the tent checks still pass;
+  the renderer-backed title-fit check keeps all five desktop buttons within
+  the 1152×648 window. The title also retains its scrolling fallback.
+- The existing complete camp-flow check also passes with the new cot/chest
+  targets, short press-feedback delay and Claude's recruitment lineup.
 
 Native Mobile/D3D12 checks and the actual full-menu audit use the owner's
 #253 private-desktop launcher. Captures include desktop and larger-text

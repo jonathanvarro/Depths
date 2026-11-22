@@ -5,7 +5,7 @@ extends Node3D
 ## and who the party can reach. When the fight ends the camera drops back
 ## into the party's eyes. The rules don't change; this is how it looks.
 ##
-## Switched on and off in Settings ("tactical_view"). Main calls enter()
+## Switched on and off in Settings ("view_above"). Main calls enter()
 ## when a fight on the map begins and exit() when it ends.
 ##
 ## On the board (owner: "keep it, go further", 2026-11-08): tap a tile next

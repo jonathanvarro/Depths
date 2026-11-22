@@ -22,7 +22,7 @@ func _feet(main, node: Node3D) -> float:
 
 
 func _initialize() -> void:
-	load("res://scripts/settings.gd").set_value("tactical_view", false)  # about the first-person fight (#248 keeps it as an option)
+	load("res://scripts/settings.gd").set_value("view_above", false)  # about the first-person fight (#248 keeps it as an option)
 	var args := OS.get_cmdline_user_args()
 	var tag: String = args[0] if args.size() > 0 else "desk"
 	var dir: String = args[1] if args.size() > 1 else ""
@@ -35,6 +35,7 @@ func _initialize() -> void:
 		# A fresh game for each fight.
 		var main = load("res://scenes/main.tscn").instantiate()
 		main.play_opening = false
+		main.overhead_from_floor = 1  # these test the board on early floors (owner 2026-11-21: off there in play)
 		main.floor_seed = 11
 		root.add_child(main)
 		await create_timer(0.5).timeout
@@ -61,6 +62,6 @@ func _initialize() -> void:
 			root.get_texture().get_image().save_png(dir + "/framing_" + tag + "_" + name + ".png")
 		main.queue_free()
 		await create_timer(0.3).timeout
-	load("res://scripts/settings.gd").set_value("tactical_view", true)  # back to the default for later checks
+	load("res://scripts/settings.gd").set_value("view_above", false)  # back to the default for later checks
 	print("fails=", fails)
 	quit()

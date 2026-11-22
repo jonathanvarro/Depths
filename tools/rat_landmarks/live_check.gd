@@ -24,7 +24,7 @@ func run() -> void:
 	var args:=OS.get_cmdline_user_args()
 	out=args[0];DirAccess.make_dir_recursive_absolute(out)
 	var Settings=load("res://scripts/settings.gd")
-	Settings.set_value("tactical_view",true)
+	Settings.set_value("view_above",true)
 	Settings.set_value("text_size","Normal")
 	Settings.set_value("flashes",false)
 	var main=load("res://scenes/main.tscn").instantiate()

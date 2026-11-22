@@ -84,7 +84,35 @@ func _initialize() -> void:
 	check("a third joins; the party is full", ps.members.size() == 3 and not _press(main._camp, "Invite"))
 	await _snap("full")
 	check("Mara can't be dismissed", not camp.dismiss(ps, mara))
+	# Dismiss: pick a member in the lineup first (owner, 2026-11-21).
+	check("no Dismiss until someone is picked", not _press(main._camp, "Dismiss"))
+	main._camp._place_chosen(ps.members[2], ps.members[2].row)
+	await process_frame
 	check("dismiss sends one away", _press(main._camp, "Dismiss") and ps.members.size() == 2)
+
+	# The lineup (owner, 2026-11-21): front and back rows, picked or dragged into.
+	await _open("fire")
+	var lineup := func(): return main._camp.find_children("*", "Button", true, false).filter(func(b): return b.tooltip_text.begins_with("Open place") or b.tooltip_text.contains(", front row") or b.tooltip_text.contains(", back row"))
+	check("the lineup shows two rows of three places", lineup.call().size() == 6, lineup.call().size())
+	var mover: Companion = ps.members[1]
+	var other := "back" if mover.row == "front" else "front"
+	main._camp._place_chosen(mover, mover.row)
+	main._camp._place_chosen(null, other)
+	check("a member picked and placed moves row", mover.row == other)
+	var newcomer: Companion = camp.candidates[0]
+	main._camp._drop_on_place({"recruit": newcomer}, null, "front")
+	check("a recruit dragged to an open place joins in that row", ps.members.size() == 3 and ps.members[2].display_name == newcomer.display_name and ps.members[2].row == "front")
+	await _snap("lineup")
+	camp.candidates.append(load("res://scripts/recruits.gd").make(camp.rng))
+	var waiter: Companion = camp.candidates[-1]
+	var leaver: Companion = ps.members[2]
+	main._camp._place_chosen(null, "front")  # nothing picked: nothing happens
+	main._camp._picked_recruit = waiter
+	main._camp._place_chosen(mara, mara.row)
+	check("Mara can't be swapped out", mara in ps.members and waiter in camp.candidates)
+	main._camp._place_chosen(leaver, leaver.row)
+	check("picking a recruit, then a member, swaps them; the member waits by the fire", ps.members.size() == 3 and leaver not in ps.members and leaver in camp.candidates and ps.members[2].display_name == waiter.display_name and ps.members[2].row == leaver.row)
+	camp.dismiss(ps, ps.members[2])
 
 	# Any hero can take up carried gear; the Pack compares before and after (#67).
 	var knife: Equipment = load("res://data/gear/plain_knife.tres")
@@ -113,7 +141,7 @@ func _initialize() -> void:
 	# A day passes: one leaves the fire, one arrives.
 	var waiting: Array = camp.candidates.duplicate()
 	camp.rest(ps)
-	check("a new day: someone new by the fire", camp.candidates.size() == 3 and camp.candidates.any(func(c): return c not in waiting))
+	check("a new day: someone new by the fire", camp.candidates.size() == camp.candidate_count(ps) and camp.candidates.any(func(c): return c not in waiting), [waiting.size(), camp.candidates.size()])
 
 	# Mara is treated; the recruit goes down alone and she rejoins later.
 	mara.add_injury(load("res://data/injuries/deep_wound.tres"))

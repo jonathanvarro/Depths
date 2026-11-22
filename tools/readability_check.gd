@@ -24,6 +24,7 @@ func _e(id: String) -> EnemyType:
 func _fight(ids: Array, seed: int):
 	var main = load("res://scenes/main.tscn").instantiate()
 	main.play_opening = false
+	main.overhead_from_floor = 1  # these test the board on early floors (owner 2026-11-21: off there in play)
 	main.floor_seed = seed
 	main.simulate_phone_safe_area = tag == "phone"
 	root.add_child(main)
@@ -66,7 +67,7 @@ func _bounds(main, label: String) -> void:
 
 
 func _initialize() -> void:
-	load("res://scripts/settings.gd").set_value("tactical_view", false)  # about the first-person fight (#248 keeps it as an option)
+	load("res://scripts/settings.gd").set_value("view_above", false)  # about the first-person fight (#248 keeps it as an option)
 	var args := OS.get_cmdline_user_args()
 	tag = args[0] if args.size() > 0 else "desk"
 	dir = args[1] if args.size() > 1 else ""
@@ -76,7 +77,7 @@ func _initialize() -> void:
 		await _elites(size)
 		await _states(size)
 	Settings.set_value("text_size", "Normal", self)
-	load("res://scripts/settings.gd").set_value("tactical_view", true)  # back to the default for later checks
+	load("res://scripts/settings.gd").set_value("view_above", false)  # back to the default for later checks
 	print("fails=", fails)
 	quit()
 

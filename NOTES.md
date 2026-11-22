@@ -19,6 +19,36 @@ Format:
 - Next: review/merge the delivery branch. Native checks use the #253 private desktop; physical iPhone review remains. The table is ready for future statistics content.
 - Watch out: button/panel chrome now uses StyleBoxTexture; duplicate as StyleBox rather than casting to StyleBoxFlat. Keep rarity, conditions and physical inventory glyphs distinct from menu chrome. Tent painting approval and its pixel hash are pinned in `art/camp/player-tent-v1/approval.json`; generation prompt/provenance is retained. Claude's active camp edits in the main checkout were not overwritten.
 
+## 2026-11-21 – Claude (first person by default)
+
+- Did: owner chose first person on floor 4 too. The view-from-above setting is now `view_above`, default off (renamed from `tactical_view` so saved "on" values are left behind). It still only works from floor 4; with it off, the King's hall is fought on the dark stage. Checks that test the board turn it on and restore off.
+- Next: nothing.
+- Watch out: use the "view_above" key, not "tactical_view".
+
+## 2026-11-21 – Claude (first floors through the party's eyes)
+
+- Did: owner playtest: exploring from above made the early floors less fun. Floors 1-3 now stay first person for exploring and fights; the View button and V only work from floor 4 (`Main.overhead_from_floor`, `_overhead_allowed`, `_overhead_on`). The setting is kept and labelled "View from above, floor 4 on (V)". Board checks (tactical, enemy_models, framing, readability) set `overhead_from_floor = 1` so they still test the board on early floors. `tools/early_floor_view_check.gd`.
+- Next: owner decides whether floor 4 should start from above (the setting still defaults on) or in first person.
+- Watch out: with the setting on, arriving on floor 4 lifts the view; the King's hall is fought on the board.
+
+## 2026-11-21 – Claude (battle music ends with the fight)
+
+- Did: owner report: the battle music kept playing after fights. main.gd asked for the place's music while `_in_combat` was still true, so `_play_place_music` skipped it. It now runs after `_in_combat = false`, with a slower 4s sine fade (`Music.AFTER_FIGHT`, `play_with_fade`). A change mid-fade (a fight right after a fight) kills the running fade first. main_hero_down_check asserts the cave music is back.
+- Next: owner listens.
+- Watch out: nothing.
+
+## 2026-11-21 – Claude (title menu fits the window)
+
+- Did: owner report: Quit fell off the bottom of the title screen (five buttons since Skip the tutorial). `title_screen.gd _apply_margins` now gives way on the top margin, then the button gaps, so every button fits the 648-high base view. `tools/title_fit_check.gd` (needs the renderer for real sizes: run through background_godot.py).
+- Next: nothing.
+- Watch out: headless runs report a square viewport, so the check only means something with a real window size.
+
+## 2026-11-21 – Claude (recruitment fire lineup)
+
+- Did: owner request. The fire shows recruits as condensed cards on the left and the party lineup on the right: Front and Back rows, three places each, with face, name and health. Click a recruit (or drag their card) then a place: an open place hires them into that row (`CampState.hire_into`), an occupied one swaps them (`CampState.swap`: the member goes back to wait by the fire; the founder stays). Click a member then a place to move rows (trading places with whoever is there); a picked member gets Dismiss. Invite still works. Cards/tiles are PanelContainers with a see-through overlay button (`_overlay`) so they size from their contents. recruit_check/camp_check updated; desktop and phone captures checked.
+- Next: owner tries it.
+- Watch out: rows set here are the starting rows for fights (Companion.row).
+
 ## 2026-11-21 – Claude (smoother 3D model animation)
 
 - Did: owner request. `scripts/anim_tidy.gd`, called by the three model actor scripts (combat-roster, field-creatures, rat): moves now cross-fade (0.14s; hurt 0.06s) instead of snapping, a repeated one-shot (two attacks in a row) starts over, and bone flips are spread over neighbouring keys along the shortest turn. The flips were in the shared goblin `fall` (spine and left leg turning 100-144 degrees in one frame, on all eight goblin-base models). Still mode is unchanged (exact frames). Loop seams were already clean. `tools/animation_audit.gd` lists each clip's biggest step; `tools/animation_smooth_check.gd`.

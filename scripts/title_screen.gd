@@ -17,6 +17,7 @@ const GAME_SCENE := "res://scenes/main.tscn"
 @export var simulate_phone := false
 
 var _margin: MarginContainer
+var _column: VBoxContainer
 var _begin: Button
 var _settings_screen: Control
 var _hero_select: Control  # hero_select.gd (#95)
@@ -46,6 +47,7 @@ func _ready() -> void:
 	menu_scroll.follow_focus = true
 	_margin.add_child(menu_scroll)
 	var column := VBoxContainer.new()
+	_column = column
 	column.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 	column.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 	column.add_theme_constant_override("separation", 12 if phone else 18)
@@ -122,8 +124,24 @@ func _apply_margins() -> void:
 	if _settings_screen: _settings_screen.set_safe_area(insets)
 	_margin.add_theme_constant_override("margin_left", int(maxf(100.0 if phone else 88.0, insets.x + 24)))
 	_margin.add_theme_constant_override("margin_right", int(maxf(64.0, insets.z + 24)))
-	_margin.add_theme_constant_override("margin_top", 56 if phone else 128)
-	_margin.add_theme_constant_override("margin_bottom", int(maxf(40.0, insets.w + 16)))
+	var bottom := int(maxf(40.0 if not phone else 24.0, insets.w + 16))
+	_margin.add_theme_constant_override("margin_bottom", bottom)
+	# Every button stays on screen (owner, 2026-11-21: Quit fell off the
+	# bottom of a short window): the top margin gives way first, then the
+	# gaps between buttons.
+	var height := get_viewport().get_visible_rect().size.y
+	var top := 56 if phone else 128
+	var gap := 12 if phone else 18
+	_column.add_theme_constant_override("separation", gap)
+	var needed := _column.get_combined_minimum_size().y
+	var spare := height - bottom - needed
+	if spare < top:
+		top = maxi(16, int(spare))
+		if spare < 16:
+			var count := maxi(1, _column.get_child_count() - 1)
+			gap = maxi(4, gap - int(ceil((16 - spare) / count)))
+			_column.add_theme_constant_override("separation", gap)
+	_margin.add_theme_constant_override("margin_top", top)
 
 
 func _menu_button(text: String, height: int, primary: bool) -> Button:

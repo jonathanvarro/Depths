@@ -69,5 +69,6 @@ func _initialize() -> void:
 		if main._results.visible: break
 	await create_timer(1.0).timeout
 	check("...and the expedition carries on", not main._results.visible and not main._ending)
+	check("...and the fight's music eases back to the cave's (owner, 2026-11-21)", main._music.place == "cave" and not main._in_combat, main._music.place)
 	print("fails=", fails)
 	quit()
