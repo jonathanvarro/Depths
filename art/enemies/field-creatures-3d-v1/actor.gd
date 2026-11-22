@@ -2,6 +2,7 @@ extends Node3D
 ## Model presentation only; callers still own intent, damage, visibility and loot.
 @export var animate_motion:=true
 @export var palette_material: Material
+const AnimTidy := preload("res://scripts/anim_tidy.gd")
 var player: AnimationPlayer
 var current_pose:="idle"
 const STATIC_TIME:={"idle":0.0,"walk":0.0,"attack":0.29,"hurt":0.125,"fall":1.0,"web":0.25,"venom":0.29}
@@ -13,6 +14,7 @@ func _ready() -> void:
 		mesh.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	for pose in player.get_animation_list():
 		player.get_animation(pose).loop_mode=Animation.LOOP_LINEAR if pose in ["idle","walk"] else Animation.LOOP_NONE
+	AnimTidy.tidy(player)  # even out bone flips (2026-11-21)
 	player.animation_finished.connect(_finished)
 	play(current_pose)
 
@@ -20,7 +22,7 @@ func play(pose: String) -> void:
 	if not is_node_ready():current_pose=pose;return
 	if not player.has_animation(pose):pose="idle"
 	current_pose=pose
-	player.play(pose);player.advance(0)
+	AnimTidy.play(player,pose);player.advance(0)  # blends from the last move
 	if not animate_motion:
 		sample(pose,player.get_animation(pose).length if pose=="fall" else float(STATIC_TIME.get(pose,0)))
 

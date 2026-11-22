@@ -13,6 +13,12 @@ Format:
 
 ---
 
+## 2026-11-21 – Claude (smoother 3D model animation)
+
+- Did: owner request. `scripts/anim_tidy.gd`, called by the three model actor scripts (combat-roster, field-creatures, rat): moves now cross-fade (0.14s; hurt 0.06s) instead of snapping, a repeated one-shot (two attacks in a row) starts over, and bone flips are spread over neighbouring keys along the shortest turn. The flips were in the shared goblin `fall` (spine and left leg turning 100-144 degrees in one frame, on all eight goblin-base models). Still mode is unchanged (exact frames). Loop seams were already clean. `tools/animation_audit.gd` lists each clip's biggest step; `tools/animation_smooth_check.gd`.
+- Next: owner looks at it in play; if a strike now feels soft, lower `BLEND`.
+- Watch out: the fix is applied at load to the imported clips, not in the .glb/Blender sources; a re-export keeps the flips in the files but the helper still evens them out.
+
 ## 2026-11-21 – Claude (Skip the tutorial on the title)
 
 - Did: owner request. The title has "Skip the tutorial": it opens the hero screen, then starts a new game at camp after the commander's first talk, as the escape leaves it (the hero has the fallen companion's weapon, starting supplies and the same partial camp). `SaveGame.skip_opening`, main `_skip_opening`. `tools/skip_opening_check.gd`.

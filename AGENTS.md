@@ -143,6 +143,9 @@ Templates > Download and Install; already installed on the owner's PC).
   shrine wall anchors, closed/empty state and set_motion. Live scene bindings
   remain a separate integration step. Delivery branch is codex/mine-props-3d.
 
+- Model animation smoothing (2026-11-21, Claude): `scripts/anim_tidy.gd`
+  (cross-fades, repeated blows restart, bone flips evened at load), used by
+  every model actor. `tools/animation_audit.gd`, `tools/animation_smooth_check.gd`.
 - Live 3D hookup (2026-11-08, Claude): `scripts/dressing.gd` `MODELS` /
   `MODELS_BY_PATH` place #239/#241/#243 decor in place of matching 2D pieces;
   six events use the #241/#242 props. `tools/models_3d_check.gd`.

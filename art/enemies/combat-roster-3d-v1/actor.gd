@@ -4,6 +4,7 @@ extends Node3D
 @export var palette_material: Material
 @export var draw_still_time := 0.38
 @export var held_poses: PackedStringArray
+const AnimTidy := preload("res://scripts/anim_tidy.gd")
 var player: AnimationPlayer
 var current_pose:="idle"
 const STATIC_TIME:={"idle":0.0,"walk":0.0,"attack":0.29,"heavy":0.29,"horn":0.25,"hurt":0.125,"web":0.25,"venom":0.29,"brace":0.38,"drum":0.46,"snare":0.38,"enraged":0.46,"call":0.38,"cast":0.50,"defend":0.33,
@@ -16,6 +17,7 @@ func _ready() -> void:
 		mesh.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	for pose in player.get_animation_list():
 		player.get_animation(pose).loop_mode=Animation.LOOP_LINEAR if pose in ["idle","walk","run"] or pose in held_poses else Animation.LOOP_NONE
+	AnimTidy.tidy(player)  # even out bone flips (2026-11-21)
 	player.animation_finished.connect(_finished)
 	play(current_pose)
 
@@ -23,7 +25,7 @@ func play(pose: String) -> void:
 	if not is_node_ready():current_pose=pose;return
 	if not player.has_animation(pose):pose="idle"
 	current_pose=pose
-	player.play(pose);player.advance(0)
+	AnimTidy.play(player,pose);player.advance(0)  # blends from the last move
 	if not animate_motion:
 		var still_time := float(STATIC_TIME.get(pose, 0))
 		if pose == "draw":
