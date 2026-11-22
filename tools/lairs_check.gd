@@ -99,11 +99,11 @@ func _initialize() -> void:
 	check("a lair fight resumes as one after loading", main._fight_kind == "lair")
 
 	# The reward.
-	var gold: int = main._party_state.supplies.gold
-	var gear_before: int = main._party_state.supplies.gear.size()
+	# Its hoard is a silver chest left where it fell (owner, 2026-11-22).
+	var chests_before: Array = main._map.contents.keys()
 	main._lair_won()
-	var prize: Equipment = main._party_state.supplies.gear.back() if main._party_state.supplies.gear.size() > gear_before else (main._overflow.keys().back() if not main._overflow.is_empty() else null)
-	check("its hoard: magic or rare gear, and gold", prize != null and prize.tier in ["magic", "rare"] and main._party_state.supplies.gold == gold + main.LAIR_GOLD + 10, "%s %s" % [prize.display_name if prize else "none", main._party_state.supplies.gold - gold])
+	var left: Array = main._map.contents.keys().filter(func(c): return c not in chests_before)
+	check("its hoard: a silver chest left where it fell", left.size() == 1 and load("res://scripts/chest_tiers.gd").tier_at(main._map, left[0]) == "silver", left)
 	check("the nest is remembered in the save", SaveGame.pack_object(map).has("lairs"))
 	main.queue_free()
 	await process_frame

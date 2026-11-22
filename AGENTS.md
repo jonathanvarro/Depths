@@ -605,6 +605,10 @@ Templates > Download and Install; already installed on the owner's PC).
   empower, glow), main `_choose_elite`/`_spawn_elite`/`_patrol`/`_elite_won`,
   `map.marks["elite"]`, `_fight_kind == "elite"`; random elites are off
   (`CombatState.RANDOM_ELITES`). `tools/named_elites_check.gd`.
+- Chest tiers (2026-11-22): `scripts/chest_tiers.gd` (common/silver/gold,
+  `map.marks["chest_tiers"]`, LOOT, art `art/props/chests-v1/<tier>.tscn`
+  when ChatGPT's lands), main `_open_tiered`/`_drop_chest`. Silver behind
+  puzzles and in lairs; gold for named elites and the King. `tools/chest_tiers_check.gd`.
 - Settings (#52): `scripts/settings.gd` (static values, `apply()`, audio
   buses Master/Music/Effects; test runs use test_settings.cfg) and
   `scripts/settings_screen.gd`. New sound players should set `bus`.

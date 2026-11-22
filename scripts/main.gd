@@ -48,6 +48,7 @@ const Sounds := preload("res://scripts/sounds.gd")
 const Music := preload("res://scripts/music.gd")
 const Puzzles := preload("res://scripts/puzzles.gd")
 const Elites := preload("res://scripts/elites.gd")
+const ChestTiers := preload("res://scripts/chest_tiers.gd")
 const PuzzleProps := preload("res://scripts/puzzle_props.gd")
 const Quests := preload("res://scripts/quests.gd")
 const ConversationScreen := preload("res://scripts/conversation_screen.gd")
@@ -684,6 +685,10 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 		_floors[depth].marks = marks
 		Puzzles.make_solid(_floors[depth])  # shut doors, the lever and the key's resting place
 		_assign_events(_floors[depth])
+		for p: Dictionary in marks.get("puzzles", []):
+			if p.has("chest"):  # behind a puzzle: a silver chest (chest_tiers.gd)
+				ChestTiers.set_tier(_floors[depth], p["chest"], "silver")
+				_floors[depth].events[p["chest"]] = load(ChestTiers.HOARD_EVENT % "silver")
 		_choose_elite(_floors[depth], depth)
 		for cell in stamped["events"]:
 			_floors[depth].events[cell] = stamped["events"][cell]
@@ -972,11 +977,10 @@ func _run_event(cell: Vector2i, at_overlook := false) -> void:
 	_room_events.drained = false
 	for item in result.get("no_room", {}):
 		_left_over(item, result["no_room"][item])
-	# A chest may hold finer gear (owner, 2026-10-21).
+	# A chest may hold finer gear (owner, 2026-10-21); silver and gold chests
+	# much more (chest_tiers.gd, owner 2026-11-22).
 	if not result["left"] and event.kind == DungeonMap.Content.CHEST and result["ambush"].is_empty() and not _in_opening:
-		var gear: Equipment = GearGen.drop(_rng, _depth, "chest")
-		if gear:
-			_found_gear(gear, "Underneath: %s." % _a(gear.display_name.to_lower()))
+		_open_tiered(ChestTiers.tier_at(_map, cell))
 	await _offer_overflow()
 	_party.locked = false
 	if result["left"]:
@@ -1523,16 +1527,60 @@ func _patrol(group, taken: Dictionary) -> void:
 		group.patrol = Roamers.NOWHERE  # blocked: somewhere else next time
 
 
+## Opens a chest's tier on top of its own contents (chest_tiers.gd).
+func _open_tiered(tier: String) -> void:
+	var loot: Dictionary = ChestTiers.loot(_rng, tier, _depth)
+	if loot["gold"] > 0:
+		_party_state.supplies.gold += loot["gold"]
+		_party_state.supplies.changed.emit()
+	var finds: Array = loot["gear"] + ([loot["trinket"]] if loot["trinket"] else [])
+	var names: Array = finds.map(func(g): return _a(g.display_name.to_lower()))
+	for find in finds:
+		if find is Equipment:
+			if _party_state.supplies.has_room_for_gear():
+				_party_state.supplies.gear.append(find)
+			else:
+				_left_over(find, 1)
+		elif _party_state.supplies.add_what_fits(find) == 0:  # a valuable (a trinket sold as treasure)
+			_left_over(find, 1)
+	_party_state.supplies.changed.emit()
+	if tier == "common":
+		if not names.is_empty():
+			_show_message("Underneath: %s. It's in the pack." % names[0])
+		return
+	Sounds.play(self, "coins", -4.0)
+	_show_message("Inside the %s: %s%s." % [ChestTiers.NAMES[tier], ", ".join(PackedStringArray(names)), (", and %d gold" % loot["gold"]) if loot["gold"] > 0 else ""])
+
+
+## Leaves a `tier` chest (a hoard) in the free cell nearest `near`: a
+## fight's prize, opened like any chest. Returns false if there's no room.
+func _drop_chest(near: Vector2i, tier: String) -> bool:
+	var spot := Vector2i(-1, -1)
+	var distances: Dictionary = _map.walking_distances(near)
+	for cell: Vector2i in distances:
+		if cell == _party.cell or _map.content_at(cell) != DungeonMap.Content.NONE or _map.solid.has(cell) or _map.door_at(cell) != DungeonMap.Door.NONE:
+			continue
+		if spot == Vector2i(-1, -1) or distances[cell] < distances[spot]:
+			spot = cell
+	if spot == Vector2i(-1, -1):
+		return false
+	_map.contents[spot] = DungeonMap.Content.CHEST
+	_map.events[spot] = load(ChestTiers.HOARD_EVENT % tier)
+	_map.triggered.erase(spot)
+	ChestTiers.set_tier(_map, spot, tier)
+	_create_room_prop(spot, _map.events[spot])
+	_minimap.queue_redraw()
+	_save_now()
+	return true
+
+
 ## Its hoard: a rare find and gold, on top of what the pack itself dropped.
 func _elite_won() -> void:
 	var pack: Dictionary = Elites.PACKS[_elite_id]
 	if _map.marks.has("elite"):
 		_map.marks["elite"]["beaten"] = true
-	var prize: Equipment = GearModel.conceal(GearModel.random_find(_rng, _depth, 2))  # #192; read it later
-	var gold: int = Elites.HOARD_GOLD + Elites.HOARD_GOLD_PER_FLOOR * _depth
-	_party_state.supplies.gold += gold
-	_party_state.supplies.changed.emit()
-	_found_gear(prize, "%s is dead. The pack's hoard: %s, and %d gold." % [pack["leader"], _a(prize.display_name.to_lower()), gold])
+	if _drop_chest(_party.cell, "gold"):
+		_show_message("%s is dead. Where it fell lies its hoard: a gilded chest." % pack["leader"])
 
 
 func _clear_groups() -> void:
@@ -2558,6 +2606,10 @@ func _add_room_props() -> void:
 
 func _create_room_prop(cell: Vector2i,event: RoomEvent) -> Node3D:
 	var node: Node3D = event.prop.instantiate() if event.prop else _placeholder_prop(event.kind)
+	var tier := ChestTiers.tier_at(_map, cell)
+	if event.kind == DungeonMap.Content.CHEST and tier != "common":
+		node.free()
+		node = ChestTiers.prop(tier, event.prop)  # silver or gold (owner, 2026-11-22)
 	if node:
 		node.position = Vector3(cell.x * CELL_SIZE, 0.0, cell.y * CELL_SIZE)
 		if event.prop_on_wall:
@@ -2869,6 +2921,10 @@ const LAIR_GOLD := 10
 const LAIR_RARE_CHANCE := 0.25
 
 func _lair_won() -> void:
+	# Its hoard is a silver chest where it fell (chest_tiers.gd, owner 2026-11-22).
+	if _drop_chest(_party.cell, "silver"):
+		_show_message("The lair is quiet. Its hoard sits among the bones: a silver-bound chest.")
+		return
 	var prize: Equipment = GearModel.conceal(GearModel.random_find(_rng, _depth, 2 if _rng.randf() < LAIR_RARE_CHANCE else 1))  # #192; read it later
 	var gold := LAIR_GOLD + 5 * _depth
 	_party_state.supplies.gold += gold
@@ -2898,6 +2954,7 @@ func _queen_defeated() -> void:
 		else:
 			_camp_state.stash.gear.append(prize)  # carried up for you
 		_party_state.supplies.changed.emit()
+	_drop_chest(_party.cell, "gold")  # and his own gilded chest (owner, 2026-11-22)
 	# A big moment, but a side quest (#157): end by pointing deeper.
 	var onward := "Whatever the commander is looking for lies further down. The way down continues." \
 			if Quests.has_flag(_camp_state, "lower_gate", "seen") \

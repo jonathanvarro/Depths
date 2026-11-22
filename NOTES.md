@@ -13,6 +13,13 @@ Format:
 
 ---
 
+## 2026-11-22 – Claude (chest tiers: common, silver, gold)
+
+- Did: owner request (ChatGPT is making the chest art in parallel). `scripts/chest_tiers.gd`: a chest's tier is `map.marks["chest_tiers"][cell]` (absent = common). Common keeps its event's contents and the old chance of a find; silver adds a certain one-modifier find, 10 + 5 x floor gold and a 35% trinket; gold a two-modifier find plus a second find, 30 + 12 x floor gold and a 70% trinket (`ChestTiers.LOOT`, main `_open_tiered`). Silver: the chest behind every lever/key puzzle (`puzzle["chest"]`, event `data/events/chest_silver_hoard.tres`) and a lair's hoard. Gold: a named elite pack's hoard and the Goblin King's (on top of his unique trinket). Hoards are real chests left where the fight ended (`main._drop_chest`). `tools/chest_tiers_check.gd`.
+- For ChatGPT's art: put the scenes at `art/props/chests-v1/common.tscn`, `silver.tscn`, `gold.tscn` (floor-centred, front +Z like the other props, with a `state` property taking "closed" / "empty" as `expedition-3d-v1/chest.tscn` does). Silver and gold are picked up automatically; until then they're the expedition chest with a silver or gold glint. Common chests still use each event's own prop (strongbox, pack, workings); swapping those to the common chest is a one-line follow-up.
+- Next: owner plays; tune `ChestTiers.LOOT` if hoards feel too rich or thin.
+- Watch out: hoard events have min_depth 99 so they never come up as ordinary chests.
+
 ## 2026-11-22 – Claude (named elite packs, #277)
 
 - Did: owner request. Random elites in ordinary fights are off (`CombatState.RANDOM_ELITES`). Instead `scripts/elites.gd` gives each floor a chance (25/40/50%) of one named pack, chosen when the floor is built (main `_choose_elite`, seed +59, kinds already beaten only) and kept in `map.marks["elite"]`. It patrols between rooms on the map with a coloured glow (`Roamers.Group.named/patrol`, main `_spawn_elite`, `_patrol`), noticing and closing in like other groups. Fights are `_fight_kind == "elite"`: `Elites.empower` names the leader, gives it both marks and +30% health, followers one mark. Victory: `_elite_won` (tier-2 find + gold) and the pack stays beaten for that floor's day; running leaves it patrolling. `tools/named_elites_check.gd`.
