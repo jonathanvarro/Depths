@@ -32,6 +32,8 @@ class Group:
 	var noticed := false
 	var rested := false  # a slow group rests every other beat
 	var node: Node3D  # its sprite on the map, set by main.gd
+	var named := ""  # a named elite pack's id (elites.gd): it patrols
+	var patrol := NOWHERE  # where a named pack is walking to
 
 	func is_wanderer() -> bool:
 		return home == NOWHERE

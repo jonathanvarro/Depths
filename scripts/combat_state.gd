@@ -101,6 +101,11 @@ const FLASH_HERO_DAMAGE := 1
 const ELITE_CHANCE := {2: 0.06, 3: 0.18, 4: 0.18, 5: 0.25, 6: 0.28}  # nudged up 2026-10-25, after the free torches; floor 2 eased 2026-11-01 (was 0.12), floor 4 2026-11-02 (was 0.22)
 const MAX_ELITES := {2: 1, 3: 2, 4: 2, 5: 2, 6: 2}
 const ELITES := ["Hardened", "Savage", "Swift", "Venomous"]
+## Random elites in ordinary fights (#140) gave way to named packs that
+## patrol a floor (owner, 2026-11-22; elites.gd). Off in the game; a test or
+## the bot can turn it back on per fight.
+const RANDOM_ELITES := false
+var random_elites := RANDOM_ELITES
 const HARDENED_HEALTH := 1.5
 const SAVAGE_DAMAGE := 1
 const SWIFT_INITIATIVE := 3
@@ -285,7 +290,7 @@ func prepare(depth: int, kind := "") -> void:
 	region = GearModel.region_of(depth)
 	for foe in foes:
 		_scale(foe)
-	if kind == "":
+	if kind == "" and random_elites:
 		var chance: float = ELITE_CHANCE.get(depth, 0.0)
 		var made := 0
 		for foe in foes:

@@ -90,7 +90,7 @@ func _initialize() -> void:
 	main._camp._buttons["fire"].pressed.emit()
 	for i in 4:
 		await process_frame
-	var cards: Array = main._camp._body.find_children("*", "PanelContainer", true, false)
+	var cards: Array = main._camp._body.find_children("*", "PanelContainer", true, false).filter(func(c): return c.find_children("*", "Button", true, false).any(func(b): return b.text in ["Invite", "Full"]))  # recruit cards, not the party lineup (2026-11-21)
 	var bar: VScrollBar = main._camp._scroll.get_v_scroll_bar()
 	var edge: float = main._camp._scroll.get_global_rect().end.x
 	check("with a Fixer, four recruits wait by the fire", main._camp_state.candidates.size() == 4 and cards.size() == 4, "%d %d" % [main._camp_state.candidates.size(), cards.size()])

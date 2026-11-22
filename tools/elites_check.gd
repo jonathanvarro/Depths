@@ -32,6 +32,7 @@ func _fight(ids: Array, depth: int, kind := ""):
 		types.append(_e(id))
 	var fight = CS.new(_party(), types)
 	fight.rng.seed = 3
+	fight.random_elites = true  # the old rule, kept switchable (owner 2026-11-22: named packs now)
 	fight.prepare(depth, kind)
 	return fight
 
@@ -93,12 +94,14 @@ func _initialize() -> void:
 	for depth in [2, 4]:
 		for i in 400:
 			var f = CS.new(_party(), [_e("goblin"), _e("goblin")] as Array[EnemyType])
+			f.random_elites = true
 			f.prepare(depth)
 			counts[depth] += f.foes.filter(func(x): return x.elite != "").size()
 	check("elites: rarer on floor 2 (about 1 foe in 17, eased 2026-11-01) than floor 4 (about 1 in 6)", counts[2] > 15 and counts[2] < 80 and counts[4] > counts[2] * 2, str(counts))
 	var none := 0
 	for i in 200:
 		var f = CS.new(_party(), [_e("rat"), _e("rat")] as Array[EnemyType])
+		f.random_elites = true
 		f.prepare(1)
 		none += f.foes.filter(func(x): return x.elite != "").size()
 	check("no elites on floor 1", none == 0)
@@ -108,6 +111,7 @@ func _initialize() -> void:
 	for i in 400:
 		var f = CS.new(_party(), [_e("goblin"), _e("rat")] as Array[EnemyType])
 		f.beaten = ["Rat"]
+		f.random_elites = true
 		f.prepare(4)
 		unmet += f.foes.filter(func(x): return x.elite != "" and x.type.display_name == "Goblin").size()
 		met += f.foes.filter(func(x): return x.elite != "" and x.type.display_name == "Rat").size()
