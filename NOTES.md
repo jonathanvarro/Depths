@@ -13,6 +13,12 @@ Format:
 
 ---
 
+## 2026-11-22 – Claude (chest art hooked up; old containers keep their own loot)
+
+- Did: merged ChatGPT's `codex/mine-polish-and-loot-chests` into main (fast-forward; PR #280's work). New `data/events/chest_common.tres` ("A chest", weight 5, every floor) uses `art/props/chests-v1/common.tscn` and is now the commonest kind-2 event. Silver/gold hoard events point at their own chest scenes. Owner: the old containers stay, with their own loot families and lower quality than a chest: `ChestTiers.CONTAINERS` (by event file name) gives a pack supplies, a tool rack tools, workings/seams ore, a buried cache valuables, a goblin stash scrap (two from floor 3), never gear; the strongbox's coin flip is its whole prize. A real common chest adds 3 + 2 x floor gold and a 35% gear find (`LOOT["common"]`, `GearGen.drop` chance override). Ladder: container < common < silver < gold. `tools/chest_tiers_check.gd` covers it.
+- Next: owner plays; tune `CONTAINERS` chances and `LOOT` numbers.
+- Watch out: chests face their default +Z, not the way the party came in. Other events still use only their own contents.
+
 ## 2026-11-22 – ChatGPT (mine shape/material pass and three loot chest types, #278/#279)
 
 - Did: refined eight mine scenes (supports, standing/hanging lanterns, miners' shrine, old workings and rails) with hewn/chipped shapes, joinery/repairs, worn metal and metre-scaled directional grain. Dressing and two event art paths now use the new family. Added common/silver/embellished gold chests with distinct profiles/fittings and registered closed/open/empty lid states. `art/props/chests-v1/{common,silver,gold}.tscn` wrappers match Claude's chest-tier dispatcher; silver/gold now select their own models. Review/source/rebuild notes: `docs/mine-polish-and-loot-chests.md` and `art/concepts/mine-polish-v2/inspector.html`.

@@ -4,7 +4,11 @@ extends RefCounted
 ## and now and then a finer piece). Silver sits behind a puzzle or in a
 ## lair's hoard; gold is kept for exceptionally hard things: a named elite
 ## pack and the Goblin King.
-##   common - its event's contents; a chance of a gear find (as before).
+##   container - the old finds (a pack, a tool rack, workings, a stash):
+##            their own contents plus a little from their own family
+##            (CONTAINERS), never a piece of gear: that's the chests'.
+##   common - a real chest (data/events/chest_common.tres): its contents, a
+##            few coins and a fair chance of a gear find.
 ##   silver - plus one certain find with a modifier, some gold, and a fair
 ##            chance of a trinket.
 ##   gold   - plus a rarer find (two modifiers), a second find, more gold
@@ -25,9 +29,23 @@ const HOARD_EVENT := "res://data/events/chest_%s_hoard.tres"
 
 ## What each tier adds on top of the chest's own contents.
 const LOOT := {
+	"common": {"find_chance": 0.35, "gold": 3, "gold_per_floor": 2},
 	"silver": {"finds": [1], "gold": 10, "gold_per_floor": 5, "trinket": 0.35},
 	"gold": {"finds": [2, 1], "gold": 30, "gold_per_floor": 12, "trinket": 0.7},
 }
+## The old containers keep their own kinds of loot (owner, 2026-11-22),
+## below a chest's: by event file name, a chance of one more thing from the
+## family (two from floor 3). The strongbox's coin flip is its whole prize.
+const CONTAINERS := {
+	"chest_abandoned_pack": {"family": "supplies", "chance": 0.5, "items": ["ration", "oil_flask", "dressing", "torch"]},
+	"chest_tool_rack": {"family": "tools", "chance": 0.4, "items": ["torch", "spade", "coal"]},
+	"chest_old_workings": {"family": "ore", "chance": 0.4, "items": ["copper_ore", "coal"]},
+	"chest_coal_seam": {"family": "ore", "chance": 0.3, "items": ["copper_ore"]},
+	"chest_buried_cache": {"family": "valuables", "chance": 0.4, "items": ["old_coin_purse", "silver_trinket", "military_medal"]},
+	"chest_goblin_stash": {"family": "scrap", "chance": 0.5, "items": ["goblin_scrap"]},
+	"chest_strongbox": {"family": "coin", "chance": 0.0, "items": []},
+}
+const ITEM := "res://data/items/%s.tres"
 ## How it reads when found and opened.
 const NAMES := {"common": "chest", "silver": "silver-bound chest", "gold": "gilded chest"}
 ## A glint for the stand-in art, so the tier shows in the dark.
@@ -46,16 +64,24 @@ static func set_tier(map, cell: Vector2i, tier: String) -> void:
 	map.marks["chest_tiers"][cell] = tier
 
 
-## The tier's extra loot on floor `depth`: {"gear": [Equipment], "gold": int,
-## "trinket": Equipment or null}. Common: maybe one piece, as before.
-static func loot(rng: RandomNumberGenerator, tier: String, depth: int) -> Dictionary:
-	var out := {"gear": [], "gold": 0, "trinket": null}
-	if not LOOT.has(tier):
-		var find: Equipment = GearGen.drop(rng, depth, "chest")
-		if find:
-			out["gear"].append(find)
+## The extra loot on floor `depth` of a `tier` chest whose event is
+## `container` (its file name): {"gear": [Equipment], "gold": int,
+## "trinket": Equipment or null, "items": {SupplyItem: count}}.
+static func loot(rng: RandomNumberGenerator, tier: String, depth: int, container := "") -> Dictionary:
+	var out := {"gear": [], "gold": 0, "trinket": null, "items": {}}
+	if tier == "common" and CONTAINERS.has(container):
+		var family: Dictionary = CONTAINERS[container]
+		if rng.randf() < float(family["chance"]):
+			var item: SupplyItem = load(ITEM % family["items"][rng.randi_range(0, family["items"].size() - 1)])
+			out["items"][item] = 2 if depth >= 3 else 1
 		return out
 	var spec: Dictionary = LOOT[tier]
+	if tier == "common":
+		var find: Equipment = GearGen.drop(rng, depth, "chest", 0, false, float(spec["find_chance"]))
+		if find:
+			out["gear"].append(find)
+		out["gold"] = int(spec["gold"]) + int(spec["gold_per_floor"]) * depth
+		return out
 	for mods: int in spec["finds"]:
 		out["gear"].append(GearModel.conceal(GearModel.random_find(rng, depth, mods)))  # read later (#223)
 	out["gold"] = int(spec["gold"]) + int(spec["gold_per_floor"]) * depth

@@ -61,13 +61,16 @@ static func bases() -> Array[Equipment]:
 ## `source`: "chest" or "foe".
 ## Elites (#140) count as tougher whatever their health and carry most of
 ## the chance; ordinary tougher foes carry less.
-static func drop(rng: RandomNumberGenerator, depth: int, source: String, foe_health := 0, elite := false) -> Equipment:
+## `chance` (0-1) overrides the source's usual odds: a real chest's (chest_tiers.gd).
+static func drop(rng: RandomNumberGenerator, depth: int, source: String, foe_health := 0, elite := false, chance_override := -1.0) -> Equipment:
 	var floor := clampi(depth, 1, 4)
 	if source == "foe" and foe_health < TOUGH_HEALTH and not elite:
 		return null
 	var chance: float = (CHEST_CHANCE if source == "chest" else FOE_CHANCE)[floor]
 	if source == "foe":
 		chance *= ELITE_TIMES if elite else ORDINARY_TIMES
+	if chance_override >= 0.0:
+		chance = chance_override
 	if rng.randf() >= chance:
 		return null
 	# Since 2026-10-31 (#192): a piece of the floor's region, rolled by the

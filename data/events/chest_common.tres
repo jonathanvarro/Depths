@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="RoomEvent" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="event"]
+[ext_resource type="PackedScene" path="res://art/props/chests-v1/common.tscn" id="prop"]
+[ext_resource type="Script" path="res://scripts/event_choice.gd" id="choice"]
+[ext_resource type="Script" path="res://scripts/event_outcome.gd" id="outcome"]
+[ext_resource type="Resource" path="res://data/items/oil_flask.tres" id="oil"]
+[ext_resource type="Resource" path="res://data/items/ration.tres" id="ration"]
+[ext_resource type="Resource" path="res://data/items/dressing.tres" id="dressing"]
+
+[sub_resource type="Resource" id="o0_0"]
+script = ExtResource("outcome")
+weight = 3
+text = "Under a moth-eaten blanket: a flask of lamp oil."
+loot = Dictionary[SupplyItem, int]({ExtResource("oil"): 1})
+
+[sub_resource type="Resource" id="o0_1"]
+script = ExtResource("outcome")
+weight = 2
+text = "Someone's last meal, wrapped in waxed cloth: a ration, still good."
+loot = Dictionary[SupplyItem, int]({ExtResource("ration"): 1})
+
+[sub_resource type="Resource" id="o0_2"]
+script = ExtResource("outcome")
+weight = 2
+text = "Bandages, rolled as neat as a soldier's."
+loot = Dictionary[SupplyItem, int]({ExtResource("dressing"): 1})
+
+[sub_resource type="Resource" id="o0_3"]
+script = ExtResource("outcome")
+weight = 1
+text = "Mostly dust, and a dead moth on the lining."
+
+[sub_resource type="Resource" id="c0"]
+script = ExtResource("choice")
+label = "Open it"
+time_cost = 1
+outcomes = Array[EventOutcome]([SubResource("o0_0"), SubResource("o0_1"), SubResource("o0_2"), SubResource("o0_3")])
+
+[resource]
+script = ExtResource("event")
+kind = 2
+title = "A chest"
+clue = "A plain wooden chest, its iron gone dark and a board nailed over an old split. Nobody has opened it in a long time."
+choices = Array[EventChoice]([SubResource("c0")])
+min_depth = 1
+max_depth = 99
+weight = 5
+prop = ExtResource("prop")

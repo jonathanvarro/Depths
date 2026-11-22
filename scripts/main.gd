@@ -980,7 +980,7 @@ func _run_event(cell: Vector2i, at_overlook := false) -> void:
 	# A chest may hold finer gear (owner, 2026-10-21); silver and gold chests
 	# much more (chest_tiers.gd, owner 2026-11-22).
 	if not result["left"] and event.kind == DungeonMap.Content.CHEST and result["ambush"].is_empty() and not _in_opening:
-		_open_tiered(ChestTiers.tier_at(_map, cell))
+		_open_tiered(ChestTiers.tier_at(_map, cell), event.resource_path.get_file().get_basename())
 	await _offer_overflow()
 	_party.locked = false
 	if result["left"]:
@@ -1528,13 +1528,21 @@ func _patrol(group, taken: Dictionary) -> void:
 
 
 ## Opens a chest's tier on top of its own contents (chest_tiers.gd).
-func _open_tiered(tier: String) -> void:
-	var loot: Dictionary = ChestTiers.loot(_rng, tier, _depth)
+## `container` is the event's file name: the old containers add from their
+## own family instead (ChestTiers.CONTAINERS).
+func _open_tiered(tier: String, container := "") -> void:
+	var loot: Dictionary = ChestTiers.loot(_rng, tier, _depth, container)
 	if loot["gold"] > 0:
 		_party_state.supplies.gold += loot["gold"]
 		_party_state.supplies.changed.emit()
 	var finds: Array = loot["gear"] + ([loot["trinket"]] if loot["trinket"] else [])
 	var names: Array = finds.map(func(g): return _a(g.display_name.to_lower()))
+	for item: SupplyItem in loot["items"]:
+		var count: int = loot["items"][item]
+		var fitted: int = _party_state.supplies.add_what_fits(item, count)
+		if fitted < count:
+			_left_over(item, count - fitted)
+		names.append(_a(item.display_name.to_lower()) if count == 1 else "%d %s" % [count, item.display_name.to_lower()])
 	for find in finds:
 		if find is Equipment:
 			if _party_state.supplies.has_room_for_gear():
@@ -1546,7 +1554,9 @@ func _open_tiered(tier: String) -> void:
 	_party_state.supplies.changed.emit()
 	if tier == "common":
 		if not names.is_empty():
-			_show_message("Underneath: %s. It's in the pack." % names[0])
+			_show_message("Underneath: %s%s. It's in the pack." % [" and ".join(PackedStringArray(names)), (", and %d gold" % loot["gold"]) if loot["gold"] > 0 else ""])
+		elif loot["gold"] > 0:
+			_show_message("Loose in the bottom: %d gold." % loot["gold"])
 		return
 	Sounds.play(self, "coins", -4.0)
 	_show_message("Inside the %s: %s%s." % [ChestTiers.NAMES[tier], ", ".join(PackedStringArray(names)), (", and %d gold" % loot["gold"]) if loot["gold"] > 0 else ""])

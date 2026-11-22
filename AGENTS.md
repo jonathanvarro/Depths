@@ -617,6 +617,9 @@ Templates > Download and Install; already installed on the owner's PC).
   `map.marks["chest_tiers"]`, LOOT, art `art/props/chests-v1/<tier>.tscn`
   when ChatGPT's lands), main `_open_tiered`/`_drop_chest`. Silver behind
   puzzles and in lairs; gold for named elites and the King. `tools/chest_tiers_check.gd`.
+  Real common chests are `data/events/chest_common.tres` (ChatGPT's art); the
+  old containers (pack, tool rack, workings, cache, stash, strongbox) keep their
+  own loot families below a chest (`ChestTiers.CONTAINERS`, never gear).
 - Settings (#52): `scripts/settings.gd` (static values, `apply()`, audio
   buses Master/Music/Effects; test runs use test_settings.cfg) and
   `scripts/settings_screen.gd`. New sound players should set `bus`.

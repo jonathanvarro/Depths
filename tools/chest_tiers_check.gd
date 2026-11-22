@@ -23,6 +23,10 @@ func _snap(name: String) -> void:
 		image.save_png(shots + "/chest_" + name + ".png")
 
 
+func main_kind_chest() -> int:
+	return load("res://scripts/dungeon_map.gd").Content.CHEST
+
+
 func _initialize() -> void:
 	var args := OS.get_cmdline_user_args()
 	shots = args[1] if args.size() > 1 else ""
@@ -44,6 +48,37 @@ func _initialize() -> void:
 	check("gold beats silver on every count", sums["gold"]["pieces"] > sums["silver"]["pieces"] and sums["gold"]["mods"] > sums["silver"]["mods"] and sums["gold"]["gold"] > sums["silver"]["gold"] and sums["gold"]["trinkets"] > sums["silver"]["trinkets"])
 	var one: Dictionary = ChestTiers.loot(rng, "gold", 2)
 	check("a gold chest always holds a two-modifier find", one["gear"].size() == 2 and one["gear"][0].mods.size() >= 2)
+	# The old containers keep their own families, below a chest (owner, 2026-11-22).
+	var room_events = load("res://scripts/room_events.gd").new()
+	for id in ChestTiers.CONTAINERS:
+		check("%s is still a container that turns up" % id, ResourceLoader.exists("res://data/events/%s.tres" % id) and load("res://data/events/%s.tres" % id).min_depth < 50)
+	var family_gear := 0
+	var family_items := {}
+	var container_value := 0
+	for id in ChestTiers.CONTAINERS:
+		for i in 200:
+			var l: Dictionary = ChestTiers.loot(rng, "common", 3, id)
+			family_gear += l["gear"].size() + (1 if l["trinket"] else 0)
+			container_value += l["gold"]
+			for item in l["items"]:
+				family_items[item.resource_path.get_file().get_basename()] = id
+				container_value += item.price * l["items"][item]
+				if item.resource_path.get_file().get_basename() not in ChestTiers.CONTAINERS[id]["items"]:
+					check("%s gives only its own family" % id, false, item.resource_path)
+	check("containers never hold a piece of gear: that's the chests'", family_gear == 0, family_gear)
+	check("...but do add from their families: supplies, tools, ore, valuables, scrap", ["ration", "spade", "copper_ore", "old_coin_purse", "goblin_scrap"].all(func(i): return family_items.has(i)), family_items.keys())
+	var chest_value := 0
+	for i in 200 * ChestTiers.CONTAINERS.size():
+		var l: Dictionary = ChestTiers.loot(rng, "common", 3, "chest_common")
+		chest_value += l["gold"] + l["gear"].reduce(func(a, g): return a + g.price, 0)
+	check("a common chest is worth more than an old container", chest_value > container_value, [chest_value, container_value])
+	var common_event: RoomEvent = load("res://data/events/chest_common.tres")
+	check("the common chest is ChatGPT's chest art", common_event.prop.resource_path == ChestTiers.ART % "common")
+	var picks := {}
+	for i in 400:
+		var e: RoomEvent = room_events.pick(main_kind_chest(), 2)
+		picks[e.resource_path.get_file().get_basename()] = picks.get(e.resource_path.get_file().get_basename(), 0) + 1
+	check("chests and containers share the floor: chests most often", picks.get("chest_common", 0) > 60 and picks.size() >= 5 and picks.get("chest_common", 0) == picks.values().max(), picks)
 	check("the hoard events never turn up as ordinary chests", load(ChestTiers.HOARD_EVENT % "silver").min_depth > 50 and load(ChestTiers.HOARD_EVENT % "gold").min_depth > 50)
 
 	# --- Where they turn up ---------------------------------------------------
@@ -93,6 +128,23 @@ func _initialize() -> void:
 	main._lair_won()
 	dropped = main._map.contents.keys().filter(func(c): return c not in before)
 	check("a lair's hoard is a silver chest", dropped.size() == 1 and ChestTiers.tier_at(main._map, dropped[0]) == "silver")
+	# Opening an old pack: its own find, added to the pack.
+	var rations: int = main._party_state.supplies.count(load("res://data/items/ration.tres")) + main._party_state.supplies.count(load("res://data/items/oil_flask.tres")) + main._party_state.supplies.count(load("res://data/items/dressing.tres")) + main._party_state.supplies.count(load("res://data/items/torch.tres"))
+	var held_gear: int = main._party_state.supplies.gear.size()
+	for i in 12:
+		main._open_tiered("common", "chest_abandoned_pack")
+	var after: int = main._party_state.supplies.count(load("res://data/items/ration.tres")) + main._party_state.supplies.count(load("res://data/items/oil_flask.tres")) + main._party_state.supplies.count(load("res://data/items/dressing.tres")) + main._party_state.supplies.count(load("res://data/items/torch.tres"))
+	check("searching old packs turns up supplies, never gear", after > rations and main._party_state.supplies.gear.size() == held_gear, [rations, after])
+	if shots != "":
+		var spot: Vector2i = main._party.cell
+		for d in [Vector2i(0, -1), Vector2i(1, 0), Vector2i(0, 1), Vector2i(-1, 0)]:
+			if main._map.is_passable(spot + d) and main._map.content_at(spot + d) == main.DungeonMap.Content.NONE:
+				main._map.contents[spot + d] = main.DungeonMap.Content.CHEST
+				main._map.events[spot + d] = common_event
+				main._create_room_prop(spot + d, common_event)
+				main._face_toward(spot + d)
+				break
+		await _snap("common")
 	var data: Dictionary = main._save_data()
 	main._restore(data)
 	await create_timer(0.3).timeout
