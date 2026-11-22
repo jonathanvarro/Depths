@@ -21,8 +21,10 @@ def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 
 def main():
     p=argparse.ArgumentParser();p.add_argument('--workspace',type=Path,required=True)
+    p.add_argument('--review-folder',default='local-padded-jacket-v2')
     args=p.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else [])
-    out=args.workspace/'build/local-padded-jacket-v2';inputs=out/'export-inputs';inputs.mkdir(exist_ok=True)
+    assert Path(args.review_folder).name==args.review_folder,'Review folder must stay beneath build/'
+    out=args.workspace/'build'/args.review_folder;inputs=out/'export-inputs';inputs.mkdir(exist_ok=True)
     (inputs/'.gdignore').touch()
     construction=json.loads((out/'construction.json').read_text())
     source_root=Path(construction['source_assembly'])
@@ -39,7 +41,7 @@ def main():
         r['fit_id']=construction['fits'][fit]['fit_id'];r['garments']=construction['fits'][fit]['garments']
         r['source_master']=construction['fits'][fit]['source_master']
         r['source_master_sha256']=construction['fits'][fit]['source_master_sha256']
-    manifest=dict(baseline,version='padded-jacket-v2',fits=fits,checks=exporter.checks,failures=[],
+    manifest=dict(baseline,version=args.review_folder, fits=fits,checks=exporter.checks,failures=[],
                   outfits=['jacket','tunic'],default_outfit='jacket',
                   review_footer='Padded expedition jacket · same body and motions · reversible Tunic/Jacket swap',
                   all_assets_local=True)

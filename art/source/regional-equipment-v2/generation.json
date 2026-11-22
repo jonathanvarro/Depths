@@ -1,0 +1,47 @@
+{
+  "date": "2026-11-22",
+  "tool": "built-in image_gen.imagegen",
+  "transparent_background": true,
+  "assets": [
+    {
+      "id": "quilted_coat",
+      "prompt": "Use case: precise-object-edit. Edit target: the attached original Depths quilted work coat inventory illustration. Produce its live sleeveless quilted coat adaptation. Keep the same dun canvas, padded stand collar, leather toggles, front opening and painterly pixel-friendly dark fantasy inventory style. Remove both sleeves completely and create believable open bound armholes; keep a hip-length split hem and broad simple torso silhouette. Replace tidy diamond quilting with slightly irregular narrow hand-stitched vertical padded channels. Add restrained ingrained seam dirt, one small crooked cloth repair, uneven bindings and gently worn toggle edges. Serviceable old handmade clothing, no extreme damage, no perfect symmetry. Isolated single empty garment seen from a slight three-quarter front angle, no body or mannequin. Neutral readable lighting with top-left highlights, no environmental shadows, no UI, no letters, no rarity border or glow. Entire object fully visible, generous transparent padding. Actual transparent RGBA background.",
+      "file": "quilted_coat-master.png",
+      "reference": "art/source/early-equipment-v1/quilted-work-coat-master.png",
+      "reference_role": "edit target",
+      "generated_file": "exec-2861ed31-09cc-4217-9e51-41e2e4f4471e.png",
+      "sha256": "6606440506cf4662d1792b9617100b7cbac06d12859026e4bbafbdc2de179596",
+      "reference_sha256": "b6fe9c182528ad989ec83ccdb8a50d3ef9338e09f5da2ff88e552f080fe7c5dc"
+    },
+    {
+      "id": "studded_jerkin",
+      "prompt": "Use case: precise-object-edit. Edit target: original Depths riveted guard coat inventory concept attached. Adapt its dark hide and oxblood-lined construction into the actual Studded jerkin. A SHORT SLEEVELESS waist-to-hip leather vest with large bound armholes, uneven overlapping leather front panels, three plain buckled ties, and sparse hammered iron studs holding the leather. REMOVE the long sleeves and the four long vertical metal strips; this is studded leather, not plated armour. Keep a modest short collar, dark leather, subtle oxblood lining, irregular sturdy seams, one small old stitched repair, dulled mismatched studs and restrained ingrained dirt. Dark gritty hand-painted fantasy item icon, broad simple silhouette legible at 64 pixels, slight three-quarter front view, top-left neutral light. Single empty garment with no body/mannequin, all visible with generous transparent padding. Actual transparent RGBA background, no text, borders, symbols, environment, glow or additional objects.",
+      "file": "studded_jerkin-master.png",
+      "reference": "art/source/early-equipment-v1/riveted-guard-coat-master.png",
+      "reference_role": "edit target",
+      "generated_file": "exec-be0c84df-3947-466c-9458-4f0575d4ccb2.png",
+      "sha256": "4241bff4b574f269d1984c68f99de5aee00485a14254d60926ed57508e0df7c0",
+      "reference_sha256": "fe6d17d8f25b8906d4cddb1cbdda937078022aed00f9a8a25c55fb49f6732fa6"
+    },
+    {
+      "id": "goblin_scale",
+      "prompt": "Use case: precise-object-edit. Edit target: original Depths garrison scale coat inventory concept attached. Adapt into the actual Goblin scale SHIRT: a compact hip-length heavy torso, short elbow-free capped sleeves, thick dark leather backing, overlapping blunt goblin-forged iron scales, two unequal plain leather fastening tabs. Keep the layered scale identity and muted iron/brown/oxblood materials. Shorten the long coat skirt to the hips and shorten sleeves to small shoulder caps. Make individual metal scales slightly mismatched in width, chipped along a few edges, dished by hand rather than perfectly straight and identical; soot and sparse rust in seams, restrained repaired leather hem, used but serviceable. Dark gritty painterly pixel-friendly fantasy inventory item. Slight three-quarter front angle, neutral top-left lighting, no dramatic environment. Single empty armour garment, no body/mannequin, generous transparent padding, actual transparent RGBA background. No text, frame, glow, symbols or extra objects.",
+      "file": "goblin_scale-master.png",
+      "reference": "art/source/early-equipment-v1/garrison-scale-coat-master.png",
+      "reference_role": "edit target",
+      "generated_file": "exec-32c9595c-71cf-4169-b1c8-56e8697ecb11.png",
+      "sha256": "c6a69ca21d4a706339766ad65de0f4ba775104a366ea1aed3e102bfeeb5f1114",
+      "reference_sha256": "2f0b290f401a6b92fa903e3d49f52592a40247da185347faa22b2f4563e36c61"
+    },
+    {
+      "id": "goblin_shield",
+      "prompt": "Use case: precise-object-edit. Edit target: the attached original Depths tall gate-guard shield inventory concept. Reimagine its same scavenged timber and forged iron construction as the actual goblin ROUND shield. Its outer silhouette must be round and slightly irregular, not kite, tower or oval. Broad mismatched vertical dark oak planks, blackened iron rim made of several unequal joined segments, off-centre battered circular iron boss, two narrow crooked cross-straps, sparse uneven rivets, restrained chipped wood and old patch repair. No large spikes. Keep the dark gritty painterly pixel-friendly inventory style and neutral top-left readable lighting. Single round shield viewed slightly three-quarter front, fully visible with generous transparent padding. Actual transparent RGBA background. No body, hands, mannequin, ground, text, insignia, border, glow or other objects. Useful sturdy shield with subtle handwork and wear, not identical manufactured boards.",
+      "file": "goblin_shield-master.png",
+      "reference": "art/source/early-equipment-v1/gate-guards-shield-master.png",
+      "reference_role": "edit target",
+      "generated_file": "exec-6105d7be-8ce3-4437-a09f-57e69707c4e4.png",
+      "sha256": "e772fb9586967f1d571780ee515dbc2e76d655254f20b63329ed449b33d32977",
+      "reference_sha256": "6bf0cd7cbc601395af18f45c7ddf5c4ae03e3c08ad1e0576eb51e1defd0f3590"
+    }
+  ]
+}

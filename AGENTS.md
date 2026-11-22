@@ -50,6 +50,15 @@ Templates > Download and Install; already installed on the owner's PC).
 
 ## Project structure
 
+- `docs/companion-polish-and-regional-equipment.md` – #218/#220's new private
+  editable seat-fit jacket copies in `build/local-companion-polish-v1` clear
+  the fixed stool over all 1,221 source chair frames. Original body skin,
+  rig/Actions and v2 masters remain unchanged; only reversible waist visibility
+  changes with the shorter cut. Source animation/contact limits remain #218.
+  #194/#195's four live-shape regional adaptations are in
+  `art/items/regional-equipment-v2`, with old/new and all-22 disposition review
+  in `art/concepts/regional-equipment-v2/inspector.html`. Only icon URIs change.
+
 - `docs/mine-polish-and-loot-chests.md` – #278/#279's refined supports,
   lanterns, miners' shrine, workings and rails in `art/dressing/mine-refined-v2`,
   now bound through Dressing/two event art paths. Common/silver/embellished gold
@@ -494,9 +503,10 @@ Templates > Download and Install; already installed on the owner's PC).
   #194/#195's complete 22-design early-region equipment art review is in
   `art/concepts/early-equipment-v1/inspector.html`: sixteen new masters, six
   retained designs, individual candidate128 exports, size/silhouette checks and
-  exact prompts. Read `docs/early-equipment-art-review.md` for reuse and advisory
-  ID comparisons. Shape selection and runtime mapping remain pending; candidates
-  are ignored by Godot and do not replace approved icons or #192/#193 data.
+  exact prompts. Read `docs/early-equipment-art-review.md` for the earlier reuse
+  audit. The 2026-11-22 live-shape follow-up and all-22 dispositions are in
+  `docs/companion-polish-and-regional-equipment.md`; unused alternatives remain
+  ignored by Godot and do not create new #192/#193 bases or gameplay rules.
   #196's seven borrowed base pictures now have dedicated128/64 exports and
   optional per-base icon bindings, including existing generated-item restore:
   `docs/equipment-icon-cleanup.md`; review `art/concepts/equipment-live-v1/inspector.html`.

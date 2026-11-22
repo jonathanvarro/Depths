@@ -40,17 +40,28 @@ def snapshot(fit):
             'actions':{a.name:action_digest(a) for a in bpy.data.actions},
             'garments':{o.name:digest_geometry(o) for o in bpy.context.scene.objects if o.get('piece') and o.get('outfit','tunic')!='jacket'}}
 
+def stable_visibility(fit):
+    body=bpy.data.objects['body.'+fit+'.v1']
+    return [[(body.vertex_groups[g.group].name,g.weight) for g in v.groups
+             if body.vertex_groups[g.group].name not in ['cover.tunic','coverage.keep']] for v in body.data.vertices]
+
 
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--workspace',type=Path,required=True)
+    parser.add_argument('--review-folder',default='local-padded-jacket-v2')
     args=parser.parse_args(sys.argv[sys.argv.index('--')+1:])
-    out=args.workspace/'build/local-padded-jacket-v2';data=json.loads((out/'construction.json').read_text())
+    assert Path(args.review_folder).name==args.review_folder,'Review folder must stay beneath build/'
+    out=args.workspace/'build'/args.review_folder;data=json.loads((out/'construction.json').read_text())
     results={};checks=0
     for fit,r in data['fits'].items():
         source=Path(r['source_master']);master=Path(r['master'])
         assert sha(source)==r['source_master_sha256'] and sha(master)==r['master_sha256'];checks+=2
         bpy.ops.wm.open_mainfile(filepath=str(source),load_ui=False,use_scripts=False);before=snapshot(fit)
+        tags=stable_visibility(fit)
         bpy.ops.wm.open_mainfile(filepath=str(master),load_ui=False,use_scripts=False);after=snapshot(fit)
+        if args.review_folder=='local-companion-polish-v1':
+            assert tags==stable_visibility(fit),'Unrelated body visibility or bone weights changed'
+            before.pop('body');after.pop('body')  # only cover.tunic/coverage.keep are intentionally revised
         assert before==after,'Original rig/body/UV/weights/garments/Action keys changed';checks+=5+len(before['actions'])+len(before['garments'])
         rig=bpy.data.objects['rig.'+fit+'.v1'];rig.data.pose_position='REST'
         garments=[o for o in bpy.context.scene.objects if o.get('outfit')=='jacket']

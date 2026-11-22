@@ -8,6 +8,17 @@ out of git (see `docs/blender-expedition-kit-tasks.md`).
 
 ## Where the files live
 
+### Companion seat-fit garment follow-up (2026-11-22, #218/#220)
+
+`build/local-companion-polish-v1` reuses all six original motions per body and
+the same 65/49-bone fits. No Action keys, root curves, timing, slots or rest
+bones change. Revised jacket cut/weights and waist visibility clear the fixed
+43 cm stool at all 1,221 integer chair-sequence source frames. Export/reimport,
+lineage, native outfit/input and phone-shape checks pass. Separate editable
+copies and media stay private/local. Source gait/death/hand/foot limitations
+and loop/in-place choices remain #218; this is garment polish rather than a
+new animation library. See [the handoff](companion-polish-and-regional-equipment.md).
+
 ### CC0 rat pilot exception (#252 / #251, 2026-11-09)
 
 `art/enemies/rat-3d-v1/rat.glb` is a public CC0-derived animated rat, separate

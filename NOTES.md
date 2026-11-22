@@ -13,6 +13,27 @@ Format:
 
 ---
 
+## 2026-11-22 – ChatGPT (companion seat-fit polish and regional equipment)
+
+- Did: owner requested these, then merge. New private editable jacket copies
+  have a cutaway hem and revised low cloth weights; fixed stool/floor and all
+  source animation remain intact. Waist visibility also restores correctly
+  with trousers off. New local review: `build/local-companion-polish-v1/review/inspector.html`.
+  Imported the previously unmerged #220 production tools; earlier assets stay
+  untouched. Four built-in ImageGen adaptations now match the live sleeveless
+  quilted coat, studded jerkin, short scale shirt and round goblin shield.
+  Only icon references change; all 22 old regional candidates have dispositions.
+- Checked: 1,221 source chair frames have no garment/seat-volume intersections;
+  972 independent export/reimport, 5,128 lineage, 6,488 native wardrobe, 4,082
+  headless and 123 focused native contact checks pass. Regional icons: 98
+  native checks/24 Pack-loot-merchant captures; gear-model/gear/save regressions
+  report fails=0. All GPU checks use private desktops without taking focus.
+- Handoff/rebuild/source prompts: `docs/companion-polish-and-regional-equipment.md`.
+  Source walk/death/hand/foot limitations and loop choices remain #218; no
+  private character media enters Git or replaces live game companion bindings.
+  Owner visual and physical iPhone review remain. Active main-checkout design
+  edits are excluded from the merge.
+
 ## 2026-11-22 – Claude (chest art hooked up; old containers keep their own loot)
 
 - Did: merged ChatGPT's `codex/mine-polish-and-loot-chests` into main (fast-forward; PR #280's work). New `data/events/chest_common.tres` ("A chest", weight 5, every floor) uses `art/props/chests-v1/common.tscn` and is now the commonest kind-2 event. Silver/gold hoard events point at their own chest scenes. Owner: the old containers stay, with their own loot families and lower quality than a chest: `ChestTiers.CONTAINERS` (by event file name) gives a pack supplies, a tool rack tools, workings/seams ore, a buried cache valuables, a goblin stash scrap (two from floor 3), never gear; the strongbox's coin flip is its whole prize. A real common chest adds 3 + 2 x floor gold and a 35% gear find (`LOOT["common"]`, `GearGen.drop` chance override). Ladder: container < common < silver < gold. `tools/chest_tiers_check.gd` covers it.
