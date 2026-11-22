@@ -13,6 +13,12 @@ Format:
 
 ---
 
+## 2026-11-21 – Claude (title menu fits the window)
+
+- Did: owner report: Quit fell off the bottom of the title screen (five buttons since Skip the tutorial). `title_screen.gd _apply_margins` now gives way on the top margin, then the button gaps, so every button fits the 648-high base view. `tools/title_fit_check.gd` (needs the renderer for real sizes: run through background_godot.py).
+- Next: nothing.
+- Watch out: headless runs report a square viewport, so the check only means something with a real window size.
+
 ## 2026-11-21 – Claude (recruitment fire lineup)
 
 - Did: owner request. The fire shows recruits as condensed cards on the left and the party lineup on the right: Front and Back rows, three places each, with face, name and health. Click a recruit (or drag their card) then a place: an open place hires them into that row (`CampState.hire_into`), an occupied one swaps them (`CampState.swap`: the member goes back to wait by the fire; the founder stays). Click a member then a place to move rows (trading places with whoever is there); a picked member gets Dismiss. Invite still works. Cards/tiles are PanelContainers with a see-through overlay button (`_overlay`) so they size from their contents. recruit_check/camp_check updated; desktop and phone captures checked.
