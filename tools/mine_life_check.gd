@@ -117,5 +117,6 @@ func _initialize() -> void:
 	check("floor change removes previous effects", life._effect == null and life._map == main._map)
 	print("mine_life_check fails=", fails)
 	main.queue_free()
-	await process_frame
+	# Let the audio mixer release the floor/music streams in headless runs.
+	await create_timer(.2).timeout
 	quit(1 if fails else 0)
