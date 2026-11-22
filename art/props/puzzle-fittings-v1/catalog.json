@@ -1,0 +1,153 @@
+{
+  "issue": 281,
+  "assets": [
+    {
+      "id": "door-frame",
+      "triangles": 800,
+      "surfaces": [
+        "Wood",
+        "Iron",
+        "Stone"
+      ],
+      "min": [
+        -1.0526710748672485,
+        -0.1701623946428299,
+        -0.00017803034279495478
+      ],
+      "max": [
+        1.0489656925201416,
+        0.16767217218875885,
+        2.3901779651641846
+      ],
+      "sha256": "c512637f1f2b8795dccdc495ee8215a2c81f8110637ef05db2dd0b282ed6ae9d"
+    },
+    {
+      "id": "door-leaf",
+      "triangles": 1613,
+      "surfaces": [
+        "Wood",
+        "Iron"
+      ],
+      "min": [
+        -0.015000000596046448,
+        -0.08400000631809235,
+        0.0247767586261034
+      ],
+      "max": [
+        1.7226734161376953,
+        0.08400000631809235,
+        2.054065704345703
+      ],
+      "sha256": "4cd1b637d20dd22a0121ce55c4012236b8e9c38e078d36d12a1940acb6ef5abd"
+    },
+    {
+      "id": "bar",
+      "triangles": 516,
+      "surfaces": [
+        "Wood",
+        "Iron"
+      ],
+      "min": [
+        0.21984589099884033,
+        -0.1679999977350235,
+        0.9950000643730164
+      ],
+      "max": [
+        1.6601502895355225,
+        -0.035999998450279236,
+        1.15500009059906
+      ],
+      "sha256": "49c3be167d40e837655622f6542dfc8227267cd57fbcd06b3aa58b0a8d70fd6a"
+    },
+    {
+      "id": "lock-cases",
+      "triangles": 140,
+      "surfaces": [
+        "Iron",
+        "Stone"
+      ],
+      "min": [
+        1.4299999475479126,
+        -0.08357315510511398,
+        0.9049999713897705
+      ],
+      "max": [
+        1.590000033378601,
+        0.08357315510511398,
+        1.1349999904632568
+      ],
+      "sha256": "efc9b1ff546bd80fd0cf8b0af663c7e5f316a8a2e47e8aac67f7860a31c6a32e"
+    },
+    {
+      "id": "lever-base",
+      "triangles": 2168,
+      "surfaces": [
+        "Stone",
+        "Iron",
+        "Silver"
+      ],
+      "min": [
+        -0.29983896017074585,
+        -0.22613103687763214,
+        -0.005366966128349304
+      ],
+      "max": [
+        0.3033328652381897,
+        0.24249999225139618,
+        1.96999990940094
+      ],
+      "sha256": "dfb042f0976e2ddd6df0d91ef3302b474d255ccce9028d86e4383c08e6bec616"
+    },
+    {
+      "id": "lever-handle",
+      "triangles": 364,
+      "surfaces": [
+        "Iron",
+        "Wood"
+      ],
+      "min": [
+        -0.052000001072883606,
+        -0.052000001072883606,
+        0.019172728061676025
+      ],
+      "max": [
+        0.052000001072883606,
+        0.052000001072883606,
+        0.9488552212715149
+      ],
+      "sha256": "4cdae8dbda6c51d2831865e5c98673cecf6e9311f24234c0e78513e5e5384e32"
+    },
+    {
+      "id": "key",
+      "triangles": 382,
+      "surfaces": [
+        "Gold"
+      ],
+      "min": [
+        -0.06700000166893005,
+        -0.02199999988079071,
+        -0.18519197404384613
+      ],
+      "max": [
+        0.06700000166893005,
+        0.02199999988079071,
+        0.15900000929832458
+      ],
+      "sha256": "aef4f14098360b74cfbf32da0842e0b0b7ab24f1fe1402d34bf111cb4c71e6ee"
+    }
+  ],
+  "cell_metres": 2,
+  "wall_metres": 2.4,
+  "front": "+Z",
+  "door_width": 1.72,
+  "door_height": 2.064,
+  "hinge_x": -0.86,
+  "lever_pivot": [
+    0,
+    0.55,
+    0
+  ],
+  "builder_sha256": "3991117e1a6f1d45d18cf881515edcd2ca4592eb9e79469fe8455befc11703af",
+  "helpers": "tools/mine_polish/build_models.py; tools/mine_props/build_models.py",
+  "source_reuse": "Existing verified CC0 seated skeleton and chain gate retained by scenes; new fittings use authored mine helpers"
+}

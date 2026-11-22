@@ -19,6 +19,19 @@ copies and media stay private/local. Source gait/death/hand/foot limitations
 and loop/in-place choices remain #218; this is garment polish rather than a
 new animation library. See [the handoff](companion-polish-and-regional-equipment.md).
 
+### Named elite wrappers (#282, 2026-11-22)
+
+`art/enemies/named-leaders-v1` reuses the original great-rat, webspinner,
+goblin-brute, hollow-miner and breach-hound GLBs byte-for-byte. No clips or
+bones were added or retargeted. Original authored rigid details follow existing
+bones, fitted at source idle t=0. All inherited clips were sampled at start,
+middle and end in native Godot, including held poses, fall and still mode;
+bone following, pre-ready requests and caller transforms passed. Source
+hashes are in the new catalogue. See
+[puzzle-props-and-elite-leaders.md](puzzle-props-and-elite-leaders.md) for the
+real patrol/combat captures and local detail masters. Per-body human statuses
+below are unaffected.
+
 ### CC0 rat pilot exception (#252 / #251, 2026-11-09)
 
 `art/enemies/rat-3d-v1/rat.glb` is a public CC0-derived animated rat, separate

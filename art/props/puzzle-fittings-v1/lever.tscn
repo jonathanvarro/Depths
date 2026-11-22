@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="Script" path="res://art/props/puzzle-fittings-v1/prop.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/props/puzzle-fittings-v1/lever-base.glb" id="lever-base"]
+[ext_resource type="PackedScene" path="res://art/props/puzzle-fittings-v1/lever-handle.glb" id="lever-handle"]
+
+[node name="PuzzleFitting" type="Node3D"]
+script=ExtResource("script")
+kind="lever"
+metadata/asset_id="puzzle-lever"
+[node name="Base" parent="." instance=ExtResource("lever-base")]
+[node name="Pivot" type="Node3D" parent="."]
+position=Vector3(0,0.55,0)
+[node name="Lean" type="Node3D" parent="Pivot"]
+rotation=Vector3(-0.610865,0,0)
+[node name="Handle" parent="Pivot/Lean" instance=ExtResource("lever-handle")]

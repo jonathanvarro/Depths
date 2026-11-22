@@ -59,6 +59,16 @@ Templates > Download and Install; already installed on the owner's PC).
   `art/items/regional-equipment-v2`, with old/new and all-22 disposition review
   in `art/concepts/regional-equipment-v2/inspector.html`. Only icon URIs change.
 
+- `docs/puzzle-props-and-elite-leaders.md` – #281/#282's production door/bar/
+  lock, lever and key fittings (`art/props/puzzle-fittings-v1`) and five named
+  leader wrappers (`art/enemies/named-leaders-v1`). Puzzle factory mounts and
+  state APIs are live on `codex/puzzle-props-and-elite-looks`; Elites.types
+  privately binds only the leader model for both patrol and combat. Existing
+  gate/skeleton, animated source GLBs, rigs, clips, followers and game rules
+  remain unchanged. Review/local detail masters:
+  `build/local-puzzles-elites-v1/inspector.html`. Native pose/phone and real
+  puzzle/elite flow checks pass; owner and physical iPhone review remain.
+
 - `docs/mine-polish-and-loot-chests.md` – #278/#279's refined supports,
   lanterns, miners' shrine, workings and rails in `art/dressing/mine-refined-v2`,
   now bound through Dressing/two event art paths. Common/silver/embellished gold
