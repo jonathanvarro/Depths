@@ -144,7 +144,8 @@ Templates > Download and Install; already installed on the owner's PC).
   remain a separate integration step. Delivery branch is codex/mine-props-3d.
 
 - Early floors first person (2026-11-21, owner playtest): the view from
-  above (#248) only works from `Main.overhead_from_floor` (4); checks that
+  above (#248, setting `view_above`, default off) only works from
+  `Main.overhead_from_floor` (4); checks that
   test the board on early floors set it to 1. `tools/early_floor_view_check.gd`.
 - Model animation smoothing (2026-11-21, Claude): `scripts/anim_tidy.gd`
   (cross-fades, repeated blows restart, bone flips evened at load), used by

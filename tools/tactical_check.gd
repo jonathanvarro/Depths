@@ -52,7 +52,7 @@ func _initialize() -> void:
 	tag = args[0] if args.size() > 0 else "desk"
 	dir = args[1] if args.size() > 1 else ""
 	var Settings = load("res://scripts/settings.gd")
-	Settings.set_value("tactical_view", true)
+	Settings.set_value("view_above", true)
 	var main = load("res://scenes/main.tscn").instantiate()
 	main.play_opening = false
 	main.overhead_from_floor = 1  # these test the board on early floors (owner 2026-11-21: off there in play)
@@ -168,10 +168,10 @@ func _initialize() -> void:
 	main._toggle_view()  # V: through the party's eyes
 	await create_timer(1.2).timeout
 	cam = root.get_viewport().get_camera_3d()
-	check("V drops the view into first person", not tactical.active and cam == main._party.camera and not _ceilings_hidden(main) and not Settings.get_value("tactical_view"))
+	check("V drops the view into first person", not tactical.active and cam == main._party.camera and not _ceilings_hidden(main) and not Settings.get_value("view_above"))
 	main._toggle_view()  # and back up
 	await create_timer(1.2).timeout
-	check("...and lifts it again, exploring from above", tactical.active and tactical._state == null and Settings.get_value("tactical_view") and main._view_button.text == "Eyes")
+	check("...and lifts it again, exploring from above", tactical.active and tactical._state == null and Settings.get_value("view_above") and main._view_button.text == "Eyes")
 	check("...and the board's marks are gone", tactical._marks.is_empty())
 	await _snap("after")
 
@@ -203,6 +203,6 @@ func _initialize() -> void:
 	if await _fight(main):
 		await create_timer(0.5).timeout
 		check("switched off in Settings, a fight stays in first person", not tactical.active and root.get_viewport().get_camera_3d() == main._party.camera, "active %s, camera %s" % [tactical.active, root.get_viewport().get_camera_3d()])
-	Settings.set_value("tactical_view", true)
+	Settings.set_value("view_above", false)  # back to the default
 	print("fails=", fails)
 	quit()

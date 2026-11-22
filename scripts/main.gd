@@ -735,15 +735,15 @@ func _overhead_allowed() -> bool:
 
 ## The player wants the view from above, and this floor allows it.
 func _overhead_on() -> bool:
-	return Settings.get_value("tactical_view") and _overhead_allowed()
+	return Settings.get_value("view_above") and _overhead_allowed()
 
 
 func _toggle_view() -> void:
 	if _in_opening or _camp.visible or _ending or not _overhead_allowed():
 		return
-	Settings.set_value("tactical_view", not Settings.get_value("tactical_view"))
+	Settings.set_value("view_above", not Settings.get_value("view_above"))
 	if _in_combat and _combat._state and _combat._state.field:
-		if Settings.get_value("tactical_view"):
+		if Settings.get_value("view_above"):
 			_tactical.enter(self, _combat._state)
 		else:
 			_tactical.exit()
@@ -766,7 +766,7 @@ func _apply_view() -> void:
 
 func _update_view_button() -> void:
 	if _view_button:
-		_view_button.text = "Eyes" if Settings.get_value("tactical_view") else "Above"
+		_view_button.text = "Eyes" if Settings.get_value("view_above") else "Above"
 		_view_button.visible = not _in_opening and _overhead_allowed()
 
 

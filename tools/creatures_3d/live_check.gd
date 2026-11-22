@@ -27,7 +27,7 @@ func light_band(main,band: int) -> void:
 func run() -> void:
 	out=OS.get_cmdline_user_args()[0];DirAccess.make_dir_recursive_absolute(out)
 	var Settings=load("res://scripts/settings.gd")
-	Settings.set_value("tactical_view",true);Settings.set_value("flashes",false);Settings.set_value("fullscreen",false);Settings.set_value("text_size","Normal")
+	Settings.set_value("view_above",true);Settings.set_value("flashes",false);Settings.set_value("fullscreen",false);Settings.set_value("text_size","Normal")
 	root.size=Vector2i(1278,590)
 	var main=load("res://scenes/main.tscn").instantiate();main.play_opening=false;main.floor_seed=11;root.add_child(main)
 	await create_timer(.7).timeout

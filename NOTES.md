@@ -13,6 +13,12 @@ Format:
 
 ---
 
+## 2026-11-21 – Claude (first person by default)
+
+- Did: owner chose first person on floor 4 too. The view-from-above setting is now `view_above`, default off (renamed from `tactical_view` so saved "on" values are left behind). It still only works from floor 4; with it off, the King's hall is fought on the dark stage. Checks that test the board turn it on and restore off.
+- Next: nothing.
+- Watch out: use the "view_above" key, not "tactical_view".
+
 ## 2026-11-21 – Claude (first floors through the party's eyes)
 
 - Did: owner playtest: exploring from above made the early floors less fun. Floors 1-3 now stay first person for exploring and fights; the View button and V only work from floor 4 (`Main.overhead_from_floor`, `_overhead_allowed`, `_overhead_on`). The setting is kept and labelled "View from above, floor 4 on (V)". Board checks (tactical, enemy_models, framing, readability) set `overhead_from_floor = 1` so they still test the board on early floors. `tools/early_floor_view_check.gd`.

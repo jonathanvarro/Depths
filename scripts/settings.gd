@@ -14,7 +14,10 @@ const DEFAULTS := {
 	"Master": 1.0, "Music": 0.8, "Effects": 1.0,
 	"fullscreen": false, "flashes": true, "text_size": "Normal",
 	"map_fights": true,  # fights on the map (#171, owner chose 2026-11-02); the battle stage is set aside
-	"tactical_view": true,  # prototype (owner, 2026-11-08): fights on the map seen from above
+	# The view from above (#248), off by default (owner playtest, 2026-11-21:
+	# first person everywhere; the board is the player's choice from floor 4).
+	# A new key, so the earlier "tactical_view" (on) in saved settings is left behind.
+	"view_above": false,
 	"enemy_models": true,  # 3D enemy models where they exist (#251); off: the painted sprites
 	"tips_seen": [],  # first-time tips already shown (2026-10-25)
 }

@@ -109,7 +109,7 @@ func _initialize() -> void:
 	tag = args[0] if args.size() > 0 else "desk"
 	dir = args[1] if args.size() > 1 else ""
 	Settings.set_value("enemy_models", true)
-	Settings.set_value("tactical_view", true)
+	Settings.set_value("view_above", true)
 	var rat_type: EnemyType = load("res://data/enemies/rat.tres")
 	check("the rat has a 3D model and keeps its sprite", rat_type.model != null and rat_type.scene != null and rat_type.view_scene() == rat_type.model)
 
@@ -179,7 +179,7 @@ func _initialize() -> void:
 
 	# First person, on the dark stage (a lair, the gate, the queen, or the
 	# view off): the painted art, which the stage is framed for.
-	Settings.set_value("tactical_view", false)
+	Settings.set_value("view_above", false)
 	main._fight_kind = ""
 	main._start_combat(main._party.cell, [rat_type] as Array[EnemyType])
 	await create_timer(1.2).timeout
@@ -191,7 +191,7 @@ func _initialize() -> void:
 	await create_timer(1.0).timeout
 
 	# The spiders: their models, and the web gesture for a web.
-	Settings.set_value("tactical_view", true)
+	Settings.set_value("view_above", true)
 	main._fight_kind = ""
 	main._start_combat(main._party.cell, [load("res://data/enemies/webspinner.tres")] as Array[EnemyType])
 	await create_timer(1.2).timeout
@@ -249,7 +249,7 @@ func _initialize() -> void:
 	await create_timer(1.0).timeout
 	# With the board off he has no painting: on the dark stage he is his
 	# model, standing on the floor (never lifted like a sprite).
-	Settings.set_value("tactical_view", false)
+	Settings.set_value("view_above", false)
 	var eye: Camera3D = main._party.camera
 	var cave_mask := eye.cull_mask
 	main._queen_fight(main._party.cell)
@@ -271,7 +271,8 @@ func _initialize() -> void:
 	main._combat.no_retreat = false
 	await _end_fight(main)
 	check("...the cave is visible again after the stage", eye.cull_mask == cave_mask)
-	Settings.set_value("tactical_view", true)
+	Settings.set_value("view_above", true)
 	await _check_goblin_elites(main)
+	Settings.set_value("view_above", false)  # back to the default
 	print("fails=", fails)
 	quit()
