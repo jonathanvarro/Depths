@@ -7,11 +7,14 @@ extends Node
 const FOLDER := "res://audio/music/"
 const PLACES := ["title", "cave", "fortress", "combat", "camp", "galleries"]
 const FADE := 1.5  # seconds
+## After a fight the battle music winds down more slowly (owner, 2026-11-21).
+const AFTER_FIGHT := 4.0
 const VOLUME_DB := -8.0
 
 var place := ""
 var _players: Array[AudioStreamPlayer] = []
 var _current := 0
+var _tween: Tween
 
 
 func _init() -> void:
@@ -35,6 +38,13 @@ static func track_for(where: String) -> AudioStream:
 
 ## Moves to `where`'s track; the old one fades out as the new fades in.
 func play(where: String) -> void:
+	play_with_fade(-1.0, where)
+
+
+## As play(), over `fade` seconds (below zero: the usual FADE).
+func play_with_fade(fade: float, where: String) -> void:
+	if fade < 0.0:
+		fade = FADE
 	if where == place:
 		return
 	place = where
@@ -42,9 +52,13 @@ func play(where: String) -> void:
 	_current = 1 - _current
 	var new := _players[_current]
 	var stream := track_for(where)
+	if _tween and _tween.is_valid():
+		_tween.kill()  # a change mid-fade (a fight right after a fight)
+		new.stop()
 	var tween := create_tween().set_parallel()
+	_tween = tween
 	if old.playing:
-		tween.tween_property(old, "volume_db", -80.0, FADE)
+		tween.tween_property(old, "volume_db", -80.0, fade).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_SINE)
 		tween.chain().tween_callback(old.stop)
 	if stream:
 		if stream is AudioStreamOggVorbis or stream is AudioStreamMP3:
@@ -56,4 +70,4 @@ func play(where: String) -> void:
 		new.stream = stream
 		new.volume_db = -80.0
 		new.play()
-		tween.tween_property(new, "volume_db", VOLUME_DB, FADE)
+		tween.tween_property(new, "volume_db", VOLUME_DB, fade).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)

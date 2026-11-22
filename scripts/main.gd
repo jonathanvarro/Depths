@@ -1118,11 +1118,13 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 		_end_field_fight()
 	else:
 		await _stage.exit()  # the fog sinks back; the cave returns
-	_play_place_music()
 	for foe in state.foes:
 		if is_instance_valid(foe.node):
 			foe.node.queue_free()
 	_in_combat = false
+	# The fight's music eases back down into the place's (owner, 2026-11-21:
+	# it used to keep playing, as this ran while still "in combat").
+	_play_place_music(Music.AFTER_FIGHT)
 	_apply_view()
 	_end_encounter()
 	_combat.only_action = ""
@@ -4655,9 +4657,9 @@ func _build_audio() -> void:
 
 
 ## The cave's music, or the fortress's on its floor (#54).
-func _play_place_music() -> void:
+func _play_place_music(fade := -1.0) -> void:
 	if _music and not _in_combat:
-		_music.play("galleries" if _depth >= Galleries.DEPTH and not _in_opening else ("fortress" if _depth == FORTRESS_DEPTH else "cave"))
+		_music.play_with_fade(fade, "galleries" if _depth >= Galleries.DEPTH and not _in_opening else ("fortress" if _depth == FORTRESS_DEPTH else "cave"))
 
 
 func _play_effect(sound: AudioStream) -> void:

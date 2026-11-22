@@ -13,6 +13,12 @@ Format:
 
 ---
 
+## 2026-11-21 – Claude (battle music ends with the fight)
+
+- Did: owner report: the battle music kept playing after fights. main.gd asked for the place's music while `_in_combat` was still true, so `_play_place_music` skipped it. It now runs after `_in_combat = false`, with a slower 4s sine fade (`Music.AFTER_FIGHT`, `play_with_fade`). A change mid-fade (a fight right after a fight) kills the running fade first. main_hero_down_check asserts the cave music is back.
+- Next: owner listens.
+- Watch out: nothing.
+
 ## 2026-11-21 – Claude (title menu fits the window)
 
 - Did: owner report: Quit fell off the bottom of the title screen (five buttons since Skip the tutorial). `title_screen.gd _apply_margins` now gives way on the top margin, then the button gaps, so every button fits the 648-high base view. `tools/title_fit_check.gd` (needs the renderer for real sizes: run through background_godot.py).
