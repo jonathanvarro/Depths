@@ -1,0 +1,19 @@
+{
+	"builder_sha256": "b3cea00edff6e421080bc1c2063e9c5e2ac96c420edf3c19658302ab4629a84e",
+	"cell_metres": 2.0,
+	"changes": "Registered bowed meshes, lighting/filtering, and a static shader tear; no new bitmap painting",
+	"forward": "-Z",
+	"issue": 274,
+	"runtime_texture": "silk.png",
+	"source": "art/source/expedition-v1/web-intact.png",
+	"source_pixels": "Exact unmodified original 1254x1254 RGBA painting; not the reduced 256px export",
+	"source_provenance": "art/source/expedition-v1/generation-addendum.json",
+	"source_sha256": "1caef1c737d3e83cc472f888ed7035036634617cea932c9117b12e76a1dbdd5b",
+	"surfaces_per_state": 1,
+	"texture_shared_by_states": true,
+	"triangles": {
+		"intact": 1344,
+		"torn": 816
+	},
+	"wall_metres": 2.4
+}

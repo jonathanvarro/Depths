@@ -50,6 +50,12 @@ Templates > Download and Install; already installed on the owner's PC).
 
 ## Project structure
 
+- `docs/refined-spider-webs.md` – #274 restores the earlier detailed silk
+  painting on fixed bowed meshes in `art/features/web-silk-v2`, with registered
+  intact/torn states and a real central aperture. Cave/fungal themes use these;
+  LevelBuilder/Party still own passage state, clearing and traversal. Review:
+  `art/concepts/web-silk-v2/inspector.html`. Older assets/corner webs remain.
+
 - `docs/rat-and-shrine-landmarks-3d.md` – #252/#251's first CC0 3D rat
   pilot (`art/enemies/rat-3d-v1`, 270 triangles, 21 bones, six short clips)
   and the three registered fresh/resolved shrine/well/cache scenes in

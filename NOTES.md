@@ -13,6 +13,12 @@ Format:
 
 ---
 
+## 2026-11-22 – ChatGPT (refined passage spider webs, #274)
+
+- Did: restored the original fine-silk painting at full resolution on gently bowed, two-sided meshes, replacing the sparse 3D wheel in cave/fungal themes. Registered torn silk keeps frayed side/top anchors and a real clear centre. Earlier art and corner dressing remain intact. Source pixels are unchanged and hash-pinned; one texture is shared by both states. See `docs/refined-spider-webs.md` and `art/concepts/web-silk-v2/inspector.html`.
+- Next: review/merge `codex/refined-spider-webs`; physical iPhone performance remains to check. Native Mobile checks pass on the private desktop without foreground activation.
+- Watch out: Party/LevelBuilder still own tearing, passage state, restore and clearing. No travel, strain, timing, collision, saves or character-animation rules changed. Claude's active puzzle work in the main checkout was left untouched.
+
 ## 2026-11-21 – Claude (view from above switched off)
 
 - Did: owner: keep the view from above off on all floors and in all fights for now. `Main.overhead_from_floor` defaults to `OVERHEAD_OFF` (999), so the View button, V and the board camera never come up; the Settings switch is commented out in settings_screen.gd. All the code stays; board checks still set `overhead_from_floor = 1`.

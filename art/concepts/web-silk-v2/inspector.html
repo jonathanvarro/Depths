@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Depths · Refined spider webs</title>
+<style>
+body{margin:0;background:#10130f;color:#e6dcc4;font:16px/1.5 system-ui,sans-serif}header,main,footer{max-width:1400px;margin:auto;padding:20px}h1{font-family:Georgia,serif;color:#d9bc83;margin:0}p{max-width:90ch;color:#bfb8a5}a{color:#dfc38c}.bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap}select{font:inherit;padding:9px;background:#22271c;border:1px solid #a68c58;color:#eee1c6}select:focus-visible{outline:2px solid #efd59b}figure{margin:0}img{display:block;width:100%;height:auto;border:1px solid #78643e;background:black}figcaption{padding:12px 0}footer{border-top:1px solid #554932}
+</style>
+<header><h1>Depths · Refined passage silk</h1>
+<p>The earlier painting's fine fibers, uneven sag and dense corner anchors return on a gently bowed surface. These are native Godot Mobile captures with the real cave/fungal materials and party lantern.</p>
+<div class="bar"><label for="view">View</label><select id="view"></select></div></header>
+<main><figure><img id="preview" alt=""><figcaption id="caption"></figcaption></figure></main>
+<footer><p><a href="../../../docs/refined-spider-webs.md">Implementation and sources</a> · <a href="../../features/web-silk-v2/catalog.json">Asset catalogue</a> · <a href="validation.json">91 checks, no failures</a></p>
+<p>The old and refined desktop images use the same camera and lighting. Passage rules and existing corner-web dressing are unchanged. Physical iPhone review remains.</p></footer>
+<script>
+const views=[['cave-refined','Refined · cave, desktop','Fine silk detail restored from the exact original painting, with fixed corner anchors.'],['cave-previous','Previous 3D version · same camera','The sparse regular spokes and rings being replaced.'],['cave-torn','Torn · cave, desktop','Registered outer silk remains while the central passage is clear down to the floor.'],['cave-phone-844','Refined · cave, landscape phone','844×390, with distance mipmaps and no special review lighting.'],['fungal-caverns-phone-844','Refined · fungal cavern, landscape phone','The same silk reads against the fungal rock.'],['cave-dim','Dim lantern','Silk uses the existing light level and does not glow.'],['cave-reverse','Reverse view','Two-sided silk remains visible from the other side.'],['cave-oblique','Oblique view','A fixed bowed surface, with no camera-facing billboard.']];
+const selector=document.querySelector('#view'),picture=document.querySelector('#preview'),caption=document.querySelector('#caption');
+for(const [id,title] of views){const option=document.createElement('option');option.value=id;option.textContent=title;selector.append(option)}
+function show(){const [id,title,description]=views[selector.selectedIndex];picture.src='captures/'+id+'.png';picture.alt=title;caption.textContent=description;history.replaceState(null,'','#'+id)}
+selector.selectedIndex=Math.max(0,views.findIndex(([id])=>id===location.hash.slice(1)));selector.onchange=show;show();
+</script></html>
