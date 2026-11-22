@@ -620,6 +620,11 @@ Templates > Download and Install; already installed on the owner's PC).
   Real common chests are `data/events/chest_common.tres` (ChatGPT's art); the
   old containers (pack, tool rack, workings, cache, stash, strongbox) keep their
   own loot families below a chest (`ChestTiers.CONTAINERS`, never gear).
+- Quartermaster's issue (2026-11-22): `CampState.ISSUE`/`issue_level`; returns
+  top the pack up to it (`top_up_torches`), raised on the mine path for gold
+  and mine materials. `tools/quartermaster_check.gd`. Floors are 35x35 with
+  smaller rooms. Out of light: glow to the next square only, map unreadable
+  (`Minimap.dark`), dark steps map only the square stood on. `tools/darkness_check.gd`.
 - Settings (#52): `scripts/settings.gd` (static values, `apply()`, audio
   buses Master/Music/Effects; test runs use test_settings.cfg) and
   `scripts/settings_screen.gd`. New sound players should set `bus`.

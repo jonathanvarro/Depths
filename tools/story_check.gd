@@ -318,9 +318,16 @@ func _step3() -> void:
 	var problems := 0
 	var unreached := 0
 	for s in 400:
-		var layout: PackedStringArray = FG.generate(s * 7919 + 5, true, 1)
-		var before = DM.new(layout, 1)
-		var stamped: Dictionary = Packages.place(layout, [package], s)
+		# As main.gd does: if the site doesn't fit, the floor's next layout.
+		var layout: PackedStringArray
+		var before
+		var stamped: Dictionary
+		for attempt in 8:
+			layout = FG.generate(s * 7919 + 5 + attempt * 104729, true, 1)
+			before = DM.new(layout, 1)
+			stamped = Packages.place(layout, [package], s + attempt * 101)
+			if stamped["failed"].is_empty():
+				break
 		var map = DM.new(stamped["layout"], 1)
 		if not stamped["failed"].is_empty() or map.find_content(DM.Content.STAIRS_UP) != before.find_content(DM.Content.STAIRS_UP) 				or map.find_content(DM.Content.STAIRS_DOWN) != before.find_content(DM.Content.STAIRS_DOWN) or map.contents.size() != before.contents.size() + 3:
 			problems += 1

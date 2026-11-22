@@ -736,14 +736,97 @@ func buy_gear(party, item: Equipment) -> bool:
 ## buying them, and a party without light can't get anywhere.
 const FREE_TORCHES := 3
 
-## Tops the pack up to FREE_TORCHES. Returns how many were handed over.
-func top_up_torches(party) -> int:
-	var short: int = FREE_TORCHES - party.supplies.count(TORCH)
-	if short <= 0:
-		return 0
-	var given: int = party.supplies.add_what_fits(TORCH, short)
+## The quartermaster's issue (owner, 2026-11-22): what every return tops
+## the pack back up to, free. The first is the baseline; each next one is
+## paid for once, in gold and things brought up from the mine (from the pack
+## or the stash), and lasts.
+const ISSUE := [
+	{"name": "Basic issue", "items": {"torch": 3}},
+	{"name": "Field issue", "items": {"torch": 4, "ration": 1}, "gold": 30, "materials": {}},
+	{"name": "Full issue", "items": {"torch": 5, "ration": 1, "dressing": 1}, "gold": 60, "materials": {"coal": 3}},
+	{"name": "Expedition issue", "items": {"torch": 5, "ration": 2, "dressing": 2, "oil_flask": 1}, "gold": 100, "materials": {"copper_ore": 2}},
+]
+const ISSUE_ITEM := "res://data/items/%s.tres"
+var issue_level := 0
+
+
+## What the issue hands over now: {SupplyItem: count}.
+func issue_items(level := -1) -> Dictionary:
+	var out := {}
+	var spec: Dictionary = ISSUE[clampi(issue_level if level < 0 else level, 0, ISSUE.size() - 1)]
+	for id: String in spec["items"]:
+		out[load(ISSUE_ITEM % id)] = int(spec["items"][id])
+	return out
+
+
+## The next issue up and what it costs, or {} at the top.
+func next_issue() -> Dictionary:
+	return ISSUE[issue_level + 1] if issue_level + 1 < ISSUE.size() else {}
+
+
+func can_raise_issue(party) -> bool:
+	var next := next_issue()
+	if next.is_empty() or party.supplies.gold < int(next["gold"]):
+		return false
+	for id: String in next["materials"]:
+		var item: SupplyItem = load(ISSUE_ITEM % id)
+		if party.supplies.count(item) + stash.count(item) < int(next["materials"][id]):
+			return false
+	return true
+
+
+## Pays for the next issue (materials from the pack first, then the stash).
+func raise_issue(party) -> bool:
+	if not can_raise_issue(party):
+		return false
+	var next := next_issue()
+	party.supplies.gold -= int(next["gold"])
+	for id: String in next["materials"]:
+		var item: SupplyItem = load(ISSUE_ITEM % id)
+		var owed: int = int(next["materials"][id]) - party.supplies.drop(item, int(next["materials"][id]))
+		if owed > 0:
+			stash.drop(item, owed)
+	issue_level += 1
+	party.supplies.changed.emit()
 	changed.emit()
-	return given
+	return true
+
+
+## "3 torches, a ration" for the issue at `level` (now by default).
+func issue_text(level := -1) -> String:
+	var parts := []
+	var items := issue_items(level)
+	for item: SupplyItem in items:
+		var n: int = items[item]
+		var name := item.display_name.to_lower()
+		parts.append(("a %s" % name) if n == 1 else "%s ×%d" % [name, n])
+	return ", ".join(PackedStringArray(parts))
+
+
+## "30 gold, 3 coal" for the next issue.
+func next_issue_price() -> String:
+	var next := next_issue()
+	if next.is_empty():
+		return ""
+	var parts := ["%d gold" % int(next["gold"])]
+	for id: String in next["materials"]:
+		parts.append("%s ×%d" % [load(ISSUE_ITEM % id).display_name.to_lower(), int(next["materials"][id])])
+	return ", ".join(PackedStringArray(parts))
+
+
+## Tops the pack up to the issue (FREE_TORCHES torches at the start).
+## Returns how many torches were handed over.
+func top_up_torches(party) -> int:
+	var torches := 0
+	var wanted := issue_items()
+	for item: SupplyItem in wanted:
+		var short: int = wanted[item] - party.supplies.count(item)
+		if short > 0:
+			var given: int = party.supplies.add_what_fits(item, short)
+			if item == TORCH:
+				torches = given
+	changed.emit()
+	return torches
 
 
 ## No light and no money: the merchant fronts two torches, once a day, so

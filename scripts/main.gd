@@ -628,6 +628,13 @@ func _unhandled_input(event: InputEvent) -> void:
 ## Builds (or returns to) a floor. Arriving from above puts the party at the
 ## way up; arriving from below puts it at the way down; the opening uses the
 ## floor's start cell.
+## True if a story quest wants a site on this floor that `map` lacks.
+func _missing_quest_site(map, depth: int) -> bool:
+	if _in_opening or use_debug_layout:
+		return false
+	return Packages.active(_camp_state, depth).any(func(p): return p.id not in map.packages)
+
+
 func _go_to_floor(depth: int, arrival: Arrival) -> void:
 	var waited := 0
 	if _floor_started:
@@ -641,23 +648,38 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 	_wanderers.arrive_on(depth, _party_state.time_elapsed)
 	_apply_theme()
 	_expedition.visit_floor(depth)
+	# A floor kept from earlier today, made before a quest that belongs on it
+	# was taken, has no site for it: build it again (owner playtest,
+	# 2026-11-22: floor 1 with no survey party, and its way down shut).
+	if _floors.has(depth) and _missing_quest_site(_floors[depth], depth):
+		_floors.erase(depth)
 	if not _floors.has(depth):
-		var layout := _make_layout(depth)
+		var layout: PackedStringArray
 		var marks := {}
-		if depth == FORTRESS_DEPTH and not use_debug_layout:
-			var fortress: Dictionary = Fortress.fortify(layout, _camp_state.gate_broken)
-			layout = fortress["layout"]
-			marks = {"hall": fortress["hall"], "gates": fortress["gates"]}
-		# Quest packages the story wants here (#123), stamped into rock.
-		# Never join a package through the queen's hall or past her gates.
-		var avoid: Array = marks.get("hall", []) + marks.get("gates", [])
-		var join: Dictionary = {}
-		if not avoid.is_empty():
-			var plain = DungeonMap.new(layout, depth)
-			join = plain.walking_distances(plain.find_content(DungeonMap.Content.STAIRS_UP))
-		var wanted: Array = [] if _in_opening else Packages.active(_camp_state, depth) + Packages.lairs(depth, _site_seed + depth * 7919 + 29) \
-				+ Packages.territories(depth, _site_seed + depth * 7919 + 31)
-		var stamped: Dictionary = Packages.place(layout, wanted, _site_seed + depth * 7919 + 13, avoid, join)
+		var stamped: Dictionary
+		# A story quest's site must fit (its floor's way on can wait for it):
+		# if this layout has no room, the next one is tried (2026-11-22).
+		for attempt in 8:
+			layout = _make_layout(depth, attempt)
+			marks = {}
+			if depth == FORTRESS_DEPTH and not use_debug_layout:
+				var fortress: Dictionary = Fortress.fortify(layout, _camp_state.gate_broken)
+				layout = fortress["layout"]
+				marks = {"hall": fortress["hall"], "gates": fortress["gates"]}
+			# Quest packages the story wants here (#123), stamped into rock.
+			# Never join a package through the queen's hall or past her gates.
+			var avoid: Array = marks.get("hall", []) + marks.get("gates", [])
+			var join: Dictionary = {}
+			if not avoid.is_empty():
+				var plain = DungeonMap.new(layout, depth)
+				join = plain.walking_distances(plain.find_content(DungeonMap.Content.STAIRS_UP))
+			var story: Array = [] if _in_opening else Packages.active(_camp_state, depth)
+			var wanted: Array = story.duplicate()
+			if not _in_opening:
+				wanted += Packages.lairs(depth, _site_seed + depth * 7919 + 29) + Packages.territories(depth, _site_seed + depth * 7919 + 31)
+			stamped = Packages.place(layout, wanted, _site_seed + depth * 7919 + 13 + attempt * 101, avoid, join)
+			if not story.any(func(p): return p.id in stamped["failed"]):
+				break
 		var refuge := Vector2i(-1, -1)
 		if depth == Refuge.DEPTH and not use_debug_layout and not _in_opening:  # a rest before the fortress
 			var placed: Dictionary = Refuge.place(stamped["layout"], depth)
@@ -837,12 +859,13 @@ func _build_level() -> void:
 			Galleries.dress_reservoir(_level, _map, CELL_SIZE, _site_seed, Quests.has_flag(_camp_state, "reservoir", "diverted"))
 
 
-func _make_layout(depth: int) -> PackedStringArray:
+## `attempt` > 0: another layout for the same floor (a story site didn't fit).
+func _make_layout(depth: int, attempt := 0) -> PackedStringArray:
 	if depth == OPENING_DEPTH:
 		return _opening["layout"]
 	if use_debug_layout and depth == 1:
 		return PackedStringArray(DEBUG_LAYOUT)
-	return FloorGenerator.generate(_site_seed + (depth - 1) * FLOOR_SEED_STEP, depth < floors_in_site, depth)
+	return FloorGenerator.generate(_site_seed + (depth - 1) * FLOOR_SEED_STEP + attempt * 104729, depth < floors_in_site, depth)
 
 
 func _on_party_entered_cell(cell: Vector2i) -> void:
@@ -2110,7 +2133,7 @@ func _end_expedition(ending: int) -> void:
 		_results.show_brief("Barely survived", "You stagger out into the daylight, alone.", "To camp")
 	else:
 		var note: String = notes[ending] + "
-At camp, the quartermaster tops your torches back up to %d." % CampState.FREE_TORCHES
+At camp, the quartermaster tops your pack back up: %s." % _camp_state.issue_text()
 		_remember_the_fallen()
 		_results.show_results(ending, _expedition, _party_state, note, _homecoming_lines())
 	_trip_memories.clear()
@@ -3454,6 +3477,11 @@ func _skip_opening() -> void:
 	hero.weapon = GearModel.ensure_instance(weapon.duplicate())
 	hero.refresh_stats()
 	hero.health = hero.effective_max_health()
+	# Out of the escape with torches only, as the opening leaves you: the
+	# lantern is bought later (owner, 2026-11-22).
+	_party_state.supplies.has_lantern = false
+	_party_state.supplies.source = Supplies.Source.NONE
+	_party_state.supplies.changed.emit()
 	_in_opening = true  # so the camp stop below restocks and ends the opening
 	_ending = true
 	_party.locked = true
@@ -4647,6 +4675,8 @@ func _build_hint() -> void:
 
 func _update_lantern() -> void:
 	_party.set_light(_party_state.supplies.light_fraction())
+	_minimap.dark = not _party.lit
+	_full_map_view.dark = not _party.lit
 
 
 func _on_light_band_changed(band: Supplies.Light) -> void:

@@ -13,6 +13,12 @@ Format:
 
 ---
 
+## 2026-11-22 – Claude (owner playtest: missing quest site, lantern, bigger floors, issue, darkness)
+
+- Did: (1) A floor kept from earlier the same day is rebuilt on arrival if an active story quest's site is missing from it (`main._missing_quest_site`); the owner's floor 1 had no survey site while its way down stayed shut. `tools/quest_site_check.gd`. (2) Skip the tutorial no longer hands over a lantern (the escape doesn't either). (3) `FloorGenerator`: 35x35 (was 31), up to 13 rooms of 3-5 (was 9 of 3-6), loop chance 0.7: about 40% more floor, slightly less doubling back. (4) Quartermaster's issue: `CampState.ISSUE` / `issue_level` / `raise_issue`; every return tops up to the issue (baseline 3 torches; Field 30g: 4 torches + ration; Full 60g + 3 coal; Expedition 100g + 2 copper ore). Bought on the mine path panel. `top_up_torches` keeps its name and return value. `tools/quartermaster_check.gd`. (5) Out of light: `Party.set_light(0)` is a faint glow that dies past the next square, `Minimap.dark` shows "Too dark to read the map" (corner and full map), and walking in the dark marks only the square you stand on (`Party._reveal`). `tools/darkness_check.gd`.
+- Next: owner plays; tune issue prices and the dark glow on a real screen (captures are dim by nature).
+- Watch out: bigger floors change every seed's layout; tests that need a feature search seeds rather than fixing one.
+
 ## 2026-11-22 – Claude (chest art hooked up; old containers keep their own loot)
 
 - Did: merged ChatGPT's `codex/mine-polish-and-loot-chests` into main (fast-forward; PR #280's work). New `data/events/chest_common.tres` ("A chest", weight 5, every floor) uses `art/props/chests-v1/common.tscn` and is now the commonest kind-2 event. Silver/gold hoard events point at their own chest scenes. Owner: the old containers stay, with their own loot families and lower quality than a chest: `ChestTiers.CONTAINERS` (by event file name) gives a pack supplies, a tool rack tools, workings/seams ore, a buried cache valuables, a goblin stash scrap (two from floor 3), never gear; the strongbox's coin flip is its whole prize. A real common chest adds 3 + 2 x floor gold and a 35% gear find (`LOOT["common"]`, `GearGen.drop` chance override). Ladder: container < common < silver < gold. `tools/chest_tiers_check.gd` covers it.

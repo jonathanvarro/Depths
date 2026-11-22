@@ -38,6 +38,12 @@ var map
 var party_cell := Vector2i.ZERO
 var party_facing := 0
 var full_view := false
+## No light to read it by (owner, 2026-11-22): the map shows nothing.
+var dark := false:
+	set(value):
+		if dark != value:
+			dark = value
+			queue_redraw()
 var reveal_all := false:
 	set(value):
 		reveal_all=value
@@ -131,6 +137,14 @@ func _draw() -> void:
 	if map==null:return
 	if full_view:draw_style_box(PAPER,Rect2(Vector2.ZERO,size))
 	else:draw_texture_rect(QUIET_PAPER,Rect2(Vector2.ZERO,size),false)
+	if dark and not reveal_all:
+		draw_rect(Rect2(Vector2.ZERO,size),Color(0.02,0.015,0.01,0.93))
+		var font:=get_theme_default_font()
+		var text:="Too dark to read the map"
+		var fs:=18 if full_view else 12
+		var w:=font.get_string_size(text,HORIZONTAL_ALIGNMENT_CENTER,-1,fs).x
+		draw_string(font,Vector2((size.x-w)/2.0,size.y/2.0),text,HORIZONTAL_ALIGNMENT_LEFT,-1,fs,Color(0.75,0.6,0.42,0.85))
+		return
 	_cache_geometry()
 	var cells:=_visible_cells()
 	var tile:=TILE

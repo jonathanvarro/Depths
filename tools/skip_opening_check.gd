@@ -42,6 +42,7 @@ func _initialize() -> void:
 	check("then camp", main._camp.visible and not main._in_opening)
 	check("Corin, armed with the fallen companion's weapon and supplied", hero.display_name == "Corin" and hero.weapon != null and hero.health > 0 and main._party_state.supplies.items.size() > 0, hero.weapon.display_name)
 	check("the story is where the escape leaves it", Quests.stage(main._camp_state, "left_behind") != Quests.Stage.UNKNOWN and not main._camp_state.site_present("smith"), Quests.stage(main._camp_state, "left_behind"))
+	check("no lantern until it is bought, as after the escape", not main._party_state.supplies.has_lantern)
 	check("the flag is used once", not SaveGame.skip_opening())
 	print("fails=", fails)
 	quit()

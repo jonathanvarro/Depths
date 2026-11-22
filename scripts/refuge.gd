@@ -10,6 +10,8 @@ extends RefCounted
 const DungeonMap := preload("res://scripts/dungeon_map.gd")
 const EVENT := preload("res://data/events/refuge_scouts.tres")
 const DEPTH := 3
+## How far from the stairs down a room may be before a passage nook will do.
+const NEAR := 12
 
 
 static func activities(members: Array, burning: bool) -> Array[String]:
@@ -41,14 +43,22 @@ static func place(layout: PackedStringArray, depth: int) -> Dictionary:
 	if down == Vector2i(-1, -1):
 		return out
 	var distances: Dictionary = map.walking_distances(down)
+	# The nearest free room cell; on the bigger floors (2026-11-22) a nook in
+	# the passage beside the stairs if every room near them is taken.
 	var best := Vector2i(-1, -1)
+	var nook := Vector2i(-1, -1)
 	for cell: Vector2i in distances:
-		if cell == down or cell == map.start_cell or not map._is_room_cell(cell):
+		if cell == down or cell == map.start_cell:
 			continue
-		if map.content_at(cell) != DungeonMap.Content.NONE or map.encounter_zones.has(cell):
+		if map.content_at(cell) != DungeonMap.Content.NONE or map.encounter_zones.has(cell) or map.door_at(cell) != DungeonMap.Door.NONE:
 			continue
-		if best == Vector2i(-1, -1) or distances[cell] < distances[best]:
-			best = cell
+		if map._is_room_cell(cell):
+			if best == Vector2i(-1, -1) or distances[cell] < distances[best]:
+				best = cell
+		elif distances[cell] >= 2 and (nook == Vector2i(-1, -1) or distances[cell] < distances[nook]):
+			nook = cell
+	if nook != Vector2i(-1, -1) and (best == Vector2i(-1, -1) or distances[best] > NEAR):
+		best = nook
 	if best == Vector2i(-1, -1):
 		return out
 	var rows := PackedStringArray(layout)

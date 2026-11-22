@@ -8,15 +8,17 @@ extends RefCounted
 ## and a hand-drawn debug layout are interchangeable.
 ## The same seed always produces the same floor.
 
-const WIDTH := 31
-const HEIGHT := 31
-const MAX_ROOMS := 9
-const ROOM_ATTEMPTS := 80
+## Bigger floors with smaller rooms and more loops (owner, 2026-11-22):
+## more to explore, less walking back the way you came.
+const WIDTH := 35
+const HEIGHT := 35
+const MAX_ROOMS := 13
+const ROOM_ATTEMPTS := 200
 const ROOM_MIN := 3
-const ROOM_MAX := 6
+const ROOM_MAX := 5
 ## Chance per room of one extra corridor, so the floor has loops rather than
 ## only dead ends (gives the player alternative routes back).
-const EXTRA_CORRIDOR_CHANCE := 0.35
+const EXTRA_CORRIDOR_CHANCE := 0.7
 ## Chance that a room (other than the start room) holds something.
 const ROOM_CONTENT_CHANCE := 0.75
 ## Layout symbols (see dungeon_map.gd) and how often each is picked, by

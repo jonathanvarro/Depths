@@ -84,13 +84,27 @@ func setup(size: float) -> void:
 ## Whether there's real light to see by: the map shows one tile further.
 var lit := true
 
+## What the party learns of the floor at `at`: in the light, the cells
+## around it; in the dark only the cell itself, felt underfoot (owner,
+## 2026-11-22: the map can't do the seeing for you).
+func _reveal(at: Vector2i) -> void:
+	if lit:
+		map.reveal_around(at, true)
+	else:
+		map.explored[at] = true
+
+
 func set_light(fraction: float) -> void:
 	lit = fraction > 0.0
 	if fraction <= 0.0:
-		_lantern.light_energy = 0.35
-		_lantern.omni_range = cell_size * 1.6
-		_lantern.light_color = Color("7a5a3a")
+		# No light: a faint glow that reaches only the next square (owner,
+		# 2026-11-22).
+		_lantern.light_energy = 1.6
+		_lantern.omni_range = cell_size * 2.5
+		_lantern.omni_attenuation = 2.5  # falls away fast past the next square
+		_lantern.light_color = Color("8a7660")
 		return
+	_lantern.omni_attenuation = 1.2
 	_lantern.light_color = Color("e8a84a")
 	_lantern.light_energy = lerpf(0.8, 1.9, fraction)
 	_lantern.omni_range = cell_size * lerpf(2.4, 4.2, fraction)
@@ -106,7 +120,7 @@ func place(dungeon_map, at: Vector2i) -> void:
 			break
 	position = _cell_to_world(cell)
 	rotation.y = _facing_to_yaw(facing)
-	map.reveal_around(cell, lit)
+	_reveal(cell)
 	moved.emit(cell, facing)
 
 
@@ -143,7 +157,7 @@ func _try_step(direction: Vector2i) -> void:
 		tween.tween_property(self, "position", position, move_time * 0.4)
 	elif map.door_at(target) == DungeonMap.Door.CLOSED:
 		map.open_door(target)
-		map.reveal_around(target, lit)
+		_reveal(target)
 		opened_door.emit(target)
 		# Lean into it and push through, then settle back.
 		var push := position + Vector3(direction.x, 0, direction.y) * TEAR_PUSH
@@ -161,7 +175,7 @@ func _try_step(direction: Vector2i) -> void:
 		cell = target
 		stepped.emit(cell)
 		tween.tween_property(self, "position", _cell_to_world(cell), move_time)
-		map.reveal_around(cell, lit)
+		_reveal(cell)
 		moved.emit(cell, facing)
 		tween.finished.connect(func(): entered_cell.emit(cell))
 	tween.finished.connect(func(): _busy = false)

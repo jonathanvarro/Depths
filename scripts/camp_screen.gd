@@ -1178,6 +1178,20 @@ func _cave_path() -> void:
 	var staying: Array = _party.living_members().filter(func(h): return h not in going)
 	if not staying.is_empty():
 		say.call("With the nurse: %s" % ", ".join(PackedStringArray(staying.map(func(h): return "%s (day %d)" % [h.display_name, _camp.ready_on(h)]))), MUTED)
+	# The quartermaster's issue (owner, 2026-11-22): topped up free on every
+	# return; a better one is paid for once, in gold and what the mine gives.
+	say.call("Quartermaster's issue, every trip: %s." % _camp.issue_text(), MUTED)
+	var next: Dictionary = _camp.next_issue()
+	if not next.is_empty():
+		var better := _button("%s (%s)" % [next["name"], _camp.next_issue_price()])
+		better.tooltip_text = "From now on: %s." % _camp.issue_text(_camp.issue_level + 1)
+		better.accessibility_name = "%s: %s, for %s" % [next["name"], _camp.issue_text(_camp.issue_level + 1), _camp.next_issue_price()]
+		better.disabled = not _camp.can_raise_issue(_party)
+		better.pressed.connect(func():
+			if _camp.raise_issue(_party):
+				_camp.top_up_torches(_party))
+		column.add_child(better)
+		say.call("Next: %s." % _camp.issue_text(_camp.issue_level + 1), MUTED)
 	var down := _button("Head back down")
 	down.pressed.connect(func(): cave_chosen.emit(1))
 	column.add_child(down)
