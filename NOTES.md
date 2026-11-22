@@ -13,6 +13,12 @@ Format:
 
 ---
 
+## 2026-11-21 – Claude (first floors through the party's eyes)
+
+- Did: owner playtest: exploring from above made the early floors less fun. Floors 1-3 now stay first person for exploring and fights; the View button and V only work from floor 4 (`Main.overhead_from_floor`, `_overhead_allowed`, `_overhead_on`). The setting is kept and labelled "View from above, floor 4 on (V)". Board checks (tactical, enemy_models, framing, readability) set `overhead_from_floor = 1` so they still test the board on early floors. `tools/early_floor_view_check.gd`.
+- Next: owner decides whether floor 4 should start from above (the setting still defaults on) or in first person.
+- Watch out: with the setting on, arriving on floor 4 lifts the view; the King's hall is fought on the board.
+
 ## 2026-11-21 – Claude (battle music ends with the fight)
 
 - Did: owner report: the battle music kept playing after fights. main.gd asked for the place's music while `_in_combat` was still true, so `_play_place_music` skipped it. It now runs after `_in_combat = false`, with a slower 4s sine fade (`Music.AFTER_FIGHT`, `play_with_fade`). A change mid-fade (a fight right after a fight) kills the running fade first. main_hero_down_check asserts the cave music is back.

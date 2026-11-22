@@ -115,6 +115,7 @@ func _initialize() -> void:
 
 	var main = load("res://scenes/main.tscn").instantiate()
 	main.play_opening = false
+	main.overhead_from_floor = 1  # these test the board on early floors (owner 2026-11-21: off there in play)
 	main.floor_seed = 11
 	main.simulate_phone_safe_area = tag == "phone"
 	root.add_child(main)

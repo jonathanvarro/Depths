@@ -35,6 +35,7 @@ func _initialize() -> void:
 		# A fresh game for each fight.
 		var main = load("res://scenes/main.tscn").instantiate()
 		main.play_opening = false
+		main.overhead_from_floor = 1  # these test the board on early floors (owner 2026-11-21: off there in play)
 		main.floor_seed = 11
 		root.add_child(main)
 		await create_timer(0.5).timeout
