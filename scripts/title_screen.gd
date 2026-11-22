@@ -19,6 +19,7 @@ var _margin: MarginContainer
 var _begin: Button
 var _settings_screen: Control
 var _hero_select: Control  # hero_select.gd (#95)
+var _skip := false  # the hero screen was opened by "Skip the tutorial"
 
 
 func _ready() -> void:
@@ -70,8 +71,16 @@ func _ready() -> void:
 		column.add_child(resume)
 	_begin = _menu_button("New game (replaces your save)" if has_save else "Begin expedition", 72 if phone else 56, not has_save)
 	# A new game starts by choosing who wakes in the dark (#95).
-	_begin.pressed.connect(func(): _hero_select.open())
+	_begin.pressed.connect(func():
+		_skip = false
+		_hero_select.open())
 	column.add_child(_begin)
+	# Straight to camp, the opening escape taken as done (owner, 2026-11-21).
+	var skip := _menu_button("Skip the tutorial", 72 if phone else 56, false)
+	skip.pressed.connect(func():
+		_skip = true
+		_hero_select.open())
+	column.add_child(skip)
 	var settings := _menu_button("Settings", 72 if phone else 56, false)
 	settings.pressed.connect(func():
 		settings.grab_focus()
@@ -148,4 +157,5 @@ func _start_new_game(hero_path: String) -> void:
 	var SaveGame := preload("res://scripts/save_game.gd")
 	SaveGame.delete()
 	SaveGame.set_new_game_hero(hero_path)
+	SaveGame.set_skip_opening(_skip)
 	get_tree().change_scene_to_file(GAME_SCENE)

@@ -458,6 +458,8 @@ Templates > Download and Install; already installed on the owner's PC).
 - `scripts/title_screen.gd` + `scenes/title.tscn` – title screen (#18) built
   from ChatGPT's title study: Begin expedition, Settings (disabled until
   settings exist), Quit (desktop only). Uses art/fonts roles.
+  "Skip the tutorial" (2026-11-21) starts a new game at camp after the
+  commander's first talk (`SaveGame.skip_opening`, main `_skip_opening`).
 - `scripts/preparation_screen.gd` – party, condition, lantern and pack before
   expeditions 2+ (the opening skips it). `scripts/safe_area.gd` – shared
   notch/home-bar insets for every screen.

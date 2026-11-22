@@ -13,6 +13,12 @@ Format:
 
 ---
 
+## 2026-11-21 – Claude (Skip the tutorial on the title)
+
+- Did: owner request. The title has "Skip the tutorial": it opens the hero screen, then starts a new game at camp after the commander's first talk, as the escape leaves it (the hero has the fallen companion's weapon, starting supplies and the same partial camp). `SaveGame.skip_opening`, main `_skip_opening`. `tools/skip_opening_check.gd`.
+- Next: nothing.
+- Watch out: it replaces any existing save, like New game.
+
 ## 2026-11-18 – Claude (bodies after a wipe; named vs random, #180)
 
 - Did: owner rule 2026-11-18. A full wipe wakes only the main hero at camp; every other companion's body stays on the floor they fell on (`CampState.lost_bodies`, with worn kit). Entering that floor lays them in far room cells (`main._place_bodies`, `map.marks["bodies"]` cell -> name, solid) with the opening's body props, and the floor message names them. Walking into one carries it (`CampState.carried`); a normal return hands carried bodies to the nurse (`bring_home` -> `fallen`, revive as before); a wipe while carrying drops them on that floor. Saved as `lost_bodies` / `carried`. Named companions now roll two strengths (random recruits one), and `Equipment.named_for` makes gear only that named companion can use (`Classes.refuses`); no such item is authored yet.

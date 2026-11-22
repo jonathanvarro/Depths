@@ -21,6 +21,7 @@ static func _state() -> Dictionary:
 			"path": "user://test_save.dat" if "--script" in OS.get_cmdline_args() else "user://save.dat",
 			"continue": false,  # set by the title screen's Continue
 			"hero": "",  # the starting hero chosen for a new game (#95)
+			"skip_opening": false,  # the title's "Skip the tutorial" (2026-11-21)
 		})
 	return Engine.get_meta(STATE)
 
@@ -48,6 +49,15 @@ static func new_game_hero() -> String:
 
 static func set_new_game_hero(value: String) -> void:
 	_state()["hero"] = value
+
+
+## A new game that starts at camp, as if the opening escape were done.
+static func skip_opening() -> bool:
+	return _state().get("skip_opening", false)
+
+
+static func set_skip_opening(value: bool) -> void:
+	_state()["skip_opening"] = value
 
 
 static func exists() -> bool:

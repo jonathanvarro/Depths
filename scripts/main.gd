@@ -573,6 +573,9 @@ func _ready() -> void:
 		_begin_opening()
 	elif use_debug_layout or not play_opening:
 		_go_to_floor(1, Arrival.OPENING)
+	elif SaveGame.skip_opening():
+		SaveGame.set_skip_opening(false)
+		_skip_opening.call_deferred()
 	else:
 		_begin_opening()
 	_set_debug(show_debug)
@@ -3167,6 +3170,23 @@ func _on_party_panicked() -> void:
 
 
 # --- Opening escape (#30) -------------------------------------------------
+
+## The title's "Skip the tutorial" (owner, 2026-11-21): the hero is out of
+## the cave with the fallen companion's weapon, meets the commander, and
+## the story goes on at camp exactly as after the escape.
+func _skip_opening() -> void:
+	var hero: Companion = _party_state.members[0]
+	var weapon: Equipment = hero.companion_weapon if hero.companion_weapon else IRON_SWORD
+	hero.weapon = GearModel.ensure_instance(weapon.duplicate())
+	hero.refresh_stats()
+	hero.health = hero.effective_max_health()
+	_in_opening = true  # so the camp stop below restocks and ends the opening
+	_ending = true
+	_party.locked = true
+	_minimap.visible = false
+	await _conversation.play(COMMANDER_FIRST, hero, _camp_state, _party_state.members)
+	_start_new_expedition()
+
 
 func _begin_opening() -> void:
 	_in_opening = true
