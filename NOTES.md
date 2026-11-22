@@ -13,6 +13,30 @@ Format:
 
 ---
 
+## 2026-11-22 – ChatGPT (puzzle fittings, then five elite leader looks)
+
+- Did: #281/#282 on `codex/puzzle-props-and-elite-looks`. Replaced simple live
+  puzzle fittings with uneven plank doors, the correct-face bolt, lock plates,
+  a chained lever and open-bow key, sharing the refined mine materials. Kept
+  the existing chain gate and seated skeleton. Added Old Whisker, Pale Spinner,
+  Skarn, Hollow Foreman and Gristle wrappers with distinct palettes and original
+  bone-mounted details; original animated GLBs/rigs/clips are untouched.
+  Elites.types privately overrides only the leader model for patrol and combat;
+  normal followers, sprite setting fallback and all rules remain intact.
+- Checks: 73 puzzle art, 678 leader pose/fit and 60 live patrol/combat/fallback
+  checks passed. Existing puzzle check covered 1,200 floors and saved states;
+  named-elite check covered selection, marks, patrol/retreat and gilded hoards;
+  both report fails=0. Private GPU desktops never took focus. Handoff/source
+  record: `docs/puzzle-props-and-elite-leaders.md`. Local gallery, 81 actual
+  captures and editable masters: `build/local-puzzles-elites-v1/inspector.html`.
+- Next: review/merge this branch, then owner visual and physical iPhone review.
+- Watch out: no new animation Actions; retain inherited actor API/held poses.
+  Source spider uses 8x4 palette UVs (the variant material's scale/offset is
+  intentional). Existing combat action panel partly covers short foes at
+  adjacent range on small screens; this batch does not change global UI.
+  Earlier mine-polish builder now has a main guard for safe helper import;
+  its CLI export body is unchanged. Unrelated main-checkout edits were left alone.
+
 ## 2026-11-22 – Claude (chest art hooked up; old containers keep their own loot)
 
 - Did: merged ChatGPT's `codex/mine-polish-and-loot-chests` into main (fast-forward; PR #280's work). New `data/events/chest_common.tres` ("A chest", weight 5, every floor) uses `art/props/chests-v1/common.tscn` and is now the commonest kind-2 event. Silver/gold hoard events point at their own chest scenes. Owner: the old containers stay, with their own loot families and lower quality than a chest: `ChestTiers.CONTAINERS` (by event file name) gives a pack supplies, a tool rack tools, workings/seams ore, a buried cache valuables, a goblin stash scrap (two from floor 3), never gear; the strongbox's coin flip is its whole prize. A real common chest adds 3 + 2 x floor gold and a 35% gear find (`LOOT["common"]`, `GearGen.drop` chance override). Ladder: container < common < silver < gold. `tools/chest_tiers_check.gd` covers it.

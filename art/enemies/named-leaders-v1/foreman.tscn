@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=3]
+[ext_resource type="Script" path="res://art/enemies/named-leaders-v1/actor.gd" id="1"]
+[ext_resource type="Material" path="res://art/enemies/named-leaders-v1/foreman.tres" id="2"]
+[ext_resource type="PackedScene" path="res://art/enemies/early-creatures-3d-v1/hollow-miner.glb" id="3"]
+
+[ext_resource type="PackedScene" path="res://art/enemies/named-leaders-v1/foreman-details.glb" id="4"]
+
+[node name="Actor" type="Node3D"]
+script = ExtResource("1")
+palette_material = ExtResource("2")
+details = ExtResource("4")
+held_poses = PackedStringArray("grab")
+metadata/visual_height = 1.42
+
+[node name="Model" parent="." instance=ExtResource("3")]

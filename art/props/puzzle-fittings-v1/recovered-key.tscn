@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="Script" path="res://art/props/puzzle-fittings-v1/prop.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/props/puzzle-fittings-v1/key.glb" id="key"]
+[ext_resource type="PackedScene" path="res://art/dressing/bone-decor-v1/seated-skeleton.tscn" id="remains"]
+
+[node name="PuzzleFitting" type="Node3D"]
+script=ExtResource("script")
+kind="key"
+metadata/asset_id="puzzle-key"
+[node name="Remains" parent="." instance=ExtResource("remains")]
+[node name="Key" type="Node3D" parent="."]
+position=Vector3(0.18,0.32,0.32)
+[node name="Model" parent="Key" instance=ExtResource("key")]
+[node name="Glint" type="OmniLight3D" parent="Key"]
+light_color=Color(1,0.847,0.541,1)
+light_energy=0.6
+omni_range=0.9

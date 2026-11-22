@@ -10,6 +10,13 @@ extends RefCounted
 ## Static helpers only (no static variables: see #100).
 
 const ENEMIES := "res://data/enemies/%s.tres"
+const LEADER_MODELS := {
+	"whisker": preload("res://art/enemies/named-leaders-v1/whisker.tscn"),
+	"spinner": preload("res://art/enemies/named-leaders-v1/spinner.tscn"),
+	"skarn": preload("res://art/enemies/named-leaders-v1/skarn.tscn"),
+	"foreman": preload("res://art/enemies/named-leaders-v1/foreman.tscn"),
+	"gristle": preload("res://art/enemies/named-leaders-v1/gristle.tscn"),
+}
 
 ## id -> the pack. `floors`: where it can turn up. `types`: leader first.
 ## `marks`: the leader's two elite marks; followers take the second.
@@ -56,6 +63,10 @@ static func types(id: String) -> Array[EnemyType]:
 	var out: Array[EnemyType] = []
 	for name: String in PACKS[id]["types"]:
 		out.append(load(ENEMIES % name))
+	# Both patrol and combat ask here. Only the leader gets a private art binding;
+	# shared definitions, followers and the Settings sprite fallback stay intact.
+	out[0]=out[0].duplicate(false)
+	out[0].model=LEADER_MODELS[id]
 	return out
 
 
