@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="Script" path="res://art/dressing/mine-refined-v2/prop.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/dressing/mine-refined-v2/workings-fresh.glb" id="workings-fresh"]
+[ext_resource type="PackedScene" path="res://art/dressing/mine-refined-v2/workings-spent.glb" id="workings-spent"]
+
+[node name="OldWorkings" type="Node3D"]
+script=ExtResource("script")
+metadata/asset_id="old-workings"
+[node name="Fresh" parent="." instance=ExtResource("workings-fresh")]
+[node name="Spent" parent="." instance=ExtResource("workings-spent")]
+visible=false

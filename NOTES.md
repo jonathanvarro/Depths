@@ -13,6 +13,12 @@ Format:
 
 ---
 
+## 2026-11-22 – ChatGPT (mine shape/material pass and three loot chest types, #278/#279)
+
+- Did: refined eight mine scenes (supports, standing/hanging lanterns, miners' shrine, old workings and rails) with hewn/chipped shapes, joinery/repairs, worn metal and metre-scaled directional grain. Dressing and two event art paths now use the new family. Added common/silver/embellished gold chests with distinct profiles/fittings and registered closed/open/empty lid states. `art/props/chests-v1/{common,silver,gold}.tscn` wrappers match the paths in Claude's pending chest-tier dispatcher. Review/source/rebuild notes: `docs/mine-polish-and-loot-chests.md` and `art/concepts/mine-polish-v2/inspector.html`.
+- Next: review/merge `codex/mine-polish-and-loot-chests`. Physical iPhone performance remains. Chest rarity/reward assignment stays with the game dispatcher.
+- Watch out: new meshes use physical UVs/UV2 and vertex colours with separate shared material families, not palette-point UVs. Keep old atlases off them. Verified CC0 originals and earlier libraries remain intact; editable Blender masters stay local. Active game-design edits in the main checkout were left untouched.
+
 ## 2026-11-22 – Claude (named elite packs, #277)
 
 - Did: owner request. Random elites in ordinary fights are off (`CombatState.RANDOM_ELITES`). Instead `scripts/elites.gd` gives each floor a chance (25/40/50%) of one named pack, chosen when the floor is built (main `_choose_elite`, seed +59, kinds already beaten only) and kept in `map.marks["elite"]`. It patrols between rooms on the map with a coloured glow (`Roamers.Group.named/patrol`, main `_spawn_elite`, `_patrol`), noticing and closing in like other groups. Fights are `_fight_kind == "elite"`: `Elites.empower` names the leader, gives it both marks and +30% health, followers one mark. Victory: `_elite_won` (tier-2 find + gold) and the pack stays beaten for that floor's day; running leaves it patrolling. `tools/named_elites_check.gd`.

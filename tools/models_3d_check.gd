@@ -52,7 +52,8 @@ func _initialize() -> void:
 		var event: RoomEvent = load("res://data/events/%s.tres" % name)
 		var path: String = event.prop.resource_path if event.prop else ""
 		var node: Node3D = event.prop.instantiate() if event.prop else null
-		var ok: bool = path.contains("-3d-v1/") and path.get_file() == events[name] + ".tscn" and node != null and "state" in node
+		var is_model: bool = path.contains("-3d-v1/") or path.begins_with("res://art/dressing/mine-refined-v2/")
+		var ok: bool = is_model and path.get_file() == events[name] + ".tscn" and node != null and "state" in node
 		if ok:
 			root.add_child(node)
 			node.set("state", "empty")

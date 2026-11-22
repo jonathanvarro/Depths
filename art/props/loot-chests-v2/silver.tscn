@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3]
+[ext_resource type="Script" path="res://art/props/loot-chests-v2/prop.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/props/loot-chests-v2/silver-body.glb" id="silver-body"]
+[ext_resource type="PackedScene" path="res://art/props/loot-chests-v2/silver-lid.glb" id="silver-lid"]
+[ext_resource type="PackedScene" path="res://art/props/loot-chests-v2/contents.glb" id="contents"]
+
+[node name="LootChest" type="Node3D"]
+script=ExtResource("script")
+metadata/chest_type="silver"
+metadata/asset_id="chest-silver"
+[node name="Base" parent="." instance=ExtResource("silver-body")]
+[node name="LidPivot" type="Node3D" parent="."]
+position=Vector3(0,0.315,-0.3106857776641846)
+[node name="Model" parent="LidPivot" instance=ExtResource("silver-lid")]
+[node name="Contents" parent="." instance=ExtResource("contents")]
+visible=false

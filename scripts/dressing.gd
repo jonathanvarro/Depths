@@ -20,12 +20,12 @@ const Settings := preload("res://scripts/settings.gd")
 ## at floor level, wall pieces at the face with local +Z into the room,
 ## ceiling pieces at the roof.
 const GROWTH := "res://art/dressing/cave-growth-3d-v1/"
-const MINE := "res://art/dressing/mine-3d-v1/"
+const MINE := "res://art/dressing/mine-refined-v2/"
 const EXPEDITION := "res://art/props/expedition-3d-v1/"
 const BONES := "res://art/dressing/bone-decor-v1/"
 const MODELS := {
 	"mine-support": MINE + "support.tscn", "mine-support-damaged": MINE + "support-damaged.tscn",
-	"mine-rails": EXPEDITION + "rails.tscn", "mine-rails-broken": EXPEDITION + "rails-broken.tscn",
+	"mine-rails": MINE + "rails.tscn", "mine-rails-broken": MINE + "rails-broken.tscn",
 	"lantern-hanging": MINE + "lantern-hanging.tscn", "lantern-standing": MINE + "lantern-standing.tscn",
 	"stalactite-single": GROWTH + "stalactite-single.tscn", "stalactite-pair": GROWTH + "stalactite-single.tscn",
 	"stalactite-cluster": GROWTH + "stalactite-cluster.tscn",

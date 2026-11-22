@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3]
+[ext_resource type="Shader" path="res://art/materials/worked-props-v2/metal.gdshader" id="shader"]
+[resource]
+shader=ExtResource("shader")
+shader_parameter/tarnish=Color(0.2235,0.2353,0.2118,1.0)
+shader_parameter/corrosion=0.20
+shader_parameter/metalness=0.78

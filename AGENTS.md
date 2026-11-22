@@ -50,6 +50,14 @@ Templates > Download and Install; already installed on the owner's PC).
 
 ## Project structure
 
+- `docs/mine-polish-and-loot-chests.md` – #278/#279's refined supports,
+  lanterns, miners' shrine, workings and rails in `art/dressing/mine-refined-v2`,
+  now bound through Dressing/two event art paths. Common/silver/embellished gold
+  hinged chests are in `art/props/loot-chests-v2`; `art/props/chests-v1` wrappers
+  match the pending tier dispatcher. New surfaces use physical grain UVs and
+  vertex colours with `art/materials/worked-props-v2`, not palette-point UVs.
+  Review: `art/concepts/mine-polish-v2/inspector.html`. Old libraries remain.
+
 - `docs/rat-and-shrine-landmarks-3d.md` – #252/#251's first CC0 3D rat
   pilot (`art/enemies/rat-3d-v1`, 270 triangles, 21 bones, six short clips)
   and the three registered fresh/resolved shrine/well/cache scenes in

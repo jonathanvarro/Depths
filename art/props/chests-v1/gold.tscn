@@ -1,0 +1,3 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="PackedScene" path="res://art/props/loot-chests-v2/gold.tscn" id="chest"]
+[node name="GoldenChest" instance=ExtResource("chest")]

@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3]
+[ext_resource type="Script" path="res://art/props/loot-chests-v2/prop.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/props/loot-chests-v2/gold-body.glb" id="gold-body"]
+[ext_resource type="PackedScene" path="res://art/props/loot-chests-v2/gold-lid.glb" id="gold-lid"]
+[ext_resource type="PackedScene" path="res://art/props/loot-chests-v2/contents.glb" id="contents"]
+
+[node name="LootChest" type="Node3D"]
+script=ExtResource("script")
+metadata/chest_type="gold"
+metadata/asset_id="chest-gold"
+[node name="Base" parent="." instance=ExtResource("gold-body")]
+[node name="LidPivot" type="Node3D" parent="."]
+position=Vector3(0,0.315,-0.32198344230651854)
+[node name="Model" parent="LidPivot" instance=ExtResource("gold-lid")]
+[node name="Contents" parent="." instance=ExtResource("contents")]
+visible=false

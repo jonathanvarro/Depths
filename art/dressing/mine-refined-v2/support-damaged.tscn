@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="Script" path="res://art/dressing/mine-refined-v2/prop.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/dressing/mine-refined-v2/support-damaged.glb" id="support-damaged"]
+
+[node name="MineProp" type="Node3D"]
+script=ExtResource("script")
+metadata/asset_id="support-damaged"
+[node name="Model" parent="." instance=ExtResource("support-damaged")]

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Depths · Mine refinement and loot chests</title>
+<style>
+body{margin:0;background:#111613;color:#e8dfca;font:16px/1.5 system-ui,sans-serif}header,main,footer{max-width:1440px;padding:22px;margin:auto}h1{font-family:Georgia,serif;font-weight:500;color:#d7ba80;margin:0}p{max-width:95ch;color:#bfb8a7}a{color:#dec48d}.bar{display:flex;gap:12px;align-items:center;flex-wrap:wrap}select,button{font:inherit;color:#e8dfca;background:#262b20;border:1px solid #a78e58;padding:10px}select{max-width:100%}button{cursor:pointer}button:focus-visible,select:focus-visible{outline:2px solid #e2c990;outline-offset:3px}figure{margin:0}img{width:100%;height:auto;display:block;background:#070b09;border:1px solid #766441}figcaption{padding:12px 0;color:#c9c0aa}footer{border-top:1px solid #514832}
+</style>
+<header><h1>Depths · Worked timber, worn metal and loot chests</h1>
+<p>Eight refined mine props, plus common, silver and embellished golden chests. These are native Godot Mobile renders, including older-asset comparisons at the same camera and light, open/empty states and landscape phone views.</p>
+<div class="bar"><label for="view">View</label><select id="view"></select><button id="previous" aria-label="Previous view">←</button><button id="next" aria-label="Next view">→</button></div></header>
+<main><figure><img id="preview" alt=""><figcaption id="caption"></figcaption></figure></main>
+<footer><p><a href="../../../docs/mine-polish-and-loot-chests.md">Implementation, sources and rebuild</a> · <a href="../../dressing/mine-refined-v2/CREDITS.md">Mine credits</a> · <a href="../../props/loot-chests-v2/CREDITS.md">Chest credits</a> · <a href="validation.json">Native check report</a></p>
+<p>Existing seeded mine placement and event rules are preserved. Chest rarity and rewards remain controller-owned. Physical iPhone performance still needs device review. Captures were made on the private test desktop without foreground activation.</p></footer>
+<script>
+const views=[
+['chest-types','Three loot chest types','Common: rough wood and repair. Silver: higher lid and cold binding. Gold: tall arch, scrollwork and raised seal/lozenge.'],
+['support-neutral','Mine support · refined','Hewn timber, bearing blocks, packing shims and directional grain.'],
+['support-previous','Mine support · previous','The previous mesh and stone-style grain, at the refined model’s camera and light.'],
+['support-damaged-neutral','Damaged support','Crooked splint, repair plank, checks and worn fasteners. The central passage stays clear.'],
+['lantern-standing-neutral','Standing lantern · refined','Retained CC0 core, beveled frame, cage bars, vents and carrying bail.'],
+['lantern-standing-previous','Standing lantern · previous','The previous shape/material, under the same neutral lighting.'],
+['lantern-hanging-neutral','Hanging lantern','Bent protective bars and bracket stay; the top mount is retained.'],
+['miners-shrine-neutral','Miners’ shrine · refined','Pitted/chipped masonry, a more legible worn carving, cloth folds, wax and offerings.'],
+['miners-shrine-previous','Miners’ shrine · previous','The previous shape/material, at the same camera and light.'],
+['miners-shrine-spent','Miners’ shrine · spent','The base and carving stay registered while offerings/cloth are removed and candles shorten.'],
+['old-workings-neutral','Old workings','Broken rock, mineral seams, hewn trough boards and a crooked pick.'],
+['old-workings-spent','Old workings · picked clean','Ore removed; scrape marks remain. Outcome and loot remain game-owned.'],
+['rails-neutral','Rails · refined','Shoes, fishplates, bolts, timber checks and worked rail heads.'],
+['rails-previous','Rails · previous','The former rails at the same camera and neutral lighting.'],
+['rails-broken-neutral','Broken rails','A curved lifted end, split sleeper and consistent section registration.'],
+['chest-common-closed','Common chest · closed','Low wooden lid, dark iron and an old repair board.'],
+['chest-common-open','Common chest · open','Real hinged lid and decorative contents.'],
+['chest-common-empty','Common chest · empty','Exact open pose, with decorative contents hidden.'],
+['chest-silver-closed','Silver chest · closed','Cold metal guards and trim, a higher lid and central rib.'],
+['chest-silver-open','Silver chest · open','Registered lid pivot; worn wood inside.'],
+['chest-silver-empty','Silver chest · empty','The same state interface as common and gold.'],
+['chest-gold-closed','Golden chest · closed','Raised chasing, lid seal and lozenge, ornate lock, scrolls and corner guards.'],
+['chest-gold-open','Golden chest · open','Lid decoration follows the actual curved source shell.'],
+['chest-gold-empty','Golden chest · empty','The decorative bundle and coins are hidden after emptying.'],
+['chest-gold-phone','Golden chest · phone, cave light','Landscape phone framing with the existing warm light; no tier-glint light is added by the art.'],
+['mine-corridor-desktop','First-person mine','Real LevelBuilder/Dressing geometry and the party eye height.'],
+['mine-corridor-phone-844','First-person mine · phone','844×390 landscape.']
+];
+const selector=document.querySelector('#view'),image=document.querySelector('#preview'),caption=document.querySelector('#caption');
+for(const [id,title] of views){const option=document.createElement('option');option.value=id;option.textContent=title;selector.append(option)}
+function show(index){index=(index+views.length)%views.length;selector.selectedIndex=index;const [id,title,text]=views[index];image.src='captures/'+id+'.png';image.alt=title;caption.textContent=text;history.replaceState(null,'','#'+id)}
+selector.onchange=()=>show(selector.selectedIndex);document.querySelector('#previous').onclick=()=>show(selector.selectedIndex-1);document.querySelector('#next').onclick=()=>show(selector.selectedIndex+1);
+show(Math.max(0,views.findIndex(([id])=>id===location.hash.slice(1))));
+</script></html>

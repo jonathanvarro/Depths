@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="Script" path="res://art/dressing/mine-refined-v2/prop.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/dressing/mine-refined-v2/lantern-standing.glb" id="lantern-standing"]
+
+[node name="MineProp" type="Node3D"]
+script=ExtResource("script")
+metadata/asset_id="lantern-standing"
+[node name="Model" parent="." instance=ExtResource("lantern-standing")]

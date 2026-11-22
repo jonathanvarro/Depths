@@ -1,0 +1,15 @@
+[gd_scene load_steps=6 format=3]
+[ext_resource type="Script" path="res://art/dressing/mine-refined-v2/prop.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/dressing/mine-refined-v2/shrine-base.glb" id="shrine-base"]
+[ext_resource type="PackedScene" path="res://art/dressing/mine-refined-v2/offerings-fresh.glb" id="offerings-fresh"]
+[ext_resource type="PackedScene" path="res://art/dressing/mine-refined-v2/offerings-spent.glb" id="offerings-spent"]
+[ext_resource type="PackedScene" path="res://art/dressing/mine-refined-v2/flames.glb" id="flames"]
+
+[node name="MinersShrine" type="Node3D"]
+script=ExtResource("script")
+metadata/asset_id="miners-shrine"
+[node name="Base" parent="." instance=ExtResource("shrine-base")]
+[node name="Fresh" parent="." instance=ExtResource("offerings-fresh")]
+[node name="Spent" parent="." instance=ExtResource("offerings-spent")]
+visible=false
+[node name="Flames" parent="." instance=ExtResource("flames")]
