@@ -10,6 +10,7 @@ extends Node
 ##   of the passage ahead, beyond the lantern - or, rarer, a shadow passes -
 ##   and are gone again, sooner if you move.
 ## - Dust hangs in a good lantern's light.
+## - Small bats, mice and falling ceiling dust visit the upper two floors (#266).
 ## With screen flashes off (Settings) the darkness holds still and the dust
 ## is left out. Everything is hidden in fights, the opening and at camp.
 
@@ -19,6 +20,7 @@ const Settings := preload("res://scripts/settings.gd")
 const DIR := "res://art/effects/ambient-v1/"
 const DARKNESS := preload("res://art/effects/ambient-v1/darkness.tres")
 const MIST := preload("res://art/effects/exploration-mist-v1/mist.tscn")
+const MineLife := preload("res://scripts/mine_life.gd")
 const EYES := ["eyes-rat", "eyes-cluster", "eyes-unknown"]
 const EYE_HEIGHTS := {"eyes-rat": 0.3, "eyes-cluster": 0.7, "eyes-unknown": 1.45, "shadow": 1.0}
 ## How strongly the darkness closes in, by light and by the worst nerves.
@@ -46,6 +48,7 @@ var _until_sighting := 0.0
 var _fog: Node3D
 var _dust: Array[AnimatedSprite3D] = []
 var _rng := RandomNumberGenerator.new()
+var mine_life: Node3D
 
 
 func _init() -> void:
@@ -64,6 +67,9 @@ func _init() -> void:
 
 ## Called once the party exists: the fog and dust travel with it.
 func attach(party: Node3D, camera: Camera3D) -> void:
+	mine_life = MineLife.new()
+	mine_life.main = main
+	add_child(mine_life)
 	_fog = MIST.instantiate()
 	_fog.top_level = true  # level with the floor, whatever the camera does
 	party.add_child(_fog)
