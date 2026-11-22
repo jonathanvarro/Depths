@@ -13,6 +13,12 @@ Format:
 
 ---
 
+## 2026-11-21 – Claude (recruitment fire lineup)
+
+- Did: owner request. The fire shows recruits as condensed cards on the left and the party lineup on the right: Front and Back rows, three places each, with face, name and health. Click a recruit (or drag their card) then a place: an open place hires them into that row (`CampState.hire_into`), an occupied one swaps them (`CampState.swap`: the member goes back to wait by the fire; the founder stays). Click a member then a place to move rows (trading places with whoever is there); a picked member gets Dismiss. Invite still works. Cards/tiles are PanelContainers with a see-through overlay button (`_overlay`) so they size from their contents. recruit_check/camp_check updated; desktop and phone captures checked.
+- Next: owner tries it.
+- Watch out: rows set here are the starting rows for fights (Companion.row).
+
 ## 2026-11-21 – Claude (smoother 3D model animation)
 
 - Did: owner request. `scripts/anim_tidy.gd`, called by the three model actor scripts (combat-roster, field-creatures, rat): moves now cross-fade (0.14s; hurt 0.06s) instead of snapping, a repeated one-shot (two attacks in a row) starts over, and bone flips are spread over neighbouring keys along the shortest turn. The flips were in the shared goblin `fall` (spine and left leg turning 100-144 degrees in one frame, on all eight goblin-base models). Still mode is unchanged (exact frames). Loop seams were already clean. `tools/animation_audit.gd` lists each clip's biggest step; `tools/animation_smooth_check.gd`.

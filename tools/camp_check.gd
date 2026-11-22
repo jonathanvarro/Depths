@@ -181,7 +181,8 @@ func _initialize() -> void:
 	check("the campfire fits without scrolling, recruits as cards", await _fits(), str(main._camp._scroll.get_v_scroll_bar().max_value))
 	var edge: float = main._camp._scroll.get_global_rect().end.x
 	var cards: Array = main._camp._body.find_children("*", "PanelContainer", true, false)
-	check("...all three cards inside the panel", cards.size() == 3 and cards.all(func(c): return c.get_global_rect().end.x <= edge + 1.0), str(cards.map(func(c): return c.get_global_rect().end.x)) + " vs %.0f" % edge)
+	var recruit_cards: Array = cards.filter(func(c): return c.find_children("*", "Button", true, false).any(func(b): return b.text == "Invite"))
+	check("...all three cards (and the party lineup) inside the panel", recruit_cards.size() == 3 and cards.all(func(c): return c.get_global_rect().end.x <= edge + 1.0), str(cards.map(func(c): return c.get_global_rect().end.x)) + " vs %.0f" % edge)
 	await _snap("fire")
 
 	# Cave path -> preparation -> a new cave.

@@ -253,6 +253,34 @@ func hire(party, recruit: Companion) -> bool:
 	return true
 
 
+## Invites `recruit` into the party's `row` ("front"/"back"), or in their
+## own row when "" (owner, 2026-11-21: the fire's party lineup).
+func hire_into(party, recruit: Companion, row := "") -> bool:
+	if not hire(party, recruit):
+		return false
+	if row != "":
+		party.members[-1].row = row
+	return true
+
+
+## Swaps `out` for `recruit` in the same row; `out` goes back to wait by
+## the fire. The founder stays.
+func swap(party, out: Companion, recruit: Companion) -> bool:
+	if out.founder or out not in party.members or recruit not in candidates:
+		return false
+	var row: String = out.row
+	party.remove_member(out)
+	recovering.erase(out)
+	if not hire(party, recruit):
+		party.members.append(out)
+		party.update_capacity()
+		return false
+	party.members[-1].row = row
+	candidates.push_front(out)
+	changed.emit()
+	return true
+
+
 ## Sends a recruit away for good. The founder (Mara) stays.
 func dismiss(party, hero: Companion) -> bool:
 	if hero.founder or hero not in party.members:

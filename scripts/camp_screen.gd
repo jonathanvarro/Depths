@@ -71,6 +71,10 @@ var _merchant_view: Control
 var _smith_view: Control  # the smith on the same exchange (owner, 2026-10-31)
 var _stash_view: Control  # the tent's Store (owner, 2026-10-25)
 var _last_site := ""
+## The fire's lineup (owner, 2026-11-21): a recruit or party member picked,
+## waiting for a place in the party to be chosen.
+var _picked_recruit: Companion
+var _picked_member: Companion
 var _save_button: Button
 var _settings_button: Button
 var _pack_button: Button
@@ -458,6 +462,8 @@ func open_activity(id: String) -> void:
 	if id!="smith":_smith_view.hide()
 	_stash_view.hide()
 	_current = id
+	_picked_recruit = null
+	_picked_member = null
 	if id == "rest" and not _camp.tent_seen:
 		_camp.tent_seen = true
 	if _note_tween:
@@ -852,27 +858,210 @@ func _fire() -> void:
 	var talking: bool = _sites.keys().any(func(site): return Story.camp_talk(_camp, site) != "")
 	if orders <= 1 and not talking:
 		_small(_rumour(), MUTED)  # room for the camp's chatter
-	_body.add_child(_label("By the fire" if not _camp.candidates.is_empty() else "No one is by the fire today.", ACTION, 13, AMBER if not _camp.candidates.is_empty() else MUTED))
+	# Recruits on the left, the party's lineup on the right (owner,
+	# 2026-11-21): pick (or drag) someone, then the place they should take.
+	var split := HBoxContainer.new()
+	split.add_theme_constant_override("separation", 10)
+	var left := VBoxContainer.new()
+	left.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	left.size_flags_stretch_ratio = 1.8
+	left.add_theme_constant_override("separation", 4)
+	split.add_child(left)
+	left.add_child(_label("By the fire" if not _camp.candidates.is_empty() else "No one is by the fire today.", ACTION, 13, AMBER if not _camp.candidates.is_empty() else MUTED))
 	if not _camp.candidates.is_empty():
 		var cards := HBoxContainer.new()
-		cards.add_theme_constant_override("separation", 8)
+		cards.add_theme_constant_override("separation", 6)
 		for recruit: Companion in _camp.candidates:
 			cards.add_child(_recruit_card(recruit, full))
-		_body.add_child(cards)
-	var party := HFlowContainer.new()
-	party.add_theme_constant_override("h_separation", 8)
-	party.add_theme_constant_override("v_separation", 4)
-	party.add_child(_label("Party:" if not _party.members.is_empty() else "Party: no one yet. Invite someone.", ACTION, 13, TEXT if not _party.members.is_empty() else AMBER))
-	for hero: Companion in _party.members:
-		party.add_child(_label("%s (%d/%d)" % [hero.display_name, hero.health, hero.effective_max_health()], BODY, 12, TEXT))
-		if not hero.founder:
-			var dismiss := _button("Dismiss")
-			dismiss.tooltip_text = "Send %s away" % hero.display_name
-			dismiss.pressed.connect(func():
-				_camp.dismiss(_party, hero)
-				_refresh_activity())
-			party.add_child(dismiss)
-	_body.add_child(party)
+		left.add_child(cards)
+		left.add_child(_clipped(_lineup_hint(), 10, AMBER if _lineup_note != "" else MUTED))
+	_lineup_note = ""
+	split.add_child(_lineup())
+	_body.add_child(split)
+
+
+var _lineup_note := ""
+
+## What picking does next, in a line.
+func _lineup_hint() -> String:
+	if _lineup_note != "":
+		return _lineup_note
+	if _picked_recruit:
+		return "%s: now choose a place in your party%s." % [_picked_recruit.display_name, " (swaps them)" if _party.free_slots() <= 0 else ""]
+	if _picked_member:
+		return "%s: choose a place to move to." % _picked_member.display_name
+	return "Pick someone (or drag them) into a place in your party."
+
+
+## The party as it stands in a fight: front row above, back row below,
+## three places each. Places are where picked or dragged people go.
+func _lineup() -> Control:
+	var panel := PanelContainer.new()
+	var plate := StyleBoxFlat.new()
+	plate.bg_color = Color(0.05, 0.05, 0.04, 0.85)
+	plate.border_color = Color(AMBER, 0.3)
+	plate.set_border_width_all(1)
+	plate.set_content_margin_all(5)
+	panel.add_theme_stylebox_override("panel", plate)
+	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	panel.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+	var box := VBoxContainer.new()
+	box.add_theme_constant_override("separation", 3)
+	panel.add_child(box)
+	var head := HBoxContainer.new()
+	head.add_child(_label("Your party", ACTION, 13, AMBER if _party.members.is_empty() else TEXT))
+	var count := _label("%d/%d" % [_party.members.size(), _party.MAX_MEMBERS], BODY, 10, MUTED)
+	count.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	count.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	head.add_child(count)
+	box.add_child(head)
+	for row in ["front", "back"]:
+		var line := HBoxContainer.new()
+		line.add_theme_constant_override("separation", 3)
+		var tag := _label("Front" if row == "front" else "Back", BODY, 10, MUTED)
+		tag.custom_minimum_size = Vector2(30, 0)
+		tag.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		line.add_child(tag)
+		var in_row: Array = _party.members.filter(func(h: Companion): return h.row == row)
+		for i in _party.MAX_MEMBERS:
+			line.add_child(_place(in_row[i] if i < in_row.size() else null, row))
+		box.add_child(line)
+	if _picked_member and not _picked_member.founder:
+		var dismiss := _button("Dismiss")
+		dismiss.tooltip_text = "Send %s away for good" % _picked_member.display_name
+		dismiss.accessibility_name = dismiss.tooltip_text
+		dismiss.pressed.connect(func():
+			_camp.dismiss(_party, _picked_member)
+			_picked_member = null
+			_refresh_activity())
+		box.add_child(dismiss)
+	return panel
+
+
+## One place in the lineup: a member's face, name and health, or an open
+## place (if the party has room). Click or drop to fill, swap or move.
+func _place(hero: Companion, row: String) -> Control:
+	var panel := PanelContainer.new()
+	panel.custom_minimum_size = Vector2(44, 0)
+	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	var picked: bool = hero != null and hero == _picked_member
+	var open: bool = hero == null and (_party.free_slots() > 0 or _picked_member != null)
+	var look := StyleBoxFlat.new()
+	look.bg_color = Color(0.09, 0.08, 0.06, 0.95) if hero else Color(0.04, 0.04, 0.03, 0.6)
+	look.border_color = AMBER if picked else Color(AMBER, 0.55 if hero else (0.3 if open else 0.12))
+	look.set_border_width_all(2 if picked else 1)
+	look.set_content_margin_all(2)
+	panel.add_theme_stylebox_override("panel", look)
+	var box := VBoxContainer.new()
+	box.add_theme_constant_override("separation", 0)
+	box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	panel.add_child(box)
+	var tile := _overlay(panel)
+	if hero:
+		var face := TextureRect.new()
+		face.texture = hero.portrait
+		face.custom_minimum_size = Vector2(0, 30)
+		face.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		face.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		face.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		box.add_child(face)
+		var who := _clipped(hero.display_name, 9, TEXT)
+		who.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		box.add_child(who)
+		var hp := _clipped("%d/%d" % [hero.health, hero.effective_max_health()], 8, MUTED)
+		hp.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		box.add_child(hp)
+		tile.tooltip_text = "%s, %s, %s row%s" % [hero.display_name, hero.role, row, "" if hero.founder else ". Pick to move or dismiss"]
+	else:
+		var label := _label("Open" if open else "", BODY, 9, MUTED)
+		label.custom_minimum_size = Vector2(0, 54)
+		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		box.add_child(label)
+		tile.tooltip_text = "Open place, %s row" % row
+	tile.accessibility_name = tile.tooltip_text
+	tile.pressed.connect(func(): _place_chosen(hero, row))
+	tile.set_drag_forwarding(
+		func(_at): return _drag_member(hero),
+		func(_at, data): return data is Dictionary and (data.has("recruit") or data.has("member")),
+		func(_at, data): _drop_on_place(data, hero, row))
+	return panel
+
+
+## A flat, see-through button laid over a panel's contents: it takes the
+## clicks, drags and focus, and the panel keeps its size from what's in it.
+func _overlay(panel: PanelContainer) -> Button:
+	var button := Button.new()
+	button.flat = true
+	var clear := StyleBoxEmpty.new()
+	var ring := StyleBoxFlat.new()
+	ring.bg_color = Color(AMBER, 0.08)
+	ring.border_color = AMBER
+	ring.set_border_width_all(1)
+	button.add_theme_stylebox_override("normal", clear)
+	button.add_theme_stylebox_override("disabled", clear)
+	button.add_theme_stylebox_override("hover", ring)
+	button.add_theme_stylebox_override("pressed", ring)
+	button.add_theme_stylebox_override("focus", ring)
+	button.pressed.connect(func(): Sounds.play(self, "ui", -12.0, 0.0))
+	panel.add_child(button)
+	return button
+
+
+func _drag_member(hero: Companion):
+	if hero == null:
+		return null
+	_drag_preview(hero)
+	return {"member": hero}
+
+
+func _drop_on_place(data: Dictionary, hero: Companion, row: String) -> void:
+	if data.has("recruit"):
+		_picked_recruit = data["recruit"]
+		_picked_member = null
+	else:
+		_picked_member = data["member"]
+		_picked_recruit = null
+	_place_chosen(hero, row)
+
+
+## A place clicked (or dropped on): fills, swaps or moves what's picked;
+## with nothing picked, picks the member standing there (to move them, or
+## to dismiss them).
+func _place_chosen(hero: Companion, row: String) -> void:
+	if _picked_recruit and _picked_recruit in _camp.candidates:
+		if hero == null:
+			if _party.free_slots() <= 0:
+				_lineup_note = "The party is full: choose someone to swap."
+				_refresh_activity()
+				return
+			_camp.hire_into(_party, _picked_recruit, row)
+		elif not hero.founder:
+			_camp.swap(_party, hero, _picked_recruit)
+		else:
+			_lineup_note = "%s leads the party and stays: choose another place." % hero.display_name
+			_refresh_activity()
+			return
+		_picked_recruit = null
+	elif _picked_member and _picked_member in _party.members:
+		if hero and hero != _picked_member:
+			hero.row = _picked_member.row  # trade places
+		_picked_member.row = row
+		_picked_member = null
+		_party.changed.emit()
+	elif hero:
+		_picked_member = hero
+	_refresh_activity()
+
+
+func _drag_preview(hero: Companion) -> void:
+	var face := TextureRect.new()
+	face.texture = hero.portrait
+	face.size = Vector2(48, 48)
+	face.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	face.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	face.modulate.a = 0.85
+	set_drag_preview(face)
 
 
 ## A recruit as a small card (owner, 2026-10-25): face, name and role,
@@ -880,50 +1069,66 @@ func _fire() -> void:
 ## word each, and Invite. Four fit across; the details are on hover.
 func _recruit_card(recruit: Companion, full: bool) -> Control:
 	var card := PanelContainer.new()
+	var picked := recruit == _picked_recruit
 	var plate := StyleBoxFlat.new()
 	plate.bg_color = Color(0.07, 0.06, 0.05, 0.9)
-	plate.border_color = Color(AMBER, 0.45)
-	plate.set_border_width_all(1)
-	plate.set_content_margin_all(5)
+	plate.border_color = AMBER if picked else Color(AMBER, 0.45)
+	plate.set_border_width_all(2 if picked else 1)
+	plate.set_content_margin_all(4)
 	card.add_theme_stylebox_override("panel", plate)
 	card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	card.size_flags_stretch_ratio = 1.0
 	var damage := str(recruit.attack_min) if recruit.attack_min == recruit.attack_max else "%d-%d" % [recruit.attack_min, recruit.attack_max]
-	card.tooltip_text = "%s
+	var box := VBoxContainer.new()
+	box.add_theme_constant_override("separation", 3)
+	card.add_child(box)
+	# Face and details are one flat button: click to pick them, or drag
+	# them onto a place in the party (owner, 2026-11-21).
+	var info := PanelContainer.new()
+	info.add_theme_stylebox_override("panel", StyleBoxEmpty.new())
+	box.add_child(info)
+	var pick := _overlay(info)
+	pick.tooltip_text = "%s
 %s
 Strength: %s
 Weakness: %s
-%d health · %s damage · %d%% to hit · speed %d" % [recruit.personality, Recruits.perk(recruit.role), recruit.strength, recruit.weakness, recruit.max_health, damage, roundi(recruit.accuracy * 100), recruit.initiative]
-	var box := VBoxContainer.new()
-	box.add_theme_constant_override("separation", 1)
-	card.add_child(box)
+%d health · %s damage · %d%% to hit · speed %d · %s row" % [recruit.personality, Recruits.perk(recruit.role), recruit.strength, recruit.weakness, recruit.max_health, damage, roundi(recruit.accuracy * 100), recruit.initiative, recruit.row]
+	pick.accessibility_name = "Pick %s, %s" % [recruit.display_name, recruit.role]
+	pick.pressed.connect(func():
+		_picked_recruit = null if picked else recruit
+		_picked_member = null
+		_refresh_activity())
+	pick.set_drag_forwarding(func(_at):
+		_drag_preview(recruit)
+		return {"recruit": recruit}, Callable(), Callable())
 	var top := HBoxContainer.new()
 	top.add_theme_constant_override("separation", 4)
+	top.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	info.add_child(top)
+	info.move_child(top, 0)  # under the see-through button
 	var face := TextureRect.new()
 	face.texture = recruit.portrait
-	face.custom_minimum_size = Vector2(30, 30)
+	face.custom_minimum_size = Vector2(34, 34)
 	face.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	face.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	face.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	top.add_child(face)
 	var who := VBoxContainer.new()
 	who.add_theme_constant_override("separation", 0)
 	who.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	var name_label := _label(recruit.display_name, ACTION, 12, TEXT)
-	name_label.clip_text = true
-	who.add_child(name_label)
-	who.add_child(_clipped(recruit.role, 10, MUTED))
-	top.add_child(who)
-	box.add_child(top)
-	box.add_child(_clipped("%d hp · %s dmg" % [recruit.max_health, damage], 10, MUTED))
-	box.add_child(_clipped(Recruits.perk_name(recruit.role), 10, TEXT))
+	who.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	who.add_child(_clipped("%s · %s" % [recruit.display_name, recruit.role], 11, TEXT))
+	who.add_child(_clipped("%d hp · %s dmg · %s" % [recruit.max_health, damage, Recruits.perk_name(recruit.role)], 9, MUTED))
 	var strengths := Array(recruit.strength.split("; ")).map(func(t: String): return t.get_slice(" (", 0))
-	box.add_child(_clipped("+ %s" % ", ".join(strengths), 10, AMBER))  # named: two (#180)
-	box.add_child(_clipped("- %s" % recruit.weakness.get_slice(" (", 0), 10, AMBER))
+	who.add_child(_clipped("+ %s" % ", ".join(strengths), 9, AMBER))  # named: two (#180)
+	who.add_child(_clipped("- %s" % recruit.weakness.get_slice(" (", 0), 9, MUTED))
+	top.add_child(who)
 	var invite := _button("Full" if full else "Invite")
 	invite.disabled = full
+	invite.custom_minimum_size = Vector2(0, 24)
 	invite.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	invite.pressed.connect(func():
 		_camp.hire(_party, recruit)
+		_picked_recruit = null
 		_refresh_activity())
 	box.add_child(invite)
 	return card
