@@ -19,6 +19,12 @@ Format:
 - Next: owner looks at it in play; if a strike now feels soft, lower `BLEND`.
 - Watch out: the fix is applied at load to the imported clips, not in the .glb/Blender sources; a re-export keeps the flips in the files but the helper still evens them out.
 
+## 2026-11-21 – ChatGPT (skill layout and gothic menu concepts, #268/#269)
+
+- Did: selectable `art/concepts/interface/skill-tree-v1/inspector.html`: shared class-training seals above larger personal traits, portrait selection, hover/pinned inspection and phone tap cards. Corin/Branna show the same Melee training with different personal paths; Mara/Alwen include Scout/Mage alternatives. Three gothic button studies in `art/concepts/interface/gothic-buttons-v1/inspector.html` each show flat-left, double-beveled and flat-right placement variants. Nine scalable original frames, source generator and review captures included. See `docs/skill-tree-concept.md`.
+- Next: owner reviews the layout and chooses a button treatment before any live UI hookup. Reliquary brass is the suggested gothic option; iron is quieter. Keep production corner widths fixed when adapting to Godot.
+- Watch out: concepts only. Current skills remain permanent and expedition levels temporary. New rank counts, bonuses, critical mechanics, Branna traits, extra personal slots and story unlocks are proposals. No live screens, rules, saves or character resources changed. Chrome review fits both skill sections at landscape-phone sizes; physical iPhone review remains.
+
 ## 2026-11-21 – Claude (Skip the tutorial on the title)
 
 - Did: owner request. The title has "Skip the tutorial": it opens the hero screen, then starts a new game at camp after the commander's first talk, as the escape leaves it (the hero has the fallen companion's weapon, starting supplies and the same partial camp). `SaveGame.skip_opening`, main `_skip_opening`. `tools/skip_opening_check.gd`.
