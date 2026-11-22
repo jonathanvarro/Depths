@@ -57,8 +57,10 @@ states, a fixed floor root and a real rear hinge. Front is local +Z.
 | gold | 3,128 | 3,528 | Tall arched lid, gold scrollwork, seal/lozenge, embellished lock and cornerwork |
 
 `art/props/chests-v1/common.tscn`, `silver.tscn` and `gold.tscn` are compatibility
-wrappers for the paths already expected by Claude's pending chest-tier
-dispatcher. They inherit the same state API and fixed tier metadata. This art
+wrappers for the paths used by Claude's chest-tier dispatcher. They inherit
+the same state API and fixed tier metadata; silver/gold select their own models
+without the fallback glint. Common still uses each event's distinct prop unless
+the caller explicitly selects the common chest. This art
 pass does not alter that dispatcher's placement, loot, rewards or save rules.
 `loot-chests-v2/library.gd` also offers an explicit scene lookup, returning null
 for unknown types rather than choosing a rarity on behalf of the caller.
@@ -92,13 +94,19 @@ involved. Editable component Blender masters remain local under
    the screenshot/report folder. `capture.gd` creates the neutral/cave review
    and same-camera older-asset comparisons.
 
-251 native checks pass, covering actual mesh/UV/colour data, triangle/surface budgets,
+260 native checks pass, covering actual mesh/UV/colour data, triangle/surface budgets,
 support clearance, mounts, fresh/spent registration, glow/still behavior,
 hinged states and interrupted motion, dispatcher wrappers and live binding
 paths. The existing complete `models_3d_check.gd` also passes its nine checks, including real
 floor dressing and event states. Desktop and landscape phone captures are
 made with the Mobile/D3D12 renderer on the private desktop without foreground
 activation. Physical iPhone performance remains a device-review step.
+
+After merging the chest-tier implementation, its 12 gameplay checks also pass:
+puzzle/lair silver hoards, named-pack gold hoards, rewards and saved tier
+restoration. The 260 asset checks explicitly exercise the real dispatcher and
+verify the returned models, lack of fallback-glint lights and restored empty
+poses. The gallery passes 31 browser checks.
 
 Review gallery: `art/concepts/mine-polish-v2/inspector.html`. Full native output
 stays local under `build/local-mine-polish-v2`.

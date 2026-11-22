@@ -4,6 +4,7 @@ const DRESSING := preload("res://scripts/dressing.gd")
 const MAP := preload("res://scripts/dungeon_map.gd")
 const LEVEL := preload("res://scripts/level_builder.gd")
 const LIBRARY := preload("res://art/props/loot-chests-v2/library.gd")
+const TIERS := preload("res://scripts/chest_tiers.gd")
 var checks := 0
 var failures: Array[String] = []
 
@@ -79,6 +80,12 @@ func run() -> void:
 		var compatible: Node3D=load("res://art/props/chests-v1/"+tier+".tscn").instantiate()
 		check(compatible.get_meta("chest_type")==tier and compatible.has_method("set_state"),"tier dispatcher compatibility scene")
 		compatible.free()
+		var dispatched: Node3D=TIERS.prop(tier,null)
+		check(dispatched!=null and dispatched.get_meta("chest_type")==tier,"live tier dispatcher selects the new model")
+		check(dispatched.find_children("*","Light3D",true,false).is_empty(),"new tier art replaces the fallback glint")
+		dispatched.state="empty";dispatched.set_motion(false);stage.add_child(dispatched)
+		check(not dispatched.get_node("Contents").visible and is_equal_approx(dispatched.get_node("LidPivot").rotation.x,deg_to_rad(-102)),"dispatched chest restores its empty state")
+		dispatched.free()
 		paths.append(subject.get_node("Base").scene_file_path)
 		var report:=stats(subject)
 		check(report.triangles<4000,tier+" closed chest budget")

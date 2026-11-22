@@ -210,12 +210,15 @@ static func _side_room(rows: PackedStringArray, rng: RandomNumberGenerator, used
 	# lever's gate keeps a nest shut in with it.
 	var cells: Array = room["inside"].filter(func(c): return _at(rows, c) == ",")
 	cells.sort_custom(func(a, b): return from_door.get(a, 0) > from_door.get(b, 0))
-	if not room["inside"].any(func(c): return _at(rows, c) == "C"):
-		_put(rows, cells[0], "C")
+	# The chest behind it is silver (chest_tiers.gd): an existing one, or a new one.
+	var chests: Array = room["inside"].filter(func(c): return _at(rows, c) == "C")
+	var chest: Vector2i = chests[0] if not chests.is_empty() else cells[0]
+	if chests.is_empty():
+		_put(rows, chest, "C")
 	var nest: bool = kind == "lever" and depth >= NEST_FROM and cells.size() > 2
 	if nest and not room["inside"].any(func(c): return _at(rows, c) == "E"):
 		_put(rows, cells[cells.size() / 2], "E")
-	var puzzle := {"kind": kind, "door": door, "open": false}
+	var puzzle := {"kind": kind, "door": door, "open": false, "chest": chest}
 	if kind == "lever":
 		puzzle["lever"] = best
 		puzzle["nest"] = nest

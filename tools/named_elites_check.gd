@@ -131,11 +131,11 @@ func _initialize() -> void:
 	check("run from it, and it walks on, not gone", group in main._groups and not group.noticed)
 	main._elite_id = group.named
 	main._engaged = group
-	var gold: int = main._party_state.supplies.gold
-	var gear: int = main._party_state.supplies.gear.size() + main._camp_state.stash.gear.size()
+	var chests_before: Array = main._map.contents.keys()
 	main._elite_won()
 	main._map_fight_over(true)
-	check("beaten: a hoard of gold and a find", main._party_state.supplies.gold > gold and main._party_state.supplies.gear.size() + main._camp_state.stash.gear.size() > gear)
+	var left: Array = main._map.contents.keys().filter(func(c): return c not in chests_before)
+	check("beaten: its hoard, a gilded chest, is left where it fell", left.size() == 1 and load("res://scripts/chest_tiers.gd").tier_at(main._map, left[0]) == "gold", left)
 	check("...and it doesn't come back on this floor today", main._map.marks["elite"]["beaten"] and not main._groups.any(func(g): return g.named != ""))
 	main._spawn_room_groups()
 	check("...even when the floor's monsters are set out again", not main._groups.any(func(g): return g.named != ""))

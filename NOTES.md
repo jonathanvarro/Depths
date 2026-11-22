@@ -15,9 +15,16 @@ Format:
 
 ## 2026-11-22 – ChatGPT (mine shape/material pass and three loot chest types, #278/#279)
 
-- Did: refined eight mine scenes (supports, standing/hanging lanterns, miners' shrine, old workings and rails) with hewn/chipped shapes, joinery/repairs, worn metal and metre-scaled directional grain. Dressing and two event art paths now use the new family. Added common/silver/embellished gold chests with distinct profiles/fittings and registered closed/open/empty lid states. `art/props/chests-v1/{common,silver,gold}.tscn` wrappers match the paths in Claude's pending chest-tier dispatcher. Review/source/rebuild notes: `docs/mine-polish-and-loot-chests.md` and `art/concepts/mine-polish-v2/inspector.html`.
-- Next: review/merge `codex/mine-polish-and-loot-chests`. Physical iPhone performance remains. Chest rarity/reward assignment stays with the game dispatcher.
+- Did: refined eight mine scenes (supports, standing/hanging lanterns, miners' shrine, old workings and rails) with hewn/chipped shapes, joinery/repairs, worn metal and metre-scaled directional grain. Dressing and two event art paths now use the new family. Added common/silver/embellished gold chests with distinct profiles/fittings and registered closed/open/empty lid states. `art/props/chests-v1/{common,silver,gold}.tscn` wrappers match Claude's chest-tier dispatcher; silver/gold now select their own models. Review/source/rebuild notes: `docs/mine-polish-and-loot-chests.md` and `art/concepts/mine-polish-v2/inspector.html`.
+- Next: review/merge PR #280 (`codex/mine-polish-and-loot-chests`). Physical iPhone performance remains. Chest rarity/reward assignment stays with the game dispatcher. After merging the tier code, all 260 art checks, 12 tier-gameplay checks and the gallery checks pass.
 - Watch out: new meshes use physical UVs/UV2 and vertex colours with separate shared material families, not palette-point UVs. Keep old atlases off them. Verified CC0 originals and earlier libraries remain intact; editable Blender masters stay local. Active game-design edits in the main checkout were left untouched.
+
+## 2026-11-22 – Claude (chest tiers: common, silver, gold)
+
+- Did: owner request (ChatGPT is making the chest art in parallel). `scripts/chest_tiers.gd`: a chest's tier is `map.marks["chest_tiers"][cell]` (absent = common). Common keeps its event's contents and the old chance of a find; silver adds a certain one-modifier find, 10 + 5 x floor gold and a 35% trinket; gold a two-modifier find plus a second find, 30 + 12 x floor gold and a 70% trinket (`ChestTiers.LOOT`, main `_open_tiered`). Silver: the chest behind every lever/key puzzle (`puzzle["chest"]`, event `data/events/chest_silver_hoard.tres`) and a lair's hoard. Gold: a named elite pack's hoard and the Goblin King's (on top of his unique trinket). Hoards are real chests left where the fight ended (`main._drop_chest`). `tools/chest_tiers_check.gd`.
+- For ChatGPT's art: put the scenes at `art/props/chests-v1/common.tscn`, `silver.tscn`, `gold.tscn` (floor-centred, front +Z like the other props, with a `state` property taking "closed" / "empty" as `expedition-3d-v1/chest.tscn` does). Silver and gold are picked up automatically; until then they're the expedition chest with a silver or gold glint. Common chests still use each event's own prop (strongbox, pack, workings); swapping those to the common chest is a one-line follow-up.
+- Next: owner plays; tune `ChestTiers.LOOT` if hoards feel too rich or thin.
+- Watch out: hoard events have min_depth 99 so they never come up as ordinary chests.
 
 ## 2026-11-22 – Claude (named elite packs, #277)
 
