@@ -23,7 +23,7 @@ G=importlib.util.module_from_spec(spec)
 spec.loader.exec_module(G)
 parser=argparse.ArgumentParser()
 parser.add_argument('--workspace',type=Path,required=True)
-args=parser.parse_args(sys.argv[sys.argv.index('--')+1:])
+args=parser.parse_args(sys.argv[sys.argv.index('--')+1:]) if __name__=='__main__' else argparse.Namespace(workspace=ROOT)
 preview_types={item.identifier for item in bpy.context.preferences.filepaths.bl_rna.properties['file_preview_type'].enum_items}
 if 'NONE' in preview_types:bpy.context.preferences.filepaths.file_preview_type='NONE'
 MINE=ROOT/'art/dressing/mine-refined-v2'
@@ -438,28 +438,32 @@ def export(name,build,folder):
     return {'id':name,'triangles':triangle_count,'surfaces':list(groups),'min':[min(p[i] for p in all_points) for i in range(3)],
        'max':[max(p[i] for p in all_points) for i in range(3)],'sha256':hashlib.sha256(path.read_bytes()).hexdigest()}
 
-sources=[]
-for family in ['kaykit-mine-props-v1','kaykit-containers-rest-v1']:
-    base=ROOT/'art/third-party'/family
-    for entry in json.loads((base/'provenance.json').read_text())['files']:
-        assert hashlib.sha256((base/entry['file']).read_bytes()).hexdigest()==entry['sha256']
-    sources.append({'originals':base.relative_to(ROOT).as_posix(),'licence':'CC0-1.0','record':'provenance.json'})
-assets=[]
-for name,build in [('support',lambda:support(False)),('support-damaged',lambda:support(True)),
- ('lantern-standing',lambda:lantern(False)),('lantern-hanging',lambda:lantern(True)),('shrine-base',shrine_base),
- ('offerings-fresh',lambda:offerings(False)),('offerings-spent',lambda:offerings(True)),('flames',flames),
- ('workings-fresh',lambda:workings(False)),('workings-spent',lambda:workings(True)),
- ('rails',lambda:rails(False)),('rails-broken',lambda:rails(True))]:assets.append(export(name,build,MINE))
-(MINE/'catalog.json').write_text(json.dumps({'issue':278,'assets':assets,'sources':sources,'front':'+Z',
- 'builder_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
- 'clear_passage':{'width':1.60,'height':1.85},'candle_flames':[[x,z+h,-y] for x,y,z,h in G.CANDLES]},indent=2)+'\n')
-chests=[]
-for tier in ['common','silver','gold']:
-    for lid in [False,True]:chests.append(export(tier+('-lid' if lid else '-body'),lambda tier=tier,lid=lid:chest(tier,lid),CHESTS))
-chests.append(export('contents',contents,CHESTS))
-(CHESTS/'catalog.json').write_text(json.dumps({'issue':279,'assets':chests,'sources':sources,
- 'builder_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
- 'tiers':['common','silver','gold'],'hinges':{tier:[0,.315,-HINGE_Y*SCALE[tier][1]] for tier in SCALE},
- 'front':'+Z','states':['closed','open','empty'],'lid_angle_degrees':-102,'loot_authority':'caller'},indent=2)+'\n')
-print('REFINED_MINE',[(a['id'],a['triangles']) for a in assets])
-print('CHEST_TYPES',[(a['id'],a['triangles']) for a in chests])
+
+def main():
+    sources=[]
+    for family in ['kaykit-mine-props-v1','kaykit-containers-rest-v1']:
+        base=ROOT/'art/third-party'/family
+        for entry in json.loads((base/'provenance.json').read_text())['files']:
+            assert hashlib.sha256((base/entry['file']).read_bytes()).hexdigest()==entry['sha256']
+        sources.append({'originals':base.relative_to(ROOT).as_posix(),'licence':'CC0-1.0','record':'provenance.json'})
+    assets=[]
+    for name,build in [('support',lambda:support(False)),('support-damaged',lambda:support(True)),
+     ('lantern-standing',lambda:lantern(False)),('lantern-hanging',lambda:lantern(True)),('shrine-base',shrine_base),
+     ('offerings-fresh',lambda:offerings(False)),('offerings-spent',lambda:offerings(True)),('flames',flames),
+     ('workings-fresh',lambda:workings(False)),('workings-spent',lambda:workings(True)),
+     ('rails',lambda:rails(False)),('rails-broken',lambda:rails(True))]:assets.append(export(name,build,MINE))
+    (MINE/'catalog.json').write_text(json.dumps({'issue':278,'assets':assets,'sources':sources,'front':'+Z',
+     'builder_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+     'clear_passage':{'width':1.60,'height':1.85},'candle_flames':[[x,z+h,-y] for x,y,z,h in G.CANDLES]},indent=2)+'\n')
+    chests=[]
+    for tier in ['common','silver','gold']:
+        for lid in [False,True]:chests.append(export(tier+('-lid' if lid else '-body'),lambda tier=tier,lid=lid:chest(tier,lid),CHESTS))
+    chests.append(export('contents',contents,CHESTS))
+    (CHESTS/'catalog.json').write_text(json.dumps({'issue':279,'assets':chests,'sources':sources,
+     'builder_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+     'tiers':['common','silver','gold'],'hinges':{tier:[0,.315,-HINGE_Y*SCALE[tier][1]] for tier in SCALE},
+     'front':'+Z','states':['closed','open','empty'],'lid_angle_degrees':-102,'loot_authority':'caller'},indent=2)+'\n')
+    print('REFINED_MINE',[(a['id'],a['triangles']) for a in assets])
+    print('CHEST_TYPES',[(a['id'],a['triangles']) for a in chests])
+
+if __name__=='__main__':main()
