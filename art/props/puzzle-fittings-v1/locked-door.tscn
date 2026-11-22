@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=3]
+[ext_resource type="Script" path="res://art/props/puzzle-fittings-v1/prop.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/props/puzzle-fittings-v1/door-frame.glb" id="door-frame"]
+[ext_resource type="PackedScene" path="res://art/props/puzzle-fittings-v1/door-leaf.glb" id="door-leaf"]
+[ext_resource type="PackedScene" path="res://art/props/puzzle-fittings-v1/lock-cases.glb" id="lock-cases"]
+
+[node name="PuzzleFitting" type="Node3D"]
+script=ExtResource("script")
+kind="locked"
+metadata/asset_id="puzzle-locked"
+[node name="Frame" parent="." instance=ExtResource("door-frame")]
+[node name="Hinge" type="Node3D" parent="."]
+position=Vector3(-0.86,0,0)
+[node name="Leaf" parent="Hinge" instance=ExtResource("door-leaf")]
+[node name="Locks" parent="Hinge" instance=ExtResource("lock-cases")]

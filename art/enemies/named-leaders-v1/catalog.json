@@ -1,0 +1,101 @@
+{
+  "issue": 282,
+  "front": "+Z",
+  "units": "metres",
+  "animation_policy": "unchanged original GLBs; rigid details bind to the source idle pose",
+  "assets": [
+    {
+      "id": "whisker",
+      "source_model": "combat-roster-3d-v1/great-rat",
+      "attachments": [
+        {
+          "bone": "spine",
+          "triangles": 112
+        },
+        {
+          "bone": "neck",
+          "triangles": 64
+        },
+        {
+          "bone": "head",
+          "triangles": 190
+        }
+      ],
+      "added_triangles": 366,
+      "sha256": "e6dbaf40d8b1b52dbf06c1679da585516ad8c3f881b78280f4b9d4a7d771fd96",
+      "source_sha256": "9a9d97934328073c3a3a8dfcb2d151ab8c057d3d5fa7c7a3c6b214c877372ca7"
+    },
+    {
+      "id": "spinner",
+      "source_model": "field-creatures-3d-v1/webspinner",
+      "attachments": [
+        {
+          "bone": "abdomen",
+          "triangles": 592
+        }
+      ],
+      "added_triangles": 592,
+      "sha256": "d920158aba20b45744cd60c4ac10449f82d5f4fb4767394e702df59db99ebcf4",
+      "source_sha256": "e15367420ec8f3d3d3f03c745eca7136e15e704360fe07bd66357fe92b34a526"
+    },
+    {
+      "id": "skarn",
+      "source_model": "goblin-elites-3d-v1/goblin-brute",
+      "attachments": [
+        {
+          "bone": "upperarm_R",
+          "triangles": 216
+        },
+        {
+          "bone": "spine3",
+          "triangles": 68
+        },
+        {
+          "bone": "spine2",
+          "triangles": 120
+        }
+      ],
+      "added_triangles": 404,
+      "sha256": "ba0341e93c5da79d4b2660546138299c7fcd1a57e1bbc51ab5788427cb01f056",
+      "source_sha256": "c9864c33d5f28d064d670db30f7990e8d00ffcab3e0f962e7f4b969f327a14ab"
+    },
+    {
+      "id": "foreman",
+      "source_model": "early-creatures-3d-v1/hollow-miner",
+      "attachments": [
+        {
+          "bone": "head",
+          "triangles": 172
+        },
+        {
+          "bone": "torso",
+          "triangles": 296
+        },
+        {
+          "bone": "root",
+          "triangles": 416
+        }
+      ],
+      "added_triangles": 884,
+      "sha256": "2dc07985b49a9147499eb73f3d96c680f384a369636f7708b646bfa2b126af24",
+      "source_sha256": "9ec6d0952dffa6d6c6be86c9b7a21016963ee7f80e516ad77ffa362737b1b350"
+    },
+    {
+      "id": "gristle",
+      "source_model": "early-creatures-3d-v1/breach-hound",
+      "attachments": [
+        {
+          "bone": "root",
+          "triangles": 152
+        },
+        {
+          "bone": "head",
+          "triangles": 310
+        }
+      ],
+      "added_triangles": 462,
+      "sha256": "4aa432c434ae657e809709eac28a7ea0410a43cdfef53b17a32e3a003b4b2239",
+      "source_sha256": "252cd45551a8a94bf577c990121ca99a66d668376581abe916d6e885575f71f3"
+    }
+  ]
+}
