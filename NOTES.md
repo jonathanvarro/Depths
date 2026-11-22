@@ -13,6 +13,12 @@ Format:
 
 ---
 
+## 2026-11-21 – Claude (view from above switched off)
+
+- Did: owner: keep the view from above off on all floors and in all fights for now. `Main.overhead_from_floor` defaults to `OVERHEAD_OFF` (999), so the View button, V and the board camera never come up; the Settings switch is commented out in settings_screen.gd. All the code stays; board checks still set `overhead_from_floor = 1`.
+- Next: to bring it back, set `overhead_from_floor` (e.g. 4) and restore the Settings line.
+- Watch out: fights on the map still happen, seen through the party's eyes.
+
 ## 2026-11-21 – Claude (first person by default)
 
 - Did: owner chose first person on floor 4 too. The view-from-above setting is now `view_above`, default off (renamed from `tactical_view` so saved "on" values are left behind). It still only works from floor 4; with it off, the King's hall is fought on the dark stage. Checks that test the board turn it on and restore off.

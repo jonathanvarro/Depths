@@ -47,7 +47,9 @@ func _init() -> void:
 		_sizes[size_name] = choice
 	if not OS.has_feature("mobile"): _toggle(display.column, "Fullscreen", "fullscreen")
 	_toggle(display.column, "Screen flashes", "flashes")
-	_toggle(display.column, "View from above, floor 4 on (V)", "view_above")  # strategic or exploration view (#248)
+	# The view from above (#248) is switched off for now (owner, 2026-11-21),
+	# so its switch is hidden; see Main.overhead_from_floor.
+	# _toggle(display.column, "View from above, floor 4 on (V)", "view_above")
 	_toggle(display.column, "3D enemies", "enemy_models")
 	_credits_scroll = ScrollContainer.new()
 	_credits_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED

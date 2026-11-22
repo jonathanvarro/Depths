@@ -723,10 +723,12 @@ func _wants_overhead() -> bool:
 	return _overhead_on() and not _in_opening and _map != null and not _camp.visible and not _ending
 
 
-## The first floors are explored and fought through the party's eyes (owner
-## playtest, 2026-11-21: exploring from above was less fun). The view from
-## above opens from this floor on, for the more complex fights.
-@export var overhead_from_floor := 4
+## The view from above (#248) works from this floor on. Owner, 2026-11-21:
+## switched off on every floor for now (exploring from above was less fun);
+## the code stays for the complex fights later. Set to 4 to bring it back
+## from the fortress, and show its Settings switch again (settings_screen.gd).
+const OVERHEAD_OFF := 999
+@export var overhead_from_floor := OVERHEAD_OFF
 
 
 func _overhead_allowed() -> bool:

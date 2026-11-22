@@ -1,6 +1,6 @@
 extends SceneTree
-## Floors 1-3 are explored and fought through the party's eyes (owner
-## playtest, 2026-11-21); the view from above opens on floor 4.
+## The view from above is switched off on every floor for now (owner,
+## 2026-11-21), even with its setting on; brought back from floor 4 it works.
 ## Args: tag, screenshot dir.
 
 const Settings := preload("res://scripts/settings.gd")
@@ -22,12 +22,15 @@ func _initialize() -> void:
 	main.wandering = false
 	root.add_child(main)
 	await create_timer(0.5).timeout
-	for depth in [1, 2, 3]:
+	for depth in [1, 2, 3, 4, 5]:
 		main._go_to_floor(depth, main.Arrival.FROM_ABOVE)
 		await create_timer(0.2).timeout
-		check("floor %d: first person, with the setting on" % depth, not main._tactical.active and not main._view_button.visible)
+		check("floor %d: first person, even with the setting on" % depth, not main._tactical.active and not main._view_button.visible)
 	main._toggle_view()
-	check("V does nothing on floor 3", Settings.get_value("view_above") and not main._tactical.active)
+	check("V does nothing", Settings.get_value("view_above") and not main._tactical.active)
+	check("the Settings switch is hidden", not main._settings.find_children("*", "", true, false).any(func(n): return (n is Label or n is Button or n is CheckButton) and n.text.begins_with("View from above")))
+	main.overhead_from_floor = 4  # brought back from the fortress: still works
+	main._go_to_floor(3, main.Arrival.FROM_BELOW)
 	main._go_to_floor(4, main.Arrival.FROM_ABOVE)
 	await create_timer(0.2).timeout
 	check("floor 4: the view from above, and the View button", main._tactical.active and main._view_button.visible)
