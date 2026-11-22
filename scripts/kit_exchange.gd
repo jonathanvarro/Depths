@@ -185,6 +185,9 @@ func _tile(entry:Dictionary,side:String) -> Button:
 	button.set_meta("item",entry.get("item"))
 	button.add_theme_stylebox_override("normal",FieldKit.plate(Color(0.04,0.045,0.03,0.20),Color(0.39,0.32,0.23,0.4),2) if side=="left" else StyleBoxEmpty.new())
 	button.add_theme_stylebox_override("hover",FieldKit.plate(Color(0.30,0.24,0.13,0.3),FieldKit.AMBER,2))
+	if side=="right":
+		for state in ["pressed","hover_pressed","focus"]:
+			button.add_theme_stylebox_override(state,FieldKit.plate(Color(.30,.24,.13,.18),FieldKit.AMBER,2))
 	var icon:=Quality.framed(_texture(entry),_tier(entry),Vector2(32,32))
 	icon.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	icon.offset_left=5;icon.offset_right=-5;icon.offset_top=4;icon.offset_bottom=-5
@@ -311,6 +314,7 @@ func _build() -> void:
 	_take_all.add_theme_constant_override("icon_max_width",28);_take_all.accessibility_name="Take everything that fits"
 	_take_all.tooltip_text="Take everything that fits";_take_all.pressed.connect(func():take_all_requested.emit());header.add_child(_take_all)
 	_close=_button("");_close.icon=CLOSE;_close.expand_icon=true;_close.add_theme_constant_override("icon_max_width",22)
+	FieldKit.Brass.apply(_close,FieldKit.Brass.Edge.RIGHT,6)
 	_close.accessibility_name="Close";_close.tooltip_text="Close";_close.pressed.connect(func():closed.emit());header.add_child(_close)
 	var workspace:=HBoxContainer.new();workspace.size_flags_vertical=Control.SIZE_EXPAND_FILL
 	workspace.add_theme_constant_override("separation",20);column.add_child(workspace)
@@ -340,7 +344,7 @@ func _build() -> void:
 	_space.size_flags_vertical=Control.SIZE_SHRINK_CENTER;lower.add_child(_space)
 	_pages=HBoxContainer.new();lower.add_child(_pages)
 	_details=PanelContainer.new();_details.custom_minimum_size=Vector2(0,100)
-	_details.add_theme_stylebox_override("panel",FieldKit.plate(Color("191d17"),FieldKit.EDGE,8));column.add_child(_details)
+	_details.add_theme_stylebox_override("panel",FieldKit.Brass.panel(8));column.add_child(_details)
 	var row:=HBoxContainer.new();row.add_theme_constant_override("separation",12);_details.add_child(row)
 	_detail_icon=_icon(null,Vector2(56,56));row.add_child(_detail_icon)
 	var scroll:=ScrollContainer.new();scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED

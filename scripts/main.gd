@@ -4936,6 +4936,7 @@ func _build_full_map(ui: CanvasLayer) -> void:
 	_full_map_title.add_theme_color_override("font_color", Color("e6dac1"))
 	header.add_child(_full_map_title)
 	_full_map_close=Button.new()
+	UiTheme.Brass.apply(_full_map_close,UiTheme.Brass.Edge.RIGHT,6)
 	_full_map_close.text="Close"
 	_full_map_close.custom_minimum_size=Vector2(96,52)
 	_full_map_close.pressed.connect(_set_full_map.bind(false))

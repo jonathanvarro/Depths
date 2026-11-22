@@ -13,6 +13,12 @@ Format:
 
 ---
 
+## 2026-11-21 – ChatGPT (live tent, brass menus and fitted item briefs, #271/#272)
+
+- Did: owner-approved tent painting is live through `tent_interior.gd`: cot Rest, chest Store, hover/focus outline and brief press feedback. Existing CampState/stash rules remain authoritative; paper is reserved for later statistics. Shared Field kit/UiTheme and menu overrides now use the approved Reliquary brass nine-slice family, including title, camp, inventory/trade, settings/journal, hero selection, events/results and combat help. The title list scrolls on short windows. Equipment icons fit the cloth inside the roll; briefs remove the duplicate image/replacement prose and keep damage/accuracy or defence in a fixed row beneath the name. See `docs/player-tent-and-brass.md` and its review gallery.
+- Next: review/merge the delivery branch. Native checks use the #253 private desktop; physical iPhone review remains. The table is ready for future statistics content.
+- Watch out: button/panel chrome now uses StyleBoxTexture; duplicate as StyleBox rather than casting to StyleBoxFlat. Keep rarity, conditions and physical inventory glyphs distinct from menu chrome. Tent painting approval and its pixel hash are pinned in `art/camp/player-tent-v1/approval.json`; generation prompt/provenance is retained. Claude's active camp edits in the main checkout were not overwritten.
+
 ## 2026-11-21 – Claude (smoother 3D model animation)
 
 - Did: owner request. `scripts/anim_tidy.gd`, called by the three model actor scripts (combat-roster, field-creatures, rat): moves now cross-fade (0.14s; hurt 0.06s) instead of snapping, a repeated one-shot (two attacks in a row) starts over, and bone flips are spread over neighbouring keys along the shortest turn. The flips were in the shared goblin `fall` (spine and left leg turning 100-144 degrees in one frame, on all eight goblin-base models). Still mode is unchanged (exact frames). Loop seams were already clean. `tools/animation_audit.gd` lists each clip's biggest step; `tools/animation_smooth_check.gd`.

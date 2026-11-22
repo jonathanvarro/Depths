@@ -46,6 +46,8 @@ var _equip_tab: Button
 var _status_tab: Button
 var _equipment: Control
 var _equipment_slots: GridContainer
+var _roll_contents: Control
+var _roll_image: TextureRect
 var _slot_buttons: Dictionary = {}
 var _status_scroll: ScrollContainer
 var _status_content: VBoxContainer
@@ -53,8 +55,9 @@ var _bag: Control
 var _pages: HBoxContainer
 var _capacity: Label
 var _details: PanelContainer
-var _detail_icon: TextureRect
 var _detail_title: Label
+var _detail_stats: Label
+var _detail_comparison: Label
 var _detail_text: VBoxContainer
 var _detail_actions: HBoxContainer
 var _detail_scroll: ScrollContainer
@@ -289,6 +292,7 @@ func _refresh_equipment() -> void:
 		box.add_child(caption)
 		var item: Equipment=_selected_hero.get(slot) if _selected_hero else null
 		var button:=_button("",Vector2(60,44))
+		button.clip_contents=true
 		button.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 		button.size_flags_vertical=Control.SIZE_EXPAND_FILL
 		button.set_meta("kit_focus","slot:"+slot)
@@ -299,11 +303,11 @@ func _refresh_equipment() -> void:
 		button.set_drag_forwarding(_drag_from_slot.bind(slot,item),_can_drop_on_slot.bind(slot),_drop_on_slot.bind(slot))
 		box.set_drag_forwarding(Callable(),_can_drop_on_slot.bind(slot),_drop_on_slot.bind(slot))  # an empty slot's button is disabled
 		if item:
-			_add_icon(button,item.icon,Quality.tier_of(item,_selected_hero),Vector2(40,40))
+			_add_icon(button,item.icon,Quality.tier_of(item,_selected_hero),Vector2(40,40),true)
 			Quality.add_mastery(button,item,22.0)
 			_bind_inspection(button,item,slot)
 		else:
-			_add_icon(button,EMPTY_ICONS[slot],"common",Vector2(32,32))
+			_add_icon(button,EMPTY_ICONS[slot],"common",Vector2(32,32),true)
 			button.get_child(0).modulate.a=0.45
 			button.disabled=true
 	_fit_equipment()
@@ -311,10 +315,18 @@ func _refresh_equipment() -> void:
 
 func _fit_equipment() -> void:
 	if not is_instance_valid(_equipment_slots):return
+	# On very short layouts trim only the outer roll/shadow, retaining room
+	# for two 44px rows on the cloth rather than spilling into its straps.
+	var height:=maxf(132,_equipment.size.y)
+	var top:=(_equipment.size.y-height)/2
+	_roll_image.offset_top=top
+	_roll_image.offset_bottom=-top
+	_roll_contents.position=Vector2(_equipment.size.x*.14,top+height*.14)
+	_roll_contents.size=Vector2(_equipment.size.x*.79,height*.70)
 	# In short phone windows the slot glyphs/accessibility names carry the
 	# labels, keeping two full rows of touch targets inside the canvas roll.
 	for box in _equipment_slots.get_children():
-		box.get_child(0).visible=_equipment.size.y>=140
+		box.get_child(0).visible=_roll_contents.size.y>=136
 
 func _highlight_slots() -> void:
 	var receiving: String=_selection.slot if _selection is Equipment else ""
@@ -327,6 +339,8 @@ func _highlight_slots() -> void:
 		var box:=FieldKit.plate(Color(0.04,0.045,0.03,0.25) if active else Color.TRANSPARENT,edge,3)
 		button.add_theme_stylebox_override("normal",box)
 		button.add_theme_stylebox_override("disabled",box)
+		for state in ["hover","pressed","hover_pressed","focus"]:
+			button.add_theme_stylebox_override(state,FieldKit.plate(Color(.30,.24,.13,.18),FieldKit.AMBER,3))
 
 func _refresh_status() -> void:
 	_clear(_status_content)
@@ -401,6 +415,8 @@ func _refresh_bag() -> void:
 		for state in ["normal","disabled"]:
 			button.add_theme_stylebox_override(state,StyleBoxEmpty.new())
 		button.add_theme_stylebox_override("hover",FieldKit.plate(Color(0.3,0.24,0.13,0.32),FieldKit.AMBER,2))
+		for state in ["pressed","hover_pressed","focus"]:
+			button.add_theme_stylebox_override(state,FieldKit.plate(Color(.30,.24,.13,.18),FieldKit.AMBER,2))
 		button.set_drag_forwarding(Callable(),_can_drop_on_bag,_drop_on_bag)
 		if index<_entries.size():
 			var entry:=_entries[index]
@@ -583,16 +599,31 @@ func _quick_use(item: Resource,slot := "") -> void:
 	elif item is Equipment:
 		_perform("equip")
 
-func _add_icon(button: Button,texture: Texture2D,tier: String,extent: Vector2) -> void:
+func _add_icon(button: Button,texture: Texture2D,tier: String,extent: Vector2,equipment := false) -> void:
 	var icon:=Quality.framed(texture,tier,extent)
 	icon.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	icon.offset_left=5;icon.offset_right=-5;icon.offset_top=4;icon.offset_bottom=-4
 	button.add_child(icon)
+	if equipment:
+		icon.set_meta("equipment_icon",true)
+		icon.custom_minimum_size=Vector2.ZERO
+		for picture in icon.find_children("*","TextureRect",true,false):picture.custom_minimum_size=Vector2.ZERO
+		if texture in EMPTY_ICONS.values():
+			icon.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
+			icon.size=Vector2(40,40)
+			icon.position=-icon.size/2
+		else:
+			icon.anchor_left=.09;icon.anchor_right=.91
+			icon.anchor_top=.07;icon.anchor_bottom=.93
+			icon.offset_left=0;icon.offset_right=0;icon.offset_top=0;icon.offset_bottom=0
 
 func _refresh_details() -> void:
 	_clear(_detail_text)
 	_clear(_detail_actions)
-	_detail_icon.texture=null
+	_detail_stats.text=""
+	_detail_comparison.text=""
+	_detail_stats.visible=false
+	_detail_comparison.visible=false
 	# Measure off-screen: hidden containers do not settle wrapped text reliably.
 	# The previous card's rectangle must not intercept the next pocket's click.
 	_details.visible=_selection!=null
@@ -600,15 +631,22 @@ func _refresh_details() -> void:
 	if _selection==null:
 		return
 	var item:=_selection
-	_detail_icon.texture=item.icon
 	var tier:=Quality.tier_of(item,_selected_hero if _from_slot!="" else null)
 	_detail_title.text=("" if tier=="common" else tier.capitalize()+" · ")+item.display_name
+	if item is Equipment and _selected_hero:
+		var seen:=GearModel.known(item)
+		match item.slot:
+			"weapon":
+				_detail_stats.text=_as_known(_selected_hero,func():return _numbers(_selected_hero,_selected_hero.weapon if _from_slot!="" else seen)).replace(" dmg, "," damage · ")
+			"body":_detail_stats.text=_as_known(_selected_hero,func():return _armour(_selected_hero,seen)).capitalize()
+			"back":_detail_stats.text=Equipment.back_text(seen)
+			"trinket":_detail_stats.text=seen.effect.effects_text() if seen.effect else "Trinket"
+		_detail_stats.visible=_detail_stats.text!=""
 	var description:=_wrapped(item.description,17,FieldKit.MUTED)
 	_detail_text.add_child(description)
 	if _from_slot!="":
 		if item is Equipment:
-			if item.slot=="back":_detail_text.add_child(_wrapped(Equipment.back_text(item),17))
-			elif GearModel.known(item).effect:_detail_text.add_child(_wrapped(GearModel.known(item).effect.effects_text(),17))
+			if item.slot not in ["back","trinket"] and GearModel.known(item).effect:_detail_text.add_child(_wrapped(GearModel.known(item).effect.effects_text(),17))
 			if item.curse:_detail_text.add_child(_wrapped("Cursed: "+item.curse.effects_text()+". Holy water or the nurse can lift it.",17))
 			for line in GearModel.card_lines(item):_detail_text.add_child(_wrapped(line,17))  # mastery and growth (#192)
 		_action("Take off","unequip",_unequip_reason())
@@ -623,10 +661,10 @@ func _refresh_details() -> void:
 			var seen:=GearModel.known(item)  # unidentified: only what shows (2026-11-03)
 			if item.slot=="weapon":comparison=_numbers(_selected_hero,now)+" → "+_numbers(_selected_hero,seen)
 			elif item.slot=="body":comparison=_armour(_selected_hero,now)+" → "+_armour(_selected_hero,seen)
-		if comparison!="":_detail_text.add_child(_wrapped(comparison,17))
-		if now:_detail_text.add_child(_wrapped("Replaces "+now.display_name,17))
-		if item.slot=="back":_detail_text.add_child(_wrapped("Worn: "+Equipment.back_text(item),17))
-		elif GearModel.known(item).effect:_detail_text.add_child(_wrapped("Worn: "+GearModel.known(item).effect.effects_text(),17))
+		if comparison!="" and now:
+			_detail_comparison.text="Equipped: "+comparison.split(" → ")[0].replace(" dmg, "," damage · ")
+			_detail_comparison.visible=true
+		if item.slot not in ["back","trinket"] and GearModel.known(item).effect:_detail_text.add_child(_wrapped("Worn: "+GearModel.known(item).effect.effects_text(),17))
 		for line in GearModel.card_lines(item):_detail_text.add_child(_wrapped(line,17))  # mastery and growth (#192)
 		_action("Wear" if item.slot=="trinket" else "Equip","equip",_equip_reason(item.slot,null,item))
 		_identify_action(item)
@@ -694,14 +732,14 @@ func _action(title: String,kind: String,reason := "") -> void:
 	button.set_meta("kit_focus","action:"+kind)
 	button.accessibility_name=title
 	button.disabled=reason!=""
-	button.tooltip_text=reason
+	button.tooltip_text="Must remain armed" if reason=="Replace this weapon from the pack" else reason
 	var serial:=_serial
 	var hero:=_selected_hero
 	button.pressed.connect(func():
 		if serial==_serial and hero==_selected_hero and reason=="":
 			_perform(kind))
 	_detail_actions.add_child(button)
-	if reason!="":_detail_text.add_child(_wrapped(reason,17,FieldKit.MUTED))
+	if reason!="" and reason!="Replace this weapon from the pack":_detail_text.add_child(_wrapped(reason,17,FieldKit.MUTED))
 
 ## Identify with a touchstone, when one is carried (owner, 2026-11-03).
 func _identify_action(item: Resource) -> void:
@@ -815,6 +853,8 @@ func _icon(texture: Texture2D,minimum: Vector2) -> TextureRect:
 
 func _header_icon(texture: Texture2D,title: String,callback: Callable) -> Button:
 	var button:=_button("")
+	if title.begins_with("Close"):
+		FieldKit.Brass.apply(button,FieldKit.Brass.Edge.RIGHT,6)
 	button.icon=texture;button.expand_icon=true
 	button.add_theme_constant_override("icon_max_width",22)
 	button.accessibility_name=title;button.tooltip_text=title
@@ -864,7 +904,14 @@ func _position_details() -> void:
 	# Wrapping must settle at the card's width before measuring its height.
 	await get_tree().process_frame
 	if serial!=_serial or _selection==null:return
-	var height:=minf(max_height,_detail_text.get_combined_minimum_size().y+_detail_column.get_child(0).size.y+_detail_actions.size.y+40)
+	var fixed_height:=0.0
+	var visible_children:=0
+	for child:Control in _detail_column.get_children():
+		if child.visible:
+			visible_children+=1
+			if child!=_detail_scroll:fixed_height+=child.size.y
+	var spacing:float=_detail_column.get_theme_constant("separation")*maxi(0,visible_children-1)
+	var height:=minf(max_height,_detail_text.get_combined_minimum_size().y+fixed_height+spacing+16)
 	_details.size=Vector2(width,height)
 	var point:=Vector2(_anchor_rect.get_center().x-width*0.5,_anchor_rect.end.y+8)
 	if beside and below<height and above<height:
@@ -942,19 +989,24 @@ func _build() -> void:
 	var panel:=Control.new();panel.size_flags_vertical=Control.SIZE_EXPAND_FILL;_hero_panel.add_child(panel)
 	panel.set_drag_forwarding(Callable(),_can_drop_on_selected,_drop_on_selected)
 	_equipment=Control.new();_equipment.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);panel.add_child(_equipment)
+	_equipment.clip_contents=true
 	_equipment.resized.connect(_fit_equipment)
 	_equipment.set_drag_forwarding(Callable(),_can_drop_on_selected,_drop_on_selected)
 	var roll:=_icon(ROLL,Vector2.ZERO);roll.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);_equipment.add_child(roll)
+	_roll_image=roll
 	roll.stretch_mode=TextureRect.STRETCH_SCALE
 	roll.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
+	_roll_contents=Control.new()
+	# Cloth interior in the 768x512 artwork; straps and shadow are not slots.
+	_roll_contents.clip_contents=true
+	_roll_contents.mouse_filter=Control.MOUSE_FILTER_PASS
+	_roll_contents.set_drag_forwarding(Callable(),_can_drop_on_selected,_drop_on_selected)
+	_equipment.add_child(_roll_contents)
 	_equipment_slots=GridContainer.new();_equipment_slots.columns=2
 	_equipment_slots.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	_equipment_slots.anchor_left=0.02;_equipment_slots.anchor_right=0.98
-	_equipment_slots.anchor_top=0.0;_equipment_slots.anchor_bottom=1.0
-	_equipment_slots.offset_top=0;_equipment_slots.offset_bottom=0
 	_equipment_slots.add_theme_constant_override("h_separation",6)
 	_equipment_slots.add_theme_constant_override("v_separation",4)
-	_equipment.add_child(_equipment_slots)
+	_roll_contents.add_child(_equipment_slots)
 	_status_scroll=ScrollContainer.new();_status_scroll.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_status_scroll.set_drag_forwarding(Callable(),_can_drop_on_selected,_drop_on_selected)
 	_status_scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;_status_scroll.follow_focus=true;panel.add_child(_status_scroll)
@@ -973,14 +1025,15 @@ func _build() -> void:
 	_capacity=_label("",17);_capacity.size_flags_horizontal=Control.SIZE_EXPAND_FILL;_capacity.size_flags_vertical=Control.SIZE_SHRINK_CENTER;lower.add_child(_capacity)
 	_pages=HBoxContainer.new();lower.add_child(_pages)
 	_details=PanelContainer.new();_details.visible=false
-	_details.add_theme_stylebox_override("panel",FieldKit.plate(Color("191d17"),FieldKit.AMBER,8))
+	_details.add_theme_stylebox_override("panel",FieldKit.Brass.panel(8))
 	add_child(_details)
 	_details.mouse_exited.connect(_leave_preview)
 	_detail_column=VBoxContainer.new();_detail_column.add_theme_constant_override("separation",8);_details.add_child(_detail_column)
 	var detail_header:=HBoxContainer.new();_detail_column.add_child(detail_header)
-	_detail_icon=_icon(null,Vector2(44,44));detail_header.add_child(_detail_icon)
 	_detail_title=_wrapped("",20);_detail_title.size_flags_vertical=Control.SIZE_SHRINK_CENTER;detail_header.add_child(_detail_title)
 	detail_header.add_child(_header_icon(CLOSE_ICON,"Close item details",clear_inspection))
+	_detail_stats=_wrapped("",20,FieldKit.AMBER);_detail_column.add_child(_detail_stats)
+	_detail_comparison=_wrapped("",14,FieldKit.MUTED);_detail_column.add_child(_detail_comparison)
 	_detail_scroll=ScrollContainer.new();_detail_scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;_detail_scroll.follow_focus=true
 	_detail_scroll.size_flags_vertical=Control.SIZE_EXPAND_FILL;_detail_column.add_child(_detail_scroll)
 	_detail_text=VBoxContainer.new();_detail_text.size_flags_horizontal=Control.SIZE_EXPAND_FILL;_detail_text.add_theme_constant_override("separation",6);_detail_scroll.add_child(_detail_text)

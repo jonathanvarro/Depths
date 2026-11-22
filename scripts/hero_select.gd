@@ -44,6 +44,7 @@ func _init() -> void:
 	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	header.add_child(title)
 	var back := _button("Back")
+	UiTheme.Brass.apply(back,UiTheme.Brass.Edge.RIGHT,10)
 	back.pressed.connect(func():
 		visible = false
 		cancelled.emit())
@@ -77,11 +78,7 @@ func _card(path: String) -> Control:
 	var hero: Companion = load(path)
 	var panel := PanelContainer.new()
 	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.09, 0.08, 0.06)
-	style.border_color = UiTheme.EDGE
-	style.set_border_width_all(1)
-	style.set_content_margin_all(12)
+	var style := UiTheme.Brass.panel(12)
 	panel.add_theme_stylebox_override("panel", style)
 	var column := VBoxContainer.new()
 	column.add_theme_constant_override("separation", 6)

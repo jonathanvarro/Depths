@@ -40,7 +40,7 @@ func _init() -> void:
 	# The same framed panel as the other menus (#169). No Close: by now the
 	# party has left camp (who stays behind is already settled).
 	var frame := PanelContainer.new()
-	frame.add_theme_stylebox_override("panel", Kit.plate(Color("20231c"), Kit.EDGE, 22))
+	frame.add_theme_stylebox_override("panel", Kit.Brass.panel(22))
 	frame.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	frame.size_flags_vertical = Control.SIZE_FILL
 	frame.custom_minimum_size = Vector2(760, 0)

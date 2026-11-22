@@ -71,7 +71,7 @@ func _section(title: String) -> Dictionary:
 	scroll.follow_focus = true
 	var panel := PanelContainer.new()
 	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	panel.add_theme_stylebox_override("panel", Kit.plate(Color("282b22"), Kit.EDGE, 12))
+	panel.add_theme_stylebox_override("panel", Kit.Brass.panel(12))
 	scroll.add_child(panel)
 	var column := VBoxContainer.new()
 	column.add_theme_constant_override("separation", 6)

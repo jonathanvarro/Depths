@@ -24,7 +24,7 @@ func _snap(name: String) -> void:
 
 func _press(node, label: String) -> bool:
 	for b in node.find_children("*", "Button", true, false):
-		if b.text.begins_with(label) and b.is_visible_in_tree() and not b.disabled:
+		if (b.text.begins_with(label) or b.accessibility_name.begins_with(label)) and b.is_visible_in_tree() and not b.disabled:
 			b.pressed.emit()
 			return true
 	return false

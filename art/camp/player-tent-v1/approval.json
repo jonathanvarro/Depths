@@ -1,0 +1,8 @@
+{
+  "approved_on": "2026-11-21",
+  "owner_feedback": "The tent painting is absolutely perfect",
+  "file": "interior.png",
+  "sha256": "46907cf060de510f3977d0f84b5bb5da76a98ca0c2119b4b6595ffac274474f4",
+  "follow_up": "A simple highlight when the user interacts with the items",
+  "source_prompt": "art/source/player-tent-v1/generation.json"
+}

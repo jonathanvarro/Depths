@@ -30,12 +30,7 @@ func _init() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var panel := PanelContainer.new()
 	panel.custom_minimum_size = Vector2(560, 0)
-	var style := StyleBoxFlat.new()
-	style.bg_color = UiTheme.overlay_colour(0.94)
-	style.border_color = UiTheme.EDGE
-	style.set_border_width_all(1)
-	style.set_content_margin_all(18)
-	panel.add_theme_stylebox_override("panel", style)
+	panel.add_theme_stylebox_override("panel", UiTheme.Brass.panel(18))
 	add_child(panel)
 	var column := VBoxContainer.new()
 	column.add_theme_constant_override("separation", 12)
