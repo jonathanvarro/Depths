@@ -19,6 +19,27 @@ Format:
 - Next: owner plays; tune issue prices and the dark glow on a real screen (captures are dim by nature).
 - Watch out: bigger floors change every seed's layout; tests that need a feature search seeds rather than fixing one.
 
+## 2026-11-22 – ChatGPT (companion seat-fit polish and regional equipment)
+
+- Did: owner requested these, then merge. New private editable jacket copies
+  have a cutaway hem and revised low cloth weights; fixed stool/floor and all
+  source animation remain intact. Waist visibility also restores correctly
+  with trousers off. New local review: `build/local-companion-polish-v1/review/inspector.html`.
+  Imported the previously unmerged #220 production tools; earlier assets stay
+  untouched. Four built-in ImageGen adaptations now match the live sleeveless
+  quilted coat, studded jerkin, short scale shirt and round goblin shield.
+  Only icon references change; all 22 old regional candidates have dispositions.
+- Checked: 1,221 source chair frames have no garment/seat-volume intersections;
+  972 independent export/reimport, 5,128 lineage, 6,488 native wardrobe, 4,082
+  headless and 123 focused native contact checks pass. Regional icons: 98
+  native checks/24 Pack-loot-merchant captures; gear-model/gear/save regressions
+  report fails=0. All GPU checks use private desktops without taking focus.
+- Handoff/rebuild/source prompts: `docs/companion-polish-and-regional-equipment.md`.
+  Source walk/death/hand/foot limitations and loop choices remain #218; no
+  private character media enters Git or replaces live game companion bindings.
+  Owner visual and physical iPhone review remain. Active main-checkout design
+  edits are excluded from the merge.
+
 ## 2026-11-22 – ChatGPT (puzzle fittings, then five elite leader looks)
 
 - Did: #281/#282 on `codex/puzzle-props-and-elite-looks`. Replaced simple live
@@ -1062,6 +1083,11 @@ persistence through the find and removal after reporting, alongside its existing
 - Did: Owner screenshot showed her hands still inside her thighs (side view). They were buried from late sit-down through the whole hold and early stand-up. hand_lift.py gained a fixed direction; prepare_wardrobe_v6.py raises both hands straight up (left 0.25, right 0.22) with the same lift on both sides of each join. assembly-v6 passes all checks; docs/female-chair-hold-review.md has the details.
 - Next: Owner reviews assembly-v6 (START_REVIEW.cmd). Male hand contacts and a real chair are still unchecked.
 - Watch out: amounts were chosen from renders, not an automatic test. Earlier assemblies are untouched.
+## 2026-11-03 – ChatGPT (finished swappable padded jacket, #220)
+- Did: Finished separate female-v1 / male-tpose-v1 jacket fits in the isolated `codex/padded-jacket-production` branch. Worn original 512px canvas, continuous hip hem/side splits, padded sleeves/collar, front overlap, three wooden toggles, stitched elbow repair and fitted alternative belt. Local `build/local-padded-jacket-v2/review/inspector.html` compares Tunic/Jacket; START_REVIEW.cmd swaps them on the same skeleton with reversible coverage, paused stepping and a close-up. Editable masters, whole-wardrobe and jacket-only GLBs remain local/ignored. Handoff: docs/padded-jacket-production.md.
+- Checks: 2,528 construction, 972 independent export/reimport, 5,128 reopened lineage/component, 6,488 native, 4,082 headless, 671 artifact and 162 browser checks pass. 328 actual native / 14 Blender captures. Adopted Claude's checked assembly-v6 snapshot during the pass; original body/UV/weights/garments/rest and every Action key/handle/slot are unchanged. Final jacket outfits are 6,922 / 5,680 visible triangles and 16 surfaces per fit. Source masters, old draft, previous assemblies and main's work/index were not changed.
+- Next: Owner reviews the finished garment in #220. Claude can use the exact-fit jacket-only components and outfit metadata on later wardrobe hookup; no live equipment/rules changed. The pushed branch carries this handoff and generic tools only; no merge into main during concurrent work.
+- Watch out: #214/#215/#218 remain open. Garment checks do not approve source foot/seat/hand contacts, loops or physical-iPhone performance. The reviewer retains original travel and stops at real clip endpoints. Blender's legacy male object names remain *.male.v1 for tooling, but the male component's base_fit_id is male-tpose-v1; do not use the retired lowered-arm bind.
 
 ## 2026-11-03 – Claude (owner approved the male T-pose, #221)
 - Did: Owner reviewed assembly-v5 ("That looks great"). Recorded in docs/male-tpose-rebind.md and closed #221.

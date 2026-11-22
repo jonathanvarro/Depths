@@ -1,0 +1,65 @@
+{
+  "items": [
+    {
+      "id": "quilted_coat",
+      "name": "Quilted coat",
+      "old_icon": "res://art/items/refined-v2/padded-coat.png",
+      "icon": "res://art/items/regional-equipment-v2/quilted_coat.png",
+      "source": "art/source/regional-equipment-v2/quilted_coat-master.png",
+      "source_sha256": "6606440506cf4662d1792b9617100b7cbac06d12859026e4bbafbdc2de179596",
+      "icon_sha256": "dbcd5f48fdd5fac1402add2dc2901b1c6e3d8d0b52881a06617f68750234070b"
+    },
+    {
+      "id": "studded_jerkin",
+      "name": "Studded jerkin",
+      "old_icon": "res://art/items/equipment-live-v1/studded_jerkin.png",
+      "icon": "res://art/items/regional-equipment-v2/studded_jerkin.png",
+      "source": "art/source/regional-equipment-v2/studded_jerkin-master.png",
+      "source_sha256": "4241bff4b574f269d1984c68f99de5aee00485a14254d60926ed57508e0df7c0",
+      "icon_sha256": "2f8677a3891f3306298fdc0f87ababaa40c5265caee4d9ee9c2a7081dc65a5a4"
+    },
+    {
+      "id": "goblin_scale",
+      "name": "Goblin scale shirt",
+      "old_icon": "res://art/items/equipment-live-v1/goblin_scale.png",
+      "icon": "res://art/items/regional-equipment-v2/goblin_scale.png",
+      "source": "art/source/regional-equipment-v2/goblin_scale-master.png",
+      "source_sha256": "c6a69ca21d4a706339766ad65de0f4ba775104a366ea1aed3e102bfeeb5f1114",
+      "icon_sha256": "4402c12d61e818482d8b3b34d61ad0c39be9652368ca7283cd2f951ecf746136"
+    },
+    {
+      "id": "goblin_shield",
+      "name": "Goblin round shield",
+      "old_icon": "res://art/items/equipment-live-v1/goblin_shield.png",
+      "icon": "res://art/items/regional-equipment-v2/goblin_shield.png",
+      "source": "art/source/regional-equipment-v2/goblin_shield-master.png",
+      "source_sha256": "e772fb9586967f1d571780ee515dbc2e76d655254f20b63329ed449b33d32977",
+      "icon_sha256": "5ffce65987c9c8868863cd1986aa64bfc7f8369d93e86a17da9a2da57d038efe"
+    }
+  ],
+  "candidate_audit": {
+    "surveyors-shortsword": "Keep the founder sword and current ordinary sword pictures; unused alternative retained.",
+    "quarry-hammer": "Adopted for the actual Miner's sledge in the tool rack.",
+    "shaft-spear": "The live Ash-shaft spear already has this narrow profile.",
+    "miners-sling": "Use the newer Leather sling production design (ranged-focus-v1).",
+    "hazel-walking-staff": "Use the newer Oak Staff production design (ranged-focus-v1); this remains an alternative concept.",
+    "waxed-work-jerkin": "The live Patched leather jerkin already has this silhouette.",
+    "quilted-work-coat": "Adapted to the current Quilted coat; new production icon, unchanged item rules.",
+    "riveted-mining-coat": "Retained concept with no live base; no new gear ID or stats introduced.",
+    "pit-shield": "The existing Iron-rimmed buckler now has a dedicated round shield.",
+    "survey-cape": "Keep the live full Oilcloth cloak; the short hooded cape remains an unused alternative.",
+    "prospectors-satchel": "The live Leather satchel already uses this bag.",
+    "notched-falchion": "The live Goblin cleaver uses this picture.",
+    "gatebreaker-mace": "Keep the heavier concept. The actual Light mace receives its own narrower variant.",
+    "garrison-spear": "The live Boar spear already has the related crossbar adaptation.",
+    "sentry-shortbow": "Use the newer Short Bow production design (ranged-focus-v1).",
+    "cinderwood-baton": "Use the newer Prayer Wand production design (ranged-focus-v1); no new regional base.",
+    "raiders-leather-vest": "The live Studded jerkin now has its own asymmetric vest adaptation.",
+    "riveted-guard-coat": "Adapted to the current Studded jerkin; new production icon, unchanged item rules.",
+    "garrison-scale-coat": "Adapted to the current Goblin scale shirt; new production icon, unchanged item rules.",
+    "gate-guards-shield": "Adapted to the current Goblin round shield; new production icon, unchanged item rules.",
+    "raiders-mantle": "The live Shadow-dyed cape uses this picture.",
+    "quartermasters-pack": "The existing Miner's frame pack is already pictured and remains a Cave & Mine base."
+  },
+  "nonvisual_fields_preserved": true
+}
