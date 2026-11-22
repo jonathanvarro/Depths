@@ -13,6 +13,18 @@ Format:
 
 ---
 
+## 2026-11-22 – Claude (named elite packs, #277)
+
+- Did: owner request. Random elites in ordinary fights are off (`CombatState.RANDOM_ELITES`). Instead `scripts/elites.gd` gives each floor a chance (25/40/50%) of one named pack, chosen when the floor is built (main `_choose_elite`, seed +59, kinds already beaten only) and kept in `map.marks["elite"]`. It patrols between rooms on the map with a coloured glow (`Roamers.Group.named/patrol`, main `_spawn_elite`, `_patrol`), noticing and closing in like other groups. Fights are `_fight_kind == "elite"`: `Elites.empower` names the leader, gives it both marks and +30% health, followers one mark. Victory: `_elite_won` (tier-2 find + gold) and the pack stays beaten for that floor's day; running leaves it patrolling. `tools/named_elites_check.gd`.
+- Next: owner plays; balance (the bot report predates this); own looks for the leaders.
+- Watch out: CombatState.ELITE_CHANCE/MAX_ELITES are now unused by the game.
+
+## 2026-11-21 – Claude (floor puzzles, #275)
+
+- Did: owner request. `scripts/puzzles.gd` lays up to three puzzles into floors 1-4 after packages and the refuge (main `_go_to_floor`, seed +43): a one-way door on a loop (barred on the side nearer the stairs; `bolt` is the cell it opens from), a lever and chain gate shutting a dead-end side room (a nest fight behind it from floor 3), and a key with a dead explorer far away opening a locked side room. Each side room gets a chest. `Puzzles.solve` replays the floor from both staircases and any puzzle that would break solvability is dropped. State lives in `map.marks["puzzles"]` (saved with the map); shut doors, levers and key spots are `map.solid`, worked in main `_work_puzzle` from `_on_party_interacted`. Looks: `scripts/puzzle_props.gd` (built shapes; the gate is #246's flow-gate). `tools/puzzles_check.gd` (1,200 floors solvable, each puzzle played, save/restore; with a shots dir it captures each piece).
+- Next: owner plays; real 3D door/lever/key art could replace the built shapes; floors 5+ need the solver to know about water first.
+- Watch out: quest sites (with a margin), their events/fights, the refuge and the fortress hall/gates are kept clear of puzzles.
+
 ## 2026-11-21 – Claude (view from above switched off)
 
 - Did: owner: keep the view from above off on all floors and in all fights for now. `Main.overhead_from_floor` defaults to `OVERHEAD_OFF` (999), so the View button, V and the board camera never come up; the Settings switch is commented out in settings_screen.gd. All the code stays; board checks still set `overhead_from_floor = 1`.

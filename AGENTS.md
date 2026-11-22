@@ -597,6 +597,14 @@ Templates > Download and Install; already installed on the owner's PC).
   `bring_home`, `drop_carried`; main.gd `_leave_the_bodies`, `_place_bodies`,
   `_pick_up_body`, map `marks["bodies"]`). Named companions roll two
   strengths; `Equipment.named_for` is named-only gear. `tools/lost_bodies_check.gd`.
+- Floor puzzles (#275, 2026-11-21): `scripts/puzzles.gd` (place/solve;
+  one-way doors, lever gates with nests from floor 3, keys; floors 1-4),
+  `scripts/puzzle_props.gd` (looks), main `_work_puzzle`, `map.marks["puzzles"]`.
+  Every floor is proved solvable from both staircases; `tools/puzzles_check.gd`.
+- Named elite packs (#277, 2026-11-22): `scripts/elites.gd` (PACKS, pick,
+  empower, glow), main `_choose_elite`/`_spawn_elite`/`_patrol`/`_elite_won`,
+  `map.marks["elite"]`, `_fight_kind == "elite"`; random elites are off
+  (`CombatState.RANDOM_ELITES`). `tools/named_elites_check.gd`.
 - Settings (#52): `scripts/settings.gd` (static values, `apply()`, audio
   buses Master/Music/Effects; test runs use test_settings.cfg) and
   `scripts/settings_screen.gd`. New sound players should set `bus`.

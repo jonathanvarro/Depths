@@ -46,6 +46,9 @@ const SaveGame := preload("res://scripts/save_game.gd")
 const Progression := preload("res://scripts/progression.gd")
 const Sounds := preload("res://scripts/sounds.gd")
 const Music := preload("res://scripts/music.gd")
+const Puzzles := preload("res://scripts/puzzles.gd")
+const Elites := preload("res://scripts/elites.gd")
+const PuzzleProps := preload("res://scripts/puzzle_props.gd")
 const Quests := preload("res://scripts/quests.gd")
 const ConversationScreen := preload("res://scripts/conversation_screen.gd")
 const QuestLog := preload("res://scripts/quest_log.gd")
@@ -364,6 +367,7 @@ var _settings: Control  # settings_screen.gd (#52)
 var _cave_theme: EnvironmentTheme  # upper mine/outskirts; floor two and fortress have their own
 var _next_opening := ""  # the next fight's round-one side (#73)
 var _fight_kind := ""  # "gate" or "queen" while those fights run (#44)
+var _elite_id := ""  # the named pack being fought ("elite" fights; elites.gd)
 ## Wandering monsters (owner, 2026-10-26): the floor's clock. Checks that
 ## walk a floor for something else can turn them off.
 var _wanderers := Wanderers.new()
@@ -660,9 +664,27 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 			refuge = placed["cell"]
 			if refuge != Vector2i(-1, -1):
 				marks["refuge"] = refuge
+		# Puzzles (owner, 2026-11-21): one-way doors, a lever and gate, a key
+		# and locked door, kept clear of quests, the refuge and the hall,
+		# and only ever placed where the floor stays solvable.
+		if not use_debug_layout and not _in_opening:
+			var keep_clear: Array = stamped["events"].keys() + stamped["fights"].keys() + marks.get("hall", []) + marks.get("gates", [])
+			if refuge != Vector2i(-1, -1):
+				keep_clear.append(refuge)
+			for id in stamped["sites"]:
+				var site: Rect2i = stamped["sites"][id]
+				for x in range(site.position.x - 1, site.end.x + 1):
+					for y in range(site.position.y - 1, site.end.y + 1):
+						keep_clear.append(Vector2i(x, y))
+			var laid: Dictionary = Puzzles.place(stamped["layout"], depth, _site_seed + depth * 7919 + 43, keep_clear)
+			stamped["layout"] = laid["layout"]
+			if not laid["puzzles"].is_empty():
+				marks["puzzles"] = laid["puzzles"]
 		_floors[depth] = DungeonMap.new(stamped["layout"], depth)
 		_floors[depth].marks = marks
+		Puzzles.make_solid(_floors[depth])  # shut doors, the lever and the key's resting place
 		_assign_events(_floors[depth])
+		_choose_elite(_floors[depth], depth)
 		for cell in stamped["events"]:
 			_floors[depth].events[cell] = stamped["events"][cell]
 		if refuge != Vector2i(-1, -1):
@@ -796,6 +818,7 @@ func _build_level() -> void:
 		landmarks = Landmarks.place(_level, _map, _depth, _site_seed, CELL_SIZE, WALL_HEIGHT)  # #117
 	if not _in_opening:
 		_add_body_props()  # #180
+		_add_puzzle_props()
 	if _depth == FORTRESS_DEPTH and not _in_opening:
 		_add_fortress_dressing()  # after the landmarks, so its cages keep out of theirs (#117)
 	if not _in_opening and not use_debug_layout:
@@ -1051,7 +1074,9 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 	var state = CombatState.new(_party_state, types)
 	if not _in_opening:
 		state.beaten = _camp_state.bestiary.keys().filter(func(k): return int(_camp_state.bestiary[k].get("killed", 0)) > 0)  # elites only of kinds already beaten (#226)
-		state.prepare(_depth, _fight_kind)  # deeper is tougher; some elites (#140)
+		state.prepare(_depth, _fight_kind)  # deeper is tougher (#140)
+		if _fight_kind == "elite":
+			Elites.empower(state, _elite_id)  # the named pack (elites.gd)
 	if _next_opening != "":
 		state.set_opening(_next_opening)  # struck first, or caught out (#73)
 		_next_opening = ""
@@ -1130,6 +1155,8 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 		_trinket_drops(state)
 		if _fight_kind == "lair":
 			_lair_won()
+		elif _fight_kind == "elite":
+			_elite_won()
 		await _offer_overflow()
 	if state.field:
 		_end_field_fight()
@@ -1411,7 +1438,7 @@ func _fight_memories(state, result: int) -> void:
 	for hero: Companion in _party_state.living_members():
 		if hero.health <= CLOSE_CALL_HEALTH:
 			_trip_memories[hero] = hero.remember("close_call", "Came through a fight on %d health, floor %d" % [hero.health, _depth], day)
-	if _fight_kind in ["lair", "queen"]:
+	if _fight_kind in ["lair", "queen", "elite"]:
 		var boss = null
 		for foe in state.foes:
 			if boss == null or foe.type.threat > boss.type.threat:
@@ -1447,6 +1474,65 @@ func _spawn_room_groups() -> void:
 	var size := maxi(1, _party_state.living_members().size())
 	for group in Roamers.room_groups(_map, func(_c): return encounter_pool(_depth, size).pick_random()):
 		_place_group(group)
+	_spawn_elite()
+
+
+# --- Named elite packs (owner, 2026-11-22; elites.gd) ----------------------
+
+## A new floor may have a named pack today (kinds the party has beaten only).
+func _choose_elite(map, depth: int) -> void:
+	if use_debug_layout or _in_opening:
+		return
+	var rng := RandomNumberGenerator.new()
+	rng.seed = _site_seed + depth * 7919 + 59
+	var beaten: Array = _camp_state.bestiary.keys().filter(func(k): return int(_camp_state.bestiary[k].get("killed", 0)) > 0)
+	var id: String = Elites.pick(depth, rng, beaten)
+	if id == "":
+		return
+	var stairs: Vector2i = map.find_content(DungeonMap.Content.STAIRS_UP)
+	var at: Vector2i = Elites.start_cell(map, stairs if stairs != Vector2i(-1, -1) else map.start_cell)
+	if at != Vector2i(-1, -1):
+		map.marks["elite"] = {"id": id, "cell": at, "beaten": false}
+
+
+## The floor's named pack takes to the halls, if it's still out there.
+func _spawn_elite() -> void:
+	var elite: Dictionary = _map.marks.get("elite", {})
+	if elite.is_empty() or elite["beaten"]:
+		return
+	var group := Roamers.Group.new()
+	group.named = elite["id"]
+	group.cell = elite["cell"]
+	group.types.assign(Elites.types(group.named))
+	_place_group(group)
+
+
+## A named pack walks between rooms until it sees the party.
+func _patrol(group, taken: Dictionary) -> void:
+	group.rested = not group.rested
+	if group.rested:
+		return  # an unhurried walk: a step every other beat
+	if group.patrol == Roamers.NOWHERE or group.patrol == group.cell:
+		group.patrol = Elites.patrol_target(_map, _rng, group.cell)
+	var from: Vector2i = group.cell
+	if Roamers.step_toward(_map, group, group.patrol, taken):
+		taken.erase(from)
+		taken[group.cell] = true
+		_move_group_node(group)
+	else:
+		group.patrol = Roamers.NOWHERE  # blocked: somewhere else next time
+
+
+## Its hoard: a rare find and gold, on top of what the pack itself dropped.
+func _elite_won() -> void:
+	var pack: Dictionary = Elites.PACKS[_elite_id]
+	if _map.marks.has("elite"):
+		_map.marks["elite"]["beaten"] = true
+	var prize: Equipment = GearModel.conceal(GearModel.random_find(_rng, _depth, 2))  # #192; read it later
+	var gold: int = Elites.HOARD_GOLD + Elites.HOARD_GOLD_PER_FLOOR * _depth
+	_party_state.supplies.gold += gold
+	_party_state.supplies.changed.emit()
+	_found_gear(prize, "%s is dead. The pack's hoard: %s, and %d gold." % [pack["leader"], _a(prize.display_name.to_lower()), gold])
 
 
 func _clear_groups() -> void:
@@ -1476,6 +1562,9 @@ func _show_group(group) -> void:
 	_roamer_root.add_child(node)
 	FoeView.face(node, _party.global_position)
 	group.node = node
+	if group.named != "":
+		_mark_elite(node)
+		node.add_child(Elites.glow(group.named))  # seen coming by its glow
 
 
 func _group_at_home(cell: Vector2i):
@@ -1514,11 +1603,18 @@ func _map_beat(party_cell: Vector2i) -> bool:
 			return true
 	var band: int = _party_state.supplies.light_band()
 	var newly := false
+	var named_seen := ""
 	for group in _groups:
 		if not group.noticed and Roamers.notices(_map, group, party_cell, band):
 			group.noticed = true
 			newly = true
-	if newly:
+			if group.named != "":
+				named_seen = group.named
+	if named_seen != "":
+		Sounds.play(self, "map_noticed", -3.0, 0.0)
+		_show_message(Elites.PACKS[named_seen]["seen"])
+		_tip("named_elites", "A named pack: far tougher than the floor's other monsters, but it guards a hoard. Its glow shows where it walks; wait for it to pass, or pick your ground.")
+	elif newly:
 		Sounds.play(self, "map_noticed", -6.0, 0.0)
 		_show_message("Something ahead has seen you.")
 		_tip("map_fights", "Monsters stand on the map now. Once they've seen you, they close in a step each time you move or wait. Turning is free. Fight where they can only come at you one way, or walk up on one that hasn't seen you to strike first.")
@@ -1526,7 +1622,9 @@ func _map_beat(party_cell: Vector2i) -> bool:
 	for group in _groups:
 		taken[group.cell] = true
 	for group in _groups:
-		if group.noticed:
+		if not group.noticed and group.named != "":
+			_patrol(group, taken)
+		elif group.noticed:
 			var from: Vector2i = group.cell
 			if Roamers.step_toward(_map, group, party_cell, taken):
 				taken.erase(from)
@@ -1560,6 +1658,9 @@ func _engage(group) -> void:
 	if group.home != Roamers.NOWHERE:
 		_map.enter(group.home)
 	_fight_kind = "wander" if group.is_wanderer() else ""
+	if group.named != "":
+		_fight_kind = "elite"
+		_elite_id = group.named
 	if is_instance_valid(group.node):
 		group.node.visible = false
 	var types: Array[EnemyType] = []
@@ -1573,6 +1674,11 @@ func _map_fight_over(won: bool) -> void:
 	var group = _engaged
 	_engaged = null
 	if group == null:
+		return
+	if group.named != "" and not won:
+		group.noticed = false  # it lost you; it walks on
+		group.patrol = Roamers.NOWHERE
+		_show_group(group)
 		return
 	if won or group.is_wanderer():
 		_groups.erase(group)
@@ -1607,6 +1713,8 @@ func _begin_field_fight(state, leader_cell: Vector2i) -> void:
 		foe.cell = spots[mini(i, spots.size() - 1)] if not spots.is_empty() else leader_cell
 		taken[foe.cell] = true
 		_place_field_foe(foe)
+		if _fight_kind == "elite" and i == 0 and is_instance_valid(foe.node):
+			foe.node.add_child(Elites.glow(_elite_id))  # its glow comes into the fight
 		if _fight_kind == "queen" and foe.type.tactic == EnemyType.Tactic.QUEEN and is_instance_valid(foe.node):
 			# His throne's fires light him across the hall (#257).
 			var glow := OmniLight3D.new()
@@ -2115,6 +2223,86 @@ func _add_body_props() -> void:
 		body.name = "Body_%d_%d" % [cell.x, cell.y]
 		_level.add_child(body)
 		i += 1
+
+
+## The floor's puzzles (owner, 2026-11-21; scripts/puzzles.gd), as built.
+func _add_puzzle_props() -> void:
+	for p: Dictionary in _map.marks.get("puzzles", []):
+		_refresh_puzzle_prop(p, "door", false)
+		if p.has("lever"):
+			_refresh_puzzle_prop(p, "lever", false)
+		if p.has("key"):
+			_refresh_puzzle_prop(p, "key", false)
+
+
+## Builds (or rebuilds) one puzzle piece; `animate` plays the change.
+func _refresh_puzzle_prop(p: Dictionary, part: String, animate: bool) -> void:
+	var cell: Vector2i = p[part]
+	var name := "Puzzle_%d_%d" % [cell.x, cell.y]
+	var old := _level.get_node_or_null(name)
+	if old and animate and old.has_method("set_open"):
+		old.set_open(true, Settings.get_value("flashes"))
+		return
+	if old:
+		old.queue_free()
+		old.name = name + "_old"
+	var node: Node3D = PuzzleProps.build(p, part, _map, CELL_SIZE, WALL_HEIGHT)
+	if node:
+		node.name = name
+		_level.add_child(node)
+
+
+## Walking into a puzzle's door, lever or key. Returns true if it was one.
+func _work_puzzle(cell: Vector2i) -> bool:
+	for p: Dictionary in _map.marks.get("puzzles", []):
+		if p["door"] == cell and not p["open"]:
+			match p["kind"]:
+				"oneway":
+					if _party.cell == p["bolt"]:
+						_open_puzzle_door(p)
+						_show_message("You draw the heavy bolt and the door swings open: a quicker way back.")
+					else:
+						_show_message("The door won't move. It's bolted from the other side.")
+						Sounds.play(self, "ui", -10.0, 0.0)
+				"key":
+					if p["held"]:
+						_open_puzzle_door(p)
+						_show_message("The key turns, stiff with rust, and the door grinds open.")
+					else:
+						_show_message("Locked. Somewhere on this floor there must be a key.")
+				"lever":
+					_show_message("An iron gate on chains, shut fast. No handle this side: something must raise it.")
+			return true
+		if p.get("lever", Vector2i(-1, -1)) == cell:
+			if p["open"]:
+				_show_message("The lever is already down.")
+			else:
+				_open_puzzle_door(p)
+				_refresh_puzzle_prop(p, "lever", true)
+				if p.get("nest", false):
+					_show_message("You haul the lever down. Somewhere a gate rattles up on its chains... and something behind it stirs.")
+				else:
+					_show_message("You haul the lever down. Somewhere a gate rattles up on its chains.")
+			return true
+		if p.get("key", Vector2i(-1, -1)) == cell:
+			if p["held"]:
+				_show_message("Only bones now.")
+			else:
+				p["held"] = true
+				_refresh_puzzle_prop(p, "key", true)
+				_show_message("A dead explorer, still clutching an iron key. You take it: it must open something on this floor.")
+				Sounds.play(self, "coins", -8.0)
+				_save_now()
+			return true
+	return false
+
+
+func _open_puzzle_door(p: Dictionary) -> void:
+	p["open"] = true
+	_map.solid.erase(p["door"])
+	_refresh_puzzle_prop(p, "door", true)
+	_play_effect(environment_theme.open_sound)
+	_save_now()
 
 
 ## Walking into a body lost in a wipe: the party wraps it to carry home.
@@ -3636,6 +3824,8 @@ func _on_party_interacted(cell: Vector2i) -> void:
 		_say("fire", false, true)
 		return
 	if _pick_up_body(cell):
+		return
+	if _work_puzzle(cell):
 		return
 	if _map.triggered.has(cell):
 		_show_message("Nothing more to take.")
