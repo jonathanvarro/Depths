@@ -1,5 +1,9 @@
 # Regional equipment icon first pass (#194 / #195)
 
+Current production follow-up (2026-11-22): [four live-shape adaptations and
+the complete candidate disposition](companion-polish-and-regional-equipment.md).
+This page retains the earlier two-icon pass.
+
 [Review both updated icons and the decisions on all 22 original candidates](../art/concepts/regional-equipment-v1/inspector.html).
 
 - **Cave & Mine.** The Quarry Hammer master now supplies the actual Miner's sledge picture in the tool-rack loot. The square iron head makes it distinct from the wooden club it previously used.

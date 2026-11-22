@@ -8,6 +8,17 @@ out of git (see `docs/blender-expedition-kit-tasks.md`).
 
 ## Where the files live
 
+### Companion seat-fit garment follow-up (2026-11-22, #218/#220)
+
+`build/local-companion-polish-v1` reuses all six original motions per body and
+the same 65/49-bone fits. No Action keys, root curves, timing, slots or rest
+bones change. Revised jacket cut/weights and waist visibility clear the fixed
+43 cm stool at all 1,221 integer chair-sequence source frames. Export/reimport,
+lineage, native outfit/input and phone-shape checks pass. Separate editable
+copies and media stay private/local. Source gait/death/hand/foot limitations
+and loop/in-place choices remain #218; this is garment polish rather than a
+new animation library. See [the handoff](companion-polish-and-regional-equipment.md).
+
 ### Named elite wrappers (#282, 2026-11-22)
 
 `art/enemies/named-leaders-v1` reuses the original great-rat, webspinner,
@@ -111,6 +122,19 @@ are preserved. These are static scenery exports, not new character clips.
   `build/local-blender-kit-v1/animation-requests-v1/received-v1/`, with separate
   female/male and individual/locomotion namespaces. Current catalogue and
   body/native checks: [received-animation-library.md](received-animation-library.md).
+
+### Padded jacket review · #220 (2026-11-03)
+
+`build/local-padded-jacket-v2/` uses assembly-v6's six existing Actions per
+body, including the current female chair hand-rest Actions and all approved male
+T-pose conversions. No clip is added, renamed, retimed or edited. Reopened
+Action key/handle/slot hashes, source body/UV/weights and rest rig agree exactly
+with the pinned source masters. The Tunic/Jacket switch reuses the skeleton
+and preserves its exact paused pose. Native motion/sequence/coverage and
+phone-size checks are documented in [padded-jacket-production.md](padded-jacket-production.md).
+This verifies the garment's export and switching; source contact/loop and
+owner animation acceptance remain separate under #214/#215/#218. Those issues
+stay open and existing clip statuses are not promoted.
 
 ## What every clip shares (measured 2026-11-01)
 

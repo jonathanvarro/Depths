@@ -236,7 +236,8 @@
         "health"
       ],
       "live": "padded_coat",
-      "weight": "light"
+      "weight": "light",
+      "icon": "res://art/items/regional-equipment-v2/quilted_coat.png"
     },
     {
       "id": "leather_jerkin",
@@ -266,7 +267,7 @@
       "template": "leather_jerkin",
       "price": 52,
       "description": "Leather set with iron studs. Better made than it looks.",
-      "icon": "res://art/items/equipment-live-v1/studded_jerkin.png"
+      "icon": "res://art/items/regional-equipment-v2/studded_jerkin.png"
     },
     {
       "id": "goblin_scale",
@@ -284,7 +285,7 @@
       "template": "leather_jerkin",
       "price": 70,
       "description": "Overlapping goblin-forged scales on a stiff backing. It stops a lot, and slows you.",
-      "icon": "res://art/items/equipment-live-v1/goblin_scale.png"
+      "icon": "res://art/items/regional-equipment-v2/goblin_scale.png"
     },
     {
       "id": "sling",
@@ -471,7 +472,7 @@
       "template": "wool_cape",
       "price": 34,
       "description": "A round goblin shield of hide on wood.",
-      "icon": "res://art/items/equipment-live-v1/goblin_shield.png"
+      "icon": "res://art/items/regional-equipment-v2/goblin_shield.png"
     },
     {
       "id": "oilcloth_cloak",
