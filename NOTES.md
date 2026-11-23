@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-11-22 – ChatGPT (cohesive camp and sharp gold, #286/#289)
+- Did: repainted terrain with an earth tent pad, weathered the tent exterior to match it, and made a grounded recruitment hearth with low seats and food on a stump table. Re-registered the existing anonymous ambient figures; candidate/service visibility is unchanged. Preserved the approved tent interior. Pack now has the same top-right safe-area anchor/size in camp and exploration, with the map below it. Camp effects follow Settings when opened and after Settings closes. Replaced the stash's enlarged 20px gold symbol with a sharp 512px-import coin painting; gold values/transfers and compact HUD glyphs remain. Built-in ImageGen prompts and exact output hashes are in the asset manifests; `docs/camp-cohesion-and-currency.md` records the handoff.
+- Next: owner review of the combined art delivery. Native captures/gallery: `build/local-camp-cohesion-v5/inspector.html`.
+- Watch out: imported camp textures are capped at 1024px, so site.gd scales from actual imported dimensions to preserve contacts. No physical iPhone run. Other station portraits/art retain highres-v4 and the same arrival/story rules.
+
 ## 2026-11-22 – Claude (softer darkness, less bolting, quieter camp music)
 - Did: owner found panic plus a blank map too punishing. In the dark the map now keeps the explored part of the room or hallway you're in and of the room with the way up (`Minimap.dark_cells`, new `DungeonMap.area_around`: a room, or connected corridor floor up to passages), with a caption "Too dark: only this place and the way up"; landmarks/quest cairns outside it hide; openings into hidden parts are dashed. Panic bolt chance 0.15 -> 0.12 per step. Camp music 10% quieter (`Music.PLACE_VOLUME`, `volume_for`). Checks: darkness_check (partial map), batch_check (camp volume).
 - Next: owner playtest of how the dark map and bolting feel.
