@@ -137,6 +137,12 @@ Format:
 - Next: owner looks at it in play; if a strike now feels soft, lower `BLEND`.
 - Watch out: the fix is applied at load to the imported clips, not in the .glb/Blender sources; a re-export keeps the flips in the files but the helper still evens them out.
 
+## 2026-11-21 – ChatGPT (small mine life, #266)
+
+- Did: added occasional tiny bats, scurrying mice and falling ceiling dust to lit exploration on floors 1–2, through `Ambience.mine_life`. Reuses the existing rat run and cave-bat flight at small scale; source models/materials stay intact. One short effect at a time, independent cosmetic RNG, empty reachable cells and overhead revealed-cell checks. Hides during combat, opening, camp, menus and weak light; screen flashes/moving effects off clears it immediately. See `docs/mine-life.md`.
+- Next: merge the branch after review; tune frequency during play if desired. Native phone-size captures stay local under `build/local-mine-life-v1/phone`; physical iPhone review remains.
+- Watch out: cosmetic only: no loot, targets, collision, sound, encounter changes or saved wildlife. Keep the feature on the first two floors until later regions get their own atmosphere. Claude's current working-copy edits were left untouched in the main checkout.
+
 ## 2026-11-21 – Claude (Skip the tutorial on the title)
 
 - Did: owner request. The title has "Skip the tutorial": it opens the hero screen, then starts a new game at camp after the commander's first talk, as the escape leaves it (the hero has the fallen companion's weapon, starting supplies and the same partial camp). `SaveGame.skip_opening`, main `_skip_opening`. `tools/skip_opening_check.gd`.

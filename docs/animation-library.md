@@ -32,6 +32,15 @@ hashes are in the new catalogue. See
 real patrol/combat captures and local detail masters. Per-body human statuses
 below are unaffected.
 
+### Mine atmosphere reuse (#266, 2026-11-21)
+
+`scripts/mine_life.gd` samples the existing rat **run** and cave bat **idle**
+at small wildlife scale during exploration on floors 1–2. Independent outer
+paths supply cosmetic travel; source rigs and Actions are unchanged. A
+28-grain MultiMesh supplies procedural ceiling dust. Motion-off removes all
+three. Native phone-size playback and expiry checked; see
+[mine-life.md](mine-life.md). No new human clips or retargeting.
+
 ### CC0 rat pilot exception (#252 / #251, 2026-11-09)
 
 `art/enemies/rat-3d-v1/rat.glb` is a public CC0-derived animated rat, separate
