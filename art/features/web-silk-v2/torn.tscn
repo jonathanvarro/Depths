@@ -1,0 +1,17 @@
+[gd_scene load_steps=6 format=3]
+[ext_resource type="Script" path="res://art/features/web-silk-v2/appearance.gd" id="script"]
+[ext_resource type="ArrayMesh" path="res://art/features/web-silk-v2/torn.res" id="mesh"]
+[ext_resource type="Shader" path="res://art/features/web-silk-v2/silk.gdshader" id="shader"]
+[ext_resource type="Texture2D" path="res://art/features/web-silk-v2/silk.png" id="silk"]
+[sub_resource type="ShaderMaterial" id="material"]
+shader=ExtResource("shader")
+shader_parameter/silk=ExtResource("silk")
+shader_parameter/torn=true
+[node name="PassageSilk" type="Node3D"]
+script=ExtResource("script")
+metadata/asset_id="web-torn"
+metadata/forward="-Z"
+[node name="Silk" type="MeshInstance3D" parent="."]
+mesh=ExtResource("mesh")
+material_override=SubResource("material")
+cast_shadow=0
