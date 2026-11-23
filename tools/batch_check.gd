@@ -172,6 +172,8 @@ func _initialize() -> void:
 	Settings.set_value("Music", 0.3, self)
 	var music := AudioServer.get_bus_index("Music")
 	check("music volume applies to its own bus", music != -1 and absf(AudioServer.get_bus_volume_db(music) - linear_to_db(0.3)) < 0.1)
+	var Music = load("res://scripts/music.gd")
+	check("camp music plays 10% quieter than the rest (owner, 2026-11-22)", absf(db_to_linear(Music.volume_for("camp")) / db_to_linear(Music.volume_for("cave")) - 0.9) < 0.001)
 	check("the place bed plays on the effects bus (#217's field ambience)", main._ambience_player.bus == "Effects")
 	Settings.set_value("text_size", "Large", self)
 	check("text size scales the interface", is_equal_approx(root.content_scale_factor, 1.15))

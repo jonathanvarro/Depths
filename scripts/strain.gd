@@ -20,8 +20,9 @@ const THRESHOLDS := {State.UNEASY: 25.0, State.SHAKEN: 50.0, State.PANICKING: 75
 const NAMES := {State.STEADY: "Steady", State.UNEASY: "Uneasy", State.SHAKEN: "Shaken", State.PANICKING: "Panicking"}
 ## How well a hero performs (combat will use this, #14).
 const EFFECTIVENESS := {State.STEADY: 1.0, State.UNEASY: 0.9, State.SHAKEN: 0.75, State.PANICKING: 0.6}
-## Chance per move that a panicking hero bolts the wrong way.
-const PANIC_BOLT_CHANCE := 0.15
+## Chance per move that a panicking hero bolts the wrong way (0.15 until
+## owner 2026-11-22: "reduce the rate of panic bolting, just a little").
+const PANIC_BOLT_CHANCE := 0.12
 
 ## Per time unit:
 const TIME := 0.04  # half the old 0.08 (#236 middle ground)

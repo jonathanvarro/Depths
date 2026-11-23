@@ -126,6 +126,29 @@ func room_around(cell: Vector2i) -> Array[Vector2i]:
 	return found
 
 
+## The room or the stretch of hallway a cell is in (owner, 2026-11-22: what
+## the map still shows in the dark). A room is room_around; a hallway is
+## the connected corridor floor around it, stopping at rooms and passages.
+func area_around(cell: Vector2i, limit := 120) -> Array[Vector2i]:
+	if is_wall(cell):
+		return []
+	if _is_room_cell(cell):
+		return room_around(cell)
+	var found: Array[Vector2i] = [cell]
+	var seen := {cell: true}
+	var i := 0
+	while i < found.size() and found.size() < limit:
+		var c := found[i]
+		i += 1
+		for offset in [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]:
+			var next: Vector2i = c + offset
+			if seen.has(next) or is_wall(next) or _is_room_cell(next) or DOOR_SYMBOLS.has(_rows[next.y][next.x]):
+				continue
+			seen[next] = true
+			found.append(next)
+	return found
+
+
 func _is_room_cell(cell: Vector2i) -> bool:
 	if is_wall(cell):
 		return false

@@ -10,6 +10,13 @@ const FADE := 1.5  # seconds
 ## After a fight the battle music winds down more slowly (owner, 2026-11-21).
 const AFTER_FIGHT := 4.0
 const VOLUME_DB := -8.0
+## Per-place loudness, as a share of VOLUME_DB's level: camp 10% quieter
+## (owner, 2026-11-22).
+const PLACE_VOLUME := {"camp": 0.9}
+
+
+static func volume_for(where: String) -> float:
+	return VOLUME_DB + linear_to_db(PLACE_VOLUME.get(where, 1.0))
 
 var place := ""
 var _players: Array[AudioStreamPlayer] = []
@@ -70,4 +77,4 @@ func play_with_fade(fade: float, where: String) -> void:
 		new.stream = stream
 		new.volume_db = -80.0
 		new.play()
-		tween.tween_property(new, "volume_db", VOLUME_DB, fade).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
+		tween.tween_property(new, "volume_db", volume_for(where), fade).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)

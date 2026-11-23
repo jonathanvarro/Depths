@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-11-22 – Claude (softer darkness, less bolting, quieter camp music)
+- Did: owner found panic plus a blank map too punishing. In the dark the map now keeps the explored part of the room or hallway you're in and of the room with the way up (`Minimap.dark_cells`, new `DungeonMap.area_around`: a room, or connected corridor floor up to passages), with a caption "Too dark: only this place and the way up"; landmarks/quest cairns outside it hide; openings into hidden parts are dashed. Panic bolt chance 0.15 -> 0.12 per step. Camp music 10% quieter (`Music.PLACE_VOLUME`, `volume_for`). Checks: darkness_check (partial map), batch_check (camp volume).
+- Next: owner playtest of how the dark map and bolting feel.
+- Watch out: "the exit" is read as the way up (the way back to camp); the way down isn't shown in the dark.
+
 ## 2026-11-22 – Claude (merged ChatGPT's five open PRs)
 - Did: owner asked to merge all open PRs: #265 ranged/focus icons, #267 mine life (bats, mice, dust), #276 finer passage webs, #270 skill-tree/menu concepts, #273 player tent and brass menus. Code merged cleanly; only NOTES/AGENTS/DESIGN/animation-library conflicted, resolved by keeping both sides. Five checks then failed only because of intended changes, so they were updated (not loosened): back/recruit read #273's new brief (stats under the name, "Equipped: ..." instead of an arrow); gold opens the stash through the tent's chest; environment_3d accepts #274's `web-silk-v2` webs; mine_life uses the renamed `view_above` setting, turns the board on with `overhead_from_floor = 1`, and takes the suite's `desk <dir>` args. Added the missing `.gdignore` to the gothic-buttons and skill-tree concept folders.
 - Next: owner playtest of floors 1-4 (#119) with the new menus; owner review of the 3D art issues (#246/#247/#250/#252/#255); #275/#277 can close after play. ChatGPT's treatment bundle (`art/props/treatment-supplies-v1`) is still unused.

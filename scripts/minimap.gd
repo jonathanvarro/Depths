@@ -2,6 +2,7 @@ extends Control
 ## Reliable explored geometry, rendered as the party's charcoal sketch (#50).
 signal pressed
 
+const DungeonMap := preload("res://scripts/dungeon_map.gd")
 const TILE := 12.0
 const VIEW_CELLS := 15
 const PADDING := 6.0
@@ -38,7 +39,8 @@ var map
 var party_cell := Vector2i.ZERO
 var party_facing := 0
 var full_view := false
-## No light to read it by (owner, 2026-11-22): the map shows nothing.
+## No light to read it by (owner, 2026-11-22): the map shows only the room
+## or hallway you're in and the room with the way up, as far as explored.
 var dark := false:
 	set(value):
 		if dark != value:
@@ -105,7 +107,7 @@ func _stroke(a: Vector2, b: Vector2, outward: Vector2, seed_value: int) -> Packe
 	return points
 
 func _cache_geometry() -> void:
-	var key: int=hash([map.explored,map._rows,reveal_all])
+	var key: int=hash([map.explored,map._rows,reveal_all,dark,party_cell if dark else Vector2i.ZERO])
 	if key==_cache_key:return
 	_cache_key=key
 	_edges.clear()
@@ -115,6 +117,8 @@ func _cache_geometry() -> void:
 			for x in map.width:
 				var c:=Vector2i(x,y)
 				if not map.is_wall(c):_known_floor[c]=true
+	elif dark:
+		for cell in dark_cells():_known_floor[cell]=true
 	else:
 		for cell in map.explored:
 			if not map.is_wall(cell):_known_floor[cell]=true
@@ -130,22 +134,27 @@ func _cache_geometry() -> void:
 			var outward:=Vector2(directions[side])
 			var points:=_stroke(a,b,outward,n)
 			# Unknown neighbours stay unknown, regardless of actual wall data.
-			var frontier: bool=not reveal_all and not map.explored.has(neighbor)
+			var frontier: bool=not reveal_all and (not map.explored.has(neighbor) or (dark and not map.is_wall(neighbor)))
 			_edges.append({"cell":c,"points":points,"frontier":frontier,"outward":outward,"hatch":n%5==0})
+
+## What the dark map still shows: the explored part of the party's room or
+## hallway, and of the room with the way up.
+func dark_cells() -> Dictionary:
+	var shown:={}
+	var areas:=[map.area_around(party_cell)]
+	var exit: Vector2i=map.find_content(DungeonMap.Content.STAIRS_UP)
+	if exit!=Vector2i(-1,-1):areas.append(map.area_around(exit))
+	for area in areas:
+		for cell in area:
+			if map.explored.has(cell) and not map.is_wall(cell):shown[cell]=true
+	return shown
 
 func _draw() -> void:
 	if map==null:return
 	if full_view:draw_style_box(PAPER,Rect2(Vector2.ZERO,size))
 	else:draw_texture_rect(QUIET_PAPER,Rect2(Vector2.ZERO,size),false)
-	if dark and not reveal_all:
-		draw_rect(Rect2(Vector2.ZERO,size),Color(0.02,0.015,0.01,0.93))
-		var font:=get_theme_default_font()
-		var text:="Too dark to read the map"
-		var fs:=18 if full_view else 12
-		var w:=font.get_string_size(text,HORIZONTAL_ALIGNMENT_CENTER,-1,fs).x
-		draw_string(font,Vector2((size.x-w)/2.0,size.y/2.0),text,HORIZONTAL_ALIGNMENT_LEFT,-1,fs,Color(0.75,0.6,0.42,0.85))
-		return
 	_cache_geometry()
+	var dim:=dark and not reveal_all
 	var cells:=_visible_cells()
 	var tile:=TILE
 	var origin:=Vector2(PADDING,PADDING)
@@ -200,14 +209,14 @@ func _draw() -> void:
 	# Landmarks (#117/#132) the party has stood in: a charcoal cairn.
 	for landmark: Dictionary in map.landmarks:
 		var spot: Vector2i=landmark["centre"]
-		if (landmark["seen"] or reveal_all) and cells.has_point(spot):
+		if (landmark["seen"] or reveal_all) and cells.has_point(spot) and (not dim or _known_floor.has(spot)):
 			_draw_landmark(origin+(Vector2(spot-cells.position)+Vector2.ONE*.5)*tile,tile)
 	# Visible quests' sites once any of it is seen, until done (#230): the
 	# cairn in amber.
 	for quest in map.marks.get("quests", {}):
 		var site: Rect2i=map.marks["quests"][quest]
 		var spot:=site.get_center()
-		if _quest_site_seen(quest) and cells.has_point(spot) and (not quest_open.is_valid() or quest_open.call(quest)):
+		if _quest_site_seen(quest) and cells.has_point(spot) and (not dim or _known_floor.has(spot)) and (not quest_open.is_valid() or quest_open.call(quest)):
 			var at:=origin+(Vector2(spot-cells.position)+Vector2.ONE*.5)*tile
 			_draw_marker(GLYPHS.landmark,at,tile,QUEST_TINT)
 			# A named site (#234): its name beside it on the full map.
@@ -221,6 +230,13 @@ func _draw() -> void:
 		for cell: Vector2i in sensed.call():
 			if cells.has_point(cell):_draw_marker(GLYPHS.danger,origin+(Vector2(cell-cells.position)+Vector2.ONE*.5)*tile,tile,Color(1,.55,.45))
 	_draw_arrow(origin+(Vector2(party_cell-cells.position)+Vector2.ONE*.5)*tile,tile)
+	if dim:
+		# The rest is lost to the dark: say why, along the bottom edge.
+		var font:=get_theme_default_font()
+		var text:="Too dark: only this place and the way up"
+		var fs:=16 if full_view else 10
+		var w:=font.get_string_size(text,HORIZONTAL_ALIGNMENT_LEFT,-1,fs).x
+		draw_string(font,Vector2((size.x-w)/2.0,size.y-(14.0 if full_view else 6.0)),text,HORIZONTAL_ALIGNMENT_LEFT,-1,fs,Color(INK,.8))
 	if full_view and rail>0:_draw_notes(notes,Rect2(Vector2(size.x-rail-10,30),Vector2(rail-12,size.y-50)))
 
 func _draw_marker(texture: Texture2D, center: Vector2, tile: float, tint:=Color.WHITE) -> void:
@@ -283,7 +299,7 @@ func _visible_cells() -> Rect2i:
 	var bounds:=Rect2i(party_cell,Vector2i.ONE)
 	if reveal_all:bounds=Rect2i(0,0,map.width,map.height)
 	else:
-		for c in map.explored:bounds=bounds.expand(c).expand(c+Vector2i.ONE)
+		for c in (_known_floor if dark else map.explored):bounds=bounds.expand(c).expand(c+Vector2i.ONE)
 	var grow: Vector2i=(Vector2i(FULL_VIEW_MIN_CELLS,FULL_VIEW_MIN_CELLS)-bounds.size).maxi(0)
 	return Rect2i(bounds.position-grow/2,bounds.size+grow)
 
