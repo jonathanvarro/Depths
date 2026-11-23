@@ -1,0 +1,162 @@
+{
+  "tool": "built-in ImageGen",
+  "input": "text only",
+  "assets": {
+    "sling": {
+      "file": "sling.png",
+      "prompt": "A single isolated inventory illustration of an ancient leather sling for a medieval fantasy role-playing game. One worn brown leather pouch with a smooth grey pebble nestled inside, and two long flax cords attached to the ends of the pouch. One cord ends in a small finger loop, the other in a simple knot. Arrange the cords loosely coiled behind the pouch to fit a square icon. Rough old leather, frayed braided fibre, earthy hand-painted game art, distinct readable shape at 64 pixels. All parts inside frame with broad transparent margins. True transparent background, no scene, no hands, no letters, no decoration.",
+      "sha256": "44f4d27fa073af4b4b4c753cf770f8f84b27cd279c67a5c818e4ab20c35d4196",
+      "128": {
+        "file": "art/items/ranged-focus-v2/sling-128.png",
+        "sha256": "6a153f2d74bfbae6514e2b376af120537eb311211bcc76dd9144a79eb5b8be9d",
+        "fit": {
+          "source_bounds": [
+            62,
+            130,
+            1200,
+            1170
+          ],
+          "scale": 0.0984182776801406,
+          "offset": [
+            8,
+            13
+          ]
+        }
+      },
+      "64": {
+        "file": "art/items/ranged-focus-v2/sling-64.png",
+        "sha256": "2b436dba134cd86a5212621b7e9802130fcfb212dfa9e87917305f05c9964583",
+        "fit": {
+          "source_bounds": [
+            62,
+            130,
+            1200,
+            1170
+          ],
+          "scale": 0.0492091388400703,
+          "offset": [
+            4,
+            6
+          ]
+        }
+      }
+    },
+    "short-bow": {
+      "file": "short-bow.png",
+      "prompt": "A single isolated equipment inventory icon for Depths, a dark gritty medieval cave RPG. Rough restrained hand-painted late-90s dungeon RPG item art, earthy muted materials, broad readable silhouette at 64 pixels. Worn, repaired, irregular and functional with subtle damage. Soft neutral warm material light, genuinely transparent background, item centered in a square with all parts comfortably clear of every edge. One item only, no text, border, scene, shadow on ground, pedestal, ornamental glow or watermark. Short bow. A short medieval hunter's self bow of weathered yew, seen diagonally from lower left to upper right, with a single clearly visible taut flax bowstring connecting the two tips. Distinctive compact crescent outline and wrapped brown grip in the middle, scrape on one limb, asymmetrically mended horn tip and uneven hand-carved surfaces. No arrow. An inventory object illustration only.",
+      "sha256": "8aab2941d0b41e0208fd0f6d672339f646636d3c695b3d27f35ea1465d2e2314",
+      "128": {
+        "file": "art/items/ranged-focus-v2/short-bow-128.png",
+        "sha256": "6e43b6022cfa0476d9eb59e876877cc59c4a19c488e4a54aa8c247c5447d2fd9",
+        "fit": {
+          "source_bounds": [
+            66,
+            21,
+            1233,
+            1228
+          ],
+          "scale": 0.0927920463960232,
+          "offset": [
+            10,
+            8
+          ]
+        }
+      },
+      "64": {
+        "file": "art/items/ranged-focus-v2/short-bow-64.png",
+        "sha256": "355638f139cb210346ca08caee89bfd1d9c771890f43170214bd19a8afd05e22",
+        "fit": {
+          "source_bounds": [
+            66,
+            21,
+            1233,
+            1228
+          ],
+          "scale": 0.0463960231980116,
+          "offset": [
+            5,
+            4
+          ]
+        }
+      }
+    },
+    "wand": {
+      "file": "wand.png",
+      "prompt": "A single isolated equipment inventory icon for Depths, a dark gritty medieval cave RPG. Rough restrained hand-painted late-90s dungeon RPG item art, earthy muted materials, broad readable silhouette at 64 pixels. Worn, repaired, irregular and functional with subtle damage. Soft neutral warm material light, genuinely transparent background, item centered in a square with all parts comfortably clear of every edge. One item only, no text, border, scene, shadow on ground, pedestal, ornamental glow or watermark. Prayer wand. A short crooked blackthorn rod angled diagonally upward, with a blunt bifurcated top holding a tiny dull pewter votive disc through a leather thong. The lower handgrip is tied with dirty cream linen, one knot hanging unevenly. Very dark ridged bark, rubbed gray grain, chipped end and a few tiny pale thorn stubs. Small and modest, a practical sacred focus carried underground, no magic, jewel or ornate staff head. The linen grip and small pewter charm must be readable as the distinguishing light shapes.",
+      "sha256": "44fe7e6cc89403a1b59c2ab1ac6fc843cfac4bff83e526c67d64dac3dff1620a",
+      "128": {
+        "file": "art/items/ranged-focus-v2/wand-128.png",
+        "sha256": "571401b0176c3a1b355234907eb1cadd64695f4c374114f185258c4fcda99f9d",
+        "fit": {
+          "source_bounds": [
+            125,
+            20,
+            1129,
+            1233
+          ],
+          "scale": 0.09233305853256389,
+          "offset": [
+            17,
+            8
+          ]
+        }
+      },
+      "64": {
+        "file": "art/items/ranged-focus-v2/wand-64.png",
+        "sha256": "284d08e866edcfce76744838a5a914cab00e31d0365fd6914242ac56f2bfdeb3",
+        "fit": {
+          "source_bounds": [
+            125,
+            20,
+            1129,
+            1233
+          ],
+          "scale": 0.046166529266281946,
+          "offset": [
+            9,
+            4
+          ]
+        }
+      }
+    },
+    "oak-staff": {
+      "file": "oak-staff.png",
+      "prompt": "A single isolated equipment inventory icon for Depths, a dark gritty medieval cave RPG. Rough restrained hand-painted late-90s dungeon RPG item art, earthy muted materials, broad readable silhouette at 64 pixels. Worn, repaired, irregular and functional with subtle damage. Soft neutral warm material light, genuinely transparent background, item centered in a square with all parts comfortably clear of every edge. One item only, no text, border, scene, shadow on ground, pedestal, ornamental glow or watermark. Oak staff. A full-length plain knotted oak walking staff, visible from its uneven rounded top to its tarnished iron foot, placed diagonally from lower left to upper right. Thick weight-bearing shaft with a subtle natural dogleg, a large off-centre knot just below the rounded head, stripped warm brown grain, a long healed split secured by two narrow iron repair bands near the lower third. A short dark brown leather handwrap high on the shaft, chipped muddy iron ferrule at the base. Intentionally plain top and sturdy chunky shaft, with no fork, charm, jewel or crystal. Strong asymmetry and worn hand-crafted finish.",
+      "sha256": "68e0b24d40e14b183c7c77a2d737d2c806422e325b1a2de7ca66af53374d1843",
+      "128": {
+        "file": "art/items/ranged-focus-v2/oak-staff-128.png",
+        "sha256": "0274eafde28f0da02408d444138283088a142021ebd02e715ad130872d412c6d",
+        "fit": {
+          "source_bounds": [
+            81,
+            11,
+            1219,
+            1246
+          ],
+          "scale": 0.09068825910931175,
+          "offset": [
+            12,
+            8
+          ]
+        }
+      },
+      "64": {
+        "file": "art/items/ranged-focus-v2/oak-staff-64.png",
+        "sha256": "85c5604e455b7570b455c18328ab5a5dd8b01ff1d10cd946dc6b053e40c922c6",
+        "fit": {
+          "source_bounds": [
+            81,
+            11,
+            1219,
+            1246
+          ],
+          "scale": 0.045344129554655874,
+          "offset": [
+            6,
+            4
+          ]
+        }
+      }
+    }
+  }
+}
