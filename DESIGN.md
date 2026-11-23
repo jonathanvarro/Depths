@@ -1084,6 +1084,17 @@ permanent right-hand description column. Reviewed concepts and approval record:
 [skill-tree-concept.md](docs/skill-tree-concept.md). New skill values, extra
 personal traits and unlock conditions are still proposals.
 
+**Owner-approved camp/menu direction, 2026-11-21 (#271/#272, following
+#269):** Reliquary brass is the shared live menu treatment. Outside button
+edges stay flat and inward corners bevel; central controls bevel both ends.
+The player's tent is viewed from its entrance, with a cot on the left for
+Rest, a central chest for storage and a rough table with paper for later
+statistics. The painting is approved and interaction highlights are subtle.
+Equipment art stays inside the physical cloth roll. Hover/tap briefs put
+damage/hit chance or the corresponding equipment summary directly beneath
+the name, with no second item picture or replacement instructions. Handoff:
+[player-tent-and-brass.md](docs/player-tent-and-brass.md).
+
 Dark, gritty, grounded medieval fantasy. Stained stone, corroded metal, worn supplies, oppressive spaces, and scarce lantern light. Charcoal, dirty parchment, muted teal, rusty brown, and warm amber form the initial palette. Keep essential threats and interface elements readable.
 
 The current visual baseline is **simple, shadow-heavy pixel environments with detailed, expressive character portraits and limited, deliberate animation**. Use bold room shapes, sparse textures, a restrained palette, and one clear encounter focal point. The owner preferred this reduced-detail direction over the intricate painted and densely textured pixel mockups. Exact environment resolution and production workflow remain open.

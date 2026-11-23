@@ -93,7 +93,8 @@ func run() -> void:
 			pack.inspect_item(gear("simple_spear"));await settle()
 			check(pack.content.get_global_rect().encloses(pack._details.get_global_rect()),"Item card stays in safe area "+tag)
 			check(pack._detail_actions.global_position.y>=pack._detail_scroll.get_global_rect().end.y,"Actions below description "+tag)
-			check(labels().contains("Replaces") and labels().contains("→"),"Visible actual gear comparison "+tag)
+			var selected:Companion=pack._selected_hero
+			check(pack._detail_stats.is_visible_in_tree() and pack._detail_stats.text==pack._numbers(selected,gear("simple_spear")).replace(" dmg, "," damage · ") and pack._detail_comparison.text=="Equipped: "+pack._numbers(selected,selected.weapon).replace(" dmg, "," damage · "),"Visible actual gear comparison "+tag)
 			await snap("inspect-"+tag)
 			pack.set_status(true);await settle()
 			check(pack._bag.is_visible_in_tree() and pack._status_scroll.is_visible_in_tree(),"Bag stays during Status "+tag)

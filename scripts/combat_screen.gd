@@ -1165,11 +1165,7 @@ func _build() -> void:
 	panel.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
 	panel.grow_horizontal = Control.GROW_DIRECTION_BEGIN
 	panel.grow_vertical = Control.GROW_DIRECTION_BEGIN
-	var style := StyleBoxFlat.new()
-	style.bg_color = UiTheme.overlay_colour(0.85)
-	style.border_color = UiTheme.EDGE
-	style.set_border_width_all(1)
-	style.set_content_margin_all(10)
+	var style := UiTheme.Brass.panel(10)
 	panel.add_theme_stylebox_override("panel", style)
 	layer.add_child(panel)
 	_actions = panel
@@ -1196,13 +1192,7 @@ func _build() -> void:
 	_rules_button.add_theme_font_size_override("font_size", 22)
 	_rules_button.tooltip_text = "How it fights (? or F1)"
 	# Gold-edged so it's noticed (owner playtest: easy to miss).
-	var edge := StyleBoxFlat.new()
-	edge.bg_color = Color(0.16, 0.12, 0.07, 0.95)
-	edge.border_color = Color("d7b174")
-	edge.set_border_width_all(2)
-	edge.set_corner_radius_all(4)
-	for state_name in ["normal", "hover", "pressed"]:
-		_rules_button.add_theme_stylebox_override(state_name, edge)
+	UiTheme.Brass.apply(_rules_button,UiTheme.Brass.Edge.RIGHT,6)
 	_rules_button.add_theme_color_override("font_color", Color("f2d27a"))
 	_rules_button.toggled.connect(func(on: bool):
 		show_rules = on

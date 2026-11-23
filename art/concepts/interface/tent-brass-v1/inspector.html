@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Depths · Tent and Reliquary brass</title>
+<style>
+@font-face{font-family:Cinzel;src:url('../../../fonts/cinzel/Cinzel-Variable.ttf')}body{margin:0;background:#10130f;color:#e7dfc7;font:16px/1.5 system-ui,sans-serif}header,main,footer{max-width:1440px;margin:auto;padding:22px}h1{font-family:Cinzel,Georgia,serif;font-weight:500;margin:0;color:#dec18a}p{max-width:86ch;color:#bcb6a1}a{color:#dec18a}select{font:inherit;background:#25271c;color:#e7dfc7;border:1px solid #a88b52;padding:10px;max-width:100%}figure{margin:20px 0}img{display:block;width:100%;height:auto;background:#080a08;border:1px solid #77643e}figcaption{padding:10px 0;color:#bcb6a1}footer{border-top:1px solid #4d452f}button{font:inherit;padding:9px 16px;background:#25271c;color:#dec18a;border:1px solid #a88b52;cursor:pointer}button:focus-visible,select:focus-visible{outline:2px solid #efd391;outline-offset:3px}.controls{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+</style>
+<header>
+<h1>Depths · Tent and Reliquary brass</h1>
+<p>The approved tent painting with native cot/chest highlights, shared brass menu frames, and fitted equipment with concise item briefs. These are captures of the running Godot Mobile renderer, taken on a private desktop.</p>
+<div class="controls"><label for="capture">View</label><select id="capture"></select><button id="previous" aria-label="Previous capture">←</button><button id="next" aria-label="Next capture">→</button></div>
+</header>
+<main><figure><img id="preview" alt=""><figcaption id="caption"></figcaption></figure></main>
+<footer>
+<p><a href="../../../../docs/player-tent-and-brass.md">Implementation and checks</a> · <a href="../../../camp/player-tent-v1/approval.json">Painting approval</a> · <a href="../../../source/player-tent-v1/generation.json">Exact ImageGen prompt and provenance</a></p>
+<p>Tent: <a href="tent-validation.json">137 checks, no failures</a>. Equipment briefs: <a href="pack-validation.json">176 checks, no failures</a>. Normal and Larger text checked at four landscape sizes. Physical iPhone review remains.</p>
+</footer>
+<script>
+const captures=[
+['tent-desktop','Your tent · desktop','Approved painting, Rest on the cot and Store on the chest. The paper is reserved for future statistics.'],
+['tent-phone','Your tent · phone','The complete painting fits without scrolling or stretching.'],
+['tent-highlight','Chest interaction highlight','A quiet brass outline and tint marks the chest on hover, focus or tap. The cot uses the same treatment.'],
+['equipped-brief','Equipped item brief · desktop','Art remains inside the cloth. Damage and hit chance stay beneath the name; there is no duplicate item picture.'],
+['carried-brief','Carried item brief · desktop','Candidate values appear first, followed by equipped values for comparison, then description and relevant actions.'],
+['equipped-phone','Equipped item brief · phone','Compact equipment pockets and a bounded, scrollable item card.'],
+['title-desktop','Title menu · desktop','Flat left edges, beveled right edges and the shared Reliquary brass palette.'],
+['title-phone','Title menu · phone, Larger text','The menu scrolls when needed and follows keyboard focus.'],
+['hero-select','Choose a survivor','Shared brass framing for character selection.'],
+['journal','Quest journal','Journal navigation and panels share the same menu family.'],
+['settings-phone','Settings · phone, Larger text','Shared frames and readable controls in a short landscape window.'],
+['event','Dungeon event','Choices inherit the shared brass buttons.'],
+['combat','Combat','Action controls use brass; enemy target tags retain their distinct meaning.'],
+['results','Expedition results','Results actions and framing use the common menu kit.'],
+['merchant','Camp merchant','Trade controls share the menu treatment; physical inventory pockets retain their artwork.'],
+['smith','Camp smith','The same action and panel family across camp services.'],
+['nurse','Camp nurse','Treatment controls use the shared menu styles.'],
+['preparation','Expedition preparation','Preparation uses the same brass panels and actions.']
+];
+const select=document.querySelector('#capture'),preview=document.querySelector('#preview'),caption=document.querySelector('#caption');
+for(const [id,title] of captures){const option=document.createElement('option');option.value=id;option.textContent=title;select.append(option)}
+function show(index){index=(index+captures.length)%captures.length;select.selectedIndex=index;const [id,title,description]=captures[index];preview.src='captures/'+id+'.png';preview.alt=title;caption.textContent=title+' — '+description;history.replaceState(null,'','#'+id)}
+select.addEventListener('change',()=>show(select.selectedIndex));document.querySelector('#previous').onclick=()=>show(select.selectedIndex-1);document.querySelector('#next').onclick=()=>show(select.selectedIndex+1);
+show(Math.max(0,captures.findIndex(([id])=>id===location.hash.slice(1))));
+</script>
+</html>
+

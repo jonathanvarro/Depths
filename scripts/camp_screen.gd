@@ -15,6 +15,8 @@ signal open_settings
 signal open_pack  # check items and equipment at camp (owner playtest, #229)
 
 const DIR := "res://art/camp/highres-v4/"
+const Brass := preload("res://art/ui/reliquary-brass-v1/style.gd")
+const TentInterior := preload("res://scripts/tent_interior.gd")
 const PORTRAIT_DIR := DIR
 const HEADING := preload("res://art/fonts/heading-cinzel.tres")
 const BODY := preload("res://art/fonts/body-source-sans.tres")
@@ -70,6 +72,7 @@ var _current := ""
 var _merchant_view: Control
 var _smith_view: Control  # the smith on the same exchange (owner, 2026-10-31)
 var _stash_view: Control  # the tent's Store (owner, 2026-10-25)
+var _tent_view: Control
 var _last_site := ""
 ## The fire's lineup (owner, 2026-11-21): a recruit or party member picked,
 ## waiting for a place in the party to be chosen.
@@ -152,6 +155,7 @@ func _init() -> void:
 	pack.pressed.connect(func(): open_pack.emit())
 	_canvas.add_child(pack)
 	var gear := _button("")
+	Brass.apply(gear,Brass.Edge.RIGHT,4)
 	gear.icon=SETTINGS_ICON
 	gear.expand_icon=true
 	gear.add_theme_constant_override("icon_max_width",18)
@@ -414,6 +418,8 @@ func _layout_activity() -> void:
 	_portrait.visible = left > 18.0
 	_scroll.position = Vector2(left, 50)
 	_scroll.size = Vector2(_activity.size.x - left - 14, _activity.size.y - 62)
+	if is_instance_valid(_tent_view):
+		_tent_view.custom_minimum_size.y = maxf(120,_scroll.size.y-4)
 
 
 func _build_activity() -> void:
@@ -429,6 +435,7 @@ func _build_activity() -> void:
 	_activity_title.position = Vector2(18, 10)
 	_activity.add_child(_activity_title)
 	_back = _button("")
+	Brass.apply(_back,Brass.Edge.RIGHT,4)
 	_back.icon=BACK_ICON
 	_back.expand_icon=true
 	_back.add_theme_constant_override("icon_max_width",18)
@@ -521,6 +528,7 @@ func _refresh_activity() -> void:
 		if _current!="treatment":
 			return
 		_activity.visible=true
+	_tent_view = null
 	for child in _body.get_children():
 		_body.remove_child(child)
 		child.queue_free()
@@ -807,31 +815,19 @@ func _nurse() -> void:
 			_body.add_child(treat)
 
 
-## The tent (owner playtest, #227): three centred buttons - Rest, Store,
-## Back. No explanations or day line; the day is on the main screen and
-## the tooltips say the rest. A hero still owed a level (rare: levels are
-## chosen underground) gets the choice above them.
+## Physical cot and chest (#271); header Back leaves the tent.
 func _tent() -> void:
 	if _party.members.any(func(h): return h.uses_stats and Progression.ready_to_advance(h)):
 		_training()
-	var column := VBoxContainer.new()
-	column.add_theme_constant_override("separation", 10)
-	column.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-	var rest := _button("Rest")
-	rest.tooltip_text = "Sleep until morning: heals and calms. Injuries need the nurse. The mine shifts overnight."
-	rest.pressed.connect(func():
+	_tent_view = TentInterior.new()
+	_tent_view.custom_minimum_size = Vector2(0,maxf(120,_scroll.size.y-4))
+	_tent_view.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_tent_view.rest_requested.connect(func():
 		_camp.rest(_party)
-		_refresh_activity())
-	var store := _button("Store")
-	store.tooltip_text = "Store and take items and gold: they stay safe at camp."
-	store.pressed.connect(_open_stash)
-	var back := _button("Back")
-	back.pressed.connect(_close_activity)
-	for button: Button in [rest, store, back]:
-		button.custom_minimum_size = Vector2(150, 34)
-		button.size_flags_horizontal = Control.SIZE_FILL
-		column.add_child(button)
-	_body.add_child(column)
+		_refresh_activity()
+		if is_instance_valid(_tent_view):_tent_view._buttons.rest.grab_focus.call_deferred())
+	_tent_view.store_requested.connect(_open_stash)
+	_body.add_child(_tent_view)
 
 
 func _open_stash() -> void:
@@ -1294,7 +1290,7 @@ func _button(text: String) -> Button:
 	button.text = text
 	button.custom_minimum_size = Vector2(0, 30)
 	button.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
-	button.add_theme_font_override("font", ACTION)
+	button.add_theme_font_override("font", HEADING)
 	button.add_theme_font_size_override("font_size", 13)
 	# This entire camp uses a scaled 640px canvas. Keep the shared theme's
 	# colours/focus, but do not double-scale its screen-sized 12px padding.

@@ -24,7 +24,7 @@ func _snap(name: String) -> void:
 
 func _press(node, label: String) -> bool:
 	for b in node.find_children("*", "Button", true, false):
-		if b.text.begins_with(label) and b.is_visible_in_tree() and not b.disabled:
+		if (b.text.begins_with(label) or b.accessibility_name.begins_with(label)) and b.is_visible_in_tree() and not b.disabled:
 			b.pressed.emit()
 			return true
 	return false
@@ -35,7 +35,7 @@ func _press(node, label: String) -> bool:
 func _stash_move(side: String, action: String) -> bool:
 	var view = main._camp._stash_view
 	for b in view.find_children("*", "Button", true, false):
-		if b.has_meta("exchange_side") and b.get_meta("exchange_side") == side and b.get_meta("item") is SupplyItem and b.is_visible_in_tree():
+		if b.has_meta("exchange_side") and b.get_meta("exchange_side") == side and b.has_meta("item") and b.get_meta("item") is SupplyItem and b.is_visible_in_tree():
 			b.pressed.emit()
 			return _press(view, action)
 	return false
@@ -150,11 +150,12 @@ func _initialize() -> void:
 	# Tent: rest (day 2), stash.
 	await _open("rest")
 	var tent_buttons: Array = main._camp._body.find_children("*", "Button", true, false)
-	check("the tent is three buttons: Rest, Store, Back (#227)", tent_buttons.map(func(b): return b.text) == ["Rest", "Store", "Back"] and _body_text().strip_edges() == "", tent_buttons.map(func(b): return b.text))
+	check("the tent has cot/chest targets and header Back (#271)", tent_buttons.size() == 2 and tent_buttons.all(func(b): return b.has_meta("tent_target")) and main._camp._back.is_visible_in_tree())
 	check("rest says injuries need the nurse (its tooltip)", tent_buttons[0].tooltip_text.contains("Injuries need the nurse"))
 	var seed_before: int = main._site_seed
 	check("the tent fits without scrolling", await _fits())
 	check("a Rest button, without a day count (owner, 2026-10-25)", _press(main._camp, "Rest"))
+	await create_timer(.16).timeout  # brief native press feedback before resting
 	check("rest: day 2, full health, calm", main._camp_state.day == 2 and hero.health == hero.effective_max_health() and hero.strain == 0.0)
 	check("a new day re-seeds the cave", main._site_seed != seed_before and main._floors.is_empty())
 	check("a new contract is posted on the new day", main._camp_state.contract.has("enemy"))
@@ -164,7 +165,9 @@ func _initialize() -> void:
 			n += main._camp_state.stash.count(item)
 		return n
 	await _snap("tent")
-	check("Store opens the stash, beside the pack", _press(main._camp, "Store") and main._camp._stash_view.visible and not main._camp._activity.visible)
+	check("the chest can be selected", _press(main._camp, "Store"))
+	await create_timer(.16).timeout
+	check("Store opens the stash, beside the pack", main._camp._stash_view.visible and not main._camp._activity.visible)
 	await process_frame
 	check("store an item in the stash", _stash_move("right", "Store") and stash_total.call() == 1)
 	await _snap("stash")
@@ -174,6 +177,7 @@ func _initialize() -> void:
 	check("closing the stash returns to the tent", main._camp._activity.visible and not main._camp._stash_view.visible)
 	check("still recovering on day 2", main._camp_state.is_recovering(hero))
 	_press(main._camp, "Rest")
+	await create_timer(.16).timeout
 	check("fit again on day 3", main._camp_state.day == 3 and not main._camp_state.is_recovering(hero))
 
 	await _open("fire")
@@ -198,4 +202,4 @@ func _initialize() -> void:
 	check("a different cave on day 3", main._map._rows != day1_layout)
 	check("the message names the day", main._message_label.text.begins_with("Day 3"), main._message_label.text)
 	print("fails=", fails)
-	quit()
+	quit(1 if fails else 0)

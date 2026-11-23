@@ -39,9 +39,12 @@ func run() -> void:
 
 	# Title.
 	var title = load("res://scenes/title.tscn").instantiate()
+	title.simulate_phone = tag == "phone"
 	root.add_child(title)
 	await create_timer(0.5).timeout
 	await _snap("01_title")
+	title._hero_select.open()
+	await _snap("01b_hero_select")
 	title.queue_free()
 	await process_frame
 

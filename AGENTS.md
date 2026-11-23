@@ -83,6 +83,16 @@ Templates > Download and Install; already installed on the owner's PC).
   LevelBuilder/Party still own passage state, clearing and traversal. Review:
   `art/concepts/web-silk-v2/inspector.html`. Older assets/corner webs remain.
 
+- `docs/player-tent-and-brass.md` – #271/#272: approved first-person tent
+  painting and cot/chest input in `scripts/tent_interior.gd`, using existing
+  CampState Rest/stash authority. Paper is reserved for later statistics.
+  `art/ui/reliquary-brass-v1/style.gd` supplies the shared live menu frames;
+  use UiTheme/FieldKit or Brass.apply for new actions. Button chrome is now
+  StyleBoxTexture: duplicate as StyleBox, not StyleBoxFlat. Rarity/status and
+  physical inventory art keep their own meanings. Equipment sits inside the
+  roll's cloth, and briefs put stats under the name without a second picture.
+  Native review: `art/concepts/interface/tent-brass-v1/inspector.html`.
+
 - `docs/rat-and-shrine-landmarks-3d.md` – #252/#251's first CC0 3D rat
   pilot (`art/enemies/rat-3d-v1`, 270 triangles, 21 bones, six short clips)
   and the three registered fresh/resolved shrine/well/cache scenes in

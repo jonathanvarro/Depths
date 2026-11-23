@@ -1,0 +1,24 @@
+{
+  "issue": 271,
+  "approved_direction": "Reliquary brass, owner 2026-11-21 (#269)",
+  "frames": [
+    {
+      "edge": "left",
+      "source_sha256": "c0c4eb44d4deccf0c5be4fe00ac029b37bfa9da2ae220ba5c5d27309c2654868",
+      "runtime": "art/ui/reliquary-brass-v1/left.svg",
+      "changes": "SVG viewport size only, 600x132 to 300x66; original geometry, colours and viewBox preserved"
+    },
+    {
+      "edge": "centre",
+      "source_sha256": "537b5c92ac096fbbbe6f784a66902e96588c9d76440f10cf1b6d1972d7848d51",
+      "runtime": "art/ui/reliquary-brass-v1/centre.svg",
+      "changes": "SVG viewport size only, 600x132 to 300x66; original geometry, colours and viewBox preserved"
+    },
+    {
+      "edge": "right",
+      "source_sha256": "dcc218dfab5fa10211bf3333208b979eafe6e017ec321d9ad3a6b3472446cad4",
+      "runtime": "art/ui/reliquary-brass-v1/right.svg",
+      "changes": "SVG viewport size only, 600x132 to 300x66; original geometry, colours and viewBox preserved"
+    }
+  ]
+}

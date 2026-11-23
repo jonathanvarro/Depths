@@ -107,6 +107,12 @@ Format:
 - Next: to bring it back, set `overhead_from_floor` (e.g. 4) and restore the Settings line.
 - Watch out: fights on the map still happen, seen through the party's eyes.
 
+## 2026-11-21 – ChatGPT (live tent, brass menus and fitted item briefs, #271/#272)
+
+- Did: owner-approved tent painting is live through `tent_interior.gd`: cot Rest, chest Store, hover/focus outline and brief press feedback. Existing CampState/stash rules remain authoritative; paper is reserved for later statistics. Shared Field kit/UiTheme and menu overrides now use the approved Reliquary brass nine-slice family, including title, camp, inventory/trade, settings/journal, hero selection, events/results and combat help. The title list scrolls on short windows. Equipment icons fit the cloth inside the roll; briefs remove the duplicate image/replacement prose and keep damage/accuracy or defence in a fixed row beneath the name. See `docs/player-tent-and-brass.md` and its review gallery.
+- Next: review/merge the delivery branch. Native checks use the #253 private desktop; physical iPhone review remains. The table is ready for future statistics content.
+- Watch out: button/panel chrome now uses StyleBoxTexture; duplicate as StyleBox rather than casting to StyleBoxFlat. Keep rarity, conditions and physical inventory glyphs distinct from menu chrome. Tent painting approval and its pixel hash are pinned in `art/camp/player-tent-v1/approval.json`; generation prompt/provenance is retained. Claude's active camp edits in the main checkout were not overwritten.
+
 ## 2026-11-21 – Claude (first person by default)
 
 - Did: owner chose first person on floor 4 too. The view-from-above setting is now `view_above`, default off (renamed from `tactical_view` so saved "on" values are left behind). It still only works from floor 4; with it off, the King's hall is fought on the dark stage. Checks that test the board turn it on and restore off.

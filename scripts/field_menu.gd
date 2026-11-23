@@ -31,7 +31,7 @@ func _init() -> void:
 	content.add_child(canvas)
 	canvas.resized.connect(_fit.call_deferred)
 	_panel = PanelContainer.new()
-	_panel.add_theme_stylebox_override("panel", Kit.plate(Color("20231c"), Kit.EDGE, 14))
+	_panel.add_theme_stylebox_override("panel", Kit.Brass.panel(14))
 	canvas.add_child(_panel)
 	_panel.resized.connect(_fit.call_deferred)
 	_panel.minimum_size_changed.connect(_fit.call_deferred)
@@ -53,6 +53,7 @@ func _init() -> void:
 	_heading.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_header.add_child(_heading)
 	_close = Button.new()
+	Kit.Brass.apply(_close, Kit.Brass.Edge.RIGHT, 6)
 	_close.icon = CLOSE
 	_close.expand_icon = true
 	_close.add_theme_constant_override("icon_max_width", 20)

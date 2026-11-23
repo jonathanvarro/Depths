@@ -6,6 +6,7 @@ extends RefCounted
 ## "ItemTitle" (Cinzel).
 
 const FieldKit := preload("res://art/ui/field-kit-v1/style.gd")
+const Brass := preload("res://art/ui/reliquary-brass-v1/style.gd")
 
 ## One palette for every screen (#169): the Field kit's colours, plus the
 ## darker see-through panel used over the 3D view and the gain/loss edges.
@@ -57,22 +58,23 @@ static func make() -> Theme:
 	theme.set_font_size("font_size", "PageTitle", 30)
 	theme.set_font_size("font_size", "ItemTitle", 24)
 	# Panels: dark charcoal with a thin worn edge (Field kit).
-	var panel := FieldKit.plate(Color(0.08, 0.075, 0.06, 0.94), FieldKit.EDGE, 14)
+	var panel := Brass.panel(14)
 	theme.set_stylebox("panel", "PanelContainer", panel)
 	theme.set_stylebox("panel", "Panel", panel)
 	# Menus and drop-downs (Settings) match the buttons.
-	theme.set_stylebox("panel", "PopupMenu", FieldKit.plate(FieldKit.SURFACE, FieldKit.EDGE, 6))
+	theme.set_stylebox("panel", "PopupMenu", Brass.panel(6))
 	theme.set_color("font_color", "PopupMenu", FieldKit.TEXT)
 	theme.set_color("font_hover_color", "PopupMenu", FieldKit.AMBER)
-	theme.set_stylebox("hover", "PopupMenu", FieldKit.plate(Color("3d392b"), FieldKit.AMBER, 4))
+	theme.set_stylebox("hover", "PopupMenu", Brass.frame("hover", Brass.Edge.CENTRE, 4))
 	for type in ["OptionButton", "CheckButton", "CheckBox"]:
 		theme.set_font("font", type, FieldKit.ACTION)
 		theme.set_color("font_color", type, FieldKit.TEXT)
 		theme.set_color("font_hover_color", type, FieldKit.TEXT)
 		theme.set_color("font_focus_color", type, FieldKit.TEXT)
 		theme.set_color("font_pressed_color", type, FieldKit.TEXT)
-	for state in ["normal", "hover", "pressed", "disabled", "focus"]:
-		theme.set_stylebox(state, "OptionButton", theme.get_stylebox(state, "Button"))
+	for type in ["OptionButton", "CheckButton", "CheckBox"]:
+		for state in Brass.STATES:
+			theme.set_stylebox(state, type, Brass.frame(state, Brass.Edge.CENTRE, 12))
 	# Health and progress bars.
 	var back := StyleBoxFlat.new()
 	back.bg_color = Color(0.12, 0.08, 0.07)

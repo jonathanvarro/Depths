@@ -101,7 +101,7 @@ func _init() -> void:
 	_ledger.add_child(_chips)
 	# The heroes sit in a panel, not straight on the painting (#169).
 	var frame := PanelContainer.new()
-	frame.add_theme_stylebox_override("panel", UiTheme.FieldKit.plate(UiTheme.overlay_colour(0.8), UiTheme.EDGE, 12))
+	frame.add_theme_stylebox_override("panel", UiTheme.Brass.panel(12))
 	frame.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_ledger.add_child(frame)
 	_heroes = VBoxContainer.new()
