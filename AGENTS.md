@@ -663,7 +663,11 @@ Templates > Download and Install; already installed on the owner's PC).
   only the explored room/hallway you're in and the way-up room
   (`Minimap.dark`/`dark_cells`, `DungeonMap.area_around`); dark steps map only
   the square stood on. `tools/darkness_check.gd`. Panic bolt 12% a step.
-  Music `PLACE_VOLUME` (camp 0.9).
+  Music `PLACE_VOLUME` (camp 0.9). No party arrow in the dark. HUD Torch
+  button (`scripts/torch_button.gd`, = `_quick_torch`/T). Containers offer
+  finds in the chest screen (`RoomEvents.hold_loot`, `_offer_finds`).
+  Preparation has Back to camp (`decided` signal). Opening knife drop is
+  guided (`scripts/spotlight.gd`, `PackScreen.guide_target`).
 - Settings (#52): `scripts/settings.gd` (static values, `apply()`, audio
   buses Master/Music/Effects; test runs use test_settings.cfg) and
   `scripts/settings_screen.gd`. New sound players should set `bus`.

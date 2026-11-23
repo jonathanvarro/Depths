@@ -685,6 +685,18 @@ func _refresh_details() -> void:
 	_detail_text.move_child(description,_detail_text.get_child_count()-1)
 	_position_details.call_deferred()
 
+## For a guided step (the opening's knife drop): the control to press next
+## for `item` and `kind` - its Drop (etc.) button once it's shown, else
+## its compartment in the bag.
+func guide_target(item: Resource,kind := "drop") -> Control:
+	if item==null:return null
+	if _selection==item and _details.visible:
+		for button in _detail_actions.get_children():
+			if button.get_meta("kit_focus","")=="action:"+kind:return button
+	for button in _bag.find_children("*","Button",true,false):
+		if button.get_meta("item",null)==item:return button
+	return null
+
 func _use_verb(item: SupplyItem) -> String:
 	match item.effect:
 		SupplyItem.Effect.HEAL_ONE:return "Drink"

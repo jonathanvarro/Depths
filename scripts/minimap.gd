@@ -211,12 +211,13 @@ func _draw() -> void:
 		var spot: Vector2i=landmark["centre"]
 		if (landmark["seen"] or reveal_all) and cells.has_point(spot) and (not dim or _known_floor.has(spot)):
 			_draw_landmark(origin+(Vector2(spot-cells.position)+Vector2.ONE*.5)*tile,tile)
-	# Visible quests' sites once any of it is seen, until done (#230): the
-	# cairn in amber.
+	# Visible quests' sites from arrival, until done: the cairn in amber.
+	# (#230 showed them once seen; owner 2026-11-22: the survey site was too
+	# hard to find, so the giver's directions put it on the map at once.)
 	for quest in map.marks.get("quests", {}):
 		var site: Rect2i=map.marks["quests"][quest]
 		var spot:=site.get_center()
-		if _quest_site_seen(quest) and cells.has_point(spot) and (not dim or _known_floor.has(spot)) and (not quest_open.is_valid() or quest_open.call(quest)):
+		if cells.has_point(spot) and (not dim or _known_floor.has(spot)) and (not quest_open.is_valid() or quest_open.call(quest)):
 			var at:=origin+(Vector2(spot-cells.position)+Vector2.ONE*.5)*tile
 			_draw_marker(GLYPHS.landmark,at,tile,QUEST_TINT)
 			# A named site (#234): its name beside it on the full map.
@@ -229,7 +230,10 @@ func _draw() -> void:
 	if sensed.is_valid():
 		for cell: Vector2i in sensed.call():
 			if cells.has_point(cell):_draw_marker(GLYPHS.danger,origin+(Vector2(cell-cells.position)+Vector2.ONE*.5)*tile,tile,Color(1,.55,.45))
-	_draw_arrow(origin+(Vector2(party_cell-cells.position)+Vector2.ONE*.5)*tile,tile)
+	# In the dark there's no arrow, only the lit place (owner, 2026-11-22):
+	# with panic bolting, you can't be sure which way you face.
+	if not dim:
+		_draw_arrow(origin+(Vector2(party_cell-cells.position)+Vector2.ONE*.5)*tile,tile)
 	if dim:
 		# The rest is lost to the dark: say why, along the bottom edge.
 		var font:=get_theme_default_font()
@@ -300,6 +304,11 @@ func _visible_cells() -> Rect2i:
 	if reveal_all:bounds=Rect2i(0,0,map.width,map.height)
 	else:
 		for c in (_known_floor if dark else map.explored):bounds=bounds.expand(c).expand(c+Vector2i.ONE)
+		if not dark:
+			for quest in map.marks.get("quests",{}):
+				if not quest_open.is_valid() or quest_open.call(quest):
+					var spot: Vector2i=map.marks["quests"][quest].get_center()
+					bounds=bounds.expand(spot).expand(spot+Vector2i.ONE)
 	var grow: Vector2i=(Vector2i(FULL_VIEW_MIN_CELLS,FULL_VIEW_MIN_CELLS)-bounds.size).maxi(0)
 	return Rect2i(bounds.position-grow/2,bounds.size+grow)
 

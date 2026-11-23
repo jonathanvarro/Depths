@@ -21,6 +21,9 @@ const Classes := preload("res://scripts/classes.gd")
 const Brews := preload("res://scripts/brews.gd")
 const StrainRules := preload("res://scripts/strain.gd")
 signal loot_found(loot: Dictionary)
+## Containers (owner, 2026-11-22): finds are held in result["held"] for the
+## player to take beside the pack, instead of going straight into it.
+var hold_loot := false
 signal gold_found(amount: int)
 
 ## Valuables a room can hold (#42): [item, deepest-from depth, weight].
@@ -139,7 +142,7 @@ func resolve(party, choice: EventChoice, forced := -1, flags: Array = []) -> Dic
 		if outcome.quest_flag != "":
 			Quests.set_flag(camp, outcome.quest, outcome.quest_flag)
 	# "no_room": finds that didn't fit in the pack (#133), for main.gd to offer.
-	var result := {"text": "", "ambush": [] as Array[EnemyType], "ends": not choice.investigation, "story": "", "changes": [], "no_room": {}}
+	var result := {"text": "", "ambush": [] as Array[EnemyType], "ends": not choice.investigation, "story": "", "changes": [], "no_room": {}, "held": {}}
 	if outcome == null:
 		return result
 	var changes: Array = result["changes"]
@@ -193,6 +196,11 @@ func resolve(party, choice: EventChoice, forced := -1, flags: Array = []) -> Dic
 	if not loot.is_empty():
 		loot_found.emit(loot)
 	for item in loot:
+		if hold_loot:
+			result["held"][item] = result["held"].get(item, 0) + loot[item]
+			notes.append("found %s ×%d" % [item.display_name.to_lower(), loot[item]])
+			chip.call(item.icon, "×%d" % loot[item] if item.icon else "%s ×%d" % [item.display_name, loot[item]], true, null)
+			continue
 		var fits: int = party.supplies.add_what_fits(item, loot[item])
 		if fits < loot[item]:
 			result["no_room"][item] = loot[item] - fits
@@ -209,6 +217,11 @@ func resolve(party, choice: EventChoice, forced := -1, flags: Array = []) -> Dic
 		notes.append("found %d gold" % outcome.gold)
 		chip.call(CHIP_ICONS["gold"], "+%d" % outcome.gold, true, null)
 	for item in outcome.gear:
+		if hold_loot:
+			result["held"][item] = result["held"].get(item, 0) + 1
+			notes.append("found %s" % item.display_name.to_lower())
+			chip.call(item.icon, "" if item.icon else item.display_name, true, null)
+			continue
 		if not party.supplies.has_room_for_gear():
 			result["no_room"][item] = 1  # offered beside the pack (#133)
 			notes.append("no room for %s" % item.display_name.to_lower())

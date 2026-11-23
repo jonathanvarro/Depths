@@ -124,6 +124,8 @@ const TORCH := preload("res://data/items/torch.tres")
 const BROKEN_KNIFE := preload("res://data/gear/broken_knife.tres")
 const IRON_SWORD := preload("res://data/gear/iron_sword.tres")
 const HintRing := preload("res://scripts/hint_ring.gd")
+const Spotlight := preload("res://scripts/spotlight.gd")
+const TorchButton := preload("res://scripts/torch_button.gd")
 const Glyphs := preload("res://art/ui/backlog96-v1/glyphs.gd")
 const WEBBED_ICON := preload("res://art/ui/visual105-v1/webbed.png")
 const OPENING_BODY_EVENTS := [
@@ -424,6 +426,8 @@ var _hint_ok: Button
 var _hint_shade: ColorRect
 var _hint_icon: TextureRect  # what the card is about, at a glance (#105)
 var _hint_ring: Panel  # hint_ring.gd: circles the button to press
+var _spotlight: Control  # spotlight.gd: dims all but that button (the knife drop)
+var _torch_button: Button  # torch_button.gd: one-press torch and the light left
 var _hint := ""  # which hint is showing
 var _hint_text := ""
 var _hint_inside := ""  # a "pack" card's text once the Pack is open
@@ -987,10 +991,14 @@ func _run_event(cell: Vector2i, at_overlook := false) -> void:
 	_room_events.depth = _depth  # deeper floors hold richer treasure (#42)
 	if not _map.event_flags.has(cell):
 		_map.event_flags[cell] = []
+	# A container's finds are laid out beside the pack to take (owner,
+	# 2026-11-22), not tipped straight into it.
+	_room_events.hold_loot = event.kind == DungeonMap.Content.CHEST and not _in_opening
 	_event_screen.show_event(event, _party_state, _room_events, _map.event_flags[cell])
 	if event.choices.any(func(c: EventChoice): return c.missing(_party_state) != ""):
 		_tip("needs_item", "A greyed choice needs something you aren't carrying: a pick, a spade, holy water or an antidote. They take pack space, but open safer ways through.")
 	var result: Dictionary = await _event_screen.finished
+	_room_events.hold_loot = false
 	_end_encounter()
 	if _room_events.alarm_raised:  # a bell wire rang (#94)
 		_room_events.alarm_raised = false
@@ -1003,7 +1011,9 @@ func _run_event(cell: Vector2i, at_overlook := false) -> void:
 	# A chest may hold finer gear (owner, 2026-10-21); silver and gold chests
 	# much more (chest_tiers.gd, owner 2026-11-22).
 	if not result["left"] and event.kind == DungeonMap.Content.CHEST and result["ambush"].is_empty() and not _in_opening:
-		_open_tiered(ChestTiers.tier_at(_map, cell), event.resource_path.get_file().get_basename())
+		_open_tiered(ChestTiers.tier_at(_map, cell), event.resource_path.get_file().get_basename(), result["held"])
+	if not result.get("held", {}).is_empty():
+		await _offer_finds(event.title, result["held"])
 	await _offer_overflow()
 	_party.locked = false
 	if result["left"]:
@@ -1553,12 +1563,23 @@ func _patrol(group, taken: Dictionary) -> void:
 ## Opens a chest's tier on top of its own contents (chest_tiers.gd).
 ## `container` is the event's file name: the old containers add from their
 ## own family instead (ChestTiers.CONTAINERS).
-func _open_tiered(tier: String, container := "") -> void:
+## `into`: a pile to add the finds to (to take beside the pack) instead of
+## putting them in the pack; gold always goes straight in.
+func _open_tiered(tier: String, container := "", into = null) -> void:
 	var loot: Dictionary = ChestTiers.loot(_rng, tier, _depth, container)
 	if loot["gold"] > 0:
 		_party_state.supplies.gold += loot["gold"]
 		_party_state.supplies.changed.emit()
 	var finds: Array = loot["gear"] + ([loot["trinket"]] if loot["trinket"] else [])
+	if into is Dictionary:
+		for item in loot["items"]:
+			into[item] = into.get(item, 0) + loot["items"][item]
+		for find in finds:
+			into[find] = into.get(find, 0) + 1
+		if loot["gold"] > 0:
+			Sounds.play(self, "coins", -4.0)
+			_show_message("%d gold, into the purse." % loot["gold"])
+		return
 	var names: Array = finds.map(func(g): return _a(g.display_name.to_lower()))
 	for item: SupplyItem in loot["items"]:
 		var count: int = loot["items"][item]
@@ -2047,7 +2068,10 @@ func _draw_danger(clear := false) -> void:
 ## T: light a torch from the pack, as the Pack's Light does (2026-11-09).
 ## Not mid-fight (the torch is thrown there), at camp or over a screen.
 func _quick_torch() -> void:
-	if _in_combat or _party.locked or _party.paused or _ending or _camp.visible or _pack.visible:
+	# The opening's "light a torch" card holds her still, but this is the
+	# very thing it asks for.
+	var asked: bool = _in_opening and _hint in ["light", "relight"]
+	if _in_combat or _party.locked or (_party.paused and not asked) or _ending or _camp.visible or _pack.visible:
 		return
 	var supplies = _party_state.supplies
 	if supplies.torch_lit() and supplies.torch_left > supplies.TORCH_BURN_TIME * 0.25:
@@ -2207,11 +2231,22 @@ func _camp_loop(reward := 0, note := "") -> void:
 	elif reward > 0:
 		_camp.announce("The king's quartermaster pays the contract: %d gold." % reward)
 	_save_now()  # autosave on returning to camp (#45)
-	var start_depth: int = await _camp.cave_chosen
+	var start_depth := 1
+	# Preparation can go Back to camp (owner, 2026-11-22): nothing about the
+	# trip is settled until Enter, and who stayed behind rejoins.
+	while true:
+		start_depth = await _camp.cave_chosen
+		var explored_before: bool = _camp_state.explored_today
+		_camp.visible = false
+		_camp_state.leave_behind(_party_state)
+		_preparation.show_for(_expedition.number + 1, _party_state)
+		if await _preparation.decided:
+			break
+		_camp_state.rejoin(_party_state)
+		_camp_state.explored_today = explored_before
+		_camp.open(_camp_state, _party_state)
 	_party_state.field_bind_used = false  # the field medic's binding: once a trip
 	_party_state.field_binds = 0
-	_camp.visible = false
-	_camp_state.leave_behind(_party_state)
 	for hero: Companion in _party_state.members:
 		Progression.reset(hero)  # a fresh expedition starts at level 1 (#172)
 	Brews.shuffle(_party_state.supplies, _rng.randi())  # new looks for the brews (#175)
@@ -2219,8 +2254,6 @@ func _camp_loop(reward := 0, note := "") -> void:
 	for key: String in _said.keys():
 		if key.contains(":"):
 			_said.erase(key)  # each hero's once-a-trip remarks (#118)
-	_preparation.show_for(_expedition.number, _party_state)
-	await _preparation.entered
 	_ending = false
 	_party.locked = false
 	_go_to_floor(start_depth, Arrival.FROM_ABOVE)
@@ -3870,6 +3903,15 @@ func _offer_overflow() -> void:
 	await _offer_no_room(finds)
 
 
+## A container's finds (owner, 2026-11-22): its contents on the left, the
+## pack on the right; take one, drag, or take all. What's left stays behind.
+func _offer_finds(title: String, finds: Dictionary) -> void:
+	_chest.open(title, finds, _party_state)
+	_tip("container_take", "Point at a find to read it. Take what you want, drag it into your pack, or take everything. Whatever you leave stays behind.")
+	await _chest.closed
+	_chest.visible = false
+
+
 ## Finds that didn't fit (#133): shown like a chest beside the pack, so the
 ## player can leave something else instead. Whatever stays is left behind.
 func _offer_no_room(finds: Dictionary) -> void:
@@ -4250,7 +4292,7 @@ func _refresh_tutorial_hint() -> void:
 	elif _starting_weapon and _starting_weapon in supplies.gear:
 		key = "drop"
 		text = "%s to open your pack." % open_pack
-		inside = "Drop the %s." % _starting_weapon.display_name.to_lower()
+		inside = "Drop the %s. Anything you drop is left behind for good." % _starting_weapon.display_name.to_lower()
 	elif not supplies.torch_lit() and not _hints_done.has("light") and supplies.count(TORCH) > 0:
 		key = "light"
 		text = "Too dark. %s to open your pack." % open_pack
@@ -4362,7 +4404,10 @@ func _show_hint(text: String, key := "start", mode := "act", inside := "") -> vo
 func _layout_hint() -> void:
 	if _hint_box == null:
 		return
-	var shown := _hint != ""
+	# Never over an event's or a prompt's own words (owner, 2026-11-22): the
+	# card waits, and comes back when they close.
+	var waiting: bool = (_event_screen != null and _event_screen.visible) or (_prompt != null and _prompt.visible)
+	var shown := _hint != "" and not waiting
 	var in_pack := _pack.visible
 	var screen_open := in_pack or _chest.visible or _in_combat or _event_screen.visible
 	_hint_label.text = _hint_inside if _hint_mode == "pack" and in_pack and _hint_inside != "" else _hint_text
@@ -4372,7 +4417,8 @@ func _layout_hint() -> void:
 	_hint_icon.visible = _hint_icon.texture != null
 	_hint_ring.finder = _hint_target if shown else Callable()
 	_hint_box.visible = shown
-	_party.paused = shown and (_hint_mode == "ok" or (_hint_mode == "pack" and not in_pack))
+	if not waiting:
+		_party.paused = shown and (_hint_mode == "ok" or (_hint_mode == "pack" and not in_pack))
 	if not shown:
 		return
 	_hint_box.reset_size()
@@ -4425,7 +4471,19 @@ func _hint_target() -> Control:
 					return button
 	if _hint_mode == "pack" and not _pack.visible:
 		return _pack_button
+	if _guiding_drop():
+		return _guided_drop_target()
 	return null
+
+
+## The opening's knife drop is guided (owner, 2026-11-22): the rest of the
+## screen dims, the Pack stays open, and the next thing to press is lit.
+func _guiding_drop() -> bool:
+	return _in_opening and _hint == "drop" and _pack.visible and _starting_weapon != null 			and _starting_weapon in _party_state.supplies.gear
+
+
+func _guided_drop_target() -> Control:
+	return _pack.guide_target(_starting_weapon) if _guiding_drop() else null
 
 
 func _finish_hint() -> void:
@@ -4630,6 +4688,9 @@ func _build_hint() -> void:
 	_hint_shade.mouse_filter = Control.MOUSE_FILTER_STOP  # play waits
 	_hint_shade.visible = false
 	layer.add_child(_hint_shade)
+	_spotlight = Spotlight.new()
+	_spotlight.finder = func(): return _guided_drop_target()
+	layer.add_child(_spotlight)
 	_hint_box = PanelContainer.new()
 	var style := StyleBoxFlat.new()
 	style.bg_color = UiTheme.overlay_colour(0.94)
@@ -4886,6 +4947,8 @@ func _set_debug(enabled: bool) -> void:
 
 ## Opens or closes the pack screen; like the map, the party waits meanwhile.
 func _set_pack(open: bool) -> void:
+	if not open and _guiding_drop():
+		return  # not until the broken knife is dropped
 	if open and is_instance_valid(_overlook) and (_overlook.visible or _overlook_stash.visible):
 		return
 	if open and (_prompt.visible or _full_map.visible or _in_combat or _event_screen.visible or _chest.visible):
@@ -5058,6 +5121,12 @@ func _build_ui(minimap: Control) -> void:
 	_view_button.tooltip_text = "Switch between the view from above and the party's eyes (V)"
 	_view_button.pressed.connect(_toggle_view)
 	buttons.add_child(_view_button)
+	# One press lights a torch, and its bar shows the light left (owner,
+	# 2026-11-22), so neither needs the Pack.
+	_torch_button = TorchButton.new()
+	_torch_button.party_state = _party_state
+	_torch_button.pressed.connect(_quick_torch)
+	buttons.add_child(_torch_button)
 	buttons.add_child(pack_button)
 	map_column.add_child(buttons)
 	_update_view_button()
@@ -5134,6 +5203,8 @@ func _build_ui(minimap: Control) -> void:
 	canvas.add_child(_combat)
 	_event_screen = EventScreen.new()
 	ui.add_child(_event_screen)
+	# A tutorial card waits while an event's own words are up (owner, 2026-11-22).
+	_event_screen.visibility_changed.connect(func(): _layout_hint.call_deferred())
 	_chest = ChestScreen.new()
 	canvas.add_child(_chest)
 	_chest.took.connect(_on_chest_took)
@@ -5335,6 +5406,7 @@ func _build_prompt(ui: Control) -> void:
 	_prompt_choices = buttons  # _choose adds its own buttons alongside
 	_prompt = center
 	_prompt.visible = false
+	_prompt.visibility_changed.connect(func(): _layout_hint.call_deferred())
 
 
 ## Holding the button holds the action, exactly like holding the key.

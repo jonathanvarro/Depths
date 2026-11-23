@@ -236,7 +236,9 @@ func _initialize() -> void:
 		go_on[0].pressed.emit()
 	for i in 4:
 		await process_frame
-	check("after Continue, what didn't fit is offered beside the pack (#136)", main._chest.visible and main._chest._title.text == "No room in your pack" and not main._chest.is_empty(), main._chest._title.text)
+	# A container's finds now open beside the pack under its own name
+	# (owner, 2026-11-22), full pack or not.
+	check("after Continue, what didn't fit is offered beside the pack (#136)", main._chest.visible and main._chest._title.text in ["No room in your pack", "A buried cache"] and not main._chest.is_empty(), main._chest._title.text)
 	main._chest.closed.emit()
 	await process_frame
 	# A blocked passage, cleared with the spade.

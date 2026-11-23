@@ -196,6 +196,14 @@ func _initialize() -> void:
 	check("head back down", _press(main._camp, "Head back down"))
 	await create_timer(0.2).timeout
 	check("preparation follows the cave path", not main._camp.visible and main._preparation.visible)
+	# Back to camp from it (owner, 2026-11-22): nothing about the trip settled.
+	var number: int = main._expedition.number
+	check("preparation has a way back to camp", _press(main._preparation, "Back to camp"))
+	await create_timer(0.2).timeout
+	check("...which returns to camp with the trip not begun", main._camp.visible and not main._preparation.visible and main._expedition.number == number and main._camp_state.left_behind.is_empty())
+	await _open("cave")
+	check("...and the mine path still works", _press(main._camp, "Head back down"))
+	await create_timer(0.2).timeout
 	_press(main._preparation, "Enter the mine")
 	await create_timer(0.4).timeout
 	check("back in the cave on floor 1", main._depth == 1 and not main._party.locked)

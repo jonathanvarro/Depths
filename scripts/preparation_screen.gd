@@ -5,6 +5,8 @@ extends Control
 ## Buying, recruiting and the stash come with the campsite (#22, #26).
 
 signal entered
+## Enter (true) or Back to camp (false) (owner, 2026-11-22: a way back).
+signal decided(go: bool)
 
 const PartyCard := preload("res://scripts/party_card.gd")
 const Supplies := preload("res://scripts/supplies.gd")
@@ -23,6 +25,7 @@ var _title: Label
 var _cards: HBoxContainer
 var _supplies: VBoxContainer
 var _enter: Button
+var _back: Button
 
 
 func _init() -> void:
@@ -37,8 +40,8 @@ func _init() -> void:
 	for side in ["left", "top", "right", "bottom"]:
 		content.add_theme_constant_override("margin_" + side, 32)
 	add_child(content)
-	# The same framed panel as the other menus (#169). No Close: by now the
-	# party has left camp (who stays behind is already settled).
+	# The same framed panel as the other menus (#169), with a way back to
+	# camp before setting out (owner, 2026-11-22).
 	var frame := PanelContainer.new()
 	frame.add_theme_stylebox_override("panel", Kit.Brass.panel(22))
 	frame.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
@@ -87,8 +90,20 @@ func _init() -> void:
 	_enter.add_theme_color_override("font_color", AMBER)
 	_enter.pressed.connect(func():
 		visible = false
-		entered.emit())
+		entered.emit()
+		decided.emit(true))
+	_back = Button.new()
+	_back.text = "Back to camp"
+	_back.add_theme_font_override("font", ACTION)
+	_back.add_theme_font_size_override("font_size", 22)
+	_back.add_theme_color_override("font_color", MUTED)
+	_back.pressed.connect(func():
+		visible = false
+		decided.emit(false))
+	_back.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	_back.custom_minimum_size = Vector2(200, 48)
 	column.add_child(_enter)
+	column.add_child(_back)
 	visible = false
 
 
@@ -157,3 +172,9 @@ func _label(text: String, font: Font, size: int, color: Color) -> Label:
 	label.add_theme_font_size_override("font_size", size)
 	label.add_theme_color_override("font_color", color)
 	return label
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if visible and event.is_action_pressed("ui_cancel"):
+		get_viewport().set_input_as_handled()
+		_back.pressed.emit()

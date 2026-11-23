@@ -145,6 +145,39 @@ func _initialize() -> void:
 				main._face_toward(spot + d)
 				break
 		await _snap("common")
+	# A container's finds are laid out beside the pack (owner, 2026-11-22):
+	# point at one to read it, take one, or take them all; the rest stays.
+	var box: Vector2i = Vector2i(-1, -1)
+	for c in main._map.walking_distances(main._party.cell):
+		if c != main._party.cell and main._map.content_at(c) == main.DungeonMap.Content.NONE and not main._map.solid.has(c) and main._map.door_at(c) == 0:
+			box = c
+			break
+	main._map.contents[box] = main.DungeonMap.Content.CHEST
+	main._map.events[box] = load("res://data/events/chest_abandoned_pack.tres")
+	main._map.triggered.erase(box)
+	var before_items: int = main._party_state.supplies.slots_used()
+	main._run_event(box)
+	await process_frame
+	for tries in 6:
+		if not main._event_screen.visible:
+			break
+		var choice: Array = main._event_screen._buttons.get_children().filter(func(b): return b is Button and not b.disabled)
+		if not choice.is_empty():
+			choice[0].pressed.emit()
+		await create_timer(0.2).timeout
+	check("an old pack's finds open beside the pack, not straight into it", main._chest.visible and not main._chest.is_empty() and main._party_state.supplies.slots_used() == before_items, [main._chest.visible, main._chest.contents])
+	if not main._chest.contents.is_empty():
+		var first = main._chest.contents.keys()[0]
+		main._chest.select_item(first, "left", false)
+		await process_frame
+		check("...pointing at one shows its card", main._chest._detail_text.get_child_count() > 1)
+		var strip: float = main._chest._details.size.y
+		main._chest.take_all()
+		await process_frame
+		await process_frame
+		check("...take all fills the pack, and the card strip keeps its height", main._chest.is_empty() and main._party_state.supplies.slots_used() > before_items and absf(main._chest._details.size.y - strip) < 1.0, [strip, main._chest._details.size.y])
+	main._chest.closed.emit()
+	await create_timer(0.2).timeout
 	var data: Dictionary = main._save_data()
 	main._restore(data)
 	await create_timer(0.3).timeout

@@ -150,6 +150,15 @@ func _do_pack_step() -> void:
 		if main._hint_box.visible:
 			check("the %s card leaves the item's buttons clear" % key, not main._hint_box.get_global_rect().intersects(main._pack._details.get_global_rect()), "%s vs %s" % [main._hint_box.get_global_rect(), main._pack._details.get_global_rect()])
 		await _snap_once("pack_open_" + key)
+	if key == "drop":
+		# Guided (owner, 2026-11-22): the rest dims, the Pack stays open, the
+		# Drop button is lit, and the card says dropped things are gone.
+		main._set_pack(false)
+		await process_frame
+		check("the knife drop keeps the Pack open", main._pack.visible)
+		var lit = main._guided_drop_target()
+		check("...dims the rest and lights its Drop button", main._spotlight.visible and lit != null and lit.get_meta("kit_focus", "") == "action:drop", lit)
+		check("...and says dropped things are gone", main._hint_label.text.contains("left behind for good"), main._hint_label.text)
 	match key:
 		"equip": _press_in_row(main._opening_weapon.display_name, "Equip")
 		"drop": _press_in_row(main._starting_weapon.display_name, "Drop")

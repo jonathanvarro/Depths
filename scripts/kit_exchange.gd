@@ -243,15 +243,20 @@ func _hover_text(entry:Dictionary) -> String:
 ".join(PackedStringArray(lines))
 
 
+## The item card strip's one height (see _show_details).
+const DETAIL_HEIGHT := 112.0
+
 func _show_details() -> void:
 	_clear(_detail_text);_clear(_detail_actions);_detail_icon.texture=null;_primary=null
 	var entry:=selected_entry()
 	if _key==null or entry.is_empty():
-		# Nothing picked: a short line, and the strip stays slim (#169).
-		_details.custom_minimum_size.y=56
+		# Nothing picked: a short line. The strip keeps one height whatever it
+		# shows (owner, 2026-11-22: storing a whole stack made the screen
+		# jump, and again on the next hover); long text scrolls inside it.
+		_details.custom_minimum_size.y=DETAIL_HEIGHT
 		_detail_text.add_child(_wrapped("Tap an item to see it here.",17,FieldKit.MUTED))
 		return
-	_details.custom_minimum_size.y=100
+	_details.custom_minimum_size.y=DETAIL_HEIGHT
 	_detail_icon.texture=_texture(entry)
 	var tier:=_tier(entry)
 	_detail_text.add_child(_wrapped((tier.capitalize()+" · " if tier!="common" else "")+_name(entry),21))
@@ -343,7 +348,7 @@ func _build() -> void:
 	_space=_label("",17,FieldKit.MUTED);_space.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 	_space.size_flags_vertical=Control.SIZE_SHRINK_CENTER;lower.add_child(_space)
 	_pages=HBoxContainer.new();lower.add_child(_pages)
-	_details=PanelContainer.new();_details.custom_minimum_size=Vector2(0,100)
+	_details=PanelContainer.new();_details.custom_minimum_size=Vector2(0,DETAIL_HEIGHT)
 	_details.add_theme_stylebox_override("panel",FieldKit.Brass.panel(8));column.add_child(_details)
 	var row:=HBoxContainer.new();row.add_theme_constant_override("separation",12);_details.add_child(row)
 	_detail_icon=_icon(null,Vector2(56,56));row.add_child(_detail_icon)

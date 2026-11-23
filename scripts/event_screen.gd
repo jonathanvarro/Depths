@@ -23,6 +23,7 @@ var _used := {}  # investigations already tried
 ## Finds that didn't fit in the pack (#133, #136): handed on with the result
 ## so main.gd can offer them beside the pack.
 var _no_room := {}
+var _held := {}  # a container's finds, for main.gd to offer beside the pack
 
 
 func _init() -> void:
@@ -73,6 +74,7 @@ func show_event(event: RoomEvent, party_state, rules, flags: Array = []) -> void
 	_rules = rules
 	_used.clear()
 	_no_room = {}
+	_held = {}
 	_title.text = event.title
 	_body.text = event.clue
 	_clear_chips()
@@ -114,6 +116,8 @@ func _choose(choice: EventChoice) -> void:
 		Sounds.play(self, "sluice", -5.0, 0.0)
 	for item in result.get("no_room", {}):
 		_no_room[item] = _no_room.get(item, 0) + result["no_room"][item]
+	for item in result.get("held", {}):
+		_held[item] = _held.get(item, 0) + result["held"][item]
 	if choice.investigation and result["ambush"].is_empty():
 		_used[choice] = true
 		_body.text += "\n\n" + result["story"]
@@ -136,6 +140,7 @@ func _choose(choice: EventChoice) -> void:
 func _finish(result: Dictionary) -> void:
 	visible = false
 	result["no_room"] = _no_room.duplicate()
+	result["held"] = _held.duplicate()
 	finished.emit(result)
 
 

@@ -409,6 +409,14 @@ func _place_activity(room: Vector2) -> void:
 	_activity.scale = Vector2.ONE * s
 	_activity.size = ((room - margin * 2) / s).floor()
 	_activity.position = margin
+	# The tent alone is a framed picture over the camp, no wider than its
+	# painting (owner, 2026-11-22: no empty bands either side of it).
+	if _current == "rest" and is_instance_valid(_tent_view) and _body.get_children().all(func(c): return c == _tent_view or not c.visible or c.get_combined_minimum_size().y < 1.0):
+		var picture: Vector2 = TentInterior.ART.get_size()
+		var wide: float = floorf((_activity.size.y - 62.0) * picture.x / picture.y + 32.0)
+		if wide < _activity.size.x:
+			_activity.position.x += (_activity.size.x - wide) * s / 2.0
+			_activity.size.x = wide
 	_layout_activity()
 
 

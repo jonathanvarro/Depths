@@ -98,6 +98,8 @@ func _initialize() -> void:
 	main._results.continue_pressed.emit()
 	await create_timer(0.5).timeout
 	main._camp.cave_chosen.emit(1)  # off again
+	await create_timer(0.3).timeout
+	main._preparation._enter.pressed.emit()  # a trip begins only at Enter (2026-11-22)
 	await create_timer(0.5).timeout
 	check("a new trip clears each hero's once-a-trip remarks", not main._said.keys().any(func(k): return k.contains(":")))
 	print("fails=", fails)
