@@ -332,14 +332,14 @@ void fragment() {
 @export var screen_flashes := true
 ## Art for the fallen companions in the opening room, one per body (Node3D
 ## scenes whose origin sits on the floor). Missing files fall back to a plain
-## placeholder shape. ChatGPT's sprites: art/props/opening-bodies-v1 (#55).
+## placeholder shape. Static anonymous 3D travellers (#285); old sprite art retained.
 @export var body_scenes: PackedStringArray = [
-	"res://art/props/opening-bodies-v1/fallen-a.tscn",
-	"res://art/props/opening-bodies-v1/fallen-b.tscn",
+	"res://art/props/opening-bodies-3d-v1/fallen-a.tscn",
+	"res://art/props/opening-bodies-3d-v1/fallen-b.tscn",
 ]
 ## The dying fire in the opening room (a Node3D scene on the floor).
-## Missing file: placeholder embers. ChatGPT's art: art/features/campfire-v1.
-@export var fire_scene_path := "res://art/features/campfire-v1/scene.tscn"
+## Missing file: placeholder embers. Solid, floor-registered 3D art (#285).
+@export var fire_scene_path := "res://art/features/campfire-3d-v1/scene.tscn"
 ## Shown as the game opens on the deepest floor, where the companions died.
 @export_multiline var opening_message := "Your companions lie still. Find the way out."
 
@@ -4025,7 +4025,7 @@ func _add_opening_dressing() -> void:
 		var path: String = body_scenes[i] if i < body_scenes.size() else ""
 		var body: Node3D
 		if path != "" and ResourceLoader.exists(path):
-			body = load(path).instantiate()  # a camera-facing sprite, drawn lying down
+			body = load(path).instantiate()  # static floor-registered model (#285)
 		else:
 			body = _placeholder_body()
 			body.rotation.y = PI / 2.0 + randf_range(-0.5, 0.5)  # lying across her view
@@ -4109,6 +4109,8 @@ func _add_fire(cell: Vector2i) -> void:
 	if fire_scene_path != "" and ResourceLoader.exists(fire_scene_path):
 		var art: Node3D = load(fire_scene_path).instantiate()
 		art.position = Vector3(cell.x * CELL_SIZE, 0.0, cell.y * CELL_SIZE)
+		if "follow_settings" in art:art.follow_settings = true
+		if art.has_method("set_motion"):art.set_motion(Settings.get_value("flashes"))
 		_level.add_child(art)
 		# A soft fill so the whole small room reads, not just the fire.
 		var fill := OmniLight3D.new()

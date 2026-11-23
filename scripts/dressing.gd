@@ -24,6 +24,8 @@ const MINE := "res://art/dressing/mine-refined-v2/"
 const EXPEDITION := "res://art/props/expedition-3d-v1/"
 const BONES := "res://art/dressing/bone-decor-v1/"
 const MODELS := {
+	"burnt-sconce": "res://art/dressing/wall-torch-3d-v1/burnt-sconce.tscn",
+	"goblin-torch-lit": "res://art/dressing/wall-torch-3d-v1/goblin-torch-lit.tscn",
 	"mine-support": MINE + "support.tscn", "mine-support-damaged": MINE + "support-damaged.tscn",
 	"mine-rails": MINE + "rails.tscn", "mine-rails-broken": MINE + "rails-broken.tscn",
 	"lantern-hanging": MINE + "lantern-hanging.tscn", "lantern-standing": MINE + "lantern-standing.tscn",

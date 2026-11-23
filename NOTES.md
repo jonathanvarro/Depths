@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-11-22 – ChatGPT (tutorial hearth and fallen companions, #285)
+- Did: created a true 3D dying hearth and two anonymous fully clothed static bodies, brown supine/slate prone. Public original recruit/mine geometry only; no private body/Mixamo or named likenesses. Main's art defaults use them, with fire following live effects preferences and exact still mode. Also replaced the burnt/lit wall torch dressing with a solid worn iron/wood model (#287), preserving mounts and mood-light budget. Native 22-check phone review, 35 torch checks, complete opening playthrough and recovery assertions pass. Sources, local masters and captures: `docs/tutorial-campfire-and-bodies-3d.md`.
+- Next: owner review; campsite cohesion/grounding and consistent Pack position requested while this batch was being checked are a separate follow-up.
+- Watch out: `body_scenes` is shared with anonymous lost-body recovery. Existing story-package references to the old paintings stay unchanged. No physical iPhone check or new death animation.
+
 ## 2026-11-22 – Claude (softer darkness, less bolting, quieter camp music)
 - Did: owner found panic plus a blank map too punishing. In the dark the map now keeps the explored part of the room or hallway you're in and of the room with the way up (`Minimap.dark_cells`, new `DungeonMap.area_around`: a room, or connected corridor floor up to passages), with a caption "Too dark: only this place and the way up"; landmarks/quest cairns outside it hide; openings into hidden parts are dashed. Panic bolt chance 0.15 -> 0.12 per step. Camp music 10% quieter (`Music.PLACE_VOLUME`, `volume_for`). Checks: darkness_check (partial map), batch_check (camp volume).
 - Next: owner playtest of how the dark map and bolting feel.

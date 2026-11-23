@@ -8,6 +8,14 @@ out of git (see `docs/blender-expedition-kit-tasks.md`).
 
 ## Where the files live
 
+### Tutorial static travellers and hearth (2026-11-22, #285)
+
+`docs/tutorial-campfire-and-bodies-3d.md`: two anonymous public-geometry resting
+poses, baked static GLBs with no skeletons or Actions. These are not combat
+dying clips or named-companion bodies. The hearth uses four low mesh flames,
+per-instance shader phase and restrained light warmth, with exact still mode.
+Editable masters and native review stay in `build/local-tutorial-3d-v1`.
+
 ### Companion seat-fit garment follow-up (2026-11-22, #218/#220)
 
 `build/local-companion-polish-v1` reuses all six original motions per body and

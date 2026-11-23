@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="Script" path="res://art/dressing/wall-torch-3d-v1/torch.gd" id="1"]
+[ext_resource type="PackedScene" path="res://art/dressing/wall-torch-3d-v1/torch.glb" id="2"]
+[ext_resource type="PackedScene" path="res://art/features/campfire-3d-v1/flames.glb" id="3"]
+[node name="WallTorch" type="Node3D"]
+script=ExtResource("1")
+metadata/dressing_id="burnt-sconce"
+[node name="Model" parent="." instance=ExtResource("2")]
+[node name="Flames" parent="." instance=ExtResource("3")]
+position=Vector3(0,0.16,0.145)
+scale=Vector3(0.4,0.65,0.4)
+[node name="MoodLight" type="OmniLight3D" parent="."]
+position=Vector3(0,0.27,0.2)
+light_color=Color(1,0.52,0.19,1)
+light_energy=0.4
+omni_range=1.5
+omni_attenuation=1.7

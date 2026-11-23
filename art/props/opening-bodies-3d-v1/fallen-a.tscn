@@ -1,0 +1,6 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="Script" path="res://art/props/opening-bodies-3d-v1/body.gd" id="1"]
+[ext_resource type="PackedScene" path="res://art/props/opening-bodies-3d-v1/fallen-a.glb" id="2"]
+[node name="FallenTravellerA" type="Node3D"]
+script = ExtResource("1")
+[node name="Model" parent="." instance=ExtResource("2")]

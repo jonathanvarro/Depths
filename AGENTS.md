@@ -50,6 +50,17 @@ Templates > Download and Install; already installed on the owner's PC).
 
 ## Project structure
 
+- `docs/tutorial-campfire-and-bodies-3d.md` – #285's live tutorial hearth and
+  two static anonymous clothed travellers. True floor-registered GLBs replace
+  Main's default opening sprites; body_scenes also serves lost-body recovery.
+  Existing search/loot/cell rules and light budget remain. Fire set_motion and
+  live effects preference give exact still mode. Local editable masters/native
+  phone review: `build/local-tutorial-3d-v1/inspector.html`. Public generic recruit
+  and mine geometry only; no private Mixamo/base-body or named likenesses.
+  #287 adds a worn solid wall torch: Dressing.MODELS maps burnt-sconce and
+  goblin-torch-lit to `art/dressing/wall-torch-3d-v1`, with existing anchors,
+  floor ranges and mood-only light. Native four-wall / still checks pass.
+
 - `docs/companion-polish-and-regional-equipment.md` – #218/#220's new private
   editable seat-fit jacket copies in `build/local-companion-polish-v1` clear
   the fixed stool over all 1,221 source chair frames. Original body skin,

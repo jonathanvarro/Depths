@@ -1,0 +1,27 @@
+{
+  "issue": 287,
+  "asset": {
+    "id": "torch",
+    "triangles": 1200,
+    "surfaces": [
+      "Iron",
+      "Wood",
+      "Stone"
+    ],
+    "min": [
+      -0.07775933295488358,
+      -0.19628900289535522,
+      -0.28045889735221863
+    ],
+    "max": [
+      0.07775933295488358,
+      -0.004187843296676874,
+      0.2888449728488922
+    ],
+    "sha256": "00f8a9d2a8044ba257395bb0bc5ec55ec1cbab165a75424a641533a0f5bcb306"
+  },
+  "units": "metres",
+  "mount": "root at wall face and existing mounting height; +Z into room",
+  "source": "Original Depths mine geometry helpers, no download or private assets",
+  "builder_sha256": "ae796c417d40cc2be483a97e3352a3c7f468ea2d8c54d5c7305ec44cdfac2992"
+}

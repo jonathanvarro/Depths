@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="PackedScene" path="res://art/dressing/wall-torch-3d-v1/burnt-sconce.tscn" id="1"]
+[node name="GoblinWallTorch" instance=ExtResource("1")]
+lit=true
+metadata/dressing_id="goblin-torch-lit"
+metadata/mood_only=true
