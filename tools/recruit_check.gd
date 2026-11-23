@@ -130,7 +130,11 @@ func _initialize() -> void:
 	comparison_hero.weapon = knife
 	var expected_span := comparison_hero.attack_range()
 	var expected_damage := str(expected_span.x) if expected_span.x == expected_span.y else "%d–%d" % [expected_span.x,expected_span.y]
-	check("pack compares the knife for selected hero", main._pack._selected_hero == helper and pack_text.contains("→") and pack_text.contains(expected_damage+" dmg"), pack_text.substr(0, 300))
+	# #273 (owner-approved): the knife's numbers for this hero under its name,
+	# and what they hold now beneath.
+	var stats: String = main._pack._detail_stats.text
+	var held: String = main._pack._detail_comparison.text
+	check("pack compares the knife for selected hero", main._pack._selected_hero == helper and stats.contains(expected_damage+" damage") and held.begins_with("Equipped: "), [stats, held])
 	check("a recruit equips it", _press(main._pack._detail_actions, "Equip") and helper.weapon == knife)
 	main._pack.refresh()
 	main._pack.inspect_item(helper.weapon,true,"weapon")

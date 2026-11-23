@@ -36,7 +36,8 @@ func _initialize() -> void:
 	var cave: EnvironmentTheme = load("res://themes/cave.tres")
 	var scenes := [cave.closed_scene, cave.opened_scene, cave.blocked_scene, cave.descent_scene, cave.ascent_scene,
 			load("res://themes/fortress.tres").descent_scene, load("res://themes/stone.tres").ascent_scene]
-	check("webs, roots, ledges and stairs are the 3D features", scenes.all(func(s): return s and s.resource_path.contains("transitions-3d-v1/")), scenes.map(func(s): return s.resource_path.get_file() if s else "none"))
+	# The webs are #274's finer silk (web-silk-v2); the rest #250's 3D set.
+	check("webs, roots, ledges and stairs are the 3D features", scenes.all(func(s): return s and (s.resource_path.contains("transitions-3d-v1/") or s.resource_path.contains("web-silk-v2/"))), scenes.map(func(s): return s.resource_path.get_file() if s else "none"))
 
 	# A real floor: outcomes leave the right state, and it's kept.
 	var main = load("res://scenes/main.tscn").instantiate()

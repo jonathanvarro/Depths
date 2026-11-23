@@ -31,9 +31,10 @@ func place(main) -> bool:
 
 func _initialize() -> void:
 	var args := OS.get_cmdline_user_args()
-	output = args[0] if not args.is_empty() else ""
+	# The suite passes "desk <dir>"; run alone it may be just "<dir>".
+	output = args[1] if args.size() > 1 else (args[0] if args.size() == 1 and args[0] not in ["desk", "phone"] else "")
 	if not output.is_empty(): DirAccess.make_dir_recursive_absolute(output)
-	Settings.set_value("tactical_view", false)
+	Settings.set_value("view_above", false)
 	Settings.set_value("flashes", true)
 	var main = load("res://scenes/main.tscn").instantiate()
 	main.play_opening = false
@@ -102,7 +103,8 @@ func _initialize() -> void:
 	main._depth = 3
 	check("deeper floors retain their own ambience", not life.show_effect("bat"))
 	main._depth = 1
-	Settings.set_value("tactical_view", true)
+	main.overhead_from_floor = 1  # the board is off by default (2026-11-21)
+	Settings.set_value("view_above", true)
 	main._apply_view()
 	await create_timer(.6).timeout
 	check("overhead shares the lit cells", not life.target_cells().is_empty())

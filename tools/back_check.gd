@@ -63,7 +63,8 @@ func _initialize() -> void:
 	await process_frame
 	main._pack.inspect_item(_gear("satchel"))
 	var labels: Array = main._pack._list.find_children("*", "Label", true, false).map(func(l): return l.text)
-	check("the Pack says what a back item does", labels.any(func(t): return t == "Worn: +2 pack slots"), str(labels.slice(0, 8)))
+	# #273 (owner-approved): the brief puts what it does right under the name.
+	check("the Pack says what a back item does", main._pack._detail_stats.visible and main._pack._detail_stats.text == "+2 pack slots", main._pack._detail_stats.text)
 	ps.equip(ps.members[0], _gear("satchel"))
 	main._pack.refresh()
 	main._pack.inspect_item(ps.members[0].back,true,"back")

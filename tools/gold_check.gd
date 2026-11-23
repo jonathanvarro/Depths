@@ -47,8 +47,10 @@ func _trade(key: Variant, side: String) -> bool:
 
 ## The tent's stash (owner, 2026-10-25): Store opens it; gold moves all at once.
 func _stash(key: String) -> bool:
-	if not _press(main._camp, "Store"):
+	# Store is the tent's chest now (#271).
+	if not is_instance_valid(main._camp._tent_view):
 		return false
+	main._camp._tent_view.store_requested.emit()
 	var view = main._camp._stash_view
 	view.select_item(key, "left" if key == "stash_gold" else "right")
 	var moved := false
