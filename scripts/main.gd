@@ -2197,6 +2197,7 @@ func _start_new_expedition(returned_alive := true) -> void:
 func _camp_loop(reward := 0, note := "") -> void:
 	_ending = true
 	_party.locked = true
+	_camp.animate_lights = Settings.get_value("flashes")
 	_camp.open(_camp_state, _party_state)
 	if _ambience_player:
 		_ambience_player.stop()
@@ -5037,7 +5038,6 @@ func _build_ui(minimap: Control) -> void:
 	var map_column := VBoxContainer.new()
 	map_column.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	map_corner.add_child(map_column)
-	map_column.add_child(minimap)
 	# Supplies live in the pack, not on the HUD (#10).
 	var pack_button := Button.new()
 	_pack_button = pack_button
@@ -5062,6 +5062,9 @@ func _build_ui(minimap: Control) -> void:
 	buttons.add_child(_view_button)
 	buttons.add_child(pack_button)
 	map_column.add_child(buttons)
+	# Keep Pack at the top-right safe-area anchor in the dungeon and camp.
+	# Showing/hiding the map no longer moves the item button.
+	map_column.add_child(minimap)
 	_update_view_button()
 	ui.add_child(map_corner)
 
@@ -5174,6 +5177,7 @@ func _build_ui(minimap: Control) -> void:
 	settings_layer.add_child(_settings)
 	_settings.closed.connect(_update_wound_dim)
 	_settings.closed.connect(_apply_view)  # the view may have changed (#248); not mid-fight
+	_settings.closed.connect(func(): _camp.animate_lights = Settings.get_value("flashes"))
 	_pack.open_settings.connect(func(): _settings.open())
 	_event_screen.coin = coin
 	_camp = CampScreen.new()

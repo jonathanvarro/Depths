@@ -15,6 +15,7 @@ signal open_settings
 signal open_pack  # check items and equipment at camp (owner playtest, #229)
 
 const DIR := "res://art/camp/highres-v4/"
+const COHESIVE := "res://art/camp/cohesive-v5/"
 const Brass := preload("res://art/ui/reliquary-brass-v1/style.gd")
 const TentInterior := preload("res://scripts/tent_interior.gd")
 const PORTRAIT_DIR := DIR
@@ -110,7 +111,7 @@ func _init() -> void:
 	content.add_child(_canvas)
 	var scenery := TextureRect.new()
 	scenery.expand_mode=TextureRect.EXPAND_IGNORE_SIZE
-	scenery.texture = load(DIR + "terrain.png")
+	scenery.texture = load(COHESIVE + "terrain.png")
 	scenery.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
 	scenery.size = CANVAS
 	scenery.light_mask = 2
@@ -120,7 +121,7 @@ func _init() -> void:
 	for site in layout["sites"]:
 		_add_site(site)
 	_add_site({"id": "trainer", "label": "Skills trainer", "npc": "", "rect": [375, 64, 107, 56]})
-	_dressing=preload("res://art/camp/highres-v4/dressing.gd").new()
+	_dressing=preload("res://art/camp/cohesive-v5/dressing.gd").new()
 	_canvas.add_child(_dressing)
 	_canvas.move_child(_dressing,_site_art.fire.get_index()+1)
 	_dressing.setup(_canvas,_site_art.fire)
@@ -128,13 +129,13 @@ func _init() -> void:
 	title.position = Vector2(20, 8)
 	_canvas.add_child(title)
 	_day_label = _label("", HEADING, 16, AMBER)
-	_day_label.position = Vector2(400, 10)
+	_day_label.position = Vector2(300, 10)
 	_day_label.size = Vector2(204, 24)
 	_day_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	_canvas.add_child(_day_label)
 	var coin := TextureRect.new()
 	coin.texture = COIN_ICON
-	coin.position = Vector2(610,13)
+	coin.position = Vector2(510,13)
 	coin.size = Vector2(14,14)
 	coin.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	coin.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -146,14 +147,19 @@ func _init() -> void:
 	save.add_theme_font_size_override("font_size", 14)  # readable on a phone (#169)
 	save.pressed.connect(func(): save_and_exit.emit())
 	_canvas.add_child(save)
-	var pack := _button("Pack")
+	# Same unscaled safe-area HUD anchor/size as the exploration Pack.
+	var pack := Button.new()
+	pack.text="Pack"
 	_pack_button = pack
-	pack.position = Vector2(340, 326)
-	pack.size = Vector2(90, 30)
-	pack.add_theme_font_size_override("font_size", 14)
+	pack.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT)
+	pack.offset_left=-112;pack.offset_right=-16
+	pack.offset_top=16;pack.offset_bottom=68
+	pack.custom_minimum_size=Vector2(96,52)
+	pack.modulate.a=0.8
 	pack.tooltip_text = "Check your items and equipment"
+	pack.pressed.connect(func(): Sounds.play(self,"ui",-12.0,0.0))
 	pack.pressed.connect(func(): open_pack.emit())
-	_canvas.add_child(pack)
+	content.add_child(pack)
 	var gear := _button("")
 	Brass.apply(gear,Brass.Edge.RIGHT,4)
 	gear.icon=SETTINGS_ICON
@@ -269,7 +275,7 @@ func _add_site(site: Dictionary) -> void:
 		art.position = Vector2(428, 112)
 		art.scale = Vector2.ONE * 0.56
 	else:
-		art = load(DIR + id + ".tscn").instantiate()
+		art = load((COHESIVE if id in ["rest","fire"] else DIR) + id + ".tscn").instantiate()
 		art.animate_lights = animate_lights
 	# Textures retain registered positions on the common landscape canvas.
 	_canvas.add_child(art)
@@ -381,7 +387,7 @@ func _fit() -> void:
 	_canvas.position = (room - CANVAS * ratio) / 2.0
 	# Keep global/activity controls comfortably tappable at Larger UI scale.
 	var height:=maxf(30.0,44.0/ratio)
-	for button in [_save_button,_settings_button,_pack_button]:
+	for button in [_save_button,_settings_button]:
 		if button:
 			button.custom_minimum_size.y=height
 			button.size.y=height
@@ -392,8 +398,6 @@ func _fit() -> void:
 		_save_button.position.x=_settings_button.position.x-124
 		_save_button.position.y=CANVAS.y-height-4
 		_settings_button.position.y=CANVAS.y-height-4
-		_pack_button.size.x=96
-		_pack_button.position=Vector2(_save_button.position.x-106,CANVAS.y-height-4)
 	_place_activity(room)
 	var touch:=maxf(30.0,44.0/_activity.scale.x)
 	for button in [_back]+_body.find_children("*","Button",true,false):button.custom_minimum_size.y=touch

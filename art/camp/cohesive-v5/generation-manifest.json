@@ -1,0 +1,60 @@
+{
+  "issues": [
+    286,
+    289
+  ],
+  "mode": "built-in image_gen",
+  "date": "2026-11-22",
+  "assets": [
+    {
+      "file": "terrain.png",
+      "prompt": "Use case: precise-object-edit. Asset type: production background plate for Depths, a dark gritty dungeon crawler's layered camp menu, 16:9 landscape. Input image is the EDIT TARGET. Preserve its composition, camera angle, cave entrance upper right, mountainous pine valley left, upper terraces, muted cool grey rocks, desaturated brown earth, weathered painterly sharp detail, and exact locations of paths. Make only these ground corrections: On the lowest foreground terrace, create a believable flat compacted-earth tent pad covering approximately x=4% to 34%, y=58% to 88% of the canvas. Replace the small exposed rock ridge within that pad with dirt, fine loose gravel, embedded small stones and worn foot marks; keep the outer cliff edge safely below it. On the same foreground level at x=48% to 80%, y=58% to 83%, make a continuous flat worn earth clearing to receive a fire and log seating, with subtle ash staining in its middle. Feather both changes naturally into existing earth. Preserve surrounding rocky ledges and lower edge foreground rocks. Do not add a tent, people, fire, furniture, food, text, interface, buildings, or any new services. This must remain an EMPTY terrain plate for independently toggled camp stations. Match the existing gritty illustrated finish, not glossy 3D or soft photorealism. No bright saturated colours. Output only the finished background image.",
+      "reference": "art/camp/highres-v4/terrain.png",
+      "source": "exec-d9ef5afb-59ea-4c4b-9f03-2ccfdcffb819.png",
+      "sha256": "126337984807a73df94c61c8e9a813710037dc446156de584699260fc58efa4b",
+      "source_dimensions": [
+        1672,
+        941
+      ],
+      "reference_sha256": {
+        "art/camp/highres-v4/terrain.png": "10070df0f4392c0f6fcc6c3606226f5b376cae9330b434c177b77cae237c51bb"
+      }
+    },
+    {
+      "file": "rest.png",
+      "prompt": "Use case: style-transfer / precise-object-edit. Asset type: a single transparent PNG camp-station sprite for Depths. Image 1 is the EDIT TARGET tent exterior. Image 2 is STYLE REFERENCE ONLY for palette, weathering and brushwork. Repaint this same modest A-frame adventurer tent, front opening facing slightly to viewer's right, as if painted by the artist of the rocky camp terrain reference. Keep a cot inside on the left, small closed travel chest near the entrance, simple belongings and hanging unlit lantern. Weathered desaturated brown-grey waxed canvas, uneven sewn repairs, worn wooden poles, sagging edges, grubby hems, coarse guy ropes. Tone down its golden clean cream colour and hard decorative outline; use the terrain's muted gritty painterly highlights and soft contact shadows. Tent pegs must be short wooden pegs properly driven into tiny loose-earth pockets at the ends of taut guy ropes, never stone pedestals. No large rocky plinth. The tent rests on one flat ground plane. Preserve a broad low roughly 1.8:1 silhouette, whole tent, all ropes and pegs fully inside the image with clear padding. No people, furniture outside the established cot/chest, text, labels, backdrop, UI or surrounding landscape. ACTUAL TRANSPARENT BACKGROUND including between all ropes and poles; only the tent and small restrained ground-contact shadows, no checkerboard. Lighting diffuse cool daylight from upper left, restrained warm canvas bounce. Output production-ready isolated sprite, sharp painterly detail compatible with the terrain, not glossy 3D, not a cartoon.",
+      "references": [
+        "art/camp/highres-v4/rest.png",
+        "art/camp/highres-v4/terrain.png"
+      ],
+      "source": "exec-6df888df-720c-4c62-a387-358ec57b10d8.png",
+      "sha256": "f30491e2cbee29eaebb105c62148acb671eb08b9677be0c044db1299d984d030",
+      "source_dimensions": [
+        1683,
+        935
+      ],
+      "reference_sha256": {
+        "art/camp/highres-v4/rest.png": "1b6036c3136c7b1723905de942accd76471f0934685563e2783610323ddcd766",
+        "art/camp/highres-v4/terrain.png": "10070df0f4392c0f6fcc6c3606226f5b376cae9330b434c177b77cae237c51bb"
+      }
+    },
+    {
+      "file": "fire.png",
+      "prompt": "Use case: style-transfer. Asset type: isolated transparent camp-station sprite for Depths. Image 1 is edit target: cooking fire with logs. Image 2 is style reference only: gritty grey mountain campsite. Repaint and simplify the cooking/recruitment hearth to match the terrain's desaturated weathered illustrated brushwork and muted grey-brown palette. Broad low 1.9:1 silhouette viewed from the same slightly elevated three-quarter camera. An uneven stone-ringed hearth, split charred logs but NO flames (animated flame added by game), crooked wooden cooking tripod with small blackened kettle physically suspended by an iron hook and chain. Two low weathered log seats, left and right, visibly resting on the same flat ground plane as the hearth; each seat has a clearly readable upper seat edge with space above it for a separately drawn seated traveller. A short broad stump beside the LEFT seat serves as a small tabletop; one wooden bowl, a crust of bread and a metal cup rest directly on that stump, coherent contact shadows, nothing hovering. Remove the rectangular four-log fence effect of the old fire; this is an open, comfortable but poor expedition firepit. Show no people, characters, labels, text, UI or backdrop. No bare floating food anywhere. Keep every stick and stone entirely inside the image with padding. Use matte worn materials, ash dust, chipped wood, a small irregular dark earth/contact shadow beneath each object. ACTUAL transparent background including all gaps under the kettle and between logs, no surrounding landscape, no checkerboard. Sharp gritty painterly game illustration matching the terrain reference, not shiny or photorealistic.",
+      "references": [
+        "art/camp/highres-v4/fire.png",
+        "art/camp/highres-v4/terrain.png"
+      ],
+      "source": "exec-7dc12db1-0f19-4602-8de0-7a90396ec7d1.png",
+      "sha256": "d1274e3aeefdad9b8cca809213c8b5af126bf65b90768d6cbd81ac1649456870",
+      "source_dimensions": [
+        1728,
+        910
+      ],
+      "reference_sha256": {
+        "art/camp/highres-v4/fire.png": "bb9a278771345d68fba11706bcb5f29774865a4258644f981a543a2f2680b23b",
+        "art/camp/highres-v4/terrain.png": "10070df0f4392c0f6fcc6c3606226f5b376cae9330b434c177b77cae237c51bb"
+      }
+    }
+  ]
+}

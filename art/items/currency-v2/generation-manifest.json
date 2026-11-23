@@ -1,0 +1,12 @@
+{
+  "issue": 289,
+  "mode": "built-in image_gen",
+  "prompt": "Use case: stylized-concept. Asset type: production inventory icon for the gritty dark fantasy dungeon crawler Depths. Create ONE large ancient gold coin, almost face-on with a slight three-quarter tilt showing a thin irregular hammered edge. A crisp deeply struck abstract branching sprig/tree currency crest at the centre: one vertical stem with three short diagonal branches to left and right, no lettering or numerals. Worn hand-struck asymmetrical outline, nicked edges, fine scratches, dulled old gold and darker recessed bronze-gold crevices, restrained bright edges. Substantial relief, strong readable silhouette, precise sharp focus and tactile detail comparable to a hand-painted RPG food/weapon inventory icon. Centre the coin, filling roughly 76% of a square canvas with clear transparent padding on all sides. One isolated coin only; no pile, bag, hands, glowing aura, bloom, blur, text, border, background or checkerboard. Diffuse light upper left. ACTUAL transparent background. Paint sharp high-quality realistic illustrative detail that remains readable when reduced to 128 and 64 pixels.",
+  "source": "exec-5e489c54-d807-4c7e-bfb2-4e38775accff.png",
+  "date": "2026-11-22",
+  "sha256": "3f8c11d292bb427620fe04f526cbc1f02cf63c10b46b110827a2f8e677c99ef8",
+  "source_dimensions": [
+    1254,
+    1254
+  ]
+}

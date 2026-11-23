@@ -2,7 +2,7 @@ extends "res://scripts/kit_exchange.gd"
 ## The tent's stash (owner, 2026-10-25): what stays safe at camp, beside
 ## the pack, on the shared Field kit exchange. One tap moves one item (or
 ## all the gold) across; a full pack says so.
-const COIN_ICON:=preload("res://art/symbols/crest-v1/currency-coin.svg")
+const COIN_ICON:=preload("res://art/items/currency-v2/gold.png")
 const Sounds:=preload("res://scripts/sounds.gd")
 var _camp
 var _party
