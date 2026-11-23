@@ -137,6 +137,12 @@ Format:
 - Next: owner tries it.
 - Watch out: rows set here are the starting rows for fights (Companion.row).
 
+## 2026-11-21 – ChatGPT (approved brass and full-width skill paths, #268/#269)
+
+- Did: owner selected Reliquary brass ("works great"); recorded in `DESIGN.md` and the button study's `selection.json`. Skill concept now has horizontal class training above personal paths across the width, with no reserved description column. Inventory-style cards appear beside the source on hover/focus, pin on click/tap and dismiss on leaving an unpinned preview, outside click, Close or Escape. Long content scrolls; the selected source remains reachable. Updated captures and `validation.json`.
+- Next: review the revised skill concept in PR #270; adapt the approved brass frames to Godot with fixed corner widths during live menu hookup.
+- Watch out: this is still the presentation concept; rank counts, new traits and unlocks are not approved gameplay. Four landscape sizes, 36 source/card placements, keyboard, hover, pinning, emulated touch and long-text/safe-margin checks pass in headless Chrome. Physical iPhone validation remains.
+
 ## 2026-11-21 – Claude (smoother 3D model animation)
 
 - Did: owner request. `scripts/anim_tidy.gd`, called by the three model actor scripts (combat-roster, field-creatures, rat): moves now cross-fade (0.14s; hurt 0.06s) instead of snapping, a repeated one-shot (two attacks in a row) starts over, and bone flips are spread over neighbouring keys along the shortest turn. The flips were in the shared goblin `fall` (spine and left leg turning 100-144 degrees in one frame, on all eight goblin-base models). Still mode is unchanged (exact frames). Loop seams were already clean. `tools/animation_audit.gd` lists each clip's biggest step; `tools/animation_smooth_check.gd`.
@@ -148,6 +154,12 @@ Format:
 - Did: added occasional tiny bats, scurrying mice and falling ceiling dust to lit exploration on floors 1–2, through `Ambience.mine_life`. Reuses the existing rat run and cave-bat flight at small scale; source models/materials stay intact. One short effect at a time, independent cosmetic RNG, empty reachable cells and overhead revealed-cell checks. Hides during combat, opening, camp, menus and weak light; screen flashes/moving effects off clears it immediately. See `docs/mine-life.md`.
 - Next: merge the branch after review; tune frequency during play if desired. Native phone-size captures stay local under `build/local-mine-life-v1/phone`; physical iPhone review remains.
 - Watch out: cosmetic only: no loot, targets, collision, sound, encounter changes or saved wildlife. Keep the feature on the first two floors until later regions get their own atmosphere. Claude's current working-copy edits were left untouched in the main checkout.
+
+## 2026-11-21 – ChatGPT (skill layout and gothic menu concepts, #268/#269)
+
+- Did: selectable `art/concepts/interface/skill-tree-v1/inspector.html`: shared class-training seals above larger personal traits, portrait selection, hover/pinned inspection and phone tap cards. Corin/Branna show the same Melee training with different personal paths; Mara/Alwen include Scout/Mage alternatives. Three gothic button studies in `art/concepts/interface/gothic-buttons-v1/inspector.html` each show flat-left, double-beveled and flat-right placement variants. Nine scalable original frames, source generator and review captures included. See `docs/skill-tree-concept.md`.
+- Next: owner reviews the layout and chooses a button treatment before any live UI hookup. Reliquary brass is the suggested gothic option; iron is quieter. Keep production corner widths fixed when adapting to Godot.
+- Watch out: concepts only. Current skills remain permanent and expedition levels temporary. New rank counts, bonuses, critical mechanics, Branna traits, extra personal slots and story unlocks are proposals. No live screens, rules, saves or character resources changed. Chrome review fits both skill sections at landscape-phone sizes; physical iPhone review remains.
 
 ## 2026-11-21 – Claude (Skip the tutorial on the title)
 

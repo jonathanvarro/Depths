@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Depths · Gothic menu buttons</title><link rel="stylesheet" href="style.css"></head>
+<body><main>
+  <header><div class="eyebrow">DEPTHS / INTERFACE STUDY 02</div><h1>Edges with character</h1><p>Three gothic button treatments. Straight edges meet the screen; cut corners face inward.</p></header>
+  <div class="columns" aria-hidden="true"><span></span><span>LEFT EDGE</span><span>CENTRE</span><span>RIGHT EDGE</span></div>
+  <section class="example iron" aria-labelledby="iron-heading">
+    <div class="material"><span>01</span><h2 id="iron-heading">Worn iron</h2><p>Hammered, smoke-dark metal.<br>A restrained everyday frame.</p></div>
+    <div class="placement"><button class="menu-button left" aria-pressed="false"><span>Continue</span></button></div>
+    <div class="placement"><button class="menu-button centre" aria-pressed="true"><span>Field kit</span></button></div>
+    <div class="placement"><button class="menu-button right" aria-pressed="false"><span>Settings</span></button></div>
+  </section>
+  <section class="example brass" aria-labelledby="brass-heading">
+    <div class="material"><span>02 · OWNER SELECTED</span><h2 id="brass-heading">Reliquary brass</h2><p>Tarnished inlay, a pointed arch.<br>Approved direction · 21 Nov 2026.</p></div>
+    <div class="placement"><button class="menu-button left" aria-pressed="false"><span>Continue</span></button></div>
+    <div class="placement"><button class="menu-button centre" aria-pressed="true"><span>Field kit</span></button></div>
+    <div class="placement"><button class="menu-button right" aria-pressed="false"><span>Settings</span></button></div>
+  </section>
+  <section class="example slate" aria-labelledby="slate-heading">
+    <div class="material"><span>03</span><h2 id="slate-heading">Carved slate</h2><p>Chipped stone, shallow engraving.<br>Cold, old and severe.</p></div>
+    <div class="placement"><button class="menu-button left" aria-pressed="false"><span>Continue</span></button></div>
+    <div class="placement"><button class="menu-button centre" aria-pressed="true"><span>Field kit</span></button></div>
+    <div class="placement"><button class="menu-button right" aria-pressed="false"><span>Settings</span></button></div>
+  </section>
+  <footer><label><input type="checkbox" id="unavailable"> Show Settings unavailable</label><p>Hover, focus or tap to compare emphasis. Centre buttons start selected.</p><a href="../skill-tree-v1/inspector.html">Skills</a><a href="../../../../docs/skill-tree-concept.md">Design notes</a></footer>
+</main><script>
+document.querySelectorAll('.menu-button').forEach(button=>button.addEventListener('click',()=>{button.closest('.example').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));}));
+document.getElementById('unavailable').addEventListener('change',event=>document.querySelectorAll('.right').forEach(button=>{button.disabled=event.target.checked;if(button.disabled)button.setAttribute('aria-pressed','false');}));
+</script></body></html>

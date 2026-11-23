@@ -1074,6 +1074,16 @@ Found weapons and armour are the smith's common pieces made better, generated wh
 
 ## Visual and audio direction
 
+**Menus and skill layout — owner review 2026-11-21 (#268/#269):** use
+Reliquary brass for the gothic menu direction. A button against the left edge
+is flat on the left and beveled on the right; central buttons bevel both ends;
+right-edge buttons mirror the left. Skill paths use the landscape width:
+shared class improvements above, named-character personal traits below.
+Descriptions use the backpack's hover/tap cards beside the source, with no
+permanent right-hand description column. Reviewed concepts and approval record:
+[skill-tree-concept.md](docs/skill-tree-concept.md). New skill values, extra
+personal traits and unlock conditions are still proposals.
+
 Dark, gritty, grounded medieval fantasy. Stained stone, corroded metal, worn supplies, oppressive spaces, and scarce lantern light. Charcoal, dirty parchment, muted teal, rusty brown, and warm amber form the initial palette. Keep essential threats and interface elements readable.
 
 The current visual baseline is **simple, shadow-heavy pixel environments with detailed, expressive character portraits and limited, deliberate animation**. Use bold room shapes, sparse textures, a restrained palette, and one clear encounter focal point. The owner preferred this reduced-detail direction over the intricate painted and densely textured pixel mockups. Exact environment resolution and production workflow remain open.

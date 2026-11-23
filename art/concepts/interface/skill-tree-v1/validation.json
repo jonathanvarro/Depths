@@ -1,0 +1,197 @@
+{
+  "pageErrors": [],
+  "imagesLoaded": true,
+  "sharedClass": true,
+  "distinctTraits": true,
+  "mageReserve": true,
+  "initiallyHidden": true,
+  "hoverPreviews": true,
+  "hoverCardReachable": true,
+  "hoverLeaves": true,
+  "pinnedPersists": true,
+  "outsideCloses": true,
+  "keyboardPreviews": true,
+  "escapeCloses": true,
+  "tapPins": true,
+  "tapCloses": true,
+  "longDescription": true,
+  "safeAreaCard": true,
+  "buttonSelect": true,
+  "disabledCount": 3,
+  "cardChecks": [
+    {
+      "bounded": true,
+      "sourceReachable": true
+    },
+    {
+      "bounded": true,
+      "sourceReachable": true
+    },
+    {
+      "bounded": true,
+      "sourceReachable": true
+    },
+    {
+      "bounded": true,
+      "sourceReachable": true
+    },
+    {
+      "bounded": true,
+      "sourceReachable": true
+    },
+    {
+      "bounded": true,
+      "sourceReachable": true
+    },
+    {
+      "bounded": true,
+      "sourceReachable": true
+    },
+    {
+      "bounded": true,
+      "sourceReachable": true
+    },
+    {
+      "bounded": true,
+      "sourceReachable": true
+    },
+    {
+      "bounded": true,
+      "sourceReachable": true
+    },
+    {
+      "bounded": true,
+      "sourceReachable": true
+    },
+    {
+      "bounded": true,
+      "sourceReachable": true
+    },
+    {
+      "bounded": true,
+      "sourceReachable": true
+    },
+    {
+      "bounded": true,
+      "sourceReachable": true
+    },
+    {
+      "bounded": true,
+      "sourceReachable": true
+    },
+    {
+      "bounded": true,
+      "sourceReachable": true
+    },
+    {
+      "bounded": true,
+      "sourceReachable": true
+    },
+    {
+      "bounded": true,
+      "sourceReachable": true
+    },
+    {
+      "bounded": true,
+      "sourceReachable": true
+    },
+    {
+      "bounded": true,
+      "sourceReachable": true
+    },
+    {
+      "bounded": true,
+      "sourceReachable": true
+    },
+    {
+      "bounded": true,
+      "sourceReachable": true
+    },
+    {
+      "bounded": true,
+      "sourceReachable": true
+    },
+    {
+      "bounded": true,
+      "sourceReachable": true
+    },
+    {
+      "bounded": true,
+      "sourceReachable": true
+    },
+    {
+      "bounded": true,
+      "sourceReachable": true
+    },
+    {
+      "bounded": true,
+      "sourceReachable": true
+    },
+    {
+      "bounded": true,
+      "sourceReachable": true
+    },
+    {
+      "bounded": true,
+      "sourceReachable": true
+    },
+    {
+      "bounded": true,
+      "sourceReachable": true
+    },
+    {
+      "bounded": true,
+      "sourceReachable": true
+    },
+    {
+      "bounded": true,
+      "sourceReachable": true
+    },
+    {
+      "bounded": true,
+      "sourceReachable": true
+    },
+    {
+      "bounded": true,
+      "sourceReachable": true
+    },
+    {
+      "bounded": true,
+      "sourceReachable": true
+    },
+    {
+      "bounded": true,
+      "sourceReachable": true
+    }
+  ],
+  "layouts": [
+    {
+      "width": 1440,
+      "height": 900,
+      "pageWidth": 1440,
+      "pageHeight": 900,
+      "minTouch": 112
+    },
+    {
+      "width": 1278,
+      "height": 590,
+      "pageWidth": 1278,
+      "pageHeight": 590,
+      "minTouch": 94
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "pageWidth": 844,
+      "pageHeight": 390,
+      "minTouch": 86
+    },
+    {
+      "width": 667,
+      "height": 375,
+      "pageWidth": 667,
+      "pageHeight": 375,
+      "minTouch": 86
+    }
+  ]
+}
