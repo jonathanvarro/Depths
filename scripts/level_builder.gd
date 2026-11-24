@@ -42,10 +42,64 @@ func build(map, theme: EnvironmentTheme, size: float, height: float) -> void:
 			_add_mesh(ceiling_mesh, at + Vector3(0, wall_height, 0)).add_to_group("ceiling")  # hidden from above (tactical view)
 			if content == DungeonMap.Content.STAIRS_DOWN:
 				_add_feature(theme.descent_scene, _make_descent(), cell)
+				_add_descent_glow(cell)
 			elif content == DungeonMap.Content.STAIRS_UP:
 				_add_feature(theme.ascent_scene, _make_ascent(), cell)
+				_add_descent_glow(cell, ASCENT_GLOW)
 			if map.door_at(cell) != DungeonMap.Door.NONE:
 				refresh_door(cell)
+
+
+## A warm glow rising from the way down (owner, 2026-11-23: the pit was
+## too easy to miss): a soft light and a faint lit patch at its mouth that
+## shows even in the dark. Steady, so still mode needs nothing.
+const DESCENT_GLOW := Color("e7a457")
+## The way up's is paler and cooler, like a breath of air from above
+## (owner, 2026-11-23: it should help players find it too).
+const ASCENT_GLOW := Color("b9c7d6")
+
+func _add_descent_glow(cell: Vector2i, colour := DESCENT_GLOW) -> void:
+	var glow := Node3D.new()
+	glow.name = "DescentGlow" if colour == DESCENT_GLOW else "AscentGlow"
+	glow.position = _cell_center(cell)
+	var light := OmniLight3D.new()
+	light.light_color = colour
+	light.light_energy = 1.4
+	light.omni_range = cell_size * 1.6
+	light.omni_attenuation = 1.6
+	light.position.y = 0.25
+	light.shadow_enabled = false
+	glow.add_child(light)
+	var patch := MeshInstance3D.new()
+	var plane := PlaneMesh.new()
+	plane.size = Vector2.ONE * cell_size * 0.62
+	var material := StandardMaterial3D.new()
+	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	material.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
+	material.albedo_color = Color(colour, 0.35)
+	material.albedo_texture = _glow_texture()
+	plane.material = material
+	patch.mesh = plane
+	patch.position.y = 0.04
+	patch.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	glow.add_child(patch)
+	add_child(glow)
+
+
+## A soft round falloff for the glow patch.
+static func _glow_texture() -> Texture2D:
+	var gradient := Gradient.new()
+	gradient.set_color(0, Color(1, 1, 1, 1))
+	gradient.set_color(1, Color(1, 1, 1, 0))
+	var texture := GradientTexture2D.new()
+	texture.gradient = gradient
+	texture.fill = GradientTexture2D.FILL_RADIAL
+	texture.fill_from = Vector2(0.5, 0.5)
+	texture.fill_to = Vector2(1.0, 0.5)
+	texture.width = 64
+	texture.height = 64
+	return texture
 
 
 ## Shows the right model for a passage's current state (call after opening).

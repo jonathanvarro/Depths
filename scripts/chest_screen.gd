@@ -15,6 +15,7 @@ func _init() -> void:
 		if side=="left":take(entry.item)
 		else:put_back(entry.item))
 	take_all_requested.connect(take_all)
+	double_click_moves=true
 	visible=false
 
 func open(title:String,items:Dictionary,party_state) -> void:
@@ -83,7 +84,8 @@ func refresh() -> void:
 		var item:Resource=entry.item
 		var held:int=supplies.count(item) if item is SupplyItem else 1
 		var count:int=(held%item.stack_size() if held%item.stack_size()!=0 else item.stack_size()) if item is SupplyItem else 1
-		entry.action="Leave %d" % count if count>1 else "Leave"
+		# "Put back", not "Leave": clear which way it goes (owner, 2026-11-23).
+		entry.action="Put back %d" % count if count>1 else "Put back"
 		entry.kind="leave"
 		entry.reason="The open flask stays with the lantern" if entry.get("open_flask",false) else ""
 		entry.info="Leaves the part-full stack first" if item is SupplyItem and held>item.stack_size() and held%item.stack_size()!=0 else ""

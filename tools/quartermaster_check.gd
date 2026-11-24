@@ -30,6 +30,16 @@ func _initialize() -> void:
 	check("30 gold buys the field issue", camp.raise_issue(party) and camp.issue_level == 1 and party.supplies.gold == 5)
 	camp.top_up_torches(party)
 	check("...and every return now tops up four torches and a ration", party.supplies.count(torch) == 4 and party.supplies.count(ration) == 1, camp.issue_text())
+	# No piling issued supplies in the stash for a fresh set each return
+	# (owner, 2026-11-23): what's stored counts toward the issue.
+	camp.store(party, torch)
+	camp.store(party, torch)
+	camp.top_up_torches(party)
+	check("stored issue torches count: no fresh set to pile up", party.supplies.count(torch) + camp.stash.count(torch) == 4, [party.supplies.count(torch), camp.stash.count(torch)])
+	camp.withdraw(party, torch)
+	camp.withdraw(party, torch)
+	var merchant_sells_supplies: bool = camp.sell(party, torch)
+	check("...and the merchant won't buy supplies back", not merchant_sells_supplies and party.supplies.count(torch) == 4)
 	party.supplies.gold = 100
 	check("the next needs coal from the mine as well", not camp.can_raise_issue(party), camp.next_issue_price())
 	party.supplies.add(coal, 1)

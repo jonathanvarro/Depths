@@ -155,6 +155,9 @@ func _add_chips(changes: Array) -> void:
 	for change in changes:
 		var chip := PanelContainer.new()
 		chip.add_theme_stylebox_override("panel", UiTheme.chip(change["good"]))
+		if change.get("tip", "") != "":
+			chip.tooltip_text = change["tip"]
+			chip.mouse_filter = Control.MOUSE_FILTER_STOP
 		var row := HBoxContainer.new()
 		row.add_theme_constant_override("separation", 4)
 		chip.add_child(row)

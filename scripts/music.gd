@@ -10,13 +10,35 @@ const FADE := 1.5  # seconds
 ## After a fight the battle music winds down more slowly (owner, 2026-11-21).
 const AFTER_FIGHT := 4.0
 const VOLUME_DB := -8.0
-## Per-place loudness, as a share of VOLUME_DB's level: camp 10% quieter
-## (owner, 2026-11-22).
-const PLACE_VOLUME := {"camp": 0.9}
+## Per-place loudness, as a share of VOLUME_DB's level (owner: camp 10%
+## quieter on 2026-11-22, another 5% on 2026-11-23; the mines 15% quieter).
+const PLACE_VOLUME := {"camp": 0.85, "cave": 0.85}
+## In pitch black the cave's music swells (owner, 2026-11-23): this share,
+## in place of its usual one, in every place below ground.
+const DARK_VOLUME := 1.1
+const UNDERGROUND := ["cave", "fortress", "galleries"]
+
+## Set by main.gd as the light comes and goes.
+var dark := false:
+	set(value):
+		if dark == value:
+			return
+		dark = value
+		_swell()
 
 
-static func volume_for(where: String) -> float:
+static func volume_for(where: String, in_dark := false) -> float:
+	if in_dark and where in UNDERGROUND:
+		return VOLUME_DB + linear_to_db(DARK_VOLUME)
 	return VOLUME_DB + linear_to_db(PLACE_VOLUME.get(where, 1.0))
+
+
+## Eases the playing track to its level for the light, without a restart.
+func _swell() -> void:
+	if (_tween and _tween.is_valid()) or not _players[_current].playing:
+		return  # a crossfade under way already lands on the right level
+	var tween := create_tween()
+	tween.tween_property(_players[_current], "volume_db", volume_for(place, dark), 2.0).set_trans(Tween.TRANS_SINE)
 
 var place := ""
 var _players: Array[AudioStreamPlayer] = []
@@ -77,4 +99,4 @@ func play_with_fade(fade: float, where: String) -> void:
 		new.stream = stream
 		new.volume_db = -80.0
 		new.play()
-		tween.tween_property(new, "volume_db", volume_for(where), fade).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
+		tween.tween_property(new, "volume_db", volume_for(where, dark), fade).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)

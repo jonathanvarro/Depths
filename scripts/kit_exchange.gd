@@ -40,6 +40,9 @@ var _detail_icon:TextureRect
 var _detail_actions:HBoxContainer
 var _primary:Button
 var _take_all:Button
+## Double-click (or double-tap) moves an item across (owner, 2026-11-23);
+## the chest turns it on, trades leave it off so nothing is bought by accident.
+var double_click_moves := false
 var _extra:Button
 
 static func inventory(supplies) -> Array[Dictionary]:
@@ -222,7 +225,8 @@ func _tile(entry:Dictionary,side:String) -> Button:
 ## Right-click does the tile's action at once: buy, sell or take (owner
 ## playtest, #229). Not when it's refused (no gold, no room...).
 func _right_click(event:InputEvent,entry:Dictionary,side:String) -> void:
-	if event is InputEventMouseButton and event.button_index==MOUSE_BUTTON_RIGHT and event.pressed:
+	var double:bool=double_click_moves and event is InputEventMouseButton and event.button_index==MOUSE_BUTTON_LEFT and event.double_click
+	if event is InputEventMouseButton and ((event.button_index==MOUSE_BUTTON_RIGHT and event.pressed) or double):
 		get_viewport().set_input_as_handled()
 		if entry.get("reason","")=="":
 			select_item(entry.key,side,true)
@@ -315,9 +319,10 @@ func _build() -> void:
 	header.add_child(_icon(COIN,Vector2(20,20)))
 	_gold=_label("0");_gold.size_flags_vertical=Control.SIZE_SHRINK_CENTER;header.add_child(_gold)
 	_extra=_button("");_extra.visible=false;_extra.pressed.connect(func():extra_requested.emit());header.add_child(_extra)
-	_take_all=_button("");_take_all.icon=TAKE_ALL;_take_all.expand_icon=true
-	_take_all.add_theme_constant_override("icon_max_width",28);_take_all.accessibility_name="Take everything that fits"
-	_take_all.tooltip_text="Take everything that fits";_take_all.pressed.connect(func():take_all_requested.emit());header.add_child(_take_all)
+	# Take all sits between the two packs, in words (owner, 2026-11-23).
+	_take_all=_button("Take all",Vector2(132,52));_take_all.icon=TAKE_ALL;_take_all.expand_icon=false
+	_take_all.add_theme_constant_override("icon_max_width",24);_take_all.accessibility_name="Take everything that fits"
+	_take_all.tooltip_text="Take everything that fits";_take_all.pressed.connect(func():take_all_requested.emit())
 	_close=_button("");_close.icon=CLOSE;_close.expand_icon=true;_close.add_theme_constant_override("icon_max_width",22)
 	FieldKit.Brass.apply(_close,FieldKit.Brass.Edge.RIGHT,6)
 	_close.accessibility_name="Close";_close.tooltip_text="Close";_close.pressed.connect(func():closed.emit());header.add_child(_close)
@@ -339,6 +344,7 @@ func _build() -> void:
 	_empty=_label("Empty",22,FieldKit.MUTED);_empty.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_empty.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER;_empty.vertical_alignment=VERTICAL_ALIGNMENT_CENTER
 	display.add_child(_empty)
+	_take_all.size_flags_vertical=Control.SIZE_SHRINK_CENTER;workspace.add_child(_take_all)
 	_bag_panel=Control.new();_bag_panel.size_flags_horizontal=Control.SIZE_EXPAND_FILL;_bag_panel.size_flags_stretch_ratio=1
 	workspace.add_child(_bag_panel)
 	_bag=BagView.new();_bag.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST

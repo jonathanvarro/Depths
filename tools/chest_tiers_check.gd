@@ -171,11 +171,33 @@ func _initialize() -> void:
 		main._chest.select_item(first, "left", false)
 		await process_frame
 		check("...pointing at one shows its card", main._chest._detail_text.get_child_count() > 1)
+		# Owner, 2026-11-23: Take all in words between the two packs, and a
+		# double-click takes.
+		var bag_rect: Rect2 = main._chest._bag_panel.get_global_rect()
+		var roll_rect: Rect2 = main._chest._left_scroll.get_global_rect()
+		var take_rect: Rect2 = main._chest._take_all.get_global_rect()
+		check("...Take all sits between the two packs, in words", main._chest._take_all.text == "Take all" and take_rect.position.x >= roll_rect.end.x - 1.0 and take_rect.end.x <= bag_rect.position.x + 1.0, [roll_rect, take_rect, bag_rect])
+		var tile: Button = null
+		for b in main._chest._left_grid.get_children():
+			if b is Button and b.get_meta("item", null) == first:
+				tile = b
+		var click := InputEventMouseButton.new()
+		click.button_index = MOUSE_BUTTON_LEFT
+		click.pressed = true
+		click.double_click = true
+		var had: int = main._chest.contents.get(first, 0)
+		var tile_found := tile != null  # the tile is rebuilt once it is taken
+		if tile_found:
+			tile.gui_input.emit(click)
+		await process_frame
+		check("...a double-click takes it", tile_found and main._chest.contents.get(first, 0) < had, [had, main._chest.contents.get(first, 0)])
+		var actions: Array = main._chest._bag_entries.map(func(e): return e.action)
+		check("...and the pack's items say Put back, not Leave", not actions.is_empty() and actions.all(func(a): return a.begins_with("Put back")), actions)
 		var strip: float = main._chest._details.size.y
 		main._chest.take_all()
 		await process_frame
 		await process_frame
-		check("...take all fills the pack, and the card strip keeps its height", main._chest.is_empty() and main._party_state.supplies.slots_used() > before_items and absf(main._chest._details.size.y - strip) < 1.0, [strip, main._chest._details.size.y])
+		check("...take all fills the pack, and the card strip keeps its height", main._chest.is_empty() and absf(main._chest._details.size.y - strip) < 1.0, [strip, main._chest._details.size.y, main._chest.contents, main._party_state.supplies.slots_used(), before_items, main._party_state.supplies.capacity])
 	main._chest.closed.emit()
 	await create_timer(0.2).timeout
 	var data: Dictionary = main._save_data()

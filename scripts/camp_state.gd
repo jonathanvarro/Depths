@@ -820,7 +820,10 @@ func top_up_torches(party) -> int:
 	var torches := 0
 	var wanted := issue_items()
 	for item: SupplyItem in wanted:
-		var short: int = wanted[item] - party.supplies.count(item)
+		# What's in the stash counts too, so issued supplies can't be piled
+		# up there trip after trip (owner, 2026-11-23: no profit from the
+		# camp's supplies; the merchant never buys supplies either).
+		var short: int = wanted[item] - party.supplies.count(item) - stash.count(item)
 		if short > 0:
 			var given: int = party.supplies.add_what_fits(item, short)
 			if item == TORCH:
