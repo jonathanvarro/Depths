@@ -50,6 +50,17 @@ Templates > Download and Install; already installed on the owner's PC).
 
 ## Project structure
 
+- `docs/tutorial-campfire-and-bodies-3d.md` – #285's live tutorial hearth and
+  two static anonymous clothed travellers. True floor-registered GLBs replace
+  Main's default opening sprites; body_scenes also serves lost-body recovery.
+  Existing search/loot/cell rules and light budget remain. Fire set_motion and
+  live effects preference give exact still mode. Local editable masters/native
+  phone review: `build/local-tutorial-3d-v1/inspector.html`. Public generic recruit
+  and mine geometry only; no private Mixamo/base-body or named likenesses.
+  #287 adds a worn solid wall torch: Dressing.MODELS maps burnt-sconce and
+  goblin-torch-lit to `art/dressing/wall-torch-3d-v1`, with existing anchors,
+  floor ranges and mood-only light. Native four-wall / still checks pass.
+
 - `docs/companion-polish-and-regional-equipment.md` – #218/#220's new private
   editable seat-fit jacket copies in `build/local-companion-polish-v1` clear
   the fixed stool over all 1,221 source chair frames. Original body skin,
@@ -559,7 +570,7 @@ Templates > Download and Install; already installed on the owner's PC).
   `enemy_act()` carries out the shown intent, then plans the next one.
 - Campsite (#40): `scripts/camp_state.gd` (day, `stash` as a Supplies,
   `recovering`, rest/treat/restock; `day_passed` re-seeds the cave in
-  main.gd) and `scripts/camp_screen.gd` (`art/camp/highres-v4` terrain,
+  main.gd) and `scripts/camp_screen.gd` (`art/camp/cohesive-v5` terrain/tent/fire,
   independent site scenes/local lights + layout.json; one activity per site).
   CampState `site_presence` / `set_site_present()` controls availability;
   absent keys default present for older saves. New story starts use #80's
@@ -574,6 +585,12 @@ Templates > Download and Install; already installed on the owner's PC).
   his site. `tools/first_days_check.gd`.
   `Injury.recovery_days`.
   `tools/camp_check.gd` drives every place (args: desk|phone, screenshot dir).
+  #286's cohesive exterior/earth pad and grounded hearth/figures retain the
+  approved tent interior and service rules. Pack shares exploration's fixed
+  top-right safe-area anchor; minimap is below it. #289 replaces only large
+  stash gold pictures with `art/items/currency-v2/gold.png` (512px import).
+  Sources/prompts/checks: `docs/camp-cohesion-and-currency.md`; native review:
+  `build/local-camp-cohesion-v5/inspector.html`.
   Higher-resolution camp/items, shared seal, focused live interface cleanup and
   portrait animation handoff: `docs/visual-refinement.md` (#112/#120).
 - Recruitment (#41): `scripts/recruits.gd` (roles, traits, names; `make(rng)`),

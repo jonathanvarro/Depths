@@ -1,0 +1,92 @@
+{
+  "issue": 285,
+  "units": "metres",
+  "floor_origin": "cell centre, sole/contact floor y=0",
+  "source": "Original public Depths recruit mesh factory and mine geometry helpers; no external downloads or private models.",
+  "builder_sha256": "1803de8ea764838df6c8c775ec42e7dbc5222deb7ecf8bbd37e0d1ddfdb18da5",
+  "dependencies": {
+    "tools/tutorial_art/fallen.py": "a7cba937069cd0876a908a33d4b2c83ad2a7130919a3de66e215dd3343c2a035",
+    "tools/combat_roster/party.py": "5cc19da6286def65e54853cd359f11297fbbdd9a1472ab9dd25bd560e786a526",
+    "tools/combat_roster/mesh_parts.py": "3d22d7effe7258645015fe088a4881b3a48ffd150c708d6a59706d97a9ad7064",
+    "tools/mine_polish/build_models.py": "80260684408a0638528ba4553054b4f772a0f2b4d5763d65f4a3046cc7d5cefa",
+    "tools/mine_props/build_models.py": "8ce154cc6449436050b94936fcd40f93591e40a1c43efe4ffcb932c4ed58793b"
+  },
+  "assets": [
+    {
+      "id": "fallen-a",
+      "triangles": 1524,
+      "surfaces": [
+        "Cloth",
+        "Skin"
+      ],
+      "min": [
+        -0.45028024911880493,
+        -0.8760802745819092,
+        0.014000002294778824
+      ],
+      "max": [
+        0.45028024911880493,
+        0.8760802745819092,
+        0.3888748288154602
+      ],
+      "sha256": "0ecd81533523ff321157b4f826992e613b79e919b16e1d16417291e92b9017e6"
+    },
+    {
+      "id": "fallen-b",
+      "triangles": 1496,
+      "surfaces": [
+        "Cloth",
+        "Skin"
+      ],
+      "min": [
+        -0.41900086402893066,
+        -0.8641093373298645,
+        0.011999998241662979
+      ],
+      "max": [
+        0.41900086402893066,
+        0.8641093373298645,
+        0.3888748288154602
+      ],
+      "sha256": "4e37a30a8eb40a02540a6dc27a32fa7058537aacac6f1a7512319285a24a3f63"
+    },
+    {
+      "id": "hearth",
+      "triangles": 2008,
+      "surfaces": [
+        "Stone",
+        "Wood",
+        "Ember"
+      ],
+      "min": [
+        -0.4976767897605896,
+        -0.46240100264549255,
+        -0.004301324486732483
+      ],
+      "max": [
+        0.497127890586853,
+        0.48526322841644287,
+        0.24026021361351013
+      ],
+      "sha256": "b35b3fd40f065e562ecee92519271a92fcce699bdc84385753b53cb168a33dc7"
+    },
+    {
+      "id": "flames",
+      "triangles": 176,
+      "surfaces": [
+        "Flame"
+      ],
+      "min": [
+        -0.19099999964237213,
+        -0.1229797899723053,
+        0.15000000596046448
+      ],
+      "max": [
+        0.1779191642999649,
+        0.15781816840171814,
+        0.4699999988079071
+      ],
+      "sha256": "5d8d1b48a462854d88ee1e5e5676e3fadd44cc4a4b2f70d97af0dcf1e5ca643c"
+    }
+  ]
+}
