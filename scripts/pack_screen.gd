@@ -766,7 +766,7 @@ func _perform(kind: String) -> void:
 		"use":
 			var message:String=_party.use_item(item,false,h)
 			if message!="":
-				Sounds.play(self,Sounds.for_item(item),-6.0)
+				Sounds.play(self,Sounds.for_item(item),Sounds.item_volume(item))
 				used.emit(message)
 		"wear":
 			if _equip_reason("trinket")=="":used.emit(_party.wear_treasure(h,item))

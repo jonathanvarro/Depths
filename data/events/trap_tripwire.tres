@@ -23,6 +23,7 @@ strain = 5.0
 [sub_resource type="Resource" id="c0"]
 script = ExtResource("choice")
 label = "Step over carefully"
+bypass = true
 time_cost = 2
 outcomes = Array[ExtResource("outcome")]([SubResource("o0_0"), SubResource("o0_1")])
 

@@ -21,6 +21,7 @@ health = -3
 [sub_resource type="Resource" id="Resource_lv1ea"]
 script = ExtResource("1_a2u73")
 label = "Edge along the far wall"
+bypass = true
 time_cost = 2
 outcomes = Array[ExtResource("2_ammb1")]([SubResource("Resource_n2x5r"), SubResource("Resource_5pu53")])
 

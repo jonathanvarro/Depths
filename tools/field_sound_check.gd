@@ -51,6 +51,10 @@ func _initialize() -> void:
 	check("each prayer has its sound, and a falter its own", Spells.ORDER.all(func(id): return Sounds.EFFECTS.has(Sounds.prayer(id, false))) and Sounds.prayer("mend", true) == "prayer_miscast" and Sounds.prayer("bind", false) == "prayer_bind")
 	var items := {"ration": "pack_eat", "dressing": "pack_bandage", "oil_flask": "pack_oil", "tome_light": "pack_tome"}
 	check("eating, bandaging, oil and reading sound once each", items.keys().all(func(i): return Sounds.for_item(load("res://data/items/%s.tres" % i)) == items[i] and Sounds.EFFECTS.has(items[i])))
+	# Drinking and eating stand out (owner, 2026-11-23).
+	var draught: SupplyItem = load("res://data/items/restorative_draught.tres")
+	var ration: SupplyItem = load("res://data/items/ration.tres")
+	check("a draught is drunk, not bandaged, and food and drink play louder", Sounds.for_item(draught) == "brew_drink" and Sounds.item_volume(ration) > Sounds.item_volume(load("res://data/items/dressing.tres")) and Sounds.item_volume(draught) > -6.0)
 	var keys := ["brew_drink", "brew_shatter", "level_up", "stairs_down", "stairs_up", "map_noticed", "map_heavy_blow", "smith_temper",
 			"trap_dart", "trap_snare", "trap_alarm_bell", "trap_tripwire"]
 	check("brews, level-ups, stairs, map warnings, traps and the smith", keys.all(func(k): return Sounds.EFFECTS.has(k) and Sounds.EFFECTS[k] != null), keys.filter(func(k): return not Sounds.EFFECTS.has(k)))

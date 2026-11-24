@@ -21,6 +21,7 @@ text = "The bell tinkles. Somewhere ahead, something goes very quiet."
 [sub_resource type="Resource" id="Resource_eggm6"]
 script = ExtResource("1_82pcq")
 label = "Step over carefully"
+bypass = true
 time_cost = 2
 outcomes = Array[ExtResource("2_qe5rh")]([SubResource("Resource_yg6m3"), SubResource("Resource_5ervo")])
 

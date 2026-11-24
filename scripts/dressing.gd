@@ -230,6 +230,10 @@ static func _thin(pool: Array) -> int:
 
 ## True for an open, empty floor cell that dressing may use.
 static func _clear(map, cell: Vector2i) -> bool:
+	# The king's lost cache keeps its place: its own buried cache doesn't
+	# move it (2026-11-23). Landmark cells are left alone by the dressing.
+	if cell == map.marks.get("lost_cache", Vector2i(-1, -1)):
+		return true
 	return map.is_passable(cell) and map.content_at(cell) == DungeonMap.Content.NONE \
 			and map.door_at(cell) == DungeonMap.Door.NONE and not map.events.has(cell) \
 			and cell != map.start_cell and not cell in map.marks.get("hall", [])

@@ -103,13 +103,25 @@ static func for_item(item) -> String:
 	if not item is SupplyItem:
 		return ""
 	match item.effect:
-		SupplyItem.Effect.FEED_PARTY: return "pack_eat"
-		SupplyItem.Effect.HEAL_ONE, SupplyItem.Effect.DRESS_INJURY: return "pack_bandage"
+		SupplyItem.Effect.FEED_PARTY, SupplyItem.Effect.CALM: return "pack_eat"
+		# Draughts and antidotes are drunk (owner, 2026-11-23: they sounded
+		# like a bandage).
+		SupplyItem.Effect.HEAL_ONE, SupplyItem.Effect.CURE_VENOM: return "brew_drink"
+		SupplyItem.Effect.DRESS_INJURY: return "pack_bandage"
 		SupplyItem.Effect.REFILL_LANTERN: return "pack_oil"
 		SupplyItem.Effect.TOME: return "pack_tome"
 		SupplyItem.Effect.CANDLE: return "prayer_cast"
 		SupplyItem.Effect.BREW: return "brew_drink"
 	return ""
+
+
+## How loud an item's sound plays (dB): eating and drinking stand out
+## (owner, 2026-11-23); the eating recording is quiet, so it's lifted most.
+static func item_volume(item) -> float:
+	match for_item(item):
+		"pack_eat": return 4.0
+		"brew_drink": return -1.0
+	return -6.0
 
 
 ## A prayer's sound (#217): its own, or the shared one; the miscast if it faltered.

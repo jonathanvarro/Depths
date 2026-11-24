@@ -378,7 +378,9 @@ func change_health(amount: int) -> void:
 		emit_changed()
 
 
-func change_strain(amount: float) -> void:
+## `calming`: deliberate relief (a shrine, herbs, food, rest...) always
+## ends panic, leaving the hero no worse than Shaken (owner, 2026-11-23).
+func change_strain(amount: float, calming := false) -> void:
 	if strain_locked:
 		return
 	if amount >= StrainRules.SHOCK_DEED:
@@ -390,6 +392,9 @@ func change_strain(amount: float) -> void:
 		amount *= boon_product("strain_rate") * party_calm  # #133; a Warden's presence (#101)
 	var before := strain
 	strain = clampf(strain + amount, 0.0, StrainRules.MAX)
+	var panic: float = StrainRules.THRESHOLDS[StrainRules.State.PANICKING]
+	if calming and amount < 0.0 and strain >= panic:
+		strain = panic - 1.0
 	if not is_equal_approx(strain, before):
 		emit_changed()
 
@@ -409,7 +414,7 @@ func is_hungry() -> bool:
 ## Eating resets hunger and eases strain a little.
 func eat() -> void:
 	hunger = 0
-	change_strain(StrainRules.EATING)
+	change_strain(StrainRules.EATING, true)
 	emit_changed()
 
 ## Maximum health after untreated, undressed injuries.

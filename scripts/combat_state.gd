@@ -789,7 +789,7 @@ func hero_defend(hero: Companion) -> String:
 	var steadies: float = hero.boon_total("defend_steadies")  # a shield-bearer's token (#135)
 	if steadies > 0.0:
 		for member in party.living_members():
-			member.change_strain(-steadies)
+			member.change_strain(-steadies, true)
 	return "%s braces, guarding the party." % hero.display_name
 
 

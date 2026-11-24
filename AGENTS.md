@@ -679,8 +679,13 @@ Templates > Download and Install; already installed on the owner's PC).
   smaller rooms. Out of light: glow to the next square only; the map shows
   only the explored room/hallway you're in and the way-up room
   (`Minimap.dark`/`dark_cells`, `DungeonMap.area_around`); dark steps map only
-  the square stood on. `tools/darkness_check.gd`. Panic bolt 12% a step.
-  Music `PLACE_VOLUME` (camp 0.9). No party arrow in the dark. HUD Torch
+  the square stood on. `tools/darkness_check.gd`. Panic bolt 8% a step; calming relief
+  (`change_strain(x, true)`) always ends panic.
+  Music `PLACE_VOLUME` (camp/cave 0.85; underground swells to 1.1 in the dark,
+  `Music.dark`). Ways down glow (`LevelBuilder._add_descent_glow`). Chest:
+  double-click takes, Take all between the packs, "Put back".
+  Traps passed by (`EventChoice.bypass`) stay set (`marks["set_traps"]`).
+  The king's lost cache always holds a buried cache (`_stock_lost_cache`). No party arrow in the dark. HUD Torch
   button (`scripts/torch_button.gd`, = `_quick_torch`/T). Containers offer
   finds in the chest screen (`RoomEvents.hold_loot`, `_offer_finds`).
   Preparation has Back to camp (`decided` signal). Opening knife drop is

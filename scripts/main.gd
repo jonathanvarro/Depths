@@ -847,6 +847,7 @@ func _build_level() -> void:
 	var landmarks := {}
 	if not _in_opening and not use_debug_layout:
 		landmarks = Landmarks.place(_level, _map, _depth, _site_seed, CELL_SIZE, WALL_HEIGHT)  # #117
+		_stock_lost_cache()
 	if not _in_opening:
 		_add_body_props()  # #180
 		_add_puzzle_props()
@@ -861,6 +862,33 @@ func _build_level() -> void:
 			Galleries.dress_galleries(_level, _map, CELL_SIZE, _site_seed)
 		if _depth >= Galleries.RESERVOIR:  # water edges, then the stairs by the gate (#168)
 			Galleries.dress_reservoir(_level, _map, CELL_SIZE, _site_seed, Quests.has_flag(_camp_state, "reservoir", "diverted"))
+
+
+## The king's lost cache always holds something to dig out (owner,
+## 2026-11-23): a buried cache among its wreckage, chosen once per floor
+## layout (`marks["lost_cache"]`, saved with the map).
+const LOST_CACHE_EVENT := preload("res://data/events/chest_buried_cache.tres")
+
+func _stock_lost_cache() -> void:
+	if _map.marks.has("lost_cache"):
+		return
+	for landmark: Dictionary in _map.landmarks:
+		if landmark["id"] != "lost_cache":
+			continue
+		var spot := Vector2i(-1, -1)
+		for cell: Vector2i in landmark["cells"]:
+			if _map.content_at(cell) != DungeonMap.Content.NONE or _map.solid.has(cell) or _map.door_at(cell) != DungeonMap.Door.NONE or cell == _party.cell:
+				continue
+			spot = cell
+			if not Dressing._wall_sides(_map, cell).is_empty():
+				break  # against a wall, among the broken crates, if there's room
+		if spot == Vector2i(-1, -1):
+			return
+		_map.contents[spot] = DungeonMap.Content.CHEST
+		_map.events[spot] = LOST_CACHE_EVENT
+		_map.marks["lost_cache"] = spot
+		_create_room_prop(spot, LOST_CACHE_EVENT)
+		return
 
 
 ## `attempt` > 0: another layout for the same floor (a story site didn't fit).
@@ -931,6 +959,14 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 		_map.discovered[cell] = true
 		_run_event(cell)
 		return
+	# A trap only stepped round is still set: walking onto it again springs
+	# it (owner, 2026-11-23). Then it's spent.
+	if _map.marks.get("set_traps", {}).has(cell) and not _in_opening:
+		_map.marks["set_traps"].erase(cell)
+		var set_trap: RoomEvent = _map.events.get(cell)
+		if set_trap and set_trap.sprung:
+			_spring_trap(cell, set_trap)
+			return
 	var content: int = _map.enter(cell)
 	match content:
 		DungeonMap.Content.NONE:
@@ -1025,7 +1061,13 @@ func _run_event(cell: Vector2i, at_overlook := false) -> void:
 	# off; it was stepped round and is still set; or it was disarmed.
 	var prop_state := "empty"
 	if event.kind == DungeonMap.Content.TRAP and not result.get("fired", true):
-		prop_state = "closed" if result.get("choice", -1) == 0 else "open"
+		var picked: int = result.get("choice", -1)
+		var passed_by: bool = picked >= 0 and picked < event.choices.size() and event.choices[picked].bypass
+		prop_state = "closed" if passed_by else "open"
+		if passed_by:  # still set: it springs if walked onto again
+			if not _map.marks.has("set_traps"):
+				_map.marks["set_traps"] = {}
+			_map.marks["set_traps"][cell] = true
 	_empty_prop(cell, prop_state)
 	if Quests.has_flag(_camp_state, "lower_gate", "seen") and not Quests.has_flag(_camp_state, "lower_gate", "ending_shown"):
 		await _slice_ending(cell)
@@ -2837,7 +2879,7 @@ const GATE_RELIEF := 15.0
 func _break_gates() -> void:
 	_camp_state.gate_broken = true
 	for hero: Companion in _party_state.living_members():
-		hero.change_strain(-GATE_RELIEF)  # courage rises as the gate splinters
+		hero.change_strain(-GATE_RELIEF, true)  # courage rises as the gate splinters
 	for gate in _map.marks.get("gates", []):
 		_map.doors[gate] = DungeonMap.Door.OPEN
 	_build_level()
@@ -3908,7 +3950,7 @@ func _offer_overflow() -> void:
 ## pack on the right; take one, drag, or take all. What's left stays behind.
 func _offer_finds(title: String, finds: Dictionary) -> void:
 	_chest.open(title, finds, _party_state)
-	_tip("container_take", "Point at a find to read it. Take what you want, drag it into your pack, or take everything. Whatever you leave stays behind.")
+	_tip("container_take", "Point at a find to read it. Double-click (or Take) to take it, drag it into your pack, or press Take all. Whatever you leave stays behind.")
 	await _chest.closed
 	_chest.visible = false
 
@@ -3917,7 +3959,7 @@ func _offer_finds(title: String, finds: Dictionary) -> void:
 ## player can leave something else instead. Whatever stays is left behind.
 func _offer_no_room(finds: Dictionary) -> void:
 	_chest.open("No room in your pack", finds, _party_state)
-	_tip("pack_full", "Your pack is full. Select a stack in your pack, then choose Leave to make room, or close to leave these finds behind. A backpack adds space; a limp takes some away.")
+	_tip("pack_full", "Your pack is full. Select a stack in your pack, then choose Put back to make room, or close to leave these finds behind. A backpack adds space; a limp takes some away.")
 	await _chest.closed
 	_chest.visible = false
 
@@ -3928,7 +3970,7 @@ func _open_opening_chest(cell: Vector2i) -> void:
 	_chest.open("A battered chest", OPENING_CHEST, _party_state)
 	Sounds.play(self, "chest")
 	_say("chest", true)
-	_show_hint("Select an item and choose Take, drag it into your pack, or take everything with the arrow.", "chest_take")
+	_show_hint("Double-click an item to take it, drag it into your pack, or press Take all.", "chest_take")
 	await _chest.closed
 	_chest.visible = false
 	_party.locked = false
@@ -4740,6 +4782,8 @@ func _build_hint() -> void:
 func _update_lantern() -> void:
 	_party.set_light(_party_state.supplies.light_fraction())
 	_minimap.dark = not _party.lit
+	if _music:
+		_music.dark = not _party.lit  # only the underground places swell
 	_full_map_view.dark = not _party.lit
 
 

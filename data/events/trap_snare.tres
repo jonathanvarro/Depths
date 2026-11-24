@@ -22,6 +22,7 @@ injury = ExtResource("6_geasg")
 [sub_resource type="Resource" id="Resource_nt5xr"]
 script = ExtResource("1_vy5ri")
 label = "Step around it"
+bypass = true
 outcomes = Array[ExtResource("2_qyv30")]([SubResource("Resource_mwqua"), SubResource("Resource_p341n")])
 
 [sub_resource type="Resource" id="Resource_vaq3h"]

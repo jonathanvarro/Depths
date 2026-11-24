@@ -20,6 +20,9 @@ extends Resource
 @export var requires: SupplyItem
 ## Gold handed over (an offering).
 @export var gold_cost := 0
+## A trap passed by without disarming it (stepped over, edged round): it
+## stays set, and springs if the party walks onto it again (owner, 2026-11-23).
+@export var bypass := false
 
 
 ## Why the party can't choose this now, or "".

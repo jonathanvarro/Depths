@@ -92,6 +92,11 @@ func _initialize() -> void:
 	await process_frame
 	_press(main._event_screen, "Continue")
 	await process_frame
+	if main._chest.visible:  # its finds lie beside the pack (2026-11-22): take them, close
+		main._chest.take_all()
+		main._chest.closed.emit()
+		await process_frame
+		await process_frame
 	check("an emptied chest shows empty", main._props[cell].get("state") == "empty")
 
 	# --- #83: Mara falls unconscious, not dead.
@@ -173,7 +178,7 @@ func _initialize() -> void:
 	var music := AudioServer.get_bus_index("Music")
 	check("music volume applies to its own bus", music != -1 and absf(AudioServer.get_bus_volume_db(music) - linear_to_db(0.3)) < 0.1)
 	var Music = load("res://scripts/music.gd")
-	check("camp music plays 10% quieter than the rest (owner, 2026-11-22)", absf(db_to_linear(Music.volume_for("camp")) / db_to_linear(Music.volume_for("cave")) - 0.9) < 0.001)
+	check("camp music 15% quieter, the mines 15% quieter, swelling in the dark (owner, 2026-11-22/23)", absf(db_to_linear(Music.volume_for("camp")) / db_to_linear(Music.volume_for("title")) - 0.85) < 0.001 and absf(db_to_linear(Music.volume_for("cave")) / db_to_linear(Music.volume_for("title")) - 0.85) < 0.001 and Music.volume_for("cave", true) > Music.volume_for("cave") and Music.volume_for("camp", true) == Music.volume_for("camp"))
 	check("the place bed plays on the effects bus (#217's field ambience)", main._ambience_player.bus == "Effects")
 	Settings.set_value("text_size", "Large", self)
 	check("text size scales the interface", is_equal_approx(root.content_scale_factor, 1.15))

@@ -331,7 +331,7 @@ func rest() -> void:
 		if member.is_unconscious():  # a rest brings them round (#83)
 			member.change_health(maxi(1, member.effective_max_health() / 4))
 	for member in living_members():
-		member.change_strain(StrainRules.RESTING)
+		member.change_strain(StrainRules.RESTING, true)
 
 
 func living_members() -> Array[Companion]:
@@ -447,7 +447,7 @@ func use_item(item: SupplyItem, in_combat := false, recipient: Companion = null)
 		SupplyItem.Effect.CALM:  # calming herbs: nerves settle (2026-11-08)
 			supplies.take(item)
 			for member in living_members():
-				member.change_strain(-item.amount)
+				member.change_strain(-item.amount, true)
 			advance_time(item.use_time)
 			return item.use_message if item.use_message != "" else "The bitter herbs go round. Breathing slows; hands stop shaking."
 		SupplyItem.Effect.IDENTIFY:  # the rarest piece first

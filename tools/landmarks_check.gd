@@ -49,6 +49,8 @@ func _initialize() -> void:
 				if depth < floors[0] or depth > floors[1]:
 					wrong.append(landmark["id"])
 				for cell in landmark["cells"]:
+					if cell == map.marks.get("lost_cache"):
+						continue  # the king's lost cache holds its own buried cache (2026-11-23)
 					if not Dressing._clear(map, cell):
 						wrong.append("%s on %s" % [landmark["id"], cell])
 			check("seed %d floor %d: landmarks fit the depth, on clear cells" % [seed, depth], wrong.is_empty() and landmarks.size() <= Landmarks.PER_FLOOR, "%s %s" % [landmarks.map(func(l): return l["id"]), wrong])
@@ -73,7 +75,7 @@ func _initialize() -> void:
 			# The same on a second visit, and remembered once seen.
 			map.encounter_zones.clear()  # look around in peace
 			var first: Dictionary = landmarks[0]
-			var cell: Vector2i = first["cells"][0]
+			var cell: Vector2i = first["cells"].filter(func(c): return c != map.marks.get("lost_cache"))[0]
 			main._party.place(map, cell)
 			main._on_party_entered_cell(cell)
 			check("floor %d: walking into %s names it" % [depth, first["name"]], main._message_label.text.begins_with(first["name"]) and first["seen"], main._message_label.text)

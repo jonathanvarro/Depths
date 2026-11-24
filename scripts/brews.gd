@@ -145,7 +145,7 @@ static func drink(party, brew: SupplyItem, hero: Companion) -> String:
 			text = "It burns all the way down! %s retches." % hero.display_name
 		"slumber":
 			party.advance_time(SLEEP_TIME)
-			hero.change_strain(SLEEP_CALM)
+			hero.change_strain(SLEEP_CALM, true)
 			text = "%s sleeps where they sit; the others keep watch. They wake calmer." % hero.display_name
 		"frenzy":
 			hero.change_strain(FRENZY_STRAIN)

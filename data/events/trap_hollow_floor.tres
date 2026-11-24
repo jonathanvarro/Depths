@@ -23,6 +23,7 @@ injury = ExtResource("limp")
 [sub_resource type="Resource" id="c0"]
 script = ExtResource("choice")
 label = "Test every step"
+bypass = true
 time_cost = 4
 outcomes = Array[ExtResource("outcome")]([SubResource("o0_0"), SubResource("o0_1")])
 
@@ -45,6 +46,7 @@ injury = ExtResource("limp")
 [sub_resource type="Resource" id="c1"]
 script = ExtResource("choice")
 label = "Hurry across"
+bypass = true
 outcomes = Array[ExtResource("outcome")]([SubResource("o1_0"), SubResource("o1_1"), SubResource("o1_2")])
 
 [sub_resource type="Resource" id="Resource_7msed"]

@@ -24,6 +24,8 @@ signal loot_found(loot: Dictionary)
 ## Containers (owner, 2026-11-22): finds are held in result["held"] for the
 ## player to take beside the pack, instead of going straight into it.
 var hold_loot := false
+## Strain a calming boon (Quiet heart...) lifts the moment it's given.
+const CALMING_BOON := 10.0
 signal gold_found(amount: int)
 
 ## Valuables a room can hold (#42): [item, deepest-from depth, weight].
@@ -166,15 +168,19 @@ func resolve(party, choice: EventChoice, forced := -1, flags: Array = []) -> Dic
 			notes.append("%s will recover %d" % [hero.display_name, outcome.heal_over_time])
 			chip.call(Glyphs.STATUS["healing"], "+%d" % outcome.heal_over_time, true, hero)
 		if outcome.strain != 0.0:
-			hero.change_strain(outcome.strain)
+			hero.change_strain(outcome.strain, outcome.strain < 0.0)  # a shrine's calm ends panic
 			notes.append("%s %s" % [hero.display_name, "steadies" if outcome.strain < 0 else "is shaken"])
 			chip.call(CHIP_ICONS["strain"], "-" if outcome.strain < 0 else "+", outcome.strain < 0, hero)
 		if outcome.boon:
 			hero.add_boon(outcome.boon)
+			if not outcome.boon.bane and outcome.boon.strain_rate < 1.0:
+				hero.change_strain(-CALMING_BOON, true)  # a calm that settles now, and ends panic (owner, 2026-11-23)
 			if outcome.boon.bane:
 				hero.change_strain(StrainRules.BANE)  # a curse settles on you (#236)
 			notes.append("%s: %s" % [hero.display_name, outcome.boon.display_name.to_lower()])
 			chip.call(outcome.boon.icon if outcome.boon.icon else BOON_ICONS[outcome.boon.bane], outcome.boon.display_name, not outcome.boon.bane, hero)
+			# Pointing at it says what it does (owner, 2026-11-23).
+			changes[-1]["tip"] = "%s (%s): %s %s" % [outcome.boon.display_name, outcome.boon.duration_text(outcome.boon.fights), outcome.boon.description, outcome.boon.effects_text()]
 		if outcome.lift_bane:
 			var lifted: Boon = hero.lift_bane()
 			if lifted:

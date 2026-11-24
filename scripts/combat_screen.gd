@@ -407,7 +407,7 @@ func _hero_action(hero: Companion, action: Dictionary) -> void:
 			_state.hero_move(hero)
 		"item":
 			_state.hero_use_item(action["item"])
-			Sounds.play(self, Sounds.for_item(action["item"]), -6.0)
+			Sounds.play(self, Sounds.for_item(action["item"]), Sounds.item_volume(action["item"]))
 			_fx.icon(_card_point(hero) + Vector2(0, -40), action["item"].icon, 48.0)
 		"retreat":
 			_state.retreat()
