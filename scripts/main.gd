@@ -7,6 +7,7 @@ const UiTheme := preload("res://scripts/ui_theme.gd")
 const DungeonMap := preload("res://scripts/dungeon_map.gd")
 const Dressing := preload("res://scripts/dressing.gd")
 const Landmarks := preload("res://scripts/landmarks.gd")
+const WallLights := preload("res://scripts/wall_lights.gd")
 const Ambience := preload("res://scripts/ambience.gd")
 const Recruits := preload("res://scripts/recruits.gd")
 const Trinkets := preload("res://scripts/trinkets.gd")
@@ -382,6 +383,7 @@ var _groups: Array = []  # Roamers.Group on this floor
 var _roamer_root: Node3D
 var _engaged = null  # the Roamers.Group being fought
 var _props := {}  # cell -> prop node for this floor's room contents (#46)
+var _wall_light_nodes := {}  # cell -> this floor's spare torch or wall lantern (2026-11-23)
 var _cell_now := Vector2i(-1, -1)
 var _cell_before := Vector2i(-1, -1)  # where to step back to from the hall's door
 var _party_state  # party_state.gd: heroes and time, kept across floors
@@ -480,6 +482,7 @@ var _spoils: Control  # spoils_screen.gd: retired by #231 (spoils show on the ca
 var _vision: CanvasLayer  # vision_filter.gd: the cold blue of memories and dreams
 var _ambience: Node  # ambience.gd: fog, creeping darkness, eyes beyond the light (#129)
 var _wound_overlay: ColorRect
+var _panic_blink: ColorRect  # the eyes squeezing shut as panic bolts
 var _wound_tween: Tween
 var _heart_player: AudioStreamPlayer
 var _bleed_ticks := 0  # bleed ticks shown this run (for tests)
@@ -740,6 +743,8 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 			var drained := Quests.has_flag(_camp_state, "dry_passage", "opened") if depth == Galleries.DEPTH \
 					else Quests.has_flag(_camp_state, "reservoir", "diverted")
 			Galleries.flood(_floors[depth], _site_seed + depth * 7919 + 37, drained, depth)
+		if not _in_opening and not use_debug_layout:
+			WallLights.place(_floors[depth], depth, _site_seed)  # spare torches, old lanterns
 	_map = _floors[depth]
 	_place_bodies()  # lost in a wipe, waiting to be found (#180)
 	_build_level()
@@ -765,6 +770,10 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 	var lost: Array = _camp_state.bodies_on(depth).map(func(h): return h.display_name)
 	if not lost.is_empty() and not _in_opening:  # #180
 		_show_message("%s · depth %d · somewhere here lie %s" % [environment_theme.display_name, depth, " and ".join(lost)])
+	# A quest's site on this floor: say how the map shows the way (owner,
+	# 2026-11-23: the survey party was still too hard to find).
+	if not _in_opening and _map.marks.get("quests", {}).keys().any(_quest_site_open):
+		_tip("quest_site_pointer", "Your quest's site on this floor is the amber cairn on your map. When it's off the corner map, an amber arrow at the map's edge points the way.")
 	_save_now()  # autosave on every floor change (#45)
 
 
@@ -848,9 +857,11 @@ func _build_level() -> void:
 	if not _in_opening and not use_debug_layout:
 		landmarks = Landmarks.place(_level, _map, _depth, _site_seed, CELL_SIZE, WALL_HEIGHT)  # #117
 		_stock_lost_cache()
+		_stock_dripping_hall()
 	if not _in_opening:
 		_add_body_props()  # #180
 		_add_puzzle_props()
+		_add_wall_lights()
 	if _depth == FORTRESS_DEPTH and not _in_opening:
 		_add_fortress_dressing()  # after the landmarks, so its cages keep out of theirs (#117)
 	if not _in_opening and not use_debug_layout:
@@ -862,6 +873,126 @@ func _build_level() -> void:
 			Galleries.dress_galleries(_level, _map, CELL_SIZE, _site_seed)
 		if _depth >= Galleries.RESERVOIR:  # water edges, then the stairs by the gate (#168)
 			Galleries.dress_reservoir(_level, _map, CELL_SIZE, _site_seed, Quests.has_flag(_camp_state, "reservoir", "diverted"))
+
+
+## A dripping hall often has a clean pool to drink from (owner, 2026-11-23):
+## two in three, rain-clear water dripped from the roof, far safer than the
+## still black pools elsewhere. Chosen once per layout (`marks["dripping_pool"]`,
+## (-1, -1) for none).
+const DRIPPING_POOL_EVENT := preload("res://data/events/object_dripping_pool.tres")
+const DRIPPING_POOL_CHANCE := 2  # in 3
+
+func _stock_dripping_hall() -> void:
+	if _map.marks.has("dripping_pool"):
+		return
+	for landmark: Dictionary in _map.landmarks:
+		if landmark["id"] != "dripping_hall":
+			continue
+		_map.marks["dripping_pool"] = Vector2i(-1, -1)
+		if posmod(hash([_site_seed, _depth, "dripping_pool"]), 3) >= DRIPPING_POOL_CHANCE:
+			return
+		var spot := Vector2i(-1, -1)
+		for cell: Vector2i in landmark["cells"]:
+			if _map.content_at(cell) != DungeonMap.Content.NONE or _map.solid.has(cell) or _map.door_at(cell) != DungeonMap.Door.NONE 					or cell == _party.cell or _map.marks.get("wall_lights", {}).has(cell):
+				continue
+			spot = cell
+			if Dressing._wall_sides(_map, cell).is_empty():
+				break  # out in the open, under the drips, if there's room
+		if spot == Vector2i(-1, -1):
+			return
+		_map.contents[spot] = DungeonMap.Content.STRANGE_OBJECT
+		_map.events[spot] = DRIPPING_POOL_EVENT
+		_map.marks["dripping_pool"] = spot
+		_create_room_prop(spot, DRIPPING_POOL_EVENT)
+		return
+
+
+## Spare torches and old lanterns on the walls (owner, 2026-11-23): their
+## art, from `map.marks["wall_lights"]` (wall_lights.gd has the rules).
+func _add_wall_lights() -> void:
+	_wall_light_nodes.clear()
+	var lights: Dictionary = _map.marks.get("wall_lights", {})
+	for cell: Vector2i in lights:
+		var light: Dictionary = lights[cell]
+		if light["taken"]:
+			continue
+		var side: Vector2i = light["side"]
+		var wall := Vector3(cell.x * CELL_SIZE, 0.0, cell.y * CELL_SIZE) + Vector3(side.x, 0, side.y) * (CELL_SIZE / 2.0 - 0.01)
+		var node: Node3D
+		if light["kind"] == "torch":
+			node = Dressing._put(_level, "burnt-sconce", wall + Vector3(0, Dressing.WALL_HEIGHTS["burnt-sconce"], 0), Dressing._yaw_facing(-side))
+			# A faint gleam on the tar, so a spare torch stands out from the
+			# spent sconces in the dressing.
+			var gleam := OmniLight3D.new()
+			gleam.light_color = Color("f0b060")
+			gleam.light_energy = 0.45
+			gleam.omni_range = CELL_SIZE * 0.9
+			gleam.position = Vector3(0, 0.15, 0.35)
+			node.add_child(gleam)
+		else:
+			node = Dressing._put(_level, "lantern-hanging", wall + Vector3(0, Dressing.WALL_HEIGHTS["lantern-hanging"], 0), Dressing._yaw_facing(-side))
+			var glow := OmniLight3D.new()
+			glow.name = "WallLanternLight"
+			glow.light_color = Color("ffb35c")
+			glow.light_energy = 1.6
+			glow.omni_range = CELL_SIZE * 3.2
+			glow.omni_attenuation = 1.2
+			glow.position = Vector3(0, -0.2, 0.45)
+			node.add_child(glow)
+		node.name = "WallLight"
+		_wall_light_nodes[cell] = node
+	_refresh_wall_lights()
+
+
+## Lit or dark, as their oil allows.
+func _refresh_wall_lights() -> void:
+	for cell: Vector2i in _wall_light_nodes:
+		var node: Node3D = _wall_light_nodes[cell]
+		var light: Dictionary = WallLights.at(_map, cell)
+		if light.get("kind") == "lantern" and is_instance_valid(node):
+			var on: bool = WallLights.is_lit(light, _party_state.time_elapsed)
+			if "lit" in node and node.lit != on:
+				node.lit = on
+			node.get_node("WallLanternLight").visible = on
+
+
+## Walking up to a wall light: a spare torch is taken, an unlit lantern
+## offered to light.
+func _wall_light(cell: Vector2i) -> void:
+	var light: Dictionary = WallLights.at(_map, cell)
+	if light["kind"] == "torch":
+		if light["taken"]:
+			return
+		if _party_state.supplies.room_for(TORCH) <= 0:
+			_show_message("A spare torch sits in an old bracket, but your pack is full.")
+			return
+		_party_state.supplies.add(TORCH)
+		light["taken"] = true
+		if _wall_light_nodes.has(cell):
+			_wall_light_nodes[cell].queue_free()
+			_wall_light_nodes.erase(cell)
+		Sounds.play(self, Sounds.for_item(TORCH), -6.0, 0.0)
+		_show_message("A spare torch, left in an old bracket. You take it.")
+		return
+	if WallLights.is_lit(light, _party_state.time_elapsed):
+		return
+	_ask("An old miners' lantern hangs on the wall, a little oil still in it. Light it?",
+			_light_wall_lantern.bind(cell), Callable(), ["Light it", "Leave it"])
+
+
+func _light_wall_lantern(cell: Vector2i) -> void:
+	WallLights.light(_map, cell, _party_state.time_elapsed)
+	for hero in _party_state.living_members():
+		hero.change_strain(WallLights.LIGHTING_RELIEF)
+	for c in WallLights.lit_area(_map, cell):
+		_map.reveal_around(c, true)
+	Sounds.play(self, "torch")
+	_refresh_wall_lights()
+	_update_lantern()
+	_minimap.queue_redraw()
+	_full_map_view.queue_redraw()
+	_show_message("The old lantern catches, and warm light fills the place.")
+	_tip("wall_lantern", "A lit lantern lights this place for a while. In its light your map works even without a light of your own, and nerves ease a little.")
 
 
 ## The king's lost cache always holds something to dig out (owner,
@@ -967,6 +1098,8 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 		if set_trap and set_trap.sprung:
 			_spring_trap(cell, set_trap)
 			return
+	if not _in_opening and not WallLights.at(_map, cell).is_empty():
+		_wall_light(cell)
 	var content: int = _map.enter(cell)
 	match content:
 		DungeonMap.Content.NONE:
@@ -3540,6 +3673,22 @@ func _card_for(hero: Companion):
 func _on_party_panicked() -> void:
 	var who: Companion = _party_state.panicking_member()
 	_show_message("%s panics and bolts!" % (who.display_name if who else "Someone"))
+	# Something has to show what happened (owner, 2026-11-23): a racing
+	# heart and a blink of the eyes while the party wheels round.
+	_heart_player.pitch_scale = 1.25
+	for i in 4:
+		get_tree().create_timer(i * 0.22).timeout.connect(_heart_player.play)
+	if not screen_flashes or not Settings.get_value("flashes"):
+		return
+	if _panic_blink == null:
+		_panic_blink = ColorRect.new()
+		_panic_blink.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		_panic_blink.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		_panic_blink.color = Color(0, 0, 0, 0)
+		_wound_overlay.add_sibling(_panic_blink)
+	var blink := create_tween()
+	blink.tween_property(_panic_blink, "color:a", 0.85, 0.08)
+	blink.tween_property(_panic_blink, "color:a", 0.0, 0.3)
 
 
 # --- Opening escape (#30) -------------------------------------------------
@@ -4780,7 +4929,13 @@ func _build_hint() -> void:
 
 
 func _update_lantern() -> void:
+	# A lit wall lantern's light counts as the party's own (2026-11-23).
+	var borrowed: bool = _map != null and not _in_opening and WallLights.lights_cell(_map, _party.cell, _party_state.time_elapsed)
+	_party.borrowed_light = borrowed
+	_party_state.near_light = borrowed
 	_party.set_light(_party_state.supplies.light_fraction())
+	if borrowed:
+		_map.reveal_around(_party.cell, true)
 	_minimap.dark = not _party.lit
 	if _music:
 		_music.dark = not _party.lit  # only the underground places swell
@@ -4922,6 +5077,9 @@ func _on_party_moved(cell: Vector2i, facing: int) -> void:
 		_cell_before = _cell_now
 		_cell_now = cell
 		_note_quest_site(cell)
+		if not _in_combat:
+			_refresh_wall_lights()
+			_update_lantern()  # walking into or out of a wall lantern's light
 	var content: int = _map.content_at(cell)
 	var state := ""
 	if content != DungeonMap.Content.NONE:

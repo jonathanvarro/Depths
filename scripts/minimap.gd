@@ -217,9 +217,19 @@ func _draw() -> void:
 	for quest in map.marks.get("quests", {}):
 		var site: Rect2i=map.marks["quests"][quest]
 		var spot:=site.get_center()
-		if cells.has_point(spot) and (not dim or _known_floor.has(spot)) and (not quest_open.is_valid() or quest_open.call(quest)):
+		var open: bool=not quest_open.is_valid() or quest_open.call(quest)
+		# Off the corner map: an amber arrow on its edge points the way, in
+		# the dark too: the giver's directions, not sight (owner, 2026-11-23).
+		if open and not full_view and not cells.has_point(spot):
+			_draw_quest_pointer(origin,Vector2(cells.size)*tile,Vector2(spot-party_cell))
+		if cells.has_point(spot) and open:
 			var at:=origin+(Vector2(spot-cells.position)+Vector2.ONE*.5)*tile
-			_draw_marker(GLYPHS.landmark,at,tile,QUEST_TINT)
+			# On a bright amber disc: tinted ink alone read as one more brown
+			# landmark (owner, 2026-11-23, still couldn't find the survey site).
+			var disc:=clampf(tile*.90,14.0 if full_view else 10.0,28.0 if full_view else 20.0)*.68
+			draw_circle(at,disc,QUEST_TINT)
+			draw_arc(at,disc,0.0,TAU,24,INK,1.2,true)
+			_draw_marker(GLYPHS.landmark,at,tile*.8)
 			# A named site (#234): its name beside it on the full map.
 			var site_name: String=map.marks.get("quest_names",{}).get(quest,"")
 			if full_view and site_name!="":
@@ -242,6 +252,24 @@ func _draw() -> void:
 		var w:=font.get_string_size(text,HORIZONTAL_ALIGNMENT_LEFT,-1,fs).x
 		draw_string(font,Vector2((size.x-w)/2.0,size.y-(14.0 if full_view else 6.0)),text,HORIZONTAL_ALIGNMENT_LEFT,-1,fs,Color(INK,.8))
 	if full_view and rail>0:_draw_notes(notes,Rect2(Vector2(size.x-rail-10,30),Vector2(rail-12,size.y-50)))
+
+## An amber arrowhead just inside the corner map's edge, toward `toward`
+## (cells from the party, who stand at the centre).
+func _draw_quest_pointer(origin: Vector2, extent: Vector2, toward: Vector2) -> void:
+	if toward==Vector2.ZERO:return
+	var dir:=toward.normalized()
+	var half:=extent/2.0-Vector2.ONE*9.0
+	var reach:=minf(half.x/absf(dir.x) if dir.x!=0.0 else INF,half.y/absf(dir.y) if dir.y!=0.0 else INF)
+	var tip:=origin+extent/2.0+dir*reach
+	# The site's amber disc, with a point toward it: not the party's arrow.
+	var centre:=tip-dir*5.0
+	var side:=dir.orthogonal()
+	var points:=PackedVector2Array([tip+dir*4.0,centre+side*4.5,centre-side*4.5])
+	draw_colored_polygon(points,QUEST_TINT)
+	draw_polyline(PackedVector2Array([centre+side*4.5,tip+dir*4.0,centre-side*4.5]),INK,1.2,true)
+	draw_circle(centre,5.5,QUEST_TINT)
+	draw_arc(centre,5.5,0.0,TAU,20,INK,1.2,true)
+
 
 func _draw_marker(texture: Texture2D, center: Vector2, tile: float, tint:=Color.WHITE) -> void:
 	if texture==null:return

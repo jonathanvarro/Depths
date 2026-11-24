@@ -168,12 +168,18 @@ func free_slots() -> int:
 	return MAX_MEMBERS - members.size()
 
 
+## In a lit wall lantern's light (main.gd keeps it current, 2026-11-23).
+var near_light := false
+
+
 func advance_time(units := 1) -> void:
 	time_elapsed += units
 	update_capacity()  # injuries come and go (#104)
 	for i in units:
 		supplies.burn(1, oil_rate())
 		var light: Supplies.Light = supplies.light_band()
+		if near_light:
+			light = Supplies.Light.BRIGHT  # a wall lantern's warm light eases nerves a little
 		for member in living_members():
 			member.hunger += 1
 			member.change_strain(StrainRules.per_time_unit(member, light))

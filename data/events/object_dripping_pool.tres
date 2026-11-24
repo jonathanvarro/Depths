@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="RoomEvent" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="event"]
+[ext_resource type="PackedScene" path="res://art/props/traps-sites-3d-v1/still-pool.tscn" id="prop"]
+[ext_resource type="Script" path="res://scripts/event_choice.gd" id="choice"]
+[ext_resource type="Script" path="res://scripts/event_outcome.gd" id="outcome"]
+
+[sub_resource type="Resource" id="o0_0"]
+script = ExtResource("outcome")
+weight = 5
+text = "Cold and clean, tasting only of stone. Strength seeps back, and the quiet drip steadies you."
+heal_over_time = 4
+strain = -4.0
+
+[sub_resource type="Resource" id="o0_1"]
+script = ExtResource("outcome")
+weight = 1
+text = "Gritty with silt, but it does no harm."
+
+[sub_resource type="Resource" id="c0"]
+script = ExtResource("choice")
+label = "Drink"
+time_cost = 2
+outcomes = Array[EventOutcome]([SubResource("o0_0"), SubResource("o0_1")])
+
+[sub_resource type="Resource" id="o1_0"]
+script = ExtResource("outcome")
+weight = 1
+text = "Drops fall from the roof in a slow, steady rhythm. The water is fresh: it doesn't sit long enough to go bad."
+
+[sub_resource type="Resource" id="c1"]
+script = ExtResource("choice")
+label = "Look closer"
+time_cost = 3
+investigation = true
+outcomes = Array[EventOutcome]([SubResource("o1_0")])
+
+[resource]
+script = ExtResource("event")
+prop = ExtResource("prop")
+kind = 4
+title = "A clear pool"
+clue = "Water drips from the roof into a hollow in the rock. The pool is clear to the bottom and smells of nothing but cold stone."
+choices = Array[EventChoice]([SubResource("c0"), SubResource("c1")])
+min_depth = 99

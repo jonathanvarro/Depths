@@ -30,6 +30,7 @@ signal interacted(cell: Vector2i)
 const DIRECTIONS: Array[Vector2i] = [Vector2i(0, -1), Vector2i(1, 0), Vector2i(0, 1), Vector2i(-1, 0)]
 const MOVE_TIME := 0.22
 const TURN_TIME := 0.16
+const BOLT_TURN_TIME := 0.2  # per quarter turn when panic bolts
 const BUMP_DISTANCE := 0.15
 ## Pushing through a web or opening a door: slower than a step (#56).
 const TEAR_TIME := 0.9
@@ -83,6 +84,8 @@ func setup(size: float) -> void:
 ## Out isn't pitch black: a faint glow keeps the way back findable.
 ## Whether there's real light to see by: the map shows one tile further.
 var lit := true
+## Standing in someone else's light: a lit wall lantern (2026-11-23).
+var borrowed_light := false
 
 ## What the party learns of the floor at `at`: in the light, the cells
 ## around it; in the dark only the cell itself, felt underfoot (owner,
@@ -95,7 +98,7 @@ func _reveal(at: Vector2i) -> void:
 
 
 func set_light(fraction: float) -> void:
-	lit = fraction > 0.0
+	lit = fraction > 0.0 or borrowed_light
 	if fraction <= 0.0:
 		# No light: a faint glow that reaches only the next square (owner,
 		# 2026-11-22).
@@ -216,11 +219,22 @@ func _bolt() -> void:
 	if open.is_empty():
 		_try_step(DIRECTIONS[facing])
 		return
-	facing = open.pick_random()
-	rotation.y = _facing_to_yaw(facing)
+	var to: int = open.pick_random()
+	var turn := wrapi(to - facing + 2, 0, 4) - 2  # -2 (about face) to 1
+	facing = to
 	panicked.emit()
 	moved.emit(cell, facing)
-	_try_step(DIRECTIONS[facing])
+	if turn == 0:
+		_try_step(DIRECTIONS[facing])
+		return
+	# A fast, lurching spin rather than a cut (owner, 2026-11-23): you see
+	# yourself wheel round before you run.
+	_busy = true
+	var tween := create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "rotation:y", rotation.y - turn * PI / 2.0, BOLT_TURN_TIME * absi(turn))
+	tween.finished.connect(func():
+		_busy = false
+		_try_step(DIRECTIONS[facing]))
 
 
 ## step: -1 turns left (counter-clockwise), 1 turns right (clockwise).
