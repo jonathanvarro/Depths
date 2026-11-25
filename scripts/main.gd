@@ -546,6 +546,7 @@ func _ready() -> void:
 		var blocked: bool = _map != null and _map.door_at(cell) == DungeonMap.Door.BLOCKED and environment_theme.blocked_sound != null
 		_play_effect(environment_theme.blocked_sound if blocked else environment_theme.bump_sound))
 	_party.panicked.connect(_on_party_panicked)
+	_party.bumped.connect(_on_party_bumped_wall)
 	_party_state.changed.connect(_on_party_state_changed)
 	_party_state.brew_revealed.connect(_reveal_floor)  # a revealing brew (#175)
 	Brews.refresh(_party_state.supplies)
@@ -774,6 +775,8 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 	# 2026-11-23: the survey party was still too hard to find).
 	if not _in_opening and _map.marks.get("quests", {}).keys().any(_quest_site_open):
 		_tip("quest_site_pointer", "Your quest's site on this floor is the amber cairn on your map. When it's off the corner map, an amber arrow at the map's edge points the way.")
+	if not _in_opening and _party_state.members.size() > 1:
+		_tip("row_tap", "Tap a hero's front/back tag on their card any time to change rows. Front heroes take the blows; back heroes need reach (a spear, a sling, a prayer) to strike.")
 	_save_now()  # autosave on every floor change (#45)
 
 
@@ -907,6 +910,22 @@ func _stock_dripping_hall() -> void:
 		return
 
 
+## Tapping a card's row tag swaps that hero's row while exploring (owner,
+## 2026-11-24: formations should be easy to change on the go). In a fight
+## it's the Move action, which takes a turn.
+func _swap_row(card) -> void:
+	var hero: Companion = card.companion
+	if hero == null or _in_opening or _camp.visible or _ending:
+		return
+	if _in_combat:
+		_show_message("In a fight, changing rows takes a turn: use Move.")
+		return
+	hero.row = "back" if hero.row == "front" else "front"
+	hero.emit_changed()
+	_party_state.changed.emit()
+	_show_message("%s moves to the %s row." % [hero.display_name, hero.row])
+
+
 ## Spare torches and old lanterns on the walls (owner, 2026-11-23): their
 ## art, from `map.marks["wall_lights"]` (wall_lights.gd has the rules).
 func _add_wall_lights() -> void:
@@ -920,17 +939,23 @@ func _add_wall_lights() -> void:
 		var wall := Vector3(cell.x * CELL_SIZE, 0.0, cell.y * CELL_SIZE) + Vector3(side.x, 0, side.y) * (CELL_SIZE / 2.0 - 0.01)
 		var node: Node3D
 		if light["kind"] == "torch":
-			node = Dressing._put(_level, "burnt-sconce", wall + Vector3(0, Dressing.WALL_HEIGHTS["burnt-sconce"], 0), Dressing._yaw_facing(-side))
-			# A faint gleam on the tar, so a spare torch stands out from the
-			# spent sconces in the dressing.
+			# Two fresh torches leaning against the foot of the wall: nothing
+			# like the burnt stubs in the dressing's brackets (2026-11-24).
+			node = WallLights.spare_torch_prop()
+			node.position = wall
+			node.rotation.y = Dressing._yaw_facing(-side)
+			_level.add_child(node)
 			var gleam := OmniLight3D.new()
 			gleam.light_color = Color("f0b060")
-			gleam.light_energy = 0.45
-			gleam.omni_range = CELL_SIZE * 0.9
-			gleam.position = Vector3(0, 0.15, 0.35)
+			gleam.light_energy = 0.35
+			gleam.omni_range = CELL_SIZE * 0.8
+			gleam.position = Vector3(0, 1.0, 0.45)
 			node.add_child(gleam)
 		else:
+			# A whole lantern, glass and all, hanging straight: the
+			# dressing's are broken and askew.
 			node = Dressing._put(_level, "lantern-hanging", wall + Vector3(0, Dressing.WALL_HEIGHTS["lantern-hanging"], 0), Dressing._yaw_facing(-side))
+			Dressing.break_lantern(node, false)
 			var glow := OmniLight3D.new()
 			glow.name = "WallLanternLight"
 			glow.light_color = Color("ffb35c")
@@ -956,8 +981,18 @@ func _refresh_wall_lights() -> void:
 			node.get_node("WallLanternLight").visible = on
 
 
-## Walking up to a wall light: a spare torch is taken, an unlit lantern
-## offered to light.
+## Walking into the wall a light hangs on uses it (owner, 2026-11-24: on
+## purpose, never just by passing).
+func _on_party_bumped_wall(target: Vector2i) -> void:
+	if _map == null or _in_opening or _in_combat or _camp.visible:
+		return
+	var light: Dictionary = WallLights.at(_map, _party.cell)
+	if not light.is_empty() and light["side"] == target - _party.cell:
+		_wall_light(_party.cell)
+
+
+## Using a wall light: a spare torch is taken, an unlit lantern offered to
+## light.
 func _wall_light(cell: Vector2i) -> void:
 	var light: Dictionary = WallLights.at(_map, cell)
 	if light["kind"] == "torch":
@@ -1099,7 +1134,7 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 			_spring_trap(cell, set_trap)
 			return
 	if not _in_opening and not WallLights.at(_map, cell).is_empty():
-		_wall_light(cell)
+		_tip("wall_light_bump", "Something hangs on the wall here. Walk into that wall to use it: light an old lantern, or take a spare torch.")
 	var content: int = _map.enter(cell)
 	match content:
 		DungeonMap.Content.NONE:
@@ -1139,6 +1174,12 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 func _assign_events(map) -> void:
 	for cell in map.contents:
 		var event: RoomEvent = _room_events.pick(map.contents[cell], map.depth)
+		# A wall piece (a coal seam, a shrine) needs a wall to stand on: its
+		# back isn't modelled (owner, 2026-11-24). Out in the open, pick again.
+		var tries := 0
+		while event and event.prop_on_wall and Dressing._wall_sides(map, cell).is_empty() and tries < 40:
+			event = _room_events.pick(map.contents[cell], map.depth)
+			tries += 1
 		if event:
 			map.events[cell] = event
 
@@ -5558,6 +5599,7 @@ func _build_party_cards(ui: Control) -> void:
 		row.add_child(card)
 		_cards.append(card)
 		card.tapped.connect(func(c): _show_message(c.condition_words()))  # #64
+		card.row_tapped.connect(_swap_row)
 	_party_state.changed.connect(_refresh_cards)
 	_refresh_cards()
 

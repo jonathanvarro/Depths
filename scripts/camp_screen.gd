@@ -889,6 +889,7 @@ func _fire() -> void:
 
 
 var _lineup_note := ""
+var _issue_note := ""  # said once on the mine path after paying for a better issue
 
 ## What picking does next, in a line.
 func _lineup_hint() -> String:
@@ -1189,6 +1190,9 @@ func _cave_path() -> void:
 	# The quartermaster's issue (owner, 2026-11-22): topped up free on every
 	# return; a better one is paid for once, in gold and what the mine gives.
 	say.call("Quartermaster's issue, every trip: %s." % _camp.issue_text(), MUTED)
+	if _issue_note != "":
+		say.call(_issue_note, AMBER)
+		_issue_note = ""
 	var next: Dictionary = _camp.next_issue()
 	if not next.is_empty():
 		var better := _button("%s (%s)" % [next["name"], _camp.next_issue_price()])
@@ -1197,9 +1201,13 @@ func _cave_path() -> void:
 		better.disabled = not _camp.can_raise_issue(_party)
 		better.pressed.connect(func():
 			if _camp.raise_issue(_party):
-				_camp.top_up_torches(_party))
+				_camp.top_up_torches(_party)
+				_issue_note = "Paid. From now on the quartermaster issues %s." % _camp.issue_text()
+				_refresh_activity())
 		column.add_child(better)
 		say.call("Next: %s." % _camp.issue_text(_camp.issue_level + 1), MUTED)
+		if better.disabled:
+			say.call(_camp.issue_shortfall(_party), AMBER)
 	var down := _button("Head back down")
 	down.pressed.connect(func(): cave_chosen.emit(1))
 	column.add_child(down)

@@ -65,6 +65,22 @@ func _initialize() -> void:
 	await create_timer(0.2).timeout
 	var buttons: Array = main._camp.find_children("*", "Button", true, false).filter(func(b): return b.text.begins_with("Field issue"))
 	check("the mine path offers the field issue", buttons.size() == 1, buttons.size())
+	# The button works with the gold in the tent, and says so (2026-11-24).
+	var camp_state = main._camp_state
+	var pack_gold: int = main._party_state.supplies.gold
+	camp_state.stash.gold += 40
+	main._party_state.supplies.gold = 0
+	main._camp._refresh_activity()
+	await process_frame
+	buttons = main._camp.find_children("*", "Button", true, false).filter(func(b): return b.text.begins_with("Field issue"))
+	check("...and gold in the tent's stash pays for it", buttons.size() == 1 and not buttons[0].disabled)
+	var level: int = camp_state.issue_level
+	buttons[0].pressed.emit()
+	await process_frame
+	var texts: Array = main._camp.find_children("*", "Label", true, false).map(func(l): return l.text)
+	check("pressing it raises the issue and says so", camp_state.issue_level == level + 1 and texts.any(func(t): return t.begins_with("Paid.")), [camp_state.issue_level, camp_state.stash.gold])
+	main._party_state.supplies.gold = pack_gold
+	check("not enough gold names what's missing", camp_state.issue_shortfall(main._party_state).contains("more"), camp_state.issue_shortfall(main._party_state))
 
 	# Bigger floors, smaller rooms (owner, 2026-11-22).
 	var cells := 0

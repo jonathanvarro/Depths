@@ -1,9 +1,10 @@
 extends RefCounted
 ## Lights on the walls (owner playtest, 2026-11-23). The bigger floors are
 ## fun to explore, so the cave gives a little light back:
-## - "torch": a spare torch left in an old bracket. Walking up to it takes
-##   it (if the pack has room). Torches as loot.
-## - "lantern": a miners' lantern with a little oil still in it. Lit, it
+## - "torch": two spare torches leaning against a wall. Walking into that
+##   wall takes one (if the pack has room). Torches as loot.
+## - "lantern": a whole miners' lantern (the dressing's are broken) with a
+##   little oil still in it; walking into its wall offers to light it. Lit, it
 ##   burns for a while (BURN time units) and lights its room, or a short
 ##   stretch of corridor: standing there counts as being in the light, so
 ##   the map works again and nerves ease very slightly.
@@ -21,6 +22,46 @@ const AWAY_FROM_STAIRS := 4
 const BURN := 200  # time units a lit lantern lasts (a step is 1)
 const CORRIDOR_REACH := 9  # cells a lantern lights along a corridor
 const LIGHTING_RELIEF := -3.0  # strain, once, for each hero when one is lit
+
+
+## Two fresh torches leaning against the foot of a wall (+Z out of the
+## wall, origin on the floor at the wall face), built like the held torch.
+static func spare_torch_prop() -> Node3D:
+	var root := Node3D.new()
+	root.name = "SpareTorches"
+	var mats := {}
+	for texture in ["wood", "cloth", "leather"]:
+		var material := StandardMaterial3D.new()
+		material.albedo_texture = load("res://art/props/held-3d-v1/%s.png" % texture)
+		material.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+		material.roughness = 0.9
+		mats[texture] = material
+	for i in 2:
+		var torch := Node3D.new()
+		torch.position = Vector3(-0.08 + i * 0.15, 0.0, 0.26 + i * 0.03)
+		torch.rotation = Vector3(-0.3, 0.0, (i * 2 - 1) * 0.09)  # leaning back on the rock
+		root.add_child(torch)
+		# Long enough that the heads show when you face the wall up close.
+		_cylinder(torch, 0.018, 0.024, 1.0, mats["wood"], 0.5)
+		_cylinder(torch, 0.026, 0.026, 0.12, mats["leather"], 0.2)  # grip binding
+		_cylinder(torch, 0.046, 0.038, 0.06, mats["cloth"], 0.98)  # the pitch-soaked head
+		_cylinder(torch, 0.054, 0.047, 0.07, mats["cloth"], 1.045)
+		_cylinder(torch, 0.038, 0.052, 0.055, mats["cloth"], 1.105)
+	return root
+
+
+static func _cylinder(parent: Node3D, top: float, bottom: float, height: float, material: Material, y: float) -> void:
+	var mesh := CylinderMesh.new()
+	mesh.top_radius = top
+	mesh.bottom_radius = bottom
+	mesh.height = height
+	mesh.radial_segments = 8
+	mesh.rings = 1
+	var part := MeshInstance3D.new()
+	part.mesh = mesh
+	part.material_override = material
+	part.position = Vector3(0, y, 0)
+	parent.add_child(part)
 
 
 ## Chooses this floor's wall lights (seeded, so a layout keeps them).

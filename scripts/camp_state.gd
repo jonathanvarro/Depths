@@ -766,7 +766,9 @@ func next_issue() -> Dictionary:
 
 func can_raise_issue(party) -> bool:
 	var next := next_issue()
-	if next.is_empty() or party.supplies.gold < int(next["gold"]):
+	# Gold in the tent's stash counts too (owner, 2026-11-24: the button
+	# seemed dead with the gold put away).
+	if next.is_empty() or party.supplies.gold + stash.gold < int(next["gold"]):
 		return false
 	for id: String in next["materials"]:
 		var item: SupplyItem = load(ISSUE_ITEM % id)
@@ -775,12 +777,31 @@ func can_raise_issue(party) -> bool:
 	return true
 
 
-## Pays for the next issue (materials from the pack first, then the stash).
+## What's still missing for the next issue, in words ("" if nothing).
+func issue_shortfall(party) -> String:
+	var next := next_issue()
+	if next.is_empty():
+		return ""
+	var missing: Array[String] = []
+	var gold: int = party.supplies.gold + stash.gold
+	if gold < int(next["gold"]):
+		missing.append("%d more gold" % (int(next["gold"]) - gold))
+	for id: String in next["materials"]:
+		var item: SupplyItem = load(ISSUE_ITEM % id)
+		var have: int = party.supplies.count(item) + stash.count(item)
+		if have < int(next["materials"][id]):
+			missing.append("%d more %s" % [int(next["materials"][id]) - have, item.display_name.to_lower()])
+	return "Still needed: %s." % ", ".join(missing) if not missing.is_empty() else ""
+
+
+## Pays for the next issue (gold and materials from the pack first, then the stash).
 func raise_issue(party) -> bool:
 	if not can_raise_issue(party):
 		return false
 	var next := next_issue()
-	party.supplies.gold -= int(next["gold"])
+	var from_pack := mini(party.supplies.gold, int(next["gold"]))
+	party.supplies.gold -= from_pack
+	stash.gold -= int(next["gold"]) - from_pack
 	for id: String in next["materials"]:
 		var item: SupplyItem = load(ISSUE_ITEM % id)
 		var owed: int = int(next["materials"][id]) - party.supplies.drop(item, int(next["materials"][id]))

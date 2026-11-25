@@ -79,7 +79,7 @@ func _gui_input(event: InputEvent) -> void:
 
 static func marker_for(content: int, used := false) -> Texture2D:
 	match content:
-		1,3:return GLYPHS.danger
+		3:return GLYPHS.danger  # a found trap; monsters are left off (owner, 2026-11-24)
 		2:return GLYPHS["chest-empty"] if used else GLYPHS.chest
 		4:return GLYPHS.object
 		5:return GLYPHS.rest

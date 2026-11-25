@@ -673,12 +673,16 @@ Templates > Download and Install; already installed on the owner's PC).
   Real common chests are `data/events/chest_common.tres` (ChatGPT's art); the
   old containers (pack, tool rack, workings, cache, stash, strongbox) keep their
   own loot families below a chest (`ChestTiers.CONTAINERS`, never gear).
-- Wall lights (2026-11-23): `scripts/wall_lights.gd` (spare torches taken by
-  walking up; old lanterns lit for `BURN`, whose light counts as the party's:
+- Wall lights (2026-11-23/24): `scripts/wall_lights.gd` (used by walking into
+  their wall, `_on_party_bumped_wall`; spare torches lean at the wall's foot;
+  decorative lanterns are broken, `Dressing.break_lantern`; old lanterns lit
+  for `BURN`, whose light counts as the party's:
   `Party.borrowed_light`, `PartyState.near_light`), main `_add_wall_lights`/
   `_wall_light`, `map.marks["wall_lights"]`. Dripping halls' clear pool:
   `_stock_dripping_hall`. Quest sites: amber disc + corner-map edge pointer.
-  `tools/playtest_nov23b_check.gd`.
+  `tools/playtest_nov23b_check.gd`. Rows change on the go by tapping a
+  card's front/back tag (`PartyCard.row_tapped`, main `_swap_row`). Monster
+  spawns have no map mark.
 - Quartermaster's issue (2026-11-22): `CampState.ISSUE`/`issue_level`; returns
   top the pack up to it (`top_up_torches`), raised on the mine path for gold
   and mine materials. `tools/quartermaster_check.gd`. Floors are 35x35 with
