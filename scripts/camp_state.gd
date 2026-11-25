@@ -249,6 +249,7 @@ func hire(party, recruit: Companion) -> bool:
 	if recruit not in candidates or not party.add_member(recruit):
 		return false
 	candidates.erase(recruit)
+	party.members[-1].dismissed = false  # the party plays with a copy
 	changed.emit()
 	return true
 
@@ -281,19 +282,29 @@ func swap(party, out: Companion, recruit: Companion) -> bool:
 	return true
 
 
-## Sends a recruit away for good. The founder (Mara) stays.
+## Sends a recruit away. The founder (Mara) stays. They wait by the fire,
+## gear and all, until the party next heads down or rests, in case you
+## change your mind or forgot their kit (owner, 2026-11-24); then they go.
 func dismiss(party, hero: Companion) -> bool:
 	if hero.founder or hero not in party.members:
 		return false
 	party.remove_member(hero)
 	recovering.erase(hero)
+	hero.dismissed = true
+	candidates.push_front(hero)
 	changed.emit()
 	return true
+
+
+## The dismissed who didn't rejoin move on (heading down, or a night's rest).
+func _send_dismissed_away() -> void:
+	candidates.assign(candidates.filter(func(c: Companion): return not c.dismissed))
 
 
 ## Heading down: heroes still recovering stay in the nurse's tent.
 func leave_behind(party) -> void:
 	explored_today = true
+	_send_dismissed_away()
 	for hero: Companion in party.members.duplicate():
 		if is_recovering(hero):
 			party.remove_member(hero)
@@ -325,6 +336,7 @@ func rest(party) -> void:
 		site_presence["treatment"] = true
 		traders_arrival_day = 0
 	explored_today = false
+	_send_dismissed_away()
 	if not candidates.is_empty():
 		var leaving: Array = candidates.filter(func(c: Companion): return c.named_id == "")
 		if not leaving.is_empty():

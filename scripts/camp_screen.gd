@@ -937,7 +937,7 @@ func _lineup() -> Control:
 		box.add_child(line)
 	if _picked_member and not _picked_member.founder:
 		var dismiss := _button("Dismiss")
-		dismiss.tooltip_text = "Send %s away for good" % _picked_member.display_name
+		dismiss.tooltip_text = "Send %s away. They wait by the fire, with their gear, until you head down or rest" % _picked_member.display_name
 		dismiss.accessibility_name = dismiss.tooltip_text
 		dismiss.pressed.connect(func():
 			_camp.dismiss(_party, _picked_member)

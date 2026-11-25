@@ -4706,19 +4706,39 @@ func _hint_target() -> Control:
 					return button
 	if _hint_mode == "pack" and not _pack.visible:
 		return _pack_button
-	if _guiding_drop():
-		return _guided_drop_target()
+	if _guiding_pack():
+		return _guided_pack_target()
 	return null
 
 
-## The opening's knife drop is guided (owner, 2026-11-22): the rest of the
-## screen dims, the Pack stays open, and the next thing to press is lit.
-func _guiding_drop() -> bool:
-	return _in_opening and _hint == "drop" and _pack.visible and _starting_weapon != null 			and _starting_weapon in _party_state.supplies.gear
+## The opening's Pack steps are guided: the rest of the screen dims, the
+## Pack stays open, and the next thing to press is lit. The knife drop
+## first (owner, 2026-11-22), then equipping the sword and lighting a
+## torch too (2026-11-24). [item, action] for the step under way, or [].
+func _guided_step() -> Array:
+	if not _in_opening or not _pack.visible:
+		return []
+	var supplies = _party_state.supplies
+	match _hint:
+		"equip":
+			if _opening_weapon in supplies.gear:
+				return [_opening_weapon, "equip"]
+		"drop":
+			if _starting_weapon != null and _starting_weapon in supplies.gear:
+				return [_starting_weapon, "drop"]
+		"light", "relight":
+			if supplies.count(TORCH) > 0 and not supplies.torch_lit():
+				return [TORCH, "use"]
+	return []
 
 
-func _guided_drop_target() -> Control:
-	return _pack.guide_target(_starting_weapon) if _guiding_drop() else null
+func _guiding_pack() -> bool:
+	return not _guided_step().is_empty()
+
+
+func _guided_pack_target() -> Control:
+	var step := _guided_step()
+	return _pack.guide_target(step[0], step[1]) if not step.is_empty() else null
 
 
 func _finish_hint() -> void:
@@ -4924,7 +4944,7 @@ func _build_hint() -> void:
 	_hint_shade.visible = false
 	layer.add_child(_hint_shade)
 	_spotlight = Spotlight.new()
-	_spotlight.finder = func(): return _guided_drop_target()
+	_spotlight.finder = func(): return _guided_pack_target()
 	layer.add_child(_spotlight)
 	_hint_box = PanelContainer.new()
 	var style := StyleBoxFlat.new()
@@ -5193,8 +5213,8 @@ func _set_debug(enabled: bool) -> void:
 
 ## Opens or closes the pack screen; like the map, the party waits meanwhile.
 func _set_pack(open: bool) -> void:
-	if not open and _guiding_drop():
-		return  # not until the broken knife is dropped
+	if not open and _guiding_pack():
+		return  # not until the guided step is done
 	if open and is_instance_valid(_overlook) and (_overlook.visible or _overlook_stash.visible):
 		return
 	if open and (_prompt.visible or _full_map.visible or _in_combat or _event_screen.visible or _chest.visible):
