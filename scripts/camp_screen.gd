@@ -836,10 +836,41 @@ func _tent() -> void:
 	_tent_view.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_tent_view.rest_requested.connect(func():
 		_camp.rest(_party)
+		_show_rest()
 		_refresh_activity()
 		if is_instance_valid(_tent_view):_tent_view._buttons.rest.grab_focus.call_deferred())
 	_tent_view.store_requested.connect(_open_stash)
 	_body.add_child(_tent_view)
+
+
+## Resting shows: the screen dims to night and back, with the new day
+## named and a soft chime (owner, 2026-11-24: nothing told you it worked).
+func _show_rest() -> void:
+	var veil := ColorRect.new()
+	veil.name = "RestVeil"
+	veil.color = Color(0, 0, 0, 0)
+	veil.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	veil.mouse_filter = Control.MOUSE_FILTER_STOP  # a moment's pause while the night passes
+	var words := Label.new()
+	words.text = "You rest through the night.
+Day %d. Everyone wakes rested." % _camp.day
+	words.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	words.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	words.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	words.add_theme_font_override("font", HEADING)
+	words.add_theme_font_size_override("font_size", 28)
+	words.add_theme_color_override("font_color", TEXT)
+	words.modulate.a = 0.0
+	veil.add_child(words)
+	add_child(veil)
+	Sounds.play(self, "prayer_mend", -8.0, 0.0)
+	var tween := veil.create_tween()
+	tween.tween_property(veil, "color:a", 0.9, 0.45)
+	tween.parallel().tween_property(words, "modulate:a", 1.0, 0.45)
+	tween.tween_interval(1.1)
+	tween.tween_property(veil, "color:a", 0.0, 0.6)
+	tween.parallel().tween_property(words, "modulate:a", 0.0, 0.5)
+	tween.tween_callback(veil.queue_free)
 
 
 func _open_stash() -> void:

@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-11-24 – Claude (panic cooldown, rest screen, quest 1 recordings)
+- Did: `Party.PANIC_COOLDOWN` (8 steps, the bolt's run included; `panic_rest`, `bolts_now()`). Camp rest shows a night veil with the new day and a soft chime (`CampScreen._show_rest`, "prayer_mend" as a stand-in sound). Recorded quest 1 end to end (Godot `--write-movie`, scratch script) from a new game and from the owner's day-5 save; the site spawned and the quest completed both times. Video kept locally in `build/videos/`.
+- Next: quest-site safeguards (owner asked, same day).
+- Watch out: Vael's report is given from the campfire's Talk button, not the mine path.
+
 ## 2026-11-24 – Claude (guided equip/light, dismissed heroes wait by the fire)
 - Did: (1) the opening's equip, light and relight Pack steps are guided like the knife drop: `_guided_step()` gives [item, action] for the current hint (equip / drop / use), `_guided_pack_target()` feeds the Spotlight, and the Pack can't close until the step is done (`_guiding_pack`). `tools/opening_playthrough.gd` checks all four. (2) `CampState.dismiss` puts the hero (gear and all) back by the fire with `Companion.dismissed = true`; they can be invited back, and `_send_dismissed_away` drops them on `leave_behind` (heading down) and on `rest`. `hire` clears the flag on the party's copy (`add_member` duplicates). `tools/recruit_check.gd`.
 - Next: owner playtest.

@@ -46,6 +46,17 @@ func _initialize() -> void:
 	await create_timer(1.0).timeout
 	check("...and shows a blink", main._panic_blink != null)
 	check("...then runs on", not party._busy)
+	# A short cooldown after a bolt (owner, 2026-11-24).
+	check("after a bolt, nerves settle for a few steps", party.panic_rest > 0 and party.panic_rest < party.PANIC_COOLDOWN, party.panic_rest)
+	party.panic_chance = 1.0
+	check("...so the next step can't bolt, even at certain panic", not party.bolts_now(), party.panic_rest)
+	party.panic_rest = 0
+	check("...until it has passed", party.bolts_now())
+	party.panic_chance = 0.0
+	# Resting at camp shows the night passing.
+	main._camp._camp = main._camp_state
+	main._camp._show_rest()
+	check("resting at camp shows the night passing", main._camp.get_node_or_null("RestVeil") != null)
 
 	# Wall lights on every floor.
 	var map = main._map
