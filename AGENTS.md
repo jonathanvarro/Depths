@@ -50,6 +50,17 @@ Templates > Download and Install; already installed on the owner's PC).
 
 ## Project structure
 
+- `docs/field-kit-silhouette-and-menu.md` – #290's fully fitted twelve-pocket
+  pack, generic equipment silhouette and clickable book spine in
+  `art/ui/field-kit-v3`. `KitBag.fitted_art` is Pack-only; trade keeps its
+  existing painting/registration. Small phones switch Gear/Pack beside the
+  safely inset portrait rail. Use actual screen-transform pixels for touch
+  sizing. `PauseMenu` opens from gear/Escape, pauses the tree, and uses the
+  existing Settings/save authority; Settings processes above it while paused.
+  Preserve nested Back, contextual briefs, selected recipients and the guided
+  tutorial knife drop. Review: `build/local-field-kit-v3/inspector.html`.
+  Native matrix/gesture/tutorial checks pass; owner/physical iPhone review remains.
+
 - `docs/tutorial-campfire-and-bodies-3d.md` – #285's live tutorial hearth and
   two static anonymous clothed travellers. True floor-registered GLBs replace
   Main's default opening sprites; body_scenes also serves lost-body recovery.
@@ -744,7 +755,8 @@ Templates > Download and Install; already installed on the owner's PC).
   Food/light stay shared. Gear/curses, costs, stacks/capacity/pages remain model
   controlled. Open with backpack or I/B. Current handoff/checks:
   `docs/contextual-field-kit.md` (#191); earlier `docs/combined-kit-live.md`.
-  `KitBag.pocket_focus` is Pack-only; preserve the default trade framing.
+  Pack now uses `KitBag.fitted_art` without cropping (#290); preserve the
+  default trade framing. Legacy `pocket_focus` remains available for old art.
 - `scripts/battle_stage.gd` – authored combat mist surge and low drifting bank
   (#129), viewport-fitted camera quad and static/plain fade when effects are off.
   Preserved source/prompt, exporter and real-renderer review: `docs/combat-fog.md`.

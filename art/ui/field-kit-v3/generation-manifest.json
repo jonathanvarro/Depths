@@ -1,0 +1,39 @@
+{
+  "generation_mode": "built-in image_gen.imagegen",
+  "created": "2026-11-24",
+  "reference": {
+    "path": "art/ui/physical-kit-v1/bag.png",
+    "use": "Material/style reference only; existing project art",
+    "sha256": "c3e63dd5b7d87279b4786f87eb9ca15271f545698e5fdb9461b4a163eebd4e01"
+  },
+  "assets": [
+    {
+      "path": "bag.png",
+      "source_output": "exec-ed4f58b4-984e-447b-b880-90cfbeba54b5.png",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "prompt": "Use case: precise-object-edit. Production inventory asset for Depths. Reference image is the existing backpack and is the material/style reference. Reimagine that same empty open worn leather-and-canvas backpack to fit FULLY inside the image while giving its compartments much more usable area. Preserve the brown leather straps, tarnished buckles, olive-brown woven canvas, uneven stitching, repairs and gritty painterly realism. Front-on, perfectly legible straight-on empty interior. Exactly TWELVE equally sized SQUARE compartments, arranged FOUR COLUMNS by THREE ROWS, aligned in a precise regular grid. No extra pockets. The whole bag silhouette is roughly 4:3 width:height, almost rectangular with softly worn uneven outer edges. Pockets occupy about 78% of both the width and height of the whole silhouette; narrow leather side rails each about 11% of the width; a short folded-back canvas flap across only the top 12%, NOT a tall upright lid; bottom edge and short secured straps within the remaining 8%. All twelve compartments have the same size, dark empty canvas interiors, thin stitched dividing walls, straight readable boundaries with small handmade imperfections. Short leather straps sit CLOSE to the bag, not long dangling extensions; buckles are visible but do not waste the canvas. The full flap, entire outer leather frame, buckles, seams and all strap tips are fully inside the image with clear transparent padding, no cut-offs. No equipment, objects in pockets, symbols, text, UI, people, glow, background or checkerboard. ACTUAL transparent background around the full bag; only a restrained tight contact shadow. Soft diffuse light upper left. Keep the high-quality weathered materials of the reference, suitable for a landscape phone inventory.",
+      "post_processing": "Source copied unchanged; runtime fits the entire canvas. Normalized pocket origins (0.124, 0.164), cell extent (0.195, 0.228), four columns and three rows.",
+      "sha256": "96f175289b572e2b2cd874bf509251afdd654470630a52499fdaad7583df187f"
+    },
+    {
+      "path": "journal-spine.png",
+      "source_output": "exec-0743fba2-117b-4f59-ba90-dfb9bf738162.png",
+      "dimensions": [
+        887,
+        1774
+      ],
+      "prompt": "Use case: stylized-concept. Production asset for Depths, a gritty dark fantasy inventory. Reference image is STYLE AND MATERIAL REFERENCE ONLY: match its worn brown leather, dull brass, fine scratches, grime and detailed painterly game rendering. Draw the narrow upright SPINE of one closed, thick quest journal, viewed almost straight at its spine with only a thin sliver of the front cover visible along its right edge. The spine is five times taller than it is wide: rounded, dark oxblood-brown leather, five uneven raised binding ribs, worn linen stitching, restrained tarnished brass corner fittings at top and bottom, a small diamond-stamped inset in the middle, a tiny faded red cloth bookmark peeking below. A little unevenness and chipped leather from years underground. Whole book spine fully visible, no cropping, calm diffuse light from upper left, crisp silhouette and controlled small-scale detail. This will stand vertically immediately to the right of the physical backpack as a clickable quest journal. No words, numbers, letters, title, runes, hands, shelf, icons, UI border, background, glow, or additional objects. Actual transparent background including around all leather edges and bookmark. Centre the isolated narrow spine on a portrait canvas with padding.",
+      "post_processing": "Source copied unchanged. Runtime AtlasTexture uses alpha>20% subject bounds [325,51,235,1689], stored as normalized coordinates to exclude the faint transparent halo while keeping the whole spine and bookmark.",
+      "sha256": "fd61a88a72cda4e82e80cf3939bbee1386307d6d16ec19f66da75817260d3597"
+    },
+    {
+      "path": "body.svg",
+      "source": "Original code-authored vector",
+      "post_processing": "No AI bitmap generation; generic neutral etched diagram without likeness or identity.",
+      "sha256": "474361bbefa020f8d28ef6869867f1340f1b9ed238a9c651a5a2235c3cd1a1d6"
+    }
+  ]
+}

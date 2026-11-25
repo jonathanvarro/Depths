@@ -160,7 +160,10 @@ func run() -> void:
 			for b in pack.find_children("*","Button",true,false):
 				if not b.is_visible_in_tree():continue
 				check(root.get_visible_rect().encloses(b.get_global_rect()),"Control inside viewport "+tag+" "+b.accessibility_name)
-				check(b.size.x>=43.9 and b.size.y>=43.9,"44px target "+tag+" "+b.accessibility_name)
+				# Logical units shrink as the UI scale increases. Measure the drawn
+				# target in window pixels, matching Main's stretched viewport too.
+				var pixels:=root.get_screen_transform().get_scale()
+				check(b.size.x*pixels.x>=43.5 and b.size.y*pixels.y>=43.5,"44px target "+tag+" "+b.accessibility_name)
 			await snap("equipment-"+tag)
 			pack.inspect_item(gear("simple_spear"));await settle()
 			check(pack.content.get_global_rect().encloses(pack._details.get_global_rect()),"Safe item card "+tag)
