@@ -673,6 +673,10 @@ Templates > Download and Install; already installed on the owner's PC).
   Real common chests are `data/events/chest_common.tres` (ChatGPT's art); the
   old containers (pack, tool rack, workings, cache, stash, strongbox) keep their
   own loot families below a chest (`ChestTiers.CONTAINERS`, never gear).
+- Quest sites (2026-11-24): `marks["sites"]` (every package's Rect2i),
+  `DungeonMap.in_story_site()` keeps other placements out; `_missing_quest_site`
+  checks the package events too and `_restore` rebuilds a floor missing one;
+  F3 shows "Quest sites: ... OK/MISSING". `tools/quest_sites_check.gd`.
 - Wall lights (2026-11-23/24): `scripts/wall_lights.gd` (used by walking into
   their wall, `_on_party_bumped_wall`; spare torches lean at the wall's foot;
   decorative lanterns are broken, `Dressing.break_lantern`; old lanterns lit

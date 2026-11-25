@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-11-24 – Claude (quest-site safeguards)
+- Did: owner asked for firm guarantees that an active quest's site exists and isn't overwritten. (1) `_go_to_floor` tries up to `STORY_SITE_TRIES` (40) layouts, then `push_error`s. (2) `marks["sites"]` records every package's site (hidden ones too); `DungeonMap.story_sites()`/`in_story_site(cell, margin)` keep landmarks, wall lights and the named pack's start out of them (landmark rooms already excluded the lost cache and dripping pool). (3) `_missing_quest_site` also requires each active package's events to be on the map; `_restore` rebuilds the current floor from the way in when its site is missing. (4) F3 overlay: "Quest sites: left_behind OK at (x, y)" / MISSING / "none wanted here" (`_quest_site_report`). `tools/quest_sites_check.gd`: 220 floors over every story package and seed set, plus the missing/rebuild/restore paths.
+- Next: owner playtest with F3 to confirm the site in their own runs.
+- Watch out: nothing found broken in generation; the owner's saves all held the site.
+
 ## 2026-11-24 – Claude (panic cooldown, rest screen, quest 1 recordings)
 - Did: `Party.PANIC_COOLDOWN` (8 steps, the bolt's run included; `panic_rest`, `bolts_now()`). Camp rest shows a night veil with the new day and a soft chime (`CampScreen._show_rest`, "prayer_mend" as a stand-in sound). Recorded quest 1 end to end (Godot `--write-movie`, scratch script) from a new game and from the owner's day-5 save; the site spawned and the quest completed both times. Video kept locally in `build/videos/`.
 - Next: quest-site safeguards (owner asked, same day).

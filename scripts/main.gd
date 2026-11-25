@@ -636,11 +636,37 @@ func _unhandled_input(event: InputEvent) -> void:
 ## Builds (or returns to) a floor. Arriving from above puts the party at the
 ## way up; arriving from below puts it at the way down; the opening uses the
 ## floor's start cell.
-## True if a story quest wants a site on this floor that `map` lacks.
+## True if a story quest wants a site on this floor that `map` lacks: not
+## recorded, or recorded but with any of its events gone (2026-11-24).
 func _missing_quest_site(map, depth: int) -> bool:
 	if _in_opening or use_debug_layout:
 		return false
-	return Packages.active(_camp_state, depth).any(func(p): return p.id not in map.packages)
+	var events: Array = map.events.values()
+	for package: QuestPackage in Packages.active(_camp_state, depth):
+		if package.id not in map.packages:
+			return true
+		for event: RoomEvent in package.events:
+			if event not in events:
+				return true
+	return false
+
+
+## For the F3 overlay (2026-11-24): each story site this floor should have,
+## where it is and whether it's really there.
+func _quest_site_report() -> String:
+	if _map == null or _in_opening:
+		return "-"
+	var parts: Array[String] = []
+	var events: Array = _map.events.values()
+	for package: QuestPackage in Packages.active(_camp_state, _depth):
+		var site: Rect2i = _map.marks.get("sites", {}).get(package.id, _map.marks.get("quests", {}).get(package.quest, Rect2i()))
+		var whole: bool = package.id in _map.packages and package.events.all(func(e): return e in events)
+		parts.append("%s %s at %s" % [package.id, "OK" if whole else "MISSING", str(site.get_center()) if site.size != Vector2i.ZERO else "?"])
+	return ", ".join(parts) if not parts.is_empty() else "none wanted here"
+
+
+## Layouts tried before a floor gives up on fitting a story site.
+const STORY_SITE_TRIES := 40
 
 
 func _go_to_floor(depth: int, arrival: Arrival) -> void:
@@ -666,8 +692,9 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 		var marks := {}
 		var stamped: Dictionary
 		# A story quest's site must fit (its floor's way on can wait for it):
-		# if this layout has no room, the next one is tried (2026-11-22).
-		for attempt in 8:
+		# if this layout has no room, the next one is tried (2026-11-22),
+		# as many as it takes (2026-11-24: never carry on without it).
+		for attempt in STORY_SITE_TRIES:
 			layout = _make_layout(depth, attempt)
 			marks = {}
 			if depth == FORTRESS_DEPTH and not use_debug_layout:
@@ -688,6 +715,8 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 			stamped = Packages.place(layout, wanted, _site_seed + depth * 7919 + 13 + attempt * 101, avoid, join)
 			if not story.any(func(p): return p.id in stamped["failed"]):
 				break
+			if attempt == STORY_SITE_TRIES - 1:
+				push_error("Floor %d: no layout fits the story site(s) %s" % [depth, stamped["failed"]])
 		var refuge := Vector2i(-1, -1)
 		if depth == Refuge.DEPTH and not use_debug_layout and not _in_opening:  # a rest before the fortress
 			var placed: Dictionary = Refuge.place(stamped["layout"], depth)
@@ -732,6 +761,12 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 			var package: QuestPackage = Packages.find(id)
 			if package.lair == "" and package.chance == 0.0 and Quests.INFO.has(package.quest) and not Quests.INFO[package.quest]["hidden"]:
 				sites[package.quest] = stamped["sites"][id]
+		marks["sites"] = stamped["sites"]  # every package's site, kept clear below
+		# The named pack never starts inside a site (it may walk through).
+		if not _floors[depth].marks.get("elite", {}).is_empty():
+			var start: Vector2i = _floors[depth].marks["elite"]["cell"]
+			if stamped["sites"].values().any(func(r: Rect2i): return r.grow(1).has_point(start)):
+				_floors[depth].marks.erase("elite")
 		if not sites.is_empty():
 			marks["quests"] = sites
 			# Names are metadata; exploration reveals them like other landmarks.
@@ -2833,6 +2868,13 @@ func _restore(data: Dictionary) -> void:
 		_camp_loop()
 		return
 	_depth = data["depth"]
+	# Continued on a floor that lacks a site the story now needs: build it
+	# again, from the way in (2026-11-24).
+	if _missing_quest_site(_floors[_depth], _depth):
+		_floors.erase(_depth)
+		_go_to_floor(_depth, Arrival.FROM_ABOVE)
+		_show_message("%s · depth %d · continued from the way in" % [environment_theme.display_name, _depth])
+		return
 	_map = _floors[_depth]
 	_apply_theme()
 	_build_level()
@@ -5146,11 +5188,11 @@ func _on_party_moved(cell: Vector2i, facing: int) -> void:
 	if content != DungeonMap.Content.NONE:
 		state = " (used)" if _map.triggered.has(cell) else ""
 	var seed_text: String = "debug layout" if use_debug_layout and _depth == 1 else str(_site_seed)
-	_debug_label.text = "Seed: %s  Depth: %d/%d\nCell: %s  Facing: %s\nHere: %s%s\nContents on floor: %d  Passages: %d\nParty: %s\nTime: %d  Oil: %.1f (%s)" % [
+	_debug_label.text = "Seed: %s  Depth: %d/%d\nCell: %s  Facing: %s\nHere: %s%s\nContents on floor: %d  Passages: %d\nParty: %s\nTime: %d  Oil: %.1f (%s)\nQuest sites: %s" % [
 		seed_text, _depth, _deepest_open(), cell, ["N", "E", "S", "W"][facing],
 		DungeonMap.content_name(content), state, _map.contents.size(), _map.doors.size(),
 		_party_state.summary(), _party_state.time_elapsed, _party_state.supplies.oil,
-		Supplies.LIGHT_NAMES[_party_state.supplies.light_band()]]
+		Supplies.LIGHT_NAMES[_party_state.supplies.light_band()], _quest_site_report()]
 
 
 ## Shows a yes/no question; `on_yes` runs if the player agrees, `on_no` if not.
