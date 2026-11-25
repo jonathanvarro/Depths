@@ -48,6 +48,11 @@ Templates > Download and Install; already installed on the owner's PC).
   of the owner's save; never their real one). Exported builds can't run
   `--script` or `--path`. Quest-site trouble is logged to
   `%APPDATA%/Godot/app_userdata/Depths/quest_sites.log`.
+- `project.godot` sets `editor/export/convert_text_resources_to_binary=false`
+  (2026-11-24): Godot 4.7.2's export conversion emptied QuestPackage
+  `rows`/flags, so exported games had no quest sites while the editor and
+  every check were fine. Test exported data with a real export, e.g.
+  `-- --save=<copy> --continue`.
 - The preset leaves out `art/source/` and `tools/`. Everything else under
   `res://` is included (data/events is loaded by folder listing, so a
   "selected scenes only" export would drop it).

@@ -28,6 +28,10 @@ func _initialize() -> void:
 	await create_timer(0.5).timeout
 	var story: Array = Packages.library().filter(func(p: QuestPackage): return p.lair == "" and p.chance == 0.0)
 	check("there are story packages to test", story.size() >= 3, story.size())
+	# The real cause (2026-11-24): the export's text-to-binary conversion
+	# emptied every package's rows and flags, so the exported game had no
+	# quest sites. Exports ship the text files instead; keep it that way.
+	check("exports keep the data files as text (binary conversion emptied the quest sites)", ProjectSettings.get_setting("editor/export/convert_text_resources_to_binary", true) == false)
 	var floors := 0
 	var problems: Array[String] = []
 	for package: QuestPackage in story:
