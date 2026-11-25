@@ -53,10 +53,29 @@ func _initialize() -> void:
 	party.panic_rest = 0
 	check("...until it has passed", party.bolts_now())
 	party.panic_chance = 0.0
-	# Resting at camp shows the night passing.
+	# Resting at camp shows the night passing, without a day count.
 	main._camp._camp = main._camp_state
 	main._camp._show_rest()
-	check("resting at camp shows the night passing", main._camp.get_node_or_null("RestVeil") != null)
+	var veil = main._camp.get_node_or_null("RestVeil")
+	check("resting at camp shows the night passing", veil != null and not veil.get_child(0).text.contains("Day"), veil.get_child(0).text if veil else "")
+	# Once between trips, unless nobody can go and the nurse needs the nights.
+	var rest_camp = load("res://scripts/camp_state.gd").new()
+	var rest_party = load("res://scripts/party_state.gd").new()
+	rest_party.add_member(load("res://data/companions/mara.tres"))
+	check("a rest is allowed", rest_camp.can_rest(rest_party))
+	rest_camp.rest(rest_party)
+	check("...but not twice in a row", not rest_camp.can_rest(rest_party))
+	rest_camp.leave_behind(rest_party)
+	rest_camp.rejoin(rest_party)
+	check("...until the party has been down again", rest_camp.can_rest(rest_party))
+	rest_camp.rest(rest_party)
+	rest_party.members[0].add_injury(load("res://data/injuries/deep_wound.tres"))
+	rest_camp.treat(rest_party.members[0])
+	check("...or nobody is fit to go", rest_camp.can_rest(rest_party))
+	# Every result chip describes itself (a rest spot's too).
+	var rest_spot: RoomEvent = load("res://data/events/rest_dry_alcove.tres")
+	var rested: Dictionary = main._room_events.resolve(main._party_state, rest_spot.choices[0])
+	check("event result icons all describe themselves", not rested["changes"].is_empty() and rested["changes"].all(func(c): return c.get("tip", "").length() > 5), rested["changes"].map(func(c): return c.get("tip", "")))
 
 	# Wall lights on every floor.
 	var map = main._map
@@ -101,6 +120,8 @@ func _initialize() -> void:
 	check("lighting an old lantern eases nerves a little", hero.strain < 40.0 and hero.strain > 30.0, hero.strain)
 	check("...and its light lets the map work", party.lit and not main._minimap.dark and main._party_state.near_light)
 	check("...the lantern burns", main._wall_light_nodes[spot].get_node("WallLanternLight").visible)
+	for member in main._party_state.members:
+		member.hunger = 0  # hunger frays nerves too; this is about the light
 	var calm: float = hero.strain
 	main._party_state.advance_time(5)
 	check("in its light, nerves ease very slightly over time", hero.strain < calm and hero.strain > calm - 2.0, [calm, hero.strain])

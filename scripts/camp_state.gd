@@ -304,6 +304,7 @@ func _send_dismissed_away() -> void:
 ## Heading down: heroes still recovering stay in the nurse's tent.
 func leave_behind(party) -> void:
 	explored_today = true
+	rested = false
 	_send_dismissed_away()
 	for hero: Companion in party.members.duplicate():
 		if is_recovering(hero):
@@ -322,7 +323,17 @@ func rejoin(party) -> void:
 
 
 ## Rest until tomorrow: everyone recovers fully, and the day moves on.
+## Rested since the last trip down: no resting twice in a row (owner,
+## 2026-11-24), unless nobody is fit to go and the nurse needs the nights.
+var rested := false
+
+
+func can_rest(party) -> bool:
+	return not rested or available(party).is_empty()
+
+
 func rest(party) -> void:
+	rested = true
 	for hero: Companion in party.members.filter(func(h: Companion): return h.is_with_party()):
 		hero.complete_pending_effects()
 		hero.hunger = 0

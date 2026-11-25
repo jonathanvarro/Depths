@@ -641,6 +641,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _missing_quest_site(map, depth: int) -> bool:
 	if _in_opening or use_debug_layout:
 		return false
+	_repair_site_records(map, depth)
 	var events: Array = map.events.values()
 	for package: QuestPackage in Packages.active(_camp_state, depth):
 		if package.id not in map.packages:
@@ -649,6 +650,51 @@ func _missing_quest_site(map, depth: int) -> bool:
 			if event not in events:
 				return true
 	return false
+
+
+## A floor that holds a quest's events but lost its note of the site (seen
+## in the owner's game, 2026-11-24): the note is rebuilt from where the
+## events lie, so the site is kept, marked and protected.
+func _repair_site_records(map, depth: int) -> void:
+	for package: QuestPackage in Packages.active(_camp_state, depth):
+		if package.id in map.packages or package.events.is_empty():
+			continue
+		var cells: Array = []
+		for c in map.events:
+			if map.events[c] in package.events:
+				cells.append(c)
+		if cells.size() < package.events.size():
+			continue  # really missing: the floor is built again
+		var site := Rect2i(cells[0], Vector2i.ONE)
+		for c in cells:
+			for r in map.room_around(c):
+				site = site.expand(r).expand(r + Vector2i.ONE)
+		site = site.grow(1)
+		map.packages.append(package.id)
+		if not map.marks.has("sites"):
+			map.marks["sites"] = {}
+		map.marks["sites"][package.id] = site
+		if Quests.INFO.has(package.quest) and not Quests.INFO[package.quest]["hidden"]:
+			if not map.marks.has("quests"):
+				map.marks["quests"] = {}
+			map.marks["quests"][package.quest] = site
+			if QUEST_SITE_NAMES.has(package.quest):
+				if not map.marks.has("quest_names"):
+					map.marks["quest_names"] = {}
+				map.marks["quest_names"][package.quest] = QUEST_SITE_NAMES[package.quest]
+		_note_site_trouble(depth, "rebuilt the record of %s from its events at %s" % [package.id, cells])
+
+
+## Anything odd about quest sites goes in user://quest_sites.log, to find
+## the cause if it ever happens again (2026-11-24).
+func _note_site_trouble(depth: int, what: String) -> void:
+	var line := "%s day %d seed %d floor %d: %s" % [Time.get_datetime_string_from_system(), _camp_state.day, _site_seed, depth, what]
+	push_warning(line)
+	var path := "user://quest_sites.log"
+	var file := FileAccess.open(path, FileAccess.READ_WRITE if FileAccess.file_exists(path) else FileAccess.WRITE)
+	if file:
+		file.seek_end()
+		file.store_line(line)
 
 
 ## For the F3 overlay (2026-11-24): each story site this floor should have,
@@ -716,7 +762,12 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 			if not story.any(func(p): return p.id in stamped["failed"]):
 				break
 			if attempt == STORY_SITE_TRIES - 1:
-				push_error("Floor %d: no layout fits the story site(s) %s" % [depth, stamped["failed"]])
+				# Last resort: the first layout with the story sites alone
+				# (no lairs or territories competing for the rock).
+				var tries_failed: Array = stamped["failed"]
+				layout = _make_layout(depth, 0)
+				stamped = Packages.place(layout, story, _site_seed + depth * 7919 + 13, avoid, join)
+				_note_site_trouble(depth, "all %d layouts failed %s; story alone: placed %s, failed %s" % [STORY_SITE_TRIES, tries_failed, stamped["placed"], stamped["failed"]])
 		var refuge := Vector2i(-1, -1)
 		if depth == Refuge.DEPTH and not use_debug_layout and not _in_opening:  # a rest before the fortress
 			var placed: Dictionary = Refuge.place(stamped["layout"], depth)
@@ -782,6 +833,8 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 		if not _in_opening and not use_debug_layout:
 			WallLights.place(_floors[depth], depth, _site_seed)  # spare torches, old lanterns
 	_map = _floors[depth]
+	if _missing_quest_site(_map, depth):
+		_note_site_trouble(depth, "the floor was built without a site the story needs: %s" % _quest_site_report())
 	_place_bodies()  # lost in a wipe, waiting to be found (#180)
 	_build_level()
 	_minimap.setup(_map)
@@ -2512,13 +2565,13 @@ func _camp_loop(reward := 0, note := "") -> void:
 	if start_depth > 1:
 		for depth in range(1, start_depth):
 			_expedition.visit_floor(depth)  # the scouts led them through
-		_show_message("Day %d. Expedition %d: the scouts' route, straight to floor %d." % [_camp_state.day, _expedition.number, start_depth])
+		_show_message("Expedition %d: the scouts' route, straight to floor %d." % [_expedition.number, start_depth])
 		for hero: Companion in _party_state.members:
 			if hero.is_with_party():
 				hero.xp = maxi(hero.xp, Progression.route_xp(start_depth))
 		_offer_level_ups.call_deferred()
 	else:
-		_show_message("Day %d. Expedition %d: back into the mine." % [_camp_state.day, _expedition.number])
+		_show_message("Expedition %d: back into the mine." % _expedition.number)
 	_light_torch_if_dark()
 
 

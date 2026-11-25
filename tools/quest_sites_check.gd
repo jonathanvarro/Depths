@@ -87,6 +87,14 @@ func _initialize() -> void:
 	main._floors.clear()
 	main._go_to_floor(1, main.Arrival.FROM_ABOVE)
 	check("F3 reports the survey site as whole", main._quest_site_report().contains("left_behind OK"), main._quest_site_report())
+	# A floor that lost only its note of the site (owner's save, 2026-11-24)
+	# gets the note back from where the events lie, unchanged.
+	var kept_site: Rect2i = main._map.marks["sites"]["left_behind"]
+	main._map.packages.clear()
+	main._map.marks["sites"] = {}
+	main._map.marks.erase("quests")
+	check("a floor that lost its site record isn't counted missing", not main._missing_quest_site(main._map, 1))
+	check("...its record comes back from the events, the same", main._map.marks["sites"].get("left_behind") == kept_site and main._map.marks["quests"].get("left_behind") == kept_site, [main._map.marks["sites"], kept_site])
 	var broken = main._map
 	for c in broken.events.keys():
 		if broken.events[c] in left_behind.events:

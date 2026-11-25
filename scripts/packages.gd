@@ -92,11 +92,14 @@ static func place(layout: PackedStringArray, packages: Array, seed_value: int, a
 				rows[y] = rows[y] + extra
 			spots = _spots(rows, package)
 		# Try spots in random order; keep the first whose way in connects.
+		var tried := spots.size()
+		var near_avoid := 0
 		var placed := false
 		while not spots.is_empty() and not placed:
 			var at: Vector2i = spots.pop_at(rng.randi_range(0, spots.size() - 1))
 			var area := Rect2i(at, Vector2i(package.rows[0].length(), package.rows.size())).grow(1)
 			if avoid.any(func(c): return area.has_point(c)):
+				near_avoid += 1
 				continue  # not right against the queen's hall
 			var trial := rows.duplicate()
 			var found := {"events": {}, "fights": {}, "lairs": {}}
@@ -109,7 +112,7 @@ static func place(layout: PackedStringArray, packages: Array, seed_value: int, a
 				placed = true
 		if not placed:
 			out["failed"].append(package.id)
-			push_warning("Quest package %s didn't fit this floor" % package.id)
+			push_warning("Quest package %s didn't fit this floor (%d spots, %d by the hall, avoid %d, join %d, floor %dx%d)" % [package.id, tried, near_avoid, avoid.size(), join.size(), rows.size(), rows[0].length()])
 			continue
 		out["placed"].append(package.id)
 	out["layout"] = PackedStringArray(rows)

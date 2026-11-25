@@ -706,9 +706,14 @@ func _rumour() -> String:
 	return "Soldiers swap stories of a Goblin King and his fortress, four floors down, behind a barred gate."
 
 
-## Top-right: the day and the purse.
+## "a night", "3 nights": recovery counted in rests, not dates.
+func _nights(count: int) -> String:
+	return "a night" if count <= 1 else "%d nights" % count
+
+
+## Top-right: the purse.
 func _status() -> String:
-	return "Day %d · %d" % [_camp.day, _party.supplies.gold]
+	return "%d gold" % _party.supplies.gold  # no day count (owner, 2026-11-24)
 
 
 ## `room` false: the pack has no space for it (#133).
@@ -807,7 +812,7 @@ func _nurse() -> void:
 		_body.add_child(lift)
 	for hero: Companion in _party.living_members():
 		if _camp.is_recovering(hero):
-			_text("%s is resting here until day %d." % [hero.display_name, _camp.ready_on(hero)])
+			_text("%s is resting here: %s." % [hero.display_name, _nights(_camp.ready_on(hero) - _camp.day)])
 		elif hero.injuries.is_empty():
 			_text("%s has no lasting injuries." % hero.display_name, MUTED)
 		else:
@@ -817,15 +822,17 @@ func _nurse() -> void:
 			# Who's left to go down meanwhile (#88).
 			var others: int = _camp.available(_party).filter(func(h): return h != hero).size()
 			if others == 0:
-				_text("Treated, %s is out until day %d - and no one else is fit, so nobody goes down until then." % [hero.display_name, _camp.day + days], AMBER)
+				_text("Treated, %s is out for %s - and no one else is fit, so nobody goes down until then." % [hero.display_name, _nights(days)], AMBER)
 			else:
-				_text("%d days of recovery · back on day %d. The others can travel." % [days, _camp.day + days], MUTED)
-			var treat := _button("Treat %s (back on day %d)" % [hero.display_name, _camp.day + days])
+				_text("%s of recovery. The others can travel." % _nights(days).capitalize(), MUTED)
+			var treat := _button("Treat %s (%s)" % [hero.display_name, _nights(days)])
 			treat.pressed.connect(func():
 				_camp.treat(hero)
 				_refresh_activity())
 			_body.add_child(treat)
 
+
+const REST_AGAIN := "You've rested. Head down into the mine before you rest again."
 
 ## Physical cot and chest (#271); header Back leaves the tent.
 func _tent() -> void:
@@ -834,7 +841,10 @@ func _tent() -> void:
 	_tent_view = TentInterior.new()
 	_tent_view.custom_minimum_size = Vector2(0,maxf(120,_scroll.size.y-4))
 	_tent_view.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_tent_view.set_rest_allowed(_camp.can_rest(_party), REST_AGAIN)
 	_tent_view.rest_requested.connect(func():
+		if not _camp.can_rest(_party):
+			return
 		_camp.rest(_party)
 		_show_rest()
 		_refresh_activity()
@@ -852,8 +862,7 @@ func _show_rest() -> void:
 	veil.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	veil.mouse_filter = Control.MOUSE_FILTER_STOP  # a moment's pause while the night passes
 	var words := Label.new()
-	words.text = "You rest through the night.
-Day %d. Everyone wakes rested." % _camp.day
+	words.text = "You rest through the night.\nEveryone wakes rested."
 	words.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	words.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	words.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -867,7 +876,7 @@ Day %d. Everyone wakes rested." % _camp.day
 	var tween := veil.create_tween()
 	tween.tween_property(veil, "color:a", 0.9, 0.45)
 	tween.parallel().tween_property(words, "modulate:a", 1.0, 0.45)
-	tween.tween_interval(1.1)
+	tween.tween_interval(1.9)
 	tween.tween_property(veil, "color:a", 0.0, 0.6)
 	tween.parallel().tween_property(words, "modulate:a", 0.0, 0.5)
 	tween.tween_callback(veil.queue_free)
@@ -1217,7 +1226,7 @@ func _cave_path() -> void:
 	say.call("Going: %s" % ", ".join(PackedStringArray(going.map(func(h): return h.display_name))), AMBER)
 	var staying: Array = _party.living_members().filter(func(h): return h not in going)
 	if not staying.is_empty():
-		say.call("With the nurse: %s" % ", ".join(PackedStringArray(staying.map(func(h): return "%s (day %d)" % [h.display_name, _camp.ready_on(h)]))), MUTED)
+		say.call("With the nurse: %s" % ", ".join(PackedStringArray(staying.map(func(h): return "%s (%s)" % [h.display_name, _nights(_camp.ready_on(h) - _camp.day)]))), MUTED)
 	# The quartermaster's issue (owner, 2026-11-22): topped up free on every
 	# return; a better one is paid for once, in gold and what the mine gives.
 	say.call("Quartermaster's issue, every trip: %s." % _camp.issue_text(), MUTED)
