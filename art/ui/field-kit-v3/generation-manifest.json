@@ -32,8 +32,8 @@
     {
       "path": "body.svg",
       "source": "Original code-authored vector",
-      "post_processing": "No AI bitmap generation; generic neutral etched diagram without likeness or identity.",
-      "sha256": "474361bbefa020f8d28ef6869867f1340f1b9ed238a9c651a5a2235c3cd1a1d6"
+      "post_processing": "No AI bitmap generation; original neutral vector torso diagram, softened curves and fading ink, refined after the owner-requested adversarial review.",
+      "sha256": "8d5b1d37cbeef84a4040692fbb0582400ec898bafc8f436d98a5ab2ba3300f93"
     }
   ]
 }

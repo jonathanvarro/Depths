@@ -47,6 +47,11 @@ func escape() -> void:
 		root.push_input(event,true);await process_frame
 	await settle()
 
+func action(kind: String) -> Button:
+	for child in main._pack._detail_actions.get_children():
+		if child.get_meta("kit_focus","")=="action:"+kind:return child
+	return null
+
 func run() -> void:
 	main=load("res://scenes/main.tscn").instantiate()
 	main.play_opening=false;main.floor_seed=11;main.wandering=false
@@ -80,16 +85,45 @@ func run() -> void:
 				if tile.get_child_count()>0:
 					var icon: Control=tile.get_child(0)
 					check("item centred in pocket "+tag,icon.get_global_rect().get_center().distance_to(tile.get_global_rect().get_center())<1)
+				for badge in tile.get_children():
+					if badge.has_meta("count_badge"):check("stack quantity readable "+tag,badge.get_theme_font_size("font_size")*pixels.y>=11.5)
 			await snap("pack-"+tag)
 			if pack._compact:pack._toggle_compact();await settle()
-			for control in [pack._equip_tab,pack._status_tab]:
+			for control in (pack._compact_buttons.values() if pack._compact else [pack._equip_tab,pack._status_tab]):
 				check("tab touch target "+tag,control.size.x*pixels.x>=43.5 and control.size.y*pixels.y>=43.5)
 			for slot: Button in pack._slot_buttons.values():
 				check("square equipment target "+tag,absf(slot.size.x-slot.size.y)<1 and slot.size.x*pixels.x>=43.5)
 				check("equipment drawing stays within silhouette pane "+tag,pack._equipment.get_global_rect().grow(1).encloses(slot.get_global_rect()))
 				check("equipped icon centred "+tag,slot.get_child(0).get_global_rect().get_center().distance_to(slot.get_global_rect().get_center())<1)
+				for other: Button in pack._slot_buttons.values():
+					if other!=slot:check("equipment targets remain separate "+tag,not slot.get_global_rect().intersects(other.get_global_rect()))
 			await snap("equipment-"+tag)
 			if pack._compact:pack._toggle_compact();await settle()
+			if pack._compact:
+				for page: String in ["equipment","status","pack"]:
+					await press(pack._compact_buttons[page],true)
+					check("stable compact navigation "+page+" "+tag,pack._compact_buttons[page].button_pressed and pack._bag_panel.visible==(page=="pack") and pack._status_scroll.visible==(page=="status"))
+			var spear: Equipment=party.supplies.gear.filter(func(gear):return gear.display_name.contains("spear"))[0]
+			pack.inspect_item(spear,true);await settle()
+			check("card names selected recipient "+tag,pack._detail_recipient.text=="For "+pack._selected_hero.display_name)
+			check("inspection stays below header "+tag,pack._details.global_position.y>=pack._header.get_global_rect().end.y)
+			for control: Button in pack._details.find_children("*","Button",true,false):
+				check("inspection action touch target "+tag,control.size.x*pixels.x>=43.5 and control.size.y*pixels.y>=43.5)
+				check("inspection action inside card "+tag,pack._details.get_global_rect().grow(1).encloses(control.get_global_rect()))
+			for label: Label in pack._details.find_children("*","Label",true,false):
+				if label.visible:check("inspection readable type "+tag,label.get_theme_font_size("font_size")*pixels.y>=12.5)
+			await snap("inspect-"+tag)
+			var time_before: int=party.time_elapsed
+			await press(action("drop"),true)
+			check("first Drop only asks "+tag,pack._drop_armed and spear in party.supplies.gear and party.time_elapsed==time_before)
+			check("confirmation has a clear permanent label "+tag,action("drop").text=="Drop permanently")
+			for control: Button in pack._details.find_children("*","Button",true,false):check("confirmation touch target "+tag,control.size.x*pixels.x>=43.5 and control.size.y*pixels.y>=43.5)
+			await snap("confirm-drop-"+tag)
+			await escape()
+			check("Escape cancels Drop without losing item "+tag,not pack._drop_armed and pack._selection==spear and spear in party.supplies.gear)
+			await press(action("drop"),true);await press(action("cancel_drop"),true)
+			check("Keep item cancels Drop "+tag,not pack._drop_armed and spear in party.supplies.gear)
+			pack.clear_inspection()
 			pack.clear_inspection();await escape()
 			check("Escape opens menu over pack "+tag,main._pause_menu.visible and paused and pack.visible)
 			check("pause panel clears phone margins "+tag,main._pause_menu.content.get_global_rect().grow(1).encloses(main._pause_menu._panel.get_global_rect()))
@@ -97,6 +131,15 @@ func run() -> void:
 				check("pause action touch target "+tag,control.size.x*pixels.x>=43.5 and control.size.y*pixels.y>=43.5)
 			if shape.x==667:await snap("pause-"+tag)
 			await escape()
+	# More than twelve carried stacks must retain usable page controls and
+	var knife: Equipment=party.supplies.gear[0]
+	pack.inspect_item(knife,true);await settle();await press(action("drop"),true)
+	var stale_confirm: Callable=action("drop").pressed.get_connections()[0].callable
+	pack.select_hero(party.members[1]);stale_confirm.call();await settle()
+	check("changing hero invalidates Drop confirmation",knife in party.supplies.gear and not pack._drop_armed)
+	pack.inspect_item(knife,true);await settle();await press(action("drop"),true);await press(action("drop"),true)
+	check("explicit confirmation drops the selected item",knife not in party.supplies.gear and not pack._details.visible)
+	pack.select_hero(party.members[0]);await settle()
 	# More than twelve carried stacks must retain usable page controls and
 	# pockets, including an over-capacity inventory the player needs to sort.
 	party.supplies.add(load("res://data/items/torch.tres"),30);await settle()

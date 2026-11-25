@@ -21,6 +21,9 @@ func _init() -> void:
 	_continue=_action("Continue",finish)
 	_options=_action("Options",func():options_requested.emit())
 	_save=_action("Save & exit",func():save_requested.emit())
+	for button in [_options,_save,_close]:
+		for state in ["normal","pressed","hover","disabled"]:
+			button.add_theme_stylebox_override(state,Kit.plate(Color("191d17"),Kit.AMBER if state in ["hover","pressed"] else Kit.EDGE,6))
 
 func _action(title: String, callback: Callable) -> Button:
 	var button:=Button.new()

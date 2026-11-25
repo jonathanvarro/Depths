@@ -161,7 +161,14 @@ func _do_pack_step() -> void:
 		check("...and says dropped things are gone", main._hint_label.text.contains("left behind for good"), main._hint_label.text)
 	match key:
 		"equip": _press_in_row(main._opening_weapon.display_name, "Equip")
-		"drop": _press_in_row(main._starting_weapon.display_name, "Drop")
+		"drop":
+			_press_in_row(main._starting_weapon.display_name, "Drop")
+			for i in 4:await process_frame
+			check("Drop asks before permanent disposal",main._starting_weapon in main._party_state.supplies.gear and main._pack._drop_armed)
+			var confirm=main._guided_drop_target()
+			check("guided spotlight follows confirmation",confirm!=null and confirm.text=="Drop permanently")
+			check("guided confirmation also permits Keep item",main._spotlight._hole.has_point(confirm.get_parent().get_child(-1).get_global_rect().get_center()))
+			_press(main._pack._detail_actions, "Drop permanently")
 		"light", "relight": _press_in_row(main.TORCH.display_name, "Light")  # the Pack names it (#191)
 		"draught": _press_in_row("Restorative draught", "Drink")  # the Pack names it (#191)
 	await process_frame

@@ -13,6 +13,12 @@ Format:
 
 ---
 
+## 2026-11-24 – ChatGPT (Field kit adversarial-review refinements, #290 / PR #291)
+- Did: Implemented all six requested review recommendations: phone inspection text and 44-pixel actions, readable stack counts, separate permanent Drop confirmation with Keep item/Escape cancellation, explicit recipient, stronger selected portraits/tabs, a smaller faded torso with grouped square equipment targets, stable compact Pack/Equipment/Status tabs, and a labelled Menu with quieter secondary controls. Multi-page controls share the compact tab row to retain full pack/44-pixel pockets. PNG paintings unchanged; only the original vector body was refined.
+- Validation: Actual Main/stretch/native matrix expanded to 824 checks; inventory gestures 553, damage briefs 176, and guided tutorial confirmation are checked on private desktops. Updated older logical-unit assertions to actual pixels. Gallery: `build/local-field-kit-v3/inspector.html`; input/provenance handoff: `docs/field-kit-silhouette-and-menu.md`.
+- Next: Review PR #291; physical iPhone and owner visual acceptance remain. No automatic merge.
+- Watch out: Drop's first click never disposes. Confirmation is selection/recipient-bound. `spotlight_action_group` lets the forced tutorial step expose both Confirm and Keep item; Escape cancels its confirmation while the existing tutorial continues to require eventual knife disposal. Phone pinned cards may cover their source, while desktop hover keeps it reachable.
+
 ## 2026-11-24 – ChatGPT (Field kit layout and pause menu, #290)
 - Did: Replaced the cropped Pack painting with a complete twelve-pocket bag, added a neutral equipment body diagram with centred square targets, inset the portraits, moved the journal to a physical book spine at the right, centred gear/X, and moved Pack Save & exit into a real Esc/gear pause menu (Continue / Options / Save & exit). Small phones share the main pane with Gear/Pack; screen-transform sizing keeps 44-pixel controls. Trade and all inventory/save rules stay with existing controllers. Source PNGs and exact built-in imagegen prompts are retained in `art/ui/field-kit-v3`.
 - Validation: Native Mobile 510 checks; existing inventory gestures 553 and briefs 176; drag policies 11; full phone tutorial completes with zero failures. Tests use private desktops, isolated APPDATA and a private save. Fixed the new canvas's medicine drop forwarding and Options/Escape input ordering. Headless import clean. Gallery: `build/local-field-kit-v3/inspector.html`; handoff: `docs/field-kit-silhouette-and-menu.md`.

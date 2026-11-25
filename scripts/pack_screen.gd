@@ -22,7 +22,6 @@ const LANTERN_ICON := preload("res://art/items/refined-v2/lantern.png")
 const UNLIT_LANTERN_ICON := preload("res://art/items/refined-v2/lantern-unlit.png")
 const TORCH_ICON := preload("res://art/items/refined-v2/torch.png")
 const COIN_ICON := preload("res://art/symbols/crest-v1/currency-coin.svg")
-const SETTINGS_ICON := preload("res://art/ui/controls-v1/settings.svg")
 const CLOSE_ICON := preload("res://art/ui/controls-v1/close.svg")
 const JOURNAL_SPINE := preload("res://art/ui/field-kit-v3/journal-spine.png")
 const BODY_SILHOUETTE := preload("res://art/ui/field-kit-v3/body.svg")
@@ -36,6 +35,7 @@ var _selected_hero: Companion
 var _selection: Resource
 var _from_slot := ""
 var _pinned := false
+var _drop_armed := false
 var _serial := 0
 var _page := 0
 var _status := false
@@ -58,6 +58,8 @@ var _pages: HBoxContainer
 var _capacity: Label
 var _details: PanelContainer
 var _detail_title: Label
+var _detail_recipient: Label
+var _detail_close: Button
 var _detail_stats: Label
 var _detail_comparison: Label
 var _detail_text: VBoxContainer
@@ -75,6 +77,8 @@ var _bag_footer: HBoxContainer
 var _journal: Button
 var _journal_caption: Label
 var _compact_switch: Button
+var _compact_tabs: HBoxContainer
+var _compact_buttons: Dictionary = {}
 var _compact := false
 var _compact_equipment := false
 var _menu: Button
@@ -117,7 +121,8 @@ func _request_refresh() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if is_visible_in_tree() and event.is_action_pressed("ui_cancel"):
 		if _selection!=null:
-			clear_inspection()
+			if _drop_armed:_cancel_drop()
+			else:clear_inspection()
 		else:
 			open_menu.emit()
 		get_viewport().set_input_as_handled()
@@ -181,8 +186,11 @@ func set_status(show_status: bool) -> void:
 	_status_scroll.visible = _status
 	_equip_tab.button_pressed = not _status
 	_status_tab.button_pressed = _status
+	_navigation_style(_equip_tab,not _status)
+	_navigation_style(_status_tab,_status)
 
 func clear_inspection() -> void:
+	_drop_armed = false
 	_selection = null
 	_from_slot = ""
 	_pinned = false
@@ -195,6 +203,7 @@ func clear_inspection() -> void:
 func inspect_item(item: Resource, pin := true, worn_slot := "", source: Control = null) -> void:
 	if item == null or (not pin and (_pinned or get_viewport().gui_is_dragging())):
 		return
+	_drop_armed = false
 	_selection = item
 	_from_slot = worn_slot
 	_pinned = pin
@@ -262,6 +271,7 @@ func _refresh_heroes() -> void:
 		var button:=_button("",Vector2(64,64))
 		button.toggle_mode=true
 		button.button_pressed=hero==_selected_hero
+		_navigation_style(button,hero==_selected_hero)
 		button.accessibility_name="Inspect "+hero.display_name
 		button.tooltip_text=hero.display_name
 		button.set_meta("kit_focus","hero:"+str(hero.get_instance_id()))
@@ -321,7 +331,7 @@ func _refresh_equipment() -> void:
 			_bind_inspection(button,item,slot)
 		else:
 			_add_icon(button,EMPTY_ICONS[slot],"common",Vector2(32,32),true)
-			button.get_child(0).modulate.a=0.45
+			button.get_child(0).modulate.a=0.65
 			button.disabled=true
 	_fit_equipment()
 	_highlight_slots()
@@ -329,8 +339,12 @@ func _refresh_equipment() -> void:
 func _fit_equipment() -> void:
 	if not is_instance_valid(_equipment_slots):return
 	var touch:=44/_pixel_scale()
-	var edge:=maxf(touch,minf(76,minf(_equipment.size.x*.25,_equipment.size.y*.28)))
-	var places:={"weapon":Vector2(.15,.52),"body":Vector2(.50,.34),"back":Vector2(.85,.26),"trinket":Vector2(.83,.74)}
+	var edge:=maxf(touch,minf(76,minf(_equipment.size.x*.22,_equipment.size.y*.23)))
+	var diagram:=Vector2(minf(_equipment.size.x*.94,_equipment.size.y*1.05),_equipment.size.y*.94)
+	var origin:=(_equipment.size-diagram)/2
+	_roll_image.position=origin+Vector2(diagram.x*.18,0)
+	_roll_image.size=Vector2(diagram.x*.64,diagram.y)
+	var places:={"weapon":Vector2(.14,.57),"body":Vector2(.5,.46),"back":Vector2(.79,.27),"trinket":Vector2(.79,.79)}
 	for slot: String in _slot_boxes:
 		var box: VBoxContainer=_slot_boxes[slot]
 		var button: Button=_slot_buttons[slot]
@@ -340,7 +354,7 @@ func _fit_equipment() -> void:
 		button.custom_minimum_size=Vector2.ONE*edge
 		button.size_flags_vertical=Control.SIZE_SHRINK_BEGIN
 		box.size=Vector2(edge,edge+(caption.get_combined_minimum_size().y+4 if caption.visible else 0))
-		var centre: Vector2=_equipment.size*places[slot]
+		var centre: Vector2=origin+diagram*places[slot]
 		box.position=Vector2(clampf(centre.x-edge/2,2,maxf(2,_equipment.size.x-edge-2)),clampf(centre.y-edge/2,2,maxf(2,_equipment.size.y-box.size.y-2)))
 
 func _highlight_slots() -> void:
@@ -445,6 +459,8 @@ func _refresh_bag() -> void:
 			_bind_inspection(button,item)
 			if entry.count!=1:
 				var badge:=_label("×%d" % entry.count if entry.count>0 else "≈",15,FieldKit.AMBER)
+				badge.set_meta("count_badge",true)
+				badge.add_theme_stylebox_override("normal",FieldKit.plate(Color("171a15"),Color.TRANSPARENT,1))
 				badge.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
 				badge.offset_left=-35;badge.offset_top=-21;badge.offset_right=-3;badge.offset_bottom=-1
 				badge.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
@@ -647,6 +663,15 @@ func _refresh_details() -> void:
 	var item:=_selection
 	var tier:=Quality.tier_of(item,_selected_hero if _from_slot!="" else null)
 	_detail_title.text=("" if tier=="common" else tier.capitalize()+" · ")+item.display_name
+	_detail_recipient.text="For "+_selected_hero.display_name if _selected_hero else "Shared pack"
+	if item is SupplyItem and item.effect in [SupplyItem.Effect.FEED_PARTY,SupplyItem.Effect.REFILL_LANTERN,SupplyItem.Effect.LIGHT_TORCH,SupplyItem.Effect.TOOL,SupplyItem.Effect.TREASURE]:_detail_recipient.text="Shared supplies"
+	if _drop_armed:
+		_detail_recipient.text="Left behind for good"
+		_detail_text.add_child(_wrapped("This item cannot be recovered after you drop it.",17))
+		_action("Drop permanently","drop")
+		_action("Keep item","cancel_drop")
+		_position_details.call_deferred()
+		return
 	if item is Equipment and _selected_hero:
 		var seen:=GearModel.known(item)
 		match item.slot:
@@ -755,6 +780,13 @@ func _unequip_reason() -> String:
 
 func _action(title: String,kind: String,reason := "") -> void:
 	var button:=_button(title,Vector2(76,44))
+	if kind=="drop" and not _drop_armed:
+		var space:=Control.new();space.size_flags_horizontal=Control.SIZE_EXPAND_FILL;_detail_actions.add_child(space)
+	if kind in ["drop","cancel_drop"]:
+		_navigation_style(button,false)
+		if _drop_armed and kind=="drop":
+			button.add_theme_color_override("font_color",Color("e9ac93"))
+			button.set_meta("spotlight_action_group",true)
 	button.set_meta("kit_focus","action:"+kind)
 	button.accessibility_name=title
 	button.disabled=reason!=""
@@ -763,9 +795,27 @@ func _action(title: String,kind: String,reason := "") -> void:
 	var hero:=_selected_hero
 	button.pressed.connect(func():
 		if serial==_serial and hero==_selected_hero and reason=="":
-			_perform(kind))
+			if kind=="drop" and not _drop_armed:
+				_drop_armed=true;_pinned=true;_serial+=1;_refresh_details()
+			elif kind=="cancel_drop":_cancel_drop()
+			else:_perform(kind))
 	_detail_actions.add_child(button)
 	if reason!="" and reason!="Replace this weapon from the pack":_detail_text.add_child(_wrapped(reason,17,FieldKit.MUTED))
+
+func _cancel_drop() -> void:
+	_drop_armed=false
+	_serial+=1
+	_refresh_details()
+
+func _navigation_style(button: Button,selected: bool) -> void:
+	if button==null:return
+	for state in ["normal","pressed","hover_pressed","hover","disabled"]:
+		var active: bool=selected if state in ["normal","disabled"] else state!="hover" or selected
+		var box:=FieldKit.plate(Color("343021") if active else Color("191d17"),FieldKit.AMBER if active else FieldKit.EDGE,6)
+		box.border_width_bottom=3 if active else 1
+		button.add_theme_stylebox_override(state,box)
+	button.add_theme_color_override("font_color",FieldKit.TEXT if selected else FieldKit.MUTED)
+	button.add_theme_color_override("font_pressed_color",FieldKit.TEXT)
 
 ## Identify with a touchstone, when one is carried (owner, 2026-11-03).
 func _identify_action(item: Resource) -> void:
@@ -857,6 +907,7 @@ func _button(title: String,minimum := Vector2(44,44)) -> Button:
 func _label(text: String,font_size:=18,color:=FieldKit.TEXT) -> Label:
 	var label:=Label.new()
 	label.text=text
+	label.set_meta("kit_font",font_size)
 	label.add_theme_font_size_override("font_size",font_size)
 	label.add_theme_color_override("font_color",color)
 	label.mouse_filter=Control.MOUSE_FILTER_IGNORE
@@ -914,18 +965,30 @@ func _leave_preview() -> void:
 
 func _position_details() -> void:
 	if _selection==null or not is_visible_in_tree():return
+	var pixels:=_pixel_scale()
+	for label: Label in _details.find_children("*","Label",true,false):
+		var minimum:=17 if label==_detail_title else (16 if label==_detail_stats else (13 if label==_detail_comparison else 14))
+		label.add_theme_font_size_override("font_size",roundi(maxf(float(label.get_meta("kit_font",17)),minimum/pixels)))
+	for button: Button in _details.find_children("*","Button",true,false):
+		button.custom_minimum_size=Vector2(44/pixels,44/pixels)
+		button.add_theme_font_size_override("font_size",roundi(maxf(18,14/pixels)))
+	_detail_close.add_theme_constant_override("icon_max_width",roundi(22/pixels))
 	var serial:=_serial
 	var safe:=content.get_global_rect().grow(-8)
+	var phone:=_pinned and get_viewport_rect().size.x*pixels<1000
+	var bottom:=safe.end.y
+	safe.position.y=_hero_summary.get_global_rect().end.y+6
+	safe.size.y=bottom-safe.position.y
 	_anchor_rect=_item_rect(_selection,_from_slot)
-	var width:=minf(380,safe.size.x)
-	var max_height:=minf(360,safe.size.y)
+	var width:=minf(380/pixels,safe.size.x)
+	var max_height:=minf(360/pixels,safe.size.y)
 	var below:=safe.end.y-_anchor_rect.end.y-8
 	var above:=_anchor_rect.position.y-safe.position.y-8
 	var left:=_anchor_rect.position.x-safe.position.x-8
 	var right:=safe.end.x-_anchor_rect.end.x-8
 	# A hover card must leave its source reachable for clicking and dragging.
 	# In short landscape windows, use the room beside the pocket instead.
-	var beside:=maxf(above,below)<max_height and maxf(left,right)>=200
+	var beside:=not phone and maxf(above,below)<max_height and maxf(left,right)>=200/pixels
 	if beside:width=minf(width,maxf(left,right))
 	_details.position=Vector2(-10000,-10000)
 	_details.size=Vector2(width,max_height)
@@ -942,7 +1005,8 @@ func _position_details() -> void:
 	var height:=minf(max_height,_detail_text.get_combined_minimum_size().y+fixed_height+spacing+16)
 	_details.size=Vector2(width,height)
 	var point:=Vector2(_anchor_rect.get_center().x-width*0.5,_anchor_rect.end.y+8)
-	if beside and below<height and above<height:
+	if phone:point=Vector2(safe.end.x-width,safe.position.y)
+	elif beside and below<height and above<height:
 		point=Vector2(_anchor_rect.position.x-width-8 if left>=right else _anchor_rect.end.x+8,_anchor_rect.get_center().y-height*0.5)
 	elif point.y+height>safe.end.y:
 		point.y=_anchor_rect.position.y-height-8
@@ -958,10 +1022,18 @@ func _fit_workspace() -> void:
 	_compact=width*_pixel_scale()<640
 	_hero_panel.visible=not _compact or _compact_equipment
 	_bag_panel.visible=not _compact or not _compact_equipment
-	_compact_switch.visible=_compact
-	_compact_switch.text="Pack" if _compact_equipment else "Gear"
-	_compact_switch.tooltip_text="Show backpack" if _compact_equipment else "Show equipment and status"
-	_compact_switch.custom_minimum_size=Vector2(touch,touch)
+	_compact_tabs.visible=_compact
+	_equip_tab.get_parent().visible=not _compact
+	var page_parent: Node=_compact_tabs if _compact else _bag_footer
+	if _pages.get_parent()!=page_parent:_pages.reparent(page_parent)
+	_pages.visible=not _compact or not _compact_equipment
+	for page: String in _compact_buttons:
+		var button: Button=_compact_buttons[page]
+		var active:=page==("pack" if not _compact_equipment else ("status" if _status else "equipment"))
+		button.button_pressed=active
+		button.custom_minimum_size.y=touch
+		button.add_theme_font_size_override("font_size",roundi(maxf(16,14/_pixel_scale())))
+		_navigation_style(button,active)
 	_title.visible=width>=380
 	_title.text="Kit" if width<700 else "Field kit"
 	_light_icon.visible=width>=380
@@ -972,25 +1044,37 @@ func _fit_workspace() -> void:
 	_title.add_theme_font_size_override("font_size",roundi(maxf(26,20/_pixel_scale())))
 	for label in [_capacity,_time_label,_lantern_label]:label.add_theme_font_size_override("font_size",roundi(maxf(16,12/_pixel_scale())))
 	_journal_caption.add_theme_font_size_override("font_size",roundi(maxf(12,11/_pixel_scale())))
-	_compact_switch.add_theme_font_size_override("font_size",roundi(maxf(12,12/_pixel_scale())))
 	for button in [_equip_tab,_status_tab]:
 		button.custom_minimum_size.y=touch
 		button.add_theme_font_size_override("font_size",roundi(maxf(16,14/_pixel_scale())))
 	for button in [_menu,_close]:
 		button.custom_minimum_size=Vector2.ONE*maxf(touch,34 if _compact else 44)
 		button.add_theme_constant_override("icon_max_width",roundi(maxf(22,22/_pixel_scale())))
+	_menu.custom_minimum_size.x=68/_pixel_scale()
+	_menu.add_theme_font_size_override("font_size",roundi(maxf(16,14/_pixel_scale())))
 	var edge:=maxf(touch,minf(64,(_workspace.size.y-(touch+12 if _compact else 0)-8)/maxi(1,_party.members.size())))
 	for button in _hero_row.get_children():
 		button.custom_minimum_size=Vector2.ONE*edge
 		var portrait: Control=button.get_child(0)
 		var inset:=minf(10,edge*.16)
 		portrait.offset_left=inset;portrait.offset_right=-inset;portrait.offset_top=inset;portrait.offset_bottom=-inset
+	for label: Label in _status_content.find_children("*","Label",true,false):
+		label.add_theme_font_size_override("font_size",roundi(maxf(float(label.get_meta("kit_font",17)),13/_pixel_scale())))
+	for button: Button in _status_content.find_children("*","Button",true,false):
+		button.custom_minimum_size.y=touch
+		button.add_theme_font_size_override("font_size",roundi(maxf(18,14/_pixel_scale())))
 	_fit_equipment.call_deferred()
 	_fit_bag_panel.call_deferred()
 	if _selection!=null:_position_details.call_deferred()
 
 func _toggle_compact() -> void:
 	_compact_equipment=not _compact_equipment
+	clear_inspection()
+	_fit_workspace()
+
+func _compact_page(page: String) -> void:
+	_compact_equipment=page!="pack"
+	set_status(page=="status")
 	clear_inspection()
 	_fit_workspace()
 
@@ -1003,10 +1087,18 @@ func _fit_bag_panel() -> void:
 			control.add_theme_font_size_override("font_size",roundi(maxf(18,14/_pixel_scale())))
 		elif control is Label:control.add_theme_font_size_override("font_size",roundi(maxf(16,12/_pixel_scale())))
 	var book_width:=maxf(maxf(touch,_journal_caption.get_combined_minimum_size().x),minf(60,_bag_panel.size.x*.10))
-	var footer:=maxf(touch,32) if _page_count()>1 else maxf(20,_capacity.get_combined_minimum_size().y)
+	var footer:=maxf(touch,32) if _page_count()>1 and not _compact else maxf(20,_capacity.get_combined_minimum_size().y)
 	var extent:=Vector2(maxf(0,_bag_panel.size.x-book_width-4),maxf(0,_bag_panel.size.y-footer))
 	_bag.position=Vector2.ZERO;_bag.size=extent;_bag._fit()
-	for button in _bag.slots:button.custom_minimum_size=Vector2.ZERO
+	for button in _bag.slots:
+		button.custom_minimum_size=Vector2.ZERO
+		for badge in button.get_children():
+			if badge.has_meta("count_badge"):
+				var font_size:=roundi(maxf(15,12/_pixel_scale()))
+				badge.add_theme_font_size_override("font_size",font_size)
+				var extent_text: Vector2=badge.get_theme_font("font").get_string_size(badge.text,HORIZONTAL_ALIGNMENT_LEFT,-1,font_size)
+				badge.offset_left=-extent_text.x-8/_pixel_scale();badge.offset_right=-3/_pixel_scale()
+				badge.offset_top=-extent_text.y-3/_pixel_scale();badge.offset_bottom=-2/_pixel_scale()
 	_bag_footer.position=Vector2(0,extent.y);_bag_footer.size=Vector2(extent.x,footer)
 	_journal.size=Vector2(book_width,minf(320,extent.y*.86))
 	_journal.position=Vector2(extent.x+4,_bag.art_rect.get_center().y-_journal.size.y/2)
@@ -1049,15 +1141,20 @@ func _build() -> void:
 	_lantern_bar=ProgressBar.new();_lantern_bar.show_percentage=false;_lantern_bar.custom_minimum_size=Vector2(98,8)
 	light.add_child(_lantern_bar)
 	_light_note=_label("");_light_note.visible=false;light.add_child(_light_note)
-	_menu=_header_icon(SETTINGS_ICON,"Game menu · Esc",func():open_menu.emit());_header.add_child(_menu)
+	_menu=_button("Menu");_menu.accessibility_name="Game menu · Esc"
+	_menu.pressed.connect(func():open_menu.emit());_header.add_child(_menu)
 	_close=_header_icon(CLOSE_ICON,"Close pack",func():closed.emit());_header.add_child(_close)
+	_navigation_style(_close,false)
 	_hero_summary=_wrapped("",17,FieldKit.MUTED);column.add_child(_hero_summary)
+	_compact_tabs=HBoxContainer.new();column.add_child(_compact_tabs)
+	for page: String in ["pack","equipment","status"]:
+		var button:=_button(page.capitalize());button.toggle_mode=true;button.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+		button.pressed.connect(_compact_page.bind(page));_compact_tabs.add_child(button);_compact_buttons[page]=button
+	_compact_switch=_compact_buttons.equipment  # compatibility for review helpers
 	_workspace=HBoxContainer.new();_workspace.size_flags_vertical=Control.SIZE_EXPAND_FILL
 	_workspace.add_theme_constant_override("separation",12);column.add_child(_workspace)
 	var rail:=VBoxContainer.new();rail.add_theme_constant_override("separation",4);_workspace.add_child(rail)
 	_hero_row=VBoxContainer.new();_hero_row.add_theme_constant_override("separation",4);rail.add_child(_hero_row)
-	_compact_switch=_button("Gear");_compact_switch.add_theme_font_size_override("font_size",12)
-	_compact_switch.pressed.connect(_toggle_compact);rail.add_child(_compact_switch)
 	_hero_panel=VBoxContainer.new();_hero_panel.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 	_hero_panel.size_flags_stretch_ratio=.70
 	_hero_panel.add_theme_constant_override("separation",4);_workspace.add_child(_hero_panel)
@@ -1077,7 +1174,7 @@ func _build() -> void:
 	_equipment.clip_contents=true
 	_equipment.resized.connect(_fit_equipment)
 	_equipment.set_drag_forwarding(Callable(),_can_drop_on_selected,_drop_on_selected)
-	var roll:=_icon(BODY_SILHOUETTE,Vector2.ZERO);roll.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);_equipment.add_child(roll)
+	var roll:=_icon(BODY_SILHOUETTE,Vector2.ZERO);_equipment.add_child(roll)
 	_roll_image=roll
 	roll.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	roll.texture_filter=CanvasItem.TEXTURE_FILTER_LINEAR
@@ -1120,13 +1217,16 @@ func _build() -> void:
 	_capacity=_label("",17);_capacity.size_flags_horizontal=Control.SIZE_EXPAND_FILL;_capacity.size_flags_vertical=Control.SIZE_SHRINK_CENTER;lower.add_child(_capacity)
 	_pages=HBoxContainer.new();lower.add_child(_pages)
 	_details=PanelContainer.new();_details.visible=false
-	_details.add_theme_stylebox_override("panel",FieldKit.Brass.panel(8))
+	var brief_frame:=FieldKit.Brass.panel(8);brief_frame.modulate_color.a=1
+	_details.add_theme_stylebox_override("panel",brief_frame)
 	add_child(_details)
 	_details.mouse_exited.connect(_leave_preview)
 	_detail_column=VBoxContainer.new();_detail_column.add_theme_constant_override("separation",8);_details.add_child(_detail_column)
 	var detail_header:=HBoxContainer.new();_detail_column.add_child(detail_header)
 	_detail_title=_wrapped("",20);_detail_title.size_flags_vertical=Control.SIZE_SHRINK_CENTER;detail_header.add_child(_detail_title)
-	detail_header.add_child(_header_icon(CLOSE_ICON,"Close item details",clear_inspection))
+	_detail_close=_header_icon(CLOSE_ICON,"Close item details",clear_inspection);detail_header.add_child(_detail_close)
+	_navigation_style(_detail_close,false)
+	_detail_recipient=_label("",14);_detail_column.add_child(_detail_recipient)
 	_detail_stats=_wrapped("",20,FieldKit.AMBER);_detail_column.add_child(_detail_stats)
 	_detail_comparison=_wrapped("",14,FieldKit.MUTED);_detail_column.add_child(_detail_comparison)
 	_detail_scroll=ScrollContainer.new();_detail_scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;_detail_scroll.follow_focus=true

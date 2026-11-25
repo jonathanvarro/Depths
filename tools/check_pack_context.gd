@@ -167,9 +167,12 @@ func run() -> void:
 			await snap("equipment-"+tag)
 			pack.inspect_item(gear("simple_spear"));await settle()
 			check(pack.content.get_global_rect().encloses(pack._details.get_global_rect()),"Safe item card "+tag)
-			check(not pack._details.get_global_rect().intersects(pack._anchor_rect),"Card leaves source pocket reachable "+tag)
+			if shape.x*1.0>=1000:
+				check(not pack._details.get_global_rect().intersects(pack._anchor_rect),"Desktop card leaves source pocket reachable "+tag)
+			else:
+				check(pack._details.global_position.y>=pack._header.get_global_rect().end.y,"Phone inspection clears header "+tag)
 			check(pack._detail_actions.global_position.y>=pack._detail_scroll.get_global_rect().end.y,"Actions under brief "+tag)
-			check(action("equip").size.y>=44,"Reachable Equip "+tag)
+			check(action("equip").size.y*root.get_screen_transform().get_scale().y>=43.5,"Reachable Equip "+tag)
 			check(pack._detail_scroll.size.y<=pack._detail_text.get_combined_minimum_size().y+20,"Actions follow brief without a large empty gap "+tag)
 			await snap("inspect-"+tag)
 			pack.clear_inspection()

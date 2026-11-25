@@ -1,11 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="200" height="400" viewBox="0 0 200 400">
- <title>Equipment silhouette</title>
- <g fill="#807965" fill-opacity=".16" stroke="#b5a17a" stroke-opacity=".38" stroke-width="1.6" stroke-linejoin="round">
-  <path d="M84 58 81 35 87 18 101 13 116 20 120 36 116 58 108 69 109 82 135 93 148 120 158 175 171 223 168 243 157 245 147 230 135 187 124 145 125 194 133 234 128 280 124 330 128 375 116 385 105 380 101 325 98 277 94 238 87 277 82 328 79 380 68 385 57 378 61 330 63 279 64 234 72 194 71 145 59 188 47 231 35 245 25 240 26 221 40 173 48 121 60 94 84 83 87 69Z"/>
-  <path d="M76 105 99 113 122 105 M98 114 96 190 M73 197 121 197 M78 206 116 206 M81 217 113 217" fill="none"/>
- </g>
- <g fill="none" stroke="#b5a17a" stroke-opacity=".16" stroke-width="1">
-  <path d="M99 4V396 M13 198H184" stroke-dasharray="3 7"/>
-  <path d="m93 5 6-4 6 4M93 395l6 4 6-4"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="300" viewBox="0 0 200 300">
+ <title>Equipment body diagram</title>
+ <defs><linearGradient id="ink" x2="0" y2="1"><stop stop-color="#b5a17a" stop-opacity=".32"/><stop offset=".8" stop-color="#b5a17a" stop-opacity=".24"/><stop offset="1" stop-color="#b5a17a" stop-opacity="0"/></linearGradient></defs>
+ <g fill="#807965" fill-opacity=".10" stroke="url(#ink)" stroke-width="1.6" stroke-linejoin="round">
+  <path d="M85 59C80 47 78 30 85 20Q100 8 115 20C122 30 120 47 115 59L109 70 110 82 136 93Q145 99 149 118L160 166 176 217 171 236 159 238 149 222 136 184 125 145 125 189 132 220 127 257 130 298 109 298 100 249 91 298 70 298 73 257 68 220 75 189 75 145 64 184 51 222 41 238 29 236 24 217 40 166 51 118Q55 99 64 93L90 82 91 70Z"/>
+  <path d="M75 106Q100 117 125 106M100 116V189M75 196Q100 201 125 196M78 207Q100 211 122 207" fill="none"/>
  </g>
 </svg>
