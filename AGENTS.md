@@ -44,6 +44,10 @@ Templates > Download and Install; already installed on the owner's PC).
   launch ("More info" > "Run anyway").
 - **Check a build:** `Depths.exe --quit-after 400 -- --begin` skips the
   title and runs the dungeon briefly; errors print to the console.
+  `-- --save=<file> --continue` continues another save file (replay a COPY
+  of the owner's save; never their real one). Exported builds can't run
+  `--script` or `--path`. Quest-site trouble is logged to
+  `%APPDATA%/Godot/app_userdata/Depths/quest_sites.log`.
 - The preset leaves out `art/source/` and `tools/`. Everything else under
   `res://` is included (data/events is loaded by folder listing, so a
   "selected scenes only" export would drop it).
