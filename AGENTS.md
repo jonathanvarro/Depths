@@ -59,6 +59,18 @@ Templates > Download and Install; already installed on the owner's PC).
 
 ## Project structure
 
+- `docs/rat-bat-refinement.md` – #292's six adversarial-review fixes in
+  `art/enemies/creatures-refined-v2`: rounded CC0 rat/great-rat derivatives,
+  articulated 13-bone cave bat, fitted Old Whisker and separate fur/skin/wing
+  surfaces. Live enemy/ambient bindings use these; old libraries and the
+  starved-rat sprite remain. Grounded bat hurt/fall stay on the floor.
+  `scripts/creature_framing.gd` fits first-person field combat above controls
+  using pose envelopes, preserves taller neighbours and restores exploration;
+  tactical/stage cameras and game rules retain authority. Local editable masters,
+  before/after and native phone review: `build/local-creatures-refined-v2`.
+  1,132 skin/framing checks plus enemy-model, wildlife and smoothing checks pass;
+  physical iPhone performance and owner style review remain.
+
 - `docs/tutorial-campfire-and-bodies-3d.md` – #285's live tutorial hearth and
   two static anonymous clothed travellers. True floor-registered GLBs replace
   Main's default opening sprites; body_scenes also serves lost-body recovery.

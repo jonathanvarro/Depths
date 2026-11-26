@@ -3,8 +3,8 @@ extends Node3D
 const Settings := preload("res://scripts/settings.gd")
 const Supplies := preload("res://scripts/supplies.gd")
 const DungeonMap := preload("res://scripts/dungeon_map.gd")
-const BAT := preload("res://art/enemies/early-creatures-3d-v1/cave-bat.tscn")
-const MOUSE := preload("res://art/enemies/rat-3d-v1/scene.tscn")
+const BAT := preload("res://art/enemies/creatures-refined-v2/cave-bat.tscn")
+const MOUSE := preload("res://art/enemies/creatures-refined-v2/rat.tscn")
 const GAP := Vector2(12.0, 25.0)
 const KINDS := ["dust", "mouse", "dust", "bat"]
 
@@ -124,7 +124,11 @@ func make_animal(kind: String) -> void:
 	_actor.scale = Vector3.ONE * (.22 if bat else .26)
 	# The bat master includes a one-metre flight offset above its own origin.
 	_actor.position.y = -.22 if bat else .007
+	if _actor.has_method("set_opacity"):
+		_actor.set_opacity(0)
+		_actor.contact.visible=false
 	for mesh: MeshInstance3D in _actor.find_children("*", "MeshInstance3D", true, false):
+		if _actor.has_method("set_opacity"):continue
 		var material: StandardMaterial3D = mesh.material_override.duplicate()
 		material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA_DEPTH_PRE_PASS
 		if bat:
@@ -196,6 +200,9 @@ func animate() -> void:
 	var clip: Animation = _actor.player.get_animation(pose)
 	_actor.sample(pose, fmod(_elapsed * speed, clip.length))
 	var fade := smoothstep(0.0, .15, t) * (1.0 - smoothstep(.80, 1.0, t))
+	if _actor.has_method("set_opacity"):
+		_actor.set_opacity(fade*.88)
+		_actor.contact.visible=false
 	for material in _materials:
 		material.albedo_color.a = fade * .88
 

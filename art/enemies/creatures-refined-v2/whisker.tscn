@@ -1,0 +1,7 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="PackedScene" path="res://art/enemies/creatures-refined-v2/great-rat.tscn" id="1"]
+[ext_resource type="Script" path="res://art/enemies/creatures-refined-v2/leader.gd" id="2"]
+[ext_resource type="PackedScene" path="res://art/enemies/creatures-refined-v2/whisker-details.glb" id="3"]
+[node name="Actor" instance=ExtResource("1")]
+script=ExtResource("2")
+details=ExtResource("3")

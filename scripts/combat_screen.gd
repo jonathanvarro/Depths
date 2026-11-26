@@ -756,6 +756,8 @@ func _process(_delta: float) -> void:
 			# Back-row tags sit higher, so a row behind doesn't hide the row in front (#72).
 			# Neighbours alternate heights too, so tags don't collide.
 			var lift: float = float(foe.node.get_meta("visual_height",TAG_HEIGHT)) + 0.12 + (0.6 if not _state.foe_in_front(foe) else 0.0) + 0.25 * (foe.node.scale.y - 1.0) + 0.35 * (_state.foes.find(foe) % 2)
+			if foe.node.has_method("framing_bounds"):
+				lift=FoeView.height(foe.node)*foe.node.scale.y+.12+.12*(_state.foes.find(foe)%2)
 			var screen := camera.unproject_position(foe.node.global_position + Vector3(0, lift, 0))
 			# What it does next as an icon (#60, #105); the words on hover.
 			tag.icon = _intent_icon(foe.intent)

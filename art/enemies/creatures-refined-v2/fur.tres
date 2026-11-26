@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3]
+[ext_resource type="Shader" path="res://art/enemies/creatures-refined-v2/creature.gdshader" id="1"]
+[resource]
+shader = ExtResource("1")
+shader_parameter/surface_kind = 0
+shader_parameter/opacity = 1.0
+shader_parameter/ash = 0.0

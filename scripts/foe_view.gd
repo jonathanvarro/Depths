@@ -99,6 +99,9 @@ static func raise_model(node: Node) -> void:
 
 ## Its height in metres, for tags and framing.
 static func height(node: Node) -> float:
+	if node and node.has_method("framing_bounds"):
+		var bounds: AABB=node.framing_bounds()
+		return bounds.end.y
 	return float(node.get_meta("visual_height", 1.0)) if node else 1.0
 
 

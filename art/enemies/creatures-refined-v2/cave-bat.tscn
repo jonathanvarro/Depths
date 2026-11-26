@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="Script" path="res://art/enemies/creatures-refined-v2/actor.gd" id="1"]
+[ext_resource type="Material" path="res://art/enemies/creatures-refined-v2/fur.tres" id="2"]
+[ext_resource type="PackedScene" path="res://art/enemies/creatures-refined-v2/cave-bat.glb" id="3"]
+[node name="Actor" type="Node3D"]
+script=ExtResource("1")
+palette_material=ExtResource("2")
+pose_bounds = {"attack": AABB(-0.80460, 0.78320, -0.48550, 1.60920, 0.65600, 0.70780), "bite": AABB(-0.26950, 0.00800, -0.40370, 0.53900, 0.42670, 0.76910), "fall": AABB(-0.80300, 0.00800, -0.36500, 1.78300, 1.38730, 0.58860), "fall-ground": AABB(-0.26950, 0.00800, -0.40370, 1.24950, 0.53920, 0.62730), "hurt": AABB(-0.80300, 0.77040, -0.45120, 1.60600, 0.69520, 0.71160), "hurt-ground": AABB(-0.32190, 0.00800, -0.44520, 0.59140, 0.42700, 0.66910), "idle": AABB(-0.80620, 0.77040, -0.36500, 1.61240, 0.69520, 0.58860), "landed": AABB(-0.26950, 0.00800, -0.40370, 0.53900, 0.42700, 0.62730), "swoop": AABB(-0.80460, 0.00800, -0.46760, 1.60920, 1.29200, 0.83300)}
+metadata/visual_height=1.46560
+held_poses=PackedStringArray("landed")
+flying=true
+[node name="Model" parent="." instance=ExtResource("3")]

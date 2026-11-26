@@ -1,0 +1,14 @@
+{
+  "id": "whisker",
+  "source_model": "creatures-refined-v2/great-rat",
+  "attachments": [
+    {
+      "bone": "head",
+      "triangles": 144
+    }
+  ],
+  "added_triangles": 144,
+  "sha256": "a913e8f64df5e4331a5a9ea7da353f6aba4af052feb1f2db47d859cd05f0b3e7",
+  "source_sha256": "e1d61a7adfa6d9ba8c44791d2e93e440da3c6738a81884c32bb903528b5e1172",
+  "adaptation": "Retained uneven whiskers and scars fitted to the revised muzzle; base bristles replace the high mane; detached old ear patch removed."
+}
