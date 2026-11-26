@@ -44,6 +44,15 @@ Templates > Download and Install; already installed on the owner's PC).
   launch ("More info" > "Run anyway").
 - **Check a build:** `Depths.exe --quit-after 400 -- --begin` skips the
   title and runs the dungeon briefly; errors print to the console.
+  `-- --save=<file> --continue` continues another save file (replay a COPY
+  of the owner's save; never their real one). Exported builds can't run
+  `--script` or `--path`. Quest-site trouble is logged to
+  `%APPDATA%/Godot/app_userdata/Depths/quest_sites.log`.
+- `project.godot` sets `editor/export/convert_text_resources_to_binary=false`
+  (2026-11-24): Godot 4.7.2's export conversion emptied QuestPackage
+  `rows`/flags, so exported games had no quest sites while the editor and
+  every check were fine. Test exported data with a real export, e.g.
+  `-- --save=<copy> --continue`.
 - The preset leaves out `art/source/` and `tools/`. Everything else under
   `res://` is included (data/events is loaded by folder listing, so a
   "selected scenes only" export would drop it).
@@ -673,6 +682,10 @@ Templates > Download and Install; already installed on the owner's PC).
   Real common chests are `data/events/chest_common.tres` (ChatGPT's art); the
   old containers (pack, tool rack, workings, cache, stash, strongbox) keep their
   own loot families below a chest (`ChestTiers.CONTAINERS`, never gear).
+- Quest sites (2026-11-24): `marks["sites"]` (every package's Rect2i),
+  `DungeonMap.in_story_site()` keeps other placements out; `_missing_quest_site`
+  checks the package events too and `_restore` rebuilds a floor missing one;
+  F3 shows "Quest sites: ... OK/MISSING". `tools/quest_sites_check.gd`.
 - Wall lights (2026-11-23/24): `scripts/wall_lights.gd` (used by walking into
   their wall, `_on_party_bumped_wall`; spare torches lean at the wall's foot;
   decorative lanterns are broken, `Dressing.break_lantern`; old lanterns lit

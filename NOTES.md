@@ -13,6 +13,26 @@ Format:
 
 ---
 
+## 2026-11-24 – Claude (ROOT CAUSE: quest sites missing in the exported game)
+- Did: the owner's exe kept building floor 1 without the survey site. Cause: Godot's export converts text resources to binary, and the converted QuestPackage files came out with empty `rows`, `unless_flags` and `needs_flags` (all PackedStringArray; compared all 241 data files, only packages were affected). In the exe every story package had no room plan, so nothing could ever be placed ("1296 spots" = a 0x0 plan). The editor, headless checks and recordings read the .tres directly, so they all passed. Fix: `[editor] export/convert_text_resources_to_binary=false` in project.godot. Verified by exporting and replaying a copy of the owner's save in the exe (`-- --save=... --continue`): floor 1 now has the site. `tools/quest_sites_check.gd` checks the setting.
+- Next: owner playtest of quest 1 in the new exe.
+- Watch out: if binary conversion is ever turned back on, check a real export's data, not just the editor.
+
+## 2026-11-24 – Claude (quest site self-repair, rest once, no day count, chip tips)
+- Did: the owner's F3 showed "left_behind MISSING" on a floor that had the survey room carved, bodies and packs in place, but an empty `map.packages`/`marks["sites"]`; their session's log had 40 "didn't fit" warnings for that floor. Not reproduced (same seed and save place fine in the editor and in an exported probe), so: `_repair_site_records` rebuilds a floor's site record from where the package's events lie (run by `_missing_quest_site`); after all layouts fail, the story sites are placed alone on the first layout; every oddity goes to `user://quest_sites.log` (`_note_site_trouble`) with day, seed and floor, and Packages' warning now says how many spots it tried. `-- --save=<file>` points any build at another save and `-- --continue` continues it (to replay a player's save copy in the exported game). Camp: rest shows ~2.9 s, no day number; `_status` is gold only; nurse/roster/treat text counts nights; arrival messages drop the day. `CampState.rested`/`can_rest` (cleared by `leave_behind`): one rest between trips unless nobody is fit to go; the tent's cot greys out (`TentInterior.set_rest_allowed`). Every event result chip has a hover tip from its summary note (rest spots: what resting does).
+- Next: if quest_sites.log ever gets a line, read it with the save.
+- Watch out: tooltips don't show on touch; chips still show their icon and number there.
+
+## 2026-11-24 – Claude (quest-site safeguards)
+- Did: owner asked for firm guarantees that an active quest's site exists and isn't overwritten. (1) `_go_to_floor` tries up to `STORY_SITE_TRIES` (40) layouts, then `push_error`s. (2) `marks["sites"]` records every package's site (hidden ones too); `DungeonMap.story_sites()`/`in_story_site(cell, margin)` keep landmarks, wall lights and the named pack's start out of them (landmark rooms already excluded the lost cache and dripping pool). (3) `_missing_quest_site` also requires each active package's events to be on the map; `_restore` rebuilds the current floor from the way in when its site is missing. (4) F3 overlay: "Quest sites: left_behind OK at (x, y)" / MISSING / "none wanted here" (`_quest_site_report`). `tools/quest_sites_check.gd`: 220 floors over every story package and seed set, plus the missing/rebuild/restore paths.
+- Next: owner playtest with F3 to confirm the site in their own runs.
+- Watch out: nothing found broken in generation; the owner's saves all held the site.
+
+## 2026-11-24 – Claude (panic cooldown, rest screen, quest 1 recordings)
+- Did: `Party.PANIC_COOLDOWN` (8 steps, the bolt's run included; `panic_rest`, `bolts_now()`). Camp rest shows a night veil with the new day and a soft chime (`CampScreen._show_rest`, "prayer_mend" as a stand-in sound). Recorded quest 1 end to end (Godot `--write-movie`, scratch script) from a new game and from the owner's day-5 save; the site spawned and the quest completed both times. Video kept locally in `build/videos/`.
+- Next: quest-site safeguards (owner asked, same day).
+- Watch out: Vael's report is given from the campfire's Talk button, not the mine path.
+
 ## 2026-11-24 – Claude (guided equip/light, dismissed heroes wait by the fire)
 - Did: (1) the opening's equip, light and relight Pack steps are guided like the knife drop: `_guided_step()` gives [item, action] for the current hint (equip / drop / use), `_guided_pack_target()` feeds the Spotlight, and the Pack can't close until the step is done (`_guiding_pack`). `tools/opening_playthrough.gd` checks all four. (2) `CampState.dismiss` puts the hero (gear and all) back by the fire with `Companion.dismissed = true`; they can be invited back, and `_send_dismissed_away` drops them on `leave_behind` (heading down) and on `rest`. `hire` clears the flag on the party's copy (`add_member` duplicates). `tools/recruit_check.gd`.
 - Next: owner playtest.

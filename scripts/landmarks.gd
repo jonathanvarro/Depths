@@ -149,8 +149,7 @@ static func _spots(map, kind: String, distances: Dictionary, used: Dictionary) -
 					var stairs := room.any(func(c): return map.content_at(c) in [DungeonMap.Content.STAIRS_DOWN, DungeonMap.Content.STAIRS_UP])
 					# A quest's site is its own place (2026-11-24: the king's
 					# cache had settled in the survey party's room).
-					var sites: Array = map.marks.get("quests", {}).values()
-					if room.any(func(c): return sites.any(func(r: Rect2i): return r.has_point(c))):
+					if room.any(func(c): return map.in_story_site(c, 1)):
 						continue
 					var clear := room.filter(func(c): return Dressing._clear(map, c) and not used.has(c))
 					if not stairs and clear.size() >= MIN_ROOM:

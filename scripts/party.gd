@@ -49,6 +49,11 @@ var paused := false
 ## Chance that a step bolts in a random open direction instead (set while
 ## someone is panicking).
 var panic_chance := 0.0
+## After a bolt, nerves settle for a few steps before another can happen
+## (owner, 2026-11-24: rare, but never twice in a row). Counted in steps
+## taken, the bolt's own run included.
+const PANIC_COOLDOWN := 8
+var panic_rest := 0
 ## How long a step and a turn take; the opening slows them down (#56).
 var move_time := MOVE_TIME
 var turn_time := TURN_TIME
@@ -131,7 +136,7 @@ func _process(_delta: float) -> void:
 	if _busy or locked or paused:
 		return
 	var stepping := Input.is_action_pressed("move_forward") or Input.is_action_pressed("move_back")
-	if stepping and panic_chance > 0.0 and randf() < panic_chance:
+	if stepping and bolts_now():
 		_bolt()
 	elif Input.is_action_pressed("move_forward"):
 		_try_step(DIRECTIONS[facing])
@@ -141,6 +146,11 @@ func _process(_delta: float) -> void:
 		_turn(-1)
 	elif Input.is_action_pressed("turn_right"):
 		_turn(1)
+
+
+## Whether panic takes this step: its chance, once the cooldown is over.
+func bolts_now() -> bool:
+	return panic_chance > 0.0 and panic_rest <= 0 and randf() < panic_chance
 
 
 func _try_step(direction: Vector2i) -> void:
@@ -176,6 +186,7 @@ func _try_step(direction: Vector2i) -> void:
 		tween.tween_property(self, "position", position, move_time * 0.4)
 	else:
 		cell = target
+		panic_rest = maxi(0, panic_rest - 1)
 		stepped.emit(cell)
 		tween.tween_property(self, "position", _cell_to_world(cell), move_time)
 		_reveal(cell)
@@ -219,6 +230,7 @@ func _bolt() -> void:
 	if open.is_empty():
 		_try_step(DIRECTIONS[facing])
 		return
+	panic_rest = PANIC_COOLDOWN
 	var to: int = open.pick_random()
 	var turn := wrapi(to - facing + 2, 0, 4) - 2  # -2 (about face) to 1
 	facing = to

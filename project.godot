@@ -30,6 +30,10 @@ window/handheld/orientation=4
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="mobile"
 
+[editor]
+
+export/convert_text_resources_to_binary=false
+
 [filesystem]
 
 import/blender/enabled=false

@@ -106,9 +106,8 @@ static func _usable(map, cell: Vector2i, stairs: Array) -> bool:
 	for s: Vector2i in stairs:
 		if s != Vector2i(-1, -1) and absi(s.x - cell.x) + absi(s.y - cell.y) < AWAY_FROM_STAIRS:
 			return false
-	for site: Rect2i in map.marks.get("quests", {}).values():
-		if site.grow(1).has_point(cell):
-			return false
+	if map.in_story_site(cell, 1):
+		return false
 	for p: Dictionary in map.marks.get("puzzles", []):
 		for value in p.values():
 			if value is Vector2i and absi(value.x - cell.x) + absi(value.y - cell.y) <= 1:

@@ -139,7 +139,7 @@ func _initialize() -> void:
 	await _open("treatment")
 	await _snap("nurse")
 	check("treatment warns no one else is fit", _body_text().contains("no one else is fit"))
-	check("nurse offers treatment with its ready day", _press(main._camp, "Treat Mara (back on day 3)"))
+	check("nurse offers treatment with its ready day", _press(main._camp, "Treat Mara (2 nights)"))
 	check("treated: no injury, recovering until day 3", hero.injuries.is_empty() and main._camp_state.is_recovering(hero) and main._camp_state.ready_on(hero) == 3)
 
 	# Cave path: no one fit.
@@ -208,6 +208,6 @@ func _initialize() -> void:
 	await create_timer(0.4).timeout
 	check("back in the cave on floor 1", main._depth == 1 and not main._party.locked)
 	check("a different cave on day 3", main._map._rows != day1_layout)
-	check("the message names the day", main._message_label.text.begins_with("Day 3"), main._message_label.text)
+	check("the message names the expedition, not the day", main._message_label.text.begins_with("Expedition"), main._message_label.text)
 	print("fails=", fails)
 	quit(1 if fails else 0)

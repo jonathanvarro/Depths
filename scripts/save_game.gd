@@ -18,12 +18,22 @@ static func _state() -> Dictionary:
 		Engine.set_meta(STATE, {
 			# Test runs (started with --script) get their own file, so they
 			# never touch the player's save.
-			"path": "user://test_save.dat" if "--script" in OS.get_cmdline_args() else "user://save.dat",
+			"path": _start_path(),
 			"continue": false,  # set by the title screen's Continue
 			"hero": "",  # the starting hero chosen for a new game (#95)
 			"skip_opening": false,  # the title's "Skip the tutorial" (2026-11-21)
 		})
 	return Engine.get_meta(STATE)
+
+
+## Test runs (--script) use their own file; `-- --save=<file>` points any
+## build at another save (2026-11-24: to replay a copy of a player's save in
+## the exported game without touching the real one).
+static func _start_path() -> String:
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--save="):
+			return arg.trim_prefix("--save=")
+	return "user://test_save.dat" if "--script" in OS.get_cmdline_args() else "user://save.dat"
 
 
 static func path() -> String:
