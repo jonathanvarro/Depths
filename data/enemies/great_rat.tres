@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" path="res://art/enemies/campaign-v1/great-rat/scene.tscn" id="2"]
 [ext_resource type="Resource" path="res://data/injuries/deep_wound.tres" id="3"]
 [ext_resource type="Resource" path="res://data/injuries/limp.tres" id="4"]
-[ext_resource type="PackedScene" path="res://art/enemies/creatures-refined-v2/great-rat.tscn" id="model3d"]
+[ext_resource type="PackedScene" path="res://art/enemies/creatures-predatory-v3/great-rat.tscn" id="model3d"]
 
 [resource]
 script = ExtResource("1")

@@ -1,6 +1,6 @@
 extends SceneTree
 var OUT: String
-const CASES={"rat":"res://art/enemies/creatures-refined-v2/rat.tscn","great-rat":"res://art/enemies/creatures-refined-v2/great-rat.tscn","bat":"res://art/enemies/creatures-refined-v2/cave-bat.tscn","whisker":"res://art/enemies/creatures-refined-v2/whisker.tscn"}
+var CASES={"rat":"res://art/enemies/creatures-refined-v2/rat.tscn","great-rat":"res://art/enemies/creatures-refined-v2/great-rat.tscn","bat":"res://art/enemies/creatures-refined-v2/cave-bat.tscn","whisker":"res://art/enemies/creatures-refined-v2/whisker.tscn"}
 var stage: Node3D
 var camera: Camera3D
 var actor: Node3D
@@ -8,6 +8,8 @@ var rows: Array=[]
 
 func _initialize() -> void:
 	OUT=OS.get_cmdline_user_args()[0] if not OS.get_cmdline_user_args().is_empty() else "res://build/local-creatures-refined-v2"
+	if OS.get_cmdline_user_args().size()>1:
+		for id in CASES:CASES[id]=CASES[id].replace("creatures-refined-v2",OS.get_cmdline_user_args()[1])
 	DirAccess.make_dir_recursive_absolute(OUT+"/captures")
 	preload("res://scripts/save_game.gd").set_path(OUT+"/private-save.dat")
 	Engine.set_meta("depths_settings",preload("res://scripts/settings.gd").DEFAULTS.duplicate())

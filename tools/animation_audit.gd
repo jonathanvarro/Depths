@@ -6,7 +6,7 @@ extends SceneTree
 ##   Godot --headless --path . --script tools/animation_audit.gd
 
 const FOLDERS := ["res://art/enemies/combat-roster-3d-v1", "res://art/enemies/early-creatures-3d-v1",
-	"res://art/enemies/creatures-refined-v2", "res://art/enemies/field-creatures-3d-v1", "res://art/enemies/fortress-goblins-3d-v1",
+	"res://art/enemies/creatures-refined-v2", "res://art/enemies/creatures-predatory-v3", "res://art/enemies/field-creatures-3d-v1", "res://art/enemies/fortress-goblins-3d-v1",
 	"res://art/enemies/goblin-elites-3d-v1", "res://art/enemies/rat-3d-v1"]
 const LOOPS := ["idle", "walk", "run"]
 const STEP := 1.0 / 30.0

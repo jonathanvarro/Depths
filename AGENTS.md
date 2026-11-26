@@ -59,6 +59,16 @@ Templates > Download and Install; already installed on the owner's PC).
 
 ## Project structure
 
+- `docs/rat-predatory-revision.md` – #294's review follow-up in
+  `art/enemies/creatures-predatory-v3`: longer tapered rat heads, smaller
+  rear-set ears, tucked legs, matte fur/red eyes, low great rat and visible
+  bristles/incisors. Surface priority keeps fur from hiding eyes/nose.
+  Grounded bat wings/tint/tag clearance improve readability; 36 samples
+  verify approved airborne bat skin unchanged. Same rigs/clips/APIs and
+  draw budgets; triangle counts are lower. Local masters and #293 comparison:
+  `build/local-creatures-predatory-v3/inspector.html`. Native 1,196 checks
+  include both rendered eyes at four sizes; owner/physical iPhone review remains.
+
 - `docs/field-kit-silhouette-and-menu.md` – #290's fully fitted twelve-pocket
   pack, generic equipment silhouette and clickable book spine in
   `art/ui/field-kit-v3`. `KitBag.fitted_art` is Pack-only; trade keeps its

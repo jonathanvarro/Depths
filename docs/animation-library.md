@@ -8,6 +8,21 @@ out of git (see `docs/blender-expedition-kit-tasks.md`).
 
 ## Where the files live
 
+### Predatory rat / grounded bat follow-up (2026-11-25, #294)
+
+`art/enemies/creatures-predatory-v3` retains the rats' 21 bones, six source
+clip roles/durations and exact still API. Shape changes tuck the leg skin and
+lower the body without moving the rig; derived floor corrections are rebuilt.
+The bat retains all 13 bones and nine clips/durations. Only grounded wing folds
+and the swoop's landing blend differ. Native skin comparison at 36 samples of
+idle/attack/hurt/fall verifies the approved airborne poses unchanged to 0.00001m.
+Ambient flying bats retain v2. Previous files and masters are untouched.
+
+Separate local masters: `build/local-creatures-predatory-v3/masters`.
+`tools/creature_refinement/build.py --predatory` makes this sibling library;
+omitting the flag retains the preceding build. Source/contract/review:
+`docs/rat-predatory-revision.md`. No new external/private animation inputs.
+
 ### Refined rat, great rat and cave bat (2026-11-25, #292)
 
 `art/enemies/creatures-refined-v2` is the live rat/great-rat/bat and ambient

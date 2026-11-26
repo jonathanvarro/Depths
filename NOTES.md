@@ -13,6 +13,12 @@ Format:
 
 ---
 
+## 2026-11-25 – ChatGPT (owner/Claude rat revisions, #294)
+- Did: sibling `creatures-predatory-v3` gives rat/great rat longer tapered heads, smaller rear-set ears, tucked leg skin, lower silhouettes, matte fur and narrow red eyes; great rat has prominent incisors/bristle fans and Old Whisker follows. Fixed a real material-order defect: transparent fur drew over eyes/nose despite valid skin geometry; Details now renders later with normal depth checking. Grounded bat wings remain broader, ground-only albedo is slightly lifted, and its tag gap is 0.34m. Approved airborne bat skin, first-person camera logic, rigs/clip roles/APIs and rules remain; ambient bats retain v2. Previous files/masters are retained.
+- Validation: native 1,196 checks pass, including actual rendered left/right eyes at desktop/phone sizes, grounded tag clearance, 36 unchanged airborne bat samples, budgets, all clip skins/loops/still, four shapes Normal/Larger, mixed enemies and camera restoration. Wildlife and animation smoothing checks pass. Rat/great rat are 2,792/2,810 triangles, below the prior 2,876/2,918; bat stays 1,226 and draw counts remain 3/3/4. Separate editable masters/#293 comparison: `build/local-creatures-predatory-v3/inspector.html`; source/limits: `docs/rat-predatory-revision.md`.
+- Next: owner-authorized merge; verified with the now-merged Field kit #291. Owner visual and physical iPhone review remain.
+- Watch out: geometry-only checks missed the hidden eyes; retain the framebuffer-projected rendered-eye assertions. UI stretch makes `unproject_position` unsuitable for direct screenshot pixel indexing; the test uses camera projection normalized to the captured framebuffer. Red eye marks add no light or visibility changes.
+
 ## 2026-11-25 – ChatGPT (owner-authorized outstanding merge: Field kit #291)
 - Did: reconciled #291 with current main, retaining both Field kit and rat/quest handoffs. Game code merged automatically; updated the tutorial confirmation fixture to use current `_guided_pack_target` after Claude expanded guidance to equip/light/relight. The owner explicitly requested merging outstanding work including #291.
 - Validation: reconciled branch passes all 824 native Field kit layout/menu/card checks and the complete phone tutorial (fails=0), including guided equip, permanent Drop/Keep item spotlight, light/relight, chest, fights, commander and camp. Tests used isolated profiles/private desktops; owner's save/input are untouched.
