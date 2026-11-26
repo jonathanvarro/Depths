@@ -170,13 +170,45 @@ AGENTS.md). For the Damp Caves, please deliver:
 - Sounds for the new closed passage (B1) and blocked passage (B2).
 - Two or three drip one-shots for the dressing to play occasionally.
 
-## I. Creatures (P3, owner's call)
+## I. Creatures (P2, owner added 2026-11-25)
 
-Floor 2's roster is already all 3D: rats, great rats, spiders, cave bats,
-goblins, rock beetles and goblin trappers. If the owner wants damp-specific
-creatures: a pale cave newt or olm, a blind crawler (crayfish-like), or a
-leech swarm. Each would be a concept first, following the enemy art
-direction.
+Floor 2's current roster stays (rats, great rats, spiders, cave bats,
+goblins, rock beetles and goblin trappers, all 3D). Add three creatures that
+belong to the wet caves, plus one named pack. Work in two steps: a concept
+sheet for the owner to approve first (front, side and three-quarter views,
+with scale beside a party figure), then the 3D model.
+
+**Art direction:** `docs/enemy-art-direction.md`. They should feel dark,
+gritty and wrong without being cartoonish: pale, blind, slick, cave-adapted.
+Learn from the rat review (#294): the silhouette must read from the front at
+combat distance on a phone. Make it low and predatory, with eyes or a clear
+"face" area so the threat reads.
+
+**3D contract (same as `creatures-predatory-v3` / `field-creatures-3d-v1`):**
+- Metric floor origin, +Z front, and a constant floor registration in every
+  clip; it fits a 2 m tile with its declared animation envelope.
+- API: `play(clip)`, `sample(clip, t)`, `set_motion(false)` (exact still
+  pose), `set_opacity(a)` for ambient fades, and `framing_bounds` for the
+  first-person combat camera.
+- Clips: `idle` (loop), `attack`, `hurt`, `fall`, `walk` (loop), `run` (loop),
+  plus any listed below. Keep them at 24 fps, short, and with clean loop
+  seams.
+- Budget: about 1,200–3,000 triangles, at most 25 bones, at most 4 skinned
+  draws. Separate surface materials (skin, wet sheen, eyes/claws) in the
+  style of the refined rats.
+- Give each a map silhouette and a bestiary thumbnail (`Bestiary.thumbnail`
+  style), plus hurt and death cries if you can.
+
+| # | Creature | Look | Suggested role in a fight (Claude sets the numbers) | Extra clips |
+|---|---|---|---|---|
+| I1 | **Pale newt** (olm) | A long, eel-like, colourless salamander, waist-high when it rears, with feathery red gills, vestigial eyes and translucent skin over a dark spine | Back-row darter: slips out of reach after biting; weak alone, comes in twos | `rear`, `submerge` (into a puddle or pool), `emerge` |
+| I2 | **Blind crawler** | A dog-sized cave crayfish: pale carapace, long feelers, one oversized claw, no eyes | Front-row tank: the claw can grab one hero (they lose a turn) until it's hit | `grab`, `hold` (loop), `release` |
+| I3 | **Leech swarm** | A heaving knot of black leeches on wet stone, which spreads into strands as it attacks | Drains health over a few turns (like venom); fire scares it off (torch throw) | `spread`, `regroup`, `burn` (recoiling from flame) |
+| I4 | **Named pack: "The Drowned Mother"** | An oversized pale newt, scarred and swollen, trailing leeches; she glows a faint cold blue on the map like the other named packs | Floor 2–3 named pack (`scripts/elites.gd` style): her, two pale newts and a leech swarm; a gilded hoard won once | Shares the newt's clips; a fitted leader model like the other named leaders |
+
+Ambient versions (the drifting mine wildlife in `scripts/mine_life.gd`): a
+pale newt slipping between puddles and a few leeches on a wet wall would
+help sell the floor. Use the same models, with `set_opacity` support.
 
 ## Integration notes for Claude (afterwards)
 
@@ -184,4 +216,6 @@ direction.
   `Galleries.theme_from` / `_apply_theme` choose floor 2's theme.
 - Landmark builders for section E, and the restyled lost cache.
 - Event `.tres` files for section F, plus any water rules agreed in G.
+- Creature definitions, tactics, encounter groups and the named pack for
+  section I (numbers balanced in play), plus their ambient wildlife hookup.
 - Keep the fungal theme files: they can come back deeper down.
