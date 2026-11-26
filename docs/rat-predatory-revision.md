@@ -15,8 +15,10 @@ grounded fold changes; ambient flying bats retain v2.
   that survive combat distance; Old Whisker's ash coat and muzzle marks follow.
 - Matte fur has restrained grouped variation. Red eye marks restore the earlier
   threat. Transparent fur had been drawing over the eye/nose detail surface;
-  drawing those details later fixes the actual render, with depth checking
-  enabled and no extra draw or light. Small red emission keeps eye contrast;
+  #294 initially drew those details later as a workaround. #297 supersedes
+  that workaround: normal surfaces are fully opaque and depth-writing;
+  transparent shader siblings are selected only for an actual cosmetic fade.
+  All normal surface priorities are zero. Small red emission keeps eye contrast;
   the caller still owns whether the creature is visible.
 - Grounded bat wings retain a broader contour instead of folding completely
   behind the body. A modest ground-only albedo lift and 0.34m tag gap keep the
@@ -59,6 +61,22 @@ PR #291. Import/parse and gallery-link checks pass too.
 The existing enemy-model/fallback/board/stage, mine-life and animation-smoothing
 checks also cover the new live bindings. Results and captures remain local.
 Owner style acceptance and physical iPhone performance/comfort remain open.
+
+## Solid-surface correction (#297)
+
+Writing `ALPHA`, even at 1.0, routed the whole creature through transparent
+sorting. A higher Details priority restored eyes but also let hidden feet/claws
+draw over the body. Normal coat/skin/details/membranes now omit alpha output.
+`set_opacity` caches separate, explicitly preloaded fade shaders per material,
+switches only below 1.0 and restores the exact opaque shader at full opacity.
+No geometry, bone, animation, light, encounter or visibility rule changes.
+
+`tools/creature_refinement/occlusion_check.gd` passes 63 checks. At front,
+oblique and side angles across idle/attack/hurt it compares custom surface
+visibility to opaque reference materials. Reconstructing the old transparent
+ordering produces 3,790 leaked body pixels in this matrix; the correction
+matches opaque occlusion. The 1,196 real combat/phone checks also pass, including
+visible eyes and grounded bat labels. Review captures: `build/local-creature-opaque`.
 
 Rebuild with Blender 5.2 using the existing source master:
 
