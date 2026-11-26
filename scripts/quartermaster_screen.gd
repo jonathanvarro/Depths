@@ -26,6 +26,7 @@ var _rows: VBoxContainer
 var _notice_label: Label
 var _footer: VBoxContainer
 var _departure: Button
+var _balance: Label
 var _fee: Label
 var _route_buttons: Dictionary={}
 var _upgrade: Button
@@ -34,6 +35,7 @@ var _compact:=false
 func _init() -> void:
 	super._init()
 	_heading.text="Quartermaster Garran"
+	_balance=text_label("",16,Kit.AMBER);_balance.autowrap_mode=TextServer.AUTOWRAP_OFF;_balance.size_flags_vertical=Control.SIZE_SHRINK_CENTER;_header.add_child(_balance);_header.move_child(_balance,_close.get_index())
 	_close.tooltip_text="Back to camp";_close.accessibility_name="Back to camp"
 	var head:=AtlasTexture.new();head.atlas=FACE
 	var extent:=FACE.get_size();head.region=Rect2(extent*Vector2(.31,0),extent*Vector2(.40,.34))
@@ -85,6 +87,7 @@ func _refresh() -> void:
 	for id: String in _tabs:
 		var button: Button=_tabs[id];button.button_pressed=id==tab
 		Kit.Brass.apply(button,Kit.Brass.Edge.CENTRE,6)
+	_balance.text="%d gold"%[party.supplies.gold+camp.stash.gold]
 	_quote.text='“'+_greeting()+'”'
 	_notice_label.text=_notice;_notice_label.visible=_notice!=""
 	_footer.visible=tab=="routes"
@@ -122,7 +125,7 @@ func _issue_icons(box: VBoxContainer,level: int) -> void:
 	for item: SupplyItem in items:
 		var row:=HBoxContainer.new();row.add_theme_constant_override("separation",10);box.add_child(row)
 		var icon:=TextureRect.new();icon.texture=item.icon;icon.custom_minimum_size=Vector2(30,30);icon.expand_mode=TextureRect.EXPAND_IGNORE_SIZE;icon.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED;row.add_child(icon)
-		row.add_child(text_label("%s ×%d"%[item.display_name,items[item]],18))
+		var name_label:=text_label("%s ×%d"%[item.display_name,items[item]],18);name_label.size_flags_horizontal=Control.SIZE_EXPAND_FILL;name_label.set_meta("issue_name",true);row.add_child(name_label)
 
 func _buy_issue() -> void:
 	if party.members.is_empty() or not camp.raise_issue(party):
@@ -150,9 +153,8 @@ func _routes() -> void:
 	_departure.text="Head back down" if selected_depth==1 else "Prepare for floor %d · %d gold"%[selected_depth,price]
 	_fee.text="Next: check the party and equipment. Back to camp costs nothing." if price==0 else "Scouts are paid only when you choose Enter the mine."
 	if not can_pay:
-		var shortage: int=maxi(0,price-party.supplies.gold)
+		var shortage: int=maxi(0,price-party.supplies.gold-camp.stash.gold)
 		_fee.text="Need %d more gold for the scouts."%shortage
-		if party.supplies.gold+camp.stash.gold>=price:_fee.text="The guide's gold is in the tent chest. Bring it into your pack before leaving."
 
 func _route_button(depth: int,title: String,detail: String,earned: bool) -> Button:
 	var box:=_card(title)
@@ -184,6 +186,7 @@ func _layout_body() -> void:
 	_left.visible=not _compact;_symbol.visible=_compact
 	_heading.text="Quartermaster" if _compact else "Quartermaster Garran"
 	_heading.add_theme_font_size_override("font_size",roundi(maxf(22 if _compact else 28,18/pixel)))
+	_balance.add_theme_font_size_override("font_size",roundi(maxf(16,14/pixel)))
 	_close.custom_minimum_size=Vector2.ONE*maxf(48,44/pixel)
 	_symbol.custom_minimum_size=Vector2.ONE*maxf(40,40/pixel)
 	for button: Button in _body.find_children("*","Button",true,false):

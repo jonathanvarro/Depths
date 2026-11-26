@@ -59,6 +59,16 @@ Templates > Download and Install; already installed on the owner's PC).
 
 ## Project structure
 
+- `docs/quartermaster-character-and-planning.md` – #296 adds original static
+  Quartermaster Garran at the existing `cave` camp site. `quartermaster_screen.gd`
+  uses shared FieldMenu/reliquary brass for standing-issue upgrades, scout routes
+  and repeatable dialogue. Existing CampState prices, unlocks and save fields
+  remain; route selection is free and Main pays only after preparation Enter,
+  rechecking eligibility/funds. Pack/stash gold both count. Original PNGs,
+  prompts and provenance: `art/camp/quartermaster-v1`. Local native review:
+  `build/local-quartermaster-v1/inspector.html`; 205 native UI checks plus
+  existing camp/issue regressions pass. Physical iPhone/owner review remain.
+
 - #297 fixes refined-creature translucency: normal v2/v3 coat, skin, details
   and membrane shaders are fully opaque; only `set_opacity` below 1.0 selects
   cached/preloaded `*-fade.gdshader` siblings. Full opacity restores the original

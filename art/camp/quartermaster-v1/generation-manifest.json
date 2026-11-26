@@ -1,0 +1,45 @@
+{
+  "issue": 296,
+  "generator": "OpenAI built-in image_gen.imagegen",
+  "date": "2026-11-25",
+  "assets": [
+    {
+      "asset": "portrait.png",
+      "source_output": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-05f605bb-cda4-476a-b24d-a01ad5fa9a1a.png",
+      "sha256": "5f4f198569c095cb7ed0a4bcdbbe9aeb11ffc5a74aa5c0c36e9a85f87c51427a",
+      "original_size": [
+        1145,
+        1374
+      ],
+      "prompt": "portrait-prompt.txt",
+      "transparent_background": true,
+      "original_output_unchanged": true,
+      "godot_import_size_limit": 1024
+    },
+    {
+      "asset": "station.png",
+      "source_output": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-dd8c3a6e-1d55-41be-ac7d-615c2efc3f9c.png",
+      "sha256": "979b12911e6ebccc638f9b4ee3c485fb23222f2180a769b8ae083bae24e21425",
+      "original_size": [
+        1132,
+        1390
+      ],
+      "prompt": "station-prompt.txt",
+      "transparent_background": true,
+      "original_output_unchanged": true,
+      "godot_import_size_limit": 512
+    }
+  ],
+  "station_references": [
+    {
+      "path": "portrait.png",
+      "role": "same original Garran identity"
+    },
+    {
+      "path": "art/camp/highres-v4/merchant.png",
+      "role": "style only, no copied likeness or costume",
+      "sha256": "ed16e71078675f4cd2aaf3b33c4a2a636ecd591e39fd071395649e1c3716c150"
+    }
+  ],
+  "post_processing": "None. Original RGBA PNGs preserved; Godot import limits bound runtime texture sizes."
+}

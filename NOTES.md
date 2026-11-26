@@ -13,6 +13,13 @@ Format:
 
 ---
 
+## 2026-11-25 – ChatGPT (Quartermaster Garran and planning, #296)
+- Did: original static portrait and grounded map-table station beside the mine; the existing cave target now opens Garran's Supplies / Routes / Talk desk in reliquary brass. Allowance tiers, prices, materials, two-visit scout unlocks, save fields and party rules remain CampState-owned. Repeatable dialogue explains them. Both pack and stash gold are shown/used, retaining Claude's latest economy and lost-pack commits.
+- Did: route choice is a free plan; Main pays on preparation Enter and rechecks availability/funds. Back costs nothing, including repeated equipment/preparation visits. No new supply/route mechanics, quest flags or animation/companion likeness work.
+- Validation: 205 native UI checks at four landscape sizes Normal/Larger, actual mouse/touch, 44px targets, resource shortages, all four issue tiers, save persistence and real Main Back/failed-fee/split-purse Enter. Existing quartermaster and native phone camp regressions pass. Original art prompts/hashes/references: `art/camp/quartermaster-v1/generation-manifest.json`; local gallery: `build/local-quartermaster-v1/inspector.html`; handoff: `docs/quartermaster-character-and-planning.md`.
+- Next: owner visual and physical iPhone review. Rat occlusion fix #298 is already merged on main; older running/exported binaries need rebuilding to contain it.
+- Watch out: keep `cave` as the site/guide key; do not bill again in CampScreen. The static service character is not an animated named-companion rig. Source PNGs stay unchanged; import size limits control runtime memory. Tests never touch the owner's save or active desktop.
+
 ## 2026-11-25 – ChatGPT (rat feet showing through body, #297)
 - Did: normal refined v2/v3 coat/skin/details/membrane shaders no longer write ALPHA, so they use real opaque depth. Removed v3's Details priority workaround. `set_opacity` selects explicitly preloaded/cached fade shader siblings only below full opacity and restores the exact solid shader at 1.0; materials retain their instances/parameters. No meshes, rigs, clips, light budgets, encounter visibility or gameplay changes.
 - Validation: 63 native occlusion/fade checks compare actual surface visibility against an opaque material reference over rat/great-rat idle/attack/hurt at front/oblique/side angles. Reconstructed old sorting leaks 3,790 body pixels; corrected masks match the opaque reference. All 1,196 native real-combat/phone checks pass, including visible eyes and grounded bat tags. Captures: `build/local-creature-opaque`; handoff: `docs/rat-predatory-revision.md`.

@@ -90,30 +90,34 @@ func run() -> void:
 					check("44px persistent target "+str(shape)+setting,button.size.y*pixel>=43)
 				if tab=="routes":
 					check("departure is visible and tappable "+str(shape)+setting,viewport.encloses(desk._departure.get_global_rect()) and desk._departure.size.y*pixel>=43)
+				if tab=="supplies":
+					for label: Label in desk._rows.find_children("*","Label",true,false):
+						if label.has_meta("issue_name"):check("supply name has readable line width "+str(shape)+setting,label.size.x*pixel>=160 and label.size.y*pixel<65)
 				if setting=="Normal":await snap("%s-%d"%[tab,shape.x])
 	# Back/Escape returns to the same existing camp site.
 	desk.finish();await settle();check("Back returns to clearing",not main._camp.is_busy() and main._camp._buttons.cave.is_visible_in_tree())
 	main._camp.open_activity("cave");await settle()
 	var escape:=InputEventKey.new();escape.keycode=KEY_ESCAPE;escape.pressed=true;root.push_input(escape,true);await settle()
 	check("Escape closes desk",not desk.visible and not main._camp.is_busy())
-	main._camp._close_activity();await snap("camp")
+	main._camp._close_activity();await snap("camp-phone")
+	root.size=Vector2i(1280,720);main.simulate_phone_safe_area=false;main._apply_safe_area();await settle();await snap("camp")
 	# Actual preparation flow: a plan and Back are free; Enter pays once.
 	SETTINGS.set_value("text_size","Normal",self);root.size=Vector2i(844,390);main._apply_safe_area()
-	party.supplies.gold=50;camp.stash.gold=0;camp.floors_reached[2]=2
+	party.supplies.gold=10;camp.stash.gold=40;camp.floors_reached[2]=2
 	main._camp_loop();await settle()
 	for attempt in 3:
 		main._camp.open_activity("cave");await settle();desk._route_buttons[2].pressed.emit();await settle();desk._departure.pressed.emit();await settle()
-		check("route reaches preparation without billing "+str(attempt),main._preparation.visible and party.supplies.gold==50)
+		check("route reaches preparation without billing "+str(attempt),main._preparation.visible and party.supplies.gold==10 and camp.stash.gold==40)
 		if attempt==0:
 			main._preparation._back.pressed.emit();await settle()
-			check("Back to camp preserves route money",main._camp.visible and party.supplies.gold==50)
+			check("Back to camp preserves route money",main._camp.visible and party.supplies.gold==10 and camp.stash.gold==40)
 		elif attempt==1:
-			party.supplies.gold=0;main._preparation._enter.pressed.emit();await settle()
+			party.supplies.gold=0;camp.stash.gold=0;main._preparation._enter.pressed.emit();await settle()
 			check("Enter rechecks route fee",main._camp.visible and main._depth==1 and party.supplies.gold==0)
-			party.supplies.gold=50
+			party.supplies.gold=10;camp.stash.gold=40
 		else:
 			main._preparation._enter.pressed.emit();await create_timer(.5).timeout
-			check("Enter pays exactly once and reaches chosen floor",main._depth==2 and party.supplies.gold==50-camp.route_price(2))
+			check("Enter pays exactly once and reaches chosen floor",main._depth==2 and party.supplies.gold==0 and camp.stash.gold==50-camp.route_price(2))
 	main.queue_free();await settle()
 	FileAccess.open(out.path_join("validation.json"),FileAccess.WRITE).store_string(JSON.stringify({"checks":checks,"failures":failures,"physical_iPhone":false},"  "))
 	print("QUARTERMASTER_UI checks=",checks," failures=",failures.size());quit(0 if failures.is_empty() else 1)
