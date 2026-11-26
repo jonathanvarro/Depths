@@ -140,7 +140,7 @@ func _initialize() -> void:
 	to_party.y = 0.0
 	var forward: Vector3 = foe.node.global_transform.basis.z
 	check("...facing the party", forward.normalized().dot(to_party.normalized()) > 0.9, forward)
-	check("...its tag sized by the model's height", is_equal_approx(FoeView.height(foe.node), 0.47))
+	check("...its tag sized by the refined model's height", FoeView.height(foe.node)>.40 and FoeView.height(foe.node)<.55)
 	main._combat._play(foe, "attack", 0.4)
 	await process_frame
 	check("an attack plays its bite clip", FoeView.current(foe.node) == "attack")

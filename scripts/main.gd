@@ -59,6 +59,7 @@ const Packages := preload("res://scripts/packages.gd")
 const BattleStage := preload("res://scripts/battle_stage.gd")
 const FoeView := preload("res://scripts/foe_view.gd")  # sprite or 3D model foes (#251)
 const TacticalView := preload("res://scripts/tactical_view.gd")
+const CreatureFraming := preload("res://scripts/creature_framing.gd")
 ## Prototype (owner, 2026-11-08): a fight on the map seen from above.
 var _tactical: Node3D
 var _view_button: Button  # strategic or exploration view (#248)
@@ -519,6 +520,7 @@ func _ready() -> void:
 
 	_minimap = Minimap.new()
 	_build_ui(_minimap)
+	add_child(CreatureFraming.new(self))
 	_party = Party.new()
 	_party.moved.connect(_minimap.on_party_moved)
 	_minimap.sensed = _sensed_cells  # a Mage's Watchful eye (#170)

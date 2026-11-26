@@ -6,7 +6,7 @@ extends SceneTree
 
 const AnimTidy := preload("res://scripts/anim_tidy.gd")
 const FOLDERS := ["res://art/enemies/combat-roster-3d-v1", "res://art/enemies/early-creatures-3d-v1",
-	"res://art/enemies/field-creatures-3d-v1", "res://art/enemies/fortress-goblins-3d-v1",
+	"res://art/enemies/creatures-refined-v2", "res://art/enemies/field-creatures-3d-v1", "res://art/enemies/fortress-goblins-3d-v1",
 	"res://art/enemies/goblin-elites-3d-v1", "res://art/enemies/rat-3d-v1"]
 
 var fails := 0
