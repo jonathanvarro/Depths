@@ -55,6 +55,8 @@ func _init() -> void:
 	_close = Button.new()
 	Kit.Brass.apply(_close, Kit.Brass.Edge.RIGHT, 6)
 	_close.icon = CLOSE
+	_close.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_close.vertical_icon_alignment = VERTICAL_ALIGNMENT_CENTER
 	_close.expand_icon = true
 	_close.add_theme_constant_override("icon_max_width", 20)
 	_close.custom_minimum_size = Vector2(48, 48)

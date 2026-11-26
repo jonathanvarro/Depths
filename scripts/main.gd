@@ -70,6 +70,7 @@ const COMMANDER_FIRST := preload("res://data/conversations/commander_first.tres"
 const CoinFlip := preload("res://scripts/coin_flip.gd")
 const Settings := preload("res://scripts/settings.gd")
 const SettingsScreen := preload("res://scripts/settings_screen.gd")
+const PauseMenu := preload("res://scripts/pause_menu.gd")
 const TITLE_SCENE := "res://scenes/title.tscn"
 ## Opening: remark on being lost at junctions this often (steps).
 const LOST_REMARK_EVERY := 18
@@ -369,6 +370,7 @@ var _active_fight: Array[EnemyType] = []
 var _wipe_pending := false  # wiped: the save already holds the aftermath
 var _save_queued := false
 var _settings: Control  # settings_screen.gd (#52)
+var _pause_menu: Control
 var _cave_theme: EnvironmentTheme  # upper mine/outskirts; floor two and fortress have their own
 var _next_opening := ""  # the next fight's round-one side (#73)
 var _fight_kind := ""  # "gate" or "queen" while those fights run (#44)
@@ -628,11 +630,19 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action_pressed("toggle_pack"):
 		_set_pack(not _pack.visible)
 	elif _pack.visible and event.is_action_pressed("ui_cancel"):
-		_set_pack(false)
+		_open_pause_menu()
 	elif _prompt.visible and event.is_action_pressed("ui_accept"):
 		_answer_prompt(true)
 	elif _prompt.visible and event.is_action_pressed("ui_cancel"):
 		_answer_prompt(false)
+	elif event.is_action_pressed("ui_cancel"):
+		_open_pause_menu()
+		get_viewport().set_input_as_handled()
+
+
+func _open_pause_menu() -> void:
+	if _settings.visible or _quest_log.visible or _pause_menu.visible:return
+	_pause_menu.open()  # existing save_and_exit remains the saving authority
 
 
 ## Builds (or returns to) a floor. Arriving from above puts the party at the
@@ -5602,14 +5612,25 @@ func _build_ui(minimap: Control) -> void:
 	_combat.keep_clear = _message_label  # tags stay below the top line
 	# Settings (#52), above everything, from the Pack or the camp.
 	var settings_layer := CanvasLayer.new()
-	settings_layer.layer = 7
+	settings_layer.layer = 8
 	add_child(settings_layer)
 	_settings = SettingsScreen.new()
+	_settings.process_mode=Node.PROCESS_MODE_ALWAYS
 	settings_layer.add_child(_settings)
 	_settings.closed.connect(_update_wound_dim)
 	_settings.closed.connect(_apply_view)  # the view may have changed (#248); not mid-fight
 	_settings.closed.connect(func(): _camp.animate_lights = Settings.get_value("flashes"))
 	_pack.open_settings.connect(func(): _settings.open())
+	var pause_layer:=CanvasLayer.new()
+	pause_layer.layer=7
+	add_child(pause_layer)
+	_pause_menu=PauseMenu.new();pause_layer.add_child(_pause_menu)
+	_pause_menu.options_overlay=_settings
+	_pack.open_menu.connect(_open_pause_menu)
+	_pause_menu.options_requested.connect(func():_settings.open())
+	_pause_menu.save_requested.connect(func():
+		_pause_menu.finish()
+		save_and_exit())
 	_event_screen.coin = coin
 	_camp = CampScreen.new()
 	canvas.add_child(_camp)
@@ -5629,7 +5650,7 @@ func _build_ui(minimap: Control) -> void:
 ## and home bar. On desktop there's nothing to avoid.
 func _apply_safe_area() -> void:
 	var insets := _safe_area_insets()
-	for menu in [_settings, _quest_log]:
+	for menu in [_settings, _quest_log, _pause_menu]:
 		if menu: menu.set_safe_area(insets)
 	for control: Control in [_safe_area, _full_map_margin, _pack.content, _combat.content, _results.content, _preparation.content, _chest.content, _camp.content]:
 		control.offset_left = insets.x

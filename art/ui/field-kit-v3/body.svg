@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="300" viewBox="0 0 200 300">
+ <title>Equipment body diagram</title>
+ <defs><linearGradient id="ink" x2="0" y2="1"><stop stop-color="#b5a17a" stop-opacity=".32"/><stop offset=".8" stop-color="#b5a17a" stop-opacity=".24"/><stop offset="1" stop-color="#b5a17a" stop-opacity="0"/></linearGradient></defs>
+ <g fill="#807965" fill-opacity=".10" stroke="url(#ink)" stroke-width="1.6" stroke-linejoin="round">
+  <path d="M85 59C80 47 78 30 85 20Q100 8 115 20C122 30 120 47 115 59L109 70 110 82 136 93Q145 99 149 118L160 166 176 217 171 236 159 238 149 222 136 184 125 145 125 189 132 220 127 257 130 298 109 298 100 249 91 298 70 298 73 257 68 220 75 189 75 145 64 184 51 222 41 238 29 236 24 217 40 166 51 118Q55 99 64 93L90 82 91 70Z"/>
+  <path d="M75 106Q100 117 125 106M100 116V189M75 196Q100 201 125 196M78 207Q100 211 122 207" fill="none"/>
+ </g>
+</svg>

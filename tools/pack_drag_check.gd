@@ -66,4 +66,6 @@ func _initialize() -> void:
 		data = {"kit_drag":"slot","slot":"body","item":cursed,"party":ps,"hero":mara}
 		check("cursed gear won't come off by dragging either", not pack._can_drop_on_bag(Vector2.ZERO, data))
 	print("fails=", fails)
+	main.queue_free()
+	await create_timer(.2).timeout
 	quit(0 if fails==0 else 1)
