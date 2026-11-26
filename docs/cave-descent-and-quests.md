@@ -6,7 +6,7 @@
 
 **Proposal below:** twelve floors in six layers, working place/quest names, 48 activity concepts, materials and story connections. These are options for review, not approved lore, a required production list or implemented gameplay. A temple and portal are a possible finale presentation; neither defines the relic yet. No new game rules, floors, mining, quests or story scenes are added by this document.
 
-**Topology clarification (owner proposal, 2026-11-25, #300):** optional lairs/quest areas remain within floors. The owner additionally proposes floor junctions with two or more exits to distinct areas/floors. The numbered outline below predates that proposal and is not an agreed linear travel network. Exact branches, destinations and return/rejoin behavior remain open; see DESIGN.md "Floor junctions". Current gameplay remains a depth-based sequence.
+**Topology update (owner direction, 2026-11-25, #300):** the first junction is **Abandoned Mines → Damp Caves → either Cavern or Fungal Hollows**. Cavern replaces Goblin Outskirts and leads through the Rest Area to the Goblin Fortress; Fungal Hollows is the working renamed Fungal Caverns side route to the Grove. The fortress has independent Throne Room, Jail and Drowned Galleries exits; Jail leads to the Execution Halls and the galleries to the Black Reservoir. The player and quartermaster establish a surface route to the Rest Area. See DESIGN.md "Floor junctions" for the complete current layout direction, exceptional boss warnings and unresolved travel details. The numbered twelve-floor outline below is historical proposal content, not the agreed travel network or a new floor-number assignment. Current gameplay remains a depth-based sequence.
 
 ## The recommended shape
 

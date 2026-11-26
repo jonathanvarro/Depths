@@ -13,6 +13,12 @@ Format:
 
 ---
 
+## 2026-11-25 – ChatGPT (owner junction map and naming correction, #300)
+- Did: recorded the concrete area network in DESIGN. Mines has one exit to Damp Caves; Damp Caves branches to Cavern (renamed Goblin Outskirts) and the fungal side route, now working-named Fungal Hollows. The latter leads to the exceptionally difficult Grove; Cavern leads to Rest Area then Fortress. Fortress independently leads to Throne Room quest boss, Jail -> exceptionally difficult Execution Halls, or Drowned Galleries -> Black Reservoir.
+- Did: recorded the surface camp -> Rest Area route as the player/quartermaster project and retained the approved rest-area art direction. Owner endorsed clear boss warnings/withdrawal, meaningful optional rewards, independent onward access and visually distinct cave regions.
+- Next: settle branch return/rejoin behavior, rest-route unlock/costs, danger/rewards and area numbering before implementation. Fungal Hollows is the proposed name selected for the owner's rename request; Cavern is the explicit owner name.
+- Watch out: documentation only; no live floor IDs, themes, quests, saves or art paths renamed. Earlier linear/12-floor diagrams do not define this network. Main has active unrelated game edits, kept out of this branch.
+
 ## 2026-11-25 – ChatGPT (floor-junction clarification, #300)
 - Did: recorded the owner's proposal: retain optional authored lairs/quest areas within floors and add floor junctions with two or more exits to distinct areas/floors. The illustrated stack showed current theme order, not an agreed future travel topology. Updated DESIGN and marked the older twelve-floor proposal accordingly.
 - Next: agree a small first junction, its destinations and whether branches return or rejoin. Exact region assignment, branch length, gating and difficulty/rewards remain open. Issue #300 tracks this design separately.

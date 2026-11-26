@@ -340,23 +340,32 @@ Allow moments of recovery within the overall decline. A defensible room or usefu
 
 Returning safely with useful gains should matter even when the bottom is not reached. Exact return-travel hazards, stair rules, and expedition persistence are unresolved.
 
-## Floor junctions — owner proposal, 2026-11-25 (#300)
+## Floor junctions — owner layout direction, 2026-11-25 (#300)
 
 Floors may have **two or more exits leading to distinct areas/floors**. Optional lairs and quest packages remain authored areas within a floor; floor junctions additionally branch the wider cave's travel network. This remains one connected cave with the surface camp as home.
 
-The existing Mines → Fungal Caverns → Goblin Outskirts → Fortress → Drowned Galleries → Black Reservoir list describes the current sequence/theme order. It does not settle the proposed junction topology. A junction's destination might lie deeper or alongside another area; exact connections, first junction, destination names, branch lengths, reconnections, gating and difficulty/rewards remain to be designed. No particular extra region or floor count is approved here.
-
-Illustrative structure only:
+The owner specified the following area connections, correcting the first junction to the **Damp Caves**, not the Abandoned Mines. **Cavern** replaces Goblin Outskirts and is retained to match the transition to the approved rest-area art. **Fungal Hollows** is Codex's working replacement for Fungal Caverns, chosen under the owner's request to distinguish that side area from Cavern.
 
 ```text
-Mines
-  |
-Junction floor
-  |-- Exit A -> one area / onward route
-  `-- Exit B -> a different area / route
+Abandoned Mines
+  `-- Damp Caves
+        |-- Cavern (formerly Goblin Outskirts)
+        |     `-- Rest Area
+        |           `-- Goblin Fortress
+        |                 |-- Throne Room [quest boss lair]
+        |                 |-- Jail [side route]
+        |                 |     `-- Execution Halls [small, exceptionally difficult boss lair]
+        |                 `-- Drowned Galleries
+        |                       `-- Black Reservoir
+        `-- Fungal Hollows [side route; formerly Fungal Caverns]
+              `-- Grove [small, exceptionally difficult boss lair]
 ```
 
-Current gameplay still travels by depth +1/-1. Before building a junction, define distinct area identities and explicit paired exit/arrival points, then account for saved exploration/state, procedural seeds, quests, map discovery and quartermaster/scout destinations. Areas at equal depth must remain distinct. First agree one small junction and whether its branch returns or rejoins; this proposal changes no live travel or generation rules.
+The **Rest Area** is the destination for a route the player and quartermaster establish from the surface camp. Reaching and securing it first makes that connection an earned expedition milestone. Exact travel costs, recovery and unlock tasks remain open; preserve underground-rest expedition continuity rather than assuming surface-camp rules.
+
+Keep the following clear as the layout is developed: exceptional boss lairs have readable danger warnings and a chance to withdraw before commitment; side routes have distinct worthwhile rewards while essential progression supplies remain available elsewhere; the Throne Room quest boss does not gate the independent Drowned Galleries exit. Distinguish wet eroded rock in Damp Caves from dense fungal life in Fungal Hollows. Use area names as the primary map labels; depth/difficulty need not uniquely identify an area.
+
+The connections above are design direction, **not implemented travel**. Exact branch length, return/rejoin behavior, exit placement, difficulty/rewards and floor numbering remain to be designed. Current gameplay still travels by depth +1/-1. Implementation needs distinct area identities and paired exit/arrival points, with saved exploration/state, procedural seeds, quests, map discovery and quartermaster/scout destinations. Areas at equal depth must remain distinct. Existing numeric theme bindings and asset paths have not been renamed.
 
 ## Story direction — decided 2026-10-19 (#122, #123)
 
