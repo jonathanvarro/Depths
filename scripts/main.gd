@@ -169,6 +169,10 @@ const BRUTE := preload("res://data/enemies/goblin_brute.tres")
 const BLOAT := preload("res://data/enemies/gas_bloat.tres")
 const MINER := preload("res://data/enemies/hollow_miner.tres")
 const BEETLE := preload("res://data/enemies/rock_beetle.tres")
+# The Damp Caves' own (owner, 2026-11-26; stand-in models until theirs are made).
+const NEWT := preload("res://data/enemies/pale_newt.tres")
+const CRAWLER := preload("res://data/enemies/blind_crawler.tres")
+const LEECHES := preload("res://data/enemies/leech_swarm.tres")
 const VENOM_SPIDER := preload("res://data/enemies/venom_spider.tres")
 const TRAPPER := preload("res://data/enemies/goblin_trapper.tres")
 const LAMP_EATER := preload("res://data/enemies/lamp_eater.tres")
@@ -203,10 +207,18 @@ const ENCOUNTER_GROUPS := {
 	# floor 3 warms up for the fortress (owner, 2026-10-19, #49).
 	# The web/venom spider + goblin pairs moved to floor 3 (#226): together
 	# they caused most floor-2 wipes.
+	# The Damp Caves (2026-11-26): their newts, crawlers and leeches join
+	# floor 2, in place of some goblin bands (goblins thicken toward the
+	# Cavern and the fortress).
 	2: [[GREAT_RAT], [GOBLIN], [GOBLIN, RAT], [SPIDER, SPIDER], [GOBLIN, SPIDER],
 			[GREAT_RAT, SPIDER], [GREAT_RAT, SPIDER, RAT], [GOBLIN, RAT, RAT], [GOBLIN, SPIDER, RAT],
-			[GOBLIN, GOBLIN, RAT], [GOBLIN, GOBLIN, SPIDER], [BAT, GOBLIN], [BAT, BAT, SPIDER],
-			[BEETLE], [BEETLE, RAT], [BEETLE, SPIDER, RAT], [TRAPPER, GOBLIN], [TRAPPER, GOBLIN, RAT]],
+			[BAT, GOBLIN], [BAT, BAT, SPIDER],
+			[BEETLE], [BEETLE, RAT], [BEETLE, SPIDER, RAT], [TRAPPER, GOBLIN],
+			[NEWT, NEWT], [NEWT, NEWT, RAT], [CRAWLER], [CRAWLER, RAT], [CRAWLER, NEWT],
+			[LEECHES], [LEECHES, NEWT], [CRAWLER, LEECHES, SPIDER]],
+	# The Fungal Hollows: spiders, beetles, bats and rats among the growth.
+	"hollows": [[SPIDER, SPIDER], [RAT, RAT, SPIDER], [BEETLE], [BEETLE, SPIDER], [BAT, BAT],
+			[GREAT_RAT, SPIDER], [WEBSPINNER, SPIDER], [VENOM_SPIDER], [BEETLE, RAT, RAT], [VENOM_SPIDER, SPIDER, RAT]],
 	3: [[GOBLIN], [GOBLIN, ARCHER], [GOBLIN, DRUMMER], [WEBSPINNER, GOBLIN], [VENOM_SPIDER, GOBLIN],
 			[GOBLIN, GOBLIN, ARCHER], [GOBLIN, WEBSPINNER, GOBLIN], [GOBLIN, GOBLIN, DRUMMER], [GUARD, GOBLIN, ARCHER],
 			[GOBLIN, ARCHER, DRUMMER], [GUARD, GOBLIN, GOBLIN],
@@ -823,7 +835,9 @@ func _go_to_area(id: String, arrival: Arrival, from_area := "") -> void:
 				for x in range(site.position.x - 1, site.end.x + 1):
 					for y in range(site.position.y - 1, site.end.y + 1):
 						keep_clear.append(Vector2i(x, y))
-			var laid: Dictionary = Puzzles.place(stamped["layout"], depth, _site_seed + depth * 7919 + 43, keep_clear)
+			# The Jail: a locked cell, always, with the jailer's keys somewhere.
+			var chances: Dictionary = {"oneway": 0.3, "key": 1.0, "lever": 0.0} if id == "jail" else Puzzles.CHANCE
+			var laid: Dictionary = Puzzles.place(stamped["layout"], depth, _site_seed + depth * 7919 + 43 + (posmod(hash(id), 997) if not Areas.on_main_path(id) else 0), keep_clear, chances)
 			stamped["layout"] = laid["layout"]
 			if not laid["puzzles"].is_empty():
 				marks["puzzles"] = laid["puzzles"]
@@ -876,6 +890,11 @@ func _go_to_area(id: String, arrival: Arrival, from_area := "") -> void:
 				if QUEST_SITE_NAMES.has(quest):
 					marks["quest_names"][quest] = QUEST_SITE_NAMES[quest]
 		_floors[key].lairs = stamped["lairs"]
+		if id == "damp" and not use_debug_layout:
+			# The Damp Caves (2026-11-26): stretches of deep water to wade in
+			# the passages, and shallow puddles in rooms (looks only).
+			Galleries.flood(_floors[key], _site_seed + 2 * 7919 + 37, false, 2)
+			_floors[key].marks["shallow"] = Galleries.puddles(_floors[key], _site_seed + 2 * 7919 + 39)
 		if Areas.theme(id) == "galleries" and not use_debug_layout:  # slice 2: water, until it's drained
 			var drained := Quests.has_flag(_camp_state, "dry_passage", "opened") if depth == Galleries.DEPTH \
 					else Quests.has_flag(_camp_state, "reservoir", "diverted")
@@ -913,6 +932,10 @@ func _go_to_area(id: String, arrival: Arrival, from_area := "") -> void:
 	# 2026-11-23: the survey party was still too hard to find).
 	if not _in_opening and _map.marks.get("quests", {}).keys().any(_quest_site_open):
 		_tip("quest_site_near", "Your quest's site is somewhere on this floor. Explore: once you're close, it's marked on your map in amber.")
+	# The Rest Area reached (#300): the scouts mark the way from camp.
+	if id == "rest" and not _camp_state.rest_secured and not use_debug_layout:
+		_camp_state.rest_secured = true
+		_show_message("The Rest Area: a scouts' camp, safe from the dark. From now on the quartermaster can send you straight here.")
 	if not _in_opening and _party_state.members.size() > 1:
 		_tip("row_tap", "Tap a hero's front/back tag on their card any time to change rows. Front heroes take the blows; back heroes need reach (a spear, a sling, a prayer) to strike.")
 	_save_now()  # autosave on every floor change (#45)
@@ -989,6 +1012,8 @@ func _build_level() -> void:
 	_add_room_props()
 	for cell in _map.water:  # floor 5's deep water (placeholder art, #166)
 		_level.add_child(Galleries.water_surface(cell, CELL_SIZE, Settings.get_value("flashes")))
+	for cell in _map.marks.get("shallow", {}):  # the Damp Caves' puddles: looks only
+		_level.add_child(Galleries.shallow_surface(cell, CELL_SIZE, Settings.get_value("flashes")))
 	if _depth == OPENING_DEPTH and _in_opening:
 		_add_opening_dressing()
 		Dressing.dress_opening(_level, _map, _site_seed, CELL_SIZE, WALL_HEIGHT)  # the new 3D pieces (2026-11-09)
@@ -1197,8 +1222,8 @@ func _stock_lost_cache() -> void:
 
 ## The depth an area's fights are drawn for: its own if it sets one (the
 ## Fungal Hollows), else the current depth.
-func _groups_depth() -> int:
-	return int(Areas.info(_area).get("groups", _depth))
+func _groups_depth():
+	return Areas.info(_area).get("groups", _depth)
 
 
 ## A boss's threshold (#300): its warning, then how the party stands, so
@@ -1349,7 +1374,10 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 	if _map.marks.get("set_traps", {}).has(cell) and not _in_opening:
 		_map.marks["set_traps"].erase(cell)
 		var set_trap: RoomEvent = _map.events.get(cell)
-		if set_trap and set_trap.sprung:
+		var sapper: Companion = _party_state.sapper()
+		if sapper:  # a Sapper pins it as the party passes (2026-11-26)
+			_show_message("%s jams the %s for good as you pass." % [sapper.display_name, set_trap.title.to_lower().trim_prefix("a ") if set_trap else "trap"])
+		elif set_trap and set_trap.sprung:
 			_spring_trap(cell, set_trap)
 			return
 	if not _in_opening and not WallLights.at(_map, cell).is_empty():
@@ -2600,8 +2628,11 @@ func _take_purse(foe) -> int:
 ## The enemy groups a party of `party_size` can meet at `depth` (#49).
 ## Down to EASY_DEPTH any group fits; deeper, a full party meets groups
 ## close to its own size.
-static func encounter_pool(depth: int, party_size: int) -> Array:
-	var groups: Array = ENCOUNTER_GROUPS.get(clampi(depth, 1, ENCOUNTER_GROUPS.size()))
+static func encounter_pool(depth, party_size: int) -> Array:
+	# `depth` is a floor number, or an area's own pool ("hollows").
+	var groups: Array = ENCOUNTER_GROUPS[depth] if depth is String else ENCOUNTER_GROUPS.get(clampi(depth, 1, 6))
+	if depth is String:
+		depth = 3
 	var cap := party_size + (1 if party_size >= PartyState.MAX_MEMBERS and depth >= 3 else 0)
 	var fitting := groups.filter(func(g: Array): return g.size() <= cap)
 	if fitting.is_empty():
@@ -2754,7 +2785,7 @@ func _camp_loop(reward := 0, note := "") -> void:
 	if start_depth > 1:
 		for depth in range(1, start_depth):
 			_expedition.visit_floor(depth)  # the scouts led them through
-		_show_message("Expedition %d: the scouts' route, straight to floor %d." % [_expedition.number, start_depth])
+		_show_message("Expedition %d: the scouts' route, straight to the %s." % [_expedition.number, Areas.area_name(Areas.route_area(start_depth))])
 		for hero: Companion in _party_state.members:
 			if hero.is_with_party():
 				hero.xp = maxi(hero.xp, Progression.route_xp(start_depth))
@@ -2875,9 +2906,9 @@ func _work_puzzle(cell: Vector2i) -> bool:
 				"key":
 					if p["held"]:
 						_open_puzzle_door(p)
-						_show_message("The key turns, stiff with rust, and the door grinds open.")
+						_show_message("The jailer's key turns, and the cell door swings open." if _area == "jail" else "The key turns, stiff with rust, and the door grinds open.")
 					else:
-						_show_message("Locked. Somewhere on this floor there must be a key.")
+						_show_message("A locked cell door. The jailer's keys must be somewhere in here." if _area == "jail" else "Locked. Somewhere on this floor there must be a key.")
 				"lever":
 					_show_message("An iron gate on chains, shut fast. No handle this side: something must raise it.")
 			return true
@@ -2898,7 +2929,7 @@ func _work_puzzle(cell: Vector2i) -> bool:
 			else:
 				p["held"] = true
 				_refresh_puzzle_prop(p, "key", true)
-				_show_message("A dead explorer, still clutching an iron key. You take it: it must open something on this floor.")
+				_show_message("A dead jailer, his ring of keys still on his belt. You take it: one of these must open a cell." if _area == "jail" else "A dead explorer, still clutching an iron key. You take it: it must open something on this floor.")
 				Sounds.play(self, "coins", -8.0)
 				_save_now()
 			return true
@@ -5353,12 +5384,8 @@ func _on_party_blocked(cell: Vector2i) -> void:
 	if tool and _area != "fortress":
 		_ask("Something chokes the passage. Clear it with the %s? (%d time)" % [tool.display_name.to_lower(), CLEAR_PASSAGE_TIME], _clear_passage.bind(cell), Callable(), ["Clear it", "Leave it"])
 		return
-	# A Fixer clears blockages without a tool (#179; once the Brawler's).
-	var fixer: Companion = null
-	for hero: Companion in _party_state.living_members():
-		if hero.role == "Fixer":
-			fixer = hero
-			break
+	# A Sapper clears blockages without a tool (#179; once the Brawler's).
+	var fixer: Companion = _party_state.sapper()
 	if fixer and _area != "fortress":
 		_ask("Something chokes the passage. %s knows how to shift it. (%d time)" % [fixer.display_name, CLEAR_PASSAGE_TIME], _clear_passage.bind(cell), Callable(), ["Clear it", "Leave it"])
 		return

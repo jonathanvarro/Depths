@@ -10,7 +10,9 @@ const DEPTH := 5
 ## Floor 6, the Black Reservoir: deeper water still. The flow gate drains it.
 const RESERVOIR := 6
 ## Of the corridor cells, about this share runs deep (floor 5, floor 6).
-const FLOODED_SHARE := {5: 0.4, 6: 0.6}
+const FLOODED_SHARE := {2: 0.15, 5: 0.4, 6: 0.6}  # 2: the Damp Caves (2026-11-26)
+## The share of room cells that start a puddle in the Damp Caves.
+const PUDDLE_SHARE := 0.06
 ## How far each flooded stretch runs, in cells.
 const STRETCH := Vector2i(3, 7)
 ## A step through deep water: extra time, a little strain, and a torch
@@ -21,6 +23,7 @@ const WADE_TORCH_SOAK := 2
 const WATER_COLOR := Color(0.05, 0.12, 0.16, 0.85)  # the placeholder pool
 ## ChatGPT's #166 art: deep water, wet slate walls, drowned masonry.
 const DEEP_WATER := preload("res://art/textures/drowned-water-v1/deep.tscn")
+const SHALLOW_WATER := preload("res://art/textures/drowned-water-v1/shallow.tscn")
 const WET_WALL := preload("res://art/textures/waterworks-v1/wet-plain.tres")
 const WET_WALL_VARIANT := preload("res://art/textures/waterworks-v1/wet-channelled.tres")
 const DROWNED_FLOOR := preload("res://art/textures/descent-surfaces-v1/drowned-masonry-floor.tres")
@@ -186,6 +189,31 @@ static func _mount(root: Node3D, node: Node3D, cell: Vector2i, side: Vector2i, c
 
 ## ChatGPT's deep water over a flooded cell (#166). `animate` false holds it
 ## still (screen effects off).
+## Shallow water over a room cell (the Damp Caves' puddles): looks only.
+static func shallow_surface(cell: Vector2i, cell_size: float, animate: bool) -> Node3D:
+	var surface = SHALLOW_WATER.instantiate()
+	surface.configure(cell, cell_size, animate)
+	return surface
+
+
+## Puddles in a few rooms (the Damp Caves, 2026-11-26): cell -> true. Looks
+## only, never on contents, doors or stairs.
+static func puddles(map, seed_value: int) -> Dictionary:
+	var rng := RandomNumberGenerator.new()
+	rng.seed = seed_value
+	var out := {}
+	for y in map.height:
+		for x in map.width:
+			var cell := Vector2i(x, y)
+			if map._is_room_cell(cell) and map.content_at(cell) == 0 and not map.water.has(cell) and cell != map.start_cell and rng.randf() < PUDDLE_SHARE:
+				out[cell] = true
+				for offset in [Vector2i.RIGHT, Vector2i.DOWN]:
+					var next: Vector2i = cell + offset
+					if map._is_room_cell(next) and map.content_at(next) == 0 and rng.randf() < 0.5:
+						out[next] = true
+	return out
+
+
 static func water_surface(cell: Vector2i, cell_size: float, animate: bool) -> Node3D:
 	var surface = DEEP_WATER.instantiate()
 	surface.configure(cell, cell_size, animate)

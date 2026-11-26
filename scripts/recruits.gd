@@ -46,7 +46,7 @@ const ROLES := {
 		"guard_factor": 0.5, "toughness": 0, "row": "back", "reach": true,
 		"weapon": "res://data/gear/sling.tres",
 		"portrait": "res://art/portraits/recruit-silhouettes-v1/fixer.png",
-		"perk": "Eye for value: finds sell for 25% more, 10% off at the merchant, one more find in treasure rooms, and clears rubble.", "perk_name": "Eye for value",
+		"perk": "Traps and rubble: spots every trap, jams set ones as the party passes, and clears rubble without a tool.", "perk_name": "Traps and rubble",
 	},
 }
 ## Each role's exploring perk (#101), for the recruit's card.

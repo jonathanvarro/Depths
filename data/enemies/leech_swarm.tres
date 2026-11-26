@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="EnemyType" format=3]
+
+[ext_resource type="Resource" path="res://data/items/spider_silk.tres" id="salvage"]
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="1"]
+[ext_resource type="PackedScene" path="res://art/enemies/cave-simple-v1/spider/scene.tscn" id="2"]
+[ext_resource type="Resource" path="res://data/injuries/deep_wound.tres" id="3"]
+[ext_resource type="Resource" path="res://data/injuries/limp.tres" id="4"]
+[ext_resource type="PackedScene" path="res://art/enemies/field-creatures-3d-v1/spider.tscn" id="model3d"]
+
+[resource]
+script = ExtResource("1")
+display_name = "Leech swarm"
+scene = ExtResource("2")
+model = ExtResource("model3d")
+max_health = 8
+damage_min = 1
+damage_max = 2
+accuracy = 0.75
+initiative = 9
+injury_chance = 0.05
+injuries = Array[Injury]([ExtResource("3"), ExtResource("4")])
+attack_verb = "latches onto"
+tactic = 2
+intro = "A heaving knot of black leeches: they latch on and drain blood over the next few turns. Fire drives them off. (Stand-in model until its own is made.)"
+loot_line = "Where the leeches knotted, a drowned man's last things: %s."
+row = "front"
+reach_back = false
+threat = 2
+drop = ExtResource("salvage")
+drop_chance = 0.0
+family = "beast"
+web_chance = 0.0
+venom_damage = 2

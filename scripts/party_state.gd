@@ -157,7 +157,17 @@ func oil_rate() -> float:
 
 ## Traps show: Mara's keen eyes (#95), a boon, or a Scout's Trap sense (#94).
 func sees_traps() -> bool:
-	return has_trait("keen_eyes") or living_members().any(func(m: Companion): return m.boon_flag("reveals_traps") or m.has_talent("trap_sense"))
+	return has_trait("keen_eyes") or sapper() != null or living_members().any(func(m: Companion): return m.boon_flag("reveals_traps") or m.has_talent("trap_sense"))
+
+
+## The party's Sapper (the "Fixer" class id), if one is with it and able:
+## spots traps, pins set ones as the party passes, clears rubble without a
+## tool (owner, 2026-11-26, in place of the old haggling perks).
+func sapper() -> Companion:
+	for hero: Companion in living_members():
+		if hero.role == "Fixer" and not hero.is_unconscious():
+			return hero
+	return null
 
 
 func draws_ambush() -> bool:

@@ -309,6 +309,7 @@ func _send_dismissed_away() -> void:
 ## Heading down: heroes still recovering stay in the nurse's tent.
 func leave_behind(party) -> void:
 	explored_today = true
+	expeditions_made += 1
 	rested = false
 	_send_dismissed_away()
 	for hero: Companion in party.members.duplicate():
@@ -328,6 +329,37 @@ func rejoin(party) -> void:
 
 
 ## Rest until tomorrow: everyone recovers fully, and the day moves on.
+## Trips into the mine started since this camp began (the tent's records).
+var expeditions_made := 0
+
+
+## The tent's records (2026-11-26): [label, value] pairs.
+func records() -> Array:
+	var Quests := load("res://scripts/quests.gd")
+	var Areas := load("res://scripts/areas.gd")
+	var killed := 0
+	for kind in bestiary:
+		killed += int(bestiary[kind].get("killed", 0))
+	var deepest := 0
+	for d in floors_reached:
+		if int(floors_reached[d]) > 0:
+			deepest = maxi(deepest, int(d))
+	var done: int = Quests.in_log(self).filter(func(id): return Quests.stage(self, id) == Quests.Stage.RESOLVED).size()
+	var bosses: int = elites_looted.filter(func(e): return String(e).begins_with("lair:")).size()
+	return [
+		["Days at the camp", day],
+		["Trips into the mine", expeditions_made],
+		["Deepest reached", Areas.area_name(Areas.main_for(deepest)) if deepest > 0 else "-"],
+		["Foes killed", killed],
+		["Kinds of foe met", bestiary.size()],
+		["Named packs beaten", elites_looted.size() - bosses],
+		["Lair bosses beaten", bosses],
+		["Quests completed", done],
+		["Companions lost below", fallen.size() + lost_bodies.size()],
+		["Gold in the stash", stash.gold],
+	]
+
+
 ## Rested since the last trip down: no resting twice in a row (owner,
 ## 2026-11-24), unless nobody is fit to go and the nurse needs the nights.
 var rested := false
@@ -487,7 +519,14 @@ func times_reached(depth: int) -> int:
 	return maxi(floors_reached.get(depth, 0), floor2_reached if depth == 2 else 0)
 
 
+## Reached the Rest Area (#300): the scouts mark the way, and the route
+## there opens. Earned by getting there, not by repeat trips.
+var rest_secured := false
+
+
 func route_open(depth := 2) -> bool:
+	if depth == 3:
+		return rest_secured  # the Rest Area's route (2026-11-26)
 	return ROUTE_PRICES.has(depth) and times_reached(depth) >= ROUTE_AFTER
 
 
@@ -685,31 +724,26 @@ func pay(party, price: int) -> bool:
 	return true
 
 
-## A Fixer's eye for value (#101): treasure sells for more, and the
-## merchant knocks something off.
-const FIXER_SALE := 1.25
-const FIXER_DISCOUNT := 0.9
-
+## The Sapper (once the Fixer, #101) no longer haggles (owner, 2026-11-26):
+## its perks are traps and rubble now (PartyState.sapper). Kept so callers
+## and old saves still work.
 static func has_fixer(party) -> bool:
 	return party != null and party.members.any(func(h): return h.role == "Fixer" and h.is_alive())
 
 
 ## What the merchant asks of this party.
-static func price_for(party, price: int) -> int:
-	return ceili(price * FIXER_DISCOUNT) if has_fixer(party) else price
-
-
-## What the merchant pays this party for `item`.
-static func sell_price(party, item) -> int:
-	var price := sale_price(item)
-	if item is SupplyItem and item.effect == SupplyItem.Effect.TREASURE and has_fixer(party):
-		price = roundi(price * FIXER_SALE)
+static func price_for(_party, price: int) -> int:
 	return price
 
 
-## How many recruits wait by the fire: one more with a Fixer.
-func candidate_count(party = null) -> int:
-	return CANDIDATES + (1 if has_fixer(party) else 0)
+## What the merchant pays this party for `item`.
+static func sell_price(_party, item) -> int:
+	return sale_price(item)
+
+
+## How many recruits wait by the fire.
+func candidate_count(_party = null) -> int:
+	return CANDIDATES
 
 
 func buy(party, item: SupplyItem) -> bool:

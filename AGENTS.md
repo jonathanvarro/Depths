@@ -726,6 +726,14 @@ Templates > Download and Install; already installed on the owner's PC).
   Real common chests are `data/events/chest_common.tres` (ChatGPT's art); the
   old containers (pack, tool rack, workings, cache, stash, strongbox) keep their
   own loot families below a chest (`ChestTiers.CONTAINERS`, never gear).
+- Area network (2026-11-26, #300): `scripts/areas.gd` (AREAS graph, depth tier,
+  main/side exits, safe Rest Area, boss lairs), main `_area`/`_go_to_area`/
+  `_exit_destination`/`_exit_to`; `_floors` keys are old floor numbers on the
+  main path, ids elsewhere. Boss thresholds `_threshold`. Damp Caves water
+  (`Galleries.flood(...,2)`, `puddles`) and creatures (pale newt, blind crawler,
+  leech swarm, the Drowned Mother); `CampState.rest_secured`; Sapper =
+  `PartyState.sapper()` (traps/rubble, no haggling); tent Records.
+  `tools/area_network_check.gd`, `tools/damp_and_rest_check.gd`.
 - Quest sites (2026-11-24): `marks["sites"]` (every package's Rect2i),
   `DungeonMap.in_story_site()` keeps other placements out; `_missing_quest_site`
   checks the package events too and `_restore` rebuilds a floor missing one;

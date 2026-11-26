@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="EnemyType" format=3]
+
+[ext_resource type="Resource" path="res://data/items/beetle_shell.tres" id="salvage"]
+[ext_resource type="Script" path="res://scripts/injury.gd" id="1_1mj7m"]
+[ext_resource type="Resource" path="res://data/injuries/limp.tres" id="2_hvvk6"]
+[ext_resource type="PackedScene" path="res://art/enemies/monsters-v1/rock-beetle/scene.tscn" id="3_8iit7"]
+[ext_resource type="PackedScene" path="res://art/enemies/early-creatures-3d-v1/rock-beetle.tscn" id="model"]
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="4_q3s3x"]
+
+[resource]
+script = ExtResource("4_q3s3x")
+display_name = "Blind crawler"
+scene = ExtResource("3_8iit7")
+model = ExtResource("model")
+max_health = 14
+damage_min = 2
+damage_max = 4
+accuracy = 0.65
+initiative = 6
+injury_chance = 0.05
+injuries = Array[ExtResource("1_1mj7m")]([ExtResource("2_hvvk6")])
+attack_verb = "snaps its claw at"
+tactic = 12
+intro = "A blind crawler, a pale cave crayfish the size of a dog: its great claw grabs and won't let go. Hit it to break the hold. (Stand-in model until its own is made.)"
+loot_line = "Under the crawler's shell, among picked bones: %s."
+threat = 3
+slow = false
+drop = ExtResource("salvage")
+drop_chance = 0.0
+family = "beast"

@@ -37,6 +37,11 @@ const PACKS := {
 	"foreman": {"name": "The Hollow Foreman's crew", "leader": "The Hollow Foreman", "floors": [3, 4, 5],
 		"types": ["hollow_miner", "hollow_miner", "gas_bloat"], "marks": ["Hardened", "Swift"], "light": Color(0.95, 0.85, 0.45),
 		"seen": "A miner's lamp swings in the dark, carried by something that stopped being a miner long ago: the Hollow Foreman, still walking his shift."},
+	# The Damp Caves' named pack (2026-11-26; a stand-in model until hers).
+	"drowned": {"name": "The Drowned Mother's brood", "leader": "The Drowned Mother", "floors": [2],
+		"types": ["pale_newt", "pale_newt", "pale_newt", "leech_swarm"], "marks": ["Hardened", "Venomous"], "light": Color(0.45, 0.7, 0.95),
+		"leader_marks": ["Savage"], "leader_health": 3.0,
+		"seen": "A cold blue glow moves through the water: the Drowned Mother, a swollen pale newt trailing leeches, and her brood."},
 	"gristle": {"name": "Gristle's pack", "leader": "Gristle", "floors": [3, 5],
 		"types": ["breach_hound", "breach_hound", "breach_hound"], "marks": ["Swift", "Savage"], "light": Color(1.0, 0.3, 0.25),
 		"seen": "Red eyes, low to the ground, and a smell of the breach: Gristle's pack is running the halls."},
@@ -69,7 +74,7 @@ static func types(id: String) -> Array[EnemyType]:
 	# Both patrol and combat ask here. Only the leader gets a private art binding;
 	# shared definitions, followers and the Settings sprite fallback stay intact.
 	out[0]=out[0].duplicate(false)
-	out[0].model=LEADER_MODELS[id]
+	out[0].model=LEADER_MODELS.get(id, out[0].model)  # stand-ins keep the base model until theirs is made
 	return out
 
 

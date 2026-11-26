@@ -57,10 +57,9 @@ func _initialize() -> void:
 	var base_price: int = CampState.price_for(party, CampState.LANTERN_PRICE)
 	check("without a Fixer: plain prices, three by the fire", base_sale == CampState.sale_price(goblet) and base_price == CampState.LANTERN_PRICE and camp.candidate_count(party) == 3)
 	party.add_member(fixer)
-	check("with a Fixer: treasure sells for 25% more", CampState.sell_price(party, goblet) == roundi(base_sale * 1.25), "%d vs %d" % [CampState.sell_price(party, goblet), base_sale])
-	check("...gear doesn't", CampState.sell_price(party, load("res://data/gear/plain_knife.tres")) == CampState.sale_price(load("res://data/gear/plain_knife.tres")))
-	check("...10% off at the merchant", CampState.price_for(party, CampState.LANTERN_PRICE) == ceili(CampState.LANTERN_PRICE * 0.9))
-	check("...and one more recruit by the fire", camp.candidate_count(party) == 4)
+	# The Sapper (the "Fixer" id) no longer haggles (owner, 2026-11-26): its
+	# perks are traps and rubble now (damp_and_rest_check covers them).
+	check("with a Sapper: plain prices and three by the fire still", CampState.sell_price(party, goblet) == base_sale and CampState.price_for(party, CampState.LANTERN_PRICE) == CampState.LANTERN_PRICE and camp.candidate_count(party) == 3)
 
 	# In the game: rubble, and the campfire with four cards.
 	var main = load("res://scenes/main.tscn").instantiate()
@@ -93,7 +92,7 @@ func _initialize() -> void:
 	var cards: Array = main._camp._body.find_children("*", "PanelContainer", true, false).filter(func(c): return c.find_children("*", "Button", true, false).any(func(b): return b.text in ["Invite", "Full"]))  # recruit cards, not the party lineup (2026-11-21)
 	var bar: VScrollBar = main._camp._scroll.get_v_scroll_bar()
 	var edge: float = main._camp._scroll.get_global_rect().end.x
-	check("with a Fixer, four recruits wait by the fire", main._camp_state.candidates.size() == 4 and cards.size() == 4, "%d %d" % [main._camp_state.candidates.size(), cards.size()])
+	check("with a Sapper, still three recruits by the fire", main._camp_state.candidates.size() == 3 and cards.size() == 3, "%d %d" % [main._camp_state.candidates.size(), cards.size()])
 	check("...and the campfire still fits, no scrolling", bar.max_value <= main._camp._scroll.size.y + 1.0 and cards.all(func(c): return c.get_global_rect().end.x <= edge + 1.0), "%.0f / %.0f" % [bar.max_value, main._camp._scroll.size.y])
 	if dir != "":
 		for i in 4:

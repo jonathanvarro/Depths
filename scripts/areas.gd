@@ -25,7 +25,7 @@ const AREAS := {
 	"execution": {"name": "Execution Halls", "depth": 4, "parent": "jail", "main": "", "side": [], "theme": "fortress", "lair": "headsman"},
 	"galleries": {"name": "Drowned Galleries", "depth": 5, "parent": "fortress", "main": "reservoir", "side": [], "key": 5, "theme": "galleries"},
 	"reservoir": {"name": "Black Reservoir", "depth": 6, "parent": "galleries", "main": "", "side": [], "key": 6, "theme": "galleries"},
-	"hollows": {"name": "Fungal Hollows", "depth": 3, "parent": "damp", "main": "", "side": ["grove"], "theme": "fungal", "groups": 2},
+	"hollows": {"name": "Fungal Hollows", "depth": 3, "parent": "damp", "main": "", "side": ["grove"], "theme": "fungal", "groups": "hollows"},
 	"grove": {"name": "Grove", "depth": 3, "parent": "hollows", "main": "", "side": [], "theme": "fungal", "lair": "heartrot"},
 }
 

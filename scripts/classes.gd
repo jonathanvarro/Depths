@@ -28,12 +28,12 @@ const SKILLS := {
 ## What each class may wear (data/equipment/bases.json "classes").
 const MELEE_HEALTH := 4  # armour and health
 const FIXER_AIM := -0.05  # weaker in a fight
-const FIXER_TREASURE := 1  # one more find in a treasure room
+const FIXER_TREASURE := 0  # no longer: the Sapper's perks are traps and rubble (2026-11-26)
 const ABOUT := {
 	"Melee": "Front row. Armour and health; little awareness, no magic.",
 	"Scout": "Back row. Hears some fights before they notice the party and always spots traps. Heavy armour slows them more.",
 	"Mage": "Prays: a few casts each trip, more prayers from tomes. Armour past light slows them more; no awareness.",
-	"Fixer": "Weaker in a fight, but better prices, more treasure, and clears rubble without a tool.",
+	"Fixer": "Weaker in a fight, but spots every trap, jams set ones as the party passes, and clears rubble without a tool.",
 }
 
 

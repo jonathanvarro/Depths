@@ -14,6 +14,7 @@ signal save_and_exit
 signal open_settings
 signal open_pack  # check items and equipment at camp (owner playtest, #229)
 
+const Areas := preload("res://scripts/areas.gd")
 const Classes := preload("res://scripts/classes.gd")
 const DIR := "res://art/camp/highres-v4/"
 const COHESIVE := "res://art/camp/cohesive-v5/"
@@ -851,6 +852,7 @@ func _tent() -> void:
 		_refresh_activity()
 		if is_instance_valid(_tent_view):_tent_view._buttons.rest.grab_focus.call_deferred())
 	_tent_view.store_requested.connect(_open_stash)
+	_tent_view.records_requested.connect(_records)
 	_body.add_child(_tent_view)
 
 
@@ -881,6 +883,27 @@ func _show_rest() -> void:
 	tween.tween_property(veil, "color:a", 0.0, 0.6)
 	tween.parallel().tween_property(words, "modulate:a", 0.0, 0.5)
 	tween.tween_callback(veil.queue_free)
+
+
+## The papers on the tent's table (owner, 2026-11-25: the place for the
+## day count and other tallies, kept off the camp screen).
+func _records() -> void:
+	_tent_view = null
+	for child in _body.get_children():
+		_body.remove_child(child)
+		child.queue_free()
+	_body.add_theme_constant_override("separation", 6)
+	for line in _camp.records():
+		var row := HBoxContainer.new()
+		var what := _label(line[0], BODY, 15, MUTED)
+		what.custom_minimum_size.x = 260
+		row.add_child(what)
+		row.add_child(_label(str(line[1]), BODY, 15, TEXT))
+		_body.add_child(row)
+	var back := _button("Back to the tent")
+	back.pressed.connect(_refresh_activity)
+	_body.add_child(back)
+	_fit()
 
 
 func _open_stash() -> void:
@@ -1256,7 +1279,7 @@ func _cave_path() -> void:
 	# dearer the deeper it goes.
 	for depth: int in _camp.open_routes():
 		var price: int = _camp.route_price(depth)
-		var route := _button("Route to floor %d (%dg)" % [depth, price])
+		var route := _button("Route to the %s (%dg)" % [Areas.area_name(Areas.route_area(depth)), price])
 		route.disabled = _purse() < price
 		route.pressed.connect(func():
 			if _camp.buy_route(_party, depth):

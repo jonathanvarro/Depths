@@ -35,7 +35,9 @@ const REQUIRED := ["<", ">", "S", "R"]
 ## Lays puzzles into `layout`. `avoid`: cells to keep clear (quest sites,
 ## their events, the refuge, the fortress hall and gates). Returns
 ## {"layout": rows, "puzzles": [ {kind, door, ...}, ... ]}.
-static func place(layout: PackedStringArray, depth: int, seed_value: int, avoid: Array = []) -> Dictionary:
+## `chances`: each kind's chance (CHANCE by default; the Jail always has a
+## locked cell and its key, 2026-11-26).
+static func place(layout: PackedStringArray, depth: int, seed_value: int, avoid: Array = [], chances: Dictionary = CHANCE) -> Dictionary:
 	var out := {"layout": layout, "puzzles": []}
 	if depth < 1 or depth > MAX_DEPTH:
 		return out
@@ -47,7 +49,7 @@ static func place(layout: PackedStringArray, depth: int, seed_value: int, avoid:
 	for cell in avoid:
 		used[cell] = true
 	for kind in ["oneway", "key", "lever"]:
-		if rng.randf() >= CHANCE[kind]:
+		if rng.randf() >= chances.get(kind, 0.0):
 			continue
 		var before := PackedStringArray(rows)
 		var puzzle: Dictionary = _oneway(rows, rng, used) if kind == "oneway" else _side_room(rows, rng, used, kind, depth)

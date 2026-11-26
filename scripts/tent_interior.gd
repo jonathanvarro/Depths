@@ -2,11 +2,13 @@ extends Control
 ## #271: physical Rest/Store targets; CampState still owns all consequences.
 signal rest_requested
 signal store_requested
+signal records_requested  # the papers on the table: the camp's records (2026-11-26)
 const ART := preload("res://art/camp/player-tent-v1/interior.png")
 const HEADING := preload("res://art/fonts/heading-cinzel.tres")
 const TARGETS := {
 	"rest": {"rect":Rect2(.035,.385,.325,.58),"label":Vector2(.20,.78),"text":"Rest", "tip":"Sleep until morning: heals and calms. Injuries need the priest. The mine shifts overnight.", "outline":[Vector2(.04,.60),Vector2(.19,.40),Vector2(.35,.41),Vector2(.35,.65),Vector2(.28,.94),Vector2(.055,.94)]},
 	"store": {"rect":Rect2(.477,.39,.217,.31),"label":Vector2(.58,.59),"text":"Store", "tip":"Store and take items and gold: they stay safe at camp.", "outline":[Vector2(.48,.45),Vector2(.51,.40),Vector2(.68,.41),Vector2(.69,.47),Vector2(.68,.68),Vector2(.485,.66)]},
+	"records": {"rect":Rect2(.70,.42,.26,.16),"label":Vector2(.83,.50),"text":"Records", "tip":"Your records: days, trips, foes and losses so far.", "outline":[Vector2(.70,.48),Vector2(.73,.43),Vector2(.86,.44),Vector2(.95,.47),Vector2(.95,.57),Vector2(.80,.56),Vector2(.71,.53)]},
 }
 var _picture := Rect2()
 var _buttons := {}
@@ -18,7 +20,7 @@ func _init() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	for id: String in TARGETS:
 		var button := Button.new()
-		button.accessibility_name = "Rest until morning" if id=="rest" else "Store belongings"
+		button.accessibility_name = {"rest": "Rest until morning", "store": "Store belongings", "records": "Read your records"}[id]
 		button.set_meta("tent_target",id)
 		button.tooltip_text = TARGETS[id].tip
 		button.custom_minimum_size = Vector2(44,44)
@@ -67,6 +69,7 @@ func _activate(id: String) -> void:
 		_activating=false;_pressed_id="";queue_redraw()
 		return
 	if id=="rest":rest_requested.emit()
+	elif id=="records":records_requested.emit()
 	else:store_requested.emit()
 
 func _fit() -> void:

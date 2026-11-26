@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="EnemyType" format=3]
+
+[ext_resource type="Resource" path="res://data/items/rat_pelt.tres" id="salvage"]
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="1"]
+[ext_resource type="PackedScene" path="res://art/enemies/cave-simple-v1/rat/scene.tscn" id="2"]
+[ext_resource type="Resource" path="res://data/injuries/deep_wound.tres" id="3"]
+[ext_resource type="Resource" path="res://data/injuries/limp.tres" id="4"]
+[ext_resource type="PackedScene" path="res://art/enemies/creatures-predatory-v3/rat.tscn" id="model3d"]
+
+[resource]
+script = ExtResource("1")
+display_name = "Pale newt"
+scene = ExtResource("2")
+model = ExtResource("model3d")
+max_health = 6
+damage_min = 2
+damage_max = 3
+accuracy = 0.7
+initiative = 13
+injury_chance = 0.05
+injuries = Array[Injury]([ExtResource("3"), ExtResource("4")])
+attack_verb = "bites"
+tactic = 1
+intro = "A pale newt, long as a man's arm, slips out of a pool: it bites the weakest and darts back out of reach. (Stand-in model until its own is made.)"
+loot_line = "In the silt where the newt lay: %s."
+threat = 2
+drop = ExtResource("salvage")
+drop_chance = 0.0
+family = "beast"
+row = "back"
+reach_back = true
