@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-11-26 – Claude (formations, first slice, #305)
+- Did: owner asked for the first slice. `scripts/formations.gd` names a party's formation: pure (Shield Wall, Pathfinders, Tunnel Crew, Vigil), pair (Spearhead, Lookouts, Work Gang, Chantry) or mixed (Survey Party), with blind spots per missing class. Set on leaving camp (`PartyState.set_out_formation`, `Companion.set_out`); only standing heroes who set out count, so a fall steps it down and getting up restores it (main `_note_formation` says so on the next step). Effects: CombatState `_gear_guard` + `formation_guard`; strain via `steady_members` (now run each time step) and `Formations.CALM`; oil via `oil_rate`; `_hears_first`/`_sensed_cells` for Pathfinders; `_map_room` for Pathfinders/Lookouts; `_work_puzzle` lets a Tunnel Crew force key doors and lever gates; RoomEvents treasure finds + `formation_finds` (replaces the dead FIXER_TREASURE). Fire shows it under the recruits with a "Together:" preview; preparation screen under the party cards. `tools/formations_check.gd` (captures fire/prep with a shots dir).
+- Next: owner playtest and tuning; area challenge families and formation gates later (#305).
+- Watch out: saves made mid-trip before this have no `set_out`, so no formation until the next trip. A Vigil's extra prayer can put casts above `Spells.CASTS`.
+
 ## 2026-11-26 – Claude (formations design, #305)
 - Did: talked the party-formation idea through with the owner and recorded it: DESIGN.md "Formations and formation gates" and issue #305. Formations named at the fire (pure/pair/mixed tiers, bonus and blind spot shown, set on leaving camp, stepping down on a fall); areas lean on challenge families; formation gates (Sapper bridge, Acolyte temple portal, possible Scout/Soldier gates) seen early and opened later; the temple portal is main story and opens the final act, with Acolytes guaranteed at the fire once its quest unlocks. Design only; nothing built.
 - Next: first slice when the owner asks: formations at the fire, the four pure abilities, the step-down rule.

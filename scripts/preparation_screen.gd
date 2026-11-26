@@ -11,6 +11,7 @@ signal decided(go: bool)
 const PartyCard := preload("res://scripts/party_card.gd")
 const Supplies := preload("res://scripts/supplies.gd")
 const StrainRules := preload("res://scripts/strain.gd")
+const Formations := preload("res://scripts/formations.gd")
 const HEADING := preload("res://art/fonts/heading-cinzel.tres")
 const ACTION := preload("res://art/fonts/action-source-sans.tres")
 const BODY := preload("res://art/fonts/body-source-sans.tres")
@@ -23,6 +24,7 @@ var content: MarginContainer  # main.gd keeps this inside the safe area
 
 var _title: Label
 var _cards: HBoxContainer
+var _formation: VBoxContainer  # the formation line (#305)
 var _supplies: VBoxContainer
 var _enter: Button
 var _back: Button
@@ -67,6 +69,11 @@ func _init() -> void:
 	_cards = HBoxContainer.new()
 	_cards.add_theme_constant_override("separation", 8)
 	party_column.add_child(_cards)
+	# The party's formation, its bonus and blind spots (#305).
+	_formation = VBoxContainer.new()
+	_formation.add_theme_constant_override("separation", 4)
+	_formation.custom_minimum_size.x = 360
+	party_column.add_child(_formation)
 	var pack_column := VBoxContainer.new()
 	pack_column.custom_minimum_size = Vector2(340, 0)
 	pack_column.add_theme_constant_override("separation", 6)
@@ -130,6 +137,16 @@ func show_for(expedition_number: int, party) -> void:
 		else:
 			card.show_empty()
 
+	for child in _formation.get_children():
+		child.queue_free()
+	var formation: Array = Formations.describe(party.members)
+	if not formation.is_empty():
+		_formation.add_child(_label(formation[0], ACTION, 22, AMBER))
+		for i in [1, 2]:
+			var line_text := _label(formation[i], BODY, 17, TEXT if i == 1 else MUTED)
+			line_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+			line_text.custom_minimum_size.x = 360
+			_formation.add_child(line_text)
 	for child in _supplies.get_children():
 		child.queue_free()
 	var supplies = party.supplies

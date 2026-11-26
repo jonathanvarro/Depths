@@ -735,6 +735,12 @@ Templates > Download and Install; already installed on the owner's PC).
   `PartyState.sapper()` (disarms on a 90% coin flip, jams set traps, rubble;
   Scouts spot traps; haggling is Rook's Haggler trait, `CampState.has_haggler`); tent Records.
   `tools/area_network_check.gd`, `tools/damp_and_rest_check.gd`.
+- Formations (#305, 2026-11-26): `scripts/formations.gd` (of/current/
+  describe; pure/pair/mixed), `Companion.set_out`, PartyState
+  `set_out_formation`/`formation`/`formation_guard`/`maps_rooms`/`pathfinders`/
+  `tunnel_crew`/`formation_finds` (calm and oil through steady_members/oil_rate);
+  main `_note_formation`, `_map_room`; shown at the fire and preparation.
+  `tools/formations_check.gd`. DESIGN.md "Formations and formation gates".
 - Quest sites (2026-11-24): `marks["sites"]` (every package's Rect2i),
   `DungeonMap.in_story_site()` keeps other placements out; `_missing_quest_site`
   checks the package events too and `_restore` rebuilds a floor missing one;

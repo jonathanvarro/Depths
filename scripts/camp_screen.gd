@@ -16,6 +16,7 @@ signal open_pack  # check items and equipment at camp (owner playtest, #229)
 
 const Areas := preload("res://scripts/areas.gd")
 const Classes := preload("res://scripts/classes.gd")
+const Formations := preload("res://scripts/formations.gd")
 const DIR := "res://art/camp/highres-v4/"
 const COHESIVE := "res://art/camp/cohesive-v5/"
 const Brass := preload("res://art/ui/reliquary-brass-v1/style.gd")
@@ -947,6 +948,14 @@ func _fire() -> void:
 			cards.add_child(_recruit_card(recruit, full))
 		left.add_child(cards)
 		left.add_child(_clipped(_lineup_hint(), 10, AMBER if _lineup_note != "" else MUTED))
+	# The formation the party makes, its bonus and its blind spots (#305).
+	var formation: Array = Formations.describe(_party.members)
+	if not formation.is_empty():
+		left.add_child(_label("Formation: " + formation[0], ACTION, 13, AMBER))
+		for i in [1, 2]:
+			var line_text := _label(formation[i], BODY, 11, TEXT if i == 1 else MUTED)
+			line_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+			left.add_child(line_text)
 	_lineup_note = ""
 	split.add_child(_lineup())
 	_body.add_child(split)
@@ -960,7 +969,12 @@ func _lineup_hint() -> String:
 	if _lineup_note != "":
 		return _lineup_note
 	if _picked_recruit:
-		return "%s: now choose a place in your party%s." % [_picked_recruit.display_name, " (swaps them)" if _party.free_slots() <= 0 else ""]
+		var hint := "%s: now choose a place in your party%s." % [_picked_recruit.display_name, " (swaps them)" if _party.free_slots() <= 0 else ""]
+		if _party.free_slots() > 0:  # what they'd make together (#305)
+			var with_them: Dictionary = Formations.of(_party.members + [_picked_recruit])
+			if not with_them.is_empty():
+				hint += " Together: %s." % with_them["name"]
+		return hint
 	if _picked_member:
 		return "%s: choose a place to move to." % _picked_member.display_name
 	return "Pick someone (or drag them) into a place in your party."

@@ -324,7 +324,7 @@ Found weapons, armour and back pieces with properties (modifiers) arrive **unide
 - **Why it isn't a farm:** mastery 3 takes 54 points, earned only from landed blows or hits taken. That's at least seven fights at the per-fight cap, and weak monsters teach a quarter as much. An iron sword gains about 7 gold that way, roughly 1 gold per fight.
 - The item card says how much mastery adds ("Mastery adds 20% to its sale price (up to 30%)").
 
-## Formations and formation gates — agreed 2026-11-26 (owner and Claude; not built yet)
+## Formations and formation gates — agreed 2026-11-26 (owner and Claude; first slice built)
 
 The classes should play off each other. Three Soldiers fight best but struggle with
 navigation, traps and obstacles; three Scouts see and find the most but fight and act
@@ -414,8 +414,17 @@ heroes are worth keeping.
 
 **Open:** bonus sizes and names; the Scout and Soldier gates; where each gate sits on the
 area network; exactly what lies beyond the portal and how it connects to the relic.
-**First slice to build:** formations at the fire (name, bonus, blind spot), the four pure
-abilities and the step-down rule.
+**First slice — built 2026-11-26 (`scripts/formations.gd`; numbers are first guesses):**
+- Shown at the recruitment fire (under the recruits; a picked recruit previews "Together:
+  ...") and on the preparation screen: name, bonus, and a blind spot per missing class.
+- Shield Wall: every blow 1 lighter. Pathfinders: every ordinary fight heard first, rooms
+  map in full on entering, wandering packs on the map. Tunnel Crew: locked doors (6 time)
+  and chained gates (10 time) forced without key or lever, +1 find in treasure rooms.
+  Vigil: +1 prayer each at setting out, strain gains ×0.75.
+- Pairs: Spearhead (front row 1 lighter), Lookouts (rooms map in full), Work Gang (+1
+  find), Chantry (strain ×0.9). Mixed: Survey Party (strain ×0.9, lantern oil ×0.9).
+- Set on leaving camp (`Companion.set_out`); steps down and back up underground, with a
+  message.
 
 ## Map and dungeon progression
 

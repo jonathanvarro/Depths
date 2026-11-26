@@ -49,6 +49,7 @@ const Progression := preload("res://scripts/progression.gd")
 const Sounds := preload("res://scripts/sounds.gd")
 const Music := preload("res://scripts/music.gd")
 const Puzzles := preload("res://scripts/puzzles.gd")
+const Formations := preload("res://scripts/formations.gd")
 const Elites := preload("res://scripts/elites.gd")
 const ChestTiers := preload("res://scripts/chest_tiers.gd")
 const PuzzleProps := preload("res://scripts/puzzle_props.gd")
@@ -1318,6 +1319,8 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 		return
 	_look_for_traps(cell)
 	_wade(cell)
+	_map_room(cell)
+	_note_formation()
 	if _map_beat(cell):
 		return  # a fight began on the map (#171)
 	_banter()
@@ -2249,13 +2252,13 @@ func _map_beat(party_cell: Vector2i) -> bool:
 
 ## Where the floor's monsters stand, while a Mage's Watchful eye lasts (#170).
 func _sensed_cells() -> Array:
-	if _party_state == null or _party_state.watch_left <= 0:
+	if _party_state == null or (_party_state.watch_left <= 0 and not _party_state.pathfinders()):  # Pathfinders see packs (#305)
 		return []
 	return _groups.map(func(g): return g.cell)
 
 
 func _move_group_node(group) -> void:
-	if _party_state.watch_left > 0:
+	if _party_state.watch_left > 0 or _party_state.pathfinders():
 		_minimap.queue_redraw()
 	if not is_instance_valid(group.node):
 		return
@@ -2774,6 +2777,8 @@ func _camp_loop(reward := 0, note := "") -> void:
 	_party_state.field_binds = 0
 	for hero: Companion in _party_state.members:
 		Progression.reset(hero)  # a fresh expedition starts at level 1 (#172)
+	_party_state.set_out_formation()  # who goes now makes the trip's formation (#305)
+	_formation_id = _party_state.formation().get("id", "")
 	Brews.shuffle(_party_state.supplies, _rng.randi())  # new looks for the brews (#175)
 	_expedition = Expedition.new(_party_state, _expedition.number + 1)
 	for key: String in _said.keys():
@@ -2792,7 +2797,49 @@ func _camp_loop(reward := 0, note := "") -> void:
 		_offer_level_ups.call_deferred()
 	else:
 		_show_message("Expedition %d: back into the mine." % _expedition.number)
+	if _formation_id != "":
+		_show_message("They go down as %s." % _party_state.formation()["name"])
 	_light_torch_if_dark()
+
+
+# --- Formations (#305) ------------------------------------------------
+
+## The formation last announced, to say when a fall steps it down or a
+## hero getting up restores it.
+var _formation_id := ""
+
+func _note_formation() -> void:
+	if _party_state == null or _ending:
+		return
+	var now: Dictionary = _party_state.formation()
+	var id: String = now.get("id", "")
+	if id == _formation_id:
+		return
+	var was: String = _formation_id
+	_formation_id = id
+	if not _party_state.members.any(func(h: Companion): return h.set_out):
+		return  # nothing set out (an older save mid-trip)
+	if id == "":
+		_show_message("With the party broken, the formation is lost.")
+	elif was == "" or (Formations.TIERS.find(now["tier"]) < Formations.TIERS.find(was.get_slice(":", 0))):
+		_show_message("Back on their feet: the %s again." % now["name"])
+	else:
+		_show_message("A fall breaks the formation: now %s." % now["name"])
+	_party_state.steady_members()
+
+
+## Pathfinders and Lookouts (#305): a room maps in full on entering it.
+func _map_room(cell: Vector2i) -> void:
+	if _in_opening or not _party_state.maps_rooms() or not _map._is_room_cell(cell) or _map.marks.get("rooms_mapped", {}).has(cell):
+		return
+	var room: Array = _map.room_around(cell)
+	if not _map.marks.has("rooms_mapped"):
+		_map.marks["rooms_mapped"] = {}
+	for c in room:
+		_map.reveal_around(c)
+		_map.marks["rooms_mapped"][c] = true
+	_minimap.queue_redraw()
+	_full_map_view.queue_redraw()
 
 
 # --- Saving (#45) -----------------------------------------------------
@@ -2907,10 +2954,19 @@ func _work_puzzle(cell: Vector2i) -> bool:
 					if p["held"]:
 						_open_puzzle_door(p)
 						_show_message("The jailer's key turns, and the cell door swings open." if _area == "jail" else "The key turns, stiff with rust, and the door grinds open.")
+					elif _party_state.tunnel_crew():  # a Tunnel Crew forces it (#305)
+						_party_state.advance_time(Formations.PICK_TIME)
+						_open_puzzle_door(p)
+						_show_message("No key needed: the Tunnel Crew works the lock until it gives.")
 					else:
 						_show_message("A locked cell door. The jailer's keys must be somewhere in here." if _area == "jail" else "Locked. Somewhere on this floor there must be a key.")
 				"lever":
-					_show_message("An iron gate on chains, shut fast. No handle this side: something must raise it.")
+					if _party_state.tunnel_crew():
+						_party_state.advance_time(Formations.GATE_TIME)
+						_open_puzzle_door(p)
+						_show_message("The Tunnel Crew wedges the chains and levers the gate up by hand.")
+					else:
+						_show_message("An iron gate on chains, shut fast. No handle this side: something must raise it.")
 			return true
 		if p.get("lever", Vector2i(-1, -1)) == cell:
 			if p["open"]:
@@ -3414,10 +3470,11 @@ func _hears_first(fight_cell: Vector2i) -> bool:
 		return false
 	if _map.alarmed:
 		return false  # a bell rang: they're listening for you (#94)
-	if not _party_state.living_members().any(func(h: Companion): return h.has_talent("sharp_ears")):
+	var pathfinders: bool = _party_state.pathfinders()  # hear every fight first (#305)
+	if not pathfinders and not _party_state.living_members().any(func(h: Companion): return h.has_talent("sharp_ears")):
 		return false
 	if not _map.heard.has(fight_cell):
-		_map.heard[fight_cell] = _rng.randf() < HEAR_FIRST_CHANCE
+		_map.heard[fight_cell] = pathfinders or _rng.randf() < HEAR_FIRST_CHANCE
 	return _map.heard[fight_cell]
 
 

@@ -12,6 +12,7 @@ signal brew_revealed  # a revealing brew was drunk: show the floor's rooms (#175
 
 const GearModel := preload("res://scripts/gear_model.gd")
 const Supplies := preload("res://scripts/supplies.gd")
+const Formations := preload("res://scripts/formations.gd")
 const Trinkets := preload("res://scripts/trinkets.gd")
 const StrainRules := preload("res://scripts/strain.gd")
 const Spells := preload("res://scripts/spells.gd")
@@ -89,8 +90,56 @@ const WARDEN_CALM := 0.85
 
 func steady_members() -> void:
 	var calm := WARDEN_CALM if has_role("Warden") else 1.0  # an unconverted Warden only: classes (#179) have no such perk
+	calm *= Formations.CALM.get(formation().get("id", ""), 1.0)  # a Vigil, Chantry or Survey Party (#305)
 	for member in members:
 		member.party_calm = calm
+
+
+# --- Formations (#305) ------------------------------------------------
+
+## Leaving camp: whoever goes now makes the trip's formation. A Vigil's
+## Acolytes each set out with an extra prayer.
+func set_out_formation() -> void:
+	for member in members:
+		member.set_out = member.is_alive()
+	if formation().get("id", "") == "pure:Mage":
+		for member in members:
+			if Spells.is_caster(member):
+				member.casts += 1
+	steady_members()
+
+
+## The formation as it stands: Formations.current.
+func formation() -> Dictionary:
+	return Formations.current(self)
+
+
+## A Shield Wall turns every blow a little; a Spearhead the front row's.
+func formation_guard(hero: Companion) -> int:
+	match formation().get("id", ""):
+		"pure:Melee": return 1
+		"pair:Melee": return 1 if hero.row == "front" else 0
+	return 0
+
+
+## Pathfinders and Lookouts map a room in full on entering it.
+func maps_rooms() -> bool:
+	return formation().get("id", "") in ["pure:Scout", "pair:Scout"]
+
+
+## Pathfinders hear every ordinary fight first and see wandering packs.
+func pathfinders() -> bool:
+	return formation().get("id", "") == "pure:Scout"
+
+
+## A Tunnel Crew forces locks and chained gates.
+func tunnel_crew() -> bool:
+	return formation().get("id", "") == "pure:Fixer"
+
+
+## Extra finds in a treasure room: a Tunnel Crew or a Work Gang.
+func formation_finds() -> int:
+	return 1 if formation().get("id", "") in ["pure:Fixer", "pair:Fixer"] else 0
 
 
 ## Slots lost to injuries: a limping hero carries less (#104) until the
@@ -149,7 +198,7 @@ func field_bind(hero: Companion) -> bool:
 
 ## How fast the lantern burns, after boons and banes (#133).
 func oil_rate() -> float:
-	var rate := 1.0
+	var rate: float = Formations.LIGHT_RATE.get(formation().get("id", ""), 1.0)  # a Survey Party (#305)
 	for member in living_members():
 		rate *= member.boon_product("oil_rate")
 	return rate
@@ -186,6 +235,7 @@ var near_light := false
 func advance_time(units := 1) -> void:
 	time_elapsed += units
 	update_capacity()  # injuries come and go (#104)
+	steady_members()  # a fall can step the formation down (#305)
 	for i in units:
 		supplies.burn(1, oil_rate())
 		var light: Supplies.Light = supplies.light_band()

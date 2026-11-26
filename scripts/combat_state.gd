@@ -1280,6 +1280,8 @@ func _gear_guard(foe: Foe, hero: Companion) -> int:
 		extra += hero.back.guard
 	if hero.body and is_defending(hero):
 		extra += int(hero.body.traits.get("brace_armour", 0))
+	if party and party.has_method("formation_guard"):
+		extra += party.formation_guard(hero)  # a Shield Wall or Spearhead (#305)
 	return extra
 
 

@@ -198,7 +198,7 @@ func resolve(party, choice: EventChoice, forced := -1, flags: Array = []) -> Dic
 		notes.append("lantern %s" % ("refilled" if outcome.oil > 0 else "spilled"))
 		chip.call(CHIP_ICONS["oil"].icon, "+" if outcome.oil > 0 else "-", outcome.oil > 0, null)
 	var loot: Dictionary = outcome.loot.duplicate()
-	var finds: int = outcome.treasure + (Classes.FIXER_TREASURE if outcome.treasure > 0 and party.has_role("Fixer") else 0)  # #179
+	var finds: int = outcome.treasure + (party.formation_finds() if outcome.treasure > 0 and party.has_method("formation_finds") else 0)  # a Tunnel Crew or Work Gang (#305)
 	for i in finds:
 		var find: SupplyItem = random_treasure(depth)
 		loot[find] = loot.get(find, 0) + 1

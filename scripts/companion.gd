@@ -149,6 +149,9 @@ var boons: Array[Dictionary] = []
 
 ## Set by the party (#101): a standing Warden steadies everyone's nerves.
 var party_calm := 1.0
+## Set out from camp with the party this trip (#305): only they make its
+## formation. Saved; someone taken on below never counts.
+var set_out := false
 ## What this hero remembers (#118, owner 2026-10-26): facts the game saw,
 ## newest first, at most MEMORY_LIMIT. Each is {"kind", "text", "day",
 ## "about"}: kind is rescued, close_call, slew or lost; `about` names who
