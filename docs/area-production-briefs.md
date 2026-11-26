@@ -190,6 +190,12 @@ distinct from the wet bare rock of the Damp Caves (#300). The existing
 fungal theme (`themes/fungal-caverns.tres`, `scripts/fungal_dressing.gd`,
 the `cave-growth-3d-v1` fungi) is the starting point. It leads to the Grove.
 
+**Owner identity direction/proposal (2026-11-26, #304):** this side region should put less pressure on the cost of light and strain, using faintly glowing growth and offering strain relief with a cost such as poison. Poison traps are a prominent hazard. Monsters, useful tools and the feel of the region should reinforce that different resource tradeoff. Exact illumination, relief, poison, trap and encounter rules remain to be designed; this is not a live balance change.
+
+**Transition room:** grow mushrooms and mold in the **Damp Caves room containing the Hollows exit**, with a gradual approach cue. The already delivered crawl has local fungi; room-scale beds, mold patches and nearby dressing are pending C work. Keep other Damp Caves rooms primarily wet bare rock so the branch remains identifiable.
+
+**Candidate gameplay treatment, for review:** usable light around selected fungal beds with darker connecting passages; limited calming/toxic harvests; visible poison-hazard families with different responses; existing venom/antidotes as the starting point. Fire can remain useful for deliberately clearing dangerous growth even when glow reduces the need for continuous light. Do not infer gameplay illumination from emissive art alone, make all glow poisonous, or add hidden unavoidable poison costs. Preserve clear warnings and make available counterplay visible. Existing mood-only glow and all live fuel/visibility rules stay unchanged until Claude implements agreed rules.
+
 - **P1:**
   - Push the look much further than today's floor 2: walls furred with mycelium, giant shelf fungi, stalks taller than the party, spore haze, soft glows.
   - Replace the 2D `moss-curtain` and the 2D fungus-pulse effect.

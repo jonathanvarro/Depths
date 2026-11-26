@@ -8,6 +8,8 @@ Keep the 35×35 generator envelope and existing room footprints of at most 5×5.
 
 Keep a dry, connected route from the mine entrance to **both** outward exits. Put water below or beside that route: central basins with dry rims, shallow side channels, short flooded dead ends. Reach the two exits through different recognizable approaches; goblin occupation hints lead toward Cavern, while fungal traces only grow dense near the Hollows boundary. The Damp Caves themselves emphasize wet rock, silt and calcite rather than the fungal side region's mushrooms.
 
+Owner refinement (2026-11-26, #304): the room holding the Fungal Hollows exit should contain mushroom beds and mold on nearby stone, beyond the fungi on the crawl frame itself. Let that local room hint at the side region while keeping the rest of the Damp Caves primarily wet bare rock. This is a dressing placement requirement for C, not a reason to spread the fungal theme over the whole junction floor or to reveal an undiscovered exit on the map.
+
 Propose exit placement by walking distance rather than opposite map corners: do not show an onward exit immediately from arrival, and aim for both exits beyond the first two or three encounter-sized chambers. Exact distance targets and seeded frequency need full-floor generation/playtests. Keep a return route readable, with a familiar landmark at important junctions. No fixed full-floor counts are established by these small sections.
 
 ## Legend and data contract

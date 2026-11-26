@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-11-26 – ChatGPT (Fungal Hollows identity and exit-room cue, #304)
+- Did: recorded the owner's direction/proposal in `docs/area-production-briefs.md`: mushrooms/mold in the Damp Caves exit room; Fungal Hollows puts less pressure on light cost and strain, with faint glowing fungi, strain relief at a cost such as poison, and numerous poison traps. Added the room-scale cue to pending C/layout handoffs; the completed crawl only has local fungi so far.
+- Next: agree functional glow coverage/fuel savings, strain-relief cost/availability, poison warnings/cures and distinct trap/monster/tool roles. Lit pockets/darker links, finite toxic harvests, existing venom/antidotes and deliberate clearing fire are discussion candidates, not assigned mechanics or stats. See #304.
+- Watch out: current decorative glow is mood-only. Useful light/fuel savings need explicit gameplay support. No live rules or assets changed in this clarification; do not silently move the current Damp Caves bitter-moss site or priest quest. Preserve the main Damp Caves' wet-rock identity and existing near-site discovery.
+
 ## 2026-11-26 – ChatGPT (Damp Caves paired exits and passages, #302)
 - Did: B1–B4 and N1–N3 for the two junction links in `art/features/damp-passages-v1`: Cavern water-cut shaft/rope return, Fungal Hollows crawl/return, fibrous wet root curtain intact/opened and limestone/siltfall blocked/cleared. Registered immediate states, exact static set_motion, −Z floor-centre mount; raised route glyphs match six original SVGs in `art/ui/area-routes-v1`. Reused original geometry helpers and the surface batch's limestone albedo; no private or downloaded source. Separate editable Blender masters remain local.
 - Validation: 274 native Mobile/D3D12 checks and 65 actual views, including neutral/torch, both phone shapes, real N–S/E–W LevelBuilder placements, opaque state/budget/bounds, restore-before-ready, actual open swap, 1.85m centre clearance, shaft/crawl floor contracts, canopy hide/restore and 16/24/32px glyph display. Clean native logs. Gallery/masters: `build/local-damp-passages-v1/inspector.html`; full contracts/budgets: asset README/catalogue and `docs/damp-caves.md`.
