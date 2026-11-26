@@ -6,6 +6,8 @@
 
 **Proposal below:** twelve floors in six layers, working place/quest names, 48 activity concepts, materials and story connections. These are options for review, not approved lore, a required production list or implemented gameplay. A temple and portal are a possible finale presentation; neither defines the relic yet. No new game rules, floors, mining, quests or story scenes are added by this document.
 
+**Topology clarification (owner proposal, 2026-11-25, #300):** optional lairs/quest areas remain within floors. The owner additionally proposes floor junctions with two or more exits to distinct areas/floors. The numbered outline below predates that proposal and is not an agreed linear travel network. Exact branches, destinations and return/rejoin behavior remain open; see DESIGN.md "Floor junctions". Current gameplay remains a depth-based sequence.
+
 ## The recommended shape
 
 Make the cave feel like **one place with a buried history**, rather than unrelated environments stacked below one another. People occupy its entrances; goblins control the passages and waterworks; water feeds fungal growth through old conduits; those conduits lead into a buried city; the city's deepest structures surround a temple and something still active.

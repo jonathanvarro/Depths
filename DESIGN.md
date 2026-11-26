@@ -340,6 +340,24 @@ Allow moments of recovery within the overall decline. A defensible room or usefu
 
 Returning safely with useful gains should matter even when the bottom is not reached. Exact return-travel hazards, stair rules, and expedition persistence are unresolved.
 
+## Floor junctions — owner proposal, 2026-11-25 (#300)
+
+Floors may have **two or more exits leading to distinct areas/floors**. Optional lairs and quest packages remain authored areas within a floor; floor junctions additionally branch the wider cave's travel network. This remains one connected cave with the surface camp as home.
+
+The existing Mines → Fungal Caverns → Goblin Outskirts → Fortress → Drowned Galleries → Black Reservoir list describes the current sequence/theme order. It does not settle the proposed junction topology. A junction's destination might lie deeper or alongside another area; exact connections, first junction, destination names, branch lengths, reconnections, gating and difficulty/rewards remain to be designed. No particular extra region or floor count is approved here.
+
+Illustrative structure only:
+
+```text
+Mines
+  |
+Junction floor
+  |-- Exit A -> one area / onward route
+  `-- Exit B -> a different area / route
+```
+
+Current gameplay still travels by depth +1/-1. Before building a junction, define distinct area identities and explicit paired exit/arrival points, then account for saved exploration/state, procedural seeds, quests, map discovery and quartermaster/scout destinations. Areas at equal depth must remain distinct. First agree one small junction and whether its branch returns or rejoins; this proposal changes no live travel or generation rules.
+
 ## Story direction — decided 2026-10-19 (#122, #123)
 
 **Scope:** the cave is the main setting. The next "site" is **deeper within the same cave**, and the story centres here rather than across many places. Other settings aren't ruled out for later. The aim is compelling gameplay, with room for characters to talk and explain the story and setting. This replaces the multi-site route in the next section for now.

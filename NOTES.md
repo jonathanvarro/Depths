@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-11-25 – ChatGPT (floor-junction clarification, #300)
+- Did: recorded the owner's proposal: retain optional authored lairs/quest areas within floors and add floor junctions with two or more exits to distinct areas/floors. The illustrated stack showed current theme order, not an agreed future travel topology. Updated DESIGN and marked the older twelve-floor proposal accordingly.
+- Next: agree a small first junction, its destinations and whether branches return or rejoin. Exact region assignment, branch length, gating and difficulty/rewards remain open. Issue #300 tracks this design separately.
+- Watch out: proposal only; current travel is depth +1/-1 with depth-keyed caches and generic up/down arrival. Any implementation needs distinct area IDs and paired exit anchors plus save/quest/map/scout handling. No game files changed; active main edits were left untouched.
+
 ## 2026-11-25 – ChatGPT (rat feet showing through body, #297)
 - Did: normal refined v2/v3 coat/skin/details/membrane shaders no longer write ALPHA, so they use real opaque depth. Removed v3's Details priority workaround. `set_opacity` selects explicitly preloaded/cached fade shader siblings only below full opacity and restores the exact solid shader at 1.0; materials retain their instances/parameters. No meshes, rigs, clips, light budgets, encounter visibility or gameplay changes.
 - Validation: 63 native occlusion/fade checks compare actual surface visibility against an opaque material reference over rat/great-rat idle/attack/hurt at front/oblique/side angles. Reconstructed old sorting leaks 3,790 body pixels; corrected masks match the opaque reference. All 1,196 native real-combat/phone checks pass, including visible eyes and grounded bat tags. Captures: `build/local-creature-opaque`; handoff: `docs/rat-predatory-revision.md`.
