@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode depth_prepass_alpha, diffuse_burley, specular_schlick_ggx;
+render_mode diffuse_burley, specular_schlick_ggx;
 uniform int surface_kind = 0;
 uniform float opacity : hint_range(0.0,1.0) = 1.0;
 uniform float ash : hint_range(0.0,1.0) = 0.0;
@@ -16,5 +16,4 @@ void fragment(){
     ALBEDO=base*(1.0+pose_readability)*(1.0+(fibre*.015+(grain-.5)*.035)*(surface_kind==0?1.0:.3));
     ROUGHNESS=surface_kind==0?.96:(surface_kind==1?.78:.42);
     SPECULAR=surface_kind==2?.35:.15;
-    ALPHA=opacity;
 }

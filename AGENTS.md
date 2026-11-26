@@ -59,6 +59,14 @@ Templates > Download and Install; already installed on the owner's PC).
 
 ## Project structure
 
+- #297 fixes refined-creature translucency: normal v2/v3 coat, skin, details
+  and membrane shaders are fully opaque; only `set_opacity` below 1.0 selects
+  cached/preloaded `*-fade.gdshader` siblings. Full opacity restores the original
+  shader. Do not write ALPHA in the normal material or raise Details priority
+  to force eyes visible: that also draws hidden claws over the body. Native
+  occlusion/reference and real combat/phone checks pass. No geometry changes;
+  review: `build/local-creature-opaque`, `docs/rat-predatory-revision.md`.
+
 - `docs/rat-predatory-revision.md` – #294's review follow-up in
   `art/enemies/creatures-predatory-v3`: longer tapered rat heads, smaller
   rear-set ears, tucked legs, matte fur/red eyes, low great rat and visible
