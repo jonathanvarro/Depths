@@ -166,6 +166,7 @@ static func unpack_into(object: Object, data: Dictionary) -> void:
 			object.set(key, typed_dict)
 		else:
 			object.set(key, value)
-	if object is Companion and object.named_id != "" and object.portrait_set == null:
-		# Older named companions saved the still portrait only.
+	if object is Companion and object.named_id != "":
+		# Older named companions saved the still portrait only, or a
+		# mismatched one (Rook, fixed 2026-11-24): their own face, always.
 		load("res://scripts/named_cast.gd").apply_portrait(object)

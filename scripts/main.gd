@@ -2449,6 +2449,16 @@ static func encounter_pool(depth: int, party_size: int) -> Array:
 
 
 ## Ends the expedition (#17) and shows what it gained and cost.
+## "Corin wakes", "Mara and Corin wake": who a wipe sends back to camp.
+func _who_wakes() -> String:
+	var mains: Array = _party_state.members.filter(func(h): return h.main_hero).map(func(h): return h.display_name)
+	if mains.is_empty():
+		return "Your leader wakes"
+	if mains.size() == 1:
+		return "%s wakes" % mains[0]
+	return "%s and %s wake" % [", ".join(PackedStringArray(mains.slice(0, -1))), mains[-1]]
+
+
 func _end_expedition(ending: int) -> void:
 	_tactical.exit()  # camp is seen as itself (#248)
 	if _ending:
@@ -2459,7 +2469,7 @@ func _end_expedition(ending: int) -> void:
 	_party.locked = true  # after closing overlays, which unlock on close
 	var notes := {
 		Expedition.Ending.RETURNED: "You stagger out into the daylight, alone." if _in_opening else "You climb out into the daylight.",
-		Expedition.Ending.WIPED: "Everyone falls, and everything they carried is lost. A main hero wakes at camp, badly hurt, in the camp's plain spare kit. The others lie where they fell, on floor %d: a later trip can find them and carry them home to the nurse." % _depth,
+		Expedition.Ending.WIPED: "The party fell on floor %d, and everything they carried is lost. %s at camp, badly hurt.%s" % [_depth, _who_wakes(), " The others lie where they fell: a later trip can carry them home to the nurse." if _party_state.members.any(func(h): return not h.main_hero) else ""],
 		Expedition.Ending.REACHED_BOTTOM: "You stood where the others fell, and lived to climb back.",
 	}
 	if ending == Expedition.Ending.WIPED:
@@ -2472,8 +2482,11 @@ func _end_expedition(ending: int) -> void:
 		_show_hint("")  # the escape is over: no "walk into the light" on top
 		_results.show_brief("Barely survived", "You stagger out into the daylight, alone.", "To camp")
 	else:
-		var note: String = notes[ending] + "
-At camp, the quartermaster tops your pack back up: %s." % _camp_state.issue_text()
+		# Only what matters now (owner, 2026-11-24): after a wipe, the
+		# quartermaster's top-up can wait for camp.
+		var note: String = notes[ending]
+		if ending != Expedition.Ending.WIPED:
+			note += "\nAt camp, the quartermaster tops your pack back up: %s." % _camp_state.issue_text()
 		_remember_the_fallen()
 		_results.show_results(ending, _expedition, _party_state, note, _homecoming_lines())
 	_trip_memories.clear()

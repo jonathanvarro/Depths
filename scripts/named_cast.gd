@@ -12,7 +12,9 @@ const Quests := preload("res://scripts/quests.gd")
 const CAST := {
 	"branna": {"name": "Branna", "role": "Melee", "portrait": "res://art/portraits/named-cast-v1/branna.png", "portrait_set": "res://data/portraits/named-cast-v1/branna.tres",
 		"intro": "Mine rescue worker. Came up to sort the dead miners' belongings, and stayed to see who killed them.", "when": "report"},
-	"rook": {"name": "Rook", "role": "Fixer", "portrait_set": "res://data/portraits/fixer-v1/fixer-a.tres",
+	# His still matches his rig (2026-11-24: the fire and the results showed
+	# a random Fixer's face while the cards showed his).
+	"rook": {"name": "Rook", "role": "Fixer", "portrait": "res://art/portraits/fixer-v1/fixer-a/preview.png", "portrait_set": "res://data/portraits/fixer-v1/fixer-a.tres",
 		"intro": "Expedition broker. Has already sold the merchant two crates he didn't know he needed.", "when": "merchant"},
 	"nessa": {"name": "Nessa", "role": "Scout", "portrait": "res://art/portraits/named-cast-v1/nessa.png", "portrait_set": "res://data/portraits/named-cast-v1/nessa.tres",
 		"intro": "Survey assistant. Says the old survey of the second floor is wrong, and wants to see for herself.", "when": "floor2"},

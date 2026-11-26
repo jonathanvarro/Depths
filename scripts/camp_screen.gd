@@ -663,7 +663,7 @@ func _smith_list() -> void:
 	elif _camp.forge_offered():
 		_text("\"With iron like that, I could build a proper forge. Better edges, better stitching. It'd cost - %dg for the bellows and the fire-bricks.\"" % CampState.FORGE_PRICE)
 		var fund := _button("Pay for a forge (%dg)" % CampState.FORGE_PRICE)
-		fund.disabled = _party.supplies.gold < CampState.FORGE_PRICE
+		fund.disabled = _purse() < CampState.FORGE_PRICE
 		fund.pressed.connect(func():
 			_camp.build_forge(_party)
 			_refresh_activity())
@@ -713,7 +713,7 @@ func _nights(count: int) -> String:
 
 ## Top-right: the purse.
 func _status() -> String:
-	return "%d gold" % _party.supplies.gold  # no day count (owner, 2026-11-24)
+	return "%d gold" % _purse()  # carried and stashed; no day count (owner, 2026-11-24)
 
 
 ## `room` false: the pack has no space for it (#133).
@@ -728,19 +728,19 @@ func _shop_row(text: String, price: int, on_buy: Callable, icon: Texture2D = nul
 	name.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	name.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	details.add_child(name)
-	if _party.supplies.gold < price:
-		details.add_child(_label("Need %dg more" % (price-_party.supplies.gold),BODY,11,MUTED))
+	if _purse() < price:
+		details.add_child(_label("Need %dg more" % (price-_purse()),BODY,11,MUTED))
 	var buy := _button("Buy %dg" % price)
 	buy.custom_minimum_size = Vector2(78, 30)
 	_price_icon(buy)
-	buy.disabled = _party.supplies.gold < price or not room
-	buy.tooltip_text = "Your pack is full" if not room else ("Need %dg more gold" % (price-_party.supplies.gold) if buy.disabled else "Buy for %dg" % price)
+	buy.disabled = _purse() < price or not room
+	buy.tooltip_text = "Your pack is full" if not room else ("Need %dg more gold" % (price-_purse()) if buy.disabled else "Buy for %dg" % price)
 	if not room:
 		details.add_child(_label("No room in your pack", BODY, 11, MUTED))
 	buy.pressed.connect(func():
-		var gold_before: int = _party.supplies.gold
+		var gold_before: int = _purse()
 		on_buy.call()
-		if _party.supplies.gold < gold_before:
+		if _purse() < gold_before:
 			Sounds.play(self, "purchase", -7.0)
 		_refresh_activity())
 	row.add_child(buy)
@@ -759,9 +759,9 @@ func _sell_row(text: String, price: int, on_sell: Callable, icon: Texture2D = nu
 	sell.custom_minimum_size = Vector2(78, 30)
 	_price_icon(sell)
 	sell.pressed.connect(func():
-		var gold_before: int = _party.supplies.gold
+		var gold_before: int = _purse()
 		on_sell.call()
-		if _party.supplies.gold > gold_before:
+		if _purse() > gold_before:
 			Sounds.play(self, "coins", -7.0)
 		_refresh_activity())
 	row.add_child(sell)
@@ -785,7 +785,7 @@ func _nurse() -> void:
 	for hero: Companion in _camp.fallen:
 		_text("%s lies under a sheet in the far tent. \"I can try. It costs, and they won't come back whole.\"" % hero.display_name, AMBER)
 		var back := _button("Bring %s back (%dg, -%d health for good)" % [hero.display_name, CampState.REVIVE_PRICE, CampState.REVIVE_SCAR])
-		back.disabled = _party.supplies.gold < CampState.REVIVE_PRICE
+		back.disabled = _purse() < CampState.REVIVE_PRICE
 		back.pressed.connect(func():
 			if _camp.revive(_party, hero):
 				announce("%s breathes again, and waits by the fire." % hero.display_name)
@@ -803,7 +803,7 @@ func _nurse() -> void:
 			var bane: Boon = hero.boons.filter(func(b): return b["boon"].bane)[0]["boon"]
 			_text("%s still carries %s: %s" % [hero.display_name, bane.display_name.to_lower(), bane.description], AMBER)
 		var lift := _button("Lift it (%dg)" % CampState.LIFT_BANE_PRICE)
-		lift.disabled = _party.supplies.gold < CampState.LIFT_BANE_PRICE
+		lift.disabled = _purse() < CampState.LIFT_BANE_PRICE
 		lift.pressed.connect(func():
 			var lifted: Boon = _camp.lift_bane(_party, hero)
 			_refresh_activity()
@@ -1256,7 +1256,7 @@ func _cave_path() -> void:
 	for depth: int in _camp.open_routes():
 		var price: int = _camp.route_price(depth)
 		var route := _button("Route to floor %d (%dg)" % [depth, price])
-		route.disabled = _party.supplies.gold < price
+		route.disabled = _purse() < price
 		route.pressed.connect(func():
 			if _camp.buy_route(_party, depth):
 				cave_chosen.emit(depth))
@@ -1373,3 +1373,9 @@ func _label(text: String, font: Font, size: int, color: Color) -> Label:
 	label.add_theme_color_override("font_shadow_color", Color.BLACK)
 	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	return label
+
+
+## The camp's purse: the pack's gold and the tent stash's, both spendable here
+## (owner, 2026-11-24).
+func _purse() -> int:
+	return _party.supplies.gold + (_camp.stash.gold if _camp else 0)

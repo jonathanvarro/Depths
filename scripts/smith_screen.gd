@@ -60,7 +60,7 @@ func refresh() -> void:
 	if _camp.forge_offered():
 		_extra.text="Build a forge · %d"%CampState.FORGE_PRICE
 		_extra.visible=true
-		_extra.disabled=supplies.gold<CampState.FORGE_PRICE
+		_extra.disabled=_purse()<CampState.FORGE_PRICE
 		_extra.tooltip_text="With proper iron, he could build a forge: finer work, and pieces with something extra."
 	else:
 		# Tempering (#173): gear at mastery 3 or 6, worn or carried.
@@ -84,7 +84,7 @@ func refresh() -> void:
 		if item is Equipment:
 			entry.price=CampState.sell_price(_party,item)
 			entry.action="Sell · %d"%entry.price
-	set_view(stock,bag,supplies.slots_used(),supplies.capacity,supplies.gold)
+	set_view(stock,bag,supplies.slots_used(),supplies.capacity,_purse())
 
 ## Everything the party holds that's due a temper.
 func _ready_to_temper() -> Array:
@@ -145,15 +145,20 @@ func _summary(item:Equipment) -> String:
 
 func _buy_reason(price:int) -> String:
 	if not _party.supplies.has_room_for_gear():return "Your pack is full"
-	if _party.supplies.gold<price:return "Need %d more gold"%(price-_party.supplies.gold)
+	if _purse()<price:return "Need %d more gold"%(price-_purse())
 	return ""
 
 func _trade(entry:Dictionary,side:String) -> void:
-	var before:int=_party.supplies.gold
+	var before:int=_purse()
 	if side=="left" and entry.get("item") is Equipment:
 		_camp.buy_gear(_party,entry.item)
 	elif side=="right" and entry.get("item") is Equipment:
 		_camp.sell_gear(_party,entry.item,true)
-	if _party.supplies.gold<before:Sounds.play(self,"purchase",-7.0)
-	elif _party.supplies.gold>before:Sounds.play(self,"coins",-7.0)
+	if _purse()<before:Sounds.play(self,"purchase",-7.0)
+	elif _purse()>before:Sounds.play(self,"coins",-7.0)
 	refresh()
+
+
+## What can be spent here: the pack's gold and the tent stash's (2026-11-24).
+func _purse() -> int:
+	return _party.supplies.gold + (_camp.stash.gold if _camp else 0)
