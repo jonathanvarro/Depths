@@ -1,6 +1,6 @@
 # Damp Caves: production handoff (#302)
 
-2026-11-26 · First delivery on `codex/damp-caves-surfaces`, based on Claude's brief at `aca0d4ce`. The owner asked to start the larger list; this delivery completes a bounded first batch, not the whole floor. Claude retains live hookup and rules. Existing fungal files remain intact for the fungal side region.
+2026-11-26 · First delivery on `codex/damp-caves-surfaces`, based on Claude's brief at `aca0d4ce`. Claude subsequently added `docs/area-production-briefs.md` (now incorporated); the two-exit/sign/glyph kit and three-knocks prop are also pending P1 work. The owner asked to start the larger list; this delivery completes a bounded first batch, not the whole floor. Claude retains live hookup and rules. Existing fungal files remain intact for the fungal side region.
 
 ## Production status
 
@@ -8,9 +8,9 @@
 | --- | --- | --- |
 | A1–A4 surfaces | Delivered, native-checked; owner/device review remains | `art/textures/damp-caves-v1` |
 | G layouts | Four complete design candidates; owner/Claude review before gameplay hookup | `docs/damp-caves-layout.md`, machine-readable `damp-caves-layout-sections.json` |
-| B passages | Not produced; next production batch | Wet fibrous curtain, obstruction, shaft and ascent |
+| B passages + N1–N3 network kit | Not produced; next production batch | Wet fibrous curtain, obstruction, distinct Cavern/Hollows outward and return exits, signs and map glyphs |
 | C dressing | Not produced | Damp wall/ceiling/edge/floor pieces, still-safe drip effect |
-| D 2D leftovers | Not produced | Floor 1–2 dressing/landmark/event replacements; keep each region's style |
+| D 2D leftovers | Not produced | Floor 1–2 dressing/landmark/event replacements, including three-knocks; keep each region's style |
 | E landmarks | Layout placement notes only; art kits not produced | Sump, weeping wall, drowned drift, rimstone stair, bone silt, wet lost cache |
 | F event props | Not produced | Satchel, pearls, seep, ledge and fish state sets |
 | H sound | Not produced | Ambience, wet steps, bump, passage and drip sounds |
@@ -45,4 +45,4 @@ Re-run the surface fixture through `tools/testing/background_godot.py`, passing 
 
 ## Next production batch
 
-Proceed with B's four feature sets using the existing floor-center/−Z convention. Favor a visibly **fibrous wet root/slime curtain** for B1 so the existing burn/tear role makes sense; calcite stone should not inherit web-burning behavior. B2 needs real blocked/cleared art, B3 a recessed water-cut descent with a ledge, and B4 a wet rope ascent. Keep existing passage/traversal and way-up/down glow caller-owned, with no art-side collision or RNG. Then build C's shared dressing pieces and use them to complete D/E/F. Creature concepts can be prepared for review while props progress; models follow explicit concept approval.
+Proceed with B's four feature sets using the existing floor-center/−Z convention and the latest area brief's N1–N3: distinct ways on/back toward Cavern and Fungal Hollows, corresponding signs and map glyphs. Do not deliver one generic onward exit for the new junction. Favor a visibly **fibrous wet root/slime curtain** for B1 so the existing burn/tear role makes sense; calcite stone should not inherit web-burning behavior. B2 needs real blocked/cleared art, B3 a recessed water-cut descent with a ledge, and B4 a wet rope ascent. Keep existing passage/traversal and way-up/down glow caller-owned, with no art-side collision or RNG. Then build C's shared dressing pieces and use them to complete D/E/F. Creature concepts can be prepared for review while props progress; models follow explicit concept approval.
