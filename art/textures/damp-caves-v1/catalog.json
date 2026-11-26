@@ -1,0 +1,123 @@
+{
+  "issue": 302,
+  "brief": "docs/damp-caves-production-brief.md A1-A4",
+  "status": "standalone surface delivery; not live assigned",
+  "wall_height_metres": 2.2,
+  "cell_size_metres": 2,
+  "assets": [
+    {
+      "id": "limestone-wall",
+      "brief": "A1",
+      "texture": "res://art/textures/damp-caves-v1/limestone-wall.png",
+      "material": "res://art/textures/damp-caves-v1/limestone-wall.tres",
+      "mount": "wall",
+      "envelope_metres": [
+        2,
+        2.2
+      ],
+      "states": [
+        "static"
+      ],
+      "geometry_provided": false,
+      "triangles_per_wall_box": 12,
+      "triangles_per_plane": null,
+      "materials_per_surface": 1,
+      "draws_per_instance": 1,
+      "bones": 0,
+      "lights": 0,
+      "roughness": 0.61,
+      "specular": 0.28,
+      "runtime_max_edge": 512,
+      "mipmaps": true,
+      "opaque": true,
+      "wall_face_uv": true,
+      "texture_samples_per_fragment": 1
+    },
+    {
+      "id": "limestone-wall-variant",
+      "brief": "A1",
+      "texture": "res://art/textures/damp-caves-v1/limestone-wall-variant.png",
+      "material": "res://art/textures/damp-caves-v1/limestone-wall-variant.tres",
+      "mount": "wall",
+      "envelope_metres": [
+        2,
+        2.2
+      ],
+      "states": [
+        "static"
+      ],
+      "geometry_provided": false,
+      "triangles_per_wall_box": 12,
+      "triangles_per_plane": null,
+      "materials_per_surface": 1,
+      "draws_per_instance": 1,
+      "bones": 0,
+      "lights": 0,
+      "roughness": 0.63,
+      "specular": 0.28,
+      "runtime_max_edge": 512,
+      "mipmaps": true,
+      "opaque": true,
+      "wall_face_uv": true,
+      "texture_samples_per_fragment": 2,
+      "edge_blend": "Base rock at borders, 55% variant at centre, 16% smooth apron. No albedo editing."
+    },
+    {
+      "id": "silt-floor",
+      "brief": "A2",
+      "texture": "res://art/textures/damp-caves-v1/silt-floor.png",
+      "material": "res://art/textures/damp-caves-v1/silt-floor.tres",
+      "mount": "floor",
+      "envelope_metres": [
+        2,
+        2
+      ],
+      "states": [
+        "static"
+      ],
+      "geometry_provided": false,
+      "triangles_per_wall_box": null,
+      "triangles_per_plane": 2,
+      "materials_per_surface": 1,
+      "draws_per_instance": 1,
+      "bones": 0,
+      "lights": 0,
+      "roughness": 0.68,
+      "specular": 0.24,
+      "runtime_max_edge": 512,
+      "mipmaps": true,
+      "opaque": true,
+      "wall_face_uv": false,
+      "texture_samples_per_fragment": 1
+    },
+    {
+      "id": "seeping-ceiling",
+      "brief": "A3",
+      "texture": "res://art/textures/damp-caves-v1/seeping-ceiling.png",
+      "material": "res://art/textures/damp-caves-v1/seeping-ceiling.tres",
+      "mount": "ceiling",
+      "envelope_metres": [
+        2,
+        2
+      ],
+      "states": [
+        "static"
+      ],
+      "geometry_provided": false,
+      "triangles_per_wall_box": null,
+      "triangles_per_plane": 2,
+      "materials_per_surface": 1,
+      "draws_per_instance": 1,
+      "bones": 0,
+      "lights": 0,
+      "roughness": 0.66,
+      "specular": 0.25,
+      "runtime_max_edge": 512,
+      "mipmaps": true,
+      "opaque": true,
+      "wall_face_uv": false,
+      "texture_samples_per_fragment": 1
+    }
+  ],
+  "costs": "Four shared 512px albedos with mipmaps: about 5.33 MiB RGBA8 before GPU format/engine overhead. Base/floor/ceiling one texture sample per fragment. Variant blends two existing albedos within each tile, one extra texture sample, still one material/draw; no extra geometry, lights, transparency, normal maps, screen reads or reflection passes."
+}

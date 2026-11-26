@@ -59,6 +59,18 @@ Templates > Download and Install; already installed on the owner's PC).
 
 ## Project structure
 
+- `docs/damp-caves.md` – #302 first production batch from Claude's floor-two
+  brief: A1–A4 surface library in `art/textures/damp-caves-v1`, with original
+  albedos, 512px mipmapped imports and opaque wet materials. The wall variant
+  is a static ShaderMaterial blending shared base rock at its borders; never
+  cast it as StandardMaterial3D or write ALPHA. Four G layout candidates are
+  in `docs/damp-caves-layout.md` / JSON, with the owner-corrected Damp Caves
+  junction, dry bypasses, protected quest/lair placement and creature proposals.
+  Native 87 checks and 50 layout checks pass. Local review/editable inputs:
+  `build/local-damp-caves-v1/inspector.html`. Live theme/hookup remains Claude's;
+  B–F/H/I art and creature concept approval remain outstanding. Preserve fungal
+  assets for the side region; no game rules or numeric floor bindings changed.
+
 - #297 fixes refined-creature translucency: normal v2/v3 coat, skin, details
   and membrane shaders are fully opaque; only `set_opacity` below 1.0 selects
   cached/preloaded `*-fade.gdshader` siblings. Full opacity restores the original

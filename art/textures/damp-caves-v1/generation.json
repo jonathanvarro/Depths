@@ -1,0 +1,54 @@
+{
+  "generator": "OpenAI built-in image_gen.imagegen",
+  "date": "2026-11-25",
+  "issue": 302,
+  "assets": [
+    {
+      "id": "limestone-wall",
+      "source": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-82c25cc9-6170-46ba-9e8c-79b90c9ac484.png",
+      "prompt": "Use case: stylized-concept. Asset type: one square seamless repeatable game albedo texture for a 2m wide x 2.2m tall wall face in Depths, a gritty first-person dungeon crawler, Godot Mobile renderer. Texture only, viewed perfectly orthographically straight on, filling the complete square edge to edge. Cold wet WATER-CARVED LIMESTONE natural cave wall, broad interlocking rounded rock masses and subtle horizontal sedimentary bedding interrupted by eroded vertical seep channels. Dark cool grey and desaturated slate blue-green, sparse dirty bone-white thin calcite streaks; very sparse deep-green damp staining. Medium-low contrast, broad readable painterly material masses, crisp restrained edge definition, dark rough crevices. Natural rock, no bricks, no rectangular masonry, no timbers, no mushrooms, no plant growth silhouettes. Wetness is communicated by dark mineral stains and smooth eroded shapes, NOT painted white specular streaks or mirror reflections. This is physically neutral base colour, under evenly diffuse neutral light: no cast shadows, perspective, vignette, ambient occlusion halos, illumination gradient, torch orange, baked light sources, glossy highlights, text, symbols, frame or border. Seamless on BOTH horizontal and vertical repeat: continue geology across left/right and top/bottom borders, same average value at all edges, no isolated central feature or edge frame. Avoid fine photographic gravel noise and tiny repetitive cells. Entire texture should remain a dark grey damp natural rock wall after shrinking to a 512px game texture. Create one opaque square texture; no presentation board or labels.",
+      "sha256": "771df4ef07c92aa0784c7dabbe92aa2c365a9a4eee1b64228d0a819f90479a1d",
+      "original_dimensions": [
+        1254,
+        1254
+      ],
+      "processing": "Original PNG unchanged. Godot import limit 512, mipmaps enabled."
+    },
+    {
+      "id": "limestone-wall-variant",
+      "source": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-95893fef-50ff-429a-a276-3d6a09274f8a.png",
+      "prompt": "Use case: stylized-concept. Asset type: a second seamless square albedo wall texture for Depths Damp Caves. Reference image is STYLE AND MATERIAL PALETTE ONLY, not an edit target: match its cold dark grey/blue-green water-carved limestone, painterly broad readable rock masses and restrained mineral palette. Make an alternate natural cave wall face that can sit directly beside it at the same 2m wide x 2.2m tall scale. Slightly smoother rounded water-eroded flowstone, a few long thin dirty ivory mineral seep streaks and differently arranged broad horizontal limestone beds, no dominant centered landmark. Very sparse dark green wet discoloration. Medium-low contrast. Orthographic straight-on texture covering the ENTIRE square, not a wall in a scene. Diffuse neutral base colour only, evenly lit; wetness should come from material response in the game, not baked bright highlights. Seamless repeat BOTH directions, left/right and top/bottom geology continues with matching edge values. No cast shadows, vignette, lighting gradient, perspective, border, UI, text, objects, bricks, timbers, skulls or mushrooms. Keep broad shapes legible at 512 pixels and avoid tiny photographic gravel noise. One opaque square texture, no comparison sheet.",
+      "reference": "limestone-wall.png: palette/material only",
+      "sha256": "8bab31a942c508ae24b4f12a18d96a9feb9093b7f1074f7048a05f8c7d7d5080",
+      "original_dimensions": [
+        1254,
+        1254
+      ],
+      "processing": "Original PNG unchanged. Godot import limit 512, mipmaps enabled."
+    },
+    {
+      "id": "silt-floor",
+      "source": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-8cc70338-feaf-43df-8a6e-389ece5e35b0.png",
+      "prompt": "Use case: stylized-concept. Asset type: a seamless square ground albedo texture for the Damp Caves in Depths. Reference image is ONLY a material/palette reference: match its cool dark grey, desaturated slate blue-green natural limestone and restrained painterly texture quality; do not copy the wall's vertical rock layout. Perfect top-down orthographic surface texture filling the complete square edge to edge, representing a 2m x 2m floor. Water-worn flat natural limestone blended into dark grey-brown SILT AND MUD, broad subtle meandering silt ripples and a scattering of small rounded limestone pebbles half embedded in mud. Mostly passable-looking smooth ground, irregular shallow dark damp staining suggesting where puddles collect, but no actual water reflections, bright puddles or deep holes: separate game puddle surfaces will sit above it. No dominant central motif. Low-contrast dark neutral base colour; even diffuse neutral lighting without baked specular, directional shadows or vignette. Broad readable painterly groups with restrained coarse material grain, not photographic sand noise. Seamless repeating horizontally and vertically, match value/geology across opposite edges. No bricks, tiles, masonry, tracks, bones, timber, mushrooms, roots, vegetation, lights, objects, text, labels or border. One opaque square texture, no scene/perspective/comparison sheet.",
+      "reference": "limestone-wall.png: palette/material only",
+      "sha256": "73a4f69a3c279f36758bc498d4cd783b57202b7a081bf8aafc15b5630003c7ce",
+      "original_dimensions": [
+        1254,
+        1254
+      ],
+      "processing": "Original PNG unchanged. Godot import limit 512, mipmaps enabled."
+    },
+    {
+      "id": "seeping-ceiling",
+      "source": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-8e42492b-3ddb-4df1-acc5-6ad1a5e1146e.png",
+      "prompt": "Use case: stylized-concept. Asset type: one seamless square cave ceiling albedo texture for the Damp Caves in Depths, a gritty first-person dungeon crawler. Reference image is only a PALETTE AND PAINTED-MATERIAL reference: match its cold dark grey, muted slate-blue-green water-carved limestone and broad readable rocky shapes. New surface is the underside of a low natural limestone ceiling, viewed orthographically straight at the surface, no perspective. Broad eroded limestone shelves and low rounded calcite ridges, darker wet seep patches with fine thin dirty-ivory mineral tracing and clusters of VERY SHORT incipient soda-straw pores fused to the surface. This is a FLAT base-colour texture, NOT long dangling 3D stalactites or objects, no cast shadows from impossible projecting spikes. Ceiling is a little darker and quieter than the wall, still enough separation to see wet cracks. Sparse green-black damp staining, no glowing growth or mushrooms. Neutral diffuse even lighting only, no baked bright gloss, white highlights, lights, shadows, vignette or gradient. Seamless on both axes: continuations of geology and matching values at left/right and top/bottom. Full opaque square edge-to-edge texture, no border, text, label, sheet, cave scene, skylight, bricks, bones, timbers or objects. Restrained painterly rough stone, broad legible shapes at 512px, no fine photographic noise.",
+      "reference": "limestone-wall.png: palette/material only",
+      "sha256": "c691960727fe3ca4d2ea50d007e810aa4f5be3a061d82c9b869a9825ac8fbd1a",
+      "original_dimensions": [
+        1254,
+        1254
+      ],
+      "processing": "Original PNG unchanged. Godot import limit 512, mipmaps enabled."
+    }
+  ]
+}

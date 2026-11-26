@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3]
+
+[ext_resource type="Shader" path="res://art/textures/damp-caves-v1/limestone-variant.gdshader" id="shader"]
+[ext_resource type="Texture2D" path="res://art/textures/damp-caves-v1/limestone-wall.png" id="base"]
+[ext_resource type="Texture2D" path="res://art/textures/damp-caves-v1/limestone-wall-variant.png" id="variant"]
+
+[resource]
+resource_name = "Damp Caves - edge-compatible limestone variant"
+shader = ExtResource("shader")
+shader_parameter/base_albedo = ExtResource("base")
+shader_parameter/variant_albedo = ExtResource("variant")
+shader_parameter/wet_roughness = 0.63
+shader_parameter/wet_specular = 0.28
+shader_parameter/variant_strength = 0.55
