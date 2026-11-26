@@ -324,6 +324,99 @@ Found weapons, armour and back pieces with properties (modifiers) arrive **unide
 - **Why it isn't a farm:** mastery 3 takes 54 points, earned only from landed blows or hits taken. That's at least seven fights at the per-fight cap, and weak monsters teach a quarter as much. An iron sword gains about 7 gold that way, roughly 1 gold per fight.
 - The item card says how much mastery adds ("Mastery adds 20% to its sale price (up to 30%)").
 
+## Formations and formation gates — agreed 2026-11-26 (owner and Claude; not built yet)
+
+The classes should play off each other. Three Soldiers fight best but struggle with
+navigation, traps and obstacles; three Scouts see and find the most but fight and act
+less well; three Sappers overcome obstacles but fight and learn less. The party you
+build at the campfire should change **how you move through a floor**, not decide it.
+
+**Class roles (as of 2026-11-26):** Soldier fights and holds the front; Scout spots
+traps and hears fights first; Sapper disarms traps on a favourable coin flip, jams set
+ones and clears rubble; Acolyte heals and prays (a support class). Named heroes carry
+their own trait on top (Mara's keen eyes, Rook's haggling) and are the better hires;
+random recruits fill out formations and recover bodies.
+
+### Formations
+
+- **Named and shown at the campfire** (and on the preparation screen) as the party is
+  picked: the formation's name, its bonus and its **blind spot**, before setting out.
+- **Three tiers** (eight bonuses to design, not twenty):
+  - **Pure** (three of a kind): one big, visible ability that changes how you play.
+    - Shield Wall (Soldiers): takes less damage, holds the front. Blind spot: no trap
+      sense, weaker in the dark, obstacles cost extra time.
+    - Pathfinders (Scouts): see rooms and wandering packs further out, rarely surprised,
+      find quest sites from further away. Blind spot: weak front row.
+    - Tunnel Crew (Sappers): puzzles and locks open faster, blockages clear, may dig
+      shortcuts and get more from workings. Blind spot: fragile in fights.
+    - Vigil (Acolytes): a niche late build (see the gates below); poor at combat,
+      navigation, traps and obstacles.
+  - **Pair** (two of a kind plus one): a smaller version of the pair's ability, plus what
+    the third hero brings. Combinations can still have names (two Soldiers and a Scout:
+    "Vanguard").
+  - **Mixed** (all different): no special ability, a steady all-round bonus (for example
+    less strain, slower lantern burn). The safe, flexible choice.
+- **Set when the party leaves camp.** It doesn't re-form underground.
+- **Steps down on a fall:** a hero knocked unconscious or killed drops the formation to
+  what the remaining heroes make (a Shield Wall losing a Soldier becomes the Soldier
+  pair bonus). Getting back up restores it; a death doesn't.
+
+### Areas as challenge families
+
+No area ever requires a class. Every obstacle has a cheap or safe way for the right
+class and costlier ways (time, light, health, gold) for the rest. Each area leans on a
+kind of problem, so the area network lets the player route to suit the party, or recruit
+for the area they're aiming at:
+
+- Mines: rubble, puzzles, workings (Sapper).
+- Damp Caves: water, dead ends, route-finding (Scout).
+- Cavern: open fights and patrols (Soldier).
+- Jail: locks, cells, keys (Sapper); Execution Halls: a brute fight (Soldier).
+- Fungal Hollows: spores, strain, darkness (Acolyte support).
+- Drowned Galleries and Black Reservoir: sluices and floods (Sapper and Scout).
+
+Arrival cards and threshold warnings hint at an area's character so players learn to
+read it. **Build order:** start with the existing obstacles (traps, rubble, locks, deep
+water, puzzles, darkness) weighted by area; add class- and formation-specific
+challenges later, once the formations feel right. Overcoming those should feel like an
+accomplishment.
+
+### Formation gates
+
+Rare, significant places only a **full party of one class** can open. They are **seen
+early** (an unbuildable chasm, a sealed archway that hums when an Acolyte is near) and
+come back to later with the right party, so the fire has a long-term purpose and spare
+heroes are worth keeping.
+
+- **Sappers build the bridge:** spanning a chasm or flooded shaft, opening a major
+  shortcut.
+- **Acolytes open the temple portal** (main story, below).
+- Possible Scout and Soldier gates: Pathfinders read old survey marks to a lost passage;
+  a Shield Wall holds a breach against a siege.
+- **Rewards:** a tent record, plus loot or the shortcut/quest state the gate opens.
+- **The gates build the route:** the shortcuts other formations open are what make the
+  Acolytes' trip to the portal survivable, so every class matters to the ending.
+
+### The temple portal (main story)
+
+- Part of the main story. Floors grow more obscure deeper down; the portal is the
+  source: it explains, without spelling out, why the creatures are influenced as they
+  are. **Keep the mystery:** it shows *that* they are influenced, not exactly how.
+- **A full Acolyte party opens it, once,** and it **opens the final act**: the strange,
+  less real floors lie beyond it, where formations matter again in new ways. After that,
+  any party can go through.
+- **Guaranteed Acolytes:** once the portal quest unlocks, recruit rolls change so
+  Acolytes reliably come to the fire (alongside named Acolytes Alwen and Maelin), so no
+  player is stuck at the climax by bad luck.
+- Story stays in one cave and its campsite (#122): beyond the portal reads as a deeper,
+  wrong version of the same cave rather than another world. Its link to the relic the
+  king wants is open.
+
+**Open:** bonus sizes and names; the Scout and Soldier gates; where each gate sits on the
+area network; exactly what lies beyond the portal and how it connects to the relic.
+**First slice to build:** formations at the fire (name, bonus, blind spot), the four pure
+abilities and the step-down rule.
+
 ## Map and dungeon progression
 
 Preserve the readable map from the visual concepts, adapted to the grid. Show explored rooms and routes, the current location, blocked doors, uncertain passages, stairs, and known routes toward safety. Notes and unresolved discoveries provide reasons to revisit rooms.

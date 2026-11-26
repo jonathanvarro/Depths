@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-11-26 – Claude (formations design, #305)
+- Did: talked the party-formation idea through with the owner and recorded it: DESIGN.md "Formations and formation gates" and issue #305. Formations named at the fire (pure/pair/mixed tiers, bonus and blind spot shown, set on leaving camp, stepping down on a fall); areas lean on challenge families; formation gates (Sapper bridge, Acolyte temple portal, possible Scout/Soldier gates) seen early and opened later; the temple portal is main story and opens the final act, with Acolytes guaranteed at the fire once its quest unlocks. Design only; nothing built.
+- Next: first slice when the owner asks: formations at the fire, the four pure abilities, the step-down rule.
+- Watch out: bonus sizes, names, the Scout/Soldier gates, gate placement and what lies beyond the portal are still open.
+
 ## 2026-11-26 – Claude (Scout spots, Sapper disarms, Rook haggles)
 - Did: owner: spotting traps is the Scout's alone, the two classes complement each other. `PartyState.sees_traps` no longer counts the Sapper. A Sapper with the party turns a trap's disarm choice (kind 3, not `bypass`, two outcomes) into a coin flip at `EventScreen.SAPPER_DISARM` 0.9 (+ luck, cap 0.95): heads the first outcome, tails the second; the choice is labelled "(Sapper)". Haggling is now a named trait: `NamedCast.CAST["rook"]["trait"]` (Haggler), `NamedCast.apply_trait` (also on load for older saves), `CampState.has_haggler`, price_for/sell_price use HAGGLER_DISCOUNT 0.9 / HAGGLER_SALE 1.25. Checks: roles, damp_and_rest.
 - Next: owner playtest.
