@@ -874,7 +874,7 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 	# A quest's site on this floor: say how the map shows the way (owner,
 	# 2026-11-23: the survey party was still too hard to find).
 	if not _in_opening and _map.marks.get("quests", {}).keys().any(_quest_site_open):
-		_tip("quest_site_pointer", "Your quest's site on this floor is the amber cairn on your map. When it's off the corner map, an amber arrow at the map's edge points the way.")
+		_tip("quest_site_near", "Your quest's site is somewhere on this floor. Explore: once you're close, it's marked on your map in amber.")
 	if not _in_opening and _party_state.members.size() > 1:
 		_tip("row_tap", "Tap a hero's front/back tag on their card any time to change rows. Front heroes take the blows; back heroes need reach (a spear, a sling, a prayer) to strike.")
 	_save_now()  # autosave on every floor change (#45)
@@ -5243,6 +5243,31 @@ func _quest_site_open(quest: String) -> bool:
 	return Packages.active(_camp_state, _depth).any(func(p): return p.quest == quest)
 
 
+## A quest's site goes on the map once the party is close: within
+## QUEST_NEAR_STEPS of walking, about a room or a hallway (owner,
+## 2026-11-25). Kept in `marks["quests_near"]` from then on.
+const QUEST_NEAR_STEPS := 12
+
+func _notice_quest_sites(cell: Vector2i) -> void:
+	var sites: Dictionary = _map.marks.get("quests", {})
+	for quest in sites:
+		if _map.marks.get("quests_near", {}).has(quest) or not _quest_site_open(quest):
+			continue
+		var site: Rect2i = sites[quest]
+		if absi(cell.x - site.get_center().x) + absi(cell.y - site.get_center().y) > QUEST_NEAR_STEPS * 2:
+			continue  # far off: no need to walk it
+		var steps: int = _map.walking_path(cell, site.get_center()).size()
+		if steps > 0 and steps <= QUEST_NEAR_STEPS:
+			if not _map.marks.has("quests_near"):
+				_map.marks["quests_near"] = {}
+			_map.marks["quests_near"][quest] = true
+			Sounds.play(self, "map_noticed", -6.0, 0.0)
+			var name: String = _map.marks.get("quest_names", {}).get(quest, "")
+			_show_message(("You're close to %s: it's on your map." % (name.left(1).to_lower() + name.substr(1))) if name != "" else "The quest's site is close: it's on your map.")
+			_minimap.queue_redraw()
+			_full_map_view.queue_redraw()
+
+
 ## Stepping into a visible quest's site: say what to do there, once (#230).
 func _note_quest_site(cell: Vector2i) -> void:
 	var sites: Dictionary = _map.marks.get("quests", {})
@@ -5265,6 +5290,7 @@ func _on_party_moved(cell: Vector2i, facing: int) -> void:
 	if cell != _cell_now:
 		_cell_before = _cell_now
 		_cell_now = cell
+		_notice_quest_sites(cell)
 		_note_quest_site(cell)
 		if not _in_combat:
 			_refresh_wall_lights()

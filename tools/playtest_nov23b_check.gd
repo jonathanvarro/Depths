@@ -142,7 +142,7 @@ func _initialize() -> void:
 	main._in_combat = false
 	check("...but not in a fight (Move takes a turn there)", member.row != row_before)
 	# The quest site's pointer and tip are there for an open site.
-	check("the corner map can point to an off-map quest site", main._minimap.has_method("_draw_quest_pointer"))
+	check("no pointer to quest sites any more (owner, 2026-11-25)", not main._minimap.has_method("_draw_quest_pointer"))
 
 	# Dripping halls: two in three hold a clear pool, safer than the still pool.
 	var halls := 0

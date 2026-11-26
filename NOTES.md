@@ -19,6 +19,11 @@ Format:
 - Next: integrate the fix and continue the separately isolated quartermaster character/interface (#296); its original portrait is saved in `build/quartermaster-checkout/art/camp/quartermaster-v1`.
 - Watch out: ALPHA=1 still triggers transparency sorting. Never force an entire detail surface above fur to expose eyes; claws on that surface then show through the body. Keep the rendered occlusion regression. Owner's unrelated camp/economy changes remain uncommitted in main and were not included here.
 
+## 2026-11-25 – Claude (quest sites found by exploring; Damp Caves brief)
+- Did: owner asked that the first quest's site be found, not pointed to. The corner-map edge pointer is removed; a quest site goes on the map only once the party is within `QUEST_NEAR_STEPS` (12) walking steps (`_notice_quest_sites`, `marks["quests_near"]`), with a short message. Arrival tip `quest_site_near`. Wrote `docs/damp-caves-production-brief.md`: everything to produce for floor 2's new Damp Caves theme (surfaces, passages, dressing, the remaining 2D leftovers on floors 1-2, landmarks, events, layout designs, sound, optional creatures).
+- Next: ChatGPT production push on the Damp Caves brief (owner, 2026-11-26); Claude hooks it up after.
+- Watch out: nothing.
+
 ## 2026-11-25 – Claude (class and nurse renames)
 - Did: owner chose new player-facing names. Classes show via `Classes.label()` / `LABELS`: Melee -> Soldier, Mage -> Acolyte, Fixer -> Sapper (Scout unchanged); ids, data `role` values, rules and saves keep the old names. The camp nurse is "the priest" in all player text (camp label, tips, results, conversations, quest text, item descriptions); ids like `nurse_arrival`, `nurse_met`, `merchant_nurse`, `_nurse()` and the "treatment" site stay. Sister Alwen's backstory now says field priest.
 - Next: the Sapper's perks (better prices, more treasure) could become sapper-like later (traps, charges); not changed.

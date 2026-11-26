@@ -91,6 +91,17 @@ func _initialize() -> void:
 	main._floors.clear()
 	main._go_to_floor(1, main.Arrival.FROM_ABOVE)
 	check("F3 reports the survey site as whole", main._quest_site_report().contains("left_behind OK"), main._quest_site_report())
+	# The site has to be found (owner, 2026-11-25): off the map until the
+	# party is within a room or a hallway of it.
+	var site_rect: Rect2i = main._map.marks["quests"]["left_behind"]
+	main._notice_quest_sites(main._party.cell)
+	var far: bool = main._map.walking_path(main._party.cell, site_rect.get_center()).size() > main.QUEST_NEAR_STEPS
+	check("arriving far from the site, it isn't on the map yet", not far or not main._map.marks.get("quests_near", {}).has("left_behind"))
+	var path: Array = main._map.walking_path(main._party.cell, site_rect.get_center())
+	var near_cell: Vector2i = path[maxi(0, path.size() - main.QUEST_NEAR_STEPS + 2)]
+	main._party.place(main._map, near_cell)
+	main._notice_quest_sites(near_cell)
+	check("...and goes on it once the party is close", main._map.marks.get("quests_near", {}).has("left_behind"), [path.size(), near_cell])
 	# A floor that lost only its note of the site (owner's save, 2026-11-24)
 	# gets the note back from where the events lie, unchanged.
 	var kept_site: Rect2i = main._map.marks["sites"]["left_behind"]

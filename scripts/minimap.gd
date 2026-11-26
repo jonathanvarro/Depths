@@ -211,17 +211,12 @@ func _draw() -> void:
 		var spot: Vector2i=landmark["centre"]
 		if (landmark["seen"] or reveal_all) and cells.has_point(spot) and (not dim or _known_floor.has(spot)):
 			_draw_landmark(origin+(Vector2(spot-cells.position)+Vector2.ONE*.5)*tile,tile)
-	# Visible quests' sites from arrival, until done: the cairn in amber.
-	# (#230 showed them once seen; owner 2026-11-22: the survey site was too
-	# hard to find, so the giver's directions put it on the map at once.)
+	# A quest's site, in amber, once the party is close to it: a room or a
+	# hallway away (owner, 2026-11-25: no pointer; it still has to be found).
 	for quest in map.marks.get("quests", {}):
 		var site: Rect2i=map.marks["quests"][quest]
 		var spot:=site.get_center()
-		var open: bool=not quest_open.is_valid() or quest_open.call(quest)
-		# Off the corner map: an amber arrow on its edge points the way, in
-		# the dark too: the giver's directions, not sight (owner, 2026-11-23).
-		if open and not full_view and not cells.has_point(spot):
-			_draw_quest_pointer(origin,Vector2(cells.size)*tile,Vector2(spot-party_cell))
+		var open: bool=(not quest_open.is_valid() or quest_open.call(quest)) and map.marks.get("quests_near",{}).has(quest)
 		if cells.has_point(spot) and open:
 			var at:=origin+(Vector2(spot-cells.position)+Vector2.ONE*.5)*tile
 			# On a bright amber disc: tinted ink alone read as one more brown
@@ -252,24 +247,6 @@ func _draw() -> void:
 		var w:=font.get_string_size(text,HORIZONTAL_ALIGNMENT_LEFT,-1,fs).x
 		draw_string(font,Vector2((size.x-w)/2.0,size.y-(14.0 if full_view else 6.0)),text,HORIZONTAL_ALIGNMENT_LEFT,-1,fs,Color(INK,.8))
 	if full_view and rail>0:_draw_notes(notes,Rect2(Vector2(size.x-rail-10,30),Vector2(rail-12,size.y-50)))
-
-## An amber arrowhead just inside the corner map's edge, toward `toward`
-## (cells from the party, who stand at the centre).
-func _draw_quest_pointer(origin: Vector2, extent: Vector2, toward: Vector2) -> void:
-	if toward==Vector2.ZERO:return
-	var dir:=toward.normalized()
-	var half:=extent/2.0-Vector2.ONE*9.0
-	var reach:=minf(half.x/absf(dir.x) if dir.x!=0.0 else INF,half.y/absf(dir.y) if dir.y!=0.0 else INF)
-	var tip:=origin+extent/2.0+dir*reach
-	# The site's amber disc, with a point toward it: not the party's arrow.
-	var centre:=tip-dir*5.0
-	var side:=dir.orthogonal()
-	var points:=PackedVector2Array([tip+dir*4.0,centre+side*4.5,centre-side*4.5])
-	draw_colored_polygon(points,QUEST_TINT)
-	draw_polyline(PackedVector2Array([centre+side*4.5,tip+dir*4.0,centre-side*4.5]),INK,1.2,true)
-	draw_circle(centre,5.5,QUEST_TINT)
-	draw_arc(centre,5.5,0.0,TAU,20,INK,1.2,true)
-
 
 func _draw_marker(texture: Texture2D, center: Vector2, tile: float, tint:=Color.WHITE) -> void:
 	if texture==null:return
@@ -334,7 +311,7 @@ func _visible_cells() -> Rect2i:
 		for c in (_known_floor if dark else map.explored):bounds=bounds.expand(c).expand(c+Vector2i.ONE)
 		if not dark:
 			for quest in map.marks.get("quests",{}):
-				if not quest_open.is_valid() or quest_open.call(quest):
+				if (not quest_open.is_valid() or quest_open.call(quest)) and map.marks.get("quests_near",{}).has(quest):
 					var spot: Vector2i=map.marks["quests"][quest].get_center()
 					bounds=bounds.expand(spot).expand(spot+Vector2i.ONE)
 	var grow: Vector2i=(Vector2i(FULL_VIEW_MIN_CELLS,FULL_VIEW_MIN_CELLS)-bounds.size).maxi(0)
