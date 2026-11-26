@@ -249,6 +249,7 @@ func hire(party, recruit: Companion) -> bool:
 	if recruit not in candidates or not party.add_member(recruit):
 		return false
 	candidates.erase(recruit)
+	party.members[-1].dismissed = false  # the party plays with a copy
 	changed.emit()
 	return true
 
@@ -281,19 +282,30 @@ func swap(party, out: Companion, recruit: Companion) -> bool:
 	return true
 
 
-## Sends a recruit away for good. The founder (Mara) stays.
+## Sends a recruit away. The founder (Mara) stays. They wait by the fire,
+## gear and all, until the party next heads down or rests, in case you
+## change your mind or forgot their kit (owner, 2026-11-24); then they go.
 func dismiss(party, hero: Companion) -> bool:
 	if hero.founder or hero not in party.members:
 		return false
 	party.remove_member(hero)
 	recovering.erase(hero)
+	hero.dismissed = true
+	candidates.push_front(hero)
 	changed.emit()
 	return true
+
+
+## The dismissed who didn't rejoin move on (heading down, or a night's rest).
+func _send_dismissed_away() -> void:
+	candidates.assign(candidates.filter(func(c: Companion): return not c.dismissed))
 
 
 ## Heading down: heroes still recovering stay in the nurse's tent.
 func leave_behind(party) -> void:
 	explored_today = true
+	rested = false
+	_send_dismissed_away()
 	for hero: Companion in party.members.duplicate():
 		if is_recovering(hero):
 			party.remove_member(hero)
@@ -311,7 +323,17 @@ func rejoin(party) -> void:
 
 
 ## Rest until tomorrow: everyone recovers fully, and the day moves on.
+## Rested since the last trip down: no resting twice in a row (owner,
+## 2026-11-24), unless nobody is fit to go and the nurse needs the nights.
+var rested := false
+
+
+func can_rest(party) -> bool:
+	return not rested or available(party).is_empty()
+
+
 func rest(party) -> void:
+	rested = true
 	for hero: Companion in party.members.filter(func(h: Companion): return h.is_with_party()):
 		hero.complete_pending_effects()
 		hero.hunger = 0
@@ -325,6 +347,7 @@ func rest(party) -> void:
 		site_presence["treatment"] = true
 		traders_arrival_day = 0
 	explored_today = false
+	_send_dismissed_away()
 	if not candidates.is_empty():
 		var leaving: Array = candidates.filter(func(c: Companion): return c.named_id == "")
 		if not leaving.is_empty():
@@ -766,7 +789,9 @@ func next_issue() -> Dictionary:
 
 func can_raise_issue(party) -> bool:
 	var next := next_issue()
-	if next.is_empty() or party.supplies.gold < int(next["gold"]):
+	# Gold in the tent's stash counts too (owner, 2026-11-24: the button
+	# seemed dead with the gold put away).
+	if next.is_empty() or party.supplies.gold + stash.gold < int(next["gold"]):
 		return false
 	for id: String in next["materials"]:
 		var item: SupplyItem = load(ISSUE_ITEM % id)
@@ -775,12 +800,31 @@ func can_raise_issue(party) -> bool:
 	return true
 
 
-## Pays for the next issue (materials from the pack first, then the stash).
+## What's still missing for the next issue, in words ("" if nothing).
+func issue_shortfall(party) -> String:
+	var next := next_issue()
+	if next.is_empty():
+		return ""
+	var missing: Array[String] = []
+	var gold: int = party.supplies.gold + stash.gold
+	if gold < int(next["gold"]):
+		missing.append("%d more gold" % (int(next["gold"]) - gold))
+	for id: String in next["materials"]:
+		var item: SupplyItem = load(ISSUE_ITEM % id)
+		var have: int = party.supplies.count(item) + stash.count(item)
+		if have < int(next["materials"][id]):
+			missing.append("%d more %s" % [int(next["materials"][id]) - have, item.display_name.to_lower()])
+	return "Still needed: %s." % ", ".join(missing) if not missing.is_empty() else ""
+
+
+## Pays for the next issue (gold and materials from the pack first, then the stash).
 func raise_issue(party) -> bool:
 	if not can_raise_issue(party):
 		return false
 	var next := next_issue()
-	party.supplies.gold -= int(next["gold"])
+	var from_pack := mini(party.supplies.gold, int(next["gold"]))
+	party.supplies.gold -= from_pack
+	stash.gold -= int(next["gold"]) - from_pack
 	for id: String in next["materials"]:
 		var item: SupplyItem = load(ISSUE_ITEM % id)
 		var owed: int = int(next["materials"][id]) - party.supplies.drop(item, int(next["materials"][id]))

@@ -113,8 +113,12 @@ func _ready() -> void:
 	_apply_margins()
 	get_viewport().size_changed.connect(_apply_margins)
 	_begin.grab_focus()
-	# For checking exported builds: `Depths.exe -- --begin` skips the title.
-	if "--begin" in OS.get_cmdline_user_args():
+	# For checking exported builds: `Depths.exe -- --begin` skips the title;
+	# `-- --continue` continues the save (with --save=<file>, a copy).
+	if "--continue" in OS.get_cmdline_user_args() and has_save:
+		SaveGame.set_continue_requested(true)
+		get_tree().change_scene_to_file.call_deferred(GAME_SCENE)
+	elif "--begin" in OS.get_cmdline_user_args():
 		_start_new_game.call_deferred(_hero_select.HEROES[0])
 
 

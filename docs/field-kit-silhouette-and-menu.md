@@ -1,8 +1,8 @@
 # Field kit: fitted pack, equipment diagram and pause menu (#290)
 
 The owner's 2026-11-24 request is implemented on
-`codex/field-kit-silhouette-menu`. Review before merging; physical iPhone
-and owner visual acceptance remain outstanding.
+`codex/field-kit-silhouette-menu`. The owner authorized integration on
+2026-11-25. Physical iPhone and final visual acceptance remain outstanding.
 
 ## Live presentation
 
@@ -10,7 +10,7 @@ and owner visual acceptance remain outstanding.
   compartments. The entire painting is aspect-fitted, including its buckles
   and outer edges. `KitBag.fitted_art` opts in; trade keeps its existing art
   and pocket registration.
-- The selected hero's four existing slots sit around a subdued torso diagram
+- The selected hero's four existing slots sit around a subdued torso
   diagram: weapon by the hand, armour at the chest, back by the shoulder,
   trinket beside the waist. No new equipment slots or gameplay rules.
   Art is centred inside square targets, including rarity frames.

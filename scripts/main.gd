@@ -59,6 +59,7 @@ const Packages := preload("res://scripts/packages.gd")
 const BattleStage := preload("res://scripts/battle_stage.gd")
 const FoeView := preload("res://scripts/foe_view.gd")  # sprite or 3D model foes (#251)
 const TacticalView := preload("res://scripts/tactical_view.gd")
+const CreatureFraming := preload("res://scripts/creature_framing.gd")
 ## Prototype (owner, 2026-11-08): a fight on the map seen from above.
 var _tactical: Node3D
 var _view_button: Button  # strategic or exploration view (#248)
@@ -521,6 +522,7 @@ func _ready() -> void:
 
 	_minimap = Minimap.new()
 	_build_ui(_minimap)
+	add_child(CreatureFraming.new(self))
 	_party = Party.new()
 	_party.moved.connect(_minimap.on_party_moved)
 	_minimap.sensed = _sensed_cells  # a Mage's Watchful eye (#170)
@@ -548,6 +550,7 @@ func _ready() -> void:
 		var blocked: bool = _map != null and _map.door_at(cell) == DungeonMap.Door.BLOCKED and environment_theme.blocked_sound != null
 		_play_effect(environment_theme.blocked_sound if blocked else environment_theme.bump_sound))
 	_party.panicked.connect(_on_party_panicked)
+	_party.bumped.connect(_on_party_bumped_wall)
 	_party_state.changed.connect(_on_party_state_changed)
 	_party_state.brew_revealed.connect(_reveal_floor)  # a revealing brew (#175)
 	Brews.refresh(_party_state.supplies)
@@ -645,11 +648,83 @@ func _open_pause_menu() -> void:
 ## Builds (or returns to) a floor. Arriving from above puts the party at the
 ## way up; arriving from below puts it at the way down; the opening uses the
 ## floor's start cell.
-## True if a story quest wants a site on this floor that `map` lacks.
+## True if a story quest wants a site on this floor that `map` lacks: not
+## recorded, or recorded but with any of its events gone (2026-11-24).
 func _missing_quest_site(map, depth: int) -> bool:
 	if _in_opening or use_debug_layout:
 		return false
-	return Packages.active(_camp_state, depth).any(func(p): return p.id not in map.packages)
+	_repair_site_records(map, depth)
+	var events: Array = map.events.values()
+	for package: QuestPackage in Packages.active(_camp_state, depth):
+		if package.id not in map.packages:
+			return true
+		for event: RoomEvent in package.events:
+			if event not in events:
+				return true
+	return false
+
+
+## A floor that holds a quest's events but lost its note of the site (seen
+## in the owner's game, 2026-11-24): the note is rebuilt from where the
+## events lie, so the site is kept, marked and protected.
+func _repair_site_records(map, depth: int) -> void:
+	for package: QuestPackage in Packages.active(_camp_state, depth):
+		if package.id in map.packages or package.events.is_empty():
+			continue
+		var cells: Array = []
+		for c in map.events:
+			if map.events[c] in package.events:
+				cells.append(c)
+		if cells.size() < package.events.size():
+			continue  # really missing: the floor is built again
+		var site := Rect2i(cells[0], Vector2i.ONE)
+		for c in cells:
+			for r in map.room_around(c):
+				site = site.expand(r).expand(r + Vector2i.ONE)
+		site = site.grow(1)
+		map.packages.append(package.id)
+		if not map.marks.has("sites"):
+			map.marks["sites"] = {}
+		map.marks["sites"][package.id] = site
+		if Quests.INFO.has(package.quest) and not Quests.INFO[package.quest]["hidden"]:
+			if not map.marks.has("quests"):
+				map.marks["quests"] = {}
+			map.marks["quests"][package.quest] = site
+			if QUEST_SITE_NAMES.has(package.quest):
+				if not map.marks.has("quest_names"):
+					map.marks["quest_names"] = {}
+				map.marks["quest_names"][package.quest] = QUEST_SITE_NAMES[package.quest]
+		_note_site_trouble(depth, "rebuilt the record of %s from its events at %s" % [package.id, cells])
+
+
+## Anything odd about quest sites goes in user://quest_sites.log, to find
+## the cause if it ever happens again (2026-11-24).
+func _note_site_trouble(depth: int, what: String) -> void:
+	var line := "%s day %d seed %d floor %d: %s" % [Time.get_datetime_string_from_system(), _camp_state.day, _site_seed, depth, what]
+	push_warning(line)
+	var path := "user://quest_sites.log"
+	var file := FileAccess.open(path, FileAccess.READ_WRITE if FileAccess.file_exists(path) else FileAccess.WRITE)
+	if file:
+		file.seek_end()
+		file.store_line(line)
+
+
+## For the F3 overlay (2026-11-24): each story site this floor should have,
+## where it is and whether it's really there.
+func _quest_site_report() -> String:
+	if _map == null or _in_opening:
+		return "-"
+	var parts: Array[String] = []
+	var events: Array = _map.events.values()
+	for package: QuestPackage in Packages.active(_camp_state, _depth):
+		var site: Rect2i = _map.marks.get("sites", {}).get(package.id, _map.marks.get("quests", {}).get(package.quest, Rect2i()))
+		var whole: bool = package.id in _map.packages and package.events.all(func(e): return e in events)
+		parts.append("%s %s at %s" % [package.id, "OK" if whole else "MISSING", str(site.get_center()) if site.size != Vector2i.ZERO else "?"])
+	return ", ".join(parts) if not parts.is_empty() else "none wanted here"
+
+
+## Layouts tried before a floor gives up on fitting a story site.
+const STORY_SITE_TRIES := 40
 
 
 func _go_to_floor(depth: int, arrival: Arrival) -> void:
@@ -675,8 +750,9 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 		var marks := {}
 		var stamped: Dictionary
 		# A story quest's site must fit (its floor's way on can wait for it):
-		# if this layout has no room, the next one is tried (2026-11-22).
-		for attempt in 8:
+		# if this layout has no room, the next one is tried (2026-11-22),
+		# as many as it takes (2026-11-24: never carry on without it).
+		for attempt in STORY_SITE_TRIES:
 			layout = _make_layout(depth, attempt)
 			marks = {}
 			if depth == FORTRESS_DEPTH and not use_debug_layout:
@@ -697,6 +773,13 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 			stamped = Packages.place(layout, wanted, _site_seed + depth * 7919 + 13 + attempt * 101, avoid, join)
 			if not story.any(func(p): return p.id in stamped["failed"]):
 				break
+			if attempt == STORY_SITE_TRIES - 1:
+				# Last resort: the first layout with the story sites alone
+				# (no lairs or territories competing for the rock).
+				var tries_failed: Array = stamped["failed"]
+				layout = _make_layout(depth, 0)
+				stamped = Packages.place(layout, story, _site_seed + depth * 7919 + 13, avoid, join)
+				_note_site_trouble(depth, "all %d layouts failed %s; story alone: placed %s, failed %s" % [STORY_SITE_TRIES, tries_failed, stamped["placed"], stamped["failed"]])
 		var refuge := Vector2i(-1, -1)
 		if depth == Refuge.DEPTH and not use_debug_layout and not _in_opening:  # a rest before the fortress
 			var placed: Dictionary = Refuge.place(stamped["layout"], depth)
@@ -741,6 +824,12 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 			var package: QuestPackage = Packages.find(id)
 			if package.lair == "" and package.chance == 0.0 and Quests.INFO.has(package.quest) and not Quests.INFO[package.quest]["hidden"]:
 				sites[package.quest] = stamped["sites"][id]
+		marks["sites"] = stamped["sites"]  # every package's site, kept clear below
+		# The named pack never starts inside a site (it may walk through).
+		if not _floors[depth].marks.get("elite", {}).is_empty():
+			var start: Vector2i = _floors[depth].marks["elite"]["cell"]
+			if stamped["sites"].values().any(func(r: Rect2i): return r.grow(1).has_point(start)):
+				_floors[depth].marks.erase("elite")
 		if not sites.is_empty():
 			marks["quests"] = sites
 			# Names are metadata; exploration reveals them like other landmarks.
@@ -756,6 +845,8 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 		if not _in_opening and not use_debug_layout:
 			WallLights.place(_floors[depth], depth, _site_seed)  # spare torches, old lanterns
 	_map = _floors[depth]
+	if _missing_quest_site(_map, depth):
+		_note_site_trouble(depth, "the floor was built without a site the story needs: %s" % _quest_site_report())
 	_place_bodies()  # lost in a wipe, waiting to be found (#180)
 	_build_level()
 	_minimap.setup(_map)
@@ -784,6 +875,8 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 	# 2026-11-23: the survey party was still too hard to find).
 	if not _in_opening and _map.marks.get("quests", {}).keys().any(_quest_site_open):
 		_tip("quest_site_pointer", "Your quest's site on this floor is the amber cairn on your map. When it's off the corner map, an amber arrow at the map's edge points the way.")
+	if not _in_opening and _party_state.members.size() > 1:
+		_tip("row_tap", "Tap a hero's front/back tag on their card any time to change rows. Front heroes take the blows; back heroes need reach (a spear, a sling, a prayer) to strike.")
 	_save_now()  # autosave on every floor change (#45)
 
 
@@ -917,6 +1010,22 @@ func _stock_dripping_hall() -> void:
 		return
 
 
+## Tapping a card's row tag swaps that hero's row while exploring (owner,
+## 2026-11-24: formations should be easy to change on the go). In a fight
+## it's the Move action, which takes a turn.
+func _swap_row(card) -> void:
+	var hero: Companion = card.companion
+	if hero == null or _in_opening or _camp.visible or _ending:
+		return
+	if _in_combat:
+		_show_message("In a fight, changing rows takes a turn: use Move.")
+		return
+	hero.row = "back" if hero.row == "front" else "front"
+	hero.emit_changed()
+	_party_state.changed.emit()
+	_show_message("%s moves to the %s row." % [hero.display_name, hero.row])
+
+
 ## Spare torches and old lanterns on the walls (owner, 2026-11-23): their
 ## art, from `map.marks["wall_lights"]` (wall_lights.gd has the rules).
 func _add_wall_lights() -> void:
@@ -930,17 +1039,23 @@ func _add_wall_lights() -> void:
 		var wall := Vector3(cell.x * CELL_SIZE, 0.0, cell.y * CELL_SIZE) + Vector3(side.x, 0, side.y) * (CELL_SIZE / 2.0 - 0.01)
 		var node: Node3D
 		if light["kind"] == "torch":
-			node = Dressing._put(_level, "burnt-sconce", wall + Vector3(0, Dressing.WALL_HEIGHTS["burnt-sconce"], 0), Dressing._yaw_facing(-side))
-			# A faint gleam on the tar, so a spare torch stands out from the
-			# spent sconces in the dressing.
+			# Two fresh torches leaning against the foot of the wall: nothing
+			# like the burnt stubs in the dressing's brackets (2026-11-24).
+			node = WallLights.spare_torch_prop()
+			node.position = wall
+			node.rotation.y = Dressing._yaw_facing(-side)
+			_level.add_child(node)
 			var gleam := OmniLight3D.new()
 			gleam.light_color = Color("f0b060")
-			gleam.light_energy = 0.45
-			gleam.omni_range = CELL_SIZE * 0.9
-			gleam.position = Vector3(0, 0.15, 0.35)
+			gleam.light_energy = 0.35
+			gleam.omni_range = CELL_SIZE * 0.8
+			gleam.position = Vector3(0, 1.0, 0.45)
 			node.add_child(gleam)
 		else:
+			# A whole lantern, glass and all, hanging straight: the
+			# dressing's are broken and askew.
 			node = Dressing._put(_level, "lantern-hanging", wall + Vector3(0, Dressing.WALL_HEIGHTS["lantern-hanging"], 0), Dressing._yaw_facing(-side))
+			Dressing.break_lantern(node, false)
 			var glow := OmniLight3D.new()
 			glow.name = "WallLanternLight"
 			glow.light_color = Color("ffb35c")
@@ -966,8 +1081,18 @@ func _refresh_wall_lights() -> void:
 			node.get_node("WallLanternLight").visible = on
 
 
-## Walking up to a wall light: a spare torch is taken, an unlit lantern
-## offered to light.
+## Walking into the wall a light hangs on uses it (owner, 2026-11-24: on
+## purpose, never just by passing).
+func _on_party_bumped_wall(target: Vector2i) -> void:
+	if _map == null or _in_opening or _in_combat or _camp.visible:
+		return
+	var light: Dictionary = WallLights.at(_map, _party.cell)
+	if not light.is_empty() and light["side"] == target - _party.cell:
+		_wall_light(_party.cell)
+
+
+## Using a wall light: a spare torch is taken, an unlit lantern offered to
+## light.
 func _wall_light(cell: Vector2i) -> void:
 	var light: Dictionary = WallLights.at(_map, cell)
 	if light["kind"] == "torch":
@@ -1109,7 +1234,7 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 			_spring_trap(cell, set_trap)
 			return
 	if not _in_opening and not WallLights.at(_map, cell).is_empty():
-		_wall_light(cell)
+		_tip("wall_light_bump", "Something hangs on the wall here. Walk into that wall to use it: light an old lantern, or take a spare torch.")
 	var content: int = _map.enter(cell)
 	match content:
 		DungeonMap.Content.NONE:
@@ -1149,6 +1274,12 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 func _assign_events(map) -> void:
 	for cell in map.contents:
 		var event: RoomEvent = _room_events.pick(map.contents[cell], map.depth)
+		# A wall piece (a coal seam, a shrine) needs a wall to stand on: its
+		# back isn't modelled (owner, 2026-11-24). Out in the open, pick again.
+		var tries := 0
+		while event and event.prop_on_wall and Dressing._wall_sides(map, cell).is_empty() and tries < 40:
+			event = _room_events.pick(map.contents[cell], map.depth)
+			tries += 1
 		if event:
 			map.events[cell] = event
 
@@ -2446,13 +2577,13 @@ func _camp_loop(reward := 0, note := "") -> void:
 	if start_depth > 1:
 		for depth in range(1, start_depth):
 			_expedition.visit_floor(depth)  # the scouts led them through
-		_show_message("Day %d. Expedition %d: the scouts' route, straight to floor %d." % [_camp_state.day, _expedition.number, start_depth])
+		_show_message("Expedition %d: the scouts' route, straight to floor %d." % [_expedition.number, start_depth])
 		for hero: Companion in _party_state.members:
 			if hero.is_with_party():
 				hero.xp = maxi(hero.xp, Progression.route_xp(start_depth))
 		_offer_level_ups.call_deferred()
 	else:
-		_show_message("Day %d. Expedition %d: back into the mine." % [_camp_state.day, _expedition.number])
+		_show_message("Expedition %d: back into the mine." % _expedition.number)
 	_light_torch_if_dark()
 
 
@@ -2802,6 +2933,13 @@ func _restore(data: Dictionary) -> void:
 		_camp_loop()
 		return
 	_depth = data["depth"]
+	# Continued on a floor that lacks a site the story now needs: build it
+	# again, from the way in (2026-11-24).
+	if _missing_quest_site(_floors[_depth], _depth):
+		_floors.erase(_depth)
+		_go_to_floor(_depth, Arrival.FROM_ABOVE)
+		_show_message("%s · depth %d · continued from the way in" % [environment_theme.display_name, _depth])
+		return
 	_map = _floors[_depth]
 	_apply_theme()
 	_build_level()
@@ -4675,19 +4813,39 @@ func _hint_target() -> Control:
 					return button
 	if _hint_mode == "pack" and not _pack.visible:
 		return _pack_button
-	if _guiding_drop():
-		return _guided_drop_target()
+	if _guiding_pack():
+		return _guided_pack_target()
 	return null
 
 
-## The opening's knife drop is guided (owner, 2026-11-22): the rest of the
-## screen dims, the Pack stays open, and the next thing to press is lit.
-func _guiding_drop() -> bool:
-	return _in_opening and _hint == "drop" and _pack.visible and _starting_weapon != null 			and _starting_weapon in _party_state.supplies.gear
+## The opening's Pack steps are guided: the rest of the screen dims, the
+## Pack stays open, and the next thing to press is lit. The knife drop
+## first (owner, 2026-11-22), then equipping the sword and lighting a
+## torch too (2026-11-24). [item, action] for the step under way, or [].
+func _guided_step() -> Array:
+	if not _in_opening or not _pack.visible:
+		return []
+	var supplies = _party_state.supplies
+	match _hint:
+		"equip":
+			if _opening_weapon in supplies.gear:
+				return [_opening_weapon, "equip"]
+		"drop":
+			if _starting_weapon != null and _starting_weapon in supplies.gear:
+				return [_starting_weapon, "drop"]
+		"light", "relight":
+			if supplies.count(TORCH) > 0 and not supplies.torch_lit():
+				return [TORCH, "use"]
+	return []
 
 
-func _guided_drop_target() -> Control:
-	return _pack.guide_target(_starting_weapon) if _guiding_drop() else null
+func _guiding_pack() -> bool:
+	return not _guided_step().is_empty()
+
+
+func _guided_pack_target() -> Control:
+	var step := _guided_step()
+	return _pack.guide_target(step[0], step[1]) if not step.is_empty() else null
 
 
 func _finish_hint() -> void:
@@ -4893,7 +5051,7 @@ func _build_hint() -> void:
 	_hint_shade.visible = false
 	layer.add_child(_hint_shade)
 	_spotlight = Spotlight.new()
-	_spotlight.finder = func(): return _guided_drop_target()
+	_spotlight.finder = func(): return _guided_pack_target()
 	layer.add_child(_spotlight)
 	_hint_box = PanelContainer.new()
 	var style := StyleBoxFlat.new()
@@ -5095,11 +5253,11 @@ func _on_party_moved(cell: Vector2i, facing: int) -> void:
 	if content != DungeonMap.Content.NONE:
 		state = " (used)" if _map.triggered.has(cell) else ""
 	var seed_text: String = "debug layout" if use_debug_layout and _depth == 1 else str(_site_seed)
-	_debug_label.text = "Seed: %s  Depth: %d/%d\nCell: %s  Facing: %s\nHere: %s%s\nContents on floor: %d  Passages: %d\nParty: %s\nTime: %d  Oil: %.1f (%s)" % [
+	_debug_label.text = "Seed: %s  Depth: %d/%d\nCell: %s  Facing: %s\nHere: %s%s\nContents on floor: %d  Passages: %d\nParty: %s\nTime: %d  Oil: %.1f (%s)\nQuest sites: %s" % [
 		seed_text, _depth, _deepest_open(), cell, ["N", "E", "S", "W"][facing],
 		DungeonMap.content_name(content), state, _map.contents.size(), _map.doors.size(),
 		_party_state.summary(), _party_state.time_elapsed, _party_state.supplies.oil,
-		Supplies.LIGHT_NAMES[_party_state.supplies.light_band()]]
+		Supplies.LIGHT_NAMES[_party_state.supplies.light_band()], _quest_site_report()]
 
 
 ## Shows a yes/no question; `on_yes` runs if the player agrees, `on_no` if not.
@@ -5162,8 +5320,8 @@ func _set_debug(enabled: bool) -> void:
 
 ## Opens or closes the pack screen; like the map, the party waits meanwhile.
 func _set_pack(open: bool) -> void:
-	if not open and _guiding_drop():
-		return  # not until the broken knife is dropped
+	if not open and _guiding_pack():
+		return  # not until the guided step is done
 	if open and is_instance_valid(_overlook) and (_overlook.visible or _overlook_stash.visible):
 		return
 	if open and (_prompt.visible or _full_map.visible or _in_combat or _event_screen.visible or _chest.visible):
@@ -5579,6 +5737,7 @@ func _build_party_cards(ui: Control) -> void:
 		row.add_child(card)
 		_cards.append(card)
 		card.tapped.connect(func(c): _show_message(c.condition_words()))  # #64
+		card.row_tapped.connect(_swap_row)
 	_party_state.changed.connect(_refresh_cards)
 	_refresh_cards()
 

@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="Script" path="res://art/enemies/creatures-refined-v2/actor.gd" id="1"]
+[ext_resource type="Material" path="res://art/enemies/creatures-refined-v2/fur.tres" id="2"]
+[ext_resource type="PackedScene" path="res://art/enemies/creatures-refined-v2/rat.glb" id="3"]
+[node name="Actor" type="Node3D"]
+script=ExtResource("1")
+palette_material=ExtResource("2")
+pose_bounds = {"attack": AABB(-0.28670, 0.00800, -0.65290, 0.57340, 0.58380, 1.59530), "fall": AABB(-0.83710, 0.00800, -0.65450, 1.22180, 0.79350, 1.43190), "hurt": AABB(-0.30370, 0.00800, -0.65290, 0.59030, 0.47200, 1.43810), "idle": AABB(-0.29130, 0.00800, -0.67010, 0.58260, 0.44620, 1.44750), "run": AABB(-0.29060, 0.00800, -0.66760, 0.58120, 0.48400, 1.44520), "walk": AABB(-0.29580, 0.00800, -0.65880, 0.59320, 0.47160, 1.43620)}
+metadata/visual_height=0.45420
+[node name="Model" parent="." instance=ExtResource("3")]

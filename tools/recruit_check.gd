@@ -88,7 +88,28 @@ func _initialize() -> void:
 	check("no Dismiss until someone is picked", not _press(main._camp, "Dismiss"))
 	main._camp._place_chosen(ps.members[2], ps.members[2].row)
 	await process_frame
+	var sent: Companion = ps.members[2]
 	check("dismiss sends one away", _press(main._camp, "Dismiss") and ps.members.size() == 2)
+	# They wait by the fire with their gear until the party heads down or
+	# rests (owner, 2026-11-24), and can be invited back meanwhile.
+	check("...to wait by the fire, gear and all", sent in camp.candidates and sent.dismissed and sent.weapon != null)
+	check("...and can be invited back", camp.hire(ps, sent) and not ps.members[-1].dismissed and ps.members[-1].display_name == sent.display_name and ps.members.size() == 3)
+	camp.dismiss(ps, ps.members[-1])
+	# On a camp of their own, so the rest of this check's camp is unchanged.
+	var other_camp = load("res://scripts/camp_state.gd").new()
+	var other_party = load("res://scripts/party_state.gd").new()
+	other_party.add_member(load("res://data/companions/mara.tres"))
+	other_camp.start(7, other_party)
+	for leaving_by in ["heading down", "a night's rest"]:
+		other_camp.hire(other_party, other_camp.candidates[0])
+		var leaver_now: Companion = other_party.members[-1]
+		other_camp.dismiss(other_party, leaver_now)
+		if leaving_by == "heading down":
+			other_camp.leave_behind(other_party)
+			other_camp.rejoin(other_party)
+		else:
+			other_camp.rest(other_party)
+		check("after %s, the dismissed move on" % leaving_by, leaver_now not in other_camp.candidates)
 
 	# The lineup (owner, 2026-11-21): front and back rows, picked or dragged into.
 	await _open("fire")
@@ -101,7 +122,7 @@ func _initialize() -> void:
 	check("a member picked and placed moves row", mover.row == other)
 	var newcomer: Companion = camp.candidates[0]
 	main._camp._drop_on_place({"recruit": newcomer}, null, "front")
-	check("a recruit dragged to an open place joins in that row", ps.members.size() == 3 and ps.members[2].display_name == newcomer.display_name and ps.members[2].row == "front")
+	check("a recruit dragged to an open place joins in that row", ps.members.size() == 3 and ps.members[2].display_name == newcomer.display_name and ps.members[2].row == "front", [ps.members.size(), newcomer.display_name, ps.members.map(func(m): return [m.display_name, m.row])])
 	await _snap("lineup")
 	camp.candidates.append(load("res://scripts/recruits.gd").make(camp.rng))
 	var waiter: Companion = camp.candidates[-1]
@@ -153,7 +174,7 @@ func _initialize() -> void:
 	var recruit: Companion = ps.members[1]
 	await _open("cave")
 	var roster := " | ".join(main._camp._body.find_children("*", "Label", true, false).map(func(l): return l.text))
-	check("roster: who goes, who stays and when", roster.contains("Going: %s" % recruit.display_name) and roster.contains("With the nurse: Mara (day 4)"), roster)
+	check("roster: who goes, who stays and when", roster.contains("Going: %s" % recruit.display_name) and roster.contains("With the nurse: Mara (2 nights)"), roster)
 	await _head_down()
 	check("Mara stays with the nurse", ps.members.size() == 1 and ps.members[0] == recruit and mara in camp.left_behind)
 	await _to_camp(main.Expedition.Ending.RETURNED)

@@ -67,6 +67,18 @@ var alarmed := false
 var heard := {}
 ## Floor-specific places, e.g. the fortress's "hall" and "gates" (#44).
 var marks := {}
+
+
+## Every quest package's site on this floor (`marks["sites"]`, package id ->
+## Rect2i; older saves only have the visible ones in `marks["quests"]`).
+func story_sites() -> Array:
+	return marks.get("sites", marks.get("quests", {})).values()
+
+
+## True if `cell` lies in a quest's site, or within `margin` cells of one:
+## nothing else may be put there (owner, 2026-11-24).
+func in_story_site(cell: Vector2i, margin := 0) -> bool:
+	return story_sites().any(func(r: Rect2i): return r.grow(margin).has_point(cell))
 ## This floor's landmarks (#117, landmarks.gd): [{id, name, cells, centre, seen}].
 var landmarks: Array = []
 ## Deep water the party has to wade (floor 5, galleries.gd): cell -> true.

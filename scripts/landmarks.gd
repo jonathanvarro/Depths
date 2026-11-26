@@ -147,6 +147,10 @@ static func _spots(map, kind: String, distances: Dictionary, used: Dictionary) -
 					for c in room:
 						rooms_seen[c] = true
 					var stairs := room.any(func(c): return map.content_at(c) in [DungeonMap.Content.STAIRS_DOWN, DungeonMap.Content.STAIRS_UP])
+					# A quest's site is its own place (2026-11-24: the king's
+					# cache had settled in the survey party's room).
+					if room.any(func(c): return map.in_story_site(c, 1)):
+						continue
 					var clear := room.filter(func(c): return Dressing._clear(map, c) and not used.has(c))
 					if not stairs and clear.size() >= MIN_ROOM:
 						spots.append(clear)
@@ -253,6 +257,8 @@ static func _build_timbered_drift(piece: Node3D, map, cells: Array, rng: RandomN
 		if not sides.is_empty():
 			var side: Vector2i = sides[i % sides.size()]
 			var lantern := Dressing._put(piece, "lantern-hanging", at + Vector3(side.x, 0, side.y) * (cell_size / 2.0 - 0.01) + Vector3(0, 1.9, 0), Dressing._yaw_facing(-side))
+			if i == lit:
+				Dressing.break_lantern(lantern, false)  # the one still burning is whole
 			if "lit" in lantern:
 				lantern.lit = i == lit
 	_glow(piece, _at(cells[lit], cell_size) + Vector3(0, 1.6, 0), Color(1.0, 0.72, 0.4), 0.45, cell_size * 1.6)

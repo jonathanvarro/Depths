@@ -41,6 +41,8 @@ enum Icon { HEALING, WOUNDED, DOWN, INJURY_WOUND, INJURY_LIMP, BLEEDING }
 
 ## Tapped or clicked (#64): the hero's conditions, in words, for touch.
 signal tapped(card)
+## The row tag ("front"/"back") was tapped: swap rows on the go (2026-11-24).
+signal row_tapped(card)
 
 var companion: Companion
 ## What each condition icon means, in words (#64), built with the icons.
@@ -108,7 +110,13 @@ func _init() -> void:
 	_row_label = Label.new()
 	_row_label.add_theme_font_size_override("font_size", 12)
 	_row_label.add_theme_color_override("font_color", Color("b7ab93"))
-	_row_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_row_label.mouse_filter = Control.MOUSE_FILTER_STOP
+	_row_label.custom_minimum_size = Vector2(0, 24)  # a finger-sized target on a phone
+	_row_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_row_label.gui_input.connect(func(event: InputEvent):
+		if show_row and companion and event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+			row_tapped.emit(self)
+			_row_label.accept_event())
 	name_row.add_child(_row_label)
 	# Condition icons sit along the portrait's bottom edge, so a few of them
 	# don't squeeze the name (#64).
@@ -219,6 +227,8 @@ func refresh() -> void:
 		_set_xp_span(companion.xp)
 		_xp_bar.value = companion.xp
 	_row_label.text = "L%d%s%s" % [companion.level, ready, (" " + ("back" if companion.row == "back" else "front")) if show_row else ""]
+	_row_label.tooltip_text = ("Tap to move to the %s row" % ("front" if companion.row == "back" else "back")) if show_row else ""
+	_row_label.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND if show_row else Control.CURSOR_ARROW
 	var cap := companion.effective_max_health()  # lowered by untreated injuries
 	_bar.max_value = cap
 	_bar.value = companion.health

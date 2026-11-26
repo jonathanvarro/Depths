@@ -46,6 +46,36 @@ func _initialize() -> void:
 	await create_timer(1.0).timeout
 	check("...and shows a blink", main._panic_blink != null)
 	check("...then runs on", not party._busy)
+	# A short cooldown after a bolt (owner, 2026-11-24).
+	check("after a bolt, nerves settle for a few steps", party.panic_rest > 0 and party.panic_rest < party.PANIC_COOLDOWN, party.panic_rest)
+	party.panic_chance = 1.0
+	check("...so the next step can't bolt, even at certain panic", not party.bolts_now(), party.panic_rest)
+	party.panic_rest = 0
+	check("...until it has passed", party.bolts_now())
+	party.panic_chance = 0.0
+	# Resting at camp shows the night passing, without a day count.
+	main._camp._camp = main._camp_state
+	main._camp._show_rest()
+	var veil = main._camp.get_node_or_null("RestVeil")
+	check("resting at camp shows the night passing", veil != null and not veil.get_child(0).text.contains("Day"), veil.get_child(0).text if veil else "")
+	# Once between trips, unless nobody can go and the nurse needs the nights.
+	var rest_camp = load("res://scripts/camp_state.gd").new()
+	var rest_party = load("res://scripts/party_state.gd").new()
+	rest_party.add_member(load("res://data/companions/mara.tres"))
+	check("a rest is allowed", rest_camp.can_rest(rest_party))
+	rest_camp.rest(rest_party)
+	check("...but not twice in a row", not rest_camp.can_rest(rest_party))
+	rest_camp.leave_behind(rest_party)
+	rest_camp.rejoin(rest_party)
+	check("...until the party has been down again", rest_camp.can_rest(rest_party))
+	rest_camp.rest(rest_party)
+	rest_party.members[0].add_injury(load("res://data/injuries/deep_wound.tres"))
+	rest_camp.treat(rest_party.members[0])
+	check("...or nobody is fit to go", rest_camp.can_rest(rest_party))
+	# Every result chip describes itself (a rest spot's too).
+	var rest_spot: RoomEvent = load("res://data/events/rest_dry_alcove.tres")
+	var rested: Dictionary = main._room_events.resolve(main._party_state, rest_spot.choices[0])
+	check("event result icons all describe themselves", not rested["changes"].is_empty() and rested["changes"].all(func(c): return c.get("tip", "").length() > 5), rested["changes"].map(func(c): return c.get("tip", "")))
 
 	# Wall lights on every floor.
 	var map = main._map
@@ -58,9 +88,14 @@ func _initialize() -> void:
 
 	var supplies = main._party_state.supplies
 	var before: int = supplies.count(main.TORCH)
-	main._wall_light(torches[0])
-	check("walking up to a spare torch takes it", supplies.count(main.TORCH) == before + 1 and lights[torches[0]]["taken"] and not main._wall_light_nodes.has(torches[0]))
-	main._wall_light(torches[0])
+	# Only on purpose (2026-11-24): stepping into the cell does nothing,
+	# walking into its wall takes it.
+	party.place(map, torches[0])
+	main._on_party_entered_cell(torches[0])
+	check("passing by a spare torch leaves it", supplies.count(main.TORCH) == before and not lights[torches[0]]["taken"])
+	main._on_party_bumped_wall(torches[0] + lights[torches[0]]["side"])
+	check("walking into its wall takes it", supplies.count(main.TORCH) == before + 1 and lights[torches[0]]["taken"] and not main._wall_light_nodes.has(torches[0]))
+	main._on_party_bumped_wall(torches[0] + lights[torches[0]]["side"])
 	check("...only once", supplies.count(main.TORCH) == before + 1)
 
 	# In the dark: light an old lantern and the map works again.
@@ -71,12 +106,22 @@ func _initialize() -> void:
 	party.place(map, spot)
 	main._update_lantern()
 	check("in the dark, no light, no map", not party.lit and main._minimap.dark)
+	check("a lantern to light hangs whole and straight", main._wall_light_nodes[spot].get_node("Model/Glass").visible and is_zero_approx(main._wall_light_nodes[spot].get_node("Model").rotation.z))
+	var broken = main.Dressing._put(Node3D.new(), "lantern-hanging", Vector3.ZERO, 0.0)
+	check("...while the dressing's are broken and askew", not broken.get_node("Model/Glass").visible and broken.get_node("Model").rotation.z > 0.1 and not broken.lit)
+	broken.get_parent().free()
+	main._on_party_bumped_wall(spot + lights[spot]["side"])
+	check("walking into its wall offers to light it", main._prompt.visible and main._prompt_action.is_valid())
+	main._prompt.visible = false
+	party.locked = false
 	var hero: Companion = main._party_state.living_members()[0]
 	hero.strain = 40.0
 	main._light_wall_lantern(spot)
 	check("lighting an old lantern eases nerves a little", hero.strain < 40.0 and hero.strain > 30.0, hero.strain)
 	check("...and its light lets the map work", party.lit and not main._minimap.dark and main._party_state.near_light)
 	check("...the lantern burns", main._wall_light_nodes[spot].get_node("WallLanternLight").visible)
+	for member in main._party_state.members:
+		member.hunger = 0  # hunger frays nerves too; this is about the light
 	var calm: float = hero.strain
 	main._party_state.advance_time(5)
 	check("in its light, nerves ease very slightly over time", hero.strain < calm and hero.strain > calm - 2.0, [calm, hero.strain])
@@ -85,6 +130,17 @@ func _initialize() -> void:
 	main._refresh_wall_lights()
 	check("it burns out in time", not party.lit and not main._wall_light_nodes[spot].get_node("WallLanternLight").visible)
 
+	# Monster spawns are left off the map; found traps stay.
+	check("no monster marks on the map", main.Minimap.marker_for(1) == null and main.Minimap.marker_for(3) != null)
+	# Rows change on the go: tap a card's row tag.
+	var member: Companion = main._party_state.members[0]
+	var row_before := member.row
+	main._swap_row(main._cards[0])
+	check("tapping a card's row tag swaps rows while exploring", member.row != row_before, member.row)
+	main._in_combat = true
+	main._swap_row(main._cards[0])
+	main._in_combat = false
+	check("...but not in a fight (Move takes a turn there)", member.row != row_before)
 	# The quest site's pointer and tip are there for an open site.
 	check("the corner map can point to an off-map quest site", main._minimap.has_method("_draw_quest_pointer"))
 
@@ -108,6 +164,26 @@ func _initialize() -> void:
 		if halls >= 12:
 			break
 	check("most dripping halls hold a clear pool", halls >= 6 and pools * 2 >= halls, [pools, halls])
+	# Wall pieces (a coal seam, a shrine) always stand against a wall.
+	var loose := 0
+	var wall_pieces := 0
+	for s in 40:
+		main._site_seed = 5000 + s
+		main._floors.clear()
+		main._go_to_floor(1 + s % 4, main.Arrival.FROM_ABOVE)
+		for c in main._map.events:
+			if main._map.events[c].prop_on_wall:
+				wall_pieces += 1
+				if main.Dressing._wall_sides(main._map, c).is_empty():
+					loose += 1
+	check("wall pieces (coal seams, shrines) always have a wall behind them", wall_pieces > 10 and loose == 0, [loose, wall_pieces])
+	# A torch can be lit in a fight; it takes the hero's turn like any item.
+	check("a torch can be lit in a fight", main.TORCH.usable_in_combat)
+	main._party_state.supplies.source = Supplies.Source.NONE
+	check("...when none is burning", main._party_state.cannot_use_reason(main.TORCH, true) == "", main._party_state.cannot_use_reason(main.TORCH, true))
+	# Old Whisker is a real fight now.
+	var Elites = load("res://scripts/elites.gd")
+	check("Old Whisker brings two great rats and two rats", Elites.types("whisker").size() == 4)
 	var clear: RoomEvent = main.DRIPPING_POOL_EVENT
 	var good := 0
 	var total := 0

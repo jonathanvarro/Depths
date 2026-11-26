@@ -297,7 +297,23 @@ static func _put(root: Node3D, id: String, at: Vector3, yaw: float) -> Node3D:
 	node.position = at
 	node.rotation.y = yaw
 	root.add_child(node)
+	if id == "lantern-hanging":
+		break_lantern(node)
 	return node
+
+
+## Decorative hanging lanterns are broken: no glass, dark, hanging askew,
+## so the few that can still be lit (wall_lights.gd) stand out (owner,
+## 2026-11-24). `broken` false mends one.
+static func break_lantern(node: Node3D, broken := true) -> void:
+	var glass := node.get_node_or_null("Model/Glass")
+	if glass:
+		glass.visible = not broken
+	var model := node.get_node_or_null("Model") as Node3D
+	if model:
+		model.rotation.z = 0.32 if broken else 0.0  # swung from its hook
+	if broken and "lit" in node:
+		node.lit = false
 
 
 ## A web strung across the top of a corner, on one wall, hanging away from

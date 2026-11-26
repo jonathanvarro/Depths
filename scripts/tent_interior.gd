@@ -46,8 +46,18 @@ func _init() -> void:
 func _ready() -> void:
 	_fit()
 
+## Resting once between trips (owner, 2026-11-24): the cot greys out, and
+## says why, until the party has been down the mine again.
+func set_rest_allowed(allowed: bool, reason := "") -> void:
+	var button: Button = _buttons["rest"]
+	button.disabled = not allowed
+	button.tooltip_text = TARGETS["rest"].tip if allowed else reason
+	button.modulate = Color.WHITE if allowed else Color(1, 1, 1, 0.45)
+	button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND if allowed else Control.CURSOR_FORBIDDEN
+
 func _activate(id: String) -> void:
 	if _activating:return
+	if id=="rest" and _buttons["rest"].disabled:return
 	_activating=true
 	_pressed_id=id
 	queue_redraw()

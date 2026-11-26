@@ -149,15 +149,18 @@ func resolve(party, choice: EventChoice, forced := -1, flags: Array = []) -> Dic
 		return result
 	var changes: Array = result["changes"]
 	var named: bool = outcome.target == EventOutcome.Target.EVERYONE and party.living_members().size() > 1
+	# Every chip says what it means when pointed at (owner, 2026-11-24): the
+	# same words as the summary line, written just before each chip.
+	var notes: Array[String] = []
 	var chip := func(icon: Texture2D, text: String, good: bool, hero) -> void:
-		changes.append({"icon": icon, "text": ("%s %s" % [hero.display_name, text]) if hero and named else text, "good": good})
+		var tip: String = notes[-1] if not notes.is_empty() else text
+		changes.append({"icon": icon, "text": ("%s %s" % [hero.display_name, text]) if hero and named else text, "good": good, "tip": tip.substr(0, 1).to_upper() + tip.substr(1) + "."})
 	var living: Array[Companion] = party.living_members()
 	var targets: Array[Companion] = []
 	if outcome.target == EventOutcome.Target.EVERYONE:
 		targets = living
 	elif not living.is_empty():
 		targets.append(living[0])  # whoever acted: the party's lead for now
-	var notes := PackedStringArray()
 	for hero in targets:
 		if outcome.health != 0:
 			hero.change_health(outcome.health)
@@ -246,11 +249,12 @@ func resolve(party, choice: EventChoice, forced := -1, flags: Array = []) -> Dic
 					hero.change_health(hero.effective_max_health())
 			notes.append("everyone recovered")
 		chip.call(CHIP_ICONS["rest"], "", true, null)
+		changes[-1]["tip"] = "Rested for %d time: healing under way finishes, nerves settle (panic ends) and anyone knocked out comes round.%s" % [party.REST_TIME, " Everyone is back to full health." if outcome.recover else ""]
 	result["ambush"] = outcome.ambush.duplicate()
 	result["story"] = outcome.text
 	var text := outcome.text
 	if not notes.is_empty():
-		text += "\n(" + "; ".join(notes) + ")"
+		text += "\n(" + "; ".join(PackedStringArray(notes)) + ")"
 	result["text"] = text
 	return result
 

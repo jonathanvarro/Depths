@@ -11,7 +11,7 @@ extends RefCounted
 
 const ENEMIES := "res://data/enemies/%s.tres"
 const LEADER_MODELS := {
-	"whisker": preload("res://art/enemies/named-leaders-v1/whisker.tscn"),
+	"whisker": preload("res://art/enemies/creatures-refined-v2/whisker.tscn"),
 	"spinner": preload("res://art/enemies/named-leaders-v1/spinner.tscn"),
 	"skarn": preload("res://art/enemies/named-leaders-v1/skarn.tscn"),
 	"foreman": preload("res://art/enemies/named-leaders-v1/foreman.tscn"),
@@ -23,7 +23,10 @@ const LEADER_MODELS := {
 ## `light`: the colour of its glow on the map.
 const PACKS := {
 	"whisker": {"name": "Old Whisker's brood", "leader": "Old Whisker", "floors": [1, 2],
-		"types": ["great_rat", "rat", "rat"], "marks": ["Hardened", "Savage"], "light": Color(0.62, 0.86, 0.42),
+		# Tougher (owner, 2026-11-24: easy and uneventful for a gold chest): a
+		# second great rat, and Whisker herself quick and much harder to kill.
+		"types": ["great_rat", "great_rat", "rat", "rat"], "marks": ["Hardened", "Savage"], "light": Color(0.62, 0.86, 0.42),
+		"leader_marks": ["Swift"], "leader_health": 1.8,
 		"seen": "A sickly green glow moves between the rooms: Old Whisker, grey as ash and big as a dog, and her brood."},
 	"spinner": {"name": "The Pale Spinner", "leader": "The Pale Spinner", "floors": [2, 3],
 		"types": ["webspinner", "spider", "spider"], "marks": ["Venomous", "Hardened"], "light": Color(0.62, 0.78, 1.0),
@@ -100,8 +103,10 @@ static func empower(state, id: String) -> void:
 		if i == 0:
 			state.make_elite(foe, pack["marks"][1])
 			state.make_elite(foe, pack["marks"][0])
+			for mark: String in pack.get("leader_marks", []):
+				state.make_elite(foe, mark)
 			var type: EnemyType = foe.type.duplicate()
-			type.max_health = roundi(type.max_health * LEADER_HEALTH)
+			type.max_health = roundi(type.max_health * float(pack.get("leader_health", LEADER_HEALTH)))
 			foe.type = type
 			foe.health = type.max_health
 			foe.name = pack["leader"]

@@ -44,6 +44,15 @@ Templates > Download and Install; already installed on the owner's PC).
   launch ("More info" > "Run anyway").
 - **Check a build:** `Depths.exe --quit-after 400 -- --begin` skips the
   title and runs the dungeon briefly; errors print to the console.
+  `-- --save=<file> --continue` continues another save file (replay a COPY
+  of the owner's save; never their real one). Exported builds can't run
+  `--script` or `--path`. Quest-site trouble is logged to
+  `%APPDATA%/Godot/app_userdata/Depths/quest_sites.log`.
+- `project.godot` sets `editor/export/convert_text_resources_to_binary=false`
+  (2026-11-24): Godot 4.7.2's export conversion emptied QuestPackage
+  `rows`/flags, so exported games had no quest sites while the editor and
+  every check were fine. Test exported data with a real export, e.g.
+  `-- --save=<copy> --continue`.
 - The preset leaves out `art/source/` and `tools/`. Everything else under
   `res://` is included (data/events is loaded by folder listing, so a
   "selected scenes only" export would drop it).
@@ -63,6 +72,18 @@ Templates > Download and Install; already installed on the owner's PC).
   Escape/Keep item cancel, and the tutorial spotlight allows both actions via
   `spotlight_action_group`. Review: `build/local-field-kit-v3/inspector.html`.
   Native matrix/gesture/tutorial checks pass; owner/physical iPhone review remains.
+
+- `docs/rat-bat-refinement.md` – #292's six adversarial-review fixes in
+  `art/enemies/creatures-refined-v2`: rounded CC0 rat/great-rat derivatives,
+  articulated 13-bone cave bat, fitted Old Whisker and separate fur/skin/wing
+  surfaces. Live enemy/ambient bindings use these; old libraries and the
+  starved-rat sprite remain. Grounded bat hurt/fall stay on the floor.
+  `scripts/creature_framing.gd` fits first-person field combat above controls
+  using pose envelopes, preserves taller neighbours and restores exploration;
+  tactical/stage cameras and game rules retain authority. Local editable masters,
+  before/after and native phone review: `build/local-creatures-refined-v2`.
+  1,132 skin/framing checks plus enemy-model, wildlife and smoothing checks pass;
+  physical iPhone performance and owner style review remain.
 
 - `docs/tutorial-campfire-and-bodies-3d.md` – #285's live tutorial hearth and
   two static anonymous clothed travellers. True floor-registered GLBs replace
@@ -687,12 +708,20 @@ Templates > Download and Install; already installed on the owner's PC).
   Real common chests are `data/events/chest_common.tres` (ChatGPT's art); the
   old containers (pack, tool rack, workings, cache, stash, strongbox) keep their
   own loot families below a chest (`ChestTiers.CONTAINERS`, never gear).
-- Wall lights (2026-11-23): `scripts/wall_lights.gd` (spare torches taken by
-  walking up; old lanterns lit for `BURN`, whose light counts as the party's:
+- Quest sites (2026-11-24): `marks["sites"]` (every package's Rect2i),
+  `DungeonMap.in_story_site()` keeps other placements out; `_missing_quest_site`
+  checks the package events too and `_restore` rebuilds a floor missing one;
+  F3 shows "Quest sites: ... OK/MISSING". `tools/quest_sites_check.gd`.
+- Wall lights (2026-11-23/24): `scripts/wall_lights.gd` (used by walking into
+  their wall, `_on_party_bumped_wall`; spare torches lean at the wall's foot;
+  decorative lanterns are broken, `Dressing.break_lantern`; old lanterns lit
+  for `BURN`, whose light counts as the party's:
   `Party.borrowed_light`, `PartyState.near_light`), main `_add_wall_lights`/
   `_wall_light`, `map.marks["wall_lights"]`. Dripping halls' clear pool:
   `_stock_dripping_hall`. Quest sites: amber disc + corner-map edge pointer.
-  `tools/playtest_nov23b_check.gd`.
+  `tools/playtest_nov23b_check.gd`. Rows change on the go by tapping a
+  card's front/back tag (`PartyCard.row_tapped`, main `_swap_row`). Monster
+  spawns have no map mark.
 - Quartermaster's issue (2026-11-22): `CampState.ISSUE`/`issue_level`; returns
   top the pack up to it (`top_up_torches`), raised on the mine path for gold
   and mine materials. `tools/quartermaster_check.gd`. Floors are 35x35 with
@@ -758,8 +787,7 @@ Templates > Download and Install; already installed on the owner's PC).
   Food/light stay shared. Gear/curses, costs, stacks/capacity/pages remain model
   controlled. Open with backpack or I/B. Current handoff/checks:
   `docs/contextual-field-kit.md` (#191); earlier `docs/combined-kit-live.md`.
-  Pack now uses `KitBag.fitted_art` without cropping (#290); preserve the
-  default trade framing. Legacy `pocket_focus` remains available for old art.
+  `KitBag.pocket_focus` is Pack-only; preserve the default trade framing.
 - `scripts/battle_stage.gd` – authored combat mist surge and low drifting bank
   (#129), viewport-fitted camera quad and static/plain fade when effects are off.
   Preserved source/prompt, exporter and real-renderer review: `docs/combat-fog.md`.
