@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-11-25 – Claude (merged #293; rat revision requested, #294)
+- Did: owner reviewed #293's before/after captures with me and chose to merge it: the first-person framing (grounded creatures above the controls) and the flying cave bat are clear improvements. The rat is mixed and the great rat (and Old Whisker on it) reads cute rather than threatening, so #294 asks ChatGPT to revise both: longer snout, smaller set-back ears, legs under the body, menacing eyes, rougher fur, a low predatory great rat with tusks and readable bristles; also lift a landed bat's tag clear. Full suite passes after the merge.
+- Next: ChatGPT: #294 (keep rig, clips, origin, budgets and API).
+- Watch out: #291 (Field kit layout) is still open and touches the Pack screen we changed on 2026-11-22/24; expect conflicts there.
+
 ## 2026-11-25 – ChatGPT (rat/bat review: all six refinements, #292)
 - Did: `codex/rat-bat-refinement` adds `art/enemies/creatures-refined-v2` and live model/ambient bindings: rounded CC0 rat and great rat with muzzle/paws/curved tail, shoulder mass/low bristles; original articulated 13-bone bat with curved wings, jaw/feet and grounded hurt/fall; fitted Old Whisker whiskers/scars/ash coat. Separate vertex-colour fur/skin/membrane shaders and restrained contact ink. `CreatureFraming` fits first-person field poses above controls, includes taller neighbours and restores the exact exploration camera; tags follow pose height. Game rules/numbers, sprite fallback, tutorial starved rat, older libraries and private assets remain unchanged. Latest main merged cleanly into this branch, retaining Claude's export/quest fixes.
 - Validation: 1,132 native skin/floor/tile/loops/still/material/framing checks (four desktop/phone shapes, Normal/Larger, mixed foes, board/exploration restore) pass. Existing enemy-model/board/stage/sprite checks, mine wildlife and animation smoothing pass. Gallery and separate editable masters: `E:/GitHub/Depths/build/local-creatures-refined-v2/inspector.html`. Native checks use the private desktop; no owner save is touched. Provenance/build/limits: `docs/rat-bat-refinement.md`.
