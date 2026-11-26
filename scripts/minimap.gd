@@ -232,6 +232,15 @@ func _draw() -> void:
 				var label_width:=font.get_string_size(site_name,HORIZONTAL_ALIGNMENT_LEFT,-1,15).x
 				var pos:=at+Vector2(-label_width/2.0,-maxf(tile*.6,16.0))
 				draw_string(font,pos,site_name,HORIZONTAL_ALIGNMENT_LEFT,-1,16,Color(0.42,0.22,0.04))
+	# Where each way down leads, once it's been seen (#300).
+	if full_view:
+		for cell: Vector2i in map.marks.get("exit_names", {}):
+			if cells.has_point(cell) and (reveal_all or map.discovered.has(cell)) and (not dim or _known_floor.has(cell)):
+				var exit_at:=origin+(Vector2(cell-cells.position)+Vector2.ONE*.5)*tile
+				var exit_name: String="To the "+map.marks["exit_names"][cell]
+				var exit_font:=get_theme_default_font()
+				var exit_width:=exit_font.get_string_size(exit_name,HORIZONTAL_ALIGNMENT_LEFT,-1,15).x
+				draw_string(exit_font,exit_at+Vector2(-exit_width/2.0,maxf(tile*.9,20.0)),exit_name,HORIZONTAL_ALIGNMENT_LEFT,-1,15,Color(INK,.85))
 	if sensed.is_valid():
 		for cell: Vector2i in sensed.call():
 			if cells.has_point(cell):_draw_marker(GLYPHS.danger,origin+(Vector2(cell-cells.position)+Vector2.ONE*.5)*tile,tile,Color(1,.55,.45))

@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="EnemyType" format=3]
+
+[ext_resource type="Script" path="res://scripts/injury.gd" id="1_bl8nq"]
+[ext_resource type="Resource" path="res://data/injuries/deep_wound.tres" id="2_hetnt"]
+[ext_resource type="PackedScene" path="res://art/enemies/monsters-v1/broodmother/scene.tscn" id="3_3pro8"]
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="4_ch0f5"]
+[ext_resource type="Resource" path="res://data/enemies/small_spider.tres" id="5_fqg88"]
+[ext_resource type="PackedScene" path="res://art/enemies/combat-roster-3d-v1/broodmother.tscn" id="model3d"]
+
+[resource]
+script = ExtResource("4_ch0f5")
+display_name = "The Heartrot"
+scene = ExtResource("3_3pro8")
+model = ExtResource("model3d")
+max_health = 65
+damage_min = 4
+damage_max = 8
+accuracy = 0.75
+initiative = 8
+injuries = Array[ExtResource("1_bl8nq")]([ExtResource("2_hetnt")])
+attack_verb = "lashes"
+tactic = 17
+intro = "The Heartrot: a mass of fungal growth knotted round something long dead. It calls its brood, its touch poisons, and below half health it rages. Placeholder art until its own model is made."
+loot_line = "Tangled in the Heartrot's mass, among older victims: %s."
+threat = 12
+summons = ExtResource("5_fqg88")
+family = "beast"

@@ -81,7 +81,7 @@ func _initialize() -> void:
 	main._party.place(map, outside)
 	main._cell_before = outside
 	main._on_party_entered_cell(door)
-	check("its threshold warns first", main._prompt.visible and main._prompt_label.text == lair.warning and not main._in_combat, main._prompt_label.text)
+	check("its threshold warns first", main._prompt.visible and main._prompt_label.text.begins_with(lair.warning) and main._prompt_label.text.contains("Your party:") and not main._in_combat, main._prompt_label.text)
 	check("...with Go in or Back away", main._prompt_buttons.map(func(b): return b.text) == ["Go in", "Back away"])
 	if dir != "":
 		for i in 6:

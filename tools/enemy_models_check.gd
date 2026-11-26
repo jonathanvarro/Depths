@@ -180,7 +180,7 @@ func _initialize() -> void:
 	# First person, on the dark stage (a lair, the gate, the queen, or the
 	# view off): the painted art, which the stage is framed for.
 	Settings.set_value("view_above", false)
-	main._fight_kind = ""
+	main._fight_kind = "lair"  # an ordinary ambush is fought in the cave now (2026-11-26); a lair keeps the stage
 	main._start_combat(main._party.cell, [rat_type] as Array[EnemyType])
 	await create_timer(1.2).timeout
 	state = main._combat._state

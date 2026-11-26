@@ -51,15 +51,16 @@ func _initialize() -> void:
 	main.play_opening = false
 	root.add_child(main)
 	await create_timer(0.5).timeout
-	main._go_to_floor(Refuge.DEPTH, main.Arrival.FROM_ABOVE)
+	# Since the area network (#300) the refuge is the Rest Area's camp.
+	main._go_to_area("rest", main.Arrival.FROM_ABOVE)
 	await create_timer(0.3).timeout
 	var map = main._map
 	var cell: Vector2i = map.marks.get("refuge", Vector2i(-1, -1))
-	check("floor 3 in the game has the refuge", cell != Vector2i(-1, -1) and map.events.get(cell) == Refuge.EVENT)
-	main._go_to_floor(2, main.Arrival.FROM_BELOW)
+	check("the Rest Area holds the refuge", cell != Vector2i(-1, -1) and map.events.get(cell) == Refuge.EVENT)
+	main._go_to_area("cavern", main.Arrival.FROM_BELOW, "rest")
 	await create_timer(0.2).timeout
-	check("...and floor 2 doesn't", not main._map.marks.has("refuge"))
-	main._go_to_floor(Refuge.DEPTH, main.Arrival.FROM_ABOVE)
+	check("...and the Cavern above it doesn't", not main._map.marks.has("refuge"))
+	main._go_to_area("rest", main.Arrival.FROM_ABOVE)
 	await create_timer(0.2).timeout
 	check("...the same refuge on the way back down", main._map.marks.get("refuge") == cell)
 

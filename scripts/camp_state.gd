@@ -411,7 +411,9 @@ func carry_home(hero: Companion) -> void:
 
 
 ## A full wipe left `hero` lying on floor `depth` (#180).
-func leave_body(hero: Companion, depth: int) -> void:
+## `depth` is the floor's key: its number on the main path, or a side area's
+## id (#300).
+func leave_body(hero: Companion, depth) -> void:
 	if bodies_on(depth).has(hero) or hero in fallen:
 		return
 	carried.erase(hero)
@@ -420,8 +422,8 @@ func leave_body(hero: Companion, depth: int) -> void:
 
 
 ## Who lies on floor `depth`.
-func bodies_on(depth: int) -> Array:
-	return lost_bodies.filter(func(b): return b["depth"] == depth).map(func(b): return b["hero"])
+func bodies_on(depth) -> Array:
+	return lost_bodies.filter(func(b): return str(b["depth"]) == str(depth)).map(func(b): return b["hero"])
 
 
 ## The party found `hero`'s body and carries it.

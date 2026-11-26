@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="EnemyType" format=3]
+
+[ext_resource type="Resource" path="res://data/items/goblin_scrap.tres" id="salvage"]
+[ext_resource type="Script" path="res://scripts/injury.gd" id="1_n2suj"]
+[ext_resource type="Resource" path="res://data/injuries/deep_wound.tres" id="2_3c1p3"]
+[ext_resource type="Resource" path="res://data/injuries/limp.tres" id="3_063hd"]
+[ext_resource type="PackedScene" path="res://art/enemies/monsters-v1/goblin-brute/scene.tscn" id="4_1r6o0"]
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="5_trueg"]
+[ext_resource type="PackedScene" path="res://art/enemies/goblin-elites-3d-v1/goblin-brute.tscn" id="model"]
+
+[resource]
+script = ExtResource("5_trueg")
+display_name = "The Headsman"
+scene = ExtResource("4_1r6o0")
+model = ExtResource("model")
+strike_delay = 0.2916667
+max_health = 70
+damage_min = 6
+damage_max = 10
+accuracy = 0.75
+initiative = 7
+injury_chance = 0.35
+injuries = Array[ExtResource("1_n2suj")]([ExtResource("2_3c1p3"), ExtResource("3_063hd")])
+attack_verb = "cleaves"
+tactic = 10
+intro = "The Headsman of the Execution Halls: a hooded goblin twice a brute's size, dragging a cleaver-axe. Placeholder art until his own model is made. Brace when he winds up."
+loot_line = "Among the Headsman's grim keepsakes: %s."
+purse = Vector2i(10, 20)
+fears_fire = false
+threat = 12
+family = "goblin"
+armour = 2
+drop = ExtResource("salvage")
+drop_chance = 0.5

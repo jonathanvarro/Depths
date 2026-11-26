@@ -7,6 +7,7 @@ const UiTheme := preload("res://scripts/ui_theme.gd")
 const DungeonMap := preload("res://scripts/dungeon_map.gd")
 const Dressing := preload("res://scripts/dressing.gd")
 const Landmarks := preload("res://scripts/landmarks.gd")
+const Areas := preload("res://scripts/areas.gd")
 const WallLights := preload("res://scripts/wall_lights.gd")
 const Ambience := preload("res://scripts/ambience.gd")
 const Recruits := preload("res://scripts/recruits.gd")
@@ -386,6 +387,8 @@ var _groups: Array = []  # Roamers.Group on this floor
 var _roamer_root: Node3D
 var _engaged = null  # the Roamers.Group being fought
 var _props := {}  # cell -> prop node for this floor's room contents (#46)
+## The area the party is in (#300): its id in Areas. `_depth` is its tier.
+var _area := "mines"
 var _wall_light_nodes := {}  # cell -> this floor's spare torch or wall lantern (2026-11-23)
 var _cell_now := Vector2i(-1, -1)
 var _cell_before := Vector2i(-1, -1)  # where to step back to from the hall's door
@@ -651,8 +654,8 @@ func _open_pause_menu() -> void:
 ## True if a story quest wants a site on this floor that `map` lacks: not
 ## recorded, or recorded but with any of its events gone (2026-11-24).
 func _missing_quest_site(map, depth: int) -> bool:
-	if _in_opening or use_debug_layout:
-		return false
+	if _in_opening or use_debug_layout or not Areas.on_main_path(_area):
+		return false  # story sites live on the main path (#300)
 	_repair_site_records(map, depth)
 	var events: Array = map.events.values()
 	for package: QuestPackage in Packages.active(_camp_state, depth):
@@ -727,7 +730,18 @@ func _quest_site_report() -> String:
 const STORY_SITE_TRIES := 40
 
 
+## Goes to the main-path area at `depth` (the old floors; tests and saves).
 func _go_to_floor(depth: int, arrival: Arrival) -> void:
+	_go_to_area("opening" if depth == OPENING_DEPTH else Areas.main_for(depth), arrival)
+
+
+## Builds (or returns to) area `id` (#300). Arriving from above puts the
+## party at its way up; from below (`from_area`, the area left), at the way
+## down that leads back there.
+func _go_to_area(id: String, arrival: Arrival, from_area := "") -> void:
+	var depth: int = Areas.depth(id)
+	var key = Areas.key(id)
+	_area = id
 	var waited := 0
 	if _floor_started:
 		# Owner rule (#8): durations finish between floors - but the time they
@@ -737,15 +751,16 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 		_party_state.complete_pending_effects()
 	_floor_started = true
 	_depth = depth
-	_wanderers.arrive_on(depth, _party_state.time_elapsed)
+	# No wanderers in the Rest Area or a boss lair.
+	_wanderers.arrive_on(0 if Areas.is_safe(id) or Areas.is_lair(id) else depth, _party_state.time_elapsed)
 	_apply_theme()
 	_expedition.visit_floor(depth)
 	# A floor kept from earlier today, made before a quest that belongs on it
 	# was taken, has no site for it: build it again (owner playtest,
 	# 2026-11-22: floor 1 with no survey party, and its way down shut).
-	if _floors.has(depth) and _missing_quest_site(_floors[depth], depth):
-		_floors.erase(depth)
-	if not _floors.has(depth):
+	if _floors.has(key) and _missing_quest_site(_floors[key], depth):
+		_floors.erase(key)
+	if not _floors.has(key):
 		var layout: PackedStringArray
 		var marks := {}
 		var stamped: Dictionary
@@ -755,10 +770,18 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 		for attempt in STORY_SITE_TRIES:
 			layout = _make_layout(depth, attempt)
 			marks = {}
-			if depth == FORTRESS_DEPTH and not use_debug_layout:
+			if id == "fortress" and not use_debug_layout:
 				var fortress: Dictionary = Fortress.fortify(layout, _camp_state.gate_broken)
 				layout = fortress["layout"]
 				marks = {"hall": fortress["hall"], "gates": fortress["gates"]}
+			# Ways on to the side areas (#300), each in a far room (never the
+			# King's hall).
+			if not use_debug_layout and not Areas.info(id)["side"].is_empty() and not Areas.is_lair(id):
+				var side_rng := RandomNumberGenerator.new()
+				side_rng.seed = hash([_site_seed, id, attempt, "exits"])
+				var with_exits: Dictionary = Areas.add_side_exits(layout, id, side_rng, marks.get("hall", []) + marks.get("gates", []))
+				layout = with_exits["layout"]
+				marks["exits"] = with_exits["exits"]
 			# Quest packages the story wants here (#123), stamped into rock.
 			# Never join a package through the queen's hall or past her gates.
 			var avoid: Array = marks.get("hall", []) + marks.get("gates", [])
@@ -766,9 +789,10 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 			if not avoid.is_empty():
 				var plain = DungeonMap.new(layout, depth)
 				join = plain.walking_distances(plain.find_content(DungeonMap.Content.STAIRS_UP))
-			var story: Array = [] if _in_opening else Packages.active(_camp_state, depth)
+			# Story sites belong to the main path; side areas have their own.
+			var story: Array = [] if _in_opening or not Areas.on_main_path(id) else Packages.active(_camp_state, depth)
 			var wanted: Array = story.duplicate()
-			if not _in_opening:
+			if not _in_opening and not Areas.is_safe(id) and not Areas.is_lair(id):
 				wanted += Packages.lairs(depth, _site_seed + depth * 7919 + 29) + Packages.territories(depth, _site_seed + depth * 7919 + 31)
 			stamped = Packages.place(layout, wanted, _site_seed + depth * 7919 + 13 + attempt * 101, avoid, join)
 			if not story.any(func(p): return p.id in stamped["failed"]):
@@ -781,7 +805,7 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 				stamped = Packages.place(layout, story, _site_seed + depth * 7919 + 13, avoid, join)
 				_note_site_trouble(depth, "all %d layouts failed %s; story alone: placed %s, failed %s" % [STORY_SITE_TRIES, tries_failed, stamped["placed"], stamped["failed"]])
 		var refuge := Vector2i(-1, -1)
-		if depth == Refuge.DEPTH and not use_debug_layout and not _in_opening:  # a rest before the fortress
+		if id == "rest" and not use_debug_layout and not _in_opening:  # the Rest Area's camp (#300)
 			var placed: Dictionary = Refuge.place(stamped["layout"], depth)
 			stamped["layout"] = placed["layout"]
 			refuge = placed["cell"]
@@ -790,12 +814,12 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 		# Puzzles (owner, 2026-11-21): one-way doors, a lever and gate, a key
 		# and locked door, kept clear of quests, the refuge and the hall,
 		# and only ever placed where the floor stays solvable.
-		if not use_debug_layout and not _in_opening:
+		if not use_debug_layout and not _in_opening and not Areas.is_safe(id) and not Areas.is_lair(id):
 			var keep_clear: Array = stamped["events"].keys() + stamped["fights"].keys() + marks.get("hall", []) + marks.get("gates", [])
 			if refuge != Vector2i(-1, -1):
 				keep_clear.append(refuge)
-			for id in stamped["sites"]:
-				var site: Rect2i = stamped["sites"][id]
+			for site_id in stamped["sites"]:
+				var site: Rect2i = stamped["sites"][site_id]
 				for x in range(site.position.x - 1, site.end.x + 1):
 					for y in range(site.position.y - 1, site.end.y + 1):
 						keep_clear.append(Vector2i(x, y))
@@ -803,33 +827,47 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 			stamped["layout"] = laid["layout"]
 			if not laid["puzzles"].is_empty():
 				marks["puzzles"] = laid["puzzles"]
-		_floors[depth] = DungeonMap.new(stamped["layout"], depth)
-		_floors[depth].marks = marks
-		Puzzles.make_solid(_floors[depth])  # shut doors, the lever and the key's resting place
-		_assign_events(_floors[depth])
+		_floors[key] = DungeonMap.new(stamped["layout"], depth)
+		_floors[key].marks = marks
+		Puzzles.make_solid(_floors[key])  # shut doors, the lever and the key's resting place
+		_assign_events(_floors[key])
 		for p: Dictionary in marks.get("puzzles", []):
 			if p.has("chest"):  # behind a puzzle: a silver chest (chest_tiers.gd)
-				ChestTiers.set_tier(_floors[depth], p["chest"], "silver")
-				_floors[depth].events[p["chest"]] = load(ChestTiers.HOARD_EVENT % "silver")
-		_choose_elite(_floors[depth], depth)
+				ChestTiers.set_tier(_floors[key], p["chest"], "silver")
+				_floors[key].events[p["chest"]] = load(ChestTiers.HOARD_EVENT % "silver")
+		if not Areas.is_safe(id) and not Areas.is_lair(id):
+			_choose_elite(_floors[key], depth)
+		# Each way down named on the full map once found (#300).
+		if Areas.children(id).size() > 1 or not _floors[key].marks.get("exits", {}).is_empty():
+			var names := {}
+			for y in _floors[key].height:
+				for x in _floors[key].width:
+					var c := Vector2i(x, y)
+					if _floors[key].content_at(c) == DungeonMap.Content.STAIRS_DOWN:
+						var dest: String = _floors[key].marks.get("exits", {}).get(c, Areas.info(id)["main"])
+						if dest != "":
+							names[c] = Areas.area_name(dest) + (" (a boss lair)" if Areas.is_lair(dest) else "")
+			_floors[key].marks["exit_names"] = names
 		for cell in stamped["events"]:
-			_floors[depth].events[cell] = stamped["events"][cell]
+			_floors[key].events[cell] = stamped["events"][cell]
 		if refuge != Vector2i(-1, -1):
-			_floors[depth].events[refuge] = Refuge.EVENT
-		_floors[depth].fight_groups = stamped["fights"]
-		_floors[depth].packages = stamped["placed"]
+			_floors[key].events[refuge] = Refuge.EVENT
+		_floors[key].fight_groups = stamped["fights"]
+		if Areas.is_lair(id):
+			_stock_lair(_floors[key], id)
+		_floors[key].packages = stamped["placed"]
 		# Visible quests' sites, marked on the map once seen (owner playtest, #230).
 		var sites := {}
-		for id in stamped["sites"]:
-			var package: QuestPackage = Packages.find(id)
+		for site_id in stamped["sites"]:
+			var package: QuestPackage = Packages.find(site_id)
 			if package.lair == "" and package.chance == 0.0 and Quests.INFO.has(package.quest) and not Quests.INFO[package.quest]["hidden"]:
-				sites[package.quest] = stamped["sites"][id]
+				sites[package.quest] = stamped["sites"][site_id]
 		marks["sites"] = stamped["sites"]  # every package's site, kept clear below
 		# The named pack never starts inside a site (it may walk through).
-		if not _floors[depth].marks.get("elite", {}).is_empty():
-			var start: Vector2i = _floors[depth].marks["elite"]["cell"]
+		if not _floors[key].marks.get("elite", {}).is_empty():
+			var start: Vector2i = _floors[key].marks["elite"]["cell"]
 			if stamped["sites"].values().any(func(r: Rect2i): return r.grow(1).has_point(start)):
-				_floors[depth].marks.erase("elite")
+				_floors[key].marks.erase("elite")
 		if not sites.is_empty():
 			marks["quests"] = sites
 			# Names are metadata; exploration reveals them like other landmarks.
@@ -837,14 +875,14 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 			for quest in sites:
 				if QUEST_SITE_NAMES.has(quest):
 					marks["quest_names"][quest] = QUEST_SITE_NAMES[quest]
-		_floors[depth].lairs = stamped["lairs"]
-		if depth >= Galleries.DEPTH and not use_debug_layout:  # slice 2: water, until it's drained
+		_floors[key].lairs = stamped["lairs"]
+		if Areas.theme(id) == "galleries" and not use_debug_layout:  # slice 2: water, until it's drained
 			var drained := Quests.has_flag(_camp_state, "dry_passage", "opened") if depth == Galleries.DEPTH \
 					else Quests.has_flag(_camp_state, "reservoir", "diverted")
-			Galleries.flood(_floors[depth], _site_seed + depth * 7919 + 37, drained, depth)
+			Galleries.flood(_floors[key], _site_seed + depth * 7919 + 37, drained, depth)
 		if not _in_opening and not use_debug_layout:
-			WallLights.place(_floors[depth], depth, _site_seed)  # spare torches, old lanterns
-	_map = _floors[depth]
+			WallLights.place(_floors[key], depth, _site_seed)  # spare torches, old lanterns
+	_map = _floors[key]
 	if _missing_quest_site(_map, depth):
 		_note_site_trouble(depth, "the floor was built without a site the story needs: %s" % _quest_site_report())
 	_place_bodies()  # lost in a wipe, waiting to be found (#180)
@@ -856,7 +894,7 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 	if arrival == Arrival.FROM_ABOVE:
 		cell = _map.find_content(DungeonMap.Content.STAIRS_UP)
 	elif arrival == Arrival.FROM_BELOW:
-		cell = _map.find_content(DungeonMap.Content.STAIRS_DOWN)
+		cell = _exit_to(from_area)
 	_party.place(_map, cell)
 	_spawn_room_groups()
 	if _in_opening:
@@ -864,11 +902,11 @@ func _go_to_floor(depth: int, arrival: Arrival) -> void:
 	elif arrival == Arrival.OPENING and not use_debug_layout:
 		_show_message(opening_message)
 	elif waited > 0:
-		_show_message("%s · depth %d · waited %d while it took hold" % [environment_theme.display_name, depth, waited])
+		_show_message("%s · waited %d while it took hold" % [Areas.area_name(id), waited])
 	else:
-		_show_message("%s · depth %d" % [environment_theme.display_name, depth])
+		_show_message(Areas.area_name(id))
 	_fortress_signs(depth)
-	var lost: Array = _camp_state.bodies_on(depth).map(func(h): return h.display_name)
+	var lost: Array = _camp_state.bodies_on(key).map(func(h): return h.display_name)
 	if not lost.is_empty() and not _in_opening:  # #180
 		_show_message("%s · depth %d · somewhere here lie %s" % [environment_theme.display_name, depth, " and ".join(lost)])
 	# A quest's site on this floor: say how the map shows the way (owner,
@@ -954,7 +992,7 @@ func _build_level() -> void:
 	if _depth == OPENING_DEPTH and _in_opening:
 		_add_opening_dressing()
 		Dressing.dress_opening(_level, _map, _site_seed, CELL_SIZE, WALL_HEIGHT)  # the new 3D pieces (2026-11-09)
-	elif _depth == OUTSKIRTS_DEPTH and not use_debug_layout:
+	elif _area == "cavern" and not use_debug_layout:
 		_add_outskirts_dressing()
 	var landmarks := {}
 	if not _in_opening and not use_debug_layout:
@@ -965,16 +1003,16 @@ func _build_level() -> void:
 		_add_body_props()  # #180
 		_add_puzzle_props()
 		_add_wall_lights()
-	if _depth == FORTRESS_DEPTH and not _in_opening:
+	if _area == "fortress" and not _in_opening:
 		_add_fortress_dressing()  # after the landmarks, so its cages keep out of theirs (#117)
 	if not _in_opening and not use_debug_layout:
 		var dresser: Script = environment_theme.dressing_script if environment_theme.dressing_script else Dressing
 		dresser.dress(_level, _map, _depth, _site_seed, CELL_SIZE, WALL_HEIGHT, landmarks)  # #128
 		if kaykit_pilot and not "--no-kaykit" in OS.get_cmdline_user_args():  # #224, adopted 2026-11-03
 			KayKitPilot.dress(_level, _map, _depth, _site_seed, CELL_SIZE, landmarks)
-		if _depth == Galleries.DEPTH:  # the galleries' waterworks (#166)
+		if _area == "galleries":  # the galleries' waterworks (#166)
 			Galleries.dress_galleries(_level, _map, CELL_SIZE, _site_seed)
-		if _depth >= Galleries.RESERVOIR:  # water edges, then the stairs by the gate (#168)
+		if _area == "reservoir":  # water edges, then the stairs by the gate (#168)
 			Galleries.dress_reservoir(_level, _map, CELL_SIZE, _site_seed, Quests.has_flag(_camp_state, "reservoir", "diverted"))
 
 
@@ -1157,13 +1195,94 @@ func _stock_lost_cache() -> void:
 		return
 
 
+## The depth an area's fights are drawn for: its own if it sets one (the
+## Fungal Hollows), else the current depth.
+func _groups_depth() -> int:
+	return int(Areas.info(_area).get("groups", _depth))
+
+
+## A boss's threshold (#300): its warning, then how the party stands, so
+## turning back is an informed choice. Backing away is always safe.
+func _threshold(warning: String) -> String:
+	var lines: Array[String] = []
+	for hero: Companion in _party_state.members:
+		if not hero.is_alive():
+			continue
+		var state := "%d/%d" % [hero.health, hero.effective_max_health()]
+		if hero.is_unconscious():
+			state = "down"
+		elif not hero.injuries.is_empty():
+			state += ", injured"
+		if hero.strain_state() >= StrainRules.State.SHAKEN:
+			state += ", " + StrainRules.NAMES[hero.strain_state()].to_lower()
+		lines.append("%s %s" % [hero.display_name, state])
+	var light: String = Supplies.LIGHT_NAMES[_party_state.supplies.light_band()].to_lower()
+	return "%s\n\nYour party: %s. Light: %s, %d torches spare." % [warning, ", ".join(lines), light, _party_state.supplies.count(TORCH)]
+
+
+## Where a way down at `cell` leads: a side area's exit, or the main way on.
+func _exit_destination(cell: Vector2i) -> String:
+	var exits: Dictionary = _map.marks.get("exits", {})
+	if exits.has(cell):
+		return exits[cell]
+	if _area == "opening" or use_debug_layout:
+		return Areas.main_for(_depth + 1)
+	return Areas.info(_area)["main"]
+
+
+## The way down on this floor that leads to `child` (the main one if it's
+## not a side exit, or no `child` is given).
+func _exit_to(child: String) -> Vector2i:
+	for cell in _map.marks.get("exits", {}):
+		if _map.marks["exits"][cell] == child:
+			return cell
+	var side_cells: Array = _map.marks.get("exits", {}).keys()
+	for y in _map.height:
+		for x in _map.width:
+			var c := Vector2i(x, y)
+			if _map.content_at(c) == DungeonMap.Content.STAIRS_DOWN and c not in side_cells:
+				return c
+	return _map.find_content(DungeonMap.Content.STAIRS_DOWN)
+
+
+## A boss lair (#300, placeholders until the bosses' art is made): the boss
+## and its followers wait at the arena's heart.
+func _stock_lair(map, id: String) -> void:
+	var lair: Dictionary = Areas.LAIRS[Areas.info(id)["lair"]]
+	var boss := Vector2i(-1, -1)
+	for cell in map.contents:
+		if map.contents[cell] == DungeonMap.Content.ENCOUNTER:
+			boss = cell
+	if boss == Vector2i(-1, -1):
+		return
+	var group: Array[EnemyType] = [load(lair["boss"])]
+	for path: String in lair["followers"]:
+		group.append(load(path))
+	map.fight_groups[boss] = group
+	map.marks["boss"] = boss
+	map.marks["lair"] = Areas.info(id)["lair"]
+
+
 ## `attempt` > 0: another layout for the same floor (a story site didn't fit).
 func _make_layout(depth: int, attempt := 0) -> PackedStringArray:
 	if depth == OPENING_DEPTH:
 		return _opening["layout"]
 	if use_debug_layout and depth == 1:
 		return PackedStringArray(DEBUG_LAYOUT)
-	return FloorGenerator.generate(_site_seed + (depth - 1) * FLOOR_SEED_STEP + attempt * 104729, depth < floors_in_site, depth)
+	var info: Dictionary = Areas.info(_area)
+	if Areas.is_lair(_area):
+		var lair_rng := RandomNumberGenerator.new()
+		lair_rng.seed = hash([_site_seed, _area, attempt])
+		return Areas.lair_layout(lair_rng)["layout"]
+	# Side areas share their tier with a main-path floor: their own seed.
+	var seed_value: int = _site_seed + (depth - 1) * FLOOR_SEED_STEP + attempt * 104729
+	if not Areas.on_main_path(_area):
+		seed_value += posmod(hash(_area), 1000003)
+	var layout := FloorGenerator.generate(seed_value, info["main"] != "" and depth < floors_in_site, depth)
+	if Areas.is_safe(_area):  # the Rest Area: no fights
+		for y in layout.size():
+			layout[y] = layout[y].replace("E", ",")
+	return layout
 
 
 func _on_party_entered_cell(cell: Vector2i) -> void:
@@ -1185,9 +1304,9 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 		_minimap.queue_redraw()
 		_full_map_view.queue_redraw()
 	# The queen's hall (#44): a warning, then no turning back.
-	if _depth == FORTRESS_DEPTH and cell in _map.marks.get("hall", []) and not _camp_state.queen_defeated:
-		_ask("The King's hall. Once you step inside, there's no turning back. Go in?",
-				_queen_fight.bind(cell), _step_back)
+	if _area == "fortress" and cell in _map.marks.get("hall", []) and not _camp_state.queen_defeated:
+		_ask(_threshold("The King's hall: torchlight, drums and the smell of goblin. Once you step inside, there's no turning back. Go in?"),
+				_queen_fight.bind(cell), _step_back, ["Go in", "Back away"])
 		return
 	# Opening: the next fight comes once she's walked far enough (#56).
 	if _in_opening and _opening_fights_done < OPENING_FIGHTS.size() and _steps_taken >= _next_fight_at:
@@ -1204,7 +1323,7 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 	if fight_cell != Vector2i(-1, -1) and not _map.triggered.has(fight_cell) and _map.lairs.has(fight_cell):
 		var lair: QuestPackage = Packages.find(_map.lairs[fight_cell])
 		if lair:  # a mini-boss's lair (#145): warned, and free to back away
-			_ask(lair.warning, _lair_fight.bind(fight_cell, lair), _step_back, ["Go in", "Back away"])
+			_ask(_threshold(lair.warning), _lair_fight.bind(fight_cell, lair), _step_back, ["Go in", "Back away"])
 			return
 	if fight_cell != Vector2i(-1, -1) and not _map.triggered.has(fight_cell) and _hears_first(fight_cell):
 		_warn_ahead(fight_cell)
@@ -1240,12 +1359,21 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 		DungeonMap.Content.NONE:
 			return
 		DungeonMap.Content.STAIRS_DOWN:
-			if not _in_opening and not Story.way_down_open(_camp_state, _depth):
+			var dest := _exit_destination(cell)
+			if dest == "":
+				return
+			if not _in_opening and dest == Areas.info(_area)["main"] and Areas.on_main_path(_area) and not Story.way_down_open(_camp_state, _depth):
 				_show_message("Not yet. Commander Vael's order comes first: find where your party fell, then report to him.")  # #237
 				return
-			_ask(environment_theme.descent_prompt, func():
+			var go_down := func():
 				Sounds.play(self, "stairs_down", -6.0, 0.0)
-				_go_to_floor(_depth + 1, Arrival.FROM_ABOVE))
+				_go_to_area(dest, Arrival.FROM_ABOVE)
+			if Areas.is_lair(dest):  # a boss lair: warned, and free to turn back (#300)
+				_ask(_threshold(Areas.LAIRS[Areas.info(dest)["lair"]]["warning"]), go_down, Callable(), ["Go in", "Back away"])
+			elif Areas.children(_area).size() > 1:
+				_ask("This way leads to the %s. Go on?" % Areas.area_name(dest), go_down)
+			else:
+				_ask(environment_theme.descent_prompt, go_down)
 		DungeonMap.Content.TRAP:
 			var trap: RoomEvent = _map.events.get(cell)
 			if trap and trap.sprung and not _in_opening and not _party_state.sees_traps() and not _map.spotted.get(cell, false):
@@ -1255,13 +1383,15 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 		DungeonMap.Content.CHEST, DungeonMap.Content.STRANGE_OBJECT, DungeonMap.Content.REST_SPOT:
 			_run_event(cell)
 		DungeonMap.Content.STAIRS_UP:
-			if _depth <= 1:  # floor 1, or the opening's daylight exit
+			var parent: String = Areas.info(_area)["parent"]
+			if _depth <= 1 or parent == "":  # floor 1, or the opening's daylight exit
 				_ask("%s Leave the mine?" % environment_theme.exit_message,
 						_end_expedition.bind(Expedition.Ending.RETURNED))
 			else:
-				_ask(environment_theme.ascent_prompt, func():
+				var left := _area
+				_ask(environment_theme.ascent_prompt if Areas.children(parent).size() == 1 else "Climb back up to the %s?" % Areas.area_name(parent), func():
 					Sounds.play(self, "stairs_up", -6.0, 0.0)
-					_go_to_floor(_depth - 1, Arrival.FROM_BELOW))
+					_go_to_area(parent, Arrival.FROM_BELOW, left))
 		_:
 			# Placeholder for real encounters: for now contents just announce themselves.
 			var content_text := DungeonMap.content_name(content)
@@ -1423,7 +1553,7 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 	_begin_encounter(cell)
 	var opening_spider := _in_opening and _opening_fights_done == OPENING_FIGHTS.size() - 1
 	if types.is_empty():
-		types.assign(encounter_pool(_depth, _party_state.living_members().size()).pick_random())
+		types.assign(encounter_pool(_groups_depth(), _party_state.living_members().size()).pick_random())
 	var state = CombatState.new(_party_state, types)
 	if not _in_opening:
 		state.beaten = _camp_state.bestiary.keys().filter(func(k): return int(_camp_state.bestiary[k].get("killed", 0)) > 0)  # elites only of kinds already beaten (#226)
@@ -1444,9 +1574,16 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 	# an event, a quest site's guards, and the Goblin King's hall (#257: he
 	# and his guards are 3D models). Lairs and the gate keep their own stage
 	# for now (the Broodmother plans differently on the board).
-	var ambush_on_board: bool = not on_map and _map_fights_active() and _overhead_on() and _fight_kind in ["", "queen"]
 	var isolate_stage := _fight_kind == "queen" or (_fight_kind == "lair" and types.has(CAPTAIN)
 		and CAPTAIN.view_scene() == CAPTAIN.model)
+	var ambush_on_board: bool = not on_map and _map_fights_active() and _overhead_on() and _fight_kind in ["", "queen"]
+	# Through the party's eyes too (owner, 2026-11-26: the survey site's
+	# guards were still fought on the old dark stage): a quest site's guards,
+	# and an event's ambush are fought in the cave, 3D models and all,
+	# like the room fights. The King's hall, lairs and the gate keep theirs.
+	var ambush_in_cave: bool = not on_map and _map_fights_active() and not _overhead_on() and _fight_kind == "" and not isolate_stage
+	if ambush_in_cave:
+		ambush_on_board = true
 	if ambush_on_board:
 		on_map = true
 	if on_map:
@@ -1455,6 +1592,10 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 		else:
 			_face_toward(cell)  # face the one that reached you
 		_begin_field_fight(state, cell)
+		if ambush_in_cave and not state.foes.is_empty():
+			var to: Vector2i = state.foes[0].cell - _party.cell  # turn to face what came at you
+			if to != Vector2i.ZERO:
+				_face_toward(_party.cell + (Vector2i(signi(to.x), 0) if absi(to.x) >= absi(to.y) else Vector2i(0, signi(to.y))))
 		if _overhead_on():
 			_tactical.enter(self, state)  # the camera lifts above the room
 		else:
@@ -1510,6 +1651,8 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 			_lair_won()
 		elif _fight_kind == "elite":
 			_elite_won()
+		elif _map.marks.has("boss") and not _map.marks.get("boss_beaten", false):
+			_area_boss_won()
 		await _offer_overflow()
 	if state.field:
 		_end_field_fight()
@@ -1825,7 +1968,7 @@ func _spawn_room_groups() -> void:
 	if not _map_fights_active():
 		return
 	var size := maxi(1, _party_state.living_members().size())
-	for group in Roamers.room_groups(_map, func(_c): return encounter_pool(_depth, size).pick_random()):
+	for group in Roamers.room_groups(_map, func(_c): return encounter_pool(_groups_depth(), size).pick_random()):
 		_place_group(group)
 	_spawn_elite()
 
@@ -1945,6 +2088,19 @@ func _drop_chest(near: Vector2i, tier: String) -> bool:
 
 
 ## Its hoard: a rare find and gold, on top of what the pack itself dropped.
+## A boss lair's boss is dead (#300): a gilded hoard where it fell, won
+## once per lair like a named pack's.
+func _area_boss_won() -> void:
+	_map.marks["boss_beaten"] = true
+	var lair: String = _map.marks.get("lair", "")
+	var looted := "lair:" + lair
+	if looted in _camp_state.elites_looted:
+		return
+	_camp_state.elites_looted.append(looted)
+	if _drop_chest(_party.cell, "gold"):
+		_show_message("The %s's hoard lies where it fell: a gilded chest." % load(Areas.LAIRS[lair]["boss"]).display_name.trim_prefix("The ").to_lower())
+
+
 func _elite_won() -> void:
 	var pack: Dictionary = Elites.PACKS[_elite_id]
 	if _map.marks.has("elite"):
@@ -2009,7 +2165,7 @@ func _spawn_wanderer() -> void:
 	var group := Roamers.Group.new()
 	group.cell = spot
 	group.noticed = true
-	group.types.assign(encounter_pool(_depth, maxi(1, _party_state.living_members().size())).pick_random())
+	group.types.assign(encounter_pool(_groups_depth(), maxi(1, _party_state.living_members().size())).pick_random())
 	_place_group(group)
 
 
@@ -2477,7 +2633,7 @@ func _end_expedition(ending: int) -> void:
 	_party.locked = true  # after closing overlays, which unlock on close
 	var notes := {
 		Expedition.Ending.RETURNED: "You stagger out into the daylight, alone." if _in_opening else "You climb out into the daylight.",
-		Expedition.Ending.WIPED: "The party fell on floor %d, and everything they carried is lost. %s at camp, badly hurt.%s" % [_depth, _who_wakes(), " The others lie where they fell: a later trip can carry them home to the priest." if _party_state.members.any(func(h): return not h.main_hero) else ""],
+		Expedition.Ending.WIPED: "The party fell in the %s, and everything they carried is lost. %s at camp, badly hurt.%s" % [Areas.area_name(_area), _who_wakes(), " The others lie where they fell: a later trip can carry them home to the priest." if _party_state.members.any(func(h): return not h.main_hero) else ""],
 		Expedition.Ending.REACHED_BOTTOM: "You stood where the others fell, and lived to climb back.",
 	}
 	if ending == Expedition.Ending.WIPED:
@@ -2594,7 +2750,7 @@ func _camp_loop(reward := 0, note := "") -> void:
 			_said.erase(key)  # each hero's once-a-trip remarks (#118)
 	_ending = false
 	_party.locked = false
-	_go_to_floor(start_depth, Arrival.FROM_ABOVE)
+	_go_to_area(Areas.route_area(start_depth), Arrival.FROM_ABOVE)
 	if start_depth > 1:
 		for depth in range(1, start_depth):
 			_expedition.visit_floor(depth)  # the scouts led them through
@@ -2626,7 +2782,7 @@ func _leave_the_bodies() -> void:
 	_camp_state.drop_carried(_depth)
 	for hero: Companion in _party_state.members:
 		if not hero.main_hero:
-			_camp_state.leave_body(hero, _depth)
+			_camp_state.leave_body(hero, Areas.key(_area))
 
 
 ## Lays the bodies lost on this floor in empty room cells (once per floor
@@ -2635,7 +2791,7 @@ func _place_bodies() -> void:
 	if _in_opening or use_debug_layout or _map == null:
 		return
 	var lying: Dictionary = _map.marks.get("bodies", {})
-	var names: Array = _camp_state.bodies_on(_depth).map(func(h): return h.display_name)
+	var names: Array = _camp_state.bodies_on(Areas.key(_area)).map(func(h): return h.display_name)
 	for cell in lying.keys():
 		if lying[cell] not in names:  # already picked up
 			lying.erase(cell)
@@ -2763,7 +2919,7 @@ func _pick_up_body(cell: Vector2i) -> bool:
 	if not lying.has(cell):
 		return false
 	var name: String = lying[cell]
-	for hero: Companion in _camp_state.bodies_on(_depth):
+	for hero: Companion in _camp_state.bodies_on(Areas.key(_area)):
 		if hero.display_name == name:
 			_camp_state.pick_up(hero)
 			break
@@ -2876,7 +3032,7 @@ func _save_data() -> Dictionary:
 		if hero in people:
 			start_heroes.append([index.call(hero), SaveGame.pack_value(_expedition._start_heroes[hero])])
 	return {
-		"seed": _site_seed, "first_seed": _first_seed, "depth": _depth,
+		"seed": _site_seed, "first_seed": _first_seed, "depth": _depth, "area": _area,
 		"at_camp": at_camp, "cell": _party.cell, "facing": _party.facing,
 		"resume": not at_camp and _active_cell != Vector2i(-1, -1),
 		"resume_fight": _active_fight.map(func(t): return t.resource_path),
@@ -2935,7 +3091,7 @@ func _restore(data: Dictionary) -> void:
 		_expedition._start_heroes[people[pair[0]]] = SaveGame.unpack_value(pair[1])
 	_floors = {}
 	for pair in data["floors"]:
-		var map = DungeonMap.new(pair[1]["_rows"], pair[0])
+		var map = DungeonMap.new(pair[1]["_rows"], pair[0] if pair[0] is int else Areas.depth(pair[0]))
 		SaveGame.unpack_into(map, pair[1])
 		_floors[pair[0]] = map
 	_floor_started = true
@@ -2954,14 +3110,15 @@ func _restore(data: Dictionary) -> void:
 		_camp_loop()
 		return
 	_depth = data["depth"]
+	_area = data.get("area", Areas.main_for(_depth))  # saves from before the network (#300)
 	# Continued on a floor that lacks a site the story now needs: build it
 	# again, from the way in (2026-11-24).
-	if _missing_quest_site(_floors[_depth], _depth):
-		_floors.erase(_depth)
-		_go_to_floor(_depth, Arrival.FROM_ABOVE)
+	if _missing_quest_site(_floors[Areas.key(_area)], _depth):
+		_floors.erase(Areas.key(_area))
+		_go_to_area(_area, Arrival.FROM_ABOVE)
 		_show_message("%s · depth %d · continued from the way in" % [environment_theme.display_name, _depth])
 		return
-	_map = _floors[_depth]
+	_map = _floors[Areas.key(_area)]
 	_apply_theme()
 	_build_level()
 	_minimap.setup(_map)
@@ -3131,13 +3288,19 @@ func _placeholder_prop(kind: int) -> Node3D:
 
 ## The damp second floor has its own set; preserve custom/debug themes.
 func _apply_theme() -> void:
-	var theme: EnvironmentTheme = FORTRESS_THEME if _depth == FORTRESS_DEPTH and not use_debug_layout else _cave_theme
-	if _depth >= Galleries.DEPTH and not use_debug_layout:
-		if not _deep_themes.has(_depth):
-			_deep_themes[_depth] = Galleries.theme_from(_cave_theme, _depth)
-		theme = _deep_themes[_depth]
-	if _depth == 2 and not use_debug_layout and _cave_theme.resource_path == "res://themes/cave.tres":
-		theme = FUNGAL_THEME
+	# Each area's look (#300); side areas borrow one until theirs is made.
+	var theme: EnvironmentTheme = _cave_theme
+	if not use_debug_layout:
+		match Areas.theme(_area):
+			"fortress":
+				theme = FORTRESS_THEME
+			"galleries":
+				if not _deep_themes.has(_depth):
+					_deep_themes[_depth] = Galleries.theme_from(_cave_theme, _depth)
+				theme = _deep_themes[_depth]
+			"fungal":
+				if _cave_theme.resource_path == "res://themes/cave.tres":
+					theme = FUNGAL_THEME
 	environment_theme = theme
 	_refresh_place_ambience()
 
@@ -3147,7 +3310,7 @@ func _refresh_place_ambience() -> void:
 		return
 	# Every place's bed is foley now (#217's field ambience): Effects.
 	_ambience_player.bus = "Effects"
-	var stream: AudioStream = Sounds.LOOPS["outskirts"] if _depth == OUTSKIRTS_DEPTH and not use_debug_layout and not _camp_state.queen_defeated else environment_theme.ambience
+	var stream: AudioStream = Sounds.LOOPS["outskirts"] if _area == "cavern" and not use_debug_layout and not _camp_state.queen_defeated else environment_theme.ambience
 	if _ambience_player.stream != stream:
 		_ambience_player.stop()
 		_ambience_player.stream = stream
@@ -3159,9 +3322,9 @@ func _refresh_place_ambience() -> void:
 func _fortress_signs(depth: int) -> void:
 	if use_debug_layout or _camp_state.queen_defeated:
 		return
-	if depth == OUTSKIRTS_DEPTH:
+	if _area == "cavern":
 		_show_message("Goblin marks daubed on the rock. Somewhere below: drums.")
-	elif depth == FORTRESS_DEPTH:
+	elif _area == "fortress":
 		_show_message("Worked stone and timber: the goblin fortress." if _camp_state.gate_broken
 				else "Worked stone and timber: the goblin fortress. The King's hall lies beyond a barred gate.")
 
@@ -3231,7 +3394,7 @@ func _hears_first(fight_cell: Vector2i) -> bool:
 func _warn_ahead(fight_cell: Vector2i) -> void:
 	if not _map.fight_groups.has(fight_cell):  # the same foes if you come back
 		var group: Array[EnemyType] = []
-		group.assign(encounter_pool(_depth, _party_state.living_members().size()).pick_random())
+		group.assign(encounter_pool(_groups_depth(), _party_state.living_members().size()).pick_random())
 		_map.fight_groups[fight_cell] = group
 	var group: Array = _map.fight_groups[fight_cell]
 	var choices := [["Fight", _ambush_fight.bind(fight_cell, "")],
@@ -3496,7 +3659,7 @@ func _wade(cell: Vector2i) -> void:
 func _drain_galleries(cell := Vector2i(-1, -1)) -> void:
 	Sounds.play(self, "drain", -6.0, 0.0)
 	_map.water.clear()
-	var reservoir := _depth >= Galleries.RESERVOIR
+	var reservoir := _area == "reservoir"
 	if not reservoir:
 		Quests.set_stage(_camp_state, "reservoir", Quests.Stage.ACTIVE)
 		if cell != Vector2i(-1, -1):
@@ -3706,7 +3869,7 @@ func _wanderers_arrive(cell: Vector2i) -> void:
 		_spawn_wanderer()  # they come looking across the map (#171)
 		return
 	var group: Array[EnemyType] = []
-	group.assign(encounter_pool(_depth, _party_state.living_members().size()).pick_random())
+	group.assign(encounter_pool(_groups_depth(), _party_state.living_members().size()).pick_random())
 	var hears: bool = not _map.alarmed and _party_state.living_members().any(func(h: Companion): return h.has_talent("sharp_ears"))
 	if hears and _rng.randf() < HEAR_FIRST_CHANCE:
 		var choices := [["Fight", _wander_fight.bind(cell, group, "")],
@@ -5178,7 +5341,7 @@ func _on_skill_learned(id: String, hero: Companion) -> void:
 
 
 func _on_party_blocked(cell: Vector2i) -> void:
-	if _depth == FORTRESS_DEPTH and cell in _map.marks.get("gates", []) and not _camp_state.gate_broken:
+	if _area == "fortress" and cell in _map.marks.get("gates", []) and not _camp_state.gate_broken:
 		_ask("A barred gate, and goblin guards behind it. Break it down? They'll fight.", _gate_fight)
 		return
 	# A spade or pick clears a blocked passage (#133).
@@ -5187,7 +5350,7 @@ func _on_party_blocked(cell: Vector2i) -> void:
 		if _party_state.supplies.count(item) > 0:
 			tool = item
 			break
-	if tool and _depth != FORTRESS_DEPTH:
+	if tool and _area != "fortress":
 		_ask("Something chokes the passage. Clear it with the %s? (%d time)" % [tool.display_name.to_lower(), CLEAR_PASSAGE_TIME], _clear_passage.bind(cell), Callable(), ["Clear it", "Leave it"])
 		return
 	# A Fixer clears blockages without a tool (#179; once the Brawler's).
@@ -5196,14 +5359,14 @@ func _on_party_blocked(cell: Vector2i) -> void:
 		if hero.role == "Fixer":
 			fixer = hero
 			break
-	if fixer and _depth != FORTRESS_DEPTH:
+	if fixer and _area != "fortress":
 		_ask("Something chokes the passage. %s knows how to shift it. (%d time)" % [fixer.display_name, CLEAR_PASSAGE_TIME], _clear_passage.bind(cell), Callable(), ["Clear it", "Leave it"])
 		return
-	if _depth != FORTRESS_DEPTH and not _in_opening:
+	if _area != "fortress" and not _in_opening:
 		# Or force it (#236): it can be done, but it costs nerve and skin.
 		_ask("Something chokes the passage. Force a way through by hand? (%d time; it will fray everyone's nerves)" % (CLEAR_PASSAGE_TIME * 2), _force_passage.bind(cell), Callable(), ["Force it", "Leave it"])
 		return
-	_show_message(environment_theme.blocked_message + ("" if _depth == FORTRESS_DEPTH else " A spade or a pick would clear it - or a Sapper."))
+	_show_message(environment_theme.blocked_message + ("" if _area == "fortress" else " A spade or a pick would clear it - or a Sapper."))
 
 
 ## Forcing a blocked passage with no tool (#236): slow, bloody, unnerving.
@@ -5240,7 +5403,7 @@ const QUEST_SITE_HINTS := {
 
 ## Whether a quest's site on this floor still has something to do (#230).
 func _quest_site_open(quest: String) -> bool:
-	return Packages.active(_camp_state, _depth).any(func(p): return p.quest == quest)
+	return Areas.on_main_path(_area) and Packages.active(_camp_state, _depth).any(func(p): return p.quest == quest)
 
 
 ## A quest's site goes on the map once the party is close: within
@@ -5392,7 +5555,7 @@ func _set_full_map(open: bool) -> void:
 	_full_map.visible = open
 	_party.locked = open
 	if open:
-		_full_map_title.text = "%s · depth %d of %d" % [environment_theme.display_name, _depth, _deepest_open()]
+		_full_map_title.text = Areas.area_name(_area) if not _in_opening else environment_theme.display_name
 		_full_map_close.grab_focus.call_deferred()
 
 
@@ -5446,7 +5609,7 @@ func _build_audio() -> void:
 ## The cave's music, or the fortress's on its floor (#54).
 func _play_place_music(fade := -1.0) -> void:
 	if _music and not _in_combat:
-		_music.play_with_fade(fade, "galleries" if _depth >= Galleries.DEPTH and not _in_opening else ("fortress" if _depth == FORTRESS_DEPTH else "cave"))
+		_music.play_with_fade(fade, "galleries" if Areas.theme(_area) == "galleries" and not _in_opening else ("fortress" if Areas.theme(_area) == "fortress" and not _in_opening else "cave"))
 
 
 func _play_effect(sound: AudioStream) -> void:

@@ -44,6 +44,7 @@ func _initialize() -> void:
 			main._site_seed = 7000 + s * 13
 			main._floors.clear()
 			main._go_to_floor(depth, main.Arrival.FROM_ABOVE)
+			await process_frame  # let the last floor's level go (GPU runs ran out of room)
 			floors += 1
 			var map = main._map
 			var tag := "%s floor %d seed %d" % [package.id, depth, main._site_seed]
@@ -135,6 +136,26 @@ func _initialize() -> void:
 	main._restore(data)
 	await process_frame
 	check("continuing on a floor without its site rebuilds it", not main._missing_quest_site(main._map, 1) and main._party.cell == main._map.find_content(main.DungeonMap.Content.STAIRS_UP))
+	# Last: the survey site's guards are fought in the cave, not on the old
+	# dark stage (owner, 2026-11-26). Nothing runs after this fight.
+	main._camp_state.quests = {}
+	Quests.set_stage(main._camp_state, "left_behind", left_behind.stages[0])
+	main._site_seed = 4242
+	main._floors.clear()
+	main._go_to_floor(1, main.Arrival.FROM_ABOVE)
+	var guard_cell := Vector2i(-1, -1)
+	for c in main._map.fight_groups:
+		if main._map.marks["sites"]["left_behind"].has_point(c):
+			guard_cell = c
+	if guard_cell != Vector2i(-1, -1):
+		var guards: Array[EnemyType] = []
+		guards.assign(main._map.fight_groups[guard_cell])
+		main._party.place(main._map, main._map.walking_path(main._party.cell, guard_cell)[-2])
+		main._start_combat(guard_cell, guards)
+		await create_timer(0.3).timeout
+		check("the survey site's guards are fought in the cave (3D), not on the dark stage", main._in_combat and main._combat._state.field and not main._stage.visible, [main._combat._state.field])
+	else:
+		check("the survey site has guards to test", false)
 	print("fails=", fails)
 	quit()
 

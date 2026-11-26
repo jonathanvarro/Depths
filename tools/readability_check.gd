@@ -25,6 +25,8 @@ func _fight(ids: Array, seed: int):
 	var main = load("res://scenes/main.tscn").instantiate()
 	main.play_opening = false
 	main.overhead_from_floor = 1  # these test the board on early floors (owner 2026-11-21: off there in play)
+	if not load("res://scripts/settings.gd").get_value("view_above"):
+		main.fights_on_map = false  # the dark stage's tags (fixed fights moved into the cave on 2026-11-26)
 	main.floor_seed = seed
 	main.simulate_phone_safe_area = tag == "phone"
 	root.add_child(main)
