@@ -63,6 +63,8 @@ func _initialize() -> void:
 	main._camp._close_activity()
 	main._camp._buttons["cave"].pressed.emit()
 	await create_timer(0.2).timeout
+	main._camp._quartermaster_view.show_tab("supplies")
+	await process_frame
 	var buttons: Array = main._camp.find_children("*", "Button", true, false).filter(func(b): return b.text.begins_with("Field issue"))
 	check("the mine path offers the field issue", buttons.size() == 1, buttons.size())
 	# The button works with the gold in the tent, and says so (2026-11-24).
@@ -71,6 +73,7 @@ func _initialize() -> void:
 	camp_state.stash.gold += 40
 	main._party_state.supplies.gold = 0
 	main._camp._refresh_activity()
+	main._camp._quartermaster_view.show_tab("supplies")
 	await process_frame
 	buttons = main._camp.find_children("*", "Button", true, false).filter(func(b): return b.text.begins_with("Field issue"))
 	check("...and gold in the tent's stash pays for it", buttons.size() == 1 and not buttons[0].disabled)

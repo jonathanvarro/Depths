@@ -2557,11 +2557,15 @@ func _camp_loop(reward := 0, note := "") -> void:
 		_camp.visible = false
 		_camp_state.leave_behind(_party_state)
 		_preparation.show_for(_expedition.number + 1, _party_state)
-		if await _preparation.decided:
+		var entering: bool=await _preparation.decided
+		# Route selection is a plan. Pay the scouts once, only after Enter;
+		# Back to camp keeps both carried and stored gold unchanged (#296).
+		if entering and (start_depth==1 or _camp_state.buy_route(_party_state,start_depth)):
 			break
 		_camp_state.rejoin(_party_state)
 		_camp_state.explored_today = explored_before
 		_camp.open(_camp_state, _party_state)
+		if entering:_camp.announce("The scouts' route is no longer available or its fee is missing. Choose again.")
 	_party_state.field_bind_used = false  # the field medic's binding: once a trip
 	_party_state.field_binds = 0
 	for hero: Companion in _party_state.members:

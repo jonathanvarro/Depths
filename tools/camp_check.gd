@@ -50,6 +50,8 @@ func _fits() -> bool:
 
 
 func _body_text() -> String:
+	if main._camp._quartermaster_view.is_visible_in_tree():
+		return " | ".join(main._camp._quartermaster_view.find_children("*","Label",true,false).map(func(l):return l.text))
 	return " | ".join(main._camp._body.find_children("*", "Label", true, false).map(func(l): return l.text))
 
 
