@@ -1,6 +1,6 @@
 # Damp Caves: production handoff (#302)
 
-2026-11-26 · Delivery on `codex/damp-caves-surfaces`, based on Claude's brief at `aca0d4ce` and the subsequent `docs/area-production-briefs.md`. Current coverage: A surfaces, B/N1–N3 for the Damp Caves junction, C environment dressing, D early flat-prop conversions including Three Knocks, and G layout candidates. This is not the entire floor. Claude retains live hookup and rules. Existing fungal files remain intact for the fungal side region.
+2026-11-26 · Delivery on `codex/damp-caves-surfaces`, based on Claude's brief at `aca0d4ce` and the subsequent `docs/area-production-briefs.md`. Current coverage: A surfaces, B/N1–N3 for the Damp Caves junction, C environment dressing, D early flat-prop conversions, E landmark compositions, F interactive appearance sets, and G layout candidates. H sound and I creatures remain. Claude retains live hookup and rules. Existing fungal files remain intact for the fungal side region.
 
 ## Production status
 
@@ -11,8 +11,8 @@
 | B passages + N1–N3 for this junction | Delivered, native-checked; no live hookup | `art/features/damp-passages-v1`, `art/ui/area-routes-v1`; other areas’ exits remain separate work |
 | C dressing | Delivered, native-checked; no live hookup | `art/dressing/damp-dressing-v1`; includes still-safe drips and fungal exit-room growth |
 | D 2D leftovers | Delivered, native-checked; no live hookup | 29 old-id dispositions and 21 mine counterparts; stash, dead lamps and Three Knocks state sets |
-| E landmarks | Placement notes and shared C/D components available; full set compositions pending | Sump, weeping wall, drowned drift, rimstone stair, bone silt, wet lost cache |
-| F event props | Not produced | Satchel, pearls, seep, ledge and fish state sets |
+| E landmarks | Six complete art compositions, native-checked; no live hookup | `art/props/damp-sites-v1/landmark-*.tscn`; sump, weeping wall, drowned drift, rimstone stair, bone silt, wet royal cache |
+| F event props | Five complete appearance sets, native-checked; event rules/text remain Claude's | Sunken satchel, cave pearls, seep, slick ledge and blind fish |
 | H sound | Not produced | Ambience, wet steps, bump, passage and drip sounds |
 | I creatures | Placement/encounter proposals only; concepts/models not produced | Concept approval precedes models per brief; no creature rules changed |
 
@@ -71,4 +71,26 @@ Rebuild: background Blender `--python tools/damp_caves/build_dressing.py -- --wo
 
 ## Next production batch
 
-E/F full landmark compositions and five event state kits, then H sound and I concept approval/model work. Shared C/D components for the wet lost cache/rimstone/flowstone are ready; the full E landmark batch remains open, including a drowned drift/cart and bone-silt composition. G's water rules, encounter weights and branch return/rejoin details still need owner/Claude review. The distinct exits/signs/glyphs delivered here cover the two Damp Caves links; shared-network N1–N3 for other areas remain future production. Claude retains all live graph/theme/dresser/quest/combat hookup.
+H sound and I concept approval/model work. G's water rules, encounter weights and branch return/rejoin details still need owner/Claude review. The distinct exits/signs/glyphs delivered here cover the two Damp Caves links; shared-network N1–N3 for other areas remain future production. Claude retains all live graph/theme/dresser/quest/combat hookup.
+
+## Landmark and interactive-appearance delivery
+
+`art/props/damp-sites-v1` completes the E/F **art delivery**: six composed landmarks, five event appearances and fourteen new solid exports. Existing rails, original pack, C/D dressing and verified CC0 bones are referenced. The drowned cart derives from Kio Kurashi's [CC0 Static Minecart](https://kiokurashi.itch.io/3d-static-minecart); its unchanged selected GLB, licence declaration, hashes and changes are retained in `art/third-party/kiokurashi-minecart-v1`. Other new geometry is original project work. Editable masters remain local. The small reusable C/D-builder change preserves all 45 earlier GLB hashes exactly.
+
+The sump, continuous weeping wall, rimstone stair, bone-silt bank and wet royal cache use a **3×3-cell / 6×6m** rectangular room, floor-centre origin and a real far wall at Z=−3m. Drowned drift uses a **1×3-cell / 2×6m** straight corridor with a partially submerged cart beside the retained rails. Independent Marker3D approach/event anchors and catalogue footprint/layout notes support placement. Fit actual walls and preserve actual dry paths and mandatory quest footprints; the scenes do not assign `map.water`, room identity, passability, search targets or rewards. The royal cache retains a reserved buried-cache anchor; bones are anonymous scenery. Landmark budgets: **3228–11328 triangles / 5–24 visible draws**, measured natively, including retained instances.
+
+| Interactive appearance | States | Important hookup contract |
+| --- | --- | --- |
+| Sunken satchel | fresh / emptied | Existing pack half under unchanged water; retain intentional burial offsets |
+| Cave pearls | fresh / gathered | Pearls disappear into empty depressions; pool remains |
+| Seep | fresh / used | Cup/use marks change; natural water remains; mount on a verified real wall |
+| Slick ledge | ready / slipped / passed | True 0.55m cut in supplied 2m tile; omit caller floor; choose actual trap outcome explicitly |
+| Blind fish | fresh / fished | Small opaque pale school under a local clear-water surface; fished school disappears |
+
+These event appearances are **548–2528 triangles / 1–6 visible draws**. Direct `state` assignment and `set_state(value, animate=false)` restore before/after ready and reject invalid values. `closed` aliases fresh/ready; `empty` aliases the second state only for two-state props. **Ledge rejects generic empty**, so a safe pass cannot silently become a slipped/disarmed trap. `mount_in_cell` fits the seep to a real cardinal wall without moving its event root/cell; a missing wall hides it and returns false, a later valid mount restores it. All event choices, cost/odds, loot, cooldown and outcome/state selection stay with Claude.
+
+Motion defaults off. `set_motion` resets exact fish/drip poses and stops processing; fished state stops swimming. The fish move rigidly with no skeleton, external animation clip or RNG. Only the small fish-viewing water surface uses standard alpha; fish, stone, ledge and all normal bodies remain opaque. No screen refraction or extra light. Parent material application is explicitly scoped to new physical-UV meshes, preserving nested water and retained palette-UV pack/bone/rail resources. Apply the caller's effects/visibility preference.
+
+**455 native Godot 4.7.2 Mobile/D3D12 checks / 65 captures, zero failures and clean logs:** fourteen actual imported bounds/hashes/counts, whole-scene budgets and material assignment, all explicit/legacy/direct/early/interrupted states, clear-water isolation, exact still/swim reset, submerged fish clearance, actual ledge support/drop rays, all four seep wall anchors and missing-wall recovery, all landmark footprints/roof limits, phone framing, desktop/1278×590/844×390 room views and neutral layout overviews. Private desktop, isolated profile, no owner save/foreground changes. Owner style/device review, live seeded placement and exported-game hookup remain.
+
+Local review: `E:/GitHub/Depths/build/local-damp-sites-v1/inspector.html`; its `masters/` contains separate-piece `.blend` files. Full API/layout/source contracts: asset README/catalogue. Rebuild with background Blender `--python tools/damp_caves/build_sites.py -- --workspace E:/GitHub/Depths`, then `python tools/damp_caves/prepare_sites.py`; import headlessly, run `tools/damp_caves/sites_check.gd` through the private-desktop helper and package with `python tools/damp_caves/package_sites.py --workspace E:/GitHub/Depths`.

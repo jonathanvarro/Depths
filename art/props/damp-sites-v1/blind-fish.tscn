@@ -1,0 +1,76 @@
+[gd_scene load_steps=6 format=3]
+[ext_resource type="Script" path="res://art/props/damp-sites-v1/site.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/props/damp-sites-v1/blind-fish-pool.glb" id="r0"]
+[ext_resource type="PackedScene" path="res://art/props/damp-sites-v1/blind-fish-body.glb" id="r1"]
+[sub_resource type="CylinderMesh" id="water2mesh"]
+top_radius=0.6
+bottom_radius=0.6
+height=0.002
+radial_segments=32
+[sub_resource type="StandardMaterial3D" id="water2mat"]
+transparency=1
+albedo_color=Color(0.13,0.23,0.21,0.42)
+roughness=0.32
+metallic_specular=0.27
+
+[node name="DampSite" type="Node3D"]
+script=ExtResource("script")
+states=PackedStringArray("fresh","fished")
+state="fresh"
+mount_mode="floor"
+metadata/asset_id="blind-fish"
+metadata/requires_floor_cut=false
+
+[node name="Mount" type="Node3D" parent="."]
+
+[node name="Fresh" type="Node3D" parent="Mount"]
+metadata/appearance_state="fresh"
+
+[node name="Fished" type="Node3D" parent="Mount"]
+metadata/appearance_state="fished"
+visible=false
+
+[node name="Pool" parent="Mount" instance=ExtResource("r0")]
+position=Vector3(0, 0, 0)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+metadata/physical_surface=true
+
+[node name="ClearWater" type="MeshInstance3D" parent="Mount"]
+position=Vector3(0, 0.09, 0)
+mesh=SubResource("water2mesh")
+material_override=SubResource("water2mat")
+cast_shadow=0
+scale=Vector3(1,1,0.6666666666666667)
+metadata/clear_water_surface=true
+
+[node name="Fish0" parent="Mount/Fresh" instance=ExtResource("r1")]
+position=Vector3(-0.26, 0.05, -0.13)
+scale=Vector3(0.74, 0.74, 0.74)
+rotation_degrees=Vector3(0,25,0)
+metadata/swimming_fish=true
+metadata/physical_surface=true
+
+[node name="Fish1" parent="Mount/Fresh" instance=ExtResource("r1")]
+position=Vector3(0.17, 0.05, -0.09)
+scale=Vector3(0.74, 0.74, 0.74)
+rotation_degrees=Vector3(0,-30,0)
+metadata/swimming_fish=true
+metadata/physical_surface=true
+
+[node name="Fish2" parent="Mount/Fresh" instance=ExtResource("r1")]
+position=Vector3(-0.12, 0.05, 0.19)
+scale=Vector3(0.74, 0.74, 0.74)
+rotation_degrees=Vector3(0,115,0)
+metadata/swimming_fish=true
+metadata/physical_surface=true
+
+[node name="Fish3" parent="Mount/Fresh" instance=ExtResource("r1")]
+position=Vector3(0.3, 0.05, 0.15)
+scale=Vector3(0.74, 0.74, 0.74)
+rotation_degrees=Vector3(0,165,0)
+metadata/swimming_fish=true
+metadata/physical_surface=true
+
+[node name="Interaction" type="Marker3D" parent="Mount"]
+position=Vector3(0, 0.3, 0.3)

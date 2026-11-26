@@ -82,9 +82,17 @@ Templates > Download and Install; already installed on the owner's PC).
   effects use separate opaque water material. `state` closed/empty aliases and
   set_state/set_searched remain; set_motion defaults still and reaches child
   drips. Glow is opt-in mood only. Native 947 checks/106 captures pass; local
-  gallery/masters: `build/local-damp-dressing-v1`. E/F full landmark/event kits,
-  H sound and I concepts/approved models remain outstanding. Preserve fungal
-  assets; no live game rules, placements or numeric floor bindings changed.
+  gallery/masters: `build/local-damp-dressing-v1`. E/F now adds six composed
+  landmarks and five interactive appearance sets in `art/props/damp-sites-v1`:
+  satchel, pearls, seep, ledge and blind fish. 455 native checks/65 captures pass;
+  review/masters: `build/local-damp-sites-v1`. Most landmarks require 3×3 cells;
+  drowned drift is 1×3. Seep mounts to actual rock; ledge requires a caller floor
+  cut and explicit slipped/passed outcome (rejects empty). Only the small fish
+  viewing water is transparent; bodies stay opaque. Motion defaults still.
+  Reuses retained bones/rails/pack plus a recorded CC0 Kio Kurashi minecart.
+  E/F README/catalogue has footprint/budget/state/source contracts. H sound and
+  I concepts/approved models remain outstanding. Preserve fungal assets; no
+  live game rules, placements, event definitions or numeric floor bindings changed.
 
 - #297 fixes refined-creature translucency: normal v2/v3 coat, skin, details
   and membrane shaders are fully opaque; only `set_opacity` below 1.0 selects

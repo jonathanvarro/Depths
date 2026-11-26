@@ -21,7 +21,7 @@ P = importlib.util.module_from_spec(spec); spec.loader.exec_module(P)
 G = P.G
 parser = argparse.ArgumentParser()
 parser.add_argument('--workspace', type=Path, required=True)
-args = parser.parse_args(sys.argv[sys.argv.index('--')+1:])
+args = parser.parse_args(sys.argv[sys.argv.index('--')+1:]) if __name__=='__main__' else argparse.Namespace(workspace=ROOT)
 ART = ROOT/'art/dressing/damp-dressing-v1'
 MASTERS = args.workspace/'build/local-damp-dressing-v1/masters'
 ART.mkdir(parents=True, exist_ok=True); MASTERS.mkdir(parents=True, exist_ok=True)
@@ -484,7 +484,7 @@ def export(ident,build,mount):
         export_texcoords=True,export_vertex_color='ACTIVE',export_active_vertex_color_when_no_material=True,
         export_animations=False,export_cameras=False,export_lights=False)
     lo=[min(p[i] for p in all_points) for i in range(3)];hi=[max(p[i] for p in all_points) for i in range(3)]
-    return {'id':ident,'model':'res://art/dressing/damp-dressing-v1/'+ident+'.glb','triangles':triangles,'draws':len(groups),
+    return {'id':ident,'model':'res://'+ART.relative_to(ROOT).as_posix()+'/'+ident+'.glb','triangles':triangles,'draws':len(groups),
             'materials':len(groups),'min':[lo[0],lo[2],-hi[1]],'max':[hi[0],hi[2],-lo[1]],'mount':mount,
             'sha256':hashlib.sha256(target.read_bytes()).hexdigest(),'lights':0,'bones':0,'states':['static']}
 
@@ -508,16 +508,20 @@ RECIPES=[('wet-flowstone',flowstone,'wall'),('mineral-seep',mineral_seep,'wall')
  ('goblin-stash-fresh',stash,'floor'),('goblin-stash-empty',lambda:stash(True),'floor'),
  ('lamp-store-fresh',lamp_store,'floor'),('lamp-store-used',lambda:lamp_store(True),'floor'),
  ('three-knocks-fresh',three_knocks,'floor'),('three-knocks-used',lambda:three_knocks(True),'floor')]
-assets=[export(ident,recipe,mount) for ident,recipe,mount in RECIPES]
-for row in assets:
-    assert row['triangles']<=6500,row
-    assert row['max'][0]-row['min'][0]<1.8,row
-catalog={'issue':302,'brief':'C/D environment dressing and remaining early 3D conversions','units':'metres; min/max in final Godot coordinates',
- 'wall_front':'+Z into room; wall mount at centre; negative Y under ceiling mount; floor origin 0',
- 'assets':assets,'sources':[{'type':'Original authored geometry','builder':'tools/damp_caves/build_dressing.py',
- 'helpers':['tools/mine_props/build_models.py','tools/mine_polish/build_models.py'],
- 'note':'Reuses original worn-prop primitives, mesh/UV/vertex-colour export conventions. No private/downloaded models or pixels.'}],
- 'builder_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
- 'hookup':'No live bindings changed. Caller owns theme, actual wall/roof anchors, collision, water, poison, route and quest state.'}
-(ART/'catalog.json').write_text(json.dumps(catalog,indent=2)+'\n',encoding='utf-8')
-print('DAMP_DRESSING',[(row['id'],row['triangles']) for row in assets])
+def main():
+    assets=[export(ident,recipe,mount) for ident,recipe,mount in RECIPES]
+    for row in assets:
+        assert row['triangles']<=6500,row
+        assert row['max'][0]-row['min'][0]<1.8,row
+    catalog={'issue':302,'brief':'C/D environment dressing and remaining early 3D conversions','units':'metres; min/max in final Godot coordinates',
+     'wall_front':'+Z into room; wall mount at centre; negative Y under ceiling mount; floor origin 0',
+     'assets':assets,'sources':[{'type':'Original authored geometry','builder':'tools/damp_caves/build_dressing.py',
+     'helpers':['tools/mine_props/build_models.py','tools/mine_polish/build_models.py'],
+     'note':'Reuses original worn-prop primitives, mesh/UV/vertex-colour export conventions. No private/downloaded models or pixels.'}],
+     'builder_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+     'hookup':'No live bindings changed. Caller owns theme, actual wall/roof anchors, collision, water, poison, route and quest state.'}
+    (ART/'catalog.json').write_text(json.dumps(catalog,indent=2)+'\n',encoding='utf-8')
+    print('DAMP_DRESSING',[(row['id'],row['triangles']) for row in assets])
+
+
+if __name__=='__main__':main()

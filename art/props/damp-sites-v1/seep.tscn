@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3]
+[ext_resource type="Script" path="res://art/props/damp-sites-v1/site.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/props/damp-sites-v1/seep-fresh.glb" id="r0"]
+[ext_resource type="PackedScene" path="res://art/props/damp-sites-v1/seep-used.glb" id="r1"]
+[ext_resource type="PackedScene" path="res://art/dressing/damp-dressing-v1/drip.tscn" id="r2"]
+
+[node name="DampSite" type="Node3D"]
+script=ExtResource("script")
+states=PackedStringArray("fresh","used")
+state="fresh"
+mount_mode="wall-floor"
+metadata/asset_id="seep"
+metadata/requires_floor_cut=false
+
+[node name="Mount" type="Node3D" parent="."]
+
+[node name="Fresh" type="Node3D" parent="Mount"]
+metadata/appearance_state="fresh"
+
+[node name="Used" type="Node3D" parent="Mount"]
+metadata/appearance_state="used"
+visible=false
+
+[node name="Model" parent="Mount/Fresh" instance=ExtResource("r0")]
+position=Vector3(0, 0, 0)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+metadata/physical_surface=true
+
+[node name="Model" parent="Mount/Used" instance=ExtResource("r1")]
+position=Vector3(0, 0, 0)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+metadata/physical_surface=true
+
+[node name="Interaction" type="Marker3D" parent="Mount"]
+position=Vector3(0, 0.35, 0.55)
+
+[node name="SafeApproach" type="Marker3D" parent="Mount"]
+position=Vector3(0, 0, 0.8)
+
+[node name="Drip" parent="Mount" instance=ExtResource("r2")]
+position=Vector3(0, 1.16, 0.07)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+fall_distance=1.098

@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="Script" path="res://art/props/damp-sites-v1/site.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/props/damp-sites-v1/cave-pearls-fresh.glb" id="r0"]
+[ext_resource type="PackedScene" path="res://art/props/damp-sites-v1/cave-pearls-gathered.glb" id="r1"]
+
+[node name="DampSite" type="Node3D"]
+script=ExtResource("script")
+states=PackedStringArray("fresh","gathered")
+state="fresh"
+mount_mode="floor"
+metadata/asset_id="cave-pearls"
+metadata/requires_floor_cut=false
+
+[node name="Mount" type="Node3D" parent="."]
+
+[node name="Fresh" type="Node3D" parent="Mount"]
+metadata/appearance_state="fresh"
+
+[node name="Gathered" type="Node3D" parent="Mount"]
+metadata/appearance_state="gathered"
+visible=false
+
+[node name="Model" parent="Mount/Fresh" instance=ExtResource("r0")]
+position=Vector3(0, 0, 0)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+metadata/physical_surface=true
+
+[node name="Model" parent="Mount/Gathered" instance=ExtResource("r1")]
+position=Vector3(0, 0, 0)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+metadata/physical_surface=true
+
+[node name="Interaction" type="Marker3D" parent="Mount"]
+position=Vector3(0, 0.35, 0.25)
+
+[node name="SafeApproach" type="Marker3D" parent="Mount"]
+position=Vector3(0, 0, 0.8)

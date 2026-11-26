@@ -1,0 +1,558 @@
+{
+  "issue": 302,
+  "brief": "E six landmark compositions / F five interactive appearance sets",
+  "assets": [
+    {
+      "id": "sump-water",
+      "model": "res://art/props/damp-sites-v1/sump-water.glb",
+      "triangles": 2184,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -2.4331068992614746,
+        -0.022894935682415962,
+        -2.230836868286133
+      ],
+      "max": [
+        2.4450743198394775,
+        0.07314212620258331,
+        2.2294745445251465
+      ],
+      "mount": "floor",
+      "sha256": "38dc656716f6901919f3e8401e1b0e774f8a97d014ce708587e94bf421307a66",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ]
+    },
+    {
+      "id": "weeping-curtain",
+      "model": "res://art/props/damp-sites-v1/weeping-curtain.glb",
+      "triangles": 1878,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -2.7417662143707275,
+        0.08131837844848633,
+        0.006000000052154064
+      ],
+      "max": [
+        2.694186210632324,
+        2.1338210105895996,
+        0.18607233464717865
+      ],
+      "mount": "wall-floor",
+      "sha256": "779515435fb63d97e86893b4e41ac54f831d5f471730e63564dc8cfa352eb01c",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ]
+    },
+    {
+      "id": "rimstone-terraces",
+      "model": "res://art/props/damp-sites-v1/rimstone-terraces.glb",
+      "triangles": 2160,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -1.784445881843567,
+        -0.04820435494184494,
+        -1.4449999332427979
+      ],
+      "max": [
+        1.784445881843567,
+        0.3700000047683716,
+        0.7384961843490601
+      ],
+      "mount": "floor",
+      "sha256": "e00ef45f02a50857e7c6bdfeda0fe7331587151997e88d396755240cb8ce7d1b",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ]
+    },
+    {
+      "id": "bone-silt-bank",
+      "model": "res://art/props/damp-sites-v1/bone-silt-bank.glb",
+      "triangles": 1174,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -1.3189254999160767,
+        0.0023628845810890198,
+        -0.6535643339157104
+      ],
+      "max": [
+        1.2916656732559204,
+        0.16500000655651093,
+        0.6421747803688049
+      ],
+      "mount": "floor",
+      "sha256": "077813e3361bbe643b3e5f7cdac1261a889ed715f492e6817a5bc281abf4df5e",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ]
+    },
+    {
+      "id": "drowned-cart",
+      "model": "res://art/props/damp-sites-v1/drowned-cart.glb",
+      "triangles": 1604,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.3609043061733246,
+        0.0,
+        -0.49414920806884766
+      ],
+      "max": [
+        0.3609043061733246,
+        0.5702356100082397,
+        0.49414920806884766
+      ],
+      "mount": "floor",
+      "sha256": "4dac60d692fda4b4a5a6dae54edf9460ca57d86cff445685f995128ca247ff95",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ]
+    },
+    {
+      "id": "cave-pearls-fresh",
+      "model": "res://art/props/damp-sites-v1/cave-pearls-fresh.glb",
+      "triangles": 1624,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.6885278224945068,
+        -0.0026371143758296967,
+        -0.473509818315506
+      ],
+      "max": [
+        0.6873131990432739,
+        0.11255113035440445,
+        0.47081297636032104
+      ],
+      "mount": "floor",
+      "sha256": "d07e24b334ea731b750553815d73b0d78ac37ae6666b387bb11ed87012a8dab3",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ]
+    },
+    {
+      "id": "cave-pearls-gathered",
+      "model": "res://art/props/damp-sites-v1/cave-pearls-gathered.glb",
+      "triangles": 1288,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.6885278224945068,
+        -0.0026371143758296967,
+        -0.473509818315506
+      ],
+      "max": [
+        0.6873131990432739,
+        0.09314212948083878,
+        0.47081297636032104
+      ],
+      "mount": "floor",
+      "sha256": "f7459aeef243f605f6122749670bab58eca91756a320168da57c3c41dfae5487",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ]
+    },
+    {
+      "id": "seep-fresh",
+      "model": "res://art/props/damp-sites-v1/seep-fresh.glb",
+      "triangles": 2026,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.5385278463363647,
+        -0.0026371143758296967,
+        -0.025766335427761078
+      ],
+      "max": [
+        0.5373132228851318,
+        1.4201959371566772,
+        0.7430694699287415
+      ],
+      "mount": "wall-floor",
+      "sha256": "d9ec5af5ee6639ad421c3402d00620c2cdb986f0828c04840058fa740d396e98",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ]
+    },
+    {
+      "id": "seep-used",
+      "model": "res://art/props/damp-sites-v1/seep-used.glb",
+      "triangles": 2074,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.5385278463363647,
+        -0.0026371143758296967,
+        -0.025766335427761078
+      ],
+      "max": [
+        0.5373132228851318,
+        1.4201959371566772,
+        0.8215026259422302
+      ],
+      "mount": "wall-floor",
+      "sha256": "5f0f6753195f1ac12d6b08ae18c5e0257ce57c7f66915442399f4062d4324315",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ]
+    },
+    {
+      "id": "slick-ledge-ready",
+      "model": "res://art/props/damp-sites-v1/slick-ledge-ready.glb",
+      "triangles": 548,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -1.0,
+        -0.550000011920929,
+        -1.0
+      ],
+      "max": [
+        1.0,
+        0.0763249471783638,
+        1.0
+      ],
+      "mount": "floor-cut",
+      "sha256": "7e652c0b9342f2609a0dc72df3cc27d95040c7e48ab525eb3077d11a8125daf7",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ]
+    },
+    {
+      "id": "slick-ledge-slipped",
+      "model": "res://art/props/damp-sites-v1/slick-ledge-slipped.glb",
+      "triangles": 928,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -1.0,
+        -0.550000011920929,
+        -1.0
+      ],
+      "max": [
+        1.0,
+        0.0763249471783638,
+        1.0
+      ],
+      "mount": "floor-cut",
+      "sha256": "a699c1b24d93b4101a2d06001f6b4c0498c83f14f494067feac0f5c5c25d5846",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ]
+    },
+    {
+      "id": "slick-ledge-passed",
+      "model": "res://art/props/damp-sites-v1/slick-ledge-passed.glb",
+      "triangles": 620,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -1.0,
+        -0.550000011920929,
+        -1.0
+      ],
+      "max": [
+        1.0,
+        0.0763249471783638,
+        1.0
+      ],
+      "mount": "floor-cut",
+      "sha256": "c7e1282c1ec44ef7cbcd7e1d1cc5e2b8e4acb706295cb85d1cae69c9c545f710",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ]
+    },
+    {
+      "id": "blind-fish-body",
+      "model": "res://art/props/damp-sites-v1/blind-fish-body.glb",
+      "triangles": 170,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.10499999672174454,
+        -0.04153874143958092,
+        -0.27000001072883606
+      ],
+      "max": [
+        0.10499999672174454,
+        0.04500000178813934,
+        0.2145494818687439
+      ],
+      "mount": "pool-local",
+      "sha256": "1795c3942b926354cab1d5980a1113433b887f0a99d8990bf70ad5760eea5b0f",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ]
+    },
+    {
+      "id": "blind-fish-pool",
+      "model": "res://art/props/damp-sites-v1/blind-fish-pool.glb",
+      "triangles": 1464,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.7885278463363647,
+        -0.0026371143758296967,
+        -0.5612533688545227
+      ],
+      "max": [
+        0.7873132228851318,
+        0.09314212948083878,
+        0.5585564970970154
+      ],
+      "mount": "floor",
+      "sha256": "8cb83c4acd5cc4ef194c964ba726a0edbed26e2e3d8ff66a415c05239540c7cb",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ]
+    }
+  ],
+  "units": "metres; bounds in Godot space",
+  "sources": [
+    {
+      "type": "Original project geometry",
+      "builder": "tools/damp_caves/build_sites.py",
+      "helpers": [
+        "tools/damp_caves/build_dressing.py",
+        "tools/mine_polish/build_models.py",
+        "tools/mine_props/build_models.py"
+      ]
+    },
+    {
+      "type": "CC0 1.0",
+      "author": "Kio Kurashi",
+      "source": "https://kiokurashi.itch.io/3d-static-minecart",
+      "record": "art/third-party/kiokurashi-minecart-v1/provenance.json",
+      "use": "drowned-cart only; original GLB retained, fitted/decimated/recoloured derivative"
+    },
+    {
+      "type": "Retained CC0 library",
+      "author": "Kay Lousberg",
+      "record": "art/third-party/kaykit-bones-v1/provenance.json",
+      "use": "existing bone recipes in bone-silt composition"
+    }
+  ],
+  "builder_sha256": "b861037fb1a0724ddd412fb9a51f4a6db725cefbe337fb46b6a187f5041abb8b",
+  "hookup": "Art appearance only; no event definitions, rewards, map.water, route, collision or saves.",
+  "events": [
+    {
+      "id": "sunken-satchel",
+      "scene": "res://art/props/damp-sites-v1/sunken-satchel.tscn",
+      "states": [
+        "fresh",
+        "emptied"
+      ],
+      "mount": "floor"
+    },
+    {
+      "id": "cave-pearls",
+      "scene": "res://art/props/damp-sites-v1/cave-pearls.tscn",
+      "states": [
+        "fresh",
+        "gathered"
+      ],
+      "mount": "floor"
+    },
+    {
+      "id": "seep",
+      "scene": "res://art/props/damp-sites-v1/seep.tscn",
+      "states": [
+        "fresh",
+        "used"
+      ],
+      "mount": "wall-floor"
+    },
+    {
+      "id": "slick-ledge",
+      "scene": "res://art/props/damp-sites-v1/slick-ledge.tscn",
+      "states": [
+        "ready",
+        "slipped",
+        "passed"
+      ],
+      "mount": "floor-cut"
+    },
+    {
+      "id": "blind-fish",
+      "scene": "res://art/props/damp-sites-v1/blind-fish.tscn",
+      "states": [
+        "fresh",
+        "fished"
+      ],
+      "mount": "floor"
+    }
+  ],
+  "landmarks": [
+    {
+      "id": "landmark-sump",
+      "scene": "res://art/props/damp-sites-v1/landmark-sump.tscn",
+      "states": [
+        "static"
+      ],
+      "mount": "landmark",
+      "room_cells": [
+        3,
+        3
+      ],
+      "bounds_hint": [
+        -3,
+        0,
+        -3,
+        3,
+        2.2,
+        3
+      ],
+      "layout": "Still central sump; perimeter banks are visual. Keep actual main-route cells dry; the art does not assign deep water."
+    },
+    {
+      "id": "landmark-weeping-wall",
+      "scene": "res://art/props/damp-sites-v1/landmark-weeping-wall.tscn",
+      "states": [
+        "static"
+      ],
+      "mount": "landmark",
+      "room_cells": [
+        3,
+        3
+      ],
+      "bounds_hint": [
+        -3,
+        0,
+        -3,
+        3,
+        2.2,
+        3
+      ],
+      "layout": "One broad curtain on the real far wall, puddles beneath; centre/front left free. Seep is an optional separate event anchor."
+    },
+    {
+      "id": "landmark-drowned-drift",
+      "scene": "res://art/props/damp-sites-v1/landmark-drowned-drift.tscn",
+      "states": [
+        "static"
+      ],
+      "mount": "landmark",
+      "room_cells": [
+        1,
+        3
+      ],
+      "bounds_hint": [
+        -1,
+        0,
+        -3,
+        1,
+        2.2,
+        3
+      ],
+      "layout": "Six-metre corridor, rails under the right-hand water lane, cart fitted against that wall. Left strip visually clear; water remains cosmetic unless caller explicitly assigns rules."
+    },
+    {
+      "id": "landmark-rimstone-stair",
+      "scene": "res://art/props/damp-sites-v1/landmark-rimstone-stair.tscn",
+      "states": [
+        "static"
+      ],
+      "mount": "landmark",
+      "room_cells": [
+        3,
+        3
+      ],
+      "bounds_hint": [
+        -3,
+        0,
+        -3,
+        3,
+        2.2,
+        3
+      ],
+      "layout": "Low stepped calcite pools form a landmark, not a new stair transition. Keep the sides and foreground as the main-route approach."
+    },
+    {
+      "id": "landmark-bone-silt",
+      "scene": "res://art/props/damp-sites-v1/landmark-bone-silt.tscn",
+      "states": [
+        "static"
+      ],
+      "mount": "landmark",
+      "room_cells": [
+        3,
+        3
+      ],
+      "bounds_hint": [
+        -3,
+        0,
+        -3,
+        3,
+        2.2,
+        3
+      ],
+      "layout": "Washed anonymous bones embedded in a low bank at a dead-end wall. Pure scenery; never reuse tutorial bodies or invent a searchable companion."
+    },
+    {
+      "id": "landmark-wet-royal-cache",
+      "scene": "res://art/props/damp-sites-v1/landmark-wet-royal-cache.tscn",
+      "states": [
+        "static"
+      ],
+      "mount": "landmark",
+      "room_cells": [
+        3,
+        3
+      ],
+      "bounds_hint": [
+        -3,
+        0,
+        -3,
+        3,
+        2.2,
+        3
+      ],
+      "layout": "Wet broken royal supplies along the back and sides, central approach and buried-cache anchor free. Preserve the existing buried-cache quest and actual mandatory site placement."
+    }
+  ],
+  "runtime_contract": {
+    "api": [
+      "state",
+      "set_state(value, animate=false) -> bool",
+      "set_motion(enabled)",
+      "mount_in_cell(map,cell,cell_size) -> bool"
+    ],
+    "state_aliases": "closed selects fresh/ready; empty aliases the resolved state only for two-state props. Slick ledge rejects empty: caller must specify slipped or passed from actual outcome.",
+    "mounts": "Floor props at y=0; seep Mount goes on a real wall with +Z inward. Landmark scenes require their exact rectangular footprint and wall faces; never place into arbitrary room centres without fitting.",
+    "floor_cut": "Slick ledge requires the caller floor omitted under its complete 2m tile, like passage shaft art. Real drop is 0.55m. No collision or trap rules are added.",
+    "water": "Shallow standing water is art. Only the small blind-fish viewing surface uses alpha; fish/stones and every other body remain opaque.",
+    "motion": "Off by default. Only fresh fish school and optional child drips move; effects off resets exact rest and stops processing. No RNG, light, timers or external clips."
+  }
+}

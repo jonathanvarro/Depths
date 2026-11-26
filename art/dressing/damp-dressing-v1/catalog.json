@@ -1192,7 +1192,7 @@
       "note": "Reuses original worn-prop primitives, mesh/UV/vertex-colour export conventions. No private/downloaded models or pixels."
     }
   ],
-  "builder_sha256": "f88ce46944f2cdd3f1df07d3488fe17ba491c875804d91771108b114d3a57559",
+  "builder_sha256": "91d993e4d8a8fbbf82fcd919f9795560ac38156eaa8c31650c0837fcaf441c53",
   "hookup": "No live bindings changed. Caller owns theme, actual wall/roof anchors, collision, water, poison, route and quest state.",
   "dispositions": [
     {

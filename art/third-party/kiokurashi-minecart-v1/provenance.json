@@ -1,0 +1,11 @@
+{
+  "author": "Kio Kurashi / kiokurashi",
+  "source": "https://kiokurashi.itch.io/3d-static-minecart",
+  "license": "CC0 1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "verified": "2026-11-26",
+  "archive_sha256": "bb96431b8751276e2f43b8cee363ce65d6bebccac53db6a0cca179e447ac3115",
+  "selected_file": "Minecart.glb",
+  "selected_sha256": "559b607841b9a021a27d68e4e62b882ce02944d6d4e09b249bdeafbb31c64f71",
+  "changes": "Original selected GLB unchanged. Derived drowned cart is uniformly fitted, rebased, aged and exported with project physical UV/vertex-colour materials; source rig/animation not used."
+}

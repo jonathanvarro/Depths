@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=3]
+[ext_resource type="Script" path="res://art/props/damp-sites-v1/site.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/props/damp-sites-v1/sump-water.glb" id="r0"]
+[ext_resource type="PackedScene" path="res://art/dressing/damp-dressing-v1/slick-boulder.tscn" id="r1"]
+[ext_resource type="PackedScene" path="res://art/dressing/damp-dressing-v1/soda-straws.tscn" id="r2"]
+[ext_resource type="PackedScene" path="res://art/dressing/damp-dressing-v1/mineral-seep.tscn" id="r3"]
+
+[node name="DampSite" type="Node3D"]
+script=ExtResource("script")
+states=PackedStringArray("static")
+state="static"
+mount_mode="landmark"
+metadata/asset_id="landmark-sump"
+metadata/requires_floor_cut=false
+
+[node name="Mount" type="Node3D" parent="."]
+
+[node name="WaterField" parent="Mount" instance=ExtResource("r0")]
+position=Vector3(0, 0, 0)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+metadata/physical_surface=true
+
+[node name="Piece113" parent="Mount" instance=ExtResource("r1")]
+position=Vector3(-2.5, 0, -2.12)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+
+[node name="Piece217" parent="Mount" instance=ExtResource("r1")]
+position=Vector3(2.5, 0, -2.11)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+
+[node name="Piece221" parent="Mount" instance=ExtResource("r1")]
+position=Vector3(-2.5, 0, 0.9)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+
+[node name="Piece225" parent="Mount" instance=ExtResource("r2")]
+position=Vector3(-1.75, 2.19, -2.45)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+
+[node name="Piece329" parent="Mount" instance=ExtResource("r2")]
+position=Vector3(0.8, 2.19, -2.45)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+
+[node name="Piece333" parent="Mount" instance=ExtResource("r3")]
+position=Vector3(1.55, 1.15, -2.98)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+
+[node name="PoolEvent" type="Marker3D" parent="Mount"]
+position=Vector3(1.6, 0, 1.45)
+
+[node name="DryApproach" type="Marker3D" parent="Mount"]
+position=Vector3(0, 0, 2.55)
