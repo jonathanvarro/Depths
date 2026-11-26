@@ -4,7 +4,7 @@ const Settings := preload("res://scripts/settings.gd")
 const Supplies := preload("res://scripts/supplies.gd")
 const DungeonMap := preload("res://scripts/dungeon_map.gd")
 const BAT := preload("res://art/enemies/creatures-refined-v2/cave-bat.tscn")
-const MOUSE := preload("res://art/enemies/creatures-refined-v2/rat.tscn")
+const MOUSE := preload("res://art/enemies/creatures-predatory-v3/rat.tscn")
 const GAP := Vector2(12.0, 25.0)
 const KINDS := ["dust", "mouse", "dust", "bat"]
 

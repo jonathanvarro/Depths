@@ -11,7 +11,7 @@ extends RefCounted
 
 const ENEMIES := "res://data/enemies/%s.tres"
 const LEADER_MODELS := {
-	"whisker": preload("res://art/enemies/creatures-refined-v2/whisker.tscn"),
+	"whisker": preload("res://art/enemies/creatures-predatory-v3/whisker.tscn"),
 	"spinner": preload("res://art/enemies/named-leaders-v1/spinner.tscn"),
 	"skarn": preload("res://art/enemies/named-leaders-v1/skarn.tscn"),
 	"foreman": preload("res://art/enemies/named-leaders-v1/foreman.tscn"),

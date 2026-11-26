@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="Script" path="res://art/enemies/creatures-predatory-v3/actor.gd" id="1"]
+[ext_resource type="Material" path="res://art/enemies/creatures-predatory-v3/fur.tres" id="2"]
+[ext_resource type="PackedScene" path="res://art/enemies/creatures-predatory-v3/rat.glb" id="3"]
+[node name="Actor" type="Node3D"]
+script=ExtResource("1")
+palette_material=ExtResource("2")
+pose_bounds = {"attack": AABB(-0.20150, 0.00800, -0.65290, 0.40300, 0.56110, 1.67220), "fall": AABB(-0.80350, 0.00800, -0.65290, 1.19610, 0.75880, 1.51440), "hurt": AABB(-0.22190, 0.00800, -0.65290, 0.44490, 0.40800, 1.52090), "idle": AABB(-0.20630, 0.00800, -0.67140, 0.41260, 0.40400, 1.53290), "run": AABB(-0.20740, 0.01500, -0.66980, 0.41480, 0.41250, 1.53160), "walk": AABB(-0.21110, 0.00800, -0.65880, 0.46030, 0.43150, 1.52030)}
+metadata/visual_height=0.41200
+[node name="Model" parent="." instance=ExtResource("3")]

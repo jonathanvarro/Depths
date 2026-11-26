@@ -1,6 +1,6 @@
 extends SceneTree
 ## Native skin, pose, material and first-person framing regressions for #292.
-const FOLDER="res://art/enemies/creatures-refined-v2/"
+var FOLDER="res://art/enemies/creatures-refined-v2/"
 const VIEW=preload("res://scripts/foe_view.gd")
 var checks:=0
 var failures: Array[String]=[]
@@ -8,6 +8,7 @@ var output: String
 
 func _initialize() -> void:
 	output=OS.get_cmdline_user_args()[0] if not OS.get_cmdline_user_args().is_empty() else "res://build/creature-refinement-check"
+	if OS.get_cmdline_user_args().size()>1:FOLDER="res://art/enemies/"+OS.get_cmdline_user_args()[1]+"/"
 	DirAccess.make_dir_recursive_absolute(output)
 	Engine.set_meta("depths_settings",preload("res://scripts/settings.gd").DEFAULTS.duplicate())
 	Engine.set_meta("depths_settings_loaded",true)
@@ -59,7 +60,49 @@ func snap(name: String) -> void:
 	await settle();await RenderingServer.frame_post_draw
 	root.get_texture().get_image().save_png(output.path_join(name+".png"))
 
+func eye_marks_render(foe,eye: Camera3D) -> void:
+	# Catch the actual #294 transparent-fur ordering defect, which skin
+	# bounds alone could not see. Inspect only projected red eye regions.
+	if DisplayServer.get_name()=="headless":return
+	await RenderingServer.frame_post_draw
+	var capture:=root.get_texture().get_image()
+	var projection:=eye.get_camera_projection()
+	var view:=eye.get_camera_transform().affine_inverse()
+	var points:=skin_points(foe.node);var index:=0
+	var groups:=[PackedVector2Array(),PackedVector2Array()]
+	for mesh: MeshInstance3D in foe.node.find_children("*","MeshInstance3D",true,false):
+		if mesh.skin==null:continue
+		for surface in mesh.mesh.get_surface_count():
+			var colours: PackedColorArray=mesh.mesh.surface_get_arrays(surface)[Mesh.ARRAY_COLOR]
+			for colour in colours:
+				if colour.r>colour.g*2 and colour.r>.2:
+					var local: Vector3=view*points[index]
+					var clip: Vector4=projection*Vector4(local.x,local.y,local.z,1.0)
+					var pixel:=Vector2((clip.x/clip.w*.5+.5)*capture.get_width(),(-clip.y/clip.w*.5+.5)*capture.get_height())
+					groups[0 if foe.node.to_local(points[index]).x<0 else 1].append(pixel)
+				index+=1
+	for side in 2:
+		var region:=Rect2(groups[side][0],Vector2.ZERO)
+		for point in groups[side]:region=region.expand(point)
+		region=region.grow(2)
+		var visible:=0
+		for y in range(maxi(0,int(region.position.y)),mini(capture.get_height(),ceili(region.end.y))):
+			for x in range(maxi(0,int(region.position.x)),mini(capture.get_width(),ceili(region.end.x))):
+				var colour:=capture.get_pixel(x,y)
+				if colour.r>colour.g*1.6 and colour.r>colour.b*1.6 and colour.r>.12:visible+=1
+		check(foe.name+" rendered eye "+str(side)+" stays visible at "+str(root.size.x),visible>0)
+
 func run() -> void:
+	if FOLDER.contains("predatory"):
+		var earlier: Node3D=load("res://art/enemies/creatures-refined-v2/cave-bat.tscn").instantiate()
+		var revised: Node3D=load(FOLDER+"cave-bat.tscn").instantiate()
+		root.add_child(earlier);root.add_child(revised);await settle()
+		for pose: String in ["idle","attack","hurt","fall"]:
+			var length: float=earlier.player.get_animation(pose).length
+			for step in 9:
+				earlier.sample(pose,length*step/8.0);revised.sample(pose,length*step/8.0)
+				check("approved flying bat unchanged "+pose+str(step),gap(skin_points(earlier),skin_points(revised))<.00001)
+		earlier.queue_free();revised.queue_free();await settle()
 	for id: String in ["rat","great-rat","cave-bat","whisker"]:
 		var actor: Node3D=load(FOLDER+id+".tscn").instantiate();root.add_child(actor);await settle()
 		var skeleton: Skeleton3D=actor.find_children("*","Skeleton3D",true,false)[0]
@@ -70,6 +113,7 @@ func run() -> void:
 		for mesh: MeshInstance3D in actor.find_children("*","MeshInstance3D",true,false):
 			if mesh.skin!=null:count+=mesh.mesh.get_faces().size()/3
 		check(id+" conservative triangle budget",count<4500)
+		if FOLDER.contains("predatory"):check(id+" within previous triangle budget",count<=(1226 if id=="cave-bat" else (2876 if id=="rat" else 2918)))
 		var poses: PackedStringArray=actor.player.get_animation_list()
 		for pose: String in poses:
 			var animation: Animation=actor.player.get_animation(pose)
@@ -135,8 +179,13 @@ func run() -> void:
 						lowest=maxf(lowest,projected.y);highest=minf(highest,projected.y)
 					var tag:="%s %s %d %.1f"%[id,pose,shape.x,ui_scale]
 					check(tag+" visible above combat actions",lowest<bottom-2 and highest>=0)
+					if id=="cave_bat" and pose=="landed" and FOLDER.contains("predatory"):
+						var label: Button=main._combat._tags[foe]
+						check(tag+" grounded tag clears model",label.get_global_rect().end.y<highest-2)
 					check(tag+" camera preserves enemy cell and floor",foe.cell==cell_before and foe.node.position.is_equal_approx(position_before))
-					if ui_scale==1.0:await snap("field-%s-%s-%d"%[id,pose,shape.x])
+					if ui_scale==1.0:
+						await snap("field-%s-%s-%d"%[id,pose,shape.x])
+						if id!="cave_bat" and pose=="idle" and FOLDER.contains("predatory"):await eye_marks_render(foe,eye)
 		if id=="rat":
 			# Presentation probe: a taller model in the next row must stay in
 			# frame when a floor-level rat asks the camera to look down.

@@ -7,6 +7,7 @@ import argparse, hashlib, json, math, sys
 from pathlib import Path
 import bpy, bmesh
 from mathutils import Vector, Quaternion, Euler
+from mathutils.bvhtree import BVHTree
 
 ROOT=Path(__file__).resolve().parents[2]
 sys.dont_write_bytecode=True
@@ -18,14 +19,17 @@ from build_early_creatures import armature
 
 parser=argparse.ArgumentParser()
 parser.add_argument('--sources',type=Path,required=True)
+parser.add_argument('--predatory',action='store_true',help='#294 rat silhouette and grounded-bat follow-up; retains v2')
 args=parser.parse_args(sys.argv[sys.argv.index('--')+1:])
-OUT=ROOT/'art/enemies/creatures-refined-v2';OUT.mkdir(parents=True,exist_ok=True)
-WORK=args.sources/'build/local-creatures-refined-v2';(WORK/'masters').mkdir(parents=True,exist_ok=True)
+FAMILY='creatures-predatory-v3' if args.predatory else 'creatures-refined-v2'
+OUT=ROOT/'art/enemies'/FAMILY;OUT.mkdir(parents=True,exist_ok=True)
+WORK=args.sources/('build/local-creatures-predatory-v3' if args.predatory else 'build/local-creatures-refined-v2');(WORK/'masters').mkdir(parents=True,exist_ok=True)
 COLOURS={**PALETTE,'hide':'614c40','hide_light':'806651','hide_dark':'44372f',
          'skin':'80605a','skin_dark':'563d3d','membrane':'65423a','membrane_light':'795347',
          'eye':'11110f','nose':'392b2a','ivory':'bba786','claw':'8a7864'}
 KINDS={'hide':'Fur','hide_light':'Fur','hide_dark':'Fur','pelt':'Fur','pelt_high':'Fur','pelt_dark':'Fur',
        'skin':'Skin','skin_dark':'Skin','membrane':'Membrane','membrane_light':'Membrane'}
+if args.predatory:COLOURS.update(hide='5d5143',hide_light='88735a',hide_dark='3e3931',eye='b83b23',ivory='d1b689')
 
 def paint(obj,types=None,body=False,great=False):
     attr=obj.data.color_attributes.new(name='Col',type='FLOAT_COLOR',domain='CORNER')
@@ -97,9 +101,9 @@ def export(id,rig,meshes,source,bones_expected=None):
         pose_bounds[pose]=[lo[0],lo[2],-hi[1],hi[0]-lo[0],hi[2]-lo[2],hi[1]-lo[1]]
     dictionary=', '.join('"%s": AABB(%s)'%(p,', '.join(f'{n:.5f}' for n in values)) for p,values in pose_bounds.items())
     text='[gd_scene load_steps=4 format=3]\n'
-    text+='[ext_resource type="Script" path="res://art/enemies/creatures-refined-v2/actor.gd" id="1"]\n'
-    text+='[ext_resource type="Material" path="res://art/enemies/creatures-refined-v2/fur.tres" id="2"]\n'
-    text+=f'[ext_resource type="PackedScene" path="res://art/enemies/creatures-refined-v2/{id}.glb" id="3"]\n'
+    text+=f'[ext_resource type="Script" path="res://art/enemies/{FAMILY}/actor.gd" id="1"]\n'
+    text+=f'[ext_resource type="Material" path="res://art/enemies/{FAMILY}/fur.tres" id="2"]\n'
+    text+=f'[ext_resource type="PackedScene" path="res://art/enemies/{FAMILY}/{id}.glb" id="3"]\n'
     text+='[node name="Actor" type="Node3D"]\nscript=ExtResource("1")\npalette_material=ExtResource("2")\n'
     text+=f'pose_bounds = {{{dictionary}}}\nmetadata/visual_height={height:.5f}\n'
     if id=='cave-bat':text+='held_poses=PackedStringArray("landed")\nflying=true\n'
@@ -140,14 +144,22 @@ def rat(great=False):
         original=p.copy()
         if p.y<-.46:
             amount=min(1,(-p.y-.46)/.37)
-            p.y=-.46+(p.y+.46)*.82
-            p.x*=1+.16*amount
+            p.y=-.46+(p.y+.46)*(1.03 if args.predatory else .82)
+            p.x*=(1.18-.60*amount) if args.predatory else (1+.16*amount)
+            if args.predatory:p.z=.23+(p.z-.23)*1.06
         if p.y>.20:
             amount=min(1,(p.y-.20)/.63)
             p.x=p.x*.67+.10*math.sin(amount*math.pi*.9)
             p.z=.285+(p.z-.285)*.66-.21*amount+.018*math.sin(amount*math.pi)
         if p.z<.065 and abs(p.x)>.14:p.x=math.copysign(.21+(abs(p.x)-.21)*.62,p.x)
-        if great and -.35<original.y<.23:
+        if args.predatory:
+            leg_weight=sum(g.weight for g in vertex.groups if body.vertex_groups[g.group].name.startswith('base') and body.vertex_groups[g.group].name!='base')
+            p.x*=1-.30*min(1,leg_weight)
+            if original.y>-.46:p.z=.06+(p.z-.06)*(.74 if great else .83)
+            if great and -.38<original.y<.20:
+                weight=math.exp(-((original.y+.17)/.25)**2)
+                p.x*=1+.18*weight
+        elif great and -.35<original.y<.23:
             weight=math.exp(-((original.y+.12)/.24)**2)
             p.x*=1+.17*weight;p.z+=.048*weight*min(1,max(0,(p.z-.12)/.20))
         vertex.co=inverse@p
@@ -159,30 +171,64 @@ def rat(great=False):
         points=[body.matrix_world@body.data.vertices[i].co for i in face.vertices]
         p=sum(points,Vector())/len(points)
         # Ears, tail and paw undersides get a separate skin response.
-        skin=(p.y>.24 or (p.y<-.43 and p.z>.365) or p.z<.055)
+        skin=(p.y>.24 or (not args.predatory and p.y<-.43 and p.z>.365) or p.z<.055)
         tags.append('skin_dark' if skin else ('hide_dark' if great else 'hide'))
     paint(body,tags,body=True,great=great)
+    head_surface=None
+    if args.predatory:
+        body.data.update();bpy.context.view_layer.update()
+        evaluated=body.evaluated_get(bpy.context.evaluated_depsgraph_get());skin=evaluated.to_mesh()
+        head_surface=BVHTree.FromPolygons([evaluated.matrix_world@v.co for v in skin.vertices],[list(p.vertices) for p in skin.polygons])
+        evaluated.to_mesh_clear()
     details=Mesh()
     # Short rounded nose and paired whisker pads, replacing the pointed wedge.
-    details.stone((0,-.744,.244),(.026,.020,.020),'head','nose',sides=10)
+    snout=-.842 if args.predatory else -.744
+    details.stone((0,snout,.242 if args.predatory else .244),(.019 if args.predatory else .026,.018 if args.predatory else .020,.016 if args.predatory else .020),'head','nose',sides=8 if args.predatory else 10)
     for sign,side in [(-1,'R'),(1,'L')]:
-        details.stone((sign*.024,-.702,.240),(.028,.032,.019),'head','hide',sides=9)
-        details.stone((sign*.096,-.584,.313),(.012,.009,.011),'head','eye',sides=10)
-        details.stone((sign*.098,-.591,.318),(.002,.0015,.002),'head','ivory',sides=6)
-        details.stone((sign*.13,-.525,.365),(.064,.018,.084),'head','hide_dark',sides=11)
-        details.stone((sign*.13,-.544,.365),(.042,.006,.057),'head','skin_dark',sides=10)
+        details.stone((sign*.024,-.785 if args.predatory else -.702,.240),(.024 if args.predatory else .028,.032,.019),'head','hide',sides=8 if args.predatory else 9)
+        if args.predatory:
+            origin=Vector((sign*.098,-1.8,.85))
+            direction=(Vector((sign*.098,-.61,.29))-origin).normalized()
+            hit,normal,_,_=head_surface.ray_cast(origin,direction)
+            assert hit is not None,'Visible eyes must sit on the actual posed head surface'
+            centre=hit-direction*.018
+            details.stone(centre,(.024,.017,.014),'head','nose',sides=7)
+            iris=centre-direction*.017
+            details.stone(iris,(.014,.010,.008),'head','eye',sides=7)
+            details.stone(iris-direction*.009+Vector((sign*.003,0,.002)),(.002,.0015,.0015),'head','ivory',sides=5)
+            # Round, smaller ears rooted behind the eyes, never upright rabbit paddles.
+            details.stone((sign*.124,-.470,.365),(.046,.017,.046),'head','hide_dark',sides=8)
+            details.stone((sign*.124,-.486,.365),(.030,.005,.030),'head','skin_dark',sides=7)
+        else:
+            details.stone((sign*.096,-.584,.313),(.012,.009,.011),'head','eye',sides=10)
+            details.stone((sign*.098,-.591,.318),(.002,.0015,.002),'head','ivory',sides=6)
+            details.stone((sign*.13,-.525,.365),(.064,.018,.084),'head','hide_dark',sides=11)
+            details.stone((sign*.13,-.544,.365),(.042,.006,.057),'head','skin_dark',sides=10)
         # Small incisors remain attached to their real jaw/head bones.
-        for x in [sign*.011]:
-            details.segment((x,-.756,.224),(x,-.769,.200),[(0,.008),(1,.006)],'head','ivory',sides=6)
-            details.segment((x,-.766,.190),(x,-.774,.207),[(0,.007),(1,.004)],'mouth','ivory',sides=6)
+        for x in [sign*(.024 if great and args.predatory else .011)]:
+            if args.predatory:
+                details.segment((x,-.835,.224),(x,-.852,.174 if great else .198),[(0,.012 if great else .008),(1,.006)],'head','ivory',sides=6)
+                details.segment((x,-.846,.183),(x,-.858,.215),[(0,.010 if great else .007),(1,.004)],'mouth','ivory',sides=6)
+            else:
+                details.segment((x,-.756,.224),(x,-.769,.200),[(0,.008),(1,.006)],'head','ivory',sides=6)
+                details.segment((x,-.766,.190),(x,-.774,.207),[(0,.007),(1,.004)],'mouth','ivory',sides=6)
         for y,z,bone in [(-.365,.023,'base.001_'+side+'.001'),(-.025,.031,'base_'+side+'.001')]:
-            details.stone((sign*.211,y-.026,z),(.037,.054,.016),bone,'skin_dark',sides=8)
+            foot_x=sign*(.148 if args.predatory else .211)
+            details.stone((foot_x,y-.026,z),(.037,.054,.016),bone,'skin_dark',sides=8)
             for toe in [-1,0,1]:
-                at=(sign*.211+toe*.020,y-.061,z-.002)
+                at=(foot_x+toe*.020,y-.061,z-.002)
                 tip=(at[0]+toe*.004,at[1]-.035,z-.007)
                 details.segment(at,tip,[(0,.011),(1,.007)],bone,'skin',sides=6)
                 details.segment(tip,(tip[0],tip[1]-.014,tip[2]-.001),[(0,.006),(1,.001)],bone,'claw',sides=5)
-    if great:
+    if args.predatory:
+        for i in range(7 if great else 4):
+            y=-.32+i*.065;z=.33+.018*math.sin(i*.4)
+            for sign in [-1,1]:
+                x=sign*(.04 if great else .028)
+                details.add([(x-.026,y-.04,z),(x+.026,y-.04,z),
+                    (x+sign*.025,y+.065,z+(.065 if great else .04)),(x,y+.04,z-.012)],
+                    [(0,1,2),(1,3,2),(3,0,2)],['hide','hide_light','hide_dark'],'spine')
+    elif great:
         # Low overlapping tapered bristle fans follow the spine; no stones.
         for i in range(7):
             y=-.27+i*.066;z=.43+.045*math.sin(i*.43)
@@ -198,7 +244,7 @@ def rat(great=False):
     bpy.ops.object.join()
     meshes=[body]
     if great:
-        rig.parent.scale.x*=1.30;rig.parent.scale.y*=1.03;rig.parent.scale.z*=1.30
+        rig.parent.scale.x*=1.30;rig.parent.scale.y*=1.0 if args.predatory else 1.03;rig.parent.scale.z*=1.30
     return export('great-rat' if great else 'rat',rig,meshes,
         {'author':'br-n518','licence':'CC0-1.0','retained_originals':'art/third-party/oga-rat-v1','master_sha256':hashlib.sha256(master.read_bytes()).hexdigest()},21)
 
@@ -277,10 +323,10 @@ def bat():
                     rig.pose.bones[name].rotation_quaternion=(basis.inverted()@world@basis).to_quaternion()
                 fold=26*impact if pose in ['swoop','attack'] else 0
                 def mixed(name,air,ground):turn(name,*(a*(1-landing)+b*landing for a,b in zip(air,ground)))
-                mixed(f'wing_{side}',(-10,sign*(-7+29*beat),sign*fold),(12,sign*9,sign*66))
-                mixed(f'elbow_{side}',(3,sign*(-12*math.sin(math.tau*t-.35)),sign*fold*.5),(-12,sign*8,sign*48))
-                mixed(f'wrist_{side}',(-6,sign*(9*math.sin(math.tau*t-.55)),sign*fold*.35),(10,sign*-10,sign*43))
-                mixed(f'finger_{side}',(0,sign*6*beat,0),(0,0,sign*26))
+                mixed(f'wing_{side}',(-10,sign*(-7+29*beat),sign*fold),(12,sign*9,sign*(40 if args.predatory else 66)))
+                mixed(f'elbow_{side}',(3,sign*(-12*math.sin(math.tau*t-.35)),sign*fold*.5),(-12,sign*8,sign*(22 if args.predatory else 48)))
+                mixed(f'wrist_{side}',(-6,sign*(9*math.sin(math.tau*t-.55)),sign*fold*.35),(10,sign*-10,sign*(18 if args.predatory else 43)))
+                mixed(f'finger_{side}',(0,sign*6*beat,0),(0,0,sign*(12 if args.predatory else 26)))
             rig.pose.bones['head'].rotation_quaternion=Quaternion((1,0,0),math.radians(9*impact if pose in ['attack','bite','swoop'] else 2*beat))
             rig.pose.bones['jaw'].rotation_quaternion=Quaternion((1,0,0),math.radians(27*impact if pose in ['attack','bite','swoop'] else 1.5))
             if pose in ['hurt','hurt-ground']:rig.pose.bones['root'].rotation_quaternion=Quaternion((0,1,0),math.radians(12*impact))
@@ -297,20 +343,25 @@ def whisker_details():
     def fitted(mesh):
         for side in (-1,1):
             for i in range(4):
-                leaders.segment(mesh,(side*.045,.315+i*.008,.735),
-                    (side*(.30+.035*(i%2)),.28+i*.034,.81-i*.042),
+                leaders.segment(mesh,(side*.045,.315+i*.008,.81 if args.predatory else .735),
+                    (side*(.30+.035*(i%2)),.28+i*.034,(.90 if args.predatory else .81)-i*.042),
                     .0025,'head','ivory',tip=.0008,sides=4)
         for i in range(3):
-            leaders.segment(mesh,(-.075+i*.018,.345,.704),
-                (-.061+i*.018,.322,.735),.003,'head','skin_shadow',tip=.0015)
+            leaders.segment(mesh,(-.075+i*.018,.345,.78 if args.predatory else .704),
+                (-.061+i*.018,.322,.81 if args.predatory else .735),.003,'head','skin_shadow',tip=.0015)
     leaders.whisker=fitted;leaders.OUT=OUT
     record=leaders.export('whisker',WORK/'masters')
-    record['source_model']='creatures-refined-v2/great-rat'
+    record['source_model']=FAMILY+'/great-rat'
     record['source_sha256']=hashlib.sha256((OUT/'great-rat.glb').read_bytes()).hexdigest()
     record['adaptation']='Retained uneven whiskers and scars fitted to the revised muzzle; base bristles replace the high mane; detached old ear patch removed.'
     return record
 
-catalog=[rat(),rat(True),bat()]
+catalog=[rat(),rat(True)]
+if args.predatory:
+    # Approved flying bat geometry/colours stay byte-equivalent; only the
+    # grounded fold and landing blend are revised in this sibling library.
+    COLOURS.update(hide='614c40',hide_light='806651',hide_dark='44372f',eye='11110f',ivory='bba786')
+catalog.append(bat())
 (OUT/'catalog.json').write_text(json.dumps({'assets':catalog},indent=2)+'\n')
 (OUT/'whisker-catalog.json').write_text(json.dumps(whisker_details(),indent=2)+'\n')
 print('REFINED_CREATURES',json.dumps([{k:a[k] for k in ['id','triangles','bones','height']} for a in catalog]),flush=True)
