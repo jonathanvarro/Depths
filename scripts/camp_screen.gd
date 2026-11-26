@@ -42,6 +42,7 @@ const Quests := preload("res://scripts/quests.gd")
 const Progression := preload("res://scripts/progression.gd")
 const Sounds := preload("res://scripts/sounds.gd")
 const MerchantScreen := preload("res://scripts/merchant_screen.gd")
+const QuartermasterScreen := preload("res://scripts/quartermaster_screen.gd")
 const SmithScreen := preload("res://scripts/smith_screen.gd")
 const StashScreen := preload("res://scripts/stash_screen.gd")
 const Recruits := preload("res://scripts/recruits.gd")
@@ -71,6 +72,7 @@ var _body: VBoxContainer
 var _back: Button
 var _current := ""
 var _merchant_view: Control
+var _quartermaster_view: Control
 var _smith_view: Control  # the smith on the same exchange (owner, 2026-10-31)
 var _stash_view: Control  # the tent's Store (owner, 2026-10-25)
 var _tent_view: Control
@@ -119,6 +121,7 @@ func _init() -> void:
 	_canvas.add_child(scenery)
 	var layout: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(DIR + "layout.json"))
 	for site in layout["sites"]:
+		if site["id"]=="cave":site["label"]="Quartermaster"
 		_add_site(site)
 	_add_site({"id": "trainer", "label": "Skills trainer", "npc": "", "rect": [375, 64, 107, 56]})
 	_dressing=preload("res://art/camp/cohesive-v5/dressing.gd").new()
@@ -189,6 +192,10 @@ func _init() -> void:
 		_activity.visible = _current != ""
 		if _current != "":
 			_refresh_activity())
+	_quartermaster_view=QuartermasterScreen.new()
+	content.add_child(_quartermaster_view)
+	_quartermaster_view.closed.connect(_close_activity)
+	_quartermaster_view.departure_requested.connect(func(depth: int):cave_chosen.emit(depth))
 	_note = _label("", ACTION, 14, AMBER)
 	_note.position = Vector2(0, 150)
 	_note.size = Vector2(CANVAS.x, 24)
@@ -280,6 +287,9 @@ func _add_site(site: Dictionary) -> void:
 	# Textures retain registered positions on the common landscape canvas.
 	_canvas.add_child(art)
 	_site_art[id]=art
+	if id=="cave":
+		var station:=Sprite2D.new();station.name="Quartermaster";station.texture=preload("res://art/camp/quartermaster-v1/station.png")
+		station.centered=false;station.position=Vector2(542,43);station.scale=Vector2.ONE*64.0/station.texture.get_height();station.texture_filter=CanvasItem.TEXTURE_FILTER_LINEAR;station.light_mask=2;art.add_child(station)
 	if id=="supplies":
 		art.add_child(load(DIR + "caravan-unloading.tscn").instantiate())
 	# The whole site and its label are one target (keyboard, mouse, touch).
@@ -479,6 +489,7 @@ func open_activity(id: String) -> void:
 	if not _sites.has(id) or _camp==null or not _camp.site_present(id):return
 	if id!="supplies":_merchant_view.hide()
 	if id!="smith":_smith_view.hide()
+	if id!="cave":_quartermaster_view.hide()
 	_stash_view.hide()
 	_current = id
 	_picked_recruit = null
@@ -500,7 +511,7 @@ func open_activity(id: String) -> void:
 	_layout_activity()
 	_activity.visible = true
 	_refresh_activity()
-	_back.grab_focus()
+	if _activity.visible:_back.grab_focus()
 
 
 func _close_activity() -> void:
@@ -509,6 +520,7 @@ func _close_activity() -> void:
 	_merchant_view.hide()
 	_smith_view.hide()
 	_stash_view.hide()
+	_quartermaster_view.hide()
 	_update_site_art()
 	_day_label.text = _status() if _camp else ""
 	if visible:_focus_available.call_deferred(_last_site)
@@ -1200,71 +1212,8 @@ func _small(text: String, color := TEXT) -> void:
 
 
 func _cave_path() -> void:
-	# A reminder card on the side, and only what's needed to go (owner,
-	# 2026-10-25). Quests, the contract and talk live at the campfire.
-	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation", 14)
-	_body.add_child(row)
-	var quest := Quests.current(_camp)
-	if quest != "":
-		row.add_child(_quest_card(quest))
-	var column := VBoxContainer.new()
-	column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	column.add_theme_constant_override("separation", 8)
-	row.add_child(column)
-	var going: Array[Companion] = _camp.available(_party)
-	var say := func(text: String, color := TEXT):
-		var label := _label(text, BODY, 13, color)
-		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		column.add_child(label)
-	if _party.members.is_empty():
-		say.call("Your party is gone. Find companions at the fire.", AMBER)
-		return
-	if going.is_empty():
-		say.call("No one is fit to go. Rest in your tent.", AMBER)
-		return
-	say.call("Going: %s" % ", ".join(PackedStringArray(going.map(func(h): return h.display_name))), AMBER)
-	var staying: Array = _party.living_members().filter(func(h): return h not in going)
-	if not staying.is_empty():
-		say.call("With the nurse: %s" % ", ".join(PackedStringArray(staying.map(func(h): return "%s (%s)" % [h.display_name, _nights(_camp.ready_on(h) - _camp.day)]))), MUTED)
-	# The quartermaster's issue (owner, 2026-11-22): topped up free on every
-	# return; a better one is paid for once, in gold and what the mine gives.
-	say.call("Quartermaster's issue, every trip: %s." % _camp.issue_text(), MUTED)
-	if _issue_note != "":
-		say.call(_issue_note, AMBER)
-		_issue_note = ""
-	var next: Dictionary = _camp.next_issue()
-	if not next.is_empty():
-		var better := _button("%s (%s)" % [next["name"], _camp.next_issue_price()])
-		better.tooltip_text = "From now on: %s." % _camp.issue_text(_camp.issue_level + 1)
-		better.accessibility_name = "%s: %s, for %s" % [next["name"], _camp.issue_text(_camp.issue_level + 1), _camp.next_issue_price()]
-		better.disabled = not _camp.can_raise_issue(_party)
-		better.pressed.connect(func():
-			if _camp.raise_issue(_party):
-				_camp.top_up_torches(_party)
-				_issue_note = "Paid. From now on the quartermaster issues %s." % _camp.issue_text()
-				_refresh_activity())
-		column.add_child(better)
-		say.call("Next: %s." % _camp.issue_text(_camp.issue_level + 1), MUTED)
-		if better.disabled:
-			say.call(_camp.issue_shortfall(_party), AMBER)
-	var down := _button("Head back down")
-	down.pressed.connect(func(): cave_chosen.emit(1))
-	column.add_child(down)
-	# The scouts' routes (#79): straight down to any floor they've marked,
-	# dearer the deeper it goes.
-	for depth: int in _camp.open_routes():
-		var price: int = _camp.route_price(depth)
-		var route := _button("Route to floor %d (%dg)" % [depth, price])
-		route.disabled = _purse() < price
-		route.pressed.connect(func():
-			if _camp.buy_route(_party, depth):
-				cave_chosen.emit(depth))
-		column.add_child(route)
-	for depth: int in CampState.ROUTE_PRICES:
-		if not _camp.route_open(depth) and (depth == 2 or _camp.times_reached(depth) > 0):
-			say.call("Reach floor %d twice for a scouts' route (%d/%d)." % [depth, _camp.times_reached(depth), CampState.ROUTE_AFTER], MUTED)
-			break
+	_activity.visible=false
+	_quartermaster_view.open(_camp,_party)
 
 
 ## The quest to keep in mind (owner, 2026-10-25): who asked, in silhouette,
