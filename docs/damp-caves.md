@@ -1,6 +1,6 @@
 # Damp Caves: production handoff (#302)
 
-2026-11-26 · First delivery on `codex/damp-caves-surfaces`, based on Claude's brief at `aca0d4ce`. Claude subsequently added `docs/area-production-briefs.md` (now incorporated); the two-exit/sign/glyph kit and three-knocks prop are also pending P1 work. The owner asked to start the larger list; this delivery completes a bounded first batch, not the whole floor. Claude retains live hookup and rules. Existing fungal files remain intact for the fungal side region.
+2026-11-26 · First delivery on `codex/damp-caves-surfaces`, based on Claude's brief at `aca0d4ce`. Claude subsequently added `docs/area-production-briefs.md` (now incorporated); the Damp Caves two-exit/sign/glyph kit is now delivered; the three-knocks prop remains pending P1 work. The owner asked to start the larger list; the current delivery covers surfaces, passage/exit art and layout candidates, not the whole floor. Claude retains live hookup and rules. Existing fungal files remain intact for the fungal side region.
 
 ## Production status
 
@@ -8,7 +8,7 @@
 | --- | --- | --- |
 | A1–A4 surfaces | Delivered, native-checked; owner/device review remains | `art/textures/damp-caves-v1` |
 | G layouts | Four complete design candidates; owner/Claude review before gameplay hookup | `docs/damp-caves-layout.md`, machine-readable `damp-caves-layout-sections.json` |
-| B passages + N1–N3 network kit | Not produced; next production batch | Wet fibrous curtain, obstruction, distinct Cavern/Hollows outward and return exits, signs and map glyphs |
+| B passages + N1–N3 for this junction | Delivered, native-checked; no live hookup | `art/features/damp-passages-v1`, `art/ui/area-routes-v1`; other areas’ exits remain separate work |
 | C dressing | Not produced | Damp wall/ceiling/edge/floor pieces, still-safe drip effect |
 | D 2D leftovers | Not produced | Floor 1–2 dressing/landmark/event replacements, including three-knocks; keep each region's style |
 | E landmarks | Layout placement notes only; art kits not produced | Sump, weeping wall, drowned drift, rimstone stair, bone silt, wet lost cache |
@@ -43,6 +43,18 @@ Local gallery: `E:/GitHub/Depths/build/local-damp-caves-v1/inspector.html`.
 
 Re-run the surface fixture through `tools/testing/background_godot.py`, passing `--script res://tools/damp_caves/surface_check.gd -- <capture-folder>`; use isolated APPDATA. Rebuild/validate sections with `python tools/damp_caves/build_layout_sections.py`. Tests ran on private desktops with `test_was_foreground=false` and touched no owner saves. Physical iPhone performance, seeded full-floor placement and owner visual review remain unverified. No live-theme, exported-game or rules claim is made for this art-only delivery.
 
+## Passage and exit delivery
+
+Brief B1–B4 and N1–N3 for the Damp Caves junction are now delivered in `art/features/damp-passages-v1`; six matching code-native SVGs are in `art/ui/area-routes-v1`. Full contracts, source record, budgets and paths are in their catalogues/READMEs. Local review: `build/local-damp-passages-v1/inspector.html`; separate editable Blender pieces: its `masters` folder.
+
+- Cavern onward is a water-cut shaft with actual recessed ledges/rope handhold. Its matching return is a wet rope ascent. The shaft supplies an open apron; the return retains the builder floor and tags its upper cap for ceiling hiding.
+- Fungal Hollows onward is a low fungal crawl with a complete ground apron. The matching fungal-side return retains the builder floor. These are visual transition throats, not newly walkable connected levels or a forced crouch mechanic.
+- Root/fibre curtain has intact/opened states; it is organic tear/burn-role artwork, not a calcite wall inheriting web fire rules. The siltfall has blocked/cleared states. Cleared states leave a true central opening. Existing gameplay still decides passage outcomes.
+- Markers use raised glyph geometry matching the map symbols, plus canonical `interaction_label` metadata for the caller's pre-commit prompt. No TextMesh lettering or billboard cost. `destination_hint`/`paired_asset` are art hints, never automatically bound world-area IDs.
+- Features are static and opaque: no processing, light, alpha, emission, collision, RNG or saved rules. The material shares the surface batch's limestone albedo; relief uses height derivatives without another texture. Budget is 680–2366 triangles / 1–2 visible draws per selected scene. An inactive state sibling remains hidden.
+
+**274 native checks pass, 65 captures:** eye-height/three-quarter in neutral/torch light, 1278×590 and 844×390; both actual LevelBuilder orientations; model/visible-state bounds, budgets, paired metadata, restore-before-ready, invalid-state guard, exact still, canopy hiding, open-passage swap, floor/aperture rays and 1.85m central clearance. Glyphs are checked at 16/24/32px. Native logs are clean; physical iPhone and owner visual review remain. Game-owned way-up/down glow is shown only in the caller fixtures and unchanged.
+
 ## Next production batch
 
-Proceed with B's four feature sets using the existing floor-center/−Z convention and the latest area brief's N1–N3: distinct ways on/back toward Cavern and Fungal Hollows, corresponding signs and map glyphs. Do not deliver one generic onward exit for the new junction. Favor a visibly **fibrous wet root/slime curtain** for B1 so the existing burn/tear role makes sense; calcite stone should not inherit web-burning behavior. B2 needs real blocked/cleared art, B3 a recessed water-cut descent with a ledge, and B4 a wet rope ascent. Keep existing passage/traversal and way-up/down glow caller-owned, with no art-side collision or RNG. Then build C's shared dressing pieces and use them to complete D/E/F. Creature concepts can be prepared for review while props progress; models follow explicit concept approval.
+C/D: the wall/ceiling/edge/floor dressing, still-safe drips, remaining flat mine/Damp Caves props and three-knocks prop. Then E/F art kits for landmarks/events, H sound and I concept approval/model work. G's water rules, encounter weights and branch return/rejoin details still need owner/Claude review. The distinct exits/signs/glyphs delivered here cover these two Damp Caves links; shared-network N1–N3 for other areas remain future production. Claude retains all live graph/theme/quest/combat hookup.

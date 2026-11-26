@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="Script" path="res://art/features/damp-passages-v1/appearance.gd" id="script"]
+[ext_resource type="Material" path="res://art/textures/damp-caves-v1/silt-floor.tres" id="ground"]
+[ext_resource type="PackedScene" path="res://art/features/damp-passages-v1/hollows-onward.glb" id="hollows-onward"]
+
+[node name="DampPassage" type="Node3D"]
+script=ExtResource("script")
+ground_material=ExtResource("ground")
+kind="static"
+state="static"
+sign_label="Hollows"
+metadata/asset_id="hollows-onward"
+metadata/forward="-Z"
+metadata/destination_hint="fungal-hollows"
+metadata/paired_asset="hollows-return"
+
+[node name="Model" parent="." instance=ExtResource("hollows-onward")]

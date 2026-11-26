@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3]
+[ext_resource type="Script" path="res://art/features/damp-passages-v1/appearance.gd" id="script"]
+[ext_resource type="Material" path="res://art/textures/damp-caves-v1/silt-floor.tres" id="ground"]
+[ext_resource type="PackedScene" path="res://art/features/damp-passages-v1/curtain-intact.glb" id="curtain-intact"]
+[ext_resource type="PackedScene" path="res://art/features/damp-passages-v1/curtain-opened.glb" id="curtain-opened"]
+
+[node name="DampPassage" type="Node3D"]
+script=ExtResource("script")
+ground_material=ExtResource("ground")
+kind="curtain"
+state="opened"
+sign_label=""
+metadata/asset_id="curtain-opened"
+metadata/forward="-Z"
+
+[node name="Intact" parent="." instance=ExtResource("curtain-intact")]
+visible=false
+
+[node name="Opened" parent="." instance=ExtResource("curtain-opened")]

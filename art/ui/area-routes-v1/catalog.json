@@ -1,0 +1,43 @@
+{
+  "issue": 302,
+  "assets": [
+    {
+      "id": "cavern",
+      "path": "res://art/ui/area-routes-v1/cavern.svg",
+      "area": "cavern",
+      "role": "area"
+    },
+    {
+      "id": "exit-cavern",
+      "path": "res://art/ui/area-routes-v1/exit-cavern.svg",
+      "area": "cavern",
+      "role": "destination exit"
+    },
+    {
+      "id": "fungal-hollows",
+      "path": "res://art/ui/area-routes-v1/fungal-hollows.svg",
+      "area": "fungal-hollows",
+      "role": "area"
+    },
+    {
+      "id": "exit-fungal-hollows",
+      "path": "res://art/ui/area-routes-v1/exit-fungal-hollows.svg",
+      "area": "fungal-hollows",
+      "role": "destination exit"
+    },
+    {
+      "id": "damp-caves",
+      "path": "res://art/ui/area-routes-v1/damp-caves.svg",
+      "area": "damp-caves",
+      "role": "area"
+    },
+    {
+      "id": "exit-damp-caves",
+      "path": "res://art/ui/area-routes-v1/exit-damp-caves.svg",
+      "area": "damp-caves",
+      "role": "destination exit"
+    }
+  ],
+  "style": "Matches existing expedition-v1/map: ivory 2.5px strokes on 32px, transparent, caller tint. Original code-native SVGs; no bitmap generation.",
+  "hookup": "Destination-aware map/arrival naming remains caller-owned. Exit arrow means transition, not numeric depth or guaranteed descent."
+}

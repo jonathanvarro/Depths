@@ -68,8 +68,14 @@ Templates > Download and Install; already installed on the owner's PC).
   junction, dry bypasses, protected quest/lair placement and creature proposals.
   Native 87 checks and 50 layout checks pass. Local review/editable inputs:
   `build/local-damp-caves-v1/inspector.html`. Live theme/hookup remains Claude's;
-  B–F/H/I art and creature concept approval remain outstanding. Preserve fungal
-  assets for the side region; no game rules or numeric floor bindings changed.
+  B/N1–N3 for this junction now adds `art/features/damp-passages-v1`: paired
+  Cavern shaft/ascent and Hollows crawl/return, restored curtain/siltfall states,
+  3D glyph signs and six SVGs in `art/ui/area-routes-v1`. 274 native checks pass;
+  review/masters: `build/local-damp-passages-v1`. Follow its floor-apron contracts
+  (onward supplies ground; return retains caller floor), −Z forward, ceiling
+  cap tag and immediate set_state/static set_motion. Metadata is art guidance,
+  not world IDs. C–F/H/I art and concept approval remain outstanding. Preserve
+  fungal assets; no live game rules or numeric floor bindings changed.
 
 - #297 fixes refined-creature translucency: normal v2/v3 coat, skin, details
   and membrane shaders are fully opaque; only `set_opacity` below 1.0 selects
