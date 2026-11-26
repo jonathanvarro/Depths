@@ -724,21 +724,31 @@ func pay(party, price: int) -> bool:
 	return true
 
 
-## The Sapper (once the Fixer, #101) no longer haggles (owner, 2026-11-26):
-## its perks are traps and rubble now (PartyState.sapper). Kept so callers
-## and old saves still work.
+## Haggling (#101) belongs to Rook, the named broker, not every Sapper
+## (owner, 2026-11-26): with a Haggler in the party the merchant and smith
+## knock something off and pay more for treasure.
+const HAGGLER_SALE := 1.25
+const HAGGLER_DISCOUNT := 0.9
+
 static func has_fixer(party) -> bool:
 	return party != null and party.members.any(func(h): return h.role == "Fixer" and h.is_alive())
 
 
+static func has_haggler(party) -> bool:
+	return party != null and party.members.any(func(h): return h.trait_id == "haggler" and h.is_alive())
+
+
 ## What the merchant asks of this party.
-static func price_for(_party, price: int) -> int:
-	return price
+static func price_for(party, price: int) -> int:
+	return ceili(price * HAGGLER_DISCOUNT) if has_haggler(party) else price
 
 
 ## What the merchant pays this party for `item`.
-static func sell_price(_party, item) -> int:
-	return sale_price(item)
+static func sell_price(party, item) -> int:
+	var price := sale_price(item)
+	if item is SupplyItem and item.effect == SupplyItem.Effect.TREASURE and has_haggler(party):
+		price = roundi(price * HAGGLER_SALE)
+	return price
 
 
 ## How many recruits wait by the fire.

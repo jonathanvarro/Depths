@@ -15,7 +15,9 @@ const CAST := {
 	# His still matches his rig (2026-11-24: the fire and the results showed
 	# a random Fixer's face while the cards showed his).
 	"rook": {"name": "Rook", "role": "Fixer", "portrait": "res://art/portraits/fixer-v1/fixer-a/preview.png", "portrait_set": "res://data/portraits/fixer-v1/fixer-a.tres",
-		"intro": "Expedition broker. Has already sold the merchant two crates he didn't know he needed.", "when": "merchant"},
+		"intro": "Expedition broker. Has already sold the merchant two crates he didn't know he needed.", "when": "merchant",
+		# Haggling is his, not every Sapper's (owner, 2026-11-26).
+		"trait": ["haggler", "Haggler", "Talks the merchant and smith down: about a tenth off what you buy, and a quarter more for treasure you sell."]},
 	"nessa": {"name": "Nessa", "role": "Scout", "portrait": "res://art/portraits/named-cast-v1/nessa.png", "portrait_set": "res://data/portraits/named-cast-v1/nessa.tres",
 		"intro": "Survey assistant. Says the old survey of the second floor is wrong, and wants to see for herself.", "when": "floor2"},
 	"maelin": {"name": "Maelin", "role": "Mage", "portrait": "res://art/portraits/named-cast-v1/maelin.png", "portrait_set": "res://data/portraits/named-cast-v1/maelin.tres",
@@ -57,7 +59,18 @@ static func make(camp, id: String) -> Companion:
 	hero.personality = who["intro"]
 	_second_strength(camp.rng, hero)
 	apply_portrait(hero)
+	apply_trait(hero)
 	return hero
+
+
+## A named companion's own trait, if they have one (also put back on older
+## saves' companions as they load).
+static func apply_trait(hero: Companion) -> void:
+	var own: Array = CAST.get(hero.named_id, {}).get("trait", [])
+	if own.size() == 3:
+		hero.trait_id = own[0]
+		hero.trait_name = own[1]
+		hero.trait_text = own[2]
 
 
 static func apply_portrait(hero: Companion) -> void:

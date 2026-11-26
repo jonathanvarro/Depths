@@ -60,6 +60,16 @@ func _initialize() -> void:
 	# The Sapper (the "Fixer" id) no longer haggles (owner, 2026-11-26): its
 	# perks are traps and rubble now (damp_and_rest_check covers them).
 	check("with a Sapper: plain prices and three by the fire still", CampState.sell_price(party, goblet) == base_sale and CampState.price_for(party, CampState.LANTERN_PRICE) == CampState.LANTERN_PRICE and camp.candidate_count(party) == 3)
+	# Haggling is Rook's own trait now (owner, 2026-11-26).
+	camp.rng.seed = 5
+	var rook: Companion = load("res://scripts/named_cast.gd").make(camp, "rook")
+	check("Rook is a Haggler", rook.trait_id == "haggler" and rook.trait_name == "Haggler", rook.trait_id)
+	party.add_member(rook)
+	check("...and with him the merchant knocks something off and pays more for treasure", CampState.price_for(party, CampState.LANTERN_PRICE) < CampState.LANTERN_PRICE and CampState.sell_price(party, goblet) > base_sale, [CampState.price_for(party, CampState.LANTERN_PRICE), CampState.sell_price(party, goblet)])
+	var rook_save: Companion = rook.duplicate()
+	rook_save.trait_id = ""
+	load("res://scripts/named_cast.gd").apply_trait(rook_save)
+	check("...and an older save's Rook gets it back", rook_save.trait_id == "haggler")
 
 	# In the game: rubble, and the campfire with four cards.
 	var main = load("res://scenes/main.tscn").instantiate()

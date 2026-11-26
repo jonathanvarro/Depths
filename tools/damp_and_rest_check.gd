@@ -56,8 +56,16 @@ func _initialize() -> void:
 
 	# The Sapper.
 	var sapper: Companion = load("res://scripts/recruits.gd").make(RandomNumberGenerator.new(), [], [], 1, "Fixer")
+	var saw_before: bool = main._party_state.sees_traps()
 	main._party_state.add_member(sapper)
-	check("a Sapper spots every trap", main._party_state.sees_traps() and main._party_state.sapper() != null)
+	check("a Sapper doesn't spot traps (that's the Scout's)", main._party_state.sapper() != null and main._party_state.sees_traps() == saw_before)
+	# ...but disarms them on a favourable coin flip; stepping over stays a roll.
+	var screen = main._event_screen
+	var wire: RoomEvent = load("res://data/events/trap_tripwire.tres")
+	screen._event = wire
+	screen._party = main._party_state
+	check("...disarms a trap on a coin flip in the party's favour", screen._disarmer(wire.choices[1]) == main._party_state.sapper() and screen._disarmer(wire.choices[1]) != null and screen.SAPPER_DISARM >= 0.85 and screen.SAPPER_DISARM < 1.0, [screen._disarmer(wire.choices[1]), wire.kind, wire.choices[1].bypass, wire.choices[1].outcomes.size(), screen.SAPPER_DISARM])
+	check("...but stepping over is still a plain roll", screen._disarmer(wire.choices[0]) == null)
 	check("...and no longer haggles", main._camp_state.price_for(main._party_state, 20) == 20)
 	main._go_to_floor(1, main.Arrival.FROM_ABOVE)
 	var map = main._map

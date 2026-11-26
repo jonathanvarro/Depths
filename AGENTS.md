@@ -732,7 +732,8 @@ Templates > Download and Install; already installed on the owner's PC).
   main path, ids elsewhere. Boss thresholds `_threshold`. Damp Caves water
   (`Galleries.flood(...,2)`, `puddles`) and creatures (pale newt, blind crawler,
   leech swarm, the Drowned Mother); `CampState.rest_secured`; Sapper =
-  `PartyState.sapper()` (traps/rubble, no haggling); tent Records.
+  `PartyState.sapper()` (disarms on a 90% coin flip, jams set traps, rubble;
+  Scouts spot traps; haggling is Rook's Haggler trait, `CampState.has_haggler`); tent Records.
   `tools/area_network_check.gd`, `tools/damp_and_rest_check.gd`.
 - Quest sites (2026-11-24): `marks["sites"]` (every package's Rect2i),
   `DungeonMap.in_story_site()` keeps other placements out; `_missing_quest_site`

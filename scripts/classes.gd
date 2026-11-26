@@ -33,7 +33,7 @@ const ABOUT := {
 	"Melee": "Front row. Armour and health; little awareness, no magic.",
 	"Scout": "Back row. Hears some fights before they notice the party and always spots traps. Heavy armour slows them more.",
 	"Mage": "Prays: a few casts each trip, more prayers from tomes. Armour past light slows them more; no awareness.",
-	"Fixer": "Weaker in a fight, but spots every trap, jams set ones as the party passes, and clears rubble without a tool.",
+	"Fixer": "Weaker in a fight, but disarms traps far more safely, jams set ones as the party passes, and clears rubble without a tool.",
 }
 
 

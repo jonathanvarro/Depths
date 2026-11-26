@@ -170,3 +170,4 @@ static func unpack_into(object: Object, data: Dictionary) -> void:
 		# Older named companions saved the still portrait only, or a
 		# mismatched one (Rook, fixed 2026-11-24): their own face, always.
 		load("res://scripts/named_cast.gd").apply_portrait(object)
+		load("res://scripts/named_cast.gd").apply_trait(object)

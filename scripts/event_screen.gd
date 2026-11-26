@@ -90,6 +90,8 @@ func _show_choices() -> void:
 		var label := choice.label
 		if choice.time_cost > 0 and not label.contains("time"):
 			label += "  (%d time)" % choice.time_cost
+		if _disarmer(choice):
+			label += "  (Sapper)"
 		var missing: String = choice.missing(_party)
 		if missing != "":
 			label = "%s  (%s)" % [choice.label, missing]
@@ -97,16 +99,37 @@ func _show_choices() -> void:
 	_add_button("Leave it", func(): _finish({"left": true, "ambush": [] as Array[EnemyType]}))
 
 
+## A Sapper disarming a trap (owner, 2026-11-26): much safer, never certain.
+## Heads is the choice's first outcome (it holds), tails its second.
+const SAPPER_DISARM := 0.9
+
+
+## The Sapper who'd work `choice`, if it disarms a trap and one is with the
+## party; else null.
+func _disarmer(choice: EventChoice) -> Companion:
+	if _event.kind != 3 or choice.bypass or choice.coin_flip or choice.outcomes.size() < 2 or not _party.has_method("sapper"):
+		return null
+	return _party.sapper()
+
+
 func _choose(choice: EventChoice) -> void:
 	var forced := -1
-	if choice.coin_flip and coin:
+	var sapper: Companion = _disarmer(choice)
+	if (choice.coin_flip or sapper) and coin:
 		# No turning it down once chosen (#77); luck bends the odds.
 		_clear_buttons()
 		var luck: Array = _party.luck()
 		var chance: float = minf(0.5 + luck[0], 0.85)
 		var note: String = "%s's luck" % luck[1] if luck[1] != "" else ""
+		var heads_text: String = choice.heads_text
+		var tails_text: String = choice.tails_text
+		if sapper:
+			chance = minf(SAPPER_DISARM + luck[0], 0.95)
+			note = "%s's steady hands" % sapper.display_name
+			heads_text = "Disarmed"
+			tails_text = "It goes off"
 		visible = false  # the coin has the screen to itself
-		var heads: bool = await coin.flip(_event.title, choice.heads_text, choice.tails_text, chance, note)
+		var heads: bool = await coin.flip(_event.title, heads_text, tails_text, chance, note)
 		visible = true
 		forced = 0 if heads else 1
 	var was_drained: bool = _rules.drained

@@ -40,7 +40,7 @@ func refresh() -> void:
 	var stock:Array[Dictionary]=[]
 	if trading:
 		if not supplies.has_lantern:
-			var lantern_price:int=CampState.price_for(_party,CampState.LANTERN_PRICE)  # a Fixer haggles (#101)
+			var lantern_price:int=CampState.price_for(_party,CampState.LANTERN_PRICE)  # a Haggler (Rook) haggles (#101)
 			stock.append({"key":"lantern","item":null,"name":"Lantern","icon":LANTERN,"description":"Brighter than a torch, burns oil. Yours to keep.","price":lantern_price,"kind":"lantern","action":"Buy · %d"%lantern_price,"reason":_buy_reason(lantern_price,true)})
 		for item:SupplyItem in CampState.MERCHANT_STOCK:
 			if item.effect==SupplyItem.Effect.REFILL_LANTERN and not supplies.has_lantern:continue
