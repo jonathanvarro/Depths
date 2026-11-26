@@ -4,6 +4,7 @@ extends Control
 signal closed
 signal save_and_exit
 signal open_settings
+signal open_menu
 signal open_quests
 signal used(message: String)
 
@@ -17,14 +18,13 @@ const Spells := preload("res://scripts/spells.gd")
 const FieldKit := preload("res://art/ui/field-kit-v1/style.gd")
 const PortraitView := preload("res://scripts/portrait_view.gd")
 const BagView := preload("res://scripts/kit_bag.gd")
-const ROLL := preload("res://art/ui/physical-kit-v1/roll.png")
 const LANTERN_ICON := preload("res://art/items/refined-v2/lantern.png")
 const UNLIT_LANTERN_ICON := preload("res://art/items/refined-v2/lantern-unlit.png")
 const TORCH_ICON := preload("res://art/items/refined-v2/torch.png")
 const COIN_ICON := preload("res://art/symbols/crest-v1/currency-coin.svg")
-const SETTINGS_ICON := preload("res://art/ui/controls-v1/settings.svg")
 const CLOSE_ICON := preload("res://art/ui/controls-v1/close.svg")
-const JOURNAL_ICON := preload("res://art/ui/controls-v1/journal.svg")
+const JOURNAL_SPINE := preload("res://art/ui/field-kit-v3/journal-spine.png")
+const BODY_SILHOUETTE := preload("res://art/ui/field-kit-v3/body.svg")
 const SLOT_NAMES := {"weapon":"Weapon", "body":"Armour", "back":"Back", "trinket":"Trinket"}
 const PAGE_SIZE := 12
 const EMPTY_ICONS := {"weapon":preload("res://art/ui/physical-kit-v1/weapon.svg"),"body":preload("res://art/ui/physical-kit-v1/armour.svg"),"back":preload("res://art/ui/controls-v1/backpack.svg"),"trinket":preload("res://art/ui/physical-kit-v1/trinket.svg")}
@@ -35,6 +35,7 @@ var _selected_hero: Companion
 var _selection: Resource
 var _from_slot := ""
 var _pinned := false
+var _drop_armed := false
 var _serial := 0
 var _page := 0
 var _status := false
@@ -45,7 +46,8 @@ var _hero_summary: Label
 var _equip_tab: Button
 var _status_tab: Button
 var _equipment: Control
-var _equipment_slots: GridContainer
+var _equipment_slots: Control
+var _slot_boxes: Dictionary = {}
 var _roll_contents: Control
 var _roll_image: TextureRect
 var _slot_buttons: Dictionary = {}
@@ -56,6 +58,8 @@ var _pages: HBoxContainer
 var _capacity: Label
 var _details: PanelContainer
 var _detail_title: Label
+var _detail_recipient: Label
+var _detail_close: Button
 var _detail_stats: Label
 var _detail_comparison: Label
 var _detail_text: VBoxContainer
@@ -68,7 +72,16 @@ var _hero_panel: VBoxContainer
 var _workspace: HBoxContainer
 var _header: HBoxContainer
 var _title: Label
-var _save: Button
+var _bag_panel: Control
+var _bag_footer: HBoxContainer
+var _journal: Button
+var _journal_caption: Label
+var _compact_switch: Button
+var _compact_tabs: HBoxContainer
+var _compact_buttons: Dictionary = {}
+var _compact := false
+var _compact_equipment := false
+var _menu: Button
 var _close: Button
 var _time_label: Label
 var _light_title: Label
@@ -93,6 +106,7 @@ func setup(party_state) -> void:
 func _on_visibility() -> void:
 	if visible:
 		_status = false
+		_compact_equipment = false
 		clear_inspection()
 		refresh()
 		_close.grab_focus.call_deferred()
@@ -107,9 +121,10 @@ func _request_refresh() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if is_visible_in_tree() and event.is_action_pressed("ui_cancel"):
 		if _selection!=null:
-			clear_inspection()
+			if _drop_armed:_cancel_drop()
+			else:clear_inspection()
 		else:
-			closed.emit()
+			open_menu.emit()
 		get_viewport().set_input_as_handled()
 
 func _input(event: InputEvent) -> void:
@@ -171,8 +186,11 @@ func set_status(show_status: bool) -> void:
 	_status_scroll.visible = _status
 	_equip_tab.button_pressed = not _status
 	_status_tab.button_pressed = _status
+	_navigation_style(_equip_tab,not _status)
+	_navigation_style(_status_tab,_status)
 
 func clear_inspection() -> void:
+	_drop_armed = false
 	_selection = null
 	_from_slot = ""
 	_pinned = false
@@ -185,6 +203,7 @@ func clear_inspection() -> void:
 func inspect_item(item: Resource, pin := true, worn_slot := "", source: Control = null) -> void:
 	if item == null or (not pin and (_pinned or get_viewport().gui_is_dragging())):
 		return
+	_drop_armed = false
 	_selection = item
 	_from_slot = worn_slot
 	_pinned = pin
@@ -252,6 +271,7 @@ func _refresh_heroes() -> void:
 		var button:=_button("",Vector2(64,64))
 		button.toggle_mode=true
 		button.button_pressed=hero==_selected_hero
+		_navigation_style(button,hero==_selected_hero)
 		button.accessibility_name="Inspect "+hero.display_name
 		button.tooltip_text=hero.display_name
 		button.set_meta("kit_focus","hero:"+str(hero.get_instance_id()))
@@ -259,7 +279,7 @@ func _refresh_heroes() -> void:
 		button.set_drag_forwarding(Callable(),_can_drop_on_hero.bind(hero),_drop_on_hero.bind(hero))
 		var portrait:=PortraitView.new()
 		portrait.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-		portrait.offset_left=4;portrait.offset_right=-4;portrait.offset_top=4;portrait.offset_bottom=-4
+		portrait.offset_left=10;portrait.offset_right=-10;portrait.offset_top=10;portrait.offset_bottom=-10
 		button.add_child(portrait)
 		portrait.show_portrait(hero.portrait_set,hero.portrait)
 		portrait.set_animated(hero.is_alive())
@@ -277,19 +297,21 @@ func _refresh_heroes() -> void:
 	else:
 		_hero_summary.text=""
 	set_status(_status)
+	_fit_workspace.call_deferred()
 
 func _refresh_equipment() -> void:
 	_clear(_equipment_slots)
 	_slot_buttons.clear()
+	_slot_boxes.clear()
 	for slot: String in SLOT_NAMES:
 		var box:=VBoxContainer.new()
 		box.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 		box.size_flags_vertical=Control.SIZE_EXPAND_FILL
 		box.add_theme_constant_override("separation",0)
 		_equipment_slots.add_child(box)
+		_slot_boxes[slot]=box
 		var caption:=_label(SLOT_NAMES[slot],14,FieldKit.MUTED)
 		caption.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
-		box.add_child(caption)
 		var item: Equipment=_selected_hero.get(slot) if _selected_hero else null
 		var button:=_button("",Vector2(60,44))
 		button.clip_contents=true
@@ -299,6 +321,7 @@ func _refresh_equipment() -> void:
 		button.accessibility_name=SLOT_NAMES[slot]+": "+(item.display_name if item else "Empty")
 		button.tooltip_text=button.accessibility_name
 		box.add_child(button)
+		box.add_child(caption)
 		_slot_buttons[slot]=button
 		button.set_drag_forwarding(_drag_from_slot.bind(slot,item),_can_drop_on_slot.bind(slot),_drop_on_slot.bind(slot))
 		box.set_drag_forwarding(Callable(),_can_drop_on_slot.bind(slot),_drop_on_slot.bind(slot))  # an empty slot's button is disabled
@@ -308,25 +331,31 @@ func _refresh_equipment() -> void:
 			_bind_inspection(button,item,slot)
 		else:
 			_add_icon(button,EMPTY_ICONS[slot],"common",Vector2(32,32),true)
-			button.get_child(0).modulate.a=0.45
+			button.get_child(0).modulate.a=0.65
 			button.disabled=true
 	_fit_equipment()
 	_highlight_slots()
 
 func _fit_equipment() -> void:
 	if not is_instance_valid(_equipment_slots):return
-	# On very short layouts trim only the outer roll/shadow, retaining room
-	# for two 44px rows on the cloth rather than spilling into its straps.
-	var height:=maxf(132,_equipment.size.y)
-	var top:=(_equipment.size.y-height)/2
-	_roll_image.offset_top=top
-	_roll_image.offset_bottom=-top
-	_roll_contents.position=Vector2(_equipment.size.x*.14,top+height*.14)
-	_roll_contents.size=Vector2(_equipment.size.x*.79,height*.70)
-	# In short phone windows the slot glyphs/accessibility names carry the
-	# labels, keeping two full rows of touch targets inside the canvas roll.
-	for box in _equipment_slots.get_children():
-		box.get_child(0).visible=_roll_contents.size.y>=136
+	var touch:=44/_pixel_scale()
+	var edge:=maxf(touch,minf(76,minf(_equipment.size.x*.22,_equipment.size.y*.23)))
+	var diagram:=Vector2(minf(_equipment.size.x*.94,_equipment.size.y*1.05),_equipment.size.y*.94)
+	var origin:=(_equipment.size-diagram)/2
+	_roll_image.position=origin+Vector2(diagram.x*.18,0)
+	_roll_image.size=Vector2(diagram.x*.64,diagram.y)
+	var places:={"weapon":Vector2(.14,.57),"body":Vector2(.5,.46),"back":Vector2(.79,.27),"trinket":Vector2(.79,.79)}
+	for slot: String in _slot_boxes:
+		var box: VBoxContainer=_slot_boxes[slot]
+		var button: Button=_slot_buttons[slot]
+		var caption: Label=box.get_child(1)
+		caption.add_theme_font_size_override("font_size",roundi(maxf(12,12/_pixel_scale())))
+		caption.visible=_equipment.size.y>=180
+		button.custom_minimum_size=Vector2.ONE*edge
+		button.size_flags_vertical=Control.SIZE_SHRINK_BEGIN
+		box.size=Vector2(edge,edge+(caption.get_combined_minimum_size().y+4 if caption.visible else 0))
+		var centre: Vector2=origin+diagram*places[slot]
+		box.position=Vector2(clampf(centre.x-edge/2,2,maxf(2,_equipment.size.x-edge-2)),clampf(centre.y-edge/2,2,maxf(2,_equipment.size.y-box.size.y-2)))
 
 func _highlight_slots() -> void:
 	var receiving: String=_selection.slot if _selection is Equipment else ""
@@ -336,7 +365,7 @@ func _highlight_slots() -> void:
 		var button:Button=_slot_buttons[slot]
 		var active:=slot==receiving and _from_slot==""
 		var edge:=FieldKit.AMBER if active else Color.TRANSPARENT
-		var box:=FieldKit.plate(Color(0.04,0.045,0.03,0.25) if active else Color.TRANSPARENT,edge,3)
+		var box:=FieldKit.plate(Color(.08,.075,.055,.88),edge if active else Color(.45,.38,.25,.65),3 if active else 1)
 		button.add_theme_stylebox_override("normal",box)
 		button.add_theme_stylebox_override("disabled",box)
 		for state in ["hover","pressed","hover_pressed","focus"]:
@@ -430,6 +459,8 @@ func _refresh_bag() -> void:
 			_bind_inspection(button,item)
 			if entry.count!=1:
 				var badge:=_label("×%d" % entry.count if entry.count>0 else "≈",15,FieldKit.AMBER)
+				badge.set_meta("count_badge",true)
+				badge.add_theme_stylebox_override("normal",FieldKit.plate(Color("171a15"),Color.TRANSPARENT,1))
 				badge.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
 				badge.offset_left=-35;badge.offset_top=-21;badge.offset_right=-3;badge.offset_bottom=-1
 				badge.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
@@ -451,6 +482,7 @@ func _refresh_bag() -> void:
 		var next:=_button("›",Vector2(44,44));next.disabled=_page==pages-1
 		next.accessibility_name="Next pack page";next.pressed.connect(show_page.bind(_page+1));_pages.add_child(next)
 	_bag._fit()
+	_fit_bag_panel.call_deferred()
 
 func _bind_inspection(button: Button,item: Resource,slot := "") -> void:
 	# The custom item card replaces delayed, detached engine tooltips.
@@ -604,18 +636,16 @@ func _add_icon(button: Button,texture: Texture2D,tier: String,extent: Vector2,eq
 	icon.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	icon.offset_left=5;icon.offset_right=-5;icon.offset_top=4;icon.offset_bottom=-4
 	button.add_child(icon)
+	# Pocket/slot bounds also control rare frames on the Larger UI setting.
+	icon.custom_minimum_size=Vector2.ZERO
+	for picture in icon.find_children("*","TextureRect",true,false):picture.custom_minimum_size=Vector2.ZERO
 	if equipment:
 		icon.set_meta("equipment_icon",true)
 		icon.custom_minimum_size=Vector2.ZERO
 		for picture in icon.find_children("*","TextureRect",true,false):picture.custom_minimum_size=Vector2.ZERO
-		if texture in EMPTY_ICONS.values():
-			icon.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
-			icon.size=Vector2(40,40)
-			icon.position=-icon.size/2
-		else:
-			icon.anchor_left=.09;icon.anchor_right=.91
-			icon.anchor_top=.07;icon.anchor_bottom=.93
-			icon.offset_left=0;icon.offset_right=0;icon.offset_top=0;icon.offset_bottom=0
+		icon.anchor_left=.12;icon.anchor_right=.88
+		icon.anchor_top=.12;icon.anchor_bottom=.88
+		icon.offset_left=0;icon.offset_right=0;icon.offset_top=0;icon.offset_bottom=0
 
 func _refresh_details() -> void:
 	_clear(_detail_text)
@@ -633,6 +663,15 @@ func _refresh_details() -> void:
 	var item:=_selection
 	var tier:=Quality.tier_of(item,_selected_hero if _from_slot!="" else null)
 	_detail_title.text=("" if tier=="common" else tier.capitalize()+" · ")+item.display_name
+	_detail_recipient.text="For "+_selected_hero.display_name if _selected_hero else "Shared pack"
+	if item is SupplyItem and item.effect in [SupplyItem.Effect.FEED_PARTY,SupplyItem.Effect.REFILL_LANTERN,SupplyItem.Effect.LIGHT_TORCH,SupplyItem.Effect.TOOL,SupplyItem.Effect.TREASURE]:_detail_recipient.text="Shared supplies"
+	if _drop_armed:
+		_detail_recipient.text="Left behind for good"
+		_detail_text.add_child(_wrapped("This item cannot be recovered after you drop it.",17))
+		_action("Drop permanently","drop")
+		_action("Keep item","cancel_drop")
+		_position_details.call_deferred()
+		return
 	if item is Equipment and _selected_hero:
 		var seen:=GearModel.known(item)
 		match item.slot:
@@ -741,6 +780,13 @@ func _unequip_reason() -> String:
 
 func _action(title: String,kind: String,reason := "") -> void:
 	var button:=_button(title,Vector2(76,44))
+	if kind=="drop" and not _drop_armed:
+		var space:=Control.new();space.size_flags_horizontal=Control.SIZE_EXPAND_FILL;_detail_actions.add_child(space)
+	if kind in ["drop","cancel_drop"]:
+		_navigation_style(button,false)
+		if _drop_armed and kind=="drop":
+			button.add_theme_color_override("font_color",Color("e9ac93"))
+			button.set_meta("spotlight_action_group",true)
 	button.set_meta("kit_focus","action:"+kind)
 	button.accessibility_name=title
 	button.disabled=reason!=""
@@ -749,9 +795,27 @@ func _action(title: String,kind: String,reason := "") -> void:
 	var hero:=_selected_hero
 	button.pressed.connect(func():
 		if serial==_serial and hero==_selected_hero and reason=="":
-			_perform(kind))
+			if kind=="drop" and not _drop_armed:
+				_drop_armed=true;_pinned=true;_serial+=1;_refresh_details()
+			elif kind=="cancel_drop":_cancel_drop()
+			else:_perform(kind))
 	_detail_actions.add_child(button)
 	if reason!="" and reason!="Replace this weapon from the pack":_detail_text.add_child(_wrapped(reason,17,FieldKit.MUTED))
+
+func _cancel_drop() -> void:
+	_drop_armed=false
+	_serial+=1
+	_refresh_details()
+
+func _navigation_style(button: Button,selected: bool) -> void:
+	if button==null:return
+	for state in ["normal","pressed","hover_pressed","hover","disabled"]:
+		var active: bool=selected if state in ["normal","disabled"] else state!="hover" or selected
+		var box:=FieldKit.plate(Color("343021") if active else Color("191d17"),FieldKit.AMBER if active else FieldKit.EDGE,6)
+		box.border_width_bottom=3 if active else 1
+		button.add_theme_stylebox_override(state,box)
+	button.add_theme_color_override("font_color",FieldKit.TEXT if selected else FieldKit.MUTED)
+	button.add_theme_color_override("font_pressed_color",FieldKit.TEXT)
 
 ## Identify with a touchstone, when one is carried (owner, 2026-11-03).
 func _identify_action(item: Resource) -> void:
@@ -843,6 +907,7 @@ func _button(title: String,minimum := Vector2(44,44)) -> Button:
 func _label(text: String,font_size:=18,color:=FieldKit.TEXT) -> Label:
 	var label:=Label.new()
 	label.text=text
+	label.set_meta("kit_font",font_size)
 	label.add_theme_font_size_override("font_size",font_size)
 	label.add_theme_color_override("font_color",color)
 	label.mouse_filter=Control.MOUSE_FILTER_IGNORE
@@ -868,6 +933,8 @@ func _header_icon(texture: Texture2D,title: String,callback: Callable) -> Button
 	if title.begins_with("Close"):
 		FieldKit.Brass.apply(button,FieldKit.Brass.Edge.RIGHT,6)
 	button.icon=texture;button.expand_icon=true
+	button.icon_alignment=HORIZONTAL_ALIGNMENT_CENTER
+	button.vertical_icon_alignment=VERTICAL_ALIGNMENT_CENTER
 	button.add_theme_constant_override("icon_max_width",22)
 	button.accessibility_name=title;button.tooltip_text=title
 	button.pressed.connect(func():
@@ -898,18 +965,30 @@ func _leave_preview() -> void:
 
 func _position_details() -> void:
 	if _selection==null or not is_visible_in_tree():return
+	var pixels:=_pixel_scale()
+	for label: Label in _details.find_children("*","Label",true,false):
+		var minimum:=17 if label==_detail_title else (16 if label==_detail_stats else (13 if label==_detail_comparison else 14))
+		label.add_theme_font_size_override("font_size",roundi(maxf(float(label.get_meta("kit_font",17)),minimum/pixels)))
+	for button: Button in _details.find_children("*","Button",true,false):
+		button.custom_minimum_size=Vector2(44/pixels,44/pixels)
+		button.add_theme_font_size_override("font_size",roundi(maxf(18,14/pixels)))
+	_detail_close.add_theme_constant_override("icon_max_width",roundi(22/pixels))
 	var serial:=_serial
 	var safe:=content.get_global_rect().grow(-8)
+	var phone:=_pinned and get_viewport_rect().size.x*pixels<1000
+	var bottom:=safe.end.y
+	safe.position.y=_hero_summary.get_global_rect().end.y+6
+	safe.size.y=bottom-safe.position.y
 	_anchor_rect=_item_rect(_selection,_from_slot)
-	var width:=minf(380,safe.size.x)
-	var max_height:=minf(360,safe.size.y)
+	var width:=minf(380/pixels,safe.size.x)
+	var max_height:=minf(360/pixels,safe.size.y)
 	var below:=safe.end.y-_anchor_rect.end.y-8
 	var above:=_anchor_rect.position.y-safe.position.y-8
 	var left:=_anchor_rect.position.x-safe.position.x-8
 	var right:=safe.end.x-_anchor_rect.end.x-8
 	# A hover card must leave its source reachable for clicking and dragging.
 	# In short landscape windows, use the room beside the pocket instead.
-	var beside:=maxf(above,below)<max_height and maxf(left,right)>=200
+	var beside:=not phone and maxf(above,below)<max_height and maxf(left,right)>=200/pixels
 	if beside:width=minf(width,maxf(left,right))
 	_details.position=Vector2(-10000,-10000)
 	_details.size=Vector2(width,max_height)
@@ -926,7 +1005,8 @@ func _position_details() -> void:
 	var height:=minf(max_height,_detail_text.get_combined_minimum_size().y+fixed_height+spacing+16)
 	_details.size=Vector2(width,height)
 	var point:=Vector2(_anchor_rect.get_center().x-width*0.5,_anchor_rect.end.y+8)
-	if beside and below<height and above<height:
+	if phone:point=Vector2(safe.end.x-width,safe.position.y)
+	elif beside and below<height and above<height:
 		point=Vector2(_anchor_rect.position.x-width-8 if left>=right else _anchor_rect.end.x+8,_anchor_rect.get_center().y-height*0.5)
 	elif point.y+height>safe.end.y:
 		point.y=_anchor_rect.position.y-height-8
@@ -936,13 +1016,98 @@ func _position_details() -> void:
 	_details.visible=true
 
 func _fit_workspace() -> void:
-	var compact:=content.size.x<820
-	_save.text="Save" if compact else "Save & exit"
-	_save.custom_minimum_size.x=44 if compact else 102
-	_title.text="Kit" if content.size.x<700 else "Field kit"
-	_hero_summary.add_theme_font_size_override("font_size",15 if content.size.x<700 else 17)
-	_hero_panel.size_flags_stretch_ratio=0.7
+	if not is_inside_tree() or _bag_panel==null:return
+	var touch:=44/_pixel_scale()
+	var width:=content.size.x-24
+	_compact=width*_pixel_scale()<640
+	_hero_panel.visible=not _compact or _compact_equipment
+	_bag_panel.visible=not _compact or not _compact_equipment
+	_compact_tabs.visible=_compact
+	_equip_tab.get_parent().visible=not _compact
+	var page_parent: Node=_compact_tabs if _compact else _bag_footer
+	if _pages.get_parent()!=page_parent:_pages.reparent(page_parent)
+	_pages.visible=not _compact or not _compact_equipment
+	for page: String in _compact_buttons:
+		var button: Button=_compact_buttons[page]
+		var active:=page==("pack" if not _compact_equipment else ("status" if _status else "equipment"))
+		button.button_pressed=active
+		button.custom_minimum_size.y=touch
+		button.add_theme_font_size_override("font_size",roundi(maxf(16,14/_pixel_scale())))
+		_navigation_style(button,active)
+	_title.visible=width>=380
+	_title.text="Kit" if width<700 else "Field kit"
+	_light_icon.visible=width>=380
+	_lantern_bar.custom_minimum_size.x=52 if width<600 else 98
+	_header.add_theme_constant_override("separation",4 if _compact else 8)
+	_workspace.add_theme_constant_override("separation",8 if _compact else 12)
+	_hero_summary.add_theme_font_size_override("font_size",roundi(maxf(17,13/_pixel_scale())))
+	_title.add_theme_font_size_override("font_size",roundi(maxf(26,20/_pixel_scale())))
+	for label in [_capacity,_time_label,_lantern_label]:label.add_theme_font_size_override("font_size",roundi(maxf(16,12/_pixel_scale())))
+	_journal_caption.add_theme_font_size_override("font_size",roundi(maxf(12,11/_pixel_scale())))
+	for button in [_equip_tab,_status_tab]:
+		button.custom_minimum_size.y=touch
+		button.add_theme_font_size_override("font_size",roundi(maxf(16,14/_pixel_scale())))
+	for button in [_menu,_close]:
+		button.custom_minimum_size=Vector2.ONE*maxf(touch,34 if _compact else 44)
+		button.add_theme_constant_override("icon_max_width",roundi(maxf(22,22/_pixel_scale())))
+	_menu.custom_minimum_size.x=68/_pixel_scale()
+	_menu.add_theme_font_size_override("font_size",roundi(maxf(16,14/_pixel_scale())))
+	var edge:=maxf(touch,minf(64,(_workspace.size.y-(touch+12 if _compact else 0)-8)/maxi(1,_party.members.size())))
+	for button in _hero_row.get_children():
+		button.custom_minimum_size=Vector2.ONE*edge
+		var portrait: Control=button.get_child(0)
+		var inset:=minf(10,edge*.16)
+		portrait.offset_left=inset;portrait.offset_right=-inset;portrait.offset_top=inset;portrait.offset_bottom=-inset
+	for label: Label in _status_content.find_children("*","Label",true,false):
+		label.add_theme_font_size_override("font_size",roundi(maxf(float(label.get_meta("kit_font",17)),13/_pixel_scale())))
+	for button: Button in _status_content.find_children("*","Button",true,false):
+		button.custom_minimum_size.y=touch
+		button.add_theme_font_size_override("font_size",roundi(maxf(18,14/_pixel_scale())))
+	_fit_equipment.call_deferred()
+	_fit_bag_panel.call_deferred()
 	if _selection!=null:_position_details.call_deferred()
+
+func _toggle_compact() -> void:
+	_compact_equipment=not _compact_equipment
+	clear_inspection()
+	_fit_workspace()
+
+func _compact_page(page: String) -> void:
+	_compact_equipment=page!="pack"
+	set_status(page=="status")
+	clear_inspection()
+	_fit_workspace()
+
+func _fit_bag_panel() -> void:
+	if not is_inside_tree() or _bag_panel==null:return
+	var touch:=44/_pixel_scale()
+	for control in _pages.get_children():
+		if control is Button:
+			control.custom_minimum_size=Vector2.ONE*touch
+			control.add_theme_font_size_override("font_size",roundi(maxf(18,14/_pixel_scale())))
+		elif control is Label:control.add_theme_font_size_override("font_size",roundi(maxf(16,12/_pixel_scale())))
+	var book_width:=maxf(maxf(touch,_journal_caption.get_combined_minimum_size().x),minf(60,_bag_panel.size.x*.10))
+	var footer:=maxf(touch,32) if _page_count()>1 and not _compact else maxf(20,_capacity.get_combined_minimum_size().y)
+	var extent:=Vector2(maxf(0,_bag_panel.size.x-book_width-4),maxf(0,_bag_panel.size.y-footer))
+	_bag.position=Vector2.ZERO;_bag.size=extent;_bag._fit()
+	for button in _bag.slots:
+		button.custom_minimum_size=Vector2.ZERO
+		for badge in button.get_children():
+			if badge.has_meta("count_badge"):
+				var font_size:=roundi(maxf(15,12/_pixel_scale()))
+				badge.add_theme_font_size_override("font_size",font_size)
+				var extent_text: Vector2=badge.get_theme_font("font").get_string_size(badge.text,HORIZONTAL_ALIGNMENT_LEFT,-1,font_size)
+				badge.offset_left=-extent_text.x-8/_pixel_scale();badge.offset_right=-3/_pixel_scale()
+				badge.offset_top=-extent_text.y-3/_pixel_scale();badge.offset_bottom=-2/_pixel_scale()
+	_bag_footer.position=Vector2(0,extent.y);_bag_footer.size=Vector2(extent.x,footer)
+	_journal.size=Vector2(book_width,minf(320,extent.y*.86))
+	_journal.position=Vector2(extent.x+4,_bag.art_rect.get_center().y-_journal.size.y/2)
+	_journal_caption.position=Vector2(_journal.position.x,_journal.position.y+_journal.size.y)
+	_journal_caption.size=Vector2(book_width,_journal_caption.get_combined_minimum_size().y)
+
+func _pixel_scale() -> float:
+	var scale:=get_viewport().get_screen_transform().get_scale()
+	return maxf(.1,minf(scale.x,scale.y))
 
 func _build() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -953,10 +1118,10 @@ func _build() -> void:
 	add_child(shade)
 	content=MarginContainer.new()
 	content.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	for side in ["left","top","right","bottom"]:content.add_theme_constant_override("margin_"+side,12)
+	for side in ["left","top","right","bottom"]:content.add_theme_constant_override("margin_"+side,6)
 	add_child(content)
 	var column:=VBoxContainer.new()
-	column.add_theme_constant_override("separation",8)
+	column.add_theme_constant_override("separation",6)
 	content.add_child(column)
 	_header=HBoxContainer.new()
 	_header.add_theme_constant_override("separation",8)
@@ -976,19 +1141,24 @@ func _build() -> void:
 	_lantern_bar=ProgressBar.new();_lantern_bar.show_percentage=false;_lantern_bar.custom_minimum_size=Vector2(98,8)
 	light.add_child(_lantern_bar)
 	_light_note=_label("");_light_note.visible=false;light.add_child(_light_note)
-	_save=_button("Save & exit",Vector2(102,44));_save.pressed.connect(func():save_and_exit.emit());_header.add_child(_save)
-	_save.accessibility_name="Save and exit"
-	_header.add_child(_header_icon(JOURNAL_ICON,"Quest journal",func():open_quests.emit()))
-	_header.add_child(_header_icon(SETTINGS_ICON,"Settings",func():open_settings.emit()))
+	_menu=_button("Menu");_menu.accessibility_name="Game menu · Esc"
+	_menu.pressed.connect(func():open_menu.emit());_header.add_child(_menu)
 	_close=_header_icon(CLOSE_ICON,"Close pack",func():closed.emit());_header.add_child(_close)
+	_navigation_style(_close,false)
+	_hero_summary=_wrapped("",17,FieldKit.MUTED);column.add_child(_hero_summary)
+	_compact_tabs=HBoxContainer.new();column.add_child(_compact_tabs)
+	for page: String in ["pack","equipment","status"]:
+		var button:=_button(page.capitalize());button.toggle_mode=true;button.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+		button.pressed.connect(_compact_page.bind(page));_compact_tabs.add_child(button);_compact_buttons[page]=button
+	_compact_switch=_compact_buttons.equipment  # compatibility for review helpers
 	_workspace=HBoxContainer.new();_workspace.size_flags_vertical=Control.SIZE_EXPAND_FILL
 	_workspace.add_theme_constant_override("separation",12);column.add_child(_workspace)
-	_hero_row=VBoxContainer.new();_hero_row.add_theme_constant_override("separation",4);_workspace.add_child(_hero_row)
+	var rail:=VBoxContainer.new();rail.add_theme_constant_override("separation",4);_workspace.add_child(rail)
+	_hero_row=VBoxContainer.new();_hero_row.add_theme_constant_override("separation",4);rail.add_child(_hero_row)
 	_hero_panel=VBoxContainer.new();_hero_panel.size_flags_horizontal=Control.SIZE_EXPAND_FILL
-	_hero_panel.custom_minimum_size.x=170
+	_hero_panel.size_flags_stretch_ratio=.70
 	_hero_panel.add_theme_constant_override("separation",4);_workspace.add_child(_hero_panel)
 	_hero_panel.set_drag_forwarding(Callable(),_can_drop_on_selected,_drop_on_selected)
-	_hero_summary=_wrapped("",17,FieldKit.MUTED);_hero_panel.add_child(_hero_summary)
 	var tabs:=HBoxContainer.new();_hero_panel.add_child(tabs)
 	_equip_tab=_button("Equipment");_equip_tab.toggle_mode=true;_equip_tab.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 	_equip_tab.add_theme_font_size_override("font_size",16)
@@ -1004,20 +1174,20 @@ func _build() -> void:
 	_equipment.clip_contents=true
 	_equipment.resized.connect(_fit_equipment)
 	_equipment.set_drag_forwarding(Callable(),_can_drop_on_selected,_drop_on_selected)
-	var roll:=_icon(ROLL,Vector2.ZERO);roll.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);_equipment.add_child(roll)
+	var roll:=_icon(BODY_SILHOUETTE,Vector2.ZERO);_equipment.add_child(roll)
 	_roll_image=roll
-	roll.stretch_mode=TextureRect.STRETCH_SCALE
-	roll.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
+	roll.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	roll.texture_filter=CanvasItem.TEXTURE_FILTER_LINEAR
 	_roll_contents=Control.new()
-	# Cloth interior in the 768x512 artwork; straps and shadow are not slots.
+	# Legacy review alias: now the body diagram's equipment canvas.
+	_roll_contents.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_roll_contents.clip_contents=true
 	_roll_contents.mouse_filter=Control.MOUSE_FILTER_PASS
 	_roll_contents.set_drag_forwarding(Callable(),_can_drop_on_selected,_drop_on_selected)
 	_equipment.add_child(_roll_contents)
-	_equipment_slots=GridContainer.new();_equipment_slots.columns=2
+	_equipment_slots=Control.new()
 	_equipment_slots.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	_equipment_slots.add_theme_constant_override("h_separation",6)
-	_equipment_slots.add_theme_constant_override("v_separation",4)
+	_equipment_slots.set_drag_forwarding(Callable(),_can_drop_on_selected,_drop_on_selected)
 	_roll_contents.add_child(_equipment_slots)
 	_status_scroll=ScrollContainer.new();_status_scroll.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_status_scroll.set_drag_forwarding(Callable(),_can_drop_on_selected,_drop_on_selected)
@@ -1026,24 +1196,37 @@ func _build() -> void:
 	_status_content.add_theme_constant_override("separation",8);_status_scroll.add_child(_status_content)
 	_inventory_scroll=_status_scroll;_injuries=_status_content
 	var right:=Control.new();right.size_flags_horizontal=Control.SIZE_EXPAND_FILL;right.size_flags_stretch_ratio=1.3;_workspace.add_child(right)
-	right.custom_minimum_size.x=230
-	_bag=BagView.new();_bag.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);right.add_child(_bag)
-	_bag.offset_bottom=-44;_bag.pocket_focus=true;_bag.clip_contents=true
+	_bag_panel=right;right.resized.connect(_fit_bag_panel)
+	_bag=BagView.new();right.add_child(_bag)
+	_bag.fitted_art=true;_bag.pocket_focus=false;_bag.clip_contents=true
 	_bag.mouse_filter=Control.MOUSE_FILTER_STOP
 	_bag.set_drag_forwarding(Callable(),_can_drop_on_bag,_drop_on_bag)
-	_bag.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
-	var lower:=HBoxContainer.new();lower.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE);lower.offset_top=-44
+	_bag.texture_filter=CanvasItem.TEXTURE_FILTER_LINEAR
+	_journal=_button("");_journal.accessibility_name="Quest journal";_journal.tooltip_text="Quest journal"
+	for state in ["normal","pressed","disabled"]:_journal.add_theme_stylebox_override(state,StyleBoxEmpty.new())
+	_journal.add_theme_stylebox_override("hover",FieldKit.plate(Color(.3,.24,.13,.14),FieldKit.AMBER,1))
+	_journal.pressed.connect(func():open_quests.emit());right.add_child(_journal)
+	var atlas:=AtlasTexture.new();atlas.atlas=JOURNAL_SPINE
+	# Opaque source bounds (>20% alpha); exclude the generator's faint halo.
+	# Normalized registration survives texture import size limits.
+	atlas.region=Rect2(JOURNAL_SPINE.get_size()*Vector2(325.0/887,51.0/1774),JOURNAL_SPINE.get_size()*Vector2(235.0/887,1689.0/1774))
+	var spine:=_icon(atlas,Vector2.ZERO);spine.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);_journal.add_child(spine)
+	_journal_caption=_label("Journal",11,FieldKit.MUTED);_journal_caption.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER;right.add_child(_journal_caption)
+	var lower:=HBoxContainer.new();_bag_footer=lower
 	lower.add_theme_constant_override("separation",8);right.add_child(lower)
 	_capacity=_label("",17);_capacity.size_flags_horizontal=Control.SIZE_EXPAND_FILL;_capacity.size_flags_vertical=Control.SIZE_SHRINK_CENTER;lower.add_child(_capacity)
 	_pages=HBoxContainer.new();lower.add_child(_pages)
 	_details=PanelContainer.new();_details.visible=false
-	_details.add_theme_stylebox_override("panel",FieldKit.Brass.panel(8))
+	var brief_frame:=FieldKit.Brass.panel(8);brief_frame.modulate_color.a=1
+	_details.add_theme_stylebox_override("panel",brief_frame)
 	add_child(_details)
 	_details.mouse_exited.connect(_leave_preview)
 	_detail_column=VBoxContainer.new();_detail_column.add_theme_constant_override("separation",8);_details.add_child(_detail_column)
 	var detail_header:=HBoxContainer.new();_detail_column.add_child(detail_header)
 	_detail_title=_wrapped("",20);_detail_title.size_flags_vertical=Control.SIZE_SHRINK_CENTER;detail_header.add_child(_detail_title)
-	detail_header.add_child(_header_icon(CLOSE_ICON,"Close item details",clear_inspection))
+	_detail_close=_header_icon(CLOSE_ICON,"Close item details",clear_inspection);detail_header.add_child(_detail_close)
+	_navigation_style(_detail_close,false)
+	_detail_recipient=_label("",14);_detail_column.add_child(_detail_recipient)
 	_detail_stats=_wrapped("",20,FieldKit.AMBER);_detail_column.add_child(_detail_stats)
 	_detail_comparison=_wrapped("",14,FieldKit.MUTED);_detail_column.add_child(_detail_comparison)
 	_detail_scroll=ScrollContainer.new();_detail_scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;_detail_scroll.follow_focus=true
@@ -1051,5 +1234,6 @@ func _build() -> void:
 	_detail_text=VBoxContainer.new();_detail_text.size_flags_horizontal=Control.SIZE_EXPAND_FILL;_detail_text.add_theme_constant_override("separation",6);_detail_scroll.add_child(_detail_text)
 	_detail_actions=HBoxContainer.new();_detail_actions.add_theme_constant_override("separation",6);_detail_column.add_child(_detail_actions)
 	content.resized.connect(_fit_workspace)
+	_workspace.resized.connect(_fit_workspace)
 	_fit_workspace.call_deferred()
 	_list=self

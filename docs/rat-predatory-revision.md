@@ -53,6 +53,9 @@ Projected left/right eye regions are checked in the rendered rat/great-rat
 images, catching the transparent-surface ordering issue that geometry-only
 checks missed. Headless geometry checks do not substitute for these renders.
 
+All 1,196 native checks pass, including against main with merged Field kit
+PR #291. Import/parse and gallery-link checks pass too.
+
 The existing enemy-model/fallback/board/stage, mine-life and animation-smoothing
 checks also cover the new live bindings. Results and captures remain local.
 Owner style acceptance and physical iPhone performance/comfort remain open.

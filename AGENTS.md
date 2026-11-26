@@ -69,6 +69,20 @@ Templates > Download and Install; already installed on the owner's PC).
   `build/local-creatures-predatory-v3/inspector.html`. Native 1,196 checks
   include both rendered eyes at four sizes; owner/physical iPhone review remains.
 
+- `docs/field-kit-silhouette-and-menu.md` – #290's fully fitted twelve-pocket
+  pack, generic equipment silhouette and clickable book spine in
+  `art/ui/field-kit-v3`. `KitBag.fitted_art` is Pack-only; trade keeps its
+  existing painting/registration. Small phones have stable Pack/Equipment/Status
+  tabs; selected tabs/portraits get a thicker brass edge. Use actual screen-transform pixels for touch
+  sizing, including inspection and confirmation actions. Menu/Escape opens
+  `PauseMenu`, pauses the tree, and uses the
+  existing Settings/save authority; Settings processes above it while paused.
+  Preserve nested Back, contextual briefs, selected recipients and the guided
+  tutorial knife drop. Drop now requires a separate permanent confirmation;
+  Escape/Keep item cancel, and the tutorial spotlight allows both actions via
+  `spotlight_action_group`. Review: `build/local-field-kit-v3/inspector.html`.
+  Native matrix/gesture/tutorial checks pass; owner/physical iPhone review remains.
+
 - `docs/rat-bat-refinement.md` – #292's six adversarial-review fixes in
   `art/enemies/creatures-refined-v2`: rounded CC0 rat/great-rat derivatives,
   articulated 13-bone cave bat, fitted Old Whisker and separate fur/skin/wing

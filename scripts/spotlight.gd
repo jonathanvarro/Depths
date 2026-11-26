@@ -22,6 +22,10 @@ func _process(_delta: float) -> void:
 	if not show:
 		return
 	var hole := target.get_global_rect().grow(8.0)
+	# A confirmation has two legitimate actions. The guided knife drop still
+	# cannot be skipped, but Keep item must remain available beside Confirm.
+	if target.get_meta("spotlight_action_group",false):
+		hole=target.get_parent().get_global_rect().grow(8.0)
 	if hole != _hole:
 		_hole = hole
 		queue_redraw()
