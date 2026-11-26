@@ -1474,7 +1474,7 @@ func _start_combat(cell: Vector2i, types: Array[EnemyType] = []) -> void:
 	_party.locked = not on_map  # on the map, the pad still steps and turns
 	_touch_pad.visible = on_map
 	if on_map:
-		_wait_button.visible = false  # Wait is on the fight panel
+		_wait_button.visible = false  # no waiting in a fight: Brace instead (2026-11-25)
 	_pack_button.disabled = true
 	if _music:
 		_music.play("combat")

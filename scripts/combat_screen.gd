@@ -1229,7 +1229,9 @@ func _build() -> void:
 	rows.add_child(_field_buttons)
 	# No Retreat on the map (owner 2026-10-31): you get away by moving - the
 	# stairs, a door shut behind you, or out of their sight.
-	for spec in [["Strike", "strike"], ["Shoot", "shoot"], ["Brace", "brace"], ["Cast", "cast"], ["Item", ""], ["Wait", "wait"]]:
+	# No Wait in a fight (owner, 2026-11-25: it adds little next to Brace);
+	# Wait stays on the exploration pad, where a beat passes.
+	for spec in [["Strike", "strike"], ["Shoot", "shoot"], ["Brace", "brace"], ["Cast", "cast"], ["Item", ""]]:
 		var button := _button(spec[0])
 		var kind: String = spec[1]
 		if kind == "cast":

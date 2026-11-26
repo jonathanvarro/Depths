@@ -180,7 +180,8 @@ func _initialize() -> void:
 		if main._combat.awaiting_field_action:
 			break
 		await process_frame
-	check("the party's one action: Strike, Shoot, Brace, Item, Wait, Retreat", main._combat.awaiting_field_action and main._combat._field_buttons.visible and main._touch_pad.visible)
+	check("the party's one action: Strike, Shoot, Brace, Item", main._combat.awaiting_field_action and main._combat._field_buttons.visible and main._touch_pad.visible)
+	check("no Wait in a fight (Brace instead; 2026-11-25), and the pad's Wait is hidden", not main._combat._field_buttons.get_children().any(func(b): return b.text == "Wait") and not main._wait_button.visible)
 	if dir != "":
 		for i in 20:
 			await process_frame
