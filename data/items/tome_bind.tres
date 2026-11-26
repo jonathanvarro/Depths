@@ -7,7 +7,7 @@
 script = ExtResource("1")
 icon = ExtResource("icon")
 display_name = "Tome: Bind"
-description = "A chained little book, its pages ruled with knots. A Mage who reads it learns Bind: the chosen foe is held in place for two turns."
+description = "A chained little book, its pages ruled with knots. An Acolyte who reads it learns Bind: the chosen foe is held in place for two turns."
 effect = 10
 use_time = 5
 usable_in_combat = false

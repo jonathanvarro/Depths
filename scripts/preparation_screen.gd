@@ -123,7 +123,7 @@ func show_for(expedition_number: int, party) -> void:
 			# The portrait already shows identity, health, strain and condition icons.
 			# Only lasting injury care needs a separate preparation note.
 			if not hero.hindering_injuries().is_empty():
-				var care := _label("Needs the nurse", BODY, 17, AMBER)
+				var care := _label("Needs the priest", BODY, 17, AMBER)
 				care.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 				care.custom_minimum_size = Vector2(100, 0)
 				hero_column.add_child(care)

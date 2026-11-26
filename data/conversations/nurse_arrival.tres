@@ -20,6 +20,6 @@ text = "\"I can dress what the mine does to you - the deep cuts, the bad legs. S
 
 [resource]
 script = ExtResource("4_a66w6")
-speaker = "The nurse"
+speaker = "The priest"
 portrait = ExtResource("3_0oeqo")
 pages = Array[ExtResource("1_ich81")]([SubResource("Resource_3a3f2"), SubResource("Resource_3n33b")])

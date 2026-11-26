@@ -7,7 +7,7 @@
 script = ExtResource("1")
 icon = ExtResource("icon")
 display_name = "Oak staff"
-description = "A Mage's walking staff. A plain blow up close, and a Mage's prayers grow with it."
+description = "An Acolyte's walking staff. A plain blow up close, and an Acolyte's prayers grow with it."
 attack_min = 1
 attack_max = 3
 accuracy_bonus = 0.0

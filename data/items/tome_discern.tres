@@ -7,7 +7,7 @@
 script = ExtResource("1")
 icon = ExtResource("icon")
 display_name = "Tome: Discern"
-description = "A reliquary-keeper's prayers for knowing a thing's true nature. A Mage who reads it learns Discern: one cast reveals what every found piece the party holds is hiding."
+description = "A reliquary-keeper's prayers for knowing a thing's true nature. An Acolyte who reads it learns Discern: one cast reveals what every found piece the party holds is hiding."
 effect = 10
 use_time = 5
 usable_in_combat = false

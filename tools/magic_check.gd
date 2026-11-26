@@ -97,7 +97,7 @@ func _initialize() -> void:
 	# Tomes and candles.
 	var mage_free = _party(["corin"])
 	mage_free.supplies.add(_item("tome_bind"))
-	check("no Mage: a tome can't be read", mage_free.cannot_use_reason(_item("tome_bind")) == "Needs a Mage")
+	check("no Acolyte: a tome can't be read", mage_free.cannot_use_reason(_item("tome_bind")) == "Needs an Acolyte")
 	party.supplies.add(_item("tome_watch"), 2)
 	check("a Mage reads a tome and learns its prayer", party.use_item(_item("tome_watch")) != "" and "watch" in Spells.known(alwen))
 	check("...a second copy: already known", party.cannot_use_reason(_item("tome_watch")) == "Already known")

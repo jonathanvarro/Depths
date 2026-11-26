@@ -151,7 +151,7 @@ func _initialize() -> void:
 	await _open("rest")
 	var tent_buttons: Array = main._camp._body.find_children("*", "Button", true, false)
 	check("the tent has cot/chest targets and header Back (#271)", tent_buttons.size() == 2 and tent_buttons.all(func(b): return b.has_meta("tent_target")) and main._camp._back.is_visible_in_tree())
-	check("rest says injuries need the nurse (its tooltip)", tent_buttons[0].tooltip_text.contains("Injuries need the nurse"))
+	check("rest says injuries need the priest (its tooltip)", tent_buttons[0].tooltip_text.contains("Injuries need the priest"))
 	var seed_before: int = main._site_seed
 	check("the tent fits without scrolling", await _fits())
 	check("a Rest button, without a day count (owner, 2026-10-25)", _press(main._camp, "Rest"))

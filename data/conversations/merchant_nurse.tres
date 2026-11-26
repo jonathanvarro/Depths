@@ -10,14 +10,14 @@ script = ExtResource("2_22qip")
 label = "Where does it grow?"
 next = 1
 said_by = {
-"Corin": "\"A nurse would be worth a walk. Where does it grow?\"",
+"Corin": "\"A priest would be worth a walk. Where does it grow?\"",
 "Mara": "\"Bitter moss. Where does it grow?\"",
 "Sister Alwen": "\"I know the stuff. Where does it grow down here?\""
 }
 
 [sub_resource type="Resource" id="Resource_y3lla"]
 script = ExtResource("1_i8cd2")
-text = "The merchant watches your party limp past his stall. \"You need a proper nurse up here, not my bandages. I know one - she'll come with my next wagon. But she won't set foot in a camp without bitter moss for her salves, and I can't get it.\""
+text = "The merchant watches your party limp past his stall. \"You need a proper priest up here, not my bandages. I know one - she'll come with my next wagon. But she won't set foot in a camp without bitter moss for her salves, and I can't get it.\""
 replies = Array[ExtResource("2_22qip")]([SubResource("Resource_bbytc")])
 
 [sub_resource type="Resource" id="Resource_nblyd"]

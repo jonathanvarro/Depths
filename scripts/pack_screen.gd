@@ -8,6 +8,7 @@ signal open_menu
 signal open_quests
 signal used(message: String)
 
+const Classes := preload("res://scripts/classes.gd")
 const GearModel := preload("res://scripts/gear_model.gd")
 const Sounds := preload("res://scripts/sounds.gd")
 const Supplies := preload("res://scripts/supplies.gd")
@@ -293,7 +294,7 @@ func _refresh_heroes() -> void:
 	if _selected_hero:
 		var h:=_selected_hero
 		var state: String=StrainRules.NAMES[h.strain_state()] if h.is_alive() else ("Unconscious" if h.is_unconscious() else "Fallen")
-		_hero_summary.text="%s · %s · %d/%d · %s" % [h.display_name,h.role,h.health,h.effective_max_health(),state]
+		_hero_summary.text="%s · %s · %d/%d · %s" % [h.display_name,Classes.label(h.role),h.health,h.effective_max_health(),state]
 	else:
 		_hero_summary.text=""
 	set_status(_status)
@@ -686,7 +687,7 @@ func _refresh_details() -> void:
 	if _from_slot!="":
 		if item is Equipment:
 			if item.slot not in ["back","trinket"] and GearModel.known(item).effect:_detail_text.add_child(_wrapped(GearModel.known(item).effect.effects_text(),17))
-			if item.curse:_detail_text.add_child(_wrapped("Cursed: "+item.curse.effects_text()+". Holy water or the nurse can lift it.",17))
+			if item.curse:_detail_text.add_child(_wrapped("Cursed: "+item.curse.effects_text()+". Holy water or the priest can lift it.",17))
 			for line in GearModel.card_lines(item):_detail_text.add_child(_wrapped(line,17))  # mastery and growth (#192)
 		_action("Take off","unequip",_unequip_reason())
 		_identify_action(item)
@@ -766,7 +767,7 @@ func _equip_reason(slot: String,hero: Companion = null,item: Equipment = null) -
 	if hero==null:hero=_selected_hero
 	if hero==null or hero not in _party.members or not hero.is_alive():return "Needs a conscious hero"
 	var held:Equipment=hero.get(slot)
-	if held and held.curse:return "Cursed · holy water or the nurse can lift it"
+	if held and held.curse:return "Cursed · holy water or the priest can lift it"
 	if item:return load("res://scripts/classes.gd").refuses(hero,item)  # #179
 	return ""
 
@@ -774,7 +775,7 @@ func _unequip_reason() -> String:
 	if _selected_hero==null or not _selected_hero.is_alive():return "Needs a conscious hero"
 	var held:Equipment=_selected_hero.get(_from_slot)
 	if held==null:return "Nothing worn"
-	if held.curse:return "Cursed · holy water or the nurse can lift it"
+	if held.curse:return "Cursed · holy water or the priest can lift it"
 	if _from_slot=="weapon" and _selected_hero.founder:return "Replace this weapon from the pack"
 	return ""
 

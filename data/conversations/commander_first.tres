@@ -39,7 +39,7 @@ flag = "asked_what"
 said_by = {
 "Corin": "\"Find what? We were told to march, never why.\"",
 "Mara": "\"Find what? I led them down there and nobody told me what for.\"",
-"Sister Alwen": "\"Find what? They sent a nurse into a mine and never said why.\""
+"Sister Alwen": "\"Find what? They sent a priest into a mine and never said why.\""
 }
 
 [sub_resource type="Resource" id="Resource_narr1"]

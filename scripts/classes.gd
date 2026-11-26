@@ -13,6 +13,9 @@ extends RefCounted
 ## Every hero has their class's standard skills plus one personal trait.
 
 const NAMES := ["Melee", "Scout", "Mage", "Fixer"]
+## What players see (owner, 2026-11-25): the ids above stay the game's
+## (saves, data, rules); only these names are shown.
+const LABELS := {"Melee": "Soldier", "Scout": "Scout", "Mage": "Acolyte", "Fixer": "Sapper"}
 ## Older roles, for saves and old recruits.
 const OLD := {"Warden": "Melee", "Brawler": "Melee", "Rogue": "Scout", "Healer": "Mage"}
 ## Skills a class always has (Companion.has_talent counts them).
@@ -83,3 +86,8 @@ static func refuses(hero: Companion, item: Equipment) -> String:
 	if kind != "" and kind not in allowed.get(item.slot, [kind]):
 		return "A %s can't wear %s %s" % [of(hero.role).to_lower(), kind, "armour" if item.slot == "body" else ("a " + kind)]
 	return ""
+
+
+## The name players see for `role` (an old role reads as its class).
+static func label(role: String) -> String:
+	return LABELS.get(of(role), role)

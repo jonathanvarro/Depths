@@ -370,7 +370,7 @@ func cannot_use_reason(item: SupplyItem, in_combat := false, recipient: Companio
 		var reader := _spell_reader(item, recipient)
 		if reader == null:
 			if not living_members().any(func(m: Companion): return Spells.is_caster(m)):
-				return "Needs a Mage"
+				return "Needs an Acolyte"
 			if item.effect == SupplyItem.Effect.TOME:
 				return "Already known"
 			return "Casts are full"

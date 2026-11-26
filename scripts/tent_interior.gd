@@ -5,7 +5,7 @@ signal store_requested
 const ART := preload("res://art/camp/player-tent-v1/interior.png")
 const HEADING := preload("res://art/fonts/heading-cinzel.tres")
 const TARGETS := {
-	"rest": {"rect":Rect2(.035,.385,.325,.58),"label":Vector2(.20,.78),"text":"Rest", "tip":"Sleep until morning: heals and calms. Injuries need the nurse. The mine shifts overnight.", "outline":[Vector2(.04,.60),Vector2(.19,.40),Vector2(.35,.41),Vector2(.35,.65),Vector2(.28,.94),Vector2(.055,.94)]},
+	"rest": {"rect":Rect2(.035,.385,.325,.58),"label":Vector2(.20,.78),"text":"Rest", "tip":"Sleep until morning: heals and calms. Injuries need the priest. The mine shifts overnight.", "outline":[Vector2(.04,.60),Vector2(.19,.40),Vector2(.35,.41),Vector2(.35,.65),Vector2(.28,.94),Vector2(.055,.94)]},
 	"store": {"rect":Rect2(.477,.39,.217,.31),"label":Vector2(.58,.59),"text":"Store", "tip":"Store and take items and gold: they stay safe at camp.", "outline":[Vector2(.48,.45),Vector2(.51,.40),Vector2(.68,.41),Vector2(.69,.47),Vector2(.68,.68),Vector2(.485,.66)]},
 }
 var _picture := Rect2()

@@ -6,7 +6,7 @@
   "sites": [
     {
       "id": "treatment",
-      "label": "Nurse",
+      "label": "Priest",
       "npc": "nurse",
       "bounds": [
         184,

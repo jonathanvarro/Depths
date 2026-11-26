@@ -1243,7 +1243,7 @@ func _build() -> void:
 	_field_buttons.get_child(0).tooltip_text = "Your front row strikes the enemy you face. Turning is free."
 	_field_buttons.get_child(1).tooltip_text = "Your back row's reach attacks the chosen enemy, along the line you face."
 	_field_buttons.get_child(2).tooltip_text = "Everyone defends: heavy blows are turned aside."
-	_field_buttons.get_child(3).tooltip_text = "Your Mage prays: a few casts each trip."
+	_field_buttons.get_child(3).tooltip_text = "Your Acolyte prays: a few casts each trip."
 	_item_buttons = HBoxContainer.new()
 	_item_buttons.add_theme_constant_override("separation", 8)
 	_item_buttons.visible = false

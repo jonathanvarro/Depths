@@ -2,6 +2,7 @@ extends Control
 ## Choosing a starting hero (#95): three main heroes side by side, each with
 ## a portrait, role, one-line backstory and their special trait. The one
 ## chosen wakes in the cave; the others don't exist in that game.
+const Classes := preload("res://scripts/classes.gd")
 const UiTheme := preload("res://scripts/ui_theme.gd")
 
 signal chosen(path: String)
@@ -99,7 +100,7 @@ func _card(path: String) -> Control:
 	face.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	details.add_child(face)
 	details.add_child(_label(hero.display_name, HEADING, 24, TEXT))
-	details.add_child(_label(hero.role, BODY, 18, AMBER))
+	details.add_child(_label(Classes.label(hero.role), BODY, 18, AMBER))
 	var story := _label(hero.backstory, BODY, 16, MUTED)
 	story.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	details.add_child(story)

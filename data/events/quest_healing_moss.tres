@@ -10,7 +10,7 @@
 
 [sub_resource type="Resource" id="Resource_hwnc0"]
 script = ExtResource("2_x3kjq")
-text = "You scrape a dripping handful into a cloth and wrap it tight. The merchant will send for his nurse."
+text = "You scrape a dripping handful into a cloth and wrap it tight. The merchant will send for the priest he knows."
 quest = "healing_moss"
 quest_flag = "have_moss"
 

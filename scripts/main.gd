@@ -2477,7 +2477,7 @@ func _end_expedition(ending: int) -> void:
 	_party.locked = true  # after closing overlays, which unlock on close
 	var notes := {
 		Expedition.Ending.RETURNED: "You stagger out into the daylight, alone." if _in_opening else "You climb out into the daylight.",
-		Expedition.Ending.WIPED: "The party fell on floor %d, and everything they carried is lost. %s at camp, badly hurt.%s" % [_depth, _who_wakes(), " The others lie where they fell: a later trip can carry them home to the nurse." if _party_state.members.any(func(h): return not h.main_hero) else ""],
+		Expedition.Ending.WIPED: "The party fell on floor %d, and everything they carried is lost. %s at camp, badly hurt.%s" % [_depth, _who_wakes(), " The others lie where they fell: a later trip can carry them home to the priest." if _party_state.members.any(func(h): return not h.main_hero) else ""],
 		Expedition.Ending.REACHED_BOTTOM: "You stood where the others fell, and lived to climb back.",
 	}
 	if ending == Expedition.Ending.WIPED:
@@ -2772,7 +2772,7 @@ func _pick_up_body(cell: Vector2i) -> bool:
 	var prop := _level.get_node_or_null("Body_%d_%d" % [cell.x, cell.y])
 	if prop:
 		prop.queue_free()
-	_show_message("You find %s where they fell, and wrap them in a cloak to carry home. The nurse may yet bring them back." % name)
+	_show_message("You find %s where they fell, and wrap them in a cloak to carry home. The priest may yet bring them back." % name)
 	_say("ally_down", true, false, null, {"fallen": name})
 	_save_now()
 	return true
@@ -3814,9 +3814,9 @@ func _on_party_state_changed(announce := true) -> void:
 		if not hurt.is_empty():
 			_tip("injury", "%s has a %s. %s %s their card to read it again." % [member.display_name, hurt[0].display_name.to_lower(), hurt[0].description, "Tap" if _is_touch() else "Click"])
 		if member.is_cursed() or member.cursed_gear():
-			_tip("cursed", "Cursed: %s can't take it off. Holy water lifts a curse, or the nurse at camp can, for %dg." % [member.display_name, CampState.LIFT_BANE_PRICE])
+			_tip("cursed", "Cursed: %s can't take it off. Holy water lifts a curse, or the priest at camp can, for %dg." % [member.display_name, CampState.LIFT_BANE_PRICE])
 		if member.boons.any(func(b): return b["boon"].bane):
-			_tip("bane", "A bane weighs on %s for a few fights; their card shows it. Holy water or the camp's nurse lifts it." % member.display_name)
+			_tip("bane", "A bane weighs on %s for a few fights; their card shows it. Holy water or the camp's priest lifts it." % member.display_name)
 		elif not member.boons.is_empty():
 			_tip("boon", "A blessing on %s for a few fights; their card shows it. It fades as the fights go by." % member.display_name)
 	# No random bolting during the opening: panic shows, but the controls
@@ -5203,7 +5203,7 @@ func _on_party_blocked(cell: Vector2i) -> void:
 		# Or force it (#236): it can be done, but it costs nerve and skin.
 		_ask("Something chokes the passage. Force a way through by hand? (%d time; it will fray everyone's nerves)" % (CLEAR_PASSAGE_TIME * 2), _force_passage.bind(cell), Callable(), ["Force it", "Leave it"])
 		return
-	_show_message(environment_theme.blocked_message + ("" if _depth == FORTRESS_DEPTH else " A spade or a pick would clear it - or a Fixer."))
+	_show_message(environment_theme.blocked_message + ("" if _depth == FORTRESS_DEPTH else " A spade or a pick would clear it - or a Sapper."))
 
 
 ## Forcing a blocked passage with no tool (#236): slow, bloody, unnerving.

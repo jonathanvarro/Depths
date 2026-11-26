@@ -213,7 +213,7 @@ func _hero_row(row: Dictionary, quote := "") -> Control:
 	var none := Color(0, 0, 0, 0)
 	if not row["back"]:
 		face.modulate = Color(0.4, 0.3, 0.3)
-		_chip(chips, Glyphs.STATUS["down"], "Did not come back", false, none, "%s lies where they fell, in the mine. Find them on a later trip and carry them home: the nurse can bring them round." % hero.display_name)
+		_chip(chips, Glyphs.STATUS["down"], "Did not come back", false, none, "%s lies where they fell, in the mine. Find them on a later trip and carry them home: the priest can bring them round." % hero.display_name)
 		return line
 	var change: int = row["health"] - row["health_from"]
 	var cap: int = hero.effective_max_health()
@@ -247,7 +247,7 @@ static func injury_tip(injury: Injury) -> String:
 	if injury.carry_penalty > 0:
 		costs.append("%d pack space" % -injury.carry_penalty)
 	var nights: String = "a night" if injury.recovery_days <= 1 else "%d nights" % injury.recovery_days
-	return "%s: %s until treated. The nurse heals it in %s." % [injury.display_name, ", ".join(costs) if not costs.is_empty() else "no lasting cost", nights]
+	return "%s: %s until treated. The priest heals it in %s." % [injury.display_name, ", ".join(costs) if not costs.is_empty() else "no lasting cost", nights]
 
 
 ## An icon and a number: green-edged for gains, red for losses.

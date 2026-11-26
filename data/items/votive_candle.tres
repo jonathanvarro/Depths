@@ -7,7 +7,7 @@
 script = ExtResource("1")
 icon = ExtResource("icon")
 display_name = "Votive candle"
-description = "A stub of blessed tallow from the camp's shrine. A Mage who prays by it, outside a fight, gets one cast back."
+description = "A stub of blessed tallow from the camp's shrine. An Acolyte who prays by it, outside a fight, gets one cast back."
 effect = 11
 amount = 1
 use_time = 3

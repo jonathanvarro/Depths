@@ -14,6 +14,7 @@ signal save_and_exit
 signal open_settings
 signal open_pack  # check items and equipment at camp (owner playtest, #229)
 
+const Classes := preload("res://scripts/classes.gd")
 const DIR := "res://art/camp/highres-v4/"
 const COHESIVE := "res://art/camp/cohesive-v5/"
 const Brass := preload("res://art/ui/reliquary-brass-v1/style.gd")
@@ -808,7 +809,7 @@ func _nurse() -> void:
 			var lifted: Boon = _camp.lift_bane(_party, hero)
 			_refresh_activity()
 			if lifted:
-				_text("The nurse mutters over %s and burns something bitter. %s lifts." % [hero.display_name, lifted.display_name], AMBER))
+				_text("The priest mutters over %s and burns something bitter. %s lifts." % [hero.display_name, lifted.display_name], AMBER))
 		_body.add_child(lift)
 	for hero: Companion in _party.living_members():
 		if _camp.is_recovering(hero):
@@ -1020,7 +1021,7 @@ func _place(hero: Companion, row: String) -> Control:
 		var hp := _clipped("%d/%d" % [hero.health, hero.effective_max_health()], 8, MUTED)
 		hp.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		box.add_child(hp)
-		tile.tooltip_text = "%s, %s, %s row%s" % [hero.display_name, hero.role, row, "" if hero.founder else ". Pick to move or dismiss"]
+		tile.tooltip_text = "%s, %s, %s row%s" % [hero.display_name, Classes.label(hero.role), row, "" if hero.founder else ". Pick to move or dismiss"]
 	else:
 		var label := _label("Open" if open else "", BODY, 9, MUTED)
 		label.custom_minimum_size = Vector2(0, 54)
@@ -1141,7 +1142,7 @@ func _recruit_card(recruit: Companion, full: bool) -> Control:
 Strength: %s
 Weakness: %s
 %d health · %s damage · %d%% to hit · speed %d · %s row" % [recruit.personality, Recruits.perk(recruit.role), recruit.strength, recruit.weakness, recruit.max_health, damage, roundi(recruit.accuracy * 100), recruit.initiative, recruit.row]
-	pick.accessibility_name = "Pick %s, %s" % [recruit.display_name, recruit.role]
+	pick.accessibility_name = "Pick %s, %s" % [recruit.display_name, Classes.label(recruit.role)]
 	pick.pressed.connect(func():
 		_picked_recruit = null if picked else recruit
 		_picked_member = null
@@ -1165,7 +1166,7 @@ Weakness: %s
 	who.add_theme_constant_override("separation", 0)
 	who.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	who.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	who.add_child(_clipped("%s · %s" % [recruit.display_name, recruit.role], 11, TEXT))
+	who.add_child(_clipped("%s · %s" % [recruit.display_name, Classes.label(recruit.role)], 11, TEXT))
 	who.add_child(_clipped("%d hp · %s dmg · %s" % [recruit.max_health, damage, Recruits.perk_name(recruit.role)], 9, MUTED))
 	var strengths := Array(recruit.strength.split("; ")).map(func(t: String): return t.get_slice(" (", 0))
 	who.add_child(_clipped("+ %s" % ", ".join(strengths), 9, AMBER))  # named: two (#180)
@@ -1226,7 +1227,7 @@ func _cave_path() -> void:
 	say.call("Going: %s" % ", ".join(PackedStringArray(going.map(func(h): return h.display_name))), AMBER)
 	var staying: Array = _party.living_members().filter(func(h): return h not in going)
 	if not staying.is_empty():
-		say.call("With the nurse: %s" % ", ".join(PackedStringArray(staying.map(func(h): return "%s (%s)" % [h.display_name, _nights(_camp.ready_on(h) - _camp.day)]))), MUTED)
+		say.call("With the priest: %s" % ", ".join(PackedStringArray(staying.map(func(h): return "%s (%s)" % [h.display_name, _nights(_camp.ready_on(h) - _camp.day)]))), MUTED)
 	# The quartermaster's issue (owner, 2026-11-22): topped up free on every
 	# return; a better one is paid for once, in gold and what the mine gives.
 	say.call("Quartermaster's issue, every trip: %s." % _camp.issue_text(), MUTED)

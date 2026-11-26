@@ -121,7 +121,7 @@ static func next_step(camp, id: String) -> String:
 			return "Someone is tapping behind the rubble. Get them out, or mark it for a crew."
 		"healing_moss":
 			if has_flag(camp, id, "have_moss"):
-				return "Bring the moss back to camp; the merchant will send for his nurse."
+				return "Bring the moss back to camp; the merchant will send for the priest he knows."
 			return "Gather bitter moss from the wet rock of the damp caverns, floor 2."
 		"iron_sample":
 			if has_flag(camp, id, "have_ore"):

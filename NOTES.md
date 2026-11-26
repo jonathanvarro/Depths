@@ -19,6 +19,11 @@ Format:
 - Next: integrate the fix and continue the separately isolated quartermaster character/interface (#296); its original portrait is saved in `build/quartermaster-checkout/art/camp/quartermaster-v1`.
 - Watch out: ALPHA=1 still triggers transparency sorting. Never force an entire detail surface above fur to expose eyes; claws on that surface then show through the body. Keep the rendered occlusion regression. Owner's unrelated camp/economy changes remain uncommitted in main and were not included here.
 
+## 2026-11-25 – Claude (class and nurse renames)
+- Did: owner chose new player-facing names. Classes show via `Classes.label()` / `LABELS`: Melee -> Soldier, Mage -> Acolyte, Fixer -> Sapper (Scout unchanged); ids, data `role` values, rules and saves keep the old names. The camp nurse is "the priest" in all player text (camp label, tips, results, conversations, quest text, item descriptions); ids like `nurse_arrival`, `nurse_met`, `merchant_nurse`, `_nurse()` and the "treatment" site stay. Sister Alwen's backstory now says field priest.
+- Next: the Sapper's perks (better prices, more treasure) could become sapper-like later (traps, charges); not changed.
+- Watch out: new player-facing text should use the new names; internal ids stay old.
+
 ## 2026-11-25 – Claude (Named packs in the journal; floor 1 variety)
 - Did: no message on a repeat named-pack kill. Journal Monsters page starts with "Named packs" by floor (`QuestLog._build_monsters`/`_draw_named`, `Tick` box): "Unknown" until seen (`CampState.elites_seen`, recorded when a pack is noticed), ticked once its hoard is taken (`elites_looted`). Floor 1 room events 13 -> 19: dart trap, hollow floor, cold camp, defiled shrine and strongbox now from floor 1, plus new `data/events/chest_ore_cart.tres` (derailed cart, rails-broken prop, floors 1-2). Checks in `tools/named_elites_check.gd`.
 - Next: owner decision on class display names (Soldier/Scout/Acolyte/Sapper, nurse as priest) - names only, keep internal ids.
