@@ -7,6 +7,11 @@ produce, what it replaces, and the conventions the game needs. ChatGPT
 produces the art and the layout designs; Claude does the live hookup (theme,
 dressing script, landmark builders, rules) afterwards.
 
+Since the owner's new area network (#300, 2026-11-25) the Damp Caves are the
+**first junction**: one way on to the Cavern, another to the Fungal Hollows.
+Both need their own exit art and signs; see `docs/area-production-briefs.md`
+(network pieces N1–N3) for that and for every other area.
+
 Priorities: **P1** is needed to swap the theme without anything looking out
 of place. **P2** makes the floor feel new. **P3** is optional, and needs the
 owner's go-ahead.

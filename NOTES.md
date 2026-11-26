@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-11-26 – Claude (area production briefs)
+- Did: owner asked for production lists for every area of the new network (#300/#301). `docs/area-production-briefs.md`: shared network pieces (exits per destination, exit signs, map glyphs, arrival cards, boss-lair threshold kit, ambience, network design) and per-area P1/P2/P3 lists for the Abandoned Mines, Damp Caves (junction), Cavern, Rest Area, Goblin Fortress (three exits), Throne Room, Jail, Execution Halls, Drowned Galleries, Black Reservoir, Fungal Hollows and Grove, including every live 2D leftover found by an inventory of dressing, props, features and enemies. The Damp Caves brief now points to it.
+- Next: ChatGPT production; Claude builds the area network and hooks art up.
+- Watch out: the network is design only; the game still travels by depth +1/-1.
+
 ## 2026-11-25 – ChatGPT (rat feet showing through body, #297)
 - Did: normal refined v2/v3 coat/skin/details/membrane shaders no longer write ALPHA, so they use real opaque depth. Removed v3's Details priority workaround. `set_opacity` selects explicitly preloaded/cached fade shader siblings only below full opacity and restores the exact solid shader at 1.0; materials retain their instances/parameters. No meshes, rigs, clips, light budgets, encounter visibility or gameplay changes.
 - Validation: 63 native occlusion/fade checks compare actual surface visibility against an opaque material reference over rat/great-rat idle/attack/hurt at front/oblique/side angles. Reconstructed old sorting leaks 3,790 body pixels; corrected masks match the opaque reference. All 1,196 native real-combat/phone checks pass, including visible eyes and grounded bat tags. Captures: `build/local-creature-opaque`; handoff: `docs/rat-predatory-revision.md`.
