@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="Script" path="res://art/dressing/damp-dressing-v1/appearance.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/dressing/damp-dressing-v1/goblin-stash-fresh.glb" id="goblin-stash-fresh"]
+[ext_resource type="PackedScene" path="res://art/dressing/damp-dressing-v1/goblin-stash-empty.glb" id="goblin-stash-empty"]
+
+[node name="DampDressing" type="Node3D"]
+script=ExtResource("script")
+states=PackedStringArray("fresh","empty")
+state="fresh"
+variant="damp"
+optional_glow=false
+metadata/asset_id="goblin-stash"
+metadata/mount="floor"
+
+[node name="Fresh" parent="." instance=ExtResource("goblin-stash-fresh")]
+metadata/appearance_state="fresh"
+
+[node name="Empty" parent="." instance=ExtResource("goblin-stash-empty")]
+metadata/appearance_state="empty"
+visible=false

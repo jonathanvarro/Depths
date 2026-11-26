@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="Script" path="res://art/dressing/damp-dressing-v1/appearance.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/dressing/damp-dressing-v1/split-barrel.glb" id="split-barrel"]
+
+[node name="DampDressing" type="Node3D"]
+script=ExtResource("script")
+states=PackedStringArray("static")
+state="static"
+variant="damp"
+optional_glow=false
+metadata/asset_id="split-barrel"
+metadata/mount="edge"
+
+[node name="Static" parent="." instance=ExtResource("split-barrel")]
+metadata/appearance_state="static"

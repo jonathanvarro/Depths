@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="Script" path="res://art/dressing/damp-dressing-v1/drip.gd" id="script"]
+[node name="Drip" type="Node3D"]
+script=ExtResource("script")
+metadata/asset_id="drip"
+metadata/mount="ceiling"

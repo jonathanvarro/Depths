@@ -74,8 +74,17 @@ Templates > Download and Install; already installed on the owner's PC).
   review/masters: `build/local-damp-passages-v1`. Follow its floor-apron contracts
   (onward supplies ground; return retains caller floor), −Z forward, ceiling
   cap tag and immediate set_state/static set_motion. Metadata is art guidance,
-  not world IDs. C–F/H/I art and concept approval remain outstanding. Preserve
-  fungal assets; no live game rules or numeric floor bindings changed.
+  not world IDs. C/D now adds `art/dressing/damp-dressing-v1`: 45 original
+  solid models, 21 dry mine counterparts, 29 old-id dispositions, fresh/resolved
+  stash/dead-lamp/Three Knocks scenes, still-safe drip/ripple and fungal exit-room
+  mushrooms/mold. +Z wall-front, roof origin and y=0 floor/edge mounts; don't
+  retain sprite-centre offsets. One opaque draw per selected GLB, 32–3064 tris;
+  effects use separate opaque water material. `state` closed/empty aliases and
+  set_state/set_searched remain; set_motion defaults still and reaches child
+  drips. Glow is opt-in mood only. Native 947 checks/106 captures pass; local
+  gallery/masters: `build/local-damp-dressing-v1`. E/F full landmark/event kits,
+  H sound and I concepts/approved models remain outstanding. Preserve fungal
+  assets; no live game rules, placements or numeric floor bindings changed.
 
 - #297 fixes refined-creature translucency: normal v2/v3 coat, skin, details
   and membrane shaders are fully opaque; only `set_opacity` below 1.0 selects

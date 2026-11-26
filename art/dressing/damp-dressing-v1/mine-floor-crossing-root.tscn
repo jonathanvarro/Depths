@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="Script" path="res://art/dressing/damp-dressing-v1/appearance.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/dressing/damp-dressing-v1/floor-crossing-root.glb" id="floor-crossing-root"]
+
+[node name="DampDressing" type="Node3D"]
+script=ExtResource("script")
+states=PackedStringArray("static")
+state="static"
+variant="mine"
+optional_glow=false
+metadata/asset_id="mine-floor-crossing-root"
+metadata/mount="floor"
+
+[node name="Static" parent="." instance=ExtResource("floor-crossing-root")]
+metadata/appearance_state="static"
