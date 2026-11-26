@@ -161,6 +161,28 @@ AGENTS.md). For the Damp Caves, please deliver:
    (`map.water`, `Galleries`), so say whether floor 2 reuses that.
 4. **Where the landmarks, the bitter-moss site (floor 2's quest) and the
    brood lair should tend to sit.**
+5. **Where the creatures live (section I)** — put them on the reference
+   sections, and say how the generator should place them:
+   - **Pale newts** in and beside water: flooded rooms, pool edges and the
+     sump. Mark the rooms where a fight can begin with them surfacing from the
+     water, and say whether deep water should hide them until the party is
+     close.
+   - **Blind crawlers** in narrow wet passages and dead ends, where a
+     front-row grab blocks the way. One per fight, usually with something
+     behind it.
+   - **Leech swarms** on wet walls and in still, shallow water. They're good
+     at bottlenecks the party must cross, and in fights that start in water.
+   - **The Drowned Mother's patrol:** a loop of rooms linked by water, with the
+     room where she rests (her starting point, kept away from the stairs) and
+     where her glow first shows. Named packs walk between rooms on the map
+     (`scripts/elites.gd`), so mark the loop on one section.
+   - **A proposed floor-2 encounter mix:** which groups to add or drop in
+     `ENCOUNTER_GROUPS[2]` (for example `[NEWT, NEWT]`, `[CRAWLER, RAT]`,
+     `[LEECHES, NEWT]`, `[CRAWLER, LEECHES, SPIDER]`), and how often the
+     new creatures appear compared with today's rats, spiders, bats, goblins,
+     beetles and trappers.
+   - **Ambient wildlife spots:** puddles where a newt slips by, and walls
+     where leeches cling, for `scripts/mine_life.gd`.
 
 ## H. Sound (P2)
 
