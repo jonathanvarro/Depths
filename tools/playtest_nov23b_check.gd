@@ -184,6 +184,25 @@ func _initialize() -> void:
 	# Old Whisker is a real fight now.
 	var Elites = load("res://scripts/elites.gd")
 	check("Old Whisker brings two great rats and two rats", Elites.types("whisker").size() == 4)
+	# 2026-11-24: the stash's gold spends at camp, pack first.
+	var purse_camp = load("res://scripts/camp_state.gd").new()
+	var purse_party = load("res://scripts/party_state.gd").new()
+	purse_party.add_member(load("res://data/companions/mara.tres"))
+	purse_party.supplies.gold = 1
+	purse_camp.stash.gold = 50
+	purse_camp.site_presence["supplies"] = true
+	purse_camp.merchant_unloading = false
+	var torch_item: SupplyItem = load("res://data/items/torch.tres")
+	var torch_price: int = purse_camp.price_for(purse_party, torch_item.price)
+	check("the merchant takes gold from the stash too", purse_camp.can_trade() and purse_camp.buy(purse_party, torch_item) and purse_party.supplies.gold == 0 and purse_camp.stash.gold == 51 - torch_price, [purse_party.supplies.gold, purse_camp.stash.gold, torch_price])
+	purse_camp.stash.gold = 0
+	check("...but not more than there is", not purse_camp.buy(purse_party, torch_item))
+	# Rook's still face matches his rig.
+	var rook: Companion = load("res://scripts/named_cast.gd").make(purse_camp, "rook")
+	check("Rook's picture by the fire is his own face", rook.portrait.resource_path == "res://art/portraits/fixer-v1/fixer-a/preview.png" and rook.portrait_set.resource_path.ends_with("fixer-a.tres"), rook.portrait.resource_path)
+	# The results explain an injury in numbers.
+	var tip: String = load("res://scripts/results_screen.gd").injury_tip(load("res://data/injuries/deep_wound.tres"))
+	check("a deep wound is explained in numbers on the results", tip.contains("-5 maximum health") and tip.contains("2 nights"), tip)
 	var clear: RoomEvent = main.DRIPPING_POOL_EVENT
 	var good := 0
 	var total := 0

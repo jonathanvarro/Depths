@@ -105,6 +105,9 @@ var recovering := {}
 var candidates: Array[Companion] = []
 ## The named cast who have come to camp (#180), by id.
 var named_met: Array[String] = []
+## Named elite packs whose gold hoard has been taken: they can come back,
+## but the hoard is won only once (owner, 2026-11-25).
+var elites_looted: Array[String] = []
 ## Companions whose bodies the party carried home (#180, owner 2026-11-17):
 ## the nurse can try to bring them back.
 var fallen: Array[Companion] = []
@@ -175,7 +178,7 @@ func teach(party, hero: Companion, lesson: String) -> bool:
 	var price: int = TRAINER_LESSONS[lesson]
 	if not can_afford(party, price):
 		return false
-	party.supplies.gold -= price
+	pay(party, price)
 	Progression.learn(hero, lesson)
 	party.supplies.changed.emit()
 	changed.emit()
@@ -372,9 +375,9 @@ func treatment_days(hero: Companion) -> int:
 ## The nurse treats every injury; the hero is out of play meanwhile.
 ## The nurse lifts one bane for a price (#133). Returns it, or null.
 func lift_bane(party, hero: Companion) -> Boon:
-	if not hero.has_bane() or party.supplies.gold < LIFT_BANE_PRICE:
+	if not hero.has_bane() or not can_afford(party, LIFT_BANE_PRICE):
 		return null
-	party.supplies.gold -= LIFT_BANE_PRICE
+	pay(party, LIFT_BANE_PRICE)
 	party.supplies.changed.emit()
 	changed.emit()
 	return hero.lift_bane()
@@ -444,9 +447,9 @@ func drop_carried(depth: int) -> void:
 ## The nurse brings a fallen companion back (#180): for a price, and a
 ## lasting scar. They wait by the fire to be asked again.
 func revive(party, hero: Companion) -> bool:
-	if hero not in fallen or not site_present("treatment") or party.supplies.gold < REVIVE_PRICE:
+	if hero not in fallen or not site_present("treatment") or not can_afford(party, REVIVE_PRICE):
 		return false
-	party.supplies.gold -= REVIVE_PRICE
+	pay(party, REVIVE_PRICE)
 	party.supplies.changed.emit()
 	fallen.erase(hero)
 	hero.hp_bonus -= REVIVE_SCAR
@@ -497,9 +500,9 @@ func route_price(depth: int) -> int:
 
 ## Pays for the route to `depth`. Returns false if it's not open or too dear.
 func buy_route(party, depth := 2) -> bool:
-	if not route_open(depth) or party.supplies.gold < route_price(depth):
+	if not route_open(depth) or not can_afford(party, route_price(depth)):
 		return false
-	party.supplies.gold -= route_price(depth)
+	pay(party, route_price(depth))
 	party.supplies.changed.emit()
 	changed.emit()
 	return true
@@ -568,9 +571,9 @@ func identify(party, item: Equipment) -> String:
 	if item == null or item.identified:
 		return "Nothing to read"
 	var price := identify_price(party, item)
-	if party.supplies.gold < price:
+	if not can_afford(party, price):
 		return "Need %d gold" % price
-	party.supplies.gold -= price
+	pay(party, price)
 	var text := GearModel.identify(item)
 	party.supplies.changed.emit()
 	party.changed.emit()
@@ -588,11 +591,11 @@ func temper(party, item: Equipment, option_id: String) -> String:
 	var cost := GearModel.temper_cost(item)
 	var material: SupplyItem = load("res://data/items/%s.tres" % cost["material_id"])
 	var have: int = party.supplies.count(material) + stash.count(material)
-	if party.supplies.gold < price_for(party, cost["gold"]):
+	if not can_afford(party, price_for(party, cost["gold"])):
 		return "Need %d gold" % price_for(party, cost["gold"])
 	if have < cost["material"]:
 		return "Needs %d %s" % [cost["material"], material.display_name.to_lower()]
-	party.supplies.gold -= price_for(party, cost["gold"])
+	pay(party, price_for(party, cost["gold"]))
 	for i in cost["material"]:
 		if not party.supplies.take(material):
 			stash.take(material)
@@ -609,9 +612,9 @@ func forge_offered() -> bool:
 
 
 func build_forge(party) -> bool:
-	if not forge_offered() or party.supplies.gold < FORGE_PRICE:
+	if not forge_offered() or not can_afford(party, FORGE_PRICE):
 		return false
-	party.supplies.gold -= FORGE_PRICE
+	pay(party, FORGE_PRICE)
 	party.supplies.changed.emit()
 	forge_built = true
 	wares_day = -1  # the forge's first work, today
@@ -659,8 +662,23 @@ func available(party) -> Array[Companion]:
 
 ## The merchant (#42): sells supplies and the lantern, buys treasure and
 ## gear (gear at 30%). The basic kit after the opening is free (main.gd).
+## At camp the stash's gold counts too (owner, 2026-11-24): spending takes
+## from the pack first, then from the tent's stash.
 func can_afford(party, price: int) -> bool:
-	return party.supplies.gold >= price
+	return party.supplies.gold + stash.gold >= price
+
+
+## Pays `price` from the pack, then the stash. False (and nothing paid) if
+## the camp's purse is short.
+func pay(party, price: int) -> bool:
+	if not can_afford(party, price):
+		return false
+	var from_pack: int = mini(party.supplies.gold, price)
+	party.supplies.gold -= from_pack
+	if price > from_pack:
+		stash.gold -= price - from_pack
+		stash.changed.emit()
+	return true
 
 
 ## A Fixer's eye for value (#101): treasure sells for more, and the
@@ -694,7 +712,7 @@ func buy(party, item: SupplyItem) -> bool:
 	var price := price_for(party, item.price)
 	if not can_trade() or not can_afford(party, price) or party.supplies.room_for(item) <= 0:
 		return false
-	party.supplies.gold -= price
+	pay(party, price)
 	party.supplies.add(item)
 	changed.emit()
 	return true
@@ -705,7 +723,7 @@ func buy_lantern(party) -> bool:
 	var price := price_for(party, LANTERN_PRICE)
 	if not can_trade() or supplies.has_lantern or not can_afford(party, price):
 		return false
-	supplies.gold -= price
+	pay(party, price)
 	supplies.has_lantern = true
 	supplies.oil = Supplies.LANTERN_CAPACITY
 	supplies.source = Supplies.Source.LANTERN
@@ -745,7 +763,7 @@ func buy_gear(party, item: Equipment) -> bool:
 	var price := price_for(party, item.price)  # a Fixer haggles here too (#101)
 	if not site_present("smith") or not can_afford(party, price) or not party.supplies.has_room_for_gear():
 		return false
-	party.supplies.gold -= price
+	pay(party, price)
 	party.supplies.gear.append(GearModel.ensure_instance(item))  # your own piece, from now on (#192)
 	fine_stock.erase(item)
 	wares.erase(item)  # one of each a day  # one of each fine piece a day
@@ -822,9 +840,7 @@ func raise_issue(party) -> bool:
 	if not can_raise_issue(party):
 		return false
 	var next := next_issue()
-	var from_pack := mini(party.supplies.gold, int(next["gold"]))
-	party.supplies.gold -= from_pack
-	stash.gold -= int(next["gold"]) - from_pack
+	pay(party, int(next["gold"]))
 	for id: String in next["materials"]:
 		var item: SupplyItem = load(ISSUE_ITEM % id)
 		var owed: int = int(next["materials"][id]) - party.supplies.drop(item, int(next["materials"][id]))

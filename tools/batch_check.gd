@@ -172,7 +172,11 @@ func _initialize() -> void:
 		await process_frame
 	main._set_pack(true)
 	await process_frame
-	check("Settings opens from the Pack", _press(main._pack, "Settings") and main._settings.visible)
+	# Since #291 (2026-11-25) Settings lives in the pause menu (Esc, or the
+	# Pack's menu button) as Options.
+	main._pack.open_menu.emit()
+	await process_frame
+	check("Settings opens from the Pack's pause menu", main._pause_menu.visible and _press(main._pause_menu, "Options") and main._settings.visible)
 	await _snap("settings")
 	Settings.set_value("Music", 0.3, self)
 	var music := AudioServer.get_bus_index("Music")

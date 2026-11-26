@@ -11,6 +11,7 @@ signal continue_pressed
 const Expedition := preload("res://scripts/expedition.gd")
 const Progression := preload("res://scripts/progression.gd")
 const Glyphs := preload("res://art/ui/backlog96-v1/glyphs.gd")
+const StrainRules := preload("res://scripts/strain.gd")
 const COLOR_TEXT := Color("e6dac1")
 const COLOR_DIM_TEXT := Color(0.85, 0.8, 0.7, 0.85)
 const COLOR_LOSS := Color("e28c7c")
@@ -138,24 +139,27 @@ func show_results(ending: int, expedition, party, note: String, quotes := {}) ->
 	_subtitle.text = "Expedition %d · %s" % [expedition.number, note]
 	_clear(_chips)
 	_clear(_heroes)
-	# What the trip brought...
+	# What the trip brought... (every chip explains itself when pointed at,
+	# owner 2026-11-24; on a wipe what was carried is lost)
+	var none := Color(0, 0, 0, 0)
+	var lost := " All of it was lost when the party fell." if wiped else ""
 	if s["gold"] > 0:
-		_chip(_chips, ICONS["gold"], "+%d" % s["gold"], true)
+		_chip(_chips, ICONS["gold"], "+%d" % s["gold"], true, none, "Gold found on this trip: %d.%s" % [s["gold"], lost])
 	if s["deepest"] > 0:
-		_chip(_chips, ICONS["deepest"], "Floor %d" % s["deepest"], true)
+		_chip(_chips, ICONS["deepest"], "Floor %d" % s["deepest"], true, none, "The deepest floor reached on this trip.")
 	if s["enemies"] > 0:
-		_chip(_chips, ICONS["enemies"], "×%d" % s["enemies"], true)
+		_chip(_chips, ICONS["enemies"], "×%d" % s["enemies"], true, none, "Enemies killed on this trip: %d." % s["enemies"])
 	if s["events"] > 0:
-		_chip(_chips, ICONS["events"], "×%d" % s["events"], true)
+		_chip(_chips, ICONS["events"], "×%d" % s["events"], true, none, "Discoveries dealt with on this trip (chests, shrines, traps, rest spots): %d." % s["events"])
 	for item: SupplyItem in s["found"]:
-		_chip(_chips, item.icon, "×%d" % s["found"][item], true)
+		_chip(_chips, item.icon, "×%d" % s["found"][item], true, none, "Found: %s ×%d.%s" % [item.display_name, s["found"][item], lost])
 	# ...and what it cost.
 	for item: SupplyItem in s["used"]:
-		_chip(_chips, item.icon, "−%d" % s["used"][item], false)
+		_chip(_chips, item.icon, "−%d" % s["used"][item], false, none, "Used up: %s ×%d." % [item.display_name, s["used"][item]])
 	if s["oil"] > 0:
-		_chip(_chips, ICONS["oil"].icon, "−%d oil" % s["oil"], false)
+		_chip(_chips, ICONS["oil"].icon, "−%d oil" % s["oil"], false, none, "Lantern oil burned: %d." % s["oil"])
 	if s["retreats"] > 0:
-		_chip(_chips, null, "Fled ×%d" % s["retreats"], false)
+		_chip(_chips, null, "Fled ×%d" % s["retreats"], false, none, "Fights the party ran from: %d." % s["retreats"])
 	for row in expedition.hero_rows(party):
 		_heroes.add_child(_hero_row(row, quotes.get(row["hero"], "")))
 	_button.text = "Begin again" if wiped else "To camp"
@@ -206,29 +210,53 @@ func _hero_row(row: Dictionary, quote := "") -> Control:
 		var said := _label(18, COLOR_DIM_TEXT, "“%s”" % quote)
 		said.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		column.add_child(said)
+	var none := Color(0, 0, 0, 0)
 	if not row["back"]:
 		face.modulate = Color(0.4, 0.3, 0.3)
-		_chip(chips, Glyphs.STATUS["down"], "Did not come back", false)
+		_chip(chips, Glyphs.STATUS["down"], "Did not come back", false, none, "%s lies where they fell, in the mine. Find them on a later trip and carry them home: the nurse can bring them round." % hero.display_name)
 		return line
 	var change: int = row["health"] - row["health_from"]
-	_chip(chips, ICONS["health"], "%d/%d" % [row["health"], hero.effective_max_health()] + ("  %+d" % change if change != 0 else ""), change >= 0)
+	var cap: int = hero.effective_max_health()
+	var health_tip := "Health %d of %d (%s on this trip)." % [row["health"], cap, ("%+d" % change) if change != 0 else "no change"]
+	if cap < hero.max_health:
+		health_tip += " Untreated injuries lower the most it can be, from %d to %d." % [hero.max_health, cap]
+	_chip(chips, ICONS["health"], "%d/%d" % [row["health"], cap] + ("  %+d" % change if change != 0 else ""), change >= 0, none, health_tip)
 	var xp: int = row["xp"] - row["xp_from"]
 	if xp > 0:
-		_chip(chips, ICONS["xp"], "+%d XP" % xp, true)
+		_chip(chips, ICONS["xp"], "+%d XP" % xp, true, none, "Experience earned on this trip: %d." % xp)
 	if Progression.ready_to_advance(hero):
-		_chip(chips, ICONS["advance"], "Level up at camp", true, COLOR_AMBER)
+		_chip(chips, ICONS["advance"], "Level up at camp", true, COLOR_AMBER, "%s has enough experience for the next level: train at the tent." % hero.display_name)
 	var nerves: float = row["strain"] - row["strain_from"]
 	if absf(nerves) >= 5.0:
-		_chip(chips, ICONS["nerves"], "calmer" if nerves < 0 else "shaken", nerves < 0)
+		var state: String = StrainRules.NAMES[hero.strain_state()]
+		_chip(chips, ICONS["nerves"], "calmer" if nerves < 0 else "shaken", nerves < 0, none, "Strain %s by %d on this trip: now %d of 100 (%s). A night's rest at camp clears it." % ["fell" if nerves < 0 else "rose", absi(roundi(nerves)), roundi(row["strain"]), state])
 	for injury: Injury in row["new_injuries"]:
-		_chip(chips, Glyphs.STATUS["limp" if injury.icon_kind == "limp" else "deep-wound"], injury.display_name, false)
+		_chip(chips, Glyphs.STATUS["limp" if injury.icon_kind == "limp" else "deep-wound"], injury.display_name, false, none, injury_tip(injury))
 	return line
 
 
+## An injury in numbers: what it costs until treated, and how long the
+## nurse needs (owner, 2026-11-24: "the player won't know what deep wound
+## means").
+static func injury_tip(injury: Injury) -> String:
+	var costs: Array[String] = []
+	if injury.max_health_penalty > 0:
+		costs.append("%d maximum health" % -injury.max_health_penalty)
+	if injury.extra_step_time > 0:
+		costs.append("+%d time for every step" % injury.extra_step_time)
+	if injury.carry_penalty > 0:
+		costs.append("%d pack space" % -injury.carry_penalty)
+	var nights: String = "a night" if injury.recovery_days <= 1 else "%d nights" % injury.recovery_days
+	return "%s: %s until treated. The nurse heals it in %s." % [injury.display_name, ", ".join(costs) if not costs.is_empty() else "no lasting cost", nights]
+
+
 ## An icon and a number: green-edged for gains, red for losses.
-func _chip(parent: Control, icon: Texture2D, text: String, good: bool, colour := Color(0, 0, 0, 0)) -> void:
+func _chip(parent: Control, icon: Texture2D, text: String, good: bool, colour := Color(0, 0, 0, 0), tip := "") -> void:
 	var chip := PanelContainer.new()
 	chip.add_theme_stylebox_override("panel", UiTheme.chip(good, colour))
+	if tip != "":
+		chip.tooltip_text = tip
+		chip.mouse_filter = Control.MOUSE_FILTER_STOP
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 4)
 	chip.add_child(row)

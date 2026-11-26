@@ -58,23 +58,28 @@ func refresh() -> void:
 			entry.price=CampState.sell_price(_party,item)
 			entry.action=("Sell 1 · %d" if item is SupplyItem else "Sell · %d")%entry.price
 			entry.info="Sells one item" if item is SupplyItem else ""
-	set_view(stock,bag,supplies.slots_used(),supplies.capacity,supplies.gold)
+	set_view(stock,bag,supplies.slots_used(),supplies.capacity,_purse())
 
 func _buy_reason(price:int,room:bool) -> String:
 	if not _camp.can_trade():return "Trading is not available yet"
 	if not room:return "Your pack is full"
-	if _party.supplies.gold<price:return "Need %d more gold"%(price-_party.supplies.gold)
+	if _purse()<price:return "Need %d more gold"%(price-_purse())
 	return ""
 
 func _trade(entry:Dictionary,side:String) -> void:
 	if not _camp.can_trade():refresh();return
-	var before:int=_party.supplies.gold
+	var before:int=_purse()
 	if side=="left":
 		if entry.key is String and entry.key=="lantern":_camp.buy_lantern(_party)
 		elif entry.get("item") in CampState.MERCHANT_STOCK:_camp.buy(_party,entry.item)
 	elif entry.get("item"):
 		if entry.item is Equipment:_camp.sell_gear(_party,entry.item)
 		elif not entry.get("open_flask",false):_camp.sell(_party,entry.item)
-	if _party.supplies.gold<before:Sounds.play(self,"purchase",-7.0)
-	elif _party.supplies.gold>before:Sounds.play(self,"coins",-7.0)
+	if _purse()<before:Sounds.play(self,"purchase",-7.0)
+	elif _purse()>before:Sounds.play(self,"coins",-7.0)
 	refresh()
+
+
+## What can be spent here: the pack's gold and the tent stash's (2026-11-24).
+func _purse() -> int:
+	return _party.supplies.gold + (_camp.stash.gold if _camp else 0)
