@@ -108,6 +108,8 @@ var named_met: Array[String] = []
 ## Named elite packs whose gold hoard has been taken: they can come back,
 ## but the hoard is won only once (owner, 2026-11-25).
 var elites_looted: Array[String] = []
+## Named packs the party has seen on the map (the journal's Named page).
+var elites_seen: Array[String] = []
 ## Companions whose bodies the party carried home (#180, owner 2026-11-17):
 ## the nurse can try to bring them back.
 var fallen: Array[Companion] = []

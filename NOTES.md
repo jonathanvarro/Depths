@@ -19,6 +19,11 @@ Format:
 - Next: integrate the fix and continue the separately isolated quartermaster character/interface (#296); its original portrait is saved in `build/quartermaster-checkout/art/camp/quartermaster-v1`.
 - Watch out: ALPHA=1 still triggers transparency sorting. Never force an entire detail surface above fur to expose eyes; claws on that surface then show through the body. Keep the rendered occlusion regression. Owner's unrelated camp/economy changes remain uncommitted in main and were not included here.
 
+## 2026-11-25 – Claude (Named packs in the journal; floor 1 variety)
+- Did: no message on a repeat named-pack kill. Journal Monsters page starts with "Named packs" by floor (`QuestLog._build_monsters`/`_draw_named`, `Tick` box): "Unknown" until seen (`CampState.elites_seen`, recorded when a pack is noticed), ticked once its hoard is taken (`elites_looted`). Floor 1 room events 13 -> 19: dart trap, hollow floor, cold camp, defiled shrine and strongbox now from floor 1, plus new `data/events/chest_ore_cart.tres` (derailed cart, rails-broken prop, floors 1-2). Checks in `tools/named_elites_check.gd`.
+- Next: owner decision on class display names (Soldier/Scout/Acolyte/Sapper, nurse as priest) - names only, keep internal ids.
+- Watch out: `encounter_save_check` failed once in a full run and passed four reruns.
+
 ## 2026-11-25 – Claude (named packs return, hoard once)
 - Did: owner decision: named elite packs keep returning on later days, but the gold hoard is won once per pack (`CampState.elites_looted`, checked in main `_elite_won`; later kills give only XP and purses). `tools/named_elites_check.gd`.
 - Next: owner playtest.

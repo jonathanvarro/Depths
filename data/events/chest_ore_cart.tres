@@ -1,0 +1,66 @@
+[gd_resource type="Resource" script_class="RoomEvent" format=3]
+
+[ext_resource type="Script" path="res://scripts/event_choice.gd" id="choice"]
+[ext_resource type="Script" path="res://scripts/event_outcome.gd" id="outcome"]
+[ext_resource type="Script" path="res://scripts/supply_item.gd" id="item"]
+[ext_resource type="Resource" path="res://data/items/coal.tres" id="coal"]
+[ext_resource type="Resource" path="res://data/items/copper_ore.tres" id="copper"]
+[ext_resource type="Resource" path="res://data/items/torch.tres" id="torch"]
+[ext_resource type="Resource" path="res://data/items/ration.tres" id="ration"]
+[ext_resource type="PackedScene" path="res://art/props/expedition-3d-v1/rails-broken.tscn" id="prop"]
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="event"]
+
+[sub_resource type="Resource" id="o0_0"]
+script = ExtResource("outcome")
+weight = 3
+text = "Under the dust, the last load is still good: coal, and a green-flecked lump of copper ore."
+loot = Dictionary[ExtResource("item"), int]({
+ExtResource("coal"): 2,
+ExtResource("copper"): 1
+})
+
+[sub_resource type="Resource" id="o0_1"]
+script = ExtResource("outcome")
+weight = 1
+text = "Mostly rock and grit. One lump of coal is worth the carrying."
+loot = Dictionary[ExtResource("item"), int]({
+ExtResource("coal"): 1
+})
+
+[sub_resource type="Resource" id="c0"]
+script = ExtResource("choice")
+label = "Sift the spilled load"
+time_cost = 2
+outcomes = Array[ExtResource("outcome")]([SubResource("o0_0"), SubResource("o0_1")])
+
+[sub_resource type="Resource" id="o1_0"]
+script = ExtResource("outcome")
+weight = 2
+text = "Wedged under the cart: a miner's lunch tin and a spare torch, wrapped against the damp."
+loot = Dictionary[ExtResource("item"), int]({
+ExtResource("torch"): 1,
+ExtResource("ration"): 1
+})
+
+[sub_resource type="Resource" id="o1_1"]
+script = ExtResource("outcome")
+weight = 1
+text = "The cart shifts on the bent rail and catches your hand. Nothing under it but rust."
+health = -2
+
+[sub_resource type="Resource" id="c1"]
+script = ExtResource("choice")
+label = "Reach under the cart"
+time_cost = 2
+outcomes = Array[ExtResource("outcome")]([SubResource("o1_0"), SubResource("o1_1")])
+
+[resource]
+script = ExtResource("event")
+kind = 2
+title = "A derailed cart"
+clue = "A miners' ore cart lies on its side across bent rails, its last load spilled in the dust."
+choices = Array[ExtResource("choice")]([SubResource("c0"), SubResource("c1")])
+min_depth = 1
+max_depth = 2
+weight = 2
+prop = ExtResource("prop")

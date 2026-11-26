@@ -2,6 +2,8 @@ extends "res://scripts/field_menu.gd"
 ## Read-only quest journal; hidden entries still come solely from Quests.in_log().
 const Quests := preload("res://scripts/quests.gd")
 const Bestiary := preload("res://scripts/bestiary.gd")
+const Elites := preload("res://scripts/elites.gd")
+const NAMED := "named:"  # list ids for the named packs (owner, 2026-11-25)
 const PAPER := preload("res://art/ui/map-v1/parchment.png")
 const INK := Color("30291e")
 
@@ -126,8 +128,41 @@ func _build() -> void:
 func _build_monsters() -> void:
 	_clear(_list)
 	_buttons.clear()
-	var ids: Array = Bestiary.names(_camp)
-	for id: String in ids:
+	var ids: Array = []
+	# The named packs first, floor by floor: unknown until seen, ticked once
+	# beaten (its hoard is won once; owner, 2026-11-25).
+	_list.add_child(text_label("Named packs", 17, Kit.MUTED))
+	for pid: String in _named_order():
+		var known: bool = pid in _camp.elites_seen or pid in _camp.elites_looted
+		var beaten: bool = pid in _camp.elites_looted
+		var button := action_button("")
+		button.toggle_mode = true
+		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		button.theme_type_variation = "ItemRow"
+		var row := HBoxContainer.new()
+		row.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		row.offset_left = 12; row.offset_right = -12
+		row.offset_top = 9; row.offset_bottom = -9
+		row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		button.add_child(row)
+		var words := VBoxContainer.new()
+		words.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		words.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		row.add_child(words)
+		words.add_child(text_label(Elites.PACKS[pid]["name"] if known else "Unknown", 20, Kit.TEXT if known else Kit.MUTED))
+		words.add_child(text_label(_floors_text(pid) + (" · beaten" if beaten else ""), 16, Kit.MUTED))
+		row.add_child(Tick.new(beaten))
+		button.custom_minimum_size.y = 78
+		button.accessibility_name = "%s, %s%s" % [Elites.PACKS[pid]["name"] if known else "Unknown named pack", _floors_text(pid), ", beaten" if beaten else ""]
+		button.pressed.connect(select_quest.bind(NAMED + pid))
+		_list.add_child(button)
+		_buttons[NAMED + pid] = button
+		ids.append(NAMED + pid)
+	var monsters: Array = Bestiary.names(_camp)
+	if not monsters.is_empty():
+		_list.add_child(text_label("Creatures", 17, Kit.MUTED))
+	ids += monsters
+	for id: String in monsters:
 		var e: Dictionary = _camp.bestiary[id]
 		var button := action_button("")
 		button.toggle_mode = true
@@ -151,6 +186,35 @@ func _build_monsters() -> void:
 	_list_scroll.scroll_vertical = 0
 	_draw_detail()
 	_layout_body()
+
+## The named packs by the first floor each can turn up on.
+func _named_order() -> Array:
+	var order: Array = Elites.PACKS.keys()
+	order.sort_custom(func(a, b): return Elites.PACKS[a]["floors"][0] < Elites.PACKS[b]["floors"][0])
+	return order
+
+
+func _floors_text(pid: String) -> String:
+	var floors: Array = Elites.PACKS[pid]["floors"]
+	return "Floor %d" % floors[0] if floors.min() == floors.max() else "Floors %d-%d" % [floors.min(), floors.max()]
+
+
+## A check mark in its box: ticked once a named pack is beaten.
+class Tick extends Control:
+	var ticked := false
+
+	func _init(done: bool) -> void:
+		ticked = done
+		custom_minimum_size = Vector2(30, 30)
+		size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	func _draw() -> void:
+		var box := Rect2(Vector2(3, 3), size - Vector2(6, 6))
+		draw_rect(box, Color("b9a57e"), false, 2.0)
+		if ticked:
+			draw_polyline(PackedVector2Array([box.position + box.size * Vector2(0.18, 0.55), box.position + box.size * Vector2(0.42, 0.8), box.position + box.size * Vector2(0.85, 0.2)]), Color("bfe3a8"), 3.0, true)
+
 
 ## A journal mark in ink, 28 px; "weak" and "immune" frame a smaller mark.
 func _journal_mark(path: String, frame: String, words: String) -> Control:
@@ -191,6 +255,9 @@ func _draw_detail() -> void:
 		empty.custom_minimum_size.y = 120
 		empty.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		_detail.add_child(empty)
+		return
+	if _selected_id.begins_with(NAMED):
+		_draw_named(_selected_id.trim_prefix(NAMED))
 		return
 	if _monsters:
 		var lines := Bestiary.page(_camp, _selected_id)
@@ -233,6 +300,23 @@ func _draw_detail() -> void:
 	_detail.add_child(heading)
 	if info["giver"] != "": _detail.add_child(text_label("From " + info["giver"], 18, Color("65503b")))
 	_detail.add_child(text_label(Quests.next_step(_camp, _selected_id), 23, INK))
+
+## A named pack's page: who they are once seen, where, and whether beaten.
+func _draw_named(pid: String) -> void:
+	var pack: Dictionary = Elites.PACKS[pid]
+	var known: bool = pid in _camp.elites_seen or pid in _camp.elites_looted
+	var beaten: bool = pid in _camp.elites_looted
+	_detail.add_child(text_label("Named pack · " + _floors_text(pid), 17, Color("65503b")))
+	var title := text_label(pack["name"] if known else "Unknown", 26, INK)
+	title.add_theme_font_override("font", Kit.HEADING)
+	_detail.add_child(title)
+	if not known:
+		_detail.add_child(text_label("Something walks these floors that the camp has no name for yet. A named pack shows itself by its glow.", 21, INK))
+		return
+	_detail.add_child(text_label(pack["seen"], 21, INK))
+	_detail.add_child(text_label("Led by %s." % pack["leader"], 21, INK))
+	_detail.add_child(text_label("Beaten: its gilded hoard is yours. It may walk again on another day, with nothing more to win but the fight." if beaten else "Not yet beaten. Its gilded hoard waits for whoever kills it first.", 21, INK))
+
 
 func _show_list() -> void:
 	_detail_open = false

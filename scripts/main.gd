@@ -1953,8 +1953,7 @@ func _elite_won() -> void:
 	# (owner, 2026-11-25: returning, not farmable). Later kills give only
 	# the fight's own experience and purses.
 	if _elite_id in _camp_state.elites_looted:
-		_show_message("%s is dead again. There's no hoard this time: you took it the first time." % pack["leader"])
-		return
+		return  # the bestiary's tick shows it's been looted (owner, 2026-11-25)
 	_camp_state.elites_looted.append(_elite_id)
 	if _drop_chest(_party.cell, "gold"):
 		_show_message("%s is dead. Where it fell lies its hoard: a gilded chest." % pack["leader"])
@@ -2036,6 +2035,8 @@ func _map_beat(party_cell: Vector2i) -> bool:
 			if group.named != "":
 				named_seen = group.named
 	if named_seen != "":
+		if named_seen not in _camp_state.elites_seen:
+			_camp_state.elites_seen.append(named_seen)  # in the journal from now on
 		Sounds.play(self, "map_noticed", -3.0, 0.0)
 		_show_message(Elites.PACKS[named_seen]["seen"])
 		_tip("named_elites", "A named pack: far tougher than the floor's other monsters, but it guards a hoard. Its glow shows where it walks; wait for it to pass, or pick your ground.")

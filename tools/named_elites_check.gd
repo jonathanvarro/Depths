@@ -140,6 +140,18 @@ func _initialize() -> void:
 	var tiers_before: Dictionary = main._map.marks.get("chest_tiers", {}).duplicate()
 	main._elite_won()
 	check("beaten again on a later day: no second hoard", main._map.marks.get("chest_tiers", {}).size() == tiers_before.size() and main._elite_id in main._camp_state.elites_looted)
+	# The journal lists every floor's named packs, ticking the beaten (2026-11-25).
+	main._quest_log._monsters = true
+	main._quest_log.open(main._camp_state)
+	await process_frame
+	var named_rows: Array = main._quest_log._buttons.keys().filter(func(k): return k.begins_with("named:"))
+	check("the journal lists every named pack", named_rows.size() == main.Elites.PACKS.size(), named_rows)
+	var ticks: Array = main._quest_log.find_children("*", "Control", true, false).filter(func(c): return "ticked" in c)
+	check("...ticking the one beaten", ticks.filter(func(t): return t.ticked).size() == 1, ticks.size())
+	main._quest_log.select_quest("named:" + main._elite_id)
+	var page: String = " ".join(main._quest_log._detail.find_children("*", "Label", true, false).map(func(l): return l.text))
+	check("...with its page saying the hoard is won", page.contains("Beaten"), page)
+	main._quest_log.visible = false
 	check("...and it doesn't come back on this floor today", main._map.marks["elite"]["beaten"] and not main._groups.any(func(g): return g.named != ""))
 	main._spawn_room_groups()
 	check("...even when the floor's monsters are set out again", not main._groups.any(func(g): return g.named != ""))
