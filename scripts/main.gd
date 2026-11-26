@@ -1949,6 +1949,13 @@ func _elite_won() -> void:
 	var pack: Dictionary = Elites.PACKS[_elite_id]
 	if _map.marks.has("elite"):
 		_map.marks["elite"]["beaten"] = true
+	# A named pack can come back on a later day, but its hoard is won once
+	# (owner, 2026-11-25: returning, not farmable). Later kills give only
+	# the fight's own experience and purses.
+	if _elite_id in _camp_state.elites_looted:
+		_show_message("%s is dead again. There's no hoard this time: you took it the first time." % pack["leader"])
+		return
+	_camp_state.elites_looted.append(_elite_id)
 	if _drop_chest(_party.cell, "gold"):
 		_show_message("%s is dead. Where it fell lies its hoard: a gilded chest." % pack["leader"])
 

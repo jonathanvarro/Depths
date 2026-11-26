@@ -19,6 +19,11 @@ Format:
 - Next: integrate the fix and continue the separately isolated quartermaster character/interface (#296); its original portrait is saved in `build/quartermaster-checkout/art/camp/quartermaster-v1`.
 - Watch out: ALPHA=1 still triggers transparency sorting. Never force an entire detail surface above fur to expose eyes; claws on that surface then show through the body. Keep the rendered occlusion regression. Owner's unrelated camp/economy changes remain uncommitted in main and were not included here.
 
+## 2026-11-25 – Claude (named packs return, hoard once)
+- Did: owner decision: named elite packs keep returning on later days, but the gold hoard is won once per pack (`CampState.elites_looted`, checked in main `_elite_won`; later kills give only XP and purses). `tools/named_elites_check.gd`.
+- Next: owner playtest.
+- Watch out: saves from before this have an empty list, so each pack drops one more hoard.
+
 ## 2026-11-25 – Claude (Rook's face, results tips, stash gold at camp)
 - Did: (1) Rook's still `portrait` now matches his `fixer-a` rig (`NamedCast.CAST`); loading a save re-applies every named companion's faces (`SaveGame.unpack_into`). (2) Old Whisker returning on a later day is by design (#277: "beaten for that floor's day"); left as is pending the owner's call. (3) Results: every chip has a hover tip in numbers (`ResultsScreen.injury_tip` for injuries); a wipe leads with where the party fell and who wakes (`_who_wakes`), without the quartermaster line. (4) Camp spending uses the pack's and the tent stash's gold, pack first: `CampState.can_afford`/`pay` (merchant, smith, nurse, trainer, routes, forge, identify, temper, issue); merchant/smith/camp screens show and check `_purse()`. `batch_check` now opens Settings via the pause menu (#291 moved it).
 - Next: owner playtest.

@@ -136,6 +136,10 @@ func _initialize() -> void:
 	main._map_fight_over(true)
 	var left: Array = main._map.contents.keys().filter(func(c): return c not in chests_before)
 	check("beaten: its hoard, a gilded chest, is left where it fell", left.size() == 1 and load("res://scripts/chest_tiers.gd").tier_at(main._map, left[0]) == "gold", left)
+	# It may come back another day, but the hoard is won once (2026-11-25).
+	var tiers_before: Dictionary = main._map.marks.get("chest_tiers", {}).duplicate()
+	main._elite_won()
+	check("beaten again on a later day: no second hoard", main._map.marks.get("chest_tiers", {}).size() == tiers_before.size() and main._elite_id in main._camp_state.elites_looted)
 	check("...and it doesn't come back on this floor today", main._map.marks["elite"]["beaten"] and not main._groups.any(func(g): return g.named != ""))
 	main._spawn_room_groups()
 	check("...even when the floor's monsters are set out again", not main._groups.any(func(g): return g.named != ""))
