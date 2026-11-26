@@ -8,6 +8,29 @@ out of git (see `docs/blender-expedition-kit-tasks.md`).
 
 ## Where the files live
 
+### Refined rat, great rat and cave bat (2026-11-25, #292)
+
+`art/enemies/creatures-refined-v2` is the live rat/great-rat/bat and ambient
+wildlife library. The CC0 rats retain the 21-bone source rig and six existing
+clip roles/durations (idle, attack, hurt, fall, walk, run at 24fps), with new
+geometry/weights and fresh floor corrections on the derived exports. Old
+Whisker uses the same great-rat clips with fitted head details and ash colour.
+Earlier source files, masters and libraries are unchanged.
+
+The original Depths cave bat now has 13 bones (root/head/jaw and five per
+side). At 24fps: idle, landed, fall, fall-ground are 24 frames; attack, swoop,
+bite are 18; hurt and hurt-ground are 12. Grounded hurt/fall prevent a landed
+bat jumping into the air on impact; swoop/bite/grounded hurt return to landed.
+Held loops close, folds share membrane station weights, outer floor origin
+stays fixed and still mode retains its exact sample. `play/sample/set_motion`
+and combat intents remain the presentation contract.
+
+Editable masters: `build/local-creatures-refined-v2/masters`. Reproducible
+builder, native skin sampling, phone framing and review tools are in
+`tools/creature_refinement`; 1,132 checks pass. Original source/clip ancestry,
+licences, mobile budgets and review limits: `docs/rat-bat-refinement.md`.
+No private human or Mixamo files were used. Physical iPhone/owner review remains.
+
 ### Tutorial static travellers and hearth (2026-11-22, #285)
 
 `docs/tutorial-campfire-and-bodies-3d.md`: two anonymous public-geometry resting
