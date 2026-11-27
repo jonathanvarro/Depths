@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3]
+[ext_resource type="Script" path="res://art/props/damp-sites-v1/site.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/props/damp-sites-v1/rimstone-terraces.glb" id="r0"]
+[ext_resource type="PackedScene" path="res://art/dressing/damp-dressing-v1/wet-stalagmite.tscn" id="r1"]
+[ext_resource type="PackedScene" path="res://art/dressing/damp-dressing-v1/dripping-crack.tscn" id="r2"]
+
+[node name="DampSite" type="Node3D"]
+script=ExtResource("script")
+states=PackedStringArray("static")
+state="static"
+mount_mode="landmark"
+metadata/asset_id="landmark-rimstone-stair"
+metadata/requires_floor_cut=false
+
+[node name="Mount" type="Node3D" parent="."]
+
+[node name="Terraces" parent="Mount" instance=ExtResource("r0")]
+position=Vector3(0, 0, -0.55)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+metadata/physical_surface=true
+
+[node name="Piece113" parent="Mount" instance=ExtResource("r1")]
+position=Vector3(-2.6, 0, -1.25)
+scale=Vector3(1.7, 1.8, 1.7)
+rotation_degrees=Vector3(0,0,0)
+
+[node name="Piece217" parent="Mount" instance=ExtResource("r2")]
+position=Vector3(-2.6, 1.2, -2.98)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+
+[node name="Piece321" parent="Mount" instance=ExtResource("r1")]
+position=Vector3(2.6, 0, -1.25)
+scale=Vector3(1.7, 1.8, 1.7)
+rotation_degrees=Vector3(0,0,0)
+
+[node name="Piece325" parent="Mount" instance=ExtResource("r2")]
+position=Vector3(2.6, 1.2, -2.98)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+
+[node name="PearlsEvent" type="Marker3D" parent="Mount"]
+position=Vector3(0, 0, -0.3)
+
+[node name="DryApproach" type="Marker3D" parent="Mount"]
+position=Vector3(0, 0, 1.85)

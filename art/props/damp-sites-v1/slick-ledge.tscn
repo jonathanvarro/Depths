@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3]
+[ext_resource type="Script" path="res://art/props/damp-sites-v1/site.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/props/damp-sites-v1/slick-ledge-ready.glb" id="r0"]
+[ext_resource type="PackedScene" path="res://art/props/damp-sites-v1/slick-ledge-slipped.glb" id="r1"]
+[ext_resource type="PackedScene" path="res://art/props/damp-sites-v1/slick-ledge-passed.glb" id="r2"]
+
+[node name="DampSite" type="Node3D"]
+script=ExtResource("script")
+states=PackedStringArray("ready","slipped","passed")
+state="ready"
+mount_mode="floor-cut"
+metadata/asset_id="slick-ledge"
+metadata/requires_floor_cut=true
+
+[node name="Mount" type="Node3D" parent="."]
+
+[node name="Ready" type="Node3D" parent="Mount"]
+metadata/appearance_state="ready"
+
+[node name="Slipped" type="Node3D" parent="Mount"]
+metadata/appearance_state="slipped"
+visible=false
+
+[node name="Passed" type="Node3D" parent="Mount"]
+metadata/appearance_state="passed"
+visible=false
+
+[node name="Model" parent="Mount/Ready" instance=ExtResource("r0")]
+position=Vector3(0, 0, 0)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+metadata/physical_surface=true
+
+[node name="Model" parent="Mount/Slipped" instance=ExtResource("r1")]
+position=Vector3(0, 0, 0)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+metadata/physical_surface=true
+
+[node name="Model" parent="Mount/Passed" instance=ExtResource("r2")]
+position=Vector3(0, 0, 0)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+metadata/physical_surface=true
+
+[node name="Interaction" type="Marker3D" parent="Mount"]
+position=Vector3(0, 0.35, 0.25)
+
+[node name="SafeApproach" type="Marker3D" parent="Mount"]
+position=Vector3(-0.62, 0, 0.6)

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="Script" path="res://art/dressing/damp-dressing-v1/appearance.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/dressing/damp-dressing-v1/exit-mushrooms.glb" id="exit-mushrooms"]
+
+[node name="DampDressing" type="Node3D"]
+script=ExtResource("script")
+states=PackedStringArray("static")
+state="static"
+variant="damp"
+optional_glow=true
+metadata/asset_id="fungus-pulse"
+metadata/mount="edge"
+
+[node name="Static" parent="." instance=ExtResource("exit-mushrooms")]
+metadata/appearance_state="static"

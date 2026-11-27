@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="Script" path="res://art/enemies/damp-creatures-v1/actor.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/enemies/damp-creatures-v1/pale-newt.glb" id="model"]
+[node name="DampCreature" type="Node3D"]
+script=ExtResource("script")
+pose_bounds={"attack": AABB(-0.30840, 0.00900, -0.92020, 0.61670, 0.40690, 1.68310), "emerge": AABB(-0.30760, 0.00800, -0.92020, 0.61170, 0.40440, 1.58020), "fall": AABB(-0.30730, 0.00800, -0.92020, 0.61500, 0.40500, 1.58020), "hurt": AABB(-0.33090, 0.00900, -0.92020, 0.63450, 0.46190, 1.58020), "idle": AABB(-0.30850, 0.00900, -0.92020, 0.61690, 0.42140, 1.58020), "rear": AABB(-0.30850, 0.00900, -0.92020, 0.61690, 0.96230, 1.58020), "run": AABB(-0.30850, 0.00900, -0.92020, 0.61690, 0.41340, 1.58020), "submerge": AABB(-0.30730, 0.00800, -0.92020, 0.61470, 0.40440, 1.58020), "walk": AABB(-0.30850, 0.00900, -0.92020, 0.61690, 0.41340, 1.58020)}
+contact_size=Vector2(0.55, 1.1)
+metadata/asset_id="pale-newt"
+metadata/visual_height=0.43040
+[node name="Model" parent="." instance=ExtResource("model")]

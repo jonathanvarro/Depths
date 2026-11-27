@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="Script" path="res://art/dressing/damp-dressing-v1/appearance.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/dressing/damp-dressing-v1/pearl-niche.glb" id="pearl-niche"]
+
+[node name="DampDressing" type="Node3D"]
+script=ExtResource("script")
+states=PackedStringArray("static")
+state="static"
+variant="damp"
+optional_glow=false
+metadata/asset_id="pearl-niche"
+metadata/mount="wall"
+
+[node name="Static" parent="." instance=ExtResource("pearl-niche")]
+metadata/appearance_state="static"

@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3]
+[ext_resource type="Script" path="res://art/props/damp-sites-v1/site.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/props/damp-sites-v1/blind-fish-pool.glb" id="r0"]
+[ext_resource type="PackedScene" path="res://art/props/expedition-3d-v1/abandoned-pack.tscn" id="r1"]
+[sub_resource type="CylinderMesh" id="water2mesh"]
+top_radius=0.56
+bottom_radius=0.56
+height=0.002
+radial_segments=32
+[sub_resource type="StandardMaterial3D" id="water2mat"]
+albedo_color=Color(0.12,0.19,0.19,1)
+roughness=0.28
+metallic_specular=0.32
+
+[node name="DampSite" type="Node3D"]
+script=ExtResource("script")
+states=PackedStringArray("fresh","emptied")
+state="fresh"
+mount_mode="floor"
+metadata/asset_id="sunken-satchel"
+metadata/requires_floor_cut=false
+
+[node name="Mount" type="Node3D" parent="."]
+
+[node name="Fresh" type="Node3D" parent="Mount"]
+metadata/appearance_state="fresh"
+
+[node name="Emptied" type="Node3D" parent="Mount"]
+metadata/appearance_state="emptied"
+visible=false
+
+[node name="Pool" parent="Mount" instance=ExtResource("r0")]
+position=Vector3(0, 0, 0)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+metadata/physical_surface=true
+
+[node name="OpaquePoolWater" type="MeshInstance3D" parent="Mount"]
+position=Vector3(0, 0.065, 0)
+mesh=SubResource("water2mesh")
+material_override=SubResource("water2mat")
+cast_shadow=0
+scale=Vector3(1,1,0.6696428571428571)
+
+[node name="Pack" parent="Mount/Fresh" instance=ExtResource("r1")]
+position=Vector3(0, -0.18, 0)
+scale=Vector3(0.8, 0.8, 0.8)
+rotation_degrees=Vector3(0,-12,0)
+state="closed"
+animate_motion=false
+
+[node name="Pack" parent="Mount/Emptied" instance=ExtResource("r1")]
+position=Vector3(0, -0.18, 0)
+scale=Vector3(0.8, 0.8, 0.8)
+rotation_degrees=Vector3(0,-12,0)
+state="empty"
+animate_motion=false
+
+[node name="Interaction" type="Marker3D" parent="Mount"]
+position=Vector3(0, 0.3, 0.3)

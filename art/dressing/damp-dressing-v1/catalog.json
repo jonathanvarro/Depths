@@ -1,0 +1,1422 @@
+{
+  "issue": 302,
+  "brief": "C/D environment dressing and remaining early 3D conversions",
+  "units": "metres; min/max in final Godot coordinates",
+  "wall_front": "+Z into room; wall mount at centre; negative Y under ceiling mount; floor origin 0",
+  "assets": [
+    {
+      "id": "wet-flowstone",
+      "model": "res://art/dressing/damp-dressing-v1/wet-flowstone.glb",
+      "triangles": 892,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.5693691968917847,
+        -0.6786816716194153,
+        0.004221894312649965
+      ],
+      "max": [
+        0.5466506481170654,
+        0.6501958966255188,
+        0.13799738883972168
+      ],
+      "mount": "wall",
+      "sha256": "ebf94405aaa35f65fd758ead777c1012d8476913a91cb07e0d424ac8e81363ee",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/wet-flowstone.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "mineral-seep",
+      "model": "res://art/dressing/damp-dressing-v1/mineral-seep.glb",
+      "triangles": 406,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.29697659611701965,
+        -0.3627716600894928,
+        -0.0013818759471178055
+      ],
+      "max": [
+        0.2729966640472412,
+        0.44114363193511963,
+        0.05751018971204758
+      ],
+      "mount": "wall",
+      "sha256": "7157faf6f9129fe2d996599779aaff8fc5870749c6679383f9cd4aeed200c4e0",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/mineral-seep.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "dripping-crack",
+      "model": "res://art/dressing/damp-dressing-v1/dripping-crack.glb",
+      "triangles": 442,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.29697659611701965,
+        -0.4208099842071533,
+        -0.0013818759471178055
+      ],
+      "max": [
+        0.2729966640472412,
+        0.44114363193511963,
+        0.07416746020317078
+      ],
+      "mount": "wall",
+      "sha256": "cad0e78672e339dc9a7ddfa6d6921d1ae94ccb32b1f0ba54fca55d232280d874",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/dripping-crack.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "damp-moss",
+      "model": "res://art/dressing/damp-dressing-v1/damp-moss.glb",
+      "triangles": 1796,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.34785279631614685,
+        -0.3049313426017761,
+        0.004681138321757317
+      ],
+      "max": [
+        0.32884901762008667,
+        0.30694013833999634,
+        0.05607440322637558
+      ],
+      "mount": "wall",
+      "sha256": "40f257a29fd66d9943dbbbb5036f904ddcbec100cf8b7f8b16ac1fcd678073e5",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/damp-moss.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "pearl-niche",
+      "model": "res://art/dressing/damp-dressing-v1/pearl-niche.glb",
+      "triangles": 1560,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.3758130371570587,
+        -0.35868167877197266,
+        0.006000000052154064
+      ],
+      "max": [
+        0.3733207881450653,
+        0.33019593358039856,
+        0.27469056844711304
+      ],
+      "mount": "wall",
+      "sha256": "474fc2552e0c8774a79e17f83b5aecebcce95a3999024fbd4ae0a893701abe91",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/pearl-niche.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "soda-straws",
+      "model": "res://art/dressing/damp-dressing-v1/soda-straws.glb",
+      "triangles": 858,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.32164475321769714,
+        -0.5162279009819031,
+        -0.18638348579406738
+      ],
+      "max": [
+        0.28079158067703247,
+        0.0015937124844640493,
+        0.19374185800552368
+      ],
+      "mount": "ceiling",
+      "sha256": "fec6decc6af8fc947c32f4b7a553c00dced41a200aad643183e3e2b01eff1e13",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/soda-straws.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "drip-stalactite",
+      "model": "res://art/dressing/damp-dressing-v1/drip-stalactite.glb",
+      "triangles": 38,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.09458368271589279,
+        -0.6302447319030762,
+        -0.10236742347478867
+      ],
+      "max": [
+        0.1049799695611,
+        0.0020508908201009035,
+        0.10236742347478867
+      ],
+      "mount": "ceiling",
+      "sha256": "24a161e8ac9fafba17852c4af49477817736a01b97960705601240ce04789841",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/drip-stalactite.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "hanging-wet-roots",
+      "model": "res://art/dressing/damp-dressing-v1/hanging-wet-roots.glb",
+      "triangles": 780,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.6740782260894775,
+        -0.4311373829841614,
+        -0.18675409257411957
+      ],
+      "max": [
+        0.7357926368713379,
+        0.005808881483972073,
+        0.11677917838096619
+      ],
+      "mount": "ceiling",
+      "sha256": "1609ea1a46cc17794c596e62548a33f2d152c43c58ef8c59317865d67004aa1f",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/hanging-wet-roots.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "rimstone-edge",
+      "model": "res://art/dressing/damp-dressing-v1/rimstone-edge.glb",
+      "triangles": 672,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.5187197327613831,
+        0.006000000983476639,
+        -0.39905256032943726
+      ],
+      "max": [
+        0.5187197327613831,
+        0.18000000715255737,
+        -0.004251134116202593
+      ],
+      "mount": "edge",
+      "sha256": "ee4e2f999d5cc985011e6e1244f5c2c22b1e8300f678a571f3fb5b4a64d219d8",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/rimstone-edge.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "slick-boulder",
+      "model": "res://art/dressing/damp-dressing-v1/slick-boulder.glb",
+      "triangles": 80,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.40448111295700073,
+        0.013425052165985107,
+        -0.30265894532203674
+      ],
+      "max": [
+        0.39261531829833984,
+        0.47778430581092834,
+        0.29057273268699646
+      ],
+      "mount": "edge",
+      "sha256": "78d090b9945c4aca66ca66c7db6c2f11a334c2b0bb2d27747c22ee968e7e0aa9",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/slick-boulder.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "wet-stalagmite",
+      "model": "res://art/dressing/damp-dressing-v1/wet-stalagmite.glb",
+      "triangles": 92,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.11867237091064453,
+        -0.021255476400256157,
+        -0.11941748112440109
+      ],
+      "max": [
+        0.11867237091064453,
+        0.39231523871421814,
+        0.11941748112440109
+      ],
+      "mount": "edge",
+      "sha256": "ff56a7ba1cfa5b7ef18ff7ca33e8ac384a112d57672249ddfc116941e7ee8a17",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/wet-stalagmite.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "drowned-debris",
+      "model": "res://art/dressing/damp-dressing-v1/drowned-debris.glb",
+      "triangles": 770,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.5102742910385132,
+        -0.05357612669467926,
+        -0.2345229685306549
+      ],
+      "max": [
+        0.44280001521110535,
+        0.4317493140697479,
+        0.2849999964237213
+      ],
+      "mount": "edge",
+      "sha256": "498164f661de71690926f4de8bc62b4d17cf16331c1a26147f2504f46ec511e1",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/drowned-debris.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "puddle-small",
+      "model": "res://art/dressing/damp-dressing-v1/puddle-small.glb",
+      "triangles": 128,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.390471488237381,
+        0.005954914726316929,
+        -0.2647503614425659
+      ],
+      "max": [
+        0.3479464054107666,
+        0.014999999664723873,
+        0.24514666199684143
+      ],
+      "mount": "floor",
+      "sha256": "ef998f38705a427fa8b440170143bcef7363f2a5021c5ba0d9af3d9a51eab878",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/puddle-small.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "puddle-wide",
+      "model": "res://art/dressing/damp-dressing-v1/puddle-wide.glb",
+      "triangles": 128,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.682348906993866,
+        0.005954914726316929,
+        -0.4602932631969452
+      ],
+      "max": [
+        0.7050492763519287,
+        0.014999999664723873,
+        0.4608757197856903
+      ],
+      "mount": "floor",
+      "sha256": "90fed5ec0aba3d3d354096bf1564035ee6beabd26a0a11c3044727a40071147b",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/puddle-wide.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "silt-ripples",
+      "model": "res://art/dressing/damp-dressing-v1/silt-ripples.glb",
+      "triangles": 626,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.5633687376976013,
+        0.004000000189989805,
+        -0.4030178189277649
+      ],
+      "max": [
+        0.58699631690979,
+        0.023000000044703484,
+        0.4096989631652832
+      ],
+      "mount": "floor",
+      "sha256": "4430fc79f0c4d707c7d1af625dc6deb22298c8095d130bd37c6621c9e38fba1c",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/silt-ripples.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "mud-bootprints",
+      "model": "res://art/dressing/damp-dressing-v1/mud-bootprints.glb",
+      "triangles": 276,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.5633687376976013,
+        0.004000000189989805,
+        -0.4030178189277649
+      ],
+      "max": [
+        0.58699631690979,
+        0.020000001415610313,
+        0.4096989631652832
+      ],
+      "mount": "floor",
+      "sha256": "24386d6e2070237aca4711c260c1e0e3ff0f5a5637015100c9d0aa76c5daae96",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/mud-bootprints.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "wet-gravel",
+      "model": "res://art/dressing/damp-dressing-v1/wet-gravel.glb",
+      "triangles": 1520,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.5824604630470276,
+        -0.010981965810060501,
+        -0.19584067165851593
+      ],
+      "max": [
+        0.49221763014793396,
+        0.053221676498651505,
+        0.2451794445514679
+      ],
+      "mount": "floor",
+      "sha256": "cd15e0bf70018bd98a8205a47306440478c5d3e2f4b07cbcd8ab5d71cd7ee419",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/wet-gravel.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "cracks-rubble",
+      "model": "res://art/dressing/damp-dressing-v1/cracks-rubble.glb",
+      "triangles": 922,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.447854608297348,
+        -0.4341021776199341,
+        -0.0013818759471178055
+      ],
+      "max": [
+        0.4310288429260254,
+        0.44114363193511963,
+        0.1829652488231659
+      ],
+      "mount": "wall",
+      "sha256": "002c4ad92ce47316b7ad2798acda977bf70b7185bba44b83e71ecfc8c9aa956d",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/cracks-rubble.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "chalk-arrow",
+      "model": "res://art/dressing/damp-dressing-v1/chalk-arrow.glb",
+      "triangles": 42,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.3033532500267029,
+        -0.08762177079916,
+        -0.0035105664283037186
+      ],
+      "max": [
+        0.2997925877571106,
+        0.24865426123142242,
+        0.015510566532611847
+      ],
+      "mount": "wall",
+      "sha256": "83603f3373ab80196e90b05d3bf917a553b504acad6504d92d95f50d10ff1605",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/chalk-arrow.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "chalk-cross",
+      "model": "res://art/dressing/damp-dressing-v1/chalk-cross.glb",
+      "triangles": 32,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.20754605531692505,
+        -0.23530860245227814,
+        -0.003510565496981144
+      ],
+      "max": [
+        0.20754605531692505,
+        0.23656179010868073,
+        0.015510565601289272
+      ],
+      "mount": "wall",
+      "sha256": "490babeac94e3d3307f4fbd78f747493797f541e4514ac700f4c8915e815d901",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/chalk-cross.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "chalk-tally",
+      "model": "res://art/dressing/damp-dressing-v1/chalk-tally.glb",
+      "triangles": 80,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.3137419521808624,
+        -0.2205503284931183,
+        -0.003510565496981144
+      ],
+      "max": [
+        0.26302728056907654,
+        0.22068023681640625,
+        0.015510565601289272
+      ],
+      "mount": "wall",
+      "sha256": "ccc45238a1b6bf13491ddd84719deafc6a3a1d1d752c03ba0318e5fd1d5d607f",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/chalk-tally.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "web-strand",
+      "model": "res://art/dressing/damp-dressing-v1/web-strand.glb",
+      "triangles": 348,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.6209542155265808,
+        -0.36091914772987366,
+        -0.01695340685546398
+      ],
+      "max": [
+        0.6111654043197632,
+        -0.01824229210615158,
+        0.12099231034517288
+      ],
+      "mount": "ceiling",
+      "sha256": "c385567c95670e6d049abf0d80fc2f387f2f73b51acde75bdfce4ab3a45d1394",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/web-strand.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "rat-nest",
+      "model": "res://art/dressing/damp-dressing-v1/rat-nest.glb",
+      "triangles": 836,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.31104665994644165,
+        0.00800000037997961,
+        -0.23179037868976593
+      ],
+      "max": [
+        0.31123730540275574,
+        0.07599668204784393,
+        0.22964948415756226
+      ],
+      "mount": "edge",
+      "sha256": "058b7b8fcf9b8b49091a1aae75626116e396216a01dfc64e2ae20658d8555a16",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/rat-nest.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "tracks-drag",
+      "model": "res://art/dressing/damp-dressing-v1/tracks-drag.glb",
+      "triangles": 626,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.5633687376976013,
+        0.004000000189989805,
+        -0.4030178189277649
+      ],
+      "max": [
+        0.58699631690979,
+        0.023000000044703484,
+        0.4096989631652832
+      ],
+      "mount": "floor",
+      "sha256": "0060dc42c9c617bbf3425d20c5c1ecf283ab1297e95be517ef1d7d68679fc75d",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/tracks-drag.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "floor-crack",
+      "model": "res://art/dressing/damp-dressing-v1/floor-crack.glb",
+      "triangles": 82,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.5610392689704895,
+        -0.004956427961587906,
+        -0.19292058050632477
+      ],
+      "max": [
+        0.5507447719573975,
+        0.02399982139468193,
+        0.222659170627594
+      ],
+      "mount": "floor",
+      "sha256": "45999d3f4ad3d15423f94618a4a48406358ca7a7a026787085f8451f27880393",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/floor-crack.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "old-scorch",
+      "model": "res://art/dressing/damp-dressing-v1/old-scorch.glb",
+      "triangles": 600,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.45240533351898193,
+        -0.0026089735329151154,
+        -0.287781298160553
+      ],
+      "max": [
+        0.434561550617218,
+        0.056499745696783066,
+        0.3068334460258484
+      ],
+      "mount": "floor",
+      "sha256": "a61892c8145a690f1e734cb81dd0b5915b441b68e5e6d4b6c0761d1f751e1865",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/old-scorch.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "moss-curtain",
+      "model": "res://art/dressing/damp-dressing-v1/moss-curtain.glb",
+      "triangles": 780,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.6740782260894775,
+        -0.4311373829841614,
+        -0.18675409257411957
+      ],
+      "max": [
+        0.7357926368713379,
+        0.005808881483972073,
+        0.11677917838096619
+      ],
+      "mount": "ceiling",
+      "sha256": "3c6d6e34a5d1a9b98e6df1f2b9d1db1ba18bb9e7086596f8867d71295f01c3d0",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/moss-curtain.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "root-curtain-a",
+      "model": "res://art/dressing/damp-dressing-v1/root-curtain-a.glb",
+      "triangles": 780,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.6740782260894775,
+        -0.4311373829841614,
+        -0.18675409257411957
+      ],
+      "max": [
+        0.7357926368713379,
+        0.005808881483972073,
+        0.11677917838096619
+      ],
+      "mount": "ceiling",
+      "sha256": "691178e95e0a98923b6e874237a34c9cf08633ea73810d5f7595ee69703da7d8",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/root-curtain-a.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "root-curtain-b",
+      "model": "res://art/dressing/damp-dressing-v1/root-curtain-b.glb",
+      "triangles": 780,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.6740530729293823,
+        -0.43214094638824463,
+        -0.18293623626232147
+      ],
+      "max": [
+        0.7357926368713379,
+        0.0058463518507778645,
+        0.10976383090019226
+      ],
+      "mount": "ceiling",
+      "sha256": "19618d62e5177916df562f4b4e83a65e3d67802d10a6593c2b93960ddd6b548d",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/root-curtain-b.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "root-foot-tangle",
+      "model": "res://art/dressing/damp-dressing-v1/root-foot-tangle.glb",
+      "triangles": 320,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.36540687084198,
+        0.0071447668597102165,
+        -0.33446717262268066
+      ],
+      "max": [
+        0.4507572650909424,
+        0.18577709794044495,
+        0.33446717262268066
+      ],
+      "mount": "edge",
+      "sha256": "18fd57fafce68f83a22f44abf9d336bec58928a916905dbcbe6c8779e4126082",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/root-foot-tangle.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "floor-crossing-root",
+      "model": "res://art/dressing/damp-dressing-v1/floor-crossing-root.glb",
+      "triangles": 78,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.801933765411377,
+        0.008784525096416473,
+        -0.09749731421470642
+      ],
+      "max": [
+        0.7802890539169312,
+        0.0809965506196022,
+        0.11193250119686127
+      ],
+      "mount": "floor",
+      "sha256": "e1a593f4a1308451ae77040fd75b45b1bf16d12efff101a1515c5149b7349ce3",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/floor-crossing-root.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "collapsed-crates",
+      "model": "res://art/dressing/damp-dressing-v1/collapsed-crates.glb",
+      "triangles": 1528,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.3644767999649048,
+        -0.021683290600776672,
+        -0.2817036509513855
+      ],
+      "max": [
+        0.4304598867893219,
+        0.4121125042438507,
+        0.27957314252853394
+      ],
+      "mount": "edge",
+      "sha256": "64c023e650b1cfe2ff021b6afecbedbf28f921ad5b579954af215eb1b4cda5de",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/collapsed-crates.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "split-barrel",
+      "model": "res://art/dressing/damp-dressing-v1/split-barrel.glb",
+      "triangles": 324,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.25,
+        -0.03615278750658035,
+        -0.2377641350030899
+      ],
+      "max": [
+        0.45621415972709656,
+        0.5099999904632568,
+        0.24710404872894287
+      ],
+      "mount": "edge",
+      "sha256": "9598483d6cbfebae6f21ac284912f6ca3ca589807fda31333841ff0fe431ecd6",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/split-barrel.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "fallen-banner",
+      "model": "res://art/dressing/damp-dressing-v1/fallen-banner.glb",
+      "triangles": 232,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.3400438725948334,
+        0.004053695593029261,
+        -0.46000000834465027
+      ],
+      "max": [
+        0.30004099011421204,
+        0.06280718743801117,
+        0.46000000834465027
+      ],
+      "mount": "floor",
+      "sha256": "4db9185df757cbae0632a56726550fb421696a6c71f088209392a65b66435af4",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/fallen-banner.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "cache-rubble-planks",
+      "model": "res://art/dressing/damp-dressing-v1/cache-rubble-planks.glb",
+      "triangles": 656,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.563369631767273,
+        -0.04402698576450348,
+        -0.2557726800441742
+      ],
+      "max": [
+        0.5520761609077454,
+        0.14548327028751373,
+        0.24143189191818237
+      ],
+      "mount": "floor",
+      "sha256": "9684d82353b57f6118b2566dc83b805f7be06a9e56aa64f6c365f59e238c6396",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/cache-rubble-planks.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "cache-spilled-grain",
+      "model": "res://art/dressing/damp-dressing-v1/cache-spilled-grain.glb",
+      "triangles": 3064,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.44510841369628906,
+        0.003421013243496418,
+        -0.2564174234867096
+      ],
+      "max": [
+        0.4642322063446045,
+        0.02271612361073494,
+        0.27992942929267883
+      ],
+      "mount": "floor",
+      "sha256": "37e299445e7885d65b4ed0f896bc91d222aba12abcc4a566ca0fc9f10c80894d",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/cache-spilled-grain.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "exit-mushrooms",
+      "model": "res://art/dressing/damp-dressing-v1/exit-mushrooms.glb",
+      "triangles": 960,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.4359999895095825,
+        0.001855685142800212,
+        -0.3100000023841858
+      ],
+      "max": [
+        0.4339999854564667,
+        0.41999998688697815,
+        0.23000000417232513
+      ],
+      "mount": "edge",
+      "sha256": "a1b8037f2d9e794fbc5d7e12c36c0ee5a95ce30300dc334663059f5ee8b67677",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/exit-mushrooms.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "exit-floor-mold",
+      "model": "res://art/dressing/damp-dressing-v1/exit-floor-mold.glb",
+      "triangles": 2080,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.3535500168800354,
+        -0.00290064699947834,
+        -0.2500793933868408
+      ],
+      "max": [
+        0.37525591254234314,
+        0.026977550238370895,
+        0.27070510387420654
+      ],
+      "mount": "floor",
+      "sha256": "62f88cefd2d4cb5931d641200519e53a5ba4e24f7c5bfdaf9726cfaa7a7fcfca",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/exit-floor-mold.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "exit-wall-mold",
+      "model": "res://art/dressing/damp-dressing-v1/exit-wall-mold.glb",
+      "triangles": 1796,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.34785279631614685,
+        -0.3049313426017761,
+        0.004681138321757317
+      ],
+      "max": [
+        0.32884901762008667,
+        0.30694013833999634,
+        0.05607440322637558
+      ],
+      "mount": "wall",
+      "sha256": "3b3e81cccb3a35516af75db7070c4219e8db4416805747e39790769c517f1ca6",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "static"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/exit-wall-mold.tscn",
+      "appearance_state": "static"
+    },
+    {
+      "id": "goblin-stash-fresh",
+      "model": "res://art/dressing/damp-dressing-v1/goblin-stash-fresh.glb",
+      "triangles": 971,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.46856972575187683,
+        -0.009655702859163284,
+        -0.2764064371585846
+      ],
+      "max": [
+        0.5299999713897705,
+        0.2761407196521759,
+        0.272529661655426
+      ],
+      "mount": "floor",
+      "sha256": "81a3312592b39e48b0c4ae3ac7a9b132959ba7fc95cbbd6553c6389a9ff5dddf",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "fresh",
+        "empty"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/goblin-stash.tscn",
+      "appearance_state": "fresh"
+    },
+    {
+      "id": "goblin-stash-empty",
+      "model": "res://art/dressing/damp-dressing-v1/goblin-stash-empty.glb",
+      "triangles": 572,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.46856972575187683,
+        -0.009655702859163284,
+        -0.2764064371585846
+      ],
+      "max": [
+        0.45576947927474976,
+        0.2659154534339905,
+        0.272529661655426
+      ],
+      "mount": "floor",
+      "sha256": "6104f243e59daecedadca6b9367b895c229168b8958ffc68eb3e96a40887b05c",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "fresh",
+        "empty"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/goblin-stash.tscn",
+      "appearance_state": "empty"
+    },
+    {
+      "id": "lamp-store-fresh",
+      "model": "res://art/dressing/damp-dressing-v1/lamp-store-fresh.glb",
+      "triangles": 1844,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.550000011920929,
+        0.00404001772403717,
+        -0.15616479516029358
+      ],
+      "max": [
+        0.5500001311302185,
+        0.9609341025352478,
+        0.15448898077011108
+      ],
+      "mount": "floor",
+      "sha256": "05734042d3a3fea260c54e20b99a2ebaf7f4dbf6862ac7665a1808568d2730c8",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "fresh",
+        "used"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/lamp-store.tscn",
+      "appearance_state": "fresh"
+    },
+    {
+      "id": "lamp-store-used",
+      "model": "res://art/dressing/damp-dressing-v1/lamp-store-used.glb",
+      "triangles": 1596,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.550000011920929,
+        0.00404001772403717,
+        -0.15616479516029358
+      ],
+      "max": [
+        0.5500001311302185,
+        0.9609341025352478,
+        0.15448898077011108
+      ],
+      "mount": "floor",
+      "sha256": "394f60e3510398da0eef84e1cf7ee512a93a8e4cdec88fc75e1ba6ca22c607be",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "fresh",
+        "used"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/lamp-store.tscn",
+      "appearance_state": "used"
+    },
+    {
+      "id": "three-knocks-fresh",
+      "model": "res://art/dressing/damp-dressing-v1/three-knocks-fresh.glb",
+      "triangles": 2338,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.7357085943222046,
+        0.010749999433755875,
+        -0.29666268825531006
+      ],
+      "max": [
+        0.699411928653717,
+        1.399699330329895,
+        0.42829999327659607
+      ],
+      "mount": "floor",
+      "sha256": "e03d92c72ba6db29c85f3ce693522b04da7d60dbe9a1139227e4d749e2d5ab17",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "fresh",
+        "used"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/three-knocks.tscn",
+      "appearance_state": "fresh"
+    },
+    {
+      "id": "three-knocks-used",
+      "model": "res://art/dressing/damp-dressing-v1/three-knocks-used.glb",
+      "triangles": 2338,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.7357085943222046,
+        -0.028058655560016632,
+        -0.29666268825531006
+      ],
+      "max": [
+        0.699411928653717,
+        1.399699330329895,
+        0.42829999327659607
+      ],
+      "mount": "floor",
+      "sha256": "34ea53fcc5207774484370f28cb081d2787c62d632eb21dde412ffa52d128234",
+      "lights": 0,
+      "bones": 0,
+      "states": [
+        "fresh",
+        "used"
+      ],
+      "scene": "res://art/dressing/damp-dressing-v1/three-knocks.tscn",
+      "appearance_state": "used"
+    }
+  ],
+  "sources": [
+    {
+      "type": "Original authored geometry",
+      "builder": "tools/damp_caves/build_dressing.py",
+      "helpers": [
+        "tools/mine_props/build_models.py",
+        "tools/mine_polish/build_models.py"
+      ],
+      "note": "Reuses original worn-prop primitives, mesh/UV/vertex-colour export conventions. No private/downloaded models or pixels."
+    }
+  ],
+  "builder_sha256": "91d993e4d8a8fbbf82fcd919f9795560ac38156eaa8c31650c0837fcaf441c53",
+  "hookup": "No live bindings changed. Caller owns theme, actual wall/roof anchors, collision, water, poison, route and quest state.",
+  "dispositions": [
+    {
+      "old_id": "cracks-rubble",
+      "damp_scene": "res://art/dressing/damp-dressing-v1/cracks-rubble.tscn",
+      "mine_scene": "res://art/dressing/damp-dressing-v1/mine-cracks-rubble.tscn",
+      "note": "Presentation replacement only; retain original until caller hookup. No later-floor daubs/litter/trophies."
+    },
+    {
+      "old_id": "chalk-arrow",
+      "damp_scene": "res://art/dressing/damp-dressing-v1/chalk-arrow.tscn",
+      "mine_scene": "res://art/dressing/damp-dressing-v1/mine-chalk-arrow.tscn",
+      "note": "Presentation replacement only; retain original until caller hookup. No later-floor daubs/litter/trophies."
+    },
+    {
+      "old_id": "chalk-cross",
+      "damp_scene": "res://art/dressing/damp-dressing-v1/chalk-cross.tscn",
+      "mine_scene": "res://art/dressing/damp-dressing-v1/mine-chalk-cross.tscn",
+      "note": "Presentation replacement only; retain original until caller hookup. No later-floor daubs/litter/trophies."
+    },
+    {
+      "old_id": "chalk-tally",
+      "damp_scene": "res://art/dressing/damp-dressing-v1/chalk-tally.tscn",
+      "mine_scene": "res://art/dressing/damp-dressing-v1/mine-chalk-tally.tscn",
+      "note": "Presentation replacement only; retain original until caller hookup. No later-floor daubs/litter/trophies."
+    },
+    {
+      "old_id": "web-strand",
+      "damp_scene": "res://art/dressing/damp-dressing-v1/web-strand.tscn",
+      "mine_scene": "res://art/dressing/damp-dressing-v1/mine-web-strand.tscn",
+      "note": "Presentation replacement only; retain original until caller hookup. No later-floor daubs/litter/trophies."
+    },
+    {
+      "old_id": "rat-nest",
+      "damp_scene": "res://art/dressing/damp-dressing-v1/rat-nest.tscn",
+      "mine_scene": "res://art/dressing/damp-dressing-v1/mine-rat-nest.tscn",
+      "note": "Presentation replacement only; retain original until caller hookup. No later-floor daubs/litter/trophies."
+    },
+    {
+      "old_id": "puddle-small",
+      "damp_scene": "res://art/dressing/damp-dressing-v1/puddle-small.tscn",
+      "mine_scene": "res://art/dressing/damp-dressing-v1/mine-puddle-small.tscn",
+      "note": "Presentation replacement only; retain original until caller hookup. No later-floor daubs/litter/trophies."
+    },
+    {
+      "old_id": "puddle-wide",
+      "damp_scene": "res://art/dressing/damp-dressing-v1/puddle-wide.tscn",
+      "mine_scene": "res://art/dressing/damp-dressing-v1/mine-puddle-wide.tscn",
+      "note": "Presentation replacement only; retain original until caller hookup. No later-floor daubs/litter/trophies."
+    },
+    {
+      "old_id": "wet-gravel",
+      "damp_scene": "res://art/dressing/damp-dressing-v1/wet-gravel.tscn",
+      "mine_scene": "res://art/dressing/damp-dressing-v1/mine-wet-gravel.tscn",
+      "note": "Presentation replacement only; retain original until caller hookup. No later-floor daubs/litter/trophies."
+    },
+    {
+      "old_id": "tracks-drag",
+      "damp_scene": "res://art/dressing/damp-dressing-v1/tracks-drag.tscn",
+      "mine_scene": "res://art/dressing/damp-dressing-v1/mine-tracks-drag.tscn",
+      "note": "Presentation replacement only; retain original until caller hookup. No later-floor daubs/litter/trophies."
+    },
+    {
+      "old_id": "floor-crack",
+      "damp_scene": "res://art/dressing/damp-dressing-v1/floor-crack.tscn",
+      "mine_scene": "res://art/dressing/damp-dressing-v1/mine-floor-crack.tscn",
+      "note": "Presentation replacement only; retain original until caller hookup. No later-floor daubs/litter/trophies."
+    },
+    {
+      "old_id": "old-scorch",
+      "damp_scene": "res://art/dressing/damp-dressing-v1/old-scorch.tscn",
+      "mine_scene": "res://art/dressing/damp-dressing-v1/mine-old-scorch.tscn",
+      "note": "Presentation replacement only; retain original until caller hookup. No later-floor daubs/litter/trophies."
+    },
+    {
+      "old_id": "root-curtain-a",
+      "damp_scene": "res://art/dressing/damp-dressing-v1/root-curtain-a.tscn",
+      "mine_scene": "res://art/dressing/damp-dressing-v1/mine-root-curtain-a.tscn",
+      "note": "Presentation replacement only; retain original until caller hookup. No later-floor daubs/litter/trophies."
+    },
+    {
+      "old_id": "root-curtain-b",
+      "damp_scene": "res://art/dressing/damp-dressing-v1/root-curtain-b.tscn",
+      "mine_scene": "res://art/dressing/damp-dressing-v1/mine-root-curtain-b.tscn",
+      "note": "Presentation replacement only; retain original until caller hookup. No later-floor daubs/litter/trophies."
+    },
+    {
+      "old_id": "root-foot-tangle",
+      "damp_scene": "res://art/dressing/damp-dressing-v1/root-foot-tangle.tscn",
+      "mine_scene": "res://art/dressing/damp-dressing-v1/mine-root-foot-tangle.tscn",
+      "note": "Presentation replacement only; retain original until caller hookup. No later-floor daubs/litter/trophies."
+    },
+    {
+      "old_id": "floor-crossing-root",
+      "damp_scene": "res://art/dressing/damp-dressing-v1/floor-crossing-root.tscn",
+      "mine_scene": "res://art/dressing/damp-dressing-v1/mine-floor-crossing-root.tscn",
+      "note": "Presentation replacement only; retain original until caller hookup. No later-floor daubs/litter/trophies."
+    },
+    {
+      "old_id": "collapsed-crates",
+      "damp_scene": "res://art/dressing/damp-dressing-v1/collapsed-crates.tscn",
+      "mine_scene": "res://art/dressing/damp-dressing-v1/mine-collapsed-crates.tscn",
+      "note": "Presentation replacement only; retain original until caller hookup. No later-floor daubs/litter/trophies."
+    },
+    {
+      "old_id": "split-barrel",
+      "damp_scene": "res://art/dressing/damp-dressing-v1/split-barrel.tscn",
+      "mine_scene": "res://art/dressing/damp-dressing-v1/mine-split-barrel.tscn",
+      "note": "Presentation replacement only; retain original until caller hookup. No later-floor daubs/litter/trophies."
+    },
+    {
+      "old_id": "fallen-banner",
+      "damp_scene": "res://art/dressing/damp-dressing-v1/fallen-banner.tscn",
+      "mine_scene": "res://art/dressing/damp-dressing-v1/mine-fallen-banner.tscn",
+      "note": "Presentation replacement only; retain original until caller hookup. No later-floor daubs/litter/trophies."
+    },
+    {
+      "old_id": "cache-rubble-planks",
+      "damp_scene": "res://art/dressing/damp-dressing-v1/cache-rubble-planks.tscn",
+      "mine_scene": "res://art/dressing/damp-dressing-v1/mine-cache-rubble-planks.tscn",
+      "note": "Presentation replacement only; retain original until caller hookup. No later-floor daubs/litter/trophies."
+    },
+    {
+      "old_id": "cache-spilled-grain",
+      "damp_scene": "res://art/dressing/damp-dressing-v1/cache-spilled-grain.tscn",
+      "mine_scene": "res://art/dressing/damp-dressing-v1/mine-cache-spilled-grain.tscn",
+      "note": "Presentation replacement only; retain original until caller hookup. No later-floor daubs/litter/trophies."
+    },
+    {
+      "old_id": "floor-gravel",
+      "damp_scene": "res://art/dressing/damp-dressing-v1/wet-gravel.tscn",
+      "mine_scene": "res://art/dressing/damp-dressing-v1/mine-wet-gravel.tscn",
+      "note": "Presentation replacement only; retain original until caller hookup. No later-floor daubs/litter/trophies."
+    },
+    {
+      "old_id": "moss-curtain",
+      "damp_scene": "res://art/dressing/damp-dressing-v1/moss-curtain.tscn",
+      "mine_scene": null,
+      "note": "Presentation replacement only; retain original until caller hookup. No later-floor daubs/litter/trophies."
+    },
+    {
+      "old_id": "moss-curtain-lit",
+      "damp_scene": "res://art/dressing/damp-dressing-v1/moss-curtain-lit.tscn",
+      "mine_scene": null,
+      "note": "Presentation replacement only; retain original until caller hookup. No later-floor daubs/litter/trophies."
+    },
+    {
+      "old_id": "fungus-pulse",
+      "damp_scene": "res://art/dressing/damp-dressing-v1/fungus-pulse.tscn",
+      "mine_scene": null,
+      "note": "Presentation replacement only; retain original until caller hookup. No later-floor daubs/litter/trophies."
+    },
+    {
+      "old_id": "drip",
+      "damp_scene": "res://art/dressing/damp-dressing-v1/drip.tscn",
+      "mine_scene": null,
+      "note": "Presentation replacement only; retain original until caller hookup. No later-floor daubs/litter/trophies."
+    },
+    {
+      "old_id": "goblin-stash",
+      "damp_scene": "res://art/dressing/damp-dressing-v1/goblin-stash.tscn",
+      "mine_scene": null,
+      "note": "Presentation replacement only; retain original until caller hookup. No later-floor daubs/litter/trophies."
+    },
+    {
+      "old_id": "lamp-eaters-lamp",
+      "damp_scene": "res://art/dressing/damp-dressing-v1/lamp-store.tscn",
+      "mine_scene": null,
+      "note": "Presentation replacement only; retain original until caller hookup. No later-floor daubs/litter/trophies."
+    },
+    {
+      "old_id": "three-knocks",
+      "damp_scene": "res://art/dressing/damp-dressing-v1/three-knocks.tscn",
+      "mine_scene": null,
+      "note": "Presentation replacement only; retain original until caller hookup. No later-floor daubs/litter/trophies."
+    }
+  ],
+  "aliases": [
+    {
+      "id": "moss-curtain-lit",
+      "base": "moss-curtain",
+      "optional_glow": true
+    },
+    {
+      "id": "fungus-pulse",
+      "base": "exit-mushrooms",
+      "optional_glow": true
+    },
+    {
+      "id": "drip-stalactite-effect",
+      "base": "drip-stalactite",
+      "effect_draw_budget": 2,
+      "effect_triangle_budget": 400
+    }
+  ],
+  "reuse": [
+    {
+      "path": "res://art/effects/exploration-mist-v1/",
+      "disposition": "Reuse existing three-sheet mist and preference/visibility rules; no second fog implementation."
+    },
+    {
+      "path": "res://art/dressing/cave-growth-3d-v1/",
+      "disposition": "Keep existing formations/wall roots/fungal growth for mine/fungal regions. New damp siblings share original helpers, not duplicate sources."
+    },
+    {
+      "path": "res://art/dressing/mine-refined-v2/",
+      "disposition": "Keep supports, workings, rails, lanterns and shrine; C/D does not rebuild them."
+    },
+    {
+      "path": "res://art/dressing/bone-decor-v1/",
+      "disposition": "Keep verified CC0 bones for later bone-silt landmark."
+    }
+  ],
+  "runtime_contract": {
+    "states": "static, goblin-stash fresh/empty, lamp-store and three-knocks fresh/used; closed/empty legacy aliases",
+    "api": [
+      "state",
+      "set_state(value, animate=false) -> bool",
+      "set_searched(searched)",
+      "set_motion(enabled)"
+    ],
+    "defaults": "Still; no lights/collision, all solid opaque, glow only in explicitly lit wrappers.",
+    "effects": "Drip default off. Ceiling origin, fall_distance determines landing; default 2.16m (ripple at roof-2.19m). Stalactite sibling supplies correctly offset hook. set_motion resets phase exactly.",
+    "mounts": "wall centre at rock face +Z out; ceiling origin at roof, 0.45m maximum fringe; edge/floor origin y=0. Patches sit 4\u201318mm above caller floor; do not raise them like sprites.",
+    "exit_room": "Use exit-mushrooms, exit-floor-mold and exit-wall-mold ONLY in Fungal Hollows exit room. Main Damp Caves stays wet bare limestone. Glow is not party light."
+  }
+}

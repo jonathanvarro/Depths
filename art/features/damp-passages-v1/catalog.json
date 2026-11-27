@@ -1,0 +1,325 @@
+{
+  "issue": 302,
+  "brief": "B1-B4 and destination-specific N1/N2/N3",
+  "assets": [
+    {
+      "id": "cavern-onward",
+      "model": "res://art/features/damp-passages-v1/cavern-onward.glb",
+      "triangles": 2010,
+      "draws": 2,
+      "materials": 2,
+      "min": [
+        -1.0,
+        -0.9100000262260437,
+        -1.0
+      ],
+      "max": [
+        1.0,
+        0.7949999570846558,
+        1.0
+      ],
+      "sha256": "1251f58ed013d99a0780c57d2ef4ede163b9b10b5196319d99b987653b7e9c7a",
+      "states": [
+        "static"
+      ],
+      "mount": "floor-centre",
+      "forward": "-Z",
+      "lights": 0,
+      "bones": 0,
+      "motion": "static; set_motion(false) is exact",
+      "floor_aperture": true,
+      "provides_ground": true,
+      "has_canopy": false,
+      "sign": true,
+      "destination_hint": "cavern",
+      "paired_asset": "cavern-return",
+      "scene": "res://art/features/damp-passages-v1/cavern-onward.tscn",
+      "sign_label": "Cavern",
+      "text_draws": 0,
+      "max_scene_draws": 2,
+      "map_glyph": "res://art/ui/area-routes-v1/exit-cavern.svg",
+      "interaction_label": "Cavern"
+    },
+    {
+      "id": "cavern-return",
+      "model": "res://art/features/damp-passages-v1/cavern-return.glb",
+      "triangles": 2366,
+      "draws": 2,
+      "materials": 2,
+      "min": [
+        -0.9500000476837158,
+        -0.0417276993393898,
+        -0.94268798828125
+      ],
+      "max": [
+        0.8801068067550659,
+        2.197251081466675,
+        0.6995105743408203
+      ],
+      "sha256": "04717a710ed391b0d68fcb7e44de506a7d4527cdd1faeae14db1fe557f0c88e2",
+      "states": [
+        "static"
+      ],
+      "mount": "floor-centre",
+      "forward": "-Z",
+      "lights": 0,
+      "bones": 0,
+      "motion": "static; set_motion(false) is exact",
+      "floor_aperture": false,
+      "provides_ground": false,
+      "has_canopy": true,
+      "sign": true,
+      "destination_hint": "damp-caves",
+      "paired_asset": "cavern-onward",
+      "scene": "res://art/features/damp-passages-v1/cavern-return.tscn",
+      "sign_label": "Damp",
+      "text_draws": 0,
+      "max_scene_draws": 2,
+      "map_glyph": "res://art/ui/area-routes-v1/exit-damp-caves.svg",
+      "interaction_label": "Damp Caves"
+    },
+    {
+      "id": "hollows-onward",
+      "model": "res://art/features/damp-passages-v1/hollows-onward.glb",
+      "triangles": 1606,
+      "draws": 2,
+      "materials": 2,
+      "min": [
+        -1.0,
+        -0.05000000074505806,
+        -1.0
+      ],
+      "max": [
+        1.0,
+        1.7580000162124634,
+        1.0
+      ],
+      "sha256": "6ace2c3c781ea538593443dd6cce9374e6dc3cfdcc0099b6b7164017fd7391aa",
+      "states": [
+        "static"
+      ],
+      "mount": "floor-centre",
+      "forward": "-Z",
+      "lights": 0,
+      "bones": 0,
+      "motion": "static; set_motion(false) is exact",
+      "floor_aperture": false,
+      "provides_ground": true,
+      "has_canopy": false,
+      "sign": true,
+      "destination_hint": "fungal-hollows",
+      "paired_asset": "hollows-return",
+      "scene": "res://art/features/damp-passages-v1/hollows-onward.tscn",
+      "sign_label": "Hollows",
+      "text_draws": 0,
+      "max_scene_draws": 2,
+      "map_glyph": "res://art/ui/area-routes-v1/exit-fungal-hollows.svg",
+      "interaction_label": "Fungal Hollows"
+    },
+    {
+      "id": "hollows-return",
+      "model": "res://art/features/damp-passages-v1/hollows-return.glb",
+      "triangles": 1273,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.9669537544250488,
+        -0.0018428785260766745,
+        -0.8399999737739563
+      ],
+      "max": [
+        0.9746854901313782,
+        1.7580000162124634,
+        0.6995105743408203
+      ],
+      "sha256": "8e28133bd721c8f72bec77c662132d7e7dcfa51ad5a2e14739aa04dde2bc4536",
+      "states": [
+        "static"
+      ],
+      "mount": "floor-centre",
+      "forward": "-Z",
+      "lights": 0,
+      "bones": 0,
+      "motion": "static; set_motion(false) is exact",
+      "floor_aperture": false,
+      "provides_ground": false,
+      "has_canopy": false,
+      "sign": true,
+      "destination_hint": "damp-caves",
+      "paired_asset": "hollows-onward",
+      "scene": "res://art/features/damp-passages-v1/hollows-return.tscn",
+      "sign_label": "Damp",
+      "text_draws": 0,
+      "max_scene_draws": 1,
+      "map_glyph": "res://art/ui/area-routes-v1/exit-damp-caves.svg",
+      "interaction_label": "Damp Caves"
+    },
+    {
+      "id": "curtain-intact",
+      "model": "res://art/features/damp-passages-v1/curtain-intact.glb",
+      "triangles": 1758,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.9781668186187744,
+        0.05295463278889656,
+        -0.2841574251651764
+      ],
+      "max": [
+        0.9744394421577454,
+        2.183048963546753,
+        0.14190012216567993
+      ],
+      "sha256": "98db206f1c4f93b53ee1dcb5006815c35794c6c93f97e9f97773fc5c0fa2291b",
+      "states": [
+        "intact",
+        "opened"
+      ],
+      "mount": "floor-centre",
+      "forward": "-Z",
+      "lights": 0,
+      "bones": 0,
+      "motion": "static; set_motion(false) is exact",
+      "floor_aperture": false,
+      "provides_ground": false,
+      "has_canopy": false,
+      "sign": false,
+      "max_scene_draws": 1,
+      "scene": "res://art/features/damp-passages-v1/curtain-intact.tscn",
+      "state_wrapper_draws": 1,
+      "state_wrapper_materials": 1
+    },
+    {
+      "id": "curtain-opened",
+      "model": "res://art/features/damp-passages-v1/curtain-opened.glb",
+      "triangles": 680,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.9781668186187744,
+        0.5823059678077698,
+        -0.2841574251651764
+      ],
+      "max": [
+        0.9744394421577454,
+        2.183048963546753,
+        0.08815748244524002
+      ],
+      "sha256": "3e2f4f5fb78b0423a974be36cd3111718b7952195a68c149cde6b41b78224fb9",
+      "states": [
+        "intact",
+        "opened"
+      ],
+      "mount": "floor-centre",
+      "forward": "-Z",
+      "lights": 0,
+      "bones": 0,
+      "motion": "static; set_motion(false) is exact",
+      "floor_aperture": false,
+      "provides_ground": false,
+      "has_canopy": false,
+      "sign": false,
+      "max_scene_draws": 1,
+      "scene": "res://art/features/damp-passages-v1/curtain-opened.tscn",
+      "state_wrapper_draws": 1,
+      "state_wrapper_materials": 1
+    },
+    {
+      "id": "siltfall-blocked",
+      "model": "res://art/features/damp-passages-v1/siltfall-blocked.glb",
+      "triangles": 1370,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.9554064869880676,
+        -0.06749765574932098,
+        -0.5255690813064575
+      ],
+      "max": [
+        0.9523460865020752,
+        1.7699999809265137,
+        0.4782540798187256
+      ],
+      "sha256": "3bd2dcbf69d27bee35826e9de5ad89caac29456c6aaa9052c5eb4189cd402b0d",
+      "states": [
+        "blocked",
+        "cleared"
+      ],
+      "mount": "floor-centre",
+      "forward": "-Z",
+      "lights": 0,
+      "bones": 0,
+      "motion": "static; set_motion(false) is exact",
+      "floor_aperture": false,
+      "provides_ground": false,
+      "has_canopy": false,
+      "sign": false,
+      "max_scene_draws": 1,
+      "scene": "res://art/features/damp-passages-v1/siltfall-blocked.tscn",
+      "state_wrapper_draws": 1,
+      "state_wrapper_materials": 1
+    },
+    {
+      "id": "siltfall-cleared",
+      "model": "res://art/features/damp-passages-v1/siltfall-cleared.glb",
+      "triangles": 728,
+      "draws": 1,
+      "materials": 1,
+      "min": [
+        -0.9554064869880676,
+        -0.014571227133274078,
+        -0.4762766659259796
+      ],
+      "max": [
+        0.9523460865020752,
+        0.1538255214691162,
+        0.46747922897338867
+      ],
+      "sha256": "85fe5ae54536b84357d1ac7e4cad8f28643b7d008beaa640a3b0c7102fb45ff4",
+      "states": [
+        "blocked",
+        "cleared"
+      ],
+      "mount": "floor-centre",
+      "forward": "-Z",
+      "lights": 0,
+      "bones": 0,
+      "motion": "static; set_motion(false) is exact",
+      "floor_aperture": false,
+      "provides_ground": false,
+      "has_canopy": false,
+      "sign": false,
+      "max_scene_draws": 1,
+      "scene": "res://art/features/damp-passages-v1/siltfall-cleared.tscn",
+      "state_wrapper_draws": 1,
+      "state_wrapper_materials": 1
+    }
+  ],
+  "cell_metres": 2,
+  "wall_metres": 2.2,
+  "forward": "-Z",
+  "units": "metres, Godot coordinates in min/max",
+  "gameplay": "No travel, collision, visibility, destination IDs, RNG or save authority. Metadata are art hints only.",
+  "sources": [
+    {
+      "type": "Original authored geometry",
+      "builder": "tools/damp_caves/build_passages.py",
+      "helpers": [
+        "tools/mine_props/build_models.py",
+        "tools/mine_polish/build_models.py"
+      ],
+      "notes": "Reuses the existing original worked-prop primitives; no downloaded/private models, animations or source pixels."
+    }
+  ],
+  "builder_sha256": "c9dc008c0276152e46d70baa06c0038d465266b49ea0b79ff28c86484d9cde5a",
+  "runtime_contract": {
+    "states": "curtain intact/opened; siltfall blocked/cleared; static exits",
+    "api": [
+      "set_state(value, animate=false) -> bool",
+      "set_motion(enabled)"
+    ],
+    "metadata": "destination_hint and paired_asset are art hints, not binding world IDs",
+    "signs": "Raised chalk glyphs match map silhouettes. sign_label is a metadata hint, not generated font geometry. Use canonical interaction_label in the caller prompt before commitment.",
+    "ceiling": "Canopy nodes join ceiling group; caller hides/restores for overhead view."
+  }
+}

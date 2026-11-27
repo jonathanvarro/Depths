@@ -59,6 +59,59 @@ Templates > Download and Install; already installed on the owner's PC).
 
 ## Project structure
 
+- #302 H/I completes the requested Damp Caves art/design delivery in PR #303:
+  four approved concepts and original 24fps rigged creatures in
+  `art/enemies/damp-creatures-v1`, eight map/bestiary SVGs and twenty new CC0-derived
+  sounds in `audio/damp-caves-v1`. Newt/Mother share clip roles; crawler adds
+  grab/hold/release, swarm spread/regroup/burn. Fixed floor/+Z/2m tile,
+  1726–2362 triangles, 24–25 bones, 2–3 skin draws plus contact plane. Use the
+  wrappers' play/sample/set_motion/set_opacity/framing_bounds; normal bodies
+  never write ALPHA, cached fades are explicit. Framing unions all clip bounds
+  for cross-fades. Submerge is visual compression under caller water, no rules.
+  Local galleries/masters: `build/local-damp-creatures-v1/inspector.html` and
+  `build/local-damp-audio-v1/inspector.html`. Audio uses Effects, existing ambience
+  −10dB once, explicit loops/no normalization; 117 previous files/music remain
+  byte-identical. Sources/recipes/approved concept prompts/hashes are retained.
+  Read `docs/damp-caves.md` and asset READMEs/catalogues. Live theme/creature/audio
+  assignment remains Claude's; owner style/listening and physical iPhone review
+  remain. N4 arrival painting is an unapproved presentation proposal, not a
+  mandatory production gate or existing area-introduction feature.
+
+- `docs/damp-caves.md` – #302 first production batch from Claude's floor-two
+  brief: A1–A4 surface library in `art/textures/damp-caves-v1`, with original
+  albedos, 512px mipmapped imports and opaque wet materials. The wall variant
+  is a static ShaderMaterial blending shared base rock at its borders; never
+  cast it as StandardMaterial3D or write ALPHA. Four G layout candidates are
+  in `docs/damp-caves-layout.md` / JSON, with the owner-corrected Damp Caves
+  junction, dry bypasses, protected quest/lair placement and creature proposals.
+  Native 87 checks and 50 layout checks pass. Local review/editable inputs:
+  `build/local-damp-caves-v1/inspector.html`. Live theme/hookup remains Claude's;
+  B/N1–N3 for this junction now adds `art/features/damp-passages-v1`: paired
+  Cavern shaft/ascent and Hollows crawl/return, restored curtain/siltfall states,
+  3D glyph signs and six SVGs in `art/ui/area-routes-v1`. 274 native checks pass;
+  review/masters: `build/local-damp-passages-v1`. Follow its floor-apron contracts
+  (onward supplies ground; return retains caller floor), −Z forward, ceiling
+  cap tag and immediate set_state/static set_motion. Metadata is art guidance,
+  not world IDs. C/D now adds `art/dressing/damp-dressing-v1`: 45 original
+  solid models, 21 dry mine counterparts, 29 old-id dispositions, fresh/resolved
+  stash/dead-lamp/Three Knocks scenes, still-safe drip/ripple and fungal exit-room
+  mushrooms/mold. +Z wall-front, roof origin and y=0 floor/edge mounts; don't
+  retain sprite-centre offsets. One opaque draw per selected GLB, 32–3064 tris;
+  effects use separate opaque water material. `state` closed/empty aliases and
+  set_state/set_searched remain; set_motion defaults still and reaches child
+  drips. Glow is opt-in mood only. Native 947 checks/106 captures pass; local
+  gallery/masters: `build/local-damp-dressing-v1`. E/F now adds six composed
+  landmarks and five interactive appearance sets in `art/props/damp-sites-v1`:
+  satchel, pearls, seep, ledge and blind fish. 455 native checks/65 captures pass;
+  review/masters: `build/local-damp-sites-v1`. Most landmarks require 3×3 cells;
+  drowned drift is 1×3. Seep mounts to actual rock; ledge requires a caller floor
+  cut and explicit slipped/passed outcome (rejects empty). Only the small fish
+  viewing water is transparent; bodies stay opaque. Motion defaults still.
+  Reuses retained bones/rails/pack plus a recorded CC0 Kio Kurashi minecart.
+  E/F README/catalogue has footprint/budget/state/source contracts. H sound and
+  I concepts/approved models remain outstanding. Preserve fungal assets; no
+  live game rules, placements, event definitions or numeric floor bindings changed.
+
 - #297 fixes refined-creature translucency: normal v2/v3 coat, skin, details
   and membrane shaders are fully opaque; only `set_opacity` below 1.0 selects
   cached/preloaded `*-fade.gdshader` siblings. Full opacity restores the original

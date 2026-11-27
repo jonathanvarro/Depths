@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="Script" path="res://art/dressing/damp-dressing-v1/appearance.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/dressing/damp-dressing-v1/old-scorch.glb" id="old-scorch"]
+
+[node name="DampDressing" type="Node3D"]
+script=ExtResource("script")
+states=PackedStringArray("static")
+state="static"
+variant="mine"
+optional_glow=false
+metadata/asset_id="mine-old-scorch"
+metadata/mount="floor"
+
+[node name="Static" parent="." instance=ExtResource("old-scorch")]
+metadata/appearance_state="static"

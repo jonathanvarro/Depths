@@ -8,6 +8,31 @@ out of git (see `docs/blender-expedition-kit-tasks.md`).
 
 ## Where the files live
 
+### Damp Caves creatures (2026-11-26, #302 I)
+
+`art/enemies/damp-creatures-v1` supplies four original skinned GLBs and native
+presentation wrappers, following explicit owner approval of all four concept
+sheets. Pale Newt and Drowned Mother share 24-bone rig/clip roles, with separate
+proportions/scar/attached leeches; Blind Crawler has 24 bones, Leech Swarm 25.
+These are original authored clips, using existing project mesh, rig/export and
+per-key floor-fitting helpers. No private body or external motion inputs.
+
+All clips are 24 fps. Common: idle 48 frames (2s), attack 18 (.75s), hurt 12
+(.5s), fall 24 (1s), walk 24 (1s), run 16 (2/3s). Newt/Mother: rear, submerge,
+emerge 24 frames. Crawler: grab/release 24, hold 36 (1.5s). Swarm: spread,
+regroup, burn 24. Idle/walk/run and crawler hold loop. Grab completes into hold;
+release/emerge return idle; fall/submerge hold their terminal frame. Explicit
+sampling takes seconds; exact still mode uses fixed readable poses.
+
+Separate editable Blender masters: `build/local-damp-creatures-v1/masters`.
+Native review: its `inspector.html`. `tools/damp_caves/build_creatures.py` and
+`prepare_creatures.py` regenerate exports/wrappers; actual imported skin,
+connected limb joints, floor registration, clip seams, framing and pose/fade
+state checks are in `tools/damp_caves/creatures_check.gd`. No live enemy or
+ambient assignments yet. Submerge is visual compression beneath caller water,
+not an untargetability/visibility rule. Full contract: asset README/catalogue
+and `docs/damp-caves.md`.
+
 ### Predatory rat / grounded bat follow-up (2026-11-25, #294)
 
 `art/enemies/creatures-predatory-v3` retains the rats' 21 bones, six source

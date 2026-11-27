@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="Script" path="res://art/dressing/damp-dressing-v1/appearance.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/dressing/damp-dressing-v1/drip-stalactite.glb" id="drip-stalactite"]
+
+[node name="DampDressing" type="Node3D"]
+script=ExtResource("script")
+states=PackedStringArray("static")
+state="static"
+variant="damp"
+optional_glow=false
+metadata/asset_id="drip-stalactite"
+metadata/mount="ceiling"
+
+[node name="Static" parent="." instance=ExtResource("drip-stalactite")]
+metadata/appearance_state="static"

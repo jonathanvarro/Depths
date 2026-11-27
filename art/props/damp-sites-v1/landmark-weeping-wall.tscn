@@ -1,0 +1,65 @@
+[gd_scene load_steps=6 format=3]
+[ext_resource type="Script" path="res://art/props/damp-sites-v1/site.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/props/damp-sites-v1/weeping-curtain.glb" id="r0"]
+[ext_resource type="PackedScene" path="res://art/dressing/damp-dressing-v1/puddle-wide.tscn" id="r1"]
+[ext_resource type="PackedScene" path="res://art/dressing/damp-dressing-v1/soda-straws.tscn" id="r2"]
+[ext_resource type="PackedScene" path="res://art/dressing/damp-dressing-v1/drip.tscn" id="r3"]
+
+[node name="DampSite" type="Node3D"]
+script=ExtResource("script")
+states=PackedStringArray("static")
+state="static"
+mount_mode="landmark"
+metadata/asset_id="landmark-weeping-wall"
+metadata/requires_floor_cut=false
+
+[node name="Mount" type="Node3D" parent="."]
+
+[node name="ContinuousCurtain" parent="Mount" instance=ExtResource("r0")]
+position=Vector3(0, 0, -2.98)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+metadata/physical_surface=true
+
+[node name="Piece113" parent="Mount" instance=ExtResource("r1")]
+position=Vector3(-1.65, 0, -2.26)
+scale=Vector3(0.9, 1, 0.85)
+rotation_degrees=Vector3(0,0,0)
+
+[node name="Piece217" parent="Mount" instance=ExtResource("r1")]
+position=Vector3(0, 0, -2.26)
+scale=Vector3(0.9, 1, 0.85)
+rotation_degrees=Vector3(0,0,0)
+
+[node name="Piece221" parent="Mount" instance=ExtResource("r1")]
+position=Vector3(1.65, 0, -2.26)
+scale=Vector3(0.9, 1, 0.85)
+rotation_degrees=Vector3(0,0,0)
+
+[node name="Piece225" parent="Mount" instance=ExtResource("r2")]
+position=Vector3(-1.2, 2.19, -2.5)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+
+[node name="Piece329" parent="Mount" instance=ExtResource("r2")]
+position=Vector3(1.1, 2.19, -2.5)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+
+[node name="Drip0" parent="Mount" instance=ExtResource("r3")]
+position=Vector3(-0.8, 2.19, -2.5)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+phase_offset=0.0
+
+[node name="Drip1" parent="Mount" instance=ExtResource("r3")]
+position=Vector3(0.7, 2.19, -2.5)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+phase_offset=1.1
+
+[node name="SeepEvent" type="Marker3D" parent="Mount"]
+position=Vector3(0, 0, -2.0)
+
+[node name="DryApproach" type="Marker3D" parent="Mount"]
+position=Vector3(0, 0, 0.8)

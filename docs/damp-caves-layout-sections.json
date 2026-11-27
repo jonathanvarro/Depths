@@ -1,0 +1,498 @@
+{
+  "issue": 302,
+  "status": "Design reference only; no live generator or water/encounter change",
+  "legend": "# rock; , room; . corridor; E C T O R < > D B existing roles; ~ proposed shallow visual wetness; w proposed deep basin requiring review",
+  "coordinates": "zero-based x,y; > may be a section connector unless explicitly destination-tagged",
+  "sections": [
+    {
+      "id": "junction",
+      "title": "Two exits beyond the drowned drift",
+      "rows": [
+        "#########################",
+        "#########################",
+        "##,,,,,###########,,,,,##",
+        "##,,<,,..###......,,>,,##",
+        "##,,,,,#.###.#####,,,,,##",
+        "##,,,,,#.#,,,,,###,,,,,##",
+        "########.#~~~~~##########",
+        "########..,,,~,##########",
+        "########..,,E,,..########",
+        "########.#,,,,,#.########",
+        "########.#######.########",
+        "########.#######.########",
+        "##,,,,,#.#######.#,,,,,##",
+        "##,,C,,..#######.#,,,,,##",
+        "##,,,,,#########..,,>,,##",
+        "##################,,,,,##",
+        "#########################",
+        "#########################",
+        "#########################"
+      ],
+      "rooms": [
+        [
+          2,
+          2,
+          5,
+          4
+        ],
+        [
+          10,
+          5,
+          5,
+          5
+        ],
+        [
+          18,
+          2,
+          5,
+          4
+        ],
+        [
+          18,
+          12,
+          5,
+          4
+        ],
+        [
+          2,
+          12,
+          5,
+          3
+        ]
+      ],
+      "points": [
+        {
+          "name": "Drowned drift",
+          "cell": [
+            8,
+            3
+          ],
+          "role": "Rails/debris at the transition from mining to wet natural rock; no flood rule implied"
+        },
+        {
+          "name": "Two destination clues",
+          "cell": [
+            12,
+            7
+          ],
+          "role": "Worked goblin marks toward Cavern; dense fungal traces only near the Hollows exit"
+        },
+        {
+          "name": "Shallow newt encounter",
+          "cell": [
+            12,
+            8
+          ],
+          "role": "Newt pair can emerge before combat begins; no hidden guaranteed first strike"
+        },
+        {
+          "name": "Ambient newt",
+          "cell": [
+            13,
+            6
+          ],
+          "role": "Small noncombat crossing between puddles, off the exit cells"
+        },
+        {
+          "name": "Optional cache",
+          "cell": [
+            4,
+            13
+          ],
+          "role": "A dead end with a reward rather than a required key"
+        }
+      ],
+      "exits": [
+        {
+          "cell": [
+            20,
+            3
+          ],
+          "destination": "Cavern"
+        },
+        {
+          "cell": [
+            20,
+            14
+          ],
+          "destination": "Fungal Hollows"
+        }
+      ],
+      "patrol": []
+    },
+    {
+      "id": "sump",
+      "title": "Dry ledge around the sump",
+      "rows": [
+        "#########################",
+        "#########################",
+        "##,,,,,##################",
+        "##,,<,,...,,,,,##########",
+        "##,,,,,###,www,##########",
+        "##,,,,,###,wwwE##########",
+        "##########,www,##########",
+        "########..,,,,,..########",
+        "########.#######.########",
+        "########.#######.########",
+        "########.#######.########",
+        "########.#######.########",
+        "##,,,,,#.#######.#,,,,,##",
+        "##,,,,,#.#######.#,,,,,##",
+        "##,,E,,..#######..,,>,,##",
+        "##,,,,,###########,,,,,##",
+        "#########################",
+        "#########################",
+        "#########################"
+      ],
+      "rooms": [
+        [
+          2,
+          2,
+          5,
+          4
+        ],
+        [
+          10,
+          3,
+          5,
+          5
+        ],
+        [
+          18,
+          12,
+          5,
+          4
+        ],
+        [
+          2,
+          12,
+          5,
+          4
+        ]
+      ],
+      "points": [
+        {
+          "name": "The sump",
+          "cell": [
+            12,
+            5
+          ],
+          "role": "3x3 deep visual basin, surrounded by a dry walkable rim"
+        },
+        {
+          "name": "Newts surface",
+          "cell": [
+            14,
+            5
+          ],
+          "role": "Fight trigger on the dry rim, visible gills and wake before engagement"
+        },
+        {
+          "name": "Blind crawler nook",
+          "cell": [
+            4,
+            14
+          ],
+          "role": "One crawler with a rat in a narrow optional dead end; retain retreat access"
+        },
+        {
+          "name": "Wall leeches",
+          "cell": [
+            10,
+            5
+          ],
+          "role": "Clinging at a wet boundary, with a dry route around the pool; no collision"
+        }
+      ],
+      "exits": [
+        {
+          "cell": [
+            20,
+            14
+          ],
+          "destination": "Section continuation (not an extra world exit)"
+        }
+      ],
+      "patrol": []
+    },
+    {
+      "id": "mother-patrol",
+      "title": "A water-linked patrol loop beside the dry route",
+      "rows": [
+        "###################################",
+        "#,,,,,#############################",
+        "#,,<,,#############################",
+        "#,,,,,#############################",
+        "#,,,,,#############################",
+        "###.#######,,,,,###########,,,,,###",
+        "###.#######,,,,,###########,,,,,###",
+        "###.#######,,~~~~~~~~~~~~~~~~~,,###",
+        "###.#######,,~,,###########,,~,,###",
+        "###.#######,,~,,###########,,~,,###",
+        "###.#########~###############~#####",
+        "###.#########~###############~#####",
+        "###.#########~###############~#####",
+        "###..........~###############~#####",
+        "###.#########~###############~#####",
+        "###.#########~###############~#####",
+        "###.#########~###############~#####",
+        "###.#########~###############~#####",
+        "###.#########~###############~#####",
+        "###.#######,,~,,###########,,~,,###",
+        "###.#######,,~,,###########,,~,,###",
+        "###.#######,,~~~~~~~~~~~~~~~~E,,###",
+        "#,,,,,#####,,,,,###########,,,,,###",
+        "#,,,,,#####,,,,,###########,,,,,###",
+        "#,,>,,#############################",
+        "#,,,,,#############################",
+        "###################################"
+      ],
+      "rooms": [
+        [
+          1,
+          1,
+          5,
+          4
+        ],
+        [
+          1,
+          22,
+          5,
+          4
+        ],
+        [
+          11,
+          5,
+          5,
+          5
+        ],
+        [
+          27,
+          5,
+          5,
+          5
+        ],
+        [
+          27,
+          19,
+          5,
+          5
+        ],
+        [
+          11,
+          19,
+          5,
+          5
+        ]
+      ],
+      "points": [
+        {
+          "name": "Drowned Mother resting room",
+          "cell": [
+            29,
+            21
+          ],
+          "role": "Leader start; at least 12 walking steps from both stair anchors"
+        },
+        {
+          "name": "First possible cold glow",
+          "cell": [
+            11,
+            13
+          ],
+          "role": "At the side-loop threshold; actual visibility remains caller-owned"
+        },
+        {
+          "name": "Dry main bypass",
+          "cell": [
+            3,
+            13
+          ],
+          "role": "The leader does not patrol the only route between stairs"
+        },
+        {
+          "name": "Leech shallows",
+          "cell": [
+            28,
+            7
+          ],
+          "role": "Shallow approach suitable for a leech/newt fight; no guaranteed swarm gate"
+        }
+      ],
+      "exits": [
+        {
+          "cell": [
+            3,
+            24
+          ],
+          "destination": "Section continuation (not an extra world exit)"
+        }
+      ],
+      "patrol": [
+        [
+          13,
+          7
+        ],
+        [
+          29,
+          7
+        ],
+        [
+          29,
+          21
+        ],
+        [
+          13,
+          21
+        ],
+        [
+          13,
+          7
+        ]
+      ]
+    },
+    {
+      "id": "quest-lair",
+      "title": "Weeping wall, protected moss site and optional brood",
+      "rows": [
+        "###############################",
+        "###############################",
+        "##,,,,,#####,,,,,#######,,,,,##",
+        "##,,,,,#####,,O,,#######,,,,,##",
+        "##,,<,,.....,,,,,...D...,,O,,##",
+        "##,,,,,#.###,,,,,#######,,,,,##",
+        "##,,,,,#.###,,,,,#######,,,,,##",
+        "########.######################",
+        "########.######################",
+        "########.###,,,,,##############",
+        "########.###,,,,,##############",
+        "########....,,O,,##############",
+        "########.###~~~~~##############",
+        "########.###,,,,,##############",
+        "########.######################",
+        "########.######################",
+        "##,,,,,#.###,,,,,#######,,,,,##",
+        "##,,,,,#.###,,,,,#######,,,,,##",
+        "##,,C,,.....,,R,,.......,,E,,##",
+        "##,,,,,#####,,,>,#######,,,,,##",
+        "##,,,,,#####,,,,,#######,,,,,##",
+        "###############################",
+        "###############################",
+        "###############################",
+        "###############################"
+      ],
+      "rooms": [
+        [
+          2,
+          2,
+          5,
+          5
+        ],
+        [
+          12,
+          2,
+          5,
+          5
+        ],
+        [
+          24,
+          2,
+          5,
+          5
+        ],
+        [
+          2,
+          16,
+          5,
+          5
+        ],
+        [
+          12,
+          16,
+          5,
+          5
+        ],
+        [
+          24,
+          16,
+          5,
+          5
+        ],
+        [
+          12,
+          9,
+          5,
+          5
+        ]
+      ],
+      "points": [
+        {
+          "name": "The weeping wall",
+          "cell": [
+            14,
+            3
+          ],
+          "role": "Flowstone landmark; drip anchors belong against the wall"
+        },
+        {
+          "name": "Bitter-moss package reserve",
+          "cell": [
+            26,
+            4
+          ],
+          "role": "Reserve actual 5x4 healing_moss package footprint plus connection margin; O denotes its intended event, not a package implementation"
+        },
+        {
+          "name": "Wet lost cache",
+          "cell": [
+            4,
+            18
+          ],
+          "role": "Rotted crates; persistent buried-cache state remains with the existing event"
+        },
+        {
+          "name": "Bone silt",
+          "cell": [
+            4,
+            16
+          ],
+          "role": "Loose bones collected in a dark silt bank at an optional end"
+        },
+        {
+          "name": "Rimstone stair",
+          "cell": [
+            14,
+            11
+          ],
+          "role": "Small terraced pools, with a dry edge to the optional object"
+        },
+        {
+          "name": "Brood warning threshold",
+          "cell": [
+            22,
+            18
+          ],
+          "role": "Existing Go in/Back away before committing; no required exit or quest target behind it"
+        },
+        {
+          "name": "Brood fight",
+          "cell": [
+            26,
+            18
+          ],
+          "role": "Retain the existing lair contract; no new monster or boss rules assigned"
+        }
+      ],
+      "exits": [
+        {
+          "cell": [
+            15,
+            19
+          ],
+          "destination": "Section continuation (not an extra world exit)"
+        }
+      ],
+      "patrol": []
+    }
+  ]
+}

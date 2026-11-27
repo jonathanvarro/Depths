@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="Script" path="res://art/dressing/damp-dressing-v1/appearance.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/dressing/damp-dressing-v1/lamp-store-fresh.glb" id="lamp-store-fresh"]
+[ext_resource type="PackedScene" path="res://art/dressing/damp-dressing-v1/lamp-store-used.glb" id="lamp-store-used"]
+
+[node name="DampDressing" type="Node3D"]
+script=ExtResource("script")
+states=PackedStringArray("fresh","used")
+state="fresh"
+variant="damp"
+optional_glow=false
+metadata/asset_id="lamp-store"
+metadata/mount="floor"
+
+[node name="Fresh" parent="." instance=ExtResource("lamp-store-fresh")]
+metadata/appearance_state="fresh"
+
+[node name="Used" parent="." instance=ExtResource("lamp-store-used")]
+metadata/appearance_state="used"
+visible=false

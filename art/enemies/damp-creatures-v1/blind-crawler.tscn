@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="Script" path="res://art/enemies/damp-creatures-v1/actor.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/enemies/damp-creatures-v1/blind-crawler.glb" id="model"]
+[node name="DampCreature" type="Node3D"]
+script=ExtResource("script")
+pose_bounds={"attack": AABB(-0.49630, 0.01550, -0.58350, 0.95920, 0.52060, 1.41820), "fall": AABB(-0.49630, 0.00800, -0.58350, 0.95920, 0.52810, 1.41840), "grab": AABB(-0.53570, 0.01550, -0.58350, 1.01550, 0.52060, 1.41840), "hold": AABB(-0.53790, 0.01550, -0.58350, 1.01900, 0.52060, 1.41840), "hurt": AABB(-0.49630, 0.01550, -0.58350, 0.95920, 0.52060, 1.41840), "idle": AABB(-0.49630, 0.01550, -0.58350, 0.95920, 0.52060, 1.41840), "release": AABB(-0.53570, 0.01550, -0.58350, 1.01550, 0.52060, 1.41840), "run": AABB(-0.49630, 0.01550, -0.58350, 0.95950, 0.52060, 1.41840), "walk": AABB(-0.49630, 0.01550, -0.58350, 0.95950, 0.52060, 1.41840)}
+contact_size=Vector2(0.85, 0.85)
+metadata/asset_id="blind-crawler"
+metadata/visual_height=0.53610
+held_poses=PackedStringArray("hold")
+[node name="Model" parent="." instance=ExtResource("model")]

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="Script" path="res://art/dressing/damp-dressing-v1/appearance.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/dressing/damp-dressing-v1/cracks-rubble.glb" id="cracks-rubble"]
+
+[node name="DampDressing" type="Node3D"]
+script=ExtResource("script")
+states=PackedStringArray("static")
+state="static"
+variant="mine"
+optional_glow=false
+metadata/asset_id="mine-cracks-rubble"
+metadata/mount="wall"
+
+[node name="Static" parent="." instance=ExtResource("cracks-rubble")]
+metadata/appearance_state="static"

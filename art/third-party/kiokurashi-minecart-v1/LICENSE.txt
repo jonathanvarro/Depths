@@ -1,0 +1,5 @@
+3D Static Minecart by Kio Kurashi (kiokurashi)
+Declared CC0 1.0 at https://kiokurashi.itch.io/3d-static-minecart
+Verified 2026-11-26.
+Licence: https://creativecommons.org/publicdomain/zero/1.0/
+The selected Minecart.glb is unchanged; see provenance.json for hashes and derivative notes.
