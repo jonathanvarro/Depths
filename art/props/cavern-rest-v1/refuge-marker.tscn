@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3]
+[ext_resource type="Script" path="res://art/props/cavern-rest-v1/presentation.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/features/campfire-3d-v1/scene.tscn" id="r0"]
+[ext_resource type="PackedScene" path="res://art/features/campfire-3d-v1/hearth.glb" id="r1"]
+[ext_resource type="PackedScene" path="res://art/props/cavern-rest-v1/bedroll.glb" id="r2"]
+[node name="CavernRest" type="Node3D"]
+script=ExtResource("script")
+states=PackedStringArray("fresh","used")
+state="fresh"
+metadata/asset_id="refuge-marker"
+metadata/mount="floor"
+metadata/footprint_metres=Vector2(2, 2)
+metadata/elevation_prototype=false
+[node name="fresh" type="Node3D" parent="."]
+metadata/appearance_state="fresh"
+visible=true
+[node name="used" type="Node3D" parent="."]
+metadata/appearance_state="used"
+visible=false
+[node name="Fire" parent="fresh" instance=ExtResource("r0")]
+position=Vector3(-0.32, 0, -0.28)
+scale=Vector3(0.52, 0.52, 0.52)
+rotation_degrees=Vector3(0,0,0)
+[node name="BankedHearth" parent="used" instance=ExtResource("r1")]
+position=Vector3(-0.32, 0, -0.28)
+scale=Vector3(0.52, 0.52, 0.52)
+rotation_degrees=Vector3(0,0,0)
+metadata/worked_surface=true
+[node name="Bedroll" parent="fresh" instance=ExtResource("r2")]
+position=Vector3(0.46, 0, -0.05)
+scale=Vector3(0.48, 0.48, 0.48)
+rotation_degrees=Vector3(0,90,0)
+metadata/worked_surface=true
+[node name="Bedroll" parent="used" instance=ExtResource("r2")]
+position=Vector3(0.46, 0, -0.05)
+scale=Vector3(0.48, 0.48, 0.48)
+rotation_degrees=Vector3(0,90,0)
+metadata/worked_surface=true
+[node name="Interaction" type="Marker3D" parent="."]
+position=Vector3(0, 0.4, 0.6)
+metadata/interaction_label="Scouts' refuge"

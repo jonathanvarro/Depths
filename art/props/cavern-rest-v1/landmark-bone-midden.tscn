@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3]
+[ext_resource type="Script" path="res://art/props/cavern-rest-v1/presentation.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/dressing/bone-decor-v1/scattered-bones.tscn" id="r0"]
+[ext_resource type="PackedScene" path="res://art/props/cavern-rest-v1/hanging-trophies.glb" id="r1"]
+[ext_resource type="PackedScene" path="res://art/props/cavern-rest-v1/talus-edge.glb" id="r2"]
+[node name="CavernRest" type="Node3D"]
+script=ExtResource("script")
+states=PackedStringArray("static")
+state="static"
+metadata/asset_id="landmark-bone-midden"
+metadata/mount="floor"
+metadata/footprint_metres=Vector2(6, 6)
+metadata/elevation_prototype=false
+[node name="Bones0" parent="." instance=ExtResource("r0")]
+position=Vector3(-2, 0, -2.1)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+[node name="Bones1" parent="." instance=ExtResource("r0")]
+position=Vector3(-1.5, 0, -1.7)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,47,0)
+[node name="Bones2" parent="." instance=ExtResource("r0")]
+position=Vector3(-2.3, 0, -1.2)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,94,0)
+[node name="Trophy" parent="." instance=ExtResource("r1")]
+position=Vector3(-2.3, 0, 0.2)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,90,0)
+metadata/worked_surface=true
+[node name="Talus" parent="." instance=ExtResource("r2")]
+position=Vector3(1.8, 0, -2.4)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+metadata/worked_surface=true
+metadata/cavern_rock=true
+[node name="Approach" type="Marker3D" parent="."]
+position=Vector3(0, 0, 2.7)

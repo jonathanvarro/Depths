@@ -1,0 +1,189 @@
+[gd_scene load_steps=18 format=3]
+[ext_resource type="Script" path="res://art/props/cavern-rest-v1/presentation.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/props/cavern-rest-v1/scout-tent.glb" id="r0"]
+[ext_resource type="PackedScene" path="res://art/props/cavern-rest-v1/map-table.glb" id="r1"]
+[ext_resource type="PackedScene" path="res://art/props/cavern-rest-v1/supply-crate.glb" id="r2"]
+[ext_resource type="PackedScene" path="res://art/props/cavern-rest-v1/bench.glb" id="r3"]
+[ext_resource type="PackedScene" path="res://art/props/cavern-rest-v1/bedroll.glb" id="r4"]
+[ext_resource type="PackedScene" path="res://art/features/campfire-3d-v1/scene.tscn" id="r5"]
+[ext_resource type="PackedScene" path="res://art/features/campfire-3d-v1/hearth.glb" id="r6"]
+[ext_resource type="PackedScene" path="res://art/props/cavern-rest-v1/column-tall.glb" id="r7"]
+[ext_resource type="PackedScene" path="res://art/props/cavern-rest-v1/cliff-face.glb" id="r8"]
+[ext_resource type="Material" path="res://art/props/cavern-rest-v1/cavern-wall.tres" id="r9"]
+[ext_resource type="Material" path="res://art/props/cavern-rest-v1/cavern-ceiling.tres" id="r10"]
+[ext_resource type="PackedScene" path="res://art/props/cavern-rest-v1/ledge-tile.glb" id="r11"]
+[ext_resource type="PackedScene" path="res://art/props/cavern-rest-v1/rest-threshold.glb" id="r12"]
+[sub_resource type="BoxMesh" id="box0mesh"]
+size=Vector3(8, 5, 0.3)
+[sub_resource type="BoxMesh" id="box2mesh"]
+size=Vector3(0.3, 5, 8)
+[sub_resource type="BoxMesh" id="box4mesh"]
+size=Vector3(8, 0.3, 7.2)
+[node name="CavernRest" type="Node3D"]
+script=ExtResource("script")
+states=PackedStringArray("fresh","used")
+state="fresh"
+metadata/asset_id="rest-area-approach"
+metadata/mount="room-context"
+metadata/footprint_metres=Vector2(8, 8)
+metadata/elevation_prototype=false
+[node name="fresh" type="Node3D" parent="."]
+metadata/appearance_state="fresh"
+visible=true
+[node name="used" type="Node3D" parent="."]
+metadata/appearance_state="used"
+visible=false
+[node name="Tent" parent="fresh" instance=ExtResource("r0")]
+position=Vector3(-2.6, 0, -0.55)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,-10,0)
+metadata/worked_surface=true
+[node name="Planning" parent="fresh" instance=ExtResource("r1")]
+position=Vector3(-1.7, 0, -2.7)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+metadata/worked_surface=true
+[node name="Supplies" parent="fresh" instance=ExtResource("r2")]
+position=Vector3(-2.8, 0, 1.8)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+metadata/worked_surface=true
+[node name="Bench" parent="fresh" instance=ExtResource("r3")]
+position=Vector3(1.55, 0, 0.9)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+metadata/worked_surface=true
+[node name="Bedroll" parent="fresh" instance=ExtResource("r4")]
+position=Vector3(2.9, 0, -1.5)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,15,0)
+metadata/worked_surface=true
+[node name="Tent" parent="used" instance=ExtResource("r0")]
+position=Vector3(-2.6, 0, -0.55)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,-10,0)
+metadata/worked_surface=true
+[node name="Planning" parent="used" instance=ExtResource("r1")]
+position=Vector3(-1.7, 0, -2.7)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+metadata/worked_surface=true
+[node name="Supplies" parent="used" instance=ExtResource("r2")]
+position=Vector3(-2.8, 0, 1.8)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+metadata/worked_surface=true
+[node name="Bench" parent="used" instance=ExtResource("r3")]
+position=Vector3(1.55, 0, 0.9)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+metadata/worked_surface=true
+[node name="Bedroll" parent="used" instance=ExtResource("r4")]
+position=Vector3(2.9, 0, -1.5)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,15,0)
+metadata/worked_surface=true
+[node name="Fire" parent="fresh" instance=ExtResource("r5")]
+position=Vector3(1.5, 0, -0.65)
+scale=Vector3(0.65, 0.65, 0.65)
+rotation_degrees=Vector3(0,0,0)
+[node name="BankedHearth" parent="used" instance=ExtResource("r6")]
+position=Vector3(1.5, 0, -0.65)
+scale=Vector3(0.65, 0.65, 0.65)
+rotation_degrees=Vector3(0,0,0)
+metadata/worked_surface=true
+[node name="LookoutColumn" parent="." instance=ExtResource("r7")]
+position=Vector3(3.6, 0, -3.2)
+scale=Vector3(0.65, 0.85, 0.65)
+rotation_degrees=Vector3(0,0,0)
+metadata/worked_surface=true
+metadata/cavern_rock=true
+[node name="ShelterBack0" parent="." instance=ExtResource("r8")]
+position=Vector3(-2.65, 2.1, -3.85)
+scale=Vector3(0.92, 0.35, 1)
+rotation_degrees=Vector3(0,0,0)
+metadata/worked_surface=true
+metadata/cavern_rock=true
+[node name="ShelterBack1" parent="." instance=ExtResource("r8")]
+position=Vector3(0.0, 2.1, -3.85)
+scale=Vector3(0.92, 0.35, 1)
+rotation_degrees=Vector3(0,0,0)
+metadata/worked_surface=true
+metadata/cavern_rock=true
+[node name="ShelterBack2" parent="." instance=ExtResource("r8")]
+position=Vector3(2.65, 2.1, -3.85)
+scale=Vector3(0.92, 0.35, 1)
+rotation_degrees=Vector3(0,0,0)
+metadata/worked_surface=true
+metadata/cavern_rock=true
+[node name="ShelterSide0" parent="." instance=ExtResource("r8")]
+position=Vector3(-3.9, 2.1, -1.5)
+scale=Vector3(1, 0.35, 1)
+rotation_degrees=Vector3(0,90,0)
+metadata/worked_surface=true
+metadata/cavern_rock=true
+[node name="ShelterSide1" parent="." instance=ExtResource("r8")]
+position=Vector3(-3.9, 2.1, 1.5)
+scale=Vector3(1, 0.35, 1)
+rotation_degrees=Vector3(0,90,0)
+metadata/worked_surface=true
+metadata/cavern_rock=true
+[node name="ShelterBackRock" type="MeshInstance3D" parent="."]
+position=Vector3(0, 2.5, -4.03)
+mesh=SubResource("box0mesh")
+material_override=ExtResource("r9")
+cast_shadow=0
+metadata/metre_uv=true
+[node name="ShelterLeftRock" type="MeshInstance3D" parent="."]
+position=Vector3(-4.03, 2.5, 0)
+mesh=SubResource("box2mesh")
+material_override=ExtResource("r9")
+cast_shadow=0
+metadata/metre_uv=true
+[node name="ShelterRoof" type="MeshInstance3D" parent="."]
+position=Vector3(0, 5.1, -0.4)
+mesh=SubResource("box4mesh")
+material_override=ExtResource("r10")
+cast_shadow=0
+metadata/metre_uv=true
+metadata/canopy=true
+[node name="LookoutRim0" parent="." instance=ExtResource("r11")]
+position=Vector3(3.2, 0, -2)
+scale=Vector3(0.8, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+metadata/worked_surface=true
+metadata/cavern_rock=true
+[node name="LookoutRim1" parent="." instance=ExtResource("r11")]
+position=Vector3(3.2, 0, 0)
+scale=Vector3(0.8, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+metadata/worked_surface=true
+metadata/cavern_rock=true
+[node name="LookoutRim2" parent="." instance=ExtResource("r11")]
+position=Vector3(3.2, 0, 2)
+scale=Vector3(0.8, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+metadata/worked_surface=true
+metadata/cavern_rock=true
+[node name="SafeThreshold" parent="." instance=ExtResource("r12")]
+position=Vector3(0, 0, 3.1)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,180,0)
+metadata/worked_surface=true
+metadata/cavern_rock=true
+[node name="Interaction" type="Marker3D" parent="."]
+position=Vector3(0, 0.6, 0.65)
+metadata/interaction_label="Scouts' refuge"
+[node name="Stash" type="Marker3D" parent="."]
+position=Vector3(-2.8, 0.5, 1.8)
+metadata/interaction_label="Supplies"
+[node name="Planning" type="Marker3D" parent="."]
+position=Vector3(-1.7, 0.75, -2.7)
+metadata/interaction_label="Scouts map"
+[node name="Quartermaster" type="Marker3D" parent="."]
+position=Vector3(-2.7, 0, 2.7)
+metadata/interaction_label="Route supplies"
+[node name="Lookout" type="Marker3D" parent="."]
+position=Vector3(2.7, 1.2, -2.6)
+[node name="Arrival" type="Marker3D" parent="."]
+position=Vector3(0, 0, 3.1)

@@ -59,6 +59,19 @@ Templates > Download and Install; already installed on the owner's PC).
 
 ## Project structure
 
+- #308's Cavern/Rest kit is in `art/props/cavern-rest-v1`: 22 original solid
+  exports, 30 scenes, new opaque physical rock/surface materials and candidate
+  theme; three unchanged source albedos/512px mipmapped imports in
+  `art/textures/cavern-v1`. Read `docs/cavern-and-rest-area.md`. Tall narrow rift
+  identity follows the title-menu reference; walkable slopes/prototype are later.
+  Compact one-cell `refuge-marker` is bound via `refuge_scouts.prop` only; all rest/
+  route/Overlook rules stay authoritative. Full approach needs reserved 4x4 room
+  and 5.3m roof; large rift/columns need bespoke void/roof handling, not default
+  2.4m ceilings. 864 native checks / 132 captures pass. Local review/masters:
+  `build/local-cavern-rest-v1/inspector.html`. Claude's Damp Caves integration
+  handoff is `docs/damp-caves-hookup-for-claude.md` (PR #303); current core/city
+  edits remain untouched. Physical iPhone/live/exported placement remain.
+
 - #297 fixes refined-creature translucency: normal v2/v3 coat, skin, details
   and membrane shaders are fully opaque; only `set_opacity` below 1.0 selects
   cached/preloaded `*-fade.gdshader` siblings. Full opacity restores the original

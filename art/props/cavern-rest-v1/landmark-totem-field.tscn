@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3]
+[ext_resource type="Script" path="res://art/props/cavern-rest-v1/presentation.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/props/cavern-rest-v1/goblin-totem.glb" id="r0"]
+[ext_resource type="PackedScene" path="res://art/props/cavern-rest-v1/drying-rack.glb" id="r1"]
+[ext_resource type="PackedScene" path="res://art/props/cavern-rest-v1/goblin-daub.glb" id="r2"]
+[node name="CavernRest" type="Node3D"]
+script=ExtResource("script")
+states=PackedStringArray("static")
+state="static"
+metadata/asset_id="landmark-totem-field"
+metadata/mount="floor"
+metadata/footprint_metres=Vector2(6, 6)
+metadata/elevation_prototype=false
+[node name="Totem0" parent="." instance=ExtResource("r0")]
+position=Vector3(-2.3, 0, -1.8)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,16,0)
+metadata/worked_surface=true
+[node name="Totem1" parent="." instance=ExtResource("r0")]
+position=Vector3(-1.6, 0, -2.25)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,-16,0)
+metadata/worked_surface=true
+[node name="Totem2" parent="." instance=ExtResource("r0")]
+position=Vector3(1.4, 0, -2.2)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,16,0)
+metadata/worked_surface=true
+[node name="Totem3" parent="." instance=ExtResource("r0")]
+position=Vector3(2.25, 0, -1.5)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,-16,0)
+metadata/worked_surface=true
+[node name="Rack" parent="." instance=ExtResource("r1")]
+position=Vector3(-2.3, 0, 0.5)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,90,0)
+metadata/worked_surface=true
+[node name="Daub" parent="." instance=ExtResource("r2")]
+position=Vector3(0, 1.3, -2.98)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+metadata/worked_surface=true
+[node name="Approach" type="Marker3D" parent="."]
+position=Vector3(0, 0, 2.7)

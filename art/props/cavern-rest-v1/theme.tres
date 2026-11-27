@@ -1,0 +1,52 @@
+[gd_resource type="Resource" script_class="EnvironmentTheme" format=3]
+
+[ext_resource type="Script" path="res://scripts/environment_theme.gd" id="1"]
+[ext_resource type="Material" path="res://art/props/cavern-rest-v1/cavern-wall.tres" id="2"]
+[ext_resource type="Material" path="res://art/props/cavern-rest-v1/cavern-wall-variant.tres" id="3"]
+[ext_resource type="Material" path="res://art/props/cavern-rest-v1/cavern-floor.tres" id="4"]
+[ext_resource type="Material" path="res://art/props/cavern-rest-v1/cavern-ceiling.tres" id="5"]
+[ext_resource type="AudioStream" path="res://audio/field-v1/ambience-cave.wav" id="6"]
+[ext_resource type="AudioStream" path="res://audio/field-v1/step-stone-1.wav" id="7"]
+[ext_resource type="AudioStream" path="res://audio/field-v1/step-stone-2.wav" id="8"]
+[ext_resource type="AudioStream" path="res://audio/field-v1/step-stone-3.wav" id="9"]
+[ext_resource type="AudioStream" path="res://audio/field-v1/step-stone-4.wav" id="step4"]
+[ext_resource type="AudioStream" path="res://audio/field-v1/wall-bump.wav" id="10"]
+[ext_resource type="AudioStream" path="res://audio/field-v1/passage-web.wav" id="11"]
+[ext_resource type="AudioStream" path="res://audio/field-v1/passage-roots.wav" id="roots"]
+[ext_resource type="PackedScene" path="res://art/props/cavern-rest-v1/hide-curtain.tscn" id="12"]
+[ext_resource type="PackedScene" path="res://art/props/cavern-rest-v1/hide-curtain-opened.tscn" id="13"]
+[ext_resource type="PackedScene" path="res://art/props/cavern-rest-v1/goblin-barricade.tscn" id="14"]
+[ext_resource type="PackedScene" path="res://art/props/cavern-rest-v1/on-to-rest.tscn" id="15"]
+[ext_resource type="PackedScene" path="res://art/props/cavern-rest-v1/back-to-damp.tscn" id="16"]
+
+[resource]
+script = ExtResource("1")
+display_name = "Cavern"
+wall_face_uv=true
+closed_scene = ExtResource("12")
+opened_scene = ExtResource("13")
+blocked_scene = ExtResource("14")
+descent_scene = ExtResource("15")
+ascent_scene = ExtResource("16")
+wall_material = ExtResource("2")
+wall_variant_material = ExtResource("3")
+floor_material = ExtResource("4")
+ceiling_material = ExtResource("5")
+closed_name = "Hide curtain"
+closed_open_message = "You pull the hide curtain aside."
+closed_color = Color(0.9, 0.9, 0.85, 0.18)
+blocked_name = "Goblin barricade"
+blocked_message = "A goblin barricade blocks the passage."
+blocked_color = Color(0.32, 0.22, 0.12, 1)
+descent_name = "Path to the Rest Area"
+descent_prompt = "Continue to the Rest Area?"
+descent_color = Color(0.02, 0.02, 0.02, 1)
+ascent_name = "Way back to the Damp Caves"
+ascent_prompt = "Return to the Damp Caves?"
+exit_message = "The path back through the Damp Caves."
+ascent_color = Color(0.4, 0.3, 0.18, 1)
+ambience = ExtResource("6")
+footstep_sounds = Array[AudioStream]([ExtResource("7"), ExtResource("8"), ExtResource("9"), ExtResource("step4")])
+bump_sound = ExtResource("10")
+open_sound = ExtResource("11")
+blocked_sound = ExtResource("roots")

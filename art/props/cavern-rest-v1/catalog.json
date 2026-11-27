@@ -1,0 +1,871 @@
+{
+  "issue": 308,
+  "assets": [
+    {
+      "id": "column-tall",
+      "triangles": 850,
+      "surfaces": [
+        "Stone"
+      ],
+      "sha256": "0f031a80377a530a9f4231b2077ad47c6da902f5b687045e0e23bff867610e36",
+      "min": [
+        -0.5257952213287354,
+        -0.06551775336265564,
+        -0.5571870803833008
+      ],
+      "max": [
+        0.6472382545471191,
+        5.800000190734863,
+        0.5630494952201843
+      ]
+    },
+    {
+      "id": "roof-pendant",
+      "triangles": 282,
+      "surfaces": [
+        "Stone"
+      ],
+      "sha256": "7c071d790b603ce65d03f53d52290661dffba93dd720e184cce583ff3fb37b2c",
+      "min": [
+        -0.4352080523967743,
+        -1.7999999523162842,
+        -0.46005576848983765
+      ],
+      "max": [
+        0.48193395137786865,
+        0.0,
+        0.40489041805267334
+      ]
+    },
+    {
+      "id": "wall-rib",
+      "triangles": 1056,
+      "surfaces": [
+        "Stone"
+      ],
+      "sha256": "d862b3ad8a518a2045d829b380a335590b348d82b633f0520413baab2247b55d",
+      "min": [
+        -0.8999999761581421,
+        -1.0800000429153442,
+        0.03500000014901161
+      ],
+      "max": [
+        0.8999999761581421,
+        1.0800000429153442,
+        0.23157399892807007
+      ]
+    },
+    {
+      "id": "cliff-face",
+      "triangles": 1056,
+      "surfaces": [
+        "Stone"
+      ],
+      "sha256": "bd7da3dba1bb40b200706bc821ba1a1100373b6e64dbc9f28f216aaa0dc1ec7f",
+      "min": [
+        -1.5,
+        -6.0,
+        0.08049999922513962
+      ],
+      "max": [
+        1.5,
+        8.0,
+        0.6721804141998291
+      ]
+    },
+    {
+      "id": "talus-edge",
+      "triangles": 1200,
+      "surfaces": [
+        "Stone"
+      ],
+      "sha256": "5e17780afae4d59aaa1cce87902b30bf5f9166a94f40f994298771938d701d17",
+      "min": [
+        -0.8071300387382507,
+        -0.05700695514678955,
+        -0.4483780860900879
+      ],
+      "max": [
+        0.65184485912323,
+        0.31545060873031616,
+        0.26879075169563293
+      ]
+    },
+    {
+      "id": "ledge-tile",
+      "triangles": 134,
+      "surfaces": [
+        "Stone"
+      ],
+      "sha256": "f16fd92e74c44d97cc71b5f6e7e3f17eb5770158e5a19d623fb7aed9f887c73b",
+      "min": [
+        -1.0,
+        -1.7999999523162842,
+        -1.0
+      ],
+      "max": [
+        1.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "id": "goblin-daub",
+      "triangles": 64,
+      "surfaces": [
+        "Iron"
+      ],
+      "sha256": "c3ecb9e771819195410dfd380f164610279ecf66242a5d874ebc30e38de4429f",
+      "min": [
+        -0.2552188038825989,
+        -0.2432273030281067,
+        0.00288521870970726
+      ],
+      "max": [
+        0.24026601016521454,
+        0.23932045698165894,
+        0.04711901769042015
+      ]
+    },
+    {
+      "id": "goblin-litter",
+      "triangles": 513,
+      "surfaces": [
+        "Iron",
+        "Wood",
+        "Cloth",
+        "Stone"
+      ],
+      "sha256": "680d8ddd256f167097f2bd54026a87528c9bec5f8a22398d698807b14a887c8d",
+      "min": [
+        -0.37695589661598206,
+        0.006126841530203819,
+        -0.2555635869503021
+      ],
+      "max": [
+        0.41629883646965027,
+        0.12999999523162842,
+        0.20999999344348907
+      ]
+    },
+    {
+      "id": "goblin-totem",
+      "triangles": 688,
+      "surfaces": [
+        "Wood",
+        "Stone"
+      ],
+      "sha256": "bd8b368188631b50542eed5b431e60774e88a5967295b8f44ee1301d5440ae32",
+      "min": [
+        -0.3812899589538574,
+        0.0,
+        -0.11299999803304672
+      ],
+      "max": [
+        0.3812224864959717,
+        1.4199999570846558,
+        0.11299999803304672
+      ]
+    },
+    {
+      "id": "drying-rack",
+      "triangles": 323,
+      "surfaces": [
+        "Wood",
+        "Cloth"
+      ],
+      "sha256": "a82672b8b0ced4c5b59f5f08a78c8ceaee748c967a57872bdc99ff0c82eeb263",
+      "min": [
+        -0.5600000023841858,
+        -0.0009641238721087575,
+        -0.0747930034995079
+      ],
+      "max": [
+        0.5600001215934753,
+        1.3609312772750854,
+        0.03256720304489136
+      ]
+    },
+    {
+      "id": "hanging-trophies",
+      "triangles": 456,
+      "surfaces": [
+        "Wood",
+        "Stone"
+      ],
+      "sha256": "53dd0d4bd64df7f50e93823ace92bfdf099a2874017109fafd0e5e5505dd4d87",
+      "min": [
+        -0.47999998927116394,
+        0.0,
+        -0.045315731316804886
+      ],
+      "max": [
+        0.4800000488758087,
+        1.271314263343811,
+        0.05607791244983673
+      ]
+    },
+    {
+      "id": "iron-seam-fresh",
+      "triangles": 1438,
+      "surfaces": [
+        "Stone"
+      ],
+      "sha256": "77ded91610a68a2f0abdfc2df62deb35639e0a74f4e26ec82183225a064d7798",
+      "min": [
+        -0.3489438593387604,
+        -0.03597568720579147,
+        -0.036066874861717224
+      ],
+      "max": [
+        0.3495609760284424,
+        1.7307331562042236,
+        0.2418622374534607
+      ]
+    },
+    {
+      "id": "iron-seam-worked",
+      "triangles": 1386,
+      "surfaces": [
+        "Stone"
+      ],
+      "sha256": "92cb87b28af84b8516f85f7e7bf3dfd0ffb322dbd8b838b3a9bb593de02f9f0d",
+      "min": [
+        -0.3489438593387604,
+        -0.03597568720579147,
+        -0.036066874861717224
+      ],
+      "max": [
+        0.3495609760284424,
+        1.7307331562042236,
+        0.2418622374534607
+      ]
+    },
+    {
+      "id": "hide-curtain-closed",
+      "triangles": 424,
+      "surfaces": [
+        "Wood",
+        "Cloth"
+      ],
+      "sha256": "42354f3855a1b51aee0d8164aaab9d28b96d5f0650aa3787aa682bfc3056cdbe",
+      "min": [
+        -0.9800000190734863,
+        0.0,
+        -0.06528507173061371
+      ],
+      "max": [
+        0.9821345806121826,
+        2.239523410797119,
+        0.10475528240203857
+      ]
+    },
+    {
+      "id": "hide-curtain-open",
+      "triangles": 232,
+      "surfaces": [
+        "Wood",
+        "Cloth"
+      ],
+      "sha256": "b6194ebd893f333b2d9d8241e27a13bdbbb024fe996ce14e1c835a775aff9dfd",
+      "min": [
+        -0.9800000190734863,
+        0.0,
+        -0.06528507173061371
+      ],
+      "max": [
+        0.9821345806121826,
+        2.239523410797119,
+        0.12999999523162842
+      ]
+    },
+    {
+      "id": "cavern-throat",
+      "triangles": 1680,
+      "surfaces": [
+        "Stone"
+      ],
+      "sha256": "98ca4f36a417542fdf6bd3c90e8d893f04561ecc7842d0591b67378be8c78b82",
+      "min": [
+        -1.0238126516342163,
+        -0.03580576181411743,
+        -0.27333036065101624
+      ],
+      "max": [
+        1.0289467573165894,
+        2.3855273723602295,
+        0.07631700485944748
+      ]
+    },
+    {
+      "id": "rest-threshold",
+      "triangles": 1835,
+      "surfaces": [
+        "Stone",
+        "Wood",
+        "Cloth"
+      ],
+      "sha256": "c7081f40478da07b924ff57c887d1d8d48a99ea1c5e685fac01954b89a983a65",
+      "min": [
+        -1.0238126516342163,
+        -0.03580576181411743,
+        -0.27333036065101624
+      ],
+      "max": [
+        1.0289467573165894,
+        2.3855273723602295,
+        0.699999988079071
+      ]
+    },
+    {
+      "id": "bedroll",
+      "triangles": 336,
+      "surfaces": [
+        "Cloth",
+        "Wood"
+      ],
+      "sha256": "79ff0e19e6f418bd3f7b4ea586ef9884b81d3de492a03a6cb15d169bcabe39b8",
+      "min": [
+        -0.33000001311302185,
+        0.0,
+        -0.824999988079071
+      ],
+      "max": [
+        0.33000001311302185,
+        0.21309727430343628,
+        0.8276084661483765
+      ]
+    },
+    {
+      "id": "scout-tent",
+      "triangles": 1177,
+      "surfaces": [
+        "Stone",
+        "Wood",
+        "Cloth"
+      ],
+      "sha256": "468873ae7a5b7e534ebb7cd0d07dcf0ec8d1a28a12eb970cc5d0cfecd2f637c6",
+      "min": [
+        -1.1200000047683716,
+        -0.031576450914144516,
+        -1.25
+      ],
+      "max": [
+        1.1200000047683716,
+        1.587644338607788,
+        1.25
+      ]
+    },
+    {
+      "id": "map-table",
+      "triangles": 1006,
+      "surfaces": [
+        "Wood",
+        "Cloth",
+        "Stone"
+      ],
+      "sha256": "494703dc8cca2d4aeee89a67b7c549590f300d07f000fc7f173cc723587dfbe3",
+      "min": [
+        -0.47999998927116394,
+        0.0,
+        -0.31247660517692566
+      ],
+      "max": [
+        0.4800000488758087,
+        0.799841582775116,
+        0.31759756803512573
+      ]
+    },
+    {
+      "id": "supply-crate",
+      "triangles": 1056,
+      "surfaces": [
+        "Wood",
+        "Iron"
+      ],
+      "sha256": "964ab801ab39d173cc30b4a7f657cf59a499b8a022aed1d3ea11b641a019b3f7",
+      "min": [
+        -0.45250001549720764,
+        0.029999997466802597,
+        -0.3149999976158142
+      ],
+      "max": [
+        0.45250001549720764,
+        0.49799999594688416,
+        0.3149999976158142
+      ]
+    },
+    {
+      "id": "bench",
+      "triangles": 304,
+      "surfaces": [
+        "Wood"
+      ],
+      "sha256": "9b62a5cb1aa016b5a5b4c1897f3091e38151e8d1b42c670d5a59b2d31ede8a22",
+      "min": [
+        -0.5699999928474426,
+        0.0,
+        -0.12915869057178497
+      ],
+      "max": [
+        0.5700001120567322,
+        0.4803503751754761,
+        0.1239033043384552
+      ]
+    }
+  ],
+  "source": "Original geometry on retained mine/worked-prop helpers. No new downloaded or private source.",
+  "masters": "build/local-cavern-rest-v1/masters",
+  "forward": "+Z out of wall / -Z passage",
+  "live_bindings_changed": true,
+  "elevation_prototype": false,
+  "helper_inputs": [
+    "tools/mine_props/build_models.py",
+    "tools/mine_polish/build_models.py"
+  ],
+  "builder_sha256": "a705af0aa13f3b312a36d83650de329fb80e91eb6d71d43d46054b85eb1732c3",
+  "scenes": [
+    {
+      "id": "column-tall",
+      "scene": "res://art/props/cavern-rest-v1/column-tall.tscn",
+      "states": [
+        "static"
+      ],
+      "footprint_metres": [
+        2,
+        2
+      ],
+      "kind": "floor",
+      "note": "True metric origin; original geometry, physical grain UVs/vertex colours. Column needs a tall room. Ledge tile is level scenery and requires caller terrain integration, not a live slope."
+    },
+    {
+      "id": "roof-pendant",
+      "scene": "res://art/props/cavern-rest-v1/roof-pendant.tscn",
+      "states": [
+        "static"
+      ],
+      "footprint_metres": [
+        2,
+        2
+      ],
+      "kind": "ceiling",
+      "note": "Metric ceiling prop. New physical material; no collision, RNG or rules."
+    },
+    {
+      "id": "wall-rib",
+      "scene": "res://art/props/cavern-rest-v1/wall-rib.tscn",
+      "states": [
+        "static"
+      ],
+      "footprint_metres": [
+        2,
+        2
+      ],
+      "kind": "wall",
+      "note": "Metric wall prop. New physical material; no collision, RNG or rules."
+    },
+    {
+      "id": "cliff-face",
+      "scene": "res://art/props/cavern-rest-v1/cliff-face.tscn",
+      "states": [
+        "static"
+      ],
+      "footprint_metres": [
+        3,
+        0.8
+      ],
+      "kind": "wall",
+      "note": "Metric wall prop. New physical material; no collision, RNG or rules."
+    },
+    {
+      "id": "talus-edge",
+      "scene": "res://art/props/cavern-rest-v1/talus-edge.tscn",
+      "states": [
+        "static"
+      ],
+      "footprint_metres": [
+        2,
+        2
+      ],
+      "kind": "floor",
+      "note": "Metric floor prop. New physical material; no collision, RNG or rules."
+    },
+    {
+      "id": "ledge-tile",
+      "scene": "res://art/props/cavern-rest-v1/ledge-tile.tscn",
+      "states": [
+        "static"
+      ],
+      "footprint_metres": [
+        2,
+        2
+      ],
+      "kind": "floor",
+      "note": "True metric origin; original geometry, physical grain UVs/vertex colours. Column needs a tall room. Ledge tile is level scenery and requires caller terrain integration, not a live slope."
+    },
+    {
+      "id": "goblin-daub",
+      "scene": "res://art/props/cavern-rest-v1/goblin-daub.tscn",
+      "states": [
+        "static"
+      ],
+      "footprint_metres": [
+        2,
+        2
+      ],
+      "kind": "wall",
+      "note": "Metric wall prop. New physical material; no collision, RNG or rules."
+    },
+    {
+      "id": "goblin-litter",
+      "scene": "res://art/props/cavern-rest-v1/goblin-litter.tscn",
+      "states": [
+        "static"
+      ],
+      "footprint_metres": [
+        2,
+        2
+      ],
+      "kind": "floor",
+      "note": "Metric floor prop. New physical material; no collision, RNG or rules."
+    },
+    {
+      "id": "goblin-totem",
+      "scene": "res://art/props/cavern-rest-v1/goblin-totem.tscn",
+      "states": [
+        "static"
+      ],
+      "footprint_metres": [
+        2,
+        2
+      ],
+      "kind": "floor",
+      "note": "Metric floor prop. New physical material; no collision, RNG or rules."
+    },
+    {
+      "id": "drying-rack",
+      "scene": "res://art/props/cavern-rest-v1/drying-rack.tscn",
+      "states": [
+        "static"
+      ],
+      "footprint_metres": [
+        2,
+        2
+      ],
+      "kind": "floor",
+      "note": "Metric floor prop. New physical material; no collision, RNG or rules."
+    },
+    {
+      "id": "hanging-trophies",
+      "scene": "res://art/props/cavern-rest-v1/hanging-trophies.tscn",
+      "states": [
+        "static"
+      ],
+      "footprint_metres": [
+        2,
+        2
+      ],
+      "kind": "floor",
+      "note": "Metric floor prop. New physical material; no collision, RNG or rules."
+    },
+    {
+      "id": "bedroll",
+      "scene": "res://art/props/cavern-rest-v1/bedroll.tscn",
+      "states": [
+        "static"
+      ],
+      "footprint_metres": [
+        2,
+        2
+      ],
+      "kind": "floor",
+      "note": "Metric floor prop. New physical material; no collision, RNG or rules."
+    },
+    {
+      "id": "scout-tent",
+      "scene": "res://art/props/cavern-rest-v1/scout-tent.tscn",
+      "states": [
+        "static"
+      ],
+      "footprint_metres": [
+        2.4,
+        2.8
+      ],
+      "kind": "floor",
+      "note": "Metric floor prop. New physical material; no collision, RNG or rules."
+    },
+    {
+      "id": "map-table",
+      "scene": "res://art/props/cavern-rest-v1/map-table.tscn",
+      "states": [
+        "static"
+      ],
+      "footprint_metres": [
+        2,
+        2
+      ],
+      "kind": "floor",
+      "note": "Metric floor prop. New physical material; no collision, RNG or rules."
+    },
+    {
+      "id": "supply-crate",
+      "scene": "res://art/props/cavern-rest-v1/supply-crate.tscn",
+      "states": [
+        "static"
+      ],
+      "footprint_metres": [
+        2,
+        2
+      ],
+      "kind": "floor",
+      "note": "Metric floor prop. New physical material; no collision, RNG or rules."
+    },
+    {
+      "id": "bench",
+      "scene": "res://art/props/cavern-rest-v1/bench.tscn",
+      "states": [
+        "static"
+      ],
+      "footprint_metres": [
+        2,
+        2
+      ],
+      "kind": "floor",
+      "note": "Metric floor prop. New physical material; no collision, RNG or rules."
+    },
+    {
+      "id": "iron-seam",
+      "scene": "res://art/props/cavern-rest-v1/iron-seam.tscn",
+      "states": [
+        "fresh",
+        "worked"
+      ],
+      "footprint_metres": [
+        2,
+        2
+      ],
+      "kind": "wall-floor",
+      "note": "Mount on a real wall; fresh/worked appearance never awards ore or advances the smith quest."
+    },
+    {
+      "id": "hide-curtain",
+      "scene": "res://art/props/cavern-rest-v1/hide-curtain.tscn",
+      "states": [
+        "closed",
+        "opened"
+      ],
+      "footprint_metres": [
+        2,
+        2
+      ],
+      "kind": "passage",
+      "note": "Floor-centre/-Z passage. Opened hides the central hide; caller retains floor. Material/wording do not assign web fire rules."
+    },
+    {
+      "id": "goblin-barricade",
+      "scene": "res://art/props/cavern-rest-v1/goblin-barricade.tscn",
+      "states": [
+        "blocked",
+        "cleared"
+      ],
+      "footprint_metres": [
+        2,
+        2
+      ],
+      "kind": "passage",
+      "note": "Retained #246 intact/broken palisade; caller still owns passage clearance. Cleared state art is broken at the edges, not a collision mesh."
+    },
+    {
+      "id": "back-to-damp",
+      "scene": "res://art/props/cavern-rest-v1/back-to-damp.tscn",
+      "states": [
+        "static"
+      ],
+      "footprint_metres": [
+        2,
+        2
+      ],
+      "kind": "passage",
+      "note": "Open level passage throat. Return retains the caller floor; no duplicate apron. No travel trigger. Canonical label must be shown; graph pairing/arrival remains Areas authority."
+    },
+    {
+      "id": "on-to-rest",
+      "scene": "res://art/props/cavern-rest-v1/on-to-rest.tscn",
+      "states": [
+        "static"
+      ],
+      "footprint_metres": [
+        2,
+        2
+      ],
+      "kind": "passage",
+      "note": "Open level passage throat. Supplies a full 2m landing because LevelBuilder omits the descent tile. No travel trigger. Canonical label must be shown; graph pairing/arrival remains Areas authority."
+    },
+    {
+      "id": "rest-return",
+      "scene": "res://art/props/cavern-rest-v1/rest-return.tscn",
+      "states": [
+        "static"
+      ],
+      "footprint_metres": [
+        2,
+        2
+      ],
+      "kind": "passage",
+      "note": "Open level passage throat. Return retains the caller floor; no duplicate apron. No travel trigger. Canonical label must be shown; graph pairing/arrival remains Areas authority."
+    },
+    {
+      "id": "rest-to-fortress",
+      "scene": "res://art/props/cavern-rest-v1/rest-to-fortress.tscn",
+      "states": [
+        "static"
+      ],
+      "footprint_metres": [
+        2,
+        2
+      ],
+      "kind": "passage",
+      "note": "Open level passage throat. Supplies a full 2m landing because LevelBuilder omits the descent tile. No travel trigger. Canonical label must be shown; graph pairing/arrival remains Areas authority."
+    },
+    {
+      "id": "refuge-marker",
+      "scene": "res://art/props/cavern-rest-v1/refuge-marker.tscn",
+      "states": [
+        "fresh",
+        "used"
+      ],
+      "footprint_metres": [
+        2,
+        2
+      ],
+      "kind": "floor",
+      "note": "Compact registered fresh/banked event marker; can replace refuge_scouts.prop through existing RoomEvent API. Caller retains solid cell and rest-once rule. One existing small fire light while fresh; still by default."
+    },
+    {
+      "id": "landmark-totem-field",
+      "scene": "res://art/props/cavern-rest-v1/landmark-totem-field.tscn",
+      "states": [
+        "static"
+      ],
+      "footprint_metres": [
+        6,
+        6
+      ],
+      "kind": "floor",
+      "note": "3x3-cell room. Totems/rack at edges; central approach and exit corridor remain clear. No added cult/lore facts."
+    },
+    {
+      "id": "landmark-goblin-lookout",
+      "scene": "res://art/props/cavern-rest-v1/landmark-goblin-lookout.tscn",
+      "states": [
+        "static"
+      ],
+      "footprint_metres": [
+        6,
+        6
+      ],
+      "kind": "floor",
+      "note": "3x3-cell edge lookout; retained CC0/project structure recipes, no guard/spawn or usable elevated platform assigned."
+    },
+    {
+      "id": "landmark-collapsed-bridge",
+      "scene": "res://art/props/cavern-rest-v1/landmark-collapsed-bridge.tscn",
+      "states": [
+        "static"
+      ],
+      "footprint_metres": [
+        6,
+        6
+      ],
+      "kind": "floor",
+      "note": "Broken bridge scenery beside a retained dry route, not an impassable gap/repair gate or new traversal rule. Reserve an alcove for the fallen deck."
+    },
+    {
+      "id": "landmark-bone-midden",
+      "scene": "res://art/props/cavern-rest-v1/landmark-bone-midden.tscn",
+      "states": [
+        "static"
+      ],
+      "footprint_metres": [
+        6,
+        6
+      ],
+      "kind": "floor",
+      "note": "3x3-cell dead-end composition; retained verified CC0 anonymous bones. No searchable identity, rewards or guaranteed ambush."
+    },
+    {
+      "id": "cavern-rift-identity",
+      "scene": "res://art/props/cavern-rest-v1/cavern-rift-identity.tscn",
+      "states": [
+        "static"
+      ],
+      "footprint_metres": [
+        10,
+        16
+      ],
+      "kind": "room-context",
+      "note": "Tall narrow rift identity vignette, NOT a playable elevation prototype. Only the foreground walkway is level y=0. Needs bespoke void/roof reservation before live placement; distant ledges are scenery, not reachable routes. No collision/controller/map."
+    },
+    {
+      "id": "rest-area-approach",
+      "scene": "res://art/props/cavern-rest-v1/rest-area-approach.tscn",
+      "states": [
+        "fresh",
+        "used"
+      ],
+      "footprint_metres": [
+        8,
+        8
+      ],
+      "kind": "room-context",
+      "note": "4x4-cell first-person refuge composition: grounded tent/pegs/bedrolls, map table and supplies, warm fire at edge, clear central arrival. One small existing light fresh, none banked. Needs reserved room/ceiling height; leave approved Overlook screen, present-party mapping and route/rest/service authority intact. Markers are future caller targets only, not new services/NPCs."
+    }
+  ],
+  "retained_inputs": [
+    {
+      "path": "res://art/props/fortress-waterworks-3d-v1/palisade-intact.glb",
+      "sha256": "38e93e24e8d5d3853cb7a5fa32bab9305e38c989d53eb2d5487b33eba949b22c"
+    },
+    {
+      "path": "res://art/props/fortress-waterworks-3d-v1/palisade-broken.glb",
+      "sha256": "9a2dc9da18beffba4dd19729b46e7ecb1d9287dab1f4303844f821410ed07490"
+    },
+    {
+      "path": "res://art/props/fortress-waterworks-3d-v1/watch-post.glb",
+      "sha256": "e412c7c35407d0a022b9ba4041e492acebe5c01fb9749d2fa2c83397c5f513a1"
+    },
+    {
+      "path": "res://art/props/fortress-waterworks-3d-v1/overhead-walkway.glb",
+      "sha256": "f6f01aef5a25d7356c15fdcea51ef76f149e0215c022afc46d01432e88ae92cf"
+    },
+    {
+      "path": "res://art/features/campfire-3d-v1/hearth.glb",
+      "sha256": "b35b3fd40f065e562ecee92519271a92fcce699bdc84385753b53cb168a33dc7"
+    },
+    {
+      "path": "res://art/features/campfire-3d-v1/flames.glb",
+      "sha256": "5d8d1b48a462854d88ee1e5e5676e3fadd44cc4a4b2f70d97af0dcf1e5ca643c"
+    },
+    {
+      "path": "res://art/textures/descent-walls-v1/worked-cave.png",
+      "sha256": "abb1a323af53226cf84aa9c077d298cfd2b421d2869c232827c9daca0bccac00"
+    },
+    {
+      "path": "res://art/textures/descent-walls-v1/goblin-hold.png",
+      "sha256": "27dd34be997b8865bc5fa3ccae13748f2db973d66fb17c1d383dd787004042d0"
+    },
+    {
+      "path": "res://art/textures/descent-surfaces-v1/worked-cave-floor.png",
+      "sha256": "145c6dc4b02754dbf7326d2511448e51c60ef2ce03a7e23a3846a25df653954b"
+    },
+    {
+      "path": "res://art/textures/descent-surfaces-v1/worked-cave-ceiling.png",
+      "sha256": "108f860515ed20d47c54b0c22fbdce9e4fc06fc0c9538c5e64a2763da87c2577"
+    }
+  ],
+  "hookup": "Compact refuge_scouts.prop URI uses the existing RoomEvent API; no rest/loot/cost/Overlook rule changes. Cavern theme/Areas/Main selection and full approach/rift reserved room/roof geometry remain caller hookup. Elevation prototype deferred.",
+  "live_binding": {
+    "file": "data/events/refuge_scouts.tres",
+    "change": "prop URI only, to compact one-cell 3D marker; original rest/loot/cost/service/Overlook rules preserved"
+  }
+}
