@@ -376,7 +376,17 @@ for the area they're aiming at:
 - Drowned Galleries and Black Reservoir: sluices and floods (Sapper and Scout).
 
 Arrival cards and threshold warnings hint at an area's character so players learn to
-read it. **Build order:** start with the existing obstacles (traps, rubble, locks, deep
+read it.
+
+**First pass built (2026-11-26, `scripts/challenges.gd`):** Mines double the rubble (a
+Sapper clears it free); Damp Caves add traps and shut passages,
+and a Scout finds the shallows (wading costs no time and half the nerves); Cavern has
+more fights, fewer traps, little rubble and packs that come sooner; the Jail more shut
+doors; Fungal Hollows and Grove keep few wall lights and their spores fray nerves faster
+(×1.35/×1.5) unless an Acolyte stands with the party; Galleries and Reservoir add traps
+and lever gates. The arrival card names what the area leans on and warns a party with
+none of its classes ("You have no Scout with you: it will cost you."); the fire and
+preparation screen list the reached areas the party suits. **Build order:** start with the existing obstacles (traps, rubble, locks, deep
 water, puzzles, darkness) weighted by area; add class- and formation-specific
 challenges later, once the formations feel right. Overcoming those should feel like an
 accomplishment.

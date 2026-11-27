@@ -46,9 +46,10 @@ static func chance(at_depth: int, lingered: int) -> float:
 
 
 ## A new floor (or a load): the clock starts over.
-func arrive_on(at_depth: int, now: int) -> void:
+## `pace` scales the quiet spell (an area of patrols, challenges.gd: sooner).
+func arrive_on(at_depth: int, now: int, pace := 1.0) -> void:
 	depth = at_depth
-	_reset(now, WANDER.get(at_depth, [0])[0])
+	_reset(now, roundi(WANDER.get(at_depth, [0])[0] * pace))
 
 
 func _reset(now: int, quiet_time: int) -> void:

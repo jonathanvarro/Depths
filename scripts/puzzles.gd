@@ -246,7 +246,7 @@ static func solve(rows: PackedStringArray, puzzles: Array) -> Dictionary:
 	for y in rows.size():
 		for x in rows[y].length():
 			var cell := Vector2i(x, y)
-			if _open(rows, cell) and not props.has(cell):
+			if _open(rows, cell) and not props.has(cell) and _at(rows, cell) != "B":
 				open_cells.append(cell)
 	for start in starts(rows):
 		# With every puzzle shut (one-way doors only from their bolt side).
@@ -290,8 +290,8 @@ static func _reach(rows: PackedStringArray, puzzles: Array, start: Vector2i, wor
 			var cell: Vector2i = queue.pop_front()
 			for n in NEIGHBOURS:
 				var next: Vector2i = cell + n
-				if reach.has(next) or not _open(rows, next) or shut.has(next):
-					continue
+				if reach.has(next) or not _open(rows, next) or shut.has(next) or _at(rows, next) == "B":
+					continue  # rubble is never the only way (as the generator keeps it, #305)
 				if bolts.has(next) and bolts[next] != cell:
 					continue  # barred from this side
 				reach[next] = true

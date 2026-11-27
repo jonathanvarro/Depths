@@ -26,6 +26,7 @@ const TURN_RIGHT_ICON := preload("res://art/ui/controls-v1/turn-right.svg")
 const Party := preload("res://scripts/party.gd")
 const Minimap := preload("res://scripts/minimap.gd")
 const FloorGenerator := preload("res://scripts/floor_generator.gd")
+const Challenges := preload("res://scripts/challenges.gd")
 const LevelBuilder := preload("res://scripts/level_builder.gd")
 const PartyState := preload("res://scripts/party_state.gd")
 const PartyCard := preload("res://scripts/party_card.gd")
@@ -755,6 +756,9 @@ func _go_to_area(id: String, arrival: Arrival, from_area := "") -> void:
 	var depth: int = Areas.depth(id)
 	var key = Areas.key(id)
 	_area = id
+	_party_state.area = id  # spores and the like (challenges.gd, #305)
+	if not _in_opening:
+		_camp_state.areas_seen[id] = true
 	var waited := 0
 	if _floor_started:
 		# Owner rule (#8): durations finish between floors - but the time they
@@ -765,7 +769,7 @@ func _go_to_area(id: String, arrival: Arrival, from_area := "") -> void:
 	_floor_started = true
 	_depth = depth
 	# No wanderers in the Rest Area or a boss lair.
-	_wanderers.arrive_on(0 if Areas.is_safe(id) or Areas.is_lair(id) else depth, _party_state.time_elapsed)
+	_wanderers.arrive_on(0 if Areas.is_safe(id) or Areas.is_lair(id) else depth, _party_state.time_elapsed, Challenges.wander_pace(id))
 	_apply_theme()
 	_expedition.visit_floor(depth)
 	# A floor kept from earlier today, made before a quest that belongs on it
@@ -837,7 +841,7 @@ func _go_to_area(id: String, arrival: Arrival, from_area := "") -> void:
 					for y in range(site.position.y - 1, site.end.y + 1):
 						keep_clear.append(Vector2i(x, y))
 			# The Jail: a locked cell, always, with the jailer's keys somewhere.
-			var chances: Dictionary = {"oneway": 0.3, "key": 1.0, "lever": 0.0} if id == "jail" else Puzzles.CHANCE
+			var chances: Dictionary = {"oneway": 0.3, "key": 1.0, "lever": 0.0} if id == "jail" else Challenges.puzzle_chances(id, Puzzles.CHANCE)
 			var laid: Dictionary = Puzzles.place(stamped["layout"], depth, _site_seed + depth * 7919 + 43 + (posmod(hash(id), 997) if not Areas.on_main_path(id) else 0), keep_clear, chances)
 			stamped["layout"] = laid["layout"]
 			if not laid["puzzles"].is_empty():
@@ -901,7 +905,7 @@ func _go_to_area(id: String, arrival: Arrival, from_area := "") -> void:
 					else Quests.has_flag(_camp_state, "reservoir", "diverted")
 			Galleries.flood(_floors[key], _site_seed + depth * 7919 + 37, drained, depth)
 		if not _in_opening and not use_debug_layout:
-			WallLights.place(_floors[key], depth, _site_seed)  # spare torches, old lanterns
+			WallLights.place(_floors[key], depth, _site_seed, Challenges.light_share(id))  # spare torches, old lanterns; few in the spores (#305)
 	_map = _floors[key]
 	if _missing_quest_site(_map, depth):
 		_note_site_trouble(depth, "the floor was built without a site the story needs: %s" % _quest_site_report())
@@ -924,7 +928,10 @@ func _go_to_area(id: String, arrival: Arrival, from_area := "") -> void:
 	elif waited > 0:
 		_show_message("%s · waited %d while it took hold" % [Areas.area_name(id), waited])
 	else:
-		_show_message(Areas.area_name(id))
+		# The arrival card: what the area leans on, and a warning if the party
+		# has none of its classes (#305: learn to read an area, recruit for it).
+		var character: String = Challenges.arrival_line(id, _party_state)
+		_show_message(Areas.area_name(id) + (" · " + character if character != "" else ""))
 	_fortress_signs(depth)
 	var lost: Array = _camp_state.bodies_on(key).map(func(h): return h.display_name)
 	if not lost.is_empty() and not _in_opening:  # #180
@@ -1304,7 +1311,7 @@ func _make_layout(depth: int, attempt := 0) -> PackedStringArray:
 	var seed_value: int = _site_seed + (depth - 1) * FLOOR_SEED_STEP + attempt * 104729
 	if not Areas.on_main_path(_area):
 		seed_value += posmod(hash(_area), 1000003)
-	var layout := FloorGenerator.generate(seed_value, info["main"] != "" and depth < floors_in_site, depth)
+	var layout := FloorGenerator.generate(seed_value, info["main"] != "" and depth < floors_in_site, depth, "" if use_debug_layout else _area)  # weighted by the area's challenges (#305)
 	if Areas.is_safe(_area):  # the Rest Area: no fights
 		for y in layout.size():
 			layout[y] = layout[y].replace("E", ",")
@@ -1402,7 +1409,7 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 			if Areas.is_lair(dest):  # a boss lair: warned, and free to turn back (#300)
 				_ask(_threshold(Areas.LAIRS[Areas.info(dest)["lair"]]["warning"]), go_down, Callable(), ["Go in", "Back away"])
 			elif Areas.children(_area).size() > 1:
-				_ask("This way leads to the %s. Go on?" % Areas.area_name(dest), go_down)
+				_ask(("This way leads to the %s. %s Go on?" % [Areas.area_name(dest), Challenges.hint(dest)]).replace("  ", " "), go_down)
 			else:
 				_ask(environment_theme.descent_prompt, go_down)
 		DungeonMap.Content.TRAP:
@@ -2767,7 +2774,7 @@ func _camp_loop(reward := 0, note := "") -> void:
 		var explored_before: bool = _camp_state.explored_today
 		_camp.visible = false
 		_camp_state.leave_behind(_party_state)
-		_preparation.show_for(_expedition.number + 1, _party_state)
+		_preparation.show_for(_expedition.number + 1, _party_state, _camp_state.areas_seen)
 		if await _preparation.decided:
 			break
 		_camp_state.rejoin(_party_state)
@@ -3158,6 +3165,12 @@ func _restore(data: Dictionary) -> void:
 	_party_state.update_capacity()  # pack space follows the party (#133)
 	SaveGame.unpack_into(_camp_state, data["camp"])
 	SaveGame.unpack_into(_camp_state.stash, data["stash"])
+	if _camp_state.areas_seen.is_empty():  # saves from before 2026-11-26: the main path reached (#305)
+		for d in _camp_state.floors_reached:
+			if int(d) >= 1 and int(_camp_state.floors_reached[d]) > 0:
+				_camp_state.areas_seen[Areas.main_for(int(d))] = true
+		if _camp_state.rest_secured:
+			_camp_state.areas_seen["rest"] = true
 	_camp_state.candidates.assign(data["candidates"].map(func(i): return people[i]))
 	_camp_state.left_behind.assign(data["left_behind"].map(func(i): return people[i]))
 	_camp_state.fallen.assign(data.get("fallen", []).map(func(i): return people[i]))  # carried home (#180)
@@ -3198,6 +3211,7 @@ func _restore(data: Dictionary) -> void:
 		return
 	_depth = data["depth"]
 	_area = data.get("area", Areas.main_for(_depth))  # saves from before the network (#300)
+	_party_state.area = _area
 	# Continued on a floor that lacks a site the story now needs: build it
 	# again, from the way in (2026-11-24).
 	if _missing_quest_site(_floors[Areas.key(_area)], _depth):
@@ -3216,7 +3230,7 @@ func _restore(data: Dictionary) -> void:
 	_party.rotation.y = -_party.facing * PI / 2.0
 	_party.moved.emit(_party.cell, _party.facing)
 	_show_message("%s · depth %d · continued" % [environment_theme.display_name, _depth])
-	_wanderers.arrive_on(_depth, _party_state.time_elapsed)
+	_wanderers.arrive_on(_depth, _party_state.time_elapsed, Challenges.wander_pace(_area))
 	if data.has("wanderers"):  # saves from before 2026-10-27 start the quiet spell again
 		SaveGame.unpack_into(_wanderers, data["wanderers"])
 	_spawn_room_groups()  # back in their rooms; wanderers lose the trail
@@ -3733,9 +3747,10 @@ func _wade(cell: Vector2i) -> void:
 	if _map == null or not _map.is_water(cell) or _in_opening:
 		return
 	Sounds.play(self, "wade", FOOTSTEP_VOLUME_DB, 0.035)
-	_party_state.advance_time(Galleries.WADE_TIME)
+	var share: float = Challenges.wade_share(_party_state)  # a Scout finds the shallows (#305)
+	_party_state.advance_time(floori(Galleries.WADE_TIME * share))
 	for hero: Companion in _party_state.living_members():
-		hero.change_strain(Galleries.WADE_STRAIN)
+		hero.change_strain(Galleries.WADE_STRAIN * share)
 	if _party_state.supplies.source == Supplies.Source.TORCH:
 		_party_state.supplies.burn(Galleries.WADE_TORCH_SOAK)
 	_tip("wading", "Deep water: wading costs time and nerves, and a torch gutters and burns down faster. A lantern rides above it.")

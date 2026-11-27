@@ -65,7 +65,9 @@ static func _cylinder(parent: Node3D, top: float, bottom: float, height: float, 
 
 
 ## Chooses this floor's wall lights (seeded, so a layout keeps them).
-static func place(map, depth: int, seed: int) -> void:
+## `share`: how many of the usual lights the area keeps (spore-choked
+## areas keep few: challenges.gd). The dice are the same either way.
+static func place(map, depth: int, seed: int, share := 1.0) -> void:
 	var lights := {}
 	map.marks["wall_lights"] = lights
 	if depth < 1:
@@ -89,6 +91,7 @@ static func place(map, depth: int, seed: int) -> void:
 		wanted.append("torch")
 	for i in rng.randi_range(LANTERNS.x, LANTERNS.y):
 		wanted.append("lantern")
+	wanted.resize(roundi(wanted.size() * clampf(share, 0.0, 1.0)))
 	for cell in spots:
 		if wanted.is_empty():
 			break

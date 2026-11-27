@@ -13,6 +13,7 @@ signal brew_revealed  # a revealing brew was drunk: show the floor's rooms (#175
 const GearModel := preload("res://scripts/gear_model.gd")
 const Supplies := preload("res://scripts/supplies.gd")
 const Formations := preload("res://scripts/formations.gd")
+const Challenges := preload("res://scripts/challenges.gd")
 const Trinkets := preload("res://scripts/trinkets.gd")
 const StrainRules := preload("res://scripts/strain.gd")
 const Spells := preload("res://scripts/spells.gd")
@@ -88,9 +89,15 @@ func has_role(role: String) -> bool:
 ## slower while one stands.
 const WARDEN_CALM := 0.85
 
+## The area the party is in (main.gd sets it on arrival; "" at camp): its
+## challenge family can weigh on nerves (challenges.gd).
+var area := ""
+
+
 func steady_members() -> void:
 	var calm := WARDEN_CALM if has_role("Warden") else 1.0  # an unconverted Warden only: classes (#179) have no such perk
 	calm *= Formations.CALM.get(formation().get("id", ""), 1.0)  # a Vigil, Chantry or Survey Party (#305)
+	calm *= Challenges.strain_factor(area, self)  # spores, unless an Acolyte is with them (#305)
 	for member in members:
 		member.party_calm = calm
 

@@ -34,12 +34,16 @@ const ROOM_CONTENT_WEIGHTS := [
 const CLOSED_PASSAGE_CHANCE := 0.3
 const BLOCKED_PASSAGE_CHANCE := 0.12
 
+const Challenges := preload("res://scripts/challenges.gd")
+
 const NEIGHBOURS: Array[Vector2i] = [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]
 
 
 ## has_descent: false on a site's deepest floor, which has no way further down.
-static func generate(seed_value: int, has_descent := true, depth := 1) -> PackedStringArray:
-	var content_weights: Dictionary = ROOM_CONTENT_WEIGHTS[clampi(depth, 1, ROOM_CONTENT_WEIGHTS.size()) - 1]
+## area: the area's challenge family (challenges.gd) weights the contents
+## and passages; the walls and the dice rolled stay the same.
+static func generate(seed_value: int, has_descent := true, depth := 1, area := "") -> PackedStringArray:
+	var content_weights: Dictionary = Challenges.content_weights(area, ROOM_CONTENT_WEIGHTS[clampi(depth, 1, ROOM_CONTENT_WEIGHTS.size()) - 1])
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed_value
 	var open := PackedByteArray()
@@ -95,7 +99,7 @@ static func generate(seed_value: int, has_descent := true, depth := 1) -> Packed
 			if not symbols.has(cell) and not survivor_room.has_point(cell):
 				symbols[cell] = content
 
-	_place_passages(open, rng, rooms, start, symbols)
+	_place_passages(open, rng, rooms, start, symbols, Challenges.blocked_chance(area, BLOCKED_PASSAGE_CHANCE), Challenges.closed_chance(area, CLOSED_PASSAGE_CHANCE))
 
 	var layout := PackedStringArray()
 	for y in HEIGHT:
@@ -116,7 +120,7 @@ static func generate(seed_value: int, has_descent := true, depth := 1) -> Packed
 ## Puts closed ('D') and blocked ('B') passages in doorways: corridor cells
 ## just outside a room, with wall on both sides. A blocked passage is only
 ## kept if every other floor cell is still reachable from the start.
-static func _place_passages(open: PackedByteArray, rng: RandomNumberGenerator, rooms: Array[Rect2i], start: Vector2i, symbols: Dictionary) -> void:
+static func _place_passages(open: PackedByteArray, rng: RandomNumberGenerator, rooms: Array[Rect2i], start: Vector2i, symbols: Dictionary, blocked_chance := BLOCKED_PASSAGE_CHANCE, closed_chance := CLOSED_PASSAGE_CHANCE) -> void:
 	var floor_count := open.count(1)
 	var blocked := {}
 	for y in HEIGHT:
@@ -127,13 +131,13 @@ static func _place_passages(open: PackedByteArray, rng: RandomNumberGenerator, r
 			if NEIGHBOURS.any(func(n): return symbols.get(cell + n, "") in ["D", "B"]):
 				continue  # no passages side by side
 			var roll := rng.randf()
-			if roll < BLOCKED_PASSAGE_CHANCE:
+			if roll < blocked_chance:
 				blocked[cell] = true
 				if _walking_distances(open, start, blocked).size() == floor_count - blocked.size():
 					symbols[cell] = "B"
 					continue
 				blocked.erase(cell)  # it would cut part of the floor off
-			if roll < BLOCKED_PASSAGE_CHANCE + CLOSED_PASSAGE_CHANCE:
+			if roll < blocked_chance + closed_chance:
 				symbols[cell] = "D"
 
 

@@ -106,7 +106,7 @@ func _initialize() -> void:
 	var torch_before: float = supplies.torch_left
 	var wet_cell: Vector2i = map.water.keys()[0]
 	main._wade(wet_cell)
-	check("wading takes time and nerves", ps.time_elapsed == time_before + Galleries.WADE_TIME and hero.strain > strain_before)
+	check("wading takes time and nerves", ps.time_elapsed == time_before + floori(Galleries.WADE_TIME * load("res://scripts/challenges.gd").wade_share(ps)) and hero.strain > strain_before)
 	check("...and soaks a torch", supplies.source != Supplies.Source.TORCH or supplies.torch_left < torch_before - Galleries.WADE_TIME, "%.1f -> %.1f" % [torch_before, supplies.torch_left])
 	var dry: Vector2i = map.start_cell
 	time_before = ps.time_elapsed

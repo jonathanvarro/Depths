@@ -741,6 +741,13 @@ Templates > Download and Install; already installed on the owner's PC).
   `tunnel_crew`/`formation_finds` (calm and oil through steady_members/oil_rate);
   main `_note_formation`, `_map_room`; shown at the fire and preparation.
   `tools/formations_check.gd`. DESIGN.md "Formations and formation gates".
+  Challenge families (#305): `scripts/challenges.gd` AREAS (leans, hint,
+  content/blocked/closed/puzzles/lights/spores/wander) feeds
+  `FloorGenerator.generate(..., area)` (same walls and dice), Puzzles chances,
+  `WallLights.place(share)`, `Wanderers.arrive_on(pace)`; `PartyState.area`
+  (spores via steady_members), Scout wading `wade_share`; arrival card and
+  side-exit prompt use the hint; `CampState.areas_seen` feeds "Suits:" at the
+  fire/preparation. `tools/challenges_check.gd`.
 - Quest sites (2026-11-24): `marks["sites"]` (every package's Rect2i),
   `DungeonMap.in_story_site()` keeps other placements out; `_missing_quest_site`
   checks the package events too and `_restore` rebuilds a floor missing one;

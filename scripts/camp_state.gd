@@ -519,6 +519,11 @@ func times_reached(depth: int) -> int:
 	return maxi(floors_reached.get(depth, 0), floor2_reached if depth == 2 else 0)
 
 
+## Every area the party has reached (id -> true): the fire names the ones a
+## party suits (challenges.gd, #305).
+var areas_seen := {}
+
+
 ## Reached the Rest Area (#300): the scouts mark the way, and the route
 ## there opens. Earned by getting there, not by repeat trips.
 var rest_secured := false

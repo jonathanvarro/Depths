@@ -17,6 +17,7 @@ signal open_pack  # check items and equipment at camp (owner playtest, #229)
 const Areas := preload("res://scripts/areas.gd")
 const Classes := preload("res://scripts/classes.gd")
 const Formations := preload("res://scripts/formations.gd")
+const Challenges := preload("res://scripts/challenges.gd")
 const DIR := "res://art/camp/highres-v4/"
 const COHESIVE := "res://art/camp/cohesive-v5/"
 const Brass := preload("res://art/ui/reliquary-brass-v1/style.gd")
@@ -952,8 +953,12 @@ func _fire() -> void:
 	var formation: Array = Formations.describe(_party.members)
 	if not formation.is_empty():
 		left.add_child(_label("Formation: " + formation[0], ACTION, 13, AMBER))
+		# The areas reached so far that lean on this party's classes (#305),
+		# on the bonus line so the fire still fits a phone.
+		var suits: Array = Challenges.suited(_party.members, _camp.areas_seen).map(func(a): return Areas.area_name(a))
 		for i in [1, 2]:
-			var line_text := _label(formation[i], BODY, 11, TEXT if i == 1 else MUTED)
+			var text: String = formation[i] + (" Suits: %s." % ", ".join(suits) if i == 1 and not suits.is_empty() else "")
+			var line_text := _label(text, BODY, 11, TEXT if i == 1 else MUTED)
 			line_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 			left.add_child(line_text)
 	_lineup_note = ""

@@ -12,6 +12,8 @@ const PartyCard := preload("res://scripts/party_card.gd")
 const Supplies := preload("res://scripts/supplies.gd")
 const StrainRules := preload("res://scripts/strain.gd")
 const Formations := preload("res://scripts/formations.gd")
+const Challenges := preload("res://scripts/challenges.gd")
+const Areas := preload("res://scripts/areas.gd")
 const HEADING := preload("res://art/fonts/heading-cinzel.tres")
 const ACTION := preload("res://art/fonts/action-source-sans.tres")
 const BODY := preload("res://art/fonts/body-source-sans.tres")
@@ -114,7 +116,8 @@ func _init() -> void:
 	visible = false
 
 
-func show_for(expedition_number: int, party) -> void:
+## areas_seen: CampState.areas_seen, for the areas this party suits (#305).
+func show_for(expedition_number: int, party, areas_seen := {}) -> void:
 	_title.text = "Expedition %d" % expedition_number
 	for child in _cards.get_children():
 		child.queue_free()
@@ -147,6 +150,13 @@ func show_for(expedition_number: int, party) -> void:
 			line_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 			line_text.custom_minimum_size.x = 360
 			_formation.add_child(line_text)
+		# The areas reached so far that lean on this party's classes (#305).
+		var suits: Array = Challenges.suited(party.members, areas_seen).map(func(a): return Areas.area_name(a))
+		if not suits.is_empty():
+			var suits_text := _label("Suits: " + ", ".join(suits) + ".", BODY, 17, TEXT)
+			suits_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+			suits_text.custom_minimum_size.x = 360
+			_formation.add_child(suits_text)
 	for child in _supplies.get_children():
 		child.queue_free()
 	var supplies = party.supplies
