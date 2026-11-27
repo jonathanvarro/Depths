@@ -354,6 +354,7 @@ func records() -> Array:
 		["Kinds of foe met", bestiary.size()],
 		["Named packs beaten", elites_looted.size() - bosses],
 		["Lair bosses beaten", bosses],
+		["Formation gates opened", gates_open.size()],
 		["Quests completed", done],
 		["Companions lost below", fallen.size() + lost_bodies.size()],
 		["Gold in the stash", stash.gold],
@@ -517,6 +518,11 @@ func record_depth(deepest: int, returned_alive := true) -> void:
 ## How many expeditions have reached `depth`.
 func times_reached(depth: int) -> int:
 	return maxi(floors_reached.get(depth, 0), floor2_reached if depth == 2 else 0)
+
+
+## Formation gates (#305): seen (id -> true) and opened for good.
+var gates_seen := {}
+var gates_open := {}
 
 
 ## Every area the party has reached (id -> true): the fire names the ones a

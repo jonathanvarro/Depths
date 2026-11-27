@@ -27,6 +27,7 @@ const Party := preload("res://scripts/party.gd")
 const Minimap := preload("res://scripts/minimap.gd")
 const FloorGenerator := preload("res://scripts/floor_generator.gd")
 const Challenges := preload("res://scripts/challenges.gd")
+const Gates := preload("res://scripts/gates.gd")
 const LevelBuilder := preload("res://scripts/level_builder.gd")
 const PartyState := preload("res://scripts/party_state.gd")
 const PartyCard := preload("res://scripts/party_card.gd")
@@ -905,6 +906,7 @@ func _go_to_area(id: String, arrival: Arrival, from_area := "") -> void:
 					else Quests.has_flag(_camp_state, "reservoir", "diverted")
 			Galleries.flood(_floors[key], _site_seed + depth * 7919 + 37, drained, depth)
 		if not _in_opening and not use_debug_layout:
+			Gates.place(_floors[key], id, _site_seed)  # formation gates (#305), before the wall lights
 			WallLights.place(_floors[key], depth, _site_seed, Challenges.light_share(id))  # spare torches, old lanterns; few in the spores (#305)
 	_map = _floors[key]
 	if _missing_quest_site(_map, depth):
@@ -1018,6 +1020,8 @@ func _build_level() -> void:
 	_play_place_music()
 	add_child(_level)
 	_add_room_props()
+	for cell in _map.marks.get("formation_gates", {}):  # #305
+		_level.add_child(Gates.build_prop(_map, cell, _camp_state.gates_open.has(Gates.at(_map, cell)), CELL_SIZE))
 	for cell in _map.water:  # floor 5's deep water (placeholder art, #166)
 		_level.add_child(Galleries.water_surface(cell, CELL_SIZE, Settings.get_value("flashes")))
 	for cell in _map.marks.get("shallow", {}):  # the Damp Caves' puddles: looks only
@@ -1328,6 +1332,7 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 	_wade(cell)
 	_map_room(cell)
 	_note_formation()
+	_notice_gate(cell)
 	if _map_beat(cell):
 		return  # a fight began on the map (#171)
 	_banter()
@@ -2814,6 +2819,55 @@ func _camp_loop(reward := 0, note := "") -> void:
 ## The formation last announced, to say when a fall steps it down or a
 ## hero getting up restores it.
 var _formation_id := ""
+
+# --- Formation gates (#305) ----------------------------------------------
+
+## Close to a formation gate for the first time this floor: say what it is
+## and who could open it, and remember it was seen (the fire names it).
+func _notice_gate(cell: Vector2i) -> void:
+	for gate_cell: Vector2i in _map.marks.get("formation_gates", {}):
+		var id: String = Gates.at(_map, gate_cell)
+		if _camp_state.gates_open.has(id) or absi(gate_cell.x - cell.x) + absi(gate_cell.y - cell.y) > Gates.NOTICE_RANGE:
+			continue
+		if _map.marks.get("gates_noticed", {}).has(gate_cell):
+			continue
+		if not _map.marks.has("gates_noticed"):
+			_map.marks["gates_noticed"] = {}
+		_map.marks["gates_noticed"][gate_cell] = true
+		_camp_state.gates_seen[id] = true
+		_show_message(Gates.info(id)["seen"])
+
+
+## Walking into a formation gate. Returns true if it was one.
+func _work_gate(cell: Vector2i) -> bool:
+	var id: String = Gates.at(_map, cell)
+	if id == "":
+		return false
+	var gate: Dictionary = Gates.info(id)
+	_camp_state.gates_seen[id] = true
+	if _camp_state.gates_open.has(id):
+		_show_message(gate["beyond"])
+	elif Gates.can_open(id, _party_state):
+		_ask(gate["ask"] % gate["time"], func(): _open_gate(id, cell), Callable(), ["Yes", "Not now"])
+	else:
+		_show_message(gate["shut"])
+		Sounds.play(self, "ui", -10.0, 0.0)
+	return true
+
+
+## The right party opens a gate, for good.
+func _open_gate(id: String, cell: Vector2i) -> void:
+	_party_state.advance_time(int(Gates.info(id)["time"]))
+	_camp_state.gates_open[id] = true
+	var old := _level.get_node_or_null("Gate_%d_%d" % [cell.x, cell.y])
+	if old:
+		old.queue_free()
+		old.name += "_old"
+	_level.add_child(Gates.build_prop(_map, cell, true, CELL_SIZE))
+	Sounds.play(self, "level_up", -5.0, 0.0)
+	_show_message(Gates.info(id)["opened"])
+	_save_now()
+
 
 func _note_formation() -> void:
 	if _party_state == null or _ending:
@@ -4590,6 +4644,8 @@ func _on_party_interacted(cell: Vector2i) -> void:
 	if _pick_up_body(cell):
 		return
 	if _work_puzzle(cell):
+		return
+	if _work_gate(cell):
 		return
 	if _map.triggered.has(cell):
 		_show_message("Nothing more to take.")

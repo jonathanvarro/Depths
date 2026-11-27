@@ -18,6 +18,7 @@ const Areas := preload("res://scripts/areas.gd")
 const Classes := preload("res://scripts/classes.gd")
 const Formations := preload("res://scripts/formations.gd")
 const Challenges := preload("res://scripts/challenges.gd")
+const Gates := preload("res://scripts/gates.gd")
 const DIR := "res://art/camp/highres-v4/"
 const COHESIVE := "res://art/camp/cohesive-v5/"
 const Brass := preload("res://art/ui/reliquary-brass-v1/style.gd")
@@ -958,6 +959,9 @@ func _fire() -> void:
 		var suits: Array = Challenges.suited(_party.members, _camp.areas_seen).map(func(a): return Areas.area_name(a))
 		for i in [1, 2]:
 			var text: String = formation[i] + (" Suits: %s." % ", ".join(suits) if i == 1 and not suits.is_empty() else "")
+			var gate_line: String = Gates.fire_line(_party.members, _camp.gates_seen, _camp.gates_open)
+			if i == 1 and gate_line != "":  # a seen formation gate this party opens (#305)
+				text += " " + gate_line
 			var line_text := _label(text, BODY, 11, TEXT if i == 1 else MUTED)
 			line_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 			left.add_child(line_text)

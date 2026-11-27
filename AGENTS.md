@@ -748,6 +748,11 @@ Templates > Download and Install; already installed on the owner's PC).
   (spores via steady_members), Scout wading `wade_share`; arrival card and
   side-exit prompt use the hint; `CampState.areas_seen` feeds "Suits:" at the
   fire/preparation. `tools/challenges_check.gd`.
+  Formation gates (#305): `scripts/gates.gd` GATES (formation, area, wording,
+  time; bridge in "reservoir" for now, portal unplaced), `Gates.place` (main,
+  before wall lights; `marks["formation_gates"]` cell -> id, solid),
+  `build_prop`/`approach`; main `_notice_gate`/`_work_gate`/`_open_gate`;
+  CampState `gates_seen`/`gates_open`; fire "Can open:". `tools/gates_check.gd`.
 - Quest sites (2026-11-24): `marks["sites"]` (every package's Rect2i),
   `DungeonMap.in_story_site()` keeps other placements out; `_missing_quest_site`
   checks the package events too and `_restore` rebuilds a floor missing one;

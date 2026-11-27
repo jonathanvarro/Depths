@@ -407,6 +407,15 @@ heroes are worth keeping.
 - **The gates build the route:** the shortcuts other formations open are what make the
   Acolytes' trip to the portal survivable, so every class matters to the ending.
 
+**System built (2026-11-26, `scripts/gates.gd`):** a gate is one entry (formation, area,
+wording, time to open) and sits on one room cell against a wall, never cutting the
+floor. Coming close names it and who could open it; the fire says "Can open: ..." for a
+party that would; the right formation is asked, spends the time, and opens it for good
+(tent record "Formation gates opened"). Placement is not decided (owner: a later-game
+idea, for example the Black Reservoir to the Buried City): for now the Sappers' chasm
+sits in the Black Reservoir, and its far side ("the Buried City") isn't open yet. The
+portal is defined but placed nowhere. Stand-in looks: a black shaft and plank bridge.
+
 ### The temple portal (main story)
 
 - Part of the main story. Floors grow more obscure deeper down; the portal is the
