@@ -32,7 +32,8 @@ const GATES := {
 		"shut": "The chasm is too wide to cross. It would take three Sappers working together to bridge it.",
 		"ask": "Your Tunnel Crew sizes up the chasm. They can bridge it with what they carry, but it will take a long while (%d). Build the bridge?",
 		"opened": "Plank by plank, the bridge goes out over the dark, and holds. The far side is open now, for good.",
-		"beyond": "Across the bridge, steps cut into the far wall drop toward something old: the Buried City, people will call it. That way isn't open yet.",
+		"beyond": "Across the bridge, steps cut into the far wall drop toward something old: the Buried City. Cross?",
+		"leads": "city",
 		"time": 30,
 	},
 	"portal": {
@@ -111,6 +112,20 @@ static func _usable(map, cell: Vector2i, up: Vector2i) -> bool:
 		return false
 	# Against a wall, so it reads as a crack in the floor running off into rock.
 	return [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT].any(func(d): return map.is_wall(cell + d) and map.is_passable(cell - d))
+
+
+## The area an open gate leads to ("" if none yet).
+static func leads(id: String) -> String:
+	return info(id).get("leads", "")
+
+
+## The cell to stand on beside the gate on `map` that leads to `area`
+## (coming back up from it), or (-1, -1).
+static func landing(map, area: String) -> Vector2i:
+	for cell: Vector2i in map.marks.get("formation_gates", {}):
+		if leads(map.marks["formation_gates"][cell]) == area:
+			return cell + approach(map, cell)
+	return Vector2i(-1, -1)
 
 
 ## The gate at `cell` on `map`, or "".

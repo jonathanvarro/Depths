@@ -111,7 +111,8 @@ func _initialize() -> void:
 	if args.size() > 1:
 		await _snap(args[1] + "/gate_bridge.png")
 	main._on_party_interacted(cell)
-	check("across it: the Buried City, not open yet", main._message_label.text.contains("Buried City"), main._message_label.text)
+	check("across it: the Buried City, offered", main._prompt.visible and main._prompt_label.text.contains("Buried City"), main._prompt_label.text)
+	main._answer_prompt(false)
 	check("the fire no longer names an opened gate", Gates.fire_line(crew, main._camp_state.gates_seen, main._camp_state.gates_open) == "")
 
 	# A new day's floor keeps it built.

@@ -26,6 +26,9 @@ const AREAS := {
 	"galleries": {"name": "Drowned Galleries", "depth": 5, "parent": "fortress", "main": "reservoir", "side": [], "key": 5, "theme": "galleries"},
 	"reservoir": {"name": "Black Reservoir", "depth": 6, "parent": "galleries", "main": "", "side": [], "key": 6, "theme": "galleries"},
 	"hollows": {"name": "Fungal Hollows", "depth": 3, "parent": "damp", "main": "", "side": ["grove"], "theme": "fungal", "groups": "hollows"},
+	# The Buried City (2026-11-26, #305): over the Sappers' bridge from the
+	# Black Reservoir, not down a stair. Its own street layout (city_generator.gd).
+	"city": {"name": "Buried City", "depth": 7, "parent": "reservoir", "main": "", "side": [], "theme": "city", "groups": "city", "gate": "bridge"},
 	"grove": {"name": "Grove", "depth": 3, "parent": "hollows", "main": "", "side": [], "theme": "fungal", "lair": "heartrot"},
 }
 
@@ -97,7 +100,8 @@ static func is_lair(id: String) -> bool:
 	return info(id).has("lair")
 
 
-## The theme name main.gd maps to a look: cave, fungal, fortress, galleries.
+## The theme name main.gd maps to a look: cave, fungal, fortress, galleries,
+## city.
 static func theme(id: String) -> String:
 	return info(id).get("theme", "cave")
 

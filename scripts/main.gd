@@ -28,6 +28,8 @@ const Minimap := preload("res://scripts/minimap.gd")
 const FloorGenerator := preload("res://scripts/floor_generator.gd")
 const Challenges := preload("res://scripts/challenges.gd")
 const Gates := preload("res://scripts/gates.gd")
+const CityGenerator := preload("res://scripts/city_generator.gd")
+const STONE_THEME := preload("res://themes/stone.tres")
 const LevelBuilder := preload("res://scripts/level_builder.gd")
 const PartyState := preload("res://scripts/party_state.gd")
 const PartyCard := preload("res://scripts/party_card.gd")
@@ -241,6 +243,11 @@ const ENCOUNTER_GROUPS := {
 			[HOUND, HOUND, LAMP_EATER], [BLOAT, BLOAT, MINER], [MINER, MINER, HOUND], [VENOM_SPIDER, MINER, BLOAT],
 			[BRUTE, MINER], [HOUND, HOUND, HOUND], [MINER, MINER, MINER], [LAMP_EATER, HOUND, MINER, BLOAT],
 			[UNDERHOUND], [UNDERHOUND, MINER], [UNDERHOUND, HOUND, HOUND], [BORROWED], [BORROWED, LAMP_EATER]],
+	# The Buried City (2026-11-26): what came up through the breach lives in
+	# its streets. Placeholder pool until the city's own creatures are made.
+	"city": [[UNDERHOUND, UNDERHOUND], [BORROWED, UNDERHOUND], [BORROWED, BORROWED], [LAMP_EATER, BORROWED],
+			[UNDERHOUND, HOUND, HOUND], [BORROWED, MINER, MINER], [UNDERHOUND, UNDERHOUND, LAMP_EATER],
+			[BORROWED, UNDERHOUND, MINER], [BORROWED, BORROWED, UNDERHOUND], [UNDERHOUND, BORROWED, LAMP_EATER, MINER]],
 	# The Black Reservoir: the stranger things the water hid.
 	6: [[UNDERHOUND], [BORROWED], [MINER, MINER], [UNDERHOUND, UNDERHOUND], [UNDERHOUND, MINER], [BORROWED, LAMP_EATER],
 			[BORROWED, UNDERHOUND], [UNDERHOUND, HOUND, HOUND], [MINER, MINER, UNDERHOUND], [BLOAT, UNDERHOUND, LAMP_EATER],
@@ -1270,6 +1277,9 @@ func _exit_destination(cell: Vector2i) -> String:
 ## The way down on this floor that leads to `child` (the main one if it's
 ## not a side exit, or no `child` is given).
 func _exit_to(child: String) -> Vector2i:
+	var landing: Vector2i = Gates.landing(_map, child)
+	if landing != Vector2i(-1, -1):
+		return landing  # back over a formation gate (#305)
 	for cell in _map.marks.get("exits", {}):
 		if _map.marks["exits"][cell] == child:
 			return cell
@@ -1315,6 +1325,8 @@ func _make_layout(depth: int, attempt := 0) -> PackedStringArray:
 	var seed_value: int = _site_seed + (depth - 1) * FLOOR_SEED_STEP + attempt * 104729
 	if not Areas.on_main_path(_area):
 		seed_value += posmod(hash(_area), 1000003)
+	if _area == "city":  # streets, not rooms and corridors
+		return CityGenerator.generate(seed_value, depth)
 	var layout := FloorGenerator.generate(seed_value, info["main"] != "" and depth < floors_in_site, depth, "" if use_debug_layout else _area)  # weighted by the area's challenges (#305)
 	if Areas.is_safe(_area):  # the Rest Area: no fights
 		for y in layout.size():
@@ -2846,7 +2858,10 @@ func _work_gate(cell: Vector2i) -> bool:
 	var gate: Dictionary = Gates.info(id)
 	_camp_state.gates_seen[id] = true
 	if _camp_state.gates_open.has(id):
-		_show_message(gate["beyond"])
+		if Gates.leads(id) != "":
+			_ask(gate["beyond"], func(): _go_to_area(Gates.leads(id), Arrival.FROM_ABOVE), Callable(), ["Cross", "Stay"])
+		else:
+			_show_message(gate["beyond"])
 	elif Gates.can_open(id, _party_state):
 		_ask(gate["ask"] % gate["time"], func(): _open_gate(id, cell), Callable(), ["Yes", "Not now"])
 	else:
@@ -3456,6 +3471,8 @@ func _apply_theme() -> void:
 			"fungal":
 				if _cave_theme.resource_path == "res://themes/cave.tres":
 					theme = FUNGAL_THEME
+			"city":
+				theme = STONE_THEME  # worked stone streets until the city's own look is made
 	environment_theme = theme
 	_refresh_place_ambience()
 

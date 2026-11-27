@@ -48,6 +48,8 @@ const AREAS := {
 		"spores": 1.35, "lights": 0.4},
 	"grove": {"leans": ["Mage"], "hint": "Thick spores and rot: an Acolyte steadies the party.",
 		"spores": 1.5, "lights": 0.0},
+	"city": {"leans": ["Scout"], "hint": "Streets that all look alike, fallen lanes and shut houses: Scout ground.",
+		"blocked": 0.14, "lights": 0.3},
 	"galleries": {"leans": ["Fixer", "Scout"], "hint": "Floods, sluices and gates: Sapper and Scout ground.",
 		"content": {"T": 1}, "puzzles": {"oneway": 0.6, "key": 0.5, "lever": 0.8}},
 	"reservoir": {"leans": ["Fixer", "Scout"], "hint": "Black water and old gates: Sapper and Scout ground.",

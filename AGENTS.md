@@ -753,6 +753,11 @@ Templates > Download and Install; already installed on the owner's PC).
   before wall lights; `marks["formation_gates"]` cell -> id, solid),
   `build_prop`/`approach`; main `_notice_gate`/`_work_gate`/`_open_gate`;
   CampState `gates_seen`/`gates_open`; fire "Can open:". `tools/gates_check.gd`.
+  Buried City (2026-11-26): Areas "city" (depth 7, parent reservoir,
+  `gate: bridge`), `scripts/city_generator.gd` (streets/houses, via
+  `_make_layout`), STONE_THEME, ENCOUNTER_GROUPS["city"], Wanderers 7;
+  `Gates.leads`/`landing` (cross from `_work_gate`; `_exit_to` lands beside
+  the bridge). `tools/city_check.gd`.
 - Quest sites (2026-11-24): `marks["sites"]` (every package's Rect2i),
   `DungeonMap.in_story_site()` keeps other placements out; `_missing_quest_site`
   checks the package events too and `_restore` rebuilds a floor missing one;

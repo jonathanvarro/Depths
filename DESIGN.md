@@ -416,6 +416,20 @@ idea, for example the Black Reservoir to the Buried City): for now the Sappers' 
 sits in the Black Reservoir, and its far side ("the Buried City") isn't open yet. The
 portal is defined but placed nowhere. Stand-in looks: a black shaft and plank bridge.
 
+### The Buried City — first pass (2026-11-26)
+
+The owner asked to start it as the bridge's far side. Built so far: area `city` (depth 7),
+reached only over the Sappers' bridge from the Black Reservoir; climbing back lands
+beside the bridge. Its own floor (`scripts/city_generator.gd`): streets in a grid, one
+house per block with a doorway (often shut), fallen lanes and choked streets (never the
+only way round), a threshold plaza with the stair up, and no way further down yet. It
+leans on Scouts (streets that all look alike), keeps few wall lights, borrows the worked
+stone look, and draws its fights from the breach's deep creatures until its own exist.
+Open: its lore and story role (`docs/cave-descent-and-quests.md` floors 9–10 are the
+earlier proposal: an unknown city, homes and public places, repeated symbols), its own
+creatures and look, landmarks, quests, what lies deeper, and whether the bridge stays
+its only way in.
+
 ### The temple portal (main story)
 
 - Part of the main story. Floors grow more obscure deeper down; the portal is the
