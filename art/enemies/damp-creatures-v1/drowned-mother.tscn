@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="Script" path="res://art/enemies/damp-creatures-v1/actor.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/enemies/damp-creatures-v1/drowned-mother.glb" id="model"]
+[node name="DampCreature" type="Node3D"]
+script=ExtResource("script")
+pose_bounds={"attack": AABB(-0.46210, 0.02200, -0.83230, 0.92420, 0.61000, 1.74240), "emerge": AABB(-0.46080, 0.00800, -0.83230, 0.91640, 0.61810, 1.63750), "fall": AABB(-0.45740, 0.00880, -0.83230, 0.91850, 0.61820, 1.63750), "hurt": AABB(-0.49650, 0.02200, -0.83230, 0.94980, 0.69190, 1.63750), "idle": AABB(-0.46230, 0.02200, -0.83820, 0.92450, 0.62710, 1.64340), "rear": AABB(-0.46230, 0.02200, -0.83230, 0.92450, 1.22890, 1.63750), "run": AABB(-0.46230, 0.02200, -0.83820, 0.92450, 0.61910, 1.64340), "submerge": AABB(-0.45570, 0.00800, -0.83230, 0.91640, 0.61810, 1.63750), "walk": AABB(-0.46230, 0.02200, -0.83820, 0.92450, 0.61910, 1.64340)}
+contact_size=Vector2(0.8, 1.35)
+metadata/asset_id="drowned-mother"
+metadata/visual_height=0.64910
+[node name="Model" parent="." instance=ExtResource("model")]

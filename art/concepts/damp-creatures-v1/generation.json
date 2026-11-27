@@ -1,0 +1,46 @@
+{
+  "issue": 302,
+  "stage": "I: concepts approved for modelling; models delivered with separate native validation and owner/device review",
+  "tool": "built-in image_gen",
+  "assets": [
+    {
+      "id": "pale-newt",
+      "prompt": "Use case: stylized-concept. Asset: PALE NEWT / OLM turnaround concept sheet for the dark first-person dungeon crawler Depths, not a finished game sprite. Landscape sheet on plain charcoal grey, four clearly separated studies of the SAME animal: front in a low threatening stance, full side view with entire tail, three-quarter alert/rearing view, and a small neutral 1.7m clothed human silhouette beside the animal for scale. Very restrained small labels: 'PALE NEWT', 'FRONT', 'SIDE', 'THREE-QUARTER', 'SCALE'. Long eel-like colourless cave salamander with four small splayed but clearly articulated limbs, low narrow predatory head, broad readable mouth, tiny vestigial eye pits, three feathery dull red external gill branches on each side behind the head. Body about 1.4m long including tail, 0.25m high at rest, raises head/chest to about human waist height when threatening. Dirty ivory skin with a subtle dark dorsal spine visible as pigmentation beneath thin-looking wet skin, anatomically tangible and opaque, NOT transparent or glass. Broad shadow masses, a little scar texture and restrained wet highlights. Early wet-cave animal: unsettling recognizable anatomy, not a cute axolotl, not a dragon, no horns, no armor, no fantasy gear, no neon glow, no huge sparkling eyes. Make front silhouette and red gill fan readable at phone combat size. Gritty painterly production concept, subdued bone grey, bruised mauve and dark red against charcoal. Same anatomy, proportions and gill placement in every study. Generous spacing, whole bodies unclipped, no decorative frame, no environment, no UI, no attacks or game stats.",
+      "file": "art/concepts/damp-creatures-v1/pale-newt.png",
+      "reference": null,
+      "approval": "approved for modelling",
+      "sha256": "45e6f96587a3b36a73afcfb85f9a29bda4f1dafbf1db7c0a640055a0992d857d"
+    },
+    {
+      "id": "blind-crawler",
+      "prompt": "Use case: stylized-concept. Asset: BLIND CRAWLER production concept turnaround for Depths, a dark gritty first-person cave dungeon crawler. Landscape sheet, plain charcoal background, same animal consistently shown in front, full side, three-quarter and small scale comparison beside a neutral clothed 1.7m human silhouette. Small restrained serif labels only: 'BLIND CRAWLER', 'FRONT', 'SIDE', 'THREE-QUARTER', 'SCALE'. Dog-sized cave crayfish, roughly 0.8m body length and 0.35m body height, low grounded wide stance. Dirty ivory mineral-stained carapace, visibly segmented abdomen and a short fan tail, six readable walking legs plus two front claw arms. No eyes at all: a hard face shield and blunt mandibles form the targetable face. Two long arcing feelers frame the face clearly without a visual tangle. Its OWN RIGHT claw is disproportionately heavy and blunt like a battered stone-splitting vice, the left claw small and narrow; maintain the same anatomical right/left in all views (on viewer left in front view). Carapace worn with just a few bruised seams, restrained wet sheen, grey-green grime in joints, dark mauve underparts. Threat must read as a pale forward-facing armored crustacean with one dominant grabbing claw, not a spider, scorpion, lobster meal or robot. Plausible early cave animal with uncomfortable mass, physically tangible. Gritty painterly production study with broad simplified material planes suitable for later low-poly mobile 3D, not noisy hyperdetail. Whole legs, claws, antennae and tail unclipped. No armor, weapons, accessories, flames, neon, magical runes, environment or elaborate page decoration.",
+      "file": "art/concepts/damp-creatures-v1/blind-crawler.png",
+      "reference": null,
+      "approval": "approved for modelling",
+      "sha256": "6b3f9bf76bb7233fadad3d1a9fdf5fa50d68c6236e25aaecd62ca6f0abdde96f"
+    },
+    {
+      "id": "leech-swarm",
+      "prompt": "Use case: stylized-concept. Asset: LEECH SWARM production concept turnaround for Depths, a dark gritty first-person wet-cave dungeon crawler. Landscape sheet on charcoal grey with four clearly separated studies of the SAME swarm design: a low forward view, low side profile, three-quarter attack-spread view, and a scale comparison next to a neutral clothed 1.7m human silhouette. Subtle restrained labels 'LEECH SWARM', 'FRONT', 'SIDE', 'THREE-QUARTER', 'SCALE'. A broad low heaving knot of 12 to 16 thick black-brown leeches on damp stone, occupying about 1m across and at most 0.25m high. Each individual is an unmistakable eyeless segmented annelid with broad smooth muscular rings, a flattened underside and one small circular sucker/mouth at the advancing end. No teeth beyond the subtle dark sucker opening; no tentacle tips or monster faces. The centre is a dense dark arching knot with 3 to 5 leading strands clearly separated by negative space so its forward motion reads on a phone. In the attack-spread study these same individuals extend away from the knot into long low strands while remaining a connected readable swarm. Dirty almost-black umber skin, sparse cold wet highlights, tiny muted maroon bands, no gore. One small wet-stone base under each study is only a ground registration cue, not a giant rock platform. Disturbing biological mass, tactile but simplified broad shadow shapes, consistent gritty painterly production concept appropriate for later low-poly mobile 3D. Avoid spaghetti tangles, octopus tentacles, glossy rubber toy balls, alien teeth, eyes, bright slime, magic, neon, environment, decorative frames or UI. Whole swarm unclipped with generous spacing.",
+      "file": "art/concepts/damp-creatures-v1/leech-swarm.png",
+      "reference": null,
+      "approval": "approved for modelling",
+      "sha256": "006539450a19cd8fd9bb3f7becf9c3e3c743ef2a97df4516b91342660c0a7428"
+    },
+    {
+      "id": "drowned-mother",
+      "prompt": "Use case: stylized-concept. Reference image 1 is the PALE NEWT turnaround: use its animal anatomy, gill placement, head and material language as the family reference, NOT a sheet to edit in place. Create a new matching landscape turnaround sheet for THE DROWNED MOTHER, a named oversized newt leader in Depths, the dark gritty first-person wet-cave dungeon crawler. Charcoal grey background and restrained labels 'THE DROWNED MOTHER', 'FRONT', 'SIDE', 'THREE-QUARTER', 'SCALE'. Same leader animal consistently shown in low frontal threat, full side view, low three-quarter view and a small scale comparison beside a neutral clothed human silhouette 1.7m tall. Oversized colourless olm/newt, about 1.85m total body length with a thick tail curving around the flank so the entire ground silhouette fits a two-metre space; low resting shoulder 0.45m, can rear to about 1.05m. Four splayed limbs, heavier forequarters, swollen abdominal mass, long flattened predatory face and tiny closed vestigial eye pits. Distinctive healed diagonal scar across the muzzle and left gill base, uneven dull-red external gill fans, cold ivory/slate skin with broad bruised mauve flanks. Three to five black leeches cling along the flank and trail behind, clearly secondary, preserving a readable single newt silhouette. No crown, no queen costume, no humanoid traits, no exposed organs, no gore, no horns or armor. Weight and age distinguish her from the ordinary newt, not decorative equipment. Sparse cold-blue wet highlights only, no luminous body or magic aura: any named-pack map glow is caller UI, not the animal's physical light. Broad dark shadow masses, simplified gritty painterly production art suitable for later mobile low-poly modelling; the skin only LOOKS thin and veined, all flesh remains visually opaque. Whole tails and limbs unclipped, generous spacing, consistent anatomy across views, no scene background or UI.",
+      "file": "art/concepts/damp-creatures-v1/drowned-mother.png",
+      "reference": "pale-newt.png: family anatomy reference, not edit target",
+      "approval": "approved for modelling",
+      "sha256": "a8b466a90f64fe7670adfee9e013dd1e1523cb9dd331059aa4d19d8cbe99cb38"
+    }
+  ],
+  "notes": [
+    "Unchanged generated masters; no pixel editing or reference-photo inputs.",
+    "Scale drawings and incidental detail are illustrative. Numeric 2m envelope and defined anatomy govern eventual models.",
+    "Opaque skin should suggest thin tissue through pigment and roughness, not ALPHA. Map glow remains caller-owned.",
+    "Concept approval does not approve suggested combat effects, numbers, spawn frequency or mandatory named-pack placement."
+  ],
+  "approved": "Owner approved all four for modelling in chat, 2026-11-26"
+}

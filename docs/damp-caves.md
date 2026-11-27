@@ -1,6 +1,6 @@
 # Damp Caves: production handoff (#302)
 
-2026-11-26 · Delivery on `codex/damp-caves-surfaces`, based on Claude's brief at `aca0d4ce` and the subsequent `docs/area-production-briefs.md`. Current coverage: A surfaces, B/N1–N3 for the Damp Caves junction, C environment dressing, D early flat-prop conversions, E landmark compositions, F interactive appearance sets, and G layout candidates. H sound and I creatures remain. Claude retains live hookup and rules. Existing fungal files remain intact for the fungal side region.
+2026-11-26 · Delivery on `codex/damp-caves-surfaces`, PR #303, based on Claude's brief at `aca0d4ce` and the subsequent `docs/area-production-briefs.md`. Current coverage: A surfaces, B/N1–N3 for the Damp Caves junction, C environment dressing, D early flat-prop conversions, E landmarks, F interactive appearances, G layout candidates, H sound and I four approved-concept creature models. Claude retains live hookup and rules. Existing fungal files remain intact for the fungal side region.
 
 ## Production status
 
@@ -13,8 +13,8 @@
 | D 2D leftovers | Delivered, native-checked; no live hookup | 29 old-id dispositions and 21 mine counterparts; stash, dead lamps and Three Knocks state sets |
 | E landmarks | Six complete art compositions, native-checked; no live hookup | `art/props/damp-sites-v1/landmark-*.tscn`; sump, weeping wall, drowned drift, rimstone stair, bone silt, wet royal cache |
 | F event props | Five complete appearance sets, native-checked; event rules/text remain Claude's | Sunken satchel, cave pearls, seep, slick ledge and blind fish |
-| H sound | Not produced | Ambience, wet steps, bump, passage and drip sounds |
-| I creatures | Placement/encounter proposals only; concepts/models not produced | Concept approval precedes models per brief; no creature rules changed |
+| H sound | Delivered, technical checks pass; human listening/mix review remains | `audio/damp-caves-v1`: 12 environment sounds + 8 creature reactions |
+| I creatures | Four concepts approved for modelling; models/rigs/clips/symbols delivered and native-checked | `art/enemies/damp-creatures-v1`, `art/ui/damp-creatures-v1`; live combat/ambient hookup remains |
 
 ## Surface handoff
 
@@ -32,7 +32,7 @@ Exact prompts, source output paths, SHA-256 hashes and reference roles: `art/tex
 
 The first world junction is **Abandoned Mines → Damp Caves → Cavern or Fungal Hollows**. Other `>` characters are explicitly section continuations. They do not invent further world destinations. The quartermaster's unlockable surface route targets the **Rest Area beyond Cavern**, as the owner specified. Numeric depth is not an area identity.
 
-All water/encounter weights and named-pack placement are **proposals only**. Default shallow `~` is visual; optional `w` basins have dry bypasses and need a deliberate rule choice. Never silently insert all wet cells into `map.water`: Galleries' authority already changes time/strain/torch behavior. Preserve actual quest footprints, mandatory site placement, current proximity-based quest discovery, existing lair Go in/Back away and the independent routes around optional encounters. New creature models still require approval of their own concept sheets.
+All water/encounter weights and named-pack placement are **proposals only**. Default shallow `~` is visual; optional `w` basins have dry bypasses and need a deliberate rule choice. Never silently insert all wet cells into `map.water`: Galleries' authority already changes time/strain/torch behavior. Preserve actual quest footprints, mandatory site placement, current proximity-based quest discovery, existing lair Go in/Back away and the independent routes around optional encounters. Owner approved all four creature concepts for modelling on 2026-11-26; model-style/device review remains.
 
 ## Native checks and local review
 
@@ -69,9 +69,11 @@ Mushroom clusters and wall/floor mold are separate **room-scale cues for the Fun
 
 Rebuild: background Blender `--python tools/damp_caves/build_dressing.py -- --workspace E:/GitHub/Depths`, then `python tools/damp_caves/prepare_dressing.py`. Import headlessly, run `tools/damp_caves/dressing_check.gd` through `tools/testing/background_godot.py`, and package the local gallery with `python tools/damp_caves/package_dressing.py --workspace E:/GitHub/Depths`. Shared shaders remain opaque and use physical metre UVs/vertex colors; do not apply them to older palette-point exports.
 
-## Next production batch
+## Remaining decisions and integration
 
-H sound and I concept approval/model work. G's water rules, encounter weights and branch return/rejoin details still need owner/Claude review. The distinct exits/signs/glyphs delivered here cover the two Damp Caves links; shared-network N1–N3 for other areas remain future production. Claude retains all live graph/theme/dresser/quest/combat hookup.
+The requested A–I art/design deliverables are present. G's water rules, encounter weights and branch return/rejoin details still need owner/Claude review. The distinct exits/signs/glyphs delivered here cover the two Damp Caves links; shared-network N1–N3 for other areas remain future production. Claude retains all live graph/theme/dresser/quest/combat hookup. Owner visual/listening review and physical iPhone testing remain; this is not a complete playable-floor claim.
+
+**N4 arrival painting remains a proposal.** Its possible purpose is first-discovery orientation and mood, not travel or a new camp service. The referenced results/arrival document concerns combat-panel entrances, not an existing area-introduction flow. A still vista/name that can be dismissed immediately, with a small name notice on revisits, is a candidate only. No forced wait, repeated restore interruption, input-swallowing transition, hidden encounter reveal or live feature is approved. No arrival painting was produced in this batch.
 
 ## Landmark and interactive-appearance delivery
 
@@ -94,3 +96,70 @@ Motion defaults off. `set_motion` resets exact fish/drip poses and stops process
 **455 native Godot 4.7.2 Mobile/D3D12 checks / 65 captures, zero failures and clean logs:** fourteen actual imported bounds/hashes/counts, whole-scene budgets and material assignment, all explicit/legacy/direct/early/interrupted states, clear-water isolation, exact still/swim reset, submerged fish clearance, actual ledge support/drop rays, all four seep wall anchors and missing-wall recovery, all landmark footprints/roof limits, phone framing, desktop/1278×590/844×390 room views and neutral layout overviews. Private desktop, isolated profile, no owner save/foreground changes. Owner style/device review, live seeded placement and exported-game hookup remain.
 
 Local review: `E:/GitHub/Depths/build/local-damp-sites-v1/inspector.html`; its `masters/` contains separate-piece `.blend` files. Full API/layout/source contracts: asset README/catalogue. Rebuild with background Blender `--python tools/damp_caves/build_sites.py -- --workspace E:/GitHub/Depths`, then `python tools/damp_caves/prepare_sites.py`; import headlessly, run `tools/damp_caves/sites_check.gd` through the private-desktop helper and package with `python tools/damp_caves/package_sites.py --workspace E:/GitHub/Depths`.
+
+## Approved creatures and sound delivery
+
+Owner approved **Pale Newt, Blind Crawler, Leech Swarm and Drowned Mother**
+concepts for modelling on 2026-11-26. Unchanged turnarounds, exact generation
+prompts/reference roles/source hashes and that approval are retained in
+`art/concepts/damp-creatures-v1`. Four rigged scenes now live in
+`art/enemies/damp-creatures-v1`, with eight original matching map/bestiary SVGs
+in `art/ui/damp-creatures-v1` and eight hurt/death sounds in the audio library.
+Existing live creatures, resources and all combat rules remain unchanged.
+
+The models reuse original project mesh/rig/floor-fit helpers. No private base,
+downloaded anatomy or external motion is used. An examined CC0 crayfish scan
+was unavailable (403) and was not downloaded/used. Editable separate Blender
+masters stay in `build/local-damp-creatures-v1/masters`. Pale Newt is 2064
+triangles / 24 bones / 3 skin draws; crawler 1726 / 24 / 2; swarm 1800 / 25 / 2;
+Mother 2362 / 24 / 3. Each adds a two-triangle contact plane. No lights or
+collision; normal opaque skin, pigment, gills/shell/detail materials and explicit
+cached fade siblings preserve #297's true opaque depth behavior.
+
+All are +Z front, fixed metric floor origin, within a two-metre cell. Common
+clips at 24fps: idle, attack, hurt, fall, walk, run. Newt/Mother add rear,
+submerge/emerge; crawler grab/hold/release; swarm spread/regroup/burn. The Mother
+shares newt rig/clip roles with heavier proportions, curl/scar and attached
+flank leeches. Read the README/catalogue for exact timings and immediate still
+poses. `sample` uses seconds. Grab finishes into hold; fall/submerge hold their
+last frame. `framing_bounds` unions registered clips for cross-fade safety.
+Submerge flattens under caller-supplied pool water; the caller owns visibility,
+targeting, map glow, patrol, encounter composition, loot and all numbers.
+
+**3966 native checks / 85 captures pass, with clean logs.** Validation checks imported skin/joint continuity, loop seams, floor
+registration and animated envelopes, exact still, opaque/fade restoration,
+state transitions, source hashes/budgets and complete desktop/1278×590/844×390/
+667×375 framing. These are native asset fixtures, **not live combat tests**.
+Local model gallery: `E:/GitHub/Depths/build/local-damp-creatures-v1/inspector.html`.
+Its `native/validation.json` records the final counts and all captures; owner
+model-style acceptance, physical iPhone performance and live/exported hookup
+remain.
+
+`audio/damp-caves-v1` supplies **20 sounds**: a 48s loop, four wet steps, splash,
+wet bump, root-curtain/siltfall sounds, three drips and eight creature reactions.
+All mono 44.1k PCM16, Effects bus, explicit loop flags and no import gain/trim/
+compression. Preserve existing ambience-player −10dB once; don't apply twice.
+Kenney impact/RPG, rubberduck water/slime, Bashar3A wind and qubodup balloon
+friction are retained verified CC0 inputs, with exact archive members, evidence,
+hashes and recipes in CREDITS/catalogue. Original shaped noise adds low material
+recoil; no actor voice or purported animal recording. Existing **117** audio
+files, including music, remain byte-identical. No runtime synthesis/new music.
+
+**326 PCM/source/rebuild checks and 165 native decoder/playback checks pass**:
+hashes, finite PCM, headroom/DC/endpoints, explicit loop wrapping and one-shot
+finish/stop, independent Effects/Music controls and 5,784,156 bytes of decoded
+PCM. Licence evidence comparison permits only raw identity or exact text
+line-ending equivalence (the retained water HTML is CRLF, checkout LF).
+Playback ran with Master muted on an isolated desktop/profile; no owner
+settings, foreground changes or Main lifecycle. Human/headphone/physical-phone
+listening and final live mix remain. Local no-autoplay sound desk:
+`E:/GitHub/Depths/build/local-damp-audio-v1/inspector.html`; separate `audition.wav`
+is only a review reel.
+
+Rebuild creatures with background Blender and `tools/damp_caves/build_creatures.py`,
+then `prepare_creatures.py`; audio with `tools/audio/build_damp_audio.py` using
+the bundled Python 3.12, NumPy/soundfile and `--deps build/audio-deps`. Both take
+`--workspace E:/GitHub/Depths`. Import headlessly, configure audio imports with
+`validate_damp_audio.py --configure-imports` and reimport. Run creature/audio
+fixtures through the private-desktop helper, then package both galleries with
+`tools/damp_caves/package_creatures_audio.py --workspace E:/GitHub/Depths`.

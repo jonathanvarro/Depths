@@ -59,6 +59,24 @@ Templates > Download and Install; already installed on the owner's PC).
 
 ## Project structure
 
+- #302 H/I completes the requested Damp Caves art/design delivery in PR #303:
+  four approved concepts and original 24fps rigged creatures in
+  `art/enemies/damp-creatures-v1`, eight map/bestiary SVGs and twenty new CC0-derived
+  sounds in `audio/damp-caves-v1`. Newt/Mother share clip roles; crawler adds
+  grab/hold/release, swarm spread/regroup/burn. Fixed floor/+Z/2m tile,
+  1726–2362 triangles, 24–25 bones, 2–3 skin draws plus contact plane. Use the
+  wrappers' play/sample/set_motion/set_opacity/framing_bounds; normal bodies
+  never write ALPHA, cached fades are explicit. Framing unions all clip bounds
+  for cross-fades. Submerge is visual compression under caller water, no rules.
+  Local galleries/masters: `build/local-damp-creatures-v1/inspector.html` and
+  `build/local-damp-audio-v1/inspector.html`. Audio uses Effects, existing ambience
+  −10dB once, explicit loops/no normalization; 117 previous files/music remain
+  byte-identical. Sources/recipes/approved concept prompts/hashes are retained.
+  Read `docs/damp-caves.md` and asset READMEs/catalogues. Live theme/creature/audio
+  assignment remains Claude's; owner style/listening and physical iPhone review
+  remain. N4 arrival painting is an unapproved presentation proposal, not a
+  mandatory production gate or existing area-introduction feature.
+
 - `docs/damp-caves.md` – #302 first production batch from Claude's floor-two
   brief: A1–A4 surface library in `art/textures/damp-caves-v1`, with original
   albedos, 512px mipmapped imports and opaque wet materials. The wall variant

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="Script" path="res://art/enemies/damp-creatures-v1/actor.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/enemies/damp-creatures-v1/leech-swarm.glb" id="model"]
+[node name="DampCreature" type="Node3D"]
+script=ExtResource("script")
+pose_bounds={"attack": AABB(-0.50700, 0.02520, -0.61530, 1.07660, 0.14840, 1.22510), "burn": AABB(-0.35950, 0.02520, -0.42860, 0.76700, 0.16580, 0.85170), "fall": AABB(-0.36880, 0.00880, -0.42860, 0.79320, 0.16400, 0.85170), "hurt": AABB(-0.36090, 0.02520, -0.42860, 0.76980, 0.14840, 0.85170), "idle": AABB(-0.36880, 0.02520, -0.42860, 0.79320, 0.14840, 0.85170), "regroup": AABB(-0.44030, 0.02520, -0.53130, 0.92910, 0.14840, 1.05710), "run": AABB(-0.36830, 0.02520, -0.45310, 0.80990, 0.14840, 0.90080), "spread": AABB(-0.50710, 0.02520, -0.61530, 1.07670, 0.14840, 1.22510), "walk": AABB(-0.36830, 0.02520, -0.45310, 0.81020, 0.14840, 0.90080)}
+contact_size=Vector2(1.0, 0.8)
+metadata/asset_id="leech-swarm"
+metadata/visual_height=0.17360
+[node name="Model" parent="." instance=ExtResource("model")]
