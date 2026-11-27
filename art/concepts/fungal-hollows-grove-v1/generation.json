@@ -1,0 +1,153 @@
+{
+  "issue": 306,
+  "date": "2026-11-26",
+  "tool": "built-in image_gen",
+  "use_case": "stylized-concept",
+  "stage": "Owner accepted all seven concept directions; masculine Flower Knight revision explicitly accepted in chat. Concept delivery only; no modelling requested in this task.",
+  "assets": [
+    {
+      "id": "01-fairy-light",
+      "reference_number": 1,
+      "reference": {
+        "role": "visual reference only; original new design requested, not an edit target",
+        "local_path": "C:/Users/jonat/AppData/Local/Temp/codex-clipboard-03f10575-4b3c-4df9-8866-680af7923b62.png",
+        "distribution": "User-supplied reference not copied into public repository; source/licence not established",
+        "sha256": "5205941b9feb46e0822657286c3d9dd671501f6825e0303078e98d6a34a8ea9d"
+      },
+      "file": "01-fairy-light.png",
+      "generated_source": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-2ed1582c-0569-4070-9058-5ec053a90611.png",
+      "prompt": "Use case: stylized-concept. Asset type: original exploratory concept plate for Depths, a dark first-person dungeon crawler, underground Fungal Hollows and hidden Grove. Input image is a visual reference only, not an edit target: invent an original design using the requested broad ideas, do not reproduce the composition or exact character. Grounded dark fantasy concept painting, tactile decayed materials, restrained fungal colour, clear silhouette at small size; careful readable anatomy and construction. A finished painterly concept study, not a low-poly model render, not a game screenshot or a UI. Use a quiet dark charcoal background with a little cave-ground context; no logos, signatures, watermark or explanatory paragraphs. Primary request: a floating fairy light that need not be hostile. Transform the reference's mysterious inner blue glow into a SMALL hovering bioluminescent presence, no humanoid woman, no tree-person torso, no staff, no menacing eye or mouth. A soft pearl of pale blue-green light held in a delicate open husk of translucent fungal filaments and tiny petal-like membranes, a few trailing threads, gentle curious movement suggested by asymmetry. It should feel like an unexplained living light encountered over a quiet cave pool, inviting and slightly uncanny, restrained luminosity, no glaring neon spell effect. Composition: one large close study of the floating form, two smaller alternate shapes in a side strip, plus a small first-person cave vignette showing its actual modest size and light reflected softly on water. Keep darkness around it rather than illuminating the whole cave. Small title 'FAIRY LIGHT'.",
+      "stage": "Owner accepted concept direction in chat, 2026-11-26",
+      "sha256": "6f741b392db193595a92b4c9b9e8ef6f7c8bc33c98d6978d2eebc8fdb5ac0d5a",
+      "width": 1199,
+      "height": 1312
+    },
+    {
+      "id": "02-shelf-fungus-hollow",
+      "reference_number": 2,
+      "reference": {
+        "role": "visual reference only; original new design requested, not an edit target",
+        "local_path": "C:/Users/jonat/AppData/Local/Temp/codex-clipboard-3363cb0c-7153-414d-a916-acd819108e87.png",
+        "distribution": "User-supplied reference not copied into public repository; source/licence not established",
+        "sha256": "883b6089cc85fcb858e421ef1dc95545b1cd75b80dd9f6cfed28faef66dad5c0"
+      },
+      "file": "02-shelf-fungus-hollow.png",
+      "generated_source": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-d21bb455-18bc-4b9a-b891-2134f37924bc.png",
+      "prompt": "Use case: stylized-concept. Asset type: original exploratory concept plate for Depths, a dark first-person dungeon crawler, underground Fungal Hollows and hidden Grove. Input image is a visual reference only, not an edit target: invent an original design using the requested broad ideas, do not reproduce the composition or exact character. Grounded dark fantasy concept painting, tactile decayed materials, restrained fungal colour, clear silhouette at small size; careful readable anatomy and construction. A finished painterly concept study, not a low-poly model render, not a game screenshot or a UI. Use a quiet dark charcoal background with a little cave-ground context; no logos, signatures, watermark or explanatory paragraphs. Primary request: ordinary Fungal Hollows creature inspired by a skeleton overtaken by shelf fungi. A tall asymmetric human-scale former explorer whose exposed old ribs support cream-gilled, muted ochre and bruised-purple fungal brackets, one shoulder enlarged by clustered shelves, thin mycelium suspending bone and scraps of worn travel cloth. Distinguish it from a generic magical skeleton: no glowing eyes, no wizard robe, no ornate armour. One hand retains a plain broken wooden walking staff, the other hangs elongated and rootlike. The colony appears to move the remains. Non-graphic dry decay, no blood or loose organs. Composition: one large full-body front three-quarter design, a smaller side silhouette and one enlarged fungus/rib construction detail. Slightly hunched unsettling posture, clear limbs and feet. Small title 'SHELFBOUND' (working concept label, not final game lore).",
+      "stage": "Owner accepted concept direction in chat, 2026-11-26",
+      "sha256": "c129346d4e0d640214b74431a9d689bb6d59dbe1c920cae6b2d877c2c6de8b9f",
+      "width": 1241,
+      "height": 1268
+    },
+    {
+      "id": "03-hollows-brute",
+      "reference_number": 3,
+      "reference": {
+        "role": "visual reference only; original new design requested, not an edit target",
+        "local_path": "C:/Users/jonat/AppData/Local/Temp/codex-clipboard-e3bf3246-258a-40c3-a972-85936d592e20.png",
+        "distribution": "User-supplied reference not copied into public repository; source/licence not established",
+        "sha256": "5b901e9d8c977537786762f688198df2c6bb2b729f586e7e7e93e3e24d45d351"
+      },
+      "file": "03-hollows-brute.png",
+      "generated_source": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-f4eea7ef-35fc-4447-b43a-f77607ade25a.png",
+      "prompt": "Use case: stylized-concept. Asset type: original exploratory concept plate for Depths, a dark first-person dungeon crawler, underground Fungal Hollows and hidden Grove. Input image is a visual reference only, not an edit target: invent an original design using the requested broad ideas, do not reproduce the composition or exact character. Grounded dark fantasy concept painting, tactile decayed materials, restrained fungal colour, clear silhouette at small size; careful readable anatomy and construction. A finished painterly concept study, not a low-poly model render, not a game screenshot or a UI. Use a quiet dark charcoal background with a little cave-ground context; no logos, signatures, watermark or explanatory paragraphs. Primary request: a difficult aggressive brute or elite in the Fungal Hollows. An original broad, low, forward-leaning creature formed from compact knotted dead roots and dense mycelium, one disproportionately heavy striking forelimb, a smaller bracing arm, thick load-bearing legs. Recognizable heavy anatomical weight. A recessed maw of split wood, a small uneven cluster of dull fungal nodules above it; no glowing eyes or cartoon expression. Torn fibrous bark reveals ivory fungal cords, bruised bracket fungi under shoulders, embedded stone fragments at knuckles. Reduce the reference's many thin curling thorns into a few strong readable hooked root shapes and dark negative spaces. Avoid tangled spaghetti silhouette. No metal armour or weapon, no antlers or humanoid knight. Composition: large full-body three-quarter crouched stance, small side view showing heavy forward weight, small attack silhouette showing an overhead forelimb smash. Subterranean only, no leafy forest. Small title 'ROOT BRUTE'.",
+      "stage": "Owner accepted concept direction in chat, 2026-11-26",
+      "sha256": "9907f664db631a1de01646f1b7c98116c16d1e9d43399d53e223fe833b5f7cd3",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "id": "05-rooted-remains-decor",
+      "reference_number": 5,
+      "reference": {
+        "role": "visual reference only; original new design requested, not an edit target",
+        "local_path": "C:/Users/jonat/AppData/Local/Temp/codex-clipboard-c1e7221e-a82d-41a7-b234-a19d9458ce33.png",
+        "distribution": "User-supplied reference not copied into public repository; source/licence not established",
+        "sha256": "9021a3943de47e3d3bffbaa3f78660a4270929ecf2790a7166806ff2d2e95d86"
+      },
+      "file": "05-rooted-remains-decor.png",
+      "generated_source": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-ba2427d7-7355-4ebe-bd37-1f1a722c6a37.png",
+      "prompt": "Use case: stylized-concept. Asset type: original exploratory concept plate for Depths, a dark first-person dungeon crawler, underground Fungal Hollows and hidden Grove. Input image is a visual reference only, not an edit target: invent an original design using the requested broad ideas, do not reproduce the composition or exact character. Grounded dark fantasy concept painting, tactile decayed materials, restrained fungal colour, clear silhouette at small size; careful readable anatomy and construction. A finished painterly concept study, not a low-poly model render, not a game screenshot or a UI. Use a quiet dark charcoal background with a little cave-ground context; no logos, signatures, watermark or explanatory paragraphs. Primary request: a FLOOR DECOR DIRECTION, not a combat creature. Adapt the reference's roots growing through former human remains into three grounded environmental props for an underground fungal cave. One anonymous seated husk fused into the wall by pale mycelial cords, a collapsed travel cloak around roots and an old helmet, and a low mound of roots/fungi enclosing partly concealed ribs. Dry desiccated remains and old ragged cloth, no fresh wounds, exposed organs, blood, dismemberment or torture scene. The overgrowth appears to have happened slowly after death. Use the human/remains element sparingly, roots and decay dominate. Bracket fungi, spore sacs and faintly luminous caps connect all three props. Composition: polished wide environment concept plate: three separated close prop studies across the lower area and a larger first-person cave vignette showing one seated husk and low root growth placed along the walls, a clear walkable center, and softly glowing mushrooms. Props must read as static scenery, not standing enemies. No attacking poses, no weapons in hands, no named character identities. Small title 'ROOTED REMAINS'.",
+      "stage": "Owner accepted concept direction in chat, 2026-11-26",
+      "sha256": "1908662e72db38b798daf4043e7e5e80a62fd0582024fe5ac17d15fdadbd0b50",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "id": "06-armoured-elite",
+      "reference_number": 6,
+      "reference": {
+        "role": "visual reference only; original new design requested, not an edit target",
+        "local_path": "C:/Users/jonat/AppData/Local/Temp/codex-clipboard-4f1d24a8-027b-408f-b85a-fbb33a8808a1.png",
+        "distribution": "User-supplied reference not copied into public repository; source/licence not established",
+        "sha256": "4d68447ac1205e14f5e2e6919304dcb58cd987d959d6e916c0adb43c8cc66e6c"
+      },
+      "file": "06-armoured-elite.png",
+      "generated_source": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-64dd8087-6bb6-4780-8f52-e3a73359444b.png",
+      "prompt": "Use case: stylized-concept. Asset type: original exploratory concept plate for Depths, a dark first-person dungeon crawler, underground Fungal Hollows and hidden Grove. Input image is a visual reference only, not an edit target: invent an original design using the requested broad ideas, do not reproduce the composition or exact character. Grounded dark fantasy concept painting, tactile decayed materials, restrained fungal colour, clear silhouette at small size; careful readable anatomy and construction. A finished painterly concept study, not a low-poly model render, not a game screenshot or a UI. Use a quiet dark charcoal background with a little cave-ground context; no logos, signatures, watermark or explanatory paragraphs. Primary request: armored elite for the Fungal Hollows / approach to the Grove. A broad, heavy, human-sized old suit of iron expedition plate held together and moved by black root cords and ivory mycelium; torn straps, rusted edges, genuine overlapping metal plates, a solid readable silhouette. Head is an empty dark helmet recess beneath a modest asymmetrical cluster of broad muted plum/ochre mushroom caps, not a cute face. It carries a practical long corroded poleaxe in one hand, the other is a heavy armored gauntlet. Fungal shelves emerge from plate seams and one shoulder, roots brace the legs. Keep the silhouette armored and grounded; limited small moss patches, no lush leafy vines, no neon glow, no flower crest and no antlers. Distinguish it from the elegant purple-flowered secret boss: this is a ponderous battered obstacle. Composition: large full-body front three-quarter study, smaller side view, close detail of mycelium connecting plate gaps. Small title 'HOLLOW SENTINEL' (working label).",
+      "stage": "Owner accepted concept direction in chat, 2026-11-26",
+      "sha256": "73175e468e6d2f313cfd103f5733608ac3c921cc90b33cc0eef1d7800e16086d",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "id": "07-fallen-hollow",
+      "reference_number": 7,
+      "reference": {
+        "role": "visual reference only; original new design requested, not an edit target",
+        "local_path": "C:/Users/jonat/AppData/Local/Temp/codex-clipboard-15581b05-cccf-4c28-9619-2d4b7ecba204.png",
+        "distribution": "User-supplied reference not copied into public repository; source/licence not established",
+        "sha256": "f5ff9d9915760c02ef292a31a49cbc33edaf4922b000ec0b4c8036d5e1917f0f"
+      },
+      "file": "07-fallen-hollow.png",
+      "generated_source": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-f09aa245-532f-47a9-b5c0-8870dd6b19d8.png",
+      "prompt": "Use case: stylized-concept. Asset type: original exploratory concept plate for Depths, a dark first-person dungeon crawler, underground Fungal Hollows and hidden Grove. Input image is a visual reference only, not an edit target: invent an original design using the requested broad ideas, do not reproduce the composition or exact character. Grounded dark fantasy concept painting, tactile decayed materials, restrained fungal colour, clear silhouette at small size; careful readable anatomy and construction. A finished painterly concept study, not a low-poly model render, not a game screenshot or a UI. Use a quiet dark charcoal background with a little cave-ground context; no logos, signatures, watermark or explanatory paragraphs. Primary request: ordinary Fungal Hollows creature, a fallen explorer animated by fungal growth, distinct from the taller shelf-fungus skeleton. A stooped, compact, human-scale corpse in worn leather and a ragged short travel coat, old iron short sword dragging from one hand, one recognizably human boot and the other foot bound in roots. Retain a partly concealed skull-like face under matted fungal threads; uneven shelf fungi only on one shoulder, smaller clusters around the back, pale mycelium stitching through seams. Asymmetric lurching gait, one shoulder lower, exposed old bone in limited dry non-graphic patches; no fresh blood/guts. Strong readable coat/sword silhouette, grim and grounded. Mostly damp brown, dirty bone, muted moss and burgundy shelves. No elaborate armour, huge mushroom hat, magical staff, bright glowing eyes or leafy flower crown. Composition: one large full body three-quarter view, smaller front silhouette, back view showing growth beneath the coat. Small title 'FALLEN EXPLORER' (working label).",
+      "stage": "Owner accepted concept direction in chat, 2026-11-26",
+      "sha256": "c5b591b5bed4c12a91d804d92d98acb9f0fe176b4b5f56a4117607f32ad0e5dd",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "id": "08-grove-secret-boss",
+      "reference_number": 8,
+      "reference": {
+        "role": "visual reference only; original new design requested, not an edit target",
+        "local_path": "C:/Users/jonat/AppData/Local/Temp/codex-clipboard-3248b353-a8a4-4f8b-a8ea-6d1132d1d743.png",
+        "distribution": "User-supplied reference not copied into public repository; source/licence not established",
+        "sha256": "491d129e87bdc08612de1b920e36b3af2f6103800651f7ef86133804fe10e5ca"
+      },
+      "file": "08-grove-secret-boss-v2.png",
+      "generated_source": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-12ff3466-7d68-4adf-9ae3-76b3b28a7104.png",
+      "prompt": "Use case: precise-object-edit. Edit target: the supplied generated concept sheet of THE GROVE \u2014 SECRET BOSS. This is a targeted character-proportion correction. Make the flower knight clearly MASCULINE, an elegant adult male knight. Keep the SAME original character design, intact large purple fungal flower crest with pale filaments and gilled underside, angular closed helmet, deep green grown plate material, spear, leaf-shaped shield, layout, small chamber vignette, lighting, palette, text and painterly rendering quality. Change the body and armour shaping: broader male shoulders and ribcage, a flatter angular breastplate with NO sculpted breasts, a straighter less pinched waist, narrower straighter male hips, slightly more substantial forearms, gauntlets and thighs, masculine poised stance. He remains a lean, regal, controlled spear-and-shield duelist; do not make him a hulking brute or a battered mushroom sentinel. No exposed face or skin, no beard added, no extra props, no new glow, no changes to the flower identity. Ensure main full-body figure and any visible secondary view agree on the masculine proportions. Preserve the distinction from the lumbering armored elite.",
+      "stage": "Owner accepted concept direction in chat, 2026-11-26",
+      "previous_versions": [
+        {
+          "file": "08-grove-secret-boss-v1.png",
+          "generated_source": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-232dbb0e-e407-4179-9288-0eade2098ecc.png",
+          "prompt": "Use case: stylized-concept. Asset type: original exploratory concept plate for Depths, a dark first-person dungeon crawler, underground Fungal Hollows and hidden Grove. Input image is a visual reference only, not an edit target: invent an original design using the requested broad ideas, do not reproduce the composition or exact character. Grounded dark fantasy concept painting, tactile decayed materials, restrained fungal colour, clear silhouette at small size; careful readable anatomy and construction. A finished painterly concept study, not a low-poly model render, not a game screenshot or a UI. Use a quiet dark charcoal background with a little cave-ground context; no logos, signatures, watermark or explanatory paragraphs. Primary request: the Grove's hidden exceptionally difficult SECRET BOSS. Preserve the reference's central appeal: an elegant intact purple flower rising as a crest over a slender poised knight, botanical plate armour, spear and leaf-shaped shield. Invent an original design and proportions. Poised, composed, formidable duelist, upright balanced stance; dignified and uncanny rather than ragged undead. Deep muted green armor-like grown plates with pale fibrous seams, a strong simple lance-like organic spear with a sharp mineral tip, a broad asymmetric shield with leaf venation but aged tactile surface. The purple bloom is unusually healthy and immaculate amid surrounding decay; recognizable five-lobed bloom with a dark gilled underside and fine spore filaments. A dark narrow helm aperture rather than a pretty human face. Keep the beauty, do NOT wilt the entire flower, do NOT make it a generic corpse, giant mushroom-headed mascot or antlered warrior. Restrained violet and dark green, small ivory details, no neon glow, no excessive capes or ribbons, no exposed skin. Composition: large full-body front three-quarter design on charcoal ground; one smaller side study of bloom/helm connection; a small underground root-chamber vignette with purple buds and a poised silhouetted boss, absolutely no outdoor sky or lush forest. Clear spear/shield hands, feet visible, avoid weapon crossing the face. Small title 'THE GROVE \u2014 SECRET BOSS', no invented final lore/name.",
+          "status": "Superseded by owner-requested masculine revision; retained unchanged",
+          "sha256": "7c26cb186b2a780e8ea7e84b0364ae3630163ef18fbe14b2d07b8b46f5c9ce25",
+          "width": 1199,
+          "height": 1312
+        }
+      ],
+      "edit_target": {
+        "role": "precise proportion edit of initial generated concept",
+        "path": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-232dbb0e-e407-4179-9288-0eade2098ecc.png"
+      },
+      "direction": "Male/masculine Flower Knight, elegant composed duelist with intact purple bloom, spear and leaf shield",
+      "approval": "Owner: 'Yes, that's perfect' after masculine v2, 2026-11-26",
+      "sha256": "682b953920febc6b3ec0bad2819a75cad9e6b4696d185a79ab61d7cbab644f92",
+      "width": 1199,
+      "height": 1312
+    }
+  ],
+  "reward_armour": {
+    "reference_number": 4,
+    "image_requested": false,
+    "idea": "Special regional armour rewards borrowing the reference's aged green plate, organic edging, skull-like faceplate and antler/branch motifs. Possible helm, pauldrons or breastplate; final pieces, names, stats, prices, drops and lore remain undecided. No concept image or item resources commissioned."
+  },
+  "discarded_optional_character": {
+    "status": "Owner rejected the subsequent optional unlockable-character study; excluded from this library. No recruitment design or implementation authorized."
+  }
+}

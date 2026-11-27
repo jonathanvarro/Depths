@@ -59,6 +59,13 @@ Templates > Download and Install; already installed on the owner's PC).
 
 ## Project structure
 
+- #306's selected Fungal Hollows/Grove concepts are in
+  `art/concepts/fungal-hollows-grove-v1/inspector.html`; exact prompts/hashes and
+  approvals are retained. Owner accepted the set and masculine Flower Knight v2.
+  Read `docs/fungal-hollows-grove-concepts.md` for roles; regional reward armour
+  is an idea only. Rejected optional unlockable-character study is excluded.
+  No models, live rules or Heartrot resource replacements in this concept task.
+
 - #297 fixes refined-creature translucency: normal v2/v3 coat, skin, details
   and membrane shaders are fully opaque; only `set_opacity` below 1.0 selects
   cached/preloaded `*-fade.gdshader` siblings. Full opacity restores the original

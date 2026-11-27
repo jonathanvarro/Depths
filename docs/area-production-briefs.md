@@ -185,6 +185,13 @@ The great dark water and the ancient stonework below the Galleries.
 
 ## 11. Fungal Hollows — side route from the Damp Caves
 
+**Selected concept direction (2026-11-26, #306):** floating fairy light (not
+necessarily hostile), two ordinary infested explorers, an aggressive root brute,
+an armoured fungal elite and rooted-remains floor dressing. Regional green/branch
+armour is a reward idea only. Seven selected plates, owner approval and the
+numbered reference mapping: `docs/fungal-hollows-grove-concepts.md`. The generic
+creature suggestions below are earlier proposals, not extra approved production.
+
 The working rename of the Fungal Caverns. **Dense fungal growth**,
 distinct from the wet bare rock of the Damp Caves (#300). The existing
 fungal theme (`themes/fungal-caverns.tres`, `scripts/fungal_dressing.gd`,
@@ -201,6 +208,13 @@ the `cave-growth-3d-v1` fungi) is the starting point. It leads to the Grove.
 - **P2, landmarks:** *the cap forest*, *the glowing pool*, *the rot pit*.
 
 ## 12. Grove — small, exceptionally hard boss lair (off the Fungal Hollows)
+
+**Selected visual direction (2026-11-26, #306):** the **masculine Flower Knight**,
+an elegant spear-and-leaf-shield secret boss with an intact purple bloom. Owner
+explicitly accepted corrected v2. See `docs/fungal-hollows-grove-concepts.md`.
+Heartrot below is the earlier placeholder proposal; existing resources remain
+untouched. Its moves/clip suggestions are not automatically assigned to the
+Flower Knight. No model or gameplay replacement is delivered in this concept task.
 
 - **P1:**
   - A boss concept (owner approval first), for example **the Heartrot**: a vast fungal growth knotted around a long-dead tree, with grasping roots, spore bursts and captured bodies in its mass.
