@@ -67,6 +67,49 @@ var alarmed := false
 var heard := {}
 ## Floor-specific places, e.g. the fortress's "hall" and "gates" (#44).
 var marks := {}
+## Optional metric terrain. Empty dictionaries preserve legacy flat floors.
+## Plain script data is saved by SaveGame with the rest of the map.
+var elevations := {}  # Vector2i -> metres
+var flat_landings := {}  # full tiles (rooms, passages and interaction pads)
+var terrain_version := 0
+
+func floor_y(c: Vector2i) -> float:
+	return float(elevations.get(c, 0.0))
+
+func world_at(c: Vector2i, size: float) -> Vector3:
+	return Vector3(c.x*size, floor_y(c), c.y*size)
+
+## Geometry connection, independent of a temporary solid chest/actor/door.
+func linked(a: Vector2i, b: Vector2i) -> bool:
+	return absi(a.x-b.x)+absi(a.y-b.y) == 1 and not is_wall(a) and not is_wall(b) and (elevations.is_empty() or absf(floor_y(a)-floor_y(b)) <= .401)
+
+func can_step(a: Vector2i, b: Vector2i) -> bool:
+	return linked(a,b) and is_passable(b)
+
+func landing_radius(c: Vector2i, size: float) -> float:
+	return size*.5 if elevations.is_empty() or flat_landings.has(c) else size*.3
+
+func step_position(a: Vector2i, b: Vector2i, progress: float, size: float) -> Vector3:
+	var p := clampf(progress,0,1)
+	var first := landing_radius(a,size)/size
+	var last := landing_radius(b,size)/size
+	var rise := clampf((p-first)/maxf(.001,1-first-last),0,1)
+	var at := world_at(a,size).lerp(world_at(b,size),p)
+	at.y = lerpf(floor_y(a),floor_y(b),rise)
+	return at
+
+## Height under an offset prop or sprite within a corridor's ramp.
+func surface_y(at: Vector3, size: float) -> float:
+	var c := Vector2i(roundi(at.x/size),roundi(at.z/size))
+	var delta := Vector2(at.x-c.x*size,at.z-c.y*size)
+	var radius := landing_radius(c,size)
+	if maxf(absf(delta.x),absf(delta.y)) <= radius: return floor_y(c)
+	var axis := Vector2i(signi(delta.x),0) if absf(delta.x)>absf(delta.y) else Vector2i(0,signi(delta.y))
+	var next := c+axis
+	if not linked(c,next): return floor_y(c)
+	var length := size-radius-landing_radius(next,size)
+	var progress := clampf((maxf(absf(delta.x),absf(delta.y))-radius)/maxf(.001,length),0,1)
+	return lerpf(floor_y(c),floor_y(next),progress)
 
 
 ## Every quest package's site on this floor (`marks["sites"]`, package id ->
@@ -132,7 +175,7 @@ func room_around(cell: Vector2i) -> Array[Vector2i]:
 		i += 1
 		for offset in [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]:
 			var next: Vector2i = c + offset
-			if not seen.has(next) and _is_room_cell(next):
+			if not seen.has(next) and _is_room_cell(next) and linked(c,next):
 				seen[next] = true
 				found.append(next)
 	return found
@@ -244,7 +287,7 @@ func reachable_from(from: Vector2i) -> Dictionary:
 		var cell: Vector2i = queue.pop_back()
 		for offset in [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]:
 			var next: Vector2i = cell + offset
-			if not seen.has(next) and is_passable(next):
+			if not seen.has(next) and can_step(cell,next):
 				seen[next] = true
 				queue.append(next)
 	return seen
@@ -260,7 +303,7 @@ func walking_distances(from: Vector2i) -> Dictionary:
 		i += 1
 		for offset in [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]:
 			var next: Vector2i = cell + offset
-			if not distance.has(next) and is_passable(next):
+			if not distance.has(next) and can_step(cell,next):
 				distance[next] = distance[cell] + 1
 				queue.append(next)
 	return distance
@@ -277,7 +320,7 @@ func walking_path(from: Vector2i, to: Vector2i) -> Array[Vector2i]:
 		i += 1
 		for offset in [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]:
 			var next: Vector2i = cell + offset
-			if not previous.has(next) and is_passable(next):
+			if not previous.has(next) and can_step(cell,next):
 				previous[next] = cell
 				queue.append(next)
 	var path: Array[Vector2i] = []

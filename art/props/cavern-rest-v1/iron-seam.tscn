@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="Script" path="res://art/props/cavern-rest-v1/presentation.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/props/cavern-rest-v1/iron-seam-fresh.glb" id="r0"]
+[ext_resource type="PackedScene" path="res://art/props/cavern-rest-v1/iron-seam-worked.glb" id="r1"]
+[node name="CavernRest" type="Node3D"]
+script=ExtResource("script")
+states=PackedStringArray("fresh","worked")
+state="fresh"
+metadata/asset_id="iron-seam"
+metadata/mount="wall-floor"
+metadata/footprint_metres=Vector2(2, 2)
+metadata/elevation_prototype=false
+[node name="fresh" type="Node3D" parent="."]
+metadata/appearance_state="fresh"
+visible=true
+[node name="worked" type="Node3D" parent="."]
+metadata/appearance_state="worked"
+visible=false
+[node name="Ore" parent="fresh" instance=ExtResource("r0")]
+position=Vector3(0, 0, 0)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+metadata/worked_surface=true
+metadata/cavern_rock=true
+[node name="Ore" parent="worked" instance=ExtResource("r1")]
+position=Vector3(0, 0, 0)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+metadata/worked_surface=true
+metadata/cavern_rock=true
+[node name="Interaction" type="Marker3D" parent="."]
+position=Vector3(0, 0.9, 0.2)
+metadata/interaction_label="Iron seam"
