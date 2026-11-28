@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="Script" path="res://art/props/cavern-rest-v1/presentation.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/props/fortress-waterworks-3d-v1/overhead-walkway.tscn" id="r0"]
+[ext_resource type="PackedScene" path="res://art/props/cavern-rest-v1/talus-edge.glb" id="r1"]
+[node name="CavernRest" type="Node3D"]
+script=ExtResource("script")
+states=PackedStringArray("static")
+state="static"
+metadata/asset_id="landmark-collapsed-bridge"
+metadata/mount="floor"
+metadata/footprint_metres=Vector2(6, 6)
+metadata/elevation_prototype=false
+[node name="FallenWalkway" parent="." instance=ExtResource("r0")]
+position=Vector3(-1.6, 0.33, -2.1)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,-18,0)
+[node name="Talus" parent="." instance=ExtResource("r1")]
+position=Vector3(-1.8, 0, -1.2)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+metadata/worked_surface=true
+metadata/cavern_rock=true
+[node name="Rim" parent="." instance=ExtResource("r1")]
+position=Vector3(1.6, 0, -2.3)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+metadata/worked_surface=true
+metadata/cavern_rock=true
+[node name="Approach" type="Marker3D" parent="."]
+position=Vector3(0, 0, 2.7)

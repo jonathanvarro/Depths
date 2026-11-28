@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="Script" path="res://art/props/cavern-rest-v1/presentation.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/props/fortress-waterworks-3d-v1/palisade.tscn" id="r0"]
+[node name="CavernRest" type="Node3D"]
+script=ExtResource("script")
+states=PackedStringArray("blocked","cleared")
+state="blocked"
+metadata/asset_id="goblin-barricade"
+metadata/mount="passage"
+metadata/footprint_metres=Vector2(2, 2)
+metadata/elevation_prototype=false
+[node name="blocked" type="Node3D" parent="."]
+metadata/appearance_state="blocked"
+visible=true
+[node name="cleared" type="Node3D" parent="."]
+metadata/appearance_state="cleared"
+visible=false
+[node name="Palisade" parent="blocked" instance=ExtResource("r0")]
+position=Vector3(0, 0, 0)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+state="closed"
+[node name="Palisade" parent="cleared" instance=ExtResource("r0")]
+position=Vector3(0, 0, 0)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+state="empty"

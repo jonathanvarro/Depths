@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3]
+[ext_resource type="Script" path="res://art/props/cavern-rest-v1/presentation.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/props/cavern-rest-v1/rest-threshold.glb" id="r0"]
+[ext_resource type="Material" path="res://art/props/cavern-rest-v1/cavern-floor.tres" id="r1"]
+[sub_resource type="BoxMesh" id="box0mesh"]
+size=Vector3(2, 0.08, 2)
+[node name="CavernRest" type="Node3D"]
+script=ExtResource("script")
+states=PackedStringArray("static")
+state="static"
+metadata/asset_id="on-to-rest"
+metadata/mount="passage"
+metadata/footprint_metres=Vector2(2, 2)
+metadata/elevation_prototype=false
+[node name="Threshold" parent="." instance=ExtResource("r0")]
+position=Vector3(0, 0, 0)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+metadata/worked_surface=true
+metadata/cavern_rock=true
+[node name="Interaction" type="Marker3D" parent="."]
+position=Vector3(0, 0.8, 0.25)
+metadata/interaction_label="Rest Area"
+[node name="DownwardExitLanding" type="MeshInstance3D" parent="."]
+position=Vector3(0, -0.04, 0)
+mesh=SubResource("box0mesh")
+material_override=ExtResource("r1")
+cast_shadow=0
+metadata/metre_uv=true
