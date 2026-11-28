@@ -105,8 +105,11 @@ func _initialize() -> void:
 		main.floor_seed = seed
 		root.add_child(main)
 		await create_timer(0.4).timeout
-		for depth in [1, 2, 3]:
-			main._go_to_floor(depth, main.Arrival.FROM_ABOVE)
+		for depth in [1, 2, 3, 30]:  # 30: the Fungal Hollows, where the fungus lives now
+			if depth == 30:
+				main._go_to_area("hollows", main.Arrival.FROM_ABOVE)
+			else:
+				main._go_to_floor(depth, main.Arrival.FROM_ABOVE)
 			await process_frame
 			for id in _ids(main):
 				seen[id] = seen.get(id, []) + [depth]
@@ -117,7 +120,7 @@ func _initialize() -> void:
 			main.queue_free()
 			await process_frame
 	var want := {"support": 1, "rails": 1, "stalactite-single": 1, "wall-roots": 1, "hanging-roots": 1,
-			"scattered-bones": 1, "rubble-cluster": 1, "shelf-fungus": 3, "mushroom-clump": 3}  # floor 2 is wet limestone now (#302): the fungus is the Cavern's
+			"scattered-bones": 1, "rubble-cluster": 1, "shelf-fungus": 30, "mushroom-clump": 30}  # floor 2 is wet limestone now (#302): the fungus is the Hollows' (30)
 	var missing := []
 	for id in want:
 		if not seen.has(id) or not want[id] in seen[id]:

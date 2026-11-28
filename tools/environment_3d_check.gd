@@ -82,7 +82,9 @@ func _initialize() -> void:
 		var pilot = main._level.get_node_or_null("KayKitPilot")
 		var meshes: Array = pilot.find_children("*", "MeshInstance3D", true, false) if pilot else []
 		skins[depth] = meshes[0].material_override.resource_path.get_file() if not meshes.is_empty() else "none"
-	check("KayKit props on floors 2, 3 and 5 in fungal, scorched and waterlogged skins", skins.get(2) == "fungal.tres" and skins.get(3) == "scorched.tres" and skins.get(5) == "waterlogged.tres", skins)
+	# Floor 2 is the wet Damp Caves (#302); the Cavern's sloped floor has no
+	# KayKit stores (#313's elevation keeps its own dressing).
+	check("KayKit props on floors 2 and 5 in waterlogged skins, none on the Cavern's slopes", skins.get(2) == "waterlogged.tres" and skins.get(3) == "none" and skins.get(5) == "waterlogged.tres", skins)
 	# The fortress (#246): its structures, clear of the gates; palisades
 	# broken once the gate is.
 	for broken in [false, true]:

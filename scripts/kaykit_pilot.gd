@@ -28,7 +28,8 @@ const GRAIN_METRES := 2.0
 
 ## Deeper floors (#225, owner-approved regional skins, 2026-11-11): the same
 ## pieces in each region's own material, a little sparser.
-const REGIONS := {2: "fungal", 3: "scorched", 4: "scorched", 5: "waterlogged", 6: "waterlogged"}
+## Floor 2 is the wet Damp Caves now (#302): waterlogged, not fungal.
+const REGIONS := {2: "waterlogged", 3: "scorched", 4: "scorched", 5: "waterlogged", 6: "waterlogged"}
 const DEEPER_ODDS := 7
 const Skins := preload("res://art/materials/regional-props-v1/skins.gd")
 

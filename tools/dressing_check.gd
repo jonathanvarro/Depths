@@ -22,7 +22,7 @@ func _pieces(main) -> Array:
 func _ids(pieces: Array) -> Dictionary:
 	var ids := {}
 	for piece: Node3D in pieces:
-		var id: String = piece.get_meta("dressing_id", piece.name)
+		var id: String = piece.get_meta("dressing_id", piece.get_meta("asset_id", piece.name))  # the Cavern's pieces carry asset_id (#313)
 		ids[id] = ids.get(id, 0) + 1
 	return ids
 
@@ -46,7 +46,7 @@ func _initialize() -> void:
 		var bad := []
 		for piece: Node3D in pieces:
 			var cell := Vector2i(roundi(piece.position.x / main.CELL_SIZE), roundi(piece.position.z / main.CELL_SIZE))
-			if not Dressing._clear(main._map, cell):
+			if not Dressing._clear(main._map, cell) and not main._map.is_wall(cell):  # the Cavern sinks columns inside solid rock (#313)
 				bad.append(cell)
 		check("floor %d: nothing on stairs, doors or events" % depth, bad.is_empty(), str(bad))
 		var themed := true
@@ -58,7 +58,7 @@ func _initialize() -> void:
 		if depth == 1:
 			check("floor 1 has pit props", ids.has("mine-support"))
 		if depth >= 3:
-			check("floor %d has goblin torches or marks" % depth, ids.has("goblin-torch-lit") or ids.has("goblin-daubs") or ids.has("goblin-litter"))
+			check("floor %d has goblin torches or marks" % depth, ids.has("goblin-torch-lit") or ids.has("goblin-daubs") or ids.has("goblin-litter") or ids.has("goblin-daub"))
 		# A second visit looks the same.
 		var before: Array = pieces.map(func(p): return p.position)
 		main._go_to_floor(depth, main.Arrival.FROM_ABOVE)
