@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="Script" path="res://art/props/cavern-rest-v1/presentation.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/props/cavern-rest-v1/rest-threshold.glb" id="r0"]
+[node name="CavernRest" type="Node3D"]
+script=ExtResource("script")
+states=PackedStringArray("static")
+state="static"
+metadata/asset_id="rest-return"
+metadata/mount="passage"
+metadata/footprint_metres=Vector2(2, 2)
+metadata/elevation_prototype=false
+[node name="Threshold" parent="." instance=ExtResource("r0")]
+position=Vector3(0, 0, 0)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+metadata/worked_surface=true
+metadata/cavern_rock=true
+[node name="Interaction" type="Marker3D" parent="."]
+position=Vector3(0, 0.8, 0.25)
+metadata/interaction_label="Cavern"

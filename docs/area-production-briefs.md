@@ -76,13 +76,15 @@ Everything in `docs/damp-caves-production-brief.md`, **plus:**
 
 ## 3. Cavern (today's floor 3, "Goblin Outskirts")
 
-A large natural cavern on the goblins' doorstep: wide open spaces, high
-shadowed roofs, goblin marks, watch posts and trophies spreading out from
-the fortress. It leads to the Rest Area. Today it uses the mine's look plus
-an "outskirts" dressing of 2D goblin props.
+A tall, narrow natural rift on the goblins' doorstep: towering formations,
+dark vertical depth, local warm lanterns, goblin marks and watch posts spreading
+out from the fortress. Owner clarified the title-menu background as the visual
+reference on 2026-11-26 (#308), superseding the broad/open-hall wording. It leads
+to the Rest Area. The playable slope/elevation prototype is explicitly later.
+Art kit and native review: `docs/cavern-and-rest-area.md`.
 
 - **P1, theme surfaces:**
-  - Natural cave wall and variant, floor and ceiling, distinct from both the mine and the Damp Caves: drier, darker, broader.
+  - Natural cave wall and variant, floor and ceiling, distinct from both the mine and the Damp Caves: drier, darker, with long vertical fractures.
   - Unused families in `art/textures/descent-walls-v1` may help (`worked-cave`, `goblin-hold`).
 - **P1, passages and exits:** a closed passage (goblin hide curtain or wicker screen), a blocked passage (goblin barricade), and ways on and back.
 - **P1, 2D leftovers to replace:**
@@ -99,6 +101,13 @@ an "outskirts" dressing of 2D goblin props.
 - **Creatures:** today's floor-3 roster is all 3D: goblins, archers, drummers, guards, webspinners, venom spiders and rats. P3: goblin scouts with wolves or hounds, if the owner wants more.
 
 ## 4. Rest Area (today's scouts' refuge and the Overlook)
+
+Production delivery (#308): a compact 3D refuge event marker plus the full first-person
+approach composition, tent/bedding/planning/supply pieces and native state/phone
+review. The compact marker is bound through the existing event prop URI; full
+approach requires reserved room/roof geometry. Read `docs/cavern-and-rest-area.md`.
+The approved Overlook camp-screen composition and current route/rest/service
+rules remain authoritative.
 
 The underground camp the player and the quartermaster establish as a route
 from the surface. Reaching it first is an earned milestone (#300). The

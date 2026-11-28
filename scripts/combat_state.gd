@@ -225,6 +225,9 @@ const MARKED_INTENTS: Array[Intent] = [Intent.HEAVY, Intent.REACH, Intent.KILLIN
 const FAR_INTENTS: Array[Intent] = [Intent.CALL, Intent.BROOD, Intent.BIRTH, Intent.BEAT, Intent.SHIELD, Intent.BRACE, Intent.RALLY, Intent.CURL, Intent.SCREECH, Intent.RECOVER, Intent.SWELL, Intent.DRAIN, Intent.KEEN]
 ## Whether a cell can be stood in or seen through (set by main.gd).
 var open_cell := Callable()
+## Optional legal terrain edge. Height differences are not walls to shoot
+## through, nor a free melee connection between neighbouring cliff ledges.
+var linked_cell := Callable()
 var round := 1
 var result := Result.ONGOING
 var rng := RandomNumberGenerator.new()
@@ -596,7 +599,7 @@ func foe_in_front(foe: Foe) -> bool:
 ## direction when it reaches (see in_line).
 func side_of(foe: Foe) -> String:
 	var d := foe.cell - party_cell
-	if absi(d.x) + absi(d.y) != 1:
+	if absi(d.x) + absi(d.y) != 1 or linked_cell.is_valid() and not linked_cell.call(party_cell,foe.cell):
 		return "far"
 	return "front" if d == facing else ("rear" if d == -facing else "side")
 
@@ -609,19 +612,23 @@ func line_to(foe: Foe, reach := FIELD_REACH) -> Vector2i:
 		return Vector2i.ZERO
 	var step := Vector2i(signi(d.x), signi(d.y))
 	var cell := party_cell + step
+	var previous := party_cell
 	while cell != foe.cell:
+		if linked_cell.is_valid() and not linked_cell.call(previous,cell): return Vector2i.ZERO
 		if open_cell.is_valid() and not open_cell.call(cell):
 			return Vector2i.ZERO
 		if foes.any(func(f: Foe): return f.is_alive() and f.cell == cell):
 			return Vector2i.ZERO  # another foe stands in the way
+		previous = cell
 		cell += step
+	if linked_cell.is_valid() and not linked_cell.call(previous,foe.cell): return Vector2i.ZERO
 	return step
 
 
 ## The foe in the cell the front row faces, or null.
 func foe_ahead() -> Foe:
 	for foe in living_foes():
-		if foe.cell == party_cell + facing:
+		if foe.cell == party_cell + facing and (not linked_cell.is_valid() or linked_cell.call(party_cell,foe.cell)):
 			return foe
 	return null
 

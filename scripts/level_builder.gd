@@ -20,6 +20,8 @@ func build(map, theme: EnvironmentTheme, size: float, height: float) -> void:
 	_theme = theme
 	cell_size = size
 	wall_height = height
+	var elevated: bool = not map.elevations.is_empty()
+	if elevated: preload("res://scripts/elevated_geometry.gd").build(self,map,theme,size)
 
 	var wall_mesh := _wall_mesh(theme.wall_material)
 	var variant_mesh := _wall_mesh(theme.wall_variant_material if theme.wall_variant_material else theme.wall_material)
@@ -29,17 +31,18 @@ func build(map, theme: EnvironmentTheme, size: float, height: float) -> void:
 	for y in map.height:
 		for x in map.width:
 			var cell := Vector2i(x, y)
+			if map.marks.get("rest_approach",Rect2i()).has_point(cell): continue
 			var at := _cell_center(cell)
 			if map.is_wall(cell):
-				if map.is_exposed_wall(cell):
+				if not elevated and map.is_exposed_wall(cell):
 					# Stable variation without consuming the floor generator's RNG.
 					var mesh := variant_mesh if (x * 7 + y * 11) % 5 == 0 else wall_mesh
 					_add_mesh(mesh, at + Vector3(0, wall_height / 2.0, 0))
 				continue
 			var content: int = map.content_at(cell)
-			if content != DungeonMap.Content.STAIRS_DOWN and not map.marks.get("formation_gates", {}).has(cell) and not map.marks.get("floor_cut", {}).has(cell):  # a gate's chasm has its own ground (#305)
+			if not elevated and content != DungeonMap.Content.STAIRS_DOWN and not map.marks.get("formation_gates", {}).has(cell) and not map.marks.get("floor_cut", {}).has(cell):  # a gate's chasm has its own ground (#305)
 				_add_mesh(tile_mesh, at)
-			_add_mesh(ceiling_mesh, at + Vector3(0, wall_height, 0)).add_to_group("ceiling")  # hidden from above (tactical view)
+			if not elevated: _add_mesh(ceiling_mesh, at + Vector3(0, wall_height, 0)).add_to_group("ceiling")  # hidden from above (tactical view)
 			if content == DungeonMap.Content.STAIRS_DOWN:
 				var down_art: String = map.marks.get("descent_art", {}).get(cell, "")  # a way with its own art (#302)
 				_add_feature(load(down_art) if down_art != "" else theme.descent_scene, _make_descent(), cell)
@@ -194,7 +197,7 @@ func _make_ascent() -> Node3D:
 
 
 func _cell_center(cell: Vector2i) -> Vector3:
-	return Vector3(cell.x * cell_size, 0.0, cell.y * cell_size)
+	return _map.world_at(cell,cell_size)
 
 
 func _add_mesh(mesh: Mesh, at: Vector3) -> MeshInstance3D:

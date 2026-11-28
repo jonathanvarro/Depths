@@ -18,8 +18,8 @@ const AREAS := {
 	"opening": {"name": "The escape", "depth": 0, "parent": "", "main": "", "side": [], "key": 0},
 	"mines": {"name": "Abandoned Mines", "depth": 1, "parent": "", "main": "damp", "side": [], "key": 1, "theme": "cave"},
 	"damp": {"name": "Damp Caves", "depth": 2, "parent": "mines", "main": "cavern", "side": ["hollows"], "key": 2, "theme": "damp"},
-	"cavern": {"name": "Cavern", "depth": 3, "parent": "damp", "main": "rest", "side": [], "key": 3, "theme": "cave", "outskirts": true},
-	"rest": {"name": "Rest Area", "depth": 3, "parent": "cavern", "main": "fortress", "side": [], "theme": "cave", "safe": true},
+	"cavern": {"name": "Cavern", "depth": 3, "parent": "damp", "main": "rest", "side": [], "key": 3, "theme": "cavern", "outskirts": true},
+	"rest": {"name": "Rest Area", "depth": 3, "parent": "cavern", "main": "fortress", "side": [], "theme": "cavern", "safe": true},
 	"fortress": {"name": "Goblin Fortress", "depth": 4, "parent": "rest", "main": "galleries", "side": ["jail"], "key": 4, "theme": "fortress"},
 	"jail": {"name": "Jail", "depth": 4, "parent": "fortress", "main": "", "side": ["execution"], "theme": "fortress", "small": true},
 	"execution": {"name": "Execution Halls", "depth": 4, "parent": "jail", "main": "", "side": [], "theme": "fortress", "lair": "headsman"},
@@ -35,10 +35,13 @@ const AREAS := {
 ## Ways between areas with art of their own (#302): the way down from an
 ## area to a child, and the way back up into a child from its parent.
 const EXIT_ART := {
+	"cavern": {"rest":"res://art/props/cavern-rest-v1/on-to-rest.tscn"},
+	"rest": {"fortress":"res://art/props/cavern-rest-v1/rest-to-fortress.tscn"},
 	"damp": {"cavern": "res://art/features/damp-passages-v1/cavern-onward.tscn",
 		"hollows": "res://art/features/damp-passages-v1/hollows-onward.tscn"},
 }
 const RETURN_ART := {
+	"rest": "res://art/props/cavern-rest-v1/rest-return.tscn",
 	"cavern": "res://art/features/damp-passages-v1/cavern-return.tscn",
 	"hollows": "res://art/features/damp-passages-v1/hollows-return.tscn",
 }

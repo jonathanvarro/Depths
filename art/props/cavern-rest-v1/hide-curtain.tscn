@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="Script" path="res://art/props/cavern-rest-v1/presentation.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/props/cavern-rest-v1/hide-curtain-closed.glb" id="r0"]
+[ext_resource type="PackedScene" path="res://art/props/cavern-rest-v1/hide-curtain-open.glb" id="r1"]
+[node name="CavernRest" type="Node3D"]
+script=ExtResource("script")
+states=PackedStringArray("closed","opened")
+state="closed"
+metadata/asset_id="hide-curtain"
+metadata/mount="passage"
+metadata/footprint_metres=Vector2(2, 2)
+metadata/elevation_prototype=false
+[node name="closed" type="Node3D" parent="."]
+metadata/appearance_state="closed"
+visible=true
+[node name="opened" type="Node3D" parent="."]
+metadata/appearance_state="opened"
+visible=false
+[node name="Screen" parent="closed" instance=ExtResource("r0")]
+position=Vector3(0, 0, 0)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+metadata/worked_surface=true
+[node name="Screen" parent="opened" instance=ExtResource("r1")]
+position=Vector3(0, 0, 0)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+metadata/worked_surface=true

@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3]
+[ext_resource type="Script" path="res://art/props/cavern-rest-v1/presentation.gd" id="script"]
+[ext_resource type="PackedScene" path="res://art/props/fortress-waterworks-3d-v1/watch-post.tscn" id="r0"]
+[ext_resource type="PackedScene" path="res://art/props/fortress-waterworks-3d-v1/palisade.tscn" id="r1"]
+[ext_resource type="PackedScene" path="res://art/props/cavern-rest-v1/hanging-trophies.glb" id="r2"]
+[ext_resource type="PackedScene" path="res://art/props/cavern-rest-v1/goblin-litter.glb" id="r3"]
+[node name="CavernRest" type="Node3D"]
+script=ExtResource("script")
+states=PackedStringArray("static")
+state="static"
+metadata/asset_id="landmark-goblin-lookout"
+metadata/mount="floor"
+metadata/footprint_metres=Vector2(6, 6)
+metadata/elevation_prototype=false
+[node name="Post" parent="." instance=ExtResource("r0")]
+position=Vector3(-2.25, 0, -2.1)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+[node name="Palisade" parent="." instance=ExtResource("r1")]
+position=Vector3(1.8, 0, -2.45)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+[node name="Trophy" parent="." instance=ExtResource("r2")]
+position=Vector3(2.4, 0, 0.1)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,-90,0)
+metadata/worked_surface=true
+[node name="Litter" parent="." instance=ExtResource("r3")]
+position=Vector3(-1.8, 0, 0.5)
+scale=Vector3(1, 1, 1)
+rotation_degrees=Vector3(0,0,0)
+metadata/worked_surface=true
+[node name="Approach" type="Marker3D" parent="."]
+position=Vector3(0, 0, 2.7)

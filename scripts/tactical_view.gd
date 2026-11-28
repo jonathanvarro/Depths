@@ -277,7 +277,7 @@ func _process(delta: float) -> void:
 	var at: Vector3 = _main._party.global_position
 	_light.global_position = at + Vector3(0, 6.0, 0)
 	if is_instance_valid(_party_token):
-		_party_token.global_position = Vector3(at.x, 0.02, at.z)
+		_party_token.global_position = Vector3(at.x, at.y+0.02, at.z)
 		_party_token.rotation.y = _main._party.rotation.y
 		_animate_figure()
 	_refresh -= delta
@@ -515,7 +515,7 @@ func _update_marks() -> void:
 	if _main._combat.awaiting_field_action:
 		for side in [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]:
 			var next: Vector2i = party_cell + side
-			if _main._map.is_passable(next) and not _state.living_foes().any(func(f): return f.cell == next):
+			if _main._map.can_step(party_cell,next) and not _state.living_foes().any(func(f): return f.cell == next):
 				steps.append(next)
 	var key := str(threat.keys()) + str(reach.keys()) + str(targets) + str(party_cell) + str(steps)
 	if key == _last_key:
@@ -538,7 +538,7 @@ func _update_marks() -> void:
 		torus.outer_radius = size * 0.4
 		ring.mesh = torus
 		ring.material_override = _flat(TARGET)
-		ring.position = Vector3(cell.x * size, 0.09, cell.y * size)
+		ring.position = _main._map.world_at(cell,size)+Vector3.UP*.09
 		add_child(ring)
 		_marks.append(ring)
 
@@ -566,7 +566,7 @@ func _tile(cell: Vector2i, colour: Color, width: float, y: float) -> void:
 	mark.mesh = mesh
 	mark.material_override = _flat(colour)
 	var size: float = _main.CELL_SIZE
-	mark.position = Vector3(cell.x * size, y, cell.y * size)
+	mark.position = _main._map.world_at(cell,size)+Vector3.UP*y
 	add_child(mark)
 	_marks.append(mark)
 
@@ -574,7 +574,7 @@ func _tile(cell: Vector2i, colour: Color, width: float, y: float) -> void:
 ## A thin square frame round a tile: reachable, not yet threatened.
 func _outline(cell: Vector2i, colour: Color, width: float, y: float) -> void:
 	var size: float = _main.CELL_SIZE
-	var centre := Vector3(cell.x * size, y, cell.y * size)
+	var centre: Vector3 = _main._map.world_at(cell,size)+Vector3.UP*y
 	var thick := 0.07
 	for side in [Vector3(0, 0, -1), Vector3(0, 0, 1), Vector3(-1, 0, 0), Vector3(1, 0, 0)]:
 		var mesh := PlaneMesh.new()

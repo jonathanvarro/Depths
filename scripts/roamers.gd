@@ -58,12 +58,13 @@ static func room_groups(map, pick: Callable) -> Array:
 	return groups
 
 
-static func adjacent(a: Vector2i, b: Vector2i) -> bool:
-	return absi(a.x - b.x) + absi(a.y - b.y) <= 1
+static func adjacent(a: Vector2i, b: Vector2i, map = null) -> bool:
+	return absi(a.x - b.x) + absi(a.y - b.y) <= 1 and (map == null or a == b or map.linked(a,b))
 
 
 ## A straight, open line from `from` to `to`, at most `reach` cells.
 static func sees(map, from: Vector2i, to: Vector2i, reach: int) -> bool:
+	if from == to: return true
 	if from.x != to.x and from.y != to.y:
 		return false
 	var distance := absi(to.x - from.x) + absi(to.y - from.y)
@@ -71,11 +72,13 @@ static func sees(map, from: Vector2i, to: Vector2i, reach: int) -> bool:
 		return false
 	var step := Vector2i(signi(to.x - from.x), signi(to.y - from.y))
 	var cell := from + step
+	var previous := from
 	while cell != to:
-		if not map.is_passable(cell) or map.door_at(cell) == 1:  # a shut door hides you
+		if not map.can_step(previous,cell) or map.door_at(cell) == 1:  # a shut door hides you
 			return false
+		previous = cell
 		cell += step
-	return true
+	return map.linked(previous,to)
 
 
 ## Whether `group` notices the party at `party_cell`, lit to `band`.
@@ -90,7 +93,7 @@ static func notices(map, group: Group, party_cell: Vector2i, band: int) -> bool:
 ## One cell toward `target`, unless that cell is taken (`blocked`) or it's
 ## already beside it.
 static func step_toward(map, group: Group, target: Vector2i, blocked: Dictionary) -> bool:
-	if adjacent(group.cell, target):
+	if adjacent(group.cell, target, map):
 		return false
 	if not group.types.is_empty() and group.types[0].slow:
 		group.rested = not group.rested  # slow: every other beat (#171)

@@ -628,6 +628,9 @@ func _ready() -> void:
 	else:
 		_begin_opening()
 	_set_debug(show_debug)
+	if "--verify-cavern" in OS.get_cmdline_user_args():
+		var refuge: Node3D = _props.get(_map.marks.get("refuge",Vector2i(-1,-1))) if _map else null
+		print("AREA_CHECK "+JSON.stringify({"area":_area,"terrain_version":_map.terrain_version,"height_cells":_map.elevations.size(),"party_y":_party.position.y,"floor_y":_map.floor_y(_party.cell),"refuge_asset":refuge.get_meta("asset_id","") if refuge else "","refuge_state":refuge.state if refuge and "state" in refuge else ""}))
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -838,7 +841,8 @@ func _go_to_area(id: String, arrival: Arrival, from_area := "") -> void:
 				_note_site_trouble(depth, "all %d layouts failed %s; story alone: placed %s, failed %s" % [STORY_SITE_TRIES, tries_failed, stamped["placed"], stamped["failed"]])
 		var refuge := Vector2i(-1, -1)
 		if id == "rest" and not use_debug_layout and not _in_opening:  # the Rest Area's camp (#300)
-			var placed: Dictionary = Refuge.place(stamped["layout"], depth)
+			var placed: Dictionary = {"layout":stamped["layout"],"cell":RestApproach.REFUGE}
+			marks["rest_approach"] = RestApproach.SITE
 			stamped["layout"] = placed["layout"]
 			refuge = placed["cell"]
 			if refuge != Vector2i(-1, -1):
@@ -863,6 +867,8 @@ func _go_to_area(id: String, arrival: Arrival, from_area := "") -> void:
 				marks["puzzles"] = laid["puzzles"]
 		_floors[key] = DungeonMap.new(stamped["layout"], depth)
 		_floors[key].marks = marks
+		if marks.has("rest_approach"):
+			for cell in RestApproach.FURNITURE: _floors[key].solid[cell]=true
 		Puzzles.make_solid(_floors[key])  # shut doors, the lever and the key's resting place
 		_assign_events(_floors[key])
 		for p: Dictionary in marks.get("puzzles", []):
@@ -921,7 +927,7 @@ func _go_to_area(id: String, arrival: Arrival, from_area := "") -> void:
 			Galleries.flood(_floors[key], _site_seed + depth * 7919 + 37, drained, depth)
 		if not _in_opening and not use_debug_layout:
 			Gates.place(_floors[key], id, _site_seed)  # formation gates (#305), before the wall lights
-			WallLights.place(_floors[key], depth, _site_seed, Challenges.light_share(id))  # spare torches, old lanterns; few in the spores (#305)
+			if id != "rest": WallLights.place(_floors[key], depth, _site_seed, Challenges.light_share(id))  # spare torches, old lanterns; few in the spores (#305)
 	_map = _floors[key]
 	if _missing_quest_site(_map, depth):
 		_note_site_trouble(depth, "the floor was built without a site the story needs: %s" % _quest_site_report())
@@ -1022,7 +1028,17 @@ func _update_view_button() -> void:
 		_view_button.visible = not _in_opening and _overhead_allowed()
 
 
+const CavernTerrain := preload("res://scripts/cavern_terrain.gd")
+const RestApproach := preload("res://scripts/rest_approach.gd")
+const CAVERN_THEME := preload("res://art/props/cavern-rest-v1/theme.tres")
+
+func _world_at(cell: Vector2i) -> Vector3:
+	return _map.world_at(cell,CELL_SIZE)
+
 func _build_level() -> void:
+	if _area == "cavern" and not use_debug_layout: CavernTerrain.ensure(_map)
+	_apply_area_atmosphere()
+	if _area != "opening": _party.move_time = .42 if not _map.elevations.is_empty() else Party.MOVE_TIME
 	if _level:
 		_level.queue_free()
 	_level = LevelBuilder.new()
@@ -1031,23 +1047,26 @@ func _build_level() -> void:
 		visual_theme=environment_theme.duplicate()
 		visual_theme.ascent_scene=preload("res://art/features/transitions-3d-v1/daylight-mouth.tscn")  # 3D (#250)
 	_mark_way_art()
-	_level.build(_map, visual_theme, CELL_SIZE, WALL_HEIGHT)
+	_level.build(_map, visual_theme, CELL_SIZE, 5.6 if _map.marks.has("rest_approach") else WALL_HEIGHT)
+	if _map.marks.has("rest_approach"): RestApproach.geometry(_level,CELL_SIZE,visual_theme.floor_material)
 	_play_place_music()
 	add_child(_level)
 	_add_room_props()
 	for cell in _map.marks.get("formation_gates", {}):  # #305
 		_level.add_child(Gates.build_prop(_map, cell, _camp_state.gates_open.has(Gates.at(_map, cell)), CELL_SIZE))
 	for cell in _map.water:  # floor 5's deep water (placeholder art, #166)
-		_level.add_child(Galleries.water_surface(cell, CELL_SIZE, Settings.get_value("flashes")))
+		var surface := Galleries.water_surface(cell,CELL_SIZE,Settings.get_value("flashes"))
+		surface.position.y += _map.floor_y(cell); _level.add_child(surface)
 	for cell in _map.marks.get("shallow", {}):  # the Damp Caves' puddles: looks only
-		_level.add_child(Galleries.shallow_surface(cell, CELL_SIZE, Settings.get_value("flashes")))
+		var surface := Galleries.shallow_surface(cell,CELL_SIZE,Settings.get_value("flashes"))
+		surface.position.y += _map.floor_y(cell); _level.add_child(surface)
 	if _depth == OPENING_DEPTH and _in_opening:
 		_add_opening_dressing()
 		Dressing.dress_opening(_level, _map, _site_seed, CELL_SIZE, WALL_HEIGHT)  # the new 3D pieces (2026-11-09)
-	elif _area == "cavern" and not use_debug_layout:
+	elif _area == "cavern" and not use_debug_layout and _map.elevations.is_empty():
 		_add_outskirts_dressing()
 	var landmarks := {}
-	if not _in_opening and not use_debug_layout:
+	if not _in_opening and not use_debug_layout and not _map.marks.has("rest_approach"):
 		landmarks = Landmarks.place(_level, _map, _depth, _site_seed, CELL_SIZE, WALL_HEIGHT, Areas.theme(_area))  # #117; the Damp Caves' own (#302)
 		_stock_lost_cache()
 		_stock_dripping_hall()
@@ -1057,15 +1076,20 @@ func _build_level() -> void:
 		_add_wall_lights()
 	if _area == "fortress" and not _in_opening:
 		_add_fortress_dressing()  # after the landmarks, so its cages keep out of theirs (#117)
-	if not _in_opening and not use_debug_layout:
+	if not _in_opening and not use_debug_layout and not _map.marks.has("rest_approach"):
 		var dresser: Script = environment_theme.dressing_script if environment_theme.dressing_script else Dressing
 		dresser.dress(_level, _map, _depth, _site_seed, CELL_SIZE, WALL_HEIGHT, landmarks)  # #128
 		if kaykit_pilot and not "--no-kaykit" in OS.get_cmdline_user_args():  # #224, adopted 2026-11-03
-			KayKitPilot.dress(_level, _map, _depth, _site_seed, CELL_SIZE, landmarks)
+			if _map.elevations.is_empty(): KayKitPilot.dress(_level, _map, _depth, _site_seed, CELL_SIZE, landmarks)
 		if _area == "galleries":  # the galleries' waterworks (#166)
 			Galleries.dress_galleries(_level, _map, CELL_SIZE, _site_seed)
 		if _area == "reservoir":  # water edges, then the stairs by the gate (#168)
 			Galleries.dress_reservoir(_level, _map, CELL_SIZE, _site_seed, Quests.has_flag(_camp_state, "reservoir", "diverted"))
+
+	if not _map.elevations.is_empty():
+		for branch in ["Dressing","Landmarks","KayKitPilot"]:
+			var root := _level.get_node_or_null(branch)
+			if root: CavernTerrain.ground_branch(root,_map,CELL_SIZE)
 
 
 ## A dripping hall often has a clean pool to drink from (owner, 2026-11-23):
@@ -1126,7 +1150,7 @@ func _add_wall_lights() -> void:
 		if light["taken"]:
 			continue
 		var side: Vector2i = light["side"]
-		var wall := Vector3(cell.x * CELL_SIZE, 0.0, cell.y * CELL_SIZE) + Vector3(side.x, 0, side.y) * (CELL_SIZE / 2.0 - 0.01)
+		var wall := _world_at(cell) + Vector3(side.x, 0, side.y) * (CELL_SIZE / 2.0 - 0.01)
 		var node: Node3D
 		if light["kind"] == "torch":
 			# Two fresh torches leaning against the foot of the wall: nothing
@@ -1354,6 +1378,7 @@ func _make_layout(depth: int, attempt := 0) -> PackedStringArray:
 	var seed_value: int = _site_seed + (depth - 1) * FLOOR_SEED_STEP + attempt * 104729
 	if not Areas.on_main_path(_area):
 		seed_value += posmod(hash(_area), 1000003)
+	if _area == "rest" and not use_debug_layout: return RestApproach.layout()
 	if _area == "city":  # streets, not rooms and corridors
 		return CityGenerator.generate(seed_value, depth)
 	var layout := FloorGenerator.generate(seed_value, info["main"] != "" and depth < floors_in_site, depth, "" if use_debug_layout else _area)  # weighted by the area's challenges (#305)
@@ -1612,7 +1637,7 @@ func _open_overlook(cell: Vector2i) -> void:
 		_overlook_stash.closed.connect(func():
 			_overlook_stash.hide()
 			_save_now()
-			_open_overlook(_party.cell))
+			_open_overlook(_map.marks.get("refuge",_party.cell)))
 	_overlook.set_safe_area(_safe_area_insets())
 	var insets := _safe_area_insets()
 	_overlook_stash.content.offset_left = insets.x
@@ -1627,7 +1652,7 @@ func _open_overlook(cell: Vector2i) -> void:
 
 
 func _overlook_target(target: String) -> void:
-	var cell: Vector2i = _party.cell
+	var cell: Vector2i = _map.marks.get("refuge",_party.cell)
 	_overlook.hide()
 	match target:
 		"fire":
@@ -2239,7 +2264,7 @@ func _show_group(group) -> void:
 		group.node.queue_free()
 	var node: Node3D = group.types[0].view_scene().instantiate()
 	_dress_foe(node, group.types[0])
-	node.position = Vector3(group.cell.x * CELL_SIZE, 0.0, group.cell.y * CELL_SIZE)
+	node.position = _world_at(group.cell)
 	_roamer_root.add_child(node)
 	FoeView.face(node, _party.global_position)
 	group.node = node
@@ -2277,7 +2302,7 @@ func _map_beat(party_cell: Vector2i) -> bool:
 		return false
 	# Walked right up to one that hadn't seen you: you strike first.
 	for group in _groups:
-		if not group.noticed and Roamers.adjacent(group.cell, party_cell):
+		if not group.noticed and Roamers.adjacent(group.cell, party_cell, _map):
 			_next_opening = "party"
 			_show_message("They haven't seen you - you strike first!")
 			_engage(group)
@@ -2314,7 +2339,7 @@ func _map_beat(party_cell: Vector2i) -> bool:
 				taken[group.cell] = true
 				_move_group_node(group)
 	for group in _groups:
-		if group.noticed and Roamers.adjacent(group.cell, party_cell):
+		if group.noticed and Roamers.adjacent(group.cell, party_cell, _map):
 			_engage(group)
 			return true
 	return false
@@ -2327,13 +2352,25 @@ func _sensed_cells() -> Array:
 	return _groups.map(func(g): return g.cell)
 
 
+func _animate_actor(node: Node3D,from: Vector2i,to: Vector2i) -> Tween:
+	var previous: Tween = node.get_meta("terrain_tween") if node.has_meta("terrain_tween") else null
+	if previous and previous.is_valid(): previous.kill()
+	node.position = _world_at(from)
+	node.set_meta("terrain_cell",to)
+	var map = _map
+	var tween := node.create_tween()
+	node.set_meta("terrain_tween",tween)
+	tween.tween_method(func(p: float): node.position = map.step_position(from,to,p,CELL_SIZE),0.0,1.0,ROAM_STEP_TIME)
+	return tween
+
 func _move_group_node(group) -> void:
 	if _party_state.watch_left > 0 or _party_state.pathfinders():
 		_minimap.queue_redraw()
 	if not is_instance_valid(group.node):
 		return
-	var tween := create_tween()
-	tween.tween_property(group.node, "position", Vector3(group.cell.x * CELL_SIZE, 0.0, group.cell.y * CELL_SIZE), ROAM_STEP_TIME)
+	var from: Vector2i = group.node.get_meta("terrain_cell",Vector2i(roundi(group.node.position.x/CELL_SIZE),roundi(group.node.position.z/CELL_SIZE)))
+	_animate_actor(group.node,from,group.cell)
+
 
 
 func _engage(group) -> void:
@@ -2387,6 +2424,7 @@ func _begin_field_fight(state, leader_cell: Vector2i) -> void:
 	state.party_cell = _party.cell
 	state.facing = _party.DIRECTIONS[_party.facing]
 	state.open_cell = func(c: Vector2i) -> bool: return _map.is_passable(c)
+	state.linked_cell = func(a: Vector2i,b: Vector2i) -> bool: return _map.linked(a,b)
 	var taken := {_party.cell: true}
 	var spots: Array[Vector2i] = _free_cells_near(leader_cell, state.foes.size(), taken)
 	if _fight_kind == "queen":
@@ -2506,7 +2544,7 @@ func _free_cells_near(from: Vector2i, count: int, taken: Dictionary) -> Array[Ve
 
 func _place_field_foe(foe) -> void:
 	var node: Node3D = foe.type.view_scene().instantiate()
-	node.position = Vector3(foe.cell.x * CELL_SIZE, 0.0, foe.cell.y * CELL_SIZE)
+	node.position = _world_at(foe.cell)
 	_dress_foe(node, foe.type)
 	if foe.elite != "":
 		_mark_elite(node)
@@ -2526,19 +2564,17 @@ func _field_step_foe(foe) -> bool:
 	var best_d: int = distances.get(foe.cell, 999)
 	for side in [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]:
 		var next: Vector2i = foe.cell + side
-		if taken.has(next) or not _map.is_passable(next):
+		if taken.has(next) or not _map.can_step(foe.cell,next):
 			continue
 		if distances.get(next, 999) < best_d:
 			best = next
 			best_d = distances[next]
 	if best == foe.cell:
 		return false
+	var from: Vector2i = foe.cell
 	foe.cell = best
 	if is_instance_valid(foe.node):
-		var tween := create_tween().set_parallel()
-		tween.tween_property(foe.node, "position:x", best.x * CELL_SIZE, ROAM_STEP_TIME)
-		tween.tween_property(foe.node, "position:z", best.y * CELL_SIZE, ROAM_STEP_TIME)
-		tween.chain().tween_callback(_lift_field_foes)
+		_animate_actor(foe.node,from,best).tween_callback(_lift_field_foes)
 	return true
 
 
@@ -2555,14 +2591,15 @@ func _lift_field_foes() -> void:
 		if not is_instance_valid(foe.node):
 			continue
 		if _tactical.active or FoeView.is_model(foe.node):  # on its tile, feet on the floor (#251)
-			foe.node.position = Vector3(foe.cell.x * CELL_SIZE, 0.0, foe.cell.y * CELL_SIZE)
+			foe.node.position = _world_at(foe.cell)
 			FoeView.face(foe.node, _party.global_position)
 			continue
 		var away: Vector2i = foe.cell - _party.cell
 		var setback := Vector3(signi(away.x), 0, signi(away.y)) * FIELD_FOE_SETBACK if absi(away.x) + absi(away.y) == 1 else Vector3.ZERO
-		foe.node.position = Vector3(foe.cell.x * CELL_SIZE, 0.0, foe.cell.y * CELL_SIZE) + setback
+		foe.node.position = _world_at(foe.cell) + setback
+		foe.node.position.y = _map.surface_y(foe.node.position,CELL_SIZE)
 		_clear_of_panel(foe.node)
-		foe.node.position.y = minf(foe.node.position.y, FIELD_FOE_MAX_LIFT)
+		foe.node.position.y = minf(foe.node.position.y, _map.floor_y(foe.cell)+FIELD_FOE_MAX_LIFT)
 
 
 # Getting away on the map (owner 2026-10-31): no Retreat button. Stairs take
@@ -2587,7 +2624,7 @@ func _field_lost(foe) -> bool:
 		return false  # the King's hall: no turning back
 	var band: int = _party_state.supplies.light_band()
 	var reach: int = Roamers.SIGHT.get(band, 3) + 1
-	if Roamers.adjacent(foe.cell, _party.cell) or Roamers.sees(_map, foe.cell, _party.cell, reach):
+	if Roamers.adjacent(foe.cell, _party.cell, _map) or Roamers.sees(_map, foe.cell, _party.cell, reach):
 		_unseen.erase(foe)
 		return false
 	_unseen[foe] = _unseen.get(foe, 0) + 1
@@ -2630,7 +2667,7 @@ func _draw_danger(clear := false) -> void:
 		mesh.material = material
 		var mark := MeshInstance3D.new()
 		mark.mesh = mesh
-		mark.position = Vector3(foe.marked_cell.x * CELL_SIZE, 0.14, foe.marked_cell.y * CELL_SIZE)
+		mark.position = _world_at(foe.marked_cell) + Vector3.UP*.14
 		add_child(mark)
 		_danger_marks.append(mark)
 		if not before.has(mark.position):
@@ -3027,7 +3064,7 @@ func _add_body_props() -> void:
 	for cell: Vector2i in lying:
 		var path: String = body_scenes[i % body_scenes.size()] if not body_scenes.is_empty() else ""
 		var body: Node3D = load(path).instantiate() if path != "" and ResourceLoader.exists(path) else _placeholder_body()
-		body.position = Vector3(cell.x * CELL_SIZE, 0.0, cell.y * CELL_SIZE)
+		body.position = _world_at(cell)
 		body.name = "Body_%d_%d" % [cell.x, cell.y]
 		_level.add_child(body)
 		i += 1
@@ -3399,12 +3436,16 @@ func _create_room_prop(cell: Vector2i,event: RoomEvent) -> Node3D:
 	if prop and Areas.theme(_area) == "damp" and DAMP_PROPS.has(prop.resource_path):
 		prop = load(DAMP_PROPS[prop.resource_path])
 	var node: Node3D = prop.instantiate() if prop else _placeholder_prop(event.kind)
+	if event == Refuge.EVENT and _map.marks.has("rest_approach"):
+		node.free(); node = RestApproach.SCENE.instantiate()
 	var tier := ChestTiers.tier_at(_map, cell)
 	if event.kind == DungeonMap.Content.CHEST and tier != "common":
 		node.free()
 		node = ChestTiers.prop(tier, event.prop)  # silver or gold (owner, 2026-11-22)
 	if node:
-		node.position = Vector3(cell.x * CELL_SIZE, 0.0, cell.y * CELL_SIZE)
+		node.position = _world_at(cell)
+		if event == Refuge.EVENT and _map.marks.has("rest_approach"):
+			node.position = _world_at(RestApproach.ANCHOR)
 		if event.prop_on_wall:
 			# Against a wall of its cell, facing in (the shrine's art, #132).
 			for side in Dressing.SIDES:
@@ -3535,10 +3576,27 @@ func _apply_theme() -> void:
 			"damp":
 				if _cave_theme.resource_path == "res://themes/cave.tres":
 					theme = DAMP_THEME  # wet limestone (#302)
+			"cavern":
+				theme = CAVERN_THEME.duplicate()
+				theme.display_name = Areas.area_name(_area)
+				if _area == "cavern": theme.dressing_script = preload("res://scripts/cavern_dressing.gd")
 			"city":
 				theme = STONE_THEME  # worked stone streets until the city's own look is made
 	environment_theme = theme
+	_apply_area_atmosphere()
 	_refresh_place_ambience()
+
+
+func _apply_area_atmosphere() -> void:
+	if _in_combat or _tactical and _tactical.active: return
+	var env: Environment = get_world_3d().environment
+	if env == null: return
+	var lit: bool = _party_state != null and _party_state.supplies.light_band() > Supplies.Light.OUT
+	var rift: bool = _area == "cavern" and not use_debug_layout and lit
+	var shelter: bool = _map != null and _map.marks.has("rest_approach")
+	env.ambient_light_color = Color("8dabb8") if rift else (Color("6d776d") if shelter else Color("1a2424"))
+	env.ambient_light_energy = .10 if rift else (.16 if shelter else .4)
+	env.fog_density = .02 if rift or shelter else .08
 
 
 func _refresh_place_ambience() -> void:
@@ -3795,7 +3853,7 @@ func _add_outskirts_dressing() -> void:
 			if (x * 7 + y * 13) % 11 != 0:
 				continue
 			var art: Node3D=scenes[placed%scenes.size()].instantiate()
-			art.position=Vector3(x*CELL_SIZE+.65,0,y*CELL_SIZE+.65)
+			art.position=_world_at(cell)+Vector3(.65,0,.65)
 			_level.add_child(art)
 			placed+=1
 
@@ -4712,6 +4770,9 @@ func _on_chest_took(_item, _quantity: int) -> void:
 ## The party walked into something solid: search a body, open the chest,
 ## or warm her hands at the fire (#69).
 func _on_party_interacted(cell: Vector2i) -> void:
+	if _map.marks.has("rest_approach") and cell in RestApproach.FURNITURE:
+		_open_overlook(_map.marks["refuge"])
+		return
 	if _in_opening and cell == _opening_chest_cell:
 		if not _map.triggered.has(cell):
 			_open_opening_chest(cell)
@@ -4866,12 +4927,12 @@ const CHEST_SCENE := "res://art/props/tutorial-chest-v1/scene.tscn"
 func _add_chest(cell: Vector2i, opened: bool) -> void:
 	if ResourceLoader.exists(CHEST_SCENE):
 		var art: Node3D = load(CHEST_SCENE).instantiate()
-		art.position = Vector3(cell.x * CELL_SIZE, 0.0, cell.y * CELL_SIZE)
+		art.position = _world_at(cell)
 		art.set("state", "empty" if opened else "closed")
 		_level.add_child(art)
 		return
 	var chest := Node3D.new()
-	chest.position = Vector3(cell.x * CELL_SIZE, 0.0, cell.y * CELL_SIZE)
+	chest.position = _world_at(cell)
 	var wood := StandardMaterial3D.new()
 	wood.albedo_color = Color(0.42, 0.28, 0.16)
 	wood.roughness = 1.0
@@ -4914,7 +4975,7 @@ func _add_chest(cell: Vector2i, opened: bool) -> void:
 func _add_fire(cell: Vector2i) -> void:
 	if fire_scene_path != "" and ResourceLoader.exists(fire_scene_path):
 		var art: Node3D = load(fire_scene_path).instantiate()
-		art.position = Vector3(cell.x * CELL_SIZE, 0.0, cell.y * CELL_SIZE)
+		art.position = _world_at(cell)
 		if "follow_settings" in art:art.follow_settings = true
 		if art.has_method("set_motion"):art.set_motion(Settings.get_value("flashes"))
 		_level.add_child(art)
@@ -4928,7 +4989,7 @@ func _add_fire(cell: Vector2i) -> void:
 		_level.add_child(fill)
 		return
 	var fire := Node3D.new()
-	fire.position = Vector3(cell.x * CELL_SIZE, 0.0, cell.y * CELL_SIZE)
+	fire.position = _world_at(cell)
 	var embers := MeshInstance3D.new()
 	var mound := SphereMesh.new()
 	mound.radius = 0.18
@@ -5521,6 +5582,7 @@ func _build_hint() -> void:
 
 
 func _update_lantern() -> void:
+	_apply_area_atmosphere()
 	# A lit wall lantern's light counts as the party's own (2026-11-23).
 	var borrowed: bool = _map != null and not _in_opening and WallLights.lights_cell(_map, _party.cell, _party_state.time_elapsed)
 	_party.borrowed_light = borrowed

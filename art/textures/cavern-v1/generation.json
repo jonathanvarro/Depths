@@ -1,0 +1,36 @@
+{
+  "issue": 308,
+  "tool": "built-in image_gen",
+  "assets": [
+    {
+      "id": "rift-wall",
+      "prompt": "Use case: stylized-concept. Asset type: seamless square albedo texture for a 3D cave wall in Depths, dark first-person dungeon crawler. Create only an edge-to-edge dry natural cave rock surface, no scene, objects or text. Tall narrow chasm identity: dark charcoal and desaturated slate-grey stone, long irregular vertical fractures and subtle mineral flutes, a few broad worn ledges, fine physical grain. Readable geological masses, natural variation, no brickwork, no grid or checkerboard, no smooth concrete. Mostly neutral grey mineral colour with a faint cool blue-green undertone, not vivid blue. Flat diffuse even lighting with no directional cast shadow, no torchlight, no glow, no specular highlight. Gritty painterly game texture compatible with simplified low-poly geometry; no photographic micro-noise. Truly tileable left/right and top/bottom, restrained contrast at edges, no single prominent repeating emblem. Output square 1024 by 1024.",
+      "source": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-6e67bc79-8025-46ad-a502-8d0cb99795a2.png",
+      "file": "rift-wall.png",
+      "role": "Original generated albedo; copied unchanged. Runtime import capped at 512px, no new live theme assignment.",
+      "sha256": "b07ec00bee62cf8db9bf777e31f5f1b40929d5498c7f9f0f842e9787f61d0f80",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "rift-floor",
+      "prompt": "Use case: stylized-concept. Asset type: seamless square floor albedo for Depths 3D cave. Edge-to-edge top-down dry worn slate and compact mineral dust, broad irregular stone patches, narrow fine fractures, small scuffs and sparse grit. Dull grey-brown mineral colour, hints of desaturated cool slate; darker than the pale calcite Damp Caves. No water, moss, mushrooms, plants, bones, props, text, grid, brickwork or checkerboard. Flat even diffuse illumination, no glow or directional shadows, no perspective, no individual huge central boulder. Gritty painterly game texture with grouped readable detail suitable for phone scale and lower-poly geometry, not noisy photoreal gravel. Seamless periodic edges in both directions. Square 1024 by 1024.",
+      "source": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-d32c6d77-7461-42cd-81dc-677d7e442b1d.png",
+      "file": "rift-floor.png",
+      "role": "Original generated albedo; copied unchanged. Runtime import capped at 512px, no new live theme assignment.",
+      "sha256": "ce67407bbcb3920fc40a12baca2faae1d1374fed2b8cbdffbf4260b5c4ef41d1",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "rift-ceiling",
+      "prompt": "Use case: stylized-concept. Asset type: seamless square ceiling albedo for Depths dark 3D cave, flat texture only. Dark grey rock with quiet irregular fracture planes and faint mineral seams; cool desaturated charcoal, minimal colour variety. Natural cave stone, no masonry, no grid or checkerboard. Lower contrast and less busy than the wall/floor; hanging stalactites are separate 3D models, do not paint individual projecting stalactites here. Flat diffuse illumination, no lighting gradient, torch, glows, cast shadows, text, objects or perspective. Restrained painterly gritty game surface, readable broad masses, no noisy photographic detail. Tileable in both directions. Square 1024 by 1024.",
+      "source": "C:/Users/jonat/.codex/generated_images/01a14858-bf41-7241-a1a3-335ffc204971/exec-9dfd8516-afc3-4113-b02d-685f6b2113e1.png",
+      "file": "rift-ceiling.png",
+      "role": "Original generated albedo; copied unchanged. Runtime import capped at 512px, no new live theme assignment.",
+      "sha256": "1b670adc1b07106375b308d72165088327a4ff9e5341110fb25b336950f9cc55",
+      "width": 1254,
+      "height": 1254
+    }
+  ]
+}
