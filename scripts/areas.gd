@@ -17,7 +17,7 @@ extends RefCounted
 const AREAS := {
 	"opening": {"name": "The escape", "depth": 0, "parent": "", "main": "", "side": [], "key": 0},
 	"mines": {"name": "Abandoned Mines", "depth": 1, "parent": "", "main": "damp", "side": [], "key": 1, "theme": "cave"},
-	"damp": {"name": "Damp Caves", "depth": 2, "parent": "mines", "main": "cavern", "side": ["hollows"], "key": 2, "theme": "fungal"},
+	"damp": {"name": "Damp Caves", "depth": 2, "parent": "mines", "main": "cavern", "side": ["hollows"], "key": 2, "theme": "damp"},
 	"cavern": {"name": "Cavern", "depth": 3, "parent": "damp", "main": "rest", "side": [], "key": 3, "theme": "cave", "outskirts": true},
 	"rest": {"name": "Rest Area", "depth": 3, "parent": "cavern", "main": "fortress", "side": [], "theme": "cave", "safe": true},
 	"fortress": {"name": "Goblin Fortress", "depth": 4, "parent": "rest", "main": "galleries", "side": ["jail"], "key": 4, "theme": "fortress"},
@@ -30,6 +30,17 @@ const AREAS := {
 	# Black Reservoir, not down a stair. Its own street layout (city_generator.gd).
 	"city": {"name": "Buried City", "depth": 7, "parent": "reservoir", "main": "", "side": [], "theme": "city", "groups": "city", "gate": "bridge"},
 	"grove": {"name": "Grove", "depth": 3, "parent": "hollows", "main": "", "side": [], "theme": "fungal", "lair": "heartrot"},
+}
+
+## Ways between areas with art of their own (#302): the way down from an
+## area to a child, and the way back up into a child from its parent.
+const EXIT_ART := {
+	"damp": {"cavern": "res://art/features/damp-passages-v1/cavern-onward.tscn",
+		"hollows": "res://art/features/damp-passages-v1/hollows-onward.tscn"},
+}
+const RETURN_ART := {
+	"cavern": "res://art/features/damp-passages-v1/cavern-return.tscn",
+	"hollows": "res://art/features/damp-passages-v1/hollows-return.tscn",
 }
 
 ## The boss lairs (placeholders until their art and bosses are made): who
@@ -100,8 +111,8 @@ static func is_lair(id: String) -> bool:
 	return info(id).has("lair")
 
 
-## The theme name main.gd maps to a look: cave, fungal, fortress, galleries,
-## city.
+## The theme name main.gd maps to a look: cave, damp, fungal, fortress,
+## galleries, city.
 static func theme(id: String) -> String:
 	return info(id).get("theme", "cave")
 

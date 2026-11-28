@@ -811,6 +811,24 @@ Templates > Download and Install; already installed on the owner's PC).
   `_make_layout`), STONE_THEME, ENCOUNTER_GROUPS["city"], Wanderers 7;
   `Gates.leads`/`landing` (cross from `_work_gate`; `_exit_to` lands beside
   the bridge). `tools/city_check.gd`.
+- Damp Caves art live (2026-11-26, PR #303 merged): `themes/damp-caves.tres`
+  (Areas theme "damp": limestone/silt/ceiling, wet steps/bump/ambience, root
+  curtain and siltfall passages, water-cut shaft); `Areas.EXIT_ART`/
+  `RETURN_ART` + main `_mark_way_art` (`marks["descent_art"]`/`["ascent_art"]`,
+  LevelBuilder uses them) for the Cavern shaft/rope and Hollows crawl; newt,
+  crawler, leeches use `art/enemies/damp-creatures-v1`, the Drowned Mother is
+  `Elites.LEADER_MODELS["drowned"]`; `Sounds.creature` newt/crawler/leeches/
+  mother. `tools/damp_art_check.gd`. Second pass (2026-11-27):
+  `scripts/damp_dressing.gd` (theme dresser; Hollows exit room alone gets
+  exit-mushrooms/mold), base `Dressing.MODELS` maps the Mines' last flat pieces
+  to the dry `mine-*` 3D counterparts; `Landmarks.place(..., area)` gives the
+  Damp Caves only their own composed scenes (`room3` 3x3 against a whole wall,
+  or a drift; `_far_wall`) plus the wet lost cache; five events
+  `data/events/damp_*.tres` (RoomEvent `areas`, `needs_wall`; satchel, pearls,
+  seep, slick ledge with `marks["floor_cut"]` and `_ledge_state`, blind fish);
+  main `DAMP_PROPS` swaps the goblin stash/dead lamp to wet props there.
+  `tools/damp_sites_check.gd`. Three Knocks keeps its old prop (its resolved
+  art would claim a rescue after a refusal).
 - Quest sites (2026-11-24): `marks["sites"]` (every package's Rect2i),
   `DungeonMap.in_story_site()` keeps other placements out; `_missing_quest_site`
   checks the package events too and `_restore` rebuilds a floor missing one;

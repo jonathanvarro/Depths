@@ -1,0 +1,54 @@
+[gd_resource type="Resource" script_class="EnvironmentTheme" format=3]
+
+[ext_resource type="Script" path="res://scripts/environment_theme.gd" id="1"]
+[ext_resource type="Material" path="res://art/textures/damp-caves-v1/limestone-wall.tres" id="2"]
+[ext_resource type="Material" path="res://art/textures/damp-caves-v1/limestone-wall-variant.tres" id="3"]
+[ext_resource type="Material" path="res://art/textures/damp-caves-v1/silt-floor.tres" id="4"]
+[ext_resource type="Material" path="res://art/textures/damp-caves-v1/seeping-ceiling.tres" id="5"]
+[ext_resource type="AudioStream" path="res://audio/damp-caves-v1/ambience-damp.wav" id="6"]
+[ext_resource type="AudioStream" path="res://audio/damp-caves-v1/step-wet-1.wav" id="7"]
+[ext_resource type="AudioStream" path="res://audio/damp-caves-v1/step-wet-2.wav" id="8"]
+[ext_resource type="AudioStream" path="res://audio/damp-caves-v1/step-wet-3.wav" id="9"]
+[ext_resource type="AudioStream" path="res://audio/damp-caves-v1/step-wet-4.wav" id="step4"]
+[ext_resource type="AudioStream" path="res://audio/damp-caves-v1/wall-bump-wet.wav" id="10"]
+[ext_resource type="AudioStream" path="res://audio/damp-caves-v1/passage-wet-roots.wav" id="11"]
+[ext_resource type="AudioStream" path="res://audio/damp-caves-v1/passage-siltfall.wav" id="silt"]
+[ext_resource type="PackedScene" path="res://art/features/damp-passages-v1/curtain-intact.tscn" id="12"]
+[ext_resource type="PackedScene" path="res://art/features/damp-passages-v1/curtain-opened.tscn" id="13"]
+[ext_resource type="PackedScene" path="res://art/features/damp-passages-v1/siltfall-blocked.tscn" id="14"]
+[ext_resource type="PackedScene" path="res://art/features/damp-passages-v1/water-cut-shaft.tscn" id="15"]
+[ext_resource type="PackedScene" path="res://art/features/transitions-3d-v1/root-climb-up.tscn" id="16"]
+[ext_resource type="Script" path="res://scripts/damp_dressing.gd" id="dressing"]
+
+[resource]
+script = ExtResource("1")
+display_name = "Damp caves"
+dressing_script = ExtResource("dressing")
+wall_face_uv = true
+closed_scene = ExtResource("12")
+opened_scene = ExtResource("13")
+blocked_scene = ExtResource("14")
+descent_scene = ExtResource("15")
+ascent_scene = ExtResource("16")
+wall_material = ExtResource("2")
+wall_variant_material = ExtResource("3")
+floor_material = ExtResource("4")
+ceiling_material = ExtResource("5")
+closed_name = "Root curtain"
+closed_open_message = "You drag the wet roots aside."
+closed_color = Color(0.3, 0.26, 0.2, 1)
+blocked_name = "Siltfall"
+blocked_message = "A slab and a slump of wet silt block the way."
+blocked_color = Color(0.4, 0.38, 0.33, 1)
+descent_name = "Shaft"
+descent_prompt = "Climb down the shaft?"
+descent_color = Color(0.02, 0.02, 0.02, 1)
+ascent_name = "Way up"
+ascent_prompt = "Climb back up?"
+exit_message = "Daylight. The way back to camp."
+ascent_color = Color(0.4, 0.35, 0.28, 1)
+ambience = ExtResource("6")
+footstep_sounds = Array[AudioStream]([ExtResource("7"), ExtResource("8"), ExtResource("9"), ExtResource("step4")])
+bump_sound = ExtResource("10")
+open_sound = ExtResource("11")
+blocked_sound = ExtResource("silt")

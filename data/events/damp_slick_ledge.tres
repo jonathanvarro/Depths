@@ -1,0 +1,57 @@
+[gd_resource type="Resource" script_class="RoomEvent" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="event"]
+[ext_resource type="PackedScene" path="res://art/props/damp-sites-v1/slick-ledge.tscn" id="prop"]
+[ext_resource type="Script" path="res://scripts/event_choice.gd" id="choice"]
+[ext_resource type="Script" path="res://scripts/event_outcome.gd" id="outcome"]
+[ext_resource type="Resource" path="res://data/injuries/limp.tres" id="limp"]
+
+[sub_resource type="Resource" id="o0_0"]
+script = ExtResource("outcome")
+weight = 3
+text = "Step by careful step along the wet rock, and you're across."
+
+[sub_resource type="Resource" id="o0_1"]
+script = ExtResource("outcome")
+weight = 1
+text = "A boot slides, and someone goes down into the cut with a crack of stone on bone."
+health = -4
+injury = ExtResource("limp")
+sets_flag = "slipped"
+
+[sub_resource type="Resource" id="c0"]
+script = ExtResource("choice")
+label = "Cross with care"
+time_cost = 3
+outcomes = Array[EventOutcome]([SubResource("o0_0"), SubResource("o0_1")])
+
+[sub_resource type="Resource" id="o1_0"]
+script = ExtResource("outcome")
+weight = 1
+text = "You go fast. The rock is slicker than it looked: a foot shoots out and someone drops into the cut."
+health = -5
+strain = 4.0
+sets_flag = "slipped"
+
+[sub_resource type="Resource" id="o1_1"]
+script = ExtResource("outcome")
+weight = 1
+text = "Quick and light, and nobody falls."
+
+[sub_resource type="Resource" id="c1"]
+script = ExtResource("choice")
+label = "Hurry across"
+time_cost = 1
+outcomes = Array[EventOutcome]([SubResource("o1_0"), SubResource("o1_1")])
+
+[resource]
+script = ExtResource("event")
+prop = ExtResource("prop")
+kind = 4
+title = "A slick ledge"
+clue = "The floor drops away into a wet cut, leaving a narrow ledge of polished stone along one side."
+choices = Array[EventChoice]([SubResource("c0"), SubResource("c1")])
+min_depth = 2
+max_depth = 2
+weight = 2
+areas = Array[String](["damp"])

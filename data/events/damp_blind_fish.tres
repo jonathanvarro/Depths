@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="RoomEvent" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="event"]
+[ext_resource type="PackedScene" path="res://art/props/damp-sites-v1/blind-fish.tscn" id="prop"]
+[ext_resource type="Script" path="res://scripts/event_choice.gd" id="choice"]
+[ext_resource type="Script" path="res://scripts/event_outcome.gd" id="outcome"]
+[ext_resource type="Resource" path="res://data/items/ration.tres" id="ration"]
+
+[sub_resource type="Resource" id="o0_0"]
+script = ExtResource("outcome")
+weight = 3
+text = "Patience, cold hands and a quick grab: two of the pale things, flapping. Eyeless, but they'll eat."
+loot = Dictionary[SupplyItem, int]({ExtResource("ration"): 1})
+
+[sub_resource type="Resource" id="o0_1"]
+script = ExtResource("outcome")
+weight = 1
+text = "They slip through your fingers every time. Only cold hands for it."
+strain = 1.0
+
+[sub_resource type="Resource" id="c0"]
+script = ExtResource("choice")
+label = "Try to catch them"
+time_cost = 4
+outcomes = Array[EventOutcome]([SubResource("o0_0"), SubResource("o0_1")])
+
+[sub_resource type="Resource" id="o1_0"]
+script = ExtResource("outcome")
+weight = 1
+text = "White fish no longer than a finger, with no eyes at all, turn slow circles over the silt. They don't flinch from the light."
+
+[sub_resource type="Resource" id="c1"]
+script = ExtResource("choice")
+label = "Watch them"
+time_cost = 1
+investigation = true
+outcomes = Array[EventOutcome]([SubResource("o1_0")])
+
+[resource]
+script = ExtResource("event")
+prop = ExtResource("prop")
+kind = 4
+title = "Blind fish"
+clue = "Something pale moves in a clear pool."
+choices = Array[EventChoice]([SubResource("c0"), SubResource("c1")])
+min_depth = 2
+max_depth = 2
+weight = 2
+areas = Array[String](["damp"])

@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/injury.gd" id="1_1mj7m"]
 [ext_resource type="Resource" path="res://data/injuries/limp.tres" id="2_hvvk6"]
 [ext_resource type="PackedScene" path="res://art/enemies/monsters-v1/rock-beetle/scene.tscn" id="3_8iit7"]
-[ext_resource type="PackedScene" path="res://art/enemies/early-creatures-3d-v1/rock-beetle.tscn" id="model"]
+[ext_resource type="PackedScene" path="res://art/enemies/damp-creatures-v1/blind-crawler.tscn" id="model"]
 [ext_resource type="Script" path="res://scripts/enemy_type.gd" id="4_q3s3x"]
 
 [resource]
@@ -21,7 +21,7 @@ injury_chance = 0.05
 injuries = Array[ExtResource("1_1mj7m")]([ExtResource("2_hvvk6")])
 attack_verb = "snaps its claw at"
 tactic = 12
-intro = "A blind crawler, a pale cave crayfish the size of a dog: its great claw grabs and won't let go. Hit it to break the hold. (Stand-in model until its own is made.)"
+intro = "A blind crawler, a pale cave crayfish the size of a dog: its great claw grabs and won't let go. Hit it to break the hold."
 loot_line = "Under the crawler's shell, among picked bones: %s."
 threat = 3
 slow = false

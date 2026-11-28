@@ -117,7 +117,7 @@ func _initialize() -> void:
 			main.queue_free()
 			await process_frame
 	var want := {"support": 1, "rails": 1, "stalactite-single": 1, "wall-roots": 1, "hanging-roots": 1,
-			"scattered-bones": 1, "rubble-cluster": 1, "shelf-fungus": 2, "mushroom-clump": 2}
+			"scattered-bones": 1, "rubble-cluster": 1, "shelf-fungus": 3, "mushroom-clump": 3}  # floor 2 is wet limestone now (#302): the fungus is the Cavern's
 	var missing := []
 	for id in want:
 		if not seen.has(id) or not want[id] in seen[id]:

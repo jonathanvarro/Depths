@@ -16,6 +16,7 @@ const LEADER_MODELS := {
 	"skarn": preload("res://art/enemies/named-leaders-v1/skarn.tscn"),
 	"foreman": preload("res://art/enemies/named-leaders-v1/foreman.tscn"),
 	"gristle": preload("res://art/enemies/named-leaders-v1/gristle.tscn"),
+	"drowned": preload("res://art/enemies/damp-creatures-v1/drowned-mother.tscn"),  # #302
 }
 
 ## id -> the pack. `floors`: where it can turn up. `types`: leader first.

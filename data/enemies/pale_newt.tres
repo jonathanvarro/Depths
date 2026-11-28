@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" path="res://art/enemies/cave-simple-v1/rat/scene.tscn" id="2"]
 [ext_resource type="Resource" path="res://data/injuries/deep_wound.tres" id="3"]
 [ext_resource type="Resource" path="res://data/injuries/limp.tres" id="4"]
-[ext_resource type="PackedScene" path="res://art/enemies/creatures-predatory-v3/rat.tscn" id="model3d"]
+[ext_resource type="PackedScene" path="res://art/enemies/damp-creatures-v1/pale-newt.tscn" id="model3d"]
 
 [resource]
 script = ExtResource("1")
@@ -21,7 +21,7 @@ injury_chance = 0.05
 injuries = Array[Injury]([ExtResource("3"), ExtResource("4")])
 attack_verb = "bites"
 tactic = 1
-intro = "A pale newt, long as a man's arm, slips out of a pool: it bites the weakest and darts back out of reach. (Stand-in model until its own is made.)"
+intro = "A pale newt, long as a man's arm, slips out of a pool: it bites the weakest and darts back out of reach."
 loot_line = "In the silt where the newt lay: %s."
 threat = 2
 drop = ExtResource("salvage")

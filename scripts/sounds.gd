@@ -48,6 +48,15 @@ const EFFECTS := {
 	"bat_hurt": preload("res://audio/field-v1/bat-hurt.wav"),
 	"bat_death": preload("res://audio/field-v1/bat-death.wav"),
 	"deep_hurt": preload("res://audio/field-v1/deep-hurt.wav"),
+	# The Damp Caves' creatures (#302, audio/damp-caves-v1).
+	"newt_hurt": preload("res://audio/damp-caves-v1/pale-newt-hurt.wav"),
+	"newt_death": preload("res://audio/damp-caves-v1/pale-newt-death.wav"),
+	"crawler_hurt": preload("res://audio/damp-caves-v1/blind-crawler-hurt.wav"),
+	"crawler_death": preload("res://audio/damp-caves-v1/blind-crawler-death.wav"),
+	"leeches_hurt": preload("res://audio/damp-caves-v1/leech-swarm-hurt.wav"),
+	"leeches_death": preload("res://audio/damp-caves-v1/leech-swarm-death.wav"),
+	"mother_hurt": preload("res://audio/damp-caves-v1/drowned-mother-hurt.wav"),
+	"mother_death": preload("res://audio/damp-caves-v1/drowned-mother-death.wav"),
 	"deep_death": preload("res://audio/field-v1/deep-death.wav"),
 	"map_noticed": preload("res://audio/field-v1/map-noticed.wav"),
 	"map_heavy_blow": preload("res://audio/field-v1/map-heavy-blow.wav"),
@@ -84,10 +93,18 @@ const WANDER_KEYS := ["wander_claws", "wander_shuffle", "wander_stones", "wander
 
 
 ## The field sound family (#217) for an enemy type, by its file name:
-## "rat", "spider", "goblin", "beetle", "bat" or "deep" (the deeper,
+## "rat", "spider", "goblin", "beetle", "bat", the Damp Caves' "newt",
+## "crawler", "leeches" and "mother", or "deep" (the deeper,
 ## stranger things). Add "_hurt" or "_death".
 static func creature(type) -> String:
 	var id: String = type.resource_path.get_file().get_basename() if type else ""
+	# The Damp Caves' creatures (#302); a named leader is a copy with no path.
+	var shown: String = type.display_name if type else ""
+	if shown == "The Drowned Mother" or type and type.model and type.model.resource_path.ends_with("drowned-mother.tscn"):
+		return "mother"
+	for pair in [["pale_newt", "Pale newt", "newt"], ["blind_crawler", "Blind crawler", "crawler"], ["leech_swarm", "Leech swarm", "leeches"]]:
+		if id == pair[0] or shown == pair[1]:
+			return pair[2]
 	for family in ["rat", "spider", "goblin", "beetle", "bat"]:
 		if id.contains(family):
 			return family

@@ -37,14 +37,16 @@ func build(map, theme: EnvironmentTheme, size: float, height: float) -> void:
 					_add_mesh(mesh, at + Vector3(0, wall_height / 2.0, 0))
 				continue
 			var content: int = map.content_at(cell)
-			if content != DungeonMap.Content.STAIRS_DOWN and not map.marks.get("formation_gates", {}).has(cell):  # a gate's chasm has its own ground (#305)
+			if content != DungeonMap.Content.STAIRS_DOWN and not map.marks.get("formation_gates", {}).has(cell) and not map.marks.get("floor_cut", {}).has(cell):  # a gate's chasm has its own ground (#305)
 				_add_mesh(tile_mesh, at)
 			_add_mesh(ceiling_mesh, at + Vector3(0, wall_height, 0)).add_to_group("ceiling")  # hidden from above (tactical view)
 			if content == DungeonMap.Content.STAIRS_DOWN:
-				_add_feature(theme.descent_scene, _make_descent(), cell)
+				var down_art: String = map.marks.get("descent_art", {}).get(cell, "")  # a way with its own art (#302)
+				_add_feature(load(down_art) if down_art != "" else theme.descent_scene, _make_descent(), cell)
 				_add_descent_glow(cell)
 			elif content == DungeonMap.Content.STAIRS_UP:
-				_add_feature(theme.ascent_scene, _make_ascent(), cell)
+				var up_art: String = map.marks.get("ascent_art", "")
+				_add_feature(load(up_art) if up_art != "" else theme.ascent_scene, _make_ascent(), cell)
 				_add_descent_glow(cell, ASCENT_GLOW)
 			if map.door_at(cell) != DungeonMap.Door.NONE:
 				refresh_door(cell)

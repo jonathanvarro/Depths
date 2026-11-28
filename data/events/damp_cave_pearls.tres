@@ -1,0 +1,52 @@
+[gd_resource type="Resource" script_class="RoomEvent" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="event"]
+[ext_resource type="PackedScene" path="res://art/props/damp-sites-v1/cave-pearls.tscn" id="prop"]
+[ext_resource type="Script" path="res://scripts/event_choice.gd" id="choice"]
+[ext_resource type="Script" path="res://scripts/event_outcome.gd" id="outcome"]
+[ext_resource type="Resource" path="res://data/injuries/limp.tres" id="limp"]
+
+[sub_resource type="Resource" id="o0_0"]
+script = ExtResource("outcome")
+weight = 4
+text = "Round and pale as milk teeth, polished by the drip. Someone at camp will pay for these."
+treasure = 1
+gold = 4
+
+[sub_resource type="Resource" id="o0_1"]
+script = ExtResource("outcome")
+weight = 1
+text = "The rim breaks under your weight and your foot goes into the basin. You get the pearls, and a turned ankle."
+treasure = 1
+injury = ExtResource("limp")
+
+[sub_resource type="Resource" id="c0"]
+script = ExtResource("choice")
+label = "Gather the pearls"
+time_cost = 2
+outcomes = Array[EventOutcome]([SubResource("o0_0"), SubResource("o0_1")])
+
+[sub_resource type="Resource" id="o1_0"]
+script = ExtResource("outcome")
+weight = 2
+text = "You lift them out one by one from the edge, slow and dry-footed."
+treasure = 1
+gold = 4
+
+[sub_resource type="Resource" id="c1"]
+script = ExtResource("choice")
+label = "Work round the rim slowly"
+time_cost = 5
+outcomes = Array[EventOutcome]([SubResource("o1_0")])
+
+[resource]
+script = ExtResource("event")
+prop = ExtResource("prop")
+kind = 4
+title = "Cave pearls"
+clue = "In a shallow stone basin, beads of white stone sit in the water, smooth as glass."
+choices = Array[EventChoice]([SubResource("c0"), SubResource("c1")])
+min_depth = 2
+max_depth = 2
+weight = 2
+areas = Array[String](["damp"])

@@ -30,6 +30,7 @@ const Challenges := preload("res://scripts/challenges.gd")
 const Gates := preload("res://scripts/gates.gd")
 const CityGenerator := preload("res://scripts/city_generator.gd")
 const STONE_THEME := preload("res://themes/stone.tres")
+const DAMP_THEME := preload("res://themes/damp-caves.tres")
 const LevelBuilder := preload("res://scripts/level_builder.gd")
 const PartyState := preload("res://scripts/party_state.gd")
 const PartyCard := preload("res://scripts/party_card.gd")
@@ -569,7 +570,7 @@ func _ready() -> void:
 	_party.stepped.connect(_on_opening_step)
 	_party.bumped.connect(func(_cell): _update_hints("bumped"))
 	_party.opened_door.connect(func(_cell): _update_hints("web_torn"))
-	_party.opened_door.connect(func(_cell): _say("web"))
+	_party.opened_door.connect(func(_cell): if "web" in environment_theme.closed_name.to_lower(): _say("web"))  # not the Damp Caves' root curtains
 	_party.moved.connect(func(_cell, _facing): _update_hints("moved"))
 	_party.bumped.connect(func(cell):
 		var blocked: bool = _map != null and _map.door_at(cell) == DungeonMap.Door.BLOCKED and environment_theme.blocked_sound != null
@@ -1023,6 +1024,7 @@ func _build_level() -> void:
 	if _depth==OPENING_DEPTH and _in_opening and _exit_cell!=Vector2i(-1,-1):
 		visual_theme=environment_theme.duplicate()
 		visual_theme.ascent_scene=preload("res://art/features/transitions-3d-v1/daylight-mouth.tscn")  # 3D (#250)
+	_mark_way_art()
 	_level.build(_map, visual_theme, CELL_SIZE, WALL_HEIGHT)
 	_play_place_music()
 	add_child(_level)
@@ -1040,7 +1042,7 @@ func _build_level() -> void:
 		_add_outskirts_dressing()
 	var landmarks := {}
 	if not _in_opening and not use_debug_layout:
-		landmarks = Landmarks.place(_level, _map, _depth, _site_seed, CELL_SIZE, WALL_HEIGHT)  # #117
+		landmarks = Landmarks.place(_level, _map, _depth, _site_seed, CELL_SIZE, WALL_HEIGHT, Areas.theme(_area))  # #117; the Damp Caves' own (#302)
 		_stock_lost_cache()
 		_stock_dripping_hall()
 	if not _in_opening:
@@ -1292,6 +1294,27 @@ func _exit_to(child: String) -> Vector2i:
 	return _map.find_content(DungeonMap.Content.STAIRS_DOWN)
 
 
+## Ways with art of their own (#302): each way down to the area it leads
+## to, and the way up back into the parent. Worked out on every build, so
+## floors saved before still get them.
+func _mark_way_art() -> void:
+	if _map == null or use_debug_layout or _in_opening:
+		return
+	var down := {}
+	var art: Dictionary = Areas.EXIT_ART.get(_area, {})
+	if not art.is_empty():
+		for y in _map.height:
+			for x in _map.width:
+				var c := Vector2i(x, y)
+				if _map.content_at(c) == DungeonMap.Content.STAIRS_DOWN:
+					var dest: String = _map.marks.get("exits", {}).get(c, Areas.info(_area)["main"])
+					if art.has(dest):
+						down[c] = art[dest]
+	_map.marks["descent_art"] = down
+	var parent: String = Areas.info(_area)["parent"]
+	_map.marks["ascent_art"] = Areas.RETURN_ART.get(_area, "") if Areas.EXIT_ART.get(parent, {}).has(_area) else ""
+
+
 ## A boss lair (#300, placeholders until the bosses' art is made): the boss
 ## and its followers wait at the arena's heart.
 func _stock_lair(map, id: String) -> void:
@@ -1458,15 +1481,30 @@ func _on_party_entered_cell(cell: Vector2i) -> void:
 ## picked to suit the depth (#16).
 func _assign_events(map) -> void:
 	for cell in map.contents:
-		var event: RoomEvent = _room_events.pick(map.contents[cell], map.depth)
+		var event: RoomEvent = _room_events.pick(map.contents[cell], map.depth, _area)
 		# A wall piece (a coal seam, a shrine) needs a wall to stand on: its
 		# back isn't modelled (owner, 2026-11-24). Out in the open, pick again.
 		var tries := 0
-		while event and event.prop_on_wall and Dressing._wall_sides(map, cell).is_empty() and tries < 40:
-			event = _room_events.pick(map.contents[cell], map.depth)
+		while event and (event.prop_on_wall or event.needs_wall) and Dressing._wall_sides(map, cell).is_empty() and tries < 40:
+			event = _room_events.pick(map.contents[cell], map.depth, _area)
 			tries += 1
 		if event:
 			map.events[cell] = event
+			if event.prop and event.prop.resource_path.ends_with(SLICK_LEDGE):  # its own cut tile (#302)
+				if not map.marks.has("floor_cut"):
+					map.marks["floor_cut"] = {}
+				map.marks["floor_cut"][cell] = true
+
+
+## The Damp Caves' slick ledge (#302 F) brings its own floor tile with a real
+## drop cut into it, and shows whether the party slipped or passed safely.
+const SLICK_LEDGE := "damp-sites-v1/slick-ledge.tscn"
+
+
+## What the slick ledge shows once crossed: "slipped" if someone fell (the
+## outcome's "slipped" flag), else "passed". Never the generic "empty".
+func _ledge_state(cell: Vector2i) -> String:
+	return "slipped" if "slipped" in _map.event_flags.get(cell, []) else "passed"
 
 
 ## A room event (#16): clue, choices, "Leave it". Leaving keeps it for later;
@@ -1527,6 +1565,8 @@ func _run_event(cell: Vector2i, at_overlook := false) -> void:
 			if not _map.marks.has("set_traps"):
 				_map.marks["set_traps"] = {}
 			_map.marks["set_traps"][cell] = true
+	if event.prop and event.prop.resource_path.ends_with(SLICK_LEDGE):
+		prop_state = _ledge_state(cell)
 	_empty_prop(cell, prop_state)
 	if Quests.has_flag(_camp_state, "lower_gate", "seen") and not Quests.has_flag(_camp_state, "lower_gate", "ending_shown"):
 		await _slice_ending(cell)
@@ -3342,8 +3382,17 @@ func _add_room_props() -> void:
 			_empty_prop(cell)
 
 
+## In the Damp Caves some props have wet versions of their own (#302).
+const DAMP_PROPS := {
+	"res://art/props/cave-events-v1/goblin-stash.tscn": "res://art/dressing/damp-dressing-v1/goblin-stash.tscn",
+	"res://art/props/traps-lamps-v1/lamp.tscn": "res://art/dressing/damp-dressing-v1/lamp-store.tscn",
+}
+
 func _create_room_prop(cell: Vector2i,event: RoomEvent) -> Node3D:
-	var node: Node3D = event.prop.instantiate() if event.prop else _placeholder_prop(event.kind)
+	var prop: PackedScene = event.prop
+	if prop and Areas.theme(_area) == "damp" and DAMP_PROPS.has(prop.resource_path):
+		prop = load(DAMP_PROPS[prop.resource_path])
+	var node: Node3D = prop.instantiate() if prop else _placeholder_prop(event.kind)
 	var tier := ChestTiers.tier_at(_map, cell)
 	if event.kind == DungeonMap.Content.CHEST and tier != "common":
 		node.free()
@@ -3471,6 +3520,9 @@ func _apply_theme() -> void:
 			"fungal":
 				if _cave_theme.resource_path == "res://themes/cave.tres":
 					theme = FUNGAL_THEME
+			"damp":
+				if _cave_theme.resource_path == "res://themes/cave.tres":
+					theme = DAMP_THEME  # wet limestone (#302)
 			"city":
 				theme = STONE_THEME  # worked stone streets until the city's own look is made
 	environment_theme = theme

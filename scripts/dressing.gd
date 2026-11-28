@@ -23,6 +23,7 @@ const GROWTH := "res://art/dressing/cave-growth-3d-v1/"
 const MINE := "res://art/dressing/mine-refined-v2/"
 const EXPEDITION := "res://art/props/expedition-3d-v1/"
 const BONES := "res://art/dressing/bone-decor-v1/"
+const MINE_DRY := "res://art/dressing/damp-dressing-v1/"
 const MODELS := {
 	"burnt-sconce": "res://art/dressing/wall-torch-3d-v1/burnt-sconce.tscn",
 	"goblin-torch-lit": "res://art/dressing/wall-torch-3d-v1/goblin-torch-lit.tscn",
@@ -40,6 +41,13 @@ const MODELS := {
 	"floor-roots": GROWTH + "floor-roots.tscn",
 	"scattered-bones": BONES + "scattered-bones.tscn", "small-remains": BONES + "small-remains.tscn",
 	"fallen-skeleton": BONES + "fallen-skeleton.tscn", "seated-skeleton": BONES + "seated-skeleton.tscn",
+	# The last flat pieces as solid 3D, in the drier mine finish (#302 D).
+	"cracks-rubble": MINE_DRY + "mine-cracks-rubble.tscn", "chalk-arrow": MINE_DRY + "mine-chalk-arrow.tscn",
+	"chalk-cross": MINE_DRY + "mine-chalk-cross.tscn", "chalk-tally": MINE_DRY + "mine-chalk-tally.tscn",
+	"web-strand": MINE_DRY + "mine-web-strand.tscn", "rat-nest": MINE_DRY + "mine-rat-nest.tscn",
+	"puddle-small": MINE_DRY + "mine-puddle-small.tscn", "puddle-wide": MINE_DRY + "mine-puddle-wide.tscn",
+	"floor-gravel": MINE_DRY + "mine-wet-gravel.tscn", "tracks-drag": MINE_DRY + "mine-tracks-drag.tscn",
+	"floor-crack": MINE_DRY + "mine-floor-crack.tscn", "old-scorch": MINE_DRY + "mine-old-scorch.tscn",
 }
 ## The fungal caverns' pieces by their 2D path (fungal_dressing.gd).
 const MODELS_BY_PATH := {

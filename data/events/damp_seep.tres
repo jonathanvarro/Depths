@@ -1,0 +1,50 @@
+[gd_resource type="Resource" script_class="RoomEvent" format=3]
+
+[ext_resource type="Script" path="res://scripts/room_event.gd" id="event"]
+[ext_resource type="PackedScene" path="res://art/props/damp-sites-v1/seep.tscn" id="prop"]
+[ext_resource type="Script" path="res://scripts/event_choice.gd" id="choice"]
+[ext_resource type="Script" path="res://scripts/event_outcome.gd" id="outcome"]
+
+[sub_resource type="Resource" id="o0_0"]
+script = ExtResource("outcome")
+weight = 5
+text = "Cold, hard water that tastes of the rock. The ache eases and your head clears."
+target = 1
+heal_over_time = 3
+strain = -5.0
+
+[sub_resource type="Resource" id="o0_1"]
+script = ExtResource("outcome")
+weight = 1
+text = "Bitter with minerals. It does no harm, but no good either."
+
+[sub_resource type="Resource" id="c0"]
+script = ExtResource("choice")
+label = "Drink"
+time_cost = 2
+outcomes = Array[EventOutcome]([SubResource("o0_0"), SubResource("o0_1")])
+
+[sub_resource type="Resource" id="o1_0"]
+script = ExtResource("outcome")
+weight = 1
+text = "Fresh water creeps out of a crack and runs down into a worn cup someone set beneath it. The rim is chipped where many mouths have been."
+
+[sub_resource type="Resource" id="c1"]
+script = ExtResource("choice")
+label = "Look closer"
+time_cost = 1
+investigation = true
+outcomes = Array[EventOutcome]([SubResource("o1_0")])
+
+[resource]
+script = ExtResource("event")
+prop = ExtResource("prop")
+kind = 4
+title = "A seep"
+clue = "Water weeps from a crack in the wall into a stone cup below."
+choices = Array[EventChoice]([SubResource("c0"), SubResource("c1")])
+min_depth = 2
+max_depth = 2
+weight = 2
+areas = Array[String](["damp"])
+needs_wall = true

@@ -99,8 +99,8 @@ static func load_library() -> Array[RoomEvent]:
 
 
 ## A weighted random event of this kind that suits the floor, or null.
-func pick(kind: int, depth: int) -> RoomEvent:
-	var options := library.filter(func(e: RoomEvent): return e.kind == kind and depth >= e.min_depth and depth <= e.max_depth)
+func pick(kind: int, depth: int, area := "") -> RoomEvent:
+	var options := library.filter(func(e: RoomEvent): return e.kind == kind and depth >= e.min_depth and depth <= e.max_depth 			and (e.areas.is_empty() or area in e.areas))
 	if options.is_empty():
 		return null
 	var total := 0

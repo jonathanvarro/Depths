@@ -17,7 +17,7 @@ const GOBLIN_MARK := preload("res://art/props/fortress-v1/goblin-mark.tscn")
 ## picked (weight, default 3). More, rarer floor-1 places (owner,
 ## 2026-11-10): the new ones weigh 1, so a floor's pair varies far more.
 const KINDS := {
-	"working_face": {"name": "The old working face", "floors": [1, 2], "spot": "dead_end"},
+	"working_face": {"name": "The old working face", "floors": [1, 1], "spot": "dead_end"},  # floor 2 is the Damp Caves (own landmarks, #302)
 	"dripping_hall": {"name": "The dripping hall", "floors": [1, 3], "spot": "room"},
 	"collapsed_shaft": {"name": "The collapsed shaft", "floors": [1, 1], "spot": "dead_end", "weight": 1},
 	"timbered_drift": {"name": "The timbered drift", "floors": [1, 1], "spot": "drift", "weight": 1},
@@ -30,7 +30,19 @@ const KINDS := {
 	"lost_cache": {"name": "The king's lost cache", "floors": [1, 2], "spot": "room"},
 	# The fortress (2026-11-17, #117): a second place to know floor 4 by.
 	"goblin_cages": {"name": "The goblins' cages", "floors": [4, 4], "spot": "dead_end"},
+	# The Damp Caves' own (#302 E, live 2026-11-27): whole composed scenes,
+	# each a 3x3 room against a far wall (or three cells of drift). Only in
+	# their area; the area's other landmarks are these, plus the king's
+	# lost cache in its wet version.
+	"sump": {"name": "The still sump", "floors": [2, 2], "areas": ["damp"], "spot": "room3", "scene": "landmark-sump"},
+	"weeping_wall": {"name": "The weeping wall", "floors": [2, 2], "areas": ["damp"], "spot": "room3", "scene": "landmark-weeping-wall"},
+	"rimstone_stair": {"name": "The rimstone pools", "floors": [2, 2], "areas": ["damp"], "spot": "room3", "scene": "landmark-rimstone-stair"},
+	"bone_silt": {"name": "The bone silt", "floors": [2, 2], "areas": ["damp"], "spot": "room3", "scene": "landmark-bone-silt", "weight": 2},
+	"drowned_drift": {"name": "The drowned drift", "floors": [2, 2], "areas": ["damp"], "spot": "drift", "scene": "landmark-drowned-drift"},
 }
+const DAMP_SITES := "res://art/props/damp-sites-v1/"
+## In these areas only their own landmarks (and the lost cache) appear.
+const OWN_LANDMARKS := ["damp"]
 const FORTRESS := "res://art/props/fortress-waterworks-3d-v1/"
 const ART := "res://art/dressing/landmarks-v1/"
 const PER_FLOOR := 2
@@ -40,7 +52,7 @@ const AWAY_FROM_START := 4  # steps: not where the party arrives
 
 ## Places this floor's landmarks and records them on `map.landmarks`.
 ## Returns the cells they use, which the dressing then leaves alone.
-static func place(level: Node3D, map, depth: int, seed: int, cell_size: float, wall_height: float) -> Dictionary:
+static func place(level: Node3D, map, depth: int, seed: int, cell_size: float, wall_height: float, area := "") -> Dictionary:
 	var seen_before: Array = map.landmarks.filter(func(l): return l["seen"]).map(func(l): return l["id"])
 	map.landmarks = []
 	var used := {}
@@ -48,7 +60,11 @@ static func place(level: Node3D, map, depth: int, seed: int, cell_size: float, w
 		return used
 	var rng := RandomNumberGenerator.new()
 	rng.seed = hash([seed, depth, "landmarks"])
-	var kinds := KINDS.keys().filter(func(k): return depth >= KINDS[k]["floors"][0] and depth <= KINDS[k]["floors"][1])
+	var kinds: Array
+	if area in OWN_LANDMARKS:
+		kinds = KINDS.keys().filter(func(k): return area in KINDS[k].get("areas", []) or k == "lost_cache")
+	else:
+		kinds = KINDS.keys().filter(func(k): return not KINDS[k].has("areas") and depth >= KINDS[k]["floors"][0] and depth <= KINDS[k]["floors"][1])
 	# A weighted order, drawn with our own generator so it's seeded too:
 	# common places come up first more often, rare ones now and then.
 	var ordered := []
@@ -71,7 +87,8 @@ static func place(level: Node3D, map, depth: int, seed: int, cell_size: float, w
 	for id: String in kinds:
 		if map.landmarks.size() >= PER_FLOOR:
 			break
-		var spots := _spots(map, KINDS[id]["spot"], distances, used)
+		var wet := area in OWN_LANDMARKS
+		var spots := _spots(map, "room3" if wet and id == "lost_cache" else KINDS[id]["spot"], distances, used)
 		if spots.is_empty():
 			continue
 		var cells: Array = spots[rng.randi_range(0, spots.size() - 1)]
@@ -80,18 +97,21 @@ static func place(level: Node3D, map, depth: int, seed: int, cell_size: float, w
 		var piece := Node3D.new()
 		piece.name = id
 		root.add_child(piece)
-		match id:
-			"working_face": _build_working_face(piece, map, cells, rng, cell_size, wall_height)
-			"dripping_hall": _build_dripping_hall(piece, map, cells, rng, cell_size, wall_height)
-			"pale_grotto": _build_pale_grotto(piece, map, cells, rng, cell_size, wall_height)
-			"trophy_crossing": _build_trophy_crossing(piece, map, cells, rng, cell_size, wall_height)
-			"root_junction": _build_root_junction(piece, map, cells, rng, cell_size, wall_height)
-			"lost_cache": _build_lost_cache(piece, map, cells, rng, cell_size, wall_height)
-			"collapsed_shaft": _build_collapsed_shaft(piece, map, cells, rng, cell_size, wall_height)
-			"timbered_drift": _build_timbered_drift(piece, map, cells, rng, cell_size, wall_height)
-			"flooded_sump": _build_flooded_sump(piece, map, cells, rng, cell_size, wall_height)
-			"old_cave_in": _build_old_cave_in(piece, map, cells, rng, cell_size, wall_height)
-			"goblin_cages": _build_goblin_cages(piece, map, cells, rng, cell_size, wall_height)
+		if KINDS[id].has("scene") or wet and id == "lost_cache":
+			_build_damp_scene(piece, map, cells, KINDS[id].get("scene", "landmark-wet-royal-cache"), cell_size)
+		else:
+			match id:
+				"working_face": _build_working_face(piece, map, cells, rng, cell_size, wall_height)
+				"dripping_hall": _build_dripping_hall(piece, map, cells, rng, cell_size, wall_height)
+				"pale_grotto": _build_pale_grotto(piece, map, cells, rng, cell_size, wall_height)
+				"trophy_crossing": _build_trophy_crossing(piece, map, cells, rng, cell_size, wall_height)
+				"root_junction": _build_root_junction(piece, map, cells, rng, cell_size, wall_height)
+				"lost_cache": _build_lost_cache(piece, map, cells, rng, cell_size, wall_height)
+				"collapsed_shaft": _build_collapsed_shaft(piece, map, cells, rng, cell_size, wall_height)
+				"timbered_drift": _build_timbered_drift(piece, map, cells, rng, cell_size, wall_height)
+				"flooded_sump": _build_flooded_sump(piece, map, cells, rng, cell_size, wall_height)
+				"old_cave_in": _build_old_cave_in(piece, map, cells, rng, cell_size, wall_height)
+				"goblin_cages": _build_goblin_cages(piece, map, cells, rng, cell_size, wall_height)
 		map.landmarks.append({"id": id, "name": KINDS[id]["name"], "cells": cells, "centre": _centre(cells), "seen": id in seen_before})
 	return used
 
@@ -103,6 +123,30 @@ static func at_cell(map, cell: Vector2i) -> Dictionary:
 		if cell in landmark["cells"]:
 			return landmark
 	return {}
+
+
+## A composed Damp Caves scene (#302 E) on its spot: centred on the middle
+## cell, its far side (local -Z) against the real wall, or along the drift.
+static func _build_damp_scene(piece: Node3D, map, cells: Array, scene: String, cell_size: float) -> void:
+	var node: Node3D = load(DAMP_SITES + scene + ".tscn").instantiate()
+	var centre: Vector2i = cells[cells.size() / 2] if cells.size() == 3 else _centre(cells)
+	var toward := _far_wall(map, centre)
+	if cells.size() == 3:  # a drift: along it
+		toward = cells[2] - cells[1]
+	node.position = _at(centre, cell_size)
+	node.rotation.y = atan2(-float(toward.x), -float(toward.y))  # local -Z toward `toward`
+	if node.has_method("set_motion"):
+		node.set_motion(load("res://scripts/settings.gd").get_value("flashes"))
+	piece.add_child(node)
+
+
+## The side of a 3x3 block (centred on `centre`) whose whole far row is wall.
+static func _far_wall(map, centre: Vector2i) -> Vector2i:
+	for d: Vector2i in Dressing.SIDES:
+		var across := Vector2i(d.y, d.x)
+		if [-1, 0, 1].all(func(i): return map.is_wall(centre + d * 2 + across * i)):
+			return d
+	return Vector2i.ZERO
 
 
 ## Places a landmark can go: each an array of cells.
@@ -140,6 +184,18 @@ static func _spots(map, kind: String, distances: Dictionary, used: Dictionary) -
 							run.append(next)
 					if run.size() == 3:
 						spots.append(run)
+				"room3":  # a 3x3 block of clear room floor with a whole wall behind it
+					var block := []
+					for dy in [-1, 0, 1]:
+						for dx in [-1, 0, 1]:
+							block.append(cell + Vector2i(dx, dy))
+					if not block.all(func(c): return map._is_room_cell(c) and Dressing._clear(map, c) and not used.has(c) and distances.get(c, 0) >= AWAY_FROM_START and not map.in_story_site(c, 1)):
+						continue
+					if _far_wall(map, cell) == Vector2i.ZERO:
+						continue
+					block.erase(cell)
+					block.insert(4, cell)  # the centre in the middle
+					spots.append(block)
 				"room":
 					if not map._is_room_cell(cell) or rooms_seen.has(cell):
 						continue

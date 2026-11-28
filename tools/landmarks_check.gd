@@ -27,7 +27,7 @@ func _initialize() -> void:
 	var kinds_seen := {}
 	var floors_with := 0
 	var floors_total := 0
-	for seed in [11, 23, 57]:
+	for seed in [11, 23, 57, 89, 131]:
 		var main = load("res://scenes/main.tscn").instantiate()
 		main.play_opening = false
 		main.fights_on_map = false  # tests the old room fights (#171 has its own check)
@@ -93,8 +93,8 @@ func _initialize() -> void:
 	check("most floors have a landmark", floors_with * 4 >= floors_total * 3, "%d of %d" % [floors_with, floors_total])
 	# The rare floor-1 places (weight 1, 2026-11-10) are checked over many
 	# floors in mine_finds_check; here every common kind must turn up.
-	var common: Array = Landmarks.KINDS.keys().filter(func(k): return int(Landmarks.KINDS[k].get("weight", 3)) > 1)
-	check("every common kind turns up somewhere", common.all(func(k): return kinds_seen.has(k)), str(kinds_seen.keys()))
+	var common: Array = Landmarks.KINDS.keys().filter(func(k): return int(Landmarks.KINDS[k].get("weight", 3)) > 1 and not Landmarks.KINDS[k].has("areas"))  # area-only kinds: damp_sites_check
+	check("every common kind turns up somewhere", common.all(func(k): return kinds_seen.has(k)), str(common.filter(func(k): return not kinds_seen.has(k))))
 	print("fails=", fails)
 	quit()
 

@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" path="res://art/enemies/cave-simple-v1/spider/scene.tscn" id="2"]
 [ext_resource type="Resource" path="res://data/injuries/deep_wound.tres" id="3"]
 [ext_resource type="Resource" path="res://data/injuries/limp.tres" id="4"]
-[ext_resource type="PackedScene" path="res://art/enemies/field-creatures-3d-v1/spider.tscn" id="model3d"]
+[ext_resource type="PackedScene" path="res://art/enemies/damp-creatures-v1/leech-swarm.tscn" id="model3d"]
 
 [resource]
 script = ExtResource("1")
@@ -21,7 +21,7 @@ injury_chance = 0.05
 injuries = Array[Injury]([ExtResource("3"), ExtResource("4")])
 attack_verb = "latches onto"
 tactic = 2
-intro = "A heaving knot of black leeches: they latch on and drain blood over the next few turns. Fire drives them off. (Stand-in model until its own is made.)"
+intro = "A heaving knot of black leeches: they latch on and drain blood over the next few turns. Fire drives them off."
 loot_line = "Where the leeches knotted, a drowned man's last things: %s."
 row = "front"
 reach_back = false

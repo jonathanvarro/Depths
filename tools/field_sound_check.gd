@@ -44,7 +44,7 @@ func _initialize() -> void:
 			if not Sounds.EFFECTS.has(family + end):
 				missing.append(file + end)
 	check("every enemy has a hurt and a death cry", missing.is_empty(), missing)
-	check("...across all six families", families.size() == 6, families)
+	check("...across all six families, plus the Damp Caves' four (#302)", ["rat", "spider", "goblin", "beetle", "bat", "deep", "newt", "crawler", "leeches"].all(func(f): return families.has(f)), families)
 	check("rats, spiders, goblins and the deep land where they should", Sounds.creature(load("res://data/enemies/great_rat.tres")) == "rat" and Sounds.creature(load("res://data/enemies/webspinner.tres")) == "spider" and Sounds.creature(load("res://data/enemies/goblin_queen.tres")) == "goblin" and Sounds.creature(load("res://data/enemies/underhound.tres")) == "deep")
 
 	# Prayers, items, the rest.
@@ -75,6 +75,6 @@ func _initialize() -> void:
 	check("floor 1's bed is the new cave ambience, on Effects", main._ambience_player.bus == "Effects" and main._ambience_player.stream.resource_path.ends_with("ambience-cave.wav"), main._ambience_player.bus)
 	main._go_to_floor(2, main.Arrival.FROM_ABOVE)
 	await process_frame
-	check("...floor 2's is the fungal one", main._ambience_player.stream.resource_path.ends_with("ambience-fungal.wav"), main._ambience_player.stream.resource_path)
+	check("...floor 2's is the Damp Caves' own (#302)", main._ambience_player.stream.resource_path.ends_with("ambience-damp.wav"), main._ambience_player.stream.resource_path)
 	print("fails=", fails)
 	quit()
