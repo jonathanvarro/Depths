@@ -48,5 +48,5 @@ static func build(p: Dictionary,part: String,map,cell_size: float,wall_height: f
 			piece.rotation.y=atan2(-float(wall.x),-float(wall.y))
 		_:
 			return null
-	piece.position+=Vector3(cell.x*cell_size,0,cell.y*cell_size)
+	piece.position+=map.world_at(cell,cell_size)
 	return piece

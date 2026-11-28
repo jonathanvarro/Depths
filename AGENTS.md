@@ -59,6 +59,24 @@ Templates > Download and Install; already installed on the owner's PC).
 
 ## Project structure
 
+- #313 integrates approved Cavern elevation into real Main: `cavern_terrain.gd`
+  preserves seeded topology/quest progress while assigning level room/site/
+  door/stair groups and 0.2m ramps (up to 2.4m down). DungeonMap's optional
+  metric fields and world/edge/profile methods serve Party, actors, props,
+  paths, field reach and saves; ordinary floors stay flat. `elevated_geometry.gd`
+  supplies actual ledge/bridge support and tall two-sided rock; scoped Cavern
+  dressing avoids quest/fight rooms. Full `rest_approach.gd` reserves the whole
+  shelter, navigable floor and furniture, binding the existing Refuge/Overlook
+  controls and canonical saved refuge cell. Cached old Rest layouts remain
+  intact until a new expedition; legacy Cavern heights derive without replacing
+  events/loot/exploration. See `docs/cavern-live-elevation.md`.
+  Native Main: 3,280 checks / 10 captures; terrain: 29,778 / 30 maps; existing
+  quest suite: 220 floors, area-network/Damp-rest and prototype regressions pass.
+  Actual Windows export continues private Cavern and spent-refuge saves with
+  asserted runtime height/asset/state; `--verify-cavern` is read-only metadata,
+  private launcher `--exported` omits --path. Gallery/private play launchers:
+  `build/local-cavern-live-v1/inspector.html`. Physical iPhone review remains.
+
 - #302 H/I completes the requested Damp Caves art/design delivery in PR #303:
   four approved concepts and original 24fps rigged creatures in
   `art/enemies/damp-creatures-v1`, eight map/bestiary SVGs and twenty new CC0-derived

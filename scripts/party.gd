@@ -123,7 +123,7 @@ func place(dungeon_map, at: Vector2i) -> void:
 	map = dungeon_map
 	cell = at
 	for f in DIRECTIONS.size():
-		if map.is_passable(cell + DIRECTIONS[f]):
+		if map.can_step(cell,cell + DIRECTIONS[f]):
 			facing = f
 			break
 	position = _cell_to_world(cell)
@@ -158,6 +158,7 @@ func _try_step(direction: Vector2i) -> void:
 	var target := cell + direction
 	var tween := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	var reason: String = step_check.call(target) if step_check.is_valid() else ""
+	if reason == "" and not map.is_wall(target) and not map.linked(cell,target): reason = "There is no path across that edge."
 	if reason != "":
 		refused.emit(reason)
 		var nudge := position + Vector3(direction.x, 0, direction.y) * BUMP_DISTANCE
@@ -176,7 +177,7 @@ func _try_step(direction: Vector2i) -> void:
 		var push := position + Vector3(direction.x, 0, direction.y) * TEAR_PUSH
 		tween.tween_property(self, "position", push, TEAR_TIME * 0.55)
 		tween.tween_property(self, "position", position, TEAR_TIME * 0.45)
-	elif not map.is_passable(target):
+	elif not map.can_step(cell,target):
 		if map.door_at(target) == DungeonMap.Door.BLOCKED:
 			blocked_by.emit(target)
 		bumped.emit(target)
@@ -185,10 +186,11 @@ func _try_step(direction: Vector2i) -> void:
 		tween.tween_property(self, "position", bump, move_time * 0.4)
 		tween.tween_property(self, "position", position, move_time * 0.4)
 	else:
+		var from := cell
 		cell = target
 		panic_rest = maxi(0, panic_rest - 1)
 		stepped.emit(cell)
-		tween.tween_property(self, "position", _cell_to_world(cell), move_time)
+		tween.tween_method(func(progress: float): position = map.step_position(from,target,progress,cell_size), 0.0, 1.0, move_time)
 		_reveal(cell)
 		moved.emit(cell, facing)
 		tween.finished.connect(func(): entered_cell.emit(cell))
@@ -199,12 +201,12 @@ func _try_step(direction: Vector2i) -> void:
 ## way - toward `toward` if given (the fight's room), else the nearest
 ## turn, with straight back last - so enemies never stand inside the rock.
 func face_open(toward := Vector2i(-1, -1)) -> void:
-	if map == null or map.is_passable(cell + DIRECTIONS[facing]):
+	if map == null or map.can_step(cell,cell + DIRECTIONS[facing]):
 		return
 	var options: Array[int] = []
 	for turn in [1, -1, 2]:  # right, left, then about-face
 		var f: int = (facing + turn + 4) % 4
-		if map.is_passable(cell + DIRECTIONS[f]):
+		if map.can_step(cell,cell + DIRECTIONS[f]):
 			options.append(f)
 	if options.is_empty():
 		return
@@ -225,7 +227,7 @@ func face_open(toward := Vector2i(-1, -1)) -> void:
 func _bolt() -> void:
 	var open: Array[int] = []
 	for f in DIRECTIONS.size():
-		if map.is_passable(cell + DIRECTIONS[f]):
+		if map.can_step(cell,cell + DIRECTIONS[f]):
 			open.append(f)
 	if open.is_empty():
 		_try_step(DIRECTIONS[facing])
@@ -261,7 +263,7 @@ func _turn(step: int) -> void:
 
 
 func _cell_to_world(c: Vector2i) -> Vector3:
-	return Vector3(c.x * cell_size, 0.0, c.y * cell_size)
+	return map.world_at(c,cell_size)
 
 
 func _facing_to_yaw(f: int) -> float:

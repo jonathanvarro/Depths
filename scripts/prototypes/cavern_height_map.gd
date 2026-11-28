@@ -52,7 +52,7 @@ func world(c: Vector2i) -> Vector3:
 
 ## Flat pads at turns, a straight ramp between their edges. Same profile is
 ## used by the geometry and the player, including backwards/downhill travel.
-func step_position(a: Vector2i, b: Vector2i, progress: float) -> Vector3:
+func step_position(a: Vector2i, b: Vector2i, progress: float, _size := TILE) -> Vector3:
 	var p := clampf(progress, 0, 1)
 	var flat := HALF_PAD / TILE
 	var rise := clampf((p-flat)/(1.0-2.0*flat), 0, 1)

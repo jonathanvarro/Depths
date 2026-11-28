@@ -5,6 +5,10 @@ prototype. Open `scenes/prototypes/cavern_walk.tscn` and press F6. The normal
 title/campaign entry remains unchanged. This builds on the Cavern art/rest
 approach delivery in PR #309; it is not a full production floor integration.
 
+Production follow-up #313 now integrates this direction in Main; see
+`docs/cavern-live-elevation.md`. This document retains the isolated study's
+original scope and owner approval.
+
 ## Owner approval
 
 The owner played the prototype and accepted it as successful: "I've played the

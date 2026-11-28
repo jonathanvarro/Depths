@@ -8,6 +8,10 @@ Follow-up #311 now supplies that isolated walking study; see
 `docs/cavern-elevation-prototype.md`. The art composition described here remains
 visual scenery, separate from the new playable scene and campaign integration.
 
+Live follow-up #313 now binds the full reserved Rest Area and height-aware
+Cavern via `docs/cavern-live-elevation.md`; the original art delivery below
+describes its earlier, deliberately limited integration scope.
+
 Delivery: branch `codex/cavern-rest-area-art`, isolated from Claude's active
 core exploration/city work. Full contracts: `art/props/cavern-rest-v1/README.md`
 and catalogue. Local native review: `build/local-cavern-rest-v1/inspector.html`.

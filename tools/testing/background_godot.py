@@ -21,6 +21,7 @@ def run():
     parser.add_argument('--project', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--timeout', type=float, default=180)
+    parser.add_argument('--exported', action='store_true', help='Run an embedded-pack executable without the editor-only --path flag.')
     parser.add_argument('arguments', nargs=argparse.REMAINDER)
     args = parser.parse_args()
     if os.name != 'nt':
@@ -129,7 +130,7 @@ def run():
             startup.dwFlags = 0x100 | 0x1  # STARTF_USESTDHANDLES | STARTF_USESHOWWINDOW
             startup.wShowWindow = 0        # SW_HIDE for the helper console.
             startup.hStdInput, startup.hStdOutput, startup.hStdError = handles
-            command = C.create_unicode_buffer(subprocess.list2cmdline([str(godot), '--path', str(project), '--windowed', *extra]))
+            command = C.create_unicode_buffer(subprocess.list2cmdline([str(godot), *([] if args.exported else ['--path', str(project)]), '--windowed', *extra]))
             try:
                 ok = kernel.CreateProcessW(str(godot), command, None, None, True,
                                            0x08000000 | 0x4, None, str(project), C.byref(startup), C.byref(process))  # + CREATE_SUSPENDED
