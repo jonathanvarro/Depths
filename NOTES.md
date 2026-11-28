@@ -13,6 +13,11 @@ Format:
 
 ---
 
+## 2026-11-27 – Claude (Three Knocks prop follows the outcome)
+- Did: owner asked. `quest_three_knocks.tres` uses `art/dressing/damp-dressing-v1/three-knocks.tscn`; `_empty_prop` overrides its state: "empty" (dug away) only when `Quests` flag `miner_at_camp` is set (the dig-out outcomes set it at once; "Mark it for a camp crew" sets it after the next return via Story), otherwise "closed" (the fall stays, even after the event resolved). damp_sites_check covers both.
+- Next: owner playtest.
+- Watch out: the chalked king's mark after "mark it for a crew" has no art; the fall just stays.
+
 ## 2026-11-27 – Claude (the Buried City's creatures)
 - Did: owner asked to start the city's own creatures. Three from the approved descent concepts (#151/#152): Choir of One (new `EnemyType.Tactic.CHOIR` appended last, `CombatState.Intent.KEEN` appended last with `KEEN_STRAIN` 5 to every standing hero; alternates KEEN and a back-row ATTACK; screen shows the screech mark until its own), Unfolding (CURLER + reach_back), Hollow Interval (DRAINER); the Marrow Shepherd (already live art, never placed before) joins them. `ENCOUNTER_GROUPS["city"]` now draws from these (one Underhound group remains). Stand-in models: lamp-eater, rock beetle, breach hound (intros say so). Art brief: `docs/area-production-briefs.md` section 13 (creatures with clips, surfaces, dressing). `tools/city_creatures_check.gd`; city_check updated.
 - Next: ChatGPT models for the three; owner review of numbers; the city's look and lore.

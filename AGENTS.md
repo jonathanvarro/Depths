@@ -834,8 +834,9 @@ Templates > Download and Install; already installed on the owner's PC).
   `data/events/damp_*.tres` (RoomEvent `areas`, `needs_wall`; satchel, pearls,
   seep, slick ledge with `marks["floor_cut"]` and `_ledge_state`, blind fish);
   main `DAMP_PROPS` swaps the goblin stash/dead lamp to wet props there.
-  `tools/damp_sites_check.gd`. Three Knocks keeps its old prop (its resolved
-  art would claim a rescue after a refusal).
+  `tools/damp_sites_check.gd`. Three Knocks uses the 3D fall; `_empty_prop`
+  shows it dug away only once the `three_knocks` flag `miner_at_camp` is set
+  (dug out by the party, or by the crew after a return), never just resolved.
 - Quest sites (2026-11-24): `marks["sites"]` (every package's Rect2i),
   `DungeonMap.in_story_site()` keeps other placements out; `_missing_quest_site`
   checks the package events too and `_restore` rebuilds a floor missing one;

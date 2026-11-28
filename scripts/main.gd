@@ -3436,6 +3436,12 @@ func _empty_prop(cell: Vector2i, state := "") -> void:
 	if node == null and _map != null and _map.triggered.has(cell) and not _map.solid.has(cell):
 		var event: RoomEvent = _map.events.get(cell)
 		if event:node = _create_room_prop(cell,event)
+	# Three Knocks (#302): the fall stays until Hask is actually out - dug
+	# free by the party, or by the camp crew after a return - never just
+	# because the event was resolved (marking it for a crew leaves it).
+	var knocks: RoomEvent = _map.events.get(cell) if _map != null else null
+	if knocks and knocks.resource_path.ends_with("quest_three_knocks.tres"):
+		state = "empty" if Quests.has_flag(_camp_state, "three_knocks", "miner_at_camp") else "closed"
 	if node and "state" in node:
 		node.set("state", state)
 

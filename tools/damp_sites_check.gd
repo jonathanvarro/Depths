@@ -146,6 +146,20 @@ func _initialize() -> void:
 	main._map.triggered[made["damp_cave_pearls"]] = true
 	main._empty_prop(made["damp_cave_pearls"])
 	check("gathered pearls leave the basin empty", String(main._props[made["damp_cave_pearls"]].state) in ["gathered", "empty"], main._props[made["damp_cave_pearls"]].state)
+	# Three Knocks: the outcome decides what the fall shows.
+	var Quests = load("res://scripts/quests.gd")
+	var knock_cell: Vector2i = spots.pop_back()
+	main._map.contents[knock_cell] = 4
+	main._map.events[knock_cell] = load("res://data/events/quest_three_knocks.tres")
+	main._map.triggered[knock_cell] = true
+	Quests.set_flag(main._camp_state, "three_knocks", "crew_sent")
+	main._build_level()
+	var knocks: Node3D = main._props[knock_cell]
+	check("Three Knocks uses its 3D fall", knocks.scene_file_path.ends_with("damp-dressing-v1/three-knocks.tscn"))
+	check("...marked for a crew, the fall stays", knocks.get_node("Fresh").visible and not knocks.get_node("Used").visible)
+	Quests.set_flag(main._camp_state, "three_knocks", "miner_at_camp")
+	main._empty_prop(knock_cell)
+	check("...once Hask is out, it's dug away", knocks.get_node("Used").visible and not knocks.get_node("Fresh").visible)
 	if shots != "":
 		for l in main._map.landmarks:
 			_look(main, l["centre"], 2)
