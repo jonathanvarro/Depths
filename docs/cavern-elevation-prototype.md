@@ -5,6 +5,15 @@ prototype. Open `scenes/prototypes/cavern_walk.tscn` and press F6. The normal
 title/campaign entry remains unchanged. This builds on the Cavern art/rest
 approach delivery in PR #309; it is not a full production floor integration.
 
+## Owner approval
+
+The owner played the prototype and accepted it as successful: "I've played the
+prototype and I think that looks great - it's a success." This approves the
+playable Cavern direction and slope/bridge/reconnecting-route experiment as the
+basis for production integration. The tested device was not specified; this
+does not establish physical iPhone performance or comfort approval, final art
+acceptance, or completion of campaign-wide elevation support.
+
 ## What to try
 
 Start on the upper western ledge, arriving from the Damp Caves. Walk north to
@@ -74,8 +83,8 @@ Final native run: **11,420 checks, 24 captures, zero failures**, with 908 actual
 tween-motion samples and clean stdout/stderr apart from the expected report.
 `START_WALK.cmd` beside it launches an interactive run only when chosen by the
 owner. Native GPU checks use `tools/testing/background_godot.py` on a private
-desktop/profile, never the owner's active screen. No physical iPhone
-performance or subjective comfort approval is claimed.
+desktop/profile, never the owner's active screen. The owner's subsequent
+successful playtest is recorded above; physical iPhone validation remains.
 
 Reproduce after a headless import:
 
@@ -87,8 +96,9 @@ python tools/package_cavern_walk.py --workspace . --output E:/GitHub/Depths/buil
 
 ## Before campaign adoption
 
-Review the walking pace, sense of height and phone readability first. Then
-agree on authored versus generated height layouts. Production adoption must
+The owner has accepted the walking study. Next agree on authored versus
+generated height layouts and verify physical phone readability. Production
+adoption must
 make Main's enemy/party/combat/prop/wanderer positions, wall lights, passages,
 water planes and dressing height-aware; provide traversable-edge checks to
 pathfinding; persist heights/links compatibly; and prove incoming/outgoing

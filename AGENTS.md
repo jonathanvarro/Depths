@@ -68,8 +68,10 @@ Templates > Download and Install; already installed on the owner's PC).
   and Retina scaling. No Main, campaign map/save/rule or original art edits.
   `docs/cavern-elevation-prototype.md` records the boundary before adoption.
   11,420 native checks / 24 captures pass on a private desktop; local gallery
-  and opt-in launcher: `build/local-cavern-walk-v1`. Physical iPhone feel and
-  performance, production ledge shapes and campaign height integration remain.
+  and opt-in launcher: `build/local-cavern-walk-v1`. Owner played it and accepted
+  the prototype as a success; use it as the production direction. Tested device
+  was unspecified. Physical iPhone feel/performance, production ledge shapes
+  and campaign height integration remain.
 
 - #308's Cavern/Rest kit is in `art/props/cavern-rest-v1`: 22 original solid
   exports, 30 scenes, new opaque physical rock/surface materials and candidate
