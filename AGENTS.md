@@ -59,6 +59,18 @@ Templates > Download and Install; already installed on the owner's PC).
 
 ## Project structure
 
+- #311 adds an isolated playable Cavern study in
+  `scenes/prototypes/cavern_walk.tscn`: 27 grid cells, upper bridge, two slopes,
+  a lower ledge 2.4m down and a reconnecting loop. Prototype DungeonMap/Party
+  subclasses under `scripts/prototypes` supply explicit reciprocal links and
+  continuous floor/camera height; adjacent ledges need a declared connection.
+  Shared Brass map/menu and mouse/keyboard/touch controls use real safe areas
+  and Retina scaling. No Main, campaign map/save/rule or original art edits.
+  `docs/cavern-elevation-prototype.md` records the boundary before adoption.
+  11,420 native checks / 24 captures pass on a private desktop; local gallery
+  and opt-in launcher: `build/local-cavern-walk-v1`. Physical iPhone feel and
+  performance, production ledge shapes and campaign height integration remain.
+
 - #308's Cavern/Rest kit is in `art/props/cavern-rest-v1`: 22 original solid
   exports, 30 scenes, new opaque physical rock/surface materials and candidate
   theme; three unchanged source albedos/512px mipmapped imports in

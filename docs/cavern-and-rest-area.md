@@ -4,6 +4,10 @@ Owner request, 2026-11-26: proceed with the Damp Caves hookup (Claude action is
 acceptable), build the Cavern's identity and finish the Rest Area approach.
 The small playable Cavern/elevation prototype comes **afterwards**.
 
+Follow-up #311 now supplies that isolated walking study; see
+`docs/cavern-elevation-prototype.md`. The art composition described here remains
+visual scenery, separate from the new playable scene and campaign integration.
+
 Delivery: branch `codex/cavern-rest-area-art`, isolated from Claude's active
 core exploration/city work. Full contracts: `art/props/cavern-rest-v1/README.md`
 and catalogue. Local native review: `build/local-cavern-rest-v1/inspector.html`.
