@@ -94,7 +94,7 @@ func _initialize() -> void:
 	check("...in its threshold plaza, by the stair up", main._party.cell == main._map.find_content(DungeonMap.Content.STAIRS_UP))
 	check("...on worked stone", main.environment_theme == main.STONE_THEME)
 	check("...and the card says it's Scout ground", main._message_label.text.contains("Buried City") and main._message_label.text.contains("Scout"), main._message_label.text)
-	check("its fights are its own", main.encounter_pool(main._groups_depth(), 3) .all(func(g): return g.all(func(t): return t in [main.UNDERHOUND, main.BORROWED, main.LAMP_EATER, main.HOUND, main.MINER])))
+	check("its fights are its own", main.encounter_pool(main._groups_depth(), 3).all(func(g): return g.all(func(t): return t in [main.CHOIR, main.UNFOLDING, main.HOLLOW, main.SHEPHERD, main.UNDERHOUND])))
 	check("things wander its streets", main._wanderers.roams(7))
 	check("its houses hold finds and fights", main._map.events.size() > 0, main._map.events.size())
 	if args.size() > 1:

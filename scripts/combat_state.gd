@@ -35,7 +35,7 @@ const GOBLIN_SHIELD_CHANCE := 0.4
 ## Enemy intentions (#60): every enemy shows what it will do on its next
 ## turn - the action, never the target - so Defend, targeting and items are
 ## real choices. Each is planned after the enemy acts (and at the start).
-enum Intent { ATTACK, LUNGE, DART, WEB, BITE, SWING, HEAVY, SHIELD, KILLING_BLOW, SHOOT, BASH, BRACE, CALL, SCREECH, CLEAVER, RUSH, RECOVER, BEAT, SWOOP, SWELL, GRAB, CURL, SNARE, DRAIN, RALLY, BROOD, REACH, BITES, BIRTH }
+enum Intent { ATTACK, LUNGE, DART, WEB, BITE, SWING, HEAVY, SHIELD, KILLING_BLOW, SHOOT, BASH, BRACE, CALL, SCREECH, CLEAVER, RUSH, RECOVER, BEAT, SWOOP, SWELL, GRAB, CURL, SNARE, DRAIN, RALLY, BROOD, REACH, BITES, BIRTH, KEEN }
 const INTENT_TEXT := {
 	Intent.ATTACK: "attacking",
 	Intent.LUNGE: "lunging",
@@ -66,7 +66,11 @@ const INTENT_TEXT := {
 	Intent.REACH: "its jaw sliding forward",
 	Intent.BITES: "every head snapping",
 	Intent.BIRTH: "its belly opening",
+	Intent.KEEN: "drawing a long, rising note",
 }
+## The Choir of One's keening (the Buried City, 2026-11-27): every standing
+## hero's nerves fray this much.
+const KEEN_STRAIN := 5.0
 ## The rest of #140's monsters. A curled beetle takes at most this much
 ## from a blow. A snared hero acts last next round. A lamp-eater drinks
 ## this much oil, or this much of a torch's life. Hounds hit harder while
@@ -218,7 +222,7 @@ const REAR_DAMAGE := 1.5
 ## Moves that mark the tile they'll hit (so stepping off it avoids them).
 const MARKED_INTENTS: Array[Intent] = [Intent.HEAVY, Intent.REACH, Intent.KILLING_BLOW, Intent.CLEAVER]
 ## Moves that don't need to reach the party: summons, drums, shields...
-const FAR_INTENTS: Array[Intent] = [Intent.CALL, Intent.BROOD, Intent.BIRTH, Intent.BEAT, Intent.SHIELD, Intent.BRACE, Intent.RALLY, Intent.CURL, Intent.SCREECH, Intent.RECOVER, Intent.SWELL, Intent.DRAIN]
+const FAR_INTENTS: Array[Intent] = [Intent.CALL, Intent.BROOD, Intent.BIRTH, Intent.BEAT, Intent.SHIELD, Intent.BRACE, Intent.RALLY, Intent.CURL, Intent.SCREECH, Intent.RECOVER, Intent.SWELL, Intent.DRAIN, Intent.KEEN]
 ## Whether a cell can be stood in or seen through (set by main.gd).
 var open_cell := Callable()
 var round := 1
@@ -439,6 +443,8 @@ func _plan(foe: Foe) -> void:
 			foe.intent = Intent.REACH if foe.intent == Intent.BITE else Intent.BITE
 		EnemyType.Tactic.HYDRA:
 			foe.intent = Intent.BITES
+		EnemyType.Tactic.CHOIR:
+			foe.intent = Intent.ATTACK if foe.intent == Intent.KEEN else Intent.KEEN
 		EnemyType.Tactic.SHEPHERD:
 			var room := living_foes().size() < 4
 			foe.intent = Intent.BIRTH if foe.calls < SHEPHERD_BIRTHS and foe.intent != Intent.BIRTH and room else Intent.SWING
@@ -973,6 +979,11 @@ func _carry_out(foe: Foe) -> Dictionary:
 					"text": "The %s pounds its drum - the others snarl and surge." % foe.name.to_lower()}
 		Intent.SCREECH:
 			return _screech(foe)
+		Intent.KEEN:
+			for hero: Companion in party.living_members():
+				hero.change_strain(KEEN_STRAIN)
+			return {"target": null, "hit": false, "damage": 0, "injury": null,
+					"text": "The %s keens: one voice, then many, from every side of the stone. Nerves fray." % foe.name.to_lower()}
 		Intent.SWELL:
 			foe.health = 0
 			var swollen := "The %s swells and tears open! %s" % [foe.name.to_lower(), _burst(foe, "near")]

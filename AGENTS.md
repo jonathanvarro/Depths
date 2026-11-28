@@ -810,7 +810,14 @@ Templates > Download and Install; already installed on the owner's PC).
   `gate: bridge`), `scripts/city_generator.gd` (streets/houses, via
   `_make_layout`), STONE_THEME, ENCOUNTER_GROUPS["city"], Wanderers 7;
   `Gates.leads`/`landing` (cross from `_work_gate`; `_exit_to` lands beside
-  the bridge). `tools/city_check.gd`.
+  the bridge). `tools/city_check.gd`. Its creatures (2026-11-27):
+  `data/enemies/choir_of_one.tres` (new Tactic CHOIR, Intent KEEN:
+  `KEEN_STRAIN` to every hero, then a back-row cut), `unfolding.tres`
+  (CURLER, reach_back), `hollow_interval.tres` (DRAINER), plus the Marrow
+  Shepherd; main CHOIR/UNFOLDING/HOLLOW/SHEPHERD, ENCOUNTER_GROUPS["city"].
+  Stand-in models (lamp-eater, rock beetle, breach hound) until ChatGPT's;
+  brief in `docs/area-production-briefs.md` section 13.
+  `tools/city_creatures_check.gd`.
 - Damp Caves art live (2026-11-26, PR #303 merged): `themes/damp-caves.tres`
   (Areas theme "damp": limestone/silt/ceiling, wet steps/bump/ambience, root
   curtain and siltfall passages, water-cut shaft); `Areas.EXIT_ART`/

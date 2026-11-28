@@ -214,6 +214,47 @@ the `cave-growth-3d-v1` fungi) is the starting point. It leads to the Grove.
 - **P1:** the arena: a ring of giant fungi around the Heartrot, a shaft of pale light from far above, roots across the floor. Plus the threshold warning (N5).
 - **P2:** a hoard and a unique reward for the side route.
 
+## 13. Buried City — beyond the Sappers' bridge (added 2026-11-27)
+
+Reached only by crossing the chasm a full Sapper party bridges in the Black
+Reservoir (#305's first formation gate). Built so far (Claude): area `city`
+(depth 7), a street-grid floor (`scripts/city_generator.gd`: streets, one
+house per block with a doorway, fallen lanes, a threshold plaza with the stair
+up), the worked-stone look (`themes/stone.tres`) as a stand-in, and its own
+fights. Its lore and story role are still the owner's (the earlier proposal
+is `docs/cave-descent-and-quests.md` floors 9–10: an unknown city, homes and
+public places, repeated symbols, explained slowly if at all).
+
+- **P1, creatures (live today on stand-in models):** turn three of the
+  approved descent concepts (`docs/descent-horror-concepts.md`,
+  `art/concepts/descent-horror-v1`) into 3D models, keeping each sheet's one
+  dominant impossibility readable at phone size:
+  - **Choir of One** (`data/enemies/choir_of_one.tres`, tactic CHOIR, back
+    row): the closed black blade that opens into a rib-like fan. Clips:
+    idle (closed), `keen` (the fan opening, held, the "many voices" moment),
+    attack (a cut that reaches the back row), hurt, fall. Stand-in today: the
+    lamp-eater.
+  - **Unfolding** (`unfolding.tres`, tactic CURLER with reach to the back
+    row): tightly curled, then extended to a length the curl could not hold.
+    Clips: idle (curled), `unfold`/`curl`, attack (the long reach), hurt,
+    fall. Stand-in: the rock beetle.
+  - **Hollow Interval** (`hollow_interval.tres`, tactic DRAINER): the
+    hound-shaped absence, grit outlining an empty jaw. It must still read as
+    a creature in the dark: outline and grit, not a black hole. Clips: idle,
+    `drink` (light bending into it), attack, hurt, fall. Stand-in: the
+    breach hound.
+  - The **Marrow Shepherd** now tends its young in the city's streets (its
+    approved 2D family is live); a 3D model joins the Black Reservoir list
+    above.
+- **P1, surfaces:** worked city stone (walls, street floor, carved ceiling)
+  distinct from the fortress and the reservoir's ancient stonework, with
+  repeated unreadable symbols; doors for houses (closed/opened) and fallen
+  stone across a street (blocked).
+- **P2, dressing and landmarks:** doorsteps, lintels, niches, a dry fountain,
+  a boundary stone, rooftops vanishing into the rock above; landmarks such as
+  *the threshold plaza*, *the house with one lamp*, *the street of doors*.
+- **P3 (owner's call first):** the city's own story events and quests.
+
 ## Suggested production order
 
 1. Damp Caves (in progress) and the network pieces N1–N3, because every
@@ -224,3 +265,4 @@ the `cave-growth-3d-v1` fungi) is the starting point. It leads to the Grove.
 4. Fortress exits, Throne Room, then Jail and Execution Halls.
 5. Fungal Hollows and the Grove.
 6. Black Reservoir creatures in 3D.
+7. Buried City creatures (live on stand-ins), then its surfaces.

@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="EnemyType" format=3]
+
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="type"]
+[ext_resource type="PackedScene" path="res://art/enemies/monsters-v1/lamp-eater/scene.tscn" id="scene"]
+[ext_resource type="PackedScene" path="res://art/enemies/early-creatures-3d-v1/lamp-eater.tscn" id="model"]
+[ext_resource type="Resource" path="res://data/injuries/deep_wound.tres" id="wound"]
+[ext_resource type="Script" path="res://scripts/injury.gd" id="injury_script"]
+
+[resource]
+script = ExtResource("type")
+display_name = "Choir of One"
+scene = ExtResource("scene")
+model = ExtResource("model")
+max_health = 14
+damage_min = 2
+damage_max = 4
+accuracy = 0.75
+initiative = 9
+injury_chance = 0.12
+injuries = Array[ExtResource("injury_script")]([ExtResource("wound")])
+attack_verb = "cuts"
+tactic = 22
+intro = "A Choir of One: a closed black blade that opens into a fan of ribs. It keens, and the streets answer in many voices, fraying everyone's nerves; then it cuts at whoever it can reach, even the back row. Kill it before the song wears you down. (Stand-in model until its own is made.)"
+loot_line = "Caught in the folds of the Choir of One: %s."
+threat = 5
+family = "breach"
+row = "back"
+reach_back = true
+fears_fire = false

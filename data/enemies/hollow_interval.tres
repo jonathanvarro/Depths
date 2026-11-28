@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="EnemyType" format=3]
+
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="type"]
+[ext_resource type="PackedScene" path="res://art/enemies/monsters-v1/breach-hound/scene.tscn" id="scene"]
+[ext_resource type="PackedScene" path="res://art/enemies/early-creatures-3d-v1/breach-hound.tscn" id="model"]
+[ext_resource type="Resource" path="res://data/injuries/deep_wound.tres" id="wound"]
+[ext_resource type="Script" path="res://scripts/injury.gd" id="injury_script"]
+
+[resource]
+script = ExtResource("type")
+display_name = "Hollow Interval"
+scene = ExtResource("scene")
+model = ExtResource("model")
+max_health = 10
+damage_min = 2
+damage_max = 5
+accuracy = 0.8
+initiative = 14
+injury_chance = 0.12
+injuries = Array[ExtResource("injury_script")]([ExtResource("wound")])
+attack_verb = "bites"
+tactic = 15
+intro = "A Hollow Interval: a hound-shaped absence, only grit outlining its jaw. It drinks your light - lantern oil or a torch's life - and bites in the dark it leaves. (Stand-in model until its own is made.)"
+loot_line = "In the grit where the Hollow Interval was: %s."
+threat = 4
+family = "breach"
+row = "front"
+reach_back = false
+fears_fire = true

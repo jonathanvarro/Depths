@@ -425,6 +425,10 @@ house per block with a doorway (often shut), fallen lanes and choked streets (ne
 only way round), a threshold plaza with the stair up, and no way further down yet. It
 leans on Scouts (streets that all look alike), keeps few wall lights, borrows the worked
 stone look, and draws its fights from the breach's deep creatures until its own exist.
+Its creatures (2026-11-27): the Choir of One (keens, everyone's nerves fray, then cuts at
+the back row), the Unfolding (curls against blows, then reaches the back row), the Hollow
+Interval (drinks the light), and the Marrow Shepherd tending its young, all from the approved
+descent concepts, on stand-in models until their own are made.
 Open: its lore and story role (`docs/cave-descent-and-quests.md` floors 9–10 are the
 earlier proposal: an unknown city, homes and public places, repeated symbols), its own
 creatures and look, landmarks, quests, what lies deeper, and whether the bridge stays

@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="EnemyType" format=3]
+
+[ext_resource type="Script" path="res://scripts/enemy_type.gd" id="type"]
+[ext_resource type="PackedScene" path="res://art/enemies/monsters-v1/rock-beetle/scene.tscn" id="scene"]
+[ext_resource type="PackedScene" path="res://art/enemies/early-creatures-3d-v1/rock-beetle.tscn" id="model"]
+[ext_resource type="Resource" path="res://data/injuries/deep_wound.tres" id="wound"]
+[ext_resource type="Script" path="res://scripts/injury.gd" id="injury_script"]
+
+[resource]
+script = ExtResource("type")
+display_name = "Unfolding"
+scene = ExtResource("scene")
+model = ExtResource("model")
+max_health = 18
+damage_min = 3
+damage_max = 6
+accuracy = 0.7
+initiative = 6
+injury_chance = 0.12
+injuries = Array[ExtResource("injury_script")]([ExtResource("wound")])
+attack_verb = "strikes"
+tactic = 13
+intro = "An Unfolding: a tight-curled thing that should not hold as much as it does. Curled, blows barely scratch it; when it unfolds, it reaches a length no curl could hold, all the way to the back row. Strike while it's open. (Stand-in model until its own is made.)"
+loot_line = "Where the Unfolding lay curled: %s."
+threat = 6
+family = "breach"
+row = "front"
+reach_back = true
+fears_fire = false

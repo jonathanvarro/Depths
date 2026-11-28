@@ -57,6 +57,8 @@ enum Tactic {
 	LUNGER,  ## bites, then a long jaw-stretching lunge that reaches the back row (Underhound)
 	HYDRA,  ## three heads, one hide: a bite per head; losing a head throws it off balance (Borrowed Pack)
 	SHEPHERD,  ## births an unfinished hound every other turn until its cage is empty (Marrow Shepherd)
+	# The Buried City's own (2026-11-27).
+	CHOIR,  ## keens (everyone's nerves fray), then strikes from the back row, in turn (Choir of One)
 }
 @export var tactic := Tactic.BASIC
 ## Shown when the fight starts: a hint at how it fights.

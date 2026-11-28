@@ -547,7 +547,7 @@ func _show_enemy_outcome(foe, intent: int, outcome: Dictionary, was_webbed: Dict
 			for other in _state.living_foes():
 				if other != foe:
 					_fx.icon(_foe_point(other), MARKS["drummed"], 40.0)
-		CombatState.Intent.CALL, CombatState.Intent.SCREECH:
+		CombatState.Intent.CALL, CombatState.Intent.SCREECH, CombatState.Intent.KEEN:
 			if intent == CombatState.Intent.SCREECH:
 				Sounds.play(self, "queen", -8.0)
 			_fx.icon(at, _intent_icon(intent), 64.0)
@@ -841,6 +841,7 @@ func _intent_icon(intent: int) -> Texture2D:
 		CombatState.Intent.REACH: return LONG_LUNGE
 		CombatState.Intent.BITES: return Glyphs.intention(CombatState.Intent.BITE)
 		CombatState.Intent.BIRTH: return BIRTHING
+		CombatState.Intent.KEEN: return Glyphs.intention(CombatState.Intent.SCREECH)  # until its own mark
 	return Glyphs.intention(intent)
 
 

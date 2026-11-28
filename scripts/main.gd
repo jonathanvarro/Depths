@@ -186,6 +186,11 @@ const HOUND := preload("res://data/enemies/breach_hound.tres")
 # Slice 2's deep monsters (placeholder looks until #166).
 const UNDERHOUND := preload("res://data/enemies/underhound.tres")
 const BORROWED := preload("res://data/enemies/borrowed_pack.tres")
+# The Buried City's own (2026-11-27); the Marrow Shepherd's first home.
+const SHEPHERD := preload("res://data/enemies/marrow_shepherd.tres")
+const CHOIR := preload("res://data/enemies/choir_of_one.tres")
+const UNFOLDING := preload("res://data/enemies/unfolding.tres")
+const HOLLOW := preload("res://data/enemies/hollow_interval.tres")
 const BROODMOTHER := preload("res://data/enemies/broodmother.tres")
 const CAPTAIN := preload("res://data/enemies/gate_captain.tres")
 ## The goblin fortress (#44): floor 3 is its outskirts, floor 4 the fortress
@@ -244,11 +249,12 @@ const ENCOUNTER_GROUPS := {
 			[HOUND, HOUND, LAMP_EATER], [BLOAT, BLOAT, MINER], [MINER, MINER, HOUND], [VENOM_SPIDER, MINER, BLOAT],
 			[BRUTE, MINER], [HOUND, HOUND, HOUND], [MINER, MINER, MINER], [LAMP_EATER, HOUND, MINER, BLOAT],
 			[UNDERHOUND], [UNDERHOUND, MINER], [UNDERHOUND, HOUND, HOUND], [BORROWED], [BORROWED, LAMP_EATER]],
-	# The Buried City (2026-11-26): what came up through the breach lives in
-	# its streets. Placeholder pool until the city's own creatures are made.
-	"city": [[UNDERHOUND, UNDERHOUND], [BORROWED, UNDERHOUND], [BORROWED, BORROWED], [LAMP_EATER, BORROWED],
-			[UNDERHOUND, HOUND, HOUND], [BORROWED, MINER, MINER], [UNDERHOUND, UNDERHOUND, LAMP_EATER],
-			[BORROWED, UNDERHOUND, MINER], [BORROWED, BORROWED, UNDERHOUND], [UNDERHOUND, BORROWED, LAMP_EATER, MINER]],
+	# The Buried City (2026-11-27): its own creatures from the approved
+	# descent concepts (#151/#152), with the Marrow Shepherd tending its
+	# young in the streets and a few Underhounds still roaming up from below.
+	"city": [[CHOIR], [UNFOLDING], [HOLLOW, HOLLOW], [SHEPHERD], [CHOIR, HOLLOW], [UNFOLDING, HOLLOW],
+			[CHOIR, UNFOLDING], [SHEPHERD, HOLLOW], [HOLLOW, HOLLOW, CHOIR], [UNFOLDING, UNFOLDING, CHOIR],
+			[SHEPHERD, CHOIR], [UNDERHOUND, HOLLOW, CHOIR], [UNFOLDING, HOLLOW, HOLLOW, CHOIR]],
 	# The Black Reservoir: the stranger things the water hid.
 	6: [[UNDERHOUND], [BORROWED], [MINER, MINER], [UNDERHOUND, UNDERHOUND], [UNDERHOUND, MINER], [BORROWED, LAMP_EATER],
 			[BORROWED, UNDERHOUND], [UNDERHOUND, HOUND, HOUND], [MINER, MINER, UNDERHOUND], [BLOAT, UNDERHOUND, LAMP_EATER],
